@@ -75,6 +75,8 @@ client.on('message', async message => {
 				message.reply('Vous n\'avait pas accès à cette commande');
 				message.delete();
 			}
+		} else if (commandName == "help") {
+			command.execute(message, client);
 		} else {
 			command.execute(message);
 		}

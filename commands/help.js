@@ -1,17 +1,24 @@
 const fs = require('fs')
+const Discord = require('discord.js');
 
 module.exports = {
 	name: 'help',
 	description: 'Liste toutes les commandes',
-	execute(message) {
-		let str = '';
+	execute(message, bot) {
 		const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 
-		for (const file of commandFiles) {
-			const command = require(`./${file}`);
-			str += `Name: ${command.name}, Description: ${command.description} \n`;
+		let commandList = new Discord.MessageEmbed()
+		.setTitle("Gon Freecss")
+		.setDescription('Voici une liste des commandes:')
+		.setColor('#FFD700')
+		.setThumbnail(bot.user.displayAvatarURL());
+		
+
+		for (var file of commandFiles) {
+			var command = require(`./${file}`);
+			commandList.addField(command.name, command.description);
 		}
 
-		message.channel.send(str);
+		message.channel.send(commandList);
 	},
 };
