@@ -3,16 +3,17 @@ const Discord = require('discord.js');
 const Client = require('./client/Client');
 const {
 	prefix,
+	token,
 	uneIncroyableMerde,
 	uneIncroyablePersonne,
 	unIncroyableModerateur,
 	unIncroyableBot,
 	lePlusIncroyable,
-	une_incroyable_cmd,
-	un_incroyable_chat,
-	des_incroyables_replays,
-	des_incroyables_musiques,
-	token
+	cmd,
+	chat,
+	replays,
+	musiques,
+	elite
 } = require('./config.json');
 
 const client = new Client();
@@ -44,7 +45,7 @@ client.on('message', async message => {
 
 	if (message.author.bot) return;
 	if (!message.content.startsWith(prefix)) return;
-	if (!message.member.roles.cache.some(role => role.id === unIncroyableModerateur || role.id === lePlusIncroyable || role.id === uneIncroyablePersonne)) return;
+	if (!message.member.roles.cache.some(role => role.id === lePlusIncroyable || role.id === unIncroyableModerateur || role.id === uneIncroyablePersonne)) return;
 
 	try {
 		if(commandName == "purge") {
@@ -63,6 +64,16 @@ client.on('message', async message => {
 		} else if (commandName == "restart") {
 			if (message.channel.id === une_incroyable_cmd && message.member.roles.cache.some(role => role.id === lePlusIncroyable)){
 				command.execute(message, client, token);
+			} else {
+				message.reply('Vous n\'avait pas accès à cette commande');
+				message.delete();
+			}
+		} else if (commandName == "say") {
+			if (message.member.roles.cache.some(role => role.id === lePlusIncroyable || role.id === unIncroyableModerateur)){
+				command.execute(message);
+			} else {
+				message.reply('Vous n\'avait pas accès à cette commande');
+				message.delete();
 			}
 		} else {
 			command.execute(message);

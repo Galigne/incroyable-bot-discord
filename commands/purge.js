@@ -1,6 +1,6 @@
 module.exports = {
 	name: 'purge',
-	description: 'Delete the last messages in all chats.',
+	description: 'Supprime les derniers message sur le channel',
 	async execute(message) {
 		const args = message.content.split(' ');
 		let deleteCount = 0;
