@@ -9,7 +9,7 @@ module.exports = {
 
 		let commandList = new Discord.MessageEmbed()
 		.setTitle("Gon Freecss")
-		.setDescription('Voici une liste des commandes:')
+		.setDescription('Voici la liste des commandes:')
 		.setColor('#FFD700')
 		.setThumbnail(bot.user.displayAvatarURL());
 		
