@@ -107,9 +107,10 @@ client.on('guildMemberAdd', guildMember =>{
 });
 
 client.on('voiceStateUpdate', (oldMember, newMember) => {
+	let oldUserChannel = oldMember.channel;
 	let newUserChannel = newMember.channel;
 
-	if(newUserChannel !== null && newUserChannel.id === equipe_voice && oldMember.member.id !== unIncroyableBot) {
+	if(oldUserChannel === null && newUserChannel !== null && newUserChannel.id === equipe_voice && oldMember.member.id !== unIncroyableBot) {
 		newMember.member.voice.channel.join().then(VoiceConnection => {
 			VoiceConnection.play("./music/Poutouyemoun.mp3").on("finish", () => VoiceConnection.disconnect());
 		}).catch(e => console.log(e))
