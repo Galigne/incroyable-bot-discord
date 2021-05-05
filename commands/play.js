@@ -59,7 +59,7 @@ module.exports = {
   play(message, song) {
     const queue = message.client.queue;
     const guild = message.guild;
-    const serverQueue = queue.get(message.guild.id);
+    const serverQueue = queue.get(guild.id);
 
     if (!song) {
       serverQueue.voiceChannel.leave();
@@ -67,14 +67,13 @@ module.exports = {
       return;
     }
 
-    const dispatcher = serverQueue.connection
-      .play(ytdl(song.url))
+    const connection = serverQueue.connection;
+    connection.play(ytdl(song.url))
       .on("finish", () => {
         serverQueue.songs.shift();
         this.play(message, serverQueue.songs[0]);
       })
       .on("error", error => console.error(error));
-    dispatcher.setVolumeLogarithmic(serverQueue.volume / 5);
     serverQueue.textChannel.send(`Joue la musique: **${song.title}**`);
   }
 };
