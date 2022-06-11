@@ -16,10 +16,11 @@ module.exports = {
             return message.reply('Donnez la valeur du lancé de dé. (entre 2 et 1000)');
             
         let rollValue = Math.floor(Math.random()*maxRoll)
-        message.channel.send("You rolled " + rollValue);
 		if(maxRoll == 20) {
-			const diceImage = new MessageAttachment("images/D20-${rollValue}.jpg")
+			const diceImage = new MessageAttachment(`images/D20-${rollValue}.png`)
 			message.channel.send({files: [diceImage]});
+		} else {
+			message.channel.send("You rolled " + rollValue);
 		}
     },   
 };
