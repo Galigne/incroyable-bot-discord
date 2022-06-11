@@ -1,3 +1,5 @@
+const { MessageAttachment } = require("discord.js");
+
 module.exports = {
 	name: 'roll',
 	description: 'Lance un dé et donne le résultat',
@@ -14,6 +16,10 @@ module.exports = {
             return message.reply('Donnez la valeur du lancé de dé. (entre 2 et 1000)');
             
         let rollValue = Math.floor(Math.random()*maxRoll)
-        message.channel.send("You rolled a " + rollValue);
+        message.channel.send("You rolled " + rollValue);
+		if(maxRoll == 20) {
+			const diceImage = new MessageAttachment("images/D20-${rollValue}.jpg")
+			message.channel.send({files: [diceImage]});
+		}
     },   
 };
