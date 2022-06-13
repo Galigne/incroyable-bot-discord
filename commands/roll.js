@@ -17,7 +17,7 @@ module.exports = {
             
         let rollValue = Math.floor(Math.random()*maxRoll)+1;
 		if(maxRoll == 20) {
-			const diceGif = new MessageAttachment(`images/D20-${rollValue}.gif`);
+			const diceGif = new MessageAttachment(`media/D20-${rollValue}.gif`);
 			message.channel.send({files: [diceGif]});
 		} else {
 			message.channel.send("You rolled " + rollValue);

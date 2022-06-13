@@ -2,6 +2,7 @@ const { MessageAttachment } = require("discord.js");
 const fs = require('fs')
 const Discord = require('discord.js');
 const { info } = require("console");
+const Character = require('../classes/Character.js/index.js.js');
 
 module.exports = {
 	name: 'jdr',
@@ -29,7 +30,7 @@ module.exports = {
                 commandName = args[2];
                 switch (commandName) {
                     case undefined:
-                        infos(message);
+                        infos(message, args[1]);
                         break;
                     case "roll":
                         rollD20(message);
@@ -45,7 +46,7 @@ module.exports = {
 
 function rollD20(message) {  
     let rollValue = Math.floor(Math.random()*20)+1;
-    const diceGif = new MessageAttachment(`images/D20-${rollValue}.gif`);
+    const diceGif = new MessageAttachment(`media/D20-${rollValue}.gif`);
     message.channel.send({files: [diceGif]});
 }
 
@@ -57,7 +58,9 @@ function delCharacter(message){
     message.channel.send("TODO...");
 }
 
-function infos(message){
+function infos(message, name){
+    var character = new Character(name, "ODNZEAOIDNAOZD");
+    character.toJson();
     message.channel.send("TODO...");
 }
 
