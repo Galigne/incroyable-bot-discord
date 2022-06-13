@@ -2,13 +2,10 @@ module.exports = {
 	name: 'coinflip',
 	description: 'Lance une pièce et donne le résultat',
 	async execute(message) {
-        let str = this.doRandHT();
-        message.channel.send(str);
+        if (Math.round(Math.random()) == 0) {
+            message.channel.send({files: ['images/PILE.gif']});
+        } else {
+            message.channel.send({files: ['images/FACE.gif']});
+        }
     },
-    
-    doRandHT() {
-        var rand = ['PILE','FACE'];
-        return rand[Math.floor(Math.random()*rand.length)];
-    }
-        
 };

@@ -12,7 +12,7 @@ module.exports = {
       const voiceChannel = message.member.voice.channel;
       if (!voiceChannel)
         return message.channel.send(
-          "Tu dois etre dans un channel vocal pour jouer de la musique!"
+          "Tu dois etre dans un channel vocal pour jouer de la musique"
         );
 
       const songInfo = await ytdl.getInfo(args[1]);
@@ -47,7 +47,7 @@ module.exports = {
       } else {
         serverQueue.songs.push(song);
         return message.channel.send(
-          `${song.title} a été ajouté a la liste d'attente!`
+          `${song.title} a été ajouté a la liste d'attente`
         );
       }
     } catch (error) {
