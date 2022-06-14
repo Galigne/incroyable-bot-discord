@@ -1,0 +1,85 @@
+{
+  "title": "Livre de règles",
+  "description": "Liste des règles du JDR RANDOM",
+  "color": "#FFD700",
+  "thumbnail": {
+    "url": "attachment://book.jpg"
+  },
+  "fields": [
+      {
+      "name": "CONSTITUTION",
+      "value": "Nombre de PV • Résistance aux effets de statuts (froid, chaud, poison, paralysie…)",
+      "inline": false
+      },
+      {
+      "name": "FORCE",
+      "value": "Maniement des armes lourdes • Bloquer ou se protéger • Actions FORCE (porter des poids, Lancer d'objets lourds…)",
+      "inline": false
+      },
+      {
+      "name":"DEXTÉRITÉ",
+      "value":"Maniement des armes légères et à distance • Esquiver • Actions DEXTÉRITÉ (infiltration, Vol à la tire…)",
+      "inline": false
+      },
+      {
+      "name":"INTELLIGENCE",
+      "value":"Maîtrise de la magie • Détermine les points de LOIS • Actions INTELLIGENCE (culture générale, compréhension, réflexion, calcul…)",
+      "inline": false
+      },
+      {
+      "name":"VITESSE",
+      "value":"Détermine l’INITIATIVE et les REFLEXES • Actions VITESSE (vitesse de course et de réflexion)",
+      "inline": false
+      },
+      {
+      "name":"PERCEPTION",
+      "value":"Précision de visée • Instinct, amélioration des 5 sens • Actions PERCEPTION (repérer un ennemi camouflé, détecter un mensonge…)",
+      "inline": false
+      },
+      {
+      "name":"CHARISME",
+      "value":"Aisance en public, marchandage, contrôle de soi, gestion des émotions, intimidation, commandement…",
+      "inline": false
+      },
+      {
+      "name":"INITIATIVE",
+      "value":"Déterminé par la VITESSE: ordre de passage des tours (en mode combat)",
+      "inline": false
+      },
+      {
+      "name":"REFLEXE",
+      "value":"(VITESSE + PERCEPTION) / 3 = REFLEXE (arrondit au plus proche) • Capacité à réagir rapidement à un péril inattendu",
+      "inline": false
+      },
+      {
+      "name":"POINT D'ACTION (PA)",
+      "value":"Détermine les actions réalisable à chaque tour • 4 points par tour • Peut économiser 50% des points restant à la fin du tour pour le suivant",
+      "inline": false
+      },
+      {
+      "name":"LOI",
+      "value":"Maitrise d'une magie (feu, télékinésie, illusion, contrôle des animaux…) • Une LOI est donné aux niveaux d'intelligence suivant: {10, 12, 14, 16, 18, 20} • Chaque point de LOI permet d'ajouter un pouvoir ou d'en améliorer un",
+      "inline": false
+      },
+      {
+      "name":"POINTS DE VIE (PV)",
+      "value":"CONSTITUTION * 10 • Plus vos points de vie son bas plus vous êtes proche de la mort et des malus s'appliquent sur vos JETS",
+      "inline": false
+      },
+      {
+      "name":"ARMURE",
+      "value":"Déterminé par la CONSTITUTION: 0 Léger[0-30%] - 12 Moyen[35-60%] - 14 Lourd[65-90%] • Nécessite de réussir un dé de CONSTITUTION pour appliquer la réduction",
+      "inline": false
+      },
+      {
+      "name":"JET",
+      "value":"Généralement effectué avec un dé 20 • Pour réussir un JET il faut faire moins que votre statistique correspondante • 1 est un coup critique et 20 un échec critique",
+      "inline": false
+      },
+      {
+      "name":"POINTS DE STAT",
+      "value":"Commence LVL 1 avec 67 points • Gagne 2 points de compétence à chaque level UP • Les STATS coutent 1 point LVL[0-14] - 2 points LVL[15-16] - 3 points LVL[17-18] - 4 points LVL[19-20]",
+      "inline": false
+      }
+  ]
+}
