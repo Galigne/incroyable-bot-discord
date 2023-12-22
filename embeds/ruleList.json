@@ -1,6 +1,6 @@
 {
   "title": "Livre de règles",
-  "description": "Liste des règles du JDR RANDOM",
+  "description": "Le JDR RANDOM est un JDR assez simple ne nécessitant que très peu de préparation. L'aventure est dirigé par les joueurs, et Le Maître du Jeu les guidera grâce à de nombreux événements généré aléatoirement. L'univers est sans limite et les joueurs peuvent y inséré leur personnage, civilisation, backstory…\n▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬",
   "color": "#FFD700",
   "thumbnail": {
     "url": "attachment://book.jpg"
@@ -78,7 +78,7 @@
       },
       {
       "name":"POINTS DE STAT",
-      "value":"Commence LVL 1 avec 67 points • Gagne 2 points de compétence à chaque level UP • Les STATS coutent 1 point LVL[0-14] - 2 points LVL[15-16] - 3 points LVL[17-18] - 4 points LVL[19-20]",
+      "value":"Commence LVL 1 avec 67 points Minimum 4 - Maximum 20 (Echec critique toujours possible) • Gagne 2 points de compétence à chaque level UP • Les STATS coutent 1 point LVL[0-14] - 2 points LVL[15-16] - 3 points LVL[17-18] - 4 points LVL[19-20]",
       "inline": false
       }
   ]

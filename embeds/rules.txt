@@ -1,0 +1,33 @@
+-Présentation JDR RANDOM
+    -Principe du RANDOM
+    -Univers
+    -Libertés
+    -Simplicité
+    -Fun
+
+-Creation de personnage
+    -Nom
+    -Race (Don de race)
+    -Stats
+    -Lois
+    -Talent
+    -Equipement
+    -Inventaire de départ (Gold, Potions)
+    -Histoire
+    -Personnalité
+
+-Explication Combat
+    -HP (Prendre des dégats)
+    -Armure
+    -Jets
+    -Initiative
+    -Points D'action
+    -Attaques
+    -Déplacements
+    -Mort
+    
+-Voyage
+    -Campement / Restauration des HP
+    -Level UP
+    -Dialogue / Achat
+    -Loot

@@ -18,7 +18,7 @@ module.exports = {
                 addCharacter(message, args[2], message.author.id);
                 break;
             case "delete":
-                delCharacter(message);
+                delCharacter(message, args[2], message.author.id);
                 break;
             case "rules":
                 rules(message);
@@ -62,8 +62,22 @@ function addCharacter(message, name, creatorID){
     });   
 }
 
-function delCharacter(message){
+function delCharacter(message, name, creatorID){
     message.channel.send("TODO...");
+    var character
+    fs.readFile(`save/${name}.json`, 'utf8', (err, data) => {
+        if (err) {
+            message.reply("Error while saving your character", err);
+          return;
+        }
+        character = Character.getCharacterFromSave(JSON.parse(data));
+      });
+
+    if(character.creatorID == creatorID) {
+        fs.unlinkSync(`save/${name}.json`);
+    } else {
+        message.reply("Your not the creator of this character");
+    }
 }
 
 function infos(message, name){
