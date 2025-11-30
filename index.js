@@ -1,6 +1,12 @@
 const fs = require('fs');
 const Discord = require('discord.js');
 const Client = require('./client/Client');
+const { 
+	joinVoiceChannel, 
+	createAudioPlayer, 
+	createAudioResource, 
+	AudioPlayerStatus 
+  } = require('@discordjs/voice');
 const {
 	prefix,
 	token,
@@ -24,7 +30,8 @@ const {
 	jdr_voice,
 	bar_voice,
 	equipe,
-	equipe_voice
+	equipe_voice,
+	poutouyemoun
 } = require('./config.json');
 
 const client = new Client();
@@ -37,7 +44,7 @@ for (const file of commandFiles) {
 	client.commands.set(command.name, command);
 }
 
-client.once('ready', () => {
+client.once('clientReady', () => {
 	console.log('Ready!');
 });
 
@@ -49,7 +56,7 @@ client.once('disconnect', () => {
 	console.log('Disconnect!');
 });
 
-client.on('message', async message => {
+client.on('messageCreate', async message => {
 	const args = message.content.slice(prefix.length).split(/ +/);
 	const commandName = args.shift().toLowerCase();
 	const command = client.commands.get(commandName);
@@ -111,9 +118,18 @@ client.on('voiceStateUpdate', (oldMember, newMember) => {
 	let newUserChannel = newMember.channel;
 
 	if(oldUserChannel === null && newUserChannel !== null && newUserChannel.id === equipe_voice && oldMember.member.id !== unIncroyableBot) {
-		newMember.member.voice.channel.join().then(VoiceConnection => {
-			VoiceConnection.play("./media/Poutouyemoun.mp3").on("finish", () => VoiceConnection.disconnect());
-		}).catch(e => console.log(e))
+		const connection = joinVoiceChannel({
+			channelId: newUserChannel.id,
+			guildId: newUserChannel.guild.id,
+			adapterCreator: newUserChannel.guild.voiceAdapterCreator,
+		});
+		const player = createAudioPlayer();
+		connection.subscribe(player);
+		const resource = createAudioResource('./media/Poutouyemoun.mp3');
+		player.play(resource);
+		player.on(AudioPlayerStatus.Idle, () => {
+			connection.destroy(); 
+		});
 	}
 })
 

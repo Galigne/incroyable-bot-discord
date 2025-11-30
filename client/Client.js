@@ -1,16 +1,26 @@
-const { Client, Collection, GuildMember } = require('discord.js');
+const {
+  Client,
+  Collection,
+  GatewayIntentBits
+} = require("discord.js");
 
 module.exports = class extends Client {
-	constructor(config) {
+	constructor() {
 		super({
-			disableEveryone: true,
-			disabledEvents: ['TYPING_START'],
+		intents: [
+			GatewayIntentBits.Guilds,
+			GatewayIntentBits.GuildMessages,
+			GatewayIntentBits.MessageContent,
+			GatewayIntentBits.GuildInvites,
+			GatewayIntentBits.GuildMembers,
+			GatewayIntentBits.GuildPresences,
+			GatewayIntentBits.GuildMessageReactions,
+			GatewayIntentBits.GuildVoiceStates,
+		]
 		});
 
 		this.commands = new Collection();
 
 		this.queue = new Map();
-
-		this.config = config;
 	}
 };

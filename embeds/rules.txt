@@ -1,33 +1,150 @@
 -Présentation JDR RANDOM
     -Principe du RANDOM
+        Le concept du Jeu De Rôle (JDR) random est d'offrir une expérience fun et facile d'accès tout en laissant le maximum de libertés aux joueurs.
+        Les règles sont simples pour les joueurs et la préparation est rapide pour le MJ, l'objectif est de pouvoir se concentrer sur le jeu et de
+        s'amuser un maximum sans trop se prendre au sérieux. 
     -Univers
+        Durant la première partie du MJ, la carte du monde est blanche. On reste quand même dans un univers de fantaisie mais c'est à peu près la
+        seule limite. Le MJ prépare un scénario assez minimaliste et commence par poser les principaux points d'intérêt pour la campagne en 
+        expliquant globalement le contexte de l'aventure, mais laisse le reste de la carte vide. Le reste de l'univers est complété par les joueurs 
+        lors de la création de leurs personnages ainsi que généré aléatoirement ou par le MJ durant la partie. Lors de l'aventure suivante, même avec
+        des joueurs différents le MJ garde la carte précédente ainsi que tout le lore associé ainsi que les personnages "retraités" afin de continuer
+        à construire l'univers par-dessus dans les parties suivantes.
     -Libertés
+        Lors de la création de personnage, il n'y a pas de race ou de classe prédéterminés. Les joueurs sont libres d'inventer la race de leur choix,
+        avec l'aspect, les caractéristiques et l'histoire qu'ils souhaitent, et ajouter celle-ci à l'univers. Ils peuvent aussi choisir les 
+        statistiques qu'ils veulent, imaginer leur propre magie et talents ainsi que leur histoire de leur personnage, les PNJ associé etc... 
+        Tout ceci est validé par le MJ dans l'objectif de rester cohérent avec le reste de l'univers et d'avoir un jeu équilibré. Tout ceci 
+        reste dans l'univers et sera éventuellement réutilisé plus tard par le MJ lors de quêtes / aventures futures.
     -Simplicité
+        Pas de calculs compliqués pour les dégâts, pas de dizaines de lancers de dés chaque tour ni de centaines de pages de règles à retenir par 
+        coeur. Pas non plus de limitation pour chaque action et de liste de sorts et d'items qui deviennent redondants après de nombreuses parties. 
+        Le JDR random laisse le MJ gérer l'équilibrage en temps réel, et la créativité des joueurs pour trouver de nouvelles idées intéressantes. 
+        Pour ce qui est de la préparation du MJ, pas de problème, les générateurs aléatoires permettent d'improviser facilement des quêtes, 
+        événements, loots, personnages etc... De cette façon, ni les joueurs ni le MJ n'ont pas la pression de devoir "suivre l'histoire".
     -Fun
+        Ici, pas de prise de tête, il ne faut pas se prendre trop au sérieux. Avec la génération aléatoire, attendez-vous à affronter des démons 
+        poulet, des vampires schizophrènes et autres monstres et personnages délirants. Ce ne seront pas les batailles les plus équilibrées, il n'y
+        a pas vraiment de théorycrafting ou d'abus des règles possible, difficile de min-max quoi que ce soit. Alors amusez-vous, passez un bon
+        moment et n'oubliez pas de rigoler.
 
 -Creation de personnage
-    -Nom
-    -Race (Don de race)
+    -Race
+        Votre race, que vous pouvez inventer de toute pièce, ou bien récupérer de celles pré-existante dans le monde de votre MJ (Vous
+        pouvez bien entendu vous inspirer des grand classiques: Elf, Nain, Humain... et les refaires à votre sauce).
+        Votre race doit avoir: son nom, sa description physique, sa description des traits psychologique "cliché", son histoire et mode de vie, 
+        une/des ville(s) sur la carte (ceux lié à votre personnage uniquement) ainsi que ses dons de race.
+        Les dons de race sont une particularité que possède tous les personnages d'une race leur conférant: 
+            Un bonus +1 de compétence (ex: +1 au jets de discrétion)
+            Une capacité physique (ex: Vision nocturne, Respirer sous l'eau, Endurance accrue...)
     -Stats
+        Caratéristiques de base:
+            Commence LVL 1 avec 67 points Minimum 4 - Maximum 20 (Echec critique toujours possible)
+            Les STATS coutent 1 point LVL[0-14] - 2 points LVL[15-16] - 3 points LVL[17-18] - 4 points LVL[19-20]
+            CONSTITUTION: Nombre de PV • Résistance aux effets de statuts (froid, chaud, poison, paralysie…)
+            FORCE: Maniement des armes lourdes • Bloquer ou se protéger • Actions FORCE (porter des poids, Lancer d'objets lourds…)
+            DEXTERITE: Maniement des armes légères et à distance • Esquiver • Actions DEXTÉRITÉ (infiltration, Vol à la tire…)
+            INTELLIGENCE: Maîtrise de la magie • Détermine les points de LOIS • Actions INTELLIGENCE (culture générale, compréhension, réflexion, calcul…)
+            VITESSE: Détermine l’INITIATIVE et les REFLEXES • Actions VITESSE (vitesse de course et de réflexion)
+            PRECISION: Précision de visée • Instinct, amélioration des 5 sens • Actions PERCEPTION (repérer un ennemi camouflé, détecter un mensonge…)
+            CHARISME: Aisance en public, marchandage, contrôle de soi, gestion des émotions, intimidation, commandement…
+        Autres:
+            INITIATIVE: Déterminé par la VITESSE: ordre de passage des tours (en mode combat).
+            REFLEXES: (VITESSE + PERCEPTION) / 3 = REFLEXE (arrondit au plus proche) • Capacité à réagir rapidement à un péril inattendu.
+            POINT D'ACTION (PA): Détermine les actions réalisable à chaque tour • 4 points par tour • Peut économiser 50% des points restant 
+            à la fin du tour pour le suivant.
+            POINTS DE VIE (PV): CONSTITUTION * 10 • Plus vos points de vie son bas plus vous êtes proche de la mort et des malus s'appliquent 
+            sur vos JETS.
+            ARMURE: Déterminé par la CONSTITUTION: 0 Léger[0-30%] - 12 Moyen[35-60%] - 14 Lourd[65-90%] • Nécessite de réussir un dé de 
+            CONSTITUTION pour appliquer la réduction.
     -Lois
+        Une "Loi" est la maîtrise d'une magie (feu, télékinésie, illusion, contrôle des animaux…) Il n'existe pas de liste de sorts prédéterminés
+        dans cet univers, mais on peut quand même trouver des parchemins contenant une instance de magie (ex: une boule de feu) utilisable sans
+        posséder la Loi associée.
+        Un point de Loi est donné aux niveaux d'intelligence suivant: {10, 12, 14, 16, 18, 20} 
+        Les points de Loi permettent d'ajouter un niveau à une Loi ou d'en créer une nouvelle. (1 point au lvl1, 2points au lvl2, 3points au lvl3...)
+        Toutes les Lois sont à discuter avec votre MJ, elles ont chacune leur description détaillée avec leurs limites.
+        Celle ci change lorsqu'une Loi est améliorée, rajoutant plus d'options et diminuant les limites de celle ci. Tout cela est au bon vouloir 
+        du MJ qui doit prendre soin de l'équilibrage. 
+        Préférablement, les Lois reflètent un aspect de la vie de votre personnage et/ou de ses expériences, quelqu'un avec une Loi contrôlant
+        des plantes est quelqu'un de proche de la nature, ayant grandi dans la forêt par exemple. Le MJ a le droit de refuser une Loi étant trop
+        hors contexte vis à vis d'un personnage.
+        Un exemple, la Loi de Feu (niveau 1): Confère au personnage la capacité de générer des flammes allant jusqu'à 900°C ainsi que de les 
+        déplacer selon sa volonté à condition de respecter les limites et de garder une ligne de vue. Celles ci ne peuvent être invoquées à plus 
+        de 10 mètres et la taille des flammes diminue en fonction de la distance (Une boule de 20cm de diamètre au contact du mage et une faible 
+        étincelle à 10m). La création coûte 2 PA, ces flammes ne peuvent blesser leur créateur. Chaque tour, le mage doit utiliser 1PA afin de les 
+        maintenir en vie (cela ne compte pas les flammes "réelles" qui auraient été engendrées) De plus si les flammes ont été éloignées, leur 
+        taille diminuera au début du tour conformément à leur distance. Le mage peut contrôler ses flammes ainsi que ce qu'elles contiennent 
+        pour 2PA dans la même zone de 10m mais la vitesse et la précision diminuent en fonction de la distance (20km/h au contact du mage et 5km/h 
+        à 10m). A noter: Les flammes n'ont pas d'impact et de poids comme une "boule de feu classique", elles ne peuvent donc pas repousser des 
+        adversaires, ni exploser, ni infliger des dégâts contondants, elles se contentent de brûler. Cependant, le mage pourrait avoir avec lui des 
+        munitions de boule de charbon ou de tissu imbibé d'huile afin de rajouter des dégâts ou d'augmenter la flammabilité de ce qu'il touche.
+        Mais ne vous basez pas forcément sur cette exemple si vous souhaitez une Loi de feu. Vous pouvez discuter tout cela avec votre MJ, peut-être
+        que vos flammes ont une couleur différente, qu'elles ne peuvent être contrôler mais peuvent etre appliquer sur des équipements ou être plus
+        puissant au corps à corps, que leur contrôle dépend de la taille des flammes, etc...
     -Talent
-    -Equipement
-    -Inventaire de départ (Gold, Potions)
-    -Histoire
-    -Personnalité
+        Tous les personnages commencent avec un talent, ceux ci peuvent être très vastes. Ils sont à discuter avec le MJ et sont liés à 
+        l'histoire et la personnalité du personnage. Quelques exemples: Immunité au froid (Ne peut pas être gelé), Assassin (Dégat x1.4 si l'ennemi 
+        ne vous a pas repéré), Bodybuilder (+1 aux actions FORCE), Politicien (+2 CHARISME lors de négociations), etc...
+    -Equipement de départ
+        Votre équipement comporte vos armes, armures et tout ce qui est fait pour le combat.
+        Vous pouvez choisir l'armure de base de votre choix (armure légère, moyenne ou lourde). Celle ci peut avoir l'apparence de votre choix, les
+        capes, chaussures, amulettes et autres bijoux n'ont dans tous les cas pas d'effets s'ils ne sont pas magiques.
+        Vous commencez avec les armes principales de base de votre choix (épée, bouclier, lance, arc, sceptre etc...) jusqu'à 3 maximum.
+        Vous avez aussi le droit à des armes secondaires et outils en tout genre de façon limité (couteau de lancé, hachette, piège à ours, 
+        poison, chaines, ...) à discuter avec le MJ.
+        Les flèches, carreaux d'arbalète et autres munitions pour arme principale non modifiée sont illimités (parce que va-y c'est chiant en fait).
+        De plus, il est possible de commencer avec 1 équipement magique faible à discuter avec le MJ à condition que celui-ci ait un impact 
+        négligeable.
+    -Inventaire de départ
+        Votre inventaire comporte tous les autres objets que vous stockez sur vous.
+        Tous les joueurs commencent avec une potion de soin restaurant 50PV.
+        Tous les joueurs lancent un dé 20+5 pour déterminer avec combien de pièces d'or ils commencent l'aventure.
+        Vous pouvez commencer avec de nombreux objets (Instruments de musique, Lanterne, Pioche, Livres, Kit de crochetage, etc...) dans la mesure
+        où ceux-ci ont un lien logique avec votre personnage et son histoire et sont en quantité raisonnable de ce que vous pourriez porter sur
+        vous lors de l'aventure.
+    -Histoire/Objectifs
+        Vous devez détailler l'histoire de votre personnage, ses connaissances, le(s) lieu(x) où il a vécu, ce qu'il faisait avant,
+        ce qui lui est arrivé.
+        Donnez aussi ses motivations, son but, pourquoi est-il devenu un aventurier? La gloire et la fortune? Une injustice? De quoi 
+        est-il à la recherche?
+    -Personnalité/Alignement
+        Concrétisez la personnalité de votre personnage, avec les traits, les manières, les habitudes, les croyances et les défauts qui donnent 
+        à une personne une identité unique, cela vous aidera à lui donner vie lors des parties. Donnez lui aussi des points d'intérêts particuliers,
+        des idéaux, des défauts, ainsi que son alignement: est-il quelqu'un de bon, de méchant?
+        Concertez vous avec les autres joueurs lors de ce moment, il est préférable que l'équipe reste soudée lors de l'aventure, il ne faudrait
+        donc pas des personnages diamétralement opposés, même si le JcJ est autorisé, cela mettrait fin à un des personnages dès le début de 
+        l'aventure et il faudrait que le joueur en recréer un avant que l'aventure n'ai même débutée.
 
 -Explication Combat
-    -HP (Prendre des dégats)
-    -Armure
-    -Jets
+    -Jets (Inspiration, Avantage/Désavantage)
+    -HP (Prendre des dégats / survivre à 0hp)
+    -Armes
+    -Armures
     -Initiative
-    -Points D'action
+    -Points d'Action
     -Attaques
     -Déplacements
     -Mort
+    -Attaque surprise
     
 -Voyage
     -Campement / Restauration des HP
-    -Level UP
+    -Niveaux/Level UP
+        Lorsque vous créez votre personnage, il commence niveau 1. Le MJ détermine lorsque les joueurs level up. Le niveau max est 10.
+        Pour rappel au niveau 1 vous avez:
+            67 points de caractéristiques à répartir.
+            1 Talent
+        A chaque level UP: 
+            Gagne 2 points à répartir et attribué entre points de caractéristiques et points de Loi.
+            Gagne +20% de points de vie max arrondit vers le bas.
+        Aux levels 3, 6 et 9:
+            Gagne 1 nouveau Talent.
+        Aux levels 2, 5, 8:
+            Gagne 1 point de caractéristique bonus.
+        Aux levels 4, 7: 
+            Gagne 1 PA supplémentaire.
+        Au level 10: 
+            Gagne 2 PA supplémentaire.
     -Dialogue / Achat
     -Loot
