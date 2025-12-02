@@ -68,7 +68,7 @@
       },
       {
       "name":"ARMURE",
-      "value":"Déterminé par la CONSTITUTION: 0 Léger[0-30%] - 12 Moyen[35-60%] - 14 Lourd[65-90%] • Nécessite de réussir un dé de CONSTITUTION pour appliquer la réduction",
+      "value":"Déterminé par la CONSTITUTION: 0 Léger[0-20%] - 12 Moyen[20-40%] - 14 Lourd[40-60%] • Donne des PV bonus en fonction de vos PV max",
       "inline": false
       },
       {
