@@ -220,6 +220,8 @@ Votre équipement regroupe **[Armes](#armes), [Armures](#armures)** et tout ce q
 - Les **flèches, carreaux** et autres munitions pour une arme principale non modifiée sont **illimités**
 - Vous pouvez débuter avec **1 équipement magique faible**, à condition que son impact soit **négligeable** et **accepté par le [MJ](#mj)**.
 
+> <span style="color:darkorange">À approfondir : gestion de la rareté des items</span>
+
 ## Inventaire de départ
 
 - Tous les joueurs commencent avec **2 potions de soin** restaurant chacune **50 PV**
