@@ -26,7 +26,7 @@
 - [Présentation](#présentation)
 - [Création de personnage](#création-de-personnage)
   - [Race](#race)
-  - [Caractéristiques (Stats)](#caractéristiques-stats)
+  - [Statistiques](#statistiques)
   - [Lois (magie)](#lois-magie)
   - [Talents](#talents)
   - [Équipement et inventaire](#équipement-et-inventaire)
@@ -56,8 +56,6 @@
 
 Le Jeu De Role (JDR) Random vise une expérience accessible, créative et résolument tournée vers le fun. Les règles sont simples pour les joueurs et la préparation du maître de jeu (MJ) est rapide : l'objectif est de favoriser l'improvisation, la liberté et le plaisir plutôt que la complexité mécanique.
 
-> <span style="color:darkorange">À approfondir : exemples de scénarios courts et tables aléatoires pour aider le MJ novice.</span>
-
 Au démarrage d'une campagne, la carte du monde est volontairement peu détaillée : le MJ pose les points d'intérêt principaux et laisse le reste « blanc ». Les joueurs complètent l'univers en créant leurs personnages ; le MJ ou des générateurs aléatoires complètent le reste au fil de la partie. Lors des campagnes suivantes, la carte, les personnages et le lore précédents sont conservés pour enrichir l'univers.
 
 Aucune race ni classe n'est imposée : les joueurs inventent leur race, son apparence, ses caractéristiques, son histoire et ses dons raciaux. Ainsi que leur classe, ses statistiques, ses armes, son armure, sa magie, ses talents et son background. Tout élément ajouté à l'univers doit être validé par le MJ pour garantir cohérence et équilibre.
@@ -74,29 +72,30 @@ L'esprit du jeu est décontracté : acceptez l'absurde et l'imprévu (démons-po
 
 ## Race
 
-Vous pouvez créer une race originale ou reprendre une race connue en l'adaptant. Chaque race doit inclure :
+Votre race peut être entièrement inventée ou issue de l’univers créé par votre MJ. Vous pouvez aussi vous inspirer des grands classiques (Elfes, Nains, Humains, etc.) et les revisiter à votre manière.
 
-* **Nom**
-* **Description physique**
-* **Traits psychologiques typiques**
-* **Histoire et mode de vie**
-* **Ville(s) d'origine** (liées au personnage)
-* **Dons raciaux** (exemples ci‑dessous)
+Chaque race doit inclure :
 
-**Dons raciaux (exemples)** :
+* Nom
+* Description physique
+* Traits psychologiques typiques
+* Histoire et mode de vie
+* Ville(s) d'origine (liées au personnage)
+* DONS RACIAUX (explication ci‑dessous)
 
+Les **DONS RACIAUX** sont une particularité que possède tous les personnages d'une race et leur conférant: 
 * Bonus de compétence : +1 à un jet (ex. +1 discrétion)
 * Capacité physique : vision nocturne, respiration aquatique, endurance accrue, etc.
 
 > <span style="color:darkorange">À approfondir : cadre culturel et relations inter-races, répercussions en jeu.</span>
 
-## Caractéristiques (Stats)
+## Statistiques
 
-**Caractéristiques de base** :
+**Statistiques de base** :
 
-* Les caractéristiques vont de **4** (minimum) à **20** (maximum).
+* Les statistiques vont de **4** (minimum) à **20** (maximum).
 * Un personnage commence **Niveau 1** avec **67 points** à répartir.
-* Les PNJ lambda ont des caractéristiques autour de 7–8.
+* Les PNJ lambda ont des statistiques autour de 7–8.
 
 **Coût en points selon la valeur** :
 
@@ -105,7 +104,7 @@ Vous pouvez créer une race originale ou reprendre une race connue en l'adaptant
 * 17–18 : 3 points
 * 19–20 : 4 points
 
-**Liste des caractéristiques** :
+**Liste des statistiques** :
 
 * **CONSTITUTION** : points de vie, résistance aux états (poison, paralysie, froid, chaleur…)
 * **FORCE** : maniement d'armes lourdes, bloquer, actions liées à la force (porter, lancer des objets lourds)
@@ -281,11 +280,11 @@ Le butin est réaliste : vous récupérez ce que portaient vos ennemis. Les coff
 * Niveau maximum : **10**
 * Début : niveau 1.
 
-**À niveau 1** : 67 points de caractéristiques, 1 talent.
+**À niveau 1** : 67 points de statistiques, 1 talent.
 
 **À chaque niveau** :
 
-* +2 points à répartir entre caractéristiques et points de LOI
+* +2 points à répartir entre statistiques et points de LOI
 * +20% de PV max (arrondi vers le bas)
 
 **Paliers** :
