@@ -158,7 +158,7 @@ Le **[JcJ](#jcj)** existe, mais mieux vaut éviter d'avoir à recréer un person
 
 Essayez de rester **cohérent avec votre personnage** dans vos actions : un lâche évitera les combats frontaux, un fanatique religieux n'insultera pas légèrement son dieu, etc.
 
-<u>Surtout, ne le faites pas foncer volontairement dans un piège mortel ou dans une situation sans aucune chance de survie.</u>
+<span style="color: darkorange;">Surtout, ne le faites pas foncer volontairement dans un piège mortel ou dans une situation sans aucune chance de survie.</span>
 
 Votre personnage peut être imprudent, mais, comme une vraie personne, il tient en général à sa vie. Vous n'êtes pas le personnage principal : il n'y aura pas de *deus ex machina* pour vous sauver. Ne soyez donc pas surpris si le [MJ](#mj) vous demande de créer un nouveau personnage.
 
@@ -527,11 +527,11 @@ Plus une attaque montre que le joueur a écouté la description du [MJ](#mj), co
 
 <u>PR apportés par un bouclier</u>
 
-- **Commun** : `+5 PR`
-- **Peu commun** : `+10 PR`
-- **Rare** : `+15 PR`
-- **Épique** : `+20 PR`
-- **Légendaire** : `+25 PR`
+- **Commun** : `5% PV max`
+- **Peu commun** : `10% PV max`
+- **Rare** : `15% PV max`
+- **Épique** : `20% PV max`
+- **Légendaire** : `25% PV max`
 
 Le [MJ](#mj) peut ajuster légèrement cette valeur selon la taille, la forme ou un effet particulier du bouclier, mais ces chiffres servent de base simple et rapide.
 
