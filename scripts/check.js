@@ -139,17 +139,18 @@ function checkAuthorization(commands) {
 		errors.push('Members should be allowed to use the help command.');
 	}
 
-	const ownerInWrongChannel = createMessage([config.roles.owner], '0');
-	if (authorizeCommand(commands.get('restart'), ownerInWrongChannel, config).allowed) {
-		errors.push('Restart should be rejected outside the commands channel.');
+	const moderatorMessage = createMessage([config.roles.moderator], '0');
+	if (!authorizeCommand(commands.get('restart'), moderatorMessage, config).allowed) {
+		errors.push('Moderators should be allowed to restart the bot.');
 	}
 
-	const ownerInCommandsChannel = createMessage(
-		[config.roles.owner],
-		config.channels.commands,
-	);
-	if (!authorizeCommand(commands.get('restart'), ownerInCommandsChannel, config).allowed) {
-		errors.push('The owner should be allowed to restart in the commands channel.');
+	const ownerMessage = createMessage([config.roles.owner], '0');
+	if (!authorizeCommand(commands.get('restart'), ownerMessage, config).allowed) {
+		errors.push('The owner should be allowed to restart the bot.');
+	}
+
+	if (authorizeCommand(commands.get('restart'), memberMessage, config).allowed) {
+		errors.push('Regular members should not be allowed to restart the bot.');
 	}
 
 	const memberUsingOwnerCommand = authorizeCommand(

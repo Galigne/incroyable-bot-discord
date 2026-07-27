@@ -4,8 +4,7 @@ module.exports = {
 	usage: '!restart',
 	helpOrder: 70,
 	access: {
-		role: 'owner',
-		channels: ['commands'],
+		role: 'moderator',
 	},
 	async execute({ client, message, token }) {
 		await message.channel.send('Reconnecting...');
