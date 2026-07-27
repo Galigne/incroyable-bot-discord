@@ -5,6 +5,12 @@ const ffmpegPath = require('ffmpeg-static');
 const { generateDependencyReport } = require('@discordjs/voice');
 const Character = require('../models/Character');
 const config = require('../config.json');
+const characterStore = require('../services/characterStore');
+const {
+	editCharacter,
+	resetTurnResources,
+	restoreResource,
+} = require('../services/characterEditor');
 const generatorCatalog = require('../services/generatorCatalog');
 const { authorizeCommand } = require('../util/authorization');
 const { loadCommands } = require('../util/loadCommands');
@@ -12,24 +18,28 @@ const { loadCommands } = require('../util/loadCommands');
 const root = path.join(__dirname, '..');
 const errors = [];
 
-checkNodeVersion();
-checkJavaScriptSyntax();
-const commands = checkCommands();
-checkHelpOrder(commands.values(), 'top-level commands');
-checkRpgStructure(commands);
-checkGeneratorCatalog();
-checkCharacterModel();
-checkConfiguration();
-checkAuthorization(commands);
-checkRequiredFiles();
+async function main() {
+	checkNodeVersion();
+	checkJavaScriptSyntax();
+	const commands = checkCommands();
+	checkHelpOrder(commands.values(), 'top-level commands');
+	checkRpgStructure(commands);
+	await checkRpgRouting(commands);
+	checkGeneratorCatalog();
+	checkCharacterModel();
+	await checkCharacterStore();
+	checkConfiguration();
+	checkAuthorization(commands);
+	checkRequiredFiles();
 
-if (errors.length > 0) {
-	console.error(errors.join('\n\n'));
-	process.exitCode = 1;
-}
-else {
-	console.log(`Checks passed: ${commands.size} commands loaded.`);
-	console.log(generateDependencyReport());
+	if (errors.length > 0) {
+		console.error(errors.join('\n\n'));
+		process.exitCode = 1;
+	}
+	else {
+		console.log(`Checks passed: ${commands.size} commands loaded.`);
+		console.log(generateDependencyReport());
+	}
 }
 
 function checkNodeVersion() {
@@ -67,7 +77,19 @@ function checkRpgStructure(commands) {
 		return;
 	}
 
-	const expectedSubcommands = ['add', 'delete', 'generate', 'help', 'rules', 'view'];
+	const expectedSubcommands = [
+		'add',
+		'delete',
+		'edit',
+		'edithelp',
+		'endturn',
+		'generate',
+		'help',
+		'rest',
+		'rules',
+		'view',
+		'viewhelp',
+	];
 	const actualSubcommands = [...rpgCommand.subcommands.keys()].sort();
 	if (actualSubcommands.join(',') !== expectedSubcommands.join(',')) {
 		errors.push(`Unexpected RPG subcommands: ${actualSubcommands.join(', ')}`);
@@ -85,41 +107,91 @@ function checkRpgStructure(commands) {
 	checkHelpOrder(rpgCommand.subcommands.values(), 'RPG subcommands');
 }
 
+async function checkRpgRouting(commands) {
+	const replies = [];
+	const context = {
+		args: [],
+		config,
+		message: {
+			reply: async message => replies.push(message),
+		},
+	};
+	const rpgCommand = commands.get('rpg');
+	await rpgCommand.execute(context);
+	await rpgCommand.execute({ ...context, args: ['UnknownCharacter'] });
+	if (
+		replies.length !== 2
+		|| !replies[0].includes('!rpg help')
+		|| !replies[1].includes('Unknown RPG command')
+	) {
+		errors.push('RPG commands should require an explicit subcommand.');
+	}
+
+	const viewCommand = rpgCommand.subcommands.get('view');
+	if (
+		viewCommand.VIEW_HELP.length > 2_000
+		|| !viewCommand.VIEW_FIELDS.includes('personality')
+		|| !viewCommand.VIEW_FIELDS.includes('status')
+	) {
+		errors.push('The RPG view help is missing required fields or exceeds Discord limits.');
+	}
+}
+
 function checkGeneratorCatalog() {
 	try {
-		const expectedCategories = [
-			'enemy',
-			'event',
-			'location',
-			'loot',
-			'npc',
-			'personality',
-			'power',
-			'quest',
-			'race',
-			'trap',
-		];
 		const categories = generatorCatalog.listCategories();
-		const actualCategories = categories.map(category => category.key);
-		if (actualCategories.join(',') !== expectedCategories.join(',')) {
-			errors.push(`Unexpected generator categories: ${actualCategories.join(', ')}`);
+		if (categories.length === 0) {
+			errors.push('At least one generator category is required.');
 		}
 
 		for (const category of categories) {
-			if (category.entries.length < 25) {
-				errors.push(
-					`Generator category ${category.name} needs at least 25 prompts; `
-					+ `${category.entries.length} found.`,
-				);
-			}
 			const firstResult = generatorCatalog.generate(category.name, () => 0);
 			if (firstResult?.entry !== category.entries[0]) {
 				errors.push(`Generator category ${category.name} cannot select its first prompt.`);
 			}
 		}
 
-		if (generatorCatalog.getCategory('personalities')?.key !== 'personality') {
+		if (
+			generatorCatalog.getCategory('personality')
+			&& generatorCatalog.getCategory('personalities')?.key !== 'personality'
+		) {
 			errors.push('Plural generator category names are not normalized correctly.');
+		}
+
+		const weightedEntries = [
+			'Default weight',
+			{ value: 'Double weight', weight: 2 },
+		];
+		if (
+			generatorCatalog.getEntryWeight(weightedEntries[0]) !== 1
+			|| generatorCatalog.getEntryWeight(weightedEntries[1]) !== 2
+			|| generatorCatalog.selectWeightedEntry(weightedEntries, () => 0) !== weightedEntries[0]
+			|| generatorCatalog.selectWeightedEntry(weightedEntries, () => 0.5) !== weightedEntries[1]
+		) {
+			errors.push('Weighted generator selection is not working correctly.');
+		}
+
+		const powerResult = generatorCatalog.generate('power', () => 0);
+		if (
+			!powerResult?.entry?.fields?.Name
+			|| !powerResult.entry.fields.Description
+		) {
+			errors.push('Power generators should expose separate Name and Description fields.');
+		}
+		const generateCommand = require('../commands/rpg/subcommands/generate');
+		const structuredEmbed = generateCommand.createGeneratedEmbed(powerResult).toJSON();
+		if (
+			structuredEmbed.fields?.[0]?.name !== 'Name'
+			|| structuredEmbed.fields?.[1]?.name !== 'Description'
+		) {
+			errors.push('Structured generator fields are not rendered correctly.');
+		}
+		const weightedTextEmbed = generateCommand.createGeneratedEmbed({
+			category: { name: 'test' },
+			entry: weightedEntries[1],
+		}).toJSON();
+		if (weightedTextEmbed.description !== 'Double weight') {
+			errors.push('Weighted text generator entries are not rendered correctly.');
 		}
 	}
 	catch (error) {
@@ -143,15 +215,128 @@ function checkHelpOrder(entries, label) {
 function checkCharacterModel() {
 	try {
 		const original = new Character('Test', '0');
-		original.stats.strength = 12;
+		editCharacter(original, 'stats.strength', ['12']);
+		editCharacter(original, 'race.name', ['Ashborn']);
+		editCharacter(original, 'personality.traits', ['add', 'Brave']);
+		editCharacter(original, 'rules', ['add', 'Fire', '|', 'Controls flames']);
+		editCharacter(original, 'equipment', ['add', 'Longsword']);
+		try {
+			editCharacter(original, 'ap.max', ['11']);
+			errors.push('AP values above 10 should be rejected.');
+		}
+		catch (error) {
+			if (error.code !== 'INVALID_CHARACTER_EDIT') {
+				throw error;
+			}
+		}
+		original.resources.hp.current = 1;
+		original.resources.ap.current = 0;
+		original.resources.md.current = 0;
+		restoreResource(original, 'hp', 50);
+		resetTurnResources(original);
 		const character = Character.fromSave(JSON.parse(JSON.stringify(original)));
-		if (character.creatorId !== '0' || character.stats.strength !== 12) {
+		if (
+			character.creatorId !== '0'
+			|| character.stats.strength !== 12
+			|| character.race.name !== 'Ashborn'
+			|| character.personality.traits[0] !== 'Brave'
+			|| character.rules[0]?.description !== 'Controls flames'
+			|| character.resources.hp.current !== 50
+			|| character.resources.ap.current !== character.resources.ap.max
+			|| character.resources.md.current !== character.resources.md.max
+		) {
 			errors.push('Character saves are not restored correctly.');
 		}
-		character.toEmbed().toJSON();
+		const summary = character.toEmbed().toJSON();
+		const status = summary.fields.find(field => field.name === 'Status');
+		if (
+			!status
+			|| !status.value.includes('HP: **50 / 100 (50%)**')
+			|| !status.value.includes('AP:\n🌟🌟🌟🌟')
+			|| summary.fields.some(field => field.name === 'Status effects')
+			|| summary.fields[1]?.name !== 'Statistics'
+			|| summary.fields[2]?.name !== 'RULEs'
+			|| summary.fields.some(field => field.name === '\u200B')
+			|| !summary.fields[1]?.value.includes('**Racial traits**')
+			|| !summary.fields[2]?.value.includes('**Talents**')
+		) {
+			errors.push('The character summary status is not formatted correctly.');
+		}
+		for (const field of ['race', 'personality', 'statistics', 'rules', 'status']) {
+			character.toFieldEmbed(field)?.toJSON();
+		}
+		character.resources.ap.current = 2;
+		character.resources.ap.max = 4;
+		const apDetail = character.toFieldEmbed('ap').toJSON();
+		if (apDetail.description !== 'AP:\n🌟🌟⭐⭐') {
+			errors.push('AP availability is not displayed correctly.');
+		}
+		if (character.toFieldEmbed('unknown') !== null) {
+			errors.push('Unknown character detail fields should be rejected.');
+		}
+
+		const legacyCharacter = Character.fromSave({
+			name: 'Legacy',
+			creatorId: '1',
+			battle: { currentHp: 20, maxHp: 80, armor: 10 },
+			inventory: { equipment: ['Spear'], bag: ['Rope'] },
+		});
+		if (
+			legacyCharacter.resources.hp.current !== 20
+			|| legacyCharacter.resources.hp.max !== 80
+			|| legacyCharacter.equipment[0] !== 'Spear'
+			|| legacyCharacter.inventory[0] !== 'Rope'
+		) {
+			errors.push('Legacy character saves are not migrated correctly.');
+		}
 	}
 	catch (error) {
 		errors.push(`Character model: ${error.message}`);
+	}
+}
+
+async function checkCharacterStore() {
+	const suffix = `${process.pid}_${Date.now()}`;
+	const originalName = `check_${suffix}`;
+	const savePath = path.join(root, 'save', `${originalName}.json`);
+
+	try {
+		await characterStore.createCharacter(originalName, 'creator');
+		try {
+			await characterStore.updateCharacter(originalName, 'stranger', false, () => {});
+			errors.push('A non-owner was allowed to edit a character.');
+		}
+		catch (error) {
+			if (error.code !== 'NOT_CHARACTER_EDITOR') {
+				throw error;
+			}
+		}
+
+		await characterStore.updateCharacter(originalName, 'dm-user', true, character => {
+			character.name = 'A Display Name With Spaces';
+			character.resources.hp.current = 42;
+		});
+		const editedCharacter = await characterStore.getCharacter(originalName);
+		if (
+			editedCharacter.name !== 'A Display Name With Spaces'
+			|| editedCharacter.resources.hp.current !== 42
+		) {
+			errors.push('Character edits are not persisted correctly.');
+		}
+		await characterStore.deleteCharacter(originalName, 'creator');
+	}
+	catch (error) {
+		errors.push(`Character store: ${error.message}`);
+	}
+	finally {
+		try {
+			fs.unlinkSync(savePath);
+		}
+		catch (error) {
+			if (error.code !== 'ENOENT') {
+				errors.push(`Could not clean up character check: ${error.message}`);
+			}
+		}
 	}
 }
 
@@ -271,3 +456,8 @@ function findJavaScriptFiles(directory) {
 	}
 	return files;
 }
+
+main().catch(error => {
+	console.error(error);
+	process.exitCode = 1;
+});

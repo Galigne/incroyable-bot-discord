@@ -4,7 +4,7 @@ module.exports = {
 	name: 'rules',
 	description: 'Open the public TTRPG rulebook',
 	usage: '!rpg rules',
-	helpOrder: 50,
+	helpOrder: 80,
 	async execute({ message }) {
 		await message.reply(`TTRPG rulebook: ${RULES_URL}`);
 	},

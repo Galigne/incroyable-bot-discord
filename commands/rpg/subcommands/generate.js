@@ -39,11 +39,30 @@ module.exports = {
 			return;
 		}
 
-		const embed = new EmbedBuilder()
-			.setTitle(`Generated ${result.category.name}`)
-			.setDescription(result.entry)
-			.setColor('#FFD700')
-			.setFooter({ text: 'The GM may adapt or reroll any result.' });
+		const embed = createGeneratedEmbed(result);
 		await message.channel.send({ embeds: [embed] });
 	},
 };
+
+function createGeneratedEmbed(result) {
+	const embed = new EmbedBuilder()
+		.setTitle(`Generated ${result.category.name}`)
+		.setColor('#FFD700')
+		.setFooter({ text: 'The GM may adapt or reroll any result.' });
+	if (typeof result.entry === 'string' || result.entry.value !== undefined) {
+		embed.setDescription(
+			typeof result.entry === 'string' ? result.entry : result.entry.value,
+		);
+	}
+	else {
+		embed.addFields(
+			Object.entries(result.entry.fields).map(([name, value]) => ({
+				name,
+				value: String(value),
+			})),
+		);
+	}
+	return embed;
+}
+
+module.exports.createGeneratedEmbed = createGeneratedEmbed;

@@ -2,35 +2,198 @@
   "name": "power",
   "description": "RULE concepts with useful limits and complications",
   "entries": [
-    "Thread RULE — Create and control a few meters of thread within sight; stronger fibers require carried material, and control weakens sharply with distance.",
-    "Echo RULE — Capture one sound and replay or redirect it; loud sounds cost more AP and only one captured sound can be held at a time.",
-    "Rust RULE — Accelerate corrosion on touched non-magical metal; large or well-maintained objects require sustained contact.",
-    "Door RULE — Sense and manipulate ordinary doors nearby; cannot create passages or affect a threshold the user cannot clearly imagine.",
-    "Weight RULE — Make one visible object somewhat heavier or lighter; cannot reduce weight to zero and requires concentration.",
-    "Ink RULE — Animate written ink into moving symbols and simple shapes; destroying the source writing ends the effect.",
-    "Momentum RULE — Store a portion of the force from one impact and release it through a later touch; excess stored force injures the user.",
-    "Mist RULE — Produce and shape cool fog nearby; wind disperses it and the user cannot see through it naturally.",
-    "Borrowed Face RULE — Copy the face of someone touched for one hour; voice, clothing, memories, and mannerisms remain unchanged.",
-    "Candle RULE — Control small existing flames and read the strongest emotion of the person who lit one.",
-    "Root RULE — Accelerate and guide nearby plant roots; barren ground requires seeds, water, and extra time.",
-    "Glass RULE — Bend and reshape touched glass without heat; shattered fragments remain dangerous and mass cannot be created.",
-    "Promise RULE — Sense when a willingly spoken promise is broken; cannot force honesty or determine why it was broken.",
-    "Friction RULE — Increase or decrease friction across a small visible surface; extremes are brief and affect allies as readily as enemies.",
-    "Scent RULE — Create, remove, and follow mundane scents; complex copied scents require a sample.",
-    "Paper RULE — Fold paper into briefly animated tools or creatures; water, fire, and heavy force destroy them easily.",
-    "Reflection RULE — Look through a nearby reflection or distort what it shows; cannot pass matter through it.",
-    "Sleep RULE — Encourage natural sleep in a calm target; pain, danger, or strong stimulation breaks the effect.",
-    "Magnetism RULE — Pull or push small ferrous objects; precision and force decrease with range.",
-    "Mending RULE — Repair simple breaks in non-living objects; missing material must be supplied and magical properties are not restored.",
-    "Shadow RULE — Stretch and shape the user's shadow into distracting forms; it cannot become solid and needs a light source.",
-    "Salt RULE — Create and shape a handful of salt; larger quantities cause exhaustion, and summoned salt dissolves by sunrise.",
-    "Heartbeat RULE — Sense nearby heartbeats and briefly synchronize with one; constructs and many undead are invisible to it.",
-    "Color RULE — Move or alter color on visible surfaces; effects are cosmetic but can enable camouflage or coded signals.",
-    "Balance RULE — Stabilize a touched object or willing person against ordinary motion; sudden heavy force can overwhelm it.",
-    "Cold RULE — Draw heat from a small nearby area; the displaced heat warms the user's body and can become dangerous.",
-    "Memory RULE — Preserve one willing recent memory inside an object; recording fades the user's own details until it is released.",
-    "Threshold RULE — Know when a designated boundary is crossed; only one boundary can be watched and it must be physically marked.",
-    "Swarm RULE — Communicate simple intentions to a small group of mundane insects; it grants no direct control over unnatural creatures.",
-    "Chance RULE — Once per scene, nudge a trivial random outcome; the GM chooses an equally unlikely inconvenience that follows."
+    {
+      "weight": 2,
+      "fields": {
+        "Name": "Thread RULE",
+        "Description": "Create and control a few meters of thread within sight; stronger fibers require carried material, and control weakens sharply with distance."
+      }
+    },
+    {
+      "weight": 2,
+      "fields": {
+        "Name": "Echo RULE",
+        "Description": "Capture one sound and replay or redirect it; loud sounds cost more AP and only one captured sound can be held at a time."
+      }
+    },
+    {
+      "fields": {
+        "Name": "Rust RULE",
+        "Description": "Accelerate corrosion on touched non-magical metal; large or well-maintained objects require sustained contact."
+      }
+    },
+    {
+      "fields": {
+        "Name": "Door RULE",
+        "Description": "Sense and manipulate ordinary doors nearby; cannot create passages or affect a threshold the user cannot clearly imagine."
+      }
+    },
+    {
+      "weight": 2,
+      "fields": {
+        "Name": "Weight RULE",
+        "Description": "Make one visible object somewhat heavier or lighter; cannot reduce weight to zero and requires concentration."
+      }
+    },
+    {
+      "fields": {
+        "Name": "Ink RULE",
+        "Description": "Animate written ink into moving symbols and simple shapes; destroying the source writing ends the effect."
+      }
+    },
+    {
+      "fields": {
+        "Name": "Momentum RULE",
+        "Description": "Store a portion of the force from one impact and release it through a later touch; excess stored force injures the user."
+      }
+    },
+    {
+      "weight": 2,
+      "fields": {
+        "Name": "Mist RULE",
+        "Description": "Produce and shape cool fog nearby; wind disperses it and the user cannot see through it naturally."
+      }
+    },
+    {
+      "fields": {
+        "Name": "Borrowed Face RULE",
+        "Description": "Copy the face of someone touched for one hour; voice, clothing, memories, and mannerisms remain unchanged."
+      }
+    },
+    {
+      "weight": 2,
+      "fields": {
+        "Name": "Candle RULE",
+        "Description": "Control small existing flames and read the strongest emotion of the person who lit one."
+      }
+    },
+    {
+      "weight": 2,
+      "fields": {
+        "Name": "Root RULE",
+        "Description": "Accelerate and guide nearby plant roots; barren ground requires seeds, water, and extra time."
+      }
+    },
+    {
+      "fields": {
+        "Name": "Glass RULE",
+        "Description": "Bend and reshape touched glass without heat; shattered fragments remain dangerous and mass cannot be created."
+      }
+    },
+    {
+      "fields": {
+        "Name": "Promise RULE",
+        "Description": "Sense when a willingly spoken promise is broken; cannot force honesty or determine why it was broken."
+      }
+    },
+    {
+      "fields": {
+        "Name": "Friction RULE",
+        "Description": "Increase or decrease friction across a small visible surface; extremes are brief and affect allies as readily as enemies."
+      }
+    },
+    {
+      "weight": 2,
+      "fields": {
+        "Name": "Scent RULE",
+        "Description": "Create, remove, and follow mundane scents; complex copied scents require a sample."
+      }
+    },
+    {
+      "fields": {
+        "Name": "Paper RULE",
+        "Description": "Fold paper into briefly animated tools or creatures; water, fire, and heavy force destroy them easily."
+      }
+    },
+    {
+      "fields": {
+        "Name": "Reflection RULE",
+        "Description": "Look through a nearby reflection or distort what it shows; cannot pass matter through it."
+      }
+    },
+    {
+      "fields": {
+        "Name": "Sleep RULE",
+        "Description": "Encourage natural sleep in a calm target; pain, danger, or strong stimulation breaks the effect."
+      }
+    },
+    {
+      "weight": 2,
+      "fields": {
+        "Name": "Magnetism RULE",
+        "Description": "Pull or push small ferrous objects; precision and force decrease with range."
+      }
+    },
+    {
+      "weight": 3,
+      "fields": {
+        "Name": "Mending RULE",
+        "Description": "Repair simple breaks in non-living objects; missing material must be supplied and magical properties are not restored."
+      }
+    },
+    {
+      "weight": 2,
+      "fields": {
+        "Name": "Shadow RULE",
+        "Description": "Stretch and shape the user's shadow into distracting forms; it cannot become solid and needs a light source."
+      }
+    },
+    {
+      "fields": {
+        "Name": "Salt RULE",
+        "Description": "Create and shape a handful of salt; larger quantities cause exhaustion, and summoned salt dissolves by sunrise."
+      }
+    },
+    {
+      "fields": {
+        "Name": "Heartbeat RULE",
+        "Description": "Sense nearby heartbeats and briefly synchronize with one; constructs and many undead are invisible to it."
+      }
+    },
+    {
+      "weight": 2,
+      "fields": {
+        "Name": "Color RULE",
+        "Description": "Move or alter color on visible surfaces; effects are cosmetic but can enable camouflage or coded signals."
+      }
+    },
+    {
+      "weight": 2,
+      "fields": {
+        "Name": "Balance RULE",
+        "Description": "Stabilize a touched object or willing person against ordinary motion; sudden heavy force can overwhelm it."
+      }
+    },
+    {
+      "weight": 2,
+      "fields": {
+        "Name": "Cold RULE",
+        "Description": "Draw heat from a small nearby area; the displaced heat warms the user's body and can become dangerous."
+      }
+    },
+    {
+      "fields": {
+        "Name": "Memory RULE",
+        "Description": "Preserve one willing recent memory inside an object; recording fades the user's own details until it is released."
+      }
+    },
+    {
+      "fields": {
+        "Name": "Threshold RULE",
+        "Description": "Know when a designated boundary is crossed; only one boundary can be watched and it must be physically marked."
+      }
+    },
+    {
+      "fields": {
+        "Name": "Swarm RULE",
+        "Description": "Communicate simple intentions to a small group of mundane insects; it grants no direct control over unnatural creatures."
+      }
+    },
+    {
+      "fields": {
+        "Name": "Chance RULE",
+        "Description": "Once per scene, nudge a trivial random outcome; the GM chooses an equally unlikely inconvenience that follows."
+      }
+    }
   ]
 }

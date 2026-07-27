@@ -2,35 +2,114 @@
   "name": "trap",
   "description": "Mechanical, magical, and social hazards",
   "entries": [
-    "A pressure tile seals both doors and slowly fills the room with harmless fog hiding the actual pit.",
-    "A rune swaps the voices of the first two creatures crossing it until they sincerely agree on something.",
-    "A treasure chest loudly accuses whoever opens it of theft, alerting nearby guardians by name.",
-    "A hallway repeats itself until travelers walk backward or extinguish every light.",
-    "A tripwire releases dozens of glass marbles while hidden shutters create a steep downhill floor.",
-    "A door handle steals the opener's shadow; the shadow runs ahead to warn enemies and exaggerate the party's strength.",
-    "A false healing fountain restores armor while quietly transferring equal damage to the next person who drinks.",
-    "A ceiling rune reverses gravity for loose objects first, providing a brief warning before affecting creatures.",
-    "A jeweled idol teleports into the pack of whoever touches it while replacing itself with a screaming replica.",
-    "A stairway counts spoken numbers; saying thirteen animates the steps into a stone serpent.",
-    "A locked gate opens easily when pushed but triggers darts when lockpicks enter the decorative keyhole.",
-    "A mirror creates one hostile reflection per visible weapon; covering or dropping weapons prevents new copies.",
-    "A floor of enchanted coins grips metal boots and armor while a rolling stone approaches very slowly.",
-    "A painted eye marks the first person who lies nearby, causing every statue ahead to watch and target them.",
-    "A bridge becomes intangible when anyone runs, forcing the group to cross calmly despite an approaching threat.",
-    "A music box puts listeners to sleep only when its melody stops, making destroying it immediately dangerous.",
-    "A pantry mimic is harmless, but attacking it awakens the entire hungry kitchen.",
-    "A rune of silence suppresses all sound while bells hidden on intruders still alert guards elsewhere.",
-    "An ornate rug rolls around trespassers, then politely asks for a password while dragging them toward a chute.",
-    "A trapped book erases one common word from the reader's vocabulary and uses the stolen word as its command phrase.",
-    "A corridor fills with illusory fire that causes no harm unless someone tries to extinguish it.",
-    "A statue offers safe passage for one honest compliment; flattery or sarcasm releases stone wasps.",
-    "A chest contains genuine treasure balanced over a mechanism triggered only when too much weight is removed.",
-    "A door teleports anyone opening it to the opposite side but leaves their carried equipment behind.",
-    "A frost rune freezes the brightest object in the room, encouraging clever control of light.",
-    "A harmless dart marks its target with a scent that attracts the dungeon's real predator.",
-    "A circular chamber rotates its exits whenever someone mentions a destination.",
-    "A golden rope can be crossed safely but tightens around anyone attempting to cut or step over it.",
-    "A guardian portrait asks a personal question; refusing locks the door, while lying releases the subject of the lie.",
-    "A pedestal grants the requested object, then announces an inconvenient but fair price that must be paid before leaving."
+    {
+      "weight": 3,
+      "value": "A pressure tile seals both doors and slowly fills the room with harmless fog hiding the actual pit."
+    },
+    {
+      "value": "A rune swaps the voices of the first two creatures crossing it until they sincerely agree on something."
+    },
+    {
+      "weight": 2,
+      "value": "A treasure chest loudly accuses whoever opens it of theft, alerting nearby guardians by name."
+    },
+    {
+      "weight": 2,
+      "value": "A hallway repeats itself until travelers walk backward or extinguish every light."
+    },
+    {
+      "weight": 3,
+      "value": "A tripwire releases dozens of glass marbles while hidden shutters create a steep downhill floor."
+    },
+    {
+      "value": "A door handle steals the opener's shadow; the shadow runs ahead to warn enemies and exaggerate the party's strength."
+    },
+    {
+      "weight": 2,
+      "value": "A false healing fountain restores armor while quietly transferring equal damage to the next person who drinks."
+    },
+    {
+      "value": "A ceiling rune reverses gravity for loose objects first, providing a brief warning before affecting creatures."
+    },
+    {
+      "value": "A jeweled idol teleports into the pack of whoever touches it while replacing itself with a screaming replica."
+    },
+    {
+      "weight": 2,
+      "value": "A stairway counts spoken numbers; saying thirteen animates the steps into a stone serpent."
+    },
+    {
+      "weight": 3,
+      "value": "A locked gate opens easily when pushed but triggers darts when lockpicks enter the decorative keyhole."
+    },
+    {
+      "weight": 2,
+      "value": "A mirror creates one hostile reflection per visible weapon; covering or dropping weapons prevents new copies."
+    },
+    {
+      "weight": 2,
+      "value": "A floor of enchanted coins grips metal boots and armor while a rolling stone approaches very slowly."
+    },
+    {
+      "value": "A painted eye marks the first person who lies nearby, causing every statue ahead to watch and target them."
+    },
+    {
+      "weight": 2,
+      "value": "A bridge becomes intangible when anyone runs, forcing the group to cross calmly despite an approaching threat."
+    },
+    {
+      "weight": 2,
+      "value": "A music box puts listeners to sleep only when its melody stops, making destroying it immediately dangerous."
+    },
+    {
+      "weight": 2,
+      "value": "A pantry mimic is harmless, but attacking it awakens the entire hungry kitchen."
+    },
+    {
+      "value": "A rune of silence suppresses all sound while bells hidden on intruders still alert guards elsewhere."
+    },
+    {
+      "weight": 2,
+      "value": "An ornate rug rolls around trespassers, then politely asks for a password while dragging them toward a chute."
+    },
+    {
+      "value": "A trapped book erases one common word from the reader's vocabulary and uses the stolen word as its command phrase."
+    },
+    {
+      "value": "A corridor fills with illusory fire that causes no harm unless someone tries to extinguish it."
+    },
+    {
+      "weight": 2,
+      "value": "A statue offers safe passage for one honest compliment; flattery or sarcasm releases stone wasps."
+    },
+    {
+      "weight": 3,
+      "value": "A chest contains genuine treasure balanced over a mechanism triggered only when too much weight is removed."
+    },
+    {
+      "value": "A door teleports anyone opening it to the opposite side but leaves their carried equipment behind."
+    },
+    {
+      "value": "A frost rune freezes the brightest object in the room, encouraging clever control of light."
+    },
+    {
+      "weight": 3,
+      "value": "A harmless dart marks its target with a scent that attracts the dungeon's real predator."
+    },
+    {
+      "weight": 2,
+      "value": "A circular chamber rotates its exits whenever someone mentions a destination."
+    },
+    {
+      "weight": 2,
+      "value": "A golden rope can be crossed safely but tightens around anyone attempting to cut or step over it."
+    },
+    {
+      "value": "A guardian portrait asks a personal question; refusing locks the door, while lying releases the subject of the lie."
+    },
+    {
+      "weight": 2,
+      "value": "A pedestal grants the requested object, then announces an inconvenient but fair price that must be paid before leaving."
+    }
   ]
 }

@@ -4,7 +4,7 @@ module.exports = {
 	name: 'delete',
 	description: 'Delete one of your characters',
 	usage: '!rpg delete <name>',
-	helpOrder: 40,
+	helpOrder: 70,
 	async execute({ args, message }) {
 		const [name] = args;
 		if (!name) {

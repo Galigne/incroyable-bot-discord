@@ -2,35 +2,207 @@
   "name": "loot",
   "description": "Treasure, equipment, curiosities, and rewards",
   "entries": [
-    "Common — A dented brass lantern, three oil flasks, 8 gold, and a map whose destination has been scratched away.",
-    "Common — A balanced hand axe with a baker's mark, a coil of silk rope, and 11 gold sewn into the lining of a glove.",
-    "Common — Two healing potions, a silver whistle only dogs react to, and a key labeled \"cellar three.\"",
-    "Common — A weatherproof bedroll, climbing spikes, dried rations, and a friendly letter addressed to the defeated enemy.",
-    "Common — A guard's shield painted over an older crest; cleaning it reveals the symbol of a disgraced noble house.",
-    "Uncommon — Boots that always remain dry but leave faint blue footprints for a minute after walking.",
-    "Uncommon — A collapsible ten-foot pole, a precision lockpicking kit, and a vial that turns red near fresh blood.",
-    "Uncommon — A moon-silver dagger that glows near curses but becomes painfully cold when one is very close.",
-    "Uncommon — A potion of borrowed voice that perfectly copies the last person heard for ten minutes.",
-    "Uncommon — A self-updating local map that records traveled paths but occasionally adds a road nobody remembers.",
-    "Uncommon — A sturdy medium armor bearing a removable rune socket and the name of a famous retired runesmith.",
-    "Uncommon — A purse containing 37 gold and one black coin accepted by a secret market.",
-    "Rare — A mirrored buckler that can reflect one beam or gaze effect before its surface cracks and needs repair.",
-    "Rare — A stormglass compass pointing toward the nearest active magical disturbance instead of north.",
-    "Rare — A seed in an iron vial; planted in soil, it grows into a sheltering tree before sunrise and withers at noon.",
-    "Rare — A cloak woven from dusk-moth silk that muffles movement in shadow but shimmers brightly in sunlight.",
-    "Rare — A runed gauntlet that can hold one non-living object weightlessly for an hour, but only while the fist stays closed.",
-    "Rare — A singing blade whose melody changes when its wielder is being deliberately deceived.",
-    "Rare — A sealed bottle containing a tiny thunderstorm and instructions written by someone with the party's handwriting.",
-    "Epic — The Crownless King's signet, recognized by ancient wards and by several factions with incompatible claims.",
-    "Epic — A phoenix-feather mantle that prevents one fiery death, then burns into an ordinary but beautiful cloak.",
-    "Epic — A door-shaped silver frame that opens once each month onto the last threshold it was carried through.",
-    "Epic — A rune-carved chain that can bind a magical effect for one scene if its user can name the effect precisely.",
-    "Legendary — The Last Cartographer's quill, able to draw a real path to any known place while erasing another road from the world.",
-    "Legendary — A cracked hour bell that stops everyone but its ringer for six heartbeats, while aging the ringer one visible year.",
-    "Curiosity — A wooden duck that insults whoever owns the most gold nearby and cannot be discarded for long.",
-    "Curiosity — A jar of argumentative fireflies that know many rumors but disagree about every detail.",
-    "Curiosity — An elegant spoon engraved with \"for emergencies\" that vibrates near soup, poison, and sleeping dragons.",
-    "Quest item — A bloodless severed shadow folded inside parchment, matching a living mayor who still casts one.",
-    "Quest item — Half of a treaty written in a dead language; the blank margins fill with new clauses during moonlight."
+    {
+      "weight": 5,
+      "fields": {
+        "Rarity": "Common",
+        "Description": "A dented brass lantern, three oil flasks, 8 gold, and a map whose destination has been scratched away."
+      }
+    },
+    {
+      "weight": 5,
+      "fields": {
+        "Rarity": "Common",
+        "Description": "A balanced hand axe with a baker's mark, a coil of silk rope, and 11 gold sewn into the lining of a glove."
+      }
+    },
+    {
+      "weight": 5,
+      "fields": {
+        "Rarity": "Common",
+        "Description": "Two healing potions, a silver whistle only dogs react to, and a key labeled \"cellar three.\""
+      }
+    },
+    {
+      "weight": 5,
+      "fields": {
+        "Rarity": "Common",
+        "Description": "A weatherproof bedroll, climbing spikes, dried rations, and a friendly letter addressed to the defeated enemy."
+      }
+    },
+    {
+      "weight": 5,
+      "fields": {
+        "Rarity": "Common",
+        "Description": "A guard's shield painted over an older crest; cleaning it reveals the symbol of a disgraced noble house."
+      }
+    },
+    {
+      "weight": 3,
+      "fields": {
+        "Rarity": "Uncommon",
+        "Description": "Boots that always remain dry but leave faint blue footprints for a minute after walking."
+      }
+    },
+    {
+      "weight": 3,
+      "fields": {
+        "Rarity": "Uncommon",
+        "Description": "A collapsible ten-foot pole, a precision lockpicking kit, and a vial that turns red near fresh blood."
+      }
+    },
+    {
+      "weight": 3,
+      "fields": {
+        "Rarity": "Uncommon",
+        "Description": "A moon-silver dagger that glows near curses but becomes painfully cold when one is very close."
+      }
+    },
+    {
+      "weight": 3,
+      "fields": {
+        "Rarity": "Uncommon",
+        "Description": "A potion of borrowed voice that perfectly copies the last person heard for ten minutes."
+      }
+    },
+    {
+      "weight": 3,
+      "fields": {
+        "Rarity": "Uncommon",
+        "Description": "A self-updating local map that records traveled paths but occasionally adds a road nobody remembers."
+      }
+    },
+    {
+      "weight": 3,
+      "fields": {
+        "Rarity": "Uncommon",
+        "Description": "A sturdy medium armor bearing a removable rune socket and the name of a famous retired runesmith."
+      }
+    },
+    {
+      "weight": 3,
+      "fields": {
+        "Rarity": "Uncommon",
+        "Description": "A purse containing 37 gold and one black coin accepted by a secret market."
+      }
+    },
+    {
+      "weight": 2,
+      "fields": {
+        "Rarity": "Rare",
+        "Description": "A mirrored buckler that can reflect one beam or gaze effect before its surface cracks and needs repair."
+      }
+    },
+    {
+      "weight": 2,
+      "fields": {
+        "Rarity": "Rare",
+        "Description": "A stormglass compass pointing toward the nearest active magical disturbance instead of north."
+      }
+    },
+    {
+      "weight": 2,
+      "fields": {
+        "Rarity": "Rare",
+        "Description": "A seed in an iron vial; planted in soil, it grows into a sheltering tree before sunrise and withers at noon."
+      }
+    },
+    {
+      "weight": 2,
+      "fields": {
+        "Rarity": "Rare",
+        "Description": "A cloak woven from dusk-moth silk that muffles movement in shadow but shimmers brightly in sunlight."
+      }
+    },
+    {
+      "weight": 2,
+      "fields": {
+        "Rarity": "Rare",
+        "Description": "A runed gauntlet that can hold one non-living object weightlessly for an hour, but only while the fist stays closed."
+      }
+    },
+    {
+      "weight": 2,
+      "fields": {
+        "Rarity": "Rare",
+        "Description": "A singing blade whose melody changes when its wielder is being deliberately deceived."
+      }
+    },
+    {
+      "weight": 2,
+      "fields": {
+        "Rarity": "Rare",
+        "Description": "A sealed bottle containing a tiny thunderstorm and instructions written by someone with the party's handwriting."
+      }
+    },
+    {
+      "fields": {
+        "Rarity": "Epic",
+        "Description": "The Crownless King's signet, recognized by ancient wards and by several factions with incompatible claims."
+      }
+    },
+    {
+      "fields": {
+        "Rarity": "Epic",
+        "Description": "A phoenix-feather mantle that prevents one fiery death, then burns into an ordinary but beautiful cloak."
+      }
+    },
+    {
+      "fields": {
+        "Rarity": "Epic",
+        "Description": "A door-shaped silver frame that opens once each month onto the last threshold it was carried through."
+      }
+    },
+    {
+      "fields": {
+        "Rarity": "Epic",
+        "Description": "A rune-carved chain that can bind a magical effect for one scene if its user can name the effect precisely."
+      }
+    },
+    {
+      "fields": {
+        "Rarity": "Legendary",
+        "Description": "The Last Cartographer's quill, able to draw a real path to any known place while erasing another road from the world."
+      }
+    },
+    {
+      "fields": {
+        "Rarity": "Legendary",
+        "Description": "A cracked hour bell that stops everyone but its ringer for six heartbeats, while aging the ringer one visible year."
+      }
+    },
+    {
+      "weight": 2,
+      "fields": {
+        "Rarity": "Curiosity",
+        "Description": "A wooden duck that insults whoever owns the most gold nearby and cannot be discarded for long."
+      }
+    },
+    {
+      "weight": 2,
+      "fields": {
+        "Rarity": "Curiosity",
+        "Description": "A jar of argumentative fireflies that know many rumors but disagree about every detail."
+      }
+    },
+    {
+      "weight": 2,
+      "fields": {
+        "Rarity": "Curiosity",
+        "Description": "An elegant spoon engraved with \"for emergencies\" that vibrates near soup, poison, and sleeping dragons."
+      }
+    },
+    {
+      "fields": {
+        "Rarity": "Quest item",
+        "Description": "A bloodless severed shadow folded inside parchment, matching a living mayor who still casts one."
+      }
+    },
+    {
+      "fields": {
+        "Rarity": "Quest item",
+        "Description": "Half of a treaty written in a dead language; the blank margins fill with new clauses during moonlight."
+      }
+    }
   ]
 }

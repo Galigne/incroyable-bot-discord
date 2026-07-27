@@ -2,35 +2,117 @@
   "name": "personality",
   "description": "Traits, ideals, quirks, bonds, and flaws",
   "entries": [
-    "Cheerfully fatalistic; treats every disaster as confirmation of a prediction nobody remembers hearing.",
-    "Painfully honest but highly skilled at changing the subject before revealing anything personal.",
-    "Suspicious of all magic except one obviously fraudulent superstition followed with complete devotion.",
-    "Grandly theatrical in public, quiet and observant in private, and terrified of being considered ordinary.",
-    "Collects favors instead of money and remembers every promise with unsettling precision.",
-    "Protective of underdogs, openly rude to authority, and unable to resist proving a bully wrong.",
-    "Polite to enemies and brutally critical of friends because respect is expressed through honesty.",
-    "Believes every problem has a practical solution, even when facing ghosts, prophecy, or divine judgment.",
-    "Compulsively adopts stray animals and assigns each one a military rank.",
-    "Treats coincidences as sacred messages and constantly rearranges plans to follow them.",
-    "Generous with possessions but jealous of attention, especially when a rival tells a better story.",
-    "Never raises their voice; the calmer they sound, the angrier and more dangerous they are.",
-    "Obsessed with etiquette from a culture they only understand through an inaccurate old book.",
-    "Claims to fear nothing except geese, and refuses to explain the very specific reason.",
-    "Loyal to any agreement's exact wording while exploiting every loophole without guilt.",
-    "Eager to forgive personal insults but incapable of overlooking harm done to a stranger.",
-    "Constantly invents impressive former careers; a surprising number later prove true.",
-    "Treats combat like a puzzle and social interaction like an unavoidable natural disaster.",
-    "Wants to be feared but automatically comforts anyone who looks upset.",
-    "Keeps meticulous journals yet replaces every person's name with an increasingly confusing nickname.",
-    "Sees wealth as a burden and spends it recklessly on memorable experiences and ridiculous gifts.",
-    "Deeply religious but argues with their deity as if speaking to an irritating family member.",
-    "Cannot admit ignorance and improvises explanations that often become accidental local legends.",
-    "Values freedom above safety but becomes controlling whenever companions are genuinely endangered.",
-    "Apologizes to every defeated enemy and becomes offended if the apology is rejected.",
-    "Speaks in proverbs, most of which are invented on the spot and only loosely relevant.",
-    "Appears cynical and mercenary but secretly sends most earnings to rebuild a ruined hometown.",
-    "Always assumes the best of monsters and the worst of institutions.",
-    "Keeps trophies from failures rather than victories and can recount every lesson attached to them.",
-    "Desperate to leave a heroic legacy, yet freezes whenever someone recognizes them in public."
+    {
+      "weight": 2,
+      "value": "Cheerfully fatalistic; treats every disaster as confirmation of a prediction nobody remembers hearing."
+    },
+    {
+      "weight": 2,
+      "value": "Painfully honest but highly skilled at changing the subject before revealing anything personal."
+    },
+    {
+      "weight": 2,
+      "value": "Suspicious of all magic except one obviously fraudulent superstition followed with complete devotion."
+    },
+    {
+      "weight": 2,
+      "value": "Grandly theatrical in public, quiet and observant in private, and terrified of being considered ordinary."
+    },
+    {
+      "weight": 2,
+      "value": "Collects favors instead of money and remembers every promise with unsettling precision."
+    },
+    {
+      "weight": 3,
+      "value": "Protective of underdogs, openly rude to authority, and unable to resist proving a bully wrong."
+    },
+    {
+      "weight": 2,
+      "value": "Polite to enemies and brutally critical of friends because respect is expressed through honesty."
+    },
+    {
+      "value": "Believes every problem has a practical solution, even when facing ghosts, prophecy, or divine judgment."
+    },
+    {
+      "value": "Compulsively adopts stray animals and assigns each one a military rank."
+    },
+    {
+      "value": "Treats coincidences as sacred messages and constantly rearranges plans to follow them."
+    },
+    {
+      "weight": 2,
+      "value": "Generous with possessions but jealous of attention, especially when a rival tells a better story."
+    },
+    {
+      "weight": 2,
+      "value": "Never raises their voice; the calmer they sound, the angrier and more dangerous they are."
+    },
+    {
+      "value": "Obsessed with etiquette from a culture they only understand through an inaccurate old book."
+    },
+    {
+      "value": "Claims to fear nothing except geese, and refuses to explain the very specific reason."
+    },
+    {
+      "weight": 2,
+      "value": "Loyal to any agreement's exact wording while exploiting every loophole without guilt."
+    },
+    {
+      "weight": 2,
+      "value": "Eager to forgive personal insults but incapable of overlooking harm done to a stranger."
+    },
+    {
+      "value": "Constantly invents impressive former careers; a surprising number later prove true."
+    },
+    {
+      "weight": 2,
+      "value": "Treats combat like a puzzle and social interaction like an unavoidable natural disaster."
+    },
+    {
+      "weight": 2,
+      "value": "Wants to be feared but automatically comforts anyone who looks upset."
+    },
+    {
+      "weight": 2,
+      "value": "Keeps meticulous journals yet replaces every person's name with an increasingly confusing nickname."
+    },
+    {
+      "value": "Sees wealth as a burden and spends it recklessly on memorable experiences and ridiculous gifts."
+    },
+    {
+      "weight": 2,
+      "value": "Deeply religious but argues with their deity as if speaking to an irritating family member."
+    },
+    {
+      "weight": 2,
+      "value": "Cannot admit ignorance and improvises explanations that often become accidental local legends."
+    },
+    {
+      "weight": 2,
+      "value": "Values freedom above safety but becomes controlling whenever companions are genuinely endangered."
+    },
+    {
+      "weight": 2,
+      "value": "Apologizes to every defeated enemy and becomes offended if the apology is rejected."
+    },
+    {
+      "value": "Speaks in proverbs, most of which are invented on the spot and only loosely relevant."
+    },
+    {
+      "weight": 2,
+      "value": "Appears cynical and mercenary but secretly sends most earnings to rebuild a ruined hometown."
+    },
+    {
+      "weight": 2,
+      "value": "Always assumes the best of monsters and the worst of institutions."
+    },
+    {
+      "weight": 2,
+      "value": "Keeps trophies from failures rather than victories and can recount every lesson attached to them."
+    },
+    {
+      "weight": 2,
+      "value": "Desperate to leave a heroic legacy, yet freezes whenever someone recognizes them in public."
+    }
   ]
 }

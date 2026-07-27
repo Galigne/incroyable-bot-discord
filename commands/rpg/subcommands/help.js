@@ -6,7 +6,7 @@ module.exports = {
 	name: 'help',
 	description: 'Show the available RPG commands',
 	usage: '!rpg help',
-	helpOrder: 60,
+	helpOrder: 90,
 	async execute({ message }) {
 		const rpgCommand = message.client.commands.get('rpg');
 		const embed = new EmbedBuilder()

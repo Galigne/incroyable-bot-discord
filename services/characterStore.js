@@ -24,9 +24,31 @@ async function deleteCharacter(name, requesterId) {
 	await fs.unlink(getSavePath(name));
 }
 
+async function updateCharacter(name, requesterId, canManage, update) {
+	const character = await getCharacter(name);
+	if (character.creatorId !== requesterId && !canManage) {
+		const error = new Error('Only the character creator or a DM can edit it.');
+		error.code = 'NOT_CHARACTER_EDITOR';
+		throw error;
+	}
+
+	await update(character);
+	await saveCharacter(character, name);
+	return character;
+}
+
 async function getCharacter(name) {
 	const data = await fs.readFile(getSavePath(name), 'utf8');
 	return Character.fromSave(JSON.parse(data));
+}
+
+async function saveCharacter(character, originalName = character.name) {
+	await fs.mkdir(savesDirectory, { recursive: true });
+	await fs.writeFile(
+		getSavePath(originalName),
+		JSON.stringify(character, null, 2),
+		'utf8',
+	);
 }
 
 function getSavePath(name) {
@@ -44,4 +66,5 @@ module.exports = {
 	createCharacter,
 	deleteCharacter,
 	getCharacter,
+	updateCharacter,
 };

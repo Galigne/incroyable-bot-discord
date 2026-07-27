@@ -2,35 +2,115 @@
   "name": "event",
   "description": "Unexpected scenes and world complications",
   "entries": [
-    "Every flame in the area turns green and points toward the same distant ruin for one minute.",
-    "A terrified courier mistakes a party member for their contact and hands over a sealed royal confession.",
-    "A localized rainstorm follows one character while the sky remains clear everywhere else.",
-    "Two merchants begin an escalating auction for an ordinary item carried by the party, refusing to explain why.",
-    "A wounded monster crashes into the scene, fleeing from something far more dangerous just out of sight.",
-    "All spoken lies become visible as black smoke until sunset, causing immediate panic in the nearest settlement.",
-    "A festival starts unexpectedly; its central competition recreates a recent party achievement with wildly incorrect details.",
-    "An earthquake opens a stairway beneath the road and seals the path ahead.",
-    "A child calmly asks the party to remove the ghost living under their bed; the ghost claims the child is the haunting.",
-    "A shower of tiny harmless frogs falls from a cloudless sky, each bearing the same golden rune.",
-    "The party encounters their own wanted posters, issued tomorrow and accusing them of a crime that has not happened yet.",
-    "A nearby statue turns its head and whispers a warning to the character with the lowest perception.",
-    "A caravan offers safe passage, but every traveler insists they have always known one of the heroes.",
-    "For one hour, shadows detach from their owners and act out their owners' hidden intentions.",
-    "A bridge collapses after the party crosses, separating them from pursuing enemies and their easiest route home.",
-    "A magical market appears between two trees and will vanish after exactly thirteen purchases.",
-    "A dying raven delivers a signet ring and repeats a place name no map records.",
-    "An eclipse begins years ahead of schedule; magical powers behave in reversed or symbolic ways.",
-    "A noble procession blocks the road while masked rebels prepare an ambush from both sides.",
-    "The nearest river runs backward, exposing a wreck full of sealed cargo and awakening its drowned crew.",
-    "A famous adventurer publicly credits the party for a deed they did not do and asks them to maintain the story.",
-    "Everyone in a village has fallen asleep except one deeply suspicious baker.",
-    "A wandering judge declares an improvised trial over ownership of a talking sword that chose a party member.",
-    "A harmless animal begins speaking with the voice of an absent ally and asks for urgent help.",
-    "The moon briefly shows a second face, after which every compass points toward the party.",
-    "A battlefield from the distant past overlays the present landscape, and ghostly actions cause real damage.",
-    "A thief steals something trivial but leaves behind an item far more valuable and dangerously recognizable.",
-    "A bell rings underground; local elders insist there is no bell and order everyone indoors.",
-    "A spontaneous peace negotiation begins between two hostile factions, and both choose the party as neutral witnesses.",
-    "Time skips forward three hours for everyone except the party, who are now blamed for what happened during the gap."
+    {
+      "weight": 2,
+      "value": "Every flame in the area turns green and points toward the same distant ruin for one minute."
+    },
+    {
+      "weight": 3,
+      "value": "A terrified courier mistakes a party member for their contact and hands over a sealed royal confession."
+    },
+    {
+      "weight": 2,
+      "value": "A localized rainstorm follows one character while the sky remains clear everywhere else."
+    },
+    {
+      "weight": 3,
+      "value": "Two merchants begin an escalating auction for an ordinary item carried by the party, refusing to explain why."
+    },
+    {
+      "weight": 3,
+      "value": "A wounded monster crashes into the scene, fleeing from something far more dangerous just out of sight."
+    },
+    {
+      "value": "All spoken lies become visible as black smoke until sunset, causing immediate panic in the nearest settlement."
+    },
+    {
+      "weight": 3,
+      "value": "A festival starts unexpectedly; its central competition recreates a recent party achievement with wildly incorrect details."
+    },
+    {
+      "weight": 2,
+      "value": "An earthquake opens a stairway beneath the road and seals the path ahead."
+    },
+    {
+      "weight": 2,
+      "value": "A child calmly asks the party to remove the ghost living under their bed; the ghost claims the child is the haunting."
+    },
+    {
+      "value": "A shower of tiny harmless frogs falls from a cloudless sky, each bearing the same golden rune."
+    },
+    {
+      "value": "The party encounters their own wanted posters, issued tomorrow and accusing them of a crime that has not happened yet."
+    },
+    {
+      "weight": 2,
+      "value": "A nearby statue turns its head and whispers a warning to the character with the lowest perception."
+    },
+    {
+      "weight": 3,
+      "value": "A caravan offers safe passage, but every traveler insists they have always known one of the heroes."
+    },
+    {
+      "value": "For one hour, shadows detach from their owners and act out their owners' hidden intentions."
+    },
+    {
+      "weight": 3,
+      "value": "A bridge collapses after the party crosses, separating them from pursuing enemies and their easiest route home."
+    },
+    {
+      "value": "A magical market appears between two trees and will vanish after exactly thirteen purchases."
+    },
+    {
+      "weight": 2,
+      "value": "A dying raven delivers a signet ring and repeats a place name no map records."
+    },
+    {
+      "value": "An eclipse begins years ahead of schedule; magical powers behave in reversed or symbolic ways."
+    },
+    {
+      "weight": 3,
+      "value": "A noble procession blocks the road while masked rebels prepare an ambush from both sides."
+    },
+    {
+      "value": "The nearest river runs backward, exposing a wreck full of sealed cargo and awakening its drowned crew."
+    },
+    {
+      "weight": 2,
+      "value": "A famous adventurer publicly credits the party for a deed they did not do and asks them to maintain the story."
+    },
+    {
+      "weight": 2,
+      "value": "Everyone in a village has fallen asleep except one deeply suspicious baker."
+    },
+    {
+      "weight": 2,
+      "value": "A wandering judge declares an improvised trial over ownership of a talking sword that chose a party member."
+    },
+    {
+      "weight": 2,
+      "value": "A harmless animal begins speaking with the voice of an absent ally and asks for urgent help."
+    },
+    {
+      "value": "The moon briefly shows a second face, after which every compass points toward the party."
+    },
+    {
+      "value": "A battlefield from the distant past overlays the present landscape, and ghostly actions cause real damage."
+    },
+    {
+      "weight": 3,
+      "value": "A thief steals something trivial but leaves behind an item far more valuable and dangerously recognizable."
+    },
+    {
+      "weight": 2,
+      "value": "A bell rings underground; local elders insist there is no bell and order everyone indoors."
+    },
+    {
+      "weight": 3,
+      "value": "A spontaneous peace negotiation begins between two hostile factions, and both choose the party as neutral witnesses."
+    },
+    {
+      "value": "Time skips forward three hours for everyone except the party, who are now blamed for what happened during the gap."
+    }
   ]
 }

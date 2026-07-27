@@ -28,6 +28,38 @@ Never commit `.env` or a Discord token. Reset any token that has previously been
 - `!rpg rules`
 - `!rpg generate list` — list generator categories (DM only)
 - `!rpg generate <category>` — generate a random prompt (DM only)
+- `!rpg add <character>` — create a character sheet
+- `!rpg view <character>` — display its gameplay summary
+- `!rpg view <character> <field>` — display a complete field and its sub-fields
+- `!rpg viewHelp` — list viewable fields with examples
+- `!rpg edit <character> <field> <value>` — edit a scalar field
+- `!rpg edit <character> <list> <add|set|remove|clear> ...` — edit a list
+- `!rpg editHelp` — explain nested fields, list actions, and RULE syntax
+- `!rpg rest <character> <HP|AR> <percentage>` — restore a resource
+- `!rpg endTurn <character>` — restore AP and MD to their maximum values
+
+Character creators can edit and manage their own sheets. Members with the configured
+DM role, as well as owners, can manage every character sheet.
+The identifier supplied to `!rpg add` remains the stable command/save key; editing
+the sheet's `name` field only changes its displayed name and may include spaces.
+
+Examples:
+
+```text
+!rpg edit Aria race.name Elf
+!rpg edit Aria stats.strength 14
+!rpg edit Aria personality.traits add Brave
+!rpg edit Aria rules add Fire | Controls nearby flames
+!rpg edit Aria equipment set 1 Runed longsword
+!rpg view Aria personality
+!rpg view Aria race
+!rpg view Aria rules
+!rpg rest Aria HP 50%
+!rpg endTurn Aria
+```
+
+AP follows `0 ≤ current ≤ max ≤ 10` and uses 🌟 for available points and ⭐ for
+spent points. HP, AR, and MD use ten-icon percentage bars.
 
 The full TTRPG rules are available in
 [`documentation/TTRPG_RANDOM_RULES_EN.md`](documentation/TTRPG_RANDOM_RULES_EN.md).
@@ -43,3 +75,7 @@ The full TTRPG rules are available in
 - `scripts/check.js`: offline validation
 
 Run `npm test` to validate syntax, command loading, configuration, character-save compatibility, and voice dependencies.
+
+Generator entries may be plain strings, weighted strings, or objects with
+multiple display fields. See
+[`data/generators/README.md`](data/generators/README.md) for the complete format.
