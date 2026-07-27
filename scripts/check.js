@@ -615,6 +615,8 @@ function checkCharacterModel() {
 			!summary.description.includes('Tall with silver hair.')
 			|| !status
 			|| !status.value.includes('HP: **50 / 100 (50%)**')
+			|| !status.value.includes(`${'❤️'.repeat(5)}${'🖤'.repeat(5)}`)
+			|| !status.value.includes('🟧'.repeat(10))
 			|| !status.value.includes('AP:\n🌟🌟🌟🌟')
 			|| summary.fields.some(field => field.name === 'Status effects')
 			|| summary.fields[1]?.name !== 'Statistics'

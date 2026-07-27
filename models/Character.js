@@ -94,10 +94,10 @@ class Character {
 
 	toEmbed() {
 		const status = [
-			formatProgressResource('HP', this.resources.hp, '❤️', '🤍'),
+			formatProgressResource('HP', this.resources.hp, '❤️', '🖤'),
 			formatProgressResource('AR', this.resources.ar, '🟦', '⬛'),
 			formatAp(this.resources.ap),
-			formatProgressResource('MD', this.resources.md, '🟨', '⬛'),
+			formatProgressResource('MD', this.resources.md, '🟧', '⬛'),
 			'',
 			`**Status effects**\n${formatList(this.statusEffects)}`,
 		].join('\n');
@@ -228,9 +228,9 @@ class Character {
 			default:
 				if (['hp', 'ar', 'md'].includes(field)) {
 					const icons = {
-						hp: ['❤️', '🤍'],
+						hp: ['❤️', '🖤'],
 						ar: ['🟦', '⬛'],
-						md: ['🟨', '⬛'],
+						md: ['🟧', '⬛'],
 					};
 					return embed.setDescription(
 						formatProgressResource(
@@ -318,10 +318,10 @@ function formatAp(resource) {
 
 function formatDetailedStatus(character) {
 	return truncate([
-		formatProgressResource('HP', character.resources.hp, '❤️', '🤍'),
+		formatProgressResource('HP', character.resources.hp, '❤️', '🖤'),
 		formatProgressResource('AR', character.resources.ar, '🟦', '⬛'),
 		formatAp(character.resources.ap),
-		formatProgressResource('MD', character.resources.md, '🟨', '⬛'),
+		formatProgressResource('MD', character.resources.md, '🟧', '⬛'),
 		formatResource('Encumbrance', character.encumbrance),
 		'',
 		`**Status effects**\n${formatList(character.statusEffects)}`,

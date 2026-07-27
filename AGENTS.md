@@ -156,7 +156,9 @@ Resources and display:
 
 - AP satisfies `0 <= current <= max <= 10`.
 - AP uses filled/spent star icons for the raw current/max values.
-- HP, AR, and MD use ten-icon percentage bars.
+- HP, AR, and MD use ten-icon percentage bars. Preserve the current colors:
+  HP uses red/black hearts, AR uses blue/black squares, and MD uses orange/black
+  squares.
 - `/rpg rest` supports only HP or AR and sets current to a percentage of maximum.
 - `/rpg deal` applies positive whole-number damage to current AR first, then current
   HP. With `piercing:true`, it bypasses AR. Piercing defaults to false.
