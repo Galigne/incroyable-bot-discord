@@ -1,9 +1,19 @@
 module.exports = {
 	name: 'say',
-	description: 'Fait écrire un message au bot',
-	execute(message) {
-        const content = message.content.substring(4);
-        message.channel.send(content);
-		message.delete();
+	description: 'Send a message through the bot',
+	usage: '!say <message>',
+	helpOrder: 50,
+	access: {
+		role: 'moderator',
+	},
+	async execute({ args, message }) {
+		const content = args.join(' ').trim();
+		if (!content) {
+			await message.reply('Provide a message to send.');
+			return;
+		}
+
+		await message.channel.send(content);
+		await message.delete();
 	},
 };

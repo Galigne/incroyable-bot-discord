@@ -1,15 +1,42 @@
-# Incroyable Bot Discord
+# Incredible Discord Bot
+
+A Discord bot with moderation, utility, local audio, and JDR character-management commands.
+
+## Requirements
+
+- Node.js 22.12 or newer
+- A Discord application with the Server Members and Message Content intents enabled
 
 ## Installation
 
-1. Utilisez Node.js 22.12 ou une version plus récente.
-2. Installez les dépendances avec `npm install`.
-3. Copiez `.env.example` vers `.env`.
-4. Générez un nouveau token dans le portail développeur Discord et placez-le dans `.env`.
-5. Lancez le bot avec `node index.js`.
+1. Install dependencies with `npm install`.
+2. Copy `.env.example` to `.env`.
+3. Generate a bot token in the Discord Developer Portal.
+4. Set `DISCORD_TOKEN` in `.env`.
+5. Start the bot with `node index.js`.
 
-Le token ne doit jamais être ajouté à Git. Si un token a déjà été versionné, réinitialisez-le dans le portail Discord.
+Never commit `.env` or a Discord token. Reset any token that has previously been committed.
 
-## Vérification locale
+## Commands
 
-Exécutez `npm test` pour vérifier la syntaxe, le chargement des commandes et la configuration hors connexion.
+- `!help`
+- `!roll <2-1000>`
+- `!say <message>`
+- `!purge <2-100>`
+- `!restart`
+- `!jdr help`
+- `!jdr rules`
+
+The full JDR rules are available in
+[`documentation/JDR_RANDOM_RULES_EN.md`](documentation/JDR_RANDOM_RULES_EN.md).
+
+## Project structure
+
+- `commands/`: top-level Discord commands
+- `commands/jdr/subcommands/`: one module per JDR subcommand
+- `models/`: domain models
+- `services/`: character persistence and local MP3 playback
+- `util/`: command loading and authorization
+- `scripts/check.js`: offline validation
+
+Run `npm test` to validate syntax, command loading, configuration, character-save compatibility, and voice dependencies.
