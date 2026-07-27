@@ -3,12 +3,12 @@ const characterStore = require('../../../services/characterStore');
 module.exports = {
 	name: 'view',
 	description: 'Display a character sheet',
-	usage: '!jdr <name> or !jdr view <name>',
-	helpOrder: 20,
+	usage: '!rpg <name> or !rpg view <name>',
+	helpOrder: 30,
 	async execute({ args, message }) {
 		const [name] = args;
 		if (!name) {
-			await message.reply('Usage: `!jdr <name>` or `!jdr view <name>`');
+			await message.reply('Usage: `!rpg <name>` or `!rpg view <name>`');
 			return;
 		}
 		try {

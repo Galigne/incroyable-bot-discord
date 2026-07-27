@@ -1,0 +1,49 @@
+const { EmbedBuilder } = require('discord.js');
+const generatorCatalog = require('../../../services/generatorCatalog');
+
+module.exports = {
+	name: 'generate',
+	description: 'Generate GM inspiration from a chosen category (DM only)',
+	usage: '!rpg generate <category> or !rpg generate list',
+	helpOrder: 10,
+	access: {
+		role: 'dm',
+	},
+	async execute({ args, message }) {
+		const requestedCategory = args.join(' ').trim();
+		if (!requestedCategory) {
+			await message.reply('Usage: `!rpg generate <category>` or `!rpg generate list`');
+			return;
+		}
+
+		if (requestedCategory.toLowerCase() === 'list') {
+			const categories = generatorCatalog.listCategories();
+			const embed = new EmbedBuilder()
+				.setTitle('RPG Generator Categories')
+				.setDescription('Use `!rpg generate <category>` to draw a random prompt.')
+				.setColor('#FFD700')
+				.addFields(categories.map(category => ({
+					name: category.name,
+					value: `${category.description} (${category.entries.length} prompts)`,
+				})));
+			await message.channel.send({ embeds: [embed] });
+			return;
+		}
+
+		const result = generatorCatalog.generate(requestedCategory);
+		if (!result) {
+			await message.reply(
+				`Unknown generator category: **${requestedCategory}**. `
+				+ 'Use `!rpg generate list` to see the available categories.',
+			);
+			return;
+		}
+
+		const embed = new EmbedBuilder()
+			.setTitle(`Generated ${result.category.name}`)
+			.setDescription(result.entry)
+			.setColor('#FFD700')
+			.setFooter({ text: 'The GM may adapt or reroll any result.' });
+		await message.channel.send({ embeds: [embed] });
+	},
+};

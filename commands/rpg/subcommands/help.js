@@ -4,18 +4,18 @@ const { sortByHelpOrder } = require('../../../util/sortByHelpOrder');
 
 module.exports = {
 	name: 'help',
-	description: 'Show the available JDR commands',
-	usage: '!jdr help',
-	helpOrder: 50,
+	description: 'Show the available RPG commands',
+	usage: '!rpg help',
+	helpOrder: 60,
 	async execute({ message }) {
-		const jdrCommand = message.client.commands.get('jdr');
+		const rpgCommand = message.client.commands.get('rpg');
 		const embed = new EmbedBuilder()
-			.setTitle('JDR Commands')
-			.setDescription('Create and manage your JDR characters.')
+			.setTitle('RPG Commands')
+			.setDescription('Create and manage your RPG characters.')
 			.setColor('#FFD700')
 			.setThumbnail('attachment://logo.jpg');
 
-		for (const subcommand of sortByHelpOrder(jdrCommand.subcommands.values())) {
+		for (const subcommand of sortByHelpOrder(rpgCommand.subcommands.values())) {
 			embed.addFields({
 				name: subcommand.usage,
 				value: subcommand.description,

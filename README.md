@@ -1,6 +1,6 @@
 # Incredible Discord Bot
 
-A Discord bot with moderation, utility, local audio, and JDR character-management commands.
+A Discord bot with moderation, utility, local audio, and RPG character-management commands.
 
 ## Requirements
 
@@ -24,16 +24,19 @@ Never commit `.env` or a Discord token. Reset any token that has previously been
 - `!say <message>`
 - `!purge <2-100>`
 - `!restart`
-- `!jdr help`
-- `!jdr rules`
+- `!rpg help`
+- `!rpg rules`
+- `!rpg generate list` — list generator categories (DM only)
+- `!rpg generate <category>` — generate a random prompt (DM only)
 
-The full JDR rules are available in
-[`documentation/JDR_RANDOM_RULES_EN.md`](documentation/JDR_RANDOM_RULES_EN.md).
+The full TTRPG rules are available in
+[`documentation/TTRPG_RANDOM_RULES_EN.md`](documentation/TTRPG_RANDOM_RULES_EN.md).
 
 ## Project structure
 
 - `commands/`: top-level Discord commands
-- `commands/jdr/subcommands/`: one module per JDR subcommand
+- `commands/rpg/subcommands/`: one module per RPG subcommand
+- `data/generators/`: editable JSON prompt catalogs for the RPG generators
 - `models/`: domain models
 - `services/`: character persistence and local MP3 playback
 - `util/`: command loading and authorization

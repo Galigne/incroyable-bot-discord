@@ -2,7 +2,7 @@
   "name": "incredible-discord-bot",
   "version": "1.0.2",
   "repository": "https://github.com/Galigne/incroyable-bot-discord.git",
-  "description": "A Discord bot with moderation, utility, and JDR commands",
+  "description": "A Discord bot with moderation, utility, and RPG commands",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",

@@ -5,6 +5,7 @@ const ffmpegPath = require('ffmpeg-static');
 const { generateDependencyReport } = require('@discordjs/voice');
 const Character = require('../models/Character');
 const config = require('../config.json');
+const generatorCatalog = require('../services/generatorCatalog');
 const { authorizeCommand } = require('../util/authorization');
 const { loadCommands } = require('../util/loadCommands');
 
@@ -15,7 +16,8 @@ checkNodeVersion();
 checkJavaScriptSyntax();
 const commands = checkCommands();
 checkHelpOrder(commands.values(), 'top-level commands');
-checkJdrStructure(commands);
+checkRpgStructure(commands);
+checkGeneratorCatalog();
 checkCharacterModel();
 checkConfiguration();
 checkAuthorization(commands);
@@ -58,29 +60,71 @@ function checkCommands() {
 	}
 }
 
-function checkJdrStructure(commands) {
-	const jdrCommand = commands.get('jdr');
-	if (!jdrCommand?.subcommands) {
-		errors.push('The JDR command must expose its subcommands.');
+function checkRpgStructure(commands) {
+	const rpgCommand = commands.get('rpg');
+	if (!rpgCommand?.subcommands) {
+		errors.push('The RPG command must expose its subcommands.');
 		return;
 	}
 
-	const expectedSubcommands = ['add', 'delete', 'help', 'rules', 'view'];
-	const actualSubcommands = [...jdrCommand.subcommands.keys()].sort();
+	const expectedSubcommands = ['add', 'delete', 'generate', 'help', 'rules', 'view'];
+	const actualSubcommands = [...rpgCommand.subcommands.keys()].sort();
 	if (actualSubcommands.join(',') !== expectedSubcommands.join(',')) {
-		errors.push(`Unexpected JDR subcommands: ${actualSubcommands.join(', ')}`);
+		errors.push(`Unexpected RPG subcommands: ${actualSubcommands.join(', ')}`);
 	}
-	for (const subcommand of jdrCommand.subcommands.values()) {
+	for (const subcommand of rpgCommand.subcommands.values()) {
 		if (
 			!subcommand.description
 			|| !subcommand.usage
 			|| !Number.isFinite(subcommand.helpOrder)
 			|| typeof subcommand.execute !== 'function'
 		) {
-			errors.push(`Invalid JDR subcommand: ${subcommand.name}`);
+			errors.push(`Invalid RPG subcommand: ${subcommand.name}`);
 		}
 	}
-	checkHelpOrder(jdrCommand.subcommands.values(), 'JDR subcommands');
+	checkHelpOrder(rpgCommand.subcommands.values(), 'RPG subcommands');
+}
+
+function checkGeneratorCatalog() {
+	try {
+		const expectedCategories = [
+			'enemy',
+			'event',
+			'location',
+			'loot',
+			'npc',
+			'personality',
+			'power',
+			'quest',
+			'race',
+			'trap',
+		];
+		const categories = generatorCatalog.listCategories();
+		const actualCategories = categories.map(category => category.key);
+		if (actualCategories.join(',') !== expectedCategories.join(',')) {
+			errors.push(`Unexpected generator categories: ${actualCategories.join(', ')}`);
+		}
+
+		for (const category of categories) {
+			if (category.entries.length < 25) {
+				errors.push(
+					`Generator category ${category.name} needs at least 25 prompts; `
+					+ `${category.entries.length} found.`,
+				);
+			}
+			const firstResult = generatorCatalog.generate(category.name, () => 0);
+			if (firstResult?.entry !== category.entries[0]) {
+				errors.push(`Generator category ${category.name} cannot select its first prompt.`);
+			}
+		}
+
+		if (generatorCatalog.getCategory('personalities')?.key !== 'personality') {
+			errors.push('Plural generator category names are not normalized correctly.');
+		}
+	}
+	catch (error) {
+		errors.push(`Generator catalog: ${error.message}`);
+	}
 }
 
 function checkHelpOrder(entries, label) {
@@ -120,6 +164,11 @@ function checkConfiguration() {
 			errors.push(`config.json is missing ${key}.`);
 		}
 	}
+	for (const role of ['newMember', 'member', 'dm', 'moderator', 'owner']) {
+		if (!config.roles?.[role]) {
+			errors.push(`config.json is missing the ${role} role.`);
+		}
+	}
 }
 
 function checkAuthorization(commands) {
@@ -134,7 +183,7 @@ function checkAuthorization(commands) {
 		},
 	});
 
-	const memberMessage = createMessage([config.roles.member], config.channels.music);
+	const memberMessage = createMessage([config.roles.member], '0');
 	if (!authorizeCommand(commands.get('help'), memberMessage, config).allowed) {
 		errors.push('Members should be allowed to use the help command.');
 	}
@@ -153,6 +202,21 @@ function checkAuthorization(commands) {
 		errors.push('Regular members should not be allowed to restart the bot.');
 	}
 
+	const generateCommand = commands.get('rpg')?.subcommands?.get('generate');
+	const dmMessage = createMessage([config.roles.dm], '0');
+	if (!authorizeCommand(generateCommand, dmMessage, config).allowed) {
+		errors.push('The DM should be allowed to generate RPG prompts.');
+	}
+	if (!authorizeCommand(generateCommand, ownerMessage, config).allowed) {
+		errors.push('The owner should be allowed to generate RPG prompts.');
+	}
+	if (authorizeCommand(generateCommand, moderatorMessage, config).allowed) {
+		errors.push('Moderators without the DM role should not generate RPG prompts.');
+	}
+	if (authorizeCommand(generateCommand, memberMessage, config).allowed) {
+		errors.push('Regular members should not generate RPG prompts.');
+	}
+
 	const memberUsingOwnerCommand = authorizeCommand(
 		commands.get('purge'),
 		memberMessage,
@@ -166,7 +230,7 @@ function checkAuthorization(commands) {
 function checkRequiredFiles() {
 	const localAudioFile = path.join('media', 'Poutouyemoun.mp3');
 	for (const file of [
-		path.join('documentation', 'JDR_RANDOM_RULES_EN.md'),
+		path.join('documentation', 'TTRPG_RANDOM_RULES_EN.md'),
 		path.join('media', 'HEADS.gif'),
 		path.join('media', 'LOGO.jpg'),
 		localAudioFile,
@@ -178,7 +242,7 @@ function checkRequiredFiles() {
 	}
 
 	if (fs.existsSync(path.join(root, 'embeds', 'ruleList.json'))) {
-		errors.push('The obsolete JDR rules embed still exists.');
+		errors.push('The obsolete RPG rules embed still exists.');
 	}
 
 	const audioCheck = spawnSync(

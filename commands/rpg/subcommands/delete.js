@@ -3,12 +3,12 @@ const characterStore = require('../../../services/characterStore');
 module.exports = {
 	name: 'delete',
 	description: 'Delete one of your characters',
-	usage: '!jdr delete <name>',
-	helpOrder: 30,
+	usage: '!rpg delete <name>',
+	helpOrder: 40,
 	async execute({ args, message }) {
 		const [name] = args;
 		if (!name) {
-			await message.reply('Usage: `!jdr delete <name>`');
+			await message.reply('Usage: `!rpg delete <name>`');
 			return;
 		}
 		try {

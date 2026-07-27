@@ -1,5 +1,6 @@
 const ROLE_GROUPS = {
-	member: ['member', 'moderator', 'owner'],
+	member: ['member', 'dm', 'moderator', 'owner'],
+	dm: ['dm', 'owner'],
 	moderator: ['moderator', 'owner'],
 	owner: ['owner'],
 };

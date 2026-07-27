@@ -3,12 +3,12 @@ const characterStore = require('../../../services/characterStore');
 module.exports = {
 	name: 'add',
 	description: 'Create a new character',
-	usage: '!jdr add <name>',
-	helpOrder: 10,
+	usage: '!rpg add <name>',
+	helpOrder: 20,
 	async execute({ args, message }) {
 		const [name] = args;
 		if (!name) {
-			await message.reply('Usage: `!jdr add <name>`');
+			await message.reply('Usage: `!rpg add <name>`');
 			return;
 		}
 		try {
