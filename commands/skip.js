@@ -1,10 +1,16 @@
 module.exports = {
 	name: 'skip',
-	description: 'Skip une musique',
-	execute(message) {
+	description: 'Passe une musique',
+	async execute(message) {
 		const serverQueue = message.client.queue.get(message.guild.id);
-		if (!message.member.voice.channel) return message.channel.send('Tu dois etre dans un channel vocal pour arrêter la musique');
-		if (!serverQueue) return message.channel.send('Il n\'y a aucun son a passer');
-		serverQueue.connection.dispatcher.end();
+		if (!message.member.voice.channel) {
+			await message.channel.send('Tu dois être dans un salon vocal pour passer la musique.');
+			return;
+		}
+		if (!serverQueue) {
+			await message.channel.send('Il n’y a aucun son à passer.');
+			return;
+		}
+		serverQueue.player.stop();
 	},
 };

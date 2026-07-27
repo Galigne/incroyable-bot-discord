@@ -7,16 +7,13 @@ const {
 module.exports = class extends Client {
 	constructor() {
 		super({
-		intents: [
-			GatewayIntentBits.Guilds,
-			GatewayIntentBits.GuildMessages,
-			GatewayIntentBits.MessageContent,
-			GatewayIntentBits.GuildInvites,
-			GatewayIntentBits.GuildMembers,
-			GatewayIntentBits.GuildPresences,
-			GatewayIntentBits.GuildMessageReactions,
-			GatewayIntentBits.GuildVoiceStates,
-		]
+			intents: [
+				GatewayIntentBits.Guilds,
+				GatewayIntentBits.GuildMessages,
+				GatewayIntentBits.MessageContent,
+				GatewayIntentBits.GuildMembers,
+				GatewayIntentBits.GuildVoiceStates,
+			]
 		});
 
 		this.commands = new Collection();

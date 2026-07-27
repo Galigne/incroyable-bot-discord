@@ -1,104 +1,119 @@
-const { MessageAttachment } = require("discord.js");
-const fs = require('fs')
-const Discord = require('discord.js');
-const { info } = require("console");
+const fs = require('node:fs/promises');
+const path = require('node:path');
+const { AttachmentBuilder, EmbedBuilder } = require('discord.js');
 const Character = require('../classes/Character.js');
 
 module.exports = {
 	name: 'jdr',
 	description: 'Commandes pour JDR',
 	async execute(message) {
-        const args = message.content.split(' ');
-		var commandName = args[1];
-        switch (commandName){
-            case undefined:
-                message.reply("La commande **!JDR** n'existe pas, essayez **!JDR help**");
-                break;
-            case "add":
-                addCharacter(message, args[2], message.author.id);
-                break;
-            case "delete":
-                delCharacter(message, args[2], message.author.id);
-                break;
-            case "rules":
-                rules(message);
-                break;
-            case "help":
-                help(message);
-                break;
-            default:
-                commandName = args[2];
-                switch (commandName) {
-                    case undefined:
-                        infos(message, args[1]);
-                        break;
-                    case "roll":
-                        rollD20(message);
-                        break;
-                    default:
-                        message.reply("Cette commande n'existe pas");
-                        break;
-                }
-                break;
-        }
-    },   
+		const args = message.content.trim().split(/\s+/);
+		const subcommand = args[1]?.toLowerCase();
+
+		switch (subcommand) {
+			case 'add':
+				await addCharacter(message, args[2]);
+				break;
+			case 'delete':
+				await deleteCharacter(message, args[2]);
+				break;
+			case 'rules':
+				await sendEmbed(
+					message,
+					'ruleList.json',
+					path.join('media', 'book.jpg'),
+					'book.jpg',
+				);
+				break;
+			case 'help':
+				await sendEmbed(
+					message,
+					'commandList.json',
+					path.join('media', 'LOGO.jpg'),
+					'logo.jpg',
+				);
+				break;
+			default:
+				if (subcommand) {
+					await showCharacter(message, args[1]);
+				}
+				else {
+					await message.reply('Essayez **!JDR help** pour afficher les commandes.');
+				}
+		}
+	},
 };
 
-function rollD20(message) {  
-    let rollValue = Math.floor(Math.random()*20)+1;
-    const diceGif = new MessageAttachment(`media/D20-${rollValue}.gif`);
-    message.channel.send({files: [diceGif]});
+function savePath(name) {
+	if (!name || !/^[\p{L}\p{N}_-]{1,50}$/u.test(name)) {
+		throw new Error('Le nom doit contenir uniquement des lettres, chiffres, tirets ou underscores.');
+	}
+	return path.join(__dirname, '..', 'save', `${name}.json`);
 }
 
-function addCharacter(message, name, creatorID){
-    var character = new Character(name, creatorID);
-    var json = JSON.stringify(character);
-    fs.writeFile(`save/${name}.json`, json, (err) => {
-        if (err)
-          message.reply("Error while saving your character", err);
-        else {
-          message.reply("Your character was created");
-        }
-    });   
+async function addCharacter(message, name) {
+	try {
+		const character = new Character(name, message.author.id);
+		await fs.writeFile(savePath(name), JSON.stringify(character, null, 2), {
+			encoding: 'utf8',
+			flag: 'wx',
+		});
+		await message.reply('Votre personnage a été créé.');
+	}
+	catch (error) {
+		if (error.code === 'EEXIST') {
+			await message.reply('Un personnage porte déjà ce nom.');
+			return;
+		}
+		await message.reply(error.message);
+	}
 }
 
-function delCharacter(message, name, creatorID){
-    message.channel.send("TODO...");
-    var character
-    fs.readFile(`save/${name}.json`, 'utf8', (err, data) => {
-        if (err) {
-            message.reply("Error while saving your character", err);
-          return;
-        }
-        character = Character.getCharacterFromSave(JSON.parse(data));
-      });
-
-    if(character.creatorID == creatorID) {
-        fs.unlinkSync(`save/${name}.json`);
-    } else {
-        message.reply("Your not the creator of this character");
-    }
+async function deleteCharacter(message, name) {
+	try {
+		const data = await fs.readFile(savePath(name), 'utf8');
+		const character = Character.getCharacterFromSave(JSON.parse(data));
+		if (character.creatorID !== message.author.id) {
+			await message.reply('Vous n’êtes pas le créateur de ce personnage.');
+			return;
+		}
+		await fs.unlink(savePath(name));
+		await message.reply('Votre personnage a été supprimé.');
+	}
+	catch (error) {
+		if (error.code === 'ENOENT') {
+			await message.reply('Ce personnage n’existe pas.');
+			return;
+		}
+		await message.reply(error.message);
+	}
 }
 
-function infos(message, name){
-    fs.readFile(`save/${name}.json`, 'utf8', (err, data) => {
-        if (err) {
-            message.reply("Error while saving your character", err);
-          return;
-        }
-        var character = Character.getCharacterFromSave(JSON.parse(data));
-        console.log(character);
-        var embed = character.toMessageEmbed();
-        message.channel.send(embed);
-      });
+async function showCharacter(message, name) {
+	try {
+		const data = await fs.readFile(savePath(name), 'utf8');
+		const character = Character.getCharacterFromSave(JSON.parse(data));
+		await message.channel.send({ embeds: [character.toMessageEmbed()] });
+	}
+	catch (error) {
+		if (error.code === 'ENOENT') {
+			await message.reply('Ce personnage n’existe pas.');
+			return;
+		}
+		await message.reply(error.message);
+	}
 }
 
-function rules(message){
-    const embed = require('../embeds/ruleList.json');
-    message.channel.send({ embed, files:[{attachment:'media/book.jpg',name:'book.jpg'}] });
-}
-
-function help(message){
-    const embed = require('../embeds/commandList.json');
-    message.channel.send({ embed, files:[{attachment:'media/logo.jpg',name:'logo.jpg'}] });
+async function sendEmbed(message, embedFile, attachmentPath, attachmentName) {
+	const rawEmbed = require(path.join('..', 'embeds', embedFile));
+	const { color, ...embedData } = rawEmbed;
+	const embed = new EmbedBuilder(embedData).setColor(color);
+	const attachment = new AttachmentBuilder(
+		path.join(__dirname, '..', attachmentPath),
+		{ name: attachmentName },
+	);
+	await message.channel.send({
+		embeds: [embed],
+		files: [attachment],
+	});
 }

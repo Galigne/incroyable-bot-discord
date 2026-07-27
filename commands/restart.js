@@ -1,11 +1,9 @@
 module.exports = {
 	name: 'restart',
 	description: 'Redémarre le bot',
-	execute(message, client, token) {
-		message.channel.send('Restarting...').then(m => {
-		  client.destroy().then(() => {
-			client.login('token');
-		  });
-		});
+	async execute(message, client, token) {
+		await message.channel.send('Redémarrage…');
+		client.destroy();
+		await client.login(token);
 	},
 };

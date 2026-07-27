@@ -1,79 +1,123 @@
-const ytdl = require("ytdl-core");
+const {
+	AudioPlayerStatus,
+	NoSubscriberBehavior,
+	StreamType,
+	VoiceConnectionStatus,
+	createAudioPlayer,
+	createAudioResource,
+	entersState,
+	joinVoiceChannel,
+} = require('@discordjs/voice');
+const ytdl = require('ytdl-core');
+
+const CONNECTION_TIMEOUT = 20_000;
 
 module.exports = {
-  name: "play",
-  description: "Joue de la musique sur un channel",
-  async execute(message) {
-    try {
-      const args = message.content.split(" ");
-      const queue = message.client.queue;
-      const serverQueue = message.client.queue.get(message.guild.id);
+	name: 'play',
+	description: 'Joue de la musique dans un salon vocal',
+	async execute(message) {
+		const url = message.content.trim().split(/\s+/)[1];
+		const voiceChannel = message.member.voice.channel;
 
-      const voiceChannel = message.member.voice.channel;
-      if (!voiceChannel)
-        return message.channel.send(
-          "Tu dois etre dans un channel vocal pour jouer de la musique"
-        );
+		if (!voiceChannel) {
+			await message.channel.send('Tu dois être dans un salon vocal pour jouer de la musique.');
+			return;
+		}
+		if (!url || !ytdl.validateURL(url)) {
+			await message.channel.send('Donne une URL YouTube valide après la commande.');
+			return;
+		}
 
-      const songInfo = await ytdl.getInfo(args[1]);
-      const song = {
-        title: songInfo.videoDetails.title,
-        url: songInfo.videoDetails.video_url
-      };
+		const songInfo = await ytdl.getInfo(url);
+		const song = {
+			title: songInfo.videoDetails.title,
+			url: songInfo.videoDetails.video_url,
+		};
+		let serverQueue = message.client.queue.get(message.guild.id);
 
-      if (!serverQueue) {
-        const queueContruct = {
-          textChannel: message.channel,
-          voiceChannel: voiceChannel,
-          connection: null,
-          songs: [],
-          volume: 5,
-          playing: true
-        };
+		if (serverQueue) {
+			serverQueue.songs.push(song);
+			await message.channel.send(`**${song.title}** a été ajouté à la liste d’attente.`);
+			return;
+		}
 
-        queue.set(message.guild.id, queueContruct);
+		const connection = joinVoiceChannel({
+			channelId: voiceChannel.id,
+			guildId: voiceChannel.guild.id,
+			adapterCreator: voiceChannel.guild.voiceAdapterCreator,
+		});
+		const player = createAudioPlayer({
+			behaviors: {
+				noSubscriber: NoSubscriberBehavior.Pause,
+			},
+		});
 
-        queueContruct.songs.push(song);
+		serverQueue = {
+			connection,
+			player,
+			songs: [song],
+			textChannel: message.channel,
+		};
+		message.client.queue.set(message.guild.id, serverQueue);
+		connection.subscribe(player);
 
-        try {
-          var connection = await voiceChannel.join();
-          queueContruct.connection = connection;
-          this.play(message, queueContruct.songs[0]);
-        } catch (err) {
-          console.log(err);
-          queue.delete(message.guild.id);
-          return message.channel.send(err);
-        }
-      } else {
-        serverQueue.songs.push(song);
-        return message.channel.send(
-          `${song.title} a été ajouté a la liste d'attente`
-        );
-      }
-    } catch (error) {
-      console.log(error);
-      message.channel.send(error.message);
-    }
-  },
+		player.on(AudioPlayerStatus.Idle, async () => {
+			serverQueue.songs.shift();
+			await playNext(message.client, message.guild.id);
+		});
+		player.on('error', async error => {
+			console.error('Erreur du lecteur audio:', error);
+			await serverQueue.textChannel
+				.send(`Impossible de lire cette musique : ${error.message}`)
+				.catch(() => {});
+			serverQueue.songs.shift();
+			await playNext(message.client, message.guild.id);
+		});
 
-  play(message, song) {
-    const queue = message.client.queue;
-    const guild = message.guild;
-    const serverQueue = queue.get(guild.id);
-
-    if (!song) {
-      serverQueue.voiceChannel.leave();
-      queue.delete(guild.id);
-      return;
-    }
-
-    const connection = serverQueue.connection;
-    connection.play(ytdl(song.url))
-      .on("finish", () => {
-        serverQueue.songs.shift();
-        this.play(message, serverQueue.songs[0]);
-      })
-      .on("error", error => console.error(error));
-    serverQueue.textChannel.send(`Joue la musique: **${song.title}**`);
-  }
+		try {
+			await entersState(connection, VoiceConnectionStatus.Ready, CONNECTION_TIMEOUT);
+			await playNext(message.client, message.guild.id);
+		}
+		catch (error) {
+			cleanup(message.client, message.guild.id);
+			throw new Error(`Impossible de rejoindre le salon vocal : ${error.message}`);
+		}
+	},
 };
+
+async function playNext(client, guildId) {
+	const serverQueue = client.queue.get(guildId);
+	if (!serverQueue) {
+		return;
+	}
+
+	const song = serverQueue.songs[0];
+	if (!song) {
+		cleanup(client, guildId);
+		return;
+	}
+
+	const stream = ytdl(song.url, {
+		filter: 'audioonly',
+		highWaterMark: 1 << 25,
+		quality: 'highestaudio',
+	});
+	const resource = createAudioResource(stream, {
+		inputType: StreamType.Arbitrary,
+	});
+
+	serverQueue.player.play(resource);
+	await serverQueue.textChannel.send(`Lecture de **${song.title}**.`);
+}
+
+function cleanup(client, guildId) {
+	const serverQueue = client.queue.get(guildId);
+	if (!serverQueue) {
+		return;
+	}
+
+	if (serverQueue.connection.state.status !== VoiceConnectionStatus.Destroyed) {
+		serverQueue.connection.destroy();
+	}
+	client.queue.delete(guildId);
+}
