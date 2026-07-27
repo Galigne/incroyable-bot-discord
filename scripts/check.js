@@ -4,6 +4,7 @@ const { spawnSync } = require('node:child_process');
 const ffmpegPath = require('ffmpeg-static');
 const { generateDependencyReport } = require('@discordjs/voice');
 const Character = require('../models/Character');
+const { BASE_STATS: BASE_STAT_NAMES } = Character;
 const config = require('../config.json');
 const characterStore = require('../services/characterStore');
 const {
@@ -12,6 +13,13 @@ const {
 	restoreResource,
 } = require('../services/characterEditor');
 const generatorCatalog = require('../services/generatorCatalog');
+const {
+	calculateMaxAp,
+	calculateRulePoints,
+	calculateStatBudget,
+	calculateStatCost,
+	populateRandomCharacter,
+} = require('../services/randomCharacterGenerator');
 const { authorizeCommand } = require('../util/authorization');
 const { loadCommands } = require('../util/loadCommands');
 
@@ -27,6 +35,7 @@ async function main() {
 	await checkRpgRouting(commands);
 	checkGeneratorCatalog();
 	checkCharacterModel();
+	checkRandomCharacterGeneration();
 	await checkCharacterStore();
 	checkConfiguration();
 	checkAuthorization(commands);
@@ -84,6 +93,8 @@ function checkRpgStructure(commands) {
 		'edithelp',
 		'endturn',
 		'generate',
+		'generatecharacter',
+		'generatelist',
 		'help',
 		'rest',
 		'rules',
@@ -171,15 +182,65 @@ function checkGeneratorCatalog() {
 			errors.push('Weighted generator selection is not working correctly.');
 		}
 
-		const powerResult = generatorCatalog.generate('power', () => 0);
+		const requiredCategories = [
+			'armors',
+			'enemy',
+			'event',
+			'inventory',
+			'location',
+			'name',
+			'npc',
+			'personality',
+			'quest',
+			'race',
+			'rules',
+			'statusEffect',
+			'talents',
+			'trap',
+			'weapons',
+		];
+		for (const categoryName of requiredCategories) {
+			if (!generatorCatalog.getCategory(categoryName)) {
+				errors.push(`Missing generator category: ${categoryName}.`);
+			}
+		}
+		if (generatorCatalog.getCategory('loot') || generatorCatalog.getCategory('power')) {
+			errors.push('Obsolete loot or power generator categories still exist.');
+		}
+		const armors = generatorCatalog.getCategory('armors')?.entries ?? [];
+		const armorCombinations = new Set(armors.map(
+			entry => `${entry.fields.Type}:${entry.fields.Rarity}`,
+		));
+		const expectedArmorCombinations = ['light', 'medium', 'heavy']
+			.flatMap(type => ['common', 'uncommon', 'rare', 'epic', 'legendary']
+				.map(rarity => `${type}:${rarity}`));
 		if (
-			!powerResult?.entry?.fields?.Name
-			|| !powerResult.entry.fields.Description
+			armors.length !== 15
+			|| expectedArmorCombinations.some(value => !armorCombinations.has(value))
 		) {
-			errors.push('Power generators should expose separate Name and Description fields.');
+			errors.push('The armor generator must contain every type and rarity combination.');
+		}
+		const commonRaceNames = ['Human', 'Elf', 'Dwarf', 'Halfling', 'Orc', 'Goblin'];
+		const raceNames = new Set(
+			generatorCatalog.getCategory('race')?.entries.map(entry => entry.fields.Name),
+		);
+		if (commonRaceNames.some(name => !raceNames.has(name))) {
+			errors.push('The race generator is missing common fantasy races.');
+		}
+		const generatedName = generatorCatalog.generate('name', () => 0)?.entry;
+		if (!generatedName?.fields?.FirstName || !generatedName.fields.LastName) {
+			errors.push('Name generators should expose separate FirstName and LastName fields.');
+		}
+
+		const rulesResult = generatorCatalog.generate('rules', () => 0);
+		if (
+			!rulesResult?.entry?.fields?.Name
+			|| !rulesResult.entry.fields.Description
+		) {
+			errors.push('RULE generators should expose separate Name and Description fields.');
 		}
 		const generateCommand = require('../commands/rpg/subcommands/generate');
-		const structuredEmbed = generateCommand.createGeneratedEmbed(powerResult).toJSON();
+		const structuredEmbed = generateCommand.createGeneratedEmbed(rulesResult).toJSON();
 		if (
 			structuredEmbed.fields?.[0]?.name !== 'Name'
 			|| structuredEmbed.fields?.[1]?.name !== 'Description'
@@ -215,6 +276,8 @@ function checkHelpOrder(entries, label) {
 function checkCharacterModel() {
 	try {
 		const original = new Character('Test', '0');
+		editCharacter(original, 'firstName', ['Diego']);
+		editCharacter(original, 'lastName', ['Robert']);
 		editCharacter(original, 'stats.strength', ['12']);
 		editCharacter(original, 'race.name', ['Ashborn']);
 		editCharacter(original, 'personality.traits', ['add', 'Brave']);
@@ -237,6 +300,10 @@ function checkCharacterModel() {
 		const character = Character.fromSave(JSON.parse(JSON.stringify(original)));
 		if (
 			character.creatorId !== '0'
+			|| character.key !== 'Test'
+			|| character.firstName !== 'Diego'
+			|| character.lastName !== 'Robert'
+			|| character.displayName !== 'Diego Robert'
 			|| character.stats.strength !== 12
 			|| character.race.name !== 'Ashborn'
 			|| character.personality.traits[0] !== 'Brave'
@@ -250,7 +317,10 @@ function checkCharacterModel() {
 		const summary = character.toEmbed().toJSON();
 		const status = summary.fields.find(field => field.name === 'Status');
 		if (
-			!status
+			!summary.description.includes('CharacterKey: **Test**')
+			|| !summary.description.includes('First Name: **Diego**')
+			|| !summary.description.includes('Last Name: **Robert**')
+			|| !status
 			|| !status.value.includes('HP: **50 / 100 (50%)**')
 			|| !status.value.includes('AP:\n🌟🌟🌟🌟')
 			|| summary.fields.some(field => field.name === 'Status effects')
@@ -275,33 +345,116 @@ function checkCharacterModel() {
 			errors.push('Unknown character detail fields should be rejected.');
 		}
 
-		const legacyCharacter = Character.fromSave({
-			name: 'Legacy',
-			creatorId: '1',
-			battle: { currentHp: 20, maxHp: 80, armor: 10 },
-			inventory: { equipment: ['Spear'], bag: ['Rope'] },
-		});
-		if (
-			legacyCharacter.resources.hp.current !== 20
-			|| legacyCharacter.resources.hp.max !== 80
-			|| legacyCharacter.equipment[0] !== 'Spear'
-			|| legacyCharacter.inventory[0] !== 'Rope'
-		) {
-			errors.push('Legacy character saves are not migrated correctly.');
-		}
 	}
 	catch (error) {
 		errors.push(`Character model: ${error.message}`);
 	}
 }
 
+function checkRandomCharacterGeneration() {
+	try {
+		let seed = 12_345;
+		const random = () => {
+			seed = (seed * 1_664_525 + 1_013_904_223) % 4_294_967_296;
+			return seed / 4_294_967_296;
+		};
+		const character = new Character('D.Robert', 'dm');
+		populateRandomCharacter(character, { level: 10, random });
+
+		if (
+			character.key !== 'D.Robert'
+			|| character.level !== 10
+			|| !character.firstName
+			|| !character.lastName
+			|| character.displayName !== `${character.firstName} ${character.lastName}`
+			|| !character.race.name
+			|| !character.race.physicalDescription
+			|| character.race.lore
+			|| character.backstory
+			|| character.goals
+			|| character.personality.traits.length !== 2
+			|| character.personality.description
+			|| character.racialTraits.skillBonus
+			|| character.racialTraits.physicalAbility
+		) {
+			errors.push('Generated identity or intentionally empty fields are incorrect.');
+		}
+
+		if (
+			calculateStatCost(character.stats) !== calculateStatBudget(character.level)
+			|| BASE_STAT_NAMES.some(stat => (
+				character.stats[stat] < 4 || character.stats[stat] > 20
+			))
+			|| character.stats.initiative !== character.stats.speed
+			|| character.stats.reflexes !== character.stats.speed
+		) {
+			errors.push('Generated statistics do not follow the point-allocation rules.');
+		}
+
+		const expectedRulePoints = calculateRulePoints(character.stats.intelligence);
+		const expectedTalentCount = 4;
+		if (
+			character.rules.length !== expectedRulePoints
+			|| new Set(character.rules.map(rule => rule.name)).size !== character.rules.length
+			|| character.talents.split('\n').length !== expectedTalentCount
+		) {
+			errors.push('Generated RULEs or talents do not match the character attributes.');
+		}
+
+		const expectedHp = Math.round(
+			character.stats.constitution * 10 * (1 + 0.2 * (character.level - 1)),
+		);
+		if (
+			character.resources.hp.max !== expectedHp
+			|| character.resources.hp.current !== expectedHp
+			|| character.resources.ap.max !== calculateMaxAp(character.level)
+			|| character.resources.ap.current !== character.resources.ap.max
+			|| character.resources.md.max !== character.stats.speed * 0.5
+			|| character.resources.md.current !== character.resources.md.max
+		) {
+			errors.push('Generated HP, AP, or MD values are incorrect.');
+		}
+
+		const armorName = character.equipment[0].split(' — ')[0];
+		const armor = generatorCatalog.getCategory('armors').entries
+			.find(entry => entry.fields.Name === armorName);
+		const armorPercentage = Number(armor?.fields['AR percentage']);
+		if (
+			!armor
+			|| Number(armor.fields['Constitution requirement']) > character.stats.constitution
+			|| character.resources.ar.max !== Math.round(expectedHp * armorPercentage / 100)
+			|| character.resources.ar.current !== character.resources.ar.max
+			|| character.equipment.length < 2
+			|| character.equipment.length > 3
+			|| character.inventory.length !== 4
+			|| !character.inventory.at(-1).endsWith(' gold')
+			|| character.encumbrance.max !== character.stats.constitution
+		) {
+			errors.push('Generated armor, equipment, inventory, AR, or encumbrance is incorrect.');
+		}
+		character.toEmbed().toJSON();
+	}
+	catch (error) {
+		errors.push(`Random character generation: ${error.message}`);
+	}
+}
+
 async function checkCharacterStore() {
 	const suffix = `${process.pid}_${Date.now()}`;
-	const originalName = `check_${suffix}`;
+	const originalName = `check.${suffix}`;
 	const savePath = path.join(root, 'save', `${originalName}.json`);
 
 	try {
 		await characterStore.createCharacter(originalName, 'creator');
+		try {
+			await characterStore.createCharacter(originalName, 'creator');
+			errors.push('A duplicate character key was allowed.');
+		}
+		catch (error) {
+			if (error.code !== 'EEXIST') {
+				throw error;
+			}
+		}
 		try {
 			await characterStore.updateCharacter(originalName, 'stranger', false, () => {});
 			errors.push('A non-owner was allowed to edit a character.');
@@ -313,12 +466,16 @@ async function checkCharacterStore() {
 		}
 
 		await characterStore.updateCharacter(originalName, 'dm-user', true, character => {
-			character.name = 'A Display Name With Spaces';
+			character.firstName = 'A Display';
+			character.lastName = 'Name With Spaces';
 			character.resources.hp.current = 42;
 		});
 		const editedCharacter = await characterStore.getCharacter(originalName);
 		if (
-			editedCharacter.name !== 'A Display Name With Spaces'
+			editedCharacter.firstName !== 'A Display'
+			|| editedCharacter.lastName !== 'Name With Spaces'
+			|| editedCharacter.displayName !== 'A Display Name With Spaces'
+			|| editedCharacter.key !== originalName
 			|| editedCharacter.resources.hp.current !== 42
 		) {
 			errors.push('Character edits are not persisted correctly.');
@@ -388,6 +545,8 @@ function checkAuthorization(commands) {
 	}
 
 	const generateCommand = commands.get('rpg')?.subcommands?.get('generate');
+	const generateCharacterCommand = commands.get('rpg')?.subcommands
+		?.get('generatecharacter');
 	const dmMessage = createMessage([config.roles.dm], '0');
 	if (!authorizeCommand(generateCommand, dmMessage, config).allowed) {
 		errors.push('The DM should be allowed to generate RPG prompts.');
@@ -400,6 +559,14 @@ function checkAuthorization(commands) {
 	}
 	if (authorizeCommand(generateCommand, memberMessage, config).allowed) {
 		errors.push('Regular members should not generate RPG prompts.');
+	}
+	if (
+		!authorizeCommand(generateCharacterCommand, dmMessage, config).allowed
+		|| !authorizeCommand(generateCharacterCommand, ownerMessage, config).allowed
+		|| authorizeCommand(generateCharacterCommand, moderatorMessage, config).allowed
+		|| authorizeCommand(generateCharacterCommand, memberMessage, config).allowed
+	) {
+		errors.push('Random character generation should be restricted to DMs and owners.');
 	}
 
 	const memberUsingOwnerCommand = authorizeCommand(

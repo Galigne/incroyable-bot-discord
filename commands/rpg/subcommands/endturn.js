@@ -6,12 +6,12 @@ const { replyToCharacterError } = require('../../../util/characterCommandErrors'
 module.exports = {
 	name: 'endturn',
 	description: 'Restore current AP and MD to their maximum values',
-	usage: '!rpg endTurn <character>',
+	usage: '!rpg endTurn <characterKey>',
 	helpOrder: 60,
 	async execute({ args, config, message }) {
 		const [characterName] = args;
 		if (!characterName) {
-			await message.reply('Usage: `!rpg endTurn <character>`');
+			await message.reply('Usage: `!rpg endTurn <characterKey>`');
 			return;
 		}
 
@@ -25,7 +25,7 @@ module.exports = {
 				},
 			);
 			await message.reply(
-				`**${character.name}** starts a new turn with `
+				`**${character.displayName}** starts a new turn with `
 				+ `${character.resources.ap.current} AP and ${character.resources.md.current} MD.`,
 			);
 		}

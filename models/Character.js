@@ -13,8 +13,10 @@ const DERIVED_STATS = ['initiative', 'reflexes'];
 const MAX_AP = 10;
 
 class Character {
-	static fromSave(data) {
-		const character = new Character(data.name, data.creatorId);
+	static fromSave(data, characterKey = data.key) {
+		const character = new Character(characterKey, data.creatorId);
+		character.firstName = data.firstName ?? '';
+		character.lastName = data.lastName ?? '';
 		character.level = data.level ?? 1;
 		character.race = {
 			name: data.race?.name ?? '',
@@ -36,12 +38,8 @@ class Character {
 		character.talents = data.talents ?? '';
 		character.resources = createResources(data);
 		character.statusEffects = copyStringList(data.statusEffects);
-		character.equipment = copyStringList(
-			data.equipment ?? data.inventory?.equipment,
-		);
-		character.inventory = copyStringList(
-			Array.isArray(data.inventory) ? data.inventory : data.inventory?.bag,
-		);
+		character.equipment = copyStringList(data.equipment);
+		character.inventory = copyStringList(data.inventory);
 		character.encumbrance = {
 			current: data.encumbrance?.current ?? 0,
 			max: data.encumbrance?.max ?? character.stats.constitution,
@@ -49,8 +47,10 @@ class Character {
 		return character;
 	}
 
-	constructor(name, creatorId) {
-		this.name = name;
+	constructor(key, creatorId) {
+		this.key = key;
+		this.firstName = '';
+		this.lastName = '';
 		this.creatorId = creatorId;
 		this.level = 1;
 		this.race = {
@@ -84,6 +84,10 @@ class Character {
 			current: 0,
 			max: this.stats.constitution,
 		};
+	}
+
+	get displayName() {
+		return [this.firstName, this.lastName].filter(Boolean).join(' ') || this.key;
 	}
 
 	toEmbed() {
@@ -120,9 +124,14 @@ class Character {
 		);
 
 		return new EmbedBuilder()
-			.setTitle(this.name)
+			.setTitle(this.displayName)
 			.setDescription(
-				`Level **${this.level}** · Race **${this.race.name || 'Unspecified'}**`,
+				[
+					`CharacterKey: **${this.key}**`,
+					`First Name: **${this.firstName || 'Unspecified'}** · `
+						+ `Last Name: **${this.lastName || 'Unspecified'}**`,
+					`Level **${this.level}** · Race **${this.race.name || 'Unspecified'}**`,
+				].join('\n'),
 			)
 			.setColor('#FFD700')
 			.addFields(
@@ -143,12 +152,19 @@ class Character {
 	toFieldEmbed(fieldName) {
 		const field = normalizeFieldName(fieldName);
 		const embed = new EmbedBuilder()
-			.setTitle(`${this.name} — ${getFieldTitle(field)}`)
+			.setTitle(`${this.displayName} — ${getFieldTitle(field)}`)
 			.setColor('#FFD700');
 
 		switch (field) {
 			case 'name':
-				return embed.setDescription(this.name || '—');
+				return embed.addFields(
+					{ name: 'First name', value: this.firstName || '—', inline: true },
+					{ name: 'Last name', value: this.lastName || '—', inline: true },
+				);
+			case 'firstname':
+				return embed.setDescription(this.firstName || '—');
+			case 'lastname':
+				return embed.setDescription(this.lastName || '—');
 			case 'level':
 				return embed.setDescription(String(this.level));
 			case 'race':
@@ -244,12 +260,12 @@ function createResources(data) {
 	const apMax = clampAp(data.resources?.ap?.max ?? 4);
 	return {
 		hp: {
-			current: data.resources?.hp?.current ?? data.battle?.currentHp ?? 100,
-			max: data.resources?.hp?.max ?? data.battle?.maxHp ?? 100,
+			current: data.resources?.hp?.current ?? 100,
+			max: data.resources?.hp?.max ?? 100,
 		},
 		ar: {
-			current: data.resources?.ar?.current ?? data.battle?.armor ?? 0,
-			max: data.resources?.ar?.max ?? data.battle?.armor ?? 0,
+			current: data.resources?.ar?.current ?? 0,
+			max: data.resources?.ar?.max ?? 0,
 		},
 		ap: {
 			current: Math.min(clampAp(data.resources?.ap?.current ?? 4), apMax),
@@ -379,10 +395,12 @@ function getFieldTitle(field) {
 		backstory: 'Backstory',
 		encumbrance: 'Encumbrance',
 		equipment: 'Equipment',
+		firstname: 'First name',
 		goals: 'Goals',
 		hp: 'HP',
 		inventory: 'Inventory',
 		level: 'Level',
+		lastname: 'Last name',
 		md: 'MD',
 		name: 'Name',
 		personality: 'Personality',

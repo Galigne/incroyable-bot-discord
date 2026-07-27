@@ -6,7 +6,7 @@ const { replyToCharacterError } = require('../../../util/characterCommandErrors'
 module.exports = {
 	name: 'rest',
 	description: 'Restore current HP or AR to a percentage of its maximum',
-	usage: '!rpg rest <character> <HP|AR> <percentage>',
+	usage: '!rpg rest <characterKey> <HP|AR> <percentage>',
 	helpOrder: 50,
 	async execute({ args, config, message }) {
 		const [characterName, resourceName, percentageValue] = args;
@@ -19,7 +19,7 @@ module.exports = {
 			|| percentage < 0
 			|| percentage > 100
 		) {
-			await message.reply('Usage: `!rpg rest <character> <HP|AR> <0-100%>`');
+			await message.reply('Usage: `!rpg rest <characterKey> <HP|AR> <0-100%>`');
 			return;
 		}
 
@@ -34,7 +34,7 @@ module.exports = {
 			);
 			const target = character.resources[resource];
 			await message.reply(
-				`**${character.name}** now has ${target.current}/${target.max} `
+				`**${character.displayName}** now has ${target.current}/${target.max} `
 				+ `${resource.toUpperCase()} (${percentage}%).`,
 			);
 		}

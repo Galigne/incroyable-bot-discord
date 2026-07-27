@@ -11,7 +11,11 @@ module.exports = {
 		const rpgCommand = message.client.commands.get('rpg');
 		const embed = new EmbedBuilder()
 			.setTitle('RPG Commands')
-			.setDescription('Create and manage your RPG characters.')
+			.setDescription(
+				'Create and manage RPG characters using a stable `CharacterKey` '
+				+ '(for example, `D.Robert`). The key identifies the save and cannot be edited. '
+				+ 'Use `!rpg editHelp` and `!rpg viewHelp` for character fields.',
+			)
 			.setColor('#FFD700')
 			.setThumbnail('attachment://logo.jpg');
 

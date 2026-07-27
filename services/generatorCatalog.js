@@ -80,7 +80,7 @@ function getEntryWeight(entry) {
 }
 
 function normalizeCategoryName(name = '') {
-	const normalizedName = name.trim().toLowerCase().replace(/[\s_]+/g, '-');
+	const normalizedName = name.trim().toLowerCase().replace(/[\s_-]+/g, '');
 	if (normalizedName.endsWith('ies')) {
 		return `${normalizedName.slice(0, -3)}y`;
 	}

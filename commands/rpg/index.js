@@ -4,6 +4,8 @@ const edit = require('./subcommands/edit');
 const editHelp = require('./subcommands/edithelp');
 const endTurn = require('./subcommands/endturn');
 const generate = require('./subcommands/generate');
+const generateCharacter = require('./subcommands/generatecharacter');
+const generateList = require('./subcommands/generatelist');
 const help = require('./subcommands/help');
 const rest = require('./subcommands/rest');
 const rules = require('./subcommands/rules');
@@ -18,6 +20,8 @@ const subcommands = new Map([
 	[editHelp.name, editHelp],
 	[endTurn.name, endTurn],
 	[generate.name, generate],
+	[generateCharacter.name, generateCharacter],
+	[generateList.name, generateList],
 	[help.name, help],
 	[rest.name, rest],
 	[rules.name, rules],

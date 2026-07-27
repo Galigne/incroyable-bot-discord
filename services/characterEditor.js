@@ -149,7 +149,8 @@ function parseListIndex(value, listLength) {
 
 function buildScalarFields() {
 	const fields = new Map();
-	addScalar(fields, ['name'], ['name'], 'name', 'text');
+	addScalar(fields, ['firstname'], ['firstName'], 'first name', 'text');
+	addScalar(fields, ['lastname'], ['lastName'], 'last name', 'text');
 	addScalar(fields, ['level'], ['level'], 'level', 'number');
 	addScalar(fields, ['race.name', 'racename'], ['race', 'name'], 'race name', 'text');
 	addScalar(

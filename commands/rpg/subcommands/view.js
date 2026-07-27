@@ -2,6 +2,8 @@ const characterStore = require('../../../services/characterStore');
 
 const VIEW_FIELDS = [
 	'name',
+	'firstName',
+	'lastName',
 	'level',
 	'race',
 	'backstory',
@@ -23,11 +25,12 @@ const VIEW_FIELDS = [
 ];
 
 const VIEW_HELP = [
-	'Use `!rpg view <character>` to display the character-sheet summary.',
-	'Use `!rpg view <character> <field>` to display one complete field and its sub-fields.',
+	'Use `!rpg view <characterKey>` to display the character-sheet summary.',
+	'Use `!rpg view <characterKey> <field>` to display one complete field and its sub-fields.',
 	'',
 	'**Available fields**',
-	'`name`, `level`',
+	'`name` — first name and last name',
+	'`firstName`, `lastName`, `level`',
 	'`race` — name, physical description, and lore',
 	'`backstory`, `goals`',
 	'`personality` — traits and additional description',
@@ -40,22 +43,23 @@ const VIEW_HELP = [
 	'`statusEffects`, `equipment`, `inventory`, `encumbrance`',
 	'',
 	'**Examples**',
-	'`!rpg view Aria`',
-	'`!rpg view Aria personality`',
-	'`!rpg view Aria race`',
-	'`!rpg view Aria rules`',
-	'`!rpg view Aria status`',
+	'`!rpg view D.Robert`',
+	'`!rpg view D.Robert name`',
+	'`!rpg view D.Robert personality`',
+	'`!rpg view D.Robert race`',
+	'`!rpg view D.Robert rules`',
+	'`!rpg view D.Robert status`',
 ].join('\n');
 
 module.exports = {
 	name: 'view',
 	description: 'Display a character summary or one detailed field',
-	usage: '!rpg view <character> [field]',
+	usage: '!rpg view <characterKey> [field]',
 	helpOrder: 30,
 	async execute({ args, message }) {
 		const [name, fieldName] = args;
 		if (!name) {
-			await message.reply('Usage: `!rpg view <character> [field]`');
+			await message.reply('Usage: `!rpg view <characterKey> [field]`');
 			return;
 		}
 		try {

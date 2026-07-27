@@ -4,8 +4,10 @@ const Character = require('../models/Character');
 
 const savesDirectory = path.join(__dirname, '..', 'save');
 
-async function createCharacter(name, creatorId) {
+async function createCharacter(name, creatorId, initialize = () => {}) {
 	const character = new Character(name, creatorId);
+	await initialize(character);
+	character.key = name;
 	await fs.mkdir(savesDirectory, { recursive: true });
 	await fs.writeFile(getSavePath(name), JSON.stringify(character, null, 2), {
 		encoding: 'utf8',
@@ -39,10 +41,10 @@ async function updateCharacter(name, requesterId, canManage, update) {
 
 async function getCharacter(name) {
 	const data = await fs.readFile(getSavePath(name), 'utf8');
-	return Character.fromSave(JSON.parse(data));
+	return Character.fromSave(JSON.parse(data), name);
 }
 
-async function saveCharacter(character, originalName = character.name) {
+async function saveCharacter(character, originalName = character.key) {
 	await fs.mkdir(savesDirectory, { recursive: true });
 	await fs.writeFile(
 		getSavePath(originalName),
@@ -52,9 +54,13 @@ async function saveCharacter(character, originalName = character.name) {
 }
 
 function getSavePath(name) {
-	if (!name || !/^[\p{L}\p{N}_-]{1,50}$/u.test(name)) {
+	if (
+		!name
+		|| !/^[\p{L}\p{N}](?:[\p{L}\p{N}_.-]{0,48}[\p{L}\p{N}])?$/u.test(name)
+	) {
 		const error = new Error(
-			'Character names may only contain letters, numbers, hyphens, and underscores.',
+			'Character keys must start and end with a letter or number and may '
+			+ 'contain letters, numbers, periods, hyphens, and underscores.',
 		);
 		error.code = 'INVALID_CHARACTER_NAME';
 		throw error;

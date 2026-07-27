@@ -3,6 +3,7 @@ const replyableErrorCodes = new Set([
 	'ENOENT',
 	'INVALID_CHARACTER_EDIT',
 	'INVALID_CHARACTER_NAME',
+	'INVALID_RANDOM_CHARACTER',
 	'NOT_CHARACTER_EDITOR',
 ]);
 
@@ -11,9 +12,11 @@ async function replyToCharacterError(message, error) {
 		return false;
 	}
 
-	const response = error.code === 'ENOENT'
-		? 'That character does not exist.'
-		: error.message;
+	const responses = {
+		EEXIST: 'A character with that key already exists.',
+		ENOENT: 'That character does not exist.',
+	};
+	const response = responses[error.code] ?? error.message;
 	await message.reply(response);
 	return true;
 }

@@ -1,0 +1,71 @@
+{
+  "key": "pnj_3",
+  "firstName": "Zorin",
+  "lastName": "Oakshield",
+  "creatorId": "168424192520355843",
+  "level": 3,
+  "race": {
+    "name": "Tidekin",
+    "physicalDescription": "Amphibious people with translucent fins whose floating clans follow moon-driven currents.",
+    "lore": ""
+  },
+  "backstory": "",
+  "goals": "",
+  "personality": {
+    "traits": [
+      "Keeps meticulous journals yet replaces every person's name with an increasingly confusing nickname.",
+      "Apologizes to every defeated enemy and becomes offended if the apology is rejected."
+    ],
+    "description": ""
+  },
+  "racialTraits": {
+    "skillBonus": "",
+    "physicalAbility": ""
+  },
+  "stats": {
+    "constitution": 11,
+    "strength": 17,
+    "dexterity": 9,
+    "intelligence": 7,
+    "speed": 7,
+    "perception": 7,
+    "charisma": 10,
+    "initiative": 7,
+    "reflexes": 7
+  },
+  "rules": [],
+  "talents": "Sailor — +2 to navigation, rigging, and balance aboard a vessel.\nBeast Friend — +2 when calming or understanding ordinary animals.",
+  "resources": {
+    "hp": {
+      "current": 154,
+      "max": 154
+    },
+    "ar": {
+      "current": 46,
+      "max": 46
+    },
+    "ap": {
+      "current": 4,
+      "max": 4
+    },
+    "md": {
+      "current": 3.5,
+      "max": 3.5
+    }
+  },
+  "statusEffects": [],
+  "equipment": [
+    "Epic light armor — Remarkable weightless protection crafted through rare techniques.",
+    "Greatsword — A massive two-handed sword designed for broad, forceful attacks."
+  ],
+  "inventory": [
+    "Grappling hook — A four-pronged hook designed for use with rope.",
+    "Merchant's scale — A folding balance and reference weights for checking trade goods.",
+    "Silvered chain — A short chain useful against creatures vulnerable to silver.",
+    "23 gold"
+  ],
+  "encumbrance": {
+    "current": 5,
+    "max": 11
+  }
+}
