@@ -38,7 +38,7 @@ function getEditableFieldValue(character, fieldName) {
 	if (multilineField) {
 		return getAtPath(character, multilineField.path)
 			.map(item => multilineField.rules
-				? `${item.name}${item.description ? `: ${item.description}` : ''}`
+				? `${item.name}: ${item.level}: ${item.description}`
 				: item)
 			.join('\n');
 	}
@@ -126,11 +126,23 @@ function parseMultilineEntry(field, line) {
 
 	const separatorIndex = value.indexOf(':');
 	const name = (separatorIndex === -1 ? value : value.slice(0, separatorIndex)).trim();
-	const description = separatorIndex === -1 ? '' : value.slice(separatorIndex + 1).trim();
+	const remainder = separatorIndex === -1 ? '' : value.slice(separatorIndex + 1).trim();
 	if (!name) {
 		throw editError('A RULE name is required before the `:` separator.');
 	}
-	return { name, description };
+	const levelSeparatorIndex = remainder.indexOf(':');
+	const possibleLevel = levelSeparatorIndex === -1
+		? remainder
+		: remainder.slice(0, levelSeparatorIndex).trim();
+	const hasExplicitLevel = /^\d+$/.test(possibleLevel) && levelSeparatorIndex !== -1;
+	const level = hasExplicitLevel ? Number(possibleLevel) : 1;
+	if (!Number.isSafeInteger(level) || level < 1) {
+		throw editError('A RULE level must be a positive whole number.');
+	}
+	const description = hasExplicitLevel
+		? remainder.slice(levelSeparatorIndex + 1).trim()
+		: remainder;
+	return { name, description, level };
 }
 
 function buildScalarFields() {
@@ -147,6 +159,7 @@ function buildScalarFields() {
 		'text',
 	);
 	addScalar(fields, ['race.lore', 'racelore'], ['race', 'lore'], 'race lore', 'text');
+	addScalar(fields, ['appearance'], ['appearance'], 'appearance', 'text');
 	addScalar(fields, ['backstory'], ['backstory'], 'backstory', 'text');
 	addScalar(fields, ['goals'], ['goals'], 'goals', 'text');
 	addScalar(

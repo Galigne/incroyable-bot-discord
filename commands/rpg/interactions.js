@@ -128,7 +128,7 @@ function createFieldModal(sessionId, fieldName, value) {
 
 	let description;
 	if (fieldName === 'rules') {
-		description = 'One RULE per line: Name: Description. Leading dashes are optional.';
+		description = 'One RULE per line: Name: Level: Description. Leading dashes are optional.';
 	}
 	else if (isCollection) {
 		description = 'Free-form lines; leading dashes are optional. Empty the form to clear.';

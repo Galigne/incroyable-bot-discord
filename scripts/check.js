@@ -21,6 +21,7 @@ const {
 } = require('../services/characterEditor');
 const generatorCatalog = require('../services/generatorCatalog');
 const {
+	allocateRuleLevels,
 	calculateMaxAp,
 	calculateRulePoints,
 	calculateStatBudget,
@@ -131,6 +132,7 @@ function checkRpgStructure(commands) {
 		'generate-help',
 		'help',
 		'rest',
+		'roll',
 		'rules',
 		'view',
 		'view-help',
@@ -165,7 +167,7 @@ function checkRpgStructure(commands) {
 }
 
 function checkSlashCommandData(commands) {
-	const expectedCommands = ['help', 'purge', 'restart', 'roll', 'rpg', 'say'];
+	const expectedCommands = ['help', 'purge', 'restart', 'rpg', 'say'];
 	if ([...commands.keys()].sort().join(',') !== expectedCommands.join(',')) {
 		errors.push(`Unexpected slash commands: ${[...commands.keys()].sort().join(', ')}.`);
 	}
@@ -192,7 +194,7 @@ function checkSlashCommandData(commands) {
 		|| EDIT_HELP.length > 2_000
 		|| VIEW_HELP.length > 2_000
 		|| !EDIT_HELP.includes('prefilled form')
-		|| !EDIT_HELP.includes('`Name: Description`')
+		|| !EDIT_HELP.includes('`Name: Level: Description`')
 		|| /\b(add|set|remove) <(?:value|position)>/.test(EDIT_HELP)
 	) {
 		errors.push('The RPG editor or viewer help is incomplete or exceeds Discord limits.');
@@ -217,8 +219,10 @@ function checkSlashCommandData(commands) {
 		['end-turn', 'character-key'],
 		['generate', 'category'],
 		['generate-character', 'level'],
+		['generate-character', 'background'],
 		['rest', 'character-key'],
 		['rest', 'percentage'],
+		['roll', 'sides'],
 		['view', 'character-key'],
 		['view', 'field'],
 	]) {
@@ -227,7 +231,7 @@ function checkSlashCommandData(commands) {
 		}
 	}
 
-	for (const commandName of ['roll', 'purge']) {
+	for (const commandName of ['purge']) {
 		const option = commands.get(commandName).data.toJSON().options[0];
 		if (!option.autocomplete) {
 			errors.push(`Missing autocomplete for /${commandName}.`);
@@ -282,6 +286,7 @@ function checkGeneratorCatalog() {
 		const requiredCategories = [
 			'animal',
 			'armors',
+			'background',
 			'building',
 			'companion',
 			'criminal',
@@ -335,6 +340,35 @@ function checkGeneratorCatalog() {
 				);
 			}
 		}
+		const backgroundEntries = generatorCatalog.getCategory('background')?.entries ?? [];
+		const backgroundNames = new Set();
+		for (const background of backgroundEntries) {
+			const backgroundName = background.fields?.Name;
+			const generatorName = background.fields?.Generator;
+			const details = generatorCatalog.getCategory(generatorName)?.entries ?? [];
+			if (
+				!backgroundName
+				|| !background.fields?.Description
+				|| !generatorName
+				|| backgroundNames.has(backgroundName.toLowerCase())
+				|| details.length === 0
+				|| details.some(entry => (
+					['Appearance', 'Backstory', 'Goals']
+						.some(field => !entry.fields?.[field])
+				))
+			) {
+				errors.push(`Invalid routed background generator: ${backgroundName ?? 'unknown'}.`);
+			}
+			backgroundNames.add(backgroundName?.toLowerCase());
+		}
+		if (
+			backgroundEntries.length !== 17
+			|| backgroundNames.has('citizen')
+			|| generatorCatalog.getCategory('citizenBackground')
+		) {
+			errors.push('Background routing must contain the 17 supported non-citizen categories.');
+		}
+
 		for (const [categoryName, requiredFields] of [
 			['faction', ['Name', 'Type', 'Goal', 'Resources', 'Hierarchy', 'Allies', 'Enemies']],
 			['government', ['Name', 'Structure', 'Leadership', 'Strength', 'Tension']],
@@ -363,6 +397,7 @@ function checkGeneratorCatalog() {
 			|| generatorCatalog.getCategory('power')
 			|| generatorCatalog.getCategory('enemy')
 			|| generatorCatalog.getCategory('location')
+			|| generatorCatalog.getCategory('citizenBackground')
 		) {
 			errors.push('An obsolete generator category still exists.');
 		}
@@ -443,7 +478,10 @@ async function checkGenerateHelp() {
 		if (
 			!embed
 			|| !renderedHelp.includes('/rpg generate category:<category>')
-			|| !renderedHelp.includes('/rpg generate-character character-key:<new key> [level]')
+			|| !renderedHelp.includes(
+				'/rpg generate-character character-key:<new key> [level] [background]',
+			)
+			|| !renderedHelp.includes('maximum of two RULEs')
 			|| missingCategory
 			|| embed.fields?.some(field => field.value.length > 1_024)
 		) {
@@ -475,13 +513,28 @@ function checkCharacterModel() {
 		setEditableFieldValue(original, 'lastName', 'Robert');
 		setEditableFieldValue(original, 'stats.strength', '12');
 		setEditableFieldValue(original, 'race.name', 'Ashborn');
+		setEditableFieldValue(original, 'appearance', 'Tall with silver hair.');
 		setEditableFieldValue(original, 'equipment', '- Longsword');
 		setEditableFieldValue(original, 'personality.traits', '- Brave\n- Curious');
 		setEditableFieldValue(
 			original,
 			'rules',
-			'- Fire: Controls flames\n- Blink: Teleports a short distance',
+			'- Fire: 2: Controls flames\n- Blink: 1: Teleports a short distance',
 		);
+		try {
+			setEditableFieldValue(original, 'rules', 'Fire: 0: Invalid level');
+			errors.push('RULE levels below 1 should be rejected.');
+		}
+		catch (error) {
+			if (error.code !== 'INVALID_CHARACTER_EDIT') {
+				throw error;
+			}
+			setEditableFieldValue(
+				original,
+				'rules',
+				'- Fire: 2: Controls flames\n- Blink: 1: Teleports a short distance',
+			);
+		}
 		try {
 			setEditableFieldValue(original, 'ap.max', '11');
 			errors.push('AP values above 10 should be rejected.');
@@ -505,11 +558,14 @@ function checkCharacterModel() {
 			|| character.displayName !== 'Diego Robert'
 			|| character.stats.strength !== 12
 			|| character.race.name !== 'Ashborn'
+			|| character.appearance !== 'Tall with silver hair.'
 			|| getEditableFieldValue(character, 'personality.traits') !== 'Brave\nCurious'
 			|| getEditableFieldValue(character, 'rules')
-				!== 'Fire: Controls flames\nBlink: Teleports a short distance'
+				!== 'Fire: 2: Controls flames\nBlink: 1: Teleports a short distance'
 			|| character.rules[0]?.description !== 'Controls flames'
+			|| character.rules[0]?.level !== 2
 			|| character.rules[1]?.name !== 'Blink'
+			|| character.rules[1]?.level !== 1
 			|| character.equipment[0] !== 'Longsword'
 			|| character.resources.hp.current !== 50
 			|| character.resources.ap.current !== character.resources.ap.max
@@ -520,7 +576,8 @@ function checkCharacterModel() {
 		const summary = character.toEmbed().toJSON();
 		const status = summary.fields.find(field => field.name === 'Status');
 		if (
-			!status
+			!summary.description.includes('Tall with silver hair.')
+			|| !status
 			|| !status.value.includes('HP: **50 / 100 (50%)**')
 			|| !status.value.includes('AP:\n🌟🌟🌟🌟')
 			|| summary.fields.some(field => field.name === 'Status effects')
@@ -528,12 +585,33 @@ function checkCharacterModel() {
 			|| summary.fields[2]?.name !== 'RULEs'
 			|| summary.fields.some(field => field.name === '\u200B')
 			|| !summary.fields[1]?.value.includes('**Racial traits**')
+			|| summary.fields[1]?.value.includes('Initiative:')
+			|| summary.fields[1]?.value.includes('Reflexes:')
+			|| !summary.fields[2]?.value.includes('Fire (Level 2)')
 			|| !summary.fields[2]?.value.includes('**Talents**')
 		) {
 			errors.push('The character summary status is not formatted correctly.');
 		}
-		for (const field of ['race', 'personality', 'statistics', 'rules', 'status']) {
-			character.toFieldEmbed(field)?.toJSON();
+		for (const field of ['appearance', 'race', 'personality', 'statistics', 'rules', 'status']) {
+			const fieldEmbed = character.toFieldEmbed(field)?.toJSON();
+			if (field === 'rules' && !fieldEmbed.description.includes('Fire — Level 2')) {
+				errors.push('The detailed RULE view does not show RULE levels.');
+			}
+			if (
+				field === 'statistics'
+				&& !fieldEmbed.fields?.find(item => item.name === 'Derived statistics')
+					?.value.includes('Initiative:')
+			) {
+				errors.push('The detailed statistics view should retain derived statistics.');
+			}
+		}
+		const legacyCharacter = Character.fromSave({
+			key: 'Legacy',
+			creatorId: '0',
+			rules: [{ name: 'Legacy RULE', description: 'Saved without a level.' }],
+		});
+		if (legacyCharacter.rules[0]?.level !== 1) {
+			errors.push('Legacy RULEs should default to level 1.');
 		}
 		character.resources.ap.current = 2;
 		character.resources.ap.max = 4;
@@ -572,8 +650,9 @@ function checkRandomCharacterGeneration() {
 			|| !character.race.name
 			|| !character.race.physicalDescription
 			|| character.race.lore
-			|| character.backstory
-			|| character.goals
+			|| !character.appearance
+			|| !character.backstory
+			|| !character.goals
 			|| character.personality.traits.length !== 2
 			|| character.personality.description
 			|| character.racialTraits.skillBonus !== generatedRace?.fields['Skill Bonus']
@@ -595,13 +674,29 @@ function checkRandomCharacterGeneration() {
 		}
 
 		const expectedRulePoints = calculateRulePoints(character.stats.intelligence);
+		const expectedRuleLevels = allocateRuleLevels(expectedRulePoints);
 		const expectedTalentCount = 4;
 		if (
-			character.rules.length !== expectedRulePoints
+			character.rules.length !== expectedRuleLevels.length
+			|| character.rules.some((rule, index) => rule.level !== expectedRuleLevels[index])
 			|| new Set(character.rules.map(rule => rule.name)).size !== character.rules.length
 			|| character.talents.split('\n').length !== expectedTalentCount
 		) {
 			errors.push('Generated RULEs or talents do not match the character attributes.');
+		}
+		const expectedAllocations = [
+			[],
+			[1],
+			[1, 1],
+			[2],
+			[2, 1],
+			[2, 1],
+			[3],
+		];
+		if (expectedAllocations.some((levels, points) => (
+			JSON.stringify(allocateRuleLevels(points)) !== JSON.stringify(levels)
+		))) {
+			errors.push('RULE Point allocation does not prioritize RULE levels correctly.');
 		}
 
 		const expectedHp = Math.round(
@@ -636,6 +731,24 @@ function checkRandomCharacterGeneration() {
 			errors.push('Generated armor, equipment, inventory, AR, or encumbrance is incorrect.');
 		}
 		character.toEmbed().toJSON();
+
+		const routedBackgrounds = generatorCatalog.getCategory('background').entries;
+		for (const routedBackground of routedBackgrounds) {
+			const backgroundName = routedBackground.fields.Name;
+			const routedCharacter = new Character(`background.${backgroundName}`, 'dm');
+			populateRandomCharacter(routedCharacter, {
+				level: 1,
+				background: backgroundName,
+				random: () => 0,
+			});
+			if (
+				!routedCharacter.appearance
+				|| !routedCharacter.backstory
+				|| !routedCharacter.goals
+			) {
+				errors.push(`Random generation failed for background: ${backgroundName}.`);
+			}
+		}
 	}
 	catch (error) {
 		errors.push(`Random character generation: ${error.message}`);

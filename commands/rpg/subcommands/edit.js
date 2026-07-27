@@ -10,7 +10,7 @@ const EDIT_HELP = [
 	'Text fields can be cleared by emptying the form before submitting it.',
 	'',
 	'**Identity and story**',
-	'`firstName`, `lastName`, `level`, `backstory`, `goals`, `talents`',
+	'`firstName`, `lastName`, `level`, `appearance`, `backstory`, `goals`, `talents`',
 	'`race.name`, `race.description`, `race.lore`',
 	'`personality.description`, `personality.traits`',
 	'`racialTrait.skillBonus`, `racialTrait.physicalAbility`',
@@ -27,11 +27,13 @@ const EDIT_HELP = [
 	'**Multiline fields**',
 	'`personality.traits`, `rules`, `statusEffects`, `equipment`, `inventory`',
 	'Write one entry per line. Leading dashes are optional.',
-	'For RULEs, use `Name: Description`, one RULE per line.',
+	'For RULEs, use `Name: Level: Description`, one RULE per line.',
+	'RULE levels must be positive whole numbers.',
 	'',
 	'**Examples**',
 	'`/rpg edit character-key:D.Robert field:stats.strength`',
 	'`/rpg edit character-key:D.Robert field:rules`',
+	'RULE example: `Fire: 2: Controls flames`',
 ].join('\n');
 
 module.exports = {

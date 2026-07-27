@@ -84,7 +84,7 @@ relevant dedicated help command, README, and tests synchronized.
 exact sequence:
 
 1. `/rpg generate category:<category>`
-2. `/rpg generate-character character-key:<new key> [level]`
+2. `/rpg generate-character character-key:<new key> [level] [background]`
 3. `/rpg generate-help`
 
 Use autocomplete for all practical command arguments. Discord returns at most 25
@@ -117,7 +117,8 @@ syntax. The modal presents their full multiline content and replaces it on submi
 - One logical entry per line.
 - Leading `- ` or `* ` is optional and normalized away.
 - Empty multiline content clears the field.
-- RULEs use `Name: Description`, one RULE per line. Split only on the first colon.
+- RULEs use `Name: Level: Description`, one RULE per line. The level is a positive
+  whole number; descriptions may contain additional colons.
 
 The model still stores traits, RULEs, status effects, equipment, and inventory in
 structured arrays because generation and display logic depend on them. “No list
@@ -134,6 +135,8 @@ from `firstName` and `lastName`. Keys:
 
 Character JSON is loaded through `Character.fromSave`; keep the model, editor,
 generator, renderer, and tests aligned when changing the schema.
+`appearance` is a standalone editable text field displayed directly below level and
+race in the public summary.
 
 Permissions:
 
@@ -194,9 +197,13 @@ categories are intentionally removed.
 At present it:
 
 - rolls level 1–10 when omitted;
+- accepts an optional background category and otherwise rolls one from
+  `background.json`; the routed background generator supplies `Appearance`,
+  `Backstory`, and `Goals`;
 - spends the entire level-based stat budget using nonlinear point costs;
 - derives initiative and reflexes from speed;
-- awards RULE points at Intelligence 10, 12, 14, 16, 18, and 20;
+- awards RULE points at Intelligence 10, 12, 14, 16, 18, and 20, then spends them
+  on at most two RULEs by maximizing the first RULE before adding the second;
 - derives HP, AP, and MD;
 - chooses armor that meets Constitution requirements and derives AR from it;
 - equips one armor and one or two weapons;
@@ -205,8 +212,8 @@ At present it:
 
 ## Other bot behavior
 
-- `/roll sides:2` sends `HEADS.gif` or `TAILS.gif`.
-- `/roll sides:20` sends the matching `D20-<result>.gif`.
+- `/rpg roll sides:2` sends `HEADS.gif` or `TAILS.gif`.
+- `/rpg roll sides:20` sends the matching `D20-<result>.gif`.
 - Other dice sizes return a text result.
 - Online music/search playback commands were intentionally removed because they
   were unreliable.

@@ -11,7 +11,7 @@ module.exports = {
 		.setDescription('Create a blank character sheet with a stable CharacterKey')
 		.addStringOption(option => option
 			.setName('character-key')
-			.setDescription('Unique save key, for example D.Robert')
+			.setDescription('Unique save key, make it short and remember it.')
 			.setMinLength(1)
 			.setMaxLength(50)
 			.setRequired(true)),

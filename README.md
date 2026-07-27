@@ -24,15 +24,15 @@ Never commit `.env` or a Discord token. Reset any token that has previously been
 ## Commands
 
 - `/help`
-- `/roll sides:<2-1000>`
 - `/say message:<text>`
 - `/purge amount:<2-100>`
 - `/restart`
 - `/rpg help`
 - `/rpg rules`
 - `/rpg generate category:<category>` — generate a random prompt (DM only)
-- `/rpg generate-character character-key:<new key> [level]` — generate and save a complete character (DM only)
+- `/rpg generate-character character-key:<new key> [level] [background]` — generate and save a complete character (DM only)
 - `/rpg generate-help` — explain generation and list generator categories (DM only)
+- `/rpg roll sides:<2-1000>` — roll a die
 - `/rpg add character-key:<new key>` — create a blank character sheet with a stable key
 - `/rpg view character-key:<key> [field]` — display the summary or one complete field
 - `/rpg view-help` — list viewable fields and examples
@@ -46,7 +46,7 @@ Autocomplete suggests existing CharacterKeys, editable fields, viewable fields,
 generator categories, common dice sizes, levels, and common purge amounts. The
 private edit form opens immediately after `/rpg edit` is submitted. Multiline
 fields accept free-form lines with optional leading dashes; RULEs use
-`Name: Description`.
+`Name: Level: Description`.
 
 Character creators can edit and manage their own sheets. Members with the configured
 DM role, as well as owners, can manage every character sheet.
@@ -57,7 +57,7 @@ Keys may contain internal periods, hyphens, and underscores, such as `D.Robert`.
 Example workflows:
 
 ```text
-/rpg generate-character character-key:D.Robert level:5
+/rpg generate-character character-key:D.Robert level:5 background:adventurer
 /rpg edit character-key:D.Robert field:stats.strength
 /rpg edit character-key:D.Robert field:rules
 /rpg view character-key:D.Robert
@@ -67,9 +67,12 @@ Example workflows:
 ```
 
 Random characters use the rulebook's stat budget and nonlinear stat costs. Their
-RULE count comes from Intelligence thresholds; HP, AP, MD, armor eligibility, AR,
+RULE Points come from Intelligence thresholds and are spent on at most two RULEs,
+prioritizing the first RULE's level; HP, AP, MD, armor eligibility, AR,
 talent count, equipment, inventory, gold, and encumbrance are derived automatically.
-If the optional level is omitted, a level from 1 to 10 is rolled.
+If the optional level is omitted, a level from 1 to 10 is rolled. The optional
+background selects one of the configured NPC categories and is also chosen randomly
+when omitted. It generates the character's appearance, backstory, and goals.
 
 AP follows `0 ≤ current ≤ max ≤ 10` and uses 🌟 for available points and ⭐ for
 spent points. HP, AR, and MD use ten-icon percentage bars.

@@ -1,22 +1,17 @@
 const path = require('node:path');
-const {
-	AttachmentBuilder,
-	InteractionContextType,
-	SlashCommandBuilder,
-} = require('discord.js');
-const { filterAutocompleteChoices } = require('../util/autocomplete');
+const { AttachmentBuilder } = require('discord.js');
+const { filterAutocompleteChoices } = require('../../../util/autocomplete');
 
 const COMMON_DICE = [2, 4, 6, 8, 10, 12, 20, 100];
 
 module.exports = {
 	name: 'roll',
 	description: 'Roll a die with a configurable number of sides',
-	usage: '/roll sides:<2-1000>',
-	helpOrder: 20,
-	data: new SlashCommandBuilder()
+	usage: '/rpg roll sides:<2-1000>',
+	helpOrder: 15,
+	configure: command => command
 		.setName('roll')
 		.setDescription('Roll a die with a configurable number of sides')
-		.setContexts(InteractionContextType.Guild)
 		.addIntegerOption(option => option
 			.setName('sides')
 			.setDescription('Number of sides on the die')
@@ -34,19 +29,19 @@ module.exports = {
 	},
 	async execute({ interaction }) {
 		const sides = interaction.options.getInteger('sides', true);
-
 		const result = Math.floor(Math.random() * sides) + 1;
+
 		if (sides === 2) {
 			const coinSide = result === 1 ? 'HEADS' : 'TAILS';
 			const animation = new AttachmentBuilder(
-				path.join(__dirname, '..', 'media', `${coinSide}.gif`),
+				path.join(__dirname, '..', '..', '..', 'media', `${coinSide}.gif`),
 			);
 			await interaction.reply({ files: [animation] });
 			return;
 		}
 		if (sides === 20) {
 			const animation = new AttachmentBuilder(
-				path.join(__dirname, '..', 'media', `D20-${result}.gif`),
+				path.join(__dirname, '..', '..', '..', 'media', `D20-${result}.gif`),
 			);
 			await interaction.reply({ files: [animation] });
 			return;

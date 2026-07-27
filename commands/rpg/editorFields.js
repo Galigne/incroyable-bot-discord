@@ -5,6 +5,7 @@ const EDIT_FIELDS = [
 	'race.name',
 	'race.description',
 	'race.lore',
+	'appearance',
 	'backstory',
 	'goals',
 	'personality.description',
@@ -46,6 +47,7 @@ const MULTILINE_COLLECTION_FIELDS = new Set([
 const PARAGRAPH_FIELDS = new Set([
 	'race.description',
 	'race.lore',
+	'appearance',
 	'backstory',
 	'goals',
 	'personality.description',

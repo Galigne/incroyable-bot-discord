@@ -23,6 +23,7 @@ class Character {
 			physicalDescription: data.race?.physicalDescription ?? '',
 			lore: data.race?.lore ?? '',
 		};
+		character.appearance = data.appearance ?? '';
 		character.backstory = data.backstory ?? '';
 		character.goals = data.goals ?? '';
 		character.personality = {
@@ -58,6 +59,7 @@ class Character {
 			physicalDescription: '',
 			lore: '',
 		};
+		this.appearance = '';
 		this.backstory = '';
 		this.goals = '';
 		this.personality = {
@@ -99,7 +101,7 @@ class Character {
 			'',
 			`**Status effects**\n${formatList(this.statusEffects)}`,
 		].join('\n');
-		const stats = [...BASE_STATS, ...DERIVED_STATS]
+		const stats = BASE_STATS
 			.map(stat => `${formatLabel(stat)}: **${this.stats[stat]}**`)
 			.join('\n');
 		const racialTraits = [
@@ -113,7 +115,10 @@ class Character {
 				formatList(this.equipment, 250),
 			],
 			[
-				formatList(this.rules.map(rule => rule.name), 250),
+				formatList(
+					this.rules.map(rule => `${rule.name} (Level ${rule.level})`),
+					250,
+				),
 				truncate(this.talents || '—', 250),
 				formatList(this.inventory, 250),
 			],
@@ -125,9 +130,10 @@ class Character {
 
 		return new EmbedBuilder()
 			.setTitle(this.displayName)
-			.setDescription(
+			.setDescription([
 				`Level **${this.level}** · Race **${this.race.name || 'Unspecified'}**`,
-			)
+				this.appearance || 'Appearance unspecified.',
+			].join('\n'))
 			.setColor('#FFD700')
 			.addFields(
 				{ name: 'Status', value: truncate(status) },
@@ -171,6 +177,8 @@ class Character {
 					},
 					{ name: 'Lore', value: truncate(this.race.lore || '—') },
 				);
+			case 'appearance':
+				return embed.setDescription(truncate(this.appearance || '—', 4_096));
 			case 'backstory':
 				return embed.setDescription(truncate(this.backstory || '—', 4_096));
 			case 'goals':
@@ -286,6 +294,7 @@ function copyRules(value) {
 		.map(rule => ({
 			name: rule.name,
 			description: typeof rule.description === 'string' ? rule.description : '',
+			level: Number.isInteger(rule.level) && rule.level > 0 ? rule.level : 1,
 		}));
 }
 
@@ -367,7 +376,8 @@ function formatRules(rules) {
 		return '—';
 	}
 	const value = rules.map((rule, index) => (
-		`**${index + 1}. ${rule.name}**\n${rule.description || 'No description.'}`
+		`**${index + 1}. ${rule.name} — Level ${rule.level}**\n`
+			+ `${rule.description || 'No description.'}`
 	)).join('\n\n');
 	return truncate(value, 4_096);
 }
@@ -386,6 +396,7 @@ function normalizeFieldName(value = '') {
 function getFieldTitle(field) {
 	const titles = {
 		ap: 'AP',
+		appearance: 'Appearance',
 		ar: 'AR',
 		backstory: 'Backstory',
 		encumbrance: 'Encumbrance',

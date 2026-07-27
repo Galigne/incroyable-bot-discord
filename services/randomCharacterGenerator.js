@@ -26,15 +26,23 @@ function populateRandomCharacter(character, options = {}) {
 	character.racialTraits.skillBonus = getField(race, 'Skill Bonus');
 	character.racialTraits.physicalAbility = getField(race, 'Physical Ability');
 
+	const background = resolveBackground(options.background, random);
+	const backgroundDetails = pickOne(getField(background, 'Generator'), random);
+	character.appearance = getField(backgroundDetails, 'Appearance');
+	character.backstory = getField(backgroundDetails, 'Backstory');
+	character.goals = getField(backgroundDetails, 'Goals');
+
 	character.personality.traits = pickMany('personality', 2, random)
 		.map(getTextValue);
 	character.stats = generateStats(level, random);
 
 	const rulePointCount = calculateRulePoints(character.stats.intelligence);
-	character.rules = pickMany('rules', rulePointCount, random)
-		.map(entry => ({
+	const ruleLevels = allocateRuleLevels(rulePointCount);
+	character.rules = pickMany('rules', ruleLevels.length, random)
+		.map((entry, index) => ({
 			name: getField(entry, 'Name'),
 			description: getField(entry, 'Description'),
+			level: ruleLevels[index],
 		}));
 
 	const talentCount = 1 + TALENT_LEVELS.filter(requiredLevel => level >= requiredLevel).length;
@@ -87,6 +95,21 @@ function populateRandomCharacter(character, options = {}) {
 	};
 
 	return character;
+}
+
+function resolveBackground(requestedBackground, random) {
+	if (!requestedBackground) {
+		return pickOne('background', random);
+	}
+	const backgroundCategory = generatorCatalog.getCategory('background');
+	const normalizedRequest = generatorCatalog.normalizeCategoryName(requestedBackground);
+	const background = backgroundCategory?.entries.find(entry => (
+		generatorCatalog.normalizeCategoryName(getField(entry, 'Name')) === normalizedRequest
+	));
+	if (!background) {
+		throw generationError(`Unknown background category: ${requestedBackground}.`);
+	}
+	return background;
 }
 
 function generateStats(level, random = Math.random) {
@@ -147,6 +170,24 @@ function getValueCost(value) {
 
 function calculateRulePoints(intelligence) {
 	return RULE_POINT_THRESHOLDS.filter(threshold => intelligence >= threshold).length;
+}
+
+function allocateRuleLevels(rulePoints) {
+	if (!Number.isInteger(rulePoints) || rulePoints < 0) {
+		throw generationError('RULE points must be a non-negative whole number.');
+	}
+
+	const levels = [];
+	let remainingPoints = rulePoints;
+	for (let ruleIndex = 0; ruleIndex < 2 && remainingPoints > 0; ruleIndex += 1) {
+		let level = 0;
+		while (remainingPoints >= level + 1) {
+			level += 1;
+			remainingPoints -= level;
+		}
+		levels.push(level);
+	}
+	return levels;
 }
 
 function calculateMaxAp(level) {
@@ -225,6 +266,7 @@ function generationError(message) {
 }
 
 module.exports = {
+	allocateRuleLevels,
 	calculateMaxAp,
 	calculateRulePoints,
 	calculateStatBudget,

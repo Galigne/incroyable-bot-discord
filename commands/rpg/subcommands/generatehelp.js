@@ -25,11 +25,14 @@ module.exports = {
 				'DM-only. Select a generator with autocomplete to draw one weighted random '
 					+ 'entry. Run it again to reroll.',
 				'',
-				'`/rpg generate-character character-key:<new key> [level]`',
+				'`/rpg generate-character character-key:<new key> [level] [background]`',
 				'DM-only. Creates and saves a complete random character using a unique '
 					+ 'CharacterKey. Level must be 1–10; when omitted, it is rolled randomly. '
-					+ 'Statistics, resources, RULEs, equipment, inventory, and gold are generated '
-					+ 'from the character level and game rules.',
+					+ 'Background selects the NPC category and is random when omitted. '
+					+ 'Statistics, resources, equipment, inventory, and gold are generated '
+					+ 'from the character level and game rules. Intelligence grants RULE Points; '
+					+ 'they raise the first RULE as far as possible before creating a second, '
+					+ 'with a maximum of two RULEs.',
 			].join('\n'))
 			.setColor('#FFD700')
 			.addFields(chunkLines(categoryLines).map((value, index) => ({

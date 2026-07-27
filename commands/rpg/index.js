@@ -13,6 +13,7 @@ const generateCharacter = require('./subcommands/generatecharacter');
 const generateHelp = require('./subcommands/generatehelp');
 const help = require('./subcommands/help');
 const rest = require('./subcommands/rest');
+const roll = require('./subcommands/roll');
 const rules = require('./subcommands/rules');
 const view = require('./subcommands/view');
 const viewHelp = require('./subcommands/viewhelp');
@@ -29,6 +30,7 @@ const subcommands = new Map([
 	[generateHelp.name, generateHelp],
 	[help.name, help],
 	[rest.name, rest],
+	[roll.name, roll],
 	[rules.name, rules],
 	[view.name, view],
 	[viewHelp.name, viewHelp],
@@ -53,6 +55,7 @@ module.exports = {
 		.addSubcommand(generateHelp.configure)
 		.addSubcommand(help.configure)
 		.addSubcommand(rest.configure)
+		.addSubcommand(roll.configure)
 		.addSubcommand(rules.configure)
 		.addSubcommand(view.configure)
 		.addSubcommand(viewHelp.configure),

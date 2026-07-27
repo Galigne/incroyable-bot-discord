@@ -1,0 +1,90 @@
+{
+    "name": "criminalBackground",
+    "description": "Appearances, histories, and goals for criminal NPCs",
+    "entries": [
+        {
+            "fields": {
+                "Appearance": "Unremarkable clothing, forgettable features, and hands kept carefully out of sight.",
+                "Backstory": "Learned pickpocketing as a hungry child and became too useful for the gang to release.",
+                "Goals": "Buy freedom from the gang and disappear before a younger sibling is recruited."
+            }
+        },
+        {
+            "fields": {
+                "Appearance": "Expensively dressed but tense, with polished manners and a recently broken nose.",
+                "Backstory": "A legitimate merchant began smuggling when impossible taxes threatened the business.",
+                "Goals": "Remove the corrupt customs chief and return to legal trade without losing everything."
+            }
+        },
+        {
+            "fields": {
+                "Appearance": "Lean, scarred, and dressed for rapid movement with no visible identifying marks.",
+                "Backstory": "Deserted an abusive military unit and survived by robbing officials along remote roads.",
+                "Goals": "Protect other deserters and expose the commander who created them."
+            }
+        },
+        {
+            "fields": {
+                "Appearance": "Friendly face, theatrical smile, and fashionable clothes supported by hidden armor.",
+                "Backstory": "Built a confidence scheme around false inheritances and accidentally uncovered a real conspiracy.",
+                "Goals": "Complete one final profitable deception and escape everyone now hunting the evidence."
+            }
+        },
+        {
+            "fields": {
+                "Appearance": "Heavy-set, carefully tattooed, and outwardly relaxed while constantly watching exits.",
+                "Backstory": "Began as a dock enforcer and inherited leadership after every superior was arrested.",
+                "Goals": "Turn the gang into a stable business and prevent a violent rival takeover."
+            }
+        },
+        {
+            "fields": {
+                "Appearance": "Pale from indoor work, with precise fingers and permanent traces of ink and metal dust.",
+                "Backstory": "A gifted artisan was imprisoned for forging documents requested by a noble patron.",
+                "Goals": "Destroy the patron's reputation and create an identity no authority can question."
+            }
+        },
+        {
+            "fields": {
+                "Appearance": "Travel-stained, charming, and equipped with several knives used mostly as tools.",
+                "Backstory": "Joined bandits after losing land to debt collectors and became their reluctant negotiator.",
+                "Goals": "Keep the group from killing, recover the seized land, and secure amnesty."
+            }
+        },
+        {
+            "fields": {
+                "Appearance": "Severe posture, official clothing, and a signet worn as though it were a weapon.",
+                "Backstory": "A minor magistrate discovered bribery was safer and more profitable than honest enforcement.",
+                "Goals": "Erase incriminating records and gain enough influence to become untouchable."
+            }
+        },
+        {
+            "fields": {
+                "Appearance": "Elegant, soft-voiced, and protected by gloves regardless of the weather.",
+                "Backstory": "Trained as an apothecary before secretly supplying poisons and antidotes to competing clients.",
+                "Goals": "Monopolize a rare ingredient and avoid choosing sides in an approaching succession crisis."
+            }
+        },
+        {
+            "fields": {
+                "Appearance": "Young, restless, and visibly trying to imitate a feared criminal reputation.",
+                "Backstory": "Committed one reckless robbery and received credit for a string of crimes performed by someone else.",
+                "Goals": "Survive the unwanted fame and discover who is using the name."
+            }
+        },
+        {
+            "fields": {
+                "Appearance": "Weather-beaten sailor with ritual scars, practical jewelry, and an easy laugh.",
+                "Backstory": "Turned pirate after a merchant captain abandoned half the crew during a storm.",
+                "Goals": "Hunt exploitative ships, provide for the old crew, and someday own a lawful harbor."
+            }
+        },
+        {
+            "fields": {
+                "Appearance": "Quiet and meticulously clean, with an old burn hidden beneath the collar.",
+                "Backstory": "Was raised inside an assassins' order and failed the first assignment intentionally.",
+                "Goals": "Free other trainees and dismantle the order without becoming the killer it designed."
+            }
+        }
+    ]
+}
