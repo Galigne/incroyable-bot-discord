@@ -2,7 +2,9 @@ const fs = require('node:fs/promises');
 const path = require('node:path');
 const Character = require('../models/Character');
 
-const savesDirectory = path.join(__dirname, '..', 'save');
+const savesDirectory = process.env.INCREDIBLE_BOT_SAVE_DIRECTORY
+	? path.resolve(process.env.INCREDIBLE_BOT_SAVE_DIRECTORY)
+	: path.join(__dirname, '..', 'save');
 
 async function createCharacter(name, creatorId, initialize = () => {}) {
 	const character = new Character(name, creatorId);

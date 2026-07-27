@@ -23,7 +23,7 @@ module.exports = {
 
 		for (const command of sortByHelpOrder(client.commands.values())) {
 			embed.addFields({
-				name: command.usage ?? `!${command.name}`,
+				name: command.usage ?? `/${command.name}`,
 				value: command.description,
 			});
 		}

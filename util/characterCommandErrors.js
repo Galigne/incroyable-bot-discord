@@ -1,3 +1,5 @@
+const { MessageFlags } = require('discord.js');
+
 const replyableErrorCodes = new Set([
 	'EEXIST',
 	'ENOENT',
@@ -17,7 +19,7 @@ async function replyToCharacterError(interaction, error) {
 		ENOENT: 'That character does not exist.',
 	};
 	const response = responses[error.code] ?? error.message;
-	await interaction.reply({ content: response, ephemeral: true });
+	await interaction.reply({ content: response, flags: MessageFlags.Ephemeral });
 	return true;
 }
 

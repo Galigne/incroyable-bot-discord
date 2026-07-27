@@ -1,4 +1,5 @@
 const fs = require('node:fs');
+const os = require('node:os');
 const path = require('node:path');
 const { spawnSync } = require('node:child_process');
 const ffmpegPath = require('ffmpeg-static');
@@ -6,11 +7,17 @@ const { generateDependencyReport } = require('@discordjs/voice');
 const Character = require('../models/Character');
 const { BASE_STATS: BASE_STAT_NAMES } = Character;
 const config = require('../config.json');
+const root = path.join(__dirname, '..');
+const testSavesDirectory = fs.mkdtempSync(
+	path.join(os.tmpdir(), 'incredible-bot-check-'),
+);
+process.env.INCREDIBLE_BOT_SAVE_DIRECTORY = testSavesDirectory;
 const characterStore = require('../services/characterStore');
 const {
-	editCharacter,
+	getEditableFieldValue,
 	resetTurnResources,
 	restoreResource,
+	setEditableFieldValue,
 } = require('../services/characterEditor');
 const generatorCatalog = require('../services/generatorCatalog');
 const {
@@ -23,31 +30,47 @@ const {
 const { authorizeCommand } = require('../util/authorization');
 const { loadCommands } = require('../util/loadCommands');
 
-const root = path.join(__dirname, '..');
 const errors = [];
 
 async function main() {
-	checkNodeVersion();
-	checkJavaScriptSyntax();
-	const commands = checkCommands();
-	checkHelpOrder(commands.values(), 'top-level commands');
-	checkRpgStructure(commands);
-	checkSlashCommandData(commands);
-	checkGeneratorCatalog();
-	checkCharacterModel();
-	checkRandomCharacterGeneration();
-	await checkCharacterStore();
-	checkConfiguration();
-	checkAuthorization(commands);
-	checkRequiredFiles();
+	try {
+		checkNodeVersion();
+		checkJavaScriptSyntax();
+		checkDeprecatedInteractionOptions();
+		const commands = checkCommands();
+		checkHelpOrder(commands.values(), 'top-level commands');
+		checkRpgStructure(commands);
+		checkSlashCommandData(commands);
+		checkGeneratorCatalog();
+		await checkGenerateHelp();
+		checkCharacterModel();
+		checkRandomCharacterGeneration();
+		await checkCharacterStore();
+		await checkInteractiveRpgUx();
+		checkConfiguration();
+		checkAuthorization(commands);
+		checkRequiredFiles();
 
-	if (errors.length > 0) {
-		console.error(errors.join('\n\n'));
-		process.exitCode = 1;
+		if (errors.length > 0) {
+			console.error(errors.join('\n\n'));
+			process.exitCode = 1;
+		}
+		else {
+			console.log(`Checks passed: ${commands.size} commands loaded.`);
+			console.log(generateDependencyReport());
+		}
 	}
-	else {
-		console.log(`Checks passed: ${commands.size} commands loaded.`);
-		console.log(generateDependencyReport());
+	finally {
+		const resolvedTemporaryDirectory = path.resolve(testSavesDirectory);
+		const resolvedSystemTemporaryDirectory = path.resolve(os.tmpdir());
+		if (
+			resolvedTemporaryDirectory.startsWith(
+				`${resolvedSystemTemporaryDirectory}${path.sep}`,
+			)
+			&& path.basename(resolvedTemporaryDirectory).startsWith('incredible-bot-check-')
+		) {
+			fs.rmSync(resolvedTemporaryDirectory, { recursive: true, force: true });
+		}
 	}
 }
 
@@ -65,6 +88,17 @@ function checkJavaScriptSyntax() {
 		});
 		if (result.status !== 0) {
 			errors.push(`${path.relative(root, file)}: ${result.stderr.trim()}`);
+		}
+	}
+}
+
+function checkDeprecatedInteractionOptions() {
+	for (const file of findJavaScriptFiles(root)) {
+		const source = fs.readFileSync(file, 'utf8');
+		if (/\bephemeral\s*:/.test(source)) {
+			errors.push(
+				`${path.relative(root, file)} uses the deprecated ephemeral response option.`,
+			);
 		}
 	}
 }
@@ -94,7 +128,7 @@ function checkRpgStructure(commands) {
 		'end-turn',
 		'generate',
 		'generate-character',
-		'generate-list',
+		'generate-help',
 		'help',
 		'rest',
 		'rules',
@@ -117,6 +151,17 @@ function checkRpgStructure(commands) {
 		}
 	}
 	checkHelpOrder(rpgCommand.subcommands.values(), 'RPG subcommands');
+	const generationHelpOrder = [
+		'generate',
+		'generate-character',
+		'generate-help',
+	].sort((left, right) => (
+		rpgCommand.subcommands.get(left).helpOrder
+		- rpgCommand.subcommands.get(right).helpOrder
+	));
+	if (generationHelpOrder.join(',') !== 'generate,generate-character,generate-help') {
+		errors.push('RPG generation commands are not in the requested help order.');
+	}
 }
 
 function checkSlashCommandData(commands) {
@@ -137,13 +182,20 @@ function checkSlashCommandData(commands) {
 	}
 
 	const rpgCommand = commands.get('rpg');
-	const viewCommand = rpgCommand.subcommands.get('view');
+	const { EDIT_FIELDS } = require('../commands/rpg/editorFields');
+	const { EDIT_HELP } = require('../commands/rpg/subcommands/edit');
+	const { VIEW_FIELDS, VIEW_HELP } = require('../commands/rpg/subcommands/view');
 	if (
-		viewCommand.VIEW_HELP.length > 2_000
-		|| !viewCommand.VIEW_FIELDS.includes('personality')
-		|| !viewCommand.VIEW_FIELDS.includes('status')
+		EDIT_FIELDS.length < 30
+		|| !VIEW_FIELDS.includes('personality')
+		|| !VIEW_FIELDS.includes('status')
+		|| EDIT_HELP.length > 2_000
+		|| VIEW_HELP.length > 2_000
+		|| !EDIT_HELP.includes('prefilled form')
+		|| !EDIT_HELP.includes('`Name: Description`')
+		|| /\b(add|set|remove) <(?:value|position)>/.test(EDIT_HELP)
 	) {
-		errors.push('The RPG view help is missing required fields or exceeds Discord limits.');
+		errors.push('The RPG editor or viewer help is incomplete or exceeds Discord limits.');
 	}
 
 	const slashSubcommands = rpgCommand.data.toJSON().options.map(option => option.name);
@@ -162,7 +214,6 @@ function checkSlashCommandData(commands) {
 		['delete', 'character-key'],
 		['edit', 'character-key'],
 		['edit', 'field'],
-		['edit', 'value'],
 		['end-turn', 'character-key'],
 		['generate', 'category'],
 		['generate-character', 'level'],
@@ -306,6 +357,36 @@ function checkGeneratorCatalog() {
 	}
 }
 
+async function checkGenerateHelp() {
+	try {
+		const generateHelp = require('../commands/rpg/subcommands/generatehelp');
+		let response;
+		await generateHelp.execute({
+			interaction: {
+				reply: async payload => {
+					response = payload;
+				},
+			},
+		});
+		const embed = response?.embeds?.[0]?.toJSON();
+		const renderedHelp = JSON.stringify(embed);
+		const missingCategory = generatorCatalog.listCategories()
+			.find(category => !renderedHelp.includes(category.name));
+		if (
+			!embed
+			|| !renderedHelp.includes('/rpg generate category:<category>')
+			|| !renderedHelp.includes('/rpg generate-character character-key:<new key> [level]')
+			|| missingCategory
+			|| embed.fields?.some(field => field.value.length > 1_024)
+		) {
+			errors.push('/rpg generate-help is incomplete or exceeds Discord embed limits.');
+		}
+	}
+	catch (error) {
+		errors.push(`Generate help: ${error.message}`);
+	}
+}
+
 function checkHelpOrder(entries, label) {
 	const orders = new Set();
 	for (const entry of entries) {
@@ -322,15 +403,19 @@ function checkHelpOrder(entries, label) {
 function checkCharacterModel() {
 	try {
 		const original = new Character('Test', '0');
-		editCharacter(original, 'firstName', ['Diego']);
-		editCharacter(original, 'lastName', ['Robert']);
-		editCharacter(original, 'stats.strength', ['12']);
-		editCharacter(original, 'race.name', ['Ashborn']);
-		editCharacter(original, 'personality.traits', ['add', 'Brave']);
-		editCharacter(original, 'rules', ['add', 'Fire', '|', 'Controls flames']);
-		editCharacter(original, 'equipment', ['add', 'Longsword']);
+		setEditableFieldValue(original, 'firstName', 'Diego');
+		setEditableFieldValue(original, 'lastName', 'Robert');
+		setEditableFieldValue(original, 'stats.strength', '12');
+		setEditableFieldValue(original, 'race.name', 'Ashborn');
+		setEditableFieldValue(original, 'equipment', '- Longsword');
+		setEditableFieldValue(original, 'personality.traits', '- Brave\n- Curious');
+		setEditableFieldValue(
+			original,
+			'rules',
+			'- Fire: Controls flames\n- Blink: Teleports a short distance',
+		);
 		try {
-			editCharacter(original, 'ap.max', ['11']);
+			setEditableFieldValue(original, 'ap.max', '11');
 			errors.push('AP values above 10 should be rejected.');
 		}
 		catch (error) {
@@ -352,8 +437,12 @@ function checkCharacterModel() {
 			|| character.displayName !== 'Diego Robert'
 			|| character.stats.strength !== 12
 			|| character.race.name !== 'Ashborn'
-			|| character.personality.traits[0] !== 'Brave'
+			|| getEditableFieldValue(character, 'personality.traits') !== 'Brave\nCurious'
+			|| getEditableFieldValue(character, 'rules')
+				!== 'Fire: Controls flames\nBlink: Teleports a short distance'
 			|| character.rules[0]?.description !== 'Controls flames'
+			|| character.rules[1]?.name !== 'Blink'
+			|| character.equipment[0] !== 'Longsword'
 			|| character.resources.hp.current !== 50
 			|| character.resources.ap.current !== character.resources.ap.max
 			|| character.resources.md.current !== character.resources.md.max
@@ -540,6 +629,77 @@ async function checkCharacterStore() {
 	}
 }
 
+async function checkInteractiveRpgUx() {
+	const suffix = `${process.pid}_${Date.now()}`;
+	const characterKey = `ux.${suffix}`;
+	const { handleRpgInteraction, openCharacterEditor } = require(
+		'../commands/rpg/interactions'
+	);
+	const user = { id: 'ux-creator' };
+	const member = {
+		roles: {
+			cache: {
+				some: () => false,
+			},
+		},
+	};
+
+	try {
+		await characterStore.createCharacter(characterKey, user.id, character => {
+			character.firstName = 'Modal';
+			character.lastName = 'Tester';
+		});
+
+		let modalPayload;
+		await openCharacterEditor({
+			user,
+			member,
+			showModal: async modal => {
+				modalPayload = modal.toJSON();
+			},
+		}, config, characterKey, 'stats.strength');
+		if (
+			modalPayload.title !== 'Edit Strength'
+			|| modalPayload.components.length !== 1
+			|| modalPayload.components[0].component.value !== '10'
+		) {
+			errors.push('The direct RPG editor did not prefill a valid statistics modal.');
+		}
+
+		let submitPayload;
+		await handleRpgInteraction({
+			customId: modalPayload.custom_id,
+			user,
+			member,
+			isModalSubmit: () => true,
+			fields: {
+				getTextInputValue: () => '14',
+			},
+			reply: async payload => {
+				submitPayload = payload;
+			},
+		}, config);
+		const editedCharacter = await characterStore.getCharacter(characterKey);
+		if (!submitPayload || editedCharacter.stats.strength !== 14) {
+			errors.push('The direct RPG editor did not save its modal value.');
+		}
+
+	}
+	catch (error) {
+		errors.push(`Interactive RPG UX: ${error.message}`);
+	}
+	finally {
+		try {
+			await characterStore.deleteCharacter(characterKey, user.id);
+		}
+		catch (error) {
+			if (error.code !== 'ENOENT') {
+				errors.push(`Could not clean up interactive UX check: ${error.message}`);
+			}
+		}
+	}
+}
+
 function checkConfiguration() {
 	if (Object.hasOwn(config, 'token')) {
 		errors.push('config.json must not contain a token.');
@@ -593,8 +753,8 @@ function checkAuthorization(commands) {
 	const generateCommand = commands.get('rpg')?.subcommands?.get('generate');
 	const generateCharacterCommand = commands.get('rpg')?.subcommands
 		?.get('generate-character');
-	const generateListCommand = commands.get('rpg')?.subcommands
-		?.get('generate-list');
+	const generateHelpCommand = commands.get('rpg')?.subcommands
+		?.get('generate-help');
 	const dmMessage = createMessage([config.roles.dm], '0');
 	if (!authorizeCommand(generateCommand, dmMessage, config).allowed) {
 		errors.push('The DM should be allowed to generate RPG prompts.');
@@ -617,10 +777,10 @@ function checkAuthorization(commands) {
 		errors.push('Random character generation should be restricted to DMs and owners.');
 	}
 	if (
-		!authorizeCommand(generateListCommand, dmMessage, config).allowed
-		|| authorizeCommand(generateListCommand, memberMessage, config).allowed
+		!authorizeCommand(generateHelpCommand, dmMessage, config).allowed
+		|| authorizeCommand(generateHelpCommand, memberMessage, config).allowed
 	) {
-		errors.push('The generator list should be restricted to DMs and owners.');
+		errors.push('Generator help should be restricted to DMs and owners.');
 	}
 
 	const memberUsingOwnerCommand = authorizeCommand(

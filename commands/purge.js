@@ -1,5 +1,6 @@
 const {
 	InteractionContextType,
+	MessageFlags,
 	SlashCommandBuilder,
 } = require('discord.js');
 const { filterAutocompleteChoices } = require('../util/autocomplete');
@@ -37,7 +38,7 @@ module.exports = {
 		const deleted = await interaction.channel.bulkDelete(deleteCount, true);
 		await interaction.reply({
 			content: `Deleted ${deleted.size} recent messages.`,
-			ephemeral: true,
+			flags: MessageFlags.Ephemeral,
 		});
 	},
 };

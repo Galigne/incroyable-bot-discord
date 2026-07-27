@@ -7,7 +7,7 @@ module.exports = {
 	name: 'generate-character',
 	description: 'Generate and save a complete random character (DM only)',
 	usage: '/rpg generate-character character-key:<new key> [level]',
-	helpOrder: 15,
+	helpOrder: 11,
 	access: {
 		role: 'dm',
 	},

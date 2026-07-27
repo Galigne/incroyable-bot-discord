@@ -1,3 +1,4 @@
+const { MessageFlags } = require('discord.js');
 const characterStore = require('../../../services/characterStore');
 const { getCharacterChoices } = require('../autocomplete');
 
@@ -30,16 +31,22 @@ module.exports = {
 			if (error.code === 'ENOENT') {
 				await interaction.reply({
 					content: 'That character does not exist.',
-					ephemeral: true,
+					flags: MessageFlags.Ephemeral,
 				});
 				return;
 			}
 			if (error.code === 'NOT_CHARACTER_OWNER') {
-				await interaction.reply({ content: error.message, ephemeral: true });
+				await interaction.reply({
+					content: error.message,
+					flags: MessageFlags.Ephemeral,
+				});
 				return;
 			}
 			if (error.code === 'INVALID_CHARACTER_NAME') {
-				await interaction.reply({ content: error.message, ephemeral: true });
+				await interaction.reply({
+					content: error.message,
+					flags: MessageFlags.Ephemeral,
+				});
 				return;
 			}
 			throw error;

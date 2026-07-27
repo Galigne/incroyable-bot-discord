@@ -1,3 +1,4 @@
+const { MessageFlags } = require('discord.js');
 const characterStore = require('../../../services/characterStore');
 
 module.exports = {
@@ -20,20 +21,23 @@ module.exports = {
 			await characterStore.createCharacter(characterKey, interaction.user.id);
 			await interaction.reply(
 				`Character with key \`${characterKey}\` was created. `
-				+ 'This CharacterKey cannot be edited. Use `/rpg edit-help` to set '
-				+ 'its first name, last name, and other fields.',
+				+ 'This CharacterKey cannot be edited. Use `/rpg edit` with a field '
+				+ 'to open its prefilled private form.',
 			);
 		}
 		catch (error) {
 			if (error.code === 'EEXIST') {
 				await interaction.reply({
 					content: 'A character with that key already exists.',
-					ephemeral: true,
+					flags: MessageFlags.Ephemeral,
 				});
 				return;
 			}
 			if (error.code === 'INVALID_CHARACTER_NAME') {
-				await interaction.reply({ content: error.message, ephemeral: true });
+				await interaction.reply({
+					content: error.message,
+					flags: MessageFlags.Ephemeral,
+				});
 				return;
 			}
 			throw error;

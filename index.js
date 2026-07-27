@@ -1,8 +1,9 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const process = require('node:process');
-const { Events } = require('discord.js');
+const { Events, MessageFlags } = require('discord.js');
 const Client = require('./client/Client');
+const { handleRpgInteraction } = require('./commands/rpg/interactions');
 const config = require('./config.json');
 const { playLocalAudio } = require('./services/localAudioPlayer');
 const { authorizeCommand } = require('./util/authorization');
@@ -40,6 +41,19 @@ client.on(Events.InteractionCreate, async interaction => {
 		return;
 	}
 
+	if (interaction.isModalSubmit()) {
+		try {
+			if (await handleRpgInteraction(interaction, config)) {
+				return;
+			}
+		}
+		catch (error) {
+			console.error(`Error while handling component ${interaction.customId}:`, error);
+			await replyWithUnexpectedError(interaction);
+		}
+		return;
+	}
+
 	const command = client.commands.get(interaction.commandName);
 	if (!command) {
 		return;
@@ -70,7 +84,7 @@ client.on(Events.InteractionCreate, async interaction => {
 		if (authorization.message) {
 			await interaction.reply({
 				content: authorization.message,
-				ephemeral: true,
+				flags: MessageFlags.Ephemeral,
 			});
 		}
 		return;
@@ -86,16 +100,7 @@ client.on(Events.InteractionCreate, async interaction => {
 	}
 	catch (error) {
 		console.error(`Error while running /${interaction.commandName}:`, error);
-		const response = {
-			content: 'Something went wrong while running that command.',
-			ephemeral: true,
-		};
-		if (interaction.replied || interaction.deferred) {
-			await interaction.followUp(response).catch(() => {});
-		}
-		else {
-			await interaction.reply(response).catch(() => {});
-		}
+		await replyWithUnexpectedError(interaction);
 	}
 });
 
@@ -159,6 +164,19 @@ function loadEnvironment() {
 	const envFile = path.join(__dirname, '.env');
 	if (fs.existsSync(envFile) && typeof process.loadEnvFile === 'function') {
 		process.loadEnvFile(envFile);
+	}
+}
+
+async function replyWithUnexpectedError(interaction) {
+	const response = {
+		content: 'Something went wrong while running that command.',
+		flags: MessageFlags.Ephemeral,
+	};
+	if (interaction.replied || interaction.deferred) {
+		await interaction.followUp(response).catch(() => {});
+	}
+	else {
+		await interaction.reply(response).catch(() => {});
 	}
 }
 

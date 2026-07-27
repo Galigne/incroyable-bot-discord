@@ -2,30 +2,95 @@
   "name": "statusEffect",
   "description": "Conditions affecting a character",
   "entries": [
-    { "weight": 3, "value": "Bruised — minor pain causes -1 on the next demanding physical action." },
-    { "weight": 3, "value": "Fatigued — prolonged effort and travel are more difficult until resting." },
-    { "weight": 3, "value": "Shaken — -1 against the next fear or intimidation effect." },
-    { "weight": 3, "value": "Distracted — -1 to the next Perception-based action." },
-    { "weight": 2, "value": "Bleeding — loses a small amount of HP after strenuous actions until treated." },
-    { "weight": 2, "value": "Burning — takes recurring fire damage until the flames are extinguished." },
-    { "weight": 2, "value": "Chilled — movement and Speed-based actions are reduced until warmed." },
-    { "weight": 2, "value": "Dazed — reactions cost additional effort during the next turn." },
-    { "weight": 2, "value": "Blinded — sight-based actions fail or suffer a major penalty." },
-    { "weight": 2, "value": "Deafened — cannot hear speech, warnings, or sound-based effects clearly." },
-    { "weight": 2, "value": "Poisoned — Constitution-based resistance is required as the poison progresses." },
-    { "weight": 2, "value": "Slowed — MD is reduced until the effect ends." },
-    { "weight": 2, "value": "Weakened — Strength-based actions suffer a penalty." },
-    { "weight": 2, "value": "Confused — the character has difficulty distinguishing allies, enemies, or directions." },
-    { "weight": 2, "value": "Frightened — cannot willingly approach the source of fear without succeeding on a roll." },
-    { "value": "Stunned — the character temporarily loses the ability to take normal actions." },
-    { "value": "Paralyzed — voluntary movement is impossible until the condition is broken." },
-    { "value": "Silenced — speech and voice-dependent abilities cannot be used." },
-    { "value": "Cursed — a supernatural penalty persists until its specific condition is resolved." },
-    { "value": "Petrifying — the body is slowly turning to stone and requires urgent intervention." },
-    { "value": "Possessed — an outside will occasionally contests control of the character." },
-    { "value": "Marked — a magical sign allows a hostile creature or effect to track the character." },
-    { "value": "Invisible — the character cannot be seen normally but still makes sound and leaves traces." },
-    { "value": "Regenerating — restores a small amount of HP at the end of each turn." },
-    { "value": "Inspired — may reroll one chosen die, after which this status ends." }
+    {
+      "weight": 3,
+      "value": "Bruised — minor pain causes -1 on the next demanding physical action."
+    },
+    {
+      "weight": 3,
+      "value": "Fatigued — prolonged effort and travel are more difficult until resting."
+    },
+    {
+      "weight": 3,
+      "value": "Shaken — -1 against the next fear or intimidation effect."
+    },
+    {
+      "weight": 3,
+      "value": "Distracted — -1 to the next Perception-based action."
+    },
+    {
+      "weight": 2,
+      "value": "Bleeding — loses a small amount of HP after strenuous actions until treated."
+    },
+    {
+      "weight": 2,
+      "value": "Burning — takes recurring fire damage until the flames are extinguished."
+    },
+    {
+      "weight": 2,
+      "value": "Chilled — movement and Speed-based actions are reduced until warmed."
+    },
+    {
+      "weight": 2,
+      "value": "Dazed — reactions cost additional effort during the next turn."
+    },
+    {
+      "weight": 2,
+      "value": "Blinded — sight-based actions fail or suffer a major penalty."
+    },
+    {
+      "weight": 2,
+      "value": "Deafened — cannot hear speech, warnings, or sound-based effects clearly."
+    },
+    {
+      "weight": 2,
+      "value": "Poisoned — Constitution-based resistance is required as the poison progresses."
+    },
+    {
+      "weight": 2,
+      "value": "Slowed — MD is reduced until the effect ends."
+    },
+    {
+      "weight": 2,
+      "value": "Weakened — Strength-based actions suffer a penalty."
+    },
+    {
+      "weight": 2,
+      "value": "Confused — the character has difficulty distinguishing allies, enemies, or directions."
+    },
+    {
+      "weight": 2,
+      "value": "Frightened — cannot willingly approach the source of fear without succeeding on a roll."
+    },
+    {
+      "value": "Stunned — the character temporarily loses the ability to take normal actions."
+    },
+    {
+      "value": "Paralyzed — voluntary movement is impossible until the condition is broken."
+    },
+    {
+      "value": "Silenced — speech and voice-dependent abilities cannot be used."
+    },
+    {
+      "value": "Cursed — a supernatural penalty persists until its specific condition is resolved."
+    },
+    {
+      "value": "Petrifying — the body is slowly turning to stone and requires urgent intervention."
+    },
+    {
+      "value": "Possessed — an outside will occasionally contests control of the character."
+    },
+    {
+      "value": "Marked — a magical sign allows a hostile creature or effect to track the character."
+    },
+    {
+      "value": "Invisible — the character cannot be seen normally but still makes sound and leaves traces."
+    },
+    {
+      "value": "Regenerating — restores a small amount of HP at the end of each turn."
+    },
+    {
+      "value": "Inspired — may reroll one chosen die, after which this status ends."
+    }
   ]
 }

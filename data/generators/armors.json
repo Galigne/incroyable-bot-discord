@@ -2,20 +2,182 @@
   "name": "armors",
   "description": "Every armor type and rarity combination",
   "entries": [
-    { "weight": 8, "fields": { "Name": "Common light armor", "Type": "light", "Rarity": "common", "Description": "Ordinary clothing or light padding that offers mobility but no meaningful AR.", "Constitution requirement": 0, "AR percentage": 0, "Encumbrance": 0 } },
-    { "weight": 5, "fields": { "Name": "Uncommon light armor", "Type": "light", "Rarity": "uncommon", "Description": "Well-fitted reinforced clothing offering modest protection.", "Constitution requirement": 0, "AR percentage": 10, "Encumbrance": 0 } },
-    { "weight": 3, "fields": { "Name": "Rare light armor", "Type": "light", "Rarity": "rare", "Description": "Superior flexible armor made from unusually resilient material.", "Constitution requirement": 0, "AR percentage": 20, "Encumbrance": 0 } },
-    { "weight": 2, "fields": { "Name": "Epic light armor", "Type": "light", "Rarity": "epic", "Description": "Remarkable weightless protection crafted through rare techniques.", "Constitution requirement": 0, "AR percentage": 30, "Encumbrance": 0 } },
-    { "fields": { "Name": "Legendary light armor", "Type": "light", "Rarity": "legendary", "Description": "A unique second skin offering exceptional protection without restricting movement.", "Constitution requirement": 0, "AR percentage": 45, "Encumbrance": 0 } },
-    { "weight": 8, "fields": { "Name": "Common medium armor", "Type": "medium", "Rarity": "common", "Description": "Standard reinforced leather, scale, or partial mail.", "Constitution requirement": 12, "AR percentage": 20, "Encumbrance": 1 } },
-    { "weight": 5, "fields": { "Name": "Uncommon medium armor", "Type": "medium", "Rarity": "uncommon", "Description": "Reliable professional armor balancing protection and mobility.", "Constitution requirement": 12, "AR percentage": 30, "Encumbrance": 1 } },
-    { "weight": 3, "fields": { "Name": "Rare medium armor", "Type": "medium", "Rarity": "rare", "Description": "Master-crafted layered armor with excellent coverage.", "Constitution requirement": 12, "AR percentage": 40, "Encumbrance": 1 } },
-    { "weight": 2, "fields": { "Name": "Epic medium armor", "Type": "medium", "Rarity": "epic", "Description": "Exceptional armor reinforced by magical materials or runes.", "Constitution requirement": 12, "AR percentage": 50, "Encumbrance": 1 } },
-    { "fields": { "Name": "Legendary medium armor", "Type": "medium", "Rarity": "legendary", "Description": "A celebrated suit offering extraordinary protection without becoming cumbersome.", "Constitution requirement": 12, "AR percentage": 65, "Encumbrance": 1 } },
-    { "weight": 8, "fields": { "Name": "Common heavy armor", "Type": "heavy", "Rarity": "common", "Description": "A basic full suit of plate or similarly massive protection.", "Constitution requirement": 14, "AR percentage": 40, "Encumbrance": 2 } },
-    { "weight": 5, "fields": { "Name": "Uncommon heavy armor", "Type": "heavy", "Rarity": "uncommon", "Description": "A carefully fitted heavy suit with reinforced joints.", "Constitution requirement": 14, "AR percentage": 50, "Encumbrance": 2 } },
-    { "weight": 3, "fields": { "Name": "Rare heavy armor", "Type": "heavy", "Rarity": "rare", "Description": "Masterwork heavy armor built from superior metal or monster plates.", "Constitution requirement": 14, "AR percentage": 60, "Encumbrance": 2 } },
-    { "weight": 2, "fields": { "Name": "Epic heavy armor", "Type": "heavy", "Rarity": "epic", "Description": "A formidable runic suit capable of withstanding extraordinary punishment.", "Constitution requirement": 14, "AR percentage": 70, "Encumbrance": 2 } },
-    { "fields": { "Name": "Legendary heavy armor", "Type": "heavy", "Rarity": "legendary", "Description": "A unique fortress-like suit remembered in songs and military histories.", "Constitution requirement": 14, "AR percentage": 85, "Encumbrance": 2 } }
+    {
+      "weight": 8,
+      "fields": {
+        "Name": "Common light armor",
+        "Type": "light",
+        "Rarity": "common",
+        "Description": "Ordinary clothing or light padding that offers mobility but no meaningful AR.",
+        "Constitution requirement": 0,
+        "AR percentage": 0,
+        "Encumbrance": 0
+      }
+    },
+    {
+      "weight": 5,
+      "fields": {
+        "Name": "Uncommon light armor",
+        "Type": "light",
+        "Rarity": "uncommon",
+        "Description": "Well-fitted reinforced clothing offering modest protection.",
+        "Constitution requirement": 0,
+        "AR percentage": 10,
+        "Encumbrance": 0
+      }
+    },
+    {
+      "weight": 3,
+      "fields": {
+        "Name": "Rare light armor",
+        "Type": "light",
+        "Rarity": "rare",
+        "Description": "Superior flexible armor made from unusually resilient material.",
+        "Constitution requirement": 0,
+        "AR percentage": 20,
+        "Encumbrance": 0
+      }
+    },
+    {
+      "weight": 2,
+      "fields": {
+        "Name": "Epic light armor",
+        "Type": "light",
+        "Rarity": "epic",
+        "Description": "Remarkable weightless protection crafted through rare techniques.",
+        "Constitution requirement": 0,
+        "AR percentage": 30,
+        "Encumbrance": 0
+      }
+    },
+    {
+      "fields": {
+        "Name": "Legendary light armor",
+        "Type": "light",
+        "Rarity": "legendary",
+        "Description": "A unique second skin offering exceptional protection without restricting movement.",
+        "Constitution requirement": 0,
+        "AR percentage": 45,
+        "Encumbrance": 0
+      }
+    },
+    {
+      "weight": 8,
+      "fields": {
+        "Name": "Common medium armor",
+        "Type": "medium",
+        "Rarity": "common",
+        "Description": "Standard reinforced leather, scale, or partial mail.",
+        "Constitution requirement": 12,
+        "AR percentage": 20,
+        "Encumbrance": 1
+      }
+    },
+    {
+      "weight": 5,
+      "fields": {
+        "Name": "Uncommon medium armor",
+        "Type": "medium",
+        "Rarity": "uncommon",
+        "Description": "Reliable professional armor balancing protection and mobility.",
+        "Constitution requirement": 12,
+        "AR percentage": 30,
+        "Encumbrance": 1
+      }
+    },
+    {
+      "weight": 3,
+      "fields": {
+        "Name": "Rare medium armor",
+        "Type": "medium",
+        "Rarity": "rare",
+        "Description": "Master-crafted layered armor with excellent coverage.",
+        "Constitution requirement": 12,
+        "AR percentage": 40,
+        "Encumbrance": 1
+      }
+    },
+    {
+      "weight": 2,
+      "fields": {
+        "Name": "Epic medium armor",
+        "Type": "medium",
+        "Rarity": "epic",
+        "Description": "Exceptional armor reinforced by magical materials or runes.",
+        "Constitution requirement": 12,
+        "AR percentage": 50,
+        "Encumbrance": 1
+      }
+    },
+    {
+      "fields": {
+        "Name": "Legendary medium armor",
+        "Type": "medium",
+        "Rarity": "legendary",
+        "Description": "A celebrated suit offering extraordinary protection without becoming cumbersome.",
+        "Constitution requirement": 12,
+        "AR percentage": 65,
+        "Encumbrance": 1
+      }
+    },
+    {
+      "weight": 8,
+      "fields": {
+        "Name": "Common heavy armor",
+        "Type": "heavy",
+        "Rarity": "common",
+        "Description": "A basic full suit of plate or similarly massive protection.",
+        "Constitution requirement": 14,
+        "AR percentage": 40,
+        "Encumbrance": 2
+      }
+    },
+    {
+      "weight": 5,
+      "fields": {
+        "Name": "Uncommon heavy armor",
+        "Type": "heavy",
+        "Rarity": "uncommon",
+        "Description": "A carefully fitted heavy suit with reinforced joints.",
+        "Constitution requirement": 14,
+        "AR percentage": 50,
+        "Encumbrance": 2
+      }
+    },
+    {
+      "weight": 3,
+      "fields": {
+        "Name": "Rare heavy armor",
+        "Type": "heavy",
+        "Rarity": "rare",
+        "Description": "Masterwork heavy armor built from superior metal or monster plates.",
+        "Constitution requirement": 14,
+        "AR percentage": 60,
+        "Encumbrance": 2
+      }
+    },
+    {
+      "weight": 2,
+      "fields": {
+        "Name": "Epic heavy armor",
+        "Type": "heavy",
+        "Rarity": "epic",
+        "Description": "A formidable runic suit capable of withstanding extraordinary punishment.",
+        "Constitution requirement": 14,
+        "AR percentage": 70,
+        "Encumbrance": 2
+      }
+    },
+    {
+      "fields": {
+        "Name": "Legendary heavy armor",
+        "Type": "heavy",
+        "Rarity": "legendary",
+        "Description": "A unique fortress-like suit remembered in songs and military histories.",
+        "Constitution requirement": 14,
+        "AR percentage": 85,
+        "Encumbrance": 2
+      }
+    }
   ]
 }

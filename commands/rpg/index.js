@@ -1,5 +1,6 @@
 const {
 	InteractionContextType,
+	MessageFlags,
 	SlashCommandBuilder,
 } = require('discord.js');
 const add = require('./subcommands/add');
@@ -9,7 +10,7 @@ const editHelp = require('./subcommands/edithelp');
 const endTurn = require('./subcommands/endturn');
 const generate = require('./subcommands/generate');
 const generateCharacter = require('./subcommands/generatecharacter');
-const generateList = require('./subcommands/generatelist');
+const generateHelp = require('./subcommands/generatehelp');
 const help = require('./subcommands/help');
 const rest = require('./subcommands/rest');
 const rules = require('./subcommands/rules');
@@ -25,7 +26,7 @@ const subcommands = new Map([
 	[endTurn.name, endTurn],
 	[generate.name, generate],
 	[generateCharacter.name, generateCharacter],
-	[generateList.name, generateList],
+	[generateHelp.name, generateHelp],
 	[help.name, help],
 	[rest.name, rest],
 	[rules.name, rules],
@@ -49,7 +50,7 @@ module.exports = {
 		.addSubcommand(endTurn.configure)
 		.addSubcommand(generate.configure)
 		.addSubcommand(generateCharacter.configure)
-		.addSubcommand(generateList.configure)
+		.addSubcommand(generateHelp.configure)
 		.addSubcommand(help.configure)
 		.addSubcommand(rest.configure)
 		.addSubcommand(rules.configure)
@@ -67,7 +68,7 @@ module.exports = {
 		if (!authorization.allowed) {
 			await context.interaction.reply({
 				content: authorization.message,
-				ephemeral: true,
+				flags: MessageFlags.Ephemeral,
 			});
 			return;
 		}

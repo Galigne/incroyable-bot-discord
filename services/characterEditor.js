@@ -1,30 +1,13 @@
 const { BASE_STATS, DERIVED_STATS, MAX_AP } = require('../models/Character');
 
 const scalarFields = buildScalarFields();
-const listFields = new Map([
+const multilineFields = new Map([
 	['personalitytraits', { path: ['personality', 'traits'], label: 'personality trait' }],
 	['rules', { path: ['rules'], label: 'RULE', rules: true }],
 	['statuseffects', { path: ['statusEffects'], label: 'status effect' }],
 	['equipment', { path: ['equipment'], label: 'equipment item' }],
 	['inventory', { path: ['inventory'], label: 'inventory item' }],
 ]);
-
-function editCharacter(character, fieldName, args) {
-	const key = normalizeFieldName(fieldName);
-	const scalarField = scalarFields.get(key);
-	if (scalarField) {
-		return editScalar(character, scalarField, args);
-	}
-
-	const listField = listFields.get(key);
-	if (listField) {
-		return editList(character, listField, args);
-	}
-
-	throw editError(
-		`Unknown field: ${fieldName}. Use \`/rpg edit-help\` to list editable fields.`,
-	);
-}
 
 function restoreResource(character, resourceName, percentage) {
 	const resource = resourceName.toLowerCase();
@@ -42,6 +25,51 @@ function restoreResource(character, resourceName, percentage) {
 function resetTurnResources(character) {
 	character.resources.ap.current = character.resources.ap.max;
 	character.resources.md.current = character.resources.md.max;
+}
+
+function getEditableFieldValue(character, fieldName) {
+	const key = normalizeFieldName(fieldName);
+	const scalarField = scalarFields.get(key);
+	if (scalarField) {
+		return String(getAtPath(character, scalarField.path) ?? '');
+	}
+
+	const multilineField = multilineFields.get(key);
+	if (multilineField) {
+		return getAtPath(character, multilineField.path)
+			.map(item => multilineField.rules
+				? `${item.name}${item.description ? `: ${item.description}` : ''}`
+				: item)
+			.join('\n');
+	}
+
+	throw editError(`Unknown field: ${fieldName}.`);
+}
+
+function setEditableFieldValue(character, fieldName, value) {
+	const key = normalizeFieldName(fieldName);
+	const scalarField = scalarFields.get(key);
+	if (scalarField) {
+		const args = value.trim() ? [value] : ['clear'];
+		return editScalar(character, scalarField, args);
+	}
+
+	const multilineField = multilineFields.get(key);
+	if (multilineField) {
+		const lines = value
+			.split(/\r?\n/)
+			.map(line => line.trim().replace(/^[-*]\s+/, ''))
+			.filter(Boolean);
+		const entries = getAtPath(character, multilineField.path);
+		entries.splice(
+			0,
+			entries.length,
+			...lines.map(line => parseMultilineEntry(multilineField, line)),
+		);
+		return `${multilineField.label} field updated.`;
+	}
+
+	throw editError(`Unknown field: ${fieldName}.`);
 }
 
 function editScalar(character, field, args) {
@@ -87,42 +115,8 @@ function editScalar(character, field, args) {
 	return `${field.label} updated.`;
 }
 
-function editList(character, field, args) {
-	const [actionName, ...actionArgs] = args;
-	const action = actionName?.toLowerCase();
-	const list = getAtPath(character, field.path);
-
-	if (action === 'clear') {
-		list.length = 0;
-		return `All ${field.label}s were removed.`;
-	}
-
-	if (action === 'add') {
-		const item = parseListItem(field, actionArgs);
-		list.push(item);
-		return `${field.label} added at position ${list.length}.`;
-	}
-
-	if (action === 'set') {
-		const [positionValue, ...itemArgs] = actionArgs;
-		const index = parseListIndex(positionValue, list.length);
-		list[index] = parseListItem(field, itemArgs);
-		return `${field.label} ${index + 1} updated.`;
-	}
-
-	if (action === 'remove') {
-		const index = parseListIndex(actionArgs[0], list.length);
-		list.splice(index, 1);
-		return `${field.label} ${index + 1} removed.`;
-	}
-
-	throw editError(
-		`Use \`add\`, \`set <position>\`, \`remove <position>\`, or \`clear\` for ${field.label}s.`,
-	);
-}
-
-function parseListItem(field, args) {
-	const value = args.join(' ').trim();
+function parseMultilineEntry(field, line) {
+	const value = line.trim();
 	if (!value) {
 		throw editError(`A value is required for the ${field.label}.`);
 	}
@@ -130,21 +124,13 @@ function parseListItem(field, args) {
 		return value;
 	}
 
-	const separatorIndex = value.indexOf('|');
+	const separatorIndex = value.indexOf(':');
 	const name = (separatorIndex === -1 ? value : value.slice(0, separatorIndex)).trim();
 	const description = separatorIndex === -1 ? '' : value.slice(separatorIndex + 1).trim();
 	if (!name) {
-		throw editError('A RULE name is required before the `|` separator.');
+		throw editError('A RULE name is required before the `:` separator.');
 	}
 	return { name, description };
-}
-
-function parseListIndex(value, listLength) {
-	const position = Number.parseInt(value, 10);
-	if (!Number.isInteger(position) || String(position) !== value || position < 1 || position > listLength) {
-		throw editError(`Choose a position between 1 and ${listLength}.`);
-	}
-	return position - 1;
 }
 
 function buildScalarFields() {
@@ -238,8 +224,9 @@ function editError(message) {
 }
 
 module.exports = {
-	editCharacter,
+	getEditableFieldValue,
 	normalizeFieldName,
 	resetTurnResources,
 	restoreResource,
+	setEditableFieldValue,
 };

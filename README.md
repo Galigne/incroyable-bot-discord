@@ -30,20 +30,23 @@ Never commit `.env` or a Discord token. Reset any token that has previously been
 - `/restart`
 - `/rpg help`
 - `/rpg rules`
-- `/rpg generate-list` — list generator categories (DM only)
 - `/rpg generate category:<category>` — generate a random prompt (DM only)
 - `/rpg generate-character character-key:<new key> [level]` — generate and save a complete character (DM only)
+- `/rpg generate-help` — explain generation and list generator categories (DM only)
 - `/rpg add character-key:<new key>` — create a blank character sheet with a stable key
-- `/rpg view character-key:<key> [field]` — display a summary or detailed field
-- `/rpg view-help` — explain all viewable fields
-- `/rpg edit character-key:<key> field:<field> value:<value>` — edit a scalar or list field
-- `/rpg edit-help` — explain nested fields, list actions, and RULE syntax
+- `/rpg view character-key:<key> [field]` — display the summary or one complete field
+- `/rpg view-help` — list viewable fields and examples
+- `/rpg edit character-key:<key> field:<field>` — edit one field in a prefilled form
+- `/rpg edit-help` — list editable fields and explain multiline form values
 - `/rpg rest character-key:<key> resource:<HP|AR> percentage:<0-100>` — restore a resource
 - `/rpg end-turn character-key:<key>` — restore AP and MD to their maximum values
 
 Discord provides native validation and choices for constrained options.
-Autocomplete suggests existing CharacterKeys, editable/viewable fields, generator
-categories, common dice sizes, levels, and common purge amounts.
+Autocomplete suggests existing CharacterKeys, editable fields, viewable fields,
+generator categories, common dice sizes, levels, and common purge amounts. The
+private edit form opens immediately after `/rpg edit` is submitted. Multiline
+fields accept free-form lines with optional leading dashes; RULEs use
+`Name: Description`.
 
 Character creators can edit and manage their own sheets. Members with the configured
 DM role, as well as owners, can manage every character sheet.
@@ -55,10 +58,9 @@ Example workflows:
 
 ```text
 /rpg generate-character character-key:D.Robert level:5
-/rpg edit character-key:D.Robert field:firstName value:Diego
-/rpg edit character-key:D.Robert field:stats.strength value:14
-/rpg edit character-key:D.Robert field:personality.traits value:add Brave
-/rpg edit character-key:D.Robert field:rules value:add Fire | Controls nearby flames
+/rpg edit character-key:D.Robert field:stats.strength
+/rpg edit character-key:D.Robert field:rules
+/rpg view character-key:D.Robert
 /rpg view character-key:D.Robert field:personality
 /rpg rest character-key:D.Robert resource:HP percentage:50
 /rpg end-turn character-key:D.Robert

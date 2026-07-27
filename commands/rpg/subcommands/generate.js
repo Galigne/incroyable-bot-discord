@@ -1,4 +1,4 @@
-const { EmbedBuilder } = require('discord.js');
+const { EmbedBuilder, MessageFlags } = require('discord.js');
 const generatorCatalog = require('../../../services/generatorCatalog');
 const { filterAutocompleteChoices } = require('../../../util/autocomplete');
 
@@ -34,8 +34,8 @@ module.exports = {
 		if (!result) {
 			await interaction.reply({
 				content: `Unknown generator category: **${requestedCategory}**. `
-					+ 'Use `/rpg generate-list` to see the available categories.',
-				ephemeral: true,
+					+ 'Use `/rpg generate-help` to see the available categories.',
+				flags: MessageFlags.Ephemeral,
 			});
 			return;
 		}

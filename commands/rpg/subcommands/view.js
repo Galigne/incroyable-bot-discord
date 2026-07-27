@@ -1,3 +1,4 @@
+const { MessageFlags } = require('discord.js');
 const characterStore = require('../../../services/characterStore');
 const { filterAutocompleteChoices } = require('../../../util/autocomplete');
 const { getCharacterChoices } = require('../autocomplete');
@@ -89,7 +90,7 @@ module.exports = {
 				await interaction.reply({
 					content: `Unknown character field: **${fieldName}**. `
 						+ 'Use `/rpg view-help` to list the available fields.',
-					ephemeral: true,
+					flags: MessageFlags.Ephemeral,
 				});
 				return;
 			}
@@ -104,12 +105,15 @@ module.exports = {
 			if (error.code === 'ENOENT') {
 				await interaction.reply({
 					content: 'That character does not exist.',
-					ephemeral: true,
+					flags: MessageFlags.Ephemeral,
 				});
 				return;
 			}
 			if (error.code === 'INVALID_CHARACTER_NAME') {
-				await interaction.reply({ content: error.message, ephemeral: true });
+				await interaction.reply({
+					content: error.message,
+					flags: MessageFlags.Ephemeral,
+				});
 				return;
 			}
 			throw error;

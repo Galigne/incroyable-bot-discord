@@ -1,3 +1,4 @@
+const { MessageFlags } = require('discord.js');
 const { VIEW_HELP } = require('./view');
 
 module.exports = {
@@ -9,6 +10,9 @@ module.exports = {
 		.setName('view-help')
 		.setDescription('Explain character summary and detailed field views'),
 	async execute({ interaction }) {
-		await interaction.reply({ content: VIEW_HELP, ephemeral: true });
+		await interaction.reply({
+			content: VIEW_HELP,
+			flags: MessageFlags.Ephemeral,
+		});
 	},
 };
