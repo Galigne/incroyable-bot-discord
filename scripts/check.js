@@ -317,10 +317,7 @@ function checkCharacterModel() {
 		const summary = character.toEmbed().toJSON();
 		const status = summary.fields.find(field => field.name === 'Status');
 		if (
-			!summary.description.includes('CharacterKey: **Test**')
-			|| !summary.description.includes('First Name: **Diego**')
-			|| !summary.description.includes('Last Name: **Robert**')
-			|| !status
+			!status
 			|| !status.value.includes('HP: **50 / 100 (50%)**')
 			|| !status.value.includes('AP:\n🌟🌟🌟🌟')
 			|| summary.fields.some(field => field.name === 'Status effects')

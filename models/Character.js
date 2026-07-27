@@ -126,12 +126,7 @@ class Character {
 		return new EmbedBuilder()
 			.setTitle(this.displayName)
 			.setDescription(
-				[
-					`CharacterKey: **${this.key}**`,
-					`First Name: **${this.firstName || 'Unspecified'}** · `
-						+ `Last Name: **${this.lastName || 'Unspecified'}**`,
-					`Level **${this.level}** · Race **${this.race.name || 'Unspecified'}**`,
-				].join('\n'),
+				`Level **${this.level}** · Race **${this.race.name || 'Unspecified'}**`,
 			)
 			.setColor('#FFD700')
 			.addFields(
