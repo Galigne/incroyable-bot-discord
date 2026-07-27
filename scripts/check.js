@@ -280,17 +280,28 @@ function checkGeneratorCatalog() {
 		}
 
 		const requiredCategories = [
+			'animal',
 			'armors',
-			'enemy',
+			'building',
+			'companion',
+			'criminal',
+			'dungeon',
 			'event',
+			'faction',
+			'government',
 			'inventory',
-			'location',
+			'material',
+			'monster',
 			'name',
 			'npc',
 			'personality',
 			'quest',
 			'race',
+			'region',
+			'religion',
+			'room',
 			'rules',
+			'settlement',
 			'statusEffect',
 			'talents',
 			'trap',
@@ -301,8 +312,59 @@ function checkGeneratorCatalog() {
 				errors.push(`Missing generator category: ${categoryName}.`);
 			}
 		}
-		if (generatorCatalog.getCategory('loot') || generatorCatalog.getCategory('power')) {
-			errors.push('Obsolete loot or power generator categories still exist.');
+		const expandedGeneratorCategories = [
+			'animal',
+			'building',
+			'companion',
+			'criminal',
+			'dungeon',
+			'faction',
+			'government',
+			'material',
+			'monster',
+			'region',
+			'religion',
+			'room',
+			'settlement',
+		];
+		for (const categoryName of expandedGeneratorCategories) {
+			const entryCount = generatorCatalog.getCategory(categoryName)?.entries.length ?? 0;
+			if (entryCount < 20 || entryCount > 40) {
+				errors.push(
+					`Generator category ${categoryName} must contain 20 to 40 entries.`,
+				);
+			}
+		}
+		for (const [categoryName, requiredFields] of [
+			['faction', ['Name', 'Type', 'Goal', 'Resources', 'Hierarchy', 'Allies', 'Enemies']],
+			['government', ['Name', 'Structure', 'Leadership', 'Strength', 'Tension']],
+			[
+				'religion',
+				[
+					'Name',
+					'Deity or Belief',
+					'Rites',
+					'Commandment',
+					'Taboo',
+					'Sacred Symbol',
+					'Religious Order',
+					'Holy Place',
+					'Relationship with Magic',
+				],
+			],
+		]) {
+			const entries = generatorCatalog.getCategory(categoryName)?.entries ?? [];
+			if (entries.some(entry => requiredFields.some(field => !entry.fields?.[field]))) {
+				errors.push(`Generator category ${categoryName} is missing required fields.`);
+			}
+		}
+		if (
+			generatorCatalog.getCategory('loot')
+			|| generatorCatalog.getCategory('power')
+			|| generatorCatalog.getCategory('enemy')
+			|| generatorCatalog.getCategory('location')
+		) {
+			errors.push('An obsolete generator category still exists.');
 		}
 		const armors = generatorCatalog.getCategory('armors')?.entries ?? [];
 		const armorCombinations = new Set(armors.map(
@@ -317,12 +379,18 @@ function checkGeneratorCatalog() {
 		) {
 			errors.push('The armor generator must contain every type and rarity combination.');
 		}
-		const commonRaceNames = ['Human', 'Elf', 'Dwarf', 'Halfling', 'Orc', 'Goblin'];
-		const raceNames = new Set(
-			generatorCatalog.getCategory('race')?.entries.map(entry => entry.fields.Name),
-		);
-		if (commonRaceNames.some(name => !raceNames.has(name))) {
-			errors.push('The race generator is missing common fantasy races.');
+		const races = generatorCatalog.getCategory('race')?.entries ?? [];
+		const commonRaceNames = ['Human', 'Elf', 'Dwarf', 'Orc', 'Goblin'];
+		const raceNames = new Set(races.map(entry => entry.fields.Name));
+		if (
+			commonRaceNames.some(name => !raceNames.has(name))
+			|| races.some(entry => (
+				!entry.fields.Description
+				|| !entry.fields['Skill Bonus']
+				|| !entry.fields['Physical Ability']
+			))
+		) {
+			errors.push('Race entries must expose names, descriptions, and racial traits.');
 		}
 		const generatedName = generatorCatalog.generate('name', () => 0)?.entry;
 		if (!generatedName?.fields?.FirstName || !generatedName.fields.LastName) {
@@ -492,6 +560,8 @@ function checkRandomCharacterGeneration() {
 		};
 		const character = new Character('D.Robert', 'dm');
 		populateRandomCharacter(character, { level: 10, random });
+		const generatedRace = generatorCatalog.getCategory('race').entries
+			.find(entry => entry.fields.Name === character.race.name);
 
 		if (
 			character.key !== 'D.Robert'
@@ -506,8 +576,9 @@ function checkRandomCharacterGeneration() {
 			|| character.goals
 			|| character.personality.traits.length !== 2
 			|| character.personality.description
-			|| character.racialTraits.skillBonus
+			|| character.racialTraits.skillBonus !== generatedRace?.fields['Skill Bonus']
 			|| character.racialTraits.physicalAbility
+				!== generatedRace?.fields['Physical Ability']
 		) {
 			errors.push('Generated identity or intentionally empty fields are incorrect.');
 		}

@@ -185,6 +185,12 @@ The catalog is cached for the process lifetime, so data changes require a restar
 
 Random character generation depends on exact category names and structured field
 labels. Before renaming generator fields, inspect `services/randomCharacterGenerator.js`.
+Race entries must expose `Name`, `Description`, `Skill Bonus`, and
+`Physical Ability`; generated characters copy the latter two into their racial
+traits. The expanded world-generation set includes `monster`, `animal`, `criminal`,
+`region`, `building`, `settlement`, `dungeon`, `room`, `companion`, `material`,
+`faction`, `government`, and `religion`. The older `enemy` and `location`
+categories are intentionally removed.
 At present it:
 
 - rolls level 1–10 when omitted;

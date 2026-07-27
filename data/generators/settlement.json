@@ -1,0 +1,28 @@
+{
+  "name": "settlement",
+  "description": "Communities, strongholds, camps, and population centers",
+  "entries": [
+    { "weight": 4, "value": "Farming Hamlet — twenty families clustered around a well, shrine, granary, and communal oven." },
+    { "weight": 4, "value": "Crossroads Village — inns, stables, traders, and craftspeople serving traffic from three roads." },
+    { "weight": 4, "value": "Fishing Village — boats, smokehouses, net sheds, and homes raised against seasonal floods." },
+    { "weight": 3, "value": "Walled Market Town — a prosperous regional center with gates, guilds, taxes, and crowded suburbs." },
+    { "weight": 3, "value": "Mining Town — rough housing and busy foundries beneath a wealthy company office and dangerous shafts." },
+    { "weight": 3, "value": "Pilgrim Town — hostels, relic sellers, healers, and rival temples surrounding a sacred destination." },
+    { "weight": 3, "value": "Frontier Fort — soldiers, settlers, workshops, and refugees sheltered behind unfinished defenses." },
+    { "weight": 3, "value": "Adventurer Camp — tents, supply stalls, healers, mercenaries, and rumor boards beside unexplored ruins." },
+    { "weight": 3, "value": "Hill Castle — a noble household and garrison overlooking farms gathered beneath its protection." },
+    { "weight": 2, "value": "River Port — warehouses, ferries, shipyards, customs officers, and floating neighborhoods." },
+    { "weight": 2, "value": "Coastal City — fortified harbors, foreign quarters, naval yards, markets, and competing merchant families." },
+    { "weight": 2, "value": "Monastery Community — monks, tenant farmers, guests, libraries, and workshops behind peaceful walls." },
+    { "weight": 2, "value": "Nomad Encampment — mobile homes, livestock enclosures, craft tents, and a council fire." },
+    { "weight": 2, "value": "Forest Enclave — homes integrated into living trees and protected by scouts who control every path." },
+    { "weight": 2, "value": "Mountain Hold — a fortified underground settlement built around mines, cisterns, and ancestral halls." },
+    { "weight": 2, "value": "Island Commune — a self-sufficient harbor settlement governed through public meetings and shared labor." },
+    { "weight": 1, "value": "Royal Capital — palace districts, ministries, slums, universities, barracks, and constant political theater." },
+    { "weight": 1, "value": "Free City — an independent trade metropolis balancing guilds, foreign powers, and citizen factions." },
+    { "weight": 1, "value": "Floating Settlement — boats and platforms permanently lashed together around a deep-water anchorage." },
+    { "weight": 1, "value": "Underground Refuge — descendants of disaster survivors living around finite water, light, and old machinery." },
+    { "weight": 1, "value": "Ruined City Camp — scavengers and scholars occupying defensible blocks of a much larger dead metropolis." },
+    { "weight": 1, "value": "Siege Camp — a temporary city of soldiers, engineers, merchants, prisoners, disease, and competing commanders." }
+  ]
+}

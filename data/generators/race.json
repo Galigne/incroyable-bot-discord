@@ -6,35 +6,45 @@
       "weight": 8,
       "fields": {
         "Name": "Human",
-        "Description": "Adaptable people found across nearly every region, with highly varied appearances, cultures, and traditions."
+        "Description": "Adaptable people found across nearly every region, with highly varied appearances, cultures, and traditions.",
+        "Skill Bonus": "+1 to History",
+        "Physical Ability": "Relentless Endurance: Humans suffer reduced fatigue from prolonged travel, heat, marching, pursuit, and repeated physical activity."
       }
     },
     {
       "weight": 6,
       "fields": {
         "Name": "Elf",
-        "Description": "Long-lived, sharp-featured people known for keen senses, graceful movement, and cultures deeply tied to magic or nature."
+        "Description": "Long-lived, sharp-featured people known for keen senses, graceful movement, and cultures deeply tied to magic or nature.",
+        "Skill Bonus": "+1 to Perception",
+        "Physical Ability": "Timeless Vitality: Elves age with extreme slowness, remaining physically healthy and mentally sharp for hundreds of years."
       }
     },
     {
       "weight": 6,
       "fields": {
         "Name": "Dwarf",
-        "Description": "Compact, sturdy people renowned for endurance, craftsmanship, clan traditions, and settlements carved into stone."
+        "Description": "Compact, sturdy people renowned for endurance, craftsmanship, clan traditions, and settlements carved into stone.",
+        "Skill Bonus": "+1 to Death-roll",
+        "Physical Ability": "Thick-Skinned: Dwarfs dense skin provides modest natural protection, allowing them to withstand unarmed blows and minor impacts better than other species when not wearing armor."
       }
     },
     {
       "weight": 5,
       "fields": {
         "Name": "Orc",
-        "Description": "Powerfully built people with prominent tusks and diverse cultures that often prize resilience, honor, and collective strength."
+        "Description": "Powerfully built people with prominent tusks and diverse cultures that often prize resilience, honor, and collective strength.",
+        "Skill Bonus": "+1 to Atletics",
+        "Physical Ability": "Iron Jaw: Orcs possess exceptionally powerful jaws, allowing their bites to cause serious injury and giving them an advantage when fighting at extremely close range."
       }
     },
     {
       "weight": 4,
       "fields": {
         "Name": "Goblin",
-        "Description": "Small, quick people with expressive features, sharp senses, and a talent for improvisation, trade, and inventive tools."
+        "Description": "Small, quick people with expressive features, sharp senses, and a talent for improvisation, trade, and inventive tools.",
+        "Skill Bonus": "+1 to Deception",
+        "Physical Ability": "Small Target: Goblins small stature makes them more difficult to hit with arrows, thrown weapons, and other projectiles, especially at longer distances."
       }
     }
   ]

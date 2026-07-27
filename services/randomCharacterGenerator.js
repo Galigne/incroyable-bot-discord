@@ -23,6 +23,8 @@ function populateRandomCharacter(character, options = {}) {
 	const race = pickOne('race', random);
 	character.race.name = getField(race, 'Name');
 	character.race.physicalDescription = getField(race, 'Description');
+	character.racialTraits.skillBonus = getField(race, 'Skill Bonus');
+	character.racialTraits.physicalAbility = getField(race, 'Physical Ability');
 
 	character.personality.traits = pickMany('personality', 2, random)
 		.map(getTextValue);

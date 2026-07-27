@@ -1,0 +1,28 @@
+{
+  "name": "animal",
+  "description": "Ordinary and fantastic friendly wildlife",
+  "entries": [
+    { "weight": 4, "value": "Mossback Deer — a calm forest grazer whose antlers host flowers, insects, and medicinal herbs." },
+    { "weight": 4, "value": "Lantern Finch — a tiny bird with glowing feathers that gathers near safe campsites." },
+    { "weight": 4, "value": "River Otter — a playful, clever swimmer that trades polished stones for food." },
+    { "weight": 3, "value": "Cloud Sheep — a woolly mountain animal light enough to survive long falls." },
+    { "weight": 3, "value": "Copper Fox — a curious red fox attracted to coins, keys, and quiet music." },
+    { "weight": 3, "value": "Burrow Pig — a sturdy forager able to locate roots, truffles, and shallow buried objects." },
+    { "weight": 3, "value": "Long-Eared Hare — an alert grassland animal that stamps before storms or approaching danger." },
+    { "weight": 3, "value": "Bluehorn Goat — a sure-footed cliff grazer with mineral-rich blue horns." },
+    { "weight": 3, "value": "Reed Crane — a patient marsh bird often following travelers through safe water." },
+    { "weight": 3, "value": "Honey Bear — a small gentle bear with golden fur and an excellent memory for kindness." },
+    { "weight": 2, "value": "Sailback Turtle — a broad river turtle whose shell catches wind while swimming." },
+    { "weight": 2, "value": "Ember Newt — a warm-bodied amphibian commonly found sleeping beside ovens." },
+    { "weight": 2, "value": "Silk Alpaca — a mild-tempered herd animal producing unusually strong, soft fiber." },
+    { "weight": 2, "value": "Rain Frog — a bright frog whose call reliably predicts rainfall several hours ahead." },
+    { "weight": 2, "value": "Moon Moth — a hand-sized silver moth that feeds on magical residue without harming spells." },
+    { "weight": 2, "value": "Pebble Crab — a harmless shore crab that decorates its shell with colorful stones." },
+    { "weight": 2, "value": "Whistle Marmot — a social alpine rodent with distinct warning calls for different threats." },
+    { "weight": 2, "value": "Orchard Drake — a flightless lizard that eats pests and warms fruit trees during frost." },
+    { "weight": 1, "value": "Mist Dolphin — a pale coastal dolphin that guides lost vessels away from reefs." },
+    { "weight": 1, "value": "Star Elk — a rare nocturnal deer whose coat resembles the current night sky." },
+    { "weight": 1, "value": "Memory Crow — a friendly black bird able to repeat one sentence it heard years ago." },
+    { "weight": 1, "value": "Glimmer Whale — a gentle deep-sea giant whose songs make plankton shine." }
+  ]
+}
