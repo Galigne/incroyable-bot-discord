@@ -576,22 +576,22 @@ Each armor is designed to absorb physical and magical damage. The level of **pro
 <u>Armor types by [constitution](#constitution)</u>
 
 - **Light** (`Constitution >= 0`): `0 to 45 %` of [HP](#hit-points-hp) converted into armor.
-  - common: `0 %`
-  - uncommon: `10 %`
-  - rare: `20 %`
-  - epic: `30 %`
+  - common: `5 %`
+  - uncommon: `15 %`
+  - rare: `25 %`
+  - epic: `35 %`
   - legendary: `45 %`
 - **Medium** (`Constitution >= 12`): `20 to 65 %` of [HP](#hit-points-hp) converted into armor.
-  - common: `20 %`
-  - uncommon: `30 %`
-  - rare: `40 %`
-  - epic: `50 %`
+  - common: `25 %`
+  - uncommon: `35 %`
+  - rare: `45 %`
+  - epic: `55 %`
   - legendary: `65 %`
 - **Heavy** (`Constitution >= 14`): `40 to 85 %` of [HP](#hit-points-hp) converted into armor.
-  - common: `40 %`
-  - uncommon: `50 %`
-  - rare: `60 %`
-  - epic: `70 %`
+  - common: `45 %`
+  - uncommon: `55 %`
+  - rare: `65 %`
+  - epic: `75 %`
   - legendary: `85 %`
 
 <u>Exceptions</u>

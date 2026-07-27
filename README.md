@@ -39,6 +39,7 @@ Never commit `.env` or a Discord token. Reset any token that has previously been
 - `/rpg edit character-key:<key> field:<field>` — edit one field in a prefilled form
 - `/rpg edit-help` — list editable fields and explain multiline form values
 - `/rpg rest character-key:<key> resource:<HP|AR> percentage:<0-100>` — restore a resource
+- `/rpg deal character-key:<key> damage-amount:<number> [piercing]` — apply damage to AR, then HP
 - `/rpg end-turn character-key:<key>` — restore AP and MD to their maximum values
 
 Discord provides native validation and choices for constrained options.
@@ -62,6 +63,7 @@ Example workflows:
 /rpg edit character-key:D.Robert field:rules
 /rpg view character-key:D.Robert
 /rpg view character-key:D.Robert field:personality
+/rpg deal character-key:D.Robert damage-amount:25 piercing:false
 /rpg rest character-key:D.Robert resource:HP percentage:50
 /rpg end-turn character-key:D.Robert
 ```

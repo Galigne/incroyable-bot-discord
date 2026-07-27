@@ -4,6 +4,7 @@ const {
 	SlashCommandBuilder,
 } = require('discord.js');
 const add = require('./subcommands/add');
+const deal = require('./subcommands/deal');
 const remove = require('./subcommands/delete');
 const edit = require('./subcommands/edit');
 const editHelp = require('./subcommands/edithelp');
@@ -21,6 +22,7 @@ const { authorizeCommand } = require('../../util/authorization');
 
 const subcommands = new Map([
 	[add.name, add],
+	[deal.name, deal],
 	[remove.name, remove],
 	[edit.name, edit],
 	[editHelp.name, editHelp],
@@ -46,6 +48,7 @@ module.exports = {
 		.setDescription('Generate prompts and manage RPG character sheets')
 		.setContexts(InteractionContextType.Guild)
 		.addSubcommand(add.configure)
+		.addSubcommand(deal.configure)
 		.addSubcommand(remove.configure)
 		.addSubcommand(edit.configure)
 		.addSubcommand(editHelp.configure)

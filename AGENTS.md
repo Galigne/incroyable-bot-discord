@@ -158,6 +158,8 @@ Resources and display:
 - AP uses filled/spent star icons for the raw current/max values.
 - HP, AR, and MD use ten-icon percentage bars.
 - `/rpg rest` supports only HP or AR and sets current to a percentage of maximum.
+- `/rpg deal` applies positive whole-number damage to current AR first, then current
+  HP. With `piercing:true`, it bypasses AR. Piercing defaults to false.
 - `/rpg end-turn` restores current AP and MD to maximum.
 
 ## Random generators

@@ -14,6 +14,7 @@ const testSavesDirectory = fs.mkdtempSync(
 process.env.INCREDIBLE_BOT_SAVE_DIRECTORY = testSavesDirectory;
 const characterStore = require('../services/characterStore');
 const {
+	dealDamage,
 	getEditableFieldValue,
 	resetTurnResources,
 	restoreResource,
@@ -123,6 +124,7 @@ function checkRpgStructure(commands) {
 
 	const expectedSubcommands = [
 		'add',
+		'deal',
 		'delete',
 		'edit',
 		'edit-help',
@@ -213,6 +215,8 @@ function checkSlashCommandData(commands) {
 	const hasAutocomplete = (subcommand, optionName) => getSubcommand(subcommand)
 		?.options.find(option => option.name === optionName)?.autocomplete === true;
 	for (const [subcommand, optionName] of [
+		['deal', 'character-key'],
+		['deal', 'damage-amount'],
 		['delete', 'character-key'],
 		['edit', 'character-key'],
 		['edit', 'field'],
@@ -545,6 +549,38 @@ function checkCharacterModel() {
 			}
 		}
 		original.resources.hp.current = 1;
+		original.resources.ar.current = 30;
+		original.resources.hp.current = 100;
+		const armoredDamage = dealDamage(original, 40);
+		if (
+			armoredDamage.arDamage !== 30
+			|| armoredDamage.hpDamage !== 10
+			|| original.resources.ar.current !== 0
+			|| original.resources.hp.current !== 90
+		) {
+			errors.push('Normal damage does not reduce AR before HP.');
+		}
+		original.resources.ar.current = 20;
+		const piercingDamage = dealDamage(original, 15, true);
+		if (
+			piercingDamage.arDamage !== 0
+			|| piercingDamage.hpDamage !== 15
+			|| original.resources.ar.current !== 20
+			|| original.resources.hp.current !== 75
+		) {
+			errors.push('Piercing damage does not bypass AR.');
+		}
+		try {
+			dealDamage(original, 0);
+			errors.push('Non-positive damage should be rejected.');
+		}
+		catch (error) {
+			if (error.code !== 'INVALID_CHARACTER_EDIT') {
+				throw error;
+			}
+		}
+		original.resources.hp.current = 1;
+		original.resources.ar.current = 0;
 		original.resources.ap.current = 0;
 		original.resources.md.current = 0;
 		restoreResource(original, 'hp', 50);

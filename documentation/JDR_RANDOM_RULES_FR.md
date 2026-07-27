@@ -574,22 +574,22 @@ Chaque armure est conçue pour absorber les dégâts physiques et magiques. Le n
 <u>Types d'armure selon la [constitution](#constitution)</u>
 
 - **Légère** (`Constitution >= 0`) : `0 à 45 %` des [PV](#points-de-vie-pv) convertis en armure.
-  - commun : `0 %`
-  - peu commun : `10 %`
-  - rare : `20 %`
-  - épique : `30 %`
+  - commun : `5 %`
+  - peu commun : `15 %`
+  - rare : `25 %`
+  - épique : `35 %`
   - légendaire : `45 %`
 - **Intermédiaire** (`Constitution >= 12`) : `20 à 65 %` des [PV](#points-de-vie-pv) convertis en armure.
-  - commun : `20 %`
-  - peu commun : `30 %`
-  - rare : `40 %`
-  - épique : `50 %`
+  - commun : `25 %`
+  - peu commun : `35 %`
+  - rare : `45 %`
+  - épique : `55 %`
   - légendaire : `65 %`
 - **Lourde** (`Constitution >= 14`) : `40 à 85 %` des [PV](#points-de-vie-pv) convertis en armure.
-  - commun : `40 %`
-  - peu commun : `50 %`
-  - rare : `60 %`
-  - épique : `70 %`
+  - commun : `45 %`
+  - peu commun : `55 %`
+  - rare : `65 %`
+  - épique : `75 %`
   - légendaire : `85 %`
 
 <u>Exceptions</u>
