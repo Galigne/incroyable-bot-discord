@@ -1,13 +1,22 @@
+const {
+	InteractionContextType,
+	SlashCommandBuilder,
+} = require('discord.js');
+
 module.exports = {
 	name: 'restart',
 	description: 'Reconnect the bot to Discord',
-	usage: '!restart',
+	usage: '/restart',
 	helpOrder: 70,
 	access: {
 		role: 'moderator',
 	},
-	async execute({ client, message, token }) {
-		await message.channel.send('Reconnecting...');
+	data: new SlashCommandBuilder()
+		.setName('restart')
+		.setDescription('Reconnect the bot to Discord')
+		.setContexts(InteractionContextType.Guild),
+	async execute({ client, interaction, token }) {
+		await interaction.reply('Reconnecting...');
 		client.destroy();
 		await client.login(token);
 	},

@@ -2,44 +2,74 @@ const characterStore = require('../../../services/characterStore');
 const { restoreResource } = require('../../../services/characterEditor');
 const { canManageCharacters } = require('../../../util/characterAuthorization');
 const { replyToCharacterError } = require('../../../util/characterCommandErrors');
+const { filterAutocompleteChoices } = require('../../../util/autocomplete');
+const { getCharacterChoices } = require('../autocomplete');
+
+const COMMON_REST_PERCENTAGES = [0, 25, 50, 75, 100];
 
 module.exports = {
 	name: 'rest',
 	description: 'Restore current HP or AR to a percentage of its maximum',
-	usage: '!rpg rest <characterKey> <HP|AR> <percentage>',
+	usage: '/rpg rest character-key:<key> resource:<HP|AR> percentage:<0-100>',
 	helpOrder: 50,
-	async execute({ args, config, message }) {
-		const [characterName, resourceName, percentageValue] = args;
-		const resource = resourceName?.toLowerCase();
-		const percentage = Number(percentageValue?.replace(/%$/, ''));
-		if (
-			!characterName
-			|| !['hp', 'ar'].includes(resource)
-			|| !Number.isFinite(percentage)
-			|| percentage < 0
-			|| percentage > 100
-		) {
-			await message.reply('Usage: `!rpg rest <characterKey> <HP|AR> <0-100%>`');
+	configure: command => command
+		.setName('rest')
+		.setDescription('Restore current HP or AR to a percentage of its maximum')
+		.addStringOption(option => option
+			.setName('character-key')
+			.setDescription('Character receiving the rest')
+			.setAutocomplete(true)
+			.setRequired(true))
+		.addStringOption(option => option
+			.setName('resource')
+			.setDescription('Resource to restore')
+			.addChoices(
+				{ name: 'HP', value: 'hp' },
+				{ name: 'AR', value: 'ar' },
+			)
+			.setRequired(true))
+		.addNumberOption(option => option
+			.setName('percentage')
+			.setDescription('Percentage of the maximum to restore to')
+			.setMinValue(0)
+			.setMaxValue(100)
+			.setAutocomplete(true)
+			.setRequired(true)),
+	async autocomplete({ interaction }) {
+		const focused = interaction.options.getFocused(true);
+		if (focused.name === 'character-key') {
+			await interaction.respond(await getCharacterChoices(focused.value));
 			return;
 		}
-
+		await interaction.respond(filterAutocompleteChoices(
+			COMMON_REST_PERCENTAGES.map(value => ({
+				name: `${value}%`,
+				value,
+			})),
+			focused.value,
+		));
+	},
+	async execute({ config, interaction }) {
+		const characterName = interaction.options.getString('character-key', true);
+		const resource = interaction.options.getString('resource', true);
+		const percentage = interaction.options.getNumber('percentage', true);
 		try {
 			const character = await characterStore.updateCharacter(
 				characterName,
-				message.author.id,
-				canManageCharacters(message, config),
+				interaction.user.id,
+				canManageCharacters(interaction, config),
 				currentCharacter => {
 					restoreResource(currentCharacter, resource, percentage);
 				},
 			);
 			const target = character.resources[resource];
-			await message.reply(
+			await interaction.reply(
 				`**${character.displayName}** now has ${target.current}/${target.max} `
 				+ `${resource.toUpperCase()} (${percentage}%).`,
 			);
 		}
 		catch (error) {
-			if (!await replyToCharacterError(message, error)) {
+			if (!await replyToCharacterError(interaction, error)) {
 				throw error;
 			}
 		}

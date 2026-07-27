@@ -1,3 +1,7 @@
+const {
+	InteractionContextType,
+	SlashCommandBuilder,
+} = require('discord.js');
 const add = require('./subcommands/add');
 const remove = require('./subcommands/delete');
 const edit = require('./subcommands/edit');
@@ -32,30 +36,55 @@ const subcommands = new Map([
 module.exports = {
 	name: 'rpg',
 	description: 'Generate prompts and manage RPG character sheets',
-	usage: '!rpg help',
+	usage: '/rpg',
 	helpOrder: 30,
+	data: new SlashCommandBuilder()
+		.setName('rpg')
+		.setDescription('Generate prompts and manage RPG character sheets')
+		.setContexts(InteractionContextType.Guild)
+		.addSubcommand(add.configure)
+		.addSubcommand(remove.configure)
+		.addSubcommand(edit.configure)
+		.addSubcommand(editHelp.configure)
+		.addSubcommand(endTurn.configure)
+		.addSubcommand(generate.configure)
+		.addSubcommand(generateCharacter.configure)
+		.addSubcommand(generateList.configure)
+		.addSubcommand(help.configure)
+		.addSubcommand(rest.configure)
+		.addSubcommand(rules.configure)
+		.addSubcommand(view.configure)
+		.addSubcommand(viewHelp.configure),
 	subcommands,
 	async execute(context) {
-		const [requestedSubcommand, ...subcommandArgs] = context.args;
-		if (!requestedSubcommand) {
-			await context.message.reply('Use `!rpg help` to list the available RPG commands.');
-			return;
-		}
-
-		const subcommand = subcommands.get(requestedSubcommand.toLowerCase());
-		if (subcommand) {
-			const authorization = authorizeCommand(subcommand, context.message, context.config);
-			if (!authorization.allowed) {
-				await context.message.reply(authorization.message);
-				return;
-			}
-			await subcommand.execute({ ...context, args: subcommandArgs });
-			return;
-		}
-
-		await context.message.reply(
-			`Unknown RPG command: **${requestedSubcommand}**. `
-			+ 'Use `!rpg help` to list the available RPG commands.',
+		const requestedSubcommand = context.interaction.options.getSubcommand();
+		const subcommand = subcommands.get(requestedSubcommand);
+		const authorization = authorizeCommand(
+			subcommand,
+			context.interaction,
+			context.config,
 		);
+		if (!authorization.allowed) {
+			await context.interaction.reply({
+				content: authorization.message,
+				ephemeral: true,
+			});
+			return;
+		}
+		await subcommand.execute(context);
+	},
+	async autocomplete(context) {
+		const requestedSubcommand = context.interaction.options.getSubcommand();
+		const subcommand = subcommands.get(requestedSubcommand);
+		const authorization = authorizeCommand(
+			subcommand,
+			context.interaction,
+			context.config,
+		);
+		if (!authorization.allowed || !subcommand?.autocomplete) {
+			await context.interaction.respond([]);
+			return;
+		}
+		await subcommand.autocomplete(context);
 	},
 };

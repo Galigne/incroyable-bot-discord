@@ -3,29 +3,37 @@ const characterStore = require('../../../services/characterStore');
 module.exports = {
 	name: 'add',
 	description: 'Create a blank character sheet with a stable CharacterKey',
-	usage: '!rpg add <characterKey>',
+	usage: '/rpg add character-key:<new key>',
 	helpOrder: 20,
-	async execute({ args, message }) {
-		const [characterKey] = args;
-		if (!characterKey) {
-			await message.reply('Usage: `!rpg add <characterKey>`');
-			return;
-		}
+	configure: command => command
+		.setName('add')
+		.setDescription('Create a blank character sheet with a stable CharacterKey')
+		.addStringOption(option => option
+			.setName('character-key')
+			.setDescription('Unique save key, for example D.Robert')
+			.setMinLength(1)
+			.setMaxLength(50)
+			.setRequired(true)),
+	async execute({ interaction }) {
+		const characterKey = interaction.options.getString('character-key', true);
 		try {
-			await characterStore.createCharacter(characterKey, message.author.id);
-			await message.reply(
+			await characterStore.createCharacter(characterKey, interaction.user.id);
+			await interaction.reply(
 				`Character with key \`${characterKey}\` was created. `
-				+ 'This CharacterKey cannot be edited. Use `!rpg editHelp` to set '
+				+ 'This CharacterKey cannot be edited. Use `/rpg edit-help` to set '
 				+ 'its first name, last name, and other fields.',
 			);
 		}
 		catch (error) {
 			if (error.code === 'EEXIST') {
-				await message.reply('A character with that key already exists.');
+				await interaction.reply({
+					content: 'A character with that key already exists.',
+					ephemeral: true,
+				});
 				return;
 			}
 			if (error.code === 'INVALID_CHARACTER_NAME') {
-				await message.reply(error.message);
+				await interaction.reply({ content: error.message, ephemeral: true });
 				return;
 			}
 			throw error;

@@ -1,4 +1,6 @@
 const characterStore = require('../../../services/characterStore');
+const { filterAutocompleteChoices } = require('../../../util/autocomplete');
+const { getCharacterChoices } = require('../autocomplete');
 
 const VIEW_FIELDS = [
 	'name',
@@ -25,8 +27,8 @@ const VIEW_FIELDS = [
 ];
 
 const VIEW_HELP = [
-	'Use `!rpg view <characterKey>` to display the character-sheet summary.',
-	'Use `!rpg view <characterKey> <field>` to display one complete field and its sub-fields.',
+	'Use `/rpg view` to display a character-sheet summary.',
+	'Select the optional `field` to display one complete field and its sub-fields.',
 	'',
 	'**Available fields**',
 	'`name` — first name and last name',
@@ -43,51 +45,71 @@ const VIEW_HELP = [
 	'`statusEffects`, `equipment`, `inventory`, `encumbrance`',
 	'',
 	'**Examples**',
-	'`!rpg view D.Robert`',
-	'`!rpg view D.Robert name`',
-	'`!rpg view D.Robert personality`',
-	'`!rpg view D.Robert race`',
-	'`!rpg view D.Robert rules`',
-	'`!rpg view D.Robert status`',
+	'Select CharacterKey `D.Robert` for the summary.',
+	'Then optionally select `name`, `personality`, `race`, `rules`, or `status`.',
 ].join('\n');
 
 module.exports = {
 	name: 'view',
 	description: 'Display a character summary or one detailed field',
-	usage: '!rpg view <characterKey> [field]',
+	usage: '/rpg view character-key:<key> [field]',
 	helpOrder: 30,
-	async execute({ args, message }) {
-		const [name, fieldName] = args;
-		if (!name) {
-			await message.reply('Usage: `!rpg view <characterKey> [field]`');
+	configure: command => command
+		.setName('view')
+		.setDescription('Display a character summary or one detailed field')
+		.addStringOption(option => option
+			.setName('character-key')
+			.setDescription('Character to display')
+			.setAutocomplete(true)
+			.setRequired(true))
+		.addStringOption(option => option
+			.setName('field')
+			.setDescription('Optional detailed field')
+			.setAutocomplete(true)),
+	async autocomplete({ interaction }) {
+		const focused = interaction.options.getFocused(true);
+		if (focused.name === 'character-key') {
+			await interaction.respond(await getCharacterChoices(focused.value));
 			return;
 		}
+		await interaction.respond(filterAutocompleteChoices(
+			VIEW_FIELDS.map(field => ({ name: field, value: field })),
+			focused.value,
+		));
+	},
+	async execute({ interaction }) {
+		const name = interaction.options.getString('character-key', true);
+		const fieldName = interaction.options.getString('field');
 		try {
 			const character = await characterStore.getCharacter(name);
 			const embed = fieldName
 				? character.toFieldEmbed(fieldName)
 				: character.toEmbed();
 			if (!embed) {
-				await message.reply(
-					`Unknown character field: **${fieldName}**. `
-					+ 'Use `!rpg viewHelp` to list the available fields.',
-				);
+				await interaction.reply({
+					content: `Unknown character field: **${fieldName}**. `
+						+ 'Use `/rpg view-help` to list the available fields.',
+					ephemeral: true,
+				});
 				return;
 			}
 			embed.setFooter({
 				text: fieldName
 					? `Character key: ${name}`
-					: `Use !rpg view ${name} <field> for more details.`,
+					: 'Use /rpg view with the field option for more details.',
 			});
-			await message.channel.send({ embeds: [embed] });
+			await interaction.reply({ embeds: [embed] });
 		}
 		catch (error) {
 			if (error.code === 'ENOENT') {
-				await message.reply('That character does not exist.');
+				await interaction.reply({
+					content: 'That character does not exist.',
+					ephemeral: true,
+				});
 				return;
 			}
 			if (error.code === 'INVALID_CHARACTER_NAME') {
-				await message.reply(error.message);
+				await interaction.reply({ content: error.message, ephemeral: true });
 				return;
 			}
 			throw error;

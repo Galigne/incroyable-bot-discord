@@ -44,6 +44,25 @@ async function getCharacter(name) {
 	return Character.fromSave(JSON.parse(data), name);
 }
 
+async function listCharacters() {
+	await fs.mkdir(savesDirectory, { recursive: true });
+	const entries = await fs.readdir(savesDirectory, { withFileTypes: true });
+	const characters = await Promise.all(entries
+		.filter(entry => entry.isFile() && entry.name.endsWith('.json'))
+		.map(async entry => {
+			const key = entry.name.slice(0, -'.json'.length);
+			try {
+				return await getCharacter(key);
+			}
+			catch {
+				return null;
+			}
+		}));
+	return characters
+		.filter(Boolean)
+		.sort((left, right) => left.key.localeCompare(right.key));
+}
+
 async function saveCharacter(character, originalName = character.key) {
 	await fs.mkdir(savesDirectory, { recursive: true });
 	await fs.writeFile(
@@ -72,5 +91,6 @@ module.exports = {
 	createCharacter,
 	deleteCharacter,
 	getCharacter,
+	listCharacters,
 	updateCharacter,
 };

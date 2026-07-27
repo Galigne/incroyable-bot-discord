@@ -42,10 +42,12 @@ function validateCommand(command, commandFile) {
 		!command.name
 		|| !command.description
 		|| !Number.isFinite(command.helpOrder)
+		|| typeof command.data?.toJSON !== 'function'
 		|| typeof command.execute !== 'function'
 	) {
 		throw new Error(
-			`${commandFile} must export a name, description, numeric helpOrder, and execute function.`,
+			`${commandFile} must export a name, description, numeric helpOrder, `
+			+ 'slash-command data, and execute function.',
 		);
 	}
 }

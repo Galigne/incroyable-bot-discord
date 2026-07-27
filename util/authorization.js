@@ -5,7 +5,7 @@ const ROLE_GROUPS = {
 	owner: ['owner'],
 };
 
-function authorizeCommand(command, message, config) {
+function authorizeCommand(command, interaction, config) {
 	const requiredRole = command.access?.role ?? 'member';
 	const allowedRoleKeys = ROLE_GROUPS[requiredRole];
 	if (!allowedRoleKeys) {
@@ -13,8 +13,10 @@ function authorizeCommand(command, message, config) {
 	}
 
 	const allowedRoleIds = allowedRoleKeys.map(role => config.roles[role]);
-	const hasAllowedRole = message.member.roles.cache
-		.some(role => allowedRoleIds.includes(role.id));
+	const memberRoles = interaction.member?.roles;
+	const hasAllowedRole = memberRoles?.cache
+		? memberRoles.cache.some(role => allowedRoleIds.includes(role.id))
+		: Array.isArray(memberRoles) && memberRoles.some(roleId => allowedRoleIds.includes(roleId));
 	if (!hasAllowedRole) {
 		return {
 			allowed: false,
@@ -25,7 +27,7 @@ function authorizeCommand(command, message, config) {
 	const channelKeys = command.access?.channels;
 	if (channelKeys) {
 		const allowedChannelIds = channelKeys.map(channel => config.channels[channel]);
-		if (!allowedChannelIds.includes(message.channel.id)) {
+		if (!allowedChannelIds.includes(interaction.channelId ?? interaction.channel?.id)) {
 			return {
 				allowed: false,
 				message: 'This command cannot be used in this channel.',

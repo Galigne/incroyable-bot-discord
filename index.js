@@ -14,8 +14,17 @@ const token = process.env.DISCORD_TOKEN?.trim();
 const client = new Client();
 client.commands = loadCommands(path.join(__dirname, 'commands'));
 
-client.once(Events.ClientReady, readyClient => {
+client.once(Events.ClientReady, async readyClient => {
 	console.log(`Logged in as ${readyClient.user.tag}.`);
+	try {
+		await readyClient.application.commands.set(
+			[...readyClient.commands.values()].map(command => command.data.toJSON()),
+		);
+		console.log(`Registered ${readyClient.commands.size} global slash commands.`);
+	}
+	catch (error) {
+		console.error('Could not register slash commands:', error);
+	}
 });
 
 client.on(Events.ShardReconnecting, shardId => {
@@ -26,42 +35,67 @@ client.on(Events.ShardDisconnect, (event, shardId) => {
 	console.log(`Shard ${shardId} disconnected with code ${event.code}.`);
 });
 
-client.on(Events.MessageCreate, async message => {
-	if (message.author.bot || !message.inGuild() || !message.content.startsWith(config.prefix)) {
+client.on(Events.InteractionCreate, async interaction => {
+	if (!interaction.inGuild()) {
 		return;
 	}
 
-	const args = message.content.slice(config.prefix.length).trim().split(/\s+/);
-	const commandName = args.shift()?.toLowerCase();
-	if (!commandName) {
-		return;
-	}
-
-	const command = client.commands.get(commandName);
+	const command = client.commands.get(interaction.commandName);
 	if (!command) {
 		return;
 	}
 
-	const authorization = authorizeCommand(command, message, config);
+	if (interaction.isAutocomplete()) {
+		try {
+			const authorization = authorizeCommand(command, interaction, config);
+			if (!authorization.allowed || !command.autocomplete) {
+				await interaction.respond([]);
+				return;
+			}
+			await command.autocomplete({ client, config, interaction });
+		}
+		catch (error) {
+			console.error(`Autocomplete failed for /${interaction.commandName}:`, error);
+			await interaction.respond([]).catch(() => {});
+		}
+		return;
+	}
+
+	if (!interaction.isChatInputCommand()) {
+		return;
+	}
+
+	const authorization = authorizeCommand(command, interaction, config);
 	if (!authorization.allowed) {
 		if (authorization.message) {
-			await message.reply(authorization.message);
+			await interaction.reply({
+				content: authorization.message,
+				ephemeral: true,
+			});
 		}
 		return;
 	}
 
 	try {
 		await command.execute({
-			args,
 			client,
 			config,
-			message,
+			interaction,
 			token,
 		});
 	}
 	catch (error) {
-		console.error(`Error while running the ${commandName} command:`, error);
-		await message.reply('Something went wrong while running that command.').catch(() => {});
+		console.error(`Error while running /${interaction.commandName}:`, error);
+		const response = {
+			content: 'Something went wrong while running that command.',
+			ephemeral: true,
+		};
+		if (interaction.replied || interaction.deferred) {
+			await interaction.followUp(response).catch(() => {});
+		}
+		else {
+			await interaction.reply(response).catch(() => {});
+		}
 	}
 });
 

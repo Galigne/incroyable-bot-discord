@@ -22,7 +22,7 @@ function editCharacter(character, fieldName, args) {
 	}
 
 	throw editError(
-		`Unknown field: ${fieldName}. Use \`!rpg editHelp\` to list editable fields.`,
+		`Unknown field: ${fieldName}. Use \`/rpg edit-help\` to list editable fields.`,
 	);
 }
 

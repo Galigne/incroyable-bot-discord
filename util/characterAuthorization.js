@@ -6,8 +6,8 @@ const dmOnlyCommand = {
 	},
 };
 
-function canManageCharacters(message, config) {
-	return authorizeCommand(dmOnlyCommand, message, config).allowed;
+function canManageCharacters(interaction, config) {
+	return authorizeCommand(dmOnlyCommand, interaction, config).allowed;
 }
 
 module.exports = { canManageCharacters };

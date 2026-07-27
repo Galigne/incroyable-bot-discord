@@ -1,32 +1,47 @@
 const { EmbedBuilder } = require('discord.js');
 const generatorCatalog = require('../../../services/generatorCatalog');
+const { filterAutocompleteChoices } = require('../../../util/autocomplete');
 
 module.exports = {
 	name: 'generate',
 	description: 'Generate GM inspiration from a chosen category (DM only)',
-	usage: '!rpg generate <category>',
+	usage: '/rpg generate category:<category>',
 	helpOrder: 10,
 	access: {
 		role: 'dm',
 	},
-	async execute({ args, message }) {
-		const requestedCategory = args.join(' ').trim();
-		if (!requestedCategory) {
-			await message.reply('Usage: `!rpg generate <category>`');
-			return;
-		}
-
+	configure: command => command
+		.setName('generate')
+		.setDescription('Generate GM inspiration from a chosen category')
+		.addStringOption(option => option
+			.setName('category')
+			.setDescription('Generator category')
+			.setAutocomplete(true)
+			.setRequired(true)),
+	async autocomplete({ interaction }) {
+		const categories = generatorCatalog.listCategories();
+		await interaction.respond(filterAutocompleteChoices(
+			categories.map(category => ({
+				name: `${category.name} — ${category.description}`.slice(0, 100),
+				value: category.name,
+			})),
+			interaction.options.getFocused(),
+		));
+	},
+	async execute({ interaction }) {
+		const requestedCategory = interaction.options.getString('category', true);
 		const result = generatorCatalog.generate(requestedCategory);
 		if (!result) {
-			await message.reply(
-				`Unknown generator category: **${requestedCategory}**. `
-				+ 'Use `!rpg generateList` to see the available categories.',
-			);
+			await interaction.reply({
+				content: `Unknown generator category: **${requestedCategory}**. `
+					+ 'Use `/rpg generate-list` to see the available categories.',
+				ephemeral: true,
+			});
 			return;
 		}
 
 		const embed = createGeneratedEmbed(result);
-		await message.channel.send({ embeds: [embed] });
+		await interaction.reply({ embeds: [embed] });
 	},
 };
 

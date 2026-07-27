@@ -1,12 +1,20 @@
-const { EmbedBuilder } = require('discord.js');
+const {
+	EmbedBuilder,
+	InteractionContextType,
+	SlashCommandBuilder,
+} = require('discord.js');
 const { sortByHelpOrder } = require('../util/sortByHelpOrder');
 
 module.exports = {
 	name: 'help',
 	description: 'List all available commands',
-	usage: '!help',
+	usage: '/help',
 	helpOrder: 10,
-	async execute({ client, message }) {
+	data: new SlashCommandBuilder()
+		.setName('help')
+		.setDescription('List all available commands')
+		.setContexts(InteractionContextType.Guild),
+	async execute({ client, interaction }) {
 		const embed = new EmbedBuilder()
 			.setTitle('Gon Freecss')
 			.setDescription('Available commands')
@@ -20,6 +28,6 @@ module.exports = {
 			});
 		}
 
-		await message.channel.send({ embeds: [embed] });
+		await interaction.reply({ embeds: [embed] });
 	},
 };

@@ -7,7 +7,7 @@ const replyableErrorCodes = new Set([
 	'NOT_CHARACTER_EDITOR',
 ]);
 
-async function replyToCharacterError(message, error) {
+async function replyToCharacterError(interaction, error) {
 	if (!replyableErrorCodes.has(error.code)) {
 		return false;
 	}
@@ -17,7 +17,7 @@ async function replyToCharacterError(message, error) {
 		ENOENT: 'That character does not exist.',
 	};
 	const response = responses[error.code] ?? error.message;
-	await message.reply(response);
+	await interaction.reply({ content: response, ephemeral: true });
 	return true;
 }
 

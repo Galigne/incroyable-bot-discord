@@ -32,7 +32,7 @@ async function main() {
 	const commands = checkCommands();
 	checkHelpOrder(commands.values(), 'top-level commands');
 	checkRpgStructure(commands);
-	await checkRpgRouting(commands);
+	checkSlashCommandData(commands);
 	checkGeneratorCatalog();
 	checkCharacterModel();
 	checkRandomCharacterGeneration();
@@ -90,16 +90,16 @@ function checkRpgStructure(commands) {
 		'add',
 		'delete',
 		'edit',
-		'edithelp',
-		'endturn',
+		'edit-help',
+		'end-turn',
 		'generate',
-		'generatecharacter',
-		'generatelist',
+		'generate-character',
+		'generate-list',
 		'help',
 		'rest',
 		'rules',
 		'view',
-		'viewhelp',
+		'view-help',
 	];
 	const actualSubcommands = [...rpgCommand.subcommands.keys()].sort();
 	if (actualSubcommands.join(',') !== expectedSubcommands.join(',')) {
@@ -110,6 +110,7 @@ function checkRpgStructure(commands) {
 			!subcommand.description
 			|| !subcommand.usage
 			|| !Number.isFinite(subcommand.helpOrder)
+			|| typeof subcommand.configure !== 'function'
 			|| typeof subcommand.execute !== 'function'
 		) {
 			errors.push(`Invalid RPG subcommand: ${subcommand.name}`);
@@ -118,26 +119,24 @@ function checkRpgStructure(commands) {
 	checkHelpOrder(rpgCommand.subcommands.values(), 'RPG subcommands');
 }
 
-async function checkRpgRouting(commands) {
-	const replies = [];
-	const context = {
-		args: [],
-		config,
-		message: {
-			reply: async message => replies.push(message),
-		},
-	};
-	const rpgCommand = commands.get('rpg');
-	await rpgCommand.execute(context);
-	await rpgCommand.execute({ ...context, args: ['UnknownCharacter'] });
-	if (
-		replies.length !== 2
-		|| !replies[0].includes('!rpg help')
-		|| !replies[1].includes('Unknown RPG command')
-	) {
-		errors.push('RPG commands should require an explicit subcommand.');
+function checkSlashCommandData(commands) {
+	const expectedCommands = ['help', 'purge', 'restart', 'roll', 'rpg', 'say'];
+	if ([...commands.keys()].sort().join(',') !== expectedCommands.join(',')) {
+		errors.push(`Unexpected slash commands: ${[...commands.keys()].sort().join(', ')}.`);
 	}
 
+	for (const command of commands.values()) {
+		const data = command.data.toJSON();
+		if (
+			data.name !== command.name
+			|| data.description !== command.description
+			|| command.usage.startsWith('!')
+		) {
+			errors.push(`Invalid slash-command metadata: ${command.name}.`);
+		}
+	}
+
+	const rpgCommand = commands.get('rpg');
 	const viewCommand = rpgCommand.subcommands.get('view');
 	if (
 		viewCommand.VIEW_HELP.length > 2_000
@@ -145,6 +144,53 @@ async function checkRpgRouting(commands) {
 		|| !viewCommand.VIEW_FIELDS.includes('status')
 	) {
 		errors.push('The RPG view help is missing required fields or exceeds Discord limits.');
+	}
+
+	const slashSubcommands = rpgCommand.data.toJSON().options.map(option => option.name);
+	if (
+		slashSubcommands.length !== rpgCommand.subcommands.size
+		|| slashSubcommands.some(name => !rpgCommand.subcommands.has(name))
+	) {
+		errors.push('The /rpg schema and routed subcommands do not match.');
+	}
+
+	const rpgData = rpgCommand.data.toJSON();
+	const getSubcommand = name => rpgData.options.find(option => option.name === name);
+	const hasAutocomplete = (subcommand, optionName) => getSubcommand(subcommand)
+		?.options.find(option => option.name === optionName)?.autocomplete === true;
+	for (const [subcommand, optionName] of [
+		['delete', 'character-key'],
+		['edit', 'character-key'],
+		['edit', 'field'],
+		['edit', 'value'],
+		['end-turn', 'character-key'],
+		['generate', 'category'],
+		['generate-character', 'level'],
+		['rest', 'character-key'],
+		['rest', 'percentage'],
+		['view', 'character-key'],
+		['view', 'field'],
+	]) {
+		if (!hasAutocomplete(subcommand, optionName)) {
+			errors.push(`Missing autocomplete for /rpg ${subcommand} ${optionName}.`);
+		}
+	}
+
+	for (const commandName of ['roll', 'purge']) {
+		const option = commands.get(commandName).data.toJSON().options[0];
+		if (!option.autocomplete) {
+			errors.push(`Missing autocomplete for /${commandName}.`);
+		}
+	}
+
+	const indexSource = fs.readFileSync(path.join(root, 'index.js'), 'utf8');
+	const clientSource = fs.readFileSync(path.join(root, 'client', 'Client.js'), 'utf8');
+	if (
+		indexSource.includes('MessageCreate')
+		|| indexSource.includes('config.prefix')
+		|| clientSource.includes('MessageContent')
+	) {
+		errors.push('Obsolete prefix-command handling or Message Content intent remains.');
 	}
 }
 
@@ -498,10 +544,13 @@ function checkConfiguration() {
 	if (Object.hasOwn(config, 'token')) {
 		errors.push('config.json must not contain a token.');
 	}
-	for (const key of ['prefix', 'botUserId', 'roles', 'channels']) {
+	for (const key of ['botUserId', 'roles', 'channels']) {
 		if (!config[key]) {
 			errors.push(`config.json is missing ${key}.`);
 		}
+	}
+	if (Object.hasOwn(config, 'prefix')) {
+		errors.push('config.json should not contain an obsolete message-command prefix.');
 	}
 	for (const role of ['newMember', 'member', 'dm', 'moderator', 'owner']) {
 		if (!config.roles?.[role]) {
@@ -543,7 +592,9 @@ function checkAuthorization(commands) {
 
 	const generateCommand = commands.get('rpg')?.subcommands?.get('generate');
 	const generateCharacterCommand = commands.get('rpg')?.subcommands
-		?.get('generatecharacter');
+		?.get('generate-character');
+	const generateListCommand = commands.get('rpg')?.subcommands
+		?.get('generate-list');
 	const dmMessage = createMessage([config.roles.dm], '0');
 	if (!authorizeCommand(generateCommand, dmMessage, config).allowed) {
 		errors.push('The DM should be allowed to generate RPG prompts.');
@@ -564,6 +615,12 @@ function checkAuthorization(commands) {
 		|| authorizeCommand(generateCharacterCommand, memberMessage, config).allowed
 	) {
 		errors.push('Random character generation should be restricted to DMs and owners.');
+	}
+	if (
+		!authorizeCommand(generateListCommand, dmMessage, config).allowed
+		|| authorizeCommand(generateListCommand, memberMessage, config).allowed
+	) {
+		errors.push('The generator list should be restricted to DMs and owners.');
 	}
 
 	const memberUsingOwnerCommand = authorizeCommand(
