@@ -1,0 +1,72 @@
+{
+  "key": "pnj",
+  "firstName": "Diego",
+  "lastName": "Robert",
+  "creatorId": "168424192520355843",
+  "level": 8,
+  "race": {
+    "name": "Human",
+    "physicalDescription": "Adaptable people found across nearly every region, with highly varied appearances, cultures, and traditions.",
+    "lore": ""
+  },
+  "appearance": "Neatly robed with well-used prayer beads and a calm, attentive expression.",
+  "backstory": "A village priest took responsibility for a neglected shrine after its former keeper disappeared.",
+  "goals": "Protect the local community, restore the shrine, and learn what happened to the previous priest.",
+  "personality": {
+    "traits": [
+      "Claims to fear nothing except geese, and refuses to explain the very specific reason.",
+      "Keeps trophies from failures rather than victories and can recount every lesson attached to them."
+    ],
+    "description": ""
+  },
+  "racialTraits": {
+    "skillBonus": "+1 to History",
+    "physicalAbility": "Relentless Endurance: Humans suffer reduced fatigue from prolonged travel, heat, marching, pursuit, and repeated physical activity."
+  },
+  "stats": {
+    "constitution": 15,
+    "strength": 11,
+    "dexterity": 14,
+    "intelligence": 7,
+    "speed": 11,
+    "perception": 11,
+    "charisma": 14,
+    "initiative": 11,
+    "reflexes": 11
+  },
+  "rules": [],
+  "talents": "Arcane Student — +1 when identifying a RULE, rune, or magical phenomenon.\nDanger Sense — +1 to Reflexes when reacting to an unseen or unexpected threat.\nUnshakable — +1 to resist fear, intimidation, and supernatural dread.",
+  "resources": {
+    "hp": {
+      "current": 180,
+      "max": 360
+    },
+    "ar": {
+      "current": 76,
+      "max": 126
+    },
+    "ap": {
+      "current": 6,
+      "max": 6
+    },
+    "md": {
+      "current": 5.5,
+      "max": 5.5
+    }
+  },
+  "statusEffects": [],
+  "equipment": [
+    "Uncommon medium armor — Reliable professional armor balancing protection and mobility.",
+    "Recurve bow — A compact bow that remains effective from horseback or tight terrain."
+  ],
+  "inventory": [
+    "Herbalism pouch — Small tools and containers for gathering useful plants.",
+    "Crowbar — A sturdy iron lever for doors, crates, and obstacles.",
+    "Climbing kit — Pitons, a hammer, straps, and simple climbing aids.",
+    "149 gold"
+  ],
+  "encumbrance": {
+    "current": 7,
+    "max": 15
+  }
+}

@@ -116,6 +116,20 @@ module.exports = function createCommandChecks(context) {
 		const getSubcommand = name => rpgData.options.find(option => option.name === name);
 		const hasAutocomplete = (subcommand, optionName) => getSubcommand(subcommand)
 			?.options.find(option => option.name === optionName)?.autocomplete === true;
+		const healResourceChoices = getSubcommand('heal')
+			?.options.find(option => option.name === 'resource')?.choices;
+		const healPercentage = getSubcommand('heal')
+			?.options.find(option => option.name === 'percentage');
+		if (
+			healResourceChoices?.map(choice => choice.value).join(',')
+				!== 'hp,armor,both'
+			|| healResourceChoices?.map(choice => choice.name).join(',')
+				!== 'HP,Armor,HP and Armor'
+			|| healPercentage?.min_value !== 0
+			|| healPercentage?.max_value !== 100
+		) {
+			errors.push('/rpg heal resource choices or percentage bounds are incorrect.');
+		}
 		for (const [subcommand, optionName] of [
 			['damage', 'character-key'],
 			['damage', 'damage-amount'],
@@ -175,4 +189,3 @@ module.exports = function createCommandChecks(context) {
 		checkHelpOrder,
 	};
 };
-

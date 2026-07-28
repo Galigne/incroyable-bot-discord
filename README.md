@@ -38,7 +38,7 @@ Never commit `.env` or a Discord token. Reset any token that has previously been
 - `/rpg get-help` — list retrievable fields and examples
 - `/rpg set character-key:<key> field:<field>` — set one field in a prefilled form
 - `/rpg set-help` — list settable fields and explain multiline form values
-- `/rpg heal character-key:<key> resource:<HP|AR> percentage:<0-100>` — restore a resource
+- `/rpg heal character-key:<key> resource:<hp|armor|both> percentage:<0-100>` — restore one or both resources
 - `/rpg damage character-key:<key> damage-amount:<number> [piercing]` — apply damage to AR, then HP
 - `/rpg end-turn character-key:<key>` — restore AP and MD to their maximum values
 
@@ -64,7 +64,7 @@ Example workflows:
 /rpg get character-key:D.Robert
 /rpg get character-key:D.Robert field:personality
 /rpg damage character-key:D.Robert damage-amount:25 piercing:false
-/rpg heal character-key:D.Robert resource:HP percentage:50
+/rpg heal character-key:D.Robert resource:both percentage:50
 /rpg end-turn character-key:D.Robert
 ```
 

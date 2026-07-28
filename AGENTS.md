@@ -168,7 +168,8 @@ Resources and display:
 - HP, AR, and MD use ten-icon percentage bars. Preserve the current colors:
   HP uses red/black hearts, AR uses blue/black squares, and MD uses orange/black
   squares.
-- `/rpg heal` supports only HP or AR and sets current to a percentage of maximum.
+- `/rpg heal` supports HP, armor, or both and sets each selected current resource
+  to the same percentage of its own maximum.
 - `/rpg damage` applies positive whole-number damage to current AR first, then current
   HP. With `piercing:true`, it bypasses AR. Piercing defaults to false.
 - `/rpg end-turn` restores current AP and MD to maximum.

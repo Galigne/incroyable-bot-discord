@@ -52,22 +52,54 @@ function createResourcesFromSave(data) {
 	};
 }
 
+function calculateRestoredResourceValue(maximum, percentage) {
+	validateRestorationPercentage(percentage);
+	return Math.min(maximum, Math.round(maximum * percentage / 100));
+}
+
 function restoreResource(character, resourceName, percentage) {
 	const resource = resourceName.toLowerCase();
 	if (!['hp', 'ar'].includes(resource)) {
 		throw characterEditError('Only HP and AR can be restored with the heal command.');
 	}
-	if (!Number.isFinite(percentage) || percentage < 0 || percentage > 100) {
-		throw characterEditError('The rest percentage must be between 0 and 100.');
-	}
 	const target = character.resources[resource];
-	target.current = Math.round(target.max * percentage / 100);
+	target.current = calculateRestoredResourceValue(target.max, percentage);
 	return target;
+}
+
+function restoreHealingResources(character, resourceName, percentage) {
+	const resourceKeys = {
+		hp: ['hp'],
+		armor: ['ar'],
+		both: ['hp', 'ar'],
+	}[resourceName];
+	if (!resourceKeys) {
+		throw characterEditError('The heal resource must be HP, Armor, or Both.');
+	}
+	validateRestorationPercentage(percentage);
+
+	return resourceKeys.map(resource => {
+		const target = character.resources[resource];
+		const previous = target.current;
+		restoreResource(character, resource, percentage);
+		return {
+			resource,
+			previous,
+			current: target.current,
+			max: target.max,
+		};
+	});
 }
 
 function resetTurnResources(character) {
 	character.resources.ap.current = character.resources.ap.max;
 	character.resources.md.current = character.resources.md.max;
+}
+
+function validateRestorationPercentage(percentage) {
+	if (!Number.isFinite(percentage) || percentage < 0 || percentage > 100) {
+		throw characterEditError('The rest percentage must be between 0 and 100.');
+	}
 }
 
 function clampActionPoints(value) {
@@ -85,9 +117,11 @@ module.exports = {
 	calculateMaxAp,
 	calculateMaxHp,
 	calculateMaxMovementDistance,
+	calculateRestoredResourceValue,
 	clampActionPoints,
 	createGeneratedResources,
 	createResourcesFromSave,
 	resetTurnResources,
+	restoreHealingResources,
 	restoreResource,
 };

@@ -60,6 +60,38 @@ module.exports = function createInteractionChecks(context) {
 				errors.push('The direct RPG editor did not save its modal value.');
 			}
 
+			await characterStore.updateCharacter(characterKey, user.id, false, character => {
+				character.resources.hp = { current: 10, max: 101 };
+				character.resources.ar = { current: 5, max: 33 };
+			});
+			const heal = require('../../commands/rpg/subcommands/heal');
+			let healPayload;
+			await heal.execute({
+				config,
+				interaction: {
+					user,
+					member,
+					options: {
+						getString: option => (
+							option === 'character-key' ? characterKey : 'both'
+						),
+						getNumber: () => 50,
+					},
+					reply: async payload => {
+						healPayload = payload;
+					},
+				},
+			});
+			const healedCharacter = await characterStore.getCharacter(characterKey);
+			if (
+				healedCharacter.resources.hp.current !== 51
+				|| healedCharacter.resources.ar.current !== 17
+				|| !healPayload.includes('HP: **10/101 → 51/101**')
+				|| !healPayload.includes('Armor: **5/33 → 17/33**')
+			) {
+				errors.push('/rpg heal both did not update and display both resources.');
+			}
+
 		}
 		catch (error) {
 			errors.push(`Interactive RPG UX: ${error.message}`);

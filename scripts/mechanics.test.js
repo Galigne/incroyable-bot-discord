@@ -21,9 +21,11 @@ const {
 	calculateMaxAp,
 	calculateMaxHp,
 	calculateMaxMovementDistance,
+	calculateRestoredResourceValue,
 	createGeneratedResources,
 	createResourcesFromSave,
 	resetTurnResources,
+	restoreHealingResources,
 	restoreResource,
 } = require('../services/mechanics/resources');
 const {
@@ -59,7 +61,7 @@ test('damage preserves AR-first and piercing behavior', () => {
 	);
 });
 
-test('healing and end-turn restoration preserve their existing results', () => {
+test('healing restores HP, armor, or both with shared rounding', () => {
 	const character = createCharacterFixture();
 	character.resources.hp = { current: 1, max: 101 };
 	character.resources.ar = { current: 0, max: 33 };
@@ -68,6 +70,33 @@ test('healing and end-turn restoration preserve their existing results', () => {
 
 	assert.deepEqual(restoreResource(character, 'hp', 50), { current: 51, max: 101 });
 	assert.deepEqual(restoreResource(character, 'ar', 25), { current: 8, max: 33 });
+	assert.deepEqual(restoreHealingResources(character, 'hp', 25), [
+		{ resource: 'hp', previous: 51, current: 25, max: 101 },
+	]);
+	assert.deepEqual(restoreHealingResources(character, 'armor', 50), [
+		{ resource: 'ar', previous: 8, current: 17, max: 33 },
+	]);
+	character.resources.hp.current = 10;
+	character.resources.ar.current = 5;
+	assert.deepEqual(restoreHealingResources(character, 'both', 50), [
+		{ resource: 'hp', previous: 10, current: 51, max: 101 },
+		{ resource: 'ar', previous: 5, current: 17, max: 33 },
+	]);
+	assert.equal(calculateRestoredResourceValue(101, 100), 101);
+	assert.equal(character.resources.hp.current <= character.resources.hp.max, true);
+	assert.equal(character.resources.ar.current <= character.resources.ar.max, true);
+
+	for (const invalidPercentage of [Number.NaN, Number.POSITIVE_INFINITY, -0.01, 100.01]) {
+		assert.throws(
+			() => restoreHealingResources(character, 'both', invalidPercentage),
+			error => error.code === 'INVALID_CHARACTER_EDIT',
+		);
+	}
+	assert.throws(
+		() => restoreHealingResources(character, 'ar', 50),
+		error => error.code === 'INVALID_CHARACTER_EDIT',
+	);
+
 	resetTurnResources(character);
 	assert.equal(character.resources.ap.current, 6);
 	assert.equal(character.resources.md.current, 7.5);
