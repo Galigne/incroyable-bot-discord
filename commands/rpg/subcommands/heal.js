@@ -1,6 +1,6 @@
 const characterStore = require('../../../services/characterStore');
 const { restoreHealingResources } = require('../../../services/mechanics/resources');
-const { canManageCharacters } = require('../../../util/characterAuthorization');
+const { canManageCharacter } = require('../../../util/authorization');
 const { replyToCharacterError } = require('../../../util/characterCommandErrors');
 const { filterAutocompleteChoices } = require('../../../util/autocomplete');
 const { getCharacterChoices } = require('../autocomplete');
@@ -79,8 +79,7 @@ module.exports = {
 			let restoredResources;
 			const character = await characterStore.updateCharacter(
 				characterName,
-				interaction.user.id,
-				canManageCharacters(interaction, config),
+				currentCharacter => canManageCharacter(interaction, currentCharacter, config),
 				currentCharacter => {
 					restoredResources = restoreHealingResources(
 						currentCharacter,

@@ -18,9 +18,9 @@ async function createCharacter(name, creatorId, initialize = () => {}) {
 	return character;
 }
 
-async function deleteCharacter(name, requesterId) {
+async function deleteCharacter(name, canManage) {
 	const character = await getCharacter(name);
-	if (character.creatorId !== requesterId) {
+	if (!canManage(character)) {
 		const error = new Error('Only the character creator can delete it.');
 		error.code = 'NOT_CHARACTER_OWNER';
 		throw error;
@@ -28,9 +28,9 @@ async function deleteCharacter(name, requesterId) {
 	await fs.unlink(getSavePath(name));
 }
 
-async function updateCharacter(name, requesterId, canManage, update) {
+async function updateCharacter(name, canManage, update) {
 	const character = await getCharacter(name);
-	if (character.creatorId !== requesterId && !canManage) {
+	if (!canManage(character)) {
 		const error = new Error('Only the character creator or a DM can edit it.');
 		error.code = 'NOT_CHARACTER_EDITOR';
 		throw error;

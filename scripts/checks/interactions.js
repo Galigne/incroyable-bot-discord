@@ -61,7 +61,7 @@ module.exports = function createInteractionChecks(context) {
 				errors.push('The direct RPG editor did not save its modal value.');
 			}
 
-			await characterStore.updateCharacter(characterKey, user.id, false, character => {
+			await characterStore.updateCharacter(characterKey, () => true, character => {
 				character.resources.hp = { current: 10, max: 101 };
 				character.resources.ar = { current: 5, max: 33 };
 			});
@@ -99,7 +99,7 @@ module.exports = function createInteractionChecks(context) {
 		}
 		finally {
 			try {
-				await characterStore.deleteCharacter(characterKey, user.id);
+				await characterStore.deleteCharacter(characterKey, () => true);
 			}
 			catch (error) {
 				if (error.code !== 'ENOENT') {

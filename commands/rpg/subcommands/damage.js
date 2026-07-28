@@ -1,6 +1,6 @@
 const characterStore = require('../../../services/characterStore');
 const { dealDamage } = require('../../../services/mechanics/damage');
-const { canManageCharacters } = require('../../../util/characterAuthorization');
+const { canManageCharacter } = require('../../../util/authorization');
 const { replyToCharacterError } = require('../../../util/characterCommandErrors');
 const { filterAutocompleteChoices } = require('../../../util/autocomplete');
 const { getCharacterChoices } = require('../autocomplete');
@@ -59,8 +59,7 @@ module.exports = {
 			let damageResult;
 			const character = await characterStore.updateCharacter(
 				characterKey,
-				interaction.user.id,
-				canManageCharacters(interaction, config),
+				currentCharacter => canManageCharacter(interaction, currentCharacter, config),
 				currentCharacter => {
 					damageResult = dealDamage(currentCharacter, damageAmount, piercing, locale);
 				},

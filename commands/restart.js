@@ -13,7 +13,7 @@ module.exports = {
 	usage: '/restart',
 	helpOrder: 70,
 	access: {
-		role: 'moderator',
+		permission: 'moderator',
 	},
 	data: localizeDescription(new SlashCommandBuilder()
 		.setName('restart')

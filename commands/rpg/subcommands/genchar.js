@@ -15,7 +15,7 @@ module.exports = {
 	usage: '/rpg gen-char character-key:<new key> [level] [background]',
 	helpOrder: 11,
 	access: {
-		role: 'dm',
+		permission: 'dm',
 	},
 	configure: command => localizeDescription(
 		command.setName('gen-char'),

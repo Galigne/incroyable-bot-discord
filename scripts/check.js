@@ -38,7 +38,14 @@ const {
 	calculateStatBudget,
 	calculateStatCost,
 } = require('../services/mechanics/characterGeneration');
-const { authorizeCommand } = require('../util/authorization');
+const {
+	authorizeCommand,
+	canManageCharacter,
+	hasDmPermission,
+	hasModeratorPermission,
+	isGuildOwner,
+} = require('../util/authorization');
+const { validateConfig } = require('../util/configuration');
 const { loadCommands } = require('../util/loadCommands');
 const createAuthorizationChecks = require('./checks/authorization');
 const createCharacterChecks = require('./checks/characters');
@@ -54,6 +61,7 @@ const context = {
 	Character,
 	allocateRuleLevels,
 	authorizeCommand,
+	canManageCharacter,
 	calculateMaxAp,
 	calculateMaxHp,
 	calculateMaxMovementDistance,
@@ -68,6 +76,9 @@ const context = {
 	fs,
 	generatorCatalog,
 	getEditableFieldValue,
+	hasDmPermission,
+	hasModeratorPermission,
+	isGuildOwner,
 	loadCommands,
 	path,
 	populateRandomCharacter,
@@ -76,6 +87,7 @@ const context = {
 	root,
 	setEditableFieldValue,
 	spawnSync,
+	validateConfig,
 };
 
 async function main() {

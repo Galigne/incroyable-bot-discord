@@ -5,7 +5,6 @@ A Discord bot with moderation, utility, local audio, and RPG character-managemen
 ## Requirements
 
 - Node.js 22.12 or newer
-- A Discord application with the Server Members intent enabled
 - The bot installed with the `bot` and `applications.commands` scopes
 
 ## Installation
@@ -14,7 +13,9 @@ A Discord bot with moderation, utility, local audio, and RPG character-managemen
 2. Copy `.env.example` to `.env`.
 3. Generate a bot token in the Discord Developer Portal.
 4. Set `DISCORD_TOKEN` in `.env`.
-5. Start the bot with `node index.js`.
+5. Copy [`config.json.example`](config.json.example) to `config.json` and replace
+   each explanation with the corresponding Discord value.
+6. Start the bot with `node index.js`.
 
 The bot registers its global slash commands when it connects. Discord may briefly
 need to refresh its command picker after a command schema changes.
@@ -36,18 +37,28 @@ Autocomplete labels and generated text are localized, while generator IDs,
 structured field keys, enum values, and routing values remain English. Content
 already saved in a character sheet is never translated retroactively.
 
-Set the default runtime language in `config.json`:
+Set the required runtime language in `config.json`. The complete configuration is:
 
 ```json
 {
-  "locale": "fr"
+  "locale": "fr",
+  "botUserId": "YOUR_BOT_USER_ID",
+  "roles": {
+    "dm": "YOUR_DM_ROLE_ID",
+    "moderator": "YOUR_MODERATOR_ROLE_ID"
+  },
+  "channels": {
+    "teamVoice": "OPTIONAL_TEAM_VOICE_CHANNEL_ID"
+  }
 }
 ```
 
-Supported values are `en` and `fr`; an unsupported or missing value falls back to
-English. A deployment that serves multiple servers can optionally add a
-`guildLocales` object whose keys are Discord server IDs and whose values are locale
-codes. A server-specific value takes precedence over `locale`.
+`locale`, `botUserId`, `roles.dm`, and `roles.moderator` are required. The only
+supported locale values are `en` and `fr`; invalid or missing values stop startup
+with a clear error. `channels.teamVoice` and the `channels` object are optional.
+The guide file explains what belongs in each field and is never loaded by the bot.
+Do not configure an owner user or owner role: the bot reads the actual server owner
+from Discord.
 
 Never commit `.env` or a Discord token. Reset any token that has previously been committed.
 
@@ -61,7 +72,7 @@ Never commit `.env` or a Discord token. Reset any token that has previously been
 - `/rpg rules`
 - `/rpg gen category:<category>` — generate a random prompt (DM only)
 - `/rpg gen-char character-key:<new key> [level] [background]` — generate and save a complete character (DM only)
-- `/rpg gen-help` — explain generation and list generator categories (DM only)
+- `/rpg gen-help` — explain generation and list generator categories
 - `/rpg roll sides:<2-1000>` — roll a die
 - `/rpg add character-key:<new key>` — create a blank character sheet with a stable key
 - `/rpg get character-key:<key> [field]` — display the summary or one complete field
@@ -79,8 +90,12 @@ private form opens immediately after `/rpg set` is submitted. Multiline
 fields accept free-form lines with optional leading dashes; RULEs use
 `Name: Level: Description`.
 
-Character creators can edit and manage their own sheets. Members with the configured
-DM role, as well as owners, can manage every character sheet.
+Character creators can edit, delete, heal, damage, and end turns for their own
+sheets. Users with the configured DM role can perform those actions on every
+character and may use `/rpg gen` and `/rpg gen-char`. Users with the configured
+moderator role may use `/say`, `/purge`, and `/restart`. The actual Discord server
+owner, identified by Discord rather than configuration, may use every command and
+manage every character.
 The identifier supplied to `/rpg add` remains the stable command/save key and cannot
 be edited. The sheet stores `firstName` and `lastName` separately for display.
 Keys may contain internal periods, hyphens, and underscores, such as `D.Robert`.

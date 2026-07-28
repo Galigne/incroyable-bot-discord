@@ -64,7 +64,6 @@ module.exports = function createLocalizationChecks(context) {
 		}
 		if (
 			getLocale({ locale: 'fr' }, 'guild') !== 'fr'
-			|| getLocale({ locale: 'fr', guildLocales: { guild: 'en' } }, 'guild') !== 'en'
 			|| getLocale({ locale: 'unsupported' }, 'guild') !== 'en'
 		) {
 			errors.push('Configured locale selection or English fallback is incorrect.');

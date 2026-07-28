@@ -6,7 +6,10 @@
   },
   "authorization": {
     "missingRole": "You do not have permission to use this command.",
-    "wrongChannel": "This command cannot be used in this channel."
+    "wrongChannel": "This command cannot be used in this channel.",
+    "guildOnly": "This permission can only be checked inside a Discord server.",
+    "invalidConfiguration": "The bot configuration is missing or invalid at `{{field}}`. Ask the server administrator to fix config.json.",
+    "obsoleteConfiguration": "The obsolete configuration field `{{field}}` must be removed from config.json."
   },
   "commands": {
     "help": {
@@ -76,7 +79,7 @@
       "success": "Generated character **{{name}}** with key `{{key}}`."
     },
     "genHelp": {
-      "description": "Explain random generation and list generator categories (DM only)",
+      "description": "Explain random generation and list generator categories",
       "schemaDescription": "Explain random generation and list generator categories",
       "title": "RPG Generation Help",
       "body": "`/rpg gen category:<category>`\nDM-only. Select a generator with autocomplete to draw one weighted random entry. Run it again to reroll.\n\n`/rpg gen-char character-key:<new key> [level] [background]`\nDM-only. Creates and saves a complete random character using a unique CharacterKey. Level must be 1–10; when omitted, it is rolled randomly. Background selects the NPC category and is random when omitted. Statistics, resources, equipment, inventory, and gold are generated from the character level and game rules. Intelligence grants RULE Points; they raise the first RULE as far as possible before creating a second, with a maximum of two RULEs.",
@@ -223,7 +226,7 @@
   "errors": {
     "characterExists": "A character with that key already exists.",
     "characterMissing": "That character does not exist.",
-    "characterOwnerDelete": "Only the character creator can delete it.",
+    "characterOwnerDelete": "Only the character creator, a DM, or the server owner can delete it.",
     "characterEditor": "Only the character creator or a DM can edit it.",
     "invalidCharacterKey": "Character keys must start and end with a letter or number and may contain letters, numbers, periods, hyphens, and underscores.",
     "unknownEditField": "Unknown field: {{field}}.",

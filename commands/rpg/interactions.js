@@ -10,7 +10,7 @@ const {
 	setEditableFieldValue,
 } = require('../../services/characterEditor');
 const characterStore = require('../../services/characterStore');
-const { canManageCharacters } = require('../../util/characterAuthorization');
+const { canManageCharacter } = require('../../util/authorization');
 const { replyToCharacterError } = require('../../util/characterCommandErrors');
 const {
 	createInteractionSession,
@@ -39,8 +39,7 @@ async function openCharacterEditor(interaction, config, characterKey, fieldName)
 
 		const character = await getEditableCharacter(
 			characterKey,
-			interaction.user.id,
-			canManageCharacters(interaction, config),
+			currentCharacter => canManageCharacter(interaction, currentCharacter, config),
 		);
 		const value = getEditableFieldValue(character, normalizedField);
 		if (value.length > 4_000) {
@@ -84,8 +83,7 @@ async function handleRpgInteraction(interaction, config) {
 		let editResult;
 		const character = await characterStore.updateCharacter(
 			session.characterKey,
-			interaction.user.id,
-			canManageCharacters(interaction, config),
+			currentCharacter => canManageCharacter(interaction, currentCharacter, config),
 			currentCharacter => {
 				editResult = setEditableFieldValue(
 					currentCharacter,
@@ -158,9 +156,9 @@ function createFieldModal(sessionId, fieldName, value, locale = 'en') {
 		);
 }
 
-async function getEditableCharacter(characterKey, userId, canManage) {
+async function getEditableCharacter(characterKey, canManage) {
 	const character = await characterStore.getCharacter(characterKey);
-	if (character.creatorId !== userId && !canManage) {
+	if (!canManage(character)) {
 		const error = new Error('Only the character creator or a DM can edit it.');
 		error.code = 'NOT_CHARACTER_EDITOR';
 		throw error;

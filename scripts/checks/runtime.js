@@ -7,6 +7,7 @@ module.exports = function createRuntimeChecks(context) {
 		root,
 		spawnSync,
 		config,
+		validateConfig,
 	} = context;
 
 	function checkNodeVersion() {
@@ -42,26 +43,140 @@ module.exports = function createRuntimeChecks(context) {
 		if (Object.hasOwn(config, 'token')) {
 			errors.push('config.json must not contain a token.');
 		}
-		for (const key of ['botUserId', 'roles', 'channels']) {
-			if (!config[key]) {
-				errors.push(`config.json is missing ${key}.`);
-			}
-		}
 		if (Object.hasOwn(config, 'prefix')) {
 			errors.push('config.json should not contain an obsolete message-command prefix.');
 		}
-		for (const role of ['newMember', 'member', 'dm', 'moderator', 'owner']) {
-			if (!config.roles?.[role]) {
-				errors.push(`config.json is missing the ${role} role.`);
+		expectValidConfiguration(config, 'the active configuration');
+		expectValidConfiguration(createConfig('en'), 'English locale');
+		expectValidConfiguration(createConfig('fr'), 'French locale');
+		expectValidConfiguration({
+			...createConfig('en'),
+			channels: {},
+		}, 'an omitted team voice channel');
+		expectValidConfiguration({
+			...createConfig('fr'),
+			channels: undefined,
+		}, 'an omitted channels object');
+
+		expectInvalidConfiguration(createConfig('de'), 'an unsupported locale');
+		const missingLocale = createConfig('en');
+		delete missingLocale.locale;
+		expectInvalidConfiguration(missingLocale, 'a missing locale');
+		const missingBotUserId = createConfig('en');
+		delete missingBotUserId.botUserId;
+		expectInvalidConfiguration(missingBotUserId, 'a missing bot user ID');
+		const missingDmRole = createConfig('en');
+		delete missingDmRole.roles.dm;
+		expectInvalidConfiguration(missingDmRole, 'a missing DM role');
+		const missingModeratorRole = createConfig('en');
+		delete missingModeratorRole.roles.moderator;
+		expectInvalidConfiguration(missingModeratorRole, 'a missing moderator role');
+		for (const oldRole of [
+			['new', 'Member'].join(''),
+			'member',
+			'owner',
+		]) {
+			const obsoleteRoleConfig = createConfig('en');
+			obsoleteRoleConfig.roles[oldRole] = 'obsolete-role';
+			expectInvalidConfiguration(
+				obsoleteRoleConfig,
+				`the obsolete roles.${oldRole} field`,
+			);
+		}
+
+		const guidePath = path.join(root, 'config.json.example');
+		if (!fs.existsSync(guidePath)) {
+			errors.push('config.json.example is missing.');
+		}
+		else {
+			const guide = JSON.parse(fs.readFileSync(guidePath, 'utf8'));
+			if (
+				typeof guide.locale !== 'string'
+				|| typeof guide.botUserId !== 'string'
+				|| typeof guide.roles?.dm !== 'string'
+				|| typeof guide.roles?.moderator !== 'string'
+			) {
+				errors.push('config.json.example should explain every required configuration field.');
 			}
 		}
-		const configuredLocales = [
-			config.locale,
-			...Object.values(config.guildLocales ?? {}),
-		].filter(Boolean);
-		if (configuredLocales.some(locale => !['en', 'fr'].includes(locale))) {
-			errors.push('config.json contains an unsupported locale. Use en or fr.');
+
+		checkRemovedRoleSystem();
+	}
+
+	function createConfig(locale) {
+		return {
+			botUserId: 'bot',
+			locale,
+			roles: {
+				dm: 'dm-role',
+				moderator: 'moderator-role',
+			},
+		};
+	}
+
+	function expectValidConfiguration(candidate, description) {
+		try {
+			validateConfig(candidate);
 		}
+		catch (error) {
+			errors.push(`Configuration validation rejected ${description}: ${error.message}`);
+		}
+	}
+
+	function expectInvalidConfiguration(candidate, description) {
+		try {
+			validateConfig(candidate);
+			errors.push(`Configuration validation accepted ${description}.`);
+		}
+		catch {
+			// Expected.
+		}
+	}
+
+	function checkRemovedRoleSystem() {
+		const formerJoinRole = ['new', 'Member'].join('');
+		const formerGeneralRole = ['roles', 'member'].join('.');
+		const forbiddenConfigurationReferences = [
+			formerJoinRole,
+			formerGeneralRole,
+			['roles', 'owner'].join('.'),
+		];
+		for (const file of findRepositoryTextFiles(root)) {
+			const relativePath = path.relative(root, file);
+			const source = fs.readFileSync(file, 'utf8');
+			for (const reference of forbiddenConfigurationReferences) {
+				if (source.includes(reference)) {
+					errors.push(`${relativePath} still references obsolete configuration: ${reference}`);
+				}
+			}
+		}
+
+		const indexSource = fs.readFileSync(path.join(root, 'index.js'), 'utf8');
+		const clientSource = fs.readFileSync(path.join(root, 'client', 'Client.js'), 'utf8');
+		if (
+			indexSource.includes(['Guild', 'MemberAdd'].join(''))
+			|| indexSource.includes('roles.add(')
+			|| clientSource.includes(['Guild', 'Members'].join(''))
+		) {
+			errors.push('Automatic role assignment or its guild-member intent still exists.');
+		}
+	}
+
+	function findRepositoryTextFiles(directory) {
+		const files = [];
+		for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
+			if (['.git', 'node_modules', 'save'].includes(entry.name)) {
+				continue;
+			}
+			const fullPath = path.join(directory, entry.name);
+			if (entry.isDirectory()) {
+				files.push(...findRepositoryTextFiles(fullPath));
+			}
+			else if (/\.(?:js|json|md)$/i.test(entry.name)) {
+				files.push(fullPath);
+			}
+		}
+		return files;
 	}
 
 	function checkRequiredFiles() {

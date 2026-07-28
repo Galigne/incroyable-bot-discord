@@ -9,7 +9,6 @@ module.exports = class extends Client {
 		super({
 			intents: [
 				GatewayIntentBits.Guilds,
-				GatewayIntentBits.GuildMembers,
 				GatewayIntentBits.GuildVoiceStates,
 			],
 		});

@@ -1,5 +1,6 @@
 const { MessageFlags } = require('discord.js');
 const characterStore = require('../../../services/characterStore');
+const { canManageCharacter, hasDmPermission } = require('../../../util/authorization');
 const { getCharacterChoices } = require('../autocomplete');
 const { getLocale, localizeDescription, t } = require('../../../util/i18n');
 
@@ -18,17 +19,22 @@ module.exports = {
 		)
 			.setAutocomplete(true)
 			.setRequired(true)),
-	async autocomplete({ interaction }) {
+	async autocomplete({ config, interaction }) {
 		await interaction.respond(await getCharacterChoices(
 			interaction.options.getFocused(),
-			{ creatorId: interaction.user.id },
+			hasDmPermission(interaction, config)
+				? {}
+				: { creatorId: interaction.user.id },
 		));
 	},
 	async execute({ config, interaction }) {
 		const locale = getLocale(config, interaction.guildId);
 		const name = interaction.options.getString('character-key', true);
 		try {
-			await characterStore.deleteCharacter(name, interaction.user.id);
+			await characterStore.deleteCharacter(
+				name,
+				character => canManageCharacter(interaction, character, config),
+			);
 			await interaction.reply(t(locale, 'rpg.delete.success', { key: name }));
 		}
 		catch (error) {

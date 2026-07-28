@@ -10,9 +10,6 @@ module.exports = {
 	descriptionKey,
 	usage: '/rpg gen-help',
 	helpOrder: 12,
-	access: {
-		role: 'dm',
-	},
 	configure: command => localizeDescription(
 		command.setName('gen-help'),
 		'rpg.genHelp.schemaDescription',

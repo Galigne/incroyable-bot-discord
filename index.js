@@ -7,6 +7,10 @@ const { handleRpgInteraction } = require('./commands/rpg/interactions');
 const config = require('./config.json');
 const { playLocalAudio } = require('./services/localAudioPlayer');
 const { authorizeCommand } = require('./util/authorization');
+const {
+	getConfigurationErrorMessage,
+	validateConfig,
+} = require('./util/configuration');
 const { loadCommands } = require('./util/loadCommands');
 const { getLocale, t } = require('./util/i18n');
 
@@ -39,6 +43,15 @@ client.on(Events.ShardDisconnect, (event, shardId) => {
 
 client.on(Events.InteractionCreate, async interaction => {
 	if (!interaction.inGuild()) {
+		if (interaction.isAutocomplete()) {
+			await interaction.respond([]).catch(() => {});
+		}
+		else if (interaction.isRepliable()) {
+			await interaction.reply({
+				content: t(getLocale(config), 'authorization.guildOnly'),
+				flags: MessageFlags.Ephemeral,
+			}).catch(() => {});
+		}
 		return;
 	}
 
@@ -105,19 +118,10 @@ client.on(Events.InteractionCreate, async interaction => {
 	}
 });
 
-client.on(Events.GuildMemberAdd, async guildMember => {
-	try {
-		await guildMember.roles.add(config.roles.newMember);
-	}
-	catch (error) {
-		console.error('Could not assign the new-member role:', error);
-	}
-});
-
 client.on(Events.VoiceStateUpdate, async (oldState, newState) => {
 	if (
 		oldState.channelId !== null
-		|| newState.channelId !== config.channels.teamVoice
+		|| newState.channelId !== config.channels?.teamVoice
 		|| oldState.member.id === config.botUserId
 	) {
 		return;
@@ -135,6 +139,15 @@ client.on(Events.VoiceStateUpdate, async (oldState, newState) => {
 });
 
 async function start() {
+	try {
+		validateConfig(config);
+	}
+	catch (error) {
+		console.error(getConfigurationErrorMessage(error, config));
+		process.exitCode = 1;
+		return;
+	}
+
 	if (!token || token === 'paste_your_new_token_here') {
 		console.error(
 			'DISCORD_TOKEN is missing. Copy .env.example to .env, '

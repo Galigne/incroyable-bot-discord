@@ -12,7 +12,7 @@ module.exports = {
 	usage: '/rpg gen category:<category>',
 	helpOrder: 10,
 	access: {
-		role: 'dm',
+		permission: 'dm',
 	},
 	configure: command => localizeDescription(
 		command.setName('gen'),

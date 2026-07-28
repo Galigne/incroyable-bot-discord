@@ -321,7 +321,7 @@ module.exports = function createCharacterChecks(context) {
 				}
 			}
 			try {
-				await characterStore.updateCharacter(originalName, 'stranger', false, () => {});
+				await characterStore.updateCharacter(originalName, () => false, () => {});
 				errors.push('A non-owner was allowed to edit a character.');
 			}
 			catch (error) {
@@ -330,7 +330,7 @@ module.exports = function createCharacterChecks(context) {
 				}
 			}
 
-			await characterStore.updateCharacter(originalName, 'dm-user', true, character => {
+			await characterStore.updateCharacter(originalName, () => true, character => {
 				character.firstName = 'A Display';
 				character.lastName = 'Name With Spaces';
 				character.resources.hp.current = 42;
@@ -345,7 +345,7 @@ module.exports = function createCharacterChecks(context) {
 			) {
 				errors.push('Character edits are not persisted correctly.');
 			}
-			await characterStore.deleteCharacter(originalName, 'creator');
+			await characterStore.deleteCharacter(originalName, () => true);
 		}
 		catch (error) {
 			errors.push(`Character store: ${error.message}`);

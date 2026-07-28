@@ -6,6 +6,9 @@
   },
   "authorization": {
     "missingRole": "Permission insuffisante pour utiliser cette commande.",
+    "guildOnly": "Cette permission ne peut être vérifiée que dans un serveur Discord.",
+    "invalidConfiguration": "La configuration du bot est absente ou invalide au champ `{{field}}`. Demandez à l’administrateur du serveur de corriger config.json.",
+    "obsoleteConfiguration": "Le champ de configuration obsolète `{{field}}` doit être supprimé de config.json.",
     "wrongChannel": "Cette commande n’est pas disponible dans ce salon."
   },
   "commands": {
@@ -76,7 +79,7 @@
       "success": "Le personnage **{{name}}** a été généré avec la clé `{{key}}`."
     },
     "genHelp": {
-      "description": "Expliquer la génération aléatoire et afficher ses catégories (MJ uniquement)",
+      "description": "Expliquer la génération aléatoire et afficher ses catégories",
       "schemaDescription": "Expliquer la génération aléatoire et afficher ses catégories",
       "title": "Aide à la génération",
       "body": "`/rpg gen category:<category>`\nCommande réservée au MJ. Sélectionnez une catégorie avec l’autocomplétion pour tirer une entrée aléatoire selon son poids. Relancez la commande pour obtenir un autre résultat.\n\n`/rpg gen-char character-key:<new key> [level] [background]`\nCommande réservée au MJ. Elle crée et sauvegarde un personnage complet sous une CharacterKey unique. Le niveau doit être compris entre 1 et 10 ; s’il est omis, il est tiré au hasard. Le Background du PNJ peut également être choisi ou tiré au hasard. Les statistiques, ressources, équipements, objets et pièces d’or dépendent du niveau et des règles du jeu. L’Intelligence accorde des points de LOI : ils servent d’abord à augmenter autant que possible le niveau d’une première LOI, puis à en créer une seconde. Un personnage ne peut ainsi recevoir que deux LOI au maximum.",
@@ -223,7 +226,7 @@
   "errors": {
     "characterExists": "Cette CharacterKey est déjà utilisée.",
     "characterMissing": "Personnage introuvable.",
-    "characterOwnerDelete": "Seul le créateur du personnage peut le supprimer.",
+    "characterOwnerDelete": "Seuls le créateur du personnage, un MJ ou le propriétaire du serveur peuvent le supprimer.",
     "characterEditor": "Seuls le créateur du personnage et les MJ peuvent modifier cette fiche.",
     "invalidCharacterKey": "Une CharacterKey doit commencer et se terminer par une lettre ou un chiffre. Elle peut contenir des lettres, des chiffres, des points, des tirets et des tirets bas.",
     "unknownEditField": "Champ inconnu : {{field}}.",

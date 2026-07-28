@@ -102,8 +102,8 @@ autocomplete choices, so filter locally with `util/autocomplete.js`.
 
 All bot-owned user-facing strings belong in `locales/en.json` and `locales/fr.json`
 and are retrieved through `util/i18n.js`. Keep both catalogs at exact key parity.
-Runtime language comes from `config.guildLocales[guildId]`, then `config.locale`,
-and falls back to English. Slash command and option names, internal values, enum
+Runtime language comes from the required `config.locale`, which must be `en` or
+`fr`. Slash command and option names, internal values, enum
 values, JSON properties, generator field identifiers, and saved data stay in
 English. Use Discord description localizations for slash-command schema text, and
 localize choice/autocomplete display labels without changing their English values.
@@ -166,16 +166,15 @@ race in the public summary.
 Permissions:
 
 - Anyone with normal bot access can view character sheets.
-- Only the character creator, a DM, or an owner can edit a character.
-- Character deletion is restricted to the creator by the current store API.
-- `/rpg gen`, `/rpg gen-char`, and `/rpg gen-help` are DM/owner
-  commands.
-- `/restart` is moderator/owner only.
-- `/say` is moderator/owner only.
-- `/purge` is owner only.
+- The creator may set, delete, heal, damage, and end turns for their character.
+- The configured DM role may perform those actions on every character and may use
+  `/rpg gen` and `/rpg gen-char`.
+- The configured moderator role may use `/say`, `/purge`, and `/restart`.
+- The actual Discord server owner from `guild.ownerId` bypasses every role check
+  and may use every command and manage every character.
 
-Role IDs and the team voice channel ID live in `config.json`. The DM role is already
-configured there. Do not hard-code those IDs elsewhere.
+`config.json` requires `locale`, `botUserId`, `roles.dm`, and `roles.moderator`.
+`channels.teamVoice` is optional. Never configure an owner ID or owner role.
 
 Resources and display:
 

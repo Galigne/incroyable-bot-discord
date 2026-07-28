@@ -1,6 +1,6 @@
 const characterStore = require('../../../services/characterStore');
 const { resetTurnResources } = require('../../../services/mechanics/resources');
-const { canManageCharacters } = require('../../../util/characterAuthorization');
+const { canManageCharacter } = require('../../../util/authorization');
 const { replyToCharacterError } = require('../../../util/characterCommandErrors');
 const { getCharacterChoices } = require('../autocomplete');
 const { getLocale, localizeDescription, t } = require('../../../util/i18n');
@@ -30,8 +30,7 @@ module.exports = {
 		try {
 			const character = await characterStore.updateCharacter(
 				characterName,
-				interaction.user.id,
-				canManageCharacters(interaction, config),
+				currentCharacter => canManageCharacter(interaction, currentCharacter, config),
 				currentCharacter => {
 					resetTurnResources(currentCharacter);
 				},

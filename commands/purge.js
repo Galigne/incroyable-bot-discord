@@ -16,7 +16,7 @@ module.exports = {
 	usage: '/purge amount:<2-100>',
 	helpOrder: 60,
 	access: {
-		role: 'owner',
+		permission: 'moderator',
 	},
 	data: localizeDescription(new SlashCommandBuilder()
 		.setName('purge')

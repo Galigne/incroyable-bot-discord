@@ -9,9 +9,8 @@ function normalizeLocale(locale) {
 	return Object.hasOwn(translations, locale) ? locale : DEFAULT_LOCALE;
 }
 
-function getLocale(config = {}, guildId) {
-	const configuredLocale = config.guildLocales?.[guildId] ?? config.locale;
-	return normalizeLocale(configuredLocale);
+function getLocale(config = {}) {
+	return normalizeLocale(config.locale);
 }
 
 function createTranslator(catalogs, onMissing = reportMissingKey) {

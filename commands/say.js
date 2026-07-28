@@ -13,7 +13,7 @@ module.exports = {
 	usage: '/say message:<text>',
 	helpOrder: 50,
 	access: {
-		role: 'moderator',
+		permission: 'moderator',
 	},
 	data: localizeDescription(new SlashCommandBuilder()
 		.setName('say')
