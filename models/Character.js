@@ -1,16 +1,18 @@
 const { EmbedBuilder } = require('discord.js');
-
-const BASE_STATS = [
-	'constitution',
-	'strength',
-	'dexterity',
-	'intelligence',
-	'speed',
-	'perception',
-	'charisma',
-];
-const DERIVED_STATS = ['initiative', 'reflexes'];
-const MAX_AP = 10;
+const {
+	BASE_STATS,
+	DERIVED_STATS,
+	MAX_AP,
+} = require('../services/mechanics/constants');
+const {
+	copyRules,
+	copyStringList,
+} = require('../services/mechanics/characterValidation');
+const {
+	clampActionPoints,
+	createResourcesFromSave,
+} = require('../services/mechanics/resources');
+const { createStats } = require('../services/mechanics/statistics');
 
 class Character {
 	static fromSave(data, characterKey = data.key) {
@@ -37,7 +39,7 @@ class Character {
 		character.stats = createStats(data.stats);
 		character.rules = copyRules(data.rules);
 		character.talents = data.talents ?? '';
-		character.resources = createResources(data);
+		character.resources = createResourcesFromSave(data);
 		character.statusEffects = copyStringList(data.statusEffects);
 		character.equipment = copyStringList(data.equipment);
 		character.inventory = copyStringList(data.inventory);
@@ -249,55 +251,6 @@ class Character {
 	}
 }
 
-function createStats(data = {}) {
-	const stats = {};
-	for (const stat of BASE_STATS) {
-		stats[stat] = data[stat] ?? 10;
-	}
-	stats.initiative = data.initiative ?? data.speed ?? 10;
-	stats.reflexes = data.reflexes ?? data.speed ?? 10;
-	return stats;
-}
-
-function createResources(data) {
-	const apMax = clampAp(data.resources?.ap?.max ?? 4);
-	return {
-		hp: {
-			current: data.resources?.hp?.current ?? 100,
-			max: data.resources?.hp?.max ?? 100,
-		},
-		ar: {
-			current: data.resources?.ar?.current ?? 0,
-			max: data.resources?.ar?.max ?? 0,
-		},
-		ap: {
-			current: Math.min(clampAp(data.resources?.ap?.current ?? 4), apMax),
-			max: apMax,
-		},
-		md: {
-			current: data.resources?.md?.current ?? 5,
-			max: data.resources?.md?.max ?? 5,
-		},
-	};
-}
-
-function copyStringList(value) {
-	return Array.isArray(value) ? value.filter(item => typeof item === 'string') : [];
-}
-
-function copyRules(value) {
-	if (!Array.isArray(value)) {
-		return [];
-	}
-	return value
-		.filter(rule => rule && typeof rule.name === 'string')
-		.map(rule => ({
-			name: rule.name,
-			description: typeof rule.description === 'string' ? rule.description : '',
-			level: Number.isInteger(rule.level) && rule.level > 0 ? rule.level : 1,
-		}));
-}
-
 function formatResource(label, resource) {
 	return `${label}: **${resource.current} / ${resource.max}**`;
 }
@@ -310,8 +263,8 @@ function formatProgressResource(label, resource, filledIcon, emptyIcon) {
 }
 
 function formatAp(resource) {
-	const maxAp = clampAp(resource.max);
-	const availableAp = Math.min(clampAp(resource.current), maxAp);
+	const maxAp = clampActionPoints(resource.max);
+	const availableAp = Math.min(clampActionPoints(resource.current), maxAp);
 	const spentAp = maxAp - availableAp;
 	return `AP:\n${'🌟'.repeat(availableAp)}${'⭐'.repeat(spentAp) || (maxAp === 0 ? '—' : '')}`;
 }
@@ -333,13 +286,6 @@ function getResourcePercentage(resource) {
 		return 0;
 	}
 	return Math.max(0, Math.min(100, Math.round(resource.current / resource.max * 100)));
-}
-
-function clampAp(value) {
-	if (!Number.isFinite(value)) {
-		return 0;
-	}
-	return Math.max(0, Math.min(MAX_AP, Math.round(value)));
 }
 
 function formatStats(stats, statNames) {

@@ -1,12 +1,17 @@
-const { BASE_STATS } = require('../models/Character');
 const generatorCatalog = require('./generatorCatalog');
-
-const BASE_STAT_BUDGET = 67;
-const MIN_STAT = 4;
-const MAX_STAT = 20;
-const RULE_POINT_THRESHOLDS = [10, 12, 14, 16, 18, 20];
-const BONUS_STAT_LEVELS = [2, 5, 8];
-const TALENT_LEVELS = [3, 6, 9];
+const {
+	allocateRuleLevels,
+	calculateRulePoints,
+	calculateStatBudget,
+	calculateStatCost,
+	calculateTalentCount,
+	generateStats,
+} = require('./mechanics/characterGeneration');
+const { canEquipArmor } = require('./mechanics/armor');
+const {
+	calculateMaxAp,
+	createGeneratedResources,
+} = require('./mechanics/resources');
 
 function populateRandomCharacter(character, options = {}) {
 	const random = options.random ?? Math.random;
@@ -45,7 +50,7 @@ function populateRandomCharacter(character, options = {}) {
 			level: ruleLevels[index],
 		}));
 
-	const talentCount = 1 + TALENT_LEVELS.filter(requiredLevel => level >= requiredLevel).length;
+	const talentCount = calculateTalentCount(level);
 	character.talents = pickMany('talents', talentCount, random)
 		.map(entry => `${getField(entry, 'Name')} — ${getField(entry, 'Description')}`)
 		.join('\n');
@@ -54,30 +59,24 @@ function populateRandomCharacter(character, options = {}) {
 		? [getTextValue(pickOne('statusEffect', random))]
 		: [];
 
-	const maxHp = Math.round(
-		character.stats.constitution * 10 * (1 + 0.2 * (level - 1)),
-	);
-	const maxAp = calculateMaxAp(level);
-	const maxMd = character.stats.speed * 0.5;
-
 	const armor = pickOne(
 		'armors',
 		random,
-		entry => Number(getField(entry, 'Constitution requirement'))
-			<= character.stats.constitution,
+		entry => canEquipArmor(
+			character.stats.constitution,
+			getField(entry, 'Constitution requirement'),
+		),
 	);
 	const weaponCount = randomInteger(1, 2, random);
 	const weapons = pickMany('weapons', weaponCount, random);
 	const inventoryItems = pickMany('inventory', 3, random);
 	const armorPercentage = Number(getField(armor, 'AR percentage'));
 
-	character.resources.hp = { current: maxHp, max: maxHp };
-	character.resources.ar = {
-		current: Math.round(maxHp * armorPercentage / 100),
-		max: Math.round(maxHp * armorPercentage / 100),
-	};
-	character.resources.ap = { current: maxAp, max: maxAp };
-	character.resources.md = { current: maxMd, max: maxMd };
+	character.resources = createGeneratedResources(
+		character.stats,
+		level,
+		armorPercentage,
+	);
 	character.equipment = [
 		formatNamedEntry(armor),
 		...weapons.map(formatNamedEntry),
@@ -110,91 +109,6 @@ function resolveBackground(requestedBackground, random) {
 		throw generationError(`Unknown background category: ${requestedBackground}.`);
 	}
 	return background;
-}
-
-function generateStats(level, random = Math.random) {
-	const stats = Object.fromEntries(BASE_STATS.map(stat => [stat, MIN_STAT]));
-	let remainingPoints = calculateStatBudget(level)
-		- BASE_STATS.length * MIN_STAT;
-
-	while (remainingPoints > 0) {
-		const eligibleStats = BASE_STATS.filter(stat => (
-			stats[stat] < MAX_STAT
-			&& getNextStatCost(stats[stat]) <= remainingPoints
-		));
-		if (eligibleStats.length === 0) {
-			throw generationError(`Could not spend ${remainingPoints} remaining stat points.`);
-		}
-		const stat = eligibleStats[randomIndex(eligibleStats.length, random)];
-		remainingPoints -= getNextStatCost(stats[stat]);
-		stats[stat] += 1;
-	}
-
-	stats.initiative = stats.speed;
-	stats.reflexes = stats.speed;
-	return stats;
-}
-
-function calculateStatBudget(level) {
-	return BASE_STAT_BUDGET
-		+ 2 * (level - 1)
-		+ BONUS_STAT_LEVELS.filter(requiredLevel => level >= requiredLevel).length;
-}
-
-function calculateStatCost(stats) {
-	return BASE_STATS.reduce((total, stat) => {
-		let cost = 0;
-		for (let value = 1; value <= stats[stat]; value += 1) {
-			cost += getValueCost(value);
-		}
-		return total + cost;
-	}, 0);
-}
-
-function getNextStatCost(currentValue) {
-	return getValueCost(currentValue + 1);
-}
-
-function getValueCost(value) {
-	if (value <= 14) {
-		return 1;
-	}
-	if (value <= 16) {
-		return 2;
-	}
-	if (value <= 18) {
-		return 3;
-	}
-	return 4;
-}
-
-function calculateRulePoints(intelligence) {
-	return RULE_POINT_THRESHOLDS.filter(threshold => intelligence >= threshold).length;
-}
-
-function allocateRuleLevels(rulePoints) {
-	if (!Number.isInteger(rulePoints) || rulePoints < 0) {
-		throw generationError('RULE points must be a non-negative whole number.');
-	}
-
-	const levels = [];
-	let remainingPoints = rulePoints;
-	for (let ruleIndex = 0; ruleIndex < 2 && remainingPoints > 0; ruleIndex += 1) {
-		let level = 0;
-		while (remainingPoints >= level + 1) {
-			level += 1;
-			remainingPoints -= level;
-		}
-		levels.push(level);
-	}
-	return levels;
-}
-
-function calculateMaxAp(level) {
-	return 4
-		+ (level >= 4 ? 1 : 0)
-		+ (level >= 7 ? 1 : 0)
-		+ (level >= 10 ? 2 : 0);
 }
 
 function pickOne(categoryName, random, predicate = () => true) {

@@ -1,5 +1,5 @@
 const characterStore = require('../../../services/characterStore');
-const { restoreResource } = require('../../../services/characterEditor');
+const { restoreResource } = require('../../../services/mechanics/resources');
 const { canManageCharacters } = require('../../../util/characterAuthorization');
 const { replyToCharacterError } = require('../../../util/characterCommandErrors');
 const { filterAutocompleteChoices } = require('../../../util/autocomplete');

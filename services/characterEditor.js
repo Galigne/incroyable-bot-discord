@@ -1,4 +1,13 @@
-const { BASE_STATS, DERIVED_STATS, MAX_AP } = require('../models/Character');
+const { BASE_STATS, DERIVED_STATS } = require('./mechanics/constants');
+const {
+	characterEditError,
+	validateActionPointEdit,
+} = require('./mechanics/characterValidation');
+const { dealDamage } = require('./mechanics/damage');
+const {
+	resetTurnResources,
+	restoreResource,
+} = require('./mechanics/resources');
 
 const scalarFields = buildScalarFields();
 const multilineFields = new Map([
@@ -8,48 +17,6 @@ const multilineFields = new Map([
 	['equipment', { path: ['equipment'], label: 'equipment item' }],
 	['inventory', { path: ['inventory'], label: 'inventory item' }],
 ]);
-
-function dealDamage(character, damageAmount, piercing = false) {
-	if (!Number.isSafeInteger(damageAmount) || damageAmount <= 0) {
-		throw editError('Damage must be a positive whole number.');
-	}
-	if (typeof piercing !== 'boolean') {
-		throw editError('Piercing must be true or false.');
-	}
-
-	const availableAr = Math.max(0, character.resources.ar.current);
-	const availableHp = Math.max(0, character.resources.hp.current);
-	const arDamage = piercing ? 0 : Math.min(availableAr, damageAmount);
-	const damageAfterArmor = damageAmount - arDamage;
-	const hpDamage = Math.min(availableHp, damageAfterArmor);
-
-	character.resources.ar.current = availableAr - arDamage;
-	character.resources.hp.current = availableHp - hpDamage;
-
-	return {
-		arDamage,
-		hpDamage,
-		piercing,
-	};
-}
-
-function restoreResource(character, resourceName, percentage) {
-	const resource = resourceName.toLowerCase();
-	if (!['hp', 'ar'].includes(resource)) {
-		throw editError('Only HP and AR can be restored with the heal command.');
-	}
-	if (!Number.isFinite(percentage) || percentage < 0 || percentage > 100) {
-		throw editError('The rest percentage must be between 0 and 100.');
-	}
-	const target = character.resources[resource];
-	target.current = Math.round(target.max * percentage / 100);
-	return target;
-}
-
-function resetTurnResources(character) {
-	character.resources.ap.current = character.resources.ap.max;
-	character.resources.md.current = character.resources.md.max;
-}
 
 function getEditableFieldValue(character, fieldName) {
 	const key = normalizeFieldName(fieldName);
@@ -107,29 +74,7 @@ function editScalar(character, field, args) {
 		if (!Number.isFinite(value)) {
 			throw editError(`${field.label} must be a number.`);
 		}
-		if (
-			field.path[0] === 'resources'
-			&& field.path[1] === 'ap'
-			&& (!Number.isInteger(value) || value < 0 || value > MAX_AP)
-		) {
-			throw editError(`AP must be a whole number between 0 and ${MAX_AP}.`);
-		}
-		if (
-			field.path[0] === 'resources'
-			&& field.path[1] === 'ap'
-			&& field.path[2] === 'current'
-			&& value > character.resources.ap.max
-		) {
-			throw editError('Current AP cannot be greater than maximum AP.');
-		}
-		if (
-			field.path[0] === 'resources'
-			&& field.path[1] === 'ap'
-			&& field.path[2] === 'max'
-			&& value < character.resources.ap.current
-		) {
-			throw editError('Maximum AP cannot be lower than current AP.');
-		}
+		validateActionPointEdit(character, field.path, value);
 	}
 	else if (value.toLowerCase() === 'clear') {
 		value = '';
@@ -255,9 +200,7 @@ function setAtPath(object, path, value) {
 }
 
 function editError(message) {
-	const error = new Error(message);
-	error.code = 'INVALID_CHARACTER_EDIT';
-	return error;
+	return characterEditError(message);
 }
 
 module.exports = {

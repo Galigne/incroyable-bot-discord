@@ -30,10 +30,11 @@ merely to make documentation match an implementation.
 - Do not launch or leave the bot running merely to validate code. Prefer `npm test`
   unless live Discord behavior must be tested or the user explicitly asks to start it.
 
-`scripts/check.js` validates syntax, command schemas, autocomplete, help ordering,
-permissions, generator data, character mechanics, modal editing, required media,
-and voice dependencies. Character-store tests use an isolated temporary directory
-through `INCREDIBLE_BOT_SAVE_DIRECTORY`; tests must never write to real saves.
+`scripts/check.js` orchestrates the focused modules under `scripts/checks/`, which
+validate syntax, command schemas, autocomplete, help ordering, permissions,
+generator data, character mechanics, modal editing, required media, and voice
+dependencies. Character-store tests use an isolated temporary directory through
+`INCREDIBLE_BOT_SAVE_DIRECTORY`; tests must never write to real saves.
 
 ## Important repository structure
 
@@ -48,11 +49,16 @@ through `INCREDIBLE_BOT_SAVE_DIRECTORY`; tests must never write to real saves.
 - `commands/rpg/interactions.js`: direct prefilled edit modal and modal submission.
 - `models/Character.js`: character schema and Discord embed rendering.
 - `services/characterStore.js`: JSON character persistence.
-- `services/characterEditor.js`: field parsing, validation, damage, resource
-  restoration, and end-turn behavior.
+- `services/characterEditor.js`: editable-field parsing and update orchestration.
+- `services/mechanics/`: Discord-independent character constants, validation,
+  statistics, resources, armor, damage, and generation formulas.
 - `services/generatorCatalog.js`: loads and validates generator JSON and performs
   weighted selection.
-- `services/randomCharacterGenerator.js`: builds complete random characters.
+- `services/randomCharacterGenerator.js`: selects generator data and assembles
+  complete random characters using `services/mechanics/`.
+- `scripts/check.js`: offline-check bootstrap, ordering, and final reporting.
+- `scripts/checks/`: focused runtime, command, generator, character, interaction,
+  and authorization integration checks plus temporary-save helpers.
 - `data/generators/`: generator catalogs. See its `README.md` before editing formats.
 - `save/`: real character data. Preserve these files unless the user explicitly
   requests a character change or deletion.
