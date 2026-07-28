@@ -5,7 +5,7 @@ const { Events, MessageFlags } = require('discord.js');
 const Client = require('./client/Client');
 const { handleRpgInteraction } = require('./commands/rpg/interactions');
 const config = require('./config.json');
-const { playLocalAudio } = require('./services/localAudioPlayer');
+const { playLocalAudio } = require('./adapters/localAudioPlayer');
 const { authorizeCommand } = require('./util/authorization');
 const {
 	getConfigurationErrorMessage,
@@ -44,13 +44,13 @@ client.on(Events.ShardDisconnect, (event, shardId) => {
 client.on(Events.InteractionCreate, async interaction => {
 	if (!interaction.inGuild()) {
 		if (interaction.isAutocomplete()) {
-			await interaction.respond([]).catch(() => {});
+			await interaction.respond([]).catch(ignoreRejection);
 		}
 		else if (interaction.isRepliable()) {
 			await interaction.reply({
 				content: t(getLocale(config), 'authorization.guildOnly'),
 				flags: MessageFlags.Ephemeral,
-			}).catch(() => {});
+			}).catch(ignoreRejection);
 		}
 		return;
 	}
@@ -84,7 +84,7 @@ client.on(Events.InteractionCreate, async interaction => {
 		}
 		catch (error) {
 			console.error(`Autocomplete failed for /${interaction.commandName}:`, error);
-			await interaction.respond([]).catch(() => {});
+			await interaction.respond([]).catch(ignoreRejection);
 		}
 		return;
 	}
@@ -188,11 +188,15 @@ async function replyWithUnexpectedError(interaction) {
 		flags: MessageFlags.Ephemeral,
 	};
 	if (interaction.replied || interaction.deferred) {
-		await interaction.followUp(response).catch(() => {});
+		await interaction.followUp(response).catch(ignoreRejection);
 	}
 	else {
-		await interaction.reply(response).catch(() => {});
+		await interaction.reply(response).catch(ignoreRejection);
 	}
+}
+
+function ignoreRejection() {
+	// The original Discord request may already be closed; the failure is non-actionable.
 }
 
 start();

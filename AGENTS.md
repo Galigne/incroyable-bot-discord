@@ -5,7 +5,8 @@ before changing commands, RPG data, character saves, or tests.
 
 ## Project purpose
 
-This is an English-language Discord bot built with CommonJS and `discord.js` 14.
+This is a localized English/French Discord bot built with CommonJS and `discord.js`
+14.
 It provides:
 
 1. General Discord utilities and moderation.
@@ -30,11 +31,13 @@ merely to make documentation match an implementation.
 - Do not launch or leave the bot running merely to validate code. Prefer `npm test`
   unless live Discord behavior must be tested or the user explicitly asks to start it.
 
+`npm test` runs ESLint, focused `node:test` suites, and `scripts/check.js`.
 `scripts/check.js` orchestrates the focused modules under `scripts/checks/`, which
-validate syntax, command schemas, autocomplete, help ordering, permissions,
-generator data, character mechanics, modal editing, required media, and voice
-dependencies. Character-store tests use an isolated temporary directory through
-`INCREDIBLE_BOT_SAVE_DIRECTORY`; tests must never write to real saves.
+validate syntax, architectural boundaries, command schemas, autocomplete, help
+ordering, permissions, generator data, character mechanics, modal editing, required
+media, and voice dependencies. Character-store tests use an isolated temporary
+directory through `INCREDIBLE_BOT_SAVE_DIRECTORY`; tests must never write to real
+saves.
 
 ## Important repository structure
 
@@ -45,11 +48,18 @@ dependencies. Character-store tests use an isolated temporary directory through
 - `commands/rpg/index.js`: `/rpg` command builder, subcommand routing, and RPG-level
   authorization.
 - `commands/rpg/subcommands/`: one module per `/rpg` subcommand.
-- `commands/rpg/editorFields.js`: canonical editable fields and modal presentation.
+- `commands/rpg/editorFields.js`: modal presentation metadata derived from the
+  canonical field catalog.
 - `commands/rpg/interactions.js`: direct prefilled edit modal and modal submission.
-- `models/Character.js`: character schema and Discord embed rendering.
+- `models/Character.js`: Discord-independent character schema and save hydration.
+- `services/`: Discord-independent domain behavior and application workflows,
+  including parsing, validation, calculations, persistence, and generation.
+- `services/characterApplicationService.js`: command-facing character workflows;
+  command adapters must use it instead of composing persistence and mechanics.
+- `services/characterFieldCatalog.js`: canonical character field identities,
+  aliases, storage paths, types, and editable/viewable capabilities.
 - `services/characterStore.js`: JSON character persistence.
-- `services/characterEditor.js`: editable-field parsing and update orchestration.
+- `services/characterEditor.js`: editable-value parsing and domain mutation.
 - `services/mechanics/`: Discord-independent character constants, validation,
   statistics, resources, armor, damage, and generation formulas.
 - `services/generatorCatalog.js`: loads and validates generator JSON and performs
@@ -57,15 +67,26 @@ dependencies. Character-store tests use an isolated temporary directory through
 - `services/randomCharacterGenerator.js`: selects generator data and assembles
   complete random characters using `services/mechanics/`.
 - `scripts/check.js`: offline-check bootstrap, ordering, and final reporting.
+- `scripts/*.test.js`: focused `node:test` suites for Discord-independent services
+  and thin command-integration coverage.
 - `scripts/checks/`: focused runtime, command, generator, character, interaction,
   and authorization integration checks plus temporary-save helpers.
 - `data/generators/`: generator catalogs. See its `README.md` before editing formats.
 - `save/`: real character data. Preserve these files unless the user explicitly
   requests a character change or deletion.
+- `adapters/`: external Discord integrations that are neither domain services nor
+  command modules, such as local voice playback.
+- `util/`: shared cross-cutting helpers and feature-specific Discord response
+  adapters.
 - `util/authorization.js`: role/channel authorization.
 - `util/autocomplete.js`: shared Discord autocomplete filtering.
-- `util/characterDisplay.js`: canonical display-field registry, aliases, localized
-  character labels, resource full names, and resource abbreviations.
+- `util/characterDisplay.js`: localized character labels, resource full names, and
+  abbreviations derived from the canonical service catalog.
+- `util/characterRenderer.js`: Discord embed rendering for character summaries and
+  detailed fields.
+- `util/characterCommandResponses.js`: localized character reply payloads.
+- `util/characterCommandErrors.js`: centralized mapping of expected character errors
+  and structured service outcomes to localized replies.
 
 ## Command architecture and conventions
 
@@ -85,6 +106,71 @@ Every top-level command must export:
 Every RPG subcommand follows the same metadata convention, but exposes `configure`
 instead of a top-level `data` builder. Register it in all three places in
 `commands/rpg/index.js`: import, `subcommands` map, and builder chain.
+
+### Layer boundaries
+
+Command and subcommand modules are Discord entry-point adapters. Keep them thin.
+They may define slash-command metadata, read Discord options and context, select the
+locale, call authorization helpers, delegate to one feature workflow or response
+adapter, and send the returned reply. They must not own reusable or non-trivial
+feature behavior.
+
+In particular, do not put any of the following directly in `execute` or
+`autocomplete`:
+
+- regular expressions or domain input parsing;
+- value-limit or game-rule validation;
+- random-selection, calculation, transformation, or persistence algorithms;
+- branching that decides a domain outcome or presentation mode, such as whether a
+  result is rendered as text, an embed, or an attachment;
+- media filename selection;
+- construction of multi-line localized result or error messages.
+
+Put domain and application behavior under `services/`. Service modules must not
+import `discord.js` or translation catalogs, accept an interaction object, create
+Discord builders, or return localized user-facing prose.
+Prefer plain inputs and plain return values. Represent expected validation failures
+with stable error codes or structured outcomes so the Discord layer can localize
+them. When localized generator data is a domain input, a service may accept a stable
+locale identifier or a caller-supplied formatter, but it must not perform interface
+translation itself. Inject nondeterministic dependencies such as random-number
+generators when practical so service tests remain deterministic.
+
+Put feature-specific Discord presentation in a response adapter under `util/` or an
+existing feature-specific interaction module. A response adapter may import Discord
+builders, map service outcomes and expected errors to localized reply payloads,
+select attachment paths from service-provided descriptors, and apply
+`MessageFlags.Ephemeral`. It must not reimplement parsing, calculations, or game
+rules.
+
+Dependencies should flow toward the domain:
+
+```text
+command/subcommand -> application service -> domain helpers/persistence
+command/subcommand -> response adapter (service outcome -> Discord payload)
+```
+
+For character persistence or mutations, commands and interaction handlers must call
+`services/characterApplicationService.js`; they must not compose
+`characterStore.js` and mechanics directly. Models own state and hydration only.
+They must not import Discord or localization code; character embeds belong in
+`util/characterRenderer.js`.
+
+For every non-trivial command feature:
+
+1. Define a plain service API for the feature behavior.
+2. Have the service return plain data, a structured outcome, or a stable expected
+   error code.
+3. Convert that outcome into localized Discord payloads in a response adapter.
+4. Keep the command limited to Discord input extraction, delegation, and sending the
+   prepared response.
+5. Test the service policy separately from Discord payload construction and command
+   routing.
+
+A truly trivial command may reply directly when it has no reusable validation,
+branching, calculation, persistence, or specialized presentation. Extract a service
+or response adapter as soon as any of those responsibilities appear; do not wait for
+the command module to become large.
 
 Use lowercase Discord command names, normally kebab-case. Put each new RPG
 subcommand in its own file. Keep `description`, `usage`, `/help`, `/rpg help`, the
@@ -110,9 +196,10 @@ localize choice/autocomplete display labels without changing their English value
 Use `documentation/JDR_RANDOM_RULES_FR.md` as the canonical source for French game
 terminology, including `PV`, `PR`, `PA`, `DD`, `LOI`, and `dons raciaux`. Treat that
 French rulebook as read-only unless the user explicitly requests a rulebook change.
-Register every displayable character field in `util/characterDisplay.js`; embeds,
-modals, autocomplete labels, choices, replies, and validation messages must consume
-that registry rather than reconstructing labels from internal paths.
+Register every character field once in `services/characterFieldCatalog.js`. Derive
+editor/viewer choices, aliases, storage paths, and presentation labels from that
+catalog; do not create parallel field maps in commands, models, services, or tests.
+Add localized label keys in `util/characterDisplay.js` and both locale catalogs.
 
 For private interaction responses, use:
 
@@ -251,9 +338,6 @@ At present it:
 
 ## Other bot behavior
 
-- `/rpg roll sides:2` sends `HEADS.gif` or `TAILS.gif`.
-- `/rpg roll sides:20` sends the matching `D20-<result>.gif`.
-- Other dice sizes return a text result.
 - Online music/search playback commands were intentionally removed because they
   were unreliable.
 - Local MP3 playback remains supported. When a member joins the configured team
@@ -270,13 +354,18 @@ Use this workflow for every feature, behavior change, bug fix, or data update:
    otherwise.
 2. Identify all coupled surfaces before implementing. Depending on the change, this
    can include slash-command schema and routing, autocomplete, authorization,
-   persistence, editing, rendering, generator data, and error handling.
+   persistence, editing, rendering, generator data, and error handling. Decide which
+   layer owns each behavior before editing: commands adapt Discord interactions,
+   services own feature rules, and response adapters own Discord presentation.
 3. Add or update focused regression coverage whenever behavior changes and testing
    is practical. New commands should have schema, routing, autocomplete, permission,
    and behavior checks as applicable. Character or generator changes should test
    their invariants and persistence. Data-driven tests should derive expectations
    from the canonical data when exact values are intentionally configurable. Never
-   weaken or remove a valid test merely to make a change pass.
+   weaken or remove a valid test merely to make a change pass. Test parsers,
+   calculations, branching policies, and error codes directly at the service layer;
+   test localization and Discord payload construction at the response-adapter layer;
+   keep command tests focused on schema, delegation, and interaction integration.
 4. Keep user-facing and agent-facing guidance synchronized when the affected
    behavior is documented:
    - update command metadata and `/help`, `/rpg help`, or dedicated help commands
@@ -304,6 +393,11 @@ Before handing off a code change:
 3. Keep generated data and `Character` schema consumers synchronized.
 4. Never edit a rulebook unless the user explicitly requested it.
 5. Use `MessageFlags.Ephemeral`, never `ephemeral: true`.
-6. Run `npm test`.
-7. Run `git diff --check`.
-8. Confirm tests did not add, modify, or remove real character saves.
+6. Keep command modules thin; move feature rules to services and specialized Discord
+   rendering to response adapters.
+7. Ensure domain models and services do not import Discord or translation catalogs,
+   accept interaction objects, or render user-facing payloads. Extend the
+   architecture check when introducing a new durable boundary.
+8. Run `npm test`.
+9. Run `git diff --check`.
+10. Confirm tests did not add, modify, or remove real character saves.

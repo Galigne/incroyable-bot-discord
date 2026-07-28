@@ -1,6 +1,11 @@
-const { MessageFlags } = require('discord.js');
-const characterStore = require('../../../services/characterStore');
+const {
+	deleteCharacter,
+} = require('../../../services/characterApplicationService');
 const { canManageCharacter, hasDmPermission } = require('../../../util/authorization');
+const {
+	createCharacterDeletedResponse,
+} = require('../../../util/characterCommandResponses');
+const { replyToCharacterError } = require('../../../util/characterCommandErrors');
 const { getCharacterChoices } = require('../autocomplete');
 const { getLocale, localizeDescription, t } = require('../../../util/i18n');
 
@@ -31,35 +36,16 @@ module.exports = {
 		const locale = getLocale(config, interaction.guildId);
 		const name = interaction.options.getString('character-key', true);
 		try {
-			await characterStore.deleteCharacter(
+			await deleteCharacter(
 				name,
 				character => canManageCharacter(interaction, character, config),
 			);
-			await interaction.reply(t(locale, 'rpg.delete.success', { key: name }));
+			await interaction.reply(createCharacterDeletedResponse(name, locale));
 		}
 		catch (error) {
-			if (error.code === 'ENOENT') {
-				await interaction.reply({
-					content: t(locale, 'errors.characterMissing'),
-					flags: MessageFlags.Ephemeral,
-				});
-				return;
+			if (!await replyToCharacterError(interaction, error, locale)) {
+				throw error;
 			}
-			if (error.code === 'NOT_CHARACTER_OWNER') {
-				await interaction.reply({
-					content: t(locale, 'errors.characterOwnerDelete'),
-					flags: MessageFlags.Ephemeral,
-				});
-				return;
-			}
-			if (error.code === 'INVALID_CHARACTER_NAME') {
-				await interaction.reply({
-					content: t(locale, 'errors.invalidCharacterKey'),
-					flags: MessageFlags.Ephemeral,
-				});
-				return;
-			}
-			throw error;
 		}
 	},
 };

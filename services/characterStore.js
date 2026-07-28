@@ -6,7 +6,7 @@ const savesDirectory = process.env.INCREDIBLE_BOT_SAVE_DIRECTORY
 	? path.resolve(process.env.INCREDIBLE_BOT_SAVE_DIRECTORY)
 	: path.join(__dirname, '..', 'save');
 
-async function createCharacter(name, creatorId, initialize = () => {}) {
+async function createCharacter(name, creatorId, initialize = () => undefined) {
 	const character = new Character(name, creatorId);
 	await initialize(character);
 	character.key = name;
@@ -46,7 +46,7 @@ async function getCharacter(name) {
 	return Character.fromSave(JSON.parse(data), name);
 }
 
-async function listCharacters() {
+async function listCharacters({ onLoadError = reportCharacterLoadError } = {}) {
 	await fs.mkdir(savesDirectory, { recursive: true });
 	const entries = await fs.readdir(savesDirectory, { withFileTypes: true });
 	const characters = await Promise.all(entries
@@ -56,13 +56,27 @@ async function listCharacters() {
 			try {
 				return await getCharacter(key);
 			}
-			catch {
+			catch (error) {
+				onLoadError(new CharacterLoadError(key, error));
 				return null;
 			}
 		}));
 	return characters
 		.filter(Boolean)
 		.sort((left, right) => left.key.localeCompare(right.key));
+}
+
+class CharacterLoadError extends Error {
+	constructor(characterKey, cause) {
+		super(`Could not load character save "${characterKey}": ${cause.message}`, { cause });
+		this.name = 'CharacterLoadError';
+		this.code = 'INVALID_CHARACTER_SAVE';
+		this.characterKey = characterKey;
+	}
+}
+
+function reportCharacterLoadError(error) {
+	console.error(error);
 }
 
 async function saveCharacter(character, originalName = character.key) {
@@ -90,6 +104,7 @@ function getSavePath(name) {
 }
 
 module.exports = {
+	CharacterLoadError,
 	createCharacter,
 	deleteCharacter,
 	getCharacter,

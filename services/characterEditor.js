@@ -1,99 +1,77 @@
-const { BASE_STATS, DERIVED_STATS } = require('./mechanics/constants');
 const {
 	characterEditError,
 	validateActionPointEdit,
 } = require('./mechanics/characterValidation');
-const { dealDamage } = require('./mechanics/damage');
-const {
-	resetTurnResources,
-	restoreResource,
-} = require('./mechanics/resources');
-const { t } = require('../util/i18n');
-const { getCharacterFieldLabel } = require('../util/characterDisplay');
-
-const scalarFields = buildScalarFields();
-const multilineFields = new Map([
-	['personalitytraits', { fieldId: 'personality.traits', path: ['personality', 'traits'] }],
-	['rules', { fieldId: 'rules', path: ['rules'], rules: true }],
-	['statuseffects', { fieldId: 'statusEffects', path: ['statusEffects'] }],
-	['equipment', { fieldId: 'equipment', path: ['equipment'] }],
-	['inventory', { fieldId: 'inventory', path: ['inventory'] }],
-]);
+const { getEditableFieldDefinition } = require('./characterFieldCatalog');
 
 function getEditableFieldValue(character, fieldName) {
-	const key = normalizeFieldName(fieldName);
-	const scalarField = scalarFields.get(key);
-	if (scalarField) {
-		return String(getAtPath(character, scalarField.path) ?? '');
+	const field = getEditableFieldDefinition(fieldName);
+	if (!field) {
+		throw editError('errors.unknownEditField', { field: fieldName });
 	}
-
-	const multilineField = multilineFields.get(key);
-	if (multilineField) {
-		return getAtPath(character, multilineField.path)
-			.map(item => multilineField.rules
+	if (field.multiline) {
+		return getAtPath(character, field.path)
+			.map(item => field.rules
 				? `${item.name}: ${item.level}: ${item.description}`
 				: item)
 			.join('\n');
 	}
-
-	throw editError(`Unknown field: ${fieldName}.`);
+	return String(getAtPath(character, field.path) ?? '');
 }
 
-function setEditableFieldValue(character, fieldName, value, locale = 'en') {
-	const key = normalizeFieldName(fieldName);
-	const scalarField = scalarFields.get(key);
-	if (scalarField) {
-		const args = value.trim() ? [value] : ['clear'];
-		return editScalar(character, scalarField, args, locale);
+function setEditableFieldValue(character, fieldName, value) {
+	const field = getEditableFieldDefinition(fieldName);
+	if (!field) {
+		throw editError('errors.unknownEditField', { field: fieldName });
 	}
-
-	const multilineField = multilineFields.get(key);
-	if (multilineField) {
+	if (field.multiline) {
 		const lines = value
 			.split(/\r?\n/)
 			.map(line => line.trim().replace(/^[-*]\s+/, ''))
 			.filter(Boolean);
-		const entries = getAtPath(character, multilineField.path);
+		const entries = getAtPath(character, field.path);
 		entries.splice(
 			0,
 			entries.length,
-			...lines.map(line => parseMultilineEntry(multilineField, line, locale)),
+			...lines.map(line => parseMultilineEntry(field, line)),
 		);
-		return t(locale, 'editorResults.collectionUpdated', {
-			field: getCharacterFieldLabel(locale, multilineField.fieldId),
-		});
+		return {
+			translationKey: 'editorResults.collectionUpdated',
+			translationVariables: { fieldId: field.id },
+		};
 	}
-
-	throw editError(t(locale, 'errors.unknownEditField', { field: fieldName }));
+	const args = value.trim() ? [value] : ['clear'];
+	return editScalar(character, field, args);
 }
 
-function editScalar(character, field, args, locale) {
-	const label = getCharacterFieldLabel(locale, field.fieldId);
+function editScalar(character, field, args) {
 	if (args.length === 0) {
-		throw editError(t(locale, 'errors.valueRequired', { field: label }));
+		throw editError('errors.valueRequired', { fieldId: field.id });
 	}
 
 	let value = args.join(' ').trim();
 	if (field.type === 'number') {
 		value = Number(value);
 		if (!Number.isFinite(value)) {
-			throw editError(t(locale, 'errors.mustBeNumber', { field: label }));
+			throw editError('errors.mustBeNumber', { fieldId: field.id });
 		}
-		validateActionPointEdit(character, field.path, value, locale);
+		validateActionPointEdit(character, field.path, value);
 	}
 	else if (value.toLowerCase() === 'clear') {
 		value = '';
 	}
 
 	setAtPath(character, field.path, value);
-	return t(locale, 'editorResults.updated', { field: label });
+	return {
+		translationKey: 'editorResults.updated',
+		translationVariables: { fieldId: field.id },
+	};
 }
 
-function parseMultilineEntry(field, line, locale) {
-	const label = getCharacterFieldLabel(locale, field.fieldId);
+function parseMultilineEntry(field, line) {
 	const value = line.trim();
 	if (!value) {
-		throw editError(t(locale, 'errors.collectionValueRequired', { field: label }));
+		throw editError('errors.collectionValueRequired', { fieldId: field.id });
 	}
 	if (!field.rules) {
 		return value;
@@ -103,95 +81,23 @@ function parseMultilineEntry(field, line, locale) {
 	const name = (separatorIndex === -1 ? value : value.slice(0, separatorIndex)).trim();
 	const remainder = separatorIndex === -1 ? '' : value.slice(separatorIndex + 1).trim();
 	if (!name) {
-		throw editError(t(locale, 'errors.ruleNameRequired'));
+		throw editError('errors.ruleNameRequired');
 	}
 	const levelSeparatorIndex = remainder.indexOf(':');
 	const possibleLevel = levelSeparatorIndex === -1
-		? remainder
+		? ''
 		: remainder.slice(0, levelSeparatorIndex).trim();
-	const hasExplicitLevel = /^\d+$/.test(possibleLevel) && levelSeparatorIndex !== -1;
-	const level = hasExplicitLevel ? Number(possibleLevel) : 1;
+	const level = Number(possibleLevel);
 	if (!Number.isSafeInteger(level) || level < 1) {
-		throw editError(t(locale, 'errors.ruleLevelInvalid'));
+		throw editError('errors.ruleLevelInvalid');
 	}
-	const description = hasExplicitLevel
-		? remainder.slice(levelSeparatorIndex + 1).trim()
-		: remainder;
+	const description = remainder.slice(levelSeparatorIndex + 1).trim();
 	return { name, description, level };
 }
 
-function buildScalarFields() {
-	const fields = new Map();
-	addScalar(fields, ['firstname'], ['firstName'], 'text');
-	addScalar(fields, ['lastname'], ['lastName'], 'text');
-	addScalar(fields, ['level'], ['level'], 'number');
-	addScalar(fields, ['race.name', 'racename'], ['race', 'name'], 'text');
-	addScalar(
-		fields,
-		['race.description', 'race.physicaldescription', 'racedescription'],
-		['race', 'physicalDescription'],
-		'text',
-	);
-	addScalar(fields, ['race.lore', 'racelore'], ['race', 'lore'], 'text');
-	addScalar(fields, ['appearance'], ['appearance'], 'text');
-	addScalar(fields, ['backstory'], ['backstory'], 'text');
-	addScalar(fields, ['goals'], ['goals'], 'text');
-	addScalar(
-		fields,
-		['personality.description', 'personalitydescription'],
-		['personality', 'description'],
-		'text',
-	);
-	addScalar(
-		fields,
-		['racialtrait.skillbonus', 'racialtraits.skillbonus'],
-		['racialTraits', 'skillBonus'],
-		'text',
-	);
-	addScalar(
-		fields,
-		['racialtrait.physicalability', 'racialtraits.physicalability'],
-		['racialTraits', 'physicalAbility'],
-		'text',
-	);
-	addScalar(fields, ['talents'], ['talents'], 'text');
-
-	for (const stat of [...BASE_STATS, ...DERIVED_STATS]) {
-		addScalar(fields, [`stats.${stat}`, stat], ['stats', stat], 'number');
-	}
-	for (const resource of ['hp', 'ar', 'ap', 'md']) {
-		for (const value of ['current', 'max']) {
-			addScalar(
-				fields,
-				[`${resource}.${value}`, `${value}${resource}`],
-				['resources', resource, value],
-				'number',
-			);
-		}
-	}
-	for (const value of ['current', 'max']) {
-		addScalar(
-			fields,
-			[`encumbrance.${value}`, `encumbrancecapacity.${value}`],
-			['encumbrance', value],
-			'number',
-		);
-	}
-	return fields;
-}
-
-function addScalar(fields, aliases, path, type) {
-	for (const alias of aliases) {
-		fields.set(normalizeFieldName(alias), {
-			fieldId: path.join('.'),
-			path,
-			type,
-		});
-	}
-}
-
 function normalizeFieldName(value = '') {
-	return value.toLowerCase().replace(/[^a-z]/g, '');
+	return getEditableFieldDefinition(value)?.id
+		?? value.toLowerCase().replace(/[^a-z]/g, '');
 }
 
 function getAtPath(object, path) {
@@ -203,15 +109,12 @@ function setAtPath(object, path, value) {
 	parent[path.at(-1)] = value;
 }
 
-function editError(message) {
-	return characterEditError(message);
+function editError(translationKey, translationVariables) {
+	return characterEditError(translationKey, translationVariables);
 }
 
 module.exports = {
-	dealDamage,
 	getEditableFieldValue,
 	normalizeFieldName,
-	resetTurnResources,
-	restoreResource,
 	setEditableFieldValue,
 };

@@ -1,12 +1,13 @@
 const fs = require('node:fs');
 const path = require('node:path');
-const { DEFAULT_LOCALE, normalizeLocale } = require('../util/i18n');
 
 const generatorsDirectory = path.join(__dirname, '..', 'data', 'generators');
 const cachedGenerators = new Map();
+const DEFAULT_LOCALE = 'en';
+const SUPPORTED_LOCALES = new Set(['en', 'fr']);
 
 function loadGenerators(locale = DEFAULT_LOCALE) {
-	const normalizedLocale = normalizeLocale(locale);
+	const normalizedLocale = normalizeGeneratorLocale(locale);
 	if (cachedGenerators.has(normalizedLocale)) {
 		return cachedGenerators.get(normalizedLocale);
 	}
@@ -51,6 +52,10 @@ function loadGenerators(locale = DEFAULT_LOCALE) {
 
 	cachedGenerators.set(normalizedLocale, generators);
 	return generators;
+}
+
+function normalizeGeneratorLocale(locale) {
+	return SUPPORTED_LOCALES.has(locale) ? locale : DEFAULT_LOCALE;
 }
 
 function readGenerator(filePath, file) {

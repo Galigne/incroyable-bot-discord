@@ -114,9 +114,15 @@
       "body": "Créez et gérez des personnages à l’aide d’une `CharacterKey` permanente, par exemple `D.Robert`. Cette clé identifie la sauvegarde et ne peut pas être modifiée. Utilisez `/rpg set` pour ouvrir le formulaire privé prérempli d’un champ. Dans `/rpg get`, ajoutez l’option `field` pour en afficher tous les détails."
     },
     "roll": {
-      "description": "Lancer un dé avec le nombre de faces choisi",
-      "sidesOption": "Nombre de faces du dé",
-      "result": "Résultat du lancer : **{{result}}**."
+      "description": "Lancer une expression de dés standard",
+      "expressionOption": "Expression de dés, par exemple 2d6+3",
+      "result": "**{{expression}}**\n\nLancers : {{rolls}}\nModificateur : {{modifier}}\nTotal : **{{total}}**",
+      "errors": {
+        "invalidFormat": "Expression de dés invalide. Utilisez `NOMBREdFACES` avec un modificateur facultatif, par exemple `2d6+3`.",
+        "diceCount": "Le nombre de dés doit être compris entre 1 et {{maxDice}}.",
+        "diceSides": "Le nombre de faces doit être compris entre 2 et {{maxSides}}.",
+        "modifier": "Le modificateur doit être compris entre -{{maxModifier}} et +{{maxModifier}}."
+      }
     },
     "rules": {
       "description": "Ouvrir le livre de règles public",

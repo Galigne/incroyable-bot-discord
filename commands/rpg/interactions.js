@@ -6,23 +6,27 @@ const {
 	TextInputStyle,
 } = require('discord.js');
 const {
-	getEditableFieldValue,
-	setEditableFieldValue,
-} = require('../../services/characterEditor');
-const characterStore = require('../../services/characterStore');
+	getEditableCharacterField,
+	updateEditableCharacter,
+} = require('../../services/characterApplicationService');
 const { canManageCharacter } = require('../../util/authorization');
-const { replyToCharacterError } = require('../../util/characterCommandErrors');
+const {
+	createCharacterEditResponse,
+} = require('../../util/characterCommandResponses');
+const {
+	replyToCharacterError,
+} = require('../../util/characterCommandErrors');
 const {
 	createInteractionSession,
 	deleteInteractionSession,
 	getInteractionSession,
 } = require('../../util/interactionSessions');
 const {
-	EDIT_FIELDS,
 	getEditFieldLabel,
 	MULTILINE_COLLECTION_FIELDS,
 	PARAGRAPH_FIELDS,
 } = require('./editorFields');
+const { getEditableFieldDefinition } = require('../../services/characterFieldCatalog');
 const { getLocale, t } = require('../../util/i18n');
 
 async function openCharacterEditor(interaction, config, characterKey, fieldName) {
@@ -37,11 +41,12 @@ async function openCharacterEditor(interaction, config, characterKey, fieldName)
 			return;
 		}
 
-		const character = await getEditableCharacter(
+		const editorState = await getEditableCharacterField(
 			characterKey,
+			normalizedField,
 			currentCharacter => canManageCharacter(interaction, currentCharacter, config),
 		);
-		const value = getEditableFieldValue(character, normalizedField);
+		const value = editorState.value;
 		if (value.length > 4_000) {
 			await interaction.reply({
 				content: t(locale, 'rpg.editor.tooLarge'),
@@ -80,27 +85,14 @@ async function handleRpgInteraction(interaction, config) {
 	}
 
 	try {
-		let editResult;
-		const character = await characterStore.updateCharacter(
+		const result = await updateEditableCharacter(
 			session.characterKey,
+			session.fieldName,
+			interaction.fields.getTextInputValue('field-value'),
 			currentCharacter => canManageCharacter(interaction, currentCharacter, config),
-			currentCharacter => {
-				editResult = setEditableFieldValue(
-					currentCharacter,
-					session.fieldName,
-					interaction.fields.getTextInputValue('field-value'),
-					locale,
-				);
-			},
 		);
 		deleteInteractionSession(session.id);
-		await interaction.reply({
-			content: t(locale, 'rpg.editor.result', {
-				name: character.displayName,
-				result: editResult,
-			}),
-			flags: MessageFlags.Ephemeral,
-		});
+		await interaction.reply(createCharacterEditResponse(result, locale));
 	}
 	catch (error) {
 		if (!await replyToCharacterError(interaction, error, locale)) {
@@ -156,26 +148,12 @@ function createFieldModal(sessionId, fieldName, value, locale = 'en') {
 		);
 }
 
-async function getEditableCharacter(characterKey, canManage) {
-	const character = await characterStore.getCharacter(characterKey);
-	if (!canManage(character)) {
-		const error = new Error('Only the character creator or a DM can edit it.');
-		error.code = 'NOT_CHARACTER_EDITOR';
-		throw error;
-	}
-	return character;
-}
-
 function findEditableField(fieldName) {
-	return EDIT_FIELDS.find(field => field.toLowerCase() === fieldName.toLowerCase());
+	return getEditableFieldDefinition(fieldName)?.editId ?? null;
 }
 
 function isTextField(fieldName) {
-	return !(
-		fieldName === 'level'
-		|| fieldName.startsWith('stats.')
-		|| /^(hp|ar|ap|md|encumbrance)\./i.test(fieldName)
-	);
+	return getEditableFieldDefinition(fieldName)?.type === 'text';
 }
 
 module.exports = {

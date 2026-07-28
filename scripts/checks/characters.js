@@ -1,3 +1,8 @@
+const {
+	createCharacterFieldEmbed,
+	createCharacterSummaryEmbed,
+} = require('../../util/characterRenderer');
+
 module.exports = function createCharacterChecks(context) {
 	const {
 		BASE_STAT_NAMES,
@@ -122,7 +127,7 @@ module.exports = function createCharacterChecks(context) {
 			) {
 				errors.push('Character saves are not restored correctly.');
 			}
-			const summary = character.toEmbed().toJSON();
+			const summary = createCharacterSummaryEmbed(character).toJSON();
 			const status = summary.fields.find(field => field.name === 'Status');
 			if (
 				!summary.description.includes('Tall with silver hair.')
@@ -144,7 +149,7 @@ module.exports = function createCharacterChecks(context) {
 				errors.push('The character summary status is not formatted correctly.');
 			}
 			for (const field of ['appearance', 'race', 'personality', 'statistics', 'rules', 'status']) {
-				const fieldEmbed = character.toFieldEmbed(field)?.toJSON();
+				const fieldEmbed = createCharacterFieldEmbed(character, field)?.toJSON();
 				if (field === 'rules' && !fieldEmbed.description.includes('Fire — Level 2')) {
 					errors.push('The detailed RULE view does not show RULE levels.');
 				}
@@ -166,11 +171,11 @@ module.exports = function createCharacterChecks(context) {
 			}
 			character.resources.ap.current = 2;
 			character.resources.ap.max = 4;
-			const apDetail = character.toFieldEmbed('ap').toJSON();
+			const apDetail = createCharacterFieldEmbed(character, 'ap').toJSON();
 			if (apDetail.description !== 'AP:\n🌟🌟⭐⭐') {
 				errors.push('AP availability is not displayed correctly.');
 			}
-			if (character.toFieldEmbed('unknown') !== null) {
+			if (createCharacterFieldEmbed(character, 'unknown') !== null) {
 				errors.push('Unknown character detail fields should be rejected.');
 			}
 
@@ -279,7 +284,7 @@ module.exports = function createCharacterChecks(context) {
 			) {
 				errors.push('Generated armor, equipment, inventory, AR, or encumbrance is incorrect.');
 			}
-			character.toEmbed().toJSON();
+			createCharacterSummaryEmbed(character).toJSON();
 
 			const routedBackgrounds = generatorCatalog.getCategory('background').entries;
 			for (const routedBackground of routedBackgrounds) {
@@ -321,7 +326,11 @@ module.exports = function createCharacterChecks(context) {
 				}
 			}
 			try {
-				await characterStore.updateCharacter(originalName, () => false, () => {});
+				await characterStore.updateCharacter(
+					originalName,
+					() => false,
+					() => undefined,
+				);
 				errors.push('A non-owner was allowed to edit a character.');
 			}
 			catch (error) {

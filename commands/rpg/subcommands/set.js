@@ -5,7 +5,6 @@ const { filterAutocompleteChoices } = require('../../../util/autocomplete');
 const { getLocale, localizeDescription, t } = require('../../../util/i18n');
 const { getEditFieldLabel } = require('../editorFields');
 
-const SET_HELP = t('en', 'rpg.setHelp.body');
 const descriptionKey = 'rpg.set.description';
 
 module.exports = {
@@ -52,5 +51,4 @@ module.exports = {
 	},
 };
 
-module.exports.SET_HELP = SET_HELP;
 module.exports.EDIT_FIELDS = EDIT_FIELDS;

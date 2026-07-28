@@ -1,37 +1,21 @@
-const { MessageFlags } = require('discord.js');
-const characterStore = require('../../../services/characterStore');
+const {
+	getCharacter,
+} = require('../../../services/characterApplicationService');
 const { filterAutocompleteChoices } = require('../../../util/autocomplete');
 const { getCharacterChoices } = require('../autocomplete');
 const { getLocale, localizeDescription, t } = require('../../../util/i18n');
 const { getCharacterFieldLabel } = require('../../../util/characterDisplay');
+const {
+	createCharacterGetResponse,
+} = require('../../../util/characterCommandResponses');
+const { replyToCharacterError } = require('../../../util/characterCommandErrors');
+const {
+	getViewableFields,
+} = require('../../../services/characterFieldCatalog');
 
-const GET_FIELDS = [
-	'name',
-	'firstName',
-	'lastName',
-	'level',
-	'race',
-	'appearance',
-	'backstory',
-	'goals',
-	'personality',
-	'racialTraits',
-	'statistics',
-	'rules',
-	'talents',
-	'status',
-	'HP',
-	'AR',
-	'AP',
-	'MD',
-	'statusEffects',
-	'equipment',
-	'inventory',
-	'encumbrance',
-];
+const GET_FIELDS = getViewableFields().map(definition => definition.viewId);
 
 const descriptionKey = 'rpg.get.description';
-const GET_HELP = t('en', 'rpg.getHelp.body');
 
 module.exports = {
 	name: 'get',
@@ -74,49 +58,20 @@ module.exports = {
 		const name = interaction.options.getString('character-key', true);
 		const fieldName = interaction.options.getString('field');
 		try {
-			const character = await characterStore.getCharacter(name);
-			const embed = fieldName
-				? character.toFieldEmbed(fieldName, locale)
-				: character.toEmbed(locale);
-			if (!embed) {
-				await interaction.reply({
-					content: t(locale, 'rpg.get.unknownField', { field: fieldName }),
-					flags: MessageFlags.Ephemeral,
-				});
-				return;
-			}
-			embed.setFooter({
-				text: fieldName
-					? t(locale, 'rpg.get.keyFooter', {
-						key: name,
-						keyLabel: getCharacterFieldLabel(locale, 'key'),
-					})
-					: t(locale, 'rpg.get.detailsFooter'),
-			});
-			await interaction.reply({ embeds: [embed] });
+			const character = await getCharacter(name);
+			await interaction.reply(
+				createCharacterGetResponse(character, name, fieldName, locale),
+			);
 		}
 		catch (error) {
-			if (error.code === 'ENOENT') {
-				await interaction.reply({
-					content: t(locale, 'errors.characterMissing'),
-					flags: MessageFlags.Ephemeral,
-				});
-				return;
+			if (!await replyToCharacterError(interaction, error, locale)) {
+				throw error;
 			}
-			if (error.code === 'INVALID_CHARACTER_NAME') {
-				await interaction.reply({
-					content: t(locale, 'errors.invalidCharacterKey'),
-					flags: MessageFlags.Ephemeral,
-				});
-				return;
-			}
-			throw error;
 		}
 	},
 };
 
 module.exports.GET_FIELDS = GET_FIELDS;
-module.exports.GET_HELP = GET_HELP;
 
 function getGetFieldLabel(field, locale) {
 	return getCharacterFieldLabel(locale, field, {

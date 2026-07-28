@@ -39,6 +39,44 @@ module.exports = function createRuntimeChecks(context) {
 		}
 	}
 
+	function checkArchitectureBoundaries() {
+		const domainRoots = [
+			path.join(root, 'models'),
+			path.join(root, 'services'),
+		];
+		for (const directory of domainRoots) {
+			for (const file of findJavaScriptFiles(directory)) {
+				const source = fs.readFileSync(file, 'utf8');
+				const relativePath = path.relative(root, file);
+				if (/require\(['"](?:discord\.js|@discordjs\/)/.test(source)) {
+					errors.push(`${relativePath} imports a Discord integration from the domain layer.`);
+				}
+				if (/require\(['"][^'"]*util\/i18n['"]\)/.test(source)) {
+					errors.push(`${relativePath} imports the localization catalog from the domain layer.`);
+				}
+			}
+		}
+
+		for (const file of findJavaScriptFiles(path.join(root, 'commands'))) {
+			const source = fs.readFileSync(file, 'utf8');
+			const relativePath = path.relative(root, file);
+			if (/\bnew\s+EmbedBuilder\b/.test(source)) {
+				errors.push(`${relativePath} constructs embeds instead of using a response adapter.`);
+			}
+			if (/services\/(?:characterStore|mechanics\/)/.test(source)) {
+				errors.push(`${relativePath} bypasses the character application service.`);
+			}
+		}
+
+		const characterModel = fs.readFileSync(
+			path.join(root, 'models', 'Character.js'),
+			'utf8',
+		);
+		if (/\bto(?:Field)?Embed\s*\(/.test(characterModel)) {
+			errors.push('models/Character.js must not own Discord embed rendering.');
+		}
+	}
+
 	function checkConfiguration() {
 		if (Object.hasOwn(config, 'token')) {
 			errors.push('config.json must not contain a token.');
@@ -187,6 +225,10 @@ module.exports = function createRuntimeChecks(context) {
 			path.join('media', 'LOGO.jpg'),
 			localAudioFile,
 			path.join('media', 'TAILS.gif'),
+			...Array.from(
+				{ length: 20 },
+				(_, index) => path.join('media', `D20-${index + 1}.gif`),
+			),
 		]) {
 			if (!fs.existsSync(path.join(root, file))) {
 				errors.push(`Required file is missing: ${file}`);
@@ -228,6 +270,7 @@ module.exports = function createRuntimeChecks(context) {
 		checkNodeVersion,
 		checkJavaScriptSyntax,
 		checkDeprecatedInteractionOptions,
+		checkArchitectureBoundaries,
 		checkConfiguration,
 		checkRequiredFiles,
 	};

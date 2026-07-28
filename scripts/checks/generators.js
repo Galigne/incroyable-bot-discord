@@ -210,15 +210,15 @@ module.exports = function createGeneratorChecks(context) {
 			) {
 				errors.push('RULE generators should expose separate Name and Description fields.');
 			}
-			const genCommand = require('../../commands/rpg/subcommands/gen');
-			const structuredEmbed = genCommand.createGeneratedEmbed(rulesResult).toJSON();
+			const { createGeneratedEmbed } = require('../../util/generatorResponses');
+			const structuredEmbed = createGeneratedEmbed(rulesResult).toJSON();
 			if (
 				structuredEmbed.fields?.[0]?.name !== 'Name'
 				|| structuredEmbed.fields?.[1]?.name !== 'Description'
 			) {
 				errors.push('Structured generator fields are not rendered correctly.');
 			}
-			const weightedTextEmbed = genCommand.createGeneratedEmbed({
+			const weightedTextEmbed = createGeneratedEmbed({
 				category: { name: 'test' },
 				entry: weightedEntries[1],
 			}).toJSON();

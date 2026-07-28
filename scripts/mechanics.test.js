@@ -33,6 +33,9 @@ const {
 	recalculateDerivedStats,
 } = require('../services/mechanics/statistics');
 const { populateRandomCharacter } = require('../services/randomCharacterGenerator');
+const {
+	createLocalizedCharacterGenerationOptions,
+} = require('../util/characterGenerationLocalization');
 
 test('damage preserves AR-first and piercing behavior', () => {
 	const character = createCharacterFixture();
@@ -239,12 +242,11 @@ test('seeded random character generation remains equivalent', () => {
 
 test('random character generation uses localized content without changing identifiers', () => {
 	const character = createCharacterFixture();
-	populateRandomCharacter(character, {
+	populateRandomCharacter(character, createLocalizedCharacterGenerationOptions({
 		background: 'criminal',
 		level: 1,
-		locale: 'fr',
 		random: () => 0,
-	});
+	}, 'fr'));
 
 	assert.equal(character.race.name, 'Humain');
 	assert.match(character.inventory.at(-1), /^\d+ pièces d’or$/);

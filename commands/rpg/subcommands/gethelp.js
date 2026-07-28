@@ -1,5 +1,4 @@
 const { MessageFlags } = require('discord.js');
-const { GET_HELP } = require('./get');
 const { getLocale, localizeDescription, t } = require('../../../util/i18n');
 
 const descriptionKey = 'rpg.getHelp.description';

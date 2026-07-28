@@ -114,9 +114,15 @@
       "body": "Create and manage RPG characters using a stable `CharacterKey` (for example, `D.Robert`). The key identifies the save and cannot be changed. Use `/rpg set` with a field to open its prefilled private form. Use the optional field in `/rpg get` for complete details."
     },
     "roll": {
-      "description": "Roll a die with a configurable number of sides",
-      "sidesOption": "Number of sides on the die",
-      "result": "You rolled **{{result}}**."
+      "description": "Roll a standard dice expression",
+      "expressionOption": "Dice expression, for example 2d6+3",
+      "result": "**{{expression}}**\n\nRolls: {{rolls}}\nModifier: {{modifier}}\nTotal: **{{total}}**",
+      "errors": {
+        "invalidFormat": "Invalid dice expression. Use `COUNTdSIDES` with one optional modifier, for example `2d6+3`.",
+        "diceCount": "The dice count must be between 1 and {{maxDice}}.",
+        "diceSides": "The number of sides must be between 2 and {{maxSides}}.",
+        "modifier": "The modifier must be between -{{maxModifier}} and +{{maxModifier}}."
+      }
     },
     "rules": {
       "description": "Open the public TTRPG rulebook",

@@ -12,11 +12,11 @@ const {
 	calculateMaxAp,
 	createGeneratedResources,
 } = require('./mechanics/resources');
-const { t } = require('../util/i18n');
 
 function populateRandomCharacter(character, options = {}) {
 	const random = options.random ?? Math.random;
 	const locale = options.locale ?? 'en';
+	const formatGold = options.formatGold ?? (gold => `${gold} gold`);
 	const level = options.level ?? randomInteger(1, 10, random);
 	if (!Number.isInteger(level) || level < 1 || level > 10) {
 		throw generationError(
@@ -91,7 +91,7 @@ function populateRandomCharacter(character, options = {}) {
 	const gold = level * randomInteger(1, 20, random) + 5;
 	character.inventory = [
 		...inventoryItems.map(formatNamedEntry),
-		t(locale, 'character.generatedGold', { gold }),
+		formatGold(gold),
 	];
 	character.encumbrance = {
 		current: [armor, ...weapons, ...inventoryItems]

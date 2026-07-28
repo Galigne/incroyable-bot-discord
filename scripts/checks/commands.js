@@ -89,8 +89,10 @@ module.exports = function createCommandChecks(context) {
 
 		const rpgCommand = commands.get('rpg');
 		const { EDIT_FIELDS } = require('../../commands/rpg/editorFields');
-		const { SET_HELP } = require('../../commands/rpg/subcommands/set');
-		const { GET_FIELDS, GET_HELP } = require('../../commands/rpg/subcommands/get');
+		const { GET_FIELDS } = require('../../commands/rpg/subcommands/get');
+		const { t } = require('../../util/i18n');
+		const SET_HELP = t('en', 'rpg.setHelp.body');
+		const GET_HELP = t('en', 'rpg.getHelp.body');
 		if (
 			EDIT_FIELDS.length < 30
 			|| !GET_FIELDS.includes('personality')
@@ -142,7 +144,7 @@ module.exports = function createCommandChecks(context) {
 			['get', 'field'],
 			['heal', 'character-key'],
 			['heal', 'percentage'],
-			['roll', 'sides'],
+			['roll', 'expression'],
 			['set', 'character-key'],
 			['set', 'field'],
 		]) {

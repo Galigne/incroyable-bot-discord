@@ -1,10 +1,13 @@
-const characterStore = require('../../../services/characterStore');
-const { resetTurnResources } = require('../../../services/mechanics/resources');
+const {
+	endCharacterTurn,
+} = require('../../../services/characterApplicationService');
 const { canManageCharacter } = require('../../../util/authorization');
+const {
+	createEndTurnResponse,
+} = require('../../../util/characterCommandResponses');
 const { replyToCharacterError } = require('../../../util/characterCommandErrors');
 const { getCharacterChoices } = require('../autocomplete');
 const { getLocale, localizeDescription, t } = require('../../../util/i18n');
-const { getResourceAbbreviation } = require('../../../util/characterDisplay');
 
 const descriptionKey = 'rpg.endTurn.description';
 
@@ -28,20 +31,11 @@ module.exports = {
 		const locale = getLocale(config, interaction.guildId);
 		const characterName = interaction.options.getString('character-key', true);
 		try {
-			const character = await characterStore.updateCharacter(
+			const result = await endCharacterTurn(
 				characterName,
 				currentCharacter => canManageCharacter(interaction, currentCharacter, config),
-				currentCharacter => {
-					resetTurnResources(currentCharacter);
-				},
 			);
-			await interaction.reply(t(locale, 'rpg.endTurn.result', {
-				ap: character.resources.ap.current,
-				apLabel: getResourceAbbreviation(locale, 'ap'),
-				md: character.resources.md.current,
-				mdLabel: getResourceAbbreviation(locale, 'md'),
-				name: character.displayName,
-			}));
+			await interaction.reply(createEndTurnResponse(result, locale));
 		}
 		catch (error) {
 			if (!await replyToCharacterError(interaction, error, locale)) {

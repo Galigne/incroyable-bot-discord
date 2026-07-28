@@ -9,7 +9,7 @@ function isGuildOwner(interaction) {
 		interaction?.guild
 		&& interaction.guild.ownerId
 		&& interaction.user?.id
-		&& interaction.guild.ownerId === interaction.user.id
+		&& interaction.guild.ownerId === interaction.user.id,
 	);
 }
 
@@ -28,7 +28,7 @@ function canManageCharacter(interaction, character, config) {
 		&& (
 			character.creatorId === interaction.user.id
 			|| hasDmPermission(interaction, config)
-		)
+		),
 	);
 }
 

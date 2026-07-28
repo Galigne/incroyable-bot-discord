@@ -1,10 +1,16 @@
-const characterStore = require('../../../services/characterStore');
+const {
+	generateCharacter,
+} = require('../../../services/characterApplicationService');
 const generatorCatalog = require('../../../services/generatorCatalog');
-const { populateRandomCharacter } = require('../../../services/randomCharacterGenerator');
+const {
+	createGeneratedCharacterResponse,
+} = require('../../../util/characterCommandResponses');
+const {
+	createLocalizedCharacterGenerationOptions,
+} = require('../../../util/characterGenerationLocalization');
 const { replyToCharacterError } = require('../../../util/characterCommandErrors');
 const { filterAutocompleteChoices } = require('../../../util/autocomplete');
 const { getLocale, localizeDescription, t } = require('../../../util/i18n');
-const { getCharacterFieldLabel } = require('../../../util/characterDisplay');
 
 const descriptionKey = 'rpg.genChar.description';
 
@@ -70,28 +76,12 @@ module.exports = {
 		const level = interaction.options.getInteger('level');
 		const background = interaction.options.getString('background');
 		try {
-			const character = await characterStore.createCharacter(
+			const character = await generateCharacter(
 				characterKey,
 				interaction.user.id,
-				generatedCharacter => populateRandomCharacter(
-					generatedCharacter,
-					{ background, level, locale },
-				),
+				createLocalizedCharacterGenerationOptions({ background, level }, locale),
 			);
-			const embed = character.toEmbed(locale)
-				.setFooter({
-					text: t(locale, 'rpg.genChar.footer', {
-						key: character.key,
-						keyLabel: getCharacterFieldLabel(locale, 'key'),
-					}),
-				});
-			await interaction.reply({
-				content: t(locale, 'rpg.genChar.success', {
-					key: character.key,
-					name: character.displayName,
-				}),
-				embeds: [embed],
-			});
+			await interaction.reply(createGeneratedCharacterResponse(character, locale));
 		}
 		catch (error) {
 			if (!await replyToCharacterError(interaction, error, locale)) {

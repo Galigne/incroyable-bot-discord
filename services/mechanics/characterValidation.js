@@ -1,14 +1,14 @@
 const { MAX_AP } = require('./constants');
-const { t } = require('../../util/i18n');
-const { getResourceAbbreviation } = require('../../util/characterDisplay');
 
-function characterEditError(message) {
-	const error = new Error(message);
+function characterEditError(translationKey, translationVariables = {}) {
+	const error = new Error(translationKey);
 	error.code = 'INVALID_CHARACTER_EDIT';
+	error.translationKey = translationKey;
+	error.translationVariables = translationVariables;
 	return error;
 }
 
-function validateActionPointEdit(character, path, value, locale = 'en') {
+function validateActionPointEdit(character, path, value) {
 	if (
 		path[0] !== 'resources'
 		|| path[1] !== 'ap'
@@ -16,20 +16,15 @@ function validateActionPointEdit(character, path, value, locale = 'en') {
 		return;
 	}
 	if (!Number.isInteger(value) || value < 0 || value > MAX_AP) {
-		throw characterEditError(t(locale, 'errors.apRange', {
-			apLabel: getResourceAbbreviation(locale, 'ap'),
+		throw characterEditError('errors.apRange', {
 			max: MAX_AP,
-		}));
+		});
 	}
 	if (path[2] === 'current' && value > character.resources.ap.max) {
-		throw characterEditError(t(locale, 'errors.apCurrentAboveMax', {
-			apLabel: getResourceAbbreviation(locale, 'ap'),
-		}));
+		throw characterEditError('errors.apCurrentAboveMax');
 	}
 	if (path[2] === 'max' && value < character.resources.ap.current) {
-		throw characterEditError(t(locale, 'errors.apMaxBelowCurrent', {
-			apLabel: getResourceAbbreviation(locale, 'ap'),
-		}));
+		throw characterEditError('errors.apMaxBelowCurrent');
 	}
 }
 

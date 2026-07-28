@@ -7,8 +7,11 @@
   "scripts": {
     "start": "node index.js",
     "check": "node scripts/check.js",
+    "lint": "eslint .",
+    "test:dice": "node --test scripts/dice.test.js",
     "test:mechanics": "node --test scripts/mechanics.test.js",
-    "test": "npm run test:mechanics && npm run check"
+    "test:services": "node --test scripts/services.test.js",
+    "test": "npm run lint && npm run test:dice && npm run test:mechanics && npm run test:services && npm run check"
   },
   "keywords": [
     "discord",
@@ -24,5 +27,10 @@
   },
   "engines": {
     "node": ">=22.12.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.5",
+    "eslint": "^9.39.5",
+    "globals": "^16.5.0"
   }
 }

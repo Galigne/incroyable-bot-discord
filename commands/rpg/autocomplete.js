@@ -1,8 +1,10 @@
-const characterStore = require('../../services/characterStore');
+const {
+	listCharacters,
+} = require('../../services/characterApplicationService');
 const { filterAutocompleteChoices } = require('../../util/autocomplete');
 
 async function getCharacterChoices(focusedValue, options = {}) {
-	const characters = await characterStore.listCharacters();
+	const characters = await listCharacters();
 	const filteredCharacters = options.creatorId
 		? characters.filter(character => character.creatorId === options.creatorId)
 		: characters;

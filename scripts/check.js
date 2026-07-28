@@ -103,6 +103,7 @@ async function main() {
 		runtimeChecks.checkNodeVersion();
 		runtimeChecks.checkJavaScriptSyntax();
 		runtimeChecks.checkDeprecatedInteractionOptions();
+		runtimeChecks.checkArchitectureBoundaries();
 		localizationChecks.checkLocalization();
 		const commands = commandChecks.checkCommands();
 		commandChecks.checkHelpOrder(commands.values(), 'top-level commands');

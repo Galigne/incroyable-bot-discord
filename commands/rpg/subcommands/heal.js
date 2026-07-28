@@ -1,6 +1,10 @@
-const characterStore = require('../../../services/characterStore');
-const { restoreHealingResources } = require('../../../services/mechanics/resources');
+const {
+	healCharacter,
+} = require('../../../services/characterApplicationService');
 const { canManageCharacter } = require('../../../util/authorization');
+const {
+	createCharacterHealResponse,
+} = require('../../../util/characterCommandResponses');
 const { replyToCharacterError } = require('../../../util/characterCommandErrors');
 const { filterAutocompleteChoices } = require('../../../util/autocomplete');
 const { getCharacterChoices } = require('../autocomplete');
@@ -76,32 +80,13 @@ module.exports = {
 		const resource = interaction.options.getString('resource', true);
 		const percentage = interaction.options.getNumber('percentage', true);
 		try {
-			let restoredResources;
-			const character = await characterStore.updateCharacter(
+			const result = await healCharacter(
 				characterName,
-				currentCharacter => canManageCharacter(interaction, currentCharacter, config),
-				currentCharacter => {
-					restoredResources = restoreHealingResources(
-						currentCharacter,
-						resource,
-						percentage,
-						locale,
-					);
-				},
-			);
-			const changes = restoredResources.map(result => t(locale, 'rpg.heal.change', {
-				current: result.current,
-				max: result.max,
-				previous: result.previous,
-				resource: result.resource === 'hp'
-					? getResourceAbbreviation(locale, 'hp')
-					: getResourceAbbreviation(locale, 'ar'),
-			}));
-			await interaction.reply(t(locale, 'rpg.heal.result', {
-				changes: changes.join('\n'),
-				name: character.displayName,
+				resource,
 				percentage,
-			}));
+				currentCharacter => canManageCharacter(interaction, currentCharacter, config),
+			);
+			await interaction.reply(createCharacterHealResponse(result, locale));
 		}
 		catch (error) {
 			if (!await replyToCharacterError(interaction, error, locale)) {

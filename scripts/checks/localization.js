@@ -1,3 +1,5 @@
+const { createCharacterSummaryEmbed } = require('../../util/characterRenderer');
+
 module.exports = function createLocalizationChecks(context) {
 	const {
 		errors,
@@ -79,7 +81,10 @@ module.exports = function createLocalizationChecks(context) {
 		}
 
 		const Character = require('../../models/Character');
-		const frenchSummary = new Character('Localisation', 'tester').toEmbed('fr').toJSON();
+		const frenchSummary = createCharacterSummaryEmbed(
+			new Character('Localisation', 'tester'),
+			'fr',
+		).toJSON();
 		if (
 			!frenchSummary.description.includes('Niveau')
 			|| frenchSummary.fields[0]?.name !== 'État'

@@ -38,11 +38,11 @@
   "talents": "Arcane Student — +1 when identifying a RULE, rune, or magical phenomenon.\nDanger Sense — +1 to Reflexes when reacting to an unseen or unexpected threat.\nUnshakable — +1 to resist fear, intimidation, and supernatural dread.",
   "resources": {
     "hp": {
-      "current": 180,
+      "current": 156,
       "max": 360
     },
     "ar": {
-      "current": 76,
+      "current": 0,
       "max": 126
     },
     "ap": {

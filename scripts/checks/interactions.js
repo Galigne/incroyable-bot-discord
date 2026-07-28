@@ -9,7 +9,7 @@ module.exports = function createInteractionChecks(context) {
 		const suffix = `${process.pid}_${Date.now()}`;
 		const characterKey = `ux.${suffix}`;
 		const { handleRpgInteraction, openCharacterEditor } = require(
-			'../../commands/rpg/interactions'
+			'../../commands/rpg/interactions',
 		);
 		const user = { id: 'ux-creator' };
 		const member = {

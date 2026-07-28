@@ -27,8 +27,10 @@ All bot-owned user-facing text is centralized in `locales/en.json` and
 receives localized French descriptions and choice labels.
 French game terminology follows `documentation/JDR_RANDOM_RULES_FR.md`; for example,
 the localized interface uses PV, PR, PA, DD, LOI, and dons raciaux.
-Character field names and resource abbreviations are mapped centrally in
-`util/characterDisplay.js`. Resource abbreviations are unique within each language:
+Character field identities, aliases, storage paths, and editing/viewing capabilities
+are defined once in `services/characterFieldCatalog.js`. Localized labels and
+resource abbreviations are resolved through `util/characterDisplay.js`. Resource
+abbreviations are unique within each language:
 HP/AR/AP/MD in English and PV/PR/PA/DD in French.
 
 Generator catalogs follow the same server locale. English reference files live in
@@ -73,7 +75,7 @@ Never commit `.env` or a Discord token. Reset any token that has previously been
 - `/rpg gen category:<category>` — generate a random prompt (DM only)
 - `/rpg gen-char character-key:<new key> [level] [background]` — generate and save a complete character (DM only)
 - `/rpg gen-help` — explain generation and list generator categories
-- `/rpg roll sides:<2-1000>` — roll a die
+- `/rpg roll expression:<dice expression>` — roll expressions such as `2d6+3`
 - `/rpg add character-key:<new key>` — create a blank character sheet with a stable key
 - `/rpg get character-key:<key> [field]` — display the summary or one complete field
 - `/rpg get-help` — list retrievable fields and examples
@@ -85,10 +87,17 @@ Never commit `.env` or a Discord token. Reset any token that has previously been
 
 Discord provides native validation and choices for constrained options.
 Autocomplete suggests existing CharacterKeys, settable fields, retrievable fields,
-generator categories, common dice sizes, levels, and common purge amounts. The
+generator categories, common dice expressions, levels, and common purge amounts. The
 private form opens immediately after `/rpg set` is submitted. Multiline
 fields accept free-form lines with optional leading dashes; RULEs use
 `Name: Level: Description`.
+
+Dice expressions use one `COUNTdSIDES` group with an optional `+MODIFIER` or
+`-MODIFIER`, such as `1d20`, `2d6+3`, or `4d8-2`. A roll is limited to 100 dice,
+1,000 sides per die, and an absolute modifier of 10,000. Advanced dice operators,
+multiple groups, parentheses, and other arithmetic are not supported. Exact
+`1d2` and `1d20` rolls return their corresponding GIF only; all other expressions
+return the textual roll breakdown.
 
 Character creators can edit, delete, heal, damage, and end turns for their own
 sheets. Users with the configured DM role can perform those actions on every
@@ -129,17 +138,22 @@ The full TTRPG rules are available in
 
 ## Project structure
 
-- `commands/`: top-level slash commands
-- `commands/rpg/subcommands/`: one module per RPG subcommand
+- `commands/`: thin Discord slash-command adapters
+- `commands/rpg/subcommands/`: one adapter per RPG subcommand
+- `services/`: Discord-independent application workflows, persistence, parsing,
+  validation, mechanics, and generation
+- `models/`: Discord-independent domain models
+- `util/`: Discord response/rendering adapters plus shared localization,
+  authorization, autocomplete, and command-loading helpers
+- `adapters/`: external Discord integrations such as local voice playback
 - `data/generators/en/` and `data/generators/fr/`: localized JSON prompt catalogs
-- `models/`: domain models
-- `services/`: character persistence and local MP3 playback
-- `util/`: command loading and authorization
 - `locales/`: English and French user-interface catalogs
-- `scripts/check.js`: offline validation
+- `scripts/`: focused `node:test` suites and offline integration checks
 
-Run `npm test` to validate syntax, slash-command schemas, autocomplete configuration,
-permissions, the current character-save schema, and voice dependencies.
+Run `npm test` to run ESLint, focused service/mechanics/dice tests, architectural
+boundary checks, slash-command schema and autocomplete checks, permissions,
+localization, the current character-save schema, required media, and voice
+dependencies.
 
 Generator entries may be plain strings, weighted strings, or objects with
 multiple display fields. See

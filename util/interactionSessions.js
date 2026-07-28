@@ -6,11 +6,11 @@ const sessions = new Map();
 function createInteractionSession(type, userId, data = {}) {
 	removeExpiredSessions();
 	const session = {
+		...data,
 		id: randomUUID(),
 		type,
 		userId,
 		expiresAt: Date.now() + SESSION_LIFETIME_MS,
-		...data,
 	};
 	sessions.set(session.id, session);
 	return session;
