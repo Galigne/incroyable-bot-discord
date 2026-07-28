@@ -49,7 +49,7 @@ async function openCharacterEditor(interaction, config, characterKey, fieldName)
 			return;
 		}
 
-		const session = createInteractionSession('edit', interaction.user.id, {
+		const session = createInteractionSession('set', interaction.user.id, {
 			characterKey,
 			fieldName: normalizedField,
 		});
@@ -63,15 +63,15 @@ async function openCharacterEditor(interaction, config, characterKey, fieldName)
 }
 
 async function handleRpgInteraction(interaction, config) {
-	if (!interaction.isModalSubmit() || !interaction.customId.startsWith('rpg-edit:')) {
+	if (!interaction.isModalSubmit() || !interaction.customId.startsWith('rpg-set:')) {
 		return false;
 	}
 
-	const sessionId = interaction.customId.slice('rpg-edit:'.length);
-	const session = getInteractionSession(sessionId, interaction.user.id, 'edit');
+	const sessionId = interaction.customId.slice('rpg-set:'.length);
+	const session = getInteractionSession(sessionId, interaction.user.id, 'set');
 	if (!session) {
 		await interaction.reply({
-			content: 'This edit form expired. Run `/rpg edit` again.',
+			content: 'This form expired. Run `/rpg set` again.',
 			flags: MessageFlags.Ephemeral,
 		});
 		return true;
@@ -141,7 +141,7 @@ function createFieldModal(sessionId, fieldName, value) {
 	}
 
 	return new ModalBuilder()
-		.setCustomId(`rpg-edit:${sessionId}`)
+		.setCustomId(`rpg-set:${sessionId}`)
 		.setTitle(`Edit ${label}`.slice(0, 45))
 		.addLabelComponents(
 			new LabelBuilder()

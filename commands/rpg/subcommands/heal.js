@@ -5,19 +5,19 @@ const { replyToCharacterError } = require('../../../util/characterCommandErrors'
 const { filterAutocompleteChoices } = require('../../../util/autocomplete');
 const { getCharacterChoices } = require('../autocomplete');
 
-const COMMON_REST_PERCENTAGES = [0, 25, 50, 75, 100];
+const COMMON_HEAL_PERCENTAGES = [0, 25, 50, 75, 100];
 
 module.exports = {
-	name: 'rest',
+	name: 'heal',
 	description: 'Restore current HP or AR to a percentage of its maximum',
-	usage: '/rpg rest character-key:<key> resource:<HP|AR> percentage:<0-100>',
+	usage: '/rpg heal character-key:<key> resource:<HP|AR> percentage:<0-100>',
 	helpOrder: 50,
 	configure: command => command
-		.setName('rest')
+		.setName('heal')
 		.setDescription('Restore current HP or AR to a percentage of its maximum')
 		.addStringOption(option => option
 			.setName('character-key')
-			.setDescription('Character receiving the rest')
+			.setDescription('Character receiving the healing')
 			.setAutocomplete(true)
 			.setRequired(true))
 		.addStringOption(option => option
@@ -42,7 +42,7 @@ module.exports = {
 			return;
 		}
 		await interaction.respond(filterAutocompleteChoices(
-			COMMON_REST_PERCENTAGES.map(value => ({
+			COMMON_HEAL_PERCENTAGES.map(value => ({
 				name: `${value}%`,
 				value,
 			})),

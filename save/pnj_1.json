@@ -1,0 +1,84 @@
+{
+  "key": "pnj_1",
+  "firstName": "Thane",
+  "lastName": "Ironroot",
+  "creatorId": "168424192520355843",
+  "level": 3,
+  "race": {
+    "name": "Human",
+    "physicalDescription": "Adaptable people found across nearly every region, with highly varied appearances, cultures, and traditions.",
+    "lore": ""
+  },
+  "appearance": "Young, carefully groomed, and visibly uncomfortable in ceremonial clothing.",
+  "backstory": "An idealistic heir was educated abroad and returned to find the family profiting from abuse.",
+  "goals": "Reform the domain without provoking a coup from relatives or retainers.",
+  "personality": {
+    "traits": [
+      "Suspicious of all magic except one obviously fraudulent superstition followed with complete devotion.",
+      "Apologizes to every defeated enemy and becomes offended if the apology is rejected."
+    ],
+    "description": ""
+  },
+  "racialTraits": {
+    "skillBonus": "+1 to History",
+    "physicalAbility": "Relentless Endurance: Humans suffer reduced fatigue from prolonged travel, heat, marching, pursuit, and repeated physical activity."
+  },
+  "stats": {
+    "constitution": 8,
+    "strength": 4,
+    "dexterity": 11,
+    "intelligence": 13,
+    "speed": 7,
+    "perception": 16,
+    "charisma": 11,
+    "initiative": 7,
+    "reflexes": 7
+  },
+  "rules": [
+    {
+      "name": "Thread RULE",
+      "description": "Create and control a few meters of thread within sight; stronger fibers require carried material, and control weakens sharply with distance.",
+      "level": 1
+    },
+    {
+      "name": "Paper RULE",
+      "description": "Fold paper into briefly animated tools or creatures; water, fire, and heavy force destroy them easily.",
+      "level": 1
+    }
+  ],
+  "talents": "Beast Friend — +2 when calming or understanding ordinary animals.\nAmbidextrous — The character can use either hand with equal precision.",
+  "resources": {
+    "hp": {
+      "current": 63,
+      "max": 112
+    },
+    "ar": {
+      "current": 6,
+      "max": 6
+    },
+    "ap": {
+      "current": 4,
+      "max": 4
+    },
+    "md": {
+      "current": 1,
+      "max": 3.5
+    }
+  },
+  "statusEffects": [],
+  "equipment": [
+    "Common light armor — Ordinary clothing or light padding that offers mobility but no meaningful AR.",
+    "Spear — A long-reaching weapon useful for thrusting, bracing, and throwing.",
+    "Scimitar — A broad curved sword designed for fluid cutting attacks."
+  ],
+  "inventory": [
+    "Waterskin — A filled leather waterskin.",
+    "Herbalism pouch — Small tools and containers for gathering useful plants.",
+    "Crowbar — A sturdy iron lever for doors, crates, and obstacles.",
+    "59 gold"
+  ],
+  "encumbrance": {
+    "current": 6,
+    "max": 8
+  }
+}

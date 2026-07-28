@@ -13,7 +13,9 @@ It provides:
 3. TTRPG tools for random generation, dice rolls, and persistent character sheets.
 
 The game rules are defined in `documentation/TTRPG_RANDOM_RULES_EN.md`. Treat that
-file as the primary rules reference when implementing RPG mechanics.
+file as the primary rules reference when implementing RPG mechanics. Rulebook files
+are read-only unless the user explicitly requests a rulebook change; never edit them
+merely to make documentation match an implementation.
 
 ## Runtime and validation
 
@@ -46,8 +48,8 @@ through `INCREDIBLE_BOT_SAVE_DIRECTORY`; tests must never write to real saves.
 - `commands/rpg/interactions.js`: direct prefilled edit modal and modal submission.
 - `models/Character.js`: character schema and Discord embed rendering.
 - `services/characterStore.js`: JSON character persistence.
-- `services/characterEditor.js`: field parsing, validation, resource restoration,
-  and end-turn behavior.
+- `services/characterEditor.js`: field parsing, validation, damage, resource
+  restoration, and end-turn behavior.
 - `services/generatorCatalog.js`: loads and validates generator JSON and performs
   weighted selection.
 - `services/randomCharacterGenerator.js`: builds complete random characters.
@@ -83,9 +85,9 @@ relevant dedicated help command, README, and tests synchronized.
 `helpOrder` controls display order. The generation commands must appear in this
 exact sequence:
 
-1. `/rpg generate category:<category>`
-2. `/rpg generate-character character-key:<new key> [level] [background]`
-3. `/rpg generate-help`
+1. `/rpg gen category:<category>`
+2. `/rpg gen-char character-key:<new key> [level] [background]`
+3. `/rpg gen-help`
 
 Use autocomplete for all practical command arguments. Discord returns at most 25
 autocomplete choices, so filter locally with `util/autocomplete.js`.
@@ -102,17 +104,18 @@ Do not use the deprecated `ephemeral: true` option. The test suite rejects it.
 
 The current viewing and editing decisions are intentional:
 
-- `/rpg view character-key:<key>` posts the public character summary.
-- `/rpg view character-key:<key> field:<field>` posts one complete detailed field.
-- `/rpg view-help` lists all supported view fields.
-- There is intentionally no `/rpg view-all` command.
-- `/rpg edit character-key:<key> field:<field>` has no value argument. Submitting
+- `/rpg get character-key:<key>` posts the public character summary.
+- `/rpg get character-key:<key> field:<field>` posts one complete detailed field.
+- `/rpg get-help` lists all supported fields.
+- There is intentionally no `/rpg get-all` command.
+- `/rpg set character-key:<key> field:<field>` has no value argument. Submitting
   the command immediately opens one private modal prefilled with the saved value.
-- `/rpg edit-help` lists editable paths and explains modal input.
+- `/rpg set-help` lists settable paths and explains modal input.
 - Do not add section/field dropdown navigation back to the editor.
 
-Textual collections have no user-facing `add`, `set`, `remove`, or `clear` action
-syntax. The modal presents their full multiline content and replaces it on submit:
+Textual collections have no per-entry `add`, `set`, `remove`, or `clear` action
+syntax. The `/rpg set` modal presents their full multiline content and replaces it
+on submit:
 
 - One logical entry per line.
 - Leading `- ` or `* ` is optional and normalized away.
@@ -143,7 +146,7 @@ Permissions:
 - Anyone with normal bot access can view character sheets.
 - Only the character creator, a DM, or an owner can edit a character.
 - Character deletion is restricted to the creator by the current store API.
-- `/rpg generate`, `/rpg generate-character`, and `/rpg generate-help` are DM/owner
+- `/rpg gen`, `/rpg gen-char`, and `/rpg gen-help` are DM/owner
   commands.
 - `/restart` is moderator/owner only.
 - `/say` is moderator/owner only.
@@ -159,15 +162,15 @@ Resources and display:
 - HP, AR, and MD use ten-icon percentage bars. Preserve the current colors:
   HP uses red/black hearts, AR uses blue/black squares, and MD uses orange/black
   squares.
-- `/rpg rest` supports only HP or AR and sets current to a percentage of maximum.
-- `/rpg deal` applies positive whole-number damage to current AR first, then current
+- `/rpg heal` supports only HP or AR and sets current to a percentage of maximum.
+- `/rpg damage` applies positive whole-number damage to current AR first, then current
   HP. With `piercing:true`, it bypasses AR. Piercing defaults to false.
 - `/rpg end-turn` restores current AP and MD to maximum.
 
 ## Random generators
 
 Every `.json` file in `data/generators/` automatically becomes a category after the
-bot restarts. `/rpg generate-help` reads the live catalog, explains both generation
+bot restarts. `/rpg gen-help` reads the live catalog, explains both generation
 commands, and lists every category.
 
 Each generator file requires:
@@ -224,6 +227,42 @@ At present it:
 - Local MP3 playback remains supported. When a member joins the configured team
   voice channel, the bot plays `media/Poutouyemoun.mp3`.
 
+## Change methodology
+
+Use this workflow for every feature, behavior change, bug fix, or data update:
+
+1. Inspect the current implementation and `git status` before editing. Read the
+   relevant command, service, model, tests, and data files; consult the rulebook or
+   `data/generators/README.md` when the change touches those areas. Existing dirty
+   changes and real character saves belong to the user unless explicitly stated
+   otherwise.
+2. Identify all coupled surfaces before implementing. Depending on the change, this
+   can include slash-command schema and routing, autocomplete, authorization,
+   persistence, editing, rendering, generator data, and error handling.
+3. Add or update focused regression coverage whenever behavior changes and testing
+   is practical. New commands should have schema, routing, autocomplete, permission,
+   and behavior checks as applicable. Character or generator changes should test
+   their invariants and persistence. Data-driven tests should derive expectations
+   from the canonical data when exact values are intentionally configurable. Never
+   weaken or remove a valid test merely to make a change pass.
+4. Keep user-facing and agent-facing guidance synchronized when the affected
+   behavior is documented:
+   - update command metadata and `/help`, `/rpg help`, or dedicated help commands
+     when command names, arguments, permissions, ordering, or UX change;
+   - update `README.md` when setup, commands, examples, or user-visible behavior
+     changes;
+   - update `AGENTS.md` when architecture, durable conventions, invariants, or the
+     expected agent workflow changes;
+   - never edit `documentation/TTRPG_RANDOM_RULES_EN.md` or any other rulebook
+     unless the user explicitly requests that specific kind of change. Treat
+     rulebooks as read-only sources of truth by default.
+5. Run targeted checks while iterating, then run the complete `npm test` suite and
+   `git diff --check`. Confirm that no real file under `save/` was added, changed,
+   or removed by validation.
+6. Hand off with a concise summary of behavior, important assumptions, validation
+   performed, and any remaining limitation. Do not claim live Discord behavior was
+   tested unless the bot was actually run for that purpose.
+
 ## Safe change checklist
 
 Before handing off a code change:
@@ -231,7 +270,8 @@ Before handing off a code change:
 1. Preserve unrelated dirty work and every real file under `save/`.
 2. Update command metadata, registration, autocomplete, help, and README together.
 3. Keep generated data and `Character` schema consumers synchronized.
-4. Use `MessageFlags.Ephemeral`, never `ephemeral: true`.
-5. Run `npm test`.
-6. Run `git diff --check`.
-7. Confirm tests did not add, modify, or remove real character saves.
+4. Never edit a rulebook unless the user explicitly requested it.
+5. Use `MessageFlags.Ephemeral`, never `ephemeral: true`.
+6. Run `npm test`.
+7. Run `git diff --check`.
+8. Confirm tests did not add, modify, or remove real character saves.

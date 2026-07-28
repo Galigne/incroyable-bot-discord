@@ -8,12 +8,12 @@ const { getCharacterChoices } = require('../autocomplete');
 const COMMON_DAMAGE_AMOUNTS = [1, 5, 10, 15, 20, 25, 50, 100];
 
 module.exports = {
-	name: 'deal',
+	name: 'damage',
 	description: 'Deal damage to a character, reducing AR before HP',
-	usage: '/rpg deal character-key:<key> damage-amount:<number> [piercing]',
+	usage: '/rpg damage character-key:<key> damage-amount:<number> [piercing]',
 	helpOrder: 55,
 	configure: command => command
-		.setName('deal')
+		.setName('damage')
 		.setDescription('Deal damage to a character, reducing AR before HP')
 		.addStringOption(option => option
 			.setName('character-key')

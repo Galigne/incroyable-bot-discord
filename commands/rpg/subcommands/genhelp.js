@@ -2,15 +2,15 @@ const { EmbedBuilder } = require('discord.js');
 const generatorCatalog = require('../../../services/generatorCatalog');
 
 module.exports = {
-	name: 'generate-help',
+	name: 'gen-help',
 	description: 'Explain random generation and list generator categories (DM only)',
-	usage: '/rpg generate-help',
+	usage: '/rpg gen-help',
 	helpOrder: 12,
 	access: {
 		role: 'dm',
 	},
 	configure: command => command
-		.setName('generate-help')
+		.setName('gen-help')
 		.setDescription('Explain random generation and list generator categories'),
 	async execute({ interaction }) {
 		const categories = generatorCatalog.listCategories();
@@ -21,11 +21,11 @@ module.exports = {
 		const embed = new EmbedBuilder()
 			.setTitle('RPG Generation Help')
 			.setDescription([
-				'`/rpg generate category:<category>`',
+				'`/rpg gen category:<category>`',
 				'DM-only. Select a generator with autocomplete to draw one weighted random '
 					+ 'entry. Run it again to reroll.',
 				'',
-				'`/rpg generate-character character-key:<new key> [level] [background]`',
+				'`/rpg gen-char character-key:<new key> [level] [background]`',
 				'DM-only. Creates and saves a complete random character using a unique '
 					+ 'CharacterKey. Level must be 1–10; when omitted, it is rolled randomly. '
 					+ 'Background selects the NPC category and is random when omitted. '

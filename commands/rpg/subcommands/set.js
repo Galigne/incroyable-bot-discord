@@ -3,9 +3,9 @@ const { openCharacterEditor } = require('../interactions');
 const { EDIT_FIELDS } = require('../editorFields');
 const { filterAutocompleteChoices } = require('../../../util/autocomplete');
 
-const EDIT_HELP = [
-	'Use `/rpg edit character-key:<key> field:<field>` to open a private prefilled form.',
-	'The CharacterKey identifies the save and cannot be edited.',
+const SET_HELP = [
+	'Use `/rpg set character-key:<key> field:<field>` to open a private prefilled form.',
+	'The CharacterKey identifies the save and cannot be changed.',
 	'Nested fields use a dot, such as `race.name`, `stats.strength`, or `hp.current`.',
 	'Text fields can be cleared by emptying the form before submitting it.',
 	'',
@@ -31,19 +31,19 @@ const EDIT_HELP = [
 	'RULE levels must be positive whole numbers.',
 	'',
 	'**Examples**',
-	'`/rpg edit character-key:D.Robert field:stats.strength`',
-	'`/rpg edit character-key:D.Robert field:rules`',
+	'`/rpg set character-key:D.Robert field:stats.strength`',
+	'`/rpg set character-key:D.Robert field:rules`',
 	'RULE example: `Fire: 2: Controls flames`',
 ].join('\n');
 
 module.exports = {
-	name: 'edit',
-	description: 'Edit one character-sheet field in a prefilled form',
-	usage: '/rpg edit character-key:<key> field:<field>',
+	name: 'set',
+	description: 'Set one character-sheet field in a prefilled form',
+	usage: '/rpg set character-key:<key> field:<field>',
 	helpOrder: 40,
 	configure: command => command
-		.setName('edit')
-		.setDescription('Edit one character-sheet field in a prefilled form')
+		.setName('set')
+		.setDescription('Set one character-sheet field in a prefilled form')
 		.addStringOption(option => option
 			.setName('character-key')
 			.setDescription('Character to edit')
@@ -75,5 +75,5 @@ module.exports = {
 	},
 };
 
-module.exports.EDIT_HELP = EDIT_HELP;
+module.exports.SET_HELP = SET_HELP;
 module.exports.EDIT_FIELDS = EDIT_FIELDS;

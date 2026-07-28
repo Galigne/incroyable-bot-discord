@@ -3,15 +3,15 @@ const generatorCatalog = require('../../../services/generatorCatalog');
 const { filterAutocompleteChoices } = require('../../../util/autocomplete');
 
 module.exports = {
-	name: 'generate',
+	name: 'gen',
 	description: 'Generate GM inspiration from a chosen category (DM only)',
-	usage: '/rpg generate category:<category>',
+	usage: '/rpg gen category:<category>',
 	helpOrder: 10,
 	access: {
 		role: 'dm',
 	},
 	configure: command => command
-		.setName('generate')
+		.setName('gen')
 		.setDescription('Generate GM inspiration from a chosen category')
 		.addStringOption(option => option
 			.setName('category')
@@ -34,7 +34,7 @@ module.exports = {
 		if (!result) {
 			await interaction.reply({
 				content: `Unknown generator category: **${requestedCategory}**. `
-					+ 'Use `/rpg generate-help` to see the available categories.',
+					+ 'Use `/rpg gen-help` to see the available categories.',
 				flags: MessageFlags.Ephemeral,
 			});
 			return;

@@ -16,9 +16,9 @@ module.exports = {
 			.setTitle('RPG Commands')
 			.setDescription(
 				'Create and manage RPG characters using a stable `CharacterKey` '
-				+ '(for example, `D.Robert`). The key identifies the save and cannot be edited. '
-				+ 'Use `/rpg edit` with a field to open its prefilled private form. '
-				+ 'Use the optional field in `/rpg view` for complete details.',
+				+ '(for example, `D.Robert`). The key identifies the save and cannot be changed. '
+				+ 'Use `/rpg set` with a field to open its prefilled private form. '
+				+ 'Use the optional field in `/rpg get` for complete details.',
 			)
 			.setColor('#FFD700')
 			.setThumbnail('attachment://logo.jpg');

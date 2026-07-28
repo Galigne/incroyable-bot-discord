@@ -3,7 +3,7 @@ const characterStore = require('../../../services/characterStore');
 const { filterAutocompleteChoices } = require('../../../util/autocomplete');
 const { getCharacterChoices } = require('../autocomplete');
 
-const VIEW_FIELDS = [
+const GET_FIELDS = [
 	'name',
 	'firstName',
 	'lastName',
@@ -28,8 +28,8 @@ const VIEW_FIELDS = [
 	'encumbrance',
 ];
 
-const VIEW_HELP = [
-	'Use `/rpg view` to display a character-sheet summary.',
+const GET_HELP = [
+	'Use `/rpg get` to display a character-sheet summary.',
 	'Select the optional `field` to display one complete field and its sub-fields.',
 	'',
 	'**Available fields**',
@@ -52,12 +52,12 @@ const VIEW_HELP = [
 ].join('\n');
 
 module.exports = {
-	name: 'view',
+	name: 'get',
 	description: 'Display a character summary or one detailed field',
-	usage: '/rpg view character-key:<key> [field]',
+	usage: '/rpg get character-key:<key> [field]',
 	helpOrder: 30,
 	configure: command => command
-		.setName('view')
+		.setName('get')
 		.setDescription('Display a character summary or one detailed field')
 		.addStringOption(option => option
 			.setName('character-key')
@@ -75,7 +75,7 @@ module.exports = {
 			return;
 		}
 		await interaction.respond(filterAutocompleteChoices(
-			VIEW_FIELDS.map(field => ({ name: field, value: field })),
+			GET_FIELDS.map(field => ({ name: field, value: field })),
 			focused.value,
 		));
 	},
@@ -90,7 +90,7 @@ module.exports = {
 			if (!embed) {
 				await interaction.reply({
 					content: `Unknown character field: **${fieldName}**. `
-						+ 'Use `/rpg view-help` to list the available fields.',
+						+ 'Use `/rpg get-help` to list the available fields.',
 					flags: MessageFlags.Ephemeral,
 				});
 				return;
@@ -98,7 +98,7 @@ module.exports = {
 			embed.setFooter({
 				text: fieldName
 					? `Character key: ${name}`
-					: 'Use /rpg view with the field option for more details.',
+					: 'Use /rpg get with the field option for more details.',
 			});
 			await interaction.reply({ embeds: [embed] });
 		}
@@ -122,5 +122,5 @@ module.exports = {
 	},
 };
 
-module.exports.VIEW_FIELDS = VIEW_FIELDS;
-module.exports.VIEW_HELP = VIEW_HELP;
+module.exports.GET_FIELDS = GET_FIELDS;
+module.exports.GET_HELP = GET_HELP;

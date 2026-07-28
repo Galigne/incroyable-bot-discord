@@ -5,15 +5,15 @@ const { replyToCharacterError } = require('../../../util/characterCommandErrors'
 const { filterAutocompleteChoices } = require('../../../util/autocomplete');
 
 module.exports = {
-	name: 'generate-character',
+	name: 'gen-char',
 	description: 'Generate and save a complete random character (DM only)',
-	usage: '/rpg generate-character character-key:<new key> [level] [background]',
+	usage: '/rpg gen-char character-key:<new key> [level] [background]',
 	helpOrder: 11,
 	access: {
 		role: 'dm',
 	},
 	configure: command => command
-		.setName('generate-character')
+		.setName('gen-char')
 		.setDescription('Generate and save a complete random character')
 		.addStringOption(option => option
 			.setName('character-key')

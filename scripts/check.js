@@ -44,7 +44,7 @@ async function main() {
 		checkRpgStructure(commands);
 		checkSlashCommandData(commands);
 		checkGeneratorCatalog();
-		await checkGenerateHelp();
+		await checkGenHelp();
 		checkCharacterModel();
 		checkRandomCharacterGeneration();
 		await checkCharacterStore();
@@ -124,20 +124,20 @@ function checkRpgStructure(commands) {
 
 	const expectedSubcommands = [
 		'add',
-		'deal',
+		'damage',
 		'delete',
-		'edit',
-		'edit-help',
 		'end-turn',
-		'generate',
-		'generate-character',
-		'generate-help',
+		'gen',
+		'gen-char',
+		'gen-help',
+		'get',
+		'get-help',
+		'heal',
 		'help',
-		'rest',
 		'roll',
 		'rules',
-		'view',
-		'view-help',
+		'set',
+		'set-help',
 	];
 	const actualSubcommands = [...rpgCommand.subcommands.keys()].sort();
 	if (actualSubcommands.join(',') !== expectedSubcommands.join(',')) {
@@ -156,14 +156,14 @@ function checkRpgStructure(commands) {
 	}
 	checkHelpOrder(rpgCommand.subcommands.values(), 'RPG subcommands');
 	const generationHelpOrder = [
-		'generate',
-		'generate-character',
-		'generate-help',
+		'gen',
+		'gen-char',
+		'gen-help',
 	].sort((left, right) => (
 		rpgCommand.subcommands.get(left).helpOrder
 		- rpgCommand.subcommands.get(right).helpOrder
 	));
-	if (generationHelpOrder.join(',') !== 'generate,generate-character,generate-help') {
+	if (generationHelpOrder.join(',') !== 'gen,gen-char,gen-help') {
 		errors.push('RPG generation commands are not in the requested help order.');
 	}
 }
@@ -187,17 +187,17 @@ function checkSlashCommandData(commands) {
 
 	const rpgCommand = commands.get('rpg');
 	const { EDIT_FIELDS } = require('../commands/rpg/editorFields');
-	const { EDIT_HELP } = require('../commands/rpg/subcommands/edit');
-	const { VIEW_FIELDS, VIEW_HELP } = require('../commands/rpg/subcommands/view');
+	const { SET_HELP } = require('../commands/rpg/subcommands/set');
+	const { GET_FIELDS, GET_HELP } = require('../commands/rpg/subcommands/get');
 	if (
 		EDIT_FIELDS.length < 30
-		|| !VIEW_FIELDS.includes('personality')
-		|| !VIEW_FIELDS.includes('status')
-		|| EDIT_HELP.length > 2_000
-		|| VIEW_HELP.length > 2_000
-		|| !EDIT_HELP.includes('prefilled form')
-		|| !EDIT_HELP.includes('`Name: Level: Description`')
-		|| /\b(add|set|remove) <(?:value|position)>/.test(EDIT_HELP)
+		|| !GET_FIELDS.includes('personality')
+		|| !GET_FIELDS.includes('status')
+		|| SET_HELP.length > 2_000
+		|| GET_HELP.length > 2_000
+		|| !SET_HELP.includes('prefilled form')
+		|| !SET_HELP.includes('`Name: Level: Description`')
+		|| /\b(add|set|remove) <(?:value|position)>/.test(SET_HELP)
 	) {
 		errors.push('The RPG editor or viewer help is incomplete or exceeds Discord limits.');
 	}
@@ -215,20 +215,20 @@ function checkSlashCommandData(commands) {
 	const hasAutocomplete = (subcommand, optionName) => getSubcommand(subcommand)
 		?.options.find(option => option.name === optionName)?.autocomplete === true;
 	for (const [subcommand, optionName] of [
-		['deal', 'character-key'],
-		['deal', 'damage-amount'],
+		['damage', 'character-key'],
+		['damage', 'damage-amount'],
 		['delete', 'character-key'],
-		['edit', 'character-key'],
-		['edit', 'field'],
 		['end-turn', 'character-key'],
-		['generate', 'category'],
-		['generate-character', 'level'],
-		['generate-character', 'background'],
-		['rest', 'character-key'],
-		['rest', 'percentage'],
+		['gen', 'category'],
+		['gen-char', 'level'],
+		['gen-char', 'background'],
+		['get', 'character-key'],
+		['get', 'field'],
+		['heal', 'character-key'],
+		['heal', 'percentage'],
 		['roll', 'sides'],
-		['view', 'character-key'],
-		['view', 'field'],
+		['set', 'character-key'],
+		['set', 'field'],
 	]) {
 		if (!hasAutocomplete(subcommand, optionName)) {
 			errors.push(`Missing autocomplete for /rpg ${subcommand} ${optionName}.`);
@@ -443,15 +443,15 @@ function checkGeneratorCatalog() {
 		) {
 			errors.push('RULE generators should expose separate Name and Description fields.');
 		}
-		const generateCommand = require('../commands/rpg/subcommands/generate');
-		const structuredEmbed = generateCommand.createGeneratedEmbed(rulesResult).toJSON();
+		const genCommand = require('../commands/rpg/subcommands/gen');
+		const structuredEmbed = genCommand.createGeneratedEmbed(rulesResult).toJSON();
 		if (
 			structuredEmbed.fields?.[0]?.name !== 'Name'
 			|| structuredEmbed.fields?.[1]?.name !== 'Description'
 		) {
 			errors.push('Structured generator fields are not rendered correctly.');
 		}
-		const weightedTextEmbed = generateCommand.createGeneratedEmbed({
+		const weightedTextEmbed = genCommand.createGeneratedEmbed({
 			category: { name: 'test' },
 			entry: weightedEntries[1],
 		}).toJSON();
@@ -464,11 +464,11 @@ function checkGeneratorCatalog() {
 	}
 }
 
-async function checkGenerateHelp() {
+async function checkGenHelp() {
 	try {
-		const generateHelp = require('../commands/rpg/subcommands/generatehelp');
+		const genHelp = require('../commands/rpg/subcommands/genhelp');
 		let response;
-		await generateHelp.execute({
+		await genHelp.execute({
 			interaction: {
 				reply: async payload => {
 					response = payload;
@@ -481,19 +481,19 @@ async function checkGenerateHelp() {
 			.find(category => !renderedHelp.includes(category.name));
 		if (
 			!embed
-			|| !renderedHelp.includes('/rpg generate category:<category>')
+			|| !renderedHelp.includes('/rpg gen category:<category>')
 			|| !renderedHelp.includes(
-				'/rpg generate-character character-key:<new key> [level] [background]',
+				'/rpg gen-char character-key:<new key> [level] [background]',
 			)
 			|| !renderedHelp.includes('maximum of two RULEs')
 			|| missingCategory
 			|| embed.fields?.some(field => field.value.length > 1_024)
 		) {
-			errors.push('/rpg generate-help is incomplete or exceeds Discord embed limits.');
+			errors.push('/rpg gen-help is incomplete or exceeds Discord embed limits.');
 		}
 	}
 	catch (error) {
-		errors.push(`Generate help: ${error.message}`);
+		errors.push(`Gen help: ${error.message}`);
 	}
 }
 
@@ -972,35 +972,35 @@ function checkAuthorization(commands) {
 		errors.push('Regular members should not be allowed to restart the bot.');
 	}
 
-	const generateCommand = commands.get('rpg')?.subcommands?.get('generate');
-	const generateCharacterCommand = commands.get('rpg')?.subcommands
-		?.get('generate-character');
-	const generateHelpCommand = commands.get('rpg')?.subcommands
-		?.get('generate-help');
+	const genCommand = commands.get('rpg')?.subcommands?.get('gen');
+	const genCharCommand = commands.get('rpg')?.subcommands
+		?.get('gen-char');
+	const genHelpCommand = commands.get('rpg')?.subcommands
+		?.get('gen-help');
 	const dmMessage = createMessage([config.roles.dm], '0');
-	if (!authorizeCommand(generateCommand, dmMessage, config).allowed) {
+	if (!authorizeCommand(genCommand, dmMessage, config).allowed) {
 		errors.push('The DM should be allowed to generate RPG prompts.');
 	}
-	if (!authorizeCommand(generateCommand, ownerMessage, config).allowed) {
+	if (!authorizeCommand(genCommand, ownerMessage, config).allowed) {
 		errors.push('The owner should be allowed to generate RPG prompts.');
 	}
-	if (authorizeCommand(generateCommand, moderatorMessage, config).allowed) {
+	if (authorizeCommand(genCommand, moderatorMessage, config).allowed) {
 		errors.push('Moderators without the DM role should not generate RPG prompts.');
 	}
-	if (authorizeCommand(generateCommand, memberMessage, config).allowed) {
+	if (authorizeCommand(genCommand, memberMessage, config).allowed) {
 		errors.push('Regular members should not generate RPG prompts.');
 	}
 	if (
-		!authorizeCommand(generateCharacterCommand, dmMessage, config).allowed
-		|| !authorizeCommand(generateCharacterCommand, ownerMessage, config).allowed
-		|| authorizeCommand(generateCharacterCommand, moderatorMessage, config).allowed
-		|| authorizeCommand(generateCharacterCommand, memberMessage, config).allowed
+		!authorizeCommand(genCharCommand, dmMessage, config).allowed
+		|| !authorizeCommand(genCharCommand, ownerMessage, config).allowed
+		|| authorizeCommand(genCharCommand, moderatorMessage, config).allowed
+		|| authorizeCommand(genCharCommand, memberMessage, config).allowed
 	) {
 		errors.push('Random character generation should be restricted to DMs and owners.');
 	}
 	if (
-		!authorizeCommand(generateHelpCommand, dmMessage, config).allowed
-		|| authorizeCommand(generateHelpCommand, memberMessage, config).allowed
+		!authorizeCommand(genHelpCommand, dmMessage, config).allowed
+		|| authorizeCommand(genHelpCommand, memberMessage, config).allowed
 	) {
 		errors.push('Generator help should be restricted to DMs and owners.');
 	}

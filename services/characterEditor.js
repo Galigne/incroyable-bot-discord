@@ -36,7 +36,7 @@ function dealDamage(character, damageAmount, piercing = false) {
 function restoreResource(character, resourceName, percentage) {
 	const resource = resourceName.toLowerCase();
 	if (!['hp', 'ar'].includes(resource)) {
-		throw editError('Only HP and AR can be restored with the rest command.');
+		throw editError('Only HP and AR can be restored with the heal command.');
 	}
 	if (!Number.isFinite(percentage) || percentage < 0 || percentage > 100) {
 		throw editError('The rest percentage must be between 0 and 100.');

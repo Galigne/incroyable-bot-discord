@@ -21,7 +21,7 @@ module.exports = {
 			await characterStore.createCharacter(characterKey, interaction.user.id);
 			await interaction.reply(
 				`Character with key \`${characterKey}\` was created. `
-				+ 'This CharacterKey cannot be edited. Use `/rpg edit` with a field '
+				+ 'This CharacterKey cannot be changed. Use `/rpg set` with a field '
 				+ 'to open its prefilled private form.',
 			);
 		}

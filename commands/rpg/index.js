@@ -4,38 +4,38 @@ const {
 	SlashCommandBuilder,
 } = require('discord.js');
 const add = require('./subcommands/add');
-const deal = require('./subcommands/deal');
+const damage = require('./subcommands/damage');
 const remove = require('./subcommands/delete');
-const edit = require('./subcommands/edit');
-const editHelp = require('./subcommands/edithelp');
+const set = require('./subcommands/set');
+const setHelp = require('./subcommands/sethelp');
 const endTurn = require('./subcommands/endturn');
-const generate = require('./subcommands/generate');
-const generateCharacter = require('./subcommands/generatecharacter');
-const generateHelp = require('./subcommands/generatehelp');
+const gen = require('./subcommands/gen');
+const genChar = require('./subcommands/genchar');
+const genHelp = require('./subcommands/genhelp');
 const help = require('./subcommands/help');
-const rest = require('./subcommands/rest');
+const heal = require('./subcommands/heal');
 const roll = require('./subcommands/roll');
 const rules = require('./subcommands/rules');
-const view = require('./subcommands/view');
-const viewHelp = require('./subcommands/viewhelp');
+const get = require('./subcommands/get');
+const getHelp = require('./subcommands/gethelp');
 const { authorizeCommand } = require('../../util/authorization');
 
 const subcommands = new Map([
 	[add.name, add],
-	[deal.name, deal],
+	[damage.name, damage],
 	[remove.name, remove],
-	[edit.name, edit],
-	[editHelp.name, editHelp],
+	[set.name, set],
+	[setHelp.name, setHelp],
 	[endTurn.name, endTurn],
-	[generate.name, generate],
-	[generateCharacter.name, generateCharacter],
-	[generateHelp.name, generateHelp],
+	[gen.name, gen],
+	[genChar.name, genChar],
+	[genHelp.name, genHelp],
 	[help.name, help],
-	[rest.name, rest],
+	[heal.name, heal],
 	[roll.name, roll],
 	[rules.name, rules],
-	[view.name, view],
-	[viewHelp.name, viewHelp],
+	[get.name, get],
+	[getHelp.name, getHelp],
 ]);
 
 module.exports = {
@@ -48,20 +48,20 @@ module.exports = {
 		.setDescription('Generate prompts and manage RPG character sheets')
 		.setContexts(InteractionContextType.Guild)
 		.addSubcommand(add.configure)
-		.addSubcommand(deal.configure)
+		.addSubcommand(damage.configure)
 		.addSubcommand(remove.configure)
-		.addSubcommand(edit.configure)
-		.addSubcommand(editHelp.configure)
+		.addSubcommand(set.configure)
+		.addSubcommand(setHelp.configure)
 		.addSubcommand(endTurn.configure)
-		.addSubcommand(generate.configure)
-		.addSubcommand(generateCharacter.configure)
-		.addSubcommand(generateHelp.configure)
+		.addSubcommand(gen.configure)
+		.addSubcommand(genChar.configure)
+		.addSubcommand(genHelp.configure)
 		.addSubcommand(help.configure)
-		.addSubcommand(rest.configure)
+		.addSubcommand(heal.configure)
 		.addSubcommand(roll.configure)
 		.addSubcommand(rules.configure)
-		.addSubcommand(view.configure)
-		.addSubcommand(viewHelp.configure),
+		.addSubcommand(get.configure)
+		.addSubcommand(getHelp.configure),
 	subcommands,
 	async execute(context) {
 		const requestedSubcommand = context.interaction.options.getSubcommand();

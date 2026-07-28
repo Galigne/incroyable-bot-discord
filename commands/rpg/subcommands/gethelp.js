@@ -1,17 +1,17 @@
 const { MessageFlags } = require('discord.js');
-const { VIEW_HELP } = require('./view');
+const { GET_HELP } = require('./get');
 
 module.exports = {
-	name: 'view-help',
+	name: 'get-help',
 	description: 'Explain character summary and detailed field views',
-	usage: '/rpg view-help',
+	usage: '/rpg get-help',
 	helpOrder: 35,
 	configure: command => command
-		.setName('view-help')
+		.setName('get-help')
 		.setDescription('Explain character summary and detailed field views'),
 	async execute({ interaction }) {
 		await interaction.reply({
-			content: VIEW_HELP,
+			content: GET_HELP,
 			flags: MessageFlags.Ephemeral,
 		});
 	},

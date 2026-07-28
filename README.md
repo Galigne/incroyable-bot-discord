@@ -29,23 +29,23 @@ Never commit `.env` or a Discord token. Reset any token that has previously been
 - `/restart`
 - `/rpg help`
 - `/rpg rules`
-- `/rpg generate category:<category>` — generate a random prompt (DM only)
-- `/rpg generate-character character-key:<new key> [level] [background]` — generate and save a complete character (DM only)
-- `/rpg generate-help` — explain generation and list generator categories (DM only)
+- `/rpg gen category:<category>` — generate a random prompt (DM only)
+- `/rpg gen-char character-key:<new key> [level] [background]` — generate and save a complete character (DM only)
+- `/rpg gen-help` — explain generation and list generator categories (DM only)
 - `/rpg roll sides:<2-1000>` — roll a die
 - `/rpg add character-key:<new key>` — create a blank character sheet with a stable key
-- `/rpg view character-key:<key> [field]` — display the summary or one complete field
-- `/rpg view-help` — list viewable fields and examples
-- `/rpg edit character-key:<key> field:<field>` — edit one field in a prefilled form
-- `/rpg edit-help` — list editable fields and explain multiline form values
-- `/rpg rest character-key:<key> resource:<HP|AR> percentage:<0-100>` — restore a resource
-- `/rpg deal character-key:<key> damage-amount:<number> [piercing]` — apply damage to AR, then HP
+- `/rpg get character-key:<key> [field]` — display the summary or one complete field
+- `/rpg get-help` — list retrievable fields and examples
+- `/rpg set character-key:<key> field:<field>` — set one field in a prefilled form
+- `/rpg set-help` — list settable fields and explain multiline form values
+- `/rpg heal character-key:<key> resource:<HP|AR> percentage:<0-100>` — restore a resource
+- `/rpg damage character-key:<key> damage-amount:<number> [piercing]` — apply damage to AR, then HP
 - `/rpg end-turn character-key:<key>` — restore AP and MD to their maximum values
 
 Discord provides native validation and choices for constrained options.
-Autocomplete suggests existing CharacterKeys, editable fields, viewable fields,
+Autocomplete suggests existing CharacterKeys, settable fields, retrievable fields,
 generator categories, common dice sizes, levels, and common purge amounts. The
-private edit form opens immediately after `/rpg edit` is submitted. Multiline
+private form opens immediately after `/rpg set` is submitted. Multiline
 fields accept free-form lines with optional leading dashes; RULEs use
 `Name: Level: Description`.
 
@@ -58,13 +58,13 @@ Keys may contain internal periods, hyphens, and underscores, such as `D.Robert`.
 Example workflows:
 
 ```text
-/rpg generate-character character-key:D.Robert level:5 background:adventurer
-/rpg edit character-key:D.Robert field:stats.strength
-/rpg edit character-key:D.Robert field:rules
-/rpg view character-key:D.Robert
-/rpg view character-key:D.Robert field:personality
-/rpg deal character-key:D.Robert damage-amount:25 piercing:false
-/rpg rest character-key:D.Robert resource:HP percentage:50
+/rpg gen-char character-key:D.Robert level:5 background:adventurer
+/rpg set character-key:D.Robert field:stats.strength
+/rpg set character-key:D.Robert field:rules
+/rpg get character-key:D.Robert
+/rpg get character-key:D.Robert field:personality
+/rpg damage character-key:D.Robert damage-amount:25 piercing:false
+/rpg heal character-key:D.Robert resource:HP percentage:50
 /rpg end-turn character-key:D.Robert
 ```
 
