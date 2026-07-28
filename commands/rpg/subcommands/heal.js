@@ -4,38 +4,54 @@ const { canManageCharacters } = require('../../../util/characterAuthorization');
 const { replyToCharacterError } = require('../../../util/characterCommandErrors');
 const { filterAutocompleteChoices } = require('../../../util/autocomplete');
 const { getCharacterChoices } = require('../autocomplete');
+const { getLocale, localizeDescription, t } = require('../../../util/i18n');
+const {
+	getResourceAbbreviation,
+	getResourceChoiceLabel,
+} = require('../../../util/characterDisplay');
 
 const COMMON_HEAL_PERCENTAGES = [0, 25, 50, 75, 100];
-const RESOURCE_NAMES = {
-	hp: 'HP',
-	ar: 'Armor',
-};
+const descriptionKey = 'rpg.heal.description';
 
 module.exports = {
 	name: 'heal',
-	description: 'Restore current HP, armor, or both to a percentage of maximum',
+	description: t('en', descriptionKey),
+	descriptionKey,
 	usage: '/rpg heal character-key:<key> resource:<hp|armor|both> percentage:<0-100>',
 	helpOrder: 50,
-	configure: command => command
-		.setName('heal')
-		.setDescription('Restore current HP, armor, or both to a percentage of maximum')
-		.addStringOption(option => option
-			.setName('character-key')
-			.setDescription('Character receiving the healing')
+	configure: command => localizeDescription(command.setName('heal'), descriptionKey)
+		.addStringOption(option => localizeDescription(
+			option.setName('character-key'),
+			'rpg.heal.characterOption',
+		)
 			.setAutocomplete(true)
 			.setRequired(true))
-		.addStringOption(option => option
-			.setName('resource')
-			.setDescription('Resource to restore')
+		.addStringOption(option => localizeDescription(
+			option.setName('resource'),
+			'rpg.heal.resourceOption',
+		)
 			.addChoices(
-				{ name: 'HP', value: 'hp' },
-				{ name: 'Armor', value: 'armor' },
-				{ name: 'HP and Armor', value: 'both' },
+				{
+					name: getResourceChoiceLabel('en', 'hp'),
+					name_localizations: { fr: getResourceChoiceLabel('fr', 'hp') },
+					value: 'hp',
+				},
+				{
+					name: getResourceChoiceLabel('en', 'ar'),
+					name_localizations: { fr: getResourceChoiceLabel('fr', 'ar') },
+					value: 'armor',
+				},
+				{
+					name: getBothResourceLabel('en'),
+					name_localizations: { fr: getBothResourceLabel('fr') },
+					value: 'both',
+				},
 			)
 			.setRequired(true))
-		.addNumberOption(option => option
-			.setName('percentage')
-			.setDescription('Percentage of the maximum to restore to')
+		.addNumberOption(option => localizeDescription(
+			option.setName('percentage'),
+			'rpg.heal.percentageOption',
+		)
 			.setMinValue(0)
 			.setMaxValue(100)
 			.setAutocomplete(true)
@@ -55,6 +71,7 @@ module.exports = {
 		));
 	},
 	async execute({ config, interaction }) {
+		const locale = getLocale(config, interaction.guildId);
 		const characterName = interaction.options.getString('character-key', true);
 		const resource = interaction.options.getString('resource', true);
 		const percentage = interaction.options.getNumber('percentage', true);
@@ -69,22 +86,35 @@ module.exports = {
 						currentCharacter,
 						resource,
 						percentage,
+						locale,
 					);
 				},
 			);
-			const changes = restoredResources.map(result => (
-				`${RESOURCE_NAMES[result.resource]}: `
-				+ `**${result.previous}/${result.max} → ${result.current}/${result.max}**`
-			));
-			await interaction.reply([
-				`**${character.displayName}** restored to ${percentage}%:`,
-				...changes,
-			].join('\n'));
+			const changes = restoredResources.map(result => t(locale, 'rpg.heal.change', {
+				current: result.current,
+				max: result.max,
+				previous: result.previous,
+				resource: result.resource === 'hp'
+					? getResourceAbbreviation(locale, 'hp')
+					: getResourceAbbreviation(locale, 'ar'),
+			}));
+			await interaction.reply(t(locale, 'rpg.heal.result', {
+				changes: changes.join('\n'),
+				name: character.displayName,
+				percentage,
+			}));
 		}
 		catch (error) {
-			if (!await replyToCharacterError(interaction, error)) {
+			if (!await replyToCharacterError(interaction, error, locale)) {
 				throw error;
 			}
 		}
 	},
 };
+
+function getBothResourceLabel(locale) {
+	return t(locale, 'rpg.heal.both', {
+		ar: getResourceAbbreviation(locale, 'ar'),
+		hp: getResourceAbbreviation(locale, 'hp'),
+	});
+}

@@ -1,0 +1,94 @@
+{
+  "name": "Donjons",
+  "description": "Sites d’aventure, ruines, repaires et complexes hostiles",
+  "entries": [
+    {
+      "weight": 3,
+      "value": "Temple enterré — des chambres sacrées ensevelis autour d'un autel scellé qui reçoit encore des offrandes."
+    },
+    {
+      "weight": 3,
+      "value": "La mine abandonnée — galeries instables, puits inondés, vieux équipements et quelque chose qui suit les rails."
+    },
+    {
+      "weight": 3,
+      "value": "Caverne de bandits — tunnels naturels élargis avec des barricades, des magasins, des cellules et des sorties cachées."
+    },
+    {
+      "weight": 3,
+      "value": "Forteresse rouillée — murs brisés au-dessus d'arsenals intacts, tunnels de commandement, et défenseurs oubliés."
+    },
+    {
+      "weight": 3,
+      "value": "Crypte ancien — tombes familiales, pièges funéraires, registres ancestraux et chambres scellées perturbées."
+    },
+    {
+      "weight": 2,
+      "value": "La tour de Wizard — des laboratoires empilés où les expériences ratées ont altéré la gravité et l'espace."
+    },
+    {
+      "weight": 2,
+      "value": "Labyrinthe d'égouts: drains actifs, fondations oubliées, voies de contrebande et créatures territoriales."
+    },
+    {
+      "weight": 2,
+      "value": "Le palais Sunken — salles inondées accessibles à marée basse, par la plongée ou par des pompes anciennes."
+    },
+    {
+      "weight": 2,
+      "value": "Terrier de monstres — nids interconnectés façonnés par des générations d'habitants de plus en plus grands."
+    },
+    {
+      "weight": 2,
+      "value": "Complexe pénitentiaire — cellules, ateliers, salles d'exécution, garde de passage et preuve d'une évasion de masse."
+    },
+    {
+      "weight": 2,
+      "value": "District de la ville s'est effondré — rues et maisons enterrées reliées par des sous - sols et des puits."
+    },
+    {
+      "weight": 2,
+      "value": "Manoir maudit — une noble demeure qui répète la dernière nuit avant la destruction de sa maison."
+    },
+    {
+      "weight": 2,
+      "value": "Sanctuaire volcanique — tunnels à blastes thermiques, ponts de la voie de lave, ponts de la voie ferrée et gardiens ignifuges."
+    },
+    {
+      "weight": 2,
+      "value": "Tombeau gelé — Salles de conservation de la glace où les portes d'ouverture libèrent l'air, la maladie et les occupants anciens."
+    },
+    {
+      "weight": 2,
+      "value": "Sanctuaire Cult — Salles de réunion déguisées descendant dans des chambres rituelles et un site inachevé d'assignation."
+    },
+    {
+      "weight": 1,
+      "value": "Donjon vivant — un organisme énorme dont les chambres digèrent les intrus et se réarrangent comme des organes."
+    },
+    {
+      "weight": 1,
+      "value": "La prison de rêve — un complexe mental est entré par le sommeil, avec des sorties cachées dans les souvenirs des prisonniers."
+    },
+    {
+      "weight": 1,
+      "value": "Tour inversée — une structure descendant dans la terre tandis que la gravité pointe vers son toit lointain."
+    },
+    {
+      "weight": 1,
+      "value": "L'ambassade planaire, un complexe diplomatique abandonné construit pour les visiteurs avec des corps incompatibles et la physique."
+    },
+    {
+      "weight": 1,
+      "value": "Caveau mécanique — salles mécaniques précises qui réinitialisent les pièges et font tourner les couloirs sur un horaire fixe."
+    },
+    {
+      "weight": 1,
+      "value": "Creux de la Racine-monde — tunnels primaires à l'intérieur d'un système racinaire colossal infecté par une corruption qui se propage."
+    },
+    {
+      "weight": 1,
+      "value": "Observatoire Astral — une ruine lointaine dont les lentilles ouvrent des chemins physiques vers des objets célestes dangereux."
+    }
+  ]
+}

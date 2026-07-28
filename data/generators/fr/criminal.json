@@ -1,0 +1,102 @@
+{
+  "name": "Criminels",
+  "description": "Adversaires humanoïdes, hors-la-loi et spécialistes du crime",
+  "entries": [
+    {
+      "weight": 4,
+      "value": "Bandit de grand chemin — une ambusher sous-payée exigeant des fournitures plutôt que des effusions de sang."
+    },
+    {
+      "weight": 4,
+      "value": "Le contrebandier à quai — un marin qui se déplace à l'intérieur de barils de poisson scellés."
+    },
+    {
+      "weight": 4,
+      "value": "Cutpurse, un voleur urbain rapide qui travaille sur des marchés bondés et des festivals religieux."
+    },
+    {
+      "weight": 3,
+      "value": "Racketteur — un agent de l'ordre qui perçoit des paiements pour les dangers que leur gang crée secrètement."
+    },
+    {
+      "weight": 3,
+      "value": "Le braconnier, un traqueur habile qui chasse les animaux protégés pour les acheteurs riches."
+    },
+    {
+      "weight": 3,
+      "value": "Pilleur de tombes — un excavateur désespéré vendant des bijoux, des os et des secrets enterrés."
+    },
+    {
+      "weight": 3,
+      "value": "Autoroute Impostor — un criminel portant un uniforme volé pour prélever de faux péages."
+    },
+    {
+      "weight": 3,
+      "value": "Receleur — un commerçant respectable spécialisé dans la fabrication de biens volés paraît légitime."
+    },
+    {
+      "weight": 3,
+      "value": "Contremaître, un artisan qui produit de fausses pièces, des sceaux, des documents de voyage et des lettres nobles."
+    },
+    {
+      "weight": 2,
+      "value": "Le chantage — un courtier en information utilisant de vrais secrets et des preuves soigneusement fabriquées."
+    },
+    {
+      "weight": 2,
+      "value": "Le kidnappeur, un planificateur de patients ciblant des personnes dont les familles ne peuvent pas faire appel aux autorités."
+    },
+    {
+      "weight": 2,
+      "value": "Duelliste illégal - un combattant professionnel payé pour blesser des rivaux sous des règles improvisées."
+    },
+    {
+      "weight": 2,
+      "value": "Relic Thief, un spécialiste qui vole des objets sacrés ou magiques sans les comprendre."
+    },
+    {
+      "weight": 2,
+      "value": "L'arsoniste, un saboteur qui utilise des feux alchimiques retardés pour détruire des dossiers et des entreprises."
+    },
+    {
+      "weight": 2,
+      "value": "Bailli corrompu — un fonctionnaire abusant de l'autorité légale pour saisir des biens et faire taire les témoins."
+    },
+    {
+      "weight": 2,
+      "value": "Le chef de l'embarquement des pirates, un assaillant discipliné qui cherche à obtenir une cargaison et une rançon au lieu de couler des navires."
+    },
+    {
+      "weight": 2,
+      "value": "Alchimiste de bande — un brasseur de toniques addictifs, de bombes à fumée et de stimulants de combat peu fiables."
+    },
+    {
+      "weight": 1,
+      "value": "Assassin — un tueur méticuleux qui organise des morts pour ressembler à des accidents ou à des punitions divines."
+    },
+    {
+      "weight": 1,
+      "value": "Mage criminel — un hors-la-loi utilisant la magie subtile pour contourner les serrures, les témoins et les contrats."
+    },
+    {
+      "weight": 1,
+      "value": "Le trafiquant d'esclaves, un trafiquant protégé par de fausses lois et des fonctionnaires complicites."
+    },
+    {
+      "weight": 1,
+      "value": "Le prince bandit, un seigneur de guerre charismatique qui unit des gangs dispersés dans une armée territoriale."
+    },
+    {
+      "weight": 1,
+      "value": "Faux Prophète — un chef culte ingénie des miracles pour gagner la richesse et l'immunité politique."
+    },
+    {
+      "weight": 1,
+      "value": "Faussaire royal — un criminel maître capable de fabriquer des revendications convaincantes sur les titres et les terres."
+    },
+    {
+      "weight": 1,
+      "value": "Juge de l'Enfer, un médiateur craint dont le tribunal privé règle les différends entre factions criminelles."
+    }
+  ]
+}

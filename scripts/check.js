@@ -45,6 +45,7 @@ const createCharacterChecks = require('./checks/characters');
 const createCommandChecks = require('./checks/commands');
 const createGeneratorChecks = require('./checks/generators');
 const createInteractionChecks = require('./checks/interactions');
+const createLocalizationChecks = require('./checks/localization');
 const createRuntimeChecks = require('./checks/runtime');
 
 const errors = [];
@@ -84,11 +85,13 @@ async function main() {
 	const characterChecks = createCharacterChecks(context);
 	const interactionChecks = createInteractionChecks(context);
 	const authorizationChecks = createAuthorizationChecks(context);
+	const localizationChecks = createLocalizationChecks(context);
 
 	try {
 		runtimeChecks.checkNodeVersion();
 		runtimeChecks.checkJavaScriptSyntax();
 		runtimeChecks.checkDeprecatedInteractionOptions();
+		localizationChecks.checkLocalization();
 		const commands = commandChecks.checkCommands();
 		commandChecks.checkHelpOrder(commands.values(), 'top-level commands');
 		commandChecks.checkRpgStructure(commands);

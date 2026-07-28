@@ -1,0 +1,96 @@
+{
+  "name": "Effets de statut",
+  "description": "États affectant un personnage",
+  "entries": [
+    {
+      "weight": 3,
+      "value": "Brus — douleur mineure cause -1 sur l'action physique suivante exigeante."
+    },
+    {
+      "weight": 3,
+      "value": "Fatigué — les efforts prolongés et les déplacements sont plus difficiles jusqu'au repos."
+    },
+    {
+      "weight": 3,
+      "value": "Ébranlé — -1 contre la peur ou l'intimidation qui vient d'être provoquée."
+    },
+    {
+      "weight": 3,
+      "value": "Détruit — -1 à la prochaine action fondée sur la perception."
+    },
+    {
+      "weight": 2,
+      "value": "Saignement — perd une petite quantité de PV après des actions intenses jusqu'à ce que traité."
+    },
+    {
+      "weight": 2,
+      "value": "Brûlures — Le feu est endommagé de façon récurrente jusqu'à ce que les flammes s'éteignent."
+    },
+    {
+      "weight": 2,
+      "value": "Transi — les mouvements et les actions basées sur la vitesse sont réduits jusqu'à ce qu'ils soient réchauffés."
+    },
+    {
+      "weight": 2,
+      "value": "Étourdi — les réactions coûtent des efforts supplémentaires au prochain virage."
+    },
+    {
+      "weight": 2,
+      "value": "Aveuglé — les actions basées sur la vue échouent ou subissent une sanction majeure."
+    },
+    {
+      "weight": 2,
+      "value": "Sourds — ne peuvent entendre clairement les discours, les avertissements ou les effets sonores."
+    },
+    {
+      "weight": 2,
+      "value": "Poisonné — La résistance fondée sur la Constitution est nécessaire à mesure que le poison progresse."
+    },
+    {
+      "weight": 2,
+      "value": "Lentement — DD est réduit jusqu'à ce que l'effet se termine."
+    },
+    {
+      "weight": 2,
+      "value": "Faiblesse — Les actions basées sur la force sont punies."
+    },
+    {
+      "weight": 2,
+      "value": "Confus — le caractère a de la difficulté à distinguer les alliés, les ennemis ou les directions."
+    },
+    {
+      "weight": 2,
+      "value": "Effrayé — ne peut s'approcher volontairement de la source de la peur sans réussir sur un rouleau."
+    },
+    {
+      "value": "Étourdie — le personnage perd temporairement la capacité de prendre des mesures normales."
+    },
+    {
+      "value": "Paralysé — le mouvement volontaire est impossible jusqu'à ce que l'état soit brisé."
+    },
+    {
+      "value": "Silence — on ne peut pas utiliser les capacités de parole et de voix."
+    },
+    {
+      "value": "Maudite — une pénalité surnaturelle persiste jusqu'à ce que sa condition spécifique soit résolue."
+    },
+    {
+      "value": "Petrifier — le corps se tourne lentement vers la pierre et nécessite une intervention urgente."
+    },
+    {
+      "value": "Poussessé — un extérieur conteste parfois le contrôle du personnage."
+    },
+    {
+      "value": "Marqué — un signe magique permet à une créature hostile ou un effet de suivre le personnage."
+    },
+    {
+      "value": "Invisible — le caractère ne peut pas être vu normalement mais fait encore du son et laisse des traces."
+    },
+    {
+      "value": "Régénérer — restaure une petite quantité de PV à la fin de chaque tour."
+    },
+    {
+      "value": "Inspiré — peut reroller un choix mourir, après quoi ce statut se termine."
+    }
+  ]
+}

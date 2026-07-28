@@ -1,0 +1,102 @@
+{
+  "name": "Bâtiments",
+  "description": "Bâtiments urbains et ruraux avec un point d’intérêt immédiat",
+  "entries": [
+    {
+      "weight": 4,
+      "value": "Auberge de bord de route — lits propres, gardés en 2007, et une salle commune où les messagers échangent des nouvelles."
+    },
+    {
+      "weight": 4,
+      "value": "Taverne en foule — nourriture bon marché, musique forte, stands privés et combats réguliers sur la politique locale."
+    },
+    {
+      "weight": 4,
+      "value": "Maison de ville — une maison de plusieurs étages étroite avec un atelier en dessous et des chambres familiales en haut."
+    },
+    {
+      "weight": 3,
+      "value": "Ferme — une maison robuste, des granges, des hangars, des animaux clôturés et des signes d'une perturbation récente."
+    },
+    {
+      "weight": 3,
+      "value": "Le forgeron, un atelier de pierre chaude qui prend des commandes tout en réparant tranquillement les armes interdites."
+    },
+    {
+      "weight": 3,
+      "value": "Magasin général — étagères de fournitures pratiques et une armoire verrouillée de commerce inhabituel."
+    },
+    {
+      "weight": 3,
+      "value": "Bathhouse public — piscines carrelées, casiers loués, préposés aux bavardages et salles de réunion discrètes."
+    },
+    {
+      "weight": 3,
+      "value": "Maison close — une maison surveillée et gérée par des professionnels offrant compagnie, information, et une confidentialité stricte."
+    },
+    {
+      "weight": 3,
+      "value": "Temple — un sanctuaire public avec un autel, cuisine charitable, archives, et crypte restreinte."
+    },
+    {
+      "weight": 3,
+      "value": "Garde - garde - garde - garde - garde - garde - garde - garde, garde - garde, garde - garde et garde - garde épuisés."
+    },
+    {
+      "weight": 2,
+      "value": "Apothécaire — étagères parfumées de remèdes, poisons, créatures préservées et expériences mal étiquetées."
+    },
+    {
+      "weight": 2,
+      "value": "Maison de guilde — bureaux, espaces de formation, conseil d'administration et salle de réunion réservée aux membres."
+    },
+    {
+      "weight": 2,
+      "value": "Entrepôt — chargement empilé, passerelles, gardes de nuit et un envoi manquant du registre."
+    },
+    {
+      "weight": 2,
+      "value": "Théâtre — sièges publics ornés, passages en coulisses, ateliers et boîtes royales cachées."
+    },
+    {
+      "weight": 2,
+      "value": "L'école, une seule classe bondée dont l'enseignant connaît tous les secrets familiaux du district."
+    },
+    {
+      "weight": 2,
+      "value": "Banque — comptoirs renforcés, bureaux privés, coffres-forts et un trésor lourdement piégé."
+    },
+    {
+      "weight": 2,
+      "value": "Usine — un lieu de travail à moteur à eau ou à vent entouré de poussière, de bruit, d'ouvriers et de machines mobiles."
+    },
+    {
+      "weight": 2,
+      "value": "Stable: montures louées, chambres à coucher, lofts de couchage et un marié qui remarque chaque arrivée."
+    },
+    {
+      "weight": 2,
+      "value": "Palais de justice — salle d'audience publique, salles de preuves, archives juridiques et cabinets privés des juges."
+    },
+    {
+      "weight": 1,
+      "value": "La tour de Wizard, une résidence verticale excentrique dont les pièces ne suivent pas les dimensions extérieures."
+    },
+    {
+      "weight": 1,
+      "value": "Ambassade — une résidence noble fortifiée fonctionnant sous la législation étrangère et la surveillance constante."
+    },
+    {
+      "weight": 1,
+      "value": "Observatoire — un laboratoire de suivi des étoiles, du temps et de quelque chose qui s'approche d'en haut."
+    },
+    {
+      "weight": 1,
+      "value": "Manoir abandonné — un domaine en décomposition laissé meublé après que ses occupants ont disparu pendant le dîner."
+    },
+    {
+      "weight": 1,
+      "value": "Arène de combat clandestine — une arène cachée avec des salles de paris, des guérisseurs, des cages et des fonctionnaires soudoyés."
+    }
+  ]
+}

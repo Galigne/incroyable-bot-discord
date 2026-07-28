@@ -1,0 +1,289 @@
+{
+  "common": {
+    "empty": "—",
+    "continued": "{{label}} (continued)",
+    "unexpectedError": "Something went wrong while running that command."
+  },
+  "authorization": {
+    "missingRole": "You do not have permission to use this command.",
+    "wrongChannel": "This command cannot be used in this channel."
+  },
+  "commands": {
+    "help": {
+      "description": "List all available commands",
+      "title": "Gon Freecss",
+      "available": "Available commands"
+    },
+    "purge": {
+      "description": "Delete recent messages from the current channel",
+      "amount": "Number of recent messages to delete",
+      "success": "Deleted {{count}} recent messages."
+    },
+    "restart": {
+      "description": "Reconnect the bot to Discord",
+      "reply": "Reconnecting..."
+    },
+    "say": {
+      "description": "Send a message through the bot",
+      "message": "Message to send"
+    },
+    "rpg": {
+      "description": "Generate prompts and manage RPG character sheets"
+    }
+  },
+  "rpg": {
+    "add": {
+      "description": "Create a blank character sheet with a stable CharacterKey",
+      "keyOption": "Unique save key, make it short and remember it.",
+      "success": "Character with key `{{key}}` was created. This CharacterKey cannot be changed. Use `/rpg set` with a field to open its prefilled private form."
+    },
+    "damage": {
+      "description": "Deal damage to a character, reducing AR before HP",
+      "characterOption": "Character receiving the damage",
+      "amountOption": "Positive amount of damage to deal",
+      "piercingOption": "Bypass AR and deal the damage directly to HP",
+      "choice": "{{amount}} damage",
+      "piercingBreakdown": "{{amount}} piercing damage was dealt directly to {{hpLabel}}.",
+      "normalBreakdown": "{{arDamage}} damage was absorbed by {{arLabel}} and {{hpDamage}} damage reached {{hpLabel}}.",
+      "result": "**{{name}}** received **{{amount}} damage**. {{breakdown}}\n{{arLabel}}: **{{arCurrent}}/{{arMax}}** · {{hpLabel}}: **{{hpCurrent}}/{{hpMax}}**"
+    },
+    "delete": {
+      "description": "Delete one of your characters",
+      "characterOption": "Character to delete",
+      "success": "Character **{{key}}** was deleted."
+    },
+    "endTurn": {
+      "description": "Restore current AP and MD to their maximum values",
+      "characterOption": "Character ending their turn",
+      "result": "**{{name}}** starts a new turn with {{ap}} {{apLabel}} and {{md}} {{mdLabel}}."
+    },
+    "gen": {
+      "description": "Generate GM inspiration from a chosen category (DM only)",
+      "schemaDescription": "Generate GM inspiration from a chosen category",
+      "categoryOption": "Generator category",
+      "unknownCategory": "Unknown generator category: **{{category}}**. Use `/rpg gen-help` to see the available categories.",
+      "title": "Generated {{category}}",
+      "footer": "The GM may adapt or reroll any result."
+    },
+    "genChar": {
+      "description": "Generate and save a complete random character (DM only)",
+      "schemaDescription": "Generate and save a complete random character",
+      "keyOption": "Unique save key, make it short and remember it.",
+      "levelOption": "Character level; omitted means a random level from 1 to 10",
+      "backgroundOption": "NPC background category; omitted means a random background",
+      "levelChoice": "Level {{level}}",
+      "footer": "{{keyLabel}}: {{key}}",
+      "success": "Generated character **{{name}}** with key `{{key}}`."
+    },
+    "genHelp": {
+      "description": "Explain random generation and list generator categories (DM only)",
+      "schemaDescription": "Explain random generation and list generator categories",
+      "title": "RPG Generation Help",
+      "body": "`/rpg gen category:<category>`\nDM-only. Select a generator with autocomplete to draw one weighted random entry. Run it again to reroll.\n\n`/rpg gen-char character-key:<new key> [level] [background]`\nDM-only. Creates and saves a complete random character using a unique CharacterKey. Level must be 1–10; when omitted, it is rolled randomly. Background selects the NPC category and is random when omitted. Statistics, resources, equipment, inventory, and gold are generated from the character level and game rules. Intelligence grants RULE Points; they raise the first RULE as far as possible before creating a second, with a maximum of two RULEs.",
+      "categoryLine": "**{{name}}** — {{description}} ({{count}} entries)",
+      "categoryLineCompact": "**{{name}}** ({{count}} entries)",
+      "available": "Available generators"
+    },
+    "get": {
+      "description": "Display a character summary or one detailed field",
+      "characterOption": "Character to display",
+      "fieldOption": "Optional detailed field",
+      "unknownField": "Unknown character field: **{{field}}**. Use `/rpg get-help` to list the available fields.",
+      "keyFooter": "{{keyLabel}}: {{key}}",
+      "detailsFooter": "Use /rpg get with the field option for more details."
+    },
+    "getHelp": {
+      "description": "Explain character summary and detailed field views",
+      "body": "Use `/rpg get` to display a character-sheet summary.\nSelect the optional `field` to display one complete field and its sub-fields.\n\n**Available fields**\n`name` — first name and last name\n`firstName`, `lastName`, `level`\n`race` — name, physical description, and lore\n`appearance`, `backstory`, `goals`\n`personality` — traits and additional description\n`racialTraits` — skill bonus and physical ability\n`statistics` — base and derived statistics\n`rules` — every RULE name, level, and description\n`talents`\n`status` — HP, AR, AP, MD, encumbrance, and status effects\n`HP`, `AR`, `AP`, `MD` — one resource only\n`statusEffects`, `equipment`, `inventory`, `encumbrance`\n\n**Examples**\nSelect CharacterKey `D.Robert` for the summary.\nThen optionally select `name`, `personality`, `race`, `rules`, or `status`."
+    },
+    "heal": {
+      "description": "Restore current HP, armor, or both to a percentage of maximum",
+      "characterOption": "Character receiving the healing",
+      "resourceOption": "Resource to restore",
+      "percentageOption": "Percentage of the maximum to restore to",
+      "both": "{{hp}} and {{ar}}",
+      "change": "{{resource}}: **{{previous}}/{{max}} → {{current}}/{{max}}**",
+      "result": "**{{name}}** restored to {{percentage}}%:\n{{changes}}"
+    },
+    "help": {
+      "description": "Show the available RPG commands",
+      "title": "RPG Commands",
+      "body": "Create and manage RPG characters using a stable `CharacterKey` (for example, `D.Robert`). The key identifies the save and cannot be changed. Use `/rpg set` with a field to open its prefilled private form. Use the optional field in `/rpg get` for complete details."
+    },
+    "roll": {
+      "description": "Roll a die with a configurable number of sides",
+      "sidesOption": "Number of sides on the die",
+      "result": "You rolled **{{result}}**."
+    },
+    "rules": {
+      "description": "Open the public TTRPG rulebook",
+      "reply": "TTRPG rulebook: {{url}}"
+    },
+    "set": {
+      "description": "Set one character-sheet field in a prefilled form",
+      "characterOption": "Character to edit",
+      "fieldOption": "Field to edit"
+    },
+    "setHelp": {
+      "description": "Explain settable character fields and forms",
+      "body": "Use `/rpg set character-key:<key> field:<field>` to open a private prefilled form.\nThe CharacterKey identifies the save and cannot be changed.\nNested fields use a dot, such as `race.name`, `stats.strength`, or `hp.current`.\nText fields can be cleared by emptying the form before submitting it.\n\n**Identity and story**\n`firstName`, `lastName`, `level`, `appearance`, `backstory`, `goals`, `talents`\n`race.name`, `race.description`, `race.lore`\n`personality.description`, `personality.traits`\n`racialTrait.skillBonus`, `racialTrait.physicalAbility`\n\n**Statistics**\n`stats.constitution`, `stats.strength`, `stats.dexterity`, `stats.intelligence`\n`stats.speed`, `stats.perception`, `stats.charisma`, `stats.initiative`, `stats.reflexes`\n\n**Status and resources**\n`hp.current`, `hp.max`, `ar.current`, `ar.max`, `ap.current`, `ap.max`\n`md.current`, `md.max`, `encumbrance.current`, `encumbrance.max`\nAP values must be whole numbers with `0 ≤ current ≤ max ≤ 10`.\n\n**Multiline fields**\n`personality.traits`, `rules`, `statusEffects`, `equipment`, `inventory`\nWrite one entry per line. Leading dashes are optional.\nFor RULEs, use `Name: Level: Description`, one RULE per line.\nRULE levels must be positive whole numbers.\n\n**Examples**\n`/rpg set character-key:D.Robert field:stats.strength`\n`/rpg set character-key:D.Robert field:rules`\nRULE example: `Fire: 2: Controls flames`"
+    },
+    "editor": {
+      "unknownField": "Unknown editable field: **{{field}}**.",
+      "tooLarge": "This field is larger than Discord’s 4,000-character modal limit.",
+      "expired": "This form expired. Run `/rpg set` again.",
+      "result": "**{{name}}**: {{result}}",
+      "collectionPlaceholder": "Write one entry per line; leading dashes are optional",
+      "valuePlaceholder": "Enter the new value",
+      "rulesDescription": "One RULE per line: Name: Level: Description. Leading dashes are optional.",
+      "collectionDescription": "Free-form lines; leading dashes are optional. Empty the form to clear.",
+      "textDescription": "The previous value is prefilled. Empty the form to clear it.",
+      "numberDescription": "Enter a valid number.",
+      "title": "Edit {{field}}"
+    }
+  },
+  "character": {
+    "generatedGold": "{{gold}} gold",
+    "fields": {
+      "characterKey": "Character key",
+      "firstName": "First name",
+      "lastName": "Last name",
+      "level": "Level",
+      "race": "Race",
+      "raceName": "Race name",
+      "racePhysicalDescription": "Race physical description",
+      "raceLore": "Race lore",
+      "appearance": "Appearance",
+      "backstory": "Backstory",
+      "goals": "Goals",
+      "personality": "Personality",
+      "personalityDescription": "Personality description",
+      "personalityTraits": "Personality traits",
+      "racialTraits": "Racial traits",
+      "racialSkillBonus": "Racial skill bonus",
+      "racialPhysicalAbility": "Racial physical ability",
+      "statistics": "Statistics",
+      "baseStatistics": "Base statistics",
+      "derivedStatistics": "Derived statistics",
+      "rules": "RULEs",
+      "ruleName": "RULE name",
+      "ruleLevel": "RULE level",
+      "ruleDescription": "RULE description",
+      "talents": "Talents",
+      "status": "Status",
+      "statusEffects": "Status effects",
+      "equipment": "Equipment",
+      "inventory": "Inventory",
+      "encumbrance": "Encumbrance",
+      "currentEncumbrance": "Current encumbrance",
+      "maximumEncumbrance": "Maximum encumbrance",
+      "name": "Full name",
+      "constitution": "Constitution",
+      "strength": "Strength",
+      "dexterity": "Dexterity",
+      "intelligence": "Intelligence",
+      "speed": "Speed",
+      "perception": "Perception",
+      "charisma": "Charisma",
+      "initiative": "Initiative",
+      "reflexes": "Reflexes",
+      "currentResource": "Current {{resource}}",
+      "maximumResource": "Maximum {{resource}}"
+    },
+    "resources": {
+      "hp": {
+        "name": "Hit points",
+        "abbreviation": "HP"
+      },
+      "ar": {
+        "name": "Armor rating",
+        "abbreviation": "AR"
+      },
+      "ap": {
+        "name": "Action points",
+        "abbreviation": "AP"
+      },
+      "md": {
+        "name": "Movement distance",
+        "abbreviation": "MD"
+      }
+    },
+    "summary": {
+      "identity": "Level **{{level}}** · Race **{{race}}**",
+      "unspecifiedRace": "Unspecified",
+      "unspecifiedAppearance": "Appearance unspecified.",
+      "ruleLevel": "{{name}} (Level {{level}})"
+    },
+    "detail": {
+      "title": "{{name}} — {{field}}",
+      "rule": "**{{index}}. {{name}} — Level {{level}}**\n{{description}}",
+      "noDescription": "No description."
+    }
+  },
+  "errors": {
+    "characterExists": "A character with that key already exists.",
+    "characterMissing": "That character does not exist.",
+    "characterOwnerDelete": "Only the character creator can delete it.",
+    "characterEditor": "Only the character creator or a DM can edit it.",
+    "invalidCharacterKey": "Character keys must start and end with a letter or number and may contain letters, numbers, periods, hyphens, and underscores.",
+    "unknownEditField": "Unknown field: {{field}}.",
+    "valueRequired": "A value is required for {{field}}.",
+    "collectionValueRequired": "A value is required for the {{field}}.",
+    "mustBeNumber": "{{field}} must be a number.",
+    "ruleNameRequired": "A RULE name is required before the `:` separator.",
+    "ruleLevelInvalid": "A RULE level must be a positive whole number.",
+    "apRange": "{{apLabel}} must be a whole number between 0 and {{max}}.",
+    "apCurrentAboveMax": "Current {{apLabel}} cannot be greater than maximum {{apLabel}}.",
+    "apMaxBelowCurrent": "Maximum {{apLabel}} cannot be lower than current {{apLabel}}.",
+    "healResourcesOnly": "Only {{hpLabel}} and {{arLabel}} can be restored with the heal command.",
+    "healResourceInvalid": "The heal resource must be {{hpLabel}}, {{arLabel}}, or both.",
+    "percentageInvalid": "The rest percentage must be between 0 and 100.",
+    "damageInvalid": "Damage must be a positive whole number.",
+    "piercingInvalid": "Piercing must be true or false.",
+    "characterLevelInvalid": "Character level must be a whole number between 1 and 10.",
+    "backgroundUnknown": "Unknown background category: {{background}}.",
+    "generatorMissing": "Missing generator category: {{category}}.",
+    "generatorNeedsEntries": "Generator category {{category}} needs at least {{count}} eligible entries.",
+    "generatorStructuredExpected": "Expected a structured generator entry with {{field}}.",
+    "generatorFieldMissing": "Generator entry is missing field: {{field}}.",
+    "generatorTextExpected": "Expected a text generator entry."
+  },
+  "editorResults": {
+    "updated": "{{field}} updated.",
+    "collectionUpdated": "{{field}} field updated."
+  },
+  "generatorFields": {
+    "arPercentage": "AR percentage",
+    "allies": "Allies",
+    "appearance": "Appearance",
+    "backstory": "Backstory",
+    "commandment": "Commandment",
+    "constitutionRequirement": "Constitution requirement",
+    "deityOrBelief": "Deity or belief",
+    "description": "Description",
+    "encumbrance": "Encumbrance",
+    "enemies": "Enemies",
+    "firstName": "First name",
+    "generator": "Generator",
+    "goal": "Goal",
+    "goals": "Goals",
+    "hierarchy": "Hierarchy",
+    "holyPlace": "Holy place",
+    "lastName": "Last name",
+    "leadership": "Leadership",
+    "name": "Name",
+    "physicalAbility": "Physical ability",
+    "rarity": "Rarity",
+    "relationshipWithMagic": "Relationship with magic",
+    "religiousOrder": "Religious order",
+    "resources": "Resources",
+    "rites": "Rites",
+    "sacredSymbol": "Sacred symbol",
+    "skillBonus": "Skill bonus",
+    "strength": "Strength",
+    "structure": "Structure",
+    "taboo": "Taboo",
+    "tension": "Tension",
+    "type": "Type"
+  }
+}

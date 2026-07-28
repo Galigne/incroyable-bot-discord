@@ -124,7 +124,7 @@ module.exports = function createCommandChecks(context) {
 			healResourceChoices?.map(choice => choice.value).join(',')
 				!== 'hp,armor,both'
 			|| healResourceChoices?.map(choice => choice.name).join(',')
-				!== 'HP,Armor,HP and Armor'
+				!== 'HP — Hit points,AR — Armor rating,HP and AR'
 			|| healPercentage?.min_value !== 0
 			|| healPercentage?.max_value !== 100
 		) {

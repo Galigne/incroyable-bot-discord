@@ -1,17 +1,19 @@
 const { MessageFlags } = require('discord.js');
 const { GET_HELP } = require('./get');
+const { getLocale, localizeDescription, t } = require('../../../util/i18n');
+
+const descriptionKey = 'rpg.getHelp.description';
 
 module.exports = {
 	name: 'get-help',
-	description: 'Explain character summary and detailed field views',
+	description: t('en', descriptionKey),
+	descriptionKey,
 	usage: '/rpg get-help',
 	helpOrder: 35,
-	configure: command => command
-		.setName('get-help')
-		.setDescription('Explain character summary and detailed field views'),
-	async execute({ interaction }) {
+	configure: command => localizeDescription(command.setName('get-help'), descriptionKey),
+	async execute({ config, interaction }) {
 		await interaction.reply({
-			content: GET_HELP,
+			content: t(getLocale(config, interaction.guildId), 'rpg.getHelp.body'),
 			flags: MessageFlags.Ephemeral,
 		});
 	},

@@ -1,0 +1,142 @@
+{
+  "name": "Backgrounds",
+  "description": "Catégories de Background pour les PNJ",
+  "entries": [
+    {
+      "weight": 4,
+      "fields": {
+        "Name": "Criminel",
+        "Description": "Hors-la-loi, voleurs, contrebandiers, fonctionnaires corrompus et membres du crime organisé",
+        "Generator": "criminalBackground"
+      }
+    },
+    {
+      "weight": 5,
+      "fields": {
+        "Name": "Aventurier",
+        "Description": "Explorateurs, mercenaires, chasseurs de monstres, pèlerins et chasseurs de trésors",
+        "Generator": "adventurerBackground"
+      }
+    },
+    {
+      "weight": 2,
+      "fields": {
+        "Name": "Noble",
+        "Description": "Aristocrates, courtisans, héritiers et petits seigneurs",
+        "Generator": "nobleBackground"
+      }
+    },
+    {
+      "weight": 5,
+      "fields": {
+        "Name": "Paysan",
+        "Description": "Agriculteurs, éleveurs et travailleurs ruraux",
+        "Generator": "peasantBackground"
+      }
+    },
+    {
+      "weight": 5,
+      "fields": {
+        "Name": "Artisan",
+        "Description": "Forgerons, charpentiers, tailleurs, alchimistes et autres artisans",
+        "Generator": "artisanBackground"
+      }
+    },
+    {
+      "weight": 5,
+      "fields": {
+        "Name": "Marchand",
+        "Description": "Négociants, boutiquiers, caravaniers et agents commerciaux",
+        "Generator": "merchantBackground"
+      }
+    },
+    {
+      "weight": 3,
+      "fields": {
+        "Name": "Érudit",
+        "Description": "Étudiants, chercheurs, scribes et bibliothécaires",
+        "Generator": "scholarBackground"
+      }
+    },
+    {
+      "weight": 3,
+      "fields": {
+        "Name": "Religieux",
+        "Description": "Prêtres, moines, serviteurs de temple et pèlerins",
+        "Generator": "religiousBackground"
+      }
+    },
+    {
+      "weight": 4,
+      "fields": {
+        "Name": "Militaire",
+        "Description": "Soldats, gardes, officiers et vétérans",
+        "Generator": "militaryBackground"
+      }
+    },
+    {
+      "weight": 3,
+      "fields": {
+        "Name": "Sauvageon",
+        "Description": "Chasseurs, nomades, ermites et membres de peuples tribaux",
+        "Generator": "outlanderBackground"
+      }
+    },
+    {
+      "weight": 4,
+      "fields": {
+        "Name": "Marin",
+        "Description": "Marins, pêcheurs, pirates et dockers",
+        "Generator": "sailorBackground"
+      }
+    },
+    {
+      "weight": 3,
+      "fields": {
+        "Name": "Artiste",
+        "Description": "Musiciens, comédiens, conteurs et artistes de spectacle",
+        "Generator": "performerBackground"
+      }
+    },
+    {
+      "weight": 4,
+      "fields": {
+        "Name": "Serviteur",
+        "Description": "Domestiques, assistants personnels et ouvriers",
+        "Generator": "servantBackground"
+      }
+    },
+    {
+      "weight": 3,
+      "fields": {
+        "Name": "Fonctionnaire",
+        "Description": "Administrateurs, diplomates, collecteurs d’impôts et juges",
+        "Generator": "officialBackground"
+      }
+    },
+    {
+      "weight": 2,
+      "fields": {
+        "Name": "Mage",
+        "Description": "Apprentis, mages autodidactes et chercheurs en magie",
+        "Generator": "mageBackground"
+      }
+    },
+    {
+      "weight": 3,
+      "fields": {
+        "Name": "Exilé",
+        "Description": "Réfugiés, fugitifs, nobles bannis et survivants déplacés",
+        "Generator": "exileBackground"
+      }
+    },
+    {
+      "weight": 3,
+      "fields": {
+        "Name": "Enfant des rues",
+        "Description": "Orphelins, mendiants, enfants des rues et récupérateurs",
+        "Generator": "urchinBackground"
+      }
+    }
+  ]
+}

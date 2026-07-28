@@ -237,6 +237,23 @@ test('seeded random character generation remains equivalent', () => {
 	});
 });
 
+test('random character generation uses localized content without changing identifiers', () => {
+	const character = createCharacterFixture();
+	populateRandomCharacter(character, {
+		background: 'criminal',
+		level: 1,
+		locale: 'fr',
+		random: () => 0,
+	});
+
+	assert.equal(character.race.name, 'Humain');
+	assert.match(character.inventory.at(-1), /^\d+ pièces d’or$/);
+	assert.equal(character.inventory.some(item => item.endsWith(' gold')), false);
+	assert.ok(character.appearance);
+	assert.ok(character.backstory);
+	assert.ok(character.goals);
+});
+
 function createCharacterFixture() {
 	return {
 		key: 'Test',

@@ -1,6 +1,8 @@
 const { MAX_AP } = require('./constants');
 const { characterEditError } = require('./characterValidation');
 const { calculateArmorRating } = require('./armor');
+const { t } = require('../../util/i18n');
+const { getResourceAbbreviation } = require('../../util/characterDisplay');
 
 function calculateMaxHp(constitution, level) {
 	return Math.round(constitution * 10 * (1 + 0.2 * (level - 1)));
@@ -52,36 +54,36 @@ function createResourcesFromSave(data) {
 	};
 }
 
-function calculateRestoredResourceValue(maximum, percentage) {
-	validateRestorationPercentage(percentage);
+function calculateRestoredResourceValue(maximum, percentage, locale = 'en') {
+	validateRestorationPercentage(percentage, locale);
 	return Math.min(maximum, Math.round(maximum * percentage / 100));
 }
 
-function restoreResource(character, resourceName, percentage) {
+function restoreResource(character, resourceName, percentage, locale = 'en') {
 	const resource = resourceName.toLowerCase();
 	if (!['hp', 'ar'].includes(resource)) {
-		throw characterEditError('Only HP and AR can be restored with the heal command.');
+		throw characterEditError(t(locale, 'errors.healResourcesOnly', resourceLabels(locale)));
 	}
 	const target = character.resources[resource];
-	target.current = calculateRestoredResourceValue(target.max, percentage);
+	target.current = calculateRestoredResourceValue(target.max, percentage, locale);
 	return target;
 }
 
-function restoreHealingResources(character, resourceName, percentage) {
+function restoreHealingResources(character, resourceName, percentage, locale = 'en') {
 	const resourceKeys = {
 		hp: ['hp'],
 		armor: ['ar'],
 		both: ['hp', 'ar'],
 	}[resourceName];
 	if (!resourceKeys) {
-		throw characterEditError('The heal resource must be HP, Armor, or Both.');
+		throw characterEditError(t(locale, 'errors.healResourceInvalid', resourceLabels(locale)));
 	}
-	validateRestorationPercentage(percentage);
+	validateRestorationPercentage(percentage, locale);
 
 	return resourceKeys.map(resource => {
 		const target = character.resources[resource];
 		const previous = target.current;
-		restoreResource(character, resource, percentage);
+		restoreResource(character, resource, percentage, locale);
 		return {
 			resource,
 			previous,
@@ -96,9 +98,9 @@ function resetTurnResources(character) {
 	character.resources.md.current = character.resources.md.max;
 }
 
-function validateRestorationPercentage(percentage) {
+function validateRestorationPercentage(percentage, locale = 'en') {
 	if (!Number.isFinite(percentage) || percentage < 0 || percentage > 100) {
-		throw characterEditError('The rest percentage must be between 0 and 100.');
+		throw characterEditError(t(locale, 'errors.percentageInvalid'));
 	}
 }
 
@@ -111,6 +113,13 @@ function clampActionPoints(value) {
 
 function createFullResource(maximum) {
 	return { current: maximum, max: maximum };
+}
+
+function resourceLabels(locale) {
+	return {
+		arLabel: getResourceAbbreviation(locale, 'ar'),
+		hpLabel: getResourceAbbreviation(locale, 'hp'),
+	};
 }
 
 module.exports = {

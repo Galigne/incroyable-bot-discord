@@ -1,0 +1,51 @@
+{
+  "name": "Races",
+  "description": "Peuples jouables, avec leur culture, leur apparence et des dons suggérés",
+  "entries": [
+    {
+      "weight": 8,
+      "fields": {
+        "Name": "Humain",
+        "Description": "Présents dans presque toutes les régions, les humains se distinguent par la grande diversité de leurs apparences, de leurs cultures et de leurs traditions.",
+        "Skill Bonus": "+1 en Histoire",
+        "Physical Ability": "Endurance acharnée : les humains résistent mieux à la fatigue causée par les longs voyages, la chaleur, les marches forcées, les poursuites et les efforts physiques répétés."
+      }
+    },
+    {
+      "weight": 6,
+      "fields": {
+        "Name": "Elfe",
+        "Description": "Peuple à la grande longévité et aux traits fins, les elfes sont connus pour leurs sens aiguisés, leur grâce et leurs cultures profondément liées à la magie ou à la nature.",
+        "Skill Bonus": "+1 en Perception",
+        "Physical Ability": "Vitalité intemporelle : les elfes vieillissent avec une extrême lenteur et conservent leur vigueur physique ainsi que leur vivacité d’esprit pendant des siècles."
+      }
+    },
+    {
+      "weight": 6,
+      "fields": {
+        "Name": "Nain",
+        "Description": "Robustes et trapus, les nains sont réputés pour leur endurance, leur savoir-faire, leurs traditions claniques et leurs cités taillées dans la pierre.",
+        "Skill Bonus": "+1 aux jets de mort",
+        "Physical Ability": "Cuir épais : lorsqu’ils ne portent pas d’armure, la peau dense des nains leur offre une protection naturelle modeste contre les coups à mains nues et les impacts mineurs."
+      }
+    },
+    {
+      "weight": 5,
+      "fields": {
+        "Name": "Orque",
+        "Description": "Puissamment bâtis et dotés de défenses proéminentes, les orques appartiennent à des cultures variées qui valorisent souvent la résilience, l’honneur et la force collective.",
+        "Skill Bonus": "+1 en Athlétisme",
+        "Physical Ability": "Mâchoire de fer : la morsure redoutable des orques peut infliger de graves blessures et leur procure un avantage lors des combats au contact le plus rapproché."
+      }
+    },
+    {
+      "weight": 4,
+      "fields": {
+        "Name": "Gobelin",
+        "Description": "Petits et vifs, les gobelins ont des traits expressifs, des sens aiguisés et un talent certain pour l’improvisation, le commerce et la fabrication d’outils ingénieux.",
+        "Skill Bonus": "+1 en Tromperie",
+        "Physical Ability": "Petite cible : leur petite taille rend les gobelins plus difficiles à toucher avec des flèches, des armes de jet et d’autres projectiles, surtout à longue distance."
+      }
+    }
+  ]
+}

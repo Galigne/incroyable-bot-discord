@@ -1,0 +1,322 @@
+{
+  "name": "Inventaire",
+  "description": "Objets pouvant apparaître dans l’inventaire d’un personnage",
+  "entries": [
+    {
+      "weight": 8,
+      "fields": {
+        "Name": "Potion de guérison",
+        "Description": "Restaurer 50 PV en cas de consommation.",
+        "Encumbrance": 1
+      }
+    },
+    {
+      "weight": 8,
+      "fields": {
+        "Name": "Coil de corde",
+        "Description": "Dix mètres de corde robuste pour monter, fixer ou fixer des charges.",
+        "Encumbrance": 1
+      }
+    },
+    {
+      "weight": 8,
+      "fields": {
+        "Name": "Lanterne et huile",
+        "Description": "Une lanterne à capuchon avec suffisamment d'huile pendant plusieurs heures.",
+        "Encumbrance": 1
+      }
+    },
+    {
+      "weight": 8,
+      "fields": {
+        "Name": "Trois rations de voyage",
+        "Description": "Nourriture compacte suffisante pour trois jours.",
+        "Encumbrance": 1
+      }
+    },
+    {
+      "weight": 7,
+      "fields": {
+        "Name": "Peau d'eau",
+        "Description": "Une peau d'eau en cuir rempli.",
+        "Encumbrance": 1
+      }
+    },
+    {
+      "weight": 7,
+      "fields": {
+        "Name": "Rouleaux de lit",
+        "Description": "Une couverture et un rouleau de couchage résistant aux intempéries.",
+        "Encumbrance": 1
+      }
+    },
+    {
+      "weight": 7,
+      "fields": {
+        "Name": "Boîte à barreaux",
+        "Description": "Flint, acier et assèche-linge pour le démarrage des feux.",
+        "Encumbrance": 0
+      }
+    },
+    {
+      "weight": 6,
+      "fields": {
+        "Name": "Kit de verrouillage",
+        "Description": "Petits outils pour la manipulation des serrures mécaniques ordinaires.",
+        "Encumbrance": 1
+      }
+    },
+    {
+      "weight": 6,
+      "fields": {
+        "Name": "Kit d'escalade",
+        "Description": "Pitons, marteau, sangles et aides à l'escalade.",
+        "Encumbrance": 2
+      }
+    },
+    {
+      "weight": 6,
+      "fields": {
+        "Name": "Bandeaux",
+        "Description": "Nettoyer les vêtements et les fournitures de base pour le traitement des blessures.",
+        "Encumbrance": 1
+      }
+    },
+    {
+      "weight": 6,
+      "fields": {
+        "Name": "Chalk et charbon",
+        "Description": "Utile pour marquer les chemins, dessiner des cartes et faire des notes.",
+        "Encumbrance": 0
+      }
+    },
+    {
+      "weight": 6,
+      "fields": {
+        "Name": "Petit miroir",
+        "Description": "Un miroir à main poli utile pour les signaux et les coins de contrôle.",
+        "Encumbrance": 0
+      }
+    },
+    {
+      "weight": 5,
+      "fields": {
+        "Name": "Barre de crowd",
+        "Description": "Un levier en fer robuste pour portes, caisses et obstacles.",
+        "Encumbrance": 1
+      }
+    },
+    {
+      "weight": 5,
+      "fields": {
+        "Name": "Crochet de grappin",
+        "Description": "Un crochet à quatre branches conçu pour une utilisation avec corde.",
+        "Encumbrance": 1
+      }
+    },
+    {
+      "weight": 5,
+      "fields": {
+        "Name": "Kit de pêche",
+        "Description": "Ligne, crochets, flotteurs et filet compact.",
+        "Encumbrance": 1
+      }
+    },
+    {
+      "weight": 5,
+      "fields": {
+        "Name": "Kit d'écriture",
+        "Description": "Encre, piquants, parchemin, cire d'étanchéité et étui de protection.",
+        "Encumbrance": 1
+      }
+    },
+    {
+      "weight": 5,
+      "fields": {
+        "Name": "Pochette à base de plantes",
+        "Description": "Petits outils et conteneurs pour la collecte de plantes utiles.",
+        "Encumbrance": 1
+      }
+    },
+    {
+      "weight": 5,
+      "fields": {
+        "Name": "Pelle",
+        "Description": "Un outil de creusement compact mais robuste.",
+        "Encumbrance": 2
+      }
+    },
+    {
+      "weight": 4,
+      "fields": {
+        "Name": "Antidote",
+        "Description": "Un traitement général donnant une autre chance de résister au poison ordinaire.",
+        "Encumbrance": 1
+      }
+    },
+    {
+      "weight": 4,
+      "fields": {
+        "Name": "Bombe à fumée",
+        "Description": "Crée un nuage dense de fumée lorsqu'il s'enflamme.",
+        "Encumbrance": 1
+      }
+    },
+    {
+      "weight": 4,
+      "fields": {
+        "Name": "Piège à ours",
+        "Description": "Un piège mécanique lourd capable de retenir une créature.",
+        "Encumbrance": 2
+      }
+    },
+    {
+      "weight": 4,
+      "fields": {
+        "Name": "Kit de déguisation",
+        "Description": "Cosmétiques, colorants, faux cheveux, et simples pièces de costume.",
+        "Encumbrance": 1
+      }
+    },
+    {
+      "weight": 4,
+      "fields": {
+        "Name": "Instrument de musique",
+        "Description": "Un instrument portable choisi pour convenir au personnage.",
+        "Encumbrance": 1
+      }
+    },
+    {
+      "weight": 4,
+      "fields": {
+        "Name": "Échelle de Merchant",
+        "Description": "Un bilan pliant et des poids de référence pour le contrôle des marchandises commerciales.",
+        "Encumbrance": 1
+      }
+    },
+    {
+      "weight": 3,
+      "fields": {
+        "Name": "Sac de caltropes",
+        "Description": "Pinces métalliques pointues utilisées pour ralentir la poursuite ou sécuriser un passage.",
+        "Encumbrance": 1
+      }
+    },
+    {
+      "weight": 3,
+      "fields": {
+        "Name": "Violon de poison de base",
+        "Description": "Une dose limitée de toxines convient pour une arme ou une boisson.",
+        "Encumbrance": 1
+      }
+    },
+    {
+      "weight": 3,
+      "fields": {
+        "Name": "Longue-vue",
+        "Description": "Un tube optique compact pour voir les détails éloignés.",
+        "Encumbrance": 1
+      }
+    },
+    {
+      "weight": 3,
+      "fields": {
+        "Name": "Tente",
+        "Description": "Un petit abri adapté à un ou deux voyageurs.",
+        "Encumbrance": 2
+      }
+    },
+    {
+      "weight": 3,
+      "fields": {
+        "Name": "Menottes",
+        "Description": "Une paire de retenue en fer avec une clé simple.",
+        "Encumbrance": 1
+      }
+    },
+    {
+      "weight": 3,
+      "fields": {
+        "Name": "Saint symbole",
+        "Description": "Un symbole lié à une foi, un serment, un ancêtre ou un idéal personnel.",
+        "Encumbrance": 0
+      }
+    },
+    {
+      "weight": 3,
+      "fields": {
+        "Name": "Carte locale",
+        "Description": "Une carte pratique mais imparfaite de la région environnante.",
+        "Encumbrance": 0
+      }
+    },
+    {
+      "weight": 2,
+      "fields": {
+        "Name": "Potion de vision nocturne",
+        "Description": "Donne une vue claire dans l'obscurité pendant une heure.",
+        "Encumbrance": 1
+      }
+    },
+    {
+      "weight": 2,
+      "fields": {
+        "Name": "Position de respiration de l'eau",
+        "Description": "Permet de respirer sous l'eau pendant trente minutes.",
+        "Encumbrance": 1
+      }
+    },
+    {
+      "weight": 2,
+      "fields": {
+        "Name": "Fiole acide",
+        "Description": "Un flacon soigneusement scellé capable d'endommager les matériaux communs.",
+        "Encumbrance": 1
+      }
+    },
+    {
+      "weight": 2,
+      "fields": {
+        "Name": "Chaîne argentée",
+        "Description": "Une courte chaîne utile contre les créatures vulnérables à l'argent.",
+        "Encumbrance": 1
+      }
+    },
+    {
+      "weight": 2,
+      "fields": {
+        "Name": "Craie runique",
+        "Description": "Rare craie qui rend magique la Madeleine plus facile à voir et à étudier.",
+        "Encumbrance": 0
+      }
+    },
+    {
+      "fields": {
+        "Name": "Boussole à sifflement",
+        "Description": "Une boussole étrange qui se plaint tranquillement quand elle pointe vers le nord.",
+        "Encumbrance": 0
+      }
+    },
+    {
+      "fields": {
+        "Name": "Bougie éternelle",
+        "Description": "Une bougie dont la petite flamme ne consomme jamais sa cire.",
+        "Encumbrance": 0
+      }
+    },
+    {
+      "fields": {
+        "Name": "fragment de rune non identifié",
+        "Description": "Un morceau de matériel magique contenant une partie d'une inscription inconnue.",
+        "Encumbrance": 1
+      }
+    },
+    {
+      "fields": {
+        "Name": "Lettre scellée mystérieuse",
+        "Description": "Une lettre adressée à quelqu'un que le personnage n'a jamais rencontré.",
+        "Encumbrance": 0
+      }
+    }
+  ]
+}

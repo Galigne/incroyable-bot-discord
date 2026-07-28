@@ -1,0 +1,102 @@
+{
+  "name": "Régions",
+  "description": "Régions géographiques naturelles et aménagées",
+  "entries": [
+    {
+      "weight": 4,
+      "value": "Terrains agricoles en rotation — champs de culture ouverts, haies, moulins et villages de marché dispersés."
+    },
+    {
+      "weight": 4,
+      "value": "Forêt tempérée — bois mixte traversé par des sentiers de jeu, des routes forestières et des cours d'eau dégagés."
+    },
+    {
+      "weight": 4,
+      "value": "Steppe herbeuse — immenses plaines balayées par le vent soutenant troupeaux, cavaliers et camps saisonniers."
+    },
+    {
+      "weight": 3,
+      "value": "Côte Rocheuse — falaises, criques cachées, colonies de pêche et grottes de marée dangereuses."
+    },
+    {
+      "weight": 3,
+      "value": "Hautes montagnes: cols escarpés, air mince, glaciers, mines et monastères isolés."
+    },
+    {
+      "weight": 3,
+      "value": "Vallée fluviale — des plaines fertiles qui relient les fermes, les ports, les ponts et les villes concurrentes."
+    },
+    {
+      "weight": 3,
+      "value": "Marais — voies navigables peu profondes, îles roseaux, tourbières et chemins qui changent par saison."
+    },
+    {
+      "weight": 3,
+      "value": "Scrubland sec — broussailles épineuses, terre rouge, rivières saisonnières et puits très séparés."
+    },
+    {
+      "weight": 3,
+      "value": "Chaîne d'îles — îles habitées et sauvages reliées par des récifs, des traversiers et des pirates."
+    },
+    {
+      "weight": 2,
+      "value": "Les forêts anciennes — d'énormes arbres anciens, de sombres sous - pousses, des routes oubliées et des esprits territoriaux."
+    },
+    {
+      "weight": 2,
+      "value": "Les hautes terres volcaniques — pentes noires, sources chaudes, champs de cendres et établissements riches en minéraux."
+    },
+    {
+      "weight": 2,
+      "value": "Toundra gelée — permafrost, végétation basse, animaux qui s'émigraient et de brefs étés violents."
+    },
+    {
+      "weight": 2,
+      "value": "Désert de sel — appartements aveuglants, ruines enterrées, caravanes minérales, et presque pas d'eau douce."
+    },
+    {
+      "weight": 2,
+      "value": "La jungle profonde — végétation dense en couches, fortes précipitations, insectes colossaux et pierres perdues."
+    },
+    {
+      "weight": 2,
+      "value": "Lac Country — Grands lacs d'eau douce, rivages boisés, communautés de pêcheurs et îles brumeuses."
+    },
+    {
+      "weight": 2,
+      "value": "Les badlands — canyons érodés, fossiles exposés, peu d'eau et d'excellentes cachettes."
+    },
+    {
+      "weight": 2,
+      "value": "Les collines viticoles — pentes cultivées, riches domaines, vieilles caves et rivalités locales intenses."
+    },
+    {
+      "weight": 2,
+      "value": "Forêt inondée — arbres à demi submergés naviguant en canot pendant une longue saison humide."
+    },
+    {
+      "weight": 1,
+      "value": "Étendue de cristal — verre naturel La formation déforme la lumière, le son, la direction et la magie."
+    },
+    {
+      "weight": 1,
+      "value": "L'archipel de lévitation — Terres flottantes reliées par des cordages, des monts volants et des cascades."
+    },
+    {
+      "weight": 1,
+      "value": "Le bassin magique mort — une dépression fertile où les effets surnaturels échouent brusquement."
+    },
+    {
+      "weight": 1,
+      "value": "Ceinture de tempête — une région côtière battue par le vent, la pluie et l'activité électrique."
+    },
+    {
+      "weight": 1,
+      "value": "Les champignons sauvages — pays humide dominé par des champignons géants, des spores et des colonies souterraines."
+    },
+    {
+      "weight": 1,
+      "value": "Champ de bataille ébranlé — des kilomètres de tranchées, de monuments commémoratifs, de magie non glissée et de communautés construites à partir de la récupération."
+    }
+  ]
+}

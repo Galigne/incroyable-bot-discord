@@ -1,0 +1,110 @@
+{
+  "name": "Salles",
+  "description": "Pièces et espaces intérieurs pour les bâtiments ou donjons",
+  "entries": [
+    {
+      "weight": 4,
+      "value": "Chambre à coucher — lit, coffre, lavabo, garde - enfants et preuve de la dernière activité de l'occupant."
+    },
+    {
+      "weight": 4,
+      "value": "Salon — assis autour d'un foyer avec des objets de famille et une lettre cachée."
+    },
+    {
+      "weight": 4,
+      "value": "Cuisine — tables de préparation, fours, couteaux, aliments entreposés, et quelque chose qui a récemment quitté la cuisine."
+    },
+    {
+      "weight": 4,
+      "value": "Salle à manger — tables longues, portes de service, décoration fanée, et sièges disposés par statut."
+    },
+    {
+      "weight": 3,
+      "value": "Toilettes — assainissement de base, évent étroit, fournitures de nettoyage et graffitis des utilisateurs précédents."
+    },
+    {
+      "weight": 3,
+      "value": "Pantalon — étagères de conserves avec un mur sonnant creux lorsqu'il est frappé."
+    },
+    {
+      "weight": 3,
+      "value": "Coffre - room — caisses étiquetées, meubles de rechange, poussières et un article qui n'appartient manifestement pas."
+    },
+    {
+      "weight": 3,
+      "value": "Bureau — bureau, correspondance, livres de comptes, tiroirs verrouillés et calendrier des rendez-vous."
+    },
+    {
+      "weight": 3,
+      "value": "Atelier — outils spécialisés, travaux inachevés, débris de matériaux et dispositif actif dangereux."
+    },
+    {
+      "weight": 3,
+      "value": "Salle de garde - porte-armes, liste de service, cartes, repas à moitié mangés et mécanisme d'alarme."
+    },
+    {
+      "weight": 3,
+      "value": "Cellule — Restrictions, messages éraflés, eau stagnante et signes d'une évasion impossible."
+    },
+    {
+      "weight": 2,
+      "value": "Bibliothèque — étagères emballées, desk de lecture, échelles, catalogues et livre délibérément mal souillé."
+    },
+    {
+      "weight": 2,
+      "value": "Laboratoire — bancs tachés, instruments fragiles, échantillons scellés et une expérience qui progresse encore."
+    },
+    {
+      "weight": 2,
+      "value": "Armoire — armes entretenues, armures, registres et plusieurs espaces vides visibles."
+    },
+    {
+      "weight": 2,
+      "value": "Infirmerie — lits étroits, outils médicaux, cabinets de médecine et notes de patient écrites en code."
+    },
+    {
+      "weight": 2,
+      "value": "Chapelle — bancs, images sacrées, offrandes, et un petit passage confessionnel privé."
+    },
+    {
+      "weight": 2,
+      "value": "Salle de bain — piscine chauffée, drains, serviettes, écrans d'intimité et accès aux tunnels d'entretien."
+    },
+    {
+      "weight": 2,
+      "value": "La crèche — petits lits, jouets, planches de leçon et symboles de protection peints sous le mobilier."
+    },
+    {
+      "weight": 2,
+      "value": "Salle de bal — sol poli, galerie de musiciens, chandeliers et balcons conçus pour l'observation."
+    },
+    {
+      "weight": 2,
+      "value": "Salle de cartographie — cartes murales, outils de levé, marqueurs de campagne et une région intentionnellement effacée."
+    },
+    {
+      "weight": 2,
+      "value": "Trésorerie — comptes d'objets de valeur, coffres scellés, registres de propriété et multiples niveaux de sécurité."
+    },
+    {
+      "weight": 1,
+      "value": "Passage secret — un parcours exigu avec des trous d'espion, des empreintes anciennes et un mécanisme qui s'ouvre ailleurs."
+    },
+    {
+      "weight": 1,
+      "value": "Chambre rituelle — marquages géométriques, restrictions, offrandes consommées et pression surnaturelle lingante."
+    },
+    {
+      "weight": 1,
+      "value": "Salle Portal — une chambre renforcée centrée sur une porte inactive et des commandes d'arrêt d'urgence."
+    },
+    {
+      "weight": 1,
+      "value": "Galerie des trophées — bêtes conservées, bannières capturées, armes nommées, et un étalage qui est encore en vie."
+    },
+    {
+      "weight": 1,
+      "value": "Salle d'interrogatoire — chaise fixe, murs insonorisés, canal de drainage, et questions soigneusement organisées."
+    }
+  ]
+}

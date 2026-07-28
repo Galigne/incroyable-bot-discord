@@ -1,0 +1,41 @@
+{
+  "name": "artisanBackground",
+  "description": "Détails de Background pour les PNJ artisans",
+  "entries": [
+    {
+      "fields": {
+        "Appearance": "Avant-bras musclés, petites cicatrices de brûlure et vêtements épais couverts de suie.",
+        "Backstory": "Un forgeron a hérité d’un atelier en difficulté ainsi que de la dernière commande inachevée de son défunt maître.",
+        "Goals": "Achever le chef-d’œuvre, sauver la forge et découvrir pourquoi le client a disparu."
+      }
+    },
+    {
+      "fields": {
+        "Appearance": "Couvert de fine sciure, avec des gestes mesurés et un crayon derrière chaque oreille.",
+        "Backstory": "Un charpentier s’est fait connaître en reconstruisant les maisons détruites par un incendie, mais il soupçonne que le feu était volontaire.",
+        "Goals": "Bâtir des logements plus sûrs et identifier la personne qui profite de ces catastrophes à répétition."
+      }
+    },
+    {
+      "fields": {
+        "Appearance": "Tenue impeccable confectionnée sur mesure, doigts agiles et regard attentif au moindre détail.",
+        "Backstory": "Un tailleur a découvert les secrets de la cour en écoutant de puissants clients convaincus que les domestiques étaient invisibles.",
+        "Goals": "Ouvrir sa propre maison de couture et n’utiliser ces secrets que pour protéger les plus vulnérables."
+      }
+    },
+    {
+      "fields": {
+        "Appearance": "Teint pâle à force de travailler en laboratoire, gants tachés et sourcils roussis de façon inégale.",
+        "Backstory": "La découverte prometteuse d’un alchimiste a été accaparée par un examinateur de guilde, qui a ensuite dissimulé la formule.",
+        "Goals": "Prouver être à l’origine de la découverte, distribuer le remède sans danger et éviter qu’il ne devienne une arme."
+      }
+    },
+    {
+      "fields": {
+        "Appearance": "Silencieux et concentré, portant des lentilles grossissantes et un tablier rempli de minuscules outils soigneusement rangés.",
+        "Backstory": "Un horloger a découvert un mécanisme impossible dans un objet qu’on lui avait confié pour une réparation ordinaire.",
+        "Goals": "Découvrir qui l’a fabriqué et le tenir à l’écart des commanditaires uniquement intéressés par ses applications militaires."
+      }
+    }
+  ]
+}

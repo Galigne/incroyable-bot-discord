@@ -1,17 +1,19 @@
 const { MessageFlags } = require('discord.js');
 const { SET_HELP } = require('./set');
+const { getLocale, localizeDescription, t } = require('../../../util/i18n');
+
+const descriptionKey = 'rpg.setHelp.description';
 
 module.exports = {
 	name: 'set-help',
-	description: 'Explain settable character fields and forms',
+	description: t('en', descriptionKey),
+	descriptionKey,
 	usage: '/rpg set-help',
 	helpOrder: 45,
-	configure: command => command
-		.setName('set-help')
-		.setDescription('Explain settable character fields and forms'),
-	async execute({ interaction }) {
+	configure: command => localizeDescription(command.setName('set-help'), descriptionKey),
+	async execute({ config, interaction }) {
 		await interaction.reply({
-			content: SET_HELP,
+			content: t(getLocale(config, interaction.guildId), 'rpg.setHelp.body'),
 			flags: MessageFlags.Ephemeral,
 		});
 	},

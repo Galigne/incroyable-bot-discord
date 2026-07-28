@@ -1,0 +1,41 @@
+{
+  "name": "exileBackground",
+  "description": "Détails de Background pour les PNJ exilés",
+  "entries": [
+    {
+      "fields": {
+        "Appearance": "Usé par les voyages, méfiant et muni d’un maigre paquetage toujours prêt pour un départ précipité.",
+        "Backstory": "Un réfugié a fui une communauté frontalière détruite par des forces que les deux États voisins nient avoir commandées.",
+        "Goals": "Mettre les autres survivants à l’abri et réunir les preuves permettant d’identifier le commanditaire de l’attaque."
+      }
+    },
+    {
+      "fields": {
+        "Appearance": "Garde le visage partiellement dissimulé et modifie quelques détails de sa tenue à chaque nouvelle ville.",
+        "Backstory": "Un fugitif a été accusé du vol de documents qui révèlent en réalité une corruption généralisée au sein de l’administration.",
+        "Goals": "Récupérer les documents, laver son nom et conserver une longueur d’avance sur les véritables voleurs."
+      }
+    },
+    {
+      "fields": {
+        "Appearance": "Conserve des manières aristocratiques malgré ses vêtements rapiécés et cache délibérément sa chevalière.",
+        "Backstory": "Un noble banni a endossé la responsabilité du complot raté de son frère ou de sa sœur afin d’éviter l’exécution de toute la famille.",
+        "Goals": "Découvrir si ce sacrifice en valait la peine et se construire une vie indépendante de son ancien titre."
+      }
+    },
+    {
+      "fields": {
+        "Appearance": "Porte les traces d’anciennes blessures et plusieurs couches protectrices provenant de régions différentes.",
+        "Backstory": "Un survivant déplacé a rebâti son foyer à plusieurs reprises, chaque communauté ayant été chassée par la guerre, une catastrophe ou les persécutions.",
+        "Goals": "Fonder un refuge durable et le rendre défendable sans pour autant en fermer les portes aux nouveaux arrivants."
+      }
+    },
+    {
+      "fields": {
+        "Appearance": "Réservé et éloquent, transportant des pamphlets interdits et de la correspondance dans une mallette à double fond.",
+        "Backstory": "Un exilé politique prônait des réformes pacifiques jusqu’à ce que le gouvernement qualifie de trahison la simple évocation du changement.",
+        "Goals": "Soutenir les réformateurs restés au pays tout en empêchant leur mouvement de sombrer dans la violence aveugle."
+      }
+    }
+  ]
+}

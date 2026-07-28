@@ -64,6 +64,8 @@ dependencies. Character-store tests use an isolated temporary directory through
   requests a character change or deletion.
 - `util/authorization.js`: role/channel authorization.
 - `util/autocomplete.js`: shared Discord autocomplete filtering.
+- `util/characterDisplay.js`: canonical display-field registry, aliases, localized
+  character labels, resource full names, and resource abbreviations.
 
 ## Command architecture and conventions
 
@@ -97,6 +99,20 @@ exact sequence:
 
 Use autocomplete for all practical command arguments. Discord returns at most 25
 autocomplete choices, so filter locally with `util/autocomplete.js`.
+
+All bot-owned user-facing strings belong in `locales/en.json` and `locales/fr.json`
+and are retrieved through `util/i18n.js`. Keep both catalogs at exact key parity.
+Runtime language comes from `config.guildLocales[guildId]`, then `config.locale`,
+and falls back to English. Slash command and option names, internal values, enum
+values, JSON properties, generator field identifiers, and saved data stay in
+English. Use Discord description localizations for slash-command schema text, and
+localize choice/autocomplete display labels without changing their English values.
+Use `documentation/JDR_RANDOM_RULES_FR.md` as the canonical source for French game
+terminology, including `PV`, `PR`, `PA`, `DD`, `LOI`, and `dons raciaux`. Treat that
+French rulebook as read-only unless the user explicitly requests a rulebook change.
+Register every displayable character field in `util/characterDisplay.js`; embeds,
+modals, autocomplete labels, choices, replies, and validation messages must consume
+that registry rather than reconstructing labels from internal paths.
 
 For private interaction responses, use:
 
@@ -176,9 +192,14 @@ Resources and display:
 
 ## Random generators
 
-Every `.json` file in `data/generators/` automatically becomes a category after the
-bot restarts. `/rpg gen-help` reads the live catalog, explains both generation
-commands, and lists every category.
+Every `.json` file in `data/generators/en/` automatically becomes a category after
+the bot restarts. `data/generators/fr/` mirrors the English reference catalog with
+localized display content. Both locales keep identical filenames, structure,
+ordering, weights, placeholders, and technical values. The catalog derives each
+internal ID from the English file, caches locales independently, and falls back to
+the English file when a localized counterpart is absent. `/rpg gen-help` reads the
+guild-localized catalog, explains both generation commands, and lists every
+category.
 
 Each generator file requires:
 
@@ -202,6 +223,11 @@ The catalog is cached for the process lifetime, so data changes require a restar
 
 Random character generation depends on exact category names and structured field
 labels. Before renaming generator fields, inspect `services/randomCharacterGenerator.js`.
+Generator IDs, `Generator` routing values, `Type`/`Rarity` enum values, JSON keys,
+and structured field labels stay English in every locale. Autocomplete display
+labels may be localized but must submit the aligned English value. Newly generated
+content uses the guild locale and is then stored verbatim; never translate existing
+save content retroactively.
 Race entries must expose `Name`, `Description`, `Skill Bonus`, and
 `Physical Ability`; generated characters copy the latter two into their racial
 traits. The expanded world-generation set includes `monster`, `animal`, `criminal`,

@@ -2,6 +2,8 @@ const { MessageFlags } = require('discord.js');
 const characterStore = require('../../../services/characterStore');
 const { filterAutocompleteChoices } = require('../../../util/autocomplete');
 const { getCharacterChoices } = require('../autocomplete');
+const { getLocale, localizeDescription, t } = require('../../../util/i18n');
+const { getCharacterFieldLabel } = require('../../../util/characterDisplay');
 
 const GET_FIELDS = [
 	'name',
@@ -28,91 +30,82 @@ const GET_FIELDS = [
 	'encumbrance',
 ];
 
-const GET_HELP = [
-	'Use `/rpg get` to display a character-sheet summary.',
-	'Select the optional `field` to display one complete field and its sub-fields.',
-	'',
-	'**Available fields**',
-	'`name` — first name and last name',
-	'`firstName`, `lastName`, `level`',
-	'`race` — name, physical description, and lore',
-	'`appearance`, `backstory`, `goals`',
-	'`personality` — traits and additional description',
-	'`racialTraits` — skill bonus and physical ability',
-	'`statistics` — base and derived statistics',
-	'`rules` — every RULE name, level, and description',
-	'`talents`',
-	'`status` — HP, AR, AP, MD, encumbrance, and status effects',
-	'`HP`, `AR`, `AP`, `MD` — one resource only',
-	'`statusEffects`, `equipment`, `inventory`, `encumbrance`',
-	'',
-	'**Examples**',
-	'Select CharacterKey `D.Robert` for the summary.',
-	'Then optionally select `name`, `personality`, `race`, `rules`, or `status`.',
-].join('\n');
+const descriptionKey = 'rpg.get.description';
+const GET_HELP = t('en', 'rpg.getHelp.body');
 
 module.exports = {
 	name: 'get',
-	description: 'Display a character summary or one detailed field',
+	description: t('en', descriptionKey),
+	descriptionKey,
 	usage: '/rpg get character-key:<key> [field]',
 	helpOrder: 30,
-	configure: command => command
-		.setName('get')
-		.setDescription('Display a character summary or one detailed field')
-		.addStringOption(option => option
-			.setName('character-key')
-			.setDescription('Character to display')
+	configure: command => localizeDescription(command.setName('get'), descriptionKey)
+		.addStringOption(option => localizeDescription(
+			option.setName('character-key'),
+			'rpg.get.characterOption',
+		)
 			.setAutocomplete(true)
 			.setRequired(true))
-		.addStringOption(option => option
-			.setName('field')
-			.setDescription('Optional detailed field')
+		.addStringOption(option => localizeDescription(
+			option.setName('field'),
+			'rpg.get.fieldOption',
+		)
 			.setAutocomplete(true)),
-	async autocomplete({ interaction }) {
+	async autocomplete({ config, interaction }) {
 		const focused = interaction.options.getFocused(true);
 		if (focused.name === 'character-key') {
 			await interaction.respond(await getCharacterChoices(focused.value));
 			return;
 		}
+		const locale = getLocale(config, interaction.guildId);
 		await interaction.respond(filterAutocompleteChoices(
-			GET_FIELDS.map(field => ({ name: field, value: field })),
+			GET_FIELDS.map(field => {
+				const label = getGetFieldLabel(field, locale);
+				return {
+					name: (label === field ? label : `${label} (${field})`).slice(0, 100),
+					value: field,
+				};
+			}),
 			focused.value,
 		));
 	},
-	async execute({ interaction }) {
+	async execute({ config, interaction }) {
+		const locale = getLocale(config, interaction.guildId);
 		const name = interaction.options.getString('character-key', true);
 		const fieldName = interaction.options.getString('field');
 		try {
 			const character = await characterStore.getCharacter(name);
 			const embed = fieldName
-				? character.toFieldEmbed(fieldName)
-				: character.toEmbed();
+				? character.toFieldEmbed(fieldName, locale)
+				: character.toEmbed(locale);
 			if (!embed) {
 				await interaction.reply({
-					content: `Unknown character field: **${fieldName}**. `
-						+ 'Use `/rpg get-help` to list the available fields.',
+					content: t(locale, 'rpg.get.unknownField', { field: fieldName }),
 					flags: MessageFlags.Ephemeral,
 				});
 				return;
 			}
 			embed.setFooter({
 				text: fieldName
-					? `Character key: ${name}`
-					: 'Use /rpg get with the field option for more details.',
+					? t(locale, 'rpg.get.keyFooter', {
+						key: name,
+						keyLabel: getCharacterFieldLabel(locale, 'key'),
+					})
+					: t(locale, 'rpg.get.detailsFooter'),
 			});
 			await interaction.reply({ embeds: [embed] });
 		}
 		catch (error) {
 			if (error.code === 'ENOENT') {
 				await interaction.reply({
-					content: 'That character does not exist.',
+					content: t(locale, 'errors.characterMissing'),
 					flags: MessageFlags.Ephemeral,
 				});
 				return;
 			}
 			if (error.code === 'INVALID_CHARACTER_NAME') {
 				await interaction.reply({
-					content: error.message,
+					content: t(locale, 'errors.invalidCharacterKey'),
 					flags: MessageFlags.Ephemeral,
 				});
 				return;
@@ -124,3 +117,9 @@ module.exports = {
 
 module.exports.GET_FIELDS = GET_FIELDS;
 module.exports.GET_HELP = GET_HELP;
+
+function getGetFieldLabel(field, locale) {
+	return getCharacterFieldLabel(locale, field, {
+		abbreviated: ['HP', 'AR', 'AP', 'MD'].includes(field),
+	});
+}

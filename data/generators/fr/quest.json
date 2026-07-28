@@ -1,0 +1,119 @@
+{
+  "name": "Quêtes",
+  "description": "Amorces d’aventure, objectifs et dilemmes",
+  "entries": [
+    {
+      "value": "Récupérer les ombres volées d'un village avant le lever du soleil ; le voleur les utilise pour construire un corps pour un esprit solitaire."
+    },
+    {
+      "weight": 2,
+      "value": "Escortez un diplomate insupportable mais vital à travers un territoire où parler un mensonge attire les prédateurs."
+    },
+    {
+      "weight": 2,
+      "value": "Enquêter sur une mine où les ouvriers reviennent chaque soir avec des souvenirs de personnes qui ont disparu il y a des années."
+    },
+    {
+      "weight": 2,
+      "value": "Volez une couronne maudite d'une puissance sans laisser personne la porter, y compris le fantôme persuasif de la couronne."
+    },
+    {
+      "weight": 3,
+      "value": "Découvrez pourquoi une rivière a cessé de couler avant que deux villes en aval ne se battent sur les eaux restantes."
+    },
+    {
+      "value": "Sauver un dragon d'une princesse qui collectionne des créatures rares et contrôle le système juridique local."
+    },
+    {
+      "weight": 2,
+      "value": "Carte une forêt qui réarrange ses chemins chaque fois que quelqu'un prend une décision qu'il regrette."
+    },
+    {
+      "weight": 3,
+      "value": "Livrez une boîte scellée à un monastère ; chaque faction prétend que la boîte contient quelque chose de différent et aucune ne peut être totalement erronée."
+    },
+    {
+      "weight": 2,
+      "value": "Effacer le nom d'une famille en prouvant que son ancêtre exécuté a été remplacé par un imitateur avant de commettre la trahison."
+    },
+    {
+      "weight": 3,
+      "value": "Négocier la paix entre une ville et le géant dont la migration saisonnière passe maintenant directement par ses nouveaux murs."
+    },
+    {
+      "value": "Retirez la médecine d'une ville en quarantaine où la maladie infecte des mots écrits plutôt que des corps."
+    },
+    {
+      "weight": 2,
+      "value": "Arrêtez un champion de tournoi qui ne peut pas perdre parce que chaque adversaire vaincu est magiquement ajouté à leur force."
+    },
+    {
+      "value": "Explorez un phare qui brille dans le sol tandis que les navires disparaissent sous les champs voisins."
+    },
+    {
+      "weight": 2,
+      "value": "Remettez une fugueuse familière à son mage, puis décidez si la prétention de mauvais traitements du familier est vraie."
+    },
+    {
+      "weight": 2,
+      "value": "Protégez la performance finale d'un théâtre hanté pour que son dramaturge mort puisse révéler le meurtrier dans la dernière scène."
+    },
+    {
+      "weight": 3,
+      "value": "Localisez une caravane fiscale manquante qui ne porte pas d'or, mais un registre capable de coller trois maisons nobles."
+    },
+    {
+      "weight": 2,
+      "value": "C'est une prison abandonnée pour libérer un détenu innocent qui, selon les archives officielles, est mort il y a quarante ans."
+    },
+    {
+      "weight": 3,
+      "value": "Rassemblez trois runesmiths rivales pour réparer un pupille défaillant, malgré que chacun blâme les autres pour son sabotage."
+    },
+    {
+      "weight": 2,
+      "value": "Tracez un monstre qui vole des noms ; ses victimes restent vivantes mais ne peuvent être rappelées ou traitées."
+    },
+    {
+      "value": "Gagnez un concours de cuisine dont le prix est une carte ancienne, tandis que les ingrédients et les juges sont secrètement enchantés."
+    },
+    {
+      "weight": 2,
+      "value": "Récupérer une cloche sacrée de colons pacifiques qui en ont besoin pour garder une créature pire endormie."
+    },
+    {
+      "weight": 2,
+      "value": "Enquêter sur une armée qui marche tous les soirs mais qui ne laisse aucune empreinte de pas et n'a attaqué personne."
+    },
+    {
+      "weight": 2,
+      "value": "Aidez un fantôme à remplir une dernière promesse sans révéler que sa réalisation ruinera un descendant vivant."
+    },
+    {
+      "value": "Entrez dans le rêve d'un noble pour enlever un assassin, sachant que les blessures et les secrets trouvés là-bas peuvent revenir à la réalité."
+    },
+    {
+      "weight": 2,
+      "value": "Trouvez la source de potions de guérison contrefaites qui fonctionnent parfaitement mais qui transfèrent les blessures à des étrangers aléatoires."
+    },
+    {
+      "weight": 3,
+      "value": "Capturez un célèbre hors-la-loi devant un shérif corrompu, puis jugez s'il faut livrer l'un ou l'autre."
+    },
+    {
+      "weight": 2,
+      "value": "Retirez un météore d'un sol contesté tandis que le dard crée rapidement une vie étrange autour d'elle."
+    },
+    {
+      "weight": 3,
+      "value": "Réunissez les pièces d'un traité rompu avant que son serment magique ne interprète le dommage comme une déclaration de guerre."
+    },
+    {
+      "weight": 2,
+      "value": "Découvrez qui remplace les statues de la ville par des citoyens pétrifiés et pourquoi les statues sourient."
+    },
+    {
+      "value": "Fermez un portail qui donne un souhait à tous les voisins, avec des résultats de plus en plus littéraux et destructeurs."
+    }
+  ]
+}

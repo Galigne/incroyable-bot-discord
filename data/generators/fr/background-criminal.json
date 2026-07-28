@@ -1,0 +1,90 @@
+{
+  "name": "criminalBackground",
+  "description": "Détails de Background pour les PNJ criminels",
+  "entries": [
+    {
+      "fields": {
+        "Appearance": "Vêtements quelconques, visage difficile à retenir et mains soigneusement gardées hors de vue.",
+        "Backstory": "A appris à faire les poches pour survivre à la faim pendant son enfance, puis est devenu trop utile pour que le gang accepte de le laisser partir.",
+        "Goals": "Racheter sa liberté et disparaître avant que le gang ne recrute son cadet."
+      }
+    },
+    {
+      "fields": {
+        "Appearance": "Vêtu avec luxe mais visiblement tendu, avec des manières raffinées et le nez récemment cassé.",
+        "Backstory": "Un marchand honnête s’est tourné vers la contrebande lorsque des taxes impossibles ont menacé de ruiner son commerce.",
+        "Goals": "Écarter le chef des douanes corrompu et revenir au commerce légal sans tout perdre."
+      }
+    },
+    {
+      "fields": {
+        "Appearance": "Mince, balafré et habillé pour se déplacer rapidement, sans aucun signe distinctif apparent.",
+        "Backstory": "A déserté une unité militaire brutale et survit depuis en détroussant les représentants de l’autorité sur les routes isolées.",
+        "Goals": "Protéger les autres déserteurs et révéler les crimes du commandant responsable de leur sort."
+      }
+    },
+    {
+      "fields": {
+        "Appearance": "Visage avenant, sourire théâtral et vêtements à la mode dissimulant une armure.",
+        "Backstory": "A monté une escroquerie fondée sur de faux héritages et découvert par accident un véritable complot.",
+        "Goals": "Réussir une dernière arnaque lucrative et échapper à toutes les personnes qui cherchent désormais à récupérer les preuves."
+      }
+    },
+    {
+      "fields": {
+        "Appearance": "Corpulence imposante, tatouages méticuleux et décontraction de façade, sans jamais cesser de surveiller les sorties.",
+        "Backstory": "A débuté comme homme de main sur les quais avant de prendre la tête du gang après l’arrestation de tous ses supérieurs.",
+        "Goals": "Transformer le gang en affaire stable et empêcher un rival violent de s’en emparer."
+      }
+    },
+    {
+      "fields": {
+        "Appearance": "Teint pâle dû au travail en intérieur, doigts précis et traces tenaces d’encre et de poussière métallique.",
+        "Backstory": "Un artisan de talent a été emprisonné pour avoir falsifié des documents à la demande d’un noble.",
+        "Goals": "Ruiner la réputation de son ancien commanditaire et se créer une identité qu’aucune autorité ne pourra remettre en cause."
+      }
+    },
+    {
+      "fields": {
+        "Appearance": "Marqué par les voyages, charmeur et muni de plusieurs couteaux qui lui servent surtout d’outils.",
+        "Backstory": "A rejoint des bandits après la saisie de ses terres par des créanciers et en est devenu le négociateur malgré lui.",
+        "Goals": "Empêcher le groupe de tuer, récupérer les terres confisquées et obtenir une amnistie."
+      }
+    },
+    {
+      "fields": {
+        "Appearance": "Maintien sévère, tenue officielle et chevalière arborée comme une arme.",
+        "Backstory": "Un magistrat subalterne a découvert que les pots-de-vin étaient moins dangereux et plus lucratifs que l’application honnête de la loi.",
+        "Goals": "Faire disparaître les documents compromettants et acquérir assez d’influence pour devenir intouchable."
+      }
+    },
+    {
+      "fields": {
+        "Appearance": "Élégant, d’une voix douce et toujours ganté, quel que soit le temps.",
+        "Backstory": "Formé comme apothicaire, fournit secrètement poisons et antidotes à des clients appartenant à des camps rivaux.",
+        "Goals": "Obtenir le monopole d’un ingrédient rare et éviter de prendre parti dans la crise de succession qui approche."
+      }
+    },
+    {
+      "fields": {
+        "Appearance": "Jeune, nerveux et manifestement désireux d’imiter la réputation d’un criminel redouté.",
+        "Backstory": "N’a commis qu’un seul vol irréfléchi, mais s’est vu attribuer toute une série de crimes perpétrés par quelqu’un d’autre.",
+        "Goals": "Survivre à cette célébrité indésirable et découvrir qui agit sous son nom."
+      }
+    },
+    {
+      "fields": {
+        "Appearance": "Marin buriné par les éléments, portant des scarifications rituelles, des bijoux pratiques et un rire facile.",
+        "Backstory": "Est devenu pirate après que le capitaine d’un navire marchand a abandonné la moitié de son équipage pendant une tempête.",
+        "Goals": "Traquer les navires qui exploitent leur équipage, subvenir aux besoins de ses anciens compagnons et posséder un jour un port légal."
+      }
+    },
+    {
+      "fields": {
+        "Appearance": "Silencieux et d’une propreté méticuleuse, avec une ancienne brûlure dissimulée sous le col.",
+        "Backstory": "A grandi au sein d’un ordre d’assassins et a volontairement échoué à sa première mission.",
+        "Goals": "Libérer les autres recrues et démanteler l’ordre sans devenir le meurtrier qu’il voulait façonner."
+      }
+    }
+  ]
+}

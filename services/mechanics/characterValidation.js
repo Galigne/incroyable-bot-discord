@@ -1,4 +1,6 @@
 const { MAX_AP } = require('./constants');
+const { t } = require('../../util/i18n');
+const { getResourceAbbreviation } = require('../../util/characterDisplay');
 
 function characterEditError(message) {
 	const error = new Error(message);
@@ -6,7 +8,7 @@ function characterEditError(message) {
 	return error;
 }
 
-function validateActionPointEdit(character, path, value) {
+function validateActionPointEdit(character, path, value, locale = 'en') {
 	if (
 		path[0] !== 'resources'
 		|| path[1] !== 'ap'
@@ -14,13 +16,20 @@ function validateActionPointEdit(character, path, value) {
 		return;
 	}
 	if (!Number.isInteger(value) || value < 0 || value > MAX_AP) {
-		throw characterEditError(`AP must be a whole number between 0 and ${MAX_AP}.`);
+		throw characterEditError(t(locale, 'errors.apRange', {
+			apLabel: getResourceAbbreviation(locale, 'ap'),
+			max: MAX_AP,
+		}));
 	}
 	if (path[2] === 'current' && value > character.resources.ap.max) {
-		throw characterEditError('Current AP cannot be greater than maximum AP.');
+		throw characterEditError(t(locale, 'errors.apCurrentAboveMax', {
+			apLabel: getResourceAbbreviation(locale, 'ap'),
+		}));
 	}
 	if (path[2] === 'max' && value < character.resources.ap.current) {
-		throw characterEditError('Maximum AP cannot be lower than current AP.');
+		throw characterEditError(t(locale, 'errors.apMaxBelowCurrent', {
+			apLabel: getResourceAbbreviation(locale, 'ap'),
+		}));
 	}
 }
 

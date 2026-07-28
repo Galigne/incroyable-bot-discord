@@ -1,42 +1,44 @@
 const { EmbedBuilder } = require('discord.js');
 const generatorCatalog = require('../../../services/generatorCatalog');
+const { getLocale, localizeDescription, t } = require('../../../util/i18n');
+
+const descriptionKey = 'rpg.genHelp.description';
 
 module.exports = {
 	name: 'gen-help',
-	description: 'Explain random generation and list generator categories (DM only)',
+	description: t('en', descriptionKey),
+	descriptionKey,
 	usage: '/rpg gen-help',
 	helpOrder: 12,
 	access: {
 		role: 'dm',
 	},
-	configure: command => command
-		.setName('gen-help')
-		.setDescription('Explain random generation and list generator categories'),
-	async execute({ interaction }) {
-		const categories = generatorCatalog.listCategories();
-		const categoryLines = categories.map(category => (
-			`**${category.name}** — ${category.description} `
-			+ `(${category.entries.length} entries)`
+	configure: command => localizeDescription(
+		command.setName('gen-help'),
+		'rpg.genHelp.schemaDescription',
+	),
+	async execute({ config, interaction }) {
+		const locale = getLocale(config, interaction.guildId);
+		const categories = generatorCatalog.listGenerators(locale);
+		const categoryLines = categories.map(category => t(
+			locale,
+			'rpg.genHelp.categoryLine',
+			{
+				count: category.entries.length,
+				description: category.description,
+				name: category.name,
+			},
 		));
 		const embed = new EmbedBuilder()
-			.setTitle('RPG Generation Help')
-			.setDescription([
-				'`/rpg gen category:<category>`',
-				'DM-only. Select a generator with autocomplete to draw one weighted random '
-					+ 'entry. Run it again to reroll.',
-				'',
-				'`/rpg gen-char character-key:<new key> [level] [background]`',
-				'DM-only. Creates and saves a complete random character using a unique '
-					+ 'CharacterKey. Level must be 1–10; when omitted, it is rolled randomly. '
-					+ 'Background selects the NPC category and is random when omitted. '
-					+ 'Statistics, resources, equipment, inventory, and gold are generated '
-					+ 'from the character level and game rules. Intelligence grants RULE Points; '
-					+ 'they raise the first RULE as far as possible before creating a second, '
-					+ 'with a maximum of two RULEs.',
-			].join('\n'))
+			.setTitle(t(locale, 'rpg.genHelp.title'))
+			.setDescription(t(locale, 'rpg.genHelp.body'))
 			.setColor('#FFD700')
 			.addFields(chunkLines(categoryLines).map((value, index) => ({
-				name: index === 0 ? 'Available generators' : 'Available generators (continued)',
+				name: index === 0
+					? t(locale, 'rpg.genHelp.available')
+					: t(locale, 'common.continued', {
+						label: t(locale, 'rpg.genHelp.available'),
+					}),
 				value,
 			})));
 		await interaction.reply({ embeds: [embed] });

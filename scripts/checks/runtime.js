@@ -55,6 +55,13 @@ module.exports = function createRuntimeChecks(context) {
 				errors.push(`config.json is missing the ${role} role.`);
 			}
 		}
+		const configuredLocales = [
+			config.locale,
+			...Object.values(config.guildLocales ?? {}),
+		].filter(Boolean);
+		if (configuredLocales.some(locale => !['en', 'fr'].includes(locale))) {
+			errors.push('config.json contains an unsupported locale. Use en or fr.');
+		}
 	}
 
 	function checkRequiredFiles() {
@@ -110,4 +117,3 @@ module.exports = function createRuntimeChecks(context) {
 		checkRequiredFiles,
 	};
 };
-

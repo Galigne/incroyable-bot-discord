@@ -1,0 +1,208 @@
+{
+  "name": "PNJ",
+  "description": "Personnages non-joueurs prêts à l’emploi",
+  "entries": [
+    {
+      "weight": 2,
+      "fields": {
+        "Name": "Mara Venn",
+        "Description": "un messager à un œil qui connaît chaque raccourci, refuse de porter des armes, et transporte secrètement un œuf de dragon."
+      }
+    },
+    {
+      "weight": 2,
+      "fields": {
+        "Name": "Frère Caldus",
+        "Description": "un guérisseur joyeux dont les miracles fonctionnent mais dont le dieu nie officiellement le connaître."
+      }
+    },
+    {
+      "fields": {
+        "Name": "Iri Quickchalk",
+        "Description": "un cartographe gobelin qui cartographie les rumeurs plutôt que les routes et devient offensé quand l'un ou l'autre se révèle inexact."
+      }
+    },
+    {
+      "fields": {
+        "Name": "Lady Seraphine Vale",
+        "Description": "un financement noble impeccablement poli des deux côtés d'une rébellion pour minimiser les pertes civiles."
+      }
+    },
+    {
+      "weight": 2,
+      "fields": {
+        "Name": "Tomas Rook",
+        "Description": "un chasseur de monstres retraité qui dirige maintenant une boulangerie et reconnaît la farine de la fête comme une poussière imitante."
+      }
+    },
+    {
+      "weight": 2,
+      "fields": {
+        "Name": "Nella Brass",
+        "Description": "un jeune runesmith capable de travailler brillantment seulement alors que quelqu'un lui raconte une histoire complètement nouvelle."
+      }
+    },
+    {
+      "weight": 2,
+      "fields": {
+        "Name": "Capitaine Orro Flint",
+        "Description": "un garde de rivière qui aime la procédure, la poésie compétitive et l'arrestation de supérieurs corrompus."
+      }
+    },
+    {
+      "weight": 2,
+      "fields": {
+        "Name": "Velette",
+        "Description": "un courtier d'information masqué qui accepte les vérités embarrassantes comme paiement et ne demande jamais d'argent."
+      }
+    },
+    {
+      "weight": 2,
+      "fields": {
+        "Name": "Vieille fen",
+        "Description": "un berger dont les brebis prédisent le temps, le danger et parfois les assassinats politiques."
+      }
+    },
+    {
+      "fields": {
+        "Name": "Professeur Holloway",
+        "Description": "un historien spectral possédant son propre squelette pour poursuivre la recherche sur le terrain."
+      }
+    },
+    {
+      "weight": 2,
+      "fields": {
+        "Name": "Kech of Seven Knives",
+        "Description": "un mercenaire intimidant qui utilise six couteaux pour cuisiner et craint de dessiner le septième."
+      }
+    },
+    {
+      "weight": 2,
+      "fields": {
+        "Name": "Pella vers le soleil",
+        "Description": "un paladin sans relâche optimiste dont l'ordre saint a été inventé lors d'un débat tavern."
+      }
+    },
+    {
+      "weight": 2,
+      "fields": {
+        "Name": "Ardoise de Dorrine",
+        "Description": "un évaluateur dwarven qui peut identifier n'importe quel artefact mais sous-estime compulsivement les objets qu'il aime personnellement."
+      }
+    },
+    {
+      "weight": 2,
+      "fields": {
+        "Name": "Mina Thrice-Lost",
+        "Description": "un explorateur qui a échappé à la même ruine impossible trois fois et qui veut désespérément revenir."
+      }
+    },
+    {
+      "weight": 3,
+      "fields": {
+        "Name": "Constable Reed",
+        "Description": "un honnête officier de village submergé par des crimes de magie que la loi locale ne reconnaît pas."
+      }
+    },
+    {
+      "fields": {
+        "Name": "Sable des roseaux",
+        "Description": "un diplomate de marais qui s'arrête quelques minutes avant chaque réponse et ne perd jamais un mot."
+      }
+    },
+    {
+      "fields": {
+        "Name": "Roi Pip IX",
+        "Description": "un monarque de rat autoproclamé commandant un excellent réseau d'espion sous la capitale."
+      }
+    },
+    {
+      "weight": 3,
+      "fields": {
+        "Name": "Tante Ember",
+        "Description": "un vieil aubergiste ashborn qui donne des chambres gratuites aux aventuriers et les facture plus tard en faveur."
+      }
+    },
+    {
+      "weight": 2,
+      "fields": {
+        "Name": "Elias Nord",
+        "Description": "un voleur charmant qui ne vole que des clés et n'a aucune idée de la moitié d'entre elles s'ouvrent."
+      }
+    },
+    {
+      "weight": 2,
+      "fields": {
+        "Name": "Réveille-toi au juniper",
+        "Description": "un botaniste se transforme lentement en arbre et traite la transformation comme un inconvénient fascinant."
+      }
+    },
+    {
+      "fields": {
+        "Name": "Le témoin gris",
+        "Description": "une figure armurée silencieuse apparaissant près des événements historiques et dessinant tout le monde présent."
+      }
+    },
+    {
+      "weight": 2,
+      "fields": {
+        "Name": "Nox Bellweather",
+        "Description": "un dispensateur de fortune dont les fausses prédictions sont réconfortantes et dont les vrais semblent absurdes."
+      }
+    },
+    {
+      "weight": 2,
+      "fields": {
+        "Name": "Durée",
+        "Description": "un sauveteur de marées portant des lettres d'amour récupérées des épaves et essayant de livrer chacune."
+      }
+    },
+    {
+      "weight": 2,
+      "fields": {
+        "Name": "Juge Odo Penn",
+        "Description": "un bureaucrate dont le timbre enchanté rend physiquement réelles les lois temporaires ridicules."
+      }
+    },
+    {
+      "weight": 2,
+      "fields": {
+        "Name": "Coil Vexa",
+        "Description": "un alchimiste vendant des potions fiables dans des bouteilles réutilisées avec des étiquettes dangereusement incorrectes."
+      }
+    },
+    {
+      "fields": {
+        "Name": "Monsieur Candlewick",
+        "Description": "un petit costume animé d'armure à la recherche d'une personne assez grande pour être son écuyer."
+      }
+    },
+    {
+      "weight": 2,
+      "fields": {
+        "Name": "Hara Lune",
+        "Description": "un chasseur de boutons qui offre toujours aux cibles une chance équitable de s'expliquer."
+      }
+    },
+    {
+      "fields": {
+        "Name": "Verre de merrit",
+        "Description": "un imitateur royal nerveux qui a été plus compétent que le monarque disparu."
+      }
+    },
+    {
+      "weight": 2,
+      "fields": {
+        "Name": "Soeur tranquille",
+        "Description": "un prêtre qui a fait un vœu de silence et emploie trois corbeaux bavards comme assistants théologiques."
+      }
+    },
+    {
+      "weight": 2,
+      "fields": {
+        "Name": "Jack brumeux",
+        "Description": "un leader de bandit amical qui insiste sur chaque vol comprend des rafraîchissements et un sondage écrit auprès des clients."
+      }
+    }
+  ]
+}

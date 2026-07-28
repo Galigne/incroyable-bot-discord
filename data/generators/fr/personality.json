@@ -1,0 +1,118 @@
+{
+  "name": "Personnalités",
+  "description": "Traits, idéaux, manies, liens et défauts",
+  "entries": [
+    {
+      "weight": 2,
+      "value": "Fini fataliste ; traite chaque désastre comme une confirmation d'une prédiction que personne ne se souvient de l'ouïe."
+    },
+    {
+      "weight": 2,
+      "value": "Honnêtement honnête mais hautement habile à changer le sujet avant de révéler quelque chose de personnel."
+    },
+    {
+      "weight": 2,
+      "value": "Suspicieux de toute magie sauf une superstition manifestement frauduleuse suivi avec une dévotion complète."
+    },
+    {
+      "weight": 2,
+      "value": "Grand théâtre en public, calme et observant en privé, et terrifié d'être considéré comme ordinaire."
+    },
+    {
+      "weight": 2,
+      "value": "Recueille des faveurs au lieu d'argent et se souvient de chaque promesse avec une précision troublante."
+    },
+    {
+      "weight": 3,
+      "value": "Protection des sous - chiens, ouvertement impoli à l'autorité, et incapable de résister à la preuve d'un mal injurieux."
+    },
+    {
+      "weight": 2,
+      "value": "Polite aux ennemis et brutalement critique aux amis parce que le respect s'exprime par l'honnêteté."
+    },
+    {
+      "value": "Croit que chaque problème a une solution pratique, même lorsqu'il est confronté à des fantômes, à des prophéties ou à un jugement divin."
+    },
+    {
+      "value": "Adopte de façon compulsive des animaux errants et attribue chacun un grade militaire."
+    },
+    {
+      "value": "Traite les coïncidences comme des messages sacrés et réorganise constamment les plans pour les suivre."
+    },
+    {
+      "weight": 2,
+      "value": "Généreux avec des biens mais jaloux de l'attention, surtout quand un rival raconte une meilleure histoire."
+    },
+    {
+      "weight": 2,
+      "value": "Ne lève jamais leur voix ; le plus assainissant qu'ils sonnent, le plus en colère et le plus dangereux qu'ils soient."
+    },
+    {
+      "value": "Obsédés par l'étiette d'une culture qu'ils ne comprennent que par un vieux livre inexact."
+    },
+    {
+      "value": "Les allégations de ne craindre que les oies, et refuse d'expliquer la raison très spécifique."
+    },
+    {
+      "weight": 2,
+      "value": "Loyal à la formulation exacte de tout accord tout en exploitant chaque faille sans culpabilité."
+    },
+    {
+      "weight": 2,
+      "value": "Eager pardonner des insultes personnelles mais incapable de négliger le mal fait à un étranger."
+    },
+    {
+      "value": "Invente constamment des carrières anciennes impressionnantes ; un nombre surprenant plus tard se révèle vrai."
+    },
+    {
+      "weight": 2,
+      "value": "Traite le combat comme un puzzle et l'interaction sociale comme une catastrophe naturelle inévitable."
+    },
+    {
+      "weight": 2,
+      "value": "Il veut être craint mais il réconforte automatiquement quiconque semble bouleversé."
+    },
+    {
+      "weight": 2,
+      "value": "Garde des revues méticuleuses tout en remplaçant le nom de chaque personne par un surnom de plus en plus confus."
+    },
+    {
+      "value": "La richesse est considérée comme un fardeau et dépense imprudemment sur des expériences mémorables et des cadeaux ridicules."
+    },
+    {
+      "weight": 2,
+      "value": "Profondément religieux, mais argumente avec leur divinité comme si s'adressait à un membre de la famille irritant."
+    },
+    {
+      "weight": 2,
+      "value": "Impossible d'admettre l'ignorance et improvise des explications qui deviennent souvent des légendes locales accidentelles."
+    },
+    {
+      "weight": 2,
+      "value": "Valeurs de liberté au-dessus de la sécurité mais devient contrôle lorsque les compagnons sont réellement en danger."
+    },
+    {
+      "weight": 2,
+      "value": "Apologise à chaque ennemi vaincu et devient offensé si les excuses sont rejetées."
+    },
+    {
+      "value": "Il parle dans des proverbes, dont la plupart sont inventés sur place et seulement de façon peu pertinente."
+    },
+    {
+      "weight": 2,
+      "value": "Il semble cynique et mercenaire mais envoie secrètement la plupart des bénéfices pour reconstruire une ville ruinée."
+    },
+    {
+      "weight": 2,
+      "value": "Il prend toujours le meilleur des monstres et le pire des institutions."
+    },
+    {
+      "weight": 2,
+      "value": "Garde les  Progresss des échecs plutôt que des victoires et peut raconter chaque leçon qui leur est attachée."
+    },
+    {
+      "weight": 2,
+      "value": "Désespérée de laisser un héritage héroïque, mais fige chaque fois que quelqu'un les reconnaît en public."
+    }
+  ]
+}

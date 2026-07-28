@@ -1,3 +1,5 @@
+const { getCharacterFieldLabel } = require('../../util/characterDisplay');
+
 const EDIT_FIELDS = [
 	'firstName',
 	'lastName',
@@ -61,44 +63,8 @@ const PARAGRAPH_FIELDS = new Set([
 	'inventory',
 ].map(field => field.toLowerCase()));
 
-function getEditFieldLabel(fieldName) {
-	const labels = {
-		firstName: 'First Name',
-		lastName: 'Last Name',
-		'race.name': 'Race Name',
-		statusEffects: 'Status Effects',
-		'race.description': 'Race Physical Description',
-		'race.lore': 'Race Lore',
-		'personality.description': 'Personality Description',
-		'personality.traits': 'Personality Traits',
-		'racialTrait.skillBonus': 'Racial Skill Bonus',
-		'racialTrait.physicalAbility': 'Racial Physical Ability',
-		'encumbrance.current': 'Current Encumbrance',
-		'encumbrance.max': 'Maximum Encumbrance',
-		rules: 'RULEs',
-	};
-	if (labels[fieldName]) {
-		return labels[fieldName];
-	}
-	if (fieldName.startsWith('stats.')) {
-		return capitalize(fieldName.split('.')[1]);
-	}
-	const resourceMatch = /^(hp|ar|ap|md)\.(current|max)$/i.exec(fieldName);
-	if (resourceMatch) {
-		return `${resourceMatch[2] === 'max' ? 'Maximum' : 'Current'} `
-			+ resourceMatch[1].toUpperCase();
-	}
-	return fieldName
-		.split('.')
-		.reverse()
-		.map(part => part.toUpperCase() === part
-			? part
-			: `${part.charAt(0).toUpperCase()}${part.slice(1)}`)
-		.join(' ');
-}
-
-function capitalize(value) {
-	return `${value.charAt(0).toUpperCase()}${value.slice(1)}`;
+function getEditFieldLabel(fieldName, locale = 'en') {
+	return getCharacterFieldLabel(locale, fieldName);
 }
 
 module.exports = {

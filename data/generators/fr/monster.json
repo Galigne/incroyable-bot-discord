@@ -1,0 +1,102 @@
+{
+  "name": "Monstres",
+  "description": "Créatures hostiles et prédateurs surnaturels",
+  "entries": [
+    {
+      "weight": 3,
+      "value": "Grave Hound, un chasseur de paquets de cadavres qui suit l'odeur de la peur et traîne des proies isolées sous terre."
+    },
+    {
+      "weight": 3,
+      "value": "Mire Troll, un marais régénérant couvert de roseaux, de sangsues et d'hameçons de pêche volés."
+    },
+    {
+      "weight": 3,
+      "value": "Drakéide de cendre — un dragon sans aile de taille chien qui crache de la résine brûlante et niche dans des cheminées."
+    },
+    {
+      "weight": 2,
+      "value": "L'araignée de verre — un prédateur d'embuscade presque invisible dont le tissu fragile coupe comme du fil."
+    },
+    {
+      "weight": 2,
+      "value": "Spectre de la cloche — un fantôme blindé qui devient solide chaque fois qu'une cloche sonne à proximité."
+    },
+    {
+      "weight": 2,
+      "value": "Lanterne Maw — une lure flottante de lumière chaude attachée à une énorme bouche souterraine."
+    },
+    {
+      "weight": 2,
+      "value": "Verger d’ossements — une colonie enracinée d'armes squelettiques qui saisit les créatures et plante leurs os."
+    },
+    {
+      "weight": 2,
+      "value": "La veuve de la friche — une bête blanche qui gèle l'humidité en silhouettes de coco."
+    },
+    {
+      "weight": 2,
+      "value": "Encre Leviathan, un monstre de rivière qui aveugle les bateaux avec la brume noire avant de frapper d'en bas."
+    },
+    {
+      "weight": 2,
+      "value": "Mange-rouille — un insecte blindé qui corrode rapidement le métal et essaime la cible la mieux équipée."
+    },
+    {
+      "weight": 2,
+      "value": "Sangsue onirique — un parasite translucide qui laisse les victimes endormies éveillées mais sans souvenirs."
+    },
+    {
+      "weight": 2,
+      "value": "Horreur au dos épineux — une plante-bête territoriale qui lance des graines de barbe dans des plaies ouvertes."
+    },
+    {
+      "weight": 2,
+      "value": "Miroir Stalker — un humanoïde mince capable de se déplacer uniquement à travers des réflexions et des surfaces polies."
+    },
+    {
+      "weight": 2,
+      "value": "Le géant des cendres — un humanoïde enflammé qui s'effondre dans l'étouffement des cendres lorsqu'il est blessé, puis se réforme."
+    },
+    {
+      "weight": 2,
+      "value": "Basilic à œil de lune — un reptile à six pattes dont le regard pétrifie seulement les créatures debout au clair de lune."
+    },
+    {
+      "weight": 1,
+      "value": "Choeur Worm — un prédateur de tunnel qui imite plusieurs voix familières à la fois."
+    },
+    {
+      "weight": 1,
+      "value": "Oath Devorer — un démon sans visage fortifié quand quelqu'un à proximité rompt une promesse."
+    },
+    {
+      "weight": 1,
+      "value": "Roc des tempêtes — un oiseau colossal qui niche dans les tonnerres et qui chasse tout ce qui transporte du métal."
+    },
+    {
+      "weight": 1,
+      "value": "La cathédrale Mimic, une ancienne colonie-créature déguisée en lieu de culte abandonné."
+    },
+    {
+      "weight": 1,
+      "value": "Chasseur à l'abandon du temps — un prédateur qui vole des secondes de sa proie pour se déplacer de façon possiblement rapide."
+    },
+    {
+      "weight": 1,
+      "value": "Hydre couronnée — chaque tête coupée se regrowne en portant le visage et les souvenirs de son tueur."
+    },
+    {
+      "weight": 1,
+      "value": "Saint Hollow — un personnage immuable et immuable offrant une guérison miraculeuse qui remplace lentement la volonté du récipiendaire."
+    },
+    {
+      "weight": 1,
+      "value": "Brouteur abyssal — une énorme forme pacifique dont l'ombre consomme agressivement des créatures vivantes."
+    },
+    {
+      "weight": 1,
+      "value": "La Bête des Comètes Rouges, un prédateur cristallin qui tombe du ciel et multiplie lorsqu'il est exposé à la magie."
+    }
+  ]
+}

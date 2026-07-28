@@ -1,0 +1,289 @@
+{
+  "common": {
+    "empty": "—",
+    "continued": "{{label}} (suite)",
+    "unexpectedError": "Une erreur est survenue pendant l’exécution de la commande."
+  },
+  "authorization": {
+    "missingRole": "Permission insuffisante pour utiliser cette commande.",
+    "wrongChannel": "Cette commande n’est pas disponible dans ce salon."
+  },
+  "commands": {
+    "help": {
+      "description": "Afficher toutes les commandes disponibles",
+      "title": "Gon Freecss",
+      "available": "Commandes disponibles"
+    },
+    "purge": {
+      "description": "Supprimer les messages récents du salon",
+      "amount": "Nombre de messages récents à supprimer",
+      "success": "{{count}} messages récents ont été supprimés."
+    },
+    "restart": {
+      "description": "Reconnecter le bot à Discord",
+      "reply": "Reconnexion en cours…"
+    },
+    "say": {
+      "description": "Envoyer un message avec le bot",
+      "message": "Message à envoyer"
+    },
+    "rpg": {
+      "description": "Générer du contenu et gérer des fiches de personnage"
+    }
+  },
+  "rpg": {
+    "add": {
+      "description": "Créer une fiche de personnage vide avec une CharacterKey permanente",
+      "keyOption": "Clé de sauvegarde unique, courte et facile à retenir",
+      "success": "Le personnage associé à la clé `{{key}}` a été créé. Cette CharacterKey ne pourra plus être modifiée. Utilisez `/rpg set` pour remplir sa fiche au moyen de formulaires privés préremplis."
+    },
+    "damage": {
+      "description": "Infliger des dégâts à un personnage, d’abord aux PR puis aux PV",
+      "characterOption": "Personnage qui subit les dégâts",
+      "amountOption": "Nombre positif de dégâts à infliger",
+      "piercingOption": "Ignorer les PR et infliger les dégâts directement aux PV",
+      "choice": "{{amount}} dégâts",
+      "piercingBreakdown": "Dégâts perforants infligés directement aux {{hpLabel}} : {{amount}}.",
+      "normalBreakdown": "Dégâts absorbés par les {{arLabel}} : {{arDamage}} ; dégâts subis par les {{hpLabel}} : {{hpDamage}}.",
+      "result": "**{{name}}** subit **{{amount}} dégâts**. {{breakdown}}\n{{arLabel}} : **{{arCurrent}}/{{arMax}}** · {{hpLabel}} : **{{hpCurrent}}/{{hpMax}}**"
+    },
+    "delete": {
+      "description": "Supprimer l’un de vos personnages",
+      "characterOption": "Personnage à supprimer",
+      "success": "Le personnage **{{key}}** a été supprimé."
+    },
+    "endTurn": {
+      "description": "Rétablir les PA et la DD à leur maximum",
+      "characterOption": "Personnage qui termine son tour",
+      "result": "**{{name}}** commence un nouveau tour avec {{ap}} {{apLabel}} et {{md}} {{mdLabel}}."
+    },
+    "gen": {
+      "description": "Générer une inspiration pour le MJ dans la catégorie choisie (MJ uniquement)",
+      "schemaDescription": "Générer une inspiration pour le MJ dans la catégorie choisie",
+      "categoryOption": "Catégorie de génération",
+      "unknownCategory": "Catégorie de génération inconnue : **{{category}}**. Utilisez `/rpg gen-help` pour consulter la liste des catégories.",
+      "title": "{{category}} — résultat généré",
+      "footer": "Le MJ peut adapter ce résultat ou effectuer un nouveau tirage."
+    },
+    "genChar": {
+      "description": "Générer et sauvegarder un personnage aléatoire complet (MJ uniquement)",
+      "schemaDescription": "Générer et sauvegarder un personnage aléatoire complet",
+      "keyOption": "Clé de sauvegarde unique, courte et facile à retenir",
+      "levelOption": "Niveau du personnage ; tirage aléatoire de 1 à 10 si omis",
+      "backgroundOption": "Background du PNJ ; tirage aléatoire si omis",
+      "levelChoice": "Niveau {{level}}",
+      "footer": "{{keyLabel}} : {{key}}",
+      "success": "Le personnage **{{name}}** a été généré avec la clé `{{key}}`."
+    },
+    "genHelp": {
+      "description": "Expliquer la génération aléatoire et afficher ses catégories (MJ uniquement)",
+      "schemaDescription": "Expliquer la génération aléatoire et afficher ses catégories",
+      "title": "Aide à la génération",
+      "body": "`/rpg gen category:<category>`\nCommande réservée au MJ. Sélectionnez une catégorie avec l’autocomplétion pour tirer une entrée aléatoire selon son poids. Relancez la commande pour obtenir un autre résultat.\n\n`/rpg gen-char character-key:<new key> [level] [background]`\nCommande réservée au MJ. Elle crée et sauvegarde un personnage complet sous une CharacterKey unique. Le niveau doit être compris entre 1 et 10 ; s’il est omis, il est tiré au hasard. Le Background du PNJ peut également être choisi ou tiré au hasard. Les statistiques, ressources, équipements, objets et pièces d’or dépendent du niveau et des règles du jeu. L’Intelligence accorde des points de LOI : ils servent d’abord à augmenter autant que possible le niveau d’une première LOI, puis à en créer une seconde. Un personnage ne peut ainsi recevoir que deux LOI au maximum.",
+      "categoryLine": "**{{name}}** — {{description}} ({{count}} entrées)",
+      "categoryLineCompact": "**{{name}}** ({{count}} entrées)",
+      "available": "Catégories disponibles"
+    },
+    "get": {
+      "description": "Afficher le résumé d’un personnage ou le détail d’un champ",
+      "characterOption": "Personnage à afficher",
+      "fieldOption": "Champ détaillé facultatif",
+      "unknownField": "Champ inconnu : **{{field}}**. Utilisez `/rpg get-help` pour consulter la liste des champs.",
+      "keyFooter": "{{keyLabel}} : {{key}}",
+      "detailsFooter": "Utilisez `/rpg get` avec l’option `field` pour afficher davantage de détails."
+    },
+    "getHelp": {
+      "description": "Expliquer le résumé d’un personnage et l’affichage détaillé des champs",
+      "body": "Utilisez `/rpg get` pour afficher le résumé d’une fiche de personnage.\nAjoutez l’option facultative `field` pour afficher un champ complet et ses sous-champs.\n\n**Champs disponibles**\n`name` — prénom et nom\n`firstName`, `lastName`, `level`\n`race` — nom, description physique et lore\n`appearance`, `backstory`, `goals`\n`personality` — traits et description complémentaire\n`racialTraits` — dons raciaux : bonus de compétence et capacité physique\n`statistics` — statistiques de base et dérivées\n`rules` — nom, niveau et description de chaque LOI\n`talents`\n`status` — PV, PR, PA, DD, encombrement et effets d’état\n`HP`, `AR`, `AP`, `MD` — identifiants internes permettant d’afficher une seule ressource\n`statusEffects`, `equipment`, `inventory`, `encumbrance`\n\n**Exemple**\nSélectionnez la CharacterKey `D.Robert` pour afficher le résumé, puis choisissez éventuellement `name`, `personality`, `race`, `rules` ou `status`."
+    },
+    "heal": {
+      "description": "Restaurer les PV, les PR ou les deux jusqu’au pourcentage choisi",
+      "characterOption": "Personnage qui reçoit les soins",
+      "resourceOption": "Ressource à restaurer",
+      "percentageOption": "Pourcentage de la valeur maximale à atteindre",
+      "both": "{{hp}} et {{ar}}",
+      "change": "{{resource}} : **{{previous}}/{{max}} → {{current}}/{{max}}**",
+      "result": "Ressources de **{{name}}** restaurées à {{percentage}} % :\n{{changes}}"
+    },
+    "help": {
+      "description": "Afficher les commandes JDR disponibles",
+      "title": "Commandes JDR",
+      "body": "Créez et gérez des personnages à l’aide d’une `CharacterKey` permanente, par exemple `D.Robert`. Cette clé identifie la sauvegarde et ne peut pas être modifiée. Utilisez `/rpg set` pour ouvrir le formulaire privé prérempli d’un champ. Dans `/rpg get`, ajoutez l’option `field` pour en afficher tous les détails."
+    },
+    "roll": {
+      "description": "Lancer un dé avec le nombre de faces choisi",
+      "sidesOption": "Nombre de faces du dé",
+      "result": "Résultat du lancer : **{{result}}**."
+    },
+    "rules": {
+      "description": "Ouvrir le livre de règles public",
+      "reply": "Livre de règles du JDR : {{url}}"
+    },
+    "set": {
+      "description": "Modifier un champ de personnage dans un formulaire prérempli",
+      "characterOption": "Personnage à modifier",
+      "fieldOption": "Champ à modifier"
+    },
+    "setHelp": {
+      "description": "Expliquer les champs modifiables et leur formulaire",
+      "body": "Utilisez `/rpg set character-key:<key> field:<field>` pour ouvrir un formulaire privé prérempli.\nLa CharacterKey identifie la sauvegarde et ne peut pas être modifiée.\nLes champs imbriqués sont séparés par un point, par exemple `race.name`, `stats.strength` ou `hp.current`.\nPour effacer un champ textuel, videz le formulaire avant de l’envoyer.\n\n**Identité et histoire**\n`firstName`, `lastName`, `level`, `appearance`, `backstory`, `goals`, `talents`\n`race.name`, `race.description`, `race.lore`\n`personality.description`, `personality.traits`\n`racialTrait.skillBonus`, `racialTrait.physicalAbility`\n\n**Statistiques**\n`stats.constitution`, `stats.strength`, `stats.dexterity`, `stats.intelligence`\n`stats.speed`, `stats.perception`, `stats.charisma`, `stats.initiative`, `stats.reflexes`\n\n**État et ressources**\n`hp.current`, `hp.max`, `ar.current`, `ar.max`, `ap.current`, `ap.max`\n`md.current`, `md.max`, `encumbrance.current`, `encumbrance.max`\nLes PA doivent être des nombres entiers respectant `0 ≤ current ≤ max ≤ 10`.\n\n**Champs multilignes**\n`personality.traits`, `rules`, `statusEffects`, `equipment`, `inventory`\nSaisissez une entrée par ligne. Les tirets en début de ligne sont facultatifs.\nPour les LOI, utilisez le format `Nom: Niveau: Description`, à raison d’une LOI par ligne.\nLe niveau d’une LOI doit être un nombre entier positif.\n\n**Exemples**\n`/rpg set character-key:D.Robert field:stats.strength`\n`/rpg set character-key:D.Robert field:rules`\nExemple de LOI : `Feu: 2: Contrôle les flammes`"
+    },
+    "editor": {
+      "unknownField": "Champ modifiable inconnu : **{{field}}**.",
+      "tooLarge": "Ce champ dépasse la limite de 4 000 caractères imposée par Discord.",
+      "expired": "Ce formulaire a expiré. Relancez `/rpg set`.",
+      "result": "**{{name}}** : {{result}}",
+      "collectionPlaceholder": "Une entrée par ligne ; tirets initiaux facultatifs",
+      "valuePlaceholder": "Saisir la nouvelle valeur",
+      "rulesDescription": "Une LOI par ligne au format Nom: Niveau: Description. Les tirets initiaux sont facultatifs.",
+      "collectionDescription": "Une entrée libre par ligne. Vider le formulaire pour effacer le champ.",
+      "textDescription": "La valeur actuelle est préremplie. Vider le formulaire pour effacer le champ.",
+      "numberDescription": "Saisir un nombre valide.",
+      "title": "Modifier {{field}}"
+    }
+  },
+  "character": {
+    "generatedGold": "{{gold}} pièces d’or",
+    "fields": {
+      "characterKey": "CharacterKey",
+      "firstName": "Prénom",
+      "lastName": "Nom",
+      "level": "Niveau",
+      "race": "Race",
+      "raceName": "Nom de la race",
+      "racePhysicalDescription": "Description physique de la race",
+      "raceLore": "Lore de la race",
+      "appearance": "Apparence",
+      "backstory": "Histoire personnelle",
+      "goals": "Objectifs",
+      "personality": "Personnalité",
+      "personalityDescription": "Description de la personnalité",
+      "personalityTraits": "Traits de personnalité",
+      "racialTraits": "Dons raciaux",
+      "racialSkillBonus": "Bonus de compétence racial",
+      "racialPhysicalAbility": "Capacité physique raciale",
+      "statistics": "Statistiques",
+      "baseStatistics": "Statistiques de base",
+      "derivedStatistics": "Statistiques dérivées",
+      "rules": "LOI",
+      "ruleName": "Nom de la LOI",
+      "ruleLevel": "Niveau de la LOI",
+      "ruleDescription": "Description de la LOI",
+      "talents": "Talents",
+      "status": "État",
+      "statusEffects": "Effets d’état",
+      "equipment": "Équipement",
+      "inventory": "Inventaire",
+      "encumbrance": "Encombrement",
+      "currentEncumbrance": "Encombrement actuel",
+      "maximumEncumbrance": "Encombrement maximal",
+      "name": "Nom complet",
+      "constitution": "Constitution",
+      "strength": "Force",
+      "dexterity": "Dextérité",
+      "intelligence": "Intelligence",
+      "speed": "Vitesse",
+      "perception": "Perception",
+      "charisma": "Charisme",
+      "initiative": "Initiative",
+      "reflexes": "Réflexes",
+      "currentResource": "Valeur actuelle ({{resource}})",
+      "maximumResource": "Valeur maximale ({{resource}})"
+    },
+    "resources": {
+      "hp": {
+        "name": "Points de vie",
+        "abbreviation": "PV"
+      },
+      "ar": {
+        "name": "Points d’armure",
+        "abbreviation": "PR"
+      },
+      "ap": {
+        "name": "Points d’action",
+        "abbreviation": "PA"
+      },
+      "md": {
+        "name": "Distance de déplacement",
+        "abbreviation": "DD"
+      }
+    },
+    "summary": {
+      "identity": "Niveau **{{level}}** · Race : **{{race}}**",
+      "unspecifiedRace": "Non précisée",
+      "unspecifiedAppearance": "Apparence non précisée.",
+      "ruleLevel": "{{name}} (niveau {{level}})"
+    },
+    "detail": {
+      "title": "{{name}} — {{field}}",
+      "rule": "**{{index}}. {{name}} — niveau {{level}}**\n{{description}}",
+      "noDescription": "Aucune description."
+    }
+  },
+  "errors": {
+    "characterExists": "Cette CharacterKey est déjà utilisée.",
+    "characterMissing": "Personnage introuvable.",
+    "characterOwnerDelete": "Seul le créateur du personnage peut le supprimer.",
+    "characterEditor": "Seuls le créateur du personnage et les MJ peuvent modifier cette fiche.",
+    "invalidCharacterKey": "Une CharacterKey doit commencer et se terminer par une lettre ou un chiffre. Elle peut contenir des lettres, des chiffres, des points, des tirets et des tirets bas.",
+    "unknownEditField": "Champ inconnu : {{field}}.",
+    "valueRequired": "Valeur requise pour {{field}}.",
+    "collectionValueRequired": "Valeur requise pour {{field}}.",
+    "mustBeNumber": "{{field}} doit contenir un nombre.",
+    "ruleNameRequired": "Le nom de la LOI doit précéder le séparateur `:`.",
+    "ruleLevelInvalid": "Le niveau d’une LOI doit être un nombre entier positif.",
+    "apRange": "La valeur de {{apLabel}} doit être un nombre entier compris entre 0 et {{max}}.",
+    "apCurrentAboveMax": "La valeur actuelle de {{apLabel}} ne peut pas dépasser la valeur maximale de {{apLabel}}.",
+    "apMaxBelowCurrent": "La valeur maximale de {{apLabel}} ne peut pas être inférieure à la valeur actuelle de {{apLabel}}.",
+    "healResourcesOnly": "La commande de soin ne peut restaurer que les {{hpLabel}} et les {{arLabel}}.",
+    "healResourceInvalid": "La ressource à restaurer doit être {{hpLabel}}, {{arLabel}} ou les deux.",
+    "percentageInvalid": "Le pourcentage de restauration doit être compris entre 0 et 100.",
+    "damageInvalid": "Le nombre de dégâts doit être un nombre entier positif.",
+    "piercingInvalid": "La valeur de l’option `piercing` doit être `true` ou `false`.",
+    "characterLevelInvalid": "Le niveau du personnage doit être un nombre entier compris entre 1 et 10.",
+    "backgroundUnknown": "Background inconnu : {{background}}.",
+    "generatorMissing": "Catégorie de génération manquante : {{category}}.",
+    "generatorNeedsEntries": "La catégorie {{category}} doit proposer au moins {{count}} entrées admissibles.",
+    "generatorStructuredExpected": "Cette génération nécessite une entrée structurée contenant le champ {{field}}.",
+    "generatorFieldMissing": "Le champ {{field}} est absent de l’entrée générée.",
+    "generatorTextExpected": "Cette génération nécessite une entrée textuelle."
+  },
+  "editorResults": {
+    "updated": "{{field}} : mise à jour effectuée.",
+    "collectionUpdated": "{{field}} : mise à jour effectuée."
+  },
+  "generatorFields": {
+    "arPercentage": "Pourcentage de PR",
+    "allies": "Alliés",
+    "appearance": "Apparence",
+    "backstory": "Histoire personnelle",
+    "commandment": "Commandement",
+    "constitutionRequirement": "Constitution requise",
+    "deityOrBelief": "Divinité ou croyance",
+    "description": "Description",
+    "encumbrance": "Encombrement",
+    "enemies": "Ennemis",
+    "firstName": "Prénom",
+    "generator": "Générateur",
+    "goal": "Objectif",
+    "goals": "Objectifs",
+    "hierarchy": "Hiérarchie",
+    "holyPlace": "Lieu saint",
+    "lastName": "Nom",
+    "leadership": "Direction",
+    "name": "Nom",
+    "physicalAbility": "Capacité physique",
+    "rarity": "Rareté",
+    "relationshipWithMagic": "Rapport à la magie",
+    "religiousOrder": "Ordre religieux",
+    "resources": "Ressources",
+    "rites": "Rites",
+    "sacredSymbol": "Symbole sacré",
+    "skillBonus": "Bonus de compétence",
+    "strength": "Force",
+    "structure": "Structure",
+    "taboo": "Tabou",
+    "tension": "Tension",
+    "type": "Type"
+  }
+}

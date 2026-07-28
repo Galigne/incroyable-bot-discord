@@ -4,27 +4,33 @@ const {
 	SlashCommandBuilder,
 } = require('discord.js');
 const { sortByHelpOrder } = require('../util/sortByHelpOrder');
+const { getLocale, localizeDescription, t } = require('../util/i18n');
+
+const descriptionKey = 'commands.help.description';
 
 module.exports = {
 	name: 'help',
-	description: 'List all available commands',
+	description: t('en', descriptionKey),
+	descriptionKey,
 	usage: '/help',
 	helpOrder: 10,
-	data: new SlashCommandBuilder()
+	data: localizeDescription(new SlashCommandBuilder()
 		.setName('help')
-		.setDescription('List all available commands')
-		.setContexts(InteractionContextType.Guild),
-	async execute({ client, interaction }) {
+		.setContexts(InteractionContextType.Guild), descriptionKey),
+	async execute({ client, config, interaction }) {
+		const locale = getLocale(config, interaction.guildId);
 		const embed = new EmbedBuilder()
-			.setTitle('Gon Freecss')
-			.setDescription('Available commands')
+			.setTitle(t(locale, 'commands.help.title'))
+			.setDescription(t(locale, 'commands.help.available'))
 			.setColor('#FFD700')
 			.setThumbnail(client.user.displayAvatarURL());
 
 		for (const command of sortByHelpOrder(client.commands.values())) {
 			embed.addFields({
 				name: command.usage ?? `/${command.name}`,
-				value: command.description,
+				value: command.descriptionKey
+					? t(locale, command.descriptionKey)
+					: command.description,
 			});
 		}
 

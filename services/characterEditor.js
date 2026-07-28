@@ -8,14 +8,16 @@ const {
 	resetTurnResources,
 	restoreResource,
 } = require('./mechanics/resources');
+const { t } = require('../util/i18n');
+const { getCharacterFieldLabel } = require('../util/characterDisplay');
 
 const scalarFields = buildScalarFields();
 const multilineFields = new Map([
-	['personalitytraits', { path: ['personality', 'traits'], label: 'personality trait' }],
-	['rules', { path: ['rules'], label: 'RULE', rules: true }],
-	['statuseffects', { path: ['statusEffects'], label: 'status effect' }],
-	['equipment', { path: ['equipment'], label: 'equipment item' }],
-	['inventory', { path: ['inventory'], label: 'inventory item' }],
+	['personalitytraits', { fieldId: 'personality.traits', path: ['personality', 'traits'] }],
+	['rules', { fieldId: 'rules', path: ['rules'], rules: true }],
+	['statuseffects', { fieldId: 'statusEffects', path: ['statusEffects'] }],
+	['equipment', { fieldId: 'equipment', path: ['equipment'] }],
+	['inventory', { fieldId: 'inventory', path: ['inventory'] }],
 ]);
 
 function getEditableFieldValue(character, fieldName) {
@@ -37,12 +39,12 @@ function getEditableFieldValue(character, fieldName) {
 	throw editError(`Unknown field: ${fieldName}.`);
 }
 
-function setEditableFieldValue(character, fieldName, value) {
+function setEditableFieldValue(character, fieldName, value, locale = 'en') {
 	const key = normalizeFieldName(fieldName);
 	const scalarField = scalarFields.get(key);
 	if (scalarField) {
 		const args = value.trim() ? [value] : ['clear'];
-		return editScalar(character, scalarField, args);
+		return editScalar(character, scalarField, args, locale);
 	}
 
 	const multilineField = multilineFields.get(key);
@@ -55,39 +57,43 @@ function setEditableFieldValue(character, fieldName, value) {
 		entries.splice(
 			0,
 			entries.length,
-			...lines.map(line => parseMultilineEntry(multilineField, line)),
+			...lines.map(line => parseMultilineEntry(multilineField, line, locale)),
 		);
-		return `${multilineField.label} field updated.`;
+		return t(locale, 'editorResults.collectionUpdated', {
+			field: getCharacterFieldLabel(locale, multilineField.fieldId),
+		});
 	}
 
-	throw editError(`Unknown field: ${fieldName}.`);
+	throw editError(t(locale, 'errors.unknownEditField', { field: fieldName }));
 }
 
-function editScalar(character, field, args) {
+function editScalar(character, field, args, locale) {
+	const label = getCharacterFieldLabel(locale, field.fieldId);
 	if (args.length === 0) {
-		throw editError(`A value is required for ${field.label}.`);
+		throw editError(t(locale, 'errors.valueRequired', { field: label }));
 	}
 
 	let value = args.join(' ').trim();
 	if (field.type === 'number') {
 		value = Number(value);
 		if (!Number.isFinite(value)) {
-			throw editError(`${field.label} must be a number.`);
+			throw editError(t(locale, 'errors.mustBeNumber', { field: label }));
 		}
-		validateActionPointEdit(character, field.path, value);
+		validateActionPointEdit(character, field.path, value, locale);
 	}
 	else if (value.toLowerCase() === 'clear') {
 		value = '';
 	}
 
 	setAtPath(character, field.path, value);
-	return `${field.label} updated.`;
+	return t(locale, 'editorResults.updated', { field: label });
 }
 
-function parseMultilineEntry(field, line) {
+function parseMultilineEntry(field, line, locale) {
+	const label = getCharacterFieldLabel(locale, field.fieldId);
 	const value = line.trim();
 	if (!value) {
-		throw editError(`A value is required for the ${field.label}.`);
+		throw editError(t(locale, 'errors.collectionValueRequired', { field: label }));
 	}
 	if (!field.rules) {
 		return value;
@@ -97,7 +103,7 @@ function parseMultilineEntry(field, line) {
 	const name = (separatorIndex === -1 ? value : value.slice(0, separatorIndex)).trim();
 	const remainder = separatorIndex === -1 ? '' : value.slice(separatorIndex + 1).trim();
 	if (!name) {
-		throw editError('A RULE name is required before the `:` separator.');
+		throw editError(t(locale, 'errors.ruleNameRequired'));
 	}
 	const levelSeparatorIndex = remainder.indexOf(':');
 	const possibleLevel = levelSeparatorIndex === -1
@@ -106,7 +112,7 @@ function parseMultilineEntry(field, line) {
 	const hasExplicitLevel = /^\d+$/.test(possibleLevel) && levelSeparatorIndex !== -1;
 	const level = hasExplicitLevel ? Number(possibleLevel) : 1;
 	if (!Number.isSafeInteger(level) || level < 1) {
-		throw editError('A RULE level must be a positive whole number.');
+		throw editError(t(locale, 'errors.ruleLevelInvalid'));
 	}
 	const description = hasExplicitLevel
 		? remainder.slice(levelSeparatorIndex + 1).trim()
@@ -116,46 +122,42 @@ function parseMultilineEntry(field, line) {
 
 function buildScalarFields() {
 	const fields = new Map();
-	addScalar(fields, ['firstname'], ['firstName'], 'first name', 'text');
-	addScalar(fields, ['lastname'], ['lastName'], 'last name', 'text');
-	addScalar(fields, ['level'], ['level'], 'level', 'number');
-	addScalar(fields, ['race.name', 'racename'], ['race', 'name'], 'race name', 'text');
+	addScalar(fields, ['firstname'], ['firstName'], 'text');
+	addScalar(fields, ['lastname'], ['lastName'], 'text');
+	addScalar(fields, ['level'], ['level'], 'number');
+	addScalar(fields, ['race.name', 'racename'], ['race', 'name'], 'text');
 	addScalar(
 		fields,
 		['race.description', 'race.physicaldescription', 'racedescription'],
 		['race', 'physicalDescription'],
-		'race physical description',
 		'text',
 	);
-	addScalar(fields, ['race.lore', 'racelore'], ['race', 'lore'], 'race lore', 'text');
-	addScalar(fields, ['appearance'], ['appearance'], 'appearance', 'text');
-	addScalar(fields, ['backstory'], ['backstory'], 'backstory', 'text');
-	addScalar(fields, ['goals'], ['goals'], 'goals', 'text');
+	addScalar(fields, ['race.lore', 'racelore'], ['race', 'lore'], 'text');
+	addScalar(fields, ['appearance'], ['appearance'], 'text');
+	addScalar(fields, ['backstory'], ['backstory'], 'text');
+	addScalar(fields, ['goals'], ['goals'], 'text');
 	addScalar(
 		fields,
 		['personality.description', 'personalitydescription'],
 		['personality', 'description'],
-		'personality description',
 		'text',
 	);
 	addScalar(
 		fields,
 		['racialtrait.skillbonus', 'racialtraits.skillbonus'],
 		['racialTraits', 'skillBonus'],
-		'racial skill bonus',
 		'text',
 	);
 	addScalar(
 		fields,
 		['racialtrait.physicalability', 'racialtraits.physicalability'],
 		['racialTraits', 'physicalAbility'],
-		'racial physical ability',
 		'text',
 	);
-	addScalar(fields, ['talents'], ['talents'], 'talents', 'text');
+	addScalar(fields, ['talents'], ['talents'], 'text');
 
 	for (const stat of [...BASE_STATS, ...DERIVED_STATS]) {
-		addScalar(fields, [`stats.${stat}`, stat], ['stats', stat], stat, 'number');
+		addScalar(fields, [`stats.${stat}`, stat], ['stats', stat], 'number');
 	}
 	for (const resource of ['hp', 'ar', 'ap', 'md']) {
 		for (const value of ['current', 'max']) {
@@ -163,7 +165,6 @@ function buildScalarFields() {
 				fields,
 				[`${resource}.${value}`, `${value}${resource}`],
 				['resources', resource, value],
-				`${value} ${resource.toUpperCase()}`,
 				'number',
 			);
 		}
@@ -173,16 +174,19 @@ function buildScalarFields() {
 			fields,
 			[`encumbrance.${value}`, `encumbrancecapacity.${value}`],
 			['encumbrance', value],
-			`${value} encumbrance`,
 			'number',
 		);
 	}
 	return fields;
 }
 
-function addScalar(fields, aliases, path, label, type) {
+function addScalar(fields, aliases, path, type) {
 	for (const alias of aliases) {
-		fields.set(normalizeFieldName(alias), { path, label, type });
+		fields.set(normalizeFieldName(alias), {
+			fieldId: path.join('.'),
+			path,
+			type,
+		});
 	}
 }
 

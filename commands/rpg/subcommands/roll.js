@@ -1,20 +1,22 @@
 const path = require('node:path');
 const { AttachmentBuilder } = require('discord.js');
 const { filterAutocompleteChoices } = require('../../../util/autocomplete');
+const { getLocale, localizeDescription, t } = require('../../../util/i18n');
 
 const COMMON_DICE = [2, 4, 6, 8, 10, 12, 20, 100];
+const descriptionKey = 'rpg.roll.description';
 
 module.exports = {
 	name: 'roll',
-	description: 'Roll a die with a configurable number of sides',
+	description: t('en', descriptionKey),
+	descriptionKey,
 	usage: '/rpg roll sides:<2-1000>',
 	helpOrder: 15,
-	configure: command => command
-		.setName('roll')
-		.setDescription('Roll a die with a configurable number of sides')
-		.addIntegerOption(option => option
-			.setName('sides')
-			.setDescription('Number of sides on the die')
+	configure: command => localizeDescription(command.setName('roll'), descriptionKey)
+		.addIntegerOption(option => localizeDescription(
+			option.setName('sides'),
+			'rpg.roll.sidesOption',
+		)
 			.setMinValue(2)
 			.setMaxValue(1_000)
 			.setAutocomplete(true)
@@ -27,7 +29,7 @@ module.exports = {
 		);
 		await interaction.respond(choices);
 	},
-	async execute({ interaction }) {
+	async execute({ config, interaction }) {
 		const sides = interaction.options.getInteger('sides', true);
 		const result = Math.floor(Math.random() * sides) + 1;
 
@@ -47,6 +49,10 @@ module.exports = {
 			return;
 		}
 
-		await interaction.reply(`You rolled **${result}**.`);
+		await interaction.reply(t(
+			getLocale(config, interaction.guildId),
+			'rpg.roll.result',
+			{ result },
+		));
 	},
 };

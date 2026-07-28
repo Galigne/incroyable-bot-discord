@@ -8,6 +8,7 @@ const config = require('./config.json');
 const { playLocalAudio } = require('./services/localAudioPlayer');
 const { authorizeCommand } = require('./util/authorization');
 const { loadCommands } = require('./util/loadCommands');
+const { getLocale, t } = require('./util/i18n');
 
 loadEnvironment();
 
@@ -168,8 +169,9 @@ function loadEnvironment() {
 }
 
 async function replyWithUnexpectedError(interaction) {
+	const locale = getLocale(config, interaction.guildId);
 	const response = {
-		content: 'Something went wrong while running that command.',
+		content: t(locale, 'common.unexpectedError'),
 		flags: MessageFlags.Ephemeral,
 	};
 	if (interaction.replied || interaction.deferred) {

@@ -1,0 +1,116 @@
+{
+  "name": "Événements",
+  "description": "Scènes inattendues et complications dans le monde",
+  "entries": [
+    {
+      "weight": 2,
+      "value": "Chaque flamme de la région devient verte et pointe vers la même ruine lointaine pendant une minute."
+    },
+    {
+      "weight": 3,
+      "value": "Un messager terrifié fait erreur à un membre du parti pour son contact et lui remet une confession royale scellée."
+    },
+    {
+      "weight": 2,
+      "value": "Une tempête de pluie localisée suit un personnage tandis que le ciel reste clair partout ailleurs."
+    },
+    {
+      "weight": 3,
+      "value": "Deux marchands commencent une vente aux enchères croissante pour un objet ordinaire porté par le parti, refusant d'expliquer pourquoi."
+    },
+    {
+      "weight": 3,
+      "value": "Un monstre blessé s'écrase sur les lieux, fuyant quelque chose de bien plus dangereux, juste hors de vue."
+    },
+    {
+      "value": "Tous les mensonges parlés deviennent visibles comme de la fumée noire jusqu'au coucher du soleil, provoquant une panique immédiate dans le village le plus proche."
+    },
+    {
+      "weight": 3,
+      "value": "Un festival commence de façon inattendue ; sa compétition centrale recrée une réalisation de parti récente avec des détails sauvagement incorrects."
+    },
+    {
+      "weight": 2,
+      "value": "Un tremblement de terre ouvre un escalier sous la route et scelle le sentier devant."
+    },
+    {
+      "weight": 2,
+      "value": "Un enfant demande calmement à la fête d'enlever le fantôme vivant sous son lit  ; le fantôme prétend que l'enfant est le hantant."
+    },
+    {
+      "value": "Une averse de grenouilles inoffensives tombe d'un ciel sans nuages, chacune portant la même rune dorée."
+    },
+    {
+      "value": "Le parti rencontre ses propres affiches, publiées demain et les accusant d'un crime qui n'est pas encore arrivé."
+    },
+    {
+      "weight": 2,
+      "value": "Une statue voisine tourne la tête et chuchote un avertissement au personnage avec la plus basse perception."
+    },
+    {
+      "weight": 3,
+      "value": "Une caravane offre un passage sûr, mais chaque voyageur insiste pour qu'ils aient toujours connu l'un des héros."
+    },
+    {
+      "value": "Pendant une heure, les ombres se détachent de leurs propriétaires et agissent dans les intentions cachées de leurs propriétaires."
+    },
+    {
+      "weight": 3,
+      "value": "Un pont s'effondre après la traversée du parti, les séparant de la poursuite des ennemis et de leur route la plus facile pour rentrer chez eux."
+    },
+    {
+      "value": "Un marché magique apparaît entre deux arbres et disparaîtra après exactement treize achats."
+    },
+    {
+      "weight": 2,
+      "value": "Un corbeau mourant livre un anneau d'enseigne et répète un nom d'endroit sans notices de carte."
+    },
+    {
+      "value": "Un e-BJS commence des années avant le calendrier ; les pouvoirs magiques se comportent de manière inversée ou symbolique."
+    },
+    {
+      "weight": 3,
+      "value": "Une noble procession bloque la route alors que les rebelles masqués préparent une embuscade des deux côtés."
+    },
+    {
+      "value": "La rivière la plus proche recule, exposant une épave pleine de cargaison scellée et réveillant son équipage noyé."
+    },
+    {
+      "weight": 2,
+      "value": "Un aventurier célèbre attribue publiquement la fête à un acte qu'ils n'ont pas fait et leur demande de maintenir l'histoire."
+    },
+    {
+      "weight": 2,
+      "value": "Tout le monde dans un village s'est endormi sauf un boulanger profondément suspect."
+    },
+    {
+      "weight": 2,
+      "value": "Un juge errant déclare un procès improvisé sur la propriété d'une épée parlante qui a choisi un membre du parti."
+    },
+    {
+      "weight": 2,
+      "value": "Un animal inoffensif commence à parler avec la voix d'un allié absent et demande une aide urgente."
+    },
+    {
+      "value": "La lune montre brièvement un deuxième visage, après quoi chaque boussole pointe vers le parti."
+    },
+    {
+      "value": "Un champ de bataille du passé lointain recouvre le paysage actuel, et les actions fantômes causent de réels dégâts."
+    },
+    {
+      "weight": 3,
+      "value": "Un voleur vole quelque chose de trivial mais laisse derrière un objet beaucoup plus précieux et dangereusement recombinable."
+    },
+    {
+      "weight": 2,
+      "value": "Une cloche sonne sous terre ; les anciens locaux insistent pour qu'il n'y ait pas de cloche et ordonnent tout le monde à l'intérieur."
+    },
+    {
+      "weight": 3,
+      "value": "Une négociation spontanée de paix commence entre deux factions hostiles, et les deux choisissent le parti comme témoin neutre."
+    },
+    {
+      "value": "Le temps passe trois heures pour tout le monde sauf la fête, qui est maintenant accusée de ce qui s'est passé pendant l'écart."
+    }
+  ]
+}

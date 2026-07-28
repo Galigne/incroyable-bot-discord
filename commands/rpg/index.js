@@ -19,6 +19,9 @@ const rules = require('./subcommands/rules');
 const get = require('./subcommands/get');
 const getHelp = require('./subcommands/gethelp');
 const { authorizeCommand } = require('../../util/authorization');
+const { localizeDescription, t } = require('../../util/i18n');
+
+const descriptionKey = 'commands.rpg.description';
 
 const subcommands = new Map([
 	[add.name, add],
@@ -40,13 +43,13 @@ const subcommands = new Map([
 
 module.exports = {
 	name: 'rpg',
-	description: 'Generate prompts and manage RPG character sheets',
+	description: t('en', descriptionKey),
+	descriptionKey,
 	usage: '/rpg',
 	helpOrder: 30,
-	data: new SlashCommandBuilder()
+	data: localizeDescription(new SlashCommandBuilder()
 		.setName('rpg')
-		.setDescription('Generate prompts and manage RPG character sheets')
-		.setContexts(InteractionContextType.Guild)
+		.setContexts(InteractionContextType.Guild), descriptionKey)
 		.addSubcommand(add.configure)
 		.addSubcommand(damage.configure)
 		.addSubcommand(remove.configure)

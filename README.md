@@ -19,6 +19,36 @@ A Discord bot with moderation, utility, local audio, and RPG character-managemen
 The bot registers its global slash commands when it connects. Discord may briefly
 need to refresh its command picker after a command schema changes.
 
+## Localization
+
+All bot-owned user-facing text is centralized in `locales/en.json` and
+`locales/fr.json`. Slash command and option names remain English, while Discord
+receives localized French descriptions and choice labels.
+French game terminology follows `documentation/JDR_RANDOM_RULES_FR.md`; for example,
+the localized interface uses PV, PR, PA, DD, LOI, and dons raciaux.
+Character field names and resource abbreviations are mapped centrally in
+`util/characterDisplay.js`. Resource abbreviations are unique within each language:
+HP/AR/AP/MD in English and PV/PR/PA/DD in French.
+
+Generator catalogs follow the same server locale. English reference files live in
+`data/generators/en/` and French display content in `data/generators/fr/`.
+Autocomplete labels and generated text are localized, while generator IDs,
+structured field keys, enum values, and routing values remain English. Content
+already saved in a character sheet is never translated retroactively.
+
+Set the default runtime language in `config.json`:
+
+```json
+{
+  "locale": "fr"
+}
+```
+
+Supported values are `en` and `fr`; an unsupported or missing value falls back to
+English. A deployment that serves multiple servers can optionally add a
+`guildLocales` object whose keys are Discord server IDs and whose values are locale
+codes. A server-specific value takes precedence over `locale`.
+
 Never commit `.env` or a Discord token. Reset any token that has previously been committed.
 
 ## Commands
@@ -86,10 +116,11 @@ The full TTRPG rules are available in
 
 - `commands/`: top-level slash commands
 - `commands/rpg/subcommands/`: one module per RPG subcommand
-- `data/generators/`: editable JSON prompt catalogs for the RPG generators
+- `data/generators/en/` and `data/generators/fr/`: localized JSON prompt catalogs
 - `models/`: domain models
 - `services/`: character persistence and local MP3 playback
 - `util/`: command loading and authorization
+- `locales/`: English and French user-interface catalogs
 - `scripts/check.js`: offline validation
 
 Run `npm test` to validate syntax, slash-command schemas, autocomplete configuration,

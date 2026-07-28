@@ -19,6 +19,7 @@ module.exports = function createInteractionChecks(context) {
 				},
 			},
 		};
+		const englishConfig = { ...config, locale: 'en' };
 
 		try {
 			await characterStore.createCharacter(characterKey, user.id, character => {
@@ -33,7 +34,7 @@ module.exports = function createInteractionChecks(context) {
 				showModal: async modal => {
 					modalPayload = modal.toJSON();
 				},
-			}, config, characterKey, 'stats.strength');
+			}, englishConfig, characterKey, 'stats.strength');
 			if (
 				modalPayload.title !== 'Edit Strength'
 				|| modalPayload.components.length !== 1
@@ -54,7 +55,7 @@ module.exports = function createInteractionChecks(context) {
 				reply: async payload => {
 					submitPayload = payload;
 				},
-			}, config);
+			}, englishConfig);
 			const editedCharacter = await characterStore.getCharacter(characterKey);
 			if (!submitPayload || editedCharacter.stats.strength !== 14) {
 				errors.push('The direct RPG editor did not save its modal value.');
@@ -67,7 +68,7 @@ module.exports = function createInteractionChecks(context) {
 			const heal = require('../../commands/rpg/subcommands/heal');
 			let healPayload;
 			await heal.execute({
-				config,
+				config: englishConfig,
 				interaction: {
 					user,
 					member,
@@ -87,7 +88,7 @@ module.exports = function createInteractionChecks(context) {
 				healedCharacter.resources.hp.current !== 51
 				|| healedCharacter.resources.ar.current !== 17
 				|| !healPayload.includes('HP: **10/101 → 51/101**')
-				|| !healPayload.includes('Armor: **5/33 → 17/33**')
+				|| !healPayload.includes('AR: **5/33 → 17/33**')
 			) {
 				errors.push('/rpg heal both did not update and display both resources.');
 			}

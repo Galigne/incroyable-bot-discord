@@ -1,0 +1,90 @@
+{
+  "name": "adventurerBackground",
+  "description": "Détails de Background pour les PNJ aventuriers",
+  "entries": [
+    {
+      "fields": {
+        "Appearance": "Endurci par les voyages, légèrement balafré et équipé d’un matériel dépareillé mais entretenu avec soin.",
+        "Backstory": "A survécu à la destruction de sa première expédition et en conserve encore la carte inachevée.",
+        "Goals": "Découvrir ce qui a tué ses compagnons et mener l’expédition à terme sans répéter leurs erreurs."
+      }
+    },
+    {
+      "fields": {
+        "Appearance": "Athlétique, vêtu de couleurs vives et toujours prêt à exhiber des trophées à l’authenticité douteuse.",
+        "Backstory": "A quitté un foyer confortable, incapable d’ignorer plus longtemps les récits consacrés à ses ancêtres héroïques.",
+        "Goals": "Acquérir une renommée véritable et découvrir si les légendes familiales disent vrai."
+      }
+    },
+    {
+      "fields": {
+        "Appearance": "Silencieux et vigilant, emmitouflé dans plusieurs couches imperméables maintes fois raccommodées.",
+        "Backstory": "Travaillait comme éclaireur aux frontières jusqu’à ce qu’un employeur ordonne d’abandonner des colons isolés.",
+        "Goals": "Guider les voyageurs vulnérables en lieu sûr et traduire son ancien employeur en justice."
+      }
+    },
+    {
+      "fields": {
+        "Appearance": "Port d’universitaire, gants tachés d’encre, bottes robustes et beaucoup trop d’instruments fragiles.",
+        "Backstory": "Un érudit a décidé de partir sur le terrain après le rejet sans examen d’une théorie importante.",
+        "Goals": "Trouver des preuves irréfutables et survivre assez longtemps pour les publier."
+      }
+    },
+    {
+      "fields": {
+        "Appearance": "Carrure puissante, armure sobre, expression sereine et bouclier visiblement endommagé.",
+        "Backstory": "Un ancien garde est devenu chasseur de monstres après l’échec des défenses ordinaires dans son quartier.",
+        "Goals": "Enseigner aux communautés des moyens de défense efficaces et retrouver la créature qui s’est échappée."
+      }
+    },
+    {
+      "fields": {
+        "Appearance": "Mince et brûlé par le soleil, portant des symboles religieux recueillis auprès de nombreuses confessions sans rapport entre elles.",
+        "Backstory": "A entrepris un pèlerinage pour comprendre un miracle personnel, mais chaque sanctuaire lui en a donné une explication différente.",
+        "Goals": "Comprendre le miracle et aider d’autres pèlerins à accomplir leurs dangereux voyages."
+      }
+    },
+    {
+      "fields": {
+        "Appearance": "Jovial et buriné par les éléments, croulant sous les cordes, les outils, les échantillons et les souvenirs superflus.",
+        "Backstory": "Est devenu explorateur au fil d’accidents répétés alors qu’il réparait du matériel pour une caravane.",
+        "Goals": "Cartographier des voies réputées inaccessibles et ouvrir un passage fiable entre des communautés isolées."
+      }
+    },
+    {
+      "fields": {
+        "Appearance": "Maintien discipliné, ancien équipement militaire débarrassé de ses insignes et boiterie soigneusement dissimulée.",
+        "Backstory": "Un vétéran a quitté une compagnie de mercenaires après avoir découvert que ses guerres étaient délibérément prolongées.",
+        "Goals": "N’accepter que des contrats honorables et démasquer les financiers qui entretiennent les conflits."
+      }
+    },
+    {
+      "fields": {
+        "Appearance": "Petite stature, gestes vifs et équipement spécialisé pour l’escalade et le crochetage.",
+        "Backstory": "A commencé à explorer des ruines pour retrouver un bien familial vendu pendant une crise financière.",
+        "Goals": "Récupérer l’héritage, rembourser les dettes familiales et prouver que la prudence vaut mieux que la bravade."
+      }
+    },
+    {
+      "fields": {
+        "Appearance": "Cape immaculée sur une armure cabossée et sourire assuré qui disparaît dès que personne ne regarde.",
+        "Backstory": "A été publiquement désigné comme le héros d’une prophétie dont rien ne prouve l’authenticité.",
+        "Goals": "Protéger les personnes entraînées dans la prophétie et découvrir qui l’a fabriquée."
+      }
+    },
+    {
+      "fields": {
+        "Appearance": "Austère et pâle, couvert de carnets répertoriant blessures, traces et dépouilles inhabituelles.",
+        "Backstory": "Un guérisseur s’est mis à étudier les monstres lorsque la médecine conventionnelle s’est révélée impuissante face aux blessures surnaturelles.",
+        "Goals": "Mettre au point des traitements fiables et capturer vivant un spécimen dangereux."
+      }
+    },
+    {
+      "fields": {
+        "Appearance": "Plus âgé que la plupart des aventuriers, pragmatique et calme, avec un équipement choisi au fil d’une longue expérience.",
+        "Backstory": "Avait pris une retraite bien méritée des années auparavant, mais a repris la route après la disparition de l’enfant d’un ancien compagnon.",
+        "Goals": "Retrouver l’héritier disparu, maintenir ses alliés inexpérimentés en vie et reprendre sa retraite sans laisser de promesse inaccomplie."
+      }
+    }
+  ]
+}

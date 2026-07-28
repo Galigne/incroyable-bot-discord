@@ -1,0 +1,246 @@
+{
+  "name": "Factions",
+  "description": "Organisations avec objectifs, ressources, hiérarchie, alliés et ennemis",
+  "entries": [
+    {
+      "weight": 3,
+      "fields": {
+        "Name": "La Guilde des Wayfarers",
+        "Type": "Adventurers' guild",
+        "Goal": "Rendre les voyages dangereux et l'exploration rentable mais survivable.",
+        "Resources": "Cartes, chapitières, guides vétérans, fonds de sauvetage.",
+        "Hierarchy": "Élu maître de guilde, capitaines régionaux, membres titulaires d'un permis.",
+        "Allies": "Merchants, colonies frontalières, cartographes.",
+        "Enemies": "Ligues de bandits, guides frauduleux, nobles territoriaux."
+      }
+    },
+    {
+      "weight": 3,
+      "fields": {
+        "Name": "Maison Valeward",
+        "Type": "Noble house",
+        "Goal": "Sécurisez un mariage royal et contrôlez le commerce de la rivière ouest.",
+        "Resources": "Les domaines fertiles, la cavalerie, les liens de mariage, les péages de rivière.",
+        "Hierarchy": "Duchesse, conseil familial, agents de ménage assermentés.",
+        "Allies": "Les guildes, deux petites maisons.",
+        "Enemies": "Un duc rival, des réformateurs républicains, des passeurs."
+      }
+    },
+    {
+      "weight": 3,
+      "fields": {
+        "Name": "Les Lanternes Ashen",
+        "Type": "Religious order",
+        "Goal": "Trouver et détruire en toute sécurité les épidémies non mortes avant que la panique ne se propage.",
+        "Resources": "Exorcistes, feu voilé, hospices cachés, archives d'enterrement.",
+        "Hierarchy": "Haute Garde, lanternes, informateurs laïcs.",
+        "Allies": "Temples, sépulcres, guérisseurs de village.",
+        "Enemies": "Des nécromancers, des marchands de cadavres, des fonctionnaires qui cachent des épidémies."
+      }
+    },
+    {
+      "weight": 3,
+      "fields": {
+        "Name": "Le Compact en laiton",
+        "Type": "Merchant guild",
+        "Goal": "Normaliser les poids, les contrats et les devises dans toute la région.",
+        "Resources": "Des entrepôts, des caravanes, des banques, des gardes engagés.",
+        "Hierarchy": "Conseil d'administration des facteurs, des auditeurs, des sociétés membres.",
+        "Allies": "Gouvernements urbains, artisans, caravansérays.",
+        "Enemies": "Contrefaçons, raquettes de protection, seigneurs isolationnistes."
+      }
+    },
+    {
+      "weight": 2,
+      "fields": {
+        "Name": "Les couteaux rouges",
+        "Type": "Criminal syndicate",
+        "Goal": "Contrôler la contrebande sans permettre la violence dans la rue.",
+        "Resources": "Des itinéraires de contrebande, des gardes soudoyés, des refuges, des informateurs.",
+        "Hierarchy": "Conseil caché, district, équipages.",
+        "Allies": "Des fonctionnaires corrompus, des clôtures, des dockers sélectionnés.",
+        "Enemies": "Des gangs indépendants, des magistrats honnêtes, des passeurs rivales."
+      }
+    },
+    {
+      "weight": 2,
+      "fields": {
+        "Name": "Le pacte de Verdant",
+        "Type": "Druidic circle",
+        "Goal": "Empêcher le peuplement de franchir les anciennes frontières écologiques.",
+        "Resources": "Des métamorphes, des groves sacrés, des messagers d'animaux, des lore.",
+        "Hierarchy": "Conseil saisonnier et cercles locaux autonomes.",
+        "Allies": "Forestiers, guérisseurs ruraux, esprits naturels.",
+        "Enemies": "Consortiums d'exploitation forestière, barons en expansion, cultes de la brûlure."
+      }
+    },
+    {
+      "weight": 2,
+      "fields": {
+        "Name": "La septième bannière",
+        "Type": "Mercenary army",
+        "Goal": "Gagnez des terres et une reconnaissance juridique après des décennies de guerres étrangères.",
+        "Resources": "Fantassin discipliné, ingénieurs, équipement de siège, anciens combattants.",
+        "Hierarchy": "Marshal, capitaines de bannière, sergents élus.",
+        "Allies": "Familles d'anciens combattants, dirigeants pragmatiques.",
+        "Enemies": "Anciens employeurs, officiers aristocratiques, déserteurs."
+      }
+    },
+    {
+      "weight": 2,
+      "fields": {
+        "Name": "Les archives tranquilles",
+        "Type": "Scholarly society",
+        "Goal": "Recueillir des connaissances dangereuses et en restreindre l'accès.",
+        "Resources": "Bibliothèques secrètes, traducteurs, magie de la mémoire, agents académiques.",
+        "Hierarchy": "Curateurs, comités scellés, chercheurs sur le terrain.",
+        "Allies": "Universités, sages prudents, monastères.",
+        "Enemies": "Brûleurs de livres, collectionneurs imprudents, revendeurs de textes interdits."
+      }
+    },
+    {
+      "weight": 2,
+      "fields": {
+        "Name": "Le Trône du sel",
+        "Type": "Pirate confederacy",
+        "Goal": "Forcer les États côtiers à reconnaître un territoire maritime libre.",
+        "Resources": "Des vaisseaux rapides, des criques, des cartes volées, des espions côtiers.",
+        "Hierarchy": "Élue comme addict et comme capitaine.",
+        "Allies": "Ports de dissidents, passeurs, prisonniers libérés.",
+        "Enemies": "Les navies royales, les marchands d'esclaves, les monopoles marchands."
+      }
+    },
+    {
+      "weight": 2,
+      "fields": {
+        "Name": "Le Veil Blanc",
+        "Type": "Assassins' order",
+        "Goal": "Enlever les dirigeants jugés susceptibles de causer des souffrances massives.",
+        "Resources": "Déguise, empoisonne, réseaux d'intelligence, fausses identités.",
+        "Hierarchy": "Juges anonymes, gestionnaires, agents isolés.",
+        "Allies": "Des shistleblowers, des espions, quelques nobles réformistes.",
+        "Enemies": "Police secrète, tyrans, assassins pour l'embauche."
+      }
+    },
+    {
+      "weight": 2,
+      "fields": {
+        "Name": "L'Union du Coeur",
+        "Type": "Workers' league",
+        "Goal": "Assurer des contrats équitables, des lieux de travail sûrs et une représentation politique.",
+        "Resources": "Des fonds de grève, du travail qualifié, des salles de réunion, du soutien public.",
+        "Hierarchy": "Délégués locaux et comité central tournant.",
+        "Allies": "Pauvres urbains, réformateurs, artisans indépendants.",
+        "Enemies": "Guildmasters, briseurs de grève, tribunaux corrompus."
+      }
+    },
+    {
+      "weight": 2,
+      "fields": {
+        "Name": "La norme d'ivoire",
+        "Type": "Knightly order",
+        "Goal": "Restaurer les routes légales et défendre les communautés abandonnées par la couronne.",
+        "Resources": "Fortifié garde, cavalerie entraînée, écuries, prestige public.",
+        "Hierarchy": "Grand commandant, les castellans, les chevaliers jurés.",
+        "Allies": "Villages, pèlerins, temples légitimes.",
+        "Enemies": "Des Rpiers, des nobles corrompus, des monstres qui contrôlent les routes."
+      }
+    },
+    {
+      "weight": 1,
+      "fields": {
+        "Name": "L'Assemblée de la nouvelle aube",
+        "Type": "Revolutionary movement",
+        "Goal": "Remplacer le règlement héraldique par des conseils régionaux élus.",
+        "Resources": "Des presses à brochures, des cellules de quartier, des défectueux, des dons.",
+        "Hierarchy": "Congrès secret, conférenciers locaux, cellules indépendantes.",
+        "Allies": "Les étudiants, les travailleurs, les minorités exclues.",
+        "Enemies": "Renseignement royal, clergé conservateur, milices loyalistes."
+      }
+    },
+    {
+      "weight": 1,
+      "fields": {
+        "Name": "Le choeur creux",
+        "Type": "Apocalyptic cult",
+        "Goal": "Silencer toute source de son pour réveiller un dieu endormi.",
+        "Resources": "Des convertis fanatiques, de la magie du silence, des musiciens doués.",
+        "Hierarchy": "Mignon prophète, chefs d'orchestre, choristes.",
+        "Allies": "Des ermites désespérés, certaines aberrations.",
+        "Enemies": "Bards, fondateurs de cloches, presque toutes les religions établies."
+      }
+    },
+    {
+      "weight": 1,
+      "fields": {
+        "Name": "L'ambassade de Saphir",
+        "Type": "Foreign political network",
+        "Goal": "Faire dépendre économiquement les États voisins sans guerre ouverte.",
+        "Resources": "Diplomates, prêts, produits de luxe, agents formés.",
+        "Hierarchy": "Ambassadeur, service commercial, bureau secret.",
+        "Allies": "Des nobles débiteurs, des guildes d'importation, des élites cosmopolites.",
+        "Enemies": "Des protectionnistes, des diplomates rivaux, des services de renseignement locaux."
+      }
+    },
+    {
+      "weight": 1,
+      "fields": {
+        "Name": "Les brise-chaînes",
+        "Type": "Liberation network",
+        "Goal": "Mettre fin à l'esclavage et reloger les personnes libérées au-delà des représailles.",
+        "Resources": "Des coffres, des papiers falsifiés, des marins sympathiques, des fonds cachés.",
+        "Hierarchy": "Routes indépendantes coordonnées par des répartiteurs masqués.",
+        "Allies": "Anciens esclaves, temples abolitionnistes, syndicats de quai.",
+        "Enemies": "Trafiquants, seigneurs de la plantation, chasseurs de bounty."
+      }
+    },
+    {
+      "weight": 1,
+      "fields": {
+        "Name": "L'échelle Gilded",
+        "Type": "Banking consortium",
+        "Goal": "Contrôler la dette souveraine et rendre la guerre financièrement impossible sans eux.",
+        "Resources": "Les fautes, les livres de crédit, les collecteurs de dettes, l'influence politique.",
+        "Hierarchy": "Cinq familles partenaires et commis professionnels.",
+        "Allies": "Merchants, dirigeants endettés, fonctionnaires de la Monnaie.",
+        "Enemies": "Mouvements de débiteurs, contrefaiteurs, banques concurrentes."
+      }
+    },
+    {
+      "weight": 1,
+      "fields": {
+        "Name": "La Société des étoiles",
+        "Type": "Arcane research society",
+        "Goal": "Récupérer des objets célestes avant que les gouvernements les arment.",
+        "Resources": "Observatoires, mages, équipes d'expédition, fragments de météorites.",
+        "Hierarchy": "Conseil scientifique, chercheurs principaux, apprentis.",
+        "Allies": "Astronomes, universités, éléments prudents.",
+        "Enemies": "Ministères de la guerre, contrebandiers d'artefacts, cultes cosmiques."
+      }
+    },
+    {
+      "weight": 1,
+      "fields": {
+        "Name": "Le verger noir",
+        "Type": "Poisoners' cartel",
+        "Goal": "Monopoliser les toxines rares et les antidotes qui les contrôlent.",
+        "Resources": "Jardins cachés, alchimistes, fronts apothicaires, fichiers de chantage.",
+        "Hierarchy": "Maîtres jardiniers, distributeurs, collectionneurs contractuels.",
+        "Allies": "Assassins, médecins corrompus, commerçants exotiques.",
+        "Enemies": "Guérisseurs, alchimistes rivaux, familles de victimes."
+      }
+    },
+    {
+      "weight": 1,
+      "fields": {
+        "Name": "Le bouclier commun",
+        "Type": "Citizen militia",
+        "Goal": "Gardez la défense locale sous contrôle communautaire plutôt que de nobles armées.",
+        "Resources": "Des volontaires, des arsenals urbains, des tours de surveillance, des connaissances locales.",
+        "Hierarchy": "Des capitaines élus responsables devant des assemblées publiques.",
+        "Allies": "Agriculteurs, commerçants, voisins communes.",
+        "Enemies": "Invaders, chefs de guerre, nobles, qui demandent le désarmement."
+      }
+    }
+  ]
+}

@@ -1,60 +1,92 @@
 const fs = require('node:fs');
 const path = require('node:path');
+const { DEFAULT_LOCALE, normalizeLocale } = require('../util/i18n');
 
 const generatorsDirectory = path.join(__dirname, '..', 'data', 'generators');
-let cachedCategories;
+const cachedGenerators = new Map();
 
-function loadCategories() {
-	if (cachedCategories) {
-		return cachedCategories;
+function loadGenerators(locale = DEFAULT_LOCALE) {
+	const normalizedLocale = normalizeLocale(locale);
+	if (cachedGenerators.has(normalizedLocale)) {
+		return cachedGenerators.get(normalizedLocale);
 	}
 
-	const categories = new Map();
-	const files = fs.readdirSync(generatorsDirectory)
+	const englishDirectory = path.join(generatorsDirectory, DEFAULT_LOCALE);
+	const localizedDirectory = path.join(generatorsDirectory, normalizedLocale);
+	const generators = new Map();
+	const files = fs.readdirSync(englishDirectory)
 		.filter(file => file.endsWith('.json'))
 		.sort();
 
 	for (const file of files) {
-		const filePath = path.join(generatorsDirectory, file);
-		const category = JSON.parse(fs.readFileSync(filePath, 'utf8'));
-		validateCategory(category, file);
+		const englishPath = path.join(englishDirectory, file);
+		const localizedPath = path.join(localizedDirectory, file);
+		const englishGenerator = readGenerator(englishPath, file);
+		const selectedPath = selectLocalizedGeneratorPath(
+			englishPath,
+			localizedPath,
+			normalizedLocale,
+		);
+		const localizedGenerator = selectedPath === englishPath
+			? englishGenerator
+			: readGenerator(selectedPath, file);
+		const id = englishGenerator.name;
+		const key = normalizeCategoryName(id);
 
-		const key = normalizeCategoryName(category.name);
-		if (categories.has(key)) {
-			throw new Error(`Duplicate generator category: ${category.name}`);
+		if (generators.has(key)) {
+			throw new Error(`Duplicate generator category: ${id}`);
 		}
-		categories.set(key, Object.freeze({
-			...category,
+		generators.set(key, Object.freeze({
+			...localizedGenerator,
+			id,
 			key,
-			entries: Object.freeze(category.entries.map(freezeEntry)),
+			locale: normalizedLocale,
+			entries: Object.freeze(localizedGenerator.entries.map(freezeEntry)),
 		}));
 	}
 
-	if (categories.size === 0) {
+	if (generators.size === 0) {
 		throw new Error('No generator categories were found.');
 	}
 
-	cachedCategories = categories;
-	return categories;
+	cachedGenerators.set(normalizedLocale, generators);
+	return generators;
 }
 
-function listCategories() {
-	return [...loadCategories().values()]
-		.sort((left, right) => left.name.localeCompare(right.name));
+function readGenerator(filePath, file) {
+	const generator = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+	validateCategory(generator, file);
+	return generator;
 }
 
-function getCategory(name) {
-	return loadCategories().get(normalizeCategoryName(name));
+function selectLocalizedGeneratorPath(englishPath, localizedPath, locale) {
+	return locale !== DEFAULT_LOCALE && fs.existsSync(localizedPath)
+		? localizedPath
+		: englishPath;
 }
 
-function generate(categoryName, random = Math.random) {
-	const category = getCategory(categoryName);
-	if (!category) {
+function listGenerators(locale = DEFAULT_LOCALE) {
+	return [...loadGenerators(locale).values()]
+		.sort((left, right) => left.name.localeCompare(right.name, locale));
+}
+
+function getGenerator(id, locale = DEFAULT_LOCALE) {
+	return loadGenerators(locale).get(normalizeCategoryName(id));
+}
+
+function generate(id, locale = DEFAULT_LOCALE, random = Math.random) {
+	// Preserve the former generate(id, random) form for service callers.
+	if (typeof locale === 'function') {
+		random = locale;
+		locale = DEFAULT_LOCALE;
+	}
+	const generator = getGenerator(id, locale);
+	if (!generator) {
 		return null;
 	}
 	return {
-		category,
-		entry: selectWeightedEntry(category.entries, random),
+		category: generator,
+		entry: selectWeightedEntry(generator.entries, random),
 	};
 }
 
@@ -192,8 +224,11 @@ function freezeEntry(entry) {
 module.exports = {
 	generate,
 	getEntryWeight,
-	getCategory,
-	listCategories,
+	getGenerator,
+	getCategory: getGenerator,
+	listGenerators,
+	listCategories: listGenerators,
 	normalizeCategoryName,
+	selectLocalizedGeneratorPath,
 	selectWeightedEntry,
 };

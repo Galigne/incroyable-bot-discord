@@ -1,0 +1,204 @@
+{
+  "name": "Talents",
+  "description": "Talents et spécialités des personnages",
+  "entries": [
+    {
+      "weight": 3,
+      "fields": {
+        "Name": "Athlète",
+        "Description": "+1 aux actions physiques impliquant un mouvement soutenu, l'escalade, ou le saut."
+      }
+    },
+    {
+      "weight": 3,
+      "fields": {
+        "Name": "Oeil Keen",
+        "Description": "+1 lors de la recherche de petits détails, pistes, pièges, ou objets cachés."
+      }
+    },
+    {
+      "weight": 3,
+      "fields": {
+        "Name": "Langue d'argent",
+        "Description": "+1 à la persuasion quand le personnage a le temps d'expliquer sa position."
+      }
+    },
+    {
+      "weight": 3,
+      "fields": {
+        "Name": "Survivant",
+        "Description": "+1 pour supporter le temps dur, la faim, l'épuisement, ou les voyages difficiles."
+      }
+    },
+    {
+      "weight": 2,
+      "fields": {
+        "Name": "Assassin",
+        "Description": "Les attaques sont plus efficaces lorsque la cible n'a pas détecté le caractère."
+      }
+    },
+    {
+      "weight": 2,
+      "fields": {
+        "Name": "Culturiste",
+        "Description": "+1 aux actions basées sur la force brute."
+      }
+    },
+    {
+      "weight": 2,
+      "fields": {
+        "Name": "Politique",
+        "Description": "+2 Charisma lors de négociations formelles et de discussions politiques."
+      }
+    },
+    {
+      "weight": 2,
+      "fields": {
+        "Name": "Champ Médicament",
+        "Description": "+1 lors de la stabilisation des blessures ou l'utilisation de fournitures médicales ordinaire."
+      }
+    },
+    {
+      "weight": 2,
+      "fields": {
+        "Name": "Dessin rapide",
+        "Description": "Dessiner ou changer une arme préparée ne ralentit pas la première action du personnage."
+      }
+    },
+    {
+      "weight": 2,
+      "fields": {
+        "Name": "Expert en bouclier",
+        "Description": "+1 lors du blocage avec un bouclier ou de la protection d'un allié adjacent."
+      }
+    },
+    {
+      "weight": 2,
+      "fields": {
+        "Name": "Pisteur",
+        "Description": "+2 quand on suit un sentier laissé par une créature connue."
+      }
+    },
+    {
+      "weight": 2,
+      "fields": {
+        "Name": "Étudiante Arcane",
+        "Description": "+1 lors de l'identification d'un phénomène LOI, rune ou magique."
+      }
+    },
+    {
+      "weight": 2,
+      "fields": {
+        "Name": "Artisan",
+        "Description": "+1 lors de la réparation, de l'évaluation ou de la création d'équipement ordinaire."
+      }
+    },
+    {
+      "weight": 2,
+      "fields": {
+        "Name": "Liste des marchandises à payer",
+        "Description": "+1 lors de la lutte contre un seul adversaire visible sans interférence à proximité."
+      }
+    },
+    {
+      "weight": 2,
+      "fields": {
+        "Name": "Ami de la bête",
+        "Description": "+2 lors de la calmant ou de la compréhension des animaux ordinaires."
+      }
+    },
+    {
+      "weight": 2,
+      "fields": {
+        "Name": "Navire",
+        "Description": "+2 à la navigation, au gréement et à l'équilibre à bord d'un navire."
+      }
+    },
+    {
+      "weight": 2,
+      "fields": {
+        "Name": "Dans le sens des rues",
+        "Description": "+1 lorsque vous trouvez des marchandises illicites, des rumeurs, ou des routes sûres à travers une ville."
+      }
+    },
+    {
+      "weight": 2,
+      "fields": {
+        "Name": "Inébranlable",
+        "Description": "+1 pour résister à la peur, l'intimidation, et la peur surnaturelle."
+      }
+    },
+    {
+      "fields": {
+        "Name": "Immunicité froide",
+        "Description": "Le caractère ne peut pas être congelé par le froid ordinaire."
+      }
+    },
+    {
+      "fields": {
+        "Name": "Tolérance au poison",
+        "Description": "+2 pour résister au poison et identifier les toxines courantes par le goût ou l'odeur."
+      }
+    },
+    {
+      "fields": {
+        "Name": "Autres",
+        "Description": "Le personnage peut utiliser l'une ou l'autre main avec une précision égale."
+      }
+    },
+    {
+      "fields": {
+        "Name": "Rythme de combat",
+        "Description": "Après une attaque coordonnée réussie, gagnez +1 sur la prochaine action alliée au même tour."
+      }
+    },
+    {
+      "fields": {
+        "Name": "Écouteur Rune",
+        "Description": "Le personnage peut sentir si une rune touchée est dormante ou active."
+      }
+    },
+    {
+      "fields": {
+        "Name": "Mémoire parfaite",
+        "Description": "+2 quand vous vous souvenez d'une scène, d'un itinéraire, d'un visage ou d'un détail précis."
+      }
+    },
+    {
+      "fields": {
+        "Name": "Inconvénient",
+        "Description": "+1 lorsque vous utilisez un objet ordinaire pour un but non intentionnel mais plausible."
+      }
+    },
+    {
+      "fields": {
+        "Name": "Dernier stand",
+        "Description": "+1 aux actions alors qu'elles sont égales ou inférieures à 20% du maximum PV."
+      }
+    },
+    {
+      "fields": {
+        "Name": "Sens de danger",
+        "Description": "+1 pour Réfléchir en réagissant à une menace invisible ou inattendue."
+      }
+    },
+    {
+      "fields": {
+        "Name": "Amers lourds",
+        "Description": "Une attaque à la mêlée lourde réussie produit un effet de position plus fort."
+      }
+    },
+    {
+      "fields": {
+        "Name": "Pause chanceuse",
+        "Description": "Une fois par session, reroller un rouleau d'utilité non critique échoué."
+      }
+    },
+    {
+      "fields": {
+        "Name": "Présence inspirante",
+        "Description": "Une fois par scène, un allié qui entend le personnage gagne +1 contre la peur."
+      }
+    }
+  ]
+}

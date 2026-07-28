@@ -6,6 +6,7 @@ const ROLE_GROUPS = {
 };
 
 function authorizeCommand(command, interaction, config) {
+	const locale = getLocale(config, interaction.guildId);
 	const requiredRole = command.access?.role ?? 'member';
 	const allowedRoleKeys = ROLE_GROUPS[requiredRole];
 	if (!allowedRoleKeys) {
@@ -20,7 +21,7 @@ function authorizeCommand(command, interaction, config) {
 	if (!hasAllowedRole) {
 		return {
 			allowed: false,
-			message: 'You do not have permission to use this command.',
+			message: t(locale, 'authorization.missingRole'),
 		};
 	}
 
@@ -30,7 +31,7 @@ function authorizeCommand(command, interaction, config) {
 		if (!allowedChannelIds.includes(interaction.channelId ?? interaction.channel?.id)) {
 			return {
 				allowed: false,
-				message: 'This command cannot be used in this channel.',
+				message: t(locale, 'authorization.wrongChannel'),
 			};
 		}
 	}
@@ -39,3 +40,4 @@ function authorizeCommand(command, interaction, config) {
 }
 
 module.exports = { authorizeCommand };
+const { getLocale, t } = require('./i18n');

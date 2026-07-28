@@ -1,0 +1,102 @@
+{
+  "name": "Compagnons",
+  "description": "Familiers et petits compagnons animaux",
+  "entries": [
+    {
+      "weight": 4,
+      "value": "Chien fidèle — trace des odeurs familières, garde des dormants et méfie un PNJ apparemment inoffensif."
+    },
+    {
+      "weight": 4,
+      "value": "Le chat de la grange — excellent pour trouver la vermine cachée, les endroits chauds et la nourriture non servie."
+    },
+    {
+      "weight": 4,
+      "value": "Pigeon voyageur — revient de façon fiable à une maison choisie qui transporte un très petit message."
+    },
+    {
+      "weight": 3,
+      "value": "Pack Chèvre — transporte des vivres modestes, mange presque n'importe quoi, et refuse manifestement les chemins maudits."
+    },
+    {
+      "weight": 3,
+      "value": "Rat Clever — se presse dans de petits espaces et apprend des instructions simples basées sur des objets."
+    },
+    {
+      "weight": 3,
+      "value": "Regardez l'Oie: elle défie fort les étrangers, les créatures invisibles et quiconque porte du pain."
+    },
+    {
+      "weight": 3,
+      "value": "Furet de poche — récupère de petits objets lâches et les cache dans des endroits gênants."
+    },
+    {
+      "weight": 3,
+      "value": "Mule — transport fiable avec un excellent niveau de sécurité et un droit de veto absolu sur les ponts dangereux."
+    },
+    {
+      "weight": 2,
+      "value": "Lanterne Finch — émet une lumière douce et se tait lorsque les prédateurs sont à proximité."
+    },
+    {
+      "weight": 2,
+      "value": "Triton de braise — fournit la chaleur, lumières sèche, et dort à l'intérieur des ustensiles de cuisine."
+    },
+    {
+      "weight": 2,
+      "value": "Tortue de mousse — pousse lentement des herbes médicinales communes à travers sa coquille."
+    },
+    {
+      "weight": 2,
+      "value": "Corbeau murmurant — se souvient des voix et peut répéter plusieurs phrases courtes avec une précision alarmante."
+    },
+    {
+      "weight": 2,
+      "value": "Slime miniature — dissout inoffensifment la saleté, la nourriture gâtée et parfois le papier important."
+    },
+    {
+      "weight": 2,
+      "value": "Scarabée mécanique — enregistre une heure de son et la joue en arrière quand la blessure."
+    },
+    {
+      "weight": 2,
+      "value": "Lézard de brise — change de couleur avec la météo et glisse de courtes distances entre les gens."
+    },
+    {
+      "weight": 2,
+      "value": "Bat de caverne — navigue dans l'obscurité complète et revient quand appelé avec un sifflet spécifique."
+    },
+    {
+      "weight": 2,
+      "value": "Loutre de rivière — nage, récupère des objets flottants et insiste pour ouvrir les mollusques pendant les scènes sérieuses."
+    },
+    {
+      "weight": 1,
+      "value": "Griffon miniature — garde farouchement un sac à dos unique et chasse les insectes avec des plongées spectaculaires."
+    },
+    {
+      "weight": 1,
+      "value": "Lapin clignotant — téléporte quelques mètres quand il est surpris mais choisit rarement la direction la plus sûre."
+    },
+    {
+      "weight": 1,
+      "value": "Le dragon de papier — se replie à plat, porte des notes écrites et respire suffisamment de flamme pour sceller la cire."
+    },
+    {
+      "weight": 1,
+      "value": "Ghost MUE — passe à travers les parois minces et devient visible après avoir mangé du fromage."
+    },
+    {
+      "weight": 1,
+      "value": "Nuage Pup — un canin flottant fait de brouillard qui peut cacher brièvement le visage d'une personne."
+    },
+    {
+      "weight": 1,
+      "value": "Élémentaire de galets — une créature en pierre de taille poing capable de sentir les tunnels à proximité et travaillé maçonnerie."
+    },
+    {
+      "weight": 1,
+      "value": "Papillon de lune — absorbe les faibles résidus magiques et les lueurs en présence d'enchantements actifs."
+    }
+  ]
+}

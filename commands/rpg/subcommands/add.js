@@ -1,41 +1,41 @@
 const { MessageFlags } = require('discord.js');
 const characterStore = require('../../../services/characterStore');
+const { getLocale, localizeDescription, t } = require('../../../util/i18n');
+
+const descriptionKey = 'rpg.add.description';
 
 module.exports = {
 	name: 'add',
-	description: 'Create a blank character sheet with a stable CharacterKey',
+	description: t('en', descriptionKey),
+	descriptionKey,
 	usage: '/rpg add character-key:<new key>',
 	helpOrder: 20,
-	configure: command => command
-		.setName('add')
-		.setDescription('Create a blank character sheet with a stable CharacterKey')
-		.addStringOption(option => option
-			.setName('character-key')
-			.setDescription('Unique save key, make it short and remember it.')
+	configure: command => localizeDescription(command.setName('add'), descriptionKey)
+		.addStringOption(option => localizeDescription(
+			option.setName('character-key'),
+			'rpg.add.keyOption',
+		)
 			.setMinLength(1)
 			.setMaxLength(50)
 			.setRequired(true)),
-	async execute({ interaction }) {
+	async execute({ config, interaction }) {
+		const locale = getLocale(config, interaction.guildId);
 		const characterKey = interaction.options.getString('character-key', true);
 		try {
 			await characterStore.createCharacter(characterKey, interaction.user.id);
-			await interaction.reply(
-				`Character with key \`${characterKey}\` was created. `
-				+ 'This CharacterKey cannot be changed. Use `/rpg set` with a field '
-				+ 'to open its prefilled private form.',
-			);
+			await interaction.reply(t(locale, 'rpg.add.success', { key: characterKey }));
 		}
 		catch (error) {
 			if (error.code === 'EEXIST') {
 				await interaction.reply({
-					content: 'A character with that key already exists.',
+					content: t(locale, 'errors.characterExists'),
 					flags: MessageFlags.Ephemeral,
 				});
 				return;
 			}
 			if (error.code === 'INVALID_CHARACTER_NAME') {
 				await interaction.reply({
-					content: error.message,
+					content: t(locale, 'errors.invalidCharacterKey'),
 					flags: MessageFlags.Ephemeral,
 				});
 				return;

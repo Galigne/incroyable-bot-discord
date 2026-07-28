@@ -1,11 +1,12 @@
 const { characterEditError } = require('./characterValidation');
+const { t } = require('../../util/i18n');
 
-function dealDamage(character, damageAmount, piercing = false) {
+function dealDamage(character, damageAmount, piercing = false, locale = 'en') {
 	if (!Number.isSafeInteger(damageAmount) || damageAmount <= 0) {
-		throw characterEditError('Damage must be a positive whole number.');
+		throw characterEditError(t(locale, 'errors.damageInvalid'));
 	}
 	if (typeof piercing !== 'boolean') {
-		throw characterEditError('Piercing must be true or false.');
+		throw characterEditError(t(locale, 'errors.piercingInvalid'));
 	}
 
 	const availableAr = Math.max(0, character.resources.ar.current);

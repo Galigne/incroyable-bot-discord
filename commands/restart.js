@@ -2,21 +2,27 @@ const {
 	InteractionContextType,
 	SlashCommandBuilder,
 } = require('discord.js');
+const { getLocale, localizeDescription, t } = require('../util/i18n');
+
+const descriptionKey = 'commands.restart.description';
 
 module.exports = {
 	name: 'restart',
-	description: 'Reconnect the bot to Discord',
+	description: t('en', descriptionKey),
+	descriptionKey,
 	usage: '/restart',
 	helpOrder: 70,
 	access: {
 		role: 'moderator',
 	},
-	data: new SlashCommandBuilder()
+	data: localizeDescription(new SlashCommandBuilder()
 		.setName('restart')
-		.setDescription('Reconnect the bot to Discord')
-		.setContexts(InteractionContextType.Guild),
-	async execute({ client, interaction, token }) {
-		await interaction.reply('Reconnecting...');
+		.setContexts(InteractionContextType.Guild), descriptionKey),
+	async execute({ client, config, interaction, token }) {
+		await interaction.reply(t(
+			getLocale(config, interaction.guildId),
+			'commands.restart.reply',
+		));
 		client.destroy();
 		await client.login(token);
 	},

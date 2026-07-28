@@ -4,24 +4,27 @@ const {
 	SlashCommandBuilder,
 } = require('discord.js');
 const { filterAutocompleteChoices } = require('../util/autocomplete');
+const { getLocale, localizeDescription, t } = require('../util/i18n');
 
 const COMMON_PURGE_AMOUNTS = [2, 5, 10, 25, 50, 100];
+const descriptionKey = 'commands.purge.description';
 
 module.exports = {
 	name: 'purge',
-	description: 'Delete recent messages from the current channel',
+	description: t('en', descriptionKey),
+	descriptionKey,
 	usage: '/purge amount:<2-100>',
 	helpOrder: 60,
 	access: {
 		role: 'owner',
 	},
-	data: new SlashCommandBuilder()
+	data: localizeDescription(new SlashCommandBuilder()
 		.setName('purge')
-		.setDescription('Delete recent messages from the current channel')
-		.setContexts(InteractionContextType.Guild)
-		.addIntegerOption(option => option
-			.setName('amount')
-			.setDescription('Number of recent messages to delete')
+		.setContexts(InteractionContextType.Guild), descriptionKey)
+		.addIntegerOption(option => localizeDescription(
+			option.setName('amount'),
+			'commands.purge.amount',
+		)
 			.setMinValue(2)
 			.setMaxValue(100)
 			.setAutocomplete(true)
@@ -33,11 +36,12 @@ module.exports = {
 			focused,
 		));
 	},
-	async execute({ interaction }) {
+	async execute({ config, interaction }) {
+		const locale = getLocale(config, interaction.guildId);
 		const deleteCount = interaction.options.getInteger('amount', true);
 		const deleted = await interaction.channel.bulkDelete(deleteCount, true);
 		await interaction.reply({
-			content: `Deleted ${deleted.size} recent messages.`,
+			content: t(locale, 'commands.purge.success', { count: deleted.size }),
 			flags: MessageFlags.Ephemeral,
 		});
 	},
