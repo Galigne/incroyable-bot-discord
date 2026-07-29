@@ -6,6 +6,9 @@ const {
 	createCharacterHealResponse,
 } = require('../../../util/characterCommandResponses');
 const { replyToCharacterError } = require('../../../util/characterCommandErrors');
+const {
+	createCharacterHistoryContext,
+} = require('../../../util/characterHistoryContext');
 const { getLocale } = require('../../../util/i18n');
 
 module.exports = {
@@ -20,6 +23,7 @@ module.exports = {
 				resource,
 				percentage,
 				currentCharacter => canManageCharacter(interaction, currentCharacter, config),
+				createCharacterHistoryContext(interaction, config),
 			);
 			await interaction.reply(createCharacterHealResponse(result, locale));
 		}

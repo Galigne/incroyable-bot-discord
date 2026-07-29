@@ -10,10 +10,16 @@ const replyableErrorCodes = new Set([
 	'EEXIST',
 	'ENOENT',
 	'INVALID_CHARACTER_EDIT',
+	'INVALID_CHARACTER_HISTORY',
+	'INVALID_CHARACTER_HISTORY_SNAPSHOT',
 	'INVALID_CHARACTER_NAME',
 	'INVALID_RANDOM_CHARACTER',
+	'NO_CHARACTER_HISTORY',
 	'NOT_CHARACTER_EDITOR',
 	'NOT_CHARACTER_OWNER',
+	'UNSUPPORTED_CHARACTER_HISTORY_SCHEMA',
+	'CHARACTER_HISTORY_CONSISTENCY_FAILED',
+	'CHARACTER_HISTORY_PERSISTENCE_FAILED',
 ]);
 
 async function replyToCharacterError(interaction, error, locale = 'en') {
@@ -25,8 +31,23 @@ async function replyToCharacterError(interaction, error, locale = 'en') {
 		EEXIST: t(locale, 'errors.characterExists'),
 		ENOENT: t(locale, 'errors.characterMissing'),
 		INVALID_CHARACTER_NAME: t(locale, 'errors.invalidCharacterKey'),
+		INVALID_CHARACTER_HISTORY: t(locale, 'rpg.undo.errors.invalidBackup'),
+		INVALID_CHARACTER_HISTORY_SNAPSHOT: t(locale, 'rpg.undo.errors.invalidBackup'),
+		NO_CHARACTER_HISTORY: t(locale, 'rpg.undo.errors.noHistory'),
 		NOT_CHARACTER_EDITOR: t(locale, 'errors.characterEditor'),
 		NOT_CHARACTER_OWNER: t(locale, 'errors.characterOwnerDelete'),
+		UNSUPPORTED_CHARACTER_HISTORY_SCHEMA: t(
+			locale,
+			'rpg.undo.errors.unsupportedSchema',
+		),
+		CHARACTER_HISTORY_CONSISTENCY_FAILED: t(
+			locale,
+			'rpg.undo.errors.operationFailed',
+		),
+		CHARACTER_HISTORY_PERSISTENCE_FAILED: t(
+			locale,
+			'rpg.undo.errors.operationFailed',
+		),
 	};
 	const response = error.translationKey
 		? translateCharacterOutcome(error, locale)

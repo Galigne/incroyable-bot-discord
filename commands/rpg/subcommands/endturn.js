@@ -6,6 +6,9 @@ const {
 	createEndTurnResponse,
 } = require('../../../util/characterCommandResponses');
 const { replyToCharacterError } = require('../../../util/characterCommandErrors');
+const {
+	createCharacterHistoryContext,
+} = require('../../../util/characterHistoryContext');
 const { getLocale } = require('../../../util/i18n');
 
 module.exports = {
@@ -16,6 +19,7 @@ module.exports = {
 			const result = await endCharacterTurn(
 				characterName,
 				currentCharacter => canManageCharacter(interaction, currentCharacter, config),
+				createCharacterHistoryContext(interaction, config),
 			);
 			await interaction.reply(createEndTurnResponse(result, locale));
 		}

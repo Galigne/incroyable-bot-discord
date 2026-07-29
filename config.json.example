@@ -7,5 +7,8 @@
   },
   "channels": {
     "teamVoice": "Optional. The Discord voice channel ID that triggers local audio playback. Remove this field, or the entire channels object, to disable the trigger."
+  },
+  "characterHistory": {
+    "maxEntries": "Optional. Positive whole-number limit for retained pre-change snapshots per character. Defaults to 3 when omitted; changes take effect for later history operations after /reload."
   }
 }

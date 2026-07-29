@@ -5,6 +5,7 @@ const { normalizeLocale, t } = require('./i18n');
 const SUPPORTED_LOCALES = new Set(['en', 'fr']);
 const ROLE_KEYS = new Set(['dm', 'moderator']);
 const DEFAULT_CONFIG_PATH = path.join(__dirname, '..', 'config.json');
+const DEFAULT_CHARACTER_HISTORY_MAX_ENTRIES = 3;
 
 class ConfigurationError extends Error {
 	constructor(field, reason = 'missing') {
@@ -51,6 +52,18 @@ function validateConfig(config) {
 			requireNonEmptyString(config.channels, 'teamVoice', 'channels.teamVoice');
 		}
 	}
+	if (config.characterHistory !== undefined) {
+		if (
+			!config.characterHistory
+			|| typeof config.characterHistory !== 'object'
+			|| Array.isArray(config.characterHistory)
+		) {
+			throw new ConfigurationError('characterHistory', 'invalid');
+		}
+		if (Object.hasOwn(config.characterHistory, 'maxEntries')) {
+			getCharacterHistoryMaxEntries(config);
+		}
+	}
 	return config;
 }
 
@@ -86,11 +99,31 @@ function requireNonEmptyString(object, property, field = property) {
 	}
 }
 
+function getCharacterHistoryMaxEntries(config = {}) {
+	const hasConfiguredLimit = (
+		config.characterHistory
+		&& typeof config.characterHistory === 'object'
+		&& Object.hasOwn(config.characterHistory, 'maxEntries')
+	);
+	const maxEntries = hasConfiguredLimit
+		? config.characterHistory.maxEntries
+		: DEFAULT_CHARACTER_HISTORY_MAX_ENTRIES;
+	if (!Number.isInteger(maxEntries) || maxEntries <= 0) {
+		throw new ConfigurationError(
+			'characterHistory.maxEntries',
+			'expected a positive integer',
+		);
+	}
+	return maxEntries;
+}
+
 module.exports = {
 	ConfigurationError,
+	DEFAULT_CHARACTER_HISTORY_MAX_ENTRIES,
 	DEFAULT_CONFIG_PATH,
 	SUPPORTED_LOCALES,
 	getConfigurationErrorMessage,
+	getCharacterHistoryMaxEntries,
 	loadConfig,
 	reloadConfig,
 	validateConfig,

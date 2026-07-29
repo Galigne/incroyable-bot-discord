@@ -70,6 +70,12 @@ saves.
   character creation, mutation, and deletion.
 - `services/atomicJsonFile.js`: same-directory temporary-file serialization and
   atomic publication for character saves.
+- `services/characterStoragePaths.js`: active save and `.history` path derivation
+  from the same configured save directory.
+- `services/characterHistoryStore.js`: bounded pre-change history documents,
+  snapshot validation, stack rotation, and undo preparation.
+- `services/characterPersistenceTransaction.js`: ordered two-file commits and
+  rollback for active saves and history documents.
 - `services/characterSaveSchema.js`: owns the current character-save schema version
   and validates raw save metadata before model hydration.
 - `services/characterFieldCatalog.js`: canonical character field identities,
@@ -221,6 +227,15 @@ same-directory temporary file before publication; exclusive creation must never
 replace an existing save. Always release and discard unused keyed queues after
 success or failure.
 
+History-backed mutations and undo must keep both the active character state and
+the `.history/<CharacterKey>.json` state inside that same critical section. Prepare
+and serialize both results before the first write. If the second file operation
+fails, roll back the first; log an unrecoverable rollback failure without exposing
+filesystem details in Discord. History documents are oldest-to-newest stacks of
+complete pre-change character saves with `createdAt`, `actorId`, and one of
+`set`, `damage`, `heal`, `end-turn`, or `delete`. Never add rejected, unauthorized,
+invalid, or failed operations to history.
+
 For every non-trivial command feature:
 
 1. Define a plain service API for the feature behavior.
@@ -332,6 +347,7 @@ Permissions:
 
 - Anyone with normal bot access can view character sheets.
 - The creator may set, delete, heal, damage, and end turns for their character.
+- The creator may undo retained changes for their active or deleted character.
 - The configured DM role may perform those actions on every character and may use
   `/gen` and `/gen-char`.
 - The configured moderator role may use `/say`, `/purge`, and `/reload`.
@@ -350,7 +366,11 @@ routing, handlers, metadata, mechanics, or models still require manually restart
 `node index.js`.
 
 `config.json` requires `locale`, `botUserId`, `roles.dm`, and `roles.moderator`.
-`channels.teamVoice` is optional. Never configure an owner ID or owner role.
+`channels.teamVoice` is optional. `characterHistory.maxEntries` is optional,
+defaults to `3`, and must be a positive integer. History operations must obtain the
+active configuration value supplied to the command so `/reload` changes later
+rotation and undo behavior without a process restart. Never configure an owner ID
+or owner role.
 
 Resources and display:
 
@@ -364,6 +384,28 @@ Resources and display:
 - `/damage` applies positive whole-number damage to current AR first, then current
   HP. With `piercing:true`, it bypasses AR. Piercing defaults to false.
 - `/end-turn` restores current AP and MD to maximum.
+
+## Character history and undo
+
+Active saves remain directly under `save/`; history lives separately under
+`save/.history/`, or under the equivalent directory derived from
+`INCREDIBLE_BOT_SAVE_DIRECTORY` in tests. Each history document contains an
+oldest-to-newest `entries` stack. Normal character listing and autocomplete must
+not traverse `.history`; only the `/undo` provider may suggest history-backed keys.
+
+Successful `/set` modal submissions, `/damage`, `/heal`, `/end-turn`, and `/delete`
+push the complete schema-versioned pre-change state. Retain the newest
+`characterHistory.maxEntries` entries and remove the oldest excess entries. Apply a
+reduced limit the next time that character’s history is pushed or popped. Preserve
+history after deletion.
+
+`/undo character-key:<key>` pops and validates the newest snapshot, restores it as
+the active save, and never pushes the displaced state. Repeated undo therefore walks
+backward and cannot alternate indefinitely; redo and history browsing are
+intentionally unsupported. Authorize active characters from their current save and
+deleted-character restoration from the stored snapshot. The creator, configured DM
+role, and actual Discord server owner may undo. Autocomplete follows those same
+rules and includes valid active and deleted CharacterKeys with usable history.
 
 ## Random generators
 

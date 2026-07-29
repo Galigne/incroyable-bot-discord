@@ -5,15 +5,34 @@ const path = require('node:path');
 async function writeJsonAtomically(
 	destinationPath,
 	data,
+	options = {},
+) {
+	return writeSerializedJsonAtomically(
+		destinationPath,
+		serializeJson(data),
+		options,
+	);
+}
+
+function serializeJson(data) {
+	const serializedData = JSON.stringify(data, null, 2);
+	if (serializedData === undefined) {
+		throw new TypeError('Data could not be serialized to JSON.');
+	}
+	return serializedData;
+}
+
+async function writeSerializedJsonAtomically(
+	destinationPath,
+	serializedData,
 	{
 		exclusive = false,
 		fileSystem = fs,
 		uniqueId = randomUUID,
 	} = {},
 ) {
-	const serializedData = JSON.stringify(data, null, 2);
-	if (serializedData === undefined) {
-		throw new TypeError('Data could not be serialized to JSON.');
+	if (typeof serializedData !== 'string') {
+		throw new TypeError('Serialized JSON data must be a string.');
 	}
 
 	const destinationDirectory = path.dirname(destinationPath);
@@ -66,5 +85,7 @@ async function removeTemporaryFile(fileSystem, temporaryPath, originalError) {
 }
 
 module.exports = {
+	serializeJson,
 	writeJsonAtomically,
+	writeSerializedJsonAtomically,
 };

@@ -185,6 +185,25 @@
       "fieldOption": "Champ à modifier",
       "behavior": "Ouvre un formulaire privé prérempli avec la valeur sauvegardée du champ choisi. La liste complète des champs modifiables figure ci-dessus, regroupée par section ; saisissez une partie du libellé ou du chemin pour filtrer l’autocomplétion. Les champs imbriqués utilisent des chemins tels que `race.name`, `stats.strength` ou `hp.current`. Les collections multilignes remplacent tout leur contenu, à raison d’une entrée par ligne ; les LOI utilisent `Nom: Niveau: Description`. Un texte vide efface les champs qui l’autorisent. Les PA doivent rester des nombres entiers avec `0 ≤ current ≤ max ≤ 10`. Seuls le créateur, un MJ ou le propriétaire du serveur peuvent modifier la fiche."
     },
+    "undo": {
+      "description": "Restaurer le plus récent état antérieur conservé d’un personnage",
+      "characterOption": "Personnage dont la sauvegarde la plus récente sera restaurée",
+      "success": "Le personnage `{{key}}` a été restauré. La sauvegarde **{{action}}**, créée {{timestamp}} par {{actor}}, a été consommée.",
+      "behavior": "Restaure et consomme la sauvegarde disponible la plus récente d’un personnage. Chaque opération `/set`, `/damage`, `/heal`, `/end-turn` ou `/delete` réussie enregistre l’état complet du personnage avant la modification. Trois sauvegardes sont conservées par défaut ; la configuration serveur `characterHistory.maxEntries` peut modifier cette limite, et `/reload` applique la nouvelle valeur aux opérations d’historique suivantes. Des annulations répétées remontent les anciens états conservés, y compris après une suppression. L’annulation n’enregistre pas l’état remplacé et aucune fonction de rétablissement n’est prise en charge. Seuls le créateur, un MJ ou le propriétaire du serveur peuvent l’utiliser.",
+      "actions": {
+        "set": "modification de champ",
+        "damage": "dégâts",
+        "heal": "soins",
+        "endTurn": "fin de tour",
+        "delete": "suppression"
+      },
+      "errors": {
+        "noHistory": "Aucune sauvegarde n’est disponible pour ce personnage.",
+        "invalidBackup": "La sauvegarde la plus récente du personnage est invalide et ne peut pas être restaurée.",
+        "unsupportedSchema": "La sauvegarde la plus récente utilise un schéma non pris en charge et ne peut pas être restaurée.",
+        "operationFailed": "Le personnage et son historique n’ont pas pu être mis à jour en toute sécurité. Aucune nouvelle tentative n’a été effectuée."
+      }
+    },
     "editor": {
       "unknownField": "Champ modifiable inconnu : **{{field}}**.",
       "tooLarge": "Ce champ dépasse la limite de 4 000 caractères imposée par Discord.",
@@ -281,7 +300,7 @@
     "characterExists": "Cette CharacterKey est déjà utilisée.",
     "characterMissing": "Personnage introuvable.",
     "characterOwnerDelete": "Seuls le créateur du personnage, un MJ ou le propriétaire du serveur peuvent le supprimer.",
-    "characterEditor": "Seuls le créateur du personnage et les MJ peuvent modifier cette fiche.",
+    "characterEditor": "Seuls le créateur du personnage, un MJ ou le propriétaire du serveur peuvent le gérer.",
     "invalidCharacterKey": "Une CharacterKey doit commencer et se terminer par une lettre ou un chiffre. Elle peut contenir des lettres, des chiffres, des points, des tirets et des tirets bas.",
     "unknownEditField": "Champ inconnu : {{field}}.",
     "valueRequired": "Valeur requise pour {{field}}.",

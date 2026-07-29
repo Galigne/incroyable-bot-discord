@@ -138,6 +138,41 @@ test('/help command:get explains summary, detailed field, and autocomplete behav
 	}
 });
 
+test('/help command:undo explains retention, consumption, and the lack of redo', () => {
+	for (const [locale, expectedBehavior] of [
+		[
+			'en',
+			[
+				'complete pre-change character state',
+				'Three backups are retained by default',
+				'characterHistory.maxEntries',
+				'Undo does not save the displaced state',
+				'redo is not supported',
+			],
+		],
+		[
+			'fr',
+			[
+				'état complet du personnage avant la modification',
+				'Trois sauvegardes sont conservées par défaut',
+				'characterHistory.maxEntries',
+				'L’annulation n’enregistre pas l’état remplacé',
+				'aucune fonction de rétablissement',
+			],
+		],
+	]) {
+		const rendered = renderDetail(
+			'undo',
+			createInteraction('regular'),
+			locale,
+		);
+		assert.ok(rendered.includes('`/undo character-key:<key>`'), locale);
+		for (const behavior of expectedBehavior) {
+			assert.ok(rendered.includes(behavior), `${locale}: ${behavior}`);
+		}
+	}
+});
+
 test('/help rejects unknown and unavailable commands', () => {
 	for (const commandName of ['missing', 'gen']) {
 		const response = createHelpResponse({

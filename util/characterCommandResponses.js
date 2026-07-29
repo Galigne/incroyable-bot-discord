@@ -17,6 +17,19 @@ function createCharacterDeletedResponse(characterKey, locale = 'en') {
 	return t(locale, 'rpg.delete.success', { key: characterKey });
 }
 
+function createCharacterUndoResponse(result, locale = 'en') {
+	const actionKey = result.action === 'end-turn'
+		? 'endTurn'
+		: result.action;
+	const unixTimestamp = Math.floor(Date.parse(result.createdAt) / 1_000);
+	return t(locale, 'rpg.undo.success', {
+		action: t(locale, `rpg.undo.actions.${actionKey}`),
+		actor: `<@${result.actorId}>`,
+		key: result.character.key,
+		timestamp: `<t:${unixTimestamp}:F>`,
+	});
+}
+
 function createCharacterDamageResponse(result, locale = 'en') {
 	const { character, damage, damageAmount } = result;
 	const damageBreakdown = damage.piercing
@@ -107,6 +120,7 @@ module.exports = {
 	createCharacterEditResponse,
 	createCharacterGetResponse,
 	createCharacterHealResponse,
+	createCharacterUndoResponse,
 	createEndTurnResponse,
 	createGeneratedCharacterResponse,
 };

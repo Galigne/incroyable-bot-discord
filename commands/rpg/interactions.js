@@ -17,6 +17,9 @@ const {
 	replyToCharacterError,
 } = require('../../util/characterCommandErrors');
 const {
+	createCharacterHistoryContext,
+} = require('../../util/characterHistoryContext');
+const {
 	createInteractionSession,
 	deleteInteractionSession,
 	getInteractionSession,
@@ -90,6 +93,7 @@ async function handleRpgInteraction(interaction, config) {
 			session.fieldName,
 			interaction.fields.getTextInputValue('field-value'),
 			currentCharacter => canManageCharacter(interaction, currentCharacter, config),
+			createCharacterHistoryContext(interaction, config),
 		);
 		deleteInteractionSession(session.id);
 		await interaction.reply(createCharacterEditResponse(result, locale));

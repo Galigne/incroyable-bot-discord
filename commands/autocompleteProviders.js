@@ -3,7 +3,10 @@ const {
 	getViewableFields,
 } = require('../services/characterFieldCatalog');
 const { filterAutocompleteChoices } = require('../util/autocomplete');
-const { hasDmPermission } = require('../util/authorization');
+const {
+	canManageCharacter,
+	hasDmPermission,
+} = require('../util/authorization');
 const {
 	OPTION_VALUE_PROVIDERS,
 	getCommandOptionValues,
@@ -16,7 +19,10 @@ const {
 	getCommandLookupValue,
 } = require('../util/helpResponses');
 const { t } = require('../util/i18n');
-const { getCharacterChoices } = require('./rpg/autocomplete');
+const {
+	getCharacterChoices,
+	getUndoableCharacterChoices,
+} = require('./rpg/autocomplete');
 
 async function getAutocompleteChoices(metadata, option, context) {
 	const provider = AUTOCOMPLETE_PROVIDERS[option.autocomplete.provider];
@@ -42,6 +48,7 @@ const AUTOCOMPLETE_PROVIDERS = {
 	characters: (option, context, focused) => getCharacterChoices(focused.value),
 	'help-commands': getHelpCommandChoices,
 	'manageable-characters': getManageableCharacterChoices,
+	'undoable-characters': getUndoableCharacters,
 	'viewable-fields': getViewableFieldChoices,
 };
 
@@ -126,6 +133,17 @@ function getManageableCharacterChoices(option, context, focused) {
 		hasDmPermission(context.interaction, context.config)
 			? {}
 			: { creatorId: context.interaction.user.id },
+	);
+}
+
+function getUndoableCharacters(option, context, focused) {
+	return getUndoableCharacterChoices(
+		focused.value,
+		character => canManageCharacter(
+			context.interaction,
+			character,
+			context.config,
+		),
 	);
 }
 

@@ -14,8 +14,12 @@ async function createCharacter(characterKey, creatorId) {
 	return characterStore.createCharacter(characterKey, creatorId);
 }
 
-async function deleteCharacter(characterKey, canManage) {
-	return characterStore.deleteCharacter(characterKey, canManage);
+async function deleteCharacter(characterKey, canManage, operationContext) {
+	return characterStore.deleteCharacter(
+		characterKey,
+		canManage,
+		createHistoryContext('delete', operationContext),
+	);
 }
 
 async function getCharacter(characterKey) {
@@ -26,7 +30,17 @@ async function listCharacters(options) {
 	return characterStore.listCharacters(options);
 }
 
-async function damageCharacter(characterKey, damageAmount, piercing, canManage) {
+async function listUndoableCharacters(canManage, options) {
+	return characterStore.listUndoableCharacters(canManage, options);
+}
+
+async function damageCharacter(
+	characterKey,
+	damageAmount,
+	piercing,
+	canManage,
+	operationContext,
+) {
 	let damage;
 	const character = await characterStore.updateCharacter(
 		characterKey,
@@ -34,11 +48,18 @@ async function damageCharacter(characterKey, damageAmount, piercing, canManage) 
 		currentCharacter => {
 			damage = dealDamage(currentCharacter, damageAmount, piercing);
 		},
+		createHistoryContext('damage', operationContext),
 	);
 	return { character, damage, damageAmount };
 }
 
-async function healCharacter(characterKey, resource, percentage, canManage) {
+async function healCharacter(
+	characterKey,
+	resource,
+	percentage,
+	canManage,
+	operationContext,
+) {
 	let changes;
 	const character = await characterStore.updateCharacter(
 		characterKey,
@@ -46,15 +67,17 @@ async function healCharacter(characterKey, resource, percentage, canManage) {
 		currentCharacter => {
 			changes = restoreHealingResources(currentCharacter, resource, percentage);
 		},
+		createHistoryContext('heal', operationContext),
 	);
 	return { character, changes, percentage };
 }
 
-async function endCharacterTurn(characterKey, canManage) {
+async function endCharacterTurn(characterKey, canManage, operationContext) {
 	const character = await characterStore.updateCharacter(
 		characterKey,
 		canManage,
 		resetTurnResources,
+		createHistoryContext('end-turn', operationContext),
 	);
 	return { character };
 }
@@ -88,6 +111,7 @@ async function updateEditableCharacter(
 	fieldName,
 	value,
 	canManage,
+	operationContext,
 ) {
 	let editOutcome;
 	const character = await characterStore.updateCharacter(
@@ -96,8 +120,21 @@ async function updateEditableCharacter(
 		currentCharacter => {
 			editOutcome = setEditableFieldValue(currentCharacter, fieldName, value);
 		},
+		createHistoryContext('set', operationContext),
 	);
 	return { character, editOutcome };
+}
+
+async function undoCharacter(characterKey, canManage, operationContext) {
+	return characterStore.undoCharacter(characterKey, canManage, {
+		maxEntries: operationContext.maxEntries,
+	});
+}
+
+function createHistoryContext(action, operationContext) {
+	return operationContext
+		? { ...operationContext, action }
+		: null;
 }
 
 function characterAuthorizationError() {
@@ -117,5 +154,7 @@ module.exports = {
 	getEditableCharacterField,
 	healCharacter,
 	listCharacters,
+	listUndoableCharacters,
+	undoCharacter,
 	updateEditableCharacter,
 };

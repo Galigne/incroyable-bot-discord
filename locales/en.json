@@ -185,6 +185,25 @@
       "fieldOption": "Field to edit",
       "behavior": "Opens one private modal prefilled with the selected saved field. The complete editable-field list appears above, grouped by section; type part of a field label or path to filter autocomplete. Nested fields use paths such as `race.name`, `stats.strength`, or `hp.current`. Multiline collections replace their full content with one entry per line; RULEs use `Name: Level: Description`. Empty text clears fields that allow it. AP must remain whole numbers with `0 ≤ current ≤ max ≤ 10`. Only the character creator, a DM, or the server owner may edit the sheet."
     },
+    "undo": {
+      "description": "Restore the newest retained pre-change character snapshot",
+      "characterOption": "Character whose newest backup will be restored",
+      "success": "Restored character `{{key}}`. The **{{action}}** backup created {{timestamp}} by {{actor}} was consumed.",
+      "behavior": "Restores and consumes the newest available backup for a character. Successful `/set`, `/damage`, `/heal`, `/end-turn`, and `/delete` operations each save the complete pre-change character state. Three backups are retained by default; the server’s `characterHistory.maxEntries` configuration can change that limit, and `/reload` applies the new value to later history operations. Repeated undos walk backward through older retained states, including restoration after deletion. Undo does not save the displaced state, and redo is not supported. Only the character creator, a DM, or the server owner may use it.",
+      "actions": {
+        "set": "field edit",
+        "damage": "damage",
+        "heal": "healing",
+        "endTurn": "end-turn",
+        "delete": "deletion"
+      },
+      "errors": {
+        "noHistory": "No backup is available for that character.",
+        "invalidBackup": "The newest character backup is invalid and cannot be restored.",
+        "unsupportedSchema": "The newest character backup uses an unsupported save schema and cannot be restored.",
+        "operationFailed": "The character and its history could not be updated safely. No retry was attempted."
+      }
+    },
     "editor": {
       "unknownField": "Unknown editable field: **{{field}}**.",
       "tooLarge": "This field is larger than Discord’s 4,000-character modal limit.",
@@ -281,7 +300,7 @@
     "characterExists": "A character with that key already exists.",
     "characterMissing": "That character does not exist.",
     "characterOwnerDelete": "Only the character creator, a DM, or the server owner can delete it.",
-    "characterEditor": "Only the character creator or a DM can edit it.",
+    "characterEditor": "Only the character creator, a DM, or the server owner can manage it.",
     "invalidCharacterKey": "Character keys must start and end with a letter or number and may contain letters, numbers, periods, hyphens, and underscores.",
     "unknownEditField": "Unknown field: {{field}}.",
     "valueRequired": "A value is required for {{field}}.",

@@ -1,5 +1,6 @@
 const {
 	listCharacters,
+	listUndoableCharacters,
 } = require('../../services/characterApplicationService');
 const { filterAutocompleteChoices } = require('../../util/autocomplete');
 
@@ -19,4 +20,20 @@ async function getCharacterChoices(focusedValue, options = {}) {
 	);
 }
 
-module.exports = { getCharacterChoices };
+async function getUndoableCharacterChoices(focusedValue, canManage) {
+	const characters = await listUndoableCharacters(canManage);
+	return filterAutocompleteChoices(
+		characters.map(character => ({
+			name: character.displayName === character.key
+				? character.key
+				: `${character.displayName} (${character.key})`,
+			value: character.key,
+		})),
+		focusedValue,
+	);
+}
+
+module.exports = {
+	getCharacterChoices,
+	getUndoableCharacterChoices,
+};

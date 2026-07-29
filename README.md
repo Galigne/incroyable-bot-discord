@@ -52,6 +52,9 @@ Set the required runtime language in `config.json`. The complete configuration i
     "dm": "YOUR_DM_ROLE_ID",
     "moderator": "YOUR_MODERATOR_ROLE_ID"
   },
+  "characterHistory": {
+    "maxEntries": 3
+  },
   "channels": {
     "teamVoice": "OPTIONAL_TEAM_VOICE_CHANNEL_ID"
   }
@@ -61,6 +64,9 @@ Set the required runtime language in `config.json`. The complete configuration i
 `locale`, `botUserId`, `roles.dm`, and `roles.moderator` are required. The only
 supported locale values are `en` and `fr`; invalid or missing values stop startup
 with a clear error. `channels.teamVoice` and the `channels` object are optional.
+`characterHistory.maxEntries` is also optional, defaults to `3`, and must be a
+positive whole number when present. Changing it and running `/reload` changes the
+limit used by subsequent history operations without restarting the process.
 The guide file explains what belongs in each field and is never loaded by the bot.
 Do not configure an owner user or owner role: the bot reads the actual server owner
 from Discord.
@@ -85,11 +91,14 @@ Never commit `.env` or a Discord token. Reset any token that has previously been
 - `/damage character-key:<key> damage-amount:<number> [piercing]` — apply damage to AR, then HP
 - `/end-turn character-key:<key>` — restore AP and MD to their maximum values
 - `/delete character-key:<key>` — delete a character
+- `/undo character-key:<key>` — consume and restore the newest retained pre-change state
 
 Discord provides native validation and choices for constrained options.
 Autocomplete suggests commands the current user may access, existing CharacterKeys,
 settable fields, retrievable fields, generator categories, common dice expressions,
-levels, and common purge amounts. The private form opens immediately after
+levels, and common purge amounts. `/undo` autocomplete includes authorized active
+characters with history and authorized deleted characters whose history can restore
+them. The private form opens immediately after
 `/set` is submitted. Multiline
 fields accept free-form lines with optional leading dashes; RULEs use
 `Name: Level: Description`.
@@ -106,8 +115,9 @@ multiple groups, parentheses, and other arithmetic are not supported. Exact
 `1d2` and `1d20` rolls return their corresponding GIF only; all other expressions
 return the textual roll breakdown.
 
-Character creators can edit, delete, heal, damage, and end turns for their own
-sheets. Users with the configured DM role can perform those actions on every
+Character creators can edit, delete, heal, damage, end turns, and undo retained
+changes for their own sheets. Users with the configured DM role can perform those
+actions on every
 character and may use `/gen` and `/gen-char`. Users with the configured
 moderator role may use `/say`, `/purge`, and `/reload`. The actual Discord server
 owner, identified by Discord rather than configuration, may use every command and
@@ -126,6 +136,31 @@ The identifier supplied to `/add` remains the stable command/save key and cannot
 be edited. The sheet stores `firstName` and `lastName` separately for display.
 Keys may contain internal periods, hyphens, and underscores, such as `D.Robert`.
 
+## Character history and undo
+
+Successful `/set`, `/damage`, `/heal`, `/end-turn`, and `/delete` operations push
+the character’s complete pre-change save into
+`save/.history/<CharacterKey>.json`. When
+`INCREDIBLE_BOT_SAVE_DIRECTORY` is set, the `.history` directory is created under
+that test save directory instead. History documents contain an oldest-to-newest
+`entries` stack; each entry records its ISO timestamp, actor Discord ID, action,
+and complete schema-versioned character snapshot. Because history is stored in a
+subdirectory, it never appears in normal character listings or autocomplete.
+
+Each push keeps the newest configured number of entries and discards older excess
+entries. A lower limit is applied the next time that character’s history changes.
+`/undo` validates and consumes the newest entry, restores it atomically as the
+active character, and can recreate a deleted character. Repeated calls continue
+backward until the bounded stack is empty. Undo does not push the displaced state,
+so it cannot toggle between two states, and redo is not supported.
+
+Character and history writes share the existing per-CharacterKey queue. Both
+resulting JSON states are serialized before the first file operation. If the second
+file operation fails, the first is rolled back; an unrecoverable rollback failure
+is logged server-side while Discord receives only a localized, filesystem-neutral
+error. Rejected, unauthorized, invalid, and failed mutations do not intentionally
+create backups.
+
 Example workflows:
 
 ```text
@@ -137,6 +172,7 @@ Example workflows:
 /damage character-key:D.Robert damage-amount:25 piercing:false
 /heal character-key:D.Robert resource:both percentage:50
 /end-turn character-key:D.Robert
+/undo character-key:D.Robert
 ```
 
 Random characters use the rulebook's stat budget and nonlinear stat costs. Their
@@ -164,7 +200,7 @@ The full TTRPG rules are available in
 - `commands/autocompleteProviders.js`: shared metadata-selected autocomplete logic
 - `commands/rpg/subcommands/`: one behavior adapter per top-level RPG command
 - `services/`: Discord-independent application workflows, persistence, parsing,
-  validation, mechanics, and generation
+  validation, mechanics, generation, and bounded character-history transactions
 - `models/`: Discord-independent domain models
 - `util/`: Discord response/rendering adapters plus shared localization,
   authorization, autocomplete, and command-loading helpers

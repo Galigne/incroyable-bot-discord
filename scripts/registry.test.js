@@ -23,6 +23,7 @@ const RPG_COMMAND_NAMES = [
 	'roll',
 	'rules',
 	'set',
+	'undo',
 ];
 
 test('registry registers every RPG command at the top level without an rpg group', () => {
@@ -162,6 +163,7 @@ test('registry permission filtering delegates to the existing authorization serv
 		roll: 'everyone',
 		rules: 'everyone',
 		set: 'everyone',
+		undo: 'everyone',
 	});
 });
 

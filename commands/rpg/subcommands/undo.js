@@ -1,27 +1,25 @@
 const {
-	deleteCharacter,
+	undoCharacter,
 } = require('../../../services/characterApplicationService');
 const { canManageCharacter } = require('../../../util/authorization');
-const {
-	createCharacterDeletedResponse,
-} = require('../../../util/characterCommandResponses');
 const { replyToCharacterError } = require('../../../util/characterCommandErrors');
 const {
 	createCharacterHistoryContext,
 } = require('../../../util/characterHistoryContext');
-const { getLocale } = require('../../../util/i18n');
+const {
+	createCharacterUndoResponse,
+} = require('../../../util/characterCommandResponses');
 
 module.exports = {
-	async execute({ config, interaction }) {
-		const locale = getLocale(config, interaction.guildId);
-		const name = interaction.options.getString('character-key', true);
+	async execute({ config, interaction, locale }) {
+		const characterKey = interaction.options.getString('character-key', true);
 		try {
-			await deleteCharacter(
-				name,
+			const result = await undoCharacter(
+				characterKey,
 				character => canManageCharacter(interaction, character, config),
 				createCharacterHistoryContext(interaction, config),
 			);
-			await interaction.reply(createCharacterDeletedResponse(name, locale));
+			await interaction.reply(createCharacterUndoResponse(result, locale));
 		}
 		catch (error) {
 			if (!await replyToCharacterError(interaction, error, locale)) {

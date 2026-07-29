@@ -448,6 +448,30 @@ const COMMAND_METADATA = [
 		handler: './rpg/subcommands/delete',
 	},
 	{
+		id: 'undo',
+		name: 'undo',
+		registrationOrder: 15,
+		category: 'rpg',
+		permission: 'everyone',
+		descriptionKey: 'rpg.undo.description',
+		options: [
+			{
+				name: 'character-key',
+				type: 'string',
+				descriptionKey: 'rpg.undo.characterOption',
+				required: true,
+				autocomplete: { provider: 'undoable-characters' },
+			},
+		],
+		examples: ['/undo character-key:<key>'],
+		help: {
+			order: 75,
+			detailsKey: 'rpg.undo.behavior',
+		},
+		guildOnly: true,
+		handler: './rpg/subcommands/undo',
+	},
+	{
 		id: 'rules',
 		name: 'rules',
 		registrationOrder: 13,
