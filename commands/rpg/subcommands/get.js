@@ -15,7 +15,7 @@ module.exports = {
 		try {
 			const character = await getCharacter(name);
 			await interaction.reply(
-				createCharacterGetResponse(character, name, fieldName, locale),
+				createCharacterGetResponse(character, fieldName, locale),
 			);
 		}
 		catch (error) {

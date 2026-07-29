@@ -51,8 +51,7 @@ function createGeneratorResponse(result, requestedCategory, locale = 'en') {
 function createGeneratedEmbed(result, locale = 'en') {
 	const embed = new EmbedBuilder()
 		.setTitle(t(locale, 'rpg.gen.title', { category: result.category.name }))
-		.setColor('#FFD700')
-		.setFooter({ text: t(locale, 'rpg.gen.footer') });
+		.setColor('#FFD700');
 	if (typeof result.entry === 'string' || result.entry.value !== undefined) {
 		embed.setDescription(
 			typeof result.entry === 'string' ? result.entry : result.entry.value,

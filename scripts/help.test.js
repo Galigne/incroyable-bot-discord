@@ -107,6 +107,37 @@ test('/help command:set lists every localized editable field by section', () => 
 	}
 });
 
+test('/help command:get explains summary, detailed field, and autocomplete behavior', () => {
+	for (const [locale, expectedBehavior] of [
+		[
+			'en',
+			[
+				'Without `field`, posts the public character summary.',
+				'With `field`, displays one complete detailed field and its sub-fields.',
+				'Autocomplete lists CharacterKeys and supported views',
+			],
+		],
+		[
+			'fr',
+			[
+				'Sans `field`, publie le résumé public du personnage.',
+				'Avec `field`, affiche un champ complet et ses sous-champs.',
+				'L’autocomplétion propose les CharacterKeys et les vues prises en charge',
+			],
+		],
+	]) {
+		const rendered = renderDetail('get', createInteraction('regular'), locale);
+		assert.ok(rendered.includes('`/get character-key:<key>`'), locale);
+		assert.ok(
+			rendered.includes('`/get character-key:<key> field:<field>`'),
+			locale,
+		);
+		for (const behavior of expectedBehavior) {
+			assert.ok(rendered.includes(behavior), `${locale}: ${behavior}`);
+		}
+	}
+});
+
 test('/help rejects unknown and unavailable commands', () => {
 	for (const commandName of ['missing', 'gen']) {
 		const response = createHelpResponse({

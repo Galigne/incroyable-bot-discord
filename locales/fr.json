@@ -116,7 +116,6 @@
       "categoryOption": "Catégorie de génération",
       "unknownCategory": "Catégorie de génération inconnue : **{{category}}**. Utilisez `/help command:gen` pour consulter les détails.",
       "title": "{{category}} — résultat généré",
-      "footer": "Le MJ peut adapter ce résultat ou effectuer un nouveau tirage.",
       "behavior": "Sélectionne une entrée aléatoire pondérée dans la catégorie de génération localisée choisie. Chaque fichier JSON de génération devient disponible après le redémarrage du bot. La liste localisée complète des catégories figure ci-dessus ; saisissez une partie du nom ou de la valeur pour filtrer l’autocomplétion."
     },
     "genChar": {
@@ -126,7 +125,6 @@
       "levelOption": "Niveau du personnage ; tirage aléatoire de 1 à 10 si omis",
       "backgroundOption": "Background du PNJ ; tirage aléatoire si omis",
       "levelChoice": "Niveau {{level}}",
-      "footer": "{{keyLabel}} : {{key}}",
       "success": "Le personnage **{{name}}** a été généré avec la clé `{{key}}`.",
       "behavior": "Crée et sauvegarde un personnage aléatoire complet sous une CharacterKey unique. Le niveau doit être compris entre 1 et 10 et est aléatoire s’il est omis ; le Background est également facultatif et aléatoire par défaut. Les statistiques, ressources, LOI, armure, armes, objets, pièces d’or et éventuels effets d’état dépendent du niveau et des règles."
     },
@@ -135,8 +133,6 @@
       "characterOption": "Personnage à afficher",
       "fieldOption": "Champ détaillé facultatif",
       "unknownField": "Champ inconnu : **{{field}}**. Utilisez `/help command:get` pour consulter les détails.",
-      "keyFooter": "{{keyLabel}} : {{key}}",
-      "detailsFooter": "Utilisez `/get` avec l’option `field` pour afficher davantage de détails.",
       "behavior": "Sans `field`, publie le résumé public du personnage. Avec `field`, affiche un champ complet et ses sous-champs. L’autocomplétion propose les CharacterKeys et les vues prises en charge, notamment `name`, `race`, `personality`, `statistics`, `rules`, `status`, `equipment` et `inventory`."
     },
     "heal": {

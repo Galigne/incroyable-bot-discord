@@ -387,6 +387,33 @@ At present it:
 - Local MP3 playback remains supported. When a member joins the configured team
   voice channel, the bot plays `media/Poutouyemoun.mp3`.
 
+## Clarification and scope control
+
+Before making a repository change, inspect the relevant files and documentation to
+understand the request. Read-only investigation may continue without confirmation.
+If an instruction remains unclear or raises a question that could affect behavior,
+scope, or user-facing functionality, stop before editing and ask the user for
+clarification.
+
+Never add, remove, or modify user-facing functionality without explicit direction.
+Instructions in the user's request or in the repository's canonical documentation,
+including the rulebooks, count as explicit direction. Do not extend a request to
+similar commands, features, or use cases merely for consistency. For example, if
+the user requests a warning for `/purge` and `/restart`, do not also apply it to
+`/say`; ask whether its omission was intentional.
+
+Make the non-behavioral supporting changes required to implement an explicitly
+requested feature correctly, including tests, locale-key parity, command metadata,
+documentation, and internal wiring. If a supporting change could introduce
+additional behavior or materially broaden the requested scope, ask first.
+
+Do not follow a questionable instruction uncritically. If a request appears unsafe,
+inconsistent, technically unsound, harmful to maintainability, or likely to produce
+a poor user experience, stop before editing, explain the concern, propose a better
+solution, and ask the user to confirm the direction. Do not pause merely over
+personal taste or when the relevant behavior or data is explicitly defined by a
+canonical rulebook.
+
 ## Change methodology
 
 Use this workflow for every feature, behavior change, bug fix, or data update:

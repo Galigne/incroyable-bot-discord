@@ -1,6 +1,5 @@
 const { MessageFlags } = require('discord.js');
 const {
-	getCharacterFieldLabel,
 	getResourceAbbreviation,
 } = require('./characterDisplay');
 const {
@@ -68,7 +67,7 @@ function createEndTurnResponse(result, locale = 'en') {
 	});
 }
 
-function createCharacterGetResponse(character, characterKey, fieldName, locale = 'en') {
+function createCharacterGetResponse(character, fieldName, locale = 'en') {
 	const embed = fieldName
 		? createCharacterFieldEmbed(character, fieldName, locale)
 		: createCharacterSummaryEmbed(character, locale);
@@ -78,31 +77,16 @@ function createCharacterGetResponse(character, characterKey, fieldName, locale =
 			flags: MessageFlags.Ephemeral,
 		};
 	}
-	embed.setFooter({
-		text: fieldName
-			? t(locale, 'rpg.get.keyFooter', {
-				key: characterKey,
-				keyLabel: getCharacterFieldLabel(locale, 'key'),
-			})
-			: t(locale, 'rpg.get.detailsFooter'),
-	});
 	return { embeds: [embed] };
 }
 
 function createGeneratedCharacterResponse(character, locale = 'en') {
-	const embed = createCharacterSummaryEmbed(character, locale)
-		.setFooter({
-			text: t(locale, 'rpg.genChar.footer', {
-				key: character.key,
-				keyLabel: getCharacterFieldLabel(locale, 'key'),
-			}),
-		});
 	return {
 		content: t(locale, 'rpg.genChar.success', {
 			key: character.key,
 			name: character.displayName,
 		}),
-		embeds: [embed],
+		embeds: [createCharacterSummaryEmbed(character, locale)],
 	};
 }
 
