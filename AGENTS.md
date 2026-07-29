@@ -26,8 +26,13 @@ merely to make documentation match an implementation.
 - Run the complete offline validation with `npm test`.
 - The Discord token belongs only in `.env` as `DISCORD_TOKEN`. Never print, move,
   hard-code, or commit it.
-- The bot registers its global slash-command schema on startup. Discord may take a
-  short time to refresh global commands after a schema change.
+- The bot registers its complete slash-command schema through each connected
+  guild's command manager. Startup synchronizes every cached guild, and
+  `GuildCreate` synchronizes newly joined guilds.
+- The obsolete global command set is cleared by the guarded
+  `global-to-guild-commands-v1` migration. Its application-specific completion
+  marker lives under ignored `.runtime/` state; normal startup and `/reload` do not
+  register or repeatedly clear global commands.
 - Do not launch or leave the bot running merely to validate code. Prefer `npm test`
   unless live Discord behavior must be tested or the user explicitly asks to start it.
 
@@ -41,7 +46,7 @@ saves.
 
 ## Important repository structure
 
-- `index.js`: environment loading, client startup, global command registration, and
+- `index.js`: environment loading, client startup, guild command registration, and
   interaction/event routing.
 - `client/Client.js`: Discord client and gateway intents.
 - `commands/metadata.js`: the single source of truth for every top-level slash
@@ -313,13 +318,13 @@ Permissions:
 
 `/reload` replies ephemerally before lifecycle work, then validates and replaces
 configuration and localization data, clears generator caches, rebuilds and replaces
-the registry/command collection, refreshes global slash commands, disconnects
-tracked voice/audio resources, and reconnects the same Discord client. Each stage
-logs detailed errors and contributes only a localized success/failure status to the
-interaction response. Candidate configuration and localization data must validate
-before activation. Do not add event listeners during reload, create a second client,
-or clear the complete `require.cache`. Source-code changes to startup, routing,
-handlers, metadata, mechanics, or models still require manually restarting
+the registry/command collection, refreshes slash commands in every connected guild,
+disconnects tracked voice/audio resources, and reconnects the same Discord client.
+Each stage logs detailed errors and contributes only a localized success/failure
+status to the interaction response. Candidate configuration and localization data
+must validate before activation. Do not add event listeners during reload, create a
+second client, or clear the complete `require.cache`. Source-code changes to startup,
+routing, handlers, metadata, mechanics, or models still require manually restarting
 `node index.js`.
 
 `config.json` requires `locale`, `botUserId`, `roles.dm`, and `roles.moderator`.

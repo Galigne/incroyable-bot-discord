@@ -10,7 +10,6 @@ const {
 } = require('@discordjs/voice');
 const { MessageFlags } = require('discord.js');
 
-const { registerCommands } = require('../adapters/discordCommandRegistration');
 const { reconnectClient } = require('../adapters/discordClientLifecycle');
 const { createLocalAudioManager } = require('../adapters/localAudioPlayer');
 const reloadCommand = require('../commands/reload');
@@ -173,23 +172,6 @@ test('command registry replacement is atomic and does not duplicate commands or 
 	assert.equal(
 		client.commands.size,
 		COMMAND_METADATA.filter(metadata => !metadata.parent).length,
-	);
-});
-
-test('command registration surfaces Discord failures', async () => {
-	const expected = new Error('Discord registration unavailable');
-	const client = {
-		application: {
-			commands: {
-				set: async () => {
-					throw expected;
-				},
-			},
-		},
-	};
-	await assert.rejects(
-		registerCommands(client, commandRegistry),
-		error => error === expected,
 	);
 });
 

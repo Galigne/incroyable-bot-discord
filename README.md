@@ -17,8 +17,11 @@ A Discord bot with moderation, utility, local audio, and RPG character-managemen
    each explanation with the corresponding Discord value.
 6. Start the bot with `node index.js`.
 
-The bot registers its global slash commands when it connects. Discord may briefly
-need to refresh its command picker after a command schema changes.
+The bot registers its complete slash-command set separately in every connected
+guild and immediately synchronizes commands when it joins a new guild. The first
+startup after migration removes obsolete global commands and records that one-time
+cleanup under ignored `.runtime/` state; later startups do not touch global command
+registration.
 
 ## Localization
 
@@ -112,11 +115,11 @@ manage every character.
 
 `/reload` acknowledges privately before disconnecting, then reloads and validates
 `config.json` and both localization catalogs, clears localized generator caches,
-rebuilds and replaces the runtime command registry, refreshes global slash-command
-registration, cleans up active voice/audio resources, and reconnects the same
-Discord client without terminating Node.js. Its final private response lists every
-successful and failed stage. Invalid configuration or localization replacements do
-not replace the previous valid state. Source-code changes—including startup,
+rebuilds and replaces the runtime command registry, refreshes slash commands in
+every connected guild, cleans up active voice/audio resources, and reconnects the
+same Discord client without terminating Node.js. Its final private response lists
+every successful and failed stage. Invalid configuration or localization
+replacements do not replace the previous valid state. Source-code changes—including startup,
 event-routing, mechanics, model, metadata, and handler changes—still require
 manually restarting `node index.js`.
 The identifier supplied to `/add` remains the stable command/save key and cannot

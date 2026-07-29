@@ -12,10 +12,11 @@
     "test:embeds": "node --test scripts/embedFooters.test.js",
     "test:help": "node --test scripts/help.test.js",
     "test:mechanics": "node --test scripts/mechanics.test.js",
+    "test:registration": "node --test scripts/commandRegistration.test.js",
     "test:reload": "node --test scripts/reload.test.js",
     "test:registry": "node --test scripts/registry.test.js",
     "test:services": "node --test scripts/services.test.js",
-    "test": "npm run lint && npm run test:dice && npm run test:embeds && npm run test:help && npm run test:mechanics && npm run test:reload && npm run test:registry && npm run test:services && npm run check"
+    "test": "npm run lint && npm run test:dice && npm run test:embeds && npm run test:help && npm run test:mechanics && npm run test:registration && npm run test:reload && npm run test:registry && npm run test:services && npm run check"
   },
   "keywords": [
     "discord",

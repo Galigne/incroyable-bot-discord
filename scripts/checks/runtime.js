@@ -106,10 +106,15 @@ module.exports = function createRuntimeChecks(context) {
 			'utf8',
 		);
 		if (
-			!indexSource.includes('registerCommands(')
+			!indexSource.includes('createCommandRegistrationLifecycle(')
 			|| !registrationSource.includes('getDiscordCommandData()')
+			|| !registrationSource.includes('guild.commands.set(commands)')
+			|| !indexSource.includes('Events.GuildCreate')
+			|| /application\.commands\.set\(commands\)/.test(registrationSource)
 		) {
-			errors.push('Slash-command registration must use the centralized command registry.');
+			errors.push(
+				'Guild slash-command registration must use the centralized command registry.',
+			);
 		}
 	}
 

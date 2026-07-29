@@ -1,4 +1,7 @@
-const { registerCommands } = require('../adapters/discordCommandRegistration');
+const {
+	assertSuccessfulRegistration,
+	registerCommands,
+} = require('../adapters/discordCommandRegistration');
 const { reconnectClient } = require('../adapters/discordClientLifecycle');
 const { disconnectVoiceResources } = require('../adapters/localAudioPlayer');
 const commandRegistry = require('../commands/registry');
@@ -30,9 +33,12 @@ function createRuntimeReloader({
 		localizations: () => reloadTranslations(catalogPaths),
 		generators: () => clearGeneratorCache(),
 		commands: () => commandRegistry.reloadCommandRegistry(runtimeState),
-		registration: () => registerCommands(
-			client,
-			runtimeState.getCommandRegistry(),
+		registration: async () => assertSuccessfulRegistration(
+			await registerCommands(
+				client,
+				runtimeState.getCommandRegistry(),
+				{ logger },
+			),
 		),
 		voiceCleanup: () => disconnectVoiceResources(),
 		discordReconnect: () => reconnectClient(client, token),

@@ -2,7 +2,9 @@ const fs = require('node:fs');
 const path = require('node:path');
 const process = require('node:process');
 const { Events, MessageFlags } = require('discord.js');
-const { registerCommands } = require('./adapters/discordCommandRegistration');
+const {
+	createCommandRegistrationLifecycle,
+} = require('./adapters/discordCommandRegistration');
 const Client = require('./client/Client');
 const commandRegistry = require('./commands/registry');
 const { handleRpgInteraction } = require('./commands/rpg/interactions');
@@ -30,18 +32,36 @@ const runtimeReloader = createRuntimeReloader({
 	runtimeState,
 	token,
 });
+const commandRegistrationLifecycle = createCommandRegistrationLifecycle({
+	getCommandRegistry: () => runtimeState.getCommandRegistry(),
+});
 
 client.once(Events.ClientReady, async readyClient => {
 	console.log(`Logged in as ${readyClient.user.tag}.`);
 	try {
-		const commandCount = await registerCommands(
-			readyClient,
-			runtimeState.getCommandRegistry(),
-		);
-		console.log(`Registered ${commandCount} global slash commands.`);
+		const registration = await commandRegistrationLifecycle.handleReady(readyClient);
+		if (!registration.success) {
+			console.error(
+				'Could not register slash commands in '
+				+ `${registration.failedGuildCount} guild(s).`,
+			);
+		}
 	}
 	catch (error) {
-		console.error('Could not register slash commands:', error);
+		console.error('Could not initialize guild slash-command registration:', error);
+	}
+});
+
+client.on(Events.GuildCreate, async guild => {
+	try {
+		await commandRegistrationLifecycle.handleGuildCreate(guild);
+	}
+	catch (error) {
+		console.error(
+			'Could not synchronize slash commands after joining guild '
+			+ `${guild.name ?? 'unknown'} (${guild.id}):`,
+			error,
+		);
 	}
 });
 
