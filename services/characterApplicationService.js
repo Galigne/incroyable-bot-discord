@@ -14,12 +14,8 @@ async function createCharacter(characterKey, creatorId) {
 	return characterStore.createCharacter(characterKey, creatorId);
 }
 
-async function deleteCharacter(characterKey, canManage, operationContext) {
-	return characterStore.deleteCharacter(
-		characterKey,
-		canManage,
-		createHistoryContext('delete', operationContext),
-	);
+async function deleteCharacter(characterKey, canManage) {
+	return characterStore.deleteCharacter(characterKey, canManage);
 }
 
 async function getCharacter(characterKey) {
@@ -98,6 +94,16 @@ async function getEditableCharacter(characterKey, canManage) {
 	return character;
 }
 
+async function getDeletableCharacter(characterKey, canManage) {
+	const character = await characterStore.getCharacter(characterKey);
+	if (!canManage(character)) {
+		const error = new Error('NOT_CHARACTER_OWNER');
+		error.code = 'NOT_CHARACTER_OWNER';
+		throw error;
+	}
+	return character;
+}
+
 async function getEditableCharacterField(characterKey, fieldName, canManage) {
 	const character = await getEditableCharacter(characterKey, canManage);
 	return {
@@ -150,6 +156,7 @@ module.exports = {
 	endCharacterTurn,
 	generateCharacter,
 	getCharacter,
+	getDeletableCharacter,
 	getEditableCharacter,
 	getEditableCharacterField,
 	healCharacter,

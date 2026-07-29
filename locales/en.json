@@ -112,10 +112,19 @@
       "behavior": "Applies a positive whole-number damage amount to current AR first, then current HP. When `piercing` is true, damage bypasses AR. Only the character creator, a DM, or the server owner may use it."
     },
     "delete": {
-      "description": "Delete one of your characters",
-      "characterOption": "Character to delete",
-      "success": "Character **{{key}}** was deleted.",
-      "behavior": "Permanently deletes the selected character save. Only the character creator, a DM, or the server owner may delete it."
+      "description": "Permanently delete a character and all retained backups",
+      "characterOption": "Character to permanently delete",
+      "modalTitle": "Permanently delete character",
+      "warning": "## Permanent deletion\nThis removes the active save and every retained backup for `{{key}}`. `/undo` cannot restore it.",
+      "confirmationLabel": "Type the exact CharacterKey",
+      "confirmationDescription": "The value is case-sensitive and must match the CharacterKey shown above.",
+      "confirmationPlaceholder": "Enter the exact CharacterKey",
+      "incorrectConfirmation": "The confirmation did not exactly match `{{key}}`. Nothing was deleted. Run `/delete` again to retry.",
+      "expired": "This deletion confirmation is missing or expired. Run `/delete` again.",
+      "wrongUser": "This deletion confirmation belongs to another user.",
+      "success": "Character **{{key}}** and all retained backups were permanently deleted.",
+      "operationFailed": "The character and its retained backups could not be deleted safely. Nothing was intentionally left partially deleted.",
+      "behavior": "Opens a private confirmation form. Type the exact, case-sensitive CharacterKey to permanently delete both the active save and every retained backup. This cannot be undone, and `/undo` cannot restore the character. Only the character creator, a DM, or the server owner may confirm deletion."
     },
     "endTurn": {
       "description": "Restore current AP and MD to their maximum values",
@@ -189,7 +198,7 @@
       "description": "Restore the newest retained pre-change character snapshot",
       "characterOption": "Character whose newest backup will be restored",
       "success": "Restored character `{{key}}`. The **{{action}}** backup created {{timestamp}} by {{actor}} was consumed.",
-      "behavior": "Restores and consumes the newest available backup for a character. Successful `/set`, `/damage`, `/heal`, `/end-turn`, and `/delete` operations each save the complete pre-change character state. Three backups are retained by default; the server’s `characterHistory.maxEntries` configuration can change that limit, and `/reload` applies the new value to later history operations. Repeated undos walk backward through older retained states, including restoration after deletion. Undo does not save the displaced state, and redo is not supported. Only the character creator, a DM, or the server owner may use it.",
+      "behavior": "Restores and consumes the newest available backup for an active character. Successful `/set`, `/damage`, `/heal`, and `/end-turn` operations each save the complete pre-change character state. Three backups are retained by default; the server’s `characterHistory.maxEntries` configuration can change that limit, and `/reload` applies the new value to later history operations. Repeated undos walk backward through older retained states. Undo does not save the displaced state, redo is not supported, and permanent `/delete` removes all backups. Only the character creator, a DM, or the server owner may use it.",
       "actions": {
         "set": "field edit",
         "damage": "damage",

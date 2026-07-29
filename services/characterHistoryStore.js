@@ -16,30 +16,24 @@ const CHARACTER_HISTORY_ACTIONS = new Set([
 	'damage',
 	'heal',
 	'end-turn',
+]);
+const STORED_CHARACTER_HISTORY_ACTIONS = new Set([
+	...CHARACTER_HISTORY_ACTIONS,
 	'delete',
 ]);
 
 async function readCharacterHistory(characterKey) {
-	const historyPath = getCharacterHistoryPath(characterKey);
-	let serialized;
-	try {
-		serialized = await fs.readFile(historyPath, 'utf8');
-	}
-	catch (error) {
-		if (error.code === 'ENOENT') {
-			return {
-				document: { entries: [] },
-				exists: false,
-				path: historyPath,
-				serialized: null,
-			};
-		}
-		throw error;
+	const historyState = await readCharacterHistoryFileState(characterKey);
+	if (!historyState.exists) {
+		return {
+			...historyState,
+			document: { entries: [] },
+		};
 	}
 
 	let document;
 	try {
-		document = JSON.parse(serialized);
+		document = JSON.parse(historyState.serialized);
 		validateHistoryDocument(document);
 	}
 	catch (error) {
@@ -50,11 +44,44 @@ async function readCharacterHistory(characterKey) {
 		);
 	}
 	return {
+		...historyState,
 		document,
-		exists: true,
-		path: historyPath,
-		serialized,
 	};
+}
+
+async function readCharacterHistoryFileState(characterKey) {
+	const historyPath = getCharacterHistoryPath(characterKey);
+	try {
+		return {
+			exists: true,
+			path: historyPath,
+			serialized: await fs.readFile(historyPath, 'utf8'),
+		};
+	}
+	catch (error) {
+		if (error.code === 'ENOENT') {
+			return {
+				exists: false,
+				path: historyPath,
+				serialized: null,
+			};
+		}
+		throw error;
+	}
+}
+
+async function deleteCharacterHistory(historyState) {
+	if (!historyState.exists) {
+		return;
+	}
+	try {
+		await fs.unlink(historyState.path);
+	}
+	catch (error) {
+		if (error.code !== 'ENOENT') {
+			throw error;
+		}
+	}
 }
 
 async function listCharacterHistoryKeys() {
@@ -179,7 +206,7 @@ function validateHistoryEntry(entry) {
 		|| !isIsoTimestamp(entry.createdAt)
 		|| typeof entry.actorId !== 'string'
 		|| entry.actorId.trim() === ''
-		|| !CHARACTER_HISTORY_ACTIONS.has(entry.action)
+		|| !STORED_CHARACTER_HISTORY_ACTIONS.has(entry.action)
 		|| !entry.character
 		|| typeof entry.character !== 'object'
 		|| Array.isArray(entry.character)
@@ -257,11 +284,13 @@ function createHistoryError(code, message, cause) {
 
 module.exports = {
 	CHARACTER_HISTORY_ACTIONS,
+	deleteCharacterHistory,
 	getUsableHistoryCharacter,
 	listCharacterHistoryKeys,
 	popCharacterHistory,
 	pushCharacterHistory,
 	readCharacterHistory,
+	readCharacterHistoryFileState,
 	restoreCharacterHistory,
 	writeCharacterHistory,
 	writePreparedCharacterHistory,

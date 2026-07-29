@@ -13,12 +13,15 @@ process.env.INCREDIBLE_BOT_SAVE_DIRECTORY = testSaveDirectory;
 const commandRegistry = require('../commands/registry');
 const {
 	damageCharacter,
-	deleteCharacter,
 	endCharacterTurn,
 	healCharacter,
 	undoCharacter,
 	updateEditableCharacter,
 } = require('../services/characterApplicationService');
+const {
+	CHARACTER_HISTORY_ACTIONS,
+	readCharacterHistory,
+} = require('../services/characterHistoryStore');
 const {
 	commitHistoryThenMutation,
 	commitMutationThenHistory,
@@ -168,12 +171,11 @@ test('every supported successful action stores a complete pre-change snapshot', 
 	await damageCharacter(characterKey, 10, false, () => true, context);
 	await healCharacter(characterKey, 'hp', 100, () => true, context);
 	await endCharacterTurn(characterKey, () => true, context);
-	await deleteCharacter(characterKey, () => true, context);
 
 	const history = await readHistory(characterKey);
 	assert.deepEqual(
 		history.entries.map(entry => entry.action),
-		['set', 'damage', 'heal', 'end-turn', 'delete'],
+		['set', 'damage', 'heal', 'end-turn'],
 	);
 	for (const entry of history.entries) {
 		assert.equal(entry.actorId, 'all-actions-actor');
@@ -182,7 +184,7 @@ test('every supported successful action stores a complete pre-change snapshot', 
 		assert.ok(entry.character.resources);
 		assert.ok(entry.character.stats);
 	}
-	await assert.rejects(getCharacter(characterKey), { code: 'ENOENT' });
+	assert.equal((await getCharacter(characterKey)).key, characterKey);
 });
 
 test('/set creates history only after a successful modal submission', async () => {
@@ -514,28 +516,24 @@ test('undo rejects missing history and preserves state on permission failure', a
 	assert.deepEqual(await readHistory(deniedKey), historyBefore);
 });
 
-test('undo restores a deleted character and authorizes from its snapshot', async () => {
-	const characterKey = nextKey('Undo.Deleted');
-	const context = historyContext(3, 'deleting-actor');
+test('new history contexts exclude delete while legacy delete entries remain readable', async () => {
+	assert.deepEqual(
+		[...CHARACTER_HISTORY_ACTIONS],
+		['set', 'damage', 'heal', 'end-turn'],
+	);
+	const characterKey = nextKey('History.LegacyDelete');
+	const context = historyContext();
 	await createCharacter(characterKey, 'creator');
-	await editFirstName(characterKey, 'Restored', context);
-	await deleteCharacter(characterKey, () => true, context);
-	await assert.rejects(getCharacter(characterKey), { code: 'ENOENT' });
-
-	await assert.rejects(
-		undoCharacter(characterKey, () => false, context),
-		{ code: 'NOT_CHARACTER_EDITOR' },
+	await editFirstName(characterKey, 'Legacy', context);
+	const legacyDocument = await readHistory(characterKey);
+	legacyDocument.entries[0].action = 'delete';
+	await fsPromises.writeFile(
+		getCharacterHistoryPath(characterKey),
+		JSON.stringify(legacyDocument, null, 2),
+		'utf8',
 	);
-	await assert.rejects(getCharacter(characterKey), { code: 'ENOENT' });
-
-	const result = await undoCharacter(
-		characterKey,
-		character => character.creatorId === 'creator',
-		context,
-	);
-	assert.equal(result.action, 'delete');
-	assert.equal(result.character.firstName, 'Restored');
-	assert.equal((await getCharacter(characterKey)).firstName, 'Restored');
+	const historyState = await readCharacterHistory(characterKey);
+	assert.equal(historyState.document.entries[0].action, 'delete');
 });
 
 test('undo rejects invalid and unsupported snapshot schema versions', async () => {
@@ -571,26 +569,18 @@ test('undo rejects invalid and unsupported snapshot schema versions', async () =
 	await fsPromises.rm(historyPath);
 });
 
-test('/undo autocomplete includes authorized active and deleted characters only', async () => {
+test('/undo autocomplete includes authorized active characters with history only', async () => {
 	const userId = 'autocomplete-user';
 	const activeKey = nextKey('Autocomplete.Active');
-	const deletedKey = nextKey('Autocomplete.Deleted');
 	const privateKey = nextKey('Autocomplete.Private');
 	await createCharacter(activeKey, userId);
 	await editFirstName(activeKey, 'Active', historyContext(3, userId));
-	await createCharacter(deletedKey, userId);
-	await deleteCharacter(
-		deletedKey,
-		() => true,
-		historyContext(3, userId),
-	);
 	await createCharacter(privateKey, 'other-user');
 	await editFirstName(privateKey, 'Private', historyContext(3, 'other-user'));
 
 	const choices = await autocompleteUndo(createInteraction(userId), createConfig());
 	const values = choices.map(choice => choice.value);
 	assert.ok(values.includes(activeKey));
-	assert.ok(values.includes(deletedKey));
 	assert.equal(values.includes(privateKey), false);
 	assert.ok(choices.length <= 25);
 

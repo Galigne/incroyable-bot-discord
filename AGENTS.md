@@ -74,8 +74,8 @@ saves.
   from the same configured save directory.
 - `services/characterHistoryStore.js`: bounded pre-change history documents,
   snapshot validation, stack rotation, and undo preparation.
-- `services/characterPersistenceTransaction.js`: ordered two-file commits and
-  rollback for active saves and history documents.
+- `services/characterPersistenceTransaction.js`: ordered two-file commits,
+  permanent deletion, and rollback for active saves and history documents.
 - `services/characterSaveSchema.js`: owns the current character-save schema version
   and validates raw save metadata before model hydration.
 - `services/characterFieldCatalog.js`: canonical character field identities,
@@ -227,13 +227,14 @@ same-directory temporary file before publication; exclusive creation must never
 replace an existing save. Always release and discard unused keyed queues after
 success or failure.
 
-History-backed mutations and undo must keep both the active character state and
+History-backed mutations, undo, and permanent deletion must keep both the active character state and
 the `.history/<CharacterKey>.json` state inside that same critical section. Prepare
 and serialize both results before the first write. If the second file operation
 fails, roll back the first; log an unrecoverable rollback failure without exposing
 filesystem details in Discord. History documents are oldest-to-newest stacks of
 complete pre-change character saves with `createdAt`, `actorId`, and one of
-`set`, `damage`, `heal`, `end-turn`, or `delete`. Never add rejected, unauthorized,
+`set`, `damage`, `heal`, or `end-turn`. Legacy `delete` entries remain readable for
+compatibility but must never be produced. Never add rejected, unauthorized,
 invalid, or failed operations to history.
 
 For every non-trivial command feature:
@@ -306,6 +307,9 @@ The current viewing and editing decisions are intentional:
 - `/set character-key:<key> field:<field>` has no value argument. Submitting
   the command immediately opens one private modal prefilled with the saved value.
 - `/help command:set` explains settable paths and modal input.
+- `/delete character-key:<key>` opens a private, single-use confirmation modal.
+  The user must type the exact case-sensitive CharacterKey; success permanently
+  removes the active save and all retained backups, so `/undo` cannot restore it.
 - Do not add section/field dropdown navigation back to the editor.
 
 Textual collections have no per-entry `add`, `set`, `remove`, or `clear` action
@@ -347,7 +351,7 @@ Permissions:
 
 - Anyone with normal bot access can view character sheets.
 - The creator may set, delete, heal, damage, and end turns for their character.
-- The creator may undo retained changes for their active or deleted character.
+- The creator may undo retained changes for their active character.
 - The configured DM role may perform those actions on every character and may use
   `/gen` and `/gen-char`.
 - The configured moderator role may use `/say`, `/purge`, and `/reload`.
@@ -393,19 +397,28 @@ Active saves remain directly under `save/`; history lives separately under
 oldest-to-newest `entries` stack. Normal character listing and autocomplete must
 not traverse `.history`; only the `/undo` provider may suggest history-backed keys.
 
-Successful `/set` modal submissions, `/damage`, `/heal`, `/end-turn`, and `/delete`
+Successful `/set` modal submissions, `/damage`, `/heal`, and `/end-turn`
 push the complete schema-versioned pre-change state. Retain the newest
 `characterHistory.maxEntries` entries and remove the oldest excess entries. Apply a
-reduced limit the next time that character’s history is pushed or popped. Preserve
-history after deletion.
+reduced limit the next time that character’s history is pushed or popped.
 
 `/undo character-key:<key>` pops and validates the newest snapshot, restores it as
 the active save, and never pushes the displaced state. Repeated undo therefore walks
 backward and cannot alternate indefinitely; redo and history browsing are
-intentionally unsupported. Authorize active characters from their current save and
-deleted-character restoration from the stored snapshot. The creator, configured DM
-role, and actual Discord server owner may undo. Autocomplete follows those same
-rules and includes valid active and deleted CharacterKeys with usable history.
+intentionally unsupported. Authorize active characters from their current save.
+The creator, configured DM role, and actual Discord server owner may undo.
+Autocomplete follows those same rules and includes valid active CharacterKeys with
+usable history.
+
+`/delete character-key:<key>` validates existence and authorization before opening
+a private, user-bound, key-bound, expiring confirmation modal. Submission consumes
+the session, requires an exact case-sensitive CharacterKey match, then reloads and
+reauthorizes inside the per-key queue. A successful deletion removes both the
+active save and the complete history document without creating a history entry.
+Missing history is valid. Delete history first, delete the active save second, and
+restore the captured history if active-save deletion fails; do not report success
+for a partial operation. There is no trash, recovery file, or `/undo` restoration
+after successful deletion.
 
 ## Random generators
 

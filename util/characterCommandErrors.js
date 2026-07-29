@@ -20,6 +20,8 @@ const replyableErrorCodes = new Set([
 	'UNSUPPORTED_CHARACTER_HISTORY_SCHEMA',
 	'CHARACTER_HISTORY_CONSISTENCY_FAILED',
 	'CHARACTER_HISTORY_PERSISTENCE_FAILED',
+	'CHARACTER_DELETION_CONSISTENCY_FAILED',
+	'CHARACTER_DELETION_PERSISTENCE_FAILED',
 ]);
 
 async function replyToCharacterError(interaction, error, locale = 'en') {
@@ -47,6 +49,14 @@ async function replyToCharacterError(interaction, error, locale = 'en') {
 		CHARACTER_HISTORY_PERSISTENCE_FAILED: t(
 			locale,
 			'rpg.undo.errors.operationFailed',
+		),
+		CHARACTER_DELETION_CONSISTENCY_FAILED: t(
+			locale,
+			'rpg.delete.operationFailed',
+		),
+		CHARACTER_DELETION_PERSISTENCE_FAILED: t(
+			locale,
+			'rpg.delete.operationFailed',
 		),
 	};
 	const response = error.translationKey

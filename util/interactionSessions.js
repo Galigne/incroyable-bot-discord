@@ -33,6 +33,25 @@ function getInteractionSession(id, userId, type) {
 	return session;
 }
 
+function consumeInteractionSession(id, userId, type) {
+	const session = sessions.get(id);
+	if (!session) {
+		return { status: 'missing' };
+	}
+	if (session.expiresAt <= Date.now()) {
+		sessions.delete(id);
+		return { status: 'expired' };
+	}
+	if (session.userId !== userId) {
+		return { status: 'wrong-user' };
+	}
+	if (type && session.type !== type) {
+		return { status: 'missing' };
+	}
+	sessions.delete(id);
+	return { session, status: 'ok' };
+}
+
 function deleteInteractionSession(id) {
 	sessions.delete(id);
 }
@@ -47,6 +66,7 @@ function removeExpiredSessions() {
 }
 
 module.exports = {
+	consumeInteractionSession,
 	createInteractionSession,
 	deleteInteractionSession,
 	getInteractionSession,

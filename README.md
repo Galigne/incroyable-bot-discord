@@ -90,15 +90,14 @@ Never commit `.env` or a Discord token. Reset any token that has previously been
 - `/heal character-key:<key> resource:<hp|armor|both> percentage:<0-100>` — restore one or both resources
 - `/damage character-key:<key> damage-amount:<number> [piercing]` — apply damage to AR, then HP
 - `/end-turn character-key:<key>` — restore AP and MD to their maximum values
-- `/delete character-key:<key>` — delete a character
+- `/delete character-key:<key>` — permanently delete a character and all backups after exact-key confirmation
 - `/undo character-key:<key>` — consume and restore the newest retained pre-change state
 
 Discord provides native validation and choices for constrained options.
 Autocomplete suggests commands the current user may access, existing CharacterKeys,
 settable fields, retrievable fields, generator categories, common dice expressions,
 levels, and common purge amounts. `/undo` autocomplete includes authorized active
-characters with history and authorized deleted characters whose history can restore
-them. The private form opens immediately after
+characters with usable history. The private form opens immediately after
 `/set` is submitted. Multiline
 fields accept free-form lines with optional leading dashes; RULEs use
 `Name: Level: Description`.
@@ -138,7 +137,7 @@ Keys may contain internal periods, hyphens, and underscores, such as `D.Robert`.
 
 ## Character history and undo
 
-Successful `/set`, `/damage`, `/heal`, `/end-turn`, and `/delete` operations push
+Successful `/set`, `/damage`, `/heal`, and `/end-turn` operations push
 the character’s complete pre-change save into
 `save/.history/<CharacterKey>.json`. When
 `INCREDIBLE_BOT_SAVE_DIRECTORY` is set, the `.history` directory is created under
@@ -149,10 +148,10 @@ subdirectory, it never appears in normal character listings or autocomplete.
 
 Each push keeps the newest configured number of entries and discards older excess
 entries. A lower limit is applied the next time that character’s history changes.
-`/undo` validates and consumes the newest entry, restores it atomically as the
-active character, and can recreate a deleted character. Repeated calls continue
-backward until the bounded stack is empty. Undo does not push the displaced state,
-so it cannot toggle between two states, and redo is not supported.
+`/undo` validates and consumes the newest entry, then restores it atomically as the
+active character. Repeated calls continue backward until the bounded stack is
+empty. Undo does not push the displaced state, so it cannot toggle between two
+states, and redo is not supported.
 
 Character and history writes share the existing per-CharacterKey queue. Both
 resulting JSON states are serialized before the first file operation. If the second
@@ -160,6 +159,13 @@ file operation fails, the first is rolled back; an unrecoverable rollback failur
 is logged server-side while Discord receives only a localized, filesystem-neutral
 error. Rejected, unauthorized, invalid, and failed mutations do not intentionally
 create backups.
+
+`/delete` opens a private confirmation form and requires the exact, case-sensitive
+CharacterKey. A successful confirmation permanently removes both the active save
+and the entire retained history document in the same per-key critical section.
+Deletion creates no backup, cannot be reversed with `/undo`, and has no trash or
+recovery location. If the two-file deletion cannot complete, the first file
+operation is rolled back before an error is returned.
 
 Example workflows:
 

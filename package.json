@@ -9,6 +9,7 @@
     "check": "node scripts/check.js",
     "lint": "eslint .",
     "test:dice": "node --test scripts/dice.test.js",
+    "test:deletion": "node --test scripts/characterDeletion.test.js",
     "test:embeds": "node --test scripts/embedFooters.test.js",
     "test:help": "node --test scripts/help.test.js",
     "test:history": "node --test scripts/characterHistory.test.js",
@@ -19,7 +20,7 @@
     "test:save-schema": "node --test scripts/characterSaveSchema.test.js",
     "test:persistence": "node --test scripts/characterPersistence.test.js",
     "test:services": "node --test scripts/services.test.js",
-    "test": "npm run lint && npm run test:dice && npm run test:embeds && npm run test:help && npm run test:history && npm run test:mechanics && npm run test:registration && npm run test:reload && npm run test:registry && npm run test:save-schema && npm run test:persistence && npm run test:services && npm run check"
+    "test": "npm run lint && npm run test:dice && npm run test:deletion && npm run test:embeds && npm run test:help && npm run test:history && npm run test:mechanics && npm run test:registration && npm run test:reload && npm run test:registry && npm run test:save-schema && npm run test:persistence && npm run test:services && npm run check"
   },
   "keywords": [
     "discord",

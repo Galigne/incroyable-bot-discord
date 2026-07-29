@@ -6,11 +6,13 @@ const {
 	writeSerializedJsonAtomically,
 } = require('./atomicJsonFile');
 const {
+	deleteCharacterHistory,
 	getUsableHistoryCharacter,
 	listCharacterHistoryKeys,
 	popCharacterHistory,
 	pushCharacterHistory,
 	readCharacterHistory,
+	readCharacterHistoryFileState,
 	restoreCharacterHistory,
 	writePreparedCharacterHistory,
 } = require('./characterHistoryStore');
@@ -18,6 +20,7 @@ const { runCharacterOperation } = require('./characterOperationQueue');
 const {
 	commitHistoryThenMutation,
 	commitMutationThenHistory,
+	commitPermanentDeletion,
 } = require('./characterPersistenceTransaction');
 const { validateCharacterSaveSchema } = require('./characterSaveSchema');
 const {
@@ -35,7 +38,7 @@ async function createCharacter(name, creatorId, initialize = () => undefined) {
 	});
 }
 
-async function deleteCharacter(name, canManage, historyContext = null) {
+async function deleteCharacter(name, canManage) {
 	return runCharacterOperation(name, async () => {
 		const current = await readCharacterRecord(name);
 		if (!canManage(current.character)) {
@@ -44,26 +47,12 @@ async function deleteCharacter(name, canManage, historyContext = null) {
 			throw error;
 		}
 
-		if (!historyContext) {
-			await fs.unlink(getCharacterSavePath(name));
-			return;
-		}
-
-		const historyState = await readCharacterHistory(name);
-		const nextHistory = pushCharacterHistory(
-			historyState,
-			current.rawSaveData,
-			historyContext,
-		);
-		const serializedHistory = serializeJson(nextHistory.document);
-		await commitHistoryThenMutation({
+		const historyState = await readCharacterHistoryFileState(name);
+		await commitPermanentDeletion({
 			characterKey: name,
-			commitMutation: () => fs.unlink(getCharacterSavePath(name)),
-			rollbackHistory: () => restoreCharacterHistory(historyState),
-			writeHistory: () => writePreparedCharacterHistory(
-				historyState.path,
-				serializedHistory,
-			),
+			deleteCharacter: () => fs.unlink(getCharacterSavePath(name)),
+			deleteHistory: () => deleteCharacterHistory(historyState),
+			restoreHistory: () => restoreCharacterHistory(historyState),
 		});
 	});
 }

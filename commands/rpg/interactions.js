@@ -2,15 +2,19 @@ const {
 	LabelBuilder,
 	MessageFlags,
 	ModalBuilder,
+	TextDisplayBuilder,
 	TextInputBuilder,
 	TextInputStyle,
 } = require('discord.js');
 const {
+	deleteCharacter,
+	getDeletableCharacter,
 	getEditableCharacterField,
 	updateEditableCharacter,
 } = require('../../services/characterApplicationService');
 const { canManageCharacter } = require('../../util/authorization');
 const {
+	createCharacterDeletedResponse,
 	createCharacterEditResponse,
 } = require('../../util/characterCommandResponses');
 const {
@@ -20,6 +24,7 @@ const {
 	createCharacterHistoryContext,
 } = require('../../util/characterHistoryContext');
 const {
+	consumeInteractionSession,
 	createInteractionSession,
 	deleteInteractionSession,
 	getInteractionSession,
@@ -71,10 +76,43 @@ async function openCharacterEditor(interaction, config, characterKey, fieldName)
 	}
 }
 
+async function openCharacterDeletionConfirmation(
+	interaction,
+	config,
+	characterKey,
+) {
+	const locale = getLocale(config, interaction.guildId);
+	try {
+		await getDeletableCharacter(
+			characterKey,
+			currentCharacter => canManageCharacter(interaction, currentCharacter, config),
+		);
+		const session = createInteractionSession('delete', interaction.user.id, {
+			characterKey,
+		});
+		await interaction.showModal(createDeletionModal(session.id, characterKey, locale));
+	}
+	catch (error) {
+		if (!await replyToCharacterError(interaction, error, locale)) {
+			throw error;
+		}
+	}
+}
+
 async function handleRpgInteraction(interaction, config) {
-	if (!interaction.isModalSubmit() || !interaction.customId.startsWith('rpg-set:')) {
+	if (!interaction.isModalSubmit()) {
 		return false;
 	}
+	if (interaction.customId.startsWith('rpg-set:')) {
+		return handleCharacterEditSubmission(interaction, config);
+	}
+	if (interaction.customId.startsWith('rpg-delete:')) {
+		return handleCharacterDeletionSubmission(interaction, config);
+	}
+	return false;
+}
+
+async function handleCharacterEditSubmission(interaction, config) {
 	const locale = getLocale(config, interaction.guildId);
 
 	const sessionId = interaction.customId.slice('rpg-set:'.length);
@@ -97,6 +135,60 @@ async function handleRpgInteraction(interaction, config) {
 		);
 		deleteInteractionSession(session.id);
 		await interaction.reply(createCharacterEditResponse(result, locale));
+	}
+	catch (error) {
+		if (!await replyToCharacterError(interaction, error, locale)) {
+			throw error;
+		}
+	}
+	return true;
+}
+
+async function handleCharacterDeletionSubmission(interaction, config) {
+	const locale = getLocale(config, interaction.guildId);
+	const sessionId = interaction.customId.slice('rpg-delete:'.length);
+	const consumed = consumeInteractionSession(
+		sessionId,
+		interaction.user.id,
+		'delete',
+	);
+	if (consumed.status === 'wrong-user') {
+		await interaction.reply({
+			content: t(locale, 'rpg.delete.wrongUser'),
+			flags: MessageFlags.Ephemeral,
+		});
+		return true;
+	}
+	if (consumed.status !== 'ok') {
+		await interaction.reply({
+			content: t(locale, 'rpg.delete.expired'),
+			flags: MessageFlags.Ephemeral,
+		});
+		return true;
+	}
+
+	const { session } = consumed;
+	if (
+		interaction.fields.getTextInputValue('character-key-confirmation')
+		!== session.characterKey
+	) {
+		await interaction.reply({
+			content: t(locale, 'rpg.delete.incorrectConfirmation', {
+				key: session.characterKey,
+			}),
+			flags: MessageFlags.Ephemeral,
+		});
+		return true;
+	}
+
+	try {
+		await deleteCharacter(
+			session.characterKey,
+			currentCharacter => canManageCharacter(interaction, currentCharacter, config),
+		);
+		await interaction.reply(
+			createCharacterDeletedResponse(session.characterKey, locale),
+		);
 	}
 	catch (error) {
 		if (!await replyToCharacterError(interaction, error, locale)) {
@@ -152,6 +244,31 @@ function createFieldModal(sessionId, fieldName, value, locale = 'en') {
 		);
 }
 
+function createDeletionModal(sessionId, characterKey, locale = 'en') {
+	const confirmationInput = new TextInputBuilder()
+		.setCustomId('character-key-confirmation')
+		.setStyle(TextInputStyle.Short)
+		.setMinLength(1)
+		.setMaxLength(50)
+		.setPlaceholder(t(locale, 'rpg.delete.confirmationPlaceholder'))
+		.setRequired(true);
+
+	return new ModalBuilder()
+		.setCustomId(`rpg-delete:${sessionId}`)
+		.setTitle(t(locale, 'rpg.delete.modalTitle'))
+		.addTextDisplayComponents(
+			new TextDisplayBuilder().setContent(
+				t(locale, 'rpg.delete.warning', { key: characterKey }),
+			),
+		)
+		.addLabelComponents(
+			new LabelBuilder()
+				.setLabel(t(locale, 'rpg.delete.confirmationLabel'))
+				.setDescription(t(locale, 'rpg.delete.confirmationDescription'))
+				.setTextInputComponent(confirmationInput),
+		);
+}
+
 function findEditableField(fieldName) {
 	return getEditableFieldDefinition(fieldName)?.editId ?? null;
 }
@@ -161,7 +278,9 @@ function isTextField(fieldName) {
 }
 
 module.exports = {
+	createDeletionModal,
 	createFieldModal,
 	handleRpgInteraction,
+	openCharacterDeletionConfirmation,
 	openCharacterEditor,
 };

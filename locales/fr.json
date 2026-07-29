@@ -112,10 +112,19 @@
       "behavior": "Applique un nombre entier positif de dégâts, d’abord aux PR actuels puis aux PV actuels. Avec `piercing:true`, les dégâts ignorent les PR. Seuls le créateur, un MJ ou le propriétaire du serveur peuvent l’utiliser."
     },
     "delete": {
-      "description": "Supprimer l’un de vos personnages",
-      "characterOption": "Personnage à supprimer",
-      "success": "Le personnage **{{key}}** a été supprimé.",
-      "behavior": "Supprime définitivement la sauvegarde du personnage choisi. Seuls le créateur, un MJ ou le propriétaire du serveur peuvent le supprimer."
+      "description": "Supprimer définitivement un personnage et toutes ses sauvegardes",
+      "characterOption": "Personnage à supprimer définitivement",
+      "modalTitle": "Supprimer définitivement",
+      "warning": "## Suppression définitive\nLa fiche active et toutes les sauvegardes conservées de `{{key}}` seront supprimées. `/undo` ne pourra pas la restaurer.",
+      "confirmationLabel": "Saisissez la CharacterKey exacte",
+      "confirmationDescription": "La valeur est sensible à la casse et doit correspondre à celle affichée ci-dessus.",
+      "confirmationPlaceholder": "Saisissez la CharacterKey exacte",
+      "incorrectConfirmation": "La confirmation ne correspond pas exactement à `{{key}}`. Rien n’a été supprimé. Relancez `/delete` pour réessayer.",
+      "expired": "Cette confirmation de suppression est introuvable ou a expiré. Relancez `/delete`.",
+      "wrongUser": "Cette confirmation de suppression appartient à un autre utilisateur.",
+      "success": "Le personnage **{{key}}** et toutes ses sauvegardes conservées ont été supprimés définitivement.",
+      "operationFailed": "Le personnage et ses sauvegardes conservées n’ont pas pu être supprimés de façon sûre. Rien n’a été volontairement laissé partiellement supprimé.",
+      "behavior": "Ouvre un formulaire de confirmation privé. Saisissez la CharacterKey exacte, en respectant la casse, pour supprimer définitivement la fiche active et toutes les sauvegardes conservées. Cette action est irréversible et `/undo` ne peut pas restaurer le personnage. Seuls le créateur, un MJ ou le propriétaire du serveur peuvent confirmer la suppression."
     },
     "endTurn": {
       "description": "Rétablir les PA et la DD à leur maximum",
@@ -189,7 +198,7 @@
       "description": "Restaurer le plus récent état antérieur conservé d’un personnage",
       "characterOption": "Personnage dont la sauvegarde la plus récente sera restaurée",
       "success": "Le personnage `{{key}}` a été restauré. La sauvegarde **{{action}}**, créée {{timestamp}} par {{actor}}, a été consommée.",
-      "behavior": "Restaure et consomme la sauvegarde disponible la plus récente d’un personnage. Chaque opération `/set`, `/damage`, `/heal`, `/end-turn` ou `/delete` réussie enregistre l’état complet du personnage avant la modification. Trois sauvegardes sont conservées par défaut ; la configuration serveur `characterHistory.maxEntries` peut modifier cette limite, et `/reload` applique la nouvelle valeur aux opérations d’historique suivantes. Des annulations répétées remontent les anciens états conservés, y compris après une suppression. L’annulation n’enregistre pas l’état remplacé et aucune fonction de rétablissement n’est prise en charge. Seuls le créateur, un MJ ou le propriétaire du serveur peuvent l’utiliser.",
+      "behavior": "Restaure et consomme la sauvegarde disponible la plus récente d’un personnage actif. Chaque opération `/set`, `/damage`, `/heal` ou `/end-turn` réussie enregistre l’état complet du personnage avant la modification. Trois sauvegardes sont conservées par défaut ; la configuration serveur `characterHistory.maxEntries` peut modifier cette limite, et `/reload` applique la nouvelle valeur aux opérations d’historique suivantes. Des annulations répétées remontent les anciens états conservés. L’annulation n’enregistre pas l’état remplacé, aucune fonction de rétablissement n’est prise en charge et `/delete` supprime définitivement toutes les sauvegardes. Seuls le créateur, un MJ ou le propriétaire du serveur peuvent l’utiliser.",
       "actions": {
         "set": "modification de champ",
         "damage": "dégâts",

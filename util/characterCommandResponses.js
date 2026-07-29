@@ -14,7 +14,10 @@ function createCharacterAddedResponse(characterKey, locale = 'en') {
 }
 
 function createCharacterDeletedResponse(characterKey, locale = 'en') {
-	return t(locale, 'rpg.delete.success', { key: characterKey });
+	return {
+		content: t(locale, 'rpg.delete.success', { key: characterKey }),
+		flags: MessageFlags.Ephemeral,
+	};
 }
 
 function createCharacterUndoResponse(result, locale = 'en') {
