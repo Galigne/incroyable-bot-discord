@@ -250,11 +250,16 @@ function getEditInputLabel(target, locale) {
 
 function createEditInput(field, inputDefinition, locale) {
 	const { customId, label, target, value } = inputDefinition;
+	const inputStyle = (
+		field.editKind === 'named-lines'
+		|| target.paragraph
+		|| target.multiline
+	)
+		? TextInputStyle.Paragraph
+		: TextInputStyle.Short;
 	const input = new TextInputBuilder()
 		.setCustomId(customId)
-		.setStyle(target.paragraph || target.multiline
-			? TextInputStyle.Paragraph
-			: TextInputStyle.Short)
+		.setStyle(inputStyle)
 		.setMaxLength(4_000)
 		.setRequired(isEditInputRequired(field, target));
 	if (value) {
@@ -275,6 +280,9 @@ function getEditInputDescription(field, target, locale) {
 			count: field.editTargetIds.length,
 		});
 	}
+	if (field.editKind === 'named-lines') {
+		return t(locale, 'rpg.editor.statisticsDescription');
+	}
 	if (target.rules) {
 		return t(locale, 'rpg.editor.rulesDescription');
 	}
@@ -291,6 +299,9 @@ function getEditInputPlaceholder(field, target, locale) {
 	if (field.editKind === 'colon') {
 		return getEditFormat(field.editId, locale);
 	}
+	if (field.editKind === 'named-lines') {
+		return t(locale, 'rpg.editor.statisticsPlaceholder');
+	}
 	if (target.multiline) {
 		return t(locale, 'rpg.editor.collectionPlaceholder');
 	}
@@ -299,6 +310,9 @@ function getEditInputPlaceholder(field, target, locale) {
 
 function isEditInputRequired(field, target) {
 	if (field.editKind === 'colon') {
+		return true;
+	}
+	if (field.editKind === 'named-lines') {
 		return true;
 	}
 	return target.type !== 'text';

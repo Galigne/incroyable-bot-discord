@@ -50,8 +50,7 @@ const EDITABLE_FIELDS = [
 	'race',
 	'background',
 	'personality',
-	'base-statistics',
-	'derived-statistics',
+	'statistics',
 	'rules',
 	'talents',
 	'status-effects',
@@ -92,6 +91,8 @@ test('the editable catalog exposes only the final grouped field list', () => {
 		'hp.current',
 		'ap.max',
 		'baseStatistics',
+		'base-statistics',
+		'derived-statistics',
 		'statusEffects',
 	]) {
 		assert.equal(getEditableFieldDefinition(removedField), null, removedField);
@@ -108,8 +109,6 @@ test('every colon-separated field is prefilled and trims valid submissions', () 
 			'ap',
 			'md',
 			'encumbrance',
-			'base-statistics',
-			'derived-statistics',
 		].map(field => [field, getEditableFieldValue(character, field)])),
 		{
 			name: ':',
@@ -118,8 +117,6 @@ test('every colon-separated field is prefilled and trims valid submissions', () 
 			ap: '4:4',
 			md: '5:5',
 			encumbrance: '0:10',
-			'base-statistics': '10:10:10:10:10:10:10',
-			'derived-statistics': '10:10',
 		},
 	);
 
@@ -129,12 +126,6 @@ test('every colon-separated field is prefilled and trims valid submissions', () 
 	setEditableFieldValue(character, 'ap', ' 3 : 6 ');
 	setEditableFieldValue(character, 'md', ' 7.5 : 12.5 ');
 	setEditableFieldValue(character, 'encumbrance', ' 2 : 15 ');
-	setEditableFieldValue(
-		character,
-		'base-statistics',
-		' 11 : 12 : 13 : 14 : 15 : 16 : 17 ',
-	);
-	setEditableFieldValue(character, 'derived-statistics', ' 18 : 19 ');
 
 	assert.equal(character.firstName, 'Ada');
 	assert.equal(character.lastName, 'Lovelace');
@@ -145,6 +136,36 @@ test('every colon-separated field is prefilled and trims valid submissions', () 
 		md: { current: 7.5, max: 12.5 },
 	});
 	assert.deepEqual(character.encumbrance, { current: 2, max: 15 });
+});
+
+test('statistics use one named line per base and derived value', () => {
+	const character = new Character('Statistics', 'tester');
+	assert.equal(
+		getEditableFieldValue(character, 'statistics'),
+		[
+			'constitution: 10',
+			'strength: 10',
+			'dexterity: 10',
+			'intelligence: 10',
+			'speed: 10',
+			'perception: 10',
+			'charisma: 10',
+			'initiative: 10',
+			'reflexes: 10',
+		].join('\n'),
+	);
+
+	setEditableFieldValue(character, 'statistics', [
+		' reflexes : 19 ',
+		'constitution: 11',
+		' strength : 12 ',
+		'dexterity: 13',
+		'intelligence: 14',
+		'speed: 15',
+		'perception: 16',
+		'charisma: 17',
+		'initiative: 18',
+	].join('\n'));
 	assert.deepEqual(character.stats, {
 		constitution: 11,
 		strength: 12,
@@ -183,8 +204,6 @@ test('colon formats reject missing, extra, malformed, and invalid values atomica
 		['hp', '1:2:3', 'errors.colonValueCount'],
 		['hp', 'one:2', 'errors.mustBeNumber'],
 		['hp', '1:', 'errors.colonValueRequired'],
-		['base-statistics', '10:10:10:10:10:10:nope', 'errors.mustBeNumber'],
-		['derived-statistics', ':10', 'errors.colonValueRequired'],
 		['ap', '5:4', 'errors.apCurrentAboveMax'],
 		['ap', '4:11', 'errors.apRange'],
 		['ap', '1.5:4', 'errors.apRange'],
@@ -200,6 +219,49 @@ test('colon formats reject missing, extra, malformed, and invalid values atomica
 			`${field}: ${value}`,
 		);
 		assert.equal(JSON.stringify(character), before, `${field}: ${value}`);
+	}
+});
+
+test('statistics reject malformed, unknown, duplicate, missing, and invalid lines atomically', () => {
+	const validLines = [
+		'constitution: 11',
+		'strength: 12',
+		'dexterity: 13',
+		'intelligence: 14',
+		'speed: 15',
+		'perception: 16',
+		'charisma: 17',
+		'initiative: 18',
+		'reflexes: 19',
+	];
+	for (const [replacement, translationKey] of [
+		['constitution 11', 'errors.statisticsLineInvalid'],
+		['luck: 11', 'errors.statisticsNameUnknown'],
+		['strength: 11', 'errors.statisticsDuplicate'],
+		[null, 'errors.statisticsMissing'],
+		['constitution: nope', 'errors.mustBeNumber'],
+	]) {
+		const character = new Character('Invalid-Statistics', 'tester');
+		const before = JSON.stringify(character);
+		const lines = [...validLines];
+		if (replacement === null) {
+			lines.shift();
+		}
+		else if (translationKey === 'errors.statisticsDuplicate') {
+			lines[0] = replacement;
+		}
+		else {
+			lines[0] = replacement;
+		}
+		assert.throws(
+			() => setEditableFieldValue(character, 'statistics', lines.join('\n')),
+			error => (
+				error.code === 'INVALID_CHARACTER_EDIT'
+				&& error.translationKey === translationKey
+			),
+			translationKey,
+		);
+		assert.equal(JSON.stringify(character), before, translationKey);
 	}
 });
 
@@ -324,8 +386,6 @@ test('every colon-separated modal uses the same prefilled format', () => {
 		'ap',
 		'md',
 		'encumbrance',
-		'base-statistics',
-		'derived-statistics',
 	]) {
 		const value = getEditableFieldValue(character, field);
 		const modal = createFieldModal('session', field, value, 'en').toJSON();
@@ -342,6 +402,21 @@ test('every colon-separated modal uses the same prefilled format', () => {
 	);
 	const emptyFrenchName = createFieldModal('session', 'name', '', 'fr').toJSON();
 	assert.equal(emptyFrenchName.components[0].component.placeholder, 'Prénom:Nom');
+});
+
+test('the statistics modal is one prefilled multiline input', () => {
+	const character = createFilledCharacter();
+	const value = getEditableFieldValue(character, 'statistics');
+	const modal = createFieldModal('session', 'statistics', value, 'en').toJSON();
+	assert.equal(modal.title, 'Edit Statistics');
+	assert.equal(modal.components.length, 1);
+	assert.equal(modal.components[0].component.value, value);
+	assert.equal(modal.components[0].component.style, 2);
+	assert.equal(modal.components[0].component.required, true);
+	assert.equal(
+		modal.components[0].description,
+		english.rpg.editor.statisticsDescription,
+	);
 });
 
 test('one grouped application update creates one history entry and keeps save keys', async () => {
@@ -381,8 +456,18 @@ test('failed grouped application updates create neither mutation nor history', a
 	await assert.rejects(
 		updateEditableCharacter(
 			characterKey,
-			'base-statistics',
-			'11:12:13:14:15:16:not-a-number',
+			'statistics',
+			[
+				'constitution: 11',
+				'strength: 12',
+				'dexterity: 13',
+				'intelligence: 14',
+				'speed: 15',
+				'perception: 16',
+				'charisma: not-a-number',
+				'initiative: 18',
+				'reflexes: 19',
+			].join('\n'),
 			() => true,
 			{ actorId: 'creator', maxEntries: 3 },
 		),
@@ -469,41 +554,41 @@ test('grouped modal validation messages and descriptions are localized', () => {
 	const character = createFilledCharacter();
 	const englishModal = createFieldModal(
 		'session',
-		'base-statistics',
-		getEditableFieldValue(character, 'base-statistics'),
+		'statistics',
+		getEditableFieldValue(character, 'statistics'),
 		'en',
 	).toJSON();
 	const frenchModal = createFieldModal(
 		'session',
-		'base-statistics',
-		getEditableFieldValue(character, 'base-statistics'),
+		'statistics',
+		getEditableFieldValue(character, 'statistics'),
 		'fr',
 	).toJSON();
-	assert.equal(englishModal.title, 'Edit Base statistics');
-	assert.equal(frenchModal.title, 'Modifier Statistiques de base');
+	assert.equal(englishModal.title, 'Edit Statistics');
+	assert.equal(frenchModal.title, 'Modifier Statistiques');
 	assert.equal(
 		englishModal.components[0].description,
-		english.rpg.editor.colonDescription.replace('{{count}}', '7'),
+		english.rpg.editor.statisticsDescription,
 	);
 	assert.equal(
 		frenchModal.components[0].description,
-		french.rpg.editor.colonDescription.replace('{{count}}', '7'),
+		french.rpg.editor.statisticsDescription,
 	);
 
 	let validationError;
 	try {
-		setEditableFieldValue(character, 'base-statistics', '10:10');
+		setEditableFieldValue(character, 'statistics', 'luck: 10');
 	}
 	catch (error) {
 		validationError = error;
 	}
 	assert.match(
 		translateCharacterOutcome(validationError, 'en'),
-		/Constitution:Strength:Dexterity:Intelligence:Speed:Perception:Charisma/,
+		/Unknown statistic `luck`/,
 	);
 	assert.match(
 		translateCharacterOutcome(validationError, 'fr'),
-		/Constitution:Force:Dextérité:Intelligence:Vitesse:Perception:Charisme/,
+		/Statistique `luck` inconnue/,
 	);
 });
 

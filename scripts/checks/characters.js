@@ -34,8 +34,18 @@ module.exports = function createCharacterChecks(context) {
 			setEditableFieldValue(original, 'name', 'Diego:Robert');
 			setEditableFieldValue(
 				original,
-				'base-statistics',
-				'10:12:10:10:10:10:10',
+				'statistics',
+				[
+					'constitution: 10',
+					'strength: 12',
+					'dexterity: 10',
+					'intelligence: 10',
+					'speed: 10',
+					'perception: 10',
+					'charisma: 10',
+					'initiative: 10',
+					'reflexes: 10',
+				].join('\n'),
 			);
 			setEditableFieldValue(original, 'race', {
 				'race.name': 'Ashborn',

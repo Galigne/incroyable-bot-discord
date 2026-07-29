@@ -192,7 +192,7 @@
       "description": "Set one character-sheet field or field group in a prefilled form",
       "characterOption": "Character to edit",
       "fieldOption": "Field to edit",
-      "behavior": "Opens one private modal prefilled with the selected saved field or group. Colon-separated inputs trim surrounding whitespace and require exactly this order: `name` = `firstName:lastName`; `hp`, `ar`, `ap`, and `md` = `current:max`; `encumbrance` = `current:max`; `base-statistics` = `constitution:strength:dexterity:intelligence:speed:perception:charisma`; `derived-statistics` = `initiative:reflexes`. Either name component may be empty. `race` uses separate Name, Physical description, Lore, Skill bonus, and Physical ability inputs. `background` uses separate Appearance, Backstory, and Goals inputs. `personality` uses separate Description and Traits inputs. Traits, status effects, equipment, and inventory use one entry per line. RULEs use one `name:level:description` entry per line; only the first two separators are structural, so descriptions may contain colons. Empty multiline inputs clear their collection. AP must remain whole numbers with `0 ≤ current ≤ max ≤ 10`. Every group is validated and saved atomically. Only the character creator, a DM, or the server owner may edit the sheet."
+      "behavior": "Opens one private modal prefilled with the selected saved field or group. Colon-separated inputs trim surrounding whitespace and require exactly this order: `name` = `firstName:lastName`; `hp`, `ar`, `ap`, and `md` = `current:max`; `encumbrance` = `current:max`. Either name component may be empty. `statistics` uses one `statName: statValue` line for each required statistic: `constitution`, `strength`, `dexterity`, `intelligence`, `speed`, `perception`, `charisma`, `initiative`, and `reflexes`. Statistic names stay English, may appear in any order, and must each appear exactly once. `race` uses separate Name, Physical description, Lore, Skill bonus, and Physical ability inputs. `background` uses separate Appearance, Backstory, and Goals inputs. `personality` uses separate Description and Traits inputs. Traits, status effects, equipment, and inventory use one entry per line. RULEs use one `name:level:description` entry per line; only the first two separators are structural, so descriptions may contain colons. Empty multiline inputs clear their collection. AP must remain whole numbers with `0 ≤ current ≤ max ≤ 10`. Every group is validated and saved atomically. Only the character creator, a DM, or the server owner may edit the sheet."
     },
     "undo": {
       "description": "Restore the newest retained pre-change character snapshot",
@@ -225,6 +225,8 @@
       "textDescription": "The previous value is prefilled. Empty the form to clear it.",
       "numberDescription": "Enter a valid number.",
       "colonDescription": "Use exactly {{count}} colon-separated values; surrounding whitespace is trimmed.",
+      "statisticsDescription": "One `statName: value` line per statistic; all nine English names are required.",
+      "statisticsPlaceholder": "One line per statistic: statName: value",
       "inputLabels": {
         "name": "Name",
         "physicalDescription": "Physical description",
@@ -330,6 +332,10 @@
     "groupInputMissing": "The complete {{field}} form must be submitted.",
     "colonValueCount": "{{field}} must contain exactly {{count}} colon-separated values in this order: `{{format}}`.",
     "colonValueRequired": "Every numeric value in {{field}} is required. Use this order: `{{format}}`.",
+    "statisticsLineInvalid": "Each statistics line must use `statName: value`.",
+    "statisticsNameUnknown": "Unknown statistic `{{stat}}`. Expected: {{statistics}}.",
+    "statisticsDuplicate": "Statistic `{{stat}}` appears more than once.",
+    "statisticsMissing": "Missing required statistic `{{stat}}`.",
     "collectionValueRequired": "A value is required for the {{field}}.",
     "mustBeNumber": "{{field}} must be a number.",
     "ruleNameRequired": "A RULE name is required before the `:` separator.",

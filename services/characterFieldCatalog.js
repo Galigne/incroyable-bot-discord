@@ -102,19 +102,17 @@ add('racialTraits.physicalAbility', 'racialPhysicalAbility', stored(
 		paragraph: true,
 	},
 ));
-add('statistics', 'statistics', { aliases: ['stats'], viewId: 'statistics' });
-add('statistics.base', 'baseStatistics', {
-	aliases: ['baseStatistics'],
-	...editable('base-statistics', 'colon', BASE_STATS.map(stat => `stats.${stat}`)),
-});
-add('statistics.derived', 'derivedStatistics', {
-	aliases: ['derivedStatistics'],
+add('statistics', 'statistics', {
+	aliases: ['stats'],
+	viewId: 'statistics',
 	...editable(
-		'derived-statistics',
-		'colon',
-		DERIVED_STATS.map(stat => `stats.${stat}`),
+		'statistics',
+		'named-lines',
+		[...BASE_STATS, ...DERIVED_STATS].map(stat => `stats.${stat}`),
 	),
 });
+add('statistics.base', 'baseStatistics', { aliases: ['baseStatistics'] });
+add('statistics.derived', 'derivedStatistics', { aliases: ['derivedStatistics'] });
 
 for (const stat of [...BASE_STATS, ...DERIVED_STATS]) {
 	add(`stats.${stat}`, stat, stored(

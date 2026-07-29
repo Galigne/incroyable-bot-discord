@@ -99,9 +99,8 @@ settable fields, retrievable fields, generator categories, common dice expressio
 levels, and common purge amounts. `/undo` autocomplete includes authorized active
 characters with usable history. The private form opens immediately after
 `/set` is submitted. Its editable choices are `name`, `level`, `race`,
-`background`, `personality`, `base-statistics`, `derived-statistics`, `rules`,
-`talents`, `status-effects`, `equipment`, `inventory`, `encumbrance`, `hp`, `ar`,
-`ap`, and `md`.
+`background`, `personality`, `statistics`, `rules`, `talents`, `status-effects`,
+`equipment`, `inventory`, `encumbrance`, `hp`, `ar`, `ap`, and `md`.
 
 Race uses separate inputs for its name, physical description, lore, skill bonus,
 and physical ability. Background uses separate appearance, backstory, and goals
@@ -109,12 +108,15 @@ inputs. Personality uses separate description and traits inputs. These groups ar
 validated and saved together.
 
 Compact groups use one colon-separated input. Name uses
-`firstName:lastName`; HP, AR, AP, MD, and encumbrance use `current:max`; base
-statistics use
-`constitution:strength:dexterity:intelligence:speed:perception:charisma`; derived
-statistics use `initiative:reflexes`. Values are prefilled in the same format,
-surrounding whitespace is trimmed, and the exact number of values is required.
-Either name component may be empty to clear it.
+`firstName:lastName`; HP, AR, AP, MD, and encumbrance use `current:max`. Values
+are prefilled in the same format, surrounding whitespace is trimmed, and the exact
+number of values is required. Either name component may be empty to clear it.
+
+Statistics use one prefilled `statName: statValue` line for each of
+`constitution`, `strength`, `dexterity`, `intelligence`, `speed`, `perception`,
+`charisma`, `initiative`, and `reflexes`. These English names may appear in any
+order but must each appear exactly once; the complete group is validated before
+any statistic changes.
 
 Personality traits, status effects, equipment, and inventory use one entry per
 line. Optional leading dashes are normalized away. RULEs use
@@ -190,7 +192,7 @@ Example workflows:
 
 ```text
 /gen-char character-key:D.Robert level:5 background:adventurer
-/set character-key:D.Robert field:base-statistics
+/set character-key:D.Robert field:statistics
 /set character-key:D.Robert field:rules
 /get character-key:D.Robert
 /get character-key:D.Robert field:personality

@@ -94,8 +94,7 @@ test('/help command:set lists every localized editable field by section', () => 
 		'race',
 		'background',
 		'personality',
-		'base-statistics',
-		'derived-statistics',
+		'statistics',
 		'rules',
 		'talents',
 		'status-effects',
@@ -122,7 +121,14 @@ test('/help command:set lists every localized editable field by section', () => 
 		for (const heading of expectedHeadings) {
 			assert.ok(rendered.includes(`**${heading}**`), `${locale}: ${heading}`);
 		}
-		for (const removedField of ['firstName', 'race.name', 'stats.strength', 'hp.current']) {
+		for (const removedField of [
+			'firstName',
+			'race.name',
+			'stats.strength',
+			'base-statistics',
+			'derived-statistics',
+			'hp.current',
+		]) {
 			assert.equal(rendered.includes(`\`${removedField}\``), false);
 		}
 	}
@@ -130,8 +136,9 @@ test('/help command:set lists every localized editable field by section', () => 
 	for (const format of [
 		'`firstName:lastName`',
 		'`current:max`',
-		'`constitution:strength:dexterity:intelligence:speed:perception:charisma`',
-		'`initiative:reflexes`',
+		'`statName: statValue`',
+		'`constitution`',
+		'`reflexes`',
 		'`name:level:description`',
 	]) {
 		assert.ok(english.includes(format), format);
@@ -290,7 +297,7 @@ test('autocomplete filters values beyond Discord\'s 25-choice display limit', as
 		await autocompleteOption(
 			'set',
 			'field',
-			'md.max',
+			'derived-statistics',
 			createInteraction('regular'),
 		),
 		[],
@@ -298,9 +305,9 @@ test('autocomplete filters values beyond Discord\'s 25-choice display limit', as
 	assert.ok((await autocompleteOption(
 		'set',
 		'field',
-		'derived',
+		'statistics',
 		createInteraction('regular'),
-	)).some(choice => choice.value === 'derived-statistics'));
+	)).some(choice => choice.value === 'statistics'));
 });
 
 test('/help overview and details are localized in English and French', () => {

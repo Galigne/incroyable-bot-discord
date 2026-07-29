@@ -309,11 +309,11 @@ The current viewing and editing decisions are intentional:
   the command immediately opens one private modal prefilled with the saved value
   or complete grouped section.
 - The only `/set field` values are `name`, `level`, `race`, `background`,
-  `personality`, `base-statistics`, `derived-statistics`, `rules`, `talents`,
-  `status-effects`, `equipment`, `inventory`, `encumbrance`, `hp`, `ar`, `ap`,
-  and `md`. Stored child fields remain canonical catalog entries but are not
-  independently editable.
-- `/help command:set` explains every grouped modal and colon-separated format.
+  `personality`, `statistics`, `rules`, `talents`, `status-effects`, `equipment`,
+  `inventory`, `encumbrance`, `hp`, `ar`, `ap`, and `md`. Stored child fields
+  remain canonical catalog entries but are not independently editable.
+- `/help command:set` explains every grouped modal, colon-separated format, and
+  named statistics line.
 - `/delete character-key:<key>` opens a private, single-use confirmation modal.
   The user must type the exact case-sensitive CharacterKey; success permanently
   removes the active save and all retained backups, so `/undo` cannot restore it.
@@ -330,11 +330,13 @@ Compact related fields use one prefilled colon-separated input:
 
 - `name`: `firstName:lastName`; either component may be empty.
 - `hp`, `ar`, `ap`, `md`, and `encumbrance`: `current:max`.
-- `base-statistics`:
-  `constitution:strength:dexterity:intelligence:speed:perception:charisma`.
-- `derived-statistics`: `initiative:reflexes`.
 
 Trim whitespace around every component and require the exact component count.
+`statistics` uses one prefilled `statName: statValue` line for each of
+`constitution`, `strength`, `dexterity`, `intelligence`, `speed`, `perception`,
+`charisma`, `initiative`, and `reflexes`. Keep these technical names in English.
+Accept them in any order, but require every name exactly once and reject unknown or
+duplicate names.
 Parse and validate a complete grouped submission before applying any value.
 One successful modal submission performs one character-store update, creates one
 `set` history entry, and returns one localized response. Invalid or unauthorized

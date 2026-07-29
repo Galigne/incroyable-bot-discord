@@ -21,6 +21,14 @@ function getEditableFieldValue(character, fieldName) {
 			.map(target => serializeTargetValue(character, target))
 			.join(':');
 	}
+	if (field.editKind === 'named-lines') {
+		return targets
+			.map(target => `${getNamedLineKey(target)}: ${serializeTargetValue(
+				character,
+				target,
+			)}`)
+			.join('\n');
+	}
 	return serializeTargetValue(character, targets[0]);
 }
 
@@ -88,11 +96,53 @@ function parseSubmittedValue(field, targets, submittedValue) {
 			};
 		});
 	}
+	if (field.editKind === 'named-lines') {
+		return parseNamedLineValue(field, targets, submittedValue);
+	}
 
 	return [{
 		target: targets[0],
 		value: parseTargetValue(targets[0], submittedValue),
 	}];
+}
+
+function parseNamedLineValue(field, targets, submittedValue) {
+	const targetsByName = new Map(targets.map(target => [
+		getNamedLineKey(target),
+		target,
+	]));
+	const valuesByTargetId = new Map();
+	for (const line of submittedValue.split(/\r?\n/).map(value => value.trim()).filter(Boolean)) {
+		const separatorIndex = line.indexOf(':');
+		if (separatorIndex === -1) {
+			throw editError('errors.statisticsLineInvalid');
+		}
+		const name = line.slice(0, separatorIndex).trim().toLowerCase();
+		const target = targetsByName.get(name);
+		if (!target) {
+			throw editError('errors.statisticsNameUnknown', {
+				stat: name,
+				statistics: [...targetsByName.keys()].join(', '),
+			});
+		}
+		if (valuesByTargetId.has(target.id)) {
+			throw editError('errors.statisticsDuplicate', { stat: name });
+		}
+		valuesByTargetId.set(
+			target.id,
+			parseTargetValue(target, line.slice(separatorIndex + 1)),
+		);
+	}
+	const missingTarget = targets.find(target => !valuesByTargetId.has(target.id));
+	if (missingTarget) {
+		throw editError('errors.statisticsMissing', {
+			stat: getNamedLineKey(missingTarget),
+		});
+	}
+	return targets.map(target => ({
+		target,
+		value: valuesByTargetId.get(target.id),
+	}));
 }
 
 function parseTargetValue(target, submittedValue) {
@@ -171,6 +221,12 @@ function serializeTargetValue(character, target) {
 			.join('\n');
 	}
 	return String(value ?? '');
+}
+
+function getNamedLineKey(target) {
+	return target.id.startsWith('stats.')
+		? target.id.slice('stats.'.length)
+		: target.id;
 }
 
 function getEditTargets(field) {

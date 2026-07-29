@@ -34,12 +34,22 @@ module.exports = function createInteractionChecks(context) {
 				showModal: async modal => {
 					modalPayload = modal.toJSON();
 				},
-			}, englishConfig, characterKey, 'base-statistics');
+			}, englishConfig, characterKey, 'statistics');
 			if (
-				modalPayload.title !== 'Edit Base statistics'
+				modalPayload.title !== 'Edit Statistics'
 				|| modalPayload.components.length !== 1
 				|| modalPayload.components[0].component.value
-					!== '10:10:10:10:10:10:10'
+					!== [
+						'constitution: 10',
+						'strength: 10',
+						'dexterity: 10',
+						'intelligence: 10',
+						'speed: 10',
+						'perception: 10',
+						'charisma: 10',
+						'initiative: 10',
+						'reflexes: 10',
+					].join('\n')
 			) {
 				errors.push('The direct RPG editor did not prefill a valid statistics modal.');
 			}
@@ -51,7 +61,17 @@ module.exports = function createInteractionChecks(context) {
 				member,
 				isModalSubmit: () => true,
 				fields: {
-					getTextInputValue: () => '10:14:10:10:10:10:10',
+					getTextInputValue: () => [
+						'constitution: 10',
+						'strength: 14',
+						'dexterity: 10',
+						'intelligence: 10',
+						'speed: 10',
+						'perception: 10',
+						'charisma: 10',
+						'initiative: 10',
+						'reflexes: 10',
+					].join('\n'),
 				},
 				reply: async payload => {
 					submitPayload = payload;

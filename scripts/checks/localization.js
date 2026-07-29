@@ -102,11 +102,21 @@ module.exports = function createLocalizationChecks(context) {
 		const { createFieldModal } = require('../../commands/rpg/interactions');
 		const frenchModal = createFieldModal(
 			'test',
-			'base-statistics',
-			'10:10:10:10:10:10:10',
+			'statistics',
+			[
+				'constitution: 10',
+				'strength: 10',
+				'dexterity: 10',
+				'intelligence: 10',
+				'speed: 10',
+				'perception: 10',
+				'charisma: 10',
+				'initiative: 10',
+				'reflexes: 10',
+			].join('\n'),
 			'fr',
 		).toJSON();
-		if (frenchModal.title !== 'Modifier Statistiques de base') {
+		if (frenchModal.title !== 'Modifier Statistiques') {
 			errors.push('Character editor modals do not use the configured locale.');
 		}
 		for (const [fieldId, expected] of Object.entries({

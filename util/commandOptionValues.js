@@ -29,6 +29,12 @@ function getEditableFieldValues(locale) {
 }
 
 function getEditableFieldGroup(field, locale) {
+	if (field.id === 'statistics') {
+		return {
+			key: 'statistics',
+			label: getCharacterFieldLabel(locale, 'statistics'),
+		};
+	}
 	if (!field.id.includes('.')) {
 		return {
 			key: 'general',
