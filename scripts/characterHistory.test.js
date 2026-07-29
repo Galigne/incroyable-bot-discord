@@ -163,8 +163,8 @@ test('every supported successful action stores a complete pre-change snapshot', 
 	await createCharacter(characterKey, 'creator');
 	await updateEditableCharacter(
 		characterKey,
-		'firstName',
-		'History',
+		'name',
+		'History:',
 		() => true,
 		context,
 	);
@@ -200,13 +200,13 @@ test('/set creates history only after a successful modal submission', async () =
 			modal = value.toJSON();
 		},
 		user,
-	}, config, characterKey, 'firstName');
+	}, config, characterKey, 'name');
 
 	let response;
 	await handleRpgInteraction({
 		customId: modal.custom_id,
 		fields: {
-			getTextInputValue: () => 'Modal value',
+			getTextInputValue: () => 'Modal value:',
 		},
 		guildId: 'guild',
 		isModalSubmit: () => true,
@@ -245,8 +245,8 @@ test('authorization, validation, and serialization failures do not add history',
 	await assert.rejects(
 		updateEditableCharacter(
 			validationKey,
-			'stats.strength',
-			'not-a-number',
+			'base-statistics',
+			'10:not-a-number:10:10:10:10:10',
 			() => true,
 			historyContext(),
 		),
@@ -670,8 +670,8 @@ async function editFirstName(
 ) {
 	return updateEditableCharacter(
 		characterKey,
-		'firstName',
-		value,
+		'name',
+		`${value}:`,
 		canManage,
 		context,
 	);

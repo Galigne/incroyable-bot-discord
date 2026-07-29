@@ -1,0 +1,74 @@
+{
+  "schemaVersion": 1,
+  "key": "pnj_1",
+  "firstName": "Borin",
+  "lastName": "Stonehand",
+  "creatorId": "168424192520355843",
+  "level": 5,
+  "race": {
+    "name": "Elfe",
+    "physicalDescription": "Peuple à la grande longévité et aux traits fins, les elfes sont connus pour leurs sens aiguisés, leur grâce et leurs cultures profondément liées à la magie ou à la nature.",
+    "lore": "va y jsp en fait"
+  },
+  "appearance": "Réservé et éloquent, transportant des pamphlets interdits et de la correspondance dans une mallette à double fond.",
+  "backstory": "Un exilé politique prônait des réformes pacifiques jusqu’à ce que le gouvernement qualifie de trahison la simple évocation du changement.",
+  "goals": "Soutenir les réformateurs restés au pays tout en empêchant leur mouvement de sombrer dans la violence aveugle.",
+  "personality": {
+    "traits": [
+      "Apologise à chaque ennemi vaincu et devient offensé si les excuses sont rejetées.",
+      "Garde des revues méticuleuses tout en remplaçant le nom de chaque personne par un surnom de plus en plus confus."
+    ],
+    "description": ""
+  },
+  "racialTraits": {
+    "skillBonus": "+1 en Perception",
+    "physicalAbility": "Vitalité intemporelle : les elfes vieillissent avec une extrême lenteur et conservent leur vigueur physique ainsi que leur vivacité d’esprit pendant des siècles."
+  },
+  "stats": {
+    "constitution": 10,
+    "strength": 12,
+    "dexterity": 14,
+    "intelligence": 8,
+    "speed": 13,
+    "perception": 11,
+    "charisma": 9,
+    "initiative": 13,
+    "reflexes": 13
+  },
+  "rules": [],
+  "talents": "Autres — Le personnage peut utiliser l'une ou l'autre main avec une précision égale.\nAthlète — +1 aux actions physiques impliquant un mouvement soutenu, l'escalade, ou le saut.",
+  "resources": {
+    "hp": {
+      "current": 180,
+      "max": 200
+    },
+    "ar": {
+      "current": 45,
+      "max": 45
+    },
+    "ap": {
+      "current": 5,
+      "max": 5
+    },
+    "md": {
+      "current": 6.5,
+      "max": 6.5
+    }
+  },
+  "statusEffects": [],
+  "equipment": [
+    "Armure légère rare — Armure souple de qualité supérieure, confectionnée dans un matériau exceptionnellement résistant.",
+    "Écharpe — Une arme légère était munie de pierres ou de petites balles de plomb.",
+    "Axe des mains — Une arme compacte à couper équilibrée assez bien pour lancer."
+  ],
+  "inventory": [
+    "Violon de poison de base — Une dose limitée de toxines convient pour une arme ou une boisson.",
+    "Trois rations de voyage — Nourriture compacte suffisante pour trois jours.",
+    "Rouleaux de lit — Une couverture et un rouleau de couchage résistant aux intempéries.",
+    "30 pièces d’or"
+  ],
+  "encumbrance": {
+    "current": 4,
+    "max": 10
+  }
+}

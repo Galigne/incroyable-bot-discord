@@ -86,6 +86,19 @@ function getCharacterTranslationVariables(locale, variables = {}) {
 		translated.field = getCharacterFieldLabel(locale, variables.fieldId);
 		delete translated.fieldId;
 	}
+	if (variables.componentFieldId) {
+		translated.component = getCharacterFieldLabel(
+			locale,
+			variables.componentFieldId,
+		);
+		delete translated.componentFieldId;
+	}
+	if (variables.formatFieldIds) {
+		translated.format = variables.formatFieldIds
+			.map(fieldId => getCharacterFieldLabel(locale, fieldId))
+			.join(':');
+		delete translated.formatFieldIds;
+	}
 	return translated;
 }
 

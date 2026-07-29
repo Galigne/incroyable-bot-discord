@@ -82,7 +82,8 @@ saves.
   aliases, storage paths, types, and editable/viewable capabilities.
 - `services/characterStore.js`: JSON character persistence; create, update, and
   delete operations are serialized per key, while updates replace saves atomically.
-- `services/characterEditor.js`: editable-value parsing and domain mutation.
+- `services/characterEditor.js`: grouped editable-value parsing, complete
+  pre-mutation validation, and domain mutation.
 - `services/mechanics/`: Discord-independent character constants, validation,
   statistics, resources, armor, damage, and generation formulas.
 - `services/generatorCatalog.js`: loads and validates generator JSON and performs
@@ -305,12 +306,40 @@ The current viewing and editing decisions are intentional:
 - `/help command:get` explains the supported views.
 - There is intentionally no `/get-all` command.
 - `/set character-key:<key> field:<field>` has no value argument. Submitting
-  the command immediately opens one private modal prefilled with the saved value.
-- `/help command:set` explains settable paths and modal input.
+  the command immediately opens one private modal prefilled with the saved value
+  or complete grouped section.
+- The only `/set field` values are `name`, `level`, `race`, `background`,
+  `personality`, `base-statistics`, `derived-statistics`, `rules`, `talents`,
+  `status-effects`, `equipment`, `inventory`, `encumbrance`, `hp`, `ar`, `ap`,
+  and `md`. Stored child fields remain canonical catalog entries but are not
+  independently editable.
+- `/help command:set` explains every grouped modal and colon-separated format.
 - `/delete character-key:<key>` opens a private, single-use confirmation modal.
   The user must type the exact case-sensitive CharacterKey; success permanently
   removes the active save and all retained backups, so `/undo` cannot restore it.
 - Do not add section/field dropdown navigation back to the editor.
+
+`race`, `background`, and `personality` use separate prefilled modal inputs:
+
+- Race updates `race.name`, `race.physicalDescription`, `race.lore`,
+  `racialTraits.skillBonus`, and `racialTraits.physicalAbility`.
+- Background updates `appearance`, `backstory`, and `goals`.
+- Personality updates `personality.description` and `personality.traits`.
+
+Compact related fields use one prefilled colon-separated input:
+
+- `name`: `firstName:lastName`; either component may be empty.
+- `hp`, `ar`, `ap`, `md`, and `encumbrance`: `current:max`.
+- `base-statistics`:
+  `constitution:strength:dexterity:intelligence:speed:perception:charisma`.
+- `derived-statistics`: `initiative:reflexes`.
+
+Trim whitespace around every component and require the exact component count.
+Parse and validate a complete grouped submission before applying any value.
+One successful modal submission performs one character-store update, creates one
+`set` history entry, and returns one localized response. Invalid or unauthorized
+submissions must not mutate the character or history. Authorization must be
+repeated inside the existing per-key update queue when the modal is submitted.
 
 Textual collections have no per-entry `add`, `set`, `remove`, or `clear` action
 syntax. The `/set` modal presents their full multiline content and replaces it
@@ -344,8 +373,9 @@ Missing, malformed, and unsupported versions are rejected with distinct stable
 error codes. Invalid and outdated saves must not be migrated, rewritten, or loaded
 through a legacy fallback. Character listing skips them and reports their
 CharacterKeys through `CharacterLoadError`.
-`appearance` is a standalone editable text field displayed directly below level and
-race in the public summary.
+`appearance` remains a standalone saved text property displayed directly below
+level and race in the public summary. It is edited as part of the atomic
+`background` group.
 
 Permissions:
 

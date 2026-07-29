@@ -88,7 +88,25 @@ test('/help command:gen lists every localized generator category', () => {
 
 test('/help command:set lists every localized editable field by section', () => {
 	const fields = getEditableFields();
-	assert.ok(fields.length > MAX_AUTOCOMPLETE_CHOICES);
+	assert.deepEqual(fields.map(field => field.editId), [
+		'name',
+		'level',
+		'race',
+		'background',
+		'personality',
+		'base-statistics',
+		'derived-statistics',
+		'rules',
+		'talents',
+		'status-effects',
+		'equipment',
+		'inventory',
+		'encumbrance',
+		'hp',
+		'ar',
+		'ap',
+		'md',
+	]);
 	for (const [locale, expectedHeadings] of [
 		['en', ['General fields', 'Statistics', 'Resources']],
 		['fr', ['Champs généraux', 'Statistiques', 'Ressources']],
@@ -104,6 +122,19 @@ test('/help command:set lists every localized editable field by section', () => 
 		for (const heading of expectedHeadings) {
 			assert.ok(rendered.includes(`**${heading}**`), `${locale}: ${heading}`);
 		}
+		for (const removedField of ['firstName', 'race.name', 'stats.strength', 'hp.current']) {
+			assert.equal(rendered.includes(`\`${removedField}\``), false);
+		}
+	}
+	const english = renderDetail('set', createInteraction('regular'), 'en');
+	for (const format of [
+		'`firstName:lastName`',
+		'`current:max`',
+		'`constitution:strength:dexterity:intelligence:speed:perception:charisma`',
+		'`initiative:reflexes`',
+		'`name:level:description`',
+	]) {
+		assert.ok(english.includes(format), format);
 	}
 });
 
@@ -251,15 +282,25 @@ test('autocomplete filters values beyond Discord\'s 25-choice display limit', as
 		'',
 		createInteraction('regular'),
 	);
-	assert.equal(initialFields.length, MAX_AUTOCOMPLETE_CHOICES);
-	assert.ok(
-		(await autocompleteOption(
+	assert.deepEqual(
+		initialFields.map(choice => choice.value),
+		getEditableFields().map(field => field.editId),
+	);
+	assert.deepEqual(
+		await autocompleteOption(
 			'set',
 			'field',
 			'md.max',
 			createInteraction('regular'),
-		)).some(choice => choice.value === 'md.max'),
+		),
+		[],
 	);
+	assert.ok((await autocompleteOption(
+		'set',
+		'field',
+		'derived',
+		createInteraction('regular'),
+	)).some(choice => choice.value === 'derived-statistics'));
 });
 
 test('/help overview and details are localized in English and French', () => {

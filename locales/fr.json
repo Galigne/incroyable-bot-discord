@@ -189,10 +189,10 @@
       "behavior": "Répond avec l’URL publique du livre de règles du JDR."
     },
     "set": {
-      "description": "Modifier un champ de personnage dans un formulaire prérempli",
+      "description": "Modifier un champ ou groupe de champs dans un formulaire prérempli",
       "characterOption": "Personnage à modifier",
       "fieldOption": "Champ à modifier",
-      "behavior": "Ouvre un formulaire privé prérempli avec la valeur sauvegardée du champ choisi. La liste complète des champs modifiables figure ci-dessus, regroupée par section ; saisissez une partie du libellé ou du chemin pour filtrer l’autocomplétion. Les champs imbriqués utilisent des chemins tels que `race.name`, `stats.strength` ou `hp.current`. Les collections multilignes remplacent tout leur contenu, à raison d’une entrée par ligne ; les LOI utilisent `Nom: Niveau: Description`. Un texte vide efface les champs qui l’autorisent. Les PA doivent rester des nombres entiers avec `0 ≤ current ≤ max ≤ 10`. Seuls le créateur, un MJ ou le propriétaire du serveur peuvent modifier la fiche."
+      "behavior": "Ouvre un formulaire privé prérempli avec le champ ou groupe choisi. Les saisies séparées par des deux-points suppriment les espaces autour des valeurs et exigent exactement cet ordre : `name` = `firstName:lastName` ; `hp`, `ar`, `ap` et `md` = `current:max` ; `encumbrance` = `current:max` ; `base-statistics` = `constitution:strength:dexterity:intelligence:speed:perception:charisma` ; `derived-statistics` = `initiative:reflexes`. Chaque partie du nom peut être vide. `race` utilise des saisies séparées pour le nom, la description physique, le lore, le bonus de compétence et la capacité physique. `background` utilise des saisies séparées pour l’apparence, l’histoire personnelle et les objectifs. `personality` utilise des saisies séparées pour la description et les traits. Les traits, effets d’état, équipements et objets utilisent une entrée par ligne. Les LOI utilisent une entrée `nom:niveau:description` par ligne ; seuls les deux premiers séparateurs structurent la LOI, une description peut donc contenir des deux-points. Une saisie multiligne vide efface la collection. Les PA doivent rester des nombres entiers avec `0 ≤ current ≤ max ≤ 10`. Chaque groupe est validé et sauvegardé atomiquement. Seuls le créateur, un MJ ou le propriétaire du serveur peuvent modifier la fiche."
     },
     "undo": {
       "description": "Restaurer le plus récent état antérieur conservé d’un personnage",
@@ -224,6 +224,19 @@
       "collectionDescription": "Une entrée libre par ligne. Vider le formulaire pour effacer le champ.",
       "textDescription": "La valeur actuelle est préremplie. Vider le formulaire pour effacer le champ.",
       "numberDescription": "Saisir un nombre valide.",
+      "colonDescription": "Saisir exactement {{count}} valeurs séparées par des deux-points ; les espaces sont supprimés.",
+      "inputLabels": {
+        "name": "Nom",
+        "physicalDescription": "Description physique",
+        "lore": "Lore",
+        "skillBonus": "Bonus de compétence",
+        "physicalAbility": "Capacité physique",
+        "description": "Description",
+        "traits": "Traits",
+        "appearance": "Apparence",
+        "backstory": "Histoire personnelle",
+        "goals": "Objectifs"
+      },
       "title": "Modifier {{field}}"
     }
   },
@@ -241,6 +254,7 @@
       "appearance": "Apparence",
       "backstory": "Histoire personnelle",
       "goals": "Objectifs",
+      "background": "Background",
       "personality": "Personnalité",
       "personalityDescription": "Description de la personnalité",
       "personalityTraits": "Traits de personnalité",
@@ -313,6 +327,9 @@
     "invalidCharacterKey": "Une CharacterKey doit commencer et se terminer par une lettre ou un chiffre. Elle peut contenir des lettres, des chiffres, des points, des tirets et des tirets bas.",
     "unknownEditField": "Champ inconnu : {{field}}.",
     "valueRequired": "Valeur requise pour {{field}}.",
+    "groupInputMissing": "Le formulaire complet {{field}} doit être envoyé.",
+    "colonValueCount": "{{field}} doit contenir exactement {{count}} valeurs séparées par des deux-points dans cet ordre : `{{format}}`.",
+    "colonValueRequired": "Toutes les valeurs numériques de {{field}} sont requises. Respectez cet ordre : `{{format}}`.",
     "collectionValueRequired": "Valeur requise pour {{field}}.",
     "mustBeNumber": "{{field}} doit contenir un nombre.",
     "ruleNameRequired": "Le nom de la LOI doit précéder le séparateur `:`.",

@@ -28,6 +28,24 @@ function validateActionPointEdit(character, path, value) {
 	}
 }
 
+function validateActionPointPair(current, maximum) {
+	if (
+		!Number.isInteger(current)
+		|| !Number.isInteger(maximum)
+		|| current < 0
+		|| maximum < 0
+		|| current > MAX_AP
+		|| maximum > MAX_AP
+	) {
+		throw characterEditError('errors.apRange', {
+			max: MAX_AP,
+		});
+	}
+	if (current > maximum) {
+		throw characterEditError('errors.apCurrentAboveMax');
+	}
+}
+
 function copyStringList(value) {
 	return Array.isArray(value) ? value.filter(item => typeof item === 'string') : [];
 }
@@ -50,4 +68,5 @@ module.exports = {
 	copyRules,
 	copyStringList,
 	validateActionPointEdit,
+	validateActionPointPair,
 };

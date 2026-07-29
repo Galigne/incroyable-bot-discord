@@ -3,24 +3,45 @@ const { BASE_STATS, DERIVED_STATS } = require('./mechanics/constants');
 const definitions = [];
 const definitionsById = new Map();
 const aliases = new Map();
+const editableAliases = new Map();
 
 add('key', 'characterKey');
-add('name', 'name', { viewId: 'name' });
-add('firstName', 'firstName', editable('firstName', ['firstName'], 'text', {
+add('name', 'name', {
+	viewId: 'name',
+	...editable('name', 'colon', ['firstName', 'lastName']),
+});
+add('firstName', 'firstName', stored(['firstName'], 'text', {
 	aliases: ['firstname'],
 	viewId: 'firstName',
 }));
-add('lastName', 'lastName', editable('lastName', ['lastName'], 'text', {
+add('lastName', 'lastName', stored(['lastName'], 'text', {
 	aliases: ['lastname'],
 	viewId: 'lastName',
 }));
-add('level', 'level', editable('level', ['level'], 'number', { viewId: 'level' }));
-add('race', 'race', { viewId: 'race' });
-add('race.name', 'raceName', editable('race.name', ['race', 'name'], 'text', {
+add('level', 'level', {
+	...stored(['level'], 'number'),
+	...editable('level', 'scalar', ['level']),
+	viewId: 'level',
+});
+add('race', 'race', {
+	viewId: 'race',
+	...editable('race', 'multi', [
+		'race.name',
+		'race.physicalDescription',
+		'race.lore',
+		'racialTraits.skillBonus',
+		'racialTraits.physicalAbility',
+	]),
+});
+add('background', 'background', editable('background', 'multi', [
+	'appearance',
+	'backstory',
+	'goals',
+]));
+add('race.name', 'raceName', stored(['race', 'name'], 'text', {
 	aliases: ['racename'],
 }));
-add('race.physicalDescription', 'racePhysicalDescription', editable(
-	'race.description',
+add('race.physicalDescription', 'racePhysicalDescription', stored(
 	['race', 'physicalDescription'],
 	'text',
 	{
@@ -28,31 +49,35 @@ add('race.physicalDescription', 'racePhysicalDescription', editable(
 		paragraph: true,
 	},
 ));
-add('race.lore', 'raceLore', editable('race.lore', ['race', 'lore'], 'text', {
+add('race.lore', 'raceLore', stored(['race', 'lore'], 'text', {
 	aliases: ['racelore'],
 	paragraph: true,
 }));
-add('appearance', 'appearance', editable('appearance', ['appearance'], 'text', {
+add('appearance', 'appearance', stored(['appearance'], 'text', {
 	paragraph: true,
 	viewId: 'appearance',
 }));
-add('backstory', 'backstory', editable('backstory', ['backstory'], 'text', {
+add('backstory', 'backstory', stored(['backstory'], 'text', {
 	paragraph: true,
 	viewId: 'backstory',
 }));
-add('goals', 'goals', editable('goals', ['goals'], 'text', {
+add('goals', 'goals', stored(['goals'], 'text', {
 	paragraph: true,
 	viewId: 'goals',
 }));
-add('personality', 'personality', { viewId: 'personality' });
-add('personality.description', 'personalityDescription', editable(
-	'personality.description',
+add('personality', 'personality', {
+	viewId: 'personality',
+	...editable('personality', 'multi', [
+		'personality.description',
+		'personality.traits',
+	]),
+});
+add('personality.description', 'personalityDescription', stored(
 	['personality', 'description'],
 	'text',
 	{ aliases: ['personalitydescription'], paragraph: true },
 ));
-add('personality.traits', 'personalityTraits', editable(
-	'personality.traits',
+add('personality.traits', 'personalityTraits', stored(
 	['personality', 'traits'],
 	'text',
 	{ aliases: ['personalitytraits'], multiline: true, paragraph: true },
@@ -61,8 +86,7 @@ add('racialTraits', 'racialTraits', {
 	aliases: ['racialtraits'],
 	viewId: 'racialTraits',
 });
-add('racialTraits.skillBonus', 'racialSkillBonus', editable(
-	'racialTrait.skillBonus',
+add('racialTraits.skillBonus', 'racialSkillBonus', stored(
 	['racialTraits', 'skillBonus'],
 	'text',
 	{
@@ -70,8 +94,7 @@ add('racialTraits.skillBonus', 'racialSkillBonus', editable(
 		paragraph: true,
 	},
 ));
-add('racialTraits.physicalAbility', 'racialPhysicalAbility', editable(
-	'racialTrait.physicalAbility',
+add('racialTraits.physicalAbility', 'racialPhysicalAbility', stored(
 	['racialTraits', 'physicalAbility'],
 	'text',
 	{
@@ -80,63 +103,84 @@ add('racialTraits.physicalAbility', 'racialPhysicalAbility', editable(
 	},
 ));
 add('statistics', 'statistics', { aliases: ['stats'], viewId: 'statistics' });
-add('statistics.base', 'baseStatistics', { aliases: ['baseStatistics'] });
-add('statistics.derived', 'derivedStatistics', { aliases: ['derivedStatistics'] });
+add('statistics.base', 'baseStatistics', {
+	aliases: ['baseStatistics'],
+	...editable('base-statistics', 'colon', BASE_STATS.map(stat => `stats.${stat}`)),
+});
+add('statistics.derived', 'derivedStatistics', {
+	aliases: ['derivedStatistics'],
+	...editable(
+		'derived-statistics',
+		'colon',
+		DERIVED_STATS.map(stat => `stats.${stat}`),
+	),
+});
 
 for (const stat of [...BASE_STATS, ...DERIVED_STATS]) {
-	add(`stats.${stat}`, stat, editable(
-		`stats.${stat}`,
+	add(`stats.${stat}`, stat, stored(
 		['stats', stat],
 		'number',
 		{ aliases: [stat] },
 	));
 }
 
-add('rules', 'rules', editable('rules', ['rules'], 'text', {
-	aliases: ['rule'],
-	multiline: true,
-	paragraph: true,
-	rules: true,
+add('rules', 'rules', {
+	...stored(['rules'], 'text', {
+		aliases: ['rule'],
+		multiline: true,
+		paragraph: true,
+		rules: true,
+	}),
+	...editable('rules', 'multiline', ['rules']),
 	viewId: 'rules',
-}));
+});
 add('rules.name', 'ruleName');
 add('rules.level', 'ruleLevel');
 add('rules.description', 'ruleDescription');
-add('talents', 'talents', editable('talents', ['talents'], 'text', {
-	paragraph: true,
+add('talents', 'talents', {
+	...stored(['talents'], 'text', { paragraph: true }),
+	...editable('talents', 'scalar', ['talents']),
 	viewId: 'talents',
-}));
+});
 add('status', 'status', { viewId: 'status' });
-add('statusEffects', 'statusEffects', editable(
-	'statusEffects',
-	['statusEffects'],
-	'text',
-	{
+add('statusEffects', 'statusEffects', {
+	...stored(['statusEffects'], 'text', {
 		aliases: ['statuseffect', 'statuseffects'],
 		multiline: true,
 		paragraph: true,
-		viewId: 'statusEffects',
-	},
-));
-add('equipment', 'equipment', editable('equipment', ['equipment'], 'text', {
-	multiline: true,
-	paragraph: true,
+	}),
+	...editable('status-effects', 'multiline', ['statusEffects']),
+	viewId: 'statusEffects',
+});
+add('equipment', 'equipment', {
+	...stored(['equipment'], 'text', {
+		multiline: true,
+		paragraph: true,
+	}),
+	...editable('equipment', 'multiline', ['equipment']),
 	viewId: 'equipment',
-}));
-add('inventory', 'inventory', editable('inventory', ['inventory'], 'text', {
-	multiline: true,
-	paragraph: true,
+});
+add('inventory', 'inventory', {
+	...stored(['inventory'], 'text', {
+		multiline: true,
+		paragraph: true,
+	}),
+	...editable('inventory', 'multiline', ['inventory']),
 	viewId: 'inventory',
-}));
-add('encumbrance', 'encumbrance', { viewId: 'encumbrance' });
-add('encumbrance.current', 'currentEncumbrance', editable(
-	'encumbrance.current',
+});
+add('encumbrance', 'encumbrance', {
+	viewId: 'encumbrance',
+	...editable('encumbrance', 'colon', [
+		'encumbrance.current',
+		'encumbrance.max',
+	]),
+});
+add('encumbrance.current', 'currentEncumbrance', stored(
 	['encumbrance', 'current'],
 	'number',
 	{ aliases: ['encumbrancecapacity.current'] },
 ));
-add('encumbrance.max', 'maximumEncumbrance', editable(
-	'encumbrance.max',
+add('encumbrance.max', 'maximumEncumbrance', stored(
 	['encumbrance', 'max'],
 	'number',
 	{ aliases: ['encumbrancecapacity.max'] },
@@ -149,13 +193,16 @@ for (const resourceId of ['hp', 'ar', 'ap', 'md']) {
 		labelKey: `character.resources.${resourceId}.name`,
 		resourceId,
 		viewId: resourceId.toUpperCase(),
+		...editable(resourceId, 'colon', [
+			`resources.${resourceId}.current`,
+			`resources.${resourceId}.max`,
+		]),
 	});
 	for (const value of ['current', 'max']) {
 		add(
 			`resources.${resourceId}.${value}`,
 			value === 'current' ? 'currentResource' : 'maximumResource',
-			editable(
-				`${resourceId}.${value}`,
+			stored(
 				['resources', resourceId, value],
 				'number',
 				{
@@ -167,8 +214,16 @@ for (const resourceId of ['hp', 'ar', 'ap', 'md']) {
 	}
 }
 
-function editable(editId, path, type, options = {}) {
-	return { ...options, editId, path, type };
+function stored(path, type, options = {}) {
+	return { ...options, path: Object.freeze([...path]), type };
+}
+
+function editable(editId, editKind, editTargetIds) {
+	return {
+		editId,
+		editKind,
+		editTargetIds: Object.freeze([...editTargetIds]),
+	};
 }
 
 function add(id, labelName, options = {}) {
@@ -188,6 +243,7 @@ function add(id, labelName, options = {}) {
 	}
 	if (definition.editId) {
 		registerAlias(definition.editId, definition);
+		registerEditableAlias(definition.editId, definition);
 	}
 	if (definition.viewId) {
 		registerAlias(definition.viewId, definition);
@@ -195,12 +251,26 @@ function add(id, labelName, options = {}) {
 }
 
 function registerAlias(alias, definition) {
-	for (const key of [alias, alias.toLowerCase(), normalizeLoose(alias)]) {
-		const existing = aliases.get(key);
+	registerMappedAlias(aliases, alias, definition, 'character field');
+}
+
+function registerEditableAlias(alias, definition) {
+	for (const key of [alias, alias.toLowerCase()]) {
+		const existing = editableAliases.get(key);
 		if (existing && existing !== definition) {
-			throw new Error(`Duplicate character field alias: ${alias}`);
+			throw new Error(`Duplicate editable field alias: ${alias}`);
 		}
-		aliases.set(key, definition);
+		editableAliases.set(key, definition);
+	}
+}
+
+function registerMappedAlias(map, alias, definition, label) {
+	for (const key of [alias, alias.toLowerCase(), normalizeLoose(alias)]) {
+		const existing = map.get(key);
+		if (existing && existing !== definition) {
+			throw new Error(`Duplicate ${label} alias: ${alias}`);
+		}
+		map.set(key, definition);
 	}
 }
 
@@ -220,8 +290,12 @@ function getCharacterFieldDefinition(fieldId) {
 }
 
 function getEditableFieldDefinition(fieldId) {
-	const definition = getCharacterFieldDefinition(fieldId);
-	return definition?.editId ? definition : null;
+	if (typeof fieldId !== 'string') {
+		return null;
+	}
+	return editableAliases.get(fieldId)
+		?? editableAliases.get(fieldId.toLowerCase())
+		?? null;
 }
 
 function getEditableFields() {

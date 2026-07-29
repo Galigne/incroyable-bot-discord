@@ -20,6 +20,7 @@ const {
 const {
 	replyToCharacterError,
 } = require('../../util/characterCommandErrors');
+const { getCharacterFieldLabel } = require('../../util/characterDisplay');
 const {
 	createCharacterHistoryContext,
 } = require('../../util/characterHistoryContext');
@@ -31,8 +32,9 @@ const {
 } = require('../../util/interactionSessions');
 const {
 	getEditFieldLabel,
-	MULTILINE_COLLECTION_FIELDS,
-	PARAGRAPH_FIELDS,
+	getEditFormat,
+	getEditInputId,
+	getEditTargetDefinitions,
 } = require('./editorFields');
 const { getEditableFieldDefinition } = require('../../services/characterFieldCatalog');
 const { getLocale, t } = require('../../util/i18n');
@@ -55,7 +57,7 @@ async function openCharacterEditor(interaction, config, characterKey, fieldName)
 			currentCharacter => canManageCharacter(interaction, currentCharacter, config),
 		);
 		const value = editorState.value;
-		if (value.length > 4_000) {
+		if (isValueTooLarge(value)) {
 			await interaction.reply({
 				content: t(locale, 'rpg.editor.tooLarge'),
 				flags: MessageFlags.Ephemeral,
@@ -129,7 +131,7 @@ async function handleCharacterEditSubmission(interaction, config) {
 		const result = await updateEditableCharacter(
 			session.characterKey,
 			session.fieldName,
-			interaction.fields.getTextInputValue('field-value'),
+			getSubmittedFieldValue(interaction, session.fieldName),
 			currentCharacter => canManageCharacter(interaction, currentCharacter, config),
 			createCharacterHistoryContext(interaction, config),
 		);
@@ -199,49 +201,107 @@ async function handleCharacterDeletionSubmission(interaction, config) {
 }
 
 function createFieldModal(sessionId, fieldName, value, locale = 'en') {
-	const normalizedField = fieldName.toLowerCase();
-	const isCollection = MULTILINE_COLLECTION_FIELDS.has(normalizedField);
+	const field = getEditableFieldDefinition(fieldName);
+	if (!field) {
+		throw new Error(`Unknown editable field: ${fieldName}`);
+	}
 	const label = getEditFieldLabel(fieldName, locale);
-	const input = new TextInputBuilder()
-		.setCustomId('field-value')
-		.setStyle(PARAGRAPH_FIELDS.has(normalizedField)
-			? TextInputStyle.Paragraph
-			: TextInputStyle.Short)
-		.setMaxLength(4_000)
-		.setRequired(!isTextField(fieldName));
-
-	if (value) {
-		input.setValue(value);
-	}
-	else {
-		input.setPlaceholder(isCollection
-			? t(locale, 'rpg.editor.collectionPlaceholder')
-			: t(locale, 'rpg.editor.valuePlaceholder'));
-	}
-
-	let description;
-	if (fieldName === 'rules') {
-		description = t(locale, 'rpg.editor.rulesDescription');
-	}
-	else if (isCollection) {
-		description = t(locale, 'rpg.editor.collectionDescription');
-	}
-	else if (isTextField(fieldName)) {
-		description = t(locale, 'rpg.editor.textDescription');
-	}
-	else {
-		description = t(locale, 'rpg.editor.numberDescription');
-	}
+	const targets = getEditTargetDefinitions(fieldName);
+	const inputDefinitions = field.editKind === 'multi'
+		? targets.map(target => ({
+			customId: getEditInputId(target.id),
+			label: getEditInputLabel(target, locale),
+			target,
+			value: value[target.id],
+		}))
+		: [{
+			customId: 'field-value',
+			label,
+			target: field,
+			value,
+		}];
+	const components = inputDefinitions.map(inputDefinition => (
+		createEditInput(field, inputDefinition, locale)
+	));
 
 	return new ModalBuilder()
 		.setCustomId(`rpg-set:${sessionId}`)
 		.setTitle(t(locale, 'rpg.editor.title', { field: label }).slice(0, 45))
-		.addLabelComponents(
-			new LabelBuilder()
-				.setLabel(label.slice(0, 45))
-				.setDescription(description.slice(0, 100))
-				.setTextInputComponent(input),
-		);
+		.addLabelComponents(...components);
+}
+
+function getEditInputLabel(target, locale) {
+	const labelKey = {
+		appearance: 'appearance',
+		backstory: 'backstory',
+		goals: 'goals',
+		'personality.description': 'description',
+		'personality.traits': 'traits',
+		'race.lore': 'lore',
+		'race.name': 'name',
+		'race.physicalDescription': 'physicalDescription',
+		'racialTraits.physicalAbility': 'physicalAbility',
+		'racialTraits.skillBonus': 'skillBonus',
+	}[target.id];
+	return labelKey
+		? t(locale, `rpg.editor.inputLabels.${labelKey}`)
+		: getCharacterFieldLabel(locale, target.id);
+}
+
+function createEditInput(field, inputDefinition, locale) {
+	const { customId, label, target, value } = inputDefinition;
+	const input = new TextInputBuilder()
+		.setCustomId(customId)
+		.setStyle(target.paragraph || target.multiline
+			? TextInputStyle.Paragraph
+			: TextInputStyle.Short)
+		.setMaxLength(4_000)
+		.setRequired(isEditInputRequired(field, target));
+	if (value) {
+		input.setValue(value);
+	}
+	else {
+		input.setPlaceholder(getEditInputPlaceholder(field, target, locale).slice(0, 100));
+	}
+	return new LabelBuilder()
+		.setLabel(label.slice(0, 45))
+		.setDescription(getEditInputDescription(field, target, locale).slice(0, 100))
+		.setTextInputComponent(input);
+}
+
+function getEditInputDescription(field, target, locale) {
+	if (field.editKind === 'colon') {
+		return t(locale, 'rpg.editor.colonDescription', {
+			count: field.editTargetIds.length,
+		});
+	}
+	if (target.rules) {
+		return t(locale, 'rpg.editor.rulesDescription');
+	}
+	if (target.multiline) {
+		return t(locale, 'rpg.editor.collectionDescription');
+	}
+	if (target.type === 'text') {
+		return t(locale, 'rpg.editor.textDescription');
+	}
+	return t(locale, 'rpg.editor.numberDescription');
+}
+
+function getEditInputPlaceholder(field, target, locale) {
+	if (field.editKind === 'colon') {
+		return getEditFormat(field.editId, locale);
+	}
+	if (target.multiline) {
+		return t(locale, 'rpg.editor.collectionPlaceholder');
+	}
+	return t(locale, 'rpg.editor.valuePlaceholder');
+}
+
+function isEditInputRequired(field, target) {
+	if (field.editKind === 'colon') {
+		return true;
+	}
+	return target.type !== 'text';
 }
 
 function createDeletionModal(sessionId, characterKey, locale = 'en') {
@@ -273,8 +333,22 @@ function findEditableField(fieldName) {
 	return getEditableFieldDefinition(fieldName)?.editId ?? null;
 }
 
-function isTextField(fieldName) {
-	return getEditableFieldDefinition(fieldName)?.type === 'text';
+function getSubmittedFieldValue(interaction, fieldName) {
+	const field = getEditableFieldDefinition(fieldName);
+	if (field?.editKind !== 'multi') {
+		return interaction.fields.getTextInputValue('field-value');
+	}
+	return Object.fromEntries(getEditTargetDefinitions(fieldName).map(target => [
+		target.id,
+		interaction.fields.getTextInputValue(getEditInputId(target.id)),
+	]));
+}
+
+function isValueTooLarge(value) {
+	const values = value && typeof value === 'object'
+		? Object.values(value)
+		: [value];
+	return values.some(item => String(item).length > 4_000);
 }
 
 module.exports = {

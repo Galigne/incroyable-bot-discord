@@ -82,7 +82,25 @@ module.exports = function createCommandChecks(context) {
 		const viewableFields = getViewableFields();
 		const documentedCommands = commandRegistry.getHelpMetadata();
 		if (
-			editableFields.length < 30
+			editableFields.map(field => field.editId).join(',') !== [
+				'name',
+				'level',
+				'race',
+				'background',
+				'personality',
+				'base-statistics',
+				'derived-statistics',
+				'rules',
+				'talents',
+				'status-effects',
+				'equipment',
+				'inventory',
+				'encumbrance',
+				'hp',
+				'ar',
+				'ap',
+				'md',
+			].join(',')
 			|| !viewableFields.some(field => field.viewId === 'personality')
 			|| !viewableFields.some(field => field.viewId === 'status')
 			|| documentedCommands.some(metadata => (

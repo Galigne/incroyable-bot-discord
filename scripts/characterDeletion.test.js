@@ -414,8 +414,8 @@ test('/delete metadata, routing, help, and locale catalogs describe permanent de
 async function createHistory(characterKey, value) {
 	return updateEditableCharacter(
 		characterKey,
-		'firstName',
-		value,
+		'name',
+		`${value}:`,
 		() => true,
 		historyContext(),
 	);

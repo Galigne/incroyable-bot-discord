@@ -56,12 +56,15 @@ test('RULE editing requires Name: Level: Description with a positive integer lev
 
 test('character editing returns localization-independent outcomes and errors', () => {
 	const character = new Character('Localization', 'tester');
-	const outcome = setEditableFieldValue(character, 'appearance', 'A green cloak.');
+	const outcome = setEditableFieldValue(character, 'personality', {
+		'personality.description': 'Quiet and observant.',
+		'personality.traits': 'Patient',
+	});
 	assert.deepEqual(outcome, {
 		translationKey: 'editorResults.updated',
-		translationVariables: { fieldId: 'appearance' },
+		translationVariables: { fieldId: 'personality' },
 	});
-	assert.match(translateCharacterOutcome(outcome, 'fr'), /apparence/i);
+	assert.match(translateCharacterOutcome(outcome, 'fr'), /personnalité/i);
 
 	assert.throws(
 		() => setEditableFieldValue(character, 'rules', 'Fire: invalid: Description'),

@@ -86,7 +86,7 @@ Never commit `.env` or a Discord token. Reset any token that has previously been
 - `/roll expression:<dice expression>` — roll expressions such as `2d6+3`
 - `/add character-key:<new key>` — create a blank character sheet with a stable key
 - `/get character-key:<key> [field]` — display the summary or one complete field
-- `/set character-key:<key> field:<field>` — set one field in a prefilled form
+- `/set character-key:<key> field:<field>` — set one field or grouped section in a prefilled form
 - `/heal character-key:<key> resource:<hp|armor|both> percentage:<0-100>` — restore one or both resources
 - `/damage character-key:<key> damage-amount:<number> [piercing]` — apply damage to AR, then HP
 - `/end-turn character-key:<key>` — restore AP and MD to their maximum values
@@ -98,9 +98,28 @@ Autocomplete suggests commands the current user may access, existing CharacterKe
 settable fields, retrievable fields, generator categories, common dice expressions,
 levels, and common purge amounts. `/undo` autocomplete includes authorized active
 characters with usable history. The private form opens immediately after
-`/set` is submitted. Multiline
-fields accept free-form lines with optional leading dashes; RULEs use
-`Name: Level: Description`.
+`/set` is submitted. Its editable choices are `name`, `level`, `race`,
+`background`, `personality`, `base-statistics`, `derived-statistics`, `rules`,
+`talents`, `status-effects`, `equipment`, `inventory`, `encumbrance`, `hp`, `ar`,
+`ap`, and `md`.
+
+Race uses separate inputs for its name, physical description, lore, skill bonus,
+and physical ability. Background uses separate appearance, backstory, and goals
+inputs. Personality uses separate description and traits inputs. These groups are
+validated and saved together.
+
+Compact groups use one colon-separated input. Name uses
+`firstName:lastName`; HP, AR, AP, MD, and encumbrance use `current:max`; base
+statistics use
+`constitution:strength:dexterity:intelligence:speed:perception:charisma`; derived
+statistics use `initiative:reflexes`. Values are prefilled in the same format,
+surrounding whitespace is trimmed, and the exact number of values is required.
+Either name component may be empty to clear it.
+
+Personality traits, status effects, equipment, and inventory use one entry per
+line. Optional leading dashes are normalized away. RULEs use
+`Name: Level: Description`, one per line; only the first two colons are separators,
+so descriptions may contain additional colons.
 
 Discord displays at most 25 autocomplete suggestions at once, so type part of a
 name or value to filter longer lists. `/help command:gen` lists every localized
@@ -171,7 +190,7 @@ Example workflows:
 
 ```text
 /gen-char character-key:D.Robert level:5 background:adventurer
-/set character-key:D.Robert field:stats.strength
+/set character-key:D.Robert field:base-statistics
 /set character-key:D.Robert field:rules
 /get character-key:D.Robert
 /get character-key:D.Robert field:personality

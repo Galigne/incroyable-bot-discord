@@ -31,13 +31,29 @@ module.exports = function createCharacterChecks(context) {
 	function checkCharacterModel() {
 		try {
 			const original = new Character('Test', '0');
-			setEditableFieldValue(original, 'firstName', 'Diego');
-			setEditableFieldValue(original, 'lastName', 'Robert');
-			setEditableFieldValue(original, 'stats.strength', '12');
-			setEditableFieldValue(original, 'race.name', 'Ashborn');
-			setEditableFieldValue(original, 'appearance', 'Tall with silver hair.');
+			setEditableFieldValue(original, 'name', 'Diego:Robert');
+			setEditableFieldValue(
+				original,
+				'base-statistics',
+				'10:12:10:10:10:10:10',
+			);
+			setEditableFieldValue(original, 'race', {
+				'race.name': 'Ashborn',
+				'race.physicalDescription': '',
+				'race.lore': '',
+				'racialTraits.skillBonus': '',
+				'racialTraits.physicalAbility': '',
+			});
+			setEditableFieldValue(original, 'background', {
+				appearance: 'Tall with silver hair.',
+				backstory: '',
+				goals: '',
+			});
 			setEditableFieldValue(original, 'equipment', '- Longsword');
-			setEditableFieldValue(original, 'personality.traits', '- Brave\n- Curious');
+			setEditableFieldValue(original, 'personality', {
+				'personality.description': '',
+				'personality.traits': '- Brave\n- Curious',
+			});
 			setEditableFieldValue(
 				original,
 				'rules',
@@ -58,7 +74,7 @@ module.exports = function createCharacterChecks(context) {
 				);
 			}
 			try {
-				setEditableFieldValue(original, 'ap.max', '11');
+				setEditableFieldValue(original, 'ap', '4:11');
 				errors.push('AP values above 10 should be rejected.');
 			}
 			catch (error) {
@@ -113,7 +129,8 @@ module.exports = function createCharacterChecks(context) {
 				|| character.stats.strength !== 12
 				|| character.race.name !== 'Ashborn'
 				|| character.appearance !== 'Tall with silver hair.'
-				|| getEditableFieldValue(character, 'personality.traits') !== 'Brave\nCurious'
+				|| getEditableFieldValue(character, 'personality')['personality.traits']
+					!== 'Brave\nCurious'
 				|| getEditableFieldValue(character, 'rules')
 					!== 'Fire: 2: Controls flames\nBlink: 1: Teleports a short distance'
 				|| character.rules[0]?.description !== 'Controls flames'
