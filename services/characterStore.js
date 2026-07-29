@@ -1,49 +1,56 @@
 const fs = require('node:fs/promises');
 const path = require('node:path');
 const Character = require('../models/Character');
+const { writeJsonAtomically } = require('./atomicJsonFile');
+const { runCharacterOperation } = require('./characterOperationQueue');
+const { validateCharacterSaveSchema } = require('./characterSaveSchema');
 
 const savesDirectory = process.env.INCREDIBLE_BOT_SAVE_DIRECTORY
 	? path.resolve(process.env.INCREDIBLE_BOT_SAVE_DIRECTORY)
 	: path.join(__dirname, '..', 'save');
 
 async function createCharacter(name, creatorId, initialize = () => undefined) {
-	const character = new Character(name, creatorId);
-	await initialize(character);
-	character.key = name;
-	await fs.mkdir(savesDirectory, { recursive: true });
-	await fs.writeFile(getSavePath(name), JSON.stringify(character, null, 2), {
-		encoding: 'utf8',
-		flag: 'wx',
+	return runCharacterOperation(name, async () => {
+		const character = new Character(name, creatorId);
+		await initialize(character);
+		character.key = name;
+		await saveCharacter(character, name, { exclusive: true });
+		return character;
 	});
-	return character;
 }
 
 async function deleteCharacter(name, canManage) {
-	const character = await getCharacter(name);
-	if (!canManage(character)) {
-		const error = new Error('Only the character creator can delete it.');
-		error.code = 'NOT_CHARACTER_OWNER';
-		throw error;
-	}
-	await fs.unlink(getSavePath(name));
+	return runCharacterOperation(name, async () => {
+		const character = await getCharacter(name);
+		if (!canManage(character)) {
+			const error = new Error('Only the character creator can delete it.');
+			error.code = 'NOT_CHARACTER_OWNER';
+			throw error;
+		}
+		await fs.unlink(getSavePath(name));
+	});
 }
 
 async function updateCharacter(name, canManage, update) {
-	const character = await getCharacter(name);
-	if (!canManage(character)) {
-		const error = new Error('Only the character creator or a DM can edit it.');
-		error.code = 'NOT_CHARACTER_EDITOR';
-		throw error;
-	}
+	return runCharacterOperation(name, async () => {
+		const character = await getCharacter(name);
+		if (!canManage(character)) {
+			const error = new Error('Only the character creator or a DM can edit it.');
+			error.code = 'NOT_CHARACTER_EDITOR';
+			throw error;
+		}
 
-	await update(character);
-	await saveCharacter(character, name);
-	return character;
+		await update(character);
+		await saveCharacter(character, name);
+		return character;
+	});
 }
 
 async function getCharacter(name) {
 	const data = await fs.readFile(getSavePath(name), 'utf8');
-	return Character.fromSave(JSON.parse(data), name);
+	const rawSaveData = JSON.parse(data);
+	validateCharacterSaveSchema(rawSaveData);
+	return Character.fromSave(rawSaveData, name);
 }
 
 async function listCharacters({ onLoadError = reportCharacterLoadError } = {}) {
@@ -79,13 +86,13 @@ function reportCharacterLoadError(error) {
 	console.error(error);
 }
 
-async function saveCharacter(character, originalName = character.key) {
-	await fs.mkdir(savesDirectory, { recursive: true });
-	await fs.writeFile(
-		getSavePath(originalName),
-		JSON.stringify(character, null, 2),
-		'utf8',
-	);
+async function saveCharacter(
+	character,
+	originalName = character.key,
+	options = {},
+) {
+	validateCharacterSaveSchema(character);
+	await writeJsonAtomically(getSavePath(originalName), character, options);
 }
 
 function getSavePath(name) {

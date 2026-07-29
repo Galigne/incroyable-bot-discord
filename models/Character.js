@@ -4,6 +4,9 @@ const {
 } = require('../services/mechanics/characterValidation');
 const { createResourcesFromSave } = require('../services/mechanics/resources');
 const { createStats } = require('../services/mechanics/statistics');
+const {
+	CURRENT_CHARACTER_SAVE_SCHEMA_VERSION,
+} = require('../services/characterSaveSchema');
 
 class Character {
 	static fromSave(data, characterKey = data.key) {
@@ -42,6 +45,7 @@ class Character {
 	}
 
 	constructor(key, creatorId) {
+		this.schemaVersion = CURRENT_CHARACTER_SAVE_SCHEMA_VERSION;
 		this.key = key;
 		this.firstName = '';
 		this.lastName = '';

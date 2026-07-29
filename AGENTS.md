@@ -66,9 +66,16 @@ saves.
   including parsing, validation, calculations, persistence, and generation.
 - `services/characterApplicationService.js`: command-facing character workflows;
   command adapters must use it instead of composing persistence and mechanics.
+- `services/characterOperationQueue.js`: per-CharacterKey synchronization for
+  character creation, mutation, and deletion.
+- `services/atomicJsonFile.js`: same-directory temporary-file serialization and
+  atomic publication for character saves.
+- `services/characterSaveSchema.js`: owns the current character-save schema version
+  and validates raw save metadata before model hydration.
 - `services/characterFieldCatalog.js`: canonical character field identities,
   aliases, storage paths, types, and editable/viewable capabilities.
-- `services/characterStore.js`: JSON character persistence.
+- `services/characterStore.js`: JSON character persistence; create, update, and
+  delete operations are serialized per key, while updates replace saves atomically.
 - `services/characterEditor.js`: editable-value parsing and domain mutation.
 - `services/mechanics/`: Discord-independent character constants, validation,
   statistics, resources, armor, damage, and generation formulas.
@@ -206,6 +213,14 @@ For character persistence or mutations, commands and interaction handlers must c
 They must not import Discord or localization code; character embeds belong in
 `util/characterRenderer.js`.
 
+Character creation, updates, and deletion must remain inside the shared
+per-CharacterKey critical section in `services/characterStore.js`. Update locks
+cover the latest load, authorization, mutation, serialization, and atomic
+replacement. Save replacements must be written and closed in a uniquely named
+same-directory temporary file before publication; exclusive creation must never
+replace an existing save. Always release and discard unused keyed queues after
+success or failure.
+
 For every non-trivial command feature:
 
 1. Define a plain service API for the feature behavior.
@@ -302,7 +317,14 @@ from `firstName` and `lastName`. Keys:
 - are unique and cannot be renamed through edit commands.
 
 Character JSON is loaded through `Character.fromSave`; keep the model, editor,
-generator, renderer, and tests aligned when changing the schema.
+generator, renderer, and tests aligned when changing the schema. The current
+character-save schema version is owned by `services/characterSaveSchema.js`.
+Every raw save must contain `schemaVersion` as a non-negative integer equal to the
+current version, and `characterStore.js` must validate it before model hydration.
+Missing, malformed, and unsupported versions are rejected with distinct stable
+error codes. Invalid and outdated saves must not be migrated, rewritten, or loaded
+through a legacy fallback. Character listing skips them and reports their
+CharacterKeys through `CharacterLoadError`.
 `appearance` is a standalone editable text field displayed directly below level and
 race in the public summary.
 
