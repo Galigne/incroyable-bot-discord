@@ -34,6 +34,7 @@ function canManageCharacter(interaction, character, config) {
 
 function authorizeCommand(command, interaction, config) {
 	const locale = getLocale(config);
+	const metadata = command?.metadata ?? command;
 	try {
 		validateConfig(config);
 	}
@@ -44,20 +45,19 @@ function authorizeCommand(command, interaction, config) {
 		};
 	}
 
-	const requiredPermission = command?.access?.permission;
-	if (!requiredPermission) {
-		return { allowed: true };
-	}
-	if (!interaction?.guild) {
+	if (metadata?.guildOnly && !interaction?.guild) {
 		return {
 			allowed: false,
 			message: t(locale, 'authorization.guildOnly'),
 		};
 	}
 
+	const requiredPermission = metadata?.permission ?? 'everyone';
 	const permissionChecks = {
+		everyone: () => true,
 		dm: hasDmPermission,
 		moderator: hasModeratorPermission,
+		owner: isGuildOwner,
 	};
 	const permissionCheck = permissionChecks[requiredPermission];
 	if (!permissionCheck) {
@@ -66,7 +66,9 @@ function authorizeCommand(command, interaction, config) {
 	if (!permissionCheck(interaction, config)) {
 		return {
 			allowed: false,
-			message: t(locale, 'authorization.missingRole'),
+			message: requiredPermission === 'owner'
+				? t(locale, 'authorization.ownerOnly')
+				: t(locale, 'authorization.missingRole'),
 		};
 	}
 	return { allowed: true };

@@ -75,6 +75,35 @@ module.exports = function createRuntimeChecks(context) {
 		if (/\bto(?:Field)?Embed\s*\(/.test(characterModel)) {
 			errors.push('models/Character.js must not own Discord embed rendering.');
 		}
+
+		const { COMMAND_METADATA } = require('../../commands/metadata');
+		for (const metadata of COMMAND_METADATA.filter(command => command.handler)) {
+			const handlerPath = path.join(
+				root,
+				'commands',
+				`${metadata.handler.slice('./'.length)}.js`,
+			);
+			const source = fs.readFileSync(handlerPath, 'utf8');
+			if (
+				/\bSlashCommandBuilder\b/.test(source)
+				|| /\blocalizeDescription\b/.test(source)
+				|| /\bconfigure\s*:/.test(source)
+				|| /\bhelpOrder\s*:/.test(source)
+				|| /\bdescriptionKey\s*:/.test(source)
+				|| /\baccess\s*:/.test(source)
+			) {
+				errors.push(
+					`${path.relative(root, handlerPath)} duplicates command registry metadata.`,
+				);
+			}
+		}
+		if (fs.existsSync(path.join(root, 'commands', 'rpg', 'index.js'))) {
+			errors.push('commands/rpg/index.js must not duplicate registry routing or schema data.');
+		}
+		const indexSource = fs.readFileSync(path.join(root, 'index.js'), 'utf8');
+		if (!indexSource.includes('commandRegistry.getDiscordCommandData()')) {
+			errors.push('Slash-command registration must use the centralized command registry.');
+		}
 	}
 
 	function checkConfiguration() {

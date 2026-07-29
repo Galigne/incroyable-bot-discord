@@ -1,7 +1,6 @@
 const path = require('node:path');
 const { AttachmentBuilder, EmbedBuilder } = require('discord.js');
 const { t } = require('./i18n');
-const { sortByHelpOrder } = require('./sortByHelpOrder');
 
 function createCommandHelpResponse(commands, avatarUrl, locale = 'en') {
 	const embed = new EmbedBuilder()
@@ -10,12 +9,13 @@ function createCommandHelpResponse(commands, avatarUrl, locale = 'en') {
 		.setColor('#FFD700')
 		.setThumbnail(avatarUrl);
 
-	for (const command of sortByHelpOrder(commands)) {
+	for (const command of sortMetadata(commands)) {
 		embed.addFields({
-			name: command.usage ?? `/${command.name}`,
-			value: command.descriptionKey
-				? t(locale, command.descriptionKey)
-				: command.description,
+			name: command.examples[0],
+			value: t(
+				locale,
+				command.help.summaryKey ?? command.descriptionKey,
+			),
 		});
 	}
 	return { embeds: [embed] };
@@ -28,12 +28,13 @@ function createRpgHelpResponse(subcommands, locale = 'en') {
 		.setColor('#FFD700')
 		.setThumbnail('attachment://logo.jpg');
 
-	for (const subcommand of sortByHelpOrder(subcommands)) {
+	for (const subcommand of sortMetadata(subcommands)) {
 		embed.addFields({
-			name: subcommand.usage,
-			value: subcommand.descriptionKey
-				? t(locale, subcommand.descriptionKey)
-				: subcommand.description,
+			name: subcommand.examples[0],
+			value: t(
+				locale,
+				subcommand.help.summaryKey ?? subcommand.descriptionKey,
+			),
 		});
 	}
 	const logo = new AttachmentBuilder(
@@ -44,6 +45,10 @@ function createRpgHelpResponse(subcommands, locale = 'en') {
 		embeds: [embed],
 		files: [logo],
 	};
+}
+
+function sortMetadata(metadata) {
+	return [...metadata].sort((left, right) => left.help.order - right.help.order);
 }
 
 module.exports = {

@@ -6,6 +6,7 @@
   },
   "authorization": {
     "missingRole": "You do not have permission to use this command.",
+    "ownerOnly": "Only the server owner may use this command.",
     "wrongChannel": "This command cannot be used in this channel.",
     "guildOnly": "This permission can only be checked inside a Discord server.",
     "invalidConfiguration": "The bot configuration is missing or invalid at `{{field}}`. Ask the server administrator to fix config.json.",
@@ -104,6 +105,9 @@
       "characterOption": "Character receiving the healing",
       "resourceOption": "Resource to restore",
       "percentageOption": "Percentage of the maximum to restore to",
+      "hpChoice": "HP — Hit points",
+      "armorChoice": "AR — Armor rating",
+      "bothChoice": "HP and AR",
       "both": "{{hp}} and {{ar}}",
       "change": "{{resource}}: **{{previous}}/{{max}} → {{current}}/{{max}}**",
       "result": "**{{name}}** restored to {{percentage}}%:\n{{changes}}"
@@ -112,6 +116,11 @@
       "description": "Show the available RPG commands",
       "title": "RPG Commands",
       "body": "Create and manage RPG characters using a stable `CharacterKey` (for example, `D.Robert`). The key identifies the save and cannot be changed. Use `/rpg set` with a field to open its prefilled private form. Use the optional field in `/rpg get` for complete details."
+    },
+    "help": {
+      "description": "Show the available RPG commands",
+      "title": "RPG Commands",
+      "body": "Create and manage RPG characters using a stable `CharacterKey` (for example, `D.Robert`). The key identifies the save and cannot be changed. Use `/set` with a field to open its prefilled private form. Use the optional field in `/get` for complete details."
     },
     "roll": {
       "description": "Roll a standard dice expression",

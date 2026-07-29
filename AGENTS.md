@@ -44,10 +44,14 @@ saves.
 - `index.js`: environment loading, client startup, global command registration, and
   interaction/event routing.
 - `client/Client.js`: Discord client and gateway intents.
-- `commands/`: one module per top-level slash command.
-- `commands/rpg/index.js`: `/rpg` command builder, subcommand routing, and RPG-level
-  authorization.
-- `commands/rpg/subcommands/`: one module per `/rpg` subcommand.
+- `commands/metadata.js`: the single source of truth for every top-level slash
+  command and `/rpg` subcommand.
+- `commands/registry.js`: validated command lookup, grouping, permission filtering,
+  Discord registration data, generic group routing, and runtime handler binding.
+- `commands/autocompleteProviders.js`: reusable autocomplete providers selected by
+  option metadata.
+- `commands/`: behavior-only handlers for top-level slash commands.
+- `commands/rpg/subcommands/`: behavior-only handlers for `/rpg` subcommands.
 - `commands/rpg/editorFields.js`: modal presentation metadata derived from the
   canonical field catalog.
 - `commands/rpg/interactions.js`: direct prefilled edit modal and modal submission.
@@ -93,27 +97,54 @@ saves.
 The bot uses slash commands only. Do not reintroduce prefix or message-content
 commands.
 
-Every top-level command must export:
+Every command and subcommand must have exactly one record in
+`commands/metadata.js`. That record owns its:
 
-- `name`
-- `description`
-- `usage`
-- numeric `helpOrder`
-- slash-command `data`
-- `execute`
-- `autocomplete` when applicable
+- stable registry ID, English Discord name, category, and optional parent group;
+- required permission (`everyone`, `dm`, `moderator`, or `owner`);
+- localized description key and optional detailed-help key;
+- typed options, option-description keys, bounds, choices, and autocomplete
+  provider descriptors;
+- usage examples, help ordering, registration ordering, and guild-only status;
+- behavior-handler path.
 
-Every RPG subcommand follows the same metadata convention, but exposes `configure`
-instead of a top-level `data` builder. Register it in all three places in
-`commands/rpg/index.js`: import, `subcommands` map, and builder chain.
+Metadata stores localization keys and technical English values, never translated
+interface prose. `commands/registry.js` validates the catalog at load time and
+derives Discord builders, runtime routing objects, permission inputs, help entries,
+and autocomplete metadata from it. Do not maintain a second command/subcommand list,
+builder chain, permission declaration, usage string, or fixed autocomplete list.
+
+Handler modules export `execute` only. Schema and autocomplete behavior are provided
+by the registry; add a reusable provider to `commands/autocompleteProviders.js` when
+an option needs dynamic suggestions. There is intentionally no
+`commands/rpg/index.js`: the registry preserves the `/rpg` command group and routes
+its subcommands generically.
+
+Use the registry API instead of inspecting handler modules:
+
+- `getAllCommands()` returns all top-level and grouped metadata records.
+- `getCommand(name, category?)` resolves a command, qualified ID, or grouped name.
+- `groupByCategory()` groups metadata into `general`, `moderation`, and `rpg`.
+- `filterByUserPermissions(interaction, config, commands?)` delegates filtering to
+  the existing authorization service.
+- `getDiscordCommandData()` returns the complete top-level Discord registration
+  builders, including grouped subcommands.
+- `getHelpMetadata(category?)` and
+  `getAutocompleteMetadata(command, option, category?)` expose the canonical
+  presentation metadata.
+
+When adding a command, add its locale keys, one metadata record, and one handler.
+Add a dynamic autocomplete provider only when an existing provider cannot describe
+the suggestions. Do not update registration, routing, authorization, or general
+help separately.
 
 ### Layer boundaries
 
 Command and subcommand modules are Discord entry-point adapters. Keep them thin.
-They may define slash-command metadata, read Discord options and context, select the
-locale, call authorization helpers, delegate to one feature workflow or response
-adapter, and send the returned reply. They must not own reusable or non-trivial
-feature behavior.
+They may read Discord options and context, select the locale, call authorization
+helpers for character ownership, delegate to one feature workflow or response
+adapter, and send the returned reply. They must not define command metadata or own
+reusable or non-trivial feature behavior.
 
 In particular, do not put any of the following directly in `execute` or
 `autocomplete`:
@@ -173,18 +204,22 @@ or response adapter as soon as any of those responsibilities appear; do not wait
 the command module to become large.
 
 Use lowercase Discord command names, normally kebab-case. Put each new RPG
-subcommand in its own file. Keep `description`, `usage`, `/help`, `/rpg help`, the
-relevant dedicated help command, README, and tests synchronized.
+subcommand handler in its own file and add one metadata record. The registry
+automatically synchronizes Discord registration, routing, permissions,
+autocomplete capability, and `/help` output.
 
-`helpOrder` controls display order. The generation commands must appear in this
+`metadata.help.order` controls help display order, while `registrationOrder`
+preserves Discord schema ordering. The generation commands must appear in this
 exact sequence:
 
 1. `/rpg gen category:<category>`
 2. `/rpg gen-char character-key:<new key> [level] [background]`
 3. `/rpg gen-help`
 
-Use autocomplete for all practical command arguments. Discord returns at most 25
-autocomplete choices, so filter locally with `util/autocomplete.js`.
+Declare autocomplete on the option metadata using a provider name. Put fixed
+suggestion values in the metadata and reusable dynamic selection in
+`commands/autocompleteProviders.js`. Discord returns at most 25 autocomplete
+choices, so providers should filter with `util/autocomplete.js`.
 
 All bot-owned user-facing strings belong in `locales/en.json` and `locales/fr.json`
 and are retrieved through `util/i18n.js`. Keep both catalogs at exact key parity.
@@ -368,8 +403,8 @@ Use this workflow for every feature, behavior change, bug fix, or data update:
    keep command tests focused on schema, delegation, and interaction integration.
 4. Keep user-facing and agent-facing guidance synchronized when the affected
    behavior is documented:
-   - update command metadata and `/help`, `/rpg help`, or dedicated help commands
-     when command names, arguments, permissions, ordering, or UX change;
+   - update the single registry metadata record and any dedicated help body when
+     command names, arguments, permissions, ordering, or UX change;
    - update `README.md` when setup, commands, examples, or user-visible behavior
      changes;
    - update `AGENTS.md` when architecture, durable conventions, invariants, or the
@@ -389,7 +424,9 @@ Use this workflow for every feature, behavior change, bug fix, or data update:
 Before handing off a code change:
 
 1. Preserve unrelated dirty work and every real file under `save/`.
-2. Update command metadata, registration, autocomplete, help, and README together.
+2. Update the canonical command metadata record, handler, locale keys, and README;
+   registration, routing, permissions, autocomplete capability, and general help
+   must remain derived from the registry.
 3. Keep generated data and `Character` schema consumers synchronized.
 4. Never edit a rulebook unless the user explicitly requested it.
 5. Use `MessageFlags.Ephemeral`, never `ephemeral: true`.

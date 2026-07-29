@@ -37,14 +37,14 @@ function createTranslator(catalogs, onMissing = reportMissingKey) {
 
 const t = createTranslator(translations);
 
-function localizeDescription(builder, key) {
-	return builder
-		.setDescription(t('en', key))
-		.setDescriptionLocalizations({ fr: t('fr', key) });
-}
-
 function getTranslation(catalog, key) {
 	return key.split('.').reduce((value, part) => value?.[part], catalog);
+}
+
+function hasTranslationKey(locale, key) {
+	const normalizedLocale = normalizeLocale(locale);
+	return typeof key === 'string'
+		&& typeof getTranslation(translations[normalizedLocale], key) === 'string';
 }
 
 function reportMissingKey(locale, key, reason = 'Missing translation') {
@@ -81,7 +81,7 @@ module.exports = {
 	findMissingKeys,
 	flattenKeys,
 	getLocale,
-	localizeDescription,
+	hasTranslationKey,
 	normalizeLocale,
 	t,
 	translations,

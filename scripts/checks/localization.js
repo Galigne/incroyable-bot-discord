@@ -200,9 +200,15 @@ module.exports = function createLocalizationChecks(context) {
 			}
 		}
 
-		const { EDIT_FIELDS } = require('../../commands/rpg/editorFields');
-		const { GET_FIELDS } = require('../../commands/rpg/subcommands/get');
-		for (const fieldId of [...EDIT_FIELDS, ...GET_FIELDS]) {
+		const {
+			getEditableFields,
+			getViewableFields,
+		} = require('../../services/characterFieldCatalog');
+		const fieldIds = [
+			...getEditableFields().map(field => field.editId),
+			...getViewableFields().map(field => field.viewId),
+		];
+		for (const fieldId of fieldIds) {
 			if (!getCharacterFieldDefinition(fieldId)) {
 				errors.push(`Displayable command field is missing from the catalog: ${fieldId}.`);
 			}

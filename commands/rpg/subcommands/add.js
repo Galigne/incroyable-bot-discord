@@ -5,24 +5,9 @@ const {
 	createCharacterAddedResponse,
 } = require('../../../util/characterCommandResponses');
 const { replyToCharacterError } = require('../../../util/characterCommandErrors');
-const { getLocale, localizeDescription, t } = require('../../../util/i18n');
-
-const descriptionKey = 'rpg.add.description';
+const { getLocale } = require('../../../util/i18n');
 
 module.exports = {
-	name: 'add',
-	description: t('en', descriptionKey),
-	descriptionKey,
-	usage: '/rpg add character-key:<new key>',
-	helpOrder: 20,
-	configure: command => localizeDescription(command.setName('add'), descriptionKey)
-		.addStringOption(option => localizeDescription(
-			option.setName('character-key'),
-			'rpg.add.keyOption',
-		)
-			.setMinLength(1)
-			.setMaxLength(50)
-			.setRequired(true)),
 	async execute({ config, interaction }) {
 		const locale = getLocale(config, interaction.guildId);
 		const characterKey = interaction.options.getString('character-key', true);

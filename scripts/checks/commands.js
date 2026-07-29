@@ -6,10 +6,15 @@ module.exports = function createCommandChecks(context) {
 		path,
 		root,
 	} = context;
+	const commandRegistry = require('../../commands/registry');
+	const { getEditableFields, getViewableFields } = require(
+		'../../services/characterFieldCatalog',
+	);
+	const { t } = require('../../util/i18n');
 
 	function checkCommands() {
 		try {
-			return loadCommands(path.join(root, 'commands'));
+			return loadCommands();
 		}
 		catch (error) {
 			errors.push(error.stack);
@@ -19,145 +24,78 @@ module.exports = function createCommandChecks(context) {
 
 	function checkRpgStructure(commands) {
 		const rpgCommand = commands.get('rpg');
+		const expectedSubcommands = commandRegistry.getAllCommands()
+			.filter(metadata => metadata.parent === 'rpg');
 		if (!rpgCommand?.subcommands) {
-			errors.push('The RPG command must expose its subcommands.');
+			errors.push('The RPG command must expose its registry-backed subcommands.');
 			return;
 		}
 
-		const expectedSubcommands = [
-			'add',
-			'damage',
-			'delete',
-			'end-turn',
-			'gen',
-			'gen-char',
-			'gen-help',
-			'get',
-			'get-help',
-			'heal',
-			'help',
-			'roll',
-			'rules',
-			'set',
-			'set-help',
-		];
-		const actualSubcommands = [...rpgCommand.subcommands.keys()].sort();
-		if (actualSubcommands.join(',') !== expectedSubcommands.join(',')) {
-			errors.push(`Unexpected RPG subcommands: ${actualSubcommands.join(', ')}`);
+		const expectedNames = expectedSubcommands.map(metadata => metadata.name).sort();
+		const actualNames = [...rpgCommand.subcommands.keys()].sort();
+		if (actualNames.join(',') !== expectedNames.join(',')) {
+			errors.push('The RPG runtime routes do not match the command registry.');
 		}
-		for (const subcommand of rpgCommand.subcommands.values()) {
+		for (const metadata of expectedSubcommands) {
+			const subcommand = rpgCommand.subcommands.get(metadata.name);
 			if (
-				!subcommand.description
-				|| !subcommand.usage
-				|| !Number.isFinite(subcommand.helpOrder)
-				|| typeof subcommand.configure !== 'function'
+				subcommand?.metadata !== metadata
 				|| typeof subcommand.execute !== 'function'
 			) {
-				errors.push(`Invalid RPG subcommand: ${subcommand.name}`);
+				errors.push(`Invalid registry-backed RPG subcommand: ${metadata.name}.`);
 			}
 		}
 		checkHelpOrder(rpgCommand.subcommands.values(), 'RPG subcommands');
-		const generationHelpOrder = [
-			'gen',
-			'gen-char',
-			'gen-help',
-		].sort((left, right) => (
-			rpgCommand.subcommands.get(left).helpOrder
-			- rpgCommand.subcommands.get(right).helpOrder
-		));
-		if (generationHelpOrder.join(',') !== 'gen,gen-char,gen-help') {
+		const generationOrder = ['rpg:gen', 'rpg:gen-char', 'rpg:gen-help']
+			.map(id => commandRegistry.getCommand(id))
+			.sort((left, right) => left.help.order - right.help.order)
+			.map(metadata => metadata.id);
+		if (generationOrder.join(',') !== 'rpg:gen,rpg:gen-char,rpg:gen-help') {
 			errors.push('RPG generation commands are not in the requested help order.');
 		}
 	}
 
 	function checkSlashCommandData(commands) {
-		const expectedCommands = ['help', 'purge', 'restart', 'rpg', 'say'];
-		if ([...commands.keys()].sort().join(',') !== expectedCommands.join(',')) {
-			errors.push(`Unexpected slash commands: ${[...commands.keys()].sort().join(', ')}.`);
+		const topLevelMetadata = commandRegistry.getAllCommands()
+			.filter(metadata => !metadata.parent);
+		const expectedNames = topLevelMetadata.map(metadata => metadata.name).sort();
+		if ([...commands.keys()].sort().join(',') !== expectedNames.join(',')) {
+			errors.push('Loaded slash commands do not match the command registry.');
 		}
 
-		for (const command of commands.values()) {
-			const data = command.data.toJSON();
+		for (const metadata of topLevelMetadata) {
+			const command = commands.get(metadata.name);
+			const data = command?.data?.toJSON();
 			if (
-				data.name !== command.name
-				|| data.description !== command.description
-				|| command.usage.startsWith('!')
+				command?.metadata !== metadata
+				|| data?.name !== metadata.name
+				|| data?.description !== t('en', metadata.descriptionKey)
+				|| command.usage !== metadata.examples[0]
 			) {
-				errors.push(`Invalid slash-command metadata: ${command.name}.`);
+				errors.push(`Invalid registry-backed slash command: ${metadata.name}.`);
 			}
+			const expectedOptions = metadata.group
+				? commandRegistry.getAllCommands()
+					.filter(candidate => candidate.parent === metadata.name)
+				: metadata.options;
+			checkRegisteredOptions(data?.options ?? [], expectedOptions, metadata.group);
 		}
 
-		const rpgCommand = commands.get('rpg');
-		const { EDIT_FIELDS } = require('../../commands/rpg/editorFields');
-		const { GET_FIELDS } = require('../../commands/rpg/subcommands/get');
-		const { t } = require('../../util/i18n');
-		const SET_HELP = t('en', 'rpg.setHelp.body');
-		const GET_HELP = t('en', 'rpg.getHelp.body');
+		const setHelp = t('en', 'rpg.setHelp.body');
+		const getHelp = t('en', 'rpg.getHelp.body');
+		const editableFields = getEditableFields();
+		const viewableFields = getViewableFields();
 		if (
-			EDIT_FIELDS.length < 30
-			|| !GET_FIELDS.includes('personality')
-			|| !GET_FIELDS.includes('status')
-			|| SET_HELP.length > 2_000
-			|| GET_HELP.length > 2_000
-			|| !SET_HELP.includes('prefilled form')
-			|| !SET_HELP.includes('`Name: Level: Description`')
-			|| /\b(add|set|remove) <(?:value|position)>/.test(SET_HELP)
+			editableFields.length < 30
+			|| !viewableFields.some(field => field.viewId === 'personality')
+			|| !viewableFields.some(field => field.viewId === 'status')
+			|| setHelp.length > 2_000
+			|| getHelp.length > 2_000
+			|| !setHelp.includes('prefilled form')
+			|| !setHelp.includes('`Name: Level: Description`')
+			|| /\b(add|set|remove) <(?:value|position)>/.test(setHelp)
 		) {
 			errors.push('The RPG editor or viewer help is incomplete or exceeds Discord limits.');
-		}
-
-		const slashSubcommands = rpgCommand.data.toJSON().options.map(option => option.name);
-		if (
-			slashSubcommands.length !== rpgCommand.subcommands.size
-			|| slashSubcommands.some(name => !rpgCommand.subcommands.has(name))
-		) {
-			errors.push('The /rpg schema and routed subcommands do not match.');
-		}
-
-		const rpgData = rpgCommand.data.toJSON();
-		const getSubcommand = name => rpgData.options.find(option => option.name === name);
-		const hasAutocomplete = (subcommand, optionName) => getSubcommand(subcommand)
-			?.options.find(option => option.name === optionName)?.autocomplete === true;
-		const healResourceChoices = getSubcommand('heal')
-			?.options.find(option => option.name === 'resource')?.choices;
-		const healPercentage = getSubcommand('heal')
-			?.options.find(option => option.name === 'percentage');
-		if (
-			healResourceChoices?.map(choice => choice.value).join(',')
-				!== 'hp,armor,both'
-			|| healResourceChoices?.map(choice => choice.name).join(',')
-				!== 'HP — Hit points,AR — Armor rating,HP and AR'
-			|| healPercentage?.min_value !== 0
-			|| healPercentage?.max_value !== 100
-		) {
-			errors.push('/rpg heal resource choices or percentage bounds are incorrect.');
-		}
-		for (const [subcommand, optionName] of [
-			['damage', 'character-key'],
-			['damage', 'damage-amount'],
-			['delete', 'character-key'],
-			['end-turn', 'character-key'],
-			['gen', 'category'],
-			['gen-char', 'level'],
-			['gen-char', 'background'],
-			['get', 'character-key'],
-			['get', 'field'],
-			['heal', 'character-key'],
-			['heal', 'percentage'],
-			['roll', 'expression'],
-			['set', 'character-key'],
-			['set', 'field'],
-		]) {
-			if (!hasAutocomplete(subcommand, optionName)) {
-				errors.push(`Missing autocomplete for /rpg ${subcommand} ${optionName}.`);
-			}
-		}
-
-		for (const commandName of ['purge']) {
-			const option = commands.get(commandName).data.toJSON().options[0];
-			if (!option.autocomplete) {
-				errors.push(`Missing autocomplete for /${commandName}.`);
-			}
 		}
 
 		const indexSource = fs.readFileSync(path.join(root, 'index.js'), 'utf8');
@@ -168,6 +106,32 @@ module.exports = function createCommandChecks(context) {
 			|| clientSource.includes('MessageContent')
 		) {
 			errors.push('Obsolete prefix-command handling or Message Content intent remains.');
+		}
+	}
+
+	function checkRegisteredOptions(registered, expected, subcommands = false) {
+		if (registered.length !== expected.length) {
+			errors.push('Registered command options do not match registry metadata.');
+			return;
+		}
+		for (const metadata of expected) {
+			const option = registered.find(candidate => candidate.name === metadata.name);
+			if (!option || option.description !== t('en', metadata.descriptionKey)) {
+				errors.push(`Missing registered option or subcommand: ${metadata.name}.`);
+				continue;
+			}
+			const expectedOptions = subcommands ? metadata.options : [];
+			if (subcommands) {
+				checkRegisteredOptions(option.options ?? [], expectedOptions);
+			}
+			else if (
+				Boolean(option.autocomplete) !== Boolean(metadata.autocomplete)
+				|| Boolean(option.required) !== Boolean(metadata.required)
+				|| (option.choices ?? []).map(choice => choice.value).join(',')
+					!== (metadata.choices ?? []).map(choice => choice.value).join(',')
+			) {
+				errors.push(`Registered option differs from metadata: ${metadata.name}.`);
+			}
 		}
 	}
 

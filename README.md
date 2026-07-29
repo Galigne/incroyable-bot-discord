@@ -139,6 +139,11 @@ The full TTRPG rules are available in
 ## Project structure
 
 - `commands/`: thin Discord slash-command adapters
+- `commands/metadata.js`: centralized command/subcommand schema, permissions,
+  localization keys, options, autocomplete descriptors, examples, and help metadata
+- `commands/registry.js`: command lookup, grouping, permission filtering, Discord
+  registration data, and `/rpg` routing
+- `commands/autocompleteProviders.js`: shared metadata-selected autocomplete logic
 - `commands/rpg/subcommands/`: one adapter per RPG subcommand
 - `services/`: Discord-independent application workflows, persistence, parsing,
   validation, mechanics, and generation
@@ -150,10 +155,10 @@ The full TTRPG rules are available in
 - `locales/`: English and French user-interface catalogs
 - `scripts/`: focused `node:test` suites and offline integration checks
 
-Run `npm test` to run ESLint, focused service/mechanics/dice tests, architectural
-boundary checks, slash-command schema and autocomplete checks, permissions,
-localization, the current character-save schema, required media, and voice
-dependencies.
+Run `npm test` to run ESLint, focused service/mechanics/dice/registry tests,
+architectural boundary checks, slash-command schema and autocomplete checks,
+permissions, localization, the current character-save schema, required media, and
+voice dependencies.
 
 Generator entries may be plain strings, weighted strings, or objects with
 multiple display fields. See

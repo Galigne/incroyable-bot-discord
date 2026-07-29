@@ -3,6 +3,7 @@ const path = require('node:path');
 const process = require('node:process');
 const { Events, MessageFlags } = require('discord.js');
 const Client = require('./client/Client');
+const commandRegistry = require('./commands/registry');
 const { handleRpgInteraction } = require('./commands/rpg/interactions');
 const config = require('./config.json');
 const { playLocalAudio } = require('./adapters/localAudioPlayer');
@@ -11,20 +12,20 @@ const {
 	getConfigurationErrorMessage,
 	validateConfig,
 } = require('./util/configuration');
-const { loadCommands } = require('./util/loadCommands');
 const { getLocale, t } = require('./util/i18n');
 
 loadEnvironment();
 
 const token = process.env.DISCORD_TOKEN?.trim();
 const client = new Client();
-client.commands = loadCommands(path.join(__dirname, 'commands'));
+client.commandRegistry = commandRegistry;
+client.commands = commandRegistry.getRuntimeCommands();
 
 client.once(Events.ClientReady, async readyClient => {
 	console.log(`Logged in as ${readyClient.user.tag}.`);
 	try {
 		await readyClient.application.commands.set(
-			[...readyClient.commands.values()].map(command => command.data.toJSON()),
+			commandRegistry.getDiscordCommandData().map(command => command.toJSON()),
 		);
 		console.log(`Registered ${readyClient.commands.size} global slash commands.`);
 	}

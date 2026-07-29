@@ -6,6 +6,7 @@
   },
   "authorization": {
     "missingRole": "Permission insuffisante pour utiliser cette commande.",
+    "ownerOnly": "Seul le propriétaire du serveur peut utiliser cette commande.",
     "guildOnly": "Cette permission ne peut être vérifiée que dans un serveur Discord.",
     "invalidConfiguration": "La configuration du bot est absente ou invalide au champ `{{field}}`. Demandez à l’administrateur du serveur de corriger config.json.",
     "obsoleteConfiguration": "Le champ de configuration obsolète `{{field}}` doit être supprimé de config.json.",
@@ -104,6 +105,9 @@
       "characterOption": "Personnage qui reçoit les soins",
       "resourceOption": "Ressource à restaurer",
       "percentageOption": "Pourcentage de la valeur maximale à atteindre",
+      "hpChoice": "PV — Points de vie",
+      "armorChoice": "PR — Points d’armure",
+      "bothChoice": "PV et PR",
       "both": "{{hp}} et {{ar}}",
       "change": "{{resource}} : **{{previous}}/{{max}} → {{current}}/{{max}}**",
       "result": "Ressources de **{{name}}** restaurées à {{percentage}} % :\n{{changes}}"
@@ -112,6 +116,11 @@
       "description": "Afficher les commandes JDR disponibles",
       "title": "Commandes JDR",
       "body": "Créez et gérez des personnages à l’aide d’une `CharacterKey` permanente, par exemple `D.Robert`. Cette clé identifie la sauvegarde et ne peut pas être modifiée. Utilisez `/rpg set` pour ouvrir le formulaire privé prérempli d’un champ. Dans `/rpg get`, ajoutez l’option `field` pour en afficher tous les détails."
+    },
+    "help": {
+      "description": "Afficher les commandes JDR disponibles",
+      "title": "Commandes JDR",
+      "body": "Créez et gérez des personnages à l’aide d’une `CharacterKey` permanente, par exemple `D.Robert`. Cette clé identifie la sauvegarde et ne peut pas être modifiée. Utilisez `/set` pour ouvrir le formulaire privé prérempli d’un champ. Dans `/get`, ajoutez l’option `field` pour en afficher tous les détails."
     },
     "roll": {
       "description": "Lancer une expression de dés standard",
