@@ -69,10 +69,23 @@
       "success": "{{count}} messages récents ont été supprimés.",
       "behavior": "Supprime le nombre demandé de messages récents dans le salon actuel. Les restrictions de suppression groupée de Discord restent applicables."
     },
-    "restart": {
-      "description": "Reconnecter le bot à Discord",
-      "reply": "Reconnexion en cours…",
-      "behavior": "Détruit la connexion actuelle du client Discord puis se reconnecte avec le jeton configuré."
+    "reload": {
+      "description": "Recharger l’état d’exécution pris en charge et se reconnecter à Discord",
+      "started": "Rechargement de l’état d’exécution lancé…",
+      "complete": "Rechargement terminé :",
+      "partial": "Rechargement terminé avec des échecs :",
+      "stageSuccess": "✓ {{stage}}",
+      "stageFailure": "✗ {{stage}}",
+      "behavior": "Recharge et valide la configuration et les catalogues anglais/français, vide les caches des générateurs, reconstruit le registre de commandes en mémoire, actualise les commandes slash Discord, nettoie les ressources vocales/audio actives et reconnecte le client Discord existant sans arrêter Node.js. Les étapes en échec sont signalées et l’état valide précédent est conservé lorsque cela est possible. Les changements du code source, du démarrage, du routage des événements, des mécaniques et des modèles nécessitent toujours de redémarrer manuellement `node index.js`.",
+      "stages": {
+        "configuration": "Configuration",
+        "localizations": "Localisations",
+        "generators": "Générateurs",
+        "commands": "Commandes",
+        "registration": "Enregistrement des commandes",
+        "voiceCleanup": "Nettoyage vocal",
+        "discordReconnect": "Reconnexion à Discord"
+      }
     },
     "say": {
       "description": "Envoyer un message avec le bot",

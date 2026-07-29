@@ -54,6 +54,10 @@ function loadGenerators(locale = DEFAULT_LOCALE) {
 	return generators;
 }
 
+function clearGeneratorCache() {
+	cachedGenerators.clear();
+}
+
 function normalizeGeneratorLocale(locale) {
 	return SUPPORTED_LOCALES.has(locale) ? locale : DEFAULT_LOCALE;
 }
@@ -227,6 +231,7 @@ function freezeEntry(entry) {
 }
 
 module.exports = {
+	clearGeneratorCache,
 	generate,
 	getEntryWeight,
 	getGenerator,

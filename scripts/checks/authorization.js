@@ -19,7 +19,7 @@ module.exports = function createAuthorizationChecks(context) {
 		const privilegedCommands = [
 			commands.get('say'),
 			commands.get('purge'),
-			commands.get('restart'),
+			commands.get('reload'),
 			commands.get('gen'),
 			commands.get('gen-char'),
 		];
@@ -49,7 +49,7 @@ module.exports = function createAuthorizationChecks(context) {
 			}
 		}
 
-		for (const name of ['say', 'purge', 'restart']) {
+		for (const name of ['say', 'purge', 'reload']) {
 			const command = commands.get(name);
 			if (!authorizeCommand(command, moderator, config).allowed) {
 				errors.push(`The moderator role should be allowed to use ${name}.`);
@@ -74,7 +74,7 @@ module.exports = function createAuthorizationChecks(context) {
 		}
 
 		const privilegedInDirectMessage = authorizeCommand(
-			commands.get('restart'),
+			commands.get('reload'),
 			directMessage,
 			config,
 		);

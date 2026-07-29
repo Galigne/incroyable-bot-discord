@@ -71,6 +71,12 @@ saves.
   weighted selection.
 - `services/randomCharacterGenerator.js`: selects generator data and assembles
   complete random characters using `services/mechanics/`.
+- `runtime/runtimeState.js`: owns the active validated configuration, command
+  registry, and runtime command collection.
+- `runtime/runtimeReloader.js`: runs the ordered `/reload` stages without clearing
+  the global Node.js module cache.
+- `adapters/discordCommandRegistration.js`: shared startup/reload slash-command
+  registration.
 - `scripts/check.js`: offline-check bootstrap, ordering, and final reporting.
 - `scripts/*.test.js`: focused `node:test` suites for Discord-independent services
   and thin command-integration coverage.
@@ -301,9 +307,20 @@ Permissions:
 - The creator may set, delete, heal, damage, and end turns for their character.
 - The configured DM role may perform those actions on every character and may use
   `/gen` and `/gen-char`.
-- The configured moderator role may use `/say`, `/purge`, and `/restart`.
+- The configured moderator role may use `/say`, `/purge`, and `/reload`.
 - The actual Discord server owner from `guild.ownerId` bypasses every role check
   and may use every command and manage every character.
+
+`/reload` replies ephemerally before lifecycle work, then validates and replaces
+configuration and localization data, clears generator caches, rebuilds and replaces
+the registry/command collection, refreshes global slash commands, disconnects
+tracked voice/audio resources, and reconnects the same Discord client. Each stage
+logs detailed errors and contributes only a localized success/failure status to the
+interaction response. Candidate configuration and localization data must validate
+before activation. Do not add event listeners during reload, create a second client,
+or clear the complete `require.cache`. Source-code changes to startup, routing,
+handlers, metadata, mechanics, or models still require manually restarting
+`node index.js`.
 
 `config.json` requires `locale`, `botUserId`, `roles.dm`, and `roles.moderator`.
 `channels.teamVoice` is optional. Never configure an owner ID or owner role.
@@ -324,7 +341,7 @@ Resources and display:
 ## Random generators
 
 Every `.json` file in `data/generators/en/` automatically becomes a category after
-the bot restarts. `data/generators/fr/` mirrors the English reference catalog with
+`/reload` or a manual process restart. `data/generators/fr/` mirrors the English reference catalog with
 localized display content. Both locales keep identical filenames, structure,
 ordering, weights, placeholders, and technical values. The catalog derives each
 internal ID from the English file, caches locales independently, and falls back to
@@ -349,7 +366,8 @@ Supported entry forms:
 
 Weights are positive numbers and default to `1`. Structured entries may contain 1
 to 25 Discord-safe fields. Preserve backward compatibility with all three formats.
-The catalog is cached for the process lifetime, so data changes require a restart.
+The catalog is cached until `/reload` clears both localized caches or the process
+is restarted.
 
 Random character generation depends on exact category names and structured field
 labels. Before renaming generator fields, inspect `services/randomCharacterGenerator.js`.
@@ -399,7 +417,7 @@ Never add, remove, or modify user-facing functionality without explicit directio
 Instructions in the user's request or in the repository's canonical documentation,
 including the rulebooks, count as explicit direction. Do not extend a request to
 similar commands, features, or use cases merely for consistency. For example, if
-the user requests a warning for `/purge` and `/restart`, do not also apply it to
+the user requests a warning for `/purge` and `/reload`, do not also apply it to
 `/say`; ask whether its omission was intentional.
 
 Make the non-behavioral supporting changes required to implement an explicitly

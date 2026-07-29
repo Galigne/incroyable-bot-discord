@@ -101,7 +101,14 @@ module.exports = function createRuntimeChecks(context) {
 			errors.push('commands/rpg/index.js must not duplicate registry routing or schema data.');
 		}
 		const indexSource = fs.readFileSync(path.join(root, 'index.js'), 'utf8');
-		if (!indexSource.includes('commandRegistry.getDiscordCommandData()')) {
+		const registrationSource = fs.readFileSync(
+			path.join(root, 'adapters', 'discordCommandRegistration.js'),
+			'utf8',
+		);
+		if (
+			!indexSource.includes('registerCommands(')
+			|| !registrationSource.includes('getDiscordCommandData()')
+		) {
 			errors.push('Slash-command registration must use the centralized command registry.');
 		}
 	}

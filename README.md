@@ -70,7 +70,7 @@ Never commit `.env` or a Discord token. Reset any token that has previously been
 - `/help command:<command>` — show permissions, parameters, accepted values, examples, and behavior
 - `/say message:<text>`
 - `/purge amount:<2-100>`
-- `/restart`
+- `/reload` — reload supported runtime state and reconnect the existing Discord client
 - `/rules`
 - `/gen category:<category>` — generate a random prompt (DM only)
 - `/gen-char character-key:<new key> [level] [background]` — generate and save a complete character (DM only)
@@ -106,9 +106,19 @@ return the textual roll breakdown.
 Character creators can edit, delete, heal, damage, and end turns for their own
 sheets. Users with the configured DM role can perform those actions on every
 character and may use `/gen` and `/gen-char`. Users with the configured
-moderator role may use `/say`, `/purge`, and `/restart`. The actual Discord server
+moderator role may use `/say`, `/purge`, and `/reload`. The actual Discord server
 owner, identified by Discord rather than configuration, may use every command and
 manage every character.
+
+`/reload` acknowledges privately before disconnecting, then reloads and validates
+`config.json` and both localization catalogs, clears localized generator caches,
+rebuilds and replaces the runtime command registry, refreshes global slash-command
+registration, cleans up active voice/audio resources, and reconnects the same
+Discord client without terminating Node.js. Its final private response lists every
+successful and failed stage. Invalid configuration or localization replacements do
+not replace the previous valid state. Source-code changes—including startup,
+event-routing, mechanics, model, metadata, and handler changes—still require
+manually restarting `node index.js`.
 The identifier supplied to `/add` remains the stable command/save key and cannot
 be edited. The sheet stores `firstName` and `lastName` separately for display.
 Keys may contain internal periods, hyphens, and underscores, such as `D.Robert`.
@@ -156,6 +166,7 @@ The full TTRPG rules are available in
 - `util/`: Discord response/rendering adapters plus shared localization,
   authorization, autocomplete, and command-loading helpers
 - `adapters/`: external Discord integrations such as local voice playback
+- `runtime/`: active runtime state and explicit reload-stage orchestration
 - `data/generators/en/` and `data/generators/fr/`: localized JSON prompt catalogs
 - `locales/`: English and French user-interface catalogs
 - `scripts/`: focused `node:test` suites and offline integration checks

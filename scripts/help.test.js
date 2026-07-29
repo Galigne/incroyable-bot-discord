@@ -35,7 +35,7 @@ test('/help lists moderation commands for a moderator', () => {
 	assert.match(rendered, /Moderation/);
 	assert.match(rendered, /\*\*\/say\*\*/);
 	assert.match(rendered, /\*\*\/purge\*\*/);
-	assert.match(rendered, /\*\*\/restart\*\*/);
+	assert.match(rendered, /\*\*\/reload\*\*/);
 	assert.doesNotMatch(rendered, /\*\*\/gen\*\*/);
 });
 

@@ -9,7 +9,7 @@ data/generators/
 ```
 
 English is the reference locale. Every `.json` file in `en/` becomes a generator
-category after the bot restarts, and `fr/` contains the corresponding localized
+category after `/reload` or a manual process restart, and `fr/` contains the corresponding localized
 file. If a localized file is absent at runtime, the catalog falls back to its
 English counterpart.
 

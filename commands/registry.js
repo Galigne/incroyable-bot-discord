@@ -283,7 +283,19 @@ function deepFreeze(value) {
 	return Object.freeze(value);
 }
 
-const commandRegistry = new CommandRegistry(COMMAND_METADATA);
+function createCommandRegistry(metadataList = COMMAND_METADATA, options = {}) {
+	return new CommandRegistry(metadataList, options);
+}
+
+function reloadCommandRegistry(runtimeState, options = {}) {
+	const candidate = createCommandRegistry(COMMAND_METADATA, options);
+	runtimeState.replaceCommandRegistry(candidate);
+	return candidate;
+}
+
+const commandRegistry = createCommandRegistry();
 
 module.exports = commandRegistry;
 module.exports.CommandRegistry = CommandRegistry;
+module.exports.createCommandRegistry = createCommandRegistry;
+module.exports.reloadCommandRegistry = reloadCommandRegistry;

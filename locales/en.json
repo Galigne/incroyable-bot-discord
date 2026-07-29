@@ -69,10 +69,23 @@
       "success": "Deleted {{count}} recent messages.",
       "behavior": "Deletes the requested number of recent messages from the current channel. Discord bulk deletion restrictions still apply."
     },
-    "restart": {
-      "description": "Reconnect the bot to Discord",
-      "reply": "Reconnecting...",
-      "behavior": "Destroys the current Discord client connection and logs in again with the configured token."
+    "reload": {
+      "description": "Reload supported runtime state and reconnect to Discord",
+      "started": "Runtime reload started…",
+      "complete": "Reload complete:",
+      "partial": "Reload completed with failures:",
+      "stageSuccess": "✓ {{stage}}",
+      "stageFailure": "✗ {{stage}}",
+      "behavior": "Reloads and validates configuration and English/French localizations, clears generator caches, rebuilds the in-memory command registry, refreshes Discord slash-command registration, cleans up active voice/audio resources, and reconnects the existing Discord client without terminating Node.js. Failed stages are reported while previous valid state is retained where practical. Source-code, startup, event-routing, mechanics, and model changes still require manually restarting `node index.js`.",
+      "stages": {
+        "configuration": "Configuration",
+        "localizations": "Localizations",
+        "generators": "Generators",
+        "commands": "Commands",
+        "registration": "Command registration",
+        "voiceCleanup": "Voice cleanup",
+        "discordReconnect": "Discord reconnect"
+      }
     },
     "say": {
       "description": "Send a message through the bot",

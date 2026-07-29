@@ -1,8 +1,16 @@
+const fs = require('node:fs');
+const path = require('node:path');
+
 const en = require('../locales/en.json');
 const fr = require('../locales/fr.json');
 
 const DEFAULT_LOCALE = 'en';
+const DEFAULT_CATALOG_PATHS = Object.freeze({
+	en: path.join(__dirname, '..', 'locales', 'en.json'),
+	fr: path.join(__dirname, '..', 'locales', 'fr.json'),
+});
 const translations = { en, fr };
+const REQUIRED_TRANSLATION_KEYS = new Set(flattenKeys(en));
 const reportedMissingKeys = new Set();
 
 function normalizeLocale(locale) {
@@ -47,6 +55,59 @@ function hasTranslationKey(locale, key) {
 		&& typeof getTranslation(translations[normalizedLocale], key) === 'string';
 }
 
+function loadTranslationCatalogs(catalogPaths = DEFAULT_CATALOG_PATHS) {
+	const candidates = Object.fromEntries(
+		Object.entries(DEFAULT_CATALOG_PATHS).map(([locale, defaultPath]) => [
+			locale,
+			JSON.parse(fs.readFileSync(catalogPaths[locale] ?? defaultPath, 'utf8')),
+		]),
+	);
+	validateTranslationCatalogs(candidates);
+	return candidates;
+}
+
+function reloadTranslations(catalogPaths = DEFAULT_CATALOG_PATHS) {
+	const candidates = loadTranslationCatalogs(catalogPaths);
+	replaceTranslationCatalogs(candidates);
+	return translations;
+}
+
+function replaceTranslationCatalogs(catalogs) {
+	validateTranslationCatalogs(catalogs);
+	for (const locale of Object.keys(DEFAULT_CATALOG_PATHS)) {
+		translations[locale] = catalogs[locale];
+	}
+	reportedMissingKeys.clear();
+	return translations;
+}
+
+function validateTranslationCatalogs(catalogs) {
+	for (const locale of Object.keys(DEFAULT_CATALOG_PATHS)) {
+		const catalog = catalogs?.[locale];
+		if (!catalog || typeof catalog !== 'object' || Array.isArray(catalog)) {
+			throw new Error(`Invalid ${locale} localization catalog.`);
+		}
+		const invalidKey = flattenKeys(catalog).find(key => (
+			!key || typeof getTranslation(catalog, key) !== 'string'
+		));
+		if (invalidKey !== undefined) {
+			throw new Error(`Invalid translation value for ${locale}:${invalidKey}.`);
+		}
+		const keys = new Set(flattenKeys(catalog));
+		if ([...REQUIRED_TRANSLATION_KEYS].some(key => !keys.has(key))) {
+			throw new Error(
+				`${locale} localization catalog does not match the runtime schema.`,
+			);
+		}
+	}
+
+	const missing = findMissingKeys(catalogs);
+	if (Object.values(missing).some(keys => keys.length > 0)) {
+		throw new Error('Localization catalogs must contain exactly the same keys.');
+	}
+	return catalogs;
+}
+
 function reportMissingKey(locale, key, reason = 'Missing translation') {
 	const identifier = `${locale}:${key}:${reason}`;
 	if (!reportedMissingKeys.has(identifier)) {
@@ -77,12 +138,17 @@ function flattenKeys(value, prefix = '') {
 
 module.exports = {
 	DEFAULT_LOCALE,
+	DEFAULT_CATALOG_PATHS,
 	createTranslator,
 	findMissingKeys,
 	flattenKeys,
 	getLocale,
 	hasTranslationKey,
+	loadTranslationCatalogs,
 	normalizeLocale,
+	reloadTranslations,
+	replaceTranslationCatalogs,
 	t,
 	translations,
+	validateTranslationCatalogs,
 };

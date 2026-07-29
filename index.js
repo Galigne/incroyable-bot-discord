@@ -2,11 +2,14 @@ const fs = require('node:fs');
 const path = require('node:path');
 const process = require('node:process');
 const { Events, MessageFlags } = require('discord.js');
+const { registerCommands } = require('./adapters/discordCommandRegistration');
 const Client = require('./client/Client');
 const commandRegistry = require('./commands/registry');
 const { handleRpgInteraction } = require('./commands/rpg/interactions');
-const config = require('./config.json');
+const initialConfig = require('./config.json');
 const { playLocalAudio } = require('./adapters/localAudioPlayer');
+const { createRuntimeReloader } = require('./runtime/runtimeReloader');
+const { RuntimeState } = require('./runtime/runtimeState');
 const { authorizeCommand } = require('./util/authorization');
 const {
 	getConfigurationErrorMessage,
@@ -18,16 +21,24 @@ loadEnvironment();
 
 const token = process.env.DISCORD_TOKEN?.trim();
 const client = new Client();
-client.commandRegistry = commandRegistry;
-client.commands = commandRegistry.getRuntimeCommands();
+const runtimeState = new RuntimeState(client, {
+	commandRegistry,
+	config: initialConfig,
+});
+const runtimeReloader = createRuntimeReloader({
+	client,
+	runtimeState,
+	token,
+});
 
 client.once(Events.ClientReady, async readyClient => {
 	console.log(`Logged in as ${readyClient.user.tag}.`);
 	try {
-		await readyClient.application.commands.set(
-			commandRegistry.getDiscordCommandData().map(command => command.toJSON()),
+		const commandCount = await registerCommands(
+			readyClient,
+			runtimeState.getCommandRegistry(),
 		);
-		console.log(`Registered ${readyClient.commands.size} global slash commands.`);
+		console.log(`Registered ${commandCount} global slash commands.`);
 	}
 	catch (error) {
 		console.error('Could not register slash commands:', error);
@@ -43,6 +54,7 @@ client.on(Events.ShardDisconnect, (event, shardId) => {
 });
 
 client.on(Events.InteractionCreate, async interaction => {
+	const config = runtimeState.getConfig();
 	if (!interaction.inGuild()) {
 		if (interaction.isAutocomplete()) {
 			await interaction.respond([]).catch(ignoreRejection);
@@ -110,6 +122,7 @@ client.on(Events.InteractionCreate, async interaction => {
 			client,
 			config,
 			interaction,
+			runtimeReloader,
 			token,
 		});
 	}
@@ -120,6 +133,7 @@ client.on(Events.InteractionCreate, async interaction => {
 });
 
 client.on(Events.VoiceStateUpdate, async (oldState, newState) => {
+	const config = runtimeState.getConfig();
 	if (
 		oldState.channelId !== null
 		|| newState.channelId !== config.channels?.teamVoice
@@ -141,10 +155,10 @@ client.on(Events.VoiceStateUpdate, async (oldState, newState) => {
 
 async function start() {
 	try {
-		validateConfig(config);
+		validateConfig(runtimeState.getConfig());
 	}
 	catch (error) {
-		console.error(getConfigurationErrorMessage(error, config));
+		console.error(getConfigurationErrorMessage(error, runtimeState.getConfig()));
 		process.exitCode = 1;
 		return;
 	}
@@ -183,7 +197,7 @@ function loadEnvironment() {
 }
 
 async function replyWithUnexpectedError(interaction) {
-	const locale = getLocale(config, interaction.guildId);
+	const locale = getLocale(runtimeState.getConfig(), interaction.guildId);
 	const response = {
 		content: t(locale, 'common.unexpectedError'),
 		flags: MessageFlags.Ephemeral,

@@ -1,7 +1,10 @@
+const fs = require('node:fs');
+const path = require('node:path');
 const { normalizeLocale, t } = require('./i18n');
 
 const SUPPORTED_LOCALES = new Set(['en', 'fr']);
 const ROLE_KEYS = new Set(['dm', 'moderator']);
+const DEFAULT_CONFIG_PATH = path.join(__dirname, '..', 'config.json');
 
 class ConfigurationError extends Error {
 	constructor(field, reason = 'missing') {
@@ -51,6 +54,17 @@ function validateConfig(config) {
 	return config;
 }
 
+function loadConfig(configPath = DEFAULT_CONFIG_PATH) {
+	const candidate = JSON.parse(fs.readFileSync(configPath, 'utf8'));
+	return validateConfig(candidate);
+}
+
+function reloadConfig(runtimeState, configPath = DEFAULT_CONFIG_PATH) {
+	const candidate = loadConfig(configPath);
+	runtimeState.replaceConfig(candidate);
+	return candidate;
+}
+
 function getConfigurationErrorMessage(error, config = {}) {
 	const locale = normalizeLocale(config.locale);
 	if (!(error instanceof ConfigurationError)) {
@@ -74,7 +88,10 @@ function requireNonEmptyString(object, property, field = property) {
 
 module.exports = {
 	ConfigurationError,
+	DEFAULT_CONFIG_PATH,
 	SUPPORTED_LOCALES,
 	getConfigurationErrorMessage,
+	loadConfig,
+	reloadConfig,
 	validateConfig,
 };
