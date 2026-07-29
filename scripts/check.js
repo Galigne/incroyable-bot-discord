@@ -107,10 +107,9 @@ async function main() {
 		localizationChecks.checkLocalization();
 		const commands = commandChecks.checkCommands();
 		commandChecks.checkHelpOrder(commands.values(), 'top-level commands');
-		commandChecks.checkRpgStructure(commands);
+		commandChecks.checkRpgTopLevelCommands(commands);
 		commandChecks.checkSlashCommandData(commands);
 		generatorChecks.checkGeneratorCatalog();
-		await generatorChecks.checkGenHelp();
 		characterChecks.checkCharacterModel();
 		characterChecks.checkRandomCharacterGeneration();
 		await characterChecks.checkCharacterStore();

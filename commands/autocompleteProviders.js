@@ -1,13 +1,20 @@
 const generatorCatalog = require('../services/generatorCatalog');
 const {
-	getEditableFields,
 	getViewableFields,
 } = require('../services/characterFieldCatalog');
 const { filterAutocompleteChoices } = require('../util/autocomplete');
 const { hasDmPermission } = require('../util/authorization');
 const {
+	OPTION_VALUE_PROVIDERS,
+	getCommandOptionValues,
+} = require('../util/commandOptionValues');
+const {
 	getCharacterFieldLabel,
 } = require('../util/characterDisplay');
+const {
+	getCommandInvocation,
+	getCommandLookupValue,
+} = require('../util/helpResponses');
 const { t } = require('../util/i18n');
 const { getCharacterChoices } = require('./rpg/autocomplete');
 
@@ -24,11 +31,16 @@ async function getAutocompleteChoices(metadata, option, context) {
 }
 
 const AUTOCOMPLETE_PROVIDERS = {
+	...Object.fromEntries(
+		Object.keys(OPTION_VALUE_PROVIDERS).map(providerName => [
+			providerName,
+			getCanonicalValueChoices,
+		]),
+	),
 	static: getStaticChoices,
 	backgrounds: getBackgroundChoices,
 	characters: (option, context, focused) => getCharacterChoices(focused.value),
-	'editable-fields': getEditableFieldChoices,
-	'generator-categories': getGeneratorCategoryChoices,
+	'help-commands': getHelpCommandChoices,
 	'manageable-characters': getManageableCharacterChoices,
 	'viewable-fields': getViewableFieldChoices,
 };
@@ -68,25 +80,43 @@ function getBackgroundChoices(option, context, focused) {
 	);
 }
 
-function getEditableFieldChoices(option, context, focused) {
+function getCanonicalValueChoices(option, context, focused) {
 	return filterAutocompleteChoices(
-		getEditableFields().map(field => ({
+		getCommandOptionValues(option.autocomplete.provider, context.locale),
+		focused.value,
+	);
+}
+
+function getHelpCommandChoices(option, context, focused) {
+	const allCommands = context.registry.getHelpMetadata();
+	const commands = canFilterHelpCommands(context.interaction)
+		? context.registry.getVisibleHelpMetadata(
+			context.interaction,
+			context.config,
+		)
+		: allCommands;
+	return filterAutocompleteChoices(
+		commands.map(metadata => ({
 			name: (
-				`${getCharacterFieldLabel(context.locale, field.id)} (${field.editId})`
+				`${getCommandInvocation(metadata)} — ${t(
+					context.locale,
+					metadata.help.summaryKey ?? metadata.descriptionKey,
+				)}`
 			).slice(0, 100),
-			value: field.editId,
+			value: getCommandLookupValue(metadata),
 		})),
 		focused.value,
 	);
 }
 
-function getGeneratorCategoryChoices(option, context, focused) {
-	return filterAutocompleteChoices(
-		generatorCatalog.listGenerators(context.locale).map(category => ({
-			name: `${category.name} — ${category.description}`.slice(0, 100),
-			value: category.id,
-		})),
-		focused.value,
+function canFilterHelpCommands(interaction) {
+	return Boolean(
+		interaction?.guild
+		&& interaction.user?.id
+		&& (
+			interaction.guild.ownerId === interaction.user.id
+			|| interaction.member?.roles
+		),
 	);
 }
 

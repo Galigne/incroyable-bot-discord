@@ -14,32 +14,78 @@
   },
   "commands": {
     "help": {
-      "description": "Afficher toutes les commandes disponibles",
-      "title": "Gon Freecss",
-      "available": "Commandes disponibles"
+      "description": "Afficher les commandes disponibles ou l’aide détaillée d’une commande",
+      "commandOption": "Commande à expliquer en détail",
+      "commandAccepted": "Une commande proposée par l’autocomplétion, par exemple `roll`",
+      "title": "Aide des commandes",
+      "available": "Commandes actuellement disponibles pour vous. Utilisez `/help command:<command>` pour afficher les détails.",
+      "behavior": "Sans option, affiche les commandes disponibles pour l’utilisateur et les regroupe par catégorie. Avec `command`, affiche la permission, les paramètres, les valeurs acceptées, les exemples et le comportement de la commande choisie.",
+      "unknownCommand": "Commande inconnue ou indisponible : **{{command}}**.",
+      "detailTitle": "Aide — {{command}}",
+      "permissionTitle": "Permission requise",
+      "parametersTitle": "Paramètres",
+      "examplesTitle": "Exemples",
+      "behaviorTitle": "Comportement",
+      "acceptedTitle": "Valeurs acceptées",
+      "required": "Obligatoire",
+      "optional": "Facultatif",
+      "noParameters": "Aucun paramètre.",
+      "categories": {
+        "general": "Général",
+        "moderation": "Modération",
+        "rpg": "JDR"
+      },
+      "permissions": {
+        "everyone": "Toute personne ayant normalement accès au bot",
+        "dm": "Rôle MJ ou propriétaire du serveur",
+        "moderator": "Rôle de modération ou propriétaire du serveur",
+        "owner": "Propriétaire du serveur uniquement"
+      },
+      "types": {
+        "boolean": "Booléen",
+        "integer": "Nombre entier",
+        "number": "Nombre",
+        "string": "Texte"
+      },
+      "accepted": {
+        "autocomplete": "Sélectionnez ou saisissez une valeur ; l’autocomplétion fournit des suggestions valides",
+        "autocompleteComplete": "Les {{count}} valeurs disponibles sont toutes affichées ci-dessous. Saisissez une partie du nom ou de la valeur pour filtrer l’autocomplétion.",
+        "freeText": "Tout texte accepté par Discord",
+        "number": "Tout nombre valide",
+        "numberRange": "Un nombre compris entre {{min}} et {{max}}",
+        "numberMinimum": "Un nombre supérieur ou égal à {{min}}",
+        "numberMaximum": "Un nombre inférieur ou égal à {{max}}",
+        "lengthRange": "Un texte de {{min}} à {{max}} caractères",
+        "lengthMaximum": "Un texte de {{max}} caractères au maximum"
+      },
+      "valueGroups": {
+        "general": "Champs généraux",
+        "resources": "Ressources"
+      }
     },
     "purge": {
       "description": "Supprimer les messages récents du salon",
       "amount": "Nombre de messages récents à supprimer",
-      "success": "{{count}} messages récents ont été supprimés."
+      "success": "{{count}} messages récents ont été supprimés.",
+      "behavior": "Supprime le nombre demandé de messages récents dans le salon actuel. Les restrictions de suppression groupée de Discord restent applicables."
     },
     "restart": {
       "description": "Reconnecter le bot à Discord",
-      "reply": "Reconnexion en cours…"
+      "reply": "Reconnexion en cours…",
+      "behavior": "Détruit la connexion actuelle du client Discord puis se reconnecte avec le jeton configuré."
     },
     "say": {
       "description": "Envoyer un message avec le bot",
-      "message": "Message à envoyer"
-    },
-    "rpg": {
-      "description": "Générer du contenu et gérer des fiches de personnage"
+      "message": "Message à envoyer",
+      "behavior": "Publie le message fourni dans le salon actuel par l’intermédiaire du bot."
     }
   },
   "rpg": {
     "add": {
       "description": "Créer une fiche de personnage vide avec une CharacterKey permanente",
       "keyOption": "Clé de sauvegarde unique, courte et facile à retenir",
-      "success": "Le personnage associé à la clé `{{key}}` a été créé. Cette CharacterKey ne pourra plus être modifiée. Utilisez `/rpg set` pour remplir sa fiche au moyen de formulaires privés préremplis."
+      "success": "Le personnage associé à la clé `{{key}}` a été créé. Cette CharacterKey ne pourra plus être modifiée. Utilisez `/set` pour remplir sa fiche au moyen de formulaires privés préremplis.",
+      "behavior": "Crée et sauvegarde une fiche vide appartenant à l’utilisateur. La CharacterKey devient l’identifiant de sauvegarde immuable ; elle doit commencer et finir par une lettre ou un chiffre, et peut contenir des points, tirets et tirets bas."
     },
     "damage": {
       "description": "Infliger des dégâts à un personnage, d’abord aux PR puis aux PV",
@@ -49,25 +95,29 @@
       "choice": "{{amount}} dégâts",
       "piercingBreakdown": "Dégâts perforants infligés directement aux {{hpLabel}} : {{amount}}.",
       "normalBreakdown": "Dégâts absorbés par les {{arLabel}} : {{arDamage}} ; dégâts subis par les {{hpLabel}} : {{hpDamage}}.",
-      "result": "**{{name}}** subit **{{amount}} dégâts**. {{breakdown}}\n{{arLabel}} : **{{arCurrent}}/{{arMax}}** · {{hpLabel}} : **{{hpCurrent}}/{{hpMax}}**"
+      "result": "**{{name}}** subit **{{amount}} dégâts**. {{breakdown}}\n{{arLabel}} : **{{arCurrent}}/{{arMax}}** · {{hpLabel}} : **{{hpCurrent}}/{{hpMax}}**",
+      "behavior": "Applique un nombre entier positif de dégâts, d’abord aux PR actuels puis aux PV actuels. Avec `piercing:true`, les dégâts ignorent les PR. Seuls le créateur, un MJ ou le propriétaire du serveur peuvent l’utiliser."
     },
     "delete": {
       "description": "Supprimer l’un de vos personnages",
       "characterOption": "Personnage à supprimer",
-      "success": "Le personnage **{{key}}** a été supprimé."
+      "success": "Le personnage **{{key}}** a été supprimé.",
+      "behavior": "Supprime définitivement la sauvegarde du personnage choisi. Seuls le créateur, un MJ ou le propriétaire du serveur peuvent le supprimer."
     },
     "endTurn": {
       "description": "Rétablir les PA et la DD à leur maximum",
       "characterOption": "Personnage qui termine son tour",
-      "result": "**{{name}}** commence un nouveau tour avec {{ap}} {{apLabel}} et {{md}} {{mdLabel}}."
+      "result": "**{{name}}** commence un nouveau tour avec {{ap}} {{apLabel}} et {{md}} {{mdLabel}}.",
+      "behavior": "Rétablit les PA et la DD actuels du personnage à leurs valeurs maximales respectives. Seuls le créateur, un MJ ou le propriétaire du serveur peuvent l’utiliser."
     },
     "gen": {
       "description": "Générer une inspiration pour le MJ dans la catégorie choisie (MJ uniquement)",
       "schemaDescription": "Générer une inspiration pour le MJ dans la catégorie choisie",
       "categoryOption": "Catégorie de génération",
-      "unknownCategory": "Catégorie de génération inconnue : **{{category}}**. Utilisez `/rpg gen-help` pour consulter la liste des catégories.",
+      "unknownCategory": "Catégorie de génération inconnue : **{{category}}**. Utilisez `/help command:gen` pour consulter les détails.",
       "title": "{{category}} — résultat généré",
-      "footer": "Le MJ peut adapter ce résultat ou effectuer un nouveau tirage."
+      "footer": "Le MJ peut adapter ce résultat ou effectuer un nouveau tirage.",
+      "behavior": "Sélectionne une entrée aléatoire pondérée dans la catégorie de génération localisée choisie. Chaque fichier JSON de génération devient disponible après le redémarrage du bot. La liste localisée complète des catégories figure ci-dessus ; saisissez une partie du nom ou de la valeur pour filtrer l’autocomplétion."
     },
     "genChar": {
       "description": "Générer et sauvegarder un personnage aléatoire complet (MJ uniquement)",
@@ -77,28 +127,17 @@
       "backgroundOption": "Background du PNJ ; tirage aléatoire si omis",
       "levelChoice": "Niveau {{level}}",
       "footer": "{{keyLabel}} : {{key}}",
-      "success": "Le personnage **{{name}}** a été généré avec la clé `{{key}}`."
-    },
-    "genHelp": {
-      "description": "Expliquer la génération aléatoire et afficher ses catégories",
-      "schemaDescription": "Expliquer la génération aléatoire et afficher ses catégories",
-      "title": "Aide à la génération",
-      "body": "`/rpg gen category:<category>`\nCommande réservée au MJ. Sélectionnez une catégorie avec l’autocomplétion pour tirer une entrée aléatoire selon son poids. Relancez la commande pour obtenir un autre résultat.\n\n`/rpg gen-char character-key:<new key> [level] [background]`\nCommande réservée au MJ. Elle crée et sauvegarde un personnage complet sous une CharacterKey unique. Le niveau doit être compris entre 1 et 10 ; s’il est omis, il est tiré au hasard. Le Background du PNJ peut également être choisi ou tiré au hasard. Les statistiques, ressources, équipements, objets et pièces d’or dépendent du niveau et des règles du jeu. L’Intelligence accorde des points de LOI : ils servent d’abord à augmenter autant que possible le niveau d’une première LOI, puis à en créer une seconde. Un personnage ne peut ainsi recevoir que deux LOI au maximum.",
-      "categoryLine": "**{{name}}** — {{description}} ({{count}} entrées)",
-      "categoryLineCompact": "**{{name}}** ({{count}} entrées)",
-      "available": "Catégories disponibles"
+      "success": "Le personnage **{{name}}** a été généré avec la clé `{{key}}`.",
+      "behavior": "Crée et sauvegarde un personnage aléatoire complet sous une CharacterKey unique. Le niveau doit être compris entre 1 et 10 et est aléatoire s’il est omis ; le Background est également facultatif et aléatoire par défaut. Les statistiques, ressources, LOI, armure, armes, objets, pièces d’or et éventuels effets d’état dépendent du niveau et des règles."
     },
     "get": {
       "description": "Afficher le résumé d’un personnage ou le détail d’un champ",
       "characterOption": "Personnage à afficher",
       "fieldOption": "Champ détaillé facultatif",
-      "unknownField": "Champ inconnu : **{{field}}**. Utilisez `/rpg get-help` pour consulter la liste des champs.",
+      "unknownField": "Champ inconnu : **{{field}}**. Utilisez `/help command:get` pour consulter les détails.",
       "keyFooter": "{{keyLabel}} : {{key}}",
-      "detailsFooter": "Utilisez `/rpg get` avec l’option `field` pour afficher davantage de détails."
-    },
-    "getHelp": {
-      "description": "Expliquer le résumé d’un personnage et l’affichage détaillé des champs",
-      "body": "Utilisez `/rpg get` pour afficher le résumé d’une fiche de personnage.\nAjoutez l’option facultative `field` pour afficher un champ complet et ses sous-champs.\n\n**Champs disponibles**\n`name` — prénom et nom\n`firstName`, `lastName`, `level`\n`race` — nom, description physique et lore\n`appearance`, `backstory`, `goals`\n`personality` — traits et description complémentaire\n`racialTraits` — dons raciaux : bonus de compétence et capacité physique\n`statistics` — statistiques de base et dérivées\n`rules` — nom, niveau et description de chaque LOI\n`talents`\n`status` — PV, PR, PA, DD, encombrement et effets d’état\n`HP`, `AR`, `AP`, `MD` — identifiants internes permettant d’afficher une seule ressource\n`statusEffects`, `equipment`, `inventory`, `encumbrance`\n\n**Exemple**\nSélectionnez la CharacterKey `D.Robert` pour afficher le résumé, puis choisissez éventuellement `name`, `personality`, `race`, `rules` ou `status`."
+      "detailsFooter": "Utilisez `/get` avec l’option `field` pour afficher davantage de détails.",
+      "behavior": "Sans `field`, publie le résumé public du personnage. Avec `field`, affiche un champ complet et ses sous-champs. L’autocomplétion propose les CharacterKeys et les vues prises en charge, notamment `name`, `race`, `personality`, `statistics`, `rules`, `status`, `equipment` et `inventory`."
     },
     "heal": {
       "description": "Restaurer les PV, les PR ou les deux jusqu’au pourcentage choisi",
@@ -110,21 +149,14 @@
       "bothChoice": "PV et PR",
       "both": "{{hp}} et {{ar}}",
       "change": "{{resource}} : **{{previous}}/{{max}} → {{current}}/{{max}}**",
-      "result": "Ressources de **{{name}}** restaurées à {{percentage}} % :\n{{changes}}"
-    },
-    "help": {
-      "description": "Afficher les commandes JDR disponibles",
-      "title": "Commandes JDR",
-      "body": "Créez et gérez des personnages à l’aide d’une `CharacterKey` permanente, par exemple `D.Robert`. Cette clé identifie la sauvegarde et ne peut pas être modifiée. Utilisez `/rpg set` pour ouvrir le formulaire privé prérempli d’un champ. Dans `/rpg get`, ajoutez l’option `field` pour en afficher tous les détails."
-    },
-    "help": {
-      "description": "Afficher les commandes JDR disponibles",
-      "title": "Commandes JDR",
-      "body": "Créez et gérez des personnages à l’aide d’une `CharacterKey` permanente, par exemple `D.Robert`. Cette clé identifie la sauvegarde et ne peut pas être modifiée. Utilisez `/set` pour ouvrir le formulaire privé prérempli d’un champ. Dans `/get`, ajoutez l’option `field` pour en afficher tous les détails."
+      "result": "Ressources de **{{name}}** restaurées à {{percentage}} % :\n{{changes}}",
+      "behavior": "Fixe les PV actuels, les PR actuels ou les deux au pourcentage demandé de leur maximum respectif, selon la règle d’arrondi commune. Seuls le créateur, un MJ ou le propriétaire du serveur peuvent l’utiliser."
     },
     "roll": {
       "description": "Lancer une expression de dés standard",
       "expressionOption": "Expression de dés, par exemple 2d6+3",
+      "acceptedValues": "`NOMBREdFACES` suivi éventuellement d’un `+MODIFICATEUR` ou `-MODIFICATEUR`",
+      "behavior": "Lance un groupe de dés standard au format `NOMBREdFACES`, suivi éventuellement d’un modificateur signé, par exemple `1d20`, `2d6+3` ou `4d8-2`. Le nombre de dés doit être compris entre 1 et 100, les faces entre 2 et 1 000, et la valeur absolue du modificateur ne peut pas dépasser 10 000. Les groupes multiples, parenthèses et autres opérations ne sont pas pris en charge. Les jets exacts `1d2` et `1d20` renvoient leur GIF dédié ; les autres renvoient le détail textuel.",
       "result": "**{{expression}}**\n\nLancers : {{rolls}}\nModificateur : {{modifier}}\nTotal : **{{total}}**",
       "errors": {
         "invalidFormat": "Expression de dés invalide. Utilisez `NOMBREdFACES` avec un modificateur facultatif, par exemple `2d6+3`.",
@@ -135,21 +167,19 @@
     },
     "rules": {
       "description": "Ouvrir le livre de règles public",
-      "reply": "Livre de règles du JDR : {{url}}"
+      "reply": "Livre de règles du JDR : {{url}}",
+      "behavior": "Répond avec l’URL publique du livre de règles du JDR."
     },
     "set": {
       "description": "Modifier un champ de personnage dans un formulaire prérempli",
       "characterOption": "Personnage à modifier",
-      "fieldOption": "Champ à modifier"
-    },
-    "setHelp": {
-      "description": "Expliquer les champs modifiables et leur formulaire",
-      "body": "Utilisez `/rpg set character-key:<key> field:<field>` pour ouvrir un formulaire privé prérempli.\nLa CharacterKey identifie la sauvegarde et ne peut pas être modifiée.\nLes champs imbriqués sont séparés par un point, par exemple `race.name`, `stats.strength` ou `hp.current`.\nPour effacer un champ textuel, videz le formulaire avant de l’envoyer.\n\n**Identité et histoire**\n`firstName`, `lastName`, `level`, `appearance`, `backstory`, `goals`, `talents`\n`race.name`, `race.description`, `race.lore`\n`personality.description`, `personality.traits`\n`racialTrait.skillBonus`, `racialTrait.physicalAbility`\n\n**Statistiques**\n`stats.constitution`, `stats.strength`, `stats.dexterity`, `stats.intelligence`\n`stats.speed`, `stats.perception`, `stats.charisma`, `stats.initiative`, `stats.reflexes`\n\n**État et ressources**\n`hp.current`, `hp.max`, `ar.current`, `ar.max`, `ap.current`, `ap.max`\n`md.current`, `md.max`, `encumbrance.current`, `encumbrance.max`\nLes PA doivent être des nombres entiers respectant `0 ≤ current ≤ max ≤ 10`.\n\n**Champs multilignes**\n`personality.traits`, `rules`, `statusEffects`, `equipment`, `inventory`\nSaisissez une entrée par ligne. Les tirets en début de ligne sont facultatifs.\nPour les LOI, utilisez le format `Nom: Niveau: Description`, à raison d’une LOI par ligne.\nLe niveau d’une LOI doit être un nombre entier positif.\n\n**Exemples**\n`/rpg set character-key:D.Robert field:stats.strength`\n`/rpg set character-key:D.Robert field:rules`\nExemple de LOI : `Feu: 2: Contrôle les flammes`"
+      "fieldOption": "Champ à modifier",
+      "behavior": "Ouvre un formulaire privé prérempli avec la valeur sauvegardée du champ choisi. La liste complète des champs modifiables figure ci-dessus, regroupée par section ; saisissez une partie du libellé ou du chemin pour filtrer l’autocomplétion. Les champs imbriqués utilisent des chemins tels que `race.name`, `stats.strength` ou `hp.current`. Les collections multilignes remplacent tout leur contenu, à raison d’une entrée par ligne ; les LOI utilisent `Nom: Niveau: Description`. Un texte vide efface les champs qui l’autorisent. Les PA doivent rester des nombres entiers avec `0 ≤ current ≤ max ≤ 10`. Seuls le créateur, un MJ ou le propriétaire du serveur peuvent modifier la fiche."
     },
     "editor": {
       "unknownField": "Champ modifiable inconnu : **{{field}}**.",
       "tooLarge": "Ce champ dépasse la limite de 4 000 caractères imposée par Discord.",
-      "expired": "Ce formulaire a expiré. Relancez `/rpg set`.",
+      "expired": "Ce formulaire a expiré. Relancez `/set`.",
       "result": "**{{name}}** : {{result}}",
       "collectionPlaceholder": "Une entrée par ligne ; tirets initiaux facultatifs",
       "valuePlaceholder": "Saisir la nouvelle valeur",

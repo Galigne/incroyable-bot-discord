@@ -231,42 +231,8 @@ module.exports = function createGeneratorChecks(context) {
 		}
 	}
 
-	async function checkGenHelp() {
-		try {
-			const genHelp = require('../../commands/rpg/subcommands/genhelp');
-			let response;
-			await genHelp.execute({
-				interaction: {
-					reply: async payload => {
-						response = payload;
-					},
-				},
-			});
-			const embed = response?.embeds?.[0]?.toJSON();
-			const renderedHelp = JSON.stringify(embed);
-			const missingCategory = generatorCatalog.listCategories()
-				.find(category => !renderedHelp.includes(category.name));
-			if (
-				!embed
-				|| !renderedHelp.includes('/rpg gen category:<category>')
-				|| !renderedHelp.includes(
-					'/rpg gen-char character-key:<new key> [level] [background]',
-				)
-				|| !renderedHelp.includes('maximum of two RULEs')
-				|| missingCategory
-				|| embed.fields?.some(field => field.value.length > 1_024)
-			) {
-				errors.push('/rpg gen-help is incomplete or exceeds Discord embed limits.');
-			}
-		}
-		catch (error) {
-			errors.push(`Gen help: ${error.message}`);
-		}
-	}
-
 	return {
 		checkGeneratorCatalog,
-		checkGenHelp,
 	};
 };
 

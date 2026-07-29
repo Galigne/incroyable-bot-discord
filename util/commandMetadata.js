@@ -71,6 +71,9 @@ function validateCommandMetadata(metadataList) {
 		if (!metadata.group && typeof metadata.handler !== 'string') {
 			errors.push(`${label}: a handler path is required.`);
 		}
+		if (!metadata.group && typeof metadata.help?.detailsKey !== 'string') {
+			errors.push(`${label}: help.detailsKey is required.`);
+		}
 
 		validateTranslationKey(metadata.descriptionKey, `${label}.descriptionKey`, errors);
 		for (const keyName of ['summaryKey', 'detailsKey']) {
@@ -110,6 +113,13 @@ function validateOptions(options, commandLabel, errors) {
 			errors.push(`${label}: invalid option type "${option.type}".`);
 		}
 		validateTranslationKey(option.descriptionKey, `${label}.descriptionKey`, errors);
+		if (option.acceptedValuesKey) {
+			validateTranslationKey(
+				option.acceptedValuesKey,
+				`${label}.acceptedValuesKey`,
+				errors,
+			);
+		}
 		if (option.choices && option.autocomplete) {
 			errors.push(`${label}: choices and autocomplete cannot both be configured.`);
 		}
@@ -126,6 +136,12 @@ function validateOptions(options, commandLabel, errors) {
 		}
 		if (option.autocomplete && typeof option.autocomplete.provider !== 'string') {
 			errors.push(`${label}: autocomplete.provider is required.`);
+		}
+		if (
+			option.autocomplete?.showAllInHelp !== undefined
+			&& typeof option.autocomplete.showAllInHelp !== 'boolean'
+		) {
+			errors.push(`${label}: autocomplete.showAllInHelp must be a boolean.`);
 		}
 		for (const suggestion of option.autocomplete?.values ?? []) {
 			if (suggestion?.nameKey) {

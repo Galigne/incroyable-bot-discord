@@ -90,7 +90,7 @@ module.exports = function createInteractionChecks(context) {
 				|| !healPayload.includes('HP: **10/101 → 51/101**')
 				|| !healPayload.includes('AR: **5/33 → 17/33**')
 			) {
-				errors.push('/rpg heal both did not update and display both resources.');
+				errors.push('/heal both did not update and display both resources.');
 			}
 
 		}

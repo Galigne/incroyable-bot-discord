@@ -14,32 +14,78 @@
   },
   "commands": {
     "help": {
-      "description": "List all available commands",
-      "title": "Gon Freecss",
-      "available": "Available commands"
+      "description": "List available commands or show detailed command help",
+      "commandOption": "Command to explain in detail",
+      "commandAccepted": "A command suggested by autocomplete, such as `roll`",
+      "title": "Command Help",
+      "available": "Commands currently available to you. Use `/help command:<command>` for details.",
+      "behavior": "Without an option, lists the commands available to the current user and groups them by category. With `command`, displays the selected command’s permission, parameters, accepted values, examples, and behavior.",
+      "unknownCommand": "Unknown command or unavailable command: **{{command}}**.",
+      "detailTitle": "Help — {{command}}",
+      "permissionTitle": "Required permission",
+      "parametersTitle": "Parameters",
+      "examplesTitle": "Examples",
+      "behaviorTitle": "Behavior",
+      "acceptedTitle": "Accepted values",
+      "required": "Required",
+      "optional": "Optional",
+      "noParameters": "No parameters.",
+      "categories": {
+        "general": "General",
+        "moderation": "Moderation",
+        "rpg": "RPG"
+      },
+      "permissions": {
+        "everyone": "Everyone with normal bot access",
+        "dm": "DM role or server owner",
+        "moderator": "Moderator role or server owner",
+        "owner": "Server owner only"
+      },
+      "types": {
+        "boolean": "Boolean",
+        "integer": "Whole number",
+        "number": "Number",
+        "string": "Text"
+      },
+      "accepted": {
+        "autocomplete": "Select or enter a value; autocomplete provides valid suggestions",
+        "autocompleteComplete": "All {{count}} available values are listed below. Type part of a name or value to filter autocomplete.",
+        "freeText": "Any text accepted by Discord",
+        "number": "Any valid number",
+        "numberRange": "A number from {{min}} to {{max}}",
+        "numberMinimum": "A number greater than or equal to {{min}}",
+        "numberMaximum": "A number less than or equal to {{max}}",
+        "lengthRange": "Text containing {{min}} to {{max}} characters",
+        "lengthMaximum": "Text containing at most {{max}} characters"
+      },
+      "valueGroups": {
+        "general": "General fields",
+        "resources": "Resources"
+      }
     },
     "purge": {
       "description": "Delete recent messages from the current channel",
       "amount": "Number of recent messages to delete",
-      "success": "Deleted {{count}} recent messages."
+      "success": "Deleted {{count}} recent messages.",
+      "behavior": "Deletes the requested number of recent messages from the current channel. Discord bulk deletion restrictions still apply."
     },
     "restart": {
       "description": "Reconnect the bot to Discord",
-      "reply": "Reconnecting..."
+      "reply": "Reconnecting...",
+      "behavior": "Destroys the current Discord client connection and logs in again with the configured token."
     },
     "say": {
       "description": "Send a message through the bot",
-      "message": "Message to send"
-    },
-    "rpg": {
-      "description": "Generate prompts and manage RPG character sheets"
+      "message": "Message to send",
+      "behavior": "Posts the supplied message in the current channel through the bot."
     }
   },
   "rpg": {
     "add": {
       "description": "Create a blank character sheet with a stable CharacterKey",
       "keyOption": "Unique save key, make it short and remember it.",
-      "success": "Character with key `{{key}}` was created. This CharacterKey cannot be changed. Use `/rpg set` with a field to open its prefilled private form."
+      "success": "Character with key `{{key}}` was created. This CharacterKey cannot be changed. Use `/set` with a field to open its prefilled private form.",
+      "behavior": "Creates and saves a blank character owned by the invoking user. The CharacterKey becomes the immutable save identifier and must start and end with a letter or number; internal periods, hyphens, and underscores are allowed."
     },
     "damage": {
       "description": "Deal damage to a character, reducing AR before HP",
@@ -49,25 +95,29 @@
       "choice": "{{amount}} damage",
       "piercingBreakdown": "{{amount}} piercing damage was dealt directly to {{hpLabel}}.",
       "normalBreakdown": "{{arDamage}} damage was absorbed by {{arLabel}} and {{hpDamage}} damage reached {{hpLabel}}.",
-      "result": "**{{name}}** received **{{amount}} damage**. {{breakdown}}\n{{arLabel}}: **{{arCurrent}}/{{arMax}}** · {{hpLabel}}: **{{hpCurrent}}/{{hpMax}}**"
+      "result": "**{{name}}** received **{{amount}} damage**. {{breakdown}}\n{{arLabel}}: **{{arCurrent}}/{{arMax}}** · {{hpLabel}}: **{{hpCurrent}}/{{hpMax}}**",
+      "behavior": "Applies a positive whole-number damage amount to current AR first, then current HP. When `piercing` is true, damage bypasses AR. Only the character creator, a DM, or the server owner may use it."
     },
     "delete": {
       "description": "Delete one of your characters",
       "characterOption": "Character to delete",
-      "success": "Character **{{key}}** was deleted."
+      "success": "Character **{{key}}** was deleted.",
+      "behavior": "Permanently deletes the selected character save. Only the character creator, a DM, or the server owner may delete it."
     },
     "endTurn": {
       "description": "Restore current AP and MD to their maximum values",
       "characterOption": "Character ending their turn",
-      "result": "**{{name}}** starts a new turn with {{ap}} {{apLabel}} and {{md}} {{mdLabel}}."
+      "result": "**{{name}}** starts a new turn with {{ap}} {{apLabel}} and {{md}} {{mdLabel}}.",
+      "behavior": "Restores the selected character’s current AP and MD to their respective maximum values. Only the character creator, a DM, or the server owner may use it."
     },
     "gen": {
       "description": "Generate GM inspiration from a chosen category (DM only)",
       "schemaDescription": "Generate GM inspiration from a chosen category",
       "categoryOption": "Generator category",
-      "unknownCategory": "Unknown generator category: **{{category}}**. Use `/rpg gen-help` to see the available categories.",
+      "unknownCategory": "Unknown generator category: **{{category}}**. Use `/help command:gen` for command details.",
       "title": "Generated {{category}}",
-      "footer": "The GM may adapt or reroll any result."
+      "footer": "The GM may adapt or reroll any result.",
+      "behavior": "Selects one weighted random entry from the chosen localized generator category. Every JSON generator file becomes available after the bot restarts. The complete localized category list appears above; type part of a category name or value to filter autocomplete."
     },
     "genChar": {
       "description": "Generate and save a complete random character (DM only)",
@@ -77,28 +127,17 @@
       "backgroundOption": "NPC background category; omitted means a random background",
       "levelChoice": "Level {{level}}",
       "footer": "{{keyLabel}}: {{key}}",
-      "success": "Generated character **{{name}}** with key `{{key}}`."
-    },
-    "genHelp": {
-      "description": "Explain random generation and list generator categories",
-      "schemaDescription": "Explain random generation and list generator categories",
-      "title": "RPG Generation Help",
-      "body": "`/rpg gen category:<category>`\nDM-only. Select a generator with autocomplete to draw one weighted random entry. Run it again to reroll.\n\n`/rpg gen-char character-key:<new key> [level] [background]`\nDM-only. Creates and saves a complete random character using a unique CharacterKey. Level must be 1–10; when omitted, it is rolled randomly. Background selects the NPC category and is random when omitted. Statistics, resources, equipment, inventory, and gold are generated from the character level and game rules. Intelligence grants RULE Points; they raise the first RULE as far as possible before creating a second, with a maximum of two RULEs.",
-      "categoryLine": "**{{name}}** — {{description}} ({{count}} entries)",
-      "categoryLineCompact": "**{{name}}** ({{count}} entries)",
-      "available": "Available generators"
+      "success": "Generated character **{{name}}** with key `{{key}}`.",
+      "behavior": "Creates and saves a complete random character under a unique CharacterKey. Level must be 1–10 and is random when omitted; background is also optional and random by default. Statistics, resources, RULEs, armor, weapons, inventory, gold, and possible status effects are generated from the selected level and the game rules."
     },
     "get": {
       "description": "Display a character summary or one detailed field",
       "characterOption": "Character to display",
       "fieldOption": "Optional detailed field",
-      "unknownField": "Unknown character field: **{{field}}**. Use `/rpg get-help` to list the available fields.",
+      "unknownField": "Unknown character field: **{{field}}**. Use `/help command:get` for command details.",
       "keyFooter": "{{keyLabel}}: {{key}}",
-      "detailsFooter": "Use /rpg get with the field option for more details."
-    },
-    "getHelp": {
-      "description": "Explain character summary and detailed field views",
-      "body": "Use `/rpg get` to display a character-sheet summary.\nSelect the optional `field` to display one complete field and its sub-fields.\n\n**Available fields**\n`name` — first name and last name\n`firstName`, `lastName`, `level`\n`race` — name, physical description, and lore\n`appearance`, `backstory`, `goals`\n`personality` — traits and additional description\n`racialTraits` — skill bonus and physical ability\n`statistics` — base and derived statistics\n`rules` — every RULE name, level, and description\n`talents`\n`status` — HP, AR, AP, MD, encumbrance, and status effects\n`HP`, `AR`, `AP`, `MD` — one resource only\n`statusEffects`, `equipment`, `inventory`, `encumbrance`\n\n**Examples**\nSelect CharacterKey `D.Robert` for the summary.\nThen optionally select `name`, `personality`, `race`, `rules`, or `status`."
+      "detailsFooter": "Use /get with the field option for more details.",
+      "behavior": "Without `field`, posts the public character summary. With `field`, displays one complete detailed field and its sub-fields. Autocomplete lists CharacterKeys and supported views such as `name`, `race`, `personality`, `statistics`, `rules`, `status`, `equipment`, and `inventory`."
     },
     "heal": {
       "description": "Restore current HP, armor, or both to a percentage of maximum",
@@ -110,21 +149,14 @@
       "bothChoice": "HP and AR",
       "both": "{{hp}} and {{ar}}",
       "change": "{{resource}}: **{{previous}}/{{max}} → {{current}}/{{max}}**",
-      "result": "**{{name}}** restored to {{percentage}}%:\n{{changes}}"
-    },
-    "help": {
-      "description": "Show the available RPG commands",
-      "title": "RPG Commands",
-      "body": "Create and manage RPG characters using a stable `CharacterKey` (for example, `D.Robert`). The key identifies the save and cannot be changed. Use `/rpg set` with a field to open its prefilled private form. Use the optional field in `/rpg get` for complete details."
-    },
-    "help": {
-      "description": "Show the available RPG commands",
-      "title": "RPG Commands",
-      "body": "Create and manage RPG characters using a stable `CharacterKey` (for example, `D.Robert`). The key identifies the save and cannot be changed. Use `/set` with a field to open its prefilled private form. Use the optional field in `/get` for complete details."
+      "result": "**{{name}}** restored to {{percentage}}%:\n{{changes}}",
+      "behavior": "Sets current HP, current AR, or both to the requested percentage of each resource’s own maximum, using the shared rounding rule. Only the character creator, a DM, or the server owner may use it."
     },
     "roll": {
       "description": "Roll a standard dice expression",
       "expressionOption": "Dice expression, for example 2d6+3",
+      "acceptedValues": "`COUNTdSIDES` with one optional `+MODIFIER` or `-MODIFIER`",
+      "behavior": "Rolls one standard dice group using `COUNTdSIDES`, optionally followed by one signed modifier, for example `1d20`, `2d6+3`, or `4d8-2`. Count must be 1–100, sides 2–1,000, and the absolute modifier at most 10,000. Multiple dice groups, parentheses, and other arithmetic are unsupported. Exact `1d2` and `1d20` rolls return their dedicated GIF; other expressions return a textual breakdown.",
       "result": "**{{expression}}**\n\nRolls: {{rolls}}\nModifier: {{modifier}}\nTotal: **{{total}}**",
       "errors": {
         "invalidFormat": "Invalid dice expression. Use `COUNTdSIDES` with one optional modifier, for example `2d6+3`.",
@@ -135,21 +167,19 @@
     },
     "rules": {
       "description": "Open the public TTRPG rulebook",
-      "reply": "TTRPG rulebook: {{url}}"
+      "reply": "TTRPG rulebook: {{url}}",
+      "behavior": "Replies with the public URL for the TTRPG rulebook."
     },
     "set": {
       "description": "Set one character-sheet field in a prefilled form",
       "characterOption": "Character to edit",
-      "fieldOption": "Field to edit"
-    },
-    "setHelp": {
-      "description": "Explain settable character fields and forms",
-      "body": "Use `/rpg set character-key:<key> field:<field>` to open a private prefilled form.\nThe CharacterKey identifies the save and cannot be changed.\nNested fields use a dot, such as `race.name`, `stats.strength`, or `hp.current`.\nText fields can be cleared by emptying the form before submitting it.\n\n**Identity and story**\n`firstName`, `lastName`, `level`, `appearance`, `backstory`, `goals`, `talents`\n`race.name`, `race.description`, `race.lore`\n`personality.description`, `personality.traits`\n`racialTrait.skillBonus`, `racialTrait.physicalAbility`\n\n**Statistics**\n`stats.constitution`, `stats.strength`, `stats.dexterity`, `stats.intelligence`\n`stats.speed`, `stats.perception`, `stats.charisma`, `stats.initiative`, `stats.reflexes`\n\n**Status and resources**\n`hp.current`, `hp.max`, `ar.current`, `ar.max`, `ap.current`, `ap.max`\n`md.current`, `md.max`, `encumbrance.current`, `encumbrance.max`\nAP values must be whole numbers with `0 ≤ current ≤ max ≤ 10`.\n\n**Multiline fields**\n`personality.traits`, `rules`, `statusEffects`, `equipment`, `inventory`\nWrite one entry per line. Leading dashes are optional.\nFor RULEs, use `Name: Level: Description`, one RULE per line.\nRULE levels must be positive whole numbers.\n\n**Examples**\n`/rpg set character-key:D.Robert field:stats.strength`\n`/rpg set character-key:D.Robert field:rules`\nRULE example: `Fire: 2: Controls flames`"
+      "fieldOption": "Field to edit",
+      "behavior": "Opens one private modal prefilled with the selected saved field. The complete editable-field list appears above, grouped by section; type part of a field label or path to filter autocomplete. Nested fields use paths such as `race.name`, `stats.strength`, or `hp.current`. Multiline collections replace their full content with one entry per line; RULEs use `Name: Level: Description`. Empty text clears fields that allow it. AP must remain whole numbers with `0 ≤ current ≤ max ≤ 10`. Only the character creator, a DM, or the server owner may edit the sheet."
     },
     "editor": {
       "unknownField": "Unknown editable field: **{{field}}**.",
       "tooLarge": "This field is larger than Discord’s 4,000-character modal limit.",
-      "expired": "This form expired. Run `/rpg set` again.",
+      "expired": "This form expired. Run `/set` again.",
       "result": "**{{name}}**: {{result}}",
       "collectionPlaceholder": "Write one entry per line; leading dashes are optional",
       "valuePlaceholder": "Enter the new value",

@@ -66,31 +66,35 @@ Never commit `.env` or a Discord token. Reset any token that has previously been
 
 ## Commands
 
-- `/help`
+- `/help` — list commands available to you, grouped by category
+- `/help command:<command>` — show permissions, parameters, accepted values, examples, and behavior
 - `/say message:<text>`
 - `/purge amount:<2-100>`
 - `/restart`
-- `/rpg help`
-- `/rpg rules`
-- `/rpg gen category:<category>` — generate a random prompt (DM only)
-- `/rpg gen-char character-key:<new key> [level] [background]` — generate and save a complete character (DM only)
-- `/rpg gen-help` — explain generation and list generator categories
-- `/rpg roll expression:<dice expression>` — roll expressions such as `2d6+3`
-- `/rpg add character-key:<new key>` — create a blank character sheet with a stable key
-- `/rpg get character-key:<key> [field]` — display the summary or one complete field
-- `/rpg get-help` — list retrievable fields and examples
-- `/rpg set character-key:<key> field:<field>` — set one field in a prefilled form
-- `/rpg set-help` — list settable fields and explain multiline form values
-- `/rpg heal character-key:<key> resource:<hp|armor|both> percentage:<0-100>` — restore one or both resources
-- `/rpg damage character-key:<key> damage-amount:<number> [piercing]` — apply damage to AR, then HP
-- `/rpg end-turn character-key:<key>` — restore AP and MD to their maximum values
+- `/rules`
+- `/gen category:<category>` — generate a random prompt (DM only)
+- `/gen-char character-key:<new key> [level] [background]` — generate and save a complete character (DM only)
+- `/roll expression:<dice expression>` — roll expressions such as `2d6+3`
+- `/add character-key:<new key>` — create a blank character sheet with a stable key
+- `/get character-key:<key> [field]` — display the summary or one complete field
+- `/set character-key:<key> field:<field>` — set one field in a prefilled form
+- `/heal character-key:<key> resource:<hp|armor|both> percentage:<0-100>` — restore one or both resources
+- `/damage character-key:<key> damage-amount:<number> [piercing]` — apply damage to AR, then HP
+- `/end-turn character-key:<key>` — restore AP and MD to their maximum values
+- `/delete character-key:<key>` — delete a character
 
 Discord provides native validation and choices for constrained options.
-Autocomplete suggests existing CharacterKeys, settable fields, retrievable fields,
-generator categories, common dice expressions, levels, and common purge amounts. The
-private form opens immediately after `/rpg set` is submitted. Multiline
+Autocomplete suggests commands the current user may access, existing CharacterKeys,
+settable fields, retrievable fields, generator categories, common dice expressions,
+levels, and common purge amounts. The private form opens immediately after
+`/set` is submitted. Multiline
 fields accept free-form lines with optional leading dashes; RULEs use
 `Name: Level: Description`.
+
+Discord displays at most 25 autocomplete suggestions at once, so type part of a
+name or value to filter longer lists. `/help command:gen` lists every localized
+generator category, and `/help command:set` lists every editable field grouped by
+section. Both lists are generated from the same catalogs used by autocomplete.
 
 Dice expressions use one `COUNTdSIDES` group with an optional `+MODIFIER` or
 `-MODIFIER`, such as `1d20`, `2d6+3`, or `4d8-2`. A roll is limited to 100 dice,
@@ -101,25 +105,25 @@ return the textual roll breakdown.
 
 Character creators can edit, delete, heal, damage, and end turns for their own
 sheets. Users with the configured DM role can perform those actions on every
-character and may use `/rpg gen` and `/rpg gen-char`. Users with the configured
+character and may use `/gen` and `/gen-char`. Users with the configured
 moderator role may use `/say`, `/purge`, and `/restart`. The actual Discord server
 owner, identified by Discord rather than configuration, may use every command and
 manage every character.
-The identifier supplied to `/rpg add` remains the stable command/save key and cannot
+The identifier supplied to `/add` remains the stable command/save key and cannot
 be edited. The sheet stores `firstName` and `lastName` separately for display.
 Keys may contain internal periods, hyphens, and underscores, such as `D.Robert`.
 
 Example workflows:
 
 ```text
-/rpg gen-char character-key:D.Robert level:5 background:adventurer
-/rpg set character-key:D.Robert field:stats.strength
-/rpg set character-key:D.Robert field:rules
-/rpg get character-key:D.Robert
-/rpg get character-key:D.Robert field:personality
-/rpg damage character-key:D.Robert damage-amount:25 piercing:false
-/rpg heal character-key:D.Robert resource:both percentage:50
-/rpg end-turn character-key:D.Robert
+/gen-char character-key:D.Robert level:5 background:adventurer
+/set character-key:D.Robert field:stats.strength
+/set character-key:D.Robert field:rules
+/get character-key:D.Robert
+/get character-key:D.Robert field:personality
+/damage character-key:D.Robert damage-amount:25 piercing:false
+/heal character-key:D.Robert resource:both percentage:50
+/end-turn character-key:D.Robert
 ```
 
 Random characters use the rulebook's stat budget and nonlinear stat costs. Their
@@ -139,12 +143,13 @@ The full TTRPG rules are available in
 ## Project structure
 
 - `commands/`: thin Discord slash-command adapters
-- `commands/metadata.js`: centralized command/subcommand schema, permissions,
-  localization keys, options, autocomplete descriptors, examples, and help metadata
-- `commands/registry.js`: command lookup, grouping, permission filtering, Discord
-  registration data, and `/rpg` routing
+- `commands/metadata.js`: centralized command schema, permissions,
+  localization keys, options, accepted-value documentation, autocomplete
+  descriptors, examples, and detailed behavior keys
+- `commands/registry.js`: command lookup, category grouping, permission filtering,
+  Discord registration data, and runtime routing
 - `commands/autocompleteProviders.js`: shared metadata-selected autocomplete logic
-- `commands/rpg/subcommands/`: one adapter per RPG subcommand
+- `commands/rpg/subcommands/`: one behavior adapter per top-level RPG command
 - `services/`: Discord-independent application workflows, persistence, parsing,
   validation, mechanics, and generation
 - `models/`: Discord-independent domain models
@@ -155,7 +160,7 @@ The full TTRPG rules are available in
 - `locales/`: English and French user-interface catalogs
 - `scripts/`: focused `node:test` suites and offline integration checks
 
-Run `npm test` to run ESLint, focused service/mechanics/dice/registry tests,
+Run `npm test` to run ESLint, focused service/mechanics/dice/help/registry tests,
 architectural boundary checks, slash-command schema and autocomplete checks,
 permissions, localization, the current character-save schema, required media, and
 voice dependencies.

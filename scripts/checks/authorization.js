@@ -20,8 +20,8 @@ module.exports = function createAuthorizationChecks(context) {
 			commands.get('say'),
 			commands.get('purge'),
 			commands.get('restart'),
-			commands.get('rpg')?.subcommands?.get('gen'),
-			commands.get('rpg')?.subcommands?.get('gen-char'),
+			commands.get('gen'),
+			commands.get('gen-char'),
 		];
 		for (const command of privilegedCommands) {
 			if (!authorizeCommand(command, owner, config).allowed) {
@@ -37,7 +37,7 @@ module.exports = function createAuthorizationChecks(context) {
 		}
 
 		for (const name of ['gen', 'gen-char']) {
-			const command = commands.get('rpg')?.subcommands?.get(name);
+			const command = commands.get(name);
 			if (!authorizeCommand(command, dm, config).allowed) {
 				errors.push(`The DM role should be allowed to use ${name}.`);
 			}
@@ -64,9 +64,8 @@ module.exports = function createAuthorizationChecks(context) {
 
 		const unrestrictedCommands = [
 			commands.get('help'),
-			commands.get('rpg')?.subcommands?.get('gen-help'),
-			commands.get('rpg')?.subcommands?.get('get'),
-			commands.get('rpg')?.subcommands?.get('roll'),
+			commands.get('get'),
+			commands.get('roll'),
 		];
 		for (const command of unrestrictedCommands) {
 			if (!authorizeCommand(command, regular, config).allowed) {
@@ -115,7 +114,7 @@ module.exports = function createAuthorizationChecks(context) {
 			roles: { moderator: config.roles.moderator },
 		};
 		const invalidAuthorization = authorizeCommand(
-			commands.get('rpg')?.subcommands?.get('gen'),
+			commands.get('gen'),
 			dm,
 			missingDmConfig,
 		);

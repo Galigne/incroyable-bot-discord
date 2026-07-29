@@ -69,55 +69,12 @@ function createGeneratedEmbed(result, locale = 'en') {
 	return embed;
 }
 
-function createGeneratorHelpResponse(categories, locale = 'en') {
-	const categoryLines = categories.map(category => t(
-		locale,
-		'rpg.genHelp.categoryLine',
-		{
-			count: category.entries.length,
-			description: category.description,
-			name: category.name,
-		},
-	));
-	const embed = new EmbedBuilder()
-		.setTitle(t(locale, 'rpg.genHelp.title'))
-		.setDescription(t(locale, 'rpg.genHelp.body'))
-		.setColor('#FFD700')
-		.addFields(chunkLines(categoryLines).map((value, index) => ({
-			name: index === 0
-				? t(locale, 'rpg.genHelp.available')
-				: t(locale, 'common.continued', {
-					label: t(locale, 'rpg.genHelp.available'),
-				}),
-			value,
-		})));
-	return { embeds: [embed] };
-}
-
-function chunkLines(lines, maxLength = 1_000) {
-	const chunks = [];
-	let chunk = '';
-	for (const line of lines) {
-		if (chunk && chunk.length + line.length + 1 > maxLength) {
-			chunks.push(chunk);
-			chunk = '';
-		}
-		chunk += `${chunk ? '\n' : ''}${line}`;
-	}
-	if (chunk) {
-		chunks.push(chunk);
-	}
-	return chunks;
-}
-
 function getGeneratorFieldLabel(field, locale) {
 	const key = GENERATOR_FIELD_KEYS[field];
 	return key ? t(locale, `generatorFields.${key}`) : field;
 }
 
 module.exports = {
-	chunkLines,
 	createGeneratedEmbed,
-	createGeneratorHelpResponse,
 	createGeneratorResponse,
 };

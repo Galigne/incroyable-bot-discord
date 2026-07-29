@@ -10,6 +10,7 @@ const {
 	AUTOCOMPLETE_PROVIDERS,
 	getAutocompleteChoices,
 } = require('./autocompleteProviders');
+const { OPTION_VALUE_PROVIDERS } = require('../util/commandOptionValues');
 const { COMMAND_METADATA } = require('./metadata');
 
 class CommandRegistry {
@@ -80,6 +81,26 @@ class CommandRegistry {
 				&& (!category || metadata.category === category)
 			))
 			.sort((left, right) => left.help.order - right.help.order);
+	}
+
+	getVisibleHelpMetadata(interaction, config, category) {
+		return this.filterByUserPermissions(
+			interaction,
+			config,
+			this.getHelpMetadata(category),
+		);
+	}
+
+	getVisibleHelpCommand(name, interaction, config) {
+		const metadata = this.getCommand(name);
+		if (
+			!metadata
+			|| metadata.group
+			|| !this.authorization(metadata, interaction, config).allowed
+		) {
+			return null;
+		}
+		return metadata;
 	}
 
 	getAutocompleteMetadata(commandName, optionName, category) {
@@ -153,7 +174,7 @@ class CommandRegistry {
 			context.interaction.options.getSubcommand(),
 		);
 		if (!subcommand) {
-			throw new Error('Unknown RPG subcommand.');
+			throw new Error(`Unknown subcommand for /${group.name}.`);
 		}
 		const authorization = this.authorization(
 			subcommand.metadata,
@@ -218,6 +239,15 @@ function assertKnownAutocompleteProviders(metadataList) {
 			if (provider && !Object.hasOwn(AUTOCOMPLETE_PROVIDERS, provider)) {
 				throw new Error(
 					`Unknown autocomplete provider "${provider}" `
+					+ `for ${metadata.id}.${option.name}.`,
+				);
+			}
+			if (
+				option.autocomplete?.showAllInHelp
+				&& !Object.hasOwn(OPTION_VALUE_PROVIDERS, provider)
+			) {
+				throw new Error(
+					`Autocomplete provider "${provider}" cannot list all values in help `
 					+ `for ${metadata.id}.${option.name}.`,
 				);
 			}

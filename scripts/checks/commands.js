@@ -22,35 +22,32 @@ module.exports = function createCommandChecks(context) {
 		}
 	}
 
-	function checkRpgStructure(commands) {
-		const rpgCommand = commands.get('rpg');
-		const expectedSubcommands = commandRegistry.getAllCommands()
-			.filter(metadata => metadata.parent === 'rpg');
-		if (!rpgCommand?.subcommands) {
-			errors.push('The RPG command must expose its registry-backed subcommands.');
-			return;
+	function checkRpgTopLevelCommands(commands) {
+		const expectedCommands = commandRegistry.getAllCommands()
+			.filter(metadata => metadata.category === 'rpg');
+		if (commands.has('rpg')) {
+			errors.push('The obsolete /rpg command group is still registered.');
 		}
-
-		const expectedNames = expectedSubcommands.map(metadata => metadata.name).sort();
-		const actualNames = [...rpgCommand.subcommands.keys()].sort();
-		if (actualNames.join(',') !== expectedNames.join(',')) {
-			errors.push('The RPG runtime routes do not match the command registry.');
-		}
-		for (const metadata of expectedSubcommands) {
-			const subcommand = rpgCommand.subcommands.get(metadata.name);
+		for (const metadata of expectedCommands) {
+			const command = commands.get(metadata.name);
 			if (
-				subcommand?.metadata !== metadata
-				|| typeof subcommand.execute !== 'function'
+				metadata.parent
+				|| metadata.group
+				|| command?.metadata !== metadata
+				|| typeof command.execute !== 'function'
 			) {
-				errors.push(`Invalid registry-backed RPG subcommand: ${metadata.name}.`);
+				errors.push(`Invalid top-level RPG command: ${metadata.name}.`);
 			}
 		}
-		checkHelpOrder(rpgCommand.subcommands.values(), 'RPG subcommands');
-		const generationOrder = ['rpg:gen', 'rpg:gen-char', 'rpg:gen-help']
+		checkHelpOrder(
+			expectedCommands.map(metadata => commands.get(metadata.name)),
+			'top-level RPG commands',
+		);
+		const generationOrder = ['gen', 'gen-char']
 			.map(id => commandRegistry.getCommand(id))
 			.sort((left, right) => left.help.order - right.help.order)
 			.map(metadata => metadata.id);
-		if (generationOrder.join(',') !== 'rpg:gen,rpg:gen-char,rpg:gen-help') {
+		if (generationOrder.join(',') !== 'gen,gen-char') {
 			errors.push('RPG generation commands are not in the requested help order.');
 		}
 	}
@@ -81,21 +78,20 @@ module.exports = function createCommandChecks(context) {
 			checkRegisteredOptions(data?.options ?? [], expectedOptions, metadata.group);
 		}
 
-		const setHelp = t('en', 'rpg.setHelp.body');
-		const getHelp = t('en', 'rpg.getHelp.body');
 		const editableFields = getEditableFields();
 		const viewableFields = getViewableFields();
+		const documentedCommands = commandRegistry.getHelpMetadata();
 		if (
 			editableFields.length < 30
 			|| !viewableFields.some(field => field.viewId === 'personality')
 			|| !viewableFields.some(field => field.viewId === 'status')
-			|| setHelp.length > 2_000
-			|| getHelp.length > 2_000
-			|| !setHelp.includes('prefilled form')
-			|| !setHelp.includes('`Name: Level: Description`')
-			|| /\b(add|set|remove) <(?:value|position)>/.test(setHelp)
+			|| documentedCommands.some(metadata => (
+				!metadata.help.detailsKey
+				|| t('en', metadata.help.detailsKey) === metadata.help.detailsKey
+			))
+			|| !t('en', 'rpg.roll.behavior').includes('COUNTdSIDES')
 		) {
-			errors.push('The RPG editor or viewer help is incomplete or exceeds Discord limits.');
+			errors.push('Centralized command help metadata is incomplete.');
 		}
 
 		const indexSource = fs.readFileSync(path.join(root, 'index.js'), 'utf8');
@@ -150,7 +146,7 @@ module.exports = function createCommandChecks(context) {
 
 	return {
 		checkCommands,
-		checkRpgStructure,
+		checkRpgTopLevelCommands,
 		checkSlashCommandData,
 		checkHelpOrder,
 	};

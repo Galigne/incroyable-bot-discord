@@ -9,10 +9,11 @@
     "check": "node scripts/check.js",
     "lint": "eslint .",
     "test:dice": "node --test scripts/dice.test.js",
+    "test:help": "node --test scripts/help.test.js",
     "test:mechanics": "node --test scripts/mechanics.test.js",
     "test:registry": "node --test scripts/registry.test.js",
     "test:services": "node --test scripts/services.test.js",
-    "test": "npm run lint && npm run test:dice && npm run test:mechanics && npm run test:registry && npm run test:services && npm run check"
+    "test": "npm run lint && npm run test:dice && npm run test:help && npm run test:mechanics && npm run test:registry && npm run test:services && npm run check"
   },
   "keywords": [
     "discord",

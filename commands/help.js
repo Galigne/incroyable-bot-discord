@@ -1,13 +1,14 @@
-const { createCommandHelpResponse } = require('../util/helpResponses');
-const { getLocale } = require('../util/i18n');
+const { createHelpResponse } = require('../util/helpResponses');
 
 module.exports = {
-	async execute({ client, config, interaction, registry }) {
-		const locale = getLocale(config, interaction.guildId);
-		await interaction.reply(createCommandHelpResponse(
-			registry.getAllCommands().filter(metadata => !metadata.parent),
-			client.user.displayAvatarURL(),
+	async execute({ client, config, interaction, locale, registry }) {
+		await interaction.reply(createHelpResponse({
+			avatarUrl: client.user.displayAvatarURL(),
+			commandName: interaction.options.getString('command'),
+			config,
+			interaction,
 			locale,
-		));
+			registry,
+		}));
 	},
 };

@@ -214,8 +214,7 @@ module.exports = function createLocalizationChecks(context) {
 			}
 		}
 
-		const healChoices = commands.get('rpg').data.toJSON().options
-			.find(option => option.name === 'heal').options
+		const healChoices = commands.get('heal').data.toJSON().options
 			.find(option => option.name === 'resource').choices;
 		if (
 			healChoices.map(choice => choice.value).join(',') !== 'hp,armor,both'

@@ -11,26 +11,42 @@ const {
 } = require('../util/commandMetadata');
 const { authorizeCommand } = require('../util/authorization');
 
-test('registry registers every top-level command and grouped subcommand', () => {
-	const topLevel = COMMAND_METADATA.filter(metadata => !metadata.parent);
+const RPG_COMMAND_NAMES = [
+	'add',
+	'damage',
+	'delete',
+	'end-turn',
+	'gen',
+	'gen-char',
+	'get',
+	'heal',
+	'roll',
+	'rules',
+	'set',
+];
+
+test('registry registers every RPG command at the top level without an rpg group', () => {
 	const registered = commandRegistry.getDiscordCommandData().map(data => data.toJSON());
 	assert.deepEqual(
 		registered.map(command => command.name),
-		topLevel
+		COMMAND_METADATA
 			.toSorted((left, right) => left.registrationOrder - right.registrationOrder)
 			.map(metadata => metadata.name),
 	);
 	assert.ok(registered.every(command => command.contexts?.includes(0)));
+	assert.equal(registered.some(command => command.name === 'rpg'), false);
+	assert.deepEqual(
+		COMMAND_METADATA
+			.filter(command => command.category === 'rpg')
+			.map(command => command.name)
+			.toSorted(),
+		RPG_COMMAND_NAMES.toSorted(),
+	);
 
-	for (const group of topLevel.filter(metadata => metadata.group)) {
-		const data = registered.find(command => command.name === group.name);
-		const children = COMMAND_METADATA
-			.filter(metadata => metadata.parent === group.name)
-			.toSorted((left, right) => left.registrationOrder - right.registrationOrder);
-		assert.deepEqual(
-			data.options.map(option => option.name),
-			children.map(metadata => metadata.name),
-		);
+	for (const metadata of COMMAND_METADATA.filter(command => command.category === 'rpg')) {
+		assert.equal(metadata.parent, undefined);
+		assert.equal(metadata.group, undefined);
+		assert.ok(registered.some(command => command.name === metadata.name));
 	}
 });
 
@@ -81,13 +97,19 @@ test('metadata validation reports missing localization keys', () => {
 
 test('registry supports lookup and grouping by category', () => {
 	assert.equal(commandRegistry.getCommand('help').id, 'help');
-	assert.equal(commandRegistry.getCommand('help', 'rpg').id, 'rpg:help');
-	assert.equal(commandRegistry.getCommand('rpg roll').id, 'rpg:roll');
+	assert.equal(commandRegistry.getCommand('help', 'rpg'), null);
+	assert.equal(commandRegistry.getCommand('roll').id, 'roll');
+	assert.equal(commandRegistry.getCommand('roll', 'rpg').id, 'roll');
+	assert.equal(commandRegistry.getCommand('rpg'), null);
+	assert.equal(commandRegistry.getCommand('rpg roll'), null);
 	assert.equal(commandRegistry.getCommand('missing'), null);
 
 	const groups = commandRegistry.groupByCategory();
 	assert.deepEqual([...groups.keys()].sort(), [...VALID_COMMAND_CATEGORIES].sort());
-	assert.ok(groups.get('rpg').some(metadata => metadata.id === 'rpg:roll'));
+	assert.ok(groups.get('rpg').some(metadata => metadata.id === 'roll'));
+	assert.equal(groups.get('rpg').some(metadata => (
+		metadata.name === 'help' || metadata.name.endsWith('-help')
+	)), false);
 	assert.ok(groups.get('moderation').some(metadata => metadata.id === 'purge'));
 });
 
@@ -122,6 +144,25 @@ test('registry permission filtering delegates to the existing authorization serv
 		permission: 'owner',
 		guildOnly: true,
 	}, regular, config).allowed, false);
+
+	const rpgPermissions = Object.fromEntries(
+		COMMAND_METADATA
+			.filter(metadata => metadata.category === 'rpg')
+			.map(metadata => [metadata.name, metadata.permission]),
+	);
+	assert.deepEqual(rpgPermissions, {
+		add: 'everyone',
+		damage: 'everyone',
+		delete: 'everyone',
+		'end-turn': 'everyone',
+		gen: 'dm',
+		'gen-char': 'dm',
+		get: 'everyone',
+		heal: 'everyone',
+		roll: 'everyone',
+		rules: 'everyone',
+		set: 'everyone',
+	});
 });
 
 test('registry exposes autocomplete, option, and choice metadata', async () => {
@@ -138,11 +179,10 @@ test('registry exposes autocomplete, option, and choice metadata', async () => {
 	assert.deepEqual(resource.choices.map(choice => choice.value), ['hp', 'armor', 'both']);
 	assert.ok(resource.choices.every(choice => choice.nameKey));
 
-	const rpgData = commandRegistry.getDiscordCommandData()
-		.find(data => data.name === 'rpg')
+	const healData = commandRegistry.getDiscordCommandData()
+		.find(data => data.name === 'heal')
 		.toJSON();
-	const registeredResource = rpgData.options
-		.find(option => option.name === 'heal').options
+	const registeredResource = healData.options
 		.find(option => option.name === 'resource');
 	assert.deepEqual(
 		registeredResource.choices.map(choice => choice.value),
@@ -154,7 +194,7 @@ test('registry exposes autocomplete, option, and choice metadata', async () => {
 	);
 
 	let response;
-	const runtime = commandRegistry.getRuntimeCommands().get('rpg');
+	const runtime = commandRegistry.getRuntimeCommands().get('roll');
 	await runtime.autocomplete({
 		config,
 		interaction: {
@@ -163,7 +203,6 @@ test('registry exposes autocomplete, option, and choice metadata', async () => {
 			member: { roles: { cache: { has: () => false } } },
 			options: {
 				getFocused: () => ({ name: 'expression', value: '1d2' }),
-				getSubcommand: () => 'roll',
 			},
 			respond: async choices => {
 				response = choices;

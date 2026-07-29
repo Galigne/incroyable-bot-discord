@@ -45,13 +45,14 @@ saves.
   interaction/event routing.
 - `client/Client.js`: Discord client and gateway intents.
 - `commands/metadata.js`: the single source of truth for every top-level slash
-  command and `/rpg` subcommand.
-- `commands/registry.js`: validated command lookup, grouping, permission filtering,
-  Discord registration data, generic group routing, and runtime handler binding.
+  command.
+- `commands/registry.js`: validated command lookup, category grouping, permission
+  filtering, Discord registration data, and runtime handler binding.
 - `commands/autocompleteProviders.js`: reusable autocomplete providers selected by
   option metadata.
 - `commands/`: behavior-only handlers for top-level slash commands.
-- `commands/rpg/subcommands/`: behavior-only handlers for `/rpg` subcommands.
+- `commands/rpg/subcommands/`: behavior-only handlers for top-level RPG commands,
+  retained in their existing feature directory.
 - `commands/rpg/editorFields.js`: modal presentation metadata derived from the
   canonical field catalog.
 - `commands/rpg/interactions.js`: direct prefilled edit modal and modal submission.
@@ -97,10 +98,10 @@ saves.
 The bot uses slash commands only. Do not reintroduce prefix or message-content
 commands.
 
-Every command and subcommand must have exactly one record in
+Every command must have exactly one record in
 `commands/metadata.js`. That record owns its:
 
-- stable registry ID, English Discord name, category, and optional parent group;
+- stable registry ID, English Discord name, and category;
 - required permission (`everyone`, `dm`, `moderator`, or `owner`);
 - localized description key and optional detailed-help key;
 - typed options, option-description keys, bounds, choices, and autocomplete
@@ -111,25 +112,25 @@ Every command and subcommand must have exactly one record in
 Metadata stores localization keys and technical English values, never translated
 interface prose. `commands/registry.js` validates the catalog at load time and
 derives Discord builders, runtime routing objects, permission inputs, help entries,
-and autocomplete metadata from it. Do not maintain a second command/subcommand list,
+and autocomplete metadata from it. Do not maintain a second command list,
 builder chain, permission declaration, usage string, or fixed autocomplete list.
 
 Handler modules export `execute` only. Schema and autocomplete behavior are provided
 by the registry; add a reusable provider to `commands/autocompleteProviders.js` when
 an option needs dynamic suggestions. There is intentionally no
-`commands/rpg/index.js`: the registry preserves the `/rpg` command group and routes
-its subcommands generically.
+`commands/rpg/index.js`: every RPG command is registered and routed at the top level.
 
 Use the registry API instead of inspecting handler modules:
 
-- `getAllCommands()` returns all top-level and grouped metadata records.
-- `getCommand(name, category?)` resolves a command, qualified ID, or grouped name.
+- `getAllCommands()` returns all command metadata records.
+- `getCommand(name, category?)` resolves a command name or registry ID.
 - `groupByCategory()` groups metadata into `general`, `moderation`, and `rpg`.
 - `filterByUserPermissions(interaction, config, commands?)` delegates filtering to
   the existing authorization service.
 - `getDiscordCommandData()` returns the complete top-level Discord registration
-  builders, including grouped subcommands.
-- `getHelpMetadata(category?)` and
+  builders.
+- `getHelpMetadata(category?)`, `getVisibleHelpMetadata(interaction, config,
+  category?)`, `getVisibleHelpCommand(name, interaction, config)`, and
   `getAutocompleteMetadata(command, option, category?)` expose the canonical
   presentation metadata.
 
@@ -137,6 +138,13 @@ When adding a command, add its locale keys, one metadata record, and one handler
 Add a dynamic autocomplete provider only when an existing provider cannot describe
 the suggestions. Do not update registration, routing, authorization, or general
 help separately.
+
+`/help` is the only help command. Its optional `command` argument displays detailed
+documentation derived from the selected command’s metadata. Every executable
+metadata record must provide a localized `help.detailsKey`; option descriptions,
+types, bounds, choices, autocomplete policy, accepted-value overrides, permissions,
+and examples are rendered automatically. Do not add grouped `help`, `*-help`,
+dedicated help handlers, or parallel command documentation.
 
 ### Layer boundaries
 
@@ -203,8 +211,8 @@ branching, calculation, persistence, or specialized presentation. Extract a serv
 or response adapter as soon as any of those responsibilities appear; do not wait for
 the command module to become large.
 
-Use lowercase Discord command names, normally kebab-case. Put each new RPG
-subcommand handler in its own file and add one metadata record. The registry
+Use lowercase Discord command names, normally kebab-case. Put each new RPG command
+handler in its own file and add one metadata record. The registry
 automatically synchronizes Discord registration, routing, permissions,
 autocomplete capability, and `/help` output.
 
@@ -212,14 +220,16 @@ autocomplete capability, and `/help` output.
 preserves Discord schema ordering. The generation commands must appear in this
 exact sequence:
 
-1. `/rpg gen category:<category>`
-2. `/rpg gen-char character-key:<new key> [level] [background]`
-3. `/rpg gen-help`
+1. `/gen category:<category>`
+2. `/gen-char character-key:<new key> [level] [background]`
 
 Declare autocomplete on the option metadata using a provider name. Put fixed
 suggestion values in the metadata and reusable dynamic selection in
 `commands/autocompleteProviders.js`. Discord returns at most 25 autocomplete
-choices, so providers should filter with `util/autocomplete.js`.
+choices, so providers should filter with `util/autocomplete.js`. For exhaustive
+dynamic values that must also appear in centralized help, set
+`autocomplete.showAllInHelp` and provide the shared value source through
+`util/commandOptionValues.js`; autocomplete and help must consume that same source.
 
 All bot-owned user-facing strings belong in `locales/en.json` and `locales/fr.json`
 and are retrieved through `util/i18n.js`. Keep both catalogs at exact key parity.
@@ -248,17 +258,17 @@ Do not use the deprecated `ephemeral: true` option. The test suite rejects it.
 
 The current viewing and editing decisions are intentional:
 
-- `/rpg get character-key:<key>` posts the public character summary.
-- `/rpg get character-key:<key> field:<field>` posts one complete detailed field.
-- `/rpg get-help` lists all supported fields.
-- There is intentionally no `/rpg get-all` command.
-- `/rpg set character-key:<key> field:<field>` has no value argument. Submitting
+- `/get character-key:<key>` posts the public character summary.
+- `/get character-key:<key> field:<field>` posts one complete detailed field.
+- `/help command:get` explains the supported views.
+- There is intentionally no `/get-all` command.
+- `/set character-key:<key> field:<field>` has no value argument. Submitting
   the command immediately opens one private modal prefilled with the saved value.
-- `/rpg set-help` lists settable paths and explains modal input.
+- `/help command:set` explains settable paths and modal input.
 - Do not add section/field dropdown navigation back to the editor.
 
 Textual collections have no per-entry `add`, `set`, `remove`, or `clear` action
-syntax. The `/rpg set` modal presents their full multiline content and replaces it
+syntax. The `/set` modal presents their full multiline content and replaces it
 on submit:
 
 - One logical entry per line.
@@ -290,7 +300,7 @@ Permissions:
 - Anyone with normal bot access can view character sheets.
 - The creator may set, delete, heal, damage, and end turns for their character.
 - The configured DM role may perform those actions on every character and may use
-  `/rpg gen` and `/rpg gen-char`.
+  `/gen` and `/gen-char`.
 - The configured moderator role may use `/say`, `/purge`, and `/restart`.
 - The actual Discord server owner from `guild.ownerId` bypasses every role check
   and may use every command and manage every character.
@@ -305,11 +315,11 @@ Resources and display:
 - HP, AR, and MD use ten-icon percentage bars. Preserve the current colors:
   HP uses red/black hearts, AR uses blue/black squares, and MD uses orange/black
   squares.
-- `/rpg heal` supports HP, armor, or both and sets each selected current resource
+- `/heal` supports HP, armor, or both and sets each selected current resource
   to the same percentage of its own maximum.
-- `/rpg damage` applies positive whole-number damage to current AR first, then current
+- `/damage` applies positive whole-number damage to current AR first, then current
   HP. With `piercing:true`, it bypasses AR. Piercing defaults to false.
-- `/rpg end-turn` restores current AP and MD to maximum.
+- `/end-turn` restores current AP and MD to maximum.
 
 ## Random generators
 
@@ -318,9 +328,8 @@ the bot restarts. `data/generators/fr/` mirrors the English reference catalog wi
 localized display content. Both locales keep identical filenames, structure,
 ordering, weights, placeholders, and technical values. The catalog derives each
 internal ID from the English file, caches locales independently, and falls back to
-the English file when a localized counterpart is absent. `/rpg gen-help` reads the
-guild-localized catalog, explains both generation commands, and lists every
-category.
+the English file when a localized counterpart is absent. `/help command:gen`
+explains generation while autocomplete on `/gen` lists every current category.
 
 Each generator file requires:
 
@@ -403,7 +412,7 @@ Use this workflow for every feature, behavior change, bug fix, or data update:
    keep command tests focused on schema, delegation, and interaction integration.
 4. Keep user-facing and agent-facing guidance synchronized when the affected
    behavior is documented:
-   - update the single registry metadata record and any dedicated help body when
+   - update the single registry metadata record and its localized behavior text when
      command names, arguments, permissions, ordering, or UX change;
    - update `README.md` when setup, commands, examples, or user-visible behavior
      changes;
