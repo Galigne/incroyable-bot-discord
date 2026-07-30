@@ -1,19 +1,142 @@
-{"name":"background","description":"NPC background categories","entries":[
-{"weight":4,"fields":{"Name":"criminal","Description":"Outlaws, thieves, smugglers, corrupt officials, and organized criminals","Generator":"criminalBackground"}},
-{"weight":5,"fields":{"Name":"adventurer","Description":"Explorers, mercenaries, monster hunters, pilgrims, and treasure seekers","Generator":"adventurerBackground"}},
-{"weight":2,"fields":{"Name":"noble","Description":"Aristocrats, courtiers, heirs, and minor lords","Generator":"nobleBackground"}},
-{"weight":5,"fields":{"Name":"peasant","Description":"Farmers, herders, and rural workers","Generator":"peasantBackground"}},
-{"weight":5,"fields":{"Name":"artisan","Description":"Blacksmiths, carpenters, tailors, alchemists, and craftspeople","Generator":"artisanBackground"}},
-{"weight":5,"fields":{"Name":"merchant","Description":"Traders, shopkeepers, caravan workers, and commercial agents","Generator":"merchantBackground"}},
-{"weight":3,"fields":{"Name":"scholar","Description":"Students, researchers, scribes, and librarians","Generator":"scholarBackground"}},
-{"weight":3,"fields":{"Name":"religious","Description":"Priests, monks, temple servants, and pilgrims","Generator":"religiousBackground"}},
-{"weight":4,"fields":{"Name":"military","Description":"Soldiers, guards, officers, and veterans","Generator":"militaryBackground"}},
-{"weight":3,"fields":{"Name":"outlander","Description":"Hunters, nomads, hermits, and tribal members","Generator":"outlanderBackground"}},
-{"weight":4,"fields":{"Name":"sailor","Description":"Sailors, fishers, pirates, and dock workers","Generator":"sailorBackground"}},
-{"weight":3,"fields":{"Name":"performer","Description":"Musicians, actors, storytellers, and entertainers","Generator":"performerBackground"}},
-{"weight":4,"fields":{"Name":"servant","Description":"Household servants, attendants, and laborers","Generator":"servantBackground"}},
-{"weight":3,"fields":{"Name":"official","Description":"Administrators, diplomats, tax collectors, and judges","Generator":"officialBackground"}},
-{"weight":2,"fields":{"Name":"mage","Description":"Apprentices, hedge mages, and magical researchers","Generator":"mageBackground"}},
-{"weight":3,"fields":{"Name":"exile","Description":"Refugees, fugitives, banished nobles, and displaced survivors","Generator":"exileBackground"}},
-{"weight":3,"fields":{"Name":"urchin","Description":"Orphans, beggars, street children, and scavengers","Generator":"urchinBackground"}}
-]}
+{
+  "name": "background",
+  "description": "NPC background categories",
+  "entries": [
+    {
+      "weight": 4,
+      "fields": {
+        "Name": "criminal",
+        "Description": "Outlaws, thieves, smugglers, corrupt officials, and organized criminals",
+        "Generator": "criminalBackground"
+      }
+    },
+    {
+      "weight": 5,
+      "fields": {
+        "Name": "adventurer",
+        "Description": "Explorers, mercenaries, monster hunters, pilgrims, and treasure seekers",
+        "Generator": "adventurerBackground"
+      }
+    },
+    {
+      "weight": 2,
+      "fields": {
+        "Name": "noble",
+        "Description": "Aristocrats, courtiers, heirs, and minor lords",
+        "Generator": "nobleBackground"
+      }
+    },
+    {
+      "weight": 5,
+      "fields": {
+        "Name": "peasant",
+        "Description": "Farmers, herders, and rural workers",
+        "Generator": "peasantBackground"
+      }
+    },
+    {
+      "weight": 5,
+      "fields": {
+        "Name": "artisan",
+        "Description": "Blacksmiths, carpenters, tailors, alchemists, and craftspeople",
+        "Generator": "artisanBackground"
+      }
+    },
+    {
+      "weight": 5,
+      "fields": {
+        "Name": "merchant",
+        "Description": "Traders, shopkeepers, caravan workers, and commercial agents",
+        "Generator": "merchantBackground"
+      }
+    },
+    {
+      "weight": 3,
+      "fields": {
+        "Name": "scholar",
+        "Description": "Students, researchers, scribes, and librarians",
+        "Generator": "scholarBackground"
+      }
+    },
+    {
+      "weight": 3,
+      "fields": {
+        "Name": "religious",
+        "Description": "Priests, monks, temple servants, and pilgrims",
+        "Generator": "religiousBackground"
+      }
+    },
+    {
+      "weight": 4,
+      "fields": {
+        "Name": "military",
+        "Description": "Soldiers, guards, officers, and veterans",
+        "Generator": "militaryBackground"
+      }
+    },
+    {
+      "weight": 3,
+      "fields": {
+        "Name": "outlander",
+        "Description": "Hunters, nomads, hermits, and tribal members",
+        "Generator": "outlanderBackground"
+      }
+    },
+    {
+      "weight": 4,
+      "fields": {
+        "Name": "sailor",
+        "Description": "Sailors, fishers, pirates, and dock workers",
+        "Generator": "sailorBackground"
+      }
+    },
+    {
+      "weight": 3,
+      "fields": {
+        "Name": "performer",
+        "Description": "Musicians, actors, storytellers, and entertainers",
+        "Generator": "performerBackground"
+      }
+    },
+    {
+      "weight": 4,
+      "fields": {
+        "Name": "servant",
+        "Description": "Household servants, attendants, and laborers",
+        "Generator": "servantBackground"
+      }
+    },
+    {
+      "weight": 3,
+      "fields": {
+        "Name": "official",
+        "Description": "Administrators, diplomats, tax collectors, and judges",
+        "Generator": "officialBackground"
+      }
+    },
+    {
+      "weight": 2,
+      "fields": {
+        "Name": "mage",
+        "Description": "Apprentices, hedge mages, and magical researchers",
+        "Generator": "mageBackground"
+      }
+    },
+    {
+      "weight": 3,
+      "fields": {
+        "Name": "exile",
+        "Description": "Refugees, fugitives, banished nobles, and displaced survivors",
+        "Generator": "exileBackground"
+      }
+    },
+    {
+      "weight": 3,
+      "fields": {
+        "Name": "urchin",
+        "Description": "Orphans, beggars, street children, and scavengers",
+        "Generator": "urchinBackground"
+      }
+    }
+  ]
+}

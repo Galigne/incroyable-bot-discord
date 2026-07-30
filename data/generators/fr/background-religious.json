@@ -1,7 +1,41 @@
-{"name":"religiousBackground","description":"Détails de Background pour les PNJ religieux","entries":[
-{"fields":{"Appearance":"Robe soignée, chapelet usé par la prière et expression calme et attentive.","Backstory":"Un prêtre de village a pris en charge un sanctuaire négligé après la disparition de son ancien gardien.","Goals":"Protéger la communauté, restaurer le sanctuaire et découvrir ce qui est arrivé au prêtre précédent."}},
-{"fields":{"Appearance":"Vêtu simplement, cheveux coupés court et mains calleuses à force de travail comme de pratique rituelle.","Backstory":"Élevé depuis l’enfance dans un monastère, vient d’être envoyé pour la première fois au-delà de ses murs.","Goals":"Mettre ses enseignements en pratique et déterminer quelles traditions méritent de perdurer."}},
-{"fields":{"Appearance":"Vêtements de temple pratiques sous une écharpe cérémonielle vive et maintes fois rapiécée.","Backstory":"Un serviteur du temple a secrètement maintenu le sanctuaire en activité tandis que le clergé se perdait dans les intrigues politiques.","Goals":"Garder le sanctuaire ouvert au peuple et révéler le détournement de ses offrandes."}},
-{"fields":{"Appearance":"Couvert de la poussière des routes, transportant des souvenirs modestes de nombreux sanctuaires et une relique soigneusement enveloppée.","Backstory":"Un pèlerin a juré de traverser le royaume après avoir survécu à une maladie dont aucun guérisseur ne pensait le voir réchapper.","Goals":"Achever son pèlerinage, rendre les bontés reçues et découvrir si sa guérison était véritablement miraculeuse."}},
-{"fields":{"Appearance":"Austère mais abordable, avec des textes sacrés annotés glissés dans chaque poche disponible.","Backstory":"Un théologien respecté a été condamné pour avoir soutenu qu’un ancien commandement avait été délibérément mal traduit.","Goals":"Retrouver le plus ancien texte encore existant et réformer la foi sans diviser ses fidèles."}}
-]}
+{
+  "name": "religiousBackground",
+  "description": "Détails de Background pour les PNJ religieux",
+  "entries": [
+    {
+      "fields": {
+        "Appearance": "Robe soignée, chapelet usé par la prière et expression calme et attentive.",
+        "Backstory": "Un prêtre de village a pris en charge un sanctuaire négligé après la disparition de son ancien gardien.",
+        "Goals": "Protéger la communauté, restaurer le sanctuaire et découvrir ce qui est arrivé au prêtre précédent."
+      }
+    },
+    {
+      "fields": {
+        "Appearance": "Vêtu simplement, cheveux coupés court et mains calleuses à force de travail comme de pratique rituelle.",
+        "Backstory": "Élevé depuis l’enfance dans un monastère, vient d’être envoyé pour la première fois au-delà de ses murs.",
+        "Goals": "Mettre ses enseignements en pratique et déterminer quelles traditions méritent de perdurer."
+      }
+    },
+    {
+      "fields": {
+        "Appearance": "Vêtements de temple pratiques sous une écharpe cérémonielle vive et maintes fois rapiécée.",
+        "Backstory": "Un serviteur du temple a secrètement maintenu le sanctuaire en activité tandis que le clergé se perdait dans les intrigues politiques.",
+        "Goals": "Garder le sanctuaire ouvert au peuple et révéler le détournement de ses offrandes."
+      }
+    },
+    {
+      "fields": {
+        "Appearance": "Couvert de la poussière des routes, transportant des souvenirs modestes de nombreux sanctuaires et une relique soigneusement enveloppée.",
+        "Backstory": "Un pèlerin a juré de traverser le royaume après avoir survécu à une maladie dont aucun guérisseur ne pensait le voir réchapper.",
+        "Goals": "Achever son pèlerinage, rendre les bontés reçues et découvrir si sa guérison était véritablement miraculeuse."
+      }
+    },
+    {
+      "fields": {
+        "Appearance": "Austère mais abordable, avec des textes sacrés annotés glissés dans chaque poche disponible.",
+        "Backstory": "Un théologien respecté a été condamné pour avoir soutenu qu’un ancien commandement avait été délibérément mal traduit.",
+        "Goals": "Retrouver le plus ancien texte encore existant et réformer la foi sans diviser ses fidèles."
+      }
+    }
+  ]
+}

@@ -2,29 +2,101 @@
   "name": "Monstres",
   "description": "Créatures hostiles et prédateurs surnaturels",
   "entries": [
-    { "weight": 3, "value": "Molosse des tombes — chasseur en meute au teint cadavérique qui flaire la peur et entraîne sous terre les proies isolées." },
-    { "weight": 3, "value": "Troll des fondrières — brute des marais capable de se régénérer, couverte de roseaux, de sangsues et d’hameçons volés." },
-    { "weight": 3, "value": "Drac de cendre — dragon sans ailes grand comme un chien, qui crache de la résine enflammée et niche dans les cheminées." },
-    { "weight": 2, "value": "Araignée de verre — prédatrice presque invisible qui chasse à l’affût et dont la toile cassante tranche comme du fil de fer." },
-    { "weight": 2, "value": "Spectre de la cloche — fantôme en armure qui prend corps chaque fois qu’une cloche sonne à proximité." },
-    { "weight": 2, "value": "Gueule-lanterne — lueur chaude flottante qui sert d’appât à une immense bouche souterraine." },
-    { "weight": 2, "value": "Verger d’ossements — colonie enracinée de bras squelettiques qui saisit les créatures et plante leurs os." },
-    { "weight": 2, "value": "Veuve de givre — bête cavernicole blanche qui gèle l’humidité pour former des silhouettes leurres." },
-    { "weight": 2, "value": "Léviathan d’encre — monstre fluvial qui aveugle les embarcations d’une brume noire avant de frapper par-dessous." },
-    { "weight": 2, "value": "Mange-rouille — insecte cuirassé qui corrode rapidement le métal et attaque en essaim la cible la mieux équipée." },
-    { "weight": 2, "value": "Sangsue des rêves — parasite translucide qui laisse ses victimes endormies conscientes, mais privées de leurs souvenirs." },
-    { "weight": 2, "value": "Horreur épineuse — bête végétale territoriale qui projette des graines barbelées dans les plaies ouvertes." },
-    { "weight": 2, "value": "Traqueur des miroirs — humanoïde décharné qui ne peut se déplacer qu’à travers les reflets et les surfaces polies." },
-    { "weight": 2, "value": "Géant de cendre — humanoïde incandescent qui s’effondre en cendres suffocantes lorsqu’il est blessé, puis se reconstitue." },
-    { "weight": 2, "value": "Basilic aux yeux de lune — reptile à six pattes dont le regard ne pétrifie que les créatures éclairées par la lune." },
-    { "weight": 1, "value": "Ver-chorale — prédateur des tunnels qui imite simultanément plusieurs voix familières." },
-    { "weight": 1, "value": "Dévoreur de serments — démon sans visage qui se renforce chaque fois qu’une personne proche rompt une promesse." },
-    { "weight": 1, "value": "Roc des tempêtes — oiseau colossal qui niche dans les nuages d’orage et chasse tout ce qui porte du métal." },
-    { "weight": 1, "value": "Mimique-cathédrale — ancienne créature coloniale déguisée en lieu de culte abandonné." },
-    { "weight": 1, "value": "Chasseur affamé de temps — prédateur vacillant qui vole des secondes à ses proies pour se déplacer à une vitesse impossible." },
-    { "weight": 1, "value": "Hydre couronnée — chaque tête tranchée repousse avec le visage et les souvenirs de la personne qui l’a abattue." },
-    { "weight": 1, "value": "Saint creux — mort-vivant radieux dont les soins miraculeux remplacent peu à peu la volonté du bénéficiaire." },
-    { "weight": 1, "value": "Brouteur abyssal — immense silhouette d’apparence paisible dont l’ombre dévore férocement les êtres vivants." },
-    { "weight": 1, "value": "Bête de la comète rouge — prédateur cristallin tombé du ciel, qui se multiplie au contact de la magie." }
+    {
+      "weight": 3,
+      "value": "Molosse des tombes — chasseur en meute au teint cadavérique qui flaire la peur et entraîne sous terre les proies isolées."
+    },
+    {
+      "weight": 3,
+      "value": "Troll des fondrières — brute des marais capable de se régénérer, couverte de roseaux, de sangsues et d’hameçons volés."
+    },
+    {
+      "weight": 3,
+      "value": "Drac de cendre — dragon sans ailes grand comme un chien, qui crache de la résine enflammée et niche dans les cheminées."
+    },
+    {
+      "weight": 2,
+      "value": "Araignée de verre — prédatrice presque invisible qui chasse à l’affût et dont la toile cassante tranche comme du fil de fer."
+    },
+    {
+      "weight": 2,
+      "value": "Spectre de la cloche — fantôme en armure qui prend corps chaque fois qu’une cloche sonne à proximité."
+    },
+    {
+      "weight": 2,
+      "value": "Gueule-lanterne — lueur chaude flottante qui sert d’appât à une immense bouche souterraine."
+    },
+    {
+      "weight": 2,
+      "value": "Verger d’ossements — colonie enracinée de bras squelettiques qui saisit les créatures et plante leurs os."
+    },
+    {
+      "weight": 2,
+      "value": "Veuve de givre — bête cavernicole blanche qui gèle l’humidité pour former des silhouettes leurres."
+    },
+    {
+      "weight": 2,
+      "value": "Léviathan d’encre — monstre fluvial qui aveugle les embarcations d’une brume noire avant de frapper par-dessous."
+    },
+    {
+      "weight": 2,
+      "value": "Mange-rouille — insecte cuirassé qui corrode rapidement le métal et attaque en essaim la cible la mieux équipée."
+    },
+    {
+      "weight": 2,
+      "value": "Sangsue des rêves — parasite translucide qui laisse ses victimes endormies conscientes, mais privées de leurs souvenirs."
+    },
+    {
+      "weight": 2,
+      "value": "Horreur épineuse — bête végétale territoriale qui projette des graines barbelées dans les plaies ouvertes."
+    },
+    {
+      "weight": 2,
+      "value": "Traqueur des miroirs — humanoïde décharné qui ne peut se déplacer qu’à travers les reflets et les surfaces polies."
+    },
+    {
+      "weight": 2,
+      "value": "Géant de cendre — humanoïde incandescent qui s’effondre en cendres suffocantes lorsqu’il est blessé, puis se reconstitue."
+    },
+    {
+      "weight": 2,
+      "value": "Basilic aux yeux de lune — reptile à six pattes dont le regard ne pétrifie que les créatures éclairées par la lune."
+    },
+    {
+      "weight": 1,
+      "value": "Ver-chorale — prédateur des tunnels qui imite simultanément plusieurs voix familières."
+    },
+    {
+      "weight": 1,
+      "value": "Dévoreur de serments — démon sans visage qui se renforce chaque fois qu’une personne proche rompt une promesse."
+    },
+    {
+      "weight": 1,
+      "value": "Roc des tempêtes — oiseau colossal qui niche dans les nuages d’orage et chasse tout ce qui porte du métal."
+    },
+    {
+      "weight": 1,
+      "value": "Mimique-cathédrale — ancienne créature coloniale déguisée en lieu de culte abandonné."
+    },
+    {
+      "weight": 1,
+      "value": "Chasseur affamé de temps — prédateur vacillant qui vole des secondes à ses proies pour se déplacer à une vitesse impossible."
+    },
+    {
+      "weight": 1,
+      "value": "Hydre couronnée — chaque tête tranchée repousse avec le visage et les souvenirs de la personne qui l’a abattue."
+    },
+    {
+      "weight": 1,
+      "value": "Saint creux — mort-vivant radieux dont les soins miraculeux remplacent peu à peu la volonté du bénéficiaire."
+    },
+    {
+      "weight": 1,
+      "value": "Brouteur abyssal — immense silhouette d’apparence paisible dont l’ombre dévore férocement les êtres vivants."
+    },
+    {
+      "weight": 1,
+      "value": "Bête de la comète rouge — prédateur cristallin tombé du ciel, qui se multiplie au contact de la magie."
+    }
   ]
 }

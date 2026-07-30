@@ -1,7 +1,41 @@
-{"name":"militaryBackground","description":"Background details for military NPCs","entries":[
-{"fields":{"Appearance":"Disciplined posture, regulation equipment, and boots maintained despite constant use.","Backstory":"A career soldier earned respect by keeping a unit together through a disastrous retreat.","Goals":"Bring the remaining soldiers home and ensure their commanders answer for avoidable losses."}},
-{"fields":{"Appearance":"Alert and broad-shouldered, wearing a guard uniform altered for comfort rather than ceremony.","Backstory":"A city guard learned every alley in the district while mediating disputes others dismissed as trivial.","Goals":"Keep the neighborhood safe and dismantle the network bribing fellow guards."}},
-{"fields":{"Appearance":"Immaculate uniform, controlled gestures, and a visible scar acquired before promotion.","Backstory":"A junior officer rose through merit but now serves nobles who value appearances over readiness.","Goals":"Prepare the troops for a real threat and protect them from reckless political orders."}},
-{"fields":{"Appearance":"Weathered, plainly dressed, and still carrying one carefully preserved piece of old kit.","Backstory":"A veteran retired after several campaigns only to find the promised land grant occupied by another family.","Goals":"Secure a fair settlement without becoming the kind of enforcer they once fought."}},
-{"fields":{"Appearance":"Lean and practical, with measuring tools, rope, and charcoal stains across both hands.","Backstory":"A military engineer survived a siege by improvising defenses from ruined civilian buildings.","Goals":"Develop defenses that save lives and prevent their inventions from being used against innocents."}}
-]}
+{
+  "name": "militaryBackground",
+  "description": "Background details for military NPCs",
+  "entries": [
+    {
+      "fields": {
+        "Appearance": "Disciplined posture, regulation equipment, and boots maintained despite constant use.",
+        "Backstory": "A career soldier earned respect by keeping a unit together through a disastrous retreat.",
+        "Goals": "Bring the remaining soldiers home and ensure their commanders answer for avoidable losses."
+      }
+    },
+    {
+      "fields": {
+        "Appearance": "Alert and broad-shouldered, wearing a guard uniform altered for comfort rather than ceremony.",
+        "Backstory": "A city guard learned every alley in the district while mediating disputes others dismissed as trivial.",
+        "Goals": "Keep the neighborhood safe and dismantle the network bribing fellow guards."
+      }
+    },
+    {
+      "fields": {
+        "Appearance": "Immaculate uniform, controlled gestures, and a visible scar acquired before promotion.",
+        "Backstory": "A junior officer rose through merit but now serves nobles who value appearances over readiness.",
+        "Goals": "Prepare the troops for a real threat and protect them from reckless political orders."
+      }
+    },
+    {
+      "fields": {
+        "Appearance": "Weathered, plainly dressed, and still carrying one carefully preserved piece of old kit.",
+        "Backstory": "A veteran retired after several campaigns only to find the promised land grant occupied by another family.",
+        "Goals": "Secure a fair settlement without becoming the kind of enforcer they once fought."
+      }
+    },
+    {
+      "fields": {
+        "Appearance": "Lean and practical, with measuring tools, rope, and charcoal stains across both hands.",
+        "Backstory": "A military engineer survived a siege by improvising defenses from ruined civilian buildings.",
+        "Goals": "Develop defenses that save lives and prevent their inventions from being used against innocents."
+      }
+    }
+  ]
+}

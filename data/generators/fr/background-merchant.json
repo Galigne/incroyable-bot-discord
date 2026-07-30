@@ -1,7 +1,41 @@
-{"name":"merchantBackground","description":"Détails de Background pour les PNJ marchands","entries":[
-{"fields":{"Appearance":"Vêtements colorés, visage expressif et doigts couverts de bagues qui ne cessent jamais de compter.","Backstory":"Un négociant a ouvert une route entre des villages délaissés par les grandes maisons de commerce.","Goals":"Établir un marché permanent et empêcher un monopole de s’emparer de la route."}},
-{"fields":{"Appearance":"Soigné et avenant, derrière des lunettes choisies pour inspirer confiance.","Backstory":"Un boutiquier a hérité d’un commerce dont la cave renferme des marchandises absentes de tous les registres.","Goals":"Identifier leur propriétaire et remettre l’affaire sur pied sans attirer l’attention des criminels."}},
-{"fields":{"Appearance":"Marqué par la route et toujours aux aguets, protégé par plusieurs étoffes contre la poussière et portant l’insigne en laiton d’une compagnie caravanière.","Backstory":"Un caravanier a survécu à une embuscade en négociant avec ses assaillants plutôt qu’en les combattant.","Goals":"Sécuriser la route et découvrir qui a fourni l’itinéraire aux bandits."}},
-{"fields":{"Appearance":"Bien nourri, abondamment parfumé et entouré de signes discrets d’une richesse récente.","Backstory":"Un ancien docker est devenu fournisseur grâce à un excellent sens du moment opportun et à une générosité sincère.","Goals":"Entrer dans la bonne société sans abandonner les ouvriers auxquels il doit son ascension."}},
-{"fields":{"Appearance":"Réservé, impeccablement vêtu et muni de mallettes d’échantillons fermées par plusieurs serrures.","Backstory":"Un représentant commercial étranger s’est retrouvé isolé lorsque la guerre a rompu tout lien avec sa maison mère.","Goals":"Nouer des alliances locales, protéger ses employés et décider si sa loyauté envers la compagnie a encore un sens."}}
-]}
+{
+  "name": "merchantBackground",
+  "description": "Détails de Background pour les PNJ marchands",
+  "entries": [
+    {
+      "fields": {
+        "Appearance": "Vêtements colorés, visage expressif et doigts couverts de bagues qui ne cessent jamais de compter.",
+        "Backstory": "Un négociant a ouvert une route entre des villages délaissés par les grandes maisons de commerce.",
+        "Goals": "Établir un marché permanent et empêcher un monopole de s’emparer de la route."
+      }
+    },
+    {
+      "fields": {
+        "Appearance": "Soigné et avenant, derrière des lunettes choisies pour inspirer confiance.",
+        "Backstory": "Un boutiquier a hérité d’un commerce dont la cave renferme des marchandises absentes de tous les registres.",
+        "Goals": "Identifier leur propriétaire et remettre l’affaire sur pied sans attirer l’attention des criminels."
+      }
+    },
+    {
+      "fields": {
+        "Appearance": "Marqué par la route et toujours aux aguets, protégé par plusieurs étoffes contre la poussière et portant l’insigne en laiton d’une compagnie caravanière.",
+        "Backstory": "Un caravanier a survécu à une embuscade en négociant avec ses assaillants plutôt qu’en les combattant.",
+        "Goals": "Sécuriser la route et découvrir qui a fourni l’itinéraire aux bandits."
+      }
+    },
+    {
+      "fields": {
+        "Appearance": "Bien nourri, abondamment parfumé et entouré de signes discrets d’une richesse récente.",
+        "Backstory": "Un ancien docker est devenu fournisseur grâce à un excellent sens du moment opportun et à une générosité sincère.",
+        "Goals": "Entrer dans la bonne société sans abandonner les ouvriers auxquels il doit son ascension."
+      }
+    },
+    {
+      "fields": {
+        "Appearance": "Réservé, impeccablement vêtu et muni de mallettes d’échantillons fermées par plusieurs serrures.",
+        "Backstory": "Un représentant commercial étranger s’est retrouvé isolé lorsque la guerre a rompu tout lien avec sa maison mère.",
+        "Goals": "Nouer des alliances locales, protéger ses employés et décider si sa loyauté envers la compagnie a encore un sens."
+      }
+    }
+  ]
+}

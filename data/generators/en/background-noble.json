@@ -1,7 +1,41 @@
-{"name":"nobleBackground","description":"Background details for noble NPCs","entries":[
-{"fields":{"Appearance":"Impeccably dressed with a family signet and the composed posture of lifelong scrutiny.","Backstory":"Raised as the spare heir, they unexpectedly inherited after a succession of family tragedies.","Goals":"Stabilize the estate, uncover the tragedies' cause, and become worthy of an unwanted title."}},
-{"fields":{"Appearance":"Fashionable but understated, with sharp eyes and a smile practiced for court.","Backstory":"A minor courtier survived by carrying messages between rivals without openly choosing a side.","Goals":"Gain an independent office and prevent the court from consuming the few people they trust."}},
-{"fields":{"Appearance":"Young, carefully groomed, and visibly uncomfortable in ceremonial clothing.","Backstory":"An idealistic heir was educated abroad and returned to find the family profiting from abuse.","Goals":"Reform the domain without provoking a coup from relatives or retainers."}},
-{"fields":{"Appearance":"Weathered for an aristocrat, wearing quality riding clothes and an old dueling scar.","Backstory":"A minor lord spent years personally defending an isolated border holding ignored by the crown.","Goals":"Secure protection for the tenants and force the capital to acknowledge the frontier."}},
-{"fields":{"Appearance":"Elegant, silver-haired, and supported by a cane concealing a narrow blade.","Backstory":"A widowed aristocrat rebuilt influence through marriages, favors, and impeccable memory.","Goals":"Arrange a peaceful succession and settle one dangerous debt before age removes the opportunity."}}
-]}
+{
+  "name": "nobleBackground",
+  "description": "Background details for noble NPCs",
+  "entries": [
+    {
+      "fields": {
+        "Appearance": "Impeccably dressed with a family signet and the composed posture of lifelong scrutiny.",
+        "Backstory": "Raised as the spare heir, they unexpectedly inherited after a succession of family tragedies.",
+        "Goals": "Stabilize the estate, uncover the tragedies' cause, and become worthy of an unwanted title."
+      }
+    },
+    {
+      "fields": {
+        "Appearance": "Fashionable but understated, with sharp eyes and a smile practiced for court.",
+        "Backstory": "A minor courtier survived by carrying messages between rivals without openly choosing a side.",
+        "Goals": "Gain an independent office and prevent the court from consuming the few people they trust."
+      }
+    },
+    {
+      "fields": {
+        "Appearance": "Young, carefully groomed, and visibly uncomfortable in ceremonial clothing.",
+        "Backstory": "An idealistic heir was educated abroad and returned to find the family profiting from abuse.",
+        "Goals": "Reform the domain without provoking a coup from relatives or retainers."
+      }
+    },
+    {
+      "fields": {
+        "Appearance": "Weathered for an aristocrat, wearing quality riding clothes and an old dueling scar.",
+        "Backstory": "A minor lord spent years personally defending an isolated border holding ignored by the crown.",
+        "Goals": "Secure protection for the tenants and force the capital to acknowledge the frontier."
+      }
+    },
+    {
+      "fields": {
+        "Appearance": "Elegant, silver-haired, and supported by a cane concealing a narrow blade.",
+        "Backstory": "A widowed aristocrat rebuilt influence through marriages, favors, and impeccable memory.",
+        "Goals": "Arrange a peaceful succession and settle one dangerous debt before age removes the opportunity."
+      }
+    }
+  ]
+}

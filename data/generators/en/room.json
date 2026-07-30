@@ -2,31 +2,109 @@
   "name": "room",
   "description": "Rooms and interior spaces for buildings or dungeons",
   "entries": [
-    { "weight": 4, "value": "Bedroom — bed, chest, washstand, personal keepsakes, and evidence of the occupant's last activity." },
-    { "weight": 4, "value": "Living Room — worn seating around a hearth with family objects and a concealed letter." },
-    { "weight": 4, "value": "Kitchen — preparation tables, ovens, knives, stored food, and something recently left cooking." },
-    { "weight": 4, "value": "Dining Hall — long tables, serving doors, faded decoration, and seating arranged by status." },
-    { "weight": 3, "value": "Toilet — basic sanitation, a narrow vent, cleaning supplies, and graffiti from previous users." },
-    { "weight": 3, "value": "Pantry — shelves of preserved food with one wall sounding hollow when struck." },
-    { "weight": 3, "value": "Storeroom — labeled crates, spare furniture, dust, and one item that clearly does not belong." },
-    { "weight": 3, "value": "Office — desk, correspondence, account books, locked drawers, and an appointment calendar." },
-    { "weight": 3, "value": "Workshop — specialized tools, unfinished work, material scraps, and a dangerous active device." },
-    { "weight": 3, "value": "Guardroom — weapon racks, duty roster, cards, half-eaten meals, and an alarm mechanism." },
-    { "weight": 3, "value": "Cell — restraints, scratched messages, stale water, and signs of an impossible escape." },
-    { "weight": 2, "value": "Library — packed shelves, reading desks, ladders, catalogues, and a deliberately misfiled book." },
-    { "weight": 2, "value": "Laboratory — stained benches, fragile instruments, sealed samples, and an experiment still progressing." },
-    { "weight": 2, "value": "Armory — maintained weapons, armor stands, issue records, and several conspicuous empty spaces." },
-    { "weight": 2, "value": "Infirmary — narrow beds, medical tools, medicine cabinets, and patient notes written in code." },
-    { "weight": 2, "value": "Chapel — benches, sacred images, offerings, and a small private confessional passage." },
-    { "weight": 2, "value": "Bathing Room — heated pool, drains, towels, privacy screens, and access to maintenance tunnels." },
-    { "weight": 2, "value": "Nursery — small beds, toys, lesson boards, and protective symbols painted beneath the furniture." },
-    { "weight": 2, "value": "Ballroom — polished floor, musicians' gallery, chandeliers, and balconies designed for observation." },
-    { "weight": 2, "value": "Map Room — wall maps, surveying tools, campaign markers, and one region intentionally erased." },
-    { "weight": 2, "value": "Treasury — counted valuables, sealed chests, ownership records, and multiple layers of security." },
-    { "weight": 1, "value": "Secret Passage — a cramped route with spy holes, old footprints, and a mechanism opening elsewhere." },
-    { "weight": 1, "value": "Ritual Chamber — geometric markings, restraints, consumed offerings, and lingering supernatural pressure." },
-    { "weight": 1, "value": "Portal Room — a reinforced chamber centered on an inactive gate and emergency shutdown controls." },
-    { "weight": 1, "value": "Trophy Gallery — preserved beasts, captured banners, named weapons, and a display that is still alive." },
-    { "weight": 1, "value": "Interrogation Room — fixed chair, soundproof walls, drainage channel, and carefully organized questions." }
+    {
+      "weight": 4,
+      "value": "Bedroom — bed, chest, washstand, personal keepsakes, and evidence of the occupant's last activity."
+    },
+    {
+      "weight": 4,
+      "value": "Living Room — worn seating around a hearth with family objects and a concealed letter."
+    },
+    {
+      "weight": 4,
+      "value": "Kitchen — preparation tables, ovens, knives, stored food, and something recently left cooking."
+    },
+    {
+      "weight": 4,
+      "value": "Dining Hall — long tables, serving doors, faded decoration, and seating arranged by status."
+    },
+    {
+      "weight": 3,
+      "value": "Toilet — basic sanitation, a narrow vent, cleaning supplies, and graffiti from previous users."
+    },
+    {
+      "weight": 3,
+      "value": "Pantry — shelves of preserved food with one wall sounding hollow when struck."
+    },
+    {
+      "weight": 3,
+      "value": "Storeroom — labeled crates, spare furniture, dust, and one item that clearly does not belong."
+    },
+    {
+      "weight": 3,
+      "value": "Office — desk, correspondence, account books, locked drawers, and an appointment calendar."
+    },
+    {
+      "weight": 3,
+      "value": "Workshop — specialized tools, unfinished work, material scraps, and a dangerous active device."
+    },
+    {
+      "weight": 3,
+      "value": "Guardroom — weapon racks, duty roster, cards, half-eaten meals, and an alarm mechanism."
+    },
+    {
+      "weight": 3,
+      "value": "Cell — restraints, scratched messages, stale water, and signs of an impossible escape."
+    },
+    {
+      "weight": 2,
+      "value": "Library — packed shelves, reading desks, ladders, catalogues, and a deliberately misfiled book."
+    },
+    {
+      "weight": 2,
+      "value": "Laboratory — stained benches, fragile instruments, sealed samples, and an experiment still progressing."
+    },
+    {
+      "weight": 2,
+      "value": "Armory — maintained weapons, armor stands, issue records, and several conspicuous empty spaces."
+    },
+    {
+      "weight": 2,
+      "value": "Infirmary — narrow beds, medical tools, medicine cabinets, and patient notes written in code."
+    },
+    {
+      "weight": 2,
+      "value": "Chapel — benches, sacred images, offerings, and a small private confessional passage."
+    },
+    {
+      "weight": 2,
+      "value": "Bathing Room — heated pool, drains, towels, privacy screens, and access to maintenance tunnels."
+    },
+    {
+      "weight": 2,
+      "value": "Nursery — small beds, toys, lesson boards, and protective symbols painted beneath the furniture."
+    },
+    {
+      "weight": 2,
+      "value": "Ballroom — polished floor, musicians' gallery, chandeliers, and balconies designed for observation."
+    },
+    {
+      "weight": 2,
+      "value": "Map Room — wall maps, surveying tools, campaign markers, and one region intentionally erased."
+    },
+    {
+      "weight": 2,
+      "value": "Treasury — counted valuables, sealed chests, ownership records, and multiple layers of security."
+    },
+    {
+      "weight": 1,
+      "value": "Secret Passage — a cramped route with spy holes, old footprints, and a mechanism opening elsewhere."
+    },
+    {
+      "weight": 1,
+      "value": "Ritual Chamber — geometric markings, restraints, consumed offerings, and lingering supernatural pressure."
+    },
+    {
+      "weight": 1,
+      "value": "Portal Room — a reinforced chamber centered on an inactive gate and emergency shutdown controls."
+    },
+    {
+      "weight": 1,
+      "value": "Trophy Gallery — preserved beasts, captured banners, named weapons, and a display that is still alive."
+    },
+    {
+      "weight": 1,
+      "value": "Interrogation Room — fixed chair, soundproof walls, drainage channel, and carefully organized questions."
+    }
   ]
 }

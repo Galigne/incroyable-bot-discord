@@ -2,27 +2,93 @@
   "name": "Animaux",
   "description": "Faune ordinaire et créatures fantastiques inoffensives",
   "entries": [
-    { "weight": 4, "value": "Cerf au dos moussu — paisible herbivore forestier dont les bois abritent fleurs, insectes et herbes médicinales." },
-    { "weight": 4, "value": "Pinson-lanterne — minuscule oiseau aux plumes lumineuses qui se rassemble près des campements sûrs." },
-    { "weight": 4, "value": "Loutre de rivière — nageuse joueuse et rusée qui échange des pierres polies contre de la nourriture." },
-    { "weight": 3, "value": "Mouton-nuage — animal laineux des montagnes, assez léger pour survivre à de longues chutes." },
-    { "weight": 3, "value": "Renard cuivré — renard roux curieux, attiré par les pièces, les clés et les mélodies paisibles." },
-    { "weight": 3, "value": "Cochon fouisseur — robuste chercheur de nourriture capable de dénicher racines, truffes et objets enterrés à faible profondeur." },
-    { "weight": 3, "value": "Lièvre à longues oreilles — animal vigilant des prairies qui frappe le sol avant une tempête ou à l’approche d’un danger." },
-    { "weight": 3, "value": "Chèvre aux cornes bleues — herbivore au pied sûr qui vit sur les falaises et possède des cornes bleues riches en minéraux." },
-    { "weight": 3, "value": "Grue des roseaux — patient oiseau des marais qui guide souvent les voyageurs à travers les eaux sans danger." },
-    { "weight": 3, "value": "Ours à miel — petit ours docile à la fourrure dorée, doté d’une excellente mémoire pour les gestes de bonté." },
-    { "weight": 2, "value": "Tortue à carapace-voile — large tortue de rivière dont la carapace prend le vent lorsqu’elle nage." },
-    { "weight": 2, "value": "Triton de braise — amphibien au corps chaud que l’on trouve souvent endormi près des fours." },
-    { "weight": 2, "value": "Alpaga de soie — paisible animal de troupeau produisant une fibre exceptionnellement douce et résistante." },
-    { "weight": 2, "value": "Grenouille de pluie — grenouille aux couleurs vives dont le chant annonce avec fiabilité la pluie plusieurs heures à l’avance." },
-    { "weight": 2, "value": "Phalène lunaire — papillon argenté grand comme une main qui se nourrit de résidus magiques sans altérer les sorts." },
-    { "weight": 2, "value": "Crabe-galet — crabe côtier inoffensif qui décore sa carapace de pierres colorées." },
-    { "weight": 2, "value": "Marmotte siffleuse — rongeur alpin sociable dont les cris d’alerte varient selon le type de menace." },
-    { "weight": 2, "value": "Drac des vergers — lézard incapable de voler qui dévore les nuisibles et réchauffe les arbres fruitiers pendant les gelées." },
-    { "weight": 1, "value": "Dauphin des brumes — dauphin pâle des côtes qui éloigne les navires perdus des récifs." },
-    { "weight": 1, "value": "Cerf étoilé — cervidé nocturne rare dont le pelage reproduit le ciel de la nuit présente." },
-    { "weight": 1, "value": "Corbeau-mémoire — oiseau noir amical capable de répéter une phrase entendue des années auparavant." },
-    { "weight": 1, "value": "Baleine scintillante — paisible géante des profondeurs dont le chant fait luire le plancton." }
+    {
+      "weight": 4,
+      "value": "Cerf au dos moussu — paisible herbivore forestier dont les bois abritent fleurs, insectes et herbes médicinales."
+    },
+    {
+      "weight": 4,
+      "value": "Pinson-lanterne — minuscule oiseau aux plumes lumineuses qui se rassemble près des campements sûrs."
+    },
+    {
+      "weight": 4,
+      "value": "Loutre de rivière — nageuse joueuse et rusée qui échange des pierres polies contre de la nourriture."
+    },
+    {
+      "weight": 3,
+      "value": "Mouton-nuage — animal laineux des montagnes, assez léger pour survivre à de longues chutes."
+    },
+    {
+      "weight": 3,
+      "value": "Renard cuivré — renard roux curieux, attiré par les pièces, les clés et les mélodies paisibles."
+    },
+    {
+      "weight": 3,
+      "value": "Cochon fouisseur — robuste chercheur de nourriture capable de dénicher racines, truffes et objets enterrés à faible profondeur."
+    },
+    {
+      "weight": 3,
+      "value": "Lièvre à longues oreilles — animal vigilant des prairies qui frappe le sol avant une tempête ou à l’approche d’un danger."
+    },
+    {
+      "weight": 3,
+      "value": "Chèvre aux cornes bleues — herbivore au pied sûr qui vit sur les falaises et possède des cornes bleues riches en minéraux."
+    },
+    {
+      "weight": 3,
+      "value": "Grue des roseaux — patient oiseau des marais qui guide souvent les voyageurs à travers les eaux sans danger."
+    },
+    {
+      "weight": 3,
+      "value": "Ours à miel — petit ours docile à la fourrure dorée, doté d’une excellente mémoire pour les gestes de bonté."
+    },
+    {
+      "weight": 2,
+      "value": "Tortue à carapace-voile — large tortue de rivière dont la carapace prend le vent lorsqu’elle nage."
+    },
+    {
+      "weight": 2,
+      "value": "Triton de braise — amphibien au corps chaud que l’on trouve souvent endormi près des fours."
+    },
+    {
+      "weight": 2,
+      "value": "Alpaga de soie — paisible animal de troupeau produisant une fibre exceptionnellement douce et résistante."
+    },
+    {
+      "weight": 2,
+      "value": "Grenouille de pluie — grenouille aux couleurs vives dont le chant annonce avec fiabilité la pluie plusieurs heures à l’avance."
+    },
+    {
+      "weight": 2,
+      "value": "Phalène lunaire — papillon argenté grand comme une main qui se nourrit de résidus magiques sans altérer les sorts."
+    },
+    {
+      "weight": 2,
+      "value": "Crabe-galet — crabe côtier inoffensif qui décore sa carapace de pierres colorées."
+    },
+    {
+      "weight": 2,
+      "value": "Marmotte siffleuse — rongeur alpin sociable dont les cris d’alerte varient selon le type de menace."
+    },
+    {
+      "weight": 2,
+      "value": "Drac des vergers — lézard incapable de voler qui dévore les nuisibles et réchauffe les arbres fruitiers pendant les gelées."
+    },
+    {
+      "weight": 1,
+      "value": "Dauphin des brumes — dauphin pâle des côtes qui éloigne les navires perdus des récifs."
+    },
+    {
+      "weight": 1,
+      "value": "Cerf étoilé — cervidé nocturne rare dont le pelage reproduit le ciel de la nuit présente."
+    },
+    {
+      "weight": 1,
+      "value": "Corbeau-mémoire — oiseau noir amical capable de répéter une phrase entendue des années auparavant."
+    },
+    {
+      "weight": 1,
+      "value": "Baleine scintillante — paisible géante des profondeurs dont le chant fait luire le plancton."
+    }
   ]
 }

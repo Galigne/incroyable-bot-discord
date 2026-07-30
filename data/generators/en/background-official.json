@@ -1,7 +1,41 @@
-{"name":"officialBackground","description":"Background details for official NPCs","entries":[
-{"fields":{"Appearance":"Orderly and ink-stained, wearing modest official clothes with every document carefully indexed.","Backstory":"A diligent administrator discovered years of contradictory orders hidden across separate archives.","Goals":"Trace who benefits from the confusion and make the administration understandable to ordinary citizens."}},
-{"fields":{"Appearance":"Polished and composed, with formal travel clothes and a case of sealed diplomatic letters.","Backstory":"A diplomat negotiated a fragile truce whose secret clause is now being deliberately misrepresented.","Goals":"Preserve the peace and reveal the truth without humiliating either side."}},
-{"fields":{"Appearance":"Well guarded but visibly tired, carrying ledgers marked with corrections in several different hands.","Backstory":"A tax collector inherited impossible quotas designed to make an impoverished district default.","Goals":"Prove the assessment was manipulated and prevent both revolt and collective punishment."}},
-{"fields":{"Appearance":"Severe robes, a measured voice, and spectacles repeatedly removed when considering testimony.","Backstory":"A judge convicted an innocent person using evidence later revealed to have been forged.","Goals":"Reverse the injustice and uncover how many earlier cases used the same false evidence."}},
-{"fields":{"Appearance":"Practical formalwear, a neutral expression, and a notebook filled with precise observations.","Backstory":"An inspector sent to investigate missing supplies found every local office reporting perfectly matching lies.","Goals":"Identify the shared source of pressure and protect the first witness willing to speak honestly."}}
-]}
+{
+  "name": "officialBackground",
+  "description": "Background details for official NPCs",
+  "entries": [
+    {
+      "fields": {
+        "Appearance": "Orderly and ink-stained, wearing modest official clothes with every document carefully indexed.",
+        "Backstory": "A diligent administrator discovered years of contradictory orders hidden across separate archives.",
+        "Goals": "Trace who benefits from the confusion and make the administration understandable to ordinary citizens."
+      }
+    },
+    {
+      "fields": {
+        "Appearance": "Polished and composed, with formal travel clothes and a case of sealed diplomatic letters.",
+        "Backstory": "A diplomat negotiated a fragile truce whose secret clause is now being deliberately misrepresented.",
+        "Goals": "Preserve the peace and reveal the truth without humiliating either side."
+      }
+    },
+    {
+      "fields": {
+        "Appearance": "Well guarded but visibly tired, carrying ledgers marked with corrections in several different hands.",
+        "Backstory": "A tax collector inherited impossible quotas designed to make an impoverished district default.",
+        "Goals": "Prove the assessment was manipulated and prevent both revolt and collective punishment."
+      }
+    },
+    {
+      "fields": {
+        "Appearance": "Severe robes, a measured voice, and spectacles repeatedly removed when considering testimony.",
+        "Backstory": "A judge convicted an innocent person using evidence later revealed to have been forged.",
+        "Goals": "Reverse the injustice and uncover how many earlier cases used the same false evidence."
+      }
+    },
+    {
+      "fields": {
+        "Appearance": "Practical formalwear, a neutral expression, and a notebook filled with precise observations.",
+        "Backstory": "An inspector sent to investigate missing supplies found every local office reporting perfectly matching lies.",
+        "Goals": "Identify the shared source of pressure and protect the first witness willing to speak honestly."
+      }
+    }
+  ]
+}

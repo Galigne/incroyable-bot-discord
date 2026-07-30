@@ -1,7 +1,41 @@
-{"name":"merchantBackground","description":"Background details for merchant NPCs","entries":[
-{"fields":{"Appearance":"Colorfully dressed, expressive, and constantly counting with ring-covered fingers.","Backstory":"A trader built a route between villages ignored by large commercial houses.","Goals":"Establish a permanent market and prevent a monopoly from absorbing the route."}},
-{"fields":{"Appearance":"Neat, approachable, and positioned behind spectacles chosen to appear trustworthy.","Backstory":"A shopkeeper inherited a store whose cellar contains goods absent from every ledger.","Goals":"Identify the goods' owner and restore the business without attracting criminal attention."}},
-{"fields":{"Appearance":"Road-worn and alert, wearing layered dust cloths and a caravan company's brass badge.","Backstory":"A caravan worker survived an ambush by negotiating with the attackers instead of fighting.","Goals":"Make the route safer and discover who supplied the bandits with the schedule."}},
-{"fields":{"Appearance":"Well-fed, heavily perfumed, and accompanied by subtle signs of recent wealth.","Backstory":"A former dock laborer became a supplier through excellent timing and genuine generosity.","Goals":"Enter respectable society without abandoning the workers who enabled that rise."}},
-{"fields":{"Appearance":"Reserved, immaculately dressed, and carrying sample cases secured by several locks.","Backstory":"A foreign factor was stranded when war severed every connection to the parent company.","Goals":"Build local alliances, protect employees, and decide whether loyalty to the company still matters."}}
-]}
+{
+  "name": "merchantBackground",
+  "description": "Background details for merchant NPCs",
+  "entries": [
+    {
+      "fields": {
+        "Appearance": "Colorfully dressed, expressive, and constantly counting with ring-covered fingers.",
+        "Backstory": "A trader built a route between villages ignored by large commercial houses.",
+        "Goals": "Establish a permanent market and prevent a monopoly from absorbing the route."
+      }
+    },
+    {
+      "fields": {
+        "Appearance": "Neat, approachable, and positioned behind spectacles chosen to appear trustworthy.",
+        "Backstory": "A shopkeeper inherited a store whose cellar contains goods absent from every ledger.",
+        "Goals": "Identify the goods' owner and restore the business without attracting criminal attention."
+      }
+    },
+    {
+      "fields": {
+        "Appearance": "Road-worn and alert, wearing layered dust cloths and a caravan company's brass badge.",
+        "Backstory": "A caravan worker survived an ambush by negotiating with the attackers instead of fighting.",
+        "Goals": "Make the route safer and discover who supplied the bandits with the schedule."
+      }
+    },
+    {
+      "fields": {
+        "Appearance": "Well-fed, heavily perfumed, and accompanied by subtle signs of recent wealth.",
+        "Backstory": "A former dock laborer became a supplier through excellent timing and genuine generosity.",
+        "Goals": "Enter respectable society without abandoning the workers who enabled that rise."
+      }
+    },
+    {
+      "fields": {
+        "Appearance": "Reserved, immaculately dressed, and carrying sample cases secured by several locks.",
+        "Backstory": "A foreign factor was stranded when war severed every connection to the parent company.",
+        "Goals": "Build local alliances, protect employees, and decide whether loyalty to the company still matters."
+      }
+    }
+  ]
+}

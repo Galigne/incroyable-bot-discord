@@ -2,25 +2,205 @@
   "name": "gouvernements",
   "description": "Systèmes politiques, structures dirigeantes, forces et tensions",
   "entries": [
-    { "weight": 3, "fields": { "Name": "Monarchie héréditaire", "Structure": "Le souverain hérite du pouvoir selon une lignée établie.", "Leadership": "Le monarque est conseillé par des ministres et des familles puissantes.", "Strength": "La succession est claire et le pouvoir central peut décider rapidement.", "Tension": "Un héritier inapte et des branches rivales menacent de provoquer une guerre civile." } },
-    { "weight": 3, "fields": { "Name": "Royaume féodal", "Structure": "La couronne accorde terres et privilèges en échange d'un service militaire.", "Leadership": "Le monarque domine des ducs, comtes et chevaliers en partie autonomes.", "Strength": "La défense et l'administration locales nécessitent peu de bureaucratie centrale.", "Tension": "Les grands vassaux n'obéissent que lorsqu'ils le souhaitent et entretiennent des armées privées." } },
-    { "weight": 3, "fields": { "Name": "Conseil élu", "Structure": "Les districts ou communautés élisent leurs représentants pour une durée déterminée.", "Leadership": "Le conseil choisit un porte-parole doté d'un pouvoir exécutif limité.", "Strength": "La participation est large et les dirigeants peuvent être remplacés sans violence.", "Tension": "La lenteur des compromis laisse les problèmes urgents sans réponse." } },
-    { "weight": 3, "fields": { "Name": "République marchande", "Structure": "Les guildes propriétaires et les familles commerçantes élisent les magistrats.", "Leadership": "Un doge ou premier consul est contrôlé par des conseils commerciaux.", "Strength": "Les finances, la diplomatie, les infrastructures et le commerce sont florissants.", "Tension": "Les citoyens pauvres ont peu voix au chapitre et la corruption est devenue la norme." } },
-    { "weight": 2, "fields": { "Name": "Confédération tribale", "Structure": "Des clans autonomes s'unissent pour la guerre, les migrations et l'application d'une loi commune.", "Leadership": "Les chefs de clan se réunissent sous l'autorité d'un grand porte-parole choisi par leurs pairs.", "Strength": "Le pouvoir local reste souple et les obligations personnelles sont fortes.", "Tension": "D'anciennes querelles et des droits de pâturage contestés brisent le consensus." } },
-    { "weight": 2, "fields": { "Name": "Théocratie", "Structure": "La loi religieuse et l'autorité civile ne font officiellement qu'une.", "Leadership": "Le haut clergé interprète la doctrine et nomme les administrateurs.", "Strength": "Une vision commune, des institutions d'entraide et une forte légitimité morale.", "Tension": "Tout désaccord doctrinal est considéré comme une trahison politique." } },
-    { "weight": 2, "fields": { "Name": "Directoire militaire", "Structure": "Les officiers supérieurs gouvernent par décrets d'urgence et commandements régionaux.", "Leadership": "Un conseil de généraux présidé par un commandant suprême.", "Strength": "La mobilisation, la logistique et la réaction aux crises sont rapides.", "Tension": "L'état d'urgence permanent opprime les civils et divise les officiers." } },
-    { "weight": 2, "fields": { "Name": "Oligarchie des guildes", "Structure": "Les guildes professionnelles reconnues obtiennent des sièges proportionnels à leur poids économique.", "Leadership": "Les maîtres de guilde négocient les politiques au sein d'une grande chambre fermée.", "Strength": "Une administration experte et des investissements dans la production spécialisée.", "Tension": "Les travailleurs sans guilde et les nouveaux secteurs d'activité sont exclus." } },
-    { "weight": 2, "fields": { "Name": "Monarchie constitutionnelle", "Structure": "Un monarque héréditaire partage le pouvoir avec une assemblée élue.", "Leadership": "La couronne assure la continuité, tandis que les ministres ont besoin du soutien du corps législatif.", "Strength": "L'unité symbolique s'allie à un gouvernement tenu de rendre des comptes.", "Tension": "Aucun camp ne s'accorde sur les limites des pouvoirs d'urgence de la couronne." } },
-    { "weight": 2, "fields": { "Name": "Démocratie directe", "Structure": "Les citoyens votent eux-mêmes les lois lors d'assemblées régulières.", "Leadership": "Des responsables élus pour de courts mandats exécutent les décisions publiques.", "Strength": "Une forte légitimité et une participation civique importante.", "Tension": "Certaines populations restent exclues de la citoyenneté et de riches orateurs manipulent les assemblées." } },
-    { "weight": 2, "fields": { "Name": "Magocratie", "Structure": "L'autorité politique dépend d'une compétence magique officiellement reconnue.", "Leadership": "Un conclave de maîtres mages accrédités attribue les fonctions civiles.", "Strength": "Des ouvrages publics puissants et une réglementation éclairée de la magie.", "Tension": "Les non-mages sont exclus et les accidents magiques échappent au contrôle." } },
-    { "weight": 2, "fields": { "Name": "Conseil des anciens", "Structure": "Chaque lignée désigne son représentant capable le plus âgé.", "Leadership": "Un conseil fonctionnant par consensus, dirigé par le médiateur le plus respecté.", "Strength": "Une longue mémoire et la prudence préservent la stabilité.", "Tension": "Les jeunes et les nouveaux arrivants ne peuvent pas influer sur les décisions." } },
-    { "weight": 1, "fields": { "Name": "République par tirage au sort", "Structure": "Les citoyens éligibles sont choisis au hasard pour occuper temporairement les fonctions publiques.", "Leadership": "Des comités tournants supervisés par des fonctionnaires permanents.", "Strength": "Le pouvoir est difficile à accaparer par les élections ou les privilèges héréditaires.", "Tension": "Les responsables inexpérimentés dépendent fortement d'administrateurs non élus." } },
-    { "weight": 1, "fields": { "Name": "Double couronne", "Structure": "Deux souverains issus de peuples différents doivent approuver les décisions majeures.", "Leadership": "Deux cours distinctes réunies par une chancellerie commune.", "Strength": "L'autonomie des deux peuples fondateurs est protégée.", "Tension": "Des différends ordinaires peuvent paralyser tout l'État." } },
-    { "weight": 1, "fields": { "Name": "Ligue de cités", "Structure": "Des cités indépendantes mettent en commun leur défense, leur monnaie et leur politique étrangère.", "Leadership": "Les délégués se réunissent en congrès, accueilli à tour de rôle par chaque cité.", "Strength": "La liberté locale bénéficie de la puissance économique collective.", "Tension": "Les cités riches se dérobent aux charges communes tout en dominant les décisions." } },
-    { "weight": 1, "fields": { "Name": "État judiciaire", "Structure": "La jurisprudence et les tribunaux gouvernent davantage que les législateurs élus.", "Leadership": "Une hiérarchie de juges culminant en un tribunal suprême.", "Strength": "Un droit prévisible et une forte protection contre l'arbitraire des dirigeants.", "Tension": "La complexité juridique renforce le pouvoir des juges et exclut les citoyens ordinaires." } },
-    { "weight": 1, "fields": { "Name": "Régence oraculaire", "Structure": "Les politiques suivent des prophéties authentifiées et interprétées par des fonctionnaires.", "Leadership": "Un régent gouverne jusqu'à l'apparition du dirigeant légitime annoncé par la prophétie.", "Strength": "La planification à long terme peut anticiper des menaces autrement invisibles.", "Tension": "Des interprétations rivales justifient la répression et des délais sans fin." } },
-    { "weight": 1, "fields": { "Name": "Nécrocratie", "Structure": "Les dirigeants morts restent légalement au pouvoir grâce à des consultations rituelles.", "Leadership": "Des ministres vivants interprètent les votes d'esprits ancestraux préservés.", "Strength": "La mémoire institutionnelle survit littéralement à chaque génération.", "Tension": "Les morts résistent au changement, et les ministres peuvent falsifier leurs volontés." } },
-    { "weight": 1, "fields": { "Name": "Gouvernement saisonnier", "Structure": "Le pouvoir passe d'une administration à l'autre au fil des quatre saisons.", "Leadership": "Chaque cour saisonnière dirige la politique pendant trois mois.", "Strength": "Des priorités différentes reçoivent régulièrement une attention garantie.", "Tension": "Les projets de longue haleine sont sabotés ou annulés à chaque transition." } },
-    { "weight": 1, "fields": { "Name": "Colonie corporative", "Structure": "Une compagnie à charte possède les infrastructures et exerce l'autorité publique.", "Leadership": "Un gouverneur nommé répond de ses actes devant des actionnaires lointains.", "Strength": "Des investissements efficaces et une exploitation rapide des ressources.", "Tension": "Les habitants sont traités comme des employés, des débiteurs ou des obstacles plutôt que comme des citoyens." } }
+    {
+      "weight": 3,
+      "fields": {
+        "Name": "Monarchie héréditaire",
+        "Structure": "Le souverain hérite du pouvoir selon une lignée établie.",
+        "Leadership": "Le monarque est conseillé par des ministres et des familles puissantes.",
+        "Strength": "La succession est claire et le pouvoir central peut décider rapidement.",
+        "Tension": "Un héritier inapte et des branches rivales menacent de provoquer une guerre civile."
+      }
+    },
+    {
+      "weight": 3,
+      "fields": {
+        "Name": "Royaume féodal",
+        "Structure": "La couronne accorde terres et privilèges en échange d'un service militaire.",
+        "Leadership": "Le monarque domine des ducs, comtes et chevaliers en partie autonomes.",
+        "Strength": "La défense et l'administration locales nécessitent peu de bureaucratie centrale.",
+        "Tension": "Les grands vassaux n'obéissent que lorsqu'ils le souhaitent et entretiennent des armées privées."
+      }
+    },
+    {
+      "weight": 3,
+      "fields": {
+        "Name": "Conseil élu",
+        "Structure": "Les districts ou communautés élisent leurs représentants pour une durée déterminée.",
+        "Leadership": "Le conseil choisit un porte-parole doté d'un pouvoir exécutif limité.",
+        "Strength": "La participation est large et les dirigeants peuvent être remplacés sans violence.",
+        "Tension": "La lenteur des compromis laisse les problèmes urgents sans réponse."
+      }
+    },
+    {
+      "weight": 3,
+      "fields": {
+        "Name": "République marchande",
+        "Structure": "Les guildes propriétaires et les familles commerçantes élisent les magistrats.",
+        "Leadership": "Un doge ou premier consul est contrôlé par des conseils commerciaux.",
+        "Strength": "Les finances, la diplomatie, les infrastructures et le commerce sont florissants.",
+        "Tension": "Les citoyens pauvres ont peu voix au chapitre et la corruption est devenue la norme."
+      }
+    },
+    {
+      "weight": 2,
+      "fields": {
+        "Name": "Confédération tribale",
+        "Structure": "Des clans autonomes s'unissent pour la guerre, les migrations et l'application d'une loi commune.",
+        "Leadership": "Les chefs de clan se réunissent sous l'autorité d'un grand porte-parole choisi par leurs pairs.",
+        "Strength": "Le pouvoir local reste souple et les obligations personnelles sont fortes.",
+        "Tension": "D'anciennes querelles et des droits de pâturage contestés brisent le consensus."
+      }
+    },
+    {
+      "weight": 2,
+      "fields": {
+        "Name": "Théocratie",
+        "Structure": "La loi religieuse et l'autorité civile ne font officiellement qu'une.",
+        "Leadership": "Le haut clergé interprète la doctrine et nomme les administrateurs.",
+        "Strength": "Une vision commune, des institutions d'entraide et une forte légitimité morale.",
+        "Tension": "Tout désaccord doctrinal est considéré comme une trahison politique."
+      }
+    },
+    {
+      "weight": 2,
+      "fields": {
+        "Name": "Directoire militaire",
+        "Structure": "Les officiers supérieurs gouvernent par décrets d'urgence et commandements régionaux.",
+        "Leadership": "Un conseil de généraux présidé par un commandant suprême.",
+        "Strength": "La mobilisation, la logistique et la réaction aux crises sont rapides.",
+        "Tension": "L'état d'urgence permanent opprime les civils et divise les officiers."
+      }
+    },
+    {
+      "weight": 2,
+      "fields": {
+        "Name": "Oligarchie des guildes",
+        "Structure": "Les guildes professionnelles reconnues obtiennent des sièges proportionnels à leur poids économique.",
+        "Leadership": "Les maîtres de guilde négocient les politiques au sein d'une grande chambre fermée.",
+        "Strength": "Une administration experte et des investissements dans la production spécialisée.",
+        "Tension": "Les travailleurs sans guilde et les nouveaux secteurs d'activité sont exclus."
+      }
+    },
+    {
+      "weight": 2,
+      "fields": {
+        "Name": "Monarchie constitutionnelle",
+        "Structure": "Un monarque héréditaire partage le pouvoir avec une assemblée élue.",
+        "Leadership": "La couronne assure la continuité, tandis que les ministres ont besoin du soutien du corps législatif.",
+        "Strength": "L'unité symbolique s'allie à un gouvernement tenu de rendre des comptes.",
+        "Tension": "Aucun camp ne s'accorde sur les limites des pouvoirs d'urgence de la couronne."
+      }
+    },
+    {
+      "weight": 2,
+      "fields": {
+        "Name": "Démocratie directe",
+        "Structure": "Les citoyens votent eux-mêmes les lois lors d'assemblées régulières.",
+        "Leadership": "Des responsables élus pour de courts mandats exécutent les décisions publiques.",
+        "Strength": "Une forte légitimité et une participation civique importante.",
+        "Tension": "Certaines populations restent exclues de la citoyenneté et de riches orateurs manipulent les assemblées."
+      }
+    },
+    {
+      "weight": 2,
+      "fields": {
+        "Name": "Magocratie",
+        "Structure": "L'autorité politique dépend d'une compétence magique officiellement reconnue.",
+        "Leadership": "Un conclave de maîtres mages accrédités attribue les fonctions civiles.",
+        "Strength": "Des ouvrages publics puissants et une réglementation éclairée de la magie.",
+        "Tension": "Les non-mages sont exclus et les accidents magiques échappent au contrôle."
+      }
+    },
+    {
+      "weight": 2,
+      "fields": {
+        "Name": "Conseil des anciens",
+        "Structure": "Chaque lignée désigne son représentant capable le plus âgé.",
+        "Leadership": "Un conseil fonctionnant par consensus, dirigé par le médiateur le plus respecté.",
+        "Strength": "Une longue mémoire et la prudence préservent la stabilité.",
+        "Tension": "Les jeunes et les nouveaux arrivants ne peuvent pas influer sur les décisions."
+      }
+    },
+    {
+      "weight": 1,
+      "fields": {
+        "Name": "République par tirage au sort",
+        "Structure": "Les citoyens éligibles sont choisis au hasard pour occuper temporairement les fonctions publiques.",
+        "Leadership": "Des comités tournants supervisés par des fonctionnaires permanents.",
+        "Strength": "Le pouvoir est difficile à accaparer par les élections ou les privilèges héréditaires.",
+        "Tension": "Les responsables inexpérimentés dépendent fortement d'administrateurs non élus."
+      }
+    },
+    {
+      "weight": 1,
+      "fields": {
+        "Name": "Double couronne",
+        "Structure": "Deux souverains issus de peuples différents doivent approuver les décisions majeures.",
+        "Leadership": "Deux cours distinctes réunies par une chancellerie commune.",
+        "Strength": "L'autonomie des deux peuples fondateurs est protégée.",
+        "Tension": "Des différends ordinaires peuvent paralyser tout l'État."
+      }
+    },
+    {
+      "weight": 1,
+      "fields": {
+        "Name": "Ligue de cités",
+        "Structure": "Des cités indépendantes mettent en commun leur défense, leur monnaie et leur politique étrangère.",
+        "Leadership": "Les délégués se réunissent en congrès, accueilli à tour de rôle par chaque cité.",
+        "Strength": "La liberté locale bénéficie de la puissance économique collective.",
+        "Tension": "Les cités riches se dérobent aux charges communes tout en dominant les décisions."
+      }
+    },
+    {
+      "weight": 1,
+      "fields": {
+        "Name": "État judiciaire",
+        "Structure": "La jurisprudence et les tribunaux gouvernent davantage que les législateurs élus.",
+        "Leadership": "Une hiérarchie de juges culminant en un tribunal suprême.",
+        "Strength": "Un droit prévisible et une forte protection contre l'arbitraire des dirigeants.",
+        "Tension": "La complexité juridique renforce le pouvoir des juges et exclut les citoyens ordinaires."
+      }
+    },
+    {
+      "weight": 1,
+      "fields": {
+        "Name": "Régence oraculaire",
+        "Structure": "Les politiques suivent des prophéties authentifiées et interprétées par des fonctionnaires.",
+        "Leadership": "Un régent gouverne jusqu'à l'apparition du dirigeant légitime annoncé par la prophétie.",
+        "Strength": "La planification à long terme peut anticiper des menaces autrement invisibles.",
+        "Tension": "Des interprétations rivales justifient la répression et des délais sans fin."
+      }
+    },
+    {
+      "weight": 1,
+      "fields": {
+        "Name": "Nécrocratie",
+        "Structure": "Les dirigeants morts restent légalement au pouvoir grâce à des consultations rituelles.",
+        "Leadership": "Des ministres vivants interprètent les votes d'esprits ancestraux préservés.",
+        "Strength": "La mémoire institutionnelle survit littéralement à chaque génération.",
+        "Tension": "Les morts résistent au changement, et les ministres peuvent falsifier leurs volontés."
+      }
+    },
+    {
+      "weight": 1,
+      "fields": {
+        "Name": "Gouvernement saisonnier",
+        "Structure": "Le pouvoir passe d'une administration à l'autre au fil des quatre saisons.",
+        "Leadership": "Chaque cour saisonnière dirige la politique pendant trois mois.",
+        "Strength": "Des priorités différentes reçoivent régulièrement une attention garantie.",
+        "Tension": "Les projets de longue haleine sont sabotés ou annulés à chaque transition."
+      }
+    },
+    {
+      "weight": 1,
+      "fields": {
+        "Name": "Colonie corporative",
+        "Structure": "Une compagnie à charte possède les infrastructures et exerce l'autorité publique.",
+        "Leadership": "Un gouverneur nommé répond de ses actes devant des actionnaires lointains.",
+        "Strength": "Des investissements efficaces et une exploitation rapide des ressources.",
+        "Tension": "Les habitants sont traités comme des employés, des débiteurs ou des obstacles plutôt que comme des citoyens."
+      }
+    }
   ]
 }

@@ -2,29 +2,101 @@
   "name": "companion",
   "description": "Pets, familiars, and small traveling creatures",
   "entries": [
-    { "weight": 4, "value": "Loyal Hound — tracks familiar scents, guards sleepers, and distrusts one apparently harmless NPC." },
-    { "weight": 4, "value": "Barn Cat — excellent at finding hidden vermin, warm places, and unattended food." },
-    { "weight": 4, "value": "Messenger Pigeon — reliably returns to one chosen home carrying a very small message." },
-    { "weight": 3, "value": "Pack Goat — carries modest supplies, eats almost anything, and refuses obviously cursed paths." },
-    { "weight": 3, "value": "Clever Rat — squeezes through tiny spaces and learns simple object-based instructions." },
-    { "weight": 3, "value": "Watch Goose — loudly challenges strangers, invisible creatures, and anyone carrying bread." },
-    { "weight": 3, "value": "Pocket Ferret — retrieves small loose objects and hides them in inconvenient places." },
-    { "weight": 3, "value": "Mule — dependable transport with excellent footing and absolute veto power over unsafe bridges." },
-    { "weight": 2, "value": "Lantern Finch — emits gentle light and becomes silent when predators are nearby." },
-    { "weight": 2, "value": "Ember Newt — provides warmth, lights dry tinder, and sleeps inside cookware." },
-    { "weight": 2, "value": "Moss Tortoise — slowly grows common medicinal herbs across its shell." },
-    { "weight": 2, "value": "Whisper Crow — remembers voices and can repeat several short phrases with alarming accuracy." },
-    { "weight": 2, "value": "Miniature Slime — harmlessly dissolves dirt, spoiled food, and occasionally important paper." },
-    { "weight": 2, "value": "Clockwork Beetle — records one hour of sound and plays it back when wound." },
-    { "weight": 2, "value": "Breeze Lizard — changes color with the weather and glides short distances between people." },
-    { "weight": 2, "value": "Cave Bat — navigates complete darkness and returns when called with a specific whistle." },
-    { "weight": 2, "value": "River Otter — swims, retrieves floating objects, and insists on opening shellfish during serious scenes." },
-    { "weight": 1, "value": "Tiny Griffin — fiercely guards a single backpack and hunts insects with dramatic dives." },
-    { "weight": 1, "value": "Blink Rabbit — teleports a few meters when startled but rarely chooses the safest direction." },
-    { "weight": 1, "value": "Paper Dragon — folds itself flat, carries written notes, and breathes enough flame to seal wax." },
-    { "weight": 1, "value": "Ghost Mouse — passes through thin walls and becomes visible after eating cheese." },
-    { "weight": 1, "value": "Cloud Pup — a floating canine made of mist that can briefly conceal a person's face." },
-    { "weight": 1, "value": "Pebble Elemental — a fist-sized stone creature able to sense nearby tunnels and worked masonry." },
-    { "weight": 1, "value": "Moon Moth — absorbs weak magical residue and glows in the presence of active enchantments." }
+    {
+      "weight": 4,
+      "value": "Loyal Hound — tracks familiar scents, guards sleepers, and distrusts one apparently harmless NPC."
+    },
+    {
+      "weight": 4,
+      "value": "Barn Cat — excellent at finding hidden vermin, warm places, and unattended food."
+    },
+    {
+      "weight": 4,
+      "value": "Messenger Pigeon — reliably returns to one chosen home carrying a very small message."
+    },
+    {
+      "weight": 3,
+      "value": "Pack Goat — carries modest supplies, eats almost anything, and refuses obviously cursed paths."
+    },
+    {
+      "weight": 3,
+      "value": "Clever Rat — squeezes through tiny spaces and learns simple object-based instructions."
+    },
+    {
+      "weight": 3,
+      "value": "Watch Goose — loudly challenges strangers, invisible creatures, and anyone carrying bread."
+    },
+    {
+      "weight": 3,
+      "value": "Pocket Ferret — retrieves small loose objects and hides them in inconvenient places."
+    },
+    {
+      "weight": 3,
+      "value": "Mule — dependable transport with excellent footing and absolute veto power over unsafe bridges."
+    },
+    {
+      "weight": 2,
+      "value": "Lantern Finch — emits gentle light and becomes silent when predators are nearby."
+    },
+    {
+      "weight": 2,
+      "value": "Ember Newt — provides warmth, lights dry tinder, and sleeps inside cookware."
+    },
+    {
+      "weight": 2,
+      "value": "Moss Tortoise — slowly grows common medicinal herbs across its shell."
+    },
+    {
+      "weight": 2,
+      "value": "Whisper Crow — remembers voices and can repeat several short phrases with alarming accuracy."
+    },
+    {
+      "weight": 2,
+      "value": "Miniature Slime — harmlessly dissolves dirt, spoiled food, and occasionally important paper."
+    },
+    {
+      "weight": 2,
+      "value": "Clockwork Beetle — records one hour of sound and plays it back when wound."
+    },
+    {
+      "weight": 2,
+      "value": "Breeze Lizard — changes color with the weather and glides short distances between people."
+    },
+    {
+      "weight": 2,
+      "value": "Cave Bat — navigates complete darkness and returns when called with a specific whistle."
+    },
+    {
+      "weight": 2,
+      "value": "River Otter — swims, retrieves floating objects, and insists on opening shellfish during serious scenes."
+    },
+    {
+      "weight": 1,
+      "value": "Tiny Griffin — fiercely guards a single backpack and hunts insects with dramatic dives."
+    },
+    {
+      "weight": 1,
+      "value": "Blink Rabbit — teleports a few meters when startled but rarely chooses the safest direction."
+    },
+    {
+      "weight": 1,
+      "value": "Paper Dragon — folds itself flat, carries written notes, and breathes enough flame to seal wax."
+    },
+    {
+      "weight": 1,
+      "value": "Ghost Mouse — passes through thin walls and becomes visible after eating cheese."
+    },
+    {
+      "weight": 1,
+      "value": "Cloud Pup — a floating canine made of mist that can briefly conceal a person's face."
+    },
+    {
+      "weight": 1,
+      "value": "Pebble Elemental — a fist-sized stone creature able to sense nearby tunnels and worked masonry."
+    },
+    {
+      "weight": 1,
+      "value": "Moon Moth — absorbs weak magical residue and glows in the presence of active enchantments."
+    }
   ]
 }

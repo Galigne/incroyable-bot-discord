@@ -1,7 +1,41 @@
-{"name":"sailorBackground","description":"Détails de Background pour les PNJ marins","entries":[
-{"fields":{"Appearance":"Vêtements blanchis par le sel, mains robustes et équilibre assuré jusque sur la terre ferme.","Backstory":"Un matelot fiable est devenu l’unique témoin de la disparition d’une cargaison précieuse pendant son quart de nuit.","Goals":"Prouver son innocence et identifier l’officier qui a organisé le vol."}},
-{"fields":{"Appearance":"Peau burinée par le soleil, légère odeur de corde et de poisson, et assortiment pratique de petits couteaux.","Backstory":"Un pêcheur a remonté dans ses filets un objet inconnu et remarque depuis d’étranges navires dans son sillage.","Goals":"Découvrir l’origine de l’objet sans attirer le danger sur sa communauté."}},
-{"fields":{"Appearance":"Tenue colorée sous un manteau élimé, vieux bijoux et signe distinctif soigneusement dissimulé.","Backstory":"Un pirate a déserté lorsque son capitaine s’est mis à attaquer des villages côtiers sans défense plutôt que de riches navires.","Goals":"Libérer ses anciens compagnons et dédommager les communautés victimes de ses raids passés."}},
-{"fields":{"Appearance":"Musclé, vêtu simplement et couvert des bleus laissés par le déchargement des navires par tous les temps.","Backstory":"Un docker a découvert une filière de contrebande en recherchant un collègue disparu.","Goals":"Retrouver son collègue, révéler le trafic et éviter que des ouvriers honnêtes n’en portent la responsabilité."}},
-{"fields":{"Appearance":"Précis et réservé, transportant ses instruments de navigation dans un étui étanche poli par des années de soin.","Backstory":"Un navigateur a survécu à un naufrage causé par des cartes délibérément falsifiées avant le départ.","Goals":"Identifier le saboteur et tracer une voie sûre dans les eaux où le navire a sombré."}}
-]}
+{
+  "name": "sailorBackground",
+  "description": "Détails de Background pour les PNJ marins",
+  "entries": [
+    {
+      "fields": {
+        "Appearance": "Vêtements blanchis par le sel, mains robustes et équilibre assuré jusque sur la terre ferme.",
+        "Backstory": "Un matelot fiable est devenu l’unique témoin de la disparition d’une cargaison précieuse pendant son quart de nuit.",
+        "Goals": "Prouver son innocence et identifier l’officier qui a organisé le vol."
+      }
+    },
+    {
+      "fields": {
+        "Appearance": "Peau burinée par le soleil, légère odeur de corde et de poisson, et assortiment pratique de petits couteaux.",
+        "Backstory": "Un pêcheur a remonté dans ses filets un objet inconnu et remarque depuis d’étranges navires dans son sillage.",
+        "Goals": "Découvrir l’origine de l’objet sans attirer le danger sur sa communauté."
+      }
+    },
+    {
+      "fields": {
+        "Appearance": "Tenue colorée sous un manteau élimé, vieux bijoux et signe distinctif soigneusement dissimulé.",
+        "Backstory": "Un pirate a déserté lorsque son capitaine s’est mis à attaquer des villages côtiers sans défense plutôt que de riches navires.",
+        "Goals": "Libérer ses anciens compagnons et dédommager les communautés victimes de ses raids passés."
+      }
+    },
+    {
+      "fields": {
+        "Appearance": "Musclé, vêtu simplement et couvert des bleus laissés par le déchargement des navires par tous les temps.",
+        "Backstory": "Un docker a découvert une filière de contrebande en recherchant un collègue disparu.",
+        "Goals": "Retrouver son collègue, révéler le trafic et éviter que des ouvriers honnêtes n’en portent la responsabilité."
+      }
+    },
+    {
+      "fields": {
+        "Appearance": "Précis et réservé, transportant ses instruments de navigation dans un étui étanche poli par des années de soin.",
+        "Backstory": "Un navigateur a survécu à un naufrage causé par des cartes délibérément falsifiées avant le départ.",
+        "Goals": "Identifier le saboteur et tracer une voie sûre dans les eaux où le navire a sombré."
+      }
+    }
+  ]
+}

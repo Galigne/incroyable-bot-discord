@@ -1,7 +1,41 @@
-{"name":"exileBackground","description":"Background details for exiled NPCs","entries":[
-{"fields":{"Appearance":"Travel-worn, cautious, and carrying a small bundle of possessions packed for sudden departure.","Backstory":"A refugee escaped a border settlement destroyed by forces both neighboring states deny commanding.","Goals":"Find safety for other survivors and gather proof of who ordered the attack."}},
-{"fields":{"Appearance":"Keeps their face partly concealed and changes small details of dress whenever entering a new town.","Backstory":"A fugitive was framed for stealing records that actually reveal widespread official corruption.","Goals":"Recover the records, clear their name, and stay ahead of the true thieves."}},
-{"fields":{"Appearance":"Maintains aristocratic habits despite patched clothing and a signet deliberately worn out of sight.","Backstory":"A banished noble accepted blame for a sibling's failed plot to prevent the entire family from being executed.","Goals":"Learn whether the sacrifice was worthwhile and build a life independent of the old title."}},
-{"fields":{"Appearance":"Marked by old injuries and protective layers assembled from several different regions.","Backstory":"A displaced survivor has rebuilt a home repeatedly as war, disaster, and prejudice forced each community onward.","Goals":"Establish one lasting refuge and make it defensible without closing it to newcomers."}},
-{"fields":{"Appearance":"Reserved and articulate, carrying banned pamphlets and correspondence in a false-bottomed case.","Backstory":"A political exile advocated peaceful reform until the government declared even discussion of change treasonous.","Goals":"Support reformers at home while preventing their movement from embracing indiscriminate violence."}}
-]}
+{
+  "name": "exileBackground",
+  "description": "Background details for exiled NPCs",
+  "entries": [
+    {
+      "fields": {
+        "Appearance": "Travel-worn, cautious, and carrying a small bundle of possessions packed for sudden departure.",
+        "Backstory": "A refugee escaped a border settlement destroyed by forces both neighboring states deny commanding.",
+        "Goals": "Find safety for other survivors and gather proof of who ordered the attack."
+      }
+    },
+    {
+      "fields": {
+        "Appearance": "Keeps their face partly concealed and changes small details of dress whenever entering a new town.",
+        "Backstory": "A fugitive was framed for stealing records that actually reveal widespread official corruption.",
+        "Goals": "Recover the records, clear their name, and stay ahead of the true thieves."
+      }
+    },
+    {
+      "fields": {
+        "Appearance": "Maintains aristocratic habits despite patched clothing and a signet deliberately worn out of sight.",
+        "Backstory": "A banished noble accepted blame for a sibling's failed plot to prevent the entire family from being executed.",
+        "Goals": "Learn whether the sacrifice was worthwhile and build a life independent of the old title."
+      }
+    },
+    {
+      "fields": {
+        "Appearance": "Marked by old injuries and protective layers assembled from several different regions.",
+        "Backstory": "A displaced survivor has rebuilt a home repeatedly as war, disaster, and prejudice forced each community onward.",
+        "Goals": "Establish one lasting refuge and make it defensible without closing it to newcomers."
+      }
+    },
+    {
+      "fields": {
+        "Appearance": "Reserved and articulate, carrying banned pamphlets and correspondence in a false-bottomed case.",
+        "Backstory": "A political exile advocated peaceful reform until the government declared even discussion of change treasonous.",
+        "Goals": "Support reformers at home while preventing their movement from embracing indiscriminate violence."
+      }
+    }
+  ]
+}

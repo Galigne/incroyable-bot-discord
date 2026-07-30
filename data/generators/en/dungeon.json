@@ -2,27 +2,93 @@
   "name": "dungeon",
   "description": "Adventure sites, ruins, lairs, and hostile complexes",
   "entries": [
-    { "weight": 3, "value": "Buried Temple — collapsed sacred chambers surrounding a sealed altar that still receives offerings." },
-    { "weight": 3, "value": "Abandoned Mine — unstable galleries, flooded shafts, old equipment, and something following the rails." },
-    { "weight": 3, "value": "Bandit Cavern — natural tunnels expanded with barricades, storerooms, cells, and hidden exits." },
-    { "weight": 3, "value": "Ruined Fortress — broken walls above intact arsenals, command tunnels, and forgotten defenders." },
-    { "weight": 3, "value": "Ancient Crypt — family tombs, funerary traps, ancestral records, and disturbed sealed chambers." },
-    { "weight": 2, "value": "Wizard's Tower — stacked laboratories where failed experiments have altered gravity and space." },
-    { "weight": 2, "value": "Sewer Labyrinth — active drains, forgotten foundations, smuggler routes, and territorial creatures." },
-    { "weight": 2, "value": "Sunken Palace — flooded halls accessible during low tide, through diving, or by ancient pumps." },
-    { "weight": 2, "value": "Monster Warren — interconnected nests shaped by generations of increasingly large inhabitants." },
-    { "weight": 2, "value": "Prison Complex — cells, workshops, execution rooms, guard passages, and evidence of a mass escape." },
-    { "weight": 2, "value": "Collapsed City District — buried streets and homes connected through basements and sinkholes." },
-    { "weight": 2, "value": "Cursed Manor — a noble residence repeating the final night before its household's destruction." },
-    { "weight": 2, "value": "Volcanic Shrine — heat-blasted tunnels, sacrificial bridges, lava channels, and fireproof guardians." },
-    { "weight": 2, "value": "Frozen Tomb — ice-preserved halls where opening doors releases ancient air, disease, and occupants." },
-    { "weight": 2, "value": "Cult Sanctuary — disguised meeting rooms descending into ritual chambers and an unfinished summoning site." },
-    { "weight": 1, "value": "Living Dungeon — an enormous organism whose chambers digest intruders and rearrange like organs." },
-    { "weight": 1, "value": "Dream Prison — a mental complex entered through sleep, with exits hidden in prisoners' memories." },
-    { "weight": 1, "value": "Inverted Tower — a structure descending into the earth while gravity points toward its distant roof." },
-    { "weight": 1, "value": "Planar Embassy — an abandoned diplomatic complex built for visitors with incompatible bodies and physics." },
-    { "weight": 1, "value": "Clockwork Vault — precise mechanical rooms that reset traps and rotate corridors on a fixed schedule." },
-    { "weight": 1, "value": "Worldroot Hollow — primeval tunnels inside a colossal root system infected by a spreading corruption." },
-    { "weight": 1, "value": "Astral Observatory — a remote ruin whose lenses open physical paths toward dangerous celestial objects." }
+    {
+      "weight": 3,
+      "value": "Buried Temple — collapsed sacred chambers surrounding a sealed altar that still receives offerings."
+    },
+    {
+      "weight": 3,
+      "value": "Abandoned Mine — unstable galleries, flooded shafts, old equipment, and something following the rails."
+    },
+    {
+      "weight": 3,
+      "value": "Bandit Cavern — natural tunnels expanded with barricades, storerooms, cells, and hidden exits."
+    },
+    {
+      "weight": 3,
+      "value": "Ruined Fortress — broken walls above intact arsenals, command tunnels, and forgotten defenders."
+    },
+    {
+      "weight": 3,
+      "value": "Ancient Crypt — family tombs, funerary traps, ancestral records, and disturbed sealed chambers."
+    },
+    {
+      "weight": 2,
+      "value": "Wizard's Tower — stacked laboratories where failed experiments have altered gravity and space."
+    },
+    {
+      "weight": 2,
+      "value": "Sewer Labyrinth — active drains, forgotten foundations, smuggler routes, and territorial creatures."
+    },
+    {
+      "weight": 2,
+      "value": "Sunken Palace — flooded halls accessible during low tide, through diving, or by ancient pumps."
+    },
+    {
+      "weight": 2,
+      "value": "Monster Warren — interconnected nests shaped by generations of increasingly large inhabitants."
+    },
+    {
+      "weight": 2,
+      "value": "Prison Complex — cells, workshops, execution rooms, guard passages, and evidence of a mass escape."
+    },
+    {
+      "weight": 2,
+      "value": "Collapsed City District — buried streets and homes connected through basements and sinkholes."
+    },
+    {
+      "weight": 2,
+      "value": "Cursed Manor — a noble residence repeating the final night before its household's destruction."
+    },
+    {
+      "weight": 2,
+      "value": "Volcanic Shrine — heat-blasted tunnels, sacrificial bridges, lava channels, and fireproof guardians."
+    },
+    {
+      "weight": 2,
+      "value": "Frozen Tomb — ice-preserved halls where opening doors releases ancient air, disease, and occupants."
+    },
+    {
+      "weight": 2,
+      "value": "Cult Sanctuary — disguised meeting rooms descending into ritual chambers and an unfinished summoning site."
+    },
+    {
+      "weight": 1,
+      "value": "Living Dungeon — an enormous organism whose chambers digest intruders and rearrange like organs."
+    },
+    {
+      "weight": 1,
+      "value": "Dream Prison — a mental complex entered through sleep, with exits hidden in prisoners' memories."
+    },
+    {
+      "weight": 1,
+      "value": "Inverted Tower — a structure descending into the earth while gravity points toward its distant roof."
+    },
+    {
+      "weight": 1,
+      "value": "Planar Embassy — an abandoned diplomatic complex built for visitors with incompatible bodies and physics."
+    },
+    {
+      "weight": 1,
+      "value": "Clockwork Vault — precise mechanical rooms that reset traps and rotate corridors on a fixed schedule."
+    },
+    {
+      "weight": 1,
+      "value": "Worldroot Hollow — primeval tunnels inside a colossal root system infected by a spreading corruption."
+    },
+    {
+      "weight": 1,
+      "value": "Astral Observatory — a remote ruin whose lenses open physical paths toward dangerous celestial objects."
+    }
   ]
 }

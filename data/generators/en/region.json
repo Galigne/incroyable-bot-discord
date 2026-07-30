@@ -2,29 +2,101 @@
   "name": "region",
   "description": "Broad natural and cultivated geographic regions",
   "entries": [
-    { "weight": 4, "value": "Rolling Farmland — open crop fields, hedgerows, mills, and scattered market villages." },
-    { "weight": 4, "value": "Temperate Forest — mixed woodland crossed by game trails, logging roads, and clear streams." },
-    { "weight": 4, "value": "Grassland Steppe — immense windswept plains supporting herds, riders, and seasonal camps." },
-    { "weight": 3, "value": "Rocky Coast — cliffs, hidden coves, fishing settlements, and dangerous tidal caves." },
-    { "weight": 3, "value": "High Mountains — steep passes, thin air, glaciers, mines, and isolated monasteries." },
-    { "weight": 3, "value": "River Valley — fertile floodplains linking farms, ports, bridges, and competing towns." },
-    { "weight": 3, "value": "Marshland — shallow waterways, reed islands, peat bogs, and paths that shift by season." },
-    { "weight": 3, "value": "Dry Scrubland — thorny brush, red earth, seasonal rivers, and widely separated wells." },
-    { "weight": 3, "value": "Island Chain — inhabited and wild islands connected by reefs, ferries, and piracy." },
-    { "weight": 2, "value": "Ancient Woodland — enormous old trees, dim undergrowth, forgotten roads, and territorial spirits." },
-    { "weight": 2, "value": "Volcanic Highlands — black slopes, hot springs, ash fields, and mineral-rich settlements." },
-    { "weight": 2, "value": "Frozen Tundra — permafrost, low vegetation, migrating animals, and brief violent summers." },
-    { "weight": 2, "value": "Salt Desert — blinding flats, buried ruins, mineral caravans, and almost no fresh water." },
-    { "weight": 2, "value": "Deep Jungle — dense layered vegetation, heavy rainfall, colossal insects, and lost stoneworks." },
-    { "weight": 2, "value": "Lake Country — broad freshwater lakes, wooded shores, fishing communities, and misty islands." },
-    { "weight": 2, "value": "Badlands — eroded canyons, exposed fossils, little water, and excellent hiding places." },
-    { "weight": 2, "value": "Wine Hills — cultivated slopes, wealthy estates, old cellars, and intense local rivalries." },
-    { "weight": 2, "value": "Flooded Forest — half-submerged trees navigated by canoe during a long wet season." },
-    { "weight": 1, "value": "Crystal Expanse — natural glass formations distort light, sound, direction, and magic." },
-    { "weight": 1, "value": "Levitating Archipelago — floating landmasses connected by ropeways, flying mounts, and waterfalls." },
-    { "weight": 1, "value": "Dead Magic Basin — a fertile-looking depression where supernatural effects abruptly fail." },
-    { "weight": 1, "value": "Storm Belt — a coastal region battered by near-constant wind, rain, and electrical activity." },
-    { "weight": 1, "value": "Mushroom Wilds — damp country dominated by giant fungi, spores, and underground settlements." },
-    { "weight": 1, "value": "Shattered Battlefield — miles of trenches, memorials, unexploded magic, and communities built from salvage." }
+    {
+      "weight": 4,
+      "value": "Rolling Farmland — open crop fields, hedgerows, mills, and scattered market villages."
+    },
+    {
+      "weight": 4,
+      "value": "Temperate Forest — mixed woodland crossed by game trails, logging roads, and clear streams."
+    },
+    {
+      "weight": 4,
+      "value": "Grassland Steppe — immense windswept plains supporting herds, riders, and seasonal camps."
+    },
+    {
+      "weight": 3,
+      "value": "Rocky Coast — cliffs, hidden coves, fishing settlements, and dangerous tidal caves."
+    },
+    {
+      "weight": 3,
+      "value": "High Mountains — steep passes, thin air, glaciers, mines, and isolated monasteries."
+    },
+    {
+      "weight": 3,
+      "value": "River Valley — fertile floodplains linking farms, ports, bridges, and competing towns."
+    },
+    {
+      "weight": 3,
+      "value": "Marshland — shallow waterways, reed islands, peat bogs, and paths that shift by season."
+    },
+    {
+      "weight": 3,
+      "value": "Dry Scrubland — thorny brush, red earth, seasonal rivers, and widely separated wells."
+    },
+    {
+      "weight": 3,
+      "value": "Island Chain — inhabited and wild islands connected by reefs, ferries, and piracy."
+    },
+    {
+      "weight": 2,
+      "value": "Ancient Woodland — enormous old trees, dim undergrowth, forgotten roads, and territorial spirits."
+    },
+    {
+      "weight": 2,
+      "value": "Volcanic Highlands — black slopes, hot springs, ash fields, and mineral-rich settlements."
+    },
+    {
+      "weight": 2,
+      "value": "Frozen Tundra — permafrost, low vegetation, migrating animals, and brief violent summers."
+    },
+    {
+      "weight": 2,
+      "value": "Salt Desert — blinding flats, buried ruins, mineral caravans, and almost no fresh water."
+    },
+    {
+      "weight": 2,
+      "value": "Deep Jungle — dense layered vegetation, heavy rainfall, colossal insects, and lost stoneworks."
+    },
+    {
+      "weight": 2,
+      "value": "Lake Country — broad freshwater lakes, wooded shores, fishing communities, and misty islands."
+    },
+    {
+      "weight": 2,
+      "value": "Badlands — eroded canyons, exposed fossils, little water, and excellent hiding places."
+    },
+    {
+      "weight": 2,
+      "value": "Wine Hills — cultivated slopes, wealthy estates, old cellars, and intense local rivalries."
+    },
+    {
+      "weight": 2,
+      "value": "Flooded Forest — half-submerged trees navigated by canoe during a long wet season."
+    },
+    {
+      "weight": 1,
+      "value": "Crystal Expanse — natural glass formations distort light, sound, direction, and magic."
+    },
+    {
+      "weight": 1,
+      "value": "Levitating Archipelago — floating landmasses connected by ropeways, flying mounts, and waterfalls."
+    },
+    {
+      "weight": 1,
+      "value": "Dead Magic Basin — a fertile-looking depression where supernatural effects abruptly fail."
+    },
+    {
+      "weight": 1,
+      "value": "Storm Belt — a coastal region battered by near-constant wind, rain, and electrical activity."
+    },
+    {
+      "weight": 1,
+      "value": "Mushroom Wilds — damp country dominated by giant fungi, spores, and underground settlements."
+    },
+    {
+      "weight": 1,
+      "value": "Shattered Battlefield — miles of trenches, memorials, unexploded magic, and communities built from salvage."
+    }
   ]
 }

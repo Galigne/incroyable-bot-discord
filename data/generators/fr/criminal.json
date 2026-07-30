@@ -2,29 +2,101 @@
   "name": "Criminels",
   "description": "Adversaires humanoïdes, hors-la-loi et spécialistes du crime",
   "entries": [
-    { "weight": 4, "value": "Bandit de grand chemin — détrousseur mal payé qui réclame des vivres plutôt que de faire couler le sang." },
-    { "weight": 4, "value": "Contrebandier des quais — marin qui dissimule sa marchandise dans des tonneaux de poisson scellés." },
-    { "weight": 4, "value": "Coupe-bourse — voleur urbain rapide qui opère dans les marchés bondés et les fêtes religieuses." },
-    { "weight": 3, "value": "Racketteur — homme de main qui exige une protection contre des dangers secrètement créés par son propre gang." },
-    { "weight": 3, "value": "Braconnier — pisteur expérimenté qui chasse des animaux protégés pour de riches acheteurs." },
-    { "weight": 3, "value": "Pilleur de tombes — fouilleur désespéré qui vend bijoux, ossements et secrets enfouis." },
-    { "weight": 3, "value": "Faux péager — criminel revêtu d’un uniforme volé pour percevoir des droits de passage frauduleux." },
-    { "weight": 3, "value": "Receleur — commerçant respectable spécialisé dans l’art de donner une apparence légitime aux biens volés." },
-    { "weight": 3, "value": "Faussaire — artisan qui fabrique pièces, sceaux, laissez-passer et lettres de noblesse contrefaits." },
-    { "weight": 2, "value": "Maître chanteur — courtier en informations qui mêle secrets authentiques et preuves soigneusement fabriquées." },
-    { "weight": 2, "value": "Ravisseur — planificateur patient qui vise les personnes dont les familles ne peuvent faire appel aux autorités." },
-    { "weight": 2, "value": "Duelliste clandestin — combattant professionnel payé pour blesser des rivaux selon des règles improvisées." },
-    { "weight": 2, "value": "Voleur de reliques — spécialiste qui dérobe des objets sacrés ou magiques sans en comprendre la nature." },
-    { "weight": 2, "value": "Incendiaire — saboteur qui emploie des feux alchimiques à retardement pour détruire registres et commerces." },
-    { "weight": 2, "value": "Bailli corrompu — fonctionnaire qui abuse de son autorité pour saisir des biens et réduire les témoins au silence." },
-    { "weight": 2, "value": "Chef d’abordage pirate — pillard discipliné qui préfère s’emparer des cargaisons et réclamer des rançons plutôt que couler les navires." },
-    { "weight": 2, "value": "Alchimiste de gang — préparateur de toniques addictifs, de bombes fumigènes et de stimulants de combat peu fiables." },
-    { "weight": 1, "value": "Assassin — meurtrier méticuleux qui fait passer ses crimes pour des accidents ou des châtiments divins." },
-    { "weight": 1, "value": "Mage criminel — hors-la-loi qui recourt à une magie subtile pour contourner serrures, témoins et contrats." },
-    { "weight": 1, "value": "Marchand d’esclaves — trafiquant sous bonne garde, protégé par de fausses lois et des fonctionnaires complices." },
-    { "weight": 1, "value": "Prince des bandits — chef de guerre charismatique qui fédère des bandes dispersées en une armée territoriale." },
-    { "weight": 1, "value": "Faux prophète — chef de culte qui fabrique des miracles pour s’enrichir et obtenir l’immunité politique." },
-    { "weight": 1, "value": "Faussaire royal — maître criminel capable de fabriquer des titres et des revendications territoriales convaincants." },
-    { "weight": 1, "value": "Juge de la pègre — médiateur redouté dont le tribunal privé tranche les conflits entre factions criminelles." }
+    {
+      "weight": 4,
+      "value": "Bandit de grand chemin — détrousseur mal payé qui réclame des vivres plutôt que de faire couler le sang."
+    },
+    {
+      "weight": 4,
+      "value": "Contrebandier des quais — marin qui dissimule sa marchandise dans des tonneaux de poisson scellés."
+    },
+    {
+      "weight": 4,
+      "value": "Coupe-bourse — voleur urbain rapide qui opère dans les marchés bondés et les fêtes religieuses."
+    },
+    {
+      "weight": 3,
+      "value": "Racketteur — homme de main qui exige une protection contre des dangers secrètement créés par son propre gang."
+    },
+    {
+      "weight": 3,
+      "value": "Braconnier — pisteur expérimenté qui chasse des animaux protégés pour de riches acheteurs."
+    },
+    {
+      "weight": 3,
+      "value": "Pilleur de tombes — fouilleur désespéré qui vend bijoux, ossements et secrets enfouis."
+    },
+    {
+      "weight": 3,
+      "value": "Faux péager — criminel revêtu d’un uniforme volé pour percevoir des droits de passage frauduleux."
+    },
+    {
+      "weight": 3,
+      "value": "Receleur — commerçant respectable spécialisé dans l’art de donner une apparence légitime aux biens volés."
+    },
+    {
+      "weight": 3,
+      "value": "Faussaire — artisan qui fabrique pièces, sceaux, laissez-passer et lettres de noblesse contrefaits."
+    },
+    {
+      "weight": 2,
+      "value": "Maître chanteur — courtier en informations qui mêle secrets authentiques et preuves soigneusement fabriquées."
+    },
+    {
+      "weight": 2,
+      "value": "Ravisseur — planificateur patient qui vise les personnes dont les familles ne peuvent faire appel aux autorités."
+    },
+    {
+      "weight": 2,
+      "value": "Duelliste clandestin — combattant professionnel payé pour blesser des rivaux selon des règles improvisées."
+    },
+    {
+      "weight": 2,
+      "value": "Voleur de reliques — spécialiste qui dérobe des objets sacrés ou magiques sans en comprendre la nature."
+    },
+    {
+      "weight": 2,
+      "value": "Incendiaire — saboteur qui emploie des feux alchimiques à retardement pour détruire registres et commerces."
+    },
+    {
+      "weight": 2,
+      "value": "Bailli corrompu — fonctionnaire qui abuse de son autorité pour saisir des biens et réduire les témoins au silence."
+    },
+    {
+      "weight": 2,
+      "value": "Chef d’abordage pirate — pillard discipliné qui préfère s’emparer des cargaisons et réclamer des rançons plutôt que couler les navires."
+    },
+    {
+      "weight": 2,
+      "value": "Alchimiste de gang — préparateur de toniques addictifs, de bombes fumigènes et de stimulants de combat peu fiables."
+    },
+    {
+      "weight": 1,
+      "value": "Assassin — meurtrier méticuleux qui fait passer ses crimes pour des accidents ou des châtiments divins."
+    },
+    {
+      "weight": 1,
+      "value": "Mage criminel — hors-la-loi qui recourt à une magie subtile pour contourner serrures, témoins et contrats."
+    },
+    {
+      "weight": 1,
+      "value": "Marchand d’esclaves — trafiquant sous bonne garde, protégé par de fausses lois et des fonctionnaires complices."
+    },
+    {
+      "weight": 1,
+      "value": "Prince des bandits — chef de guerre charismatique qui fédère des bandes dispersées en une armée territoriale."
+    },
+    {
+      "weight": 1,
+      "value": "Faux prophète — chef de culte qui fabrique des miracles pour s’enrichir et obtenir l’immunité politique."
+    },
+    {
+      "weight": 1,
+      "value": "Faussaire royal — maître criminel capable de fabriquer des titres et des revendications territoriales convaincants."
+    },
+    {
+      "weight": 1,
+      "value": "Juge de la pègre — médiateur redouté dont le tribunal privé tranche les conflits entre factions criminelles."
+    }
   ]
 }

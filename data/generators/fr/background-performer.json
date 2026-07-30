@@ -1,7 +1,41 @@
-{"name":"performerBackground","description":"Détails de Background pour les PNJ artistes","entries":[
-{"fields":{"Appearance":"Tenue expressive, instrument précieusement entretenu et doigts endurcis par des années de pratique.","Backstory":"Un musicien itinérant a appris sans le savoir une mélodie dont des rebelles se servent comme message codé.","Goals":"Comprendre le sens du morceau et décider s’il faut protéger ou dénoncer ceux qui l’utilisent."}},
-{"fields":{"Appearance":"Gracieux et soigneusement maquillé, transportant des costumes capables de lui donner l’apparence de n’importe quel rang social.","Backstory":"Un comédien a fréquenté les élites en incarnant des nobles sur scène et surpris un secret dangereux.","Goals":"Faire de ce secret une protection pour sa troupe sans provoquer les personnes concernées."}},
-{"fields":{"Appearance":"Regard chaleureux et gestes animés, avec des vêtements de voyage pratiques couverts de petits souvenirs.","Backstory":"Un conteur rassemble les récits d’une catastrophe oubliée auprès de communautés qui en gardent des souvenirs contradictoires.","Goals":"Préserver la vérité, réconcilier les témoins et achever son récit avant que les preuves ne disparaissent."}},
-{"fields":{"Appearance":"Petit, athlétique et vêtu de couleurs vives, dissimulant d’anciennes blessures sous des mouvements qui paraissent sans effort.","Backstory":"Un acrobate a quitté une compagnie célèbre lorsque son propriétaire a imposé aux artistes des numéros toujours plus mortels.","Goals":"Fonder une troupe plus sûre et libérer ses amis encore prisonniers de contrats iniques."}},
-{"fields":{"Appearance":"Toujours prêt à entrer en scène, avec un sourire prompt et les poches remplies d’accessoires rudimentaires.","Backstory":"Un artiste de rue est devenu populaire en tournant en ridicule un dirigeant local, dont les agents assistent désormais à chaque représentation.","Goals":"Continuer à parler librement, protéger son public et transformer les rires en véritable changement."}}
-]}
+{
+  "name": "performerBackground",
+  "description": "Détails de Background pour les PNJ artistes",
+  "entries": [
+    {
+      "fields": {
+        "Appearance": "Tenue expressive, instrument précieusement entretenu et doigts endurcis par des années de pratique.",
+        "Backstory": "Un musicien itinérant a appris sans le savoir une mélodie dont des rebelles se servent comme message codé.",
+        "Goals": "Comprendre le sens du morceau et décider s’il faut protéger ou dénoncer ceux qui l’utilisent."
+      }
+    },
+    {
+      "fields": {
+        "Appearance": "Gracieux et soigneusement maquillé, transportant des costumes capables de lui donner l’apparence de n’importe quel rang social.",
+        "Backstory": "Un comédien a fréquenté les élites en incarnant des nobles sur scène et surpris un secret dangereux.",
+        "Goals": "Faire de ce secret une protection pour sa troupe sans provoquer les personnes concernées."
+      }
+    },
+    {
+      "fields": {
+        "Appearance": "Regard chaleureux et gestes animés, avec des vêtements de voyage pratiques couverts de petits souvenirs.",
+        "Backstory": "Un conteur rassemble les récits d’une catastrophe oubliée auprès de communautés qui en gardent des souvenirs contradictoires.",
+        "Goals": "Préserver la vérité, réconcilier les témoins et achever son récit avant que les preuves ne disparaissent."
+      }
+    },
+    {
+      "fields": {
+        "Appearance": "Petit, athlétique et vêtu de couleurs vives, dissimulant d’anciennes blessures sous des mouvements qui paraissent sans effort.",
+        "Backstory": "Un acrobate a quitté une compagnie célèbre lorsque son propriétaire a imposé aux artistes des numéros toujours plus mortels.",
+        "Goals": "Fonder une troupe plus sûre et libérer ses amis encore prisonniers de contrats iniques."
+      }
+    },
+    {
+      "fields": {
+        "Appearance": "Toujours prêt à entrer en scène, avec un sourire prompt et les poches remplies d’accessoires rudimentaires.",
+        "Backstory": "Un artiste de rue est devenu populaire en tournant en ridicule un dirigeant local, dont les agents assistent désormais à chaque représentation.",
+        "Goals": "Continuer à parler librement, protéger son public et transformer les rires en véritable changement."
+      }
+    }
+  ]
+}

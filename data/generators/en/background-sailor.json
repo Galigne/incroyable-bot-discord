@@ -1,7 +1,41 @@
-{"name":"sailorBackground","description":"Background details for sailor NPCs","entries":[
-{"fields":{"Appearance":"Salt-stained clothes, strong hands, and an easy balance that persists on solid ground.","Backstory":"A dependable deckhand became the sole witness when valuable cargo vanished during a night watch.","Goals":"Clear their name and identify which officer arranged the theft."}},
-{"fields":{"Appearance":"Sun-weathered, smelling faintly of rope and fish, with a practical collection of small knives.","Backstory":"A fisher found an unfamiliar object tangled in the nets and has been followed by strange vessels since.","Goals":"Learn the object's origin while keeping danger away from the fishing community."}},
-{"fields":{"Appearance":"Colorfully dressed beneath a battered coat, with old jewelry and a carefully hidden identifying mark.","Backstory":"A pirate deserted after the captain began targeting helpless coastal settlements instead of wealthy ships.","Goals":"Free former crewmates from the captain and repay communities harmed by past raids."}},
-{"fields":{"Appearance":"Muscular, plainly dressed, and marked by bruises from hauling cargo in every kind of weather.","Backstory":"A dock worker uncovered a smuggling route while searching for a missing coworker.","Goals":"Find the coworker, expose the operation, and keep honest laborers from taking the blame."}},
-{"fields":{"Appearance":"Precise and reserved, carrying navigation instruments in a waterproof case worn smooth with care.","Backstory":"A navigator survived a wreck caused by charts that had been deliberately altered before departure.","Goals":"Discover who sabotaged the voyage and map a safe course through the waters that claimed it."}}
-]}
+{
+  "name": "sailorBackground",
+  "description": "Background details for sailor NPCs",
+  "entries": [
+    {
+      "fields": {
+        "Appearance": "Salt-stained clothes, strong hands, and an easy balance that persists on solid ground.",
+        "Backstory": "A dependable deckhand became the sole witness when valuable cargo vanished during a night watch.",
+        "Goals": "Clear their name and identify which officer arranged the theft."
+      }
+    },
+    {
+      "fields": {
+        "Appearance": "Sun-weathered, smelling faintly of rope and fish, with a practical collection of small knives.",
+        "Backstory": "A fisher found an unfamiliar object tangled in the nets and has been followed by strange vessels since.",
+        "Goals": "Learn the object's origin while keeping danger away from the fishing community."
+      }
+    },
+    {
+      "fields": {
+        "Appearance": "Colorfully dressed beneath a battered coat, with old jewelry and a carefully hidden identifying mark.",
+        "Backstory": "A pirate deserted after the captain began targeting helpless coastal settlements instead of wealthy ships.",
+        "Goals": "Free former crewmates from the captain and repay communities harmed by past raids."
+      }
+    },
+    {
+      "fields": {
+        "Appearance": "Muscular, plainly dressed, and marked by bruises from hauling cargo in every kind of weather.",
+        "Backstory": "A dock worker uncovered a smuggling route while searching for a missing coworker.",
+        "Goals": "Find the coworker, expose the operation, and keep honest laborers from taking the blame."
+      }
+    },
+    {
+      "fields": {
+        "Appearance": "Precise and reserved, carrying navigation instruments in a waterproof case worn smooth with care.",
+        "Backstory": "A navigator survived a wreck caused by charts that had been deliberately altered before departure.",
+        "Goals": "Discover who sabotaged the voyage and map a safe course through the waters that claimed it."
+      }
+    }
+  ]
+}

@@ -2,29 +2,101 @@
   "name": "criminal",
   "description": "Humanoid enemies, outlaws, and criminal specialists",
   "entries": [
-    { "weight": 4, "value": "Roadside Bandit — an underpaid ambusher demanding supplies rather than bloodshed." },
-    { "weight": 4, "value": "Dockside Smuggler — a sailor moving contraband inside sealed fish barrels." },
-    { "weight": 4, "value": "Cutpurse — a quick urban thief working crowded markets and religious festivals." },
-    { "weight": 3, "value": "Protection Racketeer — an enforcer collecting payments for dangers their gang secretly creates." },
-    { "weight": 3, "value": "Poacher — a skilled tracker hunting protected animals for wealthy buyers." },
-    { "weight": 3, "value": "Grave Robber — a desperate excavator selling jewelry, bones, and buried secrets." },
-    { "weight": 3, "value": "Highway Impostor — a criminal wearing a stolen uniform to levy false tolls." },
-    { "weight": 3, "value": "Fence — a respectable shopkeeper specializing in making stolen goods appear legitimate." },
-    { "weight": 3, "value": "Counterfeiter — an artisan producing false coins, seals, travel papers, and noble letters." },
-    { "weight": 2, "value": "Blackmailer — an information broker using real secrets and carefully manufactured evidence." },
-    { "weight": 2, "value": "Kidnapper — a patient planner targeting people whose families cannot involve authorities." },
-    { "weight": 2, "value": "Illegal Duelist — a professional fighter paid to injure rivals under improvised rules." },
-    { "weight": 2, "value": "Relic Thief — a specialist stealing sacred or magical objects without understanding them." },
-    { "weight": 2, "value": "Arsonist — a saboteur using delayed alchemical fires to destroy records and businesses." },
-    { "weight": 2, "value": "Corrupt Bailiff — an official abusing legal authority to seize property and silence witnesses." },
-    { "weight": 2, "value": "Pirate Boarding Chief — a disciplined raider seeking cargo and ransom instead of sinking ships." },
-    { "weight": 2, "value": "Gang Alchemist — a brewer of addictive tonics, smoke bombs, and unreliable combat stimulants." },
-    { "weight": 1, "value": "Assassin — a meticulous killer arranging deaths to resemble accidents or divine punishment." },
-    { "weight": 1, "value": "Crime Mage — an outlaw using subtle magic to bypass locks, witnesses, and contracts." },
-    { "weight": 1, "value": "Slave Trader — a guarded trafficker protected by forged laws and complicit officials." },
-    { "weight": 1, "value": "Bandit Prince — a charismatic warlord uniting scattered gangs into a territorial army." },
-    { "weight": 1, "value": "False Prophet — a cult leader engineering miracles to gain wealth and political immunity." },
-    { "weight": 1, "value": "Royal Forger — a master criminal capable of manufacturing convincing claims to titles and land." },
-    { "weight": 1, "value": "Underworld Judge — a feared mediator whose private court settles disputes between criminal factions." }
+    {
+      "weight": 4,
+      "value": "Roadside Bandit — an underpaid ambusher demanding supplies rather than bloodshed."
+    },
+    {
+      "weight": 4,
+      "value": "Dockside Smuggler — a sailor moving contraband inside sealed fish barrels."
+    },
+    {
+      "weight": 4,
+      "value": "Cutpurse — a quick urban thief working crowded markets and religious festivals."
+    },
+    {
+      "weight": 3,
+      "value": "Protection Racketeer — an enforcer collecting payments for dangers their gang secretly creates."
+    },
+    {
+      "weight": 3,
+      "value": "Poacher — a skilled tracker hunting protected animals for wealthy buyers."
+    },
+    {
+      "weight": 3,
+      "value": "Grave Robber — a desperate excavator selling jewelry, bones, and buried secrets."
+    },
+    {
+      "weight": 3,
+      "value": "Highway Impostor — a criminal wearing a stolen uniform to levy false tolls."
+    },
+    {
+      "weight": 3,
+      "value": "Fence — a respectable shopkeeper specializing in making stolen goods appear legitimate."
+    },
+    {
+      "weight": 3,
+      "value": "Counterfeiter — an artisan producing false coins, seals, travel papers, and noble letters."
+    },
+    {
+      "weight": 2,
+      "value": "Blackmailer — an information broker using real secrets and carefully manufactured evidence."
+    },
+    {
+      "weight": 2,
+      "value": "Kidnapper — a patient planner targeting people whose families cannot involve authorities."
+    },
+    {
+      "weight": 2,
+      "value": "Illegal Duelist — a professional fighter paid to injure rivals under improvised rules."
+    },
+    {
+      "weight": 2,
+      "value": "Relic Thief — a specialist stealing sacred or magical objects without understanding them."
+    },
+    {
+      "weight": 2,
+      "value": "Arsonist — a saboteur using delayed alchemical fires to destroy records and businesses."
+    },
+    {
+      "weight": 2,
+      "value": "Corrupt Bailiff — an official abusing legal authority to seize property and silence witnesses."
+    },
+    {
+      "weight": 2,
+      "value": "Pirate Boarding Chief — a disciplined raider seeking cargo and ransom instead of sinking ships."
+    },
+    {
+      "weight": 2,
+      "value": "Gang Alchemist — a brewer of addictive tonics, smoke bombs, and unreliable combat stimulants."
+    },
+    {
+      "weight": 1,
+      "value": "Assassin — a meticulous killer arranging deaths to resemble accidents or divine punishment."
+    },
+    {
+      "weight": 1,
+      "value": "Crime Mage — an outlaw using subtle magic to bypass locks, witnesses, and contracts."
+    },
+    {
+      "weight": 1,
+      "value": "Slave Trader — a guarded trafficker protected by forged laws and complicit officials."
+    },
+    {
+      "weight": 1,
+      "value": "Bandit Prince — a charismatic warlord uniting scattered gangs into a territorial army."
+    },
+    {
+      "weight": 1,
+      "value": "False Prophet — a cult leader engineering miracles to gain wealth and political immunity."
+    },
+    {
+      "weight": 1,
+      "value": "Royal Forger — a master criminal capable of manufacturing convincing claims to titles and land."
+    },
+    {
+      "weight": 1,
+      "value": "Underworld Judge — a feared mediator whose private court settles disputes between criminal factions."
+    }
   ]
 }

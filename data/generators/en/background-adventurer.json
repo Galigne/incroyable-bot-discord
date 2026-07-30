@@ -1,90 +1,90 @@
 {
-    "name": "adventurerBackground",
-    "description": "Appearances, histories, and goals for adventuring NPCs",
-    "entries": [
-        {
-            "fields": {
-                "Appearance": "Travel-hardened, lightly scarred, and equipped with carefully maintained but mismatched gear.",
-                "Backstory": "Survived the destruction of a first expedition and still carries its incomplete map.",
-                "Goals": "Learn what killed the companions and finish the expedition without repeating their mistakes."
-            }
-        },
-        {
-            "fields": {
-                "Appearance": "Athletic, brightly dressed, and eager to display trophies of doubtful authenticity.",
-                "Backstory": "Left a comfortable home after stories of heroic ancestors became impossible to ignore.",
-                "Goals": "Earn genuine renown and discover whether the family legends were true."
-            }
-        },
-        {
-            "fields": {
-                "Appearance": "Quiet, watchful, and dressed in weatherproof layers marked by many repaired tears.",
-                "Backstory": "Worked as a frontier scout until an employer ordered the abandonment of isolated settlers.",
-                "Goals": "Guide vulnerable travelers safely and bring the former employer to justice."
-            }
-        },
-        {
-            "fields": {
-                "Appearance": "Academic posture, ink-stained gloves, sturdy boots, and too many fragile instruments.",
-                "Backstory": "A scholar entered the field when an important theory was dismissed without investigation.",
-                "Goals": "Find undeniable evidence and survive long enough to publish it."
-            }
-        },
-        {
-            "fields": {
-                "Appearance": "Powerfully built with simple armor, a calm expression, and a visibly damaged shield.",
-                "Backstory": "A former guard became a monster hunter after ordinary defenses failed the home district.",
-                "Goals": "Teach settlements practical defenses and locate the creature that escaped."
-            }
-        },
-        {
-            "fields": {
-                "Appearance": "Lean and sunburned, carrying religious tokens gathered from many unrelated faiths.",
-                "Backstory": "Undertook a pilgrimage to answer a personal miracle but found every shrine offered a different explanation.",
-                "Goals": "Understand the miracle and help other pilgrims complete dangerous journeys."
-            }
-        },
-        {
-            "fields": {
-                "Appearance": "Cheerful, weathered, and burdened with ropes, tools, samples, and unnecessary souvenirs.",
-                "Backstory": "Became an explorer through repeated accidents while working as a caravan repairer.",
-                "Goals": "Map inaccessible routes and open a reliable passage between separated communities."
-            }
-        },
-        {
-            "fields": {
-                "Appearance": "Disciplined stance, old military kit stripped of insignia, and a carefully concealed limp.",
-                "Backstory": "A veteran left mercenary service after discovering the company's wars were deliberately prolonged.",
-                "Goals": "Choose honorable contracts and expose the financiers behind the conflicts."
-            }
-        },
-        {
-            "fields": {
-                "Appearance": "Small-framed, quick-moving, and equipped with specialized climbing and lock tools.",
-                "Backstory": "Started delving into ruins to recover family property sold during a financial crisis.",
-                "Goals": "Recover the heirloom, pay family debts, and prove caution is more valuable than bravado."
-            }
-        },
-        {
-            "fields": {
-                "Appearance": "Immaculate cloak over battered armor, with a confident smile that fades when alone.",
-                "Backstory": "Was publicly declared a prophesied hero despite having no evidence the prophecy is genuine.",
-                "Goals": "Protect people drawn into the prophecy and determine who manufactured it."
-            }
-        },
-        {
-            "fields": {
-                "Appearance": "Severe, pale, and covered with notebooks documenting wounds, tracks, and unusual remains.",
-                "Backstory": "A healer began studying monsters after conventional medicine failed against supernatural injuries.",
-                "Goals": "Create reliable treatments and capture a dangerous specimen alive."
-            }
-        },
-        {
-            "fields": {
-                "Appearance": "Older than most adventurers, practical and composed, carrying equipment chosen through long experience.",
-                "Backstory": "Retired successfully years ago but returned when a former companion's child disappeared.",
-                "Goals": "Find the missing heir, keep inexperienced allies alive, and retire without unfinished promises."
-            }
-        }
-    ]
+  "name": "adventurerBackground",
+  "description": "Appearances, histories, and goals for adventuring NPCs",
+  "entries": [
+    {
+      "fields": {
+        "Appearance": "Travel-hardened, lightly scarred, and equipped with carefully maintained but mismatched gear.",
+        "Backstory": "Survived the destruction of a first expedition and still carries its incomplete map.",
+        "Goals": "Learn what killed the companions and finish the expedition without repeating their mistakes."
+      }
+    },
+    {
+      "fields": {
+        "Appearance": "Athletic, brightly dressed, and eager to display trophies of doubtful authenticity.",
+        "Backstory": "Left a comfortable home after stories of heroic ancestors became impossible to ignore.",
+        "Goals": "Earn genuine renown and discover whether the family legends were true."
+      }
+    },
+    {
+      "fields": {
+        "Appearance": "Quiet, watchful, and dressed in weatherproof layers marked by many repaired tears.",
+        "Backstory": "Worked as a frontier scout until an employer ordered the abandonment of isolated settlers.",
+        "Goals": "Guide vulnerable travelers safely and bring the former employer to justice."
+      }
+    },
+    {
+      "fields": {
+        "Appearance": "Academic posture, ink-stained gloves, sturdy boots, and too many fragile instruments.",
+        "Backstory": "A scholar entered the field when an important theory was dismissed without investigation.",
+        "Goals": "Find undeniable evidence and survive long enough to publish it."
+      }
+    },
+    {
+      "fields": {
+        "Appearance": "Powerfully built with simple armor, a calm expression, and a visibly damaged shield.",
+        "Backstory": "A former guard became a monster hunter after ordinary defenses failed the home district.",
+        "Goals": "Teach settlements practical defenses and locate the creature that escaped."
+      }
+    },
+    {
+      "fields": {
+        "Appearance": "Lean and sunburned, carrying religious tokens gathered from many unrelated faiths.",
+        "Backstory": "Undertook a pilgrimage to answer a personal miracle but found every shrine offered a different explanation.",
+        "Goals": "Understand the miracle and help other pilgrims complete dangerous journeys."
+      }
+    },
+    {
+      "fields": {
+        "Appearance": "Cheerful, weathered, and burdened with ropes, tools, samples, and unnecessary souvenirs.",
+        "Backstory": "Became an explorer through repeated accidents while working as a caravan repairer.",
+        "Goals": "Map inaccessible routes and open a reliable passage between separated communities."
+      }
+    },
+    {
+      "fields": {
+        "Appearance": "Disciplined stance, old military kit stripped of insignia, and a carefully concealed limp.",
+        "Backstory": "A veteran left mercenary service after discovering the company's wars were deliberately prolonged.",
+        "Goals": "Choose honorable contracts and expose the financiers behind the conflicts."
+      }
+    },
+    {
+      "fields": {
+        "Appearance": "Small-framed, quick-moving, and equipped with specialized climbing and lock tools.",
+        "Backstory": "Started delving into ruins to recover family property sold during a financial crisis.",
+        "Goals": "Recover the heirloom, pay family debts, and prove caution is more valuable than bravado."
+      }
+    },
+    {
+      "fields": {
+        "Appearance": "Immaculate cloak over battered armor, with a confident smile that fades when alone.",
+        "Backstory": "Was publicly declared a prophesied hero despite having no evidence the prophecy is genuine.",
+        "Goals": "Protect people drawn into the prophecy and determine who manufactured it."
+      }
+    },
+    {
+      "fields": {
+        "Appearance": "Severe, pale, and covered with notebooks documenting wounds, tracks, and unusual remains.",
+        "Backstory": "A healer began studying monsters after conventional medicine failed against supernatural injuries.",
+        "Goals": "Create reliable treatments and capture a dangerous specimen alive."
+      }
+    },
+    {
+      "fields": {
+        "Appearance": "Older than most adventurers, practical and composed, carrying equipment chosen through long experience.",
+        "Backstory": "Retired successfully years ago but returned when a former companion's child disappeared.",
+        "Goals": "Find the missing heir, keep inexperienced allies alive, and retire without unfinished promises."
+      }
+    }
+  ]
 }
