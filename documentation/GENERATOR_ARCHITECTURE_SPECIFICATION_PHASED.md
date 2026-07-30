@@ -2,43 +2,84 @@
 
 ## Status
 
-This document defines the target architecture and implementation sequence for:
+This document defines the target architecture and ordered implementation sequence for:
 
 - the version 2 random generator system;
 - shared statistical generation profiles;
 - complete character and creature models;
-- creature persistence, history, and management;
+- creature persistence, history, undo, and management;
 - complete creature generation through `/gen-monster`;
-- later expansion using reusable material from `JDR_RANDOM_OLD.md`.
+- descriptive generator modifiers;
+- migration of reusable content from `documentation/JDR_RANDOM_OLD.md`.
 
-It is a design and implementation specification. It does not itself modify the bot.
+It is a design and implementation specification. It does not itself modify the
+bot.
 
 ---
 
 # Implementation Protocol
 
-This feature must be implemented **one part at a time**, in the exact order defined by this document unless a dependency discovered during implementation requires an explicit revision.
+This feature must be implemented **one part at a time**, in the order defined by
+this document unless an implementation dependency requires an explicit
+specification revision.
 
 For every part:
 
 1. implement only the scope of the current part;
 2. add or update the tests required by that part;
-3. run the complete project test suite;
-4. report:
-   - the files changed;
-   - the behavior implemented;
-   - the tests added or changed;
-   - the test results;
-   - any deviation from this specification;
-   - any unresolved design question;
-5. stop after completing the current part;
-6. wait for explicit user review and confirmation before starting the next part.
+3. run `npm run format`;
+4. run `npm test`;
+5. report:
+   - files changed;
+   - behavior implemented;
+   - tests added or changed;
+   - formatting and test results;
+   - deviations from this specification;
+   - unresolved design questions;
+6. stop after completing the current part;
+7. wait for explicit user review and confirmation before starting the next part.
 
-Codex must not continue automatically into the next part, even when the next step appears straightforward.
+Codex must not continue automatically into another part.
 
-Later-part functionality must not be implemented early unless it is strictly required to make the current part correct. Preparing broad unused abstractions for future parts is not required.
+Later-part functionality must not be implemented early unless it is strictly
+required for correctness of the current part. Do not prepare broad unused
+abstractions merely because they may be useful later.
 
-Each completed part should leave the repository in a coherent and testable state.
+Every completed part must leave the repository coherent, formatted, and
+testable.
+
+---
+
+# Decision Precedence
+
+This document replaces older generator and creature architecture assumptions.
+
+The following decisions are authoritative:
+
+1. generator schema v1 does not require backward compatibility;
+2. existing character saves and history remain compatible;
+3. complete humanoids are generated only through `/gen-char`;
+4. there is no complete `npc` generator, `criminal` generator, or separate NPC
+   model;
+5. quest references to people resolve background categories, not complete
+   characters;
+6. modifiers are strictly descriptive;
+7. modifiers never change generated statistics, resources, armor, traits,
+   equipment, status effects, RULEs, or behavior;
+8. RULE Bearer is descriptive and does not grant a RULE;
+9. creature RULE assignment is explicit through the base creature archetype,
+   never through Intelligence or modifiers;
+10. generated status effects are descriptive and interpreted by the GM;
+11. animals and companions use separate catalogs;
+12. historical personality entries are preserved;
+13. when current generator content conflicts with content from
+    `JDR_RANDOM_OLD.md`, the historical content wins;
+14. content unique to the current catalogs may remain when it does not conflict
+    with historical content.
+
+Any future mechanical modifier system is a separate feature requiring a new
+specification and explicit approval. It must not be anticipated through unused
+mechanical fields in the current modifier schema.
 
 ---
 
@@ -48,30 +89,40 @@ Each completed part should leave the repository in a coherent and testable state
 
 The old generator JSON format does **not** require backward compatibility.
 
-The repository controls all generator files and all internal callers. The final version 2 system must therefore have:
+The repository owns all generator files and all internal callers. The completed
+version 2 system has:
 
 - one generator file format;
 - one validation path;
 - one resolver API;
 - no runtime format detection;
-- no permanent compatibility overload for the old generator service API;
-- no v1 generator parser after the version 2 cutover.
+- no compatibility overload for the previous generator service API;
+- no v1 generator parser after cutover.
 
-Part 2 introduces and tests the version 2 catalog independently without making it the production catalog. Part 3 converts all repository-owned generator data, switches all callers to version 2, and removes the old catalog implementation. This temporary development sequence is not a dual-format production system.
+Part 2 implements the v2 catalog independently with fixtures. Part 3 converts
+all production data, switches all callers, and removes the old implementation.
+That temporary development sequence is not a dual-format production system.
 
-## Persistent and user-facing data
+## Persistent character data
 
-The following compatibility must be preserved unless a later explicit decision changes it:
+Preserve:
 
 - existing character save files;
 - existing character history;
 - existing character keys;
-- existing character management behavior;
-- existing `/gen-char` behavior where not intentionally changed;
-- existing permissions;
-- existing public generator concepts and localized output where not intentionally renamed.
+- existing character mutation and undo behavior;
+- existing authorization;
+- existing `/gen-char` behavior except for explicitly approved generator changes.
 
-Generator data is repository-owned implementation data. Character saves are persistent user data and must not be treated the same way.
+Generator JSON is repository-owned implementation data. Character saves are
+persistent user data and must not be treated the same way.
+
+## Public generator behavior
+
+Preserve existing public generator concepts and localized output unless a later
+migration part explicitly merges, renames, internalizes, or removes them.
+
+Stable technical IDs replace identifiers derived from display names.
 
 ---
 
@@ -80,33 +131,72 @@ Generator data is repository-owned implementation data. Character saves are pers
 The completed architecture must support:
 
 - weighted random selection through `weight`;
-- simple text entries and structured entries;
-- stable technical generator and entry identifiers;
-- English and French localized data with strict structural parity;
-- internal components hidden from generic `/gen` autocomplete;
-- templates referencing other generators;
-- independent modifiers;
-- atomic selection of fields belonging to one entry;
+- text entries and structured entries;
+- stable generator and entry IDs;
+- English and French content with strict structural parity;
+- public categories and internal components;
+- templates that reference other generators;
+- references to a randomly selected entry;
+- references to a fixed entry ID;
+- weighted selection between several source generators;
+- descriptive modifiers selected independently from a base result;
+- atomic selection of all fields belonging to one entry;
 - complete character generation through `/gen-char`;
 - complete creature generation through `/gen-monster`;
-- one shared statistical profile system for characters and creatures;
+- one statistical profile system shared by characters and creatures;
+- one statistic-allocation algorithm;
 - shared level, statistic, resource, and combat calculations;
-- separate `Character` and `Creature` models based on common combat state;
-- complete creature save, history, undo, and mutation support;
-- deterministic testing through injected random functions;
-- strict validation before data activation.
+- separate `Character` and `Creature` models based on shared combat state;
+- complete creature save, history, undo, mutation, and deletion;
+- deterministic tests through injected random functions;
+- strict validation before generator data becomes active;
+- eventual migration of all accepted historical list entries.
 
 The completed architecture must not:
 
 - derive technical IDs from localized display names;
 - store executable formulas in JSON;
 - maintain two generator formats;
-- automatically grant creature RULEs because of high Intelligence;
-- introduce an encounter-power or challenge-rating value;
-- define fixed statistics for individual creature entries;
-- permit per-creature overrides of profile minimums, maximums, or weights;
+- create a complete humanoid outside `/gen-char`;
+- create an `npc` model or persistent `npc` entity type;
+- create public `npc` or `criminal` generators for complete people;
+- grant creature RULEs because of Intelligence;
+- grant RULEs through modifiers;
+- apply any mechanical modifier effect;
+- automatically enforce status-effect mechanics;
+- introduce encounter power or challenge rating;
+- define fixed statistic blocks for individual creature entries;
+- permit per-creature profile overrides;
 - create separate statistic-allocation algorithms for characters and creatures;
 - rerun generation when loading a saved creature.
+
+---
+
+# Target Directory Structure
+
+```text
+data/generators/
+├── stat-profile.json
+├── en/
+│   ├── categories/
+│   ├── components/
+│   ├── modifiers/
+│   └── templates/
+└── fr/
+    ├── categories/
+    ├── components/
+    ├── modifiers/
+    └── templates/
+```
+
+Roles:
+
+- `categories/`: autonomous generators normally visible through `/gen`;
+- `components/`: internal data used by templates, `/gen-char`, or
+  `/gen-monster`;
+- `modifiers/`: descriptive additions selected for compatible results;
+- `templates/`: composed generators resolving one or more references;
+- `stat-profile.json`: non-localized statistical distributions.
 
 ---
 
@@ -114,21 +204,28 @@ The completed architecture must not:
 
 | Part | Name | Primary result |
 | ---: | --- | --- |
-| 1 | Shared statistical profiles | `/gen-char` uses validated shared profile allocation |
-| 2 | Generator schema v2 core | New v2 catalog is implemented and tested independently |
-| 3 | Generator data conversion and cutover | All generators use v2; old catalog is removed |
-| 4 | Structured resolver and templates | Recursive references and structured results work |
-| 5 | Generic modifier selection | Descriptive modifiers can be selected generically |
-| 6 | Shared `Combatant` model | `Character` inherits shared combat state without behavior changes |
-| 7 | Generic entity persistence foundations | Character persistence works through entity-neutral foundations |
-| 8 | `Creature` model and persistence | Creatures can be saved, loaded, mutated, and undone |
-| 9 | Common entity commands | Existing management commands work for both entity types |
-| 10 | Creature archetypes and fixed RULEs | Unsaved complete base creatures can be generated |
-| 11 | Mechanical creature modifiers | Modifiers change stats, add traits, and explicitly add RULEs |
-| 12 | `/gen-monster` integration | Complete generated creatures are atomically saved by command |
-| 13 | Content expansion | Catalogs, profiles, modifiers, templates, and old reusable lists expand |
+| 1 | Shared statistical profiles | `/gen-char` uses validated profile allocation |
+| 2 | Generator schema v2 core | A strict v2 catalog exists independently |
+| 3 | Generator data conversion and cutover | All production generators use v2 |
+| 4 | Structured resolver and templates | References, fixed entries, and provenance work |
+| 5 | Descriptive modifier selection | Modifiers can be selected without mechanical effects |
+| 6 | Shared `Combatant` model | `Character` inherits shared combat state |
+| 7 | Generic entity persistence foundations | Character persistence uses reusable foundations |
+| 8 | `Creature` model and persistence | Creatures can be stored, mutated, and undone |
+| 9 | Common entity commands | Management commands work for both entity types |
+| 10 | Creature archetypes and fixed RULEs | Complete base creatures can be generated in memory |
+| 11 | Descriptive creature modifier integration | Creatures retain selected descriptive modifiers |
+| 12 | `/gen-monster` integration | Complete generated creatures are atomically saved |
+| 13 | Historical migration inventory | Every old entry receives a migration decision |
+| 14 | Direct standalone-list migration | Straightforward historical categories are imported |
+| 15 | Humanoid and background migration | NPC/criminal material is folded into `/gen-char` data |
+| 16 | RULE reconciliation | Historical RULE content replaces conflicting current content |
+| 17 | Creature-list migration | Historical animals, companions, and monsters are structured |
+| 18 | Modifier-list migration | Historical modifiers are imported as descriptive data |
+| 19 | Quest-template migration | Historical quests use final stable references |
+| 20 | Final migration verification and content expansion | Coverage, balance, and cleanup are completed |
 
-Parts must be completed and approved sequentially.
+Every part requires explicit approval before the next part begins.
 
 ---
 
@@ -136,11 +233,10 @@ Parts must be completed and approved sequentially.
 
 ## 1.1 Objective
 
-Introduce one non-localized statistical profile system and make existing random character generation use it before creatures are introduced.
+Introduce one non-localized statistical profile system and make existing random
+character generation use it before creatures are introduced.
 
-This part proves the allocation algorithm using the existing `/gen-char` pipeline.
-
-## 1.2 Data Location
+## 1.2 Data File
 
 Add:
 
@@ -148,11 +244,7 @@ Add:
 data/generators/stat-profile.json
 ```
 
-This file is technical and is not duplicated under `en/` and `fr/`.
-
-It is not a normal generator category and is never exposed through `/gen`.
-
-## 1.3 File Shape
+Example:
 
 ```json
 {
@@ -192,34 +284,32 @@ It is not a normal generator category and is never exposed through `/gen`.
 }
 ```
 
-The initial `character-balanced` profile must reproduce the current balanced random allocation as closely as possible.
+`character-balanced` must reproduce the current balanced allocation as closely
+as possible.
 
-## 1.4 Profile Semantics
+## 1.3 Profile Semantics
 
 A profile contains only:
 
-- per-statistic minimums;
-- per-statistic maximums;
-- per-statistic allocation weights.
+- minimum value for each statistic;
+- maximum value for each statistic;
+- allocation weight for each statistic.
 
 A profile does not contain:
 
 - localized text;
 - `appliesTo`;
-- HP formulas;
-- AP formulas;
-- MD formulas;
+- HP, AP, MD, or AR formulas;
 - RULE assignment;
 - traits;
+- status effects;
 - armor;
-- executable expressions;
-- entity-type restrictions.
+- entity type;
+- executable expressions.
 
-The same profile format will later be used by characters and creatures.
+## 1.4 Required Statistics
 
-## 1.5 Required Statistics
-
-Every profile defines exactly the seven base statistics:
+Every profile defines exactly:
 
 - `constitution`;
 - `strength`;
@@ -231,28 +321,22 @@ Every profile defines exactly the seven base statistics:
 
 For each statistic:
 
-- the minimum is an integer from `4` to `20`;
-- the maximum is an integer from `4` to `20`;
-- the minimum does not exceed the maximum;
-- the allocation weight is finite and greater than or equal to `0`.
+- minimum is an integer from `4` to `20`;
+- maximum is an integer from `4` to `20`;
+- minimum does not exceed maximum;
+- allocation weight is finite and greater than or equal to `0`.
 
 At least one allocation weight must be positive.
 
-Unknown or missing statistic keys are rejected.
-
-## 1.6 Shared Level Budget
-
-Characters and creatures use the same level-dependent statistic budget:
+## 1.5 Shared Level Budget
 
 ```text
-base budget at level 1: 67
-
 budget(level) =
   67
   + 2 × (level - 1)
-  + 1 at level 2
-  + 1 at level 5
-  + 1 at level 8
+  + 1 when level >= 2
+  + 1 when level >= 5
+  + 1 when level >= 8
 ```
 
 Equivalent behavior:
@@ -265,16 +349,14 @@ function calculateStatBudget(level) {
 }
 ```
 
-The existing nonlinear value cost remains:
+Statistic value cost remains:
 
-- values `1` through `14`: `1` point per value;
-- values `15` and `16`: `2` points per value;
-- values `17` and `18`: `3` points per value;
-- values `19` and `20`: `4` points per value.
+- values `1` through `14`: `1` point;
+- values `15` and `16`: `2` points;
+- values `17` and `18`: `3` points;
+- values `19` and `20`: `4` points.
 
-## 1.7 Allocation Algorithm
-
-Proposed API:
+## 1.6 Allocation API and Algorithm
 
 ```js
 generateStats({
@@ -286,30 +368,30 @@ generateStats({
 
 Algorithm:
 
-1. validate the level and profile;
+1. validate level and profile;
 2. calculate the level budget;
-3. initialize every statistic at its profile minimum;
-4. calculate the total cost of those minimum values;
-5. when the minimum cost equals or exceeds the available budget:
-   - preserve every configured minimum;
-   - do not reduce any statistic;
-   - accept that the result may exceed its nominal budget;
-   - perform no additional allocation;
-6. otherwise, calculate the remaining budget;
-7. determine the eligible statistics:
-   - current value is below the configured maximum;
-   - allocation weight is greater than `0`;
-   - the next increase can be purchased with the remaining budget;
-8. select one eligible statistic using weighted selection;
+3. initialize each statistic to its profile minimum;
+4. calculate the cost of all minimums;
+5. when minimum cost equals or exceeds the budget:
+   - preserve every minimum;
+   - do not lower a statistic;
+   - accept a result above nominal budget;
+   - stop allocation;
+6. otherwise determine remaining budget;
+7. build eligible statistics where:
+   - current value is below maximum;
+   - weight is positive;
+   - next value cost fits remaining budget;
+8. select an eligible statistic by weight;
 9. increase it by `1`;
-10. subtract the cost of that increase;
+10. subtract the increase cost;
 11. repeat until no statistic is eligible.
 
 Unused budget is accepted when no legal increase can consume it.
 
-## 1.8 Catalog Responsibility
+## 1.7 Catalog
 
-Add a separate technical service such as `statProfileCatalog` with operations equivalent to:
+Add a Discord-independent technical catalog equivalent to:
 
 ```js
 getStatProfile(profileId)
@@ -318,60 +400,44 @@ validateStatProfiles()
 clearStatProfileCache()
 ```
 
-The service must not depend on Discord.
+## 1.8 Character Integration
 
-## 1.9 Character Integration
+`/gen-char`:
 
-Update random character generation to:
+1. loads `character-balanced`;
+2. generates statistics through the shared allocator;
+3. preserves character Intelligence-based RULE allocation;
+4. preserves save shape and command behavior.
 
-1. load `character-balanced`;
-2. pass it to the shared allocator;
-3. preserve existing character RULE allocation based on Intelligence;
-4. preserve existing character saves and command behavior.
+Profiles affect generation only. They do not restrict later `/set` operations.
 
-Profiles affect random generation only. They do not restrict manual character creation or later `/set` operations beyond normal statistic validation.
+## 1.9 Validation and Tests
 
-## 1.10 Validation
-
-Reject:
-
-- unknown profile schema versions;
-- duplicate profile IDs;
-- missing or unknown statistics;
-- invalid minimums or maximums;
-- minimums greater than maximums;
-- negative or non-finite weights;
-- profiles with no positive weight.
-
-A profile whose minimums exceed a level budget is valid by design.
-
-## 1.11 Tests
+Reject malformed schema versions, duplicate IDs, missing or unknown statistics,
+invalid bounds, negative/non-finite weights, and profiles with no positive
+weight.
 
 Test:
 
-- profile loading and caching;
-- duplicate and malformed profiles;
-- all statistics starting at minimum;
-- maximums never being exceeded;
-- zero-weight statistics never being selected;
-- weighted allocation boundaries;
-- nonlinear next-value costs;
-- correct budget at every level;
-- minimums exceeding budget;
-- unspendable remaining budget;
-- deterministic results from an injected random sequence;
-- unchanged `/gen-char` save shape;
+- loading and caching;
+- malformed profiles;
+- budget values;
+- minimum preservation;
+- maximum enforcement;
+- zero-weight behavior;
+- weighted boundaries;
+- nonlinear costs;
+- unspendable remainder;
+- injected deterministic randomness;
+- unchanged character save shape;
 - unchanged character RULE behavior.
 
-## 1.12 Completion Criteria
-
-Part 1 is complete when:
+## 1.10 Completion Criteria
 
 - `/gen-char` uses `character-balanced`;
-- existing character saves remain compatible;
-- the complete test suite passes;
-- no creature implementation exists yet;
-- no generator v2 work has been included.
+- existing saves remain compatible;
+- no creature or generator-v2 work is included;
+- formatting and full tests pass.
 
 Stop and wait for confirmation.
 
@@ -381,41 +447,12 @@ Stop and wait for confirmation.
 
 ## 2.1 Objective
 
-Implement the version 2 generator catalog and validation model independently from the current production generator catalog.
+Implement and test a strict v2 generator catalog independently from the current
+production catalog.
 
-This part does not support or parse old-format files inside the v2 catalog.
+The v2 catalog never parses v1 data.
 
-The existing runtime may continue using its current catalog until Part 3, while the v2 implementation is tested with dedicated fixtures. This is temporary development isolation, not backward compatibility inside the new system.
-
-## 2.2 Target Directory Structure
-
-The final data layout is:
-
-```text
-data/generators/
-├── stat-profile.json
-├── en/
-│   ├── categories/
-│   ├── components/
-│   ├── modifiers/
-│   └── templates/
-└── fr/
-    ├── categories/
-    ├── components/
-    ├── modifiers/
-    └── templates/
-```
-
-Directory roles:
-
-- `categories/`: autonomous generators normally visible through `/gen`;
-- `components/`: internal generators used through references or specialized commands;
-- `modifiers/`: independent modifier generators;
-- `templates/`: composed generators using references.
-
-## 2.3 Common Generator Envelope
-
-Every localized generator uses:
+## 2.2 Common Envelope
 
 ```json
 {
@@ -440,11 +477,11 @@ Every localized generator uses:
 
 Technical properties:
 
-- `schemaVersion`: exactly the supported v2 value;
-- `id`: stable English technical ID;
+- `schemaVersion`;
+- stable English `id`;
 - `kind`: `category`, `component`, `modifier`, or `template`;
 - `visibility`: `public` or `internal`;
-- `entrySchema`: expected entry shape.
+- `entrySchema`.
 
 Localized properties:
 
@@ -452,20 +489,18 @@ Localized properties:
 - `description`;
 - player-facing entry content.
 
-Technical IDs must never be derived from localized names.
-
-## 2.4 Entry Shapes
+## 2.3 Entry Shapes
 
 Every entry has:
 
-- a stable `id`;
-- an optional positive `weight`, defaulting to `1`;
+- stable `id`;
+- optional positive `weight`, default `1`;
 - exactly one primary payload:
   - `value`;
   - `fields`;
   - `template`.
 
-A text entry:
+Text:
 
 ```json
 {
@@ -475,7 +510,7 @@ A text entry:
 }
 ```
 
-A structured entry:
+Structured:
 
 ```json
 {
@@ -485,18 +520,14 @@ A structured entry:
     "Name": "Human",
     "Description": "Adaptable communities connected by fast-changing traditions.",
     "Skill Bonus": "Choose one skill bonus during character creation.",
-    "Physical Ability": "Adapt quickly to a sudden change of climate or pace."
+    "Physical Ability": "Adapt quickly to sudden changes."
   }
 }
 ```
 
-All fields in one structured entry are selected atomically.
+All fields in a structured entry are selected atomically.
 
-An entry may later contain `mechanics`, `references`, or `modifiers` when its kind and schema allow them. Part 2 needs to define extensible validation boundaries, but it does not implement reference or modifier behavior.
-
-## 2.5 Catalog API
-
-The v2 catalog should expose:
+## 2.4 Catalog API
 
 ```js
 getGenerator(id, locale)
@@ -508,86 +539,54 @@ listGenerators(locale, {
 clearGeneratorCache()
 ```
 
-Selection may remain in a dedicated reusable helper:
+Weighted selection belongs in a reusable helper:
 
 ```js
 selectWeightedEntry(entries, random = Math.random)
 ```
 
-Do not preserve the previous API overloads for long-term use.
+## 2.5 Discovery
 
-## 2.6 Discovery
+The v2 catalog:
 
-The catalog:
-
-- scans all four directories;
-- uses English paths as the structural reference;
-- reads the corresponding localized file;
-- identifies generators by stable `id`;
-- prevents duplicate IDs across all generator kinds;
+- scans all four localized subdirectories recursively;
+- uses English paths as structural reference;
+- loads matching French paths;
+- identifies generators by stable ID;
+- rejects duplicate IDs across kinds;
 - exposes public generators by default;
-- permits internal services to request internal data explicitly.
+- permits internal access explicitly.
 
-## 2.7 Localization Parity
+## 2.6 Localization Parity
 
-For every French file, validate against the corresponding English file:
+French must match English in:
 
-- identical relative path;
-- identical `schemaVersion`;
-- identical `id`;
-- identical `kind`;
-- identical `visibility`;
-- identical `entrySchema`;
-- identical entry IDs;
-- identical entry order;
-- identical weights;
-- identical technical keys and values;
-- localized player-facing text may differ.
+- relative path;
+- schema version;
+- generator ID;
+- kind;
+- visibility;
+- entry schema;
+- entry IDs and order;
+- weights;
+- technical keys and values.
 
-Later parts extend parity validation to references, mechanics, traits, fixed RULEs, modifier requests, and statistic changes.
+Only player-facing text is translated.
 
-## 2.8 Core Validation
+## 2.7 Validation and Tests
 
-Reject:
+Reject invalid envelopes, kinds, visibility, IDs, payload counts, weights,
+required fields, duplicate IDs, malformed values, and locale differences.
 
-- unknown schema versions;
-- unknown kinds;
-- invalid visibility;
-- duplicate generator IDs;
-- duplicate entry IDs;
-- missing names or descriptions;
-- invalid `entrySchema`;
-- entries without exactly one primary payload;
-- non-positive or non-finite weights;
-- missing required fields;
-- malformed value or field payloads;
-- structural differences between locales.
+Test recursive discovery, visibility, all entry shapes, stable lookup, weighted
+selection, parity, malformed fixtures, and deterministic selection.
 
-## 2.9 Tests
+## 2.8 Completion Criteria
 
-Use dedicated v2 fixtures to test:
-
-- recursive directory discovery;
-- all kinds and visibility values;
-- stable ID lookup;
-- public versus internal listing;
-- text and structured entries;
-- atomic field selection;
-- duplicate IDs;
-- malformed envelopes;
-- localization parity;
-- weighted boundaries;
-- deterministic selection.
-
-## 2.10 Completion Criteria
-
-Part 2 is complete when:
-
-- the v2 catalog and validator are fully tested;
-- production commands still use the old catalog temporarily;
-- the v2 catalog does not parse v1 files;
-- no repository generator data has yet been converted;
-- no templates, references, or modifiers are resolved yet.
+- v2 catalog and fixtures are complete;
+- production still temporarily uses v1;
+- no v1 parsing exists in v2 code;
+- no production data conversion or reference resolution is included.
 
 Stop and wait for confirmation.
 
@@ -597,90 +596,74 @@ Stop and wait for confirmation.
 
 ## 3.1 Objective
 
-Convert all existing repository generator files to schema v2 and switch the bot completely to the v2 catalog.
+Convert every current production generator to v2 and remove the old format and
+catalog.
 
-At the end of this part, the old generator format and old catalog implementation are removed.
+This part converts current repository data only. Historical
+`JDR_RANDOM_OLD.md` content is migrated in Parts 13–20.
 
-## 3.2 Conversion Scope
+## 3.2 Conversion
 
-Convert every existing English and French generator file into the target directory tree.
+For every current English and French file:
 
-For every generator:
+- assign stable generator ID;
+- assign stable entry IDs;
+- assign kind and visibility;
+- define entry schema;
+- preserve current weights;
+- preserve current localized content;
+- preserve atomic field groups;
+- align locales.
 
-- assign a stable generator `id`;
-- assign a stable entry `id` to every entry;
-- assign `kind`;
-- assign `visibility`;
-- define `entrySchema`;
-- preserve existing weights;
-- preserve existing localized output;
-- preserve related fields within one entry;
-- keep English and French entries aligned.
+## 3.3 Placement
 
-## 3.3 Category Placement
+- autonomous `/gen` data → `categories/`;
+- internal character components → `components/`;
+- future creature source lists → `components/`;
+- modifiers → `modifiers/`;
+- composed generators → `templates/`.
 
-Initially classify existing generators conservatively:
-
-- autonomous `/gen` choices belong in `categories/`;
-- current creature lists intended for later `/gen-monster` belong in `components/` and use `visibility: "internal"` when they are ready to stop being public;
-- no generator should be converted into a modifier or template merely because it may eventually be used that way;
-- placement must reflect current intended behavior at cutover.
-
-Any intentional change in public `/gen` categories must be reported for review.
+Do not reclassify data speculatively.
 
 ## 3.4 Runtime Cutover
 
-In the same approved part:
+Update:
 
-- update `/gen` to use the v2 catalog;
-- update autocomplete to use stable IDs and localized names correctly;
-- update `/gen-char` generator lookups;
-- update required-file checks;
-- update localization checks;
-- update help and tests;
-- update any direct generator imports;
-- remove the old catalog;
-- remove old API overloads;
-- remove old-format fixture support.
+- `/gen`;
+- autocomplete;
+- `/gen-char`;
+- required-file checks;
+- localization checks;
+- help and tests;
+- direct imports;
+- runtime reload behavior.
 
-No runtime code may continue accepting v1 generator files.
+Remove:
 
-## 3.5 Behavioral Compatibility
+- old catalog;
+- v1 parser;
+- old API overloads;
+- old fixtures.
 
-Preserve, unless explicitly reviewed:
+No runtime v1 support remains.
 
-- existing public generator concepts;
-- existing weights;
-- existing character-generation source data;
-- existing English and French display text;
-- existing `/gen` command behavior;
-- existing `/gen-char` behavior.
+## 3.5 Compatibility
 
-Stable IDs replace name-derived identifiers internally.
+Preserve current behavior unless explicitly changed:
 
-## 3.6 Tests
+- public categories;
+- weights;
+- character source data;
+- localized output;
+- `/gen`;
+- `/gen-char`.
 
-Test:
+## 3.6 Tests and Completion
 
-- every production generator loads;
-- no v1 generator file remains;
-- every English file has a valid French counterpart;
-- all IDs are unique;
-- all entry IDs align across locales;
-- `/gen` autocomplete lists only intended public generators;
-- weighted outputs remain correct;
-- `/gen-char` still resolves all required sources;
-- all required-file and architecture checks use the new layout.
+Test all production generators, ID uniqueness, parity, autocomplete visibility,
+weighted behavior, and `/gen-char` dependencies.
 
-## 3.7 Completion Criteria
-
-Part 3 is complete when:
-
-- all repository generator data is v2;
-- every internal caller uses the v2 API;
-- the old catalog and old format support are removed;
-- `/gen` and `/gen-char` work;
-- the complete test suite passes.
+Part 3 is complete when only v2 data and APIs remain and the full suite passes.
 
 Stop and wait for confirmation.
 
@@ -690,17 +673,53 @@ Stop and wait for confirmation.
 
 ## 4.1 Objective
 
-Add structured generator resolution and recursive templates without adding modifiers or creature persistence.
+Return structured results and support recursive template references, including
+both random and fixed entry selection.
 
-## 4.2 Template Entries
-
-Example:
+## 4.2 Random Reference
 
 ```json
 {
-  "id": "recover-item-before-rivals",
+  "person": {
+    "generator": "background",
+    "select": "fields.Name"
+  }
+}
+```
+
+This chooses a random entry from `background`.
+
+## 4.3 Fixed Entry Reference
+
+```json
+{
+  "person": {
+    "generator": "background",
+    "entry": "criminal",
+    "select": "fields.Name"
+  }
+}
+```
+
+This resolves the fixed stable entry `criminal`.
+
+`entry` is optional. When present:
+
+- no random entry selection occurs;
+- the entry must exist;
+- provenance still records generator and entry IDs;
+- localized content is read from the active locale.
+
+This capability is required for quest roles such as criminal, merchant, noble,
+official, or scholar.
+
+## 4.4 Template Example
+
+```json
+{
+  "id": "recover-item-before-rival",
   "weight": 2,
-  "template": "Recover {{item}} from {{site}} before {{rival}} reaches it.",
+  "template": "Recover {{item}} from {{site}} before {{rival}} takes it.",
   "references": {
     "item": {
       "generator": "inventory",
@@ -708,19 +727,21 @@ Example:
     },
     "site": {
       "generator": "dungeon",
-      "select": "display"
+      "select": "fields.Name"
     },
     "rival": {
-      "generator": "faction",
+      "generator": "background",
+      "entry": "criminal",
       "select": "fields.Name"
     }
   }
 }
 ```
 
-Reference marker names are technical and identical across locales.
+Reference marker names describe their template role rather than merely repeating
+the source generator ID.
 
-## 4.3 Selectors
+## 4.5 Selectors
 
 Support:
 
@@ -729,11 +750,7 @@ Support:
 - `fields.<FieldName>`;
 - `display`.
 
-`display` requests the primary representation appropriate to the selected entry shape.
-
-## 4.4 Weighted Source Selection
-
-A reference may choose between generators:
+## 4.6 Weighted Source Selection
 
 ```json
 {
@@ -748,11 +765,10 @@ A reference may choose between generators:
 }
 ```
 
-Source selection weight and entry selection weight are independent.
+A fixed `entry` may be used only when one concrete generator is identified,
+unless a future explicit schema defines an entry for every `oneOf` source.
 
-## 4.5 Resolver API
-
-Replace direct generation with:
+## 4.7 Resolver API
 
 ```js
 generate(categoryId, locale, {
@@ -761,135 +777,72 @@ generate(categoryId, locale, {
 } = {})
 ```
 
-The old `generate(id, locale, random)` form is not retained.
+The old API is not retained.
 
-## 4.6 Structured Result
+## 4.8 Structured Result
 
-The resolver returns structured provenance:
+Results retain:
 
-```js
-{
-  category: {
-    id: 'quest',
-    name: 'Quests',
-    locale: 'en',
-  },
-  entryId: 'recover-item-before-rivals',
-  output: {
-    type: 'template',
-    text: 'Recover the sealed grimoire from the abandoned prison...',
-    references: {
-      item: {
-        generatorId: 'inventory',
-        entryId: 'sealed-grimoire',
-      },
-      site: {
-        generatorId: 'dungeon',
-        entryId: 'abandoned-prison',
-      },
-      rival: {
-        generatorId: 'faction',
-        entryId: 'black-banner-company',
-      },
-    },
-    modifiers: [],
-  },
-}
-```
+- source generator ID;
+- source generator localized name;
+- source entry ID;
+- output type;
+- localized output;
+- resolved reference generator and entry IDs;
+- selected modifiers, initially empty.
 
-Text and structured entries must also produce structured output instead of only returning a raw string.
+## 4.9 Services
 
-## 4.7 Services
+`generatorResolver` orchestrates resolution.
 
-Introduce clear responsibility boundaries:
-
-`generatorResolver`:
-
-- orchestrates resolution;
-- returns structured results.
-
-`weightedSelector`:
-
-- performs weighted selection;
-- accepts injected randomness;
-- knows nothing about Discord or persistence.
+`weightedSelector` performs weighted selection.
 
 `referenceResolver`:
 
-- resolves template references;
-- selects weighted sources;
+- resolves random entries;
+- resolves fixed entries;
 - applies selectors;
-- tracks the reference stack;
-- enforces maximum depth;
-- retains source IDs.
+- resolves weighted sources;
+- detects cycles;
+- enforces depth;
+- preserves provenance.
 
-`generatorResponses`:
+`generatorResponses` renders Discord output.
 
-- converts structured output into Discord responses.
+## 4.10 Validation and Tests
 
-## 4.8 Cycle Protection
+Reject:
 
-The resolver must:
-
-- track visited generator IDs in the current resolution chain;
-- reject recursive cycles with a precise error;
-- enforce `maxDepth`;
-- not silently truncate invalid templates.
-
-## 4.9 Localization Validation
-
-Extend parity checks to require identical:
-
-- template markers;
-- reference names;
-- generator IDs;
-- selectors;
-- weighted source definitions.
-
-Only template text is translated.
-
-## 4.10 Tests
-
-Test:
-
-- each selector;
-- nested templates;
-- `oneOf` selection;
-- independent source and entry weights;
-- cycle detection;
-- maximum depth;
-- missing references;
-- unused references;
+- missing generators;
+- missing fixed entry IDs;
 - invalid selectors;
-- structured provenance;
-- deterministic cross-locale conceptual results;
-- Discord rendering separated from resolution.
+- unused markers;
+- missing references;
+- cycles;
+- excessive depth;
+- locale differences in references, fixed entry IDs, and source weights.
+
+Test nested templates, every selector, fixed references, random references,
+`oneOf`, cycles, provenance, and deterministic cross-locale selection.
 
 ## 4.11 Completion Criteria
 
-Part 4 is complete when:
-
-- templates resolve recursively;
-- `/gen` can display resolved templates;
-- structured output retains all selected IDs;
-- no modifier selection exists yet;
-- no creature model or save work has been included.
+Templates resolve into structured output and `/gen` renders them. Modifiers and
+creatures remain outside this part.
 
 Stop and wait for confirmation.
 
 ---
 
-# Part 5 — Generic Modifier Selection
+# Part 5 — Descriptive Modifier Selection
 
 ## 5.1 Objective
 
-Add generic modifier declaration and selection to the resolver.
+Support independent descriptive modifiers.
 
-This part selects and returns modifiers but does not interpret creature-specific mechanical effects.
+Modifiers are narrative additions only.
 
-## 5.2 Modifier Generator
-
-Example:
+## 5.2 Modifier Envelope
 
 ```json
 {
@@ -898,7 +851,7 @@ Example:
   "kind": "modifier",
   "visibility": "internal",
   "name": "Creature modifiers",
-  "description": "Independent alterations applied to generated creatures",
+  "description": "Descriptive variations for generated creatures",
   "appliesTo": [
     "animal",
     "monster",
@@ -915,11 +868,35 @@ Example:
 }
 ```
 
-`appliesTo` controls modifier compatibility.
+## 5.3 Modifier Entry
 
-It is not used by statistical profiles.
+```json
+{
+  "id": "gigantic",
+  "weight": 1,
+  "fields": {
+    "Name": "Gigantic",
+    "Description": "The creature is much larger and physically stronger."
+  }
+}
+```
 
-## 5.3 Modifier Request
+Current modifier entries must not contain:
+
+- `mechanics`;
+- statistic changes;
+- traits to merge into the base result;
+- armor changes;
+- resource changes;
+- RULE assignment;
+- status-effect assignment;
+- equipment generation;
+- executable behavior.
+
+Additional display-only fields may exist only when declared by the entry schema
+and never interpreted mechanically.
+
+## 5.4 Modifier Request
 
 ```json
 {
@@ -938,68 +915,59 @@ It is not used by statistical profiles.
 
 Rules:
 
-- `chance` is evaluated once for each request;
+- evaluate `chance` once;
 - `count.min` and `count.max` are inclusive;
-- the selected count is random inside the range;
-- the same modifier entry cannot be selected twice in one resolution;
-- the modifier generator must include the source generator in `appliesTo`;
-- selected modifiers remain distinct from the base result;
-- selected modifiers are included in structured output.
+- choose the count randomly;
+- do not select the same entry twice;
+- validate `appliesTo`;
+- retain modifiers separately from the base result.
 
-## 5.4 Descriptive Output
+## 5.5 Structured Modifier Result
 
-At this stage a modifier may contain localized fields such as:
+At minimum:
 
-```json
+```js
 {
-  "id": "gigantic",
-  "weight": 1,
-  "fields": {
-    "Name": "Gigantic",
-    "Description": "The creature is much larger and physically stronger."
-  }
+  generatorId: 'creature-modifier',
+  entryId: 'gigantic',
+  name: 'Gigantic',
+  description: 'The creature is much larger and physically stronger.',
 }
 ```
 
-Mechanical properties may already be accepted and preserved as technical data for future use, but they are not applied to entities in Part 5.
+The description is guidance for the GM. It does not alter any generated field.
 
-The generic resolver must not know about `Creature`, statistics, RULEs, or save files.
+## 5.6 Explicit Non-Effects
 
-## 5.5 Validation
+Selecting a modifier never changes:
 
-Reject:
+- level;
+- statistics;
+- derived values;
+- HP, AR, AP, or MD;
+- natural armor;
+- base traits;
+- RULEs;
+- status effects;
+- equipment;
+- inventory;
+- entity type.
 
-- invalid `appliesTo`;
-- references to missing modifier generators;
-- modifier generators targeting absent categories;
-- invalid chances;
-- invalid count ranges;
-- counts greater than available unique entries;
-- localized incompatibility;
-- duplicate selections.
+`RULE Bearer` remains a descriptive result only.
 
-## 5.6 Tests
+## 5.7 Validation and Tests
 
-Test:
+Reject malformed compatibility, chance, count, duplicate selections, invalid
+weights, and any modifier mechanical field.
 
-- chance boundaries;
-- count boundaries;
-- unique selection;
-- weighted modifier selection;
-- target compatibility;
-- no selected modifiers when chance fails;
-- selected modifiers retained separately;
-- deterministic results;
-- localization parity.
+Test chance boundaries, count boundaries, uniqueness, compatibility,
+deterministic selection, structured records, and proof that base output is not
+mutated.
 
-## 5.7 Completion Criteria
+## 5.8 Completion Criteria
 
-Part 5 is complete when:
-
-- generic resolver results can contain selected modifiers;
-- modifiers remain descriptive and structured;
-- no statistic changes, traits, or RULEs are applied yet;
-- no creature code depends on the resolver yet.
+Generic structured results may contain descriptive modifiers. No creature code
+or mechanical modifier behavior is introduced.
 
 Stop and wait for confirmation.
 
@@ -1009,13 +977,9 @@ Stop and wait for confirmation.
 
 ## 6.1 Objective
 
-Extract common combat state and behavior from `Character` without introducing `Creature` yet.
+Extract shared combat state from `Character` without adding `Creature`.
 
-Existing character save structure and behavior must remain compatible.
-
-## 6.2 Model Hierarchy
-
-Target hierarchy:
+## 6.2 Hierarchy
 
 ```text
 Combatant
@@ -1023,11 +987,11 @@ Combatant
 └── Creature
 ```
 
-Only `Combatant` and the refactored `Character` are implemented in this part.
+Only `Combatant` and the refactored `Character` are implemented here.
 
-## 6.3 `Combatant` Responsibilities
+## 6.3 Shared State
 
-`Combatant` contains common state:
+`Combatant` contains:
 
 - immutable entity key;
 - immutable concrete entity type;
@@ -1036,32 +1000,20 @@ Only `Combatant` and the refactored `Character` are implemented in this part.
 - seven base statistics;
 - initiative;
 - reflexes;
-- resources:
-  - HP;
-  - AR;
-  - AP;
-  - MD;
+- HP, AR, AP, and MD;
 - personality when present;
 - RULEs;
 - status effects;
 - equipment;
 - inventory;
-- encumbrance.
+- encumbrance;
+- shared combat and turn behavior.
 
-It may provide common model-level behavior required by existing character operations.
+It does not depend on Discord, generation, rendering, or persistence.
 
-It must not:
+## 6.4 Character State
 
-- depend on Discord;
-- choose generator entries;
-- render responses;
-- write files;
-- contain character-specific fields;
-- contain creature-specific fields.
-
-## 6.4 `Character` Responsibilities
-
-`Character` extends `Combatant` with:
+`Character` adds:
 
 - first name;
 - last name;
@@ -1073,83 +1025,49 @@ It must not:
 - goals;
 - talents.
 
-`Character.fromSave()` remains capable of hydrating existing character saves.
+Existing hydration, display name, and serialization remain compatible.
 
-`displayName` remains appropriate to characters.
+## 6.5 Shared Mechanics
 
-## 6.5 Shared Mechanics Extraction
-
-Move or consolidate pure shared mechanics so they are not character-specific:
+Extract or consolidate:
 
 - statistic creation and validation;
-- initiative and reflexes from Speed;
-- maximum HP;
-- maximum AP;
-- maximum MD;
-- resource creation;
-- resource recalculation;
+- initiative and reflexes;
+- HP, AP, and MD maxima;
+- resource creation and recalculation;
 - encumbrance base maximum;
-- common damage, healing, and turn behavior where already applicable.
-
-## 6.6 Derived Mechanics
+- common damage, healing, armor restoration, and turn behavior.
 
 ```text
 initiative = speed
 reflexes = speed
+
+maximum HP =
+  constitution × 10 × (1 + 0.2 × (level - 1))
+
+maximum AP:
+  level 1–3 = 4
+  level 4–6 = 5
+  level 7–9 = 6
+  level 10  = 8
+
+maximum MD = speed × 0.5
 ```
 
-Maximum HP:
+Existing rounding and current-resource adjustment policies remain authoritative.
 
-```text
-constitution × 10 × (1 + 0.2 × (level - 1))
-```
+## 6.6 Save Compatibility
 
-Maximum AP:
+Existing character saves must load without a newly required discriminator.
+Runtime may expose `entityType: "character"` while serialization preserves the
+current schema.
 
-```text
-level 1–3: 4
-level 4–6: 5
-level 7–9: 6
-level 10: 8
-```
+## 6.7 Tests and Completion
 
-Maximum MD:
+Test current saves, defaults, serialization, display, shared mechanics, and all
+existing character operations.
 
-```text
-speed × 0.5
-```
-
-Existing project rounding and resource-adjustment policies remain authoritative.
-
-## 6.7 Save Compatibility
-
-Do not require existing character saves to contain a new discriminator merely to load successfully unless a controlled character save migration is explicitly approved.
-
-The runtime model may expose `entityType: "character"` while serialization continues to preserve the established save schema.
-
-No creature save schema is introduced in this part.
-
-## 6.8 Tests
-
-Test:
-
-- existing character save hydration;
-- unchanged character serialization;
-- unchanged defaults;
-- unchanged display names;
-- shared mechanics;
-- existing damage, healing, and turn behavior;
-- character validation;
-- all existing character commands.
-
-## 6.9 Completion Criteria
-
-Part 6 is complete when:
-
-- `Character` inherits shared combat state;
-- existing character behavior and saves remain compatible;
-- no `Creature` model exists yet;
-- no command or persistence generalization has been included.
+No creature, persistence generalization, or command changes are included.
 
 Stop and wait for confirmation.
 
@@ -1159,93 +1077,47 @@ Stop and wait for confirmation.
 
 ## 7.1 Objective
 
-Generalize persistence foundations and introduce an entity application facade while supporting characters only.
+Generalize working persistence infrastructure while supporting characters only.
 
-This proves the abstraction before a second persistent model is added.
+## 7.2 Reusable Foundations
 
-## 7.2 Persistence Foundations
+Extract or parameterize where appropriate:
 
-Generalize character-specific infrastructure where appropriate:
-
-- per-key operation queue;
+- per-key operation queues;
 - atomic JSON publication;
 - history transactions;
-- rollback behavior;
-- permanent deletion transactions;
-- common load-error reporting patterns.
+- rollback;
+- permanent deletion;
+- load-error reporting.
 
-Do not rewrite working atomic mechanisms without a concrete need. Extract or parameterize reusable behavior while preserving character behavior.
+Do not rewrite proven atomic behavior without need.
 
-## 7.3 Application Facade
+## 7.3 `entityApplicationService`
 
-Add `entityApplicationService`.
-
-Initially it resolves characters only, but its interface must support later delegation by concrete model.
+Initially resolves characters only.
 
 Responsibilities:
 
 1. resolve an entity key;
-2. identify the concrete model;
-3. delegate to the correct store;
+2. identify concrete model;
+3. delegate to concrete store;
 4. invoke shared mechanics;
 5. invoke concrete validation;
-6. centralize common application operations.
+6. coordinate common operations.
 
-Possible target:
+## 7.4 Operations
 
-```text
-entityApplicationService
-└── characterStore
-```
+Prepare entity-neutral retrieval, creation, update, deletion, damage, healing,
+end turn, history, and undo.
 
-Part 8 later adds `creatureStore`.
+Commands are not switched yet.
 
-## 7.4 Key Semantics
+## 7.5 Tests and Completion
 
-Prepare for one global `EntityKey` domain.
+Test unchanged character behavior, atomicity, history, rollback, concurrency,
+facade delegation, and errors.
 
-In Part 7 only character keys exist, so behavior remains unchanged.
-
-The queue must be entity-key based rather than permanently character-specific.
-
-## 7.5 Operations
-
-Route or expose entity-neutral service operations for:
-
-- retrieval;
-- creation;
-- update;
-- deletion;
-- damage;
-- healing;
-- end turn;
-- history;
-- undo.
-
-Commands are not switched in this part.
-
-## 7.6 Tests
-
-Test:
-
-- existing character create/update/delete;
-- atomic writes;
-- history publication;
-- rollback;
-- undo;
-- concurrent operations on one key;
-- independent operations on different keys;
-- facade delegation;
-- unchanged character errors and permissions where service-owned.
-
-## 7.7 Completion Criteria
-
-Part 7 is complete when:
-
-- character persistence works through reusable entity foundations;
-- current commands still behave normally;
-- no creature store exists;
-- no command schema is changed.
+No creature store or command schema change is included.
 
 Stop and wait for confirmation.
 
@@ -1255,22 +1127,20 @@ Stop and wait for confirmation.
 
 ## 8.1 Objective
 
-Add a complete persistent `Creature` model and store without random creature generation or `/gen-monster`.
+Add complete creature persistence without random creature generation.
 
-A creature must be manageable through services and tests before generation is introduced.
-
-## 8.2 `Creature` Model
+## 8.2 Creature Model
 
 `Creature` extends `Combatant` with:
 
 - name;
 - description;
-- source creature category when generated;
-- source entry ID when generated;
-- statistical profile ID;
+- optional source category;
+- optional source entry ID;
+- optional statistical profile ID;
 - natural armor percentage;
-- creature traits;
-- applied modifiers.
+- intrinsic creature traits;
+- descriptive applied modifiers.
 
 Persistent model types are exactly:
 
@@ -1279,16 +1149,9 @@ character
 creature
 ```
 
-`animal`, `monster`, and `companion` are generator source categories, not model types.
+`animal`, `monster`, and `companion` are source categories, not entity types.
 
-`Creature` provides:
-
-- hydration;
-- validation;
-- `displayName`;
-- serialization through its save schema.
-
-## 8.3 Creature Save Layout
+## 8.3 Storage
 
 ```text
 save/
@@ -1301,111 +1164,58 @@ save/
         └── <EntityKey>.json
 ```
 
-Existing character paths do not change.
+Character paths remain unchanged.
 
 ## 8.4 Complete Creature Save
 
-A creature save stores final state rather than generation instructions.
-
-It contains at least:
+Store final state:
 
 - schema version;
-- entity type;
-- entity key;
+- entity type and key;
 - creator ID;
 - level;
-- name;
-- description;
-- optional source category;
-- optional source entry ID;
-- optional statistical profile ID;
+- name and description;
+- optional source category, entry ID, and profile ID;
 - final statistics;
-- derived statistics or resources according to the established save model;
-- current and maximum resources;
-- natural armor percentage;
-- traits;
-- RULEs;
-- status effects;
-- applied modifiers;
+- derived resources;
+- natural armor;
+- intrinsic traits;
+- fixed RULEs;
+- descriptive status effects;
+- descriptive modifier records;
 - equipment;
 - inventory;
 - encumbrance.
 
-Loading never reruns random generation.
+Loading never regenerates data.
 
-Future changes to profiles or generator data do not alter an existing creature save.
+## 8.5 Store and Key Uniqueness
 
-## 8.5 Creature Store
+Add creature create, retrieve, list, update, delete, history, undo, and
+load-error handling.
 
-Add:
+Character and creature keys share one uniqueness domain.
 
-- exclusive creature creation;
-- creature retrieval;
-- creature listing;
-- creature update;
-- creature deletion;
-- creature history;
-- creature undo;
-- creature load-error handling.
-
-Use the shared atomic and transaction foundations from Part 7.
-
-## 8.6 Global Key Uniqueness
-
-An `EntityKey` must be globally unique.
-
-A character and creature cannot share the same key.
-
-Creation must check both stores as one operation protected by the common key queue.
-
-## 8.7 Atomicity and Concurrency
-
-Preserve:
+All creation and mutation guarantees use the common per-key queue:
 
 - exclusive creation;
 - atomic save publication;
 - atomic history publication;
-- serialized mutations per key;
-- rollback after failed writes;
-- no partial visible state;
-- correct concrete schema for history.
-
-Undo must never change an entity from one concrete model to the other.
-
-## 8.8 Blank Creature Creation
-
-Provide a service-level way to create a valid blank creature for tests and later command use.
-
-Do not add `/gen-monster`.
-
-`/add type:creature` may remain deferred to Part 9 so command generalization is performed together.
-
-## 8.9 Tests
-
-Test:
-
-- creature hydration and validation;
-- creature defaults;
-- save and reload;
-- global key collision with a character;
-- exclusive creation;
-- update and history;
+- serialized mutations;
 - rollback;
-- undo;
-- deletion;
-- invalid concrete discriminator;
-- wrong-schema history;
-- loading without regeneration;
-- profile changes not affecting saved creatures.
+- no partial visibility.
 
-## 8.10 Completion Criteria
+Undo cannot change concrete type.
 
-Part 8 is complete when:
+## 8.6 Blank Creature
 
-- a complete creature can be managed through services;
-- all persistence guarantees work;
-- no random creature archetype is required;
-- no existing command has yet been generalized.
+Provide service-level creation of a valid blank creature. Command support waits
+until Part 9.
+
+## 8.7 Tests and Completion
+
+Test model validation, save/reload, global collisions, concurrency, history,
+rollback, undo, deletion, wrong schemas, and loading without regeneration.
 
 Stop and wait for confirmation.
 
@@ -1415,11 +1225,9 @@ Stop and wait for confirmation.
 
 ## 9.1 Objective
 
-Generalize existing character management commands to operate on both `Character` and `Creature`.
+Generalize management commands for characters and creatures.
 
-Generation commands remain specialized.
-
-## 9.2 Target Commands
+## 9.2 Commands
 
 ```text
 /gen-char character-key:<new key> [level] [background]
@@ -1435,21 +1243,15 @@ Generation commands remain specialized.
 /undo entity-key:<key>
 ```
 
-`/gen-monster` remains unimplemented until Part 12.
+`/gen-monster` remains absent until Part 12.
 
 ## 9.3 `/add`
 
 `type` defaults to `character`.
 
-This option chooses the concrete persistent model only at creation.
-
-The type is immutable afterward.
-
-A blank creature created by `/add` must satisfy the creature schema and remain editable through common commands.
+Concrete type is immutable.
 
 ## 9.4 Field Catalog
-
-The canonical editable/readable field catalog declares compatibility:
 
 ```js
 {
@@ -1468,87 +1270,29 @@ The canonical editable/readable field catalog declares compatibility:
 }
 ```
 
-This command-field `appliesTo` is unrelated to statistical profiles.
+Field compatibility is unrelated to statistical profiles or modifier
+`appliesTo`.
 
-After resolving the entity:
+## 9.5 Shared Operations
 
-- autocomplete exposes compatible fields only;
-- `/get` rejects incompatible fields;
-- `/set` rejects incompatible fields.
+Route damage, healing, armor restoration, end turn, deletion, history, undo,
+and common reads/writes through shared services.
 
-## 9.5 Statistic Overrides
+Statistic updates recalculate dependencies and publish history atomically.
 
-Creature statistics may be changed through `/set`.
+## 9.6 Autocomplete and Permissions
 
-A statistic update:
+Merge character and creature keys.
 
-- validates the new value;
-- recalculates dependent values;
-- follows the existing current-resource adjustment policy;
-- creates history;
-- commits atomically.
+Expose only fields compatible with the resolved entity.
 
-The generation profile does not restrict later edits.
+Preserve creator, DM, moderator where applicable, and real server-owner
+authorization.
 
-## 9.6 Shared Operations
+## 9.7 Tests and Completion
 
-The following operate through `Combatant` and the entity facade:
-
-- damage;
-- healing;
-- armor restoration;
-- end-turn reset;
-- deletion;
-- history;
-- undo;
-- common field reads and writes.
-
-Avoid duplicate character and creature implementations inside every command.
-
-## 9.7 Autocomplete
-
-Autocomplete merges accessible keys from both stores.
-
-Display names may differ, but the stable entity key remains the command value.
-
-Load failures from one save must be reported without preventing valid entities from appearing where existing behavior supports graceful recovery.
-
-## 9.8 Permissions
-
-Preserve existing policy based on:
-
-- entity creator;
-- DM role;
-- real server owner;
-- any existing moderator-specific operation.
-
-Changing `character` terminology to `entity` must not weaken authorization.
-
-## 9.9 Tests
-
-Test every common command with:
-
-- a character;
-- a creature;
-- incompatible fields;
-- key autocomplete;
-- field autocomplete;
-- creator authorization;
-- DM authorization;
-- server-owner authorization;
-- unauthorized users;
-- history and undo;
-- statistic recalculation;
-- immutable entity type.
-
-## 9.10 Completion Criteria
-
-Part 9 is complete when:
-
-- common commands manage both entity types;
-- command implementations delegate through the entity facade;
-- `/gen-char` still works;
-- `/gen-monster` is still absent.
+Test each command with both types, incompatible fields, autocomplete,
+authorization, history, undo, recalculation, and immutable type.
 
 Stop and wait for confirmation.
 
@@ -1558,25 +1302,24 @@ Stop and wait for confirmation.
 
 ## 10.1 Objective
 
-Add structured creature source catalogs and generate complete unsaved base creatures without mechanical modifiers.
+Generate complete unsaved base creatures using internal source catalogs,
+profiles, intrinsic traits, fixed RULEs, and descriptive status effects.
 
-This part introduces creature-specific generation policy while reusing the shared profile allocator and shared mechanics.
-
-## 10.2 Internal Creature Categories
-
-Use internal structured generators:
+## 10.2 Source Categories
 
 - `animal`;
 - `monster`;
 - `companion`.
 
-They are source categories for `/gen-monster`, not persistent model types.
+They are internal component generators and distinct catalogs.
 
-Their final visibility is `internal`.
+A historical animal is assigned to `animal` or `companion` according to its
+intended role. Do not automatically duplicate the same entry in both.
 
-## 10.3 Narrative and Mechanical Separation
+A separately authored trained or bonded variant may exist when meaningfully
+different from the wild animal.
 
-Example:
+## 10.3 Entry Shape
 
 ```json
 {
@@ -1606,52 +1349,55 @@ Example:
       "chance": 0,
       "generator": "status-effect"
     }
-  }
+  },
+  "modifiers": [
+    {
+      "generator": "creature-modifier",
+      "chance": 0.25,
+      "count": {
+        "min": 1,
+        "max": 1
+      }
+    }
+  ]
 }
 ```
 
-`fields` contains localized narrative content.
+Modifier requests are selected and attached only in Part 11. They never have
+mechanical effects.
 
-`mechanics` contains technical data identical across locales.
+## 10.4 Requirements
 
-## 10.4 Required Properties
+Required:
 
-A creature archetype requires:
-
-- stable entry `id`;
+- ID;
 - `fields.Name`;
 - `fields.Description`;
 - `mechanics.statProfile`.
 
-## 10.5 Optional Properties
+Optional:
 
-A creature archetype may define:
+- weight;
+- intrinsic traits;
+- natural armor;
+- fixed RULEs;
+- initial status effect;
+- descriptive modifier requests.
 
-- `weight`, default `1`;
-- `fields.Traits`, default empty;
-- `mechanics.naturalArmorPercentage`, default `0`;
-- `mechanics.fixedRules`, default empty;
-- `mechanics.initialStatusEffect`, default chance `0`;
-- modifier requests, selected generically but applied mechanically only in Part 11.
+## 10.5 No Per-Creature Statistic Overrides
 
-## 10.6 No Per-Creature Statistic Overrides
+Entries do not define:
 
-Creature entries do not define:
-
-- fixed statistic blocks;
-- minimum overrides;
-- maximum overrides;
-- allocation-weight overrides;
+- fixed statistics;
+- per-stat minimums;
+- per-stat maximums;
+- per-stat weights;
 - HP multipliers;
-- alternative budget formulas.
+- alternative budgets.
 
-All base statistics come from the referenced shared profile.
+## 10.6 Profiles
 
-Later manual correction uses `/set`.
-
-## 10.7 Initial Profiles
-
-Add and tune the minimum profiles needed by the initial archetypes, such as:
+Initial reusable profiles may include:
 
 - `animal`;
 - `companion`;
@@ -1661,554 +1407,130 @@ Add and tune the minimum profiles needed by the initial archetypes, such as:
 - `boss`;
 - `elemental`.
 
-These names describe statistical distribution only.
+A profile changes distribution only.
 
-A `caster` profile does not grant magic.
+`caster` does not grant a RULE.
 
-A `boss` profile does not grant extra budget and does not create an encounter rating.
+`boss` does not grant extra budget or create challenge rating.
 
-All profiles use the normal level budget.
-
-## 10.8 Creature Level
-
-A generated creature has a level from `1` to `10`.
-
-The generation service accepts an explicitly chosen level or a randomly chosen level. Command integration is deferred to Part 12.
-
-## 10.9 Creature RULE Policy
+## 10.7 RULE Policy
 
 Creature RULE assignment is explicit and independent from Intelligence.
 
-A high-Intelligence creature receives no RULE automatically.
-
-Character Intelligence thresholds are never evaluated during creature generation.
-
-### Fixed RULEs
-
-An archetype may always grant a specific RULE:
-
-```json
-{
-  "fixedRules": [
-    {
-      "ruleId": "fire",
-      "level": 1
-    }
-  ]
-}
-```
+Only `mechanics.fixedRules` grants a RULE during creature generation.
 
 A fixed RULE:
 
-- references a stable entry ID from the `rules` generator;
-- uses localized name and description;
-- has an explicit level;
+- references a stable `rules` entry ID;
+- has explicit level;
 - is always added;
-- may exist with low Intelligence;
-- is included in the final creature object and later save.
+- may be assigned to low-Intelligence creatures;
+- is persisted.
 
-## 10.10 Base Generation Flow
+Modifiers never grant RULEs.
+
+## 10.8 Status Effects
+
+An initial status effect:
+
+- is selected only when its configured chance succeeds;
+- is persisted as localized descriptive data;
+- is interpreted by the GM;
+- does not automatically alter statistics, actions, resources, or duration.
+
+## 10.9 Base Generation Flow
 
 ```text
 level
-→ creature source category
+→ source category
 → creature archetype
 → statistical profile
-→ weighted statistic allocation
-→ base identity
-→ base traits
+→ statistic allocation
+→ identity and intrinsic traits
 → fixed RULEs
-→ shared derived statistics and resources
+→ derived statistics and resources
 → natural armor
-→ optional initial status effect
+→ optional descriptive status effect
 → final Creature validation
 ```
 
-Modifier mechanical application is excluded until Part 11.
+## 10.10 Generation Service
 
-## 10.11 Shared Resources
+`creatureGenerationService`:
 
-Generate:
+- selects archetype;
+- loads profile;
+- generates statistics;
+- resolves intrinsic traits;
+- resolves fixed RULEs;
+- resolves optional descriptive status effects;
+- calculates resources;
+- constructs an unsaved creature.
 
-- initiative from Speed;
-- reflexes from Speed;
-- HP from Constitution and level;
-- AP from level;
-- MD from Speed;
-- AR from natural armor percentage and maximum HP.
+It does not write files or depend on Discord.
 
-Generated creatures have empty equipment and inventory by default.
+## 10.11 Validation and Tests
 
-## 10.12 Creature Generation Service
+Validate categories, profiles, names, descriptions, armor, trait IDs, fixed
+RULE structures, RULE IDs and levels, status-effect configuration, and locale
+mechanical parity.
 
-Add a pure or mostly pure `creatureGenerationService` responsible for:
+Test each category, levels, profile selection, traits, fixed RULEs with low
+Intelligence, no RULE from high Intelligence, resources, armor, status effects,
+empty equipment/inventory, and deterministic generation.
 
-- selecting the source archetype;
-- loading the statistical profile;
-- generating base statistics;
-- resolving base traits;
-- resolving fixed RULEs;
-- resolving optional initial status effects;
-- calculating common resources;
-- constructing and validating an unsaved `Creature`.
+## 10.12 Completion Criteria
 
-It does not write files and does not depend on Discord.
-
-## 10.13 Validation
-
-Reject:
-
-- unsupported source categories;
-- missing names or descriptions;
-- missing profiles;
-- invalid natural armor percentages;
-- duplicate trait IDs;
-- malformed fixed RULEs;
-- duplicate fixed RULE IDs;
-- unknown RULE IDs;
-- invalid RULE levels;
-- malformed initial status-effect configuration;
-- localized mechanical differences.
-
-## 10.14 Tests
-
-Test:
-
-- each source category;
-- explicit and random levels;
-- profile resolution;
-- missing profiles;
-- base traits;
-- low-Intelligence creature with a fixed RULE;
-- high-Intelligence creature with no fixed RULE;
-- resource calculations;
-- natural armor;
-- initial status-effect chance;
-- empty equipment and inventory;
-- complete unsaved creature validation;
-- deterministic generation.
-
-## 10.15 Completion Criteria
-
-Part 10 is complete when:
-
-- a complete base creature can be generated in memory;
-- fixed RULEs work independently from Intelligence;
-- no mechanical modifier effect is applied yet;
-- no creature is created through a Discord generation command.
+A complete base creature can be generated in memory. No modifier is attached
+yet and no Discord generation command exists.
 
 Stop and wait for confirmation.
 
 ---
 
-# Part 11 — Mechanical Creature Modifiers
+# Part 11 — Descriptive Creature Modifier Integration
 
 ## 11.1 Objective
 
-Interpret the modifier data selected by the generic resolver and apply explicit mechanical effects to generated creatures.
+Attach selected descriptive modifiers to generated creatures without changing
+any other generated value.
 
-Modifiers may:
-
-- change statistics;
-- add traits;
-- explicitly add random RULEs.
-
-## 11.2 Narrative and Mechanical Modifier Shape
-
-Example:
-
-```json
-{
-  "id": "gigantic",
-  "weight": 1,
-  "fields": {
-    "Name": "Gigantic",
-    "Description": "The creature is much larger and physically stronger.",
-    "Traits": [
-      {
-        "id": "extended-reach",
-        "Name": "Extended Reach",
-        "Description": "The creature can threaten targets from farther away."
-      },
-      {
-        "id": "large-body",
-        "Name": "Large Body",
-        "Description": "The creature has difficulty moving through confined spaces."
-      }
-    ]
-  },
-  "mechanics": {
-    "statChanges": {
-      "constitution": 2,
-      "strength": 2,
-      "dexterity": -1,
-      "speed": -1
-    }
-  }
-}
-```
-
-Narrative fields are localized.
-
-Mechanical fields are identical across locales.
-
-## 11.3 Statistic Changes
-
-`mechanics.statChanges` contains integer deltas.
-
-Rules:
-
-- apply deltas after profile allocation;
-- apply selected modifiers cumulatively;
-- do not consume or refund profile budget;
-- constrain final statistics to the normal domain `4` through `20`;
-- calculate derived resources only after all statistic changes;
-- preserve modifier records separately from final statistics.
-
-## 11.4 Added Traits
-
-Base archetype traits are added first.
-
-Modifier traits are appended afterward.
-
-Traits use:
-
-```json
-{
-  "id": "extended-reach",
-  "Name": "Extended Reach",
-  "Description": "The creature can threaten targets from farther away."
-}
-```
-
-Trait IDs are technical and identical across locales.
-
-Names and descriptions are localized.
-
-Traits are deduplicated by stable ID.
-
-Validation should reject duplicate IDs inside one source definition. Runtime combination should avoid adding the same trait twice when separate valid sources produce it.
-
-## 11.5 RULE Bearer
-
-The RULE Bearer modifier explicitly adds a random RULE:
-
-```json
-{
-  "id": "rule-bearer",
-  "weight": 1,
-  "fields": {
-    "Name": "RULE Bearer",
-    "Description": "The creature manifests an additional random RULE.",
-    "Traits": [
-      {
-        "id": "rule-bearer",
-        "Name": "RULE Bearer",
-        "Description": "The creature possesses a magical mastery not normally associated with its species."
-      }
-    ]
-  },
-  "mechanics": {
-    "addRandomRules": {
-      "generator": "rules",
-      "count": 1,
-      "level": 1
-    }
-  }
-}
-```
-
-The added RULE:
-
-- is selected from the configured generator;
-- is added after fixed RULEs;
-- cannot duplicate an existing RULE;
-- uses the configured level;
-- is independent from Intelligence;
-- is persisted later as part of the creature sheet.
-
-No other modifier grants a RULE unless it explicitly declares `addRandomRules`.
-
-## 11.6 Application Order
-
-Final creature generation order:
+## 11.2 Integration Flow
 
 ```text
-level
-→ creature archetype
-→ statistical profile
-→ base statistic allocation
-→ base identity and traits
-→ fixed RULEs
-→ generic modifier selection
-→ modifier statistic changes
-→ modifier traits
-→ modifier random RULEs
-→ derived statistics and resources
-→ natural armor
-→ initial status effects
+base Creature generation
+→ evaluate modifier requests
+→ select compatible descriptive modifiers
+→ attach modifier records
 → final validation
 ```
 
-## 11.7 Applied Modifier Records
+Modifier selection may occur before final validation because modifier records
+are part of the final save, but no derived values are recalculated as a result.
 
-A creature retains every selected modifier as a distinct record containing at least:
+## 11.3 Persisted Record
+
+At minimum:
 
 - modifier generator ID;
 - modifier entry ID;
 - localized name;
 - localized description.
 
-This allows saved data and Discord output to distinguish the base creature from its modifiers.
+The record remains separate from:
 
-The final save may also store resolved added traits and RULEs as normal creature state.
-
-## 11.8 Validation
-
-Reject:
-
-- unknown statistics in `statChanges`;
-- non-integer deltas;
-- duplicate modifier trait IDs;
-- malformed random RULE configuration;
-- invalid count;
-- invalid RULE level;
-- missing RULE generator;
-- impossible unique RULE selection;
-- localized mechanical differences.
-
-## 11.9 Tests
-
-Test:
-
-- stat changes after base allocation;
-- cumulative modifier deltas;
-- legal final statistic bounds;
-- post-modifier derived resources;
-- base and modifier trait combination;
-- trait deduplication;
-- fixed RULE plus RULE Bearer;
-- random RULE excluding fixed RULEs;
-- random RULE level;
-- high Intelligence still granting nothing automatically;
-- applied modifier records;
-- deterministic modifier effects.
-
-## 11.10 Completion Criteria
-
-Part 11 is complete when:
-
-- generated in-memory creatures include mechanical modifier effects;
-- RULE Bearer works;
-- final resource values use modified statistics;
-- creature generation still has no Discord command integration.
-
-Stop and wait for confirmation.
-
----
-
-# Part 12 — `/gen-monster` Integration
-
-## 12.1 Objective
-
-Expose the completed creature-generation pipeline through Discord and create the generated creature atomically.
-
-## 12.2 Command
-
-```text
-/gen-monster creature-key:<new key> type:<monster|animal|companion> [level]
-```
-
-Parameters:
-
-- `creature-key` is required;
-- it must be globally unique;
-- `type` is required;
-- `type` selects an allowed internal source category;
-- `level` is optional;
-- supplied levels are integers from `1` to `10`;
-- omitted levels are randomly selected from `1` to `10`.
-
-The command name remains `/gen-monster` for animals and companions.
-
-## 12.3 Authorization
-
-Preserve the intended restriction to:
-
-- DM role;
-- real server owner;
-
-according to existing project authorization conventions.
-
-Generation authorization does not replace later creator/DM permissions on the saved entity.
-
-## 12.4 Command Flow
-
-```text
-/gen-monster
-  → creatureApplicationService.generateCreature(...)
-      → reserve and validate global EntityKey
-      → creatureGenerationService builds the complete Creature
-      → validate final Creature
-      → creatureStore publishes the save atomically
-  → creatureCommandResponses renders the localized sheet
-```
-
-The command must remain thin.
-
-It parses options, checks command-level permission, invokes the application service, and renders the response.
-
-It must not directly:
-
-- select generator entries;
-- calculate statistics;
-- apply modifiers;
-- resolve RULEs;
-- write files.
-
-## 12.5 Atomic Generation
-
-The key availability check and save publication must be protected by the shared per-key queue.
-
-Failure during generation, validation, or publication must leave:
-
-- no creature save;
-- no partial history;
-- no reserved key state;
-- no collision with a concurrent character creation.
-
-## 12.6 Generated Creature Contents
-
-A successfully generated and saved creature contains:
-
-- level;
-- seven final statistics;
-- initiative and reflexes;
-- complete HP, AR, AP, and MD;
-- source type;
-- source entry ID;
-- statistical profile ID;
-- name and description;
-- base traits;
-- modifier traits;
+- intrinsic creature traits;
 - fixed RULEs;
-- modifier-added RULEs;
-- optional initial status effects;
-- selected modifier records;
-- empty equipment and inventory by default;
-- creator and entity key.
+- status effects;
+- equipment;
+- statistics.
 
-It does not contain an encounter-power value.
+## 11.4 Non-Effects
 
-## 12.7 Response Rendering
+A selected modifier must leave all base creature fields unchanged except
+`appliedModifiers`.
 
-The localized response should clearly distinguish:
-
-- creature identity;
-- level;
-- statistics;
-- resources;
-- traits;
-- RULEs;
-- modifiers;
-- initial status effects when present.
-
-Rendering must respect Discord limits and use response-layer formatting rather than model formatting.
-
-## 12.8 Help and Autocomplete
-
-Add:
-
-- command registration;
-- localized command name/description where project conventions require it;
-- `type` autocomplete;
-- optional level constraints;
-- help text;
-- expected help order:
-  - `/gen`;
-  - `/gen-char`;
-  - `/gen-monster`.
-
-## 12.9 Tests
-
-Test:
-
-- command registration;
-- supported and unsupported types;
-- explicit and omitted level;
-- invalid levels;
-- authorization;
-- global key collision;
-- concurrent generation attempts;
-- atomic failure behavior;
-- successful save;
-- localized output;
-- output limits;
-- generated entity availability through common commands;
-- complete undo after later mutation.
-
-## 12.10 Completion Criteria
-
-Part 12 is complete when:
-
-- `/gen-monster` creates and saves complete creatures;
-- common commands immediately manage generated creatures;
-- all generation and persistence tests pass;
-- the architecture is functionally complete.
-
-Stop and wait for confirmation before content expansion.
-
----
-
-# Part 13 — Content Expansion
-
-## 13.1 Objective
-
-Expand and balance content only after the architecture is stable.
-
-This part should preferably be divided into multiple small data-focused tasks, each reviewed separately.
-
-## 13.2 Statistical Profiles
-
-Refine and balance profiles such as:
-
-- `character-balanced`;
-- `animal`;
-- `companion`;
-- `predator`;
-- `brute`;
-- `caster`;
-- `boss`;
-- `elemental`;
-- any additional distribution justified by several archetypes.
-
-Profiles remain reusable distributions, not entity classes.
-
-Avoid creating one profile for every individual creature unless its statistical distribution is genuinely reusable or structurally distinct.
-
-## 13.3 Creature Archetypes
-
-Expand:
-
-- animals;
-- monsters;
-- companions.
-
-For each entry define only what the architecture supports:
-
-- localized identity;
-- localized traits;
-- shared statistical profile;
-- natural armor;
-- fixed RULEs when intrinsic;
-- initial status-effect configuration when justified;
-- modifier requests.
-
-Do not add per-entry fixed statistics or profile overrides.
-
-## 13.4 Modifier Catalog
-
-Expand descriptive and mechanical modifiers such as:
+This includes modifiers named:
 
 - Alpha;
 - Hybrid;
@@ -2221,73 +1543,880 @@ Expand descriptive and mechanical modifiers such as:
 - Ectoplasmic;
 - Invisible;
 - RULE Bearer;
-- Equipped, when equipment behavior is explicitly designed.
+- Equipped.
 
-Each modifier must define concrete behavior rather than relying only on vague descriptive text.
+Their descriptions guide the GM only.
 
-## 13.5 Templates and References
+## 11.5 Tests
 
-Expand reusable composed generators such as:
+Given identical base-generation randomness, selecting a modifier must not alter:
 
+- statistics;
+- resources;
+- natural armor;
+- traits;
+- RULEs;
+- status effects;
+- equipment;
+- inventory.
+
+Test record persistence, localization, unique selection, compatibility, and
+reload stability.
+
+## 11.6 Completion Criteria
+
+Generated in-memory creatures retain descriptive modifier records. No modifier
+mechanics exist anywhere in the implementation.
+
+Stop and wait for confirmation.
+
+---
+
+# Part 12 — `/gen-monster` Integration
+
+## 12.1 Objective
+
+Expose complete creature generation through Discord and atomically create the
+save.
+
+## 12.2 Command
+
+```text
+/gen-monster creature-key:<new key> type:<monster|animal|companion> [level]
+```
+
+- key is required and globally unique;
+- type is required;
+- level is optional from `1` to `10`;
+- omitted level is random from `1` to `10`;
+- command name remains `/gen-monster` for all three source categories.
+
+## 12.3 Authorization
+
+Restrict generation to DM role and real server owner according to project
+policy.
+
+## 12.4 Flow
+
+```text
+/gen-monster
+  → creatureApplicationService.generateCreature(...)
+      → reserve and validate EntityKey
+      → creatureGenerationService builds the base Creature
+      → descriptive modifiers are selected and attached
+      → validate final Creature
+      → creatureStore publishes atomically
+  → creatureCommandResponses renders the localized sheet
+```
+
+The command only parses options, checks permission, calls the service, and
+renders the outcome.
+
+## 12.5 Atomicity
+
+Generation failure leaves:
+
+- no creature save;
+- no partial history;
+- no reserved key;
+- no cross-type collision.
+
+## 12.6 Saved Contents
+
+- level;
+- seven statistics;
+- initiative and reflexes;
+- HP, AR, AP, and MD;
+- source category and entry ID;
+- profile ID;
+- name and description;
+- intrinsic traits;
+- fixed RULEs;
+- optional descriptive status effects;
+- descriptive modifier records;
+- empty equipment and inventory by default;
+- creator and entity key.
+
+No modifier-derived trait, RULE, armor, equipment, statistic, or resource is
+stored.
+
+## 12.7 Rendering
+
+Clearly display identity, level, statistics, resources, intrinsic traits, fixed
+RULEs, status effects, and modifiers.
+
+Modifier descriptions must be visibly separate from base creature properties.
+
+## 12.8 Help, Autocomplete, and Tests
+
+Add command metadata, localized help, type autocomplete, level bounds, response
+tests, authorization tests, collision and concurrency tests, output-limit tests,
+and common-command integration.
+
+Expected help order:
+
+1. `/gen`;
+2. `/gen-char`;
+3. `/gen-monster`.
+
+## 12.9 Completion Criteria
+
+`/gen-monster` atomically saves complete creatures and all common commands manage
+them.
+
+Stop and wait for confirmation before historical migration.
+
+---
+
+# Part 13 — Historical Migration Inventory
+
+## 13.1 Objective
+
+Create a complete migration manifest for every reusable entry in
+`documentation/JDR_RANDOM_OLD.md`.
+
+No production data changes occur in this part.
+
+## 13.2 Covered Historical Sections
+
+Inventory:
+
+- regions;
+- settlements;
+- adventure sites;
+- buildings;
+- weapons;
+- inventory;
+- races;
+- named NPC material;
+- NPC ages;
+- NPC professions and statuses;
+- personalities;
+- status effects;
+- events;
+- animals;
+- criminals;
+- monsters;
+- RULEs;
 - quests;
-- locations;
-- factions;
-- encounters;
-- other combinations that benefit from references.
+- site modifiers;
+- monster modifiers.
 
-Avoid creating templates that merely concatenate unrelated random values without producing a coherent result.
+The historical statistics section remains documentation only and is not
+imported as generation data.
 
-## 13.6 `JDR_RANDOM_OLD.md`
+## 13.3 Manifest Fields
 
-Reusable content from `documentation/JDR_RANDOM_OLD.md` is imported only after the architecture is complete.
+For every historical entry record:
 
-This document does not define a detailed migration procedure.
+- historical section;
+- historical French name or value;
+- target generator;
+- proposed stable ID;
+- proposed kind and visibility;
+- add, merge, replace, rewrite, split, or reject;
+- conflicting current entry when any;
+- winning historical content;
+- preserved historical weight;
+- required English translation;
+- required references;
+- required profile for creatures;
+- required fixed RULEs for creatures;
+- animal versus companion classification;
+- notes requiring user review.
 
-Content import should be handled as later editorial/data tasks:
+## 13.4 Conflict Policy
 
-- select useful lists;
-- adapt them to the v2 schema;
-- assign stable IDs;
-- preserve meaningful historical weights;
-- rewrite entries when necessary for current rules and quality;
-- provide English and French versions with structural parity;
-- assign broad reusable profiles to creature entries;
-- add fixed RULEs only when intrinsic;
-- add modifier requests only when appropriate;
-- validate and review each content group independently.
+When a current entry and historical entry represent the same or conflicting
+concept:
 
-Do not mix a large old-content import with engine implementation.
+- keep one canonical entry;
+- historical name, description, limits, fields, and deliberate weight win;
+- retain an existing stable technical ID when that avoids unnecessary reference
+  churn and does not misrepresent the concept;
+- update localized content to the historical version;
+- remove the duplicate;
+- update all references.
 
-## 13.7 Balancing
+Current entries that are genuinely distinct remain.
 
-Balancing remains data work.
+## 13.5 Completion Criteria
 
-Review:
+Every historical entry is accounted for and no migration begins until the
+manifest is reviewed.
 
-- profile minimums;
-- profile maximums;
-- profile weights;
-- creature natural armor;
-- fixed RULE levels;
-- modifier statistic changes;
-- modifier frequency;
-- initial status-effect frequency.
+Stop and wait for confirmation.
+
+---
+
+# Part 14 — Direct Standalone-List Migration
+
+## 14.1 Objective
+
+Migrate historical lists that map directly to normal v2 generators.
+
+## 14.2 Lists
+
+Migrate:
+
+- `region`;
+- `settlement`;
+- `dungeon`;
+- `building`;
+- `weapons`;
+- `inventory`;
+- `race`;
+- `personality`;
+- `status-effect`;
+- `event`.
+
+Any additional directly compatible list found by the approved manifest may be
+included only when explicitly listed before implementation.
+
+## 14.3 Structured Locations
+
+Regions, settlements, dungeons, buildings, and events use stable IDs with
+`Name` and `Description`.
+
+## 14.4 Weapons and Inventory
+
+Preserve:
+
+- `Name`;
+- `Description`;
+- numeric `Encumbrance`.
+
+`Encumbrance` is technical and identical across locales.
+
+## 14.5 Races
+
+Preserve atomic fields:
+
+- `Name`;
+- `Description`;
+- `Skill Bonus`;
+- `Physical Ability`.
+
+Do not independently select racial fields.
+
+## 14.6 Personalities
+
+Preserve every historical personality entry and historical weight, including
+sensitive, clinical, dated, or provocative labels.
+
+Do not remove or neutralize entries during migration.
+
+Translate faithfully into English while preserving meaning and weight.
+
+## 14.7 Status Effects
+
+Migrate as descriptive `Name` and `Description` entries.
+
+Descriptions may suggest likely consequences, but no technical penalty,
+duration, trigger, or removal mechanic is added or enforced.
+
+## 14.8 Conflict Handling
+
+Apply historical precedence against current data for every migrated list.
+
+## 14.9 Tests and Completion
+
+Validate IDs, parity, weights, field schemas, output rendering, and complete
+manifest coverage for these sections.
+
+Stop and wait for confirmation.
+
+---
+
+# Part 15 — Humanoid and Background Migration
+
+## 15.1 Objective
+
+Migrate all historical humanoid material into character-generation components.
+
+## 15.2 Complete Humanoid Rule
+
+Only `/gen-char` creates complete humanoids.
+
+Do not create:
+
+- `npc.json` as a complete-person generator;
+- `criminal.json` as a complete-person generator;
+- an NPC model;
+- an NPC persistence store;
+- an NPC generation command;
+- a separate criminal entity type.
+
+## 15.3 Named Historical NPCs
+
+Historical named characters such as authored NPC examples are decomposed.
+
+Reusable personal names may be added to `name`.
+
+Useful concepts from their descriptions may be added to appropriate existing
+character components such as:
+
+- background detail;
+- personality;
+- goal;
+- backstory;
+- talent.
+
+Do not import a complete authored NPC as one generator entry unless the user
+later approves a separate authored-character feature.
+
+## 15.4 NPC Ages
+
+Merge reusable age concepts into the character-generation component that owns
+age or life-stage description, if such a component exists after v2 cutover.
+
+Do not create an NPC-only age generator.
+
+## 15.5 Professions and Statuses
+
+Map every historical profession or status to its appropriate broad background
+detail generator.
+
+Target background-detail IDs should follow the stable v2 naming convention,
+such as:
+
+- `background-criminal`;
+- `background-adventurer`;
+- `background-noble`;
+- `background-peasant`;
+- `background-artisan`;
+- `background-merchant`;
+- `background-scholar`;
+- `background-religious`;
+- `background-military`;
+- `background-outlander`;
+- `background-sailor`;
+- `background-performer`;
+- `background-servant`;
+- `background-official`;
+- `background-mage`;
+- `background-exile`;
+- `background-urchin`.
+
+A profession may appear in more than one background only when the resulting
+background meaning is genuinely different.
+
+## 15.6 Historical Criminal Entries
+
+The old criminal group descriptions must not remain a separate `criminal`
+generator.
+
+Rewrite them into individual-character concepts inside
+`background-criminal`, for example:
+
+- road brigand;
+- corrupt guard;
+- poacher;
+- enemy scout or infiltrator.
+
+Where a concept belongs more naturally to another background, place it there or
+create separate appropriate variants.
+
+## 15.7 `/gen-char` Integration
+
+All imported humanoid material must be reachable through the existing
+`background` option and normal `/gen-char` generation pipeline.
+
+The broad `background` entry continues to reference its detailed background
+component.
+
+## 15.8 Tests and Completion
+
+Test every broad background reference, imported detail reachability, absence of
+`npc` and `criminal` complete-person generators, and unchanged complete
+humanoid creation through `/gen-char`.
+
+Stop and wait for confirmation.
+
+---
+
+# Part 16 — RULE Reconciliation
+
+## 16.1 Objective
+
+Merge the historical RULE list into the v2 `rules` generator.
+
+## 16.2 Comparison
+
+Compare each historical RULE against all current RULE entries.
+
+Classify:
+
+- new;
+- exact duplicate;
+- conceptual duplicate;
+- overlapping but distinct;
+- historical replacement;
+- current unique entry.
+
+## 16.3 Precedence
+
+When content conflicts, historical RULE content wins:
+
+- historical concept;
+- historical name;
+- historical description;
+- historical limitations;
+- historical deliberate weight.
+
+Use one canonical stable ID.
+
+An existing ID may remain when it accurately identifies the historical winning
+concept and reduces reference churn.
+
+## 16.4 References
+
+After reconciliation:
+
+- update creature fixed RULE references;
+- update templates and other references;
+- remove duplicate IDs;
+- verify locale parity;
+- verify no reference points to a removed entry.
+
+## 16.5 RULE Semantics
+
+RULEs remain descriptive rule concepts used by the game.
+
+This migration does not create executable RULE mechanics.
+
+Creature assignment remains explicit through base-archetype `fixedRules`.
+
+Modifiers never grant RULEs.
+
+## 16.6 Tests and Completion
+
+Test ID uniqueness, historical precedence, weights, fixed references,
+localization, and manifest coverage.
+
+Stop and wait for confirmation.
+
+---
+
+# Part 17 — Creature-List Migration
+
+## 17.1 Objective
+
+Migrate historical animals and monsters into complete structured source
+catalogs and create the companion catalog where appropriate.
+
+## 17.2 Classification
+
+Each historical creature is assigned to exactly one primary source:
+
+- `animal`;
+- `companion`;
+- `monster`.
+
+Use `companion` when the entry is specifically intended to accompany, assist,
+follow, or be trained by humanoids.
+
+Use `animal` for wild or ordinary fauna.
+
+Use `monster` for supernatural, hostile, transformed, or extraordinary threats.
+
+A separate companion variant may be authored when its training or bond changes
+the description enough to constitute a distinct entry.
+
+## 17.3 Required Conversion
+
+For every creature:
+
+- stable ID;
+- localized `Name`;
+- localized `Description`;
+- reusable `statProfile`;
+- intrinsic traits where appropriate;
+- natural armor where appropriate;
+- fixed RULEs only when intrinsic;
+- optional descriptive initial status effect;
+- optional descriptive modifier request.
+
+Do not define fixed statistics or profile overrides.
+
+## 17.4 Intrinsic RULE Examples
+
+Possible intrinsic fixed RULEs include a fire RULE for a fire creature or a
+petrification RULE for a gorgon-like creature, but every assignment requires
+content review.
+
+Generic descriptions such as “elemental” must not receive an arbitrary fixed
+RULE without a specific element.
+
+## 17.5 Balance
+
+Review every profile and natural-armor choice across levels `1` through `10`.
 
 Level remains the only general power indicator.
 
-Do not add challenge rating, encounter power, hidden budget multipliers, or boss budgets without a new explicit design decision.
+No challenge rating, hidden budget, boss budget, or encounter power is added.
 
-## 13.8 Completion Criteria
+## 17.6 Tests and Completion
 
-Part 13 has no single all-or-nothing completion point.
+Test source classification, profile existence, traits, armor, fixed RULEs,
+status effects, descriptive modifier requests, and full migration coverage.
 
-Each content batch must:
+Stop and wait for confirmation.
 
-- pass all schema and localization validation;
-- include deterministic data checks where relevant;
-- be reviewed for rules consistency;
-- be reviewed for English and French quality;
-- avoid changing engine architecture unless separately approved.
+---
+
+# Part 18 — Modifier-List Migration
+
+## 18.1 Objective
+
+Migrate historical site and monster modifiers as descriptive modifier data.
+
+## 18.2 Site Modifiers
+
+Migrate historical compatibility targets such as:
+
+- region;
+- settlement;
+- dungeon;
+- building.
+
+Preserve historical names, descriptions, and applicability.
+
+## 18.3 Creature Modifiers
+
+Migrate all historical creature modifier concepts, including:
+
+- Alpha;
+- Hybrid;
+- Undead;
+- Reinforced;
+- Gigantic;
+- Enraged;
+- Pack;
+- Swarm;
+- Ectoplasmic;
+- Invisible;
+- RULE Bearer;
+- Equipped.
+
+Every entry contains descriptive data only.
+
+For example, `RULE Bearer` may describe that the creature appears to wield a
+RULE, but the generator does not select, grant, or persist an added RULE.
+
+`Equipped` may describe suitable equipment, but no item is selected or added.
+
+## 18.4 No Mechanics
+
+Reject all attempts to migrate or infer:
+
+- statistic deltas;
+- armor deltas;
+- resource effects;
+- extra traits;
+- equipment entries;
+- RULE entries;
+- status effects;
+- conditional behavior;
+- group-count mechanics.
+
+## 18.5 Tests and Completion
+
+Test compatibility, weights, localization, selection, persistence, and proof
+that all generated base fields remain unchanged.
+
+Stop and wait for confirmation.
+
+---
+
+# Part 19 — Quest-Template Migration
+
+## 19.1 Objective
+
+Convert historical quests into v2 templates after all referenced IDs are stable.
+
+## 19.2 Generic Humanoid References
+
+Historical `{{npc}}` references become random references to `background`.
+
+Example:
+
+```json
+{
+  "traveler": {
+    "generator": "background",
+    "select": "fields.Name"
+  }
+}
+```
+
+Example output:
+
+```text
+Escort a noble through the region.
+```
+
+The result is a role category only.
+
+It does not generate a name, race, personality, sheet, or save.
+
+The DM may then manually run `/gen-char` with that background.
+
+## 19.3 Specific Humanoid References
+
+When a quest requires a specific role, use a fixed background entry.
+
+Criminal:
+
+```json
+{
+  "suspect": {
+    "generator": "background",
+    "entry": "criminal",
+    "select": "fields.Name"
+  }
+}
+```
+
+Merchant:
+
+```json
+{
+  "recipient": {
+    "generator": "background",
+    "entry": "merchant",
+    "select": "fields.Name"
+  }
+}
+```
+
+The localized role name is resolved from `background`; do not duplicate literal
+English role names in every template.
+
+This rule also applies to noble, official, scholar, military, religious, mage,
+and other stable broad background entries.
+
+## 19.4 Other References
+
+For every quest:
+
+- replace old placeholders with role-oriented marker names;
+- select exact generators;
+- choose exact selectors;
+- use fixed entry references where required;
+- validate required `material`, `faction`, location, item, race, creature, and
+  other generator IDs;
+- rewrite sentences for grammatical English and French;
+- keep combinations coherent;
+- preserve historical intent and weight.
+
+## 19.5 Modifier Mentions
+
+A quest may refer to a selected descriptive modifier.
+
+It must not assume the modifier mechanically changed the creature.
+
+Rewrite text such as “made its attacks impossible to contain” when that implies
+an enforced mechanical effect unless the statement is simply narrative quest
+prose.
+
+## 19.6 Provenance and DM Workflow
+
+Structured output records selected background, creature, location, and item IDs.
+
+The output may help the DM choose later commands, but it does not automatically
+create referenced characters or creatures unless the command explicitly does
+so.
+
+## 19.7 Tests and Completion
+
+Test:
+
+- generic background references;
+- fixed criminal and merchant references;
+- no `npc` generator references;
+- no complete `criminal` generator references;
+- every selector;
+- every referenced generator and entry;
+- English/French grammar;
+- cycles and depth;
+- deterministic resolution;
+- historical quest coverage.
+
+Stop and wait for confirmation.
+
+---
+
+# Part 20 — Final Migration Verification and Content Expansion
+
+## 20.1 Historical Coverage
+
+Confirm every manifest entry is:
+
+- migrated;
+- merged;
+- replaced;
+- split;
+- explicitly rejected with reason.
+
+No historical entry is silently omitted.
+
+## 20.2 Obsolete References
+
+Verify:
+
+- no `npc` generator exists;
+- no complete `criminal` generator exists;
+- no template references either;
+- all humanoid quest references use `background`;
+- all fixed role references use stable background entry IDs;
+- all removed RULE IDs have updated references;
+- no modifier mechanics remain in JSON or code.
+
+## 20.3 Historical Document
+
+Keep `JDR_RANDOM_OLD.md` as historical source or annotate migration status
+without deleting its content unless separately approved.
+
+## 20.4 Balance and Expansion
+
+After migration, further content batches may refine:
+
+- statistical profiles;
+- natural armor;
+- fixed RULE levels;
+- initial status-effect frequency;
+- modifier frequency;
+- additional creatures;
+- additional templates;
+- additional public generators.
+
+Balancing remains data work and requires review.
+
+## 20.5 Validation
+
+Run complete:
+
+- generator schema validation;
+- English/French parity validation;
+- reference validation;
+- fixed-entry validation;
+- profile validation;
+- creature validation;
+- save/history validation;
+- command checks;
+- deterministic tests;
+- formatting;
+- full `npm test`.
+
+## 20.6 Completion Criteria
+
+The architecture and historical migration are complete when:
+
+- every approved list is migrated;
+- historical conflict precedence was applied;
+- all complete humanoids use `/gen-char`;
+- creatures use the shared profile system;
+- modifiers are descriptive only;
+- status effects are GM-interpreted;
+- `/gen-monster` saves complete creatures;
+- all references and locales validate;
+- all tests pass.
+
+Stop and wait for final user approval.
+
+---
+
+# Cross-Cutting Localization Rules
+
+English is the structural reference.
+
+French must preserve:
+
+- relative path;
+- schema version;
+- generator ID;
+- kind;
+- visibility;
+- `appliesTo`;
+- entry IDs and order;
+- weights;
+- reference marker names;
+- source generator IDs;
+- fixed entry IDs;
+- selectors;
+- source weights;
+- modifier chance and count;
+- technical creature mechanics;
+- trait IDs;
+- fixed RULE IDs and levels;
+- profile IDs;
+- numeric encumbrance;
+- percentages.
+
+Translate only player-facing text.
+
+Deterministic random sequences must select the same conceptual entries across
+locales.
+
+---
+
+# Cross-Cutting Validation Rules
+
+Reject:
+
+- unknown schema versions;
+- invalid kinds or visibility;
+- duplicate generator or entry IDs;
+- invalid weights;
+- malformed primary payloads;
+- missing required fields;
+- locale structural differences;
+- missing generators;
+- missing fixed entry IDs;
+- invalid selectors;
+- unused reference markers;
+- cycles;
+- excessive depth;
+- malformed modifier chance/count;
+- incompatible modifiers;
+- modifier mechanical fields;
+- invalid profiles;
+- missing statistics;
+- invalid statistic bounds;
+- missing creature profiles;
+- invalid natural armor;
+- duplicate trait IDs;
+- invalid fixed RULE references;
+- creature RULEs derived from Intelligence;
+- RULEs derived from modifiers;
+- mechanical status-effect configuration;
+- invalid entity types;
+- cross-type save fields;
+- global key collisions;
+- wrong history schemas;
+- incompatible command fields;
+- `npc` or complete `criminal` generators after historical migration.
+
+---
+
+# Cross-Cutting Determinism Requirements
+
+All random services accept an injected random function.
+
+Test:
+
+- entry weight boundaries;
+- weighted source boundaries;
+- fixed references without randomness;
+- unique modifier selection;
+- modifier chance and count;
+- profile allocation;
+- random levels;
+- initial status-effect chance;
+- cross-locale conceptual selection;
+- base creature equality with and without descriptive modifier selection except
+  for modifier records.
 
 ---
 
@@ -2295,16 +2424,16 @@ Each content batch must:
 
 ## `generatorCatalog`
 
-- discovers v2 localized generators;
-- validates envelopes and entry schemas;
-- resolves stable IDs;
-- enforces English/French parity;
-- exposes public and internal generators.
+- discovers v2 files;
+- validates envelopes;
+- resolves IDs;
+- enforces locale parity;
+- exposes public/internal data.
 
 ## `statProfileCatalog`
 
-- loads one non-localized profile file;
-- validates statistical distributions;
+- loads non-localized profiles;
+- validates distributions;
 - resolves profile IDs.
 
 ## `weightedSelector`
@@ -2316,104 +2445,135 @@ Each content batch must:
 ## `generatorResolver`
 
 - resolves entries into structured output;
-- coordinates references and modifiers;
+- coordinates references and descriptive modifiers;
 - preserves provenance.
 
 ## `referenceResolver`
 
-- resolves template references;
-- supports selectors and weighted source choice;
+- resolves random and fixed entries;
+- applies selectors;
+- supports weighted source choice;
 - detects cycles;
 - enforces depth.
 
 ## `modifierResolver`
 
-- validates target compatibility;
+- validates compatibility;
 - evaluates chance and count;
-- selects unique modifier entries;
-- returns structured modifier data;
-- does not apply creature mechanics.
+- selects unique descriptive entries;
+- returns descriptive records;
+- never mutates a base result.
 
 ## `entityMechanics`
 
-- calculates level statistic budgets;
-- allocates profile statistics;
-- derives initiative and reflexes;
-- derives HP, AP, and MD;
-- recalculates dependent values after mutations.
+- calculates budgets;
+- allocates statistics;
+- derives initiative, reflexes, HP, AP, and MD;
+- recalculates dependencies after manual mutations.
 
 ## `creatureGenerationService`
 
-- selects creature archetypes;
-- resolves statistical profiles;
+- selects archetypes;
+- resolves profiles;
 - generates base statistics;
-- assigns fixed creature RULEs;
-- applies selected modifier mechanics;
-- creates a complete unsaved `Creature`.
+- assigns intrinsic traits;
+- assigns fixed RULEs;
+- resolves descriptive status effects;
+- attaches descriptive modifier records;
+- constructs unsaved creatures.
 
 ## `entityApplicationService`
 
 - resolves global entity keys;
-- delegates to concrete stores;
+- delegates to stores;
 - coordinates common mutations;
-- coordinates atomic creature generation and creation;
+- coordinates atomic creature generation;
 - invokes concrete validation.
 
-## Concrete stores
+## Concrete Stores
 
 `characterStore` and `creatureStore`:
 
 - persist concrete models;
 - validate concrete schemas;
 - manage concrete history;
-- reuse shared atomic and transaction foundations.
+- reuse atomic and transaction foundations.
 
-## Discord commands
+## Discord Commands
 
-Commands only:
+Commands:
 
 - parse options;
-- check command-level permissions;
+- check command-level permission;
 - invoke application services;
 - render localized responses.
 
+Commands do not own domain algorithms.
+
 ---
 
-# Final Data and Generation Flow
+# Final Character and Humanoid Policy
 
 ```text
-Localized v2 generator entry
+background category
         ↓
-Structured narrative fields + technical mechanics
+background-specific detail generator
         ↓
-Shared non-localized statistical profile
+other character components
         ↓
-Shared level budget and weighted allocation
+/gen-char
         ↓
-Character-specific or creature-specific generation policy
+complete Character save
+```
+
+Quest templates may generate only a background role label.
+
+They do not create a humanoid.
+
+There is no parallel NPC-generation path.
+
+---
+
+# Final Creature Generation Flow
+
+```text
+localized creature archetype
         ↓
-Explicit fixed creature RULEs
+shared non-localized statistical profile
         ↓
-Generic modifier selection
+shared level budget and weighted allocation
         ↓
-Creature statistic changes, traits, and explicit random RULEs
+intrinsic identity and traits
         ↓
-Shared derived statistics and resources
+explicit fixed RULEs
         ↓
-Concrete Character or Creature validation
+shared derived statistics and resources
         ↓
-Atomic complete save with history and undo
+natural armor
+        ↓
+optional descriptive status effect
+        ↓
+descriptive modifier selection
+        ↓
+descriptive modifier records only
+        ↓
+Creature validation
+        ↓
+atomic complete save with history and undo
 ```
 
 The final design has:
 
 - one generator format;
-- one statistical profile catalog;
+- one profile catalog;
 - one statistic-allocation algorithm;
-- explicit creature magic independent from Intelligence;
-- mechanical creature modifiers;
+- `/gen-char` as the only complete humanoid generator;
+- explicit creature RULEs independent from Intelligence;
+- no modifier mechanics;
+- GM-interpreted status effects;
+- separate animal, companion, and monster catalogs;
 - separate character and creature save schemas;
 - shared combat and persistence foundations;
-- no generator-format backward compatibility;
+- historical-content precedence during migration;
 - no encounter-power system;
-- incremental implementation with mandatory review between every part.
+- mandatory review between every implementation part.
