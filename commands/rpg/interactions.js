@@ -32,7 +32,6 @@ const {
 } = require('../../util/interactionSessions');
 const {
 	getEditFieldLabel,
-	getEditFormat,
 	getEditInputId,
 	getEditTargetDefinitions,
 } = require('./editorFields');
@@ -234,7 +233,9 @@ function getEditInputLabel(target, locale) {
 	const labelKey = {
 		appearance: 'appearance',
 		backstory: 'backstory',
+		firstName: 'firstName',
 		goals: 'goals',
+		lastName: 'lastName',
 		'personality.description': 'description',
 		'personality.traits': 'traits',
 		'race.lore': 'lore',
@@ -243,9 +244,16 @@ function getEditInputLabel(target, locale) {
 		'racialTraits.physicalAbility': 'physicalAbility',
 		'racialTraits.skillBonus': 'skillBonus',
 	}[target.id];
+	const numericLabelKey = target.id.endsWith('.current')
+		? 'current'
+		: target.id.endsWith('.max')
+			? 'maximum'
+			: null;
 	return labelKey
 		? t(locale, `rpg.editor.inputLabels.${labelKey}`)
-		: getCharacterFieldLabel(locale, target.id);
+		: numericLabelKey
+			? t(locale, `rpg.editor.inputLabels.${numericLabelKey}`)
+			: getCharacterFieldLabel(locale, target.id);
 }
 
 function createEditInput(field, inputDefinition, locale) {
@@ -275,11 +283,6 @@ function createEditInput(field, inputDefinition, locale) {
 }
 
 function getEditInputDescription(field, target, locale) {
-	if (field.editKind === 'colon') {
-		return t(locale, 'rpg.editor.colonDescription', {
-			count: field.editTargetIds.length,
-		});
-	}
 	if (field.editKind === 'named-lines') {
 		return t(locale, 'rpg.editor.statisticsDescription');
 	}
@@ -296,9 +299,6 @@ function getEditInputDescription(field, target, locale) {
 }
 
 function getEditInputPlaceholder(field, target, locale) {
-	if (field.editKind === 'colon') {
-		return getEditFormat(field.editId, locale);
-	}
 	if (field.editKind === 'named-lines') {
 		return t(locale, 'rpg.editor.statisticsPlaceholder');
 	}
@@ -309,9 +309,6 @@ function getEditInputPlaceholder(field, target, locale) {
 }
 
 function isEditInputRequired(field, target) {
-	if (field.editKind === 'colon') {
-		return true;
-	}
 	if (field.editKind === 'named-lines') {
 		return true;
 	}

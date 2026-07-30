@@ -25,16 +25,9 @@ function getEditInputId(fieldId) {
 		.toLowerCase()}`;
 }
 
-function getEditFormat(fieldName, locale = 'en') {
-	return getEditTargetDefinitions(fieldName)
-		.map(definition => getCharacterFieldLabel(locale, definition.id))
-		.join(':');
-}
-
 module.exports = {
 	EDIT_FIELDS,
 	getEditFieldLabel,
-	getEditFormat,
 	getEditInputId,
 	getEditTargetDefinitions,
 };

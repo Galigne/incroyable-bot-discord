@@ -415,7 +415,7 @@ async function createHistory(characterKey, value) {
 	return updateEditableCharacter(
 		characterKey,
 		'name',
-		`${value}:`,
+		{ firstName: value, lastName: '' },
 		() => true,
 		historyContext(),
 	);

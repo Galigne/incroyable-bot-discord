@@ -102,15 +102,15 @@ characters with usable history. The private form opens immediately after
 `background`, `personality`, `statistics`, `rules`, `talents`, `status-effects`,
 `equipment`, `inventory`, `encumbrance`, `hp`, `ar`, `ap`, and `md`.
 
-Race uses separate inputs for its name, physical description, lore, skill bonus,
-and physical ability. Background uses separate appearance, backstory, and goals
-inputs. Personality uses separate description and traits inputs. These groups are
-validated and saved together.
+Name uses separate optional first-name and last-name inputs; emptying either input
+clears that component. Race uses separate inputs for its name, physical description,
+lore, skill bonus, and physical ability. Background uses separate appearance,
+backstory, and goals inputs. Personality uses separate description and traits
+inputs.
 
-Compact groups use one colon-separated input. Name uses
-`firstName:lastName`; HP, AR, AP, MD, and encumbrance use `current:max`. Values
-are prefilled in the same format, surrounding whitespace is trimmed, and the exact
-number of values is required. Either name component may be empty to clear it.
+HP, AR, AP, MD, and encumbrance each use separate required Current and Maximum
+numeric inputs. Every grouped form is prefilled, validated completely, and saved
+as one atomic update.
 
 Statistics use one prefilled `statName: statValue` line for each of
 `constitution`, `strength`, `dexterity`, `intelligence`, `speed`, `perception`,
@@ -122,8 +122,9 @@ Personality traits, talents, status effects, equipment, and inventory use one
 entry per line. Optional leading `- ` or `* ` markers are normalized away, empty
 lines are ignored, and an empty submission clears the complete collection. Talent
 names and descriptions remain combined in each list entry. RULEs use
-`Name: Level: Description`, one per line; only the first two colons are separators,
-so descriptions may contain additional colons.
+`Name:Level:Description`, one per line. Each value is required, the level must be a
+positive whole number, and only the first two colons are separators, so descriptions
+may contain additional colons.
 
 Discord displays at most 25 autocomplete suggestions at once, so type part of a
 name or value to filter longer lists. `/help command:gen` lists every localized

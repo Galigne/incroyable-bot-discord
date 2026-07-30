@@ -16,11 +16,6 @@ function getEditableFieldValue(character, fieldName) {
 			serializeTargetValue(character, target),
 		]));
 	}
-	if (field.editKind === 'colon') {
-		return targets
-			.map(target => serializeTargetValue(character, target))
-			.join(':');
-	}
 	if (field.editKind === 'named-lines') {
 		return targets
 			.map(target => `${getNamedLineKey(target)}: ${serializeTargetValue(
@@ -73,28 +68,6 @@ function parseSubmittedValue(field, targets, submittedValue) {
 
 	if (typeof submittedValue !== 'string') {
 		throw editError('errors.valueRequired', { fieldId: field.id });
-	}
-	if (field.editKind === 'colon') {
-		const components = submittedValue.split(':').map(value => value.trim());
-		if (components.length !== targets.length) {
-			throw editError('errors.colonValueCount', {
-				count: targets.length,
-				fieldId: field.id,
-				formatFieldIds: field.editTargetIds,
-			});
-		}
-		return targets.map((target, index) => {
-			if (target.type === 'number' && !components[index]) {
-				throw editError('errors.colonValueRequired', {
-					fieldId: field.id,
-					formatFieldIds: field.editTargetIds,
-				});
-			}
-			return {
-				target,
-				value: parseTargetValue(target, components[index]),
-			};
-		});
 	}
 	if (field.editKind === 'named-lines') {
 		return parseNamedLineValue(field, targets, submittedValue);
@@ -190,6 +163,9 @@ function parseMultilineEntry(field, line) {
 		throw editError('errors.ruleLevelInvalid');
 	}
 	const description = line.slice(secondSeparator + 1).trim();
+	if (!description) {
+		throw editError('errors.ruleDescriptionRequired');
+	}
 	return { name, description, level };
 }
 
@@ -216,7 +192,7 @@ function serializeTargetValue(character, target) {
 	if (target.multiline) {
 		return value
 			.map(item => target.rules
-				? `${item.name}: ${item.level}: ${item.description}`
+				? `${item.name}:${item.level}:${item.description}`
 				: item)
 			.join('\n');
 	}

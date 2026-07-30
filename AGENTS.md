@@ -312,26 +312,25 @@ The current viewing and editing decisions are intentional:
   `personality`, `statistics`, `rules`, `talents`, `status-effects`, `equipment`,
   `inventory`, `encumbrance`, `hp`, `ar`, `ap`, and `md`. Stored child fields
   remain canonical catalog entries but are not independently editable.
-- `/help command:set` explains every grouped modal, colon-separated format, and
-  named statistics line.
+- `/help command:set` explains every grouped modal, named statistics line, and
+  multiline format.
 - `/delete character-key:<key>` opens a private, single-use confirmation modal.
   The user must type the exact case-sensitive CharacterKey; success permanently
   removes the active save and all retained backups, so `/undo` cannot restore it.
 - Do not add section/field dropdown navigation back to the editor.
 
-`race`, `background`, and `personality` use separate prefilled modal inputs:
+`name`, `race`, `background`, `personality`, resources, and encumbrance use
+separate prefilled modal inputs:
 
+- Name updates `firstName` and `lastName`; both inputs are optional and an empty
+  input clears that component.
 - Race updates `race.name`, `race.physicalDescription`, `race.lore`,
   `racialTraits.skillBonus`, and `racialTraits.physicalAbility`.
 - Background updates `appearance`, `backstory`, and `goals`.
 - Personality updates `personality.description` and `personality.traits`.
+- `hp`, `ar`, `ap`, `md`, and `encumbrance` each update separate `current` and
+  `max` numeric inputs. Both inputs are required and retain their domain validation.
 
-Compact related fields use one prefilled colon-separated input:
-
-- `name`: `firstName:lastName`; either component may be empty.
-- `hp`, `ar`, `ap`, `md`, and `encumbrance`: `current:max`.
-
-Trim whitespace around every component and require the exact component count.
 `statistics` uses one prefilled `statName: statValue` line for each of
 `constitution`, `strength`, `dexterity`, `intelligence`, `speed`, `perception`,
 `charisma`, `initiative`, and `reflexes`. Keep these technical names in English.
@@ -352,8 +351,9 @@ on submit:
 - Empty multiline content clears the field.
 - Talents are stored as `string[]`; each element combines the complete
   user-editable talent name and description.
-- RULEs use `Name: Level: Description`, one RULE per line. The level is a positive
-  whole number; descriptions may contain additional colons.
+- RULEs use `Name:Level:Description`, one RULE per line. Name and description are
+  required, the level is a positive whole number, and descriptions may contain
+  additional colons.
 
 The model still stores traits, talents, RULEs, status effects, equipment, and
 inventory in arrays because generation and display logic depend on them. Talents

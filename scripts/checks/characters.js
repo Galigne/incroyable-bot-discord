@@ -31,7 +31,10 @@ module.exports = function createCharacterChecks(context) {
 	function checkCharacterModel() {
 		try {
 			const original = new Character('Test', '0');
-			setEditableFieldValue(original, 'name', 'Diego:Robert');
+			setEditableFieldValue(original, 'name', {
+				firstName: 'Diego',
+				lastName: 'Robert',
+			});
 			setEditableFieldValue(
 				original,
 				'statistics',
@@ -90,7 +93,10 @@ module.exports = function createCharacterChecks(context) {
 				);
 			}
 			try {
-				setEditableFieldValue(original, 'ap', '4:11');
+				setEditableFieldValue(original, 'ap', {
+					'resources.ap.current': '4',
+					'resources.ap.max': '11',
+				});
 				errors.push('AP values above 10 should be rejected.');
 			}
 			catch (error) {
@@ -148,7 +154,7 @@ module.exports = function createCharacterChecks(context) {
 				|| getEditableFieldValue(character, 'personality')['personality.traits']
 					!== 'Brave\nCurious'
 				|| getEditableFieldValue(character, 'rules')
-					!== 'Fire: 2: Controls flames\nBlink: 1: Teleports a short distance'
+					!== 'Fire:2:Controls flames\nBlink:1:Teleports a short distance'
 				|| character.rules[0]?.description !== 'Controls flames'
 				|| character.rules[0]?.level !== 2
 				|| character.rules[1]?.name !== 'Blink'

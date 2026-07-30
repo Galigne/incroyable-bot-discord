@@ -8,7 +8,7 @@ const editableAliases = new Map();
 add('key', 'characterKey');
 add('name', 'name', {
 	viewId: 'name',
-	...editable('name', 'colon', ['firstName', 'lastName']),
+	...editable('name', 'multi', ['firstName', 'lastName']),
 });
 add('firstName', 'firstName', stored(['firstName'], 'text', {
 	aliases: ['firstname'],
@@ -171,7 +171,7 @@ add('inventory', 'inventory', {
 });
 add('encumbrance', 'encumbrance', {
 	viewId: 'encumbrance',
-	...editable('encumbrance', 'colon', [
+	...editable('encumbrance', 'multi', [
 		'encumbrance.current',
 		'encumbrance.max',
 	]),
@@ -194,7 +194,7 @@ for (const resourceId of ['hp', 'ar', 'ap', 'md']) {
 		labelKey: `character.resources.${resourceId}.name`,
 		resourceId,
 		viewId: resourceId.toUpperCase(),
-		...editable(resourceId, 'colon', [
+		...editable(resourceId, 'multi', [
 			`resources.${resourceId}.current`,
 			`resources.${resourceId}.max`,
 		]),

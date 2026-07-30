@@ -68,10 +68,18 @@ after(() => {
 });
 
 test('the editable catalog exposes only the final grouped field list', () => {
+	const editableFields = getEditableFields();
 	assert.deepEqual(
-		getEditableFields().map(field => field.editId),
+		editableFields.map(field => field.editId),
 		EDITABLE_FIELDS,
 	);
+	assert.equal(editableFields.some(field => field.editKind === 'colon'), false);
+	assert.equal(Object.hasOwn(english.rpg.editor, 'colonDescription'), false);
+	assert.equal(Object.hasOwn(english.errors, 'colonValueCount'), false);
+	assert.equal(Object.hasOwn(english.errors, 'colonValueRequired'), false);
+	assert.equal(Object.hasOwn(french.rpg.editor, 'colonDescription'), false);
+	assert.equal(Object.hasOwn(french.errors, 'colonValueCount'), false);
+	assert.equal(Object.hasOwn(french.errors, 'colonValueRequired'), false);
 	for (const removedField of [
 		'firstName',
 		'lastName',
@@ -99,8 +107,8 @@ test('the editable catalog exposes only the final grouped field list', () => {
 	}
 });
 
-test('every colon-separated field is prefilled and trims valid submissions', () => {
-	const character = new Character('Colon', 'tester');
+test('name and numeric groups are prefilled and trim valid submissions', () => {
+	const character = new Character('Groups', 'tester');
 	assert.deepEqual(
 		Object.fromEntries([
 			'name',
@@ -111,21 +119,54 @@ test('every colon-separated field is prefilled and trims valid submissions', () 
 			'encumbrance',
 		].map(field => [field, getEditableFieldValue(character, field)])),
 		{
-			name: ':',
-			hp: '100:100',
-			ar: '0:0',
-			ap: '4:4',
-			md: '5:5',
-			encumbrance: '0:10',
+			name: { firstName: '', lastName: '' },
+			hp: {
+				'resources.hp.current': '100',
+				'resources.hp.max': '100',
+			},
+			ar: {
+				'resources.ar.current': '0',
+				'resources.ar.max': '0',
+			},
+			ap: {
+				'resources.ap.current': '4',
+				'resources.ap.max': '4',
+			},
+			md: {
+				'resources.md.current': '5',
+				'resources.md.max': '5',
+			},
+			encumbrance: {
+				'encumbrance.current': '0',
+				'encumbrance.max': '10',
+			},
 		},
 	);
 
-	setEditableFieldValue(character, 'name', '  Ada  :  Lovelace  ');
-	setEditableFieldValue(character, 'hp', ' 50 : 120 ');
-	setEditableFieldValue(character, 'ar', ' 5 : 30 ');
-	setEditableFieldValue(character, 'ap', ' 3 : 6 ');
-	setEditableFieldValue(character, 'md', ' 7.5 : 12.5 ');
-	setEditableFieldValue(character, 'encumbrance', ' 2 : 15 ');
+	setEditableFieldValue(character, 'name', {
+		firstName: '  Ada  ',
+		lastName: '  Lovelace  ',
+	});
+	setEditableFieldValue(character, 'hp', {
+		'resources.hp.current': ' 50 ',
+		'resources.hp.max': ' 120 ',
+	});
+	setEditableFieldValue(character, 'ar', {
+		'resources.ar.current': ' 5 ',
+		'resources.ar.max': ' 30 ',
+	});
+	setEditableFieldValue(character, 'ap', {
+		'resources.ap.current': ' 3 ',
+		'resources.ap.max': ' 6 ',
+	});
+	setEditableFieldValue(character, 'md', {
+		'resources.md.current': ' 7.5 ',
+		'resources.md.max': ' 12.5 ',
+	});
+	setEditableFieldValue(character, 'encumbrance', {
+		'encumbrance.current': ' 2 ',
+		'encumbrance.max': ' 15 ',
+	});
 
 	assert.equal(character.firstName, 'Ada');
 	assert.equal(character.lastName, 'Lovelace');
@@ -181,32 +222,65 @@ test('statistics use one named line per base and derived value', () => {
 
 test('either saved name component can be cleared', () => {
 	const character = new Character('Names', 'tester');
-	setEditableFieldValue(character, 'name', 'First:Last');
+	setEditableFieldValue(character, 'name', {
+		firstName: 'First',
+		lastName: 'Last',
+	});
 
-	setEditableFieldValue(character, 'name', ':Retained');
+	setEditableFieldValue(character, 'name', {
+		firstName: '',
+		lastName: 'Retained',
+	});
 	assert.equal(character.firstName, '');
 	assert.equal(character.lastName, 'Retained');
 
-	setEditableFieldValue(character, 'name', 'Retained:');
+	setEditableFieldValue(character, 'name', {
+		firstName: 'Retained',
+		lastName: '',
+	});
 	assert.equal(character.firstName, 'Retained');
 	assert.equal(character.lastName, '');
 
-	setEditableFieldValue(character, 'name', ':');
+	setEditableFieldValue(character, 'name', {
+		firstName: '',
+		lastName: '',
+	});
 	assert.equal(character.firstName, '');
 	assert.equal(character.lastName, '');
 });
 
-test('colon formats reject missing, extra, malformed, and invalid values atomically', () => {
+test('numeric groups reject missing and invalid values atomically', () => {
 	for (const [field, value, translationKey] of [
-		['name', 'Only one component', 'errors.colonValueCount'],
-		['name', 'Too:many:components', 'errors.colonValueCount'],
-		['hp', '1', 'errors.colonValueCount'],
-		['hp', '1:2:3', 'errors.colonValueCount'],
-		['hp', 'one:2', 'errors.mustBeNumber'],
-		['hp', '1:', 'errors.colonValueRequired'],
-		['ap', '5:4', 'errors.apCurrentAboveMax'],
-		['ap', '4:11', 'errors.apRange'],
-		['ap', '1.5:4', 'errors.apRange'],
+		[
+			'hp',
+			{ 'resources.hp.current': '1' },
+			'errors.groupInputMissing',
+		],
+		[
+			'hp',
+			{ 'resources.hp.current': 'one', 'resources.hp.max': '2' },
+			'errors.mustBeNumber',
+		],
+		[
+			'hp',
+			{ 'resources.hp.current': '1', 'resources.hp.max': '' },
+			'errors.mustBeNumber',
+		],
+		[
+			'ap',
+			{ 'resources.ap.current': '5', 'resources.ap.max': '4' },
+			'errors.apCurrentAboveMax',
+		],
+		[
+			'ap',
+			{ 'resources.ap.current': '4', 'resources.ap.max': '11' },
+			'errors.apRange',
+		],
+		[
+			'ap',
+			{ 'resources.ap.current': '1.5', 'resources.ap.max': '4' },
+			'errors.apRange',
+		],
 	]) {
 		const character = new Character(`Invalid-${field}`, 'tester');
 		const before = JSON.stringify(character);
@@ -317,7 +391,7 @@ test('multi-input groups replace every stored target together', () => {
 	assert.equal(JSON.stringify(character), before);
 });
 
-test('RULE parsing uses only the first two colons and never partially mutates', () => {
+test('RULE parsing requires all values, uses two separators, and is atomic', () => {
 	const character = new Character('Rules', 'tester');
 	setEditableFieldValue(
 		character,
@@ -328,52 +402,62 @@ test('RULE parsing uses only the first two colons and never partially mutates', 
 		{ name: 'Fire', level: 2, description: 'Burns: brightly: at night' },
 		{ name: 'Blink', level: 1, description: 'Teleports' },
 	]);
+	assert.equal(
+		getEditableFieldValue(character, 'rules'),
+		'Fire:2:Burns: brightly: at night\nBlink:1:Teleports',
+	);
 
 	const before = JSON.stringify(character.rules);
-	assert.throws(
-		() => setEditableFieldValue(
-			character,
-			'rules',
-			'Valid: 1: Parsed first\nInvalid: nope: Must fail',
-		),
-		error => (
-			error.code === 'INVALID_CHARACTER_EDIT'
-			&& error.translationKey === 'errors.ruleLevelInvalid'
-		),
-	);
-	assert.equal(JSON.stringify(character.rules), before);
+	for (const [value, translationKey] of [
+		[
+			'Valid:1:Parsed first\nInvalid:nope:Must fail',
+			'errors.ruleLevelInvalid',
+		],
+		['Valid:1:Parsed first\nInvalid:2:', 'errors.ruleDescriptionRequired'],
+	]) {
+		assert.throws(
+			() => setEditableFieldValue(character, 'rules', value),
+			error => (
+				error.code === 'INVALID_CHARACTER_EDIT'
+				&& error.translationKey === translationKey
+			),
+		);
+		assert.equal(JSON.stringify(character.rules), before);
+	}
 });
 
-test('talent editing replaces, normalizes, serializes, and clears the multiline list', () => {
-	const character = new Character('Talents', 'tester');
-	const outcome = setEditableFieldValue(
-		character,
-		'talents',
-		[
-			'  - Athlete — +1 to sustained movement.  ',
-			'',
-			'* Cold Immunity — Ordinary cold cannot freeze the character.',
-			'  Keen Eye — +1 when searching for details.  ',
-		].join('\r\n'),
-	);
+test('multiline lists replace, normalize, serialize, and clear their collections', () => {
+	for (const [field, property] of [
+		['talents', 'talents'],
+		['status-effects', 'statusEffects'],
+		['equipment', 'equipment'],
+		['inventory', 'inventory'],
+	]) {
+		const character = new Character(`List-${field}`, 'tester');
+		const outcome = setEditableFieldValue(
+			character,
+			field,
+			'  - First complete entry  \r\n\r\n* Second complete entry\r\n',
+		);
+		assert.deepEqual(
+			character[property],
+			['First complete entry', 'Second complete entry'],
+			field,
+		);
+		assert.equal(
+			getEditableFieldValue(character, field),
+			'First complete entry\nSecond complete entry',
+			field,
+		);
+		assert.deepEqual(outcome, {
+			translationKey: 'editorResults.collectionUpdated',
+			translationVariables: { fieldId: getEditableFieldDefinition(field).id },
+		});
 
-	assert.deepEqual(character.talents, [
-		'Athlete — +1 to sustained movement.',
-		'Cold Immunity — Ordinary cold cannot freeze the character.',
-		'Keen Eye — +1 when searching for details.',
-	]);
-	assert.equal(
-		getEditableFieldValue(character, 'talents'),
-		character.talents.join('\n'),
-	);
-	assert.deepEqual(outcome, {
-		translationKey: 'editorResults.collectionUpdated',
-		translationVariables: { fieldId: 'talents' },
-	});
-
-	setEditableFieldValue(character, 'talents', '\n \r\n');
-	assert.deepEqual(character.talents, []);
-	assert.equal(getEditableFieldValue(character, 'talents'), '');
+		setEditableFieldValue(character, field, '\n \r\n');
+		assert.deepEqual(character[property], [], field);
+		assert.equal(getEditableFieldValue(character, field), '', field);
+	}
 });
 
 test('race, background, and personality modals prefill every separate input', () => {
@@ -409,35 +493,89 @@ test('race, background, and personality modals prefill every separate input', ()
 	assert.match(frenchRace.components[0].description, /préremplie/);
 });
 
-test('every colon-separated modal uses the same prefilled format', () => {
+test('name and numeric group modals use separate prefilled inputs', () => {
 	const character = createFilledCharacter();
+	const nameValues = getEditableFieldValue(character, 'name');
+	const nameModal = createFieldModal('session', 'name', nameValues, 'en').toJSON();
+	assert.deepEqual(
+		nameModal.components.map(component => component.label),
+		['First name', 'Last name'],
+	);
+	assert.deepEqual(
+		nameModal.components.map(component => component.component.value),
+		['Ada', 'Lovelace'],
+	);
+	assert.deepEqual(
+		nameModal.components.map(component => component.component.required),
+		[false, false],
+	);
+
 	for (const field of [
-		'name',
 		'hp',
 		'ar',
 		'ap',
 		'md',
 		'encumbrance',
 	]) {
-		const value = getEditableFieldValue(character, field);
-		const modal = createFieldModal('session', field, value, 'en').toJSON();
-		assert.equal(modal.components.length, 1, field);
-		assert.equal(modal.components[0].component.value, value, field);
-		assert.equal(modal.components[0].component.required, true, field);
-		assert.match(modal.components[0].description, /colon-separated/, field);
+		const values = getEditableFieldValue(character, field);
+		const modal = createFieldModal('session', field, values, 'en').toJSON();
+		assert.deepEqual(
+			modal.components.map(component => component.label),
+			['Current', 'Maximum'],
+			field,
+		);
+		assert.deepEqual(
+			modal.components.map(component => component.component.custom_id),
+			Object.keys(values).map(getEditInputId),
+			field,
+		);
+		assert.deepEqual(
+			modal.components.map(component => component.component.value),
+			Object.values(values),
+			field,
+		);
+		assert.ok(
+			modal.components.every(component => component.component.required === true),
+			field,
+		);
+		assert.ok(
+			modal.components.every(component => (
+				component.description === english.rpg.editor.numberDescription
+			)),
+			field,
+		);
 	}
 
-	const emptyName = createFieldModal('session', 'name', '', 'en').toJSON();
-	assert.equal(
-		emptyName.components[0].component.placeholder,
-		'First name:Last name',
+	const frenchName = createFieldModal('session', 'name', nameValues, 'fr').toJSON();
+	assert.deepEqual(
+		frenchName.components.map(component => component.label),
+		['Prénom', 'Nom'],
 	);
-	const emptyFrenchName = createFieldModal('session', 'name', '', 'fr').toJSON();
-	assert.equal(emptyFrenchName.components[0].component.placeholder, 'Prénom:Nom');
+	const frenchHp = createFieldModal(
+		'session',
+		'hp',
+		getEditableFieldValue(character, 'hp'),
+		'fr',
+	).toJSON();
+	assert.deepEqual(
+		frenchHp.components.map(component => component.label),
+		['Actuel', 'Maximum'],
+	);
 });
 
-test('the statistics modal is one prefilled multiline input', () => {
+test('level and statistics each use one appropriately styled prefilled input', () => {
 	const character = createFilledCharacter();
+	const levelModal = createFieldModal(
+		'session',
+		'level',
+		getEditableFieldValue(character, 'level'),
+		'en',
+	).toJSON();
+	assert.equal(levelModal.components.length, 1);
+	assert.equal(levelModal.components[0].component.value, '1');
+	assert.equal(levelModal.components[0].component.style, 1);
+	assert.equal(levelModal.components[0].component.required, true);
+
 	const value = getEditableFieldValue(character, 'statistics');
 	const modal = createFieldModal('session', 'statistics', value, 'en').toJSON();
 	assert.equal(modal.title, 'Edit Statistics');
@@ -456,13 +594,10 @@ test('one grouped application update creates one history entry and keeps save ke
 	await createCharacter(characterKey, 'creator');
 	await updateEditableCharacter(
 		characterKey,
-		'race',
+		'hp',
 		{
-			'race.name': 'Ashborn',
-			'race.physicalDescription': 'Silver eyes',
-			'race.lore': 'Old lore',
-			'racialTraits.skillBonus': 'Arcana',
-			'racialTraits.physicalAbility': 'Night sight',
+			'resources.hp.current': '80',
+			'resources.hp.max': '120',
 		},
 		() => true,
 		{ actorId: 'creator', maxEntries: 3 },
@@ -471,12 +606,14 @@ test('one grouped application update creates one history entry and keeps save ke
 	const history = await readCharacterHistory(characterKey);
 	assert.equal(history.document.entries.length, 1);
 	assert.equal(history.document.entries[0].action, 'set');
-	assert.equal(history.document.entries[0].character.race.name, '');
+	assert.deepEqual(
+		history.document.entries[0].character.resources.hp,
+		{ current: 100, max: 100 },
+	);
 	const rawSave = JSON.parse(
 		await fsPromises.readFile(getCharacterSavePath(characterKey), 'utf8'),
 	);
-	assert.equal(rawSave.race.name, 'Ashborn');
-	assert.equal(rawSave.racialTraits.skillBonus, 'Arcana');
+	assert.deepEqual(rawSave.resources.hp, { current: 80, max: 120 });
 	assert.equal(Object.hasOwn(rawSave, 'background'), false);
 	assert.equal(Object.hasOwn(rawSave, 'base-statistics'), false);
 });
@@ -488,18 +625,11 @@ test('failed grouped application updates create neither mutation nor history', a
 	await assert.rejects(
 		updateEditableCharacter(
 			characterKey,
-			'statistics',
-			[
-				'constitution: 11',
-				'strength: 12',
-				'dexterity: 13',
-				'intelligence: 14',
-				'speed: 15',
-				'perception: 16',
-				'charisma: not-a-number',
-				'initiative: 18',
-				'reflexes: 19',
-			].join('\n'),
+			'ap',
+			{
+				'resources.ap.current': '7',
+				'resources.ap.max': '6',
+			},
 			() => true,
 			{ actorId: 'creator', maxEntries: 3 },
 		),
@@ -570,7 +700,9 @@ test('modal routing submits all inputs once and repeats authorization', async ()
 		...creator,
 		customId: authorizationModal.custom_id,
 		fields: {
-			getTextInputValue: () => 'Unauthorized:Edit',
+			getTextInputValue: customId => (
+				customId === getEditInputId('firstName') ? 'Unauthorized' : 'Edit'
+			),
 		},
 		isModalSubmit: () => true,
 		reply: async value => {

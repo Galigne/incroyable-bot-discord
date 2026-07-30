@@ -164,7 +164,7 @@ test('every supported successful action stores a complete pre-change snapshot', 
 	await updateEditableCharacter(
 		characterKey,
 		'name',
-		'History:',
+		{ firstName: 'History', lastName: '' },
 		() => true,
 		context,
 	);
@@ -206,7 +206,9 @@ test('/set creates history only after a successful modal submission', async () =
 	await handleRpgInteraction({
 		customId: modal.custom_id,
 		fields: {
-			getTextInputValue: () => 'Modal value:',
+			getTextInputValue: customId => (
+				customId === 'field-first-name' ? 'Modal value' : ''
+			),
 		},
 		guildId: 'guild',
 		isModalSubmit: () => true,
@@ -681,7 +683,7 @@ async function editFirstName(
 	return updateEditableCharacter(
 		characterKey,
 		'name',
-		`${value}:`,
+		{ firstName: value, lastName: '' },
 		canManage,
 		context,
 	);

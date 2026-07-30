@@ -134,15 +134,17 @@ test('/help command:set lists every localized editable field by section', () => 
 	}
 	const english = renderDetail('set', createInteraction('regular'), 'en');
 	for (const format of [
-		'`firstName:lastName`',
-		'`current:max`',
+		'First name and Last name',
+		'Current and Maximum',
 		'`statName: statValue`',
 		'`constitution`',
 		'`reflexes`',
-		'`name:level:description`',
+		'`Name:Level:Description`',
 	]) {
 		assert.ok(english.includes(format), format);
 	}
+	assert.equal(english.includes('`firstName:lastName`'), false);
+	assert.equal(english.includes('`current:max`'), false);
 });
 
 test('/help command:get explains summary, detailed field, and autocomplete behavior', () => {

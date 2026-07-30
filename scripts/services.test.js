@@ -45,6 +45,7 @@ test('RULE editing requires Name: Level: Description with a positive integer lev
 		'Fire: Description only',
 		'Fire: abc: Description',
 		'Fire: 0: Description',
+		'Fire: 1:',
 	]) {
 		assert.throws(
 			() => setEditableFieldValue(character, 'rules', invalidRule),
