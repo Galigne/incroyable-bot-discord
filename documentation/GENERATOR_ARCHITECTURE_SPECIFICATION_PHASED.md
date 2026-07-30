@@ -29,17 +29,8 @@ For every part:
 2. add or update the tests required by that part;
 3. run `npm run format`;
 4. run `npm test`;
-5. report:
-   - files changed;
-   - behavior implemented;
-   - tests added or changed;
-   - formatting and test results;
-   - deviations from this specification;
-   - unresolved design questions;
-6. stop after completing the current part;
-7. wait for explicit user review and confirmation before starting the next part.
-
-Codex must not continue automatically into another part.
+5. commit the changes using the part name as the commit message;
+6. continue to the next part.
 
 Later-part functionality must not be implemented early unless it is strictly
 required for correctness of the current part. Do not prepare broad unused
