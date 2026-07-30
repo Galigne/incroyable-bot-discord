@@ -23,6 +23,13 @@ merely to make documentation match an implementation.
 - Required Node.js version: 22.12 or newer.
 - Install dependencies with `npm install`.
 - Start the bot with `node index.js`.
+- Keep every file correctly formatted. Never format supported files manually: run
+  `npm run format` to apply the repository formatters and `npm run format:check` to
+  verify formatting without changing files. JavaScript is formatted through
+  ESLint, and every JSON file outside ignored dependency/runtime directories is
+  formatted through Prettier. Pure formatting of files under `save/` is allowed,
+  but it must never alter their data or serve as a migration or compatibility
+  update.
 - Run the complete offline validation with `npm test`.
 - The Discord token belongs only in `.env` as `DISCORD_TOKEN`. Never print, move,
   hard-code, or commit it.

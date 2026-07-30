@@ -323,6 +323,7 @@ conserve seulement les fréquences clairement présentes dans l’ancienne table
 | Bourru mais loyal, exprime son affection par des actes pratiques plutôt que par des paroles aimables. | 2 |
 | Capricieux, change brusquement de priorité et attend de ses proches qu’ils suivent sans explication. | 1 |
 | Charismatique, attire naturellement l’attention mais se sent responsable de ceux qui choisissent de le suivre. | 2 |
+| Cinglé, agit de manière chaotique et imprévisible, en suivant une logique que les autres peinent à comprendre sur le moment. | 2 |
 | Coléreux, réagit vivement à la provocation puis regrette les dégâts causés une fois le calme revenu. | 2 |
 | Courageux, avance malgré la peur et minimise souvent le danger pour rassurer les autres. | 2 |
 | Courtois, respecte les formes même face à un ennemi et remarque immédiatement les manquements à l’étiquette. | 2 |
@@ -331,6 +332,7 @@ conserve seulement les fréquences clairement présentes dans l’ancienne table
 | Curieux, pose la question que tout le monde évite et touche volontiers ce qui devrait rester intact. | 1 |
 | Cynique, suppose que toute institution protège d’abord ses intérêts mais aide discrètement les personnes sincères. | 1 |
 | Désordonné, retrouve sans effort ses propres affaires dans un chaos incompréhensible pour les autres. | 1 |
+| Dépressif, traverse une période de profond découragement, se replie sur lui-même et peine à trouver de l’intérêt ou de l’énergie dans l’action. | 1 |
 | Dévoué, place une personne ou une cause avant son confort et peine à reconnaître quand cette loyauté est exploitée. | 1 |
 | Discret, écoute davantage qu’il ne parle et devient mal à l’aise lorsqu’on lui attribue publiquement un mérite. | 2 |
 | Distrait, remarque les détails inhabituels tout en oubliant les obligations les plus évidentes. | 2 |
@@ -346,6 +348,7 @@ conserve seulement les fréquences clairement présentes dans l’ancienne table
 | Froid en apparence, maîtrise ses réactions pour protéger un attachement beaucoup plus profond qu’il ne l’admet. | 2 |
 | Gaffeur, provoque régulièrement de petits accidents mais se montre étonnamment efficace lorsque la situation devient vraiment grave. | 2 |
 | Hautain, juge les gens selon leur maintien et leur réputation avant d’être forcé de réviser son opinion. | 2 |
+| Idiot, manque de jugement, comprend régulièrement les situations de travers et s’engage avec assurance dans de mauvaises décisions. | 2 |
 | Impatient et impulsif, préfère une mauvaise décision immédiate à une longue attente sans information. | 1 |
 | Insolent, défie l’autorité par réflexe mais respecte les personnes capables de justifier clairement leurs décisions. | 2 |
 | Ironique, utilise le sarcasme pour garder ses distances et devient très direct lorsque quelqu’un est réellement en danger. | 1 |
@@ -363,16 +366,19 @@ conserve seulement les fréquences clairement présentes dans l’ancienne table
 | Pacifique, recherche toujours une solution sans violence mais se prépare soigneusement au cas où elle échouerait. | 2 |
 | Passionné, s’investit entièrement dans un projet et oublie le reste du monde tant que son enthousiasme dure. | 2 |
 | Patient, laisse les autres se dévoiler à leur rythme et agit seulement lorsqu’il estime le moment décisif. | 1 |
+| Pervers sexuel, ramène fréquemment les échanges à des sous-entendus ou préoccupations sexuelles et franchit volontiers les limites de la bienséance. | 2 |
 | Peureux mais prudent, évite les risques inutiles et remarque souvent le danger avant les héros plus téméraires. | 2 |
 | Protecteur, prend spontanément la responsabilité des plus vulnérables et supporte mal de ne pas pouvoir tout contrôler. | 1 |
 | Rancunier, conserve une mémoire exacte des offenses mais peut renoncer à sa vengeance face à des réparations sincères. | 2 |
 | Rebelle, refuse les règles fondées uniquement sur la tradition et exige qu’une autorité démontre sa légitimité. | 2 |
 | Rêveur, imagine constamment d’autres vies et d’autres mondes, parfois au détriment de ce qui se passe devant lui. | 2 |
 | Sage, préfère poser la bonne question plutôt que donner immédiatement un conseil et accepte de reconnaître son ignorance. | 2 |
+| Schizophrène, vit à cet instant une perception désorganisée ou altérée de la réalité, sans que cela définisse automatiquement ses intentions ou sa dangerosité. | 1 |
 | Sensible, perçoit rapidement l’état émotionnel d’un groupe mais absorbe facilement les tensions ambiantes. | 2 |
 | Sérieux, traite chaque engagement avec rigueur et ne comprend pas toujours pourquoi les autres ont besoin de légèreté. | 1 |
 | Serviable, propose son aide avant qu’on la demande et dissimule souvent sa propre fatigue. | 1 |
 | Solitaire, protège farouchement son indépendance tout en espérant secrètement être invité à rester. | 2 |
+| Soumis, cède facilement devant une autorité affirmée et préfère suivre une décision plutôt que risquer une confrontation. | 1 |
 | Susceptible, interprète une critique banale comme un jugement global mais défend vivement les personnes critiquées injustement. | 1 |
 | Têtu, reste fidèle à une décision au-delà du raisonnable mais devient un allié extrêmement constant. | 2 |
 | Timide, évite d’attirer l’attention tout en préparant soigneusement ce qu’il dira si quelqu’un lui donne la parole. | 2 |
