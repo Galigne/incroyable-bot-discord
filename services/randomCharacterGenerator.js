@@ -57,8 +57,7 @@ function populateRandomCharacter(character, options = {}) {
 
 	const talentCount = calculateTalentCount(level);
 	character.talents = pickMany('talents', talentCount, locale, random)
-		.map(entry => `${getField(entry, 'Name')} — ${getField(entry, 'Description')}`)
-		.join('\n');
+		.map(entry => `${getField(entry, 'Name')} — ${getField(entry, 'Description')}`);
 
 	character.statusEffects = random() < 0.25
 		? [getTextValue(pickOne('statusEffect', locale, random))]

@@ -69,6 +69,12 @@ module.exports = function createCharacterChecks(context) {
 				'rules',
 				'- Fire: 2: Controls flames\n- Blink: 1: Teleports a short distance',
 			);
+			setEditableFieldValue(
+				original,
+				'talents',
+				'- Athlete — +1 to sustained movement.\n'
+					+ '- Cold Immunity — Ordinary cold cannot freeze the character.',
+			);
 			try {
 				setEditableFieldValue(original, 'rules', 'Fire: 0: Invalid level');
 				errors.push('RULE levels below 1 should be rejected.');
@@ -147,6 +153,9 @@ module.exports = function createCharacterChecks(context) {
 				|| character.rules[0]?.level !== 2
 				|| character.rules[1]?.name !== 'Blink'
 				|| character.rules[1]?.level !== 1
+				|| getEditableFieldValue(character, 'talents')
+					!== 'Athlete — +1 to sustained movement.\n'
+						+ 'Cold Immunity — Ordinary cold cannot freeze the character.'
 				|| character.equipment[0] !== 'Longsword'
 				|| character.resources.hp.current !== 50
 				|| character.resources.ap.current !== character.resources.ap.max
@@ -172,13 +181,25 @@ module.exports = function createCharacterChecks(context) {
 				|| summary.fields[1]?.value.includes('Reflexes:')
 				|| !summary.fields[2]?.value.includes('Fire (Level 2)')
 				|| !summary.fields[2]?.value.includes('**Talents**')
+				|| !summary.fields[2]?.value.includes('1. Athlete —')
 			) {
 				errors.push('The character summary status is not formatted correctly.');
 			}
-			for (const field of ['appearance', 'race', 'personality', 'statistics', 'rules', 'status']) {
+			for (const field of [
+				'appearance',
+				'race',
+				'personality',
+				'statistics',
+				'rules',
+				'status',
+				'talents',
+			]) {
 				const fieldEmbed = createCharacterFieldEmbed(character, field)?.toJSON();
 				if (field === 'rules' && !fieldEmbed.description.includes('Fire — Level 2')) {
 					errors.push('The detailed RULE view does not show RULE levels.');
+				}
+				if (field === 'talents' && !fieldEmbed.description.includes('2. Cold Immunity —')) {
+					errors.push('The detailed talent view does not render talents as a list.');
 				}
 				if (
 					field === 'statistics'
@@ -192,9 +213,13 @@ module.exports = function createCharacterChecks(context) {
 				key: 'Legacy',
 				creatorId: '0',
 				rules: [{ name: 'Legacy RULE', description: 'Saved without a level.' }],
+				talents: 'Legacy talent\nSecond legacy talent',
 			});
-			if (legacyCharacter.rules[0]?.level !== 1) {
-				errors.push('Legacy RULEs should default to level 1.');
+			if (
+				legacyCharacter.rules[0]?.level !== 1
+				|| legacyCharacter.talents.length !== 2
+			) {
+				errors.push('Legacy RULEs and multiline talents should remain compatible.');
 			}
 			character.resources.ap.current = 2;
 			character.resources.ap.max = 4;
@@ -263,7 +288,8 @@ module.exports = function createCharacterChecks(context) {
 				character.rules.length !== expectedRuleLevels.length
 				|| character.rules.some((rule, index) => rule.level !== expectedRuleLevels[index])
 				|| new Set(character.rules.map(rule => rule.name)).size !== character.rules.length
-				|| character.talents.split('\n').length !== expectedTalentCount
+				|| character.talents.length !== expectedTalentCount
+				|| new Set(character.talents).size !== character.talents.length
 			) {
 				errors.push('Generated RULEs or talents do not match the character attributes.');
 			}

@@ -50,6 +50,19 @@ function copyStringList(value) {
 	return Array.isArray(value) ? value.filter(item => typeof item === 'string') : [];
 }
 
+function copyTalentList(value) {
+	if (Array.isArray(value)) {
+		return copyStringList(value);
+	}
+	if (typeof value !== 'string') {
+		return [];
+	}
+	return value
+		.split(/\r?\n/)
+		.map(line => line.trim().replace(/^[-*]\s+/, ''))
+		.filter(Boolean);
+}
+
 function copyRules(value) {
 	if (!Array.isArray(value)) {
 		return [];
@@ -67,6 +80,7 @@ module.exports = {
 	characterEditError,
 	copyRules,
 	copyStringList,
+	copyTalentList,
 	validateActionPointEdit,
 	validateActionPointPair,
 };

@@ -350,12 +350,15 @@ on submit:
 - One logical entry per line.
 - Leading `- ` or `* ` is optional and normalized away.
 - Empty multiline content clears the field.
+- Talents are stored as `string[]`; each element combines the complete
+  user-editable talent name and description.
 - RULEs use `Name: Level: Description`, one RULE per line. The level is a positive
   whole number; descriptions may contain additional colons.
 
-The model still stores traits, RULEs, status effects, equipment, and inventory in
-structured arrays because generation and display logic depend on them. “No list
-system” refers to the command UX, not removal of the internal schema.
+The model still stores traits, talents, RULEs, status effects, equipment, and
+inventory in arrays because generation and display logic depend on them. Talents
+remain plain strings rather than structured objects. “No list system” refers to
+the command UX, not removal of the internal schema.
 
 ## Character rules and permissions
 
@@ -506,6 +509,8 @@ At present it:
 - derives initiative and reflexes from speed;
 - awards RULE points at Intelligence 10, 12, 14, 16, 18, and 20, then spends them
   on at most two RULEs by maximizing the first RULE before adding the second;
+- generates unique localized talents as separate array entries: one at levels
+  1–2, two at levels 3–5, three at levels 6–8, and four at levels 9–10;
 - derives HP, AP, and MD;
 - chooses armor that meets Constitution requirements and derives AR from it;
 - equips one armor and one or two weapons;

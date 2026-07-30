@@ -1,6 +1,7 @@
 const {
 	copyRules,
 	copyStringList,
+	copyTalentList,
 } = require('../services/mechanics/characterValidation');
 const { createResourcesFromSave } = require('../services/mechanics/resources');
 const { createStats } = require('../services/mechanics/statistics');
@@ -32,7 +33,7 @@ class Character {
 		};
 		character.stats = createStats(data.stats);
 		character.rules = copyRules(data.rules);
-		character.talents = data.talents ?? '';
+		character.talents = copyTalentList(data.talents);
 		character.resources = createResourcesFromSave(data);
 		character.statusEffects = copyStringList(data.statusEffects);
 		character.equipment = copyStringList(data.equipment);
@@ -69,7 +70,7 @@ class Character {
 		};
 		this.stats = createStats();
 		this.rules = [];
-		this.talents = '';
+		this.talents = [];
 		this.resources = {
 			hp: { current: 100, max: 100 },
 			ar: { current: 0, max: 0 },

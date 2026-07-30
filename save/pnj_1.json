@@ -1,0 +1,85 @@
+{
+  "schemaVersion": 1,
+  "key": "pnj_1",
+  "firstName": "Cassia",
+  "lastName": "Reed",
+  "creatorId": "168424192520355843",
+  "level": 10,
+  "race": {
+    "name": "Humain",
+    "physicalDescription": "Présents dans presque toutes les régions, les humains se distinguent par la grande diversité de leurs apparences, de leurs cultures et de leurs traditions.",
+    "lore": ""
+  },
+  "appearance": "Tablier couvert de farine, gestes vifs et habitude d’écouter pendant que les autres mangent.",
+  "backstory": "Un cuisinier en a plus appris sur les factions rivales grâce aux bribes de conversation entendues à table que la plupart des espions professionnels.",
+  "goals": "Protéger le personnel des cuisines grâce à ces informations sans devenir l’informateur forcé de qui que ce soit.",
+  "personality": {
+    "traits": [
+      "Il prend toujours le meilleur des monstres et le pire des institutions.",
+      "Fini fataliste ; traite chaque désastre comme une confirmation d'une prédiction que personne ne se souvient de l'ouïe."
+    ],
+    "description": ""
+  },
+  "racialTraits": {
+    "skillBonus": "+1 en Histoire",
+    "physicalAbility": "Endurance acharnée : les humains résistent mieux à la fatigue causée par les longs voyages, la chaleur, les marches forcées, les poursuites et les efforts physiques répétés."
+  },
+  "stats": {
+    "constitution": 11,
+    "strength": 14,
+    "dexterity": 13,
+    "intelligence": 15,
+    "speed": 13,
+    "perception": 11,
+    "charisma": 10,
+    "initiative": 13,
+    "reflexes": 13
+  },
+  "rules": [
+    {
+      "name": "LOI du Poids",
+      "description": "Permet d’alourdir ou d’alléger modérément un objet visible. Son poids ne peut pas être réduit à zéro, et l’effet exige de rester concentré.",
+      "level": 2
+    }
+  ],
+  "talents": [
+    "Survivant — +1 pour supporter le temps dur, la faim, l'épuisement, ou les voyages difficiles.",
+    "Dans le sens des rues — +1 lorsque vous trouvez des marchandises illicites, des rumeurs, ou des routes sûres à travers une ville.",
+    "Liste des marchandises à payer — +1 lors de la lutte contre un seul adversaire visible sans interférence à proximité.",
+    "Dessin rapide — Dessiner ou changer une arme préparée ne ralentit pas la première action du personnage."
+  ],
+  "resources": {
+    "hp": {
+      "current": 308,
+      "max": 308
+    },
+    "ar": {
+      "current": 15,
+      "max": 15
+    },
+    "ap": {
+      "current": 8,
+      "max": 8
+    },
+    "md": {
+      "current": 6.5,
+      "max": 6.5
+    }
+  },
+  "statusEffects": [],
+  "equipment": [
+    "Armure légère commune — Vêtements ordinaires ou rembourrage léger qui préservent la mobilité mais n’offrent presque aucun PR.",
+    "Violeur — Une épée de poussée précise favorisant la dextérité et le travail des pieds soigneux.",
+    "Coup de fouet — Une arme flexible utile pour le désarmement, le trépied et le contrôle de l'espace."
+  ],
+  "inventory": [
+    "Kit d'escalade — Pitons, marteau, sangles et aides à l'escalade.",
+    "Barre de crowd — Un levier en fer robuste pour portes, caisses et obstacles.",
+    "fragment de rune non identifié — Un morceau de matériel magique contenant une partie d'une inscription inconnue.",
+    "65 pièces d’or"
+  ],
+  "encumbrance": {
+    "current": 6,
+    "max": 11
+  }
+}

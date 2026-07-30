@@ -60,7 +60,7 @@ function createCharacterSummaryEmbed(character, locale = 'en') {
 				250,
 				locale,
 			),
-			truncate(character.talents || t(locale, 'common.empty'), 250),
+			formatList(character.talents, 250, locale),
 			formatList(character.inventory, 250, locale),
 		],
 		[
@@ -205,10 +205,7 @@ function createCharacterFieldEmbed(character, fieldName, locale = 'en') {
 	case 'rules':
 		return embed.setDescription(formatRules(character.rules, locale));
 	case 'talents':
-		return embed.setDescription(truncate(
-			character.talents || t(locale, 'common.empty'),
-			4_096,
-		));
+		return embed.setDescription(formatList(character.talents, 4_096, locale));
 	case 'status':
 		return embed.setDescription(formatDetailedStatus(character, locale));
 	case 'statuseffects':

@@ -1,5 +1,6 @@
 const assert = require('node:assert/strict');
 const { test } = require('node:test');
+const Character = require('../models/Character');
 const {
 	calculateArmorRating,
 	canEquipArmor,
@@ -7,6 +8,7 @@ const {
 const {
 	copyRules,
 	copyStringList,
+	copyTalentList,
 	validateActionPointEdit,
 } = require('../services/mechanics/characterValidation');
 const {
@@ -14,6 +16,7 @@ const {
 	calculateRulePoints,
 	calculateStatBudget,
 	calculateStatCost,
+	calculateTalentCount,
 	generateStats,
 } = require('../services/mechanics/characterGeneration');
 const { dealDamage } = require('../services/mechanics/damage');
@@ -160,6 +163,11 @@ test('statistics and derived-stat recalculation preserve existing values', () =>
 
 test('character validation preserves legacy save normalization and AP constraints', () => {
 	assert.deepEqual(copyStringList(['valid', 2, null]), ['valid']);
+	assert.deepEqual(copyTalentList('First\r\n- Second\n* Third\n\n'), [
+		'First',
+		'Second',
+		'Third',
+	]);
 	assert.deepEqual(copyRules([
 		{ name: 'Legacy', description: 2 },
 		{ name: 'Valid', description: 'Description', level: 2 },
@@ -184,6 +192,39 @@ test('character validation preserves legacy save normalization and AP constraint
 		() => validateActionPointEdit(character, ['resources', 'ap', 'max'], 11),
 		error => error.code === 'INVALID_CHARACTER_EDIT',
 	);
+});
+
+test('blank characters and hydrated saves use talent arrays', () => {
+	const blankCharacter = new Character('Blank', 'creator');
+	assert.deepEqual(blankCharacter.talents, []);
+
+	const savedTalents = [
+		'Athlete — +1 to sustained movement.',
+		'Cold Immunity — Ordinary cold cannot freeze the character.',
+	];
+	const hydratedCharacter = Character.fromSave({
+		creatorId: 'creator',
+		key: 'Array.Save',
+		talents: savedTalents,
+	});
+	assert.deepEqual(hydratedCharacter.talents, savedTalents);
+	assert.notEqual(hydratedCharacter.talents, savedTalents);
+
+	const legacyCharacter = Character.fromSave({
+		creatorId: 'creator',
+		key: 'Legacy.Save',
+		talents: [
+			'  Athlete — +1 to sustained movement.  ',
+			'- Cold Immunity — Ordinary cold cannot freeze the character.',
+			'',
+			'* Keen Eye — +1 when searching for details.',
+		].join('\r\n'),
+	});
+	assert.deepEqual(legacyCharacter.talents, [
+		'Athlete — +1 to sustained movement.',
+		'Cold Immunity — Ordinary cold cannot freeze the character.',
+		'Keen Eye — +1 when searching for details.',
+	]);
 });
 
 test('seeded random character generation remains equivalent', () => {
@@ -240,6 +281,58 @@ test('seeded random character generation remains equivalent', () => {
 	});
 });
 
+test('random character generation creates localized unique talent arrays by level', () => {
+	const talentCounts = new Map([
+		[1, 1],
+		[2, 1],
+		[3, 2],
+		[5, 2],
+		[6, 3],
+		[8, 3],
+		[9, 4],
+		[10, 4],
+	]);
+
+	for (const locale of ['en', 'fr']) {
+		for (const [level, expectedCount] of talentCounts) {
+			const character = createCharacterFixture();
+			populateRandomCharacter(character, {
+				level,
+				locale,
+				random: () => 0,
+			});
+
+			assert.equal(calculateTalentCount(level), expectedCount, `${locale} level ${level}`);
+			assert.equal(character.talents.length, expectedCount, `${locale} level ${level}`);
+			assert.equal(
+				new Set(character.talents).size,
+				expectedCount,
+				`${locale} level ${level}`,
+			);
+			assert.equal(
+				character.talents.every(talent => typeof talent === 'string' && talent),
+				true,
+				`${locale} level ${level}`,
+			);
+		}
+	}
+
+	const englishCharacter = createCharacterFixture();
+	populateRandomCharacter(englishCharacter, {
+		level: 1,
+		locale: 'en',
+		random: () => 0,
+	});
+	const frenchCharacter = createCharacterFixture();
+	populateRandomCharacter(frenchCharacter, {
+		level: 1,
+		locale: 'fr',
+		random: () => 0,
+	});
+	assert.match(englishCharacter.talents[0], /^Athlete —/);
+	assert.match(frenchCharacter.talents[0], /^Athlète —/);
+});
+
 test('random character generation uses localized content without changing identifiers', () => {
 	const character = createCharacterFixture();
 	populateRandomCharacter(character, createLocalizedCharacterGenerationOptions({
@@ -271,7 +364,7 @@ function createCharacterFixture() {
 		racialTraits: { skillBonus: '', physicalAbility: '' },
 		stats: createStats(),
 		rules: [],
-		talents: '',
+		talents: [],
 		resources: {
 			hp: { current: 100, max: 100 },
 			ar: { current: 0, max: 0 },

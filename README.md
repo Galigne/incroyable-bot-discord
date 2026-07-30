@@ -118,8 +118,10 @@ Statistics use one prefilled `statName: statValue` line for each of
 order but must each appear exactly once; the complete group is validated before
 any statistic changes.
 
-Personality traits, status effects, equipment, and inventory use one entry per
-line. Optional leading dashes are normalized away. RULEs use
+Personality traits, talents, status effects, equipment, and inventory use one
+entry per line. Optional leading `- ` or `* ` markers are normalized away, empty
+lines are ignored, and an empty submission clears the complete collection. Talent
+names and descriptions remain combined in each list entry. RULEs use
 `Name: Level: Description`, one per line; only the first two colons are separators,
 so descriptions may contain additional colons.
 
@@ -206,6 +208,9 @@ Random characters use the rulebook's stat budget and nonlinear stat costs. Their
 RULE Points come from Intelligence thresholds and are spent on at most two RULEs,
 prioritizing the first RULE's level; HP, AP, MD, armor eligibility, AR,
 talent count, equipment, inventory, gold, and encumbrance are derived automatically.
+Generated talents are stored as unique localized list entries: levels 1–2 receive
+one talent, levels 3–5 receive two, levels 6–8 receive three, and levels 9–10
+receive four.
 If the optional level is omitted, a level from 1 to 10 is rolled. The optional
 background selects one of the configured NPC categories and is also chosen randomly
 when omitted. It generates the character's appearance, backstory, and goals.

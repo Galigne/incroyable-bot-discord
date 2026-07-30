@@ -33,6 +33,49 @@ test('character summary and detail embeds have no footer', () => {
 	assert.equal(detail.footer, undefined);
 });
 
+test('character summaries and talent details render localized bounded lists', () => {
+	const character = new Character('Talent.Render', 'creator');
+	character.talents = [
+		'Athlete — +1 to sustained movement.',
+		'Cold Immunity — Ordinary cold cannot freeze the character.',
+	];
+
+	const summary = createCharacterGetResponse(character, null, 'en')
+		.embeds[0].toJSON();
+	const detailed = createCharacterGetResponse(character, 'talents', 'en')
+		.embeds[0].toJSON();
+	assert.match(
+		summary.fields[2].value,
+		/\*\*Talents\*\*\n1\. Athlete — \+1 to sustained movement\.\n2\. Cold Immunity —/,
+	);
+	assert.equal(detailed.description, [
+		'1. Athlete — +1 to sustained movement.',
+		'2. Cold Immunity — Ordinary cold cannot freeze the character.',
+	].join('\n'));
+
+	const emptyEnglish = createCharacterGetResponse(
+		new Character('Empty.English', 'creator'),
+		'talents',
+		'en',
+	).embeds[0].toJSON();
+	const emptyFrench = createCharacterGetResponse(
+		new Character('Empty.French', 'creator'),
+		'talents',
+		'fr',
+	).embeds[0].toJSON();
+	assert.equal(emptyEnglish.description, translations.en.common.empty);
+	assert.equal(emptyFrench.description, translations.fr.common.empty);
+
+	character.talents = ['A'.repeat(5_000)];
+	const boundedSummary = createCharacterGetResponse(character, null, 'en')
+		.embeds[0].toJSON();
+	const boundedDetailed = createCharacterGetResponse(character, 'talents', 'en')
+		.embeds[0].toJSON();
+	assert.ok(boundedSummary.fields[2].value.length <= 1_024);
+	assert.equal(boundedDetailed.description.length, 4_096);
+	assert.match(boundedDetailed.description, /…$/);
+});
+
 test('generated character embeds have no footer', () => {
 	const character = new Character('Generated.Footer.Test', 'creator');
 	const embed = createGeneratedCharacterResponse(character, 'en')

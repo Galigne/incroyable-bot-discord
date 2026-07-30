@@ -344,6 +344,38 @@ test('RULE parsing uses only the first two colons and never partially mutates', 
 	assert.equal(JSON.stringify(character.rules), before);
 });
 
+test('talent editing replaces, normalizes, serializes, and clears the multiline list', () => {
+	const character = new Character('Talents', 'tester');
+	const outcome = setEditableFieldValue(
+		character,
+		'talents',
+		[
+			'  - Athlete — +1 to sustained movement.  ',
+			'',
+			'* Cold Immunity — Ordinary cold cannot freeze the character.',
+			'  Keen Eye — +1 when searching for details.  ',
+		].join('\r\n'),
+	);
+
+	assert.deepEqual(character.talents, [
+		'Athlete — +1 to sustained movement.',
+		'Cold Immunity — Ordinary cold cannot freeze the character.',
+		'Keen Eye — +1 when searching for details.',
+	]);
+	assert.equal(
+		getEditableFieldValue(character, 'talents'),
+		character.talents.join('\n'),
+	);
+	assert.deepEqual(outcome, {
+		translationKey: 'editorResults.collectionUpdated',
+		translationVariables: { fieldId: 'talents' },
+	});
+
+	setEditableFieldValue(character, 'talents', '\n \r\n');
+	assert.deepEqual(character.talents, []);
+	assert.equal(getEditableFieldValue(character, 'talents'), '');
+});
+
 test('race, background, and personality modals prefill every separate input', () => {
 	const character = createFilledCharacter();
 	for (const [field, labels] of [

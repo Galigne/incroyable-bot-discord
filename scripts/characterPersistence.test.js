@@ -26,6 +26,41 @@ after(() => {
 	fs.rmSync(testSaveDirectory, { recursive: true, force: true });
 });
 
+test('talent arrays round-trip and legacy multiline saves remain compatible', async () => {
+	const arrayKey = 'Talents.Array';
+	const talents = [
+		'Athlete — +1 to sustained movement.',
+		'Cold Immunity — Ordinary cold cannot freeze the character.',
+	];
+	await createCharacter(arrayKey, 'creator', character => {
+		character.talents = [...talents];
+	});
+
+	assert.deepEqual((await getCharacter(arrayKey)).talents, talents);
+	assert.deepEqual(JSON.parse(await readSave(arrayKey)).talents, talents);
+
+	const legacyKey = 'Talents.Legacy';
+	await fsPromises.writeFile(
+		getSavePath(legacyKey),
+		JSON.stringify({
+			schemaVersion: 1,
+			key: legacyKey,
+			creatorId: 'creator',
+			talents: [
+				'Athlete — +1 to sustained movement.',
+				'Cold Immunity — Ordinary cold cannot freeze the character.',
+			].join('\n'),
+		}),
+		'utf8',
+	);
+	assert.deepEqual((await getCharacter(legacyKey)).talents, talents);
+
+	await updateCharacter(legacyKey, () => true, character => {
+		character.level = 2;
+	});
+	assert.deepEqual(JSON.parse(await readSave(legacyKey)).talents, talents);
+});
+
 test('concurrent updates to one character read the preceding saved result', async () => {
 	const characterKey = 'Concurrent.Fields';
 	await createCharacter(characterKey, 'creator');

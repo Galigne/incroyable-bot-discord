@@ -136,8 +136,11 @@ add('rules.name', 'ruleName');
 add('rules.level', 'ruleLevel');
 add('rules.description', 'ruleDescription');
 add('talents', 'talents', {
-	...stored(['talents'], 'text', { paragraph: true }),
-	...editable('talents', 'scalar', ['talents']),
+	...stored(['talents'], 'text', {
+		multiline: true,
+		paragraph: true,
+	}),
+	...editable('talents', 'multiline', ['talents']),
 	viewId: 'talents',
 });
 add('status', 'status', { viewId: 'status' });
