@@ -1,76 +1,76 @@
 {
-  "name": "Armes",
+  "name": "armes",
   "description": "Armes adaptées aux personnages générés",
   "entries": [
     {
       "weight": 5,
       "fields": {
-        "Name": "Mot long",
-        "Description": "Une lame à une main fiable pour les coupes et les poussées.",
+        "Name": "Épée longue",
+        "Description": "Une lame fiable à une main, aussi efficace pour trancher que pour porter des coups d'estoc.",
         "Encumbrance": 2
       }
     },
     {
       "weight": 5,
       "fields": {
-        "Name": "Sabre courte",
-        "Description": "Une lame rapide et polyvalente adaptée au combat rapproché.",
+        "Name": "Épée courte",
+        "Description": "Une lame rapide et polyvalente, adaptée au combat rapproché.",
         "Encumbrance": 1
       }
     },
     {
       "weight": 5,
       "fields": {
-        "Name": "Lancer",
-        "Description": "Une arme de longue portée utile pour pousser, serrer et lancer.",
+        "Name": "Lance",
+        "Description": "Une arme à longue portée utile pour frapper d'estoc, tenir une position ou être lancée.",
         "Encumbrance": 2
       }
     },
     {
       "weight": 5,
       "fields": {
-        "Name": "Aile de chasse",
-        "Description": "Une arme pratique avec des munitions ordinaires illimitées.",
+        "Name": "Arc de chasse",
+        "Description": "Une arme à distance pratique disposant de munitions ordinaires illimitées.",
         "Encumbrance": 2
       }
     },
     {
       "weight": 5,
       "fields": {
-        "Name": "Déclencheur",
-        "Description": "Une lame de lumière dissimulable qui sert aussi d'outil.",
+        "Name": "Dague",
+        "Description": "Une lame légère et facile à dissimuler, qui peut également servir d'outil.",
         "Encumbrance": 1
       }
     },
     {
       "weight": 4,
       "fields": {
-        "Name": "Axe de bataille",
-        "Description": "Une arme à forte adhérence efficace contre les boucliers et les obstacles en bois.",
+        "Name": "Hache de bataille",
+        "Description": "Une arme lourde et tranchante, efficace contre les boucliers et les obstacles en bois.",
         "Encumbrance": 2
       }
     },
     {
       "weight": 4,
       "fields": {
-        "Name": "Masse",
-        "Description": "Une arme à main à écraser efficace contre une protection rigide.",
+        "Name": "Masse d'armes",
+        "Description": "Une arme contondante à une main, efficace contre les protections rigides.",
         "Encumbrance": 2
       }
     },
     {
       "weight": 4,
       "fields": {
-        "Name": "Personnel de quartier",
-        "Description": "Un simple personnel à deux mains utilisé pour la défense, la portée et le levier.",
+        "Name": "Bâton de combat",
+        "Description": "Un simple bâton à deux mains offrant défense, allonge et effet de levier.",
         "Encumbrance": 2
       }
     },
     {
       "weight": 4,
       "fields": {
-        "Name": "Acrobate",
-        "Description": "Une arme mécanique puissante à portée avec des boulons ordinaires illimités.",
+        "Name": "Arbalète",
+        "Description": "Une puissante arme mécanique à distance disposant de carreaux ordinaires illimités.",
         "Encumbrance": 2
       }
     },
@@ -78,23 +78,23 @@
       "weight": 4,
       "fields": {
         "Name": "Sabre",
-        "Description": "Une lame à une main courbe favorisant les attaques rapides.",
+        "Description": "Une lame courbe à une main, conçue pour porter rapidement des coups de taille.",
         "Encumbrance": 1
       }
     },
     {
       "weight": 3,
       "fields": {
-        "Name": "Grande épée",
-        "Description": "Une épée massive à deux mains conçue pour des attaques larges et violentes.",
+        "Name": "Espadon",
+        "Description": "Une imposante épée à deux mains conçue pour de puissantes attaques amples.",
         "Encumbrance": 2
       }
     },
     {
       "weight": 3,
       "fields": {
-        "Name": "Halbère",
-        "Description": "Un bras de mât à deux mains combinant une tête de axe, un crochet et un point de lance.",
+        "Name": "Hallebarde",
+        "Description": "Une arme d'hast à deux mains combinant un fer de hache, un crochet et une pointe de lance.",
         "Encumbrance": 2
       }
     },
@@ -102,39 +102,39 @@
       "weight": 3,
       "fields": {
         "Name": "Marteau de guerre",
-        "Description": "Une arme de frappe concentrée pour les armures et les fortifications.",
+        "Description": "Une arme qui concentre la force de ses coups contre les armures et les fortifications.",
         "Encumbrance": 2
       }
     },
     {
       "weight": 3,
       "fields": {
-        "Name": "Violeur",
-        "Description": "Une épée de poussée précise favorisant la dextérité et le travail des pieds soigneux.",
+        "Name": "Rapière",
+        "Description": "Une épée d'estoc précise qui privilégie la Dextérité et un jeu de jambes maîtrisé.",
         "Encumbrance": 1
       }
     },
     {
       "weight": 3,
       "fields": {
-        "Name": "Ancrage",
-        "Description": "Un arc compact qui reste efficace à cheval ou à terrain serré.",
+        "Name": "Arc recourbé",
+        "Description": "Un arc compact qui reste efficace à cheval ou dans les espaces exigus.",
         "Encumbrance": 2
       }
     },
     {
       "weight": 3,
       "fields": {
-        "Name": "Axe des mains",
-        "Description": "Une arme compacte à couper équilibrée assez bien pour lancer.",
+        "Name": "Hachette",
+        "Description": "Une arme tranchante compacte, assez bien équilibrée pour être lancée.",
         "Encumbrance": 1
       }
     },
     {
       "weight": 3,
       "fields": {
-        "Name": "Flacon",
-        "Description": "Une tête enchaînée, capable d'atteindre des défenses simples.",
+        "Name": "Fléau d'armes",
+        "Description": "Une masse articulée par une chaîne, capable de contourner les défenses simples.",
         "Encumbrance": 2
       }
     },
@@ -142,7 +142,7 @@
       "weight": 3,
       "fields": {
         "Name": "Cimeterre",
-        "Description": "Une épée large et courbée conçue pour les attaques de coupe de fluides.",
+        "Description": "Une large épée courbe conçue pour enchaîner des coups de taille fluides.",
         "Encumbrance": 1
       }
     },
@@ -150,31 +150,31 @@
       "weight": 2,
       "fields": {
         "Name": "Glaive",
-        "Description": "Un long bras de mât avec une lame de coupe et une excellente portée.",
+        "Description": "Une longue arme d'hast munie d'une lame tranchante et offrant une excellente allonge.",
         "Encumbrance": 2
       }
     },
     {
       "weight": 2,
       "fields": {
-        "Name": "Couteaux de combat jumeaux",
-        "Description": "Une paire de lames rapides assorties utilisées ensemble.",
+        "Name": "Paire de couteaux de combat",
+        "Description": "Deux lames rapides et assorties, conçues pour être maniées ensemble.",
         "Encumbrance": 1
       }
     },
     {
       "weight": 2,
       "fields": {
-        "Name": "Grose arbalète répétitive",
-        "Description": "Un mécanisme volumineux capable de tirer rapidement avant le rechargement.",
+        "Name": "Arbalète lourde à répétition",
+        "Description": "Un mécanisme encombrant capable de tirer rapidement plusieurs traits avant d'être rechargé.",
         "Encumbrance": 3
       }
     },
     {
       "weight": 2,
       "fields": {
-        "Name": "Coup de fouet",
-        "Description": "Une arme flexible utile pour le désarmement, le trépied et le contrôle de l'espace.",
+        "Name": "Fouet",
+        "Description": "Une arme souple permettant de désarmer, de faire trébucher et de contrôler l'espace.",
         "Encumbrance": 1
       }
     },
@@ -182,57 +182,57 @@
       "weight": 2,
       "fields": {
         "Name": "Trident",
-        "Description": "Une lance à trois volets adaptée à la pêche, au piquage et au combat sous-marin.",
+        "Description": "Une lance à trois pointes adaptée à la pêche, à l'immobilisation et au combat sous-marin.",
         "Encumbrance": 2
       }
     },
     {
       "weight": 2,
       "fields": {
-        "Name": "Écharpe",
-        "Description": "Une arme légère était munie de pierres ou de petites balles de plomb.",
+        "Name": "Fronde",
+        "Description": "Une arme à distance légère utilisant des pierres ou de petites billes de plomb.",
         "Encumbrance": 0
       }
     },
     {
       "fields": {
-        "Name": "Le marteau de Runesmith",
-        "Description": "Un marteau de construction renforcé équilibré pour le combat et le travail runique.",
+        "Name": "Marteau de maître runique",
+        "Description": "Un marteau d'artisan renforcé, équilibré pour le combat comme pour l'art runique.",
         "Encumbrance": 2
       }
     },
     {
       "fields": {
-        "Name": "Chaîne à lames",
-        "Description": "Une arme flexible difficile offrant une portée à risque considérable.",
+        "Name": "Chaîne hérissée de lames",
+        "Description": "Une arme souple et difficile à manier, qui offre une grande allonge au prix de risques considérables.",
         "Encumbrance": 2
       }
     },
     {
       "fields": {
-        "Name": "Scepteur de cristal",
-        "Description": "Un implant d'arcane durable qui fonctionne aussi comme un mace léger.",
+        "Name": "Sceptre de cristal",
+        "Description": "Un instrument magique robuste qui peut également servir de masse légère.",
         "Encumbrance": 1
       }
     },
     {
       "fields": {
-        "Name": "Mâle de fer-méteor",
-        "Description": "Un marteau à deux mains exceptionnellement lourd avec un impact dévastateur.",
+        "Name": "Maillet en fer météorique",
+        "Description": "Un marteau à deux mains exceptionnellement lourd, dont les impacts sont dévastateurs.",
         "Encumbrance": 3
       }
     },
     {
       "fields": {
-        "Name": "Chakram d'argent-lune",
-        "Description": "Une lame circulaire qui brille sous le clair de lune.",
+        "Name": "Chakram en argent lunaire",
+        "Description": "Une lame de jet circulaire qui brille sous la lumière de la lune.",
         "Encumbrance": 1
       }
     },
     {
       "fields": {
-        "Name": "Longbow os",
-        "Description": "Un arc puissant, assemblé à partir des restes d'une bête géante.",
+        "Name": "Arc long en os",
+        "Description": "Un arc puissant assemblé à partir des ossements d'une bête gigantesque.",
         "Encumbrance": 2
       }
     }

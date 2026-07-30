@@ -284,6 +284,14 @@ localize choice/autocomplete display labels without changing their English value
 Use `documentation/JDR_RANDOM_RULES_FR.md` as the canonical source for French game
 terminology, including `PV`, `PR`, `PA`, `DD`, `LOI`, and `dons raciaux`. Treat that
 French rulebook as read-only unless the user explicitly requests a rulebook change.
+Every translation must be written from the complete context of the source entry,
+not by translating words or isolated fragments literally. Preserve the intended
+meaning, tone, register, and relationships between fields; rewrite idioms and
+fantasy descriptions into natural French when necessary. Keep proper names
+unchanged, distinguish them from descriptive names that should be localized, and
+use the French rulebook terminology whenever it defines the concept. Review the
+finished French text in context and reject calques, mistranslations, and untranslated
+user-facing values even when they are grammatically valid.
 Register every character field once in `services/characterFieldCatalog.js`. Derive
 editor/viewer choices, aliases, storage paths, and presentation labels from that
 catalog; do not create parallel field maps in commands, models, services, or tests.
@@ -378,6 +386,11 @@ Missing, malformed, and unsupported versions are rejected with distinct stable
 error codes. Invalid and outdated saves must not be migrated, rewritten, or loaded
 through a legacy fallback. Character listing skips them and reports their
 CharacterKeys through `CharacterLoadError`.
+Existing character saves and save-format backward compatibility are out of scope
+by default. Do not inspect, migrate, repair, rewrite, or adapt implementation work
+for existing save files, and do not add compatibility paths for older save formats,
+unless the user explicitly requests that work. This does not authorize modifying
+or deleting real files under `save/`; preserve them and keep tests isolated.
 `appearance` remains a standalone saved text property displayed directly below
 level and race in the public summary. It is edited as part of the atomic
 `background` group.

@@ -64,7 +64,7 @@
     {
       "weight": 8,
       "fields": {
-        "Name": "Armure moyenne commune",
+        "Name": "Armure intermédiaire commune",
         "Type": "medium",
         "Rarity": "common",
         "Description": "Protection standard en cuir renforcé, en écailles ou en cotte de mailles partielle.",

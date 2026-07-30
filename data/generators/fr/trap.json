@@ -1,115 +1,115 @@
 {
-  "name": "Pièges",
+  "name": "pièges",
   "description": "Dangers mécaniques, magiques et sociaux",
   "entries": [
     {
       "weight": 3,
-      "value": "Une tuile de pression scelle les deux portes et remplit lentement la pièce de brouillard inoffensif qui cache la fosse."
+      "value": "Une dalle à pression condamne les deux portes, puis emplit lentement la salle d'une brume inoffensive qui dissimule la véritable fosse."
     },
     {
-      "value": "Une rune échange les voix des deux premières créatures qui la traversent jusqu'à ce qu'elles s'entendent sincèrement sur quelque chose."
-    },
-    {
-      "weight": 2,
-      "value": "Un coffre à trésor accuse fort quiconque l'ouvre de vol, alertant les gardiens voisins par leur nom."
+      "value": "Une rune échange la voix des deux premières créatures qui la franchissent, jusqu'à ce qu'elles tombent sincèrement d'accord sur un sujet."
     },
     {
       "weight": 2,
-      "value": "Un couloir se répète jusqu'à ce que les voyageurs marchent en arrière ou éteindre chaque lumière."
+      "value": "Un coffre au trésor accuse bruyamment de vol la personne qui l'ouvre et alerte nommément les gardiens à proximité."
+    },
+    {
+      "weight": 2,
+      "value": "Un couloir se répète indéfiniment jusqu'à ce que les voyageurs avancent à reculons ou éteignent toutes les lumières."
     },
     {
       "weight": 3,
-      "value": "Un tréfile libère des dizaines de marbres de verre tandis que des volets cachés créent un plancher raide en descente."
+      "value": "Un fil tendu libère des dizaines de billes de verre tandis que des panneaux dissimulés inclinent fortement le sol."
     },
     {
-      "value": "Une poignée de porte vole l'ombre de l'ouvreur ; l'ombre court devant pour avertir les ennemis et exagérer la force du parti."
-    },
-    {
-      "weight": 2,
-      "value": "Une fausse fontaine de guérison restaure l'armure tout en transférant tranquillement les dommages égaux à la personne suivante qui boit."
-    },
-    {
-      "value": "Une rune de plafond inverse d'abord la gravité pour les objets lâches, fournissant un bref avertissement avant d'affecter les créatures."
-    },
-    {
-      "value": "Une idole bijoutée se téléporte dans le paquet de celui qui la touche tout en se remplaçant par une réplique criante."
+      "value": "Une poignée de porte vole l'ombre de la personne qui l'actionne. L'ombre part prévenir les ennemis en exagérant la puissance du groupe."
     },
     {
       "weight": 2,
-      "value": "Un escalier compte des nombres parlés ; en disant treize anime les marches dans un serpent de pierre."
+      "value": "Une fausse fontaine de soins restaure la protection, mais inflige discrètement autant de dégâts à la prochaine personne qui boit."
+    },
+    {
+      "value": "Une rune au plafond inverse d'abord la gravité des objets qui ne sont pas fixés, laissant un bref avertissement avant d'affecter les créatures."
+    },
+    {
+      "value": "Une idole sertie de joyaux se téléporte dans le sac de la personne qui la touche et laisse à sa place une réplique qui hurle."
+    },
+    {
+      "weight": 2,
+      "value": "Un escalier compte les nombres prononcés à voix haute. Dire treize transforme ses marches en un serpent de pierre."
     },
     {
       "weight": 3,
-      "value": "Une porte verrouillée s'ouvre facilement lorsqu'elle est poussée, mais déclenche des fléchettes lorsque les pics de verrouillage entrent dans le trou de clé décoratif."
+      "value": "Une grille verrouillée s'ouvre facilement en poussant, mais déclenche des fléchettes si des crochets pénètrent dans sa serrure décorative."
     },
     {
       "weight": 2,
-      "value": "Un miroir crée une réflexion hostile par arme visible ; le revêtement ou largage des armes empêche de nouvelles copies."
+      "value": "Un miroir crée un reflet hostile pour chaque arme visible. Couvrir ou lâcher les armes empêche l'apparition de nouvelles copies."
     },
     {
       "weight": 2,
-      "value": "Un plancher de pièces enchantées accroche bottes et armure en métal tandis qu'une pierre roulante approche très lentement."
+      "value": "Un sol couvert de pièces enchantées retient les bottes et armures métalliques tandis qu'un rocher approche en roulant très lentement."
     },
     {
-      "value": "Un œil peint marque la première personne qui se trouve à proximité, faisant que chaque statue devant eux les surveille et les cible."
-    },
-    {
-      "weight": 2,
-      "value": "Un pont devient intangible quand quelqu'un court, forçant le groupe à traverser calmement malgré une menace imminente."
+      "value": "Un œil peint marque la première personne qui ment à proximité. Toutes les statues rencontrées ensuite la suivent du regard et la prennent pour cible."
     },
     {
       "weight": 2,
-      "value": "Une boîte à musique ne fait dormir les auditeurs que lorsque sa mélodie s'arrête, rendant la destruction immédiatement dangereuse."
+      "value": "Un pont devient intangible dès que quelqu'un court, obligeant le groupe à traverser calmement malgré la menace qui approche."
     },
     {
       "weight": 2,
-      "value": "Un imitateur de cellier est inoffensif, mais l'attaquer réveille toute la cuisine affamée."
-    },
-    {
-      "value": "Une rune de silence supprime tout son tandis que des cloches cachées sur des intrus alertent encore les gardes ailleurs."
+      "value": "Une boîte à musique n'endort ceux qui l'entendent que lorsque sa mélodie s'arrête, ce qui rend sa destruction immédiate dangereuse."
     },
     {
       "weight": 2,
-      "value": "Un tapis orné roule autour des intrus, puis demande poliment un mot de passe tout en les draguant vers une chute."
+      "value": "Un garde-manger mimique est inoffensif, mais l'attaquer réveille toute la cuisine affamée."
     },
     {
-      "value": "Un livre piégé efface un mot commun du vocabulaire du lecteur et utilise le mot volé comme expression de commande."
-    },
-    {
-      "value": "Un couloir se remplit d'un feu illusoire qui ne cause aucun mal à moins que quelqu'un essaie de l'éteindre."
+      "value": "Une rune de silence étouffe tous les sons, mais des clochettes dissimulées sur les intrus continuent d'alerter les gardes ailleurs."
     },
     {
       "weight": 2,
-      "value": "Une statue offre un passage sûr pour un compliment honnête ; flatteur ou sarcasme libère des guêpes de pierre."
+      "value": "Un tapis ouvragé s'enroule autour des intrus, puis leur demande poliment un mot de passe tout en les traînant vers une trappe."
+    },
+    {
+      "value": "Un livre piégé efface un mot courant du vocabulaire de son lecteur et fait de ce mot volé sa formule de commande."
+    },
+    {
+      "value": "Un couloir s'emplit de flammes illusoires inoffensives, sauf si quelqu'un tente de les éteindre."
+    },
+    {
+      "weight": 2,
+      "value": "Une statue accorde le passage en échange d'un compliment sincère. La flatterie ou le sarcasme libèrent des guêpes de pierre."
     },
     {
       "weight": 3,
-      "value": "Un coffre contient un véritable trésor équilibré sur un mécanisme déclenché seulement quand trop de poids est enlevé."
+      "value": "Un coffre contient un véritable trésor posé en équilibre sur un mécanisme qui ne se déclenche que si l'on retire trop de poids."
     },
     {
-      "value": "Une porte téléporte quiconque l'ouvre du côté opposé mais laisse derrière lui son équipement."
+      "value": "Une porte téléporte de l'autre côté toute personne qui l'ouvre, mais abandonne sur place l'équipement qu'elle transportait."
     },
     {
-      "value": "Une rune gelée gèle l'objet le plus brillant de la pièce, encourageant un contrôle intelligent de la lumière."
+      "value": "Une rune de givre congèle l'objet le plus lumineux de la pièce, invitant à manipuler habilement la lumière."
     },
     {
       "weight": 3,
-      "value": "Une fléchette inoffensive marque sa cible avec un parfum qui attire le vrai prédateur du dungeon."
+      "value": "Une fléchette inoffensive imprègne sa cible d'une odeur qui attire le véritable prédateur du donjon."
     },
     {
       "weight": 2,
-      "value": "Une chambre circulaire tourne ses sorties chaque fois que quelqu'un mentionne une destination."
+      "value": "Une salle circulaire fait pivoter ses sorties chaque fois que quelqu'un mentionne une destination."
     },
     {
       "weight": 2,
-      "value": "Une corde dorée peut être croisée en toute sécurité mais se serre autour de quiconque tente de la couper ou de la franchir."
+      "value": "Une corde dorée peut être franchie sans danger, mais se resserre autour de quiconque tente de la couper ou de l'enjamber."
     },
     {
-      "value": "Un portrait gardien pose une question personnelle : refuser de verrouiller la porte, tout en mentant libère le sujet du mensonge."
+      "value": "Le portrait d'un gardien pose une question personnelle. Refuser de répondre verrouille la porte ; mentir libère le sujet du mensonge."
     },
     {
       "weight": 2,
-      "value": "Un pédestal accorde l'objet demandé, puis annonce un prix peu commode mais juste qui doit être payé avant de partir."
+      "value": "Un piédestal accorde l'objet demandé, puis annonce un prix contraignant mais équitable, à régler avant de pouvoir partir."
     }
   ]
 }

@@ -1,20 +1,20 @@
 {
-  "name": "Inventaire",
-  "description": "Objets pouvant apparaître dans l’inventaire d’un personnage",
+  "name": "inventaire",
+  "description": "Objets pouvant apparaître dans l'inventaire d'un personnage",
   "entries": [
     {
       "weight": 8,
       "fields": {
-        "Name": "Potion de guérison",
-        "Description": "Restaurer 50 PV en cas de consommation.",
+        "Name": "Potion de soins",
+        "Description": "Restaure 50 PV lorsqu'elle est consommée.",
         "Encumbrance": 1
       }
     },
     {
       "weight": 8,
       "fields": {
-        "Name": "Coil de corde",
-        "Description": "Dix mètres de corde robuste pour monter, fixer ou fixer des charges.",
+        "Name": "Rouleau de corde",
+        "Description": "Dix mètres de corde solide pour grimper, attacher ou arrimer une charge.",
         "Encumbrance": 1
       }
     },
@@ -22,7 +22,7 @@
       "weight": 8,
       "fields": {
         "Name": "Lanterne et huile",
-        "Description": "Une lanterne à capuchon avec suffisamment d'huile pendant plusieurs heures.",
+        "Description": "Une lanterne à capuchon contenant assez d'huile pour plusieurs heures.",
         "Encumbrance": 1
       }
     },
@@ -30,63 +30,63 @@
       "weight": 8,
       "fields": {
         "Name": "Trois rations de voyage",
-        "Description": "Nourriture compacte suffisante pour trois jours.",
+        "Description": "Des provisions compactes suffisantes pour trois jours.",
         "Encumbrance": 1
       }
     },
     {
       "weight": 7,
       "fields": {
-        "Name": "Peau d'eau",
-        "Description": "Une peau d'eau en cuir rempli.",
+        "Name": "Gourde",
+        "Description": "Une gourde en cuir remplie d'eau.",
         "Encumbrance": 1
       }
     },
     {
       "weight": 7,
       "fields": {
-        "Name": "Rouleaux de lit",
-        "Description": "Une couverture et un rouleau de couchage résistant aux intempéries.",
+        "Name": "Nécessaire de couchage",
+        "Description": "Une couverture résistante aux intempéries et un couchage roulé.",
         "Encumbrance": 1
       }
     },
     {
       "weight": 7,
       "fields": {
-        "Name": "Boîte à barreaux",
-        "Description": "Flint, acier et assèche-linge pour le démarrage des feux.",
+        "Name": "Nécessaire à feu",
+        "Description": "Un silex, un briquet en acier et de l'amadou sec pour allumer un feu.",
         "Encumbrance": 0
       }
     },
     {
       "weight": 6,
       "fields": {
-        "Name": "Kit de verrouillage",
-        "Description": "Petits outils pour la manipulation des serrures mécaniques ordinaires.",
+        "Name": "Nécessaire de crochetage",
+        "Description": "De petits outils permettant de manipuler les serrures mécaniques ordinaires.",
         "Encumbrance": 1
       }
     },
     {
       "weight": 6,
       "fields": {
-        "Name": "Kit d'escalade",
-        "Description": "Pitons, marteau, sangles et aides à l'escalade.",
+        "Name": "Matériel d'escalade",
+        "Description": "Des pitons, un marteau, des sangles et quelques accessoires d'escalade simples.",
         "Encumbrance": 2
       }
     },
     {
       "weight": 6,
       "fields": {
-        "Name": "Bandeaux",
-        "Description": "Nettoyer les vêtements et les fournitures de base pour le traitement des blessures.",
+        "Name": "Bandages",
+        "Description": "Du tissu propre et du matériel de base pour soigner les blessures.",
         "Encumbrance": 1
       }
     },
     {
       "weight": 6,
       "fields": {
-        "Name": "Chalk et charbon",
-        "Description": "Utile pour marquer les chemins, dessiner des cartes et faire des notes.",
+        "Name": "Craie et fusain",
+        "Description": "De quoi baliser un chemin, esquisser une carte ou prendre des notes.",
         "Encumbrance": 0
       }
     },
@@ -94,47 +94,47 @@
       "weight": 6,
       "fields": {
         "Name": "Petit miroir",
-        "Description": "Un miroir à main poli utile pour les signaux et les coins de contrôle.",
+        "Description": "Un miroir à main poli, utile pour envoyer des signaux et regarder au-delà des angles.",
         "Encumbrance": 0
       }
     },
     {
       "weight": 5,
       "fields": {
-        "Name": "Barre de crowd",
-        "Description": "Un levier en fer robuste pour portes, caisses et obstacles.",
+        "Name": "Pied-de-biche",
+        "Description": "Un solide levier en fer pour forcer des portes, des caisses ou d'autres obstacles.",
         "Encumbrance": 1
       }
     },
     {
       "weight": 5,
       "fields": {
-        "Name": "Crochet de grappin",
-        "Description": "Un crochet à quatre branches conçu pour une utilisation avec corde.",
+        "Name": "Grappin",
+        "Description": "Un crochet à quatre pointes conçu pour être utilisé avec une corde.",
         "Encumbrance": 1
       }
     },
     {
       "weight": 5,
       "fields": {
-        "Name": "Kit de pêche",
-        "Description": "Ligne, crochets, flotteurs et filet compact.",
+        "Name": "Matériel de pêche",
+        "Description": "Du fil, des hameçons, des flotteurs et un filet compact.",
         "Encumbrance": 1
       }
     },
     {
       "weight": 5,
       "fields": {
-        "Name": "Kit d'écriture",
-        "Description": "Encre, piquants, parchemin, cire d'étanchéité et étui de protection.",
+        "Name": "Nécessaire d'écriture",
+        "Description": "De l'encre, des plumes, du parchemin, de la cire à cacheter et un étui de protection.",
         "Encumbrance": 1
       }
     },
     {
       "weight": 5,
       "fields": {
-        "Name": "Pochette à base de plantes",
-        "Description": "Petits outils et conteneurs pour la collecte de plantes utiles.",
+        "Name": "Trousse d'herboriste",
+        "Description": "De petits outils et récipients pour récolter des plantes utiles.",
         "Encumbrance": 1
       }
     },
@@ -142,7 +142,7 @@
       "weight": 5,
       "fields": {
         "Name": "Pelle",
-        "Description": "Un outil de creusement compact mais robuste.",
+        "Description": "Un outil compact mais solide pour creuser.",
         "Encumbrance": 2
       }
     },
@@ -150,15 +150,15 @@
       "weight": 4,
       "fields": {
         "Name": "Antidote",
-        "Description": "Un traitement général donnant une autre chance de résister au poison ordinaire.",
+        "Description": "Un traitement général qui accorde une nouvelle chance de résister à un poison ordinaire.",
         "Encumbrance": 1
       }
     },
     {
       "weight": 4,
       "fields": {
-        "Name": "Bombe à fumée",
-        "Description": "Crée un nuage dense de fumée lorsqu'il s'enflamme.",
+        "Name": "Bombe fumigène",
+        "Description": "Crée un épais nuage de fumée lorsqu'elle est allumée.",
         "Encumbrance": 1
       }
     },
@@ -166,15 +166,15 @@
       "weight": 4,
       "fields": {
         "Name": "Piège à ours",
-        "Description": "Un piège mécanique lourd capable de retenir une créature.",
+        "Description": "Un lourd piège mécanique capable d'immobiliser une créature.",
         "Encumbrance": 2
       }
     },
     {
       "weight": 4,
       "fields": {
-        "Name": "Kit de déguisation",
-        "Description": "Cosmétiques, colorants, faux cheveux, et simples pièces de costume.",
+        "Name": "Nécessaire de déguisement",
+        "Description": "Des produits cosmétiques, des teintures, de faux cheveux et quelques éléments de costume simples.",
         "Encumbrance": 1
       }
     },
@@ -182,31 +182,31 @@
       "weight": 4,
       "fields": {
         "Name": "Instrument de musique",
-        "Description": "Un instrument portable choisi pour convenir au personnage.",
+        "Description": "Un instrument transportable choisi en fonction du personnage.",
         "Encumbrance": 1
       }
     },
     {
       "weight": 4,
       "fields": {
-        "Name": "Échelle de Merchant",
-        "Description": "Un bilan pliant et des poids de référence pour le contrôle des marchandises commerciales.",
+        "Name": "Balance de marchand",
+        "Description": "Une balance pliante et des poids de référence pour vérifier les marchandises.",
         "Encumbrance": 1
       }
     },
     {
       "weight": 3,
       "fields": {
-        "Name": "Sac de caltropes",
-        "Description": "Pinces métalliques pointues utilisées pour ralentir la poursuite ou sécuriser un passage.",
+        "Name": "Sac de chausse-trappes",
+        "Description": "Des pointes métalliques acérées permettant de ralentir des poursuivants ou de protéger un passage.",
         "Encumbrance": 1
       }
     },
     {
       "weight": 3,
       "fields": {
-        "Name": "Violon de poison de base",
-        "Description": "Une dose limitée de toxines convient pour une arme ou une boisson.",
+        "Name": "Fiole de poison ordinaire",
+        "Description": "Une dose limitée de toxine, suffisante pour empoisonner une arme ou une boisson.",
         "Encumbrance": 1
       }
     },
@@ -214,7 +214,7 @@
       "weight": 3,
       "fields": {
         "Name": "Longue-vue",
-        "Description": "Un tube optique compact pour voir les détails éloignés.",
+        "Description": "Un tube optique compact permettant d'observer des détails éloignés.",
         "Encumbrance": 1
       }
     },
@@ -230,15 +230,15 @@
       "weight": 3,
       "fields": {
         "Name": "Menottes",
-        "Description": "Une paire de retenue en fer avec une clé simple.",
+        "Description": "Une paire d'entraves en fer accompagnée d'une clé simple.",
         "Encumbrance": 1
       }
     },
     {
       "weight": 3,
       "fields": {
-        "Name": "Saint symbole",
-        "Description": "Un symbole lié à une foi, un serment, un ancêtre ou un idéal personnel.",
+        "Name": "Symbole sacré",
+        "Description": "Un symbole associé à une foi, un serment, un ancêtre ou un idéal personnel.",
         "Encumbrance": 0
       }
     },
@@ -246,7 +246,7 @@
       "weight": 3,
       "fields": {
         "Name": "Carte locale",
-        "Description": "Une carte pratique mais imparfaite de la région environnante.",
+        "Description": "Une carte pratique mais imparfaite des environs.",
         "Encumbrance": 0
       }
     },
@@ -254,14 +254,14 @@
       "weight": 2,
       "fields": {
         "Name": "Potion de vision nocturne",
-        "Description": "Donne une vue claire dans l'obscurité pendant une heure.",
+        "Description": "Permet de voir clairement dans l'obscurité pendant une heure.",
         "Encumbrance": 1
       }
     },
     {
       "weight": 2,
       "fields": {
-        "Name": "Position de respiration de l'eau",
+        "Name": "Potion de respiration aquatique",
         "Description": "Permet de respirer sous l'eau pendant trente minutes.",
         "Encumbrance": 1
       }
@@ -269,8 +269,8 @@
     {
       "weight": 2,
       "fields": {
-        "Name": "Fiole acide",
-        "Description": "Un flacon soigneusement scellé capable d'endommager les matériaux communs.",
+        "Name": "Fiole d'acide",
+        "Description": "Un flacon soigneusement scellé dont le contenu peut endommager les matériaux ordinaires.",
         "Encumbrance": 1
       }
     },
@@ -286,35 +286,35 @@
       "weight": 2,
       "fields": {
         "Name": "Craie runique",
-        "Description": "Rare craie qui rend magique la Madeleine plus facile à voir et à étudier.",
+        "Description": "Une craie rare qui rend les inscriptions magiques plus faciles à voir et à étudier.",
         "Encumbrance": 0
       }
     },
     {
       "fields": {
-        "Name": "Boussole à sifflement",
-        "Description": "Une boussole étrange qui se plaint tranquillement quand elle pointe vers le nord.",
+        "Name": "Boussole murmurante",
+        "Description": "Une étrange boussole qui se plaint à voix basse chaque fois qu'elle indique le nord.",
         "Encumbrance": 0
       }
     },
     {
       "fields": {
         "Name": "Bougie éternelle",
-        "Description": "Une bougie dont la petite flamme ne consomme jamais sa cire.",
+        "Description": "Une bougie dont la petite flamme ne consume jamais la cire.",
         "Encumbrance": 0
       }
     },
     {
       "fields": {
-        "Name": "fragment de rune non identifié",
-        "Description": "Un morceau de matériel magique contenant une partie d'une inscription inconnue.",
+        "Name": "Fragment de rune non identifié",
+        "Description": "Un morceau de matière magique portant une partie d'une inscription inconnue.",
         "Encumbrance": 1
       }
     },
     {
       "fields": {
-        "Name": "Lettre scellée mystérieuse",
-        "Description": "Une lettre adressée à quelqu'un que le personnage n'a jamais rencontré.",
+        "Name": "Mystérieuse lettre scellée",
+        "Description": "Une lettre adressée à une personne que le personnage n'a jamais rencontrée.",
         "Encumbrance": 0
       }
     }

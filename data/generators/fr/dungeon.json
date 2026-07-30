@@ -4,91 +4,91 @@
   "entries": [
     {
       "weight": 3,
-      "value": "Temple enterré — des chambres sacrées ensevelis autour d'un autel scellé qui reçoit encore des offrandes."
+      "value": "Temple enseveli — salles sacrées effondrées autour d’un autel scellé qui reçoit encore des offrandes."
     },
     {
       "weight": 3,
-      "value": "La mine abandonnée — galeries instables, puits inondés, vieux équipements et quelque chose qui suit les rails."
+      "value": "Mine abandonnée — galeries instables, puits inondés, ancien matériel et quelque chose qui suit les rails."
     },
     {
       "weight": 3,
-      "value": "Caverne de bandits — tunnels naturels élargis avec des barricades, des magasins, des cellules et des sorties cachées."
+      "value": "Caverne de bandits — tunnels naturels agrandis et aménagés avec barricades, réserves, cellules et issues secrètes."
     },
     {
       "weight": 3,
-      "value": "Forteresse rouillée — murs brisés au-dessus d'arsenals intacts, tunnels de commandement, et défenseurs oubliés."
+      "value": "Forteresse en ruine — murailles éventrées au-dessus d’arsenaux intacts, de tunnels de commandement et de défenseurs oubliés."
     },
     {
       "weight": 3,
-      "value": "Crypte ancien — tombes familiales, pièges funéraires, registres ancestraux et chambres scellées perturbées."
+      "value": "Crypte antique — tombeaux familiaux, pièges funéraires, archives ancestrales et chambres scellées récemment profanées."
     },
     {
       "weight": 2,
-      "value": "La tour de Wizard — des laboratoires empilés où les expériences ratées ont altéré la gravité et l'espace."
+      "value": "Tour de mage — laboratoires superposés où des expériences ratées ont déformé la gravité et l’espace."
     },
     {
       "weight": 2,
-      "value": "Labyrinthe d'égouts: drains actifs, fondations oubliées, voies de contrebande et créatures territoriales."
+      "value": "Labyrinthe d’égouts — canalisations encore actives, fondations oubliées, voies de contrebande et créatures territoriales."
     },
     {
       "weight": 2,
-      "value": "Le palais Sunken — salles inondées accessibles à marée basse, par la plongée ou par des pompes anciennes."
+      "value": "Palais englouti — salles inondées accessibles à marée basse, en plongée ou grâce à d’anciennes pompes."
     },
     {
       "weight": 2,
-      "value": "Terrier de monstres — nids interconnectés façonnés par des générations d'habitants de plus en plus grands."
+      "value": "Terriers de monstres — nids reliés entre eux et remodelés par des générations d’habitants toujours plus imposants."
     },
     {
       "weight": 2,
-      "value": "Complexe pénitentiaire — cellules, ateliers, salles d'exécution, garde de passage et preuve d'une évasion de masse."
+      "value": "Complexe pénitentiaire — cellules, ateliers, salles d’exécution, passages réservés aux gardes et traces d’une évasion massive."
     },
     {
       "weight": 2,
-      "value": "District de la ville s'est effondré — rues et maisons enterrées reliées par des sous - sols et des puits."
+      "value": "Quartier urbain effondré — rues et maisons ensevelies, reliées par les caves et des gouffres."
     },
     {
       "weight": 2,
-      "value": "Manoir maudit — une noble demeure qui répète la dernière nuit avant la destruction de sa maison."
+      "value": "Manoir maudit — demeure noble condamnée à revivre la dernière nuit précédant l’anéantissement de ses habitants."
     },
     {
       "weight": 2,
-      "value": "Sanctuaire volcanique — tunnels à blastes thermiques, ponts de la voie de lave, ponts de la voie ferrée et gardiens ignifuges."
+      "value": "Sanctuaire volcanique — tunnels ravagés par la chaleur, ponts sacrificiels, canaux de lave et gardiens insensibles au feu."
     },
     {
       "weight": 2,
-      "value": "Tombeau gelé — Salles de conservation de la glace où les portes d'ouverture libèrent l'air, la maladie et les occupants anciens."
+      "value": "Tombeau gelé — salles préservées par la glace où chaque porte ouverte libère air antique, maladies et anciens occupants."
     },
     {
       "weight": 2,
-      "value": "Sanctuaire Cult — Salles de réunion déguisées descendant dans des chambres rituelles et un site inachevé d'assignation."
+      "value": "Sanctuaire d’un culte — salles de réunion camouflées qui descendent vers des chambres rituelles et un site d’invocation inachevé."
     },
     {
       "weight": 1,
-      "value": "Donjon vivant — un organisme énorme dont les chambres digèrent les intrus et se réarrangent comme des organes."
+      "value": "Donjon vivant — organisme gigantesque dont les cavités digèrent les intrus et se réorganisent comme des organes."
     },
     {
       "weight": 1,
-      "value": "La prison de rêve — un complexe mental est entré par le sommeil, avec des sorties cachées dans les souvenirs des prisonniers."
+      "value": "Prison onirique — complexe mental auquel on accède en dormant, dont les sorties se cachent dans les souvenirs des prisonniers."
     },
     {
       "weight": 1,
-      "value": "Tour inversée — une structure descendant dans la terre tandis que la gravité pointe vers son toit lointain."
+      "value": "Tour inversée — édifice qui s’enfonce dans la terre tandis que la gravité attire vers son toit lointain."
     },
     {
       "weight": 1,
-      "value": "L'ambassade planaire, un complexe diplomatique abandonné construit pour les visiteurs avec des corps incompatibles et la physique."
+      "value": "Ambassade planaire — complexe diplomatique abandonné, construit pour des visiteurs aux corps et aux lois physiques incompatibles."
     },
     {
       "weight": 1,
-      "value": "Caveau mécanique — salles mécaniques précises qui réinitialisent les pièges et font tourner les couloirs sur un horaire fixe."
+      "value": "Caveau mécanique — salles aux mécanismes précis qui réarment les pièges et font pivoter les couloirs selon un horaire fixe."
     },
     {
       "weight": 1,
-      "value": "Creux de la Racine-monde — tunnels primaires à l'intérieur d'un système racinaire colossal infecté par une corruption qui se propage."
+      "value": "Creux de la Racine-monde — tunnels primordiaux au cœur d’un réseau de racines colossal gagné par une corruption grandissante."
     },
     {
       "weight": 1,
-      "value": "Observatoire Astral — une ruine lointaine dont les lentilles ouvrent des chemins physiques vers des objets célestes dangereux."
+      "value": "Observatoire astral — ruine isolée dont les lentilles ouvrent des passages physiques vers de dangereux corps célestes."
     }
   ]
 }

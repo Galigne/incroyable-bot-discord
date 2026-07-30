@@ -1,102 +1,102 @@
 {
   "name": "Bâtiments",
-  "description": "Bâtiments urbains et ruraux avec un point d’intérêt immédiat",
+  "description": "Bâtiments urbains et ruraux dotés d’un intérêt immédiat",
   "entries": [
     {
       "weight": 4,
-      "value": "Auberge de bord de route — lits propres, gardés en 2007, et une salle commune où les messagers échangent des nouvelles."
+      "value": "Auberge de grand chemin — lits propres, écuries surveillées et salle commune où les courriers échangent les dernières nouvelles."
     },
     {
       "weight": 4,
-      "value": "Taverne en foule — nourriture bon marché, musique forte, stands privés et combats réguliers sur la politique locale."
+      "value": "Taverne bondée — nourriture bon marché, musique assourdissante, alcôves privées et bagarres régulières autour de la politique locale."
     },
     {
       "weight": 4,
-      "value": "Maison de ville — une maison de plusieurs étages étroite avec un atelier en dessous et des chambres familiales en haut."
+      "value": "Maison de ville — demeure étroite à plusieurs étages, avec un atelier au rez-de-chaussée et les pièces familiales au-dessus."
     },
     {
       "weight": 3,
-      "value": "Ferme — une maison robuste, des granges, des hangars, des animaux clôturés et des signes d'une perturbation récente."
+      "value": "Ferme — maison robuste entourée de granges, de remises et d’enclos, où les traces d’un incident récent restent visibles."
     },
     {
       "weight": 3,
-      "value": "Le forgeron, un atelier de pierre chaude qui prend des commandes tout en réparant tranquillement les armes interdites."
+      "value": "Forge — atelier de pierre brûlant qui accepte les commandes tout en réparant discrètement des armes interdites."
     },
     {
       "weight": 3,
-      "value": "Magasin général — étagères de fournitures pratiques et une armoire verrouillée de commerce inhabituel."
+      "value": "Magasin général — rayonnages de fournitures pratiques et armoire verrouillée contenant des objets inhabituels laissés en échange."
     },
     {
       "weight": 3,
-      "value": "Bathhouse public — piscines carrelées, casiers loués, préposés aux bavardages et salles de réunion discrètes."
+      "value": "Bains publics — bassins carrelés, casiers en location, personnel friand de commérages et salles de réunion discrètes."
     },
     {
       "weight": 3,
-      "value": "Maison close — une maison surveillée et gérée par des professionnels offrant compagnie, information, et une confidentialité stricte."
+      "value": "Maison close — établissement surveillé et tenu avec professionnalisme, qui garantit compagnie, renseignements et confidentialité absolue."
     },
     {
       "weight": 3,
-      "value": "Temple — un sanctuaire public avec un autel, cuisine charitable, archives, et crypte restreinte."
+      "value": "Temple — sanctuaire public comprenant un autel, une cuisine caritative, des archives et une crypte à l’accès restreint."
     },
     {
       "weight": 3,
-      "value": "Garde - garde - garde - garde - garde - garde - garde - garde, garde - garde, garde - garde et garde - garde épuisés."
+      "value": "Corps de garde — cellules, arsenal, registres de service et officiers épuisés qui se relaient."
     },
     {
       "weight": 2,
-      "value": "Apothécaire — étagères parfumées de remèdes, poisons, créatures préservées et expériences mal étiquetées."
+      "value": "Apothicairerie — étagères odorantes chargées de remèdes, de poisons, de créatures conservées et d’expériences mal étiquetées."
     },
     {
       "weight": 2,
-      "value": "Maison de guilde — bureaux, espaces de formation, conseil d'administration et salle de réunion réservée aux membres."
+      "value": "Maison de guilde — bureaux, salles d’entraînement, tableau des contrats et salle de réunion réservée aux membres."
     },
     {
       "weight": 2,
-      "value": "Entrepôt — chargement empilé, passerelles, gardes de nuit et un envoi manquant du registre."
+      "value": "Entrepôt — cargaisons empilées, passerelles en hauteur, gardiens de nuit et livraison absente du registre."
     },
     {
       "weight": 2,
-      "value": "Théâtre — sièges publics ornés, passages en coulisses, ateliers et boîtes royales cachées."
+      "value": "Théâtre — salle richement ornée, coulisses exiguës, ateliers et loges royales dissimulées."
     },
     {
       "weight": 2,
-      "value": "L'école, une seule classe bondée dont l'enseignant connaît tous les secrets familiaux du district."
+      "value": "École — unique salle de classe surchargée dont l’enseignant connaît tous les secrets de famille du quartier."
     },
     {
       "weight": 2,
-      "value": "Banque — comptoirs renforcés, bureaux privés, coffres-forts et un trésor lourdement piégé."
+      "value": "Banque — guichets renforcés, bureaux privés, chambres fortes documentaires et trésor protégé par de nombreux pièges."
     },
     {
       "weight": 2,
-      "value": "Usine — un lieu de travail à moteur à eau ou à vent entouré de poussière, de bruit, d'ouvriers et de machines mobiles."
+      "value": "Moulin — lieu de travail mû par l’eau ou le vent, entouré de poussière, de vacarme, d’ouvriers et de mécanismes en mouvement."
     },
     {
       "weight": 2,
-      "value": "Stable: montures louées, chambres à coucher, lofts de couchage et un marié qui remarque chaque arrivée."
+      "value": "Écurie — montures à louer, selleries, soupentes pour dormir et palefrenier qui remarque chaque arrivée."
     },
     {
       "weight": 2,
-      "value": "Palais de justice — salle d'audience publique, salles de preuves, archives juridiques et cabinets privés des juges."
+      "value": "Palais de justice — salle d’audience publique, pièces réservées aux preuves, archives judiciaires et bureaux privés des juges."
     },
     {
       "weight": 1,
-      "value": "La tour de Wizard, une résidence verticale excentrique dont les pièces ne suivent pas les dimensions extérieures."
+      "value": "Tour de mage — demeure verticale excentrique dont l’agencement intérieur ne respecte pas les dimensions extérieures."
     },
     {
       "weight": 1,
-      "value": "Ambassade — une résidence noble fortifiée fonctionnant sous la législation étrangère et la surveillance constante."
+      "value": "Ambassade — résidence noble fortifiée, soumise aux lois d’un pays étranger et placée sous surveillance constante."
     },
     {
       "weight": 1,
-      "value": "Observatoire — un laboratoire de suivi des étoiles, du temps et de quelque chose qui s'approche d'en haut."
+      "value": "Observatoire — laboratoire coiffé d’un dôme qui surveille les étoiles, le climat et quelque chose qui approche depuis le ciel."
     },
     {
       "weight": 1,
-      "value": "Manoir abandonné — un domaine en décomposition laissé meublé après que ses occupants ont disparu pendant le dîner."
+      "value": "Manoir abandonné — domaine délabré resté entièrement meublé depuis la disparition de ses occupants en plein dîner."
     },
     {
       "weight": 1,
-      "value": "Arène de combat clandestine — une arène cachée avec des salles de paris, des guérisseurs, des cages et des fonctionnaires soudoyés."
+      "value": "Arène clandestine — enceinte dissimulée comprenant salles de paris, guérisseurs, cages et fonctionnaires soudoyés."
     }
   ]
 }

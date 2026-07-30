@@ -5,194 +5,194 @@
     {
       "weight": 2,
       "fields": {
-        "Name": "LOI du Fil",
-        "Description": "Permet de créer et de contrôler quelques mètres de fil à portée de vue. Les fibres résistantes nécessitent une matière première transportée par l’utilisateur, et le contrôle s’affaiblit rapidement avec la distance."
+        "Name": "LOI du fil",
+        "Description": "Crée et contrôle quelques mètres de fil à portée de vue. Les fibres plus résistantes nécessitent une matière première transportée par le personnage, et le contrôle s'affaiblit rapidement avec la distance."
       }
     },
     {
       "weight": 2,
       "fields": {
-        "Name": "LOI de l’Écho",
-        "Description": "Permet de capturer un son, puis de le reproduire ou de le rediriger. Les sons puissants coûtent davantage de PA, et un seul son peut être conservé à la fois."
+        "Name": "LOI de l'écho",
+        "Description": "Capture un son pour le rejouer ou le rediriger. Les sons puissants coûtent davantage de PA, et un seul son peut être conservé à la fois."
       }
     },
     {
       "fields": {
-        "Name": "LOI de la Rouille",
-        "Description": "Accélère la corrosion du métal non magique touché. Les objets volumineux ou bien entretenus nécessitent un contact prolongé."
+        "Name": "LOI de la rouille",
+        "Description": "Accélère la corrosion du métal non magique touché. Les objets volumineux ou bien entretenus exigent un contact prolongé."
       }
     },
     {
       "fields": {
-        "Name": "LOI des Portes",
-        "Description": "Permet de détecter et de manipuler les portes ordinaires à proximité. Elle ne peut ni créer un passage ni agir sur un seuil que l’utilisateur n’arrive pas à se représenter clairement."
-      }
-    },
-    {
-      "weight": 2,
-      "fields": {
-        "Name": "LOI du Poids",
-        "Description": "Permet d’alourdir ou d’alléger modérément un objet visible. Son poids ne peut pas être réduit à zéro, et l’effet exige de rester concentré."
-      }
-    },
-    {
-      "fields": {
-        "Name": "LOI de l’Encre",
-        "Description": "Anime l’encre d’un texte sous la forme de symboles mobiles ou de formes simples. La destruction du texte d’origine met fin à l’effet."
-      }
-    },
-    {
-      "fields": {
-        "Name": "LOI de l’Élan",
-        "Description": "Emmagasine une partie de la force d’un impact afin de la libérer lors d’un contact ultérieur. Une quantité excessive de force stockée blesse l’utilisateur."
+        "Name": "LOI des portes",
+        "Description": "Détecte et manipule les portes ordinaires à proximité. Elle ne peut ni créer de passage ni agir sur un seuil que le personnage ne parvient pas à se représenter clairement."
       }
     },
     {
       "weight": 2,
       "fields": {
-        "Name": "LOI de la Brume",
-        "Description": "Produit et façonne une brume fraîche à proximité. Le vent la disperse, et l’utilisateur ne bénéficie d’aucune faculté naturelle pour voir au travers."
+        "Name": "LOI du poids",
+        "Description": "Alourdit ou allège modérément un objet visible. Son poids ne peut pas être réduit à zéro, et l'effet exige de la concentration."
       }
     },
     {
       "fields": {
-        "Name": "LOI du Visage emprunté",
-        "Description": "Copie pendant une heure le visage d’une personne touchée. La voix, les vêtements, les souvenirs et les manières de l’utilisateur restent inchangés."
-      }
-    },
-    {
-      "weight": 2,
-      "fields": {
-        "Name": "LOI de la Bougie",
-        "Description": "Contrôle de petites flammes déjà allumées et révèle l’émotion dominante de la personne qui a allumé l’une d’elles."
-      }
-    },
-    {
-      "weight": 2,
-      "fields": {
-        "Name": "LOI des Racines",
-        "Description": "Accélère et guide la croissance des racines alentour. Dans un sol stérile, elle nécessite des graines, de l’eau et davantage de temps."
+        "Name": "LOI de l'encre",
+        "Description": "Anime l'encre écrite sous forme de symboles mobiles et de formes simples. Détruire le texte d'origine met fin à l'effet."
       }
     },
     {
       "fields": {
-        "Name": "LOI du Verre",
-        "Description": "Permet de courber et de remodeler le verre touché sans le chauffer. Les éclats restent dangereux, et aucune matière supplémentaire ne peut être créée."
-      }
-    },
-    {
-      "fields": {
-        "Name": "LOI de la Promesse",
-        "Description": "Révèle qu’une promesse formulée de plein gré vient d’être rompue. Elle ne peut ni contraindre à l’honnêteté ni révéler la raison de cette rupture."
-      }
-    },
-    {
-      "fields": {
-        "Name": "LOI de la Friction",
-        "Description": "Augmente ou réduit la friction sur une petite surface visible. Les effets extrêmes sont brefs et peuvent gêner les alliés aussi facilement que les ennemis."
+        "Name": "LOI de l'élan",
+        "Description": "Emmagasine une partie de la force d'un impact pour la libérer lors d'un contact ultérieur. Une force excessive blesse le personnage."
       }
     },
     {
       "weight": 2,
       "fields": {
-        "Name": "LOI des Odeurs",
-        "Description": "Permet de créer, de supprimer et de suivre des odeurs ordinaires. Reproduire une odeur complexe nécessite un échantillon."
+        "Name": "LOI de la brume",
+        "Description": "Produit et façonne une brume fraîche à proximité. Le vent la disperse, et le personnage ne voit pas naturellement au travers."
       }
     },
     {
       "fields": {
-        "Name": "LOI du Papier",
-        "Description": "Plie le papier pour former des outils ou des créatures brièvement animés. L’eau, le feu et les chocs violents les détruisent facilement."
-      }
-    },
-    {
-      "fields": {
-        "Name": "LOI du Reflet",
-        "Description": "Permet d’observer à travers un reflet proche ou de déformer l’image qu’il renvoie. Aucune matière ne peut traverser le reflet."
-      }
-    },
-    {
-      "fields": {
-        "Name": "LOI du Sommeil",
-        "Description": "Favorise le sommeil naturel d’une cible calme. La douleur, le danger ou une stimulation intense mettent fin à l’effet."
+        "Name": "LOI du visage emprunté",
+        "Description": "Copie pendant une heure le visage d'une personne touchée. La voix, les vêtements, les souvenirs et les manières ne changent pas."
       }
     },
     {
       "weight": 2,
       "fields": {
-        "Name": "LOI du Magnétisme",
-        "Description": "Attire ou repousse de petits objets ferreux. La précision et la force de l’effet diminuent avec la distance."
+        "Name": "LOI de la chandelle",
+        "Description": "Contrôle de petites flammes existantes et révèle l'émotion dominante de la personne qui en a allumé une."
+      }
+    },
+    {
+      "weight": 2,
+      "fields": {
+        "Name": "LOI des racines",
+        "Description": "Accélère et guide la croissance des racines à proximité. Un sol stérile exige des graines, de l'eau et davantage de temps."
+      }
+    },
+    {
+      "fields": {
+        "Name": "LOI du verre",
+        "Description": "Courbe et remodèle le verre touché sans le chauffer. Les éclats restent dangereux, et aucune matière ne peut être créée."
+      }
+    },
+    {
+      "fields": {
+        "Name": "LOI des promesses",
+        "Description": "Détecte la rupture d'une promesse prononcée de plein gré. Elle ne peut ni forcer la sincérité ni révéler pourquoi la promesse a été rompue."
+      }
+    },
+    {
+      "fields": {
+        "Name": "LOI du frottement",
+        "Description": "Augmente ou réduit le frottement sur une petite surface visible. Les effets extrêmes sont brefs et gênent les alliés aussi facilement que les ennemis."
+      }
+    },
+    {
+      "weight": 2,
+      "fields": {
+        "Name": "LOI des odeurs",
+        "Description": "Crée, supprime et suit les odeurs ordinaires. Reproduire une odeur complexe nécessite un échantillon."
+      }
+    },
+    {
+      "fields": {
+        "Name": "LOI du papier",
+        "Description": "Plie du papier pour former des outils ou des créatures brièvement animés. L'eau, le feu et les chocs violents les détruisent facilement."
+      }
+    },
+    {
+      "fields": {
+        "Name": "LOI des reflets",
+        "Description": "Permet de regarder à travers un reflet proche ou de déformer ce qu'il montre. Aucune matière ne peut le traverser."
+      }
+    },
+    {
+      "fields": {
+        "Name": "LOI du sommeil",
+        "Description": "Favorise le sommeil naturel chez une cible calme. La douleur, le danger ou une forte stimulation rompent l'effet."
+      }
+    },
+    {
+      "weight": 2,
+      "fields": {
+        "Name": "LOI du magnétisme",
+        "Description": "Attire ou repousse de petits objets ferreux. La précision et la force diminuent avec la distance."
       }
     },
     {
       "weight": 3,
       "fields": {
-        "Name": "LOI de la Réparation",
-        "Description": "Répare les cassures simples d’un objet inanimé. Les matériaux manquants doivent être fournis, et les propriétés magiques ne sont pas restaurées."
+        "Name": "LOI de la réparation",
+        "Description": "Répare les cassures simples d'objets inertes. La matière manquante doit être fournie, et les propriétés magiques ne sont pas restaurées."
       }
     },
     {
       "weight": 2,
       "fields": {
-        "Name": "LOI de l’Ombre",
-        "Description": "Étire et façonne l’ombre de l’utilisateur en formes capables de détourner l’attention. Cette ombre ne peut pas devenir solide et nécessite une source de lumière."
+        "Name": "LOI des ombres",
+        "Description": "Étire et façonne l'ombre du personnage en formes destinées à distraire. Elle ne peut pas devenir solide et nécessite une source de lumière."
       }
     },
     {
       "fields": {
-        "Name": "LOI du Sel",
-        "Description": "Crée et façonne une poignée de sel. De plus grandes quantités provoquent de l’épuisement, et le sel invoqué se dissout au lever du soleil."
+        "Name": "LOI du sel",
+        "Description": "Crée et façonne une poignée de sel. De plus grandes quantités provoquent de l'épuisement, et le sel invoqué se dissout au lever du jour."
       }
     },
     {
       "fields": {
-        "Name": "LOI des Battements de cœur",
-        "Description": "Détecte les battements de cœur à proximité et permet de se synchroniser brièvement avec l’un d’eux. Les créatures artificielles et de nombreux morts-vivants restent indétectables."
-      }
-    },
-    {
-      "weight": 2,
-      "fields": {
-        "Name": "LOI de la Couleur",
-        "Description": "Déplace ou modifie les couleurs de surfaces visibles. L’effet reste purement visuel, mais peut servir au camouflage ou à la transmission de signaux codés."
+        "Name": "LOI des battements de cœur",
+        "Description": "Détecte les battements de cœur à proximité et permet de se synchroniser brièvement avec l'un d'eux. Les créatures artificielles et de nombreux morts-vivants lui échappent."
       }
     },
     {
       "weight": 2,
       "fields": {
-        "Name": "LOI de l’Équilibre",
-        "Description": "Stabilise un objet touché ou une personne consentante face aux mouvements ordinaires. Une force soudaine et puissante peut rompre l’effet."
+        "Name": "LOI des couleurs",
+        "Description": "Déplace ou modifie les couleurs de surfaces visibles. Ses effets sont purement visuels, mais peuvent servir au camouflage ou à transmettre des signaux codés."
       }
     },
     {
       "weight": 2,
       "fields": {
-        "Name": "LOI du Froid",
-        "Description": "Retire de la chaleur à une petite zone proche. La chaleur déplacée s’accumule dans le corps de l’utilisateur et peut devenir dangereuse."
+        "Name": "LOI de l'équilibre",
+        "Description": "Stabilise un objet touché ou une personne consentante face aux mouvements ordinaires. Une force soudaine et puissante peut rompre l'effet."
+      }
+    },
+    {
+      "weight": 2,
+      "fields": {
+        "Name": "LOI du froid",
+        "Description": "Retire la chaleur d'une petite zone proche. Cette chaleur se transfère au corps du personnage et peut devenir dangereuse."
       }
     },
     {
       "fields": {
-        "Name": "LOI de la Mémoire",
-        "Description": "Conserve dans un objet un souvenir récent confié volontairement. Jusqu’à sa libération, l’enregistrement estompe les détails de ce souvenir dans l’esprit de l’utilisateur."
+        "Name": "LOI de la mémoire",
+        "Description": "Conserve dans un objet un souvenir récent confié volontairement. Jusqu'à sa libération, les détails de ce souvenir s'estompent dans la mémoire de la personne qui l'a enregistré."
       }
     },
     {
       "fields": {
-        "Name": "LOI du Seuil",
-        "Description": "Avertit lorsqu’une limite désignée est franchie. Une seule limite peut être surveillée à la fois, et celle-ci doit porter une marque physique."
+        "Name": "LOI du seuil",
+        "Description": "Avertit lorsqu'une limite désignée est franchie. Une seule limite peut être surveillée à la fois, et elle doit être marquée physiquement."
       }
     },
     {
       "fields": {
-        "Name": "LOI de l’Essaim",
-        "Description": "Communique des intentions simples à un petit groupe d’insectes ordinaires. Elle ne permet pas de contrôler directement des créatures surnaturelles."
+        "Name": "LOI de l'essaim",
+        "Description": "Communique des intentions simples à un petit groupe d'insectes ordinaires. Elle ne permet pas de contrôler directement les créatures surnaturelles."
       }
     },
     {
       "fields": {
-        "Name": "LOI de la Chance",
-        "Description": "Une fois par scène, infléchit légèrement un résultat aléatoire sans importance. Le MJ choisit ensuite un désagrément tout aussi improbable."
+        "Name": "LOI du hasard",
+        "Description": "Une fois par scène, infléchit légèrement un résultat aléatoire sans importance. Le MJ choisit ensuite un contretemps tout aussi improbable."
       }
     }
   ]

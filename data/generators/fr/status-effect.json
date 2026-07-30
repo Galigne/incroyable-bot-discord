@@ -1,96 +1,96 @@
 {
-  "name": "Effets de statut",
-  "description": "États affectant un personnage",
+  "name": "Effets d’état",
+  "description": "États temporaires ou persistants affectant un personnage",
   "entries": [
     {
       "weight": 3,
-      "value": "Brus — douleur mineure cause -1 sur l'action physique suivante exigeante."
+      "value": "Contusionné — la douleur légère impose un malus de -1 à la prochaine action physique exigeante."
     },
     {
       "weight": 3,
-      "value": "Fatigué — les efforts prolongés et les déplacements sont plus difficiles jusqu'au repos."
+      "value": "Fatigué — les efforts prolongés et les voyages restent plus difficiles jusqu’au prochain repos."
     },
     {
       "weight": 3,
-      "value": "Ébranlé — -1 contre la peur ou l'intimidation qui vient d'être provoquée."
+      "value": "Ébranlé — subit un malus de -1 contre le prochain effet de peur ou d’intimidation."
     },
     {
       "weight": 3,
-      "value": "Détruit — -1 à la prochaine action fondée sur la perception."
+      "value": "Déconcentré — subit un malus de -1 à la prochaine action fondée sur la Perception."
     },
     {
       "weight": 2,
-      "value": "Saignement — perd une petite quantité de PV après des actions intenses jusqu'à ce que traité."
+      "value": "Saignement — perd une petite quantité de PV après chaque effort intense jusqu’à recevoir des soins."
     },
     {
       "weight": 2,
-      "value": "Brûlures — Le feu est endommagé de façon récurrente jusqu'à ce que les flammes s'éteignent."
+      "value": "En feu — subit régulièrement des dégâts de feu jusqu’à l’extinction des flammes."
     },
     {
       "weight": 2,
-      "value": "Transi — les mouvements et les actions basées sur la vitesse sont réduits jusqu'à ce qu'ils soient réchauffés."
+      "value": "Transi — les déplacements et les actions fondées sur la Vitesse sont réduits jusqu’à ce que le personnage soit réchauffé."
     },
     {
       "weight": 2,
-      "value": "Étourdi — les réactions coûtent des efforts supplémentaires au prochain virage."
+      "value": "Étourdi — les réactions demandent un effort supplémentaire pendant le prochain tour."
     },
     {
       "weight": 2,
-      "value": "Aveuglé — les actions basées sur la vue échouent ou subissent une sanction majeure."
+      "value": "Aveuglé — les actions qui dépendent de la vue échouent ou subissent un lourd malus."
     },
     {
       "weight": 2,
-      "value": "Sourds — ne peuvent entendre clairement les discours, les avertissements ou les effets sonores."
+      "value": "Assourdi — n’entend plus clairement les paroles, les avertissements ni les effets sonores."
     },
     {
       "weight": 2,
-      "value": "Poisonné — La résistance fondée sur la Constitution est nécessaire à mesure que le poison progresse."
+      "value": "Empoisonné — doit réussir des résistances fondées sur la Constitution à mesure que le poison progresse."
     },
     {
       "weight": 2,
-      "value": "Lentement — DD est réduit jusqu'à ce que l'effet se termine."
+      "value": "Ralenti — la DD est réduite jusqu’à la fin de l’effet."
     },
     {
       "weight": 2,
-      "value": "Faiblesse — Les actions basées sur la force sont punies."
+      "value": "Affaibli — les actions fondées sur la Force subissent un malus."
     },
     {
       "weight": 2,
-      "value": "Confus — le caractère a de la difficulté à distinguer les alliés, les ennemis ou les directions."
+      "value": "Confus — distingue difficilement alliés, ennemis et directions."
     },
     {
       "weight": 2,
-      "value": "Effrayé — ne peut s'approcher volontairement de la source de la peur sans réussir sur un rouleau."
+      "value": "Effrayé — ne peut pas s’approcher volontairement de la source de sa peur sans réussir un jet."
     },
     {
-      "value": "Étourdie — le personnage perd temporairement la capacité de prendre des mesures normales."
+      "value": "Incapacité — perd temporairement la possibilité d’effectuer des actions normales."
     },
     {
-      "value": "Paralysé — le mouvement volontaire est impossible jusqu'à ce que l'état soit brisé."
+      "value": "Paralysé — ne peut effectuer aucun mouvement volontaire jusqu’à ce que l’état soit dissipé."
     },
     {
-      "value": "Silence — on ne peut pas utiliser les capacités de parole et de voix."
+      "value": "Réduit au silence — ne peut ni parler ni utiliser de capacités qui dépendent de la voix."
     },
     {
-      "value": "Maudite — une pénalité surnaturelle persiste jusqu'à ce que sa condition spécifique soit résolue."
+      "value": "Maudit — subit une pénalité surnaturelle jusqu’à ce que sa condition précise de levée soit remplie."
     },
     {
-      "value": "Petrifier — le corps se tourne lentement vers la pierre et nécessite une intervention urgente."
+      "value": "Pétrification — le corps se transforme lentement en pierre et nécessite une intervention urgente."
     },
     {
-      "value": "Poussessé — un extérieur conteste parfois le contrôle du personnage."
+      "value": "Possédé — une volonté étrangère tente par moments de prendre le contrôle du personnage."
     },
     {
-      "value": "Marqué — un signe magique permet à une créature hostile ou un effet de suivre le personnage."
+      "value": "Marqué — un signe magique permet à une créature ou à un effet hostile de suivre le personnage."
     },
     {
-      "value": "Invisible — le caractère ne peut pas être vu normalement mais fait encore du son et laisse des traces."
+      "value": "Invisible — ne peut pas être vu normalement, mais produit toujours des sons et laisse des traces."
     },
     {
-      "value": "Régénérer — restaure une petite quantité de PV à la fin de chaque tour."
+      "value": "Régénération — récupère une petite quantité de PV à la fin de chaque tour."
     },
     {
-      "value": "Inspiré — peut reroller un choix mourir, après quoi ce statut se termine."
+      "value": "Inspiré — peut relancer un dé de son choix, après quoi cet état prend fin."
     }
   ]
 }

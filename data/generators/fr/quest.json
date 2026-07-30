@@ -3,117 +3,117 @@
   "description": "Amorces d’aventure, objectifs et dilemmes",
   "entries": [
     {
-      "value": "Récupérer les ombres volées d'un village avant le lever du soleil ; le voleur les utilise pour construire un corps pour un esprit solitaire."
+      "value": "Récupérer avant l’aube les ombres volées d’un village ; le voleur s’en sert pour fabriquer un corps destiné à un esprit solitaire."
     },
     {
       "weight": 2,
-      "value": "Escortez un diplomate insupportable mais vital à travers un territoire où parler un mensonge attire les prédateurs."
+      "value": "Escorter un diplomate insupportable mais indispensable à travers un territoire où chaque mensonge attire des prédateurs."
     },
     {
       "weight": 2,
-      "value": "Enquêter sur une mine où les ouvriers reviennent chaque soir avec des souvenirs de personnes qui ont disparu il y a des années."
+      "value": "Enquêter dans une mine dont les ouvriers rentrent chaque soir avec les souvenirs de personnes disparues depuis des années."
     },
     {
       "weight": 2,
-      "value": "Volez une couronne maudite d'une puissance sans laisser personne la porter, y compris le fantôme persuasif de la couronne."
+      "value": "Dérober la couronne maudite d’un tyran sans laisser personne la porter, malgré le fantôme très persuasif qui l’habite."
     },
     {
       "weight": 3,
-      "value": "Découvrez pourquoi une rivière a cessé de couler avant que deux villes en aval ne se battent sur les eaux restantes."
+      "value": "Découvrir pourquoi une rivière a cessé de couler avant que deux villes en aval ne se disputent par les armes l’eau restante."
     },
     {
-      "value": "Sauver un dragon d'une princesse qui collectionne des créatures rares et contrôle le système juridique local."
+      "value": "Sauver un dragon retenu par une princesse qui collectionne les créatures rares et contrôle la justice locale."
     },
     {
       "weight": 2,
-      "value": "Carte une forêt qui réarrange ses chemins chaque fois que quelqu'un prend une décision qu'il regrette."
+      "value": "Cartographier une forêt qui réorganise ses sentiers chaque fois qu’une personne prend une décision qu’elle regrette."
     },
     {
       "weight": 3,
-      "value": "Livrez une boîte scellée à un monastère ; chaque faction prétend que la boîte contient quelque chose de différent et aucune ne peut être totalement erronée."
+      "value": "Livrer une boîte scellée à un monastère ; chaque faction lui attribue un contenu différent, et aucune n’a peut-être tout à fait tort."
     },
     {
       "weight": 2,
-      "value": "Effacer le nom d'une famille en prouvant que son ancêtre exécuté a été remplacé par un imitateur avant de commettre la trahison."
+      "value": "Réhabiliter une famille en prouvant que son ancêtre exécuté avait été remplacé par une mimique avant de commettre sa trahison."
     },
     {
       "weight": 3,
-      "value": "Négocier la paix entre une ville et le géant dont la migration saisonnière passe maintenant directement par ses nouveaux murs."
+      "value": "Négocier la paix entre une ville et le géant dont la migration saisonnière traverse désormais ses nouvelles murailles."
     },
     {
-      "value": "Retirez la médecine d'une ville en quarantaine où la maladie infecte des mots écrits plutôt que des corps."
-    },
-    {
-      "weight": 2,
-      "value": "Arrêtez un champion de tournoi qui ne peut pas perdre parce que chaque adversaire vaincu est magiquement ajouté à leur force."
-    },
-    {
-      "value": "Explorez un phare qui brille dans le sol tandis que les navires disparaissent sous les champs voisins."
+      "value": "Rapporter un remède d’une ville en quarantaine où la maladie infecte les mots écrits plutôt que les corps."
     },
     {
       "weight": 2,
-      "value": "Remettez une fugueuse familière à son mage, puis décidez si la prétention de mauvais traitements du familier est vraie."
+      "value": "Arrêter un champion de tournoi invincible, car la force de chaque adversaire vaincu vient magiquement s’ajouter à la sienne."
+    },
+    {
+      "value": "Explorer un phare dont le faisceau éclaire le sol tandis que des navires disparaissent sous les champs voisins."
     },
     {
       "weight": 2,
-      "value": "Protégez la performance finale d'un théâtre hanté pour que son dramaturge mort puisse révéler le meurtrier dans la dernière scène."
+      "value": "Ramener un familier fugitif à son mage, puis déterminer si ses accusations de mauvais traitements sont fondées."
+    },
+    {
+      "weight": 2,
+      "value": "Protéger la dernière représentation d’un théâtre hanté afin que son dramaturge défunt révèle le nom de son meurtrier dans l’ultime scène."
     },
     {
       "weight": 3,
-      "value": "Localisez une caravane fiscale manquante qui ne porte pas d'or, mais un registre capable de coller trois maisons nobles."
+      "value": "Retrouver une caravane fiscale disparue qui ne transporte aucun or, mais un registre capable de provoquer la chute de trois maisons nobles."
     },
     {
       "weight": 2,
-      "value": "C'est une prison abandonnée pour libérer un détenu innocent qui, selon les archives officielles, est mort il y a quarante ans."
+      "value": "S’introduire dans une prison abandonnée pour libérer un innocent que les archives officielles déclarent mort depuis quarante ans."
     },
     {
       "weight": 3,
-      "value": "Rassemblez trois runesmiths rivales pour réparer un pupille défaillant, malgré que chacun blâme les autres pour son sabotage."
+      "value": "Réunir trois maîtres des runes rivaux pour réparer une protection défaillante, alors que chacun accuse les deux autres de l’avoir sabotée."
     },
     {
       "weight": 2,
-      "value": "Tracez un monstre qui vole des noms ; ses victimes restent vivantes mais ne peuvent être rappelées ou traitées."
+      "value": "Pister un monstre qui vole les noms ; ses victimes restent vivantes, mais plus personne ne peut se souvenir d’elles ni s’adresser à elles."
     },
     {
-      "value": "Gagnez un concours de cuisine dont le prix est une carte ancienne, tandis que les ingrédients et les juges sont secrètement enchantés."
-    },
-    {
-      "weight": 2,
-      "value": "Récupérer une cloche sacrée de colons pacifiques qui en ont besoin pour garder une créature pire endormie."
+      "value": "Remporter un concours de cuisine dont le prix est une carte ancienne, tandis qu’ingrédients et juges sont secrètement ensorcelés."
     },
     {
       "weight": 2,
-      "value": "Enquêter sur une armée qui marche tous les soirs mais qui ne laisse aucune empreinte de pas et n'a attaqué personne."
+      "value": "Récupérer une cloche sacrée auprès de colons pacifiques qui en ont besoin pour maintenir endormie une créature bien pire."
     },
     {
       "weight": 2,
-      "value": "Aidez un fantôme à remplir une dernière promesse sans révéler que sa réalisation ruinera un descendant vivant."
-    },
-    {
-      "value": "Entrez dans le rêve d'un noble pour enlever un assassin, sachant que les blessures et les secrets trouvés là-bas peuvent revenir à la réalité."
+      "value": "Enquêter sur une armée qui marche chaque nuit sans laisser d’empreintes et qui n’a encore attaqué personne."
     },
     {
       "weight": 2,
-      "value": "Trouvez la source de potions de guérison contrefaites qui fonctionnent parfaitement mais qui transfèrent les blessures à des étrangers aléatoires."
+      "value": "Aider un fantôme à tenir une dernière promesse sans révéler que son accomplissement ruinera l’un de ses descendants encore en vie."
+    },
+    {
+      "value": "Entrer dans le rêve d’un noble pour en chasser un assassin, sachant que les blessures et les secrets découverts là-bas pourraient revenir dans la réalité."
+    },
+    {
+      "weight": 2,
+      "value": "Trouver l’origine de fausses potions de soin qui fonctionnent parfaitement, mais transfèrent les blessures à des inconnus choisis au hasard."
     },
     {
       "weight": 3,
-      "value": "Capturez un célèbre hors-la-loi devant un shérif corrompu, puis jugez s'il faut livrer l'un ou l'autre."
+      "value": "Capturer un hors-la-loi célèbre avant un shérif corrompu, puis décider lequel des deux mérite d’être livré à la justice."
     },
     {
       "weight": 2,
-      "value": "Retirez un météore d'un sol contesté tandis que le dard crée rapidement une vie étrange autour d'elle."
+      "value": "Récupérer un fragment de météore sur un territoire disputé tandis qu’une vie étrange prolifère rapidement autour de lui."
     },
     {
       "weight": 3,
-      "value": "Réunissez les pièces d'un traité rompu avant que son serment magique ne interprète le dommage comme une déclaration de guerre."
+      "value": "Réunir les morceaux d’un traité brisé avant que son serment magique n’interprète les dégâts comme une déclaration de guerre."
     },
     {
       "weight": 2,
-      "value": "Découvrez qui remplace les statues de la ville par des citoyens pétrifiés et pourquoi les statues sourient."
+      "value": "Découvrir qui remplace les statues de la ville par des habitants pétrifiés, et pourquoi ceux-ci sourient."
     },
     {
-      "value": "Fermez un portail qui donne un souhait à tous les voisins, avec des résultats de plus en plus littéraux et destructeurs."
+      "value": "Fermer un portail qui exauce un souhait pour chaque personne proche, avec des résultats de plus en plus littéraux et destructeurs."
     }
   ]
 }

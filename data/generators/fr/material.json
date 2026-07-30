@@ -4,123 +4,123 @@
   "entries": [
     {
       "weight": 5,
-      "value": "Fer — métal fort commun utilisé pour les outils, les armes, les accessoires et les armures."
+      "value": "Fer — métal courant et robuste employé pour les outils, les armes, les ferrures et les armures."
     },
     {
       "weight": 5,
-      "value": "Cuivre — métal rougeâtre utilisable, évalué pour les navires, les fils, les pièces de monnaie et les alliages."
+      "value": "Cuivre — métal rougeâtre facile à travailler, apprécié pour les récipients, les fils, les pièces et les alliages."
     },
     {
       "weight": 5,
-      "value": "Chêne — bois dense et durable utilisé dans les bâtiments, les boucliers, les barils et les navires."
+      "value": "Chêne — bois dense et durable utilisé dans la construction, les boucliers, les tonneaux et les navires."
     },
     {
       "weight": 5,
-      "value": "Pierre calcaire — pierre de travail pâle commune dans les murs, la sculpture, le mortier et les grottes."
+      "value": "Calcaire — pierre pâle facile à tailler, courante dans les murs, les sculptures, le mortier et les grottes."
     },
     {
       "weight": 4,
-      "value": "Bronze — alliage de cuivre résistant à la corrosion utilisé pour les bras, les cloches, les statues et les mécanismes."
+      "value": "Bronze — alliage de cuivre résistant à la corrosion, utilisé pour les armes, les cloches, les statues et les mécanismes."
     },
     {
       "weight": 4,
-      "value": "Acier — alliage de fer raffiné offrant une résistance fiable et une pointe de coupe durable."
+      "value": "Acier — alliage de fer raffiné, solide et capable de conserver durablement un tranchant."
     },
     {
       "weight": 4,
-      "value": "Argent — métal brillant précieux associé à la monnaie, miroirs, objets rituels et certains monstres."
+      "value": "Argent — métal précieux brillant associé à la monnaie, aux miroirs, aux objets rituels et à certains monstres."
     },
     {
       "weight": 4,
-      "value": "Cuir — cuir traité souple utilisé pour les vêtements, les armures, les conteneurs, les sangles et les livres."
+      "value": "Cuir — peau traitée et souple utilisée pour les vêtements, les armures, les contenants, les sangles et les livres."
     },
     {
       "weight": 4,
-      "value": "Granit — pierre très dure, mouchetée, adaptée aux monuments, aux fortifications et aux meules."
+      "value": "Granit — pierre mouchetée extrêmement dure, adaptée aux monuments, aux fortifications et aux meules."
     },
     {
       "weight": 3,
-      "value": "Or — métal précieux doux, précieux pour la richesse, l'ornement, la pureté rituelle et la conduite magique."
+      "value": "Or — métal précieux et malléable, recherché comme richesse, ornement, symbole de pureté rituelle et conducteur magique."
     },
     {
       "weight": 3,
-      "value": "Marbre — pierre décorative utilisée dans l'architecture riche, la sculpture, les planchers et les tombes."
+      "value": "Marbre — pierre décorative employée dans les demeures fastueuses, les sculptures, les sols et les tombeaux."
     },
     {
       "weight": 3,
-      "value": "Obsidienne — verre volcanique capable d'un bord exceptionnellement tranchant mais fragile."
+      "value": "Obsidienne — verre volcanique capable de produire un tranchant exceptionnel, mais cassant."
     },
     {
       "weight": 3,
-      "value": "Jade — pierre ornementale dure associée à l'état, aux phoques, aux médicaments et aux charmes protecteurs."
+      "value": "Jade — pierre ornementale tenace associée au prestige, aux sceaux, à la médecine et aux charmes protecteurs."
     },
     {
       "weight": 3,
-      "value": "Quartz — un cristal abondant utilisé dans les verres, les montres, la décoration et les points de base magiques."
+      "value": "Quartz — cristal abondant utilisé pour les lentilles, les mécanismes d’horlogerie, la décoration et les focaliseurs magiques simples."
     },
     {
       "weight": 3,
-      "value": "Ambre — résine fossilisée préservant les insectes, les odeurs, la charge statique et parfois les souvenirs."
+      "value": "Ambre — résine fossilisée qui conserve insectes, odeurs, électricité statique et parfois souvenirs."
     },
     {
       "weight": 3,
-      "value": "Perle — pierre précieuse organique, appréciée en bijoux, en diplomatie, en rites d'eau et en médicaments."
+      "value": "Perle — gemme organique prisée en joaillerie, en diplomatie, dans les rites liés à l’eau et en médecine."
     },
     {
       "weight": 2,
-      "value": "Améthyste — quartz violet associé à la clarté, la sobriété, les rêves et la protection spirituelle."
+      "value": "Améthyste — quartz violet associé à la lucidité, à la sobriété, aux rêves et à la protection spirituelle."
     },
     {
       "weight": 2,
-      "value": "Rubis — pierre précieuse rouge dure associée à la passion, au sang, au feu et à l'autorité royale."
+      "value": "Rubis — gemme rouge et dure associée à la passion, au sang, au feu et à l’autorité royale."
     },
     {
       "weight": 2,
-      "value": "Saphir — pierre précieuse bleue dure associée à la vérité, au ciel, à l'eau et à la magie disciplinée."
+      "value": "Saphir — gemme bleue et dure associée à la vérité, au ciel, à l’eau et à une magie rigoureuse."
     },
     {
       "weight": 2,
-      "value": "Émeraude — pierre précieuse verte associée à la croissance, au poison, à la prophétie et aux liens durables."
+      "value": "Émeraude — gemme verte associée à la croissance, au poison, aux prophéties et aux liens durables."
     },
     {
       "weight": 2,
-      "value": "Diamant — cristal limpide exceptionnellement dur utilisé pour la coupe, le statut et les enchantements durables."
+      "value": "Diamant — cristal transparent d’une dureté exceptionnelle, employé pour tailler, afficher son rang et créer des enchantements durables."
     },
     {
       "weight": 2,
-      "value": "Fer météorique — métal rare tombé dans le ciel, portant des motifs inhabituels et une résistance à la magie."
+      "value": "Fer météorique — métal rare tombé du ciel, parcouru de motifs inhabituels et résistant à la magie."
     },
     {
       "weight": 2,
-      "value": "Os de dragon — os léger résistant conservant des traces de la nature élémentaire de la créature."
+      "value": "Os de dragon — matière légère et résistante qui conserve des traces de la nature élémentaire de la créature."
     },
     {
       "weight": 2,
-      "value": "Silhouette d'araignée — fibre légère extrêmement forte utilisée dans les cordes, les vêtements, les sutures et les pièges."
+      "value": "Soie d’araignée — fibre extrêmement légère et solide utilisée pour les cordes, les vêtements, les sutures et les pièges."
     },
     {
       "weight": 1,
-      "value": "Mithral — métal argenté rare combinant une résistance exceptionnelle avec un poids très faible."
+      "value": "Mithral — métal argenté rare qui combine une résistance exceptionnelle à un poids très faible."
     },
     {
       "weight": 1,
-      "value": "Adamant — alliage noir presque incassable nécessitant une chaleur extraordinaire et des outils pour former."
+      "value": "Adamant — alliage sombre presque incassable qui exige une chaleur et des outils extraordinaires pour être façonné."
     },
     {
       "weight": 1,
-      "value": "Pierre solaire — cristal translucide chaud qui stocke la lumière du jour et affaiblit les créatures de l'obscurité."
+      "value": "Pierre solaire — cristal translucide et chaud qui emmagasine la lumière du jour et affaiblit les créatures des ténèbres."
     },
     {
       "weight": 1,
-      "value": "Verre du Vide — verre noir froid qui absorbe la lumière, le son et de petites quantités d'énergie magique."
+      "value": "Verre du Vide — verre noir et froid qui absorbe la lumière, les sons et de petites quantités d’énergie magique."
     },
     {
       "weight": 1,
-      "value": "Bois vivant — récolté sans tuer son arbre et capable de réparer lentement des objets en forme."
+      "value": "Bois vivant — récolté sans tuer l’arbre, il peut réparer lentement les objets auxquels on lui a donné forme."
     },
     {
       "weight": 1,
-      "value": "Le cristal d'éther — minéral instable qu'un sillon s'épelle tout en accumulant une résonance dangereuse."
+      "value": "Cristal d’éther — minerai instable qui amplifie les sorts tout en accumulant une résonance dangereuse."
     }
   ]
 }
