@@ -3,3 +3,4 @@
 /.runtime
 .env
 config*.json
+/documentation/SCENARIO*.md

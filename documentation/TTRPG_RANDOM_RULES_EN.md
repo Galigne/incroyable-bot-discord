@@ -20,8 +20,6 @@
 
 # Table of Contents
 
-- [JDR RANDOM](#jdr-random)
-- [Table of Contents](#table-of-contents)
 - [Overview](#overview)
 - [Character Creation](#character-creation)
   - [Character Identity and Intentions](#character-identity-and-intentions)

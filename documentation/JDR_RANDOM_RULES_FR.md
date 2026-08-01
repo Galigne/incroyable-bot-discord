@@ -20,8 +20,6 @@
 
 # Sommaire
 
-- [JDR RANDOM](#jdr-random)
-- [Sommaire](#sommaire)
 - [Présentation](#présentation)
 - [Création de personnage](#création-de-personnage)
   - [Identité et intentions du personnage](#identité-et-intentions-du-personnage)
