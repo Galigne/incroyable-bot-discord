@@ -8,7 +8,7 @@
 
 <div align="center">
 
-# JDR RANDOM
+# TTRPG RANDOM
 
 > *A simple and creative system*
 >
@@ -94,13 +94,13 @@
 
 # Overview
 
-JDR Random, a **tabletop roleplaying game** ([TTRPG](#ttrpg)), aims for an **accessible**, **creative**, and clearly **fun-first** experience. The rules are simple for players, and preparation for the **Game Master** ([GM](#gm)) stays quick: the goal is to encourage **improvisation**, **freedom**, and **enjoyment** rather than mechanical complexity.
+TTRPG Random, a **tabletop roleplaying game** ([TTRPG](#ttrpg)), aims for an **accessible**, **creative**, and clearly **fun-first** experience. The rules are simple for players, and preparation for the **Game Master** ([GM](#gm)) stays quick: the goal is to encourage **improvisation**, **freedom**, and **enjoyment** rather than mechanical complexity.
 
 At the start of a [campaign](#campaign), the world map is intentionally sparse: the [GM](#gm) places the main points of interest and leaves the rest blank. Players then complete the world by creating their characters; the [GM](#gm), or random generators, enrich the rest as play goes on. In later campaigns, the map, the characters, and the previous [lore](#lore) can be kept to deepen the setting.
 
 No race and no class are imposed: players invent their race, appearance, traits, history, and [racial traits](#racial-traits), as well as their class, stats, weapons, armor, magic, talents, and [background](#background). Any element added to the setting must be **validated by the [GM](#gm)** to guarantee **consistency** and **balance**.
 
-There is no absolute restriction on your actions, nor are there lists of spells or items doomed to repeat from game to game. Here, **your imagination sets the limits**. JDR Random leaves real-time balancing to the [GM](#gm), giving everyone a great deal of creative freedom.
+There is no absolute restriction on your actions, nor are there lists of spells or items doomed to repeat from game to game. Here, **your imagination sets the limits**. TTRPG Random leaves real-time balancing to the [GM](#gm), giving everyone a great deal of creative freedom.
 
 For [GM](#gm) preparation before each session, random generators make it easier to improvise quests, events, loot, characters, and more. That way, neither the players nor the [GM](#gm) are pressured into following an overly rigid story.
 
@@ -210,7 +210,7 @@ Affects the use of heavy [weapons](#weapons), blocking, and all actions tied to 
 <a id="dexterity"></a>
 <u>Dexterity</u>
 
-Affects the use of light and ranged [weapons](#weapons), dodging, and actions tied to dexterity: infiltration, pickpocketing, acrobatics, etc.
+Affects the use of light and ranged [weapons](#weapons), dodging, and actions tied to dexterity: stealth, pickpocketing, acrobatics, etc.
 
 <a id="intelligence"></a>
 <u>Intelligence</u>
@@ -220,7 +220,7 @@ Determines mastery of [RULE](#rule), [RULE Points](#rule-points), and actions ti
 <a id="speed"></a>
 <u>Speed</u>
 
-Determines [initiative](#initiative), [reflexes](#reflexes), movement distance, and actions tied to speed: catching someone, fleeing, drawing a weapon, etc.
+Determines [initiative](#initiative), [reflexes](#reflexes), movement distance, and actions tied to speed: catching up to someone, fleeing, drawing a weapon, etc.
 
 <a id="perception"></a>
 <u>Perception</u>
@@ -293,6 +293,8 @@ Your character starts with **`1 talent`**. Talents are varied and must remain **
 > - **Bodybuilder**: `+1` to actions tied to [strength](#strength).
 > - **Politician**: `+2` to [charisma](#charisma) during negotiations.
 
+Talents are individually approved and balanced by the [GM](#gm).
+
 ## Starting Equipment and Resources
 
 ### Starting Equipment
@@ -339,6 +341,10 @@ For a standard [stat roll](#roll):
 2. You roll **`1D20`**.
 3. If the result is **lower than or equal to your stat value**, you succeed.
 4. If the result is **higher**, or if you roll a **[critical failure](#critical-failure)** (`20`), the [action](#action) fails.
+
+Critical:
+- Even when stats & bonuses make the target value 20 or above, a 20 will always be a critical failure.
+- Even when stats & penalties make the target value 1 or below, a 1 will always be a critical success.
 
 <u>Out-of-combat note</u>
 
@@ -521,7 +527,7 @@ The more an attack shows that the player listened to the [GM](#gm)'s description
 
 - **Two-handed weapons** (or double weapons): deal high damage (`greatsword`, `halberd`, `bow`, etc.).
 - **One-handed weapons**: deal medium damage (`dagger`, `short sword`, `saber`, etc.).
-- **Shield**: adds [AR](#armor-ar), provided the [strength](#strength) requirement is met, and makes blocking enemy attacks easier.
+- **Shield**: adds [AR](#armor-ar), and makes blocking enemy attacks easier.
 
 <u>AR granted by a shield</u>
 

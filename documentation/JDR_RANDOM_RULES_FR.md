@@ -293,6 +293,8 @@ Votre personnage commence avec **`1 talent`**. Les talents sont variés et doive
 > - **Bodybuilder** : `+1` aux actions liées à la [force](#force).
 > - **Politicien** : `+2` en [charisme](#charisme) lors des négociations.
 
+Les talents sont chacun apprové et équilibré par le [MJ](#mj).
+
 ## Équipement et ressources de départ
 
 ### Équipement de départ
@@ -339,6 +341,10 @@ Pour un [jet](#jet) de caractéristique classique :
 2. Vous lancez **`1D20`**.
 3. Si le résultat est **inférieur ou égal à votre valeur de caractéristique**, vous réussissez.
 4. Si le résultat est **supérieur**, ou si vous obtenez **un [échec critique](#échec-critique)** (`20`), l'[action](#action) échoue.
+
+Critiques:
+- Même lorsque les caractéristiques et les bonus font passer la valeur cible à 20 ou plus, un 20 sera toujours un échec critique.
+- Même lorsque les caractéristiques et les malus font passer la valeur cible à 1 ou moins, un 1 sera toujours un succès critique.
 
 <u>Remarque hors combat</u>
 
@@ -521,7 +527,7 @@ Plus une attaque montre que le joueur a écouté la description du [MJ](#mj), co
 
 - **Armes à deux mains** (ou doubles armes) : infligent des dégâts élevés (`épée à deux mains`, `hallebarde`, `arc`, etc.).
 - **Armes à une main** : infligent des dégâts moyens (`dague`, `épée courte`, `sabre`, etc.).
-- **Bouclier** : ajoute des [PR](#points-darmure-pr), si la condition de [force](#force) est respectée, et facilite le blocage des attaques ennemies.
+- **Bouclier** : ajoute des [PR](#points-darmure-pr), et facilite le blocage des attaques ennemies.
 
 <u>PR apportés par un bouclier</u>
 
