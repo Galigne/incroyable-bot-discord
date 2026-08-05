@@ -42,25 +42,25 @@ const {
 
 test('damage preserves AR-first and piercing behavior', () => {
 	const character = createCharacterFixture();
-	character.resources.hp.current = 100;
-	character.resources.ar.current = 30;
+	character.status.hp.current = 100;
+	character.status.ar.current = 30;
 
 	assert.deepEqual(dealDamage(character, 40), {
 		arDamage: 30,
 		hpDamage: 10,
 		piercing: false,
 	});
-	assert.equal(character.resources.ar.current, 0);
-	assert.equal(character.resources.hp.current, 90);
+	assert.equal(character.status.ar.current, 0);
+	assert.equal(character.status.hp.current, 90);
 
-	character.resources.ar.current = 20;
+	character.status.ar.current = 20;
 	assert.deepEqual(dealDamage(character, 15, true), {
 		arDamage: 0,
 		hpDamage: 15,
 		piercing: true,
 	});
-	assert.equal(character.resources.ar.current, 20);
-	assert.equal(character.resources.hp.current, 75);
+	assert.equal(character.status.ar.current, 20);
+	assert.equal(character.status.hp.current, 75);
 	assert.throws(
 		() => dealDamage(character, 0),
 		error => error.code === 'INVALID_CHARACTER_EDIT',
@@ -69,10 +69,10 @@ test('damage preserves AR-first and piercing behavior', () => {
 
 test('healing restores HP, armor, or both with shared rounding', () => {
 	const character = createCharacterFixture();
-	character.resources.hp = { current: 1, max: 101 };
-	character.resources.ar = { current: 0, max: 33 };
-	character.resources.ap = { current: 0, max: 6 };
-	character.resources.md = { current: 0, max: 7.5 };
+	character.status.hp = { current: 1, max: 101 };
+	character.status.ar = { current: 0, max: 33 };
+	character.status.ap = { current: 0, max: 6 };
+	character.status.md = { current: 0, max: 7.5 };
 
 	assert.deepEqual(restoreResource(character, 'hp', 50), { current: 51, max: 101 });
 	assert.deepEqual(restoreResource(character, 'ar', 25), { current: 8, max: 33 });
@@ -82,15 +82,15 @@ test('healing restores HP, armor, or both with shared rounding', () => {
 	assert.deepEqual(restoreHealingResources(character, 'armor', 50), [
 		{ resource: 'ar', previous: 8, current: 17, max: 33 },
 	]);
-	character.resources.hp.current = 10;
-	character.resources.ar.current = 5;
+	character.status.hp.current = 10;
+	character.status.ar.current = 5;
 	assert.deepEqual(restoreHealingResources(character, 'both', 50), [
 		{ resource: 'hp', previous: 10, current: 51, max: 101 },
 		{ resource: 'ar', previous: 5, current: 17, max: 33 },
 	]);
 	assert.equal(calculateRestoredResourceValue(101, 100), 101);
-	assert.equal(character.resources.hp.current <= character.resources.hp.max, true);
-	assert.equal(character.resources.ar.current <= character.resources.ar.max, true);
+	assert.equal(character.status.hp.current <= character.status.hp.max, true);
+	assert.equal(character.status.ar.current <= character.status.ar.max, true);
 
 	for (const invalidPercentage of [Number.NaN, Number.POSITIVE_INFINITY, -0.01, 100.01]) {
 		assert.throws(
@@ -104,8 +104,8 @@ test('healing restores HP, armor, or both with shared rounding', () => {
 	);
 
 	resetTurnResources(character);
-	assert.equal(character.resources.ap.current, 6);
-	assert.equal(character.resources.md.current, 7.5);
+	assert.equal(character.status.ap.current, 6);
+	assert.equal(character.status.md.current, 7.5);
 });
 
 test('resource, armor, AP, and movement formulas preserve generated values', () => {
@@ -177,9 +177,7 @@ test('character validation preserves legacy save normalization and AP constraint
 		{ name: 'Valid', description: 'Description', level: 2 },
 	]);
 	assert.deepEqual(createResourcesFromSave({
-		resources: {
-			ap: { current: 12, max: 11 },
-		},
+		ap: { current: 12, max: 11 },
 	}), {
 		hp: { current: 100, max: 100 },
 		ar: { current: 0, max: 0 },
@@ -189,7 +187,7 @@ test('character validation preserves legacy save normalization and AP constraint
 
 	const character = createCharacterFixture();
 	assert.throws(
-		() => validateActionPointEdit(character, ['resources', 'ap', 'max'], 11),
+		() => validateActionPointEdit(character, ['status', 'ap', 'max'], 11),
 		error => error.code === 'INVALID_CHARACTER_EDIT',
 	);
 });
@@ -203,6 +201,7 @@ test('blank characters and hydrated saves use talent arrays', () => {
 		'Cold Immunity — Ordinary cold cannot freeze the character.',
 	];
 	const hydratedCharacter = Character.fromSave({
+		schemaVersion: 2,
 		creatorId: 'creator',
 		key: 'Array.Save',
 		talents: savedTalents,
@@ -211,6 +210,7 @@ test('blank characters and hydrated saves use talent arrays', () => {
 	assert.notEqual(hydratedCharacter.talents, savedTalents);
 
 	const legacyCharacter = Character.fromSave({
+		schemaVersion: 1,
 		creatorId: 'creator',
 		key: 'Legacy.Save',
 		talents: [
@@ -229,49 +229,53 @@ test('blank characters and hydrated saves use talent arrays', () => {
 
 test('character encumbrance defaults each absent value and preserves explicit values', () => {
 	const blankCharacter = new Character('Blank.Encumbrance', 'creator');
-	assert.deepEqual(blankCharacter.encumbrance, { current: 0, max: 0 });
+	assert.deepEqual(blankCharacter.gear.encumbrance, { current: 0, max: 0 });
 
 	const missingEncumbrance = Character.fromSave({
+		schemaVersion: 2,
 		creatorId: 'creator',
 		key: 'Missing.Encumbrance',
-		stats: { constitution: 20 },
+		statistics: { constitution: 20 },
 	});
-	assert.deepEqual(missingEncumbrance.encumbrance, { current: 0, max: 0 });
+	assert.deepEqual(missingEncumbrance.gear.encumbrance, { current: 0, max: 0 });
 
 	const missingMaximum = Character.fromSave({
+		schemaVersion: 2,
 		creatorId: 'creator',
-		encumbrance: { current: 3 },
+		gear: { encumbrance: { current: 3 } },
 		key: 'Missing.Maximum.Encumbrance',
-		stats: { constitution: 20 },
+		statistics: { constitution: 20 },
 	});
-	assert.deepEqual(missingMaximum.encumbrance, { current: 3, max: 0 });
+	assert.deepEqual(missingMaximum.gear.encumbrance, { current: 3, max: 0 });
 
 	const missingCurrent = Character.fromSave({
+		schemaVersion: 2,
 		creatorId: 'creator',
-		encumbrance: { max: 8 },
+		gear: { encumbrance: { max: 8 } },
 		key: 'Missing.Current.Encumbrance',
-		stats: { constitution: 20 },
+		statistics: { constitution: 20 },
 	});
-	assert.deepEqual(missingCurrent.encumbrance, { current: 0, max: 8 });
+	assert.deepEqual(missingCurrent.gear.encumbrance, { current: 0, max: 8 });
 
 	const explicitEncumbrance = Character.fromSave({
+		schemaVersion: 2,
 		creatorId: 'creator',
-		encumbrance: { current: 4, max: 11 },
+		gear: { encumbrance: { current: 4, max: 11 } },
 		key: 'Explicit.Encumbrance',
-		stats: { constitution: 20 },
+		statistics: { constitution: 20 },
 	});
-	assert.deepEqual(explicitEncumbrance.encumbrance, { current: 4, max: 11 });
+	assert.deepEqual(explicitEncumbrance.gear.encumbrance, { current: 4, max: 11 });
 });
 
 test('random character generation leaves manual encumbrance unchanged', () => {
 	const blankCharacter = new Character('Generated.Blank.Encumbrance', 'creator');
 	populateRandomCharacter(blankCharacter, { level: 1, random: () => 0 });
-	assert.deepEqual(blankCharacter.encumbrance, { current: 0, max: 0 });
+	assert.deepEqual(blankCharacter.gear.encumbrance, { current: 0, max: 0 });
 
 	const managedCharacter = new Character('Generated.Manual.Encumbrance', 'creator');
-	managedCharacter.encumbrance = { current: 4, max: 9 };
+	managedCharacter.gear.encumbrance = { current: 4, max: 9 };
 	populateRandomCharacter(managedCharacter, { level: 1, random: () => 0 });
-	assert.deepEqual(managedCharacter.encumbrance, { current: 4, max: 9 });
+	assert.deepEqual(managedCharacter.gear.encumbrance, { current: 4, max: 9 });
 });
 
 test('seeded random character generation remains equivalent', () => {
@@ -284,15 +288,12 @@ test('seeded random character generation remains equivalent', () => {
 	populateRandomCharacter(character, { level: 10, random });
 
 	assert.deepEqual({
-		stats: character.stats,
+		statistics: character.statistics,
 		rules: character.rules.map(rule => ({ name: rule.name, level: rule.level })),
-		resources: character.resources,
-		equipment: character.equipment,
-		inventory: character.inventory,
-		encumbrance: character.encumbrance,
-		statusEffects: character.statusEffects,
+		status: character.status,
+		gear: character.gear,
 	}, {
-		stats: {
+		statistics: {
 			constitution: 10,
 			strength: 7,
 			dexterity: 15,
@@ -304,27 +305,29 @@ test('seeded random character generation remains equivalent', () => {
 			reflexes: 15,
 		},
 		rules: [{ name: 'Shadow RULE', level: 2 }],
-		resources: {
+		status: {
 			hp: { current: 280, max: 280 },
 			ar: { current: 14, max: 14 },
 			ap: { current: 8, max: 8 },
 			md: { current: 7.5, max: 7.5 },
+			effects: [
+				'Fatigued — prolonged effort and travel are more difficult until resting.',
+			],
 		},
-		equipment: [
-			'Common light armor — Ordinary clothing or light padding that offers mobility but no meaningful AR.',
-			'Hand axe — A compact chopping weapon balanced well enough to throw.',
-			'Greatsword — A massive two-handed sword designed for broad, forceful attacks.',
-		],
-		inventory: [
-			'Bedroll — A weather-resistant blanket and sleeping roll.',
-			'Chalk and charcoal — Useful for marking paths, sketching maps, and making notes.',
-			'Manacles — A pair of iron restraints with a simple key.',
-			'175 gold',
-		],
-		encumbrance: { current: 0, max: 0 },
-		statusEffects: [
-			'Fatigued — prolonged effort and travel are more difficult until resting.',
-		],
+		gear: {
+			equipment: [
+				'Common light armor — Ordinary clothing or light padding that offers mobility but no meaningful AR.',
+				'Hand axe — A compact chopping weapon balanced well enough to throw.',
+				'Greatsword — A massive two-handed sword designed for broad, forceful attacks.',
+			],
+			inventory: [
+				'Bedroll — A weather-resistant blanket and sleeping roll.',
+				'Chalk and charcoal — Useful for marking paths, sketching maps, and making notes.',
+				'Manacles — A pair of iron restraints with a simple key.',
+				'175 gold',
+			],
+			encumbrance: { current: 0, max: 0 },
+		},
 	});
 });
 
@@ -389,38 +392,13 @@ test('random character generation uses localized content without changing identi
 	}, 'fr'));
 
 	assert.equal(character.race.name, 'Humain');
-	assert.match(character.inventory.at(-1), /^\d+ pièces d’or$/);
-	assert.equal(character.inventory.some(item => item.endsWith(' gold')), false);
-	assert.ok(character.appearance);
-	assert.ok(character.backstory);
-	assert.ok(character.goals);
+	assert.match(character.gear.inventory.at(-1), /^\d+ pièces d’or$/);
+	assert.equal(character.gear.inventory.some(item => item.endsWith(' gold')), false);
+	assert.ok(character.background.appearance);
+	assert.ok(character.background.backstory);
+	assert.ok(character.background.goals);
 });
 
 function createCharacterFixture() {
-	return {
-		key: 'Test',
-		creatorId: 'dm',
-		firstName: '',
-		lastName: '',
-		level: 1,
-		race: { name: '', physicalDescription: '', lore: '' },
-		appearance: '',
-		backstory: '',
-		goals: '',
-		personality: { traits: [], description: '' },
-		racialTraits: { skillBonus: '', physicalAbility: '' },
-		stats: createStats(),
-		rules: [],
-		talents: [],
-		resources: {
-			hp: { current: 100, max: 100 },
-			ar: { current: 0, max: 0 },
-			ap: { current: 4, max: 4 },
-			md: { current: 5, max: 5 },
-		},
-		statusEffects: [],
-		equipment: [],
-		inventory: [],
-		encumbrance: { current: 0, max: 0 },
-	};
+	return new Character('Test', 'dm');
 }

@@ -113,17 +113,19 @@ test('the editable catalog exposes only the final grouped field list', () => {
 test('name, status, and gear groups are prefilled and trim valid submissions', () => {
 	const character = new Character('Groups', 'tester');
 	assert.deepEqual(getEditableFieldValue(character, 'name'), {
-		firstName: '', lastName: '',
+		'name.firstName': '', 'name.lastName': '',
 	});
 	assert.deepEqual(getEditableFieldValue(character, 'status'), {
-		'resources.hp': '100:100',
-		'resources.ar': '0:0',
-		'resources.ap': '4:4',
-		'resources.md': '5:5',
-		statusEffects: '',
+		'status.hp': '100:100',
+		'status.ar': '0:0',
+		'status.ap': '4:4',
+		'status.md': '5:5',
+		'status.effects': '',
 	});
 	assert.deepEqual(getEditableFieldValue(character, 'gear'), {
-		equipment: '', inventory: '', encumbrance: '0:0',
+		'gear.equipment': '',
+		'gear.inventory': '',
+		'gear.encumbrance': '0:0',
 	});
 
 	setEditableFieldValue(character, 'name', {
@@ -143,18 +145,19 @@ test('name, status, and gear groups are prefilled and trim valid submissions', (
 		encumbrance: ' 2 : 15 ',
 	});
 
-	assert.equal(character.firstName, 'Ada');
-	assert.equal(character.lastName, 'Lovelace');
-	assert.deepEqual(character.resources, {
+	assert.equal(character.name.firstName, 'Ada');
+	assert.equal(character.name.lastName, 'Lovelace');
+	assert.deepEqual(character.status, {
 		hp: { current: 50, max: 120 },
 		ar: { current: 5, max: 30 },
 		ap: { current: 3, max: 6 },
 		md: { current: 7.5, max: 12.5 },
+		effects: ['Inspired', 'Hidden'],
 	});
-	assert.deepEqual(character.statusEffects, ['Inspired', 'Hidden']);
-	assert.deepEqual(character.equipment, ['Sword', 'Shield']);
-	assert.deepEqual(character.inventory, ['Potion']);
-	assert.deepEqual(character.encumbrance, { current: 2, max: 15 });
+	assert.deepEqual(character.status.effects, ['Inspired', 'Hidden']);
+	assert.deepEqual(character.gear.equipment, ['Sword', 'Shield']);
+	assert.deepEqual(character.gear.inventory, ['Potion']);
+	assert.deepEqual(character.gear.encumbrance, { current: 2, max: 15 });
 	setEditableFieldValue(character, 'status', {
 		'resources.hp': '50:120',
 		'resources.ar': '5:30',
@@ -167,9 +170,9 @@ test('name, status, and gear groups are prefilled and trim valid submissions', (
 		inventory: '',
 		encumbrance: '2:15',
 	});
-	assert.deepEqual(character.statusEffects, []);
-	assert.deepEqual(character.equipment, []);
-	assert.deepEqual(character.inventory, []);
+	assert.deepEqual(character.status.effects, []);
+	assert.deepEqual(character.gear.equipment, []);
+	assert.deepEqual(character.gear.inventory, []);
 });
 
 test('statistics use one named line per base and derived value', () => {
@@ -200,7 +203,7 @@ test('statistics use one named line per base and derived value', () => {
 		'charisma: 17',
 		'initiative: 18',
 	].join('\n'));
-	assert.deepEqual(character.stats, {
+	assert.deepEqual(character.statistics, {
 		constitution: 11,
 		strength: 12,
 		dexterity: 13,
@@ -224,22 +227,22 @@ test('either saved name component can be cleared', () => {
 		firstName: '',
 		lastName: 'Retained',
 	});
-	assert.equal(character.firstName, '');
-	assert.equal(character.lastName, 'Retained');
+	assert.equal(character.name.firstName, '');
+	assert.equal(character.name.lastName, 'Retained');
 
 	setEditableFieldValue(character, 'name', {
 		firstName: 'Retained',
 		lastName: '',
 	});
-	assert.equal(character.firstName, 'Retained');
-	assert.equal(character.lastName, '');
+	assert.equal(character.name.firstName, 'Retained');
+	assert.equal(character.name.lastName, '');
 
 	setEditableFieldValue(character, 'name', {
 		firstName: '',
 		lastName: '',
 	});
-	assert.equal(character.firstName, '');
-	assert.equal(character.lastName, '');
+	assert.equal(character.name.firstName, '');
+	assert.equal(character.name.lastName, '');
 });
 
 test('status and gear reject incomplete or malformed pairs atomically', () => {
@@ -341,14 +344,14 @@ test('multi-input groups replace every stored target together', () => {
 		name: 'Ashborn',
 		physicalDescription: 'Silver eyes',
 		lore: 'Forged in starlight',
+		traits: {
+			skillBonus: 'Arcana',
+			physicalAbility: 'Night sight',
+		},
 	});
-	assert.deepEqual(character.racialTraits, {
-		skillBonus: 'Arcana',
-		physicalAbility: 'Night sight',
-	});
-	assert.equal(character.appearance, 'Green cloak');
-	assert.equal(character.backstory, 'Raised by cartographers');
-	assert.equal(character.goals, 'Map the lost roads');
+	assert.equal(character.background.appearance, 'Green cloak');
+	assert.equal(character.background.backstory, 'Raised by cartographers');
+	assert.equal(character.background.goals, 'Map the lost roads');
 	assert.deepEqual(character.personality, {
 		description: 'Quiet and curious',
 		traits: ['Patient', 'Observant'],
@@ -585,25 +588,27 @@ test('one grouped status update creates one history entry and keeps save keys', 
 	assert.equal(history.document.entries.length, 1);
 	assert.equal(history.document.entries[0].action, 'set');
 	assert.deepEqual(
-		history.document.entries[0].character.resources.hp,
+		history.document.entries[0].character.status.hp,
 		{ current: 100, max: 100 },
 	);
 	const rawSave = JSON.parse(
 		await fsPromises.readFile(getCharacterSavePath(characterKey), 'utf8'),
 	);
-	assert.deepEqual(rawSave.resources.hp, { current: 80, max: 120 });
-	assert.deepEqual(rawSave.statusEffects, ['Inspired', 'Hidden']);
-	assert.equal(Object.hasOwn(rawSave, 'background'), false);
+	assert.deepEqual(rawSave.status.hp, { current: 80, max: 120 });
+	assert.deepEqual(rawSave.status.effects, ['Inspired', 'Hidden']);
+	assert.equal(Object.hasOwn(rawSave, 'resources'), false);
+	assert.equal(Object.hasOwn(rawSave, 'statusEffects'), false);
 	assert.equal(Object.hasOwn(rawSave, 'base-statistics'), false);
 	await undoCharacter(characterKey, () => true, { maxEntries: 3 });
 	const restored = await getCharacter(characterKey);
-	assert.deepEqual(restored.resources, {
+	assert.deepEqual(restored.status, {
 		hp: { current: 100, max: 100 },
 		ar: { current: 0, max: 0 },
 		ap: { current: 4, max: 4 },
 		md: { current: 5, max: 5 },
+		effects: [],
 	});
-	assert.deepEqual(restored.statusEffects, []);
+	assert.deepEqual(restored.status.effects, []);
 });
 
 test('/set gear updates and undo keep stored gear fields together', async () => {
@@ -622,30 +627,30 @@ test('/set gear updates and undo keep stored gear fields together', async () => 
 	);
 
 	const edited = await getCharacter(characterKey);
-	assert.deepEqual(edited.equipment, ['Sword']);
-	assert.deepEqual(edited.inventory, ['Potion']);
-	assert.deepEqual(edited.encumbrance, { current: 3, max: 8 });
+	assert.deepEqual(edited.gear.equipment, ['Sword']);
+	assert.deepEqual(edited.gear.inventory, ['Potion']);
+	assert.deepEqual(edited.gear.encumbrance, { current: 3, max: 8 });
 	const rawSave = JSON.parse(
 		await fsPromises.readFile(getCharacterSavePath(characterKey), 'utf8'),
 	);
-	assert.deepEqual(rawSave.encumbrance, { current: 3, max: 8 });
+	assert.deepEqual(rawSave.gear.encumbrance, { current: 3, max: 8 });
 	const history = await readCharacterHistory(characterKey);
 	assert.deepEqual(
-		history.document.entries[0].character.encumbrance,
+		history.document.entries[0].character.gear.encumbrance,
 		{ current: 0, max: 0 },
 	);
 	await undoCharacter(characterKey, () => true, { maxEntries: 3 });
 	const restored = await getCharacter(characterKey);
-	assert.deepEqual(restored.equipment, []);
-	assert.deepEqual(restored.inventory, []);
-	assert.deepEqual(restored.encumbrance, { current: 0, max: 0 });
+	assert.deepEqual(restored.gear.equipment, []);
+	assert.deepEqual(restored.gear.inventory, []);
+	assert.deepEqual(restored.gear.encumbrance, { current: 0, max: 0 });
 });
 
 test('name, race, background, and personality updates are atomic and undoable', async () => {
 	const edits = [
 		['name', { firstName: 'Ada', lastName: 'Lovelace' }, character => {
-			assert.equal(character.firstName, '');
-			assert.equal(character.lastName, '');
+			assert.equal(character.name.firstName, '');
+			assert.equal(character.name.lastName, '');
 		}],
 		['race', {
 			'race.name': 'Ashborn',
@@ -655,16 +660,16 @@ test('name, race, background, and personality updates are atomic and undoable', 
 			'racialTraits.physicalAbility': 'Night sight',
 		}, character => {
 			assert.equal(character.race.name, '');
-			assert.equal(character.racialTraits.skillBonus, '');
+			assert.equal(character.race.traits.skillBonus, '');
 		}],
 		['background', {
 			appearance: 'Green cloak',
 			backstory: 'Former courier',
 			goals: 'Map every road',
 		}, character => {
-			assert.equal(character.appearance, '');
-			assert.equal(character.backstory, '');
-			assert.equal(character.goals, '');
+			assert.equal(character.background.appearance, '');
+			assert.equal(character.background.backstory, '');
+			assert.equal(character.background.goals, '');
 		}],
 		['personality', {
 			'personality.traits': 'Patient\nObservant',
@@ -731,9 +736,9 @@ test('modal routing submits all inputs once and repeats authorization', async ()
 	}, config, characterKey, 'background');
 
 	const submittedValues = {
-		[getEditInputId('appearance')]: 'Blue coat',
-		[getEditInputId('backstory')]: 'Former courier',
-		[getEditInputId('goals')]: 'Cross every border',
+		[getEditInputId('background.appearance')]: 'Blue coat',
+		[getEditInputId('background.backstory')]: 'Former courier',
+		[getEditInputId('background.goals')]: 'Cross every border',
 	};
 	let replyCount = 0;
 	let successResponse;
@@ -750,9 +755,9 @@ test('modal routing submits all inputs once and repeats authorization', async ()
 		},
 	}, config);
 	const edited = await getCharacter(characterKey);
-	assert.equal(edited.appearance, 'Blue coat');
-	assert.equal(edited.backstory, 'Former courier');
-	assert.equal(edited.goals, 'Cross every border');
+	assert.equal(edited.background.appearance, 'Blue coat');
+	assert.equal(edited.background.backstory, 'Former courier');
+	assert.equal(edited.background.goals, 'Cross every border');
 	assert.equal(replyCount, 1);
 	assert.match(successResponse.content, /Background updated/);
 	assert.ok(successResponse.flags);
@@ -787,7 +792,7 @@ test('modal routing submits all inputs once and repeats authorization', async ()
 			deniedResponse = value;
 		},
 	}, config);
-	assert.equal((await getCharacter(authorizationKey)).firstName, '');
+	assert.equal((await getCharacter(authorizationKey)).name.firstName, '');
 	assert.equal(deniedResponse.content, english.errors.characterEditor);
 	await assert.rejects(fsPromises.access(getCharacterHistoryPath(authorizationKey)));
 });
@@ -836,28 +841,28 @@ test('grouped modal validation messages and descriptions are localized', () => {
 
 function createFilledCharacter() {
 	const character = new Character('Modal', 'tester');
-	character.firstName = 'Ada';
-	character.lastName = 'Lovelace';
+	character.name.firstName = 'Ada';
+	character.name.lastName = 'Lovelace';
 	character.race = {
 		name: 'Ashborn',
 		physicalDescription: 'Silver eyes',
 		lore: 'Old lore',
 	};
-	character.racialTraits = {
+	character.race.traits = {
 		skillBonus: 'Arcana',
 		physicalAbility: 'Night sight',
 	};
-	character.appearance = 'Green cloak';
-	character.backstory = 'Raised by cartographers';
-	character.goals = 'Map the lost roads';
+	character.background.appearance = 'Green cloak';
+	character.background.backstory = 'Raised by cartographers';
+	character.background.goals = 'Map the lost roads';
 	character.personality = {
 		description: 'Quiet and curious',
 		traits: ['Patient', 'Observant'],
 	};
-	character.statusEffects = ['Inspired', 'Hidden'];
-	character.equipment = ['Sword', 'Shield'];
-	character.inventory = ['Potion', 'Rope'];
-	character.encumbrance = { current: 3, max: 8 };
+	character.status.effects = ['Inspired', 'Hidden'];
+	character.gear.equipment = ['Sword', 'Shield'];
+	character.gear.inventory = ['Potion', 'Rope'];
+	character.gear.encumbrance = { current: 3, max: 8 };
 	return character;
 }
 

@@ -24,6 +24,8 @@ const {
 	listCharacters,
 	updateCharacter,
 } = require('../services/characterStore');
+const { generateCharacter } = require('../services/characterApplicationService');
+const generatorCatalog = require('../services/generatorCatalog');
 const {
 	createCharacterFieldEmbed,
 	createCharacterSummaryEmbed,
@@ -52,6 +54,23 @@ test('newly created characters persist the current schema version', async () => 
 		rawSave.schemaVersion,
 		CURRENT_CHARACTER_SAVE_SCHEMA_VERSION,
 	);
+	assert.deepEqual(Object.keys(rawSave), [
+		'schemaVersion',
+		'key',
+		'creatorId',
+		'name',
+		'level',
+		'race',
+		'background',
+		'personality',
+		'statistics',
+		'status',
+		'rules',
+		'talents',
+		'gear',
+	]);
+	assert.equal(Object.hasOwn(rawSave, 'firstName'), false);
+	assert.equal(Object.hasOwn(rawSave, 'resources'), false);
 });
 
 test('current-version saves load successfully', async () => {
@@ -59,14 +78,109 @@ test('current-version saves load successfully', async () => {
 	await writeRawSave(characterKey, {
 		schemaVersion: CURRENT_CHARACTER_SAVE_SCHEMA_VERSION,
 		creatorId: 'creator',
-		firstName: 'Current',
+		name: { firstName: 'Current', lastName: '' },
 	});
 
 	const character = await getCharacter(characterKey);
 
 	assert.equal(character.schemaVersion, CURRENT_CHARACTER_SAVE_SCHEMA_VERSION);
 	assert.equal(character.creatorId, 'creator');
-	assert.equal(character.firstName, 'Current');
+	assert.equal(character.name.firstName, 'Current');
+});
+
+test('version-1 saves migrate completely in memory without being rewritten', async () => {
+	const characterKey = 'Schema.Version1.Read';
+	const originalSave = await writeRawSave(characterKey, createVersion1Save(characterKey));
+
+	const character = await getCharacter(characterKey);
+
+	assert.equal(character.schemaVersion, 2);
+	assert.equal(character.displayName, 'Sable Reed');
+	assert.deepEqual(character.name, { firstName: 'Sable', lastName: 'Reed' });
+	assert.deepEqual(character.race.traits, {
+		skillBonus: '+1 to Death Rolls',
+		physicalAbility: 'Thick-Skinned',
+	});
+	assert.deepEqual(character.background, {
+		appearance: 'Stained gloves',
+		backstory: 'A discovery was stolen.',
+		goals: 'Recover it.',
+	});
+	assert.equal(character.statistics.constitution, 12);
+	assert.deepEqual(character.status.effects, ['Slowed']);
+	assert.deepEqual(character.gear, {
+		equipment: ['Intermediate armor'],
+		inventory: ['85 gold pieces'],
+		encumbrance: { current: 7, max: 10 },
+	});
+	assert.equal(await readSaveText(characterKey), originalSave);
+});
+
+test('the first mutation of a version-1 save writes only version-2 structure', async () => {
+	const characterKey = 'Schema.Version1.Mutation';
+	await writeRawSave(characterKey, createVersion1Save(characterKey));
+
+	await updateCharacter(characterKey, () => true, character => {
+		character.name.firstName = 'Updated';
+	});
+	const rawSave = await readRawSave(characterKey);
+
+	assert.equal(rawSave.schemaVersion, 2);
+	assert.equal(rawSave.name.firstName, 'Updated');
+	assert.equal(rawSave.status.hp.current, 210);
+	assert.equal(rawSave.gear.encumbrance.current, 7);
+	for (const legacyKey of [
+		'firstName',
+		'lastName',
+		'racialTraits',
+		'appearance',
+		'backstory',
+		'goals',
+		'stats',
+		'resources',
+		'statusEffects',
+		'equipment',
+		'inventory',
+		'encumbrance',
+	]) {
+		assert.equal(Object.hasOwn(rawSave, legacyKey), false, legacyKey);
+	}
+});
+
+test('/gen-char consumes current generator fields and persists version 2', async () => {
+	const characterKey = 'Schema.Generated';
+	const generated = await generateCharacter(characterKey, 'creator', {
+		formatGold: gold => `${gold} gold`,
+		level: 1,
+		locale: 'en',
+		random: () => 0,
+	});
+	const rawSave = await readRawSave(characterKey);
+	const nameEntry = generatorCatalog.getGenerator('name', 'en').entries[0];
+	const raceEntry = generatorCatalog.getGenerator('race', 'en').entries[0];
+
+	assert.equal(rawSave.schemaVersion, 2);
+	assert.deepEqual(rawSave.name, {
+		firstName: nameEntry.fields.FirstName,
+		lastName: nameEntry.fields.LastName,
+	});
+	assert.equal(rawSave.race.name, raceEntry.fields.Name);
+	assert.equal(rawSave.race.physicalDescription, raceEntry.fields.Description);
+	assert.equal(rawSave.race.traits.skillBonus, raceEntry.fields['Skill Bonus']);
+	assert.equal(
+		rawSave.race.traits.physicalAbility,
+		raceEntry.fields['Physical Ability'],
+	);
+	assert.ok(rawSave.background.appearance);
+	assert.ok(rawSave.background.backstory);
+	assert.ok(rawSave.background.goals);
+	assert.ok(rawSave.statistics.constitution);
+	assert.ok(rawSave.status.hp.max);
+	assert.ok(Array.isArray(rawSave.status.effects));
+	assert.ok(rawSave.gear.equipment.length >= 2);
+	assert.equal(rawSave.gear.inventory.length, 4);
+	assert.deepEqual(rawSave.gear.encumbrance, { current: 0, max: 0 });
+	assert.deepEqual(JSON.parse(JSON.stringify(generated)), rawSave);
 });
 
 test('saves without schemaVersion are rejected without being rewritten', async () => {
@@ -131,7 +245,7 @@ test('character listing skips and reports saves with invalid versions', async ()
 	await writeRawSave('Schema.Listed.Valid', {
 		schemaVersion: CURRENT_CHARACTER_SAVE_SCHEMA_VERSION,
 		creatorId: 'creator',
-		firstName: 'Valid',
+		name: { firstName: 'Valid', lastName: '' },
 	});
 	const invalidSave = await writeRawSave('Schema.Listed.Invalid', {
 		schemaVersion: CURRENT_CHARACTER_SAVE_SCHEMA_VERSION + 1,
@@ -168,18 +282,18 @@ test('character updates preserve schemaVersion', async () => {
 		characterKey,
 		() => true,
 		currentCharacter => {
-			currentCharacter.firstName = 'Updated';
+			currentCharacter.name.firstName = 'Updated';
 		},
 	);
 	const rawSave = await readRawSave(characterKey);
 
 	assert.equal(character.schemaVersion, CURRENT_CHARACTER_SAVE_SCHEMA_VERSION);
-	assert.equal(character.firstName, 'Updated');
+	assert.equal(character.name.firstName, 'Updated');
 	assert.equal(
 		rawSave.schemaVersion,
 		CURRENT_CHARACTER_SAVE_SCHEMA_VERSION,
 	);
-	assert.equal(rawSave.firstName, 'Updated');
+	assert.equal(rawSave.name.firstName, 'Updated');
 });
 
 test('schemaVersion is excluded from character editing and display surfaces', async () => {
@@ -217,4 +331,41 @@ async function writeRawSave(characterKey, rawSave) {
 		'utf8',
 	);
 	return serializedSave;
+}
+
+function createVersion1Save(characterKey) {
+	return {
+		schemaVersion: 1,
+		key: characterKey,
+		creatorId: 'creator',
+		firstName: 'Sable',
+		lastName: 'Reed',
+		level: 5,
+		race: {
+			name: 'Dwarf',
+			physicalDescription: 'Compact and sturdy.',
+			lore: '',
+		},
+		appearance: 'Stained gloves',
+		backstory: 'A discovery was stolen.',
+		goals: 'Recover it.',
+		personality: { traits: ['Uses proverbs'], description: '' },
+		racialTraits: {
+			skillBonus: '+1 to Death Rolls',
+			physicalAbility: 'Thick-Skinned',
+		},
+		stats: { constitution: 12, speed: 12 },
+		resources: {
+			hp: { current: 210, max: 216 },
+			ar: { current: 27, max: 54 },
+			ap: { current: 5, max: 5 },
+			md: { current: 6, max: 6 },
+		},
+		statusEffects: ['Slowed'],
+		rules: [{ name: 'Mist RULE', description: 'Creates mist.', level: 1 }],
+		talents: ['Animal Friend'],
+		equipment: ['Intermediate armor'],
+		inventory: ['85 gold pieces'],
+		encumbrance: { current: 7, max: 10 },
+	};
 }

@@ -120,7 +120,7 @@ module.exports = function createLocalizationChecks(context) {
 			errors.push('Character editor modals do not use the configured locale.');
 		}
 		for (const [fieldId, expected] of Object.entries({
-			'racialTraits': 'Dons raciaux',
+			'race.traits': 'Dons raciaux',
 			'rules': 'LOI',
 		})) {
 			if (getCharacterFieldLabel('fr', fieldId) !== expected) {
@@ -135,8 +135,8 @@ module.exports = function createLocalizationChecks(context) {
 		const expectedFieldIds = [
 			'key',
 			'name',
-			'firstName',
-			'lastName',
+			'name.firstName',
+			'name.lastName',
 			'level',
 			'level.value',
 			'status',
@@ -149,33 +149,33 @@ module.exports = function createLocalizationChecks(context) {
 			'race.name',
 			'race.physicalDescription',
 			'race.lore',
-			'appearance',
-			'backstory',
-			'goals',
+			'background.appearance',
+			'background.backstory',
+			'background.goals',
 			'personality',
 			'personality.description',
 			'personality.traits',
-			'racialTraits',
-			'racialTraits.skillBonus',
-			'racialTraits.physicalAbility',
+			'race.traits',
+			'race.traits.skillBonus',
+			'race.traits.physicalAbility',
 			'statistics.base',
 			'statistics.derived',
-			...[...BASE_STATS, ...DERIVED_STATS].map(stat => `stats.${stat}`),
+			...[...BASE_STATS, ...DERIVED_STATS].map(stat => `statistics.${stat}`),
 			'rules.value',
 			'rules.name',
 			'rules.level',
 			'rules.description',
 			'talents.value',
-			'statusEffects',
-			'equipment',
-			'inventory',
-			'encumbrance',
-			'encumbrance.current',
-			'encumbrance.max',
+			'status.effects',
+			'gear.equipment',
+			'gear.inventory',
+			'gear.encumbrance',
+			'gear.encumbrance.current',
+			'gear.encumbrance.max',
 			...RESOURCE_IDS.flatMap(resource => [
-				`resources.${resource}`,
-				`resources.${resource}.current`,
-				`resources.${resource}.max`,
+				`status.${resource}`,
+				`status.${resource}.current`,
+				`status.${resource}.max`,
 			]),
 		];
 		const actualFieldIds = Object.keys(CHARACTER_DISPLAY_FIELDS);
@@ -197,7 +197,7 @@ module.exports = function createLocalizationChecks(context) {
 
 		const abbreviationsByLocale = { en: [], fr: [] };
 		for (const resourceId of RESOURCE_IDS) {
-			const definition = getCharacterFieldDefinition(`resources.${resourceId}`);
+			const definition = getCharacterFieldDefinition(`status.${resourceId}`);
 			if (!definition?.abbreviationKey) {
 				errors.push(`${resourceId} is missing abbreviation metadata.`);
 				continue;

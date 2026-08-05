@@ -18,36 +18,40 @@ const SECTION_IDS = Object.freeze([
 	'personality',
 ]);
 
-addSection('name', 'name', 'multi', ['firstName', 'lastName']);
+addSection('name', 'name', 'multi', ['name.firstName', 'name.lastName']);
 addSection('level', 'level', 'scalar', ['level.value']);
 addSection('status', 'status', 'multi', [
-	'resources.hp',
-	'resources.ar',
-	'resources.ap',
-	'resources.md',
-	'statusEffects',
+	'status.hp',
+	'status.ar',
+	'status.ap',
+	'status.md',
+	'status.effects',
 ]);
 addSection(
 	'statistics',
 	'statistics',
 	'named-lines',
-	[...BASE_STATS, ...DERIVED_STATS].map(stat => `stats.${stat}`),
+	[...BASE_STATS, ...DERIVED_STATS].map(stat => `statistics.${stat}`),
 	{ aliases: ['stats'] },
 );
 addSection('rules', 'rules', 'multiline', ['rules.value']);
 addSection('talents', 'talents', 'multiline', ['talents.value']);
-addSection('gear', 'gear', 'multi', ['equipment', 'inventory', 'encumbrance']);
+addSection('gear', 'gear', 'multi', [
+	'gear.equipment',
+	'gear.inventory',
+	'gear.encumbrance',
+]);
 addSection('race', 'race', 'multi', [
 	'race.name',
 	'race.physicalDescription',
 	'race.lore',
-	'racialTraits.skillBonus',
-	'racialTraits.physicalAbility',
+	'race.traits.skillBonus',
+	'race.traits.physicalAbility',
 ]);
 addSection('background', 'background', 'multi', [
-	'appearance',
-	'backstory',
-	'goals',
+	'background.appearance',
+	'background.backstory',
+	'background.goals',
 ]);
 addSection('personality', 'personality', 'multi', [
 	'personality.traits',
@@ -55,11 +59,11 @@ addSection('personality', 'personality', 'multi', [
 ]);
 
 add('key', 'characterKey');
-add('firstName', 'firstName', stored(['firstName'], 'text', {
-	aliases: ['firstname'],
+add('name.firstName', 'firstName', stored(['name', 'firstName'], 'text', {
+	aliases: ['firstName', 'firstname'],
 }));
-add('lastName', 'lastName', stored(['lastName'], 'text', {
-	aliases: ['lastname'],
+add('name.lastName', 'lastName', stored(['name', 'lastName'], 'text', {
+	aliases: ['lastName', 'lastname'],
 }));
 add('level.value', 'level', stored(['level'], 'number', {
 	aliases: ['levelValue'],
@@ -79,15 +83,21 @@ add('race.lore', 'raceLore', stored(['race', 'lore'], 'text', {
 	aliases: ['racelore'],
 	paragraph: true,
 }));
-add('appearance', 'appearance', stored(['appearance'], 'text', {
-	paragraph: true,
-}));
-add('backstory', 'backstory', stored(['backstory'], 'text', {
-	paragraph: true,
-}));
-add('goals', 'goals', stored(['goals'], 'text', {
-	paragraph: true,
-}));
+add('background.appearance', 'appearance', stored(
+	['background', 'appearance'],
+	'text',
+	{ aliases: ['appearance'], paragraph: true },
+));
+add('background.backstory', 'backstory', stored(
+	['background', 'backstory'],
+	'text',
+	{ aliases: ['backstory'], paragraph: true },
+));
+add('background.goals', 'goals', stored(
+	['background', 'goals'],
+	'text',
+	{ aliases: ['goals'], paragraph: true },
+));
 add('personality.description', 'personalityDescription', stored(
 	['personality', 'description'],
 	'text',
@@ -98,20 +108,28 @@ add('personality.traits', 'personalityTraits', stored(
 	'text',
 	{ aliases: ['personalitytraits'], multiline: true, paragraph: true },
 ));
-add('racialTraits', 'racialTraits', { aliases: ['racialtraits'] });
-add('racialTraits.skillBonus', 'racialSkillBonus', stored(
-	['racialTraits', 'skillBonus'],
+add('race.traits', 'racialTraits', { aliases: ['racialTraits', 'racialtraits'] });
+add('race.traits.skillBonus', 'racialSkillBonus', stored(
+	['race', 'traits', 'skillBonus'],
 	'text',
 	{
-		aliases: ['racialtrait.skillbonus', 'racialtraits.skillbonus'],
+		aliases: [
+			'racialTraits.skillBonus',
+			'racialtrait.skillbonus',
+			'racialtraits.skillbonus',
+		],
 		paragraph: true,
 	},
 ));
-add('racialTraits.physicalAbility', 'racialPhysicalAbility', stored(
-	['racialTraits', 'physicalAbility'],
+add('race.traits.physicalAbility', 'racialPhysicalAbility', stored(
+	['race', 'traits', 'physicalAbility'],
 	'text',
 	{
-		aliases: ['racialtrait.physicalability', 'racialtraits.physicalability'],
+		aliases: [
+			'racialTraits.physicalAbility',
+			'racialtrait.physicalability',
+			'racialtraits.physicalability',
+		],
 		paragraph: true,
 	},
 ));
@@ -119,10 +137,10 @@ add('statistics.base', 'baseStatistics', { aliases: ['baseStatistics'] });
 add('statistics.derived', 'derivedStatistics', { aliases: ['derivedStatistics'] });
 
 for (const stat of [...BASE_STATS, ...DERIVED_STATS]) {
-	add(`stats.${stat}`, stat, stored(
-		['stats', stat],
+	add(`statistics.${stat}`, stat, stored(
+		['statistics', stat],
 		'number',
-		{ aliases: [stat] },
+		{ aliases: [`stats.${stat}`, stat] },
 	));
 }
 
@@ -139,54 +157,63 @@ add('talents.value', 'talents', stored(['talents'], 'text', {
 	multiline: true,
 	paragraph: true,
 }));
-add('statusEffects', 'statusEffects', stored(['statusEffects'], 'text', {
-	aliases: ['statuseffect', 'statuseffects'],
+add('status.effects', 'statusEffects', stored(['status', 'effects'], 'text', {
+	aliases: ['statusEffects', 'statuseffect', 'statuseffects'],
 	multiline: true,
 	paragraph: true,
 }));
-add('equipment', 'equipment', stored(['equipment'], 'text', {
+add('gear.equipment', 'equipment', stored(['gear', 'equipment'], 'text', {
+	aliases: ['equipment'],
 	multiline: true,
 	paragraph: true,
 }));
-add('inventory', 'inventory', stored(['inventory'], 'text', {
+add('gear.inventory', 'inventory', stored(['gear', 'inventory'], 'text', {
+	aliases: ['inventory'],
 	multiline: true,
 	paragraph: true,
 }));
-add('encumbrance', 'encumbrance', pairInput([
-	'encumbrance.current',
-	'encumbrance.max',
-]));
-add('encumbrance.current', 'currentEncumbrance', stored(
-	['encumbrance', 'current'],
+add('gear.encumbrance', 'encumbrance', {
+	aliases: ['encumbrance'],
+	...pairInput([
+		'gear.encumbrance.current',
+		'gear.encumbrance.max',
+	]),
+});
+add('gear.encumbrance.current', 'currentEncumbrance', stored(
+	['gear', 'encumbrance', 'current'],
 	'number',
-	{ aliases: ['encumbrancecapacity.current'] },
+	{ aliases: ['encumbrance.current', 'encumbrancecapacity.current'] },
 ));
-add('encumbrance.max', 'maximumEncumbrance', stored(
-	['encumbrance', 'max'],
+add('gear.encumbrance.max', 'maximumEncumbrance', stored(
+	['gear', 'encumbrance', 'max'],
 	'number',
-	{ aliases: ['encumbrancecapacity.max'] },
+	{ aliases: ['encumbrance.max', 'encumbrancecapacity.max'] },
 ));
 
 for (const resourceId of ['hp', 'ar', 'ap', 'md']) {
-	add(`resources.${resourceId}`, null, {
+	add(`status.${resourceId}`, null, {
 		abbreviationKey: `character.resources.${resourceId}.abbreviation`,
-		aliases: [resourceId, resourceId.toUpperCase()],
+		aliases: [`resources.${resourceId}`, resourceId, resourceId.toUpperCase()],
 		labelKey: `character.resources.${resourceId}.name`,
 		resourceId,
 		...pairInput([
-			`resources.${resourceId}.current`,
-			`resources.${resourceId}.max`,
+			`status.${resourceId}.current`,
+			`status.${resourceId}.max`,
 		]),
 	});
 	for (const value of ['current', 'max']) {
 		add(
-			`resources.${resourceId}.${value}`,
+			`status.${resourceId}.${value}`,
 			value === 'current' ? 'currentResource' : 'maximumResource',
 			stored(
-				['resources', resourceId, value],
+				['status', resourceId, value],
 				'number',
 				{
-					aliases: [`${resourceId}.${value}`, `${value}${resourceId}`],
+					aliases: [
+						`resources.${resourceId}.${value}`,
+						`${resourceId}.${value}`,
+						`${value}${resourceId}`,
+					],
 					resourceId,
 				},
 			),

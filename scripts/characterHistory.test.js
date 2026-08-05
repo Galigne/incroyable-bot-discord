@@ -97,7 +97,7 @@ test('default and custom retention rotate the oldest snapshots first', async () 
 		await editFirstName(defaultKey, value, historyContext());
 	}
 	assert.deepEqual(
-		(await readHistory(defaultKey)).entries.map(entry => entry.character.firstName),
+		(await readHistory(defaultKey)).entries.map(entry => entry.character.name.firstName),
 		['A', 'B', 'C'],
 	);
 
@@ -107,7 +107,7 @@ test('default and custom retention rotate the oldest snapshots first', async () 
 		await editFirstName(higherKey, value, historyContext(5));
 	}
 	assert.deepEqual(
-		(await readHistory(higherKey)).entries.map(entry => entry.character.firstName),
+		(await readHistory(higherKey)).entries.map(entry => entry.character.name.firstName),
 		['1', '2', '3', '4', '5'],
 	);
 
@@ -118,7 +118,7 @@ test('default and custom retention rotate the oldest snapshots first', async () 
 	}
 	await editFirstName(lowerKey, 'E', historyContext(2));
 	assert.deepEqual(
-		(await readHistory(lowerKey)).entries.map(entry => entry.character.firstName),
+		(await readHistory(lowerKey)).entries.map(entry => entry.character.name.firstName),
 		['C', 'D'],
 	);
 });
@@ -154,7 +154,7 @@ test('a reloaded retention value affects later history operations', async () => 
 
 	const history = await readHistory(characterKey);
 	assert.equal(history.entries.length, 1);
-	assert.equal(history.entries[0].character.firstName, 'A');
+	assert.equal(history.entries[0].character.name.firstName, 'A');
 });
 
 test('every supported successful action stores a complete pre-change snapshot', async () => {
@@ -181,8 +181,8 @@ test('every supported successful action stores a complete pre-change snapshot', 
 		assert.equal(entry.actorId, 'all-actions-actor');
 		assert.ok(Number.isFinite(Date.parse(entry.createdAt)));
 		assert.equal(validateCharacterSaveSchema(entry.character), entry.character);
-		assert.ok(entry.character.resources);
-		assert.ok(entry.character.stats);
+		assert.ok(entry.character.status);
+		assert.ok(entry.character.statistics);
 	}
 	assert.equal((await getCharacter(characterKey)).key, characterKey);
 });
@@ -207,7 +207,7 @@ test('/set creates history only after a successful modal submission', async () =
 		customId: modal.custom_id,
 		fields: {
 			getTextInputValue: customId => (
-				customId === 'field-first-name' ? 'Modal value' : ''
+				customId === 'field-name-first-name' ? 'Modal value' : ''
 			),
 		},
 		guildId: 'guild',
@@ -219,12 +219,12 @@ test('/set creates history only after a successful modal submission', async () =
 		user,
 	}, config);
 
-	assert.equal((await getCharacter(characterKey)).firstName, 'Modal value');
+	assert.equal((await getCharacter(characterKey)).name.firstName, 'Modal value');
 	const history = await readHistory(characterKey);
 	assert.equal(history.entries.length, 1);
 	assert.equal(history.entries[0].action, 'set');
 	assert.equal(history.entries[0].actorId, user.id);
-	assert.equal(history.entries[0].character.firstName, '');
+	assert.equal(history.entries[0].character.name.firstName, '');
 	assert.ok(response.flags);
 });
 
@@ -283,7 +283,7 @@ test('authorization, validation, and serialization failures do not add history',
 		TypeError,
 	);
 	assert.equal(await historyExists(serializationKey), false);
-	assert.equal((await getCharacter(serializationKey)).firstName, '');
+	assert.equal((await getCharacter(serializationKey)).name.firstName, '');
 });
 
 test('an active-save persistence failure rolls back its newly written history', async () => {
@@ -298,7 +298,7 @@ test('an active-save persistence failure rolls back its newly written history', 
 				characterKey,
 				() => true,
 				async character => {
-					character.firstName = 'Must roll back';
+					character.name.firstName = 'Must roll back';
 					await fsPromises.rename(savePath, displacedPath);
 					await fsPromises.mkdir(savePath);
 				},
@@ -318,7 +318,7 @@ test('an active-save persistence failure rolls back its newly written history', 
 			await fsPromises.rename(displacedPath, savePath);
 		}
 	}
-	assert.equal((await getCharacter(characterKey)).firstName, '');
+	assert.equal((await getCharacter(characterKey)).name.firstName, '');
 });
 
 test('different characters keep independent histories', async () => {
@@ -351,7 +351,7 @@ test('concurrent mutations preserve history ordering inside the per-key queue', 
 		characterKey,
 		() => true,
 		async character => {
-			character.firstName = 'First';
+			character.name.firstName = 'First';
 			firstStarted.resolve();
 			await releaseFirst.promise;
 		},
@@ -365,7 +365,7 @@ test('concurrent mutations preserve history ordering inside the per-key queue', 
 		characterKey,
 		() => true,
 		character => {
-			character.lastName = 'Second';
+			character.name.lastName = 'Second';
 		},
 		{
 			...historyContext(5, 'second-actor'),
@@ -380,8 +380,8 @@ test('concurrent mutations preserve history ordering inside the per-key queue', 
 		history.entries.map(entry => entry.actorId),
 		['first-actor', 'second-actor'],
 	);
-	assert.equal(history.entries[0].character.firstName, '');
-	assert.equal(history.entries[1].character.firstName, 'First');
+	assert.equal(history.entries[0].character.name.firstName, '');
+	assert.equal(history.entries[1].character.name.firstName, 'First');
 });
 
 test('history writes are atomic and clean temporary files after a partial write', async () => {
@@ -495,7 +495,7 @@ test('three default undos walk backward without toggling or creating redo state'
 			() => true,
 			context,
 		);
-		restoredValues.push(result.character.firstName);
+		restoredValues.push(result.character.name.firstName);
 		assert.equal(result.action, 'set');
 		assert.equal(result.actorId, 'stack-actor');
 	}
@@ -505,7 +505,48 @@ test('three default undos walk backward without toggling or creating redo state'
 		undoCharacter(characterKey, () => true, context),
 		{ code: 'NO_CHARACTER_HISTORY' },
 	);
-	assert.equal((await getCharacter(characterKey)).firstName, 'A');
+	assert.equal((await getCharacter(characterKey)).name.firstName, 'A');
+});
+
+test('version-1 and version-2 snapshots coexist and undo always writes version 2', async () => {
+	const characterKey = nextKey('Undo.MixedSchema');
+	const context = historyContext(3, 'migration-actor');
+	await fsPromises.writeFile(
+		getCharacterSavePath(characterKey),
+		JSON.stringify({
+			schemaVersion: 1,
+			key: characterKey,
+			creatorId: 'creator',
+			firstName: 'Legacy',
+			lastName: 'Name',
+		}, null, 2),
+		'utf8',
+	);
+
+	await editFirstName(characterKey, 'First v2', context);
+	await editFirstName(characterKey, 'Second v2', context);
+	let history = await readHistory(characterKey);
+	assert.deepEqual(
+		history.entries.map(entry => entry.character.schemaVersion),
+		[1, 2],
+	);
+	assert.equal(history.entries[0].character.firstName, 'Legacy');
+	assert.equal(history.entries[1].character.name.firstName, 'First v2');
+
+	const firstUndo = await undoCharacter(characterKey, () => true, context);
+	assert.equal(firstUndo.character.name.firstName, 'First v2');
+	assert.equal((await readRawSave(characterKey)).schemaVersion, 2);
+	const migratedUndo = await undoCharacter(characterKey, () => true, context);
+	assert.equal(migratedUndo.character.name.firstName, 'Legacy');
+	const migratedSave = await readRawSave(characterKey);
+	assert.equal(migratedSave.schemaVersion, 2);
+	assert.deepEqual(migratedSave.name, {
+		firstName: 'Legacy',
+		lastName: 'Name',
+	});
+	assert.equal(Object.hasOwn(migratedSave, 'firstName'), false);
+	history = await readHistory(characterKey);
+	assert.equal(history.entries.length, 0);
 });
 
 test('undo rejects missing history and preserves state on permission failure', async () => {
@@ -524,7 +565,7 @@ test('undo rejects missing history and preserves state on permission failure', a
 		undoCharacter(deniedKey, () => false, historyContext()),
 		{ code: 'NOT_CHARACTER_EDITOR' },
 	);
-	assert.equal((await getCharacter(deniedKey)).firstName, 'Current');
+	assert.equal((await getCharacter(deniedKey)).name.firstName, 'Current');
 	assert.deepEqual(await readHistory(deniedKey), historyBefore);
 });
 
@@ -565,7 +606,7 @@ test('undo rejects invalid and unsupported snapshot schema versions', async () =
 		undoCharacter(characterKey, () => true, context),
 		{ code: 'INVALID_CHARACTER_HISTORY_SNAPSHOT' },
 	);
-	assert.equal((await getCharacter(characterKey)).firstName, 'Current');
+	assert.equal((await getCharacter(characterKey)).name.firstName, 'Current');
 
 	invalidHistory.entries.at(-1).character.schemaVersion = 999;
 	await fsPromises.writeFile(
@@ -687,6 +728,13 @@ async function editFirstName(
 		canManage,
 		context,
 	);
+}
+
+async function readRawSave(characterKey) {
+	return JSON.parse(await fsPromises.readFile(
+		getCharacterSavePath(characterKey),
+		'utf8',
+	));
 }
 
 function historyContext(maxEntries = 3, actorId = 'history-actor') {

@@ -111,25 +111,25 @@ module.exports = function createCharacterChecks(context) {
 					throw error;
 				}
 			}
-			original.resources.hp.current = 1;
-			original.resources.ar.current = 30;
-			original.resources.hp.current = 100;
+			original.status.hp.current = 1;
+			original.status.ar.current = 30;
+			original.status.hp.current = 100;
 			const armoredDamage = dealDamage(original, 40);
 			if (
 				armoredDamage.arDamage !== 30
 				|| armoredDamage.hpDamage !== 10
-				|| original.resources.ar.current !== 0
-				|| original.resources.hp.current !== 90
+				|| original.status.ar.current !== 0
+				|| original.status.hp.current !== 90
 			) {
 				errors.push('Normal damage does not reduce AR before HP.');
 			}
-			original.resources.ar.current = 20;
+			original.status.ar.current = 20;
 			const piercingDamage = dealDamage(original, 15, true);
 			if (
 				piercingDamage.arDamage !== 0
 				|| piercingDamage.hpDamage !== 15
-				|| original.resources.ar.current !== 20
-				|| original.resources.hp.current !== 75
+				|| original.status.ar.current !== 20
+				|| original.status.hp.current !== 75
 			) {
 				errors.push('Piercing damage does not bypass AR.');
 			}
@@ -142,22 +142,22 @@ module.exports = function createCharacterChecks(context) {
 					throw error;
 				}
 			}
-			original.resources.hp.current = 1;
-			original.resources.ar.current = 0;
-			original.resources.ap.current = 0;
-			original.resources.md.current = 0;
+			original.status.hp.current = 1;
+			original.status.ar.current = 0;
+			original.status.ap.current = 0;
+			original.status.md.current = 0;
 			restoreResource(original, 'hp', 50);
 			resetTurnResources(original);
 			const character = Character.fromSave(JSON.parse(JSON.stringify(original)));
 			if (
 				character.creatorId !== '0'
 				|| character.key !== 'Test'
-				|| character.firstName !== 'Diego'
-				|| character.lastName !== 'Robert'
+				|| character.name.firstName !== 'Diego'
+				|| character.name.lastName !== 'Robert'
 				|| character.displayName !== 'Diego Robert'
-				|| character.stats.strength !== 12
+				|| character.statistics.strength !== 12
 				|| character.race.name !== 'Ashborn'
-				|| character.appearance !== 'Tall with silver hair.'
+				|| character.background.appearance !== 'Tall with silver hair.'
 				|| getEditableFieldValue(character, 'personality')['personality.traits']
 					!== 'Brave\nCurious'
 				|| getEditableFieldValue(character, 'rules')
@@ -169,12 +169,12 @@ module.exports = function createCharacterChecks(context) {
 				|| getEditableFieldValue(character, 'talents')
 					!== 'Athlete — +1 to sustained movement.\n'
 						+ 'Cold Immunity — Ordinary cold cannot freeze the character.'
-				|| character.equipment[0] !== 'Longsword'
-				|| character.encumbrance.current !== 2
-				|| character.encumbrance.max !== 7
-				|| character.resources.hp.current !== 50
-				|| character.resources.ap.current !== character.resources.ap.max
-				|| character.resources.md.current !== character.resources.md.max
+				|| character.gear.equipment[0] !== 'Longsword'
+				|| character.gear.encumbrance.current !== 2
+				|| character.gear.encumbrance.max !== 7
+				|| character.status.hp.current !== 50
+				|| character.status.ap.current !== character.status.ap.max
+				|| character.status.md.current !== character.status.md.max
 			) {
 				errors.push('Character saves are not restored correctly.');
 			}
@@ -235,6 +235,7 @@ module.exports = function createCharacterChecks(context) {
 				}
 			}
 			const legacyCharacter = Character.fromSave({
+				schemaVersion: 1,
 				key: 'Legacy',
 				creatorId: '0',
 				rules: [{ name: 'Legacy RULE', description: 'Saved without a level.' }],
@@ -243,13 +244,13 @@ module.exports = function createCharacterChecks(context) {
 			if (
 				legacyCharacter.rules[0]?.level !== 1
 				|| legacyCharacter.talents.length !== 2
-				|| legacyCharacter.encumbrance.current !== 0
-				|| legacyCharacter.encumbrance.max !== 0
+				|| legacyCharacter.gear.encumbrance.current !== 0
+				|| legacyCharacter.gear.encumbrance.max !== 0
 			) {
 				errors.push('Legacy character defaults should remain compatible.');
 			}
-			character.resources.ap.current = 2;
-			character.resources.ap.max = 4;
+			character.status.ap.current = 2;
+			character.status.ap.max = 4;
 			const statusDetail = createCharacterFieldEmbed(character, 'status').toJSON();
 			const apDetail = statusDetail.fields.find(field => field.name === 'Action points');
 			if (apDetail?.value !== 'AP:\n🌟🌟⭐⭐') {
@@ -280,36 +281,36 @@ module.exports = function createCharacterChecks(context) {
 			if (
 				character.key !== 'D.Robert'
 				|| character.level !== 10
-				|| !character.firstName
-				|| !character.lastName
-				|| character.displayName !== `${character.firstName} ${character.lastName}`
+				|| !character.name.firstName
+				|| !character.name.lastName
+				|| character.displayName !== `${character.name.firstName} ${character.name.lastName}`
 				|| !character.race.name
 				|| !character.race.physicalDescription
 				|| character.race.lore
-				|| !character.appearance
-				|| !character.backstory
-				|| !character.goals
+				|| !character.background.appearance
+				|| !character.background.backstory
+				|| !character.background.goals
 				|| character.personality.traits.length !== 2
 				|| character.personality.description
-				|| character.racialTraits.skillBonus !== generatedRace?.fields['Skill Bonus']
-				|| character.racialTraits.physicalAbility
+				|| character.race.traits.skillBonus !== generatedRace?.fields['Skill Bonus']
+				|| character.race.traits.physicalAbility
 					!== generatedRace?.fields['Physical Ability']
 			) {
 				errors.push('Generated identity or intentionally empty fields are incorrect.');
 			}
 
 			if (
-				calculateStatCost(character.stats) !== calculateStatBudget(character.level)
+				calculateStatCost(character.statistics) !== calculateStatBudget(character.level)
 				|| BASE_STAT_NAMES.some(stat => (
-					character.stats[stat] < 4 || character.stats[stat] > 20
+					character.statistics[stat] < 4 || character.statistics[stat] > 20
 				))
-				|| character.stats.initiative !== character.stats.speed
-				|| character.stats.reflexes !== character.stats.speed
+				|| character.statistics.initiative !== character.statistics.speed
+				|| character.statistics.reflexes !== character.statistics.speed
 			) {
 				errors.push('Generated statistics do not follow the point-allocation rules.');
 			}
 
-			const expectedRulePoints = calculateRulePoints(character.stats.intelligence);
+			const expectedRulePoints = calculateRulePoints(character.statistics.intelligence);
 			const expectedRuleLevels = allocateRuleLevels(expectedRulePoints);
 			const expectedTalentCount = 4;
 			if (
@@ -336,33 +337,33 @@ module.exports = function createCharacterChecks(context) {
 				errors.push('RULE Point allocation does not prioritize RULE levels correctly.');
 			}
 
-			const expectedHp = calculateMaxHp(character.stats.constitution, character.level);
+			const expectedHp = calculateMaxHp(character.statistics.constitution, character.level);
 			if (
-				character.resources.hp.max !== expectedHp
-				|| character.resources.hp.current !== expectedHp
-				|| character.resources.ap.max !== calculateMaxAp(character.level)
-				|| character.resources.ap.current !== character.resources.ap.max
-				|| character.resources.md.max !== calculateMaxMovementDistance(character.stats.speed)
-				|| character.resources.md.current !== character.resources.md.max
+				character.status.hp.max !== expectedHp
+				|| character.status.hp.current !== expectedHp
+				|| character.status.ap.max !== calculateMaxAp(character.level)
+				|| character.status.ap.current !== character.status.ap.max
+				|| character.status.md.max !== calculateMaxMovementDistance(character.statistics.speed)
+				|| character.status.md.current !== character.status.md.max
 			) {
 				errors.push('Generated HP, AP, or MD values are incorrect.');
 			}
 
-			const armorName = character.equipment[0].split(' — ')[0];
+			const armorName = character.gear.equipment[0].split(' — ')[0];
 			const armor = generatorCatalog.getCategory('armors').entries
 				.find(entry => entry.fields.Name === armorName);
 			const armorPercentage = Number(armor?.fields['AR percentage']);
 			if (
 				!armor
-				|| Number(armor.fields['Constitution requirement']) > character.stats.constitution
-				|| character.resources.ar.max !== Math.round(expectedHp * armorPercentage / 100)
-				|| character.resources.ar.current !== character.resources.ar.max
-				|| character.equipment.length < 2
-				|| character.equipment.length > 3
-				|| character.inventory.length !== 4
-				|| !character.inventory.at(-1).endsWith(' gold')
-				|| character.encumbrance.current !== 0
-				|| character.encumbrance.max !== 0
+				|| Number(armor.fields['Constitution requirement']) > character.statistics.constitution
+				|| character.status.ar.max !== Math.round(expectedHp * armorPercentage / 100)
+				|| character.status.ar.current !== character.status.ar.max
+				|| character.gear.equipment.length < 2
+				|| character.gear.equipment.length > 3
+				|| character.gear.inventory.length !== 4
+				|| !character.gear.inventory.at(-1).endsWith(' gold')
+				|| character.gear.encumbrance.current !== 0
+				|| character.gear.encumbrance.max !== 0
 			) {
 				errors.push('Generated armor, equipment, inventory, AR, or defaults are incorrect.');
 			}
@@ -378,9 +379,9 @@ module.exports = function createCharacterChecks(context) {
 					random: () => 0,
 				});
 				if (
-					!routedCharacter.appearance
-					|| !routedCharacter.backstory
-					|| !routedCharacter.goals
+					!routedCharacter.background.appearance
+					|| !routedCharacter.background.backstory
+					|| !routedCharacter.background.goals
 				) {
 					errors.push(`Random generation failed for background: ${backgroundName}.`);
 				}
@@ -422,17 +423,17 @@ module.exports = function createCharacterChecks(context) {
 			}
 
 			await characterStore.updateCharacter(originalName, () => true, character => {
-				character.firstName = 'A Display';
-				character.lastName = 'Name With Spaces';
-				character.resources.hp.current = 42;
+				character.name.firstName = 'A Display';
+				character.name.lastName = 'Name With Spaces';
+				character.status.hp.current = 42;
 			});
 			const editedCharacter = await characterStore.getCharacter(originalName);
 			if (
-				editedCharacter.firstName !== 'A Display'
-				|| editedCharacter.lastName !== 'Name With Spaces'
+				editedCharacter.name.firstName !== 'A Display'
+				|| editedCharacter.name.lastName !== 'Name With Spaces'
 				|| editedCharacter.displayName !== 'A Display Name With Spaces'
 				|| editedCharacter.key !== originalName
-				|| editedCharacter.resources.hp.current !== 42
+				|| editedCharacter.status.hp.current !== 42
 			) {
 				errors.push('Character edits are not persisted correctly.');
 			}

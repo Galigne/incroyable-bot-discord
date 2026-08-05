@@ -77,7 +77,7 @@ test('/delete opens a private exact-key modal without deleting anything', async 
 	);
 	assert.equal(confirmation.component.required, true);
 	assert.equal(Object.hasOwn(confirmation.component, 'value'), false);
-	assert.equal((await getCharacter(characterKey)).firstName, 'Before modal');
+	assert.equal((await getCharacter(characterKey)).name.firstName, 'Before modal');
 	assert.equal(
 		await fsPromises.readFile(getCharacterHistoryPath(characterKey), 'utf8'),
 		historyBefore,

@@ -1,0 +1,84 @@
+{
+  "schemaVersion": 2,
+  "key": "pnj_1",
+  "creatorId": "168424192520355843",
+  "name": {
+    "firstName": "Kira",
+    "lastName": "Moss"
+  },
+  "level": 3,
+  "race": {
+    "name": "Gobelin",
+    "physicalDescription": "Petits et vifs, les gobelins ont des traits expressifs, des sens aiguisés et un talent certain pour l’improvisation, le commerce et la fabrication d’outils ingénieux.",
+    "lore": "",
+    "traits": {
+      "skillBonus": "+1 en Tromperie",
+      "physicalAbility": "Petite cible : leur petite taille rend les gobelins plus difficiles à toucher avec des flèches, des armes de jet et d’autres projectiles, surtout à longue distance."
+    }
+  },
+  "background": {
+    "appearance": "Poussiéreux et vigilant, tenant une coupe cabossée tout en étudiant discrètement chaque passant.",
+    "backstory": "Un mendiant a assisté à un échange important parce qu’aucun des participants ne l’a jugé digne d’attention.",
+    "goals": "Échanger l’information contre une sécurité durable sans révéler l’étendue réelle de ses connaissances."
+  },
+  "personality": {
+    "traits": [
+      "N’élève jamais la voix ; plus son ton reste calme, plus sa colère et sa dangerosité augmentent.",
+      "Tient des journaux méticuleux, tout en remplaçant chaque nom par un surnom de plus en plus incompréhensible."
+    ],
+    "description": ""
+  },
+  "statistics": {
+    "constitution": 16,
+    "strength": 8,
+    "dexterity": 9,
+    "intelligence": 9,
+    "speed": 12,
+    "perception": 6,
+    "charisma": 10,
+    "initiative": 12,
+    "reflexes": 12
+  },
+  "status": {
+    "hp": {
+      "current": 224,
+      "max": 224
+    },
+    "ar": {
+      "current": 146,
+      "max": 146
+    },
+    "ap": {
+      "current": 4,
+      "max": 4
+    },
+    "md": {
+      "current": 6,
+      "max": 6
+    },
+    "effects": [
+      "Aveuglé — les actions qui dépendent de la vue échouent ou subissent un lourd malus."
+    ]
+  },
+  "rules": [],
+  "talents": [
+    "Assassin — Les attaques sont plus efficaces lorsque la cible n'a pas repéré le personnage.",
+    "Marin — +2 en navigation, pour manœuvrer le gréement et pour garder l'équilibre à bord d'un navire."
+  ],
+  "gear": {
+    "equipment": [
+      "Armure lourde rare — Armure lourde de maître forgée dans un métal supérieur ou constituée de plaques de monstre.",
+      "Hallebarde — Une arme d'hast à deux mains combinant un fer de hache, un crochet et une pointe de lance."
+    ],
+    "inventory": [
+      "Instrument de musique — Un instrument transportable choisi en fonction du personnage.",
+      "Trois rations de voyage — Des provisions compactes suffisantes pour trois jours.",
+      "Potion de respiration aquatique — Permet de respirer sous l'eau pendant trente minutes.",
+      "26 pièces d’or"
+    ],
+    "encumbrance": {
+      "current": 0,
+      "max": 0
+    }
+  }
+}

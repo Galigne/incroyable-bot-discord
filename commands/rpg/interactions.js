@@ -237,18 +237,18 @@ function getEditInputLabel(target, locale) {
 		return getResourceAbbreviation(locale, target.resourceId);
 	}
 	const labelKey = {
-		appearance: 'appearance',
-		backstory: 'backstory',
-		firstName: 'firstName',
-		goals: 'goals',
-		lastName: 'lastName',
+		'background.appearance': 'appearance',
+		'background.backstory': 'backstory',
+		'background.goals': 'goals',
+		'name.firstName': 'firstName',
+		'name.lastName': 'lastName',
 		'personality.description': 'description',
 		'personality.traits': 'traits',
 		'race.lore': 'lore',
 		'race.name': 'name',
 		'race.physicalDescription': 'physicalDescription',
-		'racialTraits.physicalAbility': 'physicalAbility',
-		'racialTraits.skillBonus': 'skillBonus',
+		'race.traits.physicalAbility': 'physicalAbility',
+		'race.traits.skillBonus': 'skillBonus',
 	}[target.id];
 	return labelKey
 		? t(locale, `rpg.editor.inputLabels.${labelKey}`)
@@ -291,10 +291,10 @@ function getEditInputDescription(field, target, locale) {
 	if (target.rules) {
 		return t(locale, 'rpg.editor.rulesDescription');
 	}
-	if (target.id === 'equipment') {
+	if (target.id === 'gear.equipment') {
 		return t(locale, 'rpg.editor.equipmentDescription');
 	}
-	if (target.id === 'inventory') {
+	if (target.id === 'gear.inventory') {
 		return t(locale, 'rpg.editor.inventoryDescription');
 	}
 	if (target.multiline) {

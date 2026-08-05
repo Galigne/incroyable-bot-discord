@@ -53,13 +53,14 @@ function parseSubmittedValue(field, inputs, submittedValue) {
 			throw editError('errors.groupInputMissing', { fieldId: field.id });
 		}
 		return inputs.flatMap(input => {
-			if (typeof submittedValue[input.id] !== 'string') {
+			const inputValue = getSubmittedInputValue(submittedValue, input);
+			if (typeof inputValue !== 'string') {
 				throw editError('errors.groupInputMissing', {
 					componentFieldId: input.id,
 					fieldId: field.id,
 				});
 			}
-			return parseInputValue(input, submittedValue[input.id]);
+			return parseInputValue(input, inputValue);
 		});
 	}
 
@@ -71,6 +72,15 @@ function parseSubmittedValue(field, inputs, submittedValue) {
 	}
 
 	return parseInputValue(inputs[0], submittedValue);
+}
+
+function getSubmittedInputValue(submittedValue, input) {
+	for (const inputId of [input.id, ...(input.aliases ?? [])]) {
+		if (Object.hasOwn(submittedValue, inputId)) {
+			return submittedValue[inputId];
+		}
+	}
+	return undefined;
 }
 
 function parseInputValue(input, submittedValue) {
@@ -186,14 +196,14 @@ function parseMultilineEntry(field, line) {
 
 function validatePlannedUpdates(character, updates) {
 	const actionPointUpdates = updates.filter(update => (
-		update.target.path[0] === 'resources'
+		update.target.path[0] === 'status'
 		&& update.target.path[1] === 'ap'
 	));
 	if (actionPointUpdates.length === 0) {
 		return;
 	}
 	const proposed = {
-		...character.resources.ap,
+		...character.status.ap,
 		...Object.fromEntries(actionPointUpdates.map(update => [
 			update.target.path[2],
 			update.value,
@@ -224,8 +234,8 @@ function serializeInputValue(character, input) {
 }
 
 function getNamedLineKey(target) {
-	return target.id.startsWith('stats.')
-		? target.id.slice('stats.'.length)
+	return target.id.startsWith('statistics.')
+		? target.id.slice('statistics.'.length)
 		: target.id;
 }
 

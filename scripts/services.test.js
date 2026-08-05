@@ -81,13 +81,13 @@ test('character application workflows compose persistence and mechanics', async 
 	const characterKey = 'Application.Workflow';
 	await createCharacter(characterKey, 'creator');
 	const damage = await damageCharacter(characterKey, 25, false, () => true);
-	assert.equal(damage.character.resources.hp.current, 75);
+	assert.equal(damage.character.status.hp.current, 75);
 	assert.equal(damage.damage.hpDamage, 25);
 
 	const healing = await healCharacter(characterKey, 'hp', 100, () => true);
-	assert.equal(healing.character.resources.hp.current, 100);
+	assert.equal(healing.character.status.hp.current, 100);
 	const endedTurn = await endCharacterTurn(characterKey, () => true);
-	assert.equal(endedTurn.character.resources.ap.current, 4);
+	assert.equal(endedTurn.character.status.ap.current, 4);
 	assert.equal((await getCharacter(characterKey)).key, characterKey);
 
 	await deleteCharacter(characterKey, () => true);

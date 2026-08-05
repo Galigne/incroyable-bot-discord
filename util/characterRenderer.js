@@ -23,23 +23,23 @@ function createCharacterSummaryEmbed(character, locale = 'en') {
 	const status = [
 		formatCharacterResources(character, ['hp', 'ar', 'ap', 'md'], locale),
 		'',
-		`**${getCharacterFieldLabel(locale, 'statusEffects')}**\n`
-			+ formatList(character.statusEffects, 1_024, locale),
+		`**${getCharacterFieldLabel(locale, 'status.effects')}**\n`
+			+ formatList(character.status.effects, 1_024, locale),
 	].join('\n');
 	const stats = BASE_STATS
-		.map(stat => `${formatLabel(stat, locale)}: **${character.stats[stat]}**`)
+		.map(stat => `${formatLabel(stat, locale)}: **${character.statistics[stat]}**`)
 		.join('\n');
 	const racialTraits = [
-		`${getCharacterFieldLabel(locale, 'racialTraits.skillBonus')}: `
-			+ `${character.racialTraits.skillBonus || t(locale, 'common.empty')}`,
-		`${getCharacterFieldLabel(locale, 'racialTraits.physicalAbility')}: `
-			+ `${character.racialTraits.physicalAbility || t(locale, 'common.empty')}`,
+		`${getCharacterFieldLabel(locale, 'race.traits.skillBonus')}: `
+			+ `${character.race.traits.skillBonus || t(locale, 'common.empty')}`,
+		`${getCharacterFieldLabel(locale, 'race.traits.physicalAbility')}: `
+			+ `${character.race.traits.physicalAbility || t(locale, 'common.empty')}`,
 	].join('\n');
 	const [leftColumn, rightColumn] = createSummaryColumns(
 		[
 			stats,
 			truncate(racialTraits, 250),
-			formatList(character.equipment, 250, locale),
+			formatList(character.gear.equipment, 250, locale),
 		],
 		[
 			formatList(
@@ -51,11 +51,11 @@ function createCharacterSummaryEmbed(character, locale = 'en') {
 				locale,
 			),
 			formatList(character.talents, 250, locale),
-			formatList(character.inventory, 250, locale),
+			formatList(character.gear.inventory, 250, locale),
 		],
 		[
 			[
-				getCharacterFieldLabel(locale, 'racialTraits'),
+				getCharacterFieldLabel(locale, 'race.traits'),
 				getCharacterFieldLabel(locale, 'talents'),
 			],
 			[
@@ -72,7 +72,8 @@ function createCharacterSummaryEmbed(character, locale = 'en') {
 				level: character.level,
 				race: character.race.name || t(locale, 'character.summary.unspecifiedRace'),
 			}),
-			character.appearance || t(locale, 'character.summary.unspecifiedAppearance'),
+			character.background.appearance
+				|| t(locale, 'character.summary.unspecifiedAppearance'),
 		].join('\n'))
 		.setColor('#FFD700')
 		.addFields(
@@ -176,7 +177,7 @@ function createCharacterFieldEmbed(character, fieldName, locale = 'en') {
 				value: truncate(
 					getStoredValue(character, target) || t(locale, 'common.empty'),
 				),
-				...(['race.name', 'racialTraits.skillBonus'].includes(target.id)
+				...(['race.name', 'race.traits.skillBonus'].includes(target.id)
 					? { inline: true }
 					: {}),
 			})),
@@ -228,7 +229,7 @@ function formatAp(resource, locale = 'en') {
 
 function formatCharacterResource(character, resourceId, locale = 'en') {
 	if (resourceId === 'ap') {
-		return formatAp(character.resources.ap, locale);
+		return formatAp(character.status.ap, locale);
 	}
 	const icons = PROGRESS_RESOURCE_ICONS[resourceId];
 	if (!icons) {
@@ -236,7 +237,7 @@ function formatCharacterResource(character, resourceId, locale = 'en') {
 	}
 	return formatProgressResource(
 		getResourceAbbreviation(locale, resourceId),
-		character.resources[resourceId],
+		character.status[resourceId],
 		icons[0],
 		icons[1],
 	);
@@ -320,7 +321,7 @@ function formatList(items, maxLength = 1_024, locale = 'en') {
 }
 
 function formatLabel(value, locale = 'en') {
-	return getCharacterFieldLabel(locale, `stats.${value}`);
+	return getCharacterFieldLabel(locale, `statistics.${value}`);
 }
 
 function truncate(value, maxLength = 1_024) {

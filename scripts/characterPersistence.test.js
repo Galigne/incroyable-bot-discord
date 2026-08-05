@@ -64,9 +64,9 @@ test('talent arrays round-trip and legacy multiline saves remain compatible', as
 test('encumbrance defaults and explicit values round-trip without rewriting on load', async () => {
 	const defaultKey = 'Encumbrance.Default';
 	await createCharacter(defaultKey, 'creator');
-	assert.deepEqual((await getCharacter(defaultKey)).encumbrance, { current: 0, max: 0 });
+	assert.deepEqual((await getCharacter(defaultKey)).gear.encumbrance, { current: 0, max: 0 });
 	assert.deepEqual(
-		JSON.parse(await readSave(defaultKey)).encumbrance,
+		JSON.parse(await readSave(defaultKey)).gear.encumbrance,
 		{ current: 0, max: 0 },
 	);
 
@@ -79,19 +79,19 @@ test('encumbrance defaults and explicit values round-trip without rewriting on l
 		stats: { constitution: 18 },
 	});
 	await fsPromises.writeFile(getSavePath(legacyKey), legacySave, 'utf8');
-	assert.deepEqual((await getCharacter(legacyKey)).encumbrance, { current: 3, max: 0 });
+	assert.deepEqual((await getCharacter(legacyKey)).gear.encumbrance, { current: 3, max: 0 });
 	assert.equal(await readSave(legacyKey), legacySave);
 
 	const explicitKey = 'Encumbrance.Explicit';
 	await createCharacter(explicitKey, 'creator', character => {
-		character.encumbrance = { current: 5, max: 12 };
+		character.gear.encumbrance = { current: 5, max: 12 };
 	});
 	await updateCharacter(explicitKey, () => true, character => {
 		character.level = 2;
 	});
-	assert.deepEqual((await getCharacter(explicitKey)).encumbrance, { current: 5, max: 12 });
+	assert.deepEqual((await getCharacter(explicitKey)).gear.encumbrance, { current: 5, max: 12 });
 	assert.deepEqual(
-		JSON.parse(await readSave(explicitKey)).encumbrance,
+		JSON.parse(await readSave(explicitKey)).gear.encumbrance,
 		{ current: 5, max: 12 },
 	);
 });
@@ -105,7 +105,7 @@ test('concurrent updates to one character read the preceding saved result', asyn
 
 	const firstUpdate = updateCharacter(characterKey, () => true, async character => {
 		mutationOrder.push('first-start');
-		character.firstName = 'First';
+		character.name.firstName = 'First';
 		firstStarted.resolve();
 		await releaseFirst.promise;
 		mutationOrder.push('first-finish');
@@ -114,7 +114,7 @@ test('concurrent updates to one character read the preceding saved result', asyn
 
 	const secondUpdate = updateCharacter(characterKey, () => true, character => {
 		mutationOrder.push('second');
-		character.lastName = 'Second';
+		character.name.lastName = 'Second';
 	});
 	assert.equal(getPendingCharacterOperationCount(characterKey), 2);
 
@@ -122,8 +122,8 @@ test('concurrent updates to one character read the preceding saved result', asyn
 	await Promise.all([firstUpdate, secondUpdate]);
 
 	const savedCharacter = await getCharacter(characterKey);
-	assert.equal(savedCharacter.firstName, 'First');
-	assert.equal(savedCharacter.lastName, 'Second');
+	assert.equal(savedCharacter.name.firstName, 'First');
+	assert.equal(savedCharacter.name.lastName, 'Second');
 	assert.deepEqual(mutationOrder, ['first-start', 'first-finish', 'second']);
 	assert.equal(getCharacterOperationQueueSize(), 0);
 });
@@ -169,13 +169,13 @@ test('updates to different characters can execute concurrently', { timeout: 2_00
 	const releaseSecond = createDeferred();
 
 	const firstUpdate = updateCharacter(firstKey, () => true, async character => {
-		character.firstName = 'First';
+		character.name.firstName = 'First';
 		firstStarted.resolve();
 		await releaseFirst.promise;
 	});
 	await firstStarted.promise;
 	const secondUpdate = updateCharacter(secondKey, () => true, async character => {
-		character.firstName = 'Second';
+		character.name.firstName = 'Second';
 		secondStarted.resolve();
 		await releaseSecond.promise;
 	});
@@ -200,7 +200,7 @@ test('concurrent creation of the same key remains exclusive', async () => {
 		characterKey,
 		'first-creator',
 		async character => {
-			character.firstName = 'First';
+			character.name.firstName = 'First';
 			firstStarted.resolve();
 			await releaseFirst.promise;
 		},
@@ -229,7 +229,7 @@ test('an update and deletion of one character execute sequentially', async () =>
 	const releaseUpdate = createDeferred();
 
 	const update = updateCharacter(characterKey, () => true, async character => {
-		character.firstName = 'Updated';
+		character.name.firstName = 'Updated';
 		updateStarted.resolve();
 		await releaseUpdate.promise;
 	});
@@ -251,26 +251,26 @@ test('a throwing mutation does not persist changes or retain its lock', async ()
 
 	await assert.rejects(
 		updateCharacter(characterKey, () => true, character => {
-			character.firstName = 'Not persisted';
+			character.name.firstName = 'Not persisted';
 			throw mutationError;
 		}),
 		error => error === mutationError,
 	);
 
-	assert.equal((await getCharacter(characterKey)).firstName, '');
+	assert.equal((await getCharacter(characterKey)).name.firstName, '');
 	assert.equal(getCharacterOperationQueueSize(), 0);
 
 	await updateCharacter(characterKey, () => true, character => {
-		character.lastName = 'Recovered';
+		character.name.lastName = 'Recovered';
 	});
-	assert.equal((await getCharacter(characterKey)).lastName, 'Recovered');
+	assert.equal((await getCharacter(characterKey)).name.lastName, 'Recovered');
 	assert.equal(getCharacterOperationQueueSize(), 0);
 });
 
 test('serialization failure preserves the previous save and cleans the lock', async () => {
 	const characterKey = 'Failure.Serialization';
 	await createCharacter(characterKey, 'creator', character => {
-		character.firstName = 'Valid';
+		character.name.firstName = 'Valid';
 	});
 	const previousSave = await readSave(characterKey);
 

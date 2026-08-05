@@ -27,26 +27,26 @@ function populateRandomCharacter(character, options = {}) {
 
 	character.level = level;
 	const generatedName = pickOne('name', locale, random);
-	character.firstName = getField(generatedName, 'FirstName');
-	character.lastName = getField(generatedName, 'LastName');
+	character.name.firstName = getField(generatedName, 'FirstName');
+	character.name.lastName = getField(generatedName, 'LastName');
 
 	const race = pickOne('race', locale, random);
 	character.race.name = getField(race, 'Name');
 	character.race.physicalDescription = getField(race, 'Description');
-	character.racialTraits.skillBonus = getField(race, 'Skill Bonus');
-	character.racialTraits.physicalAbility = getField(race, 'Physical Ability');
+	character.race.traits.skillBonus = getField(race, 'Skill Bonus');
+	character.race.traits.physicalAbility = getField(race, 'Physical Ability');
 
 	const background = resolveBackground(options.background, locale, random);
 	const backgroundDetails = pickOne(getField(background, 'Generator'), locale, random);
-	character.appearance = getField(backgroundDetails, 'Appearance');
-	character.backstory = getField(backgroundDetails, 'Backstory');
-	character.goals = getField(backgroundDetails, 'Goals');
+	character.background.appearance = getField(backgroundDetails, 'Appearance');
+	character.background.backstory = getField(backgroundDetails, 'Backstory');
+	character.background.goals = getField(backgroundDetails, 'Goals');
 
 	character.personality.traits = pickMany('personality', 2, locale, random)
 		.map(getTextValue);
-	character.stats = generateStats(level, random);
+	character.statistics = generateStats(level, random);
 
-	const rulePointCount = calculateRulePoints(character.stats.intelligence);
+	const rulePointCount = calculateRulePoints(character.statistics.intelligence);
 	const ruleLevels = allocateRuleLevels(rulePointCount);
 	character.rules = pickMany('rules', ruleLevels.length, locale, random)
 		.map((entry, index) => ({
@@ -59,7 +59,7 @@ function populateRandomCharacter(character, options = {}) {
 	character.talents = pickMany('talents', talentCount, locale, random)
 		.map(entry => `${getField(entry, 'Name')} — ${getField(entry, 'Description')}`);
 
-	character.statusEffects = random() < 0.25
+	character.status.effects = random() < 0.25
 		? [getTextValue(pickOne('statusEffect', locale, random))]
 		: [];
 
@@ -68,7 +68,7 @@ function populateRandomCharacter(character, options = {}) {
 		locale,
 		random,
 		entry => canEquipArmor(
-			character.stats.constitution,
+			character.statistics.constitution,
 			getField(entry, 'Constitution requirement'),
 		),
 	);
@@ -77,18 +77,18 @@ function populateRandomCharacter(character, options = {}) {
 	const inventoryItems = pickMany('inventory', 3, locale, random);
 	const armorPercentage = Number(getField(armor, 'AR percentage'));
 
-	character.resources = createGeneratedResources(
-		character.stats,
+	Object.assign(character.status, createGeneratedResources(
+		character.statistics,
 		level,
 		armorPercentage,
-	);
-	character.equipment = [
+	));
+	character.gear.equipment = [
 		formatNamedEntry(armor),
 		...weapons.map(formatNamedEntry),
 	];
 
 	const gold = level * randomInteger(1, 20, random) + 5;
-	character.inventory = [
+	character.gear.inventory = [
 		...inventoryItems.map(formatNamedEntry),
 		formatGold(gold),
 	];

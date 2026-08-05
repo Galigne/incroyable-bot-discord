@@ -35,7 +35,7 @@ test('character summary and detail embeds have no footer', () => {
 
 test('/get gear retains the manual encumbrance detail', () => {
 	const character = new Character('Encumbrance.Get', 'creator');
-	character.encumbrance = { current: 3, max: 8 };
+	character.gear.encumbrance = { current: 3, max: 8 };
 	const detail = createCharacterGetResponse(character, 'gear', 'en')
 		.embeds[0].toJSON();
 
@@ -47,31 +47,31 @@ test('/get gear retains the manual encumbrance detail', () => {
 
 test('/get renders every grouped section from unchanged stored properties', () => {
 	const character = new Character('Grouped.Get', 'creator');
-	character.firstName = 'Ada';
-	character.lastName = 'Lovelace';
+	character.name.firstName = 'Ada';
+	character.name.lastName = 'Lovelace';
 	character.level = 4;
-	character.resources = {
+	character.status = {
 		hp: { current: 50, max: 100 },
 		ar: { current: 5, max: 10 },
 		ap: { current: 2, max: 4 },
 		md: { current: 3, max: 6 },
 	};
-	character.statusEffects = ['Inspired'];
-	character.equipment = ['Sword'];
-	character.inventory = ['Potion'];
-	character.encumbrance = { current: 3, max: 8 };
+	character.status.effects = ['Inspired'];
+	character.gear.equipment = ['Sword'];
+	character.gear.inventory = ['Potion'];
+	character.gear.encumbrance = { current: 3, max: 8 };
 	character.race = {
 		name: 'Ashborn',
 		physicalDescription: 'Silver eyes',
 		lore: 'Forged in starlight',
 	};
-	character.racialTraits = {
+	character.race.traits = {
 		skillBonus: 'Arcana',
 		physicalAbility: 'Night sight',
 	};
-	character.appearance = 'Green cloak';
-	character.backstory = 'Former courier';
-	character.goals = 'Map every road';
+	character.background.appearance = 'Green cloak';
+	character.background.backstory = 'Former courier';
+	character.background.goals = 'Map every road';
 	character.personality = {
 		traits: ['Patient', 'Observant'],
 		description: 'Quiet and curious',
@@ -125,7 +125,7 @@ test('/get rejects former independent child views and safely truncates grouped l
 		assert.equal(response.embeds, undefined, field);
 		assert.match(response.content, /Unknown character field/, field);
 	}
-	character.equipment = ['A'.repeat(2_000), 'second'];
+	character.gear.equipment = ['A'.repeat(2_000), 'second'];
 	const gear = createCharacterGetResponse(character, 'gear', 'en').embeds[0].toJSON();
 	assert.ok(gear.fields[0].value.length <= 1_024);
 	assert.match(gear.fields[0].value, /^1\. .*…$/);

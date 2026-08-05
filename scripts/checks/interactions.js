@@ -23,8 +23,8 @@ module.exports = function createInteractionChecks(context) {
 
 		try {
 			await characterStore.createCharacter(characterKey, user.id, character => {
-				character.firstName = 'Modal';
-				character.lastName = 'Tester';
+				character.name.firstName = 'Modal';
+				character.name.lastName = 'Tester';
 			});
 
 			let modalPayload;
@@ -78,13 +78,13 @@ module.exports = function createInteractionChecks(context) {
 				},
 			}, englishConfig);
 			const editedCharacter = await characterStore.getCharacter(characterKey);
-			if (!submitPayload || editedCharacter.stats.strength !== 14) {
+			if (!submitPayload || editedCharacter.statistics.strength !== 14) {
 				errors.push('The direct RPG editor did not save its modal value.');
 			}
 
 			await characterStore.updateCharacter(characterKey, () => true, character => {
-				character.resources.hp = { current: 10, max: 101 };
-				character.resources.ar = { current: 5, max: 33 };
+				character.status.hp = { current: 10, max: 101 };
+				character.status.ar = { current: 5, max: 33 };
 			});
 			const heal = require('../../commands/rpg/subcommands/heal');
 			let healPayload;
@@ -106,8 +106,8 @@ module.exports = function createInteractionChecks(context) {
 			});
 			const healedCharacter = await characterStore.getCharacter(characterKey);
 			if (
-				healedCharacter.resources.hp.current !== 51
-				|| healedCharacter.resources.ar.current !== 17
+				healedCharacter.status.hp.current !== 51
+				|| healedCharacter.status.ar.current !== 17
 				|| !healPayload.includes('HP: **51 / 101 (50%)**')
 				|| !healPayload.includes('AR: **17 / 33 (52%)**')
 			) {
