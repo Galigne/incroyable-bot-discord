@@ -1,8 +1,17 @@
 {
-  "name": "religiousBackground",
-  "description": "Détails de Background pour les PNJ religieux",
+  "schemaVersion": 2,
+  "id": "background-religious",
+  "kind": "component",
+  "visibility": "internal",
+  "name": "Détails du background de religieux",
+  "description": "Apparences, histoires et objectifs pour les PNJ religieux",
+  "entrySchema": {
+    "type": "fields",
+    "required": ["Appearance", "Backstory", "Goals"]
+  },
   "entries": [
     {
+      "id": "neatly-robed-with-well-used-prayer-beads-and-a",
       "fields": {
         "Appearance": "Robe soignée, chapelet usé par la prière et expression calme et attentive.",
         "Backstory": "Un prêtre de village a pris en charge un sanctuaire négligé après la disparition de son ancien gardien.",
@@ -10,6 +19,7 @@
       }
     },
     {
+      "id": "simply-dressed-close-cropped-and-marked-by-calluses-from",
       "fields": {
         "Appearance": "Vêtu simplement, cheveux coupés court et mains calleuses à force de travail comme de pratique rituelle.",
         "Backstory": "Élevé depuis l’enfance dans un monastère, vient d’être envoyé pour la première fois au-delà de ses murs.",
@@ -17,6 +27,7 @@
       }
     },
     {
+      "id": "wears-practical-temple-clothes-beneath-a-bright-ceremonial",
       "fields": {
         "Appearance": "Vêtements de temple pratiques sous une écharpe cérémonielle vive et maintes fois rapiécée.",
         "Backstory": "Un serviteur du temple a secrètement maintenu le sanctuaire en activité tandis que le clergé se perdait dans les intrigues politiques.",
@@ -24,6 +35,7 @@
       }
     },
     {
+      "id": "dusty-from-travel-carrying-inexpensive-tokens-from-many",
       "fields": {
         "Appearance": "Couvert de la poussière des routes, transportant des souvenirs modestes de nombreux sanctuaires et une relique soigneusement enveloppée.",
         "Backstory": "Un pèlerin a juré de traverser le royaume après avoir survécu à une maladie dont aucun guérisseur ne pensait le voir réchapper.",
@@ -31,6 +43,7 @@
       }
     },
     {
+      "id": "severe-but-approachable-with-annotated-scriptures-tucked-into",
       "fields": {
         "Appearance": "Austère mais abordable, avec des textes sacrés annotés glissés dans chaque poche disponible.",
         "Backstory": "Un théologien respecté a été condamné pour avoir soutenu qu’un ancien commandement avait été délibérément mal traduit.",

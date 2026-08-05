@@ -51,10 +51,8 @@ function createGeneratedEmbed(result, locale = 'en') {
 	const embed = new EmbedBuilder()
 		.setTitle(t(locale, 'rpg.gen.title', { category: result.category.name }))
 		.setColor('#FFD700');
-	if (typeof result.entry === 'string' || result.entry.value !== undefined) {
-		embed.setDescription(
-			typeof result.entry === 'string' ? result.entry : result.entry.value,
-		);
+	if (result.entry.value !== undefined) {
+		embed.setDescription(result.entry.value);
 	}
 	else {
 		embed.addFields(

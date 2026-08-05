@@ -15,6 +15,11 @@ This document defines the target architecture and ordered implementation sequenc
 It is a design and implementation specification. It does not itself modify the
 bot.
 
+`documentation/NEW_GENERATOR_ARCHITECTURE_SPECIFICATION_PARTS.md` consolidates
+this roadmap into five approval-gated parts and is authoritative wherever the
+documents conflict. Revised Part 1 is complete: generator schema v2, the full
+current-data cutover, and shared statistical profiles now ship together.
+
 ---
 
 # Implementation Protocol
@@ -29,8 +34,7 @@ For every part:
 2. add or update the tests required by that part;
 3. run `npm run format`;
 4. run `npm test`;
-5. commit the changes using the part name as the commit message;
-6. continue to the next part.
+5. stop and obtain explicit approval before continuing to the next part.
 
 Later-part functionality must not be implemented early unless it is strictly
 required for correctness of the current part. Do not prepare broad unused
@@ -90,9 +94,9 @@ version 2 system has:
 - no compatibility overload for the previous generator service API;
 - no v1 generator parser after cutover.
 
-Part 2 implements the v2 catalog independently with fixtures. Part 3 converts
-all production data, switches all callers, and removes the old implementation.
-That temporary development sequence is not a dual-format production system.
+The revised Part 1 converted all production data, switched all callers, and
+removed the old implementation in one cutover. There was no production period
+with both formats.
 
 ## Persistent character data
 
@@ -169,58 +173,39 @@ The completed architecture must not:
 data/generators/
 ├── stat-profile.json
 ├── en/
-│   ├── categories/
-│   ├── components/
-│   ├── modifiers/
-│   └── templates/
+│   └── *.json
 └── fr/
-    ├── categories/
-    ├── components/
-    ├── modifiers/
-    └── templates/
+    └── *.json
 ```
 
 Roles:
 
-- `categories/`: autonomous generators normally visible through `/gen`;
-- `components/`: internal data used by templates, `/gen-char`, or
-  `/gen-monster`;
-- `modifiers/`: descriptive additions selected for compatible results;
-- `templates/`: composed generators resolving one or more references;
+- each localized generator declares its role through `kind` and `visibility`;
+- the current flat locale layout is recursively discovered and may be grouped
+  later without changing the catalog API;
+- public categories are visible through `/gen`;
+- internal components are available only to application workflows;
 - `stat-profile.json`: non-localized statistical distributions.
 
 ---
 
 # Implementation Overview
 
-| Part | Name | Primary result |
+| Revised part | Legacy detail sections | Primary result |
 | ---: | --- | --- |
-| 1 | Shared statistical profiles | `/gen-char` uses validated profile allocation |
-| 2 | Generator schema v2 core | A strict v2 catalog exists independently |
-| 3 | Generator data conversion and cutover | All production generators use v2 |
-| 4 | Structured resolver and templates | References, fixed entries, and provenance work |
-| 5 | Descriptive modifier selection | Modifiers can be selected without mechanical effects |
-| 6 | Shared `Combatant` model | `Character` inherits shared combat state |
-| 7 | Generic entity persistence foundations | Character persistence uses reusable foundations |
-| 8 | `Creature` model and persistence | Creatures can be stored, mutated, and undone |
-| 9 | Common entity commands | Management commands work for both entity types |
-| 10 | Creature archetypes and fixed RULEs | Complete base creatures can be generated in memory |
-| 11 | Descriptive creature modifier integration | Creatures retain selected descriptive modifiers |
-| 12 | `/gen-monster` integration | Complete generated creatures are atomically saved |
-| 13 | Historical migration inventory | Every old entry receives a migration decision |
-| 14 | Direct standalone-list migration | Straightforward historical categories are imported |
-| 15 | Humanoid and background migration | NPC/criminal material is folded into `/gen-char` data |
-| 16 | RULE reconciliation | Historical RULE content replaces conflicting current content |
-| 17 | Creature-list migration | Historical animals, companions, and monsters are structured |
-| 18 | Modifier-list migration | Historical modifiers are imported as descriptive data |
-| 19 | Quest-template migration | Historical quests use final stable references |
-| 20 | Final migration verification and content expansion | Coverage, balance, and cleanup are completed |
+| 1 | Legacy Parts 1–3 | Generator v2, production cutover, and shared statistical profiles |
+| 2 | Legacy Parts 4–5 | Structured references, templates, provenance, and descriptive modifiers |
+| 3 | Legacy Parts 6–9 | Creature persistence and shared entity management |
+| 4 | Legacy Parts 10–12 | Creature generation and `/gen-monster` |
+| 5 | Legacy Parts 13–20 | Historical migration and final verification |
 
-Every part requires explicit approval before the next part begins.
+The legacy detail headers below remain as design references until their revised
+part is implemented. The consolidated five-part specification controls scope and
+precedence. Every revised part requires explicit approval before the next begins.
 
 ---
 
-# Part 1 — Shared Statistical Profiles
+# Revised Part 1A — Shared Statistical Profiles (Complete)
 
 ## 1.1 Objective
 
@@ -275,8 +260,8 @@ Example:
 }
 ```
 
-`character-balanced` must reproduce the current balanced allocation as closely
-as possible.
+`character-balanced` reproduces the previous balanced allocation exactly for
+equivalent deterministic random input.
 
 ## 1.3 Profile Semantics
 
@@ -350,11 +335,7 @@ Statistic value cost remains:
 ## 1.6 Allocation API and Algorithm
 
 ```js
-generateStats({
-  level,
-  profile,
-  random = Math.random,
-})
+generateStats({ level, profile, random = Math.random })
 ```
 
 Algorithm:
@@ -382,13 +363,13 @@ Unused budget is accepted when no legal increase can consume it.
 
 ## 1.7 Catalog
 
-Add a Discord-independent technical catalog equivalent to:
+The Discord-independent technical catalog provides:
 
 ```js
 getStatProfile(profileId)
 listStatProfiles()
-validateStatProfiles()
 clearStatProfileCache()
+reloadStatProfiles()
 ```
 
 ## 1.8 Character Integration
@@ -423,25 +404,24 @@ Test:
 - unchanged character save shape;
 - unchanged character RULE behavior.
 
-## 1.10 Completion Criteria
+## 1.10 Completed State
 
-- `/gen-char` uses `character-balanced`;
-- existing saves remain compatible;
-- no creature or generator-v2 work is included;
-- formatting and full tests pass.
-
-Stop and wait for confirmation.
+- `/gen-char` uses `character-balanced` through the shared weighted allocator;
+- existing character saves, history, RULE behavior, and save schema v2 remain
+  compatible;
+- generator v2 and the production cutover were completed in the same revised
+  part;
+- creature, reference, template, modifier, and historical-migration work is not
+  included.
 
 ---
 
-# Part 2 — Generator Schema Version 2 Core
+# Revised Part 1B — Generator Schema Version 2 Core (Complete)
 
 ## 2.1 Objective
 
-Implement and test a strict v2 generator catalog independently from the current
-production catalog.
-
-The v2 catalog never parses v1 data.
+The strict v2 generator catalog is the only production catalog. It never parses
+v1 data.
 
 ## 2.2 Common Envelope
 
@@ -470,7 +450,8 @@ Technical properties:
 
 - `schemaVersion`;
 - stable English `id`;
-- `kind`: `category`, `component`, `modifier`, or `template`;
+- `kind`: currently `category` or `component`; revised Part 2 adds modifier and
+  template structures when their behavior is implemented;
 - `visibility`: `public` or `internal`;
 - `entrySchema`.
 
@@ -527,7 +508,10 @@ listGenerators(locale, {
   visibility = 'public',
 } = {})
 
+generate(id, locale, random = Math.random)
+
 clearGeneratorCache()
+reloadGeneratorCatalog()
 ```
 
 Weighted selection belongs in a reusable helper:
@@ -540,13 +524,14 @@ selectWeightedEntry(entries, random = Math.random)
 
 The v2 catalog:
 
-- scans all four localized subdirectories recursively;
-- uses English paths as structural reference;
-- loads matching French paths;
+- scans both locale roots recursively;
+- uses English relative paths as structural references;
+- requires matching French paths;
 - identifies generators by stable ID;
 - rejects duplicate IDs across kinds;
 - exposes public generators by default;
-- permits internal access explicitly.
+- permits internal access explicitly through stable ID lookup;
+- never exposes internal generators through `generate`.
 
 ## 2.6 Localization Parity
 
@@ -572,23 +557,22 @@ required fields, duplicate IDs, malformed values, and locale differences.
 Test recursive discovery, visibility, all entry shapes, stable lookup, weighted
 selection, parity, malformed fixtures, and deterministic selection.
 
-## 2.8 Completion Criteria
+## 2.8 Completed State
 
-- v2 catalog and fixtures are complete;
-- production still temporarily uses v1;
-- no v1 parsing exists in v2 code;
-- no production data conversion or reference resolution is included.
-
-Stop and wait for confirmation.
+- the strict catalog validates the complete English/French production pair;
+- production uses only v2;
+- no v1 parsing, fallback, runtime detection, or API overload remains;
+- reference, template, provenance, and modifier resolution remains deferred to
+  revised Part 2.
 
 ---
 
-# Part 3 — Generator Data Conversion and Cutover
+# Revised Part 1C — Generator Data Conversion and Cutover (Complete)
 
 ## 3.1 Objective
 
-Convert every current production generator to v2 and remove the old format and
-catalog.
+Every current production generator has been converted to v2 and the old format
+and catalog have been removed.
 
 This part converts current repository data only. Historical
 `JDR_RANDOM_OLD.md` content is migrated in Parts 13–20.
@@ -606,19 +590,17 @@ For every current English and French file:
 - preserve atomic field groups;
 - align locales.
 
-## 3.3 Placement
+## 3.3 Classification
 
-- autonomous `/gen` data → `categories/`;
-- internal character components → `components/`;
-- future creature source lists → `components/`;
-- modifiers → `modifiers/`;
-- composed generators → `templates/`.
-
-Do not reclassify data speculatively.
+- every previously exposed standalone generator remains a public `category`;
+- the 17 routed `background-*` detail catalogs are internal `component`
+  generators;
+- classification lives in the v2 envelope rather than directory placement;
+- no future modifier, template, or creature-only data was added speculatively.
 
 ## 3.4 Runtime Cutover
 
-Update:
+Updated:
 
 - `/gen`;
 - autocomplete;
@@ -629,7 +611,7 @@ Update:
 - direct imports;
 - runtime reload behavior.
 
-Remove:
+Removed:
 
 - old catalog;
 - v1 parser;
@@ -649,14 +631,12 @@ Preserve current behavior unless explicitly changed:
 - `/gen`;
 - `/gen-char`.
 
-## 3.6 Tests and Completion
+## 3.6 Completed State
 
-Test all production generators, ID uniqueness, parity, autocomplete visibility,
-weighted behavior, and `/gen-char` dependencies.
-
-Part 3 is complete when only v2 data and APIs remain and the full suite passes.
-
-Stop and wait for confirmation.
+Focused validation covers all production generators, ID uniqueness, strict
+locale parity, visibility, deterministic weighted behavior, autocomplete/help,
+reload, the statistical profile, `/gen-char` dependencies, character schema v2,
+and manual encumbrance. Only v2 data and APIs remain.
 
 ---
 
@@ -997,7 +977,7 @@ Only `Combatant` and the refactored `Character` are implemented here.
 - status effects;
 - equipment;
 - inventory;
-- encumbrance;
+- manually managed encumbrance;
 - shared combat and turn behavior.
 
 It does not depend on Discord, generation, rendering, or persistence.
@@ -1026,7 +1006,7 @@ Extract or consolidate:
 - initiative and reflexes;
 - HP, AP, and MD maxima;
 - resource creation and recalculation;
-- encumbrance base maximum;
+- validation of manually edited encumbrance without deriving either value;
 - common damage, healing, armor restoration, and turn behavior.
 
 ```text
@@ -1176,7 +1156,8 @@ Store final state:
 - descriptive modifier records;
 - equipment;
 - inventory;
-- encumbrance.
+- manually managed `gear.encumbrance` with independent `current` and `max`
+  values.
 
 Loading never regenerates data.
 
@@ -1774,10 +1755,11 @@ Regions, settlements, dungeons, buildings, and events use stable IDs with
 Preserve:
 
 - `Name`;
-- `Description`;
-- numeric `Encumbrance`.
+- `Description`.
 
-`Encumbrance` is technical and identical across locales.
+Do not migrate or add numeric `Encumbrance` fields. Generated weapons,
+equipment, inventory, and gold never alter the manually managed saved
+encumbrance resource.
 
 ## 14.5 Races
 
@@ -2342,7 +2324,6 @@ French must preserve:
 - trait IDs;
 - fixed RULE IDs and levels;
 - profile IDs;
-- numeric encumbrance;
 - percentages.
 
 Translate only player-facing text.

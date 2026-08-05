@@ -1,8 +1,17 @@
 {
-  "name": "criminalBackground",
-  "description": "Détails de Background pour les PNJ criminels",
+  "schemaVersion": 2,
+  "id": "background-criminal",
+  "kind": "component",
+  "visibility": "internal",
+  "name": "Détails du background de criminel",
+  "description": "Apparences, histoires et objectifs pour les PNJ criminels",
+  "entrySchema": {
+    "type": "fields",
+    "required": ["Appearance", "Backstory", "Goals"]
+  },
   "entries": [
     {
+      "id": "unremarkable-clothing-forgettable-features-and-hands-kept",
       "fields": {
         "Appearance": "Vêtements quelconques, visage difficile à retenir et mains soigneusement gardées hors de vue.",
         "Backstory": "A appris à faire les poches pour survivre à la faim pendant son enfance, puis est devenu trop utile pour que le gang accepte de le laisser partir.",
@@ -10,6 +19,7 @@
       }
     },
     {
+      "id": "expensively-dressed-but-tense-with-polished-manners-and",
       "fields": {
         "Appearance": "Vêtu avec luxe mais visiblement tendu, avec des manières raffinées et le nez récemment cassé.",
         "Backstory": "Un marchand honnête s’est tourné vers la contrebande lorsque des taxes impossibles ont menacé de ruiner son commerce.",
@@ -17,6 +27,7 @@
       }
     },
     {
+      "id": "lean-scarred-and-dressed-for-rapid-movement-with",
       "fields": {
         "Appearance": "Mince, balafré et habillé pour se déplacer rapidement, sans aucun signe distinctif apparent.",
         "Backstory": "A déserté une unité militaire brutale et survit depuis en détroussant les représentants de l’autorité sur les routes isolées.",
@@ -24,6 +35,7 @@
       }
     },
     {
+      "id": "friendly-face-theatrical-smile-and-fashionable-clothes-supported",
       "fields": {
         "Appearance": "Visage avenant, sourire théâtral et vêtements à la mode dissimulant une armure.",
         "Backstory": "A monté une escroquerie fondée sur de faux héritages et découvert par accident un véritable complot.",
@@ -31,6 +43,7 @@
       }
     },
     {
+      "id": "heavy-set-carefully-tattooed-and-outwardly-relaxed-while",
       "fields": {
         "Appearance": "Corpulence imposante, tatouages méticuleux et décontraction de façade, sans jamais cesser de surveiller les sorties.",
         "Backstory": "A débuté comme homme de main sur les quais avant de prendre la tête du gang après l’arrestation de tous ses supérieurs.",
@@ -38,6 +51,7 @@
       }
     },
     {
+      "id": "pale-from-indoor-work-with-precise-fingers-and",
       "fields": {
         "Appearance": "Teint pâle dû au travail en intérieur, doigts précis et traces tenaces d’encre et de poussière métallique.",
         "Backstory": "Un artisan de talent a été emprisonné pour avoir falsifié des documents à la demande d’un noble.",
@@ -45,6 +59,7 @@
       }
     },
     {
+      "id": "travel-stained-charming-and-equipped-with-several-knives-used",
       "fields": {
         "Appearance": "Marqué par les voyages, charmeur et muni de plusieurs couteaux qui lui servent surtout d’outils.",
         "Backstory": "A rejoint des bandits après la saisie de ses terres par des créanciers et en est devenu le négociateur malgré lui.",
@@ -52,6 +67,7 @@
       }
     },
     {
+      "id": "severe-posture-official-clothing-and-a-signet-worn",
       "fields": {
         "Appearance": "Maintien sévère, tenue officielle et chevalière arborée comme une arme.",
         "Backstory": "Un magistrat subalterne a découvert que les pots-de-vin étaient moins dangereux et plus lucratifs que l’application honnête de la loi.",
@@ -59,6 +75,7 @@
       }
     },
     {
+      "id": "elegant-soft-voiced-and-protected-by-gloves-regardless-of",
       "fields": {
         "Appearance": "Élégant, d’une voix douce et toujours ganté, quel que soit le temps.",
         "Backstory": "Formé comme apothicaire, fournit secrètement poisons et antidotes à des clients appartenant à des camps rivaux.",
@@ -66,6 +83,7 @@
       }
     },
     {
+      "id": "young-restless-and-visibly-trying-to-imitate-a",
       "fields": {
         "Appearance": "Jeune, nerveux et manifestement désireux d’imiter la réputation d’un criminel redouté.",
         "Backstory": "N’a commis qu’un seul vol irréfléchi, mais s’est vu attribuer toute une série de crimes perpétrés par quelqu’un d’autre.",
@@ -73,6 +91,7 @@
       }
     },
     {
+      "id": "weather-beaten-sailor-with-ritual-scars-practical-jewelry-and",
       "fields": {
         "Appearance": "Marin buriné par les éléments, portant des scarifications rituelles, des bijoux pratiques et un rire facile.",
         "Backstory": "Est devenu pirate après que le capitaine d’un navire marchand a abandonné la moitié de son équipage pendant une tempête.",
@@ -80,6 +99,7 @@
       }
     },
     {
+      "id": "quiet-and-meticulously-clean-with-an-old-burn",
       "fields": {
         "Appearance": "Silencieux et d’une propreté méticuleuse, avec une ancienne brûlure dissimulée sous le col.",
         "Backstory": "A grandi au sein d’un ordre d’assassins et a volontairement échoué à sa première mission.",

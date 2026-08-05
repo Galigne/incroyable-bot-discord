@@ -1,115 +1,152 @@
 {
+  "schemaVersion": 2,
+  "id": "event",
+  "kind": "category",
+  "visibility": "public",
   "name": "Événements",
   "description": "Scènes inattendues et complications dans le monde",
+  "entrySchema": {
+    "type": "text"
+  },
   "entries": [
     {
+      "id": "every-flame-in-the-area-turns-green-and",
       "weight": 2,
       "value": "Pendant une minute, toutes les flammes des environs deviennent vertes et pointent vers la même ruine lointaine."
     },
     {
+      "id": "a-terrified-courier-mistakes-a-party-member-for",
       "weight": 3,
       "value": "Un courrier terrifié prend un membre du groupe pour son contact et lui remet une confession royale scellée."
     },
     {
+      "id": "a-localized-rainstorm-follows-one-character-while-the",
       "weight": 2,
       "value": "Une averse très localisée suit un personnage tandis que le ciel reste dégagé partout ailleurs."
     },
     {
+      "id": "two-merchants-begin-an-escalating-auction-for-an",
       "weight": 3,
       "value": "Deux marchands se livrent à des enchères toujours plus folles pour un objet banal du groupe, sans vouloir expliquer leur intérêt."
     },
     {
+      "id": "a-wounded-monster-crashes-into-the-scene-fleeing",
       "weight": 3,
       "value": "Un monstre blessé surgit dans la scène, fuyant une créature bien plus dangereuse encore hors de vue."
     },
     {
+      "id": "all-spoken-lies-become-visible-as-black-smoke",
       "value": "Jusqu’au coucher du soleil, chaque mensonge prononcé se matérialise en fumée noire, semant aussitôt la panique dans la communauté la plus proche."
     },
     {
+      "id": "a-festival-starts-unexpectedly-its-central-competition-recreates",
       "weight": 3,
       "value": "Une fête débute sans prévenir ; son épreuve principale reconstitue un exploit récent du groupe avec des détails complètement erronés."
     },
     {
+      "id": "an-earthquake-opens-a-stairway-beneath-the-road",
       "weight": 2,
       "value": "Un séisme ouvre un escalier sous la route et condamne le passage vers l’avant."
     },
     {
+      "id": "a-child-calmly-asks-the-party-to-remove",
       "weight": 2,
       "value": "Un enfant demande calmement au groupe de chasser le fantôme sous son lit ; le fantôme affirme que c’est l’enfant qui hante la maison."
     },
     {
+      "id": "a-shower-of-tiny-harmless-frogs-falls-from",
       "value": "Une pluie de minuscules grenouilles inoffensives tombe d’un ciel sans nuages ; chacune porte la même rune dorée."
     },
     {
+      "id": "the-party-encounters-their-own-wanted-posters-issued",
       "value": "Le groupe découvre ses propres avis de recherche, datés du lendemain et l’accusant d’un crime qui n’a pas encore eu lieu."
     },
     {
+      "id": "a-nearby-statue-turns-its-head-and-whispers",
       "weight": 2,
       "value": "Une statue proche tourne la tête et murmure un avertissement au personnage doté de la Perception la plus faible."
     },
     {
+      "id": "a-caravan-offers-safe-passage-but-every-traveler",
       "weight": 3,
       "value": "Une caravane propose un trajet sûr, mais chacun de ses voyageurs affirme avoir toujours connu l’un des héros."
     },
     {
+      "id": "for-one-hour-shadows-detach-from-their-owners",
       "value": "Pendant une heure, les ombres se détachent de leurs propriétaires et mettent en scène leurs intentions secrètes."
     },
     {
+      "id": "a-bridge-collapses-after-the-party-crosses-separating",
       "weight": 3,
       "value": "Un pont s’effondre juste après le passage du groupe, le séparant à la fois de ses poursuivants et du chemin le plus simple pour rentrer."
     },
     {
+      "id": "a-magical-market-appears-between-two-trees-and",
       "value": "Un marché magique apparaît entre deux arbres et disparaîtra après exactement treize achats."
     },
     {
+      "id": "a-dying-raven-delivers-a-signet-ring-and",
       "weight": 2,
       "value": "Un corbeau mourant apporte une chevalière et répète le nom d’un lieu absent de toutes les cartes."
     },
     {
+      "id": "an-eclipse-begins-years-ahead-of-schedule-magical",
       "value": "Une éclipse commence des années trop tôt ; les pouvoirs magiques produisent des effets inversés ou symboliques."
     },
     {
+      "id": "a-noble-procession-blocks-the-road-while-masked",
       "weight": 3,
       "value": "Une procession nobiliaire bloque la route tandis que des rebelles masqués préparent une embuscade des deux côtés."
     },
     {
+      "id": "the-nearest-river-runs-backward-exposing-a-wreck",
       "value": "La rivière la plus proche remonte son cours, révélant une épave chargée de caisses scellées et réveillant son équipage noyé."
     },
     {
+      "id": "a-famous-adventurer-publicly-credits-the-party-for",
       "weight": 2,
       "value": "Un aventurier célèbre attribue publiquement au groupe un exploit qu’il n’a pas accompli et lui demande de préserver le mensonge."
     },
     {
+      "id": "everyone-in-a-village-has-fallen-asleep-except",
       "weight": 2,
       "value": "Tout un village s’est endormi, à l’exception d’un boulanger extrêmement méfiant."
     },
     {
+      "id": "a-wandering-judge-declares-an-improvised-trial-over",
       "weight": 2,
       "value": "Un juge itinérant improvise un procès pour déterminer le propriétaire d’une épée parlante qui a choisi un membre du groupe."
     },
     {
+      "id": "a-harmless-animal-begins-speaking-with-the-voice",
       "weight": 2,
       "value": "Un animal inoffensif se met à parler avec la voix d’un allié absent et réclame une aide urgente."
     },
     {
+      "id": "the-moon-briefly-shows-a-second-face-after",
       "value": "La lune laisse brièvement apparaître un second visage ; ensuite, toutes les boussoles pointent vers le groupe."
     },
     {
+      "id": "a-battlefield-from-the-distant-past-overlays-the",
       "value": "Un champ de bataille d’un passé lointain se superpose au paysage actuel, et les gestes des fantômes infligent de véritables dégâts."
     },
     {
+      "id": "a-thief-steals-something-trivial-but-leaves-behind",
       "weight": 3,
       "value": "Un voleur dérobe un objet insignifiant, mais laisse derrière lui quelque chose de bien plus précieux et dangereusement reconnaissable."
     },
     {
+      "id": "a-bell-rings-underground-local-elders-insist-there",
       "weight": 2,
       "value": "Une cloche sonne sous terre ; les anciens du lieu jurent qu’aucune cloche n’existe et ordonnent à tout le monde de rentrer."
     },
     {
+      "id": "a-spontaneous-peace-negotiation-begins-between-two-hostile",
       "weight": 3,
       "value": "Des négociations de paix spontanées commencent entre deux factions ennemies, qui choisissent toutes deux le groupe comme témoin neutre."
     },
     {
+      "id": "time-skips-forward-three-hours-for-everyone-except",
       "value": "Pour tous sauf le groupe, le temps avance brusquement de trois heures ; on l’accuse désormais de ce qui s’est produit pendant cet intervalle."
     }
   ]

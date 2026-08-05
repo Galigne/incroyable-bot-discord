@@ -1,8 +1,17 @@
 {
-  "name": "militaryBackground",
+  "schemaVersion": 2,
+  "id": "background-military",
+  "kind": "component",
+  "visibility": "internal",
+  "name": "Military background details",
   "description": "Background details for military NPCs",
+  "entrySchema": {
+    "type": "fields",
+    "required": ["Appearance", "Backstory", "Goals"]
+  },
   "entries": [
     {
+      "id": "disciplined-posture-regulation-equipment-and-boots-maintained",
       "fields": {
         "Appearance": "Disciplined posture, regulation equipment, and boots maintained despite constant use.",
         "Backstory": "A career soldier earned respect by keeping a unit together through a disastrous retreat.",
@@ -10,6 +19,7 @@
       }
     },
     {
+      "id": "alert-and-broad-shouldered-wearing-a-guard-uniform-altered",
       "fields": {
         "Appearance": "Alert and broad-shouldered, wearing a guard uniform altered for comfort rather than ceremony.",
         "Backstory": "A city guard learned every alley in the district while mediating disputes others dismissed as trivial.",
@@ -17,6 +27,7 @@
       }
     },
     {
+      "id": "immaculate-uniform-controlled-gestures-and-a-visible-scar",
       "fields": {
         "Appearance": "Immaculate uniform, controlled gestures, and a visible scar acquired before promotion.",
         "Backstory": "A junior officer rose through merit but now serves nobles who value appearances over readiness.",
@@ -24,6 +35,7 @@
       }
     },
     {
+      "id": "weathered-plainly-dressed-and-still-carrying-one-carefully",
       "fields": {
         "Appearance": "Weathered, plainly dressed, and still carrying one carefully preserved piece of old kit.",
         "Backstory": "A veteran retired after several campaigns only to find the promised land grant occupied by another family.",
@@ -31,6 +43,7 @@
       }
     },
     {
+      "id": "lean-and-practical-with-measuring-tools-rope-and",
       "fields": {
         "Appearance": "Lean and practical, with measuring tools, rope, and charcoal stains across both hands.",
         "Backstory": "A military engineer survived a siege by improvising defenses from ruined civilian buildings.",

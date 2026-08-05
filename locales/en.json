@@ -142,17 +142,17 @@
       "categoryOption": "Generator category",
       "unknownCategory": "Unknown generator category: **{{category}}**. Use `/help command:gen` for command details.",
       "title": "Generated {{category}}",
-      "behavior": "Selects one weighted random entry from the chosen localized generator category. Every JSON generator file becomes available after the bot restarts. The complete localized category list appears above; type part of a category name or value to filter autocomplete."
+      "behavior": "Selects one weighted random entry from the chosen localized public generator. Public schema-v2 generators become available after /reload or a bot restart; internal workflow components remain hidden. The complete localized public list appears above; type part of a generator name or ID to filter autocomplete."
     },
     "genChar": {
       "description": "Generate a random character (configured DM role or server owner)",
       "schemaDescription": "Generate and save a complete random character",
       "keyOption": "Unique save key, make it short and remember it.",
       "levelOption": "Character level; omitted means a random level from 1 to 10",
-      "backgroundOption": "NPC background category; omitted means a random background",
+      "backgroundOption": "Character background; omitted means a random background",
       "levelChoice": "Level {{level}}",
       "success": "Generated character **{{name}}** with key `{{key}}`.",
-      "behavior": "Creates and saves a complete random character under a unique CharacterKey. Level must be 1–10 and is random when omitted; background is also optional and random by default. Statistics, resources, RULEs, armor, weapons, inventory, gold, and possible status effects are generated from the selected level and the game rules."
+      "behavior": "Creates and saves a complete random character under a unique CharacterKey. Level must be 1–10 and is random when omitted; background is also optional and random by default. A shared statistical profile allocates statistics, while resources, RULEs, armor, weapons, inventory, gold, and possible status effects follow the selected level and game rules. Encumbrance remains manual and defaults to 0 / 0."
     },
     "get": {
       "description": "Display a character summary or one detailed field",

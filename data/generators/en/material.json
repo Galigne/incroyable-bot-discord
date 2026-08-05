@@ -1,124 +1,161 @@
 {
+  "schemaVersion": 2,
+  "id": "material",
+  "kind": "category",
+  "visibility": "public",
   "name": "material",
   "description": "Natural, crafted, precious, and magical materials",
+  "entrySchema": {
+    "type": "text"
+  },
   "entries": [
     {
+      "id": "iron",
       "weight": 5,
       "value": "Iron — common strong metal used for tools, weapons, fittings, and armor."
     },
     {
+      "id": "copper",
       "weight": 5,
       "value": "Copper — workable reddish metal valued for vessels, wiring, coins, and alloys."
     },
     {
+      "id": "oak",
       "weight": 5,
       "value": "Oak — dense durable timber used in buildings, shields, barrels, and ships."
     },
     {
+      "id": "limestone",
       "weight": 5,
       "value": "Limestone — pale workable stone common in walls, sculpture, mortar, and caves."
     },
     {
+      "id": "bronze",
       "weight": 4,
       "value": "Bronze — corrosion-resistant copper alloy used for arms, bells, statues, and mechanisms."
     },
     {
+      "id": "steel",
       "weight": 4,
       "value": "Steel — refined iron alloy providing reliable strength and a durable cutting edge."
     },
     {
+      "id": "silver",
       "weight": 4,
       "value": "Silver — precious bright metal associated with currency, mirrors, ritual objects, and certain monsters."
     },
     {
+      "id": "leather",
       "weight": 4,
       "value": "Leather — flexible treated hide used for clothing, armor, containers, straps, and books."
     },
     {
+      "id": "granite",
       "weight": 4,
       "value": "Granite — extremely hard speckled stone suited to monuments, fortifications, and millstones."
     },
     {
+      "id": "gold",
       "weight": 3,
       "value": "Gold — soft precious metal prized for wealth, ornament, ritual purity, and magical conductance."
     },
     {
+      "id": "marble",
       "weight": 3,
       "value": "Marble — decorative stone used in wealthy architecture, sculpture, floors, and tombs."
     },
     {
+      "id": "obsidian",
       "weight": 3,
       "value": "Obsidian — volcanic glass capable of an exceptionally sharp but brittle edge."
     },
     {
+      "id": "jade",
       "weight": 3,
       "value": "Jade — tough ornamental stone associated with status, seals, medicine, and protective charms."
     },
     {
+      "id": "quartz",
       "weight": 3,
       "value": "Quartz — abundant crystal used in lenses, timepieces, decoration, and basic magical focuses."
     },
     {
+      "id": "amber",
       "weight": 3,
       "value": "Amber — fossilized resin preserving insects, scents, static charge, and sometimes memories."
     },
     {
+      "id": "pearl",
       "weight": 3,
       "value": "Pearl — organic gemstone valued in jewelry, diplomacy, water rites, and medicines."
     },
     {
+      "id": "amethyst",
       "weight": 2,
       "value": "Amethyst — purple quartz associated with clarity, sobriety, dreams, and spiritual protection."
     },
     {
+      "id": "ruby",
       "weight": 2,
       "value": "Ruby — hard red gemstone associated with passion, blood, fire, and royal authority."
     },
     {
+      "id": "sapphire",
       "weight": 2,
       "value": "Sapphire — hard blue gemstone associated with truth, sky, water, and disciplined magic."
     },
     {
+      "id": "emerald",
       "weight": 2,
       "value": "Emerald — green gemstone associated with growth, poison, prophecy, and enduring bonds."
     },
     {
+      "id": "diamond",
       "weight": 2,
       "value": "Diamond — exceptionally hard clear crystal used for cutting, status, and durable enchantments."
     },
     {
+      "id": "meteoric-iron",
       "weight": 2,
       "value": "Meteoric Iron — rare sky-fallen metal carrying unusual patterns and resistance to magic."
     },
     {
+      "id": "dragonbone",
       "weight": 2,
       "value": "Dragonbone — light resilient bone retaining traces of the creature's elemental nature."
     },
     {
+      "id": "spider-silk",
       "weight": 2,
       "value": "Spider Silk — extremely strong light fiber used in rope, clothing, sutures, and traps."
     },
     {
+      "id": "mithral",
       "weight": 1,
       "value": "Mithral — rare silvery metal combining exceptional strength with very low weight."
     },
     {
+      "id": "adamant",
       "weight": 1,
       "value": "Adamant — nearly unbreakable dark alloy requiring extraordinary heat and tools to shape."
     },
     {
+      "id": "sunstone",
       "weight": 1,
       "value": "Sunstone — warm translucent crystal that stores daylight and weakens creatures of darkness."
     },
     {
+      "id": "voidglass",
       "weight": 1,
       "value": "Voidglass — cold black glass that absorbs light, sound, and small amounts of magical energy."
     },
     {
+      "id": "living-wood",
       "weight": 1,
       "value": "Living Wood — harvested without killing its tree and capable of slowly repairing shaped objects."
     },
     {
+      "id": "aether-crystal",
       "weight": 1,
       "value": "Aether Crystal — unstable mineral that amplifies spells while accumulating dangerous resonance."
     }

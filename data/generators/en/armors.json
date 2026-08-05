@@ -1,8 +1,25 @@
 {
+  "schemaVersion": 2,
+  "id": "armors",
+  "kind": "category",
+  "visibility": "public",
   "name": "armors",
   "description": "Every armor type and rarity combination",
+  "entrySchema": {
+    "type": "fields",
+    "required": [
+      "Name",
+      "Type",
+      "Rarity",
+      "Description",
+      "Constitution requirement",
+      "AR percentage"
+    ],
+    "technical": ["Type", "Rarity", "Constitution requirement", "AR percentage"]
+  },
   "entries": [
     {
+      "id": "common-light-armor",
       "weight": 8,
       "fields": {
         "Name": "Common light armor",
@@ -14,6 +31,7 @@
       }
     },
     {
+      "id": "uncommon-light-armor",
       "weight": 5,
       "fields": {
         "Name": "Uncommon light armor",
@@ -25,6 +43,7 @@
       }
     },
     {
+      "id": "rare-light-armor",
       "weight": 3,
       "fields": {
         "Name": "Rare light armor",
@@ -36,6 +55,7 @@
       }
     },
     {
+      "id": "epic-light-armor",
       "weight": 2,
       "fields": {
         "Name": "Epic light armor",
@@ -47,6 +67,7 @@
       }
     },
     {
+      "id": "legendary-light-armor",
       "fields": {
         "Name": "Legendary light armor",
         "Type": "light",
@@ -57,6 +78,7 @@
       }
     },
     {
+      "id": "common-medium-armor",
       "weight": 8,
       "fields": {
         "Name": "Common medium armor",
@@ -68,6 +90,7 @@
       }
     },
     {
+      "id": "uncommon-medium-armor",
       "weight": 5,
       "fields": {
         "Name": "Uncommon medium armor",
@@ -79,6 +102,7 @@
       }
     },
     {
+      "id": "rare-medium-armor",
       "weight": 3,
       "fields": {
         "Name": "Rare medium armor",
@@ -90,6 +114,7 @@
       }
     },
     {
+      "id": "epic-medium-armor",
       "weight": 2,
       "fields": {
         "Name": "Epic medium armor",
@@ -101,6 +126,7 @@
       }
     },
     {
+      "id": "legendary-medium-armor",
       "fields": {
         "Name": "Legendary medium armor",
         "Type": "medium",
@@ -111,6 +137,7 @@
       }
     },
     {
+      "id": "common-heavy-armor",
       "weight": 8,
       "fields": {
         "Name": "Common heavy armor",
@@ -122,6 +149,7 @@
       }
     },
     {
+      "id": "uncommon-heavy-armor",
       "weight": 5,
       "fields": {
         "Name": "Uncommon heavy armor",
@@ -133,6 +161,7 @@
       }
     },
     {
+      "id": "rare-heavy-armor",
       "weight": 3,
       "fields": {
         "Name": "Rare heavy armor",
@@ -144,6 +173,7 @@
       }
     },
     {
+      "id": "epic-heavy-armor",
       "weight": 2,
       "fields": {
         "Name": "Epic heavy armor",
@@ -155,6 +185,7 @@
       }
     },
     {
+      "id": "legendary-heavy-armor",
       "fields": {
         "Name": "Legendary heavy armor",
         "Type": "heavy",

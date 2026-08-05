@@ -1,108 +1,141 @@
 {
+  "schemaVersion": 2,
+  "id": "room",
+  "kind": "category",
+  "visibility": "public",
   "name": "Pièces",
   "description": "Pièces et espaces intérieurs de bâtiments ou de donjons",
+  "entrySchema": {
+    "type": "text"
+  },
   "entries": [
     {
+      "id": "bedroom",
       "weight": 4,
       "value": "Chambre — lit, coffre, nécessaire de toilette, souvenirs personnels et traces de la dernière activité de l’occupant."
     },
     {
+      "id": "living-room",
       "weight": 4,
       "value": "Salle commune — sièges usés autour d’un foyer, objets familiaux et lettre dissimulée."
     },
     {
+      "id": "kitchen",
       "weight": 4,
       "value": "Cuisine — plans de travail, fours, couteaux, provisions et plat récemment laissé sur le feu."
     },
     {
+      "id": "dining-hall",
       "weight": 4,
       "value": "Salle à manger — longues tables, portes de service, décorations fanées et places attribuées selon le rang."
     },
     {
+      "id": "toilet",
       "weight": 3,
       "value": "Toilettes — installations rudimentaires, conduit étroit, produits d’entretien et graffitis des précédents utilisateurs."
     },
     {
+      "id": "pantry",
       "weight": 3,
       "value": "Garde-manger — rayonnages de conserves et mur qui sonne creux lorsqu’on le frappe."
     },
     {
+      "id": "storeroom",
       "weight": 3,
       "value": "Réserve — caisses étiquetées, mobilier de rechange, poussière et objet qui n’a manifestement rien à faire ici."
     },
     {
+      "id": "office",
       "weight": 3,
       "value": "Bureau — table de travail, correspondance, livres de comptes, tiroirs fermés à clé et calendrier de rendez-vous."
     },
     {
+      "id": "workshop",
       "weight": 3,
       "value": "Atelier — outils spécialisés, ouvrage inachevé, chutes de matériaux et appareil dangereux toujours en marche."
     },
     {
+      "id": "guardroom",
       "weight": 3,
       "value": "Salle des gardes — râteliers d’armes, tableau de service, cartes, repas à moitié terminés et mécanisme d’alarme."
     },
     {
+      "id": "cell",
       "weight": 3,
       "value": "Cellule — entraves, messages gravés, eau croupie et traces d’une évasion impossible."
     },
     {
+      "id": "library",
       "weight": 2,
       "value": "Bibliothèque — rayonnages surchargés, pupitres de lecture, échelles, catalogues et livre volontairement rangé au mauvais endroit."
     },
     {
+      "id": "laboratory",
       "weight": 2,
       "value": "Laboratoire — paillasses tachées, instruments fragiles, échantillons scellés et expérience toujours en cours."
     },
     {
+      "id": "armory",
       "weight": 2,
       "value": "Armurerie — armes entretenues, supports d’armure, registres de distribution et plusieurs emplacements ostensiblement vides."
     },
     {
+      "id": "infirmary",
       "weight": 2,
       "value": "Infirmerie — lits étroits, instruments médicaux, armoires à remèdes et notes sur les patients rédigées en code."
     },
     {
+      "id": "chapel",
       "weight": 2,
       "value": "Chapelle — bancs, images sacrées, offrandes et petit passage menant à un confessionnal privé."
     },
     {
+      "id": "bathing-room",
       "weight": 2,
       "value": "Salle des bains — bassin chauffé, évacuations, serviettes, paravents et accès aux tunnels d’entretien."
     },
     {
+      "id": "nursery",
       "weight": 2,
       "value": "Chambre d’enfants — petits lits, jouets, tableaux d’étude et symboles protecteurs peints sous les meubles."
     },
     {
+      "id": "ballroom",
       "weight": 2,
       "value": "Salle de bal — parquet lustré, galerie des musiciens, lustres et balcons conçus pour observer les invités."
     },
     {
+      "id": "map-room",
       "weight": 2,
       "value": "Salle des cartes — cartes murales, instruments d’arpentage, marqueurs de campagne et région volontairement effacée."
     },
     {
+      "id": "treasury",
       "weight": 2,
       "value": "Trésorerie — objets de valeur inventoriés, coffres scellés, titres de propriété et plusieurs niveaux de sécurité."
     },
     {
+      "id": "secret-passage",
       "weight": 1,
       "value": "Passage secret — conduit exigu percé de judas, marqué d’anciennes empreintes et muni d’un mécanisme qui s’ouvre ailleurs."
     },
     {
+      "id": "ritual-chamber",
       "weight": 1,
       "value": "Chambre rituelle — motifs géométriques, entraves, offrandes consumées et pression surnaturelle persistante."
     },
     {
+      "id": "portal-room",
       "weight": 1,
       "value": "Salle du portail — chambre renforcée organisée autour d’une porte inactive et de commandes d’arrêt d’urgence."
     },
     {
+      "id": "trophy-gallery",
       "weight": 1,
       "value": "Galerie des trophées — bêtes naturalisées, bannières prises à l’ennemi, armes célèbres et pièce exposée encore vivante."
     },
     {
+      "id": "interrogation-room",
       "weight": 1,
       "value": "Salle d’interrogatoire — chaise fixée au sol, murs insonorisés, rigole d’évacuation et liste de questions méticuleusement ordonnée."
     }

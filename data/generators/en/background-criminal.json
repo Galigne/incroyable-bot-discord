@@ -1,8 +1,17 @@
 {
-  "name": "criminalBackground",
+  "schemaVersion": 2,
+  "id": "background-criminal",
+  "kind": "component",
+  "visibility": "internal",
+  "name": "Criminal background details",
   "description": "Appearances, histories, and goals for criminal NPCs",
+  "entrySchema": {
+    "type": "fields",
+    "required": ["Appearance", "Backstory", "Goals"]
+  },
   "entries": [
     {
+      "id": "unremarkable-clothing-forgettable-features-and-hands-kept",
       "fields": {
         "Appearance": "Unremarkable clothing, forgettable features, and hands kept carefully out of sight.",
         "Backstory": "Learned pickpocketing as a hungry child and became too useful for the gang to release.",
@@ -10,6 +19,7 @@
       }
     },
     {
+      "id": "expensively-dressed-but-tense-with-polished-manners-and",
       "fields": {
         "Appearance": "Expensively dressed but tense, with polished manners and a recently broken nose.",
         "Backstory": "A legitimate merchant began smuggling when impossible taxes threatened the business.",
@@ -17,6 +27,7 @@
       }
     },
     {
+      "id": "lean-scarred-and-dressed-for-rapid-movement-with",
       "fields": {
         "Appearance": "Lean, scarred, and dressed for rapid movement with no visible identifying marks.",
         "Backstory": "Deserted an abusive military unit and survived by robbing officials along remote roads.",
@@ -24,6 +35,7 @@
       }
     },
     {
+      "id": "friendly-face-theatrical-smile-and-fashionable-clothes-supported",
       "fields": {
         "Appearance": "Friendly face, theatrical smile, and fashionable clothes supported by hidden armor.",
         "Backstory": "Built a confidence scheme around false inheritances and accidentally uncovered a real conspiracy.",
@@ -31,6 +43,7 @@
       }
     },
     {
+      "id": "heavy-set-carefully-tattooed-and-outwardly-relaxed-while",
       "fields": {
         "Appearance": "Heavy-set, carefully tattooed, and outwardly relaxed while constantly watching exits.",
         "Backstory": "Began as a dock enforcer and inherited leadership after every superior was arrested.",
@@ -38,6 +51,7 @@
       }
     },
     {
+      "id": "pale-from-indoor-work-with-precise-fingers-and",
       "fields": {
         "Appearance": "Pale from indoor work, with precise fingers and permanent traces of ink and metal dust.",
         "Backstory": "A gifted artisan was imprisoned for forging documents requested by a noble patron.",
@@ -45,6 +59,7 @@
       }
     },
     {
+      "id": "travel-stained-charming-and-equipped-with-several-knives-used",
       "fields": {
         "Appearance": "Travel-stained, charming, and equipped with several knives used mostly as tools.",
         "Backstory": "Joined bandits after losing land to debt collectors and became their reluctant negotiator.",
@@ -52,6 +67,7 @@
       }
     },
     {
+      "id": "severe-posture-official-clothing-and-a-signet-worn",
       "fields": {
         "Appearance": "Severe posture, official clothing, and a signet worn as though it were a weapon.",
         "Backstory": "A minor magistrate discovered bribery was safer and more profitable than honest enforcement.",
@@ -59,6 +75,7 @@
       }
     },
     {
+      "id": "elegant-soft-voiced-and-protected-by-gloves-regardless-of",
       "fields": {
         "Appearance": "Elegant, soft-voiced, and protected by gloves regardless of the weather.",
         "Backstory": "Trained as an apothecary before secretly supplying poisons and antidotes to competing clients.",
@@ -66,6 +83,7 @@
       }
     },
     {
+      "id": "young-restless-and-visibly-trying-to-imitate-a",
       "fields": {
         "Appearance": "Young, restless, and visibly trying to imitate a feared criminal reputation.",
         "Backstory": "Committed one reckless robbery and received credit for a string of crimes performed by someone else.",
@@ -73,6 +91,7 @@
       }
     },
     {
+      "id": "weather-beaten-sailor-with-ritual-scars-practical-jewelry-and",
       "fields": {
         "Appearance": "Weather-beaten sailor with ritual scars, practical jewelry, and an easy laugh.",
         "Backstory": "Turned pirate after a merchant captain abandoned half the crew during a storm.",
@@ -80,6 +99,7 @@
       }
     },
     {
+      "id": "quiet-and-meticulously-clean-with-an-old-burn",
       "fields": {
         "Appearance": "Quiet and meticulously clean, with an old burn hidden beneath the collar.",
         "Backstory": "Was raised inside an assassins' order and failed the first assignment intentionally.",

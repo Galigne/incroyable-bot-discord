@@ -1,96 +1,41 @@
 const fs = require('node:fs');
 const path = require('node:path');
+const { validateGeneratorPair } = require('./generatorSchema');
+const { selectWeightedEntry } = require('./weightedSelector');
 
 const generatorsDirectory = path.join(__dirname, '..', 'data', 'generators');
-const cachedGenerators = new Map();
 const DEFAULT_LOCALE = 'en';
 const SUPPORTED_LOCALES = new Set(['en', 'fr']);
+const VISIBILITY_FILTERS = new Set(['all', 'internal', 'public']);
+let cachedCatalog = null;
 
-function loadGenerators(locale = DEFAULT_LOCALE) {
-	const normalizedLocale = normalizeGeneratorLocale(locale);
-	if (cachedGenerators.has(normalizedLocale)) {
-		return cachedGenerators.get(normalizedLocale);
+function getGenerator(id, locale = DEFAULT_LOCALE) {
+	if (typeof id !== 'string') {
+		return undefined;
 	}
+	return loadGeneratorCatalog().get(normalizeGeneratorLocale(locale)).get(id);
+}
 
-	const englishDirectory = path.join(generatorsDirectory, DEFAULT_LOCALE);
-	const localizedDirectory = path.join(generatorsDirectory, normalizedLocale);
-	const generators = new Map();
-	const files = fs.readdirSync(englishDirectory)
-		.filter(file => file.endsWith('.json'))
-		.sort();
-
-	for (const file of files) {
-		const englishPath = path.join(englishDirectory, file);
-		const localizedPath = path.join(localizedDirectory, file);
-		const englishGenerator = readGenerator(englishPath, file);
-		const selectedPath = selectLocalizedGeneratorPath(
-			englishPath,
-			localizedPath,
-			normalizedLocale,
-		);
-		const localizedGenerator = selectedPath === englishPath
-			? englishGenerator
-			: readGenerator(selectedPath, file);
-		const id = englishGenerator.name;
-		const key = normalizeCategoryName(id);
-
-		if (generators.has(key)) {
-			throw new Error(`Duplicate generator category: ${id}`);
-		}
-		generators.set(key, Object.freeze({
-			...localizedGenerator,
-			id,
-			key,
-			locale: normalizedLocale,
-			entries: Object.freeze(localizedGenerator.entries.map(freezeEntry)),
-		}));
+function listGenerators(locale = DEFAULT_LOCALE, options = {}) {
+	const visibility = options.visibility ?? 'public';
+	if (!VISIBILITY_FILTERS.has(visibility)) {
+		throw new TypeError(`Unsupported generator visibility filter: ${visibility}.`);
 	}
-
-	if (generators.size === 0) {
-		throw new Error('No generator categories were found.');
-	}
-
-	cachedGenerators.set(normalizedLocale, generators);
-	return generators;
-}
-
-function clearGeneratorCache() {
-	cachedGenerators.clear();
-}
-
-function normalizeGeneratorLocale(locale) {
-	return SUPPORTED_LOCALES.has(locale) ? locale : DEFAULT_LOCALE;
-}
-
-function readGenerator(filePath, file) {
-	const generator = JSON.parse(fs.readFileSync(filePath, 'utf8'));
-	validateCategory(generator, file);
-	return generator;
-}
-
-function selectLocalizedGeneratorPath(englishPath, localizedPath, locale) {
-	return locale !== DEFAULT_LOCALE && fs.existsSync(localizedPath)
-		? localizedPath
-		: englishPath;
-}
-
-function listGenerators(locale = DEFAULT_LOCALE) {
-	return [...loadGenerators(locale).values()]
+	return [
+		...loadGeneratorCatalog().get(normalizeGeneratorLocale(locale)).values(),
+	]
+		.filter(generator => (
+			visibility === 'all' || generator.visibility === visibility
+		))
 		.sort((left, right) => left.name.localeCompare(right.name, locale));
 }
 
-function getGenerator(id, locale = DEFAULT_LOCALE) {
-	return loadGenerators(locale).get(normalizeCategoryName(id));
-}
-
 function generate(id, locale = DEFAULT_LOCALE, random = Math.random) {
-	// Preserve the former generate(id, random) form for service callers.
-	if (typeof locale === 'function') {
-		random = locale;
-		locale = DEFAULT_LOCALE;
+	if (typeof locale !== 'string') {
+		throw new TypeError('Generator locale must be provided before the random function.');
 	}
 	const generator = getGenerator(id, locale);
-	if (!generator) {
+	if (!generator || generator.visibility !== 'public') {
 		return null;
 	}
 	return {
@@ -99,146 +44,143 @@ function generate(id, locale = DEFAULT_LOCALE, random = Math.random) {
 	};
 }
 
-function selectWeightedEntry(entries, random = Math.random) {
-	const totalWeight = entries.reduce(
-		(total, entry) => total + getEntryWeight(entry),
-		0,
-	);
-	const randomValue = Math.max(0, Math.min(0.9999999999999999, random()));
-	let target = randomValue * totalWeight;
-
-	for (const entry of entries) {
-		target -= getEntryWeight(entry);
-		if (target < 0) {
-			return entry;
-		}
-	}
-	return entries.at(-1);
+function clearGeneratorCache() {
+	cachedCatalog = null;
 }
 
-function getEntryWeight(entry) {
-	return typeof entry === 'string' ? 1 : entry.weight ?? 1;
+function reloadGeneratorCatalog() {
+	return replaceGeneratorCatalog(createGeneratorCatalogCandidate());
 }
 
-function normalizeCategoryName(name = '') {
-	const normalizedName = name.trim().toLowerCase().replace(/[\s_-]+/g, '');
-	if (normalizedName.endsWith('ies')) {
-		return `${normalizedName.slice(0, -3)}y`;
-	}
-	return normalizedName.replace(/s$/, '');
+function createGeneratorCatalogCandidate(rootDirectory = generatorsDirectory) {
+	return readGeneratorCatalog(rootDirectory);
 }
 
-function validateCategory(category, file) {
-	if (
-		typeof category?.name !== 'string'
-		|| !category.name.trim()
-		|| typeof category.description !== 'string'
-		|| !category.description.trim()
-		|| !Array.isArray(category.entries)
-		|| category.entries.length === 0
-	) {
-		throw new Error(`Invalid generator category file: ${file}`);
-	}
-
-	category.entries.forEach((entry, index) => validateEntry(entry, file, index));
-	const totalWeight = category.entries.reduce(
-		(total, entry) => total + getEntryWeight(entry),
-		0,
-	);
-	if (!Number.isFinite(totalWeight)) {
-		throw new Error(`Generator weights are too large in ${file}.`);
-	}
+function replaceGeneratorCatalog(catalog) {
+	cachedCatalog = catalog;
+	return catalog;
 }
 
-function validateEntry(entry, file, index) {
-	if (typeof entry === 'string') {
-		if (!entry.trim() || entry.length > 4_096) {
-			throw new Error(`Invalid generator entry ${index + 1} in ${file}.`);
-		}
-		return;
+function loadGeneratorCatalog() {
+	if (!cachedCatalog) {
+		cachedCatalog = readGeneratorCatalog(generatorsDirectory);
 	}
+	return cachedCatalog;
+}
 
-	if (!entry || typeof entry !== 'object' || Array.isArray(entry)) {
-		throw new Error(`Invalid generator entry ${index + 1} in ${file}.`);
-	}
-
-	const allowedKeys = new Set(['fields', 'value', 'weight']);
-	if (Object.keys(entry).some(key => !allowedKeys.has(key))) {
-		throw new Error(
-			`Generator entry ${index + 1} in ${file} may only contain fields and weight.`,
+function readGeneratorCatalog(rootDirectory) {
+	const englishDirectory = path.join(rootDirectory, 'en');
+	const frenchDirectory = path.join(rootDirectory, 'fr');
+	const englishFiles = listJsonFiles(englishDirectory);
+	const frenchFiles = listJsonFiles(frenchDirectory);
+	if (JSON.stringify(englishFiles) !== JSON.stringify(frenchFiles)) {
+		throw generatorCatalogError(
+			'GENERATOR_LOCALE_FILE_MISMATCH',
+			'English and French generator directories must contain the same JSON files.',
 		);
 	}
-	if (
-		entry.weight !== undefined
-		&& (!Number.isFinite(entry.weight) || entry.weight <= 0)
-	) {
-		throw new Error(
-			`Generator entry ${index + 1} in ${file} has an invalid weight.`,
-		);
-	}
-	const hasFields = entry.fields !== undefined;
-	const hasValue = entry.value !== undefined;
-	if (hasFields === hasValue) {
-		throw new Error(
-			`Generator entry ${index + 1} in ${file} must have either value or fields.`,
-		);
-	}
-	if (hasValue) {
-		if (
-			typeof entry.value !== 'string'
-			|| !entry.value.trim()
-			|| entry.value.length > 4_096
-		) {
-			throw new Error(`Generator entry ${index + 1} in ${file} has an invalid value.`);
-		}
-		return;
-	}
-	if (
-		!entry.fields
-		|| typeof entry.fields !== 'object'
-		|| Array.isArray(entry.fields)
-		|| Object.keys(entry.fields).length === 0
-		|| Object.keys(entry.fields).length > 25
-	) {
-		throw new Error(
-			`Generator entry ${index + 1} in ${file} must have 1 to 25 fields.`,
+	if (englishFiles.length === 0) {
+		throw generatorCatalogError(
+			'NO_GENERATORS',
+			'No generator definitions were found.',
 		);
 	}
 
-	for (const [label, value] of Object.entries(entry.fields)) {
-		if (
-			!label.trim()
-			|| label.length > 256
-			|| !['string', 'number', 'boolean'].includes(typeof value)
-			|| !String(value).trim()
-			|| String(value).length > 1_024
-		) {
-			throw new Error(
-				`Generator entry ${index + 1} in ${file} has an invalid field.`,
+	const catalogs = new Map([
+		['en', new Map()],
+		['fr', new Map()],
+	]);
+	for (const relativePath of englishFiles) {
+		const english = readGenerator(
+			path.join(englishDirectory, relativePath),
+			`en/${relativePath}`,
+		);
+		const french = readGenerator(
+			path.join(frenchDirectory, relativePath),
+			`fr/${relativePath}`,
+		);
+		validateGeneratorPair(english, french, relativePath);
+		if (catalogs.get('en').has(english.id)) {
+			throw generatorCatalogError(
+				'DUPLICATE_GENERATOR_ID',
+				`Duplicate generator ID: ${english.id}.`,
 			);
 		}
+		catalogs.get('en').set(english.id, freezeGenerator(english, 'en'));
+		catalogs.get('fr').set(french.id, freezeGenerator(french, 'fr'));
 	}
+	return catalogs;
+}
+
+function listJsonFiles(directory, relativeDirectory = '') {
+	const files = [];
+	for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
+		const relativePath = path.join(relativeDirectory, entry.name);
+		const absolutePath = path.join(directory, entry.name);
+		if (entry.isDirectory()) {
+			files.push(...listJsonFiles(absolutePath, relativePath));
+		}
+		else if (entry.isFile() && entry.name.endsWith('.json')) {
+			files.push(relativePath);
+		}
+	}
+	return files.sort();
+}
+
+function readGenerator(filePath, displayPath) {
+	try {
+		return JSON.parse(fs.readFileSync(filePath, 'utf8'));
+	}
+	catch (error) {
+		throw generatorCatalogError(
+			'INVALID_GENERATOR_JSON',
+			`Unable to read generator ${displayPath}: ${error.message}`,
+		);
+	}
+}
+
+function freezeGenerator(generator, locale) {
+	const entrySchema = Object.freeze({
+		...generator.entrySchema,
+		...(generator.entrySchema.required
+			? { required: Object.freeze([...generator.entrySchema.required]) }
+			: {}),
+		...(generator.entrySchema.technical
+			? { technical: Object.freeze([...generator.entrySchema.technical]) }
+			: {}),
+	});
+	return Object.freeze({
+		...generator,
+		locale,
+		entrySchema,
+		entries: Object.freeze(generator.entries.map(freezeEntry)),
+	});
 }
 
 function freezeEntry(entry) {
-	if (typeof entry === 'string') {
-		return entry;
-	}
 	return Object.freeze({
 		...entry,
 		...(entry.fields ? { fields: Object.freeze({ ...entry.fields }) } : {}),
 	});
 }
 
+function normalizeGeneratorLocale(locale) {
+	return SUPPORTED_LOCALES.has(locale) ? locale : DEFAULT_LOCALE;
+}
+
+function generatorCatalogError(code, message) {
+	const error = new Error(message);
+	error.name = 'GeneratorCatalogError';
+	error.code = code;
+	return error;
+}
+
 module.exports = {
 	clearGeneratorCache,
+	createGeneratorCatalogCandidate,
 	generate,
-	getEntryWeight,
 	getGenerator,
-	getCategory: getGenerator,
 	listGenerators,
-	listCategories: listGenerators,
-	normalizeCategoryName,
-	selectLocalizedGeneratorPath,
-	selectWeightedEntry,
+	reloadGeneratorCatalog,
+	replaceGeneratorCatalog,
 };

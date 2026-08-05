@@ -1,100 +1,131 @@
 {
+  "schemaVersion": 2,
+  "id": "building",
+  "kind": "category",
+  "visibility": "public",
   "name": "building",
   "description": "Urban and rural buildings with an immediate point of interest",
+  "entrySchema": {
+    "type": "text"
+  },
   "entries": [
     {
+      "id": "roadside-inn",
       "weight": 4,
       "value": "Roadside Inn — clean beds, guarded stables, and a common room where couriers exchange news."
     },
     {
+      "id": "crowded-tavern",
       "weight": 4,
       "value": "Crowded Tavern — cheap food, loud music, private booths, and regular fights over local politics."
     },
     {
+      "id": "town-house",
       "weight": 4,
       "value": "Town House — a narrow multi-story home with a workshop below and family rooms above."
     },
     {
+      "id": "farmstead",
       "weight": 3,
       "value": "Farmstead — a sturdy house, barns, sheds, fenced animals, and signs of a recent disturbance."
     },
     {
+      "id": "blacksmith",
       "weight": 3,
       "value": "Blacksmith — a hot stone workshop taking commissions while quietly repairing forbidden weapons."
     },
     {
+      "id": "general-store",
       "weight": 3,
       "value": "General Store — shelves of practical supplies and a locked cabinet of unusual trade-ins."
     },
     {
+      "id": "public-bathhouse",
       "weight": 3,
       "value": "Public Bathhouse — tiled pools, rented lockers, gossiping attendants, and discreet meeting rooms."
     },
     {
+      "id": "brothel",
       "weight": 3,
       "value": "Brothel — a guarded, professionally run house offering companionship, information, and strict privacy."
     },
     {
+      "id": "temple",
       "weight": 3,
       "value": "Temple — a public sanctuary with an altar, charitable kitchen, archives, and restricted crypt."
     },
     {
+      "id": "guardhouse",
       "weight": 3,
       "value": "Guardhouse — cells, an armory, duty records, and exhausted officers changing shifts."
     },
     {
+      "id": "apothecary",
       "weight": 2,
       "value": "Apothecary — fragrant shelves of remedies, poisons, preserved creatures, and mislabeled experiments."
     },
     {
+      "id": "guildhall",
       "weight": 2,
       "value": "Guildhall — offices, training spaces, a contract board, and a members-only meeting chamber."
     },
     {
+      "id": "warehouse",
       "weight": 2,
       "value": "Warehouse — stacked cargo, overhead walkways, night watchmen, and one shipment missing from the ledger."
     },
     {
+      "id": "theater",
       "weight": 2,
       "value": "Theater — ornate public seating, cramped backstage passages, workshops, and hidden royal boxes."
     },
     {
+      "id": "schoolhouse",
       "weight": 2,
       "value": "Schoolhouse — a single crowded classroom whose teacher knows every family secret in the district."
     },
     {
+      "id": "bank",
       "weight": 2,
       "value": "Bank — reinforced counters, private offices, document vaults, and a heavily trapped treasury."
     },
     {
+      "id": "mill",
       "weight": 2,
       "value": "Mill — a water- or wind-powered workplace surrounded by dust, noise, laborers, and moving machinery."
     },
     {
+      "id": "stable",
       "weight": 2,
       "value": "Stable — rented mounts, tack rooms, sleeping lofts, and a groom who notices every arrival."
     },
     {
+      "id": "courthouse",
       "weight": 2,
       "value": "Courthouse — public hearing chamber, evidence rooms, legal archives, and judges' private offices."
     },
     {
+      "id": "wizards-tower",
       "weight": 1,
       "value": "Wizard's Tower — an eccentric vertical residence whose rooms do not follow exterior dimensions."
     },
     {
+      "id": "embassy",
       "weight": 1,
       "value": "Embassy — a fortified noble residence operating under foreign laws and constant surveillance."
     },
     {
+      "id": "observatory",
       "weight": 1,
       "value": "Observatory — a domed hilltop laboratory tracking stars, weather, and something approaching from above."
     },
     {
+      "id": "abandoned-manor",
       "weight": 1,
       "value": "Abandoned Manor — a decaying estate left furnished after its occupants vanished during dinner."
     },
     {
+      "id": "underground-fighting-pit",
       "weight": 1,
       "value": "Underground Fighting Pit — a concealed arena with betting rooms, healers, cages, and bribed officials."
     }

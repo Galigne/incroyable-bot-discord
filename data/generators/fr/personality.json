@@ -1,116 +1,153 @@
 {
+  "schemaVersion": 2,
+  "id": "personality",
+  "kind": "category",
+  "visibility": "public",
   "name": "Personnalités",
   "description": "Traits, idéaux, manies, liens et défauts",
+  "entrySchema": {
+    "type": "text"
+  },
   "entries": [
     {
+      "id": "cheerfully-fatalistic-treats-every-disaster-as-confirmation-of",
       "weight": 2,
       "value": "Joyeusement fataliste ; voit dans chaque catastrophe la confirmation d’une prédiction que personne ne se souvient avoir entendue."
     },
     {
+      "id": "painfully-honest-but-highly-skilled-at-changing-the",
       "weight": 2,
       "value": "D’une honnêteté parfois douloureuse, mais très habile à détourner la conversation avant de révéler quoi que ce soit de personnel."
     },
     {
+      "id": "suspicious-of-all-magic-except-one-obviously-fraudulent",
       "weight": 2,
       "value": "Se méfie de toute magie, à l’exception d’une superstition manifestement frauduleuse qu’il respecte avec une dévotion absolue."
     },
     {
+      "id": "grandly-theatrical-in-public-quiet-and-observant-in",
       "weight": 2,
       "value": "Grandiloquent en public, silencieux et observateur en privé, et terrifié à l’idée de paraître ordinaire."
     },
     {
+      "id": "collects-favors-instead-of-money-and-remembers-every",
       "weight": 2,
       "value": "Préfère accumuler les services rendus plutôt que l’argent et se souvient de chaque promesse avec une précision troublante."
     },
     {
+      "id": "protective-of-underdogs-openly-rude-to-authority-and",
       "weight": 3,
       "value": "Prend systématiquement le parti des faibles, traite ouvertement l’autorité avec insolence et ne résiste jamais au plaisir de donner tort à une brute."
     },
     {
+      "id": "polite-to-enemies-and-brutally-critical-of-friends",
       "weight": 2,
       "value": "Courtois avec ses ennemis et impitoyablement critique envers ses amis, car l’honnêteté est pour lui une marque de respect."
     },
     {
+      "id": "believes-every-problem-has-a-practical-solution-even",
       "value": "Persuadé que tout problème possède une solution pratique, même face aux fantômes, aux prophéties ou au jugement divin."
     },
     {
+      "id": "compulsively-adopts-stray-animals-and-assigns-each-one",
       "value": "Recueille compulsivement les animaux errants et attribue à chacun un grade militaire."
     },
     {
+      "id": "treats-coincidences-as-sacred-messages-and-constantly-rearranges",
       "value": "Interprète les coïncidences comme des messages sacrés et bouleverse constamment ses plans pour les suivre."
     },
     {
+      "id": "generous-with-possessions-but-jealous-of-attention-especially",
       "weight": 2,
       "value": "Généreux avec ses biens mais jaloux de l’attention, surtout lorsqu’un rival raconte une meilleure histoire."
     },
     {
+      "id": "never-raises-their-voice-the-calmer-they-sound",
       "weight": 2,
       "value": "N’élève jamais la voix ; plus son ton reste calme, plus sa colère et sa dangerosité augmentent."
     },
     {
+      "id": "obsessed-with-etiquette-from-a-culture-they-only",
       "value": "Obsédé par l’étiquette d’une culture qu’il ne connaît qu’à travers un vieux livre truffé d’erreurs."
     },
     {
+      "id": "claims-to-fear-nothing-except-geese-and-refuses",
       "value": "Prétend ne rien craindre à l’exception des oies et refuse d’expliquer cette peur étrangement précise."
     },
     {
+      "id": "loyal-to-any-agreements-exact-wording-while-exploiting",
       "weight": 2,
       "value": "Respecte à la lettre tout accord, mais exploite sans remords la moindre faille dans sa formulation."
     },
     {
+      "id": "eager-to-forgive-personal-insults-but-incapable-of",
       "weight": 2,
       "value": "Pardonne volontiers les insultes qui le visent, mais ne tolère aucun tort commis envers un inconnu."
     },
     {
+      "id": "constantly-invents-impressive-former-careers-a-surprising-number",
       "value": "S’invente sans cesse d’impressionnantes carrières passées ; un nombre surprenant d’entre elles se révèlent ensuite authentiques."
     },
     {
+      "id": "treats-combat-like-a-puzzle-and-social-interaction",
       "weight": 2,
       "value": "Aborde le combat comme une énigme et les relations sociales comme une catastrophe naturelle inévitable."
     },
     {
+      "id": "wants-to-be-feared-but-automatically-comforts-anyone",
       "weight": 2,
       "value": "Veut inspirer la peur, mais réconforte instinctivement toute personne qui semble bouleversée."
     },
     {
+      "id": "keeps-meticulous-journals-yet-replaces-every-persons-name",
       "weight": 2,
       "value": "Tient des journaux méticuleux, tout en remplaçant chaque nom par un surnom de plus en plus incompréhensible."
     },
     {
+      "id": "sees-wealth-as-a-burden-and-spends-it",
       "value": "Considère la richesse comme un fardeau et la dilapide en expériences mémorables et en cadeaux absurdes."
     },
     {
+      "id": "deeply-religious-but-argues-with-their-deity-as",
       "weight": 2,
       "value": "Profondément religieux, mais se dispute avec sa divinité comme avec un membre agaçant de sa famille."
     },
     {
+      "id": "cannot-admit-ignorance-and-improvises-explanations-that-often",
       "weight": 2,
       "value": "Incapable d’avouer son ignorance, improvise des explications qui deviennent souvent, par accident, des légendes locales."
     },
     {
+      "id": "values-freedom-above-safety-but-becomes-controlling-whenever",
       "weight": 2,
       "value": "Place la liberté au-dessus de la sécurité, mais devient autoritaire dès que ses compagnons courent un véritable danger."
     },
     {
+      "id": "apologizes-to-every-defeated-enemy-and-becomes-offended",
       "weight": 2,
       "value": "Présente ses excuses à chaque ennemi vaincu et se vexe si elles sont refusées."
     },
     {
+      "id": "speaks-in-proverbs-most-of-which-are-invented",
       "value": "S’exprime en proverbes, pour la plupart inventés sur-le-champ et vaguement en rapport avec la situation."
     },
     {
+      "id": "appears-cynical-and-mercenary-but-secretly-sends-most",
       "weight": 2,
       "value": "Paraît cynique et intéressé, mais envoie secrètement l’essentiel de ses revenus pour reconstruire sa ville natale en ruine."
     },
     {
+      "id": "always-assumes-the-best-of-monsters-and-the",
       "weight": 2,
       "value": "Présume toujours le meilleur des monstres et le pire des institutions."
     },
     {
+      "id": "keeps-trophies-from-failures-rather-than-victories-and",
       "weight": 2,
       "value": "Conserve des trophées de ses échecs plutôt que de ses victoires et peut raconter la leçon associée à chacun."
     },
     {
+      "id": "desperate-to-leave-a-heroic-legacy-yet-freezes",
       "weight": 2,
       "value": "Rêve désespérément de laisser un héritage héroïque, mais perd tous ses moyens dès que quelqu’un le reconnaît en public."
     }

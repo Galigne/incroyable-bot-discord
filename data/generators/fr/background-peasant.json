@@ -1,8 +1,17 @@
 {
-  "name": "peasantBackground",
-  "description": "Détails de Background pour les PNJ paysans",
+  "schemaVersion": 2,
+  "id": "background-peasant",
+  "kind": "component",
+  "visibility": "internal",
+  "name": "Détails du background de paysan",
+  "description": "Apparences, histoires et objectifs pour les PNJ paysans",
+  "entrySchema": {
+    "type": "fields",
+    "required": ["Appearance", "Backstory", "Goals"]
+  },
   "entries": [
     {
+      "id": "sun-browned-strong-handed-and-dressed-in-patched-clothes",
       "fields": {
         "Appearance": "Peau brunie par le soleil, mains robustes et vêtements rapiécés imprégnés de l’odeur de la terre.",
         "Backstory": "Cultive les mêmes terres louées depuis l’enfance et voit le fermage augmenter après chaque bonne récolte.",
@@ -10,6 +19,7 @@
       }
     },
     {
+      "id": "lean-and-weathered-wrapped-in-wool-with-a",
       "fields": {
         "Appearance": "Mince et buriné, enveloppé de laine et muni d’une houlette polie par l’usage.",
         "Backstory": "A conduit des troupeaux pendant des années à travers des montagnes reculées et connaît des sentiers absents de toutes les cartes.",
@@ -17,6 +27,7 @@
       }
     },
     {
+      "id": "broad-backed-with-grain-dust-in-their-hair-and",
       "fields": {
         "Appearance": "Dos large, cheveux poudrés de farine et expression constamment méfiante.",
         "Backstory": "Un ouvrier du moulin a découvert que quelqu’un coupait les réserves de farine d’urgence du village.",
@@ -24,6 +35,7 @@
       }
     },
     {
+      "id": "young-mud-spattered-and-quick-moving-with-practical-clothes-and",
       "fields": {
         "Appearance": "Jeune, couvert de boue et toujours en mouvement, avec des vêtements pratiques et plusieurs outils de sa fabrication.",
         "Backstory": "Un ouvrier agricole a appris seul à réparer les machines lorsque le domaine a cessé de payer les artisans.",
@@ -31,6 +43,7 @@
       }
     },
     {
+      "id": "older-deeply-lined-and-steady-eyed-wearing-a-faded",
       "fields": {
         "Appearance": "Âgé, le visage profondément marqué et le regard ferme, portant en guise de porte-bonheur un ruban de fête délavé.",
         "Backstory": "A survécu à la famine, à la guerre et à trois propriétaires successifs, tout en devenant discrètement le médiateur respecté du hameau.",

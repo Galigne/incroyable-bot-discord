@@ -1,8 +1,25 @@
 {
+  "schemaVersion": 2,
+  "id": "armors",
+  "kind": "category",
+  "visibility": "public",
   "name": "Armures",
   "description": "Armures de chaque type et de chaque rareté",
+  "entrySchema": {
+    "type": "fields",
+    "required": [
+      "Name",
+      "Type",
+      "Rarity",
+      "Description",
+      "Constitution requirement",
+      "AR percentage"
+    ],
+    "technical": ["Type", "Rarity", "Constitution requirement", "AR percentage"]
+  },
   "entries": [
     {
+      "id": "common-light-armor",
       "weight": 8,
       "fields": {
         "Name": "Armure légère commune",
@@ -14,6 +31,7 @@
       }
     },
     {
+      "id": "uncommon-light-armor",
       "weight": 5,
       "fields": {
         "Name": "Armure légère peu commune",
@@ -25,6 +43,7 @@
       }
     },
     {
+      "id": "rare-light-armor",
       "weight": 3,
       "fields": {
         "Name": "Armure légère rare",
@@ -36,6 +55,7 @@
       }
     },
     {
+      "id": "epic-light-armor",
       "weight": 2,
       "fields": {
         "Name": "Armure légère épique",
@@ -47,6 +67,7 @@
       }
     },
     {
+      "id": "legendary-light-armor",
       "fields": {
         "Name": "Armure légère légendaire",
         "Type": "light",
@@ -57,6 +78,7 @@
       }
     },
     {
+      "id": "common-medium-armor",
       "weight": 8,
       "fields": {
         "Name": "Armure intermédiaire commune",
@@ -68,6 +90,7 @@
       }
     },
     {
+      "id": "uncommon-medium-armor",
       "weight": 5,
       "fields": {
         "Name": "Armure intermédiaire peu commune",
@@ -79,6 +102,7 @@
       }
     },
     {
+      "id": "rare-medium-armor",
       "weight": 3,
       "fields": {
         "Name": "Armure intermédiaire rare",
@@ -90,6 +114,7 @@
       }
     },
     {
+      "id": "epic-medium-armor",
       "weight": 2,
       "fields": {
         "Name": "Armure intermédiaire épique",
@@ -101,6 +126,7 @@
       }
     },
     {
+      "id": "legendary-medium-armor",
       "fields": {
         "Name": "Armure intermédiaire légendaire",
         "Type": "medium",
@@ -111,6 +137,7 @@
       }
     },
     {
+      "id": "common-heavy-armor",
       "weight": 8,
       "fields": {
         "Name": "Armure lourde commune",
@@ -122,6 +149,7 @@
       }
     },
     {
+      "id": "uncommon-heavy-armor",
       "weight": 5,
       "fields": {
         "Name": "Armure lourde peu commune",
@@ -133,6 +161,7 @@
       }
     },
     {
+      "id": "rare-heavy-armor",
       "weight": 3,
       "fields": {
         "Name": "Armure lourde rare",
@@ -144,6 +173,7 @@
       }
     },
     {
+      "id": "epic-heavy-armor",
       "weight": 2,
       "fields": {
         "Name": "Armure lourde épique",
@@ -155,6 +185,7 @@
       }
     },
     {
+      "id": "legendary-heavy-armor",
       "fields": {
         "Name": "Armure lourde légendaire",
         "Type": "heavy",

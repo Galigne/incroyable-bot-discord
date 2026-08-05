@@ -1,8 +1,17 @@
 {
+  "schemaVersion": 2,
+  "id": "race",
+  "kind": "category",
+  "visibility": "public",
   "name": "race",
   "description": "Ancestries with culture, appearance, and suggested traits",
+  "entrySchema": {
+    "type": "fields",
+    "required": ["Name", "Description", "Skill Bonus", "Physical Ability"]
+  },
   "entries": [
     {
+      "id": "human",
       "weight": 8,
       "fields": {
         "Name": "Human",
@@ -12,6 +21,7 @@
       }
     },
     {
+      "id": "elf",
       "weight": 6,
       "fields": {
         "Name": "Elf",
@@ -21,6 +31,7 @@
       }
     },
     {
+      "id": "dwarf",
       "weight": 6,
       "fields": {
         "Name": "Dwarf",
@@ -30,6 +41,7 @@
       }
     },
     {
+      "id": "orc",
       "weight": 5,
       "fields": {
         "Name": "Orc",
@@ -39,6 +51,7 @@
       }
     },
     {
+      "id": "goblin",
       "weight": 4,
       "fields": {
         "Name": "Goblin",

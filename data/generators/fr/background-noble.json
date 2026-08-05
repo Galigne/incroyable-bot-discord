@@ -1,8 +1,17 @@
 {
-  "name": "nobleBackground",
-  "description": "Détails de Background pour les PNJ nobles",
+  "schemaVersion": 2,
+  "id": "background-noble",
+  "kind": "component",
+  "visibility": "internal",
+  "name": "Détails du background de noble",
+  "description": "Apparences, histoires et objectifs pour les PNJ nobles",
+  "entrySchema": {
+    "type": "fields",
+    "required": ["Appearance", "Backstory", "Goals"]
+  },
   "entries": [
     {
+      "id": "impeccably-dressed-with-a-family-signet-and-the",
       "fields": {
         "Appearance": "Tenue irréprochable, chevalière familiale et maintien impassible acquis sous le regard constant des autres.",
         "Backstory": "Élevé comme héritier de réserve, a reçu le titre contre toute attente après une succession de drames familiaux.",
@@ -10,6 +19,7 @@
       }
     },
     {
+      "id": "fashionable-but-understated-with-sharp-eyes-and-a",
       "fields": {
         "Appearance": "À la mode sans ostentation, avec un regard perçant et un sourire travaillé pour la cour.",
         "Backstory": "Un courtisan de rang modeste a survécu en transmettant des messages entre rivaux sans jamais choisir ouvertement son camp.",
@@ -17,6 +27,7 @@
       }
     },
     {
+      "id": "young-carefully-groomed-and-visibly-uncomfortable-in-ceremonial",
       "fields": {
         "Appearance": "Jeune, parfaitement apprêté et manifestement mal à l’aise dans ses vêtements de cérémonie.",
         "Backstory": "Un héritier idéaliste, éduqué à l’étranger, est revenu découvrir que sa famille tirait profit de mauvais traitements.",
@@ -24,6 +35,7 @@
       }
     },
     {
+      "id": "weathered-for-an-aristocrat-wearing-quality-riding-clothes",
       "fields": {
         "Appearance": "Plus buriné qu’on ne l’attendrait d’un aristocrate, vêtu d’une tenue d’équitation de qualité et marqué par une ancienne cicatrice de duel.",
         "Backstory": "Un petit seigneur a défendu pendant des années un domaine frontalier isolé que la couronne avait abandonné.",
@@ -31,6 +43,7 @@
       }
     },
     {
+      "id": "elegant-silver-haired-and-supported-by-a-cane-concealing",
       "fields": {
         "Appearance": "Élégante, les cheveux argentés, s’appuyant sur une canne qui dissimule une lame étroite.",
         "Backstory": "Une aristocrate veuve a rebâti son influence à force de mariages, de services rendus et d’une mémoire irréprochable.",

@@ -1,8 +1,17 @@
 {
+  "schemaVersion": 2,
+  "id": "talents",
+  "kind": "category",
+  "visibility": "public",
   "name": "talents",
   "description": "Character talents and specialties",
+  "entrySchema": {
+    "type": "fields",
+    "required": ["Name", "Description"]
+  },
   "entries": [
     {
+      "id": "athlete",
       "weight": 3,
       "fields": {
         "Name": "Athlete",
@@ -10,6 +19,7 @@
       }
     },
     {
+      "id": "keen-eye",
       "weight": 3,
       "fields": {
         "Name": "Keen Eye",
@@ -17,6 +27,7 @@
       }
     },
     {
+      "id": "silver-tongue",
       "weight": 3,
       "fields": {
         "Name": "Silver Tongue",
@@ -24,6 +35,7 @@
       }
     },
     {
+      "id": "survivor",
       "weight": 3,
       "fields": {
         "Name": "Survivor",
@@ -31,6 +43,7 @@
       }
     },
     {
+      "id": "assassin",
       "weight": 2,
       "fields": {
         "Name": "Assassin",
@@ -38,6 +51,7 @@
       }
     },
     {
+      "id": "bodybuilder",
       "weight": 2,
       "fields": {
         "Name": "Bodybuilder",
@@ -45,6 +59,7 @@
       }
     },
     {
+      "id": "politician",
       "weight": 2,
       "fields": {
         "Name": "Politician",
@@ -52,6 +67,7 @@
       }
     },
     {
+      "id": "field-medic",
       "weight": 2,
       "fields": {
         "Name": "Field Medic",
@@ -59,6 +75,7 @@
       }
     },
     {
+      "id": "quick-draw",
       "weight": 2,
       "fields": {
         "Name": "Quick Draw",
@@ -66,6 +83,7 @@
       }
     },
     {
+      "id": "shield-expert",
       "weight": 2,
       "fields": {
         "Name": "Shield Expert",
@@ -73,6 +91,7 @@
       }
     },
     {
+      "id": "tracker",
       "weight": 2,
       "fields": {
         "Name": "Tracker",
@@ -80,6 +99,7 @@
       }
     },
     {
+      "id": "arcane-student",
       "weight": 2,
       "fields": {
         "Name": "Arcane Student",
@@ -87,6 +107,7 @@
       }
     },
     {
+      "id": "craftsperson",
       "weight": 2,
       "fields": {
         "Name": "Craftsperson",
@@ -94,6 +115,7 @@
       }
     },
     {
+      "id": "duelist",
       "weight": 2,
       "fields": {
         "Name": "Duelist",
@@ -101,6 +123,7 @@
       }
     },
     {
+      "id": "beast-friend",
       "weight": 2,
       "fields": {
         "Name": "Beast Friend",
@@ -108,6 +131,7 @@
       }
     },
     {
+      "id": "sailor",
       "weight": 2,
       "fields": {
         "Name": "Sailor",
@@ -115,6 +139,7 @@
       }
     },
     {
+      "id": "streetwise",
       "weight": 2,
       "fields": {
         "Name": "Streetwise",
@@ -122,6 +147,7 @@
       }
     },
     {
+      "id": "unshakable",
       "weight": 2,
       "fields": {
         "Name": "Unshakable",
@@ -129,72 +155,84 @@
       }
     },
     {
+      "id": "cold-immunity",
       "fields": {
         "Name": "Cold Immunity",
         "Description": "The character cannot be frozen by ordinary cold."
       }
     },
     {
+      "id": "poison-tolerance",
       "fields": {
         "Name": "Poison Tolerance",
         "Description": "+2 to resist poison and identify common toxins by taste or smell."
       }
     },
     {
+      "id": "ambidextrous",
       "fields": {
         "Name": "Ambidextrous",
         "Description": "The character can use either hand with equal precision."
       }
     },
     {
+      "id": "battle-rhythm",
       "fields": {
         "Name": "Battle Rhythm",
         "Description": "After a successful coordinated attack, gain +1 on the next allied action in the same turn."
       }
     },
     {
+      "id": "rune-listener",
       "fields": {
         "Name": "Rune Listener",
         "Description": "The character can sense whether a touched rune is dormant or active."
       }
     },
     {
+      "id": "perfect-memory",
       "fields": {
         "Name": "Perfect Memory",
         "Description": "+2 when recalling a scene, route, face, or exact spoken detail."
       }
     },
     {
+      "id": "improviser",
       "fields": {
         "Name": "Improviser",
         "Description": "+1 when using an ordinary object for an unintended but plausible purpose."
       }
     },
     {
+      "id": "last-stand",
       "fields": {
         "Name": "Last Stand",
         "Description": "+1 to actions while at or below 20% of maximum HP."
       }
     },
     {
+      "id": "danger-sense",
       "fields": {
         "Name": "Danger Sense",
         "Description": "+1 to Reflexes when reacting to an unseen or unexpected threat."
       }
     },
     {
+      "id": "heavy-hitter",
       "fields": {
         "Name": "Heavy Hitter",
         "Description": "A successful heavy melee attack produces a stronger positional effect."
       }
     },
     {
+      "id": "lucky-break",
       "fields": {
         "Name": "Lucky Break",
         "Description": "Once per session, reroll a failed non-critical utility roll."
       }
     },
     {
+      "id": "inspiring-presence",
       "fields": {
         "Name": "Inspiring Presence",
         "Description": "Once per scene, an ally who hears the character gains +1 against fear."

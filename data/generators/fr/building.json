@@ -1,100 +1,131 @@
 {
+  "schemaVersion": 2,
+  "id": "building",
+  "kind": "category",
+  "visibility": "public",
   "name": "Bâtiments",
   "description": "Bâtiments urbains et ruraux dotés d’un intérêt immédiat",
+  "entrySchema": {
+    "type": "text"
+  },
   "entries": [
     {
+      "id": "roadside-inn",
       "weight": 4,
       "value": "Auberge de grand chemin — lits propres, écuries surveillées et salle commune où les courriers échangent les dernières nouvelles."
     },
     {
+      "id": "crowded-tavern",
       "weight": 4,
       "value": "Taverne bondée — nourriture bon marché, musique assourdissante, alcôves privées et bagarres régulières autour de la politique locale."
     },
     {
+      "id": "town-house",
       "weight": 4,
       "value": "Maison de ville — demeure étroite à plusieurs étages, avec un atelier au rez-de-chaussée et les pièces familiales au-dessus."
     },
     {
+      "id": "farmstead",
       "weight": 3,
       "value": "Ferme — maison robuste entourée de granges, de remises et d’enclos, où les traces d’un incident récent restent visibles."
     },
     {
+      "id": "blacksmith",
       "weight": 3,
       "value": "Forge — atelier de pierre brûlant qui accepte les commandes tout en réparant discrètement des armes interdites."
     },
     {
+      "id": "general-store",
       "weight": 3,
       "value": "Magasin général — rayonnages de fournitures pratiques et armoire verrouillée contenant des objets inhabituels laissés en échange."
     },
     {
+      "id": "public-bathhouse",
       "weight": 3,
       "value": "Bains publics — bassins carrelés, casiers en location, personnel friand de commérages et salles de réunion discrètes."
     },
     {
+      "id": "brothel",
       "weight": 3,
       "value": "Maison close — établissement surveillé et tenu avec professionnalisme, qui garantit compagnie, renseignements et confidentialité absolue."
     },
     {
+      "id": "temple",
       "weight": 3,
       "value": "Temple — sanctuaire public comprenant un autel, une cuisine caritative, des archives et une crypte à l’accès restreint."
     },
     {
+      "id": "guardhouse",
       "weight": 3,
       "value": "Corps de garde — cellules, arsenal, registres de service et officiers épuisés qui se relaient."
     },
     {
+      "id": "apothecary",
       "weight": 2,
       "value": "Apothicairerie — étagères odorantes chargées de remèdes, de poisons, de créatures conservées et d’expériences mal étiquetées."
     },
     {
+      "id": "guildhall",
       "weight": 2,
       "value": "Maison de guilde — bureaux, salles d’entraînement, tableau des contrats et salle de réunion réservée aux membres."
     },
     {
+      "id": "warehouse",
       "weight": 2,
       "value": "Entrepôt — cargaisons empilées, passerelles en hauteur, gardiens de nuit et livraison absente du registre."
     },
     {
+      "id": "theater",
       "weight": 2,
       "value": "Théâtre — salle richement ornée, coulisses exiguës, ateliers et loges royales dissimulées."
     },
     {
+      "id": "schoolhouse",
       "weight": 2,
       "value": "École — unique salle de classe surchargée dont l’enseignant connaît tous les secrets de famille du quartier."
     },
     {
+      "id": "bank",
       "weight": 2,
       "value": "Banque — guichets renforcés, bureaux privés, chambres fortes documentaires et trésor protégé par de nombreux pièges."
     },
     {
+      "id": "mill",
       "weight": 2,
       "value": "Moulin — lieu de travail mû par l’eau ou le vent, entouré de poussière, de vacarme, d’ouvriers et de mécanismes en mouvement."
     },
     {
+      "id": "stable",
       "weight": 2,
       "value": "Écurie — montures à louer, selleries, soupentes pour dormir et palefrenier qui remarque chaque arrivée."
     },
     {
+      "id": "courthouse",
       "weight": 2,
       "value": "Palais de justice — salle d’audience publique, pièces réservées aux preuves, archives judiciaires et bureaux privés des juges."
     },
     {
+      "id": "wizards-tower",
       "weight": 1,
       "value": "Tour de mage — demeure verticale excentrique dont l’agencement intérieur ne respecte pas les dimensions extérieures."
     },
     {
+      "id": "embassy",
       "weight": 1,
       "value": "Ambassade — résidence noble fortifiée, soumise aux lois d’un pays étranger et placée sous surveillance constante."
     },
     {
+      "id": "observatory",
       "weight": 1,
       "value": "Observatoire — laboratoire coiffé d’un dôme qui surveille les étoiles, le climat et quelque chose qui approche depuis le ciel."
     },
     {
+      "id": "abandoned-manor",
       "weight": 1,
       "value": "Manoir abandonné — domaine délabré resté entièrement meublé depuis la disparition de ses occupants en plein dîner."
     },
     {
+      "id": "underground-fighting-pit",
       "weight": 1,
       "value": "Arène clandestine — enceinte dissimulée comprenant salles de paris, guérisseurs, cages et fonctionnaires soudoyés."
     }

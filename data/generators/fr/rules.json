@@ -1,8 +1,17 @@
 {
+  "schemaVersion": 2,
+  "id": "rules",
+  "kind": "category",
+  "visibility": "public",
   "name": "LOI",
   "description": "Concepts de LOI assortis de limites et de complications",
+  "entrySchema": {
+    "type": "fields",
+    "required": ["Name", "Description"]
+  },
   "entries": [
     {
+      "id": "thread-rule",
       "weight": 2,
       "fields": {
         "Name": "LOI du fil",
@@ -10,6 +19,7 @@
       }
     },
     {
+      "id": "echo-rule",
       "weight": 2,
       "fields": {
         "Name": "LOI de l'écho",
@@ -17,18 +27,21 @@
       }
     },
     {
+      "id": "rust-rule",
       "fields": {
         "Name": "LOI de la rouille",
         "Description": "Accélère la corrosion du métal non magique touché. Les objets volumineux ou bien entretenus exigent un contact prolongé."
       }
     },
     {
+      "id": "door-rule",
       "fields": {
         "Name": "LOI des portes",
         "Description": "Détecte et manipule les portes ordinaires à proximité. Elle ne peut ni créer de passage ni agir sur un seuil que le personnage ne parvient pas à se représenter clairement."
       }
     },
     {
+      "id": "weight-rule",
       "weight": 2,
       "fields": {
         "Name": "LOI du poids",
@@ -36,18 +49,21 @@
       }
     },
     {
+      "id": "ink-rule",
       "fields": {
         "Name": "LOI de l'encre",
         "Description": "Anime l'encre écrite sous forme de symboles mobiles et de formes simples. Détruire le texte d'origine met fin à l'effet."
       }
     },
     {
+      "id": "momentum-rule",
       "fields": {
         "Name": "LOI de l'élan",
         "Description": "Emmagasine une partie de la force d'un impact pour la libérer lors d'un contact ultérieur. Une force excessive blesse le personnage."
       }
     },
     {
+      "id": "mist-rule",
       "weight": 2,
       "fields": {
         "Name": "LOI de la brume",
@@ -55,12 +71,14 @@
       }
     },
     {
+      "id": "borrowed-face-rule",
       "fields": {
         "Name": "LOI du visage emprunté",
         "Description": "Copie pendant une heure le visage d'une personne touchée. La voix, les vêtements, les souvenirs et les manières ne changent pas."
       }
     },
     {
+      "id": "candle-rule",
       "weight": 2,
       "fields": {
         "Name": "LOI de la chandelle",
@@ -68,6 +86,7 @@
       }
     },
     {
+      "id": "root-rule",
       "weight": 2,
       "fields": {
         "Name": "LOI des racines",
@@ -75,24 +94,28 @@
       }
     },
     {
+      "id": "glass-rule",
       "fields": {
         "Name": "LOI du verre",
         "Description": "Courbe et remodèle le verre touché sans le chauffer. Les éclats restent dangereux, et aucune matière ne peut être créée."
       }
     },
     {
+      "id": "promise-rule",
       "fields": {
         "Name": "LOI des promesses",
         "Description": "Détecte la rupture d'une promesse prononcée de plein gré. Elle ne peut ni forcer la sincérité ni révéler pourquoi la promesse a été rompue."
       }
     },
     {
+      "id": "friction-rule",
       "fields": {
         "Name": "LOI du frottement",
         "Description": "Augmente ou réduit le frottement sur une petite surface visible. Les effets extrêmes sont brefs et gênent les alliés aussi facilement que les ennemis."
       }
     },
     {
+      "id": "scent-rule",
       "weight": 2,
       "fields": {
         "Name": "LOI des odeurs",
@@ -100,24 +123,28 @@
       }
     },
     {
+      "id": "paper-rule",
       "fields": {
         "Name": "LOI du papier",
         "Description": "Plie du papier pour former des outils ou des créatures brièvement animés. L'eau, le feu et les chocs violents les détruisent facilement."
       }
     },
     {
+      "id": "reflection-rule",
       "fields": {
         "Name": "LOI des reflets",
         "Description": "Permet de regarder à travers un reflet proche ou de déformer ce qu'il montre. Aucune matière ne peut le traverser."
       }
     },
     {
+      "id": "sleep-rule",
       "fields": {
         "Name": "LOI du sommeil",
         "Description": "Favorise le sommeil naturel chez une cible calme. La douleur, le danger ou une forte stimulation rompent l'effet."
       }
     },
     {
+      "id": "magnetism-rule",
       "weight": 2,
       "fields": {
         "Name": "LOI du magnétisme",
@@ -125,6 +152,7 @@
       }
     },
     {
+      "id": "mending-rule",
       "weight": 3,
       "fields": {
         "Name": "LOI de la réparation",
@@ -132,6 +160,7 @@
       }
     },
     {
+      "id": "shadow-rule",
       "weight": 2,
       "fields": {
         "Name": "LOI des ombres",
@@ -139,18 +168,21 @@
       }
     },
     {
+      "id": "salt-rule",
       "fields": {
         "Name": "LOI du sel",
         "Description": "Crée et façonne une poignée de sel. De plus grandes quantités provoquent de l'épuisement, et le sel invoqué se dissout au lever du jour."
       }
     },
     {
+      "id": "heartbeat-rule",
       "fields": {
         "Name": "LOI des battements de cœur",
         "Description": "Détecte les battements de cœur à proximité et permet de se synchroniser brièvement avec l'un d'eux. Les créatures artificielles et de nombreux morts-vivants lui échappent."
       }
     },
     {
+      "id": "color-rule",
       "weight": 2,
       "fields": {
         "Name": "LOI des couleurs",
@@ -158,6 +190,7 @@
       }
     },
     {
+      "id": "balance-rule",
       "weight": 2,
       "fields": {
         "Name": "LOI de l'équilibre",
@@ -165,6 +198,7 @@
       }
     },
     {
+      "id": "cold-rule",
       "weight": 2,
       "fields": {
         "Name": "LOI du froid",
@@ -172,24 +206,28 @@
       }
     },
     {
+      "id": "memory-rule",
       "fields": {
         "Name": "LOI de la mémoire",
         "Description": "Conserve dans un objet un souvenir récent confié volontairement. Jusqu'à sa libération, les détails de ce souvenir s'estompent dans la mémoire de la personne qui l'a enregistré."
       }
     },
     {
+      "id": "threshold-rule",
       "fields": {
         "Name": "LOI du seuil",
         "Description": "Avertit lorsqu'une limite désignée est franchie. Une seule limite peut être surveillée à la fois, et elle doit être marquée physiquement."
       }
     },
     {
+      "id": "swarm-rule",
       "fields": {
         "Name": "LOI de l'essaim",
         "Description": "Communique des intentions simples à un petit groupe d'insectes ordinaires. Elle ne permet pas de contrôler directement les créatures surnaturelles."
       }
     },
     {
+      "id": "chance-rule",
       "fields": {
         "Name": "LOI du hasard",
         "Description": "Une fois par scène, infléchit légèrement un résultat aléatoire sans importance. Le MJ choisit ensuite un contretemps tout aussi improbable."

@@ -1,8 +1,17 @@
 {
-  "name": "servantBackground",
+  "schemaVersion": 2,
+  "id": "background-servant",
+  "kind": "component",
+  "visibility": "internal",
+  "name": "Servant background details",
   "description": "Background details for servant NPCs",
+  "entrySchema": {
+    "type": "fields",
+    "required": ["Appearance", "Backstory", "Goals"]
+  },
   "entries": [
     {
+      "id": "immaculately-presented-in-durable-formal-clothes-moving-with",
       "fields": {
         "Appearance": "Immaculately presented in durable formal clothes, moving with quiet efficiency.",
         "Backstory": "A household servant has managed the same troubled estate through three generations of careless owners.",
@@ -10,6 +19,7 @@
       }
     },
     {
+      "id": "discreet-observant-and-dressed-to-remain-unnoticed-beside",
       "fields": {
         "Appearance": "Discreet, observant, and dressed to remain unnoticed beside a more prominent employer.",
         "Backstory": "A personal attendant became the only confidant of an heir preparing to refuse an arranged marriage.",
@@ -17,6 +27,7 @@
       }
     },
     {
+      "id": "strong-backed-and-plainly-clothed-with-hands-roughened-by",
       "fields": {
         "Appearance": "Strong-backed and plainly clothed, with hands roughened by years of varied physical work.",
         "Backstory": "A day laborer witnessed officials conceal structural faults after a deadly construction accident.",
@@ -24,6 +35,7 @@
       }
     },
     {
+      "id": "aproned-flour-dusted-and-quick-moving-with-a-habit-of",
       "fields": {
         "Appearance": "Aproned, flour-dusted, and quick-moving, with a habit of listening while others eat.",
         "Backstory": "A cook learned more about competing factions from dining-room scraps than most professional spies.",
@@ -31,6 +43,7 @@
       }
     },
     {
+      "id": "smells-faintly-of-hay-and-leather-with-practical",
       "fields": {
         "Appearance": "Smells faintly of hay and leather, with practical boots and an easy manner around animals.",
         "Backstory": "A stable hand discovered that a prized mount had been deliberately trained to throw a particular rider.",

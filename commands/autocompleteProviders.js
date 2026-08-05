@@ -71,10 +71,11 @@ function getBackgroundChoices(option, context, focused) {
 		'background',
 		context.locale,
 	)?.entries ?? [];
+	const englishById = new Map(english.map(entry => [entry.id, entry]));
 	return filterAutocompleteChoices(
-		localized.map((entry, index) => ({
+		localized.map(entry => ({
 			name: `${entry.fields.Name} — ${entry.fields.Description}`.slice(0, 100),
-			value: english[index].fields.Name,
+			value: englishById.get(entry.id)?.id ?? entry.id,
 		})),
 		focused.value,
 	);

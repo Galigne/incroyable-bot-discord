@@ -1,8 +1,17 @@
 {
-  "name": "urchinBackground",
-  "description": "Détails de Background pour les PNJ enfants des rues",
+  "schemaVersion": 2,
+  "id": "background-urchin",
+  "kind": "component",
+  "visibility": "internal",
+  "name": "Détails du background d’enfant des rues",
+  "description": "Apparences, histoires et objectifs pour les PNJ enfants des rues",
+  "entrySchema": {
+    "type": "fields",
+    "required": ["Appearance", "Backstory", "Goals"]
+  },
   "entries": [
     {
+      "id": "small-quick-and-layered-in-oversized-clothes-with",
       "fields": {
         "Appearance": "Petit, vif et emmitouflé dans des vêtements trop grands munis de nombreuses poches cachées.",
         "Backstory": "Un orphelin gagne ses repas en portant des messages et connaît par cœur des passages que les adultes remarquent à peine.",
@@ -10,6 +19,7 @@
       }
     },
     {
+      "id": "dusty-and-watchful-holding-a-battered-cup-while",
       "fields": {
         "Appearance": "Poussiéreux et vigilant, tenant une coupe cabossée tout en étudiant discrètement chaque passant.",
         "Backstory": "Un mendiant a assisté à un échange important parce qu’aucun des participants ne l’a jugé digne d’attention.",
@@ -17,6 +27,7 @@
       }
     },
     {
+      "id": "defiant-brightly-patched-and-marked-with-the-subtle",
       "fields": {
         "Appearance": "Défiant, couvert de pièces de tissu vives et marqué du signe discret d’un groupe d’enfants du quartier.",
         "Backstory": "Un enfant des rues a rejoint une bande informelle pour se protéger après l’évacuation de son ancien refuge par les autorités.",
@@ -24,6 +35,7 @@
       }
     },
     {
+      "id": "ragged-but-resourceful-carrying-wire-string-and-useful",
       "fields": {
         "Appearance": "Déguenillé mais débrouillard, transportant du fil de fer, de la ficelle et des fragments utiles triés en petits paquets.",
         "Backstory": "Un récupérateur a trouvé parmi des objets jetés un bien précieux lié à une disparition récente.",
@@ -31,6 +43,7 @@
       }
     },
     {
+      "id": "recently-cleaned-but-visibly-uncomfortable-in-borrowed-clothes",
       "fields": {
         "Appearance": "Récemment lavé mais visiblement mal à l’aise dans des vêtements empruntés qui lui vont trop bien.",
         "Backstory": "Un fugitif a échappé à un apprentissage brutal et craint désormais que la loi ne le rende à son ancien maître.",

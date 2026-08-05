@@ -1,124 +1,161 @@
 {
+  "schemaVersion": 2,
+  "id": "material",
+  "kind": "category",
+  "visibility": "public",
   "name": "Matériaux",
   "description": "Matériaux naturels, manufacturés, précieux et magiques",
+  "entrySchema": {
+    "type": "text"
+  },
   "entries": [
     {
+      "id": "iron",
       "weight": 5,
       "value": "Fer — métal courant et robuste employé pour les outils, les armes, les ferrures et les armures."
     },
     {
+      "id": "copper",
       "weight": 5,
       "value": "Cuivre — métal rougeâtre facile à travailler, apprécié pour les récipients, les fils, les pièces et les alliages."
     },
     {
+      "id": "oak",
       "weight": 5,
       "value": "Chêne — bois dense et durable utilisé dans la construction, les boucliers, les tonneaux et les navires."
     },
     {
+      "id": "limestone",
       "weight": 5,
       "value": "Calcaire — pierre pâle facile à tailler, courante dans les murs, les sculptures, le mortier et les grottes."
     },
     {
+      "id": "bronze",
       "weight": 4,
       "value": "Bronze — alliage de cuivre résistant à la corrosion, utilisé pour les armes, les cloches, les statues et les mécanismes."
     },
     {
+      "id": "steel",
       "weight": 4,
       "value": "Acier — alliage de fer raffiné, solide et capable de conserver durablement un tranchant."
     },
     {
+      "id": "silver",
       "weight": 4,
       "value": "Argent — métal précieux brillant associé à la monnaie, aux miroirs, aux objets rituels et à certains monstres."
     },
     {
+      "id": "leather",
       "weight": 4,
       "value": "Cuir — peau traitée et souple utilisée pour les vêtements, les armures, les contenants, les sangles et les livres."
     },
     {
+      "id": "granite",
       "weight": 4,
       "value": "Granit — pierre mouchetée extrêmement dure, adaptée aux monuments, aux fortifications et aux meules."
     },
     {
+      "id": "gold",
       "weight": 3,
       "value": "Or — métal précieux et malléable, recherché comme richesse, ornement, symbole de pureté rituelle et conducteur magique."
     },
     {
+      "id": "marble",
       "weight": 3,
       "value": "Marbre — pierre décorative employée dans les demeures fastueuses, les sculptures, les sols et les tombeaux."
     },
     {
+      "id": "obsidian",
       "weight": 3,
       "value": "Obsidienne — verre volcanique capable de produire un tranchant exceptionnel, mais cassant."
     },
     {
+      "id": "jade",
       "weight": 3,
       "value": "Jade — pierre ornementale tenace associée au prestige, aux sceaux, à la médecine et aux charmes protecteurs."
     },
     {
+      "id": "quartz",
       "weight": 3,
       "value": "Quartz — cristal abondant utilisé pour les lentilles, les mécanismes d’horlogerie, la décoration et les focaliseurs magiques simples."
     },
     {
+      "id": "amber",
       "weight": 3,
       "value": "Ambre — résine fossilisée qui conserve insectes, odeurs, électricité statique et parfois souvenirs."
     },
     {
+      "id": "pearl",
       "weight": 3,
       "value": "Perle — gemme organique prisée en joaillerie, en diplomatie, dans les rites liés à l’eau et en médecine."
     },
     {
+      "id": "amethyst",
       "weight": 2,
       "value": "Améthyste — quartz violet associé à la lucidité, à la sobriété, aux rêves et à la protection spirituelle."
     },
     {
+      "id": "ruby",
       "weight": 2,
       "value": "Rubis — gemme rouge et dure associée à la passion, au sang, au feu et à l’autorité royale."
     },
     {
+      "id": "sapphire",
       "weight": 2,
       "value": "Saphir — gemme bleue et dure associée à la vérité, au ciel, à l’eau et à une magie rigoureuse."
     },
     {
+      "id": "emerald",
       "weight": 2,
       "value": "Émeraude — gemme verte associée à la croissance, au poison, aux prophéties et aux liens durables."
     },
     {
+      "id": "diamond",
       "weight": 2,
       "value": "Diamant — cristal transparent d’une dureté exceptionnelle, employé pour tailler, afficher son rang et créer des enchantements durables."
     },
     {
+      "id": "meteoric-iron",
       "weight": 2,
       "value": "Fer météorique — métal rare tombé du ciel, parcouru de motifs inhabituels et résistant à la magie."
     },
     {
+      "id": "dragonbone",
       "weight": 2,
       "value": "Os de dragon — matière légère et résistante qui conserve des traces de la nature élémentaire de la créature."
     },
     {
+      "id": "spider-silk",
       "weight": 2,
       "value": "Soie d’araignée — fibre extrêmement légère et solide utilisée pour les cordes, les vêtements, les sutures et les pièges."
     },
     {
+      "id": "mithral",
       "weight": 1,
       "value": "Mithral — métal argenté rare qui combine une résistance exceptionnelle à un poids très faible."
     },
     {
+      "id": "adamant",
       "weight": 1,
       "value": "Adamant — alliage sombre presque incassable qui exige une chaleur et des outils extraordinaires pour être façonné."
     },
     {
+      "id": "sunstone",
       "weight": 1,
       "value": "Pierre solaire — cristal translucide et chaud qui emmagasine la lumière du jour et affaiblit les créatures des ténèbres."
     },
     {
+      "id": "voidglass",
       "weight": 1,
       "value": "Verre du Vide — verre noir et froid qui absorbe la lumière, les sons et de petites quantités d’énergie magique."
     },
     {
+      "id": "living-wood",
       "weight": 1,
       "value": "Bois vivant — récolté sans tuer l’arbre, il peut réparer lentement les objets auxquels on lui a donné forme."
     },
     {
+      "id": "aether-crystal",
       "weight": 1,
       "value": "Cristal d’éther — minerai instable qui amplifie les sorts tout en accumulant une résonance dangereuse."
     }

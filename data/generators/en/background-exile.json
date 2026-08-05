@@ -1,8 +1,17 @@
 {
-  "name": "exileBackground",
+  "schemaVersion": 2,
+  "id": "background-exile",
+  "kind": "component",
+  "visibility": "internal",
+  "name": "Exile background details",
   "description": "Background details for exiled NPCs",
+  "entrySchema": {
+    "type": "fields",
+    "required": ["Appearance", "Backstory", "Goals"]
+  },
   "entries": [
     {
+      "id": "travel-worn-cautious-and-carrying-a-small-bundle-of",
       "fields": {
         "Appearance": "Travel-worn, cautious, and carrying a small bundle of possessions packed for sudden departure.",
         "Backstory": "A refugee escaped a border settlement destroyed by forces both neighboring states deny commanding.",
@@ -10,6 +19,7 @@
       }
     },
     {
+      "id": "keeps-their-face-partly-concealed-and-changes-small",
       "fields": {
         "Appearance": "Keeps their face partly concealed and changes small details of dress whenever entering a new town.",
         "Backstory": "A fugitive was framed for stealing records that actually reveal widespread official corruption.",
@@ -17,6 +27,7 @@
       }
     },
     {
+      "id": "maintains-aristocratic-habits-despite-patched-clothing-and-a",
       "fields": {
         "Appearance": "Maintains aristocratic habits despite patched clothing and a signet deliberately worn out of sight.",
         "Backstory": "A banished noble accepted blame for a sibling's failed plot to prevent the entire family from being executed.",
@@ -24,6 +35,7 @@
       }
     },
     {
+      "id": "marked-by-old-injuries-and-protective-layers-assembled",
       "fields": {
         "Appearance": "Marked by old injuries and protective layers assembled from several different regions.",
         "Backstory": "A displaced survivor has rebuilt a home repeatedly as war, disaster, and prejudice forced each community onward.",
@@ -31,6 +43,7 @@
       }
     },
     {
+      "id": "reserved-and-articulate-carrying-banned-pamphlets-and",
       "fields": {
         "Appearance": "Reserved and articulate, carrying banned pamphlets and correspondence in a false-bottomed case.",
         "Backstory": "A political exile advocated peaceful reform until the government declared even discussion of change treasonous.",

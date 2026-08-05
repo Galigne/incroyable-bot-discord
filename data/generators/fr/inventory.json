@@ -1,8 +1,17 @@
 {
+  "schemaVersion": 2,
+  "id": "inventory",
+  "kind": "category",
+  "visibility": "public",
   "name": "inventaire",
   "description": "Objets pouvant apparaître dans l'inventaire d'un personnage",
+  "entrySchema": {
+    "type": "fields",
+    "required": ["Name", "Description"]
+  },
   "entries": [
     {
+      "id": "healing-potion",
       "weight": 8,
       "fields": {
         "Name": "Potion de soins",
@@ -10,6 +19,7 @@
       }
     },
     {
+      "id": "coil-of-rope",
       "weight": 8,
       "fields": {
         "Name": "Rouleau de corde",
@@ -17,6 +27,7 @@
       }
     },
     {
+      "id": "lantern-and-oil",
       "weight": 8,
       "fields": {
         "Name": "Lanterne et huile",
@@ -24,6 +35,7 @@
       }
     },
     {
+      "id": "three-travel-rations",
       "weight": 8,
       "fields": {
         "Name": "Trois rations de voyage",
@@ -31,6 +43,7 @@
       }
     },
     {
+      "id": "waterskin",
       "weight": 7,
       "fields": {
         "Name": "Gourde",
@@ -38,6 +51,7 @@
       }
     },
     {
+      "id": "bedroll",
       "weight": 7,
       "fields": {
         "Name": "Nécessaire de couchage",
@@ -45,6 +59,7 @@
       }
     },
     {
+      "id": "tinderbox",
       "weight": 7,
       "fields": {
         "Name": "Nécessaire à feu",
@@ -52,6 +67,7 @@
       }
     },
     {
+      "id": "lockpicking-kit",
       "weight": 6,
       "fields": {
         "Name": "Nécessaire de crochetage",
@@ -59,6 +75,7 @@
       }
     },
     {
+      "id": "climbing-kit",
       "weight": 6,
       "fields": {
         "Name": "Matériel d'escalade",
@@ -66,6 +83,7 @@
       }
     },
     {
+      "id": "bandages",
       "weight": 6,
       "fields": {
         "Name": "Bandages",
@@ -73,6 +91,7 @@
       }
     },
     {
+      "id": "chalk-and-charcoal",
       "weight": 6,
       "fields": {
         "Name": "Craie et fusain",
@@ -80,6 +99,7 @@
       }
     },
     {
+      "id": "small-mirror",
       "weight": 6,
       "fields": {
         "Name": "Petit miroir",
@@ -87,6 +107,7 @@
       }
     },
     {
+      "id": "crowbar",
       "weight": 5,
       "fields": {
         "Name": "Pied-de-biche",
@@ -94,6 +115,7 @@
       }
     },
     {
+      "id": "grappling-hook",
       "weight": 5,
       "fields": {
         "Name": "Grappin",
@@ -101,6 +123,7 @@
       }
     },
     {
+      "id": "fishing-kit",
       "weight": 5,
       "fields": {
         "Name": "Matériel de pêche",
@@ -108,6 +131,7 @@
       }
     },
     {
+      "id": "writing-kit",
       "weight": 5,
       "fields": {
         "Name": "Nécessaire d'écriture",
@@ -115,6 +139,7 @@
       }
     },
     {
+      "id": "herbalism-pouch",
       "weight": 5,
       "fields": {
         "Name": "Trousse d'herboriste",
@@ -122,6 +147,7 @@
       }
     },
     {
+      "id": "shovel",
       "weight": 5,
       "fields": {
         "Name": "Pelle",
@@ -129,6 +155,7 @@
       }
     },
     {
+      "id": "antidote",
       "weight": 4,
       "fields": {
         "Name": "Antidote",
@@ -136,6 +163,7 @@
       }
     },
     {
+      "id": "smoke-bomb",
       "weight": 4,
       "fields": {
         "Name": "Bombe fumigène",
@@ -143,6 +171,7 @@
       }
     },
     {
+      "id": "bear-trap",
       "weight": 4,
       "fields": {
         "Name": "Piège à ours",
@@ -150,6 +179,7 @@
       }
     },
     {
+      "id": "disguise-kit",
       "weight": 4,
       "fields": {
         "Name": "Nécessaire de déguisement",
@@ -157,6 +187,7 @@
       }
     },
     {
+      "id": "musical-instrument",
       "weight": 4,
       "fields": {
         "Name": "Instrument de musique",
@@ -164,6 +195,7 @@
       }
     },
     {
+      "id": "merchants-scale",
       "weight": 4,
       "fields": {
         "Name": "Balance de marchand",
@@ -171,6 +203,7 @@
       }
     },
     {
+      "id": "bag-of-caltrops",
       "weight": 3,
       "fields": {
         "Name": "Sac de chausse-trappes",
@@ -178,6 +211,7 @@
       }
     },
     {
+      "id": "vial-of-basic-poison",
       "weight": 3,
       "fields": {
         "Name": "Fiole de poison ordinaire",
@@ -185,6 +219,7 @@
       }
     },
     {
+      "id": "spyglass",
       "weight": 3,
       "fields": {
         "Name": "Longue-vue",
@@ -192,6 +227,7 @@
       }
     },
     {
+      "id": "tent",
       "weight": 3,
       "fields": {
         "Name": "Tente",
@@ -199,6 +235,7 @@
       }
     },
     {
+      "id": "manacles",
       "weight": 3,
       "fields": {
         "Name": "Menottes",
@@ -206,6 +243,7 @@
       }
     },
     {
+      "id": "holy-symbol",
       "weight": 3,
       "fields": {
         "Name": "Symbole sacré",
@@ -213,6 +251,7 @@
       }
     },
     {
+      "id": "local-map",
       "weight": 3,
       "fields": {
         "Name": "Carte locale",
@@ -220,6 +259,7 @@
       }
     },
     {
+      "id": "potion-of-night-vision",
       "weight": 2,
       "fields": {
         "Name": "Potion de vision nocturne",
@@ -227,6 +267,7 @@
       }
     },
     {
+      "id": "potion-of-water-breathing",
       "weight": 2,
       "fields": {
         "Name": "Potion de respiration aquatique",
@@ -234,6 +275,7 @@
       }
     },
     {
+      "id": "acid-flask",
       "weight": 2,
       "fields": {
         "Name": "Fiole d'acide",
@@ -241,6 +283,7 @@
       }
     },
     {
+      "id": "silvered-chain",
       "weight": 2,
       "fields": {
         "Name": "Chaîne argentée",
@@ -248,6 +291,7 @@
       }
     },
     {
+      "id": "runic-chalk",
       "weight": 2,
       "fields": {
         "Name": "Craie runique",
@@ -255,24 +299,28 @@
       }
     },
     {
+      "id": "whispering-compass",
       "fields": {
         "Name": "Boussole murmurante",
         "Description": "Une étrange boussole qui se plaint à voix basse chaque fois qu'elle indique le nord."
       }
     },
     {
+      "id": "everlasting-candle",
       "fields": {
         "Name": "Bougie éternelle",
         "Description": "Une bougie dont la petite flamme ne consume jamais la cire."
       }
     },
     {
+      "id": "unidentified-rune-fragment",
       "fields": {
         "Name": "Fragment de rune non identifié",
         "Description": "Un morceau de matière magique portant une partie d'une inscription inconnue."
       }
     },
     {
+      "id": "mysterious-sealed-letter",
       "fields": {
         "Name": "Mystérieuse lettre scellée",
         "Description": "Une lettre adressée à une personne que le personnage n'a jamais rencontrée."

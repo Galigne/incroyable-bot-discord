@@ -1,8 +1,17 @@
 {
-  "name": "militaryBackground",
-  "description": "Détails de Background pour les PNJ militaires",
+  "schemaVersion": 2,
+  "id": "background-military",
+  "kind": "component",
+  "visibility": "internal",
+  "name": "Détails du background de militaire",
+  "description": "Apparences, histoires et objectifs pour les PNJ militaires",
+  "entrySchema": {
+    "type": "fields",
+    "required": ["Appearance", "Backstory", "Goals"]
+  },
   "entries": [
     {
+      "id": "disciplined-posture-regulation-equipment-and-boots-maintained",
       "fields": {
         "Appearance": "Maintien discipliné, équipement réglementaire et bottes impeccablement entretenues malgré leur usage constant.",
         "Backstory": "Un soldat de carrière a gagné le respect de ses hommes en maintenant son unité soudée pendant une retraite désastreuse.",
@@ -10,6 +19,7 @@
       }
     },
     {
+      "id": "alert-and-broad-shouldered-wearing-a-guard-uniform-altered",
       "fields": {
         "Appearance": "Vigilant et large d’épaules, portant un uniforme de garde adapté au confort plutôt qu’au cérémonial.",
         "Backstory": "Un garde municipal a appris à connaître chaque ruelle de son quartier en arbitrant des conflits que les autres jugeaient insignifiants.",
@@ -17,6 +27,7 @@
       }
     },
     {
+      "id": "immaculate-uniform-controlled-gestures-and-a-visible-scar",
       "fields": {
         "Appearance": "Uniforme immaculé, gestes maîtrisés et cicatrice bien visible reçue avant sa promotion.",
         "Backstory": "Un jeune officier promu au mérite sert désormais des nobles qui privilégient les apparences à la préparation.",
@@ -24,6 +35,7 @@
       }
     },
     {
+      "id": "weathered-plainly-dressed-and-still-carrying-one-carefully",
       "fields": {
         "Appearance": "Buriné, vêtu simplement et conservant encore une pièce de son ancien équipement entretenue avec soin.",
         "Backstory": "Après plusieurs campagnes, un vétéran a pris sa retraite et découvert qu’une autre famille occupait les terres qui lui avaient été promises.",
@@ -31,6 +43,7 @@
       }
     },
     {
+      "id": "lean-and-practical-with-measuring-tools-rope-and",
       "fields": {
         "Appearance": "Mince et pragmatique, avec des instruments de mesure, de la corde et les deux mains tachées de charbon.",
         "Backstory": "Un ingénieur militaire a survécu à un siège en improvisant des défenses dans les ruines de bâtiments civils.",

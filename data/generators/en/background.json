@@ -1,141 +1,167 @@
 {
+  "schemaVersion": 2,
+  "id": "background",
+  "kind": "category",
+  "visibility": "public",
   "name": "background",
   "description": "NPC background categories",
+  "entrySchema": {
+    "type": "fields",
+    "required": ["Name", "Description", "Generator"],
+    "technical": ["Generator"]
+  },
   "entries": [
     {
+      "id": "criminal",
       "weight": 4,
       "fields": {
         "Name": "criminal",
         "Description": "Outlaws, thieves, smugglers, corrupt officials, and organized criminals",
-        "Generator": "criminalBackground"
+        "Generator": "background-criminal"
       }
     },
     {
+      "id": "adventurer",
       "weight": 5,
       "fields": {
         "Name": "adventurer",
         "Description": "Explorers, mercenaries, monster hunters, pilgrims, and treasure seekers",
-        "Generator": "adventurerBackground"
+        "Generator": "background-adventurer"
       }
     },
     {
+      "id": "noble",
       "weight": 2,
       "fields": {
         "Name": "noble",
         "Description": "Aristocrats, courtiers, heirs, and minor lords",
-        "Generator": "nobleBackground"
+        "Generator": "background-noble"
       }
     },
     {
+      "id": "peasant",
       "weight": 5,
       "fields": {
         "Name": "peasant",
         "Description": "Farmers, herders, and rural workers",
-        "Generator": "peasantBackground"
+        "Generator": "background-peasant"
       }
     },
     {
+      "id": "artisan",
       "weight": 5,
       "fields": {
         "Name": "artisan",
         "Description": "Blacksmiths, carpenters, tailors, alchemists, and craftspeople",
-        "Generator": "artisanBackground"
+        "Generator": "background-artisan"
       }
     },
     {
+      "id": "merchant",
       "weight": 5,
       "fields": {
         "Name": "merchant",
         "Description": "Traders, shopkeepers, caravan workers, and commercial agents",
-        "Generator": "merchantBackground"
+        "Generator": "background-merchant"
       }
     },
     {
+      "id": "scholar",
       "weight": 3,
       "fields": {
         "Name": "scholar",
         "Description": "Students, researchers, scribes, and librarians",
-        "Generator": "scholarBackground"
+        "Generator": "background-scholar"
       }
     },
     {
+      "id": "religious",
       "weight": 3,
       "fields": {
         "Name": "religious",
         "Description": "Priests, monks, temple servants, and pilgrims",
-        "Generator": "religiousBackground"
+        "Generator": "background-religious"
       }
     },
     {
+      "id": "military",
       "weight": 4,
       "fields": {
         "Name": "military",
         "Description": "Soldiers, guards, officers, and veterans",
-        "Generator": "militaryBackground"
+        "Generator": "background-military"
       }
     },
     {
+      "id": "outlander",
       "weight": 3,
       "fields": {
         "Name": "outlander",
         "Description": "Hunters, nomads, hermits, and tribal members",
-        "Generator": "outlanderBackground"
+        "Generator": "background-outlander"
       }
     },
     {
+      "id": "sailor",
       "weight": 4,
       "fields": {
         "Name": "sailor",
         "Description": "Sailors, fishers, pirates, and dock workers",
-        "Generator": "sailorBackground"
+        "Generator": "background-sailor"
       }
     },
     {
+      "id": "performer",
       "weight": 3,
       "fields": {
         "Name": "performer",
         "Description": "Musicians, actors, storytellers, and entertainers",
-        "Generator": "performerBackground"
+        "Generator": "background-performer"
       }
     },
     {
+      "id": "servant",
       "weight": 4,
       "fields": {
         "Name": "servant",
         "Description": "Household servants, attendants, and laborers",
-        "Generator": "servantBackground"
+        "Generator": "background-servant"
       }
     },
     {
+      "id": "official",
       "weight": 3,
       "fields": {
         "Name": "official",
         "Description": "Administrators, diplomats, tax collectors, and judges",
-        "Generator": "officialBackground"
+        "Generator": "background-official"
       }
     },
     {
+      "id": "mage",
       "weight": 2,
       "fields": {
         "Name": "mage",
         "Description": "Apprentices, hedge mages, and magical researchers",
-        "Generator": "mageBackground"
+        "Generator": "background-mage"
       }
     },
     {
+      "id": "exile",
       "weight": 3,
       "fields": {
         "Name": "exile",
         "Description": "Refugees, fugitives, banished nobles, and displaced survivors",
-        "Generator": "exileBackground"
+        "Generator": "background-exile"
       }
     },
     {
+      "id": "urchin",
       "weight": 3,
       "fields": {
         "Name": "urchin",
         "Description": "Orphans, beggars, street children, and scavengers",
-        "Generator": "urchinBackground"
+        "Generator": "background-urchin"
       }
     }
   ]

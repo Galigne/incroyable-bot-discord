@@ -1,95 +1,127 @@
 {
+  "schemaVersion": 2,
+  "id": "status-effect",
+  "kind": "category",
+  "visibility": "public",
   "name": "Effets d’état",
   "description": "États temporaires ou persistants affectant un personnage",
+  "entrySchema": {
+    "type": "text"
+  },
   "entries": [
     {
+      "id": "bruised",
       "weight": 3,
       "value": "Contusionné — la douleur légère impose un malus de -1 à la prochaine action physique exigeante."
     },
     {
+      "id": "fatigued",
       "weight": 3,
       "value": "Fatigué — les efforts prolongés et les voyages restent plus difficiles jusqu’au prochain repos."
     },
     {
+      "id": "shaken",
       "weight": 3,
       "value": "Ébranlé — subit un malus de -1 contre le prochain effet de peur ou d’intimidation."
     },
     {
+      "id": "distracted",
       "weight": 3,
       "value": "Déconcentré — subit un malus de -1 à la prochaine action fondée sur la Perception."
     },
     {
+      "id": "bleeding",
       "weight": 2,
       "value": "Saignement — perd une petite quantité de PV après chaque effort intense jusqu’à recevoir des soins."
     },
     {
+      "id": "burning",
       "weight": 2,
       "value": "En feu — subit régulièrement des dégâts de feu jusqu’à l’extinction des flammes."
     },
     {
+      "id": "chilled",
       "weight": 2,
       "value": "Transi — les déplacements et les actions fondées sur la Vitesse sont réduits jusqu’à ce que le personnage soit réchauffé."
     },
     {
+      "id": "dazed",
       "weight": 2,
       "value": "Étourdi — les réactions demandent un effort supplémentaire pendant le prochain tour."
     },
     {
+      "id": "blinded",
       "weight": 2,
       "value": "Aveuglé — les actions qui dépendent de la vue échouent ou subissent un lourd malus."
     },
     {
+      "id": "deafened",
       "weight": 2,
       "value": "Assourdi — n’entend plus clairement les paroles, les avertissements ni les effets sonores."
     },
     {
+      "id": "poisoned",
       "weight": 2,
       "value": "Empoisonné — doit réussir des résistances fondées sur la Constitution à mesure que le poison progresse."
     },
     {
+      "id": "slowed",
       "weight": 2,
       "value": "Ralenti — la DD est réduite jusqu’à la fin de l’effet."
     },
     {
+      "id": "weakened",
       "weight": 2,
       "value": "Affaibli — les actions fondées sur la Force subissent un malus."
     },
     {
+      "id": "confused",
       "weight": 2,
       "value": "Confus — distingue difficilement alliés, ennemis et directions."
     },
     {
+      "id": "frightened",
       "weight": 2,
       "value": "Effrayé — ne peut pas s’approcher volontairement de la source de sa peur sans réussir un jet."
     },
     {
+      "id": "stunned",
       "value": "Incapacité — perd temporairement la possibilité d’effectuer des actions normales."
     },
     {
+      "id": "paralyzed",
       "value": "Paralysé — ne peut effectuer aucun mouvement volontaire jusqu’à ce que l’état soit dissipé."
     },
     {
+      "id": "silenced",
       "value": "Réduit au silence — ne peut ni parler ni utiliser de capacités qui dépendent de la voix."
     },
     {
+      "id": "cursed",
       "value": "Maudit — subit une pénalité surnaturelle jusqu’à ce que sa condition précise de levée soit remplie."
     },
     {
+      "id": "petrifying",
       "value": "Pétrification — le corps se transforme lentement en pierre et nécessite une intervention urgente."
     },
     {
+      "id": "possessed",
       "value": "Possédé — une volonté étrangère tente par moments de prendre le contrôle du personnage."
     },
     {
+      "id": "marked",
       "value": "Marqué — un signe magique permet à une créature ou à un effet hostile de suivre le personnage."
     },
     {
+      "id": "invisible",
       "value": "Invisible — ne peut pas être vu normalement, mais produit toujours des sons et laisse des traces."
     },
     {
+      "id": "regenerating",
       "value": "Régénération — récupère une petite quantité de PV à la fin de chaque tour."
     },
     {
+      "id": "inspired",
       "value": "Inspiré — peut relancer un dé de son choix, après quoi cet état prend fin."
     }
   ]

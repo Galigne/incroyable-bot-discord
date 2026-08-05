@@ -142,17 +142,17 @@
       "categoryOption": "Catégorie de génération",
       "unknownCategory": "Catégorie de génération inconnue : **{{category}}**. Utilisez `/help command:gen` pour consulter les détails.",
       "title": "{{category}} — résultat généré",
-      "behavior": "Sélectionne une entrée aléatoire pondérée dans la catégorie de génération localisée choisie. Chaque fichier JSON de génération devient disponible après le redémarrage du bot. La liste localisée complète des catégories figure ci-dessus ; saisissez une partie du nom ou de la valeur pour filtrer l’autocomplétion."
+      "behavior": "Sélectionne une entrée aléatoire pondérée dans le générateur public localisé choisi. Les générateurs publics au schéma v2 deviennent disponibles après /reload ou un redémarrage du bot ; les composants internes réservés aux traitements restent masqués. La liste localisée complète des générateurs publics figure ci-dessus ; saisissez une partie du nom ou de l’identifiant pour filtrer l’autocomplétion."
     },
     "genChar": {
       "description": "Générer un personnage (rôle MJ configuré ou propriétaire du serveur)",
       "schemaDescription": "Générer et sauvegarder un personnage aléatoire complet",
       "keyOption": "Clé de sauvegarde unique, courte et facile à retenir",
       "levelOption": "Niveau du personnage ; tirage aléatoire de 1 à 10 si omis",
-      "backgroundOption": "Background du PNJ ; tirage aléatoire si omis",
+      "backgroundOption": "Background du personnage ; tirage aléatoire si omis",
       "levelChoice": "Niveau {{level}}",
       "success": "Le personnage **{{name}}** a été généré avec la clé `{{key}}`.",
-      "behavior": "Crée et sauvegarde un personnage aléatoire complet sous une CharacterKey unique. Le niveau doit être compris entre 1 et 10 et est aléatoire s’il est omis ; le Background est également facultatif et aléatoire par défaut. Les statistiques, ressources, LOI, armure, armes, objets, pièces d’or et éventuels effets d’état dépendent du niveau et des règles."
+      "behavior": "Crée et sauvegarde un personnage aléatoire complet sous une CharacterKey unique. Le niveau doit être compris entre 1 et 10 et est aléatoire s’il est omis ; le Background est également facultatif et aléatoire par défaut. Un profil statistique partagé répartit les statistiques, tandis que les ressources, LOI, armure, armes, objets, pièces d’or et éventuels effets d’état suivent le niveau choisi et les règles du jeu. L’encombrement reste manuel et vaut 0 / 0 par défaut."
     },
     "get": {
       "description": "Afficher le résumé d’un personnage ou le détail d’un champ",

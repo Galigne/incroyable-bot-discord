@@ -1,27 +1,35 @@
 const { BASE_STATS } = require('./constants');
 const { recalculateDerivedStats } = require('./statistics');
+const { validateStatProfile } = require('../statProfileCatalog');
+const { selectWeightedEntry } = require('../weightedSelector');
 
 const BASE_STAT_BUDGET = 67;
-const MIN_STAT = 4;
 const MAX_STAT = 20;
 const RULE_POINT_THRESHOLDS = [10, 12, 14, 16, 18, 20];
 const BONUS_STAT_LEVELS = [2, 5, 8];
 const TALENT_LEVELS = [3, 6, 9];
 
-function generateStats(level, random = Math.random) {
-	const stats = Object.fromEntries(BASE_STATS.map(stat => [stat, MIN_STAT]));
-	let remainingPoints = calculateStatBudget(level)
-		- BASE_STATS.length * MIN_STAT;
+function generateStats({ level, profile, random = Math.random }) {
+	if (!Number.isInteger(level) || level < 1 || level > 10) {
+		throw generationError('Character level must be a whole number between 1 and 10.');
+	}
+	validateStatProfile(profile);
+	const stats = Object.fromEntries(
+		BASE_STATS.map(stat => [stat, profile.minimums[stat]]),
+	);
+	let remainingPoints = calculateStatBudget(level) - calculateStatCost(stats);
 
 	while (remainingPoints > 0) {
 		const eligibleStats = BASE_STATS.filter(stat => (
 			stats[stat] < MAX_STAT
+			&& stats[stat] < profile.maximums[stat]
+			&& profile.weights[stat] > 0
 			&& getNextStatCost(stats[stat]) <= remainingPoints
-		));
+		)).map(stat => ({ stat, weight: profile.weights[stat] }));
 		if (eligibleStats.length === 0) {
-			throw generationError(`Could not spend ${remainingPoints} remaining stat points.`);
+			break;
 		}
-		const stat = eligibleStats[randomIndex(eligibleStats.length, random)];
+		const { stat } = selectWeightedEntry(eligibleStats, random);
 		remainingPoints -= getNextStatCost(stats[stat]);
 		stats[stat] += 1;
 	}
@@ -86,11 +94,6 @@ function getValueCost(value) {
 		return 3;
 	}
 	return 4;
-}
-
-function randomIndex(length, random) {
-	const randomValue = Math.max(0, Math.min(0.9999999999999999, random()));
-	return Math.floor(randomValue * length);
 }
 
 function generationError(message) {

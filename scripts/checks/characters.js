@@ -275,7 +275,7 @@ module.exports = function createCharacterChecks(context) {
 			};
 			const character = new Character('D.Robert', 'dm');
 			populateRandomCharacter(character, { level: 10, random });
-			const generatedRace = generatorCatalog.getCategory('race').entries
+			const generatedRace = generatorCatalog.getGenerator('race').entries
 				.find(entry => entry.fields.Name === character.race.name);
 
 			if (
@@ -350,7 +350,7 @@ module.exports = function createCharacterChecks(context) {
 			}
 
 			const armorName = character.gear.equipment[0].split(' — ')[0];
-			const armor = generatorCatalog.getCategory('armors').entries
+			const armor = generatorCatalog.getGenerator('armors').entries
 				.find(entry => entry.fields.Name === armorName);
 			const armorPercentage = Number(armor?.fields['AR percentage']);
 			if (
@@ -369,13 +369,13 @@ module.exports = function createCharacterChecks(context) {
 			}
 			createCharacterSummaryEmbed(character).toJSON();
 
-			const routedBackgrounds = generatorCatalog.getCategory('background').entries;
+			const routedBackgrounds = generatorCatalog.getGenerator('background').entries;
 			for (const routedBackground of routedBackgrounds) {
 				const backgroundName = routedBackground.fields.Name;
 				const routedCharacter = new Character(`background.${backgroundName}`, 'dm');
 				populateRandomCharacter(routedCharacter, {
 					level: 1,
-					background: backgroundName,
+					background: routedBackground.id,
 					random: () => 0,
 				});
 				if (

@@ -1,8 +1,26 @@
 {
+  "schemaVersion": 2,
+  "id": "faction",
+  "kind": "category",
+  "visibility": "public",
   "name": "faction",
   "description": "Organizations with goals, resources, hierarchy, allies, and enemies",
+  "entrySchema": {
+    "type": "fields",
+    "required": [
+      "Name",
+      "Type",
+      "Goal",
+      "Resources",
+      "Hierarchy",
+      "Allies",
+      "Enemies"
+    ],
+    "technical": ["Type"]
+  },
   "entries": [
     {
+      "id": "the-wayfarers-guild",
       "weight": 3,
       "fields": {
         "Name": "The Wayfarers' Guild",
@@ -15,6 +33,7 @@
       }
     },
     {
+      "id": "house-valeward",
       "weight": 3,
       "fields": {
         "Name": "House Valeward",
@@ -27,6 +46,7 @@
       }
     },
     {
+      "id": "the-ashen-lanterns",
       "weight": 3,
       "fields": {
         "Name": "The Ashen Lanterns",
@@ -39,6 +59,7 @@
       }
     },
     {
+      "id": "the-brass-compact",
       "weight": 3,
       "fields": {
         "Name": "The Brass Compact",
@@ -51,6 +72,7 @@
       }
     },
     {
+      "id": "the-red-knives",
       "weight": 2,
       "fields": {
         "Name": "The Red Knives",
@@ -63,6 +85,7 @@
       }
     },
     {
+      "id": "the-verdant-covenant",
       "weight": 2,
       "fields": {
         "Name": "The Verdant Covenant",
@@ -75,6 +98,7 @@
       }
     },
     {
+      "id": "the-seventh-banner",
       "weight": 2,
       "fields": {
         "Name": "The Seventh Banner",
@@ -87,6 +111,7 @@
       }
     },
     {
+      "id": "the-quiet-archive",
       "weight": 2,
       "fields": {
         "Name": "The Quiet Archive",
@@ -99,6 +124,7 @@
       }
     },
     {
+      "id": "the-salt-throne",
       "weight": 2,
       "fields": {
         "Name": "The Salt Throne",
@@ -111,6 +137,7 @@
       }
     },
     {
+      "id": "the-white-veil",
       "weight": 2,
       "fields": {
         "Name": "The White Veil",
@@ -123,6 +150,7 @@
       }
     },
     {
+      "id": "the-hearth-union",
       "weight": 2,
       "fields": {
         "Name": "The Hearth Union",
@@ -135,6 +163,7 @@
       }
     },
     {
+      "id": "the-ivory-standard",
       "weight": 2,
       "fields": {
         "Name": "The Ivory Standard",
@@ -147,6 +176,7 @@
       }
     },
     {
+      "id": "the-new-dawn-assembly",
       "weight": 1,
       "fields": {
         "Name": "The New Dawn Assembly",
@@ -159,6 +189,7 @@
       }
     },
     {
+      "id": "the-hollow-choir",
       "weight": 1,
       "fields": {
         "Name": "The Hollow Choir",
@@ -171,6 +202,7 @@
       }
     },
     {
+      "id": "the-sapphire-embassy",
       "weight": 1,
       "fields": {
         "Name": "The Sapphire Embassy",
@@ -183,6 +215,7 @@
       }
     },
     {
+      "id": "the-chainbreakers",
       "weight": 1,
       "fields": {
         "Name": "The Chainbreakers",
@@ -195,6 +228,7 @@
       }
     },
     {
+      "id": "the-gilded-scale",
       "weight": 1,
       "fields": {
         "Name": "The Gilded Scale",
@@ -207,6 +241,7 @@
       }
     },
     {
+      "id": "the-starfall-society",
       "weight": 1,
       "fields": {
         "Name": "The Starfall Society",
@@ -219,6 +254,7 @@
       }
     },
     {
+      "id": "the-black-orchard",
       "weight": 1,
       "fields": {
         "Name": "The Black Orchard",
@@ -231,6 +267,7 @@
       }
     },
     {
+      "id": "the-common-shield",
       "weight": 1,
       "fields": {
         "Name": "The Common Shield",

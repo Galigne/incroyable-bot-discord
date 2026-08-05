@@ -1,4 +1,6 @@
 const generatorCatalog = require('./generatorCatalog');
+const { getStatProfile } = require('./statProfileCatalog');
+const { selectWeightedEntry } = require('./weightedSelector');
 const {
 	allocateRuleLevels,
 	calculateRulePoints,
@@ -44,7 +46,15 @@ function populateRandomCharacter(character, options = {}) {
 
 	character.personality.traits = pickMany('personality', 2, locale, random)
 		.map(getTextValue);
-	character.statistics = generateStats(level, random);
+	const profile = getStatProfile('character-balanced');
+	if (!profile) {
+		throw generationError(
+			'Missing statistical profile: character-balanced.',
+			'errors.generatorMissing',
+			{ category: 'character-balanced' },
+		);
+	}
+	character.statistics = generateStats({ level, profile, random });
 
 	const rulePointCount = calculateRulePoints(character.statistics.intelligence);
 	const ruleLevels = allocateRuleLevels(rulePointCount);
@@ -60,7 +70,7 @@ function populateRandomCharacter(character, options = {}) {
 		.map(entry => `${getField(entry, 'Name')} — ${getField(entry, 'Description')}`);
 
 	character.status.effects = random() < 0.25
-		? [getTextValue(pickOne('statusEffect', locale, random))]
+		? [getTextValue(pickOne('status-effect', locale, random))]
 		: [];
 
 	const armor = pickOne(
@@ -100,15 +110,10 @@ function resolveBackground(requestedBackground, locale, random) {
 	if (!requestedBackground) {
 		return pickOne('background', locale, random);
 	}
-	const englishCategory = generatorCatalog.getGenerator('background', 'en');
 	const localizedCategory = generatorCatalog.getGenerator('background', locale);
-	const normalizedRequest = generatorCatalog.normalizeCategoryName(requestedBackground);
-	const backgroundIndex = englishCategory?.entries.findIndex(entry => (
-		generatorCatalog.normalizeCategoryName(getField(entry, 'Name')) === normalizedRequest
+	const background = localizedCategory?.entries.find(entry => (
+		entry.id === requestedBackground
 	));
-	const background = backgroundIndex >= 0
-		? localizedCategory?.entries[backgroundIndex]
-		: undefined;
 	if (!background) {
 		throw generationError(
 			`Unknown background category: ${requestedBackground}.`,
@@ -143,7 +148,7 @@ function pickMany(categoryName, count, locale, random, predicate = () => true) {
 
 	const selectedEntries = [];
 	for (let index = 0; index < count; index += 1) {
-		const entry = generatorCatalog.selectWeightedEntry(availableEntries, random);
+		const entry = selectWeightedEntry(availableEntries, random);
 		selectedEntries.push(entry);
 		availableEntries.splice(availableEntries.indexOf(entry), 1);
 	}
@@ -158,22 +163,17 @@ function getField(entry, requestedField) {
 			{ field: requestedField },
 		);
 	}
-	const matchingField = Object.keys(entry.fields)
-		.find(field => field.toLowerCase() === requestedField.toLowerCase());
-	if (!matchingField) {
+	if (!Object.hasOwn(entry.fields, requestedField)) {
 		throw generationError(
 			`Generator entry is missing field: ${requestedField}.`,
 			'errors.generatorFieldMissing',
 			{ field: requestedField },
 		);
 	}
-	return entry.fields[matchingField];
+	return entry.fields[requestedField];
 }
 
 function getTextValue(entry) {
-	if (typeof entry === 'string') {
-		return entry;
-	}
 	if (entry?.value !== undefined) {
 		return entry.value;
 	}

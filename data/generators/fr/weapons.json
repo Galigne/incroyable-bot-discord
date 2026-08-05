@@ -1,8 +1,17 @@
 {
+  "schemaVersion": 2,
+  "id": "weapons",
+  "kind": "category",
+  "visibility": "public",
   "name": "armes",
   "description": "Armes adaptées aux personnages générés",
+  "entrySchema": {
+    "type": "fields",
+    "required": ["Name", "Description"]
+  },
   "entries": [
     {
+      "id": "longsword",
       "weight": 5,
       "fields": {
         "Name": "Épée longue",
@@ -10,6 +19,7 @@
       }
     },
     {
+      "id": "short-sword",
       "weight": 5,
       "fields": {
         "Name": "Épée courte",
@@ -17,6 +27,7 @@
       }
     },
     {
+      "id": "spear",
       "weight": 5,
       "fields": {
         "Name": "Lance",
@@ -24,6 +35,7 @@
       }
     },
     {
+      "id": "hunting-bow",
       "weight": 5,
       "fields": {
         "Name": "Arc de chasse",
@@ -31,6 +43,7 @@
       }
     },
     {
+      "id": "dagger",
       "weight": 5,
       "fields": {
         "Name": "Dague",
@@ -38,6 +51,7 @@
       }
     },
     {
+      "id": "battle-axe",
       "weight": 4,
       "fields": {
         "Name": "Hache de bataille",
@@ -45,6 +59,7 @@
       }
     },
     {
+      "id": "mace",
       "weight": 4,
       "fields": {
         "Name": "Masse d'armes",
@@ -52,6 +67,7 @@
       }
     },
     {
+      "id": "quarterstaff",
       "weight": 4,
       "fields": {
         "Name": "Bâton de combat",
@@ -59,6 +75,7 @@
       }
     },
     {
+      "id": "crossbow",
       "weight": 4,
       "fields": {
         "Name": "Arbalète",
@@ -66,6 +83,7 @@
       }
     },
     {
+      "id": "saber",
       "weight": 4,
       "fields": {
         "Name": "Sabre",
@@ -73,6 +91,7 @@
       }
     },
     {
+      "id": "greatsword",
       "weight": 3,
       "fields": {
         "Name": "Espadon",
@@ -80,6 +99,7 @@
       }
     },
     {
+      "id": "halberd",
       "weight": 3,
       "fields": {
         "Name": "Hallebarde",
@@ -87,6 +107,7 @@
       }
     },
     {
+      "id": "warhammer",
       "weight": 3,
       "fields": {
         "Name": "Marteau de guerre",
@@ -94,6 +115,7 @@
       }
     },
     {
+      "id": "rapier",
       "weight": 3,
       "fields": {
         "Name": "Rapière",
@@ -101,6 +123,7 @@
       }
     },
     {
+      "id": "recurve-bow",
       "weight": 3,
       "fields": {
         "Name": "Arc recourbé",
@@ -108,6 +131,7 @@
       }
     },
     {
+      "id": "hand-axe",
       "weight": 3,
       "fields": {
         "Name": "Hachette",
@@ -115,6 +139,7 @@
       }
     },
     {
+      "id": "flail",
       "weight": 3,
       "fields": {
         "Name": "Fléau d'armes",
@@ -122,6 +147,7 @@
       }
     },
     {
+      "id": "scimitar",
       "weight": 3,
       "fields": {
         "Name": "Cimeterre",
@@ -129,6 +155,7 @@
       }
     },
     {
+      "id": "glaive",
       "weight": 2,
       "fields": {
         "Name": "Glaive",
@@ -136,6 +163,7 @@
       }
     },
     {
+      "id": "twin-fighting-knives",
       "weight": 2,
       "fields": {
         "Name": "Paire de couteaux de combat",
@@ -143,6 +171,7 @@
       }
     },
     {
+      "id": "heavy-repeating-crossbow",
       "weight": 2,
       "fields": {
         "Name": "Arbalète lourde à répétition",
@@ -150,6 +179,7 @@
       }
     },
     {
+      "id": "whip",
       "weight": 2,
       "fields": {
         "Name": "Fouet",
@@ -157,6 +187,7 @@
       }
     },
     {
+      "id": "trident",
       "weight": 2,
       "fields": {
         "Name": "Trident",
@@ -164,6 +195,7 @@
       }
     },
     {
+      "id": "sling",
       "weight": 2,
       "fields": {
         "Name": "Fronde",
@@ -171,36 +203,42 @@
       }
     },
     {
+      "id": "runesmiths-hammer",
       "fields": {
         "Name": "Marteau de maître runique",
         "Description": "Un marteau d'artisan renforcé, équilibré pour le combat comme pour l'art runique."
       }
     },
     {
+      "id": "bladed-chain",
       "fields": {
         "Name": "Chaîne hérissée de lames",
         "Description": "Une arme souple et difficile à manier, qui offre une grande allonge au prix de risques considérables."
       }
     },
     {
+      "id": "crystal-scepter",
       "fields": {
         "Name": "Sceptre de cristal",
         "Description": "Un instrument magique robuste qui peut également servir de masse légère."
       }
     },
     {
+      "id": "meteor-iron-maul",
       "fields": {
         "Name": "Maillet en fer météorique",
         "Description": "Un marteau à deux mains exceptionnellement lourd, dont les impacts sont dévastateurs."
       }
     },
     {
+      "id": "moon-silver-chakram",
       "fields": {
         "Name": "Chakram en argent lunaire",
         "Description": "Une lame de jet circulaire qui brille sous la lumière de la lune."
       }
     },
     {
+      "id": "bone-longbow",
       "fields": {
         "Name": "Arc long en os",
         "Description": "Un arc puissant assemblé à partir des ossements d'une bête gigantesque."

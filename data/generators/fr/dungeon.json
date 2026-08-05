@@ -1,92 +1,121 @@
 {
+  "schemaVersion": 2,
+  "id": "dungeon",
+  "kind": "category",
+  "visibility": "public",
   "name": "Donjons",
   "description": "Sites d’aventure, ruines, repaires et complexes hostiles",
+  "entrySchema": {
+    "type": "text"
+  },
   "entries": [
     {
+      "id": "buried-temple",
       "weight": 3,
       "value": "Temple enseveli — salles sacrées effondrées autour d’un autel scellé qui reçoit encore des offrandes."
     },
     {
+      "id": "abandoned-mine",
       "weight": 3,
       "value": "Mine abandonnée — galeries instables, puits inondés, ancien matériel et quelque chose qui suit les rails."
     },
     {
+      "id": "bandit-cavern",
       "weight": 3,
       "value": "Caverne de bandits — tunnels naturels agrandis et aménagés avec barricades, réserves, cellules et issues secrètes."
     },
     {
+      "id": "ruined-fortress",
       "weight": 3,
       "value": "Forteresse en ruine — murailles éventrées au-dessus d’arsenaux intacts, de tunnels de commandement et de défenseurs oubliés."
     },
     {
+      "id": "ancient-crypt",
       "weight": 3,
       "value": "Crypte antique — tombeaux familiaux, pièges funéraires, archives ancestrales et chambres scellées récemment profanées."
     },
     {
+      "id": "wizards-tower",
       "weight": 2,
       "value": "Tour de mage — laboratoires superposés où des expériences ratées ont déformé la gravité et l’espace."
     },
     {
+      "id": "sewer-labyrinth",
       "weight": 2,
       "value": "Labyrinthe d’égouts — canalisations encore actives, fondations oubliées, voies de contrebande et créatures territoriales."
     },
     {
+      "id": "sunken-palace",
       "weight": 2,
       "value": "Palais englouti — salles inondées accessibles à marée basse, en plongée ou grâce à d’anciennes pompes."
     },
     {
+      "id": "monster-warren",
       "weight": 2,
       "value": "Terriers de monstres — nids reliés entre eux et remodelés par des générations d’habitants toujours plus imposants."
     },
     {
+      "id": "prison-complex",
       "weight": 2,
       "value": "Complexe pénitentiaire — cellules, ateliers, salles d’exécution, passages réservés aux gardes et traces d’une évasion massive."
     },
     {
+      "id": "collapsed-city-district",
       "weight": 2,
       "value": "Quartier urbain effondré — rues et maisons ensevelies, reliées par les caves et des gouffres."
     },
     {
+      "id": "cursed-manor",
       "weight": 2,
       "value": "Manoir maudit — demeure noble condamnée à revivre la dernière nuit précédant l’anéantissement de ses habitants."
     },
     {
+      "id": "volcanic-shrine",
       "weight": 2,
       "value": "Sanctuaire volcanique — tunnels ravagés par la chaleur, ponts sacrificiels, canaux de lave et gardiens insensibles au feu."
     },
     {
+      "id": "frozen-tomb",
       "weight": 2,
       "value": "Tombeau gelé — salles préservées par la glace où chaque porte ouverte libère air antique, maladies et anciens occupants."
     },
     {
+      "id": "cult-sanctuary",
       "weight": 2,
       "value": "Sanctuaire d’un culte — salles de réunion camouflées qui descendent vers des chambres rituelles et un site d’invocation inachevé."
     },
     {
+      "id": "living-dungeon",
       "weight": 1,
       "value": "Donjon vivant — organisme gigantesque dont les cavités digèrent les intrus et se réorganisent comme des organes."
     },
     {
+      "id": "dream-prison",
       "weight": 1,
       "value": "Prison onirique — complexe mental auquel on accède en dormant, dont les sorties se cachent dans les souvenirs des prisonniers."
     },
     {
+      "id": "inverted-tower",
       "weight": 1,
       "value": "Tour inversée — édifice qui s’enfonce dans la terre tandis que la gravité attire vers son toit lointain."
     },
     {
+      "id": "planar-embassy",
       "weight": 1,
       "value": "Ambassade planaire — complexe diplomatique abandonné, construit pour des visiteurs aux corps et aux lois physiques incompatibles."
     },
     {
+      "id": "clockwork-vault",
       "weight": 1,
       "value": "Caveau mécanique — salles aux mécanismes précis qui réarment les pièges et font pivoter les couloirs selon un horaire fixe."
     },
     {
+      "id": "worldroot-hollow",
       "weight": 1,
       "value": "Creux de la Racine-monde — tunnels primordiaux au cœur d’un réseau de racines colossal gagné par une corruption grandissante."
     },
     {
+      "id": "astral-observatory",
       "weight": 1,
       "value": "Observatoire astral — ruine isolée dont les lentilles ouvrent des passages physiques vers de dangereux corps célestes."
     }

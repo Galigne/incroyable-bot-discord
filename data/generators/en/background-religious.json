@@ -1,8 +1,17 @@
 {
-  "name": "religiousBackground",
+  "schemaVersion": 2,
+  "id": "background-religious",
+  "kind": "component",
+  "visibility": "internal",
+  "name": "Religious background details",
   "description": "Background details for religious NPCs",
+  "entrySchema": {
+    "type": "fields",
+    "required": ["Appearance", "Backstory", "Goals"]
+  },
   "entries": [
     {
+      "id": "neatly-robed-with-well-used-prayer-beads-and-a",
       "fields": {
         "Appearance": "Neatly robed with well-used prayer beads and a calm, attentive expression.",
         "Backstory": "A village priest took responsibility for a neglected shrine after its former keeper disappeared.",
@@ -10,6 +19,7 @@
       }
     },
     {
+      "id": "simply-dressed-close-cropped-and-marked-by-calluses-from",
       "fields": {
         "Appearance": "Simply dressed, close-cropped, and marked by calluses from both labor and ritual practice.",
         "Backstory": "A monastery raised them from childhood and recently sent them beyond its walls for the first time.",
@@ -17,6 +27,7 @@
       }
     },
     {
+      "id": "wears-practical-temple-clothes-beneath-a-bright-ceremonial",
       "fields": {
         "Appearance": "Wears practical temple clothes beneath a bright ceremonial sash patched many times.",
         "Backstory": "A temple servant secretly kept the sanctuary operating while its clergy became entangled in politics.",
@@ -24,6 +35,7 @@
       }
     },
     {
+      "id": "dusty-from-travel-carrying-inexpensive-tokens-from-many",
       "fields": {
         "Appearance": "Dusty from travel, carrying inexpensive tokens from many shrines and a carefully wrapped relic.",
         "Backstory": "A pilgrim promised to cross the realm after surviving an illness no healer expected them to overcome.",
@@ -31,6 +43,7 @@
       }
     },
     {
+      "id": "severe-but-approachable-with-annotated-scriptures-tucked-into",
       "fields": {
         "Appearance": "Severe but approachable, with annotated scriptures tucked into every available pocket.",
         "Backstory": "A respected theologian was censured for arguing that an old commandment had been deliberately mistranslated.",

@@ -20,6 +20,10 @@ const {
 	getGenerator,
 } = require('../services/generatorCatalog');
 const {
+	clearStatProfileCache,
+	getStatProfile,
+} = require('../services/statProfileCatalog');
+const {
 	RELOAD_STAGES,
 	createRuntimeReloader,
 } = require('../runtime/runtimeReloader');
@@ -139,12 +143,15 @@ test('localization reload is transactional and preserves valid catalogs on failu
 	}
 });
 
-test('generator reload clears both localized caches', () => {
+test('generation-data cache clearing rebuilds both locales and statistical profiles', () => {
 	const englishBefore = getGenerator('weapons', 'en');
 	const frenchBefore = getGenerator('weapons', 'fr');
+	const profileBefore = getStatProfile('character-balanced');
 	clearGeneratorCache();
+	clearStatProfileCache();
 	assert.notEqual(getGenerator('weapons', 'en'), englishBefore);
 	assert.notEqual(getGenerator('weapons', 'fr'), frenchBefore);
+	assert.notEqual(getStatProfile('character-balanced'), profileBefore);
 });
 
 test('command registry replacement is atomic and does not duplicate commands or listeners', () => {

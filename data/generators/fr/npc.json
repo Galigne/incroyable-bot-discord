@@ -1,8 +1,17 @@
 {
+  "schemaVersion": 2,
+  "id": "npc",
+  "kind": "category",
+  "visibility": "public",
   "name": "PNJ",
   "description": "Personnages non joueurs prêts à l'emploi",
+  "entrySchema": {
+    "type": "fields",
+    "required": ["Name", "Description"]
+  },
   "entries": [
     {
+      "id": "mara-venn",
       "weight": 2,
       "fields": {
         "Name": "Mara Venn",
@@ -10,6 +19,7 @@
       }
     },
     {
+      "id": "brother-caldus",
       "weight": 2,
       "fields": {
         "Name": "Brother Caldus",
@@ -17,18 +27,21 @@
       }
     },
     {
+      "id": "iri-quickchalk",
       "fields": {
         "Name": "Iri Quickchalk",
         "Description": "un cartographe gobelin qui dessine des cartes à partir de rumeurs plutôt que de routes et s'offusque lorsque les unes ou les autres se révèlent inexactes."
       }
     },
     {
+      "id": "lady-seraphine-vale",
       "fields": {
         "Name": "Lady Seraphine Vale",
         "Description": "une noble d'une politesse irréprochable qui finance les deux camps d'une rébellion afin de limiter les pertes civiles."
       }
     },
     {
+      "id": "tomas-rook",
       "weight": 2,
       "fields": {
         "Name": "Tomas Rook",
@@ -36,6 +49,7 @@
       }
     },
     {
+      "id": "nella-brass",
       "weight": 2,
       "fields": {
         "Name": "Nella Brass",
@@ -43,6 +57,7 @@
       }
     },
     {
+      "id": "captain-orro-flint",
       "weight": 2,
       "fields": {
         "Name": "Captain Orro Flint",
@@ -50,6 +65,7 @@
       }
     },
     {
+      "id": "velvet",
       "weight": 2,
       "fields": {
         "Name": "Velvet",
@@ -57,6 +73,7 @@
       }
     },
     {
+      "id": "old-fen",
       "weight": 2,
       "fields": {
         "Name": "Old Fen",
@@ -64,12 +81,14 @@
       }
     },
     {
+      "id": "professor-holloway",
       "fields": {
         "Name": "Professor Holloway",
         "Description": "un historien spectral qui possède son propre squelette afin de poursuivre ses recherches sur le terrain."
       }
     },
     {
+      "id": "kesh-of-seven-knives",
       "weight": 2,
       "fields": {
         "Name": "Kesh of Seven Knives",
@@ -77,6 +96,7 @@
       }
     },
     {
+      "id": "pella-sunward",
       "weight": 2,
       "fields": {
         "Name": "Pella Sunward",
@@ -84,6 +104,7 @@
       }
     },
     {
+      "id": "dorrin-slate",
       "weight": 2,
       "fields": {
         "Name": "Dorrin Slate",
@@ -91,6 +112,7 @@
       }
     },
     {
+      "id": "mina-thrice-lost",
       "weight": 2,
       "fields": {
         "Name": "Mina Thrice-Lost",
@@ -98,6 +120,7 @@
       }
     },
     {
+      "id": "constable-reed",
       "weight": 3,
       "fields": {
         "Name": "Constable Reed",
@@ -105,18 +128,21 @@
       }
     },
     {
+      "id": "sable-of-the-reeds",
       "fields": {
         "Name": "Sable-of-the-Reeds",
         "Description": "un diplomate aux écailles des marais qui marque une pause de plusieurs minutes avant chaque réponse et ne gaspille jamais un mot."
       }
     },
     {
+      "id": "king-pip-ix",
       "fields": {
         "Name": "King Pip IX",
         "Description": "un rat autoproclamé monarque, à la tête d'un excellent réseau d'espions sous la capitale."
       }
     },
     {
+      "id": "auntie-ember",
       "weight": 3,
       "fields": {
         "Name": "Auntie Ember",
@@ -124,6 +150,7 @@
       }
     },
     {
+      "id": "elias-north",
       "weight": 2,
       "fields": {
         "Name": "Elias North",
@@ -131,6 +158,7 @@
       }
     },
     {
+      "id": "juniper-wake",
       "weight": 2,
       "fields": {
         "Name": "Juniper Wake",
@@ -138,12 +166,14 @@
       }
     },
     {
+      "id": "the-gray-witness",
       "fields": {
         "Name": "The Gray Witness",
         "Description": "une silhouette silencieuse en armure qui apparaît à proximité des événements historiques et dessine toutes les personnes présentes."
       }
     },
     {
+      "id": "nox-bellweather",
       "weight": 2,
       "fields": {
         "Name": "Nox Bellweather",
@@ -151,6 +181,7 @@
       }
     },
     {
+      "id": "rill",
       "weight": 2,
       "fields": {
         "Name": "Rill",
@@ -158,6 +189,7 @@
       }
     },
     {
+      "id": "magistrate-odo-penn",
       "weight": 2,
       "fields": {
         "Name": "Magistrate Odo Penn",
@@ -165,6 +197,7 @@
       }
     },
     {
+      "id": "vexa-coil",
       "weight": 2,
       "fields": {
         "Name": "Vexa Coil",
@@ -172,12 +205,14 @@
       }
     },
     {
+      "id": "sir-candlewick",
       "fields": {
         "Name": "Sir Candlewick",
         "Description": "une minuscule armure animée qui cherche une personne assez grande pour devenir son écuyer."
       }
     },
     {
+      "id": "hara-moonclaw",
       "weight": 2,
       "fields": {
         "Name": "Hara Moonclaw",
@@ -185,12 +220,14 @@
       }
     },
     {
+      "id": "merrit-glass",
       "fields": {
         "Name": "Merrit Glass",
         "Description": "un sosie royal anxieux qui gouverne avec davantage de compétence que le monarque disparu."
       }
     },
     {
+      "id": "sister-quiet",
       "weight": 2,
       "fields": {
         "Name": "Sister Quiet",
@@ -198,6 +235,7 @@
       }
     },
     {
+      "id": "bramble-jack",
       "weight": 2,
       "fields": {
         "Name": "Bramble Jack",

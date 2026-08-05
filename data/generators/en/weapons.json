@@ -1,8 +1,17 @@
 {
+  "schemaVersion": 2,
+  "id": "weapons",
+  "kind": "category",
+  "visibility": "public",
   "name": "weapons",
   "description": "Weapons suitable for generated characters",
+  "entrySchema": {
+    "type": "fields",
+    "required": ["Name", "Description"]
+  },
   "entries": [
     {
+      "id": "longsword",
       "weight": 5,
       "fields": {
         "Name": "Longsword",
@@ -10,6 +19,7 @@
       }
     },
     {
+      "id": "short-sword",
       "weight": 5,
       "fields": {
         "Name": "Short sword",
@@ -17,6 +27,7 @@
       }
     },
     {
+      "id": "spear",
       "weight": 5,
       "fields": {
         "Name": "Spear",
@@ -24,6 +35,7 @@
       }
     },
     {
+      "id": "hunting-bow",
       "weight": 5,
       "fields": {
         "Name": "Hunting bow",
@@ -31,6 +43,7 @@
       }
     },
     {
+      "id": "dagger",
       "weight": 5,
       "fields": {
         "Name": "Dagger",
@@ -38,6 +51,7 @@
       }
     },
     {
+      "id": "battle-axe",
       "weight": 4,
       "fields": {
         "Name": "Battle axe",
@@ -45,6 +59,7 @@
       }
     },
     {
+      "id": "mace",
       "weight": 4,
       "fields": {
         "Name": "Mace",
@@ -52,6 +67,7 @@
       }
     },
     {
+      "id": "quarterstaff",
       "weight": 4,
       "fields": {
         "Name": "Quarterstaff",
@@ -59,6 +75,7 @@
       }
     },
     {
+      "id": "crossbow",
       "weight": 4,
       "fields": {
         "Name": "Crossbow",
@@ -66,6 +83,7 @@
       }
     },
     {
+      "id": "saber",
       "weight": 4,
       "fields": {
         "Name": "Saber",
@@ -73,6 +91,7 @@
       }
     },
     {
+      "id": "greatsword",
       "weight": 3,
       "fields": {
         "Name": "Greatsword",
@@ -80,6 +99,7 @@
       }
     },
     {
+      "id": "halberd",
       "weight": 3,
       "fields": {
         "Name": "Halberd",
@@ -87,6 +107,7 @@
       }
     },
     {
+      "id": "warhammer",
       "weight": 3,
       "fields": {
         "Name": "Warhammer",
@@ -94,6 +115,7 @@
       }
     },
     {
+      "id": "rapier",
       "weight": 3,
       "fields": {
         "Name": "Rapier",
@@ -101,6 +123,7 @@
       }
     },
     {
+      "id": "recurve-bow",
       "weight": 3,
       "fields": {
         "Name": "Recurve bow",
@@ -108,6 +131,7 @@
       }
     },
     {
+      "id": "hand-axe",
       "weight": 3,
       "fields": {
         "Name": "Hand axe",
@@ -115,6 +139,7 @@
       }
     },
     {
+      "id": "flail",
       "weight": 3,
       "fields": {
         "Name": "Flail",
@@ -122,6 +147,7 @@
       }
     },
     {
+      "id": "scimitar",
       "weight": 3,
       "fields": {
         "Name": "Scimitar",
@@ -129,6 +155,7 @@
       }
     },
     {
+      "id": "glaive",
       "weight": 2,
       "fields": {
         "Name": "Glaive",
@@ -136,6 +163,7 @@
       }
     },
     {
+      "id": "twin-fighting-knives",
       "weight": 2,
       "fields": {
         "Name": "Twin fighting knives",
@@ -143,6 +171,7 @@
       }
     },
     {
+      "id": "heavy-repeating-crossbow",
       "weight": 2,
       "fields": {
         "Name": "Heavy repeating crossbow",
@@ -150,6 +179,7 @@
       }
     },
     {
+      "id": "whip",
       "weight": 2,
       "fields": {
         "Name": "Whip",
@@ -157,6 +187,7 @@
       }
     },
     {
+      "id": "trident",
       "weight": 2,
       "fields": {
         "Name": "Trident",
@@ -164,6 +195,7 @@
       }
     },
     {
+      "id": "sling",
       "weight": 2,
       "fields": {
         "Name": "Sling",
@@ -171,36 +203,42 @@
       }
     },
     {
+      "id": "runesmiths-hammer",
       "fields": {
         "Name": "Runesmith's hammer",
         "Description": "A reinforced crafting hammer balanced for combat and runic work."
       }
     },
     {
+      "id": "bladed-chain",
       "fields": {
         "Name": "Bladed chain",
         "Description": "A difficult flexible weapon offering reach at considerable risk."
       }
     },
     {
+      "id": "crystal-scepter",
       "fields": {
         "Name": "Crystal scepter",
         "Description": "A durable arcane implement that also functions as a light mace."
       }
     },
     {
+      "id": "meteor-iron-maul",
       "fields": {
         "Name": "Meteor-iron maul",
         "Description": "An exceptionally heavy two-handed hammer with devastating impact."
       }
     },
     {
+      "id": "moon-silver-chakram",
       "fields": {
         "Name": "Moon-silver chakram",
         "Description": "A circular throwing blade that shines under moonlight."
       }
     },
     {
+      "id": "bone-longbow",
       "fields": {
         "Name": "Bone longbow",
         "Description": "A powerful bow assembled from the remains of a giant beast."

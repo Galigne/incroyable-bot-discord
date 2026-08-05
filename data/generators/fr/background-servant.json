@@ -1,8 +1,17 @@
 {
-  "name": "servantBackground",
-  "description": "Détails de Background pour les PNJ serviteurs",
+  "schemaVersion": 2,
+  "id": "background-servant",
+  "kind": "component",
+  "visibility": "internal",
+  "name": "Détails du background de serviteur",
+  "description": "Apparences, histoires et objectifs pour les PNJ serviteurs",
+  "entrySchema": {
+    "type": "fields",
+    "required": ["Appearance", "Backstory", "Goals"]
+  },
   "entries": [
     {
+      "id": "immaculately-presented-in-durable-formal-clothes-moving-with",
       "fields": {
         "Appearance": "Présentation irréprochable, vêtements formels et résistants, gestes silencieux et efficaces.",
         "Backstory": "Un domestique maintient à flot le même domaine en difficulté depuis trois générations de propriétaires négligents.",
@@ -10,6 +19,7 @@
       }
     },
     {
+      "id": "discreet-observant-and-dressed-to-remain-unnoticed-beside",
       "fields": {
         "Appearance": "Discret et observateur, vêtu pour passer inaperçu aux côtés d’un employeur plus en vue.",
         "Backstory": "Un assistant personnel est devenu l’unique confident d’un héritier qui s’apprête à refuser un mariage arrangé.",
@@ -17,6 +27,7 @@
       }
     },
     {
+      "id": "strong-backed-and-plainly-clothed-with-hands-roughened-by",
       "fields": {
         "Appearance": "Dos robuste, vêtements simples et mains calleuses après des années de travaux physiques variés.",
         "Backstory": "Un journalier a vu des fonctionnaires dissimuler des défauts structurels après un accident de chantier mortel.",
@@ -24,6 +35,7 @@
       }
     },
     {
+      "id": "aproned-flour-dusted-and-quick-moving-with-a-habit-of",
       "fields": {
         "Appearance": "Tablier couvert de farine, gestes vifs et habitude d’écouter pendant que les autres mangent.",
         "Backstory": "Un cuisinier en a plus appris sur les factions rivales grâce aux bribes de conversation entendues à table que la plupart des espions professionnels.",
@@ -31,6 +43,7 @@
       }
     },
     {
+      "id": "smells-faintly-of-hay-and-leather-with-practical",
       "fields": {
         "Appearance": "Légère odeur de foin et de cuir, bottes pratiques et aisance naturelle avec les animaux.",
         "Backstory": "Un palefrenier a découvert qu’une monture de prix avait été délibérément dressée pour désarçonner un cavalier précis.",

@@ -1,8 +1,17 @@
 {
-  "name": "scholarBackground",
-  "description": "Détails de Background pour les PNJ érudits",
+  "schemaVersion": 2,
+  "id": "background-scholar",
+  "kind": "component",
+  "visibility": "internal",
+  "name": "Détails du background d’érudit",
+  "description": "Apparences, histoires et objectifs pour les PNJ érudits",
+  "entrySchema": {
+    "type": "fields",
+    "required": ["Appearance", "Backstory", "Goals"]
+  },
   "entries": [
     {
+      "id": "young-ink-stained-and-sleep-deprived-carrying-more-books-than",
       "fields": {
         "Appearance": "Jeune, taché d’encre et privé de sommeil, transportant plus de livres que de provisions utiles.",
         "Backstory": "Un étudiant a découvert des preuves qui contredisent la thèse principale d’un professeur renommé.",
@@ -10,6 +19,7 @@
       }
     },
     {
+      "id": "absent-minded-and-formally-dressed-with-spectacles-repaired-in",
       "fields": {
         "Appearance": "Distrait et vêtu avec formalité, portant des lunettes réparées à plusieurs endroits.",
         "Backstory": "Un chercheur a consacré des décennies à une théorie longtemps méprisée, jusqu’à ce que des événements récents en démontrent la dangereuse justesse.",
@@ -17,6 +27,7 @@
       }
     },
     {
+      "id": "quiet-precise-and-burdened-with-scroll-cases-sealing",
       "fields": {
         "Appearance": "Silencieux et précis, encombré d’étuis à parchemins, de cire à cacheter et de feuillets couverts d’une écriture serrée.",
         "Backstory": "Un scribe a remarqué que des décrets officiels étaient subtilement modifiés entre leur copie et leur publication.",
@@ -24,6 +35,7 @@
       }
     },
     {
+      "id": "dusty-soft-spoken-and-watchful-with-keys-to-collections",
       "fields": {
         "Appearance": "Poussiéreux, d’une voix douce et toujours vigilant, avec les clés de collections inaccessibles à la plupart des visiteurs.",
         "Backstory": "Un bibliothécaire a découvert qu’un livre prétendument détruit réapparaissait sans cesse sous des titres différents.",
@@ -31,6 +43,7 @@
       }
     },
     {
+      "id": "field-worn-rather-than-academic-with-notebooks-specimen-jars",
       "fields": {
         "Appearance": "Davantage marqué par le terrain que par les études, avec des carnets, des bocaux à spécimens et de solides bottes de voyage.",
         "Backstory": "Un historien indépendant a quitté l’université pour explorer des ruines que les communautés locales considèrent comme sacrées.",

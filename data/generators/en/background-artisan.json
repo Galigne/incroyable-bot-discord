@@ -1,8 +1,17 @@
 {
-  "name": "artisanBackground",
+  "schemaVersion": 2,
+  "id": "background-artisan",
+  "kind": "component",
+  "visibility": "internal",
+  "name": "Artisan background details",
   "description": "Background details for artisan NPCs",
+  "entrySchema": {
+    "type": "fields",
+    "required": ["Appearance", "Backstory", "Goals"]
+  },
   "entries": [
     {
+      "id": "muscular-forearms-small-burn-scars-and-heavy-clothing",
       "fields": {
         "Appearance": "Muscular forearms, small burn scars, and heavy clothing marked by forge soot.",
         "Backstory": "A blacksmith inherited a failing workshop and an unfinished commission from a dead master.",
@@ -10,6 +19,7 @@
       }
     },
     {
+      "id": "covered-in-fine-sawdust-with-measured-movements-and",
       "fields": {
         "Appearance": "Covered in fine sawdust, with measured movements and pencils tucked behind both ears.",
         "Backstory": "A carpenter became renowned for rebuilding homes after a fire but suspects the blaze was deliberate.",
@@ -17,6 +27,7 @@
       }
     },
     {
+      "id": "precisely-dressed-in-self-made-clothing-with-quick-fingers",
       "fields": {
         "Appearance": "Precisely dressed in self-made clothing, with quick fingers and a critical eye for detail.",
         "Backstory": "A tailor learned court secrets by listening while powerful clients believed servants were invisible.",
@@ -24,6 +35,7 @@
       }
     },
     {
+      "id": "pale-from-laboratory-work-with-stained-gloves-and",
       "fields": {
         "Appearance": "Pale from laboratory work, with stained gloves and singed eyebrows of uneven length.",
         "Backstory": "An alchemist's useful discovery was claimed by a guild examiner who then suppressed the formula.",
@@ -31,6 +43,7 @@
       }
     },
     {
+      "id": "quiet-and-focused-wearing-magnifying-lenses-and-an",
       "fields": {
         "Appearance": "Quiet and focused, wearing magnifying lenses and an apron full of tiny organized tools.",
         "Backstory": "A clockmaker found an impossible mechanism hidden inside an ordinary repair job.",

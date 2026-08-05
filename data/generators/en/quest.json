@@ -1,118 +1,155 @@
 {
+  "schemaVersion": 2,
+  "id": "quest",
+  "kind": "category",
+  "visibility": "public",
   "name": "quest",
   "description": "Adventure hooks, objectives, and dilemmas",
+  "entrySchema": {
+    "type": "text"
+  },
   "entries": [
     {
+      "id": "recover-a-villages-stolen-shadows-before-sunrise-the",
       "value": "Recover a village's stolen shadows before sunrise; the thief is using them to build a body for a lonely spirit."
     },
     {
+      "id": "escort-an-unbearable-but-vital-diplomat-through-territory",
       "weight": 2,
       "value": "Escort an unbearable but vital diplomat through territory where speaking a lie attracts predators."
     },
     {
+      "id": "investigate-a-mine-where-workers-return-each-evening",
       "weight": 2,
       "value": "Investigate a mine where workers return each evening with memories belonging to people who vanished years ago."
     },
     {
+      "id": "steal-a-cursed-crown-from-a-tyrant-without",
       "weight": 2,
       "value": "Steal a cursed crown from a tyrant without letting anyone wear it, including the crown's persuasive ghost."
     },
     {
+      "id": "find-why-a-river-has-stopped-flowing-before",
       "weight": 3,
       "value": "Find why a river has stopped flowing before two downstream towns go to war over the remaining water."
     },
     {
+      "id": "rescue-a-dragon-from-a-princess-who-collects",
       "value": "Rescue a dragon from a princess who collects rare creatures and controls the local legal system."
     },
     {
+      "id": "map-a-forest-that-rearranges-its-paths-whenever",
       "weight": 2,
       "value": "Map a forest that rearranges its paths whenever someone makes a decision they regret."
     },
     {
+      "id": "deliver-a-sealed-box-to-a-monastery-every",
       "weight": 3,
       "value": "Deliver a sealed box to a monastery; every faction claims the box contains something different and none may be entirely wrong."
     },
     {
+      "id": "clear-a-familys-name-by-proving-their-executed",
       "weight": 2,
       "value": "Clear a family's name by proving their executed ancestor was replaced by a mimic before committing treason."
     },
     {
+      "id": "negotiate-peace-between-a-town-and-the-giant",
       "weight": 3,
       "value": "Negotiate peace between a town and the giant whose seasonal migration now passes directly through its new walls."
     },
     {
+      "id": "retrieve-medicine-from-a-quarantined-city-where-the",
       "value": "Retrieve medicine from a quarantined city where the disease infects written words rather than bodies."
     },
     {
+      "id": "stop-a-tournament-champion-who-cannot-lose-because",
       "weight": 2,
       "value": "Stop a tournament champion who cannot lose because every defeated opponent is magically added to their strength."
     },
     {
+      "id": "explore-a-lighthouse-shining-into-the-ground-while",
       "value": "Explore a lighthouse shining into the ground while ships vanish beneath nearby fields."
     },
     {
+      "id": "return-a-runaway-familiar-to-its-mage-then",
       "weight": 2,
       "value": "Return a runaway familiar to its mage, then decide whether the familiar's claim of mistreatment is true."
     },
     {
+      "id": "protect-a-haunted-theaters-final-performance-so-its",
       "weight": 2,
       "value": "Protect a haunted theater's final performance so its dead playwright can reveal the murderer in the last scene."
     },
     {
+      "id": "locate-a-missing-tax-caravan-carrying-no-gold",
       "weight": 3,
       "value": "Locate a missing tax caravan carrying no gold but a ledger capable of collapsing three noble houses."
     },
     {
+      "id": "break-into-an-abandoned-prison-to-free-an",
       "weight": 2,
       "value": "Break into an abandoned prison to free an innocent inmate whom official records say died forty years ago."
     },
     {
+      "id": "gather-three-rival-runesmiths-to-repair-a-failing",
       "weight": 3,
       "value": "Gather three rival runesmiths to repair a failing ward, despite each blaming the others for its sabotage."
     },
     {
+      "id": "track-a-monster-that-steals-names-its-victims",
       "weight": 2,
       "value": "Track a monster that steals names; its victims remain alive but cannot be remembered or addressed."
     },
     {
+      "id": "win-a-cooking-contest-whose-prize-is-an",
       "value": "Win a cooking contest whose prize is an ancient map, while ingredients and judges are being secretly enchanted."
     },
     {
+      "id": "recover-a-sacred-bell-from-peaceful-settlers-who",
       "weight": 2,
       "value": "Recover a sacred bell from peaceful settlers who need it to keep a worse creature asleep."
     },
     {
+      "id": "investigate-an-army-that-marches-every-night-but",
       "weight": 2,
       "value": "Investigate an army that marches every night but leaves no footprints and has not attacked anyone."
     },
     {
+      "id": "help-a-ghost-complete-one-final-promise-without",
       "weight": 2,
       "value": "Help a ghost complete one final promise without revealing that fulfilling it will ruin a living descendant."
     },
     {
+      "id": "enter-a-nobles-dream-to-remove-an-assassin",
       "value": "Enter a noble's dream to remove an assassin, knowing wounds and secrets found there may return to reality."
     },
     {
+      "id": "find-the-source-of-counterfeit-healing-potions-that",
       "weight": 2,
       "value": "Find the source of counterfeit healing potions that work perfectly but transfer injuries to random strangers."
     },
     {
+      "id": "capture-a-famous-outlaw-before-a-corrupt-sheriff",
       "weight": 3,
       "value": "Capture a famous outlaw before a corrupt sheriff does, then judge whether to deliver either of them."
     },
     {
+      "id": "retrieve-a-meteor-shard-from-disputed-ground-while",
       "weight": 2,
       "value": "Retrieve a meteor shard from disputed ground while the shard rapidly creates strange life around it."
     },
     {
+      "id": "reunite-the-pieces-of-a-broken-treaty-before",
       "weight": 3,
       "value": "Reunite the pieces of a broken treaty before its magical oath interprets the damage as a declaration of war."
     },
     {
+      "id": "discover-who-is-replacing-town-statues-with-petrified",
       "weight": 2,
       "value": "Discover who is replacing town statues with petrified citizens and why the statues are smiling."
     },
     {
+      "id": "close-a-portal-that-grants-one-wish-to",
       "value": "Close a portal that grants one wish to everyone nearby, with increasingly literal and destructive results."
     }
   ]

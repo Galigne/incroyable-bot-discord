@@ -1,8 +1,17 @@
 {
+  "schemaVersion": 2,
+  "id": "race",
+  "kind": "category",
+  "visibility": "public",
   "name": "Races",
   "description": "Peuples jouables, avec leur culture, leur apparence et des dons suggérés",
+  "entrySchema": {
+    "type": "fields",
+    "required": ["Name", "Description", "Skill Bonus", "Physical Ability"]
+  },
   "entries": [
     {
+      "id": "human",
       "weight": 8,
       "fields": {
         "Name": "Humain",
@@ -12,6 +21,7 @@
       }
     },
     {
+      "id": "elf",
       "weight": 6,
       "fields": {
         "Name": "Elfe",
@@ -21,6 +31,7 @@
       }
     },
     {
+      "id": "dwarf",
       "weight": 6,
       "fields": {
         "Name": "Nain",
@@ -30,6 +41,7 @@
       }
     },
     {
+      "id": "orc",
       "weight": 5,
       "fields": {
         "Name": "Orque",
@@ -39,6 +51,7 @@
       }
     },
     {
+      "id": "goblin",
       "weight": 4,
       "fields": {
         "Name": "Gobelin",

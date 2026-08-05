@@ -1,5 +1,13 @@
 const fs = require('node:fs');
 const path = require('node:path');
+const {
+	getStatProfile,
+	listStatProfiles,
+} = require('../../services/statProfileCatalog');
+const {
+	getEntryWeight,
+	selectWeightedEntry,
+} = require('../../services/weightedSelector');
 
 module.exports = function createGeneratorChecks(context) {
 	const {
@@ -9,230 +17,73 @@ module.exports = function createGeneratorChecks(context) {
 
 	function checkGeneratorCatalog() {
 		try {
-			checkLocalizedGeneratorFiles(errors, generatorCatalog);
-			const categories = generatorCatalog.listCategories();
-			if (categories.length === 0) {
-				errors.push('At least one generator category is required.');
+			checkProductionDataIsV2(errors);
+			const publicGenerators = generatorCatalog.listGenerators('en');
+			const allGenerators = generatorCatalog.listGenerators('en', {
+				visibility: 'all',
+			});
+			const internalGenerators = generatorCatalog.listGenerators('en', {
+				visibility: 'internal',
+			});
+			if (
+				publicGenerators.length === 0
+				|| allGenerators.length !== publicGenerators.length + internalGenerators.length
+				|| internalGenerators.some(generator => (
+					!generator.id.startsWith('background-')
+					|| generator.kind !== 'component'
+				))
+			) {
+				errors.push('Generator v2 visibility or kind filtering is incorrect.');
 			}
+
 			const englishRace = generatorCatalog.getGenerator('race', 'en');
 			const frenchRace = generatorCatalog.getGenerator('race', 'fr');
 			if (
 				englishRace === frenchRace
 				|| englishRace?.id !== 'race'
 				|| frenchRace?.id !== 'race'
+				|| englishRace?.entries[0]?.id !== 'human'
+				|| frenchRace?.entries[0]?.id !== 'human'
 				|| englishRace?.entries[0]?.fields?.Name !== 'Human'
 				|| frenchRace?.entries[0]?.fields?.Name !== 'Humain'
 				|| generatorCatalog.getGenerator('race', 'fr') !== frenchRace
 			) {
-				errors.push('Generator catalogs are not localized and cached independently.');
+				errors.push('Generator catalogs are not localized and cached by stable ID.');
 			}
 
-			for (const category of categories) {
-				const firstResult = generatorCatalog.generate(category.name, () => 0);
-				if (firstResult?.entry !== category.entries[0]) {
-					errors.push(`Generator category ${category.name} cannot select its first prompt.`);
+			for (const generator of publicGenerators) {
+				const firstResult = generatorCatalog.generate(generator.id, 'en', () => 0);
+				if (firstResult?.entry !== generator.entries[0]) {
+					errors.push(`Generator ${generator.id} cannot select its first entry.`);
+				}
+			}
+			for (const generator of internalGenerators) {
+				if (
+					generatorCatalog.getGenerator(generator.id, 'en') !== generator
+					|| generatorCatalog.generate(generator.id, 'en', () => 0) !== null
+				) {
+					errors.push(`Internal generator ${generator.id} has invalid visibility behavior.`);
 				}
 			}
 
-			if (
-				generatorCatalog.getCategory('personality')
-				&& generatorCatalog.getCategory('personalities')?.key !== 'personality'
-			) {
-				errors.push('Plural generator category names are not normalized correctly.');
-			}
-
 			const weightedEntries = [
-				'Default weight',
-				{ value: 'Double weight', weight: 2 },
+				{ id: 'default-weight', value: 'Default weight' },
+				{ id: 'double-weight', value: 'Double weight', weight: 2 },
 			];
 			if (
-				generatorCatalog.getEntryWeight(weightedEntries[0]) !== 1
-				|| generatorCatalog.getEntryWeight(weightedEntries[1]) !== 2
-				|| generatorCatalog.selectWeightedEntry(weightedEntries, () => 0) !== weightedEntries[0]
-				|| generatorCatalog.selectWeightedEntry(weightedEntries, () => 0.5) !== weightedEntries[1]
+				getEntryWeight(weightedEntries[0]) !== 1
+				|| getEntryWeight(weightedEntries[1]) !== 2
+				|| selectWeightedEntry(weightedEntries, () => 0) !== weightedEntries[0]
+				|| selectWeightedEntry(weightedEntries, () => 0.5) !== weightedEntries[1]
 			) {
 				errors.push('Weighted generator selection is not working correctly.');
 			}
 
-			const requiredCategories = [
-				'animal',
-				'armors',
-				'background',
-				'building',
-				'companion',
-				'criminal',
-				'dungeon',
-				'event',
-				'faction',
-				'government',
-				'inventory',
-				'material',
-				'monster',
-				'name',
-				'npc',
-				'personality',
-				'quest',
-				'race',
-				'region',
-				'religion',
-				'room',
-				'rules',
-				'settlement',
-				'statusEffect',
-				'talents',
-				'trap',
-				'weapons',
-			];
-			for (const categoryName of requiredCategories) {
-				if (!generatorCatalog.getCategory(categoryName)) {
-					errors.push(`Missing generator category: ${categoryName}.`);
-				}
-			}
-			const expandedGeneratorCategories = [
-				'animal',
-				'building',
-				'companion',
-				'criminal',
-				'dungeon',
-				'faction',
-				'government',
-				'material',
-				'monster',
-				'region',
-				'religion',
-				'room',
-				'settlement',
-			];
-			for (const categoryName of expandedGeneratorCategories) {
-				const entryCount = generatorCatalog.getCategory(categoryName)?.entries.length ?? 0;
-				if (entryCount < 20 || entryCount > 40) {
-					errors.push(
-						`Generator category ${categoryName} must contain 20 to 40 entries.`,
-					);
-				}
-			}
-			const backgroundEntries = generatorCatalog.getCategory('background')?.entries ?? [];
-			const backgroundNames = new Set();
-			for (const background of backgroundEntries) {
-				const backgroundName = background.fields?.Name;
-				const generatorName = background.fields?.Generator;
-				const details = generatorCatalog.getCategory(generatorName)?.entries ?? [];
-				if (
-					!backgroundName
-					|| !background.fields?.Description
-					|| !generatorName
-					|| backgroundNames.has(backgroundName.toLowerCase())
-					|| details.length === 0
-					|| details.some(entry => (
-						['Appearance', 'Backstory', 'Goals']
-							.some(field => !entry.fields?.[field])
-					))
-				) {
-					errors.push(`Invalid routed background generator: ${backgroundName ?? 'unknown'}.`);
-				}
-				backgroundNames.add(backgroundName?.toLowerCase());
-			}
-			if (
-				backgroundEntries.length !== 17
-				|| backgroundNames.has('citizen')
-				|| generatorCatalog.getCategory('citizenBackground')
-			) {
-				errors.push('Background routing must contain the 17 supported non-citizen categories.');
-			}
-
-			for (const [categoryName, requiredFields] of [
-				['faction', ['Name', 'Type', 'Goal', 'Resources', 'Hierarchy', 'Allies', 'Enemies']],
-				['government', ['Name', 'Structure', 'Leadership', 'Strength', 'Tension']],
-				[
-					'religion',
-					[
-						'Name',
-						'Deity or Belief',
-						'Rites',
-						'Commandment',
-						'Taboo',
-						'Sacred Symbol',
-						'Religious Order',
-						'Holy Place',
-						'Relationship with Magic',
-					],
-				],
-			]) {
-				const entries = generatorCatalog.getCategory(categoryName)?.entries ?? [];
-				if (entries.some(entry => requiredFields.some(field => !entry.fields?.[field]))) {
-					errors.push(`Generator category ${categoryName} is missing required fields.`);
-				}
-			}
-			if (
-				generatorCatalog.getCategory('loot')
-				|| generatorCatalog.getCategory('power')
-				|| generatorCatalog.getCategory('enemy')
-				|| generatorCatalog.getCategory('location')
-				|| generatorCatalog.getCategory('citizenBackground')
-			) {
-				errors.push('An obsolete generator category still exists.');
-			}
-			const armors = generatorCatalog.getCategory('armors')?.entries ?? [];
-			const armorCombinations = new Set(armors.map(
-				entry => `${entry.fields.Type}:${entry.fields.Rarity}`,
-			));
-			const expectedArmorCombinations = ['light', 'medium', 'heavy']
-				.flatMap(type => ['common', 'uncommon', 'rare', 'epic', 'legendary']
-					.map(rarity => `${type}:${rarity}`));
-			if (
-				armors.length !== 15
-				|| expectedArmorCombinations.some(value => !armorCombinations.has(value))
-			) {
-				errors.push('The armor generator must contain every type and rarity combination.');
-			}
-			for (const categoryName of ['armors', 'weapons', 'inventory']) {
-				const entries = generatorCatalog.getCategory(categoryName)?.entries ?? [];
-				if (entries.some(entry => Object.hasOwn(entry.fields ?? {}, 'Encumbrance'))) {
-					errors.push(
-						`Generator category ${categoryName} still contains obsolete Encumbrance fields.`,
-					);
-				}
-			}
-			const races = generatorCatalog.getCategory('race')?.entries ?? [];
-			const commonRaceNames = ['Human', 'Elf', 'Dwarf', 'Orc', 'Goblin'];
-			const raceNames = new Set(races.map(entry => entry.fields.Name));
-			if (
-				commonRaceNames.some(name => !raceNames.has(name))
-				|| races.some(entry => (
-					!entry.fields.Description
-					|| !entry.fields['Skill Bonus']
-					|| !entry.fields['Physical Ability']
-				))
-			) {
-				errors.push('Race entries must expose names, descriptions, and racial traits.');
-			}
-			const generatedName = generatorCatalog.generate('name', () => 0)?.entry;
-			if (!generatedName?.fields?.FirstName || !generatedName.fields.LastName) {
-				errors.push('Name generators should expose separate FirstName and LastName fields.');
-			}
-
-			const rulesResult = generatorCatalog.generate('rules', () => 0);
-			if (
-				!rulesResult?.entry?.fields?.Name
-				|| !rulesResult.entry.fields.Description
-			) {
-				errors.push('RULE generators should expose separate Name and Description fields.');
-			}
-			const { createGeneratedEmbed } = require('../../util/generatorResponses');
-			const structuredEmbed = createGeneratedEmbed(rulesResult).toJSON();
-			if (
-				structuredEmbed.fields?.[0]?.name !== 'Name'
-				|| structuredEmbed.fields?.[1]?.name !== 'Description'
-			) {
-				errors.push('Structured generator fields are not rendered correctly.');
-			}
-			const weightedTextEmbed = createGeneratedEmbed({
-				category: { name: 'test' },
-				entry: weightedEntries[1],
-			}).toJSON();
-			if (weightedTextEmbed.description !== 'Double weight') {
-				errors.push('Weighted text generator entries are not rendered correctly.');
-			}
+			checkRequiredGenerators(errors, generatorCatalog);
+			checkBackgroundGenerators(errors, generatorCatalog);
+			checkStructuredGenerators(errors, generatorCatalog);
+			checkGeneratorResponses(errors, generatorCatalog, weightedEntries);
+			checkStatProfiles(errors);
 		}
 		catch (error) {
 			errors.push(`Generator catalog: ${error.message}`);
@@ -244,116 +95,243 @@ module.exports = function createGeneratorChecks(context) {
 	};
 };
 
-function checkLocalizedGeneratorFiles(errors, generatorCatalog) {
+function checkProductionDataIsV2(errors) {
 	const generatorRoot = path.join(__dirname, '..', '..', 'data', 'generators');
-	const englishDirectory = path.join(generatorRoot, 'en');
-	const frenchDirectory = path.join(generatorRoot, 'fr');
-	const englishFiles = listJsonFiles(englishDirectory);
-	const frenchFiles = listJsonFiles(frenchDirectory);
-
+	const englishFiles = listJsonFiles(path.join(generatorRoot, 'en'));
+	const frenchFiles = listJsonFiles(path.join(generatorRoot, 'fr'));
 	if (JSON.stringify(englishFiles) !== JSON.stringify(frenchFiles)) {
-		errors.push('English and French generator directories must contain the same JSON files.');
+		errors.push('English and French generator directories must contain the same files.');
 		return;
 	}
-
 	for (const file of englishFiles) {
-		try {
-			const english = JSON.parse(fs.readFileSync(path.join(englishDirectory, file), 'utf8'));
-			const french = JSON.parse(fs.readFileSync(path.join(frenchDirectory, file), 'utf8'));
-			compareLocalizedShape(english, french, file, [], errors);
+		for (const locale of ['en', 'fr']) {
+			const generator = JSON.parse(fs.readFileSync(
+				path.join(generatorRoot, locale, file),
+				'utf8',
+			));
+			if (
+				generator.schemaVersion !== 2
+				|| !generator.id
+				|| !generator.kind
+				|| !generator.visibility
+				|| !generator.entrySchema
+				|| generator.entries.some(entry => typeof entry === 'string' || !entry.id)
+			) {
+				errors.push(`Generator ${locale}/${file} was not fully converted to schema v2.`);
+			}
 		}
-		catch (error) {
-			errors.push(`Invalid localized generator JSON ${file}: ${error.message}`);
-		}
-	}
-
-	const englishIds = generatorCatalog.listGenerators('en').map(generator => generator.id).sort();
-	const frenchIds = generatorCatalog.listGenerators('fr').map(generator => generator.id).sort();
-	if (JSON.stringify(englishIds) !== JSON.stringify(frenchIds)) {
-		errors.push('English and French generator catalogs must expose the same internal IDs.');
-	}
-	const englishFallbackPath = path.join(englishDirectory, englishFiles[0]);
-	const missingLocalizedPath = path.join(frenchDirectory, '__missing-generator__.json');
-	if (
-		generatorCatalog.selectLocalizedGeneratorPath(
-			englishFallbackPath,
-			missingLocalizedPath,
-			'fr',
-		) !== englishFallbackPath
-	) {
-		errors.push('A missing localized generator must fall back to its English file.');
 	}
 }
 
-function listJsonFiles(directory) {
-	return fs.readdirSync(directory)
-		.filter(file => file.endsWith('.json'))
-		.sort();
+function checkRequiredGenerators(errors, generatorCatalog) {
+	const requiredPublicGenerators = [
+		'animal',
+		'armors',
+		'background',
+		'building',
+		'companion',
+		'criminal',
+		'dungeon',
+		'event',
+		'faction',
+		'government',
+		'inventory',
+		'material',
+		'monster',
+		'name',
+		'npc',
+		'personality',
+		'quest',
+		'race',
+		'region',
+		'religion',
+		'room',
+		'rules',
+		'settlement',
+		'status-effect',
+		'talents',
+		'trap',
+		'weapons',
+	];
+	const publicIds = new Set(
+		generatorCatalog.listGenerators('en').map(generator => generator.id),
+	);
+	for (const generatorId of requiredPublicGenerators) {
+		if (!publicIds.has(generatorId)) {
+			errors.push(`Missing public generator: ${generatorId}.`);
+		}
+	}
+
+	for (const generatorId of [
+		'animal',
+		'building',
+		'companion',
+		'criminal',
+		'dungeon',
+		'faction',
+		'government',
+		'material',
+		'monster',
+		'region',
+		'religion',
+		'room',
+		'settlement',
+	]) {
+		const entryCount = generatorCatalog.getGenerator(generatorId)?.entries.length ?? 0;
+		if (entryCount < 20 || entryCount > 40) {
+			errors.push(`Generator ${generatorId} must contain 20 to 40 entries.`);
+		}
+	}
+	for (const obsoleteId of ['loot', 'power', 'enemy', 'location', 'citizen-background']) {
+		if (generatorCatalog.getGenerator(obsoleteId)) {
+			errors.push(`Obsolete generator ${obsoleteId} still exists.`);
+		}
+	}
 }
 
-function compareLocalizedShape(english, french, file, propertyPath, errors) {
-	const location = `${file}:${propertyPath.join('.') || '<root>'}`;
-	if (Array.isArray(english)) {
-		if (!Array.isArray(french) || english.length !== french.length) {
-			errors.push(`Localized generator arrays differ at ${location}.`);
-			return;
+function checkBackgroundGenerators(errors, generatorCatalog) {
+	const backgrounds = generatorCatalog.getGenerator('background')?.entries ?? [];
+	const backgroundIds = new Set();
+	for (const background of backgrounds) {
+		const routedGeneratorId = background.fields?.Generator;
+		const details = generatorCatalog.getGenerator(routedGeneratorId)?.entries ?? [];
+		if (
+			!background.id
+			|| !background.fields?.Name
+			|| !background.fields?.Description
+			|| backgroundIds.has(background.id)
+			|| !routedGeneratorId?.startsWith('background-')
+			|| details.length === 0
+			|| details.some(entry => (
+				['Appearance', 'Backstory', 'Goals'].some(field => !entry.fields?.[field])
+			))
+		) {
+			errors.push(`Invalid routed background generator: ${background.id ?? 'unknown'}.`);
 		}
-		english.forEach((value, index) => compareLocalizedShape(
-			value,
-			french[index],
-			file,
-			[...propertyPath, index],
-			errors,
-		));
-		return;
-	}
-	if (english && typeof english === 'object') {
-		if (!french || typeof french !== 'object' || Array.isArray(french)) {
-			errors.push(`Localized generator structures differ at ${location}.`);
-			return;
-		}
-		const englishKeys = Object.keys(english);
-		const frenchKeys = Object.keys(french);
-		if (JSON.stringify(englishKeys) !== JSON.stringify(frenchKeys)) {
-			errors.push(`Localized generator keys differ at ${location}.`);
-			return;
-		}
-		for (const key of englishKeys) {
-			compareLocalizedShape(
-				english[key],
-				french[key],
-				file,
-				[...propertyPath, key],
-				errors,
-			);
-		}
-		return;
-	}
-
-	if (typeof english !== typeof french) {
-		errors.push(`Localized generator value types differ at ${location}.`);
-		return;
-	}
-	const property = propertyPath.at(-1);
-	if (
-		['weight', 'Generator', 'Type', 'Rarity', 'AR percentage',
-			'Constitution requirement', 'FirstName', 'LastName']
-			.includes(property)
-		&& english !== french
-	) {
-		errors.push(`Technical generator value was translated at ${location}.`);
+		backgroundIds.add(background.id);
 	}
 	if (
-		typeof english === 'string'
-		&& JSON.stringify(extractPlaceholders(english))
-			!== JSON.stringify(extractPlaceholders(french))
+		backgrounds.length !== 17
+		|| backgroundIds.has('citizen')
+		|| generatorCatalog.getGenerator('background-citizen')
 	) {
-		errors.push(`Localized generator placeholders differ at ${location}.`);
+		errors.push('Background routing must contain the 17 supported non-citizen categories.');
 	}
 }
 
-function extractPlaceholders(value) {
-	return [
-		...value.matchAll(/\{\{[^{}]+\}\}|\$\{[^{}]+\}|%\w/g),
-	].map(match => match[0]).sort();
+function checkStructuredGenerators(errors, generatorCatalog) {
+	for (const [generatorId, requiredFields] of [
+		['faction', ['Name', 'Type', 'Goal', 'Resources', 'Hierarchy', 'Allies', 'Enemies']],
+		['government', ['Name', 'Structure', 'Leadership', 'Strength', 'Tension']],
+		[
+			'religion',
+			[
+				'Name',
+				'Deity or Belief',
+				'Rites',
+				'Commandment',
+				'Taboo',
+				'Sacred Symbol',
+				'Religious Order',
+				'Holy Place',
+				'Relationship with Magic',
+			],
+		],
+	]) {
+		const generator = generatorCatalog.getGenerator(generatorId);
+		if (
+			JSON.stringify(generator?.entrySchema.required)
+				!== JSON.stringify(requiredFields)
+			|| generator.entries.some(entry => requiredFields.some(field => !entry.fields?.[field]))
+		) {
+			errors.push(`Generator ${generatorId} is missing required fields.`);
+		}
+	}
+
+	const armors = generatorCatalog.getGenerator('armors')?.entries ?? [];
+	const armorCombinations = new Set(armors.map(
+		entry => `${entry.fields.Type}:${entry.fields.Rarity}`,
+	));
+	const expectedArmorCombinations = ['light', 'medium', 'heavy']
+		.flatMap(type => ['common', 'uncommon', 'rare', 'epic', 'legendary']
+			.map(rarity => `${type}:${rarity}`));
+	if (
+		armors.length !== 15
+		|| expectedArmorCombinations.some(value => !armorCombinations.has(value))
+	) {
+		errors.push('The armor generator must contain every type and rarity combination.');
+	}
+	for (const generatorId of ['armors', 'weapons', 'inventory']) {
+		const entries = generatorCatalog.getGenerator(generatorId)?.entries ?? [];
+		if (entries.some(entry => Object.hasOwn(entry.fields ?? {}, 'Encumbrance'))) {
+			errors.push(`Generator ${generatorId} still contains obsolete Encumbrance fields.`);
+		}
+	}
+
+	const races = generatorCatalog.getGenerator('race')?.entries ?? [];
+	const raceIds = new Set(races.map(entry => entry.id));
+	if (
+		['human', 'elf', 'dwarf', 'orc', 'goblin'].some(id => !raceIds.has(id))
+		|| races.some(entry => (
+			!entry.fields.Description
+			|| !entry.fields['Skill Bonus']
+			|| !entry.fields['Physical Ability']
+		))
+	) {
+		errors.push('Race entries must expose stable IDs, descriptions, and racial traits.');
+	}
+}
+
+function checkGeneratorResponses(errors, generatorCatalog, weightedEntries) {
+	const generatedName = generatorCatalog.generate('name', 'en', () => 0)?.entry;
+	if (!generatedName?.fields?.FirstName || !generatedName.fields.LastName) {
+		errors.push('Name generators should expose separate FirstName and LastName fields.');
+	}
+	const rulesResult = generatorCatalog.generate('rules', 'en', () => 0);
+	if (!rulesResult?.entry?.fields?.Name || !rulesResult.entry.fields.Description) {
+		errors.push('RULE generators should expose separate Name and Description fields.');
+	}
+
+	const { createGeneratedEmbed } = require('../../util/generatorResponses');
+	const structuredEmbed = createGeneratedEmbed(rulesResult).toJSON();
+	if (
+		structuredEmbed.fields?.[0]?.name !== 'Name'
+		|| structuredEmbed.fields?.[1]?.name !== 'Description'
+	) {
+		errors.push('Structured generator fields are not rendered correctly.');
+	}
+	const weightedTextEmbed = createGeneratedEmbed({
+		category: { name: 'test' },
+		entry: weightedEntries[1],
+	}).toJSON();
+	if (weightedTextEmbed.description !== 'Double weight') {
+		errors.push('Weighted text generator entries are not rendered correctly.');
+	}
+}
+
+function checkStatProfiles(errors) {
+	const profiles = listStatProfiles();
+	const balanced = getStatProfile('character-balanced');
+	if (
+		profiles.length === 0
+		|| profiles.filter(profile => profile.id === 'character-balanced').length !== 1
+		|| balanced !== getStatProfile('character-balanced')
+	) {
+		errors.push('The balanced statistical profile is missing or is not cached.');
+	}
+}
+
+function listJsonFiles(directory, relativeDirectory = '') {
+	const files = [];
+	for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
+		const relativePath = path.join(relativeDirectory, entry.name);
+		const absolutePath = path.join(directory, entry.name);
+		if (entry.isDirectory()) {
+			files.push(...listJsonFiles(absolutePath, relativePath));
+		}
+		else if (entry.isFile() && entry.name.endsWith('.json')) {
+			files.push(relativePath);
+		}
+	}
+	return files.sort();
 }

@@ -1,8 +1,27 @@
 {
+  "schemaVersion": 2,
+  "id": "religion",
+  "kind": "category",
+  "visibility": "public",
   "name": "religion",
   "description": "Gods, beliefs, rites, laws, symbols, orders, holy places, and magic",
+  "entrySchema": {
+    "type": "fields",
+    "required": [
+      "Name",
+      "Deity or Belief",
+      "Rites",
+      "Commandment",
+      "Taboo",
+      "Sacred Symbol",
+      "Religious Order",
+      "Holy Place",
+      "Relationship with Magic"
+    ]
+  },
   "entries": [
     {
+      "id": "the-hearthmother",
       "weight": 3,
       "fields": {
         "Name": "The Hearthmother",
@@ -17,6 +36,7 @@
       }
     },
     {
+      "id": "the-open-road",
       "weight": 3,
       "fields": {
         "Name": "The Open Road",
@@ -31,6 +51,7 @@
       }
     },
     {
+      "id": "the-quiet-judge",
       "weight": 3,
       "fields": {
         "Name": "The Quiet Judge",
@@ -45,6 +66,7 @@
       }
     },
     {
+      "id": "lady-of-tides",
       "weight": 3,
       "fields": {
         "Name": "Lady of Tides",
@@ -59,6 +81,7 @@
       }
     },
     {
+      "id": "the-seven-smiths",
       "weight": 2,
       "fields": {
         "Name": "The Seven Smiths",
@@ -73,6 +96,7 @@
       }
     },
     {
+      "id": "the-green-pact",
       "weight": 2,
       "fields": {
         "Name": "The Green Pact",
@@ -87,6 +111,7 @@
       }
     },
     {
+      "id": "the-unconquered-sun",
       "weight": 2,
       "fields": {
         "Name": "The Unconquered Sun",
@@ -101,6 +126,7 @@
       }
     },
     {
+      "id": "the-moon-weaver",
       "weight": 2,
       "fields": {
         "Name": "The Moon Weaver",
@@ -115,6 +141,7 @@
       }
     },
     {
+      "id": "the-thunder-king",
       "weight": 2,
       "fields": {
         "Name": "The Thunder King",
@@ -129,6 +156,7 @@
       }
     },
     {
+      "id": "the-thousand-ancestors",
       "weight": 2,
       "fields": {
         "Name": "The Thousand Ancestors",
@@ -143,6 +171,7 @@
       }
     },
     {
+      "id": "the-liberating-flame",
       "weight": 2,
       "fields": {
         "Name": "The Liberating Flame",
@@ -157,6 +186,7 @@
       }
     },
     {
+      "id": "the-perfect-measure",
       "weight": 2,
       "fields": {
         "Name": "The Perfect Measure",
@@ -171,6 +201,7 @@
       }
     },
     {
+      "id": "the-nameless-mercy",
       "weight": 1,
       "fields": {
         "Name": "The Nameless Mercy",
@@ -185,6 +216,7 @@
       }
     },
     {
+      "id": "the-devouring-cycle",
       "weight": 1,
       "fields": {
         "Name": "The Devouring Cycle",
@@ -199,6 +231,7 @@
       }
     },
     {
+      "id": "the-sleeping-mountain",
       "weight": 1,
       "fields": {
         "Name": "The Sleeping Mountain",
@@ -213,6 +246,7 @@
       }
     },
     {
+      "id": "the-laughing-mask",
       "weight": 1,
       "fields": {
         "Name": "The Laughing Mask",
@@ -227,6 +261,7 @@
       }
     },
     {
+      "id": "the-star-pilgrims",
       "weight": 1,
       "fields": {
         "Name": "The Star Pilgrims",
@@ -241,6 +276,7 @@
       }
     },
     {
+      "id": "the-red-communion",
       "weight": 1,
       "fields": {
         "Name": "The Red Communion",
@@ -255,6 +291,7 @@
       }
     },
     {
+      "id": "the-door-beyond",
       "weight": 1,
       "fields": {
         "Name": "The Door Beyond",
@@ -269,6 +306,7 @@
       }
     },
     {
+      "id": "the-crowned-serpent",
       "weight": 1,
       "fields": {
         "Name": "The Crowned Serpent",

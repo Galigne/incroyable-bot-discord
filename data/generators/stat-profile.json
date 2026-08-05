@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "profiles": [
+    {
+      "id": "character-balanced",
+      "minimums": {
+        "constitution": 4,
+        "strength": 4,
+        "dexterity": 4,
+        "intelligence": 4,
+        "speed": 4,
+        "perception": 4,
+        "charisma": 4
+      },
+      "maximums": {
+        "constitution": 20,
+        "strength": 20,
+        "dexterity": 20,
+        "intelligence": 20,
+        "speed": 20,
+        "perception": 20,
+        "charisma": 20
+      },
+      "weights": {
+        "constitution": 1,
+        "strength": 1,
+        "dexterity": 1,
+        "intelligence": 1,
+        "speed": 1,
+        "perception": 1,
+        "charisma": 1
+      }
+    }
+  ]
+}

@@ -1,242 +1,290 @@
 {
+  "schemaVersion": 2,
+  "id": "name",
+  "kind": "category",
+  "visibility": "public",
   "name": "name",
   "description": "Fantasy character first and last names",
+  "entrySchema": {
+    "type": "fields",
+    "required": ["FirstName", "LastName"]
+  },
   "entries": [
     {
+      "id": "alden-marr",
       "fields": {
         "FirstName": "Alden",
         "LastName": "Marr"
       }
     },
     {
+      "id": "aria-moonfall",
       "fields": {
         "FirstName": "Aria",
         "LastName": "Moonfall"
       }
     },
     {
+      "id": "borin-stonehand",
       "fields": {
         "FirstName": "Borin",
         "LastName": "Stonehand"
       }
     },
     {
+      "id": "brakka-thorn",
       "fields": {
         "FirstName": "Brakka",
         "LastName": "Thorn"
       }
     },
     {
+      "id": "caelan-voss",
       "fields": {
         "FirstName": "Caelan",
         "LastName": "Voss"
       }
     },
     {
+      "id": "cassia-reed",
       "fields": {
         "FirstName": "Cassia",
         "LastName": "Reed"
       }
     },
     {
+      "id": "dain-emberforge",
       "fields": {
         "FirstName": "Dain",
         "LastName": "Emberforge"
       }
     },
     {
+      "id": "diego-robert",
       "fields": {
         "FirstName": "Diego",
         "LastName": "Robert"
       }
     },
     {
+      "id": "elara-venn",
       "fields": {
         "FirstName": "Elara",
         "LastName": "Venn"
       }
     },
     {
+      "id": "elias-crow",
       "fields": {
         "FirstName": "Elias",
         "LastName": "Crow"
       }
     },
     {
+      "id": "faela-dawnmere",
       "fields": {
         "FirstName": "Faela",
         "LastName": "Dawnmere"
       }
     },
     {
+      "id": "fenric-vale",
       "fields": {
         "FirstName": "Fenric",
         "LastName": "Vale"
       }
     },
     {
+      "id": "garran-holt",
       "fields": {
         "FirstName": "Garran",
         "LastName": "Holt"
       }
     },
     {
+      "id": "glim-tinkertop",
       "fields": {
         "FirstName": "Glim",
         "LastName": "Tinkertop"
       }
     },
     {
+      "id": "hara-flint",
       "fields": {
         "FirstName": "Hara",
         "LastName": "Flint"
       }
     },
     {
+      "id": "ilyra-ashwood",
       "fields": {
         "FirstName": "Ilyra",
         "LastName": "Ashwood"
       }
     },
     {
+      "id": "joren-pike",
       "fields": {
         "FirstName": "Joren",
         "LastName": "Pike"
       }
     },
     {
+      "id": "kael-stormward",
       "fields": {
         "FirstName": "Kael",
         "LastName": "Stormward"
       }
     },
     {
+      "id": "kira-moss",
       "fields": {
         "FirstName": "Kira",
         "LastName": "Moss"
       }
     },
     {
+      "id": "liora-brightwater",
       "fields": {
         "FirstName": "Liora",
         "LastName": "Brightwater"
       }
     },
     {
+      "id": "mara-quickstep",
       "fields": {
         "FirstName": "Mara",
         "LastName": "Quickstep"
       }
     },
     {
+      "id": "merrick-slate",
       "fields": {
         "FirstName": "Merrick",
         "LastName": "Slate"
       }
     },
     {
+      "id": "nella-brass",
       "fields": {
         "FirstName": "Nella",
         "LastName": "Brass"
       }
     },
     {
+      "id": "nox-bellweather",
       "fields": {
         "FirstName": "Nox",
         "LastName": "Bellweather"
       }
     },
     {
+      "id": "orin-blackbriar",
       "fields": {
         "FirstName": "Orin",
         "LastName": "Blackbriar"
       }
     },
     {
+      "id": "pella-sunward",
       "fields": {
         "FirstName": "Pella",
         "LastName": "Sunward"
       }
     },
     {
+      "id": "quinn-rook",
       "fields": {
         "FirstName": "Quinn",
         "LastName": "Rook"
       }
     },
     {
+      "id": "rill-tideborn",
       "fields": {
         "FirstName": "Rill",
         "LastName": "Tideborn"
       }
     },
     {
+      "id": "rowan-greycloak",
       "fields": {
         "FirstName": "Rowan",
         "LastName": "Greycloak"
       }
     },
     {
+      "id": "sable-reed",
       "fields": {
         "FirstName": "Sable",
         "LastName": "Reed"
       }
     },
     {
+      "id": "seren-hollow",
       "fields": {
         "FirstName": "Seren",
         "LastName": "Hollow"
       }
     },
     {
+      "id": "tamsin-foxglove",
       "fields": {
         "FirstName": "Tamsin",
         "LastName": "Foxglove"
       }
     },
     {
+      "id": "thane-ironroot",
       "fields": {
         "FirstName": "Thane",
         "LastName": "Ironroot"
       }
     },
     {
+      "id": "una-farstrider",
       "fields": {
         "FirstName": "Una",
         "LastName": "Farstrider"
       }
     },
     {
+      "id": "varek-coil",
       "fields": {
         "FirstName": "Varek",
         "LastName": "Coil"
       }
     },
     {
+      "id": "vexa-nightglass",
       "fields": {
         "FirstName": "Vexa",
         "LastName": "Nightglass"
       }
     },
     {
+      "id": "wren-alder",
       "fields": {
         "FirstName": "Wren",
         "LastName": "Alder"
       }
     },
     {
+      "id": "yara-frostmane",
       "fields": {
         "FirstName": "Yara",
         "LastName": "Frostmane"
       }
     },
     {
+      "id": "zevra-duskwind",
       "fields": {
         "FirstName": "Zevra",
         "LastName": "Duskwind"
       }
     },
     {
+      "id": "zorin-oakshield",
       "fields": {
         "FirstName": "Zorin",
         "LastName": "Oakshield"

@@ -1,8 +1,17 @@
 {
-  "name": "scholarBackground",
+  "schemaVersion": 2,
+  "id": "background-scholar",
+  "kind": "component",
+  "visibility": "internal",
+  "name": "Scholar background details",
   "description": "Background details for scholar NPCs",
+  "entrySchema": {
+    "type": "fields",
+    "required": ["Appearance", "Backstory", "Goals"]
+  },
   "entries": [
     {
+      "id": "young-ink-stained-and-sleep-deprived-carrying-more-books-than",
       "fields": {
         "Appearance": "Young, ink-stained, and sleep-deprived, carrying more books than practical supplies.",
         "Backstory": "A student found evidence contradicting the central claim of a celebrated professor.",
@@ -10,6 +19,7 @@
       }
     },
     {
+      "id": "absent-minded-and-formally-dressed-with-spectacles-repaired-in",
       "fields": {
         "Appearance": "Absent-minded and formally dressed, with spectacles repaired in several places.",
         "Backstory": "A researcher spent decades on a theory dismissed until recent events proved it dangerously correct.",
@@ -17,6 +27,7 @@
       }
     },
     {
+      "id": "quiet-precise-and-burdened-with-scroll-cases-sealing",
       "fields": {
         "Appearance": "Quiet, precise, and burdened with scroll cases, sealing wax, and cramped handwriting.",
         "Backstory": "A scribe noticed official decrees are being subtly altered between copying and publication.",
@@ -24,6 +35,7 @@
       }
     },
     {
+      "id": "dusty-soft-spoken-and-watchful-with-keys-to-collections",
       "fields": {
         "Appearance": "Dusty, soft-spoken, and watchful, with keys to collections most visitors never see.",
         "Backstory": "A librarian discovered a supposedly destroyed book repeatedly returning under different titles.",
@@ -31,6 +43,7 @@
       }
     },
     {
+      "id": "field-worn-rather-than-academic-with-notebooks-specimen-jars",
       "fields": {
         "Appearance": "Field-worn rather than academic, with notebooks, specimen jars, and sturdy travel boots.",
         "Backstory": "An independent historian abandoned the university to investigate ruins local communities consider sacred.",

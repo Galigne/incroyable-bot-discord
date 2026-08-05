@@ -16,7 +16,7 @@ const root = path.join(__dirname, '..');
 test('generated prompt embeds have no footer', () => {
 	const embed = createGeneratedEmbed({
 		category: { name: 'prompt' },
-		entry: 'A generated prompt',
+		entry: { id: 'generated-prompt', value: 'A generated prompt' },
 	}).toJSON();
 
 	assert.equal(embed.footer, undefined);

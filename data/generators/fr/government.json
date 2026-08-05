@@ -1,8 +1,17 @@
 {
+  "schemaVersion": 2,
+  "id": "government",
+  "kind": "category",
+  "visibility": "public",
   "name": "gouvernements",
   "description": "Systèmes politiques, structures dirigeantes, forces et tensions",
+  "entrySchema": {
+    "type": "fields",
+    "required": ["Name", "Structure", "Leadership", "Strength", "Tension"]
+  },
   "entries": [
     {
+      "id": "hereditary-monarchy",
       "weight": 3,
       "fields": {
         "Name": "Monarchie héréditaire",
@@ -13,6 +22,7 @@
       }
     },
     {
+      "id": "feudal-kingdom",
       "weight": 3,
       "fields": {
         "Name": "Royaume féodal",
@@ -23,6 +33,7 @@
       }
     },
     {
+      "id": "elected-council",
       "weight": 3,
       "fields": {
         "Name": "Conseil élu",
@@ -33,6 +44,7 @@
       }
     },
     {
+      "id": "merchant-republic",
       "weight": 3,
       "fields": {
         "Name": "République marchande",
@@ -43,6 +55,7 @@
       }
     },
     {
+      "id": "tribal-confederation",
       "weight": 2,
       "fields": {
         "Name": "Confédération tribale",
@@ -53,6 +66,7 @@
       }
     },
     {
+      "id": "theocracy",
       "weight": 2,
       "fields": {
         "Name": "Théocratie",
@@ -63,6 +77,7 @@
       }
     },
     {
+      "id": "military-directorate",
       "weight": 2,
       "fields": {
         "Name": "Directoire militaire",
@@ -73,6 +88,7 @@
       }
     },
     {
+      "id": "guild-oligarchy",
       "weight": 2,
       "fields": {
         "Name": "Oligarchie des guildes",
@@ -83,6 +99,7 @@
       }
     },
     {
+      "id": "constitutional-monarchy",
       "weight": 2,
       "fields": {
         "Name": "Monarchie constitutionnelle",
@@ -93,6 +110,7 @@
       }
     },
     {
+      "id": "direct-democracy",
       "weight": 2,
       "fields": {
         "Name": "Démocratie directe",
@@ -103,6 +121,7 @@
       }
     },
     {
+      "id": "magocracy",
       "weight": 2,
       "fields": {
         "Name": "Magocratie",
@@ -113,6 +132,7 @@
       }
     },
     {
+      "id": "elder-council",
       "weight": 2,
       "fields": {
         "Name": "Conseil des anciens",
@@ -123,6 +143,7 @@
       }
     },
     {
+      "id": "lottery-republic",
       "weight": 1,
       "fields": {
         "Name": "République par tirage au sort",
@@ -133,6 +154,7 @@
       }
     },
     {
+      "id": "dual-crown",
       "weight": 1,
       "fields": {
         "Name": "Double couronne",
@@ -143,6 +165,7 @@
       }
     },
     {
+      "id": "city-league",
       "weight": 1,
       "fields": {
         "Name": "Ligue de cités",
@@ -153,6 +176,7 @@
       }
     },
     {
+      "id": "judicial-state",
       "weight": 1,
       "fields": {
         "Name": "État judiciaire",
@@ -163,6 +187,7 @@
       }
     },
     {
+      "id": "oracle-regency",
       "weight": 1,
       "fields": {
         "Name": "Régence oraculaire",
@@ -173,6 +198,7 @@
       }
     },
     {
+      "id": "necrocracy",
       "weight": 1,
       "fields": {
         "Name": "Nécrocratie",
@@ -183,6 +209,7 @@
       }
     },
     {
+      "id": "seasonal-government",
       "weight": 1,
       "fields": {
         "Name": "Gouvernement saisonnier",
@@ -193,6 +220,7 @@
       }
     },
     {
+      "id": "corporate-colony",
       "weight": 1,
       "fields": {
         "Name": "Colonie corporative",

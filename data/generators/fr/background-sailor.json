@@ -1,8 +1,17 @@
 {
-  "name": "sailorBackground",
-  "description": "Détails de Background pour les PNJ marins",
+  "schemaVersion": 2,
+  "id": "background-sailor",
+  "kind": "component",
+  "visibility": "internal",
+  "name": "Détails du background de marin",
+  "description": "Apparences, histoires et objectifs pour les PNJ marins",
+  "entrySchema": {
+    "type": "fields",
+    "required": ["Appearance", "Backstory", "Goals"]
+  },
   "entries": [
     {
+      "id": "salt-stained-clothes-strong-hands-and-an-easy-balance",
       "fields": {
         "Appearance": "Vêtements blanchis par le sel, mains robustes et équilibre assuré jusque sur la terre ferme.",
         "Backstory": "Un matelot fiable est devenu l’unique témoin de la disparition d’une cargaison précieuse pendant son quart de nuit.",
@@ -10,6 +19,7 @@
       }
     },
     {
+      "id": "sun-weathered-smelling-faintly-of-rope-and-fish-with",
       "fields": {
         "Appearance": "Peau burinée par le soleil, légère odeur de corde et de poisson, et assortiment pratique de petits couteaux.",
         "Backstory": "Un pêcheur a remonté dans ses filets un objet inconnu et remarque depuis d’étranges navires dans son sillage.",
@@ -17,6 +27,7 @@
       }
     },
     {
+      "id": "colorfully-dressed-beneath-a-battered-coat-with-old",
       "fields": {
         "Appearance": "Tenue colorée sous un manteau élimé, vieux bijoux et signe distinctif soigneusement dissimulé.",
         "Backstory": "Un pirate a déserté lorsque son capitaine s’est mis à attaquer des villages côtiers sans défense plutôt que de riches navires.",
@@ -24,6 +35,7 @@
       }
     },
     {
+      "id": "muscular-plainly-dressed-and-marked-by-bruises-from",
       "fields": {
         "Appearance": "Musclé, vêtu simplement et couvert des bleus laissés par le déchargement des navires par tous les temps.",
         "Backstory": "Un docker a découvert une filière de contrebande en recherchant un collègue disparu.",
@@ -31,6 +43,7 @@
       }
     },
     {
+      "id": "precise-and-reserved-carrying-navigation-instruments-in-a",
       "fields": {
         "Appearance": "Précis et réservé, transportant ses instruments de navigation dans un étui étanche poli par des années de soin.",
         "Backstory": "Un navigateur a survécu à un naufrage causé par des cartes délibérément falsifiées avant le départ.",

@@ -1,100 +1,131 @@
 {
+  "schemaVersion": 2,
+  "id": "region",
+  "kind": "category",
+  "visibility": "public",
   "name": "region",
   "description": "Broad natural and cultivated geographic regions",
+  "entrySchema": {
+    "type": "text"
+  },
   "entries": [
     {
+      "id": "rolling-farmland",
       "weight": 4,
       "value": "Rolling Farmland — open crop fields, hedgerows, mills, and scattered market villages."
     },
     {
+      "id": "temperate-forest",
       "weight": 4,
       "value": "Temperate Forest — mixed woodland crossed by game trails, logging roads, and clear streams."
     },
     {
+      "id": "grassland-steppe",
       "weight": 4,
       "value": "Grassland Steppe — immense windswept plains supporting herds, riders, and seasonal camps."
     },
     {
+      "id": "rocky-coast",
       "weight": 3,
       "value": "Rocky Coast — cliffs, hidden coves, fishing settlements, and dangerous tidal caves."
     },
     {
+      "id": "high-mountains",
       "weight": 3,
       "value": "High Mountains — steep passes, thin air, glaciers, mines, and isolated monasteries."
     },
     {
+      "id": "river-valley",
       "weight": 3,
       "value": "River Valley — fertile floodplains linking farms, ports, bridges, and competing towns."
     },
     {
+      "id": "marshland",
       "weight": 3,
       "value": "Marshland — shallow waterways, reed islands, peat bogs, and paths that shift by season."
     },
     {
+      "id": "dry-scrubland",
       "weight": 3,
       "value": "Dry Scrubland — thorny brush, red earth, seasonal rivers, and widely separated wells."
     },
     {
+      "id": "island-chain",
       "weight": 3,
       "value": "Island Chain — inhabited and wild islands connected by reefs, ferries, and piracy."
     },
     {
+      "id": "ancient-woodland",
       "weight": 2,
       "value": "Ancient Woodland — enormous old trees, dim undergrowth, forgotten roads, and territorial spirits."
     },
     {
+      "id": "volcanic-highlands",
       "weight": 2,
       "value": "Volcanic Highlands — black slopes, hot springs, ash fields, and mineral-rich settlements."
     },
     {
+      "id": "frozen-tundra",
       "weight": 2,
       "value": "Frozen Tundra — permafrost, low vegetation, migrating animals, and brief violent summers."
     },
     {
+      "id": "salt-desert",
       "weight": 2,
       "value": "Salt Desert — blinding flats, buried ruins, mineral caravans, and almost no fresh water."
     },
     {
+      "id": "deep-jungle",
       "weight": 2,
       "value": "Deep Jungle — dense layered vegetation, heavy rainfall, colossal insects, and lost stoneworks."
     },
     {
+      "id": "lake-country",
       "weight": 2,
       "value": "Lake Country — broad freshwater lakes, wooded shores, fishing communities, and misty islands."
     },
     {
+      "id": "badlands",
       "weight": 2,
       "value": "Badlands — eroded canyons, exposed fossils, little water, and excellent hiding places."
     },
     {
+      "id": "wine-hills",
       "weight": 2,
       "value": "Wine Hills — cultivated slopes, wealthy estates, old cellars, and intense local rivalries."
     },
     {
+      "id": "flooded-forest",
       "weight": 2,
       "value": "Flooded Forest — half-submerged trees navigated by canoe during a long wet season."
     },
     {
+      "id": "crystal-expanse",
       "weight": 1,
       "value": "Crystal Expanse — natural glass formations distort light, sound, direction, and magic."
     },
     {
+      "id": "levitating-archipelago",
       "weight": 1,
       "value": "Levitating Archipelago — floating landmasses connected by ropeways, flying mounts, and waterfalls."
     },
     {
+      "id": "dead-magic-basin",
       "weight": 1,
       "value": "Dead Magic Basin — a fertile-looking depression where supernatural effects abruptly fail."
     },
     {
+      "id": "storm-belt",
       "weight": 1,
       "value": "Storm Belt — a coastal region battered by near-constant wind, rain, and electrical activity."
     },
     {
+      "id": "mushroom-wilds",
       "weight": 1,
       "value": "Mushroom Wilds — damp country dominated by giant fungi, spores, and underground settlements."
     },
     {
+      "id": "shattered-battlefield",
       "weight": 1,
       "value": "Shattered Battlefield — miles of trenches, memorials, unexploded magic, and communities built from salvage."
     }

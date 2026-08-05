@@ -1,8 +1,17 @@
 {
-  "name": "peasantBackground",
+  "schemaVersion": 2,
+  "id": "background-peasant",
+  "kind": "component",
+  "visibility": "internal",
+  "name": "Peasant background details",
   "description": "Background details for peasant NPCs",
+  "entrySchema": {
+    "type": "fields",
+    "required": ["Appearance", "Backstory", "Goals"]
+  },
   "entries": [
     {
+      "id": "sun-browned-strong-handed-and-dressed-in-patched-clothes",
       "fields": {
         "Appearance": "Sun-browned, strong-handed, and dressed in patched clothes carrying the smell of soil.",
         "Backstory": "Worked the same rented fields since childhood while watching rents rise after every good harvest.",
@@ -10,6 +19,7 @@
       }
     },
     {
+      "id": "lean-and-weathered-wrapped-in-wool-with-a",
       "fields": {
         "Appearance": "Lean and weathered, wrapped in wool with a shepherd's crook polished by use.",
         "Backstory": "Spent years moving herds through remote highlands and knows paths absent from every map.",
@@ -17,6 +27,7 @@
       }
     },
     {
+      "id": "broad-backed-with-grain-dust-in-their-hair-and",
       "fields": {
         "Appearance": "Broad-backed with grain dust in their hair and a permanently cautious expression.",
         "Backstory": "A mill worker discovered someone has been diluting the village's emergency flour stores.",
@@ -24,6 +35,7 @@
       }
     },
     {
+      "id": "young-mud-spattered-and-quick-moving-with-practical-clothes-and",
       "fields": {
         "Appearance": "Young, mud-spattered, and quick-moving, with practical clothes and several homemade tools.",
         "Backstory": "A rural laborer taught themselves to repair machinery after the estate stopped paying craftsmen.",
@@ -31,6 +43,7 @@
       }
     },
     {
+      "id": "older-deeply-lined-and-steady-eyed-wearing-a-faded",
       "fields": {
         "Appearance": "Older, deeply lined, and steady-eyed, wearing a faded festival ribbon for luck.",
         "Backstory": "Survived famine, war, and three landlords while quietly becoming the hamlet's trusted mediator.",

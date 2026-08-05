@@ -1,92 +1,121 @@
 {
+  "schemaVersion": 2,
+  "id": "settlement",
+  "kind": "category",
+  "visibility": "public",
   "name": "Communautés",
   "description": "Hameaux, villes, camps et autres foyers de population",
+  "entrySchema": {
+    "type": "text"
+  },
   "entries": [
     {
+      "id": "farming-hamlet",
       "weight": 4,
       "value": "Hameau agricole — vingt familles rassemblées autour d’un puits, d’un sanctuaire, d’un grenier et d’un four communal."
     },
     {
+      "id": "crossroads-village",
       "weight": 4,
       "value": "Village-carrefour — auberges, écuries, marchands et artisans au service des voyageurs de trois routes."
     },
     {
+      "id": "fishing-village",
       "weight": 4,
       "value": "Village de pêcheurs — bateaux, fumoirs, remises à filets et maisons surélevées contre les crues saisonnières."
     },
     {
+      "id": "walled-market-town",
       "weight": 3,
       "value": "Bourg marchand fortifié — prospère centre régional entouré de portes, de guildes, de taxes et de faubourgs bondés."
     },
     {
+      "id": "mining-town",
       "weight": 3,
       "value": "Ville minière — logements rudimentaires et fonderies affairées sous les bureaux opulents d’une compagnie et des puits dangereux."
     },
     {
+      "id": "pilgrim-town",
       "weight": 3,
       "value": "Ville de pèlerinage — hospices, vendeurs de reliques, guérisseurs et temples rivaux autour d’un lieu sacré."
     },
     {
+      "id": "frontier-fort",
       "weight": 3,
       "value": "Fort frontalier — soldats, colons, ateliers et réfugiés abrités derrière des défenses inachevées."
     },
     {
+      "id": "adventurer-camp",
       "weight": 3,
       "value": "Camp d’aventuriers — tentes, échoppes de ravitaillement, guérisseurs, mercenaires et tableaux de rumeurs près de ruines inexplorées."
     },
     {
+      "id": "hill-castle",
       "weight": 3,
       "value": "Château sur la colline — demeure noble et garnison dominant les fermes placées sous leur protection."
     },
     {
+      "id": "river-port",
       "weight": 2,
       "value": "Port fluvial — entrepôts, bacs, chantiers navals, douaniers et quartiers flottants."
     },
     {
+      "id": "coastal-city",
       "weight": 2,
       "value": "Ville côtière — ports fortifiés, quartiers étrangers, arsenaux navals, marchés et familles marchandes rivales."
     },
     {
+      "id": "monastery-community",
       "weight": 2,
       "value": "Communauté monastique — moines, fermiers tenanciers, visiteurs, bibliothèques et ateliers derrière des murs paisibles."
     },
     {
+      "id": "nomad-encampment",
       "weight": 2,
       "value": "Campement nomade — habitations mobiles, enclos à bétail, tentes d’artisans et feu du conseil."
     },
     {
+      "id": "forest-enclave",
       "weight": 2,
       "value": "Enclave forestière — maisons intégrées aux arbres vivants et protégées par des éclaireurs qui contrôlent tous les sentiers."
     },
     {
+      "id": "mountain-hold",
       "weight": 2,
       "value": "Bastion montagnard — communauté souterraine fortifiée organisée autour de mines, de citernes et de salles ancestrales."
     },
     {
+      "id": "island-commune",
       "weight": 2,
       "value": "Commune insulaire — communauté portuaire autosuffisante gouvernée par des assemblées publiques et le travail partagé."
     },
     {
+      "id": "royal-capital",
       "weight": 1,
       "value": "Capitale royale — quartiers du palais, ministères, taudis, universités, casernes et intrigues politiques permanentes."
     },
     {
+      "id": "free-city",
       "weight": 1,
       "value": "Ville libre — métropole marchande indépendante qui compose avec les guildes, les puissances étrangères et les factions citoyennes."
     },
     {
+      "id": "floating-settlement",
       "weight": 1,
       "value": "Communauté flottante — bateaux et plateformes amarrés en permanence les uns aux autres autour d’un mouillage profond."
     },
     {
+      "id": "underground-refuge",
       "weight": 1,
       "value": "Refuge souterrain — descendants de survivants vivant grâce à des réserves limitées d’eau et de lumière ainsi qu’à d’anciennes machines."
     },
     {
+      "id": "ruined-city-camp",
       "weight": 1,
       "value": "Camp dans une cité en ruine — récupérateurs et érudits occupent les quartiers défendables d’une métropole morte bien plus vaste."
     },
     {
+      "id": "siege-camp",
       "weight": 1,
       "value": "Camp de siège — ville provisoire peuplée de soldats, d’ingénieurs, de marchands, de prisonniers, de malades et de commandants rivaux."
     }

@@ -1,8 +1,17 @@
 {
+  "schemaVersion": 2,
+  "id": "talents",
+  "kind": "category",
+  "visibility": "public",
   "name": "talents",
   "description": "Talents et spécialités des personnages",
+  "entrySchema": {
+    "type": "fields",
+    "required": ["Name", "Description"]
+  },
   "entries": [
     {
+      "id": "athlete",
       "weight": 3,
       "fields": {
         "Name": "Athlète",
@@ -10,6 +19,7 @@
       }
     },
     {
+      "id": "keen-eye",
       "weight": 3,
       "fields": {
         "Name": "Œil aiguisé",
@@ -17,6 +27,7 @@
       }
     },
     {
+      "id": "silver-tongue",
       "weight": 3,
       "fields": {
         "Name": "Beau parleur",
@@ -24,6 +35,7 @@
       }
     },
     {
+      "id": "survivor",
       "weight": 3,
       "fields": {
         "Name": "Survivant",
@@ -31,6 +43,7 @@
       }
     },
     {
+      "id": "assassin",
       "weight": 2,
       "fields": {
         "Name": "Assassin",
@@ -38,6 +51,7 @@
       }
     },
     {
+      "id": "bodybuilder",
       "weight": 2,
       "fields": {
         "Name": "Force herculéenne",
@@ -45,6 +59,7 @@
       }
     },
     {
+      "id": "politician",
       "weight": 2,
       "fields": {
         "Name": "Politicien",
@@ -52,6 +67,7 @@
       }
     },
     {
+      "id": "field-medic",
       "weight": 2,
       "fields": {
         "Name": "Médecin de terrain",
@@ -59,6 +75,7 @@
       }
     },
     {
+      "id": "quick-draw",
       "weight": 2,
       "fields": {
         "Name": "Dégainé rapide",
@@ -66,6 +83,7 @@
       }
     },
     {
+      "id": "shield-expert",
       "weight": 2,
       "fields": {
         "Name": "Expert du bouclier",
@@ -73,6 +91,7 @@
       }
     },
     {
+      "id": "tracker",
       "weight": 2,
       "fields": {
         "Name": "Pisteur",
@@ -80,6 +99,7 @@
       }
     },
     {
+      "id": "arcane-student",
       "weight": 2,
       "fields": {
         "Name": "Érudit des arcanes",
@@ -87,6 +107,7 @@
       }
     },
     {
+      "id": "craftsperson",
       "weight": 2,
       "fields": {
         "Name": "Artisan",
@@ -94,6 +115,7 @@
       }
     },
     {
+      "id": "duelist",
       "weight": 2,
       "fields": {
         "Name": "Duelliste",
@@ -101,6 +123,7 @@
       }
     },
     {
+      "id": "beast-friend",
       "weight": 2,
       "fields": {
         "Name": "Ami des bêtes",
@@ -108,6 +131,7 @@
       }
     },
     {
+      "id": "sailor",
       "weight": 2,
       "fields": {
         "Name": "Marin",
@@ -115,6 +139,7 @@
       }
     },
     {
+      "id": "streetwise",
       "weight": 2,
       "fields": {
         "Name": "Enfant des rues",
@@ -122,6 +147,7 @@
       }
     },
     {
+      "id": "unshakable",
       "weight": 2,
       "fields": {
         "Name": "Inébranlable",
@@ -129,72 +155,84 @@
       }
     },
     {
+      "id": "cold-immunity",
       "fields": {
         "Name": "Immunité au froid",
         "Description": "Le personnage ne peut pas être gelé par un froid ordinaire."
       }
     },
     {
+      "id": "poison-tolerance",
       "fields": {
         "Name": "Résistance au poison",
         "Description": "+2 pour résister au poison et reconnaître les toxines courantes au goût ou à l'odeur."
       }
     },
     {
+      "id": "ambidextrous",
       "fields": {
         "Name": "Ambidextre",
         "Description": "Le personnage manie ses deux mains avec la même précision."
       }
     },
     {
+      "id": "battle-rhythm",
       "fields": {
         "Name": "Rythme de bataille",
         "Description": "Après une attaque coordonnée réussie, la prochaine action alliée du même tour bénéficie de +1."
       }
     },
     {
+      "id": "rune-listener",
       "fields": {
         "Name": "À l'écoute des runes",
         "Description": "Le personnage peut sentir si une rune touchée est dormante ou active."
       }
     },
     {
+      "id": "perfect-memory",
       "fields": {
         "Name": "Mémoire parfaite",
         "Description": "+2 pour se rappeler une scène, un itinéraire, un visage ou les mots exacts qui ont été prononcés."
       }
     },
     {
+      "id": "improviser",
       "fields": {
         "Name": "Improvisateur",
         "Description": "+1 pour détourner un objet ordinaire de son usage de manière plausible."
       }
     },
     {
+      "id": "last-stand",
       "fields": {
         "Name": "Dernier rempart",
         "Description": "+1 aux actions lorsque les PV actuels sont inférieurs ou égaux à 20 % des PV maximaux."
       }
     },
     {
+      "id": "danger-sense",
       "fields": {
         "Name": "Sens du danger",
         "Description": "+1 en Réflexes pour réagir à une menace invisible ou inattendue."
       }
     },
     {
+      "id": "heavy-hitter",
       "fields": {
         "Name": "Frappeur puissant",
         "Description": "Une attaque lourde au corps à corps réussie produit un effet de placement plus important."
       }
     },
     {
+      "id": "lucky-break",
       "fields": {
         "Name": "Coup de chance",
         "Description": "Une fois par session, permet de relancer un jet utilitaire non critique raté."
       }
     },
     {
+      "id": "inspiring-presence",
       "fields": {
         "Name": "Présence inspirante",
         "Description": "Une fois par scène, un allié qui entend le personnage bénéficie de +1 contre la peur."

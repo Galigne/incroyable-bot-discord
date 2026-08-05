@@ -1,8 +1,17 @@
 {
-  "name": "outlanderBackground",
-  "description": "Détails de Background pour les PNJ sauvageons",
+  "schemaVersion": 2,
+  "id": "background-outlander",
+  "kind": "component",
+  "visibility": "internal",
+  "name": "Détails du background de sauvageon",
+  "description": "Apparences, histoires et objectifs pour les PNJ sauvageons",
+  "entrySchema": {
+    "type": "fields",
+    "required": ["Appearance", "Backstory", "Goals"]
+  },
   "entries": [
     {
+      "id": "weather-beaten-quietly-observant-and-dressed-in-layered-clothing",
       "fields": {
         "Appearance": "Buriné par les éléments, observateur discret et vêtu de plusieurs couches aux couleurs du terrain environnant.",
         "Backstory": "Un chasseur a suivi un gibier de plus en plus rare bien au-delà des terres familières et découvert les signes d’une migration anormale.",
@@ -10,6 +19,7 @@
       }
     },
     {
+      "id": "travel-worn-but-meticulously-organized-carrying-a-compact",
       "fields": {
         "Appearance": "Marqué par les voyages mais méticuleusement organisé, transportant un abri compact et des souvenirs de nombreux campements.",
         "Backstory": "Un nomade a été séparé de sa caravane saisonnière après avoir guidé des étrangers à travers une violente tempête.",
@@ -17,6 +27,7 @@
       }
     },
     {
+      "id": "untrimmed-hair-steady-eyes-and-repaired-garments-made",
       "fields": {
         "Appearance": "Cheveux laissés longs, regard posé et vêtements raccommodés conçus pour résister à des années de solitude.",
         "Backstory": "Un ancien guérisseur de village est devenu ermite après avoir été tenu responsable d’une maladie qu’aucun remède ne pouvait arrêter.",
@@ -24,6 +35,7 @@
       }
     },
     {
+      "id": "decorated-with-meaningful-cords-paint-or-jewelry-whose",
       "fields": {
         "Appearance": "Orné de cordons, de peintures ou de bijoux chargés d’un sens que les étrangers comprennent rarement.",
         "Backstory": "L’émissaire d’un peuple tribal a quitté sa communauté soudée pour enquêter sur des incursions répétées en terre sacrée.",
@@ -31,6 +43,7 @@
       }
     },
     {
+      "id": "sure-footed-and-lightly-equipped-with-a-map-case",
       "fields": {
         "Appearance": "Le pied sûr et peu chargé, protégeant son étui à cartes avec davantage de soin que n’importe quelle arme.",
         "Backstory": "Un guide des régions frontalières a hérité des notes inachevées d’un parent disparu en territoire inexploré.",

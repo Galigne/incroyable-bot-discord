@@ -1,8 +1,17 @@
 {
-  "name": "merchantBackground",
+  "schemaVersion": 2,
+  "id": "background-merchant",
+  "kind": "component",
+  "visibility": "internal",
+  "name": "Merchant background details",
   "description": "Background details for merchant NPCs",
+  "entrySchema": {
+    "type": "fields",
+    "required": ["Appearance", "Backstory", "Goals"]
+  },
   "entries": [
     {
+      "id": "colorfully-dressed-expressive-and-constantly-counting-with-ring",
       "fields": {
         "Appearance": "Colorfully dressed, expressive, and constantly counting with ring-covered fingers.",
         "Backstory": "A trader built a route between villages ignored by large commercial houses.",
@@ -10,6 +19,7 @@
       }
     },
     {
+      "id": "neat-approachable-and-positioned-behind-spectacles-chosen-to",
       "fields": {
         "Appearance": "Neat, approachable, and positioned behind spectacles chosen to appear trustworthy.",
         "Backstory": "A shopkeeper inherited a store whose cellar contains goods absent from every ledger.",
@@ -17,6 +27,7 @@
       }
     },
     {
+      "id": "road-worn-and-alert-wearing-layered-dust-cloths-and",
       "fields": {
         "Appearance": "Road-worn and alert, wearing layered dust cloths and a caravan company's brass badge.",
         "Backstory": "A caravan worker survived an ambush by negotiating with the attackers instead of fighting.",
@@ -24,6 +35,7 @@
       }
     },
     {
+      "id": "well-fed-heavily-perfumed-and-accompanied-by-subtle-signs",
       "fields": {
         "Appearance": "Well-fed, heavily perfumed, and accompanied by subtle signs of recent wealth.",
         "Backstory": "A former dock laborer became a supplier through excellent timing and genuine generosity.",
@@ -31,6 +43,7 @@
       }
     },
     {
+      "id": "reserved-immaculately-dressed-and-carrying-sample-cases-secured",
       "fields": {
         "Appearance": "Reserved, immaculately dressed, and carrying sample cases secured by several locks.",
         "Backstory": "A foreign factor was stranded when war severed every connection to the parent company.",

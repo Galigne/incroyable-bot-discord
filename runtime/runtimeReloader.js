@@ -5,7 +5,7 @@ const {
 const { reconnectClient } = require('../adapters/discordClientLifecycle');
 const { disconnectVoiceResources } = require('../adapters/localAudioPlayer');
 const commandRegistry = require('../commands/registry');
-const { clearGeneratorCache } = require('../services/generatorCatalog');
+const { reloadGenerationData } = require('../services/generationData');
 const { reloadConfig } = require('../util/configuration');
 const { getLocale, reloadTranslations } = require('../util/i18n');
 
@@ -31,7 +31,7 @@ function createRuntimeReloader({
 	const stageOperations = {
 		configuration: () => reloadConfig(runtimeState, configPath),
 		localizations: () => reloadTranslations(catalogPaths),
-		generators: () => clearGeneratorCache(),
+		generators: () => reloadGenerationData(),
 		commands: () => commandRegistry.reloadCommandRegistry(runtimeState),
 		registration: async () => assertSuccessfulRegistration(
 			await registerCommands(

@@ -1,8 +1,17 @@
 {
-  "name": "mageBackground",
-  "description": "Détails de Background pour les PNJ mages",
+  "schemaVersion": 2,
+  "id": "background-mage",
+  "kind": "component",
+  "visibility": "internal",
+  "name": "Détails du background de mage",
+  "description": "Apparences, histoires et objectifs pour les PNJ mages",
+  "entrySchema": {
+    "type": "fields",
+    "required": ["Appearance", "Backstory", "Goals"]
+  },
   "entries": [
     {
+      "id": "young-and-sleep-deprived-with-singed-cuffs-and-notes",
       "fields": {
         "Appearance": "Jeune et privé de sommeil, les manchettes roussies et les deux manches couvertes de notes.",
         "Backstory": "Un apprenti a reproduit un sort que son professeur affirme ne jamais lui avoir enseigné.",
@@ -10,6 +19,7 @@
       }
     },
     {
+      "id": "dressed-in-ordinary-rural-clothing-decorated-with-discreet",
       "fields": {
         "Appearance": "Vêtements ruraux ordinaires ornés de charmes discrets fabriqués avec des matériaux courants.",
         "Backstory": "Un mage autodidacte protège une communauté isolée grâce à des traditions méprisées par les académies.",
@@ -17,6 +27,7 @@
       }
     },
     {
+      "id": "ink-stained-and-absent-minded-carrying-padded-cases-of",
       "fields": {
         "Appearance": "Distrait et taché d’encre, transportant des instruments dans des étuis rembourrés et des échantillons soigneusement étiquetés.",
         "Backstory": "Un chercheur en magie a obtenu un résultat qui remet en cause l’institution finançant ses travaux.",
@@ -24,6 +35,7 @@
       }
     },
     {
+      "id": "disciplined-and-guarded-wearing-travel-clothes-over-remnants",
       "fields": {
         "Appearance": "Discipliné et méfiant, portant une tenue de voyage par-dessus les restes renforcés d’un uniforme de mage de guerre.",
         "Backstory": "Un mage de guerre a déserté après avoir reçu l’ordre de tester un rituel instable à proximité de civils.",
@@ -31,6 +43,7 @@
       }
     },
     {
+      "id": "ceremonially-marked-meticulously-groomed-and-surrounded-by-a",
       "fields": {
         "Appearance": "Marques cérémonielles, apparence méticuleusement soignée et légère odeur d’encens ou d’ozone.",
         "Backstory": "Un spécialiste des rituels a hérité d’obligations envers un protecteur invisible, sans recevoir les instructions promises.",

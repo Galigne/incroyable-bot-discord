@@ -1,8 +1,17 @@
 {
+  "schemaVersion": 2,
+  "id": "rules",
+  "kind": "category",
+  "visibility": "public",
   "name": "rules",
   "description": "RULE concepts with useful limits and complications",
+  "entrySchema": {
+    "type": "fields",
+    "required": ["Name", "Description"]
+  },
   "entries": [
     {
+      "id": "thread-rule",
       "weight": 2,
       "fields": {
         "Name": "Thread RULE",
@@ -10,6 +19,7 @@
       }
     },
     {
+      "id": "echo-rule",
       "weight": 2,
       "fields": {
         "Name": "Echo RULE",
@@ -17,18 +27,21 @@
       }
     },
     {
+      "id": "rust-rule",
       "fields": {
         "Name": "Rust RULE",
         "Description": "Accelerate corrosion on touched non-magical metal; large or well-maintained objects require sustained contact."
       }
     },
     {
+      "id": "door-rule",
       "fields": {
         "Name": "Door RULE",
         "Description": "Sense and manipulate ordinary doors nearby; cannot create passages or affect a threshold the user cannot clearly imagine."
       }
     },
     {
+      "id": "weight-rule",
       "weight": 2,
       "fields": {
         "Name": "Weight RULE",
@@ -36,18 +49,21 @@
       }
     },
     {
+      "id": "ink-rule",
       "fields": {
         "Name": "Ink RULE",
         "Description": "Animate written ink into moving symbols and simple shapes; destroying the source writing ends the effect."
       }
     },
     {
+      "id": "momentum-rule",
       "fields": {
         "Name": "Momentum RULE",
         "Description": "Store a portion of the force from one impact and release it through a later touch; excess stored force injures the user."
       }
     },
     {
+      "id": "mist-rule",
       "weight": 2,
       "fields": {
         "Name": "Mist RULE",
@@ -55,12 +71,14 @@
       }
     },
     {
+      "id": "borrowed-face-rule",
       "fields": {
         "Name": "Borrowed Face RULE",
         "Description": "Copy the face of someone touched for one hour; voice, clothing, memories, and mannerisms remain unchanged."
       }
     },
     {
+      "id": "candle-rule",
       "weight": 2,
       "fields": {
         "Name": "Candle RULE",
@@ -68,6 +86,7 @@
       }
     },
     {
+      "id": "root-rule",
       "weight": 2,
       "fields": {
         "Name": "Root RULE",
@@ -75,24 +94,28 @@
       }
     },
     {
+      "id": "glass-rule",
       "fields": {
         "Name": "Glass RULE",
         "Description": "Bend and reshape touched glass without heat; shattered fragments remain dangerous and mass cannot be created."
       }
     },
     {
+      "id": "promise-rule",
       "fields": {
         "Name": "Promise RULE",
         "Description": "Sense when a willingly spoken promise is broken; cannot force honesty or determine why it was broken."
       }
     },
     {
+      "id": "friction-rule",
       "fields": {
         "Name": "Friction RULE",
         "Description": "Increase or decrease friction across a small visible surface; extremes are brief and affect allies as readily as enemies."
       }
     },
     {
+      "id": "scent-rule",
       "weight": 2,
       "fields": {
         "Name": "Scent RULE",
@@ -100,24 +123,28 @@
       }
     },
     {
+      "id": "paper-rule",
       "fields": {
         "Name": "Paper RULE",
         "Description": "Fold paper into briefly animated tools or creatures; water, fire, and heavy force destroy them easily."
       }
     },
     {
+      "id": "reflection-rule",
       "fields": {
         "Name": "Reflection RULE",
         "Description": "Look through a nearby reflection or distort what it shows; cannot pass matter through it."
       }
     },
     {
+      "id": "sleep-rule",
       "fields": {
         "Name": "Sleep RULE",
         "Description": "Encourage natural sleep in a calm target; pain, danger, or strong stimulation breaks the effect."
       }
     },
     {
+      "id": "magnetism-rule",
       "weight": 2,
       "fields": {
         "Name": "Magnetism RULE",
@@ -125,6 +152,7 @@
       }
     },
     {
+      "id": "mending-rule",
       "weight": 3,
       "fields": {
         "Name": "Mending RULE",
@@ -132,6 +160,7 @@
       }
     },
     {
+      "id": "shadow-rule",
       "weight": 2,
       "fields": {
         "Name": "Shadow RULE",
@@ -139,18 +168,21 @@
       }
     },
     {
+      "id": "salt-rule",
       "fields": {
         "Name": "Salt RULE",
         "Description": "Create and shape a handful of salt; larger quantities cause exhaustion, and summoned salt dissolves by sunrise."
       }
     },
     {
+      "id": "heartbeat-rule",
       "fields": {
         "Name": "Heartbeat RULE",
         "Description": "Sense nearby heartbeats and briefly synchronize with one; constructs and many undead are invisible to it."
       }
     },
     {
+      "id": "color-rule",
       "weight": 2,
       "fields": {
         "Name": "Color RULE",
@@ -158,6 +190,7 @@
       }
     },
     {
+      "id": "balance-rule",
       "weight": 2,
       "fields": {
         "Name": "Balance RULE",
@@ -165,6 +198,7 @@
       }
     },
     {
+      "id": "cold-rule",
       "weight": 2,
       "fields": {
         "Name": "Cold RULE",
@@ -172,24 +206,28 @@
       }
     },
     {
+      "id": "memory-rule",
       "fields": {
         "Name": "Memory RULE",
         "Description": "Preserve one willing recent memory inside an object; recording fades the user's own details until it is released."
       }
     },
     {
+      "id": "threshold-rule",
       "fields": {
         "Name": "Threshold RULE",
         "Description": "Know when a designated boundary is crossed; only one boundary can be watched and it must be physically marked."
       }
     },
     {
+      "id": "swarm-rule",
       "fields": {
         "Name": "Swarm RULE",
         "Description": "Communicate simple intentions to a small group of mundane insects; it grants no direct control over unnatural creatures."
       }
     },
     {
+      "id": "chance-rule",
       "fields": {
         "Name": "Chance RULE",
         "Description": "Once per scene, nudge a trivial random outcome; the GM chooses an equally unlikely inconvenience that follows."

@@ -1,8 +1,26 @@
 {
+  "schemaVersion": 2,
+  "id": "faction",
+  "kind": "category",
+  "visibility": "public",
   "name": "factions",
   "description": "Organisations avec leurs objectifs, ressources, hiérarchie, alliés et ennemis",
+  "entrySchema": {
+    "type": "fields",
+    "required": [
+      "Name",
+      "Type",
+      "Goal",
+      "Resources",
+      "Hierarchy",
+      "Allies",
+      "Enemies"
+    ],
+    "technical": ["Type"]
+  },
   "entries": [
     {
+      "id": "the-wayfarers-guild",
       "weight": 3,
       "fields": {
         "Name": "La Guilde des Voyageurs",
@@ -15,6 +33,7 @@
       }
     },
     {
+      "id": "house-valeward",
       "weight": 3,
       "fields": {
         "Name": "Maison Valeward",
@@ -27,6 +46,7 @@
       }
     },
     {
+      "id": "the-ashen-lanterns",
       "weight": 3,
       "fields": {
         "Name": "Les Lanternes Cendrées",
@@ -39,6 +59,7 @@
       }
     },
     {
+      "id": "the-brass-compact",
       "weight": 3,
       "fields": {
         "Name": "Le Pacte de Cuivre",
@@ -51,6 +72,7 @@
       }
     },
     {
+      "id": "the-red-knives",
       "weight": 2,
       "fields": {
         "Name": "Les Couteaux Rouges",
@@ -63,6 +85,7 @@
       }
     },
     {
+      "id": "the-verdant-covenant",
       "weight": 2,
       "fields": {
         "Name": "Le Pacte Verdoyant",
@@ -75,6 +98,7 @@
       }
     },
     {
+      "id": "the-seventh-banner",
       "weight": 2,
       "fields": {
         "Name": "La Septième Bannière",
@@ -87,6 +111,7 @@
       }
     },
     {
+      "id": "the-quiet-archive",
       "weight": 2,
       "fields": {
         "Name": "Les Archives Silencieuses",
@@ -99,6 +124,7 @@
       }
     },
     {
+      "id": "the-salt-throne",
       "weight": 2,
       "fields": {
         "Name": "Le Trône de Sel",
@@ -111,6 +137,7 @@
       }
     },
     {
+      "id": "the-white-veil",
       "weight": 2,
       "fields": {
         "Name": "Le Voile Blanc",
@@ -123,6 +150,7 @@
       }
     },
     {
+      "id": "the-hearth-union",
       "weight": 2,
       "fields": {
         "Name": "L'Union du Foyer",
@@ -135,6 +163,7 @@
       }
     },
     {
+      "id": "the-ivory-standard",
       "weight": 2,
       "fields": {
         "Name": "L'Étendard d'Ivoire",
@@ -147,6 +176,7 @@
       }
     },
     {
+      "id": "the-new-dawn-assembly",
       "weight": 1,
       "fields": {
         "Name": "L'Assemblée de l'Aube Nouvelle",
@@ -159,6 +189,7 @@
       }
     },
     {
+      "id": "the-hollow-choir",
       "weight": 1,
       "fields": {
         "Name": "Le Chœur Creux",
@@ -171,6 +202,7 @@
       }
     },
     {
+      "id": "the-sapphire-embassy",
       "weight": 1,
       "fields": {
         "Name": "L'Ambassade de Saphir",
@@ -183,6 +215,7 @@
       }
     },
     {
+      "id": "the-chainbreakers",
       "weight": 1,
       "fields": {
         "Name": "Les Briseurs de Chaînes",
@@ -195,6 +228,7 @@
       }
     },
     {
+      "id": "the-gilded-scale",
       "weight": 1,
       "fields": {
         "Name": "La Balance Dorée",
@@ -207,6 +241,7 @@
       }
     },
     {
+      "id": "the-starfall-society",
       "weight": 1,
       "fields": {
         "Name": "La Société des Étoiles Tombées",
@@ -219,6 +254,7 @@
       }
     },
     {
+      "id": "the-black-orchard",
       "weight": 1,
       "fields": {
         "Name": "Le Verger Noir",
@@ -231,6 +267,7 @@
       }
     },
     {
+      "id": "the-common-shield",
       "weight": 1,
       "fields": {
         "Name": "Le Bouclier du Peuple",

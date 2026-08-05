@@ -1,8 +1,17 @@
 {
-  "name": "officialBackground",
+  "schemaVersion": 2,
+  "id": "background-official",
+  "kind": "component",
+  "visibility": "internal",
+  "name": "Official background details",
   "description": "Background details for official NPCs",
+  "entrySchema": {
+    "type": "fields",
+    "required": ["Appearance", "Backstory", "Goals"]
+  },
   "entries": [
     {
+      "id": "orderly-and-ink-stained-wearing-modest-official-clothes-with",
       "fields": {
         "Appearance": "Orderly and ink-stained, wearing modest official clothes with every document carefully indexed.",
         "Backstory": "A diligent administrator discovered years of contradictory orders hidden across separate archives.",
@@ -10,6 +19,7 @@
       }
     },
     {
+      "id": "polished-and-composed-with-formal-travel-clothes-and",
       "fields": {
         "Appearance": "Polished and composed, with formal travel clothes and a case of sealed diplomatic letters.",
         "Backstory": "A diplomat negotiated a fragile truce whose secret clause is now being deliberately misrepresented.",
@@ -17,6 +27,7 @@
       }
     },
     {
+      "id": "well-guarded-but-visibly-tired-carrying-ledgers-marked",
       "fields": {
         "Appearance": "Well guarded but visibly tired, carrying ledgers marked with corrections in several different hands.",
         "Backstory": "A tax collector inherited impossible quotas designed to make an impoverished district default.",
@@ -24,6 +35,7 @@
       }
     },
     {
+      "id": "severe-robes-a-measured-voice-and-spectacles-repeatedly",
       "fields": {
         "Appearance": "Severe robes, a measured voice, and spectacles repeatedly removed when considering testimony.",
         "Backstory": "A judge convicted an innocent person using evidence later revealed to have been forged.",
@@ -31,6 +43,7 @@
       }
     },
     {
+      "id": "practical-formalwear-a-neutral-expression-and-a-notebook",
       "fields": {
         "Appearance": "Practical formalwear, a neutral expression, and a notebook filled with precise observations.",
         "Backstory": "An inspector sent to investigate missing supplies found every local office reporting perfectly matching lies.",

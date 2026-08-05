@@ -20,6 +20,7 @@ const {
 	generateStats,
 } = require('../services/mechanics/characterGeneration');
 const { dealDamage } = require('../services/mechanics/damage');
+const { BASE_STATS } = require('../services/mechanics/constants');
 const {
 	calculateMaxAp,
 	calculateMaxHp,
@@ -36,6 +37,7 @@ const {
 	recalculateDerivedStats,
 } = require('../services/mechanics/statistics');
 const { populateRandomCharacter } = require('../services/randomCharacterGenerator');
+const { getStatProfile } = require('../services/statProfileCatalog');
 const {
 	createLocalizedCharacterGenerationOptions,
 } = require('../util/characterGenerationLocalization');
@@ -144,7 +146,11 @@ test('statistics and derived-stat recalculation preserve existing values', () =>
 		seed = (seed * 1_664_525 + 1_013_904_223) % 4_294_967_296;
 		return seed / 4_294_967_296;
 	};
-	const generated = generateStats(10, random);
+	const generated = generateStats({
+		level: 10,
+		profile: getStatProfile('character-balanced'),
+		random,
+	});
 	assert.deepEqual(generated, {
 		constitution: 12,
 		strength: 7,
@@ -159,6 +165,78 @@ test('statistics and derived-stat recalculation preserve existing values', () =>
 	assert.equal(calculateStatCost(generated), calculateStatBudget(10));
 	assert.equal(calculateRulePoints(14), 3);
 	assert.deepEqual(allocateRuleLevels(6), [3]);
+});
+
+test('statistical profiles preserve minimums, maximums, weights, and legal remainders', () => {
+	const minimums = Object.fromEntries(BASE_STATS.map(stat => [stat, 4]));
+	const maximums = { ...minimums, constitution: 5, strength: 5 };
+	const weights = Object.fromEntries(BASE_STATS.map(stat => [stat, 0]));
+	weights.constitution = 1;
+	weights.strength = 3;
+	const profile = {
+		id: 'test-weighted',
+		minimums,
+		maximums,
+		weights,
+	};
+	assert.deepEqual(generateStats({ level: 1, profile, random: () => 0 }), {
+		...minimums,
+		constitution: 5,
+		strength: 5,
+		initiative: 4,
+		reflexes: 4,
+	});
+
+	const onePointMinimums = Object.fromEntries(BASE_STATS.map(stat => [stat, 10]));
+	onePointMinimums.charisma = 6;
+	const onePointProfile = {
+		id: 'test-weight-boundary',
+		minimums: onePointMinimums,
+		maximums: {
+			...onePointMinimums,
+			constitution: 11,
+			strength: 11,
+		},
+		weights: { ...weights },
+	};
+	assert.equal(generateStats({
+		level: 1,
+		profile: onePointProfile,
+		random: () => 0,
+	}).constitution, 11);
+	const boundarySelection = generateStats({
+		level: 1,
+		profile: onePointProfile,
+		random: () => 0.25,
+	});
+	assert.equal(boundarySelection.constitution, 10);
+	assert.equal(boundarySelection.strength, 11);
+
+	const expensiveMinimums = Object.fromEntries(BASE_STATS.map(stat => [stat, 20]));
+	const expensiveProfile = {
+		id: 'test-expensive-minimums',
+		minimums: expensiveMinimums,
+		maximums: { ...expensiveMinimums },
+		weights: Object.fromEntries(BASE_STATS.map(stat => [stat, 1])),
+	};
+	const expensive = generateStats({ level: 1, profile: expensiveProfile, random: () => 0 });
+	for (const stat of BASE_STATS) {
+		assert.equal(expensive[stat], 20);
+	}
+
+	const remainderProfile = {
+		id: 'test-remainder',
+		minimums: { ...minimums },
+		maximums: { ...minimums, constitution: 15 },
+		weights: { ...weights, strength: 0 },
+	};
+	const remainder = generateStats({
+		level: 1,
+		profile: remainderProfile,
+		random: () => 0,
+	});
+	assert.equal(remainder.constitution, 15);
+	assert.ok(calculateStatCost(remainder) < calculateStatBudget(1));
 });
 
 test('character validation preserves legacy save normalization and AP constraints', () => {

@@ -1,8 +1,17 @@
 {
-  "name": "performerBackground",
-  "description": "Détails de Background pour les PNJ artistes",
+  "schemaVersion": 2,
+  "id": "background-performer",
+  "kind": "component",
+  "visibility": "internal",
+  "name": "Détails du background d’artiste",
+  "description": "Apparences, histoires et objectifs pour les PNJ artistes",
+  "entrySchema": {
+    "type": "fields",
+    "required": ["Appearance", "Backstory", "Goals"]
+  },
   "entries": [
     {
+      "id": "expressively-dressed-with-a-cherished-instrument-and-fingertips",
       "fields": {
         "Appearance": "Tenue expressive, instrument précieusement entretenu et doigts endurcis par des années de pratique.",
         "Backstory": "Un musicien itinérant a appris sans le savoir une mélodie dont des rebelles se servent comme message codé.",
@@ -10,6 +19,7 @@
       }
     },
     {
+      "id": "graceful-and-carefully-made-up-carrying-costumes-that",
       "fields": {
         "Appearance": "Gracieux et soigneusement maquillé, transportant des costumes capables de lui donner l’apparence de n’importe quel rang social.",
         "Backstory": "Un comédien a fréquenté les élites en incarnant des nobles sur scène et surpris un secret dangereux.",
@@ -17,6 +27,7 @@
       }
     },
     {
+      "id": "warm-eyed-and-animated-wearing-practical-travel-clothes-covered",
       "fields": {
         "Appearance": "Regard chaleureux et gestes animés, avec des vêtements de voyage pratiques couverts de petits souvenirs.",
         "Backstory": "Un conteur rassemble les récits d’une catastrophe oubliée auprès de communautés qui en gardent des souvenirs contradictoires.",
@@ -24,6 +35,7 @@
       }
     },
     {
+      "id": "compact-athletic-and-bright-clad-with-old-injuries-concealed",
       "fields": {
         "Appearance": "Petit, athlétique et vêtu de couleurs vives, dissimulant d’anciennes blessures sous des mouvements qui paraissent sans effort.",
         "Backstory": "Un acrobate a quitté une compagnie célèbre lorsque son propriétaire a imposé aux artistes des numéros toujours plus mortels.",
@@ -31,6 +43,7 @@
       }
     },
     {
+      "id": "always-poised-for-an-audience-with-a-quick",
       "fields": {
         "Appearance": "Toujours prêt à entrer en scène, avec un sourire prompt et les poches remplies d’accessoires rudimentaires.",
         "Backstory": "Un artiste de rue est devenu populaire en tournant en ridicule un dirigeant local, dont les agents assistent désormais à chaque représentation.",

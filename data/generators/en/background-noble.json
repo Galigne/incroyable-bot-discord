@@ -1,8 +1,17 @@
 {
-  "name": "nobleBackground",
+  "schemaVersion": 2,
+  "id": "background-noble",
+  "kind": "component",
+  "visibility": "internal",
+  "name": "Noble background details",
   "description": "Background details for noble NPCs",
+  "entrySchema": {
+    "type": "fields",
+    "required": ["Appearance", "Backstory", "Goals"]
+  },
   "entries": [
     {
+      "id": "impeccably-dressed-with-a-family-signet-and-the",
       "fields": {
         "Appearance": "Impeccably dressed with a family signet and the composed posture of lifelong scrutiny.",
         "Backstory": "Raised as the spare heir, they unexpectedly inherited after a succession of family tragedies.",
@@ -10,6 +19,7 @@
       }
     },
     {
+      "id": "fashionable-but-understated-with-sharp-eyes-and-a",
       "fields": {
         "Appearance": "Fashionable but understated, with sharp eyes and a smile practiced for court.",
         "Backstory": "A minor courtier survived by carrying messages between rivals without openly choosing a side.",
@@ -17,6 +27,7 @@
       }
     },
     {
+      "id": "young-carefully-groomed-and-visibly-uncomfortable-in-ceremonial",
       "fields": {
         "Appearance": "Young, carefully groomed, and visibly uncomfortable in ceremonial clothing.",
         "Backstory": "An idealistic heir was educated abroad and returned to find the family profiting from abuse.",
@@ -24,6 +35,7 @@
       }
     },
     {
+      "id": "weathered-for-an-aristocrat-wearing-quality-riding-clothes",
       "fields": {
         "Appearance": "Weathered for an aristocrat, wearing quality riding clothes and an old dueling scar.",
         "Backstory": "A minor lord spent years personally defending an isolated border holding ignored by the crown.",
@@ -31,6 +43,7 @@
       }
     },
     {
+      "id": "elegant-silver-haired-and-supported-by-a-cane-concealing",
       "fields": {
         "Appearance": "Elegant, silver-haired, and supported by a cane concealing a narrow blade.",
         "Backstory": "A widowed aristocrat rebuilt influence through marriages, favors, and impeccable memory.",

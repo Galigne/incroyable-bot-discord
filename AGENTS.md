@@ -95,8 +95,16 @@ saves.
   pre-mutation validation, and domain mutation.
 - `services/mechanics/`: Discord-independent character constants, validation,
   statistics, resources, armor, damage, and generation formulas.
-- `services/generatorCatalog.js`: loads and validates generator JSON and performs
-  weighted selection.
+- `services/generatorSchema.js`: validates the strict generator-v2 envelope,
+  entry schemas, stable IDs, payloads, weights, and English/French parity.
+- `services/generatorCatalog.js`: recursively loads the complete generator-v2
+  locale pair and exposes stable-ID lookup plus public visibility filtering.
+- `services/statProfileCatalog.js`: loads and validates non-localized statistical
+  profiles used by character and later creature generation.
+- `services/weightedSelector.js`: shared injectable weighted selection for
+  generator entries and statistical allocation.
+- `services/generationData.js`: prepares generator and profile candidates before
+  atomically replacing both active caches during `/reload`.
 - `services/randomCharacterGenerator.js`: selects generator data and assembles
   complete random characters using `services/mechanics/`.
 - `runtime/runtimeState.js`: owns the active validated configuration, command
@@ -489,36 +497,45 @@ after successful deletion.
 
 ## Random generators
 
-Every `.json` file in `data/generators/en/` automatically becomes a category after
-`/reload` or a manual process restart. `data/generators/fr/` mirrors the English reference catalog with
-localized display content. Both locales keep identical filenames, structure,
-ordering, weights, placeholders, and technical values. The catalog derives each
-internal ID from the English file, caches locales independently, and falls back to
-the English file when a localized counterpart is absent. `/help command:gen`
-explains generation while autocomplete on `/gen` lists every current category.
+Generator schema v2 files are discovered recursively under `data/generators/en/`
+and `data/generators/fr/`. The French catalog must contain a structurally compatible
+counterpart for every English relative path; a missing or incompatible counterpart
+rejects the complete catalog instead of falling back to English. `/help command:gen`
+and `/gen` autocomplete expose only generators whose v2 visibility is `public`.
+Internal generators remain available to application workflows through stable ID
+lookup.
 
 Each generator file requires:
 
 ```json
 {
-  "name": "categoryName",
+  "schemaVersion": 2,
+  "id": "category-name",
+  "kind": "category",
+  "visibility": "public",
+  "name": "Localized category name",
   "description": "Human-readable description",
+  "entrySchema": { "type": "text" },
   "entries": []
 }
 ```
 
-Supported entry forms:
+Supported Part 1 entry forms:
 
-- plain string, default weight `1`;
-- `{ "value": "...", "weight": 2 }`;
-- `{ "fields": { "Name": "...", "Description": "..." }, "weight": 2 }`.
+- `{ "id": "stable-entry", "value": "...", "weight": 2 }`;
+- `{ "id": "stable-entry", "fields": { "Name": "...", "Description": "..." }, "weight": 2 }`.
 
 Weights are positive numbers and default to `1`. Structured entries may contain 1
-to 25 Discord-safe fields. Preserve backward compatibility with all three formats.
-The catalog is cached until `/reload` clears both localized caches or the process
-is restarted.
+to 25 Discord-safe fields declared by `entrySchema.required`; technical routing or
+enum fields are declared by `entrySchema.technical`. Generator and entry IDs,
+kinds, visibility, schemas, entry order, weights, technical values, and relative
+paths remain identical across locales. Only names, descriptions, and player-facing
+entry content are localized. There is no parser, runtime detection, API overload,
+or compatibility path for the previous generator format. `/reload` validates and
+replaces the generator and statistical-profile caches; a process restart also
+loads the current data.
 
-Random character generation depends on exact category names and structured field
+Random character generation depends on exact stable generator IDs and structured field
 labels. Before renaming generator fields, inspect `services/randomCharacterGenerator.js`.
 Generator IDs, `Generator` routing values, `Type`/`Rarity` enum values, JSON keys,
 and structured field labels stay English in every locale. Autocomplete display

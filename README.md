@@ -36,11 +36,14 @@ resource abbreviations are resolved through `util/characterDisplay.js`. Resource
 abbreviations are unique within each language:
 HP/AR/AP/MD in English and PV/PR/PA/DD in French.
 
-Generator catalogs follow the same server locale. English reference files live in
-`data/generators/en/` and French display content in `data/generators/fr/`.
-Autocomplete labels and generated text are localized, while generator IDs,
-structured field keys, enum values, and routing values remain English. Content
-already saved in a character sheet is never translated retroactively.
+Generator schema v2 catalogs follow the same server locale. English reference
+files live in `data/generators/en/` and matching French display content in
+`data/generators/fr/`; the complete catalog is rejected when a locale counterpart
+is missing or structurally incompatible. Public generators appear in `/gen`,
+autocomplete, and help, while internal components remain workflow-only.
+Autocomplete labels and generated text are localized, while stable generator and
+entry IDs, structured field keys, enum values, and routing values remain English.
+Content already saved in a character sheet is never translated retroactively.
 
 Set the required runtime language in `config.json`. The complete configuration is:
 
@@ -258,6 +261,7 @@ architectural boundary checks, slash-command schema and autocomplete checks,
 permissions, localization, the current character-save schema, required media, and
 voice dependencies.
 
-Generator entries may be plain strings, weighted strings, or objects with
-multiple display fields. See
+Every generator v2 entry is an object with a stable technical ID, an optional
+positive weight, and either localized text or one atomic structured field group.
+Shared non-localized statistical profiles drive character stat allocation. See
 [`data/generators/README.md`](data/generators/README.md) for the complete format.

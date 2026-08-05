@@ -1,8 +1,27 @@
 {
+  "schemaVersion": 2,
+  "id": "religion",
+  "kind": "category",
+  "visibility": "public",
   "name": "religions",
   "description": "Divinités, croyances, rites, préceptes, symboles, ordres, lieux saints et rapport à la magie",
+  "entrySchema": {
+    "type": "fields",
+    "required": [
+      "Name",
+      "Deity or Belief",
+      "Rites",
+      "Commandment",
+      "Taboo",
+      "Sacred Symbol",
+      "Religious Order",
+      "Holy Place",
+      "Relationship with Magic"
+    ]
+  },
   "entries": [
     {
+      "id": "the-hearthmother",
       "weight": 3,
       "fields": {
         "Name": "La Mère du Foyer",
@@ -17,6 +36,7 @@
       }
     },
     {
+      "id": "the-open-road",
       "weight": 3,
       "fields": {
         "Name": "La Route Ouverte",
@@ -31,6 +51,7 @@
       }
     },
     {
+      "id": "the-quiet-judge",
       "weight": 3,
       "fields": {
         "Name": "Le Juge Silencieux",
@@ -45,6 +66,7 @@
       }
     },
     {
+      "id": "lady-of-tides",
       "weight": 3,
       "fields": {
         "Name": "La Dame des Marées",
@@ -59,6 +81,7 @@
       }
     },
     {
+      "id": "the-seven-smiths",
       "weight": 2,
       "fields": {
         "Name": "Les Sept Forgerons",
@@ -73,6 +96,7 @@
       }
     },
     {
+      "id": "the-green-pact",
       "weight": 2,
       "fields": {
         "Name": "Le Pacte Vert",
@@ -87,6 +111,7 @@
       }
     },
     {
+      "id": "the-unconquered-sun",
       "weight": 2,
       "fields": {
         "Name": "Le Soleil Invaincu",
@@ -101,6 +126,7 @@
       }
     },
     {
+      "id": "the-moon-weaver",
       "weight": 2,
       "fields": {
         "Name": "La Tisseuse de Lune",
@@ -115,6 +141,7 @@
       }
     },
     {
+      "id": "the-thunder-king",
       "weight": 2,
       "fields": {
         "Name": "Le Roi du Tonnerre",
@@ -129,6 +156,7 @@
       }
     },
     {
+      "id": "the-thousand-ancestors",
       "weight": 2,
       "fields": {
         "Name": "Les Mille Ancêtres",
@@ -143,6 +171,7 @@
       }
     },
     {
+      "id": "the-liberating-flame",
       "weight": 2,
       "fields": {
         "Name": "La Flamme Libératrice",
@@ -157,6 +186,7 @@
       }
     },
     {
+      "id": "the-perfect-measure",
       "weight": 2,
       "fields": {
         "Name": "La Mesure Parfaite",
@@ -171,6 +201,7 @@
       }
     },
     {
+      "id": "the-nameless-mercy",
       "weight": 1,
       "fields": {
         "Name": "La Miséricorde sans Nom",
@@ -185,6 +216,7 @@
       }
     },
     {
+      "id": "the-devouring-cycle",
       "weight": 1,
       "fields": {
         "Name": "Le Cycle Dévorant",
@@ -199,6 +231,7 @@
       }
     },
     {
+      "id": "the-sleeping-mountain",
       "weight": 1,
       "fields": {
         "Name": "La Montagne Endormie",
@@ -213,6 +246,7 @@
       }
     },
     {
+      "id": "the-laughing-mask",
       "weight": 1,
       "fields": {
         "Name": "Le Masque Rieur",
@@ -227,6 +261,7 @@
       }
     },
     {
+      "id": "the-star-pilgrims",
       "weight": 1,
       "fields": {
         "Name": "Les Pèlerins des Étoiles",
@@ -241,6 +276,7 @@
       }
     },
     {
+      "id": "the-red-communion",
       "weight": 1,
       "fields": {
         "Name": "La Communion Rouge",
@@ -255,6 +291,7 @@
       }
     },
     {
+      "id": "the-door-beyond",
       "weight": 1,
       "fields": {
         "Name": "La Porte vers l'Au-delà",
@@ -269,6 +306,7 @@
       }
     },
     {
+      "id": "the-crowned-serpent",
       "weight": 1,
       "fields": {
         "Name": "Le Serpent Couronné",

@@ -1,116 +1,153 @@
 {
+  "schemaVersion": 2,
+  "id": "personality",
+  "kind": "category",
+  "visibility": "public",
   "name": "personality",
   "description": "Traits, ideals, quirks, bonds, and flaws",
+  "entrySchema": {
+    "type": "text"
+  },
   "entries": [
     {
+      "id": "cheerfully-fatalistic-treats-every-disaster-as-confirmation-of",
       "weight": 2,
       "value": "Cheerfully fatalistic; treats every disaster as confirmation of a prediction nobody remembers hearing."
     },
     {
+      "id": "painfully-honest-but-highly-skilled-at-changing-the",
       "weight": 2,
       "value": "Painfully honest but highly skilled at changing the subject before revealing anything personal."
     },
     {
+      "id": "suspicious-of-all-magic-except-one-obviously-fraudulent",
       "weight": 2,
       "value": "Suspicious of all magic except one obviously fraudulent superstition followed with complete devotion."
     },
     {
+      "id": "grandly-theatrical-in-public-quiet-and-observant-in",
       "weight": 2,
       "value": "Grandly theatrical in public, quiet and observant in private, and terrified of being considered ordinary."
     },
     {
+      "id": "collects-favors-instead-of-money-and-remembers-every",
       "weight": 2,
       "value": "Collects favors instead of money and remembers every promise with unsettling precision."
     },
     {
+      "id": "protective-of-underdogs-openly-rude-to-authority-and",
       "weight": 3,
       "value": "Protective of underdogs, openly rude to authority, and unable to resist proving a bully wrong."
     },
     {
+      "id": "polite-to-enemies-and-brutally-critical-of-friends",
       "weight": 2,
       "value": "Polite to enemies and brutally critical of friends because respect is expressed through honesty."
     },
     {
+      "id": "believes-every-problem-has-a-practical-solution-even",
       "value": "Believes every problem has a practical solution, even when facing ghosts, prophecy, or divine judgment."
     },
     {
+      "id": "compulsively-adopts-stray-animals-and-assigns-each-one",
       "value": "Compulsively adopts stray animals and assigns each one a military rank."
     },
     {
+      "id": "treats-coincidences-as-sacred-messages-and-constantly-rearranges",
       "value": "Treats coincidences as sacred messages and constantly rearranges plans to follow them."
     },
     {
+      "id": "generous-with-possessions-but-jealous-of-attention-especially",
       "weight": 2,
       "value": "Generous with possessions but jealous of attention, especially when a rival tells a better story."
     },
     {
+      "id": "never-raises-their-voice-the-calmer-they-sound",
       "weight": 2,
       "value": "Never raises their voice; the calmer they sound, the angrier and more dangerous they are."
     },
     {
+      "id": "obsessed-with-etiquette-from-a-culture-they-only",
       "value": "Obsessed with etiquette from a culture they only understand through an inaccurate old book."
     },
     {
+      "id": "claims-to-fear-nothing-except-geese-and-refuses",
       "value": "Claims to fear nothing except geese, and refuses to explain the very specific reason."
     },
     {
+      "id": "loyal-to-any-agreements-exact-wording-while-exploiting",
       "weight": 2,
       "value": "Loyal to any agreement's exact wording while exploiting every loophole without guilt."
     },
     {
+      "id": "eager-to-forgive-personal-insults-but-incapable-of",
       "weight": 2,
       "value": "Eager to forgive personal insults but incapable of overlooking harm done to a stranger."
     },
     {
+      "id": "constantly-invents-impressive-former-careers-a-surprising-number",
       "value": "Constantly invents impressive former careers; a surprising number later prove true."
     },
     {
+      "id": "treats-combat-like-a-puzzle-and-social-interaction",
       "weight": 2,
       "value": "Treats combat like a puzzle and social interaction like an unavoidable natural disaster."
     },
     {
+      "id": "wants-to-be-feared-but-automatically-comforts-anyone",
       "weight": 2,
       "value": "Wants to be feared but automatically comforts anyone who looks upset."
     },
     {
+      "id": "keeps-meticulous-journals-yet-replaces-every-persons-name",
       "weight": 2,
       "value": "Keeps meticulous journals yet replaces every person's name with an increasingly confusing nickname."
     },
     {
+      "id": "sees-wealth-as-a-burden-and-spends-it",
       "value": "Sees wealth as a burden and spends it recklessly on memorable experiences and ridiculous gifts."
     },
     {
+      "id": "deeply-religious-but-argues-with-their-deity-as",
       "weight": 2,
       "value": "Deeply religious but argues with their deity as if speaking to an irritating family member."
     },
     {
+      "id": "cannot-admit-ignorance-and-improvises-explanations-that-often",
       "weight": 2,
       "value": "Cannot admit ignorance and improvises explanations that often become accidental local legends."
     },
     {
+      "id": "values-freedom-above-safety-but-becomes-controlling-whenever",
       "weight": 2,
       "value": "Values freedom above safety but becomes controlling whenever companions are genuinely endangered."
     },
     {
+      "id": "apologizes-to-every-defeated-enemy-and-becomes-offended",
       "weight": 2,
       "value": "Apologizes to every defeated enemy and becomes offended if the apology is rejected."
     },
     {
+      "id": "speaks-in-proverbs-most-of-which-are-invented",
       "value": "Speaks in proverbs, most of which are invented on the spot and only loosely relevant."
     },
     {
+      "id": "appears-cynical-and-mercenary-but-secretly-sends-most",
       "weight": 2,
       "value": "Appears cynical and mercenary but secretly sends most earnings to rebuild a ruined hometown."
     },
     {
+      "id": "always-assumes-the-best-of-monsters-and-the",
       "weight": 2,
       "value": "Always assumes the best of monsters and the worst of institutions."
     },
     {
+      "id": "keeps-trophies-from-failures-rather-than-victories-and",
       "weight": 2,
       "value": "Keeps trophies from failures rather than victories and can recount every lesson attached to them."
     },
     {
+      "id": "desperate-to-leave-a-heroic-legacy-yet-freezes",
       "weight": 2,
       "value": "Desperate to leave a heroic legacy, yet freezes whenever someone recognizes them in public."
     }

@@ -1,8 +1,17 @@
 {
-  "name": "artisanBackground",
-  "description": "Détails de Background pour les PNJ artisans",
+  "schemaVersion": 2,
+  "id": "background-artisan",
+  "kind": "component",
+  "visibility": "internal",
+  "name": "Détails du background d’artisan",
+  "description": "Apparences, histoires et objectifs pour les PNJ artisans",
+  "entrySchema": {
+    "type": "fields",
+    "required": ["Appearance", "Backstory", "Goals"]
+  },
   "entries": [
     {
+      "id": "muscular-forearms-small-burn-scars-and-heavy-clothing",
       "fields": {
         "Appearance": "Avant-bras musclés, petites cicatrices de brûlure et vêtements épais couverts de suie.",
         "Backstory": "Un forgeron a hérité d’un atelier en difficulté ainsi que de la dernière commande inachevée de son défunt maître.",
@@ -10,6 +19,7 @@
       }
     },
     {
+      "id": "covered-in-fine-sawdust-with-measured-movements-and",
       "fields": {
         "Appearance": "Couvert de fine sciure, avec des gestes mesurés et un crayon derrière chaque oreille.",
         "Backstory": "Un charpentier s’est fait connaître en reconstruisant les maisons détruites par un incendie, mais il soupçonne que le feu était volontaire.",
@@ -17,6 +27,7 @@
       }
     },
     {
+      "id": "precisely-dressed-in-self-made-clothing-with-quick-fingers",
       "fields": {
         "Appearance": "Tenue impeccable confectionnée sur mesure, doigts agiles et regard attentif au moindre détail.",
         "Backstory": "Un tailleur a découvert les secrets de la cour en écoutant de puissants clients convaincus que les domestiques étaient invisibles.",
@@ -24,6 +35,7 @@
       }
     },
     {
+      "id": "pale-from-laboratory-work-with-stained-gloves-and",
       "fields": {
         "Appearance": "Teint pâle à force de travailler en laboratoire, gants tachés et sourcils roussis de façon inégale.",
         "Backstory": "La découverte prometteuse d’un alchimiste a été accaparée par un examinateur de guilde, qui a ensuite dissimulé la formule.",
@@ -31,6 +43,7 @@
       }
     },
     {
+      "id": "quiet-and-focused-wearing-magnifying-lenses-and-an",
       "fields": {
         "Appearance": "Silencieux et concentré, portant des lentilles grossissantes et un tablier rempli de minuscules outils soigneusement rangés.",
         "Backstory": "Un horloger a découvert un mécanisme impossible dans un objet qu’on lui avait confié pour une réparation ordinaire.",
