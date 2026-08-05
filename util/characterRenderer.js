@@ -346,7 +346,7 @@ function truncateBlocks(blocks, separator, maxLength) {
 		else {
 			const current = included.join(separator);
 			if (current.length + separator.length + 1 <= maxLength) {
-				included.push('â€¦');
+				included.push('...');
 			}
 		}
 		break;
