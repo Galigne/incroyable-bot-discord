@@ -85,23 +85,17 @@ module.exports = function createCommandChecks(context) {
 			editableFields.map(field => field.editId).join(',') !== [
 				'name',
 				'level',
-				'race',
-				'background',
-				'personality',
+				'status',
 				'statistics',
 				'rules',
 				'talents',
-				'status-effects',
-				'equipment',
-				'inventory',
-				'encumbrance',
-				'hp',
-				'ar',
-				'ap',
-				'md',
+				'gear',
+				'race',
+				'background',
+				'personality',
 			].join(',')
-			|| !viewableFields.some(field => field.viewId === 'personality')
-			|| !viewableFields.some(field => field.viewId === 'status')
+			|| viewableFields.map(field => field.viewId).join(',')
+				!== editableFields.map(field => field.editId).join(',')
 			|| documentedCommands.some(metadata => (
 				!metadata.help.detailsKey
 				|| t('en', metadata.help.detailsKey) === metadata.help.detailsKey

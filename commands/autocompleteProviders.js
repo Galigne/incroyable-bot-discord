@@ -1,7 +1,4 @@
 const generatorCatalog = require('../services/generatorCatalog');
-const {
-	getViewableFields,
-} = require('../services/characterFieldCatalog');
 const { filterAutocompleteChoices } = require('../util/autocomplete');
 const {
 	canManageCharacter,
@@ -11,9 +8,6 @@ const {
 	OPTION_VALUE_PROVIDERS,
 	getCommandOptionValues,
 } = require('../util/commandOptionValues');
-const {
-	getCharacterFieldLabel,
-} = require('../util/characterDisplay');
 const {
 	getCommandInvocation,
 	getCommandLookupValue,
@@ -49,7 +43,6 @@ const AUTOCOMPLETE_PROVIDERS = {
 	'help-commands': getHelpCommandChoices,
 	'manageable-characters': getManageableCharacterChoices,
 	'undoable-characters': getUndoableCharacters,
-	'viewable-fields': getViewableFieldChoices,
 };
 
 function getStaticChoices(option, context, focused) {
@@ -144,23 +137,6 @@ function getUndoableCharacters(option, context, focused) {
 			character,
 			context.config,
 		),
-	);
-}
-
-function getViewableFieldChoices(option, context, focused) {
-	return filterAutocompleteChoices(
-		getViewableFields().map(field => {
-			const label = getCharacterFieldLabel(context.locale, field.id, {
-				abbreviated: Boolean(field.abbreviationKey),
-			});
-			return {
-				name: (label === field.viewId
-					? label
-					: `${label} (${field.viewId})`).slice(0, 100),
-				value: field.viewId,
-			};
-		}),
-		focused.value,
 	);
 }
 

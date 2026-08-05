@@ -159,7 +159,7 @@
       "characterOption": "Character to display",
       "fieldOption": "Optional detailed field",
       "unknownField": "Unknown character field: **{{field}}**. Use `/help command:get` for command details.",
-      "behavior": "Without `field`, posts the public character summary. With `field`, displays one complete detailed field and its sub-fields. Autocomplete lists CharacterKeys and supported views such as `name`, `race`, `personality`, `statistics`, `rules`, `status`, `equipment`, and `inventory`."
+      "behavior": "Without `field`, posts the public character summary. With `field`, displays one complete section and its labelled values. The ten sections are `name`, `level`, `status`, `statistics`, `rules`, `talents`, `gear`, `race`, `background`, and `personality`, in that order. `status` groups HP, AR, AP, MD, and status effects. `gear` groups equipment, inventory, and encumbrance."
     },
     "heal": {
       "description": "Restore current HP, armor, or both to a percentage of maximum",
@@ -196,7 +196,7 @@
       "description": "Set one character-sheet field or field group in a prefilled form",
       "characterOption": "Character to edit",
       "fieldOption": "Field to edit",
-      "behavior": "Opens one private modal prefilled with the selected saved field or group. `name` uses separate optional First name and Last name inputs; emptying either input clears that component. `hp`, `ar`, `ap`, `md`, and `encumbrance` each use separate required Current and Maximum numeric inputs. `level` uses one short numeric input. `race` uses separate Name, Physical description, Lore, Skill bonus, and Physical ability inputs. `background` uses separate Appearance, Backstory, and Goals inputs. `personality` uses separate Description and Traits inputs, with one trait per line. `statistics` uses one `statName: statValue` line for each required statistic: `constitution`, `strength`, `dexterity`, `intelligence`, `speed`, `perception`, `charisma`, `initiative`, and `reflexes`. Statistic names stay English, may appear in any order, and must each appear exactly once. Talents, status effects, equipment, and inventory use one entry per line; whitespace and empty lines are ignored, and an empty input clears the collection. RULEs use one `Name:Level:Description` entry per line. Name and description must be non-empty, level must be a positive whole number, and only the first two colons are structural, so descriptions may contain additional colons. AP must remain whole numbers with `0 ≤ current ≤ max ≤ 10`. Every group is validated and saved atomically. Only the character creator, a DM, or the server owner may edit the sheet."
+      "behavior": "Opens one private modal prefilled with one of the same ten sections as `/get`: `name`, `level`, `status`, `statistics`, `rules`, `talents`, `gear`, `race`, `background`, and `personality`, in that order. `name` edits separate optional First name and Last name inputs. `level` uses one short numeric input. `status` edits HP, AR, AP, and MD as required `current:max` pairs plus one status effect per line; all five inputs are applied together. `statistics` uses one `statName: statValue` line for each required statistic: `constitution`, `strength`, `dexterity`, `intelligence`, `speed`, `perception`, `charisma`, `initiative`, and `reflexes`. Statistic names stay English, may appear in any order, and must each appear exactly once. RULEs use one `Name:Level:Description` entry per line. Talents use one entry per line. `gear` edits equipment and inventory as separate line-based lists plus encumbrance as a required `current:max` pair; all three inputs are applied together. `race` edits Name, Physical description, Lore, Skill bonus, and Physical ability. `background` edits Appearance, Backstory, and Goals. `personality` edits Traits, one per line, and Description. Empty list inputs clear their collection; whitespace, empty lines, and optional leading bullets are normalized. AP must remain whole numbers with `0 ≤ current ≤ max ≤ 10`. Every section is validated and saved atomically as one undoable operation. Only the character creator, a DM, or the server owner may edit the sheet."
     },
     "undo": {
       "description": "Restore the newest retained pre-change character snapshot",
@@ -228,6 +228,10 @@
       "collectionDescription": "One entry per line; blank lines are ignored. Empty the form to clear.",
       "textDescription": "The previous value is prefilled. Empty the form to clear it.",
       "numberDescription": "Required. Enter a valid number.",
+      "pairDescription": "Required. Enter current:max (for example, 50:100).",
+      "pairPlaceholder": "current:max",
+      "equipmentDescription": "One equipment entry per line. Empty the input to clear equipment.",
+      "inventoryDescription": "One inventory entry per line. Empty the input to clear inventory.",
       "statisticsDescription": "One `statName: value` line per statistic; all nine English names are required.",
       "statisticsPlaceholder": "One line per statistic: statName: value",
       "inputLabels": {
@@ -279,6 +283,7 @@
       "ruleDescription": "RULE description",
       "talents": "Talents",
       "status": "Status",
+      "gear": "Gear",
       "statusEffects": "Status effects",
       "equipment": "Equipment",
       "inventory": "Inventory",
@@ -343,6 +348,7 @@
     "statisticsMissing": "Missing required statistic `{{stat}}`.",
     "collectionValueRequired": "A value is required for the {{field}}.",
     "mustBeNumber": "{{field}} must be a number.",
+    "pairFormat": "{{field}} must use exactly one `current:max` pair.",
     "ruleNameRequired": "A RULE name is required before the `:` separator.",
     "ruleLevelInvalid": "A RULE level must be a positive whole number.",
     "ruleDescriptionRequired": "A RULE description is required after the second `:` separator.",

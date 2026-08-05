@@ -1,10 +1,12 @@
 const { EmbedBuilder } = require('discord.js');
 const {
 	BASE_STATS,
-	DERIVED_STATS,
 } = require('../services/mechanics/constants');
 const { clampActionPoints } = require('../services/mechanics/resources');
-const { getViewableFieldDefinition } = require('../services/characterFieldCatalog');
+const {
+	getCharacterFieldDefinition,
+	getViewableFieldDefinition,
+} = require('../services/characterFieldCatalog');
 const {
 	getCharacterFieldLabel,
 	getResourceAbbreviation,
@@ -89,10 +91,15 @@ function createCharacterSummaryEmbed(character, locale = 'en') {
 }
 
 function createCharacterFieldEmbed(character, fieldName, locale = 'en') {
-	const field = normalizeFieldName(fieldName);
+	const definition = getViewableFieldDefinition(fieldName);
+	if (!definition) {
+		return null;
+	}
+	const field = definition.sectionId;
+	const targets = definition.viewTargetIds.map(getCharacterFieldDefinition);
 	const embed = new EmbedBuilder()
 		.setTitle(t(locale, 'character.detail.title', {
-			field: getFieldTitle(field, locale),
+			field: getCharacterFieldLabel(locale, field),
 			name: character.displayName,
 		}))
 		.setColor('#FFD700');
@@ -100,80 +107,26 @@ function createCharacterFieldEmbed(character, fieldName, locale = 'en') {
 	switch (field) {
 	case 'name':
 		return embed.addFields(
-			{
-				name: getCharacterFieldLabel(locale, 'firstName'),
-				value: character.firstName || t(locale, 'common.empty'),
+			...targets.map(target => ({
+				name: getCharacterFieldLabel(locale, target.id),
+				value: getStoredValue(character, target) || t(locale, 'common.empty'),
 				inline: true,
-			},
-			{
-				name: getCharacterFieldLabel(locale, 'lastName'),
-				value: character.lastName || t(locale, 'common.empty'),
-				inline: true,
-			},
+			})),
 		);
-	case 'firstname':
-		return embed.setDescription(character.firstName || t(locale, 'common.empty'));
-	case 'lastname':
-		return embed.setDescription(character.lastName || t(locale, 'common.empty'));
 	case 'level':
-		return embed.setDescription(String(character.level));
-	case 'race':
+		return embed.setDescription(String(getStoredValue(character, targets[0])));
+	case 'status':
 		return embed.addFields(
+			...targets.filter(target => target.resourceId).map(target => ({
+				name: getCharacterFieldLabel(locale, target.id),
+				value: formatCharacterResource(character, target.resourceId, locale),
+			})),
 			{
-				name: getCharacterFieldLabel(locale, 'race.name'),
-				value: truncate(character.race.name || t(locale, 'common.empty')),
-			},
-			{
-				name: getCharacterFieldLabel(locale, 'race.physicalDescription'),
-				value: truncate(
-					character.race.physicalDescription || t(locale, 'common.empty'),
-				),
-			},
-			{
-				name: getCharacterFieldLabel(locale, 'race.lore'),
-				value: truncate(character.race.lore || t(locale, 'common.empty')),
-			},
-		);
-	case 'appearance':
-		return embed.setDescription(truncate(
-			character.appearance || t(locale, 'common.empty'),
-			4_096,
-		));
-	case 'backstory':
-		return embed.setDescription(truncate(
-			character.backstory || t(locale, 'common.empty'),
-			4_096,
-		));
-	case 'goals':
-		return embed.setDescription(truncate(
-			character.goals || t(locale, 'common.empty'),
-			4_096,
-		));
-	case 'personality':
-		return embed.addFields(
-			{
-				name: getCharacterFieldLabel(locale, 'personality.traits'),
-				value: formatList(character.personality.traits, 1_024, locale),
-			},
-			{
-				name: getCharacterFieldLabel(locale, 'personality.description'),
-				value: truncate(
-					character.personality.description || t(locale, 'common.empty'),
-				),
-			},
-		);
-	case 'racialtraits':
-		return embed.addFields(
-			{
-				name: getCharacterFieldLabel(locale, 'racialTraits.skillBonus'),
-				value: truncate(
-					character.racialTraits.skillBonus || t(locale, 'common.empty'),
-				),
-			},
-			{
-				name: getCharacterFieldLabel(locale, 'racialTraits.physicalAbility'),
-				value: truncate(
-					character.racialTraits.physicalAbility || t(locale, 'common.empty'),
+				name: getCharacterFieldLabel(locale, targets.at(-1).id),
+				value: formatList(
+					getStoredValue(character, targets.at(-1)),
+					1_024,
+					locale,
 				),
 			},
 		);
@@ -181,36 +134,74 @@ function createCharacterFieldEmbed(character, fieldName, locale = 'en') {
 		return embed.addFields(
 			{
 				name: getCharacterFieldLabel(locale, 'statistics.base'),
-				value: formatStats(character.stats, BASE_STATS, locale),
+				value: formatStatTargets(character, targets.slice(0, BASE_STATS.length), locale),
 				inline: true,
 			},
 			{
 				name: getCharacterFieldLabel(locale, 'statistics.derived'),
-				value: formatStats(character.stats, DERIVED_STATS, locale),
+				value: formatStatTargets(character, targets.slice(BASE_STATS.length), locale),
 				inline: true,
 			},
 		);
 	case 'rules':
-		return embed.setDescription(formatRules(character.rules, locale));
-	case 'talents':
-		return embed.setDescription(formatList(character.talents, 4_096, locale));
-	case 'status':
-		return embed.setDescription(formatDetailedStatus(character, locale));
-	case 'statuseffects':
-		return embed.setDescription(formatList(character.statusEffects, 1_024, locale));
-	case 'equipment':
-		return embed.setDescription(formatList(character.equipment, 1_024, locale));
-	case 'inventory':
-		return embed.setDescription(formatList(character.inventory, 1_024, locale));
-	case 'encumbrance':
-		return embed.setDescription(formatResource(
-			getCharacterFieldLabel(locale, 'encumbrance'),
-			character.encumbrance,
+		return embed.setDescription(formatRules(
+			getStoredValue(character, targets[0]),
+			locale,
 		));
+	case 'talents':
+		return embed.setDescription(formatList(
+			getStoredValue(character, targets[0]),
+			4_096,
+			locale,
+		));
+	case 'gear':
+		return embed.addFields(
+			...targets.filter(target => target.multiline).map(target => ({
+				name: getCharacterFieldLabel(locale, target.id),
+				value: formatList(getStoredValue(character, target), 1_024, locale),
+			})),
+			{
+				name: getCharacterFieldLabel(locale, targets.at(-1).id),
+				value: formatResource(
+					getCharacterFieldLabel(locale, targets.at(-1).id),
+					getPairValue(character, targets.at(-1)),
+				),
+				inline: true,
+			},
+		);
+	case 'race':
+		return embed.addFields(
+			...targets.map(target => ({
+				name: getCharacterFieldLabel(locale, target.id),
+				value: truncate(
+					getStoredValue(character, target) || t(locale, 'common.empty'),
+				),
+				...(['race.name', 'racialTraits.skillBonus'].includes(target.id)
+					? { inline: true }
+					: {}),
+			})),
+		);
+	case 'background':
+		return embed.addFields(
+			...targets.map(target => ({
+				name: getCharacterFieldLabel(locale, target.id),
+				value: truncate(
+					getStoredValue(character, target) || t(locale, 'common.empty'),
+				),
+			})),
+		);
+	case 'personality':
+		return embed.addFields(
+			...targets.map(target => ({
+				name: getCharacterFieldLabel(locale, target.id),
+				value: target.multiline
+					? formatList(getStoredValue(character, target), 1_024, locale)
+					: truncate(
+						getStoredValue(character, target) || t(locale, 'common.empty'),
+					),
+			})),
+		);
 	default:
-		if (['hp', 'ar', 'ap', 'md'].includes(field)) {
-			return embed.setDescription(formatCharacterResource(character, field, locale));
-		}
 		return null;
 	}
 }
@@ -257,16 +248,6 @@ function formatCharacterResources(character, resourceIds, locale = 'en') {
 		.join('\n');
 }
 
-function formatDetailedStatus(character, locale = 'en') {
-	return truncate([
-		formatCharacterResources(character, ['hp', 'ar', 'ap', 'md'], locale),
-		formatResource(getCharacterFieldLabel(locale, 'encumbrance'), character.encumbrance),
-		'',
-		`**${getCharacterFieldLabel(locale, 'statusEffects')}**\n`
-			+ formatList(character.statusEffects, 1_024, locale),
-	].join('\n'), 4_096);
-}
-
 function getResourcePercentage(resource) {
 	if (resource.max <= 0) {
 		return 0;
@@ -274,10 +255,21 @@ function getResourcePercentage(resource) {
 	return Math.max(0, Math.min(100, Math.round(resource.current / resource.max * 100)));
 }
 
-function formatStats(stats, statNames, locale = 'en') {
-	return statNames
-		.map(stat => `${formatLabel(stat, locale)}: **${stats[stat]}**`)
-		.join('\n');
+function formatStatTargets(character, targets, locale) {
+	return targets.map(target => (
+		`${getCharacterFieldLabel(locale, target.id)}: **${getStoredValue(character, target)}**`
+	)).join('\n');
+}
+
+function getStoredValue(character, definition) {
+	return definition.path.reduce((value, key) => value[key], character);
+}
+
+function getPairValue(character, definition) {
+	const [current, maximum] = definition.inputTargetIds
+		.map(getCharacterFieldDefinition)
+		.map(target => getStoredValue(character, target));
+	return { current, max: maximum };
 }
 
 function createSummaryColumns(leftSections, rightSections, nextHeadings) {
@@ -307,57 +299,22 @@ function formatRules(rules, locale = 'en') {
 	if (rules.length === 0) {
 		return t(locale, 'common.empty');
 	}
-	const value = rules.map((rule, index) => t(locale, 'character.detail.rule', {
+	const blocks = rules.map((rule, index) => t(locale, 'character.detail.rule', {
 		description: rule.description || t(locale, 'character.detail.noDescription'),
 		index: index + 1,
 		level: rule.level,
 		name: rule.name,
-	})).join('\n\n');
-	return truncate(value, 4_096);
-}
-
-function normalizeFieldName(value = '') {
-	const definition = getViewableFieldDefinition(value);
-	return definition
-		? definition.viewId.toLowerCase()
-		: value.toLowerCase().replace(/[^a-z]/g, '');
-}
-
-function getFieldTitle(field, locale = 'en') {
-	const titleKeys = {
-		appearance: 'appearance',
-		backstory: 'backstory',
-		encumbrance: 'encumbrance',
-		equipment: 'equipment',
-		firstname: 'firstName',
-		goals: 'goals',
-		inventory: 'inventory',
-		level: 'level',
-		lastname: 'lastName',
-		name: 'name',
-		personality: 'personality',
-		race: 'race',
-		racialtraits: 'racialTraits',
-		rules: 'rules',
-		statistics: 'statistics',
-		status: 'status',
-		statuseffects: 'statusEffects',
-		talents: 'talents',
-	};
-	if (['ap', 'ar', 'hp', 'md'].includes(field)) {
-		return getResourceAbbreviation(locale, field);
-	}
-	return titleKeys[field]
-		? getCharacterFieldLabel(locale, titleKeys[field])
-		: field.charAt(0).toUpperCase() + field.slice(1);
+	}));
+	return truncateBlocks(blocks, '\n\n', 4_096);
 }
 
 function formatList(items, maxLength = 1_024, locale = 'en') {
 	if (items.length === 0) {
 		return t(locale, 'common.empty');
 	}
-	return truncate(
-		items.map((item, index) => `${index + 1}. ${item}`).join('\n'),
+	return truncateBlocks(
+		items.map((item, index) => `${index + 1}. ${item}`),
+		'\n',
 		maxLength,
 	);
 }
@@ -371,6 +328,29 @@ function truncate(value, maxLength = 1_024) {
 		return value;
 	}
 	return `${value.slice(0, maxLength - 1)}…`;
+}
+
+function truncateBlocks(blocks, separator, maxLength) {
+	const included = [];
+	for (const block of blocks) {
+		const prefixLength = included.length === 0 ? 0 : separator.length;
+		const remaining = maxLength - included.join(separator).length - prefixLength;
+		if (block.length <= remaining) {
+			included.push(block);
+			continue;
+		}
+		if (included.length === 0) {
+			included.push(truncate(block, maxLength));
+		}
+		else {
+			const current = included.join(separator);
+			if (current.length + separator.length + 1 <= maxLength) {
+				included.push('â€¦');
+			}
+		}
+		break;
+	}
+	return included.join(separator);
 }
 
 module.exports = {

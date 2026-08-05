@@ -159,7 +159,7 @@
       "characterOption": "Personnage à afficher",
       "fieldOption": "Champ détaillé facultatif",
       "unknownField": "Champ inconnu : **{{field}}**. Utilisez `/help command:get` pour consulter les détails.",
-      "behavior": "Sans `field`, publie le résumé public du personnage. Avec `field`, affiche un champ complet et ses sous-champs. L’autocomplétion propose les CharacterKeys et les vues prises en charge, notamment `name`, `race`, `personality`, `statistics`, `rules`, `status`, `equipment` et `inventory`."
+      "behavior": "Sans `field`, publie le résumé public du personnage. Avec `field`, affiche une section complète et ses valeurs clairement libellées. Les dix sections sont `name`, `level`, `status`, `statistics`, `rules`, `talents`, `gear`, `race`, `background` et `personality`, dans cet ordre. `status` regroupe les PV, PR, PA, DD et les effets d’état. `gear` regroupe l’équipement, l’inventaire et l’encombrement."
     },
     "heal": {
       "description": "Restaurer les PV, les PR ou les deux jusqu’au pourcentage choisi",
@@ -196,7 +196,7 @@
       "description": "Modifier un champ ou groupe de champs dans un formulaire prérempli",
       "characterOption": "Personnage à modifier",
       "fieldOption": "Champ à modifier",
-      "behavior": "Ouvre un formulaire privé prérempli avec le champ ou groupe choisi. `name` utilise des saisies facultatives Prénom et Nom séparées ; vider l’une d’elles efface cette partie du nom. `hp`, `ar`, `ap`, `md` et `encumbrance` utilisent chacun des saisies numériques obligatoires Actuel et Maximum séparées. `level` utilise une seule saisie numérique courte. `race` utilise des saisies séparées pour le nom, la description physique, le lore, le bonus de compétence et la capacité physique. `background` utilise des saisies séparées pour l’apparence, l’histoire personnelle et les objectifs. `personality` utilise des saisies séparées pour la description et les traits, avec un trait par ligne. `statistics` utilise une ligne `statName: statValue` pour chacune des statistiques requises : `constitution`, `strength`, `dexterity`, `intelligence`, `speed`, `perception`, `charisma`, `initiative` et `reflexes`. Les noms des statistiques restent en anglais, peuvent apparaître dans n’importe quel ordre et doivent chacun apparaître exactement une fois. Les talents, effets d’état, équipements et objets utilisent une entrée par ligne ; les espaces et lignes vides sont ignorés, et une saisie vide efface la collection. Les LOI utilisent une entrée `Nom:Niveau:Description` par ligne. Le nom et la description ne peuvent pas être vides, le niveau doit être un nombre entier positif, et seuls les deux premiers deux-points structurent la LOI ; une description peut donc contenir d’autres deux-points. Les PA doivent rester des nombres entiers avec `0 ≤ current ≤ max ≤ 10`. Chaque groupe est validé et sauvegardé atomiquement. Seuls le créateur, un MJ ou le propriétaire du serveur peuvent modifier la fiche."
+      "behavior": "Ouvre un formulaire privé prérempli pour l’une des dix mêmes sections que `/get` : `name`, `level`, `status`, `statistics`, `rules`, `talents`, `gear`, `race`, `background` et `personality`, dans cet ordre. `name` modifie séparément le prénom et le nom, tous deux facultatifs. `level` utilise une saisie numérique courte. `status` modifie les PV, PR, PA et DD sous forme de paires obligatoires `current:max`, ainsi que les effets d’état à raison d’un par ligne ; les cinq saisies sont appliquées ensemble. `statistics` utilise une ligne `statName: statValue` pour chacune des statistiques requises : `constitution`, `strength`, `dexterity`, `intelligence`, `speed`, `perception`, `charisma`, `initiative` et `reflexes`. Les noms des statistiques restent en anglais, peuvent apparaître dans n’importe quel ordre et doivent chacun apparaître exactement une fois. Les LOI utilisent une entrée `Nom:Niveau:Description` par ligne. Les talents utilisent une entrée par ligne. `gear` modifie séparément l’équipement et l’inventaire, à raison d’une entrée par ligne, ainsi que l’encombrement sous forme d’une paire obligatoire `current:max` ; les trois saisies sont appliquées ensemble. `race` modifie le nom, la description physique, le lore, le bonus de compétence et la capacité physique. `background` modifie l’apparence, l’histoire personnelle et les objectifs. `personality` modifie les traits, à raison d’un par ligne, et la description. Une liste vide efface la collection ; les espaces, lignes vides et puces initiales facultatives sont normalisés. Les PA doivent rester des nombres entiers avec `0 ≤ current ≤ max ≤ 10`. Chaque section est validée et sauvegardée atomiquement comme une seule opération annulable. Seuls le créateur, un MJ ou le propriétaire du serveur peuvent modifier la fiche."
     },
     "undo": {
       "description": "Restaurer le plus récent état antérieur conservé d’un personnage",
@@ -228,6 +228,10 @@
       "collectionDescription": "Une entrée par ligne ; les lignes vides sont ignorées. Vider pour effacer.",
       "textDescription": "La valeur actuelle est préremplie. Vider le formulaire pour effacer le champ.",
       "numberDescription": "Obligatoire. Saisir un nombre valide.",
+      "pairDescription": "Obligatoire. Saisir current:max (par exemple 50:100).",
+      "pairPlaceholder": "current:max",
+      "equipmentDescription": "Un équipement par ligne. Vider la saisie pour effacer l’équipement.",
+      "inventoryDescription": "Un objet par ligne. Vider la saisie pour effacer l’inventaire.",
       "statisticsDescription": "Une ligne `statName: valeur` par statistique ; les neuf noms anglais sont requis.",
       "statisticsPlaceholder": "Une ligne par statistique : statName: valeur",
       "inputLabels": {
@@ -279,6 +283,7 @@
       "ruleDescription": "Description de la LOI",
       "talents": "Talents",
       "status": "État",
+      "gear": "Équipement et inventaire",
       "statusEffects": "Effets d’état",
       "equipment": "Équipement",
       "inventory": "Inventaire",
@@ -343,6 +348,7 @@
     "statisticsMissing": "La statistique requise `{{stat}}` est absente.",
     "collectionValueRequired": "Valeur requise pour {{field}}.",
     "mustBeNumber": "{{field}} doit contenir un nombre.",
+    "pairFormat": "{{field}} doit contenir exactement une paire `current:max`.",
     "ruleNameRequired": "Le nom de la LOI doit précéder le séparateur `:`.",
     "ruleLevelInvalid": "Le niveau d’une LOI doit être un nombre entier positif.",
     "ruleDescriptionRequired": "La description d’une LOI est requise après le second séparateur `:`.",

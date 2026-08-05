@@ -33,13 +33,103 @@ test('character summary and detail embeds have no footer', () => {
 	assert.equal(detail.footer, undefined);
 });
 
-test('/get responses retain the manual encumbrance detail', () => {
+test('/get gear retains the manual encumbrance detail', () => {
 	const character = new Character('Encumbrance.Get', 'creator');
 	character.encumbrance = { current: 3, max: 8 };
-	const detail = createCharacterGetResponse(character, 'encumbrance', 'en')
+	const detail = createCharacterGetResponse(character, 'gear', 'en')
 		.embeds[0].toJSON();
 
-	assert.equal(detail.description, 'Encumbrance: **3 / 8**');
+	assert.equal(
+		detail.fields.find(field => field.name === 'Encumbrance').value,
+		'Encumbrance: **3 / 8**',
+	);
+});
+
+test('/get renders every grouped section from unchanged stored properties', () => {
+	const character = new Character('Grouped.Get', 'creator');
+	character.firstName = 'Ada';
+	character.lastName = 'Lovelace';
+	character.level = 4;
+	character.resources = {
+		hp: { current: 50, max: 100 },
+		ar: { current: 5, max: 10 },
+		ap: { current: 2, max: 4 },
+		md: { current: 3, max: 6 },
+	};
+	character.statusEffects = ['Inspired'];
+	character.equipment = ['Sword'];
+	character.inventory = ['Potion'];
+	character.encumbrance = { current: 3, max: 8 };
+	character.race = {
+		name: 'Ashborn',
+		physicalDescription: 'Silver eyes',
+		lore: 'Forged in starlight',
+	};
+	character.racialTraits = {
+		skillBonus: 'Arcana',
+		physicalAbility: 'Night sight',
+	};
+	character.appearance = 'Green cloak';
+	character.backstory = 'Former courier';
+	character.goals = 'Map every road';
+	character.personality = {
+		traits: ['Patient', 'Observant'],
+		description: 'Quiet and curious',
+	};
+
+	const name = createCharacterGetResponse(character, 'name', 'en').embeds[0].toJSON();
+	assert.deepEqual(name.fields.map(field => field.value), ['Ada', 'Lovelace']);
+	assert.equal(
+		createCharacterGetResponse(character, 'level', 'en').embeds[0].toJSON().description,
+		'4',
+	);
+	const status = createCharacterGetResponse(character, 'status', 'en').embeds[0].toJSON();
+	assert.deepEqual(status.fields.map(field => field.name), [
+		'Hit points', 'Armor rating', 'Action points', 'Movement distance', 'Status effects',
+	]);
+	assert.match(status.fields[0].value, /HP: \*\*50 \/ 100 \(50%\)\*\*/);
+	assert.equal(status.fields[4].value, '1. Inspired');
+	assert.equal(status.fields.some(field => field.name === 'Encumbrance'), false);
+
+	const gear = createCharacterGetResponse(character, 'gear', 'en').embeds[0].toJSON();
+	assert.deepEqual(gear.fields.map(field => field.name), [
+		'Equipment', 'Inventory', 'Encumbrance',
+	]);
+	assert.equal(gear.fields[0].value, '1. Sword');
+	assert.equal(gear.fields[1].value, '1. Potion');
+
+	const race = createCharacterGetResponse(character, 'race', 'en').embeds[0].toJSON();
+	assert.deepEqual(race.fields.map(field => field.value), [
+		'Ashborn', 'Silver eyes', 'Forged in starlight', 'Arcana', 'Night sight',
+	]);
+	const background = createCharacterGetResponse(character, 'background', 'en')
+		.embeds[0].toJSON();
+	assert.deepEqual(background.fields.map(field => field.value), [
+		'Green cloak', 'Former courier', 'Map every road',
+	]);
+	const personality = createCharacterGetResponse(character, 'personality', 'en')
+		.embeds[0].toJSON();
+	assert.deepEqual(personality.fields.map(field => field.value), [
+		'1. Patient\n2. Observant', 'Quiet and curious',
+	]);
+});
+
+test('/get rejects former independent child views and safely truncates grouped lists', () => {
+	const character = new Character('Grouped.Bounds', 'creator');
+	for (const field of [
+		'firstName', 'lastName', 'appearance', 'backstory', 'goals', 'racialTraits',
+		'status-effects', 'hp', 'ar', 'ap', 'md', 'equipment', 'inventory',
+		'encumbrance',
+	]) {
+		const response = createCharacterGetResponse(character, field, 'en');
+		assert.equal(response.embeds, undefined, field);
+		assert.match(response.content, /Unknown character field/, field);
+	}
+	character.equipment = ['A'.repeat(2_000), 'second'];
+	const gear = createCharacterGetResponse(character, 'gear', 'en').embeds[0].toJSON();
+	assert.ok(gear.fields[0].value.length <= 1_024);
+	assert.match(gear.fields[0].value, /^1\. .*…$/);
+	assert.equal(gear.fields.some(field => field.name === '\u200B'), false);
 });
 
 test('character summaries and talent details render localized bounded lists', () => {

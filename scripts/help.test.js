@@ -3,7 +3,11 @@ const { test } = require('node:test');
 
 const commandRegistry = require('../commands/registry');
 const config = require('../config.json');
-const { getEditableFields } = require('../services/characterFieldCatalog');
+const {
+	CHARACTER_SECTION_IDS,
+	getEditableFields,
+	getViewableFields,
+} = require('../services/characterFieldCatalog');
 const generatorCatalog = require('../services/generatorCatalog');
 const { MAX_AUTOCOMPLETE_CHOICES } = require('../util/autocomplete');
 const { createHelpResponse } = require('../util/helpResponses');
@@ -86,27 +90,14 @@ test('/help command:gen lists every localized generator category', () => {
 	}
 });
 
-test('/help command:set lists every localized editable field by section', () => {
+test('/help command:get and command:set list the same ten ordered sections', () => {
 	const fields = getEditableFields();
-	assert.deepEqual(fields.map(field => field.editId), [
-		'name',
-		'level',
-		'race',
-		'background',
-		'personality',
-		'statistics',
-		'rules',
-		'talents',
-		'status-effects',
-		'equipment',
-		'inventory',
-		'encumbrance',
-		'hp',
-		'ar',
-		'ap',
-		'md',
-	]);
-	for (const [locale, expectedHeadings] of [
+	assert.deepEqual(fields.map(field => field.editId), CHARACTER_SECTION_IDS);
+	assert.deepEqual(
+		getViewableFields().map(field => field.viewId),
+		CHARACTER_SECTION_IDS,
+	);
+	for (const [locale] of [
 		['en', ['General fields', 'Statistics', 'Resources']],
 		['fr', ['Champs généraux', 'Statistiques', 'Ressources']],
 	]) {
@@ -118,33 +109,42 @@ test('/help command:set lists every localized editable field by section', () => 
 		for (const field of fields) {
 			assert.ok(rendered.includes(`\`${field.editId}\``), `${locale}: ${field.editId}`);
 		}
-		for (const heading of expectedHeadings) {
-			assert.ok(rendered.includes(`**${heading}**`), `${locale}: ${heading}`);
-		}
 		for (const removedField of [
 			'firstName',
-			'race.name',
-			'stats.strength',
-			'base-statistics',
-			'derived-statistics',
-			'hp.current',
+			'lastName',
+			'appearance',
+			'backstory',
+			'goals',
+			'racialTraits',
+			'status-effects',
+			'hp',
+			'ar',
+			'ap',
+			'md',
+			'equipment',
+			'inventory',
+			'encumbrance',
 		]) {
 			assert.equal(rendered.includes(`\`${removedField}\``), false);
+		}
+		const getRendered = renderDetail('get', createInteraction('regular'), locale);
+		for (const field of fields) {
+			assert.ok(getRendered.includes(`\`${field.viewId}\``), `${locale}: ${field.viewId}`);
 		}
 	}
 	const english = renderDetail('set', createInteraction('regular'), 'en');
 	for (const format of [
-		'First name and Last name',
-		'Current and Maximum',
+		'`status` edits HP, AR, AP, and MD',
+		'`gear` edits equipment and inventory',
 		'`statName: statValue`',
 		'`constitution`',
 		'`reflexes`',
 		'`Name:Level:Description`',
+		'`current:max`',
 	]) {
 		assert.ok(english.includes(format), format);
 	}
 	assert.equal(english.includes('`firstName:lastName`'), false);
-	assert.equal(english.includes('`current:max`'), false);
 });
 
 test('/help command:get explains summary, detailed field, and autocomplete behavior', () => {
@@ -153,16 +153,16 @@ test('/help command:get explains summary, detailed field, and autocomplete behav
 			'en',
 			[
 				'Without `field`, posts the public character summary.',
-				'With `field`, displays one complete detailed field and its sub-fields.',
-				'Autocomplete lists CharacterKeys and supported views',
+				'With `field`, displays one complete section and its labelled values.',
+				'`status` groups HP, AR, AP, MD, and status effects.',
 			],
 		],
 		[
 			'fr',
 			[
 				'Sans `field`, publie le résumé public du personnage.',
-				'Avec `field`, affiche un champ complet et ses sous-champs.',
-				'L’autocomplétion propose les CharacterKeys et les vues prises en charge',
+				'Avec `field`, affiche une section complète et ses valeurs clairement libellées.',
+				'`gear` regroupe l’équipement, l’inventaire et l’encombrement.',
 			],
 		],
 	]) {
@@ -312,6 +312,32 @@ test('autocomplete filters values beyond Discord\'s 25-choice display limit', as
 	)).some(choice => choice.value === 'statistics'));
 });
 
+test('/get and /set autocomplete return identical localized section choices', async () => {
+	for (const locale of ['en', 'fr']) {
+		for (const query of ['', 'stat', 'gear']) {
+			const getChoices = await autocompleteOption(
+				'get', 'field', query, createInteraction('regular'), locale,
+			);
+			const setChoices = await autocompleteOption(
+				'set', 'field', query, createInteraction('regular'), locale,
+			);
+			assert.deepEqual(getChoices, setChoices, `${locale}: ${query}`);
+			assert.ok(getChoices.every(choice => (
+				CHARACTER_SECTION_IDS.includes(choice.value)
+				&& choice.name.endsWith(`(${choice.value})`)
+			)));
+		}
+	}
+	const english = await autocompleteOption(
+		'get', 'field', '', createInteraction('regular'), 'en',
+	);
+	assert.deepEqual(english.map(choice => choice.value), CHARACTER_SECTION_IDS);
+	const french = await autocompleteOption(
+		'get', 'field', '', createInteraction('regular'), 'fr',
+	);
+	assert.equal(french.find(choice => choice.value === 'status').name, 'État (status)');
+});
+
 test('/help overview and details are localized in English and French', () => {
 	const interaction = createInteraction('regular');
 	const english = createOverview(interaction, 'en').embeds[0].toJSON();
@@ -390,7 +416,7 @@ async function autocomplete(interaction) {
 	return response;
 }
 
-async function autocompleteOption(commandName, optionName, value, interaction) {
+async function autocompleteOption(commandName, optionName, value, interaction, locale = 'en') {
 	let response;
 	interaction.options = {
 		getFocused: () => ({ name: optionName, value }),
@@ -399,7 +425,7 @@ async function autocompleteOption(commandName, optionName, value, interaction) {
 		response = choices;
 	};
 	await commandRegistry.getRuntimeCommands().get(commandName).autocomplete({
-		config,
+		config: { ...config, locale },
 		interaction,
 	});
 	return response;

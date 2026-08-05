@@ -9,28 +9,28 @@ const {
 
 function getEditableFieldValue(character, fieldName) {
 	const field = requireEditableField(fieldName);
-	const targets = getEditTargets(field);
+	const inputs = getEditInputs(field);
 	if (field.editKind === 'multi') {
-		return Object.fromEntries(targets.map(target => [
-			target.id,
-			serializeTargetValue(character, target),
+		return Object.fromEntries(inputs.map(input => [
+			input.id,
+			serializeInputValue(character, input),
 		]));
 	}
 	if (field.editKind === 'named-lines') {
-		return targets
+		return inputs
 			.map(target => `${getNamedLineKey(target)}: ${serializeTargetValue(
 				character,
 				target,
 			)}`)
 			.join('\n');
 	}
-	return serializeTargetValue(character, targets[0]);
+	return serializeInputValue(character, inputs[0]);
 }
 
 function setEditableFieldValue(character, fieldName, submittedValue) {
 	const field = requireEditableField(fieldName);
-	const targets = getEditTargets(field);
-	const updates = parseSubmittedValue(field, targets, submittedValue);
+	const inputs = getEditInputs(field);
+	const updates = parseSubmittedValue(field, inputs, submittedValue);
 	validatePlannedUpdates(character, updates);
 	for (const update of updates) {
 		setAtPath(character, update.target.path, update.value);
@@ -43,7 +43,7 @@ function setEditableFieldValue(character, fieldName, submittedValue) {
 	};
 }
 
-function parseSubmittedValue(field, targets, submittedValue) {
+function parseSubmittedValue(field, inputs, submittedValue) {
 	if (field.editKind === 'multi') {
 		if (
 			!submittedValue
@@ -52,17 +52,14 @@ function parseSubmittedValue(field, targets, submittedValue) {
 		) {
 			throw editError('errors.groupInputMissing', { fieldId: field.id });
 		}
-		return targets.map(target => {
-			if (typeof submittedValue[target.id] !== 'string') {
+		return inputs.flatMap(input => {
+			if (typeof submittedValue[input.id] !== 'string') {
 				throw editError('errors.groupInputMissing', {
-					componentFieldId: target.id,
+					componentFieldId: input.id,
 					fieldId: field.id,
 				});
 			}
-			return {
-				target,
-				value: parseTargetValue(target, submittedValue[target.id]),
-			};
+			return parseInputValue(input, submittedValue[input.id]);
 		});
 	}
 
@@ -70,13 +67,31 @@ function parseSubmittedValue(field, targets, submittedValue) {
 		throw editError('errors.valueRequired', { fieldId: field.id });
 	}
 	if (field.editKind === 'named-lines') {
-		return parseNamedLineValue(field, targets, submittedValue);
+		return parseNamedLineValue(field, inputs, submittedValue);
 	}
 
+	return parseInputValue(inputs[0], submittedValue);
+}
+
+function parseInputValue(input, submittedValue) {
+	if (input.inputKind === 'pair') {
+		return parsePairValue(input, submittedValue);
+	}
 	return [{
-		target: targets[0],
-		value: parseTargetValue(targets[0], submittedValue),
+		target: input,
+		value: parseTargetValue(input, submittedValue),
 	}];
+}
+
+function parsePairValue(input, submittedValue) {
+	const parts = submittedValue.trim().split(':');
+	if (parts.length !== 2 || parts.some(part => !part.trim())) {
+		throw editError('errors.pairFormat', { fieldId: input.id });
+	}
+	return getPairTargets(input).map((target, index) => ({
+		target,
+		value: parseTargetValue(target, parts[index]),
+	}));
 }
 
 function parseNamedLineValue(field, targets, submittedValue) {
@@ -199,17 +214,36 @@ function serializeTargetValue(character, target) {
 	return String(value ?? '');
 }
 
+function serializeInputValue(character, input) {
+	if (input.inputKind === 'pair') {
+		return getPairTargets(input)
+			.map(target => serializeTargetValue(character, target))
+			.join(':');
+	}
+	return serializeTargetValue(character, input);
+}
+
 function getNamedLineKey(target) {
 	return target.id.startsWith('stats.')
 		? target.id.slice('stats.'.length)
 		: target.id;
 }
 
-function getEditTargets(field) {
-	return field.editTargetIds.map(targetId => {
+function getEditInputs(field) {
+	return field.editInputIds.map(inputId => {
+		const input = getCharacterFieldDefinition(inputId);
+		if (!input || (!input.inputKind && (!input.path || !input.type))) {
+			throw new Error(`Editable input is not configured: ${inputId}`);
+		}
+		return input;
+	});
+}
+
+function getPairTargets(input) {
+	return input.inputTargetIds.map(targetId => {
 		const target = getCharacterFieldDefinition(targetId);
 		if (!target?.path || !target.type) {
-			throw new Error(`Editable target is not stored: ${targetId}`);
+			throw new Error(`Pair target is not stored: ${targetId}`);
 		}
 		return target;
 	});

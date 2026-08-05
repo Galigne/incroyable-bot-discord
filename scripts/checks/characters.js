@@ -62,10 +62,10 @@ module.exports = function createCharacterChecks(context) {
 				backstory: '',
 				goals: '',
 			});
-			setEditableFieldValue(original, 'equipment', '- Longsword');
-			setEditableFieldValue(original, 'encumbrance', {
-				'encumbrance.current': '2',
-				'encumbrance.max': '7',
+			setEditableFieldValue(original, 'gear', {
+				equipment: '- Longsword',
+				inventory: '',
+				encumbrance: '2:7',
 			});
 			setEditableFieldValue(original, 'personality', {
 				'personality.description': '',
@@ -97,9 +97,12 @@ module.exports = function createCharacterChecks(context) {
 				);
 			}
 			try {
-				setEditableFieldValue(original, 'ap', {
-					'resources.ap.current': '4',
-					'resources.ap.max': '11',
+				setEditableFieldValue(original, 'status', {
+					'resources.hp': '100:100',
+					'resources.ar': '0:30',
+					'resources.ap': '4:11',
+					'resources.md': '5:5',
+					statusEffects: '',
 				});
 				errors.push('AP values above 10 should be rejected.');
 			}
@@ -198,8 +201,10 @@ module.exports = function createCharacterChecks(context) {
 				errors.push('The character summary status is not formatted correctly.');
 			}
 			for (const field of [
-				'appearance',
-				'encumbrance',
+				'name',
+				'level',
+				'background',
+				'gear',
 				'race',
 				'personality',
 				'statistics',
@@ -214,7 +219,11 @@ module.exports = function createCharacterChecks(context) {
 				if (field === 'talents' && !fieldEmbed.description.includes('2. Cold Immunity —')) {
 					errors.push('The detailed talent view does not render talents as a list.');
 				}
-				if (field === 'encumbrance' && fieldEmbed.description !== 'Encumbrance: **2 / 7**') {
+				if (
+					field === 'gear'
+					&& fieldEmbed.fields?.find(item => item.name === 'Encumbrance')?.value
+						!== 'Encumbrance: **2 / 7**'
+				) {
 					errors.push('The detailed encumbrance view is not formatted correctly.');
 				}
 				if (
@@ -241,8 +250,9 @@ module.exports = function createCharacterChecks(context) {
 			}
 			character.resources.ap.current = 2;
 			character.resources.ap.max = 4;
-			const apDetail = createCharacterFieldEmbed(character, 'ap').toJSON();
-			if (apDetail.description !== 'AP:\n🌟🌟⭐⭐') {
+			const statusDetail = createCharacterFieldEmbed(character, 'status').toJSON();
+			const apDetail = statusDetail.fields.find(field => field.name === 'Action points');
+			if (apDetail?.value !== 'AP:\n🌟🌟⭐⭐') {
 				errors.push('AP availability is not displayed correctly.');
 			}
 			if (createCharacterFieldEmbed(character, 'unknown') !== null) {

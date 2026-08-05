@@ -5,39 +5,65 @@ const definitionsById = new Map();
 const aliases = new Map();
 const editableAliases = new Map();
 
-add('key', 'characterKey');
-add('name', 'name', {
-	viewId: 'name',
-	...editable('name', 'multi', ['firstName', 'lastName']),
-});
-add('firstName', 'firstName', stored(['firstName'], 'text', {
-	aliases: ['firstname'],
-	viewId: 'firstName',
-}));
-add('lastName', 'lastName', stored(['lastName'], 'text', {
-	aliases: ['lastname'],
-	viewId: 'lastName',
-}));
-add('level', 'level', {
-	...stored(['level'], 'number'),
-	...editable('level', 'scalar', ['level']),
-	viewId: 'level',
-});
-add('race', 'race', {
-	viewId: 'race',
-	...editable('race', 'multi', [
-		'race.name',
-		'race.physicalDescription',
-		'race.lore',
-		'racialTraits.skillBonus',
-		'racialTraits.physicalAbility',
-	]),
-});
-add('background', 'background', editable('background', 'multi', [
+const SECTION_IDS = Object.freeze([
+	'name',
+	'level',
+	'status',
+	'statistics',
+	'rules',
+	'talents',
+	'gear',
+	'race',
+	'background',
+	'personality',
+]);
+
+addSection('name', 'name', 'multi', ['firstName', 'lastName']);
+addSection('level', 'level', 'scalar', ['level.value']);
+addSection('status', 'status', 'multi', [
+	'resources.hp',
+	'resources.ar',
+	'resources.ap',
+	'resources.md',
+	'statusEffects',
+]);
+addSection(
+	'statistics',
+	'statistics',
+	'named-lines',
+	[...BASE_STATS, ...DERIVED_STATS].map(stat => `stats.${stat}`),
+	{ aliases: ['stats'] },
+);
+addSection('rules', 'rules', 'multiline', ['rules.value']);
+addSection('talents', 'talents', 'multiline', ['talents.value']);
+addSection('gear', 'gear', 'multi', ['equipment', 'inventory', 'encumbrance']);
+addSection('race', 'race', 'multi', [
+	'race.name',
+	'race.physicalDescription',
+	'race.lore',
+	'racialTraits.skillBonus',
+	'racialTraits.physicalAbility',
+]);
+addSection('background', 'background', 'multi', [
 	'appearance',
 	'backstory',
 	'goals',
-]));
+]);
+addSection('personality', 'personality', 'multi', [
+	'personality.traits',
+	'personality.description',
+]);
+
+add('key', 'characterKey');
+add('firstName', 'firstName', stored(['firstName'], 'text', {
+	aliases: ['firstname'],
+}));
+add('lastName', 'lastName', stored(['lastName'], 'text', {
+	aliases: ['lastname'],
+}));
+add('level.value', 'level', stored(['level'], 'number', {
+	aliases: ['levelValue'],
+}));
 add('race.name', 'raceName', stored(['race', 'name'], 'text', {
 	aliases: ['racename'],
 }));
@@ -55,23 +81,13 @@ add('race.lore', 'raceLore', stored(['race', 'lore'], 'text', {
 }));
 add('appearance', 'appearance', stored(['appearance'], 'text', {
 	paragraph: true,
-	viewId: 'appearance',
 }));
 add('backstory', 'backstory', stored(['backstory'], 'text', {
 	paragraph: true,
-	viewId: 'backstory',
 }));
 add('goals', 'goals', stored(['goals'], 'text', {
 	paragraph: true,
-	viewId: 'goals',
 }));
-add('personality', 'personality', {
-	viewId: 'personality',
-	...editable('personality', 'multi', [
-		'personality.description',
-		'personality.traits',
-	]),
-});
 add('personality.description', 'personalityDescription', stored(
 	['personality', 'description'],
 	'text',
@@ -82,10 +98,7 @@ add('personality.traits', 'personalityTraits', stored(
 	'text',
 	{ aliases: ['personalitytraits'], multiline: true, paragraph: true },
 ));
-add('racialTraits', 'racialTraits', {
-	aliases: ['racialtraits'],
-	viewId: 'racialTraits',
-});
+add('racialTraits', 'racialTraits', { aliases: ['racialtraits'] });
 add('racialTraits.skillBonus', 'racialSkillBonus', stored(
 	['racialTraits', 'skillBonus'],
 	'text',
@@ -102,15 +115,6 @@ add('racialTraits.physicalAbility', 'racialPhysicalAbility', stored(
 		paragraph: true,
 	},
 ));
-add('statistics', 'statistics', {
-	aliases: ['stats'],
-	viewId: 'statistics',
-	...editable(
-		'statistics',
-		'named-lines',
-		[...BASE_STATS, ...DERIVED_STATS].map(stat => `stats.${stat}`),
-	),
-});
 add('statistics.base', 'baseStatistics', { aliases: ['baseStatistics'] });
 add('statistics.derived', 'derivedStatistics', { aliases: ['derivedStatistics'] });
 
@@ -122,60 +126,36 @@ for (const stat of [...BASE_STATS, ...DERIVED_STATS]) {
 	));
 }
 
-add('rules', 'rules', {
-	...stored(['rules'], 'text', {
-		aliases: ['rule'],
-		multiline: true,
-		paragraph: true,
-		rules: true,
-	}),
-	...editable('rules', 'multiline', ['rules']),
-	viewId: 'rules',
-});
+add('rules.value', 'rules', stored(['rules'], 'text', {
+	aliases: ['rule'],
+	multiline: true,
+	paragraph: true,
+	rules: true,
+}));
 add('rules.name', 'ruleName');
 add('rules.level', 'ruleLevel');
 add('rules.description', 'ruleDescription');
-add('talents', 'talents', {
-	...stored(['talents'], 'text', {
-		multiline: true,
-		paragraph: true,
-	}),
-	...editable('talents', 'multiline', ['talents']),
-	viewId: 'talents',
-});
-add('status', 'status', { viewId: 'status' });
-add('statusEffects', 'statusEffects', {
-	...stored(['statusEffects'], 'text', {
-		aliases: ['statuseffect', 'statuseffects'],
-		multiline: true,
-		paragraph: true,
-	}),
-	...editable('status-effects', 'multiline', ['statusEffects']),
-	viewId: 'statusEffects',
-});
-add('equipment', 'equipment', {
-	...stored(['equipment'], 'text', {
-		multiline: true,
-		paragraph: true,
-	}),
-	...editable('equipment', 'multiline', ['equipment']),
-	viewId: 'equipment',
-});
-add('inventory', 'inventory', {
-	...stored(['inventory'], 'text', {
-		multiline: true,
-		paragraph: true,
-	}),
-	...editable('inventory', 'multiline', ['inventory']),
-	viewId: 'inventory',
-});
-add('encumbrance', 'encumbrance', {
-	viewId: 'encumbrance',
-	...editable('encumbrance', 'multi', [
-		'encumbrance.current',
-		'encumbrance.max',
-	]),
-});
+add('talents.value', 'talents', stored(['talents'], 'text', {
+	multiline: true,
+	paragraph: true,
+}));
+add('statusEffects', 'statusEffects', stored(['statusEffects'], 'text', {
+	aliases: ['statuseffect', 'statuseffects'],
+	multiline: true,
+	paragraph: true,
+}));
+add('equipment', 'equipment', stored(['equipment'], 'text', {
+	multiline: true,
+	paragraph: true,
+}));
+add('inventory', 'inventory', stored(['inventory'], 'text', {
+	multiline: true,
+	paragraph: true,
+}));
+add('encumbrance', 'encumbrance', pairInput([
+	'encumbrance.current',
+	'encumbrance.max',
+]));
 add('encumbrance.current', 'currentEncumbrance', stored(
 	['encumbrance', 'current'],
 	'number',
@@ -193,8 +173,7 @@ for (const resourceId of ['hp', 'ar', 'ap', 'md']) {
 		aliases: [resourceId, resourceId.toUpperCase()],
 		labelKey: `character.resources.${resourceId}.name`,
 		resourceId,
-		viewId: resourceId.toUpperCase(),
-		...editable(resourceId, 'multi', [
+		...pairInput([
 			`resources.${resourceId}.current`,
 			`resources.${resourceId}.max`,
 		]),
@@ -215,15 +194,27 @@ for (const resourceId of ['hp', 'ar', 'ap', 'md']) {
 	}
 }
 
+function addSection(id, labelName, editKind, editInputIds, options = {}) {
+	add(id, labelName, {
+		...options,
+		editId: id,
+		editInputIds: Object.freeze([...editInputIds]),
+		editKind,
+		sectionId: id,
+		sectionOrder: SECTION_IDS.indexOf(id),
+		viewId: id,
+		viewTargetIds: Object.freeze([...editInputIds]),
+	});
+}
+
 function stored(path, type, options = {}) {
 	return { ...options, path: Object.freeze([...path]), type };
 }
 
-function editable(editId, editKind, editTargetIds) {
+function pairInput(inputTargetIds) {
 	return {
-		editId,
-		editKind,
-		editTargetIds: Object.freeze([...editTargetIds]),
+		inputKind: 'pair',
+		inputTargetIds: Object.freeze([...inputTargetIds]),
 	};
 }
 
@@ -243,11 +234,7 @@ function add(id, labelName, options = {}) {
 		registerAlias(alias, definition);
 	}
 	if (definition.editId) {
-		registerAlias(definition.editId, definition);
 		registerEditableAlias(definition.editId, definition);
-	}
-	if (definition.viewId) {
-		registerAlias(definition.viewId, definition);
 	}
 }
 
@@ -299,22 +286,32 @@ function getEditableFieldDefinition(fieldId) {
 		?? null;
 }
 
+function getCharacterSections() {
+	return SECTION_IDS.map(id => definitionsById.get(id));
+}
+
 function getEditableFields() {
-	return definitions.filter(definition => definition.editId);
+	return getCharacterSections();
 }
 
 function getViewableFieldDefinition(fieldId) {
-	const definition = getCharacterFieldDefinition(fieldId);
-	return definition?.viewId ? definition : null;
+	if (typeof fieldId !== 'string') {
+		return null;
+	}
+	const definition = definitionsById.get(fieldId)
+		?? definitionsById.get(fieldId.toLowerCase());
+	return definition?.sectionId ? definition : null;
 }
 
 function getViewableFields() {
-	return definitions.filter(definition => definition.viewId);
+	return getCharacterSections();
 }
 
 module.exports = {
 	CHARACTER_FIELD_DEFINITIONS: Object.freeze([...definitions]),
+	CHARACTER_SECTION_IDS: SECTION_IDS,
 	getCharacterFieldDefinition,
+	getCharacterSections,
 	getEditableFieldDefinition,
 	getEditableFields,
 	getViewableFieldDefinition,

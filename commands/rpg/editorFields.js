@@ -15,7 +15,7 @@ function getEditFieldLabel(fieldName, locale = 'en') {
 
 function getEditTargetDefinitions(fieldName) {
 	const definition = getEditableFieldDefinition(fieldName);
-	return definition?.editTargetIds.map(getCharacterFieldDefinition) ?? [];
+	return definition?.editInputIds.map(getCharacterFieldDefinition) ?? [];
 }
 
 function getEditInputId(fieldId) {

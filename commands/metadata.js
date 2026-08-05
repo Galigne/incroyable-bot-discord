@@ -253,7 +253,10 @@ const COMMAND_METADATA = [
 				name: 'field',
 				type: 'string',
 				descriptionKey: 'rpg.get.fieldOption',
-				autocomplete: { provider: 'viewable-fields' },
+				autocomplete: {
+					provider: 'character-sections',
+					showAllInHelp: true,
+				},
 			},
 		],
 		examples: [
@@ -288,7 +291,7 @@ const COMMAND_METADATA = [
 				descriptionKey: 'rpg.set.fieldOption',
 				required: true,
 				autocomplete: {
-					provider: 'editable-fields',
+					provider: 'character-sections',
 					showAllInHelp: true,
 				},
 			},

@@ -20,7 +20,10 @@ const {
 const {
 	replyToCharacterError,
 } = require('../../util/characterCommandErrors');
-const { getCharacterFieldLabel } = require('../../util/characterDisplay');
+const {
+	getCharacterFieldLabel,
+	getResourceAbbreviation,
+} = require('../../util/characterDisplay');
 const {
 	createCharacterHistoryContext,
 } = require('../../util/characterHistoryContext');
@@ -230,6 +233,9 @@ function createFieldModal(sessionId, fieldName, value, locale = 'en') {
 }
 
 function getEditInputLabel(target, locale) {
+	if (target.resourceId && target.inputKind === 'pair') {
+		return getResourceAbbreviation(locale, target.resourceId);
+	}
 	const labelKey = {
 		appearance: 'appearance',
 		backstory: 'backstory',
@@ -244,16 +250,9 @@ function getEditInputLabel(target, locale) {
 		'racialTraits.physicalAbility': 'physicalAbility',
 		'racialTraits.skillBonus': 'skillBonus',
 	}[target.id];
-	const numericLabelKey = target.id.endsWith('.current')
-		? 'current'
-		: target.id.endsWith('.max')
-			? 'maximum'
-			: null;
 	return labelKey
 		? t(locale, `rpg.editor.inputLabels.${labelKey}`)
-		: numericLabelKey
-			? t(locale, `rpg.editor.inputLabels.${numericLabelKey}`)
-			: getCharacterFieldLabel(locale, target.id);
+		: getCharacterFieldLabel(locale, target.id);
 }
 
 function createEditInput(field, inputDefinition, locale) {
@@ -268,7 +267,7 @@ function createEditInput(field, inputDefinition, locale) {
 	const input = new TextInputBuilder()
 		.setCustomId(customId)
 		.setStyle(inputStyle)
-		.setMaxLength(4_000)
+		.setMaxLength(target.inputKind === 'pair' ? 100 : 4_000)
 		.setRequired(isEditInputRequired(field, target));
 	if (value) {
 		input.setValue(value);
@@ -283,11 +282,20 @@ function createEditInput(field, inputDefinition, locale) {
 }
 
 function getEditInputDescription(field, target, locale) {
+	if (target.inputKind === 'pair') {
+		return t(locale, 'rpg.editor.pairDescription');
+	}
 	if (field.editKind === 'named-lines') {
 		return t(locale, 'rpg.editor.statisticsDescription');
 	}
 	if (target.rules) {
 		return t(locale, 'rpg.editor.rulesDescription');
+	}
+	if (target.id === 'equipment') {
+		return t(locale, 'rpg.editor.equipmentDescription');
+	}
+	if (target.id === 'inventory') {
+		return t(locale, 'rpg.editor.inventoryDescription');
 	}
 	if (target.multiline) {
 		return t(locale, 'rpg.editor.collectionDescription');
@@ -299,6 +307,9 @@ function getEditInputDescription(field, target, locale) {
 }
 
 function getEditInputPlaceholder(field, target, locale) {
+	if (target.inputKind === 'pair') {
+		return t(locale, 'rpg.editor.pairPlaceholder');
+	}
 	if (field.editKind === 'named-lines') {
 		return t(locale, 'rpg.editor.statisticsPlaceholder');
 	}
@@ -312,7 +323,7 @@ function isEditInputRequired(field, target) {
 	if (field.editKind === 'named-lines') {
 		return true;
 	}
-	return target.type !== 'text';
+	return target.inputKind === 'pair' || target.type !== 'text';
 }
 
 function createDeletionModal(sessionId, characterKey, locale = 'en') {

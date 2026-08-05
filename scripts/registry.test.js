@@ -174,7 +174,9 @@ test('registry exposes autocomplete, option, and choice metadata', async () => {
 	assert.ok(roll.autocomplete.values.includes('1d20'));
 
 	const getField = commandRegistry.getAutocompleteMetadata('get', 'field', 'rpg');
-	assert.equal(getField.autocomplete.provider, 'viewable-fields');
+	assert.equal(getField.autocomplete.provider, 'character-sections');
+	const setField = commandRegistry.getAutocompleteMetadata('set', 'field', 'rpg');
+	assert.equal(setField.autocomplete.provider, 'character-sections');
 
 	const heal = commandRegistry.getCommand('heal', 'rpg');
 	const resource = heal.options.find(option => option.name === 'resource');

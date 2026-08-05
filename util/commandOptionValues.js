@@ -1,13 +1,11 @@
 const generatorCatalog = require('../services/generatorCatalog');
 const {
-	getCharacterFieldDefinition,
-	getEditableFields,
+	getCharacterSections,
 } = require('../services/characterFieldCatalog');
 const { getCharacterFieldLabel } = require('./characterDisplay');
-const { t } = require('./i18n');
 
 const OPTION_VALUE_PROVIDERS = Object.freeze({
-	'editable-fields': getEditableFieldValues,
+	'character-sections': getCharacterSectionValues,
 	'generator-categories': getGeneratorCategoryValues,
 });
 
@@ -16,43 +14,15 @@ function getCommandOptionValues(providerName, locale = 'en') {
 	return provider ? provider(locale) : null;
 }
 
-function getEditableFieldValues(locale) {
-	return getEditableFields().map(field => {
+function getCharacterSectionValues(locale) {
+	return getCharacterSections().map(field => {
 		const label = getCharacterFieldLabel(locale, field.id);
 		return {
-			group: getEditableFieldGroup(field, locale),
 			label,
-			name: `${label} (${field.editId})`,
-			value: field.editId,
+			name: `${label} (${field.sectionId})`,
+			value: field.sectionId,
 		};
 	});
-}
-
-function getEditableFieldGroup(field, locale) {
-	if (field.id === 'statistics') {
-		return {
-			key: 'statistics',
-			label: getCharacterFieldLabel(locale, 'statistics'),
-		};
-	}
-	if (!field.id.includes('.')) {
-		return {
-			key: 'general',
-			label: t(locale, 'commands.help.valueGroups.general'),
-		};
-	}
-	const rootId = field.id.split('.')[0];
-	if (rootId === 'resources') {
-		return {
-			key: 'resources',
-			label: t(locale, 'commands.help.valueGroups.resources'),
-		};
-	}
-	const definition = getCharacterFieldDefinition(rootId);
-	return {
-		key: definition?.id ?? rootId,
-		label: getCharacterFieldLabel(locale, definition?.id ?? rootId) ?? rootId,
-	};
 }
 
 function getGeneratorCategoryValues(locale) {
