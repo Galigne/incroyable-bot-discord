@@ -112,7 +112,7 @@
       "choice": "{{amount}} dégâts",
       "piercingBreakdown": "Dégâts perforants infligés directement aux {{hpLabel}} : {{amount}}.",
       "normalBreakdown": "Dégâts absorbés par les {{arLabel}} : {{arDamage}} ; dégâts subis par les {{hpLabel}} : {{hpDamage}}.",
-      "result": "**{{name}}** subit **{{amount}} dégâts**. {{breakdown}}\n{{arLabel}} : **{{arCurrent}}/{{arMax}}** · {{hpLabel}} : **{{hpCurrent}}/{{hpMax}}**",
+      "result": "**{{name}}** subit **{{amount}} dégâts**. {{breakdown}}\n{{resources}}",
       "behavior": "Applique un nombre entier positif de dégâts, d’abord aux PR actuels puis aux PV actuels. Avec `piercing:true`, les dégâts ignorent les PR. Seuls le créateur, un MJ ou le propriétaire du serveur peuvent l’utiliser."
     },
     "delete": {
@@ -133,7 +133,7 @@
     "endTurn": {
       "description": "Rétablir les PA et la DD à leur maximum",
       "characterOption": "Personnage qui termine son tour",
-      "result": "**{{name}}** commence un nouveau tour avec {{ap}} {{apLabel}} et {{md}} {{mdLabel}}.",
+      "result": "**{{name}}** commence un nouveau tour.\n{{resources}}",
       "behavior": "Rétablit les PA et la DD actuels du personnage à leurs valeurs maximales respectives. Seuls le créateur, un MJ ou le propriétaire du serveur peuvent l’utiliser."
     },
     "gen": {
@@ -171,7 +171,7 @@
       "bothChoice": "PV et PR",
       "both": "{{hp}} et {{ar}}",
       "change": "{{resource}} : **{{previous}}/{{max}} → {{current}}/{{max}}**",
-      "result": "Ressources de **{{name}}** restaurées à {{percentage}} % :\n{{changes}}",
+      "result": "Ressources de **{{name}}** restaurées à {{percentage}} % :\n{{resources}}",
       "behavior": "Fixe les PV actuels, les PR actuels ou les deux au pourcentage demandé de leur maximum respectif, selon la règle d’arrondi commune. Seuls le créateur, un MJ ou le propriétaire du serveur peuvent l’utiliser."
     },
     "roll": {

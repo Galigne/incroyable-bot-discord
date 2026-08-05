@@ -11,27 +11,15 @@ const {
 } = require('./characterDisplay');
 const { t } = require('./i18n');
 
+const PROGRESS_RESOURCE_ICONS = {
+	hp: ['❤️', '🖤'],
+	ar: ['🟦', '⬛'],
+	md: ['🟧', '⬛'],
+};
+
 function createCharacterSummaryEmbed(character, locale = 'en') {
 	const status = [
-		formatProgressResource(
-			getResourceAbbreviation(locale, 'hp'),
-			character.resources.hp,
-			'❤️',
-			'🖤',
-		),
-		formatProgressResource(
-			getResourceAbbreviation(locale, 'ar'),
-			character.resources.ar,
-			'🟦',
-			'⬛',
-		),
-		formatAp(character.resources.ap, locale),
-		formatProgressResource(
-			getResourceAbbreviation(locale, 'md'),
-			character.resources.md,
-			'🟧',
-			'⬛',
-		),
+		formatCharacterResources(character, ['hp', 'ar', 'ap', 'md'], locale),
 		'',
 		`**${getCharacterFieldLabel(locale, 'statusEffects')}**\n`
 			+ formatList(character.statusEffects, 1_024, locale),
@@ -220,23 +208,8 @@ function createCharacterFieldEmbed(character, fieldName, locale = 'en') {
 			character.encumbrance,
 		));
 	default:
-		if (['hp', 'ar', 'md'].includes(field)) {
-			const icons = {
-				hp: ['❤️', '🖤'],
-				ar: ['🟦', '⬛'],
-				md: ['🟧', '⬛'],
-			};
-			return embed.setDescription(
-				formatProgressResource(
-					getResourceAbbreviation(locale, field),
-					character.resources[field],
-					icons[field][0],
-					icons[field][1],
-				),
-			);
-		}
-		if (field === 'ap') {
-			return embed.setDescription(formatAp(character.resources.ap, locale));
+		if (['hp', 'ar', 'ap', 'md'].includes(field)) {
+			return embed.setDescription(formatCharacterResource(character, field, locale));
 		}
 		return null;
 	}
@@ -262,27 +235,31 @@ function formatAp(resource, locale = 'en') {
 		+ `${'⭐'.repeat(spentAp) || (maxAp === 0 ? t(locale, 'common.empty') : '')}`;
 }
 
+function formatCharacterResource(character, resourceId, locale = 'en') {
+	if (resourceId === 'ap') {
+		return formatAp(character.resources.ap, locale);
+	}
+	const icons = PROGRESS_RESOURCE_ICONS[resourceId];
+	if (!icons) {
+		throw new RangeError(`Unsupported visual resource: ${resourceId}`);
+	}
+	return formatProgressResource(
+		getResourceAbbreviation(locale, resourceId),
+		character.resources[resourceId],
+		icons[0],
+		icons[1],
+	);
+}
+
+function formatCharacterResources(character, resourceIds, locale = 'en') {
+	return resourceIds
+		.map(resourceId => formatCharacterResource(character, resourceId, locale))
+		.join('\n');
+}
+
 function formatDetailedStatus(character, locale = 'en') {
 	return truncate([
-		formatProgressResource(
-			getResourceAbbreviation(locale, 'hp'),
-			character.resources.hp,
-			'❤️',
-			'🖤',
-		),
-		formatProgressResource(
-			getResourceAbbreviation(locale, 'ar'),
-			character.resources.ar,
-			'🟦',
-			'⬛',
-		),
-		formatAp(character.resources.ap, locale),
-		formatProgressResource(
-			getResourceAbbreviation(locale, 'md'),
-			character.resources.md,
-			'🟧',
-			'⬛',
-		),
+		formatCharacterResources(character, ['hp', 'ar', 'ap', 'md'], locale),
 		formatResource(getCharacterFieldLabel(locale, 'encumbrance'), character.encumbrance),
 		'',
 		`**${getCharacterFieldLabel(locale, 'statusEffects')}**\n`
@@ -399,4 +376,6 @@ function truncate(value, maxLength = 1_024) {
 module.exports = {
 	createCharacterFieldEmbed,
 	createCharacterSummaryEmbed,
+	formatCharacterResource,
+	formatCharacterResources,
 };

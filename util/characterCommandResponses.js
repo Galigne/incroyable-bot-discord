@@ -1,11 +1,10 @@
 const { MessageFlags } = require('discord.js');
 const {
-	getResourceAbbreviation,
-} = require('./characterDisplay');
-const {
 	createCharacterFieldEmbed,
 	createCharacterSummaryEmbed,
+	formatCharacterResources,
 } = require('./characterRenderer');
+const { getResourceAbbreviation } = require('./characterDisplay');
 const { translateCharacterOutcome } = require('./characterCommandErrors');
 const { t } = require('./i18n');
 
@@ -48,38 +47,26 @@ function createCharacterDamageResponse(result, locale = 'en') {
 		});
 	return t(locale, 'rpg.damage.result', {
 		amount: damageAmount,
-		arCurrent: character.resources.ar.current,
-		arLabel: getResourceAbbreviation(locale, 'ar'),
-		arMax: character.resources.ar.max,
 		breakdown: damageBreakdown,
-		hpCurrent: character.resources.hp.current,
-		hpLabel: getResourceAbbreviation(locale, 'hp'),
-		hpMax: character.resources.hp.max,
 		name: character.displayName,
+		resources: formatCharacterResources(character, ['hp', 'ar'], locale),
 	});
 }
 
 function createCharacterHealResponse(result, locale = 'en') {
-	const changes = result.changes.map(change => t(locale, 'rpg.heal.change', {
-		current: change.current,
-		max: change.max,
-		previous: change.previous,
-		resource: getResourceAbbreviation(locale, change.resource),
-	}));
+	const changedResources = new Set(result.changes.map(change => change.resource));
+	const resourceIds = ['hp', 'ar'].filter(resourceId => changedResources.has(resourceId));
 	return t(locale, 'rpg.heal.result', {
-		changes: changes.join('\n'),
 		name: result.character.displayName,
 		percentage: result.percentage,
+		resources: formatCharacterResources(result.character, resourceIds, locale),
 	});
 }
 
 function createEndTurnResponse(result, locale = 'en') {
 	return t(locale, 'rpg.endTurn.result', {
-		ap: result.character.resources.ap.current,
-		apLabel: getResourceAbbreviation(locale, 'ap'),
-		md: result.character.resources.md.current,
-		mdLabel: getResourceAbbreviation(locale, 'md'),
 		name: result.character.displayName,
+		resources: formatCharacterResources(result.character, ['ap', 'md'], locale),
 	});
 }
 

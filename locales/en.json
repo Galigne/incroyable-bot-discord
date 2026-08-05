@@ -112,7 +112,7 @@
       "choice": "{{amount}} damage",
       "piercingBreakdown": "{{amount}} piercing damage was dealt directly to {{hpLabel}}.",
       "normalBreakdown": "{{arDamage}} damage was absorbed by {{arLabel}} and {{hpDamage}} damage reached {{hpLabel}}.",
-      "result": "**{{name}}** received **{{amount}} damage**. {{breakdown}}\n{{arLabel}}: **{{arCurrent}}/{{arMax}}** · {{hpLabel}}: **{{hpCurrent}}/{{hpMax}}**",
+      "result": "**{{name}}** received **{{amount}} damage**. {{breakdown}}\n{{resources}}",
       "behavior": "Applies a positive whole-number damage amount to current AR first, then current HP. When `piercing` is true, damage bypasses AR. Only the character creator, a DM, or the server owner may use it."
     },
     "delete": {
@@ -133,7 +133,7 @@
     "endTurn": {
       "description": "Restore current AP and MD to their maximum values",
       "characterOption": "Character ending their turn",
-      "result": "**{{name}}** starts a new turn with {{ap}} {{apLabel}} and {{md}} {{mdLabel}}.",
+      "result": "**{{name}}** starts a new turn.\n{{resources}}",
       "behavior": "Restores the selected character’s current AP and MD to their respective maximum values. Only the character creator, a DM, or the server owner may use it."
     },
     "gen": {
@@ -171,7 +171,7 @@
       "bothChoice": "HP and AR",
       "both": "{{hp}} and {{ar}}",
       "change": "{{resource}}: **{{previous}}/{{max}} → {{current}}/{{max}}**",
-      "result": "**{{name}}** restored to {{percentage}}%:\n{{changes}}",
+      "result": "**{{name}}** restored to {{percentage}}%:\n{{resources}}",
       "behavior": "Sets current HP, current AR, or both to the requested percentage of each resource’s own maximum, using the shared rounding rule. Only the character creator, a DM, or the server owner may use it."
     },
     "roll": {
