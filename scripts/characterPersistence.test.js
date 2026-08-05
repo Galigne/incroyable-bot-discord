@@ -61,6 +61,41 @@ test('talent arrays round-trip and legacy multiline saves remain compatible', as
 	assert.deepEqual(JSON.parse(await readSave(legacyKey)).talents, talents);
 });
 
+test('encumbrance defaults and explicit values round-trip without rewriting on load', async () => {
+	const defaultKey = 'Encumbrance.Default';
+	await createCharacter(defaultKey, 'creator');
+	assert.deepEqual((await getCharacter(defaultKey)).encumbrance, { current: 0, max: 0 });
+	assert.deepEqual(
+		JSON.parse(await readSave(defaultKey)).encumbrance,
+		{ current: 0, max: 0 },
+	);
+
+	const legacyKey = 'Encumbrance.Legacy';
+	const legacySave = JSON.stringify({
+		schemaVersion: 1,
+		key: legacyKey,
+		creatorId: 'creator',
+		encumbrance: { current: 3 },
+		stats: { constitution: 18 },
+	});
+	await fsPromises.writeFile(getSavePath(legacyKey), legacySave, 'utf8');
+	assert.deepEqual((await getCharacter(legacyKey)).encumbrance, { current: 3, max: 0 });
+	assert.equal(await readSave(legacyKey), legacySave);
+
+	const explicitKey = 'Encumbrance.Explicit';
+	await createCharacter(explicitKey, 'creator', character => {
+		character.encumbrance = { current: 5, max: 12 };
+	});
+	await updateCharacter(explicitKey, () => true, character => {
+		character.level = 2;
+	});
+	assert.deepEqual((await getCharacter(explicitKey)).encumbrance, { current: 5, max: 12 });
+	assert.deepEqual(
+		JSON.parse(await readSave(explicitKey)).encumbrance,
+		{ current: 5, max: 12 },
+	);
+});
+
 test('concurrent updates to one character read the preceding saved result', async () => {
 	const characterKey = 'Concurrent.Fields';
 	await createCharacter(characterKey, 'creator');

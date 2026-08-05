@@ -33,6 +33,15 @@ test('character summary and detail embeds have no footer', () => {
 	assert.equal(detail.footer, undefined);
 });
 
+test('/get responses retain the manual encumbrance detail', () => {
+	const character = new Character('Encumbrance.Get', 'creator');
+	character.encumbrance = { current: 3, max: 8 };
+	const detail = createCharacterGetResponse(character, 'encumbrance', 'en')
+		.embeds[0].toJSON();
+
+	assert.equal(detail.description, 'Encumbrance: **3 / 8**');
+});
+
 test('character summaries and talent details render localized bounded lists', () => {
 	const character = new Character('Talent.Render', 'creator');
 	character.talents = [

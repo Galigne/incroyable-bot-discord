@@ -6,316 +6,276 @@
       "weight": 8,
       "fields": {
         "Name": "Healing potion",
-        "Description": "Restores 50 HP when consumed.",
-        "Encumbrance": 1
+        "Description": "Restores 50 HP when consumed."
       }
     },
     {
       "weight": 8,
       "fields": {
         "Name": "Coil of rope",
-        "Description": "Ten meters of sturdy rope for climbing, binding, or securing loads.",
-        "Encumbrance": 1
+        "Description": "Ten meters of sturdy rope for climbing, binding, or securing loads."
       }
     },
     {
       "weight": 8,
       "fields": {
         "Name": "Lantern and oil",
-        "Description": "A hooded lantern with enough oil for several hours.",
-        "Encumbrance": 1
+        "Description": "A hooded lantern with enough oil for several hours."
       }
     },
     {
       "weight": 8,
       "fields": {
         "Name": "Three travel rations",
-        "Description": "Compact food sufficient for three days.",
-        "Encumbrance": 1
+        "Description": "Compact food sufficient for three days."
       }
     },
     {
       "weight": 7,
       "fields": {
         "Name": "Waterskin",
-        "Description": "A filled leather waterskin.",
-        "Encumbrance": 1
+        "Description": "A filled leather waterskin."
       }
     },
     {
       "weight": 7,
       "fields": {
         "Name": "Bedroll",
-        "Description": "A weather-resistant blanket and sleeping roll.",
-        "Encumbrance": 1
+        "Description": "A weather-resistant blanket and sleeping roll."
       }
     },
     {
       "weight": 7,
       "fields": {
         "Name": "Tinderbox",
-        "Description": "Flint, steel, and dry tinder for starting fires.",
-        "Encumbrance": 0
+        "Description": "Flint, steel, and dry tinder for starting fires."
       }
     },
     {
       "weight": 6,
       "fields": {
         "Name": "Lockpicking kit",
-        "Description": "Small tools for manipulating ordinary mechanical locks.",
-        "Encumbrance": 1
+        "Description": "Small tools for manipulating ordinary mechanical locks."
       }
     },
     {
       "weight": 6,
       "fields": {
         "Name": "Climbing kit",
-        "Description": "Pitons, a hammer, straps, and simple climbing aids.",
-        "Encumbrance": 2
+        "Description": "Pitons, a hammer, straps, and simple climbing aids."
       }
     },
     {
       "weight": 6,
       "fields": {
         "Name": "Bandages",
-        "Description": "Clean cloth and basic supplies for treating wounds.",
-        "Encumbrance": 1
+        "Description": "Clean cloth and basic supplies for treating wounds."
       }
     },
     {
       "weight": 6,
       "fields": {
         "Name": "Chalk and charcoal",
-        "Description": "Useful for marking paths, sketching maps, and making notes.",
-        "Encumbrance": 0
+        "Description": "Useful for marking paths, sketching maps, and making notes."
       }
     },
     {
       "weight": 6,
       "fields": {
         "Name": "Small mirror",
-        "Description": "A polished hand mirror useful for signals and checking corners.",
-        "Encumbrance": 0
+        "Description": "A polished hand mirror useful for signals and checking corners."
       }
     },
     {
       "weight": 5,
       "fields": {
         "Name": "Crowbar",
-        "Description": "A sturdy iron lever for doors, crates, and obstacles.",
-        "Encumbrance": 1
+        "Description": "A sturdy iron lever for doors, crates, and obstacles."
       }
     },
     {
       "weight": 5,
       "fields": {
         "Name": "Grappling hook",
-        "Description": "A four-pronged hook designed for use with rope.",
-        "Encumbrance": 1
+        "Description": "A four-pronged hook designed for use with rope."
       }
     },
     {
       "weight": 5,
       "fields": {
         "Name": "Fishing kit",
-        "Description": "Line, hooks, floats, and a compact net.",
-        "Encumbrance": 1
+        "Description": "Line, hooks, floats, and a compact net."
       }
     },
     {
       "weight": 5,
       "fields": {
         "Name": "Writing kit",
-        "Description": "Ink, quills, parchment, sealing wax, and a protective case.",
-        "Encumbrance": 1
+        "Description": "Ink, quills, parchment, sealing wax, and a protective case."
       }
     },
     {
       "weight": 5,
       "fields": {
         "Name": "Herbalism pouch",
-        "Description": "Small tools and containers for gathering useful plants.",
-        "Encumbrance": 1
+        "Description": "Small tools and containers for gathering useful plants."
       }
     },
     {
       "weight": 5,
       "fields": {
         "Name": "Shovel",
-        "Description": "A compact but sturdy digging tool.",
-        "Encumbrance": 2
+        "Description": "A compact but sturdy digging tool."
       }
     },
     {
       "weight": 4,
       "fields": {
         "Name": "Antidote",
-        "Description": "A general treatment granting another chance to resist ordinary poison.",
-        "Encumbrance": 1
+        "Description": "A general treatment granting another chance to resist ordinary poison."
       }
     },
     {
       "weight": 4,
       "fields": {
         "Name": "Smoke bomb",
-        "Description": "Creates a dense cloud of smoke when ignited.",
-        "Encumbrance": 1
+        "Description": "Creates a dense cloud of smoke when ignited."
       }
     },
     {
       "weight": 4,
       "fields": {
         "Name": "Bear trap",
-        "Description": "A heavy mechanical trap capable of restraining a creature.",
-        "Encumbrance": 2
+        "Description": "A heavy mechanical trap capable of restraining a creature."
       }
     },
     {
       "weight": 4,
       "fields": {
         "Name": "Disguise kit",
-        "Description": "Cosmetics, dyes, false hair, and simple costume pieces.",
-        "Encumbrance": 1
+        "Description": "Cosmetics, dyes, false hair, and simple costume pieces."
       }
     },
     {
       "weight": 4,
       "fields": {
         "Name": "Musical instrument",
-        "Description": "A portable instrument chosen to suit the character.",
-        "Encumbrance": 1
+        "Description": "A portable instrument chosen to suit the character."
       }
     },
     {
       "weight": 4,
       "fields": {
         "Name": "Merchant's scale",
-        "Description": "A folding balance and reference weights for checking trade goods.",
-        "Encumbrance": 1
+        "Description": "A folding balance and reference weights for checking trade goods."
       }
     },
     {
       "weight": 3,
       "fields": {
         "Name": "Bag of caltrops",
-        "Description": "Sharp metal spikes used to slow pursuit or secure a passage.",
-        "Encumbrance": 1
+        "Description": "Sharp metal spikes used to slow pursuit or secure a passage."
       }
     },
     {
       "weight": 3,
       "fields": {
         "Name": "Vial of basic poison",
-        "Description": "A limited dose of toxin suitable for one weapon or drink.",
-        "Encumbrance": 1
+        "Description": "A limited dose of toxin suitable for one weapon or drink."
       }
     },
     {
       "weight": 3,
       "fields": {
         "Name": "Spyglass",
-        "Description": "A compact optical tube for viewing distant details.",
-        "Encumbrance": 1
+        "Description": "A compact optical tube for viewing distant details."
       }
     },
     {
       "weight": 3,
       "fields": {
         "Name": "Tent",
-        "Description": "A small shelter suitable for one or two travelers.",
-        "Encumbrance": 2
+        "Description": "A small shelter suitable for one or two travelers."
       }
     },
     {
       "weight": 3,
       "fields": {
         "Name": "Manacles",
-        "Description": "A pair of iron restraints with a simple key.",
-        "Encumbrance": 1
+        "Description": "A pair of iron restraints with a simple key."
       }
     },
     {
       "weight": 3,
       "fields": {
         "Name": "Holy symbol",
-        "Description": "A symbol tied to a faith, oath, ancestor, or personal ideal.",
-        "Encumbrance": 0
+        "Description": "A symbol tied to a faith, oath, ancestor, or personal ideal."
       }
     },
     {
       "weight": 3,
       "fields": {
         "Name": "Local map",
-        "Description": "A practical but imperfect map of the surrounding region.",
-        "Encumbrance": 0
+        "Description": "A practical but imperfect map of the surrounding region."
       }
     },
     {
       "weight": 2,
       "fields": {
         "Name": "Potion of night vision",
-        "Description": "Grants clear sight in darkness for one hour.",
-        "Encumbrance": 1
+        "Description": "Grants clear sight in darkness for one hour."
       }
     },
     {
       "weight": 2,
       "fields": {
         "Name": "Potion of water breathing",
-        "Description": "Allows underwater breathing for thirty minutes.",
-        "Encumbrance": 1
+        "Description": "Allows underwater breathing for thirty minutes."
       }
     },
     {
       "weight": 2,
       "fields": {
         "Name": "Acid flask",
-        "Description": "A carefully sealed vial able to damage common materials.",
-        "Encumbrance": 1
+        "Description": "A carefully sealed vial able to damage common materials."
       }
     },
     {
       "weight": 2,
       "fields": {
         "Name": "Silvered chain",
-        "Description": "A short chain useful against creatures vulnerable to silver.",
-        "Encumbrance": 1
+        "Description": "A short chain useful against creatures vulnerable to silver."
       }
     },
     {
       "weight": 2,
       "fields": {
         "Name": "Runic chalk",
-        "Description": "Rare chalk that makes magical inscriptions easier to see and study.",
-        "Encumbrance": 0
+        "Description": "Rare chalk that makes magical inscriptions easier to see and study."
       }
     },
     {
       "fields": {
         "Name": "Whispering compass",
-        "Description": "A strange compass that quietly complains whenever it points north.",
-        "Encumbrance": 0
+        "Description": "A strange compass that quietly complains whenever it points north."
       }
     },
     {
       "fields": {
         "Name": "Everlasting candle",
-        "Description": "A candle whose small flame never consumes its wax.",
-        "Encumbrance": 0
+        "Description": "A candle whose small flame never consumes its wax."
       }
     },
     {
       "fields": {
         "Name": "Unidentified rune fragment",
-        "Description": "A piece of magical material containing part of an unknown inscription.",
-        "Encumbrance": 1
+        "Description": "A piece of magical material containing part of an unknown inscription."
       }
     },
     {
       "fields": {
         "Name": "Mysterious sealed letter",
-        "Description": "A letter addressed to someone the character has never met.",
-        "Encumbrance": 0
+        "Description": "A letter addressed to someone the character has never met."
       }
     }
   ]

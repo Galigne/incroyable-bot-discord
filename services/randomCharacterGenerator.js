@@ -92,11 +92,6 @@ function populateRandomCharacter(character, options = {}) {
 		...inventoryItems.map(formatNamedEntry),
 		formatGold(gold),
 	];
-	character.encumbrance = {
-		current: [armor, ...weapons, ...inventoryItems]
-			.reduce((total, entry) => total + Number(getField(entry, 'Encumbrance')), 0),
-		max: character.stats.constitution,
-	};
 
 	return character;
 }

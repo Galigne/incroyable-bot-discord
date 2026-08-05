@@ -6,234 +6,204 @@
       "weight": 5,
       "fields": {
         "Name": "Longsword",
-        "Description": "A reliable one-handed blade for cuts and thrusts.",
-        "Encumbrance": 2
+        "Description": "A reliable one-handed blade for cuts and thrusts."
       }
     },
     {
       "weight": 5,
       "fields": {
         "Name": "Short sword",
-        "Description": "A quick, versatile blade suited to close combat.",
-        "Encumbrance": 1
+        "Description": "A quick, versatile blade suited to close combat."
       }
     },
     {
       "weight": 5,
       "fields": {
         "Name": "Spear",
-        "Description": "A long-reaching weapon useful for thrusting, bracing, and throwing.",
-        "Encumbrance": 2
+        "Description": "A long-reaching weapon useful for thrusting, bracing, and throwing."
       }
     },
     {
       "weight": 5,
       "fields": {
         "Name": "Hunting bow",
-        "Description": "A practical ranged weapon with unlimited ordinary ammunition.",
-        "Encumbrance": 2
+        "Description": "A practical ranged weapon with unlimited ordinary ammunition."
       }
     },
     {
       "weight": 5,
       "fields": {
         "Name": "Dagger",
-        "Description": "A concealable light blade that also serves as a tool.",
-        "Encumbrance": 1
+        "Description": "A concealable light blade that also serves as a tool."
       }
     },
     {
       "weight": 4,
       "fields": {
         "Name": "Battle axe",
-        "Description": "A heavy-edged weapon effective against shields and wooden obstacles.",
-        "Encumbrance": 2
+        "Description": "A heavy-edged weapon effective against shields and wooden obstacles."
       }
     },
     {
       "weight": 4,
       "fields": {
         "Name": "Mace",
-        "Description": "A one-handed crushing weapon effective against rigid protection.",
-        "Encumbrance": 2
+        "Description": "A one-handed crushing weapon effective against rigid protection."
       }
     },
     {
       "weight": 4,
       "fields": {
         "Name": "Quarterstaff",
-        "Description": "A simple two-handed staff used for defense, reach, and leverage.",
-        "Encumbrance": 2
+        "Description": "A simple two-handed staff used for defense, reach, and leverage."
       }
     },
     {
       "weight": 4,
       "fields": {
         "Name": "Crossbow",
-        "Description": "A powerful mechanical ranged weapon with unlimited ordinary bolts.",
-        "Encumbrance": 2
+        "Description": "A powerful mechanical ranged weapon with unlimited ordinary bolts."
       }
     },
     {
       "weight": 4,
       "fields": {
         "Name": "Saber",
-        "Description": "A curved one-handed blade favoring fast slashing attacks.",
-        "Encumbrance": 1
+        "Description": "A curved one-handed blade favoring fast slashing attacks."
       }
     },
     {
       "weight": 3,
       "fields": {
         "Name": "Greatsword",
-        "Description": "A massive two-handed sword designed for broad, forceful attacks.",
-        "Encumbrance": 2
+        "Description": "A massive two-handed sword designed for broad, forceful attacks."
       }
     },
     {
       "weight": 3,
       "fields": {
         "Name": "Halberd",
-        "Description": "A two-handed polearm combining an axe head, hook, and spear point.",
-        "Encumbrance": 2
+        "Description": "A two-handed polearm combining an axe head, hook, and spear point."
       }
     },
     {
       "weight": 3,
       "fields": {
         "Name": "Warhammer",
-        "Description": "A concentrated striking weapon for armor and fortifications.",
-        "Encumbrance": 2
+        "Description": "A concentrated striking weapon for armor and fortifications."
       }
     },
     {
       "weight": 3,
       "fields": {
         "Name": "Rapier",
-        "Description": "A precise thrusting sword favoring Dexterity and careful footwork.",
-        "Encumbrance": 1
+        "Description": "A precise thrusting sword favoring Dexterity and careful footwork."
       }
     },
     {
       "weight": 3,
       "fields": {
         "Name": "Recurve bow",
-        "Description": "A compact bow that remains effective from horseback or tight terrain.",
-        "Encumbrance": 2
+        "Description": "A compact bow that remains effective from horseback or tight terrain."
       }
     },
     {
       "weight": 3,
       "fields": {
         "Name": "Hand axe",
-        "Description": "A compact chopping weapon balanced well enough to throw.",
-        "Encumbrance": 1
+        "Description": "A compact chopping weapon balanced well enough to throw."
       }
     },
     {
       "weight": 3,
       "fields": {
         "Name": "Flail",
-        "Description": "A chained striking head capable of reaching around simple defenses.",
-        "Encumbrance": 2
+        "Description": "A chained striking head capable of reaching around simple defenses."
       }
     },
     {
       "weight": 3,
       "fields": {
         "Name": "Scimitar",
-        "Description": "A broad curved sword designed for fluid cutting attacks.",
-        "Encumbrance": 1
+        "Description": "A broad curved sword designed for fluid cutting attacks."
       }
     },
     {
       "weight": 2,
       "fields": {
         "Name": "Glaive",
-        "Description": "A long polearm with a cutting blade and excellent reach.",
-        "Encumbrance": 2
+        "Description": "A long polearm with a cutting blade and excellent reach."
       }
     },
     {
       "weight": 2,
       "fields": {
         "Name": "Twin fighting knives",
-        "Description": "A matched pair of fast blades used together.",
-        "Encumbrance": 1
+        "Description": "A matched pair of fast blades used together."
       }
     },
     {
       "weight": 2,
       "fields": {
         "Name": "Heavy repeating crossbow",
-        "Description": "A bulky mechanism capable of rapid shots before reloading.",
-        "Encumbrance": 3
+        "Description": "A bulky mechanism capable of rapid shots before reloading."
       }
     },
     {
       "weight": 2,
       "fields": {
         "Name": "Whip",
-        "Description": "A flexible weapon useful for disarming, tripping, and controlling space.",
-        "Encumbrance": 1
+        "Description": "A flexible weapon useful for disarming, tripping, and controlling space."
       }
     },
     {
       "weight": 2,
       "fields": {
         "Name": "Trident",
-        "Description": "A three-pronged spear suited to fishing, pinning, and underwater combat.",
-        "Encumbrance": 2
+        "Description": "A three-pronged spear suited to fishing, pinning, and underwater combat."
       }
     },
     {
       "weight": 2,
       "fields": {
         "Name": "Sling",
-        "Description": "A light ranged weapon using stones or small lead bullets.",
-        "Encumbrance": 0
+        "Description": "A light ranged weapon using stones or small lead bullets."
       }
     },
     {
       "fields": {
         "Name": "Runesmith's hammer",
-        "Description": "A reinforced crafting hammer balanced for combat and runic work.",
-        "Encumbrance": 2
+        "Description": "A reinforced crafting hammer balanced for combat and runic work."
       }
     },
     {
       "fields": {
         "Name": "Bladed chain",
-        "Description": "A difficult flexible weapon offering reach at considerable risk.",
-        "Encumbrance": 2
+        "Description": "A difficult flexible weapon offering reach at considerable risk."
       }
     },
     {
       "fields": {
         "Name": "Crystal scepter",
-        "Description": "A durable arcane implement that also functions as a light mace.",
-        "Encumbrance": 1
+        "Description": "A durable arcane implement that also functions as a light mace."
       }
     },
     {
       "fields": {
         "Name": "Meteor-iron maul",
-        "Description": "An exceptionally heavy two-handed hammer with devastating impact.",
-        "Encumbrance": 3
+        "Description": "An exceptionally heavy two-handed hammer with devastating impact."
       }
     },
     {
       "fields": {
         "Name": "Moon-silver chakram",
-        "Description": "A circular throwing blade that shines under moonlight.",
-        "Encumbrance": 1
+        "Description": "A circular throwing blade that shines under moonlight."
       }
     },
     {
       "fields": {
         "Name": "Bone longbow",
-        "Description": "A powerful bow assembled from the remains of a giant beast.",
-        "Encumbrance": 2
+        "Description": "A powerful bow assembled from the remains of a giant beast."
       }
     }
   ]

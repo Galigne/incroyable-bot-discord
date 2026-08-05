@@ -175,73 +175,73 @@ Cette section reste un repère historique et ne remplace pas les règles actuell
 
 ### Armes (`weapons`)
 
-Ces candidats suivent les champs actuels `Name`, `Description` et `Encumbrance`.
+Ces candidats suivent les champs actuels `Name` et `Description`.
 
-| Name | Description | Encumbrance |
-| --- | --- | ---: |
-| Épée longue | Une lame polyvalente à une main, adaptée aux tailles comme aux attaques d’estoc. | 2 |
-| Dague | Une lame courte, facile à dissimuler et utile au combat comme pour les travaux précis. | 1 |
-| Lance | Une arme d’hast simple offrant allonge, contrôle de l’espace et efficacité contre une charge. | 2 |
-| Harpon | Une lourde pointe barbelée reliée à une corde, conçue pour retenir une cible après l’impact. | 2 |
-| Hallebarde | Une arme d’hast combinant pointe, lame de hache et crochet pour menacer plusieurs types de défense. | 3 |
-| Morgenstern | Une masse hérissée concentrant son impact sur une petite surface. | 2 |
-| Massue | Une arme contondante robuste, facile à fabriquer et efficace pour repousser un adversaire. | 2 |
-| Katana | Une longue lame courbe privilégiant les coupes rapides et un maniement précis à deux mains. | 2 |
-| Sabre | Une lame courbe à une main, légère et adaptée au combat mobile. | 1 |
-| Fléau | Une masse articulée difficile à maîtriser, capable de contourner certaines gardes. | 2 |
-| Lames jumelles | Deux armes courtes équilibrées pour un style rapide exigeant coordination et proximité. | 2 |
-| Hache de bataille | Une arme de taille puissante, efficace contre les boucliers et les obstacles en bois. | 2 |
-| Marteau de guerre | Une arme lourde concentrant sa force contre les armures rigides et les structures. | 2 |
-| Grande hache | Une arme massive à deux mains produisant des frappes larges au prix d’une défense réduite. | 3 |
-| Grand marteau | Un marteau à deux mains extrêmement lourd, conçu pour briser protections et fortifications. | 3 |
-| Faux de guerre | Une longue lame recourbée transformée en arme d’hast pour accrocher et faucher. | 2 |
-| Fouet | Une arme flexible utile pour maintenir la distance, désarmer ou entraver une cible. | 1 |
-| Griffes de combat | Des lames fixées aux mains qui prolongent les attaques naturelles sans libérer la prise. | 1 |
-| Arc long | Un arc puissant exigeant de l’espace et de la force, efficace à grande distance. | 2 |
-| Arbalète | Une arme mécanique précise dont la puissance compense un rechargement plus lent. | 2 |
-| Baguette de combat | Un focaliseur court et renforcé permettant de canaliser une LOI tout en parant des coups légers. | 1 |
-| Sceptre de combat | Un focaliseur robuste pouvant servir de masse légère lorsque la magie devient impraticable. | 2 |
-| Baliste portative | Une arbalète démesurée montée sur support, très puissante mais longue à déplacer et préparer. | 4 |
+| Name | Description |
+| --- | --- |
+| Épée longue | Une lame polyvalente à une main, adaptée aux tailles comme aux attaques d’estoc. |
+| Dague | Une lame courte, facile à dissimuler et utile au combat comme pour les travaux précis. |
+| Lance | Une arme d’hast simple offrant allonge, contrôle de l’espace et efficacité contre une charge. |
+| Harpon | Une lourde pointe barbelée reliée à une corde, conçue pour retenir une cible après l’impact. |
+| Hallebarde | Une arme d’hast combinant pointe, lame de hache et crochet pour menacer plusieurs types de défense. |
+| Morgenstern | Une masse hérissée concentrant son impact sur une petite surface. |
+| Massue | Une arme contondante robuste, facile à fabriquer et efficace pour repousser un adversaire. |
+| Katana | Une longue lame courbe privilégiant les coupes rapides et un maniement précis à deux mains. |
+| Sabre | Une lame courbe à une main, légère et adaptée au combat mobile. |
+| Fléau | Une masse articulée difficile à maîtriser, capable de contourner certaines gardes. |
+| Lames jumelles | Deux armes courtes équilibrées pour un style rapide exigeant coordination et proximité. |
+| Hache de bataille | Une arme de taille puissante, efficace contre les boucliers et les obstacles en bois. |
+| Marteau de guerre | Une arme lourde concentrant sa force contre les armures rigides et les structures. |
+| Grande hache | Une arme massive à deux mains produisant des frappes larges au prix d’une défense réduite. |
+| Grand marteau | Un marteau à deux mains extrêmement lourd, conçu pour briser protections et fortifications. |
+| Faux de guerre | Une longue lame recourbée transformée en arme d’hast pour accrocher et faucher. |
+| Fouet | Une arme flexible utile pour maintenir la distance, désarmer ou entraver une cible. |
+| Griffes de combat | Des lames fixées aux mains qui prolongent les attaques naturelles sans libérer la prise. |
+| Arc long | Un arc puissant exigeant de l’espace et de la force, efficace à grande distance. |
+| Arbalète | Une arme mécanique précise dont la puissance compense un rechargement plus lent. |
+| Baguette de combat | Un focaliseur court et renforcé permettant de canaliser une LOI tout en parant des coups légers. |
+| Sceptre de combat | Un focaliseur robuste pouvant servir de masse légère lorsque la magie devient impraticable. |
+| Baliste portative | Une arbalète démesurée montée sur support, très puissante mais longue à déplacer et préparer. |
 
 ### Inventaire (`inventory`)
 
-Ces candidats suivent les champs actuels `Name`, `Description` et `Encumbrance`.
+Ces candidats suivent les champs actuels `Name` et `Description`.
 
-| Name | Description | Encumbrance |
-| --- | --- | ---: |
-| Bourse de pièces | Une somme de monnaie locale mêlant petites pièces courantes et devises plus difficiles à écouler. | 0 |
-| Potion de soin | Une fiole stabilisée qui facilite la récupération d’une blessure lorsqu’elle est utilisée correctement. | 0 |
-| Potion de vigueur | Un breuvage augmentant brièvement les capacités physiques avant de provoquer une forte fatigue. | 0 |
-| Parchemin de LOI | Un support à usage unique permettant de déclencher une LOI précise sans l’avoir apprise. | 0 |
-| Livre de LOI | Un traité rare expliquant une LOI, ses applications et les risques liés à une mauvaise interprétation. | 1 |
-| Outils d’excavation | Un crochet, une petite pioche et une pelle repliable pour fouiller ou franchir un terrain difficile. | 2 |
-| Clef inconnue | Une clef sans serrure identifiée, marquée d’un symbole correspondant à une organisation ou un bâtiment. | 0 |
-| Notes chiffrées | Plusieurs pages de notes dont le sens dépend d’un code, d’un contexte ou d’une personne disparue. | 0 |
-| Munitions spécialisées | Un petit lot de projectiles adaptés à une arme précise ou à une cible inhabituelle. | 1 |
-| Bijou précieux | Une pièce de joaillerie identifiable, facile à transporter mais risquée à revendre. | 0 |
-| Essence élémentaire | Une substance instable conservant les propriétés d’un élément naturel ou magique. | 0 |
-| Carte au trésor | Un itinéraire incomplet accompagné de repères anciens, d’avertissements et d’une destination ambiguë. | 0 |
-| Papier de qualité | Des feuilles et un parchemin vierges adaptés aux contrats, cartes, sorts ou faux documents. | 0 |
-| Poupée cérémonielle | Une figurine de tissu portant le nom effacé d’une personne et les traces d’un ancien rituel. | 0 |
-| Grimoire verrouillé | Un livre protégé par une serrure ou une énigme, dont le contenu ne peut être consulté directement. | 1 |
-| Jouet ancien | Un jouet ou ours en peluche reconnaissable par une famille, un collectionneur ou un esprit. | 0 |
-| Fragment de créature | Une écaille, peau, corne ou dent conservée comme trophée, preuve ou composant. | 1 |
-| Médicament rare | Un traitement destiné à une maladie précise, fragile et difficile à remplacer. | 0 |
-| Plante médicinale | Une plante fraîche dont l’efficacité dépend de sa préparation et de son état de conservation. | 0 |
-| Ingrédient alchimique | Un composant organique inhabituel, comme un œil de crapaud ou une glande venimeuse. | 0 |
-| Œuvre d’art | Un tableau, une sculpture ou une pièce décorative possédant une valeur culturelle identifiable. | 2 |
-| Vêtement de cérémonie | Une robe, cape, paire de bottes ou paire de gants associée à un rang ou une institution. | 1 |
-| Couronne inachevée | Un symbole d’autorité auquel manque une gemme, une inscription ou une partie essentielle. | 1 |
-| Instrument de musique | Un luth, tambour, violon ou autre instrument transportable, usé mais fonctionnel. | 1 |
-| Peigne ouvragé | Un objet personnel décoré d’un blason discret ou d’une inscription intime. | 0 |
-| Manuscrit incomplet | Un texte historique ou scientifique dont plusieurs pages ont été retirées intentionnellement. | 0 |
-| Vase scellé | Un récipient fragile dont le contenu produit un bruit ou une chaleur inhabituelle. | 1 |
-| Fruit exotique | Un fruit rare dont la graine, la saveur ou les propriétés intéressent plusieurs acheteurs. | 0 |
-| Figurine de collection | Une pièce d’une série recherchée, insignifiante seule mais précieuse pour la bonne personne. | 0 |
-| Brosse à dents enchantée | Un objet absurdement spécifique qui nettoie parfaitement les dents et mord les autres saletés. | 0 |
-| Œuf non identifié | Un œuf vivant dont l’espèce, les besoins et le danger restent inconnus. | 1 |
-| Pierre accordée | Une pierre minérale ou magique réagissant à un lieu, une personne ou une LOI particulière. | 0 |
-| Poulet de voyage | Un poulet étonnamment calme, dressé à suivre le porteur et à signaler certaines créatures. | 1 |
+| Name | Description |
+| --- | --- |
+| Bourse de pièces | Une somme de monnaie locale mêlant petites pièces courantes et devises plus difficiles à écouler. |
+| Potion de soin | Une fiole stabilisée qui facilite la récupération d’une blessure lorsqu’elle est utilisée correctement. |
+| Potion de vigueur | Un breuvage augmentant brièvement les capacités physiques avant de provoquer une forte fatigue. |
+| Parchemin de LOI | Un support à usage unique permettant de déclencher une LOI précise sans l’avoir apprise. |
+| Livre de LOI | Un traité rare expliquant une LOI, ses applications et les risques liés à une mauvaise interprétation. |
+| Outils d’excavation | Un crochet, une petite pioche et une pelle repliable pour fouiller ou franchir un terrain difficile. |
+| Clef inconnue | Une clef sans serrure identifiée, marquée d’un symbole correspondant à une organisation ou un bâtiment. |
+| Notes chiffrées | Plusieurs pages de notes dont le sens dépend d’un code, d’un contexte ou d’une personne disparue. |
+| Munitions spécialisées | Un petit lot de projectiles adaptés à une arme précise ou à une cible inhabituelle. |
+| Bijou précieux | Une pièce de joaillerie identifiable, facile à transporter mais risquée à revendre. |
+| Essence élémentaire | Une substance instable conservant les propriétés d’un élément naturel ou magique. |
+| Carte au trésor | Un itinéraire incomplet accompagné de repères anciens, d’avertissements et d’une destination ambiguë. |
+| Papier de qualité | Des feuilles et un parchemin vierges adaptés aux contrats, cartes, sorts ou faux documents. |
+| Poupée cérémonielle | Une figurine de tissu portant le nom effacé d’une personne et les traces d’un ancien rituel. |
+| Grimoire verrouillé | Un livre protégé par une serrure ou une énigme, dont le contenu ne peut être consulté directement. |
+| Jouet ancien | Un jouet ou ours en peluche reconnaissable par une famille, un collectionneur ou un esprit. |
+| Fragment de créature | Une écaille, peau, corne ou dent conservée comme trophée, preuve ou composant. |
+| Médicament rare | Un traitement destiné à une maladie précise, fragile et difficile à remplacer. |
+| Plante médicinale | Une plante fraîche dont l’efficacité dépend de sa préparation et de son état de conservation. |
+| Ingrédient alchimique | Un composant organique inhabituel, comme un œil de crapaud ou une glande venimeuse. |
+| Œuvre d’art | Un tableau, une sculpture ou une pièce décorative possédant une valeur culturelle identifiable. |
+| Vêtement de cérémonie | Une robe, cape, paire de bottes ou paire de gants associée à un rang ou une institution. |
+| Couronne inachevée | Un symbole d’autorité auquel manque une gemme, une inscription ou une partie essentielle. |
+| Instrument de musique | Un luth, tambour, violon ou autre instrument transportable, usé mais fonctionnel. |
+| Peigne ouvragé | Un objet personnel décoré d’un blason discret ou d’une inscription intime. |
+| Manuscrit incomplet | Un texte historique ou scientifique dont plusieurs pages ont été retirées intentionnellement. |
+| Vase scellé | Un récipient fragile dont le contenu produit un bruit ou une chaleur inhabituelle. |
+| Fruit exotique | Un fruit rare dont la graine, la saveur ou les propriétés intéressent plusieurs acheteurs. |
+| Figurine de collection | Une pièce d’une série recherchée, insignifiante seule mais précieuse pour la bonne personne. |
+| Brosse à dents enchantée | Un objet absurdement spécifique qui nettoie parfaitement les dents et mord les autres saletés. |
+| Œuf non identifié | Un œuf vivant dont l’espèce, les besoins et le danger restent inconnus. |
+| Pierre accordée | Une pierre minérale ou magique réagissant à un lieu, une personne ou une LOI particulière. |
+| Poulet de voyage | Un poulet étonnamment calme, dressé à suivre le porteur et à signaler certaines créatures. |
 
 ### Races (`race`)
 

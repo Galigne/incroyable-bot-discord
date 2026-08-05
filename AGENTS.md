@@ -433,6 +433,10 @@ or owner role.
 
 Resources and display:
 
+- Encumbrance is an independent, manually managed `{ current, max }` resource. New
+  characters default both values to `0`; hydration defaults each absent value to
+  `0` while preserving explicit saved values. Never derive or update encumbrance
+  from Constitution, equipment, inventory, generation, or another property.
 - AP satisfies `0 <= current <= max <= 10`.
 - AP uses filled/spent star icons for the raw current/max values.
 - HP, AR, and MD use ten-icon percentage bars. Preserve the current colors:
@@ -535,6 +539,8 @@ At present it:
 - chooses armor that meets Constitution requirements and derives AR from it;
 - equips one armor and one or two weapons;
 - adds three inventory items plus `level * 1D20 + 5` gold;
+- leaves the manually managed encumbrance resource at its existing values, which
+  are `0 / 0` for a new character;
 - gives a generated status effect with a 25% chance.
 
 ## Other bot behavior

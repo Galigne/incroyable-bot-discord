@@ -10,8 +10,7 @@
         "Rarity": "common",
         "Description": "Ordinary clothing or light padding that offers mobility but no meaningful AR.",
         "Constitution requirement": 0,
-        "AR percentage": 5,
-        "Encumbrance": 0
+        "AR percentage": 5
       }
     },
     {
@@ -22,8 +21,7 @@
         "Rarity": "uncommon",
         "Description": "Well-fitted reinforced clothing offering modest protection.",
         "Constitution requirement": 0,
-        "AR percentage": 15,
-        "Encumbrance": 0
+        "AR percentage": 15
       }
     },
     {
@@ -34,8 +32,7 @@
         "Rarity": "rare",
         "Description": "Superior flexible armor made from unusually resilient material.",
         "Constitution requirement": 0,
-        "AR percentage": 25,
-        "Encumbrance": 0
+        "AR percentage": 25
       }
     },
     {
@@ -46,8 +43,7 @@
         "Rarity": "epic",
         "Description": "Remarkable weightless protection crafted through rare techniques.",
         "Constitution requirement": 0,
-        "AR percentage": 35,
-        "Encumbrance": 0
+        "AR percentage": 35
       }
     },
     {
@@ -57,8 +53,7 @@
         "Rarity": "legendary",
         "Description": "A unique second skin offering exceptional protection without restricting movement.",
         "Constitution requirement": 0,
-        "AR percentage": 45,
-        "Encumbrance": 0
+        "AR percentage": 45
       }
     },
     {
@@ -69,8 +64,7 @@
         "Rarity": "common",
         "Description": "Standard reinforced leather, scale, or partial mail.",
         "Constitution requirement": 12,
-        "AR percentage": 25,
-        "Encumbrance": 1
+        "AR percentage": 25
       }
     },
     {
@@ -81,8 +75,7 @@
         "Rarity": "uncommon",
         "Description": "Reliable professional armor balancing protection and mobility.",
         "Constitution requirement": 12,
-        "AR percentage": 35,
-        "Encumbrance": 1
+        "AR percentage": 35
       }
     },
     {
@@ -93,8 +86,7 @@
         "Rarity": "rare",
         "Description": "Master-crafted layered armor with excellent coverage.",
         "Constitution requirement": 12,
-        "AR percentage": 45,
-        "Encumbrance": 1
+        "AR percentage": 45
       }
     },
     {
@@ -105,8 +97,7 @@
         "Rarity": "epic",
         "Description": "Exceptional armor reinforced by magical materials or runes.",
         "Constitution requirement": 12,
-        "AR percentage": 55,
-        "Encumbrance": 1
+        "AR percentage": 55
       }
     },
     {
@@ -116,8 +107,7 @@
         "Rarity": "legendary",
         "Description": "A celebrated suit offering extraordinary protection without becoming cumbersome.",
         "Constitution requirement": 12,
-        "AR percentage": 65,
-        "Encumbrance": 1
+        "AR percentage": 65
       }
     },
     {
@@ -128,8 +118,7 @@
         "Rarity": "common",
         "Description": "A basic full suit of plate or similarly massive protection.",
         "Constitution requirement": 14,
-        "AR percentage": 45,
-        "Encumbrance": 2
+        "AR percentage": 45
       }
     },
     {
@@ -140,8 +129,7 @@
         "Rarity": "uncommon",
         "Description": "A carefully fitted heavy suit with reinforced joints.",
         "Constitution requirement": 14,
-        "AR percentage": 55,
-        "Encumbrance": 2
+        "AR percentage": 55
       }
     },
     {
@@ -152,8 +140,7 @@
         "Rarity": "rare",
         "Description": "Masterwork heavy armor built from superior metal or monster plates.",
         "Constitution requirement": 14,
-        "AR percentage": 65,
-        "Encumbrance": 2
+        "AR percentage": 65
       }
     },
     {
@@ -164,8 +151,7 @@
         "Rarity": "epic",
         "Description": "A formidable runic suit capable of withstanding extraordinary punishment.",
         "Constitution requirement": 14,
-        "AR percentage": 75,
-        "Encumbrance": 2
+        "AR percentage": 75
       }
     },
     {
@@ -175,8 +161,7 @@
         "Rarity": "legendary",
         "Description": "A unique fortress-like suit remembered in songs and military histories.",
         "Constitution requirement": 14,
-        "AR percentage": 85,
-        "Encumbrance": 2
+        "AR percentage": 85
       }
     }
   ]

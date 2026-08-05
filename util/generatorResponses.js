@@ -10,7 +10,6 @@ const GENERATOR_FIELD_KEYS = {
 	'Constitution requirement': 'constitutionRequirement',
 	'Deity or Belief': 'deityOrBelief',
 	Description: 'description',
-	Encumbrance: 'encumbrance',
 	Enemies: 'enemies',
 	FirstName: 'firstName',
 	Generator: 'generator',

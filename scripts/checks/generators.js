@@ -185,6 +185,14 @@ module.exports = function createGeneratorChecks(context) {
 			) {
 				errors.push('The armor generator must contain every type and rarity combination.');
 			}
+			for (const categoryName of ['armors', 'weapons', 'inventory']) {
+				const entries = generatorCatalog.getCategory(categoryName)?.entries ?? [];
+				if (entries.some(entry => Object.hasOwn(entry.fields ?? {}, 'Encumbrance'))) {
+					errors.push(
+						`Generator category ${categoryName} still contains obsolete Encumbrance fields.`,
+					);
+				}
+			}
 			const races = generatorCatalog.getCategory('race')?.entries ?? [];
 			const commonRaceNames = ['Human', 'Elf', 'Dwarf', 'Orc', 'Goblin'];
 			const raceNames = new Set(races.map(entry => entry.fields.Name));
@@ -329,7 +337,7 @@ function compareLocalizedShape(english, french, file, propertyPath, errors) {
 	const property = propertyPath.at(-1);
 	if (
 		['weight', 'Generator', 'Type', 'Rarity', 'AR percentage',
-			'Constitution requirement', 'Encumbrance', 'FirstName', 'LastName']
+			'Constitution requirement', 'FirstName', 'LastName']
 			.includes(property)
 		&& english !== french
 	) {

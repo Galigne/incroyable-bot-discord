@@ -40,7 +40,7 @@ class Character {
 		character.inventory = copyStringList(data.inventory);
 		character.encumbrance = {
 			current: data.encumbrance?.current ?? 0,
-			max: data.encumbrance?.max ?? character.stats.constitution,
+			max: data.encumbrance?.max ?? 0,
 		};
 		return character;
 	}
@@ -82,7 +82,7 @@ class Character {
 		this.inventory = [];
 		this.encumbrance = {
 			current: 0,
-			max: this.stats.constitution,
+			max: 0,
 		};
 	}
 

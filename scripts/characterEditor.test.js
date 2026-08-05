@@ -138,7 +138,7 @@ test('name and numeric groups are prefilled and trim valid submissions', () => {
 			},
 			encumbrance: {
 				'encumbrance.current': '0',
-				'encumbrance.max': '10',
+				'encumbrance.max': '0',
 			},
 		},
 	);
@@ -616,6 +616,32 @@ test('one grouped application update creates one history entry and keeps save ke
 	assert.deepEqual(rawSave.resources.hp, { current: 80, max: 120 });
 	assert.equal(Object.hasOwn(rawSave, 'background'), false);
 	assert.equal(Object.hasOwn(rawSave, 'base-statistics'), false);
+});
+
+test('/set application updates keep encumbrance manually editable and persisted', async () => {
+	const characterKey = 'Editor.Encumbrance';
+	await createCharacter(characterKey, 'creator');
+	await updateEditableCharacter(
+		characterKey,
+		'encumbrance',
+		{
+			'encumbrance.current': '3',
+			'encumbrance.max': '8',
+		},
+		() => true,
+		{ actorId: 'creator', maxEntries: 3 },
+	);
+
+	assert.deepEqual((await getCharacter(characterKey)).encumbrance, { current: 3, max: 8 });
+	const rawSave = JSON.parse(
+		await fsPromises.readFile(getCharacterSavePath(characterKey), 'utf8'),
+	);
+	assert.deepEqual(rawSave.encumbrance, { current: 3, max: 8 });
+	const history = await readCharacterHistory(characterKey);
+	assert.deepEqual(
+		history.document.entries[0].character.encumbrance,
+		{ current: 0, max: 0 },
+	);
 });
 
 test('failed grouped application updates create neither mutation nor history', async () => {

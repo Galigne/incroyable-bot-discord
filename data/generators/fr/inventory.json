@@ -6,316 +6,276 @@
       "weight": 8,
       "fields": {
         "Name": "Potion de soins",
-        "Description": "Restaure 50 PV lorsqu'elle est consommée.",
-        "Encumbrance": 1
+        "Description": "Restaure 50 PV lorsqu'elle est consommée."
       }
     },
     {
       "weight": 8,
       "fields": {
         "Name": "Rouleau de corde",
-        "Description": "Dix mètres de corde solide pour grimper, attacher ou arrimer une charge.",
-        "Encumbrance": 1
+        "Description": "Dix mètres de corde solide pour grimper, attacher ou arrimer une charge."
       }
     },
     {
       "weight": 8,
       "fields": {
         "Name": "Lanterne et huile",
-        "Description": "Une lanterne à capuchon contenant assez d'huile pour plusieurs heures.",
-        "Encumbrance": 1
+        "Description": "Une lanterne à capuchon contenant assez d'huile pour plusieurs heures."
       }
     },
     {
       "weight": 8,
       "fields": {
         "Name": "Trois rations de voyage",
-        "Description": "Des provisions compactes suffisantes pour trois jours.",
-        "Encumbrance": 1
+        "Description": "Des provisions compactes suffisantes pour trois jours."
       }
     },
     {
       "weight": 7,
       "fields": {
         "Name": "Gourde",
-        "Description": "Une gourde en cuir remplie d'eau.",
-        "Encumbrance": 1
+        "Description": "Une gourde en cuir remplie d'eau."
       }
     },
     {
       "weight": 7,
       "fields": {
         "Name": "Nécessaire de couchage",
-        "Description": "Une couverture résistante aux intempéries et un couchage roulé.",
-        "Encumbrance": 1
+        "Description": "Une couverture résistante aux intempéries et un couchage roulé."
       }
     },
     {
       "weight": 7,
       "fields": {
         "Name": "Nécessaire à feu",
-        "Description": "Un silex, un briquet en acier et de l'amadou sec pour allumer un feu.",
-        "Encumbrance": 0
+        "Description": "Un silex, un briquet en acier et de l'amadou sec pour allumer un feu."
       }
     },
     {
       "weight": 6,
       "fields": {
         "Name": "Nécessaire de crochetage",
-        "Description": "De petits outils permettant de manipuler les serrures mécaniques ordinaires.",
-        "Encumbrance": 1
+        "Description": "De petits outils permettant de manipuler les serrures mécaniques ordinaires."
       }
     },
     {
       "weight": 6,
       "fields": {
         "Name": "Matériel d'escalade",
-        "Description": "Des pitons, un marteau, des sangles et quelques accessoires d'escalade simples.",
-        "Encumbrance": 2
+        "Description": "Des pitons, un marteau, des sangles et quelques accessoires d'escalade simples."
       }
     },
     {
       "weight": 6,
       "fields": {
         "Name": "Bandages",
-        "Description": "Du tissu propre et du matériel de base pour soigner les blessures.",
-        "Encumbrance": 1
+        "Description": "Du tissu propre et du matériel de base pour soigner les blessures."
       }
     },
     {
       "weight": 6,
       "fields": {
         "Name": "Craie et fusain",
-        "Description": "De quoi baliser un chemin, esquisser une carte ou prendre des notes.",
-        "Encumbrance": 0
+        "Description": "De quoi baliser un chemin, esquisser une carte ou prendre des notes."
       }
     },
     {
       "weight": 6,
       "fields": {
         "Name": "Petit miroir",
-        "Description": "Un miroir à main poli, utile pour envoyer des signaux et regarder au-delà des angles.",
-        "Encumbrance": 0
+        "Description": "Un miroir à main poli, utile pour envoyer des signaux et regarder au-delà des angles."
       }
     },
     {
       "weight": 5,
       "fields": {
         "Name": "Pied-de-biche",
-        "Description": "Un solide levier en fer pour forcer des portes, des caisses ou d'autres obstacles.",
-        "Encumbrance": 1
+        "Description": "Un solide levier en fer pour forcer des portes, des caisses ou d'autres obstacles."
       }
     },
     {
       "weight": 5,
       "fields": {
         "Name": "Grappin",
-        "Description": "Un crochet à quatre pointes conçu pour être utilisé avec une corde.",
-        "Encumbrance": 1
+        "Description": "Un crochet à quatre pointes conçu pour être utilisé avec une corde."
       }
     },
     {
       "weight": 5,
       "fields": {
         "Name": "Matériel de pêche",
-        "Description": "Du fil, des hameçons, des flotteurs et un filet compact.",
-        "Encumbrance": 1
+        "Description": "Du fil, des hameçons, des flotteurs et un filet compact."
       }
     },
     {
       "weight": 5,
       "fields": {
         "Name": "Nécessaire d'écriture",
-        "Description": "De l'encre, des plumes, du parchemin, de la cire à cacheter et un étui de protection.",
-        "Encumbrance": 1
+        "Description": "De l'encre, des plumes, du parchemin, de la cire à cacheter et un étui de protection."
       }
     },
     {
       "weight": 5,
       "fields": {
         "Name": "Trousse d'herboriste",
-        "Description": "De petits outils et récipients pour récolter des plantes utiles.",
-        "Encumbrance": 1
+        "Description": "De petits outils et récipients pour récolter des plantes utiles."
       }
     },
     {
       "weight": 5,
       "fields": {
         "Name": "Pelle",
-        "Description": "Un outil compact mais solide pour creuser.",
-        "Encumbrance": 2
+        "Description": "Un outil compact mais solide pour creuser."
       }
     },
     {
       "weight": 4,
       "fields": {
         "Name": "Antidote",
-        "Description": "Un traitement général qui accorde une nouvelle chance de résister à un poison ordinaire.",
-        "Encumbrance": 1
+        "Description": "Un traitement général qui accorde une nouvelle chance de résister à un poison ordinaire."
       }
     },
     {
       "weight": 4,
       "fields": {
         "Name": "Bombe fumigène",
-        "Description": "Crée un épais nuage de fumée lorsqu'elle est allumée.",
-        "Encumbrance": 1
+        "Description": "Crée un épais nuage de fumée lorsqu'elle est allumée."
       }
     },
     {
       "weight": 4,
       "fields": {
         "Name": "Piège à ours",
-        "Description": "Un lourd piège mécanique capable d'immobiliser une créature.",
-        "Encumbrance": 2
+        "Description": "Un lourd piège mécanique capable d'immobiliser une créature."
       }
     },
     {
       "weight": 4,
       "fields": {
         "Name": "Nécessaire de déguisement",
-        "Description": "Des produits cosmétiques, des teintures, de faux cheveux et quelques éléments de costume simples.",
-        "Encumbrance": 1
+        "Description": "Des produits cosmétiques, des teintures, de faux cheveux et quelques éléments de costume simples."
       }
     },
     {
       "weight": 4,
       "fields": {
         "Name": "Instrument de musique",
-        "Description": "Un instrument transportable choisi en fonction du personnage.",
-        "Encumbrance": 1
+        "Description": "Un instrument transportable choisi en fonction du personnage."
       }
     },
     {
       "weight": 4,
       "fields": {
         "Name": "Balance de marchand",
-        "Description": "Une balance pliante et des poids de référence pour vérifier les marchandises.",
-        "Encumbrance": 1
+        "Description": "Une balance pliante et des poids de référence pour vérifier les marchandises."
       }
     },
     {
       "weight": 3,
       "fields": {
         "Name": "Sac de chausse-trappes",
-        "Description": "Des pointes métalliques acérées permettant de ralentir des poursuivants ou de protéger un passage.",
-        "Encumbrance": 1
+        "Description": "Des pointes métalliques acérées permettant de ralentir des poursuivants ou de protéger un passage."
       }
     },
     {
       "weight": 3,
       "fields": {
         "Name": "Fiole de poison ordinaire",
-        "Description": "Une dose limitée de toxine, suffisante pour empoisonner une arme ou une boisson.",
-        "Encumbrance": 1
+        "Description": "Une dose limitée de toxine, suffisante pour empoisonner une arme ou une boisson."
       }
     },
     {
       "weight": 3,
       "fields": {
         "Name": "Longue-vue",
-        "Description": "Un tube optique compact permettant d'observer des détails éloignés.",
-        "Encumbrance": 1
+        "Description": "Un tube optique compact permettant d'observer des détails éloignés."
       }
     },
     {
       "weight": 3,
       "fields": {
         "Name": "Tente",
-        "Description": "Un petit abri adapté à un ou deux voyageurs.",
-        "Encumbrance": 2
+        "Description": "Un petit abri adapté à un ou deux voyageurs."
       }
     },
     {
       "weight": 3,
       "fields": {
         "Name": "Menottes",
-        "Description": "Une paire d'entraves en fer accompagnée d'une clé simple.",
-        "Encumbrance": 1
+        "Description": "Une paire d'entraves en fer accompagnée d'une clé simple."
       }
     },
     {
       "weight": 3,
       "fields": {
         "Name": "Symbole sacré",
-        "Description": "Un symbole associé à une foi, un serment, un ancêtre ou un idéal personnel.",
-        "Encumbrance": 0
+        "Description": "Un symbole associé à une foi, un serment, un ancêtre ou un idéal personnel."
       }
     },
     {
       "weight": 3,
       "fields": {
         "Name": "Carte locale",
-        "Description": "Une carte pratique mais imparfaite des environs.",
-        "Encumbrance": 0
+        "Description": "Une carte pratique mais imparfaite des environs."
       }
     },
     {
       "weight": 2,
       "fields": {
         "Name": "Potion de vision nocturne",
-        "Description": "Permet de voir clairement dans l'obscurité pendant une heure.",
-        "Encumbrance": 1
+        "Description": "Permet de voir clairement dans l'obscurité pendant une heure."
       }
     },
     {
       "weight": 2,
       "fields": {
         "Name": "Potion de respiration aquatique",
-        "Description": "Permet de respirer sous l'eau pendant trente minutes.",
-        "Encumbrance": 1
+        "Description": "Permet de respirer sous l'eau pendant trente minutes."
       }
     },
     {
       "weight": 2,
       "fields": {
         "Name": "Fiole d'acide",
-        "Description": "Un flacon soigneusement scellé dont le contenu peut endommager les matériaux ordinaires.",
-        "Encumbrance": 1
+        "Description": "Un flacon soigneusement scellé dont le contenu peut endommager les matériaux ordinaires."
       }
     },
     {
       "weight": 2,
       "fields": {
         "Name": "Chaîne argentée",
-        "Description": "Une courte chaîne utile contre les créatures vulnérables à l'argent.",
-        "Encumbrance": 1
+        "Description": "Une courte chaîne utile contre les créatures vulnérables à l'argent."
       }
     },
     {
       "weight": 2,
       "fields": {
         "Name": "Craie runique",
-        "Description": "Une craie rare qui rend les inscriptions magiques plus faciles à voir et à étudier.",
-        "Encumbrance": 0
+        "Description": "Une craie rare qui rend les inscriptions magiques plus faciles à voir et à étudier."
       }
     },
     {
       "fields": {
         "Name": "Boussole murmurante",
-        "Description": "Une étrange boussole qui se plaint à voix basse chaque fois qu'elle indique le nord.",
-        "Encumbrance": 0
+        "Description": "Une étrange boussole qui se plaint à voix basse chaque fois qu'elle indique le nord."
       }
     },
     {
       "fields": {
         "Name": "Bougie éternelle",
-        "Description": "Une bougie dont la petite flamme ne consume jamais la cire.",
-        "Encumbrance": 0
+        "Description": "Une bougie dont la petite flamme ne consume jamais la cire."
       }
     },
     {
       "fields": {
         "Name": "Fragment de rune non identifié",
-        "Description": "Un morceau de matière magique portant une partie d'une inscription inconnue.",
-        "Encumbrance": 1
+        "Description": "Un morceau de matière magique portant une partie d'une inscription inconnue."
       }
     },
     {
       "fields": {
         "Name": "Mystérieuse lettre scellée",
-        "Description": "Une lettre adressée à une personne que le personnage n'a jamais rencontrée.",
-        "Encumbrance": 0
+        "Description": "Une lettre adressée à une personne que le personnage n'a jamais rencontrée."
       }
     }
   ]

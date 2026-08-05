@@ -63,6 +63,10 @@ module.exports = function createCharacterChecks(context) {
 				goals: '',
 			});
 			setEditableFieldValue(original, 'equipment', '- Longsword');
+			setEditableFieldValue(original, 'encumbrance', {
+				'encumbrance.current': '2',
+				'encumbrance.max': '7',
+			});
 			setEditableFieldValue(original, 'personality', {
 				'personality.description': '',
 				'personality.traits': '- Brave\n- Curious',
@@ -163,6 +167,8 @@ module.exports = function createCharacterChecks(context) {
 					!== 'Athlete — +1 to sustained movement.\n'
 						+ 'Cold Immunity — Ordinary cold cannot freeze the character.'
 				|| character.equipment[0] !== 'Longsword'
+				|| character.encumbrance.current !== 2
+				|| character.encumbrance.max !== 7
 				|| character.resources.hp.current !== 50
 				|| character.resources.ap.current !== character.resources.ap.max
 				|| character.resources.md.current !== character.resources.md.max
@@ -193,6 +199,7 @@ module.exports = function createCharacterChecks(context) {
 			}
 			for (const field of [
 				'appearance',
+				'encumbrance',
 				'race',
 				'personality',
 				'statistics',
@@ -206,6 +213,9 @@ module.exports = function createCharacterChecks(context) {
 				}
 				if (field === 'talents' && !fieldEmbed.description.includes('2. Cold Immunity —')) {
 					errors.push('The detailed talent view does not render talents as a list.');
+				}
+				if (field === 'encumbrance' && fieldEmbed.description !== 'Encumbrance: **2 / 7**') {
+					errors.push('The detailed encumbrance view is not formatted correctly.');
 				}
 				if (
 					field === 'statistics'
@@ -224,8 +234,10 @@ module.exports = function createCharacterChecks(context) {
 			if (
 				legacyCharacter.rules[0]?.level !== 1
 				|| legacyCharacter.talents.length !== 2
+				|| legacyCharacter.encumbrance.current !== 0
+				|| legacyCharacter.encumbrance.max !== 0
 			) {
-				errors.push('Legacy RULEs and multiline talents should remain compatible.');
+				errors.push('Legacy character defaults should remain compatible.');
 			}
 			character.resources.ap.current = 2;
 			character.resources.ap.max = 4;
@@ -339,9 +351,10 @@ module.exports = function createCharacterChecks(context) {
 				|| character.equipment.length > 3
 				|| character.inventory.length !== 4
 				|| !character.inventory.at(-1).endsWith(' gold')
-				|| character.encumbrance.max !== character.stats.constitution
+				|| character.encumbrance.current !== 0
+				|| character.encumbrance.max !== 0
 			) {
-				errors.push('Generated armor, equipment, inventory, AR, or encumbrance is incorrect.');
+				errors.push('Generated armor, equipment, inventory, AR, or defaults are incorrect.');
 			}
 			createCharacterSummaryEmbed(character).toJSON();
 

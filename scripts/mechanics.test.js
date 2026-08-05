@@ -227,6 +227,53 @@ test('blank characters and hydrated saves use talent arrays', () => {
 	]);
 });
 
+test('character encumbrance defaults each absent value and preserves explicit values', () => {
+	const blankCharacter = new Character('Blank.Encumbrance', 'creator');
+	assert.deepEqual(blankCharacter.encumbrance, { current: 0, max: 0 });
+
+	const missingEncumbrance = Character.fromSave({
+		creatorId: 'creator',
+		key: 'Missing.Encumbrance',
+		stats: { constitution: 20 },
+	});
+	assert.deepEqual(missingEncumbrance.encumbrance, { current: 0, max: 0 });
+
+	const missingMaximum = Character.fromSave({
+		creatorId: 'creator',
+		encumbrance: { current: 3 },
+		key: 'Missing.Maximum.Encumbrance',
+		stats: { constitution: 20 },
+	});
+	assert.deepEqual(missingMaximum.encumbrance, { current: 3, max: 0 });
+
+	const missingCurrent = Character.fromSave({
+		creatorId: 'creator',
+		encumbrance: { max: 8 },
+		key: 'Missing.Current.Encumbrance',
+		stats: { constitution: 20 },
+	});
+	assert.deepEqual(missingCurrent.encumbrance, { current: 0, max: 8 });
+
+	const explicitEncumbrance = Character.fromSave({
+		creatorId: 'creator',
+		encumbrance: { current: 4, max: 11 },
+		key: 'Explicit.Encumbrance',
+		stats: { constitution: 20 },
+	});
+	assert.deepEqual(explicitEncumbrance.encumbrance, { current: 4, max: 11 });
+});
+
+test('random character generation leaves manual encumbrance unchanged', () => {
+	const blankCharacter = new Character('Generated.Blank.Encumbrance', 'creator');
+	populateRandomCharacter(blankCharacter, { level: 1, random: () => 0 });
+	assert.deepEqual(blankCharacter.encumbrance, { current: 0, max: 0 });
+
+	const managedCharacter = new Character('Generated.Manual.Encumbrance', 'creator');
+	managedCharacter.encumbrance = { current: 4, max: 9 };
+	populateRandomCharacter(managedCharacter, { level: 1, random: () => 0 });
+	assert.deepEqual(managedCharacter.encumbrance, { current: 4, max: 9 });
+});
+
 test('seeded random character generation remains equivalent', () => {
 	let seed = 12_345;
 	const random = () => {
@@ -274,7 +321,7 @@ test('seeded random character generation remains equivalent', () => {
 			'Manacles — A pair of iron restraints with a simple key.',
 			'175 gold',
 		],
-		encumbrance: { current: 5, max: 10 },
+		encumbrance: { current: 0, max: 0 },
 		statusEffects: [
 			'Fatigued — prolonged effort and travel are more difficult until resting.',
 		],
@@ -374,6 +421,6 @@ function createCharacterFixture() {
 		statusEffects: [],
 		equipment: [],
 		inventory: [],
-		encumbrance: { current: 0, max: 10 },
+		encumbrance: { current: 0, max: 0 },
 	};
 }

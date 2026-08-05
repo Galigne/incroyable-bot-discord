@@ -110,7 +110,9 @@ inputs.
 
 HP, AR, AP, MD, and encumbrance each use separate required Current and Maximum
 numeric inputs. Every grouped form is prefilled, validated completely, and saved
-as one atomic update.
+as one atomic update. Encumbrance is a manually managed resource that defaults to
+`0 / 0`; it is not derived from Constitution, equipment, inventory, or any other
+character property.
 
 Statistics use one prefilled `statName: statValue` line for each of
 `constitution`, `strength`, `dexterity`, `intelligence`, `speed`, `perception`,
@@ -208,7 +210,8 @@ Example workflows:
 Random characters use the rulebook's stat budget and nonlinear stat costs. Their
 RULE Points come from Intelligence thresholds and are spent on at most two RULEs,
 prioritizing the first RULE's level; HP, AP, MD, armor eligibility, AR,
-talent count, equipment, inventory, gold, and encumbrance are derived automatically.
+talent count, equipment, inventory, and gold are derived automatically. Encumbrance
+remains manually managed, so generated characters keep the normal `0 / 0` default.
 Generated talents are stored as unique localized list entries: levels 1–2 receive
 one talent, levels 3–5 receive two, levels 6–8 receive three, and levels 9–10
 receive four.
