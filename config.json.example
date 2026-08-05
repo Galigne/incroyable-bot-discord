@@ -2,8 +2,8 @@
   "locale": "Required. Bot language: use exactly \"en\" for English or \"fr\" for French.",
   "botUserId": "Required. The Discord user ID of this bot application.",
   "roles": {
-    "dm": "Required. The Discord role ID for game masters who may generate content and manage any character.",
-    "moderator": "Required. The Discord role ID for moderators who may use say, purge, and reload."
+    "dm": "Optional. Discord role ID granting game-master permissions. Remove this field to make those actions server-owner-only; remove the entire roles object when neither role is configured.",
+    "moderator": "Optional. Discord role ID granting moderator permissions. Remove this field to make those actions server-owner-only; remove the entire roles object when neither role is configured."
   },
   "channels": {
     "teamVoice": "Optional. The Discord voice channel ID that triggers local audio playback. Remove this field, or the entire channels object, to disable the trigger."

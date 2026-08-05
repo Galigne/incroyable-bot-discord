@@ -101,7 +101,7 @@ test('configuration reload validates before replacing active state', () => {
 
 	const previous = runtimeState.getConfig();
 	const invalid = createConfig();
-	delete invalid.roles.moderator;
+	invalid.roles.moderator = '';
 	writeJson(configPath, invalid);
 	assert.throws(
 		() => reloadConfig(runtimeState, configPath),

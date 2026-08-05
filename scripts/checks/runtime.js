@@ -136,6 +136,21 @@ module.exports = function createRuntimeChecks(context) {
 			...createConfig('fr'),
 			channels: undefined,
 		}, 'an omitted channels object');
+		expectValidConfiguration({
+			...createConfig('en'),
+			roles: { dm: 'dm-role' },
+		}, 'only a DM role');
+		expectValidConfiguration({
+			...createConfig('en'),
+			roles: { moderator: 'moderator-role' },
+		}, 'only a moderator role');
+		expectValidConfiguration({
+			...createConfig('en'),
+			roles: {},
+		}, 'an empty roles object');
+		const withoutRoles = createConfig('en');
+		delete withoutRoles.roles;
+		expectValidConfiguration(withoutRoles, 'an omitted roles object');
 
 		expectInvalidConfiguration(createConfig('de'), 'an unsupported locale');
 		const missingLocale = createConfig('en');
@@ -146,10 +161,20 @@ module.exports = function createRuntimeChecks(context) {
 		expectInvalidConfiguration(missingBotUserId, 'a missing bot user ID');
 		const missingDmRole = createConfig('en');
 		delete missingDmRole.roles.dm;
-		expectInvalidConfiguration(missingDmRole, 'a missing DM role');
+		expectValidConfiguration(missingDmRole, 'a missing DM role');
 		const missingModeratorRole = createConfig('en');
 		delete missingModeratorRole.roles.moderator;
-		expectInvalidConfiguration(missingModeratorRole, 'a missing moderator role');
+		expectValidConfiguration(missingModeratorRole, 'a missing moderator role');
+		for (const roleKey of ['dm', 'moderator']) {
+			for (const invalidValue of ['', '   ', null, 42]) {
+				const invalidRoleConfig = createConfig('en');
+				invalidRoleConfig.roles[roleKey] = invalidValue;
+				expectInvalidConfiguration(
+					invalidRoleConfig,
+					`an invalid configured ${roleKey} role`,
+				);
+			}
+		}
 		for (const oldRole of [
 			['new', 'Member'].join(''),
 			'member',
@@ -175,7 +200,7 @@ module.exports = function createRuntimeChecks(context) {
 				|| typeof guide.roles?.dm !== 'string'
 				|| typeof guide.roles?.moderator !== 'string'
 			) {
-				errors.push('config.json.example should explain every required configuration field.');
+				errors.push('config.json.example should explain every supported configuration field.');
 			}
 		}
 

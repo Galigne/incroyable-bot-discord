@@ -7,6 +7,10 @@
   "authorization": {
     "missingRole": "You do not have permission to use this command.",
     "ownerOnly": "Only the server owner may use this command.",
+    "unconfiguredRole": {
+      "dm": "No DM role is configured, so only the server owner may use this command.",
+      "moderator": "No moderator role is configured, so only the server owner may use this command."
+    },
     "wrongChannel": "This command cannot be used in this channel.",
     "guildOnly": "This permission can only be checked inside a Discord server.",
     "invalidConfiguration": "The bot configuration is missing or invalid at `{{field}}`. Ask the server administrator to fix config.json.",
@@ -37,8 +41,8 @@
       },
       "permissions": {
         "everyone": "Everyone with normal bot access",
-        "dm": "DM role or server owner",
-        "moderator": "Moderator role or server owner",
+        "dm": "Configured DM role or server owner; owner-only when the role is omitted",
+        "moderator": "Configured moderator role or server owner; owner-only when the role is omitted",
         "owner": "Server owner only"
       },
       "types": {
@@ -133,7 +137,7 @@
       "behavior": "Restores the selected character’s current AP and MD to their respective maximum values. Only the character creator, a DM, or the server owner may use it."
     },
     "gen": {
-      "description": "Generate GM inspiration from a chosen category (DM only)",
+      "description": "Generate GM inspiration (configured DM role or server owner)",
       "schemaDescription": "Generate GM inspiration from a chosen category",
       "categoryOption": "Generator category",
       "unknownCategory": "Unknown generator category: **{{category}}**. Use `/help command:gen` for command details.",
@@ -141,7 +145,7 @@
       "behavior": "Selects one weighted random entry from the chosen localized generator category. Every JSON generator file becomes available after the bot restarts. The complete localized category list appears above; type part of a category name or value to filter autocomplete."
     },
     "genChar": {
-      "description": "Generate and save a complete random character (DM only)",
+      "description": "Generate a random character (configured DM role or server owner)",
       "schemaDescription": "Generate and save a complete random character",
       "keyOption": "Unique save key, make it short and remember it.",
       "levelOption": "Character level; omitted means a random level from 1 to 10",

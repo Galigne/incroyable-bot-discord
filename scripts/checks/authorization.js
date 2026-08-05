@@ -118,8 +118,11 @@ module.exports = function createAuthorizationChecks(context) {
 			dm,
 			missingDmConfig,
 		);
-		if (invalidAuthorization.allowed || !invalidAuthorization.message.includes('roles.dm')) {
-			errors.push('Missing permission configuration should return a clear localized error.');
+		if (invalidAuthorization.allowed || !invalidAuthorization.message) {
+			errors.push('An omitted DM role should deny non-owner users cleanly.');
+		}
+		if (!authorizeCommand(commands.get('gen'), owner, missingDmConfig).allowed) {
+			errors.push('An omitted DM role must preserve the server-owner bypass.');
 		}
 	}
 

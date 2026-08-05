@@ -407,9 +407,11 @@ Permissions:
 - Anyone with normal bot access can view character sheets.
 - The creator may set, delete, heal, damage, and end turns for their character.
 - The creator may undo retained changes for their active character.
-- The configured DM role may perform those actions on every character and may use
-  `/gen` and `/gen-char`.
-- The configured moderator role may use `/say`, `/purge`, and `/reload`.
+- When configured, the DM role may perform those actions on every character and may
+  use `/gen` and `/gen-char`; otherwise those additional permissions are
+  server-owner-only.
+- When configured, the moderator role may use `/say`, `/purge`, and `/reload`;
+  otherwise those commands are server-owner-only.
 - The actual Discord server owner from `guild.ownerId` bypasses every role check
   and may use every command and manage every character.
 
@@ -424,7 +426,10 @@ second client, or clear the complete `require.cache`. Source-code changes to sta
 routing, handlers, metadata, mechanics, or models still require manually restarting
 `node index.js`.
 
-`config.json` requires `locale`, `botUserId`, `roles.dm`, and `roles.moderator`.
+`config.json` requires `locale` and `botUserId`. The complete `roles` object,
+`roles.dm`, and `roles.moderator` are independently optional. A configured role
+grants its corresponding permissions to members with that Discord role; when it is
+omitted, those permissions are restricted to the actual Discord server owner.
 `channels.teamVoice` is optional. `characterHistory.maxEntries` is optional,
 defaults to `3`, and must be a positive integer. History operations must obtain the
 active configuration value supplied to the command so `/reload` changes later

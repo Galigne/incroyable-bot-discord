@@ -61,9 +61,13 @@ Set the required runtime language in `config.json`. The complete configuration i
 }
 ```
 
-`locale`, `botUserId`, `roles.dm`, and `roles.moderator` are required. The only
-supported locale values are `en` and `fr`; invalid or missing values stop startup
-with a clear error. `channels.teamVoice` and the `channels` object are optional.
+`locale` and `botUserId` are required. The only supported locale values are `en`
+and `fr`; invalid or missing values stop startup with a clear error. The `roles`
+object, `roles.dm`, and `roles.moderator` are independently optional. A configured
+role grants its corresponding permissions to members with that Discord role. If a
+role is omitted, those actions are restricted to the actual server owner. Present
+role values must be non-empty Discord role ID strings. `channels.teamVoice` and the
+`channels` object are optional.
 `characterHistory.maxEntries` is also optional, defaults to `3`, and must be a
 positive whole number when present. Changing it and running `/reload` changes the
 limit used by subsequent history operations without restarting the process.
@@ -81,8 +85,8 @@ Never commit `.env` or a Discord token. Reset any token that has previously been
 - `/purge amount:<2-100>`
 - `/reload` — reload supported runtime state and reconnect the existing Discord client
 - `/rules`
-- `/gen category:<category>` — generate a random prompt (DM only)
-- `/gen-char character-key:<new key> [level] [background]` — generate and save a complete character (DM only)
+- `/gen category:<category>` — generate a random prompt (configured DM role or server owner)
+- `/gen-char character-key:<new key> [level] [background]` — generate and save a complete character (configured DM role or server owner)
 - `/roll expression:<dice expression>` — roll expressions such as `2d6+3`
 - `/add character-key:<new key>` — create a blank character sheet with a stable key
 - `/get character-key:<key> [field]` — display the summary or one complete field
@@ -141,12 +145,13 @@ multiple groups, parentheses, and other arithmetic are not supported. Exact
 return the textual roll breakdown.
 
 Character creators can edit, delete, heal, damage, end turns, and undo retained
-changes for their own sheets. Users with the configured DM role can perform those
-actions on every
-character and may use `/gen` and `/gen-char`. Users with the configured
-moderator role may use `/say`, `/purge`, and `/reload`. The actual Discord server
-owner, identified by Discord rather than configuration, may use every command and
-manage every character.
+changes for their own sheets. When configured, the DM role lets its members perform
+those actions on every character and use `/gen` and `/gen-char`; without that role,
+those additional DM permissions are server-owner-only. When configured, the
+moderator role lets its members use `/say`, `/purge`, and `/reload`; without it,
+those moderation commands are server-owner-only. The actual Discord server owner,
+identified by Discord rather than configuration, may use every command and manage
+every character.
 
 `/reload` acknowledges privately before disconnecting, then reloads and validates
 `config.json` and both localization catalogs, clears localized generator caches,

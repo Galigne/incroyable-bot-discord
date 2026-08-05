@@ -64,11 +64,17 @@ function authorizeCommand(command, interaction, config) {
 		throw new Error(`Unknown command permission: ${requiredPermission}`);
 	}
 	if (!permissionCheck(interaction, config)) {
+		const configuredRole = requiredPermission === 'dm'
+			|| requiredPermission === 'moderator'
+			? config.roles?.[requiredPermission]
+			: null;
 		return {
 			allowed: false,
 			message: requiredPermission === 'owner'
 				? t(locale, 'authorization.ownerOnly')
-				: t(locale, 'authorization.missingRole'),
+				: configuredRole
+					? t(locale, 'authorization.missingRole')
+					: t(locale, `authorization.unconfiguredRole.${requiredPermission}`),
 		};
 	}
 	return { allowed: true };
@@ -87,10 +93,13 @@ function hasPrivilegedPermission(interaction, config, roleKey) {
 	catch {
 		return false;
 	}
-	return hasRole(interaction.member?.roles, config.roles[roleKey]);
+	return hasRole(interaction.member?.roles, config.roles?.[roleKey]);
 }
 
 function hasRole(memberRoles, roleId) {
+	if (!roleId) {
+		return false;
+	}
 	if (memberRoles?.cache?.has) {
 		return memberRoles.cache.has(roleId);
 	}

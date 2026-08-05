@@ -7,6 +7,10 @@
   "authorization": {
     "missingRole": "Permission insuffisante pour utiliser cette commande.",
     "ownerOnly": "Seul le propriétaire du serveur peut utiliser cette commande.",
+    "unconfiguredRole": {
+      "dm": "Aucun rôle MJ n’est configuré ; seul le propriétaire du serveur peut donc utiliser cette commande.",
+      "moderator": "Aucun rôle de modération n’est configuré ; seul le propriétaire du serveur peut donc utiliser cette commande."
+    },
     "guildOnly": "Cette permission ne peut être vérifiée que dans un serveur Discord.",
     "invalidConfiguration": "La configuration du bot est absente ou invalide au champ `{{field}}`. Demandez à l’administrateur du serveur de corriger config.json.",
     "obsoleteConfiguration": "Le champ de configuration obsolète `{{field}}` doit être supprimé de config.json.",
@@ -37,8 +41,8 @@
       },
       "permissions": {
         "everyone": "Toute personne ayant normalement accès au bot",
-        "dm": "Rôle MJ ou propriétaire du serveur",
-        "moderator": "Rôle de modération ou propriétaire du serveur",
+        "dm": "Rôle MJ configuré ou propriétaire du serveur ; propriétaire uniquement si le rôle est omis",
+        "moderator": "Rôle de modération configuré ou propriétaire du serveur ; propriétaire uniquement si le rôle est omis",
         "owner": "Propriétaire du serveur uniquement"
       },
       "types": {
@@ -133,7 +137,7 @@
       "behavior": "Rétablit les PA et la DD actuels du personnage à leurs valeurs maximales respectives. Seuls le créateur, un MJ ou le propriétaire du serveur peuvent l’utiliser."
     },
     "gen": {
-      "description": "Générer une inspiration pour le MJ dans la catégorie choisie (MJ uniquement)",
+      "description": "Générer une inspiration (rôle MJ configuré ou propriétaire du serveur)",
       "schemaDescription": "Générer une inspiration pour le MJ dans la catégorie choisie",
       "categoryOption": "Catégorie de génération",
       "unknownCategory": "Catégorie de génération inconnue : **{{category}}**. Utilisez `/help command:gen` pour consulter les détails.",
@@ -141,7 +145,7 @@
       "behavior": "Sélectionne une entrée aléatoire pondérée dans la catégorie de génération localisée choisie. Chaque fichier JSON de génération devient disponible après le redémarrage du bot. La liste localisée complète des catégories figure ci-dessus ; saisissez une partie du nom ou de la valeur pour filtrer l’autocomplétion."
     },
     "genChar": {
-      "description": "Générer et sauvegarder un personnage aléatoire complet (MJ uniquement)",
+      "description": "Générer un personnage (rôle MJ configuré ou propriétaire du serveur)",
       "schemaDescription": "Générer et sauvegarder un personnage aléatoire complet",
       "keyOption": "Clé de sauvegarde unique, courte et facile à retenir",
       "levelOption": "Niveau du personnage ; tirage aléatoire de 1 à 10 si omis",

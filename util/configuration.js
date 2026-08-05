@@ -28,15 +28,19 @@ function validateConfig(config) {
 		throw new ConfigurationError('locale', 'unsupported');
 	}
 	requireNonEmptyString(config, 'botUserId');
-	if (!config.roles || typeof config.roles !== 'object' || Array.isArray(config.roles)) {
-		throw new ConfigurationError('roles');
-	}
-	requireNonEmptyString(config.roles, 'dm', 'roles.dm');
-	requireNonEmptyString(config.roles, 'moderator', 'roles.moderator');
-
-	for (const role of Object.keys(config.roles)) {
-		if (!ROLE_KEYS.has(role)) {
-			throw new ConfigurationError(`roles.${role}`, 'obsolete');
+	if (config.roles !== undefined) {
+		if (
+			!config.roles
+			|| typeof config.roles !== 'object'
+			|| Array.isArray(config.roles)
+		) {
+			throw new ConfigurationError('roles', 'invalid');
+		}
+		for (const role of Object.keys(config.roles)) {
+			if (!ROLE_KEYS.has(role)) {
+				throw new ConfigurationError(`roles.${role}`, 'obsolete');
+			}
+			requireNonEmptyString(config.roles, role, `roles.${role}`);
 		}
 	}
 
