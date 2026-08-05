@@ -21,7 +21,7 @@ const COMMAND_METADATA = [
 			detailsKey: 'commands.help.behavior',
 		},
 		guildOnly: true,
-		handler: './help',
+		handler: './handlers/help',
 	},
 	{
 		id: 'say',
@@ -45,7 +45,7 @@ const COMMAND_METADATA = [
 			detailsKey: 'commands.say.behavior',
 		},
 		guildOnly: true,
-		handler: './say',
+		handler: './handlers/say',
 	},
 	{
 		id: 'purge',
@@ -74,7 +74,7 @@ const COMMAND_METADATA = [
 			detailsKey: 'commands.purge.behavior',
 		},
 		guildOnly: true,
-		handler: './purge',
+		handler: './handlers/purge',
 	},
 	{
 		id: 'reload',
@@ -90,7 +90,7 @@ const COMMAND_METADATA = [
 			detailsKey: 'commands.reload.behavior',
 		},
 		guildOnly: true,
-		handler: './reload',
+		handler: './handlers/reload',
 	},
 	{
 		id: 'gen',
@@ -118,7 +118,7 @@ const COMMAND_METADATA = [
 			detailsKey: 'rpg.gen.behavior',
 		},
 		guildOnly: true,
-		handler: './rpg/subcommands/gen',
+		handler: './handlers/gen',
 	},
 	{
 		id: 'gen-char',
@@ -165,7 +165,7 @@ const COMMAND_METADATA = [
 			detailsKey: 'rpg.genChar.behavior',
 		},
 		guildOnly: true,
-		handler: './rpg/subcommands/genchar',
+		handler: './handlers/genChar',
 	},
 	{
 		id: 'roll',
@@ -207,7 +207,7 @@ const COMMAND_METADATA = [
 			detailsKey: 'rpg.roll.behavior',
 		},
 		guildOnly: true,
-		handler: './rpg/subcommands/roll',
+		handler: './handlers/roll',
 	},
 	{
 		id: 'add',
@@ -232,7 +232,7 @@ const COMMAND_METADATA = [
 			detailsKey: 'rpg.add.behavior',
 		},
 		guildOnly: true,
-		handler: './rpg/subcommands/add',
+		handler: './handlers/add',
 	},
 	{
 		id: 'get',
@@ -268,7 +268,7 @@ const COMMAND_METADATA = [
 			detailsKey: 'rpg.get.behavior',
 		},
 		guildOnly: true,
-		handler: './rpg/subcommands/get',
+		handler: './handlers/get',
 	},
 	{
 		id: 'set',
@@ -302,7 +302,7 @@ const COMMAND_METADATA = [
 			detailsKey: 'rpg.set.behavior',
 		},
 		guildOnly: true,
-		handler: './rpg/subcommands/set',
+		handler: './handlers/set',
 	},
 	{
 		id: 'heal',
@@ -354,7 +354,7 @@ const COMMAND_METADATA = [
 			detailsKey: 'rpg.heal.behavior',
 		},
 		guildOnly: true,
-		handler: './rpg/subcommands/heal',
+		handler: './handlers/heal',
 	},
 	{
 		id: 'damage',
@@ -400,7 +400,7 @@ const COMMAND_METADATA = [
 			detailsKey: 'rpg.damage.behavior',
 		},
 		guildOnly: true,
-		handler: './rpg/subcommands/damage',
+		handler: './handlers/damage',
 	},
 	{
 		id: 'end-turn',
@@ -424,7 +424,7 @@ const COMMAND_METADATA = [
 			detailsKey: 'rpg.endTurn.behavior',
 		},
 		guildOnly: true,
-		handler: './rpg/subcommands/endturn',
+		handler: './handlers/endTurn',
 	},
 	{
 		id: 'delete',
@@ -448,7 +448,7 @@ const COMMAND_METADATA = [
 			detailsKey: 'rpg.delete.behavior',
 		},
 		guildOnly: true,
-		handler: './rpg/subcommands/delete',
+		handler: './handlers/delete',
 	},
 	{
 		id: 'undo',
@@ -472,7 +472,7 @@ const COMMAND_METADATA = [
 			detailsKey: 'rpg.undo.behavior',
 		},
 		guildOnly: true,
-		handler: './rpg/subcommands/undo',
+		handler: './handlers/undo',
 	},
 	{
 		id: 'rules',
@@ -488,7 +488,7 @@ const COMMAND_METADATA = [
 			detailsKey: 'rpg.rules.behavior',
 		},
 		guildOnly: true,
-		handler: './rpg/subcommands/rules',
+		handler: './handlers/rules',
 	},
 ];
 

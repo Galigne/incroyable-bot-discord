@@ -1,11 +1,11 @@
 const {
 	createCharacter,
-} = require('../../../services/characterApplicationService');
+} = require('../../services/characterApplicationService');
 const {
 	createCharacterAddedResponse,
-} = require('../../../util/characterCommandResponses');
-const { replyToCharacterError } = require('../../../util/characterCommandErrors');
-const { getLocale } = require('../../../util/i18n');
+} = require('../../util/characterCommandResponses');
+const { replyToCharacterError } = require('../../util/characterCommandErrors');
+const { getLocale } = require('../../util/i18n');
 
 module.exports = {
 	async execute({ config, interaction }) {

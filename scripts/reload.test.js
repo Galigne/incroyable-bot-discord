@@ -12,7 +12,7 @@ const { MessageFlags } = require('discord.js');
 
 const { reconnectClient } = require('../adapters/discordClientLifecycle');
 const { createLocalAudioManager } = require('../adapters/localAudioPlayer');
-const reloadCommand = require('../commands/reload');
+const reloadCommand = require('../commands/handlers/reload');
 const commandRegistry = require('../commands/registry');
 const { COMMAND_METADATA } = require('../commands/metadata');
 const {
@@ -50,7 +50,7 @@ test('/reload replaces /restart metadata, localization, and routing', () => {
 
 	const metadata = commandRegistry.getCommand('reload');
 	assert.equal(metadata.permission, 'moderator');
-	assert.equal(metadata.handler, './reload');
+	assert.equal(metadata.handler, './handlers/reload');
 	assert.equal(commandRegistry.getRuntimeCommands().has('reload'), true);
 	for (const locale of ['en', 'fr']) {
 		assert.equal(Object.hasOwn(translations[locale].commands, 'restart'), false);

@@ -99,7 +99,7 @@ module.exports = function createLocalizationChecks(context) {
 			errors.push('Character embeds do not use the configured locale.');
 		}
 
-		const { createFieldModal } = require('../../commands/rpg/interactions');
+		const { createFieldModal } = require('../../commands/character/interactions');
 		const frenchModal = createFieldModal(
 			'test',
 			'statistics',

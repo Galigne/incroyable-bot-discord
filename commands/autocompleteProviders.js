@@ -16,7 +16,7 @@ const { t } = require('../util/i18n');
 const {
 	getCharacterChoices,
 	getUndoableCharacterChoices,
-} = require('./rpg/autocomplete');
+} = require('./character/autocomplete');
 
 async function getAutocompleteChoices(metadata, option, context) {
 	const provider = AUTOCOMPLETE_PROVIDERS[option.autocomplete.provider];

@@ -8,8 +8,8 @@ module.exports = function createInteractionChecks(context) {
 	async function checkInteractiveRpgUx() {
 		const suffix = `${process.pid}_${Date.now()}`;
 		const characterKey = `ux.${suffix}`;
-		const { handleRpgInteraction, openCharacterEditor } = require(
-			'../../commands/rpg/interactions',
+		const { handleCharacterInteraction, openCharacterEditor } = require(
+			'../../commands/character/interactions',
 		);
 		const user = { id: 'ux-creator' };
 		const member = {
@@ -55,7 +55,7 @@ module.exports = function createInteractionChecks(context) {
 			}
 
 			let submitPayload;
-			await handleRpgInteraction({
+			await handleCharacterInteraction({
 				customId: modalPayload.custom_id,
 				user,
 				member,
@@ -86,7 +86,7 @@ module.exports = function createInteractionChecks(context) {
 				character.status.hp = { current: 10, max: 101 };
 				character.status.ar = { current: 5, max: 33 };
 			});
-			const heal = require('../../commands/rpg/subcommands/heal');
+			const heal = require('../../commands/handlers/heal');
 			let healPayload;
 			await heal.execute({
 				config: englishConfig,

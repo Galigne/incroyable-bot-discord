@@ -1,6 +1,6 @@
 const { MessageFlags } = require('discord.js');
-const { t } = require('../util/i18n');
-const { createReloadSummary } = require('../util/reloadResponses');
+const { t } = require('../../util/i18n');
+const { createReloadSummary } = require('../../util/reloadResponses');
 
 module.exports = {
 	async execute({ interaction, locale, runtimeReloader }) {

@@ -1,4 +1,4 @@
-const { openCharacterEditor } = require('../interactions');
+const { openCharacterEditor } = require('../character/interactions');
 
 module.exports = {
 	async execute({ config, interaction }) {

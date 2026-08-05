@@ -13,8 +13,8 @@ process.env.INCREDIBLE_BOT_SAVE_DIRECTORY = testSaveDirectory;
 const commandRegistry = require('../commands/registry');
 const {
 	createDeletionModal,
-	handleRpgInteraction,
-} = require('../commands/rpg/interactions');
+	handleCharacterInteraction,
+} = require('../commands/character/interactions');
 const {
 	deleteCharacter,
 	undoCharacter,
@@ -377,7 +377,7 @@ test('filesystem deletion failures return no partial success and preserve both f
 
 test('/delete metadata, routing, help, and locale catalogs describe permanent deletion', () => {
 	const metadata = commandRegistry.getCommand('delete');
-	assert.equal(metadata.handler, './rpg/subcommands/delete');
+	assert.equal(metadata.handler, './handlers/delete');
 	assert.equal(metadata.permission, 'everyone');
 	assert.equal(
 		commandRegistry.getAutocompleteMetadata('delete', 'character-key')
@@ -450,7 +450,7 @@ async function openDeleteModal(
 
 async function submitDeleteModal(customId, value, userId, roleIds = []) {
 	let reply;
-	const handled = await handleRpgInteraction({
+	const handled = await handleCharacterInteraction({
 		...createInteraction(userId, roleIds),
 		customId,
 		fields: {

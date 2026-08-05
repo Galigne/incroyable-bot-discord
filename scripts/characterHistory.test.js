@@ -47,9 +47,9 @@ const {
 	validateConfig,
 } = require('../util/configuration');
 const {
-	handleRpgInteraction,
+	handleCharacterInteraction,
 	openCharacterEditor,
-} = require('../commands/rpg/interactions');
+} = require('../commands/character/interactions');
 
 let keyCounter = 0;
 
@@ -203,7 +203,7 @@ test('/set creates history only after a successful modal submission', async () =
 	}, config, characterKey, 'name');
 
 	let response;
-	await handleRpgInteraction({
+	await handleCharacterInteraction({
 		customId: modal.custom_id,
 		fields: {
 			getTextInputValue: customId => (
@@ -674,7 +674,7 @@ test('undo response construction localizes action, timestamp, and actor', () => 
 test('/undo is registered, routed, permission-filtered, and documented centrally', async () => {
 	const metadata = commandRegistry.getCommand('undo');
 	assert.equal(metadata.permission, 'everyone');
-	assert.equal(metadata.handler, './rpg/subcommands/undo');
+	assert.equal(metadata.handler, './handlers/undo');
 	assert.equal(
 		commandRegistry.getAutocompleteMetadata('undo', 'character-key')
 			.autocomplete.provider,

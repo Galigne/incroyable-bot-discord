@@ -103,7 +103,7 @@ async function openCharacterDeletionConfirmation(
 	}
 }
 
-async function handleRpgInteraction(interaction, config) {
+async function handleCharacterInteraction(interaction, config) {
 	if (!interaction.isModalSubmit()) {
 		return false;
 	}
@@ -376,7 +376,7 @@ function isValueTooLarge(value) {
 module.exports = {
 	createDeletionModal,
 	createFieldModal,
-	handleRpgInteraction,
+	handleCharacterInteraction,
 	openCharacterDeletionConfirmation,
 	openCharacterEditor,
 };

@@ -7,7 +7,7 @@ const {
 } = require('./adapters/discordCommandRegistration');
 const Client = require('./client/Client');
 const commandRegistry = require('./commands/registry');
-const { handleRpgInteraction } = require('./commands/rpg/interactions');
+const { handleCharacterInteraction } = require('./commands/character/interactions');
 const initialConfig = require('./config.json');
 const { playLocalAudio } = require('./adapters/localAudioPlayer');
 const { createRuntimeReloader } = require('./runtime/runtimeReloader');
@@ -90,7 +90,7 @@ client.on(Events.InteractionCreate, async interaction => {
 
 	if (interaction.isModalSubmit()) {
 		try {
-			if (await handleRpgInteraction(interaction, config)) {
+			if (await handleCharacterInteraction(interaction, config)) {
 				return;
 			}
 		}

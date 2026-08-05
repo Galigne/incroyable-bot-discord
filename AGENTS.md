@@ -62,12 +62,14 @@ saves.
   filtering, Discord registration data, and runtime handler binding.
 - `commands/autocompleteProviders.js`: reusable autocomplete providers selected by
   option metadata.
-- `commands/`: behavior-only handlers for top-level slash commands.
-- `commands/rpg/subcommands/`: behavior-only handlers for top-level RPG commands,
-  retained in their existing feature directory.
-- `commands/rpg/editorFields.js`: modal presentation metadata derived from the
+- `commands/handlers/`: behavior-only handlers for every top-level slash command,
+  independent of its help category.
+- `commands/character/editorFields.js`: modal presentation metadata derived from the
   canonical field catalog.
-- `commands/rpg/interactions.js`: direct prefilled edit modal and modal submission.
+- `commands/character/interactions.js`: direct prefilled edit modal and modal
+  submission.
+- `commands/character/autocomplete.js`: character-specific autocomplete choice
+  presentation shared by the metadata-selected providers.
 - `models/Character.js`: Discord-independent character schema and save hydration.
 - `services/`: Discord-independent domain behavior and application workflows,
   including parsing, validation, calculations, persistence, and generation.
@@ -149,8 +151,9 @@ builder chain, permission declaration, usage string, or fixed autocomplete list.
 
 Handler modules export `execute` only. Schema and autocomplete behavior are provided
 by the registry; add a reusable provider to `commands/autocompleteProviders.js` when
-an option needs dynamic suggestions. There is intentionally no
-`commands/rpg/index.js`: every RPG command is registered and routed at the top level.
+an option needs dynamic suggestions. Help categories do not define handler folders:
+every command is registered and routed at the top level through
+`commands/handlers/`.
 
 Use the registry API instead of inspecting handler modules:
 

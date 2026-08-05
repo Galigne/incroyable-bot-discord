@@ -1,6 +1,6 @@
-const generatorCatalog = require('../../../services/generatorCatalog');
-const { createGeneratorResponse } = require('../../../util/generatorResponses');
-const { getLocale } = require('../../../util/i18n');
+const generatorCatalog = require('../../services/generatorCatalog');
+const { createGeneratorResponse } = require('../../util/generatorResponses');
+const { getLocale } = require('../../util/i18n');
 
 module.exports = {
 	async execute({ config, interaction }) {

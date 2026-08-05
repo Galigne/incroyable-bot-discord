@@ -1,5 +1,5 @@
-const { createDiceRollResponse } = require('../../../util/diceRollResponse');
-const { getLocale } = require('../../../util/i18n');
+const { createDiceRollResponse } = require('../../util/diceRollResponse');
+const { getLocale } = require('../../util/i18n');
 
 module.exports = {
 	async execute({ config, interaction }) {

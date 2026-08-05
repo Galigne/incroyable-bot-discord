@@ -1,4 +1,4 @@
-const { createHelpResponse } = require('../util/helpResponses');
+const { createHelpResponse } = require('../../util/helpResponses');
 
 module.exports = {
 	async execute({ client, config, interaction, locale, registry }) {

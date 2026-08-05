@@ -1,14 +1,14 @@
 const {
 	undoCharacter,
-} = require('../../../services/characterApplicationService');
-const { canManageCharacter } = require('../../../util/authorization');
-const { replyToCharacterError } = require('../../../util/characterCommandErrors');
+} = require('../../services/characterApplicationService');
+const { canManageCharacter } = require('../../util/authorization');
+const { replyToCharacterError } = require('../../util/characterCommandErrors');
 const {
 	createCharacterHistoryContext,
-} = require('../../../util/characterHistoryContext');
+} = require('../../util/characterHistoryContext');
 const {
 	createCharacterUndoResponse,
-} = require('../../../util/characterCommandResponses');
+} = require('../../util/characterCommandResponses');
 
 module.exports = {
 	async execute({ config, interaction, locale }) {

@@ -13,12 +13,12 @@ process.env.INCREDIBLE_BOT_SAVE_DIRECTORY = testSaveDirectory;
 const Character = require('../models/Character');
 const {
 	createFieldModal,
-	handleRpgInteraction,
+	handleCharacterInteraction,
 	openCharacterEditor,
-} = require('../commands/rpg/interactions');
+} = require('../commands/character/interactions');
 const {
 	getEditInputId,
-} = require('../commands/rpg/editorFields');
+} = require('../commands/character/editorFields');
 const {
 	getEditableFields,
 	getEditableFieldDefinition,
@@ -742,7 +742,7 @@ test('modal routing submits all inputs once and repeats authorization', async ()
 	};
 	let replyCount = 0;
 	let successResponse;
-	await handleRpgInteraction({
+	await handleCharacterInteraction({
 		...creator,
 		customId: modal.custom_id,
 		fields: {
@@ -779,7 +779,7 @@ test('modal routing submits all inputs once and repeats authorization', async ()
 		character.creatorId = 'new-owner';
 	});
 	let deniedResponse;
-	await handleRpgInteraction({
+	await handleCharacterInteraction({
 		...creator,
 		customId: authorizationModal.custom_id,
 		fields: {

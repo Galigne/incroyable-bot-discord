@@ -1,14 +1,14 @@
 const {
 	generateCharacter,
-} = require('../../../services/characterApplicationService');
+} = require('../../services/characterApplicationService');
 const {
 	createGeneratedCharacterResponse,
-} = require('../../../util/characterCommandResponses');
+} = require('../../util/characterCommandResponses');
 const {
 	createLocalizedCharacterGenerationOptions,
-} = require('../../../util/characterGenerationLocalization');
-const { replyToCharacterError } = require('../../../util/characterCommandErrors');
-const { getLocale } = require('../../../util/i18n');
+} = require('../../util/characterGenerationLocalization');
+const { replyToCharacterError } = require('../../util/characterCommandErrors');
+const { getLocale } = require('../../util/i18n');
 
 module.exports = {
 	async execute({ config, interaction }) {

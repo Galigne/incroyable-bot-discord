@@ -232,14 +232,16 @@ The full TTRPG rules are available in
 
 ## Project structure
 
-- `commands/`: thin Discord slash-command adapters
+- `commands/handlers/`: one thin Discord adapter per top-level slash command,
+  independent of help category
 - `commands/metadata.js`: centralized command schema, permissions,
   localization keys, options, accepted-value documentation, autocomplete
   descriptors, examples, and detailed behavior keys
 - `commands/registry.js`: command lookup, category grouping, permission filtering,
   Discord registration data, and runtime routing
 - `commands/autocompleteProviders.js`: shared metadata-selected autocomplete logic
-- `commands/rpg/subcommands/`: one behavior adapter per top-level RPG command
+- `commands/character/`: shared character-command autocomplete and modal
+  presentation helpers
 - `services/`: Discord-independent application workflows, persistence, parsing,
   validation, mechanics, generation, and bounded character-history transactions
 - `models/`: Discord-independent domain models

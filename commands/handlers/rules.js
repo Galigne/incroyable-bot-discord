@@ -2,7 +2,7 @@ const RULES_URLS = {
 	en: 'https://github.com/Galigne/incroyable-bot-discord/blob/master/documentation/TTRPG_RANDOM_RULES_EN.md',
 	fr: 'https://github.com/Galigne/incroyable-bot-discord/blob/master/documentation/JDR_RANDOM_RULES_FR.md',
 };
-const { getLocale, t } = require('../../../util/i18n');
+const { getLocale, t } = require('../../util/i18n');
 
 module.exports = {
 	async execute({ config, interaction }) {

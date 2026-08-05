@@ -1,15 +1,15 @@
 const {
 	healCharacter,
-} = require('../../../services/characterApplicationService');
-const { canManageCharacter } = require('../../../util/authorization');
+} = require('../../services/characterApplicationService');
+const { canManageCharacter } = require('../../util/authorization');
 const {
 	createCharacterHealResponse,
-} = require('../../../util/characterCommandResponses');
-const { replyToCharacterError } = require('../../../util/characterCommandErrors');
+} = require('../../util/characterCommandResponses');
+const { replyToCharacterError } = require('../../util/characterCommandErrors');
 const {
 	createCharacterHistoryContext,
-} = require('../../../util/characterHistoryContext');
-const { getLocale } = require('../../../util/i18n');
+} = require('../../util/characterHistoryContext');
+const { getLocale } = require('../../util/i18n');
 
 module.exports = {
 	async execute({ config, interaction }) {

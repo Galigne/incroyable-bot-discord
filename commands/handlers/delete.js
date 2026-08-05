@@ -1,6 +1,6 @@
 const {
 	openCharacterDeletionConfirmation,
-} = require('../interactions');
+} = require('../character/interactions');
 
 module.exports = {
 	async execute({ config, interaction }) {

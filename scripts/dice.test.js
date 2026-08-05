@@ -9,7 +9,7 @@ const {
 const { rollDice } = require('../services/diceRoller');
 const { rollDiceExpression } = require('../services/diceRollService');
 const { t } = require('../util/i18n');
-const rollCommand = require('../commands/rpg/subcommands/roll');
+const rollCommand = require('../commands/handlers/roll');
 
 test('dice parser accepts and normalizes supported expressions', () => {
 	assert.deepEqual(parseDiceExpression('1d20'), {

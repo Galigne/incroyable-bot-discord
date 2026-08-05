@@ -78,6 +78,11 @@ module.exports = function createRuntimeChecks(context) {
 
 		const { COMMAND_METADATA } = require('../../commands/metadata');
 		for (const metadata of COMMAND_METADATA.filter(command => command.handler)) {
+			if (!metadata.handler.startsWith('./handlers/')) {
+				errors.push(
+					`${metadata.id} must keep its top-level adapter in commands/handlers/.`,
+				);
+			}
 			const handlerPath = path.join(
 				root,
 				'commands',
@@ -97,8 +102,10 @@ module.exports = function createRuntimeChecks(context) {
 				);
 			}
 		}
-		if (fs.existsSync(path.join(root, 'commands', 'rpg', 'index.js'))) {
-			errors.push('commands/rpg/index.js must not duplicate registry routing or schema data.');
+		if (fs.existsSync(path.join(root, 'commands', 'rpg'))) {
+			errors.push(
+				'commands/rpg must not group top-level handlers by help category.',
+			);
 		}
 		const indexSource = fs.readFileSync(path.join(root, 'index.js'), 'utf8');
 		const registrationSource = fs.readFileSync(
