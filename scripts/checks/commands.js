@@ -2,7 +2,6 @@ module.exports = function createCommandChecks(context) {
 	const {
 		errors,
 		fs,
-		loadCommands,
 		path,
 		root,
 	} = context;
@@ -14,7 +13,7 @@ module.exports = function createCommandChecks(context) {
 
 	function checkCommands() {
 		try {
-			return loadCommands();
+			return commandRegistry.getRuntimeCommands();
 		}
 		catch (error) {
 			errors.push(error.stack);

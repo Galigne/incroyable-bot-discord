@@ -3,10 +3,8 @@ const { createCharacterSummaryEmbed } = require('../../util/characterRenderer');
 module.exports = function createLocalizationChecks(context) {
 	const {
 		errors,
-		loadCommands,
-		path,
-		root,
 	} = context;
+	const commandRegistry = require('../../commands/registry');
 	const {
 		createTranslator,
 		findMissingKeys,
@@ -73,7 +71,7 @@ module.exports = function createLocalizationChecks(context) {
 			errors.push('Configured locale selection or English fallback is incorrect.');
 		}
 
-		const commands = loadCommands(path.join(root, 'commands'));
+		const commands = commandRegistry.getRuntimeCommands();
 		for (const command of commands.values()) {
 			const data = command.data.toJSON();
 			if (!data.description_localizations?.fr || data.name_localizations) {

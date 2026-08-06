@@ -46,7 +46,6 @@ const {
 	isGuildOwner,
 } = require('../util/authorization');
 const { validateConfig } = require('../util/configuration');
-const { loadCommands } = require('../util/loadCommands');
 const createAuthorizationChecks = require('./checks/authorization');
 const createCharacterChecks = require('./checks/characters');
 const createCommandChecks = require('./checks/commands');
@@ -79,7 +78,6 @@ const context = {
 	hasDmPermission,
 	hasModeratorPermission,
 	isGuildOwner,
-	loadCommands,
 	path,
 	populateRandomCharacter,
 	resetTurnResources,
