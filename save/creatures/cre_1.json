@@ -1,0 +1,97 @@
+{
+  "schemaVersion": 1,
+  "type": "creature",
+  "key": "cre_1",
+  "creatorId": "168424192520355843",
+  "level": 6,
+  "name": "Molosse des tombes",
+  "description": "chasseur en meute au teint cadavérique qui flaire la peur et entraîne sous terre les proies isolées.",
+  "source": {
+    "generatorId": "creature-monster",
+    "entryId": "grave-hound",
+    "archetypeId": "monster",
+    "statProfileId": "creature-predator",
+    "provenance": [
+      {
+        "type": "entry",
+        "selection": "fixed",
+        "generatorId": "creature",
+        "entryId": "monster",
+        "path": "root.creature"
+      },
+      {
+        "type": "entry",
+        "selection": "random",
+        "generatorId": "creature-monster",
+        "entryId": "grave-hound",
+        "path": "root.creature.details"
+      }
+    ]
+  },
+  "naturalArmor": {
+    "percentage": 15
+  },
+  "statistics": {
+    "constitution": 15,
+    "strength": 6,
+    "dexterity": 16,
+    "intelligence": 6,
+    "speed": 16,
+    "perception": 9,
+    "charisma": 6,
+    "initiative": 16,
+    "reflexes": 16
+  },
+  "status": {
+    "hp": {
+      "current": 224,
+      "max": 300
+    },
+    "ar": {
+      "current": 0,
+      "max": 45
+    },
+    "ap": {
+      "current": 5,
+      "max": 5
+    },
+    "md": {
+      "current": 8,
+      "max": 8
+    },
+    "effects": []
+  },
+  "traits": [
+    {
+      "id": "grave-hound-nature",
+      "name": "Nature prédatrice",
+      "description": "chasseur en meute au teint cadavérique qui flaire la peur et entraîne sous terre les proies isolées."
+    }
+  ],
+  "rules": [],
+  "modifiers": [
+    {
+      "generatorId": "modifier",
+      "entryId": "scarred",
+      "name": "Cicatrices anciennes",
+      "description": "De vieilles cicatrices marquent le corps et témoignent des dangers surmontés.",
+      "provenance": [
+        {
+          "type": "entry",
+          "selection": "random",
+          "generatorId": "modifier",
+          "entryId": "scarred",
+          "path": "root.creature.details.modifiers.0.entries.0"
+        }
+      ]
+    }
+  ],
+  "gear": {
+    "equipment": [],
+    "inventory": [],
+    "encumbrance": {
+      "current": 0,
+      "max": 0
+    }
+  }
+}

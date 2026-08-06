@@ -565,6 +565,10 @@ after successful deletion.
 
 ## Random generators
 
+The complete production design is documented in
+`data/generators/GENERATOR_ARCHITECTURE.md`; catalog-authoring details live in
+`data/generators/README.md`.
+
 Generator schema v2 files are discovered recursively under `data/generators/en/`
 and `data/generators/fr/`. The French catalog must contain a structurally compatible
 counterpart for every English relative path; a missing or incompatible counterpart
@@ -674,12 +678,10 @@ The older `enemy` and `location` categories are also intentionally removed.
 `creature` routes its three types to the internal `creature-animal`,
 `creature-companion`, and `creature-monster` catalogs.
 
-`documentation/JDR_RANDOM_OLD_MIGRATION_MANIFEST.json` is the auditable Part 5
-record for every reusable historical item and rejected obsolete statistic. Its
-453 dispositions are applied to production data. Do not remove a manifest-backed
-entry, change a historical conflict winner, restore the retired complete-person
-roots, or add an unresolved disposition without updating the manifest and its
-focused validation.
+The historical migration is complete and its one-time audit remains in Git
+history. Preserve the resulting conflict winners and do not restore the retired
+complete-person roots. Changes to migrated production content must satisfy the
+normal generator schema, parity, reference, and production-integrity tests.
 At present it:
 
 - rolls level 1–10 when omitted;

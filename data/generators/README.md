@@ -1,5 +1,8 @@
 # Generator schema v2
 
+See `GENERATOR_ARCHITECTURE.md` for the complete generator, resolver, character,
+and creature architecture. This file is the catalog-authoring reference.
+
 Production catalogs live under matching `en/` and `fr/` paths. Discovery is
 recursive. The catalog loads both locale trees as one candidate and rejects a
 missing file, duplicate ID, invalid relationship, or structural mismatch instead
@@ -256,12 +259,10 @@ templates should be rewritten naturally for each language.
 
 ## Historical migration
 
-Part 5 applied every reusable item from `documentation/JDR_RANDOM_OLD.md`.
-`documentation/JDR_RANDOM_OLD_MIGRATION_MANIFEST.json` records all 453 source
-dispositions, conflict winners, weights, localization work, references, creature
-classifications, profiles, fixed RULEs, and explicit rejections. Focused tests
-compare the manifest back to the unchanged historical source and verify every
-applied target in both locales.
+The completed migration applied every reusable item from
+`documentation/JDR_RANDOM_OLD.md`. Its one-time disposition manifest and
+migration-specific validation remain available in Git history. Production tests
+continue to enforce the resulting catalog invariants.
 
 Historical location and event lists use structured `Name` and `Description`
 entries. Historical races retain their four fields atomically. Historical

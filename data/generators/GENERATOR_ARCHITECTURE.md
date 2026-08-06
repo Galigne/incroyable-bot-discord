@@ -1,12 +1,10 @@
-# Generator and Creature Architecture — Final State
+# Generator and Creature Architecture
 
 ## Status and authority
 
-The five approval-gated implementation parts in
-`NEW_GENERATOR_ARCHITECTURE_SPECIFICATION_PARTS.md` are complete. This document
-describes the resulting production architecture. The historical source remains
-unchanged in `JDR_RANDOM_OLD.md`, and
-`JDR_RANDOM_OLD_MIGRATION_MANIFEST.json` is the audit record for its migration.
+This document describes the production generator and creature architecture. The
+historical source remains unchanged in `documentation/JDR_RANDOM_OLD.md`; its
+one-time migration audit is retained in Git history.
 
 The English and French rulebooks remain the authority for game rules and
 terminology. They are not implementation synchronization files.
@@ -172,11 +170,9 @@ or creatures.
 
 ## Historical migration
 
-`JDR_RANDOM_OLD_MIGRATION_MANIFEST.json` contains 453 historical dispositions and
-54 dispositions for the retired current complete-person catalogs. For every
-historical item it records source identity, stable destination ID, action, weight,
-conflicts and rationale, localization work, references, creature classification,
-profile, fixed RULEs, and unresolved status.
+The completed migration applied 453 historical dispositions and 54 dispositions
+for the retired current complete-person catalogs. The one-time audit record is
+retained in Git history.
 
 The migration includes regions, settlements, adventure sites, buildings, weapons,
 inventory, races, personalities, status effects, events, humanoid components,
