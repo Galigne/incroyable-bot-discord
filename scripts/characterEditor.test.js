@@ -12,6 +12,7 @@ process.env.INCREDIBLE_BOT_SAVE_DIRECTORY = testSaveDirectory;
 
 const Character = require('../models/Character');
 const {
+	createEntityFieldModal,
 	createFieldModal,
 	handleCharacterInteraction,
 	openCharacterEditor,
@@ -576,6 +577,20 @@ test('level and statistics each use one appropriately styled prefilled input', (
 		modal.components[0].description,
 		english.rpg.editor.statisticsDescription,
 	);
+});
+
+test('character and creature RULE modals use the full-size paragraph input', () => {
+	for (const type of ['character', 'creature']) {
+		const modal = createEntityFieldModal(
+			'session',
+			type,
+			'rules',
+			'Fire:2:Controls flames',
+			'en',
+		).toJSON();
+		assert.equal(modal.components.length, 1);
+		assert.equal(modal.components[0].component.style, 2, type);
+	}
 });
 
 test('one grouped status update creates one history entry and keeps save keys', async () => {

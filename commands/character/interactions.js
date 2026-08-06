@@ -283,6 +283,7 @@ function createEditInput(type, field, inputDefinition, locale) {
 	const { customId, label, target, value } = inputDefinition;
 	const inputStyle = (
 		field.editKind === 'named-lines'
+		|| field.editKind === 'multiline'
 		|| target.paragraph
 		|| target.multiline
 	)
