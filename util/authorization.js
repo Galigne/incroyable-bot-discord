@@ -32,6 +32,8 @@ function canManageCharacter(interaction, character, config) {
 	);
 }
 
+const canManageEntity = canManageCharacter;
+
 function authorizeCommand(command, interaction, config) {
 	const locale = getLocale(config);
 	const metadata = command?.metadata ?? command;
@@ -112,6 +114,7 @@ function hasRole(memberRoles, roleId) {
 module.exports = {
 	authorizeCommand,
 	canManageCharacter,
+	canManageEntity,
 	hasDmPermission,
 	hasModeratorPermission,
 	isGuildOwner,

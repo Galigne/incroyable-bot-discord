@@ -17,6 +17,7 @@ const {
 	writePreparedCharacterHistory,
 } = require('./characterHistoryStore');
 const { runCharacterOperation } = require('./characterOperationQueue');
+const { assertEntityKeyAvailable } = require('./entityKeyRegistry');
 const {
 	commitHistoryThenMutation,
 	commitMutationThenHistory,
@@ -26,10 +27,13 @@ const { validateCharacterSaveSchema } = require('./characterSaveSchema');
 const {
 	characterSaveDirectory,
 	getCharacterSavePath,
+	validateCharacterKey,
 } = require('./characterStoragePaths');
 
 async function createCharacter(name, creatorId, initialize = () => undefined) {
+	validateCharacterKey(name);
 	return runCharacterOperation(name, async () => {
+		await assertEntityKeyAvailable(name);
 		const character = new Character(name, creatorId);
 		await initialize(character);
 		character.key = name;

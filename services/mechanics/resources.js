@@ -1,5 +1,8 @@
 const { MAX_AP } = require('./constants');
-const { characterEditError } = require('./characterValidation');
+const {
+	characterEditError,
+	combatantEditError,
+} = require('./characterValidation');
 const { calculateArmorRating } = require('./armor');
 
 function calculateMaxHp(constitution, level) {
@@ -60,8 +63,9 @@ function calculateRestoredResourceValue(maximum, percentage) {
 function restoreResource(character, resourceName, percentage) {
 	const resource = resourceName.toLowerCase();
 	if (!['hp', 'ar'].includes(resource)) {
-		throw characterEditError('errors.healResourcesOnly');
+		throw combatantEditError(character, 'errors.healResourcesOnly');
 	}
+	validateRestorationPercentage(percentage, character);
 	const target = character.status[resource];
 	target.current = calculateRestoredResourceValue(target.max, percentage);
 	return target;
@@ -74,9 +78,9 @@ function restoreHealingResources(character, resourceName, percentage) {
 		both: ['hp', 'ar'],
 	}[resourceName];
 	if (!resourceKeys) {
-		throw characterEditError('errors.healResourceInvalid');
+		throw combatantEditError(character, 'errors.healResourceInvalid');
 	}
-	validateRestorationPercentage(percentage);
+	validateRestorationPercentage(percentage, character);
 
 	return resourceKeys.map(resource => {
 		const target = character.status[resource];
@@ -96,9 +100,11 @@ function resetTurnResources(character) {
 	character.status.md.current = character.status.md.max;
 }
 
-function validateRestorationPercentage(percentage) {
+function validateRestorationPercentage(percentage, combatant = null) {
 	if (!Number.isFinite(percentage) || percentage < 0 || percentage > 100) {
-		throw characterEditError('errors.percentageInvalid');
+		throw combatant
+			? combatantEditError(combatant, 'errors.percentageInvalid')
+			: characterEditError('errors.percentageInvalid');
 	}
 }
 

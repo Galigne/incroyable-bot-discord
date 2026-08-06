@@ -99,42 +99,43 @@
   },
   "rpg": {
     "add": {
-      "description": "Create a blank character sheet with a stable CharacterKey",
-      "keyOption": "Unique save key, make it short and remember it.",
-      "success": "Character with key `{{key}}` was created. This CharacterKey cannot be changed. Use `/set` with a field to open its prefilled private form.",
-      "behavior": "Creates and saves a blank character owned by the invoking user. The CharacterKey becomes the immutable save identifier and must start and end with a letter or number; internal periods, hyphens, and underscores are allowed."
+      "description": "Create a blank character or creature with a stable EntityKey",
+      "keyOption": "Unique entity save key; make it short and memorable",
+      "typeOption": "Entity type; defaults to character",
+      "success": "{{type}} with key `{{key}}` was created. This EntityKey and type cannot be changed. Use `/set` with a compatible field to open its prefilled private form.",
+      "behavior": "Creates and saves a blank entity owned by the invoking user. `type` accepts `character` or `creature` and defaults to `character`. EntityKeys are globally unique across both types, must start and end with a letter or number, and may contain internal periods, hyphens, and underscores."
     },
     "damage": {
-      "description": "Deal damage to a character, reducing AR before HP",
-      "characterOption": "Character receiving the damage",
+      "description": "Deal damage to an entity, reducing AR before HP",
+      "entityOption": "Character or creature receiving the damage",
       "amountOption": "Positive amount of damage to deal",
       "piercingOption": "Bypass AR and deal the damage directly to HP",
       "choice": "{{amount}} damage",
       "piercingBreakdown": "{{amount}} piercing damage was dealt directly to {{hpLabel}}.",
       "normalBreakdown": "{{arDamage}} damage was absorbed by {{arLabel}} and {{hpDamage}} damage reached {{hpLabel}}.",
       "result": "**{{name}}** received **{{amount}} damage**. {{breakdown}}\n{{resources}}",
-      "behavior": "Applies a positive whole-number damage amount to current AR first, then current HP. When `piercing` is true, damage bypasses AR. Only the character creator, a DM, or the server owner may use it."
+      "behavior": "Applies a positive whole-number damage amount to the selected character or creature's current AR first, then current HP. When `piercing` is true, damage bypasses AR. Only the entity creator, a DM, or the server owner may use it."
     },
     "delete": {
-      "description": "Permanently delete a character and all retained backups",
-      "characterOption": "Character to permanently delete",
-      "modalTitle": "Permanently delete character",
+      "description": "Permanently delete an entity and all retained backups",
+      "entityOption": "Character or creature to permanently delete",
+      "modalTitle": "Permanently delete entity",
       "warning": "## Permanent deletion\nThis removes the active save and every retained backup for `{{key}}`. `/undo` cannot restore it.",
-      "confirmationLabel": "Type the exact CharacterKey",
-      "confirmationDescription": "The value is case-sensitive and must match the CharacterKey shown above.",
-      "confirmationPlaceholder": "Enter the exact CharacterKey",
+      "confirmationLabel": "Type the exact EntityKey",
+      "confirmationDescription": "The value is case-sensitive and must match the EntityKey shown above.",
+      "confirmationPlaceholder": "Enter the exact EntityKey",
       "incorrectConfirmation": "The confirmation did not exactly match `{{key}}`. Nothing was deleted. Run `/delete` again to retry.",
       "expired": "This deletion confirmation is missing or expired. Run `/delete` again.",
       "wrongUser": "This deletion confirmation belongs to another user.",
-      "success": "Character **{{key}}** and all retained backups were permanently deleted.",
-      "operationFailed": "The character and its retained backups could not be deleted safely. Nothing was intentionally left partially deleted.",
-      "behavior": "Opens a private confirmation form. Type the exact, case-sensitive CharacterKey to permanently delete both the active save and every retained backup. This cannot be undone, and `/undo` cannot restore the character. Only the character creator, a DM, or the server owner may confirm deletion."
+      "success": "Entity **{{key}}** and all retained backups were permanently deleted.",
+      "operationFailed": "The entity and its retained backups could not be deleted safely. Nothing was intentionally left partially deleted.",
+      "behavior": "Opens a private confirmation form. Type the exact, case-sensitive EntityKey to permanently delete both the active character or creature save and every retained backup. This cannot be undone. Only the entity creator, a DM, or the server owner may confirm deletion."
     },
     "endTurn": {
       "description": "Restore current AP and MD to their maximum values",
-      "characterOption": "Character ending their turn",
+      "entityOption": "Character or creature ending its turn",
       "result": "**{{name}}** starts a new turn.\n{{resources}}",
-      "behavior": "Restores the selected character’s current AP and MD to their respective maximum values. Only the character creator, a DM, or the server owner may use it."
+      "behavior": "Restores the selected character or creature's current AP and MD to their respective maximum values. Only the entity creator, a DM, or the server owner may use it."
     },
     "gen": {
       "description": "Generate GM inspiration (configured DM role or server owner)",
@@ -156,15 +157,15 @@
       "behavior": "Creates and saves a complete random character under a unique CharacterKey. Level must be 1–10 and is random when omitted; background is also optional and random by default. A shared statistical profile allocates statistics, while resources, RULEs, armor, weapons, inventory, gold, and possible status effects follow the selected level and game rules. Encumbrance remains manual and defaults to 0 / 0."
     },
     "get": {
-      "description": "Display a character summary or one detailed field",
-      "characterOption": "Character to display",
+      "description": "Display an entity summary or one compatible detailed field",
+      "entityOption": "Character or creature to display",
       "fieldOption": "Optional detailed field",
-      "unknownField": "Unknown character field: **{{field}}**. Use `/help command:get` for command details.",
-      "behavior": "Without `field`, posts the public character summary. With `field`, displays one complete section and its labelled values. The ten sections are `name`, `level`, `status`, `statistics`, `rules`, `talents`, `gear`, `race`, `background`, and `personality`, in that order. `status` groups HP, AR, AP, MD, and status effects. `gear` groups equipment, inventory, and encumbrance."
+      "unknownField": "That field is not available for this entity: **{{field}}**. Use `/help command:get` for command details.",
+      "behavior": "Without `field`, posts the public entity summary. Character fields remain `name`, `level`, `status`, `statistics`, `rules`, `talents`, `gear`, `race`, `background`, and `personality`, in that order. Creature fields use the independent order `identity`, `level`, `status`, `statistics`, `rules`, `traits`, `modifiers`, and `gear`. Autocomplete shows only fields compatible with the selected EntityKey."
     },
     "heal": {
       "description": "Restore current HP, armor, or both to a percentage of maximum",
-      "characterOption": "Character receiving the healing",
+      "entityOption": "Character or creature receiving the healing",
       "resourceOption": "Resource to restore",
       "percentageOption": "Percentage of the maximum to restore to",
       "hpChoice": "HP — Hit points",
@@ -173,7 +174,7 @@
       "both": "{{hp}} and {{ar}}",
       "change": "{{resource}}: **{{previous}}/{{max}} → {{current}}/{{max}}**",
       "result": "**{{name}}** restored to {{percentage}}%:\n{{resources}}",
-      "behavior": "Sets current HP, current AR, or both to the requested percentage of each resource’s own maximum, using the shared rounding rule. Only the character creator, a DM, or the server owner may use it."
+      "behavior": "Sets a character or creature's current HP, current AR, or both to the requested percentage of each resource's own maximum, using the shared rounding rule. Only the entity creator, a DM, or the server owner may use it."
     },
     "roll": {
       "description": "Roll a standard dice expression",
@@ -194,16 +195,16 @@
       "behavior": "Replies with the public URL for the TTRPG rulebook."
     },
     "set": {
-      "description": "Set one character-sheet field or field group in a prefilled form",
-      "characterOption": "Character to edit",
+      "description": "Set one compatible entity field group in a prefilled form",
+      "entityOption": "Character or creature to edit",
       "fieldOption": "Field to edit",
-      "behavior": "Opens one private modal prefilled with one of the same ten sections as `/get`: `name`, `level`, `status`, `statistics`, `rules`, `talents`, `gear`, `race`, `background`, and `personality`, in that order. `name` edits separate optional First name and Last name inputs. `level` uses one short numeric input. `status` edits HP, AR, AP, and MD as required `current:max` pairs plus one status effect per line; all five inputs are applied together. `statistics` uses one `statName: statValue` line for each required statistic: `constitution`, `strength`, `dexterity`, `intelligence`, `speed`, `perception`, `charisma`, `initiative`, and `reflexes`. Statistic names stay English, may appear in any order, and must each appear exactly once. RULEs use one `Name:Level:Description` entry per line. Talents use one entry per line. `gear` edits equipment and inventory as separate line-based lists plus encumbrance as a required `current:max` pair; all three inputs are applied together. `race` edits Name, Physical description, Lore, Skill bonus, and Physical ability. `background` edits Appearance, Backstory, and Goals. `personality` edits Traits, one per line, and Description. Empty list inputs clear their collection; whitespace, empty lines, and optional leading bullets are normalized. AP must remain whole numbers with `0 ≤ current ≤ max ≤ 10`. Every section is validated and saved atomically as one undoable operation. Only the character creator, a DM, or the server owner may edit the sheet."
+      "behavior": "Opens one private modal prefilled for the selected entity type. Character groups and their established order are unchanged. Creature groups use `identity`, `level`, `status`, `statistics`, `rules`, `traits`, `modifiers`, and `gear`; identity edits Name and Description. Creature traits, descriptive modifiers, and status effects use one `Name:Description` record per line, while character status effects remain plain line-based entries. Statistics, RULE, gear, resources, and encumbrance keep their compatible shared formats. EntityKey, type, schema metadata, source IDs, natural-armor metadata, and provenance are never editable. Every group is validated and saved atomically as one undoable operation. Only the entity creator, a DM, or the server owner may edit it."
     },
     "undo": {
-      "description": "Restore the newest retained pre-change character snapshot",
-      "characterOption": "Character whose newest backup will be restored",
-      "success": "Restored character `{{key}}`. The **{{action}}** backup created {{timestamp}} by {{actor}} was consumed.",
-      "behavior": "Restores and consumes the newest available backup for an active character. Successful `/set`, `/damage`, `/heal`, and `/end-turn` operations each save the complete pre-change character state. Three backups are retained by default; the server’s `characterHistory.maxEntries` configuration can change that limit, and `/reload` applies the new value to later history operations. Repeated undos walk backward through older retained states. Undo does not save the displaced state, redo is not supported, and permanent `/delete` removes all backups. Only the character creator, a DM, or the server owner may use it.",
+      "description": "Restore the newest retained pre-change entity snapshot",
+      "entityOption": "Character or creature whose newest backup will be restored",
+      "success": "Restored entity `{{key}}`. The **{{action}}** backup created {{timestamp}} by {{actor}} was consumed.",
+      "behavior": "Restores and consumes the newest available backup for an active character or creature without changing its type. Successful `/set`, `/damage`, `/heal`, and `/end-turn` operations save the complete pre-change entity state. The current `characterHistory.maxEntries` limit applies to both types. Repeated undos walk backward; redo is unsupported, and permanent `/delete` removes all backups. Only the entity creator, a DM, or the server owner may use it.",
       "actions": {
         "set": "field edit",
         "damage": "damage",
@@ -212,10 +213,10 @@
         "delete": "deletion"
       },
       "errors": {
-        "noHistory": "No backup is available for that character.",
-        "invalidBackup": "The newest character backup is invalid and cannot be restored.",
-        "unsupportedSchema": "The newest character backup uses an unsupported save schema and cannot be restored.",
-        "operationFailed": "The character and its history could not be updated safely. No retry was attempted."
+        "noHistory": "No backup is available for that entity.",
+        "invalidBackup": "The newest entity backup is invalid and cannot be restored.",
+        "unsupportedSchema": "The newest entity backup uses an unsupported save schema and cannot be restored.",
+        "operationFailed": "The entity and its history could not be updated safely. No retry was attempted."
       }
     },
     "editor": {
@@ -226,6 +227,8 @@
       "collectionPlaceholder": "One entry per line; leading dashes or asterisks are optional",
       "valuePlaceholder": "Enter the new value",
       "rulesDescription": "One RULE per line: Name:Level:Description. All three values are required.",
+      "describedDescription": "One record per line: Name:Description. Both values are required.",
+      "describedPlaceholder": "One line per record: Name:Description",
       "collectionDescription": "One entry per line; blank lines are ignored. Empty the form to clear.",
       "textDescription": "The previous value is prefilled. Empty the form to clear it.",
       "numberDescription": "Required. Enter a valid number.",
@@ -252,6 +255,33 @@
         "goals": "Goals"
       },
       "title": "Edit {{field}}"
+    }
+  },
+  "entity": {
+    "types": {
+      "character": "Character",
+      "creature": "Creature"
+    }
+  },
+  "creature": {
+    "fields": {
+      "entityKey": "Entity key",
+      "identity": "Identity",
+      "name": "Name",
+      "description": "Description",
+      "level": "Level",
+      "status": "Status",
+      "statistics": "Statistics",
+      "rules": "RULEs",
+      "traits": "Intrinsic traits",
+      "modifiers": "Descriptive modifiers",
+      "gear": "Gear"
+    },
+    "summary": {
+      "level": "Level **{{level}}** creature"
+    },
+    "detail": {
+      "title": "{{name}} — {{field}}"
     }
   },
   "character": {
@@ -335,6 +365,14 @@
     }
   },
   "errors": {
+    "entityExists": "An entity with that key already exists.",
+    "entityMissing": "That entity does not exist.",
+    "entityKeyCollision": "That EntityKey is present for more than one entity type. Resolve the storage collision before continuing.",
+    "entityTypeChanged": "That EntityKey now belongs to a different entity type. Run the command again.",
+    "entityOwnerDelete": "Only the entity creator, a DM, or the server owner can delete it.",
+    "entityEditor": "Only the entity creator, a DM, or the server owner can manage it.",
+    "invalidEntityKey": "Entity keys must start and end with a letter or number and may contain letters, numbers, periods, hyphens, and underscores.",
+    "invalidEntityType": "Entity type must be character or creature.",
     "characterExists": "A character with that key already exists.",
     "characterMissing": "That character does not exist.",
     "characterOwnerDelete": "Only the character creator, a DM, or the server owner can delete it.",
@@ -353,6 +391,10 @@
     "ruleNameRequired": "A RULE name is required before the `:` separator.",
     "ruleLevelInvalid": "A RULE level must be a positive whole number.",
     "ruleDescriptionRequired": "A RULE description is required after the second `:` separator.",
+    "describedEntryInvalid": "Each descriptive record must use `Name:Description`, with both values present.",
+    "creatureLevelRange": "Creature level must be a whole number between 1 and 10.",
+    "creatureStatisticRange": "Creature statistic `{{stat}}` must be between 0 and 100.",
+    "creatureResourceRange": "Creature resource `{{resource}}` must satisfy 0 ≤ current ≤ max; AP must also be whole and at most 10.",
     "apRange": "{{apLabel}} must be a whole number between 0 and {{max}}.",
     "apCurrentAboveMax": "Current {{apLabel}} cannot be greater than maximum {{apLabel}}.",
     "apMaxBelowCurrent": "Maximum {{apLabel}} cannot be lower than current {{apLabel}}.",

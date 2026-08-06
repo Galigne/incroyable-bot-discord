@@ -1,35 +1,28 @@
-const {
-	damageCharacter,
-} = require('../../services/characterApplicationService');
-const { canManageCharacter } = require('../../util/authorization');
-const {
-	createCharacterDamageResponse,
-} = require('../../util/characterCommandResponses');
-const { replyToCharacterError } = require('../../util/characterCommandErrors');
-const {
-	createCharacterHistoryContext,
-} = require('../../util/characterHistoryContext');
+const { damageEntity } = require('../../services/entityApplicationService');
+const { canManageEntity } = require('../../util/authorization');
+const { createEntityDamageResponse } = require('../../util/entityCommandResponses');
+const { replyToEntityError } = require('../../util/entityCommandErrors');
+const { createEntityHistoryContext } = require('../../util/entityHistoryContext');
 const { getLocale } = require('../../util/i18n');
 
 module.exports = {
 	async execute({ config, interaction }) {
 		const locale = getLocale(config, interaction.guildId);
-		const characterKey = interaction.options.getString('character-key', true);
+		const entityKey = interaction.options.getString('entity-key', true);
 		const damageAmount = interaction.options.getInteger('damage-amount', true);
 		const piercing = interaction.options.getBoolean('piercing') ?? false;
-
 		try {
-			const result = await damageCharacter(
-				characterKey,
+			const result = await damageEntity(
+				entityKey,
 				damageAmount,
 				piercing,
-				currentCharacter => canManageCharacter(interaction, currentCharacter, config),
-				createCharacterHistoryContext(interaction, config),
+				entity => canManageEntity(interaction, entity, config),
+				createEntityHistoryContext(interaction, config),
 			);
-			await interaction.reply(createCharacterDamageResponse(result, locale));
+			await interaction.reply(createEntityDamageResponse(result, locale));
 		}
 		catch (error) {
-			if (!await replyToCharacterError(interaction, error, locale)) {
+			if (!await replyToEntityError(interaction, error, locale)) {
 				throw error;
 			}
 		}

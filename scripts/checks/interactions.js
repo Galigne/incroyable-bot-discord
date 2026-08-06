@@ -95,7 +95,7 @@ module.exports = function createInteractionChecks(context) {
 					member,
 					options: {
 						getString: option => (
-							option === 'character-key' ? characterKey : 'both'
+							option === 'entity-key' ? characterKey : 'both'
 						),
 						getNumber: () => 50,
 					},

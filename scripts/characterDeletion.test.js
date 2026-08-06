@@ -70,7 +70,7 @@ test('/delete opens a private exact-key modal without deleting anything', async 
 		confirmation.description,
 		english.rpg.delete.confirmationDescription,
 	);
-	assert.equal(confirmation.component.custom_id, 'character-key-confirmation');
+	assert.equal(confirmation.component.custom_id, 'entity-key-confirmation');
 	assert.equal(
 		confirmation.component.placeholder,
 		english.rpg.delete.confirmationPlaceholder,
@@ -108,7 +108,7 @@ test('/delete validates existence and authorization before opening the modal', a
 
 	const missing = await openDeleteModal(nextKey('Delete.Missing'), 'creator');
 	assert.equal(missing.modal, undefined);
-	assert.match(missing.reply.content, /character does not exist/i);
+	assert.match(missing.reply.content, /entity does not exist/i);
 
 	const dm = await openDeleteModal(
 		characterKey,
@@ -271,7 +271,7 @@ test('submission reloads the character, observes modifications, and reauthorizes
 		disappearedKey,
 		'creator',
 	);
-	assert.match(disappeared.reply.content, /character does not exist/i);
+	assert.match(disappeared.reply.content, /entity does not exist/i);
 });
 
 test('the permanent-deletion transaction preserves state for both failure directions', async () => {
@@ -380,21 +380,20 @@ test('/delete metadata, routing, help, and locale catalogs describe permanent de
 	assert.equal(metadata.handler, './handlers/delete');
 	assert.equal(metadata.permission, 'everyone');
 	assert.equal(
-		commandRegistry.getAutocompleteMetadata('delete', 'character-key')
+		commandRegistry.getAutocompleteMetadata('delete', 'entity-key')
 			.autocomplete.provider,
-		'manageable-characters',
+		'manageable-entities',
 	);
 	assert.ok(commandRegistry.getHelpMetadata('rpg').includes(metadata));
-	assert.match(english.rpg.delete.behavior, /exact, case-sensitive CharacterKey/);
-	assert.match(english.rpg.delete.behavior, /active save.*retained backup/);
+	assert.match(english.rpg.delete.behavior, /exact, case-sensitive EntityKey/);
+	assert.match(english.rpg.delete.behavior, /active character or creature save.*retained backup/);
 	assert.match(english.rpg.delete.behavior, /cannot be undone/);
-	assert.match(english.rpg.delete.behavior, /`\/undo` cannot restore/);
 	assert.doesNotMatch(english.rpg.undo.behavior, /restoration after deletion/);
 	assert.doesNotMatch(english.rpg.undo.behavior, /`\/delete` operations.*save/);
 
 	const expectedDeleteKeys = [
 		'behavior',
-		'characterOption',
+		'entityOption',
 		'confirmationDescription',
 		'confirmationLabel',
 		'confirmationPlaceholder',
@@ -469,7 +468,7 @@ async function autocomplete(commandName, userId, roleIds = []) {
 	const interaction = {
 		...createInteraction(userId, roleIds),
 		options: {
-			getFocused: () => ({ name: 'character-key', value: '' }),
+			getFocused: () => ({ name: 'entity-key', value: '' }),
 		},
 		respond: async value => {
 			choices = value;

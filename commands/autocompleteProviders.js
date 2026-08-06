@@ -2,6 +2,7 @@ const generatorCatalog = require('../services/generatorCatalog');
 const { filterAutocompleteChoices } = require('../util/autocomplete');
 const {
 	canManageCharacter,
+	canManageEntity,
 	hasDmPermission,
 } = require('../util/authorization');
 const {
@@ -17,6 +18,11 @@ const {
 	getCharacterChoices,
 	getUndoableCharacterChoices,
 } = require('./character/autocomplete');
+const {
+	getEntityChoices,
+	getEntitySectionChoices,
+	getUndoableEntityChoices,
+} = require('./entity/autocomplete');
 
 async function getAutocompleteChoices(metadata, option, context) {
 	const provider = AUTOCOMPLETE_PROVIDERS[option.autocomplete.provider];
@@ -40,9 +46,16 @@ const AUTOCOMPLETE_PROVIDERS = {
 	static: getStaticChoices,
 	backgrounds: getBackgroundChoices,
 	characters: (option, context, focused) => getCharacterChoices(focused.value),
+	entities: (option, context, focused) => getEntityChoices(
+		focused.value,
+		context.locale,
+	),
+	'entity-sections': getEntitySections,
 	'help-commands': getHelpCommandChoices,
 	'manageable-characters': getManageableCharacterChoices,
+	'manageable-entities': getManageableEntityChoices,
 	'undoable-characters': getUndoableCharacters,
+	'undoable-entities': getUndoableEntities,
 };
 
 function getStaticChoices(option, context, focused) {
@@ -138,6 +151,32 @@ function getUndoableCharacters(option, context, focused) {
 			character,
 			context.config,
 		),
+	);
+}
+
+function getManageableEntityChoices(option, context, focused) {
+	return getEntityChoices(
+		focused.value,
+		context.locale,
+		hasDmPermission(context.interaction, context.config)
+			? {}
+			: { creatorId: context.interaction.user.id },
+	);
+}
+
+function getUndoableEntities(option, context, focused) {
+	return getUndoableEntityChoices(
+		focused.value,
+		context.locale,
+		entity => canManageEntity(context.interaction, entity, context.config),
+	);
+}
+
+function getEntitySections(option, context, focused) {
+	return getEntitySectionChoices(
+		focused.value,
+		context.locale,
+		context.interaction.options.getString?.('entity-key') ?? '',
 	);
 }
 

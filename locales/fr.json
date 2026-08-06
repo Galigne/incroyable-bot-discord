@@ -99,42 +99,43 @@
   },
   "rpg": {
     "add": {
-      "description": "Créer une fiche de personnage vide avec une CharacterKey permanente",
+      "description": "Créer un personnage ou une créature vide avec une EntityKey permanente",
       "keyOption": "Clé de sauvegarde unique, courte et facile à retenir",
-      "success": "Le personnage associé à la clé `{{key}}` a été créé. Cette CharacterKey ne pourra plus être modifiée. Utilisez `/set` pour remplir sa fiche au moyen de formulaires privés préremplis.",
-      "behavior": "Crée et sauvegarde une fiche vide appartenant à l’utilisateur. La CharacterKey devient l’identifiant de sauvegarde immuable ; elle doit commencer et finir par une lettre ou un chiffre, et peut contenir des points, tirets et tirets bas."
+      "typeOption": "Type d’entité ; personnage par défaut",
+      "success": "L’entité de type {{type}} associée à la clé `{{key}}` a été créée. Cette EntityKey et ce type ne pourront plus être modifiés. Utilisez `/set` avec un champ compatible pour ouvrir son formulaire privé prérempli.",
+      "behavior": "Crée et sauvegarde une entité vide appartenant à l’utilisateur. `type` accepte `character` ou `creature` et vaut `character` par défaut. Les EntityKeys sont uniques pour l’ensemble des deux types ; elles doivent commencer et finir par une lettre ou un chiffre, et peuvent contenir des points, tirets et tirets bas."
     },
     "damage": {
-      "description": "Infliger des dégâts à un personnage, d’abord aux PR puis aux PV",
-      "characterOption": "Personnage qui subit les dégâts",
+      "description": "Infliger des dégâts à une entité, d’abord aux PR puis aux PV",
+      "entityOption": "Personnage ou créature qui subit les dégâts",
       "amountOption": "Nombre positif de dégâts à infliger",
       "piercingOption": "Ignorer les PR et infliger les dégâts directement aux PV",
       "choice": "{{amount}} dégâts",
       "piercingBreakdown": "Dégâts perforants infligés directement aux {{hpLabel}} : {{amount}}.",
       "normalBreakdown": "Dégâts absorbés par les {{arLabel}} : {{arDamage}} ; dégâts subis par les {{hpLabel}} : {{hpDamage}}.",
       "result": "**{{name}}** subit **{{amount}} dégâts**. {{breakdown}}\n{{resources}}",
-      "behavior": "Applique un nombre entier positif de dégâts, d’abord aux PR actuels puis aux PV actuels. Avec `piercing:true`, les dégâts ignorent les PR. Seuls le créateur, un MJ ou le propriétaire du serveur peuvent l’utiliser."
+      "behavior": "Applique un nombre entier positif de dégâts au personnage ou à la créature choisi, d’abord aux PR actuels puis aux PV actuels. Avec `piercing:true`, les dégâts ignorent les PR. Seuls le créateur de l’entité, un MJ ou le propriétaire du serveur peuvent l’utiliser."
     },
     "delete": {
-      "description": "Supprimer définitivement un personnage et toutes ses sauvegardes",
-      "characterOption": "Personnage à supprimer définitivement",
-      "modalTitle": "Supprimer définitivement",
+      "description": "Supprimer définitivement une entité et toutes ses sauvegardes",
+      "entityOption": "Personnage ou créature à supprimer définitivement",
+      "modalTitle": "Supprimer définitivement l’entité",
       "warning": "## Suppression définitive\nLa fiche active et toutes les sauvegardes conservées de `{{key}}` seront supprimées. `/undo` ne pourra pas la restaurer.",
-      "confirmationLabel": "Saisissez la CharacterKey exacte",
+      "confirmationLabel": "Saisissez l’EntityKey exacte",
       "confirmationDescription": "La valeur est sensible à la casse et doit correspondre à celle affichée ci-dessus.",
-      "confirmationPlaceholder": "Saisissez la CharacterKey exacte",
+      "confirmationPlaceholder": "Saisissez l’EntityKey exacte",
       "incorrectConfirmation": "La confirmation ne correspond pas exactement à `{{key}}`. Rien n’a été supprimé. Relancez `/delete` pour réessayer.",
       "expired": "Cette confirmation de suppression est introuvable ou a expiré. Relancez `/delete`.",
       "wrongUser": "Cette confirmation de suppression appartient à un autre utilisateur.",
-      "success": "Le personnage **{{key}}** et toutes ses sauvegardes conservées ont été supprimés définitivement.",
-      "operationFailed": "Le personnage et ses sauvegardes conservées n’ont pas pu être supprimés de façon sûre. Rien n’a été volontairement laissé partiellement supprimé.",
-      "behavior": "Ouvre un formulaire de confirmation privé. Saisissez la CharacterKey exacte, en respectant la casse, pour supprimer définitivement la fiche active et toutes les sauvegardes conservées. Cette action est irréversible et `/undo` ne peut pas restaurer le personnage. Seuls le créateur, un MJ ou le propriétaire du serveur peuvent confirmer la suppression."
+      "success": "L’entité **{{key}}** et toutes ses sauvegardes conservées ont été supprimées définitivement.",
+      "operationFailed": "L’entité et ses sauvegardes conservées n’ont pas pu être supprimées de façon sûre. Rien n’a été volontairement laissé partiellement supprimé.",
+      "behavior": "Ouvre un formulaire de confirmation privé. Saisissez l’EntityKey exacte, en respectant la casse, pour supprimer définitivement le personnage ou la créature active et toutes les sauvegardes conservées. Cette action est irréversible. Seuls le créateur de l’entité, un MJ ou le propriétaire du serveur peuvent confirmer la suppression."
     },
     "endTurn": {
       "description": "Rétablir les PA et la DD à leur maximum",
-      "characterOption": "Personnage qui termine son tour",
+      "entityOption": "Personnage ou créature qui termine son tour",
       "result": "**{{name}}** commence un nouveau tour.\n{{resources}}",
-      "behavior": "Rétablit les PA et la DD actuels du personnage à leurs valeurs maximales respectives. Seuls le créateur, un MJ ou le propriétaire du serveur peuvent l’utiliser."
+      "behavior": "Rétablit les PA et la DD actuels du personnage ou de la créature à leurs valeurs maximales respectives. Seuls le créateur de l’entité, un MJ ou le propriétaire du serveur peuvent l’utiliser."
     },
     "gen": {
       "description": "Générer une inspiration (rôle MJ configuré ou propriétaire du serveur)",
@@ -156,15 +157,15 @@
       "behavior": "Crée et sauvegarde un personnage aléatoire complet sous une CharacterKey unique. Le niveau doit être compris entre 1 et 10 et est aléatoire s’il est omis ; le Background est également facultatif et aléatoire par défaut. Un profil statistique partagé répartit les statistiques, tandis que les ressources, LOI, armure, armes, objets, pièces d’or et éventuels effets d’état suivent le niveau choisi et les règles du jeu. L’encombrement reste manuel et vaut 0 / 0 par défaut."
     },
     "get": {
-      "description": "Afficher le résumé d’un personnage ou le détail d’un champ",
-      "characterOption": "Personnage à afficher",
+      "description": "Afficher le résumé d’une entité ou le détail d’un champ compatible",
+      "entityOption": "Personnage ou créature à afficher",
       "fieldOption": "Champ détaillé facultatif",
-      "unknownField": "Champ inconnu : **{{field}}**. Utilisez `/help command:get` pour consulter les détails.",
-      "behavior": "Sans `field`, publie le résumé public du personnage. Avec `field`, affiche une section complète et ses valeurs clairement libellées. Les dix sections sont `name`, `level`, `status`, `statistics`, `rules`, `talents`, `gear`, `race`, `background` et `personality`, dans cet ordre. `status` regroupe les PV, PR, PA, DD et les effets d’état. `gear` regroupe l’équipement, l’inventaire et l’encombrement."
+      "unknownField": "Ce champ n’est pas disponible pour cette entité : **{{field}}**. Utilisez `/help command:get` pour consulter les détails.",
+      "behavior": "Sans `field`, publie le résumé public de l’entité. Les champs de personnage restent `name`, `level`, `status`, `statistics`, `rules`, `talents`, `gear`, `race`, `background` et `personality`, dans cet ordre. Les champs de créature suivent leur propre ordre : `identity`, `level`, `status`, `statistics`, `rules`, `traits`, `modifiers` et `gear`. L’autocomplétion ne propose que les champs compatibles avec l’EntityKey choisie."
     },
     "heal": {
       "description": "Restaurer les PV, les PR ou les deux jusqu’au pourcentage choisi",
-      "characterOption": "Personnage qui reçoit les soins",
+      "entityOption": "Personnage ou créature qui reçoit les soins",
       "resourceOption": "Ressource à restaurer",
       "percentageOption": "Pourcentage de la valeur maximale à atteindre",
       "hpChoice": "PV — Points de vie",
@@ -173,7 +174,7 @@
       "both": "{{hp}} et {{ar}}",
       "change": "{{resource}} : **{{previous}}/{{max}} → {{current}}/{{max}}**",
       "result": "Ressources de **{{name}}** restaurées à {{percentage}} % :\n{{resources}}",
-      "behavior": "Fixe les PV actuels, les PR actuels ou les deux au pourcentage demandé de leur maximum respectif, selon la règle d’arrondi commune. Seuls le créateur, un MJ ou le propriétaire du serveur peuvent l’utiliser."
+      "behavior": "Fixe les PV actuels, les PR actuels ou les deux du personnage ou de la créature au pourcentage demandé de leur maximum respectif, selon la règle d’arrondi commune. Seuls le créateur de l’entité, un MJ ou le propriétaire du serveur peuvent l’utiliser."
     },
     "roll": {
       "description": "Lancer une expression de dés standard",
@@ -194,16 +195,16 @@
       "behavior": "Répond avec l’URL publique du livre de règles du JDR."
     },
     "set": {
-      "description": "Modifier un champ ou groupe de champs dans un formulaire prérempli",
-      "characterOption": "Personnage à modifier",
+      "description": "Modifier un groupe de champs compatible dans un formulaire prérempli",
+      "entityOption": "Personnage ou créature à modifier",
       "fieldOption": "Champ à modifier",
-      "behavior": "Ouvre un formulaire privé prérempli pour l’une des dix mêmes sections que `/get` : `name`, `level`, `status`, `statistics`, `rules`, `talents`, `gear`, `race`, `background` et `personality`, dans cet ordre. `name` modifie séparément le prénom et le nom, tous deux facultatifs. `level` utilise une saisie numérique courte. `status` modifie les PV, PR, PA et DD sous forme de paires obligatoires `current:max`, ainsi que les effets d’état à raison d’un par ligne ; les cinq saisies sont appliquées ensemble. `statistics` utilise une ligne `statName: statValue` pour chacune des statistiques requises : `constitution`, `strength`, `dexterity`, `intelligence`, `speed`, `perception`, `charisma`, `initiative` et `reflexes`. Les noms des statistiques restent en anglais, peuvent apparaître dans n’importe quel ordre et doivent chacun apparaître exactement une fois. Les LOI utilisent une entrée `Nom:Niveau:Description` par ligne. Les talents utilisent une entrée par ligne. `gear` modifie séparément l’équipement et l’inventaire, à raison d’une entrée par ligne, ainsi que l’encombrement sous forme d’une paire obligatoire `current:max` ; les trois saisies sont appliquées ensemble. `race` modifie le nom, la description physique, le lore, le bonus de compétence et la capacité physique. `background` modifie l’apparence, l’histoire personnelle et les objectifs. `personality` modifie les traits, à raison d’un par ligne, et la description. Une liste vide efface la collection ; les espaces, lignes vides et puces initiales facultatives sont normalisés. Les PA doivent rester des nombres entiers avec `0 ≤ current ≤ max ≤ 10`. Chaque section est validée et sauvegardée atomiquement comme une seule opération annulable. Seuls le créateur, un MJ ou le propriétaire du serveur peuvent modifier la fiche."
+      "behavior": "Ouvre un formulaire privé prérempli adapté au type d’entité choisi. Les groupes de personnage et leur ordre actuel restent inchangés. Les groupes de créature sont `identity`, `level`, `status`, `statistics`, `rules`, `traits`, `modifiers` et `gear` ; l’identité modifie le nom et la description. Les dons intrinsèques, modificateurs descriptifs et effets d’état de créature utilisent chacun une ligne `Nom:Description`, tandis que les effets d’état de personnage restent de simples entrées sur des lignes séparées. Les statistiques, LOI, ressources, l’équipement, l’inventaire et l’encombrement conservent leurs formats communs compatibles. L’EntityKey, le type, le schéma, les identifiants sources, les données d’armure naturelle et la provenance ne sont jamais modifiables. Chaque groupe est validé et sauvegardé atomiquement comme une seule opération annulable. Seuls le créateur de l’entité, un MJ ou le propriétaire du serveur peuvent la modifier."
     },
     "undo": {
-      "description": "Restaurer le plus récent état antérieur conservé d’un personnage",
-      "characterOption": "Personnage dont la sauvegarde la plus récente sera restaurée",
-      "success": "Le personnage `{{key}}` a été restauré. La sauvegarde **{{action}}**, créée {{timestamp}} par {{actor}}, a été consommée.",
-      "behavior": "Restaure et consomme la sauvegarde disponible la plus récente d’un personnage actif. Chaque opération `/set`, `/damage`, `/heal` ou `/end-turn` réussie enregistre l’état complet du personnage avant la modification. Trois sauvegardes sont conservées par défaut ; la configuration serveur `characterHistory.maxEntries` peut modifier cette limite, et `/reload` applique la nouvelle valeur aux opérations d’historique suivantes. Des annulations répétées remontent les anciens états conservés. L’annulation n’enregistre pas l’état remplacé, aucune fonction de rétablissement n’est prise en charge et `/delete` supprime définitivement toutes les sauvegardes. Seuls le créateur, un MJ ou le propriétaire du serveur peuvent l’utiliser.",
+      "description": "Restaurer le plus récent état antérieur conservé d’une entité",
+      "entityOption": "Personnage ou créature dont la sauvegarde la plus récente sera restaurée",
+      "success": "L’entité `{{key}}` a été restaurée. La sauvegarde **{{action}}**, créée {{timestamp}} par {{actor}}, a été consommée.",
+      "behavior": "Restaure et consomme la sauvegarde disponible la plus récente d’un personnage ou d’une créature active sans changer son type. Chaque opération `/set`, `/damage`, `/heal` ou `/end-turn` réussie enregistre l’état complet de l’entité avant modification. La limite actuelle `characterHistory.maxEntries` s’applique aux deux types. Des annulations répétées remontent les anciens états ; aucun rétablissement n’est pris en charge et `/delete` supprime toutes les sauvegardes. Seuls le créateur de l’entité, un MJ ou le propriétaire du serveur peuvent l’utiliser.",
       "actions": {
         "set": "modification de champ",
         "damage": "dégâts",
@@ -212,10 +213,10 @@
         "delete": "suppression"
       },
       "errors": {
-        "noHistory": "Aucune sauvegarde n’est disponible pour ce personnage.",
-        "invalidBackup": "La sauvegarde la plus récente du personnage est invalide et ne peut pas être restaurée.",
+        "noHistory": "Aucune sauvegarde n’est disponible pour cette entité.",
+        "invalidBackup": "La sauvegarde la plus récente de l’entité est invalide et ne peut pas être restaurée.",
         "unsupportedSchema": "La sauvegarde la plus récente utilise un schéma non pris en charge et ne peut pas être restaurée.",
-        "operationFailed": "Le personnage et son historique n’ont pas pu être mis à jour en toute sécurité. Aucune nouvelle tentative n’a été effectuée."
+        "operationFailed": "L’entité et son historique n’ont pas pu être mis à jour en toute sécurité. Aucune nouvelle tentative n’a été effectuée."
       }
     },
     "editor": {
@@ -226,6 +227,8 @@
       "collectionPlaceholder": "Une entrée par ligne ; tirets ou astérisques initiaux facultatifs",
       "valuePlaceholder": "Saisir la nouvelle valeur",
       "rulesDescription": "Une LOI par ligne : Nom:Niveau:Description. Les trois valeurs sont obligatoires.",
+      "describedDescription": "Un élément par ligne : Nom:Description. Les deux valeurs sont obligatoires.",
+      "describedPlaceholder": "Une ligne par élément : Nom:Description",
       "collectionDescription": "Une entrée par ligne ; les lignes vides sont ignorées. Vider pour effacer.",
       "textDescription": "La valeur actuelle est préremplie. Vider le formulaire pour effacer le champ.",
       "numberDescription": "Obligatoire. Saisir un nombre valide.",
@@ -252,6 +255,33 @@
         "goals": "Objectifs"
       },
       "title": "Modifier {{field}}"
+    }
+  },
+  "entity": {
+    "types": {
+      "character": "personnage",
+      "creature": "créature"
+    }
+  },
+  "creature": {
+    "fields": {
+      "entityKey": "EntityKey",
+      "identity": "Identité",
+      "name": "Nom",
+      "description": "Description",
+      "level": "Niveau",
+      "status": "État",
+      "statistics": "Statistiques",
+      "rules": "LOI",
+      "traits": "Dons intrinsèques",
+      "modifiers": "Modificateurs descriptifs",
+      "gear": "Équipement et inventaire"
+    },
+    "summary": {
+      "level": "Créature de niveau **{{level}}**"
+    },
+    "detail": {
+      "title": "{{name}} — {{field}}"
     }
   },
   "character": {
@@ -335,6 +365,14 @@
     }
   },
   "errors": {
+    "entityExists": "Cette EntityKey est déjà utilisée par une entité.",
+    "entityMissing": "Entité introuvable.",
+    "entityKeyCollision": "Cette EntityKey appartient à plusieurs types d’entités. Corrigez la collision de stockage avant de continuer.",
+    "entityTypeChanged": "Cette EntityKey appartient désormais à un autre type d’entité. Relancez la commande.",
+    "entityOwnerDelete": "Seuls le créateur de l’entité, un MJ ou le propriétaire du serveur peuvent la supprimer.",
+    "entityEditor": "Seuls le créateur de l’entité, un MJ ou le propriétaire du serveur peuvent la gérer.",
+    "invalidEntityKey": "Une EntityKey doit commencer et se terminer par une lettre ou un chiffre. Elle peut contenir des lettres, des chiffres, des points, des tirets et des tirets bas.",
+    "invalidEntityType": "Le type d’entité doit être `character` ou `creature`.",
     "characterExists": "Cette CharacterKey est déjà utilisée.",
     "characterMissing": "Personnage introuvable.",
     "characterOwnerDelete": "Seuls le créateur du personnage, un MJ ou le propriétaire du serveur peuvent le supprimer.",
@@ -353,6 +391,10 @@
     "ruleNameRequired": "Le nom de la LOI doit précéder le séparateur `:`.",
     "ruleLevelInvalid": "Le niveau d’une LOI doit être un nombre entier positif.",
     "ruleDescriptionRequired": "La description d’une LOI est requise après le second séparateur `:`.",
+    "describedEntryInvalid": "Chaque élément descriptif doit utiliser `Nom:Description`, avec les deux valeurs renseignées.",
+    "creatureLevelRange": "Le niveau d’une créature doit être un nombre entier compris entre 1 et 10.",
+    "creatureStatisticRange": "La statistique `{{stat}}` d’une créature doit être comprise entre 0 et 100.",
+    "creatureResourceRange": "La ressource `{{resource}}` d’une créature doit respecter 0 ≤ current ≤ max ; les PA doivent également être entiers et ne pas dépasser 10.",
     "apRange": "La valeur de {{apLabel}} doit être un nombre entier compris entre 0 et {{max}}.",
     "apCurrentAboveMax": "La valeur actuelle de {{apLabel}} ne peut pas dépasser la valeur maximale de {{apLabel}}.",
     "apMaxBelowCurrent": "La valeur maximale de {{apLabel}} ne peut pas être inférieure à la valeur actuelle de {{apLabel}}.",

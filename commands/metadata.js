@@ -218,15 +218,27 @@ const COMMAND_METADATA = [
 		descriptionKey: 'rpg.add.description',
 		options: [
 			{
-				name: 'character-key',
+				name: 'entity-key',
 				type: 'string',
 				descriptionKey: 'rpg.add.keyOption',
 				required: true,
 				minLength: 1,
 				maxLength: 50,
 			},
+			{
+				name: 'type',
+				type: 'string',
+				descriptionKey: 'rpg.add.typeOption',
+				choices: [
+					{ nameKey: 'entity.types.character', value: 'character' },
+					{ nameKey: 'entity.types.creature', value: 'creature' },
+				],
+			},
 		],
-		examples: ['/add character-key:<new key>'],
+		examples: [
+			'/add entity-key:<new key>',
+			'/add entity-key:<new key> type:<creature>',
+		],
 		help: {
 			order: 30,
 			detailsKey: 'rpg.add.behavior',
@@ -243,25 +255,25 @@ const COMMAND_METADATA = [
 		descriptionKey: 'rpg.get.description',
 		options: [
 			{
-				name: 'character-key',
+				name: 'entity-key',
 				type: 'string',
-				descriptionKey: 'rpg.get.characterOption',
+				descriptionKey: 'rpg.get.entityOption',
 				required: true,
-				autocomplete: { provider: 'characters' },
+				autocomplete: { provider: 'entities' },
 			},
 			{
 				name: 'field',
 				type: 'string',
 				descriptionKey: 'rpg.get.fieldOption',
 				autocomplete: {
-					provider: 'character-sections',
+					provider: 'entity-sections',
 					showAllInHelp: true,
 				},
 			},
 		],
 		examples: [
-			'/get character-key:<key>',
-			'/get character-key:<key> field:<field>',
+			'/get entity-key:<key>',
+			'/get entity-key:<key> field:<field>',
 		],
 		help: {
 			order: 40,
@@ -279,11 +291,11 @@ const COMMAND_METADATA = [
 		descriptionKey: 'rpg.set.description',
 		options: [
 			{
-				name: 'character-key',
+				name: 'entity-key',
 				type: 'string',
-				descriptionKey: 'rpg.set.characterOption',
+				descriptionKey: 'rpg.set.entityOption',
 				required: true,
-				autocomplete: { provider: 'characters' },
+				autocomplete: { provider: 'entities' },
 			},
 			{
 				name: 'field',
@@ -291,12 +303,12 @@ const COMMAND_METADATA = [
 				descriptionKey: 'rpg.set.fieldOption',
 				required: true,
 				autocomplete: {
-					provider: 'character-sections',
+					provider: 'entity-sections',
 					showAllInHelp: true,
 				},
 			},
 		],
-		examples: ['/set character-key:<key> field:<field>'],
+		examples: ['/set entity-key:<key> field:<field>'],
 		help: {
 			order: 50,
 			detailsKey: 'rpg.set.behavior',
@@ -313,11 +325,11 @@ const COMMAND_METADATA = [
 		descriptionKey: 'rpg.heal.description',
 		options: [
 			{
-				name: 'character-key',
+				name: 'entity-key',
 				type: 'string',
-				descriptionKey: 'rpg.heal.characterOption',
+				descriptionKey: 'rpg.heal.entityOption',
 				required: true,
-				autocomplete: { provider: 'characters' },
+				autocomplete: { provider: 'entities' },
 			},
 			{
 				name: 'resource',
@@ -347,7 +359,7 @@ const COMMAND_METADATA = [
 			},
 		],
 		examples: [
-			'/heal character-key:<key> resource:<hp|armor|both> percentage:<0-100>',
+			'/heal entity-key:<key> resource:<hp|armor|both> percentage:<0-100>',
 		],
 		help: {
 			order: 60,
@@ -365,11 +377,11 @@ const COMMAND_METADATA = [
 		descriptionKey: 'rpg.damage.description',
 		options: [
 			{
-				name: 'character-key',
+				name: 'entity-key',
 				type: 'string',
-				descriptionKey: 'rpg.damage.characterOption',
+				descriptionKey: 'rpg.damage.entityOption',
 				required: true,
-				autocomplete: { provider: 'characters' },
+				autocomplete: { provider: 'entities' },
 			},
 			{
 				name: 'damage-amount',
@@ -393,7 +405,7 @@ const COMMAND_METADATA = [
 			},
 		],
 		examples: [
-			'/damage character-key:<key> damage-amount:<number> [piercing]',
+			'/damage entity-key:<key> damage-amount:<number> [piercing]',
 		],
 		help: {
 			order: 65,
@@ -411,14 +423,14 @@ const COMMAND_METADATA = [
 		descriptionKey: 'rpg.endTurn.description',
 		options: [
 			{
-				name: 'character-key',
+				name: 'entity-key',
 				type: 'string',
-				descriptionKey: 'rpg.endTurn.characterOption',
+				descriptionKey: 'rpg.endTurn.entityOption',
 				required: true,
-				autocomplete: { provider: 'characters' },
+				autocomplete: { provider: 'entities' },
 			},
 		],
-		examples: ['/end-turn character-key:<key>'],
+		examples: ['/end-turn entity-key:<key>'],
 		help: {
 			order: 70,
 			detailsKey: 'rpg.endTurn.behavior',
@@ -435,14 +447,14 @@ const COMMAND_METADATA = [
 		descriptionKey: 'rpg.delete.description',
 		options: [
 			{
-				name: 'character-key',
+				name: 'entity-key',
 				type: 'string',
-				descriptionKey: 'rpg.delete.characterOption',
+				descriptionKey: 'rpg.delete.entityOption',
 				required: true,
-				autocomplete: { provider: 'manageable-characters' },
+				autocomplete: { provider: 'manageable-entities' },
 			},
 		],
-		examples: ['/delete character-key:<key>'],
+		examples: ['/delete entity-key:<key>'],
 		help: {
 			order: 80,
 			detailsKey: 'rpg.delete.behavior',
@@ -459,14 +471,14 @@ const COMMAND_METADATA = [
 		descriptionKey: 'rpg.undo.description',
 		options: [
 			{
-				name: 'character-key',
+				name: 'entity-key',
 				type: 'string',
-				descriptionKey: 'rpg.undo.characterOption',
+				descriptionKey: 'rpg.undo.entityOption',
 				required: true,
-				autocomplete: { provider: 'undoable-characters' },
+				autocomplete: { provider: 'undoable-entities' },
 			},
 		],
-		examples: ['/undo character-key:<key>'],
+		examples: ['/undo entity-key:<key>'],
 		help: {
 			order: 75,
 			detailsKey: 'rpg.undo.behavior',

@@ -105,6 +105,10 @@ class Character {
 	get displayName() {
 		return [this.name.firstName, this.name.lastName].filter(Boolean).join(' ') || this.key;
 	}
+
+	get type() {
+		return 'character';
+	}
 }
 
 module.exports = Character;

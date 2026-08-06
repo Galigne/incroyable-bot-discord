@@ -1,11 +1,11 @@
-const { characterEditError } = require('./characterValidation');
+const { combatantEditError } = require('./characterValidation');
 
 function dealDamage(character, damageAmount, piercing = false) {
 	if (!Number.isSafeInteger(damageAmount) || damageAmount <= 0) {
-		throw characterEditError('errors.damageInvalid');
+		throw combatantEditError(character, 'errors.damageInvalid');
 	}
 	if (typeof piercing !== 'boolean') {
-		throw characterEditError('errors.piercingInvalid');
+		throw combatantEditError(character, 'errors.piercingInvalid');
 	}
 
 	const availableAr = Math.max(0, character.status.ar.current);

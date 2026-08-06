@@ -676,9 +676,9 @@ test('/undo is registered, routed, permission-filtered, and documented centrally
 	assert.equal(metadata.permission, 'everyone');
 	assert.equal(metadata.handler, './handlers/undo');
 	assert.equal(
-		commandRegistry.getAutocompleteMetadata('undo', 'character-key')
+		commandRegistry.getAutocompleteMetadata('undo', 'entity-key')
 			.autocomplete.provider,
-		'undoable-characters',
+		'undoable-entities',
 	);
 	assert.ok(commandRegistry.getHelpMetadata('rpg').includes(metadata));
 	const registered = commandRegistry.getDiscordCommandData()
@@ -692,7 +692,7 @@ test('/undo is registered, routed, permission-filtered, and documented centrally
 		})),
 		[{
 			autocomplete: true,
-			name: 'character-key',
+			name: 'entity-key',
 			required: true,
 		}],
 	);
@@ -711,7 +711,7 @@ test('/undo is registered, routed, permission-filtered, and documented centrally
 		config: createConfig(),
 		interaction,
 	});
-	assert.match(response.content, /No backup/);
+	assert.match(response.content, /entity does not exist/i);
 	assert.ok(response.flags);
 });
 
@@ -773,7 +773,7 @@ function createInteraction(userId, roleIds = [], ownerId = 'owner') {
 async function autocompleteUndo(interaction, config) {
 	let choices;
 	interaction.options = {
-		getFocused: () => ({ name: 'character-key', value: '' }),
+		getFocused: () => ({ name: 'entity-key', value: '' }),
 	};
 	interaction.respond = async value => {
 		choices = value;

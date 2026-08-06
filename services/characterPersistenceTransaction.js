@@ -1,18 +1,20 @@
-function createPersistenceError(cause) {
-	const error = new Error('The character and history operation could not be persisted.', {
+function createPersistenceError(cause, entityType = 'character') {
+	const label = getEntityLabel(entityType);
+	const error = new Error(`The ${label} and history operation could not be persisted.`, {
 		cause,
 	});
-	error.name = 'CharacterHistoryPersistenceError';
-	error.code = 'CHARACTER_HISTORY_PERSISTENCE_FAILED';
+	error.name = `${capitalize(label)}HistoryPersistenceError`;
+	error.code = `${label.toUpperCase()}_HISTORY_PERSISTENCE_FAILED`;
 	return error;
 }
 
-function createConsistencyError(cause, rollbackError) {
-	const error = new Error('The character and history operation could not be rolled back.', {
+function createConsistencyError(cause, rollbackError, entityType = 'character') {
+	const label = getEntityLabel(entityType);
+	const error = new Error(`The ${label} and history operation could not be rolled back.`, {
 		cause,
 	});
-	error.name = 'CharacterHistoryConsistencyError';
-	error.code = 'CHARACTER_HISTORY_CONSISTENCY_FAILED';
+	error.name = `${capitalize(label)}HistoryConsistencyError`;
+	error.code = `${label.toUpperCase()}_HISTORY_CONSISTENCY_FAILED`;
 	Object.defineProperty(error, 'rollbackError', {
 		configurable: true,
 		value: rollbackError,
@@ -20,23 +22,29 @@ function createConsistencyError(cause, rollbackError) {
 	return error;
 }
 
-function createDeletionPersistenceError(cause) {
+function createDeletionPersistenceError(cause, entityType = 'character') {
+	const label = getEntityLabel(entityType);
 	const error = new Error(
-		'The character and its history could not be permanently deleted.',
+		`The ${label} and its history could not be permanently deleted.`,
 		{ cause },
 	);
-	error.name = 'CharacterDeletionPersistenceError';
-	error.code = 'CHARACTER_DELETION_PERSISTENCE_FAILED';
+	error.name = `${capitalize(label)}DeletionPersistenceError`;
+	error.code = `${label.toUpperCase()}_DELETION_PERSISTENCE_FAILED`;
 	return error;
 }
 
-function createDeletionConsistencyError(cause, rollbackError) {
+function createDeletionConsistencyError(
+	cause,
+	rollbackError,
+	entityType = 'character',
+) {
+	const label = getEntityLabel(entityType);
 	const error = new Error(
-		'The permanent character deletion could not be rolled back.',
+		`The permanent ${label} deletion could not be rolled back.`,
 		{ cause },
 	);
-	error.name = 'CharacterDeletionConsistencyError';
-	error.code = 'CHARACTER_DELETION_CONSISTENCY_FAILED';
+	error.name = `${capitalize(label)}DeletionConsistencyError`;
+	error.code = `${label.toUpperCase()}_DELETION_CONSISTENCY_FAILED`;
 	Object.defineProperty(error, 'rollbackError', {
 		configurable: true,
 		value: rollbackError,
@@ -47,6 +55,8 @@ function createDeletionConsistencyError(cause, rollbackError) {
 async function commitHistoryThenMutation({
 	characterKey,
 	commitMutation,
+	entityKey = characterKey,
+	entityType = 'character',
 	logger = console,
 	rollbackHistory,
 	writeHistory,
@@ -55,7 +65,7 @@ async function commitHistoryThenMutation({
 		await writeHistory();
 	}
 	catch (error) {
-		throw createPersistenceError(error);
+		throw createPersistenceError(error, entityType);
 	}
 
 	try {
@@ -63,18 +73,21 @@ async function commitHistoryThenMutation({
 	}
 	catch (error) {
 		await rollbackOrThrow({
-			characterKey,
 			cause: error,
+			entityKey,
+			entityType,
 			logger,
 			rollback: rollbackHistory,
 		});
-		throw createPersistenceError(error);
+		throw createPersistenceError(error, entityType);
 	}
 }
 
 async function commitMutationThenHistory({
 	characterKey,
 	commitMutation,
+	entityKey = characterKey,
+	entityType = 'character',
 	logger = console,
 	rollbackMutation,
 	writeHistory,
@@ -83,7 +96,7 @@ async function commitMutationThenHistory({
 		await commitMutation();
 	}
 	catch (error) {
-		throw createPersistenceError(error);
+		throw createPersistenceError(error, entityType);
 	}
 
 	try {
@@ -91,19 +104,23 @@ async function commitMutationThenHistory({
 	}
 	catch (error) {
 		await rollbackOrThrow({
-			characterKey,
 			cause: error,
+			entityKey,
+			entityType,
 			logger,
 			rollback: rollbackMutation,
 		});
-		throw createPersistenceError(error);
+		throw createPersistenceError(error, entityType);
 	}
 }
 
 async function commitPermanentDeletion({
 	characterKey,
 	deleteCharacter,
+	deleteEntity = deleteCharacter,
 	deleteHistory,
+	entityKey = characterKey,
+	entityType = 'character',
 	logger = console,
 	restoreHistory,
 }) {
@@ -111,11 +128,11 @@ async function commitPermanentDeletion({
 		await deleteHistory();
 	}
 	catch (error) {
-		throw createDeletionPersistenceError(error);
+		throw createDeletionPersistenceError(error, entityType);
 	}
 
 	try {
-		await deleteCharacter();
+		await deleteEntity();
 	}
 	catch (error) {
 		try {
@@ -123,18 +140,19 @@ async function commitPermanentDeletion({
 		}
 		catch (rollbackError) {
 			logger.error(
-				`[character-deletion] Unrecoverable rollback failure for "${characterKey}":`,
+				`[${entityType}-deletion] Unrecoverable rollback failure for "${entityKey}":`,
 				rollbackError,
 			);
-			throw createDeletionConsistencyError(error, rollbackError);
+			throw createDeletionConsistencyError(error, rollbackError, entityType);
 		}
-		throw createDeletionPersistenceError(error);
+		throw createDeletionPersistenceError(error, entityType);
 	}
 }
 
 async function rollbackOrThrow({
-	characterKey,
 	cause,
+	entityKey,
+	entityType,
 	logger,
 	rollback,
 }) {
@@ -143,11 +161,19 @@ async function rollbackOrThrow({
 	}
 	catch (rollbackError) {
 		logger.error(
-			`[character-history] Unrecoverable rollback failure for "${characterKey}":`,
+			`[${entityType}-history] Unrecoverable rollback failure for "${entityKey}":`,
 			rollbackError,
 		);
-		throw createConsistencyError(cause, rollbackError);
+		throw createConsistencyError(cause, rollbackError, entityType);
 	}
+}
+
+function getEntityLabel(entityType) {
+	return entityType === 'creature' ? 'creature' : 'character';
+}
+
+function capitalize(value) {
+	return value[0].toUpperCase() + value.slice(1);
 }
 
 module.exports = {

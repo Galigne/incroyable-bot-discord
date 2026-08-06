@@ -70,15 +70,23 @@ saves.
   submission.
 - `commands/character/autocomplete.js`: character-specific autocomplete choice
   presentation shared by the metadata-selected providers.
+- `commands/entity/`: shared character/creature field metadata and combined
+  autocomplete presentation for entity-management commands.
 - `models/Character.js`: Discord-independent character schema and save hydration.
+- `models/Creature.js`: strict persistent creature schema and final-state hydration;
+  loading never reruns generation or localization.
 - `services/`: Discord-independent domain behavior and application workflows,
   including parsing, validation, calculations, persistence, and generation.
-- `services/characterApplicationService.js`: command-facing character workflows;
-  command adapters must use it instead of composing persistence and mechanics.
-- `services/characterOperationQueue.js`: per-CharacterKey synchronization for
-  character creation, mutation, and deletion.
+- `services/characterApplicationService.js`: character-only workflows, including
+  `/gen-char`, and compatibility APIs used by focused character tests.
+- `services/entityApplicationService.js`: command-facing shared management
+  workflows for characters and creatures; management command adapters must use it.
+- `services/entityStore.js`: resolves a globally unique EntityKey to its concrete
+  persistent type and delegates to the matching store.
+- `services/characterOperationQueue.js`: shared per-EntityKey synchronization for
+  cross-type creation, mutation, undo, and deletion.
 - `services/atomicJsonFile.js`: same-directory temporary-file serialization and
-  atomic publication for character saves.
+  atomic publication for entity saves and history.
 - `services/characterStoragePaths.js`: active save and `.history` path derivation
   from the same configured save directory.
 - `services/characterHistoryStore.js`: bounded pre-change history documents,
@@ -87,8 +95,18 @@ saves.
   permanent deletion, and rollback for active saves and history documents.
 - `services/characterSaveSchema.js`: owns the current character-save schema version
   and validates raw save metadata before model hydration.
+- `services/creatureSaveSchema.js`: owns the strict creature-save schema and
+  validates complete final state before model hydration or publication.
+- `services/creatureStore.js` and `services/creatureHistoryStore.js`: creature
+  persistence, bounded history, undo, permanent deletion, and rollback-safe commits.
+- `services/entityKeyRegistry.js`: global character/creature key collision checks.
 - `services/characterFieldCatalog.js`: canonical character field identities,
   aliases, storage paths, types, and editable/viewable capabilities.
+- `services/creatureFieldCatalog.js`: independent explicit creature field order and
+  editable/viewable capabilities; source IDs, provenance, type, key, schema metadata,
+  and natural-armor metadata are not editable.
+- `services/entityFieldEditor.js`: shared grouped parser/serializer foundation used
+  by the type-specific character and creature editor adapters.
 - `services/characterStore.js`: JSON character persistence; create, update, and
   delete operations are serialized per key, while updates replace saves atomically.
 - `services/characterEditor.js`: grouped editable-value parsing, complete
@@ -126,8 +144,9 @@ saves.
 - `scripts/checks/`: focused runtime, command, generator, character, interaction,
   and authorization integration checks plus temporary-save helpers.
 - `data/generators/`: generator catalogs. See its `README.md` before editing formats.
-- `save/`: real character data. Preserve these files unless the user explicitly
-  requests a character change or deletion.
+- `save/`: real entity data. Characters remain at the root, creatures live under
+  `save/creatures/`, and their histories mirror those roots under `.history/`.
+  Preserve all real saves unless the user explicitly requests a change or deletion.
 - `adapters/`: external Discord integrations that are neither domain services nor
   command modules, such as local voice playback.
 - `util/`: shared cross-cutting helpers and feature-specific Discord response
@@ -141,6 +160,8 @@ saves.
 - `util/characterCommandResponses.js`: localized character reply payloads.
 - `util/characterCommandErrors.js`: centralized mapping of expected character errors
   and structured service outcomes to localized replies.
+- `util/entityCommandResponses.js`, `util/entityCommandErrors.js`, and
+  `util/creatureRenderer.js`: entity-neutral command presentation and creature embeds.
 
 ## Command architecture and conventions
 
@@ -239,29 +260,31 @@ command/subcommand -> application service -> domain helpers/persistence
 command/subcommand -> response adapter (service outcome -> Discord payload)
 ```
 
-For character persistence or mutations, commands and interaction handlers must call
-`services/characterApplicationService.js`; they must not compose
-`characterStore.js` and mechanics directly. Models own state and hydration only.
-They must not import Discord or localization code; character embeds belong in
-`util/characterRenderer.js`.
+Shared management commands and interaction handlers must call
+`services/entityApplicationService.js`; character-only workflows such as
+`/gen-char` use `services/characterApplicationService.js`. They must not compose
+concrete stores and mechanics directly. Models own state and hydration only. They
+must not import Discord or localization code; entity embeds belong in the renderer
+adapters under `util/`.
 
-Character creation, updates, and deletion must remain inside the shared
-per-CharacterKey critical section in `services/characterStore.js`. Update locks
-cover the latest load, authorization, mutation, serialization, and atomic
-replacement. Save replacements must be written and closed in a uniquely named
-same-directory temporary file before publication; exclusive creation must never
-replace an existing save. Always release and discard unused keyed queues after
-success or failure.
+Character and creature creation, updates, undo, and deletion must remain inside the
+shared per-EntityKey critical section exposed by `services/characterOperationQueue.js`.
+The same key lock protects cross-type creation so a character and creature cannot be
+created concurrently with the same key. Update locks cover the latest load,
+authorization, mutation, validation, serialization, and atomic replacement. Save
+replacements must be written and closed in a uniquely named same-directory temporary
+file before publication; exclusive creation must never replace an existing entity.
+Always release and discard unused keyed queues after success or failure.
 
-History-backed mutations, undo, and permanent deletion must keep both the active character state and
-the `.history/<CharacterKey>.json` state inside that same critical section. Prepare
-and serialize both results before the first write. If the second file operation
-fails, roll back the first; log an unrecoverable rollback failure without exposing
-filesystem details in Discord. History documents are oldest-to-newest stacks of
-complete pre-change character saves with `createdAt`, `actorId`, and one of
-`set`, `damage`, `heal`, or `end-turn`. Legacy `delete` entries remain readable for
-compatibility but must never be produced. Never add rejected, unauthorized,
-invalid, or failed operations to history.
+History-backed mutations, undo, and permanent deletion must keep both the active
+entity and its type-specific history document inside that same critical section.
+Prepare and serialize both results before the first write. If the second file
+operation fails, roll back the first; log an unrecoverable rollback failure without
+exposing filesystem details in Discord. History documents are oldest-to-newest
+stacks of complete same-type pre-change saves with `createdAt`, `actorId`, and one of
+`set`, `damage`, `heal`, or `end-turn`. Legacy character `delete` entries remain
+readable for compatibility but must never be produced. Never add rejected,
+unauthorized, invalid, or failed operations to history.
 
 For every non-trivial command feature:
 
@@ -320,7 +343,9 @@ user-facing values even when they are grammatically valid.
 Register every character field once in `services/characterFieldCatalog.js`. Derive
 editor/viewer choices, aliases, storage paths, and presentation labels from that
 catalog; do not create parallel field maps in commands, models, services, or tests.
-Add localized label keys in `util/characterDisplay.js` and both locale catalogs.
+Register creature fields independently in `services/creatureFieldCatalog.js` and
+preserve both explicit orders through `services/entityFieldCatalog.js`. Add localized
+labels through the matching display adapter and both locale catalogs.
 
 For private interaction responses, use:
 
@@ -334,21 +359,24 @@ Do not use the deprecated `ephemeral: true` option. The test suite rejects it.
 
 The current viewing and editing decisions are intentional:
 
-- `/get character-key:<key>` posts the public character summary.
-- `/get character-key:<key> field:<field>` posts one complete detailed field.
+- `/add entity-key:<new key> [type:<character|creature>]` creates a blank owned
+  entity; omitted `type` means `character`. EntityKey and type are immutable.
+- `/get entity-key:<key>` posts the public character or creature summary.
+- `/get entity-key:<key> field:<field>` posts one complete type-compatible field.
 - `/help command:get` explains the supported views.
 - There is intentionally no `/get-all` command.
-- `/set character-key:<key> field:<field>` has no value argument. Submitting
+- `/set entity-key:<key> field:<field>` has no value argument. Submitting
   the command immediately opens one private modal prefilled with the saved value
   or complete grouped section.
-- The only `/set field` values are `name`, `level`, `race`, `background`,
-  `personality`, `statistics`, `rules`, `talents`, `status-effects`, `equipment`,
-  `inventory`, `encumbrance`, `hp`, `ar`, `ap`, and `md`. Stored child fields
-  remain canonical catalog entries but are not independently editable.
+- Character fields remain `name`, `level`, `status`, `statistics`, `rules`,
+  `talents`, `gear`, `race`, `background`, and `personality`, in that exact order.
+- Creature fields use the independent exact order `identity`, `level`, `status`,
+  `statistics`, `rules`, `traits`, `modifiers`, and `gear`.
+- Autocomplete must return only fields compatible with a resolved EntityKey.
 - `/help command:set` explains every grouped modal, named statistics line, and
   multiline format.
-- `/delete character-key:<key>` opens a private, single-use confirmation modal.
-  The user must type the exact case-sensitive CharacterKey; success permanently
+- `/delete entity-key:<key>` opens a private, single-use confirmation modal.
+  The user must type the exact case-sensitive EntityKey; success permanently
   removes the active save and all retained backups, so `/undo` cannot restore it.
 - Do not add section/field dropdown navigation back to the editor.
 
@@ -370,10 +398,11 @@ separate prefilled modal inputs:
 Accept them in any order, but require every name exactly once and reject unknown or
 duplicate names.
 Parse and validate a complete grouped submission before applying any value.
-One successful modal submission performs one character-store update, creates one
-`set` history entry, and returns one localized response. Invalid or unauthorized
-submissions must not mutate the character or history. Authorization must be
-repeated inside the existing per-key update queue when the modal is submitted.
+One successful modal submission performs one concrete entity-store update, creates
+one `set` history entry, and returns one localized response. Invalid or unauthorized
+submissions must not mutate the entity or history. Authorization and session-bound
+type validation must be repeated inside the existing per-key update queue when the
+modal is submitted.
 
 Textual collections have no per-entry `add`, `set`, `remove`, or `clear` action
 syntax. The `/set` modal presents their full multiline content and replaces it
@@ -392,6 +421,25 @@ The model still stores traits, talents, RULEs, status effects, equipment, and
 inventory in arrays because generation and display logic depend on them. Talents
 remain plain strings rather than structured objects. “No list system” refers to
 the command UX, not removal of the internal schema.
+
+## Persistent entity types
+
+Persistent concrete types are exactly `character` and `creature`. Animal,
+companion, and monster are generator archetypes, never additional persistence
+types. EntityKeys are globally unique across both types. Character schema v2,
+migration, JSON order, and root save/history paths remain unchanged and character
+saves do not require a discriminator. Creature saves require `type: "creature"`,
+use their own strict schema, and hydrate stored final state without rerunning random
+generation, localization, references, modifiers, or formulas.
+
+Shared management commands are `/add`, `/get`, `/set`, `/damage`, `/heal`,
+`/end-turn`, `/delete`, and `/undo`, all using `entity-key`. `/gen-char` remains
+character-only and keeps `character-key`. Do not add `/gen-monster` until the
+generator part that explicitly introduces it.
+
+Anyone may view either type. The creator, configured DM role, and actual Discord
+server owner may mutate, undo, or delete it. Creature encumbrance is an independent
+manual `{ current, max }` resource that defaults to `0 / 0` and is never derived.
 
 ## Character rules and permissions
 
@@ -471,30 +519,30 @@ Resources and display:
   HP. With `piercing:true`, it bypasses AR. Piercing defaults to false.
 - `/end-turn` restores current AP and MD to maximum.
 
-## Character history and undo
+## Entity history and undo
 
-Active saves remain directly under `save/`; history lives separately under
-`save/.history/`, or under the equivalent directory derived from
+Character saves remain directly under `save/`, while creature saves live under
+`save/creatures/`. Their histories live under `save/.history/` and
+`save/.history/creatures/`, or the equivalent roots derived from
 `INCREDIBLE_BOT_SAVE_DIRECTORY` in tests. Each history document contains an
-oldest-to-newest `entries` stack. Normal character listing and autocomplete must
-not traverse `.history`; only the `/undo` provider may suggest history-backed keys.
+oldest-to-newest `entries` stack. Normal entity listing and autocomplete must not
+traverse `.history`; only the `/undo` provider may suggest history-backed keys.
 
 Successful `/set` modal submissions, `/damage`, `/heal`, and `/end-turn`
 push the complete schema-versioned pre-change state. Retain the newest
 `characterHistory.maxEntries` entries and remove the oldest excess entries. Apply a
-reduced limit the next time that character’s history is pushed or popped.
+reduced limit the next time that entity’s history is pushed or popped.
 
-`/undo character-key:<key>` pops and validates the newest snapshot, restores it as
-the active save, and never pushes the displaced state. Repeated undo therefore walks
-backward and cannot alternate indefinitely; redo and history browsing are
-intentionally unsupported. Authorize active characters from their current save.
-The creator, configured DM role, and actual Discord server owner may undo.
-Autocomplete follows those same rules and includes valid active CharacterKeys with
-usable history.
+`/undo entity-key:<key>` pops and validates the newest snapshot, restores it as the
+same concrete type, and never pushes the displaced state. Repeated undo therefore
+walks backward and cannot alternate indefinitely; redo and history browsing are
+intentionally unsupported. Authorize active entities from their current save. The
+creator, configured DM role, and actual Discord server owner may undo. Autocomplete
+follows those same rules and combines valid active EntityKeys with usable history.
 
-`/delete character-key:<key>` validates existence and authorization before opening
+`/delete entity-key:<key>` validates existence and authorization before opening
 a private, user-bound, key-bound, expiring confirmation modal. Submission consumes
-the session, requires an exact case-sensitive CharacterKey match, then reloads and
+the session, requires an exact case-sensitive EntityKey match, then reloads and
 reauthorizes inside the per-key queue. A successful deletion removes both the
 active save and the complete history document without creating a history entry.
 Missing history is valid. Delete history first, delete the active save second, and

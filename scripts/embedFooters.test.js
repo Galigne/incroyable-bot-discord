@@ -125,7 +125,7 @@ test('/get rejects former independent child views and safely truncates grouped l
 	]) {
 		const response = createCharacterGetResponse(character, field, 'en');
 		assert.equal(response.embeds, undefined, field);
-		assert.match(response.content, /Unknown character field/, field);
+		assert.match(response.content, /field is not available for this entity/, field);
 	}
 	character.gear.equipment = ['A'.repeat(2_000), 'second'];
 	const gear = createCharacterGetResponse(character, 'gear', 'en').embeds[0].toJSON();

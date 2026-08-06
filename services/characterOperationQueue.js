@@ -1,13 +1,13 @@
-const characterOperationQueues = new Map();
+const entityOperationQueues = new Map();
 
-async function runCharacterOperation(characterKey, operation) {
-	let queue = characterOperationQueues.get(characterKey);
+async function runEntityOperation(entityKey, operation) {
+	let queue = entityOperationQueues.get(entityKey);
 	if (!queue) {
 		queue = {
 			pending: 0,
 			tail: Promise.resolve(),
 		};
-		characterOperationQueues.set(characterKey, queue);
+		entityOperationQueues.set(entityKey, queue);
 	}
 
 	const previousOperation = queue.tail;
@@ -26,23 +26,31 @@ async function runCharacterOperation(characterKey, operation) {
 		release();
 		if (
 			queue.pending === 0
-			&& characterOperationQueues.get(characterKey) === queue
+			&& entityOperationQueues.get(entityKey) === queue
 		) {
-			characterOperationQueues.delete(characterKey);
+			entityOperationQueues.delete(entityKey);
 		}
 	}
 }
 
+const runCharacterOperation = runEntityOperation;
+
 function getCharacterOperationQueueSize() {
-	return characterOperationQueues.size;
+	return entityOperationQueues.size;
 }
 
 function getPendingCharacterOperationCount(characterKey) {
-	return characterOperationQueues.get(characterKey)?.pending ?? 0;
+	return entityOperationQueues.get(characterKey)?.pending ?? 0;
 }
+
+const getEntityOperationQueueSize = getCharacterOperationQueueSize;
+const getPendingEntityOperationCount = getPendingCharacterOperationCount;
 
 module.exports = {
 	getCharacterOperationQueueSize,
+	getEntityOperationQueueSize,
 	getPendingCharacterOperationCount,
+	getPendingEntityOperationCount,
 	runCharacterOperation,
+	runEntityOperation,
 };

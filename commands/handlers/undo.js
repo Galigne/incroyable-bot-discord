@@ -1,28 +1,22 @@
-const {
-	undoCharacter,
-} = require('../../services/characterApplicationService');
-const { canManageCharacter } = require('../../util/authorization');
-const { replyToCharacterError } = require('../../util/characterCommandErrors');
-const {
-	createCharacterHistoryContext,
-} = require('../../util/characterHistoryContext');
-const {
-	createCharacterUndoResponse,
-} = require('../../util/characterCommandResponses');
+const { undoEntity } = require('../../services/entityApplicationService');
+const { canManageEntity } = require('../../util/authorization');
+const { replyToEntityError } = require('../../util/entityCommandErrors');
+const { createEntityHistoryContext } = require('../../util/entityHistoryContext');
+const { createEntityUndoResponse } = require('../../util/entityCommandResponses');
 
 module.exports = {
 	async execute({ config, interaction, locale }) {
-		const characterKey = interaction.options.getString('character-key', true);
+		const entityKey = interaction.options.getString('entity-key', true);
 		try {
-			const result = await undoCharacter(
-				characterKey,
-				character => canManageCharacter(interaction, character, config),
-				createCharacterHistoryContext(interaction, config),
+			const result = await undoEntity(
+				entityKey,
+				entity => canManageEntity(interaction, entity, config),
+				createEntityHistoryContext(interaction, config),
 			);
-			await interaction.reply(createCharacterUndoResponse(result, locale));
+			await interaction.reply(createEntityUndoResponse(result, locale));
 		}
 		catch (error) {
-			if (!await replyToCharacterError(interaction, error, locale)) {
+			if (!await replyToEntityError(interaction, error, locale)) {
 				throw error;
 			}
 		}

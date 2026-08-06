@@ -1,11 +1,11 @@
-const { openCharacterEditor } = require('../character/interactions');
+const { openEntityEditor } = require('../character/interactions');
 
 module.exports = {
 	async execute({ config, interaction }) {
-		await openCharacterEditor(
+		await openEntityEditor(
 			interaction,
 			config,
-			interaction.options.getString('character-key', true),
+			interaction.options.getString('entity-key', true),
 			interaction.options.getString('field', true),
 		);
 	},

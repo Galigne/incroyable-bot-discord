@@ -7,26 +7,27 @@ const {
 	TextInputStyle,
 } = require('discord.js');
 const {
-	deleteCharacter,
-	getDeletableCharacter,
-	getEditableCharacterField,
-	updateEditableCharacter,
-} = require('../../services/characterApplicationService');
-const { canManageCharacter } = require('../../util/authorization');
+	deleteEntity,
+	getDeletableEntity,
+	getEditableEntityField,
+	updateEditableEntity,
+} = require('../../services/entityApplicationService');
 const {
-	createCharacterDeletedResponse,
-	createCharacterEditResponse,
-} = require('../../util/characterCommandResponses');
+	getEditableEntityFieldDefinition,
+} = require('../../services/entityFieldCatalog');
+const { canManageEntity } = require('../../util/authorization');
 const {
-	replyToCharacterError,
-} = require('../../util/characterCommandErrors');
+	createEntityDeletedResponse,
+	createEntityEditResponse,
+} = require('../../util/entityCommandResponses');
+const { replyToEntityError } = require('../../util/entityCommandErrors');
 const {
-	getCharacterFieldLabel,
 	getResourceAbbreviation,
 } = require('../../util/characterDisplay');
+const { getEntityFieldLabel } = require('../../util/entityDisplay');
 const {
-	createCharacterHistoryContext,
-} = require('../../util/characterHistoryContext');
+	createEntityHistoryContext,
+} = require('../../util/entityHistoryContext');
 const {
 	consumeInteractionSession,
 	createInteractionSession,
@@ -34,17 +35,22 @@ const {
 	getInteractionSession,
 } = require('../../util/interactionSessions');
 const {
-	getEditFieldLabel,
-	getEditInputId,
-	getEditTargetDefinitions,
-} = require('./editorFields');
-const { getEditableFieldDefinition } = require('../../services/characterFieldCatalog');
+	getEntityEditFieldLabel,
+	getEntityEditInputId,
+	getEntityEditTargetDefinitions,
+} = require('../entity/editorFields');
 const { getLocale, t } = require('../../util/i18n');
 
-async function openCharacterEditor(interaction, config, characterKey, fieldName) {
+async function openEntityEditor(interaction, config, entityKey, fieldName) {
 	const locale = getLocale(config, interaction.guildId);
 	try {
-		const normalizedField = findEditableField(fieldName);
+		const editorState = await getEditableEntityField(
+			entityKey,
+			fieldName,
+			entity => canManageEntity(interaction, entity, config),
+		);
+		const type = editorState.entity.type;
+		const normalizedField = getEditableEntityFieldDefinition(type, fieldName)?.editId;
 		if (!normalizedField) {
 			await interaction.reply({
 				content: t(locale, 'rpg.editor.unknownField', { field: fieldName }),
@@ -52,14 +58,7 @@ async function openCharacterEditor(interaction, config, characterKey, fieldName)
 			});
 			return;
 		}
-
-		const editorState = await getEditableCharacterField(
-			characterKey,
-			normalizedField,
-			currentCharacter => canManageCharacter(interaction, currentCharacter, config),
-		);
-		const value = editorState.value;
-		if (isValueTooLarge(value)) {
+		if (isValueTooLarge(editorState.value)) {
 			await interaction.reply({
 				content: t(locale, 'rpg.editor.tooLarge'),
 				flags: MessageFlags.Ephemeral,
@@ -68,57 +67,74 @@ async function openCharacterEditor(interaction, config, characterKey, fieldName)
 		}
 
 		const session = createInteractionSession('set', interaction.user.id, {
-			characterKey,
+			entityKey,
+			entityType: type,
 			fieldName: normalizedField,
 		});
-		await interaction.showModal(createFieldModal(session.id, normalizedField, value, locale));
+		await interaction.showModal(createEntityFieldModal(
+			session.id,
+			type,
+			normalizedField,
+			editorState.value,
+			locale,
+		));
 	}
 	catch (error) {
-		if (!await replyToCharacterError(interaction, error, locale)) {
+		if (!await replyToEntityError(interaction, error, locale)) {
 			throw error;
 		}
 	}
 }
 
-async function openCharacterDeletionConfirmation(
+async function openEntityDeletionConfirmation(
 	interaction,
 	config,
-	characterKey,
+	entityKey,
+	options = {},
 ) {
 	const locale = getLocale(config, interaction.guildId);
 	try {
-		await getDeletableCharacter(
-			characterKey,
-			currentCharacter => canManageCharacter(interaction, currentCharacter, config),
+		const entity = await getDeletableEntity(
+			entityKey,
+			currentEntity => canManageEntity(interaction, currentEntity, config),
 		);
+		const confirmationInputId = options.legacy
+			? 'character-key-confirmation'
+			: 'entity-key-confirmation';
 		const session = createInteractionSession('delete', interaction.user.id, {
-			characterKey,
+			confirmationInputId,
+			entityKey,
+			entityType: entity.type,
 		});
-		await interaction.showModal(createDeletionModal(session.id, characterKey, locale));
+		await interaction.showModal(createEntityDeletionModal(
+			session.id,
+			entityKey,
+			locale,
+			confirmationInputId,
+		));
 	}
 	catch (error) {
-		if (!await replyToCharacterError(interaction, error, locale)) {
+		if (!await replyToEntityError(interaction, error, locale)) {
 			throw error;
 		}
 	}
 }
 
-async function handleCharacterInteraction(interaction, config) {
+async function handleEntityInteraction(interaction, config) {
 	if (!interaction.isModalSubmit()) {
 		return false;
 	}
 	if (interaction.customId.startsWith('rpg-set:')) {
-		return handleCharacterEditSubmission(interaction, config);
+		return handleEntityEditSubmission(interaction, config);
 	}
 	if (interaction.customId.startsWith('rpg-delete:')) {
-		return handleCharacterDeletionSubmission(interaction, config);
+		return handleEntityDeletionSubmission(interaction, config);
 	}
 	return false;
 }
 
-async function handleCharacterEditSubmission(interaction, config) {
+async function handleEntityEditSubmission(interaction, config) {
 	const locale = getLocale(config, interaction.guildId);
-
 	const sessionId = interaction.customId.slice('rpg-set:'.length);
 	const session = getInteractionSession(sessionId, interaction.user.id, 'set');
 	if (!session) {
@@ -130,25 +146,30 @@ async function handleCharacterEditSubmission(interaction, config) {
 	}
 
 	try {
-		const result = await updateEditableCharacter(
-			session.characterKey,
+		const result = await updateEditableEntity(
+			session.entityKey,
 			session.fieldName,
-			getSubmittedFieldValue(interaction, session.fieldName),
-			currentCharacter => canManageCharacter(interaction, currentCharacter, config),
-			createCharacterHistoryContext(interaction, config),
+			getSubmittedFieldValue(
+				interaction,
+				session.entityType,
+				session.fieldName,
+			),
+			entity => canManageEntity(interaction, entity, config),
+			createEntityHistoryContext(interaction, config),
+			session.entityType,
 		);
 		deleteInteractionSession(session.id);
-		await interaction.reply(createCharacterEditResponse(result, locale));
+		await interaction.reply(createEntityEditResponse(result, locale));
 	}
 	catch (error) {
-		if (!await replyToCharacterError(interaction, error, locale)) {
+		if (!await replyToEntityError(interaction, error, locale)) {
 			throw error;
 		}
 	}
 	return true;
 }
 
-async function handleCharacterDeletionSubmission(interaction, config) {
+async function handleEntityDeletionSubmission(interaction, config) {
 	const locale = getLocale(config, interaction.guildId);
 	const sessionId = interaction.customId.slice('rpg-delete:'.length);
 	const consumed = consumeInteractionSession(
@@ -173,12 +194,12 @@ async function handleCharacterDeletionSubmission(interaction, config) {
 
 	const { session } = consumed;
 	if (
-		interaction.fields.getTextInputValue('character-key-confirmation')
-		!== session.characterKey
+		interaction.fields.getTextInputValue(session.confirmationInputId)
+		!== session.entityKey
 	) {
 		await interaction.reply({
 			content: t(locale, 'rpg.delete.incorrectConfirmation', {
-				key: session.characterKey,
+				key: session.entityKey,
 			}),
 			flags: MessageFlags.Ephemeral,
 		});
@@ -186,53 +207,56 @@ async function handleCharacterDeletionSubmission(interaction, config) {
 	}
 
 	try {
-		await deleteCharacter(
-			session.characterKey,
-			currentCharacter => canManageCharacter(interaction, currentCharacter, config),
+		await deleteEntity(
+			session.entityKey,
+			entity => canManageEntity(interaction, entity, config),
+			session.entityType,
 		);
-		await interaction.reply(
-			createCharacterDeletedResponse(session.characterKey, locale),
-		);
+		await interaction.reply(createEntityDeletedResponse(session.entityKey, locale));
 	}
 	catch (error) {
-		if (!await replyToCharacterError(interaction, error, locale)) {
+		if (!await replyToEntityError(interaction, error, locale)) {
 			throw error;
 		}
 	}
 	return true;
 }
 
-function createFieldModal(sessionId, fieldName, value, locale = 'en') {
-	const field = getEditableFieldDefinition(fieldName);
+function createEntityFieldModal(
+	sessionId,
+	type,
+	fieldName,
+	value,
+	locale = 'en',
+) {
+	const field = getEditableEntityFieldDefinition(type, fieldName);
 	if (!field) {
-		throw new Error(`Unknown editable field: ${fieldName}`);
+		throw new Error(`Unknown editable ${type} field: ${fieldName}`);
 	}
-	const label = getEditFieldLabel(fieldName, locale);
-	const targets = getEditTargetDefinitions(fieldName);
+	const fieldLabel = getEntityEditFieldLabel(type, fieldName, locale);
+	const targets = getEntityEditTargetDefinitions(type, fieldName);
 	const inputDefinitions = field.editKind === 'multi'
 		? targets.map(target => ({
-			customId: getEditInputId(target.id),
-			label: getEditInputLabel(target, locale),
+			customId: getEntityEditInputId(target.id),
+			label: getEditInputLabel(type, target, locale),
 			target,
 			value: value[target.id],
 		}))
 		: [{
 			customId: 'field-value',
-			label,
+			label: fieldLabel,
 			target: field,
 			value,
 		}];
-	const components = inputDefinitions.map(inputDefinition => (
-		createEditInput(field, inputDefinition, locale)
-	));
-
 	return new ModalBuilder()
 		.setCustomId(`rpg-set:${sessionId}`)
-		.setTitle(t(locale, 'rpg.editor.title', { field: label }).slice(0, 45))
-		.addLabelComponents(...components);
+		.setTitle(t(locale, 'rpg.editor.title', { field: fieldLabel }).slice(0, 45))
+		.addLabelComponents(...inputDefinitions.map(inputDefinition => (
+			createEditInput(type, field, inputDefinition, locale)
+		)));
 }
 
-function getEditInputLabel(target, locale) {
+function getEditInputLabel(type, target, locale) {
 	if (target.resourceId && target.inputKind === 'pair') {
 		return getResourceAbbreviation(locale, target.resourceId);
 	}
@@ -252,10 +276,10 @@ function getEditInputLabel(target, locale) {
 	}[target.id];
 	return labelKey
 		? t(locale, `rpg.editor.inputLabels.${labelKey}`)
-		: getCharacterFieldLabel(locale, target.id);
+		: getEntityFieldLabel(locale, type, target.id);
 }
 
-function createEditInput(field, inputDefinition, locale) {
+function createEditInput(type, field, inputDefinition, locale) {
 	const { customId, label, target, value } = inputDefinition;
 	const inputStyle = (
 		field.editKind === 'named-lines'
@@ -267,7 +291,9 @@ function createEditInput(field, inputDefinition, locale) {
 	const input = new TextInputBuilder()
 		.setCustomId(customId)
 		.setStyle(inputStyle)
-		.setMaxLength(target.inputKind === 'pair' ? 100 : 4_000)
+		.setMaxLength(target.inputKind === 'pair'
+			? 100
+			: target.maxLength ?? 4_000)
 		.setRequired(isEditInputRequired(field, target));
 	if (value) {
 		input.setValue(value);
@@ -277,11 +303,11 @@ function createEditInput(field, inputDefinition, locale) {
 	}
 	return new LabelBuilder()
 		.setLabel(label.slice(0, 45))
-		.setDescription(getEditInputDescription(field, target, locale).slice(0, 100))
+		.setDescription(getEditInputDescription(type, field, target, locale).slice(0, 100))
 		.setTextInputComponent(input);
 }
 
-function getEditInputDescription(field, target, locale) {
+function getEditInputDescription(type, field, target, locale) {
 	if (target.inputKind === 'pair') {
 		return t(locale, 'rpg.editor.pairDescription');
 	}
@@ -290,6 +316,9 @@ function getEditInputDescription(field, target, locale) {
 	}
 	if (target.rules) {
 		return t(locale, 'rpg.editor.rulesDescription');
+	}
+	if (target.described) {
+		return t(locale, 'rpg.editor.describedDescription');
 	}
 	if (target.id === 'gear.equipment') {
 		return t(locale, 'rpg.editor.equipmentDescription');
@@ -303,7 +332,9 @@ function getEditInputDescription(field, target, locale) {
 	if (target.type === 'text') {
 		return t(locale, 'rpg.editor.textDescription');
 	}
-	return t(locale, 'rpg.editor.numberDescription');
+	return t(locale, 'rpg.editor.numberDescription', {
+		field: getEntityFieldLabel(locale, type, target.id),
+	});
 }
 
 function getEditInputPlaceholder(field, target, locale) {
@@ -312,6 +343,9 @@ function getEditInputPlaceholder(field, target, locale) {
 	}
 	if (field.editKind === 'named-lines') {
 		return t(locale, 'rpg.editor.statisticsPlaceholder');
+	}
+	if (target.described) {
+		return t(locale, 'rpg.editor.describedPlaceholder');
 	}
 	if (target.multiline) {
 		return t(locale, 'rpg.editor.collectionPlaceholder');
@@ -326,21 +360,25 @@ function isEditInputRequired(field, target) {
 	return target.inputKind === 'pair' || target.type !== 'text';
 }
 
-function createDeletionModal(sessionId, characterKey, locale = 'en') {
+function createEntityDeletionModal(
+	sessionId,
+	entityKey,
+	locale = 'en',
+	confirmationInputId = 'entity-key-confirmation',
+) {
 	const confirmationInput = new TextInputBuilder()
-		.setCustomId('character-key-confirmation')
+		.setCustomId(confirmationInputId)
 		.setStyle(TextInputStyle.Short)
 		.setMinLength(1)
 		.setMaxLength(50)
 		.setPlaceholder(t(locale, 'rpg.delete.confirmationPlaceholder'))
 		.setRequired(true);
-
 	return new ModalBuilder()
 		.setCustomId(`rpg-delete:${sessionId}`)
 		.setTitle(t(locale, 'rpg.delete.modalTitle'))
 		.addTextDisplayComponents(
 			new TextDisplayBuilder().setContent(
-				t(locale, 'rpg.delete.warning', { key: characterKey }),
+				t(locale, 'rpg.delete.warning', { key: entityKey }),
 			),
 		)
 		.addLabelComponents(
@@ -351,19 +389,17 @@ function createDeletionModal(sessionId, characterKey, locale = 'en') {
 		);
 }
 
-function findEditableField(fieldName) {
-	return getEditableFieldDefinition(fieldName)?.editId ?? null;
-}
-
-function getSubmittedFieldValue(interaction, fieldName) {
-	const field = getEditableFieldDefinition(fieldName);
+function getSubmittedFieldValue(interaction, type, fieldName) {
+	const field = getEditableEntityFieldDefinition(type, fieldName);
 	if (field?.editKind !== 'multi') {
 		return interaction.fields.getTextInputValue('field-value');
 	}
-	return Object.fromEntries(getEditTargetDefinitions(fieldName).map(target => [
-		target.id,
-		interaction.fields.getTextInputValue(getEditInputId(target.id)),
-	]));
+	return Object.fromEntries(
+		getEntityEditTargetDefinitions(type, fieldName).map(target => [
+			target.id,
+			interaction.fields.getTextInputValue(getEntityEditInputId(target.id)),
+		]),
+	);
 }
 
 function isValueTooLarge(value) {
@@ -373,10 +409,41 @@ function isValueTooLarge(value) {
 	return values.some(item => String(item).length > 4_000);
 }
 
+function createFieldModal(sessionId, fieldName, value, locale = 'en') {
+	return createEntityFieldModal(sessionId, 'character', fieldName, value, locale);
+}
+
+function createDeletionModal(sessionId, entityKey, locale = 'en') {
+	return createEntityDeletionModal(
+		sessionId,
+		entityKey,
+		locale,
+		'character-key-confirmation',
+	);
+}
+
+function openCharacterEditor(interaction, config, characterKey, fieldName) {
+	return openEntityEditor(interaction, config, characterKey, fieldName);
+}
+
+function openCharacterDeletionConfirmation(interaction, config, characterKey) {
+	return openEntityDeletionConfirmation(
+		interaction,
+		config,
+		characterKey,
+		{ legacy: true },
+	);
+}
+
 module.exports = {
 	createDeletionModal,
+	createEntityDeletionModal,
+	createEntityFieldModal,
 	createFieldModal,
-	handleCharacterInteraction,
+	handleCharacterInteraction: handleEntityInteraction,
+	handleEntityInteraction,
 	openCharacterDeletionConfirmation,
 	openCharacterEditor,
+	openEntityDeletionConfirmation,
+	openEntityEditor,
 };

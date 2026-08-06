@@ -793,7 +793,7 @@ test('modal routing submits all inputs once and repeats authorization', async ()
 		},
 	}, config);
 	assert.equal((await getCharacter(authorizationKey)).name.firstName, '');
-	assert.equal(deniedResponse.content, english.errors.characterEditor);
+	assert.equal(deniedResponse.content, english.errors.entityEditor);
 	await assert.rejects(fsPromises.access(getCharacterHistoryPath(authorizationKey)));
 });
 

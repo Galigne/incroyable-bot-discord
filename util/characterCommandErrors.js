@@ -30,7 +30,7 @@ async function replyToCharacterError(interaction, error, locale = 'en') {
 	}
 
 	const responses = {
-		EEXIST: t(locale, 'errors.characterExists'),
+		EEXIST: t(locale, 'errors.entityExists'),
 		ENOENT: t(locale, 'errors.characterMissing'),
 		INVALID_CHARACTER_NAME: t(locale, 'errors.invalidCharacterKey'),
 		INVALID_CHARACTER_HISTORY: t(locale, 'rpg.undo.errors.invalidBackup'),

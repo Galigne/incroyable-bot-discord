@@ -1,13 +1,11 @@
-const {
-	openCharacterDeletionConfirmation,
-} = require('../character/interactions');
+const { openEntityDeletionConfirmation } = require('../character/interactions');
 
 module.exports = {
 	async execute({ config, interaction }) {
-		await openCharacterDeletionConfirmation(
+		await openEntityDeletionConfirmation(
 			interaction,
 			config,
-			interaction.options.getString('character-key', true),
+			interaction.options.getString('entity-key', true),
 		);
 	},
 };

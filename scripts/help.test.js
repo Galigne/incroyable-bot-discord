@@ -8,6 +8,9 @@ const {
 	getEditableFields,
 	getViewableFields,
 } = require('../services/characterFieldCatalog');
+const {
+	CREATURE_SECTION_IDS,
+} = require('../services/creatureFieldCatalog');
 const generatorCatalog = require('../services/generatorCatalog');
 const { MAX_AUTOCOMPLETE_CHOICES } = require('../util/autocomplete');
 const { createHelpResponse } = require('../util/helpResponses');
@@ -90,7 +93,7 @@ test('/help command:gen lists every localized generator category', () => {
 	}
 });
 
-test('/help command:get and command:set list the same ten ordered sections', () => {
+test('/help command:get and command:set list both explicit entity field orders', () => {
 	const fields = getEditableFields();
 	assert.deepEqual(fields.map(field => field.editId), CHARACTER_SECTION_IDS);
 	assert.deepEqual(
@@ -108,6 +111,9 @@ test('/help command:get and command:set list the same ten ordered sections', () 
 		);
 		for (const field of fields) {
 			assert.ok(rendered.includes(`\`${field.editId}\``), `${locale}: ${field.editId}`);
+		}
+		for (const fieldId of CREATURE_SECTION_IDS) {
+			assert.ok(rendered.includes(`\`${fieldId}\``), `${locale}: ${fieldId}`);
 		}
 		for (const removedField of [
 			'firstName',
@@ -134,13 +140,10 @@ test('/help command:get and command:set list the same ten ordered sections', () 
 	}
 	const english = renderDetail('set', createInteraction('regular'), 'en');
 	for (const format of [
-		'`status` edits HP, AR, AP, and MD',
-		'`gear` edits equipment and inventory',
-		'`statName: statValue`',
-		'`constitution`',
-		'`reflexes`',
-		'`Name:Level:Description`',
-		'`current:max`',
+		'Character groups and their established order are unchanged',
+		'Creature groups use `identity`',
+		'`Name:Description`',
+		'EntityKey, type, schema metadata',
 	]) {
 		assert.ok(english.includes(format), format);
 	}
@@ -152,24 +155,24 @@ test('/help command:get explains summary, detailed field, and autocomplete behav
 		[
 			'en',
 			[
-				'Without `field`, posts the public character summary.',
-				'With `field`, displays one complete section and its labelled values.',
-				'`status` groups HP, AR, AP, MD, and status effects.',
+				'Without `field`, posts the public entity summary.',
+				'Character fields remain `name`, `level`, `status`',
+				'Creature fields use the independent order `identity`',
 			],
 		],
 		[
 			'fr',
 			[
-				'Sans `field`, publie le résumé public du personnage.',
-				'Avec `field`, affiche une section complète et ses valeurs clairement libellées.',
-				'`gear` regroupe l’équipement, l’inventaire et l’encombrement.',
+				'Sans `field`, publie le résumé public de l’entité.',
+				'Les champs de personnage restent `name`, `level`, `status`',
+				'Les champs de créature suivent leur propre ordre',
 			],
 		],
 	]) {
 		const rendered = renderDetail('get', createInteraction('regular'), locale);
-		assert.ok(rendered.includes('`/get character-key:<key>`'), locale);
+		assert.ok(rendered.includes('`/get entity-key:<key>`'), locale);
 		assert.ok(
-			rendered.includes('`/get character-key:<key> field:<field>`'),
+			rendered.includes('`/get entity-key:<key> field:<field>`'),
 			locale,
 		);
 		for (const behavior of expectedBehavior) {
@@ -183,21 +186,21 @@ test('/help command:undo explains retention, consumption, and the lack of redo',
 		[
 			'en',
 			[
-				'complete pre-change character state',
-				'Three backups are retained by default',
+				'complete pre-change entity state',
+				'current `characterHistory.maxEntries` limit applies to both types',
 				'characterHistory.maxEntries',
-				'Undo does not save the displaced state',
-				'redo is not supported',
+				'Repeated undos walk backward',
+				'redo is unsupported',
 			],
 		],
 		[
 			'fr',
 			[
-				'état complet du personnage avant la modification',
-				'Trois sauvegardes sont conservées par défaut',
+				'l’état complet de l’entité avant modification',
+				's’applique aux deux types',
 				'characterHistory.maxEntries',
-				'L’annulation n’enregistre pas l’état remplacé',
-				'aucune fonction de rétablissement',
+				'Des annulations répétées',
+				'aucun rétablissement',
 			],
 		],
 	]) {
@@ -206,7 +209,7 @@ test('/help command:undo explains retention, consumption, and the lack of redo',
 			createInteraction('regular'),
 			locale,
 		);
-		assert.ok(rendered.includes('`/undo character-key:<key>`'), locale);
+		assert.ok(rendered.includes('`/undo entity-key:<key>`'), locale);
 		for (const behavior of expectedBehavior) {
 			assert.ok(rendered.includes(behavior), `${locale}: ${behavior}`);
 		}
@@ -293,7 +296,10 @@ test('autocomplete filters values beyond Discord\'s 25-choice display limit', as
 	);
 	assert.deepEqual(
 		initialFields.map(choice => choice.value),
-		getEditableFields().map(field => field.editId),
+		[
+			...getEditableFields().map(field => field.editId),
+			...CREATURE_SECTION_IDS.filter(id => !CHARACTER_SECTION_IDS.includes(id)),
+		],
 	);
 	assert.deepEqual(
 		await autocompleteOption(
@@ -323,19 +329,25 @@ test('/get and /set autocomplete return identical localized section choices', as
 			);
 			assert.deepEqual(getChoices, setChoices, `${locale}: ${query}`);
 			assert.ok(getChoices.every(choice => (
-				CHARACTER_SECTION_IDS.includes(choice.value)
-				&& choice.name.endsWith(`(${choice.value})`)
+				[
+					...CHARACTER_SECTION_IDS,
+					...CREATURE_SECTION_IDS,
+				].includes(choice.value)
+					&& choice.name.includes(`(${choice.value})`)
 			)));
 		}
 	}
 	const english = await autocompleteOption(
 		'get', 'field', '', createInteraction('regular'), 'en',
 	);
-	assert.deepEqual(english.map(choice => choice.value), CHARACTER_SECTION_IDS);
+	assert.deepEqual(english.map(choice => choice.value), [
+		...CHARACTER_SECTION_IDS,
+		...CREATURE_SECTION_IDS.filter(id => !CHARACTER_SECTION_IDS.includes(id)),
+	]);
 	const french = await autocompleteOption(
 		'get', 'field', '', createInteraction('regular'), 'fr',
 	);
-	assert.equal(french.find(choice => choice.value === 'status').name, 'État (status)');
+	assert.match(french.find(choice => choice.value === 'status').name, /État \(status\)/);
 });
 
 test('/help overview and details are localized in English and French', () => {

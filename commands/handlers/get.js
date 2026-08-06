@@ -1,25 +1,19 @@
-const {
-	getCharacter,
-} = require('../../services/characterApplicationService');
+const { getEntity } = require('../../services/entityApplicationService');
+const { createEntityGetResponse } = require('../../util/entityCommandResponses');
+const { replyToEntityError } = require('../../util/entityCommandErrors');
 const { getLocale } = require('../../util/i18n');
-const {
-	createCharacterGetResponse,
-} = require('../../util/characterCommandResponses');
-const { replyToCharacterError } = require('../../util/characterCommandErrors');
 
 module.exports = {
 	async execute({ config, interaction }) {
 		const locale = getLocale(config, interaction.guildId);
-		const name = interaction.options.getString('character-key', true);
+		const entityKey = interaction.options.getString('entity-key', true);
 		const fieldName = interaction.options.getString('field');
 		try {
-			const character = await getCharacter(name);
-			await interaction.reply(
-				createCharacterGetResponse(character, fieldName, locale),
-			);
+			const entity = await getEntity(entityKey);
+			await interaction.reply(createEntityGetResponse(entity, fieldName, locale));
 		}
 		catch (error) {
-			if (!await replyToCharacterError(interaction, error, locale)) {
+			if (!await replyToEntityError(interaction, error, locale)) {
 				throw error;
 			}
 		}

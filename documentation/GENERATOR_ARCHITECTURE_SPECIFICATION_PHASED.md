@@ -17,8 +17,10 @@ bot.
 
 `documentation/NEW_GENERATOR_ARCHITECTURE_SPECIFICATION_PARTS.md` consolidates
 this roadmap into five approval-gated parts and is authoritative wherever the
-documents conflict. Revised Part 1 is complete: generator schema v2, the full
-current-data cutover, and shared statistical profiles now ship together.
+documents conflict. Revised Parts 1 through 3 are complete: generator schema v2,
+the current-data cutover, shared statistical profiles, structured resolution,
+descriptive modifiers, persistent creatures, and shared entity management now ship
+together.
 
 ---
 
@@ -200,7 +202,10 @@ Roles:
 | 5 | Legacy Parts 13–20 | Historical migration and final verification |
 
 The legacy detail headers below remain as design references until their revised
-part is implemented. Revised Parts 1 and 2 are complete. The consolidated five-part
+part is implemented. Revised Parts 1 through 3 are complete. Legacy Parts 6 through
+9 are superseded by the completed Revised Part 3 state recorded below; in
+particular, their proposed inheritance hierarchy and intermediate character-only
+stages are not implementation requirements. The consolidated five-part
 specification controls scope and precedence. Every revised part requires explicit
 approval before the next begins.
 
@@ -963,7 +968,82 @@ introduced.
 
 ---
 
-# Part 6 — Shared `Combatant` Model
+# Revised Part 3 — Persistent Creatures and Shared Entity Management (Complete)
+
+## 3.1 Persistent Models and Compatibility
+
+Persistent concrete types are exactly `character` and `creature`. Animal,
+companion, and monster remain later creature source categories. The implementation
+keeps independent `Character` and `Creature` models and shares only behavior that
+has the same semantics; no common base class or inheritance hierarchy is required.
+
+Character schema v2, its v1-to-v2 in-memory migration, serialized property order,
+save paths, history paths, rendering, editing, and authorization remain compatible.
+Character serialization has no required type discriminator. Creature schema v1
+stores immutable `type: "creature"` and EntityKey, creator, level, localized final
+identity and description, source/profile/provenance identifiers, final statistics,
+resources, descriptive status effects, intrinsic traits, fixed RULEs, descriptive
+modifiers, gear, manual encumbrance, and explicit natural-armor data. Creature
+hydration validates and clones that final state without rerunning generation or
+localization.
+
+## 3.2 Persistence and Global Keys
+
+Character paths remain unchanged. Creature active saves live below
+`save/creatures/`, with history below `save/.history/creatures/`. Both concrete
+stores use the same per-EntityKey operation queue and atomic JSON publication.
+Creation checks active saves and retained history across both types while holding
+that queue, so concurrent cross-type creation cannot publish the same key.
+
+Creature updates, history snapshots, undo, and permanent deletion follow the
+existing character transaction semantics: complete pre-change snapshots, current
+runtime retention limits, no history for failed or unauthorized work, history-first
+mutation commits with rollback, mutation-first undo commits with rollback, and
+history-first permanent deletion with restoration if active deletion fails. Undo
+validates the concrete snapshot type and never creates redo history.
+
+## 3.3 Shared Commands and Presentation
+
+The common command surface is:
+
+```text
+/add entity-key:<new key> [type:<character|creature>]
+/get entity-key:<key> [field]
+/set entity-key:<key> field:<field>
+/damage entity-key:<key> damage-amount:<number> [piercing]
+/heal entity-key:<key> resource:<hp|armor|both> percentage:<0-100>
+/end-turn entity-key:<key>
+/delete entity-key:<key>
+/undo entity-key:<key>
+```
+
+`/add` defaults to `character`. `/gen-char` remains character-specific and
+`/gen-monster` remains absent until Revised Part 4. Management handlers delegate to
+the entity application service, while the concrete editors and field catalogs
+preserve type-specific behavior. Character presentation retains its established
+order. Creature presentation independently uses `identity`, `level`, `status`,
+`statistics`, `rules`, `traits`, `modifiers`, and `gear`. Resolved autocomplete
+offers only compatible fields.
+
+Anyone with normal bot access may view either type. The creator, configured DM, and
+actual server owner may mutate, undo, and delete it. Creature encumbrance defaults
+to `{ current: 0, max: 0 }` and remains manually edited; no character or creature
+encumbrance is derived from statistics, gear, armor, or generation metadata.
+
+## 3.4 Verification
+
+Focused tests cover Character compatibility, strict Creature validation and
+hydration, global active/history key collisions, cross-type creation races,
+serialized operations, history and undo, both rollback directions, deletion,
+authorization, type-compatible editing and autocomplete, independent presentation
+order, and registered management handlers.
+
+The following Legacy Parts 6 through 9 are superseded historical design notes. They
+do not override the completed state above.
+
+---
+
+# Part 6 — Shared `Combatant` Model (Superseded)
 
 ## 6.1 Objective
 
@@ -1063,7 +1143,7 @@ Stop and wait for confirmation.
 
 ---
 
-# Part 7 — Generic Entity Persistence Foundations
+# Part 7 — Generic Entity Persistence Foundations (Superseded)
 
 ## 7.1 Objective
 
@@ -1113,7 +1193,7 @@ Stop and wait for confirmation.
 
 ---
 
-# Part 8 — `Creature` Model and Persistence
+# Part 8 — `Creature` Model and Persistence (Superseded)
 
 ## 8.1 Objective
 
@@ -1212,7 +1292,7 @@ Stop and wait for confirmation.
 
 ---
 
-# Part 9 — Common Entity Commands
+# Part 9 — Common Entity Commands (Superseded)
 
 ## 9.1 Objective
 

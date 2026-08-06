@@ -1,10 +1,6 @@
-const { getCharacterHistoryMaxEntries } = require('./configuration');
+const { createEntityHistoryContext } = require('./entityHistoryContext');
 
-function createCharacterHistoryContext(interaction, config) {
-	return {
-		actorId: interaction.user.id,
-		maxEntries: getCharacterHistoryMaxEntries(config),
-	};
-}
-
-module.exports = { createCharacterHistoryContext };
+module.exports = {
+	createCharacterHistoryContext: createEntityHistoryContext,
+	createEntityHistoryContext,
+};
