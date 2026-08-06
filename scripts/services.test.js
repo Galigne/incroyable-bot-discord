@@ -20,6 +20,9 @@ const {
 	CharacterLoadError,
 	listCharacters,
 } = require('../services/characterStore');
+const {
+	getCharacterSavePath,
+} = require('../services/characterStoragePaths');
 const { setEditableFieldValue } = require('../services/characterEditor');
 const {
 	createInteractionSession,
@@ -111,8 +114,10 @@ test('interaction session callers cannot override protected metadata', () => {
 });
 
 test('character listing reports malformed save files with their key', async () => {
+	const savePath = getCharacterSavePath('Broken');
+	fs.mkdirSync(path.dirname(savePath), { recursive: true });
 	fs.writeFileSync(
-		path.join(testSaveDirectory, 'Broken.json'),
+		savePath,
 		'{ invalid json',
 		'utf8',
 	);

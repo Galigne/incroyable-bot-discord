@@ -21,6 +21,10 @@ const {
 	getCharacter,
 	updateCharacter,
 } = require('../services/characterStore');
+const {
+	characterSaveDirectory,
+	getCharacterSavePath,
+} = require('../services/characterStoragePaths');
 
 after(() => {
 	fs.rmSync(testSaveDirectory, { recursive: true, force: true });
@@ -333,7 +337,7 @@ function createDeferred() {
 }
 
 function getSavePath(characterKey) {
-	return path.join(testSaveDirectory, `${characterKey}.json`);
+	return getCharacterSavePath(characterKey);
 }
 
 async function readSave(characterKey) {
@@ -341,6 +345,6 @@ async function readSave(characterKey) {
 }
 
 async function listTemporaryFiles() {
-	return (await fsPromises.readdir(testSaveDirectory))
+	return (await fsPromises.readdir(characterSaveDirectory))
 		.filter(fileName => fileName.endsWith('.tmp'));
 }

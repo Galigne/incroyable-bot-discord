@@ -151,8 +151,9 @@ saves.
 - `scripts/checks/`: focused runtime, command, generator, character, interaction,
   and authorization integration checks plus temporary-save helpers.
 - `data/generators/`: generator catalogs. See its `README.md` before editing formats.
-- `save/`: real entity data. Characters remain at the root, creatures live under
-  `save/creatures/`, and their histories mirror those roots under `.history/`.
+- `save/`: real entity data. Characters live under `save/characters/`, creatures
+  live under `save/creatures/`, and each type keeps history in its own `.history/`
+  subdirectory.
   Preserve all real saves unless the user explicitly requests a change or deletion.
 - `adapters/`: external Discord integrations that are neither domain services nor
   command modules, such as local voice playback.
@@ -438,8 +439,8 @@ schema.
 Persistent concrete types are exactly `character` and `creature`. Animal,
 companion, and monster are generator archetypes, never additional persistence
 types. EntityKeys are globally unique across both types. Character schema v2,
-migration, existing JSON property order, and root save/history paths remain
-unchanged; the shared `modifiers` list is appended and defaults to empty when
+migration, and existing JSON property order remain unchanged; the shared
+`modifiers` list is appended and defaults to empty when
 absent, and character saves do not require a discriminator. Creature saves require `type: "creature"`,
 use their own strict schema, and hydrate stored final state without rerunning random
 generation, localization, references, modifiers, or formulas.
@@ -534,12 +535,13 @@ Resources and display:
 
 ## Entity history and undo
 
-Character saves remain directly under `save/`, while creature saves live under
-`save/creatures/`. Their histories live under `save/.history/` and
-`save/.history/creatures/`, or the equivalent roots derived from
-`INCREDIBLE_BOT_SAVE_DIRECTORY` in tests. Each history document contains an
-oldest-to-newest `entries` stack. Normal entity listing and autocomplete must not
-traverse `.history`; only the `/undo` provider may suggest history-backed keys.
+Character saves live under `save/characters/`, while creature saves live under
+`save/creatures/`. Their histories live under `save/characters/.history/` and
+`save/creatures/.history/`. `INCREDIBLE_BOT_SAVE_DIRECTORY` replaces `save/` as
+the configurable root, with the same structure beneath it. Each history document
+contains an oldest-to-newest `entries` stack. Normal entity listing and autocomplete
+must not traverse `.history`; only the `/undo` provider may suggest history-backed
+keys.
 
 Successful `/set` modal submissions, `/damage`, `/heal`, and `/end-turn`
 push the complete schema-versioned pre-change state. Retain the newest

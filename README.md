@@ -189,11 +189,14 @@ Keys may contain internal periods, hyphens, and underscores, such as `D.Robert`.
 ## Entity history and undo
 
 Successful `/set`, `/damage`, `/heal`, and `/end-turn` operations push the entity's
-complete pre-change save into its type-specific history. Character history uses
-`save/.history/<EntityKey>.json`; creature history uses
-`save/.history/creatures/<EntityKey>.json`. When
-`INCREDIBLE_BOT_SAVE_DIRECTORY` is set, the `.history` directory is created under
-that test save directory instead. History documents contain an oldest-to-newest
+complete pre-change save into its type-specific history. Character saves use
+`save/characters/<EntityKey>.json`, with history under
+`save/characters/.history/<EntityKey>.json`. Creature saves use
+`save/creatures/<EntityKey>.json`, with history under
+`save/creatures/.history/<EntityKey>.json`. When
+`INCREDIBLE_BOT_SAVE_DIRECTORY` is set, that directory replaces `save/` as the
+storage root and the same `characters/` and `creatures/` structure is created
+beneath it. History documents contain an oldest-to-newest
 `entries` stack; each entry records its ISO timestamp, actor Discord ID, action,
 and complete schema-versioned entity snapshot. Because history is stored in
 subdirectories, it never appears in normal entity listings or autocomplete.

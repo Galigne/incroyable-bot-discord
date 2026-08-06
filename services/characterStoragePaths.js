@@ -1,14 +1,12 @@
 const path = require('node:path');
 
-const characterSaveDirectory = process.env.INCREDIBLE_BOT_SAVE_DIRECTORY
+const saveRootDirectory = process.env.INCREDIBLE_BOT_SAVE_DIRECTORY
 	? path.resolve(process.env.INCREDIBLE_BOT_SAVE_DIRECTORY)
 	: path.join(__dirname, '..', 'save');
+const characterSaveDirectory = path.join(saveRootDirectory, 'characters');
 const characterHistoryDirectory = path.join(characterSaveDirectory, '.history');
-const creatureSaveDirectory = path.join(characterSaveDirectory, 'creatures');
-const creatureHistoryDirectory = path.join(
-	characterHistoryDirectory,
-	'creatures',
-);
+const creatureSaveDirectory = path.join(saveRootDirectory, 'creatures');
+const creatureHistoryDirectory = path.join(creatureSaveDirectory, '.history');
 
 function getCharacterSavePath(characterKey) {
 	validateCharacterKey(characterKey);
@@ -67,6 +65,7 @@ module.exports = {
 	getCharacterSavePath,
 	getCreatureHistoryPath,
 	getCreatureSavePath,
+	saveRootDirectory,
 	validateCharacterKey,
 	validateEntityKey,
 };

@@ -24,6 +24,9 @@ const {
 	listCharacters,
 	updateCharacter,
 } = require('../services/characterStore');
+const {
+	getCharacterSavePath,
+} = require('../services/characterStoragePaths');
 const { generateCharacter } = require('../services/characterApplicationService');
 const generatorCatalog = require('../services/generatorCatalog');
 const {
@@ -322,7 +325,7 @@ test('schemaVersion is excluded from character editing and display surfaces', as
 });
 
 function getSavePath(characterKey) {
-	return path.join(testSaveDirectory, `${characterKey}.json`);
+	return getCharacterSavePath(characterKey);
 }
 
 async function readRawSave(characterKey) {
@@ -335,6 +338,9 @@ async function readSaveText(characterKey) {
 
 async function writeRawSave(characterKey, rawSave) {
 	const serializedSave = JSON.stringify(rawSave, null, 2);
+	await fsPromises.mkdir(path.dirname(getSavePath(characterKey)), {
+		recursive: true,
+	});
 	await fsPromises.writeFile(
 		getSavePath(characterKey),
 		serializedSave,

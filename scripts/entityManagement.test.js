@@ -36,8 +36,15 @@ const {
 	commitPermanentDeletion,
 } = require('../services/characterPersistenceTransaction');
 const {
+	characterHistoryDirectory,
+	characterSaveDirectory,
+	creatureHistoryDirectory,
+	creatureSaveDirectory,
+	getCharacterHistoryPath,
+	getCharacterSavePath,
 	getCreatureHistoryPath,
 	getCreatureSavePath,
+	saveRootDirectory,
 } = require('../services/characterStoragePaths');
 const {
 	CURRENT_CREATURE_SAVE_SCHEMA_VERSION,
@@ -51,6 +58,52 @@ const commandRegistry = require('../commands/registry');
 
 after(() => {
 	fs.rmSync(testSaveDirectory, { recursive: true, force: true });
+});
+
+test('entity storage paths use symmetric type directories beneath the configured root', () => {
+	assert.equal(saveRootDirectory, testSaveDirectory);
+	assert.equal(
+		characterSaveDirectory,
+		path.join(testSaveDirectory, 'characters'),
+	);
+	assert.equal(
+		characterHistoryDirectory,
+		path.join(testSaveDirectory, 'characters', '.history'),
+	);
+	assert.equal(
+		creatureSaveDirectory,
+		path.join(testSaveDirectory, 'creatures'),
+	);
+	assert.equal(
+		creatureHistoryDirectory,
+		path.join(testSaveDirectory, 'creatures', '.history'),
+	);
+	assert.equal(
+		getCharacterSavePath('Canonical.Character'),
+		path.join(testSaveDirectory, 'characters', 'Canonical.Character.json'),
+	);
+	assert.equal(
+		getCharacterHistoryPath('Canonical.Character'),
+		path.join(
+			testSaveDirectory,
+			'characters',
+			'.history',
+			'Canonical.Character.json',
+		),
+	);
+	assert.equal(
+		getCreatureSavePath('Canonical.Creature'),
+		path.join(testSaveDirectory, 'creatures', 'Canonical.Creature.json'),
+	);
+	assert.equal(
+		getCreatureHistoryPath('Canonical.Creature'),
+		path.join(
+			testSaveDirectory,
+			'creatures',
+			'.history',
+			'Canonical.Creature.json',
+		),
+	);
 });
 
 test('blank creatures use a strict persistent schema with immutable identity', () => {
