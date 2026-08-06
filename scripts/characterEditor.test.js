@@ -597,7 +597,7 @@ test('character and creature RULE modals use the full-size paragraph input', () 
 
 test('one grouped status update creates one history entry and keeps save keys', async () => {
 	const characterKey = 'Editor.History';
-	await createEntity(characterKey, 'character', 'creator');
+	await createEntity(characterKey, 'creator', 'character');
 	await updateEditableEntity(
 		characterKey,
 		'status',
@@ -641,7 +641,7 @@ test('one grouped status update creates one history entry and keeps save keys', 
 
 test('/set gear updates and undo keep stored gear fields together', async () => {
 	const characterKey = 'Editor.Encumbrance';
-	await createEntity(characterKey, 'character', 'creator');
+	await createEntity(characterKey, 'creator', 'character');
 	await updateEditableEntity(
 		characterKey,
 		'gear',
@@ -709,7 +709,7 @@ test('name, race, background, and personality updates are atomic and undoable', 
 	];
 	for (const [index, [field, value, assertRestored]] of edits.entries()) {
 		const characterKey = `Editor.Undo.${index}`;
-		await createEntity(characterKey, 'character', 'creator');
+		await createEntity(characterKey, 'creator', 'character');
 		await updateEditableEntity(
 			characterKey,
 			field,
@@ -728,7 +728,7 @@ test('name, race, background, and personality updates are atomic and undoable', 
 
 test('failed grouped application updates create neither mutation nor history', async () => {
 	const characterKey = 'Editor.InvalidHistory';
-	await createEntity(characterKey, 'character', 'creator');
+	await createEntity(characterKey, 'creator', 'character');
 	const before = JSON.stringify(await getEntity(characterKey));
 	await assert.rejects(
 		updateEditableEntity(
@@ -754,7 +754,7 @@ test('modal routing submits all inputs once and repeats authorization', async ()
 	const config = createConfig();
 	const characterKey = 'Editor.Routing';
 	const creator = createInteraction('creator');
-	await createEntity(characterKey, 'character', creator.user.id);
+	await createEntity(characterKey, creator.user.id, 'character');
 	let modal;
 	await openEntityEditor({
 		...creator,
@@ -795,7 +795,7 @@ test('modal routing submits all inputs once and repeats authorization', async ()
 	);
 
 	const authorizationKey = 'Editor.Reauthorize';
-	await createEntity(authorizationKey, 'character', creator.user.id);
+	await createEntity(authorizationKey, creator.user.id, 'character');
 	let authorizationModal;
 	await openEntityEditor({
 		...creator,

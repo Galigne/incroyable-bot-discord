@@ -82,7 +82,7 @@ test('character editing returns localization-independent outcomes and errors', (
 
 test('entity application workflows compose character persistence and mechanics', async () => {
 	const characterKey = 'Application.Workflow';
-	await createEntity(characterKey, 'character', 'creator');
+	await createEntity(characterKey, 'creator', 'character');
 	const damage = await damageEntity(characterKey, 25, false, () => true);
 	assert.equal(damage.entity.status.hp.current, 75);
 	assert.equal(damage.damage.hpDamage, 25);

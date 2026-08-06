@@ -10,8 +10,8 @@ const {
 	restoreHealingResources,
 } = require('./mechanics/resources');
 
-async function createEntity(entityKey, type = 'character', creatorId) {
-	return entityStore.createEntity(entityKey, type, creatorId);
+async function createEntity(entityKey, creatorId, type = 'character') {
+	return entityStore.createEntity(entityKey, creatorId, type);
 }
 
 async function deleteEntity(entityKey, canManage, expectedType = null) {
@@ -142,13 +142,9 @@ function assertExpectedType(entity, expectedType) {
 }
 
 async function undoEntity(entityKey, canManage, operationContext) {
-	const result = await entityStore.undoEntity(entityKey, canManage, {
+	return entityStore.undoEntity(entityKey, canManage, {
 		maxEntries: operationContext.maxEntries,
 	});
-	return {
-		...result,
-		entity: result.creature ?? result.character,
-	};
 }
 
 function createHistoryContext(action, operationContext) {

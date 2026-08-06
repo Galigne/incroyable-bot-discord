@@ -29,6 +29,7 @@ const {
 const {
 	createCharacter,
 	getCharacter,
+	undoCharacter,
 	updateCharacter,
 } = require('../services/characterStore');
 const {
@@ -495,7 +496,7 @@ test('three default undos walk backward without toggling or creating redo state'
 			() => true,
 			context,
 		);
-		restoredValues.push(result.character.name.firstName);
+		restoredValues.push(result.entity.name.firstName);
 		assert.equal(result.action, 'set');
 		assert.equal(result.actorId, 'stack-actor');
 	}
@@ -506,6 +507,32 @@ test('three default undos walk backward without toggling or creating redo state'
 		{ code: 'NO_CHARACTER_HISTORY' },
 	);
 	assert.equal((await getCharacter(characterKey)).name.firstName, 'A');
+});
+
+test('the concrete character undo result uses the shared entity shape', async () => {
+	const characterKey = nextKey('Undo.ConcreteShape');
+	await createCharacter(characterKey, 'creator');
+	await updateCharacter(
+		characterKey,
+		() => true,
+		character => {
+			character.name.firstName = 'Changed';
+		},
+		{
+			action: 'set',
+			actorId: 'creator',
+			createdAt: '2026-08-06T10:00:00.000Z',
+			maxEntries: 3,
+		},
+	);
+
+	const result = await undoCharacter(characterKey, () => true, { maxEntries: 3 });
+	assert.deepEqual(Object.keys(result), ['entity', 'action', 'actorId', 'createdAt']);
+	assert.equal(result.entity.key, characterKey);
+	assert.equal(result.entity.name.firstName, '');
+	assert.equal(result.action, 'set');
+	assert.equal(result.actorId, 'creator');
+	assert.equal(result.createdAt, '2026-08-06T10:00:00.000Z');
 });
 
 test('version-1 and version-2 snapshots coexist and undo always writes version 2', async () => {
@@ -534,10 +561,10 @@ test('version-1 and version-2 snapshots coexist and undo always writes version 2
 	assert.equal(history.entries[1].character.name.firstName, 'First v2');
 
 	const firstUndo = await undoEntity(characterKey, () => true, context);
-	assert.equal(firstUndo.character.name.firstName, 'First v2');
+	assert.equal(firstUndo.entity.name.firstName, 'First v2');
 	assert.equal((await readRawSave(characterKey)).schemaVersion, 2);
 	const migratedUndo = await undoEntity(characterKey, () => true, context);
-	assert.equal(migratedUndo.character.name.firstName, 'Legacy');
+	assert.equal(migratedUndo.entity.name.firstName, 'Legacy');
 	const migratedSave = await readRawSave(characterKey);
 	assert.equal(migratedSave.schemaVersion, 2);
 	assert.deepEqual(migratedSave.name, {

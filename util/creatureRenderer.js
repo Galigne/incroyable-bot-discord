@@ -10,6 +10,14 @@ const {
 } = require('./combatantDisplay');
 const { formatDescribedRecords } = require('./describedRecordDisplay');
 const { getEntityFieldLabel } = require('./entityDisplay');
+const {
+	formatJoinedList,
+	formatNumberedJoinedList,
+	formatRuleList,
+	formatStatistics,
+	getStoredValue,
+	truncate,
+} = require('./entityRendererPrimitives');
 const { t } = require('./i18n');
 
 function createCreatureSummaryEmbed(creature, locale = 'en') {
@@ -163,15 +171,19 @@ function formatArchetype(creature, locale) {
 }
 
 function formatStats(creature, targets, locale) {
-	return targets.map(target => (
-		`${label(locale, target.id)}: **${getStoredValue(creature, target)}**`
-	)).join('\n');
+	return formatStatistics(
+		creature,
+		targets,
+		target => label(locale, target.id),
+	);
 }
 
 function formatRules(rules, maxLength, locale) {
-	return truncateList(rules.map(rule => (
-		`**${rule.name} (${rule.level})** - ${rule.description}`
-	)), maxLength, locale);
+	return formatRuleList(
+		rules,
+		rule => `**${rule.name} (${rule.level})** - ${rule.description}`,
+		blocks => formatJoinedList(blocks, maxLength, locale),
+	);
 }
 
 function formatGear(creature, locale) {
@@ -186,27 +198,7 @@ function formatGear(creature, locale) {
 }
 
 function formatStringList(items, maxLength, locale) {
-	return truncateList(items.map((item, index) => `${index + 1}. ${item}`), maxLength, locale);
-}
-
-function truncateList(items, maxLength, locale) {
-	if (items.length === 0) {
-		return t(locale, 'common.empty');
-	}
-	const result = items.join('\n');
-	return result.length <= maxLength
-		? result
-		: `${result.slice(0, maxLength - 3)}...`;
-}
-
-function truncate(value, maxLength = 1_024) {
-	return value.length <= maxLength
-		? value
-		: `${value.slice(0, maxLength - 1)}…`;
-}
-
-function getStoredValue(entity, definition) {
-	return definition.path.reduce((value, key) => value[key], entity);
+	return formatNumberedJoinedList(items, maxLength, locale);
 }
 
 function label(locale, fieldId) {

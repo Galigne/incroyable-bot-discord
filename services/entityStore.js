@@ -8,39 +8,51 @@ const {
 const { getStoredEntityTypes, pathExists } = require('./entityKeyRegistry');
 const { ENTITY_TYPES, assertEntityType } = require('./entityType');
 
-async function createEntity(entityKey, type, creatorId, initialize) {
+const storesByType = Object.freeze({
+	character: {
+		create: characterStore.createCharacter,
+		delete: characterStore.deleteCharacter,
+		get: characterStore.getCharacter,
+		list: characterStore.listCharacters,
+		listUndoable: characterStore.listUndoableCharacters,
+		undo: characterStore.undoCharacter,
+		update: characterStore.updateCharacter,
+	},
+	creature: {
+		create: creatureStore.createCreature,
+		delete: creatureStore.deleteCreature,
+		get: creatureStore.getCreature,
+		list: creatureStore.listCreatures,
+		listUndoable: creatureStore.listUndoableCreatures,
+		undo: creatureStore.undoCreature,
+		update: creatureStore.updateCreature,
+	},
+});
+
+async function createEntity(entityKey, creatorId, type = 'character', initialize) {
 	validateEntityKey(entityKey);
-	assertEntityType(type);
-	return type === 'creature'
-		? creatureStore.createCreature(entityKey, creatorId, initialize)
-		: characterStore.createCharacter(entityKey, creatorId, initialize);
+	return getTypeStore(type).create(entityKey, creatorId, initialize);
 }
 
 async function deleteEntity(entityKey, canManage) {
 	const type = await getEntityType(entityKey);
-	return type === 'creature'
-		? creatureStore.deleteCreature(entityKey, canManage)
-		: characterStore.deleteCharacter(entityKey, canManage);
+	return getTypeStore(type).delete(entityKey, canManage);
 }
 
 async function getEntity(entityKey) {
 	const type = await getEntityType(entityKey);
-	return type === 'creature'
-		? creatureStore.getCreature(entityKey)
-		: characterStore.getCharacter(entityKey);
+	return getTypeStore(type).get(entityKey);
 }
 
 async function updateEntity(entityKey, canManage, update, historyContext) {
 	const type = await getEntityType(entityKey);
-	return type === 'creature'
-		? creatureStore.updateCreature(entityKey, canManage, update, historyContext)
-		: characterStore.updateCharacter(entityKey, canManage, update, historyContext);
+	return getTypeStore(type).update(entityKey, canManage, update, historyContext);
 }
 
 async function listEntities(options = {}) {
 	const [characters, creatures] = await Promise.all([
-		characterStore.listCharacters(options.character),
-		creatureStore.listCreatures(options.creature),
+		storesByType.character.list(options.character),
+		storesByType.creature.list(options.creature),
 	]);
 	assertNoDuplicateKeys([...characters, ...creatures]);
 	return [...characters, ...creatures]
@@ -49,8 +61,8 @@ async function listEntities(options = {}) {
 
 async function listUndoableEntities(canManage, options = {}) {
 	const [characters, creatures] = await Promise.all([
-		characterStore.listUndoableCharacters(canManage, options.character),
-		creatureStore.listUndoableCreatures(canManage, options.creature),
+		storesByType.character.listUndoable(canManage, options.character),
+		storesByType.creature.listUndoable(canManage, options.creature),
 	]);
 	assertNoDuplicateKeys([...characters, ...creatures]);
 	return [...characters, ...creatures]
@@ -59,9 +71,12 @@ async function listUndoableEntities(canManage, options = {}) {
 
 async function undoEntity(entityKey, canManage, options) {
 	const type = await getUndoEntityType(entityKey);
-	return type === 'creature'
-		? creatureStore.undoCreature(entityKey, canManage, options)
-		: characterStore.undoCharacter(entityKey, canManage, options);
+	return getTypeStore(type).undo(entityKey, canManage, options);
+}
+
+function getTypeStore(type) {
+	assertEntityType(type);
+	return storesByType[type];
 }
 
 async function getEntityType(entityKey) {

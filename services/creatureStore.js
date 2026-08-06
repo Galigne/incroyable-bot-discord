@@ -1,10 +1,5 @@
-const fs = require('node:fs/promises');
 const Creature = require('../models/Creature');
-const {
-	serializeJson,
-	writeJsonAtomically,
-	writeSerializedJsonAtomically,
-} = require('./atomicJsonFile');
+const { createConcreteEntityStore } = require('./concreteEntityStore');
 const {
 	deleteCreatureHistory,
 	getUsableHistoryCreature,
@@ -16,215 +11,12 @@ const {
 	restoreCreatureHistory,
 	writePreparedCreatureHistory,
 } = require('./creatureHistoryStore');
-const { runEntityOperation } = require('./entityOperationQueue');
-const { assertEntityKeyAvailable } = require('./entityKeyRegistry');
-const {
-	commitHistoryThenMutation,
-	commitMutationThenHistory,
-	commitPermanentDeletion,
-} = require('./entityPersistenceTransaction');
 const { validateCreatureSaveSchema } = require('./creatureSaveSchema');
 const {
 	creatureSaveDirectory,
 	getCreatureSavePath,
 	validateEntityKey,
 } = require('./entityStoragePaths');
-
-async function createCreature(entityKey, creatorId, initialize = () => undefined) {
-	validateEntityKey(entityKey);
-	return runEntityOperation(entityKey, async () => {
-		await assertEntityKeyAvailable(entityKey);
-		const creature = new Creature(entityKey, creatorId);
-		await initialize(creature);
-		validateCreatureSaveSchema(creature, entityKey);
-		await writeJsonAtomically(
-			getCreatureSavePath(entityKey),
-			creature,
-			{ exclusive: true },
-		);
-		return creature;
-	});
-}
-
-async function deleteCreature(entityKey, canManage) {
-	return runEntityOperation(entityKey, async () => {
-		const current = await readCreatureRecord(entityKey);
-		if (!canManage(current.creature)) {
-			throw creatureOwnerError();
-		}
-
-		const historyState = await readCreatureHistoryFileState(entityKey);
-		await commitPermanentDeletion({
-			deleteEntity: () => fs.unlink(getCreatureSavePath(entityKey)),
-			deleteHistory: () => deleteCreatureHistory(historyState),
-			entityKey,
-			entityType: 'creature',
-			restoreHistory: () => restoreCreatureHistory(historyState),
-		});
-	});
-}
-
-async function updateCreature(
-	entityKey,
-	canManage,
-	update,
-	historyContext = null,
-) {
-	return runEntityOperation(entityKey, async () => {
-		const current = await readCreatureRecord(entityKey);
-		const { creature } = current;
-		if (!canManage(creature)) {
-			throw creatureEditorError();
-		}
-
-		await update(creature);
-		validateCreatureSaveSchema(creature, entityKey);
-		const serializedCreature = serializeJson(creature);
-		if (!historyContext) {
-			await writeSerializedJsonAtomically(
-				getCreatureSavePath(entityKey),
-				serializedCreature,
-			);
-			return creature;
-		}
-
-		const historyState = await readCreatureHistory(entityKey);
-		const nextHistory = pushCreatureHistory(
-			historyState,
-			current.rawSaveData,
-			historyContext,
-		);
-		const serializedHistory = serializeJson(nextHistory.document);
-		await commitHistoryThenMutation({
-			commitMutation: () => writeSerializedJsonAtomically(
-				getCreatureSavePath(entityKey),
-				serializedCreature,
-			),
-			entityKey,
-			entityType: 'creature',
-			rollbackHistory: () => restoreCreatureHistory(historyState),
-			writeHistory: () => writePreparedCreatureHistory(
-				historyState.path,
-				serializedHistory,
-			),
-		});
-		return creature;
-	});
-}
-
-async function getCreature(entityKey) {
-	return (await readCreatureRecord(entityKey)).creature;
-}
-
-async function listCreatures({ onLoadError = reportCreatureLoadError } = {}) {
-	await fs.mkdir(creatureSaveDirectory, { recursive: true });
-	const entries = await fs.readdir(creatureSaveDirectory, { withFileTypes: true });
-	const creatures = await Promise.all(entries
-		.filter(entry => entry.isFile() && entry.name.endsWith('.json'))
-		.map(async entry => {
-			const key = entry.name.slice(0, -'.json'.length);
-			try {
-				return await getCreature(key);
-			}
-			catch (error) {
-				onLoadError(new CreatureLoadError(key, error));
-				return null;
-			}
-		}));
-	return creatures
-		.filter(Boolean)
-		.sort((left, right) => left.key.localeCompare(right.key));
-}
-
-async function listUndoableCreatures(
-	canManage,
-	{ onLoadError = reportCreatureHistoryLoadError } = {},
-) {
-	const entityKeys = await listCreatureHistoryKeys();
-	const creatures = await Promise.all(entityKeys.map(entityKey => (
-		runEntityOperation(entityKey, async () => {
-			try {
-				const historyState = await readCreatureHistory(entityKey);
-				const historyCreature = getUsableHistoryCreature(
-					historyState,
-					entityKey,
-				);
-				if (!historyCreature) {
-					return null;
-				}
-
-				let activeCreature;
-				try {
-					activeCreature = await getCreature(entityKey);
-				}
-				catch (error) {
-					if (error.code !== 'ENOENT') {
-						throw error;
-					}
-					activeCreature = null;
-				}
-				const authorizationCreature = activeCreature ?? historyCreature;
-				return canManage(authorizationCreature)
-					? authorizationCreature
-					: null;
-			}
-			catch (error) {
-				onLoadError(new CreatureHistoryLoadError(entityKey, error));
-				return null;
-			}
-		})
-	)));
-	return creatures
-		.filter(Boolean)
-		.sort((left, right) => left.key.localeCompare(right.key));
-}
-
-async function undoCreature(entityKey, canManage, { maxEntries }) {
-	return runEntityOperation(entityKey, async () => {
-		let current = null;
-		try {
-			current = await readCreatureRecord(entityKey);
-		}
-		catch (error) {
-			if (error.code !== 'ENOENT') {
-				throw error;
-			}
-		}
-
-		if (current && !canManage(current.creature)) {
-			throw creatureEditorError();
-		}
-
-		const historyState = await readCreatureHistory(entityKey);
-		const undo = popCreatureHistory(historyState, maxEntries, entityKey);
-		if (!current && !canManage(undo.creature)) {
-			throw creatureEditorError();
-		}
-
-		validateCreatureSaveSchema(undo.creature, entityKey);
-		const serializedCreature = serializeJson(undo.creature);
-		const serializedHistory = serializeJson(undo.document);
-		await commitMutationThenHistory({
-			commitMutation: () => writeSerializedJsonAtomically(
-				getCreatureSavePath(entityKey),
-				serializedCreature,
-			),
-			entityKey,
-			entityType: 'creature',
-			rollbackMutation: () => restoreCreatureRecord(entityKey, current),
-			writeHistory: () => writePreparedCreatureHistory(
-				historyState.path,
-				serializedHistory,
-			),
-		});
-		return {
-			action: undo.entry.action,
-			actorId: undo.entry.actorId,
-			creature: undo.creature,
-			createdAt: undo.entry.createdAt,
-		};
-	});
-}
 
 class CreatureLoadError extends Error {
 	constructor(entityKey, cause) {
@@ -246,32 +38,37 @@ class CreatureHistoryLoadError extends Error {
 	}
 }
 
-async function readCreatureRecord(entityKey) {
-	const serialized = await fs.readFile(getCreatureSavePath(entityKey), 'utf8');
-	const rawSaveData = JSON.parse(serialized);
-	validateCreatureSaveSchema(rawSaveData, entityKey);
-	return {
-		creature: Creature.fromSave(rawSaveData, entityKey),
-		rawSaveData,
-		serialized,
-	};
-}
-
-async function restoreCreatureRecord(entityKey, record) {
-	const savePath = getCreatureSavePath(entityKey);
-	if (record) {
-		await writeSerializedJsonAtomically(savePath, record.serialized);
-		return;
-	}
-	try {
-		await fs.unlink(savePath);
-	}
-	catch (error) {
-		if (error.code !== 'ENOENT') {
-			throw error;
-		}
-	}
-}
+const store = createConcreteEntityStore({
+	createEditorError: creatureEditorError,
+	createEntityInstance: (entityKey, creatorId) => (
+		new Creature(entityKey, creatorId)
+	),
+	createHistoryLoadError: (entityKey, cause) => (
+		new CreatureHistoryLoadError(entityKey, cause)
+	),
+	createLoadError: (entityKey, cause) => new CreatureLoadError(entityKey, cause),
+	createOwnerError: creatureOwnerError,
+	entityProperty: 'creature',
+	entityType: 'creature',
+	getSavePath: getCreatureSavePath,
+	history: {
+		delete: deleteCreatureHistory,
+		getUsableEntity: getUsableHistoryCreature,
+		listKeys: listCreatureHistoryKeys,
+		pop: popCreatureHistory,
+		push: pushCreatureHistory,
+		read: readCreatureHistory,
+		readFileState: readCreatureHistoryFileState,
+		restore: restoreCreatureHistory,
+		writePrepared: writePreparedCreatureHistory,
+	},
+	hydrate: (rawSaveData, entityKey) => Creature.fromSave(rawSaveData, entityKey),
+	reportHistoryLoadError: reportCreatureHistoryLoadError,
+	reportLoadError: reportCreatureLoadError,
+	saveDirectory: creatureSaveDirectory,
+	validateKey: validateEntityKey,
+	validateSave: validateCreatureSaveSchema,
+});
 
 function reportCreatureLoadError(error) {
 	console.error(error);
@@ -300,11 +97,11 @@ function creatureOwnerError() {
 module.exports = {
 	CreatureHistoryLoadError,
 	CreatureLoadError,
-	createCreature,
-	deleteCreature,
-	getCreature,
-	listCreatures,
-	listUndoableCreatures,
-	undoCreature,
-	updateCreature,
+	createCreature: store.create,
+	deleteCreature: store.delete,
+	getCreature: store.get,
+	listCreatures: store.list,
+	listUndoableCreatures: store.listUndoable,
+	undoCreature: store.undo,
+	updateCreature: store.update,
 };

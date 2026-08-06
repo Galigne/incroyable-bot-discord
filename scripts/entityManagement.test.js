@@ -53,7 +53,10 @@ const {
 const {
 	getEntityOperationQueueSize,
 } = require('../services/entityOperationQueue');
-const { updateCreature } = require('../services/creatureStore');
+const {
+	undoCreature,
+	updateCreature,
+} = require('../services/creatureStore');
 const commandRegistry = require('../commands/registry');
 
 after(() => {
@@ -251,11 +254,21 @@ test('character saves retain schema v2 without a required discriminator', () => 
 	]);
 });
 
+test('entity creation defaults to character after required arguments', async () => {
+	const entity = await createEntity('Creation.DefaultType', 'owner');
+	assert.ok(entity instanceof Character);
+	assert.equal(entity.creatorId, 'owner');
+	await assert.rejects(
+		createEntity('Creation.InvalidType', 'owner', 'other'),
+		error => error.code === 'INVALID_ENTITY_TYPE',
+	);
+});
+
 test('concurrent cross-type creation enforces global EntityKey uniqueness', async () => {
 	const entityKey = 'Collision.Concurrent';
 	const results = await Promise.allSettled([
-		createEntity(entityKey, 'character', 'character-owner'),
-		createEntity(entityKey, 'creature', 'creature-owner'),
+		createEntity(entityKey, 'character-owner', 'character'),
+		createEntity(entityKey, 'creature-owner', 'creature'),
 	]);
 	assert.equal(results.filter(result => result.status === 'fulfilled').length, 1);
 	const rejection = results.find(result => result.status === 'rejected');
@@ -266,7 +279,7 @@ test('concurrent cross-type creation enforces global EntityKey uniqueness', asyn
 
 test('retained history reserves its key against a different concrete type', async () => {
 	const entityKey = 'Collision.History';
-	await createEntity(entityKey, 'creature', 'creature-owner');
+	await createEntity(entityKey, 'creature-owner', 'creature');
 	await damageEntity(
 		entityKey,
 		1,
@@ -277,7 +290,7 @@ test('retained history reserves its key against a different concrete type', asyn
 	await fsPromises.unlink(getCreatureSavePath(entityKey));
 
 	await assert.rejects(
-		createEntity(entityKey, 'character', 'character-owner'),
+		createEntity(entityKey, 'character-owner', 'character'),
 		error => error.code === 'EEXIST',
 	);
 	const undo = await undoEntity(entityKey, () => true, { maxEntries: 3 });
@@ -287,7 +300,7 @@ test('retained history reserves its key against a different concrete type', asyn
 
 test('creature updates serialize per key and preserve complete pre-change history', async () => {
 	const entityKey = 'Creature.History';
-	await createEntity(entityKey, 'creature', 'owner');
+	await createEntity(entityKey, 'owner', 'creature');
 	await Promise.all([
 		updateCreature(entityKey, () => true, creature => {
 			creature.level += 1;
@@ -326,9 +339,35 @@ test('creature updates serialize per key and preserve complete pre-change histor
 	assert.equal(getEntityOperationQueueSize(), 0);
 });
 
+test('the concrete creature undo result uses the shared entity shape', async () => {
+	const entityKey = 'Creature.UndoShape';
+	await createEntity(entityKey, 'owner', 'creature');
+	await updateCreature(
+		entityKey,
+		() => true,
+		creature => {
+			creature.level = 2;
+		},
+		{
+			action: 'set',
+			actorId: 'owner',
+			createdAt: '2026-08-06T10:00:00.000Z',
+			maxEntries: 3,
+		},
+	);
+
+	const result = await undoCreature(entityKey, () => true, { maxEntries: 3 });
+	assert.deepEqual(Object.keys(result), ['entity', 'action', 'actorId', 'createdAt']);
+	assert.equal(result.entity.type, 'creature');
+	assert.equal(result.entity.level, 1);
+	assert.equal(result.action, 'set');
+	assert.equal(result.actorId, 'owner');
+	assert.equal(result.createdAt, '2026-08-06T10:00:00.000Z');
+});
+
 test('creature undo rejects snapshots that could change the concrete type', async () => {
 	const entityKey = 'Creature.TypeGuard';
-	await createEntity(entityKey, 'creature', 'owner');
+	await createEntity(entityKey, 'owner', 'creature');
 	await damageEntity(
 		entityKey,
 		1,
@@ -349,7 +388,7 @@ test('creature undo rejects snapshots that could change the concrete type', asyn
 
 test('permanent creature deletion removes active state and retained history', async () => {
 	const entityKey = 'Creature.Delete';
-	await createEntity(entityKey, 'creature', 'owner');
+	await createEntity(entityKey, 'owner', 'creature');
 	await damageEntity(
 		entityKey,
 		1,
@@ -390,7 +429,7 @@ test('creature history and active-save failures roll back the first file operati
 	const savePath = getCreatureSavePath(entityKey);
 	const historyPath = getCreatureHistoryPath(entityKey);
 	const displacedPath = `${savePath}.displaced`;
-	await createEntity(entityKey, 'creature', 'owner');
+	await createEntity(entityKey, 'owner', 'creature');
 	try {
 		await assert.rejects(
 			updateCreature(
@@ -420,7 +459,7 @@ test('creature history and active-save failures roll back the first file operati
 
 test('creature-store deletion restores history when active deletion fails', async () => {
 	const entityKey = 'Creature.DeleteRollback';
-	await createEntity(entityKey, 'creature', 'owner');
+	await createEntity(entityKey, 'owner', 'creature');
 	await damageEntity(
 		entityKey,
 		1,
@@ -456,7 +495,7 @@ test('creature-store deletion restores history when active deletion fails', asyn
 
 test('creature ownership is rechecked inside mutation workflows', async () => {
 	const entityKey = 'Creature.Authorization';
-	await createEntity(entityKey, 'creature', 'owner');
+	await createEntity(entityKey, 'owner', 'creature');
 	await assert.rejects(
 		damageEntity(
 			entityKey,
@@ -496,7 +535,7 @@ test('character and creature field orders stay explicit and type-compatible', as
 	]);
 
 	const entityKey = 'Creature.Fields';
-	await createEntity(entityKey, 'creature', 'owner');
+	await createEntity(entityKey, 'owner', 'creature');
 	await updateEditableEntity(
 		entityKey,
 		'traits',
@@ -510,7 +549,7 @@ test('character and creature field orders stay explicit and type-compatible', as
 		{ name: 'Night Eyes', description: 'Sees in darkness' },
 	]);
 	const characterKey = 'Character.Modifiers';
-	await createEntity(characterKey, 'character', 'owner');
+	await createEntity(characterKey, 'owner', 'character');
 	await updateEditableEntity(
 		characterKey,
 		'modifiers',
@@ -542,8 +581,8 @@ test('character and creature field orders stay explicit and type-compatible', as
 });
 
 test('combined entity listing and autocomplete include both concrete types', async () => {
-	await createEntity('List.Character', 'character', 'owner');
-	await createEntity('List.Creature', 'creature', 'owner');
+	await createEntity('List.Character', 'owner', 'character');
+	await createEntity('List.Creature', 'owner', 'creature');
 	const choices = await getEntityChoices('List.', 'en');
 	assert.deepEqual(
 		new Set(choices.map(choice => choice.value)),

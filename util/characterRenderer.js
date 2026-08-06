@@ -12,6 +12,14 @@ const {
 } = require('./combatantDisplay');
 const { getCharacterFieldLabel } = require('./characterDisplay');
 const { formatDescribedRecords } = require('./describedRecordDisplay');
+const {
+	formatBlockList,
+	formatNumberedBlockList,
+	formatRuleList,
+	formatStatistics,
+	getStoredValue,
+	truncate,
+} = require('./entityRendererPrimitives');
 const { t } = require('./i18n');
 
 function createCharacterSummaryEmbed(character, locale = 'en') {
@@ -216,13 +224,11 @@ function formatResource(label, resource) {
 }
 
 function formatStatTargets(character, targets, locale) {
-	return targets.map(target => (
-		`${getCharacterFieldLabel(locale, target.id)}: **${getStoredValue(character, target)}**`
-	)).join('\n');
-}
-
-function getStoredValue(character, definition) {
-	return definition.path.reduce((value, key) => value[key], character);
+	return formatStatistics(
+		character,
+		targets,
+		target => getCharacterFieldLabel(locale, target.id),
+	);
 }
 
 function getPairValue(character, definition) {
@@ -256,61 +262,24 @@ function countLines(value) {
 }
 
 function formatRules(rules, locale = 'en') {
-	if (rules.length === 0) {
-		return t(locale, 'common.empty');
-	}
-	const blocks = rules.map((rule, index) => t(locale, 'character.detail.rule', {
-		description: rule.description || t(locale, 'character.detail.noDescription'),
-		index: index + 1,
-		level: rule.level,
-		name: rule.name,
-	}));
-	return truncateBlocks(blocks, '\n\n', 4_096);
+	return formatRuleList(
+		rules,
+		(rule, index) => t(locale, 'character.detail.rule', {
+			description: rule.description || t(locale, 'character.detail.noDescription'),
+			index: index + 1,
+			level: rule.level,
+			name: rule.name,
+		}),
+		blocks => formatBlockList(blocks, '\n\n', 4_096, locale),
+	);
 }
 
 function formatList(items, maxLength = 1_024, locale = 'en') {
-	if (items.length === 0) {
-		return t(locale, 'common.empty');
-	}
-	return truncateBlocks(
-		items.map((item, index) => `${index + 1}. ${item}`),
-		'\n',
-		maxLength,
-	);
+	return formatNumberedBlockList(items, maxLength, locale);
 }
 
 function formatLabel(value, locale = 'en') {
 	return getCharacterFieldLabel(locale, `statistics.${value}`);
-}
-
-function truncate(value, maxLength = 1_024) {
-	if (value.length <= maxLength) {
-		return value;
-	}
-	return `${value.slice(0, maxLength - 1)}…`;
-}
-
-function truncateBlocks(blocks, separator, maxLength) {
-	const included = [];
-	for (const block of blocks) {
-		const prefixLength = included.length === 0 ? 0 : separator.length;
-		const remaining = maxLength - included.join(separator).length - prefixLength;
-		if (block.length <= remaining) {
-			included.push(block);
-			continue;
-		}
-		if (included.length === 0) {
-			included.push(truncate(block, maxLength));
-		}
-		else {
-			const current = included.join(separator);
-			if (current.length + separator.length + 1 <= maxLength) {
-				included.push('...');
-			}
-		}
-		break;
-	}
-	return included.join(separator);
 }
 
 module.exports = {

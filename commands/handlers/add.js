@@ -9,7 +9,7 @@ module.exports = {
 		const entityKey = interaction.options.getString('entity-key', true);
 		const type = interaction.options.getString('type') ?? 'character';
 		try {
-			const entity = await createEntity(entityKey, type, interaction.user.id);
+			const entity = await createEntity(entityKey, interaction.user.id, type);
 			await interaction.reply(createEntityAddedResponse(entity, locale));
 		}
 		catch (error) {
