@@ -5,9 +5,9 @@ const {
 	getViewableCreatureFieldDefinition,
 } = require('../services/creatureFieldCatalog');
 const {
-	formatCharacterResource,
-	formatCharacterResources,
-} = require('./characterRenderer');
+	formatCombatantResource,
+	formatCombatantResources,
+} = require('./combatantDisplay');
 const { formatDescribedRecords } = require('./describedRecordDisplay');
 const { getEntityFieldLabel } = require('./entityDisplay');
 const { t } = require('./i18n');
@@ -84,7 +84,7 @@ function createCreatureFieldEmbed(creature, fieldName, locale = 'en') {
 		return embed.addFields(
 			...targets.filter(target => target.resourceId).map(target => ({
 				name: label(locale, target.id),
-				value: formatCharacterResource(creature, target.resourceId, locale),
+				value: formatCombatantResource(creature, target.resourceId, locale),
 			})),
 			{
 				name: label(locale, 'status.effects'),
@@ -149,7 +149,7 @@ function createCreatureFieldEmbed(creature, fieldName, locale = 'en') {
 
 function formatCreatureStatus(creature, locale) {
 	return [
-		formatCharacterResources(creature, ['hp', 'ar', 'ap', 'md'], locale),
+		formatCombatantResources(creature, ['hp', 'ar', 'ap', 'md'], locale),
 		`${label(locale, 'status.effects')}: `
 			+ formatDescribedRecords(creature.status.effects, 500, locale),
 	].join('\n');

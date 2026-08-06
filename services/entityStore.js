@@ -4,7 +4,7 @@ const {
 	getCharacterHistoryPath,
 	getCreatureHistoryPath,
 	validateEntityKey,
-} = require('./characterStoragePaths');
+} = require('./entityStoragePaths');
 const { getStoredEntityTypes, pathExists } = require('./entityKeyRegistry');
 
 const ENTITY_TYPES = Object.freeze(['character', 'creature']);

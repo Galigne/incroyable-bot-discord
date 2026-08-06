@@ -8,14 +8,6 @@ function characterEditError(translationKey, translationVariables = {}) {
 	return error;
 }
 
-function combatantEditError(combatant, translationKey, translationVariables = {}) {
-	const error = characterEditError(translationKey, translationVariables);
-	if (combatant?.type === 'creature') {
-		error.code = 'INVALID_CREATURE_EDIT';
-	}
-	return error;
-}
-
 function validateActionPointEdit(character, path, value) {
 	if (
 		path[0] !== 'status'
@@ -86,7 +78,6 @@ function copyRules(value) {
 
 module.exports = {
 	characterEditError,
-	combatantEditError,
 	copyRules,
 	copyStringList,
 	copyTalentList,

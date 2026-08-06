@@ -34,7 +34,7 @@ const {
 } = require('../services/entityApplicationService');
 const {
 	commitPermanentDeletion,
-} = require('../services/characterPersistenceTransaction');
+} = require('../services/entityPersistenceTransaction');
 const {
 	characterHistoryDirectory,
 	characterSaveDirectory,
@@ -45,14 +45,14 @@ const {
 	getCreatureHistoryPath,
 	getCreatureSavePath,
 	saveRootDirectory,
-} = require('../services/characterStoragePaths');
+} = require('../services/entityStoragePaths');
 const {
 	CURRENT_CREATURE_SAVE_SCHEMA_VERSION,
 	validateCreatureSaveSchema,
 } = require('../services/creatureSaveSchema');
 const {
 	getEntityOperationQueueSize,
-} = require('../services/characterOperationQueue');
+} = require('../services/entityOperationQueue');
 const { updateCreature } = require('../services/creatureStore');
 const commandRegistry = require('../commands/registry');
 

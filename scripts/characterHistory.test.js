@@ -12,12 +12,12 @@ process.env.INCREDIBLE_BOT_SAVE_DIRECTORY = testSaveDirectory;
 
 const commandRegistry = require('../commands/registry');
 const {
-	damageCharacter,
-	endCharacterTurn,
-	healCharacter,
-	undoCharacter,
-	updateEditableCharacter,
-} = require('../services/characterApplicationService');
+	damageEntity,
+	endEntityTurn,
+	healEntity,
+	undoEntity,
+	updateEditableEntity,
+} = require('../services/entityApplicationService');
 const {
 	CHARACTER_HISTORY_ACTIONS,
 	readCharacterHistory,
@@ -25,7 +25,7 @@ const {
 const {
 	commitHistoryThenMutation,
 	commitMutationThenHistory,
-} = require('../services/characterPersistenceTransaction');
+} = require('../services/entityPersistenceTransaction');
 const {
 	createCharacter,
 	getCharacter,
@@ -35,21 +35,21 @@ const {
 	characterHistoryDirectory,
 	getCharacterHistoryPath,
 	getCharacterSavePath,
-} = require('../services/characterStoragePaths');
+} = require('../services/entityStoragePaths');
 const { validateCharacterSaveSchema } = require('../services/characterSaveSchema');
 const { writeJsonAtomically } = require('../services/atomicJsonFile');
 const {
-	createCharacterUndoResponse,
-} = require('../util/characterCommandResponses');
+	createEntityUndoResponse,
+} = require('../util/entityCommandResponses');
 const {
-	getCharacterHistoryMaxEntries,
+	getEntityHistoryMaxEntries,
 	reloadConfig,
 	validateConfig,
 } = require('../util/configuration');
 const {
-	handleCharacterInteraction,
-	openCharacterEditor,
-} = require('../commands/character/interactions');
+	handleEntityInteraction,
+	openEntityEditor,
+} = require('../commands/entity/interactions');
 
 let keyCounter = 0;
 
@@ -57,18 +57,18 @@ after(() => {
 	fs.rmSync(testSaveDirectory, { recursive: true, force: true });
 });
 
-test('character history configuration defaults to three and rejects invalid limits', () => {
+test('entity history limit defaults to three and validates the retained configuration key', () => {
 	const config = createConfig();
-	assert.equal(getCharacterHistoryMaxEntries(validateConfig(config)), 3);
+	assert.equal(getEntityHistoryMaxEntries(validateConfig(config)), 3);
 	assert.equal(
-		getCharacterHistoryMaxEntries(validateConfig({
+		getEntityHistoryMaxEntries(validateConfig({
 			...config,
 			characterHistory: {},
 		})),
 		3,
 	);
 	assert.equal(
-		getCharacterHistoryMaxEntries(validateConfig({
+		getEntityHistoryMaxEntries(validateConfig({
 			...config,
 			characterHistory: { maxEntries: 7 },
 		})),
@@ -137,7 +137,7 @@ test('a reloaded retention value affects later history operations', async () => 
 	await editFirstName(
 		characterKey,
 		'A',
-		historyContext(getCharacterHistoryMaxEntries(runtimeState.getConfig())),
+		historyContext(getEntityHistoryMaxEntries(runtimeState.getConfig())),
 	);
 
 	await fsPromises.writeFile(
@@ -149,7 +149,7 @@ test('a reloaded retention value affects later history operations', async () => 
 	await editFirstName(
 		characterKey,
 		'B',
-		historyContext(getCharacterHistoryMaxEntries(runtimeState.getConfig())),
+		historyContext(getEntityHistoryMaxEntries(runtimeState.getConfig())),
 	);
 
 	const history = await readHistory(characterKey);
@@ -161,16 +161,16 @@ test('every supported successful action stores a complete pre-change snapshot', 
 	const characterKey = nextKey('Actions');
 	const context = historyContext(10, 'all-actions-actor');
 	await createCharacter(characterKey, 'creator');
-	await updateEditableCharacter(
+	await updateEditableEntity(
 		characterKey,
 		'name',
 		{ firstName: 'History', lastName: '' },
 		() => true,
 		context,
 	);
-	await damageCharacter(characterKey, 10, false, () => true, context);
-	await healCharacter(characterKey, 'hp', 100, () => true, context);
-	await endCharacterTurn(characterKey, () => true, context);
+	await damageEntity(characterKey, 10, false, () => true, context);
+	await healEntity(characterKey, 'hp', 100, () => true, context);
+	await endEntityTurn(characterKey, () => true, context);
 
 	const history = await readHistory(characterKey);
 	assert.deepEqual(
@@ -193,7 +193,7 @@ test('/set creates history only after a successful modal submission', async () =
 	const config = createConfig();
 	await createCharacter(characterKey, user.id);
 	let modal;
-	await openCharacterEditor({
+	await openEntityEditor({
 		guildId: 'guild',
 		member: { roles: [] },
 		showModal: async value => {
@@ -203,7 +203,7 @@ test('/set creates history only after a successful modal submission', async () =
 	}, config, characterKey, 'name');
 
 	let response;
-	await handleCharacterInteraction({
+	await handleEntityInteraction({
 		customId: modal.custom_id,
 		fields: {
 			getTextInputValue: customId => (
@@ -245,7 +245,7 @@ test('authorization, validation, and serialization failures do not add history',
 	const validationKey = nextKey('Failure.Validation');
 	await createCharacter(validationKey, 'creator');
 	await assert.rejects(
-		updateEditableCharacter(
+		updateEditableEntity(
 			validationKey,
 			'statistics',
 			[
@@ -424,7 +424,7 @@ test('two-file persistence rolls back the first completed operation', async () =
 	const normalState = { active: 'before', history: 'before' };
 	await assert.rejects(
 		commitHistoryThenMutation({
-			characterKey: 'Rollback.Normal',
+			entityKey: 'Rollback.Normal',
 			commitMutation: async () => {
 				throw new Error('active write failed');
 			},
@@ -442,7 +442,7 @@ test('two-file persistence rolls back the first completed operation', async () =
 	const undoState = { active: 'before', history: 'before' };
 	await assert.rejects(
 		commitMutationThenHistory({
-			characterKey: 'Rollback.Undo',
+			entityKey: 'Rollback.Undo',
 			commitMutation: async () => {
 				undoState.active = 'after';
 			},
@@ -462,7 +462,7 @@ test('unrecoverable rollback failures are logged and use a stable error code', a
 	const logged = [];
 	await assert.rejects(
 		commitHistoryThenMutation({
-			characterKey: 'Rollback.Unrecoverable',
+			entityKey: 'Rollback.Unrecoverable',
 			commitMutation: async () => {
 				throw new Error('active write failed');
 			},
@@ -490,7 +490,7 @@ test('three default undos walk backward without toggling or creating redo state'
 
 	const restoredValues = [];
 	for (let index = 0; index < 3; index += 1) {
-		const result = await undoCharacter(
+		const result = await undoEntity(
 			characterKey,
 			() => true,
 			context,
@@ -502,7 +502,7 @@ test('three default undos walk backward without toggling or creating redo state'
 	assert.deepEqual(restoredValues, ['C', 'B', 'A']);
 	assert.equal((await readHistory(characterKey)).entries.length, 0);
 	await assert.rejects(
-		undoCharacter(characterKey, () => true, context),
+		undoEntity(characterKey, () => true, context),
 		{ code: 'NO_CHARACTER_HISTORY' },
 	);
 	assert.equal((await getCharacter(characterKey)).name.firstName, 'A');
@@ -533,10 +533,10 @@ test('version-1 and version-2 snapshots coexist and undo always writes version 2
 	assert.equal(history.entries[0].character.firstName, 'Legacy');
 	assert.equal(history.entries[1].character.name.firstName, 'First v2');
 
-	const firstUndo = await undoCharacter(characterKey, () => true, context);
+	const firstUndo = await undoEntity(characterKey, () => true, context);
 	assert.equal(firstUndo.character.name.firstName, 'First v2');
 	assert.equal((await readRawSave(characterKey)).schemaVersion, 2);
-	const migratedUndo = await undoCharacter(characterKey, () => true, context);
+	const migratedUndo = await undoEntity(characterKey, () => true, context);
 	assert.equal(migratedUndo.character.name.firstName, 'Legacy');
 	const migratedSave = await readRawSave(characterKey);
 	assert.equal(migratedSave.schemaVersion, 2);
@@ -553,7 +553,7 @@ test('undo rejects missing history and preserves state on permission failure', a
 	const noHistoryKey = nextKey('Undo.Empty');
 	await createCharacter(noHistoryKey, 'creator');
 	await assert.rejects(
-		undoCharacter(noHistoryKey, () => true, historyContext()),
+		undoEntity(noHistoryKey, () => true, historyContext()),
 		{ code: 'NO_CHARACTER_HISTORY' },
 	);
 
@@ -562,7 +562,7 @@ test('undo rejects missing history and preserves state on permission failure', a
 	await editFirstName(deniedKey, 'Current', historyContext());
 	const historyBefore = await readHistory(deniedKey);
 	await assert.rejects(
-		undoCharacter(deniedKey, () => false, historyContext()),
+		undoEntity(deniedKey, () => false, historyContext()),
 		{ code: 'NOT_CHARACTER_EDITOR' },
 	);
 	assert.equal((await getCharacter(deniedKey)).name.firstName, 'Current');
@@ -603,7 +603,7 @@ test('undo rejects invalid and unsupported snapshot schema versions', async () =
 		'utf8',
 	);
 	await assert.rejects(
-		undoCharacter(characterKey, () => true, context),
+		undoEntity(characterKey, () => true, context),
 		{ code: 'INVALID_CHARACTER_HISTORY_SNAPSHOT' },
 	);
 	assert.equal((await getCharacter(characterKey)).name.firstName, 'Current');
@@ -615,7 +615,7 @@ test('undo rejects invalid and unsupported snapshot schema versions', async () =
 		'utf8',
 	);
 	await assert.rejects(
-		undoCharacter(characterKey, () => true, context),
+		undoEntity(characterKey, () => true, context),
 		{ code: 'UNSUPPORTED_CHARACTER_HISTORY_SCHEMA' },
 	);
 	assert.equal((await readHistory(characterKey)).entries.length, 1);
@@ -657,11 +657,11 @@ test('undo response construction localizes action, timestamp, and actor', () => 
 	const result = {
 		action: 'set',
 		actorId: '123456',
-		character: { key: 'Localized.Character' },
+		entity: { key: 'Localized.Character' },
 		createdAt: '2026-07-29T10:15:00.000Z',
 	};
-	const english = createCharacterUndoResponse(result, 'en');
-	const french = createCharacterUndoResponse(result, 'fr');
+	const english = createEntityUndoResponse(result, 'en');
+	const french = createEntityUndoResponse(result, 'fr');
 	for (const response of [english, french]) {
 		assert.match(response, /Localized\.Character/);
 		assert.match(response, /<@123456>/);
@@ -721,7 +721,7 @@ async function editFirstName(
 	context,
 	canManage = () => true,
 ) {
-	return updateEditableCharacter(
+	return updateEditableEntity(
 		characterKey,
 		'name',
 		{ firstName: value, lastName: '' },

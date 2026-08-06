@@ -9,7 +9,7 @@ const {
 	characterHistoryDirectory,
 	getCharacterHistoryPath,
 	validateCharacterKey,
-} = require('./characterStoragePaths');
+} = require('./entityStoragePaths');
 
 const CHARACTER_HISTORY_ACTIONS = new Set([
 	'set',

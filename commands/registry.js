@@ -225,7 +225,7 @@ class CommandRegistry {
 	createContext(metadata, context) {
 		return {
 			...context,
-			locale: getLocale(context.config, context.interaction.guildId),
+			locale: getLocale(context.config),
 			metadata,
 			registry: this,
 		};

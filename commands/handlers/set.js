@@ -1,4 +1,4 @@
-const { openEntityEditor } = require('../character/interactions');
+const { openEntityEditor } = require('../entity/interactions');
 
 module.exports = {
 	async execute({ config, interaction }) {

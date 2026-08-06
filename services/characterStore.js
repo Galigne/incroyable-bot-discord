@@ -16,23 +16,23 @@ const {
 	restoreCharacterHistory,
 	writePreparedCharacterHistory,
 } = require('./characterHistoryStore');
-const { runCharacterOperation } = require('./characterOperationQueue');
+const { runEntityOperation } = require('./entityOperationQueue');
 const { assertEntityKeyAvailable } = require('./entityKeyRegistry');
 const {
 	commitHistoryThenMutation,
 	commitMutationThenHistory,
 	commitPermanentDeletion,
-} = require('./characterPersistenceTransaction');
+} = require('./entityPersistenceTransaction');
 const { validateCharacterSaveSchema } = require('./characterSaveSchema');
 const {
 	characterSaveDirectory,
 	getCharacterSavePath,
 	validateCharacterKey,
-} = require('./characterStoragePaths');
+} = require('./entityStoragePaths');
 
 async function createCharacter(name, creatorId, initialize = () => undefined) {
 	validateCharacterKey(name);
-	return runCharacterOperation(name, async () => {
+	return runEntityOperation(name, async () => {
 		await assertEntityKeyAvailable(name);
 		const character = new Character(name, creatorId);
 		await initialize(character);
@@ -43,7 +43,7 @@ async function createCharacter(name, creatorId, initialize = () => undefined) {
 }
 
 async function deleteCharacter(name, canManage) {
-	return runCharacterOperation(name, async () => {
+	return runEntityOperation(name, async () => {
 		const current = await readCharacterRecord(name);
 		if (!canManage(current.character)) {
 			const error = new Error('Only the character creator can delete it.');
@@ -53,8 +53,9 @@ async function deleteCharacter(name, canManage) {
 
 		const historyState = await readCharacterHistoryFileState(name);
 		await commitPermanentDeletion({
-			characterKey: name,
-			deleteCharacter: () => fs.unlink(getCharacterSavePath(name)),
+			entityKey: name,
+			deleteEntity: () => fs.unlink(getCharacterSavePath(name)),
+			entityType: 'character',
 			deleteHistory: () => deleteCharacterHistory(historyState),
 			restoreHistory: () => restoreCharacterHistory(historyState),
 		});
@@ -62,7 +63,7 @@ async function deleteCharacter(name, canManage) {
 }
 
 async function updateCharacter(name, canManage, update, historyContext = null) {
-	return runCharacterOperation(name, async () => {
+	return runEntityOperation(name, async () => {
 		const current = await readCharacterRecord(name);
 		const { character } = current;
 		if (!canManage(character)) {
@@ -90,7 +91,8 @@ async function updateCharacter(name, canManage, update, historyContext = null) {
 		);
 		const serializedHistory = serializeJson(nextHistory.document);
 		await commitHistoryThenMutation({
-			characterKey: name,
+			entityKey: name,
+			entityType: 'character',
 			commitMutation: () => writeSerializedJsonAtomically(
 				getCharacterSavePath(name),
 				serializedCharacter,
@@ -135,7 +137,7 @@ async function listUndoableCharacters(
 ) {
 	const characterKeys = await listCharacterHistoryKeys();
 	const characters = await Promise.all(characterKeys.map(characterKey => (
-		runCharacterOperation(characterKey, async () => {
+		runEntityOperation(characterKey, async () => {
 			try {
 				const historyState = await readCharacterHistory(characterKey);
 				const historyCharacter = getUsableHistoryCharacter(
@@ -173,7 +175,7 @@ async function listUndoableCharacters(
 }
 
 async function undoCharacter(name, canManage, { maxEntries }) {
-	return runCharacterOperation(name, async () => {
+	return runEntityOperation(name, async () => {
 		let current = null;
 		try {
 			current = await readCharacterRecord(name);
@@ -198,7 +200,8 @@ async function undoCharacter(name, canManage, { maxEntries }) {
 		const serializedCharacter = serializeJson(undo.character);
 		const serializedHistory = serializeJson(undo.document);
 		await commitMutationThenHistory({
-			characterKey: name,
+			entityKey: name,
+			entityType: 'character',
 			commitMutation: () => writeSerializedJsonAtomically(
 				getCharacterSavePath(name),
 				serializedCharacter,

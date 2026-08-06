@@ -53,9 +53,8 @@ function createDeletionConsistencyError(
 }
 
 async function commitHistoryThenMutation({
-	characterKey,
 	commitMutation,
-	entityKey = characterKey,
+	entityKey,
 	entityType = 'character',
 	logger = console,
 	rollbackHistory,
@@ -84,9 +83,8 @@ async function commitHistoryThenMutation({
 }
 
 async function commitMutationThenHistory({
-	characterKey,
 	commitMutation,
-	entityKey = characterKey,
+	entityKey,
 	entityType = 'character',
 	logger = console,
 	rollbackMutation,
@@ -115,11 +113,9 @@ async function commitMutationThenHistory({
 }
 
 async function commitPermanentDeletion({
-	characterKey,
-	deleteCharacter,
-	deleteEntity = deleteCharacter,
+	deleteEntity,
 	deleteHistory,
-	entityKey = characterKey,
+	entityKey,
 	entityType = 'character',
 	logger = console,
 	restoreHistory,

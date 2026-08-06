@@ -12,9 +12,9 @@ process.env.INCREDIBLE_BOT_SAVE_DIRECTORY = testSaveDirectory;
 
 const { writeJsonAtomically } = require('../services/atomicJsonFile');
 const {
-	getCharacterOperationQueueSize,
-	getPendingCharacterOperationCount,
-} = require('../services/characterOperationQueue');
+	getEntityOperationQueueSize,
+	getPendingEntityOperationCount,
+} = require('../services/entityOperationQueue');
 const {
 	createCharacter,
 	deleteCharacter,
@@ -24,7 +24,7 @@ const {
 const {
 	characterSaveDirectory,
 	getCharacterSavePath,
-} = require('../services/characterStoragePaths');
+} = require('../services/entityStoragePaths');
 
 after(() => {
 	fs.rmSync(testSaveDirectory, { recursive: true, force: true });
@@ -120,7 +120,7 @@ test('concurrent updates to one character read the preceding saved result', asyn
 		mutationOrder.push('second');
 		character.name.lastName = 'Second';
 	});
-	assert.equal(getPendingCharacterOperationCount(characterKey), 2);
+	assert.equal(getPendingEntityOperationCount(characterKey), 2);
 
 	releaseFirst.resolve();
 	await Promise.all([firstUpdate, secondUpdate]);
@@ -129,7 +129,7 @@ test('concurrent updates to one character read the preceding saved result', asyn
 	assert.equal(savedCharacter.name.firstName, 'First');
 	assert.equal(savedCharacter.name.lastName, 'Second');
 	assert.deepEqual(mutationOrder, ['first-start', 'first-finish', 'second']);
-	assert.equal(getCharacterOperationQueueSize(), 0);
+	assert.equal(getEntityOperationQueueSize(), 0);
 });
 
 test('queued numeric updates do not lose changes', async () => {
@@ -152,12 +152,12 @@ test('queued numeric updates do not lose changes', async () => {
 	));
 
 	await firstStarted.promise;
-	assert.equal(getPendingCharacterOperationCount(characterKey), updateCount);
+	assert.equal(getPendingEntityOperationCount(characterKey), updateCount);
 	releaseFirst.resolve();
 	await Promise.all(updates);
 
 	assert.equal((await getCharacter(characterKey)).level, updateCount + 1);
-	assert.equal(getCharacterOperationQueueSize(), 0);
+	assert.equal(getEntityOperationQueueSize(), 0);
 });
 
 test('updates to different characters can execute concurrently', { timeout: 2_000 }, async () => {
@@ -185,14 +185,14 @@ test('updates to different characters can execute concurrently', { timeout: 2_00
 	});
 	await secondStarted.promise;
 
-	assert.equal(getPendingCharacterOperationCount(firstKey), 1);
-	assert.equal(getPendingCharacterOperationCount(secondKey), 1);
-	assert.equal(getCharacterOperationQueueSize(), 2);
+	assert.equal(getPendingEntityOperationCount(firstKey), 1);
+	assert.equal(getPendingEntityOperationCount(secondKey), 1);
+	assert.equal(getEntityOperationQueueSize(), 2);
 
 	releaseFirst.resolve();
 	releaseSecond.resolve();
 	await Promise.all([firstUpdate, secondUpdate]);
-	assert.equal(getCharacterOperationQueueSize(), 0);
+	assert.equal(getEntityOperationQueueSize(), 0);
 });
 
 test('concurrent creation of the same key remains exclusive', async () => {
@@ -211,7 +211,7 @@ test('concurrent creation of the same key remains exclusive', async () => {
 	);
 	await firstStarted.promise;
 	const secondCreation = createCharacter(characterKey, 'second-creator');
-	assert.equal(getPendingCharacterOperationCount(characterKey), 2);
+	assert.equal(getPendingEntityOperationCount(characterKey), 2);
 
 	releaseFirst.resolve();
 	const [firstResult, secondResult] = await Promise.allSettled([
@@ -223,7 +223,7 @@ test('concurrent creation of the same key remains exclusive', async () => {
 	assert.equal(secondResult.status, 'rejected');
 	assert.equal(secondResult.reason.code, 'EEXIST');
 	assert.equal((await getCharacter(characterKey)).creatorId, 'first-creator');
-	assert.equal(getCharacterOperationQueueSize(), 0);
+	assert.equal(getEntityOperationQueueSize(), 0);
 });
 
 test('an update and deletion of one character execute sequentially', async () => {
@@ -239,13 +239,13 @@ test('an update and deletion of one character execute sequentially', async () =>
 	});
 	await updateStarted.promise;
 	const deletion = deleteCharacter(characterKey, () => true);
-	assert.equal(getPendingCharacterOperationCount(characterKey), 2);
+	assert.equal(getPendingEntityOperationCount(characterKey), 2);
 
 	releaseUpdate.resolve();
 	await Promise.all([update, deletion]);
 
 	await assert.rejects(getCharacter(characterKey), { code: 'ENOENT' });
-	assert.equal(getCharacterOperationQueueSize(), 0);
+	assert.equal(getEntityOperationQueueSize(), 0);
 });
 
 test('a throwing mutation does not persist changes or retain its lock', async () => {
@@ -262,13 +262,13 @@ test('a throwing mutation does not persist changes or retain its lock', async ()
 	);
 
 	assert.equal((await getCharacter(characterKey)).name.firstName, '');
-	assert.equal(getCharacterOperationQueueSize(), 0);
+	assert.equal(getEntityOperationQueueSize(), 0);
 
 	await updateCharacter(characterKey, () => true, character => {
 		character.name.lastName = 'Recovered';
 	});
 	assert.equal((await getCharacter(characterKey)).name.lastName, 'Recovered');
-	assert.equal(getCharacterOperationQueueSize(), 0);
+	assert.equal(getEntityOperationQueueSize(), 0);
 });
 
 test('serialization failure preserves the previous save and cleans the lock', async () => {
@@ -287,7 +287,7 @@ test('serialization failure preserves the previous save and cleans the lock', as
 
 	assert.equal(await readSave(characterKey), previousSave);
 	assert.deepEqual(await listTemporaryFiles(), []);
-	assert.equal(getCharacterOperationQueueSize(), 0);
+	assert.equal(getEntityOperationQueueSize(), 0);
 });
 
 test('partial temporary-file write failure preserves the destination and cleans up', async () => {

@@ -33,24 +33,16 @@ async function runEntityOperation(entityKey, operation) {
 	}
 }
 
-const runCharacterOperation = runEntityOperation;
-
-function getCharacterOperationQueueSize() {
+function getEntityOperationQueueSize() {
 	return entityOperationQueues.size;
 }
 
-function getPendingCharacterOperationCount(characterKey) {
-	return entityOperationQueues.get(characterKey)?.pending ?? 0;
+function getPendingEntityOperationCount(entityKey) {
+	return entityOperationQueues.get(entityKey)?.pending ?? 0;
 }
 
-const getEntityOperationQueueSize = getCharacterOperationQueueSize;
-const getPendingEntityOperationCount = getPendingCharacterOperationCount;
-
 module.exports = {
-	getCharacterOperationQueueSize,
 	getEntityOperationQueueSize,
-	getPendingCharacterOperationCount,
 	getPendingEntityOperationCount,
-	runCharacterOperation,
 	runEntityOperation,
 };

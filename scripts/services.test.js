@@ -9,26 +9,26 @@ process.env.INCREDIBLE_BOT_SAVE_DIRECTORY = testSaveDirectory;
 
 const Character = require('../models/Character');
 const {
-	createCharacter,
-	damageCharacter,
-	deleteCharacter,
-	endCharacterTurn,
-	getCharacter,
-	healCharacter,
-} = require('../services/characterApplicationService');
+	createEntity,
+	damageEntity,
+	deleteEntity,
+	endEntityTurn,
+	getEntity,
+	healEntity,
+} = require('../services/entityApplicationService');
 const {
 	CharacterLoadError,
 	listCharacters,
 } = require('../services/characterStore');
 const {
 	getCharacterSavePath,
-} = require('../services/characterStoragePaths');
+} = require('../services/entityStoragePaths');
 const { setEditableFieldValue } = require('../services/characterEditor');
 const {
 	createInteractionSession,
 	deleteInteractionSession,
 } = require('../util/interactionSessions');
-const { translateCharacterOutcome } = require('../util/characterCommandErrors');
+const { translateEntityOutcome } = require('../util/entityCommandErrors');
 
 after(() => {
 	fs.rmSync(testSaveDirectory, { recursive: true, force: true });
@@ -68,7 +68,7 @@ test('character editing returns localization-independent outcomes and errors', (
 		translationKey: 'editorResults.updated',
 		translationVariables: { fieldId: 'personality' },
 	});
-	assert.match(translateCharacterOutcome(outcome, 'fr'), /personnalité/i);
+	assert.match(translateEntityOutcome(outcome, 'fr', 'character'), /personnalité/i);
 
 	assert.throws(
 		() => setEditableFieldValue(character, 'rules', 'Fire: invalid: Description'),
@@ -80,21 +80,21 @@ test('character editing returns localization-independent outcomes and errors', (
 	);
 });
 
-test('character application workflows compose persistence and mechanics', async () => {
+test('entity application workflows compose character persistence and mechanics', async () => {
 	const characterKey = 'Application.Workflow';
-	await createCharacter(characterKey, 'creator');
-	const damage = await damageCharacter(characterKey, 25, false, () => true);
-	assert.equal(damage.character.status.hp.current, 75);
+	await createEntity(characterKey, 'character', 'creator');
+	const damage = await damageEntity(characterKey, 25, false, () => true);
+	assert.equal(damage.entity.status.hp.current, 75);
 	assert.equal(damage.damage.hpDamage, 25);
 
-	const healing = await healCharacter(characterKey, 'hp', 100, () => true);
-	assert.equal(healing.character.status.hp.current, 100);
-	const endedTurn = await endCharacterTurn(characterKey, () => true);
-	assert.equal(endedTurn.character.status.ap.current, 4);
-	assert.equal((await getCharacter(characterKey)).key, characterKey);
+	const healing = await healEntity(characterKey, 'hp', 100, () => true);
+	assert.equal(healing.entity.status.hp.current, 100);
+	const endedTurn = await endEntityTurn(characterKey, () => true);
+	assert.equal(endedTurn.entity.status.ap.current, 4);
+	assert.equal((await getEntity(characterKey)).key, characterKey);
 
-	await deleteCharacter(characterKey, () => true);
-	await assert.rejects(getCharacter(characterKey), { code: 'ENOENT' });
+	await deleteEntity(characterKey, () => true);
+	await assert.rejects(getEntity(characterKey), { code: 'ENOENT' });
 });
 
 test('interaction session callers cannot override protected metadata', () => {

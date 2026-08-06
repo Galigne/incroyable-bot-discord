@@ -8,7 +8,7 @@ const {
 	creatureHistoryDirectory,
 	getCreatureHistoryPath,
 	validateEntityKey,
-} = require('./characterStoragePaths');
+} = require('./entityStoragePaths');
 
 const CREATURE_HISTORY_ACTIONS = new Set([
 	'set',

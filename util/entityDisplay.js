@@ -1,7 +1,6 @@
 const { getEntityFieldDefinition } = require('../services/entityFieldCatalog');
-const { getCharacterFieldLabel, getResourceAbbreviation } = require(
-	'./characterDisplay',
-);
+const { getCharacterFieldLabel } = require('./characterDisplay');
+const { getResourceAbbreviation } = require('./combatantDisplay');
 const { t } = require('./i18n');
 
 function getEntityFieldLabel(locale, type, fieldId, options = {}) {

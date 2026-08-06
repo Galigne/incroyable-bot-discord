@@ -1,5 +1,5 @@
 const { BASE_STATS, DERIVED_STATS, MAX_AP } = require('./mechanics/constants');
-const { validateEntityKey } = require('./characterStoragePaths');
+const { validateEntityKey } = require('./entityStoragePaths');
 
 const CURRENT_CREATURE_SAVE_SCHEMA_VERSION = 1;
 const CREATURE_STAT_IDS = Object.freeze([...BASE_STATS, ...DERIVED_STATS]);

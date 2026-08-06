@@ -1,7 +1,6 @@
 const generatorCatalog = require('../services/generatorCatalog');
 const { filterAutocompleteChoices } = require('../util/autocomplete');
 const {
-	canManageCharacter,
 	canManageEntity,
 	hasDmPermission,
 } = require('../util/authorization');
@@ -14,10 +13,6 @@ const {
 	getCommandLookupValue,
 } = require('../util/helpResponses');
 const { t } = require('../util/i18n');
-const {
-	getCharacterChoices,
-	getUndoableCharacterChoices,
-} = require('./character/autocomplete');
 const {
 	getEntityChoices,
 	getEntitySectionChoices,
@@ -45,16 +40,13 @@ const AUTOCOMPLETE_PROVIDERS = {
 	),
 	static: getStaticChoices,
 	backgrounds: getBackgroundChoices,
-	characters: (option, context, focused) => getCharacterChoices(focused.value),
 	entities: (option, context, focused) => getEntityChoices(
 		focused.value,
 		context.locale,
 	),
 	'entity-sections': getEntitySections,
 	'help-commands': getHelpCommandChoices,
-	'manageable-characters': getManageableCharacterChoices,
 	'manageable-entities': getManageableEntityChoices,
-	'undoable-characters': getUndoableCharacters,
 	'undoable-entities': getUndoableEntities,
 };
 
@@ -130,26 +122,6 @@ function canFilterHelpCommands(interaction) {
 		&& (
 			interaction.guild.ownerId === interaction.user.id
 			|| interaction.member?.roles
-		),
-	);
-}
-
-function getManageableCharacterChoices(option, context, focused) {
-	return getCharacterChoices(
-		focused.value,
-		hasDmPermission(context.interaction, context.config)
-			? {}
-			: { creatorId: context.interaction.user.id },
-	);
-}
-
-function getUndoableCharacters(option, context, focused) {
-	return getUndoableCharacterChoices(
-		focused.value,
-		character => canManageCharacter(
-			context.interaction,
-			character,
-			context.config,
 		),
 	);
 }

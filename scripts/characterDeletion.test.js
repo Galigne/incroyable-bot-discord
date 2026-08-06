@@ -12,17 +12,17 @@ process.env.INCREDIBLE_BOT_SAVE_DIRECTORY = testSaveDirectory;
 
 const commandRegistry = require('../commands/registry');
 const {
-	createDeletionModal,
-	handleCharacterInteraction,
-} = require('../commands/character/interactions');
+	createEntityDeletionModal,
+	handleEntityInteraction,
+} = require('../commands/entity/interactions');
 const {
-	deleteCharacter,
-	undoCharacter,
-	updateEditableCharacter,
-} = require('../services/characterApplicationService');
+	deleteEntity,
+	undoEntity,
+	updateEditableEntity,
+} = require('../services/entityApplicationService');
 const {
 	commitPermanentDeletion,
-} = require('../services/characterPersistenceTransaction');
+} = require('../services/entityPersistenceTransaction');
 const {
 	createCharacter,
 	getCharacter,
@@ -31,7 +31,7 @@ const {
 const {
 	getCharacterHistoryPath,
 	getCharacterSavePath,
-} = require('../services/characterStoragePaths');
+} = require('../services/entityStoragePaths');
 const {
 	getInteractionSession,
 } = require('../util/interactionSessions');
@@ -83,7 +83,7 @@ test('/delete opens a private exact-key modal without deleting anything', async 
 		historyBefore,
 	);
 
-	const frenchModal = createDeletionModal(
+	const frenchModal = createEntityDeletionModal(
 		'french-session',
 		characterKey,
 		'fr',
@@ -144,8 +144,8 @@ test('an exact confirmation permanently removes the active save and all history'
 	assert.equal(await pathExists(getCharacterHistoryPath(characterKey)), false);
 	await assert.rejects(getCharacter(characterKey), { code: 'ENOENT' });
 	await assert.rejects(
-		undoCharacter(characterKey, () => true, historyContext()),
-		{ code: 'NO_CHARACTER_HISTORY' },
+		undoEntity(characterKey, () => true, historyContext()),
+		{ code: 'ENOENT' },
 	);
 
 	const deleteChoices = await autocomplete('delete', 'creator');
@@ -265,7 +265,7 @@ test('submission reloads the character, observes modifications, and reauthorizes
 	const disappearedKey = nextKey('Delete.Disappeared');
 	await createCharacter(disappearedKey, 'creator');
 	const disappearedModal = await openDeleteModal(disappearedKey, 'creator');
-	await deleteCharacter(disappearedKey, () => true);
+	await deleteEntity(disappearedKey, () => true);
 	const disappeared = await submitDeleteModal(
 		disappearedModal.modal.custom_id,
 		disappearedKey,
@@ -278,8 +278,8 @@ test('the permanent-deletion transaction preserves state for both failure direct
 	const firstFailure = { active: 'before', history: 'before' };
 	await assert.rejects(
 		commitPermanentDeletion({
-			characterKey: 'Delete.HistoryFailure',
-			deleteCharacter: async () => {
+			entityKey: 'Delete.HistoryFailure',
+			deleteEntity: async () => {
 				firstFailure.active = 'deleted';
 			},
 			deleteHistory: async () => {
@@ -296,8 +296,8 @@ test('the permanent-deletion transaction preserves state for both failure direct
 	const secondFailure = { active: 'before', history: 'before' };
 	await assert.rejects(
 		commitPermanentDeletion({
-			characterKey: 'Delete.ActiveFailure',
-			deleteCharacter: async () => {
+			entityKey: 'Delete.ActiveFailure',
+			deleteEntity: async () => {
 				throw new Error('active deletion failed');
 			},
 			deleteHistory: async () => {
@@ -316,8 +316,8 @@ test('an unrecoverable deletion rollback is logged with a stable error code', as
 	const logged = [];
 	await assert.rejects(
 		commitPermanentDeletion({
-			characterKey: 'Delete.Unrecoverable',
-			deleteCharacter: async () => {
+			entityKey: 'Delete.Unrecoverable',
+			deleteEntity: async () => {
 				throw new Error('active deletion failed');
 			},
 			deleteHistory: async () => undefined,
@@ -411,7 +411,7 @@ test('/delete metadata, routing, help, and locale catalogs describe permanent de
 });
 
 async function createHistory(characterKey, value) {
-	return updateEditableCharacter(
+	return updateEditableEntity(
 		characterKey,
 		'name',
 		{ firstName: value, lastName: '' },
@@ -449,7 +449,7 @@ async function openDeleteModal(
 
 async function submitDeleteModal(customId, value, userId, roleIds = []) {
 	let reply;
-	const handled = await handleCharacterInteraction({
+	const handled = await handleEntityInteraction({
 		...createInteraction(userId, roleIds),
 		customId,
 		fields: {

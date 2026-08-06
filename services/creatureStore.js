@@ -16,19 +16,19 @@ const {
 	restoreCreatureHistory,
 	writePreparedCreatureHistory,
 } = require('./creatureHistoryStore');
-const { runEntityOperation } = require('./characterOperationQueue');
+const { runEntityOperation } = require('./entityOperationQueue');
 const { assertEntityKeyAvailable } = require('./entityKeyRegistry');
 const {
 	commitHistoryThenMutation,
 	commitMutationThenHistory,
 	commitPermanentDeletion,
-} = require('./characterPersistenceTransaction');
+} = require('./entityPersistenceTransaction');
 const { validateCreatureSaveSchema } = require('./creatureSaveSchema');
 const {
 	creatureSaveDirectory,
 	getCreatureSavePath,
 	validateEntityKey,
-} = require('./characterStoragePaths');
+} = require('./entityStoragePaths');
 
 async function createCreature(entityKey, creatorId, initialize = () => undefined) {
 	validateEntityKey(entityKey);

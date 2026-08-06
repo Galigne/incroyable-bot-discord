@@ -1,4 +1,4 @@
-const { combatantEditError } = require('./characterValidation');
+const { combatantEditError } = require('./combatantValidation');
 
 function dealDamage(character, damageAmount, piercing = false) {
 	if (!Number.isSafeInteger(damageAmount) || damageAmount <= 0) {

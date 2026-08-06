@@ -3,15 +3,15 @@ const { test } = require('node:test');
 
 const Character = require('../models/Character');
 const {
-	createCharacterDamageResponse,
-	createCharacterHealResponse,
-	createEndTurnResponse,
-} = require('../util/characterCommandResponses');
+	createEndEntityTurnResponse,
+	createEntityDamageResponse,
+	createEntityHealResponse,
+} = require('../util/entityCommandResponses');
+const { createCharacterSummaryEmbed } = require('../util/characterRenderer');
 const {
-	createCharacterSummaryEmbed,
-	formatCharacterResource,
-	formatCharacterResources,
-} = require('../util/characterRenderer');
+	formatCombatantResource,
+	formatCombatantResources,
+} = require('../util/combatantDisplay');
 
 function createTestCharacter() {
 	const character = new Character('Response.Test', 'creator');
@@ -28,7 +28,7 @@ function createTestCharacter() {
 
 test('shared resource formatting remains the formatting used by the general summary', () => {
 	const character = createTestCharacter();
-	const resources = formatCharacterResources(
+	const resources = formatCombatantResources(
 		character,
 		['hp', 'ar', 'ap', 'md'],
 		'en',
@@ -50,12 +50,12 @@ test('shared resource formatting remains the formatting used by the general summ
 
 test('damage response displays final HP before final AR without a plain final summary', () => {
 	const character = createTestCharacter();
-	const response = createCharacterDamageResponse({
-		character,
+	const response = createEntityDamageResponse({
+		entity: character,
 		damage: { arDamage: 12, hpDamage: 8, piercing: false },
 		damageAmount: 20,
 	}, 'en');
-	const resources = formatCharacterResources(character, ['hp', 'ar'], 'en');
+	const resources = formatCombatantResources(character, ['hp', 'ar'], 'en');
 
 	assert.ok(response.endsWith(resources));
 	assert.ok(response.indexOf('HP:') < response.indexOf('AR:'));
@@ -71,12 +71,12 @@ test('healing responses display only affected final resources in canonical order
 		[[{ resource: 'ar' }], ['ar']],
 		[[{ resource: 'ar' }, { resource: 'hp' }], ['hp', 'ar']],
 	]) {
-		const response = createCharacterHealResponse({
-			character,
+		const response = createEntityHealResponse({
+			entity: character,
 			changes,
 			percentage: 50,
 		}, 'en');
-		assert.ok(response.endsWith(formatCharacterResources(character, expectedIds, 'en')));
+		assert.ok(response.endsWith(formatCombatantResources(character, expectedIds, 'en')));
 		assert.doesNotMatch(response, /→/);
 	}
 });
@@ -84,8 +84,8 @@ test('healing responses display only affected final resources in canonical order
 test('end-turn response displays final AP before localized MD or DD', () => {
 	const character = createTestCharacter();
 	for (const locale of ['en', 'fr']) {
-		const response = createEndTurnResponse({ character }, locale);
-		const resources = formatCharacterResources(character, ['ap', 'md'], locale);
+		const response = createEndEntityTurnResponse({ entity: character }, locale);
+		const resources = formatCombatantResources(character, ['ap', 'md'], locale);
 		assert.ok(response.endsWith(resources));
 		assert.ok(response.indexOf(locale === 'fr' ? 'PA:' : 'AP:')
 			< response.indexOf(locale === 'fr' ? 'DD:' : 'MD:'));
@@ -95,12 +95,12 @@ test('end-turn response displays final AP before localized MD or DD', () => {
 
 test('shared resource formatter uses English and French resource labels', () => {
 	const character = createTestCharacter();
-	assert.match(formatCharacterResource(character, 'hp', 'en'), /^HP:/);
-	assert.match(formatCharacterResource(character, 'ar', 'en'), /^AR:/);
-	assert.match(formatCharacterResource(character, 'ap', 'en'), /^AP:/);
-	assert.match(formatCharacterResource(character, 'md', 'en'), /^MD:/);
-	assert.match(formatCharacterResource(character, 'hp', 'fr'), /^PV:/);
-	assert.match(formatCharacterResource(character, 'ar', 'fr'), /^PR:/);
-	assert.match(formatCharacterResource(character, 'ap', 'fr'), /^PA:/);
-	assert.match(formatCharacterResource(character, 'md', 'fr'), /^DD:/);
+	assert.match(formatCombatantResource(character, 'hp', 'en'), /^HP:/);
+	assert.match(formatCombatantResource(character, 'ar', 'en'), /^AR:/);
+	assert.match(formatCombatantResource(character, 'ap', 'en'), /^AP:/);
+	assert.match(formatCombatantResource(character, 'md', 'en'), /^MD:/);
+	assert.match(formatCombatantResource(character, 'hp', 'fr'), /^PV:/);
+	assert.match(formatCombatantResource(character, 'ar', 'fr'), /^PR:/);
+	assert.match(formatCombatantResource(character, 'ap', 'fr'), /^PA:/);
+	assert.match(formatCombatantResource(character, 'md', 'fr'), /^DD:/);
 });

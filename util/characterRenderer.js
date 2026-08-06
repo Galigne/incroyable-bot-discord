@@ -2,27 +2,21 @@ const { EmbedBuilder } = require('discord.js');
 const {
 	BASE_STATS,
 } = require('../services/mechanics/constants');
-const { clampActionPoints } = require('../services/mechanics/resources');
 const {
 	getCharacterFieldDefinition,
 	getViewableFieldDefinition,
 } = require('../services/characterFieldCatalog');
 const {
-	getCharacterFieldLabel,
-	getResourceAbbreviation,
-} = require('./characterDisplay');
+	formatCombatantResource,
+	formatCombatantResources,
+} = require('./combatantDisplay');
+const { getCharacterFieldLabel } = require('./characterDisplay');
 const { formatDescribedRecords } = require('./describedRecordDisplay');
 const { t } = require('./i18n');
 
-const PROGRESS_RESOURCE_ICONS = {
-	hp: ['❤️', '🖤'],
-	ar: ['🟦', '⬛'],
-	md: ['🟧', '⬛'],
-};
-
 function createCharacterSummaryEmbed(character, locale = 'en') {
 	const status = [
-		formatCharacterResources(character, ['hp', 'ar', 'ap', 'md'], locale),
+		formatCombatantResources(character, ['hp', 'ar', 'ap', 'md'], locale),
 		'',
 		`**${getCharacterFieldLabel(locale, 'status.effects')}**\n`
 			+ formatList(character.status.effects, 1_024, locale),
@@ -124,7 +118,7 @@ function createCharacterFieldEmbed(character, fieldName, locale = 'en') {
 		return embed.addFields(
 			...targets.filter(target => target.resourceId).map(target => ({
 				name: getCharacterFieldLabel(locale, target.id),
-				value: formatCharacterResource(character, target.resourceId, locale),
+				value: formatCombatantResource(character, target.resourceId, locale),
 			})),
 			{
 				name: getCharacterFieldLabel(locale, targets.at(-1).id),
@@ -219,51 +213,6 @@ function createCharacterFieldEmbed(character, fieldName, locale = 'en') {
 
 function formatResource(label, resource) {
 	return `${label}: **${resource.current} / ${resource.max}**`;
-}
-
-function formatProgressResource(label, resource, filledIcon, emptyIcon) {
-	const percentage = getResourcePercentage(resource);
-	const filledCount = Math.round(percentage / 10);
-	const bar = filledIcon.repeat(filledCount) + emptyIcon.repeat(10 - filledCount);
-	return `${label}: **${resource.current} / ${resource.max} (${percentage}%)**\n${bar}`;
-}
-
-function formatAp(resource, locale = 'en') {
-	const maxAp = clampActionPoints(resource.max);
-	const availableAp = Math.min(clampActionPoints(resource.current), maxAp);
-	const spentAp = maxAp - availableAp;
-	return `${getResourceAbbreviation(locale, 'ap')}:\n`
-		+ `${'🌟'.repeat(availableAp)}`
-		+ `${'⭐'.repeat(spentAp) || (maxAp === 0 ? t(locale, 'common.empty') : '')}`;
-}
-
-function formatCharacterResource(character, resourceId, locale = 'en') {
-	if (resourceId === 'ap') {
-		return formatAp(character.status.ap, locale);
-	}
-	const icons = PROGRESS_RESOURCE_ICONS[resourceId];
-	if (!icons) {
-		throw new RangeError(`Unsupported visual resource: ${resourceId}`);
-	}
-	return formatProgressResource(
-		getResourceAbbreviation(locale, resourceId),
-		character.status[resourceId],
-		icons[0],
-		icons[1],
-	);
-}
-
-function formatCharacterResources(character, resourceIds, locale = 'en') {
-	return resourceIds
-		.map(resourceId => formatCharacterResource(character, resourceId, locale))
-		.join('\n');
-}
-
-function getResourcePercentage(resource) {
-	if (resource.max <= 0) {
-		return 0;
-	}
-	return Math.max(0, Math.min(100, Math.round(resource.current / resource.max * 100)));
 }
 
 function formatStatTargets(character, targets, locale) {
@@ -367,6 +316,4 @@ function truncateBlocks(blocks, separator, maxLength) {
 module.exports = {
 	createCharacterFieldEmbed,
 	createCharacterSummaryEmbed,
-	formatCharacterResource,
-	formatCharacterResources,
 };

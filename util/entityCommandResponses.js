@@ -2,13 +2,15 @@ const { MessageFlags } = require('discord.js');
 const {
 	createCharacterFieldEmbed,
 	createCharacterSummaryEmbed,
-	formatCharacterResources,
 } = require('./characterRenderer');
 const {
 	createCreatureFieldEmbed,
 	createCreatureSummaryEmbed,
 } = require('./creatureRenderer');
-const { getResourceAbbreviation } = require('./characterDisplay');
+const {
+	formatCombatantResources,
+	getResourceAbbreviation,
+} = require('./combatantDisplay');
 const { translateEntityOutcome } = require('./entityCommandErrors');
 const { t } = require('./i18n');
 
@@ -54,7 +56,7 @@ function createEntityDamageResponse(result, locale = 'en') {
 		amount: damageAmount,
 		breakdown: damageBreakdown,
 		name: entity.displayName,
-		resources: formatCharacterResources(entity, ['hp', 'ar'], locale),
+		resources: formatCombatantResources(entity, ['hp', 'ar'], locale),
 	});
 }
 
@@ -64,14 +66,14 @@ function createEntityHealResponse(result, locale = 'en') {
 	return t(locale, 'rpg.heal.result', {
 		name: result.entity.displayName,
 		percentage: result.percentage,
-		resources: formatCharacterResources(result.entity, resourceIds, locale),
+		resources: formatCombatantResources(result.entity, resourceIds, locale),
 	});
 }
 
 function createEndEntityTurnResponse(result, locale = 'en') {
 	return t(locale, 'rpg.endTurn.result', {
 		name: result.entity.displayName,
-		resources: formatCharacterResources(result.entity, ['ap', 'md'], locale),
+		resources: formatCombatantResources(result.entity, ['ap', 'md'], locale),
 	});
 }
 

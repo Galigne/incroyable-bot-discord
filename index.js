@@ -7,7 +7,7 @@ const {
 } = require('./adapters/discordCommandRegistration');
 const Client = require('./client/Client');
 const commandRegistry = require('./commands/registry');
-const { handleEntityInteraction } = require('./commands/character/interactions');
+const { handleEntityInteraction } = require('./commands/entity/interactions');
 const initialConfig = require('./config.json');
 const { playLocalAudio } = require('./adapters/localAudioPlayer');
 const { createRuntimeReloader } = require('./runtime/runtimeReloader');

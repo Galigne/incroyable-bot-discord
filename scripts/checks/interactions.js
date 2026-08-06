@@ -8,8 +8,8 @@ module.exports = function createInteractionChecks(context) {
 	async function checkInteractiveRpgUx() {
 		const suffix = `${process.pid}_${Date.now()}`;
 		const characterKey = `ux.${suffix}`;
-		const { handleCharacterInteraction, openCharacterEditor } = require(
-			'../../commands/character/interactions',
+		const { handleEntityInteraction, openEntityEditor } = require(
+			'../../commands/entity/interactions',
 		);
 		const user = { id: 'ux-creator' };
 		const member = {
@@ -28,7 +28,7 @@ module.exports = function createInteractionChecks(context) {
 			});
 
 			let modalPayload;
-			await openCharacterEditor({
+			await openEntityEditor({
 				user,
 				member,
 				showModal: async modal => {
@@ -55,7 +55,7 @@ module.exports = function createInteractionChecks(context) {
 			}
 
 			let submitPayload;
-			await handleCharacterInteraction({
+			await handleEntityInteraction({
 				customId: modalPayload.custom_id,
 				user,
 				member,

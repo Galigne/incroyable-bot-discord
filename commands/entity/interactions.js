@@ -23,7 +23,7 @@ const {
 const { replyToEntityError } = require('../../util/entityCommandErrors');
 const {
 	getResourceAbbreviation,
-} = require('../../util/characterDisplay');
+} = require('../../util/combatantDisplay');
 const { getEntityFieldLabel } = require('../../util/entityDisplay');
 const {
 	createEntityHistoryContext,
@@ -38,11 +38,11 @@ const {
 	getEntityEditFieldLabel,
 	getEntityEditInputId,
 	getEntityEditTargetDefinitions,
-} = require('../entity/editorFields');
+} = require('./editorFields');
 const { getLocale, t } = require('../../util/i18n');
 
 async function openEntityEditor(interaction, config, entityKey, fieldName) {
-	const locale = getLocale(config, interaction.guildId);
+	const locale = getLocale(config);
 	try {
 		const editorState = await getEditableEntityField(
 			entityKey,
@@ -90,17 +90,14 @@ async function openEntityDeletionConfirmation(
 	interaction,
 	config,
 	entityKey,
-	options = {},
 ) {
-	const locale = getLocale(config, interaction.guildId);
+	const locale = getLocale(config);
 	try {
 		const entity = await getDeletableEntity(
 			entityKey,
 			currentEntity => canManageEntity(interaction, currentEntity, config),
 		);
-		const confirmationInputId = options.legacy
-			? 'character-key-confirmation'
-			: 'entity-key-confirmation';
+		const confirmationInputId = 'entity-key-confirmation';
 		const session = createInteractionSession('delete', interaction.user.id, {
 			confirmationInputId,
 			entityKey,
@@ -134,7 +131,7 @@ async function handleEntityInteraction(interaction, config) {
 }
 
 async function handleEntityEditSubmission(interaction, config) {
-	const locale = getLocale(config, interaction.guildId);
+	const locale = getLocale(config);
 	const sessionId = interaction.customId.slice('rpg-set:'.length);
 	const session = getInteractionSession(sessionId, interaction.user.id, 'set');
 	if (!session) {
@@ -170,7 +167,7 @@ async function handleEntityEditSubmission(interaction, config) {
 }
 
 async function handleEntityDeletionSubmission(interaction, config) {
-	const locale = getLocale(config, interaction.guildId);
+	const locale = getLocale(config);
 	const sessionId = interaction.customId.slice('rpg-delete:'.length);
 	const consumed = consumeInteractionSession(
 		sessionId,
@@ -410,41 +407,10 @@ function isValueTooLarge(value) {
 	return values.some(item => String(item).length > 4_000);
 }
 
-function createFieldModal(sessionId, fieldName, value, locale = 'en') {
-	return createEntityFieldModal(sessionId, 'character', fieldName, value, locale);
-}
-
-function createDeletionModal(sessionId, entityKey, locale = 'en') {
-	return createEntityDeletionModal(
-		sessionId,
-		entityKey,
-		locale,
-		'character-key-confirmation',
-	);
-}
-
-function openCharacterEditor(interaction, config, characterKey, fieldName) {
-	return openEntityEditor(interaction, config, characterKey, fieldName);
-}
-
-function openCharacterDeletionConfirmation(interaction, config, characterKey) {
-	return openEntityDeletionConfirmation(
-		interaction,
-		config,
-		characterKey,
-		{ legacy: true },
-	);
-}
-
 module.exports = {
-	createDeletionModal,
 	createEntityDeletionModal,
 	createEntityFieldModal,
-	createFieldModal,
-	handleCharacterInteraction: handleEntityInteraction,
 	handleEntityInteraction,
-	openCharacterDeletionConfirmation,
-	openCharacterEditor,
 	openEntityDeletionConfirmation,
 	openEntityEditor,
 };

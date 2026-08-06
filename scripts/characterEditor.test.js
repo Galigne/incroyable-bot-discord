@@ -13,13 +13,12 @@ process.env.INCREDIBLE_BOT_SAVE_DIRECTORY = testSaveDirectory;
 const Character = require('../models/Character');
 const {
 	createEntityFieldModal,
-	createFieldModal,
-	handleCharacterInteraction,
-	openCharacterEditor,
-} = require('../commands/character/interactions');
+	handleEntityInteraction,
+	openEntityEditor,
+} = require('../commands/entity/interactions');
 const {
-	getEditInputId,
-} = require('../commands/character/editorFields');
+	getEntityEditInputId,
+} = require('../commands/entity/editorFields');
 const {
 	getEditableFields,
 	getEditableFieldDefinition,
@@ -29,20 +28,20 @@ const {
 	setEditableFieldValue,
 } = require('../services/characterEditor');
 const {
-	createCharacter,
-	getCharacter,
-	undoCharacter,
-	updateEditableCharacter,
-} = require('../services/characterApplicationService');
+	createEntity,
+	getEntity,
+	undoEntity,
+	updateEditableEntity,
+} = require('../services/entityApplicationService');
 const {
 	getCharacterHistoryPath,
 	getCharacterSavePath,
-} = require('../services/characterStoragePaths');
+} = require('../services/entityStoragePaths');
 const { readCharacterHistory } = require('../services/characterHistoryStore');
 const { updateCharacter } = require('../services/characterStore');
 const {
-	translateCharacterOutcome,
-} = require('../util/characterCommandErrors');
+	translateEntityOutcome,
+} = require('../util/entityCommandErrors');
 const english = require('../locales/en.json');
 const french = require('../locales/fr.json');
 
@@ -457,11 +456,11 @@ test('race, background, and personality modals prefill every separate input', ()
 		['personality', ['Traits', 'Description']],
 	]) {
 		const values = getEditableFieldValue(character, field);
-		const modal = createFieldModal('session', field, values, 'en').toJSON();
+		const modal = createEntityFieldModal('session', 'character', field, values, 'en').toJSON();
 		assert.deepEqual(modal.components.map(component => component.label), labels);
 		assert.deepEqual(
 			modal.components.map(component => component.component.custom_id),
-			Object.keys(values).map(getEditInputId),
+			Object.keys(values).map(getEntityEditInputId),
 		);
 		assert.deepEqual(
 			modal.components.map(component => component.component.value),
@@ -469,8 +468,9 @@ test('race, background, and personality modals prefill every separate input', ()
 		);
 	}
 
-	const frenchRace = createFieldModal(
+	const frenchRace = createEntityFieldModal(
 		'session',
+		'character',
 		'race',
 		getEditableFieldValue(character, 'race'),
 		'fr',
@@ -485,7 +485,7 @@ test('race, background, and personality modals prefill every separate input', ()
 test('name, status, and gear modals use the required prefilled inputs', () => {
 	const character = createFilledCharacter();
 	const nameValues = getEditableFieldValue(character, 'name');
-	const nameModal = createFieldModal('session', 'name', nameValues, 'en').toJSON();
+	const nameModal = createEntityFieldModal('session', 'character', 'name', nameValues, 'en').toJSON();
 	assert.deepEqual(
 		nameModal.components.map(component => component.label),
 		['First name', 'Last name'],
@@ -500,7 +500,7 @@ test('name, status, and gear modals use the required prefilled inputs', () => {
 	);
 
 	const statusValues = getEditableFieldValue(character, 'status');
-	const statusModal = createFieldModal('session', 'status', statusValues, 'en').toJSON();
+	const statusModal = createEntityFieldModal('session', 'character', 'status', statusValues, 'en').toJSON();
 	assert.deepEqual(
 		statusModal.components.map(component => component.label),
 		['HP', 'AR', 'AP', 'MD', 'Status effects'],
@@ -522,7 +522,7 @@ test('name, status, and gear modals use the required prefilled inputs', () => {
 	)));
 
 	const gearValues = getEditableFieldValue(character, 'gear');
-	const gearModal = createFieldModal('session', 'gear', gearValues, 'en').toJSON();
+	const gearModal = createEntityFieldModal('session', 'character', 'gear', gearValues, 'en').toJSON();
 	assert.deepEqual(
 		gearModal.components.map(component => component.label),
 		['Equipment', 'Inventory', 'Encumbrance'],
@@ -536,13 +536,14 @@ test('name, status, and gear modals use the required prefilled inputs', () => {
 		['Sword\nShield', 'Potion\nRope', '3:8'],
 	);
 
-	const frenchName = createFieldModal('session', 'name', nameValues, 'fr').toJSON();
+	const frenchName = createEntityFieldModal('session', 'character', 'name', nameValues, 'fr').toJSON();
 	assert.deepEqual(
 		frenchName.components.map(component => component.label),
 		['Prénom', 'Nom'],
 	);
-	const frenchStatus = createFieldModal(
+	const frenchStatus = createEntityFieldModal(
 		'session',
+		'character',
 		'status',
 		getEditableFieldValue(character, 'status'),
 		'fr',
@@ -555,8 +556,9 @@ test('name, status, and gear modals use the required prefilled inputs', () => {
 
 test('level and statistics each use one appropriately styled prefilled input', () => {
 	const character = createFilledCharacter();
-	const levelModal = createFieldModal(
+	const levelModal = createEntityFieldModal(
 		'session',
+		'character',
 		'level',
 		getEditableFieldValue(character, 'level'),
 		'en',
@@ -567,7 +569,7 @@ test('level and statistics each use one appropriately styled prefilled input', (
 	assert.equal(levelModal.components[0].component.required, true);
 
 	const value = getEditableFieldValue(character, 'statistics');
-	const modal = createFieldModal('session', 'statistics', value, 'en').toJSON();
+	const modal = createEntityFieldModal('session', 'character', 'statistics', value, 'en').toJSON();
 	assert.equal(modal.title, 'Edit Statistics');
 	assert.equal(modal.components.length, 1);
 	assert.equal(modal.components[0].component.value, value);
@@ -595,8 +597,8 @@ test('character and creature RULE modals use the full-size paragraph input', () 
 
 test('one grouped status update creates one history entry and keeps save keys', async () => {
 	const characterKey = 'Editor.History';
-	await createCharacter(characterKey, 'creator');
-	await updateEditableCharacter(
+	await createEntity(characterKey, 'character', 'creator');
+	await updateEditableEntity(
 		characterKey,
 		'status',
 		{
@@ -625,8 +627,8 @@ test('one grouped status update creates one history entry and keeps save keys', 
 	assert.equal(Object.hasOwn(rawSave, 'resources'), false);
 	assert.equal(Object.hasOwn(rawSave, 'statusEffects'), false);
 	assert.equal(Object.hasOwn(rawSave, 'base-statistics'), false);
-	await undoCharacter(characterKey, () => true, { maxEntries: 3 });
-	const restored = await getCharacter(characterKey);
+	await undoEntity(characterKey, () => true, { maxEntries: 3 });
+	const restored = await getEntity(characterKey);
 	assert.deepEqual(restored.status, {
 		hp: { current: 100, max: 100 },
 		ar: { current: 0, max: 0 },
@@ -639,8 +641,8 @@ test('one grouped status update creates one history entry and keeps save keys', 
 
 test('/set gear updates and undo keep stored gear fields together', async () => {
 	const characterKey = 'Editor.Encumbrance';
-	await createCharacter(characterKey, 'creator');
-	await updateEditableCharacter(
+	await createEntity(characterKey, 'character', 'creator');
+	await updateEditableEntity(
 		characterKey,
 		'gear',
 		{
@@ -652,7 +654,7 @@ test('/set gear updates and undo keep stored gear fields together', async () => 
 		{ actorId: 'creator', maxEntries: 3 },
 	);
 
-	const edited = await getCharacter(characterKey);
+	const edited = await getEntity(characterKey);
 	assert.deepEqual(edited.gear.equipment, ['Sword']);
 	assert.deepEqual(edited.gear.inventory, ['Potion']);
 	assert.deepEqual(edited.gear.encumbrance, { current: 3, max: 8 });
@@ -665,8 +667,8 @@ test('/set gear updates and undo keep stored gear fields together', async () => 
 		history.document.entries[0].character.gear.encumbrance,
 		{ current: 0, max: 0 },
 	);
-	await undoCharacter(characterKey, () => true, { maxEntries: 3 });
-	const restored = await getCharacter(characterKey);
+	await undoEntity(characterKey, () => true, { maxEntries: 3 });
+	const restored = await getEntity(characterKey);
 	assert.deepEqual(restored.gear.equipment, []);
 	assert.deepEqual(restored.gear.inventory, []);
 	assert.deepEqual(restored.gear.encumbrance, { current: 0, max: 0 });
@@ -707,8 +709,8 @@ test('name, race, background, and personality updates are atomic and undoable', 
 	];
 	for (const [index, [field, value, assertRestored]] of edits.entries()) {
 		const characterKey = `Editor.Undo.${index}`;
-		await createCharacter(characterKey, 'creator');
-		await updateEditableCharacter(
+		await createEntity(characterKey, 'character', 'creator');
+		await updateEditableEntity(
 			characterKey,
 			field,
 			value,
@@ -719,17 +721,17 @@ test('name, race, background, and personality updates are atomic and undoable', 
 			(await readCharacterHistory(characterKey)).document.entries.length,
 			1,
 		);
-		await undoCharacter(characterKey, () => true, { maxEntries: 3 });
-		assertRestored(await getCharacter(characterKey));
+		await undoEntity(characterKey, () => true, { maxEntries: 3 });
+		assertRestored(await getEntity(characterKey));
 	}
 });
 
 test('failed grouped application updates create neither mutation nor history', async () => {
 	const characterKey = 'Editor.InvalidHistory';
-	await createCharacter(characterKey, 'creator');
-	const before = JSON.stringify(await getCharacter(characterKey));
+	await createEntity(characterKey, 'character', 'creator');
+	const before = JSON.stringify(await getEntity(characterKey));
 	await assert.rejects(
-		updateEditableCharacter(
+		updateEditableEntity(
 			characterKey,
 			'status',
 			{
@@ -744,7 +746,7 @@ test('failed grouped application updates create neither mutation nor history', a
 		),
 		{ code: 'INVALID_CHARACTER_EDIT' },
 	);
-	assert.equal(JSON.stringify(await getCharacter(characterKey)), before);
+	assert.equal(JSON.stringify(await getEntity(characterKey)), before);
 	await assert.rejects(fsPromises.access(getCharacterHistoryPath(characterKey)));
 });
 
@@ -752,9 +754,9 @@ test('modal routing submits all inputs once and repeats authorization', async ()
 	const config = createConfig();
 	const characterKey = 'Editor.Routing';
 	const creator = createInteraction('creator');
-	await createCharacter(characterKey, creator.user.id);
+	await createEntity(characterKey, 'character', creator.user.id);
 	let modal;
-	await openCharacterEditor({
+	await openEntityEditor({
 		...creator,
 		showModal: async value => {
 			modal = value.toJSON();
@@ -762,13 +764,13 @@ test('modal routing submits all inputs once and repeats authorization', async ()
 	}, config, characterKey, 'background');
 
 	const submittedValues = {
-		[getEditInputId('background.appearance')]: 'Blue coat',
-		[getEditInputId('background.backstory')]: 'Former courier',
-		[getEditInputId('background.goals')]: 'Cross every border',
+		[getEntityEditInputId('background.appearance')]: 'Blue coat',
+		[getEntityEditInputId('background.backstory')]: 'Former courier',
+		[getEntityEditInputId('background.goals')]: 'Cross every border',
 	};
 	let replyCount = 0;
 	let successResponse;
-	await handleCharacterInteraction({
+	await handleEntityInteraction({
 		...creator,
 		customId: modal.custom_id,
 		fields: {
@@ -780,7 +782,7 @@ test('modal routing submits all inputs once and repeats authorization', async ()
 			successResponse = value;
 		},
 	}, config);
-	const edited = await getCharacter(characterKey);
+	const edited = await getEntity(characterKey);
 	assert.equal(edited.background.appearance, 'Blue coat');
 	assert.equal(edited.background.backstory, 'Former courier');
 	assert.equal(edited.background.goals, 'Cross every border');
@@ -793,9 +795,9 @@ test('modal routing submits all inputs once and repeats authorization', async ()
 	);
 
 	const authorizationKey = 'Editor.Reauthorize';
-	await createCharacter(authorizationKey, creator.user.id);
+	await createEntity(authorizationKey, 'character', creator.user.id);
 	let authorizationModal;
-	await openCharacterEditor({
+	await openEntityEditor({
 		...creator,
 		showModal: async value => {
 			authorizationModal = value.toJSON();
@@ -805,12 +807,12 @@ test('modal routing submits all inputs once and repeats authorization', async ()
 		character.creatorId = 'new-owner';
 	});
 	let deniedResponse;
-	await handleCharacterInteraction({
+	await handleEntityInteraction({
 		...creator,
 		customId: authorizationModal.custom_id,
 		fields: {
 			getTextInputValue: customId => (
-				customId === getEditInputId('firstName') ? 'Unauthorized' : 'Edit'
+				customId === getEntityEditInputId('firstName') ? 'Unauthorized' : 'Edit'
 			),
 		},
 		isModalSubmit: () => true,
@@ -818,21 +820,23 @@ test('modal routing submits all inputs once and repeats authorization', async ()
 			deniedResponse = value;
 		},
 	}, config);
-	assert.equal((await getCharacter(authorizationKey)).name.firstName, '');
+	assert.equal((await getEntity(authorizationKey)).name.firstName, '');
 	assert.equal(deniedResponse.content, english.errors.entityEditor);
 	await assert.rejects(fsPromises.access(getCharacterHistoryPath(authorizationKey)));
 });
 
 test('grouped modal validation messages and descriptions are localized', () => {
 	const character = createFilledCharacter();
-	const englishModal = createFieldModal(
+	const englishModal = createEntityFieldModal(
 		'session',
+		'character',
 		'statistics',
 		getEditableFieldValue(character, 'statistics'),
 		'en',
 	).toJSON();
-	const frenchModal = createFieldModal(
+	const frenchModal = createEntityFieldModal(
 		'session',
+		'character',
 		'statistics',
 		getEditableFieldValue(character, 'statistics'),
 		'fr',
@@ -856,11 +860,11 @@ test('grouped modal validation messages and descriptions are localized', () => {
 		validationError = error;
 	}
 	assert.match(
-		translateCharacterOutcome(validationError, 'en'),
+		translateEntityOutcome(validationError, 'en', 'character'),
 		/Unknown statistic `luck`/,
 	);
 	assert.match(
-		translateCharacterOutcome(validationError, 'fr'),
+		translateEntityOutcome(validationError, 'fr', 'character'),
 		/Statistique `luck` inconnue/,
 	);
 });

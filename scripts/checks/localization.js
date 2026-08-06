@@ -16,12 +16,14 @@ module.exports = function createLocalizationChecks(context) {
 	} = require('../../util/i18n');
 	const {
 		CHARACTER_DISPLAY_FIELDS,
-		RESOURCE_IDS,
 		getCharacterFieldDefinition,
 		getCharacterFieldLabel,
+	} = require('../../util/characterDisplay');
+	const {
+		RESOURCE_IDS,
 		getResourceAbbreviation,
 		getResourceName,
-	} = require('../../util/characterDisplay');
+	} = require('../../util/combatantDisplay');
 
 	function checkLocalization() {
 		const englishKeys = flattenKeys(translations.en).sort();
@@ -65,8 +67,8 @@ module.exports = function createLocalizationChecks(context) {
 			errors.push('Locale key parity detection did not identify a missing key.');
 		}
 		if (
-			getLocale({ locale: 'fr' }, 'guild') !== 'fr'
-			|| getLocale({ locale: 'unsupported' }, 'guild') !== 'en'
+			getLocale({ locale: 'fr' }) !== 'fr'
+			|| getLocale({ locale: 'unsupported' }) !== 'en'
 		) {
 			errors.push('Configured locale selection or English fallback is incorrect.');
 		}
@@ -99,9 +101,10 @@ module.exports = function createLocalizationChecks(context) {
 			errors.push('Character embeds do not use the configured locale.');
 		}
 
-		const { createFieldModal } = require('../../commands/character/interactions');
-		const frenchModal = createFieldModal(
+		const { createEntityFieldModal } = require('../../commands/entity/interactions');
+		const frenchModal = createEntityFieldModal(
 			'test',
+			'character',
 			'statistics',
 			[
 				'constitution: 10',

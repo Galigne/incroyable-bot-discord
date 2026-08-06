@@ -1,4 +1,4 @@
-const { openEntityDeletionConfirmation } = require('../character/interactions');
+const { openEntityDeletionConfirmation } = require('../entity/interactions');
 
 module.exports = {
 	async execute({ config, interaction }) {

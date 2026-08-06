@@ -63,8 +63,8 @@ module.exports = function createRuntimeChecks(context) {
 			if (/\bnew\s+EmbedBuilder\b/.test(source)) {
 				errors.push(`${relativePath} constructs embeds instead of using a response adapter.`);
 			}
-			if (/services\/(?:characterStore|mechanics\/)/.test(source)) {
-				errors.push(`${relativePath} bypasses the character application service.`);
+			if (/services\/(?:characterStore|creatureStore|mechanics\/)/.test(source)) {
+				errors.push(`${relativePath} bypasses an application service.`);
 			}
 		}
 

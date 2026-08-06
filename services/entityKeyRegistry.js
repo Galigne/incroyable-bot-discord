@@ -5,7 +5,7 @@ const {
 	getCreatureHistoryPath,
 	getCreatureSavePath,
 	validateEntityKey,
-} = require('./characterStoragePaths');
+} = require('./entityStoragePaths');
 
 async function assertEntityKeyAvailable(entityKey) {
 	validateEntityKey(entityKey);

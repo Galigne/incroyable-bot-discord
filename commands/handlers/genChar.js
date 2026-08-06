@@ -12,7 +12,7 @@ const { getLocale } = require('../../util/i18n');
 
 module.exports = {
 	async execute({ config, interaction }) {
-		const locale = getLocale(config, interaction.guildId);
+		const locale = getLocale(config);
 		const characterKey = interaction.options.getString('character-key', true);
 		const level = interaction.options.getInteger('level');
 		const background = interaction.options.getString('background');

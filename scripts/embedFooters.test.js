@@ -5,9 +5,9 @@ const { test } = require('node:test');
 
 const Character = require('../models/Character');
 const {
-	createCharacterGetResponse,
 	createGeneratedCharacterResponse,
 } = require('../util/characterCommandResponses');
+const { createEntityGetResponse } = require('../util/entityCommandResponses');
 const { createGeneratedEmbed } = require('../util/generatorResponses');
 const { flattenKeys, translations } = require('../util/i18n');
 
@@ -26,9 +26,9 @@ test('generated prompt embeds have no footer', () => {
 
 test('character summary and detail embeds have no footer', () => {
 	const character = new Character('Footer.Test', 'creator');
-	const summary = createCharacterGetResponse(character, null, 'en')
+	const summary = createEntityGetResponse(character, null, 'en')
 		.embeds[0].toJSON();
-	const detail = createCharacterGetResponse(character, 'race', 'en')
+	const detail = createEntityGetResponse(character, 'race', 'en')
 		.embeds[0].toJSON();
 
 	assert.equal(summary.footer, undefined);
@@ -38,7 +38,7 @@ test('character summary and detail embeds have no footer', () => {
 test('/get gear retains the manual encumbrance detail', () => {
 	const character = new Character('Encumbrance.Get', 'creator');
 	character.gear.encumbrance = { current: 3, max: 8 };
-	const detail = createCharacterGetResponse(character, 'gear', 'en')
+	const detail = createEntityGetResponse(character, 'gear', 'en')
 		.embeds[0].toJSON();
 
 	assert.equal(
@@ -79,13 +79,13 @@ test('/get renders every grouped section from unchanged stored properties', () =
 		description: 'Quiet and curious',
 	};
 
-	const name = createCharacterGetResponse(character, 'name', 'en').embeds[0].toJSON();
+	const name = createEntityGetResponse(character, 'name', 'en').embeds[0].toJSON();
 	assert.deepEqual(name.fields.map(field => field.value), ['Ada', 'Lovelace']);
 	assert.equal(
-		createCharacterGetResponse(character, 'level', 'en').embeds[0].toJSON().description,
+		createEntityGetResponse(character, 'level', 'en').embeds[0].toJSON().description,
 		'4',
 	);
-	const status = createCharacterGetResponse(character, 'status', 'en').embeds[0].toJSON();
+	const status = createEntityGetResponse(character, 'status', 'en').embeds[0].toJSON();
 	assert.deepEqual(status.fields.map(field => field.name), [
 		'Hit points', 'Armor rating', 'Action points', 'Movement distance', 'Status effects',
 	]);
@@ -93,23 +93,23 @@ test('/get renders every grouped section from unchanged stored properties', () =
 	assert.equal(status.fields[4].value, '1. Inspired');
 	assert.equal(status.fields.some(field => field.name === 'Encumbrance'), false);
 
-	const gear = createCharacterGetResponse(character, 'gear', 'en').embeds[0].toJSON();
+	const gear = createEntityGetResponse(character, 'gear', 'en').embeds[0].toJSON();
 	assert.deepEqual(gear.fields.map(field => field.name), [
 		'Equipment', 'Inventory', 'Encumbrance',
 	]);
 	assert.equal(gear.fields[0].value, '1. Sword');
 	assert.equal(gear.fields[1].value, '1. Potion');
 
-	const race = createCharacterGetResponse(character, 'race', 'en').embeds[0].toJSON();
+	const race = createEntityGetResponse(character, 'race', 'en').embeds[0].toJSON();
 	assert.deepEqual(race.fields.map(field => field.value), [
 		'Ashborn', 'Silver eyes', 'Forged in starlight', 'Arcana', 'Night sight',
 	]);
-	const background = createCharacterGetResponse(character, 'background', 'en')
+	const background = createEntityGetResponse(character, 'background', 'en')
 		.embeds[0].toJSON();
 	assert.deepEqual(background.fields.map(field => field.value), [
 		'Green cloak', 'Former courier', 'Map every road',
 	]);
-	const personality = createCharacterGetResponse(character, 'personality', 'en')
+	const personality = createEntityGetResponse(character, 'personality', 'en')
 		.embeds[0].toJSON();
 	assert.deepEqual(personality.fields.map(field => field.value), [
 		'1. Patient\n2. Observant', 'Quiet and curious',
@@ -123,12 +123,12 @@ test('/get rejects former independent child views and safely truncates grouped l
 		'status-effects', 'hp', 'ar', 'ap', 'md', 'equipment', 'inventory',
 		'encumbrance',
 	]) {
-		const response = createCharacterGetResponse(character, field, 'en');
+		const response = createEntityGetResponse(character, field, 'en');
 		assert.equal(response.embeds, undefined, field);
 		assert.match(response.content, /field is not available for this entity/, field);
 	}
 	character.gear.equipment = ['A'.repeat(2_000), 'second'];
-	const gear = createCharacterGetResponse(character, 'gear', 'en').embeds[0].toJSON();
+	const gear = createEntityGetResponse(character, 'gear', 'en').embeds[0].toJSON();
 	assert.ok(gear.fields[0].value.length <= 1_024);
 	assert.match(gear.fields[0].value, /^1\. .*…$/);
 	assert.equal(gear.fields.some(field => field.name === '\u200B'), false);
@@ -141,9 +141,9 @@ test('character summaries and talent details render localized bounded lists', ()
 		'Cold Immunity — Ordinary cold cannot freeze the character.',
 	];
 
-	const summary = createCharacterGetResponse(character, null, 'en')
+	const summary = createEntityGetResponse(character, null, 'en')
 		.embeds[0].toJSON();
-	const detailed = createCharacterGetResponse(character, 'talents', 'en')
+	const detailed = createEntityGetResponse(character, 'talents', 'en')
 		.embeds[0].toJSON();
 	assert.match(
 		summary.fields[2].value,
@@ -154,12 +154,12 @@ test('character summaries and talent details render localized bounded lists', ()
 		'2. Cold Immunity — Ordinary cold cannot freeze the character.',
 	].join('\n'));
 
-	const emptyEnglish = createCharacterGetResponse(
+	const emptyEnglish = createEntityGetResponse(
 		new Character('Empty.English', 'creator'),
 		'talents',
 		'en',
 	).embeds[0].toJSON();
-	const emptyFrench = createCharacterGetResponse(
+	const emptyFrench = createEntityGetResponse(
 		new Character('Empty.French', 'creator'),
 		'talents',
 		'fr',
@@ -168,9 +168,9 @@ test('character summaries and talent details render localized bounded lists', ()
 	assert.equal(emptyFrench.description, translations.fr.common.empty);
 
 	character.talents = ['A'.repeat(5_000)];
-	const boundedSummary = createCharacterGetResponse(character, null, 'en')
+	const boundedSummary = createEntityGetResponse(character, null, 'en')
 		.embeds[0].toJSON();
-	const boundedDetailed = createCharacterGetResponse(character, 'talents', 'en')
+	const boundedDetailed = createEntityGetResponse(character, 'talents', 'en')
 		.embeds[0].toJSON();
 	assert.ok(boundedSummary.fields[2].value.length <= 1_024);
 	assert.equal(boundedDetailed.description.length, 4_096);

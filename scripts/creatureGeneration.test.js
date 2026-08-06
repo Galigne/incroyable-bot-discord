@@ -18,12 +18,12 @@ const {
 } = require('../services/creatureApplicationService');
 const {
 	getEntityOperationQueueSize,
-} = require('../services/characterOperationQueue');
+} = require('../services/entityOperationQueue');
 const { createCharacter } = require('../services/characterStore');
 const {
 	getCreatureHistoryPath,
 	getCreatureSavePath,
-} = require('../services/characterStoragePaths');
+} = require('../services/entityStoragePaths');
 const { getCreature } = require('../services/creatureStore');
 const { reloadGenerationData } = require('../services/generationData');
 const generatorCatalog = require('../services/generatorCatalog');

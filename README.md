@@ -273,8 +273,8 @@ The full TTRPG rules are available in
 - `commands/registry.js`: command lookup, category grouping, permission filtering,
   Discord registration data, and runtime routing
 - `commands/autocompleteProviders.js`: shared metadata-selected autocomplete logic
-- `commands/character/`: shared character-command autocomplete and modal
-  presentation helpers
+- `commands/entity/`: shared entity autocomplete, modal presentation, and active
+  modal interaction routing
 - `services/`: Discord-independent application workflows, persistence, parsing,
   validation, mechanics, generation, and bounded entity-history transactions
 - `models/`: Discord-independent domain models

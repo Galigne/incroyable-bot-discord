@@ -1,6 +1,6 @@
 const { MessageFlags } = require('discord.js');
 const { MAX_AP } = require('../services/mechanics/constants');
-const { getResourceAbbreviation } = require('./characterDisplay');
+const { getResourceAbbreviation } = require('./combatantDisplay');
 const { getEntityFieldLabel } = require('./entityDisplay');
 const { t } = require('./i18n');
 

@@ -5,7 +5,7 @@ const { getLocale } = require('../../util/i18n');
 
 module.exports = {
 	async execute({ config, interaction }) {
-		const locale = getLocale(config, interaction.guildId);
+		const locale = getLocale(config);
 		const entityKey = interaction.options.getString('entity-key', true);
 		const fieldName = interaction.options.getString('field');
 		try {

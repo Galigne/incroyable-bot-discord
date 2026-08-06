@@ -26,7 +26,7 @@ const {
 } = require('../services/characterStore');
 const {
 	getCharacterSavePath,
-} = require('../services/characterStoragePaths');
+} = require('../services/entityStoragePaths');
 const { generateCharacter } = require('../services/characterApplicationService');
 const generatorCatalog = require('../services/generatorCatalog');
 const {

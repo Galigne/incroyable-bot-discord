@@ -7,7 +7,7 @@ const { getLocale } = require('../../util/i18n');
 
 module.exports = {
 	async execute({ config, interaction }) {
-		const locale = getLocale(config, interaction.guildId);
+		const locale = getLocale(config);
 		const entityKey = interaction.options.getString('entity-key', true);
 		const damageAmount = interaction.options.getInteger('damage-amount', true);
 		const piercing = interaction.options.getBoolean('piercing') ?? false;

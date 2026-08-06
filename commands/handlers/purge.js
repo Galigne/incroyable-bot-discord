@@ -3,7 +3,7 @@ const { getLocale, t } = require('../../util/i18n');
 
 module.exports = {
 	async execute({ config, interaction }) {
-		const locale = getLocale(config, interaction.guildId);
+		const locale = getLocale(config);
 		const deleteCount = interaction.options.getInteger('amount', true);
 		const deleted = await interaction.channel.bulkDelete(deleteCount, true);
 		await interaction.reply({

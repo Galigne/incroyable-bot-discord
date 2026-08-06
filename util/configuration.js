@@ -5,7 +5,7 @@ const { normalizeLocale, t } = require('./i18n');
 const SUPPORTED_LOCALES = new Set(['en', 'fr']);
 const ROLE_KEYS = new Set(['dm', 'moderator']);
 const DEFAULT_CONFIG_PATH = path.join(__dirname, '..', 'config.json');
-const DEFAULT_CHARACTER_HISTORY_MAX_ENTRIES = 3;
+const DEFAULT_ENTITY_HISTORY_MAX_ENTRIES = 3;
 
 class ConfigurationError extends Error {
 	constructor(field, reason = 'missing') {
@@ -65,7 +65,7 @@ function validateConfig(config) {
 			throw new ConfigurationError('characterHistory', 'invalid');
 		}
 		if (Object.hasOwn(config.characterHistory, 'maxEntries')) {
-			getCharacterHistoryMaxEntries(config);
+			getEntityHistoryMaxEntries(config);
 		}
 	}
 	return config;
@@ -103,7 +103,7 @@ function requireNonEmptyString(object, property, field = property) {
 	}
 }
 
-function getCharacterHistoryMaxEntries(config = {}) {
+function getEntityHistoryMaxEntries(config = {}) {
 	const hasConfiguredLimit = (
 		config.characterHistory
 		&& typeof config.characterHistory === 'object'
@@ -111,7 +111,7 @@ function getCharacterHistoryMaxEntries(config = {}) {
 	);
 	const maxEntries = hasConfiguredLimit
 		? config.characterHistory.maxEntries
-		: DEFAULT_CHARACTER_HISTORY_MAX_ENTRIES;
+		: DEFAULT_ENTITY_HISTORY_MAX_ENTRIES;
 	if (!Number.isInteger(maxEntries) || maxEntries <= 0) {
 		throw new ConfigurationError(
 			'characterHistory.maxEntries',
@@ -123,11 +123,11 @@ function getCharacterHistoryMaxEntries(config = {}) {
 
 module.exports = {
 	ConfigurationError,
-	DEFAULT_CHARACTER_HISTORY_MAX_ENTRIES,
+	DEFAULT_ENTITY_HISTORY_MAX_ENTRIES,
 	DEFAULT_CONFIG_PATH,
 	SUPPORTED_LOCALES,
 	getConfigurationErrorMessage,
-	getCharacterHistoryMaxEntries,
+	getEntityHistoryMaxEntries,
 	loadConfig,
 	reloadConfig,
 	validateConfig,

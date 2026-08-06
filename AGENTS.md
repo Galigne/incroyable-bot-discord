@@ -64,36 +64,36 @@ saves.
   option metadata.
 - `commands/handlers/`: behavior-only handlers for every top-level slash command,
   independent of its help category.
-- `commands/character/editorFields.js`: modal presentation metadata derived from the
-  canonical field catalog.
-- `commands/character/interactions.js`: direct prefilled edit modal and modal
+- `commands/entity/editorFields.js`: shared modal presentation metadata derived from
+  the type-specific canonical field catalogs.
+- `commands/entity/interactions.js`: direct prefilled edit modal and modal
   submission.
-- `commands/character/autocomplete.js`: character-specific autocomplete choice
-  presentation shared by the metadata-selected providers.
-- `commands/entity/`: shared character/creature field metadata and combined
-  autocomplete presentation for entity-management commands.
+- `commands/entity/autocomplete.js`: shared entity and type-compatible field
+  autocomplete presentation selected through command metadata.
+- `commands/entity/`: shared character/creature field metadata, autocomplete,
+  editor presentation, and active modal interaction routing.
 - `models/Character.js`: Discord-independent character schema and save hydration.
 - `models/Creature.js`: strict persistent creature schema and final-state hydration;
   loading never reruns generation or localization.
 - `services/`: Discord-independent domain behavior and application workflows,
   including parsing, validation, calculations, persistence, and generation.
-- `services/characterApplicationService.js`: character-only workflows, including
-  `/gen-char`, and compatibility APIs used by focused character tests.
+- `services/characterApplicationService.js`: genuinely character-only workflows,
+  currently random character generation for `/gen-char`.
 - `services/creatureApplicationService.js`: atomic `/gen-monster` generation and
   exclusive creature publication inside the shared EntityKey queue.
 - `services/entityApplicationService.js`: command-facing shared management
   workflows for characters and creatures; management command adapters must use it.
 - `services/entityStore.js`: resolves a globally unique EntityKey to its concrete
   persistent type and delegates to the matching store.
-- `services/characterOperationQueue.js`: shared per-EntityKey synchronization for
+- `services/entityOperationQueue.js`: shared per-EntityKey synchronization for
   cross-type creation, mutation, undo, and deletion.
 - `services/atomicJsonFile.js`: same-directory temporary-file serialization and
   atomic publication for entity saves and history.
-- `services/characterStoragePaths.js`: active save and `.history` path derivation
+- `services/entityStoragePaths.js`: active save and `.history` path derivation
   from the same configured save directory.
 - `services/characterHistoryStore.js`: bounded pre-change history documents,
   snapshot validation, stack rotation, and undo preparation.
-- `services/characterPersistenceTransaction.js`: ordered two-file commits,
+- `services/entityPersistenceTransaction.js`: ordered two-file commits,
   permanent deletion, and rollback for active saves and history documents.
 - `services/characterSaveSchema.js`: owns the current character-save schema version
   and validates raw save metadata before model hydration.
@@ -113,8 +113,8 @@ saves.
   delete operations are serialized per key, while updates replace saves atomically.
 - `services/characterEditor.js`: grouped editable-value parsing, complete
   pre-mutation validation, and domain mutation.
-- `services/mechanics/`: Discord-independent character constants, validation,
-  statistics, resources, armor, damage, and generation formulas.
+- `services/mechanics/`: Discord-independent combatant and character constants,
+  validation, statistics, resources, armor, damage, and generation formulas.
 - `services/generatorSchema.js`: validates the strict generator-v2 envelope,
   entry schemas, stable IDs, payloads, weights, creature generation metadata,
   profile/reference relationships, and English/French parity.
@@ -161,13 +161,14 @@ saves.
   adapters.
 - `util/authorization.js`: role/channel authorization.
 - `util/autocomplete.js`: shared Discord autocomplete filtering.
-- `util/characterDisplay.js`: localized character labels, resource full names, and
-  abbreviations derived from the canonical service catalog.
+- `util/characterDisplay.js`: genuinely character-specific localized field labels
+  derived from the canonical service catalog.
+- `util/combatantDisplay.js`: resource names and abbreviations shared by characters
+  and creatures.
 - `util/characterRenderer.js`: Discord embed rendering for character summaries and
   detailed fields.
-- `util/characterCommandResponses.js`: localized character reply payloads.
-- `util/characterCommandErrors.js`: centralized mapping of expected character errors
-  and structured service outcomes to localized replies.
+- `util/characterCommandResponses.js` and `util/characterCommandErrors.js`:
+  character-generation response and error presentation for `/gen-char`.
 - `util/entityCommandResponses.js`, `util/entityCommandErrors.js`, and
   `util/creatureRenderer.js`: entity-neutral command presentation and creature embeds.
 
@@ -277,7 +278,7 @@ Discord or localization code; entity embeds belong in the renderer adapters unde
 `util/`.
 
 Character and creature creation, updates, undo, and deletion must remain inside the
-shared per-EntityKey critical section exposed by `services/characterOperationQueue.js`.
+shared per-EntityKey critical section exposed by `services/entityOperationQueue.js`.
 The same key lock protects cross-type creation so a character and creature cannot be
 created concurrently with the same key. Update locks cover the latest load,
 authorization, mutation, validation, serialization, and atomic replacement. Save

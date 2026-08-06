@@ -1,8 +1,6 @@
 const { MAX_AP } = require('./constants');
-const {
-	characterEditError,
-	combatantEditError,
-} = require('./characterValidation');
+const { combatantEditError } = require('./combatantValidation');
+const { characterEditError } = require('./characterValidation');
 const { calculateArmorRating } = require('./armor');
 
 function calculateMaxHp(constitution, level) {

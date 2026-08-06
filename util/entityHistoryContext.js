@@ -1,9 +1,9 @@
-const { getCharacterHistoryMaxEntries } = require('./configuration');
+const { getEntityHistoryMaxEntries } = require('./configuration');
 
 function createEntityHistoryContext(interaction, config) {
 	return {
 		actorId: interaction.user.id,
-		maxEntries: getCharacterHistoryMaxEntries(config),
+		maxEntries: getEntityHistoryMaxEntries(config),
 	};
 }
 
