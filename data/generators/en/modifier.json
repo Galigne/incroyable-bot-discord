@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 2,
+  "id": "modifier",
+  "kind": "modifier",
+  "visibility": "internal",
+  "name": "descriptive modifiers",
+  "description": "Descriptive variations shared by generated characters and creatures",
+  "appliesTo": [
+    "background",
+    "creature-animal",
+    "creature-companion",
+    "creature-monster"
+  ],
+  "entrySchema": {
+    "type": "fields",
+    "required": ["Name", "Description"]
+  },
+  "entries": [
+    {
+      "id": "scarred",
+      "weight": 3,
+      "fields": {
+        "Name": "Scarred",
+        "Description": "Old scars mark their body and hint at dangers they survived."
+      }
+    },
+    {
+      "id": "unusually-large",
+      "weight": 2,
+      "fields": {
+        "Name": "Unusually Large",
+        "Description": "They are remarkably large for their kind, with a presence that is difficult to ignore."
+      }
+    },
+    {
+      "id": "pale",
+      "weight": 2,
+      "fields": {
+        "Name": "Pale",
+        "Description": "Their coloring is unnaturally pale, making familiar features seem strange."
+      }
+    },
+    {
+      "id": "ornate-markings",
+      "weight": 2,
+      "fields": {
+        "Name": "Ornate Markings",
+        "Description": "Distinctive natural markings form elaborate patterns across their body."
+      }
+    },
+    {
+      "id": "weathered",
+      "fields": {
+        "Name": "Weathered",
+        "Description": "Exposure to harsh weather has left them rough, patient, and visibly worn."
+      }
+    }
+  ]
+}

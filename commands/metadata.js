@@ -168,6 +168,61 @@ const COMMAND_METADATA = [
 		handler: './handlers/genChar',
 	},
 	{
+		id: 'gen-monster',
+		name: 'gen-monster',
+		registrationOrder: 11,
+		category: 'rpg',
+		permission: 'dm',
+		descriptionKey: 'rpg.genMonster.schemaDescription',
+		options: [
+			{
+				name: 'creature-key',
+				type: 'string',
+				descriptionKey: 'rpg.genMonster.keyOption',
+				required: true,
+				minLength: 1,
+				maxLength: 50,
+			},
+			{
+				name: 'type',
+				type: 'string',
+				descriptionKey: 'rpg.genMonster.typeOption',
+				required: true,
+				choices: [
+					{ nameKey: 'rpg.genMonster.monsterChoice', value: 'monster' },
+					{ nameKey: 'rpg.genMonster.animalChoice', value: 'animal' },
+					{ nameKey: 'rpg.genMonster.companionChoice', value: 'companion' },
+				],
+			},
+			{
+				name: 'level',
+				type: 'integer',
+				descriptionKey: 'rpg.genMonster.levelOption',
+				minValue: 1,
+				maxValue: 10,
+				autocomplete: {
+					provider: 'static',
+					values: Array.from({ length: 10 }, (_, index) => ({
+						value: index + 1,
+						nameKey: 'rpg.genMonster.levelChoice',
+						nameVariables: { level: index + 1 },
+					})),
+				},
+			},
+		],
+		examples: [
+			'/gen-monster creature-key:<new key> type:<monster|animal|companion>',
+			'/gen-monster creature-key:<new key> type:<type> level:<1-10>',
+		],
+		help: {
+			order: 22,
+			summaryKey: 'rpg.genMonster.description',
+			detailsKey: 'rpg.genMonster.behavior',
+		},
+		guildOnly: true,
+		handler: './handlers/genMonster',
+	},
+	{
 		id: 'roll',
 		name: 'roll',
 		registrationOrder: 12,

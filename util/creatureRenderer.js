@@ -8,6 +8,7 @@ const {
 	formatCharacterResource,
 	formatCharacterResources,
 } = require('./characterRenderer');
+const { formatDescribedRecords } = require('./describedRecordDisplay');
 const { getEntityFieldLabel } = require('./entityDisplay');
 const { t } = require('./i18n');
 
@@ -19,6 +20,7 @@ function createCreatureSummaryEmbed(creature, locale = 'en') {
 		.setTitle(creature.displayName)
 		.setDescription([
 			t(locale, 'creature.summary.level', { level: creature.level }),
+			formatArchetype(creature, locale),
 			creature.description || t(locale, 'common.empty'),
 		].join('\n'))
 		.setColor('#8B5CF6')
@@ -64,12 +66,18 @@ function createCreatureFieldEmbed(creature, fieldName, locale = 'en') {
 
 	switch (field) {
 	case 'identity':
-		return embed.addFields(...targets.map(target => ({
-			name: label(locale, target.id),
-			value: truncate(
-				getStoredValue(creature, target) || t(locale, 'common.empty'),
-			),
-		})));
+		return embed.addFields(
+			...targets.map(target => ({
+				name: label(locale, target.id),
+				value: truncate(
+					getStoredValue(creature, target) || t(locale, 'common.empty'),
+				),
+			})),
+			{
+				name: t(locale, 'creature.fields.archetype'),
+				value: formatArchetype(creature, locale),
+			},
+		);
 	case 'level':
 		return embed.setDescription(String(creature.level));
 	case 'status':
@@ -85,6 +93,10 @@ function createCreatureFieldEmbed(creature, fieldName, locale = 'en') {
 					1_024,
 					locale,
 				),
+			},
+			{
+				name: t(locale, 'creature.fields.naturalArmor'),
+				value: `${creature.naturalArmor.percentage}%`,
 			},
 		);
 	case 'statistics':
@@ -143,6 +155,13 @@ function formatCreatureStatus(creature, locale) {
 	].join('\n');
 }
 
+function formatArchetype(creature, locale) {
+	const archetypeId = creature.source?.archetypeId;
+	return archetypeId
+		? t(locale, `rpg.genMonster.${archetypeId}Choice`)
+		: t(locale, 'common.empty');
+}
+
 function formatStats(creature, targets, locale) {
 	return targets.map(target => (
 		`${label(locale, target.id)}: **${getStoredValue(creature, target)}**`
@@ -152,12 +171,6 @@ function formatStats(creature, targets, locale) {
 function formatRules(rules, maxLength, locale) {
 	return truncateList(rules.map(rule => (
 		`**${rule.name} (${rule.level})** - ${rule.description}`
-	)), maxLength, locale);
-}
-
-function formatDescribedRecords(records, maxLength, locale) {
-	return truncateList(records.map(record => (
-		`**${record.name}** - ${record.description}`
 	)), maxLength, locale);
 }
 

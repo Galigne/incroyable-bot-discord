@@ -11,6 +11,7 @@ const {
 	getCharacterFieldLabel,
 	getResourceAbbreviation,
 } = require('./characterDisplay');
+const { formatDescribedRecords } = require('./describedRecordDisplay');
 const { t } = require('./i18n');
 
 const PROGRESS_RESOURCE_ICONS = {
@@ -25,6 +26,9 @@ function createCharacterSummaryEmbed(character, locale = 'en') {
 		'',
 		`**${getCharacterFieldLabel(locale, 'status.effects')}**\n`
 			+ formatList(character.status.effects, 1_024, locale),
+		'',
+		`**${getCharacterFieldLabel(locale, 'modifiers')}**\n`
+			+ formatDescribedRecords(character.modifiers, 1_024, locale),
 	].join('\n');
 	const stats = BASE_STATS
 		.map(stat => `${formatLabel(stat, locale)}: **${character.statistics[stat]}**`)
@@ -151,6 +155,12 @@ function createCharacterFieldEmbed(character, fieldName, locale = 'en') {
 		));
 	case 'talents':
 		return embed.setDescription(formatList(
+			getStoredValue(character, targets[0]),
+			4_096,
+			locale,
+		));
+	case 'modifiers':
+		return embed.setDescription(formatDescribedRecords(
 			getStoredValue(character, targets[0]),
 			4_096,
 			locale,

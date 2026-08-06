@@ -29,9 +29,17 @@ module.exports = function createGeneratorChecks(context) {
 			if (
 				publicGenerators.length === 0
 				|| allGenerators.length !== publicGenerators.length + internalGenerators.length
-				|| internalGenerators.some(generator => (
-					!generator.id.startsWith('background-')
-					|| generator.kind !== 'component'
+				|| internalGenerators.some(generator => !(
+					(generator.id.startsWith('background-') && generator.kind === 'component')
+					|| (
+						['creature-animal', 'creature-companion', 'creature-monster']
+							.includes(generator.id)
+						&& generator.kind === 'component'
+					)
+					|| (
+						generator.id === 'modifier'
+						&& generator.kind === 'modifier'
+					)
 				))
 			) {
 				errors.push('Generator v2 visibility or kind filtering is incorrect.');
@@ -86,6 +94,7 @@ module.exports = function createGeneratorChecks(context) {
 
 			checkRequiredGenerators(errors, generatorCatalog);
 			checkBackgroundGenerators(errors, generatorCatalog);
+			checkCreatureGenerators(errors, generatorCatalog);
 			checkStructuredGenerators(errors, generatorCatalog);
 			checkGeneratorResponses(errors, generatorCatalog, weightedEntries);
 			checkStatProfiles(errors);
@@ -130,11 +139,10 @@ function checkProductionDataIsV2(errors) {
 
 function checkRequiredGenerators(errors, generatorCatalog) {
 	const requiredPublicGenerators = [
-		'animal',
 		'armors',
 		'background',
 		'building',
-		'companion',
+		'creature',
 		'criminal',
 		'dungeon',
 		'event',
@@ -142,7 +150,6 @@ function checkRequiredGenerators(errors, generatorCatalog) {
 		'government',
 		'inventory',
 		'material',
-		'monster',
 		'name',
 		'npc',
 		'personality',
@@ -168,15 +175,15 @@ function checkRequiredGenerators(errors, generatorCatalog) {
 	}
 
 	for (const generatorId of [
-		'animal',
 		'building',
-		'companion',
+		'creature-animal',
+		'creature-companion',
+		'creature-monster',
 		'criminal',
 		'dungeon',
 		'faction',
 		'government',
 		'material',
-		'monster',
 		'region',
 		'religion',
 		'room',
@@ -221,6 +228,49 @@ function checkBackgroundGenerators(errors, generatorCatalog) {
 		|| generatorCatalog.getGenerator('background-citizen')
 	) {
 		errors.push('Background routing must contain the 17 supported non-citizen categories.');
+	}
+}
+
+function checkCreatureGenerators(errors, generatorCatalog) {
+	const creature = generatorCatalog.getGenerator('creature');
+	const expectedRoutes = {
+		animal: 'creature-animal',
+		companion: 'creature-companion',
+		monster: 'creature-monster',
+	};
+	if (
+		creature?.kind !== 'category'
+		|| creature.visibility !== 'public'
+		|| Object.entries(expectedRoutes).some(([archetype, generatorId]) => (
+			creature.entries.find(entry => entry.id === archetype)
+				?.fields?.Generator !== generatorId
+		))
+	) {
+		errors.push('The public creature router does not expose every creature type.');
+	}
+	for (const generatorId of Object.values(expectedRoutes)) {
+		const generator = generatorCatalog.getGenerator(generatorId);
+		if (
+			generator?.kind !== 'component'
+			|| generator.visibility !== 'internal'
+			|| generator.entries.length < 20
+			|| generator.entries.some(entry => !entry.generation)
+		) {
+			errors.push(`Invalid routed creature generator: ${generatorId}.`);
+		}
+	}
+	const statusEffects = generatorCatalog.getGenerator('status-effect');
+	const modifier = generatorCatalog.getGenerator('modifier');
+	if (
+		statusEffects?.entrySchema.type !== 'fields'
+		|| statusEffects.entries.some(entry => (
+			!entry.fields?.Name || !entry.fields.Description
+		))
+		|| modifier?.kind !== 'modifier'
+		|| !modifier.appliesTo.includes('background')
+		|| Object.values(expectedRoutes).some(id => !modifier.appliesTo.includes(id))
+	) {
+		errors.push('Status effects and modifiers are not shared generation catalogs.');
 	}
 }
 

@@ -52,6 +52,9 @@ class Character {
 				max: data.gear?.encumbrance?.max ?? 0,
 			},
 		};
+		character.modifiers = Array.isArray(data.modifiers)
+			? structuredClone(data.modifiers)
+			: [];
 		return character;
 	}
 
@@ -100,6 +103,7 @@ class Character {
 				max: 0,
 			},
 		};
+		this.modifiers = [];
 	}
 
 	get displayName() {

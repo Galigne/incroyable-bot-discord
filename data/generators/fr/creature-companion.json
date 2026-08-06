@@ -1,0 +1,615 @@
+{
+  "schemaVersion": 2,
+  "id": "creature-companion",
+  "kind": "component",
+  "visibility": "internal",
+  "name": "Compagnons",
+  "description": "Animaux de compagnie, familiers et petites créatures de voyage",
+  "entrySchema": {
+    "type": "fields",
+    "required": ["Name", "Description"]
+  },
+  "entries": [
+    {
+      "id": "loyal-hound",
+      "weight": 4,
+      "fields": {
+        "Name": "Chien fidèle",
+        "Description": "suit les odeurs familières, veille sur les dormeurs et se méfie d’un PNJ en apparence inoffensif."
+      },
+      "generation": {
+        "statProfile": "creature-companion",
+        "traits": [
+          {
+            "id": "loyal-hound-nature",
+            "Name": "Aptitude de compagnon",
+            "Description": "suit les odeurs familières, veille sur les dormeurs et se méfie d’un PNJ en apparence inoffensif."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 0
+      }
+    },
+    {
+      "id": "barn-cat",
+      "weight": 4,
+      "fields": {
+        "Name": "Chat de grange",
+        "Description": "excelle à débusquer la vermine, les coins chauds et la nourriture laissée sans surveillance."
+      },
+      "generation": {
+        "statProfile": "creature-companion",
+        "traits": [
+          {
+            "id": "barn-cat-nature",
+            "Name": "Aptitude de compagnon",
+            "Description": "excelle à débusquer la vermine, les coins chauds et la nourriture laissée sans surveillance."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 0
+      }
+    },
+    {
+      "id": "messenger-pigeon",
+      "weight": 4,
+      "fields": {
+        "Name": "Pigeon voyageur",
+        "Description": "retourne fidèlement au foyer choisi en transportant un message très court."
+      },
+      "generation": {
+        "statProfile": "creature-companion",
+        "traits": [
+          {
+            "id": "messenger-pigeon-nature",
+            "Name": "Aptitude de compagnon",
+            "Description": "retourne fidèlement au foyer choisi en transportant un message très court."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [
+          {
+            "generator": "inventory",
+            "entry": "mysterious-sealed-letter",
+            "select": "fields"
+          }
+        ],
+        "naturalArmorPercentage": 0
+      }
+    },
+    {
+      "id": "pack-goat",
+      "weight": 3,
+      "fields": {
+        "Name": "Chèvre de bât",
+        "Description": "porte une quantité raisonnable de matériel, mange presque tout et refuse obstinément les chemins manifestement maudits."
+      },
+      "generation": {
+        "statProfile": "creature-companion",
+        "traits": [
+          {
+            "id": "pack-goat-nature",
+            "Name": "Aptitude de compagnon",
+            "Description": "porte une quantité raisonnable de matériel, mange presque tout et refuse obstinément les chemins manifestement maudits."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [
+          {
+            "generator": "inventory",
+            "entry": "three-travel-rations",
+            "select": "fields"
+          }
+        ],
+        "naturalArmorPercentage": 0
+      }
+    },
+    {
+      "id": "clever-rat",
+      "weight": 3,
+      "fields": {
+        "Name": "Rat savant",
+        "Description": "se faufile dans les espaces minuscules et apprend des consignes simples associées à des objets."
+      },
+      "generation": {
+        "statProfile": "creature-companion",
+        "traits": [
+          {
+            "id": "clever-rat-nature",
+            "Name": "Aptitude de compagnon",
+            "Description": "se faufile dans les espaces minuscules et apprend des consignes simples associées à des objets."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 0
+      }
+    },
+    {
+      "id": "watch-goose",
+      "weight": 3,
+      "fields": {
+        "Name": "Oie de garde",
+        "Description": "interpelle bruyamment les inconnus, les créatures invisibles et toute personne munie de pain."
+      },
+      "generation": {
+        "statProfile": "creature-companion",
+        "traits": [
+          {
+            "id": "watch-goose-nature",
+            "Name": "Aptitude de compagnon",
+            "Description": "interpelle bruyamment les inconnus, les créatures invisibles et toute personne munie de pain."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 0
+      }
+    },
+    {
+      "id": "pocket-ferret",
+      "weight": 3,
+      "fields": {
+        "Name": "Furet de poche",
+        "Description": "rapporte de petits objets et les cache dans les endroits les moins pratiques."
+      },
+      "generation": {
+        "statProfile": "creature-companion",
+        "traits": [
+          {
+            "id": "pocket-ferret-nature",
+            "Name": "Aptitude de compagnon",
+            "Description": "rapporte de petits objets et les cache dans les endroits les moins pratiques."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 0
+      }
+    },
+    {
+      "id": "mule",
+      "weight": 3,
+      "fields": {
+        "Name": "Mule",
+        "Description": "monture fiable au pied très sûr, qui oppose un veto absolu aux ponts dangereux."
+      },
+      "generation": {
+        "statProfile": "creature-companion",
+        "traits": [
+          {
+            "id": "mule-nature",
+            "Name": "Aptitude de compagnon",
+            "Description": "monture fiable au pied très sûr, qui oppose un veto absolu aux ponts dangereux."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [
+          {
+            "generator": {
+              "oneOf": [
+                {
+                  "id": "inventory",
+                  "weight": 3
+                },
+                {
+                  "id": "weapons",
+                  "weight": 1
+                }
+              ]
+            },
+            "select": "fields"
+          }
+        ],
+        "naturalArmorPercentage": 0
+      }
+    },
+    {
+      "id": "lantern-finch",
+      "weight": 2,
+      "fields": {
+        "Name": "Pinson-lanterne",
+        "Description": "diffuse une douce lumière et se tait lorsque des prédateurs approchent."
+      },
+      "generation": {
+        "statProfile": "creature-companion",
+        "traits": [
+          {
+            "id": "lantern-finch-nature",
+            "Name": "Aptitude de compagnon",
+            "Description": "diffuse une douce lumière et se tait lorsque des prédateurs approchent."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 0
+      }
+    },
+    {
+      "id": "ember-newt",
+      "weight": 2,
+      "fields": {
+        "Name": "Triton de braise",
+        "Description": "réchauffe son entourage, allume l’amadou sec et dort dans les ustensiles de cuisine."
+      },
+      "generation": {
+        "statProfile": "creature-companion",
+        "traits": [
+          {
+            "id": "ember-newt-nature",
+            "Name": "Aptitude de compagnon",
+            "Description": "réchauffe son entourage, allume l’amadou sec et dort dans les ustensiles de cuisine."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 0
+      }
+    },
+    {
+      "id": "moss-tortoise",
+      "weight": 2,
+      "fields": {
+        "Name": "Tortue moussue",
+        "Description": "fait lentement pousser des herbes médicinales communes sur sa carapace."
+      },
+      "generation": {
+        "statProfile": "creature-companion",
+        "traits": [
+          {
+            "id": "moss-tortoise-nature",
+            "Name": "Aptitude de compagnon",
+            "Description": "fait lentement pousser des herbes médicinales communes sur sa carapace."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 0
+      }
+    },
+    {
+      "id": "whisper-crow",
+      "weight": 2,
+      "fields": {
+        "Name": "Corbeau murmurant",
+        "Description": "mémorise les voix et répète plusieurs phrases courtes avec une précision inquiétante."
+      },
+      "generation": {
+        "statProfile": "creature-companion",
+        "traits": [
+          {
+            "id": "whisper-crow-nature",
+            "Name": "Aptitude de compagnon",
+            "Description": "mémorise les voix et répète plusieurs phrases courtes avec une précision inquiétante."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 0
+      }
+    },
+    {
+      "id": "miniature-slime",
+      "weight": 2,
+      "fields": {
+        "Name": "Gelée miniature",
+        "Description": "dissout sans danger la saleté, les aliments avariés et, parfois, un document important."
+      },
+      "generation": {
+        "statProfile": "creature-companion",
+        "traits": [
+          {
+            "id": "miniature-slime-nature",
+            "Name": "Aptitude de compagnon",
+            "Description": "dissout sans danger la saleté, les aliments avariés et, parfois, un document important."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 0
+      }
+    },
+    {
+      "id": "clockwork-beetle",
+      "weight": 2,
+      "fields": {
+        "Name": "Scarabée mécanique",
+        "Description": "enregistre une heure de son et la restitue lorsqu’on remonte son mécanisme."
+      },
+      "generation": {
+        "statProfile": "creature-companion",
+        "traits": [
+          {
+            "id": "clockwork-beetle-nature",
+            "Name": "Aptitude de compagnon",
+            "Description": "enregistre une heure de son et la restitue lorsqu’on remonte son mécanisme."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 20
+      }
+    },
+    {
+      "id": "breeze-lizard",
+      "weight": 2,
+      "fields": {
+        "Name": "Lézard des brises",
+        "Description": "change de couleur avec le temps et plane sur de courtes distances d’une personne à l’autre."
+      },
+      "generation": {
+        "statProfile": "creature-companion",
+        "traits": [
+          {
+            "id": "breeze-lizard-nature",
+            "Name": "Aptitude de compagnon",
+            "Description": "change de couleur avec le temps et plane sur de courtes distances d’une personne à l’autre."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 0
+      }
+    },
+    {
+      "id": "cave-bat",
+      "weight": 2,
+      "fields": {
+        "Name": "Chauve-souris des cavernes",
+        "Description": "se repère dans l’obscurité totale et revient lorsqu’elle entend un sifflement précis."
+      },
+      "generation": {
+        "statProfile": "creature-companion",
+        "traits": [
+          {
+            "id": "cave-bat-nature",
+            "Name": "Aptitude de compagnon",
+            "Description": "se repère dans l’obscurité totale et revient lorsqu’elle entend un sifflement précis."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 0
+      }
+    },
+    {
+      "id": "river-otter",
+      "weight": 2,
+      "fields": {
+        "Name": "Loutre de rivière",
+        "Description": "nage, rapporte les objets flottants et tient absolument à ouvrir des coquillages pendant les scènes sérieuses."
+      },
+      "generation": {
+        "statProfile": "creature-companion",
+        "traits": [
+          {
+            "id": "river-otter-nature",
+            "Name": "Aptitude de compagnon",
+            "Description": "nage, rapporte les objets flottants et tient absolument à ouvrir des coquillages pendant les scènes sérieuses."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 0
+      }
+    },
+    {
+      "id": "tiny-griffin",
+      "weight": 1,
+      "fields": {
+        "Name": "Griffon miniature",
+        "Description": "défend férocement un sac à dos précis et chasse les insectes au moyen de piqués spectaculaires."
+      },
+      "generation": {
+        "statProfile": "creature-companion",
+        "traits": [
+          {
+            "id": "tiny-griffin-nature",
+            "Name": "Aptitude de compagnon",
+            "Description": "défend férocement un sac à dos précis et chasse les insectes au moyen de piqués spectaculaires."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 0
+      }
+    },
+    {
+      "id": "blink-rabbit",
+      "weight": 1,
+      "fields": {
+        "Name": "Lapin fugace",
+        "Description": "se téléporte de quelques mètres lorsqu’il prend peur, rarement dans la direction la plus sûre."
+      },
+      "generation": {
+        "statProfile": "creature-companion",
+        "traits": [
+          {
+            "id": "blink-rabbit-nature",
+            "Name": "Aptitude de compagnon",
+            "Description": "se téléporte de quelques mètres lorsqu’il prend peur, rarement dans la direction la plus sûre."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 0
+      }
+    },
+    {
+      "id": "paper-dragon",
+      "weight": 1,
+      "fields": {
+        "Name": "Dragon de papier",
+        "Description": "se replie à plat, transporte des messages écrits et crache juste assez de feu pour cacheter de la cire."
+      },
+      "generation": {
+        "statProfile": "creature-companion",
+        "traits": [
+          {
+            "id": "paper-dragon-nature",
+            "Name": "Aptitude de compagnon",
+            "Description": "se replie à plat, transporte des messages écrits et crache juste assez de feu pour cacheter de la cire."
+          }
+        ],
+        "fixedRules": [
+          {
+            "entry": "paper-rule",
+            "level": 1
+          }
+        ],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [
+          {
+            "generator": "inventory",
+            "entry": "writing-kit",
+            "select": "fields"
+          }
+        ],
+        "naturalArmorPercentage": 0
+      }
+    },
+    {
+      "id": "ghost-mouse",
+      "weight": 1,
+      "fields": {
+        "Name": "Souris fantôme",
+        "Description": "traverse les cloisons minces et devient visible après avoir mangé du fromage."
+      },
+      "generation": {
+        "statProfile": "creature-companion",
+        "traits": [
+          {
+            "id": "ghost-mouse-nature",
+            "Name": "Aptitude de compagnon",
+            "Description": "traverse les cloisons minces et devient visible après avoir mangé du fromage."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 0
+      }
+    },
+    {
+      "id": "cloud-pup",
+      "weight": 1,
+      "fields": {
+        "Name": "Chiot-nuage",
+        "Description": "petit chien flottant fait de brume, capable de dissimuler brièvement le visage d’une personne."
+      },
+      "generation": {
+        "statProfile": "creature-companion",
+        "traits": [
+          {
+            "id": "cloud-pup-nature",
+            "Name": "Aptitude de compagnon",
+            "Description": "petit chien flottant fait de brume, capable de dissimuler brièvement le visage d’une personne."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 0
+      }
+    },
+    {
+      "id": "pebble-elemental",
+      "weight": 1,
+      "fields": {
+        "Name": "Élémentaire-galet",
+        "Description": "créature de pierre grosse comme un poing qui détecte les tunnels proches et la maçonnerie ouvragée."
+      },
+      "generation": {
+        "statProfile": "creature-elemental",
+        "traits": [
+          {
+            "id": "pebble-elemental-nature",
+            "Name": "Aptitude de compagnon",
+            "Description": "créature de pierre grosse comme un poing qui détecte les tunnels proches et la maçonnerie ouvragée."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 20
+      }
+    },
+    {
+      "id": "moon-moth",
+      "weight": 1,
+      "fields": {
+        "Name": "Phalène lunaire",
+        "Description": "absorbe les faibles résidus magiques et luit en présence d’enchantements actifs."
+      },
+      "generation": {
+        "statProfile": "creature-companion",
+        "traits": [
+          {
+            "id": "moon-moth-nature",
+            "Name": "Aptitude de compagnon",
+            "Description": "absorbe les faibles résidus magiques et luit en présence d’enchantements actifs."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 0
+      }
+    }
+  ],
+  "modifiers": [
+    {
+      "generator": "modifier",
+      "chance": 0.5,
+      "count": {
+        "min": 1,
+        "max": 1
+      }
+    }
+  ]
+}

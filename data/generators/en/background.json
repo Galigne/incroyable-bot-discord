@@ -164,5 +164,15 @@
         "Generator": "background-urchin"
       }
     }
+  ],
+  "modifiers": [
+    {
+      "generator": "modifier",
+      "chance": 0.35,
+      "count": {
+        "min": 1,
+        "max": 1
+      }
+    }
   ]
 }

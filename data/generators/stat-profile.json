@@ -30,6 +30,156 @@
         "perception": 1,
         "charisma": 1
       }
+    },
+    {
+      "id": "creature-predator",
+      "minimums": {
+        "constitution": 4,
+        "strength": 4,
+        "dexterity": 4,
+        "intelligence": 4,
+        "speed": 4,
+        "perception": 4,
+        "charisma": 4
+      },
+      "maximums": {
+        "constitution": 20,
+        "strength": 18,
+        "dexterity": 20,
+        "intelligence": 12,
+        "speed": 20,
+        "perception": 20,
+        "charisma": 12
+      },
+      "weights": {
+        "constitution": 2,
+        "strength": 1,
+        "dexterity": 3,
+        "intelligence": 0.25,
+        "speed": 3,
+        "perception": 2,
+        "charisma": 0.25
+      }
+    },
+    {
+      "id": "creature-brute",
+      "minimums": {
+        "constitution": 4,
+        "strength": 4,
+        "dexterity": 4,
+        "intelligence": 4,
+        "speed": 4,
+        "perception": 4,
+        "charisma": 4
+      },
+      "maximums": {
+        "constitution": 20,
+        "strength": 20,
+        "dexterity": 14,
+        "intelligence": 8,
+        "speed": 14,
+        "perception": 14,
+        "charisma": 10
+      },
+      "weights": {
+        "constitution": 3,
+        "strength": 4,
+        "dexterity": 1,
+        "intelligence": 0.1,
+        "speed": 1,
+        "perception": 1,
+        "charisma": 0.3
+      }
+    },
+    {
+      "id": "creature-caster",
+      "minimums": {
+        "constitution": 4,
+        "strength": 4,
+        "dexterity": 4,
+        "intelligence": 16,
+        "speed": 4,
+        "perception": 4,
+        "charisma": 4
+      },
+      "maximums": {
+        "constitution": 16,
+        "strength": 12,
+        "dexterity": 18,
+        "intelligence": 20,
+        "speed": 18,
+        "perception": 20,
+        "charisma": 18
+      },
+      "weights": {
+        "constitution": 1,
+        "strength": 0.25,
+        "dexterity": 1,
+        "intelligence": 4,
+        "speed": 1,
+        "perception": 2,
+        "charisma": 1
+      }
+    },
+    {
+      "id": "creature-elemental",
+      "minimums": {
+        "constitution": 12,
+        "strength": 4,
+        "dexterity": 4,
+        "intelligence": 10,
+        "speed": 4,
+        "perception": 4,
+        "charisma": 4
+      },
+      "maximums": {
+        "constitution": 20,
+        "strength": 20,
+        "dexterity": 18,
+        "intelligence": 18,
+        "speed": 18,
+        "perception": 18,
+        "charisma": 14
+      },
+      "weights": {
+        "constitution": 3,
+        "strength": 2,
+        "dexterity": 1,
+        "intelligence": 2,
+        "speed": 1,
+        "perception": 1,
+        "charisma": 0.25
+      }
+    },
+    {
+      "id": "creature-companion",
+      "minimums": {
+        "constitution": 4,
+        "strength": 4,
+        "dexterity": 4,
+        "intelligence": 4,
+        "speed": 4,
+        "perception": 4,
+        "charisma": 4
+      },
+      "maximums": {
+        "constitution": 18,
+        "strength": 16,
+        "dexterity": 20,
+        "intelligence": 18,
+        "speed": 20,
+        "perception": 20,
+        "charisma": 20
+      },
+      "weights": {
+        "constitution": 1,
+        "strength": 0.75,
+        "dexterity": 2,
+        "intelligence": 1.5,
+        "speed": 2,
+        "perception": 2,
+        "charisma": 2
+      }
     }
   ]
 }

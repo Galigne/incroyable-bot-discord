@@ -106,6 +106,16 @@ function createEntityEditResponse(result, locale = 'en') {
 	};
 }
 
+function createGeneratedCreatureResponse(creature, locale = 'en') {
+	return {
+		content: t(locale, 'rpg.genMonster.success', {
+			key: creature.key,
+			name: creature.displayName,
+		}),
+		embeds: [createCreatureSummaryEmbed(creature, locale)],
+	};
+}
+
 module.exports = {
 	createEndEntityTurnResponse,
 	createEntityAddedResponse,
@@ -115,4 +125,5 @@ module.exports = {
 	createEntityGetResponse,
 	createEntityHealResponse,
 	createEntityUndoResponse,
+	createGeneratedCreatureResponse,
 };

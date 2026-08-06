@@ -226,7 +226,7 @@ Add descriptive modifiers to the reusable generator system. Modifier generators 
 {
   "modifiers": [
     {
-      "generator": "creature-modifier",
+      "generator": "modifier",
       "chance": 0.25,
       "count": {
         "min": 1,
@@ -358,8 +358,8 @@ Preserve current command semantics for characters, including public `/get`, the 
 Extend retrieval and editing with deliberate type-compatible fields:
 
 - existing character fields and their current grouping remain available only where currently valid;
-- shared fields such as level, statistics, resources, RULEs, status effects, equipment, inventory, and encumbrance work for both types where semantically applicable;
-- creature identity, description, intrinsic traits, and descriptive modifiers have appropriate creature-specific views and grouped editing;
+- shared fields such as level, statistics, resources, RULEs, status effects, descriptive modifiers, equipment, inventory, and encumbrance work for both types where semantically applicable;
+- creature identity, description, and intrinsic traits have appropriate creature-specific views and grouped editing;
 - internal source IDs, schema metadata, provenance, concrete type, and key are not user-editable;
 - autocomplete must not offer fields incompatible with the resolved entity.
 
@@ -394,7 +394,7 @@ The three generation categories are:
 - `companion`;
 - `monster`.
 
-They are archetype/source categories, not concrete entity types. Keep them as separate catalogs. Do not automatically duplicate the same entry between animal and companion; a separately authored trained, bonded, or domesticated variant is valid when its identity or role is meaningfully different.
+They are archetype/source categories, not concrete entity types. Add one public `creature.json` routing catalog with stable `animal`, `companion`, and `monster` entries, following the same pattern as `background.json`. Route those entries respectively to separate internal `creature-animal.json`, `creature-companion.json`, and `creature-monster.json` detail catalogs. Do not automatically duplicate the same entry between animal and companion; a separately authored trained, bonded, or domesticated variant is valid when its identity or role is meaningfully different.
 
 Each creature archetype must provide enough technical and localized information to generate a complete creature:
 
@@ -465,9 +465,9 @@ RULE behavior is explicit:
 - each fixed RULE references a stable RULE entry ID and has an explicit level;
 - modifiers never grant or modify RULEs.
 
-Status effects generated at creation are localized descriptive records interpreted by the GM. They do not automatically apply penalties, bonuses, durations, triggers, resource changes, or other enforced mechanics.
+Status effects generated at creation are localized descriptive records interpreted by the GM. Characters and creatures use the same structured `status-effect` catalog; do not create a creature-only duplicate. Status effects do not automatically apply penalties, bonuses, durations, triggers, resource changes, or other enforced mechanics.
 
-Apply descriptive modifiers through the completed Part 2 system. Store their stable IDs, localized names/descriptions, and provenance separately from intrinsic traits, RULEs, status effects, and gear. Selecting a modifier must not change any base statistic, resource, armor value, trait, RULE, status effect, equipment entry, inventory entry, or other mechanical value.
+Apply descriptive modifiers through the completed Part 2 system. Characters and creatures use the same internal `modifier` catalog. Generated characters and creatures store modifier stable IDs, localized names/descriptions, and provenance separately from intrinsic traits, RULEs, status effects, and gear; the compatible character field is appended without rewriting existing save files that omit it. Selecting a modifier must not change any base statistic, resource, armor value, trait, RULE, status effect, equipment entry, inventory entry, or other mechanical value.
 
 Default gear may use fixed, random, nested, or weighted generator references. Do not infer mechanics from descriptive prose. Generator armor metadata or explicit natural armor may initialize AR only through defined technical data and the shared resource rules.
 
@@ -508,7 +508,7 @@ Render the completed saved creature using the established entity presentation. C
 
 Loading or displaying the saved creature must never rerun generation.
 
-Use the current animal, companion, and monster content as the initial source. Add the technical information needed for valid generation without performing the broad `JDR_RANDOM_OLD.md` migration reserved for Part 5. Preserve current localized descriptions and public `/gen` behavior unless an entry must be adjusted to become structurally valid.
+Use the current animal, companion, and monster content as the initial source for the routed internal detail catalogs. Add the technical information needed for valid generation without performing the broad `JDR_RANDOM_OLD.md` migration reserved for Part 5. The new public `creature` root replaces the three former public detail roots; preserve their localized content unless an entry must be adjusted to become structurally valid.
 
 Add focused coverage for all three archetype categories, levels and profiles, explicit RULE behavior at low and high Intelligence, derived resources, natural armor, default gear, descriptive status effects, modifier non-effects, manual encumbrance, command authorization, global collisions, deterministic generation, atomic save failure, and reload stability.
 ```

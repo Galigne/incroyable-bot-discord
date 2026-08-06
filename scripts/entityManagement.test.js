@@ -87,14 +87,14 @@ test('creature hydration preserves final localized state and technical provenanc
 	saved.name = 'Ash Wolf';
 	saved.description = 'A scarred guardian.';
 	saved.source = {
-		generatorId: 'monster',
+		generatorId: 'creature-monster',
 		entryId: 'ash-wolf',
 		archetypeId: 'monster',
 		statProfileId: 'creature-balanced',
 		provenance: [{
 			type: 'entry',
 			selection: 'random',
-			generatorId: 'monster',
+			generatorId: 'creature-monster',
 			entryId: 'ash-wolf',
 			path: 'root',
 		}],
@@ -120,14 +120,14 @@ test('creature hydration preserves final localized state and technical provenanc
 		}],
 	}];
 	saved.modifiers = [{
-		generatorId: 'monster-modifiers',
+		generatorId: 'modifier',
 		entryId: 'scarred',
 		name: 'Scarred',
 		description: 'Old wounds cross its hide.',
 		provenance: [{
 			type: 'entry',
 			selection: 'random',
-			generatorId: 'monster-modifiers',
+			generatorId: 'modifier',
 			entryId: 'scarred',
 			path: 'root.modifiers',
 		}],
@@ -194,6 +194,7 @@ test('character saves retain schema v2 without a required discriminator', () => 
 		'rules',
 		'talents',
 		'gear',
+		'modifiers',
 	]);
 });
 
@@ -428,6 +429,7 @@ test('character and creature field orders stay explicit and type-compatible', as
 		'race',
 		'background',
 		'personality',
+		'modifiers',
 	]);
 	assert.deepEqual(getCreatureSections().map(field => field.id), [
 		'identity',
@@ -453,6 +455,19 @@ test('character and creature field orders stay explicit and type-compatible', as
 	assert.deepEqual((await getEntity(entityKey)).traits, [
 		{ name: 'Keen Scent', description: 'Tracks across stone' },
 		{ name: 'Night Eyes', description: 'Sees in darkness' },
+	]);
+	const characterKey = 'Character.Modifiers';
+	await createEntity(characterKey, 'character', 'owner');
+	await updateEditableEntity(
+		characterKey,
+		'modifiers',
+		'Scarred:Old wounds remain visible',
+		() => true,
+		{ actorId: 'owner', maxEntries: 3 },
+		'character',
+	);
+	assert.deepEqual((await getEntity(characterKey)).modifiers, [
+		{ name: 'Scarred', description: 'Old wounds remain visible' },
 	]);
 	await assert.rejects(
 		updateEditableEntity(
@@ -485,7 +500,7 @@ test('combined entity listing and autocomplete include both concrete types', asy
 	assert.ok(choices.some(choice => choice.name.includes('Creature')));
 });
 
-test('management metadata is entity-neutral while gen-char stays character-only', () => {
+test('management metadata is entity-neutral while generators use concrete save keys', () => {
 	const managementCommands = [
 		'add',
 		'get',
@@ -511,7 +526,15 @@ test('management metadata is entity-neutral while gen-char stays character-only'
 		COMMAND_METADATA.find(metadata => metadata.id === 'gen-char').options[0].name,
 		'character-key',
 	);
-	assert.equal(COMMAND_METADATA.some(metadata => metadata.id === 'gen-monster'), false);
+	const creatureGenerator = COMMAND_METADATA.find(
+		metadata => metadata.id === 'gen-monster',
+	);
+	assert.equal(creatureGenerator.options[0].name, 'creature-key');
+	assert.deepEqual(
+		creatureGenerator.options.find(option => option.name === 'type')
+			.choices.map(choice => choice.value),
+		['monster', 'animal', 'companion'],
+	);
 });
 
 test('registered management handlers create, mutate, and display creatures', async () => {

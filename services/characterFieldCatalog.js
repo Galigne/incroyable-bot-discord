@@ -16,6 +16,7 @@ const SECTION_IDS = Object.freeze([
 	'race',
 	'background',
 	'personality',
+	'modifiers',
 ]);
 
 addSection('name', 'name', 'multi', ['name.firstName', 'name.lastName']);
@@ -57,6 +58,7 @@ addSection('personality', 'personality', 'multi', [
 	'personality.traits',
 	'personality.description',
 ]);
+addSection('modifiers', 'modifiers', 'multiline', ['modifiers.value']);
 
 add('key', 'characterKey');
 add('name.firstName', 'firstName', stored(['name', 'firstName'], 'text', {
@@ -154,6 +156,11 @@ add('rules.name', 'ruleName');
 add('rules.level', 'ruleLevel');
 add('rules.description', 'ruleDescription');
 add('talents.value', 'talents', stored(['talents'], 'text', {
+	multiline: true,
+	paragraph: true,
+}));
+add('modifiers.value', 'modifiers', stored(['modifiers'], 'text', {
+	described: true,
 	multiline: true,
 	paragraph: true,
 }));

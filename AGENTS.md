@@ -79,6 +79,8 @@ saves.
   including parsing, validation, calculations, persistence, and generation.
 - `services/characterApplicationService.js`: character-only workflows, including
   `/gen-char`, and compatibility APIs used by focused character tests.
+- `services/creatureApplicationService.js`: atomic `/gen-monster` generation and
+  exclusive creature publication inside the shared EntityKey queue.
 - `services/entityApplicationService.js`: command-facing shared management
   workflows for characters and creatures; management command adapters must use it.
 - `services/entityStore.js`: resolves a globally unique EntityKey to its concrete
@@ -114,7 +116,8 @@ saves.
 - `services/mechanics/`: Discord-independent character constants, validation,
   statistics, resources, armor, damage, and generation formulas.
 - `services/generatorSchema.js`: validates the strict generator-v2 envelope,
-  entry schemas, stable IDs, payloads, weights, and English/French parity.
+  entry schemas, stable IDs, payloads, weights, creature generation metadata,
+  profile/reference relationships, and English/French parity.
 - `services/generatorCatalog.js`: recursively loads the complete generator-v2
   locale pair and exposes stable-ID lookup plus public visibility filtering.
 - `services/generatorResolver.js`: resolves public roots into localized structured
@@ -125,13 +128,17 @@ saves.
 - `services/modifierResolver.js`: selects compatible descriptive modifiers by
   chance, inclusive count, and weight without mutating the base result.
 - `services/statProfileCatalog.js`: loads and validates non-localized statistical
-  profiles used by character and later creature generation.
+  profiles shared by character and creature generation.
 - `services/weightedSelector.js`: shared injectable weighted selection for
   generator entries and statistical allocation.
-- `services/generationData.js`: prepares generator and profile candidates before
-  atomically replacing both active caches during `/reload`.
+- `services/generationData.js`: prepares generator and profile candidates, validates
+  their creature relationships, then atomically replaces both active caches during
+  `/reload`.
 - `services/randomCharacterGenerator.js`: selects generator data and assembles
   complete random characters using `services/mechanics/`.
+- `services/randomCreatureGenerator.js`: resolves creature sources, descriptive
+  records, RULEs, armor, and gear, then assembles complete final creatures through
+  the shared profile and mechanics infrastructure.
 - `runtime/runtimeState.js`: owns the active validated configuration, command
   registry, and runtime command collection.
 - `runtime/runtimeReloader.js`: runs the ordered `/reload` stages without clearing
@@ -262,10 +269,11 @@ command/subcommand -> response adapter (service outcome -> Discord payload)
 
 Shared management commands and interaction handlers must call
 `services/entityApplicationService.js`; character-only workflows such as
-`/gen-char` use `services/characterApplicationService.js`. They must not compose
-concrete stores and mechanics directly. Models own state and hydration only. They
-must not import Discord or localization code; entity embeds belong in the renderer
-adapters under `util/`.
+`/gen-char` use `services/characterApplicationService.js`, while `/gen-monster`
+uses `services/creatureApplicationService.js`. They must not compose concrete stores
+and mechanics directly. Models own state and hydration only. They must not import
+Discord or localization code; entity embeds belong in the renderer adapters under
+`util/`.
 
 Character and creature creation, updates, undo, and deletion must remain inside the
 shared per-EntityKey critical section exposed by `services/characterOperationQueue.js`.
@@ -313,6 +321,7 @@ exact sequence:
 
 1. `/gen category:<category>`
 2. `/gen-char character-key:<new key> [level] [background]`
+3. `/gen-monster creature-key:<new key> type:<monster|animal|companion> [level]`
 
 Declare autocomplete on the option metadata using a provider name. Put fixed
 suggestion values in the metadata and reusable dynamic selection in
@@ -368,8 +377,8 @@ The current viewing and editing decisions are intentional:
 - `/set entity-key:<key> field:<field>` has no value argument. Submitting
   the command immediately opens one private modal prefilled with the saved value
   or complete grouped section.
-- Character fields remain `name`, `level`, `status`, `statistics`, `rules`,
-  `talents`, `gear`, `race`, `background`, and `personality`, in that exact order.
+- Character fields are `name`, `level`, `status`, `statistics`, `rules`, `talents`,
+  `gear`, `race`, `background`, `personality`, and `modifiers`, in that exact order.
 - Creature fields use the independent exact order `identity`, `level`, `status`,
   `statistics`, `rules`, `traits`, `modifiers`, and `gear`.
 - Autocomplete must return only fields compatible with a resolved EntityKey.
@@ -417,25 +426,29 @@ on submit:
   required, the level is a positive whole number, and descriptions may contain
   additional colons.
 
-The model still stores traits, talents, RULEs, status effects, equipment, and
-inventory in arrays because generation and display logic depend on them. Talents
-remain plain strings rather than structured objects. “No list system” refers to
-the command UX, not removal of the internal schema.
+The models still store traits, talents, RULEs, status effects, descriptive
+modifiers, equipment, and inventory in arrays because generation and display logic
+depend on them. Character talents and status effects remain plain strings, while
+descriptive modifier records use localized names and descriptions for both entity
+types. “No list system” refers to the command UX, not removal of the internal
+schema.
 
 ## Persistent entity types
 
 Persistent concrete types are exactly `character` and `creature`. Animal,
 companion, and monster are generator archetypes, never additional persistence
 types. EntityKeys are globally unique across both types. Character schema v2,
-migration, JSON order, and root save/history paths remain unchanged and character
-saves do not require a discriminator. Creature saves require `type: "creature"`,
+migration, existing JSON property order, and root save/history paths remain
+unchanged; the shared `modifiers` list is appended and defaults to empty when
+absent, and character saves do not require a discriminator. Creature saves require `type: "creature"`,
 use their own strict schema, and hydrate stored final state without rerunning random
 generation, localization, references, modifiers, or formulas.
 
 Shared management commands are `/add`, `/get`, `/set`, `/damage`, `/heal`,
 `/end-turn`, `/delete`, and `/undo`, all using `entity-key`. `/gen-char` remains
-character-only and keeps `character-key`. Do not add `/gen-monster` until the
-generator part that explicitly introduces it.
+character-only and keeps `character-key`. `/gen-monster` creates the persistent
+`creature` type from the required `animal`, `companion`, or `monster` route in the
+public `creature` catalog and keeps `creature-key`.
 
 Anyone may view either type. The creator, configured DM role, and actual Discord
 server owner may mutate, undo, or delete it. Creature encumbrance is an independent
@@ -473,13 +486,13 @@ Permissions:
 - Anyone with normal bot access can view character sheets.
 - The creator may set, delete, heal, damage, and end turns for their character.
 - The creator may undo retained changes for their active character.
-- When configured, the DM role may perform those actions on every character and may
-  use `/gen` and `/gen-char`; otherwise those additional permissions are
-  server-owner-only.
+- When configured, the DM role may perform those actions on every entity and may
+  use `/gen`, `/gen-char`, and `/gen-monster`; otherwise those additional
+  permissions are server-owner-only.
 - When configured, the moderator role may use `/say`, `/purge`, and `/reload`;
   otherwise those commands are server-owner-only.
 - The actual Discord server owner from `guild.ownerId` bypasses every role check
-  and may use every command and manage every character.
+  and may use every command and manage every entity.
 
 `/reload` replies ephemerally before lifecycle work, then validates and replaces
 configuration and localization data, clears generator caches, rebuilds and replaces
@@ -617,6 +630,27 @@ each request. Modifiers are narrative records only: their schema and resolver mu
 never change or define statistics, resources, armor, RULEs, traits, status effects,
 gear, entity type, persistence, or executable behavior.
 
+The public `creature` catalog routes stable `animal`, `companion`, and `monster`
+type entries to the separate internal `creature-animal`, `creature-companion`, and
+`creature-monster` source catalogs, following the established `background` routing
+pattern. Each detail entry exposes localized `Name` and `Description`, an explicit
+weight, and validated `generation` metadata containing a statistical-profile ID,
+intrinsic traits, optional natural armor or armor reference, explicit fixed RULE
+references and levels, optional descriptive status references, and
+equipment/inventory references. Profiles alter only minimums, maximums, and
+allocation weights; creatures use the same level budget, nonlinear costs, derived
+statistics, and resource formulas as character generation.
+
+`services/randomCreatureGenerator.js` resolves that data and persists the complete
+final state plus stable provenance through `creatureApplicationService` and the
+exclusive creature store workflow. Creature Intelligence never assigns RULEs;
+only `fixedRules` does. The structured `status-effect` and `modifier` generator
+catalogs are shared with character generation. Status effects and modifiers remain descriptive, and a
+modifier cannot change statistics, resources, armor, traits, RULEs, status, gear,
+entity type, or persistence. Gear may use fixed, random, nested, or weighted
+references. Only explicit natural armor or technical armor metadata initializes
+AR. Creature generation never derives or changes manual encumbrance.
+
 Random character generation depends on exact stable generator IDs and structured field
 labels. Before renaming generator fields, inspect `services/randomCharacterGenerator.js`.
 Generator IDs, `Generator` routing values, `Type`/`Rarity` enum values, JSON keys,
@@ -626,10 +660,11 @@ content uses the guild locale and is then stored verbatim; never translate exist
 save content retroactively.
 Race entries must expose `Name`, `Description`, `Skill Bonus`, and
 `Physical Ability`; generated characters copy the latter two into their racial
-traits. The expanded world-generation set includes `monster`, `animal`, `criminal`,
-`region`, `building`, `settlement`, `dungeon`, `room`, `companion`, `material`,
+traits. The expanded public world-generation set includes `creature`, `criminal`,
+`region`, `building`, `settlement`, `dungeon`, `room`, `material`,
 `faction`, `government`, and `religion`. The older `enemy` and `location`
-categories are intentionally removed.
+categories are intentionally removed. `creature` routes its three types to the
+internal `creature-animal`, `creature-companion`, and `creature-monster` catalogs.
 At present it:
 
 - rolls level 1–10 when omitted;
@@ -649,6 +684,8 @@ At present it:
 - leaves the manually managed encumbrance resource at its existing values, which
   are `0 / 0` for a new character;
 - gives a generated status effect with a 25% chance.
+- retains descriptive modifiers selected by the shared `modifier` catalog through
+  the chosen background.
 
 ## Other bot behavior
 

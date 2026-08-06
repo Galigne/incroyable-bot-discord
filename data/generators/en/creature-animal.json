@@ -1,0 +1,530 @@
+{
+  "schemaVersion": 2,
+  "id": "creature-animal",
+  "kind": "component",
+  "visibility": "internal",
+  "name": "animal",
+  "description": "Ordinary and fantastic friendly wildlife",
+  "entrySchema": {
+    "type": "fields",
+    "required": ["Name", "Description"]
+  },
+  "entries": [
+    {
+      "id": "mossback-deer",
+      "weight": 4,
+      "fields": {
+        "Name": "Mossback Deer",
+        "Description": "a calm forest grazer whose antlers host flowers, insects, and medicinal herbs."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          {
+            "id": "mossback-deer-nature",
+            "Name": "Natural Adaptation",
+            "Description": "a calm forest grazer whose antlers host flowers, insects, and medicinal herbs."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 5
+      }
+    },
+    {
+      "id": "lantern-finch",
+      "weight": 4,
+      "fields": {
+        "Name": "Lantern Finch",
+        "Description": "a tiny bird with glowing feathers that gathers near safe campsites."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          {
+            "id": "lantern-finch-nature",
+            "Name": "Natural Adaptation",
+            "Description": "a tiny bird with glowing feathers that gathers near safe campsites."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 5
+      }
+    },
+    {
+      "id": "river-otter",
+      "weight": 4,
+      "fields": {
+        "Name": "River Otter",
+        "Description": "a playful, clever swimmer that trades polished stones for food."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          {
+            "id": "river-otter-nature",
+            "Name": "Natural Adaptation",
+            "Description": "a playful, clever swimmer that trades polished stones for food."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 5
+      }
+    },
+    {
+      "id": "cloud-sheep",
+      "weight": 3,
+      "fields": {
+        "Name": "Cloud Sheep",
+        "Description": "a woolly mountain animal light enough to survive long falls."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          {
+            "id": "cloud-sheep-nature",
+            "Name": "Natural Adaptation",
+            "Description": "a woolly mountain animal light enough to survive long falls."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 5
+      }
+    },
+    {
+      "id": "copper-fox",
+      "weight": 3,
+      "fields": {
+        "Name": "Copper Fox",
+        "Description": "a curious red fox attracted to coins, keys, and quiet music."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          {
+            "id": "copper-fox-nature",
+            "Name": "Natural Adaptation",
+            "Description": "a curious red fox attracted to coins, keys, and quiet music."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 5
+      }
+    },
+    {
+      "id": "burrow-pig",
+      "weight": 3,
+      "fields": {
+        "Name": "Burrow Pig",
+        "Description": "a sturdy forager able to locate roots, truffles, and shallow buried objects."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          {
+            "id": "burrow-pig-nature",
+            "Name": "Natural Adaptation",
+            "Description": "a sturdy forager able to locate roots, truffles, and shallow buried objects."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 5
+      }
+    },
+    {
+      "id": "long-eared-hare",
+      "weight": 3,
+      "fields": {
+        "Name": "Long-Eared Hare",
+        "Description": "an alert grassland animal that stamps before storms or approaching danger."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          {
+            "id": "long-eared-hare-nature",
+            "Name": "Natural Adaptation",
+            "Description": "an alert grassland animal that stamps before storms or approaching danger."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 5
+      }
+    },
+    {
+      "id": "bluehorn-goat",
+      "weight": 3,
+      "fields": {
+        "Name": "Bluehorn Goat",
+        "Description": "a sure-footed cliff grazer with mineral-rich blue horns."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          {
+            "id": "bluehorn-goat-nature",
+            "Name": "Natural Adaptation",
+            "Description": "a sure-footed cliff grazer with mineral-rich blue horns."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 5
+      }
+    },
+    {
+      "id": "reed-crane",
+      "weight": 3,
+      "fields": {
+        "Name": "Reed Crane",
+        "Description": "a patient marsh bird often following travelers through safe water."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          {
+            "id": "reed-crane-nature",
+            "Name": "Natural Adaptation",
+            "Description": "a patient marsh bird often following travelers through safe water."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 5
+      }
+    },
+    {
+      "id": "honey-bear",
+      "weight": 3,
+      "fields": {
+        "Name": "Honey Bear",
+        "Description": "a small gentle bear with golden fur and an excellent memory for kindness."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          {
+            "id": "honey-bear-nature",
+            "Name": "Natural Adaptation",
+            "Description": "a small gentle bear with golden fur and an excellent memory for kindness."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 5
+      }
+    },
+    {
+      "id": "sailback-turtle",
+      "weight": 2,
+      "fields": {
+        "Name": "Sailback Turtle",
+        "Description": "a broad river turtle whose shell catches wind while swimming."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          {
+            "id": "sailback-turtle-nature",
+            "Name": "Natural Adaptation",
+            "Description": "a broad river turtle whose shell catches wind while swimming."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 20
+      }
+    },
+    {
+      "id": "ember-newt",
+      "weight": 2,
+      "fields": {
+        "Name": "Ember Newt",
+        "Description": "a warm-bodied amphibian commonly found sleeping beside ovens."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          {
+            "id": "ember-newt-nature",
+            "Name": "Natural Adaptation",
+            "Description": "a warm-bodied amphibian commonly found sleeping beside ovens."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 5
+      }
+    },
+    {
+      "id": "silk-alpaca",
+      "weight": 2,
+      "fields": {
+        "Name": "Silk Alpaca",
+        "Description": "a mild-tempered herd animal producing unusually strong, soft fiber."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          {
+            "id": "silk-alpaca-nature",
+            "Name": "Natural Adaptation",
+            "Description": "a mild-tempered herd animal producing unusually strong, soft fiber."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 5
+      }
+    },
+    {
+      "id": "rain-frog",
+      "weight": 2,
+      "fields": {
+        "Name": "Rain Frog",
+        "Description": "a bright frog whose call reliably predicts rainfall several hours ahead."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          {
+            "id": "rain-frog-nature",
+            "Name": "Natural Adaptation",
+            "Description": "a bright frog whose call reliably predicts rainfall several hours ahead."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 5
+      }
+    },
+    {
+      "id": "moon-moth",
+      "weight": 2,
+      "fields": {
+        "Name": "Moon Moth",
+        "Description": "a hand-sized silver moth that feeds on magical residue without harming spells."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          {
+            "id": "moon-moth-nature",
+            "Name": "Natural Adaptation",
+            "Description": "a hand-sized silver moth that feeds on magical residue without harming spells."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 5
+      }
+    },
+    {
+      "id": "pebble-crab",
+      "weight": 2,
+      "fields": {
+        "Name": "Pebble Crab",
+        "Description": "a harmless shore crab that decorates its shell with colorful stones."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          {
+            "id": "pebble-crab-nature",
+            "Name": "Natural Adaptation",
+            "Description": "a harmless shore crab that decorates its shell with colorful stones."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 20
+      }
+    },
+    {
+      "id": "whistle-marmot",
+      "weight": 2,
+      "fields": {
+        "Name": "Whistle Marmot",
+        "Description": "a social alpine rodent with distinct warning calls for different threats."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          {
+            "id": "whistle-marmot-nature",
+            "Name": "Natural Adaptation",
+            "Description": "a social alpine rodent with distinct warning calls for different threats."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 5
+      }
+    },
+    {
+      "id": "orchard-drake",
+      "weight": 2,
+      "fields": {
+        "Name": "Orchard Drake",
+        "Description": "a flightless lizard that eats pests and warms fruit trees during frost."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          {
+            "id": "orchard-drake-nature",
+            "Name": "Natural Adaptation",
+            "Description": "a flightless lizard that eats pests and warms fruit trees during frost."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 5
+      }
+    },
+    {
+      "id": "mist-dolphin",
+      "weight": 1,
+      "fields": {
+        "Name": "Mist Dolphin",
+        "Description": "a pale coastal dolphin that guides lost vessels away from reefs."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          {
+            "id": "mist-dolphin-nature",
+            "Name": "Natural Adaptation",
+            "Description": "a pale coastal dolphin that guides lost vessels away from reefs."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 5
+      }
+    },
+    {
+      "id": "star-elk",
+      "weight": 1,
+      "fields": {
+        "Name": "Star Elk",
+        "Description": "a rare nocturnal deer whose coat resembles the current night sky."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          {
+            "id": "star-elk-nature",
+            "Name": "Natural Adaptation",
+            "Description": "a rare nocturnal deer whose coat resembles the current night sky."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 5
+      }
+    },
+    {
+      "id": "memory-crow",
+      "weight": 1,
+      "fields": {
+        "Name": "Memory Crow",
+        "Description": "a friendly black bird able to repeat one sentence it heard years ago."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          {
+            "id": "memory-crow-nature",
+            "Name": "Natural Adaptation",
+            "Description": "a friendly black bird able to repeat one sentence it heard years ago."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 5
+      }
+    },
+    {
+      "id": "glimmer-whale",
+      "weight": 1,
+      "fields": {
+        "Name": "Glimmer Whale",
+        "Description": "a gentle deep-sea giant whose songs make plankton shine."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          {
+            "id": "glimmer-whale-nature",
+            "Name": "Natural Adaptation",
+            "Description": "a gentle deep-sea giant whose songs make plankton shine."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 5
+      }
+    }
+  ],
+  "modifiers": [
+    {
+      "generator": "modifier",
+      "chance": 0.5,
+      "count": {
+        "min": 1,
+        "max": 1
+      }
+    }
+  ]
+}

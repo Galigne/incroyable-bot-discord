@@ -1,0 +1,672 @@
+{
+  "schemaVersion": 2,
+  "id": "creature-monster",
+  "kind": "component",
+  "visibility": "internal",
+  "name": "monster",
+  "description": "Hostile creatures and supernatural predators",
+  "entrySchema": {
+    "type": "fields",
+    "required": ["Name", "Description"]
+  },
+  "entries": [
+    {
+      "id": "grave-hound",
+      "weight": 3,
+      "fields": {
+        "Name": "Grave Hound",
+        "Description": "a corpse-pale pack hunter that follows the scent of fear and drags isolated prey underground."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          {
+            "id": "grave-hound-nature",
+            "Name": "Predatory Nature",
+            "Description": "a corpse-pale pack hunter that follows the scent of fear and drags isolated prey underground."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 15
+      }
+    },
+    {
+      "id": "mire-troll",
+      "weight": 3,
+      "fields": {
+        "Name": "Mire Troll",
+        "Description": "a regenerating swamp brute covered in reeds, leeches, and stolen fishing hooks."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          {
+            "id": "mire-troll-nature",
+            "Name": "Predatory Nature",
+            "Description": "a regenerating swamp brute covered in reeds, leeches, and stolen fishing hooks."
+          }
+        ],
+        "fixedRules": [
+          {
+            "entry": "root-rule",
+            "level": 1
+          }
+        ],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 15
+      }
+    },
+    {
+      "id": "cinder-drake",
+      "weight": 3,
+      "fields": {
+        "Name": "Cinder Drake",
+        "Description": "a dog-sized wingless dragon that spits burning resin and nests in chimneys."
+      },
+      "generation": {
+        "statProfile": "creature-elemental",
+        "traits": [
+          {
+            "id": "cinder-drake-nature",
+            "Name": "Predatory Nature",
+            "Description": "a dog-sized wingless dragon that spits burning resin and nests in chimneys."
+          }
+        ],
+        "fixedRules": [
+          {
+            "entry": "candle-rule",
+            "level": 1
+          }
+        ],
+        "statusEffects": [
+          {
+            "generator": "status-effect",
+            "entry": "smoldering",
+            "select": "fields"
+          }
+        ],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 15
+      }
+    },
+    {
+      "id": "glass-spider",
+      "weight": 2,
+      "fields": {
+        "Name": "Glass Spider",
+        "Description": "a nearly invisible ambush predator whose brittle web cuts like wire."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          {
+            "id": "glass-spider-nature",
+            "Name": "Predatory Nature",
+            "Description": "a nearly invisible ambush predator whose brittle web cuts like wire."
+          }
+        ],
+        "fixedRules": [
+          {
+            "entry": "glass-rule",
+            "level": 1
+          }
+        ],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 20
+      }
+    },
+    {
+      "id": "bell-wraith",
+      "weight": 2,
+      "fields": {
+        "Name": "Bell Wraith",
+        "Description": "an armored ghost that becomes solid whenever a nearby bell rings."
+      },
+      "generation": {
+        "statProfile": "creature-caster",
+        "traits": [
+          {
+            "id": "bell-wraith-nature",
+            "Name": "Predatory Nature",
+            "Description": "an armored ghost that becomes solid whenever a nearby bell rings."
+          }
+        ],
+        "fixedRules": [
+          {
+            "entry": "echo-rule",
+            "level": 1
+          }
+        ],
+        "statusEffects": [
+          {
+            "generator": "status-effect",
+            "entry": "shadowed",
+            "select": "fields"
+          }
+        ],
+        "equipment": [
+          {
+            "generator": "weapons",
+            "entry": "mace",
+            "select": "fields"
+          }
+        ],
+        "inventory": [],
+        "armor": {
+          "generator": "armors",
+          "entry": "common-heavy-armor",
+          "select": "fields"
+        }
+      }
+    },
+    {
+      "id": "lantern-maw",
+      "weight": 2,
+      "fields": {
+        "Name": "Lantern Maw",
+        "Description": "a floating lure of warm light attached to a huge subterranean mouth."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          {
+            "id": "lantern-maw-nature",
+            "Name": "Predatory Nature",
+            "Description": "a floating lure of warm light attached to a huge subterranean mouth."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 15
+      }
+    },
+    {
+      "id": "bone-orchard",
+      "weight": 2,
+      "fields": {
+        "Name": "Bone Orchard",
+        "Description": "a rooted colony of skeletal arms that grabs creatures and plants their bones."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          {
+            "id": "bone-orchard-nature",
+            "Name": "Predatory Nature",
+            "Description": "a rooted colony of skeletal arms that grabs creatures and plants their bones."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 15
+      }
+    },
+    {
+      "id": "frost-widow",
+      "weight": 2,
+      "fields": {
+        "Name": "Frost Widow",
+        "Description": "a white cavern beast that freezes moisture into decoy silhouettes."
+      },
+      "generation": {
+        "statProfile": "creature-caster",
+        "traits": [
+          {
+            "id": "frost-widow-nature",
+            "Name": "Predatory Nature",
+            "Description": "a white cavern beast that freezes moisture into decoy silhouettes."
+          }
+        ],
+        "fixedRules": [
+          {
+            "entry": "cold-rule",
+            "level": 1
+          }
+        ],
+        "statusEffects": [
+          {
+            "generator": "status-effect",
+            "entry": "frost-rimed",
+            "select": "fields"
+          }
+        ],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 15
+      }
+    },
+    {
+      "id": "ink-leviathan",
+      "weight": 2,
+      "fields": {
+        "Name": "Ink Leviathan",
+        "Description": "a river monster that blinds boats with black mist before striking from below."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          {
+            "id": "ink-leviathan-nature",
+            "Name": "Predatory Nature",
+            "Description": "a river monster that blinds boats with black mist before striking from below."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 15
+      }
+    },
+    {
+      "id": "rust-eater",
+      "weight": 2,
+      "fields": {
+        "Name": "Rust Eater",
+        "Description": "an armored insect that rapidly corrodes metal and swarms the best-equipped target."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          {
+            "id": "rust-eater-nature",
+            "Name": "Predatory Nature",
+            "Description": "an armored insect that rapidly corrodes metal and swarms the best-equipped target."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 40
+      }
+    },
+    {
+      "id": "dream-leech",
+      "weight": 2,
+      "fields": {
+        "Name": "Dream Leech",
+        "Description": "a translucent parasite that leaves sleeping victims awake but without memories."
+      },
+      "generation": {
+        "statProfile": "creature-caster",
+        "traits": [
+          {
+            "id": "dream-leech-nature",
+            "Name": "Predatory Nature",
+            "Description": "a translucent parasite that leaves sleeping victims awake but without memories."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 15
+      }
+    },
+    {
+      "id": "thornback-horror",
+      "weight": 2,
+      "fields": {
+        "Name": "Thornback Horror",
+        "Description": "a territorial plant-beast that launches barbed seeds into open wounds."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          {
+            "id": "thornback-horror-nature",
+            "Name": "Predatory Nature",
+            "Description": "a territorial plant-beast that launches barbed seeds into open wounds."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 15
+      }
+    },
+    {
+      "id": "mirror-stalker",
+      "weight": 2,
+      "fields": {
+        "Name": "Mirror Stalker",
+        "Description": "a thin humanoid able to move only through reflections and polished surfaces."
+      },
+      "generation": {
+        "statProfile": "creature-caster",
+        "traits": [
+          {
+            "id": "mirror-stalker-nature",
+            "Name": "Predatory Nature",
+            "Description": "a thin humanoid able to move only through reflections and polished surfaces."
+          }
+        ],
+        "fixedRules": [
+          {
+            "entry": "reflection-rule",
+            "level": 1
+          }
+        ],
+        "statusEffects": [
+          {
+            "generator": "status-effect",
+            "entry": "shadowed",
+            "select": "fields"
+          }
+        ],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 15
+      }
+    },
+    {
+      "id": "ash-giant",
+      "weight": 2,
+      "fields": {
+        "Name": "Ash Giant",
+        "Description": "a smoldering humanoid that collapses into choking ash when wounded, then reforms."
+      },
+      "generation": {
+        "statProfile": "creature-elemental",
+        "traits": [
+          {
+            "id": "ash-giant-nature",
+            "Name": "Predatory Nature",
+            "Description": "a smoldering humanoid that collapses into choking ash when wounded, then reforms."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [
+          {
+            "generator": "weapons",
+            "entry": "meteor-iron-maul",
+            "select": "fields"
+          }
+        ],
+        "inventory": [],
+        "naturalArmorPercentage": 15
+      }
+    },
+    {
+      "id": "moon-eyed-basilisk",
+      "weight": 2,
+      "fields": {
+        "Name": "Moon-Eyed Basilisk",
+        "Description": "a six-legged reptile whose gaze petrifies only creatures standing in moonlight."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          {
+            "id": "moon-eyed-basilisk-nature",
+            "Name": "Predatory Nature",
+            "Description": "a six-legged reptile whose gaze petrifies only creatures standing in moonlight."
+          }
+        ],
+        "fixedRules": [
+          {
+            "entry": "reflection-rule",
+            "level": 1
+          }
+        ],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 30
+      }
+    },
+    {
+      "id": "choir-worm",
+      "weight": 1,
+      "fields": {
+        "Name": "Choir Worm",
+        "Description": "a tunnel predator that imitates several familiar voices at once."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          {
+            "id": "choir-worm-nature",
+            "Name": "Predatory Nature",
+            "Description": "a tunnel predator that imitates several familiar voices at once."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 15
+      }
+    },
+    {
+      "id": "oath-devourer",
+      "weight": 1,
+      "fields": {
+        "Name": "Oath Devourer",
+        "Description": "a faceless fiend strengthened whenever someone nearby breaks a promise."
+      },
+      "generation": {
+        "statProfile": "creature-caster",
+        "traits": [
+          {
+            "id": "oath-devourer-nature",
+            "Name": "Predatory Nature",
+            "Description": "a faceless fiend strengthened whenever someone nearby breaks a promise."
+          }
+        ],
+        "fixedRules": [
+          {
+            "entry": "promise-rule",
+            "level": 2
+          }
+        ],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 15
+      }
+    },
+    {
+      "id": "storm-roc",
+      "weight": 1,
+      "fields": {
+        "Name": "Storm Roc",
+        "Description": "a colossal bird nesting inside thunderclouds and hunting anything carrying metal."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          {
+            "id": "storm-roc-nature",
+            "Name": "Predatory Nature",
+            "Description": "a colossal bird nesting inside thunderclouds and hunting anything carrying metal."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 15
+      }
+    },
+    {
+      "id": "cathedral-mimic",
+      "weight": 1,
+      "fields": {
+        "Name": "Cathedral Mimic",
+        "Description": "an ancient colony-creature disguised as an abandoned place of worship."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          {
+            "id": "cathedral-mimic-nature",
+            "Name": "Predatory Nature",
+            "Description": "an ancient colony-creature disguised as an abandoned place of worship."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 50
+      }
+    },
+    {
+      "id": "time-starved-hunter",
+      "weight": 1,
+      "fields": {
+        "Name": "Time-Starved Hunter",
+        "Description": "a flickering predator that steals seconds from its prey to move impossibly fast."
+      },
+      "generation": {
+        "statProfile": "creature-caster",
+        "traits": [
+          {
+            "id": "time-starved-hunter-nature",
+            "Name": "Predatory Nature",
+            "Description": "a flickering predator that steals seconds from its prey to move impossibly fast."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 15
+      }
+    },
+    {
+      "id": "crown-hydra",
+      "weight": 1,
+      "fields": {
+        "Name": "Crown Hydra",
+        "Description": "each severed head regrows wearing the face and memories of its killer."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          {
+            "id": "crown-hydra-nature",
+            "Name": "Predatory Nature",
+            "Description": "each severed head regrows wearing the face and memories of its killer."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 35
+      }
+    },
+    {
+      "id": "hollow-saint",
+      "weight": 1,
+      "fields": {
+        "Name": "Hollow Saint",
+        "Description": "a radiant undead figure offering miraculous healing that slowly replaces the recipient's will."
+      },
+      "generation": {
+        "statProfile": "creature-caster",
+        "traits": [
+          {
+            "id": "hollow-saint-nature",
+            "Name": "Predatory Nature",
+            "Description": "a radiant undead figure offering miraculous healing that slowly replaces the recipient's will."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [
+          {
+            "generator": "weapons",
+            "entry": "crystal-scepter",
+            "select": "fields"
+          }
+        ],
+        "inventory": [],
+        "armor": {
+          "generator": "armors",
+          "entry": "rare-medium-armor",
+          "select": "fields"
+        }
+      }
+    },
+    {
+      "id": "abyssal-grazer",
+      "weight": 1,
+      "fields": {
+        "Name": "Abyssal Grazer",
+        "Description": "an enormous peaceful-looking shape whose shadow aggressively consumes living creatures."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          {
+            "id": "abyssal-grazer-nature",
+            "Name": "Predatory Nature",
+            "Description": "an enormous peaceful-looking shape whose shadow aggressively consumes living creatures."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 15
+      }
+    },
+    {
+      "id": "red-comet-beast",
+      "weight": 1,
+      "fields": {
+        "Name": "Red Comet Beast",
+        "Description": "a crystalline predator that falls from the sky and multiplies when exposed to magic."
+      },
+      "generation": {
+        "statProfile": "creature-elemental",
+        "traits": [
+          {
+            "id": "red-comet-beast-nature",
+            "Name": "Predatory Nature",
+            "Description": "a crystalline predator that falls from the sky and multiplies when exposed to magic."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [
+          {
+            "generator": "status-effect",
+            "entry": "smoldering",
+            "select": "fields"
+          }
+        ],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 15
+      }
+    }
+  ],
+  "modifiers": [
+    {
+      "generator": "modifier",
+      "chance": 0.5,
+      "count": {
+        "min": 1,
+        "max": 1
+      }
+    }
+  ]
+}

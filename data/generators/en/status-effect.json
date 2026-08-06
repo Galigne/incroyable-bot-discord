@@ -3,126 +3,233 @@
   "id": "status-effect",
   "kind": "category",
   "visibility": "public",
-  "name": "statusEffect",
-  "description": "Conditions affecting a character",
+  "name": "status effect",
+  "description": "Descriptive conditions that may affect a character or creature",
   "entrySchema": {
-    "type": "text"
+    "type": "fields",
+    "required": ["Name", "Description"]
   },
   "entries": [
     {
       "id": "bruised",
       "weight": 3,
-      "value": "Bruised — minor pain causes -1 on the next demanding physical action."
+      "fields": {
+        "Name": "Bruised",
+        "Description": "minor pain causes -1 on the next demanding physical action."
+      }
     },
     {
       "id": "fatigued",
       "weight": 3,
-      "value": "Fatigued — prolonged effort and travel are more difficult until resting."
+      "fields": {
+        "Name": "Fatigued",
+        "Description": "prolonged effort and travel are more difficult until resting."
+      }
     },
     {
       "id": "shaken",
       "weight": 3,
-      "value": "Shaken — -1 against the next fear or intimidation effect."
+      "fields": {
+        "Name": "Shaken",
+        "Description": "-1 against the next fear or intimidation effect."
+      }
     },
     {
       "id": "distracted",
       "weight": 3,
-      "value": "Distracted — -1 to the next Perception-based action."
+      "fields": {
+        "Name": "Distracted",
+        "Description": "-1 to the next Perception-based action."
+      }
     },
     {
       "id": "bleeding",
       "weight": 2,
-      "value": "Bleeding — loses a small amount of HP after strenuous actions until treated."
+      "fields": {
+        "Name": "Bleeding",
+        "Description": "loses a small amount of HP after strenuous actions until treated."
+      }
     },
     {
       "id": "burning",
       "weight": 2,
-      "value": "Burning — takes recurring fire damage until the flames are extinguished."
+      "fields": {
+        "Name": "Burning",
+        "Description": "takes recurring fire damage until the flames are extinguished."
+      }
     },
     {
       "id": "chilled",
       "weight": 2,
-      "value": "Chilled — movement and Speed-based actions are reduced until warmed."
+      "fields": {
+        "Name": "Chilled",
+        "Description": "movement and Speed-based actions are reduced until warmed."
+      }
     },
     {
       "id": "dazed",
       "weight": 2,
-      "value": "Dazed — reactions cost additional effort during the next turn."
+      "fields": {
+        "Name": "Dazed",
+        "Description": "reactions cost additional effort during the next turn."
+      }
     },
     {
       "id": "blinded",
       "weight": 2,
-      "value": "Blinded — sight-based actions fail or suffer a major penalty."
+      "fields": {
+        "Name": "Blinded",
+        "Description": "sight-based actions fail or suffer a major penalty."
+      }
     },
     {
       "id": "deafened",
       "weight": 2,
-      "value": "Deafened — cannot hear speech, warnings, or sound-based effects clearly."
+      "fields": {
+        "Name": "Deafened",
+        "Description": "cannot hear speech, warnings, or sound-based effects clearly."
+      }
     },
     {
       "id": "poisoned",
       "weight": 2,
-      "value": "Poisoned — Constitution-based resistance is required as the poison progresses."
+      "fields": {
+        "Name": "Poisoned",
+        "Description": "Constitution-based resistance is required as the poison progresses."
+      }
     },
     {
       "id": "slowed",
       "weight": 2,
-      "value": "Slowed — MD is reduced until the effect ends."
+      "fields": {
+        "Name": "Slowed",
+        "Description": "MD is reduced until the effect ends."
+      }
     },
     {
       "id": "weakened",
       "weight": 2,
-      "value": "Weakened — Strength-based actions suffer a penalty."
+      "fields": {
+        "Name": "Weakened",
+        "Description": "Strength-based actions suffer a penalty."
+      }
     },
     {
       "id": "confused",
       "weight": 2,
-      "value": "Confused — the character has difficulty distinguishing allies, enemies, or directions."
+      "fields": {
+        "Name": "Confused",
+        "Description": "the character has difficulty distinguishing allies, enemies, or directions."
+      }
     },
     {
       "id": "frightened",
       "weight": 2,
-      "value": "Frightened — cannot willingly approach the source of fear without succeeding on a roll."
+      "fields": {
+        "Name": "Frightened",
+        "Description": "cannot willingly approach the source of fear without succeeding on a roll."
+      }
     },
     {
       "id": "stunned",
-      "value": "Stunned — the character temporarily loses the ability to take normal actions."
+      "fields": {
+        "Name": "Stunned",
+        "Description": "the character temporarily loses the ability to take normal actions."
+      }
     },
     {
       "id": "paralyzed",
-      "value": "Paralyzed — voluntary movement is impossible until the condition is broken."
+      "fields": {
+        "Name": "Paralyzed",
+        "Description": "voluntary movement is impossible until the condition is broken."
+      }
     },
     {
       "id": "silenced",
-      "value": "Silenced — speech and voice-dependent abilities cannot be used."
+      "fields": {
+        "Name": "Silenced",
+        "Description": "speech and voice-dependent abilities cannot be used."
+      }
     },
     {
       "id": "cursed",
-      "value": "Cursed — a supernatural penalty persists until its specific condition is resolved."
+      "fields": {
+        "Name": "Cursed",
+        "Description": "a supernatural penalty persists until its specific condition is resolved."
+      }
     },
     {
       "id": "petrifying",
-      "value": "Petrifying — the body is slowly turning to stone and requires urgent intervention."
+      "fields": {
+        "Name": "Petrifying",
+        "Description": "the body is slowly turning to stone and requires urgent intervention."
+      }
     },
     {
       "id": "possessed",
-      "value": "Possessed — an outside will occasionally contests control of the character."
+      "fields": {
+        "Name": "Possessed",
+        "Description": "an outside will occasionally contests control of the character."
+      }
     },
     {
       "id": "marked",
-      "value": "Marked — a magical sign allows a hostile creature or effect to track the character."
+      "fields": {
+        "Name": "Marked",
+        "Description": "a magical sign allows a hostile creature or effect to track the character."
+      }
     },
     {
       "id": "invisible",
-      "value": "Invisible — the character cannot be seen normally but still makes sound and leaves traces."
+      "fields": {
+        "Name": "Invisible",
+        "Description": "the character cannot be seen normally but still makes sound and leaves traces."
+      }
     },
     {
       "id": "regenerating",
-      "value": "Regenerating — restores a small amount of HP at the end of each turn."
+      "fields": {
+        "Name": "Regenerating",
+        "Description": "restores a small amount of HP at the end of each turn."
+      }
     },
     {
       "id": "inspired",
-      "value": "Inspired — may reroll one chosen die, after which this status ends."
+      "fields": {
+        "Name": "Inspired",
+        "Description": "may reroll one chosen die, after which this status ends."
+      }
+    },
+    {
+      "id": "restless",
+      "weight": 3,
+      "fields": {
+        "Name": "Restless",
+        "Description": "It never becomes completely still and constantly watches its surroundings."
+      }
+    },
+    {
+      "id": "smoldering",
+      "weight": 2,
+      "fields": {
+        "Name": "Smoldering",
+        "Description": "Thin smoke and dim embers drift from its body without an enforced mechanical effect."
+      }
+    },
+    {
+      "id": "frost-rimed",
+      "weight": 2,
+      "fields": {
+        "Name": "Frost-Rimed",
+        "Description": "A persistent layer of frost coats part of its body and nearby surfaces."
+      }
+    },
+    {
+      "id": "shadowed",
+      "fields": {
+        "Name": "Shadowed",
+        "Description": "Its outline remains difficult to separate from the shadows around it."
+      }
     }
   ]
 }

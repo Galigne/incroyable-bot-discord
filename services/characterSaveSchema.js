@@ -74,6 +74,7 @@ function migrateCharacterSave(rawSaveData) {
 			inventory: rawSaveData.inventory,
 			encumbrance: rawSaveData.encumbrance,
 		},
+		modifiers: [],
 	};
 }
 

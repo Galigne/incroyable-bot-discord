@@ -154,14 +154,27 @@
       "backgroundOption": "Background du personnage ; tirage aléatoire si omis",
       "levelChoice": "Niveau {{level}}",
       "success": "Le personnage **{{name}}** a été généré avec la clé `{{key}}`.",
-      "behavior": "Crée et sauvegarde un personnage aléatoire complet sous une CharacterKey unique. Le niveau doit être compris entre 1 et 10 et est aléatoire s’il est omis ; le Background est également facultatif et aléatoire par défaut. Un profil statistique partagé répartit les statistiques, tandis que les ressources, LOI, armure, armes, objets, pièces d’or et éventuels effets d’état suivent le niveau choisi et les règles du jeu. L’encombrement reste manuel et vaut 0 / 0 par défaut."
+      "behavior": "Crée et sauvegarde un personnage aléatoire complet sous une CharacterKey unique. Le niveau doit être compris entre 1 et 10 et est aléatoire s’il est omis ; le Background est également facultatif et aléatoire par défaut. Le routeur public `background` sélectionne un catalogue de détail interne et peut ajouter des modificateurs descriptifs partagés. Un profil statistique partagé répartit les statistiques, tandis que les ressources, LOI, armure, armes, objets, pièces d’or et éventuels effets d’état suivent le niveau choisi et les règles du jeu. L’encombrement reste manuel et vaut 0 / 0 par défaut."
+    },
+    "genMonster": {
+      "description": "Générer une créature (rôle MJ configuré ou propriétaire du serveur)",
+      "schemaDescription": "Générer et sauvegarder une créature aléatoire complète",
+      "keyOption": "Clé de sauvegarde de créature unique parmi toutes les entités",
+      "typeOption": "Catégorie source de la créature",
+      "levelOption": "Niveau de la créature ; tirage aléatoire de 1 à 10 si omis",
+      "monsterChoice": "Monstre",
+      "animalChoice": "Animal",
+      "companionChoice": "Compagnon",
+      "levelChoice": "Niveau {{level}}",
+      "success": "La créature **{{name}}** a été générée et sauvegardée avec la CreatureKey `{{key}}`.",
+      "behavior": "Crée et sauvegarde atomiquement une créature complète en faisant passer le type `monster`, `animal` ou `companion` choisi par le catalogue public `creature`, qui le dirige vers son catalogue de détail interne `creature-*`. La CreatureKey est unique parmi toutes les entités et le niveau doit être compris entre 1 et 10, ou est tiré au hasard s’il est omis. Les profils statistiques partagés répartissent les statistiques et calculent les ressources dérivées ; seules des références explicites peuvent accorder des LOI. Les effets d’état initiaux et les modificateurs proviennent des mêmes catalogues descriptifs que ceux disponibles pour les personnages, tandis que l’équipement, l’inventaire, l’armure naturelle et les métadonnées d’armure sont résolus puis conservés avec une provenance stable. L’encombrement reste manuel et vaut 0 / 0 par défaut. Seuls un MJ configuré ou le propriétaire du serveur peuvent utiliser cette commande."
     },
     "get": {
       "description": "Afficher le résumé d’une entité ou le détail d’un champ compatible",
       "entityOption": "Personnage ou créature à afficher",
       "fieldOption": "Champ détaillé facultatif",
       "unknownField": "Ce champ n’est pas disponible pour cette entité : **{{field}}**. Utilisez `/help command:get` pour consulter les détails.",
-      "behavior": "Sans `field`, publie le résumé public de l’entité. Les champs de personnage restent `name`, `level`, `status`, `statistics`, `rules`, `talents`, `gear`, `race`, `background` et `personality`, dans cet ordre. Les champs de créature suivent leur propre ordre : `identity`, `level`, `status`, `statistics`, `rules`, `traits`, `modifiers` et `gear`. L’autocomplétion ne propose que les champs compatibles avec l’EntityKey choisie."
+      "behavior": "Sans `field`, publie le résumé public de l’entité. Les champs de personnage sont `name`, `level`, `status`, `statistics`, `rules`, `talents`, `gear`, `race`, `background`, `personality` et `modifiers`, dans cet ordre. Les champs de créature suivent leur propre ordre : `identity`, `level`, `status`, `statistics`, `rules`, `traits`, `modifiers` et `gear`. Les effets d’état et les modificateurs descriptifs sont disponibles pour les deux types d’entité. L’autocomplétion ne propose que les champs compatibles avec l’EntityKey choisie."
     },
     "heal": {
       "description": "Restaurer les PV, les PR ou les deux jusqu’au pourcentage choisi",
@@ -198,7 +211,7 @@
       "description": "Modifier un groupe de champs compatible dans un formulaire prérempli",
       "entityOption": "Personnage ou créature à modifier",
       "fieldOption": "Champ à modifier",
-      "behavior": "Ouvre un formulaire privé prérempli adapté au type d’entité choisi. Les groupes de personnage et leur ordre actuel restent inchangés. Les groupes de créature sont `identity`, `level`, `status`, `statistics`, `rules`, `traits`, `modifiers` et `gear` ; l’identité modifie le nom et la description. Les dons intrinsèques, modificateurs descriptifs et effets d’état de créature utilisent chacun une ligne `Nom:Description`, tandis que les effets d’état de personnage restent de simples entrées sur des lignes séparées. Les statistiques, LOI, ressources, l’équipement, l’inventaire et l’encombrement conservent leurs formats communs compatibles. L’EntityKey, le type, le schéma, les identifiants sources, les données d’armure naturelle et la provenance ne sont jamais modifiables. Chaque groupe est validé et sauvegardé atomiquement comme une seule opération annulable. Seuls le créateur de l’entité, un MJ ou le propriétaire du serveur peuvent la modifier."
+      "behavior": "Ouvre un formulaire privé prérempli adapté au type d’entité choisi. Les groupes de personnage conservent leur ordre établi, suivi de `modifiers` ; les groupes de créature sont `identity`, `level`, `status`, `statistics`, `rules`, `traits`, `modifiers` et `gear`, et l’identité modifie le nom et la description. Pour les deux types, les modificateurs descriptifs utilisent une ligne `Nom:Description`. Les dons intrinsèques et effets d’état de créature emploient le même format, tandis que les effets d’état de personnage conservent leur format compatible d’une entrée simple par ligne. Les statistiques, LOI, ressources, l’équipement, l’inventaire et l’encombrement conservent leurs formats communs compatibles. L’EntityKey, le type, le schéma, les identifiants sources, les données d’armure naturelle et la provenance ne sont jamais modifiables. Chaque groupe est validé et sauvegardé atomiquement comme une seule opération annulable. Seuls le créateur de l’entité, un MJ ou le propriétaire du serveur peuvent la modifier."
     },
     "undo": {
       "description": "Restaurer le plus récent état antérieur conservé d’une entité",
@@ -269,8 +282,10 @@
       "identity": "Identité",
       "name": "Nom",
       "description": "Description",
+      "archetype": "Archétype",
       "level": "Niveau",
       "status": "État",
+      "naturalArmor": "Armure naturelle",
       "statistics": "Statistiques",
       "rules": "LOI",
       "traits": "Dons intrinsèques",
@@ -300,6 +315,7 @@
       "goals": "Objectifs",
       "background": "Background",
       "personality": "Personnalité",
+      "modifiers": "Modificateurs descriptifs",
       "personalityDescription": "Description de la personnalité",
       "personalityTraits": "Traits de personnalité",
       "racialTraits": "Dons raciaux",
@@ -392,6 +408,8 @@
     "ruleLevelInvalid": "Le niveau d’une LOI doit être un nombre entier positif.",
     "ruleDescriptionRequired": "La description d’une LOI est requise après le second séparateur `:`.",
     "describedEntryInvalid": "Chaque élément descriptif doit utiliser `Nom:Description`, avec les deux valeurs renseignées.",
+    "creatureArchetypeInvalid": "Le type de créature doit être `monster`, `animal` ou `companion`.",
+    "creatureLevelInvalid": "Le niveau d’une créature doit être un nombre entier compris entre 1 et 10.",
     "creatureLevelRange": "Le niveau d’une créature doit être un nombre entier compris entre 1 et 10.",
     "creatureStatisticRange": "La statistique `{{stat}}` d’une créature doit être comprise entre 0 et 100.",
     "creatureResourceRange": "La ressource `{{resource}}` d’une créature doit respecter 0 ≤ current ≤ max ; les PA doivent également être entiers et ne pas dépasser 10.",

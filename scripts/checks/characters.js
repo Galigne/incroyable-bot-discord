@@ -211,6 +211,7 @@ module.exports = function createCharacterChecks(context) {
 				'rules',
 				'status',
 				'talents',
+				'modifiers',
 			]) {
 				const fieldEmbed = createCharacterFieldEmbed(character, field)?.toJSON();
 				if (field === 'rules' && !fieldEmbed.description.includes('Fire — Level 2')) {

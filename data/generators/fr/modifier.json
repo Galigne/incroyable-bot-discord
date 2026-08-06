@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 2,
+  "id": "modifier",
+  "kind": "modifier",
+  "visibility": "internal",
+  "name": "modificateurs descriptifs",
+  "description": "Variations descriptives communes aux personnages et aux créatures générés",
+  "appliesTo": [
+    "background",
+    "creature-animal",
+    "creature-companion",
+    "creature-monster"
+  ],
+  "entrySchema": {
+    "type": "fields",
+    "required": ["Name", "Description"]
+  },
+  "entries": [
+    {
+      "id": "scarred",
+      "weight": 3,
+      "fields": {
+        "Name": "Cicatrices anciennes",
+        "Description": "De vieilles cicatrices marquent le corps et témoignent des dangers surmontés."
+      }
+    },
+    {
+      "id": "unusually-large",
+      "weight": 2,
+      "fields": {
+        "Name": "Taille exceptionnelle",
+        "Description": "Une taille remarquable pour son espèce confère une présence difficile à ignorer."
+      }
+    },
+    {
+      "id": "pale",
+      "weight": 2,
+      "fields": {
+        "Name": "Pâleur inhabituelle",
+        "Description": "Une coloration anormalement pâle donne un aspect étrange à des traits pourtant familiers."
+      }
+    },
+    {
+      "id": "ornate-markings",
+      "weight": 2,
+      "fields": {
+        "Name": "Marques ouvragées",
+        "Description": "Des marques naturelles caractéristiques dessinent des motifs complexes sur le corps."
+      }
+    },
+    {
+      "id": "weathered",
+      "fields": {
+        "Name": "Marques des éléments",
+        "Description": "Les intempéries ont laissé une apparence rude, patiente et visiblement éprouvée."
+      }
+    }
+  ]
+}

@@ -6,6 +6,17 @@ const MAX_ENTRY_TEXT_LENGTH = 4_096;
 const MAX_FIELD_VALUE_LENGTH = 1_024;
 const MAX_MODIFIER_REQUESTS = 25;
 const MAX_MODIFIER_COUNT = 25;
+const CREATURE_ARCHETYPE_IDS = new Set(['animal', 'companion', 'monster']);
+const CREATURE_GENERATOR_BY_ARCHETYPE = Object.freeze(Object.fromEntries(
+	[...CREATURE_ARCHETYPE_IDS].map(archetype => [
+		archetype,
+		`creature-${archetype}`,
+	]),
+));
+const CREATURE_GENERATOR_IDS = new Set(
+	Object.values(CREATURE_GENERATOR_BY_ARCHETYPE),
+);
+const CREATURE_ROUTER_ID = 'creature';
 const FORBIDDEN_MODIFIER_FIELDS = new Set([
 	'armor',
 	'behavior',
@@ -81,6 +92,7 @@ function validateGeneratorDefinition(generator, file = '<generator>') {
 	);
 	validateGeneratorKindProperties(generator, file);
 	const entrySchema = validateEntrySchema(generator.entrySchema, generator.kind, file);
+	validateCreatureGeneratorEnvelope(generator, entrySchema, file);
 	if (generator.modifiers !== undefined) {
 		validateModifierRequests(generator.modifiers, `${file} modifiers`);
 	}
@@ -93,7 +105,7 @@ function validateGeneratorDefinition(generator, file = '<generator>') {
 
 	const entryIds = new Set();
 	generator.entries.forEach((entry, index) => {
-		validateGeneratorEntry(entry, entrySchema, generator.kind, file, index);
+		validateGeneratorEntry(entry, entrySchema, generator, file, index);
 		if (entryIds.has(entry.id)) {
 			throw generatorSchemaError(
 				'DUPLICATE_GENERATOR_ENTRY_ID',
@@ -193,6 +205,14 @@ function validateGeneratorPair(english, french, file = '<generator>') {
 				extractPlaceholders(frenchEntry[localizedProperty]),
 				file,
 				`entries.${index}.${localizedProperty}.placeholders`,
+			);
+		}
+		if (CREATURE_GENERATOR_IDS.has(english.id)) {
+			validateCreatureGenerationPair(
+				englishEntry.generation,
+				frenchEntry.generation,
+				file,
+				index,
 			);
 		}
 	}
@@ -312,6 +332,232 @@ function validateModifierEntrySchema(entrySchema, file) {
 	}
 }
 
+function validateCreatureGeneratorEnvelope(generator, entrySchema, file) {
+	if (generator.id === CREATURE_ROUTER_ID) {
+		if (
+			generator.kind !== 'category'
+			|| generator.visibility !== 'public'
+			|| entrySchema.type !== 'fields'
+			|| JSON.stringify(entrySchema.required)
+				!== JSON.stringify(['Name', 'Description', 'Generator'])
+			|| JSON.stringify(entrySchema.technical ?? [])
+				!== JSON.stringify(['Generator'])
+		) {
+			throw generatorSchemaError(
+				'INVALID_CREATURE_ROUTER_SCHEMA',
+				`Creature router ${file} must expose localized Name and Description fields plus a technical Generator field.`,
+			);
+		}
+		return;
+	}
+	if (!CREATURE_GENERATOR_IDS.has(generator.id)) {
+		return;
+	}
+	if (
+		generator.kind !== 'component'
+		|| generator.visibility !== 'internal'
+		|| entrySchema.type !== 'fields'
+		|| JSON.stringify(entrySchema.required) !== JSON.stringify(['Name', 'Description'])
+		|| (entrySchema.technical?.length ?? 0) !== 0
+	) {
+		throw generatorSchemaError(
+			'INVALID_CREATURE_ARCHETYPE_SCHEMA',
+			`Creature detail generator ${file} must be an internal component exposing localized Name and Description fields.`,
+		);
+	}
+}
+
+function validateCreatureGeneration(generation, location) {
+	assertPlainObject(
+		generation,
+		`Creature archetype ${location} must define generation metadata.`,
+	);
+	assertAllowedKeys(
+		generation,
+		[
+			'statProfile',
+			'naturalArmorPercentage',
+			'traits',
+			'fixedRules',
+			'statusEffects',
+			'armor',
+			'equipment',
+			'inventory',
+		],
+		`Creature archetype ${location} contains unsupported generation metadata.`,
+	);
+	assertRequiredKeys(
+		generation,
+		['statProfile', 'traits', 'equipment', 'inventory'],
+		`Creature archetype ${location} is missing required generation metadata.`,
+	);
+	validateTechnicalId(generation.statProfile, `statistical profile in ${location}`);
+	if (
+		generation.naturalArmorPercentage !== undefined
+		&& (
+			!Number.isFinite(generation.naturalArmorPercentage)
+			|| generation.naturalArmorPercentage < 0
+			|| generation.naturalArmorPercentage > 100
+		)
+	) {
+		throw generatorSchemaError(
+			'INVALID_CREATURE_NATURAL_ARMOR',
+			`Creature archetype ${location} has invalid natural armor.`,
+		);
+	}
+	validateCreatureTraits(generation.traits, location);
+	validateFixedRules(generation.fixedRules ?? [], location);
+	validateReferenceList(
+		generation.statusEffects ?? [],
+		`${location} status effects`,
+		{ requiredSelector: 'fields' },
+	);
+	if (generation.armor !== undefined) {
+		if (generation.naturalArmorPercentage !== undefined) {
+			throw generatorSchemaError(
+				'CREATURE_ARMOR_SOURCE_CONFLICT',
+				`Creature archetype ${location} cannot combine generated armor and natural armor.`,
+			);
+		}
+		validateReference(generation.armor, `${location} armor`);
+		if (generation.armor.select !== 'fields') {
+			throw generatorSchemaError(
+				'INVALID_CREATURE_ARMOR_REFERENCE',
+				`Creature archetype ${location} armor must select complete fields.`,
+			);
+		}
+	}
+	validateReferenceList(generation.equipment, `${location} equipment`);
+	validateReferenceList(generation.inventory, `${location} inventory`);
+}
+
+function validateCreatureTraits(traits, location) {
+	if (!Array.isArray(traits) || traits.length === 0 || traits.length > 25) {
+		throw generatorSchemaError(
+			'INVALID_CREATURE_TRAITS',
+			`Creature archetype ${location} must define 1 to 25 intrinsic traits.`,
+		);
+	}
+	const ids = new Set();
+	for (const [index, trait] of traits.entries()) {
+		assertPlainObject(trait, `Creature trait ${location}.${index} is invalid.`);
+		assertExactKeys(
+			trait,
+			['id', 'Name', 'Description'],
+			`Creature trait ${location}.${index} has invalid properties.`,
+		);
+		validateTechnicalId(trait.id, `trait ID in ${location}`);
+		validateDisplayText(trait.Name, 256, `trait name in ${location}`);
+		validateDisplayText(
+			trait.Description,
+			MAX_ENTRY_TEXT_LENGTH,
+			`trait description in ${location}`,
+		);
+		if (ids.has(trait.id)) {
+			throw generatorSchemaError(
+				'DUPLICATE_CREATURE_TRAIT_ID',
+				`Creature archetype ${location} repeats trait ${trait.id}.`,
+			);
+		}
+		ids.add(trait.id);
+	}
+}
+
+function validateFixedRules(rules, location) {
+	if (!Array.isArray(rules) || rules.length > 25) {
+		throw generatorSchemaError(
+			'INVALID_CREATURE_FIXED_RULES',
+			`Creature archetype ${location} has invalid fixed RULEs.`,
+		);
+	}
+	const entries = new Set();
+	for (const rule of rules) {
+		assertPlainObject(rule, `Creature archetype ${location} has an invalid fixed RULE.`);
+		assertExactKeys(
+			rule,
+			['entry', 'level'],
+			`Creature archetype ${location} fixed RULE has invalid properties.`,
+		);
+		validateTechnicalId(rule.entry, `fixed RULE entry in ${location}`);
+		if (!Number.isInteger(rule.level) || rule.level < 1 || rule.level > 10) {
+			throw generatorSchemaError(
+				'INVALID_CREATURE_FIXED_RULE_LEVEL',
+				`Creature archetype ${location} has an invalid fixed RULE level.`,
+			);
+		}
+		if (entries.has(rule.entry)) {
+			throw generatorSchemaError(
+				'DUPLICATE_CREATURE_FIXED_RULE',
+				`Creature archetype ${location} repeats fixed RULE ${rule.entry}.`,
+			);
+		}
+		entries.add(rule.entry);
+	}
+}
+
+function validateReferenceList(references, location, options = {}) {
+	if (!Array.isArray(references) || references.length > 25) {
+		throw generatorSchemaError(
+			'INVALID_CREATURE_REFERENCES',
+			`Creature archetype ${location} must be an array with at most 25 references.`,
+		);
+	}
+	for (const [index, reference] of references.entries()) {
+		validateReference(reference, `${location}.${index}`);
+		if (
+			options.requiredSelector
+			&& reference.select !== options.requiredSelector
+		) {
+			throw generatorSchemaError(
+				'INVALID_CREATURE_REFERENCE_SELECTOR',
+				`Creature archetype ${location}.${index} must select ${options.requiredSelector}.`,
+			);
+		}
+	}
+}
+
+function validateCreatureGenerationPair(english, french, file, index) {
+	const location = `entries.${index}.generation`;
+	const technicalProperties = [
+		'statProfile',
+		'naturalArmorPercentage',
+		'fixedRules',
+		'statusEffects',
+		'armor',
+		'equipment',
+		'inventory',
+	];
+	assertParity(Object.keys(english).sort(), Object.keys(french).sort(), file, `${location}.keys`);
+	for (const property of technicalProperties) {
+		assertParity(english[property], french[property], file, `${location}.${property}`);
+	}
+	assertParity(english.traits.length, french.traits.length, file, `${location}.traits.length`);
+	for (let traitIndex = 0; traitIndex < english.traits.length; traitIndex += 1) {
+		const englishTrait = english.traits[traitIndex];
+		const frenchTrait = french.traits[traitIndex];
+		assertParity(
+			Object.keys(englishTrait).sort(),
+			Object.keys(frenchTrait).sort(),
+			file,
+			`${location}.traits.${traitIndex}.keys`,
+		);
+		assertParity(
+			englishTrait.id,
+			frenchTrait.id,
+			file,
+			`${location}.traits.${traitIndex}.id`,
+		);
+		for (const property of ['Name', 'Description']) {
+			assertParity(
+				extractPlaceholders(englishTrait[property]),
+				extractPlaceholders(frenchTrait[property]),
+				file,
+				`${location}.traits.${traitIndex}.${property}.placeholders`,
+			);
+		}
+	}
+}
+
 function validateFieldNameList(fields, file, property, allowEmpty = false) {
 	if (
 		!Array.isArray(fields)
@@ -331,8 +577,9 @@ function validateFieldNameList(fields, file, property, allowEmpty = false) {
 	}
 }
 
-function validateGeneratorEntry(entry, entrySchema, generatorKind, file, index) {
+function validateGeneratorEntry(entry, entrySchema, generator, file, index) {
 	const location = `${file} entry ${index + 1}`;
+	const generatorKind = generator.kind;
 	assertPlainObject(entry, `Invalid generator entry: ${location}.`);
 	validateTechnicalId(entry.id, `entry ID at ${location}`);
 	if (
@@ -354,7 +601,12 @@ function validateGeneratorEntry(entry, entrySchema, generatorKind, file, index) 
 		validateModifierRequests(entry.modifiers, `${location} modifiers`);
 	}
 
-	const commonKeys = ['id', 'weight', 'modifiers'];
+	const commonKeys = [
+		'id',
+		'weight',
+		'modifiers',
+		...(CREATURE_GENERATOR_IDS.has(generator.id) ? ['generation'] : []),
+	];
 	if (entrySchema.type === 'text') {
 		assertAllowedKeys(
 			entry,
@@ -408,6 +660,9 @@ function validateGeneratorEntry(entry, entrySchema, generatorKind, file, index) 
 				`Generator ${location} must declare non-text field ${field} as technical.`,
 			);
 		}
+	}
+	if (CREATURE_GENERATOR_IDS.has(generator.id)) {
+		validateCreatureGeneration(entry.generation, location);
 	}
 }
 
@@ -617,6 +872,9 @@ function validateGeneratorRelationships(catalog) {
 			for (const reference of Object.values(entry.references ?? {})) {
 				validateReferenceRelationship(reference, catalog, generator.id);
 			}
+			if (entry.generation) {
+				validateCreatureGenerationRelationships(generator, entry, catalog);
+			}
 		}
 	}
 	return true;
@@ -642,6 +900,132 @@ function validateReferenceRelationship(reference, catalog, ownerId) {
 		}
 		validateSelectorForGenerator(reference.select, source, ownerId);
 	}
+	return sourceIds.map(sourceId => catalog.get(sourceId));
+}
+
+function validateCreatureGenerationRelationships(generator, entry, catalog) {
+	const generation = entry.generation;
+	const ownerId = `${generator.id}:${entry.id}`;
+	const rules = catalog.get('rules');
+	if (
+		generation.fixedRules?.some(rule => (
+			!rules
+			|| rules.entrySchema.type !== 'fields'
+			|| !rules.entrySchema.required.includes('Name')
+			|| !rules.entrySchema.required.includes('Description')
+			|| !rules.entries.some(candidate => candidate.id === rule.entry)
+		))
+	) {
+		throw generatorSchemaError(
+			'GENERATOR_ENTRY_NOT_FOUND',
+			`Creature archetype ${ownerId} references an unknown fixed RULE.`,
+		);
+	}
+	for (const reference of generation.statusEffects ?? []) {
+		const sources = validateReferenceRelationship(reference, catalog, ownerId);
+		assertReferenceFields(sources, ['Name', 'Description'], ownerId, 'status effect');
+	}
+	if (generation.armor) {
+		const sources = validateReferenceRelationship(generation.armor, catalog, ownerId);
+		assertReferenceFields(
+			sources,
+			['Name', 'Description', 'AR percentage'],
+			ownerId,
+			'armor',
+		);
+	}
+	for (const reference of [
+		...generation.equipment,
+		...generation.inventory,
+	]) {
+		const sources = validateReferenceRelationship(reference, catalog, ownerId);
+		assertGearReferenceResult(sources, reference.select, ownerId);
+	}
+}
+
+function assertReferenceFields(sources, fields, ownerId, label) {
+	if (sources.some(source => (
+		source.entrySchema.type !== 'fields'
+		|| fields.some(field => !source.entrySchema.required.includes(field))
+	))) {
+		throw generatorSchemaError(
+			'INVALID_CREATURE_REFERENCE_TARGET',
+			`Creature archetype ${ownerId} has an invalid ${label} reference.`,
+		);
+	}
+}
+
+function assertGearReferenceResult(sources, selector, ownerId) {
+	if (selector === 'value' || selector === 'display') {
+		return;
+	}
+	if (selector === 'fields') {
+		assertReferenceFields(sources, ['Name', 'Description'], ownerId, 'gear');
+		return;
+	}
+	const field = selector.slice('fields.'.length);
+	if (sources.some(source => source.entries.some(entry => (
+		typeof entry.fields?.[field] !== 'string'
+	)))) {
+		throw generatorSchemaError(
+			'INVALID_CREATURE_REFERENCE_TARGET',
+			`Creature archetype ${ownerId} has a non-text gear reference.`,
+		);
+	}
+}
+
+function validateCreatureStatProfileRelationships(catalogs, profiles) {
+	if (!(catalogs instanceof Map) || !(profiles instanceof Map)) {
+		throw new TypeError('Creature profile validation requires catalog and profile maps.');
+	}
+	for (const locale of ['en', 'fr']) {
+		const catalog = catalogs.get(locale);
+		if (!(catalog instanceof Map)) {
+			throw new TypeError(`Creature profile validation is missing the ${locale} catalog.`);
+		}
+		const router = catalog.get(CREATURE_ROUTER_ID);
+		if (!router) {
+			throw generatorSchemaError(
+				'CREATURE_ROUTER_MISSING',
+				`Creature generation is missing the ${locale} ${CREATURE_ROUTER_ID} router.`,
+			);
+		}
+		if (
+			router.entries.length !== CREATURE_ARCHETYPE_IDS.size
+			|| router.entries.some(entry => !CREATURE_ARCHETYPE_IDS.has(entry.id))
+		) {
+			throw generatorSchemaError(
+				'CREATURE_ROUTE_INVALID',
+				`Creature generation has invalid ${locale} router entries.`,
+			);
+		}
+		for (const archetypeId of CREATURE_ARCHETYPE_IDS) {
+			const generatorId = CREATURE_GENERATOR_BY_ARCHETYPE[archetypeId];
+			const route = router.entries.find(entry => entry.id === archetypeId);
+			if (route?.fields?.Generator !== generatorId) {
+				throw generatorSchemaError(
+					'CREATURE_ROUTE_INVALID',
+					`Creature generation has an invalid ${locale} ${archetypeId} route.`,
+				);
+			}
+			const generator = catalog.get(generatorId);
+			if (!generator) {
+				throw generatorSchemaError(
+					'CREATURE_ARCHETYPE_MISSING',
+					`Creature generation is missing the ${locale} ${generatorId} archetype.`,
+				);
+			}
+			for (const entry of generator.entries) {
+				if (!profiles.has(entry.generation.statProfile)) {
+					throw generatorSchemaError(
+						'CREATURE_STAT_PROFILE_MISSING',
+						`Creature archetype ${generatorId}:${entry.id} references an unknown statistical profile.`,
+					);
+				}
+			}
+		}
+	}
+	return true;
 }
 
 function validateSelectorForGenerator(selector, source, ownerId) {
@@ -795,7 +1179,12 @@ function generatorSchemaError(code, message) {
 }
 
 module.exports = {
+	CREATURE_ARCHETYPE_IDS: Object.freeze([...CREATURE_ARCHETYPE_IDS]),
+	CREATURE_GENERATOR_BY_ARCHETYPE,
+	CREATURE_GENERATOR_IDS: Object.freeze([...CREATURE_GENERATOR_IDS]),
+	CREATURE_ROUTER_ID,
 	GENERATOR_SCHEMA_VERSION,
+	validateCreatureStatProfileRelationships,
 	validateGeneratorDefinition,
 	validateGeneratorPair,
 	validateGeneratorRelationships,

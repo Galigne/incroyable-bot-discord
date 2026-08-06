@@ -389,7 +389,7 @@ test('seeded random character generation remains equivalent', () => {
 			ap: { current: 8, max: 8 },
 			md: { current: 7.5, max: 7.5 },
 			effects: [
-				'Fatigued — prolonged effort and travel are more difficult until resting.',
+				'Shaken — -1 against the next fear or intimidation effect.',
 			],
 		},
 		gear: {
@@ -407,6 +407,36 @@ test('seeded random character generation remains equivalent', () => {
 			encumbrance: { current: 0, max: 0 },
 		},
 	});
+});
+
+test('character modifiers attach without changing generated base state', () => {
+	const plain = createCharacterFixture();
+	const modified = createCharacterFixture();
+	populateRandomCharacter(plain, {
+		level: 7,
+		random: createSeededRandom(4_242),
+		resolver: { resolveReference: () => ({ modifiers: [] }) },
+	});
+	populateRandomCharacter(modified, {
+		level: 7,
+		random: createSeededRandom(4_242),
+		resolver: {
+			resolveReference: () => ({
+				modifiers: [{
+					generatorId: 'modifier',
+					entryId: 'scarred',
+					name: 'Scarred',
+					description: 'Old scars remain visible.',
+					provenance: [],
+				}],
+			}),
+		},
+	});
+	const { modifiers: plainModifiers, ...plainBase } = structuredClone(plain);
+	const { modifiers: modifiedModifiers, ...modifiedBase } = structuredClone(modified);
+	assert.deepEqual(plainModifiers, []);
+	assert.equal(modifiedModifiers[0].entryId, 'scarred');
+	assert.deepEqual(modifiedBase, plainBase);
 });
 
 test('random character generation creates localized unique talent arrays by level', () => {
@@ -479,4 +509,12 @@ test('random character generation uses localized content without changing identi
 
 function createCharacterFixture() {
 	return new Character('Test', 'dm');
+}
+
+function createSeededRandom(initialSeed) {
+	let seed = initialSeed;
+	return () => {
+		seed = (seed * 1_664_525 + 1_013_904_223) % 4_294_967_296;
+		return seed / 4_294_967_296;
+	};
 }

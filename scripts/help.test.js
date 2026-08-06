@@ -31,6 +31,7 @@ test('/help lists DM-only commands for a DM', () => {
 	const rendered = renderOverview(createInteraction('dm', [config.roles.dm]));
 	assert.match(rendered, /\*\*\/gen\*\*/);
 	assert.match(rendered, /\*\*\/gen-char\*\*/);
+	assert.match(rendered, /\*\*\/gen-monster\*\*/);
 	assert.doesNotMatch(rendered, /\*\*\/say\*\*/);
 });
 
@@ -81,7 +82,7 @@ test('/help command:gen lists every localized generator category', () => {
 	const interaction = createInteraction('dm', [config.roles.dm]);
 	for (const locale of ['en', 'fr']) {
 		const categories = generatorCatalog.listGenerators(locale);
-		assert.ok(categories.length > MAX_AUTOCOMPLETE_CHOICES);
+		assert.ok(categories.length >= MAX_AUTOCOMPLETE_CHOICES);
 		const rendered = renderDetail('gen', interaction, locale);
 		for (const category of categories) {
 			assert.ok(rendered.includes(`\`${category.id}\``), `${locale}: ${category.id}`);
@@ -140,8 +141,8 @@ test('/help command:get and command:set list both explicit entity field orders',
 	}
 	const english = renderDetail('set', createInteraction('regular'), 'en');
 	for (const format of [
-		'Character groups and their established order are unchanged',
-		'Creature groups use `identity`',
+		'Character groups retain their established order with `modifiers` appended',
+		'creature groups use `identity`',
 		'`Name:Description`',
 		'EntityKey, type, schema metadata',
 	]) {
@@ -156,7 +157,7 @@ test('/help command:get explains summary, detailed field, and autocomplete behav
 			'en',
 			[
 				'Without `field`, posts the public entity summary.',
-				'Character fields remain `name`, `level`, `status`',
+				'Character fields use `name`, `level`, `status`',
 				'Creature fields use the independent order `identity`',
 			],
 		],
@@ -164,7 +165,7 @@ test('/help command:get explains summary, detailed field, and autocomplete behav
 			'fr',
 			[
 				'Sans `field`, publie le résumé public de l’entité.',
-				'Les champs de personnage restent `name`, `level`, `status`',
+				'Les champs de personnage sont `name`, `level`, `status`',
 				'Les champs de créature suivent leur propre ordre',
 			],
 		],
@@ -240,7 +241,7 @@ test('/help command autocomplete filters commands by permission', async () => {
 		},
 		{
 			interaction: createInteraction('dm', [config.roles.dm]),
-			includes: ['gen', 'gen-char'],
+			includes: ['gen', 'gen-char', 'gen-monster'],
 			excludes: ['say'],
 		},
 		{
@@ -275,7 +276,7 @@ test('/help autocomplete falls back to every command without member role data', 
 	assert.ok(values.includes('say'));
 });
 
-test('autocomplete filters values beyond Discord\'s 25-choice display limit', async () => {
+test('autocomplete respects Discord\'s 25-choice limit and filters values', async () => {
 	const dm = createInteraction('dm', [config.roles.dm]);
 	const initialCategories = await autocompleteOption('gen', 'category', '', dm);
 	assert.equal(initialCategories.length, MAX_AUTOCOMPLETE_CHOICES);

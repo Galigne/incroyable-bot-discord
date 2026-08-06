@@ -1,4 +1,5 @@
 const generatorCatalog = require('./generatorCatalog');
+const generatorResolver = require('./generatorResolver');
 const { getStatProfile } = require('./statProfileCatalog');
 const { selectWeightedEntry } = require('./weightedSelector');
 const {
@@ -19,6 +20,7 @@ function populateRandomCharacter(character, options = {}) {
 	const random = options.random ?? Math.random;
 	const locale = options.locale ?? 'en';
 	const formatGold = options.formatGold ?? (gold => `${gold} gold`);
+	const resolver = options.resolver ?? generatorResolver;
 	const level = options.level ?? randomInteger(1, 10, random);
 	if (!Number.isInteger(level) || level < 1 || level > 10) {
 		throw generationError(
@@ -70,7 +72,7 @@ function populateRandomCharacter(character, options = {}) {
 		.map(entry => `${getField(entry, 'Name')} — ${getField(entry, 'Description')}`);
 
 	character.status.effects = random() < 0.25
-		? [getTextValue(pickOne('status-effect', locale, random))]
+		? [formatNamedEntry(pickOne('status-effect', locale, random))]
 		: [];
 
 	const armor = pickOne(
@@ -102,6 +104,12 @@ function populateRandomCharacter(character, options = {}) {
 		...inventoryItems.map(formatNamedEntry),
 		formatGold(gold),
 	];
+	character.modifiers = resolveBackgroundModifiers(
+		background.id,
+		locale,
+		random,
+		resolver,
+	);
 
 	return character;
 }
@@ -122,6 +130,19 @@ function resolveBackground(requestedBackground, locale, random) {
 		);
 	}
 	return background;
+}
+
+function resolveBackgroundModifiers(backgroundId, locale, random, resolver) {
+	const resolved = resolver.resolveReference(
+		{
+			generator: 'background',
+			entry: backgroundId,
+			select: 'fields',
+		},
+		locale,
+		{ path: 'root.character.background', random },
+	);
+	return resolved.modifiers.map(modifier => structuredClone(modifier));
 }
 
 function pickOne(categoryName, locale, random, predicate = () => true) {

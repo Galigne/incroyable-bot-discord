@@ -33,6 +33,22 @@ function createGeneratorResolver({ getGenerator = generatorCatalog.getGenerator 
 		return createCompletedResult(generator, entry, resolved);
 	}
 
+	function resolveReference(reference, locale = 'en', options = {}) {
+		validateOptions(locale, options);
+		const state = {
+			activeSelections: [],
+			locale,
+			maxDepth: options.maxDepth ?? DEFAULT_MAX_DEPTH,
+			random: options.random ?? Math.random,
+		};
+		return referenceResolver.resolveReference(
+			reference,
+			locale,
+			state,
+			options.path ?? 'root.reference',
+		);
+	}
+
 	function resolveSelection(generator, entry, selection, state, path) {
 		const selectionKey = `${generator.id}:${entry.id}`;
 		if (state.activeSelections.includes(selectionKey)) {
@@ -130,6 +146,7 @@ function createGeneratorResolver({ getGenerator = generatorCatalog.getGenerator 
 
 	return {
 		generate,
+		resolveReference,
 	};
 }
 
@@ -202,6 +219,12 @@ function validateOptions(locale, options) {
 	) {
 		throw new TypeError(`Generator maxDepth must be an integer from 1 to ${MAX_ALLOWED_DEPTH}.`);
 	}
+	if (
+		options.path !== undefined
+		&& (typeof options.path !== 'string' || !options.path.trim())
+	) {
+		throw new TypeError('Generator reference path must be a non-empty string.');
+	}
 }
 
 const defaultResolver = createGeneratorResolver();
@@ -209,4 +232,5 @@ const defaultResolver = createGeneratorResolver();
 module.exports = {
 	createGeneratorResolver,
 	generate: defaultResolver.generate,
+	resolveReference: defaultResolver.resolveReference,
 };

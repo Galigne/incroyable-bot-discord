@@ -17,10 +17,10 @@ bot.
 
 `documentation/NEW_GENERATOR_ARCHITECTURE_SPECIFICATION_PARTS.md` consolidates
 this roadmap into five approval-gated parts and is authoritative wherever the
-documents conflict. Revised Parts 1 through 3 are complete: generator schema v2,
+documents conflict. Revised Parts 1 through 4 are complete: generator schema v2,
 the current-data cutover, shared statistical profiles, structured resolution,
 descriptive modifiers, persistent creatures, and shared entity management now ship
-together.
+together with complete creature generation and `/gen-monster`.
 
 ---
 
@@ -201,13 +201,13 @@ Roles:
 | 4 | Legacy Parts 10–12 | Creature generation and `/gen-monster` |
 | 5 | Legacy Parts 13–20 | Historical migration and final verification |
 
-The legacy detail headers below remain as design references until their revised
-part is implemented. Revised Parts 1 through 3 are complete. Legacy Parts 6 through
-9 are superseded by the completed Revised Part 3 state recorded below; in
-particular, their proposed inheritance hierarchy and intermediate character-only
-stages are not implementation requirements. The consolidated five-part
-specification controls scope and precedence. Every revised part requires explicit
-approval before the next begins.
+The legacy detail headers below remain as historical design references until their
+revised part is implemented. Revised Parts 1 through 4 are complete. Legacy Parts 6
+through 9 are superseded by Revised Part 3, and Legacy Parts 10 through 12 are
+superseded by Revised Part 4. Their proposed inheritance hierarchy, intermediate
+states, and older creature metadata do not override the completed implementation.
+The consolidated five-part specification controls scope and precedence. Every
+revised part requires explicit approval before the next begins.
 
 ---
 
@@ -841,15 +841,16 @@ Modifiers are narrative additions only.
 ```json
 {
   "schemaVersion": 2,
-  "id": "creature-modifier",
+  "id": "modifier",
   "kind": "modifier",
   "visibility": "internal",
-  "name": "Creature modifiers",
-  "description": "Descriptive variations for generated creatures",
+  "name": "Descriptive modifiers",
+  "description": "Descriptive variations shared by generated characters and creatures",
   "appliesTo": [
-    "animal",
-    "monster",
-    "companion"
+    "background",
+    "creature-animal",
+    "creature-companion",
+    "creature-monster"
   ],
   "entrySchema": {
     "type": "fields",
@@ -896,7 +897,7 @@ and never interpreted mechanically.
 {
   "modifiers": [
     {
-      "generator": "creature-modifier",
+      "generator": "modifier",
       "chance": 0.25,
       "count": {
         "min": 1,
@@ -922,7 +923,7 @@ At minimum:
 
 ```js
 {
-  generatorId: 'creature-modifier',
+  generatorId: 'modifier',
   entryId: 'gigantic',
   name: 'Gigantic',
   description: 'The creature is much larger and physically stronger.',
@@ -963,8 +964,9 @@ mutated.
 Generic structured results contain compatible descriptive modifier records when
 requested by a generator or entry. Chance is evaluated once, inclusive counts are
 selected, weighted entries are unique within a request, and each record retains
-technical provenance. No creature code or mechanical modifier behavior was
-introduced.
+technical provenance. The current production `modifier` catalog is shared by
+background-based character generation and internal creature-detail catalogs; no
+mechanical modifier behavior is introduced.
 
 ---
 
@@ -973,12 +975,14 @@ introduced.
 ## 3.1 Persistent Models and Compatibility
 
 Persistent concrete types are exactly `character` and `creature`. Animal,
-companion, and monster remain later creature source categories. The implementation
+companion, and monster remain creature source categories. The implementation
 keeps independent `Character` and `Creature` models and shares only behavior that
 has the same semantics; no common base class or inheritance hierarchy is required.
 
-Character schema v2, its v1-to-v2 in-memory migration, serialized property order,
-save paths, history paths, rendering, editing, and authorization remain compatible.
+Character schema v2, its v1-to-v2 in-memory migration, existing serialized property
+order, save paths, history paths, rendering, editing, and authorization remain
+compatible. A shared descriptive `modifiers` list is appended to new saves and
+defaults to empty when absent, without rewriting existing save files.
 Character serialization has no required type discriminator. Creature schema v1
 stores immutable `type: "creature"` and EntityKey, creator, level, localized final
 identity and description, source/profile/provenance identifiers, final statistics,
@@ -1017,13 +1021,13 @@ The common command surface is:
 /undo entity-key:<key>
 ```
 
-`/add` defaults to `character`. `/gen-char` remains character-specific and
-`/gen-monster` remains absent until Revised Part 4. Management handlers delegate to
-the entity application service, while the concrete editors and field catalogs
-preserve type-specific behavior. Character presentation retains its established
-order. Creature presentation independently uses `identity`, `level`, `status`,
-`statistics`, `rules`, `traits`, `modifiers`, and `gear`. Resolved autocomplete
-offers only compatible fields.
+`/add` defaults to `character`. `/gen-char` remains character-specific. Revised
+Part 3 intentionally left `/gen-monster` to Revised Part 4, which now provides it.
+Management handlers delegate to the entity application service, while the concrete
+editors and field catalogs preserve type-specific behavior. Character presentation
+retains its established order. Creature presentation independently uses `identity`,
+`level`, `status`, `statistics`, `rules`, `traits`, `modifiers`, and `gear`.
+Resolved autocomplete offers only compatible fields.
 
 Anyone with normal bot access may view either type. The creator, configured DM, and
 actual server owner may mutate, undo, and delete it. Creature encumbrance defaults
@@ -1040,6 +1044,91 @@ order, and registered management handlers.
 
 The following Legacy Parts 6 through 9 are superseded historical design notes. They
 do not override the completed state above.
+
+---
+
+# Revised Part 4 — Creature Generation and `/gen-monster` (Complete)
+
+## 4.1 Sources and Generation Metadata
+
+The public generator-v2 `creature` catalog routes the stable `animal`, `companion`,
+and `monster` type entries to the internal `creature-animal`,
+`creature-companion`, and `creature-monster` detail catalogs, matching the existing
+background router architecture. Detail entries retain the current localized
+identities and descriptions and add strict `generation` metadata: a statistical
+profile, localized intrinsic traits with stable IDs, optional explicit natural
+armor or armor reference, explicit fixed RULE entry IDs and levels, optional
+descriptive status references, and arrays of ordinary equipment and inventory
+references. Entries have explicit stable IDs and weights and cannot contain fixed
+statistics, per-entry profile overrides, alternate budgets, challenge ratings, or
+resource formulas.
+
+Five reusable creature distributions ship alongside `character-balanced`:
+`creature-predator`, `creature-brute`, `creature-caster`,
+`creature-elemental`, and `creature-companion`. They contain only minimums,
+maximums, and allocation weights. Creature levels range from 1 through 10 and use
+the existing shared budget, nonlinear costs, weighted allocation, derived
+statistics, and HP/AR/AP/MD calculations.
+
+## 4.2 Explicit Rules, Descriptive Records, Armor, and Gear
+
+Creature Intelligence never grants RULE points or RULEs. Only an entry's
+`fixedRules` references create persisted RULE records, so a low-Intelligence
+creature may have an explicit RULE and a high-Intelligence creature has none unless
+one was authored. Generated status effects are localized descriptive records with
+stable selection provenance and enforce no bonuses, penalties, durations, or
+resource changes.
+
+The internal `modifier` generator applies through the completed generic modifier
+resolver to both background-based characters and creature detail generators. Its
+localized records and provenance are stored separately on either entity; selecting
+one cannot alter any mechanical or base field. The public structured
+`status-effect` catalog likewise supplies descriptive states to both character and
+creature generation, replacing the former creature-only duplicate.
+
+Explicit natural-armor percentages and armor references are mutually exclusive.
+Only natural armor or the referenced armor generator's technical `AR percentage`
+initializes AR through the shared resource formulas. Equipment and inventory use
+the existing fixed, random, nested, and weighted reference machinery. Descriptive
+prose never supplies mechanics. Generated gear never changes the Creature model's
+manual `{ current: 0, max: 0 }` encumbrance default.
+
+## 4.3 Atomic Generation and Command
+
+The public command is:
+
+```text
+/gen-monster creature-key:<new key> type:<monster|animal|companion> [level]
+```
+
+The type is required, level is optional from 1 through 10 and random when omitted,
+and permission follows the configured-DM-or-actual-server-owner generation policy.
+Its centralized help order follows `/gen` and `/gen-char`.
+
+The thin command adapter delegates to `creatureApplicationService`, which runs
+generation inside `creatureStore.createCreature` and the shared per-EntityKey
+critical section. Global character/creature collision checks, final schema
+validation, and exclusive atomic publication complete before the entity becomes
+visible. A generation, validation, collision, or save failure leaves no creature,
+history, key reservation, or temporary file.
+
+The persisted Creature contains its selected level, localized identity, source and
+profile IDs, complete technical provenance, final statistics and resources,
+intrinsic traits, explicit RULEs, descriptive status and modifier records, armor
+state, equipment, inventory, creator, and immutable key. Loading and rendering use
+only that final save and never rerun generation or localization.
+
+## 4.4 Verification
+
+Focused tests cover all three categories and five profiles, level selection,
+nonlinear budgets, deterministic English/French IDs, high- and low-Intelligence
+RULE policy, derived resources, natural and generated armor, fixed and weighted
+gear, descriptive status, modifier non-effects, manual encumbrance, command
+authorization and rendering, global collision behavior, atomic publication
+failure, queue cleanup, persisted provenance, and stability across reload/load.
+
+Legacy Parts 10 through 12 later in this document are superseded historical design
+notes. They do not override the completed state above.
 
 ---
 
@@ -1369,7 +1458,7 @@ Stop and wait for confirmation.
 
 ---
 
-# Part 10 — Creature Archetypes and Fixed RULEs
+# Part 10 — Creature Archetypes and Fixed RULEs (Superseded)
 
 ## 10.1 Objective
 
@@ -1423,7 +1512,7 @@ different from the wild animal.
   },
   "modifiers": [
     {
-      "generator": "creature-modifier",
+      "generator": "modifier",
       "chance": 0.25,
       "count": {
         "min": 1,
@@ -1559,7 +1648,7 @@ Stop and wait for confirmation.
 
 ---
 
-# Part 11 — Descriptive Creature Modifier Integration
+# Part 11 — Descriptive Creature Modifier Integration (Superseded)
 
 ## 11.1 Objective
 
@@ -1643,7 +1732,7 @@ Stop and wait for confirmation.
 
 ---
 
-# Part 12 — `/gen-monster` Integration
+# Part 12 — `/gen-monster` Integration (Superseded)
 
 ## 12.1 Objective
 

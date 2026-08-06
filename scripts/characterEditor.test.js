@@ -56,6 +56,7 @@ const EDITABLE_FIELDS = [
 	'race',
 	'background',
 	'personality',
+	'modifiers',
 ];
 
 after(() => {
@@ -127,6 +128,7 @@ test('name, status, and gear groups are prefilled and trim valid submissions', (
 		'gear.inventory': '',
 		'gear.encumbrance': '0:0',
 	});
+	assert.equal(getEditableFieldValue(character, 'modifiers'), '');
 
 	setEditableFieldValue(character, 'name', {
 		firstName: '  Ada  ',
@@ -144,6 +146,11 @@ test('name, status, and gear groups are prefilled and trim valid submissions', (
 		inventory: 'Potion',
 		encumbrance: ' 2 : 15 ',
 	});
+	setEditableFieldValue(
+		character,
+		'modifiers',
+		'- Scarred:Old wounds remain visible\n* Pale:Unnaturally pale coloring',
+	);
 
 	assert.equal(character.name.firstName, 'Ada');
 	assert.equal(character.name.lastName, 'Lovelace');
@@ -158,6 +165,10 @@ test('name, status, and gear groups are prefilled and trim valid submissions', (
 	assert.deepEqual(character.gear.equipment, ['Sword', 'Shield']);
 	assert.deepEqual(character.gear.inventory, ['Potion']);
 	assert.deepEqual(character.gear.encumbrance, { current: 2, max: 15 });
+	assert.deepEqual(character.modifiers, [
+		{ name: 'Scarred', description: 'Old wounds remain visible' },
+		{ name: 'Pale', description: 'Unnaturally pale coloring' },
+	]);
 	setEditableFieldValue(character, 'status', {
 		'resources.hp': '50:120',
 		'resources.ar': '5:30',

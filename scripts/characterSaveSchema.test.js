@@ -68,7 +68,9 @@ test('newly created characters persist the current schema version', async () => 
 		'rules',
 		'talents',
 		'gear',
+		'modifiers',
 	]);
+	assert.deepEqual(rawSave.modifiers, []);
 	assert.equal(Object.hasOwn(rawSave, 'firstName'), false);
 	assert.equal(Object.hasOwn(rawSave, 'resources'), false);
 });
@@ -113,6 +115,7 @@ test('version-1 saves migrate completely in memory without being rewritten', asy
 		inventory: ['85 gold pieces'],
 		encumbrance: { current: 7, max: 10 },
 	});
+	assert.deepEqual(character.modifiers, []);
 	assert.equal(await readSaveText(characterKey), originalSave);
 });
 
@@ -176,7 +179,14 @@ test('/gen-char consumes current generator fields and persists version 2', async
 	assert.ok(rawSave.background.goals);
 	assert.ok(rawSave.statistics.constitution);
 	assert.ok(rawSave.status.hp.max);
-	assert.ok(Array.isArray(rawSave.status.effects));
+	const statusEntry = generatorCatalog.getGenerator('status-effect', 'en').entries[0];
+	assert.deepEqual(rawSave.status.effects, [
+		`${statusEntry.fields.Name} — ${statusEntry.fields.Description}`,
+	]);
+	assert.deepEqual(rawSave.modifiers.map(modifier => [
+		modifier.generatorId,
+		modifier.entryId,
+	]), [['modifier', 'scarred']]);
 	assert.ok(rawSave.gear.equipment.length >= 2);
 	assert.equal(rawSave.gear.inventory.length, 4);
 	assert.deepEqual(rawSave.gear.encumbrance, { current: 0, max: 0 });

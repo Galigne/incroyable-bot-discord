@@ -1,6 +1,6 @@
 # Incredible Discord Bot
 
-A Discord bot with moderation, utility, local audio, and RPG character-management commands.
+A Discord bot with moderation, utility, local audio, and RPG entity-management commands.
 
 ## Requirements
 
@@ -30,10 +30,10 @@ All bot-owned user-facing text is centralized in `locales/en.json` and
 receives localized French descriptions and choice labels.
 French game terminology follows `documentation/JDR_RANDOM_RULES_FR.md`; for example,
 the localized interface uses PV, PR, PA, DD, LOI, and dons raciaux.
-Character field identities, aliases, storage paths, and editing/viewing capabilities
-are defined once in `services/characterFieldCatalog.js`. Localized labels and
-resource abbreviations are resolved through `util/characterDisplay.js`. Resource
-abbreviations are unique within each language:
+Character and creature field identities, aliases, storage paths, and editing/viewing
+capabilities are defined by their service catalogs and combined only for shared
+entity commands. Localized labels and resource abbreviations are resolved through
+the display adapters. Resource abbreviations are unique within each language:
 HP/AR/AP/MD in English and PV/PR/PA/DD in French.
 
 Generator schema v2 catalogs follow the same server locale. English reference
@@ -46,8 +46,13 @@ entry IDs, structured field keys, enum values, and routing values remain English
 Public template generators can compose nested random or fixed references, including
 weighted choices between internal sources. Completed results retain technical
 provenance, and configured narrative modifiers are displayed separately without
-changing generated mechanics or save data.
-Content already saved in a character sheet is never translated retroactively.
+changing base generated mechanics.
+The public `creature` catalog routes `animal`, `companion`, and `monster` types to
+their internal `creature-*` sources. Those sources use the same references and
+profiles to persist a complete final creature, including provenance, without
+rerunning generation on load or display. Status effects and descriptive modifiers
+come from catalogs shared with character generation.
+Content already saved in an entity is never translated retroactively.
 
 Set the required runtime language in `config.json`. The complete configuration is:
 
@@ -94,24 +99,26 @@ Never commit `.env` or a Discord token. Reset any token that has previously been
 - `/rules`
 - `/gen category:<category>` — generate a random prompt (configured DM role or server owner)
 - `/gen-char character-key:<new key> [level] [background]` — generate and save a complete character (configured DM role or server owner)
+- `/gen-monster creature-key:<new key> type:<monster|animal|companion> [level]` — generate and atomically save a complete creature (configured DM role or server owner)
 - `/roll expression:<dice expression>` — roll expressions such as `2d6+3`
-- `/add character-key:<new key>` — create a blank character sheet with a stable key
-- `/get character-key:<key> [field]` — display the summary or one complete field
-- `/set character-key:<key> field:<field>` — set one field or grouped section in a prefilled form
-- `/heal character-key:<key> resource:<hp|armor|both> percentage:<0-100>` — restore one or both resources
-- `/damage character-key:<key> damage-amount:<number> [piercing]` — apply damage to AR, then HP
-- `/end-turn character-key:<key>` — restore AP and MD to their maximum values
-- `/delete character-key:<key>` — permanently delete a character and all backups after exact-key confirmation
-- `/undo character-key:<key>` — consume and restore the newest retained pre-change state
+- `/add entity-key:<new key> [type:<character|creature>]` — create a blank owned entity; character is the default
+- `/get entity-key:<key> [field]` — display the summary or one type-compatible field
+- `/set entity-key:<key> field:<field>` — set one grouped field in a prefilled form
+- `/heal entity-key:<key> resource:<hp|armor|both> percentage:<0-100>` — restore one or both resources
+- `/damage entity-key:<key> damage-amount:<number> [piercing]` — apply damage to AR, then HP
+- `/end-turn entity-key:<key>` — restore AP and MD to their maximum values
+- `/delete entity-key:<key>` — permanently delete an entity and all backups after exact-key confirmation
+- `/undo entity-key:<key>` — consume and restore the newest retained pre-change state
 
 Discord provides native validation and choices for constrained options.
-Autocomplete suggests commands the current user may access, existing CharacterKeys,
-settable fields, retrievable fields, generator categories, common dice expressions,
-levels, and common purge amounts. `/undo` autocomplete includes authorized active
-characters with usable history. The private form opens immediately after
-`/set` is submitted. Its editable choices are `name`, `level`, `race`,
-`background`, `personality`, `statistics`, `rules`, `talents`, `status-effects`,
-`equipment`, `inventory`, `encumbrance`, `hp`, `ar`, `ap`, and `md`.
+Autocomplete suggests commands the current user may access, existing EntityKeys,
+type-compatible fields, generator categories, common dice expressions, levels, and
+common purge amounts. `/undo` autocomplete includes authorized active entities with
+usable history. The private form opens immediately after `/set` is submitted.
+Character fields are `name`, `level`, `status`, `statistics`, `rules`, `talents`,
+`gear`, `race`, `background`, `personality`, and `modifiers`. Creature fields independently use
+`identity`, `level`, `status`, `statistics`, `rules`, `traits`, `modifiers`, and
+`gear`.
 
 Name uses separate optional first-name and last-name inputs; emptying either input
 clears that component. Race uses separate inputs for its name, physical description,
@@ -139,6 +146,10 @@ names and descriptions remain combined in each list entry. RULEs use
 positive whole number, and only the first two colons are separators, so descriptions
 may contain additional colons.
 
+Descriptive modifiers are shared by characters and creatures and use one
+`Name:Description` record per line. Existing character saves without a `modifiers`
+property load it as an empty list; no save-file migration or rewrite is performed.
+
 Discord displays at most 25 autocomplete suggestions at once, so type part of a
 name or value to filter longer lists. `/help command:gen` lists every localized
 generator category, and `/help command:set` lists every editable field grouped by
@@ -151,14 +162,15 @@ multiple groups, parentheses, and other arithmetic are not supported. Exact
 `1d2` and `1d20` rolls return their corresponding GIF only; all other expressions
 return the textual roll breakdown.
 
-Character creators can edit, delete, heal, damage, end turns, and undo retained
-changes for their own sheets. When configured, the DM role lets its members perform
-those actions on every character and use `/gen` and `/gen-char`; without that role,
-those additional DM permissions are server-owner-only. When configured, the
+Entity creators can edit, delete, heal, damage, end turns, and undo retained changes
+for their own characters or creatures. When configured, the DM role lets its
+members perform those actions on every entity and use `/gen`, `/gen-char`, and
+`/gen-monster`; without that role, those additional DM permissions are
+server-owner-only. When configured, the
 moderator role lets its members use `/say`, `/purge`, and `/reload`; without it,
 those moderation commands are server-owner-only. The actual Discord server owner,
 identified by Discord rather than configuration, may use every command and manage
-every character.
+every entity.
 
 `/reload` acknowledges privately before disconnecting, then reloads and validates
 `config.json` and both localization catalogs, clears localized generator caches,
@@ -169,29 +181,31 @@ every successful and failed stage. Invalid configuration or localization
 replacements do not replace the previous valid state. Source-code changes—including startup,
 event-routing, mechanics, model, metadata, and handler changes—still require
 manually restarting `node index.js`.
-The identifier supplied to `/add` remains the stable command/save key and cannot
-be edited. The sheet stores `firstName` and `lastName` separately for display.
+The identifier supplied to `/add`, `/gen-char`, or `/gen-monster` remains the stable
+command/save key and cannot be edited. Character sheets store `firstName` and
+`lastName` separately for display.
 Keys may contain internal periods, hyphens, and underscores, such as `D.Robert`.
 
-## Character history and undo
+## Entity history and undo
 
-Successful `/set`, `/damage`, `/heal`, and `/end-turn` operations push
-the character’s complete pre-change save into
-`save/.history/<CharacterKey>.json`. When
+Successful `/set`, `/damage`, `/heal`, and `/end-turn` operations push the entity's
+complete pre-change save into its type-specific history. Character history uses
+`save/.history/<EntityKey>.json`; creature history uses
+`save/.history/creatures/<EntityKey>.json`. When
 `INCREDIBLE_BOT_SAVE_DIRECTORY` is set, the `.history` directory is created under
 that test save directory instead. History documents contain an oldest-to-newest
 `entries` stack; each entry records its ISO timestamp, actor Discord ID, action,
-and complete schema-versioned character snapshot. Because history is stored in a
-subdirectory, it never appears in normal character listings or autocomplete.
+and complete schema-versioned entity snapshot. Because history is stored in
+subdirectories, it never appears in normal entity listings or autocomplete.
 
 Each push keeps the newest configured number of entries and discards older excess
-entries. A lower limit is applied the next time that character’s history changes.
+entries. A lower limit is applied the next time that entity's history changes.
 `/undo` validates and consumes the newest entry, then restores it atomically as the
-active character. Repeated calls continue backward until the bounded stack is
-empty. Undo does not push the displaced state, so it cannot toggle between two
+same concrete entity type. Repeated calls continue backward until the bounded stack
+is empty. Undo does not push the displaced state, so it cannot toggle between two
 states, and redo is not supported.
 
-Character and history writes share the existing per-CharacterKey queue. Both
+Entity and history writes share the existing per-EntityKey queue. Both
 resulting JSON states are serialized before the first file operation. If the second
 file operation fails, the first is rolled back; an unrecoverable rollback failure
 is logged server-side while Discord receives only a localized, filesystem-neutral
@@ -199,7 +213,7 @@ error. Rejected, unauthorized, invalid, and failed mutations do not intentionall
 create backups.
 
 `/delete` opens a private confirmation form and requires the exact, case-sensitive
-CharacterKey. A successful confirmation permanently removes both the active save
+EntityKey. A successful confirmation permanently removes both the active save
 and the entire retained history document in the same per-key critical section.
 Deletion creates no backup, cannot be reversed with `/undo`, and has no trash or
 recovery location. If the two-file deletion cannot complete, the first file
@@ -209,14 +223,13 @@ Example workflows:
 
 ```text
 /gen-char character-key:D.Robert level:5 background:adventurer
-/set character-key:D.Robert field:statistics
-/set character-key:D.Robert field:rules
-/get character-key:D.Robert
-/get character-key:D.Robert field:personality
-/damage character-key:D.Robert damage-amount:25 piercing:false
-/heal character-key:D.Robert resource:both percentage:50
-/end-turn character-key:D.Robert
-/undo character-key:D.Robert
+/gen-monster creature-key:Ash.Wolf type:monster level:5
+/set entity-key:D.Robert field:statistics
+/get entity-key:Ash.Wolf field:traits
+/damage entity-key:Ash.Wolf damage-amount:25 piercing:false
+/heal entity-key:Ash.Wolf resource:both percentage:50
+/end-turn entity-key:Ash.Wolf
+/undo entity-key:Ash.Wolf
 ```
 
 Random characters use the rulebook's stat budget and nonlinear stat costs. Their
@@ -228,8 +241,18 @@ Generated talents are stored as unique localized list entries: levels 1–2 rece
 one talent, levels 3–5 receive two, levels 6–8 receive three, and levels 9–10
 receive four.
 If the optional level is omitted, a level from 1 to 10 is rolled. The optional
-background selects one of the configured NPC categories and is also chosen randomly
-when omitted. It generates the character's appearance, backstory, and goals.
+background selects one of the configured background categories and is also chosen
+randomly when omitted. It generates the character's appearance, backstory, and goals.
+
+Random creatures select an `animal`, `companion`, or `monster` route from the
+public `creature` catalog, then generate from its internal `creature-animal`,
+`creature-companion`, or `creature-monster` source. They share the character level budget, nonlinear statistic allocation,
+derived statistics, and resource formulas while using creature-specific profile
+distributions. Only explicit source references grant creature RULEs; Intelligence
+and descriptive modifiers never do. Natural armor or technical armor metadata may
+initialize AR, status effects and modifiers remain descriptive, and generated gear
+does not alter manual encumbrance. The complete localized result and stable
+provenance are saved once and never regenerated during later loading or display.
 
 AP follows `0 ≤ current ≤ max ≤ 10` and uses 🌟 for available points and ⭐ for
 spent points. HP, AR, and MD use ten-icon percentage bars.
@@ -250,7 +273,7 @@ The full TTRPG rules are available in
 - `commands/character/`: shared character-command autocomplete and modal
   presentation helpers
 - `services/`: Discord-independent application workflows, persistence, parsing,
-  validation, mechanics, generation, and bounded character-history transactions
+  validation, mechanics, generation, and bounded entity-history transactions
 - `models/`: Discord-independent domain models
 - `util/`: Discord response/rendering adapters plus shared localization,
   authorization, autocomplete, and command-loading helpers
@@ -262,12 +285,12 @@ The full TTRPG rules are available in
 
 Run `npm test` to run ESLint, focused service/mechanics/dice/help/registry tests,
 architectural boundary checks, slash-command schema and autocomplete checks,
-permissions, localization, the current character-save schema, required media, and
-voice dependencies.
+permissions, localization, character and creature save/generation invariants,
+required media, and voice dependencies.
 
 Every generator v2 entry is an object with a stable technical ID, an optional
 positive weight, and localized text, one atomic structured field group, or a
 localized template with validated references. The resolver supports weighted
 sources, deterministic provenance, and strictly descriptive modifiers. Shared
-non-localized statistical profiles drive character stat allocation. See
+non-localized statistical profiles drive character and creature stat allocation. See
 [`data/generators/README.md`](data/generators/README.md) for the complete format.
