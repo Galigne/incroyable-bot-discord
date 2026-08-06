@@ -1,16 +1,11 @@
 # Generator schema v2
 
-Production generator catalogs are stored by locale under `en/` and `fr/`.
-English and French must contain the same relative `.json` paths. The catalog
-loads and validates both locales as one data set; a missing or incompatible
-counterpart rejects the catalog instead of falling back to English.
+Production catalogs live under matching `en/` and `fr/` paths. Discovery is
+recursive. The catalog loads both locale trees as one candidate and rejects a
+missing file, duplicate ID, invalid relationship, or structural mismatch instead
+of falling back to English.
 
-The current flat directory layout is intentional. Discovery is recursive, so
-later architecture parts may group files without changing the catalog API.
-
-## Generator envelope
-
-Every generator uses schema version 2:
+## Common envelope and visibility
 
 ```json
 {
@@ -22,63 +17,23 @@ Every generator uses schema version 2:
   "description": "Ancestries and cultures",
   "entrySchema": {
     "type": "fields",
-    "required": [
-      "Name",
-      "Description",
-      "Skill Bonus",
-      "Physical Ability"
-    ]
+    "required": ["Name", "Description"]
   },
   "entries": []
 }
 ```
 
-- `schemaVersion` is always `2`.
-- `id` is a stable English kebab-case technical ID and is not derived at
-  runtime from a filename or display name.
-- `kind` is currently `category` or `component`.
-- `visibility` is `public` or `internal`.
-- `name`, `description`, and player-facing entry content are localized.
-- `entrySchema` declares one uniform entry payload for the generator.
+- IDs are stable English kebab-case technical values.
+- `kind` is `category`, `component`, `template`, or `modifier`.
+- `visibility` is `public` or `internal`. Only public non-modifier roots appear in
+  `/gen`, autocomplete, and centralized help. References may use internal data.
+- `name`, `description`, templates, text values, and player-facing fields are
+  localized.
+- Entries have a stable `id`, an optional positive finite `weight` (default `1`),
+  and exactly one payload declared by `entrySchema`.
 
-Public generators are exposed by `/gen`, its autocomplete, and its centralized
-help. Internal components remain available to application workflows but cannot
-be generated directly through `/gen`. The routed `background-*` detail
-generators are internal; the broad `background` generator remains public.
-
-## Entries
-
-Every entry is an object with a stable technical `id` and an optional positive
-finite `weight`. An omitted weight defaults to `1`.
-
-Text entries use an entry schema of `{ "type": "text" }`:
-
-```json
-{
-  "id": "forest-at-dusk",
-  "weight": 3,
-  "value": "A forest path disappears as night falls."
-}
-```
-
-Structured entries declare all required technical field names. Their fields
-are selected atomically:
-
-```json
-{
-  "id": "human",
-  "weight": 5,
-  "fields": {
-    "Name": "Human",
-    "Description": "Adaptable communities with fast-changing traditions.",
-    "Skill Bonus": "+1 to History",
-    "Physical Ability": "Relentless Endurance"
-  }
-}
-```
-
-When a structured field stores a routing value or enum rather than localized
-prose, list it in `entrySchema.technical`:
+Text entries use `{ "type": "text" }` and a `value`. Field entries declare 1 to
+25 required fields and store them atomically:
 
 ```json
 {
@@ -88,37 +43,137 @@ prose, list it in `entrySchema.technical`:
 }
 ```
 
-Technical field values must be identical in English and French. All generator
-and entry IDs, kinds, visibility values, schemas, entry order, payload shapes,
-and weights must also match. Only localized display text may differ.
+Technical fields hold routing, enum, numeric, or boolean values and must be
+identical across locales. Equipment generator data never stores encumbrance;
+character encumbrance remains manually managed.
 
-Generator equipment data never stores numeric encumbrance. Character
-encumbrance is a manually managed saved resource and generation leaves it
-unchanged.
+## Templates and references
 
-## Statistical profiles
+A template generator uses `kind: "template"` and
+`entrySchema: { "type": "template" }`. Every named marker must have exactly one
+reference definition, and every reference must be used by the localized template.
+Marker names describe their sentence role and remain identical across locales.
 
-`stat-profile.json` contains non-localized statistical profiles. Each profile
-defines a minimum, maximum, and allocation weight for all seven base
-statistics. Profiles contain no localized text, formulas, RULE assignment,
-traits, gear, entity type, or encumbrance behavior.
+```json
+{
+  "id": "recover-item-before-rival",
+  "weight": 2,
+  "template": "Recover {{item}} from {{site}} before {{rival}} takes it.",
+  "references": {
+    "item": {
+      "generator": "inventory",
+      "select": "fields.Name"
+    },
+    "site": {
+      "generator": {
+        "oneOf": [
+          { "id": "dungeon", "weight": 3 },
+          { "id": "building", "weight": 2 },
+          { "id": "settlement", "weight": 1 }
+        ]
+      },
+      "select": "display"
+    },
+    "rival": {
+      "generator": "background",
+      "entry": "criminal",
+      "select": "fields.Name"
+    }
+  }
+}
+```
 
-`character-balanced` preserves the existing character distribution with
-minimum `4`, maximum `20`, and weight `1` for every base statistic.
+Omitting `entry` selects a weighted random entry. A fixed `entry` consumes no
+entry-selection randomness and is allowed only with one concrete generator.
+Supported selectors are:
 
-## Runtime services
+- `value` for text entries;
+- `fields` for a copy of the complete structured group;
+- `fields.<technical field name>` for one structured value;
+- `display` for the canonical human-readable form.
 
-`services/generatorCatalog.js` provides:
+`display` returns a text value or resolved nested template directly. For field
+entries it uses `Name`, then the first declared non-technical field, then the first
+declared field. When a complete `fields` object is inserted into template prose,
+its localized values are joined in declared order with an em dash.
 
-- `getGenerator(id, locale)` for public or internal workflow access;
-- `listGenerators(locale, { visibility })`, defaulting to public generators;
-- `generate(id, locale, random)` for public `/gen` selection;
-- `clearGeneratorCache()` and `reloadGeneratorCatalog()`.
+Templates may reference templates. The runtime detects repeated active
+generator/entry pairs as cycles and defaults to at most eight active selections
+(callers may choose a validated bound up to 32). Failures use stable service error
+codes.
 
-`services/statProfileCatalog.js` provides profile lookup, listing, validation,
-cache clearing, and reload. `/reload` validates and replaces both catalogs.
-Weighted selection is shared through `services/weightedSelector.js` and accepts
-an injected random function for deterministic tests.
+## Descriptive modifiers
+
+Modifier generators are always internal and declare compatible generator IDs:
+
+```json
+{
+  "schemaVersion": 2,
+  "id": "creature-modifier",
+  "kind": "modifier",
+  "visibility": "internal",
+  "name": "Creature modifiers",
+  "description": "Descriptive variations",
+  "appliesTo": ["animal", "monster", "companion"],
+  "entrySchema": {
+    "type": "fields",
+    "required": ["Name", "Description"]
+  },
+  "entries": [
+    {
+      "id": "gigantic",
+      "weight": 1,
+      "fields": {
+        "Name": "Gigantic",
+        "Description": "The creature is extraordinarily large."
+      }
+    }
+  ]
+}
+```
+
+A non-modifier generator or entry may request them:
+
+```json
+{
+  "modifiers": [
+    {
+      "generator": "creature-modifier",
+      "chance": 0.25,
+      "count": { "min": 1, "max": 1 }
+    }
+  ]
+}
+```
+
+Chance is evaluated once per request. The inclusive count is selected next, then
+compatible entries are selected by weight without replacement. Each result is a
+separate record containing stable generator/entry IDs, localized name and
+description, and technical provenance. Modifier fields are display-only. The
+schema rejects generic mechanics/effects payloads and fields for statistics,
+resources, armor, RULEs, traits, status effects, gear, entity type, persistence,
+or executable behavior.
+
+## Results, parity, and services
+
+`services/generatorResolver.generate(id, locale, { random, maxDepth })` accepts
+only public roots. It returns root generator ID/name, root entry ID, output type,
+localized `value`, `fields`, or `templateOutput`, base/reference provenance, and
+separate modifier records. Base provenance plus each modifier record's provenance
+is the complete record of entry choices. Provenance contains technical IDs and
+paths, never localized strings. Resolution never creates or saves an entity.
+
+English and French must match in relative paths, schemas, generator and entry IDs,
+kinds, visibility, entry order, weights, technical field values, markers,
+references, selectors, weighted source order/weights, modifier compatibility,
+requests, chances, and counts. Equivalent injected randomness therefore selects
+the same conceptual IDs in both locales. Only player-facing prose changes, and
+templates should be rewritten naturally for each language.
+
+`services/generatorCatalog.js` owns discovery, validation, stable lookup, public
+listing, cache replacement, and reload. `generatorResolver`, `referenceResolver`,
+`modifierResolver`, and `weightedSelector` own resolution. Statistical profiles in
+`stat-profile.json` remain non-localized and separate from modifier compatibility.
 
 The previous generator format, display-name-derived IDs, locale fallback, API
 overloads, and runtime format detection are not supported.

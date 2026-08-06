@@ -7,6 +7,7 @@ const {
 	AUTOCOMPLETE_PROVIDERS,
 } = require('../commands/autocompleteProviders');
 const generatorCatalog = require('../services/generatorCatalog');
+const generatorResolver = require('../services/generatorResolver');
 const {
 	validateGeneratorDefinition,
 	validateGeneratorPair,
@@ -37,7 +38,7 @@ test('production generator v2 data uses stable IDs, strict parity, and visibilit
 		&& generator.id.startsWith('background-')
 	)));
 	assert.equal(
-		generatorCatalog.generate(internal[0].id, 'en', () => 0),
+		generatorResolver.generate(internal[0].id, 'en', { random: () => 0 }),
 		null,
 	);
 	for (const generator of all) {
@@ -53,15 +54,20 @@ test('production generator v2 data uses stable IDs, strict parity, and visibilit
 		)));
 	}
 	assert.throws(
-		() => generatorCatalog.generate('race', () => 0),
+		() => generatorResolver.generate('race', () => 0),
 		/locale must be provided/,
 	);
+	assert.throws(
+		() => generatorResolver.generate('race', 'en', () => 0),
+		/options must be an object/,
+	);
+	assert.equal(generatorCatalog.generate, undefined);
 	assert.equal(generatorCatalog.getCategory, undefined);
 	assert.equal(generatorCatalog.listCategories, undefined);
 	for (const randomValue of [0, 0.1, 0.5, 0.999999]) {
 		assert.equal(
-			generatorCatalog.generate('race', 'en', () => randomValue).entry.id,
-			generatorCatalog.generate('race', 'fr', () => randomValue).entry.id,
+			generatorResolver.generate('race', 'en', { random: () => randomValue }).entryId,
+			generatorResolver.generate('race', 'fr', { random: () => randomValue }).entryId,
 		);
 	}
 });

@@ -49,20 +49,47 @@ function createGeneratorResponse(result, requestedCategory, locale = 'en') {
 
 function createGeneratedEmbed(result, locale = 'en') {
 	const embed = new EmbedBuilder()
-		.setTitle(t(locale, 'rpg.gen.title', { category: result.category.name }))
+		.setTitle(t(locale, 'rpg.gen.title', { category: result.generatorName }))
 		.setColor('#FFD700');
-	if (result.entry.value !== undefined) {
-		embed.setDescription(result.entry.value);
-	}
-	else {
+	if (result.outputType === 'fields') {
 		embed.addFields(
-			Object.entries(result.entry.fields).map(([name, value]) => ({
+			Object.entries(result.fields).map(([name, value]) => ({
 				name: getGeneratorFieldLabel(name, locale),
 				value: String(value),
 			})),
 		);
 	}
+	else {
+		embed.setDescription(
+			result.outputType === 'template' ? result.templateOutput : result.value,
+		);
+	}
+	addModifiers(embed, result, locale);
 	return embed;
+}
+
+function addModifiers(embed, result, locale) {
+	if (!result.modifiers?.length) {
+		return;
+	}
+	const title = t(locale, 'rpg.gen.modifiers');
+	const value = truncate(result.modifiers.map(modifier => (
+		`**${modifier.name}** — ${modifier.description}`
+	)).join('\n'), 1_024);
+	const fieldCount = result.outputType === 'fields'
+		? Object.keys(result.fields).length
+		: 0;
+	if (fieldCount < 25) {
+		embed.addFields({ name: title, value });
+		return;
+	}
+	embed.setDescription(`**${title}**\n${value}`);
+}
+
+function truncate(value, maximumLength) {
+	return value.length <= maximumLength
+		? value
+		: `${value.slice(0, maximumLength - 1).trimEnd()}…`;
 }
 
 function getGeneratorFieldLabel(field, locale) {

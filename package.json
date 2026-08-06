@@ -17,7 +17,7 @@
     "test:deletion": "node --test scripts/characterDeletion.test.js",
     "test:editor": "node --test scripts/characterEditor.test.js",
     "test:embeds": "node --test scripts/embedFooters.test.js",
-    "test:generators": "node --test scripts/generatorCatalog.test.js",
+    "test:generators": "node --test scripts/generatorCatalog.test.js scripts/generatorResolver.test.js",
     "test:help": "node --test scripts/help.test.js",
     "test:history": "node --test scripts/characterHistory.test.js",
     "test:mechanics": "node --test scripts/mechanics.test.js",

@@ -142,7 +142,8 @@
       "categoryOption": "Generator category",
       "unknownCategory": "Unknown generator category: **{{category}}**. Use `/help command:gen` for command details.",
       "title": "Generated {{category}}",
-      "behavior": "Selects one weighted random entry from the chosen localized public generator. Public schema-v2 generators become available after /reload or a bot restart; internal workflow components remain hidden. The complete localized public list appears above; type part of a generator name or ID to filter autocomplete."
+      "modifiers": "Modifiers",
+      "behavior": "Resolves one weighted random result from the chosen localized public generator, including nested templates and descriptive modifiers when configured. References may use internal generators without exposing them as root choices. Public schema-v2 generators become available after /reload or a bot restart; the complete localized public list appears above."
     },
     "genChar": {
       "description": "Generate a random character (configured DM role or server owner)",

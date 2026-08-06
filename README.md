@@ -43,6 +43,10 @@ is missing or structurally incompatible. Public generators appear in `/gen`,
 autocomplete, and help, while internal components remain workflow-only.
 Autocomplete labels and generated text are localized, while stable generator and
 entry IDs, structured field keys, enum values, and routing values remain English.
+Public template generators can compose nested random or fixed references, including
+weighted choices between internal sources. Completed results retain technical
+provenance, and configured narrative modifiers are displayed separately without
+changing generated mechanics or save data.
 Content already saved in a character sheet is never translated retroactively.
 
 Set the required runtime language in `config.json`. The complete configuration is:
@@ -262,6 +266,8 @@ permissions, localization, the current character-save schema, required media, an
 voice dependencies.
 
 Every generator v2 entry is an object with a stable technical ID, an optional
-positive weight, and either localized text or one atomic structured field group.
-Shared non-localized statistical profiles drive character stat allocation. See
+positive weight, and localized text, one atomic structured field group, or a
+localized template with validated references. The resolver supports weighted
+sources, deterministic provenance, and strictly descriptive modifiers. Shared
+non-localized statistical profiles drive character stat allocation. See
 [`data/generators/README.md`](data/generators/README.md) for the complete format.

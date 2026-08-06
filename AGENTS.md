@@ -99,6 +99,13 @@ saves.
   entry schemas, stable IDs, payloads, weights, and English/French parity.
 - `services/generatorCatalog.js`: recursively loads the complete generator-v2
   locale pair and exposes stable-ID lookup plus public visibility filtering.
+- `services/generatorResolver.js`: resolves public roots into localized structured
+  results, coordinates nested references and descriptive modifiers, and preserves
+  stable technical provenance.
+- `services/referenceResolver.js`: resolves random and fixed entries, selectors,
+  weighted generator sources, cycles, and bounded nesting.
+- `services/modifierResolver.js`: selects compatible descriptive modifiers by
+  chance, inclusive count, and weight without mutating the base result.
 - `services/statProfileCatalog.js`: loads and validates non-localized statistical
   profiles used by character and later creature generation.
 - `services/weightedSelector.js`: shared injectable weighted selection for
@@ -520,10 +527,12 @@ Each generator file requires:
 }
 ```
 
-Supported Part 1 entry forms:
+Supported entry forms:
 
 - `{ "id": "stable-entry", "value": "...", "weight": 2 }`;
-- `{ "id": "stable-entry", "fields": { "Name": "...", "Description": "..." }, "weight": 2 }`.
+- `{ "id": "stable-entry", "fields": { "Name": "...", "Description": "..." }, "weight": 2 }`;
+- template entries with localized `template` text and a matching `references`
+  object when `kind` and `entrySchema.type` are both `template`.
 
 Weights are positive numbers and default to `1`. Structured entries may contain 1
 to 25 Discord-safe fields declared by `entrySchema.required`; technical routing or
@@ -534,6 +543,31 @@ entry content are localized. There is no parser, runtime detection, API overload
 or compatibility path for the previous generator format. `/reload` validates and
 replaces the generator and statistical-profile caches; a process restart also
 loads the current data.
+
+Template references support random or fixed stable entry selection, `value`,
+`fields`, `fields.<technical name>`, and `display` selectors, nested templates,
+and weighted `generator.oneOf` sources. Fixed references never consume randomness
+for entry selection. `display` returns text/template output directly and uses
+`Name`, or the first non-technical declared field, for structured entries. A
+reference may use an internal generator even though only public roots appear in
+`/gen`, autocomplete, and help. Resolution is capped at eight nested selections by
+default and reports stable errors for cycles and excessive depth.
+
+Completed results contain the localized root generator name, stable root generator
+and entry IDs, output type and localized output, base/reference provenance, and a
+separate `modifiers` array. Provenance uses only stable technical IDs and selection
+paths. Every modifier record contains its own selection provenance, so the base
+provenance plus modifier-record provenance is the complete choice history.
+Equivalent deterministic random input must select the same IDs in English and
+French.
+
+Modifier generators use `kind: "modifier"`, `visibility: "internal"`, a technical
+`appliesTo` generator-ID list, and structured entries that include localized `Name`
+and `Description` fields. Generator-level or entry-level `modifiers` requests define
+one chance and an inclusive count range. Selection is weighted and unique within
+each request. Modifiers are narrative records only: their schema and resolver must
+never change or define statistics, resources, armor, RULEs, traits, status effects,
+gear, entity type, persistence, or executable behavior.
 
 Random character generation depends on exact stable generator IDs and structured field
 labels. Before renaming generator fields, inspect `services/randomCharacterGenerator.js`.

@@ -1,7 +1,9 @@
 const fs = require('node:fs');
 const path = require('node:path');
-const { validateGeneratorPair } = require('./generatorSchema');
-const { selectWeightedEntry } = require('./weightedSelector');
+const {
+	validateGeneratorPair,
+	validateGeneratorRelationships,
+} = require('./generatorSchema');
 
 const generatorsDirectory = path.join(__dirname, '..', 'data', 'generators');
 const DEFAULT_LOCALE = 'en';
@@ -28,20 +30,6 @@ function listGenerators(locale = DEFAULT_LOCALE, options = {}) {
 			visibility === 'all' || generator.visibility === visibility
 		))
 		.sort((left, right) => left.name.localeCompare(right.name, locale));
-}
-
-function generate(id, locale = DEFAULT_LOCALE, random = Math.random) {
-	if (typeof locale !== 'string') {
-		throw new TypeError('Generator locale must be provided before the random function.');
-	}
-	const generator = getGenerator(id, locale);
-	if (!generator || generator.visibility !== 'public') {
-		return null;
-	}
-	return {
-		category: generator,
-		entry: selectWeightedEntry(generator.entries, random),
-	};
 }
 
 function clearGeneratorCache() {
@@ -109,6 +97,8 @@ function readGeneratorCatalog(rootDirectory) {
 		catalogs.get('en').set(english.id, freezeGenerator(english, 'en'));
 		catalogs.get('fr').set(french.id, freezeGenerator(french, 'fr'));
 	}
+	validateGeneratorRelationships(catalogs.get('en'));
+	validateGeneratorRelationships(catalogs.get('fr'));
 	return catalogs;
 }
 
@@ -140,28 +130,22 @@ function readGenerator(filePath, displayPath) {
 }
 
 function freezeGenerator(generator, locale) {
-	const entrySchema = Object.freeze({
-		...generator.entrySchema,
-		...(generator.entrySchema.required
-			? { required: Object.freeze([...generator.entrySchema.required]) }
-			: {}),
-		...(generator.entrySchema.technical
-			? { technical: Object.freeze([...generator.entrySchema.technical]) }
-			: {}),
-	});
-	return Object.freeze({
+	return deepFreeze({
 		...generator,
 		locale,
-		entrySchema,
-		entries: Object.freeze(generator.entries.map(freezeEntry)),
+		entrySchema: { ...generator.entrySchema },
+		entries: generator.entries.map(entry => ({ ...entry })),
 	});
 }
 
-function freezeEntry(entry) {
-	return Object.freeze({
-		...entry,
-		...(entry.fields ? { fields: Object.freeze({ ...entry.fields }) } : {}),
-	});
+function deepFreeze(value) {
+	if (!value || typeof value !== 'object' || Object.isFrozen(value)) {
+		return value;
+	}
+	for (const nestedValue of Object.values(value)) {
+		deepFreeze(nestedValue);
+	}
+	return Object.freeze(value);
 }
 
 function normalizeGeneratorLocale(locale) {
@@ -178,7 +162,6 @@ function generatorCatalogError(code, message) {
 module.exports = {
 	clearGeneratorCache,
 	createGeneratorCatalogCandidate,
-	generate,
 	getGenerator,
 	listGenerators,
 	reloadGeneratorCatalog,

@@ -142,7 +142,8 @@
       "categoryOption": "Catégorie de génération",
       "unknownCategory": "Catégorie de génération inconnue : **{{category}}**. Utilisez `/help command:gen` pour consulter les détails.",
       "title": "{{category}} — résultat généré",
-      "behavior": "Sélectionne une entrée aléatoire pondérée dans le générateur public localisé choisi. Les générateurs publics au schéma v2 deviennent disponibles après /reload ou un redémarrage du bot ; les composants internes réservés aux traitements restent masqués. La liste localisée complète des générateurs publics figure ci-dessus ; saisissez une partie du nom ou de l’identifiant pour filtrer l’autocomplétion."
+      "modifiers": "Modificateurs",
+      "behavior": "Résout un résultat aléatoire pondéré depuis le générateur public localisé choisi, avec ses modèles imbriqués et ses modificateurs descriptifs lorsqu’ils sont configurés. Les références peuvent utiliser des générateurs internes sans les proposer comme choix racines. Les générateurs publics au schéma v2 deviennent disponibles après /reload ou un redémarrage du bot ; leur liste localisée complète figure ci-dessus."
     },
     "genChar": {
       "description": "Générer un personnage (rôle MJ configuré ou propriétaire du serveur)",

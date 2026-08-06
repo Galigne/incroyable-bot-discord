@@ -8,6 +8,7 @@ const {
 	getEntryWeight,
 	selectWeightedEntry,
 } = require('../../services/weightedSelector');
+const generatorResolver = require('../../services/generatorResolver');
 
 module.exports = function createGeneratorChecks(context) {
 	const {
@@ -52,15 +53,19 @@ module.exports = function createGeneratorChecks(context) {
 			}
 
 			for (const generator of publicGenerators) {
-				const firstResult = generatorCatalog.generate(generator.id, 'en', () => 0);
-				if (firstResult?.entry !== generator.entries[0]) {
+				const firstResult = generatorResolver.generate(generator.id, 'en', {
+					random: () => 0,
+				});
+				if (firstResult?.entryId !== generator.entries[0].id) {
 					errors.push(`Generator ${generator.id} cannot select its first entry.`);
 				}
 			}
 			for (const generator of internalGenerators) {
 				if (
 					generatorCatalog.getGenerator(generator.id, 'en') !== generator
-					|| generatorCatalog.generate(generator.id, 'en', () => 0) !== null
+					|| generatorResolver.generate(generator.id, 'en', {
+						random: () => 0,
+					}) !== null
 				) {
 					errors.push(`Internal generator ${generator.id} has invalid visibility behavior.`);
 				}
@@ -283,12 +288,12 @@ function checkStructuredGenerators(errors, generatorCatalog) {
 }
 
 function checkGeneratorResponses(errors, generatorCatalog, weightedEntries) {
-	const generatedName = generatorCatalog.generate('name', 'en', () => 0)?.entry;
+	const generatedName = generatorResolver.generate('name', 'en', { random: () => 0 });
 	if (!generatedName?.fields?.FirstName || !generatedName.fields.LastName) {
 		errors.push('Name generators should expose separate FirstName and LastName fields.');
 	}
-	const rulesResult = generatorCatalog.generate('rules', 'en', () => 0);
-	if (!rulesResult?.entry?.fields?.Name || !rulesResult.entry.fields.Description) {
+	const rulesResult = generatorResolver.generate('rules', 'en', { random: () => 0 });
+	if (!rulesResult?.fields?.Name || !rulesResult.fields.Description) {
 		errors.push('RULE generators should expose separate Name and Description fields.');
 	}
 
@@ -301,8 +306,10 @@ function checkGeneratorResponses(errors, generatorCatalog, weightedEntries) {
 		errors.push('Structured generator fields are not rendered correctly.');
 	}
 	const weightedTextEmbed = createGeneratedEmbed({
-		category: { name: 'test' },
-		entry: weightedEntries[1],
+		generatorName: 'test',
+		outputType: 'value',
+		value: weightedEntries[1].value,
+		modifiers: [],
 	}).toJSON();
 	if (weightedTextEmbed.description !== 'Double weight') {
 		errors.push('Weighted text generator entries are not rendered correctly.');

@@ -200,8 +200,9 @@ Roles:
 | 5 | Legacy Parts 13–20 | Historical migration and final verification |
 
 The legacy detail headers below remain as design references until their revised
-part is implemented. The consolidated five-part specification controls scope and
-precedence. Every revised part requires explicit approval before the next begins.
+part is implemented. Revised Parts 1 and 2 are complete. The consolidated five-part
+specification controls scope and precedence. Every revised part requires explicit
+approval before the next begins.
 
 ---
 
@@ -450,8 +451,7 @@ Technical properties:
 
 - `schemaVersion`;
 - stable English `id`;
-- `kind`: currently `category` or `component`; revised Part 2 adds modifier and
-  template structures when their behavior is implemented;
+- `kind`: `category`, `component`, `template`, or `modifier`;
 - `visibility`: `public` or `internal`;
 - `entrySchema`.
 
@@ -508,10 +508,17 @@ listGenerators(locale, {
   visibility = 'public',
 } = {})
 
-generate(id, locale, random = Math.random)
-
 clearGeneratorCache()
 reloadGeneratorCatalog()
+```
+
+Public result assembly belongs to the completed revised Part 2 resolver:
+
+```js
+generatorResolver.generate(id, locale, {
+  random = Math.random,
+  maxDepth = 8,
+} = {})
 ```
 
 Weighted selection belongs in a reusable helper:
@@ -562,8 +569,8 @@ selection, parity, malformed fixtures, and deterministic selection.
 - the strict catalog validates the complete English/French production pair;
 - production uses only v2;
 - no v1 parsing, fallback, runtime detection, or API overload remains;
-- reference, template, provenance, and modifier resolution remains deferred to
-  revised Part 2.
+- reference, template, provenance, and modifier resolution was deferred from this
+  part and is now complete in revised Part 2.
 
 ---
 
@@ -640,7 +647,7 @@ and manual encumbrance. Only v2 data and APIs remain.
 
 ---
 
-# Part 4 — Structured Resolver and Templates
+# Part 4 — Structured Resolver and Templates (Complete)
 
 ## 4.1 Objective
 
@@ -752,15 +759,26 @@ The old API is not retained.
 
 ## 4.8 Structured Result
 
-Results retain:
+Completed results use:
 
-- source generator ID;
-- source generator localized name;
-- source entry ID;
-- output type;
-- localized output;
-- resolved reference generator and entry IDs;
-- selected modifiers, initially empty.
+```js
+{
+  generatorId,
+  generatorName,
+  entryId,
+  outputType,
+  value, // text only
+  fields, // structured fields only
+  templateOutput, // resolved templates only
+  provenance,
+  modifiers,
+}
+```
+
+Base/reference provenance is an ordered list of technical selection events. Every
+event records a type, random/fixed/weighted selection mode, generator ID, optional
+entry ID, and resolution path. Modifier selection provenance lives on its separate
+modifier record; the two sources together form the complete choice history.
 
 ## 4.9 Services
 
@@ -796,16 +814,16 @@ Reject:
 Test nested templates, every selector, fixed references, random references,
 `oneOf`, cycles, provenance, and deterministic cross-locale selection.
 
-## 4.11 Completion Criteria
+## 4.11 Completed State
 
-Templates resolve into structured output and `/gen` renders them. Modifiers and
-creatures remain outside this part.
-
-Stop and wait for confirmation.
+Templates resolve into structured output and `/gen` renders them. Random and fixed
+references, all selectors, nested templates, weighted sources, stable provenance,
+cycle detection, and bounded depth are implemented. Descriptive modifiers were
+completed in the same revised Part 2; creatures remain outside this part.
 
 ---
 
-# Part 5 — Descriptive Modifier Selection
+# Part 5 — Descriptive Modifier Selection (Complete)
 
 ## 5.1 Objective
 
@@ -935,12 +953,13 @@ Test chance boundaries, count boundaries, uniqueness, compatibility,
 deterministic selection, structured records, and proof that base output is not
 mutated.
 
-## 5.8 Completion Criteria
+## 5.8 Completed State
 
-Generic structured results may contain descriptive modifiers. No creature code
-or mechanical modifier behavior is introduced.
-
-Stop and wait for confirmation.
+Generic structured results contain compatible descriptive modifier records when
+requested by a generator or entry. Chance is evaluated once, inclusive counts are
+selected, weighted entries are unique within a request, and each record retains
+technical provenance. No creature code or mechanical modifier behavior was
+introduced.
 
 ---
 
