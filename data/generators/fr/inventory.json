@@ -11,14 +11,6 @@
   },
   "entries": [
     {
-      "id": "healing-potion",
-      "weight": 8,
-      "fields": {
-        "Name": "Potion de soins",
-        "Description": "Restaure 50 PV lorsqu'elle est consommée."
-      }
-    },
-    {
       "id": "coil-of-rope",
       "weight": 8,
       "fields": {
@@ -187,14 +179,6 @@
       }
     },
     {
-      "id": "musical-instrument",
-      "weight": 4,
-      "fields": {
-        "Name": "Instrument de musique",
-        "Description": "Un instrument transportable choisi en fonction du personnage."
-      }
-    },
-    {
       "id": "merchants-scale",
       "weight": 4,
       "fields": {
@@ -324,6 +308,237 @@
       "fields": {
         "Name": "Mystérieuse lettre scellée",
         "Description": "Une lettre adressée à une personne que le personnage n'a jamais rencontrée."
+      }
+    },
+    {
+      "id": "coin-purse",
+      "fields": {
+        "Name": "Bourse de pièces",
+        "Description": "Une somme de monnaie locale mêlant petites pièces courantes et devises plus difficiles à écouler."
+      }
+    },
+    {
+      "id": "healing-potion",
+      "fields": {
+        "Name": "Potion de soin",
+        "Description": "Une fiole stabilisée qui facilite la récupération d’une blessure lorsqu’elle est utilisée correctement."
+      }
+    },
+    {
+      "id": "vigor-potion",
+      "fields": {
+        "Name": "Potion de vigueur",
+        "Description": "Un breuvage augmentant brièvement les capacités physiques avant de provoquer une forte fatigue."
+      }
+    },
+    {
+      "id": "rule-scroll",
+      "fields": {
+        "Name": "Parchemin de LOI",
+        "Description": "Un support à usage unique permettant de déclencher une LOI précise sans l’avoir apprise."
+      }
+    },
+    {
+      "id": "rule-book",
+      "fields": {
+        "Name": "Livre de LOI",
+        "Description": "Un traité rare expliquant une LOI, ses applications et les risques liés à une mauvaise interprétation."
+      }
+    },
+    {
+      "id": "excavation-tools",
+      "fields": {
+        "Name": "Outils d’excavation",
+        "Description": "Un crochet, une petite pioche et une pelle repliable pour fouiller ou franchir un terrain difficile."
+      }
+    },
+    {
+      "id": "unknown-key",
+      "fields": {
+        "Name": "Clef inconnue",
+        "Description": "Une clef sans serrure identifiée, marquée d’un symbole correspondant à une organisation ou un bâtiment."
+      }
+    },
+    {
+      "id": "coded-notes",
+      "fields": {
+        "Name": "Notes chiffrées",
+        "Description": "Plusieurs pages de notes dont le sens dépend d’un code, d’un contexte ou d’une personne disparue."
+      }
+    },
+    {
+      "id": "specialized-ammunition",
+      "fields": {
+        "Name": "Munitions spécialisées",
+        "Description": "Un petit lot de projectiles adaptés à une arme précise ou à une cible inhabituelle."
+      }
+    },
+    {
+      "id": "precious-jewel",
+      "fields": {
+        "Name": "Bijou précieux",
+        "Description": "Une pièce de joaillerie identifiable, facile à transporter mais risquée à revendre."
+      }
+    },
+    {
+      "id": "elemental-essence",
+      "fields": {
+        "Name": "Essence élémentaire",
+        "Description": "Une substance instable conservant les propriétés d’un élément naturel ou magique."
+      }
+    },
+    {
+      "id": "treasure-map",
+      "fields": {
+        "Name": "Carte au trésor",
+        "Description": "Un itinéraire incomplet accompagné de repères anciens, d’avertissements et d’une destination ambiguë."
+      }
+    },
+    {
+      "id": "quality-paper",
+      "fields": {
+        "Name": "Papier de qualité",
+        "Description": "Des feuilles et un parchemin vierges adaptés aux contrats, cartes, sorts ou faux documents."
+      }
+    },
+    {
+      "id": "ceremonial-doll",
+      "fields": {
+        "Name": "Poupée cérémonielle",
+        "Description": "Une figurine de tissu portant le nom effacé d’une personne et les traces d’un ancien rituel."
+      }
+    },
+    {
+      "id": "locked-grimoire",
+      "fields": {
+        "Name": "Grimoire verrouillé",
+        "Description": "Un livre protégé par une serrure ou une énigme, dont le contenu ne peut être consulté directement."
+      }
+    },
+    {
+      "id": "old-toy",
+      "fields": {
+        "Name": "Jouet ancien",
+        "Description": "Un jouet ou ours en peluche reconnaissable par une famille, un collectionneur ou un esprit."
+      }
+    },
+    {
+      "id": "creature-fragment",
+      "fields": {
+        "Name": "Fragment de créature",
+        "Description": "Une écaille, peau, corne ou dent conservée comme trophée, preuve ou composant."
+      }
+    },
+    {
+      "id": "rare-medicine",
+      "fields": {
+        "Name": "Médicament rare",
+        "Description": "Un traitement destiné à une maladie précise, fragile et difficile à remplacer."
+      }
+    },
+    {
+      "id": "medicinal-plant",
+      "fields": {
+        "Name": "Plante médicinale",
+        "Description": "Une plante fraîche dont l’efficacité dépend de sa préparation et de son état de conservation."
+      }
+    },
+    {
+      "id": "alchemical-ingredient",
+      "fields": {
+        "Name": "Ingrédient alchimique",
+        "Description": "Un composant organique inhabituel, comme un œil de crapaud ou une glande venimeuse."
+      }
+    },
+    {
+      "id": "work-of-art",
+      "fields": {
+        "Name": "Œuvre d’art",
+        "Description": "Un tableau, une sculpture ou une pièce décorative possédant une valeur culturelle identifiable."
+      }
+    },
+    {
+      "id": "ceremonial-clothing",
+      "fields": {
+        "Name": "Vêtement de cérémonie",
+        "Description": "Une robe, cape, paire de bottes ou paire de gants associée à un rang ou une institution."
+      }
+    },
+    {
+      "id": "unfinished-crown",
+      "fields": {
+        "Name": "Couronne inachevée",
+        "Description": "Un symbole d’autorité auquel manque une gemme, une inscription ou une partie essentielle."
+      }
+    },
+    {
+      "id": "musical-instrument",
+      "fields": {
+        "Name": "Instrument de musique",
+        "Description": "Un luth, tambour, violon ou autre instrument transportable, usé mais fonctionnel."
+      }
+    },
+    {
+      "id": "ornate-comb",
+      "fields": {
+        "Name": "Peigne ouvragé",
+        "Description": "Un objet personnel décoré d’un blason discret ou d’une inscription intime."
+      }
+    },
+    {
+      "id": "incomplete-manuscript",
+      "fields": {
+        "Name": "Manuscrit incomplet",
+        "Description": "Un texte historique ou scientifique dont plusieurs pages ont été retirées intentionnellement."
+      }
+    },
+    {
+      "id": "sealed-vase",
+      "fields": {
+        "Name": "Vase scellé",
+        "Description": "Un récipient fragile dont le contenu produit un bruit ou une chaleur inhabituelle."
+      }
+    },
+    {
+      "id": "exotic-fruit",
+      "fields": {
+        "Name": "Fruit exotique",
+        "Description": "Un fruit rare dont la graine, la saveur ou les propriétés intéressent plusieurs acheteurs."
+      }
+    },
+    {
+      "id": "collectible-figurine",
+      "fields": {
+        "Name": "Figurine de collection",
+        "Description": "Une pièce d’une série recherchée, insignifiante seule mais précieuse pour la bonne personne."
+      }
+    },
+    {
+      "id": "enchanted-toothbrush",
+      "fields": {
+        "Name": "Brosse à dents enchantée",
+        "Description": "Un objet absurdement spécifique qui nettoie parfaitement les dents et mord les autres saletés."
+      }
+    },
+    {
+      "id": "unidentified-egg",
+      "fields": {
+        "Name": "Œuf non identifié",
+        "Description": "Un œuf vivant dont l’espèce, les besoins et le danger restent inconnus."
+      }
+    },
+    {
+      "id": "attuned-stone",
+      "fields": {
+        "Name": "Pierre accordée",
+        "Description": "Une pierre minérale ou magique réagissant à un lieu, une personne ou une LOI particulière."
+      }
+    },
+    {
+      "id": "travel-chicken",
+      "fields": {
+        "Name": "Poulet de voyage",
+        "Description": "Un poulet étonnamment calme, dressé à suivre le porteur et à signaler certaines créatures."
       }
     }
   ]

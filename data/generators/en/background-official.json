@@ -49,6 +49,78 @@
         "Backstory": "An inspector sent to investigate missing supplies found every local office reporting perfectly matching lies.",
         "Goals": "Identify the shared source of pressure and protect the first witness willing to speak honestly."
       }
+    },
+    {
+      "id": "established-experienced-adult",
+      "fields": {
+        "Appearance": "An experienced adult protecting an established position.",
+        "Backstory": "Their life stage has forced them into responsibilities that do not fit ordinary expectations.",
+        "Goals": "Prove their judgment while protecting the freedom to grow or change."
+      }
+    },
+    {
+      "id": "legacy-profession-mayor",
+      "fields": {
+        "Appearance": "Clothing and tools immediately suggest the work of a mayor.",
+        "Backstory": "Built a life as a mayor and knows the profession’s obligations and hidden pressures.",
+        "Goals": "Use that experience to secure a safer and more independent future."
+      }
+    },
+    {
+      "id": "legacy-profession-minister",
+      "fields": {
+        "Appearance": "Clothing and tools immediately suggest the work of a minister.",
+        "Backstory": "Built a life as a minister and knows the profession’s obligations and hidden pressures.",
+        "Goals": "Use that experience to secure a safer and more independent future."
+      }
+    },
+    {
+      "id": "legacy-profession-jailer",
+      "fields": {
+        "Appearance": "Clothing and tools immediately suggest the work of a jailer.",
+        "Backstory": "Built a life as a jailer and knows the profession’s obligations and hidden pressures.",
+        "Goals": "Use that experience to secure a safer and more independent future."
+      }
+    },
+    {
+      "id": "legacy-profession-executioner",
+      "fields": {
+        "Appearance": "Clothing and tools immediately suggest the work of a executioner.",
+        "Backstory": "Built a life as a executioner and knows the profession’s obligations and hidden pressures.",
+        "Goals": "Use that experience to secure a safer and more independent future."
+      }
+    },
+    {
+      "id": "legacy-profession-townsfolk",
+      "fields": {
+        "Appearance": "Clothing and tools immediately suggest the work of a townsfolk.",
+        "Backstory": "Built a life as a townsfolk and knows the profession’s obligations and hidden pressures.",
+        "Goals": "Use that experience to secure a safer and more independent future."
+      }
+    },
+    {
+      "id": "decomposed-constable-reed",
+      "fields": {
+        "Appearance": "A distinctive figure remembered as Constable Reed.",
+        "Backstory": "an honest village officer overwhelmed by crimes involving magic that local law does not acknowledge.",
+        "Goals": "Turn this unusual history toward a self-directed future."
+      }
+    },
+    {
+      "id": "decomposed-sable-of-the-reeds",
+      "fields": {
+        "Appearance": "A distinctive figure remembered as Sable-of-the-Reeds.",
+        "Backstory": "a marshscale diplomat who pauses for minutes before every answer and never wastes a word.",
+        "Goals": "Turn this unusual history toward a self-directed future."
+      }
+    },
+    {
+      "id": "decomposed-magistrate-odo-penn",
+      "fields": {
+        "Appearance": "A distinctive figure remembered as Magistrate Odo Penn.",
+        "Backstory": "a bureaucrat whose enchanted stamp makes ridiculous temporary laws physically real.",
+        "Goals": "Turn this unusual history toward a self-directed future."
+      }
     }
   ]
 }

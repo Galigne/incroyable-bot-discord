@@ -49,6 +49,86 @@
         "Backstory": "Un historien indépendant a quitté l’université pour explorer des ruines que les communautés locales considèrent comme sacrées.",
         "Goals": "Documenter le passé sans exploiter ses descendants et réparer les dégâts causés par les expéditions précédentes."
       }
+    },
+    {
+      "id": "arth-the-scribe-legacy-concept",
+      "fields": {
+        "Appearance": "Son allure et son équipement témoignent d’un parcours singulier et mémorable.",
+        "Backstory": "Un chroniqueur méticuleux qui consigne les contradictions de l’histoire officielle et conserve plusieurs versions de chaque événement.",
+        "Goals": "Résoudre le conflit inachevé sans renoncer à son indépendance."
+      }
+    },
+    {
+      "id": "elder-with-valuable-memory",
+      "fields": {
+        "Appearance": "Personne âgée disposant d’une mémoire ou d’une réputation précieuse.",
+        "Backstory": "Cette étape de sa vie l’a confronté à des responsabilités qui dépassent les attentes ordinaires.",
+        "Goals": "Prouver son discernement tout en préservant sa liberté d’évoluer."
+      }
+    },
+    {
+      "id": "legacy-profession-scientist",
+      "fields": {
+        "Appearance": "Sa tenue et ses outils évoquent immédiatement le métier suivant : scientifique.",
+        "Backstory": "A construit sa vie comme scientifique et connaît les obligations ainsi que les pressions cachées de cette activité.",
+        "Goals": "Mettre cette expérience à profit pour obtenir un avenir plus sûr et plus autonome."
+      }
+    },
+    {
+      "id": "legacy-profession-researcher",
+      "fields": {
+        "Appearance": "Sa tenue et ses outils évoquent immédiatement le métier suivant : chercheur.",
+        "Backstory": "A construit sa vie comme chercheur et connaît les obligations ainsi que les pressions cachées de cette activité.",
+        "Goals": "Mettre cette expérience à profit pour obtenir un avenir plus sûr et plus autonome."
+      }
+    },
+    {
+      "id": "legacy-profession-scribe",
+      "fields": {
+        "Appearance": "Sa tenue et ses outils évoquent immédiatement le métier suivant : scribe.",
+        "Backstory": "A construit sa vie comme scribe et connaît les obligations ainsi que les pressions cachées de cette activité.",
+        "Goals": "Mettre cette expérience à profit pour obtenir un avenir plus sûr et plus autonome."
+      }
+    },
+    {
+      "id": "legacy-profession-physician",
+      "fields": {
+        "Appearance": "Sa tenue et ses outils évoquent immédiatement le métier suivant : médecin.",
+        "Backstory": "A construit sa vie comme médecin et connaît les obligations ainsi que les pressions cachées de cette activité.",
+        "Goals": "Mettre cette expérience à profit pour obtenir un avenir plus sûr et plus autonome."
+      }
+    },
+    {
+      "id": "legacy-profession-sage",
+      "fields": {
+        "Appearance": "Sa tenue et ses outils évoquent immédiatement le métier suivant : sage.",
+        "Backstory": "A construit sa vie comme sage et connaît les obligations ainsi que les pressions cachées de cette activité.",
+        "Goals": "Mettre cette expérience à profit pour obtenir un avenir plus sûr et plus autonome."
+      }
+    },
+    {
+      "id": "decomposed-iri-quickchalk",
+      "fields": {
+        "Appearance": "Une figure singulière connue sous le nom de Iri Quickchalk.",
+        "Backstory": "un cartographe gobelin qui dessine des cartes à partir de rumeurs plutôt que de routes et s'offusque lorsque les unes ou les autres se révèlent inexactes.",
+        "Goals": "Transformer ce parcours singulier en un avenir choisi."
+      }
+    },
+    {
+      "id": "decomposed-professor-holloway",
+      "fields": {
+        "Appearance": "Une figure singulière connue sous le nom de Professor Holloway.",
+        "Backstory": "un historien spectral qui possède son propre squelette afin de poursuivre ses recherches sur le terrain.",
+        "Goals": "Transformer ce parcours singulier en un avenir choisi."
+      }
+    },
+    {
+      "id": "decomposed-juniper-wake",
+      "fields": {
+        "Appearance": "Une figure singulière connue sous le nom de Juniper Wake.",
+        "Backstory": "un botaniste qui se transforme lentement en arbre et considère ce phénomène comme un contretemps fascinant.",
+        "Goals": "Transformer ce parcours singulier en un avenir choisi."
+      }
     }
   ]
 }

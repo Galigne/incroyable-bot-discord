@@ -49,6 +49,30 @@
         "Backstory": "Un palefrenier a découvert qu’une monture de prix avait été délibérément dressée pour désarçonner un cavalier précis.",
         "Goals": "Empêcher le meurtre prévu et identifier qui a manipulé l’animal sans mettre celui-ci en danger."
       }
+    },
+    {
+      "id": "legacy-profession-driver",
+      "fields": {
+        "Appearance": "Sa tenue et ses outils évoquent immédiatement le métier suivant : conducteur.",
+        "Backstory": "A construit sa vie comme conducteur et connaît les obligations ainsi que les pressions cachées de cette activité.",
+        "Goals": "Mettre cette expérience à profit pour obtenir un avenir plus sûr et plus autonome."
+      }
+    },
+    {
+      "id": "legacy-profession-prisoner",
+      "fields": {
+        "Appearance": "Sa tenue et ses outils évoquent immédiatement le métier suivant : prisonnier.",
+        "Backstory": "A construit sa vie comme prisonnier et connaît les obligations ainsi que les pressions cachées de cette activité.",
+        "Goals": "Mettre cette expérience à profit pour obtenir un avenir plus sûr et plus autonome."
+      }
+    },
+    {
+      "id": "decomposed-mara-venn",
+      "fields": {
+        "Appearance": "Une figure singulière connue sous le nom de Mara Venn.",
+        "Backstory": "une messagère borgne qui connaît tous les raccourcis, refuse de porter une arme et transporte secrètement un œuf de dragon.",
+        "Goals": "Transformer ce parcours singulier en un avenir choisi."
+      }
     }
   ]
 }

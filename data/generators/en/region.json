@@ -6,128 +6,226 @@
   "name": "region",
   "description": "Broad natural and cultivated geographic regions",
   "entrySchema": {
-    "type": "text"
+    "type": "fields",
+    "required": ["Name", "Description"]
   },
   "entries": [
     {
-      "id": "rolling-farmland",
-      "weight": 4,
-      "value": "Rolling Farmland — open crop fields, hedgerows, mills, and scattered market villages."
-    },
-    {
       "id": "temperate-forest",
       "weight": 4,
-      "value": "Temperate Forest — mixed woodland crossed by game trails, logging roads, and clear streams."
-    },
-    {
-      "id": "grassland-steppe",
-      "weight": 4,
-      "value": "Grassland Steppe — immense windswept plains supporting herds, riders, and seasonal camps."
-    },
-    {
-      "id": "rocky-coast",
-      "weight": 3,
-      "value": "Rocky Coast — cliffs, hidden coves, fishing settlements, and dangerous tidal caves."
-    },
-    {
-      "id": "high-mountains",
-      "weight": 3,
-      "value": "High Mountains — steep passes, thin air, glaciers, mines, and isolated monasteries."
-    },
-    {
-      "id": "river-valley",
-      "weight": 3,
-      "value": "River Valley — fertile floodplains linking farms, ports, bridges, and competing towns."
-    },
-    {
-      "id": "marshland",
-      "weight": 3,
-      "value": "Marshland — shallow waterways, reed islands, peat bogs, and paths that shift by season."
+      "fields": {
+        "Name": "Temperate Forest",
+        "Description": "mixed woodland crossed by game trails, logging roads, and clear streams."
+      }
     },
     {
       "id": "dry-scrubland",
       "weight": 3,
-      "value": "Dry Scrubland — thorny brush, red earth, seasonal rivers, and widely separated wells."
-    },
-    {
-      "id": "island-chain",
-      "weight": 3,
-      "value": "Island Chain — inhabited and wild islands connected by reefs, ferries, and piracy."
-    },
-    {
-      "id": "ancient-woodland",
-      "weight": 2,
-      "value": "Ancient Woodland — enormous old trees, dim undergrowth, forgotten roads, and territorial spirits."
-    },
-    {
-      "id": "volcanic-highlands",
-      "weight": 2,
-      "value": "Volcanic Highlands — black slopes, hot springs, ash fields, and mineral-rich settlements."
+      "fields": {
+        "Name": "Dry Scrubland",
+        "Description": "thorny brush, red earth, seasonal rivers, and widely separated wells."
+      }
     },
     {
       "id": "frozen-tundra",
       "weight": 2,
-      "value": "Frozen Tundra — permafrost, low vegetation, migrating animals, and brief violent summers."
+      "fields": {
+        "Name": "Frozen Tundra",
+        "Description": "permafrost, low vegetation, migrating animals, and brief violent summers."
+      }
     },
     {
       "id": "salt-desert",
       "weight": 2,
-      "value": "Salt Desert — blinding flats, buried ruins, mineral caravans, and almost no fresh water."
-    },
-    {
-      "id": "deep-jungle",
-      "weight": 2,
-      "value": "Deep Jungle — dense layered vegetation, heavy rainfall, colossal insects, and lost stoneworks."
-    },
-    {
-      "id": "lake-country",
-      "weight": 2,
-      "value": "Lake Country — broad freshwater lakes, wooded shores, fishing communities, and misty islands."
+      "fields": {
+        "Name": "Salt Desert",
+        "Description": "blinding flats, buried ruins, mineral caravans, and almost no fresh water."
+      }
     },
     {
       "id": "badlands",
       "weight": 2,
-      "value": "Badlands — eroded canyons, exposed fossils, little water, and excellent hiding places."
+      "fields": {
+        "Name": "Badlands",
+        "Description": "eroded canyons, exposed fossils, little water, and excellent hiding places."
+      }
     },
     {
       "id": "wine-hills",
       "weight": 2,
-      "value": "Wine Hills — cultivated slopes, wealthy estates, old cellars, and intense local rivalries."
+      "fields": {
+        "Name": "Wine Hills",
+        "Description": "cultivated slopes, wealthy estates, old cellars, and intense local rivalries."
+      }
     },
     {
       "id": "flooded-forest",
       "weight": 2,
-      "value": "Flooded Forest — half-submerged trees navigated by canoe during a long wet season."
+      "fields": {
+        "Name": "Flooded Forest",
+        "Description": "half-submerged trees navigated by canoe during a long wet season."
+      }
     },
     {
       "id": "crystal-expanse",
       "weight": 1,
-      "value": "Crystal Expanse — natural glass formations distort light, sound, direction, and magic."
-    },
-    {
-      "id": "levitating-archipelago",
-      "weight": 1,
-      "value": "Levitating Archipelago — floating landmasses connected by ropeways, flying mounts, and waterfalls."
+      "fields": {
+        "Name": "Crystal Expanse",
+        "Description": "natural glass formations distort light, sound, direction, and magic."
+      }
     },
     {
       "id": "dead-magic-basin",
       "weight": 1,
-      "value": "Dead Magic Basin — a fertile-looking depression where supernatural effects abruptly fail."
+      "fields": {
+        "Name": "Dead Magic Basin",
+        "Description": "a fertile-looking depression where supernatural effects abruptly fail."
+      }
     },
     {
       "id": "storm-belt",
       "weight": 1,
-      "value": "Storm Belt — a coastal region battered by near-constant wind, rain, and electrical activity."
+      "fields": {
+        "Name": "Storm Belt",
+        "Description": "a coastal region battered by near-constant wind, rain, and electrical activity."
+      }
     },
     {
       "id": "mushroom-wilds",
       "weight": 1,
-      "value": "Mushroom Wilds — damp country dominated by giant fungi, spores, and underground settlements."
+      "fields": {
+        "Name": "Mushroom Wilds",
+        "Description": "damp country dominated by giant fungi, spores, and underground settlements."
+      }
+    },
+    {
+      "id": "ancient-woodland",
+      "fields": {
+        "Name": "Deep Forest",
+        "Description": "An ancient forest of fading paths, isolated clearings, and territories claimed by wildlife."
+      }
+    },
+    {
+      "id": "deep-jungle",
+      "fields": {
+        "Name": "Stifling Jungle",
+        "Description": "Dense vegetation, violent rain, and ruins slowly swallowed by roots."
+      }
+    },
+    {
+      "id": "arid-desert",
+      "fields": {
+        "Name": "Arid Desert",
+        "Description": "Dunes and rocky plateaus where water sources determine routes and conflicts."
+      }
+    },
+    {
+      "id": "grassland-steppe",
+      "fields": {
+        "Name": "Open Grassland",
+        "Description": "Wide windswept grasslands suited to herds, travelers, and ambushes visible from afar."
+      }
+    },
+    {
+      "id": "lake-country",
+      "fields": {
+        "Name": "Lake District",
+        "Description": "Lakes, islets, and fishing villages linked by boats and flood-prone paths."
+      }
+    },
+    {
+      "id": "rocky-coast",
+      "fields": {
+        "Name": "Cliff Coast",
+        "Description": "A steep coast cut by coves, sea caves, and hazardous passages."
+      }
+    },
+    {
+      "id": "river-valley",
+      "fields": {
+        "Name": "River Valley",
+        "Description": "A fertile region organized around a river, fortified bridges, and rival ports."
+      }
+    },
+    {
+      "id": "high-mountains",
+      "fields": {
+        "Name": "Mountain Range",
+        "Description": "Hard-to-reach peaks sheltering mines, monasteries, and strategic passes."
+      }
+    },
+    {
+      "id": "pack-ice",
+      "fields": {
+        "Name": "Pack Ice",
+        "Description": "An unstable frozen sea where routes change with fractures and animal migrations."
+      }
+    },
+    {
+      "id": "monumental-glacier",
+      "fields": {
+        "Name": "Monumental Glacier",
+        "Description": "A mass of ice crossed by crevasses, blue caves, and trapped remains."
+      }
+    },
+    {
+      "id": "island-chain",
+      "fields": {
+        "Name": "Archipelago",
+        "Description": "Islands separated by reefs, unpredictable currents, and disputed sea lanes."
+      }
+    },
+    {
+      "id": "levitating-archipelago",
+      "fields": {
+        "Name": "Floating Archipelago",
+        "Description": "Suspended lands linked by bridges and airships, with waterfalls falling into the void."
+      }
+    },
+    {
+      "id": "volcanic-highlands",
+      "fields": {
+        "Name": "Volcanic Highlands",
+        "Description": "Ash slopes, hot springs, and valuable seams beneath an active volcano."
+      }
+    },
+    {
+      "id": "marshland",
+      "fields": {
+        "Name": "Misty Marsh",
+        "Description": "Shallow waters, peat bogs, and islands whose paths change with the seasons."
+      }
+    },
+    {
+      "id": "rolling-farmland",
+      "fields": {
+        "Name": "Agricultural Hills",
+        "Description": "Terraced crops, scattered farms, and guarded market roads."
+      }
     },
     {
       "id": "shattered-battlefield",
-      "weight": 1,
-      "value": "Shattered Battlefield — miles of trenches, memorials, unexploded magic, and communities built from salvage."
+      "fields": {
+        "Name": "Abandoned Battlefield",
+        "Description": "A territory marked by trenches, wreckage, and supernatural traces of an old war."
+      }
+    },
+    {
+      "id": "celestial-region",
+      "fields": {
+        "Name": "Celestial Region",
+        "Description": "Air currents, solid clouds, and weather phenomena form a traversable but unstable territory."
+      }
+    }
+  ],
+  "modifiers": [
+    {
+      "generator": "site-modifier-all",
+      "chance": 0.2,
+      "count": {
+        "min": 1,
+        "max": 1
+      }
     }
   ]
 }

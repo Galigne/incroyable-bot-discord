@@ -657,6 +657,909 @@
         "inventory": [],
         "naturalArmorPercentage": 15
       }
+    },
+    {
+      "id": "ash-phoenix",
+      "fields": {
+        "Name": "Ash Phoenix",
+        "Description": "A great incandescent bird reborn from a nearby hearth, carrying memories of those who fed the flame."
+      },
+      "generation": {
+        "statProfile": "creature-elemental",
+        "traits": [
+          {
+            "id": "ash-phoenix-nature",
+            "Name": "Intrinsic Nature",
+            "Description": "A great incandescent bird reborn from a nearby hearth, carrying memories of those who fed the flame."
+          }
+        ],
+        "fixedRules": [
+          {
+            "entry": "candle-rule",
+            "level": 2
+          }
+        ],
+        "statusEffects": [
+          {
+            "generator": "status-effect",
+            "entry": "smoldering",
+            "select": "fields"
+          }
+        ],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 10
+      },
+      "weight": 1
+    },
+    {
+      "id": "juvenile-ogre",
+      "fields": {
+        "Name": "Juvenile Ogre",
+        "Description": "A hungry young giant imitates absent adults and turns every game into real danger."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          {
+            "id": "juvenile-ogre-nature",
+            "Name": "Intrinsic Nature",
+            "Description": "A hungry young giant imitates absent adults and turns every game into real danger."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 15
+      },
+      "weight": 1
+    },
+    {
+      "id": "hungry-changeling",
+      "fields": {
+        "Name": "Hungry Changeling",
+        "Description": "A creature copies a person’s appearance but poorly understands their habits and bonds."
+      },
+      "generation": {
+        "statProfile": "creature-caster",
+        "traits": [
+          {
+            "id": "hungry-changeling-nature",
+            "Name": "Intrinsic Nature",
+            "Description": "A creature copies a person’s appearance but poorly understands their habits and bonds."
+          }
+        ],
+        "fixedRules": [
+          {
+            "entry": "borrowed-face-rule",
+            "level": 1
+          }
+        ],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 10
+      },
+      "weight": 1
+    },
+    {
+      "id": "imp",
+      "fields": {
+        "Name": "Imp",
+        "Description": "A small demon offers trivial bargains whose wording hides disproportionate consequences."
+      },
+      "generation": {
+        "statProfile": "creature-caster",
+        "traits": [
+          {
+            "id": "imp-nature",
+            "Name": "Intrinsic Nature",
+            "Description": "A small demon offers trivial bargains whose wording hides disproportionate consequences."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 5
+      },
+      "weight": 1
+    },
+    {
+      "id": "dissolving-ooze",
+      "fields": {
+        "Name": "Dissolving Ooze",
+        "Description": "A slow mass digests organic matter and soft metal, leaving objects it cannot understand."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          {
+            "id": "dissolving-ooze-nature",
+            "Name": "Intrinsic Nature",
+            "Description": "A slow mass digests organic matter and soft metal, leaving objects it cannot understand."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 15
+      },
+      "weight": 1
+    },
+    {
+      "id": "uprooted-treant",
+      "fields": {
+        "Name": "Uprooted Treant",
+        "Description": "A plant guardian walks far from its forest because its territory’s roots were poisoned."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          {
+            "id": "uprooted-treant-nature",
+            "Name": "Intrinsic Nature",
+            "Description": "A plant guardian walks far from its forest because its territory’s roots were poisoned."
+          }
+        ],
+        "fixedRules": [
+          {
+            "entry": "root-rule",
+            "level": 2
+          }
+        ],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 35
+      },
+      "weight": 1
+    },
+    {
+      "id": "stubborn-undead",
+      "fields": {
+        "Name": "Stubborn Undead",
+        "Description": "An animated corpse continues a daily task without realizing the world has changed."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          {
+            "id": "stubborn-undead-nature",
+            "Name": "Intrinsic Nature",
+            "Description": "An animated corpse continues a daily task without realizing the world has changed."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 10
+      },
+      "weight": 1
+    },
+    {
+      "id": "patrol-skeleton",
+      "fields": {
+        "Name": "Patrol Skeleton",
+        "Description": "Armed bones repeat a military route and treat every breach of protocol as intrusion."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          {
+            "id": "patrol-skeleton-nature",
+            "Name": "Intrinsic Nature",
+            "Description": "Armed bones repeat a military route and treat every breach of protocol as intrusion."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [
+          {
+            "generator": "weapons",
+            "entry": "spear",
+            "select": "fields"
+          }
+        ],
+        "inventory": [],
+        "naturalArmorPercentage": 10
+      },
+      "weight": 1
+    },
+    {
+      "id": "mutant-animal",
+      "fields": {
+        "Name": "Mutant Animal",
+        "Description": "An ordinary beast bears an impossible adaptation caused by magical or alchemical pollution."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          {
+            "id": "mutant-animal-nature",
+            "Name": "Intrinsic Nature",
+            "Description": "An ordinary beast bears an impossible adaptation caused by magical or alchemical pollution."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 10
+      },
+      "weight": 1
+    },
+    {
+      "id": "abandoned-golem",
+      "fields": {
+        "Name": "Abandoned Golem",
+        "Description": "An artificial servant follows an order made dangerous by the absence of a master able to change it."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          {
+            "id": "abandoned-golem-nature",
+            "Name": "Intrinsic Nature",
+            "Description": "An artificial servant follows an order made dangerous by the absence of a master able to change it."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 50
+      },
+      "weight": 1
+    },
+    {
+      "id": "imp-chicken",
+      "fields": {
+        "Name": "Imp Chicken",
+        "Description": "A possessed fowl displays absurd aggression, supernatural leaps, and resilience far beyond its size."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          {
+            "id": "imp-chicken-nature",
+            "Name": "Intrinsic Nature",
+            "Description": "A possessed fowl displays absurd aggression, supernatural leaps, and resilience far beyond its size."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 5
+      },
+      "weight": 1
+    },
+    {
+      "id": "giant-insect",
+      "fields": {
+        "Name": "Giant Insect",
+        "Description": "A colossal arthropod defends a nest built around a source of heat or magic."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          {
+            "id": "giant-insect-nature",
+            "Name": "Intrinsic Nature",
+            "Description": "A colossal arthropod defends a nest built around a source of heat or magic."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 30
+      },
+      "weight": 1
+    },
+    {
+      "id": "animated-statue",
+      "fields": {
+        "Name": "Animated Statue",
+        "Description": "A sculpture leaves its plinth to correct anyone contradicting the official event it depicts."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          {
+            "id": "animated-statue-nature",
+            "Name": "Intrinsic Nature",
+            "Description": "A sculpture leaves its plinth to correct anyone contradicting the official event it depicts."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 50
+      },
+      "weight": 1
+    },
+    {
+      "id": "voracious-slug",
+      "fields": {
+        "Name": "Voracious Slug",
+        "Description": "A slow creature secretes a substance that dissolves walls, armor, or memories according to its diet."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          {
+            "id": "voracious-slug-nature",
+            "Name": "Intrinsic Nature",
+            "Description": "A slow creature secretes a substance that dissolves walls, armor, or memories according to its diet."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 15
+      },
+      "weight": 1
+    },
+    {
+      "id": "fiery-salamander",
+      "fields": {
+        "Name": "Fiery Salamander",
+        "Description": "A supernatural reptile lives in fire and unintentionally spreads flames when frightened."
+      },
+      "generation": {
+        "statProfile": "creature-elemental",
+        "traits": [
+          {
+            "id": "fiery-salamander-nature",
+            "Name": "Intrinsic Nature",
+            "Description": "A supernatural reptile lives in fire and unintentionally spreads flames when frightened."
+          }
+        ],
+        "fixedRules": [
+          {
+            "entry": "candle-rule",
+            "level": 1
+          }
+        ],
+        "statusEffects": [
+          {
+            "generator": "status-effect",
+            "entry": "smoldering",
+            "select": "fields"
+          }
+        ],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 25
+      },
+      "weight": 1
+    },
+    {
+      "id": "cliff-harpy",
+      "fields": {
+        "Name": "Cliff Harpy",
+        "Description": "A winged predator imitates familiar calls to lure travelers onto dangerous ground."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          {
+            "id": "cliff-harpy-nature",
+            "Name": "Intrinsic Nature",
+            "Description": "A winged predator imitates familiar calls to lure travelers onto dangerous ground."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 10
+      },
+      "weight": 1
+    },
+    {
+      "id": "murky-water-siren",
+      "fields": {
+        "Name": "Murky-Water Siren",
+        "Description": "An aquatic creature uses song and reflections to isolate a target from the group."
+      },
+      "generation": {
+        "statProfile": "creature-caster",
+        "traits": [
+          {
+            "id": "murky-water-siren-nature",
+            "Name": "Intrinsic Nature",
+            "Description": "An aquatic creature uses song and reflections to isolate a target from the group."
+          }
+        ],
+        "fixedRules": [
+          {
+            "entry": "influence-rule",
+            "level": 1
+          }
+        ],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 10
+      },
+      "weight": 1
+    },
+    {
+      "id": "watcher-cyclops",
+      "fields": {
+        "Name": "Watcher Cyclops",
+        "Description": "A solitary giant guards a passage whose destination is forgotten but whose prohibition remains."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          {
+            "id": "watcher-cyclops-nature",
+            "Name": "Intrinsic Nature",
+            "Description": "A solitary giant guards a passage whose destination is forgotten but whose prohibition remains."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 20
+      },
+      "weight": 1
+    },
+    {
+      "id": "hungry-vampire",
+      "fields": {
+        "Name": "Hungry Vampire",
+        "Description": "An immortal predator maintains a civil facade while scarcity makes control increasingly fragile."
+      },
+      "generation": {
+        "statProfile": "creature-caster",
+        "traits": [
+          {
+            "id": "hungry-vampire-nature",
+            "Name": "Intrinsic Nature",
+            "Description": "An immortal predator maintains a civil facade while scarcity makes control increasingly fragile."
+          }
+        ],
+        "fixedRules": [
+          {
+            "entry": "vampirism-rule",
+            "level": 2
+          }
+        ],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 10
+      },
+      "weight": 1
+    },
+    {
+      "id": "memory-parasite",
+      "fields": {
+        "Name": "Memory Parasite",
+        "Description": "A small creature feeds on recent memories and leaves victims unable to explain their presence."
+      },
+      "generation": {
+        "statProfile": "creature-caster",
+        "traits": [
+          {
+            "id": "memory-parasite-nature",
+            "Name": "Intrinsic Nature",
+            "Description": "A small creature feeds on recent memories and leaves victims unable to explain their presence."
+          }
+        ],
+        "fixedRules": [
+          {
+            "entry": "memory-rule",
+            "level": 1
+          }
+        ],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 5
+      },
+      "weight": 1
+    },
+    {
+      "id": "repetitive-ghost",
+      "fields": {
+        "Name": "Repetitive Ghost",
+        "Description": "A spirit reenacts an incomplete scene and turns violent when witnesses change its course."
+      },
+      "generation": {
+        "statProfile": "creature-caster",
+        "traits": [
+          {
+            "id": "repetitive-ghost-nature",
+            "Name": "Intrinsic Nature",
+            "Description": "A spirit reenacts an incomplete scene and turns violent when witnesses change its course."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [
+          {
+            "generator": "status-effect",
+            "entry": "shadowed",
+            "select": "fields"
+          }
+        ],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 0
+      },
+      "weight": 1
+    },
+    {
+      "id": "unstable-chimera",
+      "fields": {
+        "Name": "Unstable Chimera",
+        "Description": "Several incompatible anatomies struggle to control one artificially created body."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          {
+            "id": "unstable-chimera-nature",
+            "Name": "Intrinsic Nature",
+            "Description": "Several incompatible anatomies struggle to control one artificially created body."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 25
+      },
+      "weight": 1
+    },
+    {
+      "id": "unleashed-elemental",
+      "fields": {
+        "Name": "Unleashed Elemental",
+        "Description": "An animated natural force restores balance without understanding the lives in its path."
+      },
+      "generation": {
+        "statProfile": "creature-elemental",
+        "traits": [
+          {
+            "id": "unleashed-elemental-nature",
+            "Name": "Intrinsic Nature",
+            "Description": "An animated natural force restores balance without understanding the lives in its path."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 25
+      },
+      "weight": 1
+    },
+    {
+      "id": "territorial-gargoyle",
+      "fields": {
+        "Name": "Territorial Gargoyle",
+        "Description": "A stone sentinel changes buildings nightly and treats each new position as sacred."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          {
+            "id": "territorial-gargoyle-nature",
+            "Name": "Intrinsic Nature",
+            "Description": "A stone sentinel changes buildings nightly and treats each new position as sacred."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 45
+      },
+      "weight": 1
+    },
+    {
+      "id": "highland-griffin",
+      "fields": {
+        "Name": "Highland Griffin",
+        "Description": "A majestic predator protects its aerie and shiny objects mistaken for eggs."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          {
+            "id": "highland-griffin-nature",
+            "Name": "Intrinsic Nature",
+            "Description": "A majestic predator protects its aerie and shiny objects mistaken for eggs."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 20
+      },
+      "weight": 1
+    },
+    {
+      "id": "reclusive-gorgon",
+      "fields": {
+        "Name": "Reclusive Gorgon",
+        "Description": "A cursed creature petrifies from fear more than cruelty and collects statues of visitors."
+      },
+      "generation": {
+        "statProfile": "creature-caster",
+        "traits": [
+          {
+            "id": "reclusive-gorgon-nature",
+            "Name": "Intrinsic Nature",
+            "Description": "A cursed creature petrifies from fear more than cruelty and collects statues of visitors."
+          }
+        ],
+        "fixedRules": [
+          {
+            "entry": "petrification-rule",
+            "level": 2
+          }
+        ],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 20
+      },
+      "weight": 1
+    },
+    {
+      "id": "hunted-werewolf",
+      "fields": {
+        "Name": "Hunted Werewolf",
+        "Description": "A transformed person leads hunters away from loved ones before losing control."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          {
+            "id": "hunted-werewolf-nature",
+            "Name": "Intrinsic Nature",
+            "Description": "A transformed person leads hunters away from loved ones before losing control."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 15
+      },
+      "weight": 1
+    },
+    {
+      "id": "guardian-mummy",
+      "fields": {
+        "Name": "Guardian Mummy",
+        "Description": "An ancient dignitary preserves a place, oath, or error that descendants would rather forget."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          {
+            "id": "guardian-mummy-nature",
+            "Name": "Intrinsic Nature",
+            "Description": "An ancient dignitary preserves a place, oath, or error that descendants would rather forget."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 25
+      },
+      "weight": 1
+    },
+    {
+      "id": "architect-minotaur",
+      "fields": {
+        "Name": "Architect Minotaur",
+        "Description": "A creature endlessly alters its labyrinth and considers every lost traveler a willing intruder."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          {
+            "id": "architect-minotaur-nature",
+            "Name": "Intrinsic Nature",
+            "Description": "A creature endlessly alters its labyrinth and considers every lost traveler a willing intruder."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 25
+      },
+      "weight": 1
+    },
+    {
+      "id": "giant-burrowing-worm",
+      "fields": {
+        "Name": "Giant Burrowing Worm",
+        "Description": "A subterranean predator follows vibration and heat, causing collapses and displaced ground."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          {
+            "id": "giant-burrowing-worm-nature",
+            "Name": "Intrinsic Nature",
+            "Description": "A subterranean predator follows vibration and heat, causing collapses and displaced ground."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 30
+      },
+      "weight": 1
+    },
+    {
+      "id": "carnivorous-plant",
+      "fields": {
+        "Name": "Carnivorous Plant",
+        "Description": "A plant colony imitates scents, voices, and shapes to attract prey."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          {
+            "id": "carnivorous-plant-nature",
+            "Name": "Intrinsic Nature",
+            "Description": "A plant colony imitates scents, voices, and shapes to attract prey."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 15
+      },
+      "weight": 1
+    },
+    {
+      "id": "ancient-dragon",
+      "fields": {
+        "Name": "Ancient Dragon",
+        "Description": "An immensely powerful creature guards a region-shaping secret more than material treasure."
+      },
+      "generation": {
+        "statProfile": "creature-caster",
+        "traits": [
+          {
+            "id": "ancient-dragon-nature",
+            "Name": "Intrinsic Nature",
+            "Description": "An immensely powerful creature guards a region-shaping secret more than material treasure."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 50
+      },
+      "weight": 1
+    },
+    {
+      "id": "shoal-kraken",
+      "fields": {
+        "Name": "Shoal Kraken",
+        "Description": "A sea monster blocks a trade route and builds a nest from wrecks."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          {
+            "id": "shoal-kraken-nature",
+            "Name": "Intrinsic Nature",
+            "Description": "A sea monster blocks a trade route and builds a nest from wrecks."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 25
+      },
+      "weight": 1
+    },
+    {
+      "id": "migrating-behemoth",
+      "fields": {
+        "Name": "Migrating Behemoth",
+        "Description": "A gigantic creature periodically crosses communities built on its ancient route."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          {
+            "id": "migrating-behemoth-nature",
+            "Name": "Intrinsic Nature",
+            "Description": "A gigantic creature periodically crosses communities built on its ancient route."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 50
+      },
+      "weight": 1
+    },
+    {
+      "id": "vengeful-spirit",
+      "fields": {
+        "Name": "Vengeful Spirit",
+        "Description": "An entity bound to a specific injustice strikes the culprit’s symbols rather than true heirs."
+      },
+      "generation": {
+        "statProfile": "creature-caster",
+        "traits": [
+          {
+            "id": "vengeful-spirit-nature",
+            "Name": "Intrinsic Nature",
+            "Description": "An entity bound to a specific injustice strikes the culprit’s symbols rather than true heirs."
+          }
+        ],
+        "fixedRules": [
+          {
+            "entry": "spirits-rule",
+            "level": 2
+          }
+        ],
+        "statusEffects": [
+          {
+            "generator": "status-effect",
+            "entry": "shadowed",
+            "select": "fields"
+          }
+        ],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 0
+      },
+      "weight": 1
+    },
+    {
+      "id": "insect-queen",
+      "fields": {
+        "Name": "Insect Queen",
+        "Description": "An intelligent creature coordinates a colony and negotiates as if every individual were part of its body."
+      },
+      "generation": {
+        "statProfile": "creature-caster",
+        "traits": [
+          {
+            "id": "insect-queen-nature",
+            "Name": "Intrinsic Nature",
+            "Description": "An intelligent creature coordinates a colony and negotiates as if every individual were part of its body."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 25
+      },
+      "weight": 1
     }
   ],
   "modifiers": [

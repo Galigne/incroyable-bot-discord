@@ -515,6 +515,213 @@
         "inventory": [],
         "naturalArmorPercentage": 5
       }
+    },
+    {
+      "id": "solar-lizard",
+      "fields": {
+        "Name": "Solar Lizard",
+        "Description": "A placid reptile that stores heat in its scales and seeks sun-exposed surfaces."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          {
+            "id": "solar-lizard-nature",
+            "Name": "Intrinsic Nature",
+            "Description": "A placid reptile that stores heat in its scales and seeks sun-exposed surfaces."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 10
+      },
+      "weight": 1
+    },
+    {
+      "id": "reed-snake",
+      "fields": {
+        "Name": "Reed Snake",
+        "Description": "A discreet aquatic snake whose bite is painful but rarely lethal."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          {
+            "id": "reed-snake-nature",
+            "Name": "Intrinsic Nature",
+            "Description": "A discreet aquatic snake whose bite is painful but rarely lethal."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 5
+      },
+      "weight": 1
+    },
+    {
+      "id": "scavenger-rat",
+      "fields": {
+        "Name": "Scavenger Rat",
+        "Description": "A curious rodent that carries tools, buttons, and shiny objects to a surprisingly organized nest."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          {
+            "id": "scavenger-rat-nature",
+            "Name": "Intrinsic Nature",
+            "Description": "A curious rodent that carries tools, buttons, and shiny objects to a surprisingly organized nest."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 0
+      },
+      "weight": 1
+    },
+    {
+      "id": "weaver-spider",
+      "fields": {
+        "Name": "Weaver Spider",
+        "Description": "A large nonaggressive spider whose strong silk is prized by craftspeople."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          {
+            "id": "weaver-spider-nature",
+            "Name": "Intrinsic Nature",
+            "Description": "A large nonaggressive spider whose strong silk is prized by craftspeople."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 10
+      },
+      "weight": 1
+    },
+    {
+      "id": "hill-wolf",
+      "fields": {
+        "Name": "Hill Wolf",
+        "Description": "A cautious social predator that watches a group before choosing avoidance or approach."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          {
+            "id": "hill-wolf-nature",
+            "Name": "Intrinsic Nature",
+            "Description": "A cautious social predator that watches a group before choosing avoidance or approach."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 10
+      },
+      "weight": 1
+    },
+    {
+      "id": "armored-crab",
+      "fields": {
+        "Name": "Armored Crab",
+        "Description": "A large crustacean that reinforces its shell with debris and seashells."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          {
+            "id": "armored-crab-nature",
+            "Name": "Intrinsic Nature",
+            "Description": "A large crustacean that reinforces its shell with debris and seashells."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 35
+      },
+      "weight": 1
+    },
+    {
+      "id": "burrowing-armadillo",
+      "fields": {
+        "Name": "Burrowing Armadillo",
+        "Description": "A sturdy animal able to locate water, roots, and hollows beneath dry ground."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          {
+            "id": "burrowing-armadillo-nature",
+            "Name": "Intrinsic Nature",
+            "Description": "A sturdy animal able to locate water, roots, and hollows beneath dry ground."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 30
+      },
+      "weight": 1
+    },
+    {
+      "id": "thieving-monkey",
+      "fields": {
+        "Name": "Thieving Monkey",
+        "Description": "An intelligent animal that trades stolen objects for food or new curiosities."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          {
+            "id": "thieving-monkey-nature",
+            "Name": "Intrinsic Nature",
+            "Description": "An intelligent animal that trades stolen objects for food or new curiosities."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 5
+      },
+      "weight": 1
+    },
+    {
+      "id": "cave-bat",
+      "fields": {
+        "Name": "Cave Bat",
+        "Description": "A small nocturnal animal whose movement reveals air currents and hidden passages."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          {
+            "id": "cave-bat-nature",
+            "Name": "Intrinsic Nature",
+            "Description": "A small nocturnal animal whose movement reveals air currents and hidden passages."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 0
+      },
+      "weight": 1
     }
   ],
   "modifiers": [

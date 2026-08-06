@@ -25,7 +25,7 @@ test('production generator v2 data uses stable IDs, strict parity, and visibilit
 	const frenchPublic = generatorCatalog.listGenerators('fr');
 	const internal = generatorCatalog.listGenerators('en', { visibility: 'internal' });
 	const all = generatorCatalog.listGenerators('en', { visibility: 'all' });
-	assert.ok(englishPublic.length >= 25);
+	assert.ok(englishPublic.length >= 23);
 	assert.deepEqual(
 		englishPublic.map(generator => generator.id).sort(),
 		frenchPublic.map(generator => generator.id).sort(),
@@ -41,6 +41,10 @@ test('production generator v2 data uses stable IDs, strict parity, and visibilit
 			['creature-companion', 'component'],
 			['creature-monster', 'component'],
 			['modifier', 'modifier'],
+			['site-modifier-all', 'modifier'],
+			['site-modifier-building', 'modifier'],
+			['site-modifier-interiors', 'modifier'],
+			['site-modifier-structures', 'modifier'],
 		]),
 	);
 	assert.equal(

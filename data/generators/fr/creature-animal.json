@@ -515,6 +515,213 @@
         "inventory": [],
         "naturalArmorPercentage": 5
       }
+    },
+    {
+      "id": "solar-lizard",
+      "fields": {
+        "Name": "Lézard solaire",
+        "Description": "Un reptile placide qui stocke la chaleur dans ses écailles et"
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          {
+            "id": "solar-lizard-nature",
+            "Name": "Nature intrinsèque",
+            "Description": "Un reptile placide qui stocke la chaleur dans ses écailles et"
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 10
+      },
+      "weight": 1
+    },
+    {
+      "id": "reed-snake",
+      "fields": {
+        "Name": "Serpent des roseaux",
+        "Description": "Un serpent aquatique discret dont la morsure est"
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          {
+            "id": "reed-snake-nature",
+            "Name": "Nature intrinsèque",
+            "Description": "Un serpent aquatique discret dont la morsure est"
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 5
+      },
+      "weight": 1
+    },
+    {
+      "id": "scavenger-rat",
+      "fields": {
+        "Name": "Rat récupérateur",
+        "Description": "Un rongeur curieux qui emporte petits outils, boutons et"
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          {
+            "id": "scavenger-rat-nature",
+            "Name": "Nature intrinsèque",
+            "Description": "Un rongeur curieux qui emporte petits outils, boutons et"
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 0
+      },
+      "weight": 1
+    },
+    {
+      "id": "weaver-spider",
+      "fields": {
+        "Name": "Araignée tisseuse",
+        "Description": "Une grosse araignée non agressive dont la toile solide est"
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          {
+            "id": "weaver-spider-nature",
+            "Name": "Nature intrinsèque",
+            "Description": "Une grosse araignée non agressive dont la toile solide est"
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 10
+      },
+      "weight": 1
+    },
+    {
+      "id": "hill-wolf",
+      "fields": {
+        "Name": "Loup des collines",
+        "Description": "Un prédateur social prudent qui observe longtemps un"
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          {
+            "id": "hill-wolf-nature",
+            "Name": "Nature intrinsèque",
+            "Description": "Un prédateur social prudent qui observe longtemps un"
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 10
+      },
+      "weight": 1
+    },
+    {
+      "id": "armored-crab",
+      "fields": {
+        "Name": "Crabe cuirassé",
+        "Description": "Un crustacé de grande taille utilisant débris et coquillages"
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          {
+            "id": "armored-crab-nature",
+            "Name": "Nature intrinsèque",
+            "Description": "Un crustacé de grande taille utilisant débris et coquillages"
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 35
+      },
+      "weight": 1
+    },
+    {
+      "id": "burrowing-armadillo",
+      "fields": {
+        "Name": "Tatou fouisseur",
+        "Description": "Un animal robuste capable de localiser eau, racines et"
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          {
+            "id": "burrowing-armadillo-nature",
+            "Name": "Nature intrinsèque",
+            "Description": "Un animal robuste capable de localiser eau, racines et"
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 30
+      },
+      "weight": 1
+    },
+    {
+      "id": "thieving-monkey",
+      "fields": {
+        "Name": "Singe chapardeur",
+        "Description": "Un animal intelligent qui échange volontiers les objets"
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          {
+            "id": "thieving-monkey-nature",
+            "Name": "Nature intrinsèque",
+            "Description": "Un animal intelligent qui échange volontiers les objets"
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 5
+      },
+      "weight": 1
+    },
+    {
+      "id": "cave-bat",
+      "fields": {
+        "Name": "Chauve-souris cavernicole",
+        "Description": "Un petit animal nocturne dont les mouvements"
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          {
+            "id": "cave-bat-nature",
+            "Name": "Nature intrinsèque",
+            "Description": "Un petit animal nocturne dont les mouvements"
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 0
+      },
+      "weight": 1
     }
   ],
   "modifiers": [

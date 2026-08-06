@@ -25,14 +25,6 @@
       }
     },
     {
-      "id": "unusually-large",
-      "weight": 2,
-      "fields": {
-        "Name": "Unusually Large",
-        "Description": "They are remarkably large for their kind, with a presence that is difficult to ignore."
-      }
-    },
-    {
       "id": "pale",
       "weight": 2,
       "fields": {
@@ -53,6 +45,90 @@
       "fields": {
         "Name": "Weathered",
         "Description": "Exposure to harsh weather has left them rough, patient, and visibly worn."
+      }
+    },
+    {
+      "id": "alpha",
+      "fields": {
+        "Name": "Alpha",
+        "Description": "The subject has the bearing of a dominant leader that coordinates peers and protects group cohesion."
+      }
+    },
+    {
+      "id": "hybrid",
+      "fields": {
+        "Name": "Hybrid",
+        "Description": "The subject shows traits from a second species, suggesting one useful ability and a contradictory weakness."
+      }
+    },
+    {
+      "id": "undead",
+      "fields": {
+        "Name": "Undead",
+        "Description": "The subject appears free of several biological needs and bound to the cause or rite of reanimation."
+      }
+    },
+    {
+      "id": "reinforced",
+      "fields": {
+        "Name": "Reinforced",
+        "Description": "Armor, mutation, or magical protection visibly suggests unusual resilience against ordinary attacks."
+      }
+    },
+    {
+      "id": "gigantic",
+      "fields": {
+        "Name": "Gigantic",
+        "Description": "The subject is extraordinarily large, with imposing reach and presence but difficulty in narrow spaces."
+      }
+    },
+    {
+      "id": "enraged",
+      "fields": {
+        "Name": "Enraged",
+        "Description": "The subject appears recklessly aggressive after injury, dangerous in manner but increasingly predictable."
+      }
+    },
+    {
+      "id": "pack",
+      "fields": {
+        "Name": "Pack",
+        "Description": "The encounter is narrated as a coordinated pack, without changing generated group size or mechanics."
+      }
+    },
+    {
+      "id": "swarm",
+      "fields": {
+        "Name": "Swarm",
+        "Description": "The encounter is narrated as many small creatures acting as one threat, without changing generated group size or mechanics."
+      }
+    },
+    {
+      "id": "ectoplasmic",
+      "fields": {
+        "Name": "Ectoplasmic",
+        "Description": "The subject appears partly able to cross matter but must seem material to affect the physical world."
+      }
+    },
+    {
+      "id": "invisible",
+      "fields": {
+        "Name": "Invisible",
+        "Description": "The subject is hard to see, though scent, sound, and interaction with the surroundings may reveal it."
+      }
+    },
+    {
+      "id": "rule-bearer",
+      "fields": {
+        "Name": "RULE Bearer",
+        "Description": "The subject appears to wield a RULE-like phenomenon with an ordinary user’s limitations; no RULE is selected or granted."
+      }
+    },
+    {
+      "id": "equipped",
+      "fields": {
+        "Name": "Equipped",
+        "Description": "The subject appears to carry anatomy-appropriate weapons or objects; no equipment is selected or added."
       }
     }
   ]

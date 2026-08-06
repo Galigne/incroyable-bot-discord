@@ -49,6 +49,46 @@
         "Backstory": "A navigator survived a wreck caused by charts that had been deliberately altered before departure.",
         "Goals": "Discover who sabotaged the voyage and map a safe course through the waters that claimed it."
       }
+    },
+    {
+      "id": "legacy-profession-fisher",
+      "fields": {
+        "Appearance": "Clothing and tools immediately suggest the work of a fisher.",
+        "Backstory": "Built a life as a fisher and knows the profession’s obligations and hidden pressures.",
+        "Goals": "Use that experience to secure a safer and more independent future."
+      }
+    },
+    {
+      "id": "legacy-profession-pilot",
+      "fields": {
+        "Appearance": "Clothing and tools immediately suggest the work of a pilot.",
+        "Backstory": "Built a life as a pilot and knows the profession’s obligations and hidden pressures.",
+        "Goals": "Use that experience to secure a safer and more independent future."
+      }
+    },
+    {
+      "id": "legacy-profession-pirate",
+      "fields": {
+        "Appearance": "Clothing and tools immediately suggest the work of a pirate.",
+        "Backstory": "Built a life as a pirate and knows the profession’s obligations and hidden pressures.",
+        "Goals": "Use that experience to secure a safer and more independent future."
+      }
+    },
+    {
+      "id": "legacy-profession-pirate-captain",
+      "fields": {
+        "Appearance": "Clothing and tools immediately suggest the work of a pirate captain.",
+        "Backstory": "Built a life as a pirate captain and knows the profession’s obligations and hidden pressures.",
+        "Goals": "Use that experience to secure a safer and more independent future."
+      }
+    },
+    {
+      "id": "decomposed-rill",
+      "fields": {
+        "Appearance": "A distinctive figure remembered as Rill.",
+        "Backstory": "a tidekin salvager carrying love letters recovered from wrecks and trying to deliver each one.",
+        "Goals": "Turn this unusual history toward a self-directed future."
+      }
     }
   ]
 }

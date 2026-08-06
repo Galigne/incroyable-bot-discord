@@ -49,6 +49,78 @@
         "Backstory": "A military engineer survived a siege by improvising defenses from ruined civilian buildings.",
         "Goals": "Develop defenses that save lives and prevent their inventions from being used against innocents."
       }
+    },
+    {
+      "id": "legacy-profession-general",
+      "fields": {
+        "Appearance": "Clothing and tools immediately suggest the work of a general.",
+        "Backstory": "Built a life as a general and knows the profession’s obligations and hidden pressures.",
+        "Goals": "Use that experience to secure a safer and more independent future."
+      }
+    },
+    {
+      "id": "legacy-profession-commander",
+      "fields": {
+        "Appearance": "Clothing and tools immediately suggest the work of a commander.",
+        "Backstory": "Built a life as a commander and knows the profession’s obligations and hidden pressures.",
+        "Goals": "Use that experience to secure a safer and more independent future."
+      }
+    },
+    {
+      "id": "legacy-profession-captain",
+      "fields": {
+        "Appearance": "Clothing and tools immediately suggest the work of a captain.",
+        "Backstory": "Built a life as a captain and knows the profession’s obligations and hidden pressures.",
+        "Goals": "Use that experience to secure a safer and more independent future."
+      }
+    },
+    {
+      "id": "legacy-profession-guard",
+      "fields": {
+        "Appearance": "Clothing and tools immediately suggest the work of a guard.",
+        "Backstory": "Built a life as a guard and knows the profession’s obligations and hidden pressures.",
+        "Goals": "Use that experience to secure a safer and more independent future."
+      }
+    },
+    {
+      "id": "legacy-profession-soldier",
+      "fields": {
+        "Appearance": "Clothing and tools immediately suggest the work of a soldier.",
+        "Backstory": "Built a life as a soldier and knows the profession’s obligations and hidden pressures.",
+        "Goals": "Use that experience to secure a safer and more independent future."
+      }
+    },
+    {
+      "id": "legacy-profession-guardian",
+      "fields": {
+        "Appearance": "Clothing and tools immediately suggest the work of a guardian.",
+        "Backstory": "Built a life as a guardian and knows the profession’s obligations and hidden pressures.",
+        "Goals": "Use that experience to secure a safer and more independent future."
+      }
+    },
+    {
+      "id": "legacy-profession-scout",
+      "fields": {
+        "Appearance": "Clothing and tools immediately suggest the work of a scout.",
+        "Backstory": "Built a life as a scout and knows the profession’s obligations and hidden pressures.",
+        "Goals": "Use that experience to secure a safer and more independent future."
+      }
+    },
+    {
+      "id": "legacy-enemy-scout",
+      "fields": {
+        "Appearance": "Clothing and equipment suit the role of enemy scout.",
+        "Backstory": "A small unit observes local defenses and tries to leave without open combat.",
+        "Goals": "Complete the current operation without becoming expendable to allies or employers."
+      }
+    },
+    {
+      "id": "decomposed-captain-orro-flint",
+      "fields": {
+        "Appearance": "A distinctive figure remembered as Captain Orro Flint.",
+        "Backstory": "a river-orc guard who loves procedure, competitive poetry, and arresting corrupt superiors.",
+        "Goals": "Turn this unusual history toward a self-directed future."
+      }
     }
   ]
 }

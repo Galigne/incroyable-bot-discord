@@ -49,6 +49,46 @@
         "Backstory": "A widowed aristocrat rebuilt influence through marriages, favors, and impeccable memory.",
         "Goals": "Arrange a peaceful succession and settle one dangerous debt before age removes the opportunity."
       }
+    },
+    {
+      "id": "legacy-profession-sovereign",
+      "fields": {
+        "Appearance": "Clothing and tools immediately suggest the work of a sovereign.",
+        "Backstory": "Built a life as a sovereign and knows the profession’s obligations and hidden pressures.",
+        "Goals": "Use that experience to secure a safer and more independent future."
+      }
+    },
+    {
+      "id": "legacy-profession-prince",
+      "fields": {
+        "Appearance": "Clothing and tools immediately suggest the work of a prince.",
+        "Backstory": "Built a life as a prince and knows the profession’s obligations and hidden pressures.",
+        "Goals": "Use that experience to secure a safer and more independent future."
+      }
+    },
+    {
+      "id": "legacy-profession-noble",
+      "fields": {
+        "Appearance": "Clothing and tools immediately suggest the work of a noble.",
+        "Backstory": "Built a life as a noble and knows the profession’s obligations and hidden pressures.",
+        "Goals": "Use that experience to secure a safer and more independent future."
+      }
+    },
+    {
+      "id": "decomposed-lady-seraphine-vale",
+      "fields": {
+        "Appearance": "A distinctive figure remembered as Lady Seraphine Vale.",
+        "Backstory": "an impeccably polite noble funding both sides of a rebellion to minimize civilian casualties.",
+        "Goals": "Turn this unusual history toward a self-directed future."
+      }
+    },
+    {
+      "id": "decomposed-king-pip-ix",
+      "fields": {
+        "Appearance": "A distinctive figure remembered as King Pip IX.",
+        "Backstory": "a self-proclaimed rat monarch commanding an excellent spy network beneath the capital.",
+        "Goals": "Turn this unusual history toward a self-directed future."
+      }
     }
   ]
 }

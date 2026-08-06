@@ -37,7 +37,10 @@ module.exports = function createGeneratorChecks(context) {
 						&& generator.kind === 'component'
 					)
 					|| (
-						generator.id === 'modifier'
+						(
+							generator.id === 'modifier'
+							|| generator.id.startsWith('site-modifier-')
+						)
 						&& generator.kind === 'modifier'
 					)
 				))
@@ -143,7 +146,6 @@ function checkRequiredGenerators(errors, generatorCatalog) {
 		'background',
 		'building',
 		'creature',
-		'criminal',
 		'dungeon',
 		'event',
 		'faction',
@@ -151,7 +153,6 @@ function checkRequiredGenerators(errors, generatorCatalog) {
 		'inventory',
 		'material',
 		'name',
-		'npc',
 		'personality',
 		'quest',
 		'race',
@@ -179,7 +180,6 @@ function checkRequiredGenerators(errors, generatorCatalog) {
 		'creature-animal',
 		'creature-companion',
 		'creature-monster',
-		'criminal',
 		'dungeon',
 		'faction',
 		'government',
@@ -190,11 +190,19 @@ function checkRequiredGenerators(errors, generatorCatalog) {
 		'settlement',
 	]) {
 		const entryCount = generatorCatalog.getGenerator(generatorId)?.entries.length ?? 0;
-		if (entryCount < 20 || entryCount > 40) {
-			errors.push(`Generator ${generatorId} must contain 20 to 40 entries.`);
+		if (entryCount < 20) {
+			errors.push(`Generator ${generatorId} must contain at least 20 entries.`);
 		}
 	}
-	for (const obsoleteId of ['loot', 'power', 'enemy', 'location', 'citizen-background']) {
+	for (const obsoleteId of [
+		'loot',
+		'power',
+		'enemy',
+		'location',
+		'citizen-background',
+		'npc',
+		'criminal',
+	]) {
 		if (generatorCatalog.getGenerator(obsoleteId)) {
 			errors.push(`Obsolete generator ${obsoleteId} still exists.`);
 		}

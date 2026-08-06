@@ -19,7 +19,7 @@
     "test:creature-generation": "node --test scripts/creatureGeneration.test.js",
     "test:entities": "node --test scripts/entityManagement.test.js",
     "test:embeds": "node --test scripts/embedFooters.test.js",
-    "test:generators": "node --test scripts/generatorCatalog.test.js scripts/generatorResolver.test.js",
+    "test:generators": "node --test scripts/generatorCatalog.test.js scripts/generatorResolver.test.js scripts/historicalMigration.test.js",
     "test:help": "node --test scripts/help.test.js",
     "test:history": "node --test scripts/characterHistory.test.js",
     "test:mechanics": "node --test scripts/mechanics.test.js",

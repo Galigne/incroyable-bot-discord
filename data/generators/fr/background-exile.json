@@ -49,6 +49,14 @@
         "Backstory": "Un exilé politique prônait des réformes pacifiques jusqu’à ce que le gouvernement qualifie de trahison la simple évocation du changement.",
         "Goals": "Soutenir les réformateurs restés au pays tout en empêchant leur mouvement de sombrer dans la violence aveugle."
       }
+    },
+    {
+      "id": "legacy-profession-revolutionary",
+      "fields": {
+        "Appearance": "Sa tenue et ses outils évoquent immédiatement le métier suivant : révolutionnaire.",
+        "Backstory": "A construit sa vie comme révolutionnaire et connaît les obligations ainsi que les pressions cachées de cette activité.",
+        "Goals": "Mettre cette expérience à profit pour obtenir un avenir plus sûr et plus autonome."
+      }
     }
   ]
 }

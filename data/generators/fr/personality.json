@@ -150,6 +150,358 @@
       "id": "desperate-to-leave-a-heroic-legacy-yet-freezes",
       "weight": 2,
       "value": "Rêve désespérément de laisser un héritage héroïque, mais perd tous ses moyens dès que quelqu’un le reconnaît en public."
+    },
+    {
+      "id": "welcoming-and-attentive",
+      "value": "Accueillant et attentionné, met spontanément les nouveaux venus à l’aise mais s’implique trop vite dans leurs problèmes."
+    },
+    {
+      "id": "ambitious",
+      "value": "Ambitieux, mesure chaque relation à l’aune de ce qu’elle peut lui permettre d’accomplir."
+    },
+    {
+      "id": "playful-humorist",
+      "value": "Amusant et joueur, détourne les situations tendues par l’humour même lorsque le moment s’y prête mal.",
+      "weight": 2
+    },
+    {
+      "id": "arrogant",
+      "value": "Arrogant, considère sa compétence comme une évidence et vit toute correction comme une attaque personnelle.",
+      "weight": 2
+    },
+    {
+      "id": "passionate-artist",
+      "value": "Artiste passionné, recherche la beauté jusque dans les lieux dangereux et néglige parfois les besoins pratiques.",
+      "weight": 2
+    },
+    {
+      "id": "authoritarian",
+      "value": "Autoritaire, organise naturellement les autres mais supporte difficilement qu’une décision lui échappe.",
+      "weight": 2
+    },
+    {
+      "id": "miserly",
+      "value": "Avare, conserve argent, informations et faveurs jusqu’à ce que leur dépense soit absolument nécessaire.",
+      "weight": 2
+    },
+    {
+      "id": "talkative",
+      "value": "Bavard, partage volontiers anecdotes et rumeurs mais révèle parfois une information qu’il devait protéger.",
+      "weight": 2
+    },
+    {
+      "id": "smooth-talker",
+      "value": "Beau parleur, sait rendre une proposition séduisante sans mentir directement sur ses défauts."
+    },
+    {
+      "id": "jaded",
+      "value": "Blasé, accueille merveilles et catastrophes avec la même lassitude tout en observant soigneusement les réactions des autres.",
+      "weight": 2
+    },
+    {
+      "id": "gruff-but-loyal",
+      "value": "Bourru mais loyal, exprime son affection par des actes pratiques plutôt que par des paroles aimables.",
+      "weight": 2
+    },
+    {
+      "id": "capricious",
+      "value": "Capricieux, change brusquement de priorité et attend de ses proches qu’ils suivent sans explication."
+    },
+    {
+      "id": "charismatic",
+      "value": "Charismatique, attire naturellement l’attention mais se sent responsable de ceux qui choisissent de le suivre.",
+      "weight": 2
+    },
+    {
+      "id": "chaotically-unpredictable",
+      "value": "Cinglé, agit de manière chaotique et imprévisible, en suivant une logique que les autres peinent à comprendre sur le moment.",
+      "weight": 2
+    },
+    {
+      "id": "hot-tempered",
+      "value": "Coléreux, réagit vivement à la provocation puis regrette les dégâts causés une fois le calme revenu.",
+      "weight": 2
+    },
+    {
+      "id": "courageous",
+      "value": "Courageux, avance malgré la peur et minimise souvent le danger pour rassurer les autres.",
+      "weight": 2
+    },
+    {
+      "id": "courteous",
+      "value": "Courtois, respecte les formes même face à un ennemi et remarque immédiatement les manquements à l’étiquette.",
+      "weight": 2
+    },
+    {
+      "id": "creative",
+      "value": "Créatif, improvise des solutions inattendues mais perd rapidement intérêt pour leur mise en œuvre."
+    },
+    {
+      "id": "cultured",
+      "value": "Cultivé, relie chaque situation à une référence savante et oublie que ses interlocuteurs ne la partagent pas toujours.",
+      "weight": 2
+    },
+    {
+      "id": "curious",
+      "value": "Curieux, pose la question que tout le monde évite et touche volontiers ce qui devrait rester intact."
+    },
+    {
+      "id": "cynical",
+      "value": "Cynique, suppose que toute institution protège d’abord ses intérêts mais aide discrètement les personnes sincères."
+    },
+    {
+      "id": "disorganized",
+      "value": "Désordonné, retrouve sans effort ses propres affaires dans un chaos incompréhensible pour les autres."
+    },
+    {
+      "id": "depressed",
+      "value": "Dépressif, traverse une période de profond découragement, se replie sur lui-même et peine à trouver de l’intérêt ou de l’énergie dans l’action."
+    },
+    {
+      "id": "devoted",
+      "value": "Dévoué, place une personne ou une cause avant son confort et peine à reconnaître quand cette loyauté est exploitée."
+    },
+    {
+      "id": "reserved",
+      "value": "Discret, écoute davantage qu’il ne parle et devient mal à l’aise lorsqu’on lui attribue publiquement un mérite.",
+      "weight": 2
+    },
+    {
+      "id": "absent-minded",
+      "value": "Distrait, remarque les détails inhabituels tout en oubliant les obligations les plus évidentes.",
+      "weight": 2
+    },
+    {
+      "id": "selfish",
+      "value": "Égoïste, protège d’abord sa sécurité mais peut devenir étonnamment généreux envers les rares personnes qu’il considère comme siennes.",
+      "weight": 2
+    },
+    {
+      "id": "emotional",
+      "value": "Émotif, exprime ouvertement joie, peur et colère, rendant ses intentions faciles à lire."
+    },
+    {
+      "id": "energetic",
+      "value": "Énergique, transforme chaque attente en activité et épuise parfois ses compagnons par son enthousiasme.",
+      "weight": 2
+    },
+    {
+      "id": "enigmatic",
+      "value": "Énigmatique, répond par images et demi-vérités parce qu’il craint davantage d’être compris que d’être mal jugé."
+    },
+    {
+      "id": "ingeniously-lazy",
+      "value": "Fainéant ingénieux, dépense beaucoup d’efforts à inventer une méthode qui lui évitera un travail répétitif.",
+      "weight": 2
+    },
+    {
+      "id": "proud",
+      "value": "Fier, accepte volontiers un défi mais refuse une aide qui donnerait l’impression qu’il n’est pas à la hauteur."
+    },
+    {
+      "id": "party-lover",
+      "value": "Fêtard, crée rapidement une célébration et traite chaque lendemain difficile comme le prix normal d’une bonne histoire."
+    },
+    {
+      "id": "devious",
+      "value": "Fourbe, préfère détourner les règles plutôt que les enfreindre ouvertement et garde toujours une issue de secours.",
+      "weight": 2
+    },
+    {
+      "id": "blunt",
+      "value": "Franc, dit ce qu’il pense sans détour et confond parfois honnêteté avec absence de tact.",
+      "weight": 2
+    },
+    {
+      "id": "outwardly-cold",
+      "value": "Froid en apparence, maîtrise ses réactions pour protéger un attachement beaucoup plus profond qu’il ne l’admet.",
+      "weight": 2
+    },
+    {
+      "id": "accident-prone",
+      "value": "Gaffeur, provoque régulièrement de petits accidents mais se montre étonnamment efficace lorsque la situation devient vraiment grave.",
+      "weight": 2
+    },
+    {
+      "id": "haughty",
+      "value": "Hautain, juge les gens selon leur maintien et leur réputation avant d’être forcé de réviser son opinion.",
+      "weight": 2
+    },
+    {
+      "id": "foolish",
+      "value": "Idiot, manque de jugement, comprend régulièrement les situations de travers et s’engage avec assurance dans de mauvaises décisions.",
+      "weight": 2
+    },
+    {
+      "id": "impatient-and-impulsive",
+      "value": "Impatient et impulsif, préfère une mauvaise décision immédiate à une longue attente sans information."
+    },
+    {
+      "id": "insolent",
+      "value": "Insolent, défie l’autorité par réflexe mais respecte les personnes capables de justifier clairement leurs décisions.",
+      "weight": 2
+    },
+    {
+      "id": "ironic",
+      "value": "Ironique, utilise le sarcasme pour garder ses distances et devient très direct lorsque quelqu’un est réellement en danger."
+    },
+    {
+      "id": "jealous",
+      "value": "Jaloux, compare constamment sa place à celle des autres tout en ayant honte de ce besoin de reconnaissance.",
+      "weight": 2
+    },
+    {
+      "id": "nervous",
+      "value": "Nerveux, anticipe tous les échecs possibles et se prépare donc souvent mieux que les optimistes du groupe.",
+      "weight": 2
+    },
+    {
+      "id": "fair-minded",
+      "value": "Juste, applique les mêmes principes à ses alliés et à ses ennemis même lorsque cela lui coûte personnellement.",
+      "weight": 2
+    },
+    {
+      "id": "logical",
+      "value": "Logique, cherche une cause vérifiable à chaque phénomène et traite la magie comme un problème encore mal documenté."
+    },
+    {
+      "id": "clumsy",
+      "value": "Maladroit, manque d’aisance physique mais reconnaît très vite les personnes gênées ou exclues.",
+      "weight": 2
+    },
+    {
+      "id": "compulsively-orderly",
+      "value": "Maniaque, entretient des rituels précis d’ordre et de contrôle qui deviennent fragiles sous la pression."
+    },
+    {
+      "id": "mysterious",
+      "value": "Mystérieux, protège son passé par des réponses vagues mais ne ment jamais au sujet du danger présent."
+    },
+    {
+      "id": "modest",
+      "value": "Modeste, minimise ses réussites et attribue facilement le mérite aux autres jusqu’à laisser quelqu’un usurper son travail."
+    },
+    {
+      "id": "compulsive-fabulist",
+      "value": "Mythomane, embellit son histoire de façon compulsive et finit parfois prisonnier de ses propres inventions.",
+      "weight": 2
+    },
+    {
+      "id": "naive",
+      "value": "Naïf, accorde d’abord sa confiance mais se souvient longtemps de chaque trahison.",
+      "weight": 2
+    },
+    {
+      "id": "optimistic",
+      "value": "Optimiste, cherche une possibilité favorable dans chaque crise et refuse de laisser le fatalisme décider à sa place.",
+      "weight": 2
+    },
+    {
+      "id": "pacifist",
+      "value": "Pacifique, recherche toujours une solution sans violence mais se prépare soigneusement au cas où elle échouerait.",
+      "weight": 2
+    },
+    {
+      "id": "passionate",
+      "value": "Passionné, s’investit entièrement dans un projet et oublie le reste du monde tant que son enthousiasme dure.",
+      "weight": 2
+    },
+    {
+      "id": "patient",
+      "value": "Patient, laisse les autres se dévoiler à leur rythme et agit seulement lorsqu’il estime le moment décisif."
+    },
+    {
+      "id": "sexually-inappropriate",
+      "value": "Pervers sexuel, ramène fréquemment les échanges à des sous-entendus ou préoccupations sexuelles et franchit volontiers les limites de la bienséance.",
+      "weight": 2
+    },
+    {
+      "id": "fearful-but-cautious",
+      "value": "Peureux mais prudent, évite les risques inutiles et remarque souvent le danger avant les héros plus téméraires.",
+      "weight": 2
+    },
+    {
+      "id": "protective",
+      "value": "Protecteur, prend spontanément la responsabilité des plus vulnérables et supporte mal de ne pas pouvoir tout contrôler."
+    },
+    {
+      "id": "resentful",
+      "value": "Rancunier, conserve une mémoire exacte des offenses mais peut renoncer à sa vengeance face à des réparations sincères.",
+      "weight": 2
+    },
+    {
+      "id": "rebellious",
+      "value": "Rebelle, refuse les règles fondées uniquement sur la tradition et exige qu’une autorité démontre sa légitimité.",
+      "weight": 2
+    },
+    {
+      "id": "dreamer",
+      "value": "Rêveur, imagine constamment d’autres vies et d’autres mondes, parfois au détriment de ce qui se passe devant lui.",
+      "weight": 2
+    },
+    {
+      "id": "wise",
+      "value": "Sage, préfère poser la bonne question plutôt que donner immédiatement un conseil et accepte de reconnaître son ignorance.",
+      "weight": 2
+    },
+    {
+      "id": "schizophrenic",
+      "value": "Schizophrène, vit à cet instant une perception désorganisée ou altérée de la réalité, sans que cela définisse automatiquement ses intentions ou sa dangerosité."
+    },
+    {
+      "id": "sensitive",
+      "value": "Sensible, perçoit rapidement l’état émotionnel d’un groupe mais absorbe facilement les tensions ambiantes.",
+      "weight": 2
+    },
+    {
+      "id": "serious",
+      "value": "Sérieux, traite chaque engagement avec rigueur et ne comprend pas toujours pourquoi les autres ont besoin de légèreté."
+    },
+    {
+      "id": "helpful",
+      "value": "Serviable, propose son aide avant qu’on la demande et dissimule souvent sa propre fatigue."
+    },
+    {
+      "id": "solitary",
+      "value": "Solitaire, protège farouchement son indépendance tout en espérant secrètement être invité à rester.",
+      "weight": 2
+    },
+    {
+      "id": "submissive",
+      "value": "Soumis, cède facilement devant une autorité affirmée et préfère suivre une décision plutôt que risquer une confrontation."
+    },
+    {
+      "id": "touchy",
+      "value": "Susceptible, interprète une critique banale comme un jugement global mais défend vivement les personnes critiquées injustement."
+    },
+    {
+      "id": "stubborn",
+      "value": "Têtu, reste fidèle à une décision au-delà du raisonnable mais devient un allié extrêmement constant.",
+      "weight": 2
+    },
+    {
+      "id": "shy",
+      "value": "Timide, évite d’attirer l’attention tout en préparant soigneusement ce qu’il dira si quelqu’un lui donne la parole.",
+      "weight": 2
+    },
+    {
+      "id": "cheater",
+      "value": "Tricheur, considère les règles comme des obstacles négociables et respecte les adversaires capables de déjouer ses méthodes.",
+      "weight": 2
+    },
+    {
+      "id": "boastful",
+      "value": "Vantard, raconte ses exploits avec démesure mais accepte presque toujours le défi nécessaire pour les prouver.",
+      "weight": 2
+    },
+    {
+      "id": "violent",
+      "value": "Violent, recourt trop vite à la force et cherche une justification morale après avoir agi.",
+      "weight": 2
+    },
+    {
+      "id": "bon-vivant",
+      "value": "Bon vivant, valorise nourriture, compagnie et confort sans pour autant abandonner un ami lorsque la fête se termine."
     }
   ]
 }

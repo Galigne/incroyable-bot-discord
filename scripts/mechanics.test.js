@@ -382,7 +382,7 @@ test('seeded random character generation remains equivalent', () => {
 			initiative: 15,
 			reflexes: 15,
 		},
-		rules: [{ name: 'Shadow RULE', level: 2 }],
+		rules: [{ name: 'Ghost RULE', level: 2 }],
 		status: {
 			hp: { current: 280, max: 280 },
 			ar: { current: 14, max: 14 },
@@ -395,13 +395,13 @@ test('seeded random character generation remains equivalent', () => {
 		gear: {
 			equipment: [
 				'Common light armor — Ordinary clothing or light padding that offers mobility but no meaningful AR.',
-				'Hand axe — A compact chopping weapon balanced well enough to throw.',
-				'Greatsword — A massive two-handed sword designed for broad, forceful attacks.',
+				'Harpoon — A heavy barbed point tied to a rope, designed to hold a target after impact.',
+				'Heavy repeating crossbow — A bulky mechanism capable of rapid shots before reloading.',
 			],
 			inventory: [
-				'Bedroll — A weather-resistant blanket and sleeping roll.',
-				'Chalk and charcoal — Useful for marking paths, sketching maps, and making notes.',
-				'Manacles — A pair of iron restraints with a simple key.',
+				'Lockpicking kit — Small tools for manipulating ordinary mechanical locks.',
+				'Crowbar — A sturdy iron lever for doors, crates, and obstacles.',
+				'Precious Jewel — An identifiable piece of jewelry, portable but risky to resell.',
 				'175 gold',
 			],
 			encumbrance: { current: 0, max: 0 },

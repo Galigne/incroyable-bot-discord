@@ -1,156 +1,367 @@
 {
   "schemaVersion": 2,
   "id": "quest",
-  "kind": "category",
+  "kind": "template",
   "visibility": "public",
   "name": "quest",
   "description": "Adventure hooks, objectives, and dilemmas",
   "entrySchema": {
-    "type": "text"
+    "type": "template"
   },
   "entries": [
     {
-      "id": "recover-a-villages-stolen-shadows-before-sunrise-the",
-      "value": "Recover a village's stolen shadows before sunrise; the thief is using them to build a body for a lonely spirit."
+      "id": "recover-item-before-criminal",
+      "template": "Recover the item known as {{item}} from {{site}} before someone with the {{rival}} background takes it.",
+      "references": {
+        "item": {
+          "generator": "inventory",
+          "select": "display"
+        },
+        "site": {
+          "generator": "dungeon",
+          "select": "display"
+        },
+        "rival": {
+          "generator": "background",
+          "entry": "criminal",
+          "select": "display"
+        }
+      }
     },
     {
-      "id": "escort-an-unbearable-but-vital-diplomat-through-territory",
-      "weight": 2,
-      "value": "Escort an unbearable but vital diplomat through territory where speaking a lie attracts predators."
+      "id": "hunt-modified-monster",
+      "template": "Hunt a creature identified as {{creature}} after witnesses associate it with the trait {{variation}}.",
+      "references": {
+        "creature": {
+          "generator": "creature-monster",
+          "select": "display"
+        },
+        "variation": {
+          "generator": "modifier",
+          "select": "display"
+        }
+      }
     },
     {
-      "id": "investigate-a-mine-where-workers-return-each-evening",
-      "weight": 2,
-      "value": "Investigate a mine where workers return each evening with memories belonging to people who vanished years ago."
+      "id": "defend-settlement-from-faction",
+      "template": "Defend {{community}} against a threat tied to {{faction}}.",
+      "references": {
+        "community": {
+          "generator": "settlement",
+          "select": "display"
+        },
+        "faction": {
+          "generator": "faction",
+          "select": "display"
+        }
+      }
     },
     {
-      "id": "steal-a-cursed-crown-from-a-tyrant-without",
-      "weight": 2,
-      "value": "Steal a cursed crown from a tyrant without letting anyone wear it, including the crown's persuasive ghost."
+      "id": "escort-traveler-through-region",
+      "template": "Escort someone with the {{traveler}} background through the region known as {{region}} without revealing the true reason for the journey.",
+      "references": {
+        "traveler": {
+          "generator": "background",
+          "select": "display"
+        },
+        "region": {
+          "generator": "region",
+          "select": "display"
+        }
+      }
     },
     {
-      "id": "find-why-a-river-has-stopped-flowing-before",
-      "weight": 3,
-      "value": "Find why a river has stopped flowing before two downstream towns go to war over the remaining water."
+      "id": "steal-item-from-building",
+      "template": "Steal the item known as {{item}} from a place identified as {{building}} and return it to its rightful owner.",
+      "references": {
+        "item": {
+          "generator": "inventory",
+          "select": "display"
+        },
+        "building": {
+          "generator": "building",
+          "select": "display"
+        }
+      }
     },
     {
-      "id": "rescue-a-dragon-from-a-princess-who-collects",
-      "value": "Rescue a dragon from a princess who collects rare creatures and controls the local legal system."
+      "id": "find-missing-person-at-site",
+      "template": "Find someone with the {{missing-person}} background who vanished after a last visit to {{site}}.",
+      "references": {
+        "missing-person": {
+          "generator": "background",
+          "select": "display"
+        },
+        "site": {
+          "generator": "dungeon",
+          "select": "display"
+        }
+      }
     },
     {
-      "id": "map-a-forest-that-rearranges-its-paths-whenever",
-      "weight": 2,
-      "value": "Map a forest that rearranges its paths whenever someone makes a decision they regret."
+      "id": "stop-criminal-operation",
+      "template": "Identify and arrest a suspect with the {{suspect}} background before the next operation.",
+      "references": {
+        "suspect": {
+          "generator": "background",
+          "entry": "criminal",
+          "select": "display"
+        }
+      }
     },
     {
-      "id": "deliver-a-sealed-box-to-a-monastery-every",
-      "weight": 3,
-      "value": "Deliver a sealed box to a monastery; every faction claims the box contains something different and none may be entirely wrong."
+      "id": "prevent-faction-war",
+      "template": "Prevent {{first-faction}} and {{second-faction}} from starting a war around {{community}}.",
+      "references": {
+        "first-faction": {
+          "generator": "faction",
+          "select": "display"
+        },
+        "second-faction": {
+          "generator": "faction",
+          "select": "display"
+        },
+        "community": {
+          "generator": "settlement",
+          "select": "display"
+        }
+      }
     },
     {
-      "id": "clear-a-familys-name-by-proving-their-executed",
-      "weight": 2,
-      "value": "Clear a family's name by proving their executed ancestor was replaced by a mimic before committing treason."
+      "id": "negotiate-racial-peace",
+      "template": "Negotiate peace between a community of the {{people}} people and the inhabitants of {{settlement}}.",
+      "references": {
+        "people": {
+          "generator": "race",
+          "select": "display"
+        },
+        "settlement": {
+          "generator": "settlement",
+          "select": "display"
+        }
+      }
     },
     {
-      "id": "negotiate-peace-between-a-town-and-the-giant",
-      "weight": 3,
-      "value": "Negotiate peace between a town and the giant whose seasonal migration now passes directly through its new walls."
+      "id": "anonymous-gift",
+      "template": "Give the item known as {{item}} to someone with the {{recipient}} background without revealing who commissioned the delivery.",
+      "references": {
+        "item": {
+          "generator": "inventory",
+          "select": "display"
+        },
+        "recipient": {
+          "generator": "background",
+          "select": "display"
+        }
+      }
     },
     {
-      "id": "retrieve-medicine-from-a-quarantined-city-where-the",
-      "value": "Retrieve medicine from a quarantined city where the disease infects written words rather than bodies."
+      "id": "first-contact",
+      "template": "Establish lasting first contact with a community of the {{people}} people.",
+      "references": {
+        "people": {
+          "generator": "race",
+          "select": "display"
+        }
+      }
     },
     {
-      "id": "stop-a-tournament-champion-who-cannot-lose-because",
-      "weight": 2,
-      "value": "Stop a tournament champion who cannot lose because every defeated opponent is magically added to their strength."
+      "id": "map-unknown-phenomenon",
+      "template": "Explore {{region}} and report the cause of a phenomenon absent from every map.",
+      "references": {
+        "region": {
+          "generator": "region",
+          "select": "display"
+        }
+      }
     },
     {
-      "id": "explore-a-lighthouse-shining-into-the-ground-while",
-      "value": "Explore a lighthouse shining into the ground while ships vanish beneath nearby fields."
+      "id": "study-monster-alive",
+      "template": "Study a creature identified as {{creature}} without killing it to understand its link with {{region}}.",
+      "references": {
+        "creature": {
+          "generator": "creature-monster",
+          "select": "display"
+        },
+        "region": {
+          "generator": "region",
+          "select": "display"
+        }
+      }
     },
     {
-      "id": "return-a-runaway-familiar-to-its-mage-then",
-      "weight": 2,
-      "value": "Return a runaway familiar to its mage, then decide whether the familiar's claim of mistreatment is true."
+      "id": "solve-faction-murder",
+      "template": "Solve the murder of someone with the {{victim}} background despite interference from {{faction}}.",
+      "references": {
+        "victim": {
+          "generator": "background",
+          "select": "display"
+        },
+        "faction": {
+          "generator": "faction",
+          "select": "display"
+        }
+      }
     },
     {
-      "id": "protect-a-haunted-theaters-final-performance-so-its",
-      "weight": 2,
-      "value": "Protect a haunted theater's final performance so its dead playwright can reveal the murderer in the last scene."
+      "id": "spy-on-secret-meeting",
+      "template": "Spy on someone with the {{target}} background during a secret meeting in a place identified as {{building}}.",
+      "references": {
+        "target": {
+          "generator": "background",
+          "select": "display"
+        },
+        "building": {
+          "generator": "building",
+          "select": "display"
+        }
+      }
     },
     {
-      "id": "locate-a-missing-tax-caravan-carrying-no-gold",
-      "weight": 3,
-      "value": "Locate a missing tax caravan carrying no gold but a ledger capable of collapsing three noble houses."
+      "id": "prevent-inside-assassination",
+      "template": "Prevent the assassination of someone with the {{target}} background without revealing that the threat comes from {{faction}}.",
+      "references": {
+        "target": {
+          "generator": "background",
+          "select": "display"
+        },
+        "faction": {
+          "generator": "faction",
+          "select": "display"
+        }
+      }
     },
     {
-      "id": "break-into-an-abandoned-prison-to-free-an",
-      "weight": 2,
-      "value": "Break into an abandoned prison to free an innocent inmate whom official records say died forty years ago."
+      "id": "gather-remedy-material",
+      "template": "Gather several samples of {{material}} needed to make a remedy.",
+      "references": {
+        "material": {
+          "generator": "material",
+          "select": "display"
+        }
+      }
     },
     {
-      "id": "gather-three-rival-runesmiths-to-repair-a-failing",
-      "weight": 3,
-      "value": "Gather three rival runesmiths to repair a failing ward, despite each blaming the others for its sabotage."
+      "id": "evacuate-before-monsters",
+      "template": "Evacuate {{settlement}} before a group associated with {{creature}} arrives.",
+      "references": {
+        "settlement": {
+          "generator": "settlement",
+          "select": "display"
+        },
+        "creature": {
+          "generator": "creature-monster",
+          "select": "display"
+        }
+      }
     },
     {
-      "id": "track-a-monster-that-steals-names-its-victims",
-      "weight": 2,
-      "value": "Track a monster that steals names; its victims remain alive but cannot be remembered or addressed."
+      "id": "escape-site-with-prisoner",
+      "template": "Escape {{site}} with someone from the {{prisoner}} background who refuses to explain the imprisonment.",
+      "references": {
+        "site": {
+          "generator": "dungeon",
+          "select": "display"
+        },
+        "prisoner": {
+          "generator": "background",
+          "select": "display"
+        }
+      }
     },
     {
-      "id": "win-a-cooking-contest-whose-prize-is-an",
-      "value": "Win a cooking contest whose prize is an ancient map, while ingredients and judges are being secretly enchanted."
+      "id": "rescue-criminal-captive",
+      "template": "Rescue someone with the {{captive}} background from a captor with the {{captor}} background inside a place identified as {{building}}.",
+      "references": {
+        "captive": {
+          "generator": "background",
+          "select": "display"
+        },
+        "captor": {
+          "generator": "background",
+          "entry": "criminal",
+          "select": "display"
+        },
+        "building": {
+          "generator": "building",
+          "select": "display"
+        }
+      }
     },
     {
-      "id": "recover-a-sacred-bell-from-peaceful-settlers-who",
-      "weight": 2,
-      "value": "Recover a sacred bell from peaceful settlers who need it to keep a worse creature asleep."
+      "id": "hide-item-from-faction",
+      "template": "Hide {{item}} from {{faction}}, which can track anyone who touched it.",
+      "references": {
+        "item": {
+          "generator": "inventory",
+          "select": "display"
+        },
+        "faction": {
+          "generator": "faction",
+          "select": "display"
+        }
+      }
     },
     {
-      "id": "investigate-an-army-that-marches-every-night-but",
-      "weight": 2,
-      "value": "Investigate an army that marches every night but leaves no footprints and has not attacked anyone."
+      "id": "conceal-adventure-site",
+      "template": "Prevent someone with the {{seeker}} background from discovering the location of {{site}}.",
+      "references": {
+        "seeker": {
+          "generator": "background",
+          "select": "display"
+        },
+        "site": {
+          "generator": "dungeon",
+          "select": "display"
+        }
+      }
     },
     {
-      "id": "help-a-ghost-complete-one-final-promise-without",
-      "weight": 2,
-      "value": "Help a ghost complete one final promise without revealing that fulfilling it will ruin a living descendant."
+      "id": "tail-person-through-settlement",
+      "template": "Follow someone with the {{target}} background through {{settlement}} without drawing the attention of their allies.",
+      "references": {
+        "target": {
+          "generator": "background",
+          "select": "display"
+        },
+        "settlement": {
+          "generator": "settlement",
+          "select": "display"
+        }
+      }
     },
     {
-      "id": "enter-a-nobles-dream-to-remove-an-assassin",
-      "value": "Enter a noble's dream to remove an assassin, knowing wounds and secrets found there may return to reality."
+      "id": "collect-seasonal-material",
+      "template": "Collect {{material}} in {{region}} before a seasonal change makes it inaccessible.",
+      "references": {
+        "material": {
+          "generator": "material",
+          "select": "display"
+        },
+        "region": {
+          "generator": "region",
+          "select": "display"
+        }
+      }
     },
     {
-      "id": "find-the-source-of-counterfeit-healing-potions-that",
-      "weight": 2,
-      "value": "Find the source of counterfeit healing potions that work perfectly but transfer injuries to random strangers."
-    },
-    {
-      "id": "capture-a-famous-outlaw-before-a-corrupt-sheriff",
-      "weight": 3,
-      "value": "Capture a famous outlaw before a corrupt sheriff does, then judge whether to deliver either of them."
-    },
-    {
-      "id": "retrieve-a-meteor-shard-from-disputed-ground-while",
-      "weight": 2,
-      "value": "Retrieve a meteor shard from disputed ground while the shard rapidly creates strange life around it."
-    },
-    {
-      "id": "reunite-the-pieces-of-a-broken-treaty-before",
-      "weight": 3,
-      "value": "Reunite the pieces of a broken treaty before its magical oath interprets the damage as a declaration of war."
-    },
-    {
-      "id": "discover-who-is-replacing-town-statues-with-petrified",
-      "weight": 2,
-      "value": "Discover who is replacing town statues with petrified citizens and why the statues are smiling."
-    },
-    {
-      "id": "close-a-portal-that-grants-one-wish-to",
-      "value": "Close a portal that grants one wish to everyone nearby, with increasingly literal and destructive results."
+      "id": "deliver-contested-goods",
+      "template": "Deliver goods represented by {{item}} to someone with the {{recipient}} background, while several figures with the {{criminal-role}} background carry the same parcel description.",
+      "references": {
+        "item": {
+          "generator": "inventory",
+          "select": "display"
+        },
+        "recipient": {
+          "generator": "background",
+          "select": "display"
+        },
+        "criminal-role": {
+          "generator": "background",
+          "entry": "criminal",
+          "select": "display"
+        }
+      }
     }
   ]
 }

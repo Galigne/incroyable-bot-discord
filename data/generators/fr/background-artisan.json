@@ -49,6 +49,86 @@
         "Backstory": "Un horloger a découvert un mécanisme impossible dans un objet qu’on lui avait confié pour une réparation ordinaire.",
         "Goals": "Découvrir qui l’a fabriqué et le tenir à l’écart des commanditaires uniquement intéressés par ses applications militaires."
       }
+    },
+    {
+      "id": "legacy-profession-butcher",
+      "fields": {
+        "Appearance": "Sa tenue et ses outils évoquent immédiatement le métier suivant : boucher.",
+        "Backstory": "A construit sa vie comme boucher et connaît les obligations ainsi que les pressions cachées de cette activité.",
+        "Goals": "Mettre cette expérience à profit pour obtenir un avenir plus sûr et plus autonome."
+      }
+    },
+    {
+      "id": "legacy-profession-pastry-cook",
+      "fields": {
+        "Appearance": "Sa tenue et ses outils évoquent immédiatement le métier suivant : pâtissier.",
+        "Backstory": "A construit sa vie comme pâtissier et connaît les obligations ainsi que les pressions cachées de cette activité.",
+        "Goals": "Mettre cette expérience à profit pour obtenir un avenir plus sûr et plus autonome."
+      }
+    },
+    {
+      "id": "legacy-profession-cook",
+      "fields": {
+        "Appearance": "Sa tenue et ses outils évoquent immédiatement le métier suivant : cuisinier.",
+        "Backstory": "A construit sa vie comme cuisinier et connaît les obligations ainsi que les pressions cachées de cette activité.",
+        "Goals": "Mettre cette expérience à profit pour obtenir un avenir plus sûr et plus autonome."
+      }
+    },
+    {
+      "id": "legacy-profession-craftsperson",
+      "fields": {
+        "Appearance": "Sa tenue et ses outils évoquent immédiatement le métier suivant : artisan.",
+        "Backstory": "A construit sa vie comme artisan et connaît les obligations ainsi que les pressions cachées de cette activité.",
+        "Goals": "Mettre cette expérience à profit pour obtenir un avenir plus sûr et plus autonome."
+      }
+    },
+    {
+      "id": "legacy-profession-blacksmith",
+      "fields": {
+        "Appearance": "Sa tenue et ses outils évoquent immédiatement le métier suivant : forgeron.",
+        "Backstory": "A construit sa vie comme forgeron et connaît les obligations ainsi que les pressions cachées de cette activité.",
+        "Goals": "Mettre cette expérience à profit pour obtenir un avenir plus sûr et plus autonome."
+      }
+    },
+    {
+      "id": "legacy-profession-mechanic",
+      "fields": {
+        "Appearance": "Sa tenue et ses outils évoquent immédiatement le métier suivant : mécanicien.",
+        "Backstory": "A construit sa vie comme mécanicien et connaît les obligations ainsi que les pressions cachées de cette activité.",
+        "Goals": "Mettre cette expérience à profit pour obtenir un avenir plus sûr et plus autonome."
+      }
+    },
+    {
+      "id": "legacy-profession-engineer",
+      "fields": {
+        "Appearance": "Sa tenue et ses outils évoquent immédiatement le métier suivant : ingénieur.",
+        "Backstory": "A construit sa vie comme ingénieur et connaît les obligations ainsi que les pressions cachées de cette activité.",
+        "Goals": "Mettre cette expérience à profit pour obtenir un avenir plus sûr et plus autonome."
+      }
+    },
+    {
+      "id": "legacy-profession-technician",
+      "fields": {
+        "Appearance": "Sa tenue et ses outils évoquent immédiatement le métier suivant : technicien.",
+        "Backstory": "A construit sa vie comme technicien et connaît les obligations ainsi que les pressions cachées de cette activité.",
+        "Goals": "Mettre cette expérience à profit pour obtenir un avenir plus sûr et plus autonome."
+      }
+    },
+    {
+      "id": "decomposed-nella-brass",
+      "fields": {
+        "Appearance": "Une figure singulière connue sous le nom de Nella Brass.",
+        "Backstory": "une jeune maîtresse runique capable de prouesses, mais seulement si quelqu'un lui raconte une histoire qu'elle n'a jamais entendue.",
+        "Goals": "Transformer ce parcours singulier en un avenir choisi."
+      }
+    },
+    {
+      "id": "decomposed-vexa-coil",
+      "fields": {
+        "Appearance": "Une figure singulière connue sous le nom de Vexa Coil.",
+        "Backstory": "une alchimiste qui vend des potions fiables dans des flacons réutilisés portant des étiquettes dangereusement erronées.",
+        "Goals": "Transformer ce parcours singulier en un avenir choisi."
+      }
     }
   ]
 }

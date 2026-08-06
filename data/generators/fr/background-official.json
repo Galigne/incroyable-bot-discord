@@ -49,6 +49,78 @@
         "Backstory": "Un inspecteur chargé d’enquêter sur la disparition de fournitures a découvert que tous les bureaux locaux rapportaient exactement les mêmes mensonges.",
         "Goals": "Identifier l’origine des pressions communes et protéger le premier témoin prêt à parler honnêtement."
       }
+    },
+    {
+      "id": "established-experienced-adult",
+      "fields": {
+        "Appearance": "Adulte expérimenté protégeant une position acquise.",
+        "Backstory": "Cette étape de sa vie l’a confronté à des responsabilités qui dépassent les attentes ordinaires.",
+        "Goals": "Prouver son discernement tout en préservant sa liberté d’évoluer."
+      }
+    },
+    {
+      "id": "legacy-profession-mayor",
+      "fields": {
+        "Appearance": "Sa tenue et ses outils évoquent immédiatement le métier suivant : maire.",
+        "Backstory": "A construit sa vie comme maire et connaît les obligations ainsi que les pressions cachées de cette activité.",
+        "Goals": "Mettre cette expérience à profit pour obtenir un avenir plus sûr et plus autonome."
+      }
+    },
+    {
+      "id": "legacy-profession-minister",
+      "fields": {
+        "Appearance": "Sa tenue et ses outils évoquent immédiatement le métier suivant : ministre.",
+        "Backstory": "A construit sa vie comme ministre et connaît les obligations ainsi que les pressions cachées de cette activité.",
+        "Goals": "Mettre cette expérience à profit pour obtenir un avenir plus sûr et plus autonome."
+      }
+    },
+    {
+      "id": "legacy-profession-jailer",
+      "fields": {
+        "Appearance": "Sa tenue et ses outils évoquent immédiatement le métier suivant : geôlier.",
+        "Backstory": "A construit sa vie comme geôlier et connaît les obligations ainsi que les pressions cachées de cette activité.",
+        "Goals": "Mettre cette expérience à profit pour obtenir un avenir plus sûr et plus autonome."
+      }
+    },
+    {
+      "id": "legacy-profession-executioner",
+      "fields": {
+        "Appearance": "Sa tenue et ses outils évoquent immédiatement le métier suivant : bourreau.",
+        "Backstory": "A construit sa vie comme bourreau et connaît les obligations ainsi que les pressions cachées de cette activité.",
+        "Goals": "Mettre cette expérience à profit pour obtenir un avenir plus sûr et plus autonome."
+      }
+    },
+    {
+      "id": "legacy-profession-townsfolk",
+      "fields": {
+        "Appearance": "Sa tenue et ses outils évoquent immédiatement le métier suivant : citadin.",
+        "Backstory": "A construit sa vie comme citadin et connaît les obligations ainsi que les pressions cachées de cette activité.",
+        "Goals": "Mettre cette expérience à profit pour obtenir un avenir plus sûr et plus autonome."
+      }
+    },
+    {
+      "id": "decomposed-constable-reed",
+      "fields": {
+        "Appearance": "Une figure singulière connue sous le nom de Constable Reed.",
+        "Backstory": "un garde de village honnête, dépassé par des crimes magiques dont la législation locale refuse l'existence.",
+        "Goals": "Transformer ce parcours singulier en un avenir choisi."
+      }
+    },
+    {
+      "id": "decomposed-sable-of-the-reeds",
+      "fields": {
+        "Appearance": "Une figure singulière connue sous le nom de Sable-of-the-Reeds.",
+        "Backstory": "un diplomate aux écailles des marais qui marque une pause de plusieurs minutes avant chaque réponse et ne gaspille jamais un mot.",
+        "Goals": "Transformer ce parcours singulier en un avenir choisi."
+      }
+    },
+    {
+      "id": "decomposed-magistrate-odo-penn",
+      "fields": {
+        "Appearance": "Une figure singulière connue sous le nom de Magistrate Odo Penn.",
+        "Backstory": "un bureaucrate dont le sceau enchanté donne temporairement une réalité physique à des lois ridicules.",
+        "Goals": "Transformer ce parcours singulier en un avenir choisi."
+      }
     }
   ]
 }

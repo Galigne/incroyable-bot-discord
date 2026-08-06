@@ -35,14 +35,6 @@
       }
     },
     {
-      "id": "distracted",
-      "weight": 3,
-      "fields": {
-        "Name": "Déconcentré",
-        "Description": "subit un malus de -1 à la prochaine action fondée sur la Perception."
-      }
-    },
-    {
       "id": "bleeding",
       "weight": 2,
       "fields": {
@@ -229,6 +221,41 @@
       "fields": {
         "Name": "Voilée d’ombre",
         "Description": "Sa silhouette reste difficile à distinguer des ombres qui l’entourent."
+      }
+    },
+    {
+      "id": "distracted",
+      "fields": {
+        "Name": "Distrait",
+        "Description": "Le personnage perd le fil de son environnement et subit un"
+      }
+    },
+    {
+      "id": "drunk",
+      "fields": {
+        "Name": "Ivre",
+        "Description": "La coordination et le jugement sont altérés jusqu’à ce que le"
+      }
+    },
+    {
+      "id": "intoxicated",
+      "fields": {
+        "Name": "Intoxiqué",
+        "Description": "Une substance inconnue modifie les perceptions ou réactions du"
+      }
+    },
+    {
+      "id": "feverish",
+      "fields": {
+        "Name": "Fiévreux",
+        "Description": "La maladie épuise le personnage et rend les efforts prolongés plus"
+      }
+    },
+    {
+      "id": "meditative",
+      "fields": {
+        "Name": "Méditatif",
+        "Description": "Le personnage est profondément concentré ; l’interrompre annule"
       }
     }
   ]

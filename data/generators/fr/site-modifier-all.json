@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 2,
+  "id": "site-modifier-all",
+  "kind": "modifier",
+  "visibility": "internal",
+  "name": "Modificateurs de site historiques",
+  "description": "Variations historiques descriptives compatibles avec des générateurs de lieux précis",
+  "appliesTo": ["region", "settlement", "dungeon", "building"],
+  "entrySchema": {
+    "type": "fields",
+    "required": ["Name", "Description"]
+  },
+  "entries": [
+    {
+      "id": "abandoned",
+      "fields": {
+        "Name": "Abandonné",
+        "Description": "Le lieu fonctionne encore partiellement, mais ses occupants sont partis sans emporter leurs affaires essentielles."
+      }
+    },
+    {
+      "id": "immense",
+      "fields": {
+        "Name": "Immense",
+        "Description": "Les distances intérieures dépassent les attentes et imposent ravitaillement, navigation ou plusieurs étapes d’exploration."
+      }
+    }
+  ]
+}

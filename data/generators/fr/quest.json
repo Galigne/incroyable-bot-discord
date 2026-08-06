@@ -1,156 +1,367 @@
 {
   "schemaVersion": 2,
   "id": "quest",
-  "kind": "category",
+  "kind": "template",
   "visibility": "public",
   "name": "Quêtes",
   "description": "Amorces d’aventure, objectifs et dilemmes",
   "entrySchema": {
-    "type": "text"
+    "type": "template"
   },
   "entries": [
     {
-      "id": "recover-a-villages-stolen-shadows-before-sunrise-the",
-      "value": "Récupérer avant l’aube les ombres volées d’un village ; le voleur s’en sert pour fabriquer un corps destiné à un esprit solitaire."
+      "id": "recover-item-before-criminal",
+      "template": "Retrouver l’objet appelé {{item}} dans {{site}} avant qu’une personne au profil {{rival}} ne s’en empare.",
+      "references": {
+        "item": {
+          "generator": "inventory",
+          "select": "display"
+        },
+        "site": {
+          "generator": "dungeon",
+          "select": "display"
+        },
+        "rival": {
+          "generator": "background",
+          "entry": "criminal",
+          "select": "display"
+        }
+      }
     },
     {
-      "id": "escort-an-unbearable-but-vital-diplomat-through-territory",
-      "weight": 2,
-      "value": "Escorter un diplomate insupportable mais indispensable à travers un territoire où chaque mensonge attire des prédateurs."
+      "id": "hunt-modified-monster",
+      "template": "Traquer une créature identifiée comme {{creature}} après que des témoins lui ont associé le qualificatif {{variation}}.",
+      "references": {
+        "creature": {
+          "generator": "creature-monster",
+          "select": "display"
+        },
+        "variation": {
+          "generator": "modifier",
+          "select": "display"
+        }
+      }
     },
     {
-      "id": "investigate-a-mine-where-workers-return-each-evening",
-      "weight": 2,
-      "value": "Enquêter dans une mine dont les ouvriers rentrent chaque soir avec les souvenirs de personnes disparues depuis des années."
+      "id": "defend-settlement-from-faction",
+      "template": "Défendre {{community}} contre une menace liée à {{faction}}.",
+      "references": {
+        "community": {
+          "generator": "settlement",
+          "select": "display"
+        },
+        "faction": {
+          "generator": "faction",
+          "select": "display"
+        }
+      }
     },
     {
-      "id": "steal-a-cursed-crown-from-a-tyrant-without",
-      "weight": 2,
-      "value": "Dérober la couronne maudite d’un tyran sans laisser personne la porter, malgré le fantôme très persuasif qui l’habite."
+      "id": "escort-traveler-through-region",
+      "template": "Escorter une personne au profil {{traveler}} à travers la région appelée {{region}} sans révéler la véritable raison du voyage.",
+      "references": {
+        "traveler": {
+          "generator": "background",
+          "select": "display"
+        },
+        "region": {
+          "generator": "region",
+          "select": "display"
+        }
+      }
     },
     {
-      "id": "find-why-a-river-has-stopped-flowing-before",
-      "weight": 3,
-      "value": "Découvrir pourquoi une rivière a cessé de couler avant que deux villes en aval ne se disputent par les armes l’eau restante."
+      "id": "steal-item-from-building",
+      "template": "Voler l’objet appelé {{item}} dans un lieu identifié comme {{building}} afin de le rendre à son propriétaire légitime.",
+      "references": {
+        "item": {
+          "generator": "inventory",
+          "select": "display"
+        },
+        "building": {
+          "generator": "building",
+          "select": "display"
+        }
+      }
     },
     {
-      "id": "rescue-a-dragon-from-a-princess-who-collects",
-      "value": "Sauver un dragon retenu par une princesse qui collectionne les créatures rares et contrôle la justice locale."
+      "id": "find-missing-person-at-site",
+      "template": "Retrouver une personne au profil {{missing-person}}, disparue après une dernière visite dans {{site}}.",
+      "references": {
+        "missing-person": {
+          "generator": "background",
+          "select": "display"
+        },
+        "site": {
+          "generator": "dungeon",
+          "select": "display"
+        }
+      }
     },
     {
-      "id": "map-a-forest-that-rearranges-its-paths-whenever",
-      "weight": 2,
-      "value": "Cartographier une forêt qui réorganise ses sentiers chaque fois qu’une personne prend une décision qu’elle regrette."
+      "id": "stop-criminal-operation",
+      "template": "Identifier puis arrêter un suspect au profil {{suspect}} avant sa prochaine opération.",
+      "references": {
+        "suspect": {
+          "generator": "background",
+          "entry": "criminal",
+          "select": "display"
+        }
+      }
     },
     {
-      "id": "deliver-a-sealed-box-to-a-monastery-every",
-      "weight": 3,
-      "value": "Livrer une boîte scellée à un monastère ; chaque faction lui attribue un contenu différent, et aucune n’a peut-être tout à fait tort."
+      "id": "prevent-faction-war",
+      "template": "Empêcher {{first-faction}} et {{second-faction}} de déclencher une guerre autour de {{community}}.",
+      "references": {
+        "first-faction": {
+          "generator": "faction",
+          "select": "display"
+        },
+        "second-faction": {
+          "generator": "faction",
+          "select": "display"
+        },
+        "community": {
+          "generator": "settlement",
+          "select": "display"
+        }
+      }
     },
     {
-      "id": "clear-a-familys-name-by-proving-their-executed",
-      "weight": 2,
-      "value": "Réhabiliter une famille en prouvant que son ancêtre exécuté avait été remplacé par une mimique avant de commettre sa trahison."
+      "id": "negotiate-racial-peace",
+      "template": "Négocier la paix entre une communauté du peuple {{people}} et les habitants de {{settlement}}.",
+      "references": {
+        "people": {
+          "generator": "race",
+          "select": "display"
+        },
+        "settlement": {
+          "generator": "settlement",
+          "select": "display"
+        }
+      }
     },
     {
-      "id": "negotiate-peace-between-a-town-and-the-giant",
-      "weight": 3,
-      "value": "Négocier la paix entre une ville et le géant dont la migration saisonnière traverse désormais ses nouvelles murailles."
+      "id": "anonymous-gift",
+      "template": "Offrir l’objet appelé {{item}} à une personne au profil {{recipient}} sans révéler l’identité du commanditaire.",
+      "references": {
+        "item": {
+          "generator": "inventory",
+          "select": "display"
+        },
+        "recipient": {
+          "generator": "background",
+          "select": "display"
+        }
+      }
     },
     {
-      "id": "retrieve-medicine-from-a-quarantined-city-where-the",
-      "value": "Rapporter un remède d’une ville en quarantaine où la maladie infecte les mots écrits plutôt que les corps."
+      "id": "first-contact",
+      "template": "Établir un premier contact durable avec une communauté du peuple {{people}}.",
+      "references": {
+        "people": {
+          "generator": "race",
+          "select": "display"
+        }
+      }
     },
     {
-      "id": "stop-a-tournament-champion-who-cannot-lose-because",
-      "weight": 2,
-      "value": "Arrêter un champion de tournoi invincible, car la force de chaque adversaire vaincu vient magiquement s’ajouter à la sienne."
+      "id": "map-unknown-phenomenon",
+      "template": "Explorer {{region}} et rapporter la cause d’un phénomène absent des cartes.",
+      "references": {
+        "region": {
+          "generator": "region",
+          "select": "display"
+        }
+      }
     },
     {
-      "id": "explore-a-lighthouse-shining-into-the-ground-while",
-      "value": "Explorer un phare dont le faisceau éclaire le sol tandis que des navires disparaissent sous les champs voisins."
+      "id": "study-monster-alive",
+      "template": "Étudier une créature identifiée comme {{creature}} sans la tuer afin de comprendre son lien avec {{region}}.",
+      "references": {
+        "creature": {
+          "generator": "creature-monster",
+          "select": "display"
+        },
+        "region": {
+          "generator": "region",
+          "select": "display"
+        }
+      }
     },
     {
-      "id": "return-a-runaway-familiar-to-its-mage-then",
-      "weight": 2,
-      "value": "Ramener un familier fugitif à son mage, puis déterminer si ses accusations de mauvais traitements sont fondées."
+      "id": "solve-faction-murder",
+      "template": "Résoudre le meurtre d’une personne au profil {{victim}} malgré l’intervention de {{faction}}.",
+      "references": {
+        "victim": {
+          "generator": "background",
+          "select": "display"
+        },
+        "faction": {
+          "generator": "faction",
+          "select": "display"
+        }
+      }
     },
     {
-      "id": "protect-a-haunted-theaters-final-performance-so-its",
-      "weight": 2,
-      "value": "Protéger la dernière représentation d’un théâtre hanté afin que son dramaturge défunt révèle le nom de son meurtrier dans l’ultime scène."
+      "id": "spy-on-secret-meeting",
+      "template": "Espionner une personne au profil {{target}} pendant une rencontre secrète dans un lieu identifié comme {{building}}.",
+      "references": {
+        "target": {
+          "generator": "background",
+          "select": "display"
+        },
+        "building": {
+          "generator": "building",
+          "select": "display"
+        }
+      }
     },
     {
-      "id": "locate-a-missing-tax-caravan-carrying-no-gold",
-      "weight": 3,
-      "value": "Retrouver une caravane fiscale disparue qui ne transporte aucun or, mais un registre capable de provoquer la chute de trois maisons nobles."
+      "id": "prevent-inside-assassination",
+      "template": "Empêcher l’assassinat d’une personne au profil {{target}} sans révéler que le danger vient de {{faction}}.",
+      "references": {
+        "target": {
+          "generator": "background",
+          "select": "display"
+        },
+        "faction": {
+          "generator": "faction",
+          "select": "display"
+        }
+      }
     },
     {
-      "id": "break-into-an-abandoned-prison-to-free-an",
-      "weight": 2,
-      "value": "S’introduire dans une prison abandonnée pour libérer un innocent que les archives officielles déclarent mort depuis quarante ans."
+      "id": "gather-remedy-material",
+      "template": "Réunir plusieurs échantillons de {{material}} nécessaires à la fabrication d’un remède.",
+      "references": {
+        "material": {
+          "generator": "material",
+          "select": "display"
+        }
+      }
     },
     {
-      "id": "gather-three-rival-runesmiths-to-repair-a-failing",
-      "weight": 3,
-      "value": "Réunir trois maîtres des runes rivaux pour réparer une protection défaillante, alors que chacun accuse les deux autres de l’avoir sabotée."
+      "id": "evacuate-before-monsters",
+      "template": "Évacuer {{settlement}} avant l’arrivée d’un groupe associé à {{creature}}.",
+      "references": {
+        "settlement": {
+          "generator": "settlement",
+          "select": "display"
+        },
+        "creature": {
+          "generator": "creature-monster",
+          "select": "display"
+        }
+      }
     },
     {
-      "id": "track-a-monster-that-steals-names-its-victims",
-      "weight": 2,
-      "value": "Pister un monstre qui vole les noms ; ses victimes restent vivantes, mais plus personne ne peut se souvenir d’elles ni s’adresser à elles."
+      "id": "escape-site-with-prisoner",
+      "template": "S’échapper de {{site}} avec une personne au profil {{prisoner}} qui refuse d’expliquer son emprisonnement.",
+      "references": {
+        "site": {
+          "generator": "dungeon",
+          "select": "display"
+        },
+        "prisoner": {
+          "generator": "background",
+          "select": "display"
+        }
+      }
     },
     {
-      "id": "win-a-cooking-contest-whose-prize-is-an",
-      "value": "Remporter un concours de cuisine dont le prix est une carte ancienne, tandis qu’ingrédients et juges sont secrètement ensorcelés."
+      "id": "rescue-criminal-captive",
+      "template": "Sauver une personne au profil {{captive}}, retenue par un ravisseur au profil {{captor}} dans un lieu identifié comme {{building}}.",
+      "references": {
+        "captive": {
+          "generator": "background",
+          "select": "display"
+        },
+        "captor": {
+          "generator": "background",
+          "entry": "criminal",
+          "select": "display"
+        },
+        "building": {
+          "generator": "building",
+          "select": "display"
+        }
+      }
     },
     {
-      "id": "recover-a-sacred-bell-from-peaceful-settlers-who",
-      "weight": 2,
-      "value": "Récupérer une cloche sacrée auprès de colons pacifiques qui en ont besoin pour maintenir endormie une créature bien pire."
+      "id": "hide-item-from-faction",
+      "template": "Cacher {{item}} à {{faction}}, capable de suivre toute personne l’ayant touché.",
+      "references": {
+        "item": {
+          "generator": "inventory",
+          "select": "display"
+        },
+        "faction": {
+          "generator": "faction",
+          "select": "display"
+        }
+      }
     },
     {
-      "id": "investigate-an-army-that-marches-every-night-but",
-      "weight": 2,
-      "value": "Enquêter sur une armée qui marche chaque nuit sans laisser d’empreintes et qui n’a encore attaqué personne."
+      "id": "conceal-adventure-site",
+      "template": "Empêcher une personne au profil {{seeker}} de découvrir l’emplacement de {{site}}.",
+      "references": {
+        "seeker": {
+          "generator": "background",
+          "select": "display"
+        },
+        "site": {
+          "generator": "dungeon",
+          "select": "display"
+        }
+      }
     },
     {
-      "id": "help-a-ghost-complete-one-final-promise-without",
-      "weight": 2,
-      "value": "Aider un fantôme à tenir une dernière promesse sans révéler que son accomplissement ruinera l’un de ses descendants encore en vie."
+      "id": "tail-person-through-settlement",
+      "template": "Prendre une personne au profil {{target}} en filature à travers {{settlement}} sans attirer l’attention de ses alliés.",
+      "references": {
+        "target": {
+          "generator": "background",
+          "select": "display"
+        },
+        "settlement": {
+          "generator": "settlement",
+          "select": "display"
+        }
+      }
     },
     {
-      "id": "enter-a-nobles-dream-to-remove-an-assassin",
-      "value": "Entrer dans le rêve d’un noble pour en chasser un assassin, sachant que les blessures et les secrets découverts là-bas pourraient revenir dans la réalité."
+      "id": "collect-seasonal-material",
+      "template": "Collecter {{material}} dans {{region}} avant qu’un changement saisonnier ne le rende inaccessible.",
+      "references": {
+        "material": {
+          "generator": "material",
+          "select": "display"
+        },
+        "region": {
+          "generator": "region",
+          "select": "display"
+        }
+      }
     },
     {
-      "id": "find-the-source-of-counterfeit-healing-potions-that",
-      "weight": 2,
-      "value": "Trouver l’origine de fausses potions de soin qui fonctionnent parfaitement, mais transfèrent les blessures à des inconnus choisis au hasard."
-    },
-    {
-      "id": "capture-a-famous-outlaw-before-a-corrupt-sheriff",
-      "weight": 3,
-      "value": "Capturer un hors-la-loi célèbre avant un shérif corrompu, puis décider lequel des deux mérite d’être livré à la justice."
-    },
-    {
-      "id": "retrieve-a-meteor-shard-from-disputed-ground-while",
-      "weight": 2,
-      "value": "Récupérer un fragment de météore sur un territoire disputé tandis qu’une vie étrange prolifère rapidement autour de lui."
-    },
-    {
-      "id": "reunite-the-pieces-of-a-broken-treaty-before",
-      "weight": 3,
-      "value": "Réunir les morceaux d’un traité brisé avant que son serment magique n’interprète les dégâts comme une déclaration de guerre."
-    },
-    {
-      "id": "discover-who-is-replacing-town-statues-with-petrified",
-      "weight": 2,
-      "value": "Découvrir qui remplace les statues de la ville par des habitants pétrifiés, et pourquoi ceux-ci sourient."
-    },
-    {
-      "id": "close-a-portal-that-grants-one-wish-to",
-      "value": "Fermer un portail qui exauce un souhait pour chaque personne proche, avec des résultats de plus en plus littéraux et destructeurs."
+      "id": "deliver-contested-goods",
+      "template": "Livrer une marchandise représentée par {{item}} à une personne au profil {{recipient}}, alors que plusieurs individus au profil {{criminal-role}} possèdent la même description du colis.",
+      "references": {
+        "item": {
+          "generator": "inventory",
+          "select": "display"
+        },
+        "recipient": {
+          "generator": "background",
+          "select": "display"
+        },
+        "criminal-role": {
+          "generator": "background",
+          "entry": "criminal",
+          "select": "display"
+        }
+      }
     }
   ]
 }

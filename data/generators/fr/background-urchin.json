@@ -49,6 +49,22 @@
         "Backstory": "Un fugitif a échappé à un apprentissage brutal et craint désormais que la loi ne le rende à son ancien maître.",
         "Goals": "Prouver les mauvais traitements, trouver un travail indépendant et aider d’autres apprentis à échapper au même sort."
       }
+    },
+    {
+      "id": "curious-child-in-adult-situation",
+      "fields": {
+        "Appearance": "Enfant curieux placé dans une situation d’adulte.",
+        "Backstory": "Cette étape de sa vie l’a confronté à des responsabilités qui dépassent les attentes ordinaires.",
+        "Goals": "Prouver son discernement tout en préservant sa liberté d’évoluer."
+      }
+    },
+    {
+      "id": "legacy-profession-homeless-fugitive",
+      "fields": {
+        "Appearance": "Sa tenue et ses outils évoquent immédiatement le métier suivant : fugitif sans-abri..",
+        "Backstory": "A construit sa vie comme fugitif sans-abri. et connaît les obligations ainsi que les pressions cachées de cette activité.",
+        "Goals": "Mettre cette expérience à profit pour obtenir un avenir plus sûr et plus autonome."
+      }
     }
   ]
 }

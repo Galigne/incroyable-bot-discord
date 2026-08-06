@@ -49,6 +49,22 @@
         "Backstory": "A ritual specialist inherited obligations to an unseen patron without receiving the promised instructions.",
         "Goals": "Discover the patron's nature and renegotiate the obligations before the next payment is due."
       }
+    },
+    {
+      "id": "drowi-legacy-concept",
+      "fields": {
+        "Appearance": "Their bearing and equipment reflect an unusual and memorable career.",
+        "Backstory": "A capricious and amusing goblin court alchemist who presents dangerous experiments as harmless jokes.",
+        "Goals": "Resolve the unfinished conflict without surrendering personal independence."
+      }
+    },
+    {
+      "id": "legacy-profession-mage",
+      "fields": {
+        "Appearance": "Clothing and tools immediately suggest the work of a mage.",
+        "Backstory": "Built a life as a mage and knows the profession’s obligations and hidden pressures.",
+        "Goals": "Use that experience to secure a safer and more independent future."
+      }
     }
   ]
 }

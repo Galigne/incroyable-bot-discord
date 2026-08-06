@@ -6,118 +6,243 @@
   "name": "Donjons",
   "description": "Sites d’aventure, ruines, repaires et complexes hostiles",
   "entrySchema": {
-    "type": "text"
+    "type": "fields",
+    "required": ["Name", "Description"]
   },
   "entries": [
     {
       "id": "buried-temple",
       "weight": 3,
-      "value": "Temple enseveli — salles sacrées effondrées autour d’un autel scellé qui reçoit encore des offrandes."
-    },
-    {
-      "id": "abandoned-mine",
-      "weight": 3,
-      "value": "Mine abandonnée — galeries instables, puits inondés, ancien matériel et quelque chose qui suit les rails."
+      "fields": {
+        "Name": "Temple enseveli",
+        "Description": "salles sacrées effondrées autour d’un autel scellé qui reçoit encore des offrandes."
+      }
     },
     {
       "id": "bandit-cavern",
       "weight": 3,
-      "value": "Caverne de bandits — tunnels naturels agrandis et aménagés avec barricades, réserves, cellules et issues secrètes."
+      "fields": {
+        "Name": "Caverne de bandits",
+        "Description": "tunnels naturels agrandis et aménagés avec barricades, réserves, cellules et issues secrètes."
+      }
     },
     {
       "id": "ruined-fortress",
       "weight": 3,
-      "value": "Forteresse en ruine — murailles éventrées au-dessus d’arsenaux intacts, de tunnels de commandement et de défenseurs oubliés."
+      "fields": {
+        "Name": "Forteresse en ruine",
+        "Description": "murailles éventrées au-dessus d’arsenaux intacts, de tunnels de commandement et de défenseurs oubliés."
+      }
     },
     {
       "id": "ancient-crypt",
       "weight": 3,
-      "value": "Crypte antique — tombeaux familiaux, pièges funéraires, archives ancestrales et chambres scellées récemment profanées."
+      "fields": {
+        "Name": "Crypte antique",
+        "Description": "tombeaux familiaux, pièges funéraires, archives ancestrales et chambres scellées récemment profanées."
+      }
     },
     {
       "id": "wizards-tower",
       "weight": 2,
-      "value": "Tour de mage — laboratoires superposés où des expériences ratées ont déformé la gravité et l’espace."
-    },
-    {
-      "id": "sewer-labyrinth",
-      "weight": 2,
-      "value": "Labyrinthe d’égouts — canalisations encore actives, fondations oubliées, voies de contrebande et créatures territoriales."
+      "fields": {
+        "Name": "Tour de mage",
+        "Description": "laboratoires superposés où des expériences ratées ont déformé la gravité et l’espace."
+      }
     },
     {
       "id": "sunken-palace",
       "weight": 2,
-      "value": "Palais englouti — salles inondées accessibles à marée basse, en plongée ou grâce à d’anciennes pompes."
+      "fields": {
+        "Name": "Palais englouti",
+        "Description": "salles inondées accessibles à marée basse, en plongée ou grâce à d’anciennes pompes."
+      }
     },
     {
       "id": "monster-warren",
       "weight": 2,
-      "value": "Terriers de monstres — nids reliés entre eux et remodelés par des générations d’habitants toujours plus imposants."
-    },
-    {
-      "id": "prison-complex",
-      "weight": 2,
-      "value": "Complexe pénitentiaire — cellules, ateliers, salles d’exécution, passages réservés aux gardes et traces d’une évasion massive."
+      "fields": {
+        "Name": "Terriers de monstres",
+        "Description": "nids reliés entre eux et remodelés par des générations d’habitants toujours plus imposants."
+      }
     },
     {
       "id": "collapsed-city-district",
       "weight": 2,
-      "value": "Quartier urbain effondré — rues et maisons ensevelies, reliées par les caves et des gouffres."
+      "fields": {
+        "Name": "Quartier urbain effondré",
+        "Description": "rues et maisons ensevelies, reliées par les caves et des gouffres."
+      }
     },
     {
       "id": "cursed-manor",
       "weight": 2,
-      "value": "Manoir maudit — demeure noble condamnée à revivre la dernière nuit précédant l’anéantissement de ses habitants."
+      "fields": {
+        "Name": "Manoir maudit",
+        "Description": "demeure noble condamnée à revivre la dernière nuit précédant l’anéantissement de ses habitants."
+      }
     },
     {
       "id": "volcanic-shrine",
       "weight": 2,
-      "value": "Sanctuaire volcanique — tunnels ravagés par la chaleur, ponts sacrificiels, canaux de lave et gardiens insensibles au feu."
+      "fields": {
+        "Name": "Sanctuaire volcanique",
+        "Description": "tunnels ravagés par la chaleur, ponts sacrificiels, canaux de lave et gardiens insensibles au feu."
+      }
     },
     {
       "id": "frozen-tomb",
       "weight": 2,
-      "value": "Tombeau gelé — salles préservées par la glace où chaque porte ouverte libère air antique, maladies et anciens occupants."
+      "fields": {
+        "Name": "Tombeau gelé",
+        "Description": "salles préservées par la glace où chaque porte ouverte libère air antique, maladies et anciens occupants."
+      }
     },
     {
       "id": "cult-sanctuary",
       "weight": 2,
-      "value": "Sanctuaire d’un culte — salles de réunion camouflées qui descendent vers des chambres rituelles et un site d’invocation inachevé."
+      "fields": {
+        "Name": "Sanctuaire d’un culte",
+        "Description": "salles de réunion camouflées qui descendent vers des chambres rituelles et un site d’invocation inachevé."
+      }
     },
     {
       "id": "living-dungeon",
       "weight": 1,
-      "value": "Donjon vivant — organisme gigantesque dont les cavités digèrent les intrus et se réorganisent comme des organes."
+      "fields": {
+        "Name": "Donjon vivant",
+        "Description": "organisme gigantesque dont les cavités digèrent les intrus et se réorganisent comme des organes."
+      }
     },
     {
       "id": "dream-prison",
       "weight": 1,
-      "value": "Prison onirique — complexe mental auquel on accède en dormant, dont les sorties se cachent dans les souvenirs des prisonniers."
+      "fields": {
+        "Name": "Prison onirique",
+        "Description": "complexe mental auquel on accède en dormant, dont les sorties se cachent dans les souvenirs des prisonniers."
+      }
     },
     {
       "id": "inverted-tower",
       "weight": 1,
-      "value": "Tour inversée — édifice qui s’enfonce dans la terre tandis que la gravité attire vers son toit lointain."
+      "fields": {
+        "Name": "Tour inversée",
+        "Description": "édifice qui s’enfonce dans la terre tandis que la gravité attire vers son toit lointain."
+      }
     },
     {
       "id": "planar-embassy",
       "weight": 1,
-      "value": "Ambassade planaire — complexe diplomatique abandonné, construit pour des visiteurs aux corps et aux lois physiques incompatibles."
+      "fields": {
+        "Name": "Ambassade planaire",
+        "Description": "complexe diplomatique abandonné, construit pour des visiteurs aux corps et aux lois physiques incompatibles."
+      }
     },
     {
       "id": "clockwork-vault",
       "weight": 1,
-      "value": "Caveau mécanique — salles aux mécanismes précis qui réarment les pièges et font pivoter les couloirs selon un horaire fixe."
+      "fields": {
+        "Name": "Caveau mécanique",
+        "Description": "salles aux mécanismes précis qui réarment les pièges et font pivoter les couloirs selon un horaire fixe."
+      }
     },
     {
       "id": "worldroot-hollow",
       "weight": 1,
-      "value": "Creux de la Racine-monde — tunnels primordiaux au cœur d’un réseau de racines colossal gagné par une corruption grandissante."
+      "fields": {
+        "Name": "Creux de la Racine-monde",
+        "Description": "tunnels primordiaux au cœur d’un réseau de racines colossal gagné par une corruption grandissante."
+      }
     },
     {
       "id": "astral-observatory",
       "weight": 1,
-      "value": "Observatoire astral — ruine isolée dont les lentilles ouvrent des passages physiques vers de dangereux corps célestes."
+      "fields": {
+        "Name": "Observatoire astral",
+        "Description": "ruine isolée dont les lentilles ouvrent des passages physiques vers de dangereux corps célestes."
+      }
+    },
+    {
+      "id": "forgotten-ruins",
+      "fields": {
+        "Name": "Ruines oubliées",
+        "Description": "Les restes instables d’un domaine abandonné, encore protégés"
+      }
+    },
+    {
+      "id": "abandoned-mine",
+      "fields": {
+        "Name": "Mine condamnée",
+        "Description": "Des galeries désertées après un accident dont les causes"
+      }
+    },
+    {
+      "id": "inhabited-cave",
+      "fields": {
+        "Name": "Grotte habitée",
+        "Description": "Un réseau naturel occupé par une créature, une communauté ou"
+      }
+    },
+    {
+      "id": "prison-complex",
+      "fields": {
+        "Name": "Prison désaffectée",
+        "Description": "Des cellules, archives et passages de service où demeure"
+      }
+    },
+    {
+      "id": "sewer-labyrinth",
+      "fields": {
+        "Name": "Égouts anciens",
+        "Description": "Un réseau plus vaste que la ville actuelle, reliant citernes,"
+      }
+    },
+    {
+      "id": "desecrated-cemetery",
+      "fields": {
+        "Name": "Cimetière profané",
+        "Description": "Des tombes ouvertes et des monuments déplacés autour d’un"
+      }
+    },
+    {
+      "id": "anomalous-crater",
+      "fields": {
+        "Name": "Cratère anormal",
+        "Description": "Une dépression récente où la pierre, la magie ou le temps se"
+      }
+    },
+    {
+      "id": "ruined-sanctuary",
+      "fields": {
+        "Name": "Sanctuaire en ruine",
+        "Description": "Une chapelle ou un temple abandonné dont les rites"
+      }
+    }
+  ],
+  "modifiers": [
+    {
+      "generator": "site-modifier-all",
+      "chance": 0.2,
+      "count": {
+        "min": 1,
+        "max": 1
+      }
+    },
+    {
+      "generator": "site-modifier-structures",
+      "chance": 0.2,
+      "count": {
+        "min": 1,
+        "max": 1
+      }
+    },
+    {
+      "generator": "site-modifier-interiors",
+      "chance": 0.2,
+      "count": {
+        "min": 1,
+        "max": 1
+      }
     }
   ]
 }

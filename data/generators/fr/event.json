@@ -6,148 +6,351 @@
   "name": "Événements",
   "description": "Scènes inattendues et complications dans le monde",
   "entrySchema": {
-    "type": "text"
+    "type": "fields",
+    "required": ["Name", "Description"]
   },
   "entries": [
     {
       "id": "every-flame-in-the-area-turns-green-and",
       "weight": 2,
-      "value": "Pendant une minute, toutes les flammes des environs deviennent vertes et pointent vers la même ruine lointaine."
+      "fields": {
+        "Name": "Pendant une minute, toutes les flammes des environs deviennent vertes et pointent vers la même ruine lointaine.",
+        "Description": "Pendant une minute, toutes les flammes des environs deviennent vertes et pointent vers la même ruine lointaine."
+      }
     },
     {
       "id": "a-terrified-courier-mistakes-a-party-member-for",
       "weight": 3,
-      "value": "Un courrier terrifié prend un membre du groupe pour son contact et lui remet une confession royale scellée."
+      "fields": {
+        "Name": "Un courrier terrifié prend un membre du groupe pour son contact et lui remet une confession royale scellée.",
+        "Description": "Un courrier terrifié prend un membre du groupe pour son contact et lui remet une confession royale scellée."
+      }
     },
     {
       "id": "a-localized-rainstorm-follows-one-character-while-the",
       "weight": 2,
-      "value": "Une averse très localisée suit un personnage tandis que le ciel reste dégagé partout ailleurs."
+      "fields": {
+        "Name": "Une averse très localisée suit un personnage tandis que le ciel reste dégagé partout ailleurs.",
+        "Description": "Une averse très localisée suit un personnage tandis que le ciel reste dégagé partout ailleurs."
+      }
     },
     {
       "id": "two-merchants-begin-an-escalating-auction-for-an",
       "weight": 3,
-      "value": "Deux marchands se livrent à des enchères toujours plus folles pour un objet banal du groupe, sans vouloir expliquer leur intérêt."
+      "fields": {
+        "Name": "Deux marchands se livrent à des enchères toujours plus folles pour un objet banal du groupe, sans vouloir expliquer leur intérêt.",
+        "Description": "Deux marchands se livrent à des enchères toujours plus folles pour un objet banal du groupe, sans vouloir expliquer leur intérêt."
+      }
     },
     {
       "id": "a-wounded-monster-crashes-into-the-scene-fleeing",
       "weight": 3,
-      "value": "Un monstre blessé surgit dans la scène, fuyant une créature bien plus dangereuse encore hors de vue."
+      "fields": {
+        "Name": "Un monstre blessé surgit dans la scène, fuyant une créature bien plus dangereuse encore hors de vue.",
+        "Description": "Un monstre blessé surgit dans la scène, fuyant une créature bien plus dangereuse encore hors de vue."
+      }
     },
     {
       "id": "all-spoken-lies-become-visible-as-black-smoke",
-      "value": "Jusqu’au coucher du soleil, chaque mensonge prononcé se matérialise en fumée noire, semant aussitôt la panique dans la communauté la plus proche."
+      "fields": {
+        "Name": "Jusqu’au coucher du soleil, chaque mensonge prononcé se matérialise en fumée noire, semant aussitôt la panique dans la communauté la plus proche.",
+        "Description": "Jusqu’au coucher du soleil, chaque mensonge prononcé se matérialise en fumée noire, semant aussitôt la panique dans la communauté la plus proche."
+      }
     },
     {
       "id": "a-festival-starts-unexpectedly-its-central-competition-recreates",
       "weight": 3,
-      "value": "Une fête débute sans prévenir ; son épreuve principale reconstitue un exploit récent du groupe avec des détails complètement erronés."
+      "fields": {
+        "Name": "Une fête débute sans prévenir ; son épreuve principale reconstitue un exploit récent du groupe avec des détails complètement erronés.",
+        "Description": "Une fête débute sans prévenir ; son épreuve principale reconstitue un exploit récent du groupe avec des détails complètement erronés."
+      }
     },
     {
       "id": "an-earthquake-opens-a-stairway-beneath-the-road",
       "weight": 2,
-      "value": "Un séisme ouvre un escalier sous la route et condamne le passage vers l’avant."
+      "fields": {
+        "Name": "Un séisme ouvre un escalier sous la route et condamne le passage vers l’avant.",
+        "Description": "Un séisme ouvre un escalier sous la route et condamne le passage vers l’avant."
+      }
     },
     {
       "id": "a-child-calmly-asks-the-party-to-remove",
       "weight": 2,
-      "value": "Un enfant demande calmement au groupe de chasser le fantôme sous son lit ; le fantôme affirme que c’est l’enfant qui hante la maison."
+      "fields": {
+        "Name": "Un enfant demande calmement au groupe de chasser le fantôme sous son lit ; le fantôme affirme que c’est l’enfant qui hante la maison.",
+        "Description": "Un enfant demande calmement au groupe de chasser le fantôme sous son lit ; le fantôme affirme que c’est l’enfant qui hante la maison."
+      }
     },
     {
       "id": "a-shower-of-tiny-harmless-frogs-falls-from",
-      "value": "Une pluie de minuscules grenouilles inoffensives tombe d’un ciel sans nuages ; chacune porte la même rune dorée."
+      "fields": {
+        "Name": "Une pluie de minuscules grenouilles inoffensives tombe d’un ciel sans nuages ; chacune porte la même rune dorée.",
+        "Description": "Une pluie de minuscules grenouilles inoffensives tombe d’un ciel sans nuages ; chacune porte la même rune dorée."
+      }
     },
     {
       "id": "the-party-encounters-their-own-wanted-posters-issued",
-      "value": "Le groupe découvre ses propres avis de recherche, datés du lendemain et l’accusant d’un crime qui n’a pas encore eu lieu."
+      "fields": {
+        "Name": "Le groupe découvre ses propres avis de recherche, datés du lendemain et l’accusant d’un crime qui n’a pas encore eu lieu.",
+        "Description": "Le groupe découvre ses propres avis de recherche, datés du lendemain et l’accusant d’un crime qui n’a pas encore eu lieu."
+      }
     },
     {
       "id": "a-nearby-statue-turns-its-head-and-whispers",
       "weight": 2,
-      "value": "Une statue proche tourne la tête et murmure un avertissement au personnage doté de la Perception la plus faible."
+      "fields": {
+        "Name": "Une statue proche tourne la tête et murmure un avertissement au personnage doté de la Perception la plus faible.",
+        "Description": "Une statue proche tourne la tête et murmure un avertissement au personnage doté de la Perception la plus faible."
+      }
     },
     {
       "id": "a-caravan-offers-safe-passage-but-every-traveler",
       "weight": 3,
-      "value": "Une caravane propose un trajet sûr, mais chacun de ses voyageurs affirme avoir toujours connu l’un des héros."
+      "fields": {
+        "Name": "Une caravane propose un trajet sûr, mais chacun de ses voyageurs affirme avoir toujours connu l’un des héros.",
+        "Description": "Une caravane propose un trajet sûr, mais chacun de ses voyageurs affirme avoir toujours connu l’un des héros."
+      }
     },
     {
       "id": "for-one-hour-shadows-detach-from-their-owners",
-      "value": "Pendant une heure, les ombres se détachent de leurs propriétaires et mettent en scène leurs intentions secrètes."
+      "fields": {
+        "Name": "Pendant une heure, les ombres se détachent de leurs propriétaires et mettent en scène leurs intentions secrètes.",
+        "Description": "Pendant une heure, les ombres se détachent de leurs propriétaires et mettent en scène leurs intentions secrètes."
+      }
     },
     {
       "id": "a-bridge-collapses-after-the-party-crosses-separating",
       "weight": 3,
-      "value": "Un pont s’effondre juste après le passage du groupe, le séparant à la fois de ses poursuivants et du chemin le plus simple pour rentrer."
+      "fields": {
+        "Name": "Un pont s’effondre juste après le passage du groupe, le séparant à la fois de ses poursuivants et du chemin le plus simple pour rentrer.",
+        "Description": "Un pont s’effondre juste après le passage du groupe, le séparant à la fois de ses poursuivants et du chemin le plus simple pour rentrer."
+      }
     },
     {
       "id": "a-magical-market-appears-between-two-trees-and",
-      "value": "Un marché magique apparaît entre deux arbres et disparaîtra après exactement treize achats."
+      "fields": {
+        "Name": "Un marché magique apparaît entre deux arbres et disparaîtra après exactement treize achats.",
+        "Description": "Un marché magique apparaît entre deux arbres et disparaîtra après exactement treize achats."
+      }
     },
     {
       "id": "a-dying-raven-delivers-a-signet-ring-and",
       "weight": 2,
-      "value": "Un corbeau mourant apporte une chevalière et répète le nom d’un lieu absent de toutes les cartes."
+      "fields": {
+        "Name": "Un corbeau mourant apporte une chevalière et répète le nom d’un lieu absent de toutes les cartes.",
+        "Description": "Un corbeau mourant apporte une chevalière et répète le nom d’un lieu absent de toutes les cartes."
+      }
     },
     {
       "id": "an-eclipse-begins-years-ahead-of-schedule-magical",
-      "value": "Une éclipse commence des années trop tôt ; les pouvoirs magiques produisent des effets inversés ou symboliques."
+      "fields": {
+        "Name": "Une éclipse commence des années trop tôt ; les pouvoirs magiques produisent des effets inversés ou symboliques.",
+        "Description": "Une éclipse commence des années trop tôt ; les pouvoirs magiques produisent des effets inversés ou symboliques."
+      }
     },
     {
       "id": "a-noble-procession-blocks-the-road-while-masked",
       "weight": 3,
-      "value": "Une procession nobiliaire bloque la route tandis que des rebelles masqués préparent une embuscade des deux côtés."
+      "fields": {
+        "Name": "Une procession nobiliaire bloque la route tandis que des rebelles masqués préparent une embuscade des deux côtés.",
+        "Description": "Une procession nobiliaire bloque la route tandis que des rebelles masqués préparent une embuscade des deux côtés."
+      }
     },
     {
       "id": "the-nearest-river-runs-backward-exposing-a-wreck",
-      "value": "La rivière la plus proche remonte son cours, révélant une épave chargée de caisses scellées et réveillant son équipage noyé."
+      "fields": {
+        "Name": "La rivière la plus proche remonte son cours, révélant une épave chargée de caisses scellées et réveillant son équipage noyé.",
+        "Description": "La rivière la plus proche remonte son cours, révélant une épave chargée de caisses scellées et réveillant son équipage noyé."
+      }
     },
     {
       "id": "a-famous-adventurer-publicly-credits-the-party-for",
       "weight": 2,
-      "value": "Un aventurier célèbre attribue publiquement au groupe un exploit qu’il n’a pas accompli et lui demande de préserver le mensonge."
+      "fields": {
+        "Name": "Un aventurier célèbre attribue publiquement au groupe un exploit qu’il n’a pas accompli et lui demande de préserver le mensonge.",
+        "Description": "Un aventurier célèbre attribue publiquement au groupe un exploit qu’il n’a pas accompli et lui demande de préserver le mensonge."
+      }
     },
     {
       "id": "everyone-in-a-village-has-fallen-asleep-except",
       "weight": 2,
-      "value": "Tout un village s’est endormi, à l’exception d’un boulanger extrêmement méfiant."
+      "fields": {
+        "Name": "Tout un village s’est endormi, à l’exception d’un boulanger extrêmement méfiant.",
+        "Description": "Tout un village s’est endormi, à l’exception d’un boulanger extrêmement méfiant."
+      }
     },
     {
       "id": "a-wandering-judge-declares-an-improvised-trial-over",
       "weight": 2,
-      "value": "Un juge itinérant improvise un procès pour déterminer le propriétaire d’une épée parlante qui a choisi un membre du groupe."
+      "fields": {
+        "Name": "Un juge itinérant improvise un procès pour déterminer le propriétaire d’une épée parlante qui a choisi un membre du groupe.",
+        "Description": "Un juge itinérant improvise un procès pour déterminer le propriétaire d’une épée parlante qui a choisi un membre du groupe."
+      }
     },
     {
       "id": "a-harmless-animal-begins-speaking-with-the-voice",
       "weight": 2,
-      "value": "Un animal inoffensif se met à parler avec la voix d’un allié absent et réclame une aide urgente."
+      "fields": {
+        "Name": "Un animal inoffensif se met à parler avec la voix d’un allié absent et réclame une aide urgente.",
+        "Description": "Un animal inoffensif se met à parler avec la voix d’un allié absent et réclame une aide urgente."
+      }
     },
     {
       "id": "the-moon-briefly-shows-a-second-face-after",
-      "value": "La lune laisse brièvement apparaître un second visage ; ensuite, toutes les boussoles pointent vers le groupe."
+      "fields": {
+        "Name": "La lune laisse brièvement apparaître un second visage ; ensuite, toutes les boussoles pointent vers le groupe.",
+        "Description": "La lune laisse brièvement apparaître un second visage ; ensuite, toutes les boussoles pointent vers le groupe."
+      }
     },
     {
       "id": "a-battlefield-from-the-distant-past-overlays-the",
-      "value": "Un champ de bataille d’un passé lointain se superpose au paysage actuel, et les gestes des fantômes infligent de véritables dégâts."
+      "fields": {
+        "Name": "Un champ de bataille d’un passé lointain se superpose au paysage actuel, et les gestes des fantômes infligent de véritables dégâts.",
+        "Description": "Un champ de bataille d’un passé lointain se superpose au paysage actuel, et les gestes des fantômes infligent de véritables dégâts."
+      }
     },
     {
       "id": "a-thief-steals-something-trivial-but-leaves-behind",
       "weight": 3,
-      "value": "Un voleur dérobe un objet insignifiant, mais laisse derrière lui quelque chose de bien plus précieux et dangereusement reconnaissable."
+      "fields": {
+        "Name": "Un voleur dérobe un objet insignifiant, mais laisse derrière lui quelque chose de bien plus précieux et dangereusement reconnaissable.",
+        "Description": "Un voleur dérobe un objet insignifiant, mais laisse derrière lui quelque chose de bien plus précieux et dangereusement reconnaissable."
+      }
     },
     {
       "id": "a-bell-rings-underground-local-elders-insist-there",
       "weight": 2,
-      "value": "Une cloche sonne sous terre ; les anciens du lieu jurent qu’aucune cloche n’existe et ordonnent à tout le monde de rentrer."
+      "fields": {
+        "Name": "Une cloche sonne sous terre ; les anciens du lieu jurent qu’aucune cloche n’existe et ordonnent à tout le monde de rentrer.",
+        "Description": "Une cloche sonne sous terre ; les anciens du lieu jurent qu’aucune cloche n’existe et ordonnent à tout le monde de rentrer."
+      }
     },
     {
       "id": "a-spontaneous-peace-negotiation-begins-between-two-hostile",
       "weight": 3,
-      "value": "Des négociations de paix spontanées commencent entre deux factions ennemies, qui choisissent toutes deux le groupe comme témoin neutre."
+      "fields": {
+        "Name": "Des négociations de paix spontanées commencent entre deux factions ennemies, qui choisissent toutes deux le groupe comme témoin neutre.",
+        "Description": "Des négociations de paix spontanées commencent entre deux factions ennemies, qui choisissent toutes deux le groupe comme témoin neutre."
+      }
     },
     {
       "id": "time-skips-forward-three-hours-for-everyone-except",
-      "value": "Pour tous sauf le groupe, le temps avance brusquement de trois heures ; on l’accuse désormais de ce qui s’est produit pendant cet intervalle."
+      "fields": {
+        "Name": "Pour tous sauf le groupe, le temps avance brusquement de trois heures ; on l’accuse désormais de ce qui s’est produit pendant cet intervalle.",
+        "Description": "Pour tous sauf le groupe, le temps avance brusquement de trois heures ; on l’accuse désormais de ce qui s’est produit pendant cet intervalle."
+      }
+    },
+    {
+      "id": "sudden-tremor",
+      "fields": {
+        "Name": "Secousse soudaine",
+        "Description": "Le sol tremble assez fortement pour interrompre l’action"
+      }
+    },
+    {
+      "id": "panicked-animals",
+      "fields": {
+        "Name": "Animaux affolés",
+        "Description": "Des cris se rapprochent tandis que la faune fuit une menace"
+      }
+    },
+    {
+      "id": "distress-call",
+      "fields": {
+        "Name": "Appel de détresse",
+        "Description": "Une voix demande de l’aide depuis un endroit où personne"
+      }
+    },
+    {
+      "id": "nauseating-odor",
+      "fields": {
+        "Name": "Odeur nauséabonde",
+        "Description": "Une puanteur inhabituelle envahit la zone et conduit vers"
+      }
+    },
+    {
+      "id": "bewitching-perfume",
+      "fields": {
+        "Name": "Parfum envoûtant",
+        "Description": "Une odeur agréable altère subtilement l’attention, les"
+      }
+    },
+    {
+      "id": "shared-pain",
+      "fields": {
+        "Name": "Douleur partagée",
+        "Description": "Plusieurs personnages ressentent simultanément le même mal"
+      }
+    },
+    {
+      "id": "fainting",
+      "fields": {
+        "Name": "Évanouissement",
+        "Description": "Un PNJ perd connaissance au moment précis où il allait"
+      }
+    },
+    {
+      "id": "gathering-storm",
+      "fields": {
+        "Name": "Tempête naissante",
+        "Description": "Le temps change brutalement et rend la route, le combat ou"
+      }
+    },
+    {
+      "id": "unexpected-arrival",
+      "fields": {
+        "Name": "Arrivée inattendue",
+        "Description": "Un nouveau PNJ se présente en affirmant connaître l’un"
+      }
+    },
+    {
+      "id": "hostile-migration",
+      "fields": {
+        "Name": "Migration hostile",
+        "Description": "Plusieurs créatures surgissent dans la zone parce qu’une"
+      }
+    },
+    {
+      "id": "disrupted-cycle",
+      "fields": {
+        "Name": "Cycle bouleversé",
+        "Description": "La nuit tombe ou le jour se lève plusieurs heures trop tôt,"
+      }
+    },
+    {
+      "id": "impossible-message",
+      "fields": {
+        "Name": "Message impossible",
+        "Description": "Un appel au secours provient d’une personne absente,"
+      }
+    },
+    {
+      "id": "return-of-the-past",
+      "fields": {
+        "Name": "Retour du passé",
+        "Description": "Un événement lié à l’histoire d’un personnage réapparaît"
+      }
+    },
+    {
+      "id": "sudden-epidemic",
+      "fields": {
+        "Name": "Épidémie soudaine",
+        "Description": "Un membre du groupe montre les premiers signes d’une"
+      }
+    },
+    {
+      "id": "supplies-exhausted",
+      "fields": {
+        "Name": "Ravitaillement épuisé",
+        "Description": "La nourriture disparaît, se gâte ou devient impropre à"
+      }
+    },
+    {
+      "id": "extreme-temperature",
+      "fields": {
+        "Name": "Température extrême",
+        "Description": "Une chaleur ou un froid anormal force chacun à chercher"
+      }
     }
   ]
 }

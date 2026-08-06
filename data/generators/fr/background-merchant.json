@@ -49,6 +49,54 @@
         "Backstory": "Un représentant commercial étranger s’est retrouvé isolé lorsque la guerre a rompu tout lien avec sa maison mère.",
         "Goals": "Nouer des alliances locales, protéger ses employés et décider si sa loyauté envers la compagnie a encore un sens."
       }
+    },
+    {
+      "id": "legacy-profession-fishmonger",
+      "fields": {
+        "Appearance": "Sa tenue et ses outils évoquent immédiatement le métier suivant : poissonnier.",
+        "Backstory": "A construit sa vie comme poissonnier et connaît les obligations ainsi que les pressions cachées de cette activité.",
+        "Goals": "Mettre cette expérience à profit pour obtenir un avenir plus sûr et plus autonome."
+      }
+    },
+    {
+      "id": "legacy-profession-merchant",
+      "fields": {
+        "Appearance": "Sa tenue et ses outils évoquent immédiatement le métier suivant : marchand.",
+        "Backstory": "A construit sa vie comme marchand et connaît les obligations ainsi que les pressions cachées de cette activité.",
+        "Goals": "Mettre cette expérience à profit pour obtenir un avenir plus sûr et plus autonome."
+      }
+    },
+    {
+      "id": "legacy-profession-secondhand-dealer",
+      "fields": {
+        "Appearance": "Sa tenue et ses outils évoquent immédiatement le métier suivant : brocanteur.",
+        "Backstory": "A construit sa vie comme brocanteur et connaît les obligations ainsi que les pressions cachées de cette activité.",
+        "Goals": "Mettre cette expérience à profit pour obtenir un avenir plus sûr et plus autonome."
+      }
+    },
+    {
+      "id": "legacy-profession-innkeeper",
+      "fields": {
+        "Appearance": "Sa tenue et ses outils évoquent immédiatement le métier suivant : tavernier.",
+        "Backstory": "A construit sa vie comme tavernier et connaît les obligations ainsi que les pressions cachées de cette activité.",
+        "Goals": "Mettre cette expérience à profit pour obtenir un avenir plus sûr et plus autonome."
+      }
+    },
+    {
+      "id": "decomposed-dorrin-slate",
+      "fields": {
+        "Appearance": "Une figure singulière connue sous le nom de Dorrin Slate.",
+        "Backstory": "un expert nain capable d'identifier n'importe quel artefact, mais qui sous-évalue compulsivement les objets qui lui plaisent.",
+        "Goals": "Transformer ce parcours singulier en un avenir choisi."
+      }
+    },
+    {
+      "id": "decomposed-auntie-ember",
+      "fields": {
+        "Appearance": "Une figure singulière connue sous le nom de Auntie Ember.",
+        "Backstory": "une vieille aubergiste née des cendres qui loge gratuitement les aventuriers, puis leur présente plus tard la note sous forme de services à rendre.",
+        "Goals": "Transformer ce parcours singulier en un avenir choisi."
+      }
     }
   ]
 }

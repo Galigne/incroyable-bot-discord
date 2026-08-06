@@ -49,6 +49,30 @@
         "Backstory": "A stable hand discovered that a prized mount had been deliberately trained to throw a particular rider.",
         "Goals": "Prevent the planned death and identify who tampered with the animal without endangering it."
       }
+    },
+    {
+      "id": "legacy-profession-driver",
+      "fields": {
+        "Appearance": "Clothing and tools immediately suggest the work of a driver.",
+        "Backstory": "Built a life as a driver and knows the profession’s obligations and hidden pressures.",
+        "Goals": "Use that experience to secure a safer and more independent future."
+      }
+    },
+    {
+      "id": "legacy-profession-prisoner",
+      "fields": {
+        "Appearance": "Clothing and tools immediately suggest the work of a prisoner.",
+        "Backstory": "Built a life as a prisoner and knows the profession’s obligations and hidden pressures.",
+        "Goals": "Use that experience to secure a safer and more independent future."
+      }
+    },
+    {
+      "id": "decomposed-mara-venn",
+      "fields": {
+        "Appearance": "A distinctive figure remembered as Mara Venn.",
+        "Backstory": "a one-eyed courier who knows every shortcut, refuses to carry weapons, and is secretly transporting a dragon egg.",
+        "Goals": "Turn this unusual history toward a self-directed future."
+      }
     }
   ]
 }

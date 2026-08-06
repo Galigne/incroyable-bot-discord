@@ -49,6 +49,22 @@
         "Backstory": "A runaway fled an abusive apprenticeship and now fears being legally returned to the former master.",
         "Goals": "Prove the abuse, secure independent work, and help other apprentices escape the same treatment."
       }
+    },
+    {
+      "id": "curious-child-in-adult-situation",
+      "fields": {
+        "Appearance": "A curious child placed in an adult situation.",
+        "Backstory": "Their life stage has forced them into responsibilities that do not fit ordinary expectations.",
+        "Goals": "Prove their judgment while protecting the freedom to grow or change."
+      }
+    },
+    {
+      "id": "legacy-profession-homeless-fugitive",
+      "fields": {
+        "Appearance": "Clothing and tools immediately suggest the work of a homeless fugitive.",
+        "Backstory": "Built a life as a homeless fugitive and knows the profession’s obligations and hidden pressures.",
+        "Goals": "Use that experience to secure a safer and more independent future."
+      }
     }
   ]
 }

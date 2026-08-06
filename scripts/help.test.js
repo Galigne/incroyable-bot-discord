@@ -82,7 +82,7 @@ test('/help command:gen lists every localized generator category', () => {
 	const interaction = createInteraction('dm', [config.roles.dm]);
 	for (const locale of ['en', 'fr']) {
 		const categories = generatorCatalog.listGenerators(locale);
-		assert.ok(categories.length >= MAX_AUTOCOMPLETE_CHOICES);
+		assert.ok(categories.length > 0);
 		const rendered = renderDetail('gen', interaction, locale);
 		for (const category of categories) {
 			assert.ok(rendered.includes(`\`${category.id}\``), `${locale}: ${category.id}`);
@@ -279,7 +279,14 @@ test('/help autocomplete falls back to every command without member role data', 
 test('autocomplete respects Discord\'s 25-choice limit and filters values', async () => {
 	const dm = createInteraction('dm', [config.roles.dm]);
 	const initialCategories = await autocompleteOption('gen', 'category', '', dm);
-	assert.equal(initialCategories.length, MAX_AUTOCOMPLETE_CHOICES);
+	assert.equal(
+		initialCategories.length,
+		Math.min(
+			generatorCatalog.listGenerators('en').length,
+			MAX_AUTOCOMPLETE_CHOICES,
+		),
+	);
+	assert.ok(initialCategories.length <= MAX_AUTOCOMPLETE_CHOICES);
 	const filteredCategories = await autocompleteOption(
 		'gen',
 		'category',

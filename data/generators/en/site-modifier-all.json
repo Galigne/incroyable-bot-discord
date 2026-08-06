@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 2,
+  "id": "site-modifier-all",
+  "kind": "modifier",
+  "visibility": "internal",
+  "name": "Historical site modifiers",
+  "description": "Descriptive historical variations compatible with specific location generators",
+  "appliesTo": ["region", "settlement", "dungeon", "building"],
+  "entrySchema": {
+    "type": "fields",
+    "required": ["Name", "Description"]
+  },
+  "entries": [
+    {
+      "id": "abandoned",
+      "fields": {
+        "Name": "Abandoned",
+        "Description": "The place still partly functions, but its occupants left essential belongings behind."
+      }
+    },
+    {
+      "id": "immense",
+      "fields": {
+        "Name": "Immense",
+        "Description": "Internal distances exceed expectations and demand supplies, navigation, or several stages of exploration."
+      }
+    }
+  ]
+}

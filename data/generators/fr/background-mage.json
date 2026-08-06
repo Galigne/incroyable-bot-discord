@@ -49,6 +49,22 @@
         "Backstory": "Un spécialiste des rituels a hérité d’obligations envers un protecteur invisible, sans recevoir les instructions promises.",
         "Goals": "Découvrir la nature de ce protecteur et renégocier ses obligations avant la prochaine échéance."
       }
+    },
+    {
+      "id": "drowi-legacy-concept",
+      "fields": {
+        "Appearance": "Son allure et son équipement témoignent d’un parcours singulier et mémorable.",
+        "Backstory": "Un alchimiste lutin au service de la cour, capricieux et amusant, qui présente ses expériences dangereuses comme de simples plaisanteries.",
+        "Goals": "Résoudre le conflit inachevé sans renoncer à son indépendance."
+      }
+    },
+    {
+      "id": "legacy-profession-mage",
+      "fields": {
+        "Appearance": "Sa tenue et ses outils évoquent immédiatement le métier suivant : mage.",
+        "Backstory": "A construit sa vie comme mage et connaît les obligations ainsi que les pressions cachées de cette activité.",
+        "Goals": "Mettre cette expérience à profit pour obtenir un avenir plus sûr et plus autonome."
+      }
     }
   ]
 }

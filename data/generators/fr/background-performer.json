@@ -49,6 +49,46 @@
         "Backstory": "Un artiste de rue est devenu populaire en tournant en ridicule un dirigeant local, dont les agents assistent désormais à chaque représentation.",
         "Goals": "Continuer à parler librement, protéger son public et transformer les rires en véritable changement."
       }
+    },
+    {
+      "id": "legacy-profession-storyteller",
+      "fields": {
+        "Appearance": "Sa tenue et ses outils évoquent immédiatement le métier suivant : conteur.",
+        "Backstory": "A construit sa vie comme conteur et connaît les obligations ainsi que les pressions cachées de cette activité.",
+        "Goals": "Mettre cette expérience à profit pour obtenir un avenir plus sûr et plus autonome."
+      }
+    },
+    {
+      "id": "legacy-profession-singer",
+      "fields": {
+        "Appearance": "Sa tenue et ses outils évoquent immédiatement le métier suivant : chanteur.",
+        "Backstory": "A construit sa vie comme chanteur et connaît les obligations ainsi que les pressions cachées de cette activité.",
+        "Goals": "Mettre cette expérience à profit pour obtenir un avenir plus sûr et plus autonome."
+      }
+    },
+    {
+      "id": "legacy-profession-troubadour",
+      "fields": {
+        "Appearance": "Sa tenue et ses outils évoquent immédiatement le métier suivant : troubadour.",
+        "Backstory": "A construit sa vie comme troubadour et connaît les obligations ainsi que les pressions cachées de cette activité.",
+        "Goals": "Mettre cette expérience à profit pour obtenir un avenir plus sûr et plus autonome."
+      }
+    },
+    {
+      "id": "legacy-profession-celebrity",
+      "fields": {
+        "Appearance": "Sa tenue et ses outils évoquent immédiatement le métier suivant : célébrité.",
+        "Backstory": "A construit sa vie comme célébrité et connaît les obligations ainsi que les pressions cachées de cette activité.",
+        "Goals": "Mettre cette expérience à profit pour obtenir un avenir plus sûr et plus autonome."
+      }
+    },
+    {
+      "id": "decomposed-nox-bellweather",
+      "fields": {
+        "Appearance": "Une figure singulière connue sous le nom de Nox Bellweather.",
+        "Backstory": "un diseur de bonne aventure dont les fausses prédictions sont rassurantes et les vraies complètement absurdes en apparence.",
+        "Goals": "Transformer ce parcours singulier en un avenir choisi."
+      }
     }
   ]
 }

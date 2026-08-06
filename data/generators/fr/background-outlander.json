@@ -49,6 +49,46 @@
         "Backstory": "Un guide des régions frontalières a hérité des notes inachevées d’un parent disparu en territoire inexploré.",
         "Goals": "Achever la carte, retrouver l’expédition disparue et empêcher l’expansion de détruire des lieux fragiles."
       }
+    },
+    {
+      "id": "legacy-profession-hunter",
+      "fields": {
+        "Appearance": "Sa tenue et ses outils évoquent immédiatement le métier suivant : chasseur.",
+        "Backstory": "A construit sa vie comme chasseur et connaît les obligations ainsi que les pressions cachées de cette activité.",
+        "Goals": "Mettre cette expérience à profit pour obtenir un avenir plus sûr et plus autonome."
+      }
+    },
+    {
+      "id": "legacy-profession-traveler",
+      "fields": {
+        "Appearance": "Sa tenue et ses outils évoquent immédiatement le métier suivant : voyageur.",
+        "Backstory": "A construit sa vie comme voyageur et connaît les obligations ainsi que les pressions cachées de cette activité.",
+        "Goals": "Mettre cette expérience à profit pour obtenir un avenir plus sûr et plus autonome."
+      }
+    },
+    {
+      "id": "legacy-profession-nomad",
+      "fields": {
+        "Appearance": "Sa tenue et ses outils évoquent immédiatement le métier suivant : nomade.",
+        "Backstory": "A construit sa vie comme nomade et connaît les obligations ainsi que les pressions cachées de cette activité.",
+        "Goals": "Mettre cette expérience à profit pour obtenir un avenir plus sûr et plus autonome."
+      }
+    },
+    {
+      "id": "legacy-profession-tracker",
+      "fields": {
+        "Appearance": "Sa tenue et ses outils évoquent immédiatement le métier suivant : traceur.",
+        "Backstory": "A construit sa vie comme traceur et connaît les obligations ainsi que les pressions cachées de cette activité.",
+        "Goals": "Mettre cette expérience à profit pour obtenir un avenir plus sûr et plus autonome."
+      }
+    },
+    {
+      "id": "legacy-profession-hermit",
+      "fields": {
+        "Appearance": "Sa tenue et ses outils évoquent immédiatement le métier suivant : ermite.",
+        "Backstory": "A construit sa vie comme ermite et connaît les obligations ainsi que les pressions cachées de cette activité.",
+        "Goals": "Mettre cette expérience à profit pour obtenir un avenir plus sûr et plus autonome."
+      }
     }
   ]
 }

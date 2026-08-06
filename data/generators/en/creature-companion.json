@@ -600,6 +600,52 @@
         "inventory": [],
         "naturalArmorPercentage": 0
       }
+    },
+    {
+      "id": "messenger-raptor",
+      "fields": {
+        "Name": "Messenger Raptor",
+        "Description": "A territorial bird trainable to recognize people, emblems, and routes."
+      },
+      "generation": {
+        "statProfile": "creature-companion",
+        "traits": [
+          {
+            "id": "messenger-raptor-nature",
+            "Name": "Intrinsic Nature",
+            "Description": "A territorial bird trainable to recognize people, emblems, and routes."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 0
+      },
+      "weight": 1
+    },
+    {
+      "id": "sir-candlewick",
+      "fields": {
+        "Name": "Sir Candlewick",
+        "Description": "a tiny animated suit of armor searching for a person large enough to be its squire."
+      },
+      "generation": {
+        "statProfile": "creature-companion",
+        "traits": [
+          {
+            "id": "sir-candlewick-nature",
+            "Name": "Animated Helper",
+            "Description": "a tiny animated suit of armor searching for a person large enough to be its squire."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 35
+      },
+      "weight": 1
     }
   ],
   "modifiers": [

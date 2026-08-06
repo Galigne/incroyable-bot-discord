@@ -11,14 +11,6 @@
   },
   "entries": [
     {
-      "id": "longsword",
-      "weight": 5,
-      "fields": {
-        "Name": "Épée longue",
-        "Description": "Une lame fiable à une main, aussi efficace pour trancher que pour porter des coups d'estoc."
-      }
-    },
-    {
       "id": "short-sword",
       "weight": 5,
       "fields": {
@@ -27,35 +19,11 @@
       }
     },
     {
-      "id": "spear",
-      "weight": 5,
-      "fields": {
-        "Name": "Lance",
-        "Description": "Une arme à longue portée utile pour frapper d'estoc, tenir une position ou être lancée."
-      }
-    },
-    {
       "id": "hunting-bow",
       "weight": 5,
       "fields": {
         "Name": "Arc de chasse",
         "Description": "Une arme à distance pratique disposant de munitions ordinaires illimitées."
-      }
-    },
-    {
-      "id": "dagger",
-      "weight": 5,
-      "fields": {
-        "Name": "Dague",
-        "Description": "Une lame légère et facile à dissimuler, qui peut également servir d'outil."
-      }
-    },
-    {
-      "id": "battle-axe",
-      "weight": 4,
-      "fields": {
-        "Name": "Hache de bataille",
-        "Description": "Une arme lourde et tranchante, efficace contre les boucliers et les obstacles en bois."
       }
     },
     {
@@ -75,43 +43,11 @@
       }
     },
     {
-      "id": "crossbow",
-      "weight": 4,
-      "fields": {
-        "Name": "Arbalète",
-        "Description": "Une puissante arme mécanique à distance disposant de carreaux ordinaires illimités."
-      }
-    },
-    {
-      "id": "saber",
-      "weight": 4,
-      "fields": {
-        "Name": "Sabre",
-        "Description": "Une lame courbe à une main, conçue pour porter rapidement des coups de taille."
-      }
-    },
-    {
       "id": "greatsword",
       "weight": 3,
       "fields": {
         "Name": "Espadon",
         "Description": "Une imposante épée à deux mains conçue pour de puissantes attaques amples."
-      }
-    },
-    {
-      "id": "halberd",
-      "weight": 3,
-      "fields": {
-        "Name": "Hallebarde",
-        "Description": "Une arme d'hast à deux mains combinant un fer de hache, un crochet et une pointe de lance."
-      }
-    },
-    {
-      "id": "warhammer",
-      "weight": 3,
-      "fields": {
-        "Name": "Marteau de guerre",
-        "Description": "Une arme qui concentre la force de ses coups contre les armures et les fortifications."
       }
     },
     {
@@ -136,14 +72,6 @@
       "fields": {
         "Name": "Hachette",
         "Description": "Une arme tranchante compacte, assez bien équilibrée pour être lancée."
-      }
-    },
-    {
-      "id": "flail",
-      "weight": 3,
-      "fields": {
-        "Name": "Fléau d'armes",
-        "Description": "Une masse articulée par une chaîne, capable de contourner les défenses simples."
       }
     },
     {
@@ -176,14 +104,6 @@
       "fields": {
         "Name": "Arbalète lourde à répétition",
         "Description": "Un mécanisme encombrant capable de tirer rapidement plusieurs traits avant d'être rechargé."
-      }
-    },
-    {
-      "id": "whip",
-      "weight": 2,
-      "fields": {
-        "Name": "Fouet",
-        "Description": "Une arme souple permettant de désarmer, de faire trébucher et de contrôler l'espace."
       }
     },
     {
@@ -242,6 +162,167 @@
       "fields": {
         "Name": "Arc long en os",
         "Description": "Un arc puissant assemblé à partir des ossements d'une bête gigantesque."
+      }
+    },
+    {
+      "id": "longsword",
+      "fields": {
+        "Name": "Épée longue",
+        "Description": "Une lame polyvalente à une main, adaptée aux tailles comme aux attaques d’estoc."
+      }
+    },
+    {
+      "id": "dagger",
+      "fields": {
+        "Name": "Dague",
+        "Description": "Une lame courte, facile à dissimuler et utile au combat comme pour les travaux précis."
+      }
+    },
+    {
+      "id": "spear",
+      "fields": {
+        "Name": "Lance",
+        "Description": "Une arme d’hast simple offrant allonge, contrôle de l’espace et efficacité contre une charge."
+      }
+    },
+    {
+      "id": "harpoon",
+      "fields": {
+        "Name": "Harpon",
+        "Description": "Une lourde pointe barbelée reliée à une corde, conçue pour retenir une cible après l’impact."
+      }
+    },
+    {
+      "id": "halberd",
+      "fields": {
+        "Name": "Hallebarde",
+        "Description": "Une arme d’hast combinant pointe, lame de hache et crochet pour menacer plusieurs types de défense."
+      }
+    },
+    {
+      "id": "morning-star",
+      "fields": {
+        "Name": "Morgenstern",
+        "Description": "Une masse hérissée concentrant son impact sur une petite surface."
+      }
+    },
+    {
+      "id": "club",
+      "fields": {
+        "Name": "Massue",
+        "Description": "Une arme contondante robuste, facile à fabriquer et efficace pour repousser un adversaire."
+      }
+    },
+    {
+      "id": "katana",
+      "fields": {
+        "Name": "Katana",
+        "Description": "Une longue lame courbe privilégiant les coupes rapides et un maniement précis à deux mains."
+      }
+    },
+    {
+      "id": "saber",
+      "fields": {
+        "Name": "Sabre",
+        "Description": "Une lame courbe à une main, légère et adaptée au combat mobile."
+      }
+    },
+    {
+      "id": "flail",
+      "fields": {
+        "Name": "Fléau",
+        "Description": "Une masse articulée difficile à maîtriser, capable de contourner certaines gardes."
+      }
+    },
+    {
+      "id": "twin-blades",
+      "fields": {
+        "Name": "Lames jumelles",
+        "Description": "Deux armes courtes équilibrées pour un style rapide exigeant coordination et proximité."
+      }
+    },
+    {
+      "id": "battle-axe",
+      "fields": {
+        "Name": "Hache de bataille",
+        "Description": "Une arme de taille puissante, efficace contre les boucliers et les obstacles en bois."
+      }
+    },
+    {
+      "id": "warhammer",
+      "fields": {
+        "Name": "Marteau de guerre",
+        "Description": "Une arme lourde concentrant sa force contre les armures rigides et les structures."
+      }
+    },
+    {
+      "id": "greataxe",
+      "fields": {
+        "Name": "Grande hache",
+        "Description": "Une arme massive à deux mains produisant des frappes larges au prix d’une défense réduite."
+      }
+    },
+    {
+      "id": "great-hammer",
+      "fields": {
+        "Name": "Grand marteau",
+        "Description": "Un marteau à deux mains extrêmement lourd, conçu pour briser protections et fortifications."
+      }
+    },
+    {
+      "id": "war-scythe",
+      "fields": {
+        "Name": "Faux de guerre",
+        "Description": "Une longue lame recourbée transformée en arme d’hast pour accrocher et faucher."
+      }
+    },
+    {
+      "id": "whip",
+      "fields": {
+        "Name": "Fouet",
+        "Description": "Une arme flexible utile pour maintenir la distance, désarmer ou entraver une cible."
+      }
+    },
+    {
+      "id": "fighting-claws",
+      "fields": {
+        "Name": "Griffes de combat",
+        "Description": "Des lames fixées aux mains qui prolongent les attaques naturelles sans libérer la prise."
+      }
+    },
+    {
+      "id": "longbow",
+      "fields": {
+        "Name": "Arc long",
+        "Description": "Un arc puissant exigeant de l’espace et de la force, efficace à grande distance."
+      }
+    },
+    {
+      "id": "crossbow",
+      "fields": {
+        "Name": "Arbalète",
+        "Description": "Une arme mécanique précise dont la puissance compense un rechargement plus lent."
+      }
+    },
+    {
+      "id": "combat-wand",
+      "fields": {
+        "Name": "Baguette de combat",
+        "Description": "Un focaliseur court et renforcé permettant de canaliser une LOI tout en parant des coups légers."
+      }
+    },
+    {
+      "id": "combat-scepter",
+      "fields": {
+        "Name": "Sceptre de combat",
+        "Description": "Un focaliseur robuste pouvant servir de masse légère lorsque la magie devient impraticable."
+      }
+    },
+    {
+      "id": "portable-ballista",
+      "fields": {
+        "Name": "Baliste portative",
+        "Description": "Une arbalète démesurée montée sur support, très puissante mais longue à déplacer et préparer."
       }
     }
   ]

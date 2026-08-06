@@ -49,6 +49,46 @@
         "Backstory": "A frontier guide inherited unfinished route notes from a parent who vanished in unexplored country.",
         "Goals": "Complete the map, locate the missing expedition, and keep expansion from destroying fragile places."
       }
+    },
+    {
+      "id": "legacy-profession-hunter",
+      "fields": {
+        "Appearance": "Clothing and tools immediately suggest the work of a hunter.",
+        "Backstory": "Built a life as a hunter and knows the profession’s obligations and hidden pressures.",
+        "Goals": "Use that experience to secure a safer and more independent future."
+      }
+    },
+    {
+      "id": "legacy-profession-traveler",
+      "fields": {
+        "Appearance": "Clothing and tools immediately suggest the work of a traveler.",
+        "Backstory": "Built a life as a traveler and knows the profession’s obligations and hidden pressures.",
+        "Goals": "Use that experience to secure a safer and more independent future."
+      }
+    },
+    {
+      "id": "legacy-profession-nomad",
+      "fields": {
+        "Appearance": "Clothing and tools immediately suggest the work of a nomad.",
+        "Backstory": "Built a life as a nomad and knows the profession’s obligations and hidden pressures.",
+        "Goals": "Use that experience to secure a safer and more independent future."
+      }
+    },
+    {
+      "id": "legacy-profession-tracker",
+      "fields": {
+        "Appearance": "Clothing and tools immediately suggest the work of a tracker.",
+        "Backstory": "Built a life as a tracker and knows the profession’s obligations and hidden pressures.",
+        "Goals": "Use that experience to secure a safer and more independent future."
+      }
+    },
+    {
+      "id": "legacy-profession-hermit",
+      "fields": {
+        "Appearance": "Clothing and tools immediately suggest the work of a hermit.",
+        "Backstory": "Built a life as a hermit and knows the profession’s obligations and hidden pressures.",
+        "Goals": "Use that experience to secure a safer and more independent future."
+      }
     }
   ]
 }

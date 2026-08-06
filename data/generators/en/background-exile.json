@@ -49,6 +49,14 @@
         "Backstory": "A political exile advocated peaceful reform until the government declared even discussion of change treasonous.",
         "Goals": "Support reformers at home while preventing their movement from embracing indiscriminate violence."
       }
+    },
+    {
+      "id": "legacy-profession-revolutionary",
+      "fields": {
+        "Appearance": "Clothing and tools immediately suggest the work of a revolutionary.",
+        "Backstory": "Built a life as a revolutionary and knows the profession’s obligations and hidden pressures.",
+        "Goals": "Use that experience to secure a safer and more independent future."
+      }
     }
   ]
 }

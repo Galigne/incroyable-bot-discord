@@ -105,6 +105,94 @@
         "Backstory": "Retired successfully years ago but returned when a former companion's child disappeared.",
         "Goals": "Find the missing heir, keep inexperienced allies alive, and retire without unfinished promises."
       }
+    },
+    {
+      "id": "laria-legacy-concept",
+      "fields": {
+        "Appearance": "Their bearing and equipment reflect an unusual and memorable career.",
+        "Backstory": "A demon hunter betrayed by her people after loving an enemy; vengeance still conceals unresolved feelings.",
+        "Goals": "Resolve the unfinished conflict without surrendering personal independence."
+      }
+    },
+    {
+      "id": "impatient-young-adult",
+      "fields": {
+        "Appearance": "A young adult impatient to prove their worth.",
+        "Backstory": "Their life stage has forced them into responsibilities that do not fit ordinary expectations.",
+        "Goals": "Prove their judgment while protecting the freedom to grow or change."
+      }
+    },
+    {
+      "id": "legacy-profession-warrior",
+      "fields": {
+        "Appearance": "Clothing and tools immediately suggest the work of a warrior.",
+        "Backstory": "Built a life as a warrior and knows the profession’s obligations and hidden pressures.",
+        "Goals": "Use that experience to secure a safer and more independent future."
+      }
+    },
+    {
+      "id": "legacy-profession-bounty-hunter",
+      "fields": {
+        "Appearance": "Clothing and tools immediately suggest the work of a bounty hunter.",
+        "Backstory": "Built a life as a bounty hunter and knows the profession’s obligations and hidden pressures.",
+        "Goals": "Use that experience to secure a safer and more independent future."
+      }
+    },
+    {
+      "id": "legacy-profession-protector",
+      "fields": {
+        "Appearance": "Clothing and tools immediately suggest the work of a protector.",
+        "Backstory": "Built a life as a protector and knows the profession’s obligations and hidden pressures.",
+        "Goals": "Use that experience to secure a safer and more independent future."
+      }
+    },
+    {
+      "id": "legacy-profession-explorer",
+      "fields": {
+        "Appearance": "Clothing and tools immediately suggest the work of a explorer.",
+        "Backstory": "Built a life as a explorer and knows the profession’s obligations and hidden pressures.",
+        "Goals": "Use that experience to secure a safer and more independent future."
+      }
+    },
+    {
+      "id": "decomposed-tomas-rook",
+      "fields": {
+        "Appearance": "A distinctive figure remembered as Tomas Rook.",
+        "Backstory": "a retired monster hunter who now runs a bakery and recognizes the party's flour as mimic dust.",
+        "Goals": "Turn this unusual history toward a self-directed future."
+      }
+    },
+    {
+      "id": "decomposed-kesh-of-seven-knives",
+      "fields": {
+        "Appearance": "A distinctive figure remembered as Kesh of Seven Knives.",
+        "Backstory": "an intimidating mercenary who uses six knives for cooking and fears drawing the seventh.",
+        "Goals": "Turn this unusual history toward a self-directed future."
+      }
+    },
+    {
+      "id": "decomposed-mina-thrice-lost",
+      "fields": {
+        "Appearance": "A distinctive figure remembered as Mina Thrice-Lost.",
+        "Backstory": "an explorer who has escaped the same impossible ruin three times and desperately wants to return.",
+        "Goals": "Turn this unusual history toward a self-directed future."
+      }
+    },
+    {
+      "id": "decomposed-the-gray-witness",
+      "fields": {
+        "Appearance": "A distinctive figure remembered as The Gray Witness.",
+        "Backstory": "a silent armored figure appearing near historic events and sketching everyone present.",
+        "Goals": "Turn this unusual history toward a self-directed future."
+      }
+    },
+    {
+      "id": "decomposed-hara-moonclaw",
+      "fields": {
+        "Appearance": "A distinctive figure remembered as Hara Moonclaw.",
+        "Backstory": "a bounty hunter who always offers targets one fair chance to explain themselves.",
+        "Goals": "Turn this unusual history toward a self-directed future."
+      }
     }
   ]
 }

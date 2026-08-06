@@ -49,6 +49,62 @@
         "Backstory": "A respected theologian was censured for arguing that an old commandment had been deliberately mistranslated.",
         "Goals": "Find the earliest surviving text and reform the faith without dividing its followers."
       }
+    },
+    {
+      "id": "legacy-profession-priest",
+      "fields": {
+        "Appearance": "Clothing and tools immediately suggest the work of a priest.",
+        "Backstory": "Built a life as a priest and knows the profession’s obligations and hidden pressures.",
+        "Goals": "Use that experience to secure a safer and more independent future."
+      }
+    },
+    {
+      "id": "legacy-profession-fanatic",
+      "fields": {
+        "Appearance": "Clothing and tools immediately suggest the work of a fanatic.",
+        "Backstory": "Built a life as a fanatic and knows the profession’s obligations and hidden pressures.",
+        "Goals": "Use that experience to secure a safer and more independent future."
+      }
+    },
+    {
+      "id": "legacy-profession-prophet",
+      "fields": {
+        "Appearance": "Clothing and tools immediately suggest the work of a prophet.",
+        "Backstory": "Built a life as a prophet and knows the profession’s obligations and hidden pressures.",
+        "Goals": "Use that experience to secure a safer and more independent future."
+      }
+    },
+    {
+      "id": "legacy-profession-monk",
+      "fields": {
+        "Appearance": "Clothing and tools immediately suggest the work of a monk.",
+        "Backstory": "Built a life as a monk and knows the profession’s obligations and hidden pressures.",
+        "Goals": "Use that experience to secure a safer and more independent future."
+      }
+    },
+    {
+      "id": "decomposed-brother-caldus",
+      "fields": {
+        "Appearance": "A distinctive figure remembered as Brother Caldus.",
+        "Backstory": "a cheerful healer whose miracles work but whose god officially denies knowing him.",
+        "Goals": "Turn this unusual history toward a self-directed future."
+      }
+    },
+    {
+      "id": "decomposed-pella-sunward",
+      "fields": {
+        "Appearance": "A distinctive figure remembered as Pella Sunward.",
+        "Backstory": "a relentlessly optimistic paladin whose holy order was invented during a tavern argument.",
+        "Goals": "Turn this unusual history toward a self-directed future."
+      }
+    },
+    {
+      "id": "decomposed-sister-quiet",
+      "fields": {
+        "Appearance": "A distinctive figure remembered as Sister Quiet.",
+        "Backstory": "a priest who took a vow of silence and employs three talkative ravens as theological assistants.",
+        "Goals": "Turn this unusual history toward a self-directed future."
+      }
     }
   ]
 }

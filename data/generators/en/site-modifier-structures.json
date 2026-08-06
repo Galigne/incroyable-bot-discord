@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 2,
+  "id": "site-modifier-structures",
+  "kind": "modifier",
+  "visibility": "internal",
+  "name": "Historical site modifiers",
+  "description": "Descriptive historical variations compatible with specific location generators",
+  "appliesTo": ["settlement", "dungeon", "building"],
+  "entrySchema": {
+    "type": "fields",
+    "required": ["Name", "Description"]
+  },
+  "entries": [
+    {
+      "id": "ruined",
+      "fields": {
+        "Name": "Ruined",
+        "Description": "The structure is unstable, some accessways are blocked, and movement may reveal or destroy a passage."
+      }
+    },
+    {
+      "id": "recently-destroyed",
+      "fields": {
+        "Name": "Recently Destroyed",
+        "Description": "Fresh traces still reveal the event and allow pursuit of those responsible or surviving."
+      }
+    }
+  ]
+}

@@ -49,6 +49,86 @@
         "Backstory": "A clockmaker found an impossible mechanism hidden inside an ordinary repair job.",
         "Goals": "Understand its maker and keep it away from patrons who want only military applications."
       }
+    },
+    {
+      "id": "legacy-profession-butcher",
+      "fields": {
+        "Appearance": "Clothing and tools immediately suggest the work of a butcher.",
+        "Backstory": "Built a life as a butcher and knows the profession’s obligations and hidden pressures.",
+        "Goals": "Use that experience to secure a safer and more independent future."
+      }
+    },
+    {
+      "id": "legacy-profession-pastry-cook",
+      "fields": {
+        "Appearance": "Clothing and tools immediately suggest the work of a pastry cook.",
+        "Backstory": "Built a life as a pastry cook and knows the profession’s obligations and hidden pressures.",
+        "Goals": "Use that experience to secure a safer and more independent future."
+      }
+    },
+    {
+      "id": "legacy-profession-cook",
+      "fields": {
+        "Appearance": "Clothing and tools immediately suggest the work of a cook.",
+        "Backstory": "Built a life as a cook and knows the profession’s obligations and hidden pressures.",
+        "Goals": "Use that experience to secure a safer and more independent future."
+      }
+    },
+    {
+      "id": "legacy-profession-craftsperson",
+      "fields": {
+        "Appearance": "Clothing and tools immediately suggest the work of a craftsperson.",
+        "Backstory": "Built a life as a craftsperson and knows the profession’s obligations and hidden pressures.",
+        "Goals": "Use that experience to secure a safer and more independent future."
+      }
+    },
+    {
+      "id": "legacy-profession-blacksmith",
+      "fields": {
+        "Appearance": "Clothing and tools immediately suggest the work of a blacksmith.",
+        "Backstory": "Built a life as a blacksmith and knows the profession’s obligations and hidden pressures.",
+        "Goals": "Use that experience to secure a safer and more independent future."
+      }
+    },
+    {
+      "id": "legacy-profession-mechanic",
+      "fields": {
+        "Appearance": "Clothing and tools immediately suggest the work of a mechanic.",
+        "Backstory": "Built a life as a mechanic and knows the profession’s obligations and hidden pressures.",
+        "Goals": "Use that experience to secure a safer and more independent future."
+      }
+    },
+    {
+      "id": "legacy-profession-engineer",
+      "fields": {
+        "Appearance": "Clothing and tools immediately suggest the work of a engineer.",
+        "Backstory": "Built a life as a engineer and knows the profession’s obligations and hidden pressures.",
+        "Goals": "Use that experience to secure a safer and more independent future."
+      }
+    },
+    {
+      "id": "legacy-profession-technician",
+      "fields": {
+        "Appearance": "Clothing and tools immediately suggest the work of a technician.",
+        "Backstory": "Built a life as a technician and knows the profession’s obligations and hidden pressures.",
+        "Goals": "Use that experience to secure a safer and more independent future."
+      }
+    },
+    {
+      "id": "decomposed-nella-brass",
+      "fields": {
+        "Appearance": "A distinctive figure remembered as Nella Brass.",
+        "Backstory": "a young runesmith capable of brilliant work only while someone tells her a completely new story.",
+        "Goals": "Turn this unusual history toward a self-directed future."
+      }
+    },
+    {
+      "id": "decomposed-vexa-coil",
+      "fields": {
+        "Appearance": "A distinctive figure remembered as Vexa Coil.",
+        "Backstory": "an alchemist selling reliable potions in reused bottles with dangerously incorrect labels.",
+        "Goals": "Turn this unusual history toward a self-directed future."
+      }
     }
   ]
 }

@@ -49,6 +49,46 @@
         "Backstory": "Un navigateur a survécu à un naufrage causé par des cartes délibérément falsifiées avant le départ.",
         "Goals": "Identifier le saboteur et tracer une voie sûre dans les eaux où le navire a sombré."
       }
+    },
+    {
+      "id": "legacy-profession-fisher",
+      "fields": {
+        "Appearance": "Sa tenue et ses outils évoquent immédiatement le métier suivant : pêcheur.",
+        "Backstory": "A construit sa vie comme pêcheur et connaît les obligations ainsi que les pressions cachées de cette activité.",
+        "Goals": "Mettre cette expérience à profit pour obtenir un avenir plus sûr et plus autonome."
+      }
+    },
+    {
+      "id": "legacy-profession-pilot",
+      "fields": {
+        "Appearance": "Sa tenue et ses outils évoquent immédiatement le métier suivant : pilote.",
+        "Backstory": "A construit sa vie comme pilote et connaît les obligations ainsi que les pressions cachées de cette activité.",
+        "Goals": "Mettre cette expérience à profit pour obtenir un avenir plus sûr et plus autonome."
+      }
+    },
+    {
+      "id": "legacy-profession-pirate",
+      "fields": {
+        "Appearance": "Sa tenue et ses outils évoquent immédiatement le métier suivant : pirate.",
+        "Backstory": "A construit sa vie comme pirate et connaît les obligations ainsi que les pressions cachées de cette activité.",
+        "Goals": "Mettre cette expérience à profit pour obtenir un avenir plus sûr et plus autonome."
+      }
+    },
+    {
+      "id": "legacy-profession-pirate-captain",
+      "fields": {
+        "Appearance": "Sa tenue et ses outils évoquent immédiatement le métier suivant : capitaine pirate.",
+        "Backstory": "A construit sa vie comme capitaine pirate et connaît les obligations ainsi que les pressions cachées de cette activité.",
+        "Goals": "Mettre cette expérience à profit pour obtenir un avenir plus sûr et plus autonome."
+      }
+    },
+    {
+      "id": "decomposed-rill",
+      "fields": {
+        "Appearance": "Une figure singulière connue sous le nom de Rill.",
+        "Backstory": "un récupérateur du peuple des marées qui transporte des lettres d'amour repêchées dans des épaves et tente de remettre chacune à son destinataire.",
+        "Goals": "Transformer ce parcours singulier en un avenir choisi."
+      }
     }
   ]
 }

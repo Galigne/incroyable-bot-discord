@@ -49,6 +49,46 @@
         "Backstory": "A survécu à la famine, à la guerre et à trois propriétaires successifs, tout en devenant discrètement le médiateur respecté du hameau.",
         "Goals": "Empêcher la jeune génération de raviver les anciennes querelles et obtenir la propriété collective du puits."
       }
+    },
+    {
+      "id": "legacy-profession-farmer",
+      "fields": {
+        "Appearance": "Sa tenue et ses outils évoquent immédiatement le métier suivant : paysan.",
+        "Backstory": "A construit sa vie comme paysan et connaît les obligations ainsi que les pressions cachées de cette activité.",
+        "Goals": "Mettre cette expérience à profit pour obtenir un avenir plus sûr et plus autonome."
+      }
+    },
+    {
+      "id": "legacy-profession-lumberjack",
+      "fields": {
+        "Appearance": "Sa tenue et ses outils évoquent immédiatement le métier suivant : bûcheron.",
+        "Backstory": "A construit sa vie comme bûcheron et connaît les obligations ainsi que les pressions cachées de cette activité.",
+        "Goals": "Mettre cette expérience à profit pour obtenir un avenir plus sûr et plus autonome."
+      }
+    },
+    {
+      "id": "legacy-profession-miner",
+      "fields": {
+        "Appearance": "Sa tenue et ses outils évoquent immédiatement le métier suivant : mineur.",
+        "Backstory": "A construit sa vie comme mineur et connaît les obligations ainsi que les pressions cachées de cette activité.",
+        "Goals": "Mettre cette expérience à profit pour obtenir un avenir plus sûr et plus autonome."
+      }
+    },
+    {
+      "id": "legacy-profession-shepherd",
+      "fields": {
+        "Appearance": "Sa tenue et ses outils évoquent immédiatement le métier suivant : berger.",
+        "Backstory": "A construit sa vie comme berger et connaît les obligations ainsi que les pressions cachées de cette activité.",
+        "Goals": "Mettre cette expérience à profit pour obtenir un avenir plus sûr et plus autonome."
+      }
+    },
+    {
+      "id": "decomposed-old-fen",
+      "fields": {
+        "Appearance": "Une figure singulière connue sous le nom de Old Fen.",
+        "Backstory": "un berger dont les moutons prédisent la météo, les dangers et, à l'occasion, les assassinats politiques.",
+        "Goals": "Transformer ce parcours singulier en un avenir choisi."
+      }
     }
   ]
 }

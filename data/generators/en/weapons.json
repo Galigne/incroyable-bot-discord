@@ -11,14 +11,6 @@
   },
   "entries": [
     {
-      "id": "longsword",
-      "weight": 5,
-      "fields": {
-        "Name": "Longsword",
-        "Description": "A reliable one-handed blade for cuts and thrusts."
-      }
-    },
-    {
       "id": "short-sword",
       "weight": 5,
       "fields": {
@@ -27,35 +19,11 @@
       }
     },
     {
-      "id": "spear",
-      "weight": 5,
-      "fields": {
-        "Name": "Spear",
-        "Description": "A long-reaching weapon useful for thrusting, bracing, and throwing."
-      }
-    },
-    {
       "id": "hunting-bow",
       "weight": 5,
       "fields": {
         "Name": "Hunting bow",
         "Description": "A practical ranged weapon with unlimited ordinary ammunition."
-      }
-    },
-    {
-      "id": "dagger",
-      "weight": 5,
-      "fields": {
-        "Name": "Dagger",
-        "Description": "A concealable light blade that also serves as a tool."
-      }
-    },
-    {
-      "id": "battle-axe",
-      "weight": 4,
-      "fields": {
-        "Name": "Battle axe",
-        "Description": "A heavy-edged weapon effective against shields and wooden obstacles."
       }
     },
     {
@@ -75,43 +43,11 @@
       }
     },
     {
-      "id": "crossbow",
-      "weight": 4,
-      "fields": {
-        "Name": "Crossbow",
-        "Description": "A powerful mechanical ranged weapon with unlimited ordinary bolts."
-      }
-    },
-    {
-      "id": "saber",
-      "weight": 4,
-      "fields": {
-        "Name": "Saber",
-        "Description": "A curved one-handed blade favoring fast slashing attacks."
-      }
-    },
-    {
       "id": "greatsword",
       "weight": 3,
       "fields": {
         "Name": "Greatsword",
         "Description": "A massive two-handed sword designed for broad, forceful attacks."
-      }
-    },
-    {
-      "id": "halberd",
-      "weight": 3,
-      "fields": {
-        "Name": "Halberd",
-        "Description": "A two-handed polearm combining an axe head, hook, and spear point."
-      }
-    },
-    {
-      "id": "warhammer",
-      "weight": 3,
-      "fields": {
-        "Name": "Warhammer",
-        "Description": "A concentrated striking weapon for armor and fortifications."
       }
     },
     {
@@ -136,14 +72,6 @@
       "fields": {
         "Name": "Hand axe",
         "Description": "A compact chopping weapon balanced well enough to throw."
-      }
-    },
-    {
-      "id": "flail",
-      "weight": 3,
-      "fields": {
-        "Name": "Flail",
-        "Description": "A chained striking head capable of reaching around simple defenses."
       }
     },
     {
@@ -176,14 +104,6 @@
       "fields": {
         "Name": "Heavy repeating crossbow",
         "Description": "A bulky mechanism capable of rapid shots before reloading."
-      }
-    },
-    {
-      "id": "whip",
-      "weight": 2,
-      "fields": {
-        "Name": "Whip",
-        "Description": "A flexible weapon useful for disarming, tripping, and controlling space."
       }
     },
     {
@@ -242,6 +162,167 @@
       "fields": {
         "Name": "Bone longbow",
         "Description": "A powerful bow assembled from the remains of a giant beast."
+      }
+    },
+    {
+      "id": "longsword",
+      "fields": {
+        "Name": "Longsword",
+        "Description": "A versatile one-handed blade suited to both cuts and thrusts."
+      }
+    },
+    {
+      "id": "dagger",
+      "fields": {
+        "Name": "Dagger",
+        "Description": "A short, concealable blade useful in combat and for precise work."
+      }
+    },
+    {
+      "id": "spear",
+      "fields": {
+        "Name": "Spear",
+        "Description": "A simple polearm offering reach, area control, and effectiveness against a charge."
+      }
+    },
+    {
+      "id": "harpoon",
+      "fields": {
+        "Name": "Harpoon",
+        "Description": "A heavy barbed point tied to a rope, designed to hold a target after impact."
+      }
+    },
+    {
+      "id": "halberd",
+      "fields": {
+        "Name": "Halberd",
+        "Description": "A polearm combining spike, axe blade, and hook against varied defenses."
+      }
+    },
+    {
+      "id": "morning-star",
+      "fields": {
+        "Name": "Morning Star",
+        "Description": "A spiked mace concentrating impact on a small area."
+      }
+    },
+    {
+      "id": "club",
+      "fields": {
+        "Name": "Club",
+        "Description": "A sturdy, easily made blunt weapon effective for driving an opponent back."
+      }
+    },
+    {
+      "id": "katana",
+      "fields": {
+        "Name": "Katana",
+        "Description": "A long curved blade favoring swift cuts and precise two-handed use."
+      }
+    },
+    {
+      "id": "saber",
+      "fields": {
+        "Name": "Saber",
+        "Description": "A light curved one-handed blade suited to mobile fighting."
+      }
+    },
+    {
+      "id": "flail",
+      "fields": {
+        "Name": "Flail",
+        "Description": "A difficult articulated weapon able to swing around some guards."
+      }
+    },
+    {
+      "id": "twin-blades",
+      "fields": {
+        "Name": "Twin Blades",
+        "Description": "Two balanced short weapons for a fast style demanding coordination and proximity."
+      }
+    },
+    {
+      "id": "battle-axe",
+      "fields": {
+        "Name": "Battle Axe",
+        "Description": "A powerful cutting weapon effective against shields and wooden obstacles."
+      }
+    },
+    {
+      "id": "warhammer",
+      "fields": {
+        "Name": "Warhammer",
+        "Description": "A heavy weapon concentrating force against rigid armor and structures."
+      }
+    },
+    {
+      "id": "greataxe",
+      "fields": {
+        "Name": "Greataxe",
+        "Description": "A massive two-handed axe delivering broad blows at the cost of defense."
+      }
+    },
+    {
+      "id": "great-hammer",
+      "fields": {
+        "Name": "Great Hammer",
+        "Description": "An extremely heavy two-handed hammer made to break protection and fortifications."
+      }
+    },
+    {
+      "id": "war-scythe",
+      "fields": {
+        "Name": "War Scythe",
+        "Description": "A long curved blade adapted into a polearm for hooking and sweeping."
+      }
+    },
+    {
+      "id": "whip",
+      "fields": {
+        "Name": "Whip",
+        "Description": "A flexible weapon useful for keeping distance, disarming, or entangling."
+      }
+    },
+    {
+      "id": "fighting-claws",
+      "fields": {
+        "Name": "Fighting Claws",
+        "Description": "Hand-mounted blades extending natural attacks without freeing the grip."
+      }
+    },
+    {
+      "id": "longbow",
+      "fields": {
+        "Name": "Longbow",
+        "Description": "A powerful bow requiring space and strength, effective at long range."
+      }
+    },
+    {
+      "id": "crossbow",
+      "fields": {
+        "Name": "Crossbow",
+        "Description": "A precise mechanical weapon whose power offsets its slower reload."
+      }
+    },
+    {
+      "id": "combat-wand",
+      "fields": {
+        "Name": "Combat Wand",
+        "Description": "A short reinforced focus that channels a RULE while parrying light blows."
+      }
+    },
+    {
+      "id": "combat-scepter",
+      "fields": {
+        "Name": "Combat Scepter",
+        "Description": "A sturdy focus usable as a light mace when magic is impractical."
+      }
+    },
+    {
+      "id": "portable-ballista",
+      "fields": {
+        "Name": "Portable Ballista",
+        "Description": "An oversized supported crossbow, extremely powerful but slow to move and prepare."
       }
     }
   ]

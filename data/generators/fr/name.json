@@ -289,6 +289,27 @@
         "FirstName": "Zorin",
         "LastName": "Oakshield"
       }
+    },
+    {
+      "id": "arth-the-scribe",
+      "fields": {
+        "FirstName": "Arth",
+        "LastName": "le Scribe"
+      }
+    },
+    {
+      "id": "laria-the-demon-hunter",
+      "fields": {
+        "FirstName": "Laria",
+        "LastName": "la Chasseuse de démons"
+      }
+    },
+    {
+      "id": "drowi-the-alchemist",
+      "fields": {
+        "FirstName": "Drowi",
+        "LastName": "l’Alchimiste"
+      }
     }
   ]
 }

@@ -12,52 +12,137 @@
   "entries": [
     {
       "id": "human",
-      "weight": 8,
       "fields": {
         "Name": "Human",
-        "Description": "Adaptable people found across nearly every region, with highly varied appearances, cultures, and traditions.",
-        "Skill Bonus": "+1 to History",
-        "Physical Ability": "Relentless Endurance: Humans suffer reduced fatigue from prolonged travel, heat, marching, pursuit, and repeated physical activity."
+        "Description": "Highly diverse communities whose traditions emphasize adaptation, alliances, and rapid transmission of knowledge.",
+        "Skill Bonus": "Versatility: a bonus in one skill chosen at creation.",
+        "Physical Ability": "Adaptive endurance: better withstands abrupt changes of climate or pace."
       }
     },
     {
       "id": "elf",
-      "weight": 6,
       "fields": {
         "Name": "Elf",
-        "Description": "Long-lived, sharp-featured people known for keen senses, graceful movement, and cultures deeply tied to magic or nature.",
-        "Skill Bonus": "+1 to Perception",
-        "Physical Ability": "Timeless Vitality: Elves age with extreme slowness, remaining physically healthy and mentally sharp for hundreds of years."
+        "Description": "A long-lived people with keen senses, attached to the memory of places and the distant consequences of decisions.",
+        "Skill Bonus": "Careful perception of natural and magical details.",
+        "Physical Ability": "Effective twilight vision in low light."
       }
     },
     {
       "id": "dwarf",
-      "weight": 6,
       "fields": {
         "Name": "Dwarf",
-        "Description": "Compact, sturdy people renowned for endurance, craftsmanship, clan traditions, and settlements carved into stone.",
-        "Skill Bonus": "+1 to Death-roll",
-        "Physical Ability": "Thick-Skinned: Dwarfs dense skin provides modest natural protection, allowing them to withstand unarmed blows and minor impacts better than other species when not wearing armor."
+        "Description": "A people of builders whose communities define status through craft mastery and one’s given word.",
+        "Skill Bonus": "Crafting stone, metal, or mechanisms.",
+        "Physical Ability": "Stability: better resists impacts and forced movement."
       }
     },
     {
       "id": "orc",
-      "weight": 5,
       "fields": {
         "Name": "Orc",
-        "Description": "Powerfully built people with prominent tusks and diverse cultures that often prize resilience, honor, and collective strength.",
-        "Skill Bonus": "+1 to Atletics",
-        "Physical Ability": "Iron Jaw: Orcs possess exceptionally powerful jaws, allowing their bites to cause serious injury and giving them an advantage when fighting at extremely close range."
+        "Description": "A robust people organized around community ties, public challenges, and a strong oral tradition.",
+        "Skill Bonus": "Intimidation or survival in hostile territory.",
+        "Physical Ability": "Physical power during a brief, intense effort."
       }
     },
     {
       "id": "goblin",
-      "weight": 4,
       "fields": {
         "Name": "Goblin",
-        "Description": "Small, quick people with expressive features, sharp senses, and a talent for improvisation, trade, and inventive tools.",
-        "Skill Bonus": "+1 to Deception",
-        "Physical Ability": "Small Target: Goblins small stature makes them more difficult to hit with arrows, thrown weapons, and other projectiles, especially at longer distances."
+        "Description": "An ingenious people quick to turn waste, tools, and unexpected opportunities into useful solutions.",
+        "Skill Bonus": "Tinkering, traps, and material recovery.",
+        "Physical Ability": "Small size: slips through narrow passages and cluttered cover."
+      }
+    },
+    {
+      "id": "halfling",
+      "fields": {
+        "Name": "Halfling",
+        "Description": "Travelers and rural communities valuing hospitality, discretion, and shared stories.",
+        "Skill Bonus": "Stealth in crowds or domestic settings.",
+        "Physical Ability": "Quick footing: keeps balance more easily."
+      }
+    },
+    {
+      "id": "reptilian",
+      "fields": {
+        "Name": "Reptilian",
+        "Description": "A scaled people adapted to heat, long stillness, and humid environments.",
+        "Skill Bonus": "Tracking through marks, heat, and scent.",
+        "Physical Ability": "Natural scales provide light protection."
+      }
+    },
+    {
+      "id": "fishfolk",
+      "fields": {
+        "Name": "Fishfolk",
+        "Description": "An amphibious people living among coastal communities, reefs, and partly submerged cities.",
+        "Skill Bonus": "Navigation, fishing, and knowledge of currents.",
+        "Physical Ability": "Aquatic breathing and natural underwater movement."
+      }
+    },
+    {
+      "id": "avian",
+      "fields": {
+        "Name": "Avian",
+        "Description": "A feathered highland people who prize currents, distances, and messages.",
+        "Skill Bonus": "Long-range observation and aerial orientation.",
+        "Physical Ability": "Gliding flight slows falls and crosses short gaps."
+      }
+    },
+    {
+      "id": "sylvan",
+      "fields": {
+        "Name": "Sylvan",
+        "Description": "A plantlike or tree-bonded people whose memory passes through seasons and roots.",
+        "Skill Bonus": "Plant knowledge and communication with ecosystems.",
+        "Physical Ability": "Photosynthesis: light and water can sustain them briefly."
+      }
+    },
+    {
+      "id": "slugfolk",
+      "fields": {
+        "Name": "Slugfolk",
+        "Description": "A flexible people adapted to damp places, vertical surfaces, and hard-to-reach spaces.",
+        "Skill Bonus": "Detects substances through touch and taste.",
+        "Physical Ability": "Adhesion: moves slowly across very steep surfaces."
+      }
+    },
+    {
+      "id": "beastfolk",
+      "fields": {
+        "Name": "Beastfolk",
+        "Description": "Humanoid lineages sharing animal traits and traditions closely tied to their environment.",
+        "Skill Bonus": "Instinct and interaction with the related species.",
+        "Physical Ability": "One heightened animal sense chosen for the lineage."
+      }
+    },
+    {
+      "id": "fairy",
+      "fields": {
+        "Name": "Fairy",
+        "Description": "A small supernatural people bound to promises, emotions, and magically charged places.",
+        "Skill Bonus": "Reading intentions and understanding pacts.",
+        "Physical Ability": "Levitation or limited flight while lightly loaded."
+      }
+    },
+    {
+      "id": "giant",
+      "fields": {
+        "Name": "Giant",
+        "Description": "A very large people whose homes, tools, and stories use an unusual scale.",
+        "Skill Bonus": "Strength work and knowledge of monumental terrain.",
+        "Physical Ability": "Far greater reach and carrying capacity."
+      }
+    },
+    {
+      "id": "centaur",
+      "fields": {
+        "Name": "Centaur",
+        "Description": "A nomadic people with humanoid torsos and quadrupedal bodies, adapted to open land and long travel.",
+        "Skill Bonus": "Land travel, tracking, and mounted combat.",
+        "Physical Ability": "Fast running on open terrain and great carrying capacity."
       }
     }
   ]

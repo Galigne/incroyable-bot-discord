@@ -12,52 +12,137 @@
   "entries": [
     {
       "id": "human",
-      "weight": 8,
       "fields": {
         "Name": "Humain",
-        "Description": "Présents dans presque toutes les régions, les humains se distinguent par la grande diversité de leurs apparences, de leurs cultures et de leurs traditions.",
-        "Skill Bonus": "+1 en Histoire",
-        "Physical Ability": "Endurance acharnée : les humains résistent mieux à la fatigue causée par les longs voyages, la chaleur, les marches forcées, les poursuites et les efforts physiques répétés."
+        "Description": "Des communautés très diverses dont les traditions reposent sur l’adaptation, les alliances et la transmission rapide des savoirs.",
+        "Skill Bonus": "Polyvalence : bonus dans une compétence choisie à la création.",
+        "Physical Ability": "Endurance adaptable : supporte mieux un changement brutal de climat ou de rythme."
       }
     },
     {
       "id": "elf",
-      "weight": 6,
       "fields": {
         "Name": "Elfe",
-        "Description": "Peuple à la grande longévité et aux traits fins, les elfes sont connus pour leurs sens aiguisés, leur grâce et leurs cultures profondément liées à la magie ou à la nature.",
-        "Skill Bonus": "+1 en Perception",
-        "Physical Ability": "Vitalité intemporelle : les elfes vieillissent avec une extrême lenteur et conservent leur vigueur physique ainsi que leur vivacité d’esprit pendant des siècles."
+        "Description": "Un peuple longévif aux sens précis, attaché à la mémoire des lieux et aux conséquences lointaines de chaque décision.",
+        "Skill Bonus": "Perception attentive des détails naturels et magiques.",
+        "Physical Ability": "Vision crépusculaire efficace sous une faible lumière."
       }
     },
     {
       "id": "dwarf",
-      "weight": 6,
       "fields": {
         "Name": "Nain",
-        "Description": "Robustes et trapus, les nains sont réputés pour leur endurance, leur savoir-faire, leurs traditions claniques et leurs cités taillées dans la pierre.",
-        "Skill Bonus": "+1 aux jets de mort",
-        "Physical Ability": "Cuir épais : lorsqu’ils ne portent pas d’armure, la peau dense des nains leur offre une protection naturelle modeste contre les coups à mains nues et les impacts mineurs."
+        "Description": "Un peuple de bâtisseurs vivant dans des communautés où la maîtrise artisanale et la parole donnée définissent le statut.",
+        "Skill Bonus": "Artisanat de la pierre, du métal ou des mécanismes.",
+        "Physical Ability": "Stabilité : résiste mieux aux chocs et aux déplacements forcés."
       }
     },
     {
       "id": "orc",
-      "weight": 5,
       "fields": {
         "Name": "Orque",
-        "Description": "Puissamment bâtis et dotés de défenses proéminentes, les orques appartiennent à des cultures variées qui valorisent souvent la résilience, l’honneur et la force collective.",
-        "Skill Bonus": "+1 en Athlétisme",
-        "Physical Ability": "Mâchoire de fer : la morsure redoutable des orques peut infliger de graves blessures et leur procure un avantage lors des combats au contact le plus rapproché."
+        "Description": "Un peuple robuste organisé autour de liens communautaires, de défis publics et d’une forte tradition orale.",
+        "Skill Bonus": "Intimidation ou survie en territoire hostile.",
+        "Physical Ability": "Puissance physique lors d’un effort bref et intense."
       }
     },
     {
       "id": "goblin",
-      "weight": 4,
       "fields": {
         "Name": "Gobelin",
-        "Description": "Petits et vifs, les gobelins ont des traits expressifs, des sens aiguisés et un talent certain pour l’improvisation, le commerce et la fabrication d’outils ingénieux.",
-        "Skill Bonus": "+1 en Tromperie",
-        "Physical Ability": "Petite cible : leur petite taille rend les gobelins plus difficiles à toucher avec des flèches, des armes de jet et d’autres projectiles, surtout à longue distance."
+        "Description": "Un peuple ingénieux qui transforme rapidement déchets, outils et occasions imprévues en solutions utiles.",
+        "Skill Bonus": "Bricolage, pièges et récupération de matériaux.",
+        "Physical Ability": "Petite taille : se faufile dans les passages étroits et les couverts encombrés."
+      }
+    },
+    {
+      "id": "halfling",
+      "fields": {
+        "Name": "Halfelin",
+        "Description": "Un peuple de voyageurs et de communautés rurales valorisant hospitalité, discrétion et récits partagés.",
+        "Skill Bonus": "Discrétion dans les foules ou les environnements domestiques.",
+        "Physical Ability": "Appuis rapides : conserve plus facilement son équilibre."
+      }
+    },
+    {
+      "id": "reptilian",
+      "fields": {
+        "Name": "Reptilien",
+        "Description": "Un peuple écailleux adapté aux climats chauds, aux longues périodes d’immobilité et aux environnements humides.",
+        "Skill Bonus": "Pistage par les traces, la chaleur et les odeurs.",
+        "Physical Ability": "Écailles naturelles offrant une protection légère."
+      }
+    },
+    {
+      "id": "fishfolk",
+      "fields": {
+        "Name": "Peuple-poisson",
+        "Description": "Un peuple amphibie vivant entre communautés côtières, récifs et cités partiellement immergées.",
+        "Skill Bonus": "Navigation, pêche et connaissance des courants.",
+        "Physical Ability": "Respiration aquatique et déplacement naturel sous l’eau."
+      }
+    },
+    {
+      "id": "avian",
+      "fields": {
+        "Name": "Avian",
+        "Description": "Un peuple à plumes vivant sur les hauteurs et accordant une grande importance aux courants, aux distances et aux messages.",
+        "Skill Bonus": "Observation à longue distance et orientation aérienne.",
+        "Physical Ability": "Vol plané permettant de ralentir une chute et franchir de courtes distances."
+      }
+    },
+    {
+      "id": "sylvan",
+      "fields": {
+        "Name": "Sylvestre",
+        "Description": "Un peuple végétal ou étroitement lié aux arbres, dont la mémoire se transmet par les saisons et les racines.",
+        "Skill Bonus": "Connaissance des plantes et communication avec les écosystèmes.",
+        "Physical Ability": "Photosynthèse : peut se soutenir brièvement avec lumière et eau."
+      }
+    },
+    {
+      "id": "slugfolk",
+      "fields": {
+        "Name": "Homme-limace",
+        "Description": "Un peuple souple adapté aux milieux humides, aux surfaces verticales et aux espaces difficiles d’accès.",
+        "Skill Bonus": "Détection des substances par le toucher et le goût.",
+        "Physical Ability": "Adhérence : se déplace lentement sur des surfaces très inclinées."
+      }
+    },
+    {
+      "id": "beastfolk",
+      "fields": {
+        "Name": "Homme-bête",
+        "Description": "Un ensemble de lignées humanoïdes partageant des traits animaux et des traditions fortement liées à leur environnement.",
+        "Skill Bonus": "Instinct et interaction avec l’espèce apparentée.",
+        "Physical Ability": "Sens animal développé choisi selon la lignée."
+      }
+    },
+    {
+      "id": "fairy",
+      "fields": {
+        "Name": "Fée",
+        "Description": "Un petit peuple surnaturel lié aux promesses, aux émotions et aux lieux chargés de magie.",
+        "Skill Bonus": "Lecture des intentions et connaissance des pactes.",
+        "Physical Ability": "Lévitation ou vol limité avec une charge légère."
+      }
+    },
+    {
+      "id": "giant",
+      "fields": {
+        "Name": "Géant",
+        "Description": "Un peuple de très grande taille dont les habitats, outils et récits sont conçus à une échelle inhabituelle.",
+        "Skill Bonus": "Travail de force et connaissance des terrains monumentaux.",
+        "Physical Ability": "Allonge et capacité de port nettement supérieures."
+      }
+    },
+    {
+      "id": "centaur",
+      "fields": {
+        "Name": "Centaure",
+        "Description": "Un peuple nomade au torse humanoïde et au corps de quadrupède, adapté aux grands espaces et aux déplacements prolongés.",
+        "Skill Bonus": "Voyage terrestre, pistage et combat monté.",
+        "Physical Ability": "Course rapide sur terrain ouvert et grande capacité de transport."
       }
     }
   ]

@@ -1,3 +1,9 @@
+# Generator and Creature Architecture — Implementation Record
+
+> Implementation status: Parts 1 through 5 are complete. Part 5 is audited by
+> `documentation/JDR_RANDOM_OLD_MIGRATION_MANIFEST.json`; the sections below remain
+> the approval-gated implementation record.
+
 # 1. Generator v2 and current-data cutover
 
 ```text

@@ -105,6 +105,94 @@
         "Backstory": "Avait pris une retraite bien méritée des années auparavant, mais a repris la route après la disparition de l’enfant d’un ancien compagnon.",
         "Goals": "Retrouver l’héritier disparu, maintenir ses alliés inexpérimentés en vie et reprendre sa retraite sans laisser de promesse inaccomplie."
       }
+    },
+    {
+      "id": "laria-legacy-concept",
+      "fields": {
+        "Appearance": "Son allure et son équipement témoignent d’un parcours singulier et mémorable.",
+        "Backstory": "Une chasseuse de démons trahie par son propre peuple après avoir aimé l’un de ses ennemis ; sa quête de vengeance masque encore des sentiments irrésolus.",
+        "Goals": "Résoudre le conflit inachevé sans renoncer à son indépendance."
+      }
+    },
+    {
+      "id": "impatient-young-adult",
+      "fields": {
+        "Appearance": "Jeune adulte impatient de prouver sa valeur.",
+        "Backstory": "Cette étape de sa vie l’a confronté à des responsabilités qui dépassent les attentes ordinaires.",
+        "Goals": "Prouver son discernement tout en préservant sa liberté d’évoluer."
+      }
+    },
+    {
+      "id": "legacy-profession-warrior",
+      "fields": {
+        "Appearance": "Sa tenue et ses outils évoquent immédiatement le métier suivant : guerrier.",
+        "Backstory": "A construit sa vie comme guerrier et connaît les obligations ainsi que les pressions cachées de cette activité.",
+        "Goals": "Mettre cette expérience à profit pour obtenir un avenir plus sûr et plus autonome."
+      }
+    },
+    {
+      "id": "legacy-profession-bounty-hunter",
+      "fields": {
+        "Appearance": "Sa tenue et ses outils évoquent immédiatement le métier suivant : chasseur de primes.",
+        "Backstory": "A construit sa vie comme chasseur de primes et connaît les obligations ainsi que les pressions cachées de cette activité.",
+        "Goals": "Mettre cette expérience à profit pour obtenir un avenir plus sûr et plus autonome."
+      }
+    },
+    {
+      "id": "legacy-profession-protector",
+      "fields": {
+        "Appearance": "Sa tenue et ses outils évoquent immédiatement le métier suivant : protecteur.",
+        "Backstory": "A construit sa vie comme protecteur et connaît les obligations ainsi que les pressions cachées de cette activité.",
+        "Goals": "Mettre cette expérience à profit pour obtenir un avenir plus sûr et plus autonome."
+      }
+    },
+    {
+      "id": "legacy-profession-explorer",
+      "fields": {
+        "Appearance": "Sa tenue et ses outils évoquent immédiatement le métier suivant : explorateur.",
+        "Backstory": "A construit sa vie comme explorateur et connaît les obligations ainsi que les pressions cachées de cette activité.",
+        "Goals": "Mettre cette expérience à profit pour obtenir un avenir plus sûr et plus autonome."
+      }
+    },
+    {
+      "id": "decomposed-tomas-rook",
+      "fields": {
+        "Appearance": "Une figure singulière connue sous le nom de Tomas Rook.",
+        "Backstory": "un ancien chasseur de monstres devenu boulanger, qui reconnaît dans la farine du groupe de la poudre de mimique.",
+        "Goals": "Transformer ce parcours singulier en un avenir choisi."
+      }
+    },
+    {
+      "id": "decomposed-kesh-of-seven-knives",
+      "fields": {
+        "Appearance": "Une figure singulière connue sous le nom de Kesh of Seven Knives.",
+        "Backstory": "un mercenaire intimidant qui utilise six couteaux pour cuisiner et redoute de dégainer le septième.",
+        "Goals": "Transformer ce parcours singulier en un avenir choisi."
+      }
+    },
+    {
+      "id": "decomposed-mina-thrice-lost",
+      "fields": {
+        "Appearance": "Une figure singulière connue sous le nom de Mina Thrice-Lost.",
+        "Backstory": "une exploratrice qui s'est échappée trois fois de la même ruine impossible et brûle d'envie d'y retourner.",
+        "Goals": "Transformer ce parcours singulier en un avenir choisi."
+      }
+    },
+    {
+      "id": "decomposed-the-gray-witness",
+      "fields": {
+        "Appearance": "Une figure singulière connue sous le nom de The Gray Witness.",
+        "Backstory": "une silhouette silencieuse en armure qui apparaît à proximité des événements historiques et dessine toutes les personnes présentes.",
+        "Goals": "Transformer ce parcours singulier en un avenir choisi."
+      }
+    },
+    {
+      "id": "decomposed-hara-moonclaw",
+      "fields": {
+        "Appearance": "Une figure singulière connue sous le nom de Hara Moonclaw.",
+        "Backstory": "une chasseuse de primes qui accorde toujours à ses cibles une chance équitable de s'expliquer.",
+        "Goals": "Transformer ce parcours singulier en un avenir choisi."
+      }
     }
   ]
 }

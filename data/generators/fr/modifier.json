@@ -25,14 +25,6 @@
       }
     },
     {
-      "id": "unusually-large",
-      "weight": 2,
-      "fields": {
-        "Name": "Taille exceptionnelle",
-        "Description": "Une taille remarquable pour son espèce confère une présence difficile à ignorer."
-      }
-    },
-    {
       "id": "pale",
       "weight": 2,
       "fields": {
@@ -53,6 +45,90 @@
       "fields": {
         "Name": "Marques des éléments",
         "Description": "Les intempéries ont laissé une apparence rude, patiente et visiblement éprouvée."
+      }
+    },
+    {
+      "id": "alpha",
+      "fields": {
+        "Name": "Alpha",
+        "Description": "Un chef ou dominant coordonne les autres créatures et protège en priorité la cohésion du groupe."
+      }
+    },
+    {
+      "id": "hybrid",
+      "fields": {
+        "Name": "Hybride",
+        "Description": "La créature possède des traits empruntés à une seconde espèce, avec une capacité utile et une faiblesse contradictoire."
+      }
+    },
+    {
+      "id": "undead",
+      "fields": {
+        "Name": "Mort-vivant",
+        "Description": "Le monstre ignore plusieurs besoins biologiques mais reste lié à la cause ou au rituel de sa réanimation."
+      }
+    },
+    {
+      "id": "reinforced",
+      "fields": {
+        "Name": "Renforcé",
+        "Description": "Une armure, une mutation ou une protection magique réduit l’efficacité des attaques ordinaires."
+      }
+    },
+    {
+      "id": "gigantic",
+      "fields": {
+        "Name": "Gigantesque",
+        "Description": "Sa taille augmente allonge, force et résistance, mais l’empêche de se déplacer facilement dans les espaces étroits."
+      }
+    },
+    {
+      "id": "enraged",
+      "fields": {
+        "Name": "Enragé",
+        "Description": "La créature attaque sans prudence après avoir été blessée et devient plus dangereuse mais plus prévisible."
+      }
+    },
+    {
+      "id": "pack",
+      "fields": {
+        "Name": "Meute",
+        "Description": "Le résultat représente trois individus coordonnés plutôt qu’une créature solitaire."
+      }
+    },
+    {
+      "id": "swarm",
+      "fields": {
+        "Name": "Nuée",
+        "Description": "Une multitude de petites créatures agit comme une seule menace et résiste aux attaques visant un individu."
+      }
+    },
+    {
+      "id": "ectoplasmic",
+      "fields": {
+        "Name": "Ectoplasmique",
+        "Description": "La créature traverse partiellement la matière mais doit se matérialiser pour affecter le monde physique."
+      }
+    },
+    {
+      "id": "invisible",
+      "fields": {
+        "Name": "Invisible",
+        "Description": "La créature reste difficile à voir, mais son odeur, ses sons et son interaction avec le décor peuvent la trahir."
+      }
+    },
+    {
+      "id": "rule-bearer",
+      "fields": {
+        "Name": "Porteur de LOI",
+        "Description": "Le monstre manifeste une LOI issue de `rules`, soumise à la même limitation qu’un utilisateur ordinaire."
+      }
+    },
+    {
+      "id": "equipped",
+      "fields": {
+        "Name": "Équipé",
+        "Description": "La créature utilise une arme ou un objet issu de `weapons` ou `inventory`, adapté à son anatomie et à son comportement."
       }
     }
   ]

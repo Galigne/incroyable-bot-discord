@@ -600,6 +600,52 @@
         "inventory": [],
         "naturalArmorPercentage": 0
       }
+    },
+    {
+      "id": "messenger-raptor",
+      "fields": {
+        "Name": "Rapace messager",
+        "Description": "Un oiseau territorial pouvant être dressé à reconnaître des"
+      },
+      "generation": {
+        "statProfile": "creature-companion",
+        "traits": [
+          {
+            "id": "messenger-raptor-nature",
+            "Name": "Nature intrinsèque",
+            "Description": "Un oiseau territorial pouvant être dressé à reconnaître des"
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 0
+      },
+      "weight": 1
+    },
+    {
+      "id": "sir-candlewick",
+      "fields": {
+        "Name": "Sir Candlewick",
+        "Description": "une minuscule armure animée qui cherche une personne assez grande pour devenir son écuyer."
+      },
+      "generation": {
+        "statProfile": "creature-companion",
+        "traits": [
+          {
+            "id": "sir-candlewick-nature",
+            "Name": "Auxiliaire animé",
+            "Description": "une minuscule armure animée qui cherche une personne assez grande pour devenir son écuyer."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 35
+      },
+      "weight": 1
     }
   ],
   "modifiers": [

@@ -49,6 +49,46 @@
         "Backstory": "Survived famine, war, and three landlords while quietly becoming the hamlet's trusted mediator.",
         "Goals": "Keep the younger generation from repeating old feuds and secure communal ownership of the well."
       }
+    },
+    {
+      "id": "legacy-profession-farmer",
+      "fields": {
+        "Appearance": "Clothing and tools immediately suggest the work of a farmer.",
+        "Backstory": "Built a life as a farmer and knows the profession’s obligations and hidden pressures.",
+        "Goals": "Use that experience to secure a safer and more independent future."
+      }
+    },
+    {
+      "id": "legacy-profession-lumberjack",
+      "fields": {
+        "Appearance": "Clothing and tools immediately suggest the work of a lumberjack.",
+        "Backstory": "Built a life as a lumberjack and knows the profession’s obligations and hidden pressures.",
+        "Goals": "Use that experience to secure a safer and more independent future."
+      }
+    },
+    {
+      "id": "legacy-profession-miner",
+      "fields": {
+        "Appearance": "Clothing and tools immediately suggest the work of a miner.",
+        "Backstory": "Built a life as a miner and knows the profession’s obligations and hidden pressures.",
+        "Goals": "Use that experience to secure a safer and more independent future."
+      }
+    },
+    {
+      "id": "legacy-profession-shepherd",
+      "fields": {
+        "Appearance": "Clothing and tools immediately suggest the work of a shepherd.",
+        "Backstory": "Built a life as a shepherd and knows the profession’s obligations and hidden pressures.",
+        "Goals": "Use that experience to secure a safer and more independent future."
+      }
+    },
+    {
+      "id": "decomposed-old-fen",
+      "fields": {
+        "Appearance": "A distinctive figure remembered as Old Fen.",
+        "Backstory": "a shepherd whose sheep predict the weather, danger, and occasionally political assassinations.",
+        "Goals": "Turn this unusual history toward a self-directed future."
+      }
     }
   ]
 }

@@ -49,6 +49,46 @@
         "Backstory": "Une aristocrate veuve a rebâti son influence à force de mariages, de services rendus et d’une mémoire irréprochable.",
         "Goals": "Organiser une succession pacifique et régler une dette dangereuse avant que l’âge ne lui en retire l’occasion."
       }
+    },
+    {
+      "id": "legacy-profession-sovereign",
+      "fields": {
+        "Appearance": "Sa tenue et ses outils évoquent immédiatement le métier suivant : souverain.",
+        "Backstory": "A construit sa vie comme souverain et connaît les obligations ainsi que les pressions cachées de cette activité.",
+        "Goals": "Mettre cette expérience à profit pour obtenir un avenir plus sûr et plus autonome."
+      }
+    },
+    {
+      "id": "legacy-profession-prince",
+      "fields": {
+        "Appearance": "Sa tenue et ses outils évoquent immédiatement le métier suivant : prince.",
+        "Backstory": "A construit sa vie comme prince et connaît les obligations ainsi que les pressions cachées de cette activité.",
+        "Goals": "Mettre cette expérience à profit pour obtenir un avenir plus sûr et plus autonome."
+      }
+    },
+    {
+      "id": "legacy-profession-noble",
+      "fields": {
+        "Appearance": "Sa tenue et ses outils évoquent immédiatement le métier suivant : noble.",
+        "Backstory": "A construit sa vie comme noble et connaît les obligations ainsi que les pressions cachées de cette activité.",
+        "Goals": "Mettre cette expérience à profit pour obtenir un avenir plus sûr et plus autonome."
+      }
+    },
+    {
+      "id": "decomposed-lady-seraphine-vale",
+      "fields": {
+        "Appearance": "Une figure singulière connue sous le nom de Lady Seraphine Vale.",
+        "Backstory": "une noble d'une politesse irréprochable qui finance les deux camps d'une rébellion afin de limiter les pertes civiles.",
+        "Goals": "Transformer ce parcours singulier en un avenir choisi."
+      }
+    },
+    {
+      "id": "decomposed-king-pip-ix",
+      "fields": {
+        "Appearance": "Une figure singulière connue sous le nom de King Pip IX.",
+        "Backstory": "un rat autoproclamé monarque, à la tête d'un excellent réseau d'espions sous la capitale.",
+        "Goals": "Transformer ce parcours singulier en un avenir choisi."
+      }
     }
   ]
 }

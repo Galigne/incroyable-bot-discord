@@ -49,6 +49,78 @@
         "Backstory": "Un ingénieur militaire a survécu à un siège en improvisant des défenses dans les ruines de bâtiments civils.",
         "Goals": "Concevoir des défenses qui sauvent des vies et empêcher que ses inventions ne soient utilisées contre des innocents."
       }
+    },
+    {
+      "id": "legacy-profession-general",
+      "fields": {
+        "Appearance": "Sa tenue et ses outils évoquent immédiatement le métier suivant : général.",
+        "Backstory": "A construit sa vie comme général et connaît les obligations ainsi que les pressions cachées de cette activité.",
+        "Goals": "Mettre cette expérience à profit pour obtenir un avenir plus sûr et plus autonome."
+      }
+    },
+    {
+      "id": "legacy-profession-commander",
+      "fields": {
+        "Appearance": "Sa tenue et ses outils évoquent immédiatement le métier suivant : commandant.",
+        "Backstory": "A construit sa vie comme commandant et connaît les obligations ainsi que les pressions cachées de cette activité.",
+        "Goals": "Mettre cette expérience à profit pour obtenir un avenir plus sûr et plus autonome."
+      }
+    },
+    {
+      "id": "legacy-profession-captain",
+      "fields": {
+        "Appearance": "Sa tenue et ses outils évoquent immédiatement le métier suivant : capitaine.",
+        "Backstory": "A construit sa vie comme capitaine et connaît les obligations ainsi que les pressions cachées de cette activité.",
+        "Goals": "Mettre cette expérience à profit pour obtenir un avenir plus sûr et plus autonome."
+      }
+    },
+    {
+      "id": "legacy-profession-guard",
+      "fields": {
+        "Appearance": "Sa tenue et ses outils évoquent immédiatement le métier suivant : garde.",
+        "Backstory": "A construit sa vie comme garde et connaît les obligations ainsi que les pressions cachées de cette activité.",
+        "Goals": "Mettre cette expérience à profit pour obtenir un avenir plus sûr et plus autonome."
+      }
+    },
+    {
+      "id": "legacy-profession-soldier",
+      "fields": {
+        "Appearance": "Sa tenue et ses outils évoquent immédiatement le métier suivant : soldat.",
+        "Backstory": "A construit sa vie comme soldat et connaît les obligations ainsi que les pressions cachées de cette activité.",
+        "Goals": "Mettre cette expérience à profit pour obtenir un avenir plus sûr et plus autonome."
+      }
+    },
+    {
+      "id": "legacy-profession-guardian",
+      "fields": {
+        "Appearance": "Sa tenue et ses outils évoquent immédiatement le métier suivant : gardien.",
+        "Backstory": "A construit sa vie comme gardien et connaît les obligations ainsi que les pressions cachées de cette activité.",
+        "Goals": "Mettre cette expérience à profit pour obtenir un avenir plus sûr et plus autonome."
+      }
+    },
+    {
+      "id": "legacy-profession-scout",
+      "fields": {
+        "Appearance": "Sa tenue et ses outils évoquent immédiatement le métier suivant : éclaireur.",
+        "Backstory": "A construit sa vie comme éclaireur et connaît les obligations ainsi que les pressions cachées de cette activité.",
+        "Goals": "Mettre cette expérience à profit pour obtenir un avenir plus sûr et plus autonome."
+      }
+    },
+    {
+      "id": "legacy-enemy-scout",
+      "fields": {
+        "Appearance": "La tenue et l’équipement correspondent au rôle suivant : éclaireurs ennemis.",
+        "Backstory": "Une petite unité observe les défenses locales et cherche",
+        "Goals": "Mener l’opération en cours à terme sans devenir sacrifiable aux yeux de ses alliés ou employeurs."
+      }
+    },
+    {
+      "id": "decomposed-captain-orro-flint",
+      "fields": {
+        "Appearance": "Une figure singulière connue sous le nom de Captain Orro Flint.",
+        "Backstory": "un garde orc des rivières qui adore les procédures, les concours de poésie et l'arrestation de ses supérieurs corrompus.",
+        "Goals": "Transformer ce parcours singulier en un avenir choisi."
+      }
     }
   ]
 }

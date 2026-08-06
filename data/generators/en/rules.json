@@ -41,25 +41,10 @@
       }
     },
     {
-      "id": "weight-rule",
-      "weight": 2,
-      "fields": {
-        "Name": "Weight RULE",
-        "Description": "Make one visible object somewhat heavier or lighter; cannot reduce weight to zero and requires concentration."
-      }
-    },
-    {
       "id": "ink-rule",
       "fields": {
         "Name": "Ink RULE",
         "Description": "Animate written ink into moving symbols and simple shapes; destroying the source writing ends the effect."
-      }
-    },
-    {
-      "id": "momentum-rule",
-      "fields": {
-        "Name": "Momentum RULE",
-        "Description": "Store a portion of the force from one impact and release it through a later touch; excess stored force injures the user."
       }
     },
     {
@@ -75,22 +60,6 @@
       "fields": {
         "Name": "Borrowed Face RULE",
         "Description": "Copy the face of someone touched for one hour; voice, clothing, memories, and mannerisms remain unchanged."
-      }
-    },
-    {
-      "id": "candle-rule",
-      "weight": 2,
-      "fields": {
-        "Name": "Candle RULE",
-        "Description": "Control small existing flames and read the strongest emotion of the person who lit one."
-      }
-    },
-    {
-      "id": "root-rule",
-      "weight": 2,
-      "fields": {
-        "Name": "Root RULE",
-        "Description": "Accelerate and guide nearby plant roots; barren ground requires seeds, water, and extra time."
       }
     },
     {
@@ -130,44 +99,6 @@
       }
     },
     {
-      "id": "reflection-rule",
-      "fields": {
-        "Name": "Reflection RULE",
-        "Description": "Look through a nearby reflection or distort what it shows; cannot pass matter through it."
-      }
-    },
-    {
-      "id": "sleep-rule",
-      "fields": {
-        "Name": "Sleep RULE",
-        "Description": "Encourage natural sleep in a calm target; pain, danger, or strong stimulation breaks the effect."
-      }
-    },
-    {
-      "id": "magnetism-rule",
-      "weight": 2,
-      "fields": {
-        "Name": "Magnetism RULE",
-        "Description": "Pull or push small ferrous objects; precision and force decrease with range."
-      }
-    },
-    {
-      "id": "mending-rule",
-      "weight": 3,
-      "fields": {
-        "Name": "Mending RULE",
-        "Description": "Repair simple breaks in non-living objects; missing material must be supplied and magical properties are not restored."
-      }
-    },
-    {
-      "id": "shadow-rule",
-      "weight": 2,
-      "fields": {
-        "Name": "Shadow RULE",
-        "Description": "Stretch and shape the user's shadow into distracting forms; it cannot become solid and needs a light source."
-      }
-    },
-    {
       "id": "salt-rule",
       "fields": {
         "Name": "Salt RULE",
@@ -198,21 +129,6 @@
       }
     },
     {
-      "id": "cold-rule",
-      "weight": 2,
-      "fields": {
-        "Name": "Cold RULE",
-        "Description": "Draw heat from a small nearby area; the displaced heat warms the user's body and can become dangerous."
-      }
-    },
-    {
-      "id": "memory-rule",
-      "fields": {
-        "Name": "Memory RULE",
-        "Description": "Preserve one willing recent memory inside an object; recording fades the user's own details until it is released."
-      }
-    },
-    {
       "id": "threshold-rule",
       "fields": {
         "Name": "Threshold RULE",
@@ -231,6 +147,321 @@
       "fields": {
         "Name": "Chance RULE",
         "Description": "Once per scene, nudge a trivial random outcome; the GM chooses an equally unlikely inconvenience that follows."
+      }
+    },
+    {
+      "id": "momentum-rule",
+      "fields": {
+        "Name": "Impact RULE",
+        "Description": "Briefly amplifies a charge, strike, or projectile; it cannot change the trajectory and transfers some recoil to the user."
+      }
+    },
+    {
+      "id": "ricochet-rule",
+      "fields": {
+        "Name": "Ricochet RULE",
+        "Description": "Deflects a projectile toward a second visible surface; every bounce sharply reduces power and requires a plausible angle."
+      }
+    },
+    {
+      "id": "celerity-rule",
+      "fields": {
+        "Name": "Celerity RULE",
+        "Description": "Accelerates one simple movement for a few seconds; the user’s decisions and perceptions do not speed up."
+      }
+    },
+    {
+      "id": "invisibility-rule",
+      "fields": {
+        "Name": "Invisibility RULE",
+        "Description": "Visually conceals a motionless target; sound, tracks, and moved objects remain perceptible."
+      }
+    },
+    {
+      "id": "candle-rule",
+      "fields": {
+        "Name": "Flame RULE",
+        "Description": "Creates or directs nearby fire; its size depends on available fuel and it remains dangerous to allies."
+      }
+    },
+    {
+      "id": "cold-rule",
+      "fields": {
+        "Name": "Frost RULE",
+        "Description": "Rapidly removes heat from a small surface; it can form ice but cannot instantly freeze a whole creature."
+      }
+    },
+    {
+      "id": "rain-rule",
+      "fields": {
+        "Name": "Rain RULE",
+        "Description": "Condenses humidity into local rain; the effect is weak in a very dry environment."
+      }
+    },
+    {
+      "id": "mending-rule",
+      "fields": {
+        "Name": "Healing RULE",
+        "Description": "Accelerates closure of a recent wound; it replaces neither lost blood nor a destroyed limb."
+      }
+    },
+    {
+      "id": "teleportation-rule",
+      "fields": {
+        "Name": "Teleportation RULE",
+        "Description": "Moves the user to a visible clear point; it fails when the route crosses consecrated protection."
+      }
+    },
+    {
+      "id": "electricity-rule",
+      "fields": {
+        "Name": "Electricity RULE",
+        "Description": "Produces or guides a discharge between conductors; the user must control the current’s path."
+      }
+    },
+    {
+      "id": "storm-rule",
+      "fields": {
+        "Name": "Storm RULE",
+        "Description": "Strengthens existing weather; it cannot create a full storm beneath a perfectly calm sky."
+      }
+    },
+    {
+      "id": "blessing-rule",
+      "fields": {
+        "Name": "Blessing RULE",
+        "Description": "Grants a limited advantage to an action following a declared vow; breaking the vow immediately ends the effect."
+      }
+    },
+    {
+      "id": "summoning-rule",
+      "fields": {
+        "Name": "Summoning RULE",
+        "Description": "Calls a minor entity matching a prepared symbol; it keeps its will and demands a reasonable price."
+      }
+    },
+    {
+      "id": "resurrection-rule",
+      "fields": {
+        "Name": "Resurrection RULE",
+        "Description": "Briefly recalls a recently dead spirit into its body; each use exacts a lasting cost and the spirit may refuse."
+      }
+    },
+    {
+      "id": "curse-rule",
+      "fields": {
+        "Name": "Curse RULE",
+        "Description": "Binds a precise penalty to a clearly stated condition; the target must be able to understand how to break it."
+      }
+    },
+    {
+      "id": "vampirism-rule",
+      "fields": {
+        "Name": "Vampirism RULE",
+        "Description": "Transfers a small amount of vitality through contact; it cannot exceed the injuries actually inflicted."
+      }
+    },
+    {
+      "id": "telekinesis-rule",
+      "fields": {
+        "Name": "Telekinesis RULE",
+        "Description": "Moves a visible object at range; mass and precision cannot both be maximized."
+      }
+    },
+    {
+      "id": "influence-rule",
+      "fields": {
+        "Name": "Influence RULE",
+        "Description": "Strengthens an already plausible emotion or suggestion; it creates neither lasting loyalty nor action against core values."
+      }
+    },
+    {
+      "id": "dead-rule",
+      "fields": {
+        "Name": "Dead RULE",
+        "Description": "Gives one simple order to an animated corpse; it regains neither complete memories nor lost intelligence."
+      }
+    },
+    {
+      "id": "illusion-rule",
+      "fields": {
+        "Name": "Illusion RULE",
+        "Description": "Produces a credible image or sound in a limited area; it has no mass or heat of its own."
+      }
+    },
+    {
+      "id": "sleep-rule",
+      "fields": {
+        "Name": "Sleep RULE",
+        "Description": "Deepens the fatigue of a calm target; pain or immediate danger can wake them."
+      }
+    },
+    {
+      "id": "soul-bond-rule",
+      "fields": {
+        "Name": "Soul Bond RULE",
+        "Description": "Lets two volunteers share a sensation or emotion; great distance blurs the bond."
+      }
+    },
+    {
+      "id": "ghost-rule",
+      "fields": {
+        "Name": "Ghost RULE",
+        "Description": "Briefly makes part of the body intangible; the effect cannot be maintained while carrying a heavy load."
+      }
+    },
+    {
+      "id": "spirits-rule",
+      "fields": {
+        "Name": "Spirits RULE",
+        "Description": "Manifests a protective or vengeful spirit tied to a memory; it follows that memory rather than exact orders."
+      }
+    },
+    {
+      "id": "familiar-rule",
+      "fields": {
+        "Name": "Familiar RULE",
+        "Description": "Creates a sensory bond with a consenting small animal; confusion and pain cross both ways."
+      }
+    },
+    {
+      "id": "root-rule",
+      "fields": {
+        "Name": "Plants RULE",
+        "Description": "Accelerates or guides plant growth; it requires water, nutrients, and a still-living plant."
+      }
+    },
+    {
+      "id": "beasts-rule",
+      "fields": {
+        "Name": "Beasts RULE",
+        "Description": "Conveys a simple intention to an animal; it removes neither fear nor instinct."
+      }
+    },
+    {
+      "id": "spores-rule",
+      "fields": {
+        "Name": "Spores RULE",
+        "Description": "Produces toxic, soothing, or curative spores; only one effect may be prepared and wind remains uncontrolled."
+      }
+    },
+    {
+      "id": "stone-rule",
+      "fields": {
+        "Name": "Stone RULE",
+        "Description": "Moves or shapes a limited amount of rock; complex structures take time and knowledge of their load."
+      }
+    },
+    {
+      "id": "petrification-rule",
+      "fields": {
+        "Name": "Petrification RULE",
+        "Description": "Gradually turns a small exposed area to stone; complete transformation needs repeated applications and is reversible at first."
+      }
+    },
+    {
+      "id": "decay-rule",
+      "fields": {
+        "Name": "Decay RULE",
+        "Description": "Accelerates deterioration of dead matter; treated or protected materials decay slowly."
+      }
+    },
+    {
+      "id": "weight-rule",
+      "fields": {
+        "Name": "Gravity RULE",
+        "Description": "Raises or lowers apparent weight in a small area; inertia and structural strength do not change."
+      }
+    },
+    {
+      "id": "magnetism-rule",
+      "fields": {
+        "Name": "Magnetism RULE",
+        "Description": "Attracts or repels nearby metals; nonmetallic objects and rare alloys react weakly."
+      }
+    },
+    {
+      "id": "double-rule",
+      "fields": {
+        "Name": "Double RULE",
+        "Description": "Creates a temporary imperfect copy of the user; it shares intentions but not recent memories."
+      }
+    },
+    {
+      "id": "time-rule",
+      "fields": {
+        "Name": "Time RULE",
+        "Description": "Slightly accelerates or slows a local process; it cannot rewrite the past or undo a decision."
+      }
+    },
+    {
+      "id": "space-rule",
+      "fields": {
+        "Name": "Space RULE",
+        "Description": "Opens a brief passage between prepared surfaces; the same user must have marked both points."
+      }
+    },
+    {
+      "id": "vision-rule",
+      "fields": {
+        "Name": "Vision RULE",
+        "Description": "Shows one possible future consequence of an immediate decision; changed circumstances invalidate it."
+      }
+    },
+    {
+      "id": "size-rule",
+      "fields": {
+        "Name": "Size RULE",
+        "Description": "Temporarily enlarges or shrinks an object or creature; unstable mass sharply limits duration."
+      }
+    },
+    {
+      "id": "wind-rule",
+      "fields": {
+        "Name": "Wind RULE",
+        "Description": "Directs an air current or creates a gust; the effect quickly weakens in a very large space."
+      }
+    },
+    {
+      "id": "blood-rule",
+      "fields": {
+        "Name": "Blood RULE",
+        "Description": "Tracks or identifies someone from their blood; the sample is consumed and may be contaminated."
+      }
+    },
+    {
+      "id": "shadow-rule",
+      "fields": {
+        "Name": "Shadow RULE",
+        "Description": "Thickens or moves an existing shadow; intense light reduces its reach and solidity."
+      }
+    },
+    {
+      "id": "sand-rule",
+      "fields": {
+        "Name": "Sand RULE",
+        "Description": "Moves and compacts sand or dust; it creates no matter and becomes imprecise in rain."
+      }
+    },
+    {
+      "id": "metal-rule",
+      "fields": {
+        "Name": "Metal RULE",
+        "Description": "Bends or joins a small amount of heated metal; enchanted alloys resist the effect."
+      }
+    },
+    {
+      "id": "reflection-rule",
+      "fields": {
+        "Name": "Mirror RULE",
+        "Description": "Copies the visible appearance of an observed RULE without its full power; only one imitation may be retained."
+      }
+    },
+    {
+      "id": "memory-rule",
+      "fields": {
+        "Name": "Memory RULE",
+        "Description": "Clarifies or blurs a memory; it cannot invent missing information and leaves detectable traces."
       }
     }
   ]

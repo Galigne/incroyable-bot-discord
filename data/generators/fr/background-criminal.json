@@ -105,6 +105,270 @@
         "Backstory": "A grandi au sein d’un ordre d’assassins et a volontairement échoué à sa première mission.",
         "Goals": "Libérer les autres recrues et démanteler l’ordre sans devenir le meurtrier qu’il voulait façonner."
       }
+    },
+    {
+      "id": "legacy-profession-assassin",
+      "fields": {
+        "Appearance": "Sa tenue et ses outils évoquent immédiatement le métier suivant : assassin.",
+        "Backstory": "A construit sa vie comme assassin et connaît les obligations ainsi que les pressions cachées de cette activité.",
+        "Goals": "Mettre cette expérience à profit pour obtenir un avenir plus sûr et plus autonome."
+      }
+    },
+    {
+      "id": "legacy-profession-thief",
+      "fields": {
+        "Appearance": "Sa tenue et ses outils évoquent immédiatement le métier suivant : voleur.",
+        "Backstory": "A construit sa vie comme voleur et connaît les obligations ainsi que les pressions cachées de cette activité.",
+        "Goals": "Mettre cette expérience à profit pour obtenir un avenir plus sûr et plus autonome."
+      }
+    },
+    {
+      "id": "legacy-road-brigand",
+      "fields": {
+        "Appearance": "La tenue et l’équipement correspondent au rôle suivant : bande de brigands.",
+        "Backstory": "Des voleurs de route bien renseignés choisissent leurs",
+        "Goals": "Mener l’opération en cours à terme sans devenir sacrifiable aux yeux de ses alliés ou employeurs."
+      }
+    },
+    {
+      "id": "legacy-corrupt-patrol",
+      "fields": {
+        "Appearance": "La tenue et l’équipement correspondent au rôle suivant : patrouille corrompue.",
+        "Backstory": "Des soldats ou gardes utilisent leur autorité pour",
+        "Goals": "Mener l’opération en cours à terme sans devenir sacrifiable aux yeux de ses alliés ou employeurs."
+      }
+    },
+    {
+      "id": "legacy-clandestine-hunter",
+      "fields": {
+        "Appearance": "La tenue et l’équipement correspondent au rôle suivant : chasseurs clandestins.",
+        "Backstory": "Des pisteurs armés capturent une créature protégée",
+        "Goals": "Mener l’opération en cours à terme sans devenir sacrifiable aux yeux de ses alliés ou employeurs."
+      }
+    },
+    {
+      "id": "decomposed-velvet",
+      "fields": {
+        "Appearance": "Une figure singulière connue sous le nom de Velvet.",
+        "Backstory": "un courtier en renseignements masqué qui accepte les vérités embarrassantes en guise de paiement et ne demande jamais d'argent.",
+        "Goals": "Transformer ce parcours singulier en un avenir choisi."
+      }
+    },
+    {
+      "id": "decomposed-elias-north",
+      "fields": {
+        "Appearance": "Une figure singulière connue sous le nom de Elias North.",
+        "Backstory": "un voleur charmeur qui ne dérobe que des clés et ignore ce que la moitié d'entre elles ouvrent.",
+        "Goals": "Transformer ce parcours singulier en un avenir choisi."
+      }
+    },
+    {
+      "id": "decomposed-merrit-glass",
+      "fields": {
+        "Appearance": "Une figure singulière connue sous le nom de Merrit Glass.",
+        "Backstory": "un sosie royal anxieux qui gouverne avec davantage de compétence que le monarque disparu.",
+        "Goals": "Transformer ce parcours singulier en un avenir choisi."
+      }
+    },
+    {
+      "id": "decomposed-bramble-jack",
+      "fields": {
+        "Appearance": "Une figure singulière connue sous le nom de Bramble Jack.",
+        "Backstory": "un sympathique chef de bandits qui exige que chaque vol comprenne des rafraîchissements et un questionnaire de satisfaction écrit.",
+        "Goals": "Transformer ce parcours singulier en un avenir choisi."
+      }
+    },
+    {
+      "id": "decomposed-criminal-roadside-bandit",
+      "fields": {
+        "Appearance": "La tenue et les outils correspondent au rôle criminel suivant : bandit de grand chemin.",
+        "Backstory": "détrousseur mal payé qui réclame des vivres plutôt que de faire couler le sang.",
+        "Goals": "Mener une opération décisive puis échapper aux pressions du réseau criminel."
+      }
+    },
+    {
+      "id": "decomposed-criminal-dockside-smuggler",
+      "fields": {
+        "Appearance": "La tenue et les outils correspondent au rôle criminel suivant : contrebandier des quais.",
+        "Backstory": "marin qui dissimule sa marchandise dans des tonneaux de poisson scellés.",
+        "Goals": "Mener une opération décisive puis échapper aux pressions du réseau criminel."
+      }
+    },
+    {
+      "id": "decomposed-criminal-cutpurse",
+      "fields": {
+        "Appearance": "La tenue et les outils correspondent au rôle criminel suivant : coupe-bourse.",
+        "Backstory": "voleur urbain rapide qui opère dans les marchés bondés et les fêtes religieuses.",
+        "Goals": "Mener une opération décisive puis échapper aux pressions du réseau criminel."
+      }
+    },
+    {
+      "id": "decomposed-criminal-protection-racketeer",
+      "fields": {
+        "Appearance": "La tenue et les outils correspondent au rôle criminel suivant : racketteur.",
+        "Backstory": "homme de main qui exige une protection contre des dangers secrètement créés par son propre gang.",
+        "Goals": "Mener une opération décisive puis échapper aux pressions du réseau criminel."
+      }
+    },
+    {
+      "id": "decomposed-criminal-poacher",
+      "fields": {
+        "Appearance": "La tenue et les outils correspondent au rôle criminel suivant : braconnier.",
+        "Backstory": "pisteur expérimenté qui chasse des animaux protégés pour de riches acheteurs.",
+        "Goals": "Mener une opération décisive puis échapper aux pressions du réseau criminel."
+      }
+    },
+    {
+      "id": "decomposed-criminal-grave-robber",
+      "fields": {
+        "Appearance": "La tenue et les outils correspondent au rôle criminel suivant : pilleur de tombes.",
+        "Backstory": "fouilleur désespéré qui vend bijoux, ossements et secrets enfouis.",
+        "Goals": "Mener une opération décisive puis échapper aux pressions du réseau criminel."
+      }
+    },
+    {
+      "id": "decomposed-criminal-highway-impostor",
+      "fields": {
+        "Appearance": "La tenue et les outils correspondent au rôle criminel suivant : faux péager.",
+        "Backstory": "criminel revêtu d’un uniforme volé pour percevoir des droits de passage frauduleux.",
+        "Goals": "Mener une opération décisive puis échapper aux pressions du réseau criminel."
+      }
+    },
+    {
+      "id": "decomposed-criminal-fence",
+      "fields": {
+        "Appearance": "La tenue et les outils correspondent au rôle criminel suivant : receleur.",
+        "Backstory": "commerçant respectable spécialisé dans l’art de donner une apparence légitime aux biens volés.",
+        "Goals": "Mener une opération décisive puis échapper aux pressions du réseau criminel."
+      }
+    },
+    {
+      "id": "decomposed-criminal-counterfeiter",
+      "fields": {
+        "Appearance": "La tenue et les outils correspondent au rôle criminel suivant : faussaire.",
+        "Backstory": "artisan qui fabrique pièces, sceaux, laissez-passer et lettres de noblesse contrefaits.",
+        "Goals": "Mener une opération décisive puis échapper aux pressions du réseau criminel."
+      }
+    },
+    {
+      "id": "decomposed-criminal-blackmailer",
+      "fields": {
+        "Appearance": "La tenue et les outils correspondent au rôle criminel suivant : maître chanteur.",
+        "Backstory": "courtier en informations qui mêle secrets authentiques et preuves soigneusement fabriquées.",
+        "Goals": "Mener une opération décisive puis échapper aux pressions du réseau criminel."
+      }
+    },
+    {
+      "id": "decomposed-criminal-kidnapper",
+      "fields": {
+        "Appearance": "La tenue et les outils correspondent au rôle criminel suivant : ravisseur.",
+        "Backstory": "planificateur patient qui vise les personnes dont les familles ne peuvent faire appel aux autorités.",
+        "Goals": "Mener une opération décisive puis échapper aux pressions du réseau criminel."
+      }
+    },
+    {
+      "id": "decomposed-criminal-illegal-duelist",
+      "fields": {
+        "Appearance": "La tenue et les outils correspondent au rôle criminel suivant : duelliste clandestin.",
+        "Backstory": "combattant professionnel payé pour blesser des rivaux selon des règles improvisées.",
+        "Goals": "Mener une opération décisive puis échapper aux pressions du réseau criminel."
+      }
+    },
+    {
+      "id": "decomposed-criminal-relic-thief",
+      "fields": {
+        "Appearance": "La tenue et les outils correspondent au rôle criminel suivant : voleur de reliques.",
+        "Backstory": "spécialiste qui dérobe des objets sacrés ou magiques sans en comprendre la nature.",
+        "Goals": "Mener une opération décisive puis échapper aux pressions du réseau criminel."
+      }
+    },
+    {
+      "id": "decomposed-criminal-arsonist",
+      "fields": {
+        "Appearance": "La tenue et les outils correspondent au rôle criminel suivant : incendiaire.",
+        "Backstory": "saboteur qui emploie des feux alchimiques à retardement pour détruire registres et commerces.",
+        "Goals": "Mener une opération décisive puis échapper aux pressions du réseau criminel."
+      }
+    },
+    {
+      "id": "decomposed-criminal-corrupt-bailiff",
+      "fields": {
+        "Appearance": "La tenue et les outils correspondent au rôle criminel suivant : bailli corrompu.",
+        "Backstory": "fonctionnaire qui abuse de son autorité pour saisir des biens et réduire les témoins au silence.",
+        "Goals": "Mener une opération décisive puis échapper aux pressions du réseau criminel."
+      }
+    },
+    {
+      "id": "decomposed-criminal-pirate-boarding-chief",
+      "fields": {
+        "Appearance": "La tenue et les outils correspondent au rôle criminel suivant : chef d’abordage pirate.",
+        "Backstory": "pillard discipliné qui préfère s’emparer des cargaisons et réclamer des rançons plutôt que couler les navires.",
+        "Goals": "Mener une opération décisive puis échapper aux pressions du réseau criminel."
+      }
+    },
+    {
+      "id": "decomposed-criminal-gang-alchemist",
+      "fields": {
+        "Appearance": "La tenue et les outils correspondent au rôle criminel suivant : alchimiste de gang.",
+        "Backstory": "préparateur de toniques addictifs, de bombes fumigènes et de stimulants de combat peu fiables.",
+        "Goals": "Mener une opération décisive puis échapper aux pressions du réseau criminel."
+      }
+    },
+    {
+      "id": "decomposed-criminal-assassin",
+      "fields": {
+        "Appearance": "La tenue et les outils correspondent au rôle criminel suivant : assassin.",
+        "Backstory": "meurtrier méticuleux qui fait passer ses crimes pour des accidents ou des châtiments divins.",
+        "Goals": "Mener une opération décisive puis échapper aux pressions du réseau criminel."
+      }
+    },
+    {
+      "id": "decomposed-criminal-crime-mage",
+      "fields": {
+        "Appearance": "La tenue et les outils correspondent au rôle criminel suivant : mage criminel.",
+        "Backstory": "hors-la-loi qui recourt à une magie subtile pour contourner serrures, témoins et contrats.",
+        "Goals": "Mener une opération décisive puis échapper aux pressions du réseau criminel."
+      }
+    },
+    {
+      "id": "decomposed-criminal-slave-trader",
+      "fields": {
+        "Appearance": "La tenue et les outils correspondent au rôle criminel suivant : marchand d’esclaves.",
+        "Backstory": "trafiquant sous bonne garde, protégé par de fausses lois et des fonctionnaires complices.",
+        "Goals": "Mener une opération décisive puis échapper aux pressions du réseau criminel."
+      }
+    },
+    {
+      "id": "decomposed-criminal-bandit-prince",
+      "fields": {
+        "Appearance": "La tenue et les outils correspondent au rôle criminel suivant : prince des bandits.",
+        "Backstory": "chef de guerre charismatique qui fédère des bandes dispersées en une armée territoriale.",
+        "Goals": "Mener une opération décisive puis échapper aux pressions du réseau criminel."
+      }
+    },
+    {
+      "id": "decomposed-criminal-false-prophet",
+      "fields": {
+        "Appearance": "La tenue et les outils correspondent au rôle criminel suivant : faux prophète.",
+        "Backstory": "chef de culte qui fabrique des miracles pour s’enrichir et obtenir l’immunité politique.",
+        "Goals": "Mener une opération décisive puis échapper aux pressions du réseau criminel."
+      }
+    },
+    {
+      "id": "decomposed-criminal-royal-forger",
+      "fields": {
+        "Appearance": "La tenue et les outils correspondent au rôle criminel suivant : faussaire royal.",
+        "Backstory": "maître criminel capable de fabriquer des titres et des revendications territoriales convaincants.",
+        "Goals": "Mener une opération décisive puis échapper aux pressions du réseau criminel."
+      }
+    },
+    {
+      "id": "decomposed-criminal-underworld-judge",
+      "fields": {
+        "Appearance": "La tenue et les outils correspondent au rôle criminel suivant : juge de la pègre.",
+        "Backstory": "médiateur redouté dont le tribunal privé tranche les conflits entre factions criminelles.",
+        "Goals": "Mener une opération décisive puis échapper aux pressions du réseau criminel."
+      }
     }
   ]
 }

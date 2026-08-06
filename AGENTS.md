@@ -606,7 +606,7 @@ replaces the generator and statistical-profile caches; a process restart also
 loads the current data.
 
 Template references support random or fixed stable entry selection, `value`,
-`fields`, `fields.<technical name>`, and `display` selectors, nested templates,
+`fields`, `fields.<declared name>`, and `display` selectors, nested templates,
 and weighted `generator.oneOf` sources. Fixed references never consume randomness
 for entry selection. `display` returns text/template output directly and uses
 `Name`, or the first non-technical declared field, for structured entries. A
@@ -629,6 +629,11 @@ one chance and an inclusive count range. Selection is weighted and unique within
 each request. Modifiers are narrative records only: their schema and resolver must
 never change or define statistics, resources, armor, RULEs, traits, status effects,
 gear, entity type, persistence, or executable behavior.
+Historical location modifiers are partitioned between the internal
+`site-modifier-all`, `site-modifier-structures`, `site-modifier-interiors`, and
+`site-modifier-building` catalogs so each entry retains its exact compatibility
+set without duplicating concepts. Location generators request only compatible
+catalogs.
 
 The public `creature` catalog routes stable `animal`, `companion`, and `monster`
 type entries to the separate internal `creature-animal`, `creature-companion`, and
@@ -660,11 +665,21 @@ content uses the guild locale and is then stored verbatim; never translate exist
 save content retroactively.
 Race entries must expose `Name`, `Description`, `Skill Bonus`, and
 `Physical Ability`; generated characters copy the latter two into their racial
-traits. The expanded public world-generation set includes `creature`, `criminal`,
-`region`, `building`, `settlement`, `dungeon`, `room`, `material`,
-`faction`, `government`, and `religion`. The older `enemy` and `location`
-categories are intentionally removed. `creature` routes its three types to the
-internal `creature-animal`, `creature-companion`, and `creature-monster` catalogs.
+traits. The expanded public world-generation set includes `creature`, `region`,
+`building`, `settlement`, `dungeon`, `room`, `material`, `faction`, `government`,
+and `religion`. Complete `npc` and `criminal` roots do not exist: complete
+humanoids come only from `/gen-char`, and reusable roles live in routed background
+components. Historical quests reference random or fixed `background` entries.
+The older `enemy` and `location` categories are also intentionally removed.
+`creature` routes its three types to the internal `creature-animal`,
+`creature-companion`, and `creature-monster` catalogs.
+
+`documentation/JDR_RANDOM_OLD_MIGRATION_MANIFEST.json` is the auditable Part 5
+record for every reusable historical item and rejected obsolete statistic. Its
+453 dispositions are applied to production data. Do not remove a manifest-backed
+entry, change a historical conflict winner, restore the retired complete-person
+roots, or add an unresolved disposition without updating the manifest and its
+focused validation.
 At present it:
 
 - rolls level 1–10 when omitted;

@@ -45,7 +45,7 @@ Text entries use `{ "type": "text" }` and a `value`. Field entries declare 1 to
 
 Technical fields hold routing, enum, numeric, or boolean values and must be
 identical across locales. Equipment generator data never stores encumbrance;
-character encumbrance remains manually managed.
+character and creature encumbrance remain manually managed.
 
 ## Templates and references
 
@@ -159,6 +159,14 @@ schema rejects generic mechanics/effects payloads and fields for statistics,
 resources, armor, RULEs, traits, status effects, gear, entity type, persistence,
 or executable behavior.
 
+Historical creature modifiers live in the shared `modifier` catalog used by
+background-based character generation and all three creature detail catalogs.
+Historical site modifiers use four non-overlapping internal catalogs grouped by
+their exact compatibility sets: `site-modifier-all`,
+`site-modifier-structures`, `site-modifier-interiors`, and
+`site-modifier-building`. The location roots request only the groups compatible
+with that root. All are narrative-only.
+
 ## Creature archetype generation
 
 The public `creature` generator is a routing catalog like `background`. Its stable
@@ -245,6 +253,27 @@ references, selectors, weighted source order/weights, modifier compatibility,
 requests, chances, and counts. Equivalent injected randomness therefore selects
 the same conceptual IDs in both locales. Only player-facing prose changes, and
 templates should be rewritten naturally for each language.
+
+## Historical migration
+
+Part 5 applied every reusable item from `documentation/JDR_RANDOM_OLD.md`.
+`documentation/JDR_RANDOM_OLD_MIGRATION_MANIFEST.json` records all 453 source
+dispositions, conflict winners, weights, localization work, references, creature
+classifications, profiles, fixed RULEs, and explicit rejections. Focused tests
+compare the manifest back to the unchanged historical source and verify every
+applied target in both locales.
+
+Historical location and event lists use structured `Name` and `Description`
+entries. Historical races retain their four fields atomically. Historical
+personalities retain every deliberate weight. Historical creatures use the shared
+profile system and explicit generation metadata; fixed statistic blocks were
+rejected. Historical quests are v2 templates whose generic people resolve broad
+`background` entries and whose specific roles resolve fixed background IDs.
+
+There is no `npc` or `criminal` generator. Current and historical person concepts
+were decomposed into routed background details (with reusable name material where
+appropriate), and complete humanoids continue to be generated only through
+`/gen-char`.
 
 `services/generatorCatalog.js` owns discovery, validation, stable lookup, public
 listing, cache replacement, and reload. `generatorResolver`, `referenceResolver`,

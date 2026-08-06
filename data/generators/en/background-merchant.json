@@ -49,6 +49,54 @@
         "Backstory": "A foreign factor was stranded when war severed every connection to the parent company.",
         "Goals": "Build local alliances, protect employees, and decide whether loyalty to the company still matters."
       }
+    },
+    {
+      "id": "legacy-profession-fishmonger",
+      "fields": {
+        "Appearance": "Clothing and tools immediately suggest the work of a fishmonger.",
+        "Backstory": "Built a life as a fishmonger and knows the profession’s obligations and hidden pressures.",
+        "Goals": "Use that experience to secure a safer and more independent future."
+      }
+    },
+    {
+      "id": "legacy-profession-merchant",
+      "fields": {
+        "Appearance": "Clothing and tools immediately suggest the work of a merchant.",
+        "Backstory": "Built a life as a merchant and knows the profession’s obligations and hidden pressures.",
+        "Goals": "Use that experience to secure a safer and more independent future."
+      }
+    },
+    {
+      "id": "legacy-profession-secondhand-dealer",
+      "fields": {
+        "Appearance": "Clothing and tools immediately suggest the work of a secondhand dealer.",
+        "Backstory": "Built a life as a secondhand dealer and knows the profession’s obligations and hidden pressures.",
+        "Goals": "Use that experience to secure a safer and more independent future."
+      }
+    },
+    {
+      "id": "legacy-profession-innkeeper",
+      "fields": {
+        "Appearance": "Clothing and tools immediately suggest the work of a innkeeper.",
+        "Backstory": "Built a life as a innkeeper and knows the profession’s obligations and hidden pressures.",
+        "Goals": "Use that experience to secure a safer and more independent future."
+      }
+    },
+    {
+      "id": "decomposed-dorrin-slate",
+      "fields": {
+        "Appearance": "A distinctive figure remembered as Dorrin Slate.",
+        "Backstory": "a dwarven appraiser who can identify any artifact but compulsively undervalues objects he personally likes.",
+        "Goals": "Turn this unusual history toward a self-directed future."
+      }
+    },
+    {
+      "id": "decomposed-auntie-ember",
+      "fields": {
+        "Appearance": "A distinctive figure remembered as Auntie Ember.",
+        "Backstory": "an elderly ashborn innkeeper who gives free rooms to adventurers and invoices them later in favors.",
+        "Goals": "Turn this unusual history toward a self-directed future."
+      }
     }
   ]
 }

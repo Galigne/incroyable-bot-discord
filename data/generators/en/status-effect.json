@@ -35,14 +35,6 @@
       }
     },
     {
-      "id": "distracted",
-      "weight": 3,
-      "fields": {
-        "Name": "Distracted",
-        "Description": "-1 to the next Perception-based action."
-      }
-    },
-    {
       "id": "bleeding",
       "weight": 2,
       "fields": {
@@ -229,6 +221,41 @@
       "fields": {
         "Name": "Shadowed",
         "Description": "Its outline remains difficult to separate from the shadows around it."
+      }
+    },
+    {
+      "id": "distracted",
+      "fields": {
+        "Name": "Distracted",
+        "Description": "The subject loses track of their surroundings and is disadvantaged on the next action requiring sustained attention."
+      }
+    },
+    {
+      "id": "drunk",
+      "fields": {
+        "Name": "Drunk",
+        "Description": "Coordination and judgment are impaired until rest or suitable treatment."
+      }
+    },
+    {
+      "id": "intoxicated",
+      "fields": {
+        "Name": "Intoxicated",
+        "Description": "An unknown substance alters perception or reactions; the exact effect depends on the product."
+      }
+    },
+    {
+      "id": "feverish",
+      "fields": {
+        "Name": "Feverish",
+        "Description": "Illness drains the subject and makes prolonged effort more difficult."
+      }
+    },
+    {
+      "id": "meditative",
+      "fields": {
+        "Name": "Meditative",
+        "Description": "The subject is deeply focused; interruption ends the sought benefit and leaves brief disorientation."
       }
     }
   ]

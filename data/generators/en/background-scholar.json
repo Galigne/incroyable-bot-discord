@@ -49,6 +49,86 @@
         "Backstory": "An independent historian abandoned the university to investigate ruins local communities consider sacred.",
         "Goals": "Document the past without exploiting its descendants and repair the damage caused by earlier expeditions."
       }
+    },
+    {
+      "id": "arth-the-scribe-legacy-concept",
+      "fields": {
+        "Appearance": "Their bearing and equipment reflect an unusual and memorable career.",
+        "Backstory": "A meticulous chronicler who records contradictions in official history and keeps several versions of every event.",
+        "Goals": "Resolve the unfinished conflict without surrendering personal independence."
+      }
+    },
+    {
+      "id": "elder-with-valuable-memory",
+      "fields": {
+        "Appearance": "An older person with a valuable memory or reputation.",
+        "Backstory": "Their life stage has forced them into responsibilities that do not fit ordinary expectations.",
+        "Goals": "Prove their judgment while protecting the freedom to grow or change."
+      }
+    },
+    {
+      "id": "legacy-profession-scientist",
+      "fields": {
+        "Appearance": "Clothing and tools immediately suggest the work of a scientist.",
+        "Backstory": "Built a life as a scientist and knows the profession’s obligations and hidden pressures.",
+        "Goals": "Use that experience to secure a safer and more independent future."
+      }
+    },
+    {
+      "id": "legacy-profession-researcher",
+      "fields": {
+        "Appearance": "Clothing and tools immediately suggest the work of a researcher.",
+        "Backstory": "Built a life as a researcher and knows the profession’s obligations and hidden pressures.",
+        "Goals": "Use that experience to secure a safer and more independent future."
+      }
+    },
+    {
+      "id": "legacy-profession-scribe",
+      "fields": {
+        "Appearance": "Clothing and tools immediately suggest the work of a scribe.",
+        "Backstory": "Built a life as a scribe and knows the profession’s obligations and hidden pressures.",
+        "Goals": "Use that experience to secure a safer and more independent future."
+      }
+    },
+    {
+      "id": "legacy-profession-physician",
+      "fields": {
+        "Appearance": "Clothing and tools immediately suggest the work of a physician.",
+        "Backstory": "Built a life as a physician and knows the profession’s obligations and hidden pressures.",
+        "Goals": "Use that experience to secure a safer and more independent future."
+      }
+    },
+    {
+      "id": "legacy-profession-sage",
+      "fields": {
+        "Appearance": "Clothing and tools immediately suggest the work of a sage.",
+        "Backstory": "Built a life as a sage and knows the profession’s obligations and hidden pressures.",
+        "Goals": "Use that experience to secure a safer and more independent future."
+      }
+    },
+    {
+      "id": "decomposed-iri-quickchalk",
+      "fields": {
+        "Appearance": "A distinctive figure remembered as Iri Quickchalk.",
+        "Backstory": "a goblin cartographer who maps rumors rather than roads and becomes offended when either proves inaccurate.",
+        "Goals": "Turn this unusual history toward a self-directed future."
+      }
+    },
+    {
+      "id": "decomposed-professor-holloway",
+      "fields": {
+        "Appearance": "A distinctive figure remembered as Professor Holloway.",
+        "Backstory": "a spectral historian possessing their own skeleton to continue field research.",
+        "Goals": "Turn this unusual history toward a self-directed future."
+      }
+    },
+    {
+      "id": "decomposed-juniper-wake",
+      "fields": {
+        "Appearance": "A distinctive figure remembered as Juniper Wake.",
+        "Backstory": "a botanist slowly turning into a tree and treating the transformation as a fascinating inconvenience.",
+        "Goals": "Turn this unusual history toward a self-directed future."
+      }
     }
   ]
 }
