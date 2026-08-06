@@ -109,19 +109,26 @@ test('generator and background autocomplete expose stable public values', () => 
 	assert.ok(choices[0].name.startsWith(frenchBackgrounds[0].fields.Name));
 });
 
-test('generator schema validates v2 payloads and localized technical parity', () => {
+test('generator schema validates v2 envelopes and kinds', () => {
 	const english = createTextGenerator();
-	const french = structuredClone(english);
-	french.name = 'Météo';
-	french.description = 'Conditions météorologiques';
-	french.entries[0].value = 'Une pluie douce commence.';
-	assert.equal(validateGeneratorPair(english, french, 'weather.json'), true);
+	assert.equal(validateGeneratorDefinition(english), english);
 
 	for (const invalid of [
 		{ ...english, schemaVersion: 1 },
 		{ ...english, id: 'Invalid ID' },
 		{ ...english, kind: 'template' },
 		{ ...english, visibility: 'hidden' },
+	]) {
+		assert.throws(() => validateGeneratorDefinition(invalid), error => (
+			error.name === 'GeneratorSchemaError'
+		));
+	}
+});
+
+test('generator schema validates entry schemas and payloads', () => {
+	const english = createTextGenerator();
+	for (const invalid of [
+		{ ...english, entrySchema: { type: 'fields', required: [] } },
 		{ ...english, entries: [{ id: 'rain', value: 'Rain', weight: 0 }] },
 		{ ...english, entries: [{ id: 'rain', value: 'Rain' }, { id: 'rain', value: 'Storm' }] },
 		{ ...english, entries: ['Legacy string'] },
@@ -130,6 +137,18 @@ test('generator schema validates v2 payloads and localized technical parity', ()
 			error.name === 'GeneratorSchemaError'
 		));
 	}
+
+	const fields = createFieldsGenerator();
+	assert.equal(validateGeneratorDefinition(fields), fields);
+});
+
+test('generator schema validates localized technical parity', () => {
+	const english = createTextGenerator();
+	const french = structuredClone(english);
+	french.name = 'Météo';
+	french.description = 'Conditions météorologiques';
+	french.entries[0].value = 'Une pluie douce commence.';
+	assert.equal(validateGeneratorPair(english, french, 'weather.json'), true);
 
 	const fieldsEnglish = createFieldsGenerator();
 	const fieldsFrench = structuredClone(fieldsEnglish);

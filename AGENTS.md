@@ -115,9 +115,11 @@ saves.
   pre-mutation validation, and domain mutation.
 - `services/mechanics/`: Discord-independent combatant and character constants,
   validation, statistics, resources, armor, damage, and generation formulas.
-- `services/generatorSchema.js`: validates the strict generator-v2 envelope,
-  entry schemas, stable IDs, payloads, weights, creature generation metadata,
-  profile/reference relationships, and English/French parity.
+- `services/generatorSchema.js`: stable public façade for generator-v2 validation
+  and creature routing constants.
+- `services/generatorSchema/`: focused internal validators for shared assertions,
+  envelopes, entries, parity, modifiers, references, creature metadata, and catalog
+  relationships.
 - `services/generatorCatalog.js`: recursively loads the complete generator-v2
   locale pair and exposes stable-ID lookup plus public visibility filtering.
 - `services/generatorResolver.js`: resolves public roots into localized structured

@@ -233,7 +233,7 @@ test('descriptive modifiers attach without mutating the base resolved result', (
 	assert.deepEqual(baseWithModifiers, baseWithoutModifiers);
 });
 
-test('template and modifier schemas enforce parity, relationships, and descriptive-only data', () => {
+test('template schemas preserve localized placeholders and technical parity', () => {
 	const catalogs = createLocalizedCatalogs();
 	for (const generator of catalogs.get('en').values()) {
 		assert.equal(validateGeneratorDefinition(generator), generator);
@@ -242,7 +242,6 @@ test('template and modifier schemas enforce parity, relationships, and descripti
 			true,
 		);
 	}
-	assert.equal(validateGeneratorRelationships(catalogs.get('en')), true);
 
 	const mismatchedTemplate = structuredClone(catalogs.get('fr').get('quest'));
 	mismatchedTemplate.entries[0].template = 'Récupérez {{item}}.';
@@ -262,7 +261,10 @@ test('template and modifier schemas enforce parity, relationships, and descripti
 		() => validateGeneratorPair(catalogs.get('en').get('quest'), mismatchedChance),
 		error => error.code === 'GENERATOR_LOCALE_PARITY_MISMATCH',
 	);
+});
 
+test('modifier schemas and requests remain descriptive and bounded', () => {
+	const catalogs = createLocalizedCatalogs();
 	const mechanicalModifier = structuredClone(catalogs.get('en').get('quest-modifier'));
 	mechanicalModifier.entries[0].mechanics = { strength: 2 };
 	assert.throws(
@@ -299,6 +301,11 @@ test('template and modifier schemas enforce parity, relationships, and descripti
 			].includes(error.code),
 		);
 	}
+});
+
+test('references and selectors validate structure and catalog relationships', () => {
+	const catalogs = createLocalizedCatalogs();
+	assert.equal(validateGeneratorRelationships(catalogs.get('en')), true);
 	const fixedWeightedSource = structuredClone(catalogs.get('en').get('quest'));
 	fixedWeightedSource.entries[0].references.site.entry = 'harbor';
 	assert.throws(
@@ -328,7 +335,10 @@ test('template and modifier schemas enforce parity, relationships, and descripti
 		() => validateGeneratorRelationships(invalidSelector),
 		error => error.code === 'INVALID_GENERATOR_SELECTOR',
 	);
+});
 
+test('catalog relationships reject incompatible modifier requests', () => {
+	const catalogs = createLocalizedCatalogs();
 	const incompatible = new Map(catalogs.get('en'));
 	const incompatibleModifier = structuredClone(incompatible.get('quest-modifier'));
 	incompatibleModifier.appliesTo = ['item'];

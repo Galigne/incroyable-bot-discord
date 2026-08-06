@@ -1,0 +1,141 @@
+const { generatorSchemaError } = require('./assertions');
+const {
+	CREATURE_ARCHETYPE_IDS,
+	CREATURE_GENERATOR_BY_ARCHETYPE,
+	CREATURE_ROUTER_ID,
+} = require('./constants');
+
+function validateCreatureGenerationRelationships(
+	generator,
+	entry,
+	catalog,
+	validateReferenceRelationship,
+) {
+	const generation = entry.generation;
+	const ownerId = `${generator.id}:${entry.id}`;
+	const rules = catalog.get('rules');
+	if (
+		generation.fixedRules?.some(rule => (
+			!rules
+			|| rules.entrySchema.type !== 'fields'
+			|| !rules.entrySchema.required.includes('Name')
+			|| !rules.entrySchema.required.includes('Description')
+			|| !rules.entries.some(candidate => candidate.id === rule.entry)
+		))
+	) {
+		throw generatorSchemaError(
+			'GENERATOR_ENTRY_NOT_FOUND',
+			`Creature archetype ${ownerId} references an unknown fixed RULE.`,
+		);
+	}
+	for (const reference of generation.statusEffects ?? []) {
+		const sources = validateReferenceRelationship(reference, catalog, ownerId);
+		assertReferenceFields(sources, ['Name', 'Description'], ownerId, 'status effect');
+	}
+	if (generation.armor) {
+		const sources = validateReferenceRelationship(generation.armor, catalog, ownerId);
+		assertReferenceFields(
+			sources,
+			['Name', 'Description', 'AR percentage'],
+			ownerId,
+			'armor',
+		);
+	}
+	for (const reference of [
+		...generation.equipment,
+		...generation.inventory,
+	]) {
+		const sources = validateReferenceRelationship(reference, catalog, ownerId);
+		assertGearReferenceResult(sources, reference.select, ownerId);
+	}
+}
+
+function assertReferenceFields(sources, fields, ownerId, label) {
+	if (sources.some(source => (
+		source.entrySchema.type !== 'fields'
+		|| fields.some(field => !source.entrySchema.required.includes(field))
+	))) {
+		throw generatorSchemaError(
+			'INVALID_CREATURE_REFERENCE_TARGET',
+			`Creature archetype ${ownerId} has an invalid ${label} reference.`,
+		);
+	}
+}
+
+function assertGearReferenceResult(sources, selector, ownerId) {
+	if (selector === 'value' || selector === 'display') {
+		return;
+	}
+	if (selector === 'fields') {
+		assertReferenceFields(sources, ['Name', 'Description'], ownerId, 'gear');
+		return;
+	}
+	const field = selector.slice('fields.'.length);
+	if (sources.some(source => source.entries.some(entry => (
+		typeof entry.fields?.[field] !== 'string'
+	)))) {
+		throw generatorSchemaError(
+			'INVALID_CREATURE_REFERENCE_TARGET',
+			`Creature archetype ${ownerId} has a non-text gear reference.`,
+		);
+	}
+}
+
+function validateCreatureStatProfileRelationships(catalogs, profiles) {
+	if (!(catalogs instanceof Map) || !(profiles instanceof Map)) {
+		throw new TypeError('Creature profile validation requires catalog and profile maps.');
+	}
+	for (const locale of ['en', 'fr']) {
+		const catalog = catalogs.get(locale);
+		if (!(catalog instanceof Map)) {
+			throw new TypeError(`Creature profile validation is missing the ${locale} catalog.`);
+		}
+		const router = catalog.get(CREATURE_ROUTER_ID);
+		if (!router) {
+			throw generatorSchemaError(
+				'CREATURE_ROUTER_MISSING',
+				`Creature generation is missing the ${locale} ${CREATURE_ROUTER_ID} router.`,
+			);
+		}
+		if (
+			router.entries.length !== CREATURE_ARCHETYPE_IDS.size
+			|| router.entries.some(entry => !CREATURE_ARCHETYPE_IDS.has(entry.id))
+		) {
+			throw generatorSchemaError(
+				'CREATURE_ROUTE_INVALID',
+				`Creature generation has invalid ${locale} router entries.`,
+			);
+		}
+		for (const archetypeId of CREATURE_ARCHETYPE_IDS) {
+			const generatorId = CREATURE_GENERATOR_BY_ARCHETYPE[archetypeId];
+			const route = router.entries.find(entry => entry.id === archetypeId);
+			if (route?.fields?.Generator !== generatorId) {
+				throw generatorSchemaError(
+					'CREATURE_ROUTE_INVALID',
+					`Creature generation has an invalid ${locale} ${archetypeId} route.`,
+				);
+			}
+			const generator = catalog.get(generatorId);
+			if (!generator) {
+				throw generatorSchemaError(
+					'CREATURE_ARCHETYPE_MISSING',
+					`Creature generation is missing the ${locale} ${generatorId} archetype.`,
+				);
+			}
+			for (const entry of generator.entries) {
+				if (!profiles.has(entry.generation.statProfile)) {
+					throw generatorSchemaError(
+						'CREATURE_STAT_PROFILE_MISSING',
+						`Creature archetype ${generatorId}:${entry.id} references an unknown statistical profile.`,
+					);
+				}
+			}
+		}
+	}
+	return true;
+}
+
+module.exports = {
+	validateCreatureGenerationRelationships,
+	validateCreatureStatProfileRelationships,
+};

@@ -38,6 +38,7 @@ const {
 	validateCreatureStatProfileRelationships,
 	validateGeneratorDefinition,
 	validateGeneratorPair,
+	validateGeneratorRelationships,
 } = require('../services/generatorSchema');
 const {
 	calculateStatBudget,
@@ -139,11 +140,9 @@ test('production creature sources are strict localized archetypes backed by prof
 	)));
 });
 
-test('creature schema rejects mechanical overrides, armor conflicts, parity drift, and missing profiles', () => {
+test('creature metadata rejects mechanical overrides and armor conflicts', () => {
 	const english = structuredClone(generatorCatalog.getGenerator('creature-animal', 'en'));
-	const french = structuredClone(generatorCatalog.getGenerator('creature-animal', 'fr'));
 	delete english.locale;
-	delete french.locale;
 
 	const mechanical = structuredClone(english);
 	mechanical.entries[0].generation.statistics = { constitution: 20 };
@@ -162,19 +161,36 @@ test('creature schema rejects mechanical overrides, armor conflicts, parity drif
 		() => validateGeneratorDefinition(armorConflict),
 		error => error.code === 'CREATURE_ARMOR_SOURCE_CONFLICT',
 	);
+});
 
+test('creature metadata preserves English and French technical parity', () => {
+	const english = structuredClone(generatorCatalog.getGenerator('creature-animal', 'en'));
+	const french = structuredClone(generatorCatalog.getGenerator('creature-animal', 'fr'));
+	delete english.locale;
+	delete french.locale;
 	french.entries[0].generation.statProfile = 'creature-brute';
 	assert.throws(
 		() => validateGeneratorPair(english, french),
 		error => error.code === 'GENERATOR_LOCALE_PARITY_MISMATCH',
 	);
+});
 
+test('creature routers, archetypes, and statistical profiles validate relationships', () => {
 	const catalogs = createGeneratorCatalogCandidate();
 	const profiles = createStatProfileCandidate();
 	profiles.delete('creature-predator');
 	assert.throws(
 		() => validateCreatureStatProfileRelationships(catalogs, profiles),
 		error => error.code === 'CREATURE_STAT_PROFILE_MISSING',
+	);
+	const missingRouterCatalogs = createGeneratorCatalogCandidate();
+	missingRouterCatalogs.get('en').delete('creature');
+	assert.throws(
+		() => validateCreatureStatProfileRelationships(
+			missingRouterCatalogs,
+			createStatProfileCandidate(),
+		),
+		error => error.code === 'CREATURE_ROUTER_MISSING',
 	);
 	const missingArchetypeCatalogs = createGeneratorCatalogCandidate();
 	missingArchetypeCatalogs.get('fr').delete('creature-animal');
@@ -195,6 +211,20 @@ test('creature schema rejects mechanical overrides, armor conflicts, parity drif
 			createStatProfileCandidate(),
 		),
 		error => error.code === 'CREATURE_ROUTE_INVALID',
+	);
+});
+
+test('creature generation references require compatible target payloads', () => {
+	const catalog = new Map(createGeneratorCatalogCandidate().get('en'));
+	const animal = structuredClone(catalog.get('creature-animal'));
+	animal.entries[0].generation.statusEffects = [{
+		generator: 'faction',
+		select: 'fields',
+	}];
+	catalog.set('creature-animal', animal);
+	assert.throws(
+		() => validateGeneratorRelationships(catalog),
+		error => error.code === 'INVALID_CREATURE_REFERENCE_TARGET',
 	);
 });
 
