@@ -1,6 +1,25 @@
 const js = require('@eslint/js');
 const globals = require('globals');
 
+const commonRestrictedSyntax = [
+	{
+		selector: 'Property[key.name=\'ephemeral\']',
+		message: 'Use MessageFlags.Ephemeral instead of the deprecated ephemeral option.',
+	},
+	{
+		selector: 'MemberExpression[object.name=\'config\'][property.name=\'prefix\']',
+		message: 'Prefix commands are not supported.',
+	},
+	{
+		selector: 'MemberExpression[property.name=\'MessageCreate\']',
+		message: 'Message commands are not supported.',
+	},
+	{
+		selector: 'MemberExpression[property.name=\'MessageContent\']',
+		message: 'The bot must not request the Message Content intent.',
+	},
+];
+
 module.exports = [
 	{
 		ignores: [
@@ -51,6 +70,42 @@ module.exports = [
 			'space-unary-ops': 'error',
 			'spaced-comment': 'error',
 			yoda: 'error',
+			'no-restricted-syntax': ['error', ...commonRestrictedSyntax],
+		},
+	},
+	{
+		files: ['models/**/*.js', 'services/**/*.js'],
+		rules: {
+			'no-restricted-modules': ['error', {
+				patterns: [
+					'discord.js',
+					'@discordjs/*',
+					'../util/i18n',
+					'../../util/i18n',
+				],
+			}],
+		},
+	},
+	{
+		files: ['commands/**/*.js'],
+		rules: {
+			'no-restricted-modules': ['error', {
+				patterns: [
+					'../services/characterStore',
+					'../services/creatureStore',
+					'../services/mechanics/*',
+					'../../services/characterStore',
+					'../../services/creatureStore',
+					'../../services/mechanics/*',
+				],
+			}],
+			'no-restricted-syntax': ['error', ...commonRestrictedSyntax, {
+				selector: 'NewExpression[callee.name=\'EmbedBuilder\']',
+				message: 'Commands must use a response adapter to construct embeds.',
+			}, {
+				selector: 'NewExpression[callee.name=\'SlashCommandBuilder\']',
+				message: 'Command schema must come from the centralized metadata registry.',
+			}],
 		},
 	},
 ];

@@ -5,7 +5,7 @@ module.exports = function createInteractionChecks(context) {
 		errors,
 	} = context;
 
-	async function checkInteractiveRpgUx() {
+	async function checkEntityInteractions() {
 		const suffix = `${process.pid}_${Date.now()}`;
 		const characterKey = `ux.${suffix}`;
 		const { handleEntityInteraction, openEntityEditor } = require(
@@ -131,6 +131,6 @@ module.exports = function createInteractionChecks(context) {
 	}
 
 	return {
-		checkInteractiveRpgUx,
+		checkEntityInteractions,
 	};
 };

@@ -2,11 +2,11 @@ const fs = require('node:fs');
 const os = require('node:os');
 const path = require('node:path');
 
-function createTemporarySaveDirectory() {
+function createTemporaryEntityStorage() {
 	return fs.mkdtempSync(path.join(os.tmpdir(), 'incredible-bot-check-'));
 }
 
-function removeTemporarySaveDirectory(directory) {
+function removeTemporaryEntityStorage(directory) {
 	const resolvedDirectory = path.resolve(directory);
 	const resolvedSystemTemporaryDirectory = path.resolve(os.tmpdir());
 	if (
@@ -18,7 +18,6 @@ function removeTemporarySaveDirectory(directory) {
 }
 
 module.exports = {
-	createTemporarySaveDirectory,
-	removeTemporarySaveDirectory,
+	createTemporaryEntityStorage,
+	removeTemporaryEntityStorage,
 };
-

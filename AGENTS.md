@@ -1,7 +1,7 @@
 # Incredible Discord Bot — Agent Guide
 
 This file is the operational context for agents working in this repository. Read it
-before changing commands, RPG data, character saves, or tests.
+before changing commands, RPG data, entity saves, or tests.
 
 ## Project purpose
 
@@ -11,7 +11,8 @@ It provides:
 
 1. General Discord utilities and moderation.
 2. Dice rolling and local audio playback.
-3. TTRPG tools for random generation, dice rolls, and persistent character sheets.
+3. TTRPG tools for random generation, dice rolls, and persistent character and
+   creature sheets.
 
 The game rules are defined in `documentation/TTRPG_RANDOM_RULES_EN.md`. Treat that
 file as the primary rules reference when implementing RPG mechanics. Rulebook files
@@ -43,13 +44,15 @@ merely to make documentation match an implementation.
 - Do not launch or leave the bot running merely to validate code. Prefer `npm test`
   unless live Discord behavior must be tested or the user explicitly asks to start it.
 
-`npm test` runs ESLint, focused `node:test` suites, and `scripts/check.js`.
-`scripts/check.js` orchestrates the focused modules under `scripts/checks/`, which
-validate syntax, architectural boundaries, command schemas, autocomplete, help
-ordering, permissions, generator data, character mechanics, modal editing, required
-media, and voice dependencies. Character-store tests use an isolated temporary
-directory through `INCREDIBLE_BOT_SAVE_DIRECTORY`; tests must never write to real
-saves.
+`npm test` runs ESLint, every focused `scripts/*.test.js` suite, and
+`scripts/check.js`. Node runs each test file in its own process, preserving isolation
+for suites that set environment variables or initialize persistent/reload state.
+`scripts/check.js` orchestrates focused modules under `scripts/checks/`, which
+validate architectural boundaries, command schemas, autocomplete, help ordering,
+permissions, generator data, character mechanics, entity interactions, required
+media, and voice dependencies. Persistence tests set
+`INCREDIBLE_BOT_SAVE_DIRECTORY` to isolated temporary roots and must never read or
+write real saves.
 
 ## Important repository structure
 
@@ -64,14 +67,9 @@ saves.
   option metadata.
 - `commands/handlers/`: behavior-only handlers for every top-level slash command,
   independent of its help category.
-- `commands/entity/editorFields.js`: shared modal presentation metadata derived from
-  the type-specific canonical field catalogs.
-- `commands/entity/interactions.js`: direct prefilled edit modal and modal
-  submission.
-- `commands/entity/autocomplete.js`: shared entity and type-compatible field
-  autocomplete presentation selected through command metadata.
-- `commands/entity/`: shared character/creature field metadata, autocomplete,
-  editor presentation, and active modal interaction routing.
+- `commands/entity/`: shared entity autocomplete, type-compatible modal
+  presentation metadata, and active edit/delete interaction routing; field
+  capabilities remain owned by the type-specific service catalogs.
 - `models/Character.js`: Discord-independent character schema and save hydration.
 - `models/Creature.js`: strict persistent creature schema and final-state hydration;
   loading never reruns generation or localization.
@@ -87,20 +85,23 @@ saves.
   persistent type and delegates to the matching store.
 - `services/entityOperationQueue.js`: shared per-EntityKey synchronization for
   cross-type creation, mutation, undo, and deletion.
-- `services/atomicJsonFile.js`: same-directory temporary-file serialization and
-  atomic publication for entity saves and history.
-- `services/entityStoragePaths.js`: active save and `.history` path derivation
-  from the same configured save directory.
-- `services/characterHistoryStore.js`: bounded pre-change history documents,
-  snapshot validation, stack rotation, and undo preparation.
-- `services/entityPersistenceTransaction.js`: ordered two-file commits,
-  permanent deletion, and rollback for active saves and history documents.
+- `services/atomicJsonFile.js`: JSON serialization and same-directory atomic file
+  publication used by all entity persistence.
+- `services/entityStoragePaths.js`: the sole active-save and `.history` path
+  derivation layer for both concrete types and configured temporary roots.
+- `services/concreteEntityStore.js`: consolidated create, load, list, update, undo,
+  and deletion workflow used by both concrete stores.
+- `services/entityHistoryStore.js`: consolidated bounded-history validation,
+  rotation, restoration, and prepared-write workflow used by both history stores.
+- `services/entityPersistenceTransaction.js`: shared ordered two-file commit,
+  permanent-deletion, and rollback coordination for active saves and history.
 - `services/characterSaveSchema.js`: owns the current character-save schema version
   and validates raw save metadata before model hydration.
 - `services/creatureSaveSchema.js`: owns the strict creature-save schema and
   validates complete final state before model hydration or publication.
-- `services/creatureStore.js` and `services/creatureHistoryStore.js`: creature
-  persistence, bounded history, undo, permanent deletion, and rollback-safe commits.
+- `services/characterStore.js`, `services/creatureStore.js`, and their matching
+  history stores: type-specific schemas, hydration, errors, and adapters over the
+  consolidated persistence helpers.
 - `services/entityKeyRegistry.js`: global character/creature key collision checks.
 - `services/characterFieldCatalog.js`: canonical character field identities,
   aliases, storage paths, types, and editable/viewable capabilities.
@@ -109,8 +110,6 @@ saves.
   and natural-armor metadata are not editable.
 - `services/entityFieldEditor.js`: shared grouped parser/serializer foundation used
   by the type-specific character and creature editor adapters.
-- `services/characterStore.js`: JSON character persistence; create, update, and
-  delete operations are serialized per key, while updates replace saves atomically.
 - `services/characterEditor.js`: grouped editable-value parsing, complete
   pre-mutation validation, and domain mutation.
 - `services/mechanics/`: Discord-independent combatant and character constants,
@@ -150,8 +149,9 @@ saves.
 - `scripts/check.js`: offline-check bootstrap, ordering, and final reporting.
 - `scripts/*.test.js`: focused `node:test` suites for Discord-independent services
   and thin command-integration coverage.
-- `scripts/checks/`: focused runtime, command, generator, character, interaction,
-  and authorization integration checks plus temporary-save helpers.
+- `scripts/checks/`: focused runtime, command, generator, character, entity
+  interaction, localization, and authorization checks plus temporary entity-storage
+  helpers.
 - `data/generators/`: generator catalogs. See its `README.md` before editing formats.
 - `save/`: real entity data. Characters live under `save/characters/`, creatures
   live under `save/creatures/`, and each type keeps history in its own `.history/`
@@ -232,7 +232,7 @@ dedicated help handlers, or parallel command documentation.
 
 Command and subcommand modules are Discord entry-point adapters. Keep them thin.
 They may read Discord options and context, select the locale, call authorization
-helpers for character ownership, delegate to one feature workflow or response
+helpers for entity ownership, delegate to one feature workflow or response
 adapter, and send the returned reply. They must not define command metadata or own
 reusable or non-trivial feature behavior.
 
@@ -458,10 +458,10 @@ Anyone may view either type. The creator, configured DM role, and actual Discord
 server owner may mutate, undo, or delete it. Creature encumbrance is an independent
 manual `{ current, max }` resource that defaults to `0 / 0` and is never derived.
 
-## Character rules and permissions
+## Entity keys, character rules, and permissions
 
-A CharacterKey is the immutable save identifier and filename stem. It is distinct
-from `firstName` and `lastName`. Keys:
+An EntityKey is the immutable save identifier and filename stem for either concrete
+type. It is distinct from character `firstName` and `lastName`. Keys:
 
 - must start and end with a letter or number;
 - may contain letters, numbers, periods, hyphens, and underscores;
@@ -750,7 +750,7 @@ Use this workflow for every feature, behavior change, bug fix, or data update:
 1. Inspect the current implementation and `git status` before editing. Read the
    relevant command, service, model, tests, and data files; consult the rulebook or
    `data/generators/README.md` when the change touches those areas. Existing dirty
-   changes and real character saves belong to the user unless explicitly stated
+   changes and real entity saves belong to the user unless explicitly stated
    otherwise.
 2. Identify all coupled surfaces before implementing. Depending on the change, this
    can include slash-command schema and routing, autocomplete, authorization,
@@ -792,7 +792,7 @@ Before handing off a code change:
 2. Update the canonical command metadata record, handler, locale keys, and README;
    registration, routing, permissions, autocomplete capability, and general help
    must remain derived from the registry.
-3. Keep generated data and `Character` schema consumers synchronized.
+3. Keep generated data and both concrete entity-schema consumers synchronized.
 4. Never edit a rulebook unless the user explicitly requested it.
 5. Use `MessageFlags.Ephemeral`, never `ephemeral: true`.
 6. Keep command modules thin; move feature rules to services and specialized Discord
@@ -802,4 +802,4 @@ Before handing off a code change:
    architecture check when introducing a new durable boundary.
 8. Run `npm test`.
 9. Run `git diff --check`.
-10. Confirm tests did not add, modify, or remove real character saves.
+10. Confirm tests did not add, modify, or remove real entity saves.

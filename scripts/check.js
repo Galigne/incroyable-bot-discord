@@ -5,13 +5,13 @@ const ffmpegPath = require('ffmpeg-static');
 const { generateDependencyReport } = require('@discordjs/voice');
 const config = require('../config.json');
 const {
-	createTemporarySaveDirectory,
-	removeTemporarySaveDirectory,
+	createTemporaryEntityStorage,
+	removeTemporaryEntityStorage,
 } = require('./checks/helpers');
 
 const root = path.join(__dirname, '..');
-const testSavesDirectory = createTemporarySaveDirectory();
-process.env.INCREDIBLE_BOT_SAVE_DIRECTORY = testSavesDirectory;
+const testEntityStorage = createTemporaryEntityStorage();
+process.env.INCREDIBLE_BOT_SAVE_DIRECTORY = testEntityStorage;
 
 const Character = require('../models/Character');
 const { BASE_STATS: BASE_STAT_NAMES } = require('../services/mechanics/constants');
@@ -40,7 +40,7 @@ const {
 } = require('../services/mechanics/characterGeneration');
 const {
 	authorizeCommand,
-	canManageCharacter,
+	canManageEntity,
 	hasDmPermission,
 	hasModeratorPermission,
 	isGuildOwner,
@@ -60,7 +60,7 @@ const context = {
 	Character,
 	allocateRuleLevels,
 	authorizeCommand,
-	canManageCharacter,
+	canManageEntity,
 	calculateMaxAp,
 	calculateMaxHp,
 	calculateMaxMovementDistance,
@@ -99,8 +99,6 @@ async function main() {
 
 	try {
 		runtimeChecks.checkNodeVersion();
-		runtimeChecks.checkJavaScriptSyntax();
-		runtimeChecks.checkDeprecatedInteractionOptions();
 		runtimeChecks.checkArchitectureBoundaries();
 		localizationChecks.checkLocalization();
 		const commands = commandChecks.checkCommands();
@@ -111,7 +109,7 @@ async function main() {
 		characterChecks.checkCharacterModel();
 		characterChecks.checkRandomCharacterGeneration();
 		await characterChecks.checkCharacterStore();
-		await interactionChecks.checkInteractiveRpgUx();
+		await interactionChecks.checkEntityInteractions();
 		runtimeChecks.checkConfiguration();
 		authorizationChecks.checkAuthorization(commands);
 		runtimeChecks.checkRequiredFiles();
@@ -126,7 +124,7 @@ async function main() {
 		}
 	}
 	finally {
-		removeTemporarySaveDirectory(testSavesDirectory);
+		removeTemporaryEntityStorage(testEntityStorage);
 	}
 }
 

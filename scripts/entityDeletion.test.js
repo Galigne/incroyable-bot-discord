@@ -235,7 +235,7 @@ test('missing and expired deletion sessions return a localized failure', async (
 	assert.equal((await getCharacter(characterKey)).key, characterKey);
 });
 
-test('submission reloads the character, observes modifications, and reauthorizes', async () => {
+test('submission reloads the entity, observes modifications, and reauthorizes', async () => {
 	const modifiedKey = nextKey('Delete.Modified');
 	await createCharacter(modifiedKey, 'creator');
 	const modifiedModal = await openDeleteModal(modifiedKey, 'creator');

@@ -4,7 +4,7 @@ const { test } = require('node:test');
 const commandRegistry = require('../commands/registry');
 const {
 	authorizeCommand,
-	canManageCharacter,
+	canManageEntity,
 	hasDmPermission,
 	hasModeratorPermission,
 } = require('../util/authorization');
@@ -98,19 +98,19 @@ test('each configured role grants only its corresponding permission', () => {
 	);
 });
 
-test('character creators retain ownership permissions without configured roles', () => {
+test('entity creators retain ownership permissions without configured roles', () => {
 	const config = { ...BASE_CONFIG };
 	const creator = createInteraction('creator');
 	const owner = createInteraction('owner', [], 'owner');
-	const character = { creatorId: 'creator' };
+	const entity = { creatorId: 'creator' };
 
-	assert.equal(canManageCharacter(creator, character, config), true);
-	assert.equal(canManageCharacter(createInteraction('regular'), character, config), false);
-	assert.equal(canManageCharacter(owner, character, config), true);
+	assert.equal(canManageEntity(creator, entity, config), true);
+	assert.equal(canManageEntity(createInteraction('regular'), entity, config), false);
+	assert.equal(canManageEntity(owner, entity, config), true);
 	assert.equal(
-		canManageCharacter(
+		canManageEntity(
 			createInteraction('dm', ['dm-role']),
-			character,
+			entity,
 			{ ...BASE_CONFIG, roles: { dm: 'dm-role' } },
 		),
 		true,

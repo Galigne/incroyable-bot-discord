@@ -100,7 +100,7 @@ test('encumbrance defaults and explicit values round-trip without rewriting on l
 	);
 });
 
-test('concurrent updates to one character read the preceding saved result', async () => {
+test('concurrent updates to one entity read the preceding saved result', async () => {
 	const characterKey = 'Concurrent.Fields';
 	await createCharacter(characterKey, 'creator');
 	const firstStarted = createDeferred();
@@ -160,7 +160,7 @@ test('queued numeric updates do not lose changes', async () => {
 	assert.equal(getEntityOperationQueueSize(), 0);
 });
 
-test('updates to different characters can execute concurrently', { timeout: 2_000 }, async () => {
+test('updates to different entities can execute concurrently', { timeout: 2_000 }, async () => {
 	const firstKey = 'Concurrent.First';
 	const secondKey = 'Concurrent.Second';
 	await Promise.all([
@@ -226,7 +226,7 @@ test('concurrent creation of the same key remains exclusive', async () => {
 	assert.equal(getEntityOperationQueueSize(), 0);
 });
 
-test('an update and deletion of one character execute sequentially', async () => {
+test('an update and deletion of one entity execute sequentially', async () => {
 	const characterKey = 'Concurrent.Deletion';
 	await createCharacter(characterKey, 'creator');
 	const updateStarted = createDeferred();

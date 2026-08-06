@@ -274,20 +274,33 @@ The full TTRPG rules are available in
   Discord registration data, and runtime routing
 - `commands/autocompleteProviders.js`: shared metadata-selected autocomplete logic
 - `commands/entity/`: shared entity autocomplete, modal presentation, and active
-  modal interaction routing
-- `services/`: Discord-independent application workflows, persistence, parsing,
-  validation, mechanics, generation, and bounded entity-history transactions
+  edit/delete interaction routing
+- `services/entityOperationQueue.js`: the shared per-EntityKey critical section for
+  cross-type creation, mutation, undo, and permanent deletion
+- `services/entityStoragePaths.js`: active-save and history paths for both concrete
+  types beneath the configured storage root
+- `services/concreteEntityStore.js` and `services/entityHistoryStore.js`:
+  consolidated persistence and bounded-history workflows adapted by the character
+  and creature stores
+- `services/entityPersistenceTransaction.js`: rollback-safe coordination of active
+  saves and history documents
+- `services/atomicJsonFile.js`: shared JSON serialization and same-directory atomic
+  publication used by entity saves and histories
+- `services/`: remaining Discord-independent application workflows, parsing,
+  validation, mechanics, and generation
 - `models/`: Discord-independent domain models
 - `util/`: Discord response/rendering adapters plus shared localization,
-  authorization, autocomplete, and command-loading helpers
+  authorization, autocomplete, command-loading helpers, and
+  `combatantDisplay.js` resource formatting for both entity types
 - `adapters/`: external Discord integrations such as local voice playback
 - `runtime/`: active runtime state and explicit reload-stage orchestration
 - `data/generators/en/` and `data/generators/fr/`: localized JSON prompt catalogs
 - `locales/`: English and French user-interface catalogs
 - `scripts/`: focused `node:test` suites and offline integration checks
 
-Run `npm test` to run ESLint, focused service/mechanics/dice/help/registry tests,
-architectural boundary checks, slash-command schema and autocomplete checks,
+Run `npm test` to run ESLint, every focused `node:test` suite in an isolated test
+process, and offline integration checks covering services, mechanics, dice, help,
+registry behavior, architectural boundaries, slash-command schemas, autocomplete,
 permissions, localization, character and creature save/generation invariants,
 required media, and voice dependencies.
 

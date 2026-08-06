@@ -1,7 +1,7 @@
 module.exports = function createAuthorizationChecks(context) {
 	const {
 		authorizeCommand,
-		canManageCharacter,
+		canManageEntity,
 		config,
 		errors,
 		hasDmPermission,
@@ -92,22 +92,22 @@ module.exports = function createAuthorizationChecks(context) {
 			errors.push('Direct messages must never satisfy guild role checks.');
 		}
 
-		const ownedCharacter = { creatorId: regular.user.id };
-		const otherCharacter = { creatorId: 'someone-else' };
-		if (!canManageCharacter(regular, ownedCharacter, config)) {
-			errors.push('Regular users should manage their own characters.');
+		const ownedEntity = { creatorId: regular.user.id };
+		const otherEntity = { creatorId: 'someone-else' };
+		if (!canManageEntity(regular, ownedEntity, config)) {
+			errors.push('Regular users should manage their own entities.');
 		}
-		if (canManageCharacter(regular, otherCharacter, config)) {
-			errors.push('Regular users should not manage other characters.');
+		if (canManageEntity(regular, otherEntity, config)) {
+			errors.push('Regular users should not manage other entities.');
 		}
-		if (!canManageCharacter(dm, otherCharacter, config)) {
-			errors.push('The DM role should manage any character.');
+		if (!canManageEntity(dm, otherEntity, config)) {
+			errors.push('The DM role should manage any entity.');
 		}
-		if (!canManageCharacter(owner, otherCharacter, config)) {
-			errors.push('The server owner should manage any character.');
+		if (!canManageEntity(owner, otherEntity, config)) {
+			errors.push('The server owner should manage any entity.');
 		}
-		if (canManageCharacter(moderator, otherCharacter, config)) {
-			errors.push('The moderator role alone should not manage other characters.');
+		if (canManageEntity(moderator, otherEntity, config)) {
+			errors.push('The moderator role alone should not manage other entities.');
 		}
 
 		const missingDmConfig = {

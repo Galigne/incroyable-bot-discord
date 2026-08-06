@@ -1,10 +1,5 @@
 module.exports = function createCommandChecks(context) {
-	const {
-		errors,
-		fs,
-		path,
-		root,
-	} = context;
+	const { errors } = context;
 	const commandRegistry = require('../../commands/registry');
 	const { getEditableFields, getViewableFields } = require(
 		'../../services/characterFieldCatalog',
@@ -105,15 +100,6 @@ module.exports = function createCommandChecks(context) {
 			errors.push('Centralized command help metadata is incomplete.');
 		}
 
-		const indexSource = fs.readFileSync(path.join(root, 'index.js'), 'utf8');
-		const clientSource = fs.readFileSync(path.join(root, 'client', 'Client.js'), 'utf8');
-		if (
-			indexSource.includes('MessageCreate')
-			|| indexSource.includes('config.prefix')
-			|| clientSource.includes('MessageContent')
-		) {
-			errors.push('Obsolete prefix-command handling or Message Content intent remains.');
-		}
 	}
 
 	function checkRegisteredOptions(registered, expected, subcommands = false) {
