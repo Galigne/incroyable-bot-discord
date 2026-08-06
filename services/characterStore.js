@@ -67,7 +67,9 @@ async function updateCharacter(name, canManage, update, historyContext = null) {
 		const current = await readCharacterRecord(name);
 		const { character } = current;
 		if (!canManage(character)) {
-			const error = new Error('Only the character creator or a DM can edit it.');
+			const error = new Error(
+				'Only the character creator, a DM, or the server owner can edit it.',
+			);
 			error.code = 'NOT_CHARACTER_EDITOR';
 			throw error;
 		}
@@ -286,7 +288,9 @@ async function restoreCharacterRecord(name, record) {
 }
 
 function characterEditorError() {
-	const error = new Error('Only the character creator or a DM can edit it.');
+	const error = new Error(
+		'Only the character creator, a DM, or the server owner can edit it.',
+	);
 	error.code = 'NOT_CHARACTER_EDITOR';
 	return error;
 }

@@ -1,5 +1,6 @@
 const { MessageFlags } = require('discord.js');
 const { MAX_AP } = require('../services/mechanics/constants');
+const { assertEntityType } = require('../services/entityType');
 const { getResourceAbbreviation } = require('./combatantDisplay');
 const { getEntityFieldLabel } = require('./entityDisplay');
 const { t } = require('./i18n');
@@ -108,6 +109,7 @@ async function replyToEntityError(interaction, error, locale = 'en') {
 }
 
 function translateEntityOutcome(outcome, locale = 'en', type = 'character') {
+	assertEntityType(type);
 	return t(locale, outcome.translationKey, getTranslationVariables(
 		locale,
 		type,

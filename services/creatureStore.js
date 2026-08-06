@@ -282,13 +282,17 @@ function reportCreatureHistoryLoadError(error) {
 }
 
 function creatureEditorError() {
-	const error = new Error('Only the creature creator or a DM can edit it.');
+	const error = new Error(
+		'Only the creature creator, a DM, or the server owner can edit it.',
+	);
 	error.code = 'NOT_CREATURE_EDITOR';
 	return error;
 }
 
 function creatureOwnerError() {
-	const error = new Error('Only the creature creator or a DM can delete it.');
+	const error = new Error(
+		'Only the creature creator, a DM, or the server owner can delete it.',
+	);
 	error.code = 'NOT_CREATURE_OWNER';
 	return error;
 }

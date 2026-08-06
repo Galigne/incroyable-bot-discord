@@ -2,9 +2,11 @@ const { getEntityFieldDefinition } = require('../services/entityFieldCatalog');
 const { getCharacterFieldLabel } = require('./characterDisplay');
 const { getResourceAbbreviation } = require('./combatantDisplay');
 const { t } = require('./i18n');
+const { assertEntityType } = require('../services/entityType');
 
 function getEntityFieldLabel(locale, type, fieldId, options = {}) {
-	if (type !== 'creature') {
+	assertEntityType(type);
+	if (type === 'character') {
 		return getCharacterFieldLabel(locale, fieldId, options);
 	}
 	const definition = getEntityFieldDefinition(type, fieldId);

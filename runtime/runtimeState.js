@@ -20,9 +20,6 @@ class RuntimeState {
 
 	replaceCommandRegistry(commandRegistry) {
 		const commands = commandRegistry.getRuntimeCommands();
-		if (commands.size !== new Set(commands.keys()).size) {
-			throw new Error('The runtime command collection contains duplicate names.');
-		}
 		this.commandRegistry = commandRegistry;
 		this.client.commandRegistry = commandRegistry;
 		this.client.commands = commands;

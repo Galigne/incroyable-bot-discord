@@ -1,3 +1,5 @@
+const { assertEntityType } = require('./entityType');
+
 function createPersistenceError(cause, entityType = 'character') {
 	const label = getEntityLabel(entityType);
 	const error = new Error(`The ${label} and history operation could not be persisted.`, {
@@ -60,6 +62,7 @@ async function commitHistoryThenMutation({
 	rollbackHistory,
 	writeHistory,
 }) {
+	assertEntityType(entityType);
 	try {
 		await writeHistory();
 	}
@@ -90,6 +93,7 @@ async function commitMutationThenHistory({
 	rollbackMutation,
 	writeHistory,
 }) {
+	assertEntityType(entityType);
 	try {
 		await commitMutation();
 	}
@@ -120,6 +124,7 @@ async function commitPermanentDeletion({
 	logger = console,
 	restoreHistory,
 }) {
+	assertEntityType(entityType);
 	try {
 		await deleteHistory();
 	}
@@ -165,6 +170,7 @@ async function rollbackOrThrow({
 }
 
 function getEntityLabel(entityType) {
+	assertEntityType(entityType);
 	return entityType === 'creature' ? 'creature' : 'character';
 }
 

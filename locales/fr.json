@@ -2,7 +2,8 @@
   "common": {
     "empty": "—",
     "continued": "{{label}} (suite)",
-    "unexpectedError": "Une erreur est survenue pendant l’exécution de la commande."
+    "unexpectedError": "Une erreur est survenue pendant l’exécution de la commande.",
+    "commandUnavailable": "Cette commande est temporairement indisponible. Une synchronisation des commandes slash peut être nécessaire."
   },
   "authorization": {
     "missingRole": "Permission insuffisante pour utiliser cette commande.",

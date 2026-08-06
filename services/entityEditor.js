@@ -1,7 +1,9 @@
 const characterEditor = require('./characterEditor');
 const creatureEditor = require('./creatureEditor');
+const { assertEntityType } = require('./entityType');
 
 function getEditor(type) {
+	assertEntityType(type);
 	return type === 'creature' ? creatureEditor : characterEditor;
 }
 

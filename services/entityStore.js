@@ -6,16 +6,11 @@ const {
 	validateEntityKey,
 } = require('./entityStoragePaths');
 const { getStoredEntityTypes, pathExists } = require('./entityKeyRegistry');
-
-const ENTITY_TYPES = Object.freeze(['character', 'creature']);
+const { ENTITY_TYPES, assertEntityType } = require('./entityType');
 
 async function createEntity(entityKey, type, creatorId, initialize) {
 	validateEntityKey(entityKey);
-	if (!ENTITY_TYPES.includes(type)) {
-		const error = new Error(`Unsupported entity type: ${type}.`);
-		error.code = 'INVALID_ENTITY_TYPE';
-		throw error;
-	}
+	assertEntityType(type);
 	return type === 'creature'
 		? creatureStore.createCreature(entityKey, creatorId, initialize)
 		: characterStore.createCharacter(entityKey, creatorId, initialize);

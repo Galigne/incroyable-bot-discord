@@ -2,7 +2,8 @@
   "common": {
     "empty": "—",
     "continued": "{{label}} (continued)",
-    "unexpectedError": "Something went wrong while running that command."
+    "unexpectedError": "Something went wrong while running that command.",
+    "commandUnavailable": "This command is temporarily unavailable. Slash-command synchronization may be required."
   },
   "authorization": {
     "missingRole": "You do not have permission to use this command.",

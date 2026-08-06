@@ -26,12 +26,13 @@
     "test:optional-roles": "node --test scripts/optionalRoles.test.js",
     "test:registration": "node --test scripts/commandRegistration.test.js",
     "test:reload": "node --test scripts/reload.test.js",
+    "test:runtime-robustness": "node --test scripts/runtimeRobustness.test.js",
     "test:registry": "node --test scripts/registry.test.js",
     "test:save-schema": "node --test scripts/characterSaveSchema.test.js",
     "test:responses": "node --test scripts/characterResponses.test.js",
     "test:persistence": "node --test scripts/characterPersistence.test.js",
     "test:services": "node --test scripts/services.test.js",
-    "test": "npm run format:check && npm run test:dice && npm run test:deletion && npm run test:editor && npm run test:creature-generation && npm run test:embeds && npm run test:entities && npm run test:generators && npm run test:help && npm run test:history && npm run test:mechanics && npm run test:optional-roles && npm run test:registration && npm run test:reload && npm run test:registry && npm run test:save-schema && npm run test:responses && npm run test:persistence && npm run test:services && npm run check"
+    "test": "npm run format:check && npm run test:dice && npm run test:deletion && npm run test:editor && npm run test:creature-generation && npm run test:embeds && npm run test:entities && npm run test:generators && npm run test:help && npm run test:history && npm run test:mechanics && npm run test:optional-roles && npm run test:registration && npm run test:reload && npm run test:runtime-robustness && npm run test:registry && npm run test:save-schema && npm run test:responses && npm run test:persistence && npm run test:services && npm run check"
   },
   "keywords": [
     "discord",

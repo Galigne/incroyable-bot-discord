@@ -13,8 +13,10 @@ const {
 } = require('./combatantDisplay');
 const { translateEntityOutcome } = require('./entityCommandErrors');
 const { t } = require('./i18n');
+const { assertEntityType } = require('../services/entityType');
 
 function createEntityAddedResponse(entity, locale = 'en') {
+	assertEntityType(entity.type);
 	return t(locale, 'rpg.add.success', {
 		key: entity.key,
 		type: t(locale, `entity.types.${entity.type}`),
@@ -78,6 +80,7 @@ function createEndEntityTurnResponse(result, locale = 'en') {
 }
 
 function createEntityGetResponse(entity, fieldName, locale = 'en') {
+	assertEntityType(entity.type);
 	const embed = entity.type === 'creature'
 		? fieldName
 			? createCreatureFieldEmbed(entity, fieldName, locale)

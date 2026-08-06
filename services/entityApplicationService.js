@@ -1,4 +1,5 @@
 const entityStore = require('./entityStore');
+const { assertEntityType } = require('./entityType');
 const {
 	getEditableEntityFieldValue,
 	setEditableEntityFieldValue,
@@ -130,7 +131,10 @@ async function updateEditableEntity(
 }
 
 function assertExpectedType(entity, expectedType) {
-	if (expectedType && entity.type !== expectedType) {
+	if (expectedType !== null) {
+		assertEntityType(expectedType);
+	}
+	if (expectedType !== null && entity.type !== expectedType) {
 		const error = new Error('The entity type changed while the interaction was open.');
 		error.code = 'ENTITY_TYPE_CHANGED';
 		throw error;

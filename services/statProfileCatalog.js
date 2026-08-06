@@ -172,7 +172,11 @@ function assertPlainObject(value, message) {
 }
 
 function assertExactKeys(value, expectedKeys, message) {
-	if (JSON.stringify(Object.keys(value)) !== JSON.stringify(expectedKeys)) {
+	const actualKeys = Object.keys(value);
+	if (
+		actualKeys.length !== expectedKeys.length
+		|| expectedKeys.some(key => !Object.hasOwn(value, key))
+	) {
 		throw statProfileError('INVALID_STAT_PROFILE_STRUCTURE', message);
 	}
 }
