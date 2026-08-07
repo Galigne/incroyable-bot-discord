@@ -21,7 +21,7 @@ function hasModeratorPermission(interaction, config) {
 	return hasPrivilegedPermission(interaction, config, 'moderator');
 }
 
-function canManageCharacter(interaction, character, config) {
+function canManageEntity(interaction, character, config) {
 	return Boolean(
 		character
 		&& interaction?.user?.id
@@ -31,8 +31,6 @@ function canManageCharacter(interaction, character, config) {
 		),
 	);
 }
-
-const canManageEntity = canManageCharacter;
 
 function authorizeCommand(command, interaction, config) {
 	const locale = getLocale(config);
@@ -113,7 +111,6 @@ function hasRole(memberRoles, roleId) {
 
 module.exports = {
 	authorizeCommand,
-	canManageCharacter,
 	canManageEntity,
 	hasDmPermission,
 	hasModeratorPermission,

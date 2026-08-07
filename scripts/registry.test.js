@@ -1,7 +1,9 @@
 const assert = require('node:assert/strict');
 const { test } = require('node:test');
 
-const config = require('../config.json');
+const { loadConfig } = require('../util/configuration');
+
+const config = loadConfig();
 const commandRegistry = require('../commands/registry');
 const { COMMAND_METADATA } = require('../commands/metadata');
 const {

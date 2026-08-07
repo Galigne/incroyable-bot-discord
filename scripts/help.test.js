@@ -2,7 +2,9 @@ const assert = require('node:assert/strict');
 const { test } = require('node:test');
 
 const commandRegistry = require('../commands/registry');
-const config = require('../config.json');
+const { loadConfig } = require('../util/configuration');
+
+const config = loadConfig();
 const {
 	CHARACTER_SECTION_IDS,
 	getEditableFields,

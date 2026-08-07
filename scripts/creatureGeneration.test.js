@@ -12,7 +12,9 @@ process.env.INCREDIBLE_BOT_SAVE_DIRECTORY = testSaveDirectory;
 
 const Creature = require('../models/Creature');
 const commandRegistry = require('../commands/registry');
-const config = require('../config.json');
+const { loadConfig } = require('../util/configuration');
+
+const config = loadConfig();
 const {
 	generateCreature,
 } = require('../services/creatureApplicationService');

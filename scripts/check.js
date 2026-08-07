@@ -3,7 +3,9 @@ const path = require('node:path');
 const { spawnSync } = require('node:child_process');
 const ffmpegPath = require('ffmpeg-static');
 const { generateDependencyReport } = require('@discordjs/voice');
-const config = require('../config.json');
+const { loadConfig } = require('../util/configuration');
+
+const config = loadConfig();
 const {
 	createTemporaryEntityStorage,
 	removeTemporaryEntityStorage,

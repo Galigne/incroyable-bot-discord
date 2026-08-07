@@ -94,7 +94,7 @@ function characterEditorError() {
 }
 
 function characterOwnerError() {
-	const error = new Error('Only the character creator can delete it.');
+	const error = new Error('Only the creature creator, a DM, or the server owner can delete it.');
 	error.code = 'NOT_CHARACTER_OWNER';
 	return error;
 }

@@ -290,8 +290,7 @@ The full TTRPG rules are available in
   validation, mechanics, and generation
 - `models/`: Discord-independent domain models
 - `util/`: Discord response/rendering adapters plus shared localization,
-  authorization, autocomplete, command-loading helpers, and
-  `combatantDisplay.js` resource formatting for both entity types
+authorization, autocomplete, command-schema utilities, and `combatantDisplay.js` helpers
 - `adapters/`: external Discord integrations such as local voice playback
 - `runtime/`: active runtime state and explicit reload-stage orchestration
 - `data/generators/en/` and `data/generators/fr/`: localized JSON prompt catalogs
