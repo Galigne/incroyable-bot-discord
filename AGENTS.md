@@ -32,8 +32,10 @@ merely to make documentation match an implementation.
   but it must never alter their data or serve as a migration or compatibility
   update.
 - Run the complete offline validation with `npm test`.
-- The Discord token belongs only in `.env` as `DISCORD_TOKEN`. Never print, move,
-  hard-code, or commit it.
+- The Discord token belongs only in the required top-level `discordToken` field of
+  ignored `config.json`. Never print, log, hard-code, or commit it. It is captured
+  during process startup; changing it requires restarting the bot, and `/reload`
+  reconnects with the startup token.
 - The bot registers its complete slash-command schema through each connected
   guild's command manager. Startup synchronizes every cached guild, and
   `GuildCreate` synchronizes newly joined guilds.
@@ -56,7 +58,7 @@ write real saves.
 
 ## Important repository structure
 
-- `index.js`: environment loading, client startup, guild command registration, and
+- `index.js`: configuration loading, client startup, guild command registration, and
   interaction/event routing.
 - `client/Client.js`: Discord client and gateway intents.
 - `commands/metadata.js`: the single source of truth for every top-level slash
@@ -508,8 +510,12 @@ must validate before activation. Do not add event listeners during reload, creat
 second client, or clear the complete `require.cache`. Source-code changes to startup,
 routing, handlers, metadata, mechanics, or models still require manually restarting
 `node index.js`.
+The Discord authentication token is also restart-only: configuration reloads may
+validate and replace the active `discordToken` value, but the running client's
+reconnect stage must continue using the token captured at process startup.
 
-`config.json` requires `locale` and `botUserId`. The complete `roles` object,
+`config.json` is the only local bot configuration source and requires
+`discordToken`, `locale`, and `botUserId`. The complete `roles` object,
 `roles.dm`, and `roles.moderator` are independently optional. A configured role
 grants its corresponding permissions to members with that Discord role; when it is
 omitted, those permissions are restricted to the actual Discord server owner.

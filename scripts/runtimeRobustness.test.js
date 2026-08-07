@@ -27,6 +27,7 @@ const { validateStatProfileDocument } = require('../services/statProfileCatalog'
 const {
 	getConfigurationErrorMessage,
 	loadConfig,
+	validateConfig,
 } = require('../util/configuration');
 const { createEntityGetResponse } = require('../util/entityCommandResponses');
 const { translateEntityOutcome } = require('../util/entityCommandErrors');
@@ -54,6 +55,28 @@ test('configuration loading reports missing, malformed, and invalid files clearl
 				assert.match(getConfigurationErrorMessage(error), /configuration/i);
 				return true;
 			},
+		);
+	}
+});
+
+test('configuration requires a non-empty Discord token', () => {
+	const validConfig = {
+		botUserId: 'bot',
+		discordToken: 'test-token',
+		locale: 'en',
+	};
+	assert.equal(validateConfig(validConfig), validConfig);
+	for (const discordToken of [undefined, null, '', '   ', 42]) {
+		const candidate = { ...validConfig, discordToken };
+		if (discordToken === undefined) {
+			delete candidate.discordToken;
+		}
+		assert.throws(
+			() => validateConfig(candidate),
+			error => (
+				error.code === 'INVALID_CONFIGURATION'
+				&& error.field === 'discordToken'
+			),
 		);
 	}
 });
@@ -188,7 +211,6 @@ function createTestInteractionHandler(overrides = {}) {
 		handleEntityInteraction: async () => false,
 		logger: { error: () => undefined },
 		runtimeReloader: {},
-		token: 'token',
 		...overrides,
 	});
 }

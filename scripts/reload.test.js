@@ -249,6 +249,40 @@ test('Discord reconnect reuses the client without duplicating listeners', async 
 	assert.equal(client.listenerCount('interaction'), 1);
 });
 
+test('/reload validates a changed token but reconnects with the startup token', async () => {
+	const configPath = path.join(temporaryDirectory, 'restart-only-token.json');
+	const runtimeState = createConfigState(createConfig());
+	const replacement = {
+		...createConfig(),
+		discordToken: 'changed-config-token',
+		locale: 'fr',
+	};
+	writeJson(configPath, replacement);
+	const loginTokens = [];
+	const client = {
+		destroy: () => undefined,
+		login: async discordToken => loginTokens.push(discordToken),
+	};
+	const operations = Object.fromEntries(
+		RELOAD_STAGES
+			.filter(id => !['configuration', 'discordReconnect'].includes(id))
+			.map(id => [id, async () => undefined]),
+	);
+	const runtimeReloader = createRuntimeReloader({
+		client,
+		configPath,
+		discordToken: 'startup-token',
+		operations,
+		runtimeState,
+	});
+
+	const outcome = await runtimeReloader.reload();
+
+	assert.equal(outcome.success, true);
+	assert.deepEqual(runtimeState.getConfig(), replacement);
+	assert.deepEqual(loginTokens, ['startup-token']);
+});
+
 test('runtime reload reports a failed registration and continues later stages', async () => {
 	const calls = [];
 	const logged = [];
@@ -266,12 +300,12 @@ test('runtime reload reports a failed registration and continues later stages', 
 	]));
 	const runtimeReloader = createRuntimeReloader({
 		client: {},
+		discordToken: 'sensitive-token',
 		logger: {
 			error: (...parts) => logged.push(parts),
 		},
 		operations,
 		runtimeState,
-		token: 'sensitive-token',
 	});
 	const outcome = await runtimeReloader.reload();
 
@@ -297,11 +331,11 @@ test('concurrent reload requests share one stage run', async () => {
 	]));
 	const runtimeReloader = createRuntimeReloader({
 		client: {},
+		discordToken: 'test-token',
 		operations,
 		runtimeState: {
 			getConfig: () => ({ locale: 'en' }),
 		},
-		token: 'test-token',
 	});
 
 	const [first, second] = await Promise.all([
@@ -349,6 +383,7 @@ test('/reload acknowledges ephemerally before running stages and returns a summa
 function createConfig() {
 	return {
 		botUserId: 'bot',
+		discordToken: 'test-config-token',
 		locale: 'en',
 		roles: {
 			dm: 'dm-role',

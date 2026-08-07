@@ -13,6 +13,7 @@ const { createHelpResponse } = require('../util/helpResponses');
 
 const BASE_CONFIG = {
 	botUserId: 'bot',
+	discordToken: 'test-token',
 	locale: 'en',
 };
 

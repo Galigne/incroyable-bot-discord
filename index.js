@@ -1,4 +1,3 @@
-const fs = require('node:fs');
 const path = require('node:path');
 const process = require('node:process');
 const { Events } = require('discord.js');
@@ -19,18 +18,10 @@ const {
 	loadConfig,
 } = require('./util/configuration');
 
-loadEnvironment();
-
-const token = process.env.DISCORD_TOKEN?.trim();
 const client = new Client();
 const runtimeState = new RuntimeState(client, {
 	commandRegistry,
 	config: {},
-});
-const runtimeReloader = createRuntimeReloader({
-	client,
-	runtimeState,
-	token,
 });
 const commandRegistrationLifecycle = createCommandRegistrationLifecycle({
 	getCommandRegistry: () => runtimeState.getCommandRegistry(),
@@ -73,15 +64,6 @@ client.on(Events.ShardDisconnect, (event, shardId) => {
 	console.log(`Shard ${shardId} disconnected with code ${event.code}.`);
 });
 
-client.on(Events.InteractionCreate, createInteractionHandler({
-	authorizeCommand,
-	client,
-	getConfig: () => runtimeState.getConfig(),
-	handleEntityInteraction,
-	runtimeReloader,
-	token,
-}));
-
 client.on(Events.VoiceStateUpdate, createVoiceStateHandler({
 	audioPath: path.join(__dirname, 'media', 'Poutouyemoun.mp3'),
 	getConfig: () => runtimeState.getConfig(),
@@ -89,8 +71,10 @@ client.on(Events.VoiceStateUpdate, createVoiceStateHandler({
 }));
 
 async function start() {
+	let startupConfig;
 	try {
-		runtimeState.replaceConfig(loadConfig());
+		startupConfig = loadConfig();
+		runtimeState.replaceConfig(startupConfig);
 	}
 	catch (error) {
 		console.error(getConfigurationErrorMessage(error, runtimeState.getConfig()));
@@ -98,36 +82,34 @@ async function start() {
 		return;
 	}
 
-	if (!token || token === 'paste_your_new_token_here') {
-		console.error(
-			'DISCORD_TOKEN is missing. Copy .env.example to .env, '
-			+ 'then add a token generated in the Discord Developer Portal.',
-		);
-		process.exitCode = 1;
-		return;
-	}
+	const startupDiscordToken = startupConfig.discordToken.trim();
+	const runtimeReloader = createRuntimeReloader({
+		client,
+		discordToken: startupDiscordToken,
+		runtimeState,
+	});
+	client.on(Events.InteractionCreate, createInteractionHandler({
+		authorizeCommand,
+		client,
+		getConfig: () => runtimeState.getConfig(),
+		handleEntityInteraction,
+		runtimeReloader,
+	}));
 
 	try {
-		await client.login(token);
+		await client.login(startupDiscordToken);
 	}
 	catch (error) {
 		if (error.code === 'TokenInvalid') {
 			console.error(
 				'Discord rejected the token. Reset it in the Developer Portal, '
-				+ 'then update DISCORD_TOKEN in .env.',
+				+ 'then update discordToken in config.json and restart the bot.',
 			);
 		}
 		else {
 			console.error('The bot failed to start:', error);
 		}
 		process.exitCode = 1;
-	}
-}
-
-function loadEnvironment() {
-	const envFile = path.join(__dirname, '.env');
-	if (fs.existsSync(envFile) && typeof process.loadEnvFile === 'function') {
-		process.loadEnvFile(envFile);
 	}
 }
 

@@ -899,6 +899,7 @@ function createFilledCharacter() {
 function createConfig() {
 	return {
 		botUserId: 'bot',
+		discordToken: 'test-token',
 		characterHistory: { maxEntries: 3 },
 		locale: 'en',
 		roles: {

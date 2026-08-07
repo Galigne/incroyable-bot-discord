@@ -23,10 +23,10 @@ function createRuntimeReloader({
 	catalogPaths,
 	client,
 	configPath,
+	discordToken,
 	logger = console,
 	operations = {},
 	runtimeState,
-	token,
 }) {
 	const stageOperations = {
 		configuration: () => reloadConfig(runtimeState, configPath),
@@ -41,7 +41,7 @@ function createRuntimeReloader({
 			),
 		),
 		voiceCleanup: () => disconnectVoiceResources(),
-		discordReconnect: () => reconnectClient(client, token),
+		discordReconnect: () => reconnectClient(client, discordToken),
 		...operations,
 	};
 	let activeReload = null;

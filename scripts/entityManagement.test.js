@@ -631,7 +631,11 @@ test('management metadata is entity-neutral while generators use concrete save k
 
 test('registered management handlers create, mutate, and display creatures', async () => {
 	const entityKey = 'Handlers.Creature';
-	const config = { botUserId: 'bot', locale: 'en' };
+	const config = {
+		botUserId: 'bot',
+		discordToken: 'test-token',
+		locale: 'en',
+	};
 	const baseInteraction = {
 		guild: { ownerId: 'server-owner' },
 		guildId: 'guild',

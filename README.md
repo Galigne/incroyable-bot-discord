@@ -10,12 +10,11 @@ A Discord bot with moderation, utility, local audio, and RPG entity-management c
 ## Installation
 
 1. Install dependencies with `npm install`.
-2. Copy `.env.example` to `.env`.
-3. Generate a bot token in the Discord Developer Portal.
-4. Set `DISCORD_TOKEN` in `.env`.
-5. Copy [`config.json.example`](config.json.example) to `config.json` and replace
+2. Generate a bot token in the Discord Developer Portal.
+3. Copy [`config.json.example`](config.json.example) to `config.json` and replace
    each explanation with the corresponding Discord value.
-6. Start the bot with `node index.js`.
+4. Set the required `discordToken` field to the generated bot token.
+5. Start the bot with `node index.js`.
 
 The bot registers its complete slash-command set separately in every connected
 guild and immediately synchronizes commands when it joins a new guild. The first
@@ -58,6 +57,7 @@ Set the required runtime language in `config.json`. The complete configuration i
 
 ```json
 {
+  "discordToken": "YOUR_DISCORD_BOT_TOKEN",
   "locale": "fr",
   "botUserId": "YOUR_BOT_USER_ID",
   "roles": {
@@ -73,8 +73,9 @@ Set the required runtime language in `config.json`. The complete configuration i
 }
 ```
 
-`locale` and `botUserId` are required. The only supported locale values are `en`
-and `fr`; invalid or missing values stop startup with a clear error. The `roles`
+`discordToken`, `locale`, and `botUserId` are required non-empty values. The only
+supported locale values are `en` and `fr`; invalid or missing values stop startup
+with a clear error. The `roles`
 object, `roles.dm`, and `roles.moderator` are independently optional. A configured
 role grants its corresponding permissions to members with that Discord role. If a
 role is omitted, those actions are restricted to the actual server owner. Present
@@ -87,7 +88,11 @@ The guide file explains what belongs in each field and is never loaded by the bo
 Do not configure an owner user or owner role: the bot reads the actual server owner
 from Discord.
 
-Never commit `.env` or a Discord token. Reset any token that has previously been committed.
+`config.json` is the bot's only local configuration source and remains ignored by
+Git. `/reload` validates and applies its reloadable settings, but `discordToken` is
+restart-only: changing it requires restarting the bot, and reconnects during
+`/reload` continue using the token captured at process startup. Never commit
+`config.json` or a Discord token. Reset any token that has previously been committed.
 
 ## Commands
 

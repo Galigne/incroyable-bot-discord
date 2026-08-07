@@ -1,4 +1,5 @@
 {
+  "discordToken": "Required. Bot token generated in the Discord Developer Portal. Changing it requires restarting the bot.",
   "locale": "Required. Bot language: use exactly \"en\" for English or \"fr\" for French.",
   "botUserId": "Required. The Discord user ID of this bot application.",
   "roles": {

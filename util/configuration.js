@@ -21,6 +21,7 @@ function validateConfig(config) {
 	if (!config || typeof config !== 'object' || Array.isArray(config)) {
 		throw new ConfigurationError('config', 'invalid');
 	}
+	requireNonEmptyString(config, 'discordToken');
 	if (!Object.hasOwn(config, 'locale')) {
 		throw new ConfigurationError('locale');
 	}

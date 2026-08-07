@@ -499,6 +499,7 @@ function createInteraction(userId, roleIds = []) {
 function createConfig() {
 	return {
 		botUserId: 'bot',
+		discordToken: 'test-token',
 		characterHistory: { maxEntries: 3 },
 		locale: 'en',
 		roles: {

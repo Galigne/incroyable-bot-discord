@@ -8,7 +8,6 @@ function createInteractionHandler({
 	handleEntityInteraction,
 	logger = console,
 	runtimeReloader,
-	token,
 }) {
 	return async interaction => {
 		let config = {};
@@ -66,7 +65,6 @@ function createInteractionHandler({
 				config,
 				interaction,
 				runtimeReloader,
-				token,
 			});
 		}
 		catch (error) {

@@ -1,6 +1,6 @@
-async function reconnectClient(client, token) {
+async function reconnectClient(client, discordToken) {
 	client.destroy();
-	await client.login(token);
+	await client.login(discordToken);
 }
 
 module.exports = { reconnectClient };

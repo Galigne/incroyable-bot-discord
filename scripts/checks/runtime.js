@@ -35,7 +35,7 @@ module.exports = function createRuntimeChecks(context) {
 
 	function checkConfiguration() {
 		if (Object.hasOwn(config, 'token')) {
-			errors.push('config.json must not contain a token.');
+			errors.push('config.json must not contain the obsolete token field.');
 		}
 		if (Object.hasOwn(config, 'prefix')) {
 			errors.push('config.json should not contain an obsolete message-command prefix.');
@@ -74,6 +74,15 @@ module.exports = function createRuntimeChecks(context) {
 		const missingBotUserId = createConfig('en');
 		delete missingBotUserId.botUserId;
 		expectInvalidConfiguration(missingBotUserId, 'a missing bot user ID');
+		const missingDiscordToken = createConfig('en');
+		delete missingDiscordToken.discordToken;
+		expectInvalidConfiguration(missingDiscordToken, 'a missing Discord token');
+		for (const invalidValue of ['', '   ', null, 42]) {
+			expectInvalidConfiguration({
+				...createConfig('en'),
+				discordToken: invalidValue,
+			}, 'an invalid Discord token');
+		}
 		const missingDmRole = createConfig('en');
 		delete missingDmRole.roles.dm;
 		expectValidConfiguration(missingDmRole, 'a missing DM role');
@@ -104,7 +113,8 @@ module.exports = function createRuntimeChecks(context) {
 		else {
 			const guide = JSON.parse(fs.readFileSync(guidePath, 'utf8'));
 			if (
-				typeof guide.locale !== 'string'
+				typeof guide.discordToken !== 'string'
+				|| typeof guide.locale !== 'string'
 				|| typeof guide.botUserId !== 'string'
 				|| typeof guide.roles?.dm !== 'string'
 				|| typeof guide.roles?.moderator !== 'string'
@@ -118,6 +128,7 @@ module.exports = function createRuntimeChecks(context) {
 	function createConfig(locale) {
 		return {
 			botUserId: 'bot',
+			discordToken: 'test-token',
 			locale,
 			roles: {
 				dm: 'dm-role',

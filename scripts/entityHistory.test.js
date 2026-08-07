@@ -771,6 +771,7 @@ function historyContext(maxEntries = 3, actorId = 'history-actor') {
 function createConfig(maxEntries) {
 	return {
 		botUserId: 'bot',
+		discordToken: 'test-token',
 		locale: 'en',
 		roles: {
 			dm: 'dm-role',
