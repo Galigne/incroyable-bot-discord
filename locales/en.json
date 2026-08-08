@@ -294,7 +294,9 @@
       "gear": "Gear"
     },
     "summary": {
-      "level": "Level **{{level}}** creature"
+      "identity": "Level **{{level}}** · Archetype **{{archetype}}**",
+      "level": "Level **{{level}}** creature",
+      "ruleLevel": "{{name}} (Level {{level}})"
     },
     "detail": {
       "title": "{{name}} — {{field}}"

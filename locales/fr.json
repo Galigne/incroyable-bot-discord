@@ -294,7 +294,9 @@
       "gear": "Équipement et inventaire"
     },
     "summary": {
-      "level": "Créature de niveau **{{level}}**"
+      "identity": "Niveau **{{level}}** · Archétype : **{{archetype}}**",
+      "level": "Créature de niveau **{{level}}**",
+      "ruleLevel": "{{name}} (niveau {{level}})"
     },
     "detail": {
       "title": "{{name}} — {{field}}"

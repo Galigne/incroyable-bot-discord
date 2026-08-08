@@ -2,6 +2,7 @@ const assert = require('node:assert/strict');
 const { test } = require('node:test');
 
 const Character = require('../models/Character');
+const Creature = require('../models/Creature');
 const {
 	createGeneratedCharacterResponse,
 } = require('../util/characterCommandResponses');
@@ -207,6 +208,52 @@ test('character summaries omit empty optional content and all gear lists', () =>
 	assert.match(populatedSummary.fields[2].value, /Fire \(Level 2\)/);
 	assert.match(populatedSummary.fields[2].value, /\*\*Talents\*\*\n1\. Athlete/);
 	assert.doesNotMatch(JSON.stringify(populatedSummary), /Equipment|Inventory/);
+});
+
+test('creature summaries match the concise character layout with intrinsic traits', () => {
+	const creature = new Creature('Concise.Creature', 'creator');
+	creature.gear.equipment = ['Claws'];
+	creature.gear.inventory = ['Shiny stone'];
+
+	const emptySummary = createEntityGetResponse(creature, null, 'en')
+		.embeds[0].toJSON();
+	assert.deepEqual(emptySummary.fields.map(field => field.name), [
+		'Status', 'Statistics',
+	]);
+	assert.equal(emptySummary.description, 'Level **1**');
+	assert.doesNotMatch(JSON.stringify(emptySummary), /—|Equipment|Inventory|Gear/);
+	assert.doesNotMatch(emptySummary.fields[0].value, /Status effects|Modifiers/);
+
+	creature.description = 'A moonlit guardian.';
+	creature.source = { archetypeId: 'monster' };
+	creature.status.effects = [{ name: 'Inspired', description: 'Moves boldly.' }];
+	creature.modifiers = [{ name: 'Moonlit', description: 'Glows softly.' }];
+	creature.rules = [{ name: 'Fire', level: 2, description: 'Controls flames.' }];
+	creature.traits = [{ name: 'Night sight', description: 'Sees in darkness.' }];
+
+	const populatedSummary = createEntityGetResponse(creature, null, 'en')
+		.embeds[0].toJSON();
+	assert.match(
+		populatedSummary.description,
+		/Archetype \*\*Monster\*\*\nA moonlit guardian\.$/,
+	);
+	assert.deepEqual(populatedSummary.fields.map(field => field.name), [
+		'Status', 'Statistics', 'RULEs',
+	]);
+	assert.match(populatedSummary.fields[0].value, /\*\*Status effects\*\*/);
+	assert.match(populatedSummary.fields[0].value, /\*\*Descriptive modifiers\*\*/);
+	assert.match(populatedSummary.fields[2].value, /1\. Fire \(Level 2\)/);
+	assert.match(
+		populatedSummary.fields[2].value,
+		/\*\*Intrinsic traits\*\*\n\*\*Night sight\*\*/,
+	);
+	assert.doesNotMatch(JSON.stringify(populatedSummary), /Equipment|Inventory|Gear/);
+
+	const detailedGear = createEntityGetResponse(creature, 'gear', 'en')
+		.embeds[0].toJSON();
+	assert.deepEqual(detailedGear.fields.map(field => field.name), [
+		'Equipment', 'Inventory', 'Encumbrance',
+	]);
 });
 
 test('generated character embeds have no footer', () => {

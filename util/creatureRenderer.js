@@ -24,38 +24,70 @@ function createCreatureSummaryEmbed(creature, locale = 'en') {
 	const stats = BASE_STATS.map(stat => (
 		`${label(locale, `statistics.${stat}`)}: **${creature.statistics[stat]}**`
 	)).join('\n');
+	const statusSections = [
+		formatCombatantResources(creature, ['hp', 'ar', 'ap', 'md'], locale),
+	];
+	if (creature.status.effects.length > 0) {
+		statusSections.push(
+			`**${label(locale, 'status.effects')}**\n`
+				+ formatDescribedRecords(creature.status.effects, 1_024, locale),
+		);
+	}
+	if (creature.modifiers.length > 0) {
+		statusSections.push(
+			`**${label(locale, 'modifiers')}**\n`
+				+ formatDescribedRecords(creature.modifiers, 1_024, locale),
+		);
+	}
+	const rightSections = [];
+	if (creature.rules.length > 0) {
+		rightSections.push({
+			label: label(locale, 'rules'),
+			value: formatSummaryRules(creature.rules, locale),
+		});
+	}
+	if (creature.traits.length > 0) {
+		rightSections.push({
+			label: label(locale, 'traits'),
+			value: formatDescribedRecords(creature.traits, 250, locale),
+		});
+	}
+	const rightColumn = rightSections
+		.map((section, index) => `${index === 0 ? '' : `**${section.label}**\n`}${section.value}`)
+		.join('\n\n');
+	const archetype = getArchetype(creature, locale);
+	const description = [
+		archetype
+			? t(locale, 'creature.summary.identity', {
+				archetype,
+				level: creature.level,
+			})
+			: `${label(locale, 'level')} **${creature.level}**`,
+		...(hasText(creature.description) ? [creature.description] : []),
+	].join('\n');
+	const summaryFields = [
+		{
+			name: label(locale, 'status'),
+			value: truncate(statusSections.join('\n\n')),
+		},
+		{
+			name: label(locale, 'statistics'),
+			value: truncate(stats),
+			inline: true,
+		},
+	];
+	if (rightSections.length > 0) {
+		summaryFields.push({
+			name: rightSections[0].label,
+			value: truncate(rightColumn),
+			inline: true,
+		});
+	}
 	return new EmbedBuilder()
 		.setTitle(creature.displayName)
-		.setDescription([
-			t(locale, 'creature.summary.level', { level: creature.level }),
-			formatArchetype(creature, locale),
-			creature.description || t(locale, 'common.empty'),
-		].join('\n'))
+		.setDescription(description)
 		.setColor('#8B5CF6')
-		.addFields(
-			{
-				name: label(locale, 'status'),
-				value: formatCreatureStatus(creature, locale),
-			},
-			{ name: label(locale, 'statistics'), value: stats, inline: true },
-			{
-				name: label(locale, 'traits'),
-				value: formatDescribedRecords(creature.traits, 1_024, locale),
-				inline: true,
-			},
-			{
-				name: label(locale, 'rules'),
-				value: formatRules(creature.rules, 1_024, locale),
-			},
-			{
-				name: label(locale, 'modifiers'),
-				value: formatDescribedRecords(creature.modifiers, 1_024, locale),
-			},
-			{
-				name: label(locale, 'gear'),
-				value: formatGear(creature, locale),
-			},
-		);
+		.addFields(summaryFields);
 }
 
 function createCreatureFieldEmbed(creature, fieldName, locale = 'en') {
@@ -155,19 +187,15 @@ function createCreatureFieldEmbed(creature, fieldName, locale = 'en') {
 	}
 }
 
-function formatCreatureStatus(creature, locale) {
-	return [
-		formatCombatantResources(creature, ['hp', 'ar', 'ap', 'md'], locale),
-		`${label(locale, 'status.effects')}: `
-			+ formatDescribedRecords(creature.status.effects, 500, locale),
-	].join('\n');
+function formatArchetype(creature, locale) {
+	return getArchetype(creature, locale) || t(locale, 'common.empty');
 }
 
-function formatArchetype(creature, locale) {
+function getArchetype(creature, locale) {
 	const archetypeId = creature.source?.archetypeId;
 	return archetypeId
 		? t(locale, `rpg.genMonster.${archetypeId}Choice`)
-		: t(locale, 'common.empty');
+		: null;
 }
 
 function formatStats(creature, targets, locale) {
@@ -186,15 +214,15 @@ function formatRules(rules, maxLength, locale) {
 	);
 }
 
-function formatGear(creature, locale) {
-	return [
-		`**${label(locale, 'gear.equipment')}**: `
-			+ formatStringList(creature.gear.equipment, 300, locale),
-		`**${label(locale, 'gear.inventory')}**: `
-			+ formatStringList(creature.gear.inventory, 300, locale),
-		`**${label(locale, 'gear.encumbrance')}**: `
-			+ `${creature.gear.encumbrance.current} / ${creature.gear.encumbrance.max}`,
-	].join('\n');
+function formatSummaryRules(rules, locale) {
+	return formatNumberedJoinedList(
+		rules.map(rule => t(locale, 'creature.summary.ruleLevel', {
+			level: rule.level,
+			name: rule.name,
+		})),
+		250,
+		locale,
+	);
 }
 
 function formatStringList(items, maxLength, locale) {
@@ -203,6 +231,10 @@ function formatStringList(items, maxLength, locale) {
 
 function label(locale, fieldId) {
 	return getEntityFieldLabel(locale, 'creature', fieldId);
+}
+
+function hasText(value) {
+	return typeof value === 'string' && value.trim().length > 0;
 }
 
 module.exports = {
