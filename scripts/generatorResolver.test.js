@@ -365,6 +365,7 @@ test('/gen rendering preserves value and fields layouts and renders templates an
 		entryId: 'criminal',
 		outputType: 'fields',
 		fields: { Name: 'Criminal', Description: 'An outlaw.' },
+		displayFields: { Name: 'Criminal', Description: 'An outlaw.' },
 		provenance: [],
 		modifiers: [],
 	}).toJSON();
@@ -389,6 +390,51 @@ test('/gen rendering preserves value and fields layouts and renders templates an
 		name: 'Modifiers',
 		value: '**Urgent** — Time is running out.',
 	}]);
+});
+
+test('/gen omits technical fields while resolved fields retain them for internal use', () => {
+	const generator = {
+		schemaVersion: 2,
+		id: 'armors',
+		kind: 'category',
+		visibility: 'public',
+		name: 'Armors',
+		description: 'Armor catalog',
+		entrySchema: {
+			type: 'fields',
+			required: ['Name', 'Generator', 'Type', 'Description', 'AR percentage'],
+			technical: ['Generator', 'Type', 'AR percentage'],
+		},
+		entries: [{
+			id: 'light-armor',
+			fields: {
+				Name: 'Light armor',
+				Generator: 'armor-details',
+				Type: 'light',
+				Description: 'Flexible protection.',
+				'AR percentage': 25,
+			},
+		}],
+	};
+	const result = createGeneratorResolver({
+		getGenerator: () => generator,
+	}).generate('armors', 'en', { random: () => 0 });
+
+	assert.deepEqual(result.fields, {
+		Name: 'Light armor',
+		Generator: 'armor-details',
+		Type: 'light',
+		Description: 'Flexible protection.',
+		'AR percentage': 25,
+	});
+	assert.deepEqual(result.displayFields, {
+		Name: 'Light armor',
+		Description: 'Flexible protection.',
+	});
+	assert.deepEqual(
+		createGeneratedEmbed(result).toJSON().fields.map(field => field.name),
+		['Name', 'Description'],
+	);
 });
 
 function createLocalizedCatalogs({ includeRequest = true } = {}) {

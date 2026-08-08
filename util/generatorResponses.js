@@ -53,7 +53,7 @@ function createGeneratedEmbed(result, locale = 'en') {
 		.setColor('#FFD700');
 	if (result.outputType === 'fields') {
 		embed.addFields(
-			Object.entries(result.fields).map(([name, value]) => ({
+			Object.entries(result.displayFields).map(([name, value]) => ({
 				name: getGeneratorFieldLabel(name, locale),
 				value: String(value),
 			})),
@@ -77,7 +77,7 @@ function addModifiers(embed, result, locale) {
 		`**${modifier.name}** — ${modifier.description}`
 	)).join('\n'), 1_024);
 	const fieldCount = result.outputType === 'fields'
-		? Object.keys(result.fields).length
+		? Object.keys(result.displayFields).length
 		: 0;
 	if (fieldCount < 25) {
 		embed.addFields({ name: title, value });

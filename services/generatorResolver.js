@@ -108,6 +108,7 @@ function createGeneratorResolver({ getGenerator = generatorCatalog.getGenerator 
 			return {
 				outputType: 'fields',
 				fields,
+				displayFields: getDisplayFields(generator, fields),
 				display: getFieldsDisplay(generator, fields),
 				provenance: [],
 				modifiers: [],
@@ -168,6 +169,13 @@ function formatTemplateReferenceValue(value) {
 	);
 }
 
+function getDisplayFields(generator, fields) {
+	const technical = new Set(generator.entrySchema.technical ?? []);
+	return Object.fromEntries(
+		Object.entries(fields).filter(([field]) => !technical.has(field)),
+	);
+}
+
 function getFieldsDisplay(generator, fields) {
 	if (Object.hasOwn(fields, 'Name')) {
 		return String(fields.Name);
@@ -189,6 +197,7 @@ function createCompletedResult(generator, entry, resolved) {
 	};
 	if (resolved.outputType === 'fields') {
 		result.fields = resolved.fields;
+		result.displayFields = resolved.displayFields;
 	}
 	else if (resolved.outputType === 'template') {
 		result.templateOutput = resolved.templateOutput;
