@@ -143,8 +143,9 @@ test('character summaries and talent details render localized bounded lists', ()
 		.embeds[0].toJSON();
 	assert.match(
 		summary.fields[2].value,
-		/\*\*Talents\*\*\n1\. Athlete — \+1 to sustained movement\.\n2\. Cold Immunity —/,
+		/^1\. Athlete — \+1 to sustained movement\.\n2\. Cold Immunity —/,
 	);
+	assert.equal(summary.fields[2].name, 'Talents');
 	assert.equal(detailed.description, [
 		'1. Athlete — +1 to sustained movement.',
 		'2. Cold Immunity — Ordinary cold cannot freeze the character.',
@@ -171,6 +172,41 @@ test('character summaries and talent details render localized bounded lists', ()
 	assert.ok(boundedSummary.fields[2].value.length <= 1_024);
 	assert.equal(boundedDetailed.description.length, 4_096);
 	assert.match(boundedDetailed.description, /…$/);
+});
+
+test('character summaries omit empty optional content and all gear lists', () => {
+	const character = new Character('Concise.Summary', 'creator');
+	character.gear.equipment = ['Sword'];
+	character.gear.inventory = ['Potion'];
+
+	const emptySummary = createEntityGetResponse(character, null, 'en')
+		.embeds[0].toJSON();
+	assert.deepEqual(emptySummary.fields.map(field => field.name), [
+		'Status', 'Statistics',
+	]);
+	assert.equal(emptySummary.description, 'Level **1**');
+	assert.doesNotMatch(JSON.stringify(emptySummary), /—|Equipment|Inventory/);
+	assert.doesNotMatch(emptySummary.fields[0].value, /Status effects|Modifiers/);
+	assert.doesNotMatch(emptySummary.fields[1].value, /Racial traits/);
+
+	character.background.appearance = 'Green cloak';
+	character.race.name = 'Ashborn';
+	character.race.traits.skillBonus = 'Arcana';
+	character.status.effects = ['Inspired'];
+	character.modifiers = [{ name: 'Moonlit', description: 'Glows softly.' }];
+	character.rules = [{ name: 'Fire', level: 2, description: 'Controls flames.' }];
+	character.talents = ['Athlete'];
+
+	const populatedSummary = createEntityGetResponse(character, null, 'en')
+		.embeds[0].toJSON();
+	assert.match(populatedSummary.description, /Race \*\*Ashborn\*\*\nGreen cloak$/);
+	assert.match(populatedSummary.fields[0].value, /\*\*Status effects\*\*\n1\. Inspired/);
+	assert.match(populatedSummary.fields[0].value, /\*\*Descriptive modifiers\*\*/);
+	assert.match(populatedSummary.fields[1].value, /Racial skill bonus: Arcana/);
+	assert.doesNotMatch(populatedSummary.fields[1].value, /Racial physical ability/);
+	assert.match(populatedSummary.fields[2].value, /Fire \(Level 2\)/);
+	assert.match(populatedSummary.fields[2].value, /\*\*Talents\*\*\n1\. Athlete/);
+	assert.doesNotMatch(JSON.stringify(populatedSummary), /Equipment|Inventory/);
 });
 
 test('generated character embeds have no footer', () => {

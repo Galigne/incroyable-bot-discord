@@ -81,10 +81,11 @@ module.exports = function createLocalizationChecks(context) {
 		}
 
 		const Character = require('../../models/Character');
-		const frenchSummary = createCharacterSummaryEmbed(
-			new Character('Localisation', 'tester'),
-			'fr',
-		).toJSON();
+		const localizedCharacter = new Character('Localisation', 'tester');
+		localizedCharacter.race.traits.skillBonus = 'Arcanes';
+		localizedCharacter.rules = [{ name: 'Feu', level: 1, description: '' }];
+		const frenchSummary = createCharacterSummaryEmbed(localizedCharacter, 'fr')
+			.toJSON();
 		if (
 			!frenchSummary.description.includes('Niveau')
 			|| frenchSummary.fields[0]?.name !== 'État'

@@ -45,7 +45,7 @@ test('shared resource formatting remains the formatting used by the general summ
 		'MD: **6 / 8 (75%)**',
 		'🟧🟧🟧🟧🟧🟧🟧🟧⬛⬛',
 	].join('\n'));
-	assert.ok(summaryStatus.startsWith(`${resources}\n\n`));
+	assert.equal(summaryStatus, resources);
 });
 
 test('damage response displays final HP before final AR without a plain final summary', () => {

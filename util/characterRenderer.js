@@ -23,32 +23,43 @@ const {
 const { t } = require('./i18n');
 
 function createCharacterSummaryEmbed(character, locale = 'en') {
-	const status = [
+	const statusSections = [
 		formatCombatantResources(character, ['hp', 'ar', 'ap', 'md'], locale),
-		'',
-		`**${getCharacterFieldLabel(locale, 'status.effects')}**\n`
-			+ formatList(character.status.effects, 1_024, locale),
-		'',
-		`**${getCharacterFieldLabel(locale, 'modifiers')}**\n`
-			+ formatDescribedRecords(character.modifiers, 1_024, locale),
-	].join('\n');
+	];
+	if (character.status.effects.length > 0) {
+		statusSections.push(
+			`**${getCharacterFieldLabel(locale, 'status.effects')}**\n`
+				+ formatList(character.status.effects, 1_024, locale),
+		);
+	}
+	if (character.modifiers.length > 0) {
+		statusSections.push(
+			`**${getCharacterFieldLabel(locale, 'modifiers')}**\n`
+				+ formatDescribedRecords(character.modifiers, 1_024, locale),
+		);
+	}
+	const status = statusSections.join('\n\n');
 	const stats = BASE_STATS
 		.map(stat => `${formatLabel(stat, locale)}: **${character.statistics[stat]}**`)
 		.join('\n');
 	const racialTraits = [
-		`${getCharacterFieldLabel(locale, 'race.traits.skillBonus')}: `
-			+ `${character.race.traits.skillBonus || t(locale, 'common.empty')}`,
-		`${getCharacterFieldLabel(locale, 'race.traits.physicalAbility')}: `
-			+ `${character.race.traits.physicalAbility || t(locale, 'common.empty')}`,
-	].join('\n');
-	const [leftColumn, rightColumn] = createSummaryColumns(
-		[
-			stats,
-			truncate(racialTraits, 250),
-			formatList(character.gear.equipment, 250, locale),
-		],
-		[
-			formatList(
+		['race.traits.skillBonus', character.race.traits.skillBonus],
+		['race.traits.physicalAbility', character.race.traits.physicalAbility],
+	]
+		.filter(([, value]) => hasText(value))
+		.map(([field, value]) => `${getCharacterFieldLabel(locale, field)}: ${value}`);
+	const leftColumn = [
+		stats,
+		...(racialTraits.length > 0 ? [
+			`**${getCharacterFieldLabel(locale, 'race.traits')}**\n`
+				+ truncate(racialTraits.join('\n'), 250),
+		] : []),
+	].join('\n\n');
+	const rightSections = [];
+	if (character.rules.length > 0) {
+		rightSections.push({
+			label: getCharacterFieldLabel(locale, 'rules'),
+			value: formatList(
 				character.rules.map(rule => t(locale, 'character.summary.ruleLevel', {
 					level: rule.level,
 					name: rule.name,
@@ -56,45 +67,49 @@ function createCharacterSummaryEmbed(character, locale = 'en') {
 				250,
 				locale,
 			),
-			formatList(character.talents, 250, locale),
-			formatList(character.gear.inventory, 250, locale),
-		],
-		[
-			[
-				getCharacterFieldLabel(locale, 'race.traits'),
-				getCharacterFieldLabel(locale, 'talents'),
-			],
-			[
-				getCharacterFieldLabel(locale, 'equipment'),
-				getCharacterFieldLabel(locale, 'inventory'),
-			],
-		],
-	);
+		});
+	}
+	if (character.talents.length > 0) {
+		rightSections.push({
+			label: getCharacterFieldLabel(locale, 'talents'),
+			value: formatList(character.talents, 250, locale),
+		});
+	}
+	const rightColumn = rightSections
+		.map((section, index) => `${index === 0 ? '' : `**${section.label}**\n`}${section.value}`)
+		.join('\n\n');
+	const description = [
+		hasText(character.race.name)
+			? t(locale, 'character.summary.identity', {
+				level: character.level,
+				race: character.race.name,
+			})
+			: `${getCharacterFieldLabel(locale, 'level')} **${character.level}**`,
+		...(hasText(character.background.appearance)
+			? [character.background.appearance]
+			: []),
+	].join('\n');
+	const summaryFields = [
+		{ name: getCharacterFieldLabel(locale, 'status'), value: truncate(status) },
+		{
+			name: getCharacterFieldLabel(locale, 'statistics'),
+			value: truncate(leftColumn),
+			inline: true,
+		},
+	];
+	if (rightSections.length > 0) {
+		summaryFields.push({
+			name: rightSections[0].label,
+			value: truncate(rightColumn),
+			inline: true,
+		});
+	}
 
 	return new EmbedBuilder()
 		.setTitle(character.displayName)
-		.setDescription([
-			t(locale, 'character.summary.identity', {
-				level: character.level,
-				race: character.race.name || t(locale, 'character.summary.unspecifiedRace'),
-			}),
-			character.background.appearance
-				|| t(locale, 'character.summary.unspecifiedAppearance'),
-		].join('\n'))
+		.setDescription(description)
 		.setColor('#FFD700')
-		.addFields(
-			{ name: getCharacterFieldLabel(locale, 'status'), value: truncate(status) },
-			{
-				name: getCharacterFieldLabel(locale, 'statistics'),
-				value: leftColumn,
-				inline: true,
-			},
-			{
-				name: getCharacterFieldLabel(locale, 'rules'),
-				value: rightColumn,
-				inline: true,
-			},
-		);
+		.addFields(summaryFields);
 }
 
 function createCharacterFieldEmbed(character, fieldName, locale = 'en') {
@@ -238,27 +253,8 @@ function getPairValue(character, definition) {
 	return { current, max: maximum };
 }
 
-function createSummaryColumns(leftSections, rightSections, nextHeadings) {
-	let leftColumn = leftSections[0];
-	let rightColumn = rightSections[0];
-
-	for (let index = 0; index < nextHeadings.length; index += 1) {
-		const leftLineCount = countLines(leftSections[index]);
-		const rightLineCount = countLines(rightSections[index]);
-		const sectionHeight = Math.max(leftLineCount, rightLineCount);
-		const [leftHeading, rightHeading] = nextHeadings[index];
-
-		leftColumn += '\n'.repeat(sectionHeight - leftLineCount + 2)
-			+ `**${leftHeading}**\n${leftSections[index + 1]}`;
-		rightColumn += '\n'.repeat(sectionHeight - rightLineCount + 2)
-			+ `**${rightHeading}**\n${rightSections[index + 1]}`;
-	}
-
-	return [truncate(leftColumn), truncate(rightColumn)];
-}
-
-function countLines(value) {
-	return value.split('\n').length;
+function hasText(value) {
+	return typeof value === 'string' && value.trim().length > 0;
 }
 
 function formatRules(rules, locale = 'en') {
