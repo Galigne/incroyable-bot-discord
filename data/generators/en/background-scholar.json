@@ -107,25 +107,25 @@
       }
     },
     {
-      "id": "decomposed-iri-quickchalk",
+      "id": "decomposed-rumor-cartographer",
       "fields": {
-        "Appearance": "A distinctive figure remembered as Iri Quickchalk.",
+        "Appearance": "A goblin cartographer's maps chart rumors rather than roads, with corrections for both.",
         "Backstory": "a goblin cartographer who maps rumors rather than roads and becomes offended when either proves inaccurate.",
         "Goals": "Turn this unusual history toward a self-directed future."
       }
     },
     {
-      "id": "decomposed-professor-holloway",
+      "id": "decomposed-spectral-skeleton-historian",
       "fields": {
-        "Appearance": "A distinctive figure remembered as Professor Holloway.",
+        "Appearance": "A spectral historian's skeleton serves as both vessel and research subject.",
         "Backstory": "a spectral historian possessing their own skeleton to continue field research.",
         "Goals": "Turn this unusual history toward a self-directed future."
       }
     },
     {
-      "id": "decomposed-juniper-wake",
+      "id": "decomposed-tree-turning-botanist",
       "fields": {
-        "Appearance": "A distinctive figure remembered as Juniper Wake.",
+        "Appearance": "A botanist's skin is slowly turning to bark, treated as a fascinating inconvenience.",
         "Backstory": "a botanist slowly turning into a tree and treating the transformation as a fascinating inconvenience.",
         "Goals": "Turn this unusual history toward a self-directed future."
       }

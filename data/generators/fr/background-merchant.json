@@ -83,17 +83,17 @@
       }
     },
     {
-      "id": "decomposed-dorrin-slate",
+      "id": "decomposed-favorite-artifact-appraiser",
       "fields": {
-        "Appearance": "Une figure singulière connue sous le nom de Dorrin Slate.",
+        "Appearance": "Les outils d’un expert sont précis, mais les objets qui lui plaisent sont manifestement sous-évalués.",
         "Backstory": "un expert nain capable d'identifier n'importe quel artefact, mais qui sous-évalue compulsivement les objets qui lui plaisent.",
         "Goals": "Transformer ce parcours singulier en un avenir choisi."
       }
     },
     {
-      "id": "decomposed-auntie-ember",
+      "id": "decomposed-favor-based-innkeeper",
       "fields": {
-        "Appearance": "Une figure singulière connue sous le nom de Auntie Ember.",
+        "Appearance": "Le registre d’un aubergiste note les chambres offertes aux aventuriers en échange de faveurs à réclamer plus tard.",
         "Backstory": "une vieille aubergiste née des cendres qui loge gratuitement les aventuriers, puis leur présente plus tard la note sous forme de services à rendre.",
         "Goals": "Transformer ce parcours singulier en un avenir choisi."
       }

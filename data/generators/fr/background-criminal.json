@@ -147,33 +147,33 @@
       }
     },
     {
-      "id": "decomposed-velvet",
+      "id": "decomposed-truth-for-information-broker",
       "fields": {
-        "Appearance": "Une figure singulière connue sous le nom de Velvet.",
+        "Appearance": "Un masque et un registre de vérités embarrassantes signalent un intermédiaire qui n’accepte pas d’argent.",
         "Backstory": "un courtier en renseignements masqué qui accepte les vérités embarrassantes en guise de paiement et ne demande jamais d'argent.",
         "Goals": "Transformer ce parcours singulier en un avenir choisi."
       }
     },
     {
-      "id": "decomposed-elias-north",
+      "id": "decomposed-key-only-thief",
       "fields": {
-        "Appearance": "Une figure singulière connue sous le nom de Elias North.",
+        "Appearance": "Un trousseau de clés sans serrure connue pend à la ceinture d’un voleur charmeur.",
         "Backstory": "un voleur charmeur qui ne dérobe que des clés et ignore ce que la moitié d'entre elles ouvrent.",
         "Goals": "Transformer ce parcours singulier en un avenir choisi."
       }
     },
     {
-      "id": "decomposed-merrit-glass",
+      "id": "decomposed-royal-impersonator-regent",
       "fields": {
-        "Appearance": "Une figure singulière connue sous le nom de Merrit Glass.",
+        "Appearance": "Des insignes empruntés et une politesse nerveuse trahissent un imposteur royal qui gouverne peut-être mieux que le monarque absent.",
         "Backstory": "un sosie royal anxieux qui gouverne avec davantage de compétence que le monarque disparu.",
         "Goals": "Transformer ce parcours singulier en un avenir choisi."
       }
     },
     {
-      "id": "decomposed-bramble-jack",
+      "id": "decomposed-refreshment-loving-bandit",
       "fields": {
-        "Appearance": "Une figure singulière connue sous le nom de Bramble Jack.",
+        "Appearance": "Le sac d’un chef de bandits contient toujours des rafraîchissements et des formulaires d’évaluation.",
         "Backstory": "un sympathique chef de bandits qui exige que chaque vol comprenne des rafraîchissements et un questionnaire de satisfaction écrit.",
         "Goals": "Transformer ce parcours singulier en un avenir choisi."
       }

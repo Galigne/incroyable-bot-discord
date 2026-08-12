@@ -83,25 +83,25 @@
       }
     },
     {
-      "id": "decomposed-brother-caldus",
+      "id": "decomposed-denied-miracle-healer",
       "fields": {
-        "Appearance": "Une figure singulière connue sous le nom de Brother Caldus.",
+        "Appearance": "Un guérisseur joyeux conserve les preuves de miracles que son propre dieu refuse de reconnaître.",
         "Backstory": "un guérisseur jovial dont les miracles fonctionnent, bien que son dieu nie officiellement le connaître.",
         "Goals": "Transformer ce parcours singulier en un avenir choisi."
       }
     },
     {
-      "id": "decomposed-pella-sunward",
+      "id": "decomposed-tavern-born-paladin-order",
       "fields": {
-        "Appearance": "Une figure singulière connue sous le nom de Pella Sunward.",
+        "Appearance": "Un paladin porte la charte d’un ordre sacré inventé pendant une dispute dans une taverne.",
         "Backstory": "une paladine d'un optimisme inépuisable, dont l'ordre sacré a été inventé au cours d'une dispute dans une taverne.",
         "Goals": "Transformer ce parcours singulier en un avenir choisi."
       }
     },
     {
-      "id": "decomposed-sister-quiet",
+      "id": "decomposed-silent-priest-ravens",
       "fields": {
-        "Appearance": "Une figure singulière connue sous le nom de Sister Quiet.",
+        "Appearance": "Un prêtre silencieux voyage avec trois corbeaux bavards qui lui servent d’assistants théologiques.",
         "Backstory": "une prêtresse ayant fait vœu de silence, assistée dans ses travaux théologiques par trois corbeaux très bavards.",
         "Goals": "Transformer ce parcours singulier en un avenir choisi."
       }

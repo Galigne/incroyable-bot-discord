@@ -115,17 +115,17 @@
       }
     },
     {
-      "id": "decomposed-nella-brass",
+      "id": "decomposed-story-dependent-runesmith",
       "fields": {
-        "Appearance": "A distinctive figure remembered as Nella Brass.",
+        "Appearance": "Ink-stained hands and unfinished glyphs mark a young runesmith.",
         "Backstory": "a young runesmith capable of brilliant work only while someone tells her a completely new story.",
         "Goals": "Turn this unusual history toward a self-directed future."
       }
     },
     {
-      "id": "decomposed-vexa-coil",
+      "id": "decomposed-mislabeled-potion-alchemist",
       "fields": {
-        "Appearance": "A distinctive figure remembered as Vexa Coil.",
+        "Appearance": "Reused bottles with dangerously incorrect labels fill an alchemist's kit.",
         "Backstory": "an alchemist selling reliable potions in reused bottles with dangerously incorrect labels.",
         "Goals": "Turn this unusual history toward a self-directed future."
       }

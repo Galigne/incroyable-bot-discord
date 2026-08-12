@@ -99,25 +99,25 @@
       }
     },
     {
-      "id": "decomposed-constable-reed",
+      "id": "decomposed-magical-crime-constable",
       "fields": {
-        "Appearance": "Une figure singulière connue sous le nom de Constable Reed.",
+        "Appearance": "Les dossiers d’un agent de village concernent des crimes magiques que le droit local refuse de reconnaître.",
         "Backstory": "un garde de village honnête, dépassé par des crimes magiques dont la législation locale refuse l'existence.",
         "Goals": "Transformer ce parcours singulier en un avenir choisi."
       }
     },
     {
-      "id": "decomposed-sable-of-the-reeds",
+      "id": "decomposed-deliberate-marshscale-diplomat",
       "fields": {
-        "Appearance": "Une figure singulière connue sous le nom de Sable-of-the-Reeds.",
+        "Appearance": "Un diplomate des marais marque une longue pause avant chaque réponse et ne gaspille aucun mot.",
         "Backstory": "un diplomate aux écailles des marais qui marque une pause de plusieurs minutes avant chaque réponse et ne gaspille jamais un mot.",
         "Goals": "Transformer ce parcours singulier en un avenir choisi."
       }
     },
     {
-      "id": "decomposed-magistrate-odo-penn",
+      "id": "decomposed-enchanted-stamp-bureaucrat",
       "fields": {
-        "Appearance": "Une figure singulière connue sous le nom de Magistrate Odo Penn.",
+        "Appearance": "Un tampon enchanté et une pile de lois provisoires absurdes accompagnent un fonctionnaire méticuleux.",
         "Backstory": "un bureaucrate dont le sceau enchanté donne temporairement une réalité physique à des lois ridicules.",
         "Goals": "Transformer ce parcours singulier en un avenir choisi."
       }

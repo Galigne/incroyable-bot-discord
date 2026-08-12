@@ -75,17 +75,17 @@
       }
     },
     {
-      "id": "decomposed-lady-seraphine-vale",
+      "id": "decomposed-rebellion-balancing-noble",
       "fields": {
-        "Appearance": "A distinctive figure remembered as Lady Seraphine Vale.",
+        "Appearance": "An impeccably polite noble carries ledgers comparing the civilian cost of both sides in a rebellion.",
         "Backstory": "an impeccably polite noble funding both sides of a rebellion to minimize civilian casualties.",
         "Goals": "Turn this unusual history toward a self-directed future."
       }
     },
     {
-      "id": "decomposed-king-pip-ix",
+      "id": "decomposed-rat-king-spymaster",
       "fields": {
-        "Appearance": "A distinctive figure remembered as King Pip IX.",
+        "Appearance": "A tiny crown, coded messages, and underground maps suggest a rat monarch's court.",
         "Backstory": "a self-proclaimed rat monarch commanding an excellent spy network beneath the capital.",
         "Goals": "Turn this unusual history toward a self-directed future."
       }

@@ -83,17 +83,17 @@
       }
     },
     {
-      "id": "decomposed-dorrin-slate",
+      "id": "decomposed-favorite-artifact-appraiser",
       "fields": {
-        "Appearance": "A distinctive figure remembered as Dorrin Slate.",
+        "Appearance": "An appraiser's tools are precise, but favorite objects are visibly undervalued.",
         "Backstory": "a dwarven appraiser who can identify any artifact but compulsively undervalues objects he personally likes.",
         "Goals": "Turn this unusual history toward a self-directed future."
       }
     },
     {
-      "id": "decomposed-auntie-ember",
+      "id": "decomposed-favor-based-innkeeper",
       "fields": {
-        "Appearance": "A distinctive figure remembered as Auntie Ember.",
+        "Appearance": "An innkeeper's ledger records free rooms for adventurers as favors to be collected later.",
         "Backstory": "an elderly ashborn innkeeper who gives free rooms to adventurers and invoices them later in favors.",
         "Goals": "Turn this unusual history toward a self-directed future."
       }

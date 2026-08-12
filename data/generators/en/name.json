@@ -310,6 +310,188 @@
         "FirstName": "Drowi",
         "LastName": "the Alchemist"
       }
+    },
+    {
+      "id": "tomas-rook",
+      "fields": {
+        "FirstName": "Tomas",
+        "LastName": "Rook"
+      }
+    },
+    {
+      "id": "kesh-of-seven-knives",
+      "fields": {
+        "FirstName": "Kesh",
+        "LastName": "of Seven Knives"
+      }
+    },
+    {
+      "id": "mina-thrice-lost",
+      "fields": {
+        "FirstName": "Mina",
+        "LastName": "Thrice-Lost"
+      }
+    },
+    {
+      "id": "the-gray-witness",
+      "fields": {
+        "FirstName": "The",
+        "LastName": "Gray Witness"
+      }
+    },
+    {
+      "id": "hara-moonclaw",
+      "fields": {
+        "FirstName": "Hara",
+        "LastName": "Moonclaw"
+      }
+    },
+    {
+      "id": "vexa-coil",
+      "fields": {
+        "FirstName": "Vexa",
+        "LastName": "Coil"
+      }
+    },
+    {
+      "id": "velvet-the-broker",
+      "fields": {
+        "FirstName": "Velvet",
+        "LastName": "the Broker"
+      }
+    },
+    {
+      "id": "elias-north",
+      "fields": {
+        "FirstName": "Elias",
+        "LastName": "North"
+      }
+    },
+    {
+      "id": "merrit-glass",
+      "fields": {
+        "FirstName": "Merrit",
+        "LastName": "Glass"
+      }
+    },
+    {
+      "id": "bramble-jack",
+      "fields": {
+        "FirstName": "Bramble",
+        "LastName": "Jack"
+      }
+    },
+    {
+      "id": "dorrin-slate",
+      "fields": {
+        "FirstName": "Dorrin",
+        "LastName": "Slate"
+      }
+    },
+    {
+      "id": "auntie-ember",
+      "fields": {
+        "FirstName": "Auntie",
+        "LastName": "Ember"
+      }
+    },
+    {
+      "id": "captain-orro-flint",
+      "fields": {
+        "FirstName": "Captain Orro",
+        "LastName": "Flint"
+      }
+    },
+    {
+      "id": "lady-seraphine-vale",
+      "fields": {
+        "FirstName": "Lady Seraphine",
+        "LastName": "Vale"
+      }
+    },
+    {
+      "id": "king-pip-ix",
+      "fields": {
+        "FirstName": "King Pip",
+        "LastName": "IX"
+      }
+    },
+    {
+      "id": "constable-reed",
+      "fields": {
+        "FirstName": "Constable",
+        "LastName": "Reed"
+      }
+    },
+    {
+      "id": "sable-of-the-reeds",
+      "fields": {
+        "FirstName": "Sable-of-the-Reeds",
+        "LastName": "Marsh"
+      }
+    },
+    {
+      "id": "magistrate-odo-penn",
+      "fields": {
+        "FirstName": "Magistrate Odo",
+        "LastName": "Penn"
+      }
+    },
+    {
+      "id": "old-fen",
+      "fields": {
+        "FirstName": "Old",
+        "LastName": "Fen"
+      }
+    },
+    {
+      "id": "brother-caldus",
+      "fields": {
+        "FirstName": "Brother",
+        "LastName": "Caldus"
+      }
+    },
+    {
+      "id": "sister-quiet",
+      "fields": {
+        "FirstName": "Sister",
+        "LastName": "Quiet"
+      }
+    },
+    {
+      "id": "rill-the-salvager",
+      "fields": {
+        "FirstName": "Rill",
+        "LastName": "the Salvager"
+      }
+    },
+    {
+      "id": "iri-quickchalk",
+      "fields": {
+        "FirstName": "Iri",
+        "LastName": "Quickchalk"
+      }
+    },
+    {
+      "id": "professor-holloway",
+      "fields": {
+        "FirstName": "Professor",
+        "LastName": "Holloway"
+      }
+    },
+    {
+      "id": "juniper-wake",
+      "fields": {
+        "FirstName": "Juniper",
+        "LastName": "Wake"
+      }
+    },
+    {
+      "id": "mara-venn",
+      "fields": {
+        "FirstName": "Mara",
+        "LastName": "Venn"
+      }
     }
   ]
 }

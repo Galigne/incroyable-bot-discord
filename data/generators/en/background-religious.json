@@ -83,25 +83,25 @@
       }
     },
     {
-      "id": "decomposed-brother-caldus",
+      "id": "decomposed-denied-miracle-healer",
       "fields": {
-        "Appearance": "A distinctive figure remembered as Brother Caldus.",
+        "Appearance": "A cheerful healer carries evidence of miracles that their own god refuses to acknowledge.",
         "Backstory": "a cheerful healer whose miracles work but whose god officially denies knowing him.",
         "Goals": "Turn this unusual history toward a self-directed future."
       }
     },
     {
-      "id": "decomposed-pella-sunward",
+      "id": "decomposed-tavern-born-paladin-order",
       "fields": {
-        "Appearance": "A distinctive figure remembered as Pella Sunward.",
+        "Appearance": "A paladin carries the charter of a holy order invented during a tavern argument.",
         "Backstory": "a relentlessly optimistic paladin whose holy order was invented during a tavern argument.",
         "Goals": "Turn this unusual history toward a self-directed future."
       }
     },
     {
-      "id": "decomposed-sister-quiet",
+      "id": "decomposed-silent-priest-ravens",
       "fields": {
-        "Appearance": "A distinctive figure remembered as Sister Quiet.",
+        "Appearance": "A silent priest travels with three talkative ravens serving as theological assistants.",
         "Backstory": "a priest who took a vow of silence and employs three talkative ravens as theological assistants.",
         "Goals": "Turn this unusual history toward a self-directed future."
       }

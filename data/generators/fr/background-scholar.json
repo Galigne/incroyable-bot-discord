@@ -107,25 +107,25 @@
       }
     },
     {
-      "id": "decomposed-iri-quickchalk",
+      "id": "decomposed-rumor-cartographer",
       "fields": {
-        "Appearance": "Une figure singulière connue sous le nom de Iri Quickchalk.",
+        "Appearance": "Les cartes d’un cartographe gobelin recensent les rumeurs plutôt que les routes, avec des corrections pour les unes comme pour les autres.",
         "Backstory": "un cartographe gobelin qui dessine des cartes à partir de rumeurs plutôt que de routes et s'offusque lorsque les unes ou les autres se révèlent inexactes.",
         "Goals": "Transformer ce parcours singulier en un avenir choisi."
       }
     },
     {
-      "id": "decomposed-professor-holloway",
+      "id": "decomposed-spectral-skeleton-historian",
       "fields": {
-        "Appearance": "Une figure singulière connue sous le nom de Professor Holloway.",
+        "Appearance": "Le squelette d’un historien spectral lui sert à la fois de réceptacle et de sujet d’étude.",
         "Backstory": "un historien spectral qui possède son propre squelette afin de poursuivre ses recherches sur le terrain.",
         "Goals": "Transformer ce parcours singulier en un avenir choisi."
       }
     },
     {
-      "id": "decomposed-juniper-wake",
+      "id": "decomposed-tree-turning-botanist",
       "fields": {
-        "Appearance": "Une figure singulière connue sous le nom de Juniper Wake.",
+        "Appearance": "La peau d’un botaniste se transforme lentement en écorce, ce qui est traité comme un contretemps fascinant.",
         "Backstory": "un botaniste qui se transforme lentement en arbre et considère ce phénomène comme un contretemps fascinant.",
         "Goals": "Transformer ce parcours singulier en un avenir choisi."
       }

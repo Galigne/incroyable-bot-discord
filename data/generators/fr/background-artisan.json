@@ -115,17 +115,17 @@
       }
     },
     {
-      "id": "decomposed-nella-brass",
+      "id": "decomposed-story-dependent-runesmith",
       "fields": {
-        "Appearance": "Une figure singulière connue sous le nom de Nella Brass.",
+        "Appearance": "Des mains tachées d’encre et des glyphes inachevés trahissent un jeune artisan des runes.",
         "Backstory": "une jeune maîtresse runique capable de prouesses, mais seulement si quelqu'un lui raconte une histoire qu'elle n'a jamais entendue.",
         "Goals": "Transformer ce parcours singulier en un avenir choisi."
       }
     },
     {
-      "id": "decomposed-vexa-coil",
+      "id": "decomposed-mislabeled-potion-alchemist",
       "fields": {
-        "Appearance": "Une figure singulière connue sous le nom de Vexa Coil.",
+        "Appearance": "Des flacons réutilisés aux étiquettes dangereusement erronées remplissent la trousse d’un alchimiste.",
         "Backstory": "une alchimiste qui vend des potions fiables dans des flacons réutilisés portant des étiquettes dangereusement erronées.",
         "Goals": "Transformer ce parcours singulier en un avenir choisi."
       }

@@ -82,6 +82,113 @@ test('production generator v2 data uses stable IDs, strict parity, and visibilit
 	}
 });
 
+test('background concepts do not embed fixed personal identities', () => {
+	const removedNames = [
+		'Tomas Rook',
+		'Kesh of Seven Knives',
+		'Mina Thrice-Lost',
+		'The Gray Witness',
+		'Hara Moonclaw',
+		'Nella Brass',
+		'Vexa Coil',
+		'Velvet',
+		'Elias North',
+		'Merrit Glass',
+		'Bramble Jack',
+		'Dorrin Slate',
+		'Auntie Ember',
+		'Captain Orro Flint',
+		'Lady Seraphine Vale',
+		'King Pip IX',
+		'Constable Reed',
+		'Sable-of-the-Reeds',
+		'Magistrate Odo Penn',
+		'Old Fen',
+		'Nox Bellweather',
+		'Brother Caldus',
+		'Pella Sunward',
+		'Sister Quiet',
+		'Rill',
+		'Iri Quickchalk',
+		'Professor Holloway',
+		'Juniper Wake',
+		'Mara Venn',
+	];
+	for (const locale of ['en', 'fr']) {
+		for (const generator of generatorCatalog.listGenerators(locale, {
+			visibility: 'internal',
+		}).filter(candidate => candidate.id.startsWith('background-'))) {
+			for (const entry of generator.entries) {
+				const serializedEntry = JSON.stringify(entry);
+				assert.doesNotMatch(serializedEntry, /remembered as\b/i);
+				assert.doesNotMatch(serializedEntry, /sous le nom\b/i);
+				for (const name of removedNames) {
+					assert.equal(
+						containsWholePhrase(serializedEntry, name),
+						false,
+						`${locale}/${generator.id}/${entry.id} embeds ${name}`,
+					);
+				}
+			}
+		}
+	}
+});
+
+function containsWholePhrase(text, phrase) {
+	const escapedPhrase = phrase.replace(/[.*+?^${}()|[\\]\\]/g, '\\$&');
+	return new RegExp(`(?:^|[^A-Za-z])${escapedPhrase}(?:$|[^A-Za-z])`, 'i')
+		.test(text);
+}
+
+test('removed background names remain available through the name generator', () => {
+	const expectedNames = [
+		'Tomas Rook',
+		'Kesh of Seven Knives',
+		'Mina Thrice-Lost',
+		'The Gray Witness',
+		'Hara Moonclaw',
+		'Nella Brass',
+		'Vexa Coil',
+		'Velvet',
+		'Elias North',
+		'Merrit Glass',
+		'Bramble Jack',
+		'Dorrin Slate',
+		'Auntie Ember',
+		'Captain Orro Flint',
+		'Lady Seraphine Vale',
+		'King Pip IX',
+		'Constable Reed',
+		'Sable-of-the-Reeds',
+		'Magistrate Odo Penn',
+		'Old Fen',
+		'Nox Bellweather',
+		'Brother Caldus',
+		'Pella Sunward',
+		'Sister Quiet',
+		'Rill',
+		'Iri Quickchalk',
+		'Professor Holloway',
+		'Juniper Wake',
+		'Mara Venn',
+	];
+	for (const locale of ['en', 'fr']) {
+		const names = generatorCatalog.getGenerator('name', locale).entries.map(entry => (
+			`${entry.fields.FirstName} ${entry.fields.LastName}`
+		));
+		for (const expectedName of expectedNames) {
+			assert.equal(
+				names.some(name => (
+					name === expectedName
+					|| name.startsWith(`${expectedName} `)
+				)),
+				true,
+				`${locale} name generator is missing ${expectedName}`,
+			);
+		}
+	}
+});
+
 test('generator and background autocomplete expose stable public values', () => {
 	const publicValues = getCommandOptionValues('generator-categories', 'fr');
 	const publicIds = new Set(

@@ -99,25 +99,25 @@
       }
     },
     {
-      "id": "decomposed-constable-reed",
+      "id": "decomposed-magical-crime-constable",
       "fields": {
-        "Appearance": "A distinctive figure remembered as Constable Reed.",
+        "Appearance": "A village officer's case files concern magical crimes that local law refuses to acknowledge.",
         "Backstory": "an honest village officer overwhelmed by crimes involving magic that local law does not acknowledge.",
         "Goals": "Turn this unusual history toward a self-directed future."
       }
     },
     {
-      "id": "decomposed-sable-of-the-reeds",
+      "id": "decomposed-deliberate-marshscale-diplomat",
       "fields": {
-        "Appearance": "A distinctive figure remembered as Sable-of-the-Reeds.",
+        "Appearance": "A marsh diplomat pauses deliberately, weighing every answer before speaking.",
         "Backstory": "a marshscale diplomat who pauses for minutes before every answer and never wastes a word.",
         "Goals": "Turn this unusual history toward a self-directed future."
       }
     },
     {
-      "id": "decomposed-magistrate-odo-penn",
+      "id": "decomposed-enchanted-stamp-bureaucrat",
       "fields": {
-        "Appearance": "A distinctive figure remembered as Magistrate Odo Penn.",
+        "Appearance": "An enchanted stamp and a stack of absurd provisional laws accompany a meticulous bureaucrat.",
         "Backstory": "a bureaucrat whose enchanted stamp makes ridiculous temporary laws physically real.",
         "Goals": "Turn this unusual history toward a self-directed future."
       }

@@ -147,33 +147,33 @@
       }
     },
     {
-      "id": "decomposed-velvet",
+      "id": "decomposed-truth-for-information-broker",
       "fields": {
-        "Appearance": "A distinctive figure remembered as Velvet.",
+        "Appearance": "A mask and a ledger of embarrassing truths mark an information broker who takes no coin.",
         "Backstory": "a masked information broker who accepts embarrassing truths as payment and never asks for money.",
         "Goals": "Turn this unusual history toward a self-directed future."
       }
     },
     {
-      "id": "decomposed-elias-north",
+      "id": "decomposed-key-only-thief",
       "fields": {
-        "Appearance": "A distinctive figure remembered as Elias North.",
+        "Appearance": "A ring of unclaimed keys hangs from a charming thief's belt.",
         "Backstory": "a charming thief who steals only keys and has no idea what half of them open.",
         "Goals": "Turn this unusual history toward a self-directed future."
       }
     },
     {
-      "id": "decomposed-merrit-glass",
+      "id": "decomposed-royal-impersonator-regent",
       "fields": {
-        "Appearance": "A distinctive figure remembered as Merrit Glass.",
+        "Appearance": "Borrowed regalia and nervous courtesy mark a royal impersonator who may govern better than the absent monarch.",
         "Backstory": "a nervous royal impersonator who has been ruling more competently than the missing monarch.",
         "Goals": "Turn this unusual history toward a self-directed future."
       }
     },
     {
-      "id": "decomposed-bramble-jack",
+      "id": "decomposed-refreshment-loving-bandit",
       "fields": {
-        "Appearance": "A distinctive figure remembered as Bramble Jack.",
+        "Appearance": "A bandit leader's travel pack always includes refreshments and survey forms.",
         "Backstory": "a friendly bandit leader who insists every robbery include refreshments and a written customer survey.",
         "Goals": "Turn this unusual history toward a self-directed future."
       }

@@ -155,41 +155,41 @@
       }
     },
     {
-      "id": "decomposed-tomas-rook",
+      "id": "decomposed-mimic-detecting-baker",
       "fields": {
-        "Appearance": "A distinctive figure remembered as Tomas Rook.",
+        "Appearance": "Baker's clothing is dusted with flour, but monster-hunting gear remains close at hand.",
         "Backstory": "a retired monster hunter who now runs a bakery and recognizes the party's flour as mimic dust.",
         "Goals": "Turn this unusual history toward a self-directed future."
       }
     },
     {
-      "id": "decomposed-kesh-of-seven-knives",
+      "id": "decomposed-seven-knife-cook",
       "fields": {
-        "Appearance": "A distinctive figure remembered as Kesh of Seven Knives.",
+        "Appearance": "Cooking tools hang beside six ready knives and one carefully sheathed spare.",
         "Backstory": "an intimidating mercenary who uses six knives for cooking and fears drawing the seventh.",
         "Goals": "Turn this unusual history toward a self-directed future."
       }
     },
     {
-      "id": "decomposed-mina-thrice-lost",
+      "id": "decomposed-thrice-lost-explorer",
       "fields": {
-        "Appearance": "A distinctive figure remembered as Mina Thrice-Lost.",
+        "Appearance": "Travel-worn explorer's gear bears marks from repeated escapes from an impossible ruin.",
         "Backstory": "an explorer who has escaped the same impossible ruin three times and desperately wants to return.",
         "Goals": "Turn this unusual history toward a self-directed future."
       }
     },
     {
-      "id": "decomposed-the-gray-witness",
+      "id": "decomposed-armored-history-sketcher",
       "fields": {
-        "Appearance": "A distinctive figure remembered as The Gray Witness.",
+        "Appearance": "A silent armored observer carries charcoal and a sketchbook for recording historic events.",
         "Backstory": "a silent armored figure appearing near historic events and sketching everyone present.",
         "Goals": "Turn this unusual history toward a self-directed future."
       }
     },
     {
-      "id": "decomposed-hara-moonclaw",
+      "id": "decomposed-fair-chance-bounty-hunter",
       "fields": {
-        "Appearance": "A distinctive figure remembered as Hara Moonclaw.",
+        "Appearance": "A bounty hunter's practical gear includes a token reserved for every target's chance to speak.",
         "Backstory": "a bounty hunter who always offers targets one fair chance to explain themselves.",
         "Goals": "Turn this unusual history toward a self-directed future."
       }

@@ -75,17 +75,17 @@
       }
     },
     {
-      "id": "decomposed-lady-seraphine-vale",
+      "id": "decomposed-rebellion-balancing-noble",
       "fields": {
-        "Appearance": "Une figure singulière connue sous le nom de Lady Seraphine Vale.",
+        "Appearance": "Un noble d’une politesse irréprochable conserve des registres comparant le coût civil des deux camps d’une rébellion.",
         "Backstory": "une noble d'une politesse irréprochable qui finance les deux camps d'une rébellion afin de limiter les pertes civiles.",
         "Goals": "Transformer ce parcours singulier en un avenir choisi."
       }
     },
     {
-      "id": "decomposed-king-pip-ix",
+      "id": "decomposed-rat-king-spymaster",
       "fields": {
-        "Appearance": "Une figure singulière connue sous le nom de King Pip IX.",
+        "Appearance": "Une petite couronne, des messages codés et des cartes souterraines évoquent la cour d’un monarque des rats.",
         "Backstory": "un rat autoproclamé monarque, à la tête d'un excellent réseau d'espions sous la capitale.",
         "Goals": "Transformer ce parcours singulier en un avenir choisi."
       }
