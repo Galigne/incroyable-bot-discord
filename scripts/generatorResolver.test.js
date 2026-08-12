@@ -1,5 +1,9 @@
 const assert = require('node:assert/strict');
 const { test } = require('node:test');
+const commandRegistry = require('../commands/registry');
+const {
+	generateGeneratorResults,
+} = require('../services/generatorApplicationService');
 const { createGeneratorResolver } = require('../services/generatorResolver');
 const { selectResolvedOutput } = require('../services/referenceResolver');
 const {
@@ -8,9 +12,99 @@ const {
 	validateGeneratorRelationships,
 } = require('../services/generatorSchema');
 const {
+	createGeneratorBatchResponse,
 	createGeneratedEmbed,
 	createGeneratorResponse,
 } = require('../util/generatorResponses');
+
+test('generator batches call the single-result resolver independently', () => {
+	const calls = [];
+	const generated = { generatorId: 'fixture', entryId: 'same' };
+	const results = generateGeneratorResults(
+		'fixture',
+		'en',
+		{ count: 3, modifier: 'fixture_modifier' },
+		{
+			generate(...args) {
+				calls.push(args);
+				return generated;
+			},
+		},
+	);
+
+	assert.equal(results.length, 3);
+	assert.deepEqual(results, [generated, generated, generated]);
+	assert.equal(calls.length, 3);
+	assert.deepEqual(calls, [
+		['fixture', 'en', { modifier: 'fixture_modifier' }],
+		['fixture', 'en', { modifier: 'fixture_modifier' }],
+		['fixture', 'en', { modifier: 'fixture_modifier' }],
+	]);
+	for (const count of [0, 11, 1.5]) {
+		assert.throws(
+			() => generateGeneratorResults('fixture', 'en', { count }, {
+				generate: () => generated,
+			}),
+			/Generator count must be an integer from 1 to 10/,
+		);
+	}
+});
+
+test('/gen count uses one embed per result while keeping modifiers with their result', () => {
+	const results = Array.from({ length: 10 }, (_, index) => ({
+		generatorName: 'Quest',
+		outputType: index % 2 === 0 ? 'value' : 'fields',
+		value: `Prompt ${index + 1}`,
+		displayFields: { name: `Entry ${index + 1}` },
+		modifiers: index === 0
+			? [{
+				generatorName: 'Quest modifiers',
+				outputType: 'fields',
+				displayFields: { name: 'Urgent', description: 'Act now.' },
+				modifiers: [],
+			}]
+			: [],
+	}));
+	const response = createGeneratorBatchResponse(results, 'quest', 'en');
+
+	assert.equal(response.embeds.length, 10);
+	assert.deepEqual(response.embeds.map(embed => embed.data.title), [
+		...Array.from({ length: 10 }, (_, index) => `Result ${index + 1}/10 — Quest`),
+	]);
+	assert.match(response.embeds[0].data.fields[0].name, /Generated modifier Quest modifiers/);
+	assert.ok(response.embeds.every(embed => (
+		(embed.data.fields ?? []).length <= 25
+		&& (embed.data.fields ?? []).every(field => field.value.length <= 1_024)
+	)));
+});
+
+test('/gen count is wired through the command runtime', async () => {
+	let response;
+	await commandRegistry.getRuntimeCommands().get('gen').execute({
+		config: { locale: 'en' },
+		interaction: {
+			options: {
+				getInteger: name => name === 'count' ? 2 : null,
+				getString: (name, required) => {
+					if (name === 'category') {
+						return 'name';
+					}
+					if (required) {
+						throw new Error(`Missing required option ${name}.`);
+					}
+					return null;
+				},
+			},
+			reply: async payload => {
+				response = payload;
+			},
+		},
+	});
+
+	assert.equal(response.embeds.length, 2);
+	assert.match(response.embeds[0].data.title, /Result 1\/2/);
+	assert.match(response.embeds[1].data.title, /Result 2\/2/);
+});
 
 test('inline references resolve text, structured display, explicit fields, and provenance', () => {
 	const catalogs = createLocalizedCatalogs();

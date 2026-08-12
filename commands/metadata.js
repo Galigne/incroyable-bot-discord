@@ -111,6 +111,13 @@ const COMMAND_METADATA = [
 				},
 			},
 			{
+				name: 'count',
+				type: 'integer',
+				descriptionKey: 'rpg.gen.countOption',
+				minValue: 1,
+				maxValue: 10,
+			},
+			{
 				name: 'modifier',
 				type: 'string',
 				descriptionKey: 'rpg.gen.modifierOption',
@@ -119,6 +126,7 @@ const COMMAND_METADATA = [
 		],
 		examples: [
 			'/gen category:<category>',
+			'/gen category:<category> count:<2-10>',
 			'/gen category:<category> modifier:<modifier>',
 		],
 		help: {

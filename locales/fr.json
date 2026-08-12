@@ -142,12 +142,14 @@
       "description": "Générer une inspiration (rôle MJ configuré ou propriétaire du serveur)",
       "schemaDescription": "Générer une inspiration pour le MJ dans la catégorie choisie",
       "categoryOption": "Catégorie de génération",
+      "countOption": "Nombre de résultats indépendants à générer ; 1 par défaut",
       "modifierOption": "Source de modificateur facultative configurée pour la catégorie choisie",
       "unknownCategory": "Catégorie de génération inconnue : **{{category}}**. Utilisez `/help command:gen` pour consulter les détails.",
       "invalidModifier": "La source de modificateur **{{modifier}}** n'est pas configurée pour la catégorie **{{category}}**.",
       "title": "{{category}} — résultat généré",
+      "batchResultTitle": "Résultat {{index}}/{{count}} — {{category}}",
       "modifierTitle": "Modificateur généré : {{category}}",
-      "behavior": "Résout un résultat pondéré depuis le générateur public localisé choisi, puis affiche chaque modificateur automatique configuré comme un résultat distinct. Les références intégrées et les relations de modificateurs partagent une profondeur maximale de quatre et conservent la provenance technique. La source de modificateur facultative doit être déclarée par la catégorie choisie ; la sélectionner la génère une fois, quelle que soit sa probabilité automatique."
+      "behavior": "Résout un résultat pondéré depuis le générateur public localisé choisi, puis affiche chaque modificateur automatique configuré comme un résultat distinct. Le nombre facultatif génère de 1 à 10 résultats indépendants dans une seule réponse ; sa valeur par défaut est 1 et les doublons sont autorisés. Les références intégrées et les relations de modificateurs partagent une profondeur maximale de quatre et conservent la provenance technique. La source de modificateur facultative doit être déclarée par la catégorie choisie ; la sélectionner la génère une fois par résultat, quelle que soit sa probabilité automatique."
     },
     "genChar": {
       "description": "Générer un personnage (rôle MJ configuré ou propriétaire du serveur)",

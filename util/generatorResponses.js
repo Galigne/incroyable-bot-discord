@@ -63,6 +63,94 @@ function createGeneratorResponse(
 	};
 }
 
+function createGeneratorBatchResponse(
+	results,
+	requestedCategory,
+	locale = 'en',
+	requestedModifier,
+) {
+	const firstResult = results.find(Boolean);
+	if (!firstResult || results.some(result => !result)) {
+		return createGeneratorResponse(
+			null,
+			requestedCategory,
+			locale,
+			requestedModifier,
+		);
+	}
+	return {
+		embeds: results.map((result, index) => (
+			createGeneratorBatchEmbed(result, locale, index + 1, results.length)
+		)),
+	};
+}
+
+function createGeneratorResultsResponse(
+	results,
+	requestedCategory,
+	locale = 'en',
+	requestedModifier,
+) {
+	if (results.length === 1) {
+		return createGeneratorResponse(
+			results[0],
+			requestedCategory,
+			locale,
+			results[0] ? requestedModifier : undefined,
+		);
+	}
+	return createGeneratorBatchResponse(
+		results,
+		requestedCategory,
+		locale,
+		results.every(Boolean) ? requestedModifier : undefined,
+	);
+}
+
+function createGeneratorBatchEmbed(result, locale, index, count) {
+	const embed = new EmbedBuilder()
+		.setTitle(t(locale, 'rpg.gen.batchResultTitle', {
+			category: result.generatorName,
+			count,
+			index,
+		}))
+		.setColor('#FFD700');
+	if (result.outputType === 'fields') {
+		embed.addFields(
+			Object.entries(result.displayFields).map(([name, value]) => ({
+				name: getGeneratorFieldLabel(name, locale),
+				value: String(value),
+			})),
+		);
+	}
+	else {
+		embed.setDescription(result.value);
+	}
+	for (const modifier of result.modifiers ?? []) {
+		addBatchModifier(embed, modifier, locale);
+	}
+	return embed;
+}
+
+function addBatchModifier(embed, modifier, locale) {
+	const value = modifier.outputType === 'fields'
+		? Object.entries(modifier.displayFields ?? {})
+			.map(([name, fieldValue]) => (
+				`**${getGeneratorFieldLabel(name, locale)}:** ${fieldValue}`
+			))
+			.join('\n')
+		: String(modifier.value);
+	embed.addFields({
+		name: t(locale, 'rpg.gen.modifierTitle', {
+			category: modifier.generatorName,
+		}),
+		value,
+	});
+	for (const nestedModifier of modifier.modifiers ?? []) {
+		addBatchModifier(embed, nestedModifier, locale);
+	}
+}
+
 function createGeneratedEmbed(result, locale = 'en', options = {}) {
 	const embed = new EmbedBuilder()
 		.setTitle(t(
@@ -100,6 +188,8 @@ function getGeneratorFieldLabel(field, locale) {
 }
 
 module.exports = {
+	createGeneratorBatchResponse,
 	createGeneratedEmbed,
 	createGeneratorResponse,
+	createGeneratorResultsResponse,
 };

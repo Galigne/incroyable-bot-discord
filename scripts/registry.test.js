@@ -223,6 +223,27 @@ test('registry exposes autocomplete, option, and choice metadata', async () => {
 	]);
 });
 
+test('/gen exposes an optional count from 1 through 10', () => {
+	const gen = commandRegistry.getCommand('gen');
+	const count = gen.options.find(option => option.name === 'count');
+	assert.deepEqual(
+		{
+			name: count.name,
+			type: count.type,
+			minValue: count.minValue,
+			maxValue: count.maxValue,
+			required: count.required,
+		},
+		{
+			name: 'count',
+			type: 'integer',
+			minValue: 1,
+			maxValue: 10,
+			required: undefined,
+		},
+	);
+});
+
 test('handler modules no longer duplicate command definitions', () => {
 	for (const metadata of COMMAND_METADATA.filter(command => command.handler)) {
 		const handler = require(`../commands/${metadata.handler.slice(2)}`);

@@ -142,12 +142,14 @@
       "description": "Generate GM inspiration (configured DM role or server owner)",
       "schemaDescription": "Generate GM inspiration from a chosen category",
       "categoryOption": "Generator category",
+      "countOption": "Number of independent results to generate; defaults to 1",
       "modifierOption": "Optional modifier source configured for the selected category",
       "unknownCategory": "Unknown generator category: **{{category}}**. Use `/help command:gen` for command details.",
       "invalidModifier": "Modifier source **{{modifier}}** is not configured for category **{{category}}**.",
       "title": "Generated {{category}}",
+      "batchResultTitle": "Result {{index}}/{{count}} — {{category}}",
       "modifierTitle": "Generated modifier {{category}}",
-      "behavior": "Resolves one weighted result from the chosen localized public generator, then displays each configured automatic modifier as a separate result. Inline references and modifier relationships share a maximum nesting depth of four and preserve technical provenance. The optional modifier source must be declared by the selected category; choosing it generates it once regardless of its automatic percentage."
+      "behavior": "Resolves one weighted result from the chosen localized public generator, then displays each configured automatic modifier as a separate result. The optional count generates 1 to 10 independent results in one response; it defaults to 1 and duplicate results are allowed. Inline references and modifier relationships share a maximum nesting depth of four and preserve technical provenance. The optional modifier source must be declared by the selected category; choosing it generates it once per result regardless of its automatic percentage."
     },
     "genChar": {
       "description": "Generate a random character (configured DM role or server owner)",
