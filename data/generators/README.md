@@ -8,6 +8,22 @@ recursive. The catalog loads both locale trees as one candidate and rejects a
 missing file, duplicate ID, invalid relationship, or structural mismatch instead
 of falling back to English.
 
+## Content philosophy
+
+Generators are tools for GM inspiration, not automatic story writers. Prefer
+reusable concepts, archetypes, and evocative details that still allow a
+substantially different interpretation when the same entry is generated again.
+Leave meaningful creative decisions to the GM, and avoid unnecessary fixed
+personal history, motives, identity, relationships, or consequences. Concise
+content is preferable when extra detail would only make an entry more specific
+rather than more useful.
+
+Use references to combine building blocks selectively; they should not routinely
+assemble complete characters, locations, encounters, or scenarios automatically.
+Keep independent concepts independent when random combination can produce more
+varied results. These are authoring principles for the existing generator-v2
+catalogs and resolver, not additional schema or runtime requirements.
+
 ## Common envelope and visibility
 
 ```json

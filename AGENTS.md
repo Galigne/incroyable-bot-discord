@@ -580,6 +580,18 @@ The complete production design is documented in
 `data/generators/GENERATOR_ARCHITECTURE.md`; catalog-authoring details live in
 `data/generators/README.md`.
 
+Generators are tools for GM inspiration, not automatic story writers. Author
+entries primarily as reusable concepts, archetypes, and evocative details, so a
+repeat result can still support a substantially different interpretation. Leave
+meaningful creative decisions to the GM; avoid unnecessary fixed personal
+history, motives, identity, relationships, or consequences; and prefer concise
+content when added detail would only make an entry more specific rather than
+more useful. References should not routinely assemble complete characters,
+locations, encounters, or scenarios automatically. Keep independent concepts
+independent when their random combination can create more varied results. This
+guidance describes how to author the existing generator-v2 catalogs and does not
+introduce runtime requirements.
+
 Generator schema v2 files are discovered recursively under `data/generators/en/`
 and `data/generators/fr/`. The French catalog must contain a structurally compatible
 counterpart for every English relative path; a missing or incompatible counterpart
