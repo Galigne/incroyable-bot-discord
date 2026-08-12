@@ -8,22 +8,25 @@ const editableAliases = new Map();
 const SECTION_IDS = Object.freeze([
 	'identity',
 	'level',
+	'resources',
 	'status',
 	'statistics',
 	'rules',
 	'traits',
-	'modifiers',
 	'gear',
 ]);
 
 addSection('identity', 'multi', ['identity.name', 'identity.description']);
 addSection('level', 'scalar', ['level.value']);
+addSection('resources', 'multi', [
+	'resources.hp',
+	'resources.ar',
+	'resources.ap',
+	'resources.md',
+]);
 addSection('status', 'multi', [
-	'status.hp',
-	'status.ar',
-	'status.ap',
-	'status.md',
 	'status.effects',
+	'status.modifiers',
 ]);
 addSection(
 	'statistics',
@@ -33,7 +36,6 @@ addSection(
 );
 addSection('rules', 'multiline', ['rules.value']);
 addSection('traits', 'multiline', ['traits.value']);
-addSection('modifiers', 'multiline', ['modifiers.value']);
 addSection('gear', 'multi', [
 	'gear.equipment',
 	'gear.inventory',
@@ -74,13 +76,13 @@ add('traits.value', 'creature.fields.traits', stored(['traits'], 'text', {
 	multiline: true,
 	paragraph: true,
 }));
-add('modifiers.value', 'creature.fields.modifiers', stored(
-	['modifiers'],
+add('status.effects', 'character.fields.statusEffects', stored(
+	['status', 'effects'],
 	'text',
 	{ described: true, multiline: true, paragraph: true },
 ));
-add('status.effects', 'character.fields.statusEffects', stored(
-	['status', 'effects'],
+add('status.modifiers', 'creature.fields.modifiers', stored(
+	['status', 'modifiers'],
 	'text',
 	{ described: true, multiline: true, paragraph: true },
 ));
@@ -107,22 +109,22 @@ add('gear.encumbrance.max', 'character.fields.maximumEncumbrance', stored(
 ));
 
 for (const resourceId of ['hp', 'ar', 'ap', 'md']) {
-	add(`status.${resourceId}`, `character.resources.${resourceId}.name`, {
+	add(`resources.${resourceId}`, `character.resources.${resourceId}.name`, {
 		abbreviationKey: `character.resources.${resourceId}.abbreviation`,
 		aliases: [`resources.${resourceId}`, resourceId, resourceId.toUpperCase()],
 		resourceId,
 		...pairInput([
-			`status.${resourceId}.current`,
-			`status.${resourceId}.max`,
+			`resources.${resourceId}.current`,
+			`resources.${resourceId}.max`,
 		]),
 	});
 	for (const value of ['current', 'max']) {
 		add(
-			`status.${resourceId}.${value}`,
+			`resources.${resourceId}.${value}`,
 			value === 'current'
 				? 'character.fields.currentResource'
 				: 'character.fields.maximumResource',
-			stored(['status', resourceId, value], 'number', { resourceId }),
+			stored(['resources', resourceId, value], 'number', { resourceId }),
 		);
 	}
 }

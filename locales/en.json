@@ -159,7 +159,7 @@
       "backgroundOption": "Character background; omitted means a random background",
       "levelChoice": "Level {{level}}",
       "success": "Generated character **{{name}}** with key `{{key}}`.",
-      "behavior": "Creates and saves a complete random character under a unique CharacterKey. Level must be 1–10 and is random when omitted; background is also optional and random by default. The public `background` router selects one broad category, then the generic v3 inline resolver independently selects an archetype and a reusable physical description. Backstory and goals start empty. A shared statistical profile allocates statistics, while resources, RULEs, armor, weapons, inventory, gold, and possible status effects follow the selected level and game rules. Encumbrance remains manual and defaults to 0 / 0."
+      "behavior": "Creates and saves a complete random character under a unique CharacterKey. Level must be 1–10 and is random when omitted; background is also optional and random by default. The public `background` router selects one broad category, then the generic v3 inline resolver independently selects an archetype and a reusable physical description. Backstory and goals start empty. A shared statistical profile allocates statistics, while resources, RULEs, armor, weapons, inventory, gold, temporary status effects, and persistent modifiers from the character pool follow the selected level and game rules. Encumbrance remains manual and defaults to 0 / 0."
     },
     "genCreature": {
       "description": "Generate a creature (configured DM role or server owner)",
@@ -169,14 +169,14 @@
       "levelOption": "Creature level; randomly 1 to 10 when omitted",
       "levelChoice": "Level {{level}}",
       "success": "Generated **{{name}}** and saved it with CreatureKey `{{key}}`.",
-      "behavior": "Atomically creates and saves one complete creature by resolving an optional stable type entry from the public `creature` catalog, or randomly selecting one when type is omitted, then following its referenced detail generator. The CreatureKey is globally unique and level must be 1–10 or is random when omitted. Shared statistical profiles allocate statistics and derive resources; RULEs are granted only by explicit source references. Initial status effects and modifiers come from the same descriptive catalogs available to characters, while equipment, inventory, natural armor, and armor metadata are resolved and persisted with stable provenance. Encumbrance remains manual and defaults to 0 / 0. Only a configured DM or the server owner may use this command."
+      "behavior": "Atomically creates and saves one complete creature by resolving an optional stable type entry from the public `creature` catalog, or randomly selecting one when type is omitted, then following its referenced detail generator. The CreatureKey is globally unique and level must be 1–10 or is random when omitted. Shared statistical profiles allocate statistics and derive resources; RULEs are granted only by explicit source references. Temporary status effects come from the status-effect catalog, while persistent modifiers come only from the creature modifier pool. Equipment, inventory, natural armor, and armor metadata are resolved and persisted with stable provenance. Encumbrance remains manual and defaults to 0 / 0. Only a configured DM or the server owner may use this command."
     },
     "get": {
       "description": "Display an entity summary or one compatible detailed field",
       "entityOption": "Character or creature to display",
       "fieldOption": "Optional detailed field",
       "unknownField": "That field is not available for this entity: **{{field}}**. Use `/help command:get` for command details.",
-      "behavior": "Without `field`, posts the public entity summary. Character fields use `name`, `level`, `status`, `statistics`, `rules`, `talents`, `gear`, `race`, `background`, `personality`, and `modifiers`, in that order. Creature fields use the independent order `identity`, `level`, `status`, `statistics`, `rules`, `traits`, `modifiers`, and `gear`. Status effects and descriptive modifiers are available to both entity types. Autocomplete shows only fields compatible with the selected EntityKey."
+      "behavior": "Without `field`, posts the public entity summary. Character fields use `name`, `level`, `resources`, `status`, `statistics`, `rules`, `talents`, `gear`, `race`, `background`, and `personality`, in that order. Creature fields use the independent order `identity`, `level`, `resources`, `status`, `statistics`, `rules`, `traits`, and `gear`. The `resources` view shows HP, AR, AP, and MD. The `status` view shows separate Status Effects and Modifiers subsections, omitting empty lists. Autocomplete shows only fields compatible with the selected EntityKey."
     },
     "heal": {
       "description": "Restore current HP, armor, or both to a percentage of maximum",
@@ -213,7 +213,7 @@
       "description": "Set one compatible entity field group in a prefilled form",
       "entityOption": "Character or creature to edit",
       "fieldOption": "Field to edit",
-      "behavior": "Opens one private modal prefilled for the selected entity type. Character groups retain their established order with `modifiers` appended; creature groups use `identity`, `level`, `status`, `statistics`, `rules`, `traits`, `modifiers`, and `gear`, with identity editing Name and Description. Descriptive modifiers use one `Name:Description` record per line for both types. Creature traits and creature status effects use that same record format, while character status effects retain their compatible plain line-based format. Statistics, RULE, gear, resources, and encumbrance keep their compatible shared formats. EntityKey, type, schema metadata, source IDs, natural-armor metadata, and provenance are never editable. Every group is validated and saved atomically as one undoable operation. Only the entity creator, a DM, or the server owner may edit it."
+      "behavior": "Opens one private modal prefilled for the selected entity type. Character groups use `name`, `level`, `resources`, `status`, `statistics`, `rules`, `talents`, `gear`, `race`, `background`, and `personality`; creature groups use `identity`, `level`, `resources`, `status`, `statistics`, `rules`, `traits`, and `gear`. The `resources` modal has four short current:max inputs for HP, AR, AP, and MD. The `status` modal has independent multiline Name:Description inputs for Status Effects and Modifiers. EntityKey, type, schema metadata, source IDs, natural-armor metadata, and provenance are never editable. Every group is validated and saved atomically as one undoable operation. Only the entity creator, a DM, or the server owner may edit it."
     },
     "undo": {
       "description": "Restore the newest retained pre-change entity snapshot",
@@ -285,6 +285,7 @@
       "description": "Description",
       "archetype": "Archetype",
       "level": "Level",
+      "resources": "Resources",
       "status": "Status",
       "naturalArmor": "Natural armor",
       "statistics": "Statistics",
@@ -309,6 +310,7 @@
       "firstName": "First name",
       "lastName": "Last name",
       "level": "Level",
+      "resources": "Resources",
       "race": "Race",
       "raceName": "Race name",
       "racePhysicalDescription": "Race physical description",

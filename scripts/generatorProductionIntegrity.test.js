@@ -16,7 +16,8 @@ test('production catalogs exclude retired roots and obsolete mechanical payloads
 	assert.doesNotMatch(serialized, /"Encumbrance"/i);
 	assert.doesNotMatch(serialized, /challengeRating|fixedStatistics|statOverrides/);
 	for (const modifier of all.filter(generator => (
-		generator.id === 'modifier' || generator.id.startsWith('site_modifier_')
+		['modifier_character', 'modifier_creature'].includes(generator.id)
+			|| generator.id.startsWith('site_modifier_')
 	))) {
 		assert.equal(modifier.visibility, 'internal');
 		assert.ok(modifier.entries.every(entry => (

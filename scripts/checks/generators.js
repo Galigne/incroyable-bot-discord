@@ -60,7 +60,7 @@ module.exports = function createGeneratorChecks(context) {
 					)
 					|| (
 						(
-							generator.id === 'modifier'
+							['modifier_character', 'modifier_creature'].includes(generator.id)
 							|| generator.id.startsWith('site_modifier_')
 						)
 						&& !Object.hasOwn(generator, 'kind')
@@ -298,14 +298,21 @@ function checkCreatureGenerators(errors, generatorCatalog) {
 		}
 	}
 	const statusEffects = generatorCatalog.getGenerator('status_effect');
-	const modifier = generatorCatalog.getGenerator('modifier');
+	const characterModifiers = generatorCatalog.getGenerator('modifier_character');
+	const creatureModifiers = generatorCatalog.getGenerator('modifier_creature');
 	if (
 		statusEffects?.entrySchema.type !== 'fields'
 		|| statusEffects.entries.some(entry => (
 			!entry.fields?.name || !entry.fields.description
 		))
-		|| Object.hasOwn(modifier ?? {}, 'kind')
-		|| modifier?.visibility !== 'internal'
+		|| [characterModifiers, creatureModifiers].some(generator => (
+			Object.hasOwn(generator ?? {}, 'kind')
+			|| generator?.visibility !== 'internal'
+			|| generator.entrySchema.type !== 'fields'
+			|| generator.entries.some(entry => (
+				!entry.fields?.name || !entry.fields.description
+			))
+		))
 		|| JSON.stringify(generatorCatalog.getGenerator('region').modifiers)
 			!== JSON.stringify({ site_modifier_all: 20 })
 		|| JSON.stringify(generatorCatalog.getGenerator('building').modifiers)
@@ -316,7 +323,7 @@ function checkCreatureGenerators(errors, generatorCatalog) {
 				site_modifier_building: 20,
 			})
 	) {
-		errors.push('Status effects and modifiers are not shared generation catalogs.');
+		errors.push('Status effects and character/creature modifiers are not valid generation catalogs.');
 	}
 }
 

@@ -44,25 +44,25 @@ const {
 
 test('damage preserves AR-first and piercing behavior', () => {
 	const character = createCharacterFixture();
-	character.status.hp.current = 100;
-	character.status.ar.current = 30;
+	character.resources.hp.current = 100;
+	character.resources.ar.current = 30;
 
 	assert.deepEqual(dealDamage(character, 40), {
 		arDamage: 30,
 		hpDamage: 10,
 		piercing: false,
 	});
-	assert.equal(character.status.ar.current, 0);
-	assert.equal(character.status.hp.current, 90);
+	assert.equal(character.resources.ar.current, 0);
+	assert.equal(character.resources.hp.current, 90);
 
-	character.status.ar.current = 20;
+	character.resources.ar.current = 20;
 	assert.deepEqual(dealDamage(character, 15, true), {
 		arDamage: 0,
 		hpDamage: 15,
 		piercing: true,
 	});
-	assert.equal(character.status.ar.current, 20);
-	assert.equal(character.status.hp.current, 75);
+	assert.equal(character.resources.ar.current, 20);
+	assert.equal(character.resources.hp.current, 75);
 	assert.throws(
 		() => dealDamage(character, 0),
 		error => error.code === 'INVALID_CHARACTER_EDIT',
@@ -71,10 +71,10 @@ test('damage preserves AR-first and piercing behavior', () => {
 
 test('healing restores HP, armor, or both with shared rounding', () => {
 	const character = createCharacterFixture();
-	character.status.hp = { current: 1, max: 101 };
-	character.status.ar = { current: 0, max: 33 };
-	character.status.ap = { current: 0, max: 6 };
-	character.status.md = { current: 0, max: 7.5 };
+	character.resources.hp = { current: 1, max: 101 };
+	character.resources.ar = { current: 0, max: 33 };
+	character.resources.ap = { current: 0, max: 6 };
+	character.resources.md = { current: 0, max: 7.5 };
 
 	assert.deepEqual(restoreResource(character, 'hp', 50), { current: 51, max: 101 });
 	assert.deepEqual(restoreResource(character, 'ar', 25), { current: 8, max: 33 });
@@ -84,15 +84,15 @@ test('healing restores HP, armor, or both with shared rounding', () => {
 	assert.deepEqual(restoreHealingResources(character, 'armor', 50), [
 		{ resource: 'ar', previous: 8, current: 17, max: 33 },
 	]);
-	character.status.hp.current = 10;
-	character.status.ar.current = 5;
+	character.resources.hp.current = 10;
+	character.resources.ar.current = 5;
 	assert.deepEqual(restoreHealingResources(character, 'both', 50), [
 		{ resource: 'hp', previous: 10, current: 51, max: 101 },
 		{ resource: 'ar', previous: 5, current: 17, max: 33 },
 	]);
 	assert.equal(calculateRestoredResourceValue(101, 100), 101);
-	assert.equal(character.status.hp.current <= character.status.hp.max, true);
-	assert.equal(character.status.ar.current <= character.status.ar.max, true);
+	assert.equal(character.resources.hp.current <= character.resources.hp.max, true);
+	assert.equal(character.resources.ar.current <= character.resources.ar.max, true);
 
 	for (const invalidPercentage of [Number.NaN, Number.POSITIVE_INFINITY, -0.01, 100.01]) {
 		assert.throws(
@@ -106,8 +106,8 @@ test('healing restores HP, armor, or both with shared rounding', () => {
 	);
 
 	resetTurnResources(character);
-	assert.equal(character.status.ap.current, 6);
-	assert.equal(character.status.md.current, 7.5);
+	assert.equal(character.resources.ap.current, 6);
+	assert.equal(character.resources.md.current, 7.5);
 });
 
 test('resource, armor, AP, and movement formulas preserve generated values', () => {
@@ -239,7 +239,7 @@ test('statistical profiles preserve minimums, maximums, weights, and legal remai
 	assert.ok(calculateStatCost(remainder) < calculateStatBudget(1));
 });
 
-test('character validation preserves legacy save normalization and AP constraints', () => {
+test('character validation preserves current save normalization and AP constraints', () => {
 	assert.deepEqual(copyStringList(['valid', 2, null]), ['valid']);
 	assert.deepEqual(copyTalentList('First\r\n- Second\n* Third\n\n'), [
 		'First',
@@ -265,7 +265,7 @@ test('character validation preserves legacy save normalization and AP constraint
 
 	const character = createCharacterFixture();
 	assert.throws(
-		() => validateActionPointEdit(character, ['status', 'ap', 'max'], 11),
+		() => validateActionPointEdit(character, ['resources', 'ap', 'max'], 11),
 		error => error.code === 'INVALID_CHARACTER_EDIT',
 	);
 });
@@ -279,7 +279,7 @@ test('blank characters and hydrated saves use talent arrays', () => {
 		'Cold Immunity — Ordinary cold cannot freeze the character.',
 	];
 	const hydratedCharacter = Character.fromSave({
-		schemaVersion: 2,
+		schemaVersion: 3,
 		creatorId: 'creator',
 		key: 'Array.Save',
 		talents: savedTalents,
@@ -288,7 +288,7 @@ test('blank characters and hydrated saves use talent arrays', () => {
 	assert.notEqual(hydratedCharacter.talents, savedTalents);
 
 	const legacyCharacter = Character.fromSave({
-		schemaVersion: 1,
+		schemaVersion: 3,
 		creatorId: 'creator',
 		key: 'Legacy.Save',
 		talents: [
@@ -310,7 +310,7 @@ test('character encumbrance defaults each absent value and preserves explicit va
 	assert.deepEqual(blankCharacter.gear.encumbrance, { current: 0, max: 0 });
 
 	const missingEncumbrance = Character.fromSave({
-		schemaVersion: 2,
+		schemaVersion: 3,
 		creatorId: 'creator',
 		key: 'Missing.Encumbrance',
 		statistics: { constitution: 20 },
@@ -318,7 +318,7 @@ test('character encumbrance defaults each absent value and preserves explicit va
 	assert.deepEqual(missingEncumbrance.gear.encumbrance, { current: 0, max: 0 });
 
 	const missingMaximum = Character.fromSave({
-		schemaVersion: 2,
+		schemaVersion: 3,
 		creatorId: 'creator',
 		gear: { encumbrance: { current: 3 } },
 		key: 'Missing.Maximum.Encumbrance',
@@ -327,7 +327,7 @@ test('character encumbrance defaults each absent value and preserves explicit va
 	assert.deepEqual(missingMaximum.gear.encumbrance, { current: 3, max: 0 });
 
 	const missingCurrent = Character.fromSave({
-		schemaVersion: 2,
+		schemaVersion: 3,
 		creatorId: 'creator',
 		gear: { encumbrance: { max: 8 } },
 		key: 'Missing.Current.Encumbrance',
@@ -336,7 +336,7 @@ test('character encumbrance defaults each absent value and preserves explicit va
 	assert.deepEqual(missingCurrent.gear.encumbrance, { current: 0, max: 8 });
 
 	const explicitEncumbrance = Character.fromSave({
-		schemaVersion: 2,
+		schemaVersion: 3,
 		creatorId: 'creator',
 		gear: { encumbrance: { current: 4, max: 11 } },
 		key: 'Explicit.Encumbrance',
@@ -383,16 +383,18 @@ test('character modifiers attach without changing generated base state', () => {
 				},
 				provenance: [{
 					type: 'entry',
-					generatorId: 'modifier',
+					generatorId: 'modifier_character',
 					entryId: 'scarred',
 				}],
 			}),
 		},
 	});
-	const { modifiers: plainModifiers, ...plainBase } = structuredClone(plain);
-	const { modifiers: modifiedModifiers, ...modifiedBase } = structuredClone(modified);
-	assert.deepEqual(plainModifiers, []);
-	assert.equal(modifiedModifiers[0].entryId, 'scarred');
+	const plainBase = structuredClone(plain);
+	const modifiedBase = structuredClone(modified);
+	assert.deepEqual(plainBase.status.modifiers, []);
+	assert.equal(modifiedBase.status.modifiers[0].entryId, 'scarred');
+	plainBase.status = { ...plainBase.status, modifiers: [] };
+	modifiedBase.status = { ...modifiedBase.status, modifiers: [] };
 	assert.deepEqual(modifiedBase, plainBase);
 });
 

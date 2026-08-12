@@ -8,6 +8,7 @@ const editableAliases = new Map();
 const SECTION_IDS = Object.freeze([
 	'name',
 	'level',
+	'resources',
 	'status',
 	'statistics',
 	'rules',
@@ -16,17 +17,19 @@ const SECTION_IDS = Object.freeze([
 	'race',
 	'background',
 	'personality',
-	'modifiers',
 ]);
 
 addSection('name', 'name', 'multi', ['name.firstName', 'name.lastName']);
 addSection('level', 'level', 'scalar', ['level.value']);
+addSection('resources', 'resources', 'multi', [
+	'resources.hp',
+	'resources.ar',
+	'resources.ap',
+	'resources.md',
+]);
 addSection('status', 'status', 'multi', [
-	'status.hp',
-	'status.ar',
-	'status.ap',
-	'status.md',
 	'status.effects',
+	'status.modifiers',
 ]);
 addSection(
 	'statistics',
@@ -64,7 +67,6 @@ addSection('personality', 'personality', 'multi', [
 	'personality.traits',
 	'personality.description',
 ]);
-addSection('modifiers', 'modifiers', 'multiline', ['modifiers.value']);
 
 add('key', 'characterKey');
 add('name.firstName', 'firstName', stored(['name', 'firstName'], 'text', {
@@ -169,15 +171,16 @@ add('talents.value', 'talents', stored(['talents'], 'text', {
 	multiline: true,
 	paragraph: true,
 }));
-add('modifiers.value', 'modifiers', stored(['modifiers'], 'text', {
+add('status.effects', 'statusEffects', stored(['status', 'effects'], 'text', {
+	aliases: ['statusEffects', 'statuseffect', 'statuseffects'],
 	described: true,
 	multiline: true,
 	paragraph: true,
 }));
-add('status.effects', 'statusEffects', stored(['status', 'effects'], 'text', {
-	aliases: ['statusEffects', 'statuseffect', 'statuseffects'],
+add('status.modifiers', 'modifiers', stored(['status', 'modifiers'], 'text', {
 	multiline: true,
 	paragraph: true,
+	described: true,
 }));
 add('gear.equipment', 'equipment', stored(['gear', 'equipment'], 'text', {
 	aliases: ['equipment'],
@@ -208,22 +211,22 @@ add('gear.encumbrance.max', 'maximumEncumbrance', stored(
 ));
 
 for (const resourceId of ['hp', 'ar', 'ap', 'md']) {
-	add(`status.${resourceId}`, null, {
+	add(`resources.${resourceId}`, null, {
 		abbreviationKey: `character.resources.${resourceId}.abbreviation`,
 		aliases: [`resources.${resourceId}`, resourceId, resourceId.toUpperCase()],
 		labelKey: `character.resources.${resourceId}.name`,
 		resourceId,
 		...pairInput([
-			`status.${resourceId}.current`,
-			`status.${resourceId}.max`,
+			`resources.${resourceId}.current`,
+			`resources.${resourceId}.max`,
 		]),
 	});
 	for (const value of ['current', 'max']) {
 		add(
-			`status.${resourceId}.${value}`,
+			`resources.${resourceId}.${value}`,
 			value === 'current' ? 'currentResource' : 'maximumResource',
 			stored(
-				['status', resourceId, value],
+				['resources', resourceId, value],
 				'number',
 				{
 					aliases: [

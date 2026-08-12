@@ -7,12 +7,12 @@ const { createResourcesFromSave } = require('../services/mechanics/resources');
 const { createStats } = require('../services/mechanics/statistics');
 const {
 	CURRENT_CHARACTER_SAVE_SCHEMA_VERSION,
-	migrateCharacterSave,
+	validateCharacterSaveSchema,
 } = require('../services/characterSaveSchema');
 
 class Character {
 	static fromSave(data, characterKey = data.key) {
-		data = migrateCharacterSave(data);
+		validateCharacterSaveSchema(data);
 		const character = new Character(characterKey, data.creatorId);
 		character.name = {
 			firstName: data.name?.firstName ?? '',
@@ -39,9 +39,10 @@ class Character {
 			description: data.personality?.description ?? '',
 		};
 		character.statistics = createStats(data.statistics);
+		character.resources = createResourcesFromSave(data.resources);
 		character.status = {
-			...createResourcesFromSave(data.status),
-			effects: copyStringList(data.status?.effects),
+			effects: structuredClone(data.status?.effects ?? []),
+			modifiers: structuredClone(data.status?.modifiers ?? []),
 		};
 		character.rules = copyRules(data.rules);
 		character.talents = copyTalentList(data.talents);
@@ -53,9 +54,6 @@ class Character {
 				max: data.gear?.encumbrance?.max ?? 0,
 			},
 		};
-		character.modifiers = Array.isArray(data.modifiers)
-			? structuredClone(data.modifiers)
-			: [];
 		return character;
 	}
 
@@ -88,12 +86,15 @@ class Character {
 			description: '',
 		};
 		this.statistics = createStats();
-		this.status = {
+		this.resources = {
 			hp: { current: 100, max: 100 },
 			ar: { current: 0, max: 0 },
 			ap: { current: 4, max: 4 },
 			md: { current: 5, max: 5 },
+		};
+		this.status = {
 			effects: [],
+			modifiers: [],
 		};
 		this.rules = [];
 		this.talents = [];
@@ -105,7 +106,6 @@ class Character {
 				max: 0,
 			},
 		};
-		this.modifiers = [];
 	}
 
 	get displayName() {

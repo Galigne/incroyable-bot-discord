@@ -26,7 +26,7 @@ function getResourceChoiceLabel(locale, resourceId) {
 
 function formatCombatantResource(combatant, resourceId, locale = 'en') {
 	if (resourceId === 'ap') {
-		return formatActionPoints(combatant.status.ap, locale);
+		return formatActionPoints(combatant.resources.ap, locale);
 	}
 	const icons = PROGRESS_RESOURCE_ICONS[resourceId];
 	if (!icons) {
@@ -34,7 +34,7 @@ function formatCombatantResource(combatant, resourceId, locale = 'en') {
 	}
 	return formatProgressResource(
 		getResourceAbbreviation(locale, resourceId),
-		combatant.status[resourceId],
+		combatant.resources[resourceId],
 		icons[0],
 		icons[1],
 	);

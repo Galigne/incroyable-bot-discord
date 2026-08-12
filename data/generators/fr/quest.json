@@ -14,7 +14,7 @@
     },
     {
       "id": "hunt_modified_monster",
-      "value": "Traquer une créature identifiée comme {{ creature_monster }} après que des témoins lui ont associé le qualificatif {{ modifier }}."
+      "value": "Traquer une créature identifiée comme {{ creature_monster }} après que des témoins lui ont associé le qualificatif {{ modifier_creature }}."
     },
     {
       "id": "defend_settlement_from_faction",

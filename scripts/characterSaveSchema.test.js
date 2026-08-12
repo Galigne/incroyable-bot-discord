@@ -67,15 +67,15 @@ test('newly created characters persist the current schema version', async () => 
 		'background',
 		'personality',
 		'statistics',
+		'resources',
 		'status',
 		'rules',
 		'talents',
 		'gear',
-		'modifiers',
 	]);
-	assert.deepEqual(rawSave.modifiers, []);
 	assert.equal(Object.hasOwn(rawSave, 'firstName'), false);
-	assert.equal(Object.hasOwn(rawSave, 'resources'), false);
+	assert.deepEqual(rawSave.status, { effects: [], modifiers: [] });
+	assert.deepEqual(Object.keys(rawSave.resources), ['hp', 'ar', 'ap', 'md']);
 });
 
 test('current-version saves load successfully', async () => {
@@ -93,68 +93,22 @@ test('current-version saves load successfully', async () => {
 	assert.equal(character.name.firstName, 'Current');
 });
 
-test('version-1 saves migrate completely in memory without being rewritten', async () => {
-	const characterKey = 'Schema.Version1.Read';
-	const originalSave = await writeRawSave(characterKey, createVersion1Save(characterKey));
-
-	const character = await getCharacter(characterKey);
-
-	assert.equal(character.schemaVersion, 2);
-	assert.equal(character.displayName, 'Sable Reed');
-	assert.deepEqual(character.name, { firstName: 'Sable', lastName: 'Reed' });
-	assert.deepEqual(character.race.traits, {
-		skillBonus: '+1 to Death Rolls',
-		physicalAbility: 'Thick-Skinned',
-	});
-	assert.deepEqual(character.background, {
-		archetype: '',
-		physicalDescription: 'Stained gloves',
-		backstory: 'A discovery was stolen.',
-		goals: 'Recover it.',
-	});
-	assert.equal(character.statistics.constitution, 12);
-	assert.deepEqual(character.status.effects, ['Slowed']);
-	assert.deepEqual(character.gear, {
-		equipment: ['Intermediate armor'],
-		inventory: ['85 gold pieces'],
-		encumbrance: { current: 7, max: 10 },
-	});
-	assert.deepEqual(character.modifiers, []);
-	assert.equal(await readSaveText(characterKey), originalSave);
-});
-
-test('the first mutation of a version-1 save writes only version-2 structure', async () => {
-	const characterKey = 'Schema.Version1.Mutation';
-	await writeRawSave(characterKey, createVersion1Save(characterKey));
-
-	await updateCharacter(characterKey, () => true, character => {
-		character.name.firstName = 'Updated';
-	});
-	const rawSave = await readRawSave(characterKey);
-
-	assert.equal(rawSave.schemaVersion, 2);
-	assert.equal(rawSave.name.firstName, 'Updated');
-	assert.equal(rawSave.status.hp.current, 210);
-	assert.equal(rawSave.gear.encumbrance.current, 7);
-	for (const legacyKey of [
-		'firstName',
-		'lastName',
-		'racialTraits',
-		'appearance',
-		'backstory',
-		'goals',
-		'stats',
-		'resources',
-		'statusEffects',
-		'equipment',
-		'inventory',
-		'encumbrance',
-	]) {
-		assert.equal(Object.hasOwn(rawSave, legacyKey), false, legacyKey);
+test('unsupported previous schemas are rejected without rewriting', async () => {
+	for (const schemaVersion of [1, 2]) {
+		const characterKey = `Schema.Legacy.${schemaVersion}`;
+		const originalSave = await writeRawSave(characterKey, {
+			schemaVersion,
+			creatorId: 'creator',
+		});
+		await assert.rejects(
+			getCharacter(characterKey),
+			{ code: 'UNSUPPORTED_CHARACTER_SCHEMA_VERSION' },
+		);
+		assert.equal(await readSaveText(characterKey), originalSave);
 	}
 });
 
-test('/gen-char consumes current generator fields and persists version 2', async () => {
+test('/gen-char consumes current generator fields and persists the current schema', async () => {
 	const characterKey = 'Schema.Generated';
 	const generated = await generateCharacter(characterKey, 'creator', {
 		formatGold: gold => `${gold} gold`,
@@ -166,7 +120,7 @@ test('/gen-char consumes current generator fields and persists version 2', async
 	const nameEntry = generatorCatalog.getGenerator('name', 'en').entries[0];
 	const raceEntry = generatorCatalog.getGenerator('race', 'en').entries[0];
 
-	assert.equal(rawSave.schemaVersion, 2);
+	assert.equal(rawSave.schemaVersion, CURRENT_CHARACTER_SAVE_SCHEMA_VERSION);
 	assert.deepEqual(rawSave.name, {
 		firstName: nameEntry.fields.first_name,
 		lastName: nameEntry.fields.last_name,
@@ -183,15 +137,18 @@ test('/gen-char consumes current generator fields and persists version 2', async
 	assert.equal(rawSave.background.backstory, '');
 	assert.equal(rawSave.background.goals, '');
 	assert.ok(rawSave.statistics.constitution);
-	assert.ok(rawSave.status.hp.max);
+	assert.ok(rawSave.resources.hp.max);
 	const statusEntry = generatorCatalog.getGenerator('status_effect', 'en').entries[0];
 	assert.deepEqual(rawSave.status.effects, [
-		`${statusEntry.fields.name} — ${statusEntry.fields.description}`,
+		{
+			name: statusEntry.fields.name,
+			description: statusEntry.fields.description,
+		},
 	]);
-	assert.deepEqual(rawSave.modifiers.map(modifier => [
+	assert.deepEqual(rawSave.status.modifiers.map(modifier => [
 		modifier.generatorId,
 		modifier.entryId,
-	]), [['modifier', 'scarred']]);
+	]), [['modifier_character', 'scarred']]);
 	assert.ok(rawSave.gear.equipment.length >= 2);
 	assert.equal(rawSave.gear.inventory.length, 4);
 	assert.deepEqual(rawSave.gear.encumbrance, { current: 0, max: 0 });
@@ -349,41 +306,4 @@ async function writeRawSave(characterKey, rawSave) {
 		'utf8',
 	);
 	return serializedSave;
-}
-
-function createVersion1Save(characterKey) {
-	return {
-		schemaVersion: 1,
-		key: characterKey,
-		creatorId: 'creator',
-		firstName: 'Sable',
-		lastName: 'Reed',
-		level: 5,
-		race: {
-			name: 'Dwarf',
-			physicalDescription: 'Compact and sturdy.',
-			lore: '',
-		},
-		appearance: 'Stained gloves',
-		backstory: 'A discovery was stolen.',
-		goals: 'Recover it.',
-		personality: { traits: ['Uses proverbs'], description: '' },
-		racialTraits: {
-			skillBonus: '+1 to Death Rolls',
-			physicalAbility: 'Thick-Skinned',
-		},
-		stats: { constitution: 12, speed: 12 },
-		resources: {
-			hp: { current: 210, max: 216 },
-			ar: { current: 27, max: 54 },
-			ap: { current: 5, max: 5 },
-			md: { current: 6, max: 6 },
-		},
-		statusEffects: ['Slowed'],
-		rules: [{ name: 'Mist RULE', description: 'Creates mist.', level: 1 }],
-		talents: ['Animal Friend'],
-		equipment: ['Intermediate armor'],
-		inventory: ['85 gold pieces'],
-		encumbrance: { current: 7, max: 10 },
-	};
 }

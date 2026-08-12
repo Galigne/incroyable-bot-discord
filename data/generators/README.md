@@ -105,10 +105,10 @@ result declares the source IDs and independent percentages on its own envelope:
 ```json
 {
   "schemaVersion": 3,
-  "id": "modifier",
+  "id": "modifier_creature",
   "visibility": "internal",
   "name": "Descriptive modifiers",
-  "description": "Narrative variations shared by characters and creatures",
+  "description": "Persistent descriptive variations for generated creatures",
   "entrySchema": {
     "type": "fields",
     "required": ["name", "description"]
@@ -150,6 +150,12 @@ sources are ordinary generators: technical and mechanical-looking fields are onl
 output when displayed or explicitly selected, and never execute game behavior.
 Modifier maps are validated for known IDs, valid percentages, locale parity, and
 recursive relationships before startup or `/reload` replaces the catalog.
+
+Character generation selects only from `modifier_character`, while creature
+generation selects only from `modifier_creature`. Both pools use the same
+localized `{name, description}` entry shape and the existing independent 25%
+application policy. Temporary status conditions are separate: they come only
+from `status_effect` and are stored independently from persistent modifiers.
 
 ## Creature and character routing
 

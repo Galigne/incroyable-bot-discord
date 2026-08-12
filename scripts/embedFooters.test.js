@@ -49,13 +49,13 @@ test('/get renders every grouped section from unchanged stored properties', () =
 	character.name.firstName = 'Ada';
 	character.name.lastName = 'Lovelace';
 	character.level = 4;
-	character.status = {
+	character.resources = {
 		hp: { current: 50, max: 100 },
 		ar: { current: 5, max: 10 },
 		ap: { current: 2, max: 4 },
 		md: { current: 3, max: 6 },
 	};
-	character.status.effects = ['Inspired'];
+	character.status.effects = [{ name: 'Inspired', description: 'Temporary inspiration' }];
 	character.gear.equipment = ['Sword'];
 	character.gear.inventory = ['Potion'];
 	character.gear.encumbrance = { current: 3, max: 8 };
@@ -83,12 +83,16 @@ test('/get renders every grouped section from unchanged stored properties', () =
 		createEntityGetResponse(character, 'level', 'en').embeds[0].toJSON().description,
 		'4',
 	);
+	const resources = createEntityGetResponse(character, 'resources', 'en').embeds[0].toJSON();
+	assert.deepEqual(resources.fields.map(field => field.name), [
+		'Hit points', 'Armor rating', 'Action points', 'Movement distance',
+	]);
+	assert.match(resources.fields[0].value, /HP: \*\*50 \/ 100 \(50%\)\*\*/);
 	const status = createEntityGetResponse(character, 'status', 'en').embeds[0].toJSON();
 	assert.deepEqual(status.fields.map(field => field.name), [
-		'Hit points', 'Armor rating', 'Action points', 'Movement distance', 'Status effects',
+		'Status effects',
 	]);
-	assert.match(status.fields[0].value, /HP: \*\*50 \/ 100 \(50%\)\*\*/);
-	assert.equal(status.fields[4].value, '1. Inspired');
+	assert.equal(status.fields[0].value, '**Inspired** - Temporary inspiration');
 	assert.equal(status.fields.some(field => field.name === 'Encumbrance'), false);
 
 	const gear = createEntityGetResponse(character, 'gear', 'en').embeds[0].toJSON();
@@ -195,8 +199,8 @@ test('character summaries omit empty optional content and all gear lists', () =>
 	character.background.physicalDescription = 'Green cloak';
 	character.race.name = 'Ashborn';
 	character.race.traits.skillBonus = 'Arcana';
-	character.status.effects = ['Inspired'];
-	character.modifiers = [{ name: 'Moonlit', description: 'Glows softly.' }];
+	character.status.effects = [{ name: 'Inspired', description: 'Moves boldly.' }];
+	character.status.modifiers = [{ name: 'Moonlit', description: 'Glows softly.' }];
 	character.rules = [{ name: 'Fire', level: 2, description: 'Controls flames.' }];
 	character.talents = ['Athlete'];
 
@@ -206,7 +210,7 @@ test('character summaries omit empty optional content and all gear lists', () =>
 		populatedSummary.description,
 		/Race \*\*Ashborn\*\* · Archetype \*\*Courier\*\*\nGreen cloak$/,
 	);
-	assert.match(populatedSummary.fields[0].value, /\*\*Status effects\*\*\n1\. Inspired/);
+	assert.match(populatedSummary.fields[0].value, /\*\*Status effects\*\*\n\*\*Inspired\*\* - Moves boldly\./);
 	assert.match(populatedSummary.fields[0].value, /\*\*Descriptive modifiers\*\*/);
 	assert.match(populatedSummary.fields[1].value, /Racial skill bonus: Arcana/);
 	assert.doesNotMatch(populatedSummary.fields[1].value, /Racial physical ability/);
@@ -232,7 +236,7 @@ test('creature summaries match the concise character layout with intrinsic trait
 	creature.description = 'A moonlit guardian.';
 	creature.source = { archetypeId: 'monster' };
 	creature.status.effects = [{ name: 'Inspired', description: 'Moves boldly.' }];
-	creature.modifiers = [{ name: 'Moonlit', description: 'Glows softly.' }];
+	creature.status.modifiers = [{ name: 'Moonlit', description: 'Glows softly.' }];
 	creature.rules = [{ name: 'Fire', level: 2, description: 'Controls flames.' }];
 	creature.traits = [{ name: 'Night sight', description: 'Sees in darkness.' }];
 

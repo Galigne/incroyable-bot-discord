@@ -79,6 +79,7 @@ module.exports = function createCommandChecks(context) {
 			editableFields.map(field => field.editId).join(',') !== [
 				'name',
 				'level',
+				'resources',
 				'status',
 				'statistics',
 				'rules',
@@ -87,7 +88,6 @@ module.exports = function createCommandChecks(context) {
 				'race',
 				'background',
 				'personality',
-				'modifiers',
 			].join(',')
 			|| viewableFields.map(field => field.viewId).join(',')
 				!== editableFields.map(field => field.editId).join(',')

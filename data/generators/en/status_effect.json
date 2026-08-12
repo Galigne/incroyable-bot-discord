@@ -192,37 +192,6 @@
       }
     },
     {
-      "id": "restless",
-      "weight": 3,
-      "fields": {
-        "name": "Restless",
-        "description": "It never becomes completely still and constantly watches its surroundings."
-      }
-    },
-    {
-      "id": "smoldering",
-      "weight": 2,
-      "fields": {
-        "name": "Smoldering",
-        "description": "Thin smoke and dim embers drift from its body without an enforced mechanical effect."
-      }
-    },
-    {
-      "id": "frost_rimed",
-      "weight": 2,
-      "fields": {
-        "name": "Frost-Rimed",
-        "description": "A persistent layer of frost coats part of its body and nearby surfaces."
-      }
-    },
-    {
-      "id": "shadowed",
-      "fields": {
-        "name": "Shadowed",
-        "description": "Its outline remains difficult to separate from the shadows around it."
-      }
-    },
-    {
       "id": "distracted",
       "fields": {
         "name": "Distracted",

@@ -48,6 +48,7 @@ const french = require('../locales/fr.json');
 const EDITABLE_FIELDS = [
 	'name',
 	'level',
+	'resources',
 	'status',
 	'statistics',
 	'rules',
@@ -56,7 +57,6 @@ const EDITABLE_FIELDS = [
 	'race',
 	'background',
 	'personality',
-	'modifiers',
 ];
 
 after(() => {
@@ -105,6 +105,11 @@ test('the editable catalog exposes only the final grouped field list', () => {
 		'equipment',
 		'inventory',
 		'encumbrance',
+		'modifiers',
+		'resources.hp',
+		'resources.ar',
+		'resources.ap',
+		'resources.md',
 	]) {
 		assert.equal(getEditableFieldDefinition(removedField), null, removedField);
 	}
@@ -115,65 +120,76 @@ test('name, status, and gear groups are prefilled and trim valid submissions', (
 	assert.deepEqual(getEditableFieldValue(character, 'name'), {
 		'name.firstName': '', 'name.lastName': '',
 	});
+	assert.deepEqual(getEditableFieldValue(character, 'resources'), {
+		'resources.hp': '100:100',
+		'resources.ar': '0:0',
+		'resources.ap': '4:4',
+		'resources.md': '5:5',
+	});
 	assert.deepEqual(getEditableFieldValue(character, 'status'), {
-		'status.hp': '100:100',
-		'status.ar': '0:0',
-		'status.ap': '4:4',
-		'status.md': '5:5',
 		'status.effects': '',
+		'status.modifiers': '',
 	});
 	assert.deepEqual(getEditableFieldValue(character, 'gear'), {
 		'gear.equipment': '',
 		'gear.inventory': '',
 		'gear.encumbrance': '0:0',
 	});
-	assert.equal(getEditableFieldValue(character, 'modifiers'), '');
+	assert.throws(
+		() => getEditableFieldValue(character, 'modifiers'),
+		error => error.code === 'INVALID_CHARACTER_EDIT',
+	);
 
 	setEditableFieldValue(character, 'name', {
 		firstName: '  Ada  ',
 		lastName: '  Lovelace  ',
 	});
-	setEditableFieldValue(character, 'status', {
+	setEditableFieldValue(character, 'resources', {
 		'resources.hp': ' 50 : 120 ',
 		'resources.ar': ' 5:30 ',
 		'resources.ap': ' 3 : 6 ',
 		'resources.md': ' 7.5 : 12.5 ',
-		statusEffects: '- Inspired\n* Hidden',
+	});
+	setEditableFieldValue(character, 'status', {
+		'status.effects': '- Inspired:Temporary inspiration\n* Hidden:Concealed from view',
+		'status.modifiers': '- Scarred:Old wounds remain visible\n* Pale:Unnaturally pale coloring',
 	});
 	setEditableFieldValue(character, 'gear', {
 		equipment: '- Sword\n* Shield',
 		inventory: 'Potion',
 		encumbrance: ' 2 : 15 ',
 	});
-	setEditableFieldValue(
-		character,
-		'modifiers',
-		'- Scarred:Old wounds remain visible\n* Pale:Unnaturally pale coloring',
-	);
 
 	assert.equal(character.name.firstName, 'Ada');
 	assert.equal(character.name.lastName, 'Lovelace');
-	assert.deepEqual(character.status, {
+	assert.deepEqual(character.resources, {
 		hp: { current: 50, max: 120 },
 		ar: { current: 5, max: 30 },
 		ap: { current: 3, max: 6 },
 		md: { current: 7.5, max: 12.5 },
-		effects: ['Inspired', 'Hidden'],
 	});
-	assert.deepEqual(character.status.effects, ['Inspired', 'Hidden']);
+	assert.deepEqual(character.status, {
+		effects: [
+			{ name: 'Inspired', description: 'Temporary inspiration' },
+			{ name: 'Hidden', description: 'Concealed from view' },
+		],
+		modifiers: [
+			{ name: 'Scarred', description: 'Old wounds remain visible' },
+			{ name: 'Pale', description: 'Unnaturally pale coloring' },
+		],
+	});
 	assert.deepEqual(character.gear.equipment, ['Sword', 'Shield']);
 	assert.deepEqual(character.gear.inventory, ['Potion']);
 	assert.deepEqual(character.gear.encumbrance, { current: 2, max: 15 });
-	assert.deepEqual(character.modifiers, [
-		{ name: 'Scarred', description: 'Old wounds remain visible' },
-		{ name: 'Pale', description: 'Unnaturally pale coloring' },
-	]);
-	setEditableFieldValue(character, 'status', {
+	setEditableFieldValue(character, 'resources', {
 		'resources.hp': '50:120',
 		'resources.ar': '5:30',
 		'resources.ap': '3:6',
 		'resources.md': '7.5:12.5',
-		statusEffects: '',
+	});
+	setEditableFieldValue(character, 'status', {
+		'status.effects': '',
+		'status.modifiers': '',
 	});
 	setEditableFieldValue(character, 'gear', {
 		equipment: '',
@@ -255,23 +271,22 @@ test('either saved name component can be cleared', () => {
 	assert.equal(character.name.lastName, '');
 });
 
-test('status and gear reject incomplete or malformed pairs atomically', () => {
-	const validStatus = {
+test('resources and gear reject incomplete or malformed pairs atomically', () => {
+	const validResources = {
 		'resources.hp': '50:100',
 		'resources.ar': '5:20',
 		'resources.ap': '3:6',
 		'resources.md': '4:8',
-		statusEffects: 'Inspired',
 	};
 	for (const [field, value, translationKey] of [
-		['status', { ...validStatus, 'resources.hp': undefined }, 'errors.groupInputMissing'],
-		['status', { ...validStatus, 'resources.hp': '1' }, 'errors.pairFormat'],
-		['status', { ...validStatus, 'resources.hp': '1:' }, 'errors.pairFormat'],
-		['status', { ...validStatus, 'resources.hp': '1:2:3' }, 'errors.pairFormat'],
-		['status', { ...validStatus, 'resources.hp': 'one:2' }, 'errors.mustBeNumber'],
-		['status', { ...validStatus, 'resources.ap': '5:4' }, 'errors.apCurrentAboveMax'],
-		['status', { ...validStatus, 'resources.ap': '4:11' }, 'errors.apRange'],
-		['status', { ...validStatus, 'resources.ap': '1.5:4' }, 'errors.apRange'],
+		['resources', { ...validResources, 'resources.hp': undefined }, 'errors.groupInputMissing'],
+		['resources', { ...validResources, 'resources.hp': '1' }, 'errors.pairFormat'],
+		['resources', { ...validResources, 'resources.hp': '1:' }, 'errors.pairFormat'],
+		['resources', { ...validResources, 'resources.hp': '1:2:3' }, 'errors.pairFormat'],
+		['resources', { ...validResources, 'resources.hp': 'one:2' }, 'errors.mustBeNumber'],
+		['resources', { ...validResources, 'resources.ap': '5:4' }, 'errors.apCurrentAboveMax'],
+		['resources', { ...validResources, 'resources.ap': '4:11' }, 'errors.apRange'],
+		['resources', { ...validResources, 'resources.ap': '1.5:4' }, 'errors.apRange'],
 		['gear', { equipment: 'Changed', inventory: 'Changed', encumbrance: '2' }, 'errors.pairFormat'],
 	]) {
 		const character = new Character(`Invalid-${field}`, 'tester');
@@ -481,7 +496,7 @@ test('race, background, and personality modals prefill every separate input', ()
 	assert.match(frenchRace.components[0].description, /préremplie/);
 });
 
-test('name, status, and gear modals use the required prefilled inputs', () => {
+test('name, resources, status, and gear modals use the required prefilled inputs', () => {
 	const character = createFilledCharacter();
 	const nameValues = getEditableFieldValue(character, 'name');
 	const nameModal = createEntityFieldModal('session', 'character', 'name', nameValues, 'en').toJSON();
@@ -498,27 +513,61 @@ test('name, status, and gear modals use the required prefilled inputs', () => {
 		[false, false],
 	);
 
+	const resourcesValues = getEditableFieldValue(character, 'resources');
+	const resourcesModal = createEntityFieldModal(
+		'session',
+		'character',
+		'resources',
+		resourcesValues,
+		'en',
+	).toJSON();
+	assert.deepEqual(
+		resourcesModal.components.map(component => component.label),
+		['HP', 'AR', 'AP', 'MD'],
+	);
+	assert.deepEqual(
+		resourcesModal.components.map(component => component.component.value),
+		['100:100', '0:0', '4:4', '5:5'],
+	);
+	assert.deepEqual(
+		resourcesModal.components.map(component => component.component.style),
+		[1, 1, 1, 1],
+	);
+	assert.deepEqual(
+		resourcesModal.components.map(component => component.component.required),
+		[true, true, true, true],
+	);
+	assert.ok(resourcesModal.components.every(component => (
+		component.description === english.rpg.editor.pairDescription
+	)));
+
 	const statusValues = getEditableFieldValue(character, 'status');
-	const statusModal = createEntityFieldModal('session', 'character', 'status', statusValues, 'en').toJSON();
+	const statusModal = createEntityFieldModal(
+		'session',
+		'character',
+		'status',
+		statusValues,
+		'en',
+	).toJSON();
 	assert.deepEqual(
 		statusModal.components.map(component => component.label),
-		['HP', 'AR', 'AP', 'MD', 'Status effects'],
+		['Status effects', 'Descriptive modifiers'],
 	);
 	assert.deepEqual(
 		statusModal.components.map(component => component.component.value),
-		['100:100', '0:0', '4:4', '5:5', 'Inspired\nHidden'],
+		[
+			'Inspired:Temporary inspiration\nHidden:Concealed from view',
+			'Scarred:Old wounds remain visible\nPale:Unnaturally pale coloring',
+		],
 	);
 	assert.deepEqual(
 		statusModal.components.map(component => component.component.style),
-		[1, 1, 1, 1, 2],
+		[2, 2],
 	);
 	assert.deepEqual(
 		statusModal.components.map(component => component.component.required),
-		[true, true, true, true, false],
+		[false, false],
 	);
-	assert.ok(statusModal.components.slice(0, 4).every(component => (
-		component.description === english.rpg.editor.pairDescription
-	)));
 
 	const gearValues = getEditableFieldValue(character, 'gear');
 	const gearModal = createEntityFieldModal('session', 'character', 'gear', gearValues, 'en').toJSON();
@@ -549,7 +598,7 @@ test('name, status, and gear modals use the required prefilled inputs', () => {
 	).toJSON();
 	assert.deepEqual(
 		frenchStatus.components.map(component => component.label),
-		['PV', 'PR', 'PA', 'DD', 'Effets d’état'],
+		['Effets d’état', 'Modificateurs descriptifs'],
 	);
 });
 
@@ -601,11 +650,8 @@ test('one grouped status update creates one history entry and keeps save keys', 
 		characterKey,
 		'status',
 		{
-			'resources.hp': '80:120',
-			'resources.ar': '5:10',
-			'resources.ap': '2:4',
-			'resources.md': '3:6',
-			statusEffects: 'Inspired\nHidden',
+			'status.effects': 'Inspired:Temporary inspiration\nHidden:Concealed from view',
+			'status.modifiers': 'Scarred:Old wounds remain visible',
 		},
 		() => true,
 		{ actorId: 'creator', maxEntries: 3 },
@@ -615,26 +661,30 @@ test('one grouped status update creates one history entry and keeps save keys', 
 	assert.equal(history.document.entries.length, 1);
 	assert.equal(history.document.entries[0].action, 'set');
 	assert.deepEqual(
-		history.document.entries[0].character.status.hp,
-		{ current: 100, max: 100 },
+		history.document.entries[0].character.status,
+		{ effects: [], modifiers: [] },
 	);
 	const rawSave = JSON.parse(
 		await fsPromises.readFile(getCharacterSavePath(characterKey), 'utf8'),
 	);
-	assert.deepEqual(rawSave.status.hp, { current: 80, max: 120 });
-	assert.deepEqual(rawSave.status.effects, ['Inspired', 'Hidden']);
-	assert.equal(Object.hasOwn(rawSave, 'resources'), false);
-	assert.equal(Object.hasOwn(rawSave, 'statusEffects'), false);
+	assert.deepEqual(rawSave.status.effects, [
+		{ name: 'Inspired', description: 'Temporary inspiration' },
+		{ name: 'Hidden', description: 'Concealed from view' },
+	]);
+	assert.deepEqual(rawSave.status.modifiers, [
+		{ name: 'Scarred', description: 'Old wounds remain visible' },
+	]);
+	assert.deepEqual(rawSave.resources.hp, { current: 100, max: 100 });
 	assert.equal(Object.hasOwn(rawSave, 'base-statistics'), false);
 	await undoEntity(characterKey, () => true, { maxEntries: 3 });
 	const restored = await getEntity(characterKey);
-	assert.deepEqual(restored.status, {
+	assert.deepEqual(restored.resources, {
 		hp: { current: 100, max: 100 },
 		ar: { current: 0, max: 0 },
 		ap: { current: 4, max: 4 },
 		md: { current: 5, max: 5 },
-		effects: [],
 	});
+	assert.deepEqual(restored.status, { effects: [], modifiers: [] });
 	assert.deepEqual(restored.status.effects, []);
 });
 
@@ -734,11 +784,8 @@ test('failed grouped application updates create neither mutation nor history', a
 			characterKey,
 			'status',
 			{
-				'resources.hp': '10:20',
-				'resources.ar': '1:2',
-				'resources.ap': '7:6',
-				'resources.md': '1:2',
-				statusEffects: 'Changed',
+				'status.effects': 'Changed',
+				'status.modifiers': 'Stable:Persistent alteration',
 			},
 			() => true,
 			{ actorId: 'creator', maxEntries: 3 },
@@ -889,7 +936,14 @@ function createFilledCharacter() {
 		description: 'Quiet and curious',
 		traits: ['Patient', 'Observant'],
 	};
-	character.status.effects = ['Inspired', 'Hidden'];
+	character.status.effects = [
+		{ name: 'Inspired', description: 'Temporary inspiration' },
+		{ name: 'Hidden', description: 'Concealed from view' },
+	];
+	character.status.modifiers = [
+		{ name: 'Scarred', description: 'Old wounds remain visible' },
+		{ name: 'Pale', description: 'Unnaturally pale coloring' },
+	];
 	character.gear.equipment = ['Sword', 'Shield'];
 	character.gear.inventory = ['Potion', 'Rope'];
 	character.gear.encumbrance = { current: 3, max: 8 };

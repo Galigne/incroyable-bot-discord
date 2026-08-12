@@ -1,45 +1,14 @@
 {
   "schemaVersion": 3,
-  "id": "modifier",
+  "id": "modifier_creature",
   "visibility": "internal",
-  "name": "descriptive modifiers",
-  "description": "Descriptive variations shared by generated characters and creatures",
+  "name": "creature modifiers",
+  "description": "Persistent descriptive variations for generated creatures",
   "entrySchema": {
     "type": "fields",
     "required": ["name", "description"]
   },
   "entries": [
-    {
-      "id": "scarred",
-      "weight": 3,
-      "fields": {
-        "name": "Scarred",
-        "description": "Old scars mark their body and hint at dangers they survived."
-      }
-    },
-    {
-      "id": "pale",
-      "weight": 2,
-      "fields": {
-        "name": "Pale",
-        "description": "Their coloring is unnaturally pale, making familiar features seem strange."
-      }
-    },
-    {
-      "id": "ornate_markings",
-      "weight": 2,
-      "fields": {
-        "name": "Ornate Markings",
-        "description": "Distinctive natural markings form elaborate patterns across their body."
-      }
-    },
-    {
-      "id": "weathered",
-      "fields": {
-        "name": "Weathered",
-        "description": "Exposure to harsh weather has left them rough, patient, and visibly worn."
-      }
-    },
     {
       "id": "alpha",
       "fields": {
@@ -122,6 +91,37 @@
       "fields": {
         "name": "Equipped",
         "description": "The subject appears to carry anatomy-appropriate weapons or objects; no equipment is selected or added."
+      }
+    },
+    {
+      "id": "restless",
+      "weight": 3,
+      "fields": {
+        "name": "Restless",
+        "description": "It never becomes completely still and constantly watches its surroundings."
+      }
+    },
+    {
+      "id": "smoldering",
+      "weight": 2,
+      "fields": {
+        "name": "Smoldering",
+        "description": "Thin smoke and dim embers drift from its body without an enforced mechanical effect."
+      }
+    },
+    {
+      "id": "frost_rimed",
+      "weight": 2,
+      "fields": {
+        "name": "Frost-Rimed",
+        "description": "A persistent layer of frost coats part of its body and nearby surfaces."
+      }
+    },
+    {
+      "id": "shadowed",
+      "fields": {
+        "name": "Shadowed",
+        "description": "Its outline remains difficult to separate from the shadows around it."
       }
     }
   ]

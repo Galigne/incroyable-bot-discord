@@ -127,15 +127,17 @@ test('production creature sources are strict localized archetypes backed by prof
 		'creature-predator',
 	]));
 
-	const modifier = generatorCatalog.getGenerator('modifier', 'en');
-	assert.equal(Object.hasOwn(modifier, 'kind'), false);
-	assert.equal(modifier.visibility, 'internal');
-	assert.ok(modifier.entries.every(entry => (
-		JSON.stringify(Object.keys(entry.fields)) === JSON.stringify([
-			'name',
-			'description',
-		])
-	)));
+	for (const generatorId of ['modifier_character', 'modifier_creature']) {
+		const modifier = generatorCatalog.getGenerator(generatorId, 'en');
+		assert.equal(Object.hasOwn(modifier, 'kind'), false);
+		assert.equal(modifier.visibility, 'internal');
+		assert.ok(modifier.entries.every(entry => (
+			JSON.stringify(Object.keys(entry.fields)) === JSON.stringify([
+				'name',
+				'description',
+			])
+		)));
+	}
 });
 
 test('creature metadata rejects mechanical overrides and armor conflicts', () => {
@@ -241,15 +243,15 @@ test('equivalent random input selects the same stable IDs and statistics in both
 		assert.equal(english.source.statProfileId, french.source.statProfileId);
 		assert.deepEqual(english.source.provenance, french.source.provenance);
 		assert.deepEqual(english.statistics, french.statistics);
-		assert.deepEqual(english.status.hp, french.status.hp);
-		assert.deepEqual(english.status.ar, french.status.ar);
+		assert.deepEqual(english.resources.hp, french.resources.hp);
+		assert.deepEqual(english.resources.ar, french.resources.ar);
 		assert.deepEqual(
 			english.traits.map(trait => trait.id),
 			french.traits.map(trait => trait.id),
 		);
 		assert.deepEqual(
-			english.modifiers.map(modifier => modifier.entryId),
-			french.modifiers.map(modifier => modifier.entryId),
+			english.status.modifiers.map(modifier => modifier.entryId),
+			french.status.modifiers.map(modifier => modifier.entryId),
 		);
 	}
 });
@@ -278,10 +280,10 @@ test('all creature profiles use the shared nonlinear level budget and derived re
 		assert.equal(creature.statistics.reflexes, creature.statistics.speed);
 		assert.deepEqual(
 			{
-				hp: creature.status.hp,
-				ar: creature.status.ar,
-				ap: creature.status.ap,
-				md: creature.status.md,
+				hp: creature.resources.hp,
+				ar: creature.resources.ar,
+				ap: creature.resources.ap,
+				md: creature.resources.md,
 			},
 			createGeneratedResources(
 				creature.statistics,
@@ -297,8 +299,8 @@ test('all creature profiles use the shared nonlinear level budget and derived re
 		assert.ok(
 			calculateStatCost(creature.statistics) <= calculateStatBudget(level),
 		);
-		assert.equal(creature.status.hp.current, creature.status.hp.max);
-		assert.equal(creature.status.ap.current, creature.status.ap.max);
+		assert.equal(creature.resources.hp.current, creature.resources.hp.max);
+		assert.equal(creature.resources.ap.current, creature.resources.ap.max);
 	}
 
 	const randomLevel = populateRandomCreature(
@@ -333,23 +335,23 @@ test('natural armor, generated armor, status, and weighted gear resolve to final
 	const cinderDrake = generateEntry('monster', 'cinder_drake', { level: 5 });
 	assert.deepEqual(cinderDrake.naturalArmor, { percentage: 15 });
 	assert.equal(
-		cinderDrake.status.ar.max,
-		calculateArmorRating(cinderDrake.status.hp.max, 15),
+		cinderDrake.resources.ar.max,
+		calculateArmorRating(cinderDrake.resources.hp.max, 15),
 	);
 	assert.deepEqual(
-		cinderDrake.status.effects.map(effect => [effect.generatorId, effect.entryId]),
-		[['status_effect', 'smoldering']],
+		cinderDrake.status.modifiers.map(modifier => [modifier.generatorId, modifier.entryId]),
+		[['modifier_creature', 'smoldering']],
 	);
-	assert.ok(cinderDrake.status.effects[0].provenance.length > 0);
+	assert.ok(cinderDrake.status.modifiers[0].provenance.length > 0);
 
 	const bellWraith = generateEntry('monster', 'bell_wraith', { level: 5 });
 	const armorEntry = generatorCatalog.getGenerator('armors', 'en').entries
 		.find(entry => entry.id === 'common_heavy_armor');
 	assert.deepEqual(bellWraith.naturalArmor, { percentage: 0 });
 	assert.equal(
-		bellWraith.status.ar.max,
+		bellWraith.resources.ar.max,
 		calculateArmorRating(
-			bellWraith.status.hp.max,
+			bellWraith.resources.hp.max,
 			armorEntry.fields['ar_percentage'],
 		),
 	);
@@ -387,7 +389,7 @@ test('descriptive modifiers cannot change mechanical generation results', () => 
 		provenance: [{
 			type: 'entry',
 			selection: 'random',
-			generatorId: 'modifier',
+			generatorId: 'modifier_creature',
 			entryId: 'scarred',
 			path: 'root.creature.modifier',
 		}],
@@ -415,19 +417,20 @@ test('descriptive modifiers cannot change mechanical generation results', () => 
 			),
 		},
 	);
-	assert.equal(modified.modifiers.length, 1);
+	assert.equal(modified.status.modifiers.length, 1);
 	for (const property of [
 		'level',
 		'naturalArmor',
 		'statistics',
-		'status',
+		'resources',
 		'traits',
 		'rules',
 		'gear',
 	]) {
 		assert.deepEqual(modified[property], plain[property], property);
 	}
-	assert.ok(modified.modifiers.every(modifier => (
+	assert.deepEqual(modified.status.effects, plain.status.effects);
+	assert.ok(modified.status.modifiers.every(modifier => (
 		Object.keys(modifier).toSorted().join(',')
 		=== 'description,entryId,generatorId,name,provenance'
 	)));
@@ -617,7 +620,7 @@ test('loading and rendering persisted creatures never reruns generation after re
 		'utf8',
 	);
 	assert.ok(generated.source.provenance.length > 0);
-	assert.ok(generated.modifiers[0].provenance.length > 0);
+	assert.ok(generated.status.modifiers[0].provenance.length > 0);
 	reloadGenerationData();
 
 	const originalRandom = Math.random;
@@ -635,7 +638,7 @@ test('loading and rendering persisted creatures never reruns generation after re
 	}
 	assert.deepEqual(loaded.source, generated.source);
 	assert.deepEqual(loaded.status, generated.status);
-	assert.deepEqual(loaded.modifiers, generated.modifiers);
+	assert.deepEqual(loaded.status.modifiers, generated.status.modifiers);
 	assert.equal(
 		await fsPromises.readFile(getCreatureSavePath(generated.key), 'utf8'),
 		savedBefore,

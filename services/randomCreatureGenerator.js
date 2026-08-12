@@ -120,7 +120,8 @@ function populateRandomCreature(creature, options = {}) {
 	}));
 	creature.rules = [];
 	creature.status.effects = [];
-	creature.modifiers = maybeGenerateDescriptiveModifiers({
+	creature.status.modifiers = maybeGenerateDescriptiveModifiers({
+		generator: 'modifier_creature',
 		resolver,
 		locale,
 		random,
@@ -139,6 +140,13 @@ function populateRandomCreature(creature, options = {}) {
 	resolveStatusEffects(
 		creature,
 		generation.statusEffects ?? [],
+		locale,
+		random,
+		resolver,
+	);
+	resolveModifiers(
+		creature,
+		generation.modifiers ?? [],
 		locale,
 		random,
 		resolver,
@@ -181,7 +189,7 @@ function populateRandomCreature(creature, options = {}) {
 		sourceProvenance,
 	);
 	Object.assign(
-		creature.status,
+		creature.resources,
 		createGeneratedResources(creature.statistics, level, armorPercentage),
 	);
 	creature.source = {
@@ -192,6 +200,26 @@ function populateRandomCreature(creature, options = {}) {
 		provenance: sourceProvenance,
 	};
 	return creature;
+}
+
+function resolveModifiers(creature, references, locale, random, resolver) {
+	for (const [index, reference] of references.entries()) {
+		const resolved = resolveGenerationReference(
+			reference,
+			locale,
+			random,
+			resolver,
+			`root.generation.modifiers.${index}`,
+		);
+		const selection = getEntrySelection(resolved.provenance);
+		creature.status.modifiers.push({
+			generatorId: selection.generatorId,
+			entryId: selection.entryId,
+			name: requireLocalizedField(resolved.value, 'name'),
+			description: requireLocalizedField(resolved.value, 'description'),
+			provenance: resolved.provenance,
+		});
+	}
 }
 
 function resolveFixedRules(

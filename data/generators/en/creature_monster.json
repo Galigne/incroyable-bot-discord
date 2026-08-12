@@ -82,9 +82,9 @@
             "level": 1
           }
         ],
-        "statusEffects": [
+        "modifiers": [
           {
-            "generator": "status_effect",
+            "generator": "modifier_creature",
             "entry": "smoldering",
             "select": "fields"
           }
@@ -144,9 +144,9 @@
             "level": 1
           }
         ],
-        "statusEffects": [
+        "modifiers": [
           {
-            "generator": "status_effect",
+            "generator": "modifier_creature",
             "entry": "shadowed",
             "select": "fields"
           }
@@ -234,9 +234,9 @@
             "level": 1
           }
         ],
-        "statusEffects": [
+        "modifiers": [
           {
-            "generator": "status_effect",
+            "generator": "modifier_creature",
             "entry": "frost_rimed",
             "select": "fields"
           }
@@ -360,9 +360,9 @@
             "level": 1
           }
         ],
-        "statusEffects": [
+        "modifiers": [
           {
-            "generator": "status_effect",
+            "generator": "modifier_creature",
             "entry": "shadowed",
             "select": "fields"
           }
@@ -645,9 +645,9 @@
           }
         ],
         "fixedRules": [],
-        "statusEffects": [
+        "modifiers": [
           {
-            "generator": "status_effect",
+            "generator": "modifier_creature",
             "entry": "smoldering",
             "select": "fields"
           }
@@ -678,9 +678,9 @@
             "level": 2
           }
         ],
-        "statusEffects": [
+        "modifiers": [
           {
-            "generator": "status_effect",
+            "generator": "modifier_creature",
             "entry": "smoldering",
             "select": "fields"
           }
@@ -1027,9 +1027,9 @@
             "level": 1
           }
         ],
-        "statusEffects": [
+        "modifiers": [
           {
-            "generator": "status_effect",
+            "generator": "modifier_creature",
             "entry": "smoldering",
             "select": "fields"
           }
@@ -1186,9 +1186,9 @@
           }
         ],
         "fixedRules": [],
-        "statusEffects": [
+        "modifiers": [
           {
-            "generator": "status_effect",
+            "generator": "modifier_creature",
             "entry": "shadowed",
             "select": "fields"
           }
@@ -1524,9 +1524,9 @@
             "level": 2
           }
         ],
-        "statusEffects": [
+        "modifiers": [
           {
-            "generator": "status_effect",
+            "generator": "modifier_creature",
             "entry": "shadowed",
             "select": "fields"
           }

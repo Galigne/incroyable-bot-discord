@@ -1,6 +1,7 @@
 const DESCRIPTIVE_MODIFIER_CHANCE = 0.25;
 
 function maybeGenerateDescriptiveModifiers({
+	generator = 'modifier_character',
 	resolver,
 	locale = 'en',
 	random = Math.random,
@@ -9,10 +10,17 @@ function maybeGenerateDescriptiveModifiers({
 	if (readRandom(random) >= DESCRIPTIVE_MODIFIER_CHANCE) {
 		return [];
 	}
-	return [generateDescriptiveModifier({ resolver, locale, random, path })];
+	return [generateDescriptiveModifier({
+		generator,
+		resolver,
+		locale,
+		random,
+		path,
+	})];
 }
 
 function generateDescriptiveModifier({
+	generator = 'modifier_character',
 	resolver,
 	locale = 'en',
 	random = Math.random,
@@ -23,7 +31,7 @@ function generateDescriptiveModifier({
 	}
 	const resolved = resolver.resolveReference(
 		{
-			generator: 'modifier',
+			generator,
 			select: 'fields',
 		},
 		locale,
@@ -35,7 +43,7 @@ function generateDescriptiveModifier({
 			record.type === 'entry' && record.generatorId && record.entryId
 		));
 		return {
-			generatorId: selection?.generatorId ?? 'modifier',
+			generatorId: selection?.generatorId ?? generator,
 			entryId: selection?.entryId,
 			name: fields.name,
 			description: fields.description,

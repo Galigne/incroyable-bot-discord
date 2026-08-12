@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 3,
+  "id": "modifier_character",
+  "visibility": "internal",
+  "name": "character modifiers",
+  "description": "Persistent descriptive variations for generated characters",
+  "entrySchema": {
+    "type": "fields",
+    "required": ["name", "description"]
+  },
+  "entries": [
+    {
+      "id": "scarred",
+      "weight": 3,
+      "fields": {
+        "name": "Scarred",
+        "description": "Old scars mark their body and hint at dangers they survived."
+      }
+    },
+    {
+      "id": "pale",
+      "weight": 2,
+      "fields": {
+        "name": "Pale",
+        "description": "Their coloring is unnaturally pale, making familiar features seem strange."
+      }
+    },
+    {
+      "id": "ornate_markings",
+      "weight": 2,
+      "fields": {
+        "name": "Ornate Markings",
+        "description": "Distinctive natural markings form elaborate patterns across their body."
+      }
+    },
+    {
+      "id": "weathered",
+      "fields": {
+        "name": "Weathered",
+        "description": "Exposure to harsh weather has left them rough, patient, and visibly worn."
+      }
+    }
+  ]
+}

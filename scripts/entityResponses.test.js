@@ -16,13 +16,13 @@ const {
 function createTestCharacter() {
 	const character = new Character('Response.Test', 'creator');
 	character.name.firstName = 'Response';
-	character.status = {
+	character.resources = {
 		hp: { current: 42, max: 100 },
 		ar: { current: 8, max: 20 },
 		ap: { current: 3, max: 5 },
 		md: { current: 6, max: 8 },
-		effects: [],
 	};
+	character.status = { effects: [], modifiers: [] };
 	return character;
 }
 

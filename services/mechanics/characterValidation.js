@@ -10,7 +10,7 @@ function characterEditError(translationKey, translationVariables = {}) {
 
 function validateActionPointEdit(character, path, value) {
 	if (
-		path[0] !== 'status'
+		path[0] !== 'resources'
 		|| path[1] !== 'ap'
 	) {
 		return;
@@ -20,10 +20,10 @@ function validateActionPointEdit(character, path, value) {
 			max: MAX_AP,
 		});
 	}
-	if (path[2] === 'current' && value > character.status.ap.max) {
+	if (path[2] === 'current' && value > character.resources.ap.max) {
 		throw characterEditError('errors.apCurrentAboveMax');
 	}
-	if (path[2] === 'max' && value < character.status.ap.current) {
+	if (path[2] === 'max' && value < character.resources.ap.current) {
 		throw characterEditError('errors.apMaxBelowCurrent');
 	}
 }

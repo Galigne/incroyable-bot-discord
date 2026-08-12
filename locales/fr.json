@@ -159,7 +159,7 @@
       "backgroundOption": "Background du personnage ; tirage aléatoire si omis",
       "levelChoice": "Niveau {{level}}",
       "success": "Le personnage **{{name}}** a été généré avec la clé `{{key}}`.",
-      "behavior": "Crée et sauvegarde un personnage aléatoire complet sous une CharacterKey unique. Le niveau doit être compris entre 1 et 10 et est aléatoire s’il est omis ; le Background est également facultatif et aléatoire par défaut. Le routeur public `background` sélectionne une catégorie générale, puis le résolveur générique des références v3 sélectionne indépendamment un archétype et une description physique réutilisable. L’histoire personnelle et les objectifs commencent vides. Un profil statistique partagé répartit les statistiques, tandis que les ressources, LOI, armure, armes, objets, pièces d’or et éventuels effets d’état suivent le niveau choisi et les règles du jeu. L’encombrement reste manuel et vaut 0 / 0 par défaut."
+      "behavior": "Crée et sauvegarde un personnage aléatoire complet sous une CharacterKey unique. Le niveau doit être compris entre 1 et 10 et est aléatoire s’il est omis ; le Background est également facultatif et aléatoire par défaut. Le routeur public `background` sélectionne une catégorie générale, puis le résolveur générique des références v3 sélectionne indépendamment un archétype et une description physique réutilisable. L’histoire personnelle et les objectifs commencent vides. Un profil statistique partagé répartit les statistiques, tandis que les ressources, LOI, armure, armes, objets, pièces d’or, effets d’état temporaires et modificateurs persistants du pool de personnages suivent le niveau choisi et les règles du jeu. L’encombrement reste manuel et vaut 0 / 0 par défaut."
     },
     "genCreature": {
       "description": "Générer une créature (rôle MJ configuré ou propriétaire du serveur)",
@@ -169,14 +169,14 @@
       "levelOption": "Niveau de la créature ; tirage aléatoire de 1 à 10 si omis",
       "levelChoice": "Niveau {{level}}",
       "success": "La créature **{{name}}** a été générée et sauvegardée avec la CreatureKey `{{key}}`.",
-      "behavior": "Crée et sauvegarde atomiquement une créature complète en résolvant une entrée de type stable facultative du catalogue public `creature`, ou en en tirant une au hasard si le type est omis, puis en suivant le générateur de détail référencé. La CreatureKey est unique parmi toutes les entités et le niveau doit être compris entre 1 et 10, ou est tiré au hasard s’il est omis. Les profils statistiques partagés répartissent les statistiques et calculent les ressources dérivées ; seules des références explicites peuvent accorder des LOI. Les effets d’état initiaux et les modificateurs proviennent des mêmes catalogues descriptifs que ceux disponibles pour les personnages, tandis que l’équipement, l’inventaire, l’armure naturelle et les métadonnées d’armure sont résolus puis conservés avec une provenance stable. L’encombrement reste manuel et vaut 0 / 0 par défaut. Seuls un MJ configuré ou le propriétaire du serveur peuvent utiliser cette commande."
+      "behavior": "Crée et sauvegarde atomiquement une créature complète en résolvant une entrée de type stable facultative du catalogue public `creature`, ou en en tirant une au hasard si le type est omis, puis en suivant le générateur de détail référencé. La CreatureKey est unique parmi toutes les entités et le niveau doit être compris entre 1 et 10, ou est tiré au hasard s’il est omis. Les profils statistiques partagés répartissent les statistiques et calculent les ressources dérivées ; seules des références explicites peuvent accorder des LOI. Les effets d’état temporaires proviennent du catalogue des effets d’état, tandis que les modificateurs persistants proviennent uniquement du pool de créatures. L’équipement, l’inventaire, l’armure naturelle et les métadonnées d’armure sont résolus puis conservés avec une provenance stable. L’encombrement reste manuel et vaut 0 / 0 par défaut. Seuls un MJ configuré ou le propriétaire du serveur peuvent utiliser cette commande."
     },
     "get": {
       "description": "Afficher le résumé d’une entité ou le détail d’un champ compatible",
       "entityOption": "Personnage ou créature à afficher",
       "fieldOption": "Champ détaillé facultatif",
       "unknownField": "Ce champ n’est pas disponible pour cette entité : **{{field}}**. Utilisez `/help command:get` pour consulter les détails.",
-      "behavior": "Sans `field`, publie le résumé public de l’entité. Les champs de personnage sont `name`, `level`, `status`, `statistics`, `rules`, `talents`, `gear`, `race`, `background`, `personality` et `modifiers`, dans cet ordre. Les champs de créature suivent leur propre ordre : `identity`, `level`, `status`, `statistics`, `rules`, `traits`, `modifiers` et `gear`. Les effets d’état et les modificateurs descriptifs sont disponibles pour les deux types d’entité. L’autocomplétion ne propose que les champs compatibles avec l’EntityKey choisie."
+      "behavior": "Sans `field`, publie le résumé public de l’entité. Les champs de personnage sont `name`, `level`, `resources`, `status`, `statistics`, `rules`, `talents`, `gear`, `race`, `background` et `personality`, dans cet ordre. Les champs de créature suivent leur propre ordre : `identity`, `level`, `resources`, `status`, `statistics`, `rules`, `traits` et `gear`. La vue `resources` affiche les PV, PR, PA et DD. La vue `status` affiche séparément les Effets d’état et les Modificateurs, en omettant les listes vides. L’autocomplétion ne propose que les champs compatibles avec l’EntityKey choisie."
     },
     "heal": {
       "description": "Restaurer les PV, les PR ou les deux jusqu’au pourcentage choisi",
@@ -213,7 +213,7 @@
       "description": "Modifier un groupe de champs compatible dans un formulaire prérempli",
       "entityOption": "Personnage ou créature à modifier",
       "fieldOption": "Champ à modifier",
-      "behavior": "Ouvre un formulaire privé prérempli adapté au type d’entité choisi. Les groupes de personnage conservent leur ordre établi, suivi de `modifiers` ; les groupes de créature sont `identity`, `level`, `status`, `statistics`, `rules`, `traits`, `modifiers` et `gear`, et l’identité modifie le nom et la description. Pour les deux types, les modificateurs descriptifs utilisent une ligne `Nom:Description`. Les dons intrinsèques et effets d’état de créature emploient le même format, tandis que les effets d’état de personnage conservent leur format compatible d’une entrée simple par ligne. Les statistiques, LOI, ressources, l’équipement, l’inventaire et l’encombrement conservent leurs formats communs compatibles. L’EntityKey, le type, le schéma, les identifiants sources, les données d’armure naturelle et la provenance ne sont jamais modifiables. Chaque groupe est validé et sauvegardé atomiquement comme une seule opération annulable. Seuls le créateur de l’entité, un MJ ou le propriétaire du serveur peuvent la modifier."
+      "behavior": "Ouvre un formulaire privé prérempli adapté au type d’entité choisi. Les groupes de personnage sont `name`, `level`, `resources`, `status`, `statistics`, `rules`, `talents`, `gear`, `race`, `background` et `personality` ; ceux des créatures sont `identity`, `level`, `resources`, `status`, `statistics`, `rules`, `traits` et `gear`. Le formulaire `resources` comporte quatre saisies courtes `actuel:max` pour les PV, PR, PA et DD. Le formulaire `status` comporte deux saisies multilignes indépendantes au format Nom:Description pour les Effets d’état et les Modificateurs. L’EntityKey, le type, le schéma, les identifiants sources, les données d’armure naturelle et la provenance ne sont jamais modifiables. Chaque groupe est validé et sauvegardé atomiquement comme une seule opération annulable. Seuls le créateur de l’entité, un MJ ou le propriétaire du serveur peuvent la modifier."
     },
     "undo": {
       "description": "Restaurer le plus récent état antérieur conservé d’une entité",
@@ -285,6 +285,7 @@
       "description": "Description",
       "archetype": "Archétype",
       "level": "Niveau",
+      "resources": "Ressources",
       "status": "État",
       "naturalArmor": "Armure naturelle",
       "statistics": "Statistiques",
@@ -309,6 +310,7 @@
       "firstName": "Prénom",
       "lastName": "Nom",
       "level": "Niveau",
+      "resources": "Ressources",
       "race": "Race",
       "raceName": "Nom de la race",
       "racePhysicalDescription": "Description physique de la race",

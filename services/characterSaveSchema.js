@@ -1,5 +1,4 @@
-const CURRENT_CHARACTER_SAVE_SCHEMA_VERSION = 2;
-const SUPPORTED_CHARACTER_SAVE_SCHEMA_VERSIONS = new Set([1, 2]);
+const CURRENT_CHARACTER_SAVE_SCHEMA_VERSION = 3;
 
 function validateCharacterSaveSchema(rawSaveData) {
 	if (
@@ -21,62 +20,28 @@ function validateCharacterSaveSchema(rawSaveData) {
 			'Character save schemaVersion must be a non-negative integer.',
 		);
 	}
-	if (!SUPPORTED_CHARACTER_SAVE_SCHEMA_VERSIONS.has(schemaVersion)) {
+	if (schemaVersion !== CURRENT_CHARACTER_SAVE_SCHEMA_VERSION) {
 		throw schemaVersionError(
 			'UNSUPPORTED_CHARACTER_SCHEMA_VERSION',
 			`Unsupported character save schemaVersion ${schemaVersion}; `
-				+ `expected a supported version (1 or ${CURRENT_CHARACTER_SAVE_SCHEMA_VERSION}).`,
+			+ `expected ${CURRENT_CHARACTER_SAVE_SCHEMA_VERSION}.`,
+		);
+	}
+	if (Object.hasOwn(rawSaveData, 'modifiers')) {
+		throw schemaVersionError(
+			'INVALID_CHARACTER_SAVE',
+			'Character saves must store modifiers under status.',
+		);
+	}
+	const resourceKeys = ['hp', 'ar', 'ap', 'md'];
+	if (resourceKeys.some(resourceId => Object.hasOwn(rawSaveData.status ?? {}, resourceId))) {
+		throw schemaVersionError(
+			'INVALID_CHARACTER_SAVE',
+			'Character saves must store combat resources under resources.',
 		);
 	}
 
 	return rawSaveData;
-}
-
-function migrateCharacterSave(rawSaveData) {
-	validateCharacterSaveSchema(rawSaveData);
-	if (rawSaveData.schemaVersion === CURRENT_CHARACTER_SAVE_SCHEMA_VERSION) {
-		return rawSaveData;
-	}
-
-	return {
-		schemaVersion: CURRENT_CHARACTER_SAVE_SCHEMA_VERSION,
-		key: rawSaveData.key,
-		creatorId: rawSaveData.creatorId,
-		name: {
-			firstName: rawSaveData.firstName,
-			lastName: rawSaveData.lastName,
-		},
-		level: rawSaveData.level,
-		race: {
-			name: rawSaveData.race?.name,
-			physicalDescription: rawSaveData.race?.physicalDescription,
-			lore: rawSaveData.race?.lore,
-			traits: {
-				skillBonus: rawSaveData.racialTraits?.skillBonus,
-				physicalAbility: rawSaveData.racialTraits?.physicalAbility,
-			},
-		},
-		background: {
-			archetype: '',
-			physicalDescription: rawSaveData.appearance,
-			backstory: rawSaveData.backstory,
-			goals: rawSaveData.goals,
-		},
-		personality: rawSaveData.personality,
-		statistics: rawSaveData.stats,
-		status: {
-			...rawSaveData.resources,
-			effects: rawSaveData.statusEffects,
-		},
-		rules: rawSaveData.rules,
-		talents: rawSaveData.talents,
-		gear: {
-			equipment: rawSaveData.equipment,
-			inventory: rawSaveData.inventory,
-			encumbrance: rawSaveData.encumbrance,
-		},
-		modifiers: [],
-	};
 }
 
 function schemaVersionError(code, message) {
@@ -88,6 +53,5 @@ function schemaVersionError(code, message) {
 
 module.exports = {
 	CURRENT_CHARACTER_SAVE_SCHEMA_VERSION,
-	migrateCharacterSave,
 	validateCharacterSaveSchema,
 };

@@ -71,6 +71,7 @@ function validateCreatureGeneration(generation, location) {
 			'traits',
 			'fixedRules',
 			'statusEffects',
+			'modifiers',
 			'armor',
 			'equipment',
 			'inventory',
@@ -109,6 +110,11 @@ function validateCreatureGeneration(generation, location) {
 	validateReferenceList(
 		generation.statusEffects ?? [],
 		`${location} status effects`,
+		{ requiredSelector: 'fields' },
+	);
+	validateReferenceList(
+		generation.modifiers ?? [],
+		`${location} modifiers`,
 		{ requiredSelector: 'fields' },
 	);
 	if (generation.armor !== undefined) {

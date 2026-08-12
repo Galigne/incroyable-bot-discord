@@ -23,19 +23,21 @@ const {
 const { t } = require('./i18n');
 
 function createCharacterSummaryEmbed(character, locale = 'en') {
+	const effects = character.status.effects ?? [];
+	const modifiers = character.status.modifiers ?? [];
 	const statusSections = [
 		formatCombatantResources(character, ['hp', 'ar', 'ap', 'md'], locale),
 	];
-	if (character.status.effects.length > 0) {
+	if (effects.length > 0) {
 		statusSections.push(
 			`**${getCharacterFieldLabel(locale, 'status.effects')}**\n`
-				+ formatList(character.status.effects, 1_024, locale),
+				+ formatDescribedRecords(effects, 1_024, locale),
 		);
 	}
-	if (character.modifiers.length > 0) {
+	if (modifiers.length > 0) {
 		statusSections.push(
-			`**${getCharacterFieldLabel(locale, 'modifiers')}**\n`
-				+ formatDescribedRecords(character.modifiers, 1_024, locale),
+			`**${getCharacterFieldLabel(locale, 'status.modifiers')}**\n`
+				+ formatDescribedRecords(modifiers, 1_024, locale),
 		);
 	}
 	const status = statusSections.join('\n\n');
@@ -150,20 +152,25 @@ function createCharacterFieldEmbed(character, fieldName, locale = 'en') {
 		);
 	case 'level':
 		return embed.setDescription(String(getStoredValue(character, targets[0])));
-	case 'status':
+	case 'resources':
 		return embed.addFields(
-			...targets.filter(target => target.resourceId).map(target => ({
+			...targets.map(target => ({
 				name: getCharacterFieldLabel(locale, target.id),
 				value: formatCombatantResource(character, target.resourceId, locale),
 			})),
-			{
-				name: getCharacterFieldLabel(locale, targets.at(-1).id),
-				value: formatList(
-					getStoredValue(character, targets.at(-1)),
-					1_024,
-					locale,
-				),
-			},
+		);
+	case 'status':
+		return embed.addFields(
+			...targets
+				.filter(target => (getStoredValue(character, target) ?? []).length > 0)
+				.map(target => ({
+					name: getCharacterFieldLabel(locale, target.id),
+					value: formatDescribedRecords(
+						getStoredValue(character, target),
+						1_024,
+						locale,
+					),
+				})),
 		);
 	case 'statistics':
 		return embed.addFields(
@@ -185,12 +192,6 @@ function createCharacterFieldEmbed(character, fieldName, locale = 'en') {
 		));
 	case 'talents':
 		return embed.setDescription(formatList(
-			getStoredValue(character, targets[0]),
-			4_096,
-			locale,
-		));
-	case 'modifiers':
-		return embed.setDescription(formatDescribedRecords(
 			getStoredValue(character, targets[0]),
 			4_096,
 			locale,

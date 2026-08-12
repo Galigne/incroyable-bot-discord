@@ -156,7 +156,7 @@ module.exports = function createLocalizationChecks(context) {
 			'background.backstory',
 			'background.goals',
 			'personality',
-			'modifiers',
+			'resources',
 			'personality.description',
 			'personality.traits',
 			'race.traits',
@@ -170,17 +170,17 @@ module.exports = function createLocalizationChecks(context) {
 			'rules.level',
 			'rules.description',
 			'talents.value',
-			'modifiers.value',
 			'status.effects',
+			'status.modifiers',
 			'gear.equipment',
 			'gear.inventory',
 			'gear.encumbrance',
 			'gear.encumbrance.current',
 			'gear.encumbrance.max',
 			...RESOURCE_IDS.flatMap(resource => [
-				`status.${resource}`,
-				`status.${resource}.current`,
-				`status.${resource}.max`,
+				`resources.${resource}`,
+				`resources.${resource}.current`,
+				`resources.${resource}.max`,
 			]),
 		];
 		const actualFieldIds = Object.keys(CHARACTER_DISPLAY_FIELDS);
@@ -202,7 +202,7 @@ module.exports = function createLocalizationChecks(context) {
 
 		const abbreviationsByLocale = { en: [], fr: [] };
 		for (const resourceId of RESOURCE_IDS) {
-			const definition = getCharacterFieldDefinition(`status.${resourceId}`);
+			const definition = getCharacterFieldDefinition(`resources.${resourceId}`);
 			if (!definition?.abbreviationKey) {
 				errors.push(`${resourceId} is missing abbreviation metadata.`);
 				continue;

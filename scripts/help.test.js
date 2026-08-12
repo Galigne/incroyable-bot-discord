@@ -142,9 +142,9 @@ test('/help command:get and command:set list both explicit entity field orders',
 	}
 	const english = renderDetail('set', createInteraction('regular'), 'en');
 	for (const format of [
-		'Character groups retain their established order with `modifiers` appended',
+		'The `resources` modal has four short current:max inputs',
 		'creature groups use `identity`',
-		'`Name:Description`',
+		'Name:Description',
 		'EntityKey, type, schema metadata',
 	]) {
 		assert.ok(english.includes(format), format);
@@ -158,7 +158,7 @@ test('/help command:get explains summary, detailed field, and autocomplete behav
 			'en',
 			[
 				'Without `field`, posts the public entity summary.',
-				'Character fields use `name`, `level`, `status`',
+				'Character fields use `name`, `level`, `resources`, `status`',
 				'Creature fields use the independent order `identity`',
 			],
 		],
@@ -166,7 +166,7 @@ test('/help command:get explains summary, detailed field, and autocomplete behav
 			'fr',
 			[
 				'Sans `field`, publie le résumé public de l’entité.',
-				'Les champs de personnage sont `name`, `level`, `status`',
+				'Les champs de personnage sont `name`, `level`, `resources`, `status`',
 				'Les champs de créature suivent leur propre ordre',
 			],
 		],

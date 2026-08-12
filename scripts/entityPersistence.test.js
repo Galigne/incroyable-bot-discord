@@ -30,7 +30,7 @@ after(() => {
 	fs.rmSync(testSaveDirectory, { recursive: true, force: true });
 });
 
-test('talent arrays round-trip and legacy multiline saves remain compatible', async () => {
+test('talent arrays round-trip in the current save schema', async () => {
 	const arrayKey = 'Talents.Array';
 	const talents = [
 		'Athlete — +1 to sustained movement.',
@@ -47,7 +47,7 @@ test('talent arrays round-trip and legacy multiline saves remain compatible', as
 	await fsPromises.writeFile(
 		getSavePath(legacyKey),
 		JSON.stringify({
-			schemaVersion: 1,
+			schemaVersion: 3,
 			key: legacyKey,
 			creatorId: 'creator',
 			talents: [
@@ -76,11 +76,17 @@ test('encumbrance defaults and explicit values round-trip without rewriting on l
 
 	const legacyKey = 'Encumbrance.Legacy';
 	const legacySave = JSON.stringify({
-		schemaVersion: 1,
+		schemaVersion: 3,
 		key: legacyKey,
 		creatorId: 'creator',
-		encumbrance: { current: 3 },
-		stats: { constitution: 18 },
+		gear: { encumbrance: { current: 3 } },
+		resources: {
+			hp: { current: 100, max: 100 },
+			ar: { current: 0, max: 0 },
+			ap: { current: 4, max: 4 },
+			md: { current: 5, max: 5 },
+		},
+		status: { effects: [], modifiers: [] },
 	});
 	await fsPromises.writeFile(getSavePath(legacyKey), legacySave, 'utf8');
 	assert.deepEqual((await getCharacter(legacyKey)).gear.encumbrance, { current: 3, max: 0 });

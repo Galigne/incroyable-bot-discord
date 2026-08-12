@@ -129,10 +129,10 @@ test('blank creatures use a strict persistent schema with immutable identity', (
 		'source',
 		'naturalArmor',
 		'statistics',
+		'resources',
 		'status',
 		'traits',
 		'rules',
-		'modifiers',
 		'gear',
 	]);
 	assert.equal(validateCreatureSaveSchema(creature), creature);
@@ -156,7 +156,7 @@ test('creature hydration preserves final localized state and technical provenanc
 		}],
 	};
 	saved.naturalArmor.percentage = 25;
-	saved.status.ar = { current: 30, max: 30 };
+	saved.resources.ar = { current: 30, max: 30 };
 	saved.traits = [{
 		name: 'Keen Scent',
 		description: 'Tracks by scent.',
@@ -175,15 +175,15 @@ test('creature hydration preserves final localized state and technical provenanc
 			path: 'root.status-effects',
 		}],
 	}];
-	saved.modifiers = [{
-		generatorId: 'modifier',
+	saved.status.modifiers = [{
+		generatorId: 'modifier_creature',
 		entryId: 'scarred',
 		name: 'Scarred',
 		description: 'Old wounds cross its hide.',
 		provenance: [{
 			type: 'entry',
 			selection: 'random',
-			generatorId: 'modifier',
+			generatorId: 'modifier_creature',
 			entryId: 'scarred',
 			path: 'root.modifiers',
 		}],
@@ -192,11 +192,11 @@ test('creature hydration preserves final localized state and technical provenanc
 	validateCreatureSaveSchema(saved);
 	const hydrated = Creature.fromSave(saved);
 	assert.equal(hydrated.name, 'Ash Wolf');
-	assert.equal(hydrated.status.ar.max, 30);
+	assert.equal(hydrated.resources.ar.max, 30);
 	assert.equal(hydrated.naturalArmor.percentage, 25);
 	assert.deepEqual(hydrated.source, saved.source);
 	assert.deepEqual(hydrated.status.effects, saved.status.effects);
-	assert.deepEqual(hydrated.modifiers, saved.modifiers);
+	assert.deepEqual(hydrated.status.modifiers, saved.status.modifiers);
 	saved.source.entryId = 'changed-after-hydration';
 	assert.equal(hydrated.source.entryId, 'ash_wolf');
 });
@@ -218,7 +218,7 @@ test('creature saves reject missing, unsupported, mismatched, and invalid state'
 		error => error.code === 'CREATURE_KEY_MISMATCH',
 	);
 	const invalid = JSON.parse(JSON.stringify(new Creature('Schema.Invalid', 'creator')));
-	invalid.status.hp.current = 101;
+	invalid.resources.hp.current = 101;
 	assert.throws(
 		() => validateCreatureSaveSchema(invalid),
 		error => error.code === 'INVALID_CREATURE_SAVE',
@@ -231,10 +231,10 @@ test('creature saves reject missing, unsupported, mismatched, and invalid state'
 	);
 });
 
-test('character saves retain schema v2 without a required discriminator', () => {
+test('character saves use the current schema without a required discriminator', () => {
 	const character = new Character('Character.Compatible', 'creator');
 	const saved = JSON.parse(JSON.stringify(character));
-	assert.equal(saved.schemaVersion, 2);
+	assert.equal(saved.schemaVersion, 3);
 	assert.equal(Object.hasOwn(saved, 'type'), false);
 	assert.deepEqual(Object.keys(saved), [
 		'schemaVersion',
@@ -246,11 +246,11 @@ test('character saves retain schema v2 without a required discriminator', () => 
 		'background',
 		'personality',
 		'statistics',
+		'resources',
 		'status',
 		'rules',
 		'talents',
 		'gear',
-		'modifiers',
 	]);
 });
 
@@ -331,11 +331,11 @@ test('creature updates serialize per key and preserve complete pre-change histor
 	));
 	assert.equal(history.type, 'creature');
 	assert.equal(history.entries.length, 1);
-	assert.equal(history.entries[0].creature.status.hp.current, 95);
+	assert.equal(history.entries[0].creature.resources.hp.current, 95);
 
 	const undo = await undoEntity(entityKey, () => true, { maxEntries: 1 });
 	assert.equal(undo.entity.type, 'creature');
-	assert.equal(undo.entity.status.hp.current, 95);
+	assert.equal(undo.entity.resources.hp.current, 95);
 	assert.equal(getEntityOperationQueueSize(), 0);
 });
 
@@ -506,13 +506,14 @@ test('creature ownership is rechecked inside mutation workflows', async () => {
 		),
 		error => error.code === 'NOT_CREATURE_EDITOR',
 	);
-	assert.equal((await getEntity(entityKey)).status.hp.current, 100);
+	assert.equal((await getEntity(entityKey)).resources.hp.current, 100);
 });
 
 test('character and creature field orders stay explicit and type-compatible', async () => {
 	assert.deepEqual(getCharacterSections().map(field => field.id), [
 		'name',
 		'level',
+		'resources',
 		'status',
 		'statistics',
 		'rules',
@@ -521,16 +522,15 @@ test('character and creature field orders stay explicit and type-compatible', as
 		'race',
 		'background',
 		'personality',
-		'modifiers',
 	]);
 	assert.deepEqual(getCreatureSections().map(field => field.id), [
 		'identity',
 		'level',
+		'resources',
 		'status',
 		'statistics',
 		'rules',
 		'traits',
-		'modifiers',
 		'gear',
 	]);
 
@@ -552,15 +552,29 @@ test('character and creature field orders stay explicit and type-compatible', as
 	await createEntity(characterKey, 'owner', 'character');
 	await updateEditableEntity(
 		characterKey,
-		'modifiers',
-		'Scarred:Old wounds remain visible',
+		'status',
+		{
+			'status.effects': '',
+			'status.modifiers': 'Scarred:Old wounds remain visible',
+		},
 		() => true,
 		{ actorId: 'owner', maxEntries: 3 },
 		'character',
 	);
-	assert.deepEqual((await getEntity(characterKey)).modifiers, [
+	assert.deepEqual((await getEntity(characterKey)).status.modifiers, [
 		{ name: 'Scarred', description: 'Old wounds remain visible' },
 	]);
+	await assert.rejects(
+		updateEditableEntity(
+			characterKey,
+			'modifiers',
+			'Scarred:Old wounds remain visible',
+			() => true,
+			{ actorId: 'owner', maxEntries: 3 },
+			'character',
+		),
+		error => error.code === 'INVALID_CHARACTER_EDIT',
+	);
 	await assert.rejects(
 		updateEditableEntity(
 			entityKey,
@@ -672,7 +686,7 @@ test('registered management handlers create, mutate, and display creatures', asy
 		},
 	});
 	assert.match(damageReply, /received \*\*7 damage\*\*/);
-	assert.equal((await getEntity(entityKey)).status.hp.current, 93);
+	assert.equal((await getEntity(entityKey)).resources.hp.current, 93);
 
 	let getReply;
 	await commandRegistry.getRuntimeCommands().get('get').execute({

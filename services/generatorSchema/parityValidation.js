@@ -131,6 +131,7 @@ function validateCreatureGenerationPair(english, french, file, index) {
 		'naturalArmorPercentage',
 		'fixedRules',
 		'statusEffects',
+		'modifiers',
 		'armor',
 		'equipment',
 		'inventory',

@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 3,
+  "id": "modifier_character",
+  "visibility": "internal",
+  "name": "modificateurs de personnage",
+  "description": "Variations descriptives persistantes pour les personnages générés",
+  "entrySchema": {
+    "type": "fields",
+    "required": ["name", "description"]
+  },
+  "entries": [
+    {
+      "id": "scarred",
+      "weight": 3,
+      "fields": {
+        "name": "Cicatrices anciennes",
+        "description": "De vieilles cicatrices marquent le corps et témoignent des dangers surmontés."
+      }
+    },
+    {
+      "id": "pale",
+      "weight": 2,
+      "fields": {
+        "name": "Pâleur inhabituelle",
+        "description": "Une coloration anormalement pâle donne un aspect étrange à des traits pourtant familiers."
+      }
+    },
+    {
+      "id": "ornate_markings",
+      "weight": 2,
+      "fields": {
+        "name": "Marques ouvragées",
+        "description": "Des marques naturelles caractéristiques dessinent des motifs complexes sur le corps."
+      }
+    },
+    {
+      "id": "weathered",
+      "fields": {
+        "name": "Marques des éléments",
+        "description": "Les intempéries ont laissé une apparence rude, patiente et visiblement éprouvée."
+      }
+    }
+  ]
+}

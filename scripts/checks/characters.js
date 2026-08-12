@@ -98,12 +98,11 @@ module.exports = function createCharacterChecks(context) {
 				);
 			}
 			try {
-				setEditableFieldValue(original, 'status', {
+				setEditableFieldValue(original, 'resources', {
 					'resources.hp': '100:100',
 					'resources.ar': '0:30',
 					'resources.ap': '4:11',
 					'resources.md': '5:5',
-					statusEffects: '',
 				});
 				errors.push('AP values above 10 should be rejected.');
 			}
@@ -112,25 +111,25 @@ module.exports = function createCharacterChecks(context) {
 					throw error;
 				}
 			}
-			original.status.hp.current = 1;
-			original.status.ar.current = 30;
-			original.status.hp.current = 100;
+			original.resources.hp.current = 1;
+			original.resources.ar.current = 30;
+			original.resources.hp.current = 100;
 			const armoredDamage = dealDamage(original, 40);
 			if (
 				armoredDamage.arDamage !== 30
 				|| armoredDamage.hpDamage !== 10
-				|| original.status.ar.current !== 0
-				|| original.status.hp.current !== 90
+				|| original.resources.ar.current !== 0
+				|| original.resources.hp.current !== 90
 			) {
 				errors.push('Normal damage does not reduce AR before HP.');
 			}
-			original.status.ar.current = 20;
+			original.resources.ar.current = 20;
 			const piercingDamage = dealDamage(original, 15, true);
 			if (
 				piercingDamage.arDamage !== 0
 				|| piercingDamage.hpDamage !== 15
-				|| original.status.ar.current !== 20
-				|| original.status.hp.current !== 75
+				|| original.resources.ar.current !== 20
+				|| original.resources.hp.current !== 75
 			) {
 				errors.push('Piercing damage does not bypass AR.');
 			}
@@ -143,10 +142,10 @@ module.exports = function createCharacterChecks(context) {
 					throw error;
 				}
 			}
-			original.status.hp.current = 1;
-			original.status.ar.current = 0;
-			original.status.ap.current = 0;
-			original.status.md.current = 0;
+			original.resources.hp.current = 1;
+			original.resources.ar.current = 0;
+			original.resources.ap.current = 0;
+			original.resources.md.current = 0;
 			restoreResource(original, 'hp', 50);
 			resetTurnResources(original);
 			const character = Character.fromSave(JSON.parse(JSON.stringify(original)));
@@ -176,9 +175,9 @@ module.exports = function createCharacterChecks(context) {
 				|| character.gear.equipment[0] !== 'Longsword'
 				|| character.gear.encumbrance.current !== 2
 				|| character.gear.encumbrance.max !== 7
-				|| character.status.hp.current !== 50
-				|| character.status.ap.current !== character.status.ap.max
-				|| character.status.md.current !== character.status.md.max
+				|| character.resources.hp.current !== 50
+				|| character.resources.ap.current !== character.resources.ap.max
+				|| character.resources.md.current !== character.resources.md.max
 			) {
 				errors.push('Character saves are not restored correctly.');
 			}
@@ -212,6 +211,7 @@ module.exports = function createCharacterChecks(context) {
 			for (const field of [
 				'name',
 				'level',
+				'resources',
 				'background',
 				'gear',
 				'race',
@@ -220,7 +220,6 @@ module.exports = function createCharacterChecks(context) {
 				'rules',
 				'status',
 				'talents',
-				'modifiers',
 			]) {
 				const fieldEmbed = createCharacterFieldEmbed(character, field)?.toJSON();
 				if (field === 'rules' && !fieldEmbed.description.includes('Fire — Level 2')) {
@@ -244,24 +243,9 @@ module.exports = function createCharacterChecks(context) {
 					errors.push('The detailed statistics view should retain derived statistics.');
 				}
 			}
-			const legacyCharacter = Character.fromSave({
-				schemaVersion: 1,
-				key: 'Legacy',
-				creatorId: '0',
-				rules: [{ name: 'Legacy RULE', description: 'Saved without a level.' }],
-				talents: 'Legacy talent\nSecond legacy talent',
-			});
-			if (
-				legacyCharacter.rules[0]?.level !== 1
-				|| legacyCharacter.talents.length !== 2
-				|| legacyCharacter.gear.encumbrance.current !== 0
-				|| legacyCharacter.gear.encumbrance.max !== 0
-			) {
-				errors.push('Legacy character defaults should remain compatible.');
-			}
-			character.status.ap.current = 2;
-			character.status.ap.max = 4;
-			const statusDetail = createCharacterFieldEmbed(character, 'status').toJSON();
+			character.resources.ap.current = 2;
+			character.resources.ap.max = 4;
+			const statusDetail = createCharacterFieldEmbed(character, 'resources').toJSON();
 			const apDetail = statusDetail.fields.find(field => field.name === 'Action points');
 			if (apDetail?.value !== 'AP:\n🌟🌟⭐⭐') {
 				errors.push('AP availability is not displayed correctly.');
@@ -350,12 +334,12 @@ module.exports = function createCharacterChecks(context) {
 
 			const expectedHp = calculateMaxHp(character.statistics.constitution, character.level);
 			if (
-				character.status.hp.max !== expectedHp
-				|| character.status.hp.current !== expectedHp
-				|| character.status.ap.max !== calculateMaxAp(character.level)
-				|| character.status.ap.current !== character.status.ap.max
-				|| character.status.md.max !== calculateMaxMovementDistance(character.statistics.speed)
-				|| character.status.md.current !== character.status.md.max
+				character.resources.hp.max !== expectedHp
+				|| character.resources.hp.current !== expectedHp
+				|| character.resources.ap.max !== calculateMaxAp(character.level)
+				|| character.resources.ap.current !== character.resources.ap.max
+				|| character.resources.md.max !== calculateMaxMovementDistance(character.statistics.speed)
+				|| character.resources.md.current !== character.resources.md.max
 			) {
 				errors.push('Generated HP, AP, or MD values are incorrect.');
 			}
@@ -367,8 +351,8 @@ module.exports = function createCharacterChecks(context) {
 			if (
 				!armor
 				|| Number(armor.fields.constitution_requirement) > character.statistics.constitution
-				|| character.status.ar.max !== Math.round(expectedHp * armorPercentage / 100)
-				|| character.status.ar.current !== character.status.ar.max
+				|| character.resources.ar.max !== Math.round(expectedHp * armorPercentage / 100)
+				|| character.resources.ar.current !== character.resources.ar.max
 				|| character.gear.equipment.length < 2
 				|| character.gear.equipment.length > 3
 				|| character.gear.inventory.length !== 4
@@ -437,7 +421,7 @@ module.exports = function createCharacterChecks(context) {
 			await characterStore.updateCharacter(originalName, () => true, character => {
 				character.name.firstName = 'A Display';
 				character.name.lastName = 'Name With Spaces';
-				character.status.hp.current = 42;
+				character.resources.hp.current = 42;
 			});
 			const editedCharacter = await characterStore.getCharacter(originalName);
 			if (
@@ -445,7 +429,7 @@ module.exports = function createCharacterChecks(context) {
 				|| editedCharacter.name.lastName !== 'Name With Spaces'
 				|| editedCharacter.displayName !== 'A Display Name With Spaces'
 				|| editedCharacter.key !== originalName
-				|| editedCharacter.status.hp.current !== 42
+				|| editedCharacter.resources.hp.current !== 42
 			) {
 				errors.push('Character edits are not persisted correctly.');
 			}

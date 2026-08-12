@@ -14,7 +14,7 @@
     },
     {
       "id": "hunt_modified_monster",
-      "value": "Hunt a creature identified as {{ creature_monster }} after witnesses associate it with the trait {{ modifier }}."
+      "value": "Hunt a creature identified as {{ creature_monster }} after witnesses associate it with the trait {{ modifier_creature }}."
     },
     {
       "id": "defend_settlement_from_faction",

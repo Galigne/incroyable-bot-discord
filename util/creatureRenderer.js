@@ -22,22 +22,24 @@ const {
 const { t } = require('./i18n');
 
 function createCreatureSummaryEmbed(creature, locale = 'en') {
+	const effects = creature.status.effects ?? [];
+	const modifiers = creature.status.modifiers ?? [];
 	const stats = BASE_STATS.map(stat => (
 		`${label(locale, `statistics.${stat}`)}: **${creature.statistics[stat]}**`
 	)).join('\n');
 	const statusSections = [
 		formatCombatantResources(creature, ['hp', 'ar', 'ap', 'md'], locale),
 	];
-	if (creature.status.effects.length > 0) {
+	if (effects.length > 0) {
 		statusSections.push(
 			`**${label(locale, 'status.effects')}**\n`
-				+ formatDescribedRecords(creature.status.effects, 1_024, locale),
+				+ formatDescribedRecords(effects, 1_024, locale),
 		);
 	}
-	if (creature.modifiers.length > 0) {
+	if (modifiers.length > 0) {
 		statusSections.push(
-			`**${label(locale, 'modifiers')}**\n`
-				+ formatDescribedRecords(creature.modifiers, 1_024, locale),
+			`**${label(locale, 'status.modifiers')}**\n`
+				+ formatDescribedRecords(modifiers, 1_024, locale),
 		);
 	}
 	const rightSections = [];
@@ -121,24 +123,25 @@ function createCreatureFieldEmbed(creature, fieldName, locale = 'en') {
 		);
 	case 'level':
 		return embed.setDescription(String(creature.level));
-	case 'status':
+	case 'resources':
 		return embed.addFields(
-			...targets.filter(target => target.resourceId).map(target => ({
+			...targets.map(target => ({
 				name: label(locale, target.id),
 				value: formatCombatantResource(creature, target.resourceId, locale),
 			})),
-			{
-				name: label(locale, 'status.effects'),
-				value: formatDescribedRecords(
-					creature.status.effects,
-					1_024,
-					locale,
-				),
-			},
-			{
-				name: t(locale, 'creature.fields.naturalArmor'),
-				value: `${creature.naturalArmor.percentage}%`,
-			},
+		);
+	case 'status':
+		return embed.addFields(
+			...targets
+				.filter(target => (getStoredValue(creature, target) ?? []).length > 0)
+				.map(target => ({
+					name: label(locale, target.id),
+					value: formatDescribedRecords(
+						getStoredValue(creature, target),
+						1_024,
+						locale,
+					),
+				})),
 		);
 	case 'statistics':
 		return embed.addFields(
@@ -158,12 +161,6 @@ function createCreatureFieldEmbed(creature, fieldName, locale = 'en') {
 	case 'traits':
 		return embed.setDescription(formatDescribedRecords(
 			creature.traits,
-			4_096,
-			locale,
-		));
-	case 'modifiers':
-		return embed.setDescription(formatDescribedRecords(
-			creature.modifiers,
 			4_096,
 			locale,
 		));

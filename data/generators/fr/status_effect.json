@@ -192,37 +192,6 @@
       }
     },
     {
-      "id": "restless",
-      "weight": 3,
-      "fields": {
-        "name": "Agitée",
-        "description": "Elle ne reste jamais parfaitement immobile et surveille constamment les alentours."
-      }
-    },
-    {
-      "id": "smoldering",
-      "weight": 2,
-      "fields": {
-        "name": "Incandescente",
-        "description": "Une fumée légère et de faibles braises s’échappent de son corps sans imposer d’effet mécanique."
-      }
-    },
-    {
-      "id": "frost_rimed",
-      "weight": 2,
-      "fields": {
-        "name": "Couverte de givre",
-        "description": "Une couche de givre persistante recouvre une partie de son corps et les surfaces proches."
-      }
-    },
-    {
-      "id": "shadowed",
-      "fields": {
-        "name": "Voilée d’ombre",
-        "description": "Sa silhouette reste difficile à distinguer des ombres qui l’entourent."
-      }
-    },
-    {
       "id": "distracted",
       "fields": {
         "name": "Distrait",

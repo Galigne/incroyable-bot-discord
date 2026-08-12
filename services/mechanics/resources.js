@@ -31,24 +31,24 @@ function createGeneratedResources(stats, level, armorPercentage) {
 	};
 }
 
-function createResourcesFromSave(status = {}) {
-	const apMax = clampActionPoints(status.ap?.max ?? 4);
+function createResourcesFromSave(resources = {}) {
+	const apMax = clampActionPoints(resources.ap?.max ?? 4);
 	return {
 		hp: {
-			current: status.hp?.current ?? 100,
-			max: status.hp?.max ?? 100,
+			current: resources.hp?.current ?? 100,
+			max: resources.hp?.max ?? 100,
 		},
 		ar: {
-			current: status.ar?.current ?? 0,
-			max: status.ar?.max ?? 0,
+			current: resources.ar?.current ?? 0,
+			max: resources.ar?.max ?? 0,
 		},
 		ap: {
-			current: Math.min(clampActionPoints(status.ap?.current ?? 4), apMax),
+			current: Math.min(clampActionPoints(resources.ap?.current ?? 4), apMax),
 			max: apMax,
 		},
 		md: {
-			current: status.md?.current ?? 5,
-			max: status.md?.max ?? 5,
+			current: resources.md?.current ?? 5,
+			max: resources.md?.max ?? 5,
 		},
 	};
 }
@@ -64,7 +64,7 @@ function restoreResource(character, resourceName, percentage) {
 		throw combatantEditError(character, 'errors.healResourcesOnly');
 	}
 	validateRestorationPercentage(percentage, character);
-	const target = character.status[resource];
+	const target = character.resources[resource];
 	target.current = calculateRestoredResourceValue(target.max, percentage);
 	return target;
 }
@@ -81,7 +81,7 @@ function restoreHealingResources(character, resourceName, percentage) {
 	validateRestorationPercentage(percentage, character);
 
 	return resourceKeys.map(resource => {
-		const target = character.status[resource];
+		const target = character.resources[resource];
 		const previous = target.current;
 		restoreResource(character, resource, percentage);
 		return {
@@ -94,8 +94,8 @@ function restoreHealingResources(character, resourceName, percentage) {
 }
 
 function resetTurnResources(character) {
-	character.status.ap.current = character.status.ap.max;
-	character.status.md.current = character.status.md.max;
+	character.resources.ap.current = character.resources.ap.max;
+	character.resources.md.current = character.resources.md.max;
 }
 
 function validateRestorationPercentage(percentage, combatant = null) {

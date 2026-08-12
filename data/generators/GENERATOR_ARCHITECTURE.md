@@ -63,13 +63,14 @@ including inline references and its own modifier map, and attaches the complete
 result in a separate modifier array. Modifier output never merges into the base
 result or changes game mechanics. Technical-looking fields remain inert output.
 
-The shared `modifier` generator remains available to background-based character
-generation and all three creature detail components. Application code applies the
-descriptive modifier policy independently at 25%; it is not declared in those
+Character generation uses only the `modifier_character` pool, and all three
+creature detail components use only `modifier_creature`. Application code applies
+the descriptive modifier policy independently at 25%; it is not declared in those
 generator maps. Site modifier generators remain ordinary internal catalogs, and
 site consumers retain their former independent 20% probabilities in their maps.
 The public `status_effect` component contains structured localized `name` and
-`description` fields shared by both persistent entity types.
+`description` fields for temporary conditions and remains separate from both
+persistent modifier pools.
 
 ## Shared statistical profiles
 
@@ -97,7 +98,8 @@ remain editable character fields.
 
 `/gen-char` creates a complete character, including name, race, background,
 personality, statistics, derived resources, explicit character RULE allocation,
-talents, descriptive statuses and modifiers, gear, and manual encumbrance.
+talents, temporary status effects, character-pool modifiers, gear, and manual
+encumbrance.
 Generated armor, weapons, inventory, and gold never alter encumbrance.
 
 ## Creature generation and persistence
@@ -112,8 +114,9 @@ the complete entity atomically as type `creature`.
 
 Every detail entry supplies localized identity and explicit generation metadata:
 one shared statistical profile, intrinsic localized traits, optional natural armor
-or armor reference, explicit fixed RULE IDs and levels, optional descriptive status
-references, and optional equipment or inventory references. Entries cannot define
+or armor reference, explicit fixed RULE IDs and levels, optional temporary
+status-effect references, creature-pool modifier references, and optional equipment
+or inventory references. Entries cannot define
 fixed statistics, alternate budgets, challenge ratings, resource formulas, or
 automatic encumbrance. Loading and displaying a saved creature never reruns
 generation.

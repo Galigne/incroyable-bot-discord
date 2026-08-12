@@ -16,10 +16,10 @@ class Creature {
 			: structuredClone(data.source);
 		creature.naturalArmor = structuredClone(data.naturalArmor);
 		creature.statistics = structuredClone(data.statistics);
+		creature.resources = structuredClone(data.resources);
 		creature.status = structuredClone(data.status);
 		creature.traits = structuredClone(data.traits);
 		creature.rules = structuredClone(data.rules);
-		creature.modifiers = structuredClone(data.modifiers);
 		creature.gear = structuredClone(data.gear);
 		return creature;
 	}
@@ -43,16 +43,18 @@ class Creature {
 		this.source = null;
 		this.naturalArmor = { percentage: 0 };
 		this.statistics = createStats();
-		this.status = {
+		this.resources = {
 			hp: { current: 100, max: 100 },
 			ar: { current: 0, max: 0 },
 			ap: { current: 4, max: 4 },
 			md: { current: 5, max: 5 },
+		};
+		this.status = {
 			effects: [],
+			modifiers: [],
 		};
 		this.traits = [];
 		this.rules = [];
-		this.modifiers = [];
 		this.gear = {
 			equipment: [],
 			inventory: [],

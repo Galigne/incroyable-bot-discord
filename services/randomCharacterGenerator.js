@@ -68,6 +68,7 @@ function populateRandomCharacter(character, options = {}) {
 		{ path: 'root.character.background.physicalDescription', random },
 	);
 	const backgroundModifiers = maybeGenerateDescriptiveModifiers({
+		generator: 'modifier_character',
 		resolver,
 		locale,
 		random,
@@ -106,7 +107,7 @@ function populateRandomCharacter(character, options = {}) {
 		.map(entry => `${getField(entry, 'name')} — ${getField(entry, 'description')}`);
 
 	character.status.effects = random() < 0.25
-		? [formatNamedEntry(pickOne('status_effect', locale, random))]
+		? [createDescribedRecord(pickOne('status_effect', locale, random))]
 		: [];
 
 	const armor = pickOne(
@@ -123,7 +124,7 @@ function populateRandomCharacter(character, options = {}) {
 	const inventoryItems = pickMany('inventory', 3, locale, random);
 	const armorPercentage = Number(getField(armor, 'ar_percentage'));
 
-	Object.assign(character.status, createGeneratedResources(
+	Object.assign(character.resources, createGeneratedResources(
 		character.statistics,
 		level,
 		armorPercentage,
@@ -138,7 +139,7 @@ function populateRandomCharacter(character, options = {}) {
 		...inventoryItems.map(formatNamedEntry),
 		formatGold(gold),
 	];
-	character.modifiers = backgroundModifiers.map(modifier => structuredClone(modifier));
+	character.status.modifiers = backgroundModifiers.map(modifier => structuredClone(modifier));
 
 	return character;
 }
@@ -239,6 +240,13 @@ function formatNamedEntry(entry) {
 	const name = getField(entry, 'name');
 	const description = getField(entry, 'description');
 	return `${name} — ${description}`;
+}
+
+function createDescribedRecord(entry) {
+	return {
+		name: getField(entry, 'name'),
+		description: getField(entry, 'description'),
+	};
 }
 
 function randomInteger(min, max, random) {

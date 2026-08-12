@@ -84,13 +84,13 @@ test('entity application workflows compose character persistence and mechanics',
 	const characterKey = 'Application.Workflow';
 	await createEntity(characterKey, 'creator', 'character');
 	const damage = await damageEntity(characterKey, 25, false, () => true);
-	assert.equal(damage.entity.status.hp.current, 75);
+	assert.equal(damage.entity.resources.hp.current, 75);
 	assert.equal(damage.damage.hpDamage, 25);
 
 	const healing = await healEntity(characterKey, 'hp', 100, () => true);
-	assert.equal(healing.entity.status.hp.current, 100);
+	assert.equal(healing.entity.resources.hp.current, 100);
 	const endedTurn = await endEntityTurn(characterKey, () => true);
-	assert.equal(endedTurn.entity.status.ap.current, 4);
+	assert.equal(endedTurn.entity.resources.ap.current, 4);
 	assert.equal((await getEntity(characterKey)).key, characterKey);
 
 	await deleteEntity(characterKey, () => true);

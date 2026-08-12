@@ -535,9 +535,8 @@ test('the concrete character undo result uses the shared entity shape', async ()
 	assert.equal(result.createdAt, '2026-08-06T10:00:00.000Z');
 });
 
-test('version-1 and version-2 snapshots coexist and undo always writes version 2', async () => {
+test('unsupported legacy snapshots are rejected without creating history', async () => {
 	const characterKey = nextKey('Undo.MixedSchema');
-	const context = historyContext(3, 'migration-actor');
 	await fsPromises.writeFile(
 		getCharacterSavePath(characterKey),
 		JSON.stringify({
@@ -550,30 +549,11 @@ test('version-1 and version-2 snapshots coexist and undo always writes version 2
 		'utf8',
 	);
 
-	await editFirstName(characterKey, 'First v2', context);
-	await editFirstName(characterKey, 'Second v2', context);
-	let history = await readHistory(characterKey);
-	assert.deepEqual(
-		history.entries.map(entry => entry.character.schemaVersion),
-		[1, 2],
+	await assert.rejects(
+		editFirstName(characterKey, 'First v2', historyContext(3, 'legacy-actor')),
+		error => error.code === 'UNSUPPORTED_CHARACTER_SCHEMA_VERSION',
 	);
-	assert.equal(history.entries[0].character.firstName, 'Legacy');
-	assert.equal(history.entries[1].character.name.firstName, 'First v2');
-
-	const firstUndo = await undoEntity(characterKey, () => true, context);
-	assert.equal(firstUndo.entity.name.firstName, 'First v2');
-	assert.equal((await readRawSave(characterKey)).schemaVersion, 2);
-	const migratedUndo = await undoEntity(characterKey, () => true, context);
-	assert.equal(migratedUndo.entity.name.firstName, 'Legacy');
-	const migratedSave = await readRawSave(characterKey);
-	assert.equal(migratedSave.schemaVersion, 2);
-	assert.deepEqual(migratedSave.name, {
-		firstName: 'Legacy',
-		lastName: 'Name',
-	});
-	assert.equal(Object.hasOwn(migratedSave, 'firstName'), false);
-	history = await readHistory(characterKey);
-	assert.equal(history.entries.length, 0);
+	await assert.rejects(readHistory(characterKey));
 });
 
 test('undo rejects missing history and preserves state on permission failure', async () => {
@@ -755,13 +735,6 @@ async function editFirstName(
 		canManage,
 		context,
 	);
-}
-
-async function readRawSave(characterKey) {
-	return JSON.parse(await fsPromises.readFile(
-		getCharacterSavePath(characterKey),
-		'utf8',
-	));
 }
 
 function historyContext(maxEntries = 3, actorId = 'history-actor') {

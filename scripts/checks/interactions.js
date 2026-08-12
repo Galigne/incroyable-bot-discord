@@ -83,8 +83,8 @@ module.exports = function createInteractionChecks(context) {
 			}
 
 			await characterStore.updateCharacter(characterKey, () => true, character => {
-				character.status.hp = { current: 10, max: 101 };
-				character.status.ar = { current: 5, max: 33 };
+				character.resources.hp = { current: 10, max: 101 };
+				character.resources.ar = { current: 5, max: 33 };
 			});
 			const heal = require('../../commands/handlers/heal');
 			let healPayload;
@@ -106,8 +106,8 @@ module.exports = function createInteractionChecks(context) {
 			});
 			const healedCharacter = await characterStore.getCharacter(characterKey);
 			if (
-				healedCharacter.status.hp.current !== 51
-				|| healedCharacter.status.ar.current !== 17
+				healedCharacter.resources.hp.current !== 51
+				|| healedCharacter.resources.ar.current !== 17
 				|| !healPayload.includes('HP: **51 / 101 (50%)**')
 				|| !healPayload.includes('AR: **17 / 33 (52%)**')
 			) {

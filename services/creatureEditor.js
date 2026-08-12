@@ -30,7 +30,7 @@ function validateCreatureUpdates(creature, updates, editError) {
 		}
 	}
 	for (const resourceId of ['hp', 'ar', 'ap', 'md']) {
-		validateResourcePair(proposed.status[resourceId], resourceId, editError);
+		validateResourcePair(proposed.resources[resourceId], resourceId, editError);
 	}
 	validateResourcePair(proposed.gear.encumbrance, 'encumbrance', editError);
 }

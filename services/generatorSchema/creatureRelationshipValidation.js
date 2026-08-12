@@ -31,6 +31,10 @@ function validateCreatureGenerationRelationships(
 		const sources = validateReferenceRelationship(reference, catalog, ownerId);
 		assertReferenceFields(sources, ['name', 'description'], ownerId, 'status effect');
 	}
+	for (const reference of generation.modifiers ?? []) {
+		const sources = validateReferenceRelationship(reference, catalog, ownerId);
+		assertReferenceFields(sources, ['name', 'description'], ownerId, 'modifier');
+	}
 	if (generation.armor) {
 		const sources = validateReferenceRelationship(generation.armor, catalog, ownerId);
 		assertReferenceFields(

@@ -1,7 +1,7 @@
 const { BASE_STATS, DERIVED_STATS, MAX_AP } = require('./mechanics/constants');
 const { validateEntityKey } = require('./entityStoragePaths');
 
-const CURRENT_CREATURE_SAVE_SCHEMA_VERSION = 1;
+const CURRENT_CREATURE_SAVE_SCHEMA_VERSION = 2;
 const CREATURE_STAT_IDS = Object.freeze([...BASE_STATS, ...DERIVED_STATS]);
 const TECHNICAL_ID = /^[a-z0-9]+(?:_[a-z0-9]+)*$/;
 const STAT_PROFILE_ID = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
@@ -36,10 +36,10 @@ function validateCreatureSaveSchema(rawSaveData, expectedKey = rawSaveData?.key)
 		'source',
 		'naturalArmor',
 		'statistics',
+		'resources',
 		'status',
 		'traits',
 		'rules',
-		'modifiers',
 		'gear',
 	]);
 
@@ -68,12 +68,10 @@ function validateCreatureSaveSchema(rawSaveData, expectedKey = rawSaveData?.key)
 	validateSource(rawSaveData.source);
 	validateNaturalArmor(rawSaveData.naturalArmor);
 	validateStatistics(rawSaveData.statistics);
+	validateResources(rawSaveData.resources);
 	validateStatus(rawSaveData.status);
 	validateDescribedRecords(rawSaveData.traits, 'traits', { recordId: 'id' });
 	validateRules(rawSaveData.rules);
-	validateDescribedRecords(rawSaveData.modifiers, 'modifiers', {
-		modifierSource: true,
-	});
 	validateGear(rawSaveData.gear);
 	return rawSaveData;
 }
@@ -129,13 +127,25 @@ function validateStatistics(statistics) {
 
 function validateStatus(status) {
 	assertRecord(status, 'status');
-	assertExactKeys(status, 'status', ['hp', 'ar', 'ap', 'md', 'effects']);
-	for (const resourceId of ['hp', 'ar', 'ap', 'md']) {
-		validateResource(status[resourceId], `status.${resourceId}`, resourceId === 'ap');
-	}
+	assertExactKeys(status, 'status', ['effects', 'modifiers']);
 	validateDescribedRecords(status.effects, 'status.effects', {
 		selectionSource: true,
 	});
+	validateDescribedRecords(status.modifiers, 'status.modifiers', {
+		selectionSource: true,
+	});
+}
+
+function validateResources(resources) {
+	assertRecord(resources, 'resources');
+	assertExactKeys(resources, 'resources', ['hp', 'ar', 'ap', 'md']);
+	for (const resourceId of ['hp', 'ar', 'ap', 'md']) {
+		validateResource(
+			resources[resourceId],
+			`resources.${resourceId}`,
+			resourceId === 'ap',
+		);
+	}
 }
 
 function validateResource(resource, path, actionPoints = false) {
@@ -189,7 +199,7 @@ function validateDescribedRecords(records, path, options = {}) {
 		if (options.recordId) {
 			optionalKeys.push(options.recordId);
 		}
-		if (options.modifierSource || options.selectionSource) {
+		if (options.selectionSource) {
 			optionalKeys.push('generatorId', 'entryId', 'provenance');
 		}
 		assertExactKeys(
@@ -206,7 +216,7 @@ function validateDescribedRecords(records, path, options = {}) {
 				`${recordPath}.${options.recordId}`,
 			);
 		}
-		if (options.modifierSource || options.selectionSource) {
+		if (options.selectionSource) {
 			for (const idField of ['generatorId', 'entryId']) {
 				if (record[idField] !== undefined) {
 					assertTechnicalId(record[idField], `${recordPath}.${idField}`);

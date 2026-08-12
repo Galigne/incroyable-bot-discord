@@ -50,8 +50,9 @@ are displayed separately without changing base generated mechanics.
 The public `creature` catalog routes `animal`, `companion`, and `monster` types to
 their internal `creature_*` sources. Those sources use the same references and
 profiles to persist a complete final creature, including provenance, without
-rerunning generation on load or display. Status effects and descriptive modifiers
-come from catalogs shared with character generation.
+rerunning generation on load or display. Temporary status effects come from the
+`status_effect` catalog; persistent character and creature modifiers come from
+their separate `modifier_character` and `modifier_creature` pools.
 Content already saved in an entity is never translated retroactively.
 
 Set the required runtime language in `config.json`. The complete configuration is:
@@ -121,10 +122,11 @@ Autocomplete suggests commands the current user may access, existing EntityKeys,
 type-compatible fields, generator categories, localized creature types, common
 dice expressions, levels, and common purge amounts. `/undo` autocomplete includes authorized active entities with
 usable history. The private form opens immediately after `/set` is submitted.
-Character fields are `name`, `level`, `status`, `statistics`, `rules`, `talents`,
-`gear`, `race`, `background`, `personality`, and `modifiers`. Creature fields independently use
-`identity`, `level`, `status`, `statistics`, `rules`, `traits`, `modifiers`, and
-`gear`.
+Character fields are `name`, `level`, `resources`, `status`, `statistics`, `rules`,
+`talents`, `gear`, `race`, `background`, `personality`. Creature fields independently
+use `identity`, `level`, `resources`, `status`, `statistics`, `rules`, `traits`, and
+`gear`. The `resources` section contains HP, AR, AP, and MD. The `status` section
+contains independent Status Effects and Modifiers lists.
 
 Name uses separate optional first-name and last-name inputs; emptying either input
 clears that component. Race uses separate inputs for its name, physical description,
@@ -133,9 +135,9 @@ archetype and physical description, while its editable form contains separate
 backstory and goals inputs. Personality uses separate description and traits
 inputs.
 
-HP, AR, AP, MD, and encumbrance each use separate required Current and Maximum
-numeric inputs. Every grouped form is prefilled, validated completely, and saved
-as one atomic update. Encumbrance is a manually managed resource that defaults to
+The resources form uses separate required Current and Maximum numeric inputs for
+HP, AR, AP, and MD. Every grouped form is prefilled, validated completely, and
+saved as one atomic update. Encumbrance is a manually managed resource that defaults to
 `0 / 0`; it is not derived from Constitution, equipment, inventory, or any other
 character property.
 
@@ -145,7 +147,7 @@ Statistics use one prefilled `statName: statValue` line for each of
 order but must each appear exactly once; the complete group is validated before
 any statistic changes.
 
-Personality traits, talents, status effects, equipment, and inventory use one
+Personality traits, talents, equipment, and inventory use one
 entry per line. Optional leading `- ` or `* ` markers are normalized away, empty
 lines are ignored, and an empty submission clears the complete collection. Talent
 names and descriptions remain combined in each list entry. RULEs use
@@ -153,9 +155,9 @@ names and descriptions remain combined in each list entry. RULEs use
 positive whole number, and only the first two colons are separators, so descriptions
 may contain additional colons.
 
-Descriptive modifiers are shared by characters and creatures and use one
-`Name:Description` record per line. Existing character saves without a `modifiers`
-property load it as an empty list; no save-file migration or rewrite is performed.
+Status Effects and Modifiers each use one `Name:Description` record per line and
+can be cleared independently. Status Effects describe temporary conditions;
+Modifiers describe persistent distinguishing alterations.
 
 Discord displays at most 25 autocomplete suggestions at once, so type part of a
 name or value to filter longer lists. `/help command:gen` lists every localized
