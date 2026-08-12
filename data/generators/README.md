@@ -167,8 +167,9 @@ putting an inline reference in a technical `generator` field:
 The technical field is an ordinary field value, not a special raw generator ID.
 Character and creature workflows explicitly resolve it, then consume the returned
 fields and provenance. Background routes resolve to simple localized text
-archetypes; character generation also independently resolves the internal
-`physical_description` text generator. The persistent creature type remains `creature`; `animal`,
+archetypes from the matching `background_<category>` generator; character
+generation also independently resolves the internal `physical_description` text
+generator. The persistent creature type remains `creature`; `animal`,
 `companion`, and `monster` are generator archetypes only.
 
 Creature detail entries use localized `name` and `description` fields plus

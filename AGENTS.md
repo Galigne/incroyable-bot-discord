@@ -635,10 +635,11 @@ between English and French.
 
 The public `background` and `creature` components route to internal components
 through ordinary technical `generator` fields containing inline references such as
-`{{ artisan }}` or `{{ creature_animal }}`. Background category IDs route to
-same-ID internal text generators containing reusable archetypes, and character
-generation independently resolves the internal `physical_description` text
-generator. The public creature router entries define the available stable type IDs
+`{{ background_artisan }}` or `{{ creature_animal }}`. Background category IDs
+route to matching `background_<category>` internal text generators containing
+reusable archetypes, and character generation independently resolves the internal
+`physical_description` text generator. The public creature router entries define
+the available stable type IDs
 and reference their internal detail generators; `animal`, `companion`, and
 `monster` are the current entries, not a closed command list or persistence types.
 Detail components expose localized `name` and `description` fields plus validated

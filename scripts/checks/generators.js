@@ -11,23 +11,23 @@ const {
 const generatorResolver = require('../../services/generatorResolver');
 
 const BACKGROUND_GENERATOR_IDS = new Set([
-	'adventurer',
-	'artisan',
-	'criminal',
-	'exile',
-	'mage',
-	'merchant',
-	'military',
-	'noble',
-	'official',
-	'outlander',
-	'peasant',
-	'performer',
-	'religious',
-	'sailor',
-	'scholar',
-	'servant',
-	'urchin',
+	'background_adventurer',
+	'background_artisan',
+	'background_criminal',
+	'background_exile',
+	'background_mage',
+	'background_merchant',
+	'background_military',
+	'background_noble',
+	'background_official',
+	'background_outlander',
+	'background_peasant',
+	'background_performer',
+	'background_religious',
+	'background_sailor',
+	'background_scholar',
+	'background_servant',
+	'background_urchin',
 ]);
 
 module.exports = function createGeneratorChecks(context) {
@@ -242,7 +242,7 @@ function checkBackgroundGenerators(errors, generatorCatalog) {
 			|| !background.fields?.name
 			|| !background.fields?.description
 			|| backgroundIds.has(background.id)
-			|| routedGeneratorId !== background.id
+			|| routedGeneratorId !== `background_${background.id}`
 			|| details.length === 0
 			|| generatorCatalog.getGenerator(routedGeneratorId)?.entrySchema.type !== 'text'
 			|| details.some(entry => typeof entry.value !== 'string' || !entry.value.trim())

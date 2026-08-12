@@ -87,7 +87,8 @@ allocation constraints and weighting.
 
 The public `background` component remains the broad category selector. Each stable
 category entry routes through its ordinary technical `generator` field to an
-internal text generator with the same broad ID, such as `{{ artisan }}`. These
+internal text generator named `background_<category>`, such as
+`{{ background_artisan }}`. These
 internal generators contain only reusable occupation, role, or social-archetype
 text entries. Character generation independently resolves one entry from the
 internal `physical_description` text generator. The saved background contains

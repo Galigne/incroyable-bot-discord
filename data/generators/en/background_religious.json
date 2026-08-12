@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 3,
+  "id": "background_religious",
+  "visibility": "internal",
+  "name": "Religious archetypes",
+  "description": "Faith, temple, and pilgrimage roles",
+  "entrySchema": { "type": "text" },
+  "entries": [
+    { "id": "priest", "value": "Priest" },
+    { "id": "monk", "value": "Monk" },
+    { "id": "temple_servant", "value": "Temple servant" },
+    { "id": "pilgrim", "value": "Pilgrim" },
+    { "id": "theologian", "value": "Theologian" },
+    { "id": "prophet", "value": "Prophet" },
+    { "id": "healer", "value": "Healer" },
+    { "id": "paladin", "value": "Paladin" },
+    { "id": "shrine_keeper", "value": "Shrine keeper" },
+    { "id": "religious_scholar", "value": "Religious scholar" }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 3,
+  "id": "background_merchant",
+  "visibility": "internal",
+  "name": "Merchant archetypes",
+  "description": "Trade and commercial roles",
+  "entrySchema": { "type": "text" },
+  "entries": [
+    { "id": "trader", "value": "Trader" },
+    { "id": "shopkeeper", "value": "Shopkeeper" },
+    { "id": "caravaner", "value": "Caravaner" },
+    { "id": "factor", "value": "Factor" },
+    { "id": "appraiser", "value": "Appraiser" },
+    { "id": "innkeeper", "value": "Innkeeper" },
+    { "id": "fishmonger", "value": "Fishmonger" },
+    { "id": "supplier", "value": "Supplier" },
+    { "id": "peddler", "value": "Peddler" },
+    { "id": "market_broker", "value": "Market broker" }
+  ]
+}

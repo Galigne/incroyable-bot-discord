@@ -21,9 +21,12 @@ const {
 const { getCommandOptionValues } = require('../util/commandOptionValues');
 
 const BACKGROUND_GENERATOR_IDS = new Set([
-	'adventurer', 'artisan', 'criminal', 'exile', 'mage', 'merchant',
-	'military', 'noble', 'official', 'outlander', 'peasant', 'performer',
-	'religious', 'sailor', 'scholar', 'servant', 'urchin',
+	'background_adventurer', 'background_artisan', 'background_criminal',
+	'background_exile', 'background_mage', 'background_merchant',
+	'background_military', 'background_noble', 'background_official',
+	'background_outlander', 'background_peasant', 'background_performer',
+	'background_religious', 'background_sailor', 'background_scholar',
+	'background_servant', 'background_urchin',
 ]);
 
 test('production generator v3 data uses stable IDs, strict parity, and visibility', () => {
@@ -39,7 +42,7 @@ test('production generator v3 data uses stable IDs, strict parity, and visibilit
 	assert.equal(all.length, englishPublic.length + internal.length);
 	assert.ok(internal.length > 0);
 	assert.ok(internal.every(generator => generator.visibility === 'internal'));
-	assert.ok(internal.some(generator => generator.id === 'adventurer'));
+	assert.ok(internal.some(generator => generator.id === 'background_adventurer'));
 	assert.ok(internal.some(generator => generator.id === 'creature_animal'));
 	assert.ok(all.every(generator => !Object.hasOwn(generator, 'kind')));
 	assert.equal(

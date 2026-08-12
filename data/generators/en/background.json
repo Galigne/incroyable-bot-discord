@@ -16,7 +16,7 @@
       "fields": {
         "name": "criminal",
         "description": "Outlaws, thieves, smugglers, corrupt officials, and organized criminals",
-        "generator": "{{ criminal }}"
+        "generator": "{{ background_criminal }}"
       }
     },
     {
@@ -25,7 +25,7 @@
       "fields": {
         "name": "adventurer",
         "description": "Explorers, mercenaries, monster hunters, pilgrims, and treasure seekers",
-        "generator": "{{ adventurer }}"
+        "generator": "{{ background_adventurer }}"
       }
     },
     {
@@ -34,7 +34,7 @@
       "fields": {
         "name": "noble",
         "description": "Aristocrats, courtiers, heirs, and minor lords",
-        "generator": "{{ noble }}"
+        "generator": "{{ background_noble }}"
       }
     },
     {
@@ -43,7 +43,7 @@
       "fields": {
         "name": "peasant",
         "description": "Farmers, herders, and rural workers",
-        "generator": "{{ peasant }}"
+        "generator": "{{ background_peasant }}"
       }
     },
     {
@@ -52,7 +52,7 @@
       "fields": {
         "name": "artisan",
         "description": "Blacksmiths, carpenters, tailors, alchemists, and craftspeople",
-        "generator": "{{ artisan }}"
+        "generator": "{{ background_artisan }}"
       }
     },
     {
@@ -61,7 +61,7 @@
       "fields": {
         "name": "merchant",
         "description": "Traders, shopkeepers, caravan workers, and commercial agents",
-        "generator": "{{ merchant }}"
+        "generator": "{{ background_merchant }}"
       }
     },
     {
@@ -70,7 +70,7 @@
       "fields": {
         "name": "scholar",
         "description": "Students, researchers, scribes, and librarians",
-        "generator": "{{ scholar }}"
+        "generator": "{{ background_scholar }}"
       }
     },
     {
@@ -79,7 +79,7 @@
       "fields": {
         "name": "religious",
         "description": "Priests, monks, temple servants, and pilgrims",
-        "generator": "{{ religious }}"
+        "generator": "{{ background_religious }}"
       }
     },
     {
@@ -88,7 +88,7 @@
       "fields": {
         "name": "military",
         "description": "Soldiers, guards, officers, and veterans",
-        "generator": "{{ military }}"
+        "generator": "{{ background_military }}"
       }
     },
     {
@@ -97,7 +97,7 @@
       "fields": {
         "name": "outlander",
         "description": "Hunters, nomads, hermits, and tribal members",
-        "generator": "{{ outlander }}"
+        "generator": "{{ background_outlander }}"
       }
     },
     {
@@ -106,7 +106,7 @@
       "fields": {
         "name": "sailor",
         "description": "Sailors, fishers, pirates, and dock workers",
-        "generator": "{{ sailor }}"
+        "generator": "{{ background_sailor }}"
       }
     },
     {
@@ -115,7 +115,7 @@
       "fields": {
         "name": "performer",
         "description": "Musicians, actors, storytellers, and entertainers",
-        "generator": "{{ performer }}"
+        "generator": "{{ background_performer }}"
       }
     },
     {
@@ -124,7 +124,7 @@
       "fields": {
         "name": "servant",
         "description": "Household servants, attendants, and laborers",
-        "generator": "{{ servant }}"
+        "generator": "{{ background_servant }}"
       }
     },
     {
@@ -133,7 +133,7 @@
       "fields": {
         "name": "official",
         "description": "Administrators, diplomats, tax collectors, and judges",
-        "generator": "{{ official }}"
+        "generator": "{{ background_official }}"
       }
     },
     {
@@ -142,7 +142,7 @@
       "fields": {
         "name": "mage",
         "description": "Apprentices, hedge mages, and magical researchers",
-        "generator": "{{ mage }}"
+        "generator": "{{ background_mage }}"
       }
     },
     {
@@ -151,7 +151,7 @@
       "fields": {
         "name": "exile",
         "description": "Refugees, fugitives, banished nobles, and displaced survivors",
-        "generator": "{{ exile }}"
+        "generator": "{{ background_exile }}"
       }
     },
     {
@@ -160,7 +160,7 @@
       "fields": {
         "name": "urchin",
         "description": "Orphans, beggars, street children, and scavengers",
-        "generator": "{{ urchin }}"
+        "generator": "{{ background_urchin }}"
       }
     }
   ]

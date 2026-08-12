@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 3,
+  "id": "background_scholar",
+  "visibility": "internal",
+  "name": "Scholar archetypes",
+  "description": "Learning, record-keeping, and research roles",
+  "entrySchema": { "type": "text" },
+  "entries": [
+    { "id": "student", "value": "Student" },
+    { "id": "researcher", "value": "Researcher" },
+    { "id": "scribe", "value": "Scribe" },
+    { "id": "librarian", "value": "Librarian" },
+    { "id": "historian", "value": "Historian" },
+    { "id": "cartographer", "value": "Cartographer" },
+    { "id": "physician", "value": "Physician" },
+    { "id": "theologian", "value": "Theologian" },
+    { "id": "archivist", "value": "Archivist" },
+    { "id": "professor", "value": "Professor" },
+    { "id": "chronicler", "value": "Chronicler" }
+  ]
+}
