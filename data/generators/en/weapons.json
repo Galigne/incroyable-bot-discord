@@ -1,328 +1,327 @@
 {
-  "schemaVersion": 2,
+  "schemaVersion": 3,
   "id": "weapons",
-  "kind": "category",
   "visibility": "public",
   "name": "weapons",
   "description": "Weapons suitable for generated characters",
   "entrySchema": {
     "type": "fields",
-    "required": ["Name", "Description"]
+    "required": ["name", "description"]
   },
   "entries": [
     {
-      "id": "short-sword",
+      "id": "short_sword",
       "weight": 5,
       "fields": {
-        "Name": "Short sword",
-        "Description": "A quick, versatile blade suited to close combat."
+        "name": "Short sword",
+        "description": "A quick, versatile blade suited to close combat."
       }
     },
     {
-      "id": "hunting-bow",
+      "id": "hunting_bow",
       "weight": 5,
       "fields": {
-        "Name": "Hunting bow",
-        "Description": "A practical ranged weapon with unlimited ordinary ammunition."
+        "name": "Hunting bow",
+        "description": "A practical ranged weapon with unlimited ordinary ammunition."
       }
     },
     {
       "id": "mace",
       "weight": 4,
       "fields": {
-        "Name": "Mace",
-        "Description": "A one-handed crushing weapon effective against rigid protection."
+        "name": "Mace",
+        "description": "A one-handed crushing weapon effective against rigid protection."
       }
     },
     {
       "id": "quarterstaff",
       "weight": 4,
       "fields": {
-        "Name": "Quarterstaff",
-        "Description": "A simple two-handed staff used for defense, reach, and leverage."
+        "name": "Quarterstaff",
+        "description": "A simple two-handed staff used for defense, reach, and leverage."
       }
     },
     {
       "id": "greatsword",
       "weight": 3,
       "fields": {
-        "Name": "Greatsword",
-        "Description": "A massive two-handed sword designed for broad, forceful attacks."
+        "name": "Greatsword",
+        "description": "A massive two-handed sword designed for broad, forceful attacks."
       }
     },
     {
       "id": "rapier",
       "weight": 3,
       "fields": {
-        "Name": "Rapier",
-        "Description": "A precise thrusting sword favoring Dexterity and careful footwork."
+        "name": "Rapier",
+        "description": "A precise thrusting sword favoring Dexterity and careful footwork."
       }
     },
     {
-      "id": "recurve-bow",
+      "id": "recurve_bow",
       "weight": 3,
       "fields": {
-        "Name": "Recurve bow",
-        "Description": "A compact bow that remains effective from horseback or tight terrain."
+        "name": "Recurve bow",
+        "description": "A compact bow that remains effective from horseback or tight terrain."
       }
     },
     {
-      "id": "hand-axe",
+      "id": "hand_axe",
       "weight": 3,
       "fields": {
-        "Name": "Hand axe",
-        "Description": "A compact chopping weapon balanced well enough to throw."
+        "name": "Hand axe",
+        "description": "A compact chopping weapon balanced well enough to throw."
       }
     },
     {
       "id": "scimitar",
       "weight": 3,
       "fields": {
-        "Name": "Scimitar",
-        "Description": "A broad curved sword designed for fluid cutting attacks."
+        "name": "Scimitar",
+        "description": "A broad curved sword designed for fluid cutting attacks."
       }
     },
     {
       "id": "glaive",
       "weight": 2,
       "fields": {
-        "Name": "Glaive",
-        "Description": "A long polearm with a cutting blade and excellent reach."
+        "name": "Glaive",
+        "description": "A long polearm with a cutting blade and excellent reach."
       }
     },
     {
-      "id": "twin-fighting-knives",
+      "id": "twin_fighting_knives",
       "weight": 2,
       "fields": {
-        "Name": "Twin fighting knives",
-        "Description": "A matched pair of fast blades used together."
+        "name": "Twin fighting knives",
+        "description": "A matched pair of fast blades used together."
       }
     },
     {
-      "id": "heavy-repeating-crossbow",
+      "id": "heavy_repeating_crossbow",
       "weight": 2,
       "fields": {
-        "Name": "Heavy repeating crossbow",
-        "Description": "A bulky mechanism capable of rapid shots before reloading."
+        "name": "Heavy repeating crossbow",
+        "description": "A bulky mechanism capable of rapid shots before reloading."
       }
     },
     {
       "id": "trident",
       "weight": 2,
       "fields": {
-        "Name": "Trident",
-        "Description": "A three-pronged spear suited to fishing, pinning, and underwater combat."
+        "name": "Trident",
+        "description": "A three-pronged spear suited to fishing, pinning, and underwater combat."
       }
     },
     {
       "id": "sling",
       "weight": 2,
       "fields": {
-        "Name": "Sling",
-        "Description": "A light ranged weapon using stones or small lead bullets."
+        "name": "Sling",
+        "description": "A light ranged weapon using stones or small lead bullets."
       }
     },
     {
-      "id": "runesmiths-hammer",
+      "id": "runesmiths_hammer",
       "fields": {
-        "Name": "Runesmith's hammer",
-        "Description": "A reinforced crafting hammer balanced for combat and runic work."
+        "name": "Runesmith's hammer",
+        "description": "A reinforced crafting hammer balanced for combat and runic work."
       }
     },
     {
-      "id": "bladed-chain",
+      "id": "bladed_chain",
       "fields": {
-        "Name": "Bladed chain",
-        "Description": "A difficult flexible weapon offering reach at considerable risk."
+        "name": "Bladed chain",
+        "description": "A difficult flexible weapon offering reach at considerable risk."
       }
     },
     {
-      "id": "crystal-scepter",
+      "id": "crystal_scepter",
       "fields": {
-        "Name": "Crystal scepter",
-        "Description": "A durable arcane implement that also functions as a light mace."
+        "name": "Crystal scepter",
+        "description": "A durable arcane implement that also functions as a light mace."
       }
     },
     {
-      "id": "meteor-iron-maul",
+      "id": "meteor_iron_maul",
       "fields": {
-        "Name": "Meteor-iron maul",
-        "Description": "An exceptionally heavy two-handed hammer with devastating impact."
+        "name": "Meteor-iron maul",
+        "description": "An exceptionally heavy two-handed hammer with devastating impact."
       }
     },
     {
-      "id": "moon-silver-chakram",
+      "id": "moon_silver_chakram",
       "fields": {
-        "Name": "Moon-silver chakram",
-        "Description": "A circular throwing blade that shines under moonlight."
+        "name": "Moon-silver chakram",
+        "description": "A circular throwing blade that shines under moonlight."
       }
     },
     {
-      "id": "bone-longbow",
+      "id": "bone_longbow",
       "fields": {
-        "Name": "Bone longbow",
-        "Description": "A powerful bow assembled from the remains of a giant beast."
+        "name": "Bone longbow",
+        "description": "A powerful bow assembled from the remains of a giant beast."
       }
     },
     {
       "id": "longsword",
       "fields": {
-        "Name": "Longsword",
-        "Description": "A versatile one-handed blade suited to both cuts and thrusts."
+        "name": "Longsword",
+        "description": "A versatile one-handed blade suited to both cuts and thrusts."
       }
     },
     {
       "id": "dagger",
       "fields": {
-        "Name": "Dagger",
-        "Description": "A short, concealable blade useful in combat and for precise work."
+        "name": "Dagger",
+        "description": "A short, concealable blade useful in combat and for precise work."
       }
     },
     {
       "id": "spear",
       "fields": {
-        "Name": "Spear",
-        "Description": "A simple polearm offering reach, area control, and effectiveness against a charge."
+        "name": "Spear",
+        "description": "A simple polearm offering reach, area control, and effectiveness against a charge."
       }
     },
     {
       "id": "harpoon",
       "fields": {
-        "Name": "Harpoon",
-        "Description": "A heavy barbed point tied to a rope, designed to hold a target after impact."
+        "name": "Harpoon",
+        "description": "A heavy barbed point tied to a rope, designed to hold a target after impact."
       }
     },
     {
       "id": "halberd",
       "fields": {
-        "Name": "Halberd",
-        "Description": "A polearm combining spike, axe blade, and hook against varied defenses."
+        "name": "Halberd",
+        "description": "A polearm combining spike, axe blade, and hook against varied defenses."
       }
     },
     {
-      "id": "morning-star",
+      "id": "morning_star",
       "fields": {
-        "Name": "Morning Star",
-        "Description": "A spiked mace concentrating impact on a small area."
+        "name": "Morning Star",
+        "description": "A spiked mace concentrating impact on a small area."
       }
     },
     {
       "id": "club",
       "fields": {
-        "Name": "Club",
-        "Description": "A sturdy, easily made blunt weapon effective for driving an opponent back."
+        "name": "Club",
+        "description": "A sturdy, easily made blunt weapon effective for driving an opponent back."
       }
     },
     {
       "id": "katana",
       "fields": {
-        "Name": "Katana",
-        "Description": "A long curved blade favoring swift cuts and precise two-handed use."
+        "name": "Katana",
+        "description": "A long curved blade favoring swift cuts and precise two-handed use."
       }
     },
     {
       "id": "saber",
       "fields": {
-        "Name": "Saber",
-        "Description": "A light curved one-handed blade suited to mobile fighting."
+        "name": "Saber",
+        "description": "A light curved one-handed blade suited to mobile fighting."
       }
     },
     {
       "id": "flail",
       "fields": {
-        "Name": "Flail",
-        "Description": "A difficult articulated weapon able to swing around some guards."
+        "name": "Flail",
+        "description": "A difficult articulated weapon able to swing around some guards."
       }
     },
     {
-      "id": "twin-blades",
+      "id": "twin_blades",
       "fields": {
-        "Name": "Twin Blades",
-        "Description": "Two balanced short weapons for a fast style demanding coordination and proximity."
+        "name": "Twin Blades",
+        "description": "Two balanced short weapons for a fast style demanding coordination and proximity."
       }
     },
     {
-      "id": "battle-axe",
+      "id": "battle_axe",
       "fields": {
-        "Name": "Battle Axe",
-        "Description": "A powerful cutting weapon effective against shields and wooden obstacles."
+        "name": "Battle Axe",
+        "description": "A powerful cutting weapon effective against shields and wooden obstacles."
       }
     },
     {
       "id": "warhammer",
       "fields": {
-        "Name": "Warhammer",
-        "Description": "A heavy weapon concentrating force against rigid armor and structures."
+        "name": "Warhammer",
+        "description": "A heavy weapon concentrating force against rigid armor and structures."
       }
     },
     {
       "id": "greataxe",
       "fields": {
-        "Name": "Greataxe",
-        "Description": "A massive two-handed axe delivering broad blows at the cost of defense."
+        "name": "Greataxe",
+        "description": "A massive two-handed axe delivering broad blows at the cost of defense."
       }
     },
     {
-      "id": "great-hammer",
+      "id": "great_hammer",
       "fields": {
-        "Name": "Great Hammer",
-        "Description": "An extremely heavy two-handed hammer made to break protection and fortifications."
+        "name": "Great Hammer",
+        "description": "An extremely heavy two-handed hammer made to break protection and fortifications."
       }
     },
     {
-      "id": "war-scythe",
+      "id": "war_scythe",
       "fields": {
-        "Name": "War Scythe",
-        "Description": "A long curved blade adapted into a polearm for hooking and sweeping."
+        "name": "War Scythe",
+        "description": "A long curved blade adapted into a polearm for hooking and sweeping."
       }
     },
     {
       "id": "whip",
       "fields": {
-        "Name": "Whip",
-        "Description": "A flexible weapon useful for keeping distance, disarming, or entangling."
+        "name": "Whip",
+        "description": "A flexible weapon useful for keeping distance, disarming, or entangling."
       }
     },
     {
-      "id": "fighting-claws",
+      "id": "fighting_claws",
       "fields": {
-        "Name": "Fighting Claws",
-        "Description": "Hand-mounted blades extending natural attacks without freeing the grip."
+        "name": "Fighting Claws",
+        "description": "Hand-mounted blades extending natural attacks without freeing the grip."
       }
     },
     {
       "id": "longbow",
       "fields": {
-        "Name": "Longbow",
-        "Description": "A powerful bow requiring space and strength, effective at long range."
+        "name": "Longbow",
+        "description": "A powerful bow requiring space and strength, effective at long range."
       }
     },
     {
       "id": "crossbow",
       "fields": {
-        "Name": "Crossbow",
-        "Description": "A precise mechanical weapon whose power offsets its slower reload."
+        "name": "Crossbow",
+        "description": "A precise mechanical weapon whose power offsets its slower reload."
       }
     },
     {
-      "id": "combat-wand",
+      "id": "combat_wand",
       "fields": {
-        "Name": "Combat Wand",
-        "Description": "A short reinforced focus that channels a RULE while parrying light blows."
+        "name": "Combat Wand",
+        "description": "A short reinforced focus that channels a RULE while parrying light blows."
       }
     },
     {
-      "id": "combat-scepter",
+      "id": "combat_scepter",
       "fields": {
-        "Name": "Combat Scepter",
-        "Description": "A sturdy focus usable as a light mace when magic is impractical."
+        "name": "Combat Scepter",
+        "description": "A sturdy focus usable as a light mace when magic is impractical."
       }
     },
     {
-      "id": "portable-ballista",
+      "id": "portable_ballista",
       "fields": {
-        "Name": "Portable Ballista",
-        "Description": "An oversized supported crossbow, extremely powerful but slow to move and prepare."
+        "name": "Portable Ballista",
+        "description": "An oversized supported crossbow, extremely powerful but slow to move and prepare."
       }
     }
   ]

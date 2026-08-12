@@ -279,7 +279,7 @@ module.exports = function createCharacterChecks(context) {
 			const character = new Character('D.Robert', 'dm');
 			populateRandomCharacter(character, { level: 10, random });
 			const generatedRace = generatorCatalog.getGenerator('race').entries
-				.find(entry => entry.fields.Name === character.race.name);
+				.find(entry => entry.fields.name === character.race.name);
 
 			if (
 				character.key !== 'D.Robert'
@@ -295,9 +295,9 @@ module.exports = function createCharacterChecks(context) {
 				|| !character.background.goals
 				|| character.personality.traits.length !== 2
 				|| character.personality.description
-				|| character.race.traits.skillBonus !== generatedRace?.fields['Skill Bonus']
+				|| character.race.traits.skillBonus !== generatedRace?.fields.skill_bonus
 				|| character.race.traits.physicalAbility
-					!== generatedRace?.fields['Physical Ability']
+					!== generatedRace?.fields.physical_ability
 			) {
 				errors.push('Generated identity or intentionally empty fields are incorrect.');
 			}
@@ -354,11 +354,11 @@ module.exports = function createCharacterChecks(context) {
 
 			const armorName = character.gear.equipment[0].split(' — ')[0];
 			const armor = generatorCatalog.getGenerator('armors').entries
-				.find(entry => entry.fields.Name === armorName);
-			const armorPercentage = Number(armor?.fields['AR percentage']);
+				.find(entry => entry.fields.name === armorName);
+			const armorPercentage = Number(armor?.fields.ar_percentage);
 			if (
 				!armor
-				|| Number(armor.fields['Constitution requirement']) > character.statistics.constitution
+				|| Number(armor.fields.constitution_requirement) > character.statistics.constitution
 				|| character.status.ar.max !== Math.round(expectedHp * armorPercentage / 100)
 				|| character.status.ar.current !== character.status.ar.max
 				|| character.gear.equipment.length < 2
@@ -374,7 +374,7 @@ module.exports = function createCharacterChecks(context) {
 
 			const routedBackgrounds = generatorCatalog.getGenerator('background').entries;
 			for (const routedBackground of routedBackgrounds) {
-				const backgroundName = routedBackground.fields.Name;
+				const backgroundName = routedBackground.fields.name;
 				const routedCharacter = new Character(`background.${backgroundName}`, 'dm');
 				populateRandomCharacter(routedCharacter, {
 					level: 1,

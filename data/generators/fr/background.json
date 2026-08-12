@@ -1,177 +1,166 @@
 {
-  "schemaVersion": 2,
+  "schemaVersion": 3,
   "id": "background",
-  "kind": "category",
   "visibility": "public",
   "name": "Backgrounds",
   "description": "Catégories de Background pour les PNJ",
   "entrySchema": {
     "type": "fields",
-    "required": ["Name", "Description", "Generator"],
-    "technical": ["Generator"]
+    "required": ["name", "description", "generator"],
+    "technical": ["generator"]
   },
   "entries": [
     {
       "id": "criminal",
       "weight": 4,
       "fields": {
-        "Name": "Criminel",
-        "Description": "Hors-la-loi, voleurs, contrebandiers, fonctionnaires corrompus et membres du crime organisé",
-        "Generator": "background-criminal"
+        "name": "Criminel",
+        "description": "Hors-la-loi, voleurs, contrebandiers, fonctionnaires corrompus et membres du crime organisé",
+        "generator": "{{ background_criminal }}"
       }
     },
     {
       "id": "adventurer",
       "weight": 5,
       "fields": {
-        "Name": "Aventurier",
-        "Description": "Explorateurs, mercenaires, chasseurs de monstres, pèlerins et chasseurs de trésors",
-        "Generator": "background-adventurer"
+        "name": "Aventurier",
+        "description": "Explorateurs, mercenaires, chasseurs de monstres, pèlerins et chasseurs de trésors",
+        "generator": "{{ background_adventurer }}"
       }
     },
     {
       "id": "noble",
       "weight": 2,
       "fields": {
-        "Name": "Noble",
-        "Description": "Aristocrates, courtisans, héritiers et petits seigneurs",
-        "Generator": "background-noble"
+        "name": "Noble",
+        "description": "Aristocrates, courtisans, héritiers et petits seigneurs",
+        "generator": "{{ background_noble }}"
       }
     },
     {
       "id": "peasant",
       "weight": 5,
       "fields": {
-        "Name": "Paysan",
-        "Description": "Agriculteurs, éleveurs et travailleurs ruraux",
-        "Generator": "background-peasant"
+        "name": "Paysan",
+        "description": "Agriculteurs, éleveurs et travailleurs ruraux",
+        "generator": "{{ background_peasant }}"
       }
     },
     {
       "id": "artisan",
       "weight": 5,
       "fields": {
-        "Name": "Artisan",
-        "Description": "Forgerons, charpentiers, tailleurs, alchimistes et autres artisans",
-        "Generator": "background-artisan"
+        "name": "Artisan",
+        "description": "Forgerons, charpentiers, tailleurs, alchimistes et autres artisans",
+        "generator": "{{ background_artisan }}"
       }
     },
     {
       "id": "merchant",
       "weight": 5,
       "fields": {
-        "Name": "Marchand",
-        "Description": "Négociants, boutiquiers, caravaniers et agents commerciaux",
-        "Generator": "background-merchant"
+        "name": "Marchand",
+        "description": "Négociants, boutiquiers, caravaniers et agents commerciaux",
+        "generator": "{{ background_merchant }}"
       }
     },
     {
       "id": "scholar",
       "weight": 3,
       "fields": {
-        "Name": "Érudit",
-        "Description": "Étudiants, chercheurs, scribes et bibliothécaires",
-        "Generator": "background-scholar"
+        "name": "Érudit",
+        "description": "Étudiants, chercheurs, scribes et bibliothécaires",
+        "generator": "{{ background_scholar }}"
       }
     },
     {
       "id": "religious",
       "weight": 3,
       "fields": {
-        "Name": "Religieux",
-        "Description": "Prêtres, moines, serviteurs de temple et pèlerins",
-        "Generator": "background-religious"
+        "name": "Religieux",
+        "description": "Prêtres, moines, serviteurs de temple et pèlerins",
+        "generator": "{{ background_religious }}"
       }
     },
     {
       "id": "military",
       "weight": 4,
       "fields": {
-        "Name": "Militaire",
-        "Description": "Soldats, gardes, officiers et vétérans",
-        "Generator": "background-military"
+        "name": "Militaire",
+        "description": "Soldats, gardes, officiers et vétérans",
+        "generator": "{{ background_military }}"
       }
     },
     {
       "id": "outlander",
       "weight": 3,
       "fields": {
-        "Name": "Sauvageon",
-        "Description": "Chasseurs, nomades, ermites et membres de peuples tribaux",
-        "Generator": "background-outlander"
+        "name": "Sauvageon",
+        "description": "Chasseurs, nomades, ermites et membres de peuples tribaux",
+        "generator": "{{ background_outlander }}"
       }
     },
     {
       "id": "sailor",
       "weight": 4,
       "fields": {
-        "Name": "Marin",
-        "Description": "Marins, pêcheurs, pirates et dockers",
-        "Generator": "background-sailor"
+        "name": "Marin",
+        "description": "Marins, pêcheurs, pirates et dockers",
+        "generator": "{{ background_sailor }}"
       }
     },
     {
       "id": "performer",
       "weight": 3,
       "fields": {
-        "Name": "Artiste",
-        "Description": "Musiciens, comédiens, conteurs et artistes de spectacle",
-        "Generator": "background-performer"
+        "name": "Artiste",
+        "description": "Musiciens, comédiens, conteurs et artistes de spectacle",
+        "generator": "{{ background_performer }}"
       }
     },
     {
       "id": "servant",
       "weight": 4,
       "fields": {
-        "Name": "Serviteur",
-        "Description": "Domestiques, assistants personnels et ouvriers",
-        "Generator": "background-servant"
+        "name": "Serviteur",
+        "description": "Domestiques, assistants personnels et ouvriers",
+        "generator": "{{ background_servant }}"
       }
     },
     {
       "id": "official",
       "weight": 3,
       "fields": {
-        "Name": "Fonctionnaire",
-        "Description": "Administrateurs, diplomates, collecteurs d’impôts et juges",
-        "Generator": "background-official"
+        "name": "Fonctionnaire",
+        "description": "Administrateurs, diplomates, collecteurs d’impôts et juges",
+        "generator": "{{ background_official }}"
       }
     },
     {
       "id": "mage",
       "weight": 2,
       "fields": {
-        "Name": "Mage",
-        "Description": "Apprentis, mages autodidactes et chercheurs en magie",
-        "Generator": "background-mage"
+        "name": "Mage",
+        "description": "Apprentis, mages autodidactes et chercheurs en magie",
+        "generator": "{{ background_mage }}"
       }
     },
     {
       "id": "exile",
       "weight": 3,
       "fields": {
-        "Name": "Exilé",
-        "Description": "Réfugiés, fugitifs, nobles bannis et survivants déplacés",
-        "Generator": "background-exile"
+        "name": "Exilé",
+        "description": "Réfugiés, fugitifs, nobles bannis et survivants déplacés",
+        "generator": "{{ background_exile }}"
       }
     },
     {
       "id": "urchin",
       "weight": 3,
       "fields": {
-        "Name": "Enfant des rues",
-        "Description": "Orphelins, mendiants, enfants des rues et récupérateurs",
-        "Generator": "background-urchin"
-      }
-    }
-  ],
-  "modifiers": [
-    {
-      "generator": "modifier",
-      "chance": 0.35,
-      "count": {
-        "min": 1,
-        "max": 1
+        "name": "Enfant des rues",
+        "description": "Orphelins, mendiants, enfants des rues et récupérateurs",
+        "generator": "{{ background_urchin }}"
       }
     }
   ]

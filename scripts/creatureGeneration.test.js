@@ -82,28 +82,28 @@ test('production creature sources are strict localized archetypes backed by prof
 	const profileIds = new Set();
 	for (const locale of ['en', 'fr']) {
 		const router = generatorCatalog.getGenerator(CREATURE_ROUTER_ID, locale);
-		assert.equal(router.kind, 'category');
+		assert.equal(Object.hasOwn(router, 'kind'), false);
 		assert.equal(router.visibility, 'public');
 		assert.deepEqual(router.entries.map(entry => entry.id), CREATURE_ARCHETYPE_IDS);
 		for (const archetype of CREATURE_ARCHETYPE_IDS) {
 			const generatorId = CREATURE_GENERATOR_BY_ARCHETYPE[archetype];
 			assert.equal(
-				router.entries.find(entry => entry.id === archetype).fields.Generator,
-				generatorId,
+				router.entries.find(entry => entry.id === archetype).fields.generator,
+				`{{ ${generatorId} }}`,
 			);
 			const generator = generatorCatalog.getGenerator(generatorId, locale);
-			assert.equal(generator.kind, 'component');
+			assert.equal(Object.hasOwn(generator, 'kind'), false);
 			assert.equal(generator.visibility, 'internal');
 			assert.deepEqual(generator.entrySchema, {
 				type: 'fields',
-				required: ['Name', 'Description'],
+				required: ['name', 'description'],
 			});
 			assert.ok(generator.entries.length >= 20);
 			for (const entry of generator.entries) {
 				assert.ok(Number.isFinite(entry.weight) && entry.weight > 0);
-				assert.deepEqual(Object.keys(entry.fields), ['Name', 'Description']);
-				assert.ok(entry.fields.Name);
-				assert.ok(entry.fields.Description);
+				assert.deepEqual(Object.keys(entry.fields), ['name', 'description']);
+				assert.ok(entry.fields.name);
+				assert.ok(entry.fields.description);
 				assert.ok(entry.generation.traits.length > 0);
 				assert.ok(Array.isArray(entry.generation.equipment));
 				assert.ok(Array.isArray(entry.generation.inventory));
@@ -129,21 +129,18 @@ test('production creature sources are strict localized archetypes backed by prof
 	]));
 
 	const modifier = generatorCatalog.getGenerator('modifier', 'en');
-	assert.equal(modifier.kind, 'modifier');
-	assert.deepEqual(modifier.appliesTo, [
-		'background',
-		...Object.values(CREATURE_GENERATOR_BY_ARCHETYPE),
-	]);
+	assert.equal(Object.hasOwn(modifier, 'kind'), false);
+	assert.equal(modifier.visibility, 'internal');
 	assert.ok(modifier.entries.every(entry => (
 		JSON.stringify(Object.keys(entry.fields)) === JSON.stringify([
-			'Name',
-			'Description',
+			'name',
+			'description',
 		])
 	)));
 });
 
 test('creature metadata rejects mechanical overrides and armor conflicts', () => {
-	const english = structuredClone(generatorCatalog.getGenerator('creature-animal', 'en'));
+	const english = structuredClone(generatorCatalog.getGenerator('creature_animal', 'en'));
 	delete english.locale;
 
 	const mechanical = structuredClone(english);
@@ -156,7 +153,7 @@ test('creature metadata rejects mechanical overrides and armor conflicts', () =>
 	const armorConflict = structuredClone(english);
 	armorConflict.entries[0].generation.armor = {
 		generator: 'armors',
-		entry: 'common-light-armor',
+		entry: 'common_light_armor',
 		select: 'fields',
 	};
 	assert.throws(
@@ -166,8 +163,8 @@ test('creature metadata rejects mechanical overrides and armor conflicts', () =>
 });
 
 test('creature metadata preserves English and French technical parity', () => {
-	const english = structuredClone(generatorCatalog.getGenerator('creature-animal', 'en'));
-	const french = structuredClone(generatorCatalog.getGenerator('creature-animal', 'fr'));
+	const english = structuredClone(generatorCatalog.getGenerator('creature_animal', 'en'));
+	const french = structuredClone(generatorCatalog.getGenerator('creature_animal', 'fr'));
 	delete english.locale;
 	delete french.locale;
 	french.entries[0].generation.statProfile = 'creature-brute';
@@ -195,7 +192,7 @@ test('creature routers, archetypes, and statistical profiles validate relationsh
 		error => error.code === 'CREATURE_ROUTER_MISSING',
 	);
 	const missingArchetypeCatalogs = createGeneratorCatalogCandidate();
-	missingArchetypeCatalogs.get('fr').delete('creature-animal');
+	missingArchetypeCatalogs.get('fr').delete('creature_animal');
 	assert.throws(
 		() => validateCreatureStatProfileRelationships(
 			missingArchetypeCatalogs,
@@ -205,7 +202,7 @@ test('creature routers, archetypes, and statistical profiles validate relationsh
 	);
 	const invalidRoutes = createGeneratorCatalogCandidate();
 	const invalidRouter = structuredClone(invalidRoutes.get('fr').get('creature'));
-	invalidRouter.entries[0].fields.Generator = 'creature-monster';
+	invalidRouter.entries[0].fields.generator = '{{ creature_monster }}';
 	invalidRoutes.get('fr').set('creature', invalidRouter);
 	assert.throws(
 		() => validateCreatureStatProfileRelationships(
@@ -218,12 +215,12 @@ test('creature routers, archetypes, and statistical profiles validate relationsh
 
 test('creature generation references require compatible target payloads', () => {
 	const catalog = new Map(createGeneratorCatalogCandidate().get('en'));
-	const animal = structuredClone(catalog.get('creature-animal'));
+	const animal = structuredClone(catalog.get('creature_animal'));
 	animal.entries[0].generation.statusEffects = [{
 		generator: 'faction',
 		select: 'fields',
 	}];
-	catalog.set('creature-animal', animal);
+	catalog.set('creature_animal', animal);
 	assert.throws(
 		() => validateGeneratorRelationships(catalog),
 		error => error.code === 'INVALID_CREATURE_REFERENCE_TARGET',
@@ -260,11 +257,11 @@ test('equivalent random input selects the same stable IDs and statistics in both
 
 test('all creature profiles use the shared nonlinear level budget and derived resources', () => {
 	const representatives = [
-		['animal', 'mossback-deer'],
-		['animal', 'honey-bear'],
-		['companion', 'loyal-hound'],
-		['companion', 'pebble-elemental'],
-		['monster', 'hollow-saint'],
+		['animal', 'mossback_deer'],
+		['animal', 'honey_bear'],
+		['companion', 'loyal_hound'],
+		['companion', 'pebble_elemental'],
+		['monster', 'hollow_saint'],
 	];
 	const usedProfiles = new Set();
 	for (const [archetype, entryId] of representatives) {
@@ -296,7 +293,7 @@ test('all creature profiles use the shared nonlinear level budget and derived re
 	}
 	assert.equal(usedProfiles.size, 5);
 	for (let level = 1; level <= 10; level += 1) {
-		const creature = generateEntry('animal', 'mossback-deer', { level });
+		const creature = generateEntry('animal', 'mossback_deer', { level });
 		assert.equal(creature.level, level);
 		assert.ok(
 			calculateStatCost(creature.statistics) <= calculateStatBudget(level),
@@ -323,18 +320,18 @@ test('creature Intelligence never grants RULEs and explicit RULE references are 
 	assert.ok(intelligentMule.statistics.intelligence >= 16);
 	assert.deepEqual(intelligentMule.rules, []);
 
-	const mireTroll = generateEntry('monster', 'mire-troll', { level: 10 });
+	const mireTroll = generateEntry('monster', 'mire_troll', { level: 10 });
 	assert.ok(mireTroll.statistics.intelligence <= 8);
 	assert.deepEqual(mireTroll.rules.map(rule => ({
 		entryId: rule.entryId,
 		level: rule.level,
-	})), [{ entryId: 'root-rule', level: 1 }]);
+	})), [{ entryId: 'root_rule', level: 1 }]);
 	assert.ok(mireTroll.rules[0].name);
 	assert.ok(mireTroll.rules[0].description);
 });
 
 test('natural armor, generated armor, status, and weighted gear resolve to final state', () => {
-	const cinderDrake = generateEntry('monster', 'cinder-drake', { level: 5 });
+	const cinderDrake = generateEntry('monster', 'cinder_drake', { level: 5 });
 	assert.deepEqual(cinderDrake.naturalArmor, { percentage: 15 });
 	assert.equal(
 		cinderDrake.status.ar.max,
@@ -342,25 +339,25 @@ test('natural armor, generated armor, status, and weighted gear resolve to final
 	);
 	assert.deepEqual(
 		cinderDrake.status.effects.map(effect => [effect.generatorId, effect.entryId]),
-		[['status-effect', 'smoldering']],
+		[['status_effect', 'smoldering']],
 	);
 	assert.ok(cinderDrake.status.effects[0].provenance.length > 0);
 
-	const bellWraith = generateEntry('monster', 'bell-wraith', { level: 5 });
+	const bellWraith = generateEntry('monster', 'bell_wraith', { level: 5 });
 	const armorEntry = generatorCatalog.getGenerator('armors', 'en').entries
-		.find(entry => entry.id === 'common-heavy-armor');
+		.find(entry => entry.id === 'common_heavy_armor');
 	assert.deepEqual(bellWraith.naturalArmor, { percentage: 0 });
 	assert.equal(
 		bellWraith.status.ar.max,
 		calculateArmorRating(
 			bellWraith.status.hp.max,
-			armorEntry.fields['AR percentage'],
+			armorEntry.fields['ar_percentage'],
 		),
 	);
 	assert.equal(bellWraith.gear.equipment.length, 2);
 	assert.ok(bellWraith.source.provenance.some(record => (
 		record.generatorId === 'armors'
-		&& record.entryId === 'common-heavy-armor'
+		&& record.entryId === 'common_heavy_armor'
 	)));
 
 	const mule = generateEntry('companion', 'mule', { level: 5 });
@@ -377,22 +374,33 @@ test('natural armor, generated armor, status, and weighted gear resolve to final
 
 test('descriptive modifiers cannot change mechanical generation results', () => {
 	const baseResult = generatorResolver.resolveReference(
-		{ generator: 'creature-animal', select: 'fields' },
+		{ generator: 'creature_animal', select: 'fields' },
 		'en',
 		{ random: () => 0 },
 	);
 	const withoutModifier = structuredClone(baseResult);
 	withoutModifier.modifiers = [];
-	const withModifier = structuredClone(baseResult);
-	assert.equal(withModifier.modifiers.length, 1);
+	const modifierResult = {
+		fields: {
+			name: 'Scarred',
+			description: 'Old scars remain visible.',
+		},
+		provenance: [{
+			type: 'entry',
+			selection: 'random',
+			generatorId: 'modifier',
+			entryId: 'scarred',
+			path: 'root.creature.modifier',
+		}],
+	};
 
 	const plain = populateRandomCreature(
 		new Creature('Modifier.Plain', 'creator'),
 		{
 			archetype: 'animal',
 			level: 7,
-			random: () => 0.25,
-			resolver: createDetailResolver('creature-animal', withoutModifier),
+			random: () => 0,
+			resolver: createDetailResolver('creature_animal', withoutModifier),
 		},
 	);
 	const modified = populateRandomCreature(
@@ -400,8 +408,12 @@ test('descriptive modifiers cannot change mechanical generation results', () => 
 		{
 			archetype: 'animal',
 			level: 7,
-			random: () => 0.25,
-			resolver: createDetailResolver('creature-animal', withModifier),
+			random: () => 0,
+			resolver: createDetailResolver(
+				'creature_animal',
+				withoutModifier,
+				modifierResult,
+			),
 		},
 	);
 	assert.equal(modified.modifiers.length, 1);
@@ -644,15 +656,19 @@ function getArmorPercentage(creature) {
 	}
 	return generatorCatalog.getGenerator('armors', 'en').entries
 		.find(entry => entry.id === armorSelection.entryId)
-		.fields['AR percentage'];
+		.fields['ar_percentage'];
 }
 
-function createDetailResolver(generatorId, result) {
+function createDetailResolver(generatorId, result, modifierResult) {
 	return {
 		resolveReference(reference, locale, options) {
-			return reference.generator === generatorId && !reference.entry
-				? structuredClone(result)
-				: generatorResolver.resolveReference(reference, locale, options);
+			if (reference.generator === generatorId && !reference.entry) {
+				return structuredClone(result);
+			}
+			if (reference.generator === 'modifier' && modifierResult) {
+				return structuredClone(modifierResult);
+			}
+			return generatorResolver.resolveReference(reference, locale, options);
 		},
 	};
 }

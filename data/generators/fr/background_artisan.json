@@ -1,0 +1,133 @@
+{
+  "schemaVersion": 3,
+  "id": "background_artisan",
+  "visibility": "internal",
+  "name": "Détails du background d’artisan",
+  "description": "Apparences, histoires et objectifs pour les PNJ artisans",
+  "entrySchema": {
+    "type": "fields",
+    "required": ["appearance", "backstory", "goals"]
+  },
+  "entries": [
+    {
+      "id": "muscular_forearms_small_burn_scars_and_heavy_clothing",
+      "fields": {
+        "appearance": "Avant-bras musclés, petites cicatrices de brûlure et vêtements épais couverts de suie.",
+        "backstory": "Un forgeron a hérité d’un atelier en difficulté ainsi que de la dernière commande inachevée de son défunt maître.",
+        "goals": "Achever le chef-d’œuvre, sauver la forge et découvrir pourquoi le client a disparu."
+      }
+    },
+    {
+      "id": "covered_in_fine_sawdust_with_measured_movements_and",
+      "fields": {
+        "appearance": "Couvert de fine sciure, avec des gestes mesurés et un crayon derrière chaque oreille.",
+        "backstory": "Un charpentier s’est fait connaître en reconstruisant les maisons détruites par un incendie, mais il soupçonne que le feu était volontaire.",
+        "goals": "Bâtir des logements plus sûrs et identifier la personne qui profite de ces catastrophes à répétition."
+      }
+    },
+    {
+      "id": "precisely_dressed_in_self_made_clothing_with_quick_fingers",
+      "fields": {
+        "appearance": "Tenue impeccable confectionnée sur mesure, doigts agiles et regard attentif au moindre détail.",
+        "backstory": "Un tailleur a découvert les secrets de la cour en écoutant de puissants clients convaincus que les domestiques étaient invisibles.",
+        "goals": "Ouvrir sa propre maison de couture et n’utiliser ces secrets que pour protéger les plus vulnérables."
+      }
+    },
+    {
+      "id": "pale_from_laboratory_work_with_stained_gloves_and",
+      "fields": {
+        "appearance": "Teint pâle à force de travailler en laboratoire, gants tachés et sourcils roussis de façon inégale.",
+        "backstory": "La découverte prometteuse d’un alchimiste a été accaparée par un examinateur de guilde, qui a ensuite dissimulé la formule.",
+        "goals": "Prouver être à l’origine de la découverte, distribuer le remède sans danger et éviter qu’il ne devienne une arme."
+      }
+    },
+    {
+      "id": "quiet_and_focused_wearing_magnifying_lenses_and_an",
+      "fields": {
+        "appearance": "Silencieux et concentré, portant des lentilles grossissantes et un tablier rempli de minuscules outils soigneusement rangés.",
+        "backstory": "Un horloger a découvert un mécanisme impossible dans un objet qu’on lui avait confié pour une réparation ordinaire.",
+        "goals": "Découvrir qui l’a fabriqué et le tenir à l’écart des commanditaires uniquement intéressés par ses applications militaires."
+      }
+    },
+    {
+      "id": "legacy_profession_butcher",
+      "fields": {
+        "appearance": "Sa tenue et ses outils évoquent immédiatement le métier suivant : boucher.",
+        "backstory": "A construit sa vie comme boucher et connaît les obligations ainsi que les pressions cachées de cette activité.",
+        "goals": "Mettre cette expérience à profit pour obtenir un avenir plus sûr et plus autonome."
+      }
+    },
+    {
+      "id": "legacy_profession_pastry_cook",
+      "fields": {
+        "appearance": "Sa tenue et ses outils évoquent immédiatement le métier suivant : pâtissier.",
+        "backstory": "A construit sa vie comme pâtissier et connaît les obligations ainsi que les pressions cachées de cette activité.",
+        "goals": "Mettre cette expérience à profit pour obtenir un avenir plus sûr et plus autonome."
+      }
+    },
+    {
+      "id": "legacy_profession_cook",
+      "fields": {
+        "appearance": "Sa tenue et ses outils évoquent immédiatement le métier suivant : cuisinier.",
+        "backstory": "A construit sa vie comme cuisinier et connaît les obligations ainsi que les pressions cachées de cette activité.",
+        "goals": "Mettre cette expérience à profit pour obtenir un avenir plus sûr et plus autonome."
+      }
+    },
+    {
+      "id": "legacy_profession_craftsperson",
+      "fields": {
+        "appearance": "Sa tenue et ses outils évoquent immédiatement le métier suivant : artisan.",
+        "backstory": "A construit sa vie comme artisan et connaît les obligations ainsi que les pressions cachées de cette activité.",
+        "goals": "Mettre cette expérience à profit pour obtenir un avenir plus sûr et plus autonome."
+      }
+    },
+    {
+      "id": "legacy_profession_blacksmith",
+      "fields": {
+        "appearance": "Sa tenue et ses outils évoquent immédiatement le métier suivant : forgeron.",
+        "backstory": "A construit sa vie comme forgeron et connaît les obligations ainsi que les pressions cachées de cette activité.",
+        "goals": "Mettre cette expérience à profit pour obtenir un avenir plus sûr et plus autonome."
+      }
+    },
+    {
+      "id": "legacy_profession_mechanic",
+      "fields": {
+        "appearance": "Sa tenue et ses outils évoquent immédiatement le métier suivant : mécanicien.",
+        "backstory": "A construit sa vie comme mécanicien et connaît les obligations ainsi que les pressions cachées de cette activité.",
+        "goals": "Mettre cette expérience à profit pour obtenir un avenir plus sûr et plus autonome."
+      }
+    },
+    {
+      "id": "legacy_profession_engineer",
+      "fields": {
+        "appearance": "Sa tenue et ses outils évoquent immédiatement le métier suivant : ingénieur.",
+        "backstory": "A construit sa vie comme ingénieur et connaît les obligations ainsi que les pressions cachées de cette activité.",
+        "goals": "Mettre cette expérience à profit pour obtenir un avenir plus sûr et plus autonome."
+      }
+    },
+    {
+      "id": "legacy_profession_technician",
+      "fields": {
+        "appearance": "Sa tenue et ses outils évoquent immédiatement le métier suivant : technicien.",
+        "backstory": "A construit sa vie comme technicien et connaît les obligations ainsi que les pressions cachées de cette activité.",
+        "goals": "Mettre cette expérience à profit pour obtenir un avenir plus sûr et plus autonome."
+      }
+    },
+    {
+      "id": "decomposed_story_dependent_runesmith",
+      "fields": {
+        "appearance": "Des mains tachées d’encre et des glyphes inachevés trahissent un jeune artisan des runes.",
+        "backstory": "une jeune maîtresse runique capable de prouesses, mais seulement si quelqu'un lui raconte une histoire qu'elle n'a jamais entendue.",
+        "goals": "Transformer ce parcours singulier en un avenir choisi."
+      }
+    },
+    {
+      "id": "decomposed_mislabeled_potion_alchemist",
+      "fields": {
+        "appearance": "Des flacons réutilisés aux étiquettes dangereusement erronées remplissent la trousse d’un alchimiste.",
+        "backstory": "une alchimiste qui vend des potions fiables dans des flacons réutilisés portant des étiquettes dangereusement erronées.",
+        "goals": "Transformer ce parcours singulier en un avenir choisi."
+      }
+    }
+  ]
+}

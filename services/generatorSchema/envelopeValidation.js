@@ -7,7 +7,6 @@ const {
 	validateTechnicalId,
 } = require('./assertions');
 const {
-	GENERATOR_KINDS,
 	GENERATOR_SCHEMA_VERSION,
 	GENERATOR_VISIBILITIES,
 	MAX_ENTRY_TEXT_LENGTH,
@@ -17,10 +16,8 @@ const {
 	validateEntrySchema,
 	validateGeneratorEntry,
 } = require('./entryValidation');
-const {
-	validateModifierRequests,
-	validateTechnicalIdList,
-} = require('./modifierValidation');
+const { extractInlineReferences } = require('./referenceValidation');
+const { validateModifierMap } = require('./modifierMapValidation');
 
 function validateGeneratorDefinition(generator, file = '<generator>') {
 	assertPlainObject(generator, `Invalid generator document: ${file}.`);
@@ -29,11 +26,9 @@ function validateGeneratorDefinition(generator, file = '<generator>') {
 		[
 			'schemaVersion',
 			'id',
-			'kind',
 			'visibility',
 			'name',
 			'description',
-			'appliesTo',
 			'entrySchema',
 			'modifiers',
 			'entries',
@@ -45,7 +40,6 @@ function validateGeneratorDefinition(generator, file = '<generator>') {
 		[
 			'schemaVersion',
 			'id',
-			'kind',
 			'visibility',
 			'name',
 			'description',
@@ -61,12 +55,6 @@ function validateGeneratorDefinition(generator, file = '<generator>') {
 		);
 	}
 	validateTechnicalId(generator.id, `generator ID in ${file}`);
-	if (!GENERATOR_KINDS.has(generator.kind)) {
-		throw generatorSchemaError(
-			'INVALID_GENERATOR_KIND',
-			`Generator ${file} has an unsupported kind.`,
-		);
-	}
 	if (!GENERATOR_VISIBILITIES.has(generator.visibility)) {
 		throw generatorSchemaError(
 			'INVALID_GENERATOR_VISIBILITY',
@@ -74,16 +62,17 @@ function validateGeneratorDefinition(generator, file = '<generator>') {
 		);
 	}
 	validateDisplayText(generator.name, 256, `generator name in ${file}`);
+	extractInlineReferences(generator.name, `generator name in ${file}`);
 	validateDisplayText(
 		generator.description,
 		MAX_ENTRY_TEXT_LENGTH,
 		`generator description in ${file}`,
 	);
-	validateGeneratorKindProperties(generator, file);
-	const entrySchema = validateEntrySchema(generator.entrySchema, generator.kind, file);
+	extractInlineReferences(generator.description, `generator description in ${file}`);
+	const entrySchema = validateEntrySchema(generator.entrySchema, file);
 	validateCreatureGeneratorEnvelope(generator, entrySchema, file);
 	if (generator.modifiers !== undefined) {
-		validateModifierRequests(generator.modifiers, `${file} modifiers`);
+		validateModifierMap(generator.modifiers, `${file} modifiers`);
 	}
 	if (!Array.isArray(generator.entries) || generator.entries.length === 0) {
 		throw generatorSchemaError(
@@ -114,31 +103,6 @@ function validateGeneratorDefinition(generator, file = '<generator>') {
 		);
 	}
 	return generator;
-}
-
-function validateGeneratorKindProperties(generator, file) {
-	if (generator.kind === 'modifier') {
-		if (generator.visibility !== 'internal') {
-			throw generatorSchemaError(
-				'INVALID_MODIFIER_VISIBILITY',
-				`Modifier generator ${file} must be internal.`,
-			);
-		}
-		validateTechnicalIdList(generator.appliesTo, file, 'appliesTo');
-		if (generator.modifiers !== undefined) {
-			throw generatorSchemaError(
-				'INVALID_MODIFIER_REQUEST',
-				`Modifier generator ${file} cannot request other modifiers.`,
-			);
-		}
-		return;
-	}
-	if (generator.appliesTo !== undefined) {
-		throw generatorSchemaError(
-			'INVALID_MODIFIER_COMPATIBILITY',
-			`Non-modifier generator ${file} cannot define appliesTo.`,
-		);
-	}
 }
 
 module.exports = { validateGeneratorDefinition };

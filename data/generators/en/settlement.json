@@ -1,222 +1,207 @@
 {
-  "schemaVersion": 2,
+  "schemaVersion": 3,
   "id": "settlement",
-  "kind": "category",
   "visibility": "public",
   "name": "settlement",
   "description": "Communities, strongholds, camps, and population centers",
   "entrySchema": {
     "type": "fields",
-    "required": ["Name", "Description"]
+    "required": ["name", "description"]
   },
   "entries": [
     {
-      "id": "crossroads-village",
+      "id": "crossroads_village",
       "weight": 4,
       "fields": {
-        "Name": "Crossroads Village",
-        "Description": "inns, stables, traders, and craftspeople serving traffic from three roads."
+        "name": "Crossroads Village",
+        "description": "inns, stables, traders, and craftspeople serving traffic from three roads."
       }
     },
     {
-      "id": "fishing-village",
+      "id": "fishing_village",
       "weight": 4,
       "fields": {
-        "Name": "Fishing Village",
-        "Description": "boats, smokehouses, net sheds, and homes raised against seasonal floods."
+        "name": "Fishing Village",
+        "description": "boats, smokehouses, net sheds, and homes raised against seasonal floods."
       }
     },
     {
-      "id": "mining-town",
+      "id": "mining_town",
       "weight": 3,
       "fields": {
-        "Name": "Mining Town",
-        "Description": "rough housing and busy foundries beneath a wealthy company office and dangerous shafts."
+        "name": "Mining Town",
+        "description": "rough housing and busy foundries beneath a wealthy company office and dangerous shafts."
       }
     },
     {
-      "id": "pilgrim-town",
+      "id": "pilgrim_town",
       "weight": 3,
       "fields": {
-        "Name": "Pilgrim Town",
-        "Description": "hostels, relic sellers, healers, and rival temples surrounding a sacred destination."
+        "name": "Pilgrim Town",
+        "description": "hostels, relic sellers, healers, and rival temples surrounding a sacred destination."
       }
     },
     {
-      "id": "frontier-fort",
+      "id": "frontier_fort",
       "weight": 3,
       "fields": {
-        "Name": "Frontier Fort",
-        "Description": "soldiers, settlers, workshops, and refugees sheltered behind unfinished defenses."
+        "name": "Frontier Fort",
+        "description": "soldiers, settlers, workshops, and refugees sheltered behind unfinished defenses."
       }
     },
     {
-      "id": "adventurer-camp",
+      "id": "adventurer_camp",
       "weight": 3,
       "fields": {
-        "Name": "Adventurer Camp",
-        "Description": "tents, supply stalls, healers, mercenaries, and rumor boards beside unexplored ruins."
+        "name": "Adventurer Camp",
+        "description": "tents, supply stalls, healers, mercenaries, and rumor boards beside unexplored ruins."
       }
     },
     {
-      "id": "hill-castle",
+      "id": "hill_castle",
       "weight": 3,
       "fields": {
-        "Name": "Hill Castle",
-        "Description": "a noble household and garrison overlooking farms gathered beneath its protection."
+        "name": "Hill Castle",
+        "description": "a noble household and garrison overlooking farms gathered beneath its protection."
       }
     },
     {
-      "id": "river-port",
+      "id": "river_port",
       "weight": 2,
       "fields": {
-        "Name": "River Port",
-        "Description": "warehouses, ferries, shipyards, customs officers, and floating neighborhoods."
+        "name": "River Port",
+        "description": "warehouses, ferries, shipyards, customs officers, and floating neighborhoods."
       }
     },
     {
-      "id": "monastery-community",
+      "id": "monastery_community",
       "weight": 2,
       "fields": {
-        "Name": "Monastery Community",
-        "Description": "monks, tenant farmers, guests, libraries, and workshops behind peaceful walls."
+        "name": "Monastery Community",
+        "description": "monks, tenant farmers, guests, libraries, and workshops behind peaceful walls."
       }
     },
     {
-      "id": "forest-enclave",
+      "id": "forest_enclave",
       "weight": 2,
       "fields": {
-        "Name": "Forest Enclave",
-        "Description": "homes integrated into living trees and protected by scouts who control every path."
+        "name": "Forest Enclave",
+        "description": "homes integrated into living trees and protected by scouts who control every path."
       }
     },
     {
-      "id": "mountain-hold",
+      "id": "mountain_hold",
       "weight": 2,
       "fields": {
-        "Name": "Mountain Hold",
-        "Description": "a fortified underground settlement built around mines, cisterns, and ancestral halls."
+        "name": "Mountain Hold",
+        "description": "a fortified underground settlement built around mines, cisterns, and ancestral halls."
       }
     },
     {
-      "id": "island-commune",
+      "id": "island_commune",
       "weight": 2,
       "fields": {
-        "Name": "Island Commune",
-        "Description": "a self-sufficient harbor settlement governed through public meetings and shared labor."
+        "name": "Island Commune",
+        "description": "a self-sufficient harbor settlement governed through public meetings and shared labor."
       }
     },
     {
-      "id": "free-city",
+      "id": "free_city",
       "weight": 1,
       "fields": {
-        "Name": "Free City",
-        "Description": "an independent trade metropolis balancing guilds, foreign powers, and citizen factions."
+        "name": "Free City",
+        "description": "an independent trade metropolis balancing guilds, foreign powers, and citizen factions."
       }
     },
     {
-      "id": "underground-refuge",
+      "id": "underground_refuge",
       "weight": 1,
       "fields": {
-        "Name": "Underground Refuge",
-        "Description": "descendants of disaster survivors living around finite water, light, and old machinery."
+        "name": "Underground Refuge",
+        "description": "descendants of disaster survivors living around finite water, light, and old machinery."
       }
     },
     {
-      "id": "ruined-city-camp",
+      "id": "ruined_city_camp",
       "weight": 1,
       "fields": {
-        "Name": "Ruined City Camp",
-        "Description": "scavengers and scholars occupying defensible blocks of a much larger dead metropolis."
+        "name": "Ruined City Camp",
+        "description": "scavengers and scholars occupying defensible blocks of a much larger dead metropolis."
       }
     },
     {
-      "id": "farming-hamlet",
+      "id": "farming_hamlet",
       "fields": {
-        "Name": "Farming Village",
-        "Description": "A small community centered on barns, a mill, a weekly market, and common land."
+        "name": "Farming Village",
+        "description": "A small community centered on barns, a mill, a weekly market, and common land."
       }
     },
     {
-      "id": "walled-market-town",
+      "id": "walled_market_town",
       "fields": {
-        "Name": "Market Town",
-        "Description": "A regional center shaped by guilds, warehouses, taxes, and commercial rivalries."
+        "name": "Market Town",
+        "description": "A regional center shaped by guilds, warehouses, taxes, and commercial rivalries."
       }
     },
     {
-      "id": "coastal-city",
+      "id": "coastal_city",
       "fields": {
-        "Name": "Fortified Port",
-        "Description": "Quays protected by towers, a demanding harbor office, and districts of far-traveled sailors."
+        "name": "Fortified Port",
+        "description": "Quays protected by towers, a demanding harbor office, and districts of far-traveled sailors."
       }
     },
     {
-      "id": "nomad-encampment",
+      "id": "nomad_encampment",
       "fields": {
-        "Name": "Nomad Encampment",
-        "Description": "Mobile homes organized around herds, craftspeople, and a clan council."
+        "name": "Nomad Encampment",
+        "description": "Mobile homes organized around herds, craftspeople, and a clan council."
       }
     },
     {
-      "id": "siege-camp",
+      "id": "siege_camp",
       "fields": {
-        "Name": "Military Camp",
-        "Description": "A temporary settlement of soldiers, engineers, healers, and civilian suppliers."
+        "name": "Military Camp",
+        "description": "A temporary settlement of soldiers, engineers, healers, and civilian suppliers."
       }
     },
     {
-      "id": "royal-capital",
+      "id": "royal_capital",
       "fields": {
-        "Name": "Capital",
-        "Description": "A metropolis where palaces, offices, barracks, markets, and poor districts compete for space."
+        "name": "Capital",
+        "description": "A metropolis where palaces, offices, barracks, markets, and poor districts compete for space."
       }
     },
     {
-      "id": "underground-city",
+      "id": "underground_city",
       "fields": {
-        "Name": "Underground City",
-        "Description": "A lightless community built around shafts, caves, and ancient machines."
+        "name": "Underground City",
+        "description": "A lightless community built around shafts, caves, and ancient machines."
       }
     },
     {
-      "id": "floating-settlement",
+      "id": "floating_settlement",
       "fields": {
-        "Name": "Floating City",
-        "Description": "Ships and platforms permanently linked around an anchorage, reef, or gigantic creature."
+        "name": "Floating City",
+        "description": "Ships and platforms permanently linked around an anchorage, reef, or gigantic creature."
       }
     },
     {
       "id": "slum",
       "fields": {
-        "Name": "Slum",
-        "Description": "A dense district built from salvaged materials and governed by mutual-aid networks and informal authorities."
+        "name": "Slum",
+        "description": "A dense district built from salvaged materials and governed by mutual-aid networks and informal authorities."
       }
     },
     {
-      "id": "tribal-enclave",
+      "id": "tribal_enclave",
       "fields": {
-        "Name": "Tribal Enclave",
-        "Description": "A close community centered on tradition, sacred territory, and customary authority."
+        "name": "Tribal Enclave",
+        "description": "A close community centered on tradition, sacred territory, and customary authority."
       }
     }
   ],
-  "modifiers": [
-    {
-      "generator": "site-modifier-all",
-      "chance": 0.2,
-      "count": {
-        "min": 1,
-        "max": 1
-      }
-    },
-    {
-      "generator": "site-modifier-structures",
-      "chance": 0.2,
-      "count": {
-        "min": 1,
-        "max": 1
-      }
-    }
-  ]
+  "modifiers": {
+    "site_modifier_all": 20,
+    "site_modifier_structures": 20
+  }
 }

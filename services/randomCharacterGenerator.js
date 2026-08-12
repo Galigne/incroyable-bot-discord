@@ -1,5 +1,8 @@
 const generatorCatalog = require('./generatorCatalog');
 const generatorResolver = require('./generatorResolver');
+const {
+	maybeGenerateDescriptiveModifiers,
+} = require('./descriptiveModifierGenerator');
 const { getStatProfile } = require('./statProfileCatalog');
 const { selectWeightedEntry } = require('./weightedSelector');
 const {
@@ -31,20 +34,43 @@ function populateRandomCharacter(character, options = {}) {
 
 	character.level = level;
 	const generatedName = pickOne('name', locale, random);
-	character.name.firstName = getField(generatedName, 'FirstName');
-	character.name.lastName = getField(generatedName, 'LastName');
+	character.name.firstName = getField(generatedName, 'first_name');
+	character.name.lastName = getField(generatedName, 'last_name');
 
 	const race = pickOne('race', locale, random);
-	character.race.name = getField(race, 'Name');
-	character.race.physicalDescription = getField(race, 'Description');
-	character.race.traits.skillBonus = getField(race, 'Skill Bonus');
-	character.race.traits.physicalAbility = getField(race, 'Physical Ability');
+	character.race.name = getField(race, 'name');
+	character.race.physicalDescription = getField(race, 'description');
+	character.race.traits.skillBonus = getField(race, 'skill_bonus');
+	character.race.traits.physicalAbility = getField(race, 'physical_ability');
 
 	const background = resolveBackground(options.background, locale, random);
-	const backgroundDetails = pickOne(getField(background, 'Generator'), locale, random);
-	character.background.appearance = getField(backgroundDetails, 'Appearance');
-	character.background.backstory = getField(backgroundDetails, 'Backstory');
-	character.background.goals = getField(backgroundDetails, 'Goals');
+	const route = generatorResolver.resolveReference(
+		{
+			generator: 'background',
+			entry: background.id,
+			select: 'fields',
+		},
+		locale,
+		{ path: 'root.character.background', random },
+	);
+	const detailResolver = resolver.resolveInlineReference
+		?? generatorResolver.resolveInlineReference;
+	const routeFields = route.fields ?? route.value;
+	const backgroundDetailsResult = detailResolver(
+		routeFields.generator,
+		locale,
+		{ path: 'root.character.background.details', random },
+	);
+	const backgroundDetails = backgroundDetailsResult.fields ?? backgroundDetailsResult.value;
+	const backgroundModifiers = maybeGenerateDescriptiveModifiers({
+		resolver,
+		locale,
+		random,
+		path: 'root.character.modifier',
+	});
+	character.background.appearance = backgroundDetails.appearance;
+	character.background.backstory = backgroundDetails.backstory;
+	character.background.goals = backgroundDetails.goals;
 
 	character.personality.traits = pickMany('personality', 2, locale, random)
 		.map(getTextValue);
@@ -62,17 +88,17 @@ function populateRandomCharacter(character, options = {}) {
 	const ruleLevels = allocateRuleLevels(rulePointCount);
 	character.rules = pickMany('rules', ruleLevels.length, locale, random)
 		.map((entry, index) => ({
-			name: getField(entry, 'Name'),
-			description: getField(entry, 'Description'),
+			name: getField(entry, 'name'),
+			description: getField(entry, 'description'),
 			level: ruleLevels[index],
 		}));
 
 	const talentCount = calculateTalentCount(level);
 	character.talents = pickMany('talents', talentCount, locale, random)
-		.map(entry => `${getField(entry, 'Name')} — ${getField(entry, 'Description')}`);
+		.map(entry => `${getField(entry, 'name')} — ${getField(entry, 'description')}`);
 
 	character.status.effects = random() < 0.25
-		? [formatNamedEntry(pickOne('status-effect', locale, random))]
+		? [formatNamedEntry(pickOne('status_effect', locale, random))]
 		: [];
 
 	const armor = pickOne(
@@ -81,13 +107,13 @@ function populateRandomCharacter(character, options = {}) {
 		random,
 		entry => canEquipArmor(
 			character.statistics.constitution,
-			getField(entry, 'Constitution requirement'),
+			getField(entry, 'constitution_requirement'),
 		),
 	);
 	const weaponCount = randomInteger(1, 2, random);
 	const weapons = pickMany('weapons', weaponCount, locale, random);
 	const inventoryItems = pickMany('inventory', 3, locale, random);
-	const armorPercentage = Number(getField(armor, 'AR percentage'));
+	const armorPercentage = Number(getField(armor, 'ar_percentage'));
 
 	Object.assign(character.status, createGeneratedResources(
 		character.statistics,
@@ -104,12 +130,7 @@ function populateRandomCharacter(character, options = {}) {
 		...inventoryItems.map(formatNamedEntry),
 		formatGold(gold),
 	];
-	character.modifiers = resolveBackgroundModifiers(
-		background.id,
-		locale,
-		random,
-		resolver,
-	);
+	character.modifiers = backgroundModifiers.map(modifier => structuredClone(modifier));
 
 	return character;
 }
@@ -130,19 +151,6 @@ function resolveBackground(requestedBackground, locale, random) {
 		);
 	}
 	return background;
-}
-
-function resolveBackgroundModifiers(backgroundId, locale, random, resolver) {
-	const resolved = resolver.resolveReference(
-		{
-			generator: 'background',
-			entry: backgroundId,
-			select: 'fields',
-		},
-		locale,
-		{ path: 'root.character.background', random },
-	);
-	return resolved.modifiers.map(modifier => structuredClone(modifier));
 }
 
 function pickOne(categoryName, locale, random, predicate = () => true) {
@@ -205,8 +213,8 @@ function getTextValue(entry) {
 }
 
 function formatNamedEntry(entry) {
-	const name = getField(entry, 'Name');
-	const description = getField(entry, 'Description');
+	const name = getField(entry, 'name');
+	const description = getField(entry, 'description');
 	return `${name} — ${description}`;
 }
 

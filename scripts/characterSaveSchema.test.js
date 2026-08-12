@@ -167,24 +167,24 @@ test('/gen-char consumes current generator fields and persists version 2', async
 
 	assert.equal(rawSave.schemaVersion, 2);
 	assert.deepEqual(rawSave.name, {
-		firstName: nameEntry.fields.FirstName,
-		lastName: nameEntry.fields.LastName,
+		firstName: nameEntry.fields.first_name,
+		lastName: nameEntry.fields.last_name,
 	});
-	assert.equal(rawSave.race.name, raceEntry.fields.Name);
-	assert.equal(rawSave.race.physicalDescription, raceEntry.fields.Description);
-	assert.equal(rawSave.race.traits.skillBonus, raceEntry.fields['Skill Bonus']);
+	assert.equal(rawSave.race.name, raceEntry.fields.name);
+	assert.equal(rawSave.race.physicalDescription, raceEntry.fields.description);
+	assert.equal(rawSave.race.traits.skillBonus, raceEntry.fields.skill_bonus);
 	assert.equal(
 		rawSave.race.traits.physicalAbility,
-		raceEntry.fields['Physical Ability'],
+		raceEntry.fields.physical_ability,
 	);
 	assert.ok(rawSave.background.appearance);
 	assert.ok(rawSave.background.backstory);
 	assert.ok(rawSave.background.goals);
 	assert.ok(rawSave.statistics.constitution);
 	assert.ok(rawSave.status.hp.max);
-	const statusEntry = generatorCatalog.getGenerator('status-effect', 'en').entries[0];
+	const statusEntry = generatorCatalog.getGenerator('status_effect', 'en').entries[0];
 	assert.deepEqual(rawSave.status.effects, [
-		`${statusEntry.fields.Name} — ${statusEntry.fields.Description}`,
+		`${statusEntry.fields.name} — ${statusEntry.fields.description}`,
 	]);
 	assert.deepEqual(rawSave.modifiers.map(modifier => [
 		modifier.generatorId,

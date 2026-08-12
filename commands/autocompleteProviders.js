@@ -40,6 +40,7 @@ const AUTOCOMPLETE_PROVIDERS = {
 	),
 	static: getStaticChoices,
 	backgrounds: getBackgroundChoices,
+	'generator-modifiers': getGeneratorModifierChoices,
 	entities: (option, context, focused) => getEntityChoices(
 		focused.value,
 		context.locale,
@@ -79,7 +80,7 @@ function getBackgroundChoices(option, context, focused) {
 	const englishById = new Map(english.map(entry => [entry.id, entry]));
 	return filterAutocompleteChoices(
 		localized.map(entry => ({
-			name: `${entry.fields.Name} — ${entry.fields.Description}`.slice(0, 100),
+			name: `${entry.fields.name} — ${entry.fields.description}`.slice(0, 100),
 			value: englishById.get(entry.id)?.id ?? entry.id,
 		})),
 		focused.value,
@@ -133,6 +134,30 @@ function getManageableEntityChoices(option, context, focused) {
 		hasDmPermission(context.interaction, context.config)
 			? {}
 			: { creatorId: context.interaction.user.id },
+	);
+}
+
+function getGeneratorModifierChoices(option, context, focused) {
+	const categoryId = context.interaction.options.getString?.('category');
+	const category = generatorCatalog.getGenerator(categoryId, 'en');
+	if (!category || category.visibility !== 'public') {
+		return [];
+	}
+	const localizedGenerators = new Map(
+		(generatorCatalog.listGenerators(context.locale, { visibility: 'all' }) ?? [])
+			.map(generator => [generator.id, generator]),
+	);
+	return filterAutocompleteChoices(
+		Object.keys(category.modifiers ?? {}).map(generatorId => {
+			const generator = localizedGenerators.get(generatorId)
+				?? generatorCatalog.getGenerator(generatorId, context.locale);
+			return {
+				name: `${generator?.name ?? generatorId} — ${generator?.description ?? ''}`
+					.slice(0, 100),
+				value: generatorId,
+			};
+		}),
+		focused.value,
 	);
 }
 

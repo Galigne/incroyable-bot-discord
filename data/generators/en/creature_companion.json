@@ -1,0 +1,650 @@
+{
+  "schemaVersion": 3,
+  "id": "creature_companion",
+  "visibility": "internal",
+  "name": "companion",
+  "description": "Pets, familiars, and small traveling creatures",
+  "entrySchema": {
+    "type": "fields",
+    "required": ["name", "description"]
+  },
+  "entries": [
+    {
+      "id": "loyal_hound",
+      "weight": 4,
+      "fields": {
+        "name": "Loyal Hound",
+        "description": "tracks familiar scents, guards sleepers, and distrusts one apparently harmless NPC."
+      },
+      "generation": {
+        "statProfile": "creature-companion",
+        "traits": [
+          {
+            "id": "loyal_hound_nature",
+            "name": "Bonded Aptitude",
+            "description": "tracks familiar scents, guards sleepers, and distrusts one apparently harmless NPC."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 0
+      }
+    },
+    {
+      "id": "barn_cat",
+      "weight": 4,
+      "fields": {
+        "name": "Barn Cat",
+        "description": "excellent at finding hidden vermin, warm places, and unattended food."
+      },
+      "generation": {
+        "statProfile": "creature-companion",
+        "traits": [
+          {
+            "id": "barn_cat_nature",
+            "name": "Bonded Aptitude",
+            "description": "excellent at finding hidden vermin, warm places, and unattended food."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 0
+      }
+    },
+    {
+      "id": "messenger_pigeon",
+      "weight": 4,
+      "fields": {
+        "name": "Messenger Pigeon",
+        "description": "reliably returns to one chosen home carrying a very small message."
+      },
+      "generation": {
+        "statProfile": "creature-companion",
+        "traits": [
+          {
+            "id": "messenger_pigeon_nature",
+            "name": "Bonded Aptitude",
+            "description": "reliably returns to one chosen home carrying a very small message."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [
+          {
+            "generator": "inventory",
+            "entry": "mysterious_sealed_letter",
+            "select": "fields"
+          }
+        ],
+        "naturalArmorPercentage": 0
+      }
+    },
+    {
+      "id": "pack_goat",
+      "weight": 3,
+      "fields": {
+        "name": "Pack Goat",
+        "description": "carries modest supplies, eats almost anything, and refuses obviously cursed paths."
+      },
+      "generation": {
+        "statProfile": "creature-companion",
+        "traits": [
+          {
+            "id": "pack_goat_nature",
+            "name": "Bonded Aptitude",
+            "description": "carries modest supplies, eats almost anything, and refuses obviously cursed paths."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [
+          {
+            "generator": "inventory",
+            "entry": "three_travel_rations",
+            "select": "fields"
+          }
+        ],
+        "naturalArmorPercentage": 0
+      }
+    },
+    {
+      "id": "clever_rat",
+      "weight": 3,
+      "fields": {
+        "name": "Clever Rat",
+        "description": "squeezes through tiny spaces and learns simple object-based instructions."
+      },
+      "generation": {
+        "statProfile": "creature-companion",
+        "traits": [
+          {
+            "id": "clever_rat_nature",
+            "name": "Bonded Aptitude",
+            "description": "squeezes through tiny spaces and learns simple object-based instructions."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 0
+      }
+    },
+    {
+      "id": "watch_goose",
+      "weight": 3,
+      "fields": {
+        "name": "Watch Goose",
+        "description": "loudly challenges strangers, invisible creatures, and anyone carrying bread."
+      },
+      "generation": {
+        "statProfile": "creature-companion",
+        "traits": [
+          {
+            "id": "watch_goose_nature",
+            "name": "Bonded Aptitude",
+            "description": "loudly challenges strangers, invisible creatures, and anyone carrying bread."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 0
+      }
+    },
+    {
+      "id": "pocket_ferret",
+      "weight": 3,
+      "fields": {
+        "name": "Pocket Ferret",
+        "description": "retrieves small loose objects and hides them in inconvenient places."
+      },
+      "generation": {
+        "statProfile": "creature-companion",
+        "traits": [
+          {
+            "id": "pocket_ferret_nature",
+            "name": "Bonded Aptitude",
+            "description": "retrieves small loose objects and hides them in inconvenient places."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 0
+      }
+    },
+    {
+      "id": "mule",
+      "weight": 3,
+      "fields": {
+        "name": "Mule",
+        "description": "dependable transport with excellent footing and absolute veto power over unsafe bridges."
+      },
+      "generation": {
+        "statProfile": "creature-companion",
+        "traits": [
+          {
+            "id": "mule_nature",
+            "name": "Bonded Aptitude",
+            "description": "dependable transport with excellent footing and absolute veto power over unsafe bridges."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [
+          {
+            "generator": {
+              "oneOf": [
+                {
+                  "id": "inventory",
+                  "weight": 3
+                },
+                {
+                  "id": "weapons",
+                  "weight": 1
+                }
+              ]
+            },
+            "select": "fields"
+          }
+        ],
+        "naturalArmorPercentage": 0
+      }
+    },
+    {
+      "id": "lantern_finch",
+      "weight": 2,
+      "fields": {
+        "name": "Lantern Finch",
+        "description": "emits gentle light and becomes silent when predators are nearby."
+      },
+      "generation": {
+        "statProfile": "creature-companion",
+        "traits": [
+          {
+            "id": "lantern_finch_nature",
+            "name": "Bonded Aptitude",
+            "description": "emits gentle light and becomes silent when predators are nearby."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 0
+      }
+    },
+    {
+      "id": "ember_newt",
+      "weight": 2,
+      "fields": {
+        "name": "Ember Newt",
+        "description": "provides warmth, lights dry tinder, and sleeps inside cookware."
+      },
+      "generation": {
+        "statProfile": "creature-companion",
+        "traits": [
+          {
+            "id": "ember_newt_nature",
+            "name": "Bonded Aptitude",
+            "description": "provides warmth, lights dry tinder, and sleeps inside cookware."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 0
+      }
+    },
+    {
+      "id": "moss_tortoise",
+      "weight": 2,
+      "fields": {
+        "name": "Moss Tortoise",
+        "description": "slowly grows common medicinal herbs across its shell."
+      },
+      "generation": {
+        "statProfile": "creature-companion",
+        "traits": [
+          {
+            "id": "moss_tortoise_nature",
+            "name": "Bonded Aptitude",
+            "description": "slowly grows common medicinal herbs across its shell."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 0
+      }
+    },
+    {
+      "id": "whisper_crow",
+      "weight": 2,
+      "fields": {
+        "name": "Whisper Crow",
+        "description": "remembers voices and can repeat several short phrases with alarming accuracy."
+      },
+      "generation": {
+        "statProfile": "creature-companion",
+        "traits": [
+          {
+            "id": "whisper_crow_nature",
+            "name": "Bonded Aptitude",
+            "description": "remembers voices and can repeat several short phrases with alarming accuracy."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 0
+      }
+    },
+    {
+      "id": "miniature_slime",
+      "weight": 2,
+      "fields": {
+        "name": "Miniature Slime",
+        "description": "harmlessly dissolves dirt, spoiled food, and occasionally important paper."
+      },
+      "generation": {
+        "statProfile": "creature-companion",
+        "traits": [
+          {
+            "id": "miniature_slime_nature",
+            "name": "Bonded Aptitude",
+            "description": "harmlessly dissolves dirt, spoiled food, and occasionally important paper."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 0
+      }
+    },
+    {
+      "id": "clockwork_beetle",
+      "weight": 2,
+      "fields": {
+        "name": "Clockwork Beetle",
+        "description": "records one hour of sound and plays it back when wound."
+      },
+      "generation": {
+        "statProfile": "creature-companion",
+        "traits": [
+          {
+            "id": "clockwork_beetle_nature",
+            "name": "Bonded Aptitude",
+            "description": "records one hour of sound and plays it back when wound."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 20
+      }
+    },
+    {
+      "id": "breeze_lizard",
+      "weight": 2,
+      "fields": {
+        "name": "Breeze Lizard",
+        "description": "changes color with the weather and glides short distances between people."
+      },
+      "generation": {
+        "statProfile": "creature-companion",
+        "traits": [
+          {
+            "id": "breeze_lizard_nature",
+            "name": "Bonded Aptitude",
+            "description": "changes color with the weather and glides short distances between people."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 0
+      }
+    },
+    {
+      "id": "cave_bat",
+      "weight": 2,
+      "fields": {
+        "name": "Cave Bat",
+        "description": "navigates complete darkness and returns when called with a specific whistle."
+      },
+      "generation": {
+        "statProfile": "creature-companion",
+        "traits": [
+          {
+            "id": "cave_bat_nature",
+            "name": "Bonded Aptitude",
+            "description": "navigates complete darkness and returns when called with a specific whistle."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 0
+      }
+    },
+    {
+      "id": "river_otter",
+      "weight": 2,
+      "fields": {
+        "name": "River Otter",
+        "description": "swims, retrieves floating objects, and insists on opening shellfish during serious scenes."
+      },
+      "generation": {
+        "statProfile": "creature-companion",
+        "traits": [
+          {
+            "id": "river_otter_nature",
+            "name": "Bonded Aptitude",
+            "description": "swims, retrieves floating objects, and insists on opening shellfish during serious scenes."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 0
+      }
+    },
+    {
+      "id": "tiny_griffin",
+      "weight": 1,
+      "fields": {
+        "name": "Tiny Griffin",
+        "description": "fiercely guards a single backpack and hunts insects with dramatic dives."
+      },
+      "generation": {
+        "statProfile": "creature-companion",
+        "traits": [
+          {
+            "id": "tiny_griffin_nature",
+            "name": "Bonded Aptitude",
+            "description": "fiercely guards a single backpack and hunts insects with dramatic dives."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 0
+      }
+    },
+    {
+      "id": "blink_rabbit",
+      "weight": 1,
+      "fields": {
+        "name": "Blink Rabbit",
+        "description": "teleports a few meters when startled but rarely chooses the safest direction."
+      },
+      "generation": {
+        "statProfile": "creature-companion",
+        "traits": [
+          {
+            "id": "blink_rabbit_nature",
+            "name": "Bonded Aptitude",
+            "description": "teleports a few meters when startled but rarely chooses the safest direction."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 0
+      }
+    },
+    {
+      "id": "paper_dragon",
+      "weight": 1,
+      "fields": {
+        "name": "Paper Dragon",
+        "description": "folds itself flat, carries written notes, and breathes enough flame to seal wax."
+      },
+      "generation": {
+        "statProfile": "creature-companion",
+        "traits": [
+          {
+            "id": "paper_dragon_nature",
+            "name": "Bonded Aptitude",
+            "description": "folds itself flat, carries written notes, and breathes enough flame to seal wax."
+          }
+        ],
+        "fixedRules": [
+          {
+            "entry": "paper_rule",
+            "level": 1
+          }
+        ],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [
+          {
+            "generator": "inventory",
+            "entry": "writing_kit",
+            "select": "fields"
+          }
+        ],
+        "naturalArmorPercentage": 0
+      }
+    },
+    {
+      "id": "ghost_mouse",
+      "weight": 1,
+      "fields": {
+        "name": "Ghost Mouse",
+        "description": "passes through thin walls and becomes visible after eating cheese."
+      },
+      "generation": {
+        "statProfile": "creature-companion",
+        "traits": [
+          {
+            "id": "ghost_mouse_nature",
+            "name": "Bonded Aptitude",
+            "description": "passes through thin walls and becomes visible after eating cheese."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 0
+      }
+    },
+    {
+      "id": "cloud_pup",
+      "weight": 1,
+      "fields": {
+        "name": "Cloud Pup",
+        "description": "a floating canine made of mist that can briefly conceal a person's face."
+      },
+      "generation": {
+        "statProfile": "creature-companion",
+        "traits": [
+          {
+            "id": "cloud_pup_nature",
+            "name": "Bonded Aptitude",
+            "description": "a floating canine made of mist that can briefly conceal a person's face."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 0
+      }
+    },
+    {
+      "id": "pebble_elemental",
+      "weight": 1,
+      "fields": {
+        "name": "Pebble Elemental",
+        "description": "a fist-sized stone creature able to sense nearby tunnels and worked masonry."
+      },
+      "generation": {
+        "statProfile": "creature-elemental",
+        "traits": [
+          {
+            "id": "pebble_elemental_nature",
+            "name": "Bonded Aptitude",
+            "description": "a fist-sized stone creature able to sense nearby tunnels and worked masonry."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 20
+      }
+    },
+    {
+      "id": "moon_moth",
+      "weight": 1,
+      "fields": {
+        "name": "Moon Moth",
+        "description": "absorbs weak magical residue and glows in the presence of active enchantments."
+      },
+      "generation": {
+        "statProfile": "creature-companion",
+        "traits": [
+          {
+            "id": "moon_moth_nature",
+            "name": "Bonded Aptitude",
+            "description": "absorbs weak magical residue and glows in the presence of active enchantments."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 0
+      }
+    },
+    {
+      "id": "messenger_raptor",
+      "fields": {
+        "name": "Messenger Raptor",
+        "description": "A territorial bird trainable to recognize people, emblems, and routes."
+      },
+      "generation": {
+        "statProfile": "creature-companion",
+        "traits": [
+          {
+            "id": "messenger_raptor_nature",
+            "name": "Intrinsic Nature",
+            "description": "A territorial bird trainable to recognize people, emblems, and routes."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 0
+      },
+      "weight": 1
+    },
+    {
+      "id": "sir_candlewick",
+      "fields": {
+        "name": "Sir Candlewick",
+        "description": "a tiny animated suit of armor searching for a person large enough to be its squire."
+      },
+      "generation": {
+        "statProfile": "creature-companion",
+        "traits": [
+          {
+            "id": "sir_candlewick_nature",
+            "name": "Animated Helper",
+            "description": "a tiny animated suit of armor searching for a person large enough to be its squire."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 35
+      },
+      "weight": 1
+    }
+  ]
+}

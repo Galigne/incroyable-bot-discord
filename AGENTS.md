@@ -116,20 +116,20 @@ write real saves.
   pre-mutation validation, and domain mutation.
 - `services/mechanics/`: Discord-independent combatant and character constants,
   validation, statistics, resources, armor, damage, and generation formulas.
-- `services/generatorSchema.js`: stable public façade for generator-v2 validation
+- `services/generatorSchema.js`: stable public façade for generator-v3 validation
   and creature routing constants.
 - `services/generatorSchema/`: focused internal validators for shared assertions,
   envelopes, entries, parity, modifiers, references, creature metadata, and catalog
   relationships.
-- `services/generatorCatalog.js`: recursively loads the complete generator-v2
+- `services/generatorCatalog.js`: recursively loads the complete generator-v3
   locale pair and exposes stable-ID lookup plus public visibility filtering.
 - `services/generatorResolver.js`: resolves public roots into localized structured
-  results, coordinates nested references and descriptive modifiers, and preserves
-  stable technical provenance.
+  results, coordinates nested references and generator-level modifier results, and
+  preserves stable technical provenance.
 - `services/referenceResolver.js`: resolves random and fixed entries, selectors,
   weighted generator sources, cycles, and bounded nesting.
-- `services/modifierResolver.js`: selects compatible descriptive modifiers by
-  chance, inclusive count, and weight without mutating the base result.
+- `services/descriptiveModifierGenerator.js`: applies the independent 25%
+  application policy for character and creature descriptive modifiers.
 - `services/statProfileCatalog.js`: loads and validates non-localized statistical
   profiles shared by character and creature generation.
 - `services/weightedSelector.js`: shared injectable weighted selection for
@@ -588,129 +588,85 @@ history, motives, identity, relationships, or consequences; and prefer concise
 content when added detail would only make an entry more specific rather than
 more useful. References should not routinely assemble complete characters,
 locations, encounters, or scenarios automatically. Keep independent concepts
-independent when their random combination can create more varied results. This
-guidance describes how to author the existing generator-v2 catalogs and does not
-introduce runtime requirements.
+independent when their random combination can create more varied results.
 
-Generator schema v2 files are discovered recursively under `data/generators/en/`
+Generator schema v3 files are discovered recursively under `data/generators/en/`
 and `data/generators/fr/`. The French catalog must contain a structurally compatible
 counterpart for every English relative path; a missing or incompatible counterpart
 rejects the complete catalog instead of falling back to English. `/help command:gen`
-and `/gen` autocomplete expose only generators whose v2 visibility is `public`.
-Internal generators remain available to application workflows through stable ID
-lookup.
+and `/gen` autocomplete expose only public roots. Internal generators remain
+available to application workflows, inline references, and modifier relationships.
 
-Each generator file requires:
+Each generator file declares `schemaVersion: 3`, a lowercase snake_case `id`,
+`visibility`, localized `name` and `description`, an entry schema, entries, and
+optionally a `modifiers` object mapping generator IDs to percentages from 0 through
+100. Entries are text `value`s or structured `fields` with lowercase snake_case
+keys. A field may be marked
+`technical`; technical fields are hidden from implicit display but may be read by
+an explicit inline field reference. There is no category or template entry type,
+named reference map, or compatibility parser.
 
-```json
-{
-  "schemaVersion": 2,
-  "id": "category-name",
-  "kind": "category",
-  "visibility": "public",
-  "name": "Localized category name",
-  "description": "Human-readable description",
-  "entrySchema": { "type": "text" },
-  "entries": []
-}
+Inline references are written directly in values:
+
+```text
+{{ generator }}
+{{ generator.field }}
+{{ generator:entry }}
+{{ generator:entry.field }}
 ```
 
-Supported entry forms:
+Every occurrence resolves independently. Missing entries use weighted selection;
+fixed entries consume no entry-selection randomness. References may be nested or
+point to internal generators. The resolver validates source, entry, field, and
+locale parity, preserves stable provenance, detects cycles across references and
+modifiers, and limits the shared active selection depth to four. `/reload`
+validates and atomically replaces the generator and statistical-profile caches.
 
-- `{ "id": "stable-entry", "value": "...", "weight": 2 }`;
-- `{ "id": "stable-entry", "fields": { "Name": "...", "Description": "..." }, "weight": 2 }`;
-- template entries with localized `template` text and a matching `references`
-  object when `kind` and `entrySchema.type` are both `template`.
+All generators, including former modifier catalogs, use the same schema. A
+consuming generator owns its optional modifier map; each configured source rolls
+independently, generates one weighted entry, resolves nested references and its own
+modifiers, and attaches a complete result separately from the base result. The
+mechanism is additive only and never executes technical-looking fields or changes
+statistics, resources, armor, RULEs, traits, status, gear, entity type, persistence,
+or other mechanics. Modifier IDs and percentages are technical data and must match
+between English and French.
 
-Weights are positive numbers and default to `1`. Structured entries may contain 1
-to 25 Discord-safe fields declared by `entrySchema.required`; technical routing or
-enum fields are declared by `entrySchema.technical`. Generator and entry IDs,
-kinds, visibility, schemas, entry order, weights, technical values, and relative
-paths remain identical across locales. Only names, descriptions, and player-facing
-entry content are localized. There is no parser, runtime detection, API overload,
-or compatibility path for the previous generator format. `/reload` validates and
-replaces the generator and statistical-profile caches; a process restart also
-loads the current data.
-
-Template references support random or fixed stable entry selection, `value`,
-`fields`, `fields.<declared name>`, and `display` selectors, nested templates,
-and weighted `generator.oneOf` sources. Fixed references never consume randomness
-for entry selection. `display` returns text/template output directly and uses
-`Name`, or the first non-technical declared field, for structured entries. A
-reference may use an internal generator even though only public roots appear in
-`/gen`, autocomplete, and help. Resolution is capped at eight nested selections by
-default and reports stable errors for cycles and excessive depth.
-
-Completed results contain the localized root generator name, stable root generator
-and entry IDs, output type and localized output, base/reference provenance, and a
-separate `modifiers` array. Provenance uses only stable technical IDs and selection
-paths. Every modifier record contains its own selection provenance, so the base
-provenance plus modifier-record provenance is the complete choice history.
-Equivalent deterministic random input must select the same IDs in English and
-French.
-
-Modifier generators use `kind: "modifier"`, `visibility: "internal"`, a technical
-`appliesTo` generator-ID list, and structured entries that include localized `Name`
-and `Description` fields. Generator-level or entry-level `modifiers` requests define
-one chance and an inclusive count range. Selection is weighted and unique within
-each request. Modifiers are narrative records only: their schema and resolver must
-never change or define statistics, resources, armor, RULEs, traits, status effects,
-gear, entity type, persistence, or executable behavior.
-Historical location modifiers are partitioned between the internal
-`site-modifier-all`, `site-modifier-structures`, `site-modifier-interiors`, and
-`site-modifier-building` catalogs so each entry retains its exact compatibility
-set without duplicating concepts. Location generators request only compatible
-catalogs.
-
-The public `creature` catalog routes stable `animal`, `companion`, and `monster`
-type entries to the separate internal `creature-animal`, `creature-companion`, and
-`creature-monster` source catalogs, following the established `background` routing
-pattern. Each detail entry exposes localized `Name` and `Description`, an explicit
-weight, and validated `generation` metadata containing a statistical-profile ID,
-intrinsic traits, optional natural armor or armor reference, explicit fixed RULE
-references and levels, optional descriptive status references, and
-equipment/inventory references. Profiles alter only minimums, maximums, and
-allocation weights; creatures use the same level budget, nonlinear costs, derived
-statistics, and resource formulas as character generation.
+The public `background` and `creature` components route to internal components
+through ordinary technical `generator` fields containing inline references such as
+`{{ background_adventurer }}` or `{{ creature_animal }}`. The public creature
+archetypes `animal`, `companion`, and `monster` are not persistence types. Detail
+components expose localized `name` and `description` fields plus validated
+generation metadata. `statProfile` IDs belong to the separate non-localized
+statistical-profile schema and remain kebab-case.
 
 `services/randomCreatureGenerator.js` resolves that data and persists the complete
 final state plus stable provenance through `creatureApplicationService` and the
 exclusive creature store workflow. Creature Intelligence never assigns RULEs;
-only `fixedRules` does. The structured `status-effect` and `modifier` generator
-catalogs are shared with character generation. Status effects and modifiers remain descriptive, and a
-modifier cannot change statistics, resources, armor, traits, RULEs, status, gear,
-entity type, or persistence. Gear may use fixed, random, nested, or weighted
-references. Only explicit natural armor or technical armor metadata initializes
-AR. Creature generation never derives or changes manual encumbrance.
+only `fixedRules` does. Status effects and modifiers remain descriptive. Gear may
+use fixed, random, nested, or weighted inline references. Only explicit natural
+armor or technical armor metadata initializes AR. Creature generation never derives
+or changes manual encumbrance.
 
-Random character generation depends on exact stable generator IDs and structured field
-labels. Before renaming generator fields, inspect `services/randomCharacterGenerator.js`.
-Generator IDs, `Generator` routing values, `Type`/`Rarity` enum values, JSON keys,
-and structured field labels stay English in every locale. Autocomplete display
-labels may be localized but must submit the aligned English value. Newly generated
-content uses the guild locale and is then stored verbatim; never translate existing
-save content retroactively.
-Race entries must expose `Name`, `Description`, `Skill Bonus`, and
-`Physical Ability`; generated characters copy the latter two into their racial
-traits. The expanded public world-generation set includes `creature`, `region`,
-`building`, `settlement`, `dungeon`, `room`, `material`, `faction`, `government`,
-and `religion`. Complete `npc` and `criminal` roots do not exist: complete
-humanoids come only from `/gen-char`, and reusable roles live in routed background
-components. Historical quests reference random or fixed `background` entries.
-The older `enemy` and `location` categories are also intentionally removed.
-`creature` routes its three types to the internal `creature-animal`,
-`creature-companion`, and `creature-monster` catalogs.
+Random character generation depends on exact stable generator IDs and field keys.
+Before renaming generator fields, inspect `services/randomCharacterGenerator.js`.
+Generator IDs, routing values, enum values, JSON keys, and field keys stay English
+in every locale. Newly generated content uses the guild locale and is then stored
+verbatim; never translate existing save content retroactively. Race entries expose
+`name`, `description`, `skill_bonus`, and `physical_ability`; generated characters
+copy the latter two into their racial traits. Historical quests are ordinary text
+components with inline references to random or fixed `background` entries.
 
 The historical migration is complete and its one-time audit remains in Git
 history. Preserve the resulting conflict winners and do not restore the retired
 complete-person roots. Changes to migrated production content must satisfy the
-normal generator schema, parity, reference, and production-integrity tests.
+normal schema, parity, inline-reference, and production-integrity tests.
+
 At present it:
 
 - rolls level 1–10 when omitted;
 - accepts an optional background category and otherwise rolls one from
-  `background.json`; the routed background generator supplies `Appearance`,
-  `Backstory`, and `Goals`;
+  `background.json`; its inline route supplies `appearance`, `backstory`, and
+  `goals`;
 - spends the entire level-based stat budget using nonlinear point costs;
 - derives initiative and reflexes from speed;
 - awards RULE points at Intelligence 10, 12, 14, 16, 18, and 20, then spends them
@@ -723,9 +679,9 @@ At present it:
 - adds three inventory items plus `level * 1D20 + 5` gold;
 - leaves the manually managed encumbrance resource at its existing values, which
   are `0 / 0` for a new character;
-- gives a generated status effect with a 25% chance.
-- retains descriptive modifiers selected by the shared `modifier` catalog through
-  the chosen background.
+- gives a generated status effect with a 25% chance;
+- rolls the ordinary internal `modifier` generator with a separate 25% application
+  policy and stores only its descriptive name, description, and provenance.
 
 ## Other bot behavior
 

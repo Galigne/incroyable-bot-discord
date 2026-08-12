@@ -18,7 +18,7 @@ module.exports = function createGeneratorChecks(context) {
 
 	function checkGeneratorCatalog() {
 		try {
-			checkProductionDataIsV2(errors);
+			checkProductionDataIsV3(errors);
 			const publicGenerators = generatorCatalog.listGenerators('en');
 			const allGenerators = generatorCatalog.listGenerators('en', {
 				visibility: 'all',
@@ -30,22 +30,22 @@ module.exports = function createGeneratorChecks(context) {
 				publicGenerators.length === 0
 				|| allGenerators.length !== publicGenerators.length + internalGenerators.length
 				|| internalGenerators.some(generator => !(
-					(generator.id.startsWith('background-') && generator.kind === 'component')
+					(generator.id.startsWith('background_') && !Object.hasOwn(generator, 'kind'))
 					|| (
-						['creature-animal', 'creature-companion', 'creature-monster']
+						['creature_animal', 'creature_companion', 'creature_monster']
 							.includes(generator.id)
-						&& generator.kind === 'component'
+						&& !Object.hasOwn(generator, 'kind')
 					)
 					|| (
 						(
 							generator.id === 'modifier'
-							|| generator.id.startsWith('site-modifier-')
+							|| generator.id.startsWith('site_modifier_')
 						)
-						&& generator.kind === 'modifier'
+						&& !Object.hasOwn(generator, 'kind')
 					)
 				))
 			) {
-				errors.push('Generator v2 visibility or kind filtering is incorrect.');
+				errors.push('Generator v3 visibility or schema filtering is incorrect.');
 			}
 
 			const englishRace = generatorCatalog.getGenerator('race', 'en');
@@ -56,8 +56,8 @@ module.exports = function createGeneratorChecks(context) {
 				|| frenchRace?.id !== 'race'
 				|| englishRace?.entries[0]?.id !== 'human'
 				|| frenchRace?.entries[0]?.id !== 'human'
-				|| englishRace?.entries[0]?.fields?.Name !== 'Human'
-				|| frenchRace?.entries[0]?.fields?.Name !== 'Humain'
+				|| englishRace?.entries[0]?.fields?.name !== 'Human'
+				|| frenchRace?.entries[0]?.fields?.name !== 'Humain'
 				|| generatorCatalog.getGenerator('race', 'fr') !== frenchRace
 			) {
 				errors.push('Generator catalogs are not localized and cached by stable ID.');
@@ -112,7 +112,7 @@ module.exports = function createGeneratorChecks(context) {
 	};
 };
 
-function checkProductionDataIsV2(errors) {
+function checkProductionDataIsV3(errors) {
 	const generatorRoot = path.join(__dirname, '..', '..', 'data', 'generators');
 	const englishFiles = listJsonFiles(path.join(generatorRoot, 'en'));
 	const frenchFiles = listJsonFiles(path.join(generatorRoot, 'fr'));
@@ -127,14 +127,14 @@ function checkProductionDataIsV2(errors) {
 				'utf8',
 			));
 			if (
-				generator.schemaVersion !== 2
+				generator.schemaVersion !== 3
 				|| !generator.id
-				|| !generator.kind
+				|| Object.hasOwn(generator, 'kind')
 				|| !generator.visibility
 				|| !generator.entrySchema
 				|| generator.entries.some(entry => typeof entry === 'string' || !entry.id)
 			) {
-				errors.push(`Generator ${locale}/${file} was not fully converted to schema v2.`);
+				errors.push(`Generator ${locale}/${file} was not fully converted to schema v3.`);
 			}
 		}
 	}
@@ -161,7 +161,7 @@ function checkRequiredGenerators(errors, generatorCatalog) {
 		'room',
 		'rules',
 		'settlement',
-		'status-effect',
+		'status_effect',
 		'talents',
 		'trap',
 		'weapons',
@@ -177,9 +177,9 @@ function checkRequiredGenerators(errors, generatorCatalog) {
 
 	for (const generatorId of [
 		'building',
-		'creature-animal',
-		'creature-companion',
-		'creature-monster',
+		'creature_animal',
+		'creature_companion',
+		'creature_monster',
 		'dungeon',
 		'faction',
 		'government',
@@ -213,17 +213,17 @@ function checkBackgroundGenerators(errors, generatorCatalog) {
 	const backgrounds = generatorCatalog.getGenerator('background')?.entries ?? [];
 	const backgroundIds = new Set();
 	for (const background of backgrounds) {
-		const routedGeneratorId = background.fields?.Generator;
+		const routedGeneratorId = getInlineGeneratorId(background.fields?.generator);
 		const details = generatorCatalog.getGenerator(routedGeneratorId)?.entries ?? [];
 		if (
 			!background.id
-			|| !background.fields?.Name
-			|| !background.fields?.Description
+			|| !background.fields?.name
+			|| !background.fields?.description
 			|| backgroundIds.has(background.id)
-			|| !routedGeneratorId?.startsWith('background-')
+			|| !routedGeneratorId?.startsWith('background_')
 			|| details.length === 0
 			|| details.some(entry => (
-				['Appearance', 'Backstory', 'Goals'].some(field => !entry.fields?.[field])
+				['appearance', 'backstory', 'goals'].some(field => !entry.fields?.[field])
 			))
 		) {
 			errors.push(`Invalid routed background generator: ${background.id ?? 'unknown'}.`);
@@ -233,7 +233,7 @@ function checkBackgroundGenerators(errors, generatorCatalog) {
 	if (
 		backgrounds.length !== 17
 		|| backgroundIds.has('citizen')
-		|| generatorCatalog.getGenerator('background-citizen')
+		|| generatorCatalog.getGenerator('background_citizen')
 	) {
 		errors.push('Background routing must contain the 17 supported non-citizen categories.');
 	}
@@ -242,16 +242,16 @@ function checkBackgroundGenerators(errors, generatorCatalog) {
 function checkCreatureGenerators(errors, generatorCatalog) {
 	const creature = generatorCatalog.getGenerator('creature');
 	const expectedRoutes = {
-		animal: 'creature-animal',
-		companion: 'creature-companion',
-		monster: 'creature-monster',
+		animal: 'creature_animal',
+		companion: 'creature_companion',
+		monster: 'creature_monster',
 	};
 	if (
-		creature?.kind !== 'category'
+		Object.hasOwn(creature ?? {}, 'kind')
 		|| creature.visibility !== 'public'
 		|| Object.entries(expectedRoutes).some(([archetype, generatorId]) => (
 			creature.entries.find(entry => entry.id === archetype)
-				?.fields?.Generator !== generatorId
+				?.fields?.generator !== `{{ ${generatorId} }}`
 		))
 	) {
 		errors.push('The public creature router does not expose every creature type.');
@@ -259,7 +259,7 @@ function checkCreatureGenerators(errors, generatorCatalog) {
 	for (const generatorId of Object.values(expectedRoutes)) {
 		const generator = generatorCatalog.getGenerator(generatorId);
 		if (
-			generator?.kind !== 'component'
+			Object.hasOwn(generator ?? {}, 'kind')
 			|| generator.visibility !== 'internal'
 			|| generator.entries.length < 20
 			|| generator.entries.some(entry => !entry.generation)
@@ -267,16 +267,24 @@ function checkCreatureGenerators(errors, generatorCatalog) {
 			errors.push(`Invalid routed creature generator: ${generatorId}.`);
 		}
 	}
-	const statusEffects = generatorCatalog.getGenerator('status-effect');
+	const statusEffects = generatorCatalog.getGenerator('status_effect');
 	const modifier = generatorCatalog.getGenerator('modifier');
 	if (
 		statusEffects?.entrySchema.type !== 'fields'
 		|| statusEffects.entries.some(entry => (
-			!entry.fields?.Name || !entry.fields.Description
+			!entry.fields?.name || !entry.fields.description
 		))
-		|| modifier?.kind !== 'modifier'
-		|| !modifier.appliesTo.includes('background')
-		|| Object.values(expectedRoutes).some(id => !modifier.appliesTo.includes(id))
+		|| Object.hasOwn(modifier ?? {}, 'kind')
+		|| modifier?.visibility !== 'internal'
+		|| JSON.stringify(generatorCatalog.getGenerator('region').modifiers)
+			!== JSON.stringify({ site_modifier_all: 20 })
+		|| JSON.stringify(generatorCatalog.getGenerator('building').modifiers)
+			!== JSON.stringify({
+				site_modifier_all: 20,
+				site_modifier_structures: 20,
+				site_modifier_interiors: 20,
+				site_modifier_building: 20,
+			})
 	) {
 		errors.push('Status effects and modifiers are not shared generation catalogs.');
 	}
@@ -284,20 +292,20 @@ function checkCreatureGenerators(errors, generatorCatalog) {
 
 function checkStructuredGenerators(errors, generatorCatalog) {
 	for (const [generatorId, requiredFields] of [
-		['faction', ['Name', 'Type', 'Goal', 'Resources', 'Hierarchy', 'Allies', 'Enemies']],
-		['government', ['Name', 'Structure', 'Leadership', 'Strength', 'Tension']],
+		['faction', ['name', 'type', 'goal', 'resources', 'hierarchy', 'allies', 'enemies']],
+		['government', ['name', 'structure', 'leadership', 'strength', 'tension']],
 		[
 			'religion',
 			[
-				'Name',
-				'Deity or Belief',
-				'Rites',
-				'Commandment',
-				'Taboo',
-				'Sacred Symbol',
-				'Religious Order',
-				'Holy Place',
-				'Relationship with Magic',
+				'name',
+				'deity_or_belief',
+				'rites',
+				'commandment',
+				'taboo',
+				'sacred_symbol',
+				'religious_order',
+				'holy_place',
+				'relationship_with_magic',
 			],
 		],
 	]) {
@@ -313,7 +321,7 @@ function checkStructuredGenerators(errors, generatorCatalog) {
 
 	const armors = generatorCatalog.getGenerator('armors')?.entries ?? [];
 	const armorCombinations = new Set(armors.map(
-		entry => `${entry.fields.Type}:${entry.fields.Rarity}`,
+		entry => `${entry.fields.type}:${entry.fields.rarity}`,
 	));
 	const expectedArmorCombinations = ['light', 'medium', 'heavy']
 		.flatMap(type => ['common', 'uncommon', 'rare', 'epic', 'legendary']
@@ -336,9 +344,9 @@ function checkStructuredGenerators(errors, generatorCatalog) {
 	if (
 		['human', 'elf', 'dwarf', 'orc', 'goblin'].some(id => !raceIds.has(id))
 		|| races.some(entry => (
-			!entry.fields.Description
-			|| !entry.fields['Skill Bonus']
-			|| !entry.fields['Physical Ability']
+			!entry.fields.description
+			|| !entry.fields.skill_bonus
+			|| !entry.fields.physical_ability
 		))
 	) {
 		errors.push('Race entries must expose stable IDs, descriptions, and racial traits.');
@@ -347,12 +355,12 @@ function checkStructuredGenerators(errors, generatorCatalog) {
 
 function checkGeneratorResponses(errors, generatorCatalog, weightedEntries) {
 	const generatedName = generatorResolver.generate('name', 'en', { random: () => 0 });
-	if (!generatedName?.fields?.FirstName || !generatedName.fields.LastName) {
-		errors.push('Name generators should expose separate FirstName and LastName fields.');
+	if (!generatedName?.fields?.first_name || !generatedName.fields.last_name) {
+		errors.push('Name generators should expose separate first_name and last_name fields.');
 	}
 	const rulesResult = generatorResolver.generate('rules', 'en', { random: () => 0 });
-	if (!rulesResult?.fields?.Name || !rulesResult.fields.Description) {
-		errors.push('RULE generators should expose separate Name and Description fields.');
+	if (!rulesResult?.fields?.name || !rulesResult.fields.description) {
+		errors.push('RULE generators should expose separate name and description fields.');
 	}
 
 	const { createGeneratedEmbed } = require('../../util/generatorResponses');
@@ -399,4 +407,11 @@ function listJsonFiles(directory, relativeDirectory = '') {
 		}
 	}
 	return files.sort();
+}
+
+function getInlineGeneratorId(value) {
+	const match = typeof value === 'string'
+		? value.match(/^\s*\{\{\s*([a-z0-9]+(?:_[a-z0-9]+)*)\s*\}\}\s*$/)
+		: null;
+	return match?.[1];
 }

@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 3,
+  "id": "site_modifier_structures",
+  "visibility": "internal",
+  "name": "Modificateurs de site historiques",
+  "description": "Variations historiques descriptives compatibles avec des générateurs de lieux précis",
+  "entrySchema": {
+    "type": "fields",
+    "required": ["name", "description"]
+  },
+  "entries": [
+    {
+      "id": "ruined",
+      "fields": {
+        "name": "En ruine",
+        "description": "La structure est instable, certains accès sont condamnés et chaque déplacement peut révéler ou détruire un passage."
+      }
+    },
+    {
+      "id": "recently_destroyed",
+      "fields": {
+        "name": "Récemment détruit",
+        "description": "Des traces fraîches permettent encore de reconstituer l’événement et de poursuivre ses responsables ou survivants."
+      }
+    }
+  ]
+}

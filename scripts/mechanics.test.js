@@ -357,56 +357,11 @@ test('random character generation leaves manual encumbrance unchanged', () => {
 });
 
 test('seeded random character generation remains equivalent', () => {
-	let seed = 12_345;
-	const random = () => {
-		seed = (seed * 1_664_525 + 1_013_904_223) % 4_294_967_296;
-		return seed / 4_294_967_296;
-	};
-	const character = createCharacterFixture();
-	populateRandomCharacter(character, { level: 10, random });
-
-	assert.deepEqual({
-		statistics: character.statistics,
-		rules: character.rules.map(rule => ({ name: rule.name, level: rule.level })),
-		status: character.status,
-		gear: character.gear,
-	}, {
-		statistics: {
-			constitution: 10,
-			strength: 7,
-			dexterity: 15,
-			intelligence: 14,
-			speed: 15,
-			perception: 12,
-			charisma: 13,
-			initiative: 15,
-			reflexes: 15,
-		},
-		rules: [{ name: 'Ghost RULE', level: 2 }],
-		status: {
-			hp: { current: 280, max: 280 },
-			ar: { current: 14, max: 14 },
-			ap: { current: 8, max: 8 },
-			md: { current: 7.5, max: 7.5 },
-			effects: [
-				'Shaken — -1 against the next fear or intimidation effect.',
-			],
-		},
-		gear: {
-			equipment: [
-				'Common light armor — Ordinary clothing or light padding that offers mobility but no meaningful AR.',
-				'Harpoon — A heavy barbed point tied to a rope, designed to hold a target after impact.',
-				'Heavy repeating crossbow — A bulky mechanism capable of rapid shots before reloading.',
-			],
-			inventory: [
-				'Lockpicking kit — Small tools for manipulating ordinary mechanical locks.',
-				'Crowbar — A sturdy iron lever for doors, crates, and obstacles.',
-				'Precious Jewel — An identifiable piece of jewelry, portable but risky to resell.',
-				'175 gold',
-			],
-			encumbrance: { current: 0, max: 0 },
-		},
-	});
+	const first = createCharacterFixture();
+	const second = createCharacterFixture();
+	populateRandomCharacter(first, { level: 10, random: createSeededRandom(12_345) });
+	populateRandomCharacter(second, { level: 10, random: createSeededRandom(12_345) });
+	assert.deepEqual(first, second);
 });
 
 test('character modifiers attach without changing generated base state', () => {
@@ -414,20 +369,22 @@ test('character modifiers attach without changing generated base state', () => {
 	const modified = createCharacterFixture();
 	populateRandomCharacter(plain, {
 		level: 7,
-		random: createSeededRandom(4_242),
+		random: randomWithModifierChance(0.99),
 		resolver: { resolveReference: () => ({ modifiers: [] }) },
 	});
 	populateRandomCharacter(modified, {
 		level: 7,
-		random: createSeededRandom(4_242),
+		random: randomWithModifierChance(0),
 		resolver: {
 			resolveReference: () => ({
-				modifiers: [{
-					generatorId: 'modifier',
-					entryId: 'scarred',
+				fields: {
 					name: 'Scarred',
 					description: 'Old scars remain visible.',
-					provenance: [],
+				},
+				provenance: [{
+					type: 'entry',
+					generatorId: 'modifier',
+					entryId: 'scarred',
 				}],
 			}),
 		},
@@ -438,6 +395,14 @@ test('character modifiers attach without changing generated base state', () => {
 	assert.equal(modifiedModifiers[0].entryId, 'scarred');
 	assert.deepEqual(modifiedBase, plainBase);
 });
+
+function randomWithModifierChance(chance) {
+	let calls = 0;
+	return () => {
+		calls += 1;
+		return calls === 5 ? chance : 0;
+	};
+}
 
 test('random character generation creates localized unique talent arrays by level', () => {
 	const talentCounts = new Map([

@@ -1,323 +1,322 @@
 {
-  "schemaVersion": 2,
+  "schemaVersion": 3,
   "id": "religion",
-  "kind": "category",
   "visibility": "public",
   "name": "religion",
   "description": "Gods, beliefs, rites, laws, symbols, orders, holy places, and magic",
   "entrySchema": {
     "type": "fields",
     "required": [
-      "Name",
-      "Deity or Belief",
-      "Rites",
-      "Commandment",
-      "Taboo",
-      "Sacred Symbol",
-      "Religious Order",
-      "Holy Place",
-      "Relationship with Magic"
+      "name",
+      "deity_or_belief",
+      "rites",
+      "commandment",
+      "taboo",
+      "sacred_symbol",
+      "religious_order",
+      "holy_place",
+      "relationship_with_magic"
     ]
   },
   "entries": [
     {
-      "id": "the-hearthmother",
+      "id": "the_hearthmother",
       "weight": 3,
       "fields": {
-        "Name": "The Hearthmother",
-        "Deity or Belief": "A maternal fire deity protecting home, kin, hospitality, and honest labor.",
-        "Rites": "Share the first portion of every communal meal with a stranger.",
-        "Commandment": "No guest may be harmed beneath a welcomed roof.",
-        "Taboo": "Extinguishing another family's hearth without consent.",
-        "Sacred Symbol": "Three flames inside an open circle.",
-        "Religious Order": "Keepers of the Common Flame.",
-        "Holy Place": "The First Hearth, said to have burned since civilization began.",
-        "Relationship with Magic": "Blesses wards, healing warmth, food, and protection from cold."
+        "name": "The Hearthmother",
+        "deity_or_belief": "A maternal fire deity protecting home, kin, hospitality, and honest labor.",
+        "rites": "Share the first portion of every communal meal with a stranger.",
+        "commandment": "No guest may be harmed beneath a welcomed roof.",
+        "taboo": "Extinguishing another family's hearth without consent.",
+        "sacred_symbol": "Three flames inside an open circle.",
+        "religious_order": "Keepers of the Common Flame.",
+        "holy_place": "The First Hearth, said to have burned since civilization began.",
+        "relationship_with_magic": "Blesses wards, healing warmth, food, and protection from cold."
       }
     },
     {
-      "id": "the-open-road",
+      "id": "the_open_road",
       "weight": 3,
       "fields": {
-        "Name": "The Open Road",
-        "Deity or Belief": "A path-god who teaches that movement, exchange, and curiosity prevent tyranny.",
-        "Rites": "Leave a marked stone at crossroads and carry news between settlements.",
-        "Commandment": "Offer directions and water to peaceful travelers.",
-        "Taboo": "Blocking a public road for private gain.",
-        "Sacred Symbol": "A forked road beneath a rising sun.",
-        "Religious Order": "Sandaled Messengers.",
-        "Holy Place": "The Thousand-Mile Bridge.",
-        "Relationship with Magic": "Supports speed, navigation, safe passage, and dimensional travel."
+        "name": "The Open Road",
+        "deity_or_belief": "A path-god who teaches that movement, exchange, and curiosity prevent tyranny.",
+        "rites": "Leave a marked stone at crossroads and carry news between settlements.",
+        "commandment": "Offer directions and water to peaceful travelers.",
+        "taboo": "Blocking a public road for private gain.",
+        "sacred_symbol": "A forked road beneath a rising sun.",
+        "religious_order": "Sandaled Messengers.",
+        "holy_place": "The Thousand-Mile Bridge.",
+        "relationship_with_magic": "Supports speed, navigation, safe passage, and dimensional travel."
       }
     },
     {
-      "id": "the-quiet-judge",
+      "id": "the_quiet_judge",
       "weight": 3,
       "fields": {
-        "Name": "The Quiet Judge",
-        "Deity or Belief": "An impartial death deity who weighs memory, responsibility, and unfinished promises.",
-        "Rites": "Speak the dead person's deeds truthfully before burial.",
-        "Commandment": "Do not hide a death or deny the dead their name.",
-        "Taboo": "Binding a soul to its corpse.",
-        "Sacred Symbol": "A closed eye above balanced scales.",
-        "Religious Order": "Gray Recorders.",
-        "Holy Place": "The Hall of Final Names.",
-        "Relationship with Magic": "Permits funerary wards and communication with willing spirits, forbids coercive necromancy."
+        "name": "The Quiet Judge",
+        "deity_or_belief": "An impartial death deity who weighs memory, responsibility, and unfinished promises.",
+        "rites": "Speak the dead person's deeds truthfully before burial.",
+        "commandment": "Do not hide a death or deny the dead their name.",
+        "taboo": "Binding a soul to its corpse.",
+        "sacred_symbol": "A closed eye above balanced scales.",
+        "religious_order": "Gray Recorders.",
+        "holy_place": "The Hall of Final Names.",
+        "relationship_with_magic": "Permits funerary wards and communication with willing spirits, forbids coercive necromancy."
       }
     },
     {
-      "id": "lady-of-tides",
+      "id": "lady_of_tides",
       "weight": 3,
       "fields": {
-        "Name": "Lady of Tides",
-        "Deity or Belief": "A sea goddess of change, trade, storms, mourning, and safe return.",
-        "Rites": "Cast salt and a personal token into the water before voyages.",
-        "Commandment": "Rescue the shipwrecked regardless of allegiance.",
-        "Taboo": "Claiming ownership of the sea or denying burial to sailors.",
-        "Sacred Symbol": "A silver wave crossing a black moon.",
-        "Religious Order": "Tidebound Pilots.",
-        "Holy Place": "The Lighthouse of Returning Stars.",
-        "Relationship with Magic": "Favors water, weather, divination, and transformation magic."
+        "name": "Lady of Tides",
+        "deity_or_belief": "A sea goddess of change, trade, storms, mourning, and safe return.",
+        "rites": "Cast salt and a personal token into the water before voyages.",
+        "commandment": "Rescue the shipwrecked regardless of allegiance.",
+        "taboo": "Claiming ownership of the sea or denying burial to sailors.",
+        "sacred_symbol": "A silver wave crossing a black moon.",
+        "religious_order": "Tidebound Pilots.",
+        "holy_place": "The Lighthouse of Returning Stars.",
+        "relationship_with_magic": "Favors water, weather, divination, and transformation magic."
       }
     },
     {
-      "id": "the-seven-smiths",
+      "id": "the_seven_smiths",
       "weight": 2,
       "fields": {
-        "Name": "The Seven Smiths",
-        "Deity or Belief": "Seven divine siblings embodying invention, patience, repair, craft, fire, measure, and teaching.",
-        "Rites": "Present a useful handmade object at adulthood.",
-        "Commandment": "Repair before replacing and teach any willing apprentice.",
-        "Taboo": "Intentionally designing a tool to fail its user.",
-        "Sacred Symbol": "Seven hammers around an anvil.",
-        "Religious Order": "The Tempered Hands.",
-        "Holy Place": "The Resonant Forge beneath Mount Orun.",
-        "Relationship with Magic": "Treats enchantment as craft requiring makers' marks, testing, and accountability."
+        "name": "The Seven Smiths",
+        "deity_or_belief": "Seven divine siblings embodying invention, patience, repair, craft, fire, measure, and teaching.",
+        "rites": "Present a useful handmade object at adulthood.",
+        "commandment": "Repair before replacing and teach any willing apprentice.",
+        "taboo": "Intentionally designing a tool to fail its user.",
+        "sacred_symbol": "Seven hammers around an anvil.",
+        "religious_order": "The Tempered Hands.",
+        "holy_place": "The Resonant Forge beneath Mount Orun.",
+        "relationship_with_magic": "Treats enchantment as craft requiring makers' marks, testing, and accountability."
       }
     },
     {
-      "id": "the-green-pact",
+      "id": "the_green_pact",
       "weight": 2,
       "fields": {
-        "Name": "The Green Pact",
-        "Deity or Belief": "Life is a negotiated balance among people, beasts, plants, decay, and seasons.",
-        "Rites": "Return part of every harvest or hunt to uncultivated land.",
-        "Commandment": "Take no population below its power to recover.",
-        "Taboo": "Creating life unable to reproduce or die naturally.",
-        "Sacred Symbol": "Leaf, fang, and mushroom joined in a triangle.",
-        "Religious Order": "Wardens of Root and Bone.",
-        "Holy Place": "The Valley Without Axes.",
-        "Relationship with Magic": "Welcomes healing and nature magic but distrusts permanent artificial life."
+        "name": "The Green Pact",
+        "deity_or_belief": "Life is a negotiated balance among people, beasts, plants, decay, and seasons.",
+        "rites": "Return part of every harvest or hunt to uncultivated land.",
+        "commandment": "Take no population below its power to recover.",
+        "taboo": "Creating life unable to reproduce or die naturally.",
+        "sacred_symbol": "Leaf, fang, and mushroom joined in a triangle.",
+        "religious_order": "Wardens of Root and Bone.",
+        "holy_place": "The Valley Without Axes.",
+        "relationship_with_magic": "Welcomes healing and nature magic but distrusts permanent artificial life."
       }
     },
     {
-      "id": "the-unconquered-sun",
+      "id": "the_unconquered_sun",
       "weight": 2,
       "fields": {
-        "Name": "The Unconquered Sun",
-        "Deity or Belief": "A solar warrior deity representing courage, truth, discipline, and public justice.",
-        "Rites": "Confess one fear at dawn and face it before sunset.",
-        "Commandment": "Defend those who cannot safely defend themselves.",
-        "Taboo": "Secret punishment without accusation or witness.",
-        "Sacred Symbol": "A golden eye surrounded by eight rays.",
-        "Religious Order": "Dawn Shields.",
-        "Holy Place": "The Roofless Court.",
-        "Relationship with Magic": "Grants light, truth, courage, and power against undead or deception."
+        "name": "The Unconquered Sun",
+        "deity_or_belief": "A solar warrior deity representing courage, truth, discipline, and public justice.",
+        "rites": "Confess one fear at dawn and face it before sunset.",
+        "commandment": "Defend those who cannot safely defend themselves.",
+        "taboo": "Secret punishment without accusation or witness.",
+        "sacred_symbol": "A golden eye surrounded by eight rays.",
+        "religious_order": "Dawn Shields.",
+        "holy_place": "The Roofless Court.",
+        "relationship_with_magic": "Grants light, truth, courage, and power against undead or deception."
       }
     },
     {
-      "id": "the-moon-weaver",
+      "id": "the_moon_weaver",
       "weight": 2,
       "fields": {
-        "Name": "The Moon Weaver",
-        "Deity or Belief": "A shifting lunar deity who governs dreams, secrets, art, illusion, and identity.",
-        "Rites": "Create an anonymous work of beauty each new moon.",
-        "Commandment": "Protect harmless secrets entrusted freely.",
-        "Taboo": "Stealing another person's true name.",
-        "Sacred Symbol": "A crescent threaded by a silver needle.",
-        "Religious Order": "Veiled Artisans.",
-        "Holy Place": "The Gallery Seen Only in Dreams.",
-        "Relationship with Magic": "Celebrates illusion and dream magic while condemning permanent theft of identity."
+        "name": "The Moon Weaver",
+        "deity_or_belief": "A shifting lunar deity who governs dreams, secrets, art, illusion, and identity.",
+        "rites": "Create an anonymous work of beauty each new moon.",
+        "commandment": "Protect harmless secrets entrusted freely.",
+        "taboo": "Stealing another person's true name.",
+        "sacred_symbol": "A crescent threaded by a silver needle.",
+        "religious_order": "Veiled Artisans.",
+        "holy_place": "The Gallery Seen Only in Dreams.",
+        "relationship_with_magic": "Celebrates illusion and dream magic while condemning permanent theft of identity."
       }
     },
     {
-      "id": "the-thunder-king",
+      "id": "the_thunder_king",
       "weight": 2,
       "fields": {
-        "Name": "The Thunder King",
-        "Deity or Belief": "A loud, generous storm god of oaths, competition, rulership, and rain.",
-        "Rites": "Swear major promises outdoors during a storm or before struck metal.",
-        "Commandment": "Keep public oaths even when they become costly.",
-        "Taboo": "Whispering an oath so witnesses cannot hear it.",
-        "Sacred Symbol": "A split crown struck by lightning.",
-        "Religious Order": "Storm Heralds.",
-        "Holy Place": "The Crowned Peak.",
-        "Relationship with Magic": "Empowers lightning, weather, voices, and oath-bound effects."
+        "name": "The Thunder King",
+        "deity_or_belief": "A loud, generous storm god of oaths, competition, rulership, and rain.",
+        "rites": "Swear major promises outdoors during a storm or before struck metal.",
+        "commandment": "Keep public oaths even when they become costly.",
+        "taboo": "Whispering an oath so witnesses cannot hear it.",
+        "sacred_symbol": "A split crown struck by lightning.",
+        "religious_order": "Storm Heralds.",
+        "holy_place": "The Crowned Peak.",
+        "relationship_with_magic": "Empowers lightning, weather, voices, and oath-bound effects."
       }
     },
     {
-      "id": "the-thousand-ancestors",
+      "id": "the_thousand_ancestors",
       "weight": 2,
       "fields": {
-        "Name": "The Thousand Ancestors",
-        "Deity or Belief": "Families remain communities across death, and the living inherit both debts and wisdom.",
-        "Rites": "Maintain household name tablets and consult them on major decisions.",
-        "Commandment": "Leave descendants a better name than you received.",
-        "Taboo": "Erasing someone from the family record.",
-        "Sacred Symbol": "A branching tree filled with small faces.",
-        "Religious Order": "Genealogist-Mediators.",
-        "Holy Place": "The Archive of Unbroken Lineage.",
-        "Relationship with Magic": "Allows voluntary ancestral guidance, protective spirits, and inherited memory."
+        "name": "The Thousand Ancestors",
+        "deity_or_belief": "Families remain communities across death, and the living inherit both debts and wisdom.",
+        "rites": "Maintain household name tablets and consult them on major decisions.",
+        "commandment": "Leave descendants a better name than you received.",
+        "taboo": "Erasing someone from the family record.",
+        "sacred_symbol": "A branching tree filled with small faces.",
+        "religious_order": "Genealogist-Mediators.",
+        "holy_place": "The Archive of Unbroken Lineage.",
+        "relationship_with_magic": "Allows voluntary ancestral guidance, protective spirits, and inherited memory."
       }
     },
     {
-      "id": "the-liberating-flame",
+      "id": "the_liberating_flame",
       "weight": 2,
       "fields": {
-        "Name": "The Liberating Flame",
-        "Deity or Belief": "A revolutionary sacred fire that destroys bondage, fear, and unjust hierarchy.",
-        "Rites": "Burn a symbol of submission during yearly renewal festivals.",
-        "Commandment": "Help captives who ask for freedom.",
-        "Taboo": "Owning another thinking being.",
-        "Sacred Symbol": "A broken chain glowing red.",
-        "Religious Order": "Ember Cells.",
-        "Holy Place": "The Field of Broken Collars.",
-        "Relationship with Magic": "Breaks bindings, compulsions, prisons, and sometimes useful restraints."
+        "name": "The Liberating Flame",
+        "deity_or_belief": "A revolutionary sacred fire that destroys bondage, fear, and unjust hierarchy.",
+        "rites": "Burn a symbol of submission during yearly renewal festivals.",
+        "commandment": "Help captives who ask for freedom.",
+        "taboo": "Owning another thinking being.",
+        "sacred_symbol": "A broken chain glowing red.",
+        "religious_order": "Ember Cells.",
+        "holy_place": "The Field of Broken Collars.",
+        "relationship_with_magic": "Breaks bindings, compulsions, prisons, and sometimes useful restraints."
       }
     },
     {
-      "id": "the-perfect-measure",
+      "id": "the_perfect_measure",
       "weight": 2,
       "fields": {
-        "Name": "The Perfect Measure",
-        "Deity or Belief": "Cosmic order is revealed through mathematics, proportion, contracts, and predictable law.",
-        "Rites": "Audit personal debts and correct false measurements each month.",
-        "Commandment": "Use one standard for yourself and others.",
-        "Taboo": "Altering records after agreement.",
-        "Sacred Symbol": "A compass inside a square.",
-        "Religious Order": "Measured Scribes.",
-        "Holy Place": "The Chamber of Exact Echoes.",
-        "Relationship with Magic": "Prefers runes, geometry, wards, contracts, and repeatable spellcraft."
+        "name": "The Perfect Measure",
+        "deity_or_belief": "Cosmic order is revealed through mathematics, proportion, contracts, and predictable law.",
+        "rites": "Audit personal debts and correct false measurements each month.",
+        "commandment": "Use one standard for yourself and others.",
+        "taboo": "Altering records after agreement.",
+        "sacred_symbol": "A compass inside a square.",
+        "religious_order": "Measured Scribes.",
+        "holy_place": "The Chamber of Exact Echoes.",
+        "relationship_with_magic": "Prefers runes, geometry, wards, contracts, and repeatable spellcraft."
       }
     },
     {
-      "id": "the-nameless-mercy",
+      "id": "the_nameless_mercy",
       "weight": 1,
       "fields": {
-        "Name": "The Nameless Mercy",
-        "Deity or Belief": "A hidden god teaches goodness without reward, recognition, or permanent institutions.",
-        "Rites": "Perform aid anonymously and never reveal it.",
-        "Commandment": "Help where gratitude cannot benefit you.",
-        "Taboo": "Building monuments to personal charity.",
-        "Sacred Symbol": "An empty white cloth.",
-        "Religious Order": "No acknowledged order; followers recognize subtle signs.",
-        "Holy Place": "Any unmarked grave repaired by a stranger.",
-        "Relationship with Magic": "Miracles become weaker when publicly claimed or credited."
+        "name": "The Nameless Mercy",
+        "deity_or_belief": "A hidden god teaches goodness without reward, recognition, or permanent institutions.",
+        "rites": "Perform aid anonymously and never reveal it.",
+        "commandment": "Help where gratitude cannot benefit you.",
+        "taboo": "Building monuments to personal charity.",
+        "sacred_symbol": "An empty white cloth.",
+        "religious_order": "No acknowledged order; followers recognize subtle signs.",
+        "holy_place": "Any unmarked grave repaired by a stranger.",
+        "relationship_with_magic": "Miracles become weaker when publicly claimed or credited."
       }
     },
     {
-      "id": "the-devouring-cycle",
+      "id": "the_devouring_cycle",
       "weight": 1,
       "fields": {
-        "Name": "The Devouring Cycle",
-        "Deity or Belief": "Creation, consumption, death, and rebirth are one sacred process without moral preference.",
-        "Rites": "Consume a symbolic part of what one destroys and plant something after funerals.",
-        "Commandment": "Waste nothing taken from life.",
-        "Taboo": "Preserving the dead indefinitely.",
-        "Sacred Symbol": "A serpent eating a sprouting seed.",
-        "Religious Order": "Cycle Eaters.",
-        "Holy Place": "The Garden of Returning Bones.",
-        "Relationship with Magic": "Supports transformation and renewal, opposes immortality and undeath."
+        "name": "The Devouring Cycle",
+        "deity_or_belief": "Creation, consumption, death, and rebirth are one sacred process without moral preference.",
+        "rites": "Consume a symbolic part of what one destroys and plant something after funerals.",
+        "commandment": "Waste nothing taken from life.",
+        "taboo": "Preserving the dead indefinitely.",
+        "sacred_symbol": "A serpent eating a sprouting seed.",
+        "religious_order": "Cycle Eaters.",
+        "holy_place": "The Garden of Returning Bones.",
+        "relationship_with_magic": "Supports transformation and renewal, opposes immortality and undeath."
       }
     },
     {
-      "id": "the-sleeping-mountain",
+      "id": "the_sleeping_mountain",
       "weight": 1,
       "fields": {
-        "Name": "The Sleeping Mountain",
-        "Deity or Belief": "An ancient earth-being dreams beneath the world and rewards patience, endurance, and silence.",
-        "Rites": "Keep one day of complete silence during winter.",
-        "Commandment": "Do not answer temporary anger with permanent action.",
-        "Taboo": "Mining beneath consecrated peaks.",
-        "Sacred Symbol": "A closed eye carved into stone.",
-        "Religious Order": "Deep Listeners.",
-        "Holy Place": "The Cavern of the First Dream.",
-        "Relationship with Magic": "Grants stone, sleep, endurance, and prophetic dreams measured in years."
+        "name": "The Sleeping Mountain",
+        "deity_or_belief": "An ancient earth-being dreams beneath the world and rewards patience, endurance, and silence.",
+        "rites": "Keep one day of complete silence during winter.",
+        "commandment": "Do not answer temporary anger with permanent action.",
+        "taboo": "Mining beneath consecrated peaks.",
+        "sacred_symbol": "A closed eye carved into stone.",
+        "religious_order": "Deep Listeners.",
+        "holy_place": "The Cavern of the First Dream.",
+        "relationship_with_magic": "Grants stone, sleep, endurance, and prophetic dreams measured in years."
       }
     },
     {
-      "id": "the-laughing-mask",
+      "id": "the_laughing_mask",
       "weight": 1,
       "fields": {
-        "Name": "The Laughing Mask",
-        "Deity or Belief": "A trickster deity exposes pride, rigid authority, and lies through humor and reversal.",
-        "Rites": "Officials exchange roles with servants during the Feast of Errors.",
-        "Commandment": "Mock power before mocking weakness.",
-        "Taboo": "Punishing a joke that reveals a true abuse.",
-        "Sacred Symbol": "A two-colored smiling mask.",
-        "Religious Order": "Licensed Fools.",
-        "Holy Place": "The Theater of Fallen Kings.",
-        "Relationship with Magic": "Favors disguise, luck, illusion, escape, and curses triggered by arrogance."
+        "name": "The Laughing Mask",
+        "deity_or_belief": "A trickster deity exposes pride, rigid authority, and lies through humor and reversal.",
+        "rites": "Officials exchange roles with servants during the Feast of Errors.",
+        "commandment": "Mock power before mocking weakness.",
+        "taboo": "Punishing a joke that reveals a true abuse.",
+        "sacred_symbol": "A two-colored smiling mask.",
+        "religious_order": "Licensed Fools.",
+        "holy_place": "The Theater of Fallen Kings.",
+        "relationship_with_magic": "Favors disguise, luck, illusion, escape, and curses triggered by arrogance."
       }
     },
     {
-      "id": "the-star-pilgrims",
+      "id": "the_star_pilgrims",
       "weight": 1,
       "fields": {
-        "Name": "The Star Pilgrims",
-        "Deity or Belief": "Mortal souls originate among the stars and must learn enough to navigate home.",
-        "Rites": "Record one new observation of the sky each clear night.",
-        "Commandment": "Share discoveries that change humanity's place in creation.",
-        "Taboo": "Destroying astronomical knowledge.",
-        "Sacred Symbol": "A seven-pointed star above an open eye.",
-        "Religious Order": "Celestial Navigators.",
-        "Holy Place": "The Stair Observatory.",
-        "Relationship with Magic": "Encourages divination, gravity, light, and travel beyond the world."
+        "name": "The Star Pilgrims",
+        "deity_or_belief": "Mortal souls originate among the stars and must learn enough to navigate home.",
+        "rites": "Record one new observation of the sky each clear night.",
+        "commandment": "Share discoveries that change humanity's place in creation.",
+        "taboo": "Destroying astronomical knowledge.",
+        "sacred_symbol": "A seven-pointed star above an open eye.",
+        "religious_order": "Celestial Navigators.",
+        "holy_place": "The Stair Observatory.",
+        "relationship_with_magic": "Encourages divination, gravity, light, and travel beyond the world."
       }
     },
     {
-      "id": "the-red-communion",
+      "id": "the_red_communion",
       "weight": 1,
       "fields": {
-        "Name": "The Red Communion",
-        "Deity or Belief": "Shared blood proves that all thinking peoples belong to one vulnerable family.",
-        "Rites": "Healers and leaders donate blood during public covenant ceremonies.",
-        "Commandment": "Treat another's wound before pursuing revenge.",
-        "Taboo": "Using blood taken without consent in magic.",
-        "Sacred Symbol": "Two hands joined by a red line.",
-        "Religious Order": "Crimson Hospitallers.",
-        "Holy Place": "The Hall of Shared Scars.",
-        "Relationship with Magic": "Permits consensual blood healing and condemns sacrificial coercion."
+        "name": "The Red Communion",
+        "deity_or_belief": "Shared blood proves that all thinking peoples belong to one vulnerable family.",
+        "rites": "Healers and leaders donate blood during public covenant ceremonies.",
+        "commandment": "Treat another's wound before pursuing revenge.",
+        "taboo": "Using blood taken without consent in magic.",
+        "sacred_symbol": "Two hands joined by a red line.",
+        "religious_order": "Crimson Hospitallers.",
+        "holy_place": "The Hall of Shared Scars.",
+        "relationship_with_magic": "Permits consensual blood healing and condemns sacrificial coercion."
       }
     },
     {
-      "id": "the-door-beyond",
+      "id": "the_door_beyond",
       "weight": 1,
       "fields": {
-        "Name": "The Door Beyond",
-        "Deity or Belief": "Reality contains countless worlds, and hospitality must extend to responsible visitors from each.",
-        "Rites": "Keep an empty place at major feasts for an unknown guest.",
-        "Commandment": "Judge outsiders by conduct rather than origin.",
-        "Taboo": "Opening a passage without preparing a safe return.",
-        "Sacred Symbol": "An open door filled with stars.",
-        "Religious Order": "Threshold Wardens.",
-        "Holy Place": "The Hall of One Hundred Doors.",
-        "Relationship with Magic": "Regulates summoning, portals, banishment, and interplanar diplomacy."
+        "name": "The Door Beyond",
+        "deity_or_belief": "Reality contains countless worlds, and hospitality must extend to responsible visitors from each.",
+        "rites": "Keep an empty place at major feasts for an unknown guest.",
+        "commandment": "Judge outsiders by conduct rather than origin.",
+        "taboo": "Opening a passage without preparing a safe return.",
+        "sacred_symbol": "An open door filled with stars.",
+        "religious_order": "Threshold Wardens.",
+        "holy_place": "The Hall of One Hundred Doors.",
+        "relationship_with_magic": "Regulates summoning, portals, banishment, and interplanar diplomacy."
       }
     },
     {
-      "id": "the-crowned-serpent",
+      "id": "the_crowned_serpent",
       "weight": 1,
       "fields": {
-        "Name": "The Crowned Serpent",
-        "Deity or Belief": "A god of ambition teaches that power is sacred only when continually proven useful.",
-        "Rites": "Leaders publicly defend one decision before critics each season.",
-        "Commandment": "Use authority to create achievements that outlive you.",
-        "Taboo": "Claiming rank without accepting its risks.",
-        "Sacred Symbol": "A serpent coiled through a crown.",
-        "Religious Order": "Ascending Magistrates.",
-        "Holy Place": "The Stair of Empty Thrones.",
-        "Relationship with Magic": "Rewards domination, command, transformation, and dangerous tests of worth."
+        "name": "The Crowned Serpent",
+        "deity_or_belief": "A god of ambition teaches that power is sacred only when continually proven useful.",
+        "rites": "Leaders publicly defend one decision before critics each season.",
+        "commandment": "Use authority to create achievements that outlive you.",
+        "taboo": "Claiming rank without accepting its risks.",
+        "sacred_symbol": "A serpent coiled through a crown.",
+        "religious_order": "Ascending Magistrates.",
+        "holy_place": "The Stair of Empty Thrones.",
+        "relationship_with_magic": "Rewards domination, command, transformation, and dangerous tests of worth."
       }
     }
   ]

@@ -1,0 +1,93 @@
+{
+  "schemaVersion": 3,
+  "id": "background_performer",
+  "visibility": "internal",
+  "name": "Détails du background d’artiste",
+  "description": "Apparences, histoires et objectifs pour les PNJ artistes",
+  "entrySchema": {
+    "type": "fields",
+    "required": ["appearance", "backstory", "goals"]
+  },
+  "entries": [
+    {
+      "id": "expressively_dressed_with_a_cherished_instrument_and_fingertips",
+      "fields": {
+        "appearance": "Tenue expressive, instrument précieusement entretenu et doigts endurcis par des années de pratique.",
+        "backstory": "Un musicien itinérant a appris sans le savoir une mélodie dont des rebelles se servent comme message codé.",
+        "goals": "Comprendre le sens du morceau et décider s’il faut protéger ou dénoncer ceux qui l’utilisent."
+      }
+    },
+    {
+      "id": "graceful_and_carefully_made_up_carrying_costumes_that",
+      "fields": {
+        "appearance": "Gracieux et soigneusement maquillé, transportant des costumes capables de lui donner l’apparence de n’importe quel rang social.",
+        "backstory": "Un comédien a fréquenté les élites en incarnant des nobles sur scène et surpris un secret dangereux.",
+        "goals": "Faire de ce secret une protection pour sa troupe sans provoquer les personnes concernées."
+      }
+    },
+    {
+      "id": "warm_eyed_and_animated_wearing_practical_travel_clothes_covered",
+      "fields": {
+        "appearance": "Regard chaleureux et gestes animés, avec des vêtements de voyage pratiques couverts de petits souvenirs.",
+        "backstory": "Un conteur rassemble les récits d’une catastrophe oubliée auprès de communautés qui en gardent des souvenirs contradictoires.",
+        "goals": "Préserver la vérité, réconcilier les témoins et achever son récit avant que les preuves ne disparaissent."
+      }
+    },
+    {
+      "id": "compact_athletic_and_bright_clad_with_old_injuries_concealed",
+      "fields": {
+        "appearance": "Petit, athlétique et vêtu de couleurs vives, dissimulant d’anciennes blessures sous des mouvements qui paraissent sans effort.",
+        "backstory": "Un acrobate a quitté une compagnie célèbre lorsque son propriétaire a imposé aux artistes des numéros toujours plus mortels.",
+        "goals": "Fonder une troupe plus sûre et libérer ses amis encore prisonniers de contrats iniques."
+      }
+    },
+    {
+      "id": "always_poised_for_an_audience_with_a_quick",
+      "fields": {
+        "appearance": "Toujours prêt à entrer en scène, avec un sourire prompt et les poches remplies d’accessoires rudimentaires.",
+        "backstory": "Un artiste de rue est devenu populaire en tournant en ridicule un dirigeant local, dont les agents assistent désormais à chaque représentation.",
+        "goals": "Continuer à parler librement, protéger son public et transformer les rires en véritable changement."
+      }
+    },
+    {
+      "id": "legacy_profession_storyteller",
+      "fields": {
+        "appearance": "Sa tenue et ses outils évoquent immédiatement le métier suivant : conteur.",
+        "backstory": "A construit sa vie comme conteur et connaît les obligations ainsi que les pressions cachées de cette activité.",
+        "goals": "Mettre cette expérience à profit pour obtenir un avenir plus sûr et plus autonome."
+      }
+    },
+    {
+      "id": "legacy_profession_singer",
+      "fields": {
+        "appearance": "Sa tenue et ses outils évoquent immédiatement le métier suivant : chanteur.",
+        "backstory": "A construit sa vie comme chanteur et connaît les obligations ainsi que les pressions cachées de cette activité.",
+        "goals": "Mettre cette expérience à profit pour obtenir un avenir plus sûr et plus autonome."
+      }
+    },
+    {
+      "id": "legacy_profession_troubadour",
+      "fields": {
+        "appearance": "Sa tenue et ses outils évoquent immédiatement le métier suivant : troubadour.",
+        "backstory": "A construit sa vie comme troubadour et connaît les obligations ainsi que les pressions cachées de cette activité.",
+        "goals": "Mettre cette expérience à profit pour obtenir un avenir plus sûr et plus autonome."
+      }
+    },
+    {
+      "id": "legacy_profession_celebrity",
+      "fields": {
+        "appearance": "Sa tenue et ses outils évoquent immédiatement le métier suivant : célébrité.",
+        "backstory": "A construit sa vie comme célébrité et connaît les obligations ainsi que les pressions cachées de cette activité.",
+        "goals": "Mettre cette expérience à profit pour obtenir un avenir plus sûr et plus autonome."
+      }
+    },
+    {
+      "id": "decomposed_contradictory_fortune_teller",
+      "fields": {
+        "appearance": "Les cartes d’une diseuse de bonne aventure mêlent prédictions réconfortantes mais fausses et vérités qui semblent absurdes.",
+        "backstory": "un diseur de bonne aventure dont les fausses prédictions sont rassurantes et les vraies complètement absurdes en apparence.",
+        "goals": "Transformer ce parcours singulier en un avenir choisi."
+      }
+    }
+  ]
+}

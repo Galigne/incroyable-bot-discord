@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 3,
+  "id": "site_modifier_all",
+  "visibility": "internal",
+  "name": "Historical site modifiers",
+  "description": "Descriptive historical variations compatible with specific location generators",
+  "entrySchema": {
+    "type": "fields",
+    "required": ["name", "description"]
+  },
+  "entries": [
+    {
+      "id": "abandoned",
+      "fields": {
+        "name": "Abandoned",
+        "description": "The place still partly functions, but its occupants left essential belongings behind."
+      }
+    },
+    {
+      "id": "immense",
+      "fields": {
+        "name": "Immense",
+        "description": "Internal distances exceed expectations and demand supplies, navigation, or several stages of exploration."
+      }
+    }
+  ]
+}

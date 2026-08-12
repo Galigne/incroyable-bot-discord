@@ -1,0 +1,373 @@
+{
+  "schemaVersion": 3,
+  "id": "background_criminal",
+  "visibility": "internal",
+  "name": "Criminal background details",
+  "description": "Appearances, histories, and goals for criminal NPCs",
+  "entrySchema": {
+    "type": "fields",
+    "required": ["appearance", "backstory", "goals"]
+  },
+  "entries": [
+    {
+      "id": "unremarkable_clothing_forgettable_features_and_hands_kept",
+      "fields": {
+        "appearance": "Unremarkable clothing, forgettable features, and hands kept carefully out of sight.",
+        "backstory": "Learned pickpocketing as a hungry child and became too useful for the gang to release.",
+        "goals": "Buy freedom from the gang and disappear before a younger sibling is recruited."
+      }
+    },
+    {
+      "id": "expensively_dressed_but_tense_with_polished_manners_and",
+      "fields": {
+        "appearance": "Expensively dressed but tense, with polished manners and a recently broken nose.",
+        "backstory": "A legitimate merchant began smuggling when impossible taxes threatened the business.",
+        "goals": "Remove the corrupt customs chief and return to legal trade without losing everything."
+      }
+    },
+    {
+      "id": "lean_scarred_and_dressed_for_rapid_movement_with",
+      "fields": {
+        "appearance": "Lean, scarred, and dressed for rapid movement with no visible identifying marks.",
+        "backstory": "Deserted an abusive military unit and survived by robbing officials along remote roads.",
+        "goals": "Protect other deserters and expose the commander who created them."
+      }
+    },
+    {
+      "id": "friendly_face_theatrical_smile_and_fashionable_clothes_supported",
+      "fields": {
+        "appearance": "Friendly face, theatrical smile, and fashionable clothes supported by hidden armor.",
+        "backstory": "Built a confidence scheme around false inheritances and accidentally uncovered a real conspiracy.",
+        "goals": "Complete one final profitable deception and escape everyone now hunting the evidence."
+      }
+    },
+    {
+      "id": "heavy_set_carefully_tattooed_and_outwardly_relaxed_while",
+      "fields": {
+        "appearance": "Heavy-set, carefully tattooed, and outwardly relaxed while constantly watching exits.",
+        "backstory": "Began as a dock enforcer and inherited leadership after every superior was arrested.",
+        "goals": "Turn the gang into a stable business and prevent a violent rival takeover."
+      }
+    },
+    {
+      "id": "pale_from_indoor_work_with_precise_fingers_and",
+      "fields": {
+        "appearance": "Pale from indoor work, with precise fingers and permanent traces of ink and metal dust.",
+        "backstory": "A gifted artisan was imprisoned for forging documents requested by a noble patron.",
+        "goals": "Destroy the patron's reputation and create an identity no authority can question."
+      }
+    },
+    {
+      "id": "travel_stained_charming_and_equipped_with_several_knives_used",
+      "fields": {
+        "appearance": "Travel-stained, charming, and equipped with several knives used mostly as tools.",
+        "backstory": "Joined bandits after losing land to debt collectors and became their reluctant negotiator.",
+        "goals": "Keep the group from killing, recover the seized land, and secure amnesty."
+      }
+    },
+    {
+      "id": "severe_posture_official_clothing_and_a_signet_worn",
+      "fields": {
+        "appearance": "Severe posture, official clothing, and a signet worn as though it were a weapon.",
+        "backstory": "A minor magistrate discovered bribery was safer and more profitable than honest enforcement.",
+        "goals": "Erase incriminating records and gain enough influence to become untouchable."
+      }
+    },
+    {
+      "id": "elegant_soft_voiced_and_protected_by_gloves_regardless_of",
+      "fields": {
+        "appearance": "Elegant, soft-voiced, and protected by gloves regardless of the weather.",
+        "backstory": "Trained as an apothecary before secretly supplying poisons and antidotes to competing clients.",
+        "goals": "Monopolize a rare ingredient and avoid choosing sides in an approaching succession crisis."
+      }
+    },
+    {
+      "id": "young_restless_and_visibly_trying_to_imitate_a",
+      "fields": {
+        "appearance": "Young, restless, and visibly trying to imitate a feared criminal reputation.",
+        "backstory": "Committed one reckless robbery and received credit for a string of crimes performed by someone else.",
+        "goals": "Survive the unwanted fame and discover who is using the name."
+      }
+    },
+    {
+      "id": "weather_beaten_sailor_with_ritual_scars_practical_jewelry_and",
+      "fields": {
+        "appearance": "Weather-beaten sailor with ritual scars, practical jewelry, and an easy laugh.",
+        "backstory": "Turned pirate after a merchant captain abandoned half the crew during a storm.",
+        "goals": "Hunt exploitative ships, provide for the old crew, and someday own a lawful harbor."
+      }
+    },
+    {
+      "id": "quiet_and_meticulously_clean_with_an_old_burn",
+      "fields": {
+        "appearance": "Quiet and meticulously clean, with an old burn hidden beneath the collar.",
+        "backstory": "Was raised inside an assassins' order and failed the first assignment intentionally.",
+        "goals": "Free other trainees and dismantle the order without becoming the killer it designed."
+      }
+    },
+    {
+      "id": "legacy_profession_assassin",
+      "fields": {
+        "appearance": "Clothing and tools immediately suggest the work of a assassin.",
+        "backstory": "Built a life as a assassin and knows the profession’s obligations and hidden pressures.",
+        "goals": "Use that experience to secure a safer and more independent future."
+      }
+    },
+    {
+      "id": "legacy_profession_thief",
+      "fields": {
+        "appearance": "Clothing and tools immediately suggest the work of a thief.",
+        "backstory": "Built a life as a thief and knows the profession’s obligations and hidden pressures.",
+        "goals": "Use that experience to secure a safer and more independent future."
+      }
+    },
+    {
+      "id": "legacy_road_brigand",
+      "fields": {
+        "appearance": "Clothing and equipment suit the role of road brigand.",
+        "backstory": "Well-informed road thieves choose targets through an accomplice in the neighboring community.",
+        "goals": "Complete the current operation without becoming expendable to allies or employers."
+      }
+    },
+    {
+      "id": "legacy_corrupt_patrol",
+      "fields": {
+        "appearance": "Clothing and equipment suit the role of corrupt patrol.",
+        "backstory": "Soldiers or guards use authority to extort travelers and confiscate evidence.",
+        "goals": "Complete the current operation without becoming expendable to allies or employers."
+      }
+    },
+    {
+      "id": "legacy_clandestine_hunter",
+      "fields": {
+        "appearance": "Clothing and equipment suit the role of clandestine hunter.",
+        "backstory": "Armed trackers capture a protected creature for an anonymous patron.",
+        "goals": "Complete the current operation without becoming expendable to allies or employers."
+      }
+    },
+    {
+      "id": "decomposed_truth_for_information_broker",
+      "fields": {
+        "appearance": "A mask and a ledger of embarrassing truths mark an information broker who takes no coin.",
+        "backstory": "a masked information broker who accepts embarrassing truths as payment and never asks for money.",
+        "goals": "Turn this unusual history toward a self-directed future."
+      }
+    },
+    {
+      "id": "decomposed_key_only_thief",
+      "fields": {
+        "appearance": "A ring of unclaimed keys hangs from a charming thief's belt.",
+        "backstory": "a charming thief who steals only keys and has no idea what half of them open.",
+        "goals": "Turn this unusual history toward a self-directed future."
+      }
+    },
+    {
+      "id": "decomposed_royal_impersonator_regent",
+      "fields": {
+        "appearance": "Borrowed regalia and nervous courtesy mark a royal impersonator who may govern better than the absent monarch.",
+        "backstory": "a nervous royal impersonator who has been ruling more competently than the missing monarch.",
+        "goals": "Turn this unusual history toward a self-directed future."
+      }
+    },
+    {
+      "id": "decomposed_refreshment_loving_bandit",
+      "fields": {
+        "appearance": "A bandit leader's travel pack always includes refreshments and survey forms.",
+        "backstory": "a friendly bandit leader who insists every robbery include refreshments and a written customer survey.",
+        "goals": "Turn this unusual history toward a self-directed future."
+      }
+    },
+    {
+      "id": "decomposed_criminal_roadside_bandit",
+      "fields": {
+        "appearance": "Clothing and tools fit the criminal role of roadside bandit.",
+        "backstory": "an underpaid ambusher demanding supplies rather than bloodshed.",
+        "goals": "Complete one decisive operation and escape the pressures of the criminal network."
+      }
+    },
+    {
+      "id": "decomposed_criminal_dockside_smuggler",
+      "fields": {
+        "appearance": "Clothing and tools fit the criminal role of dockside smuggler.",
+        "backstory": "a sailor moving contraband inside sealed fish barrels.",
+        "goals": "Complete one decisive operation and escape the pressures of the criminal network."
+      }
+    },
+    {
+      "id": "decomposed_criminal_cutpurse",
+      "fields": {
+        "appearance": "Clothing and tools fit the criminal role of cutpurse.",
+        "backstory": "a quick urban thief working crowded markets and religious festivals.",
+        "goals": "Complete one decisive operation and escape the pressures of the criminal network."
+      }
+    },
+    {
+      "id": "decomposed_criminal_protection_racketeer",
+      "fields": {
+        "appearance": "Clothing and tools fit the criminal role of protection racketeer.",
+        "backstory": "an enforcer collecting payments for dangers their gang secretly creates.",
+        "goals": "Complete one decisive operation and escape the pressures of the criminal network."
+      }
+    },
+    {
+      "id": "decomposed_criminal_poacher",
+      "fields": {
+        "appearance": "Clothing and tools fit the criminal role of poacher.",
+        "backstory": "a skilled tracker hunting protected animals for wealthy buyers.",
+        "goals": "Complete one decisive operation and escape the pressures of the criminal network."
+      }
+    },
+    {
+      "id": "decomposed_criminal_grave_robber",
+      "fields": {
+        "appearance": "Clothing and tools fit the criminal role of grave robber.",
+        "backstory": "a desperate excavator selling jewelry, bones, and buried secrets.",
+        "goals": "Complete one decisive operation and escape the pressures of the criminal network."
+      }
+    },
+    {
+      "id": "decomposed_criminal_highway_impostor",
+      "fields": {
+        "appearance": "Clothing and tools fit the criminal role of highway impostor.",
+        "backstory": "a criminal wearing a stolen uniform to levy false tolls.",
+        "goals": "Complete one decisive operation and escape the pressures of the criminal network."
+      }
+    },
+    {
+      "id": "decomposed_criminal_fence",
+      "fields": {
+        "appearance": "Clothing and tools fit the criminal role of fence.",
+        "backstory": "a respectable shopkeeper specializing in making stolen goods appear legitimate.",
+        "goals": "Complete one decisive operation and escape the pressures of the criminal network."
+      }
+    },
+    {
+      "id": "decomposed_criminal_counterfeiter",
+      "fields": {
+        "appearance": "Clothing and tools fit the criminal role of counterfeiter.",
+        "backstory": "an artisan producing false coins, seals, travel papers, and noble letters.",
+        "goals": "Complete one decisive operation and escape the pressures of the criminal network."
+      }
+    },
+    {
+      "id": "decomposed_criminal_blackmailer",
+      "fields": {
+        "appearance": "Clothing and tools fit the criminal role of blackmailer.",
+        "backstory": "an information broker using real secrets and carefully manufactured evidence.",
+        "goals": "Complete one decisive operation and escape the pressures of the criminal network."
+      }
+    },
+    {
+      "id": "decomposed_criminal_kidnapper",
+      "fields": {
+        "appearance": "Clothing and tools fit the criminal role of kidnapper.",
+        "backstory": "a patient planner targeting people whose families cannot involve authorities.",
+        "goals": "Complete one decisive operation and escape the pressures of the criminal network."
+      }
+    },
+    {
+      "id": "decomposed_criminal_illegal_duelist",
+      "fields": {
+        "appearance": "Clothing and tools fit the criminal role of illegal duelist.",
+        "backstory": "a professional fighter paid to injure rivals under improvised rules.",
+        "goals": "Complete one decisive operation and escape the pressures of the criminal network."
+      }
+    },
+    {
+      "id": "decomposed_criminal_relic_thief",
+      "fields": {
+        "appearance": "Clothing and tools fit the criminal role of relic thief.",
+        "backstory": "a specialist stealing sacred or magical objects without understanding them.",
+        "goals": "Complete one decisive operation and escape the pressures of the criminal network."
+      }
+    },
+    {
+      "id": "decomposed_criminal_arsonist",
+      "fields": {
+        "appearance": "Clothing and tools fit the criminal role of arsonist.",
+        "backstory": "a saboteur using delayed alchemical fires to destroy records and businesses.",
+        "goals": "Complete one decisive operation and escape the pressures of the criminal network."
+      }
+    },
+    {
+      "id": "decomposed_criminal_corrupt_bailiff",
+      "fields": {
+        "appearance": "Clothing and tools fit the criminal role of corrupt bailiff.",
+        "backstory": "an official abusing legal authority to seize property and silence witnesses.",
+        "goals": "Complete one decisive operation and escape the pressures of the criminal network."
+      }
+    },
+    {
+      "id": "decomposed_criminal_pirate_boarding_chief",
+      "fields": {
+        "appearance": "Clothing and tools fit the criminal role of pirate boarding chief.",
+        "backstory": "a disciplined raider seeking cargo and ransom instead of sinking ships.",
+        "goals": "Complete one decisive operation and escape the pressures of the criminal network."
+      }
+    },
+    {
+      "id": "decomposed_criminal_gang_alchemist",
+      "fields": {
+        "appearance": "Clothing and tools fit the criminal role of gang alchemist.",
+        "backstory": "a brewer of addictive tonics, smoke bombs, and unreliable combat stimulants.",
+        "goals": "Complete one decisive operation and escape the pressures of the criminal network."
+      }
+    },
+    {
+      "id": "decomposed_criminal_assassin",
+      "fields": {
+        "appearance": "Clothing and tools fit the criminal role of assassin.",
+        "backstory": "a meticulous killer arranging deaths to resemble accidents or divine punishment.",
+        "goals": "Complete one decisive operation and escape the pressures of the criminal network."
+      }
+    },
+    {
+      "id": "decomposed_criminal_crime_mage",
+      "fields": {
+        "appearance": "Clothing and tools fit the criminal role of crime mage.",
+        "backstory": "an outlaw using subtle magic to bypass locks, witnesses, and contracts.",
+        "goals": "Complete one decisive operation and escape the pressures of the criminal network."
+      }
+    },
+    {
+      "id": "decomposed_criminal_slave_trader",
+      "fields": {
+        "appearance": "Clothing and tools fit the criminal role of slave trader.",
+        "backstory": "a guarded trafficker protected by forged laws and complicit officials.",
+        "goals": "Complete one decisive operation and escape the pressures of the criminal network."
+      }
+    },
+    {
+      "id": "decomposed_criminal_bandit_prince",
+      "fields": {
+        "appearance": "Clothing and tools fit the criminal role of bandit prince.",
+        "backstory": "a charismatic warlord uniting scattered gangs into a territorial army.",
+        "goals": "Complete one decisive operation and escape the pressures of the criminal network."
+      }
+    },
+    {
+      "id": "decomposed_criminal_false_prophet",
+      "fields": {
+        "appearance": "Clothing and tools fit the criminal role of false prophet.",
+        "backstory": "a cult leader engineering miracles to gain wealth and political immunity.",
+        "goals": "Complete one decisive operation and escape the pressures of the criminal network."
+      }
+    },
+    {
+      "id": "decomposed_criminal_royal_forger",
+      "fields": {
+        "appearance": "Clothing and tools fit the criminal role of royal forger.",
+        "backstory": "a master criminal capable of manufacturing convincing claims to titles and land.",
+        "goals": "Complete one decisive operation and escape the pressures of the criminal network."
+      }
+    },
+    {
+      "id": "decomposed_criminal_underworld_judge",
+      "fields": {
+        "appearance": "Clothing and tools fit the criminal role of underworld judge.",
+        "backstory": "a feared mediator whose private court settles disputes between criminal factions.",
+        "goals": "Complete one decisive operation and escape the pressures of the criminal network."
+      }
+    }
+  ]
+}

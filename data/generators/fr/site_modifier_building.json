@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 3,
+  "id": "site_modifier_building",
+  "visibility": "internal",
+  "name": "Modificateurs de site historiques",
+  "description": "Variations historiques descriptives compatibles avec des générateurs de lieux précis",
+  "entrySchema": {
+    "type": "fields",
+    "required": ["name", "description"]
+  },
+  "entries": [
+    {
+      "id": "local_center",
+      "fields": {
+        "name": "Centre local",
+        "description": "Le lieu est le plus important de la communauté et concentre ressources, réputation et conflits de proximité."
+      }
+    },
+    {
+      "id": "national_institution",
+      "fields": {
+        "name": "Institution nationale",
+        "description": "Le lieu exerce une influence sur tout le pays et bénéficie de protections politiques exceptionnelles."
+      }
+    },
+    {
+      "id": "continental_site",
+      "fields": {
+        "name": "Site continental",
+        "description": "Le lieu est unique à l’échelle du continent et attire experts, pèlerins, espions et puissances étrangères."
+      }
+    },
+    {
+      "id": "closed_after_an_incident",
+      "fields": {
+        "name": "Fermé après un incident",
+        "description": "L’accès officiel est interdit pendant une enquête, une contamination ou une crise que les responsables minimisent."
+      }
+    },
+    {
+      "id": "under_renovation",
+      "fields": {
+        "name": "En rénovation",
+        "description": "Une partie du lieu est inaccessible tandis qu’ouvriers, échafaudages et plans anciens offrent de nouveaux passages."
+      }
+    }
+  ]
+}

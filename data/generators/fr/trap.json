@@ -1,7 +1,6 @@
 {
-  "schemaVersion": 2,
+  "schemaVersion": 3,
   "id": "trap",
-  "kind": "category",
   "visibility": "public",
   "name": "pièges",
   "description": "Dangers mécaniques, magiques et sociaux",
@@ -10,141 +9,141 @@
   },
   "entries": [
     {
-      "id": "a-pressure-tile-seals-both-doors-and-slowly",
+      "id": "a_pressure_tile_seals_both_doors_and_slowly",
       "weight": 3,
       "value": "Une dalle à pression condamne les deux portes, puis emplit lentement la salle d'une brume inoffensive qui dissimule la véritable fosse."
     },
     {
-      "id": "a-rune-swaps-the-voices-of-the-first",
+      "id": "a_rune_swaps_the_voices_of_the_first",
       "value": "Une rune échange la voix des deux premières créatures qui la franchissent, jusqu'à ce qu'elles tombent sincèrement d'accord sur un sujet."
     },
     {
-      "id": "a-treasure-chest-loudly-accuses-whoever-opens-it",
+      "id": "a_treasure_chest_loudly_accuses_whoever_opens_it",
       "weight": 2,
       "value": "Un coffre au trésor accuse bruyamment de vol la personne qui l'ouvre et alerte nommément les gardiens à proximité."
     },
     {
-      "id": "a-hallway-repeats-itself-until-travelers-walk-backward",
+      "id": "a_hallway_repeats_itself_until_travelers_walk_backward",
       "weight": 2,
       "value": "Un couloir se répète indéfiniment jusqu'à ce que les voyageurs avancent à reculons ou éteignent toutes les lumières."
     },
     {
-      "id": "a-tripwire-releases-dozens-of-glass-marbles-while",
+      "id": "a_tripwire_releases_dozens_of_glass_marbles_while",
       "weight": 3,
       "value": "Un fil tendu libère des dizaines de billes de verre tandis que des panneaux dissimulés inclinent fortement le sol."
     },
     {
-      "id": "a-door-handle-steals-the-openers-shadow-the",
+      "id": "a_door_handle_steals_the_openers_shadow_the",
       "value": "Une poignée de porte vole l'ombre de la personne qui l'actionne. L'ombre part prévenir les ennemis en exagérant la puissance du groupe."
     },
     {
-      "id": "a-false-healing-fountain-restores-armor-while-quietly",
+      "id": "a_false_healing_fountain_restores_armor_while_quietly",
       "weight": 2,
       "value": "Une fausse fontaine de soins restaure la protection, mais inflige discrètement autant de dégâts à la prochaine personne qui boit."
     },
     {
-      "id": "a-ceiling-rune-reverses-gravity-for-loose-objects",
+      "id": "a_ceiling_rune_reverses_gravity_for_loose_objects",
       "value": "Une rune au plafond inverse d'abord la gravité des objets qui ne sont pas fixés, laissant un bref avertissement avant d'affecter les créatures."
     },
     {
-      "id": "a-jeweled-idol-teleports-into-the-pack-of",
+      "id": "a_jeweled_idol_teleports_into_the_pack_of",
       "value": "Une idole sertie de joyaux se téléporte dans le sac de la personne qui la touche et laisse à sa place une réplique qui hurle."
     },
     {
-      "id": "a-stairway-counts-spoken-numbers-saying-thirteen-animates",
+      "id": "a_stairway_counts_spoken_numbers_saying_thirteen_animates",
       "weight": 2,
       "value": "Un escalier compte les nombres prononcés à voix haute. Dire treize transforme ses marches en un serpent de pierre."
     },
     {
-      "id": "a-locked-gate-opens-easily-when-pushed-but",
+      "id": "a_locked_gate_opens_easily_when_pushed_but",
       "weight": 3,
       "value": "Une grille verrouillée s'ouvre facilement en poussant, mais déclenche des fléchettes si des crochets pénètrent dans sa serrure décorative."
     },
     {
-      "id": "a-mirror-creates-one-hostile-reflection-per-visible",
+      "id": "a_mirror_creates_one_hostile_reflection_per_visible",
       "weight": 2,
       "value": "Un miroir crée un reflet hostile pour chaque arme visible. Couvrir ou lâcher les armes empêche l'apparition de nouvelles copies."
     },
     {
-      "id": "a-floor-of-enchanted-coins-grips-metal-boots",
+      "id": "a_floor_of_enchanted_coins_grips_metal_boots",
       "weight": 2,
       "value": "Un sol couvert de pièces enchantées retient les bottes et armures métalliques tandis qu'un rocher approche en roulant très lentement."
     },
     {
-      "id": "a-painted-eye-marks-the-first-person-who",
+      "id": "a_painted_eye_marks_the_first_person_who",
       "value": "Un œil peint marque la première personne qui ment à proximité. Toutes les statues rencontrées ensuite la suivent du regard et la prennent pour cible."
     },
     {
-      "id": "a-bridge-becomes-intangible-when-anyone-runs-forcing",
+      "id": "a_bridge_becomes_intangible_when_anyone_runs_forcing",
       "weight": 2,
       "value": "Un pont devient intangible dès que quelqu'un court, obligeant le groupe à traverser calmement malgré la menace qui approche."
     },
     {
-      "id": "a-music-box-puts-listeners-to-sleep-only",
+      "id": "a_music_box_puts_listeners_to_sleep_only",
       "weight": 2,
       "value": "Une boîte à musique n'endort ceux qui l'entendent que lorsque sa mélodie s'arrête, ce qui rend sa destruction immédiate dangereuse."
     },
     {
-      "id": "a-pantry-mimic-is-harmless-but-attacking-it",
+      "id": "a_pantry_mimic_is_harmless_but_attacking_it",
       "weight": 2,
       "value": "Un garde-manger mimique est inoffensif, mais l'attaquer réveille toute la cuisine affamée."
     },
     {
-      "id": "a-rune-of-silence-suppresses-all-sound-while",
+      "id": "a_rune_of_silence_suppresses_all_sound_while",
       "value": "Une rune de silence étouffe tous les sons, mais des clochettes dissimulées sur les intrus continuent d'alerter les gardes ailleurs."
     },
     {
-      "id": "an-ornate-rug-rolls-around-trespassers-then-politely",
+      "id": "an_ornate_rug_rolls_around_trespassers_then_politely",
       "weight": 2,
       "value": "Un tapis ouvragé s'enroule autour des intrus, puis leur demande poliment un mot de passe tout en les traînant vers une trappe."
     },
     {
-      "id": "a-trapped-book-erases-one-common-word-from",
+      "id": "a_trapped_book_erases_one_common_word_from",
       "value": "Un livre piégé efface un mot courant du vocabulaire de son lecteur et fait de ce mot volé sa formule de commande."
     },
     {
-      "id": "a-corridor-fills-with-illusory-fire-that-causes",
+      "id": "a_corridor_fills_with_illusory_fire_that_causes",
       "value": "Un couloir s'emplit de flammes illusoires inoffensives, sauf si quelqu'un tente de les éteindre."
     },
     {
-      "id": "a-statue-offers-safe-passage-for-one-honest",
+      "id": "a_statue_offers_safe_passage_for_one_honest",
       "weight": 2,
       "value": "Une statue accorde le passage en échange d'un compliment sincère. La flatterie ou le sarcasme libèrent des guêpes de pierre."
     },
     {
-      "id": "a-chest-contains-genuine-treasure-balanced-over-a",
+      "id": "a_chest_contains_genuine_treasure_balanced_over_a",
       "weight": 3,
       "value": "Un coffre contient un véritable trésor posé en équilibre sur un mécanisme qui ne se déclenche que si l'on retire trop de poids."
     },
     {
-      "id": "a-door-teleports-anyone-opening-it-to-the",
+      "id": "a_door_teleports_anyone_opening_it_to_the",
       "value": "Une porte téléporte de l'autre côté toute personne qui l'ouvre, mais abandonne sur place l'équipement qu'elle transportait."
     },
     {
-      "id": "a-frost-rune-freezes-the-brightest-object-in",
+      "id": "a_frost_rune_freezes_the_brightest_object_in",
       "value": "Une rune de givre congèle l'objet le plus lumineux de la pièce, invitant à manipuler habilement la lumière."
     },
     {
-      "id": "a-harmless-dart-marks-its-target-with-a",
+      "id": "a_harmless_dart_marks_its_target_with_a",
       "weight": 3,
       "value": "Une fléchette inoffensive imprègne sa cible d'une odeur qui attire le véritable prédateur du donjon."
     },
     {
-      "id": "a-circular-chamber-rotates-its-exits-whenever-someone",
+      "id": "a_circular_chamber_rotates_its_exits_whenever_someone",
       "weight": 2,
       "value": "Une salle circulaire fait pivoter ses sorties chaque fois que quelqu'un mentionne une destination."
     },
     {
-      "id": "a-golden-rope-can-be-crossed-safely-but",
+      "id": "a_golden_rope_can_be_crossed_safely_but",
       "weight": 2,
       "value": "Une corde dorée peut être franchie sans danger, mais se resserre autour de quiconque tente de la couper ou de l'enjamber."
     },
     {
-      "id": "a-guardian-portrait-asks-a-personal-question-refusing",
+      "id": "a_guardian_portrait_asks_a_personal_question_refusing",
       "value": "Le portrait d'un gardien pose une question personnelle. Refuser de répondre verrouille la porte ; mentir libère le sujet du mensonge."
     },
     {
-      "id": "a-pedestal-grants-the-requested-object-then-announces",
+      "id": "a_pedestal_grants_the_requested_object_then_announces",
       "weight": 2,
       "value": "Un piédestal accorde l'objet demandé, puis annonce un prix contraignant mais équitable, à régler avant de pouvoir partir."
     }

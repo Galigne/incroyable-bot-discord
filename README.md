@@ -35,19 +35,20 @@ entity commands. Localized labels and resource abbreviations are resolved throug
 the display adapters. Resource abbreviations are unique within each language:
 HP/AR/AP/MD in English and PV/PR/PA/DD in French.
 
-Generator schema v2 catalogs follow the same server locale. English reference
+Generator schema v3 catalogs follow the same server locale. English reference
 files live in `data/generators/en/` and matching French display content in
 `data/generators/fr/`; the complete catalog is rejected when a locale counterpart
 is missing or structurally incompatible. Public generators appear in `/gen`,
 autocomplete, and help, while internal components remain workflow-only.
 Autocomplete labels and generated text are localized, while stable generator and
 entry IDs, structured field keys, enum values, and routing values remain English.
-Public template generators can compose nested random or fixed references, including
-weighted choices between internal sources. Completed results retain technical
-provenance, and configured narrative modifiers are displayed separately without
-changing base generated mechanics.
+Component text and field values can contain inline references such as
+`{{ inventory }}`, `{{ background:criminal }}`, or `{{ creature_monster.name }}`.
+Each occurrence resolves independently, including nested and weighted sources.
+Completed results retain technical provenance, and configured narrative modifiers
+are displayed separately without changing base generated mechanics.
 The public `creature` catalog routes `animal`, `companion`, and `monster` types to
-their internal `creature-*` sources. Those sources use the same references and
+their internal `creature_*` sources. Those sources use the same references and
 profiles to persist a complete final creature, including provenance, without
 rerunning generation on load or display. Status effects and descriptive modifiers
 come from catalogs shared with character generation.
@@ -253,8 +254,8 @@ background selects one of the configured background categories and is also chose
 randomly when omitted. It generates the character's appearance, backstory, and goals.
 
 Random creatures select an `animal`, `companion`, or `monster` route from the
-public `creature` catalog, then generate from its internal `creature-animal`,
-`creature-companion`, or `creature-monster` source. They share the character level budget, nonlinear statistic allocation,
+public `creature` catalog, then generate from its internal `creature_animal`,
+`creature_companion`, or `creature_monster` source. They share the character level budget, nonlinear statistic allocation,
 derived statistics, and resource formulas while using creature-specific profile
 distributions. Only explicit source references grant creature RULEs; Intelligence
 and descriptive modifiers never do. Natural armor or technical armor metadata may
@@ -308,9 +309,9 @@ registry behavior, architectural boundaries, slash-command schemas, autocomplete
 permissions, localization, character and creature save/generation invariants,
 required media, and voice dependencies.
 
-Every generator v2 entry is an object with a stable technical ID, an optional
+Every generator v3 entry is an object with a stable technical ID, an optional
 positive weight, and localized text, one atomic structured field group, or a
-localized template with validated references. The resolver supports weighted
+localized component value with validated inline references. The resolver supports weighted
 sources, deterministic provenance, and strictly descriptive modifiers. Shared
 non-localized statistical profiles drive character and creature stat allocation. See
 [`data/generators/README.md`](data/generators/README.md) for the complete format.

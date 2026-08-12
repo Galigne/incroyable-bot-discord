@@ -1,0 +1,726 @@
+{
+  "schemaVersion": 3,
+  "id": "creature_animal",
+  "visibility": "internal",
+  "name": "Animaux",
+  "description": "Faune ordinaire et créatures fantastiques inoffensives",
+  "entrySchema": {
+    "type": "fields",
+    "required": ["name", "description"]
+  },
+  "entries": [
+    {
+      "id": "mossback_deer",
+      "weight": 4,
+      "fields": {
+        "name": "Cerf au dos moussu",
+        "description": "paisible herbivore forestier dont les bois abritent fleurs, insectes et herbes médicinales."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          {
+            "id": "mossback_deer_nature",
+            "name": "Adaptation naturelle",
+            "description": "paisible herbivore forestier dont les bois abritent fleurs, insectes et herbes médicinales."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 5
+      }
+    },
+    {
+      "id": "lantern_finch",
+      "weight": 4,
+      "fields": {
+        "name": "Pinson-lanterne",
+        "description": "minuscule oiseau aux plumes lumineuses qui se rassemble près des campements sûrs."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          {
+            "id": "lantern_finch_nature",
+            "name": "Adaptation naturelle",
+            "description": "minuscule oiseau aux plumes lumineuses qui se rassemble près des campements sûrs."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 5
+      }
+    },
+    {
+      "id": "river_otter",
+      "weight": 4,
+      "fields": {
+        "name": "Loutre de rivière",
+        "description": "nageuse joueuse et rusée qui échange des pierres polies contre de la nourriture."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          {
+            "id": "river_otter_nature",
+            "name": "Adaptation naturelle",
+            "description": "nageuse joueuse et rusée qui échange des pierres polies contre de la nourriture."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 5
+      }
+    },
+    {
+      "id": "cloud_sheep",
+      "weight": 3,
+      "fields": {
+        "name": "Mouton-nuage",
+        "description": "animal laineux des montagnes, assez léger pour survivre à de longues chutes."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          {
+            "id": "cloud_sheep_nature",
+            "name": "Adaptation naturelle",
+            "description": "animal laineux des montagnes, assez léger pour survivre à de longues chutes."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 5
+      }
+    },
+    {
+      "id": "copper_fox",
+      "weight": 3,
+      "fields": {
+        "name": "Renard cuivré",
+        "description": "renard roux curieux, attiré par les pièces, les clés et les mélodies paisibles."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          {
+            "id": "copper_fox_nature",
+            "name": "Adaptation naturelle",
+            "description": "renard roux curieux, attiré par les pièces, les clés et les mélodies paisibles."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 5
+      }
+    },
+    {
+      "id": "burrow_pig",
+      "weight": 3,
+      "fields": {
+        "name": "Cochon fouisseur",
+        "description": "robuste chercheur de nourriture capable de dénicher racines, truffes et objets enterrés à faible profondeur."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          {
+            "id": "burrow_pig_nature",
+            "name": "Adaptation naturelle",
+            "description": "robuste chercheur de nourriture capable de dénicher racines, truffes et objets enterrés à faible profondeur."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 5
+      }
+    },
+    {
+      "id": "long_eared_hare",
+      "weight": 3,
+      "fields": {
+        "name": "Lièvre à longues oreilles",
+        "description": "animal vigilant des prairies qui frappe le sol avant une tempête ou à l’approche d’un danger."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          {
+            "id": "long_eared_hare_nature",
+            "name": "Adaptation naturelle",
+            "description": "animal vigilant des prairies qui frappe le sol avant une tempête ou à l’approche d’un danger."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 5
+      }
+    },
+    {
+      "id": "bluehorn_goat",
+      "weight": 3,
+      "fields": {
+        "name": "Chèvre aux cornes bleues",
+        "description": "herbivore au pied sûr qui vit sur les falaises et possède des cornes bleues riches en minéraux."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          {
+            "id": "bluehorn_goat_nature",
+            "name": "Adaptation naturelle",
+            "description": "herbivore au pied sûr qui vit sur les falaises et possède des cornes bleues riches en minéraux."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 5
+      }
+    },
+    {
+      "id": "reed_crane",
+      "weight": 3,
+      "fields": {
+        "name": "Grue des roseaux",
+        "description": "patient oiseau des marais qui guide souvent les voyageurs à travers les eaux sans danger."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          {
+            "id": "reed_crane_nature",
+            "name": "Adaptation naturelle",
+            "description": "patient oiseau des marais qui guide souvent les voyageurs à travers les eaux sans danger."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 5
+      }
+    },
+    {
+      "id": "honey_bear",
+      "weight": 3,
+      "fields": {
+        "name": "Ours à miel",
+        "description": "petit ours docile à la fourrure dorée, doté d’une excellente mémoire pour les gestes de bonté."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          {
+            "id": "honey_bear_nature",
+            "name": "Adaptation naturelle",
+            "description": "petit ours docile à la fourrure dorée, doté d’une excellente mémoire pour les gestes de bonté."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 5
+      }
+    },
+    {
+      "id": "sailback_turtle",
+      "weight": 2,
+      "fields": {
+        "name": "Tortue à carapace-voile",
+        "description": "large tortue de rivière dont la carapace prend le vent lorsqu’elle nage."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          {
+            "id": "sailback_turtle_nature",
+            "name": "Adaptation naturelle",
+            "description": "large tortue de rivière dont la carapace prend le vent lorsqu’elle nage."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 20
+      }
+    },
+    {
+      "id": "ember_newt",
+      "weight": 2,
+      "fields": {
+        "name": "Triton de braise",
+        "description": "amphibien au corps chaud que l’on trouve souvent endormi près des fours."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          {
+            "id": "ember_newt_nature",
+            "name": "Adaptation naturelle",
+            "description": "amphibien au corps chaud que l’on trouve souvent endormi près des fours."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 5
+      }
+    },
+    {
+      "id": "silk_alpaca",
+      "weight": 2,
+      "fields": {
+        "name": "Alpaga de soie",
+        "description": "paisible animal de troupeau produisant une fibre exceptionnellement douce et résistante."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          {
+            "id": "silk_alpaca_nature",
+            "name": "Adaptation naturelle",
+            "description": "paisible animal de troupeau produisant une fibre exceptionnellement douce et résistante."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 5
+      }
+    },
+    {
+      "id": "rain_frog",
+      "weight": 2,
+      "fields": {
+        "name": "Grenouille de pluie",
+        "description": "grenouille aux couleurs vives dont le chant annonce avec fiabilité la pluie plusieurs heures à l’avance."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          {
+            "id": "rain_frog_nature",
+            "name": "Adaptation naturelle",
+            "description": "grenouille aux couleurs vives dont le chant annonce avec fiabilité la pluie plusieurs heures à l’avance."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 5
+      }
+    },
+    {
+      "id": "moon_moth",
+      "weight": 2,
+      "fields": {
+        "name": "Phalène lunaire",
+        "description": "papillon argenté grand comme une main qui se nourrit de résidus magiques sans altérer les sorts."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          {
+            "id": "moon_moth_nature",
+            "name": "Adaptation naturelle",
+            "description": "papillon argenté grand comme une main qui se nourrit de résidus magiques sans altérer les sorts."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 5
+      }
+    },
+    {
+      "id": "pebble_crab",
+      "weight": 2,
+      "fields": {
+        "name": "Crabe-galet",
+        "description": "crabe côtier inoffensif qui décore sa carapace de pierres colorées."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          {
+            "id": "pebble_crab_nature",
+            "name": "Adaptation naturelle",
+            "description": "crabe côtier inoffensif qui décore sa carapace de pierres colorées."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 20
+      }
+    },
+    {
+      "id": "whistle_marmot",
+      "weight": 2,
+      "fields": {
+        "name": "Marmotte siffleuse",
+        "description": "rongeur alpin sociable dont les cris d’alerte varient selon le type de menace."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          {
+            "id": "whistle_marmot_nature",
+            "name": "Adaptation naturelle",
+            "description": "rongeur alpin sociable dont les cris d’alerte varient selon le type de menace."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 5
+      }
+    },
+    {
+      "id": "orchard_drake",
+      "weight": 2,
+      "fields": {
+        "name": "Drac des vergers",
+        "description": "lézard incapable de voler qui dévore les nuisibles et réchauffe les arbres fruitiers pendant les gelées."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          {
+            "id": "orchard_drake_nature",
+            "name": "Adaptation naturelle",
+            "description": "lézard incapable de voler qui dévore les nuisibles et réchauffe les arbres fruitiers pendant les gelées."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 5
+      }
+    },
+    {
+      "id": "mist_dolphin",
+      "weight": 1,
+      "fields": {
+        "name": "Dauphin des brumes",
+        "description": "dauphin pâle des côtes qui éloigne les navires perdus des récifs."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          {
+            "id": "mist_dolphin_nature",
+            "name": "Adaptation naturelle",
+            "description": "dauphin pâle des côtes qui éloigne les navires perdus des récifs."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 5
+      }
+    },
+    {
+      "id": "star_elk",
+      "weight": 1,
+      "fields": {
+        "name": "Cerf étoilé",
+        "description": "cervidé nocturne rare dont le pelage reproduit le ciel de la nuit présente."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          {
+            "id": "star_elk_nature",
+            "name": "Adaptation naturelle",
+            "description": "cervidé nocturne rare dont le pelage reproduit le ciel de la nuit présente."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 5
+      }
+    },
+    {
+      "id": "memory_crow",
+      "weight": 1,
+      "fields": {
+        "name": "Corbeau-mémoire",
+        "description": "oiseau noir amical capable de répéter une phrase entendue des années auparavant."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          {
+            "id": "memory_crow_nature",
+            "name": "Adaptation naturelle",
+            "description": "oiseau noir amical capable de répéter une phrase entendue des années auparavant."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 5
+      }
+    },
+    {
+      "id": "glimmer_whale",
+      "weight": 1,
+      "fields": {
+        "name": "Baleine scintillante",
+        "description": "paisible géante des profondeurs dont le chant fait luire le plancton."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          {
+            "id": "glimmer_whale_nature",
+            "name": "Adaptation naturelle",
+            "description": "paisible géante des profondeurs dont le chant fait luire le plancton."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 5
+      }
+    },
+    {
+      "id": "solar_lizard",
+      "fields": {
+        "name": "Lézard solaire",
+        "description": "Un reptile placide qui stocke la chaleur dans ses écailles et"
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          {
+            "id": "solar_lizard_nature",
+            "name": "Nature intrinsèque",
+            "description": "Un reptile placide qui stocke la chaleur dans ses écailles et"
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 10
+      },
+      "weight": 1
+    },
+    {
+      "id": "reed_snake",
+      "fields": {
+        "name": "Serpent des roseaux",
+        "description": "Un serpent aquatique discret dont la morsure est"
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          {
+            "id": "reed_snake_nature",
+            "name": "Nature intrinsèque",
+            "description": "Un serpent aquatique discret dont la morsure est"
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 5
+      },
+      "weight": 1
+    },
+    {
+      "id": "scavenger_rat",
+      "fields": {
+        "name": "Rat récupérateur",
+        "description": "Un rongeur curieux qui emporte petits outils, boutons et"
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          {
+            "id": "scavenger_rat_nature",
+            "name": "Nature intrinsèque",
+            "description": "Un rongeur curieux qui emporte petits outils, boutons et"
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 0
+      },
+      "weight": 1
+    },
+    {
+      "id": "weaver_spider",
+      "fields": {
+        "name": "Araignée tisseuse",
+        "description": "Une grosse araignée non agressive dont la toile solide est"
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          {
+            "id": "weaver_spider_nature",
+            "name": "Nature intrinsèque",
+            "description": "Une grosse araignée non agressive dont la toile solide est"
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 10
+      },
+      "weight": 1
+    },
+    {
+      "id": "hill_wolf",
+      "fields": {
+        "name": "Loup des collines",
+        "description": "Un prédateur social prudent qui observe longtemps un"
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          {
+            "id": "hill_wolf_nature",
+            "name": "Nature intrinsèque",
+            "description": "Un prédateur social prudent qui observe longtemps un"
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 10
+      },
+      "weight": 1
+    },
+    {
+      "id": "armored_crab",
+      "fields": {
+        "name": "Crabe cuirassé",
+        "description": "Un crustacé de grande taille utilisant débris et coquillages"
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          {
+            "id": "armored_crab_nature",
+            "name": "Nature intrinsèque",
+            "description": "Un crustacé de grande taille utilisant débris et coquillages"
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 35
+      },
+      "weight": 1
+    },
+    {
+      "id": "burrowing_armadillo",
+      "fields": {
+        "name": "Tatou fouisseur",
+        "description": "Un animal robuste capable de localiser eau, racines et"
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          {
+            "id": "burrowing_armadillo_nature",
+            "name": "Nature intrinsèque",
+            "description": "Un animal robuste capable de localiser eau, racines et"
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 30
+      },
+      "weight": 1
+    },
+    {
+      "id": "thieving_monkey",
+      "fields": {
+        "name": "Singe chapardeur",
+        "description": "Un animal intelligent qui échange volontiers les objets"
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          {
+            "id": "thieving_monkey_nature",
+            "name": "Nature intrinsèque",
+            "description": "Un animal intelligent qui échange volontiers les objets"
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 5
+      },
+      "weight": 1
+    },
+    {
+      "id": "cave_bat",
+      "fields": {
+        "name": "Chauve-souris cavernicole",
+        "description": "Un petit animal nocturne dont les mouvements"
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          {
+            "id": "cave_bat_nature",
+            "name": "Nature intrinsèque",
+            "description": "Un petit animal nocturne dont les mouvements"
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 0
+      },
+      "weight": 1
+    }
+  ]
+}

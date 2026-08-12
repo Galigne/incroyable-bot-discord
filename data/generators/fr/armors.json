@@ -1,198 +1,197 @@
 {
-  "schemaVersion": 2,
+  "schemaVersion": 3,
   "id": "armors",
-  "kind": "category",
   "visibility": "public",
   "name": "Armures",
   "description": "Armures de chaque type et de chaque rareté",
   "entrySchema": {
     "type": "fields",
     "required": [
-      "Name",
-      "Type",
-      "Rarity",
-      "Description",
-      "Constitution requirement",
-      "AR percentage"
+      "name",
+      "type",
+      "rarity",
+      "description",
+      "constitution_requirement",
+      "ar_percentage"
     ],
-    "technical": ["Type", "Rarity", "Constitution requirement", "AR percentage"]
+    "technical": ["type", "rarity", "constitution_requirement", "ar_percentage"]
   },
   "entries": [
     {
-      "id": "common-light-armor",
+      "id": "common_light_armor",
       "weight": 8,
       "fields": {
-        "Name": "Armure légère commune",
-        "Type": "light",
-        "Rarity": "common",
-        "Description": "Vêtements ordinaires ou rembourrage léger qui préservent la mobilité mais n’offrent presque aucun PR.",
-        "Constitution requirement": 0,
-        "AR percentage": 5
+        "name": "Armure légère commune",
+        "type": "light",
+        "rarity": "common",
+        "description": "Vêtements ordinaires ou rembourrage léger qui préservent la mobilité mais n’offrent presque aucun PR.",
+        "constitution_requirement": 0,
+        "ar_percentage": 5
       }
     },
     {
-      "id": "uncommon-light-armor",
+      "id": "uncommon_light_armor",
       "weight": 5,
       "fields": {
-        "Name": "Armure légère peu commune",
-        "Type": "light",
-        "Rarity": "uncommon",
-        "Description": "Vêtements renforcés bien ajustés offrant une protection modeste.",
-        "Constitution requirement": 0,
-        "AR percentage": 15
+        "name": "Armure légère peu commune",
+        "type": "light",
+        "rarity": "uncommon",
+        "description": "Vêtements renforcés bien ajustés offrant une protection modeste.",
+        "constitution_requirement": 0,
+        "ar_percentage": 15
       }
     },
     {
-      "id": "rare-light-armor",
+      "id": "rare_light_armor",
       "weight": 3,
       "fields": {
-        "Name": "Armure légère rare",
-        "Type": "light",
-        "Rarity": "rare",
-        "Description": "Armure souple de qualité supérieure, confectionnée dans un matériau exceptionnellement résistant.",
-        "Constitution requirement": 0,
-        "AR percentage": 25
+        "name": "Armure légère rare",
+        "type": "light",
+        "rarity": "rare",
+        "description": "Armure souple de qualité supérieure, confectionnée dans un matériau exceptionnellement résistant.",
+        "constitution_requirement": 0,
+        "ar_percentage": 25
       }
     },
     {
-      "id": "epic-light-armor",
+      "id": "epic_light_armor",
       "weight": 2,
       "fields": {
-        "Name": "Armure légère épique",
-        "Type": "light",
-        "Rarity": "epic",
-        "Description": "Protection remarquable et presque sans poids, réalisée grâce à des techniques rares.",
-        "Constitution requirement": 0,
-        "AR percentage": 35
+        "name": "Armure légère épique",
+        "type": "light",
+        "rarity": "epic",
+        "description": "Protection remarquable et presque sans poids, réalisée grâce à des techniques rares.",
+        "constitution_requirement": 0,
+        "ar_percentage": 35
       }
     },
     {
-      "id": "legendary-light-armor",
+      "id": "legendary_light_armor",
       "fields": {
-        "Name": "Armure légère légendaire",
-        "Type": "light",
-        "Rarity": "legendary",
-        "Description": "Une seconde peau unique offrant une protection exceptionnelle sans restreindre le mouvement.",
-        "Constitution requirement": 0,
-        "AR percentage": 45
+        "name": "Armure légère légendaire",
+        "type": "light",
+        "rarity": "legendary",
+        "description": "Une seconde peau unique offrant une protection exceptionnelle sans restreindre le mouvement.",
+        "constitution_requirement": 0,
+        "ar_percentage": 45
       }
     },
     {
-      "id": "common-medium-armor",
+      "id": "common_medium_armor",
       "weight": 8,
       "fields": {
-        "Name": "Armure intermédiaire commune",
-        "Type": "medium",
-        "Rarity": "common",
-        "Description": "Protection standard en cuir renforcé, en écailles ou en cotte de mailles partielle.",
-        "Constitution requirement": 12,
-        "AR percentage": 25
+        "name": "Armure intermédiaire commune",
+        "type": "medium",
+        "rarity": "common",
+        "description": "Protection standard en cuir renforcé, en écailles ou en cotte de mailles partielle.",
+        "constitution_requirement": 12,
+        "ar_percentage": 25
       }
     },
     {
-      "id": "uncommon-medium-armor",
+      "id": "uncommon_medium_armor",
       "weight": 5,
       "fields": {
-        "Name": "Armure intermédiaire peu commune",
-        "Type": "medium",
-        "Rarity": "uncommon",
-        "Description": "Armure professionnelle fiable offrant un bon équilibre entre protection et mobilité.",
-        "Constitution requirement": 12,
-        "AR percentage": 35
+        "name": "Armure intermédiaire peu commune",
+        "type": "medium",
+        "rarity": "uncommon",
+        "description": "Armure professionnelle fiable offrant un bon équilibre entre protection et mobilité.",
+        "constitution_requirement": 12,
+        "ar_percentage": 35
       }
     },
     {
-      "id": "rare-medium-armor",
+      "id": "rare_medium_armor",
       "weight": 3,
       "fields": {
-        "Name": "Armure intermédiaire rare",
-        "Type": "medium",
-        "Rarity": "rare",
-        "Description": "Armure multicouche de maître offrant une excellente couverture.",
-        "Constitution requirement": 12,
-        "AR percentage": 45
+        "name": "Armure intermédiaire rare",
+        "type": "medium",
+        "rarity": "rare",
+        "description": "Armure multicouche de maître offrant une excellente couverture.",
+        "constitution_requirement": 12,
+        "ar_percentage": 45
       }
     },
     {
-      "id": "epic-medium-armor",
+      "id": "epic_medium_armor",
       "weight": 2,
       "fields": {
-        "Name": "Armure intermédiaire épique",
-        "Type": "medium",
-        "Rarity": "epic",
-        "Description": "Armure exceptionnelle renforcée par des matériaux ou runes magiques.",
-        "Constitution requirement": 12,
-        "AR percentage": 55
+        "name": "Armure intermédiaire épique",
+        "type": "medium",
+        "rarity": "epic",
+        "description": "Armure exceptionnelle renforcée par des matériaux ou runes magiques.",
+        "constitution_requirement": 12,
+        "ar_percentage": 55
       }
     },
     {
-      "id": "legendary-medium-armor",
+      "id": "legendary_medium_armor",
       "fields": {
-        "Name": "Armure intermédiaire légendaire",
-        "Type": "medium",
-        "Rarity": "legendary",
-        "Description": "Armure renommée offrant une protection extraordinaire sans devenir encombrante.",
-        "Constitution requirement": 12,
-        "AR percentage": 65
+        "name": "Armure intermédiaire légendaire",
+        "type": "medium",
+        "rarity": "legendary",
+        "description": "Armure renommée offrant une protection extraordinaire sans devenir encombrante.",
+        "constitution_requirement": 12,
+        "ar_percentage": 65
       }
     },
     {
-      "id": "common-heavy-armor",
+      "id": "common_heavy_armor",
       "weight": 8,
       "fields": {
-        "Name": "Armure lourde commune",
-        "Type": "heavy",
-        "Rarity": "common",
-        "Description": "Une combinaison complète de base de plaque ou une protection massive similaire.",
-        "Constitution requirement": 14,
-        "AR percentage": 45
+        "name": "Armure lourde commune",
+        "type": "heavy",
+        "rarity": "common",
+        "description": "Une combinaison complète de base de plaque ou une protection massive similaire.",
+        "constitution_requirement": 14,
+        "ar_percentage": 45
       }
     },
     {
-      "id": "uncommon-heavy-armor",
+      "id": "uncommon_heavy_armor",
       "weight": 5,
       "fields": {
-        "Name": "Armure lourde peu commune",
-        "Type": "heavy",
-        "Rarity": "uncommon",
-        "Description": "Armure lourde soigneusement ajustée, dotée d’articulations renforcées.",
-        "Constitution requirement": 14,
-        "AR percentage": 55
+        "name": "Armure lourde peu commune",
+        "type": "heavy",
+        "rarity": "uncommon",
+        "description": "Armure lourde soigneusement ajustée, dotée d’articulations renforcées.",
+        "constitution_requirement": 14,
+        "ar_percentage": 55
       }
     },
     {
-      "id": "rare-heavy-armor",
+      "id": "rare_heavy_armor",
       "weight": 3,
       "fields": {
-        "Name": "Armure lourde rare",
-        "Type": "heavy",
-        "Rarity": "rare",
-        "Description": "Armure lourde de maître forgée dans un métal supérieur ou constituée de plaques de monstre.",
-        "Constitution requirement": 14,
-        "AR percentage": 65
+        "name": "Armure lourde rare",
+        "type": "heavy",
+        "rarity": "rare",
+        "description": "Armure lourde de maître forgée dans un métal supérieur ou constituée de plaques de monstre.",
+        "constitution_requirement": 14,
+        "ar_percentage": 65
       }
     },
     {
-      "id": "epic-heavy-armor",
+      "id": "epic_heavy_armor",
       "weight": 2,
       "fields": {
-        "Name": "Armure lourde épique",
-        "Type": "heavy",
-        "Rarity": "epic",
-        "Description": "Formidable armure runique capable d’encaisser des dégâts extraordinaires.",
-        "Constitution requirement": 14,
-        "AR percentage": 75
+        "name": "Armure lourde épique",
+        "type": "heavy",
+        "rarity": "epic",
+        "description": "Formidable armure runique capable d’encaisser des dégâts extraordinaires.",
+        "constitution_requirement": 14,
+        "ar_percentage": 75
       }
     },
     {
-      "id": "legendary-heavy-armor",
+      "id": "legendary_heavy_armor",
       "fields": {
-        "Name": "Armure lourde légendaire",
-        "Type": "heavy",
-        "Rarity": "legendary",
-        "Description": "Armure unique semblable à une forteresse, célébrée dans les chants et les chroniques militaires.",
-        "Constitution requirement": 14,
-        "AR percentage": 85
+        "name": "Armure lourde légendaire",
+        "type": "heavy",
+        "rarity": "legendary",
+        "description": "Armure unique semblable à une forteresse, célébrée dans les chants et les chroniques militaires.",
+        "constitution_requirement": 14,
+        "ar_percentage": 85
       }
     }
   ]

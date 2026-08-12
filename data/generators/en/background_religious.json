@@ -1,0 +1,109 @@
+{
+  "schemaVersion": 3,
+  "id": "background_religious",
+  "visibility": "internal",
+  "name": "Religious background details",
+  "description": "Background details for religious NPCs",
+  "entrySchema": {
+    "type": "fields",
+    "required": ["appearance", "backstory", "goals"]
+  },
+  "entries": [
+    {
+      "id": "neatly_robed_with_well_used_prayer_beads_and_a",
+      "fields": {
+        "appearance": "Neatly robed with well-used prayer beads and a calm, attentive expression.",
+        "backstory": "A village priest took responsibility for a neglected shrine after its former keeper disappeared.",
+        "goals": "Protect the local community, restore the shrine, and learn what happened to the previous priest."
+      }
+    },
+    {
+      "id": "simply_dressed_close_cropped_and_marked_by_calluses_from",
+      "fields": {
+        "appearance": "Simply dressed, close-cropped, and marked by calluses from both labor and ritual practice.",
+        "backstory": "A monastery raised them from childhood and recently sent them beyond its walls for the first time.",
+        "goals": "Put their teachings into practice and decide which traditions deserve to survive."
+      }
+    },
+    {
+      "id": "wears_practical_temple_clothes_beneath_a_bright_ceremonial",
+      "fields": {
+        "appearance": "Wears practical temple clothes beneath a bright ceremonial sash patched many times.",
+        "backstory": "A temple servant secretly kept the sanctuary operating while its clergy became entangled in politics.",
+        "goals": "Keep the sanctuary open to ordinary people and expose the misuse of its offerings."
+      }
+    },
+    {
+      "id": "dusty_from_travel_carrying_inexpensive_tokens_from_many",
+      "fields": {
+        "appearance": "Dusty from travel, carrying inexpensive tokens from many shrines and a carefully wrapped relic.",
+        "backstory": "A pilgrim promised to cross the realm after surviving an illness no healer expected them to overcome.",
+        "goals": "Complete the pilgrimage, repay acts of kindness, and discover whether the recovery was truly miraculous."
+      }
+    },
+    {
+      "id": "severe_but_approachable_with_annotated_scriptures_tucked_into",
+      "fields": {
+        "appearance": "Severe but approachable, with annotated scriptures tucked into every available pocket.",
+        "backstory": "A respected theologian was censured for arguing that an old commandment had been deliberately mistranslated.",
+        "goals": "Find the earliest surviving text and reform the faith without dividing its followers."
+      }
+    },
+    {
+      "id": "legacy_profession_priest",
+      "fields": {
+        "appearance": "Clothing and tools immediately suggest the work of a priest.",
+        "backstory": "Built a life as a priest and knows the profession’s obligations and hidden pressures.",
+        "goals": "Use that experience to secure a safer and more independent future."
+      }
+    },
+    {
+      "id": "legacy_profession_fanatic",
+      "fields": {
+        "appearance": "Clothing and tools immediately suggest the work of a fanatic.",
+        "backstory": "Built a life as a fanatic and knows the profession’s obligations and hidden pressures.",
+        "goals": "Use that experience to secure a safer and more independent future."
+      }
+    },
+    {
+      "id": "legacy_profession_prophet",
+      "fields": {
+        "appearance": "Clothing and tools immediately suggest the work of a prophet.",
+        "backstory": "Built a life as a prophet and knows the profession’s obligations and hidden pressures.",
+        "goals": "Use that experience to secure a safer and more independent future."
+      }
+    },
+    {
+      "id": "legacy_profession_monk",
+      "fields": {
+        "appearance": "Clothing and tools immediately suggest the work of a monk.",
+        "backstory": "Built a life as a monk and knows the profession’s obligations and hidden pressures.",
+        "goals": "Use that experience to secure a safer and more independent future."
+      }
+    },
+    {
+      "id": "decomposed_denied_miracle_healer",
+      "fields": {
+        "appearance": "A cheerful healer carries evidence of miracles that their own god refuses to acknowledge.",
+        "backstory": "a cheerful healer whose miracles work but whose god officially denies knowing him.",
+        "goals": "Turn this unusual history toward a self-directed future."
+      }
+    },
+    {
+      "id": "decomposed_tavern_born_paladin_order",
+      "fields": {
+        "appearance": "A paladin carries the charter of a holy order invented during a tavern argument.",
+        "backstory": "a relentlessly optimistic paladin whose holy order was invented during a tavern argument.",
+        "goals": "Turn this unusual history toward a self-directed future."
+      }
+    },
+    {
+      "id": "decomposed_silent_priest_ravens",
+      "fields": {
+        "appearance": "A silent priest travels with three talkative ravens serving as theological assistants.",
+        "backstory": "a priest who took a vow of silence and employs three talkative ravens as theological assistants.",
+        "goals": "Turn this unusual history toward a self-directed future."
+      }
+    }
+  ]
+}

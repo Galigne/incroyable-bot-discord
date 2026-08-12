@@ -1,544 +1,543 @@
 {
-  "schemaVersion": 2,
+  "schemaVersion": 3,
   "id": "inventory",
-  "kind": "category",
   "visibility": "public",
   "name": "inventory",
   "description": "Items that may appear in a character inventory",
   "entrySchema": {
     "type": "fields",
-    "required": ["Name", "Description"]
+    "required": ["name", "description"]
   },
   "entries": [
     {
-      "id": "coil-of-rope",
+      "id": "coil_of_rope",
       "weight": 8,
       "fields": {
-        "Name": "Coil of rope",
-        "Description": "Ten meters of sturdy rope for climbing, binding, or securing loads."
+        "name": "Coil of rope",
+        "description": "Ten meters of sturdy rope for climbing, binding, or securing loads."
       }
     },
     {
-      "id": "lantern-and-oil",
+      "id": "lantern_and_oil",
       "weight": 8,
       "fields": {
-        "Name": "Lantern and oil",
-        "Description": "A hooded lantern with enough oil for several hours."
+        "name": "Lantern and oil",
+        "description": "A hooded lantern with enough oil for several hours."
       }
     },
     {
-      "id": "three-travel-rations",
+      "id": "three_travel_rations",
       "weight": 8,
       "fields": {
-        "Name": "Three travel rations",
-        "Description": "Compact food sufficient for three days."
+        "name": "Three travel rations",
+        "description": "Compact food sufficient for three days."
       }
     },
     {
       "id": "waterskin",
       "weight": 7,
       "fields": {
-        "Name": "Waterskin",
-        "Description": "A filled leather waterskin."
+        "name": "Waterskin",
+        "description": "A filled leather waterskin."
       }
     },
     {
       "id": "bedroll",
       "weight": 7,
       "fields": {
-        "Name": "Bedroll",
-        "Description": "A weather-resistant blanket and sleeping roll."
+        "name": "Bedroll",
+        "description": "A weather-resistant blanket and sleeping roll."
       }
     },
     {
       "id": "tinderbox",
       "weight": 7,
       "fields": {
-        "Name": "Tinderbox",
-        "Description": "Flint, steel, and dry tinder for starting fires."
+        "name": "Tinderbox",
+        "description": "Flint, steel, and dry tinder for starting fires."
       }
     },
     {
-      "id": "lockpicking-kit",
+      "id": "lockpicking_kit",
       "weight": 6,
       "fields": {
-        "Name": "Lockpicking kit",
-        "Description": "Small tools for manipulating ordinary mechanical locks."
+        "name": "Lockpicking kit",
+        "description": "Small tools for manipulating ordinary mechanical locks."
       }
     },
     {
-      "id": "climbing-kit",
+      "id": "climbing_kit",
       "weight": 6,
       "fields": {
-        "Name": "Climbing kit",
-        "Description": "Pitons, a hammer, straps, and simple climbing aids."
+        "name": "Climbing kit",
+        "description": "Pitons, a hammer, straps, and simple climbing aids."
       }
     },
     {
       "id": "bandages",
       "weight": 6,
       "fields": {
-        "Name": "Bandages",
-        "Description": "Clean cloth and basic supplies for treating wounds."
+        "name": "Bandages",
+        "description": "Clean cloth and basic supplies for treating wounds."
       }
     },
     {
-      "id": "chalk-and-charcoal",
+      "id": "chalk_and_charcoal",
       "weight": 6,
       "fields": {
-        "Name": "Chalk and charcoal",
-        "Description": "Useful for marking paths, sketching maps, and making notes."
+        "name": "Chalk and charcoal",
+        "description": "Useful for marking paths, sketching maps, and making notes."
       }
     },
     {
-      "id": "small-mirror",
+      "id": "small_mirror",
       "weight": 6,
       "fields": {
-        "Name": "Small mirror",
-        "Description": "A polished hand mirror useful for signals and checking corners."
+        "name": "Small mirror",
+        "description": "A polished hand mirror useful for signals and checking corners."
       }
     },
     {
       "id": "crowbar",
       "weight": 5,
       "fields": {
-        "Name": "Crowbar",
-        "Description": "A sturdy iron lever for doors, crates, and obstacles."
+        "name": "Crowbar",
+        "description": "A sturdy iron lever for doors, crates, and obstacles."
       }
     },
     {
-      "id": "grappling-hook",
+      "id": "grappling_hook",
       "weight": 5,
       "fields": {
-        "Name": "Grappling hook",
-        "Description": "A four-pronged hook designed for use with rope."
+        "name": "Grappling hook",
+        "description": "A four-pronged hook designed for use with rope."
       }
     },
     {
-      "id": "fishing-kit",
+      "id": "fishing_kit",
       "weight": 5,
       "fields": {
-        "Name": "Fishing kit",
-        "Description": "Line, hooks, floats, and a compact net."
+        "name": "Fishing kit",
+        "description": "Line, hooks, floats, and a compact net."
       }
     },
     {
-      "id": "writing-kit",
+      "id": "writing_kit",
       "weight": 5,
       "fields": {
-        "Name": "Writing kit",
-        "Description": "Ink, quills, parchment, sealing wax, and a protective case."
+        "name": "Writing kit",
+        "description": "Ink, quills, parchment, sealing wax, and a protective case."
       }
     },
     {
-      "id": "herbalism-pouch",
+      "id": "herbalism_pouch",
       "weight": 5,
       "fields": {
-        "Name": "Herbalism pouch",
-        "Description": "Small tools and containers for gathering useful plants."
+        "name": "Herbalism pouch",
+        "description": "Small tools and containers for gathering useful plants."
       }
     },
     {
       "id": "shovel",
       "weight": 5,
       "fields": {
-        "Name": "Shovel",
-        "Description": "A compact but sturdy digging tool."
+        "name": "Shovel",
+        "description": "A compact but sturdy digging tool."
       }
     },
     {
       "id": "antidote",
       "weight": 4,
       "fields": {
-        "Name": "Antidote",
-        "Description": "A general treatment granting another chance to resist ordinary poison."
+        "name": "Antidote",
+        "description": "A general treatment granting another chance to resist ordinary poison."
       }
     },
     {
-      "id": "smoke-bomb",
+      "id": "smoke_bomb",
       "weight": 4,
       "fields": {
-        "Name": "Smoke bomb",
-        "Description": "Creates a dense cloud of smoke when ignited."
+        "name": "Smoke bomb",
+        "description": "Creates a dense cloud of smoke when ignited."
       }
     },
     {
-      "id": "bear-trap",
+      "id": "bear_trap",
       "weight": 4,
       "fields": {
-        "Name": "Bear trap",
-        "Description": "A heavy mechanical trap capable of restraining a creature."
+        "name": "Bear trap",
+        "description": "A heavy mechanical trap capable of restraining a creature."
       }
     },
     {
-      "id": "disguise-kit",
+      "id": "disguise_kit",
       "weight": 4,
       "fields": {
-        "Name": "Disguise kit",
-        "Description": "Cosmetics, dyes, false hair, and simple costume pieces."
+        "name": "Disguise kit",
+        "description": "Cosmetics, dyes, false hair, and simple costume pieces."
       }
     },
     {
-      "id": "merchants-scale",
+      "id": "merchants_scale",
       "weight": 4,
       "fields": {
-        "Name": "Merchant's scale",
-        "Description": "A folding balance and reference weights for checking trade goods."
+        "name": "Merchant's scale",
+        "description": "A folding balance and reference weights for checking trade goods."
       }
     },
     {
-      "id": "bag-of-caltrops",
+      "id": "bag_of_caltrops",
       "weight": 3,
       "fields": {
-        "Name": "Bag of caltrops",
-        "Description": "Sharp metal spikes used to slow pursuit or secure a passage."
+        "name": "Bag of caltrops",
+        "description": "Sharp metal spikes used to slow pursuit or secure a passage."
       }
     },
     {
-      "id": "vial-of-basic-poison",
+      "id": "vial_of_basic_poison",
       "weight": 3,
       "fields": {
-        "Name": "Vial of basic poison",
-        "Description": "A limited dose of toxin suitable for one weapon or drink."
+        "name": "Vial of basic poison",
+        "description": "A limited dose of toxin suitable for one weapon or drink."
       }
     },
     {
       "id": "spyglass",
       "weight": 3,
       "fields": {
-        "Name": "Spyglass",
-        "Description": "A compact optical tube for viewing distant details."
+        "name": "Spyglass",
+        "description": "A compact optical tube for viewing distant details."
       }
     },
     {
       "id": "tent",
       "weight": 3,
       "fields": {
-        "Name": "Tent",
-        "Description": "A small shelter suitable for one or two travelers."
+        "name": "Tent",
+        "description": "A small shelter suitable for one or two travelers."
       }
     },
     {
       "id": "manacles",
       "weight": 3,
       "fields": {
-        "Name": "Manacles",
-        "Description": "A pair of iron restraints with a simple key."
+        "name": "Manacles",
+        "description": "A pair of iron restraints with a simple key."
       }
     },
     {
-      "id": "holy-symbol",
+      "id": "holy_symbol",
       "weight": 3,
       "fields": {
-        "Name": "Holy symbol",
-        "Description": "A symbol tied to a faith, oath, ancestor, or personal ideal."
+        "name": "Holy symbol",
+        "description": "A symbol tied to a faith, oath, ancestor, or personal ideal."
       }
     },
     {
-      "id": "local-map",
+      "id": "local_map",
       "weight": 3,
       "fields": {
-        "Name": "Local map",
-        "Description": "A practical but imperfect map of the surrounding region."
+        "name": "Local map",
+        "description": "A practical but imperfect map of the surrounding region."
       }
     },
     {
-      "id": "potion-of-night-vision",
+      "id": "potion_of_night_vision",
       "weight": 2,
       "fields": {
-        "Name": "Potion of night vision",
-        "Description": "Grants clear sight in darkness for one hour."
+        "name": "Potion of night vision",
+        "description": "Grants clear sight in darkness for one hour."
       }
     },
     {
-      "id": "potion-of-water-breathing",
+      "id": "potion_of_water_breathing",
       "weight": 2,
       "fields": {
-        "Name": "Potion of water breathing",
-        "Description": "Allows underwater breathing for thirty minutes."
+        "name": "Potion of water breathing",
+        "description": "Allows underwater breathing for thirty minutes."
       }
     },
     {
-      "id": "acid-flask",
+      "id": "acid_flask",
       "weight": 2,
       "fields": {
-        "Name": "Acid flask",
-        "Description": "A carefully sealed vial able to damage common materials."
+        "name": "Acid flask",
+        "description": "A carefully sealed vial able to damage common materials."
       }
     },
     {
-      "id": "silvered-chain",
+      "id": "silvered_chain",
       "weight": 2,
       "fields": {
-        "Name": "Silvered chain",
-        "Description": "A short chain useful against creatures vulnerable to silver."
+        "name": "Silvered chain",
+        "description": "A short chain useful against creatures vulnerable to silver."
       }
     },
     {
-      "id": "runic-chalk",
+      "id": "runic_chalk",
       "weight": 2,
       "fields": {
-        "Name": "Runic chalk",
-        "Description": "Rare chalk that makes magical inscriptions easier to see and study."
+        "name": "Runic chalk",
+        "description": "Rare chalk that makes magical inscriptions easier to see and study."
       }
     },
     {
-      "id": "whispering-compass",
+      "id": "whispering_compass",
       "fields": {
-        "Name": "Whispering compass",
-        "Description": "A strange compass that quietly complains whenever it points north."
+        "name": "Whispering compass",
+        "description": "A strange compass that quietly complains whenever it points north."
       }
     },
     {
-      "id": "everlasting-candle",
+      "id": "everlasting_candle",
       "fields": {
-        "Name": "Everlasting candle",
-        "Description": "A candle whose small flame never consumes its wax."
+        "name": "Everlasting candle",
+        "description": "A candle whose small flame never consumes its wax."
       }
     },
     {
-      "id": "unidentified-rune-fragment",
+      "id": "unidentified_rune_fragment",
       "fields": {
-        "Name": "Unidentified rune fragment",
-        "Description": "A piece of magical material containing part of an unknown inscription."
+        "name": "Unidentified rune fragment",
+        "description": "A piece of magical material containing part of an unknown inscription."
       }
     },
     {
-      "id": "mysterious-sealed-letter",
+      "id": "mysterious_sealed_letter",
       "fields": {
-        "Name": "Mysterious sealed letter",
-        "Description": "A letter addressed to someone the character has never met."
+        "name": "Mysterious sealed letter",
+        "description": "A letter addressed to someone the character has never met."
       }
     },
     {
-      "id": "coin-purse",
+      "id": "coin_purse",
       "fields": {
-        "Name": "Coin Purse",
-        "Description": "Local currency mixing common small coins with harder-to-spend foreign money."
+        "name": "Coin Purse",
+        "description": "Local currency mixing common small coins with harder-to-spend foreign money."
       }
     },
     {
-      "id": "healing-potion",
+      "id": "healing_potion",
       "fields": {
-        "Name": "Healing Potion",
-        "Description": "A stabilized vial that aids recovery from an injury when used correctly."
+        "name": "Healing Potion",
+        "description": "A stabilized vial that aids recovery from an injury when used correctly."
       }
     },
     {
-      "id": "vigor-potion",
+      "id": "vigor_potion",
       "fields": {
-        "Name": "Vigor Potion",
-        "Description": "A drink briefly improving physical ability before causing severe fatigue."
+        "name": "Vigor Potion",
+        "description": "A drink briefly improving physical ability before causing severe fatigue."
       }
     },
     {
-      "id": "rule-scroll",
+      "id": "rule_scroll",
       "fields": {
-        "Name": "RULE Scroll",
-        "Description": "A single-use medium that triggers one specific RULE without learning it."
+        "name": "RULE Scroll",
+        "description": "A single-use medium that triggers one specific RULE without learning it."
       }
     },
     {
-      "id": "rule-book",
+      "id": "rule_book",
       "fields": {
-        "Name": "RULE Book",
-        "Description": "A rare treatise explaining a RULE, its uses, and the risks of misinterpretation."
+        "name": "RULE Book",
+        "description": "A rare treatise explaining a RULE, its uses, and the risks of misinterpretation."
       }
     },
     {
-      "id": "excavation-tools",
+      "id": "excavation_tools",
       "fields": {
-        "Name": "Excavation Tools",
-        "Description": "A hook, small pick, and folding shovel for searching or crossing difficult ground."
+        "name": "Excavation Tools",
+        "description": "A hook, small pick, and folding shovel for searching or crossing difficult ground."
       }
     },
     {
-      "id": "unknown-key",
+      "id": "unknown_key",
       "fields": {
-        "Name": "Unknown Key",
-        "Description": "A key with no known lock, marked by a symbol tied to an organization or building."
+        "name": "Unknown Key",
+        "description": "A key with no known lock, marked by a symbol tied to an organization or building."
       }
     },
     {
-      "id": "coded-notes",
+      "id": "coded_notes",
       "fields": {
-        "Name": "Coded Notes",
-        "Description": "Pages whose meaning depends on a code, missing context, or absent person."
+        "name": "Coded Notes",
+        "description": "Pages whose meaning depends on a code, missing context, or absent person."
       }
     },
     {
-      "id": "specialized-ammunition",
+      "id": "specialized_ammunition",
       "fields": {
-        "Name": "Specialized Ammunition",
-        "Description": "A small batch of projectiles made for a particular weapon or unusual target."
+        "name": "Specialized Ammunition",
+        "description": "A small batch of projectiles made for a particular weapon or unusual target."
       }
     },
     {
-      "id": "precious-jewel",
+      "id": "precious_jewel",
       "fields": {
-        "Name": "Precious Jewel",
-        "Description": "An identifiable piece of jewelry, portable but risky to resell."
+        "name": "Precious Jewel",
+        "description": "An identifiable piece of jewelry, portable but risky to resell."
       }
     },
     {
-      "id": "elemental-essence",
+      "id": "elemental_essence",
       "fields": {
-        "Name": "Elemental Essence",
-        "Description": "An unstable substance retaining properties of a natural or magical element."
+        "name": "Elemental Essence",
+        "description": "An unstable substance retaining properties of a natural or magical element."
       }
     },
     {
-      "id": "treasure-map",
+      "id": "treasure_map",
       "fields": {
-        "Name": "Treasure Map",
-        "Description": "An incomplete route with old landmarks, warnings, and an ambiguous destination."
+        "name": "Treasure Map",
+        "description": "An incomplete route with old landmarks, warnings, and an ambiguous destination."
       }
     },
     {
-      "id": "quality-paper",
+      "id": "quality_paper",
       "fields": {
-        "Name": "Quality Paper",
-        "Description": "Blank sheets and parchment suited to contracts, maps, spells, or forged documents."
+        "name": "Quality Paper",
+        "description": "Blank sheets and parchment suited to contracts, maps, spells, or forged documents."
       }
     },
     {
-      "id": "ceremonial-doll",
+      "id": "ceremonial_doll",
       "fields": {
-        "Name": "Ceremonial Doll",
-        "Description": "A cloth figure bearing an erased name and traces of an old ritual."
+        "name": "Ceremonial Doll",
+        "description": "A cloth figure bearing an erased name and traces of an old ritual."
       }
     },
     {
-      "id": "locked-grimoire",
+      "id": "locked_grimoire",
       "fields": {
-        "Name": "Locked Grimoire",
-        "Description": "A book protected by a lock or riddle whose contents cannot be read directly."
+        "name": "Locked Grimoire",
+        "description": "A book protected by a lock or riddle whose contents cannot be read directly."
       }
     },
     {
-      "id": "old-toy",
+      "id": "old_toy",
       "fields": {
-        "Name": "Old Toy",
-        "Description": "A toy or stuffed bear recognizable to a family, collector, or spirit."
+        "name": "Old Toy",
+        "description": "A toy or stuffed bear recognizable to a family, collector, or spirit."
       }
     },
     {
-      "id": "creature-fragment",
+      "id": "creature_fragment",
       "fields": {
-        "Name": "Creature Fragment",
-        "Description": "A preserved scale, hide, horn, or tooth kept as trophy, proof, or component."
+        "name": "Creature Fragment",
+        "description": "A preserved scale, hide, horn, or tooth kept as trophy, proof, or component."
       }
     },
     {
-      "id": "rare-medicine",
+      "id": "rare_medicine",
       "fields": {
-        "Name": "Rare Medicine",
-        "Description": "A fragile, hard-to-replace treatment for one specific illness."
+        "name": "Rare Medicine",
+        "description": "A fragile, hard-to-replace treatment for one specific illness."
       }
     },
     {
-      "id": "medicinal-plant",
+      "id": "medicinal_plant",
       "fields": {
-        "Name": "Medicinal Plant",
-        "Description": "A fresh plant whose effectiveness depends on preparation and preservation."
+        "name": "Medicinal Plant",
+        "description": "A fresh plant whose effectiveness depends on preparation and preservation."
       }
     },
     {
-      "id": "alchemical-ingredient",
+      "id": "alchemical_ingredient",
       "fields": {
-        "Name": "Alchemical Ingredient",
-        "Description": "An unusual organic component such as a toad eye or venom gland."
+        "name": "Alchemical Ingredient",
+        "description": "An unusual organic component such as a toad eye or venom gland."
       }
     },
     {
-      "id": "work-of-art",
+      "id": "work_of_art",
       "fields": {
-        "Name": "Work of Art",
-        "Description": "A painting, sculpture, or decoration with recognizable cultural value."
+        "name": "Work of Art",
+        "description": "A painting, sculpture, or decoration with recognizable cultural value."
       }
     },
     {
-      "id": "ceremonial-clothing",
+      "id": "ceremonial_clothing",
       "fields": {
-        "Name": "Ceremonial Clothing",
-        "Description": "A robe, cloak, boots, or gloves associated with a rank or institution."
+        "name": "Ceremonial Clothing",
+        "description": "A robe, cloak, boots, or gloves associated with a rank or institution."
       }
     },
     {
-      "id": "unfinished-crown",
+      "id": "unfinished_crown",
       "fields": {
-        "Name": "Unfinished Crown",
-        "Description": "A symbol of authority missing a gem, inscription, or essential piece."
+        "name": "Unfinished Crown",
+        "description": "A symbol of authority missing a gem, inscription, or essential piece."
       }
     },
     {
-      "id": "musical-instrument",
+      "id": "musical_instrument",
       "fields": {
-        "Name": "Musical Instrument",
-        "Description": "A portable lute, drum, violin, or other worn but functional instrument."
+        "name": "Musical Instrument",
+        "description": "A portable lute, drum, violin, or other worn but functional instrument."
       }
     },
     {
-      "id": "ornate-comb",
+      "id": "ornate_comb",
       "fields": {
-        "Name": "Ornate Comb",
-        "Description": "A personal item decorated with a discreet crest or intimate inscription."
+        "name": "Ornate Comb",
+        "description": "A personal item decorated with a discreet crest or intimate inscription."
       }
     },
     {
-      "id": "incomplete-manuscript",
+      "id": "incomplete_manuscript",
       "fields": {
-        "Name": "Incomplete Manuscript",
-        "Description": "A historical or scientific text with pages deliberately removed."
+        "name": "Incomplete Manuscript",
+        "description": "A historical or scientific text with pages deliberately removed."
       }
     },
     {
-      "id": "sealed-vase",
+      "id": "sealed_vase",
       "fields": {
-        "Name": "Sealed Vase",
-        "Description": "A fragile container whose contents produce an unusual sound or warmth."
+        "name": "Sealed Vase",
+        "description": "A fragile container whose contents produce an unusual sound or warmth."
       }
     },
     {
-      "id": "exotic-fruit",
+      "id": "exotic_fruit",
       "fields": {
-        "Name": "Exotic Fruit",
-        "Description": "A rare fruit whose seed, flavor, or properties interest several buyers."
+        "name": "Exotic Fruit",
+        "description": "A rare fruit whose seed, flavor, or properties interest several buyers."
       }
     },
     {
-      "id": "collectible-figurine",
+      "id": "collectible_figurine",
       "fields": {
-        "Name": "Collectible Figurine",
-        "Description": "One piece of a sought-after series, trivial alone but valuable to the right person."
+        "name": "Collectible Figurine",
+        "description": "One piece of a sought-after series, trivial alone but valuable to the right person."
       }
     },
     {
-      "id": "enchanted-toothbrush",
+      "id": "enchanted_toothbrush",
       "fields": {
-        "Name": "Enchanted Toothbrush",
-        "Description": "An absurdly specific tool that cleans teeth perfectly and bites other dirt."
+        "name": "Enchanted Toothbrush",
+        "description": "An absurdly specific tool that cleans teeth perfectly and bites other dirt."
       }
     },
     {
-      "id": "unidentified-egg",
+      "id": "unidentified_egg",
       "fields": {
-        "Name": "Unidentified Egg",
-        "Description": "A living egg whose species, needs, and danger remain unknown."
+        "name": "Unidentified Egg",
+        "description": "A living egg whose species, needs, and danger remain unknown."
       }
     },
     {
-      "id": "attuned-stone",
+      "id": "attuned_stone",
       "fields": {
-        "Name": "Attuned Stone",
-        "Description": "A mineral or magical stone reacting to a place, person, or particular RULE."
+        "name": "Attuned Stone",
+        "description": "A mineral or magical stone reacting to a place, person, or particular RULE."
       }
     },
     {
-      "id": "travel-chicken",
+      "id": "travel_chicken",
       "fields": {
-        "Name": "Travel Chicken",
-        "Description": "An unusually calm chicken trained to follow its carrier and signal certain creatures."
+        "name": "Travel Chicken",
+        "description": "An unusually calm chicken trained to follow its carrier and signal certain creatures."
       }
     }
   ]

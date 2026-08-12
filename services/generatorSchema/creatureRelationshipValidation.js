@@ -4,6 +4,7 @@ const {
 	CREATURE_GENERATOR_BY_ARCHETYPE,
 	CREATURE_ROUTER_ID,
 } = require('./constants');
+const { parseInlineReference } = require('./referenceValidation');
 
 function validateCreatureGenerationRelationships(
 	generator,
@@ -18,8 +19,8 @@ function validateCreatureGenerationRelationships(
 		generation.fixedRules?.some(rule => (
 			!rules
 			|| rules.entrySchema.type !== 'fields'
-			|| !rules.entrySchema.required.includes('Name')
-			|| !rules.entrySchema.required.includes('Description')
+			|| !rules.entrySchema.required.includes('name')
+			|| !rules.entrySchema.required.includes('description')
 			|| !rules.entries.some(candidate => candidate.id === rule.entry)
 		))
 	) {
@@ -30,13 +31,13 @@ function validateCreatureGenerationRelationships(
 	}
 	for (const reference of generation.statusEffects ?? []) {
 		const sources = validateReferenceRelationship(reference, catalog, ownerId);
-		assertReferenceFields(sources, ['Name', 'Description'], ownerId, 'status effect');
+		assertReferenceFields(sources, ['name', 'description'], ownerId, 'status effect');
 	}
 	if (generation.armor) {
 		const sources = validateReferenceRelationship(generation.armor, catalog, ownerId);
 		assertReferenceFields(
 			sources,
-			['Name', 'Description', 'AR percentage'],
+			['name', 'description', 'ar_percentage'],
 			ownerId,
 			'armor',
 		);
@@ -67,7 +68,7 @@ function assertGearReferenceResult(sources, selector, ownerId) {
 		return;
 	}
 	if (selector === 'fields') {
-		assertReferenceFields(sources, ['Name', 'Description'], ownerId, 'gear');
+		assertReferenceFields(sources, ['name', 'description'], ownerId, 'gear');
 		return;
 	}
 	const field = selector.slice('fields.'.length);
@@ -109,7 +110,14 @@ function validateCreatureStatProfileRelationships(catalogs, profiles) {
 		for (const archetypeId of CREATURE_ARCHETYPE_IDS) {
 			const generatorId = CREATURE_GENERATOR_BY_ARCHETYPE[archetypeId];
 			const route = router.entries.find(entry => entry.id === archetypeId);
-			if (route?.fields?.Generator !== generatorId) {
+			const routeExpression = route?.fields?.generator;
+			const routeReference = typeof routeExpression === 'string'
+				? parseInlineReference(
+					routeExpression.replace(/^\s*\{\{([^{}]+)\}\}\s*$/, '$1'),
+					`${locale} creature route`,
+				)
+				: null;
+			if (routeReference?.generator !== generatorId) {
 				throw generatorSchemaError(
 					'CREATURE_ROUTE_INVALID',
 					`Creature generation has an invalid ${locale} ${archetypeId} route.`,

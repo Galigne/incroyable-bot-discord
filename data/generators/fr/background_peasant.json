@@ -1,0 +1,93 @@
+{
+  "schemaVersion": 3,
+  "id": "background_peasant",
+  "visibility": "internal",
+  "name": "Détails du background de paysan",
+  "description": "Apparences, histoires et objectifs pour les PNJ paysans",
+  "entrySchema": {
+    "type": "fields",
+    "required": ["appearance", "backstory", "goals"]
+  },
+  "entries": [
+    {
+      "id": "sun_browned_strong_handed_and_dressed_in_patched_clothes",
+      "fields": {
+        "appearance": "Peau brunie par le soleil, mains robustes et vêtements rapiécés imprégnés de l’odeur de la terre.",
+        "backstory": "Cultive les mêmes terres louées depuis l’enfance et voit le fermage augmenter après chaque bonne récolte.",
+        "goals": "Devenir propriétaire de la ferme, protéger les siens et unir le voisinage contre les contrats abusifs."
+      }
+    },
+    {
+      "id": "lean_and_weathered_wrapped_in_wool_with_a",
+      "fields": {
+        "appearance": "Mince et buriné, enveloppé de laine et muni d’une houlette polie par l’usage.",
+        "backstory": "A conduit des troupeaux pendant des années à travers des montagnes reculées et connaît des sentiers absents de toutes les cartes.",
+        "goals": "Récupérer le bétail volé et préserver les droits de pâturage ancestraux."
+      }
+    },
+    {
+      "id": "broad_backed_with_grain_dust_in_their_hair_and",
+      "fields": {
+        "appearance": "Dos large, cheveux poudrés de farine et expression constamment méfiante.",
+        "backstory": "Un ouvrier du moulin a découvert que quelqu’un coupait les réserves de farine d’urgence du village.",
+        "goals": "Dénoncer le vol sans provoquer de panique et préserver les provisions pour l’hiver."
+      }
+    },
+    {
+      "id": "young_mud_spattered_and_quick_moving_with_practical_clothes_and",
+      "fields": {
+        "appearance": "Jeune, couvert de boue et toujours en mouvement, avec des vêtements pratiques et plusieurs outils de sa fabrication.",
+        "backstory": "Un ouvrier agricole a appris seul à réparer les machines lorsque le domaine a cessé de payer les artisans.",
+        "goals": "Faire reconnaître ses compétences d’ingénieur et libérer le village de sa dépendance envers le domaine."
+      }
+    },
+    {
+      "id": "older_deeply_lined_and_steady_eyed_wearing_a_faded",
+      "fields": {
+        "appearance": "Âgé, le visage profondément marqué et le regard ferme, portant en guise de porte-bonheur un ruban de fête délavé.",
+        "backstory": "A survécu à la famine, à la guerre et à trois propriétaires successifs, tout en devenant discrètement le médiateur respecté du hameau.",
+        "goals": "Empêcher la jeune génération de raviver les anciennes querelles et obtenir la propriété collective du puits."
+      }
+    },
+    {
+      "id": "legacy_profession_farmer",
+      "fields": {
+        "appearance": "Sa tenue et ses outils évoquent immédiatement le métier suivant : paysan.",
+        "backstory": "A construit sa vie comme paysan et connaît les obligations ainsi que les pressions cachées de cette activité.",
+        "goals": "Mettre cette expérience à profit pour obtenir un avenir plus sûr et plus autonome."
+      }
+    },
+    {
+      "id": "legacy_profession_lumberjack",
+      "fields": {
+        "appearance": "Sa tenue et ses outils évoquent immédiatement le métier suivant : bûcheron.",
+        "backstory": "A construit sa vie comme bûcheron et connaît les obligations ainsi que les pressions cachées de cette activité.",
+        "goals": "Mettre cette expérience à profit pour obtenir un avenir plus sûr et plus autonome."
+      }
+    },
+    {
+      "id": "legacy_profession_miner",
+      "fields": {
+        "appearance": "Sa tenue et ses outils évoquent immédiatement le métier suivant : mineur.",
+        "backstory": "A construit sa vie comme mineur et connaît les obligations ainsi que les pressions cachées de cette activité.",
+        "goals": "Mettre cette expérience à profit pour obtenir un avenir plus sûr et plus autonome."
+      }
+    },
+    {
+      "id": "legacy_profession_shepherd",
+      "fields": {
+        "appearance": "Sa tenue et ses outils évoquent immédiatement le métier suivant : berger.",
+        "backstory": "A construit sa vie comme berger et connaît les obligations ainsi que les pressions cachées de cette activité.",
+        "goals": "Mettre cette expérience à profit pour obtenir un avenir plus sûr et plus autonome."
+      }
+    },
+    {
+      "id": "decomposed_prophetic_shepherd",
+      "fields": {
+        "appearance": "Un berger voyage avec des moutons qui semblent prédire la météo, le danger et la politique.",
+        "backstory": "un berger dont les moutons prédisent la météo, les dangers et, à l'occasion, les assassinats politiques.",
+        "goals": "Transformer ce parcours singulier en un avenir choisi."
+      }
+    }
+  ]
+}

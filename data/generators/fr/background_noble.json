@@ -1,0 +1,93 @@
+{
+  "schemaVersion": 3,
+  "id": "background_noble",
+  "visibility": "internal",
+  "name": "Détails du background de noble",
+  "description": "Apparences, histoires et objectifs pour les PNJ nobles",
+  "entrySchema": {
+    "type": "fields",
+    "required": ["appearance", "backstory", "goals"]
+  },
+  "entries": [
+    {
+      "id": "impeccably_dressed_with_a_family_signet_and_the",
+      "fields": {
+        "appearance": "Tenue irréprochable, chevalière familiale et maintien impassible acquis sous le regard constant des autres.",
+        "backstory": "Élevé comme héritier de réserve, a reçu le titre contre toute attente après une succession de drames familiaux.",
+        "goals": "Stabiliser le domaine, découvrir la cause de ces drames et se montrer digne d’un titre jamais désiré."
+      }
+    },
+    {
+      "id": "fashionable_but_understated_with_sharp_eyes_and_a",
+      "fields": {
+        "appearance": "À la mode sans ostentation, avec un regard perçant et un sourire travaillé pour la cour.",
+        "backstory": "Un courtisan de rang modeste a survécu en transmettant des messages entre rivaux sans jamais choisir ouvertement son camp.",
+        "goals": "Obtenir une charge indépendante et empêcher la cour de dévorer les rares personnes auxquelles il accorde sa confiance."
+      }
+    },
+    {
+      "id": "young_carefully_groomed_and_visibly_uncomfortable_in_ceremonial",
+      "fields": {
+        "appearance": "Jeune, parfaitement apprêté et manifestement mal à l’aise dans ses vêtements de cérémonie.",
+        "backstory": "Un héritier idéaliste, éduqué à l’étranger, est revenu découvrir que sa famille tirait profit de mauvais traitements.",
+        "goals": "Réformer le domaine sans provoquer un coup d’État de la part de ses proches ou de ses serviteurs."
+      }
+    },
+    {
+      "id": "weathered_for_an_aristocrat_wearing_quality_riding_clothes",
+      "fields": {
+        "appearance": "Plus buriné qu’on ne l’attendrait d’un aristocrate, vêtu d’une tenue d’équitation de qualité et marqué par une ancienne cicatrice de duel.",
+        "backstory": "Un petit seigneur a défendu pendant des années un domaine frontalier isolé que la couronne avait abandonné.",
+        "goals": "Obtenir la protection de ses gens et forcer la capitale à reconnaître l’importance de la frontière."
+      }
+    },
+    {
+      "id": "elegant_silver_haired_and_supported_by_a_cane_concealing",
+      "fields": {
+        "appearance": "Élégante, les cheveux argentés, s’appuyant sur une canne qui dissimule une lame étroite.",
+        "backstory": "Une aristocrate veuve a rebâti son influence à force de mariages, de services rendus et d’une mémoire irréprochable.",
+        "goals": "Organiser une succession pacifique et régler une dette dangereuse avant que l’âge ne lui en retire l’occasion."
+      }
+    },
+    {
+      "id": "legacy_profession_sovereign",
+      "fields": {
+        "appearance": "Sa tenue et ses outils évoquent immédiatement le métier suivant : souverain.",
+        "backstory": "A construit sa vie comme souverain et connaît les obligations ainsi que les pressions cachées de cette activité.",
+        "goals": "Mettre cette expérience à profit pour obtenir un avenir plus sûr et plus autonome."
+      }
+    },
+    {
+      "id": "legacy_profession_prince",
+      "fields": {
+        "appearance": "Sa tenue et ses outils évoquent immédiatement le métier suivant : prince.",
+        "backstory": "A construit sa vie comme prince et connaît les obligations ainsi que les pressions cachées de cette activité.",
+        "goals": "Mettre cette expérience à profit pour obtenir un avenir plus sûr et plus autonome."
+      }
+    },
+    {
+      "id": "legacy_profession_noble",
+      "fields": {
+        "appearance": "Sa tenue et ses outils évoquent immédiatement le métier suivant : noble.",
+        "backstory": "A construit sa vie comme noble et connaît les obligations ainsi que les pressions cachées de cette activité.",
+        "goals": "Mettre cette expérience à profit pour obtenir un avenir plus sûr et plus autonome."
+      }
+    },
+    {
+      "id": "decomposed_rebellion_balancing_noble",
+      "fields": {
+        "appearance": "Un noble d’une politesse irréprochable conserve des registres comparant le coût civil des deux camps d’une rébellion.",
+        "backstory": "une noble d'une politesse irréprochable qui finance les deux camps d'une rébellion afin de limiter les pertes civiles.",
+        "goals": "Transformer ce parcours singulier en un avenir choisi."
+      }
+    },
+    {
+      "id": "decomposed_rat_king_spymaster",
+      "fields": {
+        "appearance": "Une petite couronne, des messages codés et des cartes souterraines évoquent la cour d’un monarque des rats.",
+        "backstory": "un rat autoproclamé monarque, à la tête d'un excellent réseau d'espions sous la capitale.",
+        "goals": "Transformer ce parcours singulier en un avenir choisi."
+      }
+    }
+  ]
+}

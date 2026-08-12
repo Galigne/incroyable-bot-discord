@@ -1,0 +1,261 @@
+{
+  "schemaVersion": 3,
+  "id": "status_effect",
+  "visibility": "public",
+  "name": "effet de statut",
+  "description": "États descriptifs pouvant affecter un personnage ou une créature",
+  "entrySchema": {
+    "type": "fields",
+    "required": ["name", "description"]
+  },
+  "entries": [
+    {
+      "id": "bruised",
+      "weight": 3,
+      "fields": {
+        "name": "Contusionné",
+        "description": "la douleur légère impose un malus de -1 à la prochaine action physique exigeante."
+      }
+    },
+    {
+      "id": "fatigued",
+      "weight": 3,
+      "fields": {
+        "name": "Fatigué",
+        "description": "les efforts prolongés et les voyages restent plus difficiles jusqu’au prochain repos."
+      }
+    },
+    {
+      "id": "shaken",
+      "weight": 3,
+      "fields": {
+        "name": "Ébranlé",
+        "description": "subit un malus de -1 contre le prochain effet de peur ou d’intimidation."
+      }
+    },
+    {
+      "id": "bleeding",
+      "weight": 2,
+      "fields": {
+        "name": "Saignement",
+        "description": "perd une petite quantité de PV après chaque effort intense jusqu’à recevoir des soins."
+      }
+    },
+    {
+      "id": "burning",
+      "weight": 2,
+      "fields": {
+        "name": "En feu",
+        "description": "subit régulièrement des dégâts de feu jusqu’à l’extinction des flammes."
+      }
+    },
+    {
+      "id": "chilled",
+      "weight": 2,
+      "fields": {
+        "name": "Transi",
+        "description": "les déplacements et les actions fondées sur la Vitesse sont réduits jusqu’à ce que le personnage soit réchauffé."
+      }
+    },
+    {
+      "id": "dazed",
+      "weight": 2,
+      "fields": {
+        "name": "Étourdi",
+        "description": "les réactions demandent un effort supplémentaire pendant le prochain tour."
+      }
+    },
+    {
+      "id": "blinded",
+      "weight": 2,
+      "fields": {
+        "name": "Aveuglé",
+        "description": "les actions qui dépendent de la vue échouent ou subissent un lourd malus."
+      }
+    },
+    {
+      "id": "deafened",
+      "weight": 2,
+      "fields": {
+        "name": "Assourdi",
+        "description": "n’entend plus clairement les paroles, les avertissements ni les effets sonores."
+      }
+    },
+    {
+      "id": "poisoned",
+      "weight": 2,
+      "fields": {
+        "name": "Empoisonné",
+        "description": "doit réussir des résistances fondées sur la Constitution à mesure que le poison progresse."
+      }
+    },
+    {
+      "id": "slowed",
+      "weight": 2,
+      "fields": {
+        "name": "Ralenti",
+        "description": "la DD est réduite jusqu’à la fin de l’effet."
+      }
+    },
+    {
+      "id": "weakened",
+      "weight": 2,
+      "fields": {
+        "name": "Affaibli",
+        "description": "les actions fondées sur la Force subissent un malus."
+      }
+    },
+    {
+      "id": "confused",
+      "weight": 2,
+      "fields": {
+        "name": "Confus",
+        "description": "distingue difficilement alliés, ennemis et directions."
+      }
+    },
+    {
+      "id": "frightened",
+      "weight": 2,
+      "fields": {
+        "name": "Effrayé",
+        "description": "ne peut pas s’approcher volontairement de la source de sa peur sans réussir un jet."
+      }
+    },
+    {
+      "id": "stunned",
+      "fields": {
+        "name": "Incapacité",
+        "description": "perd temporairement la possibilité d’effectuer des actions normales."
+      }
+    },
+    {
+      "id": "paralyzed",
+      "fields": {
+        "name": "Paralysé",
+        "description": "ne peut effectuer aucun mouvement volontaire jusqu’à ce que l’état soit dissipé."
+      }
+    },
+    {
+      "id": "silenced",
+      "fields": {
+        "name": "Réduit au silence",
+        "description": "ne peut ni parler ni utiliser de capacités qui dépendent de la voix."
+      }
+    },
+    {
+      "id": "cursed",
+      "fields": {
+        "name": "Maudit",
+        "description": "subit une pénalité surnaturelle jusqu’à ce que sa condition précise de levée soit remplie."
+      }
+    },
+    {
+      "id": "petrifying",
+      "fields": {
+        "name": "Pétrification",
+        "description": "le corps se transforme lentement en pierre et nécessite une intervention urgente."
+      }
+    },
+    {
+      "id": "possessed",
+      "fields": {
+        "name": "Possédé",
+        "description": "une volonté étrangère tente par moments de prendre le contrôle du personnage."
+      }
+    },
+    {
+      "id": "marked",
+      "fields": {
+        "name": "Marqué",
+        "description": "un signe magique permet à une créature ou à un effet hostile de suivre le personnage."
+      }
+    },
+    {
+      "id": "invisible",
+      "fields": {
+        "name": "Invisible",
+        "description": "ne peut pas être vu normalement, mais produit toujours des sons et laisse des traces."
+      }
+    },
+    {
+      "id": "regenerating",
+      "fields": {
+        "name": "Régénération",
+        "description": "récupère une petite quantité de PV à la fin de chaque tour."
+      }
+    },
+    {
+      "id": "inspired",
+      "fields": {
+        "name": "Inspiré",
+        "description": "peut relancer un dé de son choix, après quoi cet état prend fin."
+      }
+    },
+    {
+      "id": "restless",
+      "weight": 3,
+      "fields": {
+        "name": "Agitée",
+        "description": "Elle ne reste jamais parfaitement immobile et surveille constamment les alentours."
+      }
+    },
+    {
+      "id": "smoldering",
+      "weight": 2,
+      "fields": {
+        "name": "Incandescente",
+        "description": "Une fumée légère et de faibles braises s’échappent de son corps sans imposer d’effet mécanique."
+      }
+    },
+    {
+      "id": "frost_rimed",
+      "weight": 2,
+      "fields": {
+        "name": "Couverte de givre",
+        "description": "Une couche de givre persistante recouvre une partie de son corps et les surfaces proches."
+      }
+    },
+    {
+      "id": "shadowed",
+      "fields": {
+        "name": "Voilée d’ombre",
+        "description": "Sa silhouette reste difficile à distinguer des ombres qui l’entourent."
+      }
+    },
+    {
+      "id": "distracted",
+      "fields": {
+        "name": "Distrait",
+        "description": "Le personnage perd le fil de son environnement et subit un"
+      }
+    },
+    {
+      "id": "drunk",
+      "fields": {
+        "name": "Ivre",
+        "description": "La coordination et le jugement sont altérés jusqu’à ce que le"
+      }
+    },
+    {
+      "id": "intoxicated",
+      "fields": {
+        "name": "Intoxiqué",
+        "description": "Une substance inconnue modifie les perceptions ou réactions du"
+      }
+    },
+    {
+      "id": "feverish",
+      "fields": {
+        "name": "Fiévreux",
+        "description": "La maladie épuise le personnage et rend les efforts prolongés plus"
+      }
+    },
+    {
+      "id": "meditative",
+      "fields": {
+        "name": "Méditatif",
+        "description": "Le personnage est profondément concentré ; l’interrompre annule"
+      }
+    }
+  ]
+}

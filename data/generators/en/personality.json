@@ -1,7 +1,6 @@
 {
-  "schemaVersion": 2,
+  "schemaVersion": 3,
   "id": "personality",
-  "kind": "category",
   "visibility": "public",
   "name": "personality",
   "description": "Traits, ideals, quirks, bonds, and flaws",
@@ -10,149 +9,149 @@
   },
   "entries": [
     {
-      "id": "cheerfully-fatalistic-treats-every-disaster-as-confirmation-of",
+      "id": "cheerfully_fatalistic_treats_every_disaster_as_confirmation_of",
       "weight": 2,
       "value": "Cheerfully fatalistic; treats every disaster as confirmation of a prediction nobody remembers hearing."
     },
     {
-      "id": "painfully-honest-but-highly-skilled-at-changing-the",
+      "id": "painfully_honest_but_highly_skilled_at_changing_the",
       "weight": 2,
       "value": "Painfully honest but highly skilled at changing the subject before revealing anything personal."
     },
     {
-      "id": "suspicious-of-all-magic-except-one-obviously-fraudulent",
+      "id": "suspicious_of_all_magic_except_one_obviously_fraudulent",
       "weight": 2,
       "value": "Suspicious of all magic except one obviously fraudulent superstition followed with complete devotion."
     },
     {
-      "id": "grandly-theatrical-in-public-quiet-and-observant-in",
+      "id": "grandly_theatrical_in_public_quiet_and_observant_in",
       "weight": 2,
       "value": "Grandly theatrical in public, quiet and observant in private, and terrified of being considered ordinary."
     },
     {
-      "id": "collects-favors-instead-of-money-and-remembers-every",
+      "id": "collects_favors_instead_of_money_and_remembers_every",
       "weight": 2,
       "value": "Collects favors instead of money and remembers every promise with unsettling precision."
     },
     {
-      "id": "protective-of-underdogs-openly-rude-to-authority-and",
+      "id": "protective_of_underdogs_openly_rude_to_authority_and",
       "weight": 3,
       "value": "Protective of underdogs, openly rude to authority, and unable to resist proving a bully wrong."
     },
     {
-      "id": "polite-to-enemies-and-brutally-critical-of-friends",
+      "id": "polite_to_enemies_and_brutally_critical_of_friends",
       "weight": 2,
       "value": "Polite to enemies and brutally critical of friends because respect is expressed through honesty."
     },
     {
-      "id": "believes-every-problem-has-a-practical-solution-even",
+      "id": "believes_every_problem_has_a_practical_solution_even",
       "value": "Believes every problem has a practical solution, even when facing ghosts, prophecy, or divine judgment."
     },
     {
-      "id": "compulsively-adopts-stray-animals-and-assigns-each-one",
+      "id": "compulsively_adopts_stray_animals_and_assigns_each_one",
       "value": "Compulsively adopts stray animals and assigns each one a military rank."
     },
     {
-      "id": "treats-coincidences-as-sacred-messages-and-constantly-rearranges",
+      "id": "treats_coincidences_as_sacred_messages_and_constantly_rearranges",
       "value": "Treats coincidences as sacred messages and constantly rearranges plans to follow them."
     },
     {
-      "id": "generous-with-possessions-but-jealous-of-attention-especially",
+      "id": "generous_with_possessions_but_jealous_of_attention_especially",
       "weight": 2,
       "value": "Generous with possessions but jealous of attention, especially when a rival tells a better story."
     },
     {
-      "id": "never-raises-their-voice-the-calmer-they-sound",
+      "id": "never_raises_their_voice_the_calmer_they_sound",
       "weight": 2,
       "value": "Never raises their voice; the calmer they sound, the angrier and more dangerous they are."
     },
     {
-      "id": "obsessed-with-etiquette-from-a-culture-they-only",
+      "id": "obsessed_with_etiquette_from_a_culture_they_only",
       "value": "Obsessed with etiquette from a culture they only understand through an inaccurate old book."
     },
     {
-      "id": "claims-to-fear-nothing-except-geese-and-refuses",
+      "id": "claims_to_fear_nothing_except_geese_and_refuses",
       "value": "Claims to fear nothing except geese, and refuses to explain the very specific reason."
     },
     {
-      "id": "loyal-to-any-agreements-exact-wording-while-exploiting",
+      "id": "loyal_to_any_agreements_exact_wording_while_exploiting",
       "weight": 2,
       "value": "Loyal to any agreement's exact wording while exploiting every loophole without guilt."
     },
     {
-      "id": "eager-to-forgive-personal-insults-but-incapable-of",
+      "id": "eager_to_forgive_personal_insults_but_incapable_of",
       "weight": 2,
       "value": "Eager to forgive personal insults but incapable of overlooking harm done to a stranger."
     },
     {
-      "id": "constantly-invents-impressive-former-careers-a-surprising-number",
+      "id": "constantly_invents_impressive_former_careers_a_surprising_number",
       "value": "Constantly invents impressive former careers; a surprising number later prove true."
     },
     {
-      "id": "treats-combat-like-a-puzzle-and-social-interaction",
+      "id": "treats_combat_like_a_puzzle_and_social_interaction",
       "weight": 2,
       "value": "Treats combat like a puzzle and social interaction like an unavoidable natural disaster."
     },
     {
-      "id": "wants-to-be-feared-but-automatically-comforts-anyone",
+      "id": "wants_to_be_feared_but_automatically_comforts_anyone",
       "weight": 2,
       "value": "Wants to be feared but automatically comforts anyone who looks upset."
     },
     {
-      "id": "keeps-meticulous-journals-yet-replaces-every-persons-name",
+      "id": "keeps_meticulous_journals_yet_replaces_every_persons_name",
       "weight": 2,
       "value": "Keeps meticulous journals yet replaces every person's name with an increasingly confusing nickname."
     },
     {
-      "id": "sees-wealth-as-a-burden-and-spends-it",
+      "id": "sees_wealth_as_a_burden_and_spends_it",
       "value": "Sees wealth as a burden and spends it recklessly on memorable experiences and ridiculous gifts."
     },
     {
-      "id": "deeply-religious-but-argues-with-their-deity-as",
+      "id": "deeply_religious_but_argues_with_their_deity_as",
       "weight": 2,
       "value": "Deeply religious but argues with their deity as if speaking to an irritating family member."
     },
     {
-      "id": "cannot-admit-ignorance-and-improvises-explanations-that-often",
+      "id": "cannot_admit_ignorance_and_improvises_explanations_that_often",
       "weight": 2,
       "value": "Cannot admit ignorance and improvises explanations that often become accidental local legends."
     },
     {
-      "id": "values-freedom-above-safety-but-becomes-controlling-whenever",
+      "id": "values_freedom_above_safety_but_becomes_controlling_whenever",
       "weight": 2,
       "value": "Values freedom above safety but becomes controlling whenever companions are genuinely endangered."
     },
     {
-      "id": "apologizes-to-every-defeated-enemy-and-becomes-offended",
+      "id": "apologizes_to_every_defeated_enemy_and_becomes_offended",
       "weight": 2,
       "value": "Apologizes to every defeated enemy and becomes offended if the apology is rejected."
     },
     {
-      "id": "speaks-in-proverbs-most-of-which-are-invented",
+      "id": "speaks_in_proverbs_most_of_which_are_invented",
       "value": "Speaks in proverbs, most of which are invented on the spot and only loosely relevant."
     },
     {
-      "id": "appears-cynical-and-mercenary-but-secretly-sends-most",
+      "id": "appears_cynical_and_mercenary_but_secretly_sends_most",
       "weight": 2,
       "value": "Appears cynical and mercenary but secretly sends most earnings to rebuild a ruined hometown."
     },
     {
-      "id": "always-assumes-the-best-of-monsters-and-the",
+      "id": "always_assumes_the_best_of_monsters_and_the",
       "weight": 2,
       "value": "Always assumes the best of monsters and the worst of institutions."
     },
     {
-      "id": "keeps-trophies-from-failures-rather-than-victories-and",
+      "id": "keeps_trophies_from_failures_rather_than_victories_and",
       "weight": 2,
       "value": "Keeps trophies from failures rather than victories and can recount every lesson attached to them."
     },
     {
-      "id": "desperate-to-leave-a-heroic-legacy-yet-freezes",
+      "id": "desperate_to_leave_a_heroic_legacy_yet_freezes",
       "weight": 2,
       "value": "Desperate to leave a heroic legacy, yet freezes whenever someone recognizes them in public."
     },
     {
-      "id": "welcoming-and-attentive",
+      "id": "welcoming_and_attentive",
       "value": "Welcoming and attentive, puts newcomers at ease but becomes involved in their problems too quickly."
     },
     {
@@ -160,7 +159,7 @@
       "value": "Ambitious, measures every relationship by what it may help them accomplish."
     },
     {
-      "id": "playful-humorist",
+      "id": "playful_humorist",
       "value": "Playful and funny, defuses tense situations with humor even when the moment is inappropriate.",
       "weight": 2
     },
@@ -170,7 +169,7 @@
       "weight": 2
     },
     {
-      "id": "passionate-artist",
+      "id": "passionate_artist",
       "value": "A passionate artist who seeks beauty even in dangerous places and neglects practical needs.",
       "weight": 2
     },
@@ -190,7 +189,7 @@
       "weight": 2
     },
     {
-      "id": "smooth-talker",
+      "id": "smooth_talker",
       "value": "A smooth talker who makes proposals attractive without directly lying about their flaws."
     },
     {
@@ -199,7 +198,7 @@
       "weight": 2
     },
     {
-      "id": "gruff-but-loyal",
+      "id": "gruff_but_loyal",
       "value": "Gruff but loyal, expresses affection through practical deeds rather than kind words.",
       "weight": 2
     },
@@ -213,12 +212,12 @@
       "weight": 2
     },
     {
-      "id": "chaotically-unpredictable",
+      "id": "chaotically_unpredictable",
       "value": "Wildly unpredictable, follows a private logic that others struggle to understand in the moment.",
       "weight": 2
     },
     {
-      "id": "hot-tempered",
+      "id": "hot_tempered",
       "value": "Hot-tempered, reacts sharply to provocation and regrets the damage after calming down.",
       "weight": 2
     },
@@ -267,7 +266,7 @@
       "weight": 2
     },
     {
-      "id": "absent-minded",
+      "id": "absent_minded",
       "value": "Absent-minded, notices unusual details while forgetting obvious obligations.",
       "weight": 2
     },
@@ -290,7 +289,7 @@
       "value": "Enigmatic, answers with images and half-truths because being understood feels more dangerous than being judged."
     },
     {
-      "id": "ingeniously-lazy",
+      "id": "ingeniously_lazy",
       "value": "Ingeniously lazy, works hard to invent ways around repetitive labor.",
       "weight": 2
     },
@@ -299,7 +298,7 @@
       "value": "Proud, welcomes challenges but refuses help that might imply inadequacy."
     },
     {
-      "id": "party-lover",
+      "id": "party_lover",
       "value": "A party-lover who quickly starts celebrations and accepts every rough morning as the price of a good story."
     },
     {
@@ -313,12 +312,12 @@
       "weight": 2
     },
     {
-      "id": "outwardly-cold",
+      "id": "outwardly_cold",
       "value": "Outwardly cold, controls reactions to protect a much deeper attachment.",
       "weight": 2
     },
     {
-      "id": "accident-prone",
+      "id": "accident_prone",
       "value": "Accident-prone in ordinary moments but surprisingly effective in a real crisis.",
       "weight": 2
     },
@@ -333,7 +332,7 @@
       "weight": 2
     },
     {
-      "id": "impatient-and-impulsive",
+      "id": "impatient_and_impulsive",
       "value": "Impatient and impulsive, prefers an immediate bad decision to waiting without information."
     },
     {
@@ -356,7 +355,7 @@
       "weight": 2
     },
     {
-      "id": "fair-minded",
+      "id": "fair_minded",
       "value": "Fair-minded, applies the same principles to allies and enemies even at personal cost.",
       "weight": 2
     },
@@ -370,7 +369,7 @@
       "weight": 2
     },
     {
-      "id": "compulsively-orderly",
+      "id": "compulsively_orderly",
       "value": "Compulsively orderly, relies on precise rituals of control that become fragile under pressure."
     },
     {
@@ -382,7 +381,7 @@
       "value": "Modest, minimizes achievements and gives away credit until someone claims the work."
     },
     {
-      "id": "compulsive-fabulist",
+      "id": "compulsive_fabulist",
       "value": "A compulsive fabulist who embellishes personal history and becomes trapped in invented stories.",
       "weight": 2
     },
@@ -411,12 +410,12 @@
       "value": "Patient, lets others reveal themselves and acts only at the decisive moment."
     },
     {
-      "id": "sexually-inappropriate",
+      "id": "sexually_inappropriate",
       "value": "Sexually inappropriate, frequently turns exchanges toward sexual concerns or innuendo and crosses social boundaries.",
       "weight": 2
     },
     {
-      "id": "fearful-but-cautious",
+      "id": "fearful_but_cautious",
       "value": "Fearful but cautious, avoids needless risk and often spots danger before bolder heroes.",
       "weight": 2
     },
@@ -500,7 +499,7 @@
       "weight": 2
     },
     {
-      "id": "bon-vivant",
+      "id": "bon_vivant",
       "value": "A bon vivant who values food, company, and comfort without abandoning friends when the party ends."
     }
   ]

@@ -1,7 +1,6 @@
 {
-  "schemaVersion": 2,
+  "schemaVersion": 3,
   "id": "material",
-  "kind": "category",
   "visibility": "public",
   "name": "material",
   "description": "Natural, crafted, precious, and magical materials",
@@ -115,7 +114,7 @@
       "value": "Diamond — exceptionally hard clear crystal used for cutting, status, and durable enchantments."
     },
     {
-      "id": "meteoric-iron",
+      "id": "meteoric_iron",
       "weight": 2,
       "value": "Meteoric Iron — rare sky-fallen metal carrying unusual patterns and resistance to magic."
     },
@@ -125,7 +124,7 @@
       "value": "Dragonbone — light resilient bone retaining traces of the creature's elemental nature."
     },
     {
-      "id": "spider-silk",
+      "id": "spider_silk",
       "weight": 2,
       "value": "Spider Silk — extremely strong light fiber used in rope, clothing, sutures, and traps."
     },
@@ -150,12 +149,12 @@
       "value": "Voidglass — cold black glass that absorbs light, sound, and small amounts of magical energy."
     },
     {
-      "id": "living-wood",
+      "id": "living_wood",
       "weight": 1,
       "value": "Living Wood — harvested without killing its tree and capable of slowly repairing shaped objects."
     },
     {
-      "id": "aether-crystal",
+      "id": "aether_crystal",
       "weight": 1,
       "value": "Aether Crystal — unstable mineral that amplifies spells while accumulating dangerous resonance."
     }

@@ -1,544 +1,543 @@
 {
-  "schemaVersion": 2,
+  "schemaVersion": 3,
   "id": "inventory",
-  "kind": "category",
   "visibility": "public",
   "name": "inventaire",
   "description": "Objets pouvant apparaître dans l'inventaire d'un personnage",
   "entrySchema": {
     "type": "fields",
-    "required": ["Name", "Description"]
+    "required": ["name", "description"]
   },
   "entries": [
     {
-      "id": "coil-of-rope",
+      "id": "coil_of_rope",
       "weight": 8,
       "fields": {
-        "Name": "Rouleau de corde",
-        "Description": "Dix mètres de corde solide pour grimper, attacher ou arrimer une charge."
+        "name": "Rouleau de corde",
+        "description": "Dix mètres de corde solide pour grimper, attacher ou arrimer une charge."
       }
     },
     {
-      "id": "lantern-and-oil",
+      "id": "lantern_and_oil",
       "weight": 8,
       "fields": {
-        "Name": "Lanterne et huile",
-        "Description": "Une lanterne à capuchon contenant assez d'huile pour plusieurs heures."
+        "name": "Lanterne et huile",
+        "description": "Une lanterne à capuchon contenant assez d'huile pour plusieurs heures."
       }
     },
     {
-      "id": "three-travel-rations",
+      "id": "three_travel_rations",
       "weight": 8,
       "fields": {
-        "Name": "Trois rations de voyage",
-        "Description": "Des provisions compactes suffisantes pour trois jours."
+        "name": "Trois rations de voyage",
+        "description": "Des provisions compactes suffisantes pour trois jours."
       }
     },
     {
       "id": "waterskin",
       "weight": 7,
       "fields": {
-        "Name": "Gourde",
-        "Description": "Une gourde en cuir remplie d'eau."
+        "name": "Gourde",
+        "description": "Une gourde en cuir remplie d'eau."
       }
     },
     {
       "id": "bedroll",
       "weight": 7,
       "fields": {
-        "Name": "Nécessaire de couchage",
-        "Description": "Une couverture résistante aux intempéries et un couchage roulé."
+        "name": "Nécessaire de couchage",
+        "description": "Une couverture résistante aux intempéries et un couchage roulé."
       }
     },
     {
       "id": "tinderbox",
       "weight": 7,
       "fields": {
-        "Name": "Nécessaire à feu",
-        "Description": "Un silex, un briquet en acier et de l'amadou sec pour allumer un feu."
+        "name": "Nécessaire à feu",
+        "description": "Un silex, un briquet en acier et de l'amadou sec pour allumer un feu."
       }
     },
     {
-      "id": "lockpicking-kit",
+      "id": "lockpicking_kit",
       "weight": 6,
       "fields": {
-        "Name": "Nécessaire de crochetage",
-        "Description": "De petits outils permettant de manipuler les serrures mécaniques ordinaires."
+        "name": "Nécessaire de crochetage",
+        "description": "De petits outils permettant de manipuler les serrures mécaniques ordinaires."
       }
     },
     {
-      "id": "climbing-kit",
+      "id": "climbing_kit",
       "weight": 6,
       "fields": {
-        "Name": "Matériel d'escalade",
-        "Description": "Des pitons, un marteau, des sangles et quelques accessoires d'escalade simples."
+        "name": "Matériel d'escalade",
+        "description": "Des pitons, un marteau, des sangles et quelques accessoires d'escalade simples."
       }
     },
     {
       "id": "bandages",
       "weight": 6,
       "fields": {
-        "Name": "Bandages",
-        "Description": "Du tissu propre et du matériel de base pour soigner les blessures."
+        "name": "Bandages",
+        "description": "Du tissu propre et du matériel de base pour soigner les blessures."
       }
     },
     {
-      "id": "chalk-and-charcoal",
+      "id": "chalk_and_charcoal",
       "weight": 6,
       "fields": {
-        "Name": "Craie et fusain",
-        "Description": "De quoi baliser un chemin, esquisser une carte ou prendre des notes."
+        "name": "Craie et fusain",
+        "description": "De quoi baliser un chemin, esquisser une carte ou prendre des notes."
       }
     },
     {
-      "id": "small-mirror",
+      "id": "small_mirror",
       "weight": 6,
       "fields": {
-        "Name": "Petit miroir",
-        "Description": "Un miroir à main poli, utile pour envoyer des signaux et regarder au-delà des angles."
+        "name": "Petit miroir",
+        "description": "Un miroir à main poli, utile pour envoyer des signaux et regarder au-delà des angles."
       }
     },
     {
       "id": "crowbar",
       "weight": 5,
       "fields": {
-        "Name": "Pied-de-biche",
-        "Description": "Un solide levier en fer pour forcer des portes, des caisses ou d'autres obstacles."
+        "name": "Pied-de-biche",
+        "description": "Un solide levier en fer pour forcer des portes, des caisses ou d'autres obstacles."
       }
     },
     {
-      "id": "grappling-hook",
+      "id": "grappling_hook",
       "weight": 5,
       "fields": {
-        "Name": "Grappin",
-        "Description": "Un crochet à quatre pointes conçu pour être utilisé avec une corde."
+        "name": "Grappin",
+        "description": "Un crochet à quatre pointes conçu pour être utilisé avec une corde."
       }
     },
     {
-      "id": "fishing-kit",
+      "id": "fishing_kit",
       "weight": 5,
       "fields": {
-        "Name": "Matériel de pêche",
-        "Description": "Du fil, des hameçons, des flotteurs et un filet compact."
+        "name": "Matériel de pêche",
+        "description": "Du fil, des hameçons, des flotteurs et un filet compact."
       }
     },
     {
-      "id": "writing-kit",
+      "id": "writing_kit",
       "weight": 5,
       "fields": {
-        "Name": "Nécessaire d'écriture",
-        "Description": "De l'encre, des plumes, du parchemin, de la cire à cacheter et un étui de protection."
+        "name": "Nécessaire d'écriture",
+        "description": "De l'encre, des plumes, du parchemin, de la cire à cacheter et un étui de protection."
       }
     },
     {
-      "id": "herbalism-pouch",
+      "id": "herbalism_pouch",
       "weight": 5,
       "fields": {
-        "Name": "Trousse d'herboriste",
-        "Description": "De petits outils et récipients pour récolter des plantes utiles."
+        "name": "Trousse d'herboriste",
+        "description": "De petits outils et récipients pour récolter des plantes utiles."
       }
     },
     {
       "id": "shovel",
       "weight": 5,
       "fields": {
-        "Name": "Pelle",
-        "Description": "Un outil compact mais solide pour creuser."
+        "name": "Pelle",
+        "description": "Un outil compact mais solide pour creuser."
       }
     },
     {
       "id": "antidote",
       "weight": 4,
       "fields": {
-        "Name": "Antidote",
-        "Description": "Un traitement général qui accorde une nouvelle chance de résister à un poison ordinaire."
+        "name": "Antidote",
+        "description": "Un traitement général qui accorde une nouvelle chance de résister à un poison ordinaire."
       }
     },
     {
-      "id": "smoke-bomb",
+      "id": "smoke_bomb",
       "weight": 4,
       "fields": {
-        "Name": "Bombe fumigène",
-        "Description": "Crée un épais nuage de fumée lorsqu'elle est allumée."
+        "name": "Bombe fumigène",
+        "description": "Crée un épais nuage de fumée lorsqu'elle est allumée."
       }
     },
     {
-      "id": "bear-trap",
+      "id": "bear_trap",
       "weight": 4,
       "fields": {
-        "Name": "Piège à ours",
-        "Description": "Un lourd piège mécanique capable d'immobiliser une créature."
+        "name": "Piège à ours",
+        "description": "Un lourd piège mécanique capable d'immobiliser une créature."
       }
     },
     {
-      "id": "disguise-kit",
+      "id": "disguise_kit",
       "weight": 4,
       "fields": {
-        "Name": "Nécessaire de déguisement",
-        "Description": "Des produits cosmétiques, des teintures, de faux cheveux et quelques éléments de costume simples."
+        "name": "Nécessaire de déguisement",
+        "description": "Des produits cosmétiques, des teintures, de faux cheveux et quelques éléments de costume simples."
       }
     },
     {
-      "id": "merchants-scale",
+      "id": "merchants_scale",
       "weight": 4,
       "fields": {
-        "Name": "Balance de marchand",
-        "Description": "Une balance pliante et des poids de référence pour vérifier les marchandises."
+        "name": "Balance de marchand",
+        "description": "Une balance pliante et des poids de référence pour vérifier les marchandises."
       }
     },
     {
-      "id": "bag-of-caltrops",
+      "id": "bag_of_caltrops",
       "weight": 3,
       "fields": {
-        "Name": "Sac de chausse-trappes",
-        "Description": "Des pointes métalliques acérées permettant de ralentir des poursuivants ou de protéger un passage."
+        "name": "Sac de chausse-trappes",
+        "description": "Des pointes métalliques acérées permettant de ralentir des poursuivants ou de protéger un passage."
       }
     },
     {
-      "id": "vial-of-basic-poison",
+      "id": "vial_of_basic_poison",
       "weight": 3,
       "fields": {
-        "Name": "Fiole de poison ordinaire",
-        "Description": "Une dose limitée de toxine, suffisante pour empoisonner une arme ou une boisson."
+        "name": "Fiole de poison ordinaire",
+        "description": "Une dose limitée de toxine, suffisante pour empoisonner une arme ou une boisson."
       }
     },
     {
       "id": "spyglass",
       "weight": 3,
       "fields": {
-        "Name": "Longue-vue",
-        "Description": "Un tube optique compact permettant d'observer des détails éloignés."
+        "name": "Longue-vue",
+        "description": "Un tube optique compact permettant d'observer des détails éloignés."
       }
     },
     {
       "id": "tent",
       "weight": 3,
       "fields": {
-        "Name": "Tente",
-        "Description": "Un petit abri adapté à un ou deux voyageurs."
+        "name": "Tente",
+        "description": "Un petit abri adapté à un ou deux voyageurs."
       }
     },
     {
       "id": "manacles",
       "weight": 3,
       "fields": {
-        "Name": "Menottes",
-        "Description": "Une paire d'entraves en fer accompagnée d'une clé simple."
+        "name": "Menottes",
+        "description": "Une paire d'entraves en fer accompagnée d'une clé simple."
       }
     },
     {
-      "id": "holy-symbol",
+      "id": "holy_symbol",
       "weight": 3,
       "fields": {
-        "Name": "Symbole sacré",
-        "Description": "Un symbole associé à une foi, un serment, un ancêtre ou un idéal personnel."
+        "name": "Symbole sacré",
+        "description": "Un symbole associé à une foi, un serment, un ancêtre ou un idéal personnel."
       }
     },
     {
-      "id": "local-map",
+      "id": "local_map",
       "weight": 3,
       "fields": {
-        "Name": "Carte locale",
-        "Description": "Une carte pratique mais imparfaite des environs."
+        "name": "Carte locale",
+        "description": "Une carte pratique mais imparfaite des environs."
       }
     },
     {
-      "id": "potion-of-night-vision",
+      "id": "potion_of_night_vision",
       "weight": 2,
       "fields": {
-        "Name": "Potion de vision nocturne",
-        "Description": "Permet de voir clairement dans l'obscurité pendant une heure."
+        "name": "Potion de vision nocturne",
+        "description": "Permet de voir clairement dans l'obscurité pendant une heure."
       }
     },
     {
-      "id": "potion-of-water-breathing",
+      "id": "potion_of_water_breathing",
       "weight": 2,
       "fields": {
-        "Name": "Potion de respiration aquatique",
-        "Description": "Permet de respirer sous l'eau pendant trente minutes."
+        "name": "Potion de respiration aquatique",
+        "description": "Permet de respirer sous l'eau pendant trente minutes."
       }
     },
     {
-      "id": "acid-flask",
+      "id": "acid_flask",
       "weight": 2,
       "fields": {
-        "Name": "Fiole d'acide",
-        "Description": "Un flacon soigneusement scellé dont le contenu peut endommager les matériaux ordinaires."
+        "name": "Fiole d'acide",
+        "description": "Un flacon soigneusement scellé dont le contenu peut endommager les matériaux ordinaires."
       }
     },
     {
-      "id": "silvered-chain",
+      "id": "silvered_chain",
       "weight": 2,
       "fields": {
-        "Name": "Chaîne argentée",
-        "Description": "Une courte chaîne utile contre les créatures vulnérables à l'argent."
+        "name": "Chaîne argentée",
+        "description": "Une courte chaîne utile contre les créatures vulnérables à l'argent."
       }
     },
     {
-      "id": "runic-chalk",
+      "id": "runic_chalk",
       "weight": 2,
       "fields": {
-        "Name": "Craie runique",
-        "Description": "Une craie rare qui rend les inscriptions magiques plus faciles à voir et à étudier."
+        "name": "Craie runique",
+        "description": "Une craie rare qui rend les inscriptions magiques plus faciles à voir et à étudier."
       }
     },
     {
-      "id": "whispering-compass",
+      "id": "whispering_compass",
       "fields": {
-        "Name": "Boussole murmurante",
-        "Description": "Une étrange boussole qui se plaint à voix basse chaque fois qu'elle indique le nord."
+        "name": "Boussole murmurante",
+        "description": "Une étrange boussole qui se plaint à voix basse chaque fois qu'elle indique le nord."
       }
     },
     {
-      "id": "everlasting-candle",
+      "id": "everlasting_candle",
       "fields": {
-        "Name": "Bougie éternelle",
-        "Description": "Une bougie dont la petite flamme ne consume jamais la cire."
+        "name": "Bougie éternelle",
+        "description": "Une bougie dont la petite flamme ne consume jamais la cire."
       }
     },
     {
-      "id": "unidentified-rune-fragment",
+      "id": "unidentified_rune_fragment",
       "fields": {
-        "Name": "Fragment de rune non identifié",
-        "Description": "Un morceau de matière magique portant une partie d'une inscription inconnue."
+        "name": "Fragment de rune non identifié",
+        "description": "Un morceau de matière magique portant une partie d'une inscription inconnue."
       }
     },
     {
-      "id": "mysterious-sealed-letter",
+      "id": "mysterious_sealed_letter",
       "fields": {
-        "Name": "Mystérieuse lettre scellée",
-        "Description": "Une lettre adressée à une personne que le personnage n'a jamais rencontrée."
+        "name": "Mystérieuse lettre scellée",
+        "description": "Une lettre adressée à une personne que le personnage n'a jamais rencontrée."
       }
     },
     {
-      "id": "coin-purse",
+      "id": "coin_purse",
       "fields": {
-        "Name": "Bourse de pièces",
-        "Description": "Une somme de monnaie locale mêlant petites pièces courantes et devises plus difficiles à écouler."
+        "name": "Bourse de pièces",
+        "description": "Une somme de monnaie locale mêlant petites pièces courantes et devises plus difficiles à écouler."
       }
     },
     {
-      "id": "healing-potion",
+      "id": "healing_potion",
       "fields": {
-        "Name": "Potion de soin",
-        "Description": "Une fiole stabilisée qui facilite la récupération d’une blessure lorsqu’elle est utilisée correctement."
+        "name": "Potion de soin",
+        "description": "Une fiole stabilisée qui facilite la récupération d’une blessure lorsqu’elle est utilisée correctement."
       }
     },
     {
-      "id": "vigor-potion",
+      "id": "vigor_potion",
       "fields": {
-        "Name": "Potion de vigueur",
-        "Description": "Un breuvage augmentant brièvement les capacités physiques avant de provoquer une forte fatigue."
+        "name": "Potion de vigueur",
+        "description": "Un breuvage augmentant brièvement les capacités physiques avant de provoquer une forte fatigue."
       }
     },
     {
-      "id": "rule-scroll",
+      "id": "rule_scroll",
       "fields": {
-        "Name": "Parchemin de LOI",
-        "Description": "Un support à usage unique permettant de déclencher une LOI précise sans l’avoir apprise."
+        "name": "Parchemin de LOI",
+        "description": "Un support à usage unique permettant de déclencher une LOI précise sans l’avoir apprise."
       }
     },
     {
-      "id": "rule-book",
+      "id": "rule_book",
       "fields": {
-        "Name": "Livre de LOI",
-        "Description": "Un traité rare expliquant une LOI, ses applications et les risques liés à une mauvaise interprétation."
+        "name": "Livre de LOI",
+        "description": "Un traité rare expliquant une LOI, ses applications et les risques liés à une mauvaise interprétation."
       }
     },
     {
-      "id": "excavation-tools",
+      "id": "excavation_tools",
       "fields": {
-        "Name": "Outils d’excavation",
-        "Description": "Un crochet, une petite pioche et une pelle repliable pour fouiller ou franchir un terrain difficile."
+        "name": "Outils d’excavation",
+        "description": "Un crochet, une petite pioche et une pelle repliable pour fouiller ou franchir un terrain difficile."
       }
     },
     {
-      "id": "unknown-key",
+      "id": "unknown_key",
       "fields": {
-        "Name": "Clef inconnue",
-        "Description": "Une clef sans serrure identifiée, marquée d’un symbole correspondant à une organisation ou un bâtiment."
+        "name": "Clef inconnue",
+        "description": "Une clef sans serrure identifiée, marquée d’un symbole correspondant à une organisation ou un bâtiment."
       }
     },
     {
-      "id": "coded-notes",
+      "id": "coded_notes",
       "fields": {
-        "Name": "Notes chiffrées",
-        "Description": "Plusieurs pages de notes dont le sens dépend d’un code, d’un contexte ou d’une personne disparue."
+        "name": "Notes chiffrées",
+        "description": "Plusieurs pages de notes dont le sens dépend d’un code, d’un contexte ou d’une personne disparue."
       }
     },
     {
-      "id": "specialized-ammunition",
+      "id": "specialized_ammunition",
       "fields": {
-        "Name": "Munitions spécialisées",
-        "Description": "Un petit lot de projectiles adaptés à une arme précise ou à une cible inhabituelle."
+        "name": "Munitions spécialisées",
+        "description": "Un petit lot de projectiles adaptés à une arme précise ou à une cible inhabituelle."
       }
     },
     {
-      "id": "precious-jewel",
+      "id": "precious_jewel",
       "fields": {
-        "Name": "Bijou précieux",
-        "Description": "Une pièce de joaillerie identifiable, facile à transporter mais risquée à revendre."
+        "name": "Bijou précieux",
+        "description": "Une pièce de joaillerie identifiable, facile à transporter mais risquée à revendre."
       }
     },
     {
-      "id": "elemental-essence",
+      "id": "elemental_essence",
       "fields": {
-        "Name": "Essence élémentaire",
-        "Description": "Une substance instable conservant les propriétés d’un élément naturel ou magique."
+        "name": "Essence élémentaire",
+        "description": "Une substance instable conservant les propriétés d’un élément naturel ou magique."
       }
     },
     {
-      "id": "treasure-map",
+      "id": "treasure_map",
       "fields": {
-        "Name": "Carte au trésor",
-        "Description": "Un itinéraire incomplet accompagné de repères anciens, d’avertissements et d’une destination ambiguë."
+        "name": "Carte au trésor",
+        "description": "Un itinéraire incomplet accompagné de repères anciens, d’avertissements et d’une destination ambiguë."
       }
     },
     {
-      "id": "quality-paper",
+      "id": "quality_paper",
       "fields": {
-        "Name": "Papier de qualité",
-        "Description": "Des feuilles et un parchemin vierges adaptés aux contrats, cartes, sorts ou faux documents."
+        "name": "Papier de qualité",
+        "description": "Des feuilles et un parchemin vierges adaptés aux contrats, cartes, sorts ou faux documents."
       }
     },
     {
-      "id": "ceremonial-doll",
+      "id": "ceremonial_doll",
       "fields": {
-        "Name": "Poupée cérémonielle",
-        "Description": "Une figurine de tissu portant le nom effacé d’une personne et les traces d’un ancien rituel."
+        "name": "Poupée cérémonielle",
+        "description": "Une figurine de tissu portant le nom effacé d’une personne et les traces d’un ancien rituel."
       }
     },
     {
-      "id": "locked-grimoire",
+      "id": "locked_grimoire",
       "fields": {
-        "Name": "Grimoire verrouillé",
-        "Description": "Un livre protégé par une serrure ou une énigme, dont le contenu ne peut être consulté directement."
+        "name": "Grimoire verrouillé",
+        "description": "Un livre protégé par une serrure ou une énigme, dont le contenu ne peut être consulté directement."
       }
     },
     {
-      "id": "old-toy",
+      "id": "old_toy",
       "fields": {
-        "Name": "Jouet ancien",
-        "Description": "Un jouet ou ours en peluche reconnaissable par une famille, un collectionneur ou un esprit."
+        "name": "Jouet ancien",
+        "description": "Un jouet ou ours en peluche reconnaissable par une famille, un collectionneur ou un esprit."
       }
     },
     {
-      "id": "creature-fragment",
+      "id": "creature_fragment",
       "fields": {
-        "Name": "Fragment de créature",
-        "Description": "Une écaille, peau, corne ou dent conservée comme trophée, preuve ou composant."
+        "name": "Fragment de créature",
+        "description": "Une écaille, peau, corne ou dent conservée comme trophée, preuve ou composant."
       }
     },
     {
-      "id": "rare-medicine",
+      "id": "rare_medicine",
       "fields": {
-        "Name": "Médicament rare",
-        "Description": "Un traitement destiné à une maladie précise, fragile et difficile à remplacer."
+        "name": "Médicament rare",
+        "description": "Un traitement destiné à une maladie précise, fragile et difficile à remplacer."
       }
     },
     {
-      "id": "medicinal-plant",
+      "id": "medicinal_plant",
       "fields": {
-        "Name": "Plante médicinale",
-        "Description": "Une plante fraîche dont l’efficacité dépend de sa préparation et de son état de conservation."
+        "name": "Plante médicinale",
+        "description": "Une plante fraîche dont l’efficacité dépend de sa préparation et de son état de conservation."
       }
     },
     {
-      "id": "alchemical-ingredient",
+      "id": "alchemical_ingredient",
       "fields": {
-        "Name": "Ingrédient alchimique",
-        "Description": "Un composant organique inhabituel, comme un œil de crapaud ou une glande venimeuse."
+        "name": "Ingrédient alchimique",
+        "description": "Un composant organique inhabituel, comme un œil de crapaud ou une glande venimeuse."
       }
     },
     {
-      "id": "work-of-art",
+      "id": "work_of_art",
       "fields": {
-        "Name": "Œuvre d’art",
-        "Description": "Un tableau, une sculpture ou une pièce décorative possédant une valeur culturelle identifiable."
+        "name": "Œuvre d’art",
+        "description": "Un tableau, une sculpture ou une pièce décorative possédant une valeur culturelle identifiable."
       }
     },
     {
-      "id": "ceremonial-clothing",
+      "id": "ceremonial_clothing",
       "fields": {
-        "Name": "Vêtement de cérémonie",
-        "Description": "Une robe, cape, paire de bottes ou paire de gants associée à un rang ou une institution."
+        "name": "Vêtement de cérémonie",
+        "description": "Une robe, cape, paire de bottes ou paire de gants associée à un rang ou une institution."
       }
     },
     {
-      "id": "unfinished-crown",
+      "id": "unfinished_crown",
       "fields": {
-        "Name": "Couronne inachevée",
-        "Description": "Un symbole d’autorité auquel manque une gemme, une inscription ou une partie essentielle."
+        "name": "Couronne inachevée",
+        "description": "Un symbole d’autorité auquel manque une gemme, une inscription ou une partie essentielle."
       }
     },
     {
-      "id": "musical-instrument",
+      "id": "musical_instrument",
       "fields": {
-        "Name": "Instrument de musique",
-        "Description": "Un luth, tambour, violon ou autre instrument transportable, usé mais fonctionnel."
+        "name": "Instrument de musique",
+        "description": "Un luth, tambour, violon ou autre instrument transportable, usé mais fonctionnel."
       }
     },
     {
-      "id": "ornate-comb",
+      "id": "ornate_comb",
       "fields": {
-        "Name": "Peigne ouvragé",
-        "Description": "Un objet personnel décoré d’un blason discret ou d’une inscription intime."
+        "name": "Peigne ouvragé",
+        "description": "Un objet personnel décoré d’un blason discret ou d’une inscription intime."
       }
     },
     {
-      "id": "incomplete-manuscript",
+      "id": "incomplete_manuscript",
       "fields": {
-        "Name": "Manuscrit incomplet",
-        "Description": "Un texte historique ou scientifique dont plusieurs pages ont été retirées intentionnellement."
+        "name": "Manuscrit incomplet",
+        "description": "Un texte historique ou scientifique dont plusieurs pages ont été retirées intentionnellement."
       }
     },
     {
-      "id": "sealed-vase",
+      "id": "sealed_vase",
       "fields": {
-        "Name": "Vase scellé",
-        "Description": "Un récipient fragile dont le contenu produit un bruit ou une chaleur inhabituelle."
+        "name": "Vase scellé",
+        "description": "Un récipient fragile dont le contenu produit un bruit ou une chaleur inhabituelle."
       }
     },
     {
-      "id": "exotic-fruit",
+      "id": "exotic_fruit",
       "fields": {
-        "Name": "Fruit exotique",
-        "Description": "Un fruit rare dont la graine, la saveur ou les propriétés intéressent plusieurs acheteurs."
+        "name": "Fruit exotique",
+        "description": "Un fruit rare dont la graine, la saveur ou les propriétés intéressent plusieurs acheteurs."
       }
     },
     {
-      "id": "collectible-figurine",
+      "id": "collectible_figurine",
       "fields": {
-        "Name": "Figurine de collection",
-        "Description": "Une pièce d’une série recherchée, insignifiante seule mais précieuse pour la bonne personne."
+        "name": "Figurine de collection",
+        "description": "Une pièce d’une série recherchée, insignifiante seule mais précieuse pour la bonne personne."
       }
     },
     {
-      "id": "enchanted-toothbrush",
+      "id": "enchanted_toothbrush",
       "fields": {
-        "Name": "Brosse à dents enchantée",
-        "Description": "Un objet absurdement spécifique qui nettoie parfaitement les dents et mord les autres saletés."
+        "name": "Brosse à dents enchantée",
+        "description": "Un objet absurdement spécifique qui nettoie parfaitement les dents et mord les autres saletés."
       }
     },
     {
-      "id": "unidentified-egg",
+      "id": "unidentified_egg",
       "fields": {
-        "Name": "Œuf non identifié",
-        "Description": "Un œuf vivant dont l’espèce, les besoins et le danger restent inconnus."
+        "name": "Œuf non identifié",
+        "description": "Un œuf vivant dont l’espèce, les besoins et le danger restent inconnus."
       }
     },
     {
-      "id": "attuned-stone",
+      "id": "attuned_stone",
       "fields": {
-        "Name": "Pierre accordée",
-        "Description": "Une pierre minérale ou magique réagissant à un lieu, une personne ou une LOI particulière."
+        "name": "Pierre accordée",
+        "description": "Une pierre minérale ou magique réagissant à un lieu, une personne ou une LOI particulière."
       }
     },
     {
-      "id": "travel-chicken",
+      "id": "travel_chicken",
       "fields": {
-        "Name": "Poulet de voyage",
-        "Description": "Un poulet étonnamment calme, dressé à suivre le porteur et à signaler certaines créatures."
+        "name": "Poulet de voyage",
+        "description": "Un poulet étonnamment calme, dressé à suivre le porteur et à signaler certaines créatures."
       }
     }
   ]

@@ -1,0 +1,125 @@
+{
+  "schemaVersion": 3,
+  "id": "background_official",
+  "visibility": "internal",
+  "name": "Official background details",
+  "description": "Background details for official NPCs",
+  "entrySchema": {
+    "type": "fields",
+    "required": ["appearance", "backstory", "goals"]
+  },
+  "entries": [
+    {
+      "id": "orderly_and_ink_stained_wearing_modest_official_clothes_with",
+      "fields": {
+        "appearance": "Orderly and ink-stained, wearing modest official clothes with every document carefully indexed.",
+        "backstory": "A diligent administrator discovered years of contradictory orders hidden across separate archives.",
+        "goals": "Trace who benefits from the confusion and make the administration understandable to ordinary citizens."
+      }
+    },
+    {
+      "id": "polished_and_composed_with_formal_travel_clothes_and",
+      "fields": {
+        "appearance": "Polished and composed, with formal travel clothes and a case of sealed diplomatic letters.",
+        "backstory": "A diplomat negotiated a fragile truce whose secret clause is now being deliberately misrepresented.",
+        "goals": "Preserve the peace and reveal the truth without humiliating either side."
+      }
+    },
+    {
+      "id": "well_guarded_but_visibly_tired_carrying_ledgers_marked",
+      "fields": {
+        "appearance": "Well guarded but visibly tired, carrying ledgers marked with corrections in several different hands.",
+        "backstory": "A tax collector inherited impossible quotas designed to make an impoverished district default.",
+        "goals": "Prove the assessment was manipulated and prevent both revolt and collective punishment."
+      }
+    },
+    {
+      "id": "severe_robes_a_measured_voice_and_spectacles_repeatedly",
+      "fields": {
+        "appearance": "Severe robes, a measured voice, and spectacles repeatedly removed when considering testimony.",
+        "backstory": "A judge convicted an innocent person using evidence later revealed to have been forged.",
+        "goals": "Reverse the injustice and uncover how many earlier cases used the same false evidence."
+      }
+    },
+    {
+      "id": "practical_formalwear_a_neutral_expression_and_a_notebook",
+      "fields": {
+        "appearance": "Practical formalwear, a neutral expression, and a notebook filled with precise observations.",
+        "backstory": "An inspector sent to investigate missing supplies found every local office reporting perfectly matching lies.",
+        "goals": "Identify the shared source of pressure and protect the first witness willing to speak honestly."
+      }
+    },
+    {
+      "id": "established_experienced_adult",
+      "fields": {
+        "appearance": "An experienced adult protecting an established position.",
+        "backstory": "Their life stage has forced them into responsibilities that do not fit ordinary expectations.",
+        "goals": "Prove their judgment while protecting the freedom to grow or change."
+      }
+    },
+    {
+      "id": "legacy_profession_mayor",
+      "fields": {
+        "appearance": "Clothing and tools immediately suggest the work of a mayor.",
+        "backstory": "Built a life as a mayor and knows the profession’s obligations and hidden pressures.",
+        "goals": "Use that experience to secure a safer and more independent future."
+      }
+    },
+    {
+      "id": "legacy_profession_minister",
+      "fields": {
+        "appearance": "Clothing and tools immediately suggest the work of a minister.",
+        "backstory": "Built a life as a minister and knows the profession’s obligations and hidden pressures.",
+        "goals": "Use that experience to secure a safer and more independent future."
+      }
+    },
+    {
+      "id": "legacy_profession_jailer",
+      "fields": {
+        "appearance": "Clothing and tools immediately suggest the work of a jailer.",
+        "backstory": "Built a life as a jailer and knows the profession’s obligations and hidden pressures.",
+        "goals": "Use that experience to secure a safer and more independent future."
+      }
+    },
+    {
+      "id": "legacy_profession_executioner",
+      "fields": {
+        "appearance": "Clothing and tools immediately suggest the work of a executioner.",
+        "backstory": "Built a life as a executioner and knows the profession’s obligations and hidden pressures.",
+        "goals": "Use that experience to secure a safer and more independent future."
+      }
+    },
+    {
+      "id": "legacy_profession_townsfolk",
+      "fields": {
+        "appearance": "Clothing and tools immediately suggest the work of a townsfolk.",
+        "backstory": "Built a life as a townsfolk and knows the profession’s obligations and hidden pressures.",
+        "goals": "Use that experience to secure a safer and more independent future."
+      }
+    },
+    {
+      "id": "decomposed_magical_crime_constable",
+      "fields": {
+        "appearance": "A village officer's case files concern magical crimes that local law refuses to acknowledge.",
+        "backstory": "an honest village officer overwhelmed by crimes involving magic that local law does not acknowledge.",
+        "goals": "Turn this unusual history toward a self-directed future."
+      }
+    },
+    {
+      "id": "decomposed_deliberate_marshscale_diplomat",
+      "fields": {
+        "appearance": "A marsh diplomat pauses deliberately, weighing every answer before speaking.",
+        "backstory": "a marshscale diplomat who pauses for minutes before every answer and never wastes a word.",
+        "goals": "Turn this unusual history toward a self-directed future."
+      }
+    },
+    {
+      "id": "decomposed_enchanted_stamp_bureaucrat",
+      "fields": {
+        "appearance": "An enchanted stamp and a stack of absurd provisional laws accompany a meticulous bureaucrat.",
+        "backstory": "a bureaucrat whose enchanted stamp makes ridiculous temporary laws physically real.",
+        "goals": "Turn this unusual history toward a self-directed future."
+      }
+    }
+  ]
+}

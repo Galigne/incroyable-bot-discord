@@ -143,15 +143,15 @@ test('creature hydration preserves final localized state and technical provenanc
 	saved.name = 'Ash Wolf';
 	saved.description = 'A scarred guardian.';
 	saved.source = {
-		generatorId: 'creature-monster',
-		entryId: 'ash-wolf',
+		generatorId: 'creature_monster',
+		entryId: 'ash_wolf',
 		archetypeId: 'monster',
 		statProfileId: 'creature-balanced',
 		provenance: [{
 			type: 'entry',
 			selection: 'random',
-			generatorId: 'creature-monster',
-			entryId: 'ash-wolf',
+			generatorId: 'creature_monster',
+			entryId: 'ash_wolf',
 			path: 'root',
 		}],
 	};
@@ -160,17 +160,17 @@ test('creature hydration preserves final localized state and technical provenanc
 	saved.traits = [{
 		name: 'Keen Scent',
 		description: 'Tracks by scent.',
-		id: 'keen-scent',
+		id: 'keen_scent',
 	}];
 	saved.status.effects = [{
-		generatorId: 'status-effect',
+		generatorId: 'status_effect',
 		entryId: 'burning',
 		name: 'Burning',
 		description: 'Flames cling to the target.',
 		provenance: [{
 			type: 'entry',
 			selection: 'random',
-			generatorId: 'status-effect',
+			generatorId: 'status_effect',
 			entryId: 'burning',
 			path: 'root.status-effects',
 		}],
@@ -198,7 +198,7 @@ test('creature hydration preserves final localized state and technical provenanc
 	assert.deepEqual(hydrated.status.effects, saved.status.effects);
 	assert.deepEqual(hydrated.modifiers, saved.modifiers);
 	saved.source.entryId = 'changed-after-hydration';
-	assert.equal(hydrated.source.entryId, 'ash-wolf');
+	assert.equal(hydrated.source.entryId, 'ash_wolf');
 });
 
 test('creature saves reject missing, unsupported, mismatched, and invalid state', () => {

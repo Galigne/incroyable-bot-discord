@@ -1,7 +1,6 @@
 {
-  "schemaVersion": 2,
+  "schemaVersion": 3,
   "id": "trap",
-  "kind": "category",
   "visibility": "public",
   "name": "trap",
   "description": "Mechanical, magical, and social hazards",
@@ -10,141 +9,141 @@
   },
   "entries": [
     {
-      "id": "a-pressure-tile-seals-both-doors-and-slowly",
+      "id": "a_pressure_tile_seals_both_doors_and_slowly",
       "weight": 3,
       "value": "A pressure tile seals both doors and slowly fills the room with harmless fog hiding the actual pit."
     },
     {
-      "id": "a-rune-swaps-the-voices-of-the-first",
+      "id": "a_rune_swaps_the_voices_of_the_first",
       "value": "A rune swaps the voices of the first two creatures crossing it until they sincerely agree on something."
     },
     {
-      "id": "a-treasure-chest-loudly-accuses-whoever-opens-it",
+      "id": "a_treasure_chest_loudly_accuses_whoever_opens_it",
       "weight": 2,
       "value": "A treasure chest loudly accuses whoever opens it of theft, alerting nearby guardians by name."
     },
     {
-      "id": "a-hallway-repeats-itself-until-travelers-walk-backward",
+      "id": "a_hallway_repeats_itself_until_travelers_walk_backward",
       "weight": 2,
       "value": "A hallway repeats itself until travelers walk backward or extinguish every light."
     },
     {
-      "id": "a-tripwire-releases-dozens-of-glass-marbles-while",
+      "id": "a_tripwire_releases_dozens_of_glass_marbles_while",
       "weight": 3,
       "value": "A tripwire releases dozens of glass marbles while hidden shutters create a steep downhill floor."
     },
     {
-      "id": "a-door-handle-steals-the-openers-shadow-the",
+      "id": "a_door_handle_steals_the_openers_shadow_the",
       "value": "A door handle steals the opener's shadow; the shadow runs ahead to warn enemies and exaggerate the party's strength."
     },
     {
-      "id": "a-false-healing-fountain-restores-armor-while-quietly",
+      "id": "a_false_healing_fountain_restores_armor_while_quietly",
       "weight": 2,
       "value": "A false healing fountain restores armor while quietly transferring equal damage to the next person who drinks."
     },
     {
-      "id": "a-ceiling-rune-reverses-gravity-for-loose-objects",
+      "id": "a_ceiling_rune_reverses_gravity_for_loose_objects",
       "value": "A ceiling rune reverses gravity for loose objects first, providing a brief warning before affecting creatures."
     },
     {
-      "id": "a-jeweled-idol-teleports-into-the-pack-of",
+      "id": "a_jeweled_idol_teleports_into_the_pack_of",
       "value": "A jeweled idol teleports into the pack of whoever touches it while replacing itself with a screaming replica."
     },
     {
-      "id": "a-stairway-counts-spoken-numbers-saying-thirteen-animates",
+      "id": "a_stairway_counts_spoken_numbers_saying_thirteen_animates",
       "weight": 2,
       "value": "A stairway counts spoken numbers; saying thirteen animates the steps into a stone serpent."
     },
     {
-      "id": "a-locked-gate-opens-easily-when-pushed-but",
+      "id": "a_locked_gate_opens_easily_when_pushed_but",
       "weight": 3,
       "value": "A locked gate opens easily when pushed but triggers darts when lockpicks enter the decorative keyhole."
     },
     {
-      "id": "a-mirror-creates-one-hostile-reflection-per-visible",
+      "id": "a_mirror_creates_one_hostile_reflection_per_visible",
       "weight": 2,
       "value": "A mirror creates one hostile reflection per visible weapon; covering or dropping weapons prevents new copies."
     },
     {
-      "id": "a-floor-of-enchanted-coins-grips-metal-boots",
+      "id": "a_floor_of_enchanted_coins_grips_metal_boots",
       "weight": 2,
       "value": "A floor of enchanted coins grips metal boots and armor while a rolling stone approaches very slowly."
     },
     {
-      "id": "a-painted-eye-marks-the-first-person-who",
+      "id": "a_painted_eye_marks_the_first_person_who",
       "value": "A painted eye marks the first person who lies nearby, causing every statue ahead to watch and target them."
     },
     {
-      "id": "a-bridge-becomes-intangible-when-anyone-runs-forcing",
+      "id": "a_bridge_becomes_intangible_when_anyone_runs_forcing",
       "weight": 2,
       "value": "A bridge becomes intangible when anyone runs, forcing the group to cross calmly despite an approaching threat."
     },
     {
-      "id": "a-music-box-puts-listeners-to-sleep-only",
+      "id": "a_music_box_puts_listeners_to_sleep_only",
       "weight": 2,
       "value": "A music box puts listeners to sleep only when its melody stops, making destroying it immediately dangerous."
     },
     {
-      "id": "a-pantry-mimic-is-harmless-but-attacking-it",
+      "id": "a_pantry_mimic_is_harmless_but_attacking_it",
       "weight": 2,
       "value": "A pantry mimic is harmless, but attacking it awakens the entire hungry kitchen."
     },
     {
-      "id": "a-rune-of-silence-suppresses-all-sound-while",
+      "id": "a_rune_of_silence_suppresses_all_sound_while",
       "value": "A rune of silence suppresses all sound while bells hidden on intruders still alert guards elsewhere."
     },
     {
-      "id": "an-ornate-rug-rolls-around-trespassers-then-politely",
+      "id": "an_ornate_rug_rolls_around_trespassers_then_politely",
       "weight": 2,
       "value": "An ornate rug rolls around trespassers, then politely asks for a password while dragging them toward a chute."
     },
     {
-      "id": "a-trapped-book-erases-one-common-word-from",
+      "id": "a_trapped_book_erases_one_common_word_from",
       "value": "A trapped book erases one common word from the reader's vocabulary and uses the stolen word as its command phrase."
     },
     {
-      "id": "a-corridor-fills-with-illusory-fire-that-causes",
+      "id": "a_corridor_fills_with_illusory_fire_that_causes",
       "value": "A corridor fills with illusory fire that causes no harm unless someone tries to extinguish it."
     },
     {
-      "id": "a-statue-offers-safe-passage-for-one-honest",
+      "id": "a_statue_offers_safe_passage_for_one_honest",
       "weight": 2,
       "value": "A statue offers safe passage for one honest compliment; flattery or sarcasm releases stone wasps."
     },
     {
-      "id": "a-chest-contains-genuine-treasure-balanced-over-a",
+      "id": "a_chest_contains_genuine_treasure_balanced_over_a",
       "weight": 3,
       "value": "A chest contains genuine treasure balanced over a mechanism triggered only when too much weight is removed."
     },
     {
-      "id": "a-door-teleports-anyone-opening-it-to-the",
+      "id": "a_door_teleports_anyone_opening_it_to_the",
       "value": "A door teleports anyone opening it to the opposite side but leaves their carried equipment behind."
     },
     {
-      "id": "a-frost-rune-freezes-the-brightest-object-in",
+      "id": "a_frost_rune_freezes_the_brightest_object_in",
       "value": "A frost rune freezes the brightest object in the room, encouraging clever control of light."
     },
     {
-      "id": "a-harmless-dart-marks-its-target-with-a",
+      "id": "a_harmless_dart_marks_its_target_with_a",
       "weight": 3,
       "value": "A harmless dart marks its target with a scent that attracts the dungeon's real predator."
     },
     {
-      "id": "a-circular-chamber-rotates-its-exits-whenever-someone",
+      "id": "a_circular_chamber_rotates_its_exits_whenever_someone",
       "weight": 2,
       "value": "A circular chamber rotates its exits whenever someone mentions a destination."
     },
     {
-      "id": "a-golden-rope-can-be-crossed-safely-but",
+      "id": "a_golden_rope_can_be_crossed_safely_but",
       "weight": 2,
       "value": "A golden rope can be crossed safely but tightens around anyone attempting to cut or step over it."
     },
     {
-      "id": "a-guardian-portrait-asks-a-personal-question-refusing",
+      "id": "a_guardian_portrait_asks_a_personal_question_refusing",
       "value": "A guardian portrait asks a personal question; refusing locks the door, while lying releases the subject of the lie."
     },
     {
-      "id": "a-pedestal-grants-the-requested-object-then-announces",
+      "id": "a_pedestal_grants_the_requested_object_then_announces",
       "weight": 2,
       "value": "A pedestal grants the requested object, then announces an inconvenient but fair price that must be paid before leaving."
     }

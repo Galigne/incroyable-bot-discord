@@ -142,10 +142,12 @@
       "description": "Générer une inspiration (rôle MJ configuré ou propriétaire du serveur)",
       "schemaDescription": "Générer une inspiration pour le MJ dans la catégorie choisie",
       "categoryOption": "Catégorie de génération",
+      "modifierOption": "Source de modificateur facultative configurée pour la catégorie choisie",
       "unknownCategory": "Catégorie de génération inconnue : **{{category}}**. Utilisez `/help command:gen` pour consulter les détails.",
+      "invalidModifier": "La source de modificateur **{{modifier}}** n'est pas configurée pour la catégorie **{{category}}**.",
       "title": "{{category}} — résultat généré",
-      "modifiers": "Modificateurs",
-      "behavior": "Résout un résultat aléatoire pondéré depuis le générateur public localisé choisi, avec ses modèles imbriqués et ses modificateurs descriptifs lorsqu’ils sont configurés. Les références peuvent utiliser des générateurs internes sans les proposer comme choix racines. Les générateurs publics au schéma v2 deviennent disponibles après /reload ou un redémarrage du bot ; leur liste localisée complète figure ci-dessus."
+      "modifierTitle": "Modificateur généré : {{category}}",
+      "behavior": "Résout un résultat pondéré depuis le générateur public localisé choisi, puis affiche chaque modificateur automatique configuré comme un résultat distinct. Les références intégrées et les relations de modificateurs partagent une profondeur maximale de quatre et conservent la provenance technique. La source de modificateur facultative doit être déclarée par la catégorie choisie ; la sélectionner la génère une fois, quelle que soit sa probabilité automatique."
     },
     "genChar": {
       "description": "Générer un personnage (rôle MJ configuré ou propriétaire du serveur)",
@@ -168,7 +170,7 @@
       "companionChoice": "Compagnon",
       "levelChoice": "Niveau {{level}}",
       "success": "La créature **{{name}}** a été générée et sauvegardée avec la CreatureKey `{{key}}`.",
-      "behavior": "Crée et sauvegarde atomiquement une créature complète en faisant passer le type `monster`, `animal` ou `companion` choisi par le catalogue public `creature`, qui le dirige vers son catalogue de détail interne `creature-*`. La CreatureKey est unique parmi toutes les entités et le niveau doit être compris entre 1 et 10, ou est tiré au hasard s’il est omis. Les profils statistiques partagés répartissent les statistiques et calculent les ressources dérivées ; seules des références explicites peuvent accorder des LOI. Les effets d’état initiaux et les modificateurs proviennent des mêmes catalogues descriptifs que ceux disponibles pour les personnages, tandis que l’équipement, l’inventaire, l’armure naturelle et les métadonnées d’armure sont résolus puis conservés avec une provenance stable. L’encombrement reste manuel et vaut 0 / 0 par défaut. Seuls un MJ configuré ou le propriétaire du serveur peuvent utiliser cette commande."
+      "behavior": "Crée et sauvegarde atomiquement une créature complète en faisant passer le type `monster`, `animal` ou `companion` choisi par le catalogue public `creature`, qui le dirige vers son catalogue de détail interne `creature_*`. La CreatureKey est unique parmi toutes les entités et le niveau doit être compris entre 1 et 10, ou est tiré au hasard s’il est omis. Les profils statistiques partagés répartissent les statistiques et calculent les ressources dérivées ; seules des références explicites peuvent accorder des LOI. Les effets d’état initiaux et les modificateurs proviennent des mêmes catalogues descriptifs que ceux disponibles pour les personnages, tandis que l’équipement, l’inventaire, l’armure naturelle et les métadonnées d’armure sont résolus puis conservés avec une provenance stable. L’encombrement reste manuel et vaut 0 / 0 par défaut. Seuls un MJ configuré ou le propriétaire du serveur peuvent utiliser cette commande."
     },
     "get": {
       "description": "Afficher le résumé d’une entité ou le détail d’un champ compatible",

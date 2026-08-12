@@ -11,7 +11,9 @@ test('production catalogs exclude retired roots and obsolete mechanical payloads
 	assert.doesNotMatch(serialized, /"generator":"(?:npc|criminal)"/);
 	assert.doesNotMatch(serialized, /"Encumbrance"/i);
 	assert.doesNotMatch(serialized, /challengeRating|fixedStatistics|statOverrides/);
-	for (const modifier of all.filter(generator => generator.kind === 'modifier')) {
+	for (const modifier of all.filter(generator => (
+		generator.id === 'modifier' || generator.id.startsWith('site_modifier_')
+	))) {
 		assert.equal(modifier.visibility, 'internal');
 		assert.ok(modifier.entries.every(entry => (
 			Object.keys(entry).every(key => ['id', 'weight', 'fields'].includes(key))
@@ -19,11 +21,12 @@ test('production catalogs exclude retired roots and obsolete mechanical payloads
 	}
 	for (const locale of ['en', 'fr']) {
 		const quest = generatorCatalog.getGenerator('quest', locale);
-		assert.equal(quest.kind, 'template');
+		assert.equal(Object.hasOwn(quest, 'kind'), false);
+		assert.equal(quest.entrySchema.type, 'text');
 		assert.ok(quest.entries.every(entry => (
-			Object.values(entry.references).every(reference => (
-				reference.generator !== 'npc' && reference.generator !== 'criminal'
-			))
+			!Object.hasOwn(entry, 'template')
+			&& !Object.hasOwn(entry, 'references')
+			&& entry.value.includes('{{')
 		)));
 	}
 });

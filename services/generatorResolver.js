@@ -1,14 +1,13 @@
 const generatorCatalog = require('./generatorCatalog');
 const { generatorResolutionError } = require('./generatorResolutionError');
-const { createModifierResolver } = require('./modifierResolver');
 const { createReferenceResolver } = require('./referenceResolver');
+const { parseInlineReference } = require('./generatorSchema/referenceValidation');
 const { selectWeightedEntry } = require('./weightedSelector');
 
-const DEFAULT_MAX_DEPTH = 8;
-const MAX_ALLOWED_DEPTH = 32;
+const DEFAULT_MAX_DEPTH = 4;
+const MAX_ALLOWED_DEPTH = 4;
 
 function createGeneratorResolver({ getGenerator = generatorCatalog.getGenerator } = {}) {
-	const modifierResolver = createModifierResolver({ getGenerator });
 	const referenceResolver = createReferenceResolver({
 		getGenerator,
 		resolveSelection,
@@ -17,30 +16,29 @@ function createGeneratorResolver({ getGenerator = generatorCatalog.getGenerator 
 	function generate(generatorId, locale = 'en', options = {}) {
 		validateOptions(locale, options);
 		const generator = getGenerator(generatorId, locale);
-		if (!generator || generator.visibility !== 'public' || generator.kind === 'modifier') {
+		if (!generator || generator.visibility !== 'public') {
 			return null;
 		}
+		validateExplicitModifier(generator, options.modifier);
 		const random = options.random ?? Math.random;
-		const maxDepth = options.maxDepth ?? DEFAULT_MAX_DEPTH;
+		const state = createState(locale, options, random);
 		const entry = selectWeightedEntry(generator.entries, random);
-		const state = {
-			activeSelections: [],
-			locale,
-			maxDepth,
-			random,
-		};
-		const resolved = resolveSelection(generator, entry, 'random', state, 'root');
+		const resolved = resolveSelection(
+			generator,
+			entry,
+			'random',
+			state,
+			'root',
+			undefined,
+			{ explicitModifier: options.modifier },
+		);
 		return createCompletedResult(generator, entry, resolved);
 	}
 
 	function resolveReference(reference, locale = 'en', options = {}) {
 		validateOptions(locale, options);
-		const state = {
-			activeSelections: [],
-			locale,
-			maxDepth: options.maxDepth ?? DEFAULT_MAX_DEPTH,
-			random: options.random ?? Math.random,
-		};
+		const random = options.random ?? Math.random;
+		const state = createState(locale, options, random);
 		return referenceResolver.resolveReference(
 			reference,
 			locale,
@@ -49,7 +47,47 @@ function createGeneratorResolver({ getGenerator = generatorCatalog.getGenerator 
 		);
 	}
 
-	function resolveSelection(generator, entry, selection, state, path) {
+	function resolveInlineReference(expression, locale = 'en', options = {}) {
+		validateOptions(locale, options);
+		const random = options.random ?? Math.random;
+		const state = options.state ?? createState(locale, options, random);
+		return resolveInlineReferenceInState(expression, state, options.path ?? 'root.inline');
+	}
+
+	function resolveInlineReferenceInState(expression, state, path) {
+		const wrapped = typeof expression === 'string'
+			? expression.match(/^\s*\{\{([^{}]+)\}\}\s*$/)
+			: null;
+		const parsed = parseInlineReference(wrapped?.[1] ?? expression, path);
+		const resolved = referenceResolver.resolveReference(
+			{
+				generator: parsed.generator,
+				...(parsed.entry ? { entry: parsed.entry } : {}),
+				select: parsed.field ? `fields.${parsed.field}` : 'display',
+			},
+			state.locale,
+			state,
+			path,
+		);
+		return {
+			value: resolved.outputType === 'fields' && !parsed.field
+				? resolved.display
+				: resolved.value,
+			fields: resolved.fields,
+			provenance: resolved.provenance,
+			modifiers: resolved.modifiers,
+		};
+	}
+
+	function resolveSelection(
+		generator,
+		entry,
+		selection,
+		state,
+		path,
+		requestedField,
+		options = {},
+	) {
 		const selectionKey = `${generator.id}:${entry.id}`;
 		if (state.activeSelections.includes(selectionKey)) {
 			throw generatorResolutionError(
@@ -66,12 +104,12 @@ function createGeneratorResolver({ getGenerator = generatorCatalog.getGenerator 
 
 		state.activeSelections.push(selectionKey);
 		try {
-			const payload = resolvePayload(generator, entry, state, path);
-			const ownModifiers = modifierResolver.resolveModifierRequests(
-				[...(generator.modifiers ?? []), ...(entry.modifiers ?? [])],
-				generator.id,
-				state.locale,
-				{ random: state.random, path: `${path}.modifiers` },
+			const payload = resolvePayload(generator, entry, state, path, requestedField);
+			const ownModifiers = resolveGeneratorModifiers(
+				generator,
+				state,
+				`${path}.modifiers`,
+				options.explicitModifier,
 			);
 			return {
 				...payload,
@@ -93,53 +131,132 @@ function createGeneratorResolver({ getGenerator = generatorCatalog.getGenerator 
 		}
 	}
 
-	function resolvePayload(generator, entry, state, path) {
-		if (generator.entrySchema.type === 'text') {
-			return {
-				outputType: 'value',
-				value: entry.value,
-				display: entry.value,
-				provenance: [],
-				modifiers: [],
-			};
-		}
-		if (generator.entrySchema.type === 'fields') {
-			const fields = { ...entry.fields };
-			return {
-				outputType: 'fields',
-				fields,
-				displayFields: getDisplayFields(generator, fields),
-				display: getFieldsDisplay(generator, fields),
-				provenance: [],
-				modifiers: [],
-			};
-		}
-		return resolveTemplate(entry, state.locale, state, path);
+	function resolveGeneratorModifiers(generator, state, path, explicitModifier) {
+		return Object.entries(generator.modifiers ?? {}).flatMap((
+			[modifierId, percentage],
+			index,
+		) => {
+			const isExplicit = modifierId === explicitModifier;
+			if (!isExplicit && readRandom(state.random) >= percentage / 100) {
+				return [];
+			}
+			const modifierGenerator = getGenerator(modifierId, state.locale);
+			if (!modifierGenerator) {
+				throw generatorResolutionError(
+					'GENERATOR_MODIFIER_MISSING',
+					'The requested modifier generator is unavailable.',
+				);
+			}
+			const entry = selectWeightedEntry(modifierGenerator.entries, state.random);
+			const modifierPath = `${path}.${index}.${modifierId}`;
+			const resolved = resolveSelection(
+				modifierGenerator,
+				entry,
+				'random',
+				state,
+				modifierPath,
+			);
+			return [createCompletedResult(modifierGenerator, entry, resolved)];
+		});
 	}
 
-	function resolveTemplate(entry, locale, state, path) {
-		let templateOutput = entry.template;
-		const provenance = [];
-		const modifiers = [];
-		for (const [name, reference] of Object.entries(entry.references)) {
-			const referencePath = `${path}.references.${name}`;
-			const resolved = referenceResolver.resolveReference(
-				reference,
-				locale,
-				state,
-				referencePath,
-			);
-			const markerValue = formatTemplateReferenceValue(resolved.value);
-			templateOutput = templateOutput
-				.split(`{{${name}}}`)
-				.join(markerValue);
-			provenance.push(...resolved.provenance);
-			modifiers.push(...resolved.modifiers);
+	function resolvePayload(generator, entry, state, path, requestedField) {
+		if (generator.entrySchema.type === 'text') {
+			const resolved = resolveInlineString(entry.value, state, `${path}.value`);
+			return {
+				outputType: 'value',
+				value: resolved.value,
+				display: resolved.value,
+				provenance: resolved.provenance,
+				modifiers: resolved.modifiers,
+			};
 		}
+
+		const fields = { ...entry.fields };
+		const technical = new Set(generator.entrySchema.technical ?? []);
+		const displayFields = {};
+		let provenance = [];
+		let modifiers = [];
+		if (requestedField === undefined) {
+			for (const field of generator.entrySchema.required) {
+				if (technical.has(field)) {
+					continue;
+				}
+				const resolved = resolveInlineString(
+					String(fields[field]),
+					state,
+					`${path}.fields.${field}`,
+				);
+				displayFields[field] = resolved.value;
+				provenance = [...provenance, ...resolved.provenance];
+				modifiers = [...modifiers, ...resolved.modifiers];
+			}
+		}
+
+		let selectedField;
+		if (requestedField !== undefined) {
+			if (!Object.hasOwn(fields, requestedField)) {
+				throw generatorResolutionError(
+					'INVALID_GENERATOR_SELECTOR',
+					'The generator selector is not valid for the selected entry.',
+				);
+			}
+			if (typeof fields[requestedField] === 'string') {
+				const resolved = resolveInlineString(
+					fields[requestedField],
+					state,
+					`${path}.fields.${requestedField}`,
+				);
+				selectedField = resolved.value;
+				provenance = [...provenance, ...resolved.provenance];
+				modifiers = [...modifiers, ...resolved.modifiers];
+			}
+			else {
+				selectedField = fields[requestedField];
+			}
+		}
+
+		const display = generator.entrySchema.required
+			.filter(field => !technical.has(field))
+			.map(field => displayFields[field])
+			.join(' — ');
 		return {
-			outputType: 'template',
-			templateOutput,
-			display: templateOutput,
+			outputType: 'fields',
+			fields,
+			displayFields,
+			display,
+			selectedField,
+			provenance,
+			modifiers,
+		};
+	}
+
+	function resolveInlineString(value, state, path) {
+		if (typeof value !== 'string') {
+			return { value: String(value), provenance: [], modifiers: [] };
+		}
+		const matcher = /\{\{([^{}]*)\}\}/g;
+		let output = '';
+		let cursor = 0;
+		let referenceIndex = 0;
+		let provenance = [];
+		let modifiers = [];
+		for (const match of value.matchAll(matcher)) {
+			output += value.slice(cursor, match.index);
+			const resolved = resolveInlineReferenceInState(
+				match[1],
+				state,
+				`${path}.references.${referenceIndex}`,
+			);
+			output += formatInlineValue(resolved.value);
+			provenance = [...provenance, ...resolved.provenance];
+			modifiers = [...modifiers, ...resolved.modifiers];
+			cursor = match.index + match[0].length;
+			referenceIndex += 1;
+		}
+		output += value.slice(cursor);
+		return {
+			value: output,
 			provenance,
 			modifiers,
 		};
@@ -147,43 +264,32 @@ function createGeneratorResolver({ getGenerator = generatorCatalog.getGenerator 
 
 	return {
 		generate,
+		resolveInlineReference,
 		resolveReference,
 	};
+
+	function createState(locale, options, random) {
+		return {
+			activeSelections: [],
+			locale,
+			maxDepth: options.maxDepth ?? DEFAULT_MAX_DEPTH,
+			random,
+		};
+	}
 }
 
-function formatTemplateReferenceValue(value) {
+function formatInlineValue(value) {
 	if (['string', 'number', 'boolean'].includes(typeof value)) {
 		return String(value);
 	}
-	if (value && typeof value === 'object' && !Array.isArray(value)) {
-		const fieldValues = Object.values(value);
-		if (fieldValues.every(field => (
-			['string', 'number', 'boolean'].includes(typeof field)
-		))) {
-			return fieldValues.map(String).join(' — ');
-		}
-	}
 	throw generatorResolutionError(
-		'GENERATOR_TEMPLATE_REFERENCE_INVALID',
-		'A template marker resolved to an unsupported value.',
+		'GENERATOR_INLINE_REFERENCE_INVALID',
+		'An inline generator reference resolved to an unsupported value.',
 	);
 }
 
-function getDisplayFields(generator, fields) {
-	const technical = new Set(generator.entrySchema.technical ?? []);
-	return Object.fromEntries(
-		Object.entries(fields).filter(([field]) => !technical.has(field)),
-	);
-}
-
-function getFieldsDisplay(generator, fields) {
-	if (Object.hasOwn(fields, 'Name')) {
-		return String(fields.Name);
-	}
-	const technical = new Set(generator.entrySchema.technical ?? []);
-	const displayField = generator.entrySchema.required.find(field => !technical.has(field))
-		?? generator.entrySchema.required[0];
-	return String(fields[displayField]);
+function readRandom(random) {
+	return Math.max(0, Math.min(0.9999999999999999, random()));
 }
 
 function createCompletedResult(generator, entry, resolved) {
@@ -198,9 +304,6 @@ function createCompletedResult(generator, entry, resolved) {
 	if (resolved.outputType === 'fields') {
 		result.fields = resolved.fields;
 		result.displayFields = resolved.displayFields;
-	}
-	else if (resolved.outputType === 'template') {
-		result.templateOutput = resolved.templateOutput;
 	}
 	else {
 		result.value = resolved.value;
@@ -217,6 +320,15 @@ function validateOptions(locale, options) {
 	}
 	if (options.random !== undefined && typeof options.random !== 'function') {
 		throw new TypeError('Generator random option must be a function.');
+	}
+	if (
+		options.modifier !== undefined
+		&& (
+			typeof options.modifier !== 'string'
+			|| !options.modifier.trim()
+		)
+	) {
+		throw new TypeError('Generator modifier option must be a non-empty string.');
 	}
 	if (
 		options.maxDepth !== undefined
@@ -236,10 +348,21 @@ function validateOptions(locale, options) {
 	}
 }
 
+function validateExplicitModifier(generator, modifierId) {
+	if (modifierId === undefined || Object.hasOwn(generator.modifiers ?? {}, modifierId)) {
+		return;
+	}
+	throw generatorResolutionError(
+		'GENERATOR_MODIFIER_INVALID',
+		'The selected modifier is not configured for this generator.',
+	);
+}
+
 const defaultResolver = createGeneratorResolver();
 
 module.exports = {
 	createGeneratorResolver,
 	generate: defaultResolver.generate,
+	resolveInlineReference: defaultResolver.resolveInlineReference,
 	resolveReference: defaultResolver.resolveReference,
 };

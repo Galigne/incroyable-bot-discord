@@ -1,241 +1,240 @@
 {
-  "schemaVersion": 2,
+  "schemaVersion": 3,
   "id": "talents",
-  "kind": "category",
   "visibility": "public",
   "name": "talents",
   "description": "Character talents and specialties",
   "entrySchema": {
     "type": "fields",
-    "required": ["Name", "Description"]
+    "required": ["name", "description"]
   },
   "entries": [
     {
       "id": "athlete",
       "weight": 3,
       "fields": {
-        "Name": "Athlete",
-        "Description": "+1 to physical actions involving sustained movement, climbing, or jumping."
+        "name": "Athlete",
+        "description": "+1 to physical actions involving sustained movement, climbing, or jumping."
       }
     },
     {
-      "id": "keen-eye",
+      "id": "keen_eye",
       "weight": 3,
       "fields": {
-        "Name": "Keen Eye",
-        "Description": "+1 when searching for small details, tracks, traps, or hidden objects."
+        "name": "Keen Eye",
+        "description": "+1 when searching for small details, tracks, traps, or hidden objects."
       }
     },
     {
-      "id": "silver-tongue",
+      "id": "silver_tongue",
       "weight": 3,
       "fields": {
-        "Name": "Silver Tongue",
-        "Description": "+1 to persuasion when the character has time to explain their position."
+        "name": "Silver Tongue",
+        "description": "+1 to persuasion when the character has time to explain their position."
       }
     },
     {
       "id": "survivor",
       "weight": 3,
       "fields": {
-        "Name": "Survivor",
-        "Description": "+1 to endure harsh weather, hunger, exhaustion, or difficult travel."
+        "name": "Survivor",
+        "description": "+1 to endure harsh weather, hunger, exhaustion, or difficult travel."
       }
     },
     {
       "id": "assassin",
       "weight": 2,
       "fields": {
-        "Name": "Assassin",
-        "Description": "Attacks are more effective when the target has not detected the character."
+        "name": "Assassin",
+        "description": "Attacks are more effective when the target has not detected the character."
       }
     },
     {
       "id": "bodybuilder",
       "weight": 2,
       "fields": {
-        "Name": "Bodybuilder",
-        "Description": "+1 to actions based on raw Strength."
+        "name": "Bodybuilder",
+        "description": "+1 to actions based on raw Strength."
       }
     },
     {
       "id": "politician",
       "weight": 2,
       "fields": {
-        "Name": "Politician",
-        "Description": "+2 Charisma during formal negotiations and political discussions."
+        "name": "Politician",
+        "description": "+2 Charisma during formal negotiations and political discussions."
       }
     },
     {
-      "id": "field-medic",
+      "id": "field_medic",
       "weight": 2,
       "fields": {
-        "Name": "Field Medic",
-        "Description": "+1 when stabilizing injuries or using mundane medical supplies."
+        "name": "Field Medic",
+        "description": "+1 when stabilizing injuries or using mundane medical supplies."
       }
     },
     {
-      "id": "quick-draw",
+      "id": "quick_draw",
       "weight": 2,
       "fields": {
-        "Name": "Quick Draw",
-        "Description": "Drawing or changing a readied weapon does not slow the character's first action."
+        "name": "Quick Draw",
+        "description": "Drawing or changing a readied weapon does not slow the character's first action."
       }
     },
     {
-      "id": "shield-expert",
+      "id": "shield_expert",
       "weight": 2,
       "fields": {
-        "Name": "Shield Expert",
-        "Description": "+1 when blocking with a shield or protecting an adjacent ally."
+        "name": "Shield Expert",
+        "description": "+1 when blocking with a shield or protecting an adjacent ally."
       }
     },
     {
       "id": "tracker",
       "weight": 2,
       "fields": {
-        "Name": "Tracker",
-        "Description": "+2 when following a trail left by a known creature."
+        "name": "Tracker",
+        "description": "+2 when following a trail left by a known creature."
       }
     },
     {
-      "id": "arcane-student",
+      "id": "arcane_student",
       "weight": 2,
       "fields": {
-        "Name": "Arcane Student",
-        "Description": "+1 when identifying a RULE, rune, or magical phenomenon."
+        "name": "Arcane Student",
+        "description": "+1 when identifying a RULE, rune, or magical phenomenon."
       }
     },
     {
       "id": "craftsperson",
       "weight": 2,
       "fields": {
-        "Name": "Craftsperson",
-        "Description": "+1 when repairing, evaluating, or creating mundane equipment."
+        "name": "Craftsperson",
+        "description": "+1 when repairing, evaluating, or creating mundane equipment."
       }
     },
     {
       "id": "duelist",
       "weight": 2,
       "fields": {
-        "Name": "Duelist",
-        "Description": "+1 when fighting a single visible opponent without nearby interference."
+        "name": "Duelist",
+        "description": "+1 when fighting a single visible opponent without nearby interference."
       }
     },
     {
-      "id": "beast-friend",
+      "id": "beast_friend",
       "weight": 2,
       "fields": {
-        "Name": "Beast Friend",
-        "Description": "+2 when calming or understanding ordinary animals."
+        "name": "Beast Friend",
+        "description": "+2 when calming or understanding ordinary animals."
       }
     },
     {
       "id": "sailor",
       "weight": 2,
       "fields": {
-        "Name": "Sailor",
-        "Description": "+2 to navigation, rigging, and balance aboard a vessel."
+        "name": "Sailor",
+        "description": "+2 to navigation, rigging, and balance aboard a vessel."
       }
     },
     {
       "id": "streetwise",
       "weight": 2,
       "fields": {
-        "Name": "Streetwise",
-        "Description": "+1 when finding illicit goods, rumors, or safe routes through a city."
+        "name": "Streetwise",
+        "description": "+1 when finding illicit goods, rumors, or safe routes through a city."
       }
     },
     {
       "id": "unshakable",
       "weight": 2,
       "fields": {
-        "Name": "Unshakable",
-        "Description": "+1 to resist fear, intimidation, and supernatural dread."
+        "name": "Unshakable",
+        "description": "+1 to resist fear, intimidation, and supernatural dread."
       }
     },
     {
-      "id": "cold-immunity",
+      "id": "cold_immunity",
       "fields": {
-        "Name": "Cold Immunity",
-        "Description": "The character cannot be frozen by ordinary cold."
+        "name": "Cold Immunity",
+        "description": "The character cannot be frozen by ordinary cold."
       }
     },
     {
-      "id": "poison-tolerance",
+      "id": "poison_tolerance",
       "fields": {
-        "Name": "Poison Tolerance",
-        "Description": "+2 to resist poison and identify common toxins by taste or smell."
+        "name": "Poison Tolerance",
+        "description": "+2 to resist poison and identify common toxins by taste or smell."
       }
     },
     {
       "id": "ambidextrous",
       "fields": {
-        "Name": "Ambidextrous",
-        "Description": "The character can use either hand with equal precision."
+        "name": "Ambidextrous",
+        "description": "The character can use either hand with equal precision."
       }
     },
     {
-      "id": "battle-rhythm",
+      "id": "battle_rhythm",
       "fields": {
-        "Name": "Battle Rhythm",
-        "Description": "After a successful coordinated attack, gain +1 on the next allied action in the same turn."
+        "name": "Battle Rhythm",
+        "description": "After a successful coordinated attack, gain +1 on the next allied action in the same turn."
       }
     },
     {
-      "id": "rune-listener",
+      "id": "rune_listener",
       "fields": {
-        "Name": "Rune Listener",
-        "Description": "The character can sense whether a touched rune is dormant or active."
+        "name": "Rune Listener",
+        "description": "The character can sense whether a touched rune is dormant or active."
       }
     },
     {
-      "id": "perfect-memory",
+      "id": "perfect_memory",
       "fields": {
-        "Name": "Perfect Memory",
-        "Description": "+2 when recalling a scene, route, face, or exact spoken detail."
+        "name": "Perfect Memory",
+        "description": "+2 when recalling a scene, route, face, or exact spoken detail."
       }
     },
     {
       "id": "improviser",
       "fields": {
-        "Name": "Improviser",
-        "Description": "+1 when using an ordinary object for an unintended but plausible purpose."
+        "name": "Improviser",
+        "description": "+1 when using an ordinary object for an unintended but plausible purpose."
       }
     },
     {
-      "id": "last-stand",
+      "id": "last_stand",
       "fields": {
-        "Name": "Last Stand",
-        "Description": "+1 to actions while at or below 20% of maximum HP."
+        "name": "Last Stand",
+        "description": "+1 to actions while at or below 20% of maximum HP."
       }
     },
     {
-      "id": "danger-sense",
+      "id": "danger_sense",
       "fields": {
-        "Name": "Danger Sense",
-        "Description": "+1 to Reflexes when reacting to an unseen or unexpected threat."
+        "name": "Danger Sense",
+        "description": "+1 to Reflexes when reacting to an unseen or unexpected threat."
       }
     },
     {
-      "id": "heavy-hitter",
+      "id": "heavy_hitter",
       "fields": {
-        "Name": "Heavy Hitter",
-        "Description": "A successful heavy melee attack produces a stronger positional effect."
+        "name": "Heavy Hitter",
+        "description": "A successful heavy melee attack produces a stronger positional effect."
       }
     },
     {
-      "id": "lucky-break",
+      "id": "lucky_break",
       "fields": {
-        "Name": "Lucky Break",
-        "Description": "Once per session, reroll a failed non-critical utility roll."
+        "name": "Lucky Break",
+        "description": "Once per session, reroll a failed non-critical utility roll."
       }
     },
     {
-      "id": "inspiring-presence",
+      "id": "inspiring_presence",
       "fields": {
-        "Name": "Inspiring Presence",
-        "Description": "Once per scene, an ally who hears the character gains +1 against fear."
+        "name": "Inspiring Presence",
+        "description": "Once per scene, an ally who hears the character gains +1 against fear."
       }
     }
   ]

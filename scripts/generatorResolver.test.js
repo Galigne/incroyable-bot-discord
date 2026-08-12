@@ -1,114 +1,91 @@
 const assert = require('node:assert/strict');
 const { test } = require('node:test');
 const { createGeneratorResolver } = require('../services/generatorResolver');
-const { createModifierResolver } = require('../services/modifierResolver');
 const { selectResolvedOutput } = require('../services/referenceResolver');
 const {
 	validateGeneratorDefinition,
 	validateGeneratorPair,
 	validateGeneratorRelationships,
 } = require('../services/generatorSchema');
-const { createGeneratedEmbed } = require('../util/generatorResponses');
+const {
+	createGeneratedEmbed,
+	createGeneratorResponse,
+} = require('../util/generatorResponses');
 
-test('nested templates resolve random, fixed, weighted, and display references with provenance', () => {
+test('inline references resolve text, structured display, explicit fields, and provenance', () => {
 	const catalogs = createLocalizedCatalogs();
 	const resolver = createFixtureResolver(catalogs);
 	const result = resolver.generate('quest', 'en', {
-		random: sequenceRandom([0, 0, 0.8, 0, 0, 0, 0.9]),
+		random: sequenceRandom([0, 0, 0]),
 	});
 
-	assert.equal(result.generatorId, 'quest');
-	assert.equal(result.generatorName, 'Quests');
-	assert.equal(result.entryId, 'recover-before-rival');
-	assert.equal(result.outputType, 'template');
+	assert.equal(result.outputType, 'value');
 	assert.equal(
-		result.templateOutput,
-		'Recover Relic from Harbor before Criminal meets the Criminal.',
+		result.value,
+		'Recover Relic from Criminal — An outlaw at Relic — A valuable object.',
 	);
 	assert.deepEqual(
 		result.provenance.map(provenanceIdentity),
 		[
-			'entry:random:quest:recover-before-rival',
+			'entry:random:quest:recover_item',
 			'entry:random:item:relic',
-			'generator-source:weighted:site-b:',
-			'entry:random:site-b:harbor',
 			'entry:fixed:person:criminal',
-			'entry:random:nested-role:meeting',
-			'entry:fixed:person:criminal',
+			'entry:random:item:relic',
 		],
 	);
-	assert.deepEqual(result.modifiers.map(modifier => modifier.entryId), ['enraged']);
-	assert.deepEqual(
-		result.modifiers[0].provenance.map(provenanceIdentity),
-		['entry:random:quest-modifier:enraged'],
+
+	const fields = resolver.resolveReference(
+		{ generator: 'item', entry: 'relic', select: 'fields' },
+		'en',
+	);
+	assert.deepEqual(fields.value, {
+		name: 'Relic',
+		description: 'A valuable object',
+	});
+	assert.equal(
+		resolver.resolveInlineReference('{{ item:relic.name }}', 'en').value,
+		'Relic',
 	);
 });
 
-test('equivalent deterministic input selects the same IDs across locales', () => {
+test('equivalent deterministic input preserves inline selection IDs across locales', () => {
 	const catalogs = createLocalizedCatalogs();
 	const resolver = createFixtureResolver(catalogs);
-	const randomValues = [0, 0, 0.8, 0, 0, 0, 0.9];
-	const english = resolver.generate('quest', 'en', {
-		random: sequenceRandom(randomValues),
-	});
-	const french = resolver.generate('quest', 'fr', {
-		random: sequenceRandom(randomValues),
-	});
+	const values = [0, 0.9, 0.1];
+	const english = resolver.generate('quest', 'en', { random: sequenceRandom(values) });
+	const french = resolver.generate('quest', 'fr', { random: sequenceRandom(values) });
 
-	assert.notEqual(english.templateOutput, french.templateOutput);
-	assert.equal(
-		french.templateOutput,
-		'Récupérez Relique au Port avant que Criminel ne rencontre le personnage Criminel.',
-	);
+	assert.notEqual(english.value, french.value);
 	assert.deepEqual(
 		english.provenance.map(provenanceIdentity),
 		french.provenance.map(provenanceIdentity),
 	);
-	assert.deepEqual(
-		english.modifiers.map(modifier => [modifier.generatorId, modifier.entryId]),
-		french.modifiers.map(modifier => [modifier.generatorId, modifier.entryId]),
-	);
-	assert.equal(english.modifiers[0].name, 'Enraged');
-	assert.equal(french.modifiers[0].name, 'Furieux');
 });
 
-test('fixed references do not consume randomness for entry selection', () => {
-	const calls = [];
+test('fixed inline references do not consume randomness for entry selection', () => {
 	const catalog = new Map([
 		['person', createPersonGenerator('en')],
-		['fixed-prompt', {
-			schemaVersion: 2,
-			id: 'fixed-prompt',
-			kind: 'template',
+		['fixed_prompt', {
+			schemaVersion: 3,
+			id: 'fixed_prompt',
 			visibility: 'public',
 			name: 'Fixed prompt',
 			description: 'A fixed prompt',
-			entrySchema: { type: 'template' },
-			entries: [{
-				id: 'fixed-role',
-				template: 'Meet {{role}}',
-				references: {
-					role: {
-						generator: 'person',
-						entry: 'criminal',
-						select: 'fields',
-					},
-				},
-			}],
+			entrySchema: { type: 'text' },
+			entries: [{ id: 'fixed_role', value: 'Meet {{ person:criminal }}.' }],
 		}],
 	]);
-	const resolver = createGeneratorResolver({
-		getGenerator: id => catalog.get(id),
-	});
-	const result = resolver.generate('fixed-prompt', 'en', {
+	const resolver = createGeneratorResolver({ getGenerator: id => catalog.get(id) });
+	let calls = 0;
+	const result = resolver.generate('fixed_prompt', 'en', {
 		random: () => {
-			calls.push('random');
+			calls += 1;
 			return 0;
 		},
 	});
 
-	assert.equal(result.templateOutput, 'Meet Criminal — An outlaw.');
-	assert.equal(calls.length, 1);
+	assert.equal(result.value, 'Meet Criminal — An outlaw.');
+	assert.equal(calls, 1);
 	assert.equal(result.provenance[1].selection, 'fixed');
 });
 
@@ -120,236 +97,120 @@ test('selectors return values, complete field groups, individual fields, and dis
 	};
 	const fieldsResult = {
 		outputType: 'fields',
-		fields: { Name: 'Criminal', Description: 'An outlaw.' },
-		display: 'Criminal',
-	};
-	const templateResult = {
-		outputType: 'template',
-		templateOutput: 'A resolved quest.',
-		display: 'A resolved quest.',
+		fields: { name: 'Criminal', description: 'An outlaw.' },
+		selectedField: 'Criminal',
+		display: 'Criminal — An outlaw.',
 	};
 
 	assert.equal(selectResolvedOutput(valueResult, 'value'), 'Rain');
 	assert.equal(selectResolvedOutput(valueResult, 'display'), 'Rain');
 	assert.deepEqual(selectResolvedOutput(fieldsResult, 'fields'), fieldsResult.fields);
 	assert.notEqual(selectResolvedOutput(fieldsResult, 'fields'), fieldsResult.fields);
-	assert.equal(selectResolvedOutput(fieldsResult, 'fields.Name'), 'Criminal');
-	assert.equal(selectResolvedOutput(fieldsResult, 'display'), 'Criminal');
-	assert.equal(selectResolvedOutput(templateResult, 'display'), 'A resolved quest.');
+	assert.equal(selectResolvedOutput(fieldsResult, 'fields.name'), 'Criminal');
+	assert.equal(selectResolvedOutput(fieldsResult, 'display'), 'Criminal — An outlaw.');
 	assert.throws(
-		() => selectResolvedOutput(valueResult, 'fields.Name'),
+		() => selectResolvedOutput(valueResult, 'fields.name'),
 		error => error.code === 'INVALID_GENERATOR_SELECTOR',
 	);
 });
 
-test('resolution reports stable cycle and bounded-depth errors', () => {
-	const cycle = createCycleCatalog();
-	const cycleResolver = createGeneratorResolver({
-		getGenerator: id => cycle.get(id),
-	});
+test('resolution reports stable cycle and a maximum of four active selections', () => {
+	const cycle = new Map([['loop', createTextGenerator('loop', '{{ loop:rain }}')]]);
+	const cycleResolver = createGeneratorResolver({ getGenerator: id => cycle.get(id) });
 	assert.throws(
 		() => cycleResolver.generate('loop', 'en', { random: () => 0 }),
 		error => error.code === 'GENERATOR_REFERENCE_CYCLE',
 	);
 
-	const chain = createDepthCatalog();
-	const depthResolver = createGeneratorResolver({
-		getGenerator: id => chain.get(id),
-	});
+	const chain = new Map([
+		['chain', {
+			schemaVersion: 3,
+			id: 'chain',
+			visibility: 'public',
+			name: 'Chain',
+			description: 'Nested chain',
+			entrySchema: { type: 'text' },
+			entries: [
+				{ id: 'first', value: '{{ chain:second }}' },
+				{ id: 'second', value: '{{ chain:third }}' },
+				{ id: 'third', value: '{{ chain:fourth }}' },
+				{ id: 'fourth', value: '{{ ending }}' },
+			],
+		}],
+		['ending', createTextGenerator('ending', 'Done')],
+	]);
+	const chainResolver = createGeneratorResolver({ getGenerator: id => chain.get(id) });
 	assert.throws(
-		() => depthResolver.generate('chain', 'en', {
-			random: () => 0,
-			maxDepth: 2,
-		}),
+		() => chainResolver.generate('chain', 'en', { random: () => 0 }),
 		error => error.code === 'GENERATOR_MAX_DEPTH_EXCEEDED',
 	);
 });
 
-test('modifier chance, inclusive count, weighted uniqueness, and compatibility are enforced', () => {
+test('modifier sources use percentage maps, ordinary resolution, and explicit selection', () => {
 	const catalogs = createLocalizedCatalogs();
-	const english = catalogs.get('en');
-	const resolver = createModifierResolver({
-		getGenerator: id => english.get(id),
+	const resolver = createFixtureResolver(catalogs);
+	const automatic = resolver.generate('quest', 'en', {
+		random: sequenceRandom([0, 0, 0]),
 	});
-	const request = {
-		generator: 'quest-modifier',
-		chance: 0.25,
-		count: { min: 1, max: 1 },
-	};
-	let chanceCalls = 0;
-	assert.deepEqual(
-		resolver.resolveModifierRequests([request], 'quest', 'en', {
-			random: () => {
-				chanceCalls += 1;
-				return 0.25;
-			},
-		}),
-		[],
-	);
-	assert.equal(chanceCalls, 1);
+	assert.equal(automatic.modifiers.length, 1);
+	assert.equal(automatic.modifiers[0].outputType, 'fields');
+	assert.equal(automatic.modifiers[0].fields.name, 'Urgent');
 
-	const records = resolver.resolveModifierRequests([{
-		...request,
-		chance: 1,
-		count: { min: 1, max: 2 },
-	}], 'quest', 'en', {
-		random: sequenceRandom([0, 0.999999, 0, 0.999999]),
+	catalogs.get('en').get('quest').modifiers.quest_modifier = 25;
+	const boundary = resolver.generate('quest', 'en', { random: () => 0.25 });
+	assert.deepEqual(boundary.modifiers, []);
+	const explicit = resolver.generate('quest', 'en', {
+		modifier: 'quest_modifier',
+		random: sequenceRandom([0, 0.999999]),
 	});
-	assert.equal(records.length, 2);
-	assert.equal(new Set(records.map(record => record.entryId)).size, 2);
-	assert.throws(
-		() => resolver.resolveModifierRequests([{
-			...request,
-			chance: 1,
-		}], 'item', 'en', { random: sequenceRandom([0]) }),
-		error => error.code === 'GENERATOR_MODIFIER_INCOMPATIBLE',
-	);
-	assert.throws(
-		() => resolver.resolveModifierRequests([{
-			...request,
-			generator: 'missing-modifier',
-			chance: 0,
-		}], 'quest', 'en', { random: sequenceRandom([0]) }),
-		error => error.code === 'GENERATOR_MODIFIER_MISSING',
-	);
+	assert.equal(explicit.modifiers.length, 1);
+	assert.equal(explicit.modifiers[0].generatorId, 'quest_modifier');
 });
 
-test('descriptive modifiers attach without mutating the base resolved result', () => {
-	const withModifierCatalogs = createLocalizedCatalogs();
-	const withoutModifierCatalogs = createLocalizedCatalogs({ includeRequest: false });
-	const withModifiers = createFixtureResolver(withModifierCatalogs).generate('quest', 'en', {
-		random: sequenceRandom([0, 0, 0.8, 0, 0, 0, 0.9]),
-	});
-	const withoutModifiers = createFixtureResolver(withoutModifierCatalogs).generate(
-		'quest',
-		'en',
-		{ random: sequenceRandom([0, 0, 0.8, 0, 0]) },
-	);
-	const { modifiers, ...baseWithModifiers } = withModifiers;
-	const { modifiers: emptyModifiers, ...baseWithoutModifiers } = withoutModifiers;
-
-	assert.equal(modifiers.length, 1);
-	assert.deepEqual(emptyModifiers, []);
-	assert.deepEqual(baseWithModifiers, baseWithoutModifiers);
-});
-
-test('template schemas preserve localized placeholders and technical parity', () => {
-	const catalogs = createLocalizedCatalogs();
-	for (const generator of catalogs.get('en').values()) {
-		assert.equal(validateGeneratorDefinition(generator), generator);
-		assert.equal(
-			validateGeneratorPair(generator, catalogs.get('fr').get(generator.id)),
-			true,
-		);
-	}
-
-	const mismatchedTemplate = structuredClone(catalogs.get('fr').get('quest'));
-	mismatchedTemplate.entries[0].template = 'Récupérez {{item}}.';
-	assert.throws(
-		() => validateGeneratorPair(catalogs.get('en').get('quest'), mismatchedTemplate),
-		error => error.code === 'GENERATOR_TEMPLATE_REFERENCE_MISMATCH',
-	);
-	const mismatchedSource = structuredClone(catalogs.get('fr').get('quest'));
-	mismatchedSource.entries[0].references.site.generator.oneOf[0].weight = 4;
-	assert.throws(
-		() => validateGeneratorPair(catalogs.get('en').get('quest'), mismatchedSource),
-		error => error.code === 'GENERATOR_LOCALE_PARITY_MISMATCH',
-	);
-	const mismatchedChance = structuredClone(catalogs.get('fr').get('quest'));
-	mismatchedChance.modifiers[0].chance = 0.5;
-	assert.throws(
-		() => validateGeneratorPair(catalogs.get('en').get('quest'), mismatchedChance),
-		error => error.code === 'GENERATOR_LOCALE_PARITY_MISMATCH',
-	);
-});
-
-test('modifier schemas and requests remain descriptive and bounded', () => {
-	const catalogs = createLocalizedCatalogs();
-	const mechanicalModifier = structuredClone(catalogs.get('en').get('quest-modifier'));
-	mechanicalModifier.entries[0].mechanics = { strength: 2 };
-	assert.throws(
-		() => validateGeneratorDefinition(mechanicalModifier),
-		error => error.code === 'INVALID_GENERATOR_STRUCTURE',
-	);
-	const mechanicalField = structuredClone(catalogs.get('en').get('quest-modifier'));
-	mechanicalField.entrySchema.required.push('Effects');
-	mechanicalField.entries.forEach(entry => {
-		entry.fields.Effects = 'None';
-	});
-	assert.throws(
-		() => validateGeneratorDefinition(mechanicalField),
-		error => error.code === 'MODIFIER_MECHANICAL_FIELD',
-	);
-	const textModifier = structuredClone(catalogs.get('en').get('quest-modifier'));
-	textModifier.entrySchema = { type: 'text' };
-	textModifier.entries = [{ id: 'narrative', value: 'Narrative only' }];
-	assert.throws(
-		() => validateGeneratorDefinition(textModifier),
-		error => error.code === 'INVALID_GENERATOR_ENTRY_SCHEMA',
-	);
-	for (const invalidRequest of [
-		{ generator: 'quest-modifier', chance: 2, count: { min: 1, max: 1 } },
-		{ generator: 'quest-modifier', chance: 1, count: { min: 2, max: 1 } },
+test('schema v3 rejects obsolete kinds, template entries, malformed references, and parity drift', () => {
+	const text = createTextGenerator();
+	assert.equal(validateGeneratorDefinition(text), text);
+	for (const invalid of [
+		{ ...text, schemaVersion: 2 },
+		{ ...text, kind: 'category' },
+		{ ...text, kind: 'template' },
+		{ ...text, entries: [{ id: 'rain', template: '{{ weather }}', references: {} }] },
+		{ ...text, entries: [{ id: 'rain', value: '{{ weather.bad-field }}' }] },
 	]) {
-		const invalidQuest = structuredClone(catalogs.get('en').get('quest'));
-		invalidQuest.modifiers = [invalidRequest];
 		assert.throws(
-			() => validateGeneratorDefinition(invalidQuest),
-			error => [
-				'INVALID_MODIFIER_CHANCE',
-				'INVALID_MODIFIER_COUNT',
-			].includes(error.code),
+			() => validateGeneratorDefinition(invalid),
+			error => error.name === 'GeneratorSchemaError',
 		);
 	}
+
+	const french = structuredClone(text);
+	french.name = 'Météo';
+	french.entries[0].value = 'Une pluie douce commence.';
+	assert.equal(validateGeneratorPair(text, french, 'weather.json'), true);
+	const mismatched = structuredClone(french);
+	mismatched.entries[0].value = 'Une pluie douce {{ other }} commence.';
+	assert.throws(
+		() => validateGeneratorPair(text, mismatched, 'weather.json'),
+		error => error.code === 'GENERATOR_LOCALE_PARITY_MISMATCH',
+	);
 });
 
-test('references and selectors validate structure and catalog relationships', () => {
-	const catalogs = createLocalizedCatalogs();
-	assert.equal(validateGeneratorRelationships(catalogs.get('en')), true);
-	const fixedWeightedSource = structuredClone(catalogs.get('en').get('quest'));
-	fixedWeightedSource.entries[0].references.site.entry = 'harbor';
+test('inline relationships reject unknown generators, entries, and fields', () => {
+	const source = createFieldsGenerator('source', 'Source', ['Value']);
+	const owner = createTextGenerator('owner', '{{ source.missing }}');
+	const catalog = new Map([['source', source], ['owner', owner]]);
 	assert.throws(
-		() => validateGeneratorDefinition(fixedWeightedSource),
-		error => error.code === 'INVALID_GENERATOR_FIXED_REFERENCE',
-	);
-
-	const missingSource = new Map(catalogs.get('en'));
-	missingSource.delete('item');
-	assert.throws(
-		() => validateGeneratorRelationships(missingSource),
-		error => error.code === 'GENERATOR_REFERENCE_MISSING',
-	);
-	const missingFixedEntry = new Map(catalogs.get('en'));
-	const missingEntryQuest = structuredClone(missingFixedEntry.get('quest'));
-	missingEntryQuest.entries[0].references.rival.entry = 'missing-role';
-	missingFixedEntry.set('quest', missingEntryQuest);
-	assert.throws(
-		() => validateGeneratorRelationships(missingFixedEntry),
-		error => error.code === 'GENERATOR_ENTRY_NOT_FOUND',
-	);
-	const invalidSelector = new Map(catalogs.get('en'));
-	const invalidSelectorQuest = structuredClone(invalidSelector.get('quest'));
-	invalidSelectorQuest.entries[0].references.item.select = 'value';
-	invalidSelector.set('quest', invalidSelectorQuest);
-	assert.throws(
-		() => validateGeneratorRelationships(invalidSelector),
+		() => validateGeneratorRelationships(catalog),
 		error => error.code === 'INVALID_GENERATOR_SELECTOR',
 	);
-});
-
-test('catalog relationships reject incompatible modifier requests', () => {
-	const catalogs = createLocalizedCatalogs();
-	const incompatible = new Map(catalogs.get('en'));
-	const incompatibleModifier = structuredClone(incompatible.get('quest-modifier'));
-	incompatibleModifier.appliesTo = ['item'];
-	incompatible.set('quest-modifier', incompatibleModifier);
+	owner.entries[0].value = '{{ missing }}';
 	assert.throws(
-		() => validateGeneratorRelationships(incompatible),
-		error => error.code === 'GENERATOR_MODIFIER_INCOMPATIBLE',
+		() => validateGeneratorRelationships(catalog),
+		error => error.code === 'GENERATOR_REFERENCE_MISSING',
 	);
 });
 
-test('/gen rendering preserves value and fields layouts and renders templates and modifiers', () => {
+test('/gen rendering preserves value and structured-field layouts', () => {
 	const valueEmbed = createGeneratedEmbed({
 		generatorName: 'Weather',
 		entryId: 'rain',
@@ -364,76 +225,90 @@ test('/gen rendering preserves value and fields layouts and renders templates an
 		generatorName: 'People',
 		entryId: 'criminal',
 		outputType: 'fields',
-		fields: { Name: 'Criminal', Description: 'An outlaw.' },
-		displayFields: { Name: 'Criminal', Description: 'An outlaw.' },
+		fields: { name: 'Criminal', description: 'An outlaw.' },
+		displayFields: { name: 'Criminal', description: 'An outlaw.' },
 		provenance: [],
 		modifiers: [],
 	}).toJSON();
 	assert.deepEqual(fieldsEmbed.fields.map(field => field.name), ['Name', 'Description']);
-
-	const templateEmbed = createGeneratedEmbed({
-		generatorName: 'Quests',
-		entryId: 'recover',
-		outputType: 'template',
-		templateOutput: 'Recover the relic.',
-		provenance: [],
-		modifiers: [{
-			generatorId: 'quest-modifier',
-			entryId: 'urgent',
-			name: 'Urgent',
-			description: 'Time is running out.',
-			provenance: [],
-		}],
-	}).toJSON();
-	assert.equal(templateEmbed.description, 'Recover the relic.');
-	assert.deepEqual(templateEmbed.fields, [{
-		name: 'Modifiers',
-		value: '**Urgent** — Time is running out.',
-	}]);
 });
 
-test('/gen omits technical fields while resolved fields retain them for internal use', () => {
+test('/gen renders complete modifier results as separate embeds', () => {
+	const response = createGeneratorResponse({
+		generatorName: 'Quest',
+		outputType: 'value',
+		value: 'Find the lost key.',
+		modifiers: [{
+			generatorName: 'Quest modifiers',
+			outputType: 'fields',
+			displayFields: {
+				name: 'Urgent',
+				description: 'The deadline is tonight.',
+			},
+			modifiers: [],
+		}],
+	});
+	assert.equal(response.embeds.length, 2);
+	assert.equal(response.embeds[0].data.description, 'Find the lost key.');
+	assert.equal(response.embeds[1].data.fields[0].name, 'Name');
+	assert.match(response.embeds[1].data.title, /modifier/i);
+});
+
+test('/gen omits technical fields while retaining them in structured results', () => {
 	const generator = {
-		schemaVersion: 2,
+		schemaVersion: 3,
 		id: 'armors',
-		kind: 'category',
 		visibility: 'public',
 		name: 'Armors',
 		description: 'Armor catalog',
 		entrySchema: {
 			type: 'fields',
-			required: ['Name', 'Generator', 'Type', 'Description', 'AR percentage'],
-			technical: ['Generator', 'Type', 'AR percentage'],
+			required: ['name', 'generator', 'type', 'description', 'ar_percentage'],
+			technical: ['generator', 'type', 'ar_percentage'],
 		},
 		entries: [{
-			id: 'light-armor',
+			id: 'light_armor',
 			fields: {
-				Name: 'Light armor',
-				Generator: 'armor-details',
-				Type: 'light',
-				Description: 'Flexible protection.',
-				'AR percentage': 25,
+				name: 'Light armor',
+				generator: 'armor_details',
+				type: 'light',
+				description: 'Flexible protection.',
+				ar_percentage: 25,
 			},
 		}],
 	};
-	const result = createGeneratorResolver({
-		getGenerator: () => generator,
-	}).generate('armors', 'en', { random: () => 0 });
+	const result = createGeneratorResolver({ getGenerator: () => generator })
+		.generate('armors', 'en', { random: () => 0 });
 
-	assert.deepEqual(result.fields, {
-		Name: 'Light armor',
-		Generator: 'armor-details',
-		Type: 'light',
-		Description: 'Flexible protection.',
-		'AR percentage': 25,
-	});
+	assert.deepEqual(result.fields, generator.entries[0].fields);
 	assert.deepEqual(result.displayFields, {
-		Name: 'Light armor',
-		Description: 'Flexible protection.',
+		name: 'Light armor',
+		description: 'Flexible protection.',
 	});
 	assert.deepEqual(
 		createGeneratedEmbed(result).toJSON().fields.map(field => field.name),
 		['Name', 'Description'],
+	);
+});
+
+test('modifier relationships reject unknown sources and statically visible cycles', () => {
+	const owner = createTextGenerator('owner', 'Owner');
+	owner.modifiers = { missing: 50 };
+	assert.throws(
+		() => validateGeneratorRelationships(new Map([['owner', owner]])),
+		error => error.code === 'GENERATOR_REFERENCE_MISSING',
+	);
+
+	const first = createTextGenerator('first', 'First');
+	const second = createTextGenerator('second', 'Second');
+	first.modifiers = { second: 50 };
+	second.modifiers = { first: 50 };
+	assert.throws(
+		() => validateGeneratorRelationships(new Map([
+			['first', first],
+			['second', second],
+		])),
+		error => error.code === 'GENERATOR_MODIFIER_CYCLE',
 	);
 });
 
@@ -447,45 +322,22 @@ function createLocalizedCatalogs({ includeRequest = true } = {}) {
 function createFixtureCatalog(locale, includeRequest) {
 	const french = locale === 'fr';
 	const quest = {
-		schemaVersion: 2,
+		schemaVersion: 3,
 		id: 'quest',
-		kind: 'template',
 		visibility: 'public',
 		name: french ? 'Quêtes' : 'Quests',
 		description: french ? 'Amorces de quêtes' : 'Quest prompts',
-		entrySchema: { type: 'template' },
+		entrySchema: { type: 'text' },
 		entries: [{
-			id: 'recover-before-rival',
+			id: 'recover_item',
 			weight: 2,
-			template: french
-				? 'Récupérez {{item}} au {{site}} avant que {{rival}} ne rencontre {{meeting}}.'
-				: 'Recover {{item}} from {{site}} before {{rival}} meets {{meeting}}.',
-			references: {
-				item: { generator: 'item', select: 'fields.Name' },
-				site: {
-					generator: {
-						oneOf: [
-							{ id: 'site-a', weight: 3 },
-							{ id: 'site-b', weight: 1 },
-						],
-					},
-					select: 'display',
-				},
-				rival: {
-					generator: 'person',
-					entry: 'criminal',
-					select: 'fields.Name',
-				},
-				meeting: { generator: 'nested-role', select: 'display' },
-			},
+			value: french
+				? 'Récupérez {{ item.name }} auprès de {{ person:criminal }} à {{ item }}.'
+				: 'Recover {{ item.name }} from {{ person:criminal }} at {{ item }}.',
 		}],
 	};
 	if (includeRequest) {
-		quest.modifiers = [{
-			generator: 'quest-modifier',
-			chance: 1,
-			count: { min: 1, max: 1 },
-		}];
+		quest.modifiers = { quest_modifier: 100 };
 	}
 	return new Map([
 		['person', createPersonGenerator(locale)],
@@ -494,60 +346,56 @@ function createFixtureCatalog(locale, includeRequest) {
 			french ? 'Objets' : 'Items',
 			french ? ['Relique', 'Registre'] : ['Relic', 'Ledger'],
 		)],
-		['site-a', createFieldsGenerator(
-			'site-a',
-			french ? 'Sites ruraux' : 'Rural sites',
-			french ? ['Ruines'] : ['Ruins'],
-		)],
-		['site-b', createFieldsGenerator(
-			'site-b',
-			french ? 'Sites urbains' : 'Urban sites',
-			french ? ['Port'] : ['Harbor'],
-		)],
-		['nested-role', createNestedRoleGenerator(locale)],
-		['quest-modifier', createModifierGenerator(locale)],
+		['quest_modifier', createModifierGenerator(locale)],
 		['quest', quest],
 	]);
+}
+
+function createTextGenerator(id = 'weather', value = 'Rain') {
+	return {
+		schemaVersion: 3,
+		id,
+		visibility: 'public',
+		name: 'Weather',
+		description: 'Weather prompts',
+		entrySchema: { type: 'text' },
+		entries: [{ id: 'rain', value }],
+	};
 }
 
 function createPersonGenerator(locale) {
 	const french = locale === 'fr';
 	return {
-		schemaVersion: 2,
+		schemaVersion: 3,
 		id: 'person',
-		kind: 'component',
 		visibility: 'internal',
 		name: french ? 'Personnes' : 'People',
 		description: french ? 'Rôles de personnages' : 'Character roles',
-		entrySchema: { type: 'fields', required: ['Name', 'Description'] },
-		entries: [
-			{
-				id: 'criminal',
-				fields: {
-					Name: french ? 'Criminel' : 'Criminal',
-					Description: french ? 'Un hors-la-loi.' : 'An outlaw.',
-				},
+		entrySchema: { type: 'fields', required: ['name', 'description'] },
+		entries: [{
+			id: 'criminal',
+			fields: {
+				name: french ? 'Criminel' : 'Criminal',
+				description: french ? 'Un hors-la-loi' : 'An outlaw',
 			},
-			{
-				id: 'noble',
-				fields: {
-					Name: french ? 'Noble' : 'Noble',
-					Description: french ? 'Un aristocrate.' : 'An aristocrat.',
-				},
+		}, {
+			id: 'noble',
+			fields: {
+				name: french ? 'Noble' : 'Noble',
+				description: french ? 'Un aristocrate' : 'An aristocrat',
 			},
-		],
+		}],
 	};
 }
 
 function createFieldsGenerator(id, name, values) {
 	return {
-		schemaVersion: 2,
+		schemaVersion: 3,
 		id,
-		kind: 'component',
 		visibility: 'internal',
 		name,
 		description: name,
-		entrySchema: { type: 'fields', required: ['Name'] },
+		entrySchema: { type: 'fields', required: ['name', 'description'] },
 		entries: values.map(value => ({
 			id: value === 'Harbor' || value === 'Port'
 				? 'harbor'
@@ -556,67 +404,36 @@ function createFieldsGenerator(id, name, values) {
 					: value === 'Relic' || value === 'Relique'
 						? 'relic'
 						: 'ledger',
-			fields: { Name: value },
+			fields: { name: value, description: 'A valuable object' },
 		})),
-	};
-}
-
-function createNestedRoleGenerator(locale) {
-	const french = locale === 'fr';
-	return {
-		schemaVersion: 2,
-		id: 'nested-role',
-		kind: 'template',
-		visibility: 'internal',
-		name: french ? 'Rencontres' : 'Meetings',
-		description: french ? 'Rencontres imbriquées' : 'Nested meetings',
-		entrySchema: { type: 'template' },
-		entries: [{
-			id: 'meeting',
-			template: french ? 'le personnage {{role}}' : 'the {{role}}',
-			references: {
-				role: {
-					generator: 'person',
-					entry: 'criminal',
-					select: 'display',
-				},
-			},
-		}],
 	};
 }
 
 function createModifierGenerator(locale) {
 	const french = locale === 'fr';
 	return {
-		schemaVersion: 2,
-		id: 'quest-modifier',
-		kind: 'modifier',
+		schemaVersion: 3,
+		id: 'quest_modifier',
 		visibility: 'internal',
 		name: french ? 'Modificateurs de quête' : 'Quest modifiers',
 		description: french ? 'Variantes descriptives' : 'Descriptive variants',
-		appliesTo: ['quest'],
-		entrySchema: { type: 'fields', required: ['Name', 'Description'] },
-		entries: [
-			{
-				id: 'urgent',
-				fields: {
-					Name: french ? 'Urgent' : 'Urgent',
-					Description: french
-						? 'Le temps presse.'
-						: 'Time is running out.',
-				},
+		entrySchema: { type: 'fields', required: ['name', 'description'] },
+		entries: [{
+			id: 'urgent',
+			fields: {
+				name: 'Urgent',
+				description: french ? 'Le temps presse.' : 'Time is running out.',
 			},
-			{
-				id: 'enraged',
-				weight: 2,
-				fields: {
-					Name: french ? 'Furieux' : 'Enraged',
-					Description: french
-						? 'Les tensions ont atteint leur paroxysme.'
-						: 'Tensions have reached a breaking point.',
-				},
+		}, {
+			id: 'enraged',
+			weight: 2,
+			fields: {
+				name: french ? 'Furieux' : 'Enraged',
+				description: french
+					? 'Les tensions ont atteint leur paroxysme.'
+					: 'Tensions have reached a breaking point.',
 			},
-		],
+		}],
 	};
 }
 
@@ -624,79 +441,6 @@ function createFixtureResolver(catalogs) {
 	return createGeneratorResolver({
 		getGenerator: (id, locale) => catalogs.get(locale).get(id),
 	});
-}
-
-function createCycleCatalog() {
-	return new Map([['loop', {
-		schemaVersion: 2,
-		id: 'loop',
-		kind: 'template',
-		visibility: 'public',
-		name: 'Loop',
-		description: 'Cyclic template',
-		entrySchema: { type: 'template' },
-		entries: [{
-			id: 'again',
-			template: '{{again}}',
-			references: {
-				again: {
-					generator: 'loop',
-					entry: 'again',
-					select: 'display',
-				},
-			},
-		}],
-	}]]);
-}
-
-function createDepthCatalog() {
-	const chain = {
-		schemaVersion: 2,
-		id: 'chain',
-		kind: 'template',
-		visibility: 'public',
-		name: 'Chain',
-		description: 'Deep template chain',
-		entrySchema: { type: 'template' },
-		entries: [
-			createChainEntry('first', 'second'),
-			createChainEntry('second', 'third'),
-			{
-				id: 'third',
-				template: '{{ending}}',
-				references: {
-					ending: { generator: 'ending', select: 'value' },
-				},
-			},
-		],
-	};
-	return new Map([
-		['chain', chain],
-		['ending', {
-			schemaVersion: 2,
-			id: 'ending',
-			kind: 'component',
-			visibility: 'internal',
-			name: 'Ending',
-			description: 'End of chain',
-			entrySchema: { type: 'text' },
-			entries: [{ id: 'done', value: 'Done' }],
-		}],
-	]);
-}
-
-function createChainEntry(id, nextEntry) {
-	return {
-		id,
-		template: '{{next}}',
-		references: {
-			next: {
-				generator: 'chain',
-				entry: nextEntry,
-				select: 'display',
-			},
-		},
-	};
 }
 
 function sequenceRandom(values) {

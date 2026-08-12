@@ -1,231 +1,223 @@
 {
-  "schemaVersion": 2,
+  "schemaVersion": 3,
   "id": "region",
-  "kind": "category",
   "visibility": "public",
   "name": "region",
   "description": "Broad natural and cultivated geographic regions",
   "entrySchema": {
     "type": "fields",
-    "required": ["Name", "Description"]
+    "required": ["name", "description"]
   },
   "entries": [
     {
-      "id": "temperate-forest",
+      "id": "temperate_forest",
       "weight": 4,
       "fields": {
-        "Name": "Temperate Forest",
-        "Description": "mixed woodland crossed by game trails, logging roads, and clear streams."
+        "name": "Temperate Forest",
+        "description": "mixed woodland crossed by game trails, logging roads, and clear streams."
       }
     },
     {
-      "id": "dry-scrubland",
+      "id": "dry_scrubland",
       "weight": 3,
       "fields": {
-        "Name": "Dry Scrubland",
-        "Description": "thorny brush, red earth, seasonal rivers, and widely separated wells."
+        "name": "Dry Scrubland",
+        "description": "thorny brush, red earth, seasonal rivers, and widely separated wells."
       }
     },
     {
-      "id": "frozen-tundra",
+      "id": "frozen_tundra",
       "weight": 2,
       "fields": {
-        "Name": "Frozen Tundra",
-        "Description": "permafrost, low vegetation, migrating animals, and brief violent summers."
+        "name": "Frozen Tundra",
+        "description": "permafrost, low vegetation, migrating animals, and brief violent summers."
       }
     },
     {
-      "id": "salt-desert",
+      "id": "salt_desert",
       "weight": 2,
       "fields": {
-        "Name": "Salt Desert",
-        "Description": "blinding flats, buried ruins, mineral caravans, and almost no fresh water."
+        "name": "Salt Desert",
+        "description": "blinding flats, buried ruins, mineral caravans, and almost no fresh water."
       }
     },
     {
       "id": "badlands",
       "weight": 2,
       "fields": {
-        "Name": "Badlands",
-        "Description": "eroded canyons, exposed fossils, little water, and excellent hiding places."
+        "name": "Badlands",
+        "description": "eroded canyons, exposed fossils, little water, and excellent hiding places."
       }
     },
     {
-      "id": "wine-hills",
+      "id": "wine_hills",
       "weight": 2,
       "fields": {
-        "Name": "Wine Hills",
-        "Description": "cultivated slopes, wealthy estates, old cellars, and intense local rivalries."
+        "name": "Wine Hills",
+        "description": "cultivated slopes, wealthy estates, old cellars, and intense local rivalries."
       }
     },
     {
-      "id": "flooded-forest",
+      "id": "flooded_forest",
       "weight": 2,
       "fields": {
-        "Name": "Flooded Forest",
-        "Description": "half-submerged trees navigated by canoe during a long wet season."
+        "name": "Flooded Forest",
+        "description": "half-submerged trees navigated by canoe during a long wet season."
       }
     },
     {
-      "id": "crystal-expanse",
+      "id": "crystal_expanse",
       "weight": 1,
       "fields": {
-        "Name": "Crystal Expanse",
-        "Description": "natural glass formations distort light, sound, direction, and magic."
+        "name": "Crystal Expanse",
+        "description": "natural glass formations distort light, sound, direction, and magic."
       }
     },
     {
-      "id": "dead-magic-basin",
+      "id": "dead_magic_basin",
       "weight": 1,
       "fields": {
-        "Name": "Dead Magic Basin",
-        "Description": "a fertile-looking depression where supernatural effects abruptly fail."
+        "name": "Dead Magic Basin",
+        "description": "a fertile-looking depression where supernatural effects abruptly fail."
       }
     },
     {
-      "id": "storm-belt",
+      "id": "storm_belt",
       "weight": 1,
       "fields": {
-        "Name": "Storm Belt",
-        "Description": "a coastal region battered by near-constant wind, rain, and electrical activity."
+        "name": "Storm Belt",
+        "description": "a coastal region battered by near-constant wind, rain, and electrical activity."
       }
     },
     {
-      "id": "mushroom-wilds",
+      "id": "mushroom_wilds",
       "weight": 1,
       "fields": {
-        "Name": "Mushroom Wilds",
-        "Description": "damp country dominated by giant fungi, spores, and underground settlements."
+        "name": "Mushroom Wilds",
+        "description": "damp country dominated by giant fungi, spores, and underground settlements."
       }
     },
     {
-      "id": "ancient-woodland",
+      "id": "ancient_woodland",
       "fields": {
-        "Name": "Deep Forest",
-        "Description": "An ancient forest of fading paths, isolated clearings, and territories claimed by wildlife."
+        "name": "Deep Forest",
+        "description": "An ancient forest of fading paths, isolated clearings, and territories claimed by wildlife."
       }
     },
     {
-      "id": "deep-jungle",
+      "id": "deep_jungle",
       "fields": {
-        "Name": "Stifling Jungle",
-        "Description": "Dense vegetation, violent rain, and ruins slowly swallowed by roots."
+        "name": "Stifling Jungle",
+        "description": "Dense vegetation, violent rain, and ruins slowly swallowed by roots."
       }
     },
     {
-      "id": "arid-desert",
+      "id": "arid_desert",
       "fields": {
-        "Name": "Arid Desert",
-        "Description": "Dunes and rocky plateaus where water sources determine routes and conflicts."
+        "name": "Arid Desert",
+        "description": "Dunes and rocky plateaus where water sources determine routes and conflicts."
       }
     },
     {
-      "id": "grassland-steppe",
+      "id": "grassland_steppe",
       "fields": {
-        "Name": "Open Grassland",
-        "Description": "Wide windswept grasslands suited to herds, travelers, and ambushes visible from afar."
+        "name": "Open Grassland",
+        "description": "Wide windswept grasslands suited to herds, travelers, and ambushes visible from afar."
       }
     },
     {
-      "id": "lake-country",
+      "id": "lake_country",
       "fields": {
-        "Name": "Lake District",
-        "Description": "Lakes, islets, and fishing villages linked by boats and flood-prone paths."
+        "name": "Lake District",
+        "description": "Lakes, islets, and fishing villages linked by boats and flood-prone paths."
       }
     },
     {
-      "id": "rocky-coast",
+      "id": "rocky_coast",
       "fields": {
-        "Name": "Cliff Coast",
-        "Description": "A steep coast cut by coves, sea caves, and hazardous passages."
+        "name": "Cliff Coast",
+        "description": "A steep coast cut by coves, sea caves, and hazardous passages."
       }
     },
     {
-      "id": "river-valley",
+      "id": "river_valley",
       "fields": {
-        "Name": "River Valley",
-        "Description": "A fertile region organized around a river, fortified bridges, and rival ports."
+        "name": "River Valley",
+        "description": "A fertile region organized around a river, fortified bridges, and rival ports."
       }
     },
     {
-      "id": "high-mountains",
+      "id": "high_mountains",
       "fields": {
-        "Name": "Mountain Range",
-        "Description": "Hard-to-reach peaks sheltering mines, monasteries, and strategic passes."
+        "name": "Mountain Range",
+        "description": "Hard-to-reach peaks sheltering mines, monasteries, and strategic passes."
       }
     },
     {
-      "id": "pack-ice",
+      "id": "pack_ice",
       "fields": {
-        "Name": "Pack Ice",
-        "Description": "An unstable frozen sea where routes change with fractures and animal migrations."
+        "name": "Pack Ice",
+        "description": "An unstable frozen sea where routes change with fractures and animal migrations."
       }
     },
     {
-      "id": "monumental-glacier",
+      "id": "monumental_glacier",
       "fields": {
-        "Name": "Monumental Glacier",
-        "Description": "A mass of ice crossed by crevasses, blue caves, and trapped remains."
+        "name": "Monumental Glacier",
+        "description": "A mass of ice crossed by crevasses, blue caves, and trapped remains."
       }
     },
     {
-      "id": "island-chain",
+      "id": "island_chain",
       "fields": {
-        "Name": "Archipelago",
-        "Description": "Islands separated by reefs, unpredictable currents, and disputed sea lanes."
+        "name": "Archipelago",
+        "description": "Islands separated by reefs, unpredictable currents, and disputed sea lanes."
       }
     },
     {
-      "id": "levitating-archipelago",
+      "id": "levitating_archipelago",
       "fields": {
-        "Name": "Floating Archipelago",
-        "Description": "Suspended lands linked by bridges and airships, with waterfalls falling into the void."
+        "name": "Floating Archipelago",
+        "description": "Suspended lands linked by bridges and airships, with waterfalls falling into the void."
       }
     },
     {
-      "id": "volcanic-highlands",
+      "id": "volcanic_highlands",
       "fields": {
-        "Name": "Volcanic Highlands",
-        "Description": "Ash slopes, hot springs, and valuable seams beneath an active volcano."
+        "name": "Volcanic Highlands",
+        "description": "Ash slopes, hot springs, and valuable seams beneath an active volcano."
       }
     },
     {
       "id": "marshland",
       "fields": {
-        "Name": "Misty Marsh",
-        "Description": "Shallow waters, peat bogs, and islands whose paths change with the seasons."
+        "name": "Misty Marsh",
+        "description": "Shallow waters, peat bogs, and islands whose paths change with the seasons."
       }
     },
     {
-      "id": "rolling-farmland",
+      "id": "rolling_farmland",
       "fields": {
-        "Name": "Agricultural Hills",
-        "Description": "Terraced crops, scattered farms, and guarded market roads."
+        "name": "Agricultural Hills",
+        "description": "Terraced crops, scattered farms, and guarded market roads."
       }
     },
     {
-      "id": "shattered-battlefield",
+      "id": "shattered_battlefield",
       "fields": {
-        "Name": "Abandoned Battlefield",
-        "Description": "A territory marked by trenches, wreckage, and supernatural traces of an old war."
+        "name": "Abandoned Battlefield",
+        "description": "A territory marked by trenches, wreckage, and supernatural traces of an old war."
       }
     },
     {
-      "id": "celestial-region",
+      "id": "celestial_region",
       "fields": {
-        "Name": "Celestial Region",
-        "Description": "Air currents, solid clouds, and weather phenomena form a traversable but unstable territory."
+        "name": "Celestial Region",
+        "description": "Air currents, solid clouds, and weather phenomena form a traversable but unstable territory."
       }
     }
   ],
-  "modifiers": [
-    {
-      "generator": "site-modifier-all",
-      "chance": 0.2,
-      "count": {
-        "min": 1,
-        "max": 1
-      }
-    }
-  ]
+  "modifiers": {
+    "site_modifier_all": 20
+  }
 }

@@ -1,7 +1,6 @@
 {
-  "schemaVersion": 2,
+  "schemaVersion": 3,
   "id": "material",
-  "kind": "category",
   "visibility": "public",
   "name": "Matériaux",
   "description": "Matériaux naturels, manufacturés, précieux et magiques",
@@ -115,7 +114,7 @@
       "value": "Diamant — cristal transparent d’une dureté exceptionnelle, employé pour tailler, afficher son rang et créer des enchantements durables."
     },
     {
-      "id": "meteoric-iron",
+      "id": "meteoric_iron",
       "weight": 2,
       "value": "Fer météorique — métal rare tombé du ciel, parcouru de motifs inhabituels et résistant à la magie."
     },
@@ -125,7 +124,7 @@
       "value": "Os de dragon — matière légère et résistante qui conserve des traces de la nature élémentaire de la créature."
     },
     {
-      "id": "spider-silk",
+      "id": "spider_silk",
       "weight": 2,
       "value": "Soie d’araignée — fibre extrêmement légère et solide utilisée pour les cordes, les vêtements, les sutures et les pièges."
     },
@@ -150,12 +149,12 @@
       "value": "Verre du Vide — verre noir et froid qui absorbe la lumière, les sons et de petites quantités d’énergie magique."
     },
     {
-      "id": "living-wood",
+      "id": "living_wood",
       "weight": 1,
       "value": "Bois vivant — récolté sans tuer l’arbre, il peut réparer lentement les objets auxquels on lui a donné forme."
     },
     {
-      "id": "aether-crystal",
+      "id": "aether_crystal",
       "weight": 1,
       "value": "Cristal d’éther — minerai instable qui amplifie les sorts tout en accumulant une résonance dangereuse."
     }

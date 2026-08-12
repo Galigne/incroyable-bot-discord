@@ -2,54 +2,74 @@ const { EmbedBuilder, MessageFlags } = require('discord.js');
 const { t } = require('./i18n');
 
 const GENERATOR_FIELD_KEYS = {
-	'AR percentage': 'arPercentage',
-	Allies: 'allies',
-	Appearance: 'appearance',
-	Backstory: 'backstory',
-	Commandment: 'commandment',
-	'Constitution requirement': 'constitutionRequirement',
-	'Deity or Belief': 'deityOrBelief',
-	Description: 'description',
-	Enemies: 'enemies',
-	FirstName: 'firstName',
-	Generator: 'generator',
-	Goal: 'goal',
-	Goals: 'goals',
-	Hierarchy: 'hierarchy',
-	'Holy Place': 'holyPlace',
-	LastName: 'lastName',
-	Leadership: 'leadership',
-	Name: 'name',
-	'Physical Ability': 'physicalAbility',
-	Rarity: 'rarity',
-	'Relationship with Magic': 'relationshipWithMagic',
-	'Religious Order': 'religiousOrder',
-	Resources: 'resources',
-	Rites: 'rites',
-	'Sacred Symbol': 'sacredSymbol',
-	'Skill Bonus': 'skillBonus',
-	Strength: 'strength',
-	Structure: 'structure',
-	Taboo: 'taboo',
-	Tension: 'tension',
-	Type: 'type',
+	ar_percentage: 'arPercentage',
+	allies: 'allies',
+	appearance: 'appearance',
+	backstory: 'backstory',
+	commandment: 'commandment',
+	constitution_requirement: 'constitutionRequirement',
+	deity_or_belief: 'deityOrBelief',
+	description: 'description',
+	enemies: 'enemies',
+	first_name: 'firstName',
+	generator: 'generator',
+	goal: 'goal',
+	goals: 'goals',
+	hierarchy: 'hierarchy',
+	holy_place: 'holyPlace',
+	last_name: 'lastName',
+	leadership: 'leadership',
+	name: 'name',
+	physical_ability: 'physicalAbility',
+	rarity: 'rarity',
+	relationship_with_magic: 'relationshipWithMagic',
+	religious_order: 'religiousOrder',
+	resources: 'resources',
+	rites: 'rites',
+	sacred_symbol: 'sacredSymbol',
+	skill_bonus: 'skillBonus',
+	strength: 'strength',
+	structure: 'structure',
+	taboo: 'taboo',
+	tension: 'tension',
+	type: 'type',
 };
 
-function createGeneratorResponse(result, requestedCategory, locale = 'en') {
+function createGeneratorResponse(
+	result,
+	requestedCategory,
+	locale = 'en',
+	requestedModifier,
+) {
 	if (!result) {
 		return {
-			content: t(locale, 'rpg.gen.unknownCategory', {
-				category: requestedCategory,
-			}),
+			content: t(
+				locale,
+				requestedModifier
+					? 'rpg.gen.invalidModifier'
+					: 'rpg.gen.unknownCategory',
+				{
+					category: requestedCategory,
+					modifier: requestedModifier,
+				},
+			),
 			flags: MessageFlags.Ephemeral,
 		};
 	}
-	return { embeds: [createGeneratedEmbed(result, locale)] };
+	return {
+		embeds: flattenGeneratedResults(result).map((generated, index) => (
+			createGeneratedEmbed(generated, locale, { isModifier: index > 0 })
+		)),
+	};
 }
 
-function createGeneratedEmbed(result, locale = 'en') {
+function createGeneratedEmbed(result, locale = 'en', options = {}) {
 	const embed = new EmbedBuilder()
-		.setTitle(t(locale, 'rpg.gen.title', { category: result.generatorName }))
+		.setTitle(t(
+			locale,
+			options.isModifier ? 'rpg.gen.modifierTitle' : 'rpg.gen.title',
+			{ category: result.generatorName },
+		))
 		.setColor('#FFD700');
 	if (result.outputType === 'fields') {
 		embed.addFields(
@@ -61,35 +81,17 @@ function createGeneratedEmbed(result, locale = 'en') {
 	}
 	else {
 		embed.setDescription(
-			result.outputType === 'template' ? result.templateOutput : result.value,
+			result.value,
 		);
 	}
-	addModifiers(embed, result, locale);
 	return embed;
 }
 
-function addModifiers(embed, result, locale) {
-	if (!result.modifiers?.length) {
-		return;
-	}
-	const title = t(locale, 'rpg.gen.modifiers');
-	const value = truncate(result.modifiers.map(modifier => (
-		`**${modifier.name}** — ${modifier.description}`
-	)).join('\n'), 1_024);
-	const fieldCount = result.outputType === 'fields'
-		? Object.keys(result.displayFields).length
-		: 0;
-	if (fieldCount < 25) {
-		embed.addFields({ name: title, value });
-		return;
-	}
-	embed.setDescription(`**${title}**\n${value}`);
-}
-
-function truncate(value, maximumLength) {
-	return value.length <= maximumLength
-		? value
-		: `${value.slice(0, maximumLength - 1).trimEnd()}…`;
+function flattenGeneratedResults(result) {
+	return [
+		result,
+		...(result.modifiers ?? []).flatMap(flattenGeneratedResults),
+	];
 }
 
 function getGeneratorFieldLabel(field, locale) {

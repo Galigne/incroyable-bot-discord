@@ -1,0 +1,93 @@
+{
+  "schemaVersion": 3,
+  "id": "background_outlander",
+  "visibility": "internal",
+  "name": "Détails du background de sauvageon",
+  "description": "Apparences, histoires et objectifs pour les PNJ sauvageons",
+  "entrySchema": {
+    "type": "fields",
+    "required": ["appearance", "backstory", "goals"]
+  },
+  "entries": [
+    {
+      "id": "weather_beaten_quietly_observant_and_dressed_in_layered_clothing",
+      "fields": {
+        "appearance": "Buriné par les éléments, observateur discret et vêtu de plusieurs couches aux couleurs du terrain environnant.",
+        "backstory": "Un chasseur a suivi un gibier de plus en plus rare bien au-delà des terres familières et découvert les signes d’une migration anormale.",
+        "goals": "Trouver ce qui a troublé la nature sauvage et préserver les territoires de chasse pour les générations futures."
+      }
+    },
+    {
+      "id": "travel_worn_but_meticulously_organized_carrying_a_compact",
+      "fields": {
+        "appearance": "Marqué par les voyages mais méticuleusement organisé, transportant un abri compact et des souvenirs de nombreux campements.",
+        "backstory": "Un nomade a été séparé de sa caravane saisonnière après avoir guidé des étrangers à travers une violente tempête.",
+        "goals": "Retrouver la caravane et s’assurer que la destination des étrangers ne menace pas son itinéraire."
+      }
+    },
+    {
+      "id": "untrimmed_hair_steady_eyes_and_repaired_garments_made",
+      "fields": {
+        "appearance": "Cheveux laissés longs, regard posé et vêtements raccommodés conçus pour résister à des années de solitude.",
+        "backstory": "Un ancien guérisseur de village est devenu ermite après avoir été tenu responsable d’une maladie qu’aucun remède ne pouvait arrêter.",
+        "goals": "Mettre au point un traitement et décider si son retour apaiserait les anciennes blessures ou les rouvrirait."
+      }
+    },
+    {
+      "id": "decorated_with_meaningful_cords_paint_or_jewelry_whose",
+      "fields": {
+        "appearance": "Orné de cordons, de peintures ou de bijoux chargés d’un sens que les étrangers comprennent rarement.",
+        "backstory": "L’émissaire d’un peuple tribal a quitté sa communauté soudée pour enquêter sur des incursions répétées en terre sacrée.",
+        "goals": "Faire reconnaître les frontières de sa communauté et éviter une guerre dont aucun camp ne comprend les véritables enjeux."
+      }
+    },
+    {
+      "id": "sure_footed_and_lightly_equipped_with_a_map_case",
+      "fields": {
+        "appearance": "Le pied sûr et peu chargé, protégeant son étui à cartes avec davantage de soin que n’importe quelle arme.",
+        "backstory": "Un guide des régions frontalières a hérité des notes inachevées d’un parent disparu en territoire inexploré.",
+        "goals": "Achever la carte, retrouver l’expédition disparue et empêcher l’expansion de détruire des lieux fragiles."
+      }
+    },
+    {
+      "id": "legacy_profession_hunter",
+      "fields": {
+        "appearance": "Sa tenue et ses outils évoquent immédiatement le métier suivant : chasseur.",
+        "backstory": "A construit sa vie comme chasseur et connaît les obligations ainsi que les pressions cachées de cette activité.",
+        "goals": "Mettre cette expérience à profit pour obtenir un avenir plus sûr et plus autonome."
+      }
+    },
+    {
+      "id": "legacy_profession_traveler",
+      "fields": {
+        "appearance": "Sa tenue et ses outils évoquent immédiatement le métier suivant : voyageur.",
+        "backstory": "A construit sa vie comme voyageur et connaît les obligations ainsi que les pressions cachées de cette activité.",
+        "goals": "Mettre cette expérience à profit pour obtenir un avenir plus sûr et plus autonome."
+      }
+    },
+    {
+      "id": "legacy_profession_nomad",
+      "fields": {
+        "appearance": "Sa tenue et ses outils évoquent immédiatement le métier suivant : nomade.",
+        "backstory": "A construit sa vie comme nomade et connaît les obligations ainsi que les pressions cachées de cette activité.",
+        "goals": "Mettre cette expérience à profit pour obtenir un avenir plus sûr et plus autonome."
+      }
+    },
+    {
+      "id": "legacy_profession_tracker",
+      "fields": {
+        "appearance": "Sa tenue et ses outils évoquent immédiatement le métier suivant : traceur.",
+        "backstory": "A construit sa vie comme traceur et connaît les obligations ainsi que les pressions cachées de cette activité.",
+        "goals": "Mettre cette expérience à profit pour obtenir un avenir plus sûr et plus autonome."
+      }
+    },
+    {
+      "id": "legacy_profession_hermit",
+      "fields": {
+        "appearance": "Sa tenue et ses outils évoquent immédiatement le métier suivant : ermite.",
+        "backstory": "A construit sa vie comme ermite et connaît les obligations ainsi que les pressions cachées de cette activité.",
+        "goals": "Mettre cette expérience à profit pour obtenir un avenir plus sûr et plus autonome."
+      }
+    }
+  ]
+}

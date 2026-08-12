@@ -7,6 +7,8 @@ const {
 	validateTechnicalId,
 } = require('./assertions');
 
+const INLINE_REFERENCE_PATTERN = /^[a-z0-9]+(?:_[a-z0-9]+)*(?::[a-z0-9]+(?:_[a-z0-9]+)*)?(?:\.[a-z0-9]+(?:_[a-z0-9]+)*)?$/;
+
 function validateReference(reference, location) {
 	assertPlainObject(reference, `Invalid generator reference: ${location}.`);
 	assertAllowedKeys(
@@ -97,9 +99,7 @@ function validateSelector(selector, location) {
 	}
 	if (
 		typeof selector === 'string'
-		&& selector.startsWith('fields.')
-		&& selector.slice('fields.'.length).trim()
-		&& selector.length <= 263
+		&& /^fields\.[a-z0-9]+(?:_[a-z0-9]+)*$/.test(selector)
 	) {
 		return;
 	}
@@ -109,21 +109,51 @@ function validateSelector(selector, location) {
 	);
 }
 
-function extractTemplateMarkers(value, location) {
-	const markers = [...value.matchAll(/\{\{([a-z0-9]+(?:-[a-z0-9]+)*)\}\}/g)]
-		.map(match => match[1]);
-	const remainder = value.replace(/\{\{[a-z0-9]+(?:-[a-z0-9]+)*\}\}/g, '');
-	if (remainder.includes('{{') || remainder.includes('}}')) {
+function parseInlineReference(expression, location = 'generator reference') {
+	const normalized = typeof expression === 'string' ? expression.trim() : '';
+	if (!INLINE_REFERENCE_PATTERN.test(normalized)) {
 		throw generatorSchemaError(
-			'INVALID_GENERATOR_TEMPLATE_MARKER',
-			`Generator ${location} contains an invalid template marker.`,
+			'INVALID_GENERATOR_INLINE_REFERENCE',
+			`Generator ${location} contains an invalid inline reference.`,
 		);
 	}
-	return markers;
+	const [sourceAndEntry, field] = normalized.split('.');
+	const [generator, entry] = sourceAndEntry.split(':');
+	return { generator, entry, field };
+}
+
+function extractInlineReferences(value, location = 'generator text') {
+	if (typeof value !== 'string') {
+		return [];
+	}
+	const references = [];
+	const matcher = /\{\{([^{}]*)\}\}/g;
+	let cursor = 0;
+	for (const match of value.matchAll(matcher)) {
+		const before = value.slice(cursor, match.index);
+		if (before.includes('{{') || before.includes('}}')) {
+			throw generatorSchemaError(
+				'INVALID_GENERATOR_INLINE_REFERENCE',
+				`Generator ${location} contains malformed inline reference syntax.`,
+			);
+		}
+		const expression = match[1].trim();
+		parseInlineReference(expression, location);
+		references.push(expression);
+		cursor = match.index + match[0].length;
+	}
+	if (value.slice(cursor).includes('{{') || value.slice(cursor).includes('}}')) {
+		throw generatorSchemaError(
+			'INVALID_GENERATOR_INLINE_REFERENCE',
+			`Generator ${location} contains malformed inline reference syntax.`,
+		);
+	}
+	return references;
 }
 
 module.exports = {
-	extractTemplateMarkers,
+	extractInlineReferences,
+	parseInlineReference,
 	validateReference,
 	validateSelector,
 };

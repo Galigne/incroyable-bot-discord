@@ -10,15 +10,22 @@ function createReferenceResolver({ getGenerator, resolveSelection }) {
 		const sourceResult = resolveSource(reference.generator, locale, state.random, path);
 		const entry = resolveEntry(sourceResult.generator, reference, state.random);
 		const selection = reference.entry ? 'fixed' : 'random';
+		const requestedField = reference.select.startsWith('fields.')
+			? reference.select.slice('fields.'.length)
+			: undefined;
 		const resolved = resolveSelection(
 			sourceResult.generator,
 			entry,
 			selection,
 			state,
 			path,
+			requestedField,
 		);
 		return {
 			value: selectResolvedOutput(resolved, reference.select),
+			outputType: resolved.outputType,
+			fields: resolved.fields,
+			display: resolved.display,
 			provenance: [...sourceResult.provenance, ...resolved.provenance],
 			modifiers: resolved.modifiers,
 		};
@@ -84,9 +91,8 @@ function selectResolvedOutput(resolved, selector) {
 		return { ...resolved.fields };
 	}
 	if (selector.startsWith('fields.') && resolved.outputType === 'fields') {
-		const field = selector.slice('fields.'.length);
-		if (Object.hasOwn(resolved.fields, field)) {
-			return resolved.fields[field];
+		if (resolved.selectedField !== undefined) {
+			return resolved.selectedField;
 		}
 	}
 	throw generatorResolutionError(

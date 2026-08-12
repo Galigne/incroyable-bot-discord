@@ -142,10 +142,12 @@
       "description": "Generate GM inspiration (configured DM role or server owner)",
       "schemaDescription": "Generate GM inspiration from a chosen category",
       "categoryOption": "Generator category",
+      "modifierOption": "Optional modifier source configured for the selected category",
       "unknownCategory": "Unknown generator category: **{{category}}**. Use `/help command:gen` for command details.",
+      "invalidModifier": "Modifier source **{{modifier}}** is not configured for category **{{category}}**.",
       "title": "Generated {{category}}",
-      "modifiers": "Modifiers",
-      "behavior": "Resolves one weighted random result from the chosen localized public generator, including nested templates and descriptive modifiers when configured. References may use internal generators without exposing them as root choices. Public schema-v2 generators become available after /reload or a bot restart; the complete localized public list appears above."
+      "modifierTitle": "Generated modifier {{category}}",
+      "behavior": "Resolves one weighted result from the chosen localized public generator, then displays each configured automatic modifier as a separate result. Inline references and modifier relationships share a maximum nesting depth of four and preserve technical provenance. The optional modifier source must be declared by the selected category; choosing it generates it once regardless of its automatic percentage."
     },
     "genChar": {
       "description": "Generate a random character (configured DM role or server owner)",
@@ -168,7 +170,7 @@
       "companionChoice": "Companion",
       "levelChoice": "Level {{level}}",
       "success": "Generated **{{name}}** and saved it with CreatureKey `{{key}}`.",
-      "behavior": "Atomically creates and saves one complete creature by routing the selected `monster`, `animal`, or `companion` type through the public `creature` catalog to its internal `creature-*` detail catalog. The CreatureKey is globally unique and level must be 1–10 or is random when omitted. Shared statistical profiles allocate statistics and derive resources; RULEs are granted only by explicit source references. Initial status effects and modifiers come from the same descriptive catalogs available to characters, while equipment, inventory, natural armor, and armor metadata are resolved and persisted with stable provenance. Encumbrance remains manual and defaults to 0 / 0. Only a configured DM or the server owner may use this command."
+      "behavior": "Atomically creates and saves one complete creature by routing the selected `monster`, `animal`, or `companion` type through the public `creature` catalog to its internal `creature_*` detail catalog. The CreatureKey is globally unique and level must be 1–10 or is random when omitted. Shared statistical profiles allocate statistics and derive resources; RULEs are granted only by explicit source references. Initial status effects and modifiers come from the same descriptive catalogs available to characters, while equipment, inventory, natural armor, and armor metadata are resolved and persisted with stable provenance. Encumbrance remains manual and defaults to 0 / 0. Only a configured DM or the server owner may use this command."
     },
     "get": {
       "description": "Display an entity summary or one compatible detailed field",

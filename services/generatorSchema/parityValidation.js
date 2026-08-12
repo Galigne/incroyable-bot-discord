@@ -1,6 +1,7 @@
 const { generatorSchemaError } = require('./assertions');
 const { CREATURE_GENERATOR_IDS } = require('./constants');
 const { validateGeneratorDefinition } = require('./envelopeValidation');
+const { extractInlineReferences } = require('./referenceValidation');
 
 function validateGeneratorPair(english, french, file = '<generator>') {
 	validateGeneratorDefinition(english, `en/${file}`);
@@ -8,14 +9,24 @@ function validateGeneratorPair(english, french, file = '<generator>') {
 	for (const property of [
 		'schemaVersion',
 		'id',
-		'kind',
 		'visibility',
-		'appliesTo',
 		'entrySchema',
 		'modifiers',
 	]) {
 		assertParity(english[property], french[property], file, property);
 	}
+	assertParity(
+		extractInlineReferences(english.name, `${file} name`),
+		extractInlineReferences(french.name, `${file} name`),
+		file,
+		'name.inlineReferences',
+	);
+	assertParity(
+		extractInlineReferences(english.description, `${file} description`),
+		extractInlineReferences(french.description, `${file} description`),
+		file,
+		'description.inlineReferences',
+	);
 	assertParity(english.entries.length, french.entries.length, file, 'entries.length');
 
 	const technicalFields = new Set(english.entrySchema.technical ?? []);
@@ -28,7 +39,7 @@ function validateGeneratorPair(english, french, file = '<generator>') {
 			file,
 			`entries.${index}.keys`,
 		);
-		for (const property of ['id', 'weight', 'modifiers', 'references']) {
+		for (const property of ['id', 'weight']) {
 			assertParity(
 				englishEntry[property],
 				frenchEntry[property],
@@ -47,14 +58,12 @@ function validateGeneratorPair(english, french, file = '<generator>') {
 			);
 		}
 		else {
-			const localizedProperty = english.entrySchema.type === 'template'
-				? 'template'
-				: 'value';
+			const localizedProperty = 'value';
 			assertParity(
-				extractPlaceholders(englishEntry[localizedProperty]),
-				extractPlaceholders(frenchEntry[localizedProperty]),
+				extractInlineReferences(englishEntry[localizedProperty], file),
+				extractInlineReferences(frenchEntry[localizedProperty], file),
 				file,
-				`entries.${index}.${localizedProperty}.placeholders`,
+				`entries.${index}.${localizedProperty}.inlineReferences`,
 			);
 		}
 		if (CREATURE_GENERATOR_IDS.has(english.id)) {
@@ -101,10 +110,10 @@ function validateFieldsPair(
 		}
 		else if (typeof englishEntry.fields[field] === 'string') {
 			assertParity(
-				extractPlaceholders(englishEntry.fields[field]),
-				extractPlaceholders(frenchEntry.fields[field]),
+				extractInlineReferences(englishEntry.fields[field], file),
+				extractInlineReferences(frenchEntry.fields[field], file),
 				file,
-				`${location}.placeholders`,
+				`${location}.inlineReferences`,
 			);
 		}
 	}
@@ -141,12 +150,12 @@ function validateCreatureGenerationPair(english, french, file, index) {
 			file,
 			`${location}.traits.${traitIndex}.id`,
 		);
-		for (const property of ['Name', 'Description']) {
+		for (const property of ['name', 'description']) {
 			assertParity(
-				extractPlaceholders(englishTrait[property]),
-				extractPlaceholders(frenchTrait[property]),
+				extractInlineReferences(englishTrait[property], file),
+				extractInlineReferences(frenchTrait[property], file),
 				file,
-				`${location}.traits.${traitIndex}.${property}.placeholders`,
+				`${location}.traits.${traitIndex}.${property}.inlineReferences`,
 			);
 		}
 	}
@@ -159,12 +168,6 @@ function assertParity(english, french, file, property) {
 			`English and French generator data differ at ${file}:${property}.`,
 		);
 	}
-}
-
-function extractPlaceholders(value) {
-	return [
-		...value.matchAll(/\{\{[^{}]+\}\}|\$\{[^{}]+\}|%\w/g),
-	].map(match => match[0]).sort();
 }
 
 function typeOfField(value) {

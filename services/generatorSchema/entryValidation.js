@@ -13,38 +13,21 @@ const {
 	MAX_FIELD_VALUE_LENGTH,
 } = require('./constants');
 const { validateCreatureGeneration } = require('./creatureMetadataValidation');
-const {
-	validateModifierEntrySchema,
-	validateModifierRequests,
-} = require('./modifierValidation');
-const {
-	extractTemplateMarkers,
-	validateReference,
-} = require('./referenceValidation');
-
-function validateEntrySchema(entrySchema, generatorKind, file) {
+const { extractInlineReferences } = require('./referenceValidation');
+function validateEntrySchema(entrySchema, file) {
 	assertPlainObject(entrySchema, `Generator ${file} has an invalid entrySchema.`);
-	if (entrySchema.type === 'text' || entrySchema.type === 'template') {
+	if (entrySchema.type === 'text') {
 		assertExactKeys(
 			entrySchema,
 			['type'],
 			`Generator ${file} may only define entrySchema.type for this payload.`,
 		);
-		if (
-			generatorKind === 'modifier'
-			|| (generatorKind === 'template') !== (entrySchema.type === 'template')
-		) {
-			throw generatorSchemaError(
-				'INVALID_GENERATOR_ENTRY_SCHEMA',
-				`Generator ${file} has a kind and entry schema mismatch.`,
-			);
-		}
 		return entrySchema;
 	}
-	if (entrySchema.type !== 'fields' || generatorKind === 'template') {
+	if (entrySchema.type !== 'fields') {
 		throw generatorSchemaError(
 			'INVALID_GENERATOR_ENTRY_SCHEMA',
-			`Generator ${file} must use a text, fields, or template entry schema.`,
+			`Generator ${file} must use a text or fields entry schema.`,
 		);
 	}
 	assertAllowedKeys(
@@ -63,9 +46,6 @@ function validateEntrySchema(entrySchema, generatorKind, file) {
 			);
 		}
 	}
-	if (generatorKind === 'modifier') {
-		validateModifierEntrySchema(entrySchema, file);
-	}
 	return entrySchema;
 }
 
@@ -78,7 +58,8 @@ function validateFieldNameList(fields, file, property, allowEmpty = false) {
 		|| fields.some(field => (
 			typeof field !== 'string'
 			|| !field.trim()
-			|| field.length > 256
+			|| field.length > 100
+			|| !/^[a-z0-9]+(?:_[a-z0-9]+)*$/.test(field)
 		))
 	) {
 		throw generatorSchemaError(
@@ -90,8 +71,8 @@ function validateFieldNameList(fields, file, property, allowEmpty = false) {
 
 function validateGeneratorEntry(entry, entrySchema, generator, file, index) {
 	const location = `${file} entry ${index + 1}`;
-	const generatorKind = generator.kind;
 	assertPlainObject(entry, `Invalid generator entry: ${location}.`);
+	validateInlineStrings(entry, location);
 	validateTechnicalId(entry.id, `entry ID at ${location}`);
 	if (
 		entry.weight !== undefined
@@ -102,20 +83,9 @@ function validateGeneratorEntry(entry, entrySchema, generator, file, index) {
 			`Generator ${location} has an invalid weight.`,
 		);
 	}
-	if (entry.modifiers !== undefined) {
-		if (generatorKind === 'modifier') {
-			throw generatorSchemaError(
-				'INVALID_MODIFIER_REQUEST',
-				`Modifier entry ${location} cannot request other modifiers.`,
-			);
-		}
-		validateModifierRequests(entry.modifiers, `${location} modifiers`);
-	}
-
 	const commonKeys = [
 		'id',
 		'weight',
-		'modifiers',
 		...(CREATURE_GENERATOR_IDS.has(generator.id) ? ['generation'] : []),
 	];
 	if (entrySchema.type === 'text') {
@@ -132,11 +102,6 @@ function validateGeneratorEntry(entry, entrySchema, generator, file, index) {
 		validateDisplayText(entry.value, MAX_ENTRY_TEXT_LENGTH, location);
 		return;
 	}
-	if (entrySchema.type === 'template') {
-		validateTemplateEntry(entry, commonKeys, location);
-		return;
-	}
-
 	assertAllowedKeys(
 		entry,
 		[...commonKeys, 'fields'],
@@ -177,36 +142,21 @@ function validateGeneratorEntry(entry, entrySchema, generator, file, index) {
 	}
 }
 
-function validateTemplateEntry(entry, commonKeys, location) {
-	assertAllowedKeys(
-		entry,
-		[...commonKeys, 'template', 'references'],
-		`Generator ${location} has unsupported properties.`,
-	);
-	assertRequiredKeys(
-		entry,
-		['id', 'template', 'references'],
-		`Generator ${location} must contain a template and references.`,
-	);
-	validateDisplayText(entry.template, MAX_ENTRY_TEXT_LENGTH, `${location} template`);
-	assertPlainObject(entry.references, `Generator ${location} has invalid references.`);
-	const referenceNames = Object.keys(entry.references);
-	if (referenceNames.length === 0 || referenceNames.length > 25) {
-		throw generatorSchemaError(
-			'INVALID_GENERATOR_REFERENCES',
-			`Generator ${location} must contain 1 to 25 references.`,
-		);
+function validateInlineStrings(value, location) {
+	if (typeof value === 'string') {
+		extractInlineReferences(value, location);
+		return;
 	}
-	for (const [name, reference] of Object.entries(entry.references)) {
-		validateTechnicalId(name, `reference name in ${location}`);
-		validateReference(reference, `${location} reference ${name}`);
+	if (Array.isArray(value)) {
+		value.forEach((nestedValue, index) => {
+			validateInlineStrings(nestedValue, `${location}.${index}`);
+		});
+		return;
 	}
-	const markers = extractTemplateMarkers(entry.template, location);
-	if (JSON.stringify([...new Set(markers)].sort()) !== JSON.stringify(referenceNames.sort())) {
-		throw generatorSchemaError(
-			'GENERATOR_TEMPLATE_REFERENCE_MISMATCH',
-			`Generator ${location} template markers and references must match.`,
-		);
+	if (value && typeof value === 'object') {
+		for (const [key, nestedValue] of Object.entries(value)) {
+			validateInlineStrings(nestedValue, `${location}.${key}`);
+		}
 	}
 }
 

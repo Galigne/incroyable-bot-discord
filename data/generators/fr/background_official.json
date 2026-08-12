@@ -1,0 +1,125 @@
+{
+  "schemaVersion": 3,
+  "id": "background_official",
+  "visibility": "internal",
+  "name": "Détails du background de fonctionnaire",
+  "description": "Apparences, histoires et objectifs pour les PNJ fonctionnaires",
+  "entrySchema": {
+    "type": "fields",
+    "required": ["appearance", "backstory", "goals"]
+  },
+  "entries": [
+    {
+      "id": "orderly_and_ink_stained_wearing_modest_official_clothes_with",
+      "fields": {
+        "appearance": "Ordonné et taché d’encre, portant une tenue officielle modeste et classant méticuleusement chaque document.",
+        "backstory": "Un administrateur consciencieux a découvert des années d’ordres contradictoires dissimulés dans des archives distinctes.",
+        "goals": "Identifier qui profite de cette confusion et rendre l’administration compréhensible aux citoyens ordinaires."
+      }
+    },
+    {
+      "id": "polished_and_composed_with_formal_travel_clothes_and",
+      "fields": {
+        "appearance": "Élégant et maître de lui, vêtu pour un voyage officiel et muni d’une mallette de lettres diplomatiques scellées.",
+        "backstory": "Un diplomate a négocié une trêve fragile dont une clause secrète est aujourd’hui délibérément déformée.",
+        "goals": "Préserver la paix et révéler la vérité sans humilier aucun des deux camps."
+      }
+    },
+    {
+      "id": "well_guarded_but_visibly_tired_carrying_ledgers_marked",
+      "fields": {
+        "appearance": "Bien gardé mais visiblement épuisé, transportant des registres corrigés par plusieurs mains différentes.",
+        "backstory": "Un collecteur d’impôts a hérité de quotas impossibles, conçus pour provoquer la faillite d’un quartier appauvri.",
+        "goals": "Prouver que l’évaluation a été manipulée et éviter à la fois la révolte et une punition collective."
+      }
+    },
+    {
+      "id": "severe_robes_a_measured_voice_and_spectacles_repeatedly",
+      "fields": {
+        "appearance": "Robe austère, voix mesurée et lunettes systématiquement retirées au moment d’examiner un témoignage.",
+        "backstory": "Un juge a condamné un innocent sur la foi de preuves dont il a découvert plus tard qu’elles avaient été falsifiées.",
+        "goals": "Réparer cette injustice et déterminer combien d’affaires antérieures reposaient sur les mêmes faux."
+      }
+    },
+    {
+      "id": "practical_formalwear_a_neutral_expression_and_a_notebook",
+      "fields": {
+        "appearance": "Tenue officielle pratique, expression neutre et carnet rempli d’observations précises.",
+        "backstory": "Un inspecteur chargé d’enquêter sur la disparition de fournitures a découvert que tous les bureaux locaux rapportaient exactement les mêmes mensonges.",
+        "goals": "Identifier l’origine des pressions communes et protéger le premier témoin prêt à parler honnêtement."
+      }
+    },
+    {
+      "id": "established_experienced_adult",
+      "fields": {
+        "appearance": "Adulte expérimenté protégeant une position acquise.",
+        "backstory": "Cette étape de sa vie l’a confronté à des responsabilités qui dépassent les attentes ordinaires.",
+        "goals": "Prouver son discernement tout en préservant sa liberté d’évoluer."
+      }
+    },
+    {
+      "id": "legacy_profession_mayor",
+      "fields": {
+        "appearance": "Sa tenue et ses outils évoquent immédiatement le métier suivant : maire.",
+        "backstory": "A construit sa vie comme maire et connaît les obligations ainsi que les pressions cachées de cette activité.",
+        "goals": "Mettre cette expérience à profit pour obtenir un avenir plus sûr et plus autonome."
+      }
+    },
+    {
+      "id": "legacy_profession_minister",
+      "fields": {
+        "appearance": "Sa tenue et ses outils évoquent immédiatement le métier suivant : ministre.",
+        "backstory": "A construit sa vie comme ministre et connaît les obligations ainsi que les pressions cachées de cette activité.",
+        "goals": "Mettre cette expérience à profit pour obtenir un avenir plus sûr et plus autonome."
+      }
+    },
+    {
+      "id": "legacy_profession_jailer",
+      "fields": {
+        "appearance": "Sa tenue et ses outils évoquent immédiatement le métier suivant : geôlier.",
+        "backstory": "A construit sa vie comme geôlier et connaît les obligations ainsi que les pressions cachées de cette activité.",
+        "goals": "Mettre cette expérience à profit pour obtenir un avenir plus sûr et plus autonome."
+      }
+    },
+    {
+      "id": "legacy_profession_executioner",
+      "fields": {
+        "appearance": "Sa tenue et ses outils évoquent immédiatement le métier suivant : bourreau.",
+        "backstory": "A construit sa vie comme bourreau et connaît les obligations ainsi que les pressions cachées de cette activité.",
+        "goals": "Mettre cette expérience à profit pour obtenir un avenir plus sûr et plus autonome."
+      }
+    },
+    {
+      "id": "legacy_profession_townsfolk",
+      "fields": {
+        "appearance": "Sa tenue et ses outils évoquent immédiatement le métier suivant : citadin.",
+        "backstory": "A construit sa vie comme citadin et connaît les obligations ainsi que les pressions cachées de cette activité.",
+        "goals": "Mettre cette expérience à profit pour obtenir un avenir plus sûr et plus autonome."
+      }
+    },
+    {
+      "id": "decomposed_magical_crime_constable",
+      "fields": {
+        "appearance": "Les dossiers d’un agent de village concernent des crimes magiques que le droit local refuse de reconnaître.",
+        "backstory": "un garde de village honnête, dépassé par des crimes magiques dont la législation locale refuse l'existence.",
+        "goals": "Transformer ce parcours singulier en un avenir choisi."
+      }
+    },
+    {
+      "id": "decomposed_deliberate_marshscale_diplomat",
+      "fields": {
+        "appearance": "Un diplomate des marais marque une longue pause avant chaque réponse et ne gaspille aucun mot.",
+        "backstory": "un diplomate aux écailles des marais qui marque une pause de plusieurs minutes avant chaque réponse et ne gaspille jamais un mot.",
+        "goals": "Transformer ce parcours singulier en un avenir choisi."
+      }
+    },
+    {
+      "id": "decomposed_enchanted_stamp_bureaucrat",
+      "fields": {
+        "appearance": "Un tampon enchanté et une pile de lois provisoires absurdes accompagnent un fonctionnaire méticuleux.",
+        "backstory": "un bureaucrate dont le sceau enchanté donne temporairement une réalité physique à des lois ridicules.",
+        "goals": "Transformer ce parcours singulier en un avenir choisi."
+      }
+    }
+  ]
+}

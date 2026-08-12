@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 3,
+  "id": "site_modifier_interiors",
+  "visibility": "internal",
+  "name": "Historical site modifiers",
+  "description": "Descriptive historical variations compatible with specific location generators",
+  "entrySchema": {
+    "type": "fields",
+    "required": ["name", "description"]
+  },
+  "entries": [
+    {
+      "id": "hidden",
+      "fields": {
+        "name": "Hidden",
+        "description": "Access is concealed by terrain, a newer structure, or a maintained illusion."
+      }
+    },
+    {
+      "id": "cramped",
+      "fields": {
+        "name": "Cramped",
+        "description": "Passages and usable spaces restrict movement, visibility, and bulky equipment."
+      }
+    }
+  ]
+}

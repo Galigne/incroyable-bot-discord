@@ -1,0 +1,101 @@
+{
+  "schemaVersion": 3,
+  "id": "background_merchant",
+  "visibility": "internal",
+  "name": "Merchant background details",
+  "description": "Background details for merchant NPCs",
+  "entrySchema": {
+    "type": "fields",
+    "required": ["appearance", "backstory", "goals"]
+  },
+  "entries": [
+    {
+      "id": "colorfully_dressed_expressive_and_constantly_counting_with_ring",
+      "fields": {
+        "appearance": "Colorfully dressed, expressive, and constantly counting with ring-covered fingers.",
+        "backstory": "A trader built a route between villages ignored by large commercial houses.",
+        "goals": "Establish a permanent market and prevent a monopoly from absorbing the route."
+      }
+    },
+    {
+      "id": "neat_approachable_and_positioned_behind_spectacles_chosen_to",
+      "fields": {
+        "appearance": "Neat, approachable, and positioned behind spectacles chosen to appear trustworthy.",
+        "backstory": "A shopkeeper inherited a store whose cellar contains goods absent from every ledger.",
+        "goals": "Identify the goods' owner and restore the business without attracting criminal attention."
+      }
+    },
+    {
+      "id": "road_worn_and_alert_wearing_layered_dust_cloths_and",
+      "fields": {
+        "appearance": "Road-worn and alert, wearing layered dust cloths and a caravan company's brass badge.",
+        "backstory": "A caravan worker survived an ambush by negotiating with the attackers instead of fighting.",
+        "goals": "Make the route safer and discover who supplied the bandits with the schedule."
+      }
+    },
+    {
+      "id": "well_fed_heavily_perfumed_and_accompanied_by_subtle_signs",
+      "fields": {
+        "appearance": "Well-fed, heavily perfumed, and accompanied by subtle signs of recent wealth.",
+        "backstory": "A former dock laborer became a supplier through excellent timing and genuine generosity.",
+        "goals": "Enter respectable society without abandoning the workers who enabled that rise."
+      }
+    },
+    {
+      "id": "reserved_immaculately_dressed_and_carrying_sample_cases_secured",
+      "fields": {
+        "appearance": "Reserved, immaculately dressed, and carrying sample cases secured by several locks.",
+        "backstory": "A foreign factor was stranded when war severed every connection to the parent company.",
+        "goals": "Build local alliances, protect employees, and decide whether loyalty to the company still matters."
+      }
+    },
+    {
+      "id": "legacy_profession_fishmonger",
+      "fields": {
+        "appearance": "Clothing and tools immediately suggest the work of a fishmonger.",
+        "backstory": "Built a life as a fishmonger and knows the profession’s obligations and hidden pressures.",
+        "goals": "Use that experience to secure a safer and more independent future."
+      }
+    },
+    {
+      "id": "legacy_profession_merchant",
+      "fields": {
+        "appearance": "Clothing and tools immediately suggest the work of a merchant.",
+        "backstory": "Built a life as a merchant and knows the profession’s obligations and hidden pressures.",
+        "goals": "Use that experience to secure a safer and more independent future."
+      }
+    },
+    {
+      "id": "legacy_profession_secondhand_dealer",
+      "fields": {
+        "appearance": "Clothing and tools immediately suggest the work of a secondhand dealer.",
+        "backstory": "Built a life as a secondhand dealer and knows the profession’s obligations and hidden pressures.",
+        "goals": "Use that experience to secure a safer and more independent future."
+      }
+    },
+    {
+      "id": "legacy_profession_innkeeper",
+      "fields": {
+        "appearance": "Clothing and tools immediately suggest the work of a innkeeper.",
+        "backstory": "Built a life as a innkeeper and knows the profession’s obligations and hidden pressures.",
+        "goals": "Use that experience to secure a safer and more independent future."
+      }
+    },
+    {
+      "id": "decomposed_favorite_artifact_appraiser",
+      "fields": {
+        "appearance": "An appraiser's tools are precise, but favorite objects are visibly undervalued.",
+        "backstory": "a dwarven appraiser who can identify any artifact but compulsively undervalues objects he personally likes.",
+        "goals": "Turn this unusual history toward a self-directed future."
+      }
+    },
+    {
+      "id": "decomposed_favor_based_innkeeper",
+      "fields": {
+        "appearance": "An innkeeper's ledger records free rooms for adventurers as favors to be collected later.",
+        "backstory": "an elderly ashborn innkeeper who gives free rooms to adventurers and invoices them later in favors.",
+        "goals": "Turn this unusual history toward a self-directed future."
+      }
+    }
+  ]
+}

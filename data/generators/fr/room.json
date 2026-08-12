@@ -1,7 +1,6 @@
 {
-  "schemaVersion": 2,
+  "schemaVersion": 3,
   "id": "room",
-  "kind": "category",
   "visibility": "public",
   "name": "Pièces",
   "description": "Pièces et espaces intérieurs de bâtiments ou de donjons",
@@ -15,7 +14,7 @@
       "value": "Chambre — lit, coffre, nécessaire de toilette, souvenirs personnels et traces de la dernière activité de l’occupant."
     },
     {
-      "id": "living-room",
+      "id": "living_room",
       "weight": 4,
       "value": "Salle commune — sièges usés autour d’un foyer, objets familiaux et lettre dissimulée."
     },
@@ -25,7 +24,7 @@
       "value": "Cuisine — plans de travail, fours, couteaux, provisions et plat récemment laissé sur le feu."
     },
     {
-      "id": "dining-hall",
+      "id": "dining_hall",
       "weight": 4,
       "value": "Salle à manger — longues tables, portes de service, décorations fanées et places attribuées selon le rang."
     },
@@ -90,7 +89,7 @@
       "value": "Chapelle — bancs, images sacrées, offrandes et petit passage menant à un confessionnal privé."
     },
     {
-      "id": "bathing-room",
+      "id": "bathing_room",
       "weight": 2,
       "value": "Salle des bains — bassin chauffé, évacuations, serviettes, paravents et accès aux tunnels d’entretien."
     },
@@ -105,7 +104,7 @@
       "value": "Salle de bal — parquet lustré, galerie des musiciens, lustres et balcons conçus pour observer les invités."
     },
     {
-      "id": "map-room",
+      "id": "map_room",
       "weight": 2,
       "value": "Salle des cartes — cartes murales, instruments d’arpentage, marqueurs de campagne et région volontairement effacée."
     },
@@ -115,27 +114,27 @@
       "value": "Trésorerie — objets de valeur inventoriés, coffres scellés, titres de propriété et plusieurs niveaux de sécurité."
     },
     {
-      "id": "secret-passage",
+      "id": "secret_passage",
       "weight": 1,
       "value": "Passage secret — conduit exigu percé de judas, marqué d’anciennes empreintes et muni d’un mécanisme qui s’ouvre ailleurs."
     },
     {
-      "id": "ritual-chamber",
+      "id": "ritual_chamber",
       "weight": 1,
       "value": "Chambre rituelle — motifs géométriques, entraves, offrandes consumées et pression surnaturelle persistante."
     },
     {
-      "id": "portal-room",
+      "id": "portal_room",
       "weight": 1,
       "value": "Salle du portail — chambre renforcée organisée autour d’une porte inactive et de commandes d’arrêt d’urgence."
     },
     {
-      "id": "trophy-gallery",
+      "id": "trophy_gallery",
       "weight": 1,
       "value": "Galerie des trophées — bêtes naturalisées, bannières prises à l’ennemi, armes célèbres et pièce exposée encore vivante."
     },
     {
-      "id": "interrogation-room",
+      "id": "interrogation_room",
       "weight": 1,
       "value": "Salle d’interrogatoire — chaise fixée au sol, murs insonorisés, rigole d’évacuation et liste de questions méticuleusement ordonnée."
     }

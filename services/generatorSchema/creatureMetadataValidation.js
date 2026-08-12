@@ -17,17 +17,16 @@ const { validateReference } = require('./referenceValidation');
 function validateCreatureGeneratorEnvelope(generator, entrySchema, file) {
 	if (generator.id === CREATURE_ROUTER_ID) {
 		if (
-			generator.kind !== 'category'
-			|| generator.visibility !== 'public'
+			generator.visibility !== 'public'
 			|| entrySchema.type !== 'fields'
 			|| JSON.stringify(entrySchema.required)
-				!== JSON.stringify(['Name', 'Description', 'Generator'])
+				!== JSON.stringify(['name', 'description', 'generator'])
 			|| JSON.stringify(entrySchema.technical ?? [])
-				!== JSON.stringify(['Generator'])
+				!== JSON.stringify(['generator'])
 		) {
 			throw generatorSchemaError(
 				'INVALID_CREATURE_ROUTER_SCHEMA',
-				`Creature router ${file} must expose localized Name and Description fields plus a technical Generator field.`,
+				`Creature router ${file} must expose localized name and description fields plus a technical generator field.`,
 			);
 		}
 		return;
@@ -36,15 +35,14 @@ function validateCreatureGeneratorEnvelope(generator, entrySchema, file) {
 		return;
 	}
 	if (
-		generator.kind !== 'component'
-		|| generator.visibility !== 'internal'
+		generator.visibility !== 'internal'
 		|| entrySchema.type !== 'fields'
-		|| JSON.stringify(entrySchema.required) !== JSON.stringify(['Name', 'Description'])
+		|| JSON.stringify(entrySchema.required) !== JSON.stringify(['name', 'description'])
 		|| (entrySchema.technical?.length ?? 0) !== 0
 	) {
 		throw generatorSchemaError(
 			'INVALID_CREATURE_ARCHETYPE_SCHEMA',
-			`Creature detail generator ${file} must be an internal component exposing localized Name and Description fields.`,
+			`Creature detail generator ${file} must be an internal generator exposing localized name and description fields.`,
 		);
 	}
 }
@@ -73,7 +71,15 @@ function validateCreatureGeneration(generation, location) {
 		['statProfile', 'traits', 'equipment', 'inventory'],
 		`Creature archetype ${location} is missing required generation metadata.`,
 	);
-	validateTechnicalId(generation.statProfile, `statistical profile in ${location}`);
+	if (
+		typeof generation.statProfile !== 'string'
+		|| !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(generation.statProfile)
+	) {
+		throw generatorSchemaError(
+			'INVALID_CREATURE_STAT_PROFILE',
+			`Creature archetype ${location} has an invalid statistical profile.`,
+		);
+	}
 	if (
 		generation.naturalArmorPercentage !== undefined
 		&& (
@@ -125,13 +131,13 @@ function validateCreatureTraits(traits, location) {
 		assertPlainObject(trait, `Creature trait ${location}.${index} is invalid.`);
 		assertExactKeys(
 			trait,
-			['id', 'Name', 'Description'],
+			['id', 'name', 'description'],
 			`Creature trait ${location}.${index} has invalid properties.`,
 		);
 		validateTechnicalId(trait.id, `trait ID in ${location}`);
-		validateDisplayText(trait.Name, 256, `trait name in ${location}`);
+		validateDisplayText(trait.name, 256, `trait name in ${location}`);
 		validateDisplayText(
-			trait.Description,
+			trait.description,
 			MAX_ENTRY_TEXT_LENGTH,
 			`trait description in ${location}`,
 		);

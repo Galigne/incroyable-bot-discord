@@ -1,0 +1,1564 @@
+{
+  "schemaVersion": 3,
+  "id": "creature_monster",
+  "visibility": "internal",
+  "name": "Monstres",
+  "description": "Créatures hostiles et prédateurs surnaturels",
+  "entrySchema": {
+    "type": "fields",
+    "required": ["name", "description"]
+  },
+  "entries": [
+    {
+      "id": "grave_hound",
+      "weight": 3,
+      "fields": {
+        "name": "Molosse des tombes",
+        "description": "chasseur en meute au teint cadavérique qui flaire la peur et entraîne sous terre les proies isolées."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          {
+            "id": "grave_hound_nature",
+            "name": "Nature prédatrice",
+            "description": "chasseur en meute au teint cadavérique qui flaire la peur et entraîne sous terre les proies isolées."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 15
+      }
+    },
+    {
+      "id": "mire_troll",
+      "weight": 3,
+      "fields": {
+        "name": "Troll des fondrières",
+        "description": "brute des marais capable de se régénérer, couverte de roseaux, de sangsues et d’hameçons volés."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          {
+            "id": "mire_troll_nature",
+            "name": "Nature prédatrice",
+            "description": "brute des marais capable de se régénérer, couverte de roseaux, de sangsues et d’hameçons volés."
+          }
+        ],
+        "fixedRules": [
+          {
+            "entry": "root_rule",
+            "level": 1
+          }
+        ],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 15
+      }
+    },
+    {
+      "id": "cinder_drake",
+      "weight": 3,
+      "fields": {
+        "name": "Drac de cendre",
+        "description": "dragon sans ailes grand comme un chien, qui crache de la résine enflammée et niche dans les cheminées."
+      },
+      "generation": {
+        "statProfile": "creature-elemental",
+        "traits": [
+          {
+            "id": "cinder_drake_nature",
+            "name": "Nature prédatrice",
+            "description": "dragon sans ailes grand comme un chien, qui crache de la résine enflammée et niche dans les cheminées."
+          }
+        ],
+        "fixedRules": [
+          {
+            "entry": "candle_rule",
+            "level": 1
+          }
+        ],
+        "statusEffects": [
+          {
+            "generator": "status_effect",
+            "entry": "smoldering",
+            "select": "fields"
+          }
+        ],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 15
+      }
+    },
+    {
+      "id": "glass_spider",
+      "weight": 2,
+      "fields": {
+        "name": "Araignée de verre",
+        "description": "prédatrice presque invisible qui chasse à l’affût et dont la toile cassante tranche comme du fil de fer."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          {
+            "id": "glass_spider_nature",
+            "name": "Nature prédatrice",
+            "description": "prédatrice presque invisible qui chasse à l’affût et dont la toile cassante tranche comme du fil de fer."
+          }
+        ],
+        "fixedRules": [
+          {
+            "entry": "glass_rule",
+            "level": 1
+          }
+        ],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 20
+      }
+    },
+    {
+      "id": "bell_wraith",
+      "weight": 2,
+      "fields": {
+        "name": "Spectre de la cloche",
+        "description": "fantôme en armure qui prend corps chaque fois qu’une cloche sonne à proximité."
+      },
+      "generation": {
+        "statProfile": "creature-caster",
+        "traits": [
+          {
+            "id": "bell_wraith_nature",
+            "name": "Nature prédatrice",
+            "description": "fantôme en armure qui prend corps chaque fois qu’une cloche sonne à proximité."
+          }
+        ],
+        "fixedRules": [
+          {
+            "entry": "echo_rule",
+            "level": 1
+          }
+        ],
+        "statusEffects": [
+          {
+            "generator": "status_effect",
+            "entry": "shadowed",
+            "select": "fields"
+          }
+        ],
+        "equipment": [
+          {
+            "generator": "weapons",
+            "entry": "mace",
+            "select": "fields"
+          }
+        ],
+        "inventory": [],
+        "armor": {
+          "generator": "armors",
+          "entry": "common_heavy_armor",
+          "select": "fields"
+        }
+      }
+    },
+    {
+      "id": "lantern_maw",
+      "weight": 2,
+      "fields": {
+        "name": "Gueule-lanterne",
+        "description": "lueur chaude flottante qui sert d’appât à une immense bouche souterraine."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          {
+            "id": "lantern_maw_nature",
+            "name": "Nature prédatrice",
+            "description": "lueur chaude flottante qui sert d’appât à une immense bouche souterraine."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 15
+      }
+    },
+    {
+      "id": "bone_orchard",
+      "weight": 2,
+      "fields": {
+        "name": "Verger d’ossements",
+        "description": "colonie enracinée de bras squelettiques qui saisit les créatures et plante leurs os."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          {
+            "id": "bone_orchard_nature",
+            "name": "Nature prédatrice",
+            "description": "colonie enracinée de bras squelettiques qui saisit les créatures et plante leurs os."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 15
+      }
+    },
+    {
+      "id": "frost_widow",
+      "weight": 2,
+      "fields": {
+        "name": "Veuve de givre",
+        "description": "bête cavernicole blanche qui gèle l’humidité pour former des silhouettes leurres."
+      },
+      "generation": {
+        "statProfile": "creature-caster",
+        "traits": [
+          {
+            "id": "frost_widow_nature",
+            "name": "Nature prédatrice",
+            "description": "bête cavernicole blanche qui gèle l’humidité pour former des silhouettes leurres."
+          }
+        ],
+        "fixedRules": [
+          {
+            "entry": "cold_rule",
+            "level": 1
+          }
+        ],
+        "statusEffects": [
+          {
+            "generator": "status_effect",
+            "entry": "frost_rimed",
+            "select": "fields"
+          }
+        ],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 15
+      }
+    },
+    {
+      "id": "ink_leviathan",
+      "weight": 2,
+      "fields": {
+        "name": "Léviathan d’encre",
+        "description": "monstre fluvial qui aveugle les embarcations d’une brume noire avant de frapper par-dessous."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          {
+            "id": "ink_leviathan_nature",
+            "name": "Nature prédatrice",
+            "description": "monstre fluvial qui aveugle les embarcations d’une brume noire avant de frapper par-dessous."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 15
+      }
+    },
+    {
+      "id": "rust_eater",
+      "weight": 2,
+      "fields": {
+        "name": "Mange-rouille",
+        "description": "insecte cuirassé qui corrode rapidement le métal et attaque en essaim la cible la mieux équipée."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          {
+            "id": "rust_eater_nature",
+            "name": "Nature prédatrice",
+            "description": "insecte cuirassé qui corrode rapidement le métal et attaque en essaim la cible la mieux équipée."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 40
+      }
+    },
+    {
+      "id": "dream_leech",
+      "weight": 2,
+      "fields": {
+        "name": "Sangsue des rêves",
+        "description": "parasite translucide qui laisse ses victimes endormies conscientes, mais privées de leurs souvenirs."
+      },
+      "generation": {
+        "statProfile": "creature-caster",
+        "traits": [
+          {
+            "id": "dream_leech_nature",
+            "name": "Nature prédatrice",
+            "description": "parasite translucide qui laisse ses victimes endormies conscientes, mais privées de leurs souvenirs."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 15
+      }
+    },
+    {
+      "id": "thornback_horror",
+      "weight": 2,
+      "fields": {
+        "name": "Horreur épineuse",
+        "description": "bête végétale territoriale qui projette des graines barbelées dans les plaies ouvertes."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          {
+            "id": "thornback_horror_nature",
+            "name": "Nature prédatrice",
+            "description": "bête végétale territoriale qui projette des graines barbelées dans les plaies ouvertes."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 15
+      }
+    },
+    {
+      "id": "mirror_stalker",
+      "weight": 2,
+      "fields": {
+        "name": "Traqueur des miroirs",
+        "description": "humanoïde décharné qui ne peut se déplacer qu’à travers les reflets et les surfaces polies."
+      },
+      "generation": {
+        "statProfile": "creature-caster",
+        "traits": [
+          {
+            "id": "mirror_stalker_nature",
+            "name": "Nature prédatrice",
+            "description": "humanoïde décharné qui ne peut se déplacer qu’à travers les reflets et les surfaces polies."
+          }
+        ],
+        "fixedRules": [
+          {
+            "entry": "reflection_rule",
+            "level": 1
+          }
+        ],
+        "statusEffects": [
+          {
+            "generator": "status_effect",
+            "entry": "shadowed",
+            "select": "fields"
+          }
+        ],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 15
+      }
+    },
+    {
+      "id": "ash_giant",
+      "weight": 2,
+      "fields": {
+        "name": "Géant de cendre",
+        "description": "humanoïde incandescent qui s’effondre en cendres suffocantes lorsqu’il est blessé, puis se reconstitue."
+      },
+      "generation": {
+        "statProfile": "creature-elemental",
+        "traits": [
+          {
+            "id": "ash_giant_nature",
+            "name": "Nature prédatrice",
+            "description": "humanoïde incandescent qui s’effondre en cendres suffocantes lorsqu’il est blessé, puis se reconstitue."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [
+          {
+            "generator": "weapons",
+            "entry": "meteor_iron_maul",
+            "select": "fields"
+          }
+        ],
+        "inventory": [],
+        "naturalArmorPercentage": 15
+      }
+    },
+    {
+      "id": "moon_eyed_basilisk",
+      "weight": 2,
+      "fields": {
+        "name": "Basilic aux yeux de lune",
+        "description": "reptile à six pattes dont le regard ne pétrifie que les créatures éclairées par la lune."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          {
+            "id": "moon_eyed_basilisk_nature",
+            "name": "Nature prédatrice",
+            "description": "reptile à six pattes dont le regard ne pétrifie que les créatures éclairées par la lune."
+          }
+        ],
+        "fixedRules": [
+          {
+            "entry": "reflection_rule",
+            "level": 1
+          }
+        ],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 30
+      }
+    },
+    {
+      "id": "choir_worm",
+      "weight": 1,
+      "fields": {
+        "name": "Ver-chorale",
+        "description": "prédateur des tunnels qui imite simultanément plusieurs voix familières."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          {
+            "id": "choir_worm_nature",
+            "name": "Nature prédatrice",
+            "description": "prédateur des tunnels qui imite simultanément plusieurs voix familières."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 15
+      }
+    },
+    {
+      "id": "oath_devourer",
+      "weight": 1,
+      "fields": {
+        "name": "Dévoreur de serments",
+        "description": "démon sans visage qui se renforce chaque fois qu’une personne proche rompt une promesse."
+      },
+      "generation": {
+        "statProfile": "creature-caster",
+        "traits": [
+          {
+            "id": "oath_devourer_nature",
+            "name": "Nature prédatrice",
+            "description": "démon sans visage qui se renforce chaque fois qu’une personne proche rompt une promesse."
+          }
+        ],
+        "fixedRules": [
+          {
+            "entry": "promise_rule",
+            "level": 2
+          }
+        ],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 15
+      }
+    },
+    {
+      "id": "storm_roc",
+      "weight": 1,
+      "fields": {
+        "name": "Roc des tempêtes",
+        "description": "oiseau colossal qui niche dans les nuages d’orage et chasse tout ce qui porte du métal."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          {
+            "id": "storm_roc_nature",
+            "name": "Nature prédatrice",
+            "description": "oiseau colossal qui niche dans les nuages d’orage et chasse tout ce qui porte du métal."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 15
+      }
+    },
+    {
+      "id": "cathedral_mimic",
+      "weight": 1,
+      "fields": {
+        "name": "Mimique-cathédrale",
+        "description": "ancienne créature coloniale déguisée en lieu de culte abandonné."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          {
+            "id": "cathedral_mimic_nature",
+            "name": "Nature prédatrice",
+            "description": "ancienne créature coloniale déguisée en lieu de culte abandonné."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 50
+      }
+    },
+    {
+      "id": "time_starved_hunter",
+      "weight": 1,
+      "fields": {
+        "name": "Chasseur affamé de temps",
+        "description": "prédateur vacillant qui vole des secondes à ses proies pour se déplacer à une vitesse impossible."
+      },
+      "generation": {
+        "statProfile": "creature-caster",
+        "traits": [
+          {
+            "id": "time_starved_hunter_nature",
+            "name": "Nature prédatrice",
+            "description": "prédateur vacillant qui vole des secondes à ses proies pour se déplacer à une vitesse impossible."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 15
+      }
+    },
+    {
+      "id": "crown_hydra",
+      "weight": 1,
+      "fields": {
+        "name": "Hydre couronnée",
+        "description": "chaque tête tranchée repousse avec le visage et les souvenirs de la personne qui l’a abattue."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          {
+            "id": "crown_hydra_nature",
+            "name": "Nature prédatrice",
+            "description": "chaque tête tranchée repousse avec le visage et les souvenirs de la personne qui l’a abattue."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 35
+      }
+    },
+    {
+      "id": "hollow_saint",
+      "weight": 1,
+      "fields": {
+        "name": "Saint creux",
+        "description": "mort-vivant radieux dont les soins miraculeux remplacent peu à peu la volonté du bénéficiaire."
+      },
+      "generation": {
+        "statProfile": "creature-caster",
+        "traits": [
+          {
+            "id": "hollow_saint_nature",
+            "name": "Nature prédatrice",
+            "description": "mort-vivant radieux dont les soins miraculeux remplacent peu à peu la volonté du bénéficiaire."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [
+          {
+            "generator": "weapons",
+            "entry": "crystal_scepter",
+            "select": "fields"
+          }
+        ],
+        "inventory": [],
+        "armor": {
+          "generator": "armors",
+          "entry": "rare_medium_armor",
+          "select": "fields"
+        }
+      }
+    },
+    {
+      "id": "abyssal_grazer",
+      "weight": 1,
+      "fields": {
+        "name": "Brouteur abyssal",
+        "description": "immense silhouette d’apparence paisible dont l’ombre dévore férocement les êtres vivants."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          {
+            "id": "abyssal_grazer_nature",
+            "name": "Nature prédatrice",
+            "description": "immense silhouette d’apparence paisible dont l’ombre dévore férocement les êtres vivants."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 15
+      }
+    },
+    {
+      "id": "red_comet_beast",
+      "weight": 1,
+      "fields": {
+        "name": "Bête de la comète rouge",
+        "description": "prédateur cristallin tombé du ciel, qui se multiplie au contact de la magie."
+      },
+      "generation": {
+        "statProfile": "creature-elemental",
+        "traits": [
+          {
+            "id": "red_comet_beast_nature",
+            "name": "Nature prédatrice",
+            "description": "prédateur cristallin tombé du ciel, qui se multiplie au contact de la magie."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [
+          {
+            "generator": "status_effect",
+            "entry": "smoldering",
+            "select": "fields"
+          }
+        ],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 15
+      }
+    },
+    {
+      "id": "ash_phoenix",
+      "fields": {
+        "name": "Phénix de cendre",
+        "description": "Un grand oiseau incandescent renaît d’un foyer voisin en"
+      },
+      "generation": {
+        "statProfile": "creature-elemental",
+        "traits": [
+          {
+            "id": "ash_phoenix_nature",
+            "name": "Nature intrinsèque",
+            "description": "Un grand oiseau incandescent renaît d’un foyer voisin en"
+          }
+        ],
+        "fixedRules": [
+          {
+            "entry": "candle_rule",
+            "level": 2
+          }
+        ],
+        "statusEffects": [
+          {
+            "generator": "status_effect",
+            "entry": "smoldering",
+            "select": "fields"
+          }
+        ],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 10
+      },
+      "weight": 1
+    },
+    {
+      "id": "juvenile_ogre",
+      "fields": {
+        "name": "Ogre juvénile",
+        "description": "Un jeune géant affamé imite le comportement d’adultes absents"
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          {
+            "id": "juvenile_ogre_nature",
+            "name": "Nature intrinsèque",
+            "description": "Un jeune géant affamé imite le comportement d’adultes absents"
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 15
+      },
+      "weight": 1
+    },
+    {
+      "id": "hungry_changeling",
+      "fields": {
+        "name": "Changelin affamé",
+        "description": "Une créature copie l’apparence d’une personne mais comprend"
+      },
+      "generation": {
+        "statProfile": "creature-caster",
+        "traits": [
+          {
+            "id": "hungry_changeling_nature",
+            "name": "Nature intrinsèque",
+            "description": "Une créature copie l’apparence d’une personne mais comprend"
+          }
+        ],
+        "fixedRules": [
+          {
+            "entry": "borrowed_face_rule",
+            "level": 1
+          }
+        ],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 10
+      },
+      "weight": 1
+    },
+    {
+      "id": "imp",
+      "fields": {
+        "name": "Diablotin",
+        "description": "Un petit démon propose des marchés insignifiants dont les"
+      },
+      "generation": {
+        "statProfile": "creature-caster",
+        "traits": [
+          {
+            "id": "imp_nature",
+            "name": "Nature intrinsèque",
+            "description": "Un petit démon propose des marchés insignifiants dont les"
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 5
+      },
+      "weight": 1
+    },
+    {
+      "id": "dissolving_ooze",
+      "fields": {
+        "name": "Limon dissolvant",
+        "description": "Une masse lente digère matière organique et métal tendre,"
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          {
+            "id": "dissolving_ooze_nature",
+            "name": "Nature intrinsèque",
+            "description": "Une masse lente digère matière organique et métal tendre,"
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 15
+      },
+      "weight": 1
+    },
+    {
+      "id": "uprooted_treant",
+      "fields": {
+        "name": "Tréant déraciné",
+        "description": "Un gardien végétal marche loin de sa forêt parce que les"
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          {
+            "id": "uprooted_treant_nature",
+            "name": "Nature intrinsèque",
+            "description": "Un gardien végétal marche loin de sa forêt parce que les"
+          }
+        ],
+        "fixedRules": [
+          {
+            "entry": "root_rule",
+            "level": 2
+          }
+        ],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 35
+      },
+      "weight": 1
+    },
+    {
+      "id": "stubborn_undead",
+      "fields": {
+        "name": "Mort-vivant obstiné",
+        "description": "Un cadavre animé poursuit une tâche quotidienne sans"
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          {
+            "id": "stubborn_undead_nature",
+            "name": "Nature intrinsèque",
+            "description": "Un cadavre animé poursuit une tâche quotidienne sans"
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 10
+      },
+      "weight": 1
+    },
+    {
+      "id": "patrol_skeleton",
+      "fields": {
+        "name": "Squelette de patrouille",
+        "description": "Des ossements armés répètent encore un itinéraire"
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          {
+            "id": "patrol_skeleton_nature",
+            "name": "Nature intrinsèque",
+            "description": "Des ossements armés répètent encore un itinéraire"
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [
+          {
+            "generator": "weapons",
+            "entry": "spear",
+            "select": "fields"
+          }
+        ],
+        "inventory": [],
+        "naturalArmorPercentage": 10
+      },
+      "weight": 1
+    },
+    {
+      "id": "mutant_animal",
+      "fields": {
+        "name": "Animal mutant",
+        "description": "Une bête ordinaire porte une adaptation impossible provoquée"
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          {
+            "id": "mutant_animal_nature",
+            "name": "Nature intrinsèque",
+            "description": "Une bête ordinaire porte une adaptation impossible provoquée"
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 10
+      },
+      "weight": 1
+    },
+    {
+      "id": "abandoned_golem",
+      "fields": {
+        "name": "Golem abandonné",
+        "description": "Un serviteur artificiel continue d’appliquer un ordre devenu"
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          {
+            "id": "abandoned_golem_nature",
+            "name": "Nature intrinsèque",
+            "description": "Un serviteur artificiel continue d’appliquer un ordre devenu"
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 50
+      },
+      "weight": 1
+    },
+    {
+      "id": "imp_chicken",
+      "fields": {
+        "name": "Poulet diablotin",
+        "description": "Une volaille possédée manifeste une agressivité absurde,"
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          {
+            "id": "imp_chicken_nature",
+            "name": "Nature intrinsèque",
+            "description": "Une volaille possédée manifeste une agressivité absurde,"
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 5
+      },
+      "weight": 1
+    },
+    {
+      "id": "giant_insect",
+      "fields": {
+        "name": "Insecte géant",
+        "description": "Un arthropode colossal défend un nid construit autour d’une"
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          {
+            "id": "giant_insect_nature",
+            "name": "Nature intrinsèque",
+            "description": "Un arthropode colossal défend un nid construit autour d’une"
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 30
+      },
+      "weight": 1
+    },
+    {
+      "id": "animated_statue",
+      "fields": {
+        "name": "Statue animée",
+        "description": "Une sculpture quitte son socle pour corriger toute personne"
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          {
+            "id": "animated_statue_nature",
+            "name": "Nature intrinsèque",
+            "description": "Une sculpture quitte son socle pour corriger toute personne"
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 50
+      },
+      "weight": 1
+    },
+    {
+      "id": "voracious_slug",
+      "fields": {
+        "name": "Limace vorace",
+        "description": "Une créature lente sécrète une substance capable de dissoudre"
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          {
+            "id": "voracious_slug_nature",
+            "name": "Nature intrinsèque",
+            "description": "Une créature lente sécrète une substance capable de dissoudre"
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 15
+      },
+      "weight": 1
+    },
+    {
+      "id": "fiery_salamander",
+      "fields": {
+        "name": "Salamandre ardente",
+        "description": "Un reptile surnaturel vit dans les flammes et propage"
+      },
+      "generation": {
+        "statProfile": "creature-elemental",
+        "traits": [
+          {
+            "id": "fiery_salamander_nature",
+            "name": "Nature intrinsèque",
+            "description": "Un reptile surnaturel vit dans les flammes et propage"
+          }
+        ],
+        "fixedRules": [
+          {
+            "entry": "candle_rule",
+            "level": 1
+          }
+        ],
+        "statusEffects": [
+          {
+            "generator": "status_effect",
+            "entry": "smoldering",
+            "select": "fields"
+          }
+        ],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 25
+      },
+      "weight": 1
+    },
+    {
+      "id": "cliff_harpy",
+      "fields": {
+        "name": "Harpie des falaises",
+        "description": "Une prédatrice ailée imite les appels familiers pour"
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          {
+            "id": "cliff_harpy_nature",
+            "name": "Nature intrinsèque",
+            "description": "Une prédatrice ailée imite les appels familiers pour"
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 10
+      },
+      "weight": 1
+    },
+    {
+      "id": "murky_water_siren",
+      "fields": {
+        "name": "Sirène des eaux troubles",
+        "description": "Une créature aquatique utilise chants et reflets"
+      },
+      "generation": {
+        "statProfile": "creature-caster",
+        "traits": [
+          {
+            "id": "murky_water_siren_nature",
+            "name": "Nature intrinsèque",
+            "description": "Une créature aquatique utilise chants et reflets"
+          }
+        ],
+        "fixedRules": [
+          {
+            "entry": "influence_rule",
+            "level": 1
+          }
+        ],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 10
+      },
+      "weight": 1
+    },
+    {
+      "id": "watcher_cyclops",
+      "fields": {
+        "name": "Cyclope veilleur",
+        "description": "Un géant solitaire garde un passage dont il a oublié la"
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          {
+            "id": "watcher_cyclops_nature",
+            "name": "Nature intrinsèque",
+            "description": "Un géant solitaire garde un passage dont il a oublié la"
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 20
+      },
+      "weight": 1
+    },
+    {
+      "id": "hungry_vampire",
+      "fields": {
+        "name": "Vampire affamé",
+        "description": "Un prédateur immortel tente de préserver une façade civile"
+      },
+      "generation": {
+        "statProfile": "creature-caster",
+        "traits": [
+          {
+            "id": "hungry_vampire_nature",
+            "name": "Nature intrinsèque",
+            "description": "Un prédateur immortel tente de préserver une façade civile"
+          }
+        ],
+        "fixedRules": [
+          {
+            "entry": "vampirism_rule",
+            "level": 2
+          }
+        ],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 10
+      },
+      "weight": 1
+    },
+    {
+      "id": "memory_parasite",
+      "fields": {
+        "name": "Parasite mémoriel",
+        "description": "Une petite créature se nourrit de souvenirs récents et"
+      },
+      "generation": {
+        "statProfile": "creature-caster",
+        "traits": [
+          {
+            "id": "memory_parasite_nature",
+            "name": "Nature intrinsèque",
+            "description": "Une petite créature se nourrit de souvenirs récents et"
+          }
+        ],
+        "fixedRules": [
+          {
+            "entry": "memory_rule",
+            "level": 1
+          }
+        ],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 5
+      },
+      "weight": 1
+    },
+    {
+      "id": "repetitive_ghost",
+      "fields": {
+        "name": "Fantôme répétitif",
+        "description": "Un esprit rejoue une scène incomplète et devient violent"
+      },
+      "generation": {
+        "statProfile": "creature-caster",
+        "traits": [
+          {
+            "id": "repetitive_ghost_nature",
+            "name": "Nature intrinsèque",
+            "description": "Un esprit rejoue une scène incomplète et devient violent"
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [
+          {
+            "generator": "status_effect",
+            "entry": "shadowed",
+            "select": "fields"
+          }
+        ],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 0
+      },
+      "weight": 1
+    },
+    {
+      "id": "unstable_chimera",
+      "fields": {
+        "name": "Chimère instable",
+        "description": "Plusieurs anatomies incompatibles luttent pour contrôler"
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          {
+            "id": "unstable_chimera_nature",
+            "name": "Nature intrinsèque",
+            "description": "Plusieurs anatomies incompatibles luttent pour contrôler"
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 25
+      },
+      "weight": 1
+    },
+    {
+      "id": "unleashed_elemental",
+      "fields": {
+        "name": "Élémentaire déchaîné",
+        "description": "Une force naturelle animée cherche à rétablir un"
+      },
+      "generation": {
+        "statProfile": "creature-elemental",
+        "traits": [
+          {
+            "id": "unleashed_elemental_nature",
+            "name": "Nature intrinsèque",
+            "description": "Une force naturelle animée cherche à rétablir un"
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 25
+      },
+      "weight": 1
+    },
+    {
+      "id": "territorial_gargoyle",
+      "fields": {
+        "name": "Gargouille territoriale",
+        "description": "Une sentinelle de pierre change de bâtiment chaque"
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          {
+            "id": "territorial_gargoyle_nature",
+            "name": "Nature intrinsèque",
+            "description": "Une sentinelle de pierre change de bâtiment chaque"
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 45
+      },
+      "weight": 1
+    },
+    {
+      "id": "highland_griffin",
+      "fields": {
+        "name": "Griffon des hauteurs",
+        "description": "Un prédateur majestueux protège son aire et les objets"
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          {
+            "id": "highland_griffin_nature",
+            "name": "Nature intrinsèque",
+            "description": "Un prédateur majestueux protège son aire et les objets"
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 20
+      },
+      "weight": 1
+    },
+    {
+      "id": "reclusive_gorgon",
+      "fields": {
+        "name": "Gorgone recluse",
+        "description": "Une créature maudite pétrifie par peur davantage que par"
+      },
+      "generation": {
+        "statProfile": "creature-caster",
+        "traits": [
+          {
+            "id": "reclusive_gorgon_nature",
+            "name": "Nature intrinsèque",
+            "description": "Une créature maudite pétrifie par peur davantage que par"
+          }
+        ],
+        "fixedRules": [
+          {
+            "entry": "petrification_rule",
+            "level": 2
+          }
+        ],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 20
+      },
+      "weight": 1
+    },
+    {
+      "id": "hunted_werewolf",
+      "fields": {
+        "name": "Loup-garou traqué",
+        "description": "Une personne transformée tente de guider les chasseurs loin"
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          {
+            "id": "hunted_werewolf_nature",
+            "name": "Nature intrinsèque",
+            "description": "Une personne transformée tente de guider les chasseurs loin"
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 15
+      },
+      "weight": 1
+    },
+    {
+      "id": "guardian_mummy",
+      "fields": {
+        "name": "Momie gardienne",
+        "description": "Un ancien dignitaire préserve un lieu, un serment ou une"
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          {
+            "id": "guardian_mummy_nature",
+            "name": "Nature intrinsèque",
+            "description": "Un ancien dignitaire préserve un lieu, un serment ou une"
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 25
+      },
+      "weight": 1
+    },
+    {
+      "id": "architect_minotaur",
+      "fields": {
+        "name": "Minotaure architecte",
+        "description": "Une créature modifie continuellement son labyrinthe et"
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          {
+            "id": "architect_minotaur_nature",
+            "name": "Nature intrinsèque",
+            "description": "Une créature modifie continuellement son labyrinthe et"
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 25
+      },
+      "weight": 1
+    },
+    {
+      "id": "giant_burrowing_worm",
+      "fields": {
+        "name": "Ver fouisseur géant",
+        "description": "Un prédateur souterrain suit vibrations et chaleur,"
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          {
+            "id": "giant_burrowing_worm_nature",
+            "name": "Nature intrinsèque",
+            "description": "Un prédateur souterrain suit vibrations et chaleur,"
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 30
+      },
+      "weight": 1
+    },
+    {
+      "id": "carnivorous_plant",
+      "fields": {
+        "name": "Plante carnivore",
+        "description": "Une colonie végétale imite odeurs, voix et silhouettes afin"
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          {
+            "id": "carnivorous_plant_nature",
+            "name": "Nature intrinsèque",
+            "description": "Une colonie végétale imite odeurs, voix et silhouettes afin"
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 15
+      },
+      "weight": 1
+    },
+    {
+      "id": "ancient_dragon",
+      "fields": {
+        "name": "Dragon ancien",
+        "description": "Une créature immensément puissante protège moins un trésor"
+      },
+      "generation": {
+        "statProfile": "creature-caster",
+        "traits": [
+          {
+            "id": "ancient_dragon_nature",
+            "name": "Nature intrinsèque",
+            "description": "Une créature immensément puissante protège moins un trésor"
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 50
+      },
+      "weight": 1
+    },
+    {
+      "id": "shoal_kraken",
+      "fields": {
+        "name": "Kraken des hauts-fonds",
+        "description": "Un monstre marin bloque une route commerciale en"
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          {
+            "id": "shoal_kraken_nature",
+            "name": "Nature intrinsèque",
+            "description": "Un monstre marin bloque une route commerciale en"
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 25
+      },
+      "weight": 1
+    },
+    {
+      "id": "migrating_behemoth",
+      "fields": {
+        "name": "Béhémoth migrateur",
+        "description": "Une créature gigantesque traverse périodiquement les"
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          {
+            "id": "migrating_behemoth_nature",
+            "name": "Nature intrinsèque",
+            "description": "Une créature gigantesque traverse périodiquement les"
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 50
+      },
+      "weight": 1
+    },
+    {
+      "id": "vengeful_spirit",
+      "fields": {
+        "name": "Esprit vengeur",
+        "description": "Une entité liée à une injustice précise frappe les symboles"
+      },
+      "generation": {
+        "statProfile": "creature-caster",
+        "traits": [
+          {
+            "id": "vengeful_spirit_nature",
+            "name": "Nature intrinsèque",
+            "description": "Une entité liée à une injustice précise frappe les symboles"
+          }
+        ],
+        "fixedRules": [
+          {
+            "entry": "spirits_rule",
+            "level": 2
+          }
+        ],
+        "statusEffects": [
+          {
+            "generator": "status_effect",
+            "entry": "shadowed",
+            "select": "fields"
+          }
+        ],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 0
+      },
+      "weight": 1
+    },
+    {
+      "id": "insect_queen",
+      "fields": {
+        "name": "Reine insecte",
+        "description": "Une créature intelligente coordonne une colonie et négocie"
+      },
+      "generation": {
+        "statProfile": "creature-caster",
+        "traits": [
+          {
+            "id": "insect_queen_nature",
+            "name": "Nature intrinsèque",
+            "description": "Une créature intelligente coordonne une colonie et négocie"
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 25
+      },
+      "weight": 1
+    }
+  ]
+}

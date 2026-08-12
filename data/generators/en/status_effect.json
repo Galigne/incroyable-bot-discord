@@ -1,0 +1,261 @@
+{
+  "schemaVersion": 3,
+  "id": "status_effect",
+  "visibility": "public",
+  "name": "status effect",
+  "description": "Descriptive conditions that may affect a character or creature",
+  "entrySchema": {
+    "type": "fields",
+    "required": ["name", "description"]
+  },
+  "entries": [
+    {
+      "id": "bruised",
+      "weight": 3,
+      "fields": {
+        "name": "Bruised",
+        "description": "minor pain causes -1 on the next demanding physical action."
+      }
+    },
+    {
+      "id": "fatigued",
+      "weight": 3,
+      "fields": {
+        "name": "Fatigued",
+        "description": "prolonged effort and travel are more difficult until resting."
+      }
+    },
+    {
+      "id": "shaken",
+      "weight": 3,
+      "fields": {
+        "name": "Shaken",
+        "description": "-1 against the next fear or intimidation effect."
+      }
+    },
+    {
+      "id": "bleeding",
+      "weight": 2,
+      "fields": {
+        "name": "Bleeding",
+        "description": "loses a small amount of HP after strenuous actions until treated."
+      }
+    },
+    {
+      "id": "burning",
+      "weight": 2,
+      "fields": {
+        "name": "Burning",
+        "description": "takes recurring fire damage until the flames are extinguished."
+      }
+    },
+    {
+      "id": "chilled",
+      "weight": 2,
+      "fields": {
+        "name": "Chilled",
+        "description": "movement and Speed-based actions are reduced until warmed."
+      }
+    },
+    {
+      "id": "dazed",
+      "weight": 2,
+      "fields": {
+        "name": "Dazed",
+        "description": "reactions cost additional effort during the next turn."
+      }
+    },
+    {
+      "id": "blinded",
+      "weight": 2,
+      "fields": {
+        "name": "Blinded",
+        "description": "sight-based actions fail or suffer a major penalty."
+      }
+    },
+    {
+      "id": "deafened",
+      "weight": 2,
+      "fields": {
+        "name": "Deafened",
+        "description": "cannot hear speech, warnings, or sound-based effects clearly."
+      }
+    },
+    {
+      "id": "poisoned",
+      "weight": 2,
+      "fields": {
+        "name": "Poisoned",
+        "description": "Constitution-based resistance is required as the poison progresses."
+      }
+    },
+    {
+      "id": "slowed",
+      "weight": 2,
+      "fields": {
+        "name": "Slowed",
+        "description": "MD is reduced until the effect ends."
+      }
+    },
+    {
+      "id": "weakened",
+      "weight": 2,
+      "fields": {
+        "name": "Weakened",
+        "description": "Strength-based actions suffer a penalty."
+      }
+    },
+    {
+      "id": "confused",
+      "weight": 2,
+      "fields": {
+        "name": "Confused",
+        "description": "the character has difficulty distinguishing allies, enemies, or directions."
+      }
+    },
+    {
+      "id": "frightened",
+      "weight": 2,
+      "fields": {
+        "name": "Frightened",
+        "description": "cannot willingly approach the source of fear without succeeding on a roll."
+      }
+    },
+    {
+      "id": "stunned",
+      "fields": {
+        "name": "Stunned",
+        "description": "the character temporarily loses the ability to take normal actions."
+      }
+    },
+    {
+      "id": "paralyzed",
+      "fields": {
+        "name": "Paralyzed",
+        "description": "voluntary movement is impossible until the condition is broken."
+      }
+    },
+    {
+      "id": "silenced",
+      "fields": {
+        "name": "Silenced",
+        "description": "speech and voice-dependent abilities cannot be used."
+      }
+    },
+    {
+      "id": "cursed",
+      "fields": {
+        "name": "Cursed",
+        "description": "a supernatural penalty persists until its specific condition is resolved."
+      }
+    },
+    {
+      "id": "petrifying",
+      "fields": {
+        "name": "Petrifying",
+        "description": "the body is slowly turning to stone and requires urgent intervention."
+      }
+    },
+    {
+      "id": "possessed",
+      "fields": {
+        "name": "Possessed",
+        "description": "an outside will occasionally contests control of the character."
+      }
+    },
+    {
+      "id": "marked",
+      "fields": {
+        "name": "Marked",
+        "description": "a magical sign allows a hostile creature or effect to track the character."
+      }
+    },
+    {
+      "id": "invisible",
+      "fields": {
+        "name": "Invisible",
+        "description": "the character cannot be seen normally but still makes sound and leaves traces."
+      }
+    },
+    {
+      "id": "regenerating",
+      "fields": {
+        "name": "Regenerating",
+        "description": "restores a small amount of HP at the end of each turn."
+      }
+    },
+    {
+      "id": "inspired",
+      "fields": {
+        "name": "Inspired",
+        "description": "may reroll one chosen die, after which this status ends."
+      }
+    },
+    {
+      "id": "restless",
+      "weight": 3,
+      "fields": {
+        "name": "Restless",
+        "description": "It never becomes completely still and constantly watches its surroundings."
+      }
+    },
+    {
+      "id": "smoldering",
+      "weight": 2,
+      "fields": {
+        "name": "Smoldering",
+        "description": "Thin smoke and dim embers drift from its body without an enforced mechanical effect."
+      }
+    },
+    {
+      "id": "frost_rimed",
+      "weight": 2,
+      "fields": {
+        "name": "Frost-Rimed",
+        "description": "A persistent layer of frost coats part of its body and nearby surfaces."
+      }
+    },
+    {
+      "id": "shadowed",
+      "fields": {
+        "name": "Shadowed",
+        "description": "Its outline remains difficult to separate from the shadows around it."
+      }
+    },
+    {
+      "id": "distracted",
+      "fields": {
+        "name": "Distracted",
+        "description": "The subject loses track of their surroundings and is disadvantaged on the next action requiring sustained attention."
+      }
+    },
+    {
+      "id": "drunk",
+      "fields": {
+        "name": "Drunk",
+        "description": "Coordination and judgment are impaired until rest or suitable treatment."
+      }
+    },
+    {
+      "id": "intoxicated",
+      "fields": {
+        "name": "Intoxicated",
+        "description": "An unknown substance alters perception or reactions; the exact effect depends on the product."
+      }
+    },
+    {
+      "id": "feverish",
+      "fields": {
+        "name": "Feverish",
+        "description": "Illness drains the subject and makes prolonged effort more difficult."
+      }
+    },
+    {
+      "id": "meditative",
+      "fields": {
+        "name": "Meditative",
+        "description": "The subject is deeply focused; interruption ends the sought benefit and leaves brief disorientation."
+      }
+    }
+  ]
+}

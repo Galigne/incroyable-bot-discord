@@ -110,8 +110,17 @@ const COMMAND_METADATA = [
 					showAllInHelp: true,
 				},
 			},
+			{
+				name: 'modifier',
+				type: 'string',
+				descriptionKey: 'rpg.gen.modifierOption',
+				autocomplete: { provider: 'generator-modifiers' },
+			},
 		],
-		examples: ['/gen category:<category>'],
+		examples: [
+			'/gen category:<category>',
+			'/gen category:<category> modifier:<modifier>',
+		],
 		help: {
 			order: 20,
 			summaryKey: 'rpg.gen.description',

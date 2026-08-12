@@ -1,0 +1,1564 @@
+{
+  "schemaVersion": 3,
+  "id": "creature_monster",
+  "visibility": "internal",
+  "name": "monster",
+  "description": "Hostile creatures and supernatural predators",
+  "entrySchema": {
+    "type": "fields",
+    "required": ["name", "description"]
+  },
+  "entries": [
+    {
+      "id": "grave_hound",
+      "weight": 3,
+      "fields": {
+        "name": "Grave Hound",
+        "description": "a corpse-pale pack hunter that follows the scent of fear and drags isolated prey underground."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          {
+            "id": "grave_hound_nature",
+            "name": "Predatory Nature",
+            "description": "a corpse-pale pack hunter that follows the scent of fear and drags isolated prey underground."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 15
+      }
+    },
+    {
+      "id": "mire_troll",
+      "weight": 3,
+      "fields": {
+        "name": "Mire Troll",
+        "description": "a regenerating swamp brute covered in reeds, leeches, and stolen fishing hooks."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          {
+            "id": "mire_troll_nature",
+            "name": "Predatory Nature",
+            "description": "a regenerating swamp brute covered in reeds, leeches, and stolen fishing hooks."
+          }
+        ],
+        "fixedRules": [
+          {
+            "entry": "root_rule",
+            "level": 1
+          }
+        ],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 15
+      }
+    },
+    {
+      "id": "cinder_drake",
+      "weight": 3,
+      "fields": {
+        "name": "Cinder Drake",
+        "description": "a dog-sized wingless dragon that spits burning resin and nests in chimneys."
+      },
+      "generation": {
+        "statProfile": "creature-elemental",
+        "traits": [
+          {
+            "id": "cinder_drake_nature",
+            "name": "Predatory Nature",
+            "description": "a dog-sized wingless dragon that spits burning resin and nests in chimneys."
+          }
+        ],
+        "fixedRules": [
+          {
+            "entry": "candle_rule",
+            "level": 1
+          }
+        ],
+        "statusEffects": [
+          {
+            "generator": "status_effect",
+            "entry": "smoldering",
+            "select": "fields"
+          }
+        ],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 15
+      }
+    },
+    {
+      "id": "glass_spider",
+      "weight": 2,
+      "fields": {
+        "name": "Glass Spider",
+        "description": "a nearly invisible ambush predator whose brittle web cuts like wire."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          {
+            "id": "glass_spider_nature",
+            "name": "Predatory Nature",
+            "description": "a nearly invisible ambush predator whose brittle web cuts like wire."
+          }
+        ],
+        "fixedRules": [
+          {
+            "entry": "glass_rule",
+            "level": 1
+          }
+        ],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 20
+      }
+    },
+    {
+      "id": "bell_wraith",
+      "weight": 2,
+      "fields": {
+        "name": "Bell Wraith",
+        "description": "an armored ghost that becomes solid whenever a nearby bell rings."
+      },
+      "generation": {
+        "statProfile": "creature-caster",
+        "traits": [
+          {
+            "id": "bell_wraith_nature",
+            "name": "Predatory Nature",
+            "description": "an armored ghost that becomes solid whenever a nearby bell rings."
+          }
+        ],
+        "fixedRules": [
+          {
+            "entry": "echo_rule",
+            "level": 1
+          }
+        ],
+        "statusEffects": [
+          {
+            "generator": "status_effect",
+            "entry": "shadowed",
+            "select": "fields"
+          }
+        ],
+        "equipment": [
+          {
+            "generator": "weapons",
+            "entry": "mace",
+            "select": "fields"
+          }
+        ],
+        "inventory": [],
+        "armor": {
+          "generator": "armors",
+          "entry": "common_heavy_armor",
+          "select": "fields"
+        }
+      }
+    },
+    {
+      "id": "lantern_maw",
+      "weight": 2,
+      "fields": {
+        "name": "Lantern Maw",
+        "description": "a floating lure of warm light attached to a huge subterranean mouth."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          {
+            "id": "lantern_maw_nature",
+            "name": "Predatory Nature",
+            "description": "a floating lure of warm light attached to a huge subterranean mouth."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 15
+      }
+    },
+    {
+      "id": "bone_orchard",
+      "weight": 2,
+      "fields": {
+        "name": "Bone Orchard",
+        "description": "a rooted colony of skeletal arms that grabs creatures and plants their bones."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          {
+            "id": "bone_orchard_nature",
+            "name": "Predatory Nature",
+            "description": "a rooted colony of skeletal arms that grabs creatures and plants their bones."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 15
+      }
+    },
+    {
+      "id": "frost_widow",
+      "weight": 2,
+      "fields": {
+        "name": "Frost Widow",
+        "description": "a white cavern beast that freezes moisture into decoy silhouettes."
+      },
+      "generation": {
+        "statProfile": "creature-caster",
+        "traits": [
+          {
+            "id": "frost_widow_nature",
+            "name": "Predatory Nature",
+            "description": "a white cavern beast that freezes moisture into decoy silhouettes."
+          }
+        ],
+        "fixedRules": [
+          {
+            "entry": "cold_rule",
+            "level": 1
+          }
+        ],
+        "statusEffects": [
+          {
+            "generator": "status_effect",
+            "entry": "frost_rimed",
+            "select": "fields"
+          }
+        ],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 15
+      }
+    },
+    {
+      "id": "ink_leviathan",
+      "weight": 2,
+      "fields": {
+        "name": "Ink Leviathan",
+        "description": "a river monster that blinds boats with black mist before striking from below."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          {
+            "id": "ink_leviathan_nature",
+            "name": "Predatory Nature",
+            "description": "a river monster that blinds boats with black mist before striking from below."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 15
+      }
+    },
+    {
+      "id": "rust_eater",
+      "weight": 2,
+      "fields": {
+        "name": "Rust Eater",
+        "description": "an armored insect that rapidly corrodes metal and swarms the best-equipped target."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          {
+            "id": "rust_eater_nature",
+            "name": "Predatory Nature",
+            "description": "an armored insect that rapidly corrodes metal and swarms the best-equipped target."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 40
+      }
+    },
+    {
+      "id": "dream_leech",
+      "weight": 2,
+      "fields": {
+        "name": "Dream Leech",
+        "description": "a translucent parasite that leaves sleeping victims awake but without memories."
+      },
+      "generation": {
+        "statProfile": "creature-caster",
+        "traits": [
+          {
+            "id": "dream_leech_nature",
+            "name": "Predatory Nature",
+            "description": "a translucent parasite that leaves sleeping victims awake but without memories."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 15
+      }
+    },
+    {
+      "id": "thornback_horror",
+      "weight": 2,
+      "fields": {
+        "name": "Thornback Horror",
+        "description": "a territorial plant-beast that launches barbed seeds into open wounds."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          {
+            "id": "thornback_horror_nature",
+            "name": "Predatory Nature",
+            "description": "a territorial plant-beast that launches barbed seeds into open wounds."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 15
+      }
+    },
+    {
+      "id": "mirror_stalker",
+      "weight": 2,
+      "fields": {
+        "name": "Mirror Stalker",
+        "description": "a thin humanoid able to move only through reflections and polished surfaces."
+      },
+      "generation": {
+        "statProfile": "creature-caster",
+        "traits": [
+          {
+            "id": "mirror_stalker_nature",
+            "name": "Predatory Nature",
+            "description": "a thin humanoid able to move only through reflections and polished surfaces."
+          }
+        ],
+        "fixedRules": [
+          {
+            "entry": "reflection_rule",
+            "level": 1
+          }
+        ],
+        "statusEffects": [
+          {
+            "generator": "status_effect",
+            "entry": "shadowed",
+            "select": "fields"
+          }
+        ],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 15
+      }
+    },
+    {
+      "id": "ash_giant",
+      "weight": 2,
+      "fields": {
+        "name": "Ash Giant",
+        "description": "a smoldering humanoid that collapses into choking ash when wounded, then reforms."
+      },
+      "generation": {
+        "statProfile": "creature-elemental",
+        "traits": [
+          {
+            "id": "ash_giant_nature",
+            "name": "Predatory Nature",
+            "description": "a smoldering humanoid that collapses into choking ash when wounded, then reforms."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [
+          {
+            "generator": "weapons",
+            "entry": "meteor_iron_maul",
+            "select": "fields"
+          }
+        ],
+        "inventory": [],
+        "naturalArmorPercentage": 15
+      }
+    },
+    {
+      "id": "moon_eyed_basilisk",
+      "weight": 2,
+      "fields": {
+        "name": "Moon-Eyed Basilisk",
+        "description": "a six-legged reptile whose gaze petrifies only creatures standing in moonlight."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          {
+            "id": "moon_eyed_basilisk_nature",
+            "name": "Predatory Nature",
+            "description": "a six-legged reptile whose gaze petrifies only creatures standing in moonlight."
+          }
+        ],
+        "fixedRules": [
+          {
+            "entry": "reflection_rule",
+            "level": 1
+          }
+        ],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 30
+      }
+    },
+    {
+      "id": "choir_worm",
+      "weight": 1,
+      "fields": {
+        "name": "Choir Worm",
+        "description": "a tunnel predator that imitates several familiar voices at once."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          {
+            "id": "choir_worm_nature",
+            "name": "Predatory Nature",
+            "description": "a tunnel predator that imitates several familiar voices at once."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 15
+      }
+    },
+    {
+      "id": "oath_devourer",
+      "weight": 1,
+      "fields": {
+        "name": "Oath Devourer",
+        "description": "a faceless fiend strengthened whenever someone nearby breaks a promise."
+      },
+      "generation": {
+        "statProfile": "creature-caster",
+        "traits": [
+          {
+            "id": "oath_devourer_nature",
+            "name": "Predatory Nature",
+            "description": "a faceless fiend strengthened whenever someone nearby breaks a promise."
+          }
+        ],
+        "fixedRules": [
+          {
+            "entry": "promise_rule",
+            "level": 2
+          }
+        ],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 15
+      }
+    },
+    {
+      "id": "storm_roc",
+      "weight": 1,
+      "fields": {
+        "name": "Storm Roc",
+        "description": "a colossal bird nesting inside thunderclouds and hunting anything carrying metal."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          {
+            "id": "storm_roc_nature",
+            "name": "Predatory Nature",
+            "description": "a colossal bird nesting inside thunderclouds and hunting anything carrying metal."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 15
+      }
+    },
+    {
+      "id": "cathedral_mimic",
+      "weight": 1,
+      "fields": {
+        "name": "Cathedral Mimic",
+        "description": "an ancient colony-creature disguised as an abandoned place of worship."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          {
+            "id": "cathedral_mimic_nature",
+            "name": "Predatory Nature",
+            "description": "an ancient colony-creature disguised as an abandoned place of worship."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 50
+      }
+    },
+    {
+      "id": "time_starved_hunter",
+      "weight": 1,
+      "fields": {
+        "name": "Time-Starved Hunter",
+        "description": "a flickering predator that steals seconds from its prey to move impossibly fast."
+      },
+      "generation": {
+        "statProfile": "creature-caster",
+        "traits": [
+          {
+            "id": "time_starved_hunter_nature",
+            "name": "Predatory Nature",
+            "description": "a flickering predator that steals seconds from its prey to move impossibly fast."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 15
+      }
+    },
+    {
+      "id": "crown_hydra",
+      "weight": 1,
+      "fields": {
+        "name": "Crown Hydra",
+        "description": "each severed head regrows wearing the face and memories of its killer."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          {
+            "id": "crown_hydra_nature",
+            "name": "Predatory Nature",
+            "description": "each severed head regrows wearing the face and memories of its killer."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 35
+      }
+    },
+    {
+      "id": "hollow_saint",
+      "weight": 1,
+      "fields": {
+        "name": "Hollow Saint",
+        "description": "a radiant undead figure offering miraculous healing that slowly replaces the recipient's will."
+      },
+      "generation": {
+        "statProfile": "creature-caster",
+        "traits": [
+          {
+            "id": "hollow_saint_nature",
+            "name": "Predatory Nature",
+            "description": "a radiant undead figure offering miraculous healing that slowly replaces the recipient's will."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [
+          {
+            "generator": "weapons",
+            "entry": "crystal_scepter",
+            "select": "fields"
+          }
+        ],
+        "inventory": [],
+        "armor": {
+          "generator": "armors",
+          "entry": "rare_medium_armor",
+          "select": "fields"
+        }
+      }
+    },
+    {
+      "id": "abyssal_grazer",
+      "weight": 1,
+      "fields": {
+        "name": "Abyssal Grazer",
+        "description": "an enormous peaceful-looking shape whose shadow aggressively consumes living creatures."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          {
+            "id": "abyssal_grazer_nature",
+            "name": "Predatory Nature",
+            "description": "an enormous peaceful-looking shape whose shadow aggressively consumes living creatures."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 15
+      }
+    },
+    {
+      "id": "red_comet_beast",
+      "weight": 1,
+      "fields": {
+        "name": "Red Comet Beast",
+        "description": "a crystalline predator that falls from the sky and multiplies when exposed to magic."
+      },
+      "generation": {
+        "statProfile": "creature-elemental",
+        "traits": [
+          {
+            "id": "red_comet_beast_nature",
+            "name": "Predatory Nature",
+            "description": "a crystalline predator that falls from the sky and multiplies when exposed to magic."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [
+          {
+            "generator": "status_effect",
+            "entry": "smoldering",
+            "select": "fields"
+          }
+        ],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 15
+      }
+    },
+    {
+      "id": "ash_phoenix",
+      "fields": {
+        "name": "Ash Phoenix",
+        "description": "A great incandescent bird reborn from a nearby hearth, carrying memories of those who fed the flame."
+      },
+      "generation": {
+        "statProfile": "creature-elemental",
+        "traits": [
+          {
+            "id": "ash_phoenix_nature",
+            "name": "Intrinsic Nature",
+            "description": "A great incandescent bird reborn from a nearby hearth, carrying memories of those who fed the flame."
+          }
+        ],
+        "fixedRules": [
+          {
+            "entry": "candle_rule",
+            "level": 2
+          }
+        ],
+        "statusEffects": [
+          {
+            "generator": "status_effect",
+            "entry": "smoldering",
+            "select": "fields"
+          }
+        ],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 10
+      },
+      "weight": 1
+    },
+    {
+      "id": "juvenile_ogre",
+      "fields": {
+        "name": "Juvenile Ogre",
+        "description": "A hungry young giant imitates absent adults and turns every game into real danger."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          {
+            "id": "juvenile_ogre_nature",
+            "name": "Intrinsic Nature",
+            "description": "A hungry young giant imitates absent adults and turns every game into real danger."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 15
+      },
+      "weight": 1
+    },
+    {
+      "id": "hungry_changeling",
+      "fields": {
+        "name": "Hungry Changeling",
+        "description": "A creature copies a person’s appearance but poorly understands their habits and bonds."
+      },
+      "generation": {
+        "statProfile": "creature-caster",
+        "traits": [
+          {
+            "id": "hungry_changeling_nature",
+            "name": "Intrinsic Nature",
+            "description": "A creature copies a person’s appearance but poorly understands their habits and bonds."
+          }
+        ],
+        "fixedRules": [
+          {
+            "entry": "borrowed_face_rule",
+            "level": 1
+          }
+        ],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 10
+      },
+      "weight": 1
+    },
+    {
+      "id": "imp",
+      "fields": {
+        "name": "Imp",
+        "description": "A small demon offers trivial bargains whose wording hides disproportionate consequences."
+      },
+      "generation": {
+        "statProfile": "creature-caster",
+        "traits": [
+          {
+            "id": "imp_nature",
+            "name": "Intrinsic Nature",
+            "description": "A small demon offers trivial bargains whose wording hides disproportionate consequences."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 5
+      },
+      "weight": 1
+    },
+    {
+      "id": "dissolving_ooze",
+      "fields": {
+        "name": "Dissolving Ooze",
+        "description": "A slow mass digests organic matter and soft metal, leaving objects it cannot understand."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          {
+            "id": "dissolving_ooze_nature",
+            "name": "Intrinsic Nature",
+            "description": "A slow mass digests organic matter and soft metal, leaving objects it cannot understand."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 15
+      },
+      "weight": 1
+    },
+    {
+      "id": "uprooted_treant",
+      "fields": {
+        "name": "Uprooted Treant",
+        "description": "A plant guardian walks far from its forest because its territory’s roots were poisoned."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          {
+            "id": "uprooted_treant_nature",
+            "name": "Intrinsic Nature",
+            "description": "A plant guardian walks far from its forest because its territory’s roots were poisoned."
+          }
+        ],
+        "fixedRules": [
+          {
+            "entry": "root_rule",
+            "level": 2
+          }
+        ],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 35
+      },
+      "weight": 1
+    },
+    {
+      "id": "stubborn_undead",
+      "fields": {
+        "name": "Stubborn Undead",
+        "description": "An animated corpse continues a daily task without realizing the world has changed."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          {
+            "id": "stubborn_undead_nature",
+            "name": "Intrinsic Nature",
+            "description": "An animated corpse continues a daily task without realizing the world has changed."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 10
+      },
+      "weight": 1
+    },
+    {
+      "id": "patrol_skeleton",
+      "fields": {
+        "name": "Patrol Skeleton",
+        "description": "Armed bones repeat a military route and treat every breach of protocol as intrusion."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          {
+            "id": "patrol_skeleton_nature",
+            "name": "Intrinsic Nature",
+            "description": "Armed bones repeat a military route and treat every breach of protocol as intrusion."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [
+          {
+            "generator": "weapons",
+            "entry": "spear",
+            "select": "fields"
+          }
+        ],
+        "inventory": [],
+        "naturalArmorPercentage": 10
+      },
+      "weight": 1
+    },
+    {
+      "id": "mutant_animal",
+      "fields": {
+        "name": "Mutant Animal",
+        "description": "An ordinary beast bears an impossible adaptation caused by magical or alchemical pollution."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          {
+            "id": "mutant_animal_nature",
+            "name": "Intrinsic Nature",
+            "description": "An ordinary beast bears an impossible adaptation caused by magical or alchemical pollution."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 10
+      },
+      "weight": 1
+    },
+    {
+      "id": "abandoned_golem",
+      "fields": {
+        "name": "Abandoned Golem",
+        "description": "An artificial servant follows an order made dangerous by the absence of a master able to change it."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          {
+            "id": "abandoned_golem_nature",
+            "name": "Intrinsic Nature",
+            "description": "An artificial servant follows an order made dangerous by the absence of a master able to change it."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 50
+      },
+      "weight": 1
+    },
+    {
+      "id": "imp_chicken",
+      "fields": {
+        "name": "Imp Chicken",
+        "description": "A possessed fowl displays absurd aggression, supernatural leaps, and resilience far beyond its size."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          {
+            "id": "imp_chicken_nature",
+            "name": "Intrinsic Nature",
+            "description": "A possessed fowl displays absurd aggression, supernatural leaps, and resilience far beyond its size."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 5
+      },
+      "weight": 1
+    },
+    {
+      "id": "giant_insect",
+      "fields": {
+        "name": "Giant Insect",
+        "description": "A colossal arthropod defends a nest built around a source of heat or magic."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          {
+            "id": "giant_insect_nature",
+            "name": "Intrinsic Nature",
+            "description": "A colossal arthropod defends a nest built around a source of heat or magic."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 30
+      },
+      "weight": 1
+    },
+    {
+      "id": "animated_statue",
+      "fields": {
+        "name": "Animated Statue",
+        "description": "A sculpture leaves its plinth to correct anyone contradicting the official event it depicts."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          {
+            "id": "animated_statue_nature",
+            "name": "Intrinsic Nature",
+            "description": "A sculpture leaves its plinth to correct anyone contradicting the official event it depicts."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 50
+      },
+      "weight": 1
+    },
+    {
+      "id": "voracious_slug",
+      "fields": {
+        "name": "Voracious Slug",
+        "description": "A slow creature secretes a substance that dissolves walls, armor, or memories according to its diet."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          {
+            "id": "voracious_slug_nature",
+            "name": "Intrinsic Nature",
+            "description": "A slow creature secretes a substance that dissolves walls, armor, or memories according to its diet."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 15
+      },
+      "weight": 1
+    },
+    {
+      "id": "fiery_salamander",
+      "fields": {
+        "name": "Fiery Salamander",
+        "description": "A supernatural reptile lives in fire and unintentionally spreads flames when frightened."
+      },
+      "generation": {
+        "statProfile": "creature-elemental",
+        "traits": [
+          {
+            "id": "fiery_salamander_nature",
+            "name": "Intrinsic Nature",
+            "description": "A supernatural reptile lives in fire and unintentionally spreads flames when frightened."
+          }
+        ],
+        "fixedRules": [
+          {
+            "entry": "candle_rule",
+            "level": 1
+          }
+        ],
+        "statusEffects": [
+          {
+            "generator": "status_effect",
+            "entry": "smoldering",
+            "select": "fields"
+          }
+        ],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 25
+      },
+      "weight": 1
+    },
+    {
+      "id": "cliff_harpy",
+      "fields": {
+        "name": "Cliff Harpy",
+        "description": "A winged predator imitates familiar calls to lure travelers onto dangerous ground."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          {
+            "id": "cliff_harpy_nature",
+            "name": "Intrinsic Nature",
+            "description": "A winged predator imitates familiar calls to lure travelers onto dangerous ground."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 10
+      },
+      "weight": 1
+    },
+    {
+      "id": "murky_water_siren",
+      "fields": {
+        "name": "Murky-Water Siren",
+        "description": "An aquatic creature uses song and reflections to isolate a target from the group."
+      },
+      "generation": {
+        "statProfile": "creature-caster",
+        "traits": [
+          {
+            "id": "murky_water_siren_nature",
+            "name": "Intrinsic Nature",
+            "description": "An aquatic creature uses song and reflections to isolate a target from the group."
+          }
+        ],
+        "fixedRules": [
+          {
+            "entry": "influence_rule",
+            "level": 1
+          }
+        ],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 10
+      },
+      "weight": 1
+    },
+    {
+      "id": "watcher_cyclops",
+      "fields": {
+        "name": "Watcher Cyclops",
+        "description": "A solitary giant guards a passage whose destination is forgotten but whose prohibition remains."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          {
+            "id": "watcher_cyclops_nature",
+            "name": "Intrinsic Nature",
+            "description": "A solitary giant guards a passage whose destination is forgotten but whose prohibition remains."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 20
+      },
+      "weight": 1
+    },
+    {
+      "id": "hungry_vampire",
+      "fields": {
+        "name": "Hungry Vampire",
+        "description": "An immortal predator maintains a civil facade while scarcity makes control increasingly fragile."
+      },
+      "generation": {
+        "statProfile": "creature-caster",
+        "traits": [
+          {
+            "id": "hungry_vampire_nature",
+            "name": "Intrinsic Nature",
+            "description": "An immortal predator maintains a civil facade while scarcity makes control increasingly fragile."
+          }
+        ],
+        "fixedRules": [
+          {
+            "entry": "vampirism_rule",
+            "level": 2
+          }
+        ],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 10
+      },
+      "weight": 1
+    },
+    {
+      "id": "memory_parasite",
+      "fields": {
+        "name": "Memory Parasite",
+        "description": "A small creature feeds on recent memories and leaves victims unable to explain their presence."
+      },
+      "generation": {
+        "statProfile": "creature-caster",
+        "traits": [
+          {
+            "id": "memory_parasite_nature",
+            "name": "Intrinsic Nature",
+            "description": "A small creature feeds on recent memories and leaves victims unable to explain their presence."
+          }
+        ],
+        "fixedRules": [
+          {
+            "entry": "memory_rule",
+            "level": 1
+          }
+        ],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 5
+      },
+      "weight": 1
+    },
+    {
+      "id": "repetitive_ghost",
+      "fields": {
+        "name": "Repetitive Ghost",
+        "description": "A spirit reenacts an incomplete scene and turns violent when witnesses change its course."
+      },
+      "generation": {
+        "statProfile": "creature-caster",
+        "traits": [
+          {
+            "id": "repetitive_ghost_nature",
+            "name": "Intrinsic Nature",
+            "description": "A spirit reenacts an incomplete scene and turns violent when witnesses change its course."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [
+          {
+            "generator": "status_effect",
+            "entry": "shadowed",
+            "select": "fields"
+          }
+        ],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 0
+      },
+      "weight": 1
+    },
+    {
+      "id": "unstable_chimera",
+      "fields": {
+        "name": "Unstable Chimera",
+        "description": "Several incompatible anatomies struggle to control one artificially created body."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          {
+            "id": "unstable_chimera_nature",
+            "name": "Intrinsic Nature",
+            "description": "Several incompatible anatomies struggle to control one artificially created body."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 25
+      },
+      "weight": 1
+    },
+    {
+      "id": "unleashed_elemental",
+      "fields": {
+        "name": "Unleashed Elemental",
+        "description": "An animated natural force restores balance without understanding the lives in its path."
+      },
+      "generation": {
+        "statProfile": "creature-elemental",
+        "traits": [
+          {
+            "id": "unleashed_elemental_nature",
+            "name": "Intrinsic Nature",
+            "description": "An animated natural force restores balance without understanding the lives in its path."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 25
+      },
+      "weight": 1
+    },
+    {
+      "id": "territorial_gargoyle",
+      "fields": {
+        "name": "Territorial Gargoyle",
+        "description": "A stone sentinel changes buildings nightly and treats each new position as sacred."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          {
+            "id": "territorial_gargoyle_nature",
+            "name": "Intrinsic Nature",
+            "description": "A stone sentinel changes buildings nightly and treats each new position as sacred."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 45
+      },
+      "weight": 1
+    },
+    {
+      "id": "highland_griffin",
+      "fields": {
+        "name": "Highland Griffin",
+        "description": "A majestic predator protects its aerie and shiny objects mistaken for eggs."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          {
+            "id": "highland_griffin_nature",
+            "name": "Intrinsic Nature",
+            "description": "A majestic predator protects its aerie and shiny objects mistaken for eggs."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 20
+      },
+      "weight": 1
+    },
+    {
+      "id": "reclusive_gorgon",
+      "fields": {
+        "name": "Reclusive Gorgon",
+        "description": "A cursed creature petrifies from fear more than cruelty and collects statues of visitors."
+      },
+      "generation": {
+        "statProfile": "creature-caster",
+        "traits": [
+          {
+            "id": "reclusive_gorgon_nature",
+            "name": "Intrinsic Nature",
+            "description": "A cursed creature petrifies from fear more than cruelty and collects statues of visitors."
+          }
+        ],
+        "fixedRules": [
+          {
+            "entry": "petrification_rule",
+            "level": 2
+          }
+        ],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 20
+      },
+      "weight": 1
+    },
+    {
+      "id": "hunted_werewolf",
+      "fields": {
+        "name": "Hunted Werewolf",
+        "description": "A transformed person leads hunters away from loved ones before losing control."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          {
+            "id": "hunted_werewolf_nature",
+            "name": "Intrinsic Nature",
+            "description": "A transformed person leads hunters away from loved ones before losing control."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 15
+      },
+      "weight": 1
+    },
+    {
+      "id": "guardian_mummy",
+      "fields": {
+        "name": "Guardian Mummy",
+        "description": "An ancient dignitary preserves a place, oath, or error that descendants would rather forget."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          {
+            "id": "guardian_mummy_nature",
+            "name": "Intrinsic Nature",
+            "description": "An ancient dignitary preserves a place, oath, or error that descendants would rather forget."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 25
+      },
+      "weight": 1
+    },
+    {
+      "id": "architect_minotaur",
+      "fields": {
+        "name": "Architect Minotaur",
+        "description": "A creature endlessly alters its labyrinth and considers every lost traveler a willing intruder."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          {
+            "id": "architect_minotaur_nature",
+            "name": "Intrinsic Nature",
+            "description": "A creature endlessly alters its labyrinth and considers every lost traveler a willing intruder."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 25
+      },
+      "weight": 1
+    },
+    {
+      "id": "giant_burrowing_worm",
+      "fields": {
+        "name": "Giant Burrowing Worm",
+        "description": "A subterranean predator follows vibration and heat, causing collapses and displaced ground."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          {
+            "id": "giant_burrowing_worm_nature",
+            "name": "Intrinsic Nature",
+            "description": "A subterranean predator follows vibration and heat, causing collapses and displaced ground."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 30
+      },
+      "weight": 1
+    },
+    {
+      "id": "carnivorous_plant",
+      "fields": {
+        "name": "Carnivorous Plant",
+        "description": "A plant colony imitates scents, voices, and shapes to attract prey."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          {
+            "id": "carnivorous_plant_nature",
+            "name": "Intrinsic Nature",
+            "description": "A plant colony imitates scents, voices, and shapes to attract prey."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 15
+      },
+      "weight": 1
+    },
+    {
+      "id": "ancient_dragon",
+      "fields": {
+        "name": "Ancient Dragon",
+        "description": "An immensely powerful creature guards a region-shaping secret more than material treasure."
+      },
+      "generation": {
+        "statProfile": "creature-caster",
+        "traits": [
+          {
+            "id": "ancient_dragon_nature",
+            "name": "Intrinsic Nature",
+            "description": "An immensely powerful creature guards a region-shaping secret more than material treasure."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 50
+      },
+      "weight": 1
+    },
+    {
+      "id": "shoal_kraken",
+      "fields": {
+        "name": "Shoal Kraken",
+        "description": "A sea monster blocks a trade route and builds a nest from wrecks."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          {
+            "id": "shoal_kraken_nature",
+            "name": "Intrinsic Nature",
+            "description": "A sea monster blocks a trade route and builds a nest from wrecks."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 25
+      },
+      "weight": 1
+    },
+    {
+      "id": "migrating_behemoth",
+      "fields": {
+        "name": "Migrating Behemoth",
+        "description": "A gigantic creature periodically crosses communities built on its ancient route."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          {
+            "id": "migrating_behemoth_nature",
+            "name": "Intrinsic Nature",
+            "description": "A gigantic creature periodically crosses communities built on its ancient route."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 50
+      },
+      "weight": 1
+    },
+    {
+      "id": "vengeful_spirit",
+      "fields": {
+        "name": "Vengeful Spirit",
+        "description": "An entity bound to a specific injustice strikes the culprit’s symbols rather than true heirs."
+      },
+      "generation": {
+        "statProfile": "creature-caster",
+        "traits": [
+          {
+            "id": "vengeful_spirit_nature",
+            "name": "Intrinsic Nature",
+            "description": "An entity bound to a specific injustice strikes the culprit’s symbols rather than true heirs."
+          }
+        ],
+        "fixedRules": [
+          {
+            "entry": "spirits_rule",
+            "level": 2
+          }
+        ],
+        "statusEffects": [
+          {
+            "generator": "status_effect",
+            "entry": "shadowed",
+            "select": "fields"
+          }
+        ],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 0
+      },
+      "weight": 1
+    },
+    {
+      "id": "insect_queen",
+      "fields": {
+        "name": "Insect Queen",
+        "description": "An intelligent creature coordinates a colony and negotiates as if every individual were part of its body."
+      },
+      "generation": {
+        "statProfile": "creature-caster",
+        "traits": [
+          {
+            "id": "insect_queen_nature",
+            "name": "Intrinsic Nature",
+            "description": "An intelligent creature coordinates a colony and negotiates as if every individual were part of its body."
+          }
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 25
+      },
+      "weight": 1
+    }
+  ]
+}

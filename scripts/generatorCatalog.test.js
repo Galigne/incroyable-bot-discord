@@ -20,7 +20,7 @@ const {
 } = require('../services/weightedSelector');
 const { getCommandOptionValues } = require('../util/commandOptionValues');
 
-test('production generator v2 data uses stable IDs, strict parity, and visibility', () => {
+test('production generator v3 data uses stable IDs, strict parity, and visibility', () => {
 	const englishPublic = generatorCatalog.listGenerators('en');
 	const frenchPublic = generatorCatalog.listGenerators('fr');
 	const internal = generatorCatalog.listGenerators('en', { visibility: 'internal' });
@@ -33,34 +33,23 @@ test('production generator v2 data uses stable IDs, strict parity, and visibilit
 	assert.equal(all.length, englishPublic.length + internal.length);
 	assert.ok(internal.length > 0);
 	assert.ok(internal.every(generator => generator.visibility === 'internal'));
-	assert.deepEqual(
-		new Set(internal.filter(generator => !generator.id.startsWith('background-'))
-			.map(generator => [generator.id, generator.kind])),
-		new Set([
-			['creature-animal', 'component'],
-			['creature-companion', 'component'],
-			['creature-monster', 'component'],
-			['modifier', 'modifier'],
-			['site-modifier-all', 'modifier'],
-			['site-modifier-building', 'modifier'],
-			['site-modifier-interiors', 'modifier'],
-			['site-modifier-structures', 'modifier'],
-		]),
-	);
+	assert.ok(internal.some(generator => generator.id === 'background_adventurer'));
+	assert.ok(internal.some(generator => generator.id === 'creature_animal'));
+	assert.ok(all.every(generator => !Object.hasOwn(generator, 'kind')));
 	assert.equal(
 		generatorResolver.generate(internal[0].id, 'en', { random: () => 0 }),
 		null,
 	);
 	for (const generator of all) {
-		assert.equal(generator.schemaVersion, 2);
-		assert.match(generator.id, /^[a-z0-9]+(?:-[a-z0-9]+)*$/);
+		assert.equal(generator.schemaVersion, 3);
+		assert.match(generator.id, /^[a-z0-9]+(?:_[a-z0-9]+)*$/);
 		assert.equal(
 			new Set(generator.entries.map(entry => entry.id)).size,
 			generator.entries.length,
 		);
 		assert.ok(generator.entries.every(entry => (
 			typeof entry === 'object'
-			&& /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(entry.id)
+			&& /^[a-z0-9]+(?:_[a-z0-9]+)*$/.test(entry.id)
 		)));
 	}
 	assert.throws(
@@ -117,7 +106,7 @@ test('background concepts do not embed fixed personal identities', () => {
 	for (const locale of ['en', 'fr']) {
 		for (const generator of generatorCatalog.listGenerators(locale, {
 			visibility: 'internal',
-		}).filter(candidate => candidate.id.startsWith('background-'))) {
+		}).filter(candidate => candidate.id.startsWith('background_'))) {
 			for (const entry of generator.entries) {
 				const serializedEntry = JSON.stringify(entry);
 				assert.doesNotMatch(serializedEntry, /remembered as\b/i);
@@ -174,7 +163,7 @@ test('removed background names remain available through the name generator', () 
 	];
 	for (const locale of ['en', 'fr']) {
 		const names = generatorCatalog.getGenerator('name', locale).entries.map(entry => (
-			`${entry.fields.FirstName} ${entry.fields.LastName}`
+			`${entry.fields.first_name} ${entry.fields.last_name}`
 		));
 		for (const expectedName of expectedNames) {
 			assert.equal(
@@ -213,10 +202,47 @@ test('generator and background autocomplete expose stable public values', () => 
 		choices.map(choice => choice.value),
 		englishBackgrounds.map(entry => entry.id),
 	);
-	assert.ok(choices[0].name.startsWith(frenchBackgrounds[0].fields.Name));
+	assert.ok(choices[0].name.startsWith(frenchBackgrounds[0].fields.name));
 });
 
-test('generator schema validates v2 envelopes and kinds', () => {
+test('/gen modifier autocomplete follows the selected category map', () => {
+	const context = {
+		locale: 'fr',
+		interaction: {
+			options: {
+				getString: name => name === 'category' ? 'building' : '',
+			},
+		},
+	};
+	const choices = AUTOCOMPLETE_PROVIDERS['generator-modifiers'](
+		{},
+		context,
+		{ value: '' },
+	);
+	assert.deepEqual(
+		choices.map(choice => choice.value),
+		[
+			'site_modifier_all',
+			'site_modifier_structures',
+			'site_modifier_interiors',
+			'site_modifier_building',
+		],
+	);
+	assert.ok(choices.every(choice => choice.name.length <= 100));
+	assert.deepEqual(
+		AUTOCOMPLETE_PROVIDERS['generator-modifiers'](
+			{},
+			{
+				...context,
+				interaction: { options: { getString: () => 'unknown' } },
+			},
+			{ value: '' },
+		),
+		[],
+	);
+});
+
+test('generator schema validates unified v3 envelopes', () => {
 	const english = createTextGenerator();
 	assert.equal(validateGeneratorDefinition(english), english);
 
@@ -247,6 +273,17 @@ test('generator schema validates entry schemas and payloads', () => {
 
 	const fields = createFieldsGenerator();
 	assert.equal(validateGeneratorDefinition(fields), fields);
+	for (const modifiers of [
+		[],
+		{ quest_modifier: -1 },
+		{ quest_modifier: 101 },
+		{ 'Invalid ID': 50 },
+	]) {
+		assert.throws(
+			() => validateGeneratorDefinition({ ...english, modifiers }),
+			error => error.name === 'GeneratorSchemaError',
+		);
+	}
 });
 
 test('generator schema validates localized technical parity', () => {
@@ -261,15 +298,15 @@ test('generator schema validates localized technical parity', () => {
 	const fieldsFrench = structuredClone(fieldsEnglish);
 	fieldsFrench.name = 'Armures';
 	fieldsFrench.description = 'Armures disponibles';
-	fieldsFrench.entries[0].fields.Name = 'Armure légère';
+	fieldsFrench.entries[0].fields.name = 'Armure légère';
 	assert.equal(validateGeneratorPair(fieldsEnglish, fieldsFrench), true);
-	fieldsFrench.entries[0].fields.Type = 'léger';
+	fieldsFrench.entries[0].fields.type = 'léger';
 	assert.throws(
 		() => validateGeneratorPair(fieldsEnglish, fieldsFrench),
 		error => error.code === 'GENERATOR_LOCALE_PARITY_MISMATCH',
 	);
-	fieldsFrench.entries[0].fields.Type = 'light';
-	fieldsFrench.entries[0].id = 'armure-legere';
+	fieldsFrench.entries[0].fields.type = 'light';
+	fieldsFrench.entries[0].id = 'armure_legere';
 	assert.throws(
 		() => validateGeneratorPair(fieldsEnglish, fieldsFrench),
 		error => error.code === 'GENERATOR_LOCALE_PARITY_MISMATCH',
@@ -277,7 +314,7 @@ test('generator schema validates localized technical parity', () => {
 });
 
 test('recursive catalog discovery rejects a missing locale counterpart', async t => {
-	const root = await fsPromises.mkdtemp(path.join(os.tmpdir(), 'generator-v2-'));
+	const root = await fsPromises.mkdtemp(path.join(os.tmpdir(), 'generator-v3-'));
 	t.after(() => fsPromises.rm(root, { recursive: true, force: true }));
 	await fsPromises.mkdir(path.join(root, 'en', 'nested'), { recursive: true });
 	await fsPromises.mkdir(path.join(root, 'fr', 'nested'), { recursive: true });
@@ -299,7 +336,7 @@ test('recursive catalog discovery rejects a missing locale counterpart', async t
 		JSON.stringify(french),
 	);
 	const candidate = generatorCatalog.createGeneratorCatalogCandidate(root);
-	assert.equal(candidate.get('en').get('weather').entries[0].id, 'gentle-rain');
+	assert.equal(candidate.get('en').get('weather').entries[0].id, 'gentle_rain');
 	assert.equal(candidate.get('fr').get('weather').entries[0].value, 'Une pluie douce commence.');
 });
 
@@ -385,33 +422,31 @@ test('clearing the generator cache rebuilds both localized catalogs', () => {
 
 function createTextGenerator() {
 	return {
-		schemaVersion: 2,
+		schemaVersion: 3,
 		id: 'weather',
-		kind: 'category',
 		visibility: 'public',
 		name: 'Weather',
 		description: 'Weather conditions',
 		entrySchema: { type: 'text' },
-		entries: [{ id: 'gentle-rain', weight: 2, value: 'A gentle rain begins.' }],
+		entries: [{ id: 'gentle_rain', weight: 2, value: 'A gentle rain begins.' }],
 	};
 }
 
 function createFieldsGenerator() {
 	return {
-		schemaVersion: 2,
+		schemaVersion: 3,
 		id: 'armor',
-		kind: 'category',
 		visibility: 'public',
 		name: 'Armor',
 		description: 'Available armor',
 		entrySchema: {
 			type: 'fields',
-			required: ['Name', 'Type'],
-			technical: ['Type'],
+			required: ['name', 'type'],
+			technical: ['type'],
 		},
 		entries: [{
-			id: 'light-armor',
-			fields: { Name: 'Light armor', Type: 'light' },
+			id: 'light_armor',
+			fields: { name: 'Light armor', type: 'light' },
 		}],
 	};
 }

@@ -3,7 +3,8 @@ const { validateEntityKey } = require('./entityStoragePaths');
 
 const CURRENT_CREATURE_SAVE_SCHEMA_VERSION = 1;
 const CREATURE_STAT_IDS = Object.freeze([...BASE_STATS, ...DERIVED_STATS]);
-const TECHNICAL_ID = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
+const TECHNICAL_ID = /^[a-z0-9]+(?:_[a-z0-9]+)*$/;
+const STAT_PROFILE_ID = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 
 function validateCreatureSaveSchema(rawSaveData, expectedKey = rawSaveData?.key) {
 	if (!isRecord(rawSaveData) || !Object.hasOwn(rawSaveData, 'schemaVersion')) {
@@ -96,7 +97,12 @@ function validateSource(source) {
 		'statProfileId',
 	]) {
 		if (source[field] !== undefined && source[field] !== null) {
-			assertTechnicalId(source[field], `source.${field}`);
+			if (field === 'statProfileId') {
+				assertStatProfileId(source[field], `source.${field}`);
+			}
+			else {
+				assertTechnicalId(source[field], `source.${field}`);
+			}
 		}
 	}
 	validateProvenance(source.provenance ?? [], 'source.provenance');
@@ -289,6 +295,12 @@ function assertBoundedString(value, path, maximumLength) {
 function assertTechnicalId(value, path) {
 	if (typeof value !== 'string' || !TECHNICAL_ID.test(value)) {
 		throw invalidSave(`${path} must be a stable technical ID.`);
+	}
+}
+
+function assertStatProfileId(value, path) {
+	if (typeof value !== 'string' || !STAT_PROFILE_ID.test(value)) {
+		throw invalidSave(`${path} must be a stable statistical profile ID.`);
 	}
 }
 

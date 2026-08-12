@@ -1,367 +1,112 @@
 {
-  "schemaVersion": 2,
+  "schemaVersion": 3,
   "id": "quest",
-  "kind": "template",
   "visibility": "public",
   "name": "quest",
   "description": "Adventure hooks, objectives, and dilemmas",
   "entrySchema": {
-    "type": "template"
+    "type": "text"
   },
   "entries": [
     {
-      "id": "recover-item-before-criminal",
-      "template": "Recover the item known as {{item}} from {{site}} before someone with the {{rival}} background takes it.",
-      "references": {
-        "item": {
-          "generator": "inventory",
-          "select": "display"
-        },
-        "site": {
-          "generator": "dungeon",
-          "select": "display"
-        },
-        "rival": {
-          "generator": "background",
-          "entry": "criminal",
-          "select": "display"
-        }
-      }
+      "id": "recover_item_before_criminal",
+      "value": "Recover the item known as {{ inventory }} from {{ dungeon }} before someone with the {{ background:criminal }} background takes it."
     },
     {
-      "id": "hunt-modified-monster",
-      "template": "Hunt a creature identified as {{creature}} after witnesses associate it with the trait {{variation}}.",
-      "references": {
-        "creature": {
-          "generator": "creature-monster",
-          "select": "display"
-        },
-        "variation": {
-          "generator": "modifier",
-          "select": "display"
-        }
-      }
+      "id": "hunt_modified_monster",
+      "value": "Hunt a creature identified as {{ creature_monster }} after witnesses associate it with the trait {{ modifier }}."
     },
     {
-      "id": "defend-settlement-from-faction",
-      "template": "Defend {{community}} against a threat tied to {{faction}}.",
-      "references": {
-        "community": {
-          "generator": "settlement",
-          "select": "display"
-        },
-        "faction": {
-          "generator": "faction",
-          "select": "display"
-        }
-      }
+      "id": "defend_settlement_from_faction",
+      "value": "Defend {{ settlement }} against a threat tied to {{ faction }}."
     },
     {
-      "id": "escort-traveler-through-region",
-      "template": "Escort someone with the {{traveler}} background through the region known as {{region}} without revealing the true reason for the journey.",
-      "references": {
-        "traveler": {
-          "generator": "background",
-          "select": "display"
-        },
-        "region": {
-          "generator": "region",
-          "select": "display"
-        }
-      }
+      "id": "escort_traveler_through_region",
+      "value": "Escort someone with the {{ background }} background through the region known as {{ region }} without revealing the true reason for the journey."
     },
     {
-      "id": "steal-item-from-building",
-      "template": "Steal the item known as {{item}} from a place identified as {{building}} and return it to its rightful owner.",
-      "references": {
-        "item": {
-          "generator": "inventory",
-          "select": "display"
-        },
-        "building": {
-          "generator": "building",
-          "select": "display"
-        }
-      }
+      "id": "steal_item_from_building",
+      "value": "Steal the item known as {{ inventory }} from a place identified as {{ building }} and return it to its rightful owner."
     },
     {
-      "id": "find-missing-person-at-site",
-      "template": "Find someone with the {{missing-person}} background who vanished after a last visit to {{site}}.",
-      "references": {
-        "missing-person": {
-          "generator": "background",
-          "select": "display"
-        },
-        "site": {
-          "generator": "dungeon",
-          "select": "display"
-        }
-      }
+      "id": "find_missing_person_at_site",
+      "value": "Find someone with the {{ background }} background who vanished after a last visit to {{ dungeon }}."
     },
     {
-      "id": "stop-criminal-operation",
-      "template": "Identify and arrest a suspect with the {{suspect}} background before the next operation.",
-      "references": {
-        "suspect": {
-          "generator": "background",
-          "entry": "criminal",
-          "select": "display"
-        }
-      }
+      "id": "stop_criminal_operation",
+      "value": "Identify and arrest a suspect with the {{ background:criminal }} background before the next operation."
     },
     {
-      "id": "prevent-faction-war",
-      "template": "Prevent {{first-faction}} and {{second-faction}} from starting a war around {{community}}.",
-      "references": {
-        "first-faction": {
-          "generator": "faction",
-          "select": "display"
-        },
-        "second-faction": {
-          "generator": "faction",
-          "select": "display"
-        },
-        "community": {
-          "generator": "settlement",
-          "select": "display"
-        }
-      }
+      "id": "prevent_faction_war",
+      "value": "Prevent {{ faction }} and {{ faction }} from starting a war around {{ settlement }}."
     },
     {
-      "id": "negotiate-racial-peace",
-      "template": "Negotiate peace between a community of the {{people}} people and the inhabitants of {{settlement}}.",
-      "references": {
-        "people": {
-          "generator": "race",
-          "select": "display"
-        },
-        "settlement": {
-          "generator": "settlement",
-          "select": "display"
-        }
-      }
+      "id": "negotiate_racial_peace",
+      "value": "Negotiate peace between a community of the {{ race }} people and the inhabitants of {{ settlement }}."
     },
     {
-      "id": "anonymous-gift",
-      "template": "Give the item known as {{item}} to someone with the {{recipient}} background without revealing who commissioned the delivery.",
-      "references": {
-        "item": {
-          "generator": "inventory",
-          "select": "display"
-        },
-        "recipient": {
-          "generator": "background",
-          "select": "display"
-        }
-      }
+      "id": "anonymous_gift",
+      "value": "Give the item known as {{ inventory }} to someone with the {{ background }} background without revealing who commissioned the delivery."
     },
     {
-      "id": "first-contact",
-      "template": "Establish lasting first contact with a community of the {{people}} people.",
-      "references": {
-        "people": {
-          "generator": "race",
-          "select": "display"
-        }
-      }
+      "id": "first_contact",
+      "value": "Establish lasting first contact with a community of the {{ race }} people."
     },
     {
-      "id": "map-unknown-phenomenon",
-      "template": "Explore {{region}} and report the cause of a phenomenon absent from every map.",
-      "references": {
-        "region": {
-          "generator": "region",
-          "select": "display"
-        }
-      }
+      "id": "map_unknown_phenomenon",
+      "value": "Explore {{ region }} and report the cause of a phenomenon absent from every map."
     },
     {
-      "id": "study-monster-alive",
-      "template": "Study a creature identified as {{creature}} without killing it to understand its link with {{region}}.",
-      "references": {
-        "creature": {
-          "generator": "creature-monster",
-          "select": "display"
-        },
-        "region": {
-          "generator": "region",
-          "select": "display"
-        }
-      }
+      "id": "study_monster_alive",
+      "value": "Study a creature identified as {{ creature_monster }} without killing it to understand its link with {{ region }}."
     },
     {
-      "id": "solve-faction-murder",
-      "template": "Solve the murder of someone with the {{victim}} background despite interference from {{faction}}.",
-      "references": {
-        "victim": {
-          "generator": "background",
-          "select": "display"
-        },
-        "faction": {
-          "generator": "faction",
-          "select": "display"
-        }
-      }
+      "id": "solve_faction_murder",
+      "value": "Solve the murder of someone with the {{ background }} background despite interference from {{ faction }}."
     },
     {
-      "id": "spy-on-secret-meeting",
-      "template": "Spy on someone with the {{target}} background during a secret meeting in a place identified as {{building}}.",
-      "references": {
-        "target": {
-          "generator": "background",
-          "select": "display"
-        },
-        "building": {
-          "generator": "building",
-          "select": "display"
-        }
-      }
+      "id": "spy_on_secret_meeting",
+      "value": "Spy on someone with the {{ background }} background during a secret meeting in a place identified as {{ building }}."
     },
     {
-      "id": "prevent-inside-assassination",
-      "template": "Prevent the assassination of someone with the {{target}} background without revealing that the threat comes from {{faction}}.",
-      "references": {
-        "target": {
-          "generator": "background",
-          "select": "display"
-        },
-        "faction": {
-          "generator": "faction",
-          "select": "display"
-        }
-      }
+      "id": "prevent_inside_assassination",
+      "value": "Prevent the assassination of someone with the {{ background }} background without revealing that the threat comes from {{ faction }}."
     },
     {
-      "id": "gather-remedy-material",
-      "template": "Gather several samples of {{material}} needed to make a remedy.",
-      "references": {
-        "material": {
-          "generator": "material",
-          "select": "display"
-        }
-      }
+      "id": "gather_remedy_material",
+      "value": "Gather several samples of {{ material }} needed to make a remedy."
     },
     {
-      "id": "evacuate-before-monsters",
-      "template": "Evacuate {{settlement}} before a group associated with {{creature}} arrives.",
-      "references": {
-        "settlement": {
-          "generator": "settlement",
-          "select": "display"
-        },
-        "creature": {
-          "generator": "creature-monster",
-          "select": "display"
-        }
-      }
+      "id": "evacuate_before_monsters",
+      "value": "Evacuate {{ settlement }} before a group associated with {{ creature_monster }} arrives."
     },
     {
-      "id": "escape-site-with-prisoner",
-      "template": "Escape {{site}} with someone from the {{prisoner}} background who refuses to explain the imprisonment.",
-      "references": {
-        "site": {
-          "generator": "dungeon",
-          "select": "display"
-        },
-        "prisoner": {
-          "generator": "background",
-          "select": "display"
-        }
-      }
+      "id": "escape_site_with_prisoner",
+      "value": "Escape {{ dungeon }} with someone from the {{ background }} background who refuses to explain the imprisonment."
     },
     {
-      "id": "rescue-criminal-captive",
-      "template": "Rescue someone with the {{captive}} background from a captor with the {{captor}} background inside a place identified as {{building}}.",
-      "references": {
-        "captive": {
-          "generator": "background",
-          "select": "display"
-        },
-        "captor": {
-          "generator": "background",
-          "entry": "criminal",
-          "select": "display"
-        },
-        "building": {
-          "generator": "building",
-          "select": "display"
-        }
-      }
+      "id": "rescue_criminal_captive",
+      "value": "Rescue someone with the {{ background }} background from a captor with the {{ background:criminal }} background inside a place identified as {{ building }}."
     },
     {
-      "id": "hide-item-from-faction",
-      "template": "Hide {{item}} from {{faction}}, which can track anyone who touched it.",
-      "references": {
-        "item": {
-          "generator": "inventory",
-          "select": "display"
-        },
-        "faction": {
-          "generator": "faction",
-          "select": "display"
-        }
-      }
+      "id": "hide_item_from_faction",
+      "value": "Hide {{ inventory }} from {{ faction }}, which can track anyone who touched it."
     },
     {
-      "id": "conceal-adventure-site",
-      "template": "Prevent someone with the {{seeker}} background from discovering the location of {{site}}.",
-      "references": {
-        "seeker": {
-          "generator": "background",
-          "select": "display"
-        },
-        "site": {
-          "generator": "dungeon",
-          "select": "display"
-        }
-      }
+      "id": "conceal_adventure_site",
+      "value": "Prevent someone with the {{ background }} background from discovering the location of {{ dungeon }}."
     },
     {
-      "id": "tail-person-through-settlement",
-      "template": "Follow someone with the {{target}} background through {{settlement}} without drawing the attention of their allies.",
-      "references": {
-        "target": {
-          "generator": "background",
-          "select": "display"
-        },
-        "settlement": {
-          "generator": "settlement",
-          "select": "display"
-        }
-      }
+      "id": "tail_person_through_settlement",
+      "value": "Follow someone with the {{ background }} background through {{ settlement }} without drawing the attention of their allies."
     },
     {
-      "id": "collect-seasonal-material",
-      "template": "Collect {{material}} in {{region}} before a seasonal change makes it inaccessible.",
-      "references": {
-        "material": {
-          "generator": "material",
-          "select": "display"
-        },
-        "region": {
-          "generator": "region",
-          "select": "display"
-        }
-      }
+      "id": "collect_seasonal_material",
+      "value": "Collect {{ material }} in {{ region }} before a seasonal change makes it inaccessible."
     },
     {
-      "id": "deliver-contested-goods",
-      "template": "Deliver goods represented by {{item}} to someone with the {{recipient}} background, while several figures with the {{criminal-role}} background carry the same parcel description.",
-      "references": {
-        "item": {
-          "generator": "inventory",
-          "select": "display"
-        },
-        "recipient": {
-          "generator": "background",
-          "select": "display"
-        },
-        "criminal-role": {
-          "generator": "background",
-          "entry": "criminal",
-          "select": "display"
-        }
-      }
+      "id": "deliver_contested_goods",
+      "value": "Deliver goods represented by {{ inventory }} to someone with the {{ background }} background, while several figures with the {{ background:criminal }} background carry the same parcel description."
     }
   ]
 }

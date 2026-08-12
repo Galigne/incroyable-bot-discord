@@ -1,467 +1,466 @@
 {
-  "schemaVersion": 2,
+  "schemaVersion": 3,
   "id": "rules",
-  "kind": "category",
   "visibility": "public",
   "name": "rules",
   "description": "RULE concepts with useful limits and complications",
   "entrySchema": {
     "type": "fields",
-    "required": ["Name", "Description"]
+    "required": ["name", "description"]
   },
   "entries": [
     {
-      "id": "thread-rule",
+      "id": "thread_rule",
       "weight": 2,
       "fields": {
-        "Name": "Thread RULE",
-        "Description": "Create and control a few meters of thread within sight; stronger fibers require carried material, and control weakens sharply with distance."
+        "name": "Thread RULE",
+        "description": "Create and control a few meters of thread within sight; stronger fibers require carried material, and control weakens sharply with distance."
       }
     },
     {
-      "id": "echo-rule",
+      "id": "echo_rule",
       "weight": 2,
       "fields": {
-        "Name": "Echo RULE",
-        "Description": "Capture one sound and replay or redirect it; loud sounds cost more AP and only one captured sound can be held at a time."
+        "name": "Echo RULE",
+        "description": "Capture one sound and replay or redirect it; loud sounds cost more AP and only one captured sound can be held at a time."
       }
     },
     {
-      "id": "rust-rule",
+      "id": "rust_rule",
       "fields": {
-        "Name": "Rust RULE",
-        "Description": "Accelerate corrosion on touched non-magical metal; large or well-maintained objects require sustained contact."
+        "name": "Rust RULE",
+        "description": "Accelerate corrosion on touched non-magical metal; large or well-maintained objects require sustained contact."
       }
     },
     {
-      "id": "door-rule",
+      "id": "door_rule",
       "fields": {
-        "Name": "Door RULE",
-        "Description": "Sense and manipulate ordinary doors nearby; cannot create passages or affect a threshold the user cannot clearly imagine."
+        "name": "Door RULE",
+        "description": "Sense and manipulate ordinary doors nearby; cannot create passages or affect a threshold the user cannot clearly imagine."
       }
     },
     {
-      "id": "ink-rule",
+      "id": "ink_rule",
       "fields": {
-        "Name": "Ink RULE",
-        "Description": "Animate written ink into moving symbols and simple shapes; destroying the source writing ends the effect."
+        "name": "Ink RULE",
+        "description": "Animate written ink into moving symbols and simple shapes; destroying the source writing ends the effect."
       }
     },
     {
-      "id": "mist-rule",
+      "id": "mist_rule",
       "weight": 2,
       "fields": {
-        "Name": "Mist RULE",
-        "Description": "Produce and shape cool fog nearby; wind disperses it and the user cannot see through it naturally."
+        "name": "Mist RULE",
+        "description": "Produce and shape cool fog nearby; wind disperses it and the user cannot see through it naturally."
       }
     },
     {
-      "id": "borrowed-face-rule",
+      "id": "borrowed_face_rule",
       "fields": {
-        "Name": "Borrowed Face RULE",
-        "Description": "Copy the face of someone touched for one hour; voice, clothing, memories, and mannerisms remain unchanged."
+        "name": "Borrowed Face RULE",
+        "description": "Copy the face of someone touched for one hour; voice, clothing, memories, and mannerisms remain unchanged."
       }
     },
     {
-      "id": "glass-rule",
+      "id": "glass_rule",
       "fields": {
-        "Name": "Glass RULE",
-        "Description": "Bend and reshape touched glass without heat; shattered fragments remain dangerous and mass cannot be created."
+        "name": "Glass RULE",
+        "description": "Bend and reshape touched glass without heat; shattered fragments remain dangerous and mass cannot be created."
       }
     },
     {
-      "id": "promise-rule",
+      "id": "promise_rule",
       "fields": {
-        "Name": "Promise RULE",
-        "Description": "Sense when a willingly spoken promise is broken; cannot force honesty or determine why it was broken."
+        "name": "Promise RULE",
+        "description": "Sense when a willingly spoken promise is broken; cannot force honesty or determine why it was broken."
       }
     },
     {
-      "id": "friction-rule",
+      "id": "friction_rule",
       "fields": {
-        "Name": "Friction RULE",
-        "Description": "Increase or decrease friction across a small visible surface; extremes are brief and affect allies as readily as enemies."
+        "name": "Friction RULE",
+        "description": "Increase or decrease friction across a small visible surface; extremes are brief and affect allies as readily as enemies."
       }
     },
     {
-      "id": "scent-rule",
+      "id": "scent_rule",
       "weight": 2,
       "fields": {
-        "Name": "Scent RULE",
-        "Description": "Create, remove, and follow mundane scents; complex copied scents require a sample."
+        "name": "Scent RULE",
+        "description": "Create, remove, and follow mundane scents; complex copied scents require a sample."
       }
     },
     {
-      "id": "paper-rule",
+      "id": "paper_rule",
       "fields": {
-        "Name": "Paper RULE",
-        "Description": "Fold paper into briefly animated tools or creatures; water, fire, and heavy force destroy them easily."
+        "name": "Paper RULE",
+        "description": "Fold paper into briefly animated tools or creatures; water, fire, and heavy force destroy them easily."
       }
     },
     {
-      "id": "salt-rule",
+      "id": "salt_rule",
       "fields": {
-        "Name": "Salt RULE",
-        "Description": "Create and shape a handful of salt; larger quantities cause exhaustion, and summoned salt dissolves by sunrise."
+        "name": "Salt RULE",
+        "description": "Create and shape a handful of salt; larger quantities cause exhaustion, and summoned salt dissolves by sunrise."
       }
     },
     {
-      "id": "heartbeat-rule",
+      "id": "heartbeat_rule",
       "fields": {
-        "Name": "Heartbeat RULE",
-        "Description": "Sense nearby heartbeats and briefly synchronize with one; constructs and many undead are invisible to it."
+        "name": "Heartbeat RULE",
+        "description": "Sense nearby heartbeats and briefly synchronize with one; constructs and many undead are invisible to it."
       }
     },
     {
-      "id": "color-rule",
+      "id": "color_rule",
       "weight": 2,
       "fields": {
-        "Name": "Color RULE",
-        "Description": "Move or alter color on visible surfaces; effects are cosmetic but can enable camouflage or coded signals."
+        "name": "Color RULE",
+        "description": "Move or alter color on visible surfaces; effects are cosmetic but can enable camouflage or coded signals."
       }
     },
     {
-      "id": "balance-rule",
+      "id": "balance_rule",
       "weight": 2,
       "fields": {
-        "Name": "Balance RULE",
-        "Description": "Stabilize a touched object or willing person against ordinary motion; sudden heavy force can overwhelm it."
+        "name": "Balance RULE",
+        "description": "Stabilize a touched object or willing person against ordinary motion; sudden heavy force can overwhelm it."
       }
     },
     {
-      "id": "threshold-rule",
+      "id": "threshold_rule",
       "fields": {
-        "Name": "Threshold RULE",
-        "Description": "Know when a designated boundary is crossed; only one boundary can be watched and it must be physically marked."
+        "name": "Threshold RULE",
+        "description": "Know when a designated boundary is crossed; only one boundary can be watched and it must be physically marked."
       }
     },
     {
-      "id": "swarm-rule",
+      "id": "swarm_rule",
       "fields": {
-        "Name": "Swarm RULE",
-        "Description": "Communicate simple intentions to a small group of mundane insects; it grants no direct control over unnatural creatures."
+        "name": "Swarm RULE",
+        "description": "Communicate simple intentions to a small group of mundane insects; it grants no direct control over unnatural creatures."
       }
     },
     {
-      "id": "chance-rule",
+      "id": "chance_rule",
       "fields": {
-        "Name": "Chance RULE",
-        "Description": "Once per scene, nudge a trivial random outcome; the GM chooses an equally unlikely inconvenience that follows."
+        "name": "Chance RULE",
+        "description": "Once per scene, nudge a trivial random outcome; the GM chooses an equally unlikely inconvenience that follows."
       }
     },
     {
-      "id": "momentum-rule",
+      "id": "momentum_rule",
       "fields": {
-        "Name": "Impact RULE",
-        "Description": "Briefly amplifies a charge, strike, or projectile; it cannot change the trajectory and transfers some recoil to the user."
+        "name": "Impact RULE",
+        "description": "Briefly amplifies a charge, strike, or projectile; it cannot change the trajectory and transfers some recoil to the user."
       }
     },
     {
-      "id": "ricochet-rule",
+      "id": "ricochet_rule",
       "fields": {
-        "Name": "Ricochet RULE",
-        "Description": "Deflects a projectile toward a second visible surface; every bounce sharply reduces power and requires a plausible angle."
+        "name": "Ricochet RULE",
+        "description": "Deflects a projectile toward a second visible surface; every bounce sharply reduces power and requires a plausible angle."
       }
     },
     {
-      "id": "celerity-rule",
+      "id": "celerity_rule",
       "fields": {
-        "Name": "Celerity RULE",
-        "Description": "Accelerates one simple movement for a few seconds; the user’s decisions and perceptions do not speed up."
+        "name": "Celerity RULE",
+        "description": "Accelerates one simple movement for a few seconds; the user’s decisions and perceptions do not speed up."
       }
     },
     {
-      "id": "invisibility-rule",
+      "id": "invisibility_rule",
       "fields": {
-        "Name": "Invisibility RULE",
-        "Description": "Visually conceals a motionless target; sound, tracks, and moved objects remain perceptible."
+        "name": "Invisibility RULE",
+        "description": "Visually conceals a motionless target; sound, tracks, and moved objects remain perceptible."
       }
     },
     {
-      "id": "candle-rule",
+      "id": "candle_rule",
       "fields": {
-        "Name": "Flame RULE",
-        "Description": "Creates or directs nearby fire; its size depends on available fuel and it remains dangerous to allies."
+        "name": "Flame RULE",
+        "description": "Creates or directs nearby fire; its size depends on available fuel and it remains dangerous to allies."
       }
     },
     {
-      "id": "cold-rule",
+      "id": "cold_rule",
       "fields": {
-        "Name": "Frost RULE",
-        "Description": "Rapidly removes heat from a small surface; it can form ice but cannot instantly freeze a whole creature."
+        "name": "Frost RULE",
+        "description": "Rapidly removes heat from a small surface; it can form ice but cannot instantly freeze a whole creature."
       }
     },
     {
-      "id": "rain-rule",
+      "id": "rain_rule",
       "fields": {
-        "Name": "Rain RULE",
-        "Description": "Condenses humidity into local rain; the effect is weak in a very dry environment."
+        "name": "Rain RULE",
+        "description": "Condenses humidity into local rain; the effect is weak in a very dry environment."
       }
     },
     {
-      "id": "mending-rule",
+      "id": "mending_rule",
       "fields": {
-        "Name": "Healing RULE",
-        "Description": "Accelerates closure of a recent wound; it replaces neither lost blood nor a destroyed limb."
+        "name": "Healing RULE",
+        "description": "Accelerates closure of a recent wound; it replaces neither lost blood nor a destroyed limb."
       }
     },
     {
-      "id": "teleportation-rule",
+      "id": "teleportation_rule",
       "fields": {
-        "Name": "Teleportation RULE",
-        "Description": "Moves the user to a visible clear point; it fails when the route crosses consecrated protection."
+        "name": "Teleportation RULE",
+        "description": "Moves the user to a visible clear point; it fails when the route crosses consecrated protection."
       }
     },
     {
-      "id": "electricity-rule",
+      "id": "electricity_rule",
       "fields": {
-        "Name": "Electricity RULE",
-        "Description": "Produces or guides a discharge between conductors; the user must control the current’s path."
+        "name": "Electricity RULE",
+        "description": "Produces or guides a discharge between conductors; the user must control the current’s path."
       }
     },
     {
-      "id": "storm-rule",
+      "id": "storm_rule",
       "fields": {
-        "Name": "Storm RULE",
-        "Description": "Strengthens existing weather; it cannot create a full storm beneath a perfectly calm sky."
+        "name": "Storm RULE",
+        "description": "Strengthens existing weather; it cannot create a full storm beneath a perfectly calm sky."
       }
     },
     {
-      "id": "blessing-rule",
+      "id": "blessing_rule",
       "fields": {
-        "Name": "Blessing RULE",
-        "Description": "Grants a limited advantage to an action following a declared vow; breaking the vow immediately ends the effect."
+        "name": "Blessing RULE",
+        "description": "Grants a limited advantage to an action following a declared vow; breaking the vow immediately ends the effect."
       }
     },
     {
-      "id": "summoning-rule",
+      "id": "summoning_rule",
       "fields": {
-        "Name": "Summoning RULE",
-        "Description": "Calls a minor entity matching a prepared symbol; it keeps its will and demands a reasonable price."
+        "name": "Summoning RULE",
+        "description": "Calls a minor entity matching a prepared symbol; it keeps its will and demands a reasonable price."
       }
     },
     {
-      "id": "resurrection-rule",
+      "id": "resurrection_rule",
       "fields": {
-        "Name": "Resurrection RULE",
-        "Description": "Briefly recalls a recently dead spirit into its body; each use exacts a lasting cost and the spirit may refuse."
+        "name": "Resurrection RULE",
+        "description": "Briefly recalls a recently dead spirit into its body; each use exacts a lasting cost and the spirit may refuse."
       }
     },
     {
-      "id": "curse-rule",
+      "id": "curse_rule",
       "fields": {
-        "Name": "Curse RULE",
-        "Description": "Binds a precise penalty to a clearly stated condition; the target must be able to understand how to break it."
+        "name": "Curse RULE",
+        "description": "Binds a precise penalty to a clearly stated condition; the target must be able to understand how to break it."
       }
     },
     {
-      "id": "vampirism-rule",
+      "id": "vampirism_rule",
       "fields": {
-        "Name": "Vampirism RULE",
-        "Description": "Transfers a small amount of vitality through contact; it cannot exceed the injuries actually inflicted."
+        "name": "Vampirism RULE",
+        "description": "Transfers a small amount of vitality through contact; it cannot exceed the injuries actually inflicted."
       }
     },
     {
-      "id": "telekinesis-rule",
+      "id": "telekinesis_rule",
       "fields": {
-        "Name": "Telekinesis RULE",
-        "Description": "Moves a visible object at range; mass and precision cannot both be maximized."
+        "name": "Telekinesis RULE",
+        "description": "Moves a visible object at range; mass and precision cannot both be maximized."
       }
     },
     {
-      "id": "influence-rule",
+      "id": "influence_rule",
       "fields": {
-        "Name": "Influence RULE",
-        "Description": "Strengthens an already plausible emotion or suggestion; it creates neither lasting loyalty nor action against core values."
+        "name": "Influence RULE",
+        "description": "Strengthens an already plausible emotion or suggestion; it creates neither lasting loyalty nor action against core values."
       }
     },
     {
-      "id": "dead-rule",
+      "id": "dead_rule",
       "fields": {
-        "Name": "Dead RULE",
-        "Description": "Gives one simple order to an animated corpse; it regains neither complete memories nor lost intelligence."
+        "name": "Dead RULE",
+        "description": "Gives one simple order to an animated corpse; it regains neither complete memories nor lost intelligence."
       }
     },
     {
-      "id": "illusion-rule",
+      "id": "illusion_rule",
       "fields": {
-        "Name": "Illusion RULE",
-        "Description": "Produces a credible image or sound in a limited area; it has no mass or heat of its own."
+        "name": "Illusion RULE",
+        "description": "Produces a credible image or sound in a limited area; it has no mass or heat of its own."
       }
     },
     {
-      "id": "sleep-rule",
+      "id": "sleep_rule",
       "fields": {
-        "Name": "Sleep RULE",
-        "Description": "Deepens the fatigue of a calm target; pain or immediate danger can wake them."
+        "name": "Sleep RULE",
+        "description": "Deepens the fatigue of a calm target; pain or immediate danger can wake them."
       }
     },
     {
-      "id": "soul-bond-rule",
+      "id": "soul_bond_rule",
       "fields": {
-        "Name": "Soul Bond RULE",
-        "Description": "Lets two volunteers share a sensation or emotion; great distance blurs the bond."
+        "name": "Soul Bond RULE",
+        "description": "Lets two volunteers share a sensation or emotion; great distance blurs the bond."
       }
     },
     {
-      "id": "ghost-rule",
+      "id": "ghost_rule",
       "fields": {
-        "Name": "Ghost RULE",
-        "Description": "Briefly makes part of the body intangible; the effect cannot be maintained while carrying a heavy load."
+        "name": "Ghost RULE",
+        "description": "Briefly makes part of the body intangible; the effect cannot be maintained while carrying a heavy load."
       }
     },
     {
-      "id": "spirits-rule",
+      "id": "spirits_rule",
       "fields": {
-        "Name": "Spirits RULE",
-        "Description": "Manifests a protective or vengeful spirit tied to a memory; it follows that memory rather than exact orders."
+        "name": "Spirits RULE",
+        "description": "Manifests a protective or vengeful spirit tied to a memory; it follows that memory rather than exact orders."
       }
     },
     {
-      "id": "familiar-rule",
+      "id": "familiar_rule",
       "fields": {
-        "Name": "Familiar RULE",
-        "Description": "Creates a sensory bond with a consenting small animal; confusion and pain cross both ways."
+        "name": "Familiar RULE",
+        "description": "Creates a sensory bond with a consenting small animal; confusion and pain cross both ways."
       }
     },
     {
-      "id": "root-rule",
+      "id": "root_rule",
       "fields": {
-        "Name": "Plants RULE",
-        "Description": "Accelerates or guides plant growth; it requires water, nutrients, and a still-living plant."
+        "name": "Plants RULE",
+        "description": "Accelerates or guides plant growth; it requires water, nutrients, and a still-living plant."
       }
     },
     {
-      "id": "beasts-rule",
+      "id": "beasts_rule",
       "fields": {
-        "Name": "Beasts RULE",
-        "Description": "Conveys a simple intention to an animal; it removes neither fear nor instinct."
+        "name": "Beasts RULE",
+        "description": "Conveys a simple intention to an animal; it removes neither fear nor instinct."
       }
     },
     {
-      "id": "spores-rule",
+      "id": "spores_rule",
       "fields": {
-        "Name": "Spores RULE",
-        "Description": "Produces toxic, soothing, or curative spores; only one effect may be prepared and wind remains uncontrolled."
+        "name": "Spores RULE",
+        "description": "Produces toxic, soothing, or curative spores; only one effect may be prepared and wind remains uncontrolled."
       }
     },
     {
-      "id": "stone-rule",
+      "id": "stone_rule",
       "fields": {
-        "Name": "Stone RULE",
-        "Description": "Moves or shapes a limited amount of rock; complex structures take time and knowledge of their load."
+        "name": "Stone RULE",
+        "description": "Moves or shapes a limited amount of rock; complex structures take time and knowledge of their load."
       }
     },
     {
-      "id": "petrification-rule",
+      "id": "petrification_rule",
       "fields": {
-        "Name": "Petrification RULE",
-        "Description": "Gradually turns a small exposed area to stone; complete transformation needs repeated applications and is reversible at first."
+        "name": "Petrification RULE",
+        "description": "Gradually turns a small exposed area to stone; complete transformation needs repeated applications and is reversible at first."
       }
     },
     {
-      "id": "decay-rule",
+      "id": "decay_rule",
       "fields": {
-        "Name": "Decay RULE",
-        "Description": "Accelerates deterioration of dead matter; treated or protected materials decay slowly."
+        "name": "Decay RULE",
+        "description": "Accelerates deterioration of dead matter; treated or protected materials decay slowly."
       }
     },
     {
-      "id": "weight-rule",
+      "id": "weight_rule",
       "fields": {
-        "Name": "Gravity RULE",
-        "Description": "Raises or lowers apparent weight in a small area; inertia and structural strength do not change."
+        "name": "Gravity RULE",
+        "description": "Raises or lowers apparent weight in a small area; inertia and structural strength do not change."
       }
     },
     {
-      "id": "magnetism-rule",
+      "id": "magnetism_rule",
       "fields": {
-        "Name": "Magnetism RULE",
-        "Description": "Attracts or repels nearby metals; nonmetallic objects and rare alloys react weakly."
+        "name": "Magnetism RULE",
+        "description": "Attracts or repels nearby metals; nonmetallic objects and rare alloys react weakly."
       }
     },
     {
-      "id": "double-rule",
+      "id": "double_rule",
       "fields": {
-        "Name": "Double RULE",
-        "Description": "Creates a temporary imperfect copy of the user; it shares intentions but not recent memories."
+        "name": "Double RULE",
+        "description": "Creates a temporary imperfect copy of the user; it shares intentions but not recent memories."
       }
     },
     {
-      "id": "time-rule",
+      "id": "time_rule",
       "fields": {
-        "Name": "Time RULE",
-        "Description": "Slightly accelerates or slows a local process; it cannot rewrite the past or undo a decision."
+        "name": "Time RULE",
+        "description": "Slightly accelerates or slows a local process; it cannot rewrite the past or undo a decision."
       }
     },
     {
-      "id": "space-rule",
+      "id": "space_rule",
       "fields": {
-        "Name": "Space RULE",
-        "Description": "Opens a brief passage between prepared surfaces; the same user must have marked both points."
+        "name": "Space RULE",
+        "description": "Opens a brief passage between prepared surfaces; the same user must have marked both points."
       }
     },
     {
-      "id": "vision-rule",
+      "id": "vision_rule",
       "fields": {
-        "Name": "Vision RULE",
-        "Description": "Shows one possible future consequence of an immediate decision; changed circumstances invalidate it."
+        "name": "Vision RULE",
+        "description": "Shows one possible future consequence of an immediate decision; changed circumstances invalidate it."
       }
     },
     {
-      "id": "size-rule",
+      "id": "size_rule",
       "fields": {
-        "Name": "Size RULE",
-        "Description": "Temporarily enlarges or shrinks an object or creature; unstable mass sharply limits duration."
+        "name": "Size RULE",
+        "description": "Temporarily enlarges or shrinks an object or creature; unstable mass sharply limits duration."
       }
     },
     {
-      "id": "wind-rule",
+      "id": "wind_rule",
       "fields": {
-        "Name": "Wind RULE",
-        "Description": "Directs an air current or creates a gust; the effect quickly weakens in a very large space."
+        "name": "Wind RULE",
+        "description": "Directs an air current or creates a gust; the effect quickly weakens in a very large space."
       }
     },
     {
-      "id": "blood-rule",
+      "id": "blood_rule",
       "fields": {
-        "Name": "Blood RULE",
-        "Description": "Tracks or identifies someone from their blood; the sample is consumed and may be contaminated."
+        "name": "Blood RULE",
+        "description": "Tracks or identifies someone from their blood; the sample is consumed and may be contaminated."
       }
     },
     {
-      "id": "shadow-rule",
+      "id": "shadow_rule",
       "fields": {
-        "Name": "Shadow RULE",
-        "Description": "Thickens or moves an existing shadow; intense light reduces its reach and solidity."
+        "name": "Shadow RULE",
+        "description": "Thickens or moves an existing shadow; intense light reduces its reach and solidity."
       }
     },
     {
-      "id": "sand-rule",
+      "id": "sand_rule",
       "fields": {
-        "Name": "Sand RULE",
-        "Description": "Moves and compacts sand or dust; it creates no matter and becomes imprecise in rain."
+        "name": "Sand RULE",
+        "description": "Moves and compacts sand or dust; it creates no matter and becomes imprecise in rain."
       }
     },
     {
-      "id": "metal-rule",
+      "id": "metal_rule",
       "fields": {
-        "Name": "Metal RULE",
-        "Description": "Bends or joins a small amount of heated metal; enchanted alloys resist the effect."
+        "name": "Metal RULE",
+        "description": "Bends or joins a small amount of heated metal; enchanted alloys resist the effect."
       }
     },
     {
-      "id": "reflection-rule",
+      "id": "reflection_rule",
       "fields": {
-        "Name": "Mirror RULE",
-        "Description": "Copies the visible appearance of an observed RULE without its full power; only one imitation may be retained."
+        "name": "Mirror RULE",
+        "description": "Copies the visible appearance of an observed RULE without its full power; only one imitation may be retained."
       }
     },
     {
-      "id": "memory-rule",
+      "id": "memory_rule",
       "fields": {
-        "Name": "Memory RULE",
-        "Description": "Clarifies or blurs a memory; it cannot invent missing information and leaves detectable traces."
+        "name": "Memory RULE",
+        "description": "Clarifies or blurs a memory; it cannot invent missing information and leaves detectable traces."
       }
     }
   ]
