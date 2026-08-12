@@ -275,25 +275,21 @@ function checkPhysicalDescriptionGenerator(errors, generatorCatalog) {
 
 function checkCreatureGenerators(errors, generatorCatalog) {
 	const creature = generatorCatalog.getGenerator('creature');
-	const expectedRoutes = {
-		animal: 'creature_animal',
-		companion: 'creature_companion',
-		monster: 'creature_monster',
-	};
 	if (
 		Object.hasOwn(creature ?? {}, 'kind')
-		|| creature.visibility !== 'public'
-		|| Object.entries(expectedRoutes).some(([archetype, generatorId]) => (
-			creature.entries.find(entry => entry.id === archetype)
-				?.fields?.generator !== `{{ ${generatorId} }}`
-		))
+		|| creature?.visibility !== 'public'
+		|| !Array.isArray(creature?.entries)
+		|| creature.entries.length === 0
 	) {
-		errors.push('The public creature router does not expose every creature type.');
+		errors.push('The public creature router does not expose any valid creature types.');
 	}
-	for (const generatorId of Object.values(expectedRoutes)) {
+	for (const route of creature?.entries ?? []) {
+		const generatorId = getInlineGeneratorId(route.fields?.generator);
 		const generator = generatorCatalog.getGenerator(generatorId);
 		if (
-			Object.hasOwn(generator ?? {}, 'kind')
+			!generatorId
+			|| !generator
+			|| Object.hasOwn(generator ?? {}, 'kind')
 			|| generator.visibility !== 'internal'
 			|| generator.entries.length < 20
 			|| generator.entries.some(entry => !entry.generation)

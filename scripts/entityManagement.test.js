@@ -619,14 +619,12 @@ test('management metadata is entity-neutral while generators use concrete save k
 		'character-key',
 	);
 	const creatureGenerator = COMMAND_METADATA.find(
-		metadata => metadata.id === 'gen-monster',
+		metadata => metadata.id === 'gen-creature',
 	);
 	assert.equal(creatureGenerator.options[0].name, 'creature-key');
-	assert.deepEqual(
-		creatureGenerator.options.find(option => option.name === 'type')
-			.choices.map(choice => choice.value),
-		['monster', 'animal', 'companion'],
-	);
+	const creatureType = creatureGenerator.options.find(option => option.name === 'type');
+	assert.equal(creatureType.required, undefined);
+	assert.equal(creatureType.autocomplete.provider, 'creature-types');
 });
 
 test('registered management handlers create, mutate, and display creatures', async () => {

@@ -113,7 +113,7 @@ function createEntityEditResponse(result, locale = 'en') {
 
 function createGeneratedCreatureResponse(creature, locale = 'en') {
 	return {
-		content: t(locale, 'rpg.genMonster.success', {
+		content: t(locale, 'rpg.genCreature.success', {
 			key: creature.key,
 			name: creature.displayName,
 		}),

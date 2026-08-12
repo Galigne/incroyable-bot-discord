@@ -11,13 +11,13 @@ module.exports = {
 	async execute({ config, interaction }) {
 		const locale = getLocale(config);
 		const entityKey = interaction.options.getString('creature-key', true);
-		const archetype = interaction.options.getString('type', true);
+		const type = interaction.options.getString('type');
 		const level = interaction.options.getInteger('level');
 		try {
 			const creature = await generateCreature(
 				entityKey,
 				interaction.user.id,
-				{ archetype, level, locale },
+				{ type, level, locale },
 			);
 			await interaction.reply(createGeneratedCreatureResponse(creature, locale));
 		}

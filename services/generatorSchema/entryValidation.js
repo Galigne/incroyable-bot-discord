@@ -8,11 +8,13 @@ const {
 	validateTechnicalId,
 } = require('./assertions');
 const {
-	CREATURE_GENERATOR_IDS,
 	MAX_ENTRY_TEXT_LENGTH,
 	MAX_FIELD_VALUE_LENGTH,
 } = require('./constants');
-const { validateCreatureGeneration } = require('./creatureMetadataValidation');
+const {
+	isCreatureDetailGenerator,
+	validateCreatureGeneration,
+} = require('./creatureMetadataValidation');
 const { extractInlineReferences } = require('./referenceValidation');
 function validateEntrySchema(entrySchema, file) {
 	assertPlainObject(entrySchema, `Generator ${file} has an invalid entrySchema.`);
@@ -69,7 +71,14 @@ function validateFieldNameList(fields, file, property, allowEmpty = false) {
 	}
 }
 
-function validateGeneratorEntry(entry, entrySchema, generator, file, index) {
+function validateGeneratorEntry(
+	entry,
+	entrySchema,
+	generator,
+	file,
+	index,
+	options = {},
+) {
 	const location = `${file} entry ${index + 1}`;
 	assertPlainObject(entry, `Invalid generator entry: ${location}.`);
 	validateInlineStrings(entry, location);
@@ -86,7 +95,7 @@ function validateGeneratorEntry(entry, entrySchema, generator, file, index) {
 	const commonKeys = [
 		'id',
 		'weight',
-		...(CREATURE_GENERATOR_IDS.has(generator.id) ? ['generation'] : []),
+		...(isCreatureDetailGenerator(generator.id, options) ? ['generation'] : []),
 	];
 	if (entrySchema.type === 'text') {
 		assertAllowedKeys(
@@ -137,7 +146,7 @@ function validateGeneratorEntry(entry, entrySchema, generator, file, index) {
 			);
 		}
 	}
-	if (CREATURE_GENERATOR_IDS.has(generator.id)) {
+	if (isCreatureDetailGenerator(generator.id, options)) {
 		validateCreatureGeneration(entry.generation, location);
 	}
 }

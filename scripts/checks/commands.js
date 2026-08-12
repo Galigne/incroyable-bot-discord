@@ -37,11 +37,11 @@ module.exports = function createCommandChecks(context) {
 			expectedCommands.map(metadata => commands.get(metadata.name)),
 			'top-level RPG commands',
 		);
-		const generationOrder = ['gen', 'gen-char', 'gen-monster']
+		const generationOrder = ['gen', 'gen-char', 'gen-creature']
 			.map(id => commandRegistry.getCommand(id))
 			.sort((left, right) => left.help.order - right.help.order)
 			.map(metadata => metadata.id);
-		if (generationOrder.join(',') !== 'gen,gen-char,gen-monster') {
+		if (generationOrder.join(',') !== 'gen,gen-char,gen-creature') {
 			errors.push('RPG generation commands are not in the requested help order.');
 		}
 	}

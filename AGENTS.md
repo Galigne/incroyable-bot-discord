@@ -79,7 +79,7 @@ write real saves.
   including parsing, validation, calculations, persistence, and generation.
 - `services/characterApplicationService.js`: genuinely character-only workflows,
   currently random character generation for `/gen-char`.
-- `services/creatureApplicationService.js`: atomic `/gen-monster` generation and
+- `services/creatureApplicationService.js`: atomic `/gen-creature` generation and
   exclusive creature publication inside the shared EntityKey queue.
 - `services/entityApplicationService.js`: command-facing shared management
   workflows for characters and creatures; management command adapters must use it.
@@ -117,7 +117,7 @@ write real saves.
 - `services/mechanics/`: Discord-independent combatant and character constants,
   validation, statistics, resources, armor, damage, and generation formulas.
 - `services/generatorSchema.js`: stable public façade for generator-v3 validation
-  and creature routing constants.
+  and the public creature router identifier.
 - `services/generatorSchema/`: focused internal validators for shared assertions,
   envelopes, entries, parity, modifiers, references, creature metadata, and catalog
   relationships.
@@ -275,7 +275,7 @@ command/subcommand -> response adapter (service outcome -> Discord payload)
 
 Shared management commands and interaction handlers must call
 `services/entityApplicationService.js`; character-only workflows such as
-`/gen-char` use `services/characterApplicationService.js`, while `/gen-monster`
+`/gen-char` use `services/characterApplicationService.js`, while `/gen-creature`
 uses `services/creatureApplicationService.js`. They must not compose concrete stores
 and mechanics directly. Models own state and hydration only. They must not import
 Discord or localization code; entity embeds belong in the renderer adapters under
@@ -327,7 +327,7 @@ exact sequence:
 
 1. `/gen category:<category>`
 2. `/gen-char character-key:<new key> [level] [background]`
-3. `/gen-monster creature-key:<new key> type:<monster|animal|companion> [level]`
+3. `/gen-creature creature-key:<new key> [level] [type]`
 
 Declare autocomplete on the option metadata using a provider name. Put fixed
 suggestion values in the metadata and reusable dynamic selection in
@@ -442,9 +442,9 @@ schema.
 
 ## Persistent entity types
 
-Persistent concrete types are exactly `character` and `creature`. Animal,
-companion, and monster are generator archetypes, never additional persistence
-types. EntityKeys are globally unique across both types. Character schema v2,
+Persistent concrete types are exactly `character` and `creature`. The public
+creature router's current animal, companion, and monster entries are generator
+types, never additional persistence types; the router may define more. EntityKeys are globally unique across both types. Character schema v2,
 migration, and existing JSON property order remain unchanged; the shared
 `modifiers` list is appended and defaults to empty when
 absent, and character saves do not require a discriminator. Creature saves require `type: "creature"`,
@@ -453,9 +453,10 @@ generation, localization, references, modifiers, or formulas.
 
 Shared management commands are `/add`, `/get`, `/set`, `/damage`, `/heal`,
 `/end-turn`, `/delete`, and `/undo`, all using `entity-key`. `/gen-char` remains
-character-only and keeps `character-key`. `/gen-monster` creates the persistent
-`creature` type from the required `animal`, `companion`, or `monster` route in the
-public `creature` catalog and keeps `creature-key`.
+character-only and keeps `character-key`. `/gen-creature` creates the persistent
+`creature` type from an optional stable type entry in the public `creature` catalog;
+when omitted, the router selects a type randomly, and its referenced detail
+generator supplies the creature state. It keeps `creature-key`.
 
 Anyone may view either type. The creator, configured DM role, and actual Discord
 server owner may mutate, undo, or delete it. Creature encumbrance is an independent
@@ -494,7 +495,7 @@ Permissions:
 - The creator may set, delete, heal, damage, and end turns for their character.
 - The creator may undo retained changes for their active character.
 - When configured, the DM role may perform those actions on every entity and may
-  use `/gen`, `/gen-char`, and `/gen-monster`; otherwise those additional
+  use `/gen`, `/gen-char`, and `/gen-creature`; otherwise those additional
   permissions are server-owner-only.
 - When configured, the moderator role may use `/say`, `/purge`, and `/reload`;
   otherwise those commands are server-owner-only.
@@ -637,9 +638,10 @@ through ordinary technical `generator` fields containing inline references such 
 `{{ artisan }}` or `{{ creature_animal }}`. Background category IDs route to
 same-ID internal text generators containing reusable archetypes, and character
 generation independently resolves the internal `physical_description` text
-generator. The public creature
-archetypes `animal`, `companion`, and `monster` are not persistence types. Detail
-components expose localized `name` and `description` fields plus validated
+generator. The public creature router entries define the available stable type IDs
+and reference their internal detail generators; `animal`, `companion`, and
+`monster` are the current entries, not a closed command list or persistence types.
+Detail components expose localized `name` and `description` fields plus validated
 generation metadata. `statProfile` IDs belong to the separate non-localized
 statistical-profile schema and remain kebab-case.
 

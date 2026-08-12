@@ -40,6 +40,7 @@ const AUTOCOMPLETE_PROVIDERS = {
 	),
 	static: getStaticChoices,
 	backgrounds: getBackgroundChoices,
+	'creature-types': getCreatureTypeChoices,
 	'generator-modifiers': getGeneratorModifierChoices,
 	entities: (option, context, focused) => getEntityChoices(
 		focused.value,
@@ -134,6 +135,22 @@ function getManageableEntityChoices(option, context, focused) {
 		hasDmPermission(context.interaction, context.config)
 			? {}
 			: { creatorId: context.interaction.user.id },
+	);
+}
+
+function getCreatureTypeChoices(option, context, focused) {
+	const english = generatorCatalog.getGenerator('creature', 'en')?.entries ?? [];
+	const localized = generatorCatalog.getGenerator(
+		'creature',
+		context.locale,
+	)?.entries ?? [];
+	const englishById = new Map(english.map(entry => [entry.id, entry]));
+	return filterAutocompleteChoices(
+		localized.map(entry => ({
+			name: `${entry.fields.name} — ${entry.fields.description}`.slice(0, 100),
+			value: englishById.get(entry.id)?.id ?? entry.id,
+		})),
+		focused.value,
 	);
 }
 

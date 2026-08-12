@@ -101,15 +101,13 @@ Generated armor, weapons, inventory, and gold never alter encumbrance.
 
 ## Creature generation and persistence
 
-The public `creature` component routes stable entries as follows:
-
-- `animal` to `creature_animal`;
-- `companion` to `creature_companion`;
-- `monster` to `creature_monster`.
-
-These are source classifications, not saved entity types. `/gen-monster` accepts a
-creature type, level, and new CreatureKey, generates the complete entity, and saves
-it atomically as type `creature`.
+The public `creature` component defines the available stable type entries. Each
+entry points through its technical `generator` field to an internal detail
+generator; the current entries route `animal`, `companion`, and `monster` to their
+matching `creature_*` generators. These are source classifications, not saved
+entity types. `/gen-creature` accepts an optional creature type, level, and new
+CreatureKey, randomly selecting a router entry when type is omitted, then saves
+the complete entity atomically as type `creature`.
 
 Every detail entry supplies localized identity and explicit generation metadata:
 one shared statistical profile, intrinsic localized traits, optional natural armor

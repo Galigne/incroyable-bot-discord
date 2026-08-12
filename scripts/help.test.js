@@ -33,7 +33,7 @@ test('/help lists DM-only commands for a DM', () => {
 	const rendered = renderOverview(createInteraction('dm', [config.roles.dm]));
 	assert.match(rendered, /\*\*\/gen\*\*/);
 	assert.match(rendered, /\*\*\/gen-char\*\*/);
-	assert.match(rendered, /\*\*\/gen-monster\*\*/);
+	assert.match(rendered, /\*\*\/gen-creature\*\*/);
 	assert.doesNotMatch(rendered, /\*\*\/say\*\*/);
 });
 
@@ -242,7 +242,7 @@ test('/help command autocomplete filters commands by permission', async () => {
 		},
 		{
 			interaction: createInteraction('dm', [config.roles.dm]),
-			includes: ['gen', 'gen-char', 'gen-monster'],
+			includes: ['gen', 'gen-char', 'gen-creature'],
 			excludes: ['say'],
 		},
 		{

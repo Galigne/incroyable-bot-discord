@@ -105,7 +105,7 @@ restart-only: changing it requires restarting the bot, and reconnects during
 - `/rules`
 - `/gen category:<category>` — generate a random prompt (configured DM role or server owner)
 - `/gen-char character-key:<new key> [level] [background]` — generate and save a complete character (configured DM role or server owner)
-- `/gen-monster creature-key:<new key> type:<monster|animal|companion> [level]` — generate and atomically save a complete creature (configured DM role or server owner)
+- `/gen-creature creature-key:<new key> [level] [type]` — generate and atomically save a complete creature; type is optional and comes from the public `creature` router (configured DM role or server owner)
 - `/roll expression:<dice expression>` — roll expressions such as `2d6+3`
 - `/add entity-key:<new key> [type:<character|creature>]` — create a blank owned entity; character is the default
 - `/get entity-key:<key> [field]` — display the summary or one type-compatible field
@@ -118,8 +118,8 @@ restart-only: changing it requires restarting the bot, and reconnects during
 
 Discord provides native validation and choices for constrained options.
 Autocomplete suggests commands the current user may access, existing EntityKeys,
-type-compatible fields, generator categories, common dice expressions, levels, and
-common purge amounts. `/undo` autocomplete includes authorized active entities with
+type-compatible fields, generator categories, localized creature types, common
+dice expressions, levels, and common purge amounts. `/undo` autocomplete includes authorized active entities with
 usable history. The private form opens immediately after `/set` is submitted.
 Character fields are `name`, `level`, `status`, `statistics`, `rules`, `talents`,
 `gear`, `race`, `background`, `personality`, and `modifiers`. Creature fields independently use
@@ -172,7 +172,7 @@ return the textual roll breakdown.
 Entity creators can edit, delete, heal, damage, end turns, and undo retained changes
 for their own characters or creatures. When configured, the DM role lets its
 members perform those actions on every entity and use `/gen`, `/gen-char`, and
-`/gen-monster`; without that role, those additional DM permissions are
+`/gen-creature`; without that role, those additional DM permissions are
 server-owner-only. When configured, the
 moderator role lets its members use `/say`, `/purge`, and `/reload`; without it,
 those moderation commands are server-owner-only. The actual Discord server owner,
@@ -188,7 +188,7 @@ every successful and failed stage. Invalid configuration or localization
 replacements do not replace the previous valid state. Source-code changes—including startup,
 event-routing, mechanics, model, metadata, and handler changes—still require
 manually restarting `node index.js`.
-The identifier supplied to `/add`, `/gen-char`, or `/gen-monster` remains the stable
+The identifier supplied to `/add`, `/gen-char`, or `/gen-creature` remains the stable
 command/save key and cannot be edited. Character sheets store `firstName` and
 `lastName` separately for display.
 Keys may contain internal periods, hyphens, and underscores, such as `D.Robert`.
@@ -233,7 +233,7 @@ Example workflows:
 
 ```text
 /gen-char character-key:D.Robert level:5 background:adventurer
-/gen-monster creature-key:Ash.Wolf type:monster level:5
+/gen-creature creature-key:Ash.Wolf level:5 type:monster
 /set entity-key:D.Robert field:statistics
 /get entity-key:Ash.Wolf field:traits
 /damage entity-key:Ash.Wolf damage-amount:25 piercing:false
@@ -256,9 +256,10 @@ chosen randomly when omitted. The selected category independently resolves one
 reusable archetype and one reusable physical description through generator-v3
 inline references. Backstory and goals start empty and remain editable.
 
-Random creatures select an `animal`, `companion`, or `monster` route from the
-public `creature` catalog, then generate from its internal `creature_animal`,
-`creature_companion`, or `creature_monster` source. They share the character level budget, nonlinear statistic allocation,
+Random creatures select a stable type route from the public `creature` catalog
+(randomly when `type` is omitted), then generate from that entry’s referenced
+internal detail source. The current data provides `animal`, `companion`, and
+`monster`, but the router defines the available set. They share the character level budget, nonlinear statistic allocation,
 derived statistics, and resource formulas while using creature-specific profile
 distributions. Only explicit source references grant creature RULEs; Intelligence
 and descriptive modifiers never do. Natural armor or technical armor metadata may

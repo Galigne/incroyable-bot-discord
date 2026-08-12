@@ -161,18 +161,15 @@
       "success": "Le personnage **{{name}}** a été généré avec la clé `{{key}}`.",
       "behavior": "Crée et sauvegarde un personnage aléatoire complet sous une CharacterKey unique. Le niveau doit être compris entre 1 et 10 et est aléatoire s’il est omis ; le Background est également facultatif et aléatoire par défaut. Le routeur public `background` sélectionne une catégorie générale, puis le résolveur générique des références v3 sélectionne indépendamment un archétype et une description physique réutilisable. L’histoire personnelle et les objectifs commencent vides. Un profil statistique partagé répartit les statistiques, tandis que les ressources, LOI, armure, armes, objets, pièces d’or et éventuels effets d’état suivent le niveau choisi et les règles du jeu. L’encombrement reste manuel et vaut 0 / 0 par défaut."
     },
-    "genMonster": {
+    "genCreature": {
       "description": "Générer une créature (rôle MJ configuré ou propriétaire du serveur)",
       "schemaDescription": "Générer et sauvegarder une créature aléatoire complète",
       "keyOption": "Clé de sauvegarde de créature unique parmi toutes les entités",
-      "typeOption": "Catégorie source de la créature",
+      "typeOption": "Type de créature facultatif du catalogue public `creature` ; tirage aléatoire s’il est omis",
       "levelOption": "Niveau de la créature ; tirage aléatoire de 1 à 10 si omis",
-      "monsterChoice": "Monstre",
-      "animalChoice": "Animal",
-      "companionChoice": "Compagnon",
       "levelChoice": "Niveau {{level}}",
       "success": "La créature **{{name}}** a été générée et sauvegardée avec la CreatureKey `{{key}}`.",
-      "behavior": "Crée et sauvegarde atomiquement une créature complète en faisant passer le type `monster`, `animal` ou `companion` choisi par le catalogue public `creature`, qui le dirige vers son catalogue de détail interne `creature_*`. La CreatureKey est unique parmi toutes les entités et le niveau doit être compris entre 1 et 10, ou est tiré au hasard s’il est omis. Les profils statistiques partagés répartissent les statistiques et calculent les ressources dérivées ; seules des références explicites peuvent accorder des LOI. Les effets d’état initiaux et les modificateurs proviennent des mêmes catalogues descriptifs que ceux disponibles pour les personnages, tandis que l’équipement, l’inventaire, l’armure naturelle et les métadonnées d’armure sont résolus puis conservés avec une provenance stable. L’encombrement reste manuel et vaut 0 / 0 par défaut. Seuls un MJ configuré ou le propriétaire du serveur peuvent utiliser cette commande."
+      "behavior": "Crée et sauvegarde atomiquement une créature complète en résolvant une entrée de type stable facultative du catalogue public `creature`, ou en en tirant une au hasard si le type est omis, puis en suivant le générateur de détail référencé. La CreatureKey est unique parmi toutes les entités et le niveau doit être compris entre 1 et 10, ou est tiré au hasard s’il est omis. Les profils statistiques partagés répartissent les statistiques et calculent les ressources dérivées ; seules des références explicites peuvent accorder des LOI. Les effets d’état initiaux et les modificateurs proviennent des mêmes catalogues descriptifs que ceux disponibles pour les personnages, tandis que l’équipement, l’inventaire, l’armure naturelle et les métadonnées d’armure sont résolus puis conservés avec une provenance stable. L’encombrement reste manuel et vaut 0 / 0 par défaut. Seuls un MJ configuré ou le propriétaire du serveur peuvent utiliser cette commande."
     },
     "get": {
       "description": "Afficher le résumé d’une entité ou le détail d’un champ compatible",
@@ -417,7 +414,7 @@
     "ruleLevelInvalid": "Le niveau d’une LOI doit être un nombre entier positif.",
     "ruleDescriptionRequired": "La description d’une LOI est requise après le second séparateur `:`.",
     "describedEntryInvalid": "Chaque élément descriptif doit utiliser `Nom:Description`, avec les deux valeurs renseignées.",
-    "creatureArchetypeInvalid": "Le type de créature doit être `monster`, `animal` ou `companion`.",
+    "creatureTypeInvalid": "Ce type de créature n’est pas disponible dans le catalogue public `creature`.",
     "creatureLevelInvalid": "Le niveau d’une créature doit être un nombre entier compris entre 1 et 10.",
     "creatureLevelRange": "Le niveau d’une créature doit être un nombre entier compris entre 1 et 10.",
     "creatureStatisticRange": "La statistique `{{stat}}` d’une créature doit être comprise entre 0 et 100.",

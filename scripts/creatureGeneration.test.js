@@ -34,8 +34,6 @@ const {
 } = require('../services/generatorCatalog');
 const generatorResolver = require('../services/generatorResolver');
 const {
-	CREATURE_ARCHETYPE_IDS,
-	CREATURE_GENERATOR_BY_ARCHETYPE,
 	CREATURE_ROUTER_ID,
 	validateCreatureStatProfileRelationships,
 	validateGeneratorDefinition,
@@ -78,15 +76,16 @@ after(() => {
 });
 
 test('production creature sources are strict localized archetypes backed by profiles', () => {
-	assert.deepEqual(CREATURE_ARCHETYPE_IDS, ['animal', 'companion', 'monster']);
+	const creatureTypes = getCreatureTypes();
+	assert.deepEqual(creatureTypes, ['animal', 'companion', 'monster']);
 	const profileIds = new Set();
 	for (const locale of ['en', 'fr']) {
 		const router = generatorCatalog.getGenerator(CREATURE_ROUTER_ID, locale);
 		assert.equal(Object.hasOwn(router, 'kind'), false);
 		assert.equal(router.visibility, 'public');
-		assert.deepEqual(router.entries.map(entry => entry.id), CREATURE_ARCHETYPE_IDS);
-		for (const archetype of CREATURE_ARCHETYPE_IDS) {
-			const generatorId = CREATURE_GENERATOR_BY_ARCHETYPE[archetype];
+		assert.deepEqual(router.entries.map(entry => entry.id), creatureTypes);
+		for (const archetype of creatureTypes) {
+			const generatorId = getCreatureGeneratorId(archetype, locale);
 			assert.equal(
 				router.entries.find(entry => entry.id === archetype).fields.generator,
 				`{{ ${generatorId} }}`,
@@ -202,7 +201,7 @@ test('creature routers, archetypes, and statistical profiles validate relationsh
 	);
 	const invalidRoutes = createGeneratorCatalogCandidate();
 	const invalidRouter = structuredClone(invalidRoutes.get('fr').get('creature'));
-	invalidRouter.entries[0].fields.generator = '{{ creature_monster }}';
+	invalidRouter.entries[0].fields.generator = '{{ creature_monster.name }}';
 	invalidRoutes.get('fr').set('creature', invalidRouter);
 	assert.throws(
 		() => validateCreatureStatProfileRelationships(
@@ -228,7 +227,7 @@ test('creature generation references require compatible target payloads', () => 
 });
 
 test('equivalent random input selects the same stable IDs and statistics in both locales', () => {
-	for (const archetype of CREATURE_ARCHETYPE_IDS) {
+	for (const archetype of getCreatureTypes()) {
 		const english = populateRandomCreature(
 			new Creature(`Deterministic.${archetype}.en`, 'creator'),
 			{ archetype, level: 6, locale: 'en', random: () => 0 },
@@ -434,11 +433,11 @@ test('descriptive modifiers cannot change mechanical generation results', () => 
 	)));
 });
 
-test('/gen-monster is DM-only and atomically persists a complete generated creature', async () => {
-	const metadata = commandRegistry.getCommand('gen-monster');
+test('/gen-creature is DM-only and atomically persists a complete generated creature', async () => {
+	const metadata = commandRegistry.getCommand('gen-creature');
 	assert.equal(metadata.permission, 'dm');
 	assert.equal(metadata.help.order, 22);
-	assert.equal(metadata.options.find(option => option.name === 'type').required, true);
+	assert.equal(metadata.options.find(option => option.name === 'type').required, undefined);
 	assert.equal(metadata.options.find(option => option.name === 'level').required, undefined);
 
 	const owner = createInteraction('server-owner', [], 'server-owner');
@@ -463,7 +462,7 @@ test('/gen-monster is DM-only and atomically persists a complete generated creat
 			response = payload;
 		},
 	};
-	await commandRegistry.getRuntimeCommands().get('gen-monster').execute({
+	await commandRegistry.getRuntimeCommands().get('gen-creature').execute({
 		config,
 		interaction,
 	});
@@ -476,6 +475,43 @@ test('/gen-monster is DM-only and atomically persists a complete generated creat
 		.some(field => field.name === 'Archetype' && field.value === 'Animal'));
 	assert.equal(await pathExists(getCreatureHistoryPath(stored.key)), false);
 	assert.equal(getEntityOperationQueueSize(), 0);
+});
+
+test('/gen-creature type autocomplete uses localized router entries and stable IDs', async () => {
+	let choices;
+	await commandRegistry.getRuntimeCommands().get('gen-creature').autocomplete({
+		config: { ...config, locale: 'fr' },
+		interaction: {
+			guild: { ownerId: 'server-owner' },
+			guildId: 'guild',
+			member: { roles: { cache: { has: () => true } } },
+			options: {
+				getFocused: () => ({ name: 'type', value: 'com' }),
+			},
+			respond: async value => {
+				choices = value;
+			},
+			user: { id: 'dm-user' },
+		},
+	});
+	assert.deepEqual(choices.map(choice => choice.value), ['companion']);
+	assert.equal(
+		choices[0].name,
+		'Compagnons — Animaux de compagnie, familiers et petites créatures de voyage',
+	);
+});
+
+test('/gen-creature randomly selects a router entry when type is omitted', () => {
+	const creature = populateRandomCreature(
+		new Creature('Random.Type', 'creator'),
+		{
+			level: 4,
+			locale: 'en',
+			random: sequenceRandom([0.999999, 0]),
+		},
+	);
+	assert.equal(creature.source.archetypeId, 'monster');
+	assert.equal(creature.source.generatorId, getCreatureGeneratorId('monster'));
 });
 
 test('generation, collision, and save failures leave no partial creature or history', async () => {
@@ -625,8 +661,7 @@ function generateEntry(archetype, entryId, {
 }
 
 function getEntryMidpoint(generatorId, entryId) {
-	const detailGeneratorId = CREATURE_GENERATOR_BY_ARCHETYPE[generatorId]
-		?? generatorId;
+	const detailGeneratorId = getCreatureGeneratorId(generatorId) ?? generatorId;
 	const entries = generatorCatalog.getGenerator(detailGeneratorId, 'en').entries;
 	const totalWeight = entries.reduce((total, entry) => total + entry.weight, 0);
 	let previousWeight = 0;
@@ -637,6 +672,20 @@ function getEntryMidpoint(generatorId, entryId) {
 		previousWeight += entry.weight;
 	}
 	throw new Error(`Unknown ${generatorId} entry ${entryId}.`);
+}
+
+function getCreatureTypes(locale = 'en') {
+	return generatorCatalog.getGenerator(CREATURE_ROUTER_ID, locale)
+		.entries.map(entry => entry.id);
+}
+
+function getCreatureGeneratorId(typeId, locale = 'en') {
+	const route = generatorCatalog.getGenerator(CREATURE_ROUTER_ID, locale)
+		.entries.find(entry => entry.id === typeId);
+	const match = route?.fields?.generator?.match(
+		/^\s*\{\{\s*([a-z0-9]+(?:_[a-z0-9]+)*)\s*\}\}\s*$/,
+	);
+	return match?.[1];
 }
 
 function sequenceRandom(values, fallback = 0.5) {

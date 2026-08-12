@@ -4,8 +4,6 @@ const {
 	maybeGenerateDescriptiveModifiers,
 } = require('./descriptiveModifierGenerator');
 const {
-	CREATURE_ARCHETYPE_IDS,
-	CREATURE_GENERATOR_BY_ARCHETYPE,
 	CREATURE_ROUTER_ID,
 } = require('./generatorSchema');
 const { parseInlineReference } = require('./generatorSchema/referenceValidation');
@@ -16,18 +14,34 @@ const { getStatProfile } = require('./statProfileCatalog');
 function populateRandomCreature(creature, options = {}) {
 	const random = options.random ?? Math.random;
 	const locale = options.locale ?? 'en';
-	const archetype = options.archetype;
+	const requestedType = options.type ?? options.archetype;
 	const resolver = options.resolver ?? generatorResolver;
 	const getGenerator = options.getGenerator ?? generatorCatalog.getGenerator;
 	const getProfile = options.getStatProfile ?? getStatProfile;
-	validateArchetype(archetype);
 	const level = options.level ?? randomInteger(1, 10, random);
 	validateLevel(level);
+	const router = getGenerator(CREATURE_ROUTER_ID, locale);
+	const routeEntry = requestedType === undefined
+		? null
+		: router?.entries?.find(entry => entry.id === requestedType);
+	if (!router || !Array.isArray(router.entries) || router.entries.length === 0) {
+		throw creatureGenerationError(
+			'Creature router is unavailable.',
+			'errors.generatorMissing',
+			{ category: CREATURE_ROUTER_ID },
+		);
+	}
+	if (requestedType !== undefined && !routeEntry) {
+		throw creatureGenerationError(
+			`Unsupported creature type: ${requestedType}.`,
+			'errors.creatureTypeInvalid',
+		);
+	}
 
 	const route = resolveGenerationReference(
 		{
 			generator: CREATURE_ROUTER_ID,
-			entry: archetype,
+			...(requestedType === undefined ? {} : { entry: requestedType }),
 			select: 'fields',
 		},
 		locale,
@@ -35,16 +49,21 @@ function populateRandomCreature(creature, options = {}) {
 		resolver,
 		'root.creature',
 	);
-	const routeExpression = route.value?.generator;
+	const selectedType = getEntrySelection(route.provenance).entryId;
+	const routeExpression = route.fields?.generator ?? route.value?.generator;
 	const parsedRoute = typeof routeExpression === 'string'
 		? parseInlineReference(routeExpression.replace(/^\s*\{\{([^{}]+)\}\}\s*$/, '$1'), 'creature route')
 		: null;
-	const expectedGeneratorId = CREATURE_GENERATOR_BY_ARCHETYPE[archetype];
-	if (parsedRoute?.generator !== expectedGeneratorId) {
+	if (
+		!parsedRoute
+		|| parsedRoute.entry
+		|| parsedRoute.field
+		|| !parsedRoute.generator
+	) {
 		throw creatureGenerationError(
-			`Creature archetype route ${archetype} is unavailable.`,
+			`Creature type route ${selectedType} is unavailable.`,
 			'errors.generatorMissing',
-			{ category: archetype },
+			{ category: selectedType },
 		);
 	}
 	const result = resolver.resolveInlineReference
@@ -54,7 +73,7 @@ function populateRandomCreature(creature, options = {}) {
 			{ path: 'root.creature.details', random },
 		)
 		: resolveGenerationReference(
-			{ generator: expectedGeneratorId, select: 'fields' },
+			{ generator: parsedRoute.generator, select: 'fields' },
 			locale,
 			random,
 			resolver,
@@ -62,6 +81,13 @@ function populateRandomCreature(creature, options = {}) {
 		);
 	const selection = getEntrySelection(result.provenance);
 	const generatorId = selection.generatorId;
+	if (generatorId !== parsedRoute.generator) {
+		throw creatureGenerationError(
+			`Creature type route ${selectedType} resolved to an unexpected generator.`,
+			'errors.generatorMissing',
+			{ category: selectedType },
+		);
+	}
 	const generator = getGenerator(generatorId, locale);
 	const entry = generator?.entries.find(candidate => candidate.id === selection.entryId);
 	if (!entry?.generation || !result.value) {
@@ -161,7 +187,7 @@ function populateRandomCreature(creature, options = {}) {
 	creature.source = {
 		generatorId,
 		entryId: selection.entryId,
-		archetypeId: archetype,
+		archetypeId: selectedType,
 		statProfileId: generation.statProfile,
 		provenance: sourceProvenance,
 	};
@@ -285,15 +311,6 @@ function getEntrySelection(provenance) {
 		);
 	}
 	return selection;
-}
-
-function validateArchetype(archetype) {
-	if (!CREATURE_ARCHETYPE_IDS.includes(archetype)) {
-		throw creatureGenerationError(
-			`Unsupported creature archetype: ${archetype}.`,
-			'errors.creatureArchetypeInvalid',
-		);
-	}
 }
 
 function validateLevel(level) {

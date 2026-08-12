@@ -1,5 +1,6 @@
 const { EmbedBuilder } = require('discord.js');
 const { BASE_STATS } = require('../services/mechanics/constants');
+const generatorCatalog = require('../services/generatorCatalog');
 const {
 	getCreatureFieldDefinition,
 	getViewableCreatureFieldDefinition,
@@ -193,9 +194,9 @@ function formatArchetype(creature, locale) {
 
 function getArchetype(creature, locale) {
 	const archetypeId = creature.source?.archetypeId;
-	return archetypeId
-		? t(locale, `rpg.genMonster.${archetypeId}Choice`)
-		: null;
+	const name = generatorCatalog.getGenerator('creature', locale)?.entries
+		.find(entry => entry.id === archetypeId)?.fields?.name ?? archetypeId;
+	return name ? name[0].toLocaleUpperCase(locale) + name.slice(1) : null;
 }
 
 function formatStats(creature, targets, locale) {

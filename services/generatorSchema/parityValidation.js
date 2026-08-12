@@ -1,11 +1,16 @@
 const { generatorSchemaError } = require('./assertions');
-const { CREATURE_GENERATOR_IDS } = require('./constants');
+const { isCreatureDetailGenerator } = require('./creatureMetadataValidation');
 const { validateGeneratorDefinition } = require('./envelopeValidation');
 const { extractInlineReferences } = require('./referenceValidation');
 
-function validateGeneratorPair(english, french, file = '<generator>') {
-	validateGeneratorDefinition(english, `en/${file}`);
-	validateGeneratorDefinition(french, `fr/${file}`);
+function validateGeneratorPair(
+	english,
+	french,
+	file = '<generator>',
+	options = {},
+) {
+	validateGeneratorDefinition(english, `en/${file}`, options);
+	validateGeneratorDefinition(french, `fr/${file}`, options);
 	for (const property of [
 		'schemaVersion',
 		'id',
@@ -66,7 +71,7 @@ function validateGeneratorPair(english, french, file = '<generator>') {
 				`entries.${index}.${localizedProperty}.inlineReferences`,
 			);
 		}
-		if (CREATURE_GENERATOR_IDS.has(english.id)) {
+		if (isCreatureDetailGenerator(english.id, options)) {
 			validateCreatureGenerationPair(
 				englishEntry.generation,
 				frenchEntry.generation,

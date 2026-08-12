@@ -4,21 +4,8 @@ const GENERATOR_VISIBILITIES = new Set(['internal', 'public']);
 const MAX_ENTRY_TEXT_LENGTH = 4_096;
 const MAX_FIELD_VALUE_LENGTH = 1_024;
 const MAX_MODIFIER_SOURCES = 25;
-const CREATURE_ARCHETYPE_IDS = new Set(['animal', 'companion', 'monster']);
-const CREATURE_GENERATOR_BY_ARCHETYPE = Object.freeze(Object.fromEntries(
-	[...CREATURE_ARCHETYPE_IDS].map(archetype => [
-		archetype,
-		`creature_${archetype}`,
-	]),
-));
-const CREATURE_GENERATOR_IDS = new Set(
-	Object.values(CREATURE_GENERATOR_BY_ARCHETYPE),
-);
 const CREATURE_ROUTER_ID = 'creature';
 module.exports = {
-	CREATURE_ARCHETYPE_IDS,
-	CREATURE_GENERATOR_BY_ARCHETYPE,
-	CREATURE_GENERATOR_IDS,
 	CREATURE_ROUTER_ID,
 	GENERATOR_ID_PATTERN,
 	GENERATOR_SCHEMA_VERSION,

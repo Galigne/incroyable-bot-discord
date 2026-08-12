@@ -4,6 +4,8 @@ const {
 	validateGeneratorPair,
 	validateGeneratorRelationships,
 } = require('./generatorSchema');
+const { CREATURE_ROUTER_ID } = require('./generatorSchema/constants');
+const { parseInlineReference } = require('./generatorSchema/referenceValidation');
 
 const generatorsDirectory = path.join(__dirname, '..', 'data', 'generators');
 const DEFAULT_LOCALE = 'en';
@@ -74,20 +76,26 @@ function readGeneratorCatalog(rootDirectory) {
 		);
 	}
 
+	const definitions = englishFiles.map(relativePath => ({
+		relativePath,
+		english: readGenerator(
+			path.join(englishDirectory, relativePath),
+			`en/${relativePath}`,
+		),
+		french: readGenerator(
+			path.join(frenchDirectory, relativePath),
+			`fr/${relativePath}`,
+		),
+	}));
+	const creatureGeneratorIds = discoverCreatureGeneratorIds(definitions);
 	const catalogs = new Map([
 		['en', new Map()],
 		['fr', new Map()],
 	]);
-	for (const relativePath of englishFiles) {
-		const english = readGenerator(
-			path.join(englishDirectory, relativePath),
-			`en/${relativePath}`,
-		);
-		const french = readGenerator(
-			path.join(frenchDirectory, relativePath),
-			`fr/${relativePath}`,
-		);
-		validateGeneratorPair(english, french, relativePath);
+	for (const { relativePath, english, french } of definitions) {
+		validateGeneratorPair(english, french, relativePath, {
+			creatureGeneratorIds,
+		});
 		if (catalogs.get('en').has(english.id)) {
 			throw generatorCatalogError(
 				'DUPLICATE_GENERATOR_ID',
@@ -100,6 +108,32 @@ function readGeneratorCatalog(rootDirectory) {
 	validateGeneratorRelationships(catalogs.get('en'));
 	validateGeneratorRelationships(catalogs.get('fr'));
 	return catalogs;
+}
+
+function discoverCreatureGeneratorIds(definitions) {
+	const router = definitions.find(({ english }) => (
+		english.id === CREATURE_ROUTER_ID
+	))?.english;
+	const ids = new Set();
+	for (const entry of router?.entries ?? []) {
+		const expression = entry.fields?.generator;
+		const match = typeof expression === 'string'
+			? expression.match(/^\s*\{\{([^{}]+)\}\}\s*$/)
+			: null;
+		if (!match) {
+			continue;
+		}
+		try {
+			const reference = parseInlineReference(match[1], 'creature route');
+			if (!reference.entry && !reference.field) {
+				ids.add(reference.generator);
+			}
+		}
+		catch {
+			// The normal generator validation reports malformed route syntax.
+		}
+	}
+	return ids;
 }
 
 function listJsonFiles(directory, relativeDirectory = '') {

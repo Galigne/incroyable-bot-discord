@@ -19,7 +19,7 @@ const {
 const { extractInlineReferences } = require('./referenceValidation');
 const { validateModifierMap } = require('./modifierMapValidation');
 
-function validateGeneratorDefinition(generator, file = '<generator>') {
+function validateGeneratorDefinition(generator, file = '<generator>', options = {}) {
 	assertPlainObject(generator, `Invalid generator document: ${file}.`);
 	assertAllowedKeys(
 		generator,
@@ -70,7 +70,7 @@ function validateGeneratorDefinition(generator, file = '<generator>') {
 	);
 	extractInlineReferences(generator.description, `generator description in ${file}`);
 	const entrySchema = validateEntrySchema(generator.entrySchema, file);
-	validateCreatureGeneratorEnvelope(generator, entrySchema, file);
+	validateCreatureGeneratorEnvelope(generator, entrySchema, file, options);
 	if (generator.modifiers !== undefined) {
 		validateModifierMap(generator.modifiers, `${file} modifiers`);
 	}
@@ -83,7 +83,7 @@ function validateGeneratorDefinition(generator, file = '<generator>') {
 
 	const entryIds = new Set();
 	generator.entries.forEach((entry, index) => {
-		validateGeneratorEntry(entry, entrySchema, generator, file, index);
+		validateGeneratorEntry(entry, entrySchema, generator, file, index, options);
 		if (entryIds.has(entry.id)) {
 			throw generatorSchemaError(
 				'DUPLICATE_GENERATOR_ENTRY_ID',

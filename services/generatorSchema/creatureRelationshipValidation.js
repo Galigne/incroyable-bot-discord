@@ -1,7 +1,5 @@
 const { generatorSchemaError } = require('./assertions');
 const {
-	CREATURE_ARCHETYPE_IDS,
-	CREATURE_GENERATOR_BY_ARCHETYPE,
 	CREATURE_ROUTER_ID,
 } = require('./constants');
 const { parseInlineReference } = require('./referenceValidation');
@@ -98,18 +96,14 @@ function validateCreatureStatProfileRelationships(catalogs, profiles) {
 				`Creature generation is missing the ${locale} ${CREATURE_ROUTER_ID} router.`,
 			);
 		}
-		if (
-			router.entries.length !== CREATURE_ARCHETYPE_IDS.size
-			|| router.entries.some(entry => !CREATURE_ARCHETYPE_IDS.has(entry.id))
-		) {
+		if (!Array.isArray(router.entries) || router.entries.length === 0) {
 			throw generatorSchemaError(
 				'CREATURE_ROUTE_INVALID',
 				`Creature generation has invalid ${locale} router entries.`,
 			);
 		}
-		for (const archetypeId of CREATURE_ARCHETYPE_IDS) {
-			const generatorId = CREATURE_GENERATOR_BY_ARCHETYPE[archetypeId];
-			const route = router.entries.find(entry => entry.id === archetypeId);
+		for (const route of router.entries) {
+			const archetypeId = route.id;
 			const routeExpression = route?.fields?.generator;
 			const routeReference = typeof routeExpression === 'string'
 				? parseInlineReference(
@@ -117,7 +111,13 @@ function validateCreatureStatProfileRelationships(catalogs, profiles) {
 					`${locale} creature route`,
 				)
 				: null;
-			if (routeReference?.generator !== generatorId) {
+			const generatorId = routeReference?.generator;
+			if (
+				!routeReference
+				|| routeReference.entry
+				|| routeReference.field
+				|| !generatorId
+			) {
 				throw generatorSchemaError(
 					'CREATURE_ROUTE_INVALID',
 					`Creature generation has an invalid ${locale} ${archetypeId} route.`,

@@ -8,13 +8,17 @@ const {
 	validateTechnicalId,
 } = require('./assertions');
 const {
-	CREATURE_GENERATOR_IDS,
 	CREATURE_ROUTER_ID,
 	MAX_ENTRY_TEXT_LENGTH,
 } = require('./constants');
 const { validateReference } = require('./referenceValidation');
 
-function validateCreatureGeneratorEnvelope(generator, entrySchema, file) {
+function validateCreatureGeneratorEnvelope(
+	generator,
+	entrySchema,
+	file,
+	options = {},
+) {
 	if (generator.id === CREATURE_ROUTER_ID) {
 		if (
 			generator.visibility !== 'public'
@@ -31,7 +35,7 @@ function validateCreatureGeneratorEnvelope(generator, entrySchema, file) {
 		}
 		return;
 	}
-	if (!CREATURE_GENERATOR_IDS.has(generator.id)) {
+	if (!isCreatureDetailGenerator(generator.id, options)) {
 		return;
 	}
 	if (
@@ -45,6 +49,13 @@ function validateCreatureGeneratorEnvelope(generator, entrySchema, file) {
 			`Creature detail generator ${file} must be an internal generator exposing localized name and description fields.`,
 		);
 	}
+}
+
+function isCreatureDetailGenerator(generatorId, options = {}) {
+	if (options.creatureGeneratorIds instanceof Set) {
+		return options.creatureGeneratorIds.has(generatorId);
+	}
+	return /^creature_[a-z0-9]+(?:_[a-z0-9]+)*$/.test(generatorId);
 }
 
 function validateCreatureGeneration(generation, location) {
@@ -205,6 +216,7 @@ function validateReferenceList(references, location, options = {}) {
 }
 
 module.exports = {
+	isCreatureDetailGenerator,
 	validateCreatureGeneration,
 	validateCreatureGeneratorEnvelope,
 };

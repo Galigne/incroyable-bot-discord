@@ -161,18 +161,15 @@
       "success": "Generated character **{{name}}** with key `{{key}}`.",
       "behavior": "Creates and saves a complete random character under a unique CharacterKey. Level must be 1–10 and is random when omitted; background is also optional and random by default. The public `background` router selects one broad category, then the generic v3 inline resolver independently selects an archetype and a reusable physical description. Backstory and goals start empty. A shared statistical profile allocates statistics, while resources, RULEs, armor, weapons, inventory, gold, and possible status effects follow the selected level and game rules. Encumbrance remains manual and defaults to 0 / 0."
     },
-    "genMonster": {
+    "genCreature": {
       "description": "Generate a creature (configured DM role or server owner)",
       "schemaDescription": "Generate and save a complete random creature",
       "keyOption": "Globally unique creature save key",
-      "typeOption": "Creature source category",
+      "typeOption": "Optional creature type from the public creature catalog; omitted means a random type",
       "levelOption": "Creature level; randomly 1 to 10 when omitted",
-      "monsterChoice": "Monster",
-      "animalChoice": "Animal",
-      "companionChoice": "Companion",
       "levelChoice": "Level {{level}}",
       "success": "Generated **{{name}}** and saved it with CreatureKey `{{key}}`.",
-      "behavior": "Atomically creates and saves one complete creature by routing the selected `monster`, `animal`, or `companion` type through the public `creature` catalog to its internal `creature_*` detail catalog. The CreatureKey is globally unique and level must be 1–10 or is random when omitted. Shared statistical profiles allocate statistics and derive resources; RULEs are granted only by explicit source references. Initial status effects and modifiers come from the same descriptive catalogs available to characters, while equipment, inventory, natural armor, and armor metadata are resolved and persisted with stable provenance. Encumbrance remains manual and defaults to 0 / 0. Only a configured DM or the server owner may use this command."
+      "behavior": "Atomically creates and saves one complete creature by resolving an optional stable type entry from the public `creature` catalog, or randomly selecting one when type is omitted, then following its referenced detail generator. The CreatureKey is globally unique and level must be 1–10 or is random when omitted. Shared statistical profiles allocate statistics and derive resources; RULEs are granted only by explicit source references. Initial status effects and modifiers come from the same descriptive catalogs available to characters, while equipment, inventory, natural armor, and armor metadata are resolved and persisted with stable provenance. Encumbrance remains manual and defaults to 0 / 0. Only a configured DM or the server owner may use this command."
     },
     "get": {
       "description": "Display an entity summary or one compatible detailed field",
@@ -417,7 +414,7 @@
     "ruleLevelInvalid": "A RULE level must be a positive whole number.",
     "ruleDescriptionRequired": "A RULE description is required after the second `:` separator.",
     "describedEntryInvalid": "Each descriptive record must use `Name:Description`, with both values present.",
-    "creatureArchetypeInvalid": "Creature type must be monster, animal, or companion.",
+    "creatureTypeInvalid": "That creature type is not available in the public creature catalog.",
     "creatureLevelInvalid": "Creature level must be a whole number between 1 and 10.",
     "creatureLevelRange": "Creature level must be a whole number between 1 and 10.",
     "creatureStatisticRange": "Creature statistic `{{stat}}` must be between 0 and 100.",
