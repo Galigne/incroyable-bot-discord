@@ -258,7 +258,6 @@ function getEditInputLabel(type, target, locale) {
 		return getResourceAbbreviation(locale, target.resourceId);
 	}
 	const labelKey = {
-		'background.appearance': 'appearance',
 		'background.backstory': 'backstory',
 		'background.goals': 'goals',
 		'name.firstName': 'firstName',

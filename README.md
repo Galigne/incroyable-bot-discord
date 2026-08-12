@@ -128,8 +128,9 @@ Character fields are `name`, `level`, `status`, `statistics`, `rules`, `talents`
 
 Name uses separate optional first-name and last-name inputs; emptying either input
 clears that component. Race uses separate inputs for its name, physical description,
-lore, skill bonus, and physical ability. Background uses separate appearance,
-backstory, and goals inputs. Personality uses separate description and traits
+lore, skill bonus, and physical ability. Background displays the generated
+archetype and physical description, while its editable form contains separate
+backstory and goals inputs. Personality uses separate description and traits
 inputs.
 
 HP, AR, AP, MD, and encumbrance each use separate required Current and Maximum
@@ -250,8 +251,10 @@ Generated talents are stored as unique localized list entries: levels 1–2 rece
 one talent, levels 3–5 receive two, levels 6–8 receive three, and levels 9–10
 receive four.
 If the optional level is omitted, a level from 1 to 10 is rolled. The optional
-background selects one of the configured background categories and is also chosen
-randomly when omitted. It generates the character's appearance, backstory, and goals.
+background selects one of the configured broad background categories and is also
+chosen randomly when omitted. The selected category independently resolves one
+reusable archetype and one reusable physical description through generator-v3
+inline references. Backstory and goals start empty and remain editable.
 
 Random creatures select an `animal`, `companion`, or `monster` route from the
 public `creature` catalog, then generate from its internal `creature_animal`,

@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 3,
+  "id": "peasant",
+  "visibility": "internal",
+  "name": "Peasant archetypes",
+  "description": "Rural occupations and community roles",
+  "entrySchema": { "type": "text" },
+  "entries": [
+    { "id": "farmer", "value": "Farmer" },
+    { "id": "herder", "value": "Herder" },
+    { "id": "shepherd", "value": "Shepherd" },
+    { "id": "miller", "value": "Miller" },
+    { "id": "farmhand", "value": "Farmhand" },
+    { "id": "lumberjack", "value": "Lumberjack" },
+    { "id": "miner", "value": "Miner" },
+    { "id": "village_elder", "value": "Village elder" },
+    { "id": "rural_laborer", "value": "Rural laborer" },
+    { "id": "village_healer", "value": "Village healer" }
+  ]
+}

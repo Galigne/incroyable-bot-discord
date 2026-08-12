@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 3,
+  "id": "mage",
+  "visibility": "internal",
+  "name": "Mage archetypes",
+  "description": "Magical study and practice roles",
+  "entrySchema": { "type": "text" },
+  "entries": [
+    { "id": "apprentice", "value": "Apprentice" },
+    { "id": "hedge_mage", "value": "Hedge mage" },
+    { "id": "magical_researcher", "value": "Magical researcher" },
+    { "id": "battle_mage", "value": "Battle mage" },
+    { "id": "ritualist", "value": "Ritualist" },
+    { "id": "alchemist", "value": "Alchemist" },
+    { "id": "runesmith", "value": "Runesmith" },
+    { "id": "diviner", "value": "Diviner" },
+    { "id": "court_mage", "value": "Court mage" },
+    { "id": "enchanter", "value": "Enchanter" }
+  ]
+}

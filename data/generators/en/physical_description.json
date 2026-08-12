@@ -1,0 +1,67 @@
+{
+  "schemaVersion": 3,
+  "id": "physical_description",
+  "visibility": "internal",
+  "name": "Physical descriptions",
+  "description": "Reusable visible physical traits",
+  "entrySchema": { "type": "text" },
+  "entries": [
+    { "id": "tall_broad_shoulders", "value": "Tall and broad-shouldered." },
+    { "id": "short_wiry", "value": "Short and wiry." },
+    { "id": "lean_angular", "value": "Lean, with an angular face." },
+    { "id": "round_soft_features", "value": "A round face and soft features." },
+    {
+      "id": "weathered_square_jaw",
+      "value": "A square jaw and weathered skin."
+    },
+    {
+      "id": "pale_sharp_cheekbones",
+      "value": "A pale complexion and sharp cheekbones."
+    },
+    { "id": "freckles", "value": "Freckles scattered across the nose." },
+    { "id": "curly_dark_hair", "value": "A mass of dark, curly hair." },
+    {
+      "id": "long_braided_hair",
+      "value": "Long hair gathered into neat braids."
+    },
+    {
+      "id": "close_cropped_hair",
+      "value": "Close-cropped hair and steady grey eyes."
+    },
+    { "id": "thick_eyebrows", "value": "Thick eyebrows and deep-set eyes." },
+    { "id": "brow_scar", "value": "A noticeable scar over one eyebrow." },
+    { "id": "cheek_birthmark", "value": "A small birthmark on one cheek." },
+    {
+      "id": "upright_posture",
+      "value": "An upright posture and a composed expression."
+    },
+    { "id": "broad_smile", "value": "A broad smile and a deep dimple." },
+    { "id": "high_cheekbones", "value": "A narrow face with high cheekbones." },
+    {
+      "id": "brown_eyes_curled_hair",
+      "value": "Warm brown eyes and tightly curled hair."
+    },
+    {
+      "id": "pale_blue_eyes",
+      "value": "Pale blue eyes beneath a heavy fringe."
+    },
+    {
+      "id": "small_stature",
+      "value": "Small in stature, with quick, precise movements."
+    },
+    { "id": "heavyset", "value": "Heavyset, with a calm, open face." },
+    {
+      "id": "athletic_build",
+      "value": "An athletic build and an easy, balanced stance."
+    },
+    {
+      "id": "missing_tooth",
+      "value": "A missing tooth shows when they smile."
+    },
+    { "id": "full_beard", "value": "A full beard frames a serious face." },
+    {
+      "id": "round_spectacles",
+      "value": "Round spectacles and a long, thoughtful face."
+    }
+  ]
+}

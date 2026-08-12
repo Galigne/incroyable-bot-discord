@@ -50,10 +50,16 @@ addSection('race', 'race', 'multi', [
 	'race.traits.physicalAbility',
 ]);
 addSection('background', 'background', 'multi', [
-	'background.appearance',
 	'background.backstory',
 	'background.goals',
-]);
+], {
+	viewTargetIds: [
+		'background.archetype',
+		'background.physicalDescription',
+		'background.backstory',
+		'background.goals',
+	],
+});
 addSection('personality', 'personality', 'multi', [
 	'personality.traits',
 	'personality.description',
@@ -85,10 +91,14 @@ add('race.lore', 'raceLore', stored(['race', 'lore'], 'text', {
 	aliases: ['racelore'],
 	paragraph: true,
 }));
-add('background.appearance', 'appearance', stored(
-	['background', 'appearance'],
+add('background.archetype', 'backgroundArchetype', stored(
+	['background', 'archetype'],
 	'text',
-	{ aliases: ['appearance'], paragraph: true },
+));
+add('background.physicalDescription', 'backgroundPhysicalDescription', stored(
+	['background', 'physicalDescription'],
+	'text',
+	{ paragraph: true },
 ));
 add('background.backstory', 'backstory', stored(
 	['background', 'backstory'],
@@ -229,6 +239,7 @@ for (const resourceId of ['hp', 'ar', 'ap', 'md']) {
 }
 
 function addSection(id, labelName, editKind, editInputIds, options = {}) {
+	const viewTargetIds = options.viewTargetIds ?? editInputIds;
 	add(id, labelName, {
 		...options,
 		editId: id,
@@ -237,7 +248,7 @@ function addSection(id, labelName, editKind, editInputIds, options = {}) {
 		sectionId: id,
 		sectionOrder: SECTION_IDS.indexOf(id),
 		viewId: id,
-		viewTargetIds: Object.freeze([...editInputIds]),
+		viewTargetIds: Object.freeze([...viewTargetIds]),
 	});
 }
 

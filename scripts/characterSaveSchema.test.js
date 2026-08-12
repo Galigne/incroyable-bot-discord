@@ -107,7 +107,8 @@ test('version-1 saves migrate completely in memory without being rewritten', asy
 		physicalAbility: 'Thick-Skinned',
 	});
 	assert.deepEqual(character.background, {
-		appearance: 'Stained gloves',
+		archetype: '',
+		physicalDescription: 'Stained gloves',
 		backstory: 'A discovery was stolen.',
 		goals: 'Recover it.',
 	});
@@ -177,9 +178,10 @@ test('/gen-char consumes current generator fields and persists version 2', async
 		rawSave.race.traits.physicalAbility,
 		raceEntry.fields.physical_ability,
 	);
-	assert.ok(rawSave.background.appearance);
-	assert.ok(rawSave.background.backstory);
-	assert.ok(rawSave.background.goals);
+	assert.ok(rawSave.background.archetype);
+	assert.ok(rawSave.background.physicalDescription);
+	assert.equal(rawSave.background.backstory, '');
+	assert.equal(rawSave.background.goals, '');
 	assert.ok(rawSave.statistics.constitution);
 	assert.ok(rawSave.status.hp.max);
 	const statusEntry = generatorCatalog.getGenerator('status_effect', 'en').entries[0];

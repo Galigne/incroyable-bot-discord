@@ -85,9 +85,14 @@ allocation constraints and weighting.
 
 ## Character generation
 
-The public `background` component routes its stable role entries to internal
-`background_*` components through the ordinary technical `generator` field. Each
-detail component supplies `appearance`, `backstory`, and `goals`.
+The public `background` component remains the broad category selector. Each stable
+category entry routes through its ordinary technical `generator` field to an
+internal text generator with the same broad ID, such as `{{ artisan }}`. These
+internal generators contain only reusable occupation, role, or social-archetype
+text entries. Character generation independently resolves one entry from the
+internal `physical_description` text generator. The saved background contains
+`archetype` and `physicalDescription`; `backstory` and `goals` start empty and
+remain editable character fields.
 
 `/gen-char` creates a complete character, including name, race, background,
 personality, statistics, derived resources, explicit character RULE allocation,
@@ -116,8 +121,10 @@ generation.
 
 ## Humanoid and quest routing
 
-Complete-person `npc` and `criminal` roots are retired. Person concepts are routed
-through reusable background detail components. The public `quest` component is a
+The former complete-person `npc` root and the former structured `criminal` root
+are retired; `criminal` is now reused as a simple internal archetype generator.
+Person concepts are routed through reusable broad-background archetype components.
+The public `quest` component is a
 normal text component whose values contain inline references, for example:
 
 ```text

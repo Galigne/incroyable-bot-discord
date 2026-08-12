@@ -402,7 +402,8 @@ separate prefilled modal inputs:
   input clears that component.
 - Race updates `race.name`, `race.physicalDescription`, `race.lore`,
   `racialTraits.skillBonus`, and `racialTraits.physicalAbility`.
-- Background updates `appearance`, `backstory`, and `goals`.
+- Background updates `backstory` and `goals`; generated `archetype` and
+  `physicalDescription` are viewable but not editable.
 - Personality updates `personality.description` and `personality.traits`.
 - `hp`, `ar`, `ap`, `md`, and `encumbrance` each update separate `current` and
   `max` numeric inputs. Both inputs are required and retain their domain validation.
@@ -483,9 +484,9 @@ by default. Do not inspect, migrate, repair, rewrite, or adapt implementation wo
 for existing save files, and do not add compatibility paths for older save formats,
 unless the user explicitly requests that work. This does not authorize modifying
 or deleting real files under `save/`; preserve them and keep tests isolated.
-`appearance` remains a standalone saved text property displayed directly below
-level and race in the public summary. It is edited as part of the atomic
-`background` group.
+`background.archetype` and `background.physicalDescription` are generated text
+properties displayed directly below level and race in the public summary.
+`background.backstory` and `background.goals` remain editable as one atomic group.
 
 Permissions:
 
@@ -633,7 +634,10 @@ between English and French.
 
 The public `background` and `creature` components route to internal components
 through ordinary technical `generator` fields containing inline references such as
-`{{ background_adventurer }}` or `{{ creature_animal }}`. The public creature
+`{{ artisan }}` or `{{ creature_animal }}`. Background category IDs route to
+same-ID internal text generators containing reusable archetypes, and character
+generation independently resolves the internal `physical_description` text
+generator. The public creature
 archetypes `animal`, `companion`, and `monster` are not persistence types. Detail
 components expose localized `name` and `description` fields plus validated
 generation metadata. `statProfile` IDs belong to the separate non-localized
@@ -665,8 +669,9 @@ At present it:
 
 - rolls level 1–10 when omitted;
 - accepts an optional background category and otherwise rolls one from
-  `background.json`; its inline route supplies `appearance`, `backstory`, and
-  `goals`;
+  `background.json`; its inline route supplies one reusable archetype, while an
+  independent `physical_description` roll supplies the visible physical
+  description; backstory and goals start empty;
 - spends the entire level-based stat budget using nonlinear point costs;
 - derives initiative and reflexes from speed;
 - awards RULE points at Intelligence 10, 12, 14, 16, 18, and 20, then spends them

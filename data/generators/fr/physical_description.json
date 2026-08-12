@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 3,
+  "id": "physical_description",
+  "visibility": "internal",
+  "name": "Descriptions physiques",
+  "description": "Traits physiques visibles et réutilisables",
+  "entrySchema": { "type": "text" },
+  "entries": [
+    { "id": "tall_broad_shoulders", "value": "Grand et large d’épaules." },
+    { "id": "short_wiry", "value": "Petit et nerveux." },
+    {
+      "id": "lean_angular",
+      "value": "Une silhouette fine et un visage anguleux."
+    },
+    { "id": "round_soft_features", "value": "Un visage rond aux traits doux." },
+    {
+      "id": "weathered_square_jaw",
+      "value": "Une mâchoire carrée et une peau burinée."
+    },
+    {
+      "id": "pale_sharp_cheekbones",
+      "value": "Un teint pâle et des pommettes saillantes."
+    },
+    { "id": "freckles", "value": "Des taches de rousseur parsèment le nez." },
+    {
+      "id": "curly_dark_hair",
+      "value": "Une masse de cheveux noirs et bouclés."
+    },
+    {
+      "id": "long_braided_hair",
+      "value": "De longs cheveux réunis en nattes soignées."
+    },
+    {
+      "id": "close_cropped_hair",
+      "value": "Des cheveux courts et des yeux gris attentifs."
+    },
+    {
+      "id": "thick_eyebrows",
+      "value": "Des sourcils épais et des yeux profondément enfoncés."
+    },
+    {
+      "id": "brow_scar",
+      "value": "Une cicatrice visible au-dessus d’un sourcil."
+    },
+    {
+      "id": "cheek_birthmark",
+      "value": "Une petite marque de naissance sur une joue."
+    },
+    {
+      "id": "upright_posture",
+      "value": "Une posture droite et une expression posée."
+    },
+    {
+      "id": "broad_smile",
+      "value": "Un large sourire accompagné d’une fossette profonde."
+    },
+    {
+      "id": "high_cheekbones",
+      "value": "Un visage étroit aux pommettes hautes."
+    },
+    {
+      "id": "brown_eyes_curled_hair",
+      "value": "Des yeux bruns chaleureux et des cheveux très bouclés."
+    },
+    {
+      "id": "pale_blue_eyes",
+      "value": "Des yeux bleu pâle sous une lourde mèche."
+    },
+    {
+      "id": "small_stature",
+      "value": "De petite taille, avec des gestes rapides et précis."
+    },
+    {
+      "id": "heavyset",
+      "value": "Une forte corpulence et un visage calme et ouvert."
+    },
+    {
+      "id": "athletic_build",
+      "value": "Une carrure athlétique et une posture naturellement équilibrée."
+    },
+    {
+      "id": "missing_tooth",
+      "value": "Une dent manquante apparaît quand la personne sourit."
+    },
+    {
+      "id": "full_beard",
+      "value": "Une barbe fournie encadre un visage sérieux."
+    },
+    {
+      "id": "round_spectacles",
+      "value": "Des lunettes rondes et un visage long et pensif."
+    }
+  ]
+}

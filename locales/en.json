@@ -159,7 +159,7 @@
       "backgroundOption": "Character background; omitted means a random background",
       "levelChoice": "Level {{level}}",
       "success": "Generated character **{{name}}** with key `{{key}}`.",
-      "behavior": "Creates and saves a complete random character under a unique CharacterKey. Level must be 1–10 and is random when omitted; background is also optional and random by default. The public `background` router selects an internal detail catalog and may attach shared descriptive modifiers. A shared statistical profile allocates statistics, while resources, RULEs, armor, weapons, inventory, gold, and possible status effects follow the selected level and game rules. Encumbrance remains manual and defaults to 0 / 0."
+      "behavior": "Creates and saves a complete random character under a unique CharacterKey. Level must be 1–10 and is random when omitted; background is also optional and random by default. The public `background` router selects one broad category, then the generic v3 inline resolver independently selects an archetype and a reusable physical description. Backstory and goals start empty. A shared statistical profile allocates statistics, while resources, RULEs, armor, weapons, inventory, gold, and possible status effects follow the selected level and game rules. Encumbrance remains manual and defaults to 0 / 0."
     },
     "genMonster": {
       "description": "Generate a creature (configured DM role or server owner)",
@@ -268,7 +268,6 @@
         "physicalAbility": "Physical ability",
         "description": "Description",
         "traits": "Traits",
-        "appearance": "Appearance",
         "backstory": "Backstory",
         "goals": "Goals"
       },
@@ -317,7 +316,8 @@
       "raceName": "Race name",
       "racePhysicalDescription": "Race physical description",
       "raceLore": "Race lore",
-      "appearance": "Appearance",
+      "backgroundArchetype": "Background archetype",
+      "backgroundPhysicalDescription": "Background physical description",
       "backstory": "Backstory",
       "goals": "Goals",
       "background": "Background",
@@ -377,8 +377,10 @@
     },
     "summary": {
       "identity": "Level **{{level}}** · Race **{{race}}**",
+      "identityWithArchetype": "Level **{{level}}** · Race **{{race}}** · Archetype **{{archetype}}**",
+      "levelWithArchetype": "Level **{{level}}** · Archetype **{{archetype}}**",
+      "archetype": "Archetype **{{archetype}}**",
       "unspecifiedRace": "Unspecified",
-      "unspecifiedAppearance": "Appearance unspecified.",
       "ruleLevel": "{{name}} (Level {{level}})"
     },
     "detail": {

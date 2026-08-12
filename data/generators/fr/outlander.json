@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 3,
+  "id": "outlander",
+  "visibility": "internal",
+  "name": "Archétypes de sauvageon",
+  "description": "Rôles liés à la nature et aux frontières",
+  "entrySchema": { "type": "text" },
+  "entries": [
+    { "id": "hunter", "value": "Chasseur" },
+    { "id": "nomad", "value": "Nomade" },
+    { "id": "hermit", "value": "Ermite" },
+    { "id": "tribal_envoy", "value": "Émissaire tribal" },
+    { "id": "frontier_guide", "value": "Guide des frontières" },
+    { "id": "ranger", "value": "Rôdeur" },
+    { "id": "wilderness_healer", "value": "Guérisseur des terres sauvages" },
+    { "id": "tracker", "value": "Pisteur" },
+    { "id": "wilderness_scout", "value": "Éclaireur des terres sauvages" }
+  ]
+}

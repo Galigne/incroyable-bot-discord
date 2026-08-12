@@ -400,7 +400,7 @@ function randomWithModifierChance(chance) {
 	let calls = 0;
 	return () => {
 		calls += 1;
-		return calls === 5 ? chance : 0;
+		return calls === 6 ? chance : 0;
 	};
 }
 
@@ -467,9 +467,10 @@ test('random character generation uses localized content without changing identi
 	assert.equal(character.race.name, 'Humain');
 	assert.match(character.gear.inventory.at(-1), /^\d+ pièces d’or$/);
 	assert.equal(character.gear.inventory.some(item => item.endsWith(' gold')), false);
-	assert.ok(character.background.appearance);
-	assert.ok(character.background.backstory);
-	assert.ok(character.background.goals);
+	assert.ok(character.background.archetype);
+	assert.ok(character.background.physicalDescription);
+	assert.equal(character.background.backstory, '');
+	assert.equal(character.background.goals, '');
 });
 
 function createCharacterFixture() {

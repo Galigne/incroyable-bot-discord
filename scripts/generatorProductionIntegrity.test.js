@@ -5,7 +5,7 @@ const generatorResolver = require('../services/generatorResolver');
 
 test('production catalogs exclude retired roots and obsolete mechanical payloads', () => {
 	assert.equal(generatorCatalog.getGenerator('npc'), undefined);
-	assert.equal(generatorCatalog.getGenerator('criminal'), undefined);
+	assert.equal(generatorCatalog.getGenerator('criminal').visibility, 'internal');
 	const all = generatorCatalog.listGenerators('en', { visibility: 'all' });
 	const serialized = JSON.stringify(all);
 	assert.doesNotMatch(serialized, /"generator":"(?:npc|criminal)"/);

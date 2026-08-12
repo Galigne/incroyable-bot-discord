@@ -78,16 +78,29 @@ function createCharacterSummaryEmbed(character, locale = 'en') {
 	const rightColumn = rightSections
 		.map((section, index) => `${index === 0 ? '' : `**${section.label}**\n`}${section.value}`)
 		.join('\n\n');
-	const description = [
-		hasText(character.race.name)
-			? t(locale, 'character.summary.identity', {
+	const hasArchetype = hasText(character.background.archetype);
+	const identity = hasText(character.race.name)
+		? t(locale, hasArchetype
+			? 'character.summary.identityWithArchetype'
+			: 'character.summary.identity', {
+			level: character.level,
+			race: character.race.name,
+			archetype: character.background.archetype,
+		})
+		: hasArchetype
+			? t(locale, 'character.summary.levelWithArchetype', {
 				level: character.level,
-				race: character.race.name,
+				archetype: character.background.archetype,
 			})
-			: `${getCharacterFieldLabel(locale, 'level')} **${character.level}**`,
-		...(hasText(character.background.appearance)
-			? [character.background.appearance]
-			: []),
+			: `${getCharacterFieldLabel(locale, 'level')} **${character.level}**`;
+	const backgroundDescription = [
+		hasText(character.background.physicalDescription)
+			? character.background.physicalDescription
+			: null,
+	].filter(Boolean);
+	const description = [
+		identity,
+		...backgroundDescription,
 	].join('\n');
 	const summaryFields = [
 		{ name: getCharacterFieldLabel(locale, 'status'), value: truncate(status) },

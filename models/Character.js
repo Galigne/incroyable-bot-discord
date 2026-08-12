@@ -29,7 +29,8 @@ class Character {
 			},
 		};
 		character.background = {
-			appearance: data.background?.appearance ?? '',
+			archetype: data.background?.archetype ?? '',
+			physicalDescription: data.background?.physicalDescription ?? '',
 			backstory: data.background?.backstory ?? '',
 			goals: data.background?.goals ?? '',
 		};
@@ -77,7 +78,8 @@ class Character {
 			},
 		};
 		this.background = {
-			appearance: '',
+			archetype: '',
+			physicalDescription: '',
 			backstory: '',
 			goals: '',
 		};

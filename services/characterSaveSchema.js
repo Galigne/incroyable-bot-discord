@@ -57,7 +57,8 @@ function migrateCharacterSave(rawSaveData) {
 			},
 		},
 		background: {
-			appearance: rawSaveData.appearance,
+			archetype: '',
+			physicalDescription: rawSaveData.appearance,
 			backstory: rawSaveData.backstory,
 			goals: rawSaveData.goals,
 		},

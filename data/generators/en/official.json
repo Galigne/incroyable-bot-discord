@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 3,
+  "id": "official",
+  "visibility": "internal",
+  "name": "Official archetypes",
+  "description": "Administrative and civic roles",
+  "entrySchema": { "type": "text" },
+  "entries": [
+    { "id": "administrator", "value": "Administrator" },
+    { "id": "diplomat", "value": "Diplomat" },
+    { "id": "tax_collector", "value": "Tax collector" },
+    { "id": "judge", "value": "Judge" },
+    { "id": "inspector", "value": "Inspector" },
+    { "id": "clerk", "value": "Clerk" },
+    { "id": "magistrate", "value": "Magistrate" },
+    { "id": "bailiff", "value": "Bailiff" },
+    { "id": "notary", "value": "Notary" },
+    { "id": "envoy", "value": "Envoy" }
+  ]
+}

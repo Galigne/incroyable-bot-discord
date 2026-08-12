@@ -68,7 +68,8 @@ test('/get renders every grouped section from unchanged stored properties', () =
 		skillBonus: 'Arcana',
 		physicalAbility: 'Night sight',
 	};
-	character.background.appearance = 'Green cloak';
+	character.background.archetype = 'Courier';
+	character.background.physicalDescription = 'Green cloak';
 	character.background.backstory = 'Former courier';
 	character.background.goals = 'Map every road';
 	character.personality = {
@@ -104,7 +105,7 @@ test('/get renders every grouped section from unchanged stored properties', () =
 	const background = createEntityGetResponse(character, 'background', 'en')
 		.embeds[0].toJSON();
 	assert.deepEqual(background.fields.map(field => field.value), [
-		'Green cloak', 'Former courier', 'Map every road',
+		'Courier', 'Green cloak', 'Former courier', 'Map every road',
 	]);
 	const personality = createEntityGetResponse(character, 'personality', 'en')
 		.embeds[0].toJSON();
@@ -116,7 +117,7 @@ test('/get renders every grouped section from unchanged stored properties', () =
 test('/get rejects former independent child views and safely truncates grouped lists', () => {
 	const character = new Character('Grouped.Bounds', 'creator');
 	for (const field of [
-		'firstName', 'lastName', 'appearance', 'backstory', 'goals', 'racialTraits',
+		'firstName', 'lastName', 'backstory', 'goals', 'racialTraits',
 		'status-effects', 'hp', 'ar', 'ap', 'md', 'equipment', 'inventory',
 		'encumbrance',
 	]) {
@@ -190,7 +191,8 @@ test('character summaries omit empty optional content and all gear lists', () =>
 	assert.doesNotMatch(emptySummary.fields[0].value, /Status effects|Modifiers/);
 	assert.doesNotMatch(emptySummary.fields[1].value, /Racial traits/);
 
-	character.background.appearance = 'Green cloak';
+	character.background.archetype = 'Courier';
+	character.background.physicalDescription = 'Green cloak';
 	character.race.name = 'Ashborn';
 	character.race.traits.skillBonus = 'Arcana';
 	character.status.effects = ['Inspired'];
@@ -200,7 +202,10 @@ test('character summaries omit empty optional content and all gear lists', () =>
 
 	const populatedSummary = createEntityGetResponse(character, null, 'en')
 		.embeds[0].toJSON();
-	assert.match(populatedSummary.description, /Race \*\*Ashborn\*\*\nGreen cloak$/);
+	assert.match(
+		populatedSummary.description,
+		/Race \*\*Ashborn\*\* · Archetype \*\*Courier\*\*\nGreen cloak$/,
+	);
 	assert.match(populatedSummary.fields[0].value, /\*\*Status effects\*\*\n1\. Inspired/);
 	assert.match(populatedSummary.fields[0].value, /\*\*Descriptive modifiers\*\*/);
 	assert.match(populatedSummary.fields[1].value, /Racial skill bonus: Arcana/);

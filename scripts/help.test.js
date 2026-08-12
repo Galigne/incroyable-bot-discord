@@ -121,7 +121,6 @@ test('/help command:get and command:set list both explicit entity field orders',
 		for (const removedField of [
 			'firstName',
 			'lastName',
-			'appearance',
 			'backstory',
 			'goals',
 			'racialTraits',

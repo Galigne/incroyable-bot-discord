@@ -44,7 +44,10 @@ function populateRandomCharacter(character, options = {}) {
 	character.race.traits.physicalAbility = getField(race, 'physical_ability');
 
 	const background = resolveBackground(options.background, locale, random);
-	const route = generatorResolver.resolveReference(
+	const routeResolver = hasReferenceResolution(resolver)
+		? resolver
+		: generatorResolver;
+	const route = routeResolver.resolveReference(
 		{
 			generator: 'background',
 			entry: background.id,
@@ -53,24 +56,29 @@ function populateRandomCharacter(character, options = {}) {
 		locale,
 		{ path: 'root.character.background', random },
 	);
-	const detailResolver = resolver.resolveInlineReference
-		?? generatorResolver.resolveInlineReference;
 	const routeFields = route.fields ?? route.value;
-	const backgroundDetailsResult = detailResolver(
+	const archetypeResult = routeResolver.resolveInlineReference(
 		routeFields.generator,
 		locale,
-		{ path: 'root.character.background.details', random },
+		{ path: 'root.character.background.archetype', random },
 	);
-	const backgroundDetails = backgroundDetailsResult.fields ?? backgroundDetailsResult.value;
+	const physicalDescriptionResult = routeResolver.resolveInlineReference(
+		'{{ physical_description }}',
+		locale,
+		{ path: 'root.character.background.physicalDescription', random },
+	);
 	const backgroundModifiers = maybeGenerateDescriptiveModifiers({
 		resolver,
 		locale,
 		random,
 		path: 'root.character.modifier',
 	});
-	character.background.appearance = backgroundDetails.appearance;
-	character.background.backstory = backgroundDetails.backstory;
-	character.background.goals = backgroundDetails.goals;
+	character.background.archetype = getResolvedTextValue(archetypeResult);
+	character.background.physicalDescription = getResolvedTextValue(
+		physicalDescriptionResult,
+	);
+	character.background.backstory = '';
+	character.background.goals = '';
 
 	character.personality.traits = pickMany('personality', 2, locale, random)
 		.map(getTextValue);
@@ -210,6 +218,21 @@ function getTextValue(entry) {
 		'Expected a text generator entry.',
 		'errors.generatorTextExpected',
 	);
+}
+
+function getResolvedTextValue(result) {
+	if (result?.fields !== undefined || typeof result?.value !== 'string') {
+		throw generationError(
+			'Expected a text generator result.',
+			'errors.generatorTextExpected',
+		);
+	}
+	return result.value;
+}
+
+function hasReferenceResolution(resolver) {
+	return typeof resolver?.resolveReference === 'function'
+		&& typeof resolver.resolveInlineReference === 'function';
 }
 
 function formatNamedEntry(entry) {

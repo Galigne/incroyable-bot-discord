@@ -159,7 +159,7 @@
       "backgroundOption": "Background du personnage ; tirage aléatoire si omis",
       "levelChoice": "Niveau {{level}}",
       "success": "Le personnage **{{name}}** a été généré avec la clé `{{key}}`.",
-      "behavior": "Crée et sauvegarde un personnage aléatoire complet sous une CharacterKey unique. Le niveau doit être compris entre 1 et 10 et est aléatoire s’il est omis ; le Background est également facultatif et aléatoire par défaut. Le routeur public `background` sélectionne un catalogue de détail interne et peut ajouter des modificateurs descriptifs partagés. Un profil statistique partagé répartit les statistiques, tandis que les ressources, LOI, armure, armes, objets, pièces d’or et éventuels effets d’état suivent le niveau choisi et les règles du jeu. L’encombrement reste manuel et vaut 0 / 0 par défaut."
+      "behavior": "Crée et sauvegarde un personnage aléatoire complet sous une CharacterKey unique. Le niveau doit être compris entre 1 et 10 et est aléatoire s’il est omis ; le Background est également facultatif et aléatoire par défaut. Le routeur public `background` sélectionne une catégorie générale, puis le résolveur générique des références v3 sélectionne indépendamment un archétype et une description physique réutilisable. L’histoire personnelle et les objectifs commencent vides. Un profil statistique partagé répartit les statistiques, tandis que les ressources, LOI, armure, armes, objets, pièces d’or et éventuels effets d’état suivent le niveau choisi et les règles du jeu. L’encombrement reste manuel et vaut 0 / 0 par défaut."
     },
     "genMonster": {
       "description": "Générer une créature (rôle MJ configuré ou propriétaire du serveur)",
@@ -268,7 +268,6 @@
         "physicalAbility": "Capacité physique",
         "description": "Description",
         "traits": "Traits",
-        "appearance": "Apparence",
         "backstory": "Histoire personnelle",
         "goals": "Objectifs"
       },
@@ -317,7 +316,8 @@
       "raceName": "Nom de la race",
       "racePhysicalDescription": "Description physique de la race",
       "raceLore": "Lore de la race",
-      "appearance": "Apparence",
+      "backgroundArchetype": "Archétype du background",
+      "backgroundPhysicalDescription": "Description physique du background",
       "backstory": "Histoire personnelle",
       "goals": "Objectifs",
       "background": "Background",
@@ -377,8 +377,10 @@
     },
     "summary": {
       "identity": "Niveau **{{level}}** · Race : **{{race}}**",
+      "identityWithArchetype": "Niveau **{{level}}** · Race : **{{race}}** · Archétype : **{{archetype}}**",
+      "levelWithArchetype": "Niveau **{{level}}** · Archétype : **{{archetype}}**",
+      "archetype": "Archétype : **{{archetype}}**",
       "unspecifiedRace": "Non précisée",
-      "unspecifiedAppearance": "Apparence non précisée.",
       "ruleLevel": "{{name}} (niveau {{level}})"
     },
     "detail": {

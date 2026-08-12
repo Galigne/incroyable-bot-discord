@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 3,
+  "id": "merchant",
+  "visibility": "internal",
+  "name": "Archétypes marchands",
+  "description": "Rôles commerciaux et liés au négoce",
+  "entrySchema": { "type": "text" },
+  "entries": [
+    { "id": "trader", "value": "Marchand" },
+    { "id": "shopkeeper", "value": "Boutiquier" },
+    { "id": "caravaner", "value": "Caravanier" },
+    { "id": "factor", "value": "Facteur de commerce" },
+    { "id": "appraiser", "value": "Expert" },
+    { "id": "innkeeper", "value": "Aubergiste" },
+    { "id": "fishmonger", "value": "Poissonnier" },
+    { "id": "supplier", "value": "Fournisseur" },
+    { "id": "peddler", "value": "Colporteur" },
+    { "id": "market_broker", "value": "Courtier du marché" }
+  ]
+}

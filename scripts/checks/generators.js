@@ -10,6 +10,26 @@ const {
 } = require('../../services/weightedSelector');
 const generatorResolver = require('../../services/generatorResolver');
 
+const BACKGROUND_GENERATOR_IDS = new Set([
+	'adventurer',
+	'artisan',
+	'criminal',
+	'exile',
+	'mage',
+	'merchant',
+	'military',
+	'noble',
+	'official',
+	'outlander',
+	'peasant',
+	'performer',
+	'religious',
+	'sailor',
+	'scholar',
+	'servant',
+	'urchin',
+]);
+
 module.exports = function createGeneratorChecks(context) {
 	const {
 		errors,
@@ -30,7 +50,9 @@ module.exports = function createGeneratorChecks(context) {
 				publicGenerators.length === 0
 				|| allGenerators.length !== publicGenerators.length + internalGenerators.length
 				|| internalGenerators.some(generator => !(
-					(generator.id.startsWith('background_') && !Object.hasOwn(generator, 'kind'))
+					((BACKGROUND_GENERATOR_IDS.has(generator.id)
+						|| generator.id === 'physical_description')
+						&& !Object.hasOwn(generator, 'kind'))
 					|| (
 						['creature_animal', 'creature_companion', 'creature_monster']
 							.includes(generator.id)
@@ -97,6 +119,7 @@ module.exports = function createGeneratorChecks(context) {
 
 			checkRequiredGenerators(errors, generatorCatalog);
 			checkBackgroundGenerators(errors, generatorCatalog);
+			checkPhysicalDescriptionGenerator(errors, generatorCatalog);
 			checkCreatureGenerators(errors, generatorCatalog);
 			checkStructuredGenerators(errors, generatorCatalog);
 			checkGeneratorResponses(errors, generatorCatalog, weightedEntries);
@@ -201,7 +224,6 @@ function checkRequiredGenerators(errors, generatorCatalog) {
 		'location',
 		'citizen-background',
 		'npc',
-		'criminal',
 	]) {
 		if (generatorCatalog.getGenerator(obsoleteId)) {
 			errors.push(`Obsolete generator ${obsoleteId} still exists.`);
@@ -220,11 +242,10 @@ function checkBackgroundGenerators(errors, generatorCatalog) {
 			|| !background.fields?.name
 			|| !background.fields?.description
 			|| backgroundIds.has(background.id)
-			|| !routedGeneratorId?.startsWith('background_')
+			|| routedGeneratorId !== background.id
 			|| details.length === 0
-			|| details.some(entry => (
-				['appearance', 'backstory', 'goals'].some(field => !entry.fields?.[field])
-			))
+			|| generatorCatalog.getGenerator(routedGeneratorId)?.entrySchema.type !== 'text'
+			|| details.some(entry => typeof entry.value !== 'string' || !entry.value.trim())
 		) {
 			errors.push(`Invalid routed background generator: ${background.id ?? 'unknown'}.`);
 		}
@@ -236,6 +257,19 @@ function checkBackgroundGenerators(errors, generatorCatalog) {
 		|| generatorCatalog.getGenerator('background_citizen')
 	) {
 		errors.push('Background routing must contain the 17 supported non-citizen categories.');
+	}
+}
+
+function checkPhysicalDescriptionGenerator(errors, generatorCatalog) {
+	const generator = generatorCatalog.getGenerator('physical_description');
+	if (
+		!generator
+		|| generator.visibility !== 'internal'
+		|| generator.entrySchema.type !== 'text'
+		|| generator.entries.length < 20
+		|| generator.entries.some(entry => typeof entry.value !== 'string' || !entry.value.trim())
+	) {
+		errors.push('Physical descriptions must be a reusable internal text generator.');
 	}
 }
 

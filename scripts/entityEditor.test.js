@@ -82,7 +82,6 @@ test('the editable catalog exposes only the final grouped field list', () => {
 		'race.name',
 		'race.description',
 		'race.lore',
-		'appearance',
 		'backstory',
 		'goals',
 		'personality.description',
@@ -342,9 +341,8 @@ test('multi-input groups replace every stored target together', () => {
 		'racialTraits.physicalAbility': 'Night sight',
 	});
 	setEditableFieldValue(character, 'background', {
-		appearance: 'Green cloak',
-		backstory: 'Raised by cartographers',
-		goals: 'Map the lost roads',
+		'background.backstory': 'Raised by cartographers',
+		'background.goals': 'Map the lost roads',
 	});
 	setEditableFieldValue(character, 'personality', {
 		'personality.description': 'Quiet and curious',
@@ -360,7 +358,8 @@ test('multi-input groups replace every stored target together', () => {
 			physicalAbility: 'Night sight',
 		},
 	});
-	assert.equal(character.background.appearance, 'Green cloak');
+	assert.equal(character.background.archetype, '');
+	assert.equal(character.background.physicalDescription, '');
 	assert.equal(character.background.backstory, 'Raised by cartographers');
 	assert.equal(character.background.goals, 'Map the lost roads');
 	assert.deepEqual(character.personality, {
@@ -452,7 +451,7 @@ test('race, background, and personality modals prefill every separate input', ()
 	const character = createFilledCharacter();
 	for (const [field, labels] of [
 		['race', ['Name', 'Physical description', 'Lore', 'Skill bonus', 'Physical ability']],
-		['background', ['Appearance', 'Backstory', 'Goals']],
+		['background', ['Backstory', 'Goals']],
 		['personality', ['Traits', 'Description']],
 	]) {
 		const values = getEditableFieldValue(character, field);
@@ -691,11 +690,11 @@ test('name, race, background, and personality updates are atomic and undoable', 
 			assert.equal(character.race.traits.skillBonus, '');
 		}],
 		['background', {
-			appearance: 'Green cloak',
-			backstory: 'Former courier',
-			goals: 'Map every road',
+			'background.backstory': 'Former courier',
+			'background.goals': 'Map every road',
 		}, character => {
-			assert.equal(character.background.appearance, '');
+			assert.equal(character.background.archetype, '');
+			assert.equal(character.background.physicalDescription, '');
 			assert.equal(character.background.backstory, '');
 			assert.equal(character.background.goals, '');
 		}],
@@ -764,7 +763,6 @@ test('modal routing submits all inputs once and repeats authorization', async ()
 	}, config, characterKey, 'background');
 
 	const submittedValues = {
-		[getEntityEditInputId('background.appearance')]: 'Blue coat',
 		[getEntityEditInputId('background.backstory')]: 'Former courier',
 		[getEntityEditInputId('background.goals')]: 'Cross every border',
 	};
@@ -783,7 +781,8 @@ test('modal routing submits all inputs once and repeats authorization', async ()
 		},
 	}, config);
 	const edited = await getEntity(characterKey);
-	assert.equal(edited.background.appearance, 'Blue coat');
+	assert.equal(edited.background.archetype, '');
+	assert.equal(edited.background.physicalDescription, '');
 	assert.equal(edited.background.backstory, 'Former courier');
 	assert.equal(edited.background.goals, 'Cross every border');
 	assert.equal(replyCount, 1);
@@ -882,7 +881,8 @@ function createFilledCharacter() {
 		skillBonus: 'Arcana',
 		physicalAbility: 'Night sight',
 	};
-	character.background.appearance = 'Green cloak';
+	character.background.archetype = 'Courier';
+	character.background.physicalDescription = 'Green cloak';
 	character.background.backstory = 'Raised by cartographers';
 	character.background.goals = 'Map the lost roads';
 	character.personality = {

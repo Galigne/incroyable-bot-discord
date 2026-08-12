@@ -58,10 +58,11 @@ module.exports = function createCharacterChecks(context) {
 				'racialTraits.physicalAbility': '',
 			});
 			setEditableFieldValue(original, 'background', {
-				appearance: 'Tall with silver hair.',
-				backstory: '',
-				goals: '',
+				'background.backstory': 'Raised by cartographers',
+				'background.goals': 'Map the lost roads',
 			});
+			original.background.archetype = 'Cartographer';
+			original.background.physicalDescription = 'Tall with silver hair.';
 			setEditableFieldValue(original, 'gear', {
 				equipment: '- Longsword',
 				inventory: '',
@@ -157,7 +158,10 @@ module.exports = function createCharacterChecks(context) {
 				|| character.displayName !== 'Diego Robert'
 				|| character.statistics.strength !== 12
 				|| character.race.name !== 'Ashborn'
-				|| character.background.appearance !== 'Tall with silver hair.'
+				|| character.background.archetype !== 'Cartographer'
+				|| character.background.physicalDescription !== 'Tall with silver hair.'
+				|| character.background.backstory !== 'Raised by cartographers'
+				|| character.background.goals !== 'Map the lost roads'
 				|| getEditableFieldValue(character, 'personality')['personality.traits']
 					!== 'Brave\nCurious'
 				|| getEditableFieldValue(character, 'rules')
@@ -181,7 +185,10 @@ module.exports = function createCharacterChecks(context) {
 			const summary = createCharacterSummaryEmbed(character).toJSON();
 			const status = summary.fields.find(field => field.name === 'Status');
 			if (
-				!summary.description.includes('Tall with silver hair.')
+				!summary.description.includes(
+					'Level **1** · Race **Ashborn** · Archetype **Cartographer**',
+				)
+				|| !summary.description.includes('Tall with silver hair.')
 				|| !status
 				|| !status.value.includes('HP: **50 / 100 (50%)**')
 				|| !status.value.includes(`${'❤️'.repeat(5)}${'🖤'.repeat(5)}`)
@@ -290,9 +297,10 @@ module.exports = function createCharacterChecks(context) {
 				|| !character.race.name
 				|| !character.race.physicalDescription
 				|| character.race.lore
-				|| !character.background.appearance
-				|| !character.background.backstory
-				|| !character.background.goals
+				|| !character.background.archetype
+				|| !character.background.physicalDescription
+				|| character.background.backstory
+				|| character.background.goals
 				|| character.personality.traits.length !== 2
 				|| character.personality.description
 				|| character.race.traits.skillBonus !== generatedRace?.fields.skill_bonus
@@ -382,9 +390,10 @@ module.exports = function createCharacterChecks(context) {
 					random: () => 0,
 				});
 				if (
-					!routedCharacter.background.appearance
-					|| !routedCharacter.background.backstory
-					|| !routedCharacter.background.goals
+					!routedCharacter.background.archetype
+					|| !routedCharacter.background.physicalDescription
+					|| routedCharacter.background.backstory
+					|| routedCharacter.background.goals
 				) {
 					errors.push(`Random generation failed for background: ${backgroundName}.`);
 				}
