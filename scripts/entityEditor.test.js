@@ -733,6 +733,18 @@ test('collection modal instructions match each parser format and clearing behavi
 		english.rpg.editor.collectionPlaceholder,
 	);
 
+	const frenchTalentModal = createEntityFieldModal(
+		'session',
+		'character',
+		'talents',
+		'',
+		'fr',
+	).toJSON();
+	assert.equal(
+		frenchTalentModal.components[0].description,
+		french.rpg.editor.collectionDescription,
+	);
+
 	const personalityModal = createEntityFieldModal(
 		'session',
 		'character',
@@ -772,6 +784,25 @@ test('collection modal instructions match each parser format and clearing behavi
 	assert.equal(
 		gearModal.components[1].component.placeholder,
 		english.rpg.editor.collectionPlaceholder,
+	);
+
+	const frenchGearModal = createEntityFieldModal(
+		'session',
+		'character',
+		'gear',
+		{
+			'gear.equipment': '',
+			'gear.inventory': '',
+			'gear.encumbrance': '0:0',
+		},
+		'fr',
+	).toJSON();
+	assert.deepEqual(
+		frenchGearModal.components.slice(0, 2).map(component => component.description),
+		[
+			french.rpg.editor.equipmentDescription,
+			french.rpg.editor.inventoryDescription,
+		],
 	);
 
 	const statusModal = createEntityFieldModal(
