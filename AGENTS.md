@@ -725,53 +725,6 @@ solution, and ask the user to confirm the direction. Do not pause merely over
 personal taste or when the relevant behavior or data is explicitly defined by a
 canonical rulebook.
 
-## Direct-to-master delivery workflow
-
-The normal Codex workflow is always direct to `master`, regardless of the size
-or risk of the task. Do not create or use dedicated task branches or pull
-requests as part of this workflow.
-
-Before starting a new task:
-
-1. Check `git status` and never discard existing dirty work. If existing work
-   overlaps the task or a synchronization step could affect it, preserve it and
-   ask the user before taking a risky action.
-2. Synchronize remote information as appropriate, such as with `git fetch
-   origin`, without overwriting local work. Confirm that implementation will
-   proceed directly on `master`. If the current branch is not `master`, stop
-   and ask the user rather than switching branches as part of the normal
-   workflow.
-
-Implement the requested task directly on `master`. Run the appropriate
-validation, including the repository's normal full validation when applicable.
-
-Stop before committing or pushing. Present the completed changes and validation
-results to the user for manual approval. Codex must never commit or push
-implementation work without explicit user approval.
-
-Only after explicit user approval:
-
-1. Create one focused commit for the task whenever practical.
-2. Push that commit directly to `origin/master`.
-3. Report the resulting commit SHA.
-
-The pushed commit may then be independently reviewed. A review should inspect
-the exact commit diff together with the relevant surrounding current code,
-`AGENTS.md`, the original implementation request, and applicable project
-documentation.
-
-If review findings require changes:
-
-1. Implement the fixes directly on `master` and validate them.
-2. Stop before committing or pushing and present the fixes and validation
-   results to the user for approval.
-3. After explicit approval, create a new focused corrective commit and push it
-   directly to `origin/master`.
-4. Never amend, rewrite, force-push, or replace the previously reviewed commit.
-
-Additional review and fix cycles follow the same pattern, with each approved
-correction represented by a new commit.
-
 ### GitHub authentication
 
 Keep `origin` as the credential-free HTTPS URL
@@ -794,19 +747,22 @@ through the runtime environment and must never be committed.
 
 ## Change methodology
 
-After completing the preflight above, use this methodology for every feature,
-behavior change, bug fix, or data update:
+Use this methodology for every feature, behavior change, bug fix, or data
+update:
 
-1. Read the relevant command, service, model, tests, and data files before
+1. Check `git status` and never discard existing dirty work. If existing work
+   overlaps the task or a synchronization step could affect it, preserve it and
+   ask the user before taking a risky action.
+2. Read the relevant command, service, model, tests, and data files before
    editing; consult the rulebook or `data/generators/README.md` when the change
    touches those areas. Preserve unrelated dirty changes and real entity saves
    unless explicitly stated otherwise.
-2. Identify all coupled surfaces before implementing. Depending on the change, this
+3. Identify all coupled surfaces before implementing. Depending on the change, this
    can include slash-command schema and routing, autocomplete, authorization,
    persistence, editing, rendering, generator data, and error handling. Decide which
    layer owns each behavior before editing: commands adapt Discord interactions,
    services own feature rules, and response adapters own Discord presentation.
-3. Add or update focused regression coverage whenever behavior changes and testing
+4. Add or update focused regression coverage whenever behavior changes and testing
    is practical. New commands should have schema, routing, autocomplete, permission,
    and behavior checks as applicable. Character or generator changes should test
    their invariants and persistence. Data-driven tests should derive expectations
@@ -815,7 +771,7 @@ behavior change, bug fix, or data update:
    calculations, branching policies, and error codes directly at the service layer;
    test localization and Discord payload construction at the response-adapter layer;
    keep command tests focused on schema, delegation, and interaction integration.
-4. Keep user-facing and agent-facing guidance synchronized when the affected
+5. Keep user-facing and agent-facing guidance synchronized when the affected
    behavior is documented:
    - update the single registry metadata record and its localized behavior text when
      command names, arguments, permissions, ordering, or UX change;
@@ -826,10 +782,10 @@ behavior change, bug fix, or data update:
    - never edit `documentation/TTRPG_RANDOM_RULES_EN.md` or any other rulebook
      unless the user explicitly requests that specific kind of change. Treat
      rulebooks as read-only sources of truth by default.
-5. Run targeted checks while iterating, then run the complete `npm test` suite and
+6. Run targeted checks while iterating, then run the complete `npm test` suite and
    `git diff --check`. Confirm that no real file under `save/` was added, changed,
    or removed by validation.
-6. Hand off with a concise summary of behavior, important assumptions, validation
+7. Hand off with a concise summary of behavior, important assumptions, validation
    performed, and any remaining limitation. Do not claim live Discord behavior was
    tested unless the bot was actually run for that purpose.
 
