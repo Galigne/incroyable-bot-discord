@@ -12,6 +12,9 @@ const {
 	validateGeneratorDefinition,
 	validateGeneratorPair,
 } = require('../services/generatorSchema');
+const {
+	parseWrappedInlineReference,
+} = require('../services/generatorSchema/referenceValidation');
 const { BASE_STATS } = require('../services/mechanics/constants');
 const statProfileCatalog = require('../services/statProfileCatalog');
 const {
@@ -82,6 +85,23 @@ test('generator and background autocomplete expose stable public values', () => 
 		englishBackgrounds.map(entry => entry.id),
 	);
 	assert.ok(choices[0].name.startsWith(frenchBackgrounds[0].fields.name));
+});
+
+test('wrapped inline reference parsing requires exactly one valid token', () => {
+	assert.deepEqual(
+		parseWrappedInlineReference('{{ creature_monster:dragon.name }}'),
+		{ generator: 'creature_monster', entry: 'dragon', field: 'name' },
+	);
+	for (const invalid of [
+		'creature_monster',
+		'{{ creature_monster }} {{ creature_animal }}',
+		'{{ creature-monster }}',
+	]) {
+		assert.throws(
+			() => parseWrappedInlineReference(invalid),
+			error => error.code === 'INVALID_GENERATOR_INLINE_REFERENCE',
+		);
+	}
 });
 
 test('/gen modifier autocomplete follows the selected category map', () => {

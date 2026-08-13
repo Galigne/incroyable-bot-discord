@@ -5,7 +5,9 @@ const {
 	validateGeneratorRelationships,
 } = require('./generatorSchema');
 const { CREATURE_ROUTER_ID } = require('./generatorSchema/constants');
-const { parseInlineReference } = require('./generatorSchema/referenceValidation');
+const {
+	parseWrappedInlineReference,
+} = require('./generatorSchema/referenceValidation');
 
 const generatorsDirectory = path.join(__dirname, '..', 'data', 'generators');
 const DEFAULT_LOCALE = 'en';
@@ -117,14 +119,8 @@ function discoverCreatureGeneratorIds(definitions) {
 	const ids = new Set();
 	for (const entry of router?.entries ?? []) {
 		const expression = entry.fields?.generator;
-		const match = typeof expression === 'string'
-			? expression.match(/^\s*\{\{([^{}]+)\}\}\s*$/)
-			: null;
-		if (!match) {
-			continue;
-		}
 		try {
-			const reference = parseInlineReference(match[1], 'creature route');
+			const reference = parseWrappedInlineReference(expression, 'creature route');
 			if (!reference.entry && !reference.field) {
 				ids.add(reference.generator);
 			}

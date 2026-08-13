@@ -1,7 +1,9 @@
 const generatorCatalog = require('./generatorCatalog');
 const { generatorResolutionError } = require('./generatorResolutionError');
 const { createReferenceResolver } = require('./referenceResolver');
-const { parseInlineReference } = require('./generatorSchema/referenceValidation');
+const {
+	parseWrappedInlineReference,
+} = require('./generatorSchema/referenceValidation');
 const { selectWeightedEntry } = require('./weightedSelector');
 
 const DEFAULT_MAX_DEPTH = 4;
@@ -55,10 +57,7 @@ function createGeneratorResolver({ getGenerator = generatorCatalog.getGenerator 
 	}
 
 	function resolveInlineReferenceInState(expression, state, path) {
-		const wrapped = typeof expression === 'string'
-			? expression.match(/^\s*\{\{([^{}]+)\}\}\s*$/)
-			: null;
-		const parsed = parseInlineReference(wrapped?.[1] ?? expression, path);
+		const parsed = parseWrappedInlineReference(expression, path);
 		const resolved = referenceResolver.resolveReference(
 			{
 				generator: parsed.generator,
@@ -244,7 +243,7 @@ function createGeneratorResolver({ getGenerator = generatorCatalog.getGenerator 
 		for (const match of value.matchAll(matcher)) {
 			output += value.slice(cursor, match.index);
 			const resolved = resolveInlineReferenceInState(
-				match[1],
+				match[0],
 				state,
 				`${path}.references.${referenceIndex}`,
 			);
@@ -358,9 +357,22 @@ function validateExplicitModifier(generator, modifierId) {
 	);
 }
 
+function assertGeneratorResolverInterface(resolver) {
+	if (
+		typeof resolver?.resolveReference !== 'function'
+		|| typeof resolver.resolveInlineReference !== 'function'
+	) {
+		throw new TypeError(
+			'Random generation requires a resolver with reference and inline-reference resolution.',
+		);
+	}
+	return resolver;
+}
+
 const defaultResolver = createGeneratorResolver();
 
 module.exports = {
+	assertGeneratorResolverInterface,
 	createGeneratorResolver,
 	generate: defaultResolver.generate,
 	resolveInlineReference: defaultResolver.resolveInlineReference,

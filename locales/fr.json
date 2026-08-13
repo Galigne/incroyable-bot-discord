@@ -444,8 +444,6 @@
   "generatorFields": {
     "arPercentage": "Pourcentage de PR",
     "allies": "Alliés",
-    "appearance": "Apparence",
-    "backstory": "Histoire personnelle",
     "commandment": "Commandement",
     "constitutionRequirement": "Constitution requise",
     "deityOrBelief": "Divinité ou croyance",
@@ -454,7 +452,6 @@
     "firstName": "Prénom",
     "generator": "Générateur",
     "goal": "Objectif",
-    "goals": "Objectifs",
     "hierarchy": "Hiérarchie",
     "holyPlace": "Lieu saint",
     "lastName": "Nom",

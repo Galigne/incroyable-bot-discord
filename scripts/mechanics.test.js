@@ -37,6 +37,7 @@ const {
 	recalculateDerivedStats,
 } = require('../services/mechanics/statistics');
 const { populateRandomCharacter } = require('../services/randomCharacterGenerator');
+const generatorResolver = require('../services/generatorResolver');
 const { getStatProfile } = require('../services/statProfileCatalog');
 const {
 	createLocalizedCharacterGenerationOptions,
@@ -370,24 +371,22 @@ test('character modifiers attach without changing generated base state', () => {
 	populateRandomCharacter(plain, {
 		level: 7,
 		random: randomWithModifierChance(0.99),
-		resolver: { resolveReference: () => ({ modifiers: [] }) },
+		resolver: createCharacterModifierResolver({ modifiers: [] }),
 	});
 	populateRandomCharacter(modified, {
 		level: 7,
 		random: randomWithModifierChance(0),
-		resolver: {
-			resolveReference: () => ({
-				fields: {
-					name: 'Scarred',
-					description: 'Old scars remain visible.',
-				},
-				provenance: [{
-					type: 'entry',
-					generatorId: 'modifier_character',
-					entryId: 'scarred',
-				}],
-			}),
-		},
+		resolver: createCharacterModifierResolver({
+			fields: {
+				name: 'Scarred',
+				description: 'Old scars remain visible.',
+			},
+			provenance: [{
+				type: 'entry',
+				generatorId: 'modifier_character',
+				entryId: 'scarred',
+			}],
+		}),
 	});
 	const plainBase = structuredClone(plain);
 	const modifiedBase = structuredClone(modified);
@@ -403,6 +402,18 @@ function randomWithModifierChance(chance) {
 	return () => {
 		calls += 1;
 		return calls === 6 ? chance : 0;
+	};
+}
+
+function createCharacterModifierResolver(modifierResult) {
+	return {
+		resolveReference(reference, locale, options) {
+			if (reference.generator === 'modifier_character') {
+				return structuredClone(modifierResult);
+			}
+			return generatorResolver.resolveReference(reference, locale, options);
+		},
+		resolveInlineReference: generatorResolver.resolveInlineReference,
 	};
 }
 

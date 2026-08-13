@@ -122,6 +122,23 @@ function parseInlineReference(expression, location = 'generator reference') {
 	return { generator, entry, field };
 }
 
+function parseWrappedInlineReference(expression, location = 'generator reference') {
+	if (typeof expression !== 'string') {
+		throw generatorSchemaError(
+			'INVALID_GENERATOR_INLINE_REFERENCE',
+			`Generator ${location} must contain exactly one wrapped inline reference.`,
+		);
+	}
+	const match = expression.match(/^\s*\{\{([^{}]+)\}\}\s*$/);
+	if (!match) {
+		throw generatorSchemaError(
+			'INVALID_GENERATOR_INLINE_REFERENCE',
+			`Generator ${location} must contain exactly one wrapped inline reference.`,
+		);
+	}
+	return parseInlineReference(match[1], location);
+}
+
 function extractInlineReferences(value, location = 'generator text') {
 	if (typeof value !== 'string') {
 		return [];
@@ -154,6 +171,7 @@ function extractInlineReferences(value, location = 'generator text') {
 module.exports = {
 	extractInlineReferences,
 	parseInlineReference,
+	parseWrappedInlineReference,
 	validateReference,
 	validateSelector,
 };

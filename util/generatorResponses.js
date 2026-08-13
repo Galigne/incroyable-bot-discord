@@ -4,8 +4,6 @@ const { t } = require('./i18n');
 const GENERATOR_FIELD_KEYS = {
 	ar_percentage: 'arPercentage',
 	allies: 'allies',
-	appearance: 'appearance',
-	backstory: 'backstory',
 	commandment: 'commandment',
 	constitution_requirement: 'constitutionRequirement',
 	deity_or_belief: 'deityOrBelief',
@@ -14,7 +12,6 @@ const GENERATOR_FIELD_KEYS = {
 	first_name: 'firstName',
 	generator: 'generator',
 	goal: 'goal',
-	goals: 'goals',
 	hierarchy: 'hierarchy',
 	holy_place: 'holyPlace',
 	last_name: 'lastName',
