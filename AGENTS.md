@@ -784,29 +784,32 @@ overhead:
 ### GitHub authentication
 
 Keep `origin` as the credential-free HTTPS URL
-`https://github.com/Galigne/incroyable-bot-discord.git`. Use persistent secure
-credential storage: prefer Git Credential Manager backed by the operating
-system's secure credential store for Git, and use the GitHub CLI's normal OS
-keyring for `gh`. Never use Git's plaintext `credential.store`, a shell profile,
-or a plaintext environment/configuration file.
+`https://github.com/Galigne/incroyable-bot-discord.git`. The local ignored
+`.codex/config.toml` provides non-interactive Git and GitHub CLI authentication
+through the runtime environment and must never be committed.
 
-Before publishing, verify access from the Codex shell, not only from the user's
-interactive PowerShell session. The Codex shell may use a separate Windows
-profile and credential store, so run `gh auth status` from the task environment;
-on this Windows setup, use `C:\Program Files\GitHub CLI\gh.exe` when `gh` is not
-on `PATH`. When valid credentials are available, Codex must reuse them for Git
-pushes and pull-request operations instead of starting a new interactive login.
-
-If authentication is invalid or unavailable, reauthenticate from that same
-shell with `gh auth login --hostname github.com --git-protocol https --web`.
-If a personal access token must be entered, use only an interactive
-credential-manager or GitHub CLI PAT flow so the user enters it directly. Never
-request, print, echo, paste into chat, commit, or store tokens or other
-credentials in repository files, `AGENTS.md`, `.env` files, Git configuration,
-scripts, shell history, remote URLs, or plaintext credential stores. Verify
-access again before publishing and after an environment reset, token
-revocation/expiration, or permission change. If the GitHub connector cannot
-perform a write, use the authenticated local `gh` CLI as the fallback.
+- Use ordinary `git pull`, `git fetch`, and `git push` commands. Authentication
+  is already injected into Git's runtime environment; do not configure or invoke
+  a Git credential helper.
+- Use `C:\Program Files\GitHub CLI\gh.exe` for GitHub pull-request operations
+  when `gh` is not on `PATH`. Authentication is already supplied through the
+  environment.
+- Never run `gh auth login`, `gh auth setup-git`, browser/device authentication,
+  Git Credential Manager setup, or any other reauthentication flow.
+- Never inspect, print, echo, expose, or modify `GH_TOKEN`, Git authorization
+  headers, `.codex/config.toml`, or any other credential value.
+- Do not perform a separate authentication preflight before every push. Simply
+  execute the required Git/GitHub operation.
+- If a remote Git or GitHub CLI operation fails because authentication is
+  unavailable, stop immediately and report the failed command and error to the
+  user. Do not attempt to repair or replace authentication yourself.
+- For substantial-change pull requests, after successfully pushing the branch,
+  create the pull request non-interactively with `gh pr create`, explicitly
+  specifying the repository, base branch, head branch, title, and body with
+  `--repo`, `--base`, `--head`, `--title`, and `--body` as needed.
+- After `gh pr create`, always verify that the pull request actually exists using
+  `gh pr view` and report its URL. Never claim that a pull request was created
+  unless that verification succeeds.
 
 ## Change methodology
 
