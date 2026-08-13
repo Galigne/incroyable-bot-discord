@@ -226,13 +226,13 @@ function checkCreatureGenerators(errors, generatorCatalog) {
 			))
 		))
 		|| JSON.stringify(generatorCatalog.getGenerator('region').modifiers)
-			!== JSON.stringify({ site_modifier_all: 20 })
+			!== JSON.stringify({ site_modifier_all: 5 })
 		|| JSON.stringify(generatorCatalog.getGenerator('building').modifiers)
 			!== JSON.stringify({
-				site_modifier_all: 20,
-				site_modifier_structures: 20,
-				site_modifier_interiors: 20,
-				site_modifier_building: 20,
+				site_modifier_all: 5,
+				site_modifier_structures: 5,
+				site_modifier_interiors: 5,
+				site_modifier_building: 5,
 			})
 	) {
 		errors.push('Status effects and character/creature modifiers are not valid generation catalogs.');

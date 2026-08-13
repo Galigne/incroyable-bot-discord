@@ -130,8 +130,8 @@ percentages:
 
 ```json
 "modifiers": {
-  "site_modifier_all": 20,
-  "site_modifier_building": 20
+  "site_modifier_all": 5,
+  "site_modifier_building": 5
 }
 ```
 

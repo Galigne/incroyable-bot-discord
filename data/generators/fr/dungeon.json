@@ -219,8 +219,8 @@
     }
   ],
   "modifiers": {
-    "site_modifier_all": 20,
-    "site_modifier_structures": 20,
-    "site_modifier_interiors": 20
+    "site_modifier_all": 5,
+    "site_modifier_structures": 5,
+    "site_modifier_interiors": 5
   }
 }
