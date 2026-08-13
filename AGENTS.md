@@ -731,6 +731,20 @@ Choose the workflow that matches the change's scope, risk, and usefulness of an
 independent pull-request review. Do not use a rigid technical threshold. If it
 is genuinely unclear which workflow applies, ask the user before editing.
 
+Before starting a new task, complete this preflight; a review-fix continuation
+on an existing PR branch is not a new task and follows the substantial-change
+review-fix rule below:
+
+1. Check `git status`. Do not discard dirty work; resolve it or ask the user
+   before switching branches or pulling.
+2. Verify that the current branch is `master`.
+3. Pull the latest `master` with `git pull --ff-only origin master`.
+4. Verify again that the current branch is `master`, the working tree is clean,
+   and it is synchronized with `origin/master`.
+
+Only after this preflight may a substantial task branch be created or a small
+change be edited directly on `master`.
+
 For substantial changes, new features, significant refactors, or other work
 where a pull request is useful:
 
@@ -780,10 +794,9 @@ fallback.
 After selecting the applicable workflow above, use this methodology for every
 feature, behavior change, bug fix, or data update:
 
-1. Inspect the current implementation and `git status` before editing. Read the
-   relevant command, service, model, tests, and data files;
-   consult the rulebook or `data/generators/README.md` when the change touches
-   those areas. Existing dirty changes and real entity saves belong to the user
+1. Read the relevant command, service, model, tests, and data files before
+   editing; consult the rulebook or `data/generators/README.md` when the change
+   touches those areas. Preserve unrelated dirty changes and real entity saves
    unless explicitly stated otherwise.
 2. Identify all coupled surfaces before implementing. Depending on the change, this
    can include slash-command schema and routing, autocomplete, authorization,
