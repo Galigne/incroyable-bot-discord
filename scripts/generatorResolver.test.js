@@ -142,6 +142,100 @@ test('inline references resolve text, structured display, explicit fields, and p
 	);
 });
 
+test('/gen formats direct substitutions without changing the generated value', () => {
+	const resolver = createInlineFormattingResolver(new Map([
+		['quest', createTextGenerator('quest', 'Go to {{ city }}.')],
+		['city', createTextGenerator('city', 'Waterdeep', 'internal')],
+	]));
+	const result = resolver.generate('quest', 'en', { random: () => 0 });
+
+	assert.equal(result.value, 'Go to Waterdeep.');
+	assert.equal(
+		createGeneratedEmbed(result).toJSON().description,
+		'Go to `Waterdeep`.',
+	);
+});
+
+test('/gen brackets recursive substitutions inside the direct inline-code value', () => {
+	const resolver = createInlineFormattingResolver(new Map([
+		['quest', createTextGenerator('quest', 'Escort {{ background }} across a forest.')],
+		['background', createTextGenerator('background', 'Merchant from {{ city }}')],
+		['city', createTextGenerator('city', 'Waterdeep', 'internal')],
+	]));
+	const quest = resolver.generate('quest', 'en', { random: () => 0 });
+	const background = resolver.generate('background', 'en', { random: () => 0 });
+
+	assert.equal(quest.value, 'Escort Merchant from Waterdeep across a forest.');
+	assert.equal(background.value, 'Merchant from Waterdeep');
+	assert.equal(
+		createGeneratedEmbed(quest).toJSON().description,
+		'Escort `Merchant from [Waterdeep]` across a forest.',
+	);
+	assert.equal(
+		createGeneratedEmbed(background).toJSON().description,
+		'Merchant from `Waterdeep`',
+	);
+});
+
+test('/gen formats multiple references independently in one template', () => {
+	const resolver = createInlineFormattingResolver(new Map([
+		['quest', createTextGenerator('quest', 'Meet {{ person }} at {{ city }}.')],
+		['person', createTextGenerator('person', 'the Old Ranger', 'internal')],
+		['city', createTextGenerator('city', 'Waterdeep', 'internal')],
+	]));
+	const result = resolver.generate('quest', 'en', { random: () => 0 });
+
+	assert.equal(
+		createGeneratedEmbed(result).toJSON().description,
+		'Meet `the Old Ranger` at `Waterdeep`.',
+	);
+});
+
+test('/gen brackets every level of deeper recursive substitutions', () => {
+	const resolver = createInlineFormattingResolver(new Map([
+		['outer', createTextGenerator('outer', 'A {{ middle }}')],
+		['middle', createTextGenerator('middle', 'B {{ inner }}', 'internal')],
+		['inner', createTextGenerator('inner', 'C {{ final }}', 'internal')],
+		['final', createTextGenerator('final', 'D', 'internal')],
+	]));
+	const result = resolver.generate('outer', 'en', { random: () => 0 });
+
+	assert.equal(result.value, 'A B C D');
+	assert.equal(
+		createGeneratedEmbed(result).toJSON().description,
+		'A `B [C [D]]`',
+	);
+});
+
+test('/gen applies the same substitution formatting to displayed generator fields', () => {
+	const resolver = createInlineFormattingResolver(new Map([
+		['person', {
+			schemaVersion: 3,
+			id: 'person',
+			visibility: 'public',
+			name: 'People',
+			description: 'People',
+			entrySchema: { type: 'fields', required: ['name', 'description'] },
+			entries: [{
+				id: 'merchant',
+				fields: {
+					name: 'Merchant from {{ city }}',
+					description: 'A traveler.',
+				},
+			}],
+		}],
+		['city', createTextGenerator('city', 'Waterdeep', 'internal')],
+	]));
+	const result = resolver.generate('person', 'en', { random: () => 0 });
+	const fields = createGeneratedEmbed(result).toJSON().fields;
+
+	assert.equal(result.displayFields.name, 'Merchant from Waterdeep');
+	assert.equal(
+		fields.find(field => field.name === 'Name').value,
+		'Merchant from `Waterdeep`',
+	);
+});
+
 test('equivalent deterministic input preserves inline selection IDs across locales', () => {
 	const catalogs = createLocalizedCatalogs();
 	const resolver = createFixtureResolver(catalogs);
@@ -445,16 +539,22 @@ function createFixtureCatalog(locale, includeRequest) {
 	]);
 }
 
-function createTextGenerator(id = 'weather', value = 'Rain') {
+function createTextGenerator(id = 'weather', value = 'Rain', visibility = 'public') {
 	return {
 		schemaVersion: 3,
 		id,
-		visibility: 'public',
+		visibility,
 		name: 'Weather',
 		description: 'Weather prompts',
 		entrySchema: { type: 'text' },
 		entries: [{ id: 'rain', value }],
 	};
+}
+
+function createInlineFormattingResolver(catalog) {
+	return createGeneratorResolver({
+		getGenerator: id => catalog.get(id),
+	});
 }
 
 function createPersonGenerator(locale) {

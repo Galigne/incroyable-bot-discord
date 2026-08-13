@@ -73,6 +73,7 @@ function createGeneratorResolver({ getGenerator = generatorCatalog.getGenerator 
 				? resolved.display
 				: resolved.value,
 			fields: resolved.fields,
+			template: resolved.template,
 			provenance: resolved.provenance,
 			modifiers: resolved.modifiers,
 		};
@@ -166,6 +167,7 @@ function createGeneratorResolver({ getGenerator = generatorCatalog.getGenerator 
 				outputType: 'value',
 				value: resolved.value,
 				display: resolved.value,
+				displayTemplate: resolved.template,
 				provenance: resolved.provenance,
 				modifiers: resolved.modifiers,
 			};
@@ -174,6 +176,7 @@ function createGeneratorResolver({ getGenerator = generatorCatalog.getGenerator 
 		const fields = { ...entry.fields };
 		const technical = new Set(generator.entrySchema.technical ?? []);
 		const displayFields = {};
+		const displayFieldTemplates = {};
 		let provenance = [];
 		let modifiers = [];
 		if (requestedField === undefined) {
@@ -187,12 +190,14 @@ function createGeneratorResolver({ getGenerator = generatorCatalog.getGenerator 
 					`${path}.fields.${field}`,
 				);
 				displayFields[field] = resolved.value;
+				displayFieldTemplates[field] = resolved.template;
 				provenance = [...provenance, ...resolved.provenance];
 				modifiers = [...modifiers, ...resolved.modifiers];
 			}
 		}
 
 		let selectedField;
+		let selectedDisplayTemplate;
 		if (requestedField !== undefined) {
 			if (!Object.hasOwn(fields, requestedField)) {
 				throw generatorResolutionError(
@@ -207,14 +212,22 @@ function createGeneratorResolver({ getGenerator = generatorCatalog.getGenerator 
 					`${path}.fields.${requestedField}`,
 				);
 				selectedField = resolved.value;
+				selectedDisplayTemplate = resolved.template;
 				provenance = [...provenance, ...resolved.provenance];
 				modifiers = [...modifiers, ...resolved.modifiers];
 			}
 			else {
 				selectedField = fields[requestedField];
+				selectedDisplayTemplate = createStaticTemplate(selectedField);
 			}
 		}
 
+		const displayTemplate = joinTemplates(
+			generator.entrySchema.required
+				.filter(field => !technical.has(field))
+				.map(field => displayFieldTemplates[field]),
+			' — ',
+		);
 		const display = generator.entrySchema.required
 			.filter(field => !technical.has(field))
 			.map(field => displayFields[field])
@@ -223,8 +236,11 @@ function createGeneratorResolver({ getGenerator = generatorCatalog.getGenerator 
 			outputType: 'fields',
 			fields,
 			displayFields,
+			displayFieldTemplates,
 			display,
+			displayTemplate,
 			selectedField,
+			selectedDisplayTemplate,
 			provenance,
 			modifiers,
 		};
@@ -232,30 +248,42 @@ function createGeneratorResolver({ getGenerator = generatorCatalog.getGenerator 
 
 	function resolveInlineString(value, state, path) {
 		if (typeof value !== 'string') {
-			return { value: String(value), provenance: [], modifiers: [] };
+			return {
+				value: String(value),
+				template: createStaticTemplate(value),
+				provenance: [],
+				modifiers: [],
+			};
 		}
 		const matcher = /\{\{([^{}]*)\}\}/g;
 		let output = '';
 		let cursor = 0;
 		let referenceIndex = 0;
+		const templateParts = [];
 		let provenance = [];
 		let modifiers = [];
 		for (const match of value.matchAll(matcher)) {
-			output += value.slice(cursor, match.index);
+			const staticValue = value.slice(cursor, match.index);
+			output += staticValue;
+			appendTemplateText(templateParts, staticValue);
 			const resolved = resolveInlineReferenceInState(
 				match[0],
 				state,
 				`${path}.references.${referenceIndex}`,
 			);
 			output += formatInlineValue(resolved.value);
+			templateParts.push({ type: 'reference', template: resolved.template });
 			provenance = [...provenance, ...resolved.provenance];
 			modifiers = [...modifiers, ...resolved.modifiers];
 			cursor = match.index + match[0].length;
 			referenceIndex += 1;
 		}
-		output += value.slice(cursor);
+		const trailingValue = value.slice(cursor);
+		output += trailingValue;
+		appendTemplateText(templateParts, trailingValue);
 		return {
 			value: output,
+			template: { type: 'template', parts: templateParts },
 			provenance,
 			modifiers,
 		};
@@ -303,11 +331,37 @@ function createCompletedResult(generator, entry, resolved) {
 	if (resolved.outputType === 'fields') {
 		result.fields = resolved.fields;
 		result.displayFields = resolved.displayFields;
+		result.displayFieldTemplates = resolved.displayFieldTemplates;
 	}
 	else {
 		result.value = resolved.value;
+		result.valueTemplate = resolved.displayTemplate;
 	}
 	return result;
+}
+
+function createStaticTemplate(value) {
+	return {
+		type: 'template',
+		parts: [{ type: 'text', value: String(value) }],
+	};
+}
+
+function appendTemplateText(parts, value) {
+	if (value) {
+		parts.push({ type: 'text', value });
+	}
+}
+
+function joinTemplates(templates, separator) {
+	const parts = [];
+	for (const [index, template] of templates.entries()) {
+		if (index > 0) {
+			appendTemplateText(parts, separator);
+		}
+		parts.push(...(template?.parts ?? []));
+	}
+	return { type: 'template', parts };
 }
 
 function validateOptions(locale, options) {

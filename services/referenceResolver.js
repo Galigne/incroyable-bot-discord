@@ -26,6 +26,7 @@ function createReferenceResolver({ getGenerator, resolveSelection }) {
 			outputType: resolved.outputType,
 			fields: resolved.fields,
 			display: resolved.display,
+			template: selectResolvedTemplate(resolved, reference.select),
 			provenance: [...sourceResult.provenance, ...resolved.provenance],
 			modifiers: resolved.modifiers,
 		};
@@ -101,7 +102,21 @@ function selectResolvedOutput(resolved, selector) {
 	);
 }
 
+function selectResolvedTemplate(resolved, selector) {
+	if (selector === 'display') {
+		return resolved.displayTemplate;
+	}
+	if (selector === 'value' && resolved.outputType === 'value') {
+		return resolved.displayTemplate;
+	}
+	if (selector.startsWith('fields.') && resolved.outputType === 'fields') {
+		return resolved.selectedDisplayTemplate;
+	}
+	return undefined;
+}
+
 module.exports = {
 	createReferenceResolver,
 	selectResolvedOutput,
+	selectResolvedTemplate,
 };

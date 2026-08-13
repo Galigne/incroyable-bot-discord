@@ -111,6 +111,8 @@ Autocomplete suggests commands the current user may access, existing EntityKeys,
 type-compatible fields, generator categories, localized creature types, common
 dice expressions, levels, and common purge amounts. `/undo` autocomplete includes authorized active entities with
 usable history. The private form opens immediately after `/set` is submitted.
+In `/gen` results, direct inline generator references are shown in inline code;
+references resolved inside them use square brackets at every recursive level.
 Character fields are `name`, `level`, `resources`, `status`, `statistics`, `rules`,
 `talents`, `gear`, `race`, `background`, `personality`. Creature fields independently
 use `identity`, `level`, `resources`, `status`, `statistics`, `rules`, `traits`, and

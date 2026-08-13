@@ -116,12 +116,15 @@ function createGeneratorBatchEmbed(result, locale, index, count) {
 		embed.addFields(
 			Object.entries(result.displayFields).map(([name, value]) => ({
 				name: getGeneratorFieldLabel(name, locale),
-				value: String(value),
+				value: renderGeneratorValue(
+					value,
+					result.displayFieldTemplates?.[name],
+				),
 			})),
 		);
 	}
 	else {
-		embed.setDescription(result.value);
+		embed.setDescription(renderGeneratorValue(result.value, result.valueTemplate));
 	}
 	for (const modifier of result.modifiers ?? []) {
 		addBatchModifier(embed, modifier, locale);
@@ -133,10 +136,13 @@ function addBatchModifier(embed, modifier, locale) {
 	const value = modifier.outputType === 'fields'
 		? Object.entries(modifier.displayFields ?? {})
 			.map(([name, fieldValue]) => (
-				`**${getGeneratorFieldLabel(name, locale)}:** ${fieldValue}`
+				`**${getGeneratorFieldLabel(name, locale)}:** ${renderGeneratorValue(
+					fieldValue,
+					modifier.displayFieldTemplates?.[name],
+				)}`
 			))
 			.join('\n')
-		: String(modifier.value);
+		: renderGeneratorValue(modifier.value, modifier.valueTemplate);
 	embed.addFields({
 		name: t(locale, 'rpg.gen.modifierTitle', {
 			category: modifier.generatorName,
@@ -160,16 +166,37 @@ function createGeneratedEmbed(result, locale = 'en', options = {}) {
 		embed.addFields(
 			Object.entries(result.displayFields).map(([name, value]) => ({
 				name: getGeneratorFieldLabel(name, locale),
-				value: String(value),
+				value: renderGeneratorValue(
+					value,
+					result.displayFieldTemplates?.[name],
+				),
 			})),
 		);
 	}
 	else {
-		embed.setDescription(
-			result.value,
-		);
+		embed.setDescription(renderGeneratorValue(result.value, result.valueTemplate));
 	}
 	return embed;
+}
+
+function renderGeneratorValue(value, template) {
+	if (!template || !Array.isArray(template.parts)) {
+		return String(value);
+	}
+	return renderGeneratorTemplate(template, false);
+}
+
+function renderGeneratorTemplate(template, nested) {
+	return template.parts.map(part => {
+		if (part.type === 'text') {
+			return part.value;
+		}
+		if (part.type !== 'reference') {
+			return '';
+		}
+		const rendered = renderGeneratorTemplate(part.template, true);
+		return nested ? `[${rendered}]` : `\`${rendered}\``;
+	}).join('');
 }
 
 function flattenGeneratedResults(result) {
