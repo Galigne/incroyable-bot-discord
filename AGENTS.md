@@ -429,8 +429,8 @@ on submit:
 - Empty multiline content clears the field.
 - Talents are stored as `string[]`; each element combines the complete
   user-editable talent name and description.
-- Creature intrinsic traits are also stored as `string[]`; each element combines
-  the complete user-editable trait name and rules description.
+- Creature intrinsic traits are stored as `string[]`; each element may contain any
+  non-empty text and does not require a name, description, or separator structure.
 - RULEs use `Name:Level:Description`, one RULE per line. Name and description are
   required, the level is a positive whole number, and descriptions may contain
   additional colons.

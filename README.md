@@ -146,10 +146,11 @@ any statistic changes.
 Personality traits, talents, creature intrinsic traits, equipment, and inventory
 use one entry per line. Optional leading `- ` or `* ` markers are normalized away,
 empty lines are ignored, and an empty submission clears the complete collection.
-Talent and creature-trait names and descriptions remain combined in each list
-entry. RULEs use `Name:Level:Description`, one per line. Each value is required, the
-level must be a positive whole number, and only the first two colons are separators,
-so descriptions may contain additional colons.
+Character talent names and descriptions remain combined in each talent entry.
+Creature intrinsic traits may contain any non-empty text and do not require a name,
+description, or separator structure. RULEs use `Name:Level:Description`, one per
+line. Each value is required, the level must be a positive whole number, and only
+the first two colons are separators, so descriptions may contain additional colons.
 
 Status Effects and Modifiers each use one `Name:Description` record per line and
 can be cleared independently. Status Effects describe temporary conditions;
