@@ -496,7 +496,7 @@ test('race, background, and personality modals prefill every separate input', ()
 	).toJSON();
 	assert.deepEqual(
 		frenchRace.components.map(component => component.label),
-		['Nom', 'Description physique', 'Lore', 'Bonus de compétence', 'Capacité physique'],
+		['Nom', 'Description physique', 'Histoire et culture', 'Bonus de compétence', 'Capacité physique'],
 	);
 	assert.match(frenchRace.components[0].description, /préremplie/);
 });

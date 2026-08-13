@@ -141,203 +141,203 @@
       "id": "municipal_museum",
       "fields": {
         "name": "Musée municipal",
-        "description": "Une collection locale mal surveillée contient un objet dont"
+        "description": "Une collection locale mal surveillée contient un objet dont l’origine officielle est mensongère."
       }
     },
     {
       "id": "library",
       "fields": {
         "name": "Bibliothèque",
-        "description": "Les ouvrages les plus consultés ont tous perdu la même page,"
+        "description": "Les ouvrages les plus consultés ont tous perdu la même page, tandis qu’une étagère scellée semble encore visitée."
       }
     },
     {
       "id": "general_store",
       "fields": {
         "name": "Magasin général",
-        "description": "Une échoppe encombrée où le propriétaire connaît les besoins"
+        "description": "Une échoppe encombrée où le propriétaire connaît les besoins des visiteurs avant qu’ils ne les expriment."
       }
     },
     {
       "id": "guardhouse",
       "fields": {
         "name": "Caserne",
-        "description": "Une garnison sous tension tente de dissimuler la disparition"
+        "description": "Une garnison sous tension dissimule la disparition répétée de ses sentinelles."
       }
     },
     {
       "id": "armory",
       "fields": {
         "name": "Armurerie",
-        "description": "Un atelier sécurisé vend et répare des armes, mais refuse"
+        "description": "Un atelier sécurisé vend et répare des armes, mais dissimule l’origine d’une commande prestigieuse."
       }
     },
     {
       "id": "town_hall",
       "fields": {
         "name": "Mairie",
-        "description": "Les registres municipaux contredisent les souvenirs des habitants au"
+        "description": "Les registres municipaux contredisent les souvenirs des habitants d’un quartier entier."
       }
     },
     {
       "id": "crowded_tavern",
       "fields": {
         "name": "Taverne",
-        "description": "Un établissement bruyant où circulent rumeurs, contrats et messages"
+        "description": "Un établissement bruyant où s’échangent rumeurs, contrats et messages destinés à des clients absents."
       }
     },
     {
       "id": "restaurant",
       "fields": {
         "name": "Restaurant",
-        "description": "Une cuisine réputée dépend d’un ingrédient rare dont"
+        "description": "Une cuisine réputée dépend d’un ingrédient rare dont l’approvisionnement s’est interrompu."
       }
     },
     {
       "id": "roadside_inn",
       "fields": {
         "name": "Auberge",
-        "description": "Des chambres simples entourent une salle commune où voyageurs et"
+        "description": "Des chambres simples entourent une salle commune où voyageurs et habitants échangent nouvelles et soupçons."
       }
     },
     {
       "id": "town_house",
       "fields": {
         "name": "Maison de ville",
-        "description": "Une habitation mitoyenne cache des pièces dont les fenêtres"
+        "description": "Une habitation mitoyenne cache des pièces dont les fenêtres ne correspondent pas à sa façade."
       }
     },
     {
       "id": "farmstead",
       "fields": {
         "name": "Ferme isolée",
-        "description": "Les récoltes sont excellentes malgré un sol stérile et la"
+        "description": "Les cultures prospèrent dans un sol stérile, et la famille refuse toute inspection."
       }
     },
     {
       "id": "public_park",
       "fields": {
         "name": "Parc public",
-        "description": "Des statues, kiosques et allées composent à la nuit tombée un"
+        "description": "La nuit, statues, kiosques et allées dessinent un plan différent de celui que l’on voit le jour."
       }
     },
     {
       "id": "walled_garden",
       "fields": {
         "name": "Jardin clos",
-        "description": "Des plantes rares prospèrent autour d’une serre dont personne"
+        "description": "Des plantes rares prospèrent autour d’une serre dont personne n’est officiellement responsable de la clé."
       }
     },
     {
       "id": "bank",
       "fields": {
         "name": "Banque",
-        "description": "Des coffres protégés par des gardes et des sceaux contiennent aussi"
+        "description": "Des coffres protégés par des gardes et des sceaux contiennent aussi des dépôts dont les propriétaires souhaitent l’oubli."
       }
     },
     {
       "id": "monumental_fountain",
       "fields": {
         "name": "Fontaine monumentale",
-        "description": "Les offrandes jetées dans l’eau réapparaissent dans les"
+        "description": "Les offrandes jetées dans l’eau réapparaissent dans les poches d’inconnus."
       }
     },
     {
       "id": "public_square",
       "fields": {
         "name": "Place publique",
-        "description": "Marchés, proclamations et manifestations se disputent un"
+        "description": "Marchés, proclamations et manifestations se disputent l’espace sous un monument controversé."
       }
     },
     {
       "id": "church",
       "fields": {
         "name": "Église",
-        "description": "Une communauté religieuse active entretient un lieu de culte dont la"
+        "description": "Une communauté religieuse active entretient un lieu de culte dont la crypte est antérieure à la ville."
       }
     },
     {
       "id": "cathedral",
       "fields": {
         "name": "Cathédrale",
-        "description": "Un vaste édifice sert autant de centre spirituel que d’institution"
+        "description": "Une vaste institution spirituelle et politique conserve des reliques jalousement gardées."
       }
     },
     {
       "id": "great_gate",
       "fields": {
         "name": "Grande porte",
-        "description": "L’accès principal de la ville concentre gardes, taxes,"
+        "description": "L’entrée principale de la ville concentre gardes, taxes, voyageurs bloqués et marchandises suspectes."
       }
     },
     {
       "id": "bakery_and_pastry_shop",
       "fields": {
         "name": "Boulangerie-pâtisserie",
-        "description": "Le four communal fonctionne sans combustible depuis"
+        "description": "Le four communal brûle sans combustible depuis plusieurs nuits et attire des visiteurs après la fermeture."
       }
     },
     {
       "id": "butcher_and_delicatessen",
       "fields": {
         "name": "Boucherie-charcuterie",
-        "description": "Le commerce reçoit une viande inhabituelle dont le"
+        "description": "Le commerce reçoit une viande inhabituelle provenant d’un fournisseur absent de tous les registres."
       }
     },
     {
       "id": "craft_workshop",
       "fields": {
         "name": "Échoppe d’artisan",
-        "description": "Un atelier exigu fabrique un objet remarquable au prix"
+        "description": "Un atelier exigu fabrique un objet remarquable au prix de longues heures ou d’un matériau rare."
       }
     },
     {
       "id": "stable",
       "fields": {
         "name": "Écurie",
-        "description": "Montures, palefreniers et voyageurs de passage entourent un animal"
+        "description": "Montures, palefreniers et voyageurs entourent un animal dont personne ne peut approcher."
       }
     },
     {
       "id": "manor",
       "fields": {
         "name": "Manoir",
-        "description": "Une demeure prestigieuse réunit domestiques, invités et héritiers"
+        "description": "Une demeure prestigieuse réunit domestiques, invités et héritiers autour d’un secret de famille."
       }
     },
     {
       "id": "prison",
       "fields": {
         "name": "Prison",
-        "description": "L’administration affirme qu’une cellule occupée depuis des années"
+        "description": "L’administration affirme qu’une cellule occupée depuis des années n’a jamais existé."
       }
     },
     {
       "id": "secondhand_shop",
       "fields": {
         "name": "Brocante",
-        "description": "Des objets ordinaires côtoient des souvenirs volés et des reliques"
+        "description": "Des objets ordinaires côtoient des souvenirs volés et des reliques dont le vendeur ignore la véritable fonction."
       }
     },
     {
       "id": "tenement",
       "fields": {
         "name": "Immeuble populaire",
-        "description": "De nombreux foyers partagent escaliers, cour intérieure"
+        "description": "De nombreux foyers partagent escaliers, cour intérieure et querelles autour d’un appartement muré."
       }
     },
     {
       "id": "dump",
       "fields": {
         "name": "Décharge",
-        "description": "Des récupérateurs fouillent des montagnes de déchets autour d’un"
+        "description": "Des récupérateurs fouillent des montagnes de déchets autour d’un objet qui transforme lentement les matériaux voisins."
       }
     },
     {
       "id": "mechanical_scrapyard",
       "fields": {
         "name": "Casse mécanique",
-        "description": "Des carcasses de machines et de véhicules servent de"
+        "description": "Des carcasses de machines et de véhicules fournissent des pièces à un mécanicien qui les protège farouchement."
       }
     }
   ],

@@ -77,7 +77,7 @@
       "id": "quick_draw",
       "weight": 2,
       "fields": {
-        "name": "Dégainé rapide",
+        "name": "Dégainage rapide",
         "description": "Dégainer ou changer une arme préparée ne ralentit pas la première action du personnage."
       }
     },

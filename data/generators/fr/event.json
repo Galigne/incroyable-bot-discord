@@ -243,112 +243,112 @@
       "id": "sudden_tremor",
       "fields": {
         "name": "Secousse soudaine",
-        "description": "Le sol tremble assez fortement pour interrompre l’action"
+        "description": "Le sol tremble assez fortement pour interrompre les événements et révéler une fissure, un passage ou une structure fragilisée."
       }
     },
     {
       "id": "panicked_animals",
       "fields": {
         "name": "Animaux affolés",
-        "description": "Des cris se rapprochent tandis que la faune fuit une menace"
+        "description": "Des cris se rapprochent tandis que la faune fuit une menace encore invisible."
       }
     },
     {
       "id": "distress_call",
       "fields": {
         "name": "Appel de détresse",
-        "description": "Une voix demande de l’aide depuis un endroit où personne"
+        "description": "Une voix appelle à l’aide depuis un endroit où personne ne devrait survivre."
       }
     },
     {
       "id": "nauseating_odor",
       "fields": {
         "name": "Odeur nauséabonde",
-        "description": "Une puanteur inhabituelle envahit la zone et conduit vers"
+        "description": "Une puanteur inhabituelle envahit la zone et mène vers sa source tout en signalant un danger."
       }
     },
     {
       "id": "bewitching_perfume",
       "fields": {
         "name": "Parfum envoûtant",
-        "description": "Une odeur agréable altère subtilement l’attention, les"
+        "description": "Une odeur agréable modifie subtilement l’attention, les émotions ou le comportement des personnes exposées."
       }
     },
     {
       "id": "shared_pain",
       "fields": {
         "name": "Douleur partagée",
-        "description": "Plusieurs personnages ressentent simultanément le même mal"
+        "description": "Plusieurs personnes ressentent simultanément la même douleur sans blessure visible."
       }
     },
     {
       "id": "fainting",
       "fields": {
         "name": "Évanouissement",
-        "description": "Un PNJ perd connaissance au moment précis où il allait"
+        "description": "Un personnage secondaire perd connaissance juste avant de révéler une information essentielle."
       }
     },
     {
       "id": "gathering_storm",
       "fields": {
         "name": "Tempête naissante",
-        "description": "Le temps change brutalement et rend la route, le combat ou"
+        "description": "Le temps change brutalement et complique les déplacements, les combats ou la communication."
       }
     },
     {
       "id": "unexpected_arrival",
       "fields": {
         "name": "Arrivée inattendue",
-        "description": "Un nouveau PNJ se présente en affirmant connaître l’un"
+        "description": "Un nouveau venu apparaît et affirme connaître l’un des personnages depuis des années."
       }
     },
     {
       "id": "hostile_migration",
       "fields": {
         "name": "Migration hostile",
-        "description": "Plusieurs créatures surgissent dans la zone parce qu’une"
+        "description": "Plusieurs créatures entrent dans la zone après qu’une menace plus importante les a chassées de leur territoire."
       }
     },
     {
       "id": "disrupted_cycle",
       "fields": {
         "name": "Cycle bouleversé",
-        "description": "La nuit tombe ou le jour se lève plusieurs heures trop tôt,"
+        "description": "La nuit tombe ou le jour se lève plusieurs heures trop tôt, tandis que les horloges et les souvenirs se contredisent."
       }
     },
     {
       "id": "impossible_message",
       "fields": {
         "name": "Message impossible",
-        "description": "Un appel au secours provient d’une personne absente,"
+        "description": "Un appel au secours provient d’une personne absente, morte ou située à une distance impossible."
       }
     },
     {
       "id": "return_of_the_past",
       "fields": {
         "name": "Retour du passé",
-        "description": "Un événement lié à l’histoire d’un personnage réapparaît"
+        "description": "L’histoire d’un personnage revient sous la forme d’un témoin, d’une dette ou d’une accusation."
       }
     },
     {
       "id": "sudden_epidemic",
       "fields": {
         "name": "Épidémie soudaine",
-        "description": "Un membre du groupe montre les premiers signes d’une"
+        "description": "Un membre du groupe montre les premiers signes d’une maladie que les habitants reconnaissent avec terreur."
       }
     },
     {
       "id": "supplies_exhausted",
       "fields": {
         "name": "Ravitaillement épuisé",
-        "description": "La nourriture disparaît, se gâte ou devient impropre à"
+        "description": "La nourriture disparaît, se gâte ou devient immangeable au pire moment."
       }
     },
     {
       "id": "extreme_temperature",
       "fields": {
         "name": "Température extrême",
-        "description": "Une chaleur ou un froid anormal force chacun à chercher"
+        "description": "Une chaleur ou un froid anormal force chacun à chercher rapidement un abri ou une explication."
       }
     }
   ]

@@ -156,10 +156,10 @@
       "schemaDescription": "Générer et sauvegarder un personnage aléatoire complet",
       "keyOption": "Clé de sauvegarde unique, courte et facile à retenir",
       "levelOption": "Niveau du personnage ; tirage aléatoire de 1 à 10 si omis",
-      "backgroundOption": "Background du personnage ; tirage aléatoire si omis",
+      "backgroundOption": "Profil du personnage ; tirage aléatoire si omis",
       "levelChoice": "Niveau {{level}}",
       "success": "Le personnage **{{name}}** a été généré avec la clé `{{key}}`.",
-      "behavior": "Crée et sauvegarde un personnage aléatoire complet sous une CharacterKey unique. Le niveau doit être compris entre 1 et 10 et est aléatoire s’il est omis ; le Background est également facultatif et aléatoire par défaut. Le routeur public `background` sélectionne une catégorie générale, puis le résolveur générique des références v3 sélectionne indépendamment un archétype et une description physique réutilisable. L’histoire personnelle et les objectifs commencent vides. Un profil statistique partagé répartit les statistiques, tandis que les ressources, LOI, armure, armes, objets, pièces d’or, effets d’état temporaires et modificateurs persistants du pool de personnages suivent le niveau choisi et les règles du jeu. L’encombrement reste manuel et vaut 0 / 0 par défaut."
+      "behavior": "Crée et sauvegarde un personnage aléatoire complet sous une CharacterKey unique. Le niveau est compris entre 1 et 10 et tiré aléatoirement s’il est omis ; le profil est également facultatif et choisi aléatoirement par défaut. Le profil sélectionné détermine le générateur d’archétype, tandis que la description physique est générée indépendamment. L’histoire personnelle et les objectifs commencent vides. Un profil statistique partagé répartit les statistiques, tandis que les ressources, LOI, armure, armes, objets, pièces d’or, effets d’état temporaires et modificateurs persistants propres aux personnages suivent le niveau choisi et les règles du jeu. L’encombrement reste manuel et vaut 0 / 0 par défaut."
     },
     "genCreature": {
       "description": "Générer une créature (rôle MJ configuré ou propriétaire du serveur)",
@@ -169,7 +169,7 @@
       "levelOption": "Niveau de la créature ; tirage aléatoire de 1 à 10 si omis",
       "levelChoice": "Niveau {{level}}",
       "success": "La créature **{{name}}** a été générée et sauvegardée avec la CreatureKey `{{key}}`.",
-      "behavior": "Crée et sauvegarde atomiquement une créature complète en résolvant une entrée de type stable facultative du catalogue public `creature`, ou en en tirant une au hasard si le type est omis, puis en suivant le générateur de détail référencé. La CreatureKey est unique parmi toutes les entités et le niveau doit être compris entre 1 et 10, ou est tiré au hasard s’il est omis. Les profils statistiques partagés répartissent les statistiques et calculent les ressources dérivées ; seules des références explicites peuvent accorder des LOI. Les effets d’état temporaires proviennent du catalogue des effets d’état, tandis que les modificateurs persistants proviennent uniquement du pool de créatures. L’équipement, l’inventaire, l’armure naturelle et les métadonnées d’armure sont résolus puis conservés avec une provenance stable. L’encombrement reste manuel et vaut 0 / 0 par défaut. Seuls un MJ configuré ou le propriétaire du serveur peuvent utiliser cette commande."
+      "behavior": "Crée et sauvegarde atomiquement une créature complète. Si un type est précisé, la créature est générée dans cette catégorie ; sinon, une catégorie est choisie aléatoirement. La CreatureKey est unique parmi toutes les entités et le niveau est compris entre 1 et 10, ou tiré aléatoirement s’il est omis. Des profils statistiques partagés répartissent les statistiques et calculent les ressources dérivées ; les LOI ne sont accordées que lorsqu’elles sont prévues explicitement. Les effets d’état temporaires proviennent du catalogue des effets d’état, tandis que les modificateurs persistants viennent du catalogue propre aux créatures. L’équipement, l’inventaire et l’armure naturelle sont déterminés par la créature choisie. L’encombrement reste manuel et vaut 0 / 0 par défaut. Seuls un MJ configuré ou le propriétaire du serveur peuvent utiliser cette commande."
     },
     "get": {
       "description": "Afficher le résumé d’une entité ou le détail d’un champ compatible",
@@ -266,7 +266,7 @@
         "current": "Actuel",
         "maximum": "Maximum",
         "physicalDescription": "Description physique",
-        "lore": "Lore",
+        "lore": "Histoire et culture",
         "skillBonus": "Bonus de compétence",
         "physicalAbility": "Capacité physique",
         "description": "Description",
@@ -320,12 +320,12 @@
       "race": "Race",
       "raceName": "Nom de la race",
       "racePhysicalDescription": "Description physique de la race",
-      "raceLore": "Lore de la race",
-      "backgroundArchetype": "Archétype du background",
-      "backgroundPhysicalDescription": "Description physique du background",
+      "raceLore": "Histoire et culture de la race",
+      "backgroundArchetype": "Archétype du profil",
+      "backgroundPhysicalDescription": "Description physique du profil",
       "backstory": "Histoire personnelle",
       "goals": "Objectifs",
-      "background": "Background",
+      "background": "Profil",
       "personality": "Personnalité",
       "modifiers": "Modificateurs descriptifs",
       "personalityDescription": "Description de la personnalité",
@@ -436,7 +436,7 @@
     "damageInvalid": "Le nombre de dégâts doit être un nombre entier positif.",
     "piercingInvalid": "La valeur de l’option `piercing` doit être `true` ou `false`.",
     "characterLevelInvalid": "Le niveau du personnage doit être un nombre entier compris entre 1 et 10.",
-    "backgroundUnknown": "Background inconnu : {{background}}.",
+    "backgroundUnknown": "Profil inconnu : {{background}}.",
     "generatorMissing": "Catégorie de génération manquante : {{category}}.",
     "generatorNeedsEntries": "La catégorie {{category}} doit proposer au moins {{count}} entrées admissibles.",
     "generatorStructuredExpected": "Cette génération nécessite une entrée structurée contenant le champ {{field}}.",

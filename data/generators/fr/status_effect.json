@@ -2,7 +2,7 @@
   "schemaVersion": 3,
   "id": "status_effect",
   "visibility": "public",
-  "name": "effet de statut",
+  "name": "Effets d’état",
   "description": "États descriptifs pouvant affecter un personnage ou une créature",
   "entrySchema": {
     "type": "fields",
@@ -110,7 +110,7 @@
       "weight": 2,
       "fields": {
         "name": "Confus",
-        "description": "distingue difficilement alliés, ennemis et directions."
+        "description": "Le personnage distingue difficilement ses alliés, ses ennemis et les directions."
       }
     },
     {
@@ -124,7 +124,7 @@
     {
       "id": "stunned",
       "fields": {
-        "name": "Incapacité",
+        "name": "Sonné",
         "description": "perd temporairement la possibilité d’effectuer des actions normales."
       }
     },
@@ -195,35 +195,35 @@
       "id": "distracted",
       "fields": {
         "name": "Distrait",
-        "description": "Le personnage perd le fil de son environnement et subit un"
+        "description": "Le personnage perd le fil de son environnement et subit un désavantage à sa prochaine action exigeant une attention soutenue."
       }
     },
     {
       "id": "drunk",
       "fields": {
         "name": "Ivre",
-        "description": "La coordination et le jugement sont altérés jusqu’à ce que le"
+        "description": "La coordination et le jugement sont altérés jusqu’au repos ou à un traitement adapté."
       }
     },
     {
       "id": "intoxicated",
       "fields": {
         "name": "Intoxiqué",
-        "description": "Une substance inconnue modifie les perceptions ou réactions du"
+        "description": "Une substance inconnue altère les perceptions ou les réactions ; l’effet exact dépend du produit."
       }
     },
     {
       "id": "feverish",
       "fields": {
         "name": "Fiévreux",
-        "description": "La maladie épuise le personnage et rend les efforts prolongés plus"
+        "description": "La maladie épuise le personnage et rend les efforts prolongés plus difficiles."
       }
     },
     {
       "id": "meditative",
       "fields": {
         "name": "Méditatif",
-        "description": "Le personnage est profondément concentré ; l’interrompre annule"
+        "description": "Le personnage est profondément concentré ; l’interrompre met fin au bénéfice recherché et provoque une brève désorientation."
       }
     }
   ]

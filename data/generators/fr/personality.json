@@ -213,7 +213,7 @@
     },
     {
       "id": "chaotically_unpredictable",
-      "value": "Cinglé, agit de manière chaotique et imprévisible, en suivant une logique que les autres peinent à comprendre sur le moment.",
+      "value": "Imprévisible, agit de manière chaotique en suivant une logique que les autres peinent à comprendre sur le moment.",
       "weight": 2
     },
     {
@@ -328,7 +328,7 @@
     },
     {
       "id": "foolish",
-      "value": "Idiot, manque de jugement, comprend régulièrement les situations de travers et s’engage avec assurance dans de mauvaises décisions.",
+      "value": "Insensé, manque de jugement, comprend régulièrement les situations de travers et s’engage avec assurance dans de mauvaises décisions.",
       "weight": 2
     },
     {
@@ -397,7 +397,7 @@
     },
     {
       "id": "pacifist",
-      "value": "Pacifique, recherche toujours une solution sans violence mais se prépare soigneusement au cas où elle échouerait.",
+      "value": "Pacifiste, recherche toujours une solution sans violence mais se prépare soigneusement au cas où elle échouerait.",
       "weight": 2
     },
     {
@@ -411,7 +411,7 @@
     },
     {
       "id": "sexually_inappropriate",
-      "value": "Pervers sexuel, ramène fréquemment les échanges à des sous-entendus ou préoccupations sexuelles et franchit volontiers les limites de la bienséance.",
+      "value": "Sexuellement déplacé, ramène fréquemment les échanges à des sous-entendus ou préoccupations sexuelles et franchit volontiers les limites de la bienséance.",
       "weight": 2
     },
     {

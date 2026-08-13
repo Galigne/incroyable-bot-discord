@@ -165,56 +165,56 @@
       "id": "forgotten_ruins",
       "fields": {
         "name": "Ruines oubliées",
-        "description": "Les restes instables d’un domaine abandonné, encore protégés"
+        "description": "Les vestiges instables d’un domaine abandonné restent protégés par des pièges, des gardiens ou des serments."
       }
     },
     {
       "id": "abandoned_mine",
       "fields": {
         "name": "Mine condamnée",
-        "description": "Des galeries désertées après un accident dont les causes"
+        "description": "Des galeries désertées après un accident dont la cause officielle contredit les traces découvertes plus bas."
       }
     },
     {
       "id": "inhabited_cave",
       "fields": {
         "name": "Grotte habitée",
-        "description": "Un réseau naturel occupé par une créature, une communauté ou"
+        "description": "Un réseau naturel aménagé par une créature, une communauté ou des fugitifs."
       }
     },
     {
       "id": "prison_complex",
       "fields": {
         "name": "Prison désaffectée",
-        "description": "Des cellules, archives et passages de service où demeure"
+        "description": "Des cellules, des archives et des passages de service conservent les preuves d’une détention effacée de l’histoire."
       }
     },
     {
       "id": "sewer_labyrinth",
       "fields": {
         "name": "Égouts anciens",
-        "description": "Un réseau plus vaste que la ville actuelle, reliant citernes,"
+        "description": "Un réseau plus vaste que la ville actuelle relie citernes, cryptes et fondations interdites."
       }
     },
     {
       "id": "desecrated_cemetery",
       "fields": {
         "name": "Cimetière profané",
-        "description": "Des tombes ouvertes et des monuments déplacés autour d’un"
+        "description": "Des tombes ouvertes et des monuments déplacés entourent un caveau que quelqu’un tente d’atteindre."
       }
     },
     {
       "id": "anomalous_crater",
       "fields": {
         "name": "Cratère anormal",
-        "description": "Une dépression récente où la pierre, la magie ou le temps se"
+        "description": "Une dépression récente où la pierre, la magie ou le temps se comportent différemment."
       }
     },
     {
       "id": "ruined_sanctuary",
       "fields": {
         "name": "Sanctuaire en ruine",
-        "description": "Une chapelle ou un temple abandonné dont les rites"
+        "description": "Une chapelle ou un temple abandonné dont les rites produisent encore des effets sans officiant."
       }
     }
   ],

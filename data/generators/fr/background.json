@@ -2,8 +2,8 @@
   "schemaVersion": 3,
   "id": "background",
   "visibility": "public",
-  "name": "Backgrounds",
-  "description": "Catégories de background",
+  "name": "Profils",
+  "description": "Catégories de profils de personnage",
   "entrySchema": {
     "type": "fields",
     "required": ["name", "description", "generator"],

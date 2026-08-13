@@ -400,7 +400,7 @@
       "id": "solar_lizard",
       "fields": {
         "name": "Lézard solaire",
-        "description": "Un reptile placide qui stocke la chaleur dans ses écailles et"
+        "description": "Un reptile placide qui stocke la chaleur dans ses écailles et recherche les surfaces exposées au soleil."
       },
       "generation": {
         "statProfile": "creature-predator",
@@ -419,7 +419,7 @@
       "id": "reed_snake",
       "fields": {
         "name": "Serpent des roseaux",
-        "description": "Un serpent aquatique discret dont la morsure est"
+        "description": "Un serpent aquatique discret dont la morsure est douloureuse mais rarement mortelle."
       },
       "generation": {
         "statProfile": "creature-predator",
@@ -436,7 +436,7 @@
       "id": "scavenger_rat",
       "fields": {
         "name": "Rat récupérateur",
-        "description": "Un rongeur curieux qui emporte petits outils, boutons et"
+        "description": "Un rongeur curieux qui emporte petits outils, boutons et objets brillants vers un nid étonnamment bien organisé."
       },
       "generation": {
         "statProfile": "creature-predator",
@@ -453,7 +453,7 @@
       "id": "weaver_spider",
       "fields": {
         "name": "Araignée tisseuse",
-        "description": "Une grosse araignée non agressive dont la toile solide est"
+        "description": "Une grosse araignée non agressive dont la toile résistante est recherchée par les artisans."
       },
       "generation": {
         "statProfile": "creature-predator",
@@ -470,7 +470,7 @@
       "id": "hill_wolf",
       "fields": {
         "name": "Loup des collines",
-        "description": "Un prédateur social prudent qui observe longtemps un"
+        "description": "Un prédateur social prudent qui observe longuement un groupe avant de décider de l’éviter ou de s’en approcher."
       },
       "generation": {
         "statProfile": "creature-predator",
@@ -487,7 +487,7 @@
       "id": "armored_crab",
       "fields": {
         "name": "Crabe cuirassé",
-        "description": "Un crustacé de grande taille utilisant débris et coquillages"
+        "description": "Un grand crustacé qui renforce sa carapace avec des débris et des coquillages."
       },
       "generation": {
         "statProfile": "creature-brute",
@@ -504,7 +504,7 @@
       "id": "burrowing_armadillo",
       "fields": {
         "name": "Tatou fouisseur",
-        "description": "Un animal robuste capable de localiser eau, racines et"
+        "description": "Un animal robuste capable de localiser l’eau, les racines et les cavités sous un sol sec."
       },
       "generation": {
         "statProfile": "creature-brute",
@@ -521,7 +521,7 @@
       "id": "thieving_monkey",
       "fields": {
         "name": "Singe chapardeur",
-        "description": "Un animal intelligent qui échange volontiers les objets"
+        "description": "Un animal intelligent qui échange volontiers les objets volés contre de la nourriture ou de nouvelles curiosités."
       },
       "generation": {
         "statProfile": "creature-predator",
@@ -540,7 +540,7 @@
       "id": "cave_bat",
       "fields": {
         "name": "Chauve-souris cavernicole",
-        "description": "Un petit animal nocturne dont les mouvements"
+        "description": "Un petit animal nocturne dont les mouvements révèlent les courants d’air et les passages cachés."
       },
       "generation": {
         "statProfile": "creature-predator",

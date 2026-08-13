@@ -493,7 +493,7 @@
       "id": "messenger_raptor",
       "fields": {
         "name": "Rapace messager",
-        "description": "Un oiseau territorial pouvant être dressé à reconnaître des"
+        "description": "Un oiseau territorial pouvant être dressé à reconnaître des personnes, des emblèmes et des itinéraires."
       },
       "generation": {
         "statProfile": "creature-companion",

@@ -222,7 +222,7 @@
       "id": "corporate_colony",
       "weight": 1,
       "fields": {
-        "name": "Colonie corporative",
+        "name": "Colonie administrée par une compagnie",
         "structure": "Une compagnie à charte possède les infrastructures et exerce l'autorité publique.",
         "leadership": "Un gouverneur nommé répond de ses actes devant des actionnaires lointains.",
         "strength": "Des investissements efficaces et une exploitation rapide des ressources.",

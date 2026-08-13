@@ -578,7 +578,7 @@
       "id": "ash_phoenix",
       "fields": {
         "name": "Phénix de cendre",
-        "description": "Un grand oiseau incandescent renaît d’un foyer voisin en"
+        "description": "Un grand oiseau incandescent renaît d’un foyer voisin en portant les souvenirs de ceux qui ont nourri la flamme."
       },
       "generation": {
         "statProfile": "creature-elemental",
@@ -610,7 +610,7 @@
       "id": "juvenile_ogre",
       "fields": {
         "name": "Ogre juvénile",
-        "description": "Un jeune géant affamé imite le comportement d’adultes absents"
+        "description": "Un jeune géant affamé imite des adultes absents et transforme chaque jeu en véritable danger."
       },
       "generation": {
         "statProfile": "creature-brute",
@@ -627,7 +627,7 @@
       "id": "hungry_changeling",
       "fields": {
         "name": "Changelin affamé",
-        "description": "Une créature copie l’apparence d’une personne mais comprend"
+        "description": "Une créature copie l’apparence d’une personne mais comprend mal ses habitudes et ses liens."
       },
       "generation": {
         "statProfile": "creature-caster",
@@ -651,7 +651,7 @@
       "id": "imp",
       "fields": {
         "name": "Diablotin",
-        "description": "Un petit démon propose des marchés insignifiants dont les"
+        "description": "Un petit démon propose des marchés insignifiants dont la formulation dissimule des conséquences disproportionnées."
       },
       "generation": {
         "statProfile": "creature-caster",
@@ -668,7 +668,7 @@
       "id": "dissolving_ooze",
       "fields": {
         "name": "Limon dissolvant",
-        "description": "Une masse lente digère matière organique et métal tendre,"
+        "description": "Une masse lente digère la matière organique et le métal tendre, laissant intacts les objets qu’elle ne comprend pas."
       },
       "generation": {
         "statProfile": "creature-brute",
@@ -689,7 +689,7 @@
       "id": "uprooted_treant",
       "fields": {
         "name": "Tréant déraciné",
-        "description": "Un gardien végétal marche loin de sa forêt parce que les"
+        "description": "Un gardien végétal s’éloigne de sa forêt parce que les racines de son territoire ont été empoisonnées."
       },
       "generation": {
         "statProfile": "creature-brute",
@@ -714,7 +714,7 @@
       "id": "stubborn_undead",
       "fields": {
         "name": "Mort-vivant obstiné",
-        "description": "Un cadavre animé poursuit une tâche quotidienne sans"
+        "description": "Un cadavre animé poursuit une tâche quotidienne sans comprendre que le monde a changé."
       },
       "generation": {
         "statProfile": "creature-brute",
@@ -734,7 +734,7 @@
       "id": "patrol_skeleton",
       "fields": {
         "name": "Squelette de patrouille",
-        "description": "Des ossements armés répètent encore un itinéraire"
+        "description": "Des ossements armés répètent un itinéraire militaire et considèrent toute entorse au protocole comme une intrusion."
       },
       "generation": {
         "statProfile": "creature-brute",
@@ -760,7 +760,7 @@
       "id": "mutant_animal",
       "fields": {
         "name": "Animal mutant",
-        "description": "Une bête ordinaire porte une adaptation impossible provoquée"
+        "description": "Une bête ordinaire porte une adaptation impossible provoquée par une pollution magique ou alchimique."
       },
       "generation": {
         "statProfile": "creature-predator",
@@ -777,7 +777,7 @@
       "id": "abandoned_golem",
       "fields": {
         "name": "Golem abandonné",
-        "description": "Un serviteur artificiel continue d’appliquer un ordre devenu"
+        "description": "Un serviteur artificiel continue d’exécuter un ordre devenu dangereux en l’absence d’un maître capable de le modifier."
       },
       "generation": {
         "statProfile": "creature-brute",
@@ -798,7 +798,7 @@
       "id": "imp_chicken",
       "fields": {
         "name": "Poulet diablotin",
-        "description": "Une volaille possédée manifeste une agressivité absurde,"
+        "description": "Une volaille possédée manifeste une agressivité absurde, des bonds surnaturels et une résistance sans commune mesure avec sa taille."
       },
       "generation": {
         "statProfile": "creature-predator",
@@ -818,7 +818,7 @@
       "id": "giant_insect",
       "fields": {
         "name": "Insecte géant",
-        "description": "Un arthropode colossal défend un nid construit autour d’une"
+        "description": "Un arthropode colossal défend un nid construit autour d’une source de chaleur ou de magie."
       },
       "generation": {
         "statProfile": "creature-brute",
@@ -835,7 +835,7 @@
       "id": "animated_statue",
       "fields": {
         "name": "Statue animée",
-        "description": "Une sculpture quitte son socle pour corriger toute personne"
+        "description": "Une sculpture quitte son socle pour corriger toute personne qui contredit la version officielle de l’événement qu’elle représente."
       },
       "generation": {
         "statProfile": "creature-brute",
@@ -856,7 +856,7 @@
       "id": "voracious_slug",
       "fields": {
         "name": "Limace vorace",
-        "description": "Une créature lente sécrète une substance capable de dissoudre"
+        "description": "Une créature lente sécrète une substance qui dissout murs, armures ou souvenirs selon son alimentation."
       },
       "generation": {
         "statProfile": "creature-brute",
@@ -875,7 +875,7 @@
       "id": "fiery_salamander",
       "fields": {
         "name": "Salamandre ardente",
-        "description": "Un reptile surnaturel vit dans les flammes et propage"
+        "description": "Un reptile surnaturel vit dans les flammes et propage involontairement le feu lorsqu’il prend peur."
       },
       "generation": {
         "statProfile": "creature-elemental",
@@ -903,7 +903,7 @@
       "id": "cliff_harpy",
       "fields": {
         "name": "Harpie des falaises",
-        "description": "Une prédatrice ailée imite les appels familiers pour"
+        "description": "Une prédatrice ailée imite des appels familiers pour attirer les voyageurs sur un terrain dangereux."
       },
       "generation": {
         "statProfile": "creature-predator",
@@ -923,7 +923,7 @@
       "id": "murky_water_siren",
       "fields": {
         "name": "Sirène des eaux troubles",
-        "description": "Une créature aquatique utilise chants et reflets"
+        "description": "Une créature aquatique utilise chants et reflets pour isoler une cible du groupe."
       },
       "generation": {
         "statProfile": "creature-caster",
@@ -949,7 +949,7 @@
       "id": "watcher_cyclops",
       "fields": {
         "name": "Cyclope veilleur",
-        "description": "Un géant solitaire garde un passage dont il a oublié la"
+        "description": "Un géant solitaire garde un passage dont la destination a été oubliée, mais dont l’interdiction demeure."
       },
       "generation": {
         "statProfile": "creature-brute",
@@ -969,7 +969,7 @@
       "id": "hungry_vampire",
       "fields": {
         "name": "Vampire affamé",
-        "description": "Un prédateur immortel tente de préserver une façade civile"
+        "description": "Un prédateur immortel maintient une façade civilisée tandis que la pénurie rend son contrôle de plus en plus fragile."
       },
       "generation": {
         "statProfile": "creature-caster",
@@ -995,7 +995,7 @@
       "id": "memory_parasite",
       "fields": {
         "name": "Parasite mémoriel",
-        "description": "Une petite créature se nourrit de souvenirs récents et"
+        "description": "Une petite créature se nourrit de souvenirs récents et laisse ses victimes incapables d’expliquer sa présence."
       },
       "generation": {
         "statProfile": "creature-caster",
@@ -1020,7 +1020,7 @@
       "id": "repetitive_ghost",
       "fields": {
         "name": "Fantôme répétitif",
-        "description": "Un esprit rejoue une scène incomplète et devient violent"
+        "description": "Un esprit rejoue une scène incomplète et devient violent lorsque des témoins en modifient le déroulement."
       },
       "generation": {
         "statProfile": "creature-caster",
@@ -1046,7 +1046,7 @@
       "id": "unstable_chimera",
       "fields": {
         "name": "Chimère instable",
-        "description": "Plusieurs anatomies incompatibles luttent pour contrôler"
+        "description": "Plusieurs anatomies incompatibles luttent pour contrôler un même corps créé artificiellement."
       },
       "generation": {
         "statProfile": "creature-brute",
@@ -1066,7 +1066,7 @@
       "id": "unleashed_elemental",
       "fields": {
         "name": "Élémentaire déchaîné",
-        "description": "Une force naturelle animée cherche à rétablir un"
+        "description": "Une force naturelle animée cherche à rétablir l’équilibre sans comprendre les vies qui se trouvent sur son chemin."
       },
       "generation": {
         "statProfile": "creature-elemental",
@@ -1083,7 +1083,7 @@
       "id": "territorial_gargoyle",
       "fields": {
         "name": "Gargouille territoriale",
-        "description": "Une sentinelle de pierre change de bâtiment chaque"
+        "description": "Une sentinelle de pierre change de bâtiment chaque nuit et considère chacun de ses nouveaux emplacements comme sacré."
       },
       "generation": {
         "statProfile": "creature-brute",
@@ -1100,7 +1100,7 @@
       "id": "highland_griffin",
       "fields": {
         "name": "Griffon des hauteurs",
-        "description": "Un prédateur majestueux protège son aire et les objets"
+        "description": "Un prédateur majestueux protège son aire et les objets brillants qu’il prend pour des œufs."
       },
       "generation": {
         "statProfile": "creature-predator",
@@ -1117,7 +1117,7 @@
       "id": "reclusive_gorgon",
       "fields": {
         "name": "Gorgone recluse",
-        "description": "Une créature maudite pétrifie par peur davantage que par"
+        "description": "Une créature maudite pétrifie davantage par peur que par cruauté et collectionne les statues de ses visiteurs."
       },
       "generation": {
         "statProfile": "creature-caster",
@@ -1141,7 +1141,7 @@
       "id": "hunted_werewolf",
       "fields": {
         "name": "Loup-garou traqué",
-        "description": "Une personne transformée tente de guider les chasseurs loin"
+        "description": "Une personne transformée entraîne les chasseurs loin de ses proches avant de perdre le contrôle."
       },
       "generation": {
         "statProfile": "creature-predator",
@@ -1162,7 +1162,7 @@
       "id": "guardian_mummy",
       "fields": {
         "name": "Momie gardienne",
-        "description": "Un ancien dignitaire préserve un lieu, un serment ou une"
+        "description": "Un ancien dignitaire préserve un lieu, un serment ou une erreur que ses descendants préféreraient oublier."
       },
       "generation": {
         "statProfile": "creature-brute",
@@ -1182,7 +1182,7 @@
       "id": "architect_minotaur",
       "fields": {
         "name": "Minotaure architecte",
-        "description": "Une créature modifie continuellement son labyrinthe et"
+        "description": "Une créature modifie sans cesse son labyrinthe et considère chaque voyageur égaré comme un intrus volontaire."
       },
       "generation": {
         "statProfile": "creature-brute",
@@ -1202,7 +1202,7 @@
       "id": "giant_burrowing_worm",
       "fields": {
         "name": "Ver fouisseur géant",
-        "description": "Un prédateur souterrain suit vibrations et chaleur,"
+        "description": "Un prédateur souterrain suit les vibrations et la chaleur, provoquant effondrements et déplacements du sol."
       },
       "generation": {
         "statProfile": "creature-brute",
@@ -1219,7 +1219,7 @@
       "id": "carnivorous_plant",
       "fields": {
         "name": "Plante carnivore",
-        "description": "Une colonie végétale imite odeurs, voix et silhouettes afin"
+        "description": "Une colonie végétale imite odeurs, voix et silhouettes pour attirer ses proies."
       },
       "generation": {
         "statProfile": "creature-brute",
@@ -1239,7 +1239,7 @@
       "id": "ancient_dragon",
       "fields": {
         "name": "Dragon ancien",
-        "description": "Une créature immensément puissante protège moins un trésor"
+        "description": "Une créature immensément puissante protège davantage un secret capable de façonner une région qu’un trésor matériel."
       },
       "generation": {
         "statProfile": "creature-caster",
@@ -1260,7 +1260,7 @@
       "id": "shoal_kraken",
       "fields": {
         "name": "Kraken des hauts-fonds",
-        "description": "Un monstre marin bloque une route commerciale en"
+        "description": "Un monstre marin bloque une route commerciale et construit un nid à partir d’épaves."
       },
       "generation": {
         "statProfile": "creature-brute",
@@ -1281,7 +1281,7 @@
       "id": "migrating_behemoth",
       "fields": {
         "name": "Béhémoth migrateur",
-        "description": "Une créature gigantesque traverse périodiquement les"
+        "description": "Une créature gigantesque traverse périodiquement des communautés bâties sur son ancienne route migratoire."
       },
       "generation": {
         "statProfile": "creature-brute",
@@ -1298,7 +1298,7 @@
       "id": "vengeful_spirit",
       "fields": {
         "name": "Esprit vengeur",
-        "description": "Une entité liée à une injustice précise frappe les symboles"
+        "description": "Une entité liée à une injustice précise frappe les symboles du coupable plutôt que ses véritables héritiers."
       },
       "generation": {
         "statProfile": "creature-caster",
@@ -1329,7 +1329,7 @@
       "id": "insect_queen",
       "fields": {
         "name": "Reine insecte",
-        "description": "Une créature intelligente coordonne une colonie et négocie"
+        "description": "Une créature intelligente coordonne une colonie et négocie comme si chaque individu faisait partie de son propre corps."
       },
       "generation": {
         "statProfile": "creature-caster",

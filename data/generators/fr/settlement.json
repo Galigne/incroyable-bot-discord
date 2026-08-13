@@ -133,70 +133,70 @@
       "id": "farming_hamlet",
       "fields": {
         "name": "Village agricole",
-        "description": "Une petite communauté centrée sur les granges, le moulin,"
+        "description": "Une petite communauté centrée sur les granges, le moulin, un marché hebdomadaire et des terres communes."
       }
     },
     {
       "id": "walled_market_town",
       "fields": {
         "name": "Ville marchande",
-        "description": "Un centre régional animé par les guildes, les entrepôts, les"
+        "description": "Un centre régional façonné par les guildes, les entrepôts, les taxes et les rivalités commerciales."
       }
     },
     {
       "id": "coastal_city",
       "fields": {
         "name": "Port fortifié",
-        "description": "Des quais protégés par des tours, une capitainerie exigeante et"
+        "description": "Des quais protégés par des tours, une capitainerie exigeante et des quartiers de marins venus de loin."
       }
     },
     {
       "id": "nomad_encampment",
       "fields": {
         "name": "Campement nomade",
-        "description": "Des habitations mobiles organisées autour des troupeaux,"
+        "description": "Des habitations mobiles organisées autour des troupeaux, des artisans et d’un conseil de clan."
       }
     },
     {
       "id": "siege_camp",
       "fields": {
         "name": "Camp militaire",
-        "description": "Une implantation temporaire de soldats, d’ingénieurs, de"
+        "description": "Une implantation temporaire de soldats, d’ingénieurs, de soigneurs et de fournisseurs civils."
       }
     },
     {
       "id": "royal_capital",
       "fields": {
         "name": "Capitale",
-        "description": "Une métropole où palais, administrations, casernes, marchés et"
+        "description": "Une métropole où palais, administrations, casernes, marchés et quartiers pauvres se disputent l’espace."
       }
     },
     {
       "id": "underground_city",
       "fields": {
         "name": "Ville souterraine",
-        "description": "Une communauté construite autour de puits, de cavernes et"
+        "description": "Une communauté privée de lumière construite autour de puits, de cavernes et de machines anciennes."
       }
     },
     {
       "id": "floating_settlement",
       "fields": {
         "name": "Ville flottante",
-        "description": "Des navires et plateformes reliés en permanence autour d’un"
+        "description": "Des navires et des plateformes reliés en permanence autour d’un mouillage, d’un récif ou d’une créature gigantesque."
       }
     },
     {
       "id": "slum",
       "fields": {
         "name": "Bidonville",
-        "description": "Un quartier dense bâti avec des matériaux récupérés, animé par"
+        "description": "Un quartier dense bâti avec des matériaux récupérés et gouverné par des réseaux d’entraide et des autorités informelles."
       }
     },
     {
       "id": "tribal_enclave",
       "fields": {
         "name": "Enclave tribale",
-        "description": "Une communauté resserrée autour d’une tradition, d’un"
+        "description": "Une communauté soudée autour d’une tradition, d’un territoire sacré et d’une autorité coutumière."
       }
     }
   ],

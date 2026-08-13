@@ -142,7 +142,7 @@
         "name": "Armure lourde commune",
         "type": "heavy",
         "rarity": "common",
-        "description": "Une combinaison complète de base de plaque ou une protection massive similaire.",
+        "description": "Une armure de plates complète et basique, ou une protection massive équivalente.",
         "constitution_requirement": 14,
         "ar_percentage": 45
       }

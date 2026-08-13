@@ -84,7 +84,7 @@
     {
       "id": "avian",
       "fields": {
-        "name": "Avian",
+        "name": "Peuple aviaire",
         "description": "Un peuple à plumes vivant sur les hauteurs et accordant une grande importance aux courants, aux distances et aux messages.",
         "skill_bonus": "Observation à longue distance et orientation aérienne.",
         "physical_ability": "Vol plané permettant de ralentir une chute et franchir de courtes distances."
