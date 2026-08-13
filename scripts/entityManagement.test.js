@@ -555,7 +555,7 @@ test('character and creature field orders stay explicit and type-compatible', as
 	);
 	assert.deepEqual((await getEntity(entityKey)).traits, [
 		'Keen Scent — Tracks across stone',
-		'Night Eyes — Sees in darkness',
+		'- Night Eyes — Sees in darkness',
 	]);
 	const characterKey = 'Character.Modifiers';
 	await createEntity(characterKey, 'owner', 'character');

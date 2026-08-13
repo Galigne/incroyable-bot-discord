@@ -158,7 +158,7 @@ function createFieldEditor({
 	function parseMultilineValue(field, submittedValue) {
 		return submittedValue
 			.split(/\r?\n/)
-			.map(line => line.trim().replace(/^[-*]\s+/, ''))
+			.map(line => line.trim())
 			.filter(Boolean)
 			.map(line => parseMultilineEntry(field, line));
 	}

@@ -59,7 +59,7 @@ function copyTalentList(value) {
 	}
 	return value
 		.split(/\r?\n/)
-		.map(line => line.trim().replace(/^[-*]\s+/, ''))
+		.map(line => line.trim())
 		.filter(Boolean);
 }
 

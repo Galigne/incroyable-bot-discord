@@ -175,15 +175,15 @@ test('name, status, and gear groups are prefilled and trim valid submissions', (
 	});
 	assert.deepEqual(character.status, {
 		effects: [
-			{ name: 'Inspired', description: 'Temporary inspiration' },
-			{ name: 'Hidden', description: 'Concealed from view' },
+			{ name: '- Inspired', description: 'Temporary inspiration' },
+			{ name: '* Hidden', description: 'Concealed from view' },
 		],
 		modifiers: [
-			{ name: 'Scarred', description: 'Old wounds remain visible' },
-			{ name: 'Pale', description: 'Unnaturally pale coloring' },
+			{ name: '- Scarred', description: 'Old wounds remain visible' },
+			{ name: '* Pale', description: 'Unnaturally pale coloring' },
 		],
 	});
-	assert.deepEqual(character.gear.equipment, ['Sword', 'Shield']);
+	assert.deepEqual(character.gear.equipment, ['- Sword', '* Shield']);
 	assert.deepEqual(character.gear.inventory, ['Potion']);
 	assert.deepEqual(character.gear.encumbrance, { current: 2, max: 15 });
 	setEditableFieldValue(character, 'resources', {
@@ -384,7 +384,7 @@ test('multi-input groups replace every stored target together', () => {
 	assert.equal(character.background.goals, 'Map the lost roads');
 	assert.deepEqual(character.personality, {
 		description: 'Quiet and curious',
-		traits: ['Patient', 'Observant'],
+		traits: ['- Patient', '* Observant'],
 	});
 
 	const before = JSON.stringify(character);
@@ -438,7 +438,7 @@ test('RULE parsing requires all values, uses two separators, and is atomic', () 
 	}
 });
 
-test('multiline lists replace, normalize, serialize, and clear their collections', () => {
+test('multiline collections use one entry per line, trim, serialize, and clear', () => {
 	for (const [field, property] of [['talents', 'talents']]) {
 		const character = new Character(`List-${field}`, 'tester');
 		const outcome = setEditableFieldValue(
@@ -448,12 +448,12 @@ test('multiline lists replace, normalize, serialize, and clear their collections
 		);
 		assert.deepEqual(
 			character[property],
-			['First complete entry', 'Second complete entry'],
+			['- First complete entry', '* Second complete entry'],
 			field,
 		);
 		assert.equal(
 			getEditableFieldValue(character, field),
-			'First complete entry\nSecond complete entry',
+			'- First complete entry\n* Second complete entry',
 			field,
 		);
 		assert.deepEqual(outcome, {

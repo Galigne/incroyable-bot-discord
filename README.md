@@ -144,8 +144,8 @@ order but must each appear exactly once; the complete group is validated before
 any statistic changes.
 
 Personality traits, talents, creature intrinsic traits, equipment, and inventory
-use one entry per line. Optional leading `- ` or `* ` markers are normalized away,
-empty lines are ignored, and an empty submission clears the complete collection.
+use one entry per line. Surrounding whitespace is trimmed, empty lines are
+ignored, and an empty submission clears the complete collection.
 Character talent names and descriptions remain combined in each talent entry.
 Creature intrinsic traits may contain any non-empty text and do not require a name,
 description, or separator structure. RULEs use `Name:Level:Description`, one per

@@ -240,12 +240,12 @@ test('statistical profiles preserve minimums, maximums, weights, and legal remai
 	assert.ok(calculateStatCost(remainder) < calculateStatBudget(1));
 });
 
-test('character validation preserves current save normalization and AP constraints', () => {
+test('character validation preserves save list trimming and AP constraints', () => {
 	assert.deepEqual(copyStringList(['valid', 2, null]), ['valid']);
 	assert.deepEqual(copyTalentList('First\r\n- Second\n* Third\n\n'), [
 		'First',
-		'Second',
-		'Third',
+		'- Second',
+		'* Third',
 	]);
 	assert.deepEqual(copyRules([
 		{ name: 'Legacy', description: 2 },
@@ -288,10 +288,10 @@ test('blank characters and hydrated saves use talent arrays', () => {
 	assert.deepEqual(hydratedCharacter.talents, savedTalents);
 	assert.notEqual(hydratedCharacter.talents, savedTalents);
 
-	const legacyCharacter = Character.fromSave({
+	const hydratedTextCharacter = Character.fromSave({
 		schemaVersion: 3,
 		creatorId: 'creator',
-		key: 'Legacy.Save',
+		key: 'Text.Save',
 		talents: [
 			'  Athlete — +1 to sustained movement.  ',
 			'- Cold Immunity — Ordinary cold cannot freeze the character.',
@@ -299,10 +299,10 @@ test('blank characters and hydrated saves use talent arrays', () => {
 			'* Keen Eye — +1 when searching for details.',
 		].join('\r\n'),
 	});
-	assert.deepEqual(legacyCharacter.talents, [
+	assert.deepEqual(hydratedTextCharacter.talents, [
 		'Athlete — +1 to sustained movement.',
-		'Cold Immunity — Ordinary cold cannot freeze the character.',
-		'Keen Eye — +1 when searching for details.',
+		'- Cold Immunity — Ordinary cold cannot freeze the character.',
+		'* Keen Eye — +1 when searching for details.',
 	]);
 });
 

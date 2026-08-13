@@ -425,7 +425,8 @@ syntax. The `/set` modal presents their full multiline content and replaces it
 on submit:
 
 - One logical entry per line.
-- Leading `- ` or `* ` is optional and normalized away.
+- Surrounding whitespace is trimmed and blank lines are ignored.
+- Leading `- ` or `* ` is ordinary entry content and is never stripped.
 - Empty multiline content clears the field.
 - Talents are stored as `string[]`; each element combines the complete
   user-editable talent name and description.

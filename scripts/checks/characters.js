@@ -162,17 +162,17 @@ module.exports = function createCharacterChecks(context) {
 				|| character.background.backstory !== 'Raised by cartographers'
 				|| character.background.goals !== 'Map the lost roads'
 				|| getEditableFieldValue(character, 'personality')['personality.traits']
-					!== 'Brave\nCurious'
+					!== '- Brave\n- Curious'
 				|| getEditableFieldValue(character, 'rules')
-					!== 'Fire:2:Controls flames\nBlink:1:Teleports a short distance'
+					!== '- Fire:2:Controls flames\n- Blink:1:Teleports a short distance'
 				|| character.rules[0]?.description !== 'Controls flames'
 				|| character.rules[0]?.level !== 2
-				|| character.rules[1]?.name !== 'Blink'
+				|| character.rules[1]?.name !== '- Blink'
 				|| character.rules[1]?.level !== 1
 				|| getEditableFieldValue(character, 'talents')
-					!== 'Athlete — +1 to sustained movement.\n'
-						+ 'Cold Immunity — Ordinary cold cannot freeze the character.'
-				|| character.gear.equipment[0] !== 'Longsword'
+					!== '- Athlete — +1 to sustained movement.\n'
+						+ '- Cold Immunity — Ordinary cold cannot freeze the character.'
+				|| character.gear.equipment[0] !== '- Longsword'
 				|| character.gear.encumbrance.current !== 2
 				|| character.gear.encumbrance.max !== 7
 				|| character.resources.hp.current !== 50
@@ -200,9 +200,9 @@ module.exports = function createCharacterChecks(context) {
 				|| summary.fields[1]?.value.includes('**Racial traits**')
 				|| summary.fields[1]?.value.includes('Initiative:')
 				|| summary.fields[1]?.value.includes('Reflexes:')
-				|| !summary.fields[2]?.value.includes('Fire (Level 2)')
+				|| !summary.fields[2]?.value.includes('- Fire (Level 2)')
 				|| !summary.fields[2]?.value.includes('**Talents**')
-				|| !summary.fields[2]?.value.includes('1. Athlete —')
+				|| !summary.fields[2]?.value.includes('1. - Athlete —')
 				|| JSON.stringify(summary).includes('Equipment')
 				|| JSON.stringify(summary).includes('Inventory')
 			) {
@@ -222,10 +222,10 @@ module.exports = function createCharacterChecks(context) {
 				'talents',
 			]) {
 				const fieldEmbed = createCharacterFieldEmbed(character, field)?.toJSON();
-				if (field === 'rules' && !fieldEmbed.description.includes('Fire — Level 2')) {
+				if (field === 'rules' && !fieldEmbed.description.includes('- Fire — Level 2')) {
 					errors.push('The detailed RULE view does not show RULE levels.');
 				}
-				if (field === 'talents' && !fieldEmbed.description.includes('2. Cold Immunity —')) {
+				if (field === 'talents' && !fieldEmbed.description.includes('2. - Cold Immunity —')) {
 					errors.push('The detailed talent view does not render talents as a list.');
 				}
 				if (
