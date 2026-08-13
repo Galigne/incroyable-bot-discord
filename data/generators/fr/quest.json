@@ -107,6 +107,66 @@
     {
       "id": "deliver_contested_goods",
       "value": "Livrer une marchandise représentée par {{ valuables }} à une personne au profil {{ background }}, alors que plusieurs individus au profil {{ background:criminal }} possèdent la même description du colis."
+    },
+    {
+      "id": "treasure_hunt_site",
+      "value": "Trouver une cache au trésor représentée par {{ valuables }} sur le site {{ site }} ou à l’intérieur de celui-ci."
+    },
+    {
+      "id": "cure_affliction",
+      "value": "Trouver le savoir, la matière ou l’aide nécessaire pour soigner ou lever l’affliction suivante : {{ affliction }}"
+    },
+    {
+      "id": "investigate_rumor",
+      "value": "Déterminer si cette rumeur est vraie et relever ce qui la confirme ou la contredit : {{ rumor }}"
+    },
+    {
+      "id": "protect_secret",
+      "value": "Empêcher que le secret suivant soit découvert ou révélé : {{ secret }}"
+    },
+    {
+      "id": "uncover_secret",
+      "value": "Découvrir la vérité derrière le secret suivant et obtenir des preuves capables de résister à un examen attentif : {{ secret }}"
+    },
+    {
+      "id": "locate_affliction_source",
+      "value": "Déterminer où la maladie ou malédiction suivante est apparue et comment elle s’est propagée pour la première fois : {{ affliction }}"
+    },
+    {
+      "id": "retrieve_runed_item",
+      "value": "Récupérer un objet portant une rune associée à la {{ rules.name }} dans {{ site }}."
+    },
+    {
+      "id": "destroy_runed_item",
+      "value": "Trouver et détruire un objet portant une rune associée à la {{ rules.name }} dissimulé dans {{ site }}."
+    },
+    {
+      "id": "sabotage_faction_site",
+      "value": "Neutraliser ou perturber une opération, un dispositif, une route ou une ressource entretenue par {{ faction }} sur le site {{ site }}."
+    },
+    {
+      "id": "repair_settlement_resource",
+      "value": "Restaurer une structure, une route, un dispositif ou une ressource endommagée dont dépend {{ settlement }}."
+    },
+    {
+      "id": "steal_information_building",
+      "value": "Obtenir des archives, de la correspondance ou des plans protégés conservés dans {{ building }}."
+    },
+    {
+      "id": "expose_conspiracy",
+      "value": "Réunir assez de preuves pour révéler une coopération secrète ou des actes répréhensibles impliquant {{ faction }} et {{ government }}."
+    },
+    {
+      "id": "resolve_debt_oath",
+      "value": "Honorer, transférer, recouvrer ou régler une dette, une promesse ou un serment important qui lie une personne au profil {{ background }} à {{ faction }}."
+    },
+    {
+      "id": "protect_during_crisis",
+      "value": "Protéger une personne, un objet ou une partie vulnérable de {{ site }} pendant le déroulement de la crise suivante : {{ event }}"
+    },
+    {
+      "id": "negotiate_access",
+      "value": "Obtenir de {{ faction }} l’autorisation d’entrer dans {{ site }}, de le traverser, de l’inspecter ou de l’utiliser."
     }
   ]
 }

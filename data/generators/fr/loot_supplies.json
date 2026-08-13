@@ -237,6 +237,27 @@
         "name": "Papier de qualité",
         "description": "Des feuilles et un parchemin vierges adaptés aux contrats, cartes, sorts ou faux documents."
       }
+    },
+    {
+      "id": "runed_lantern",
+      "fields": {
+        "name": "Lanterne runique",
+        "description": "Une lanterne à volets fonctionnelle portant une rune associée à la {{ rules.name }} ; le MJ en détermine la fonction précise."
+      }
+    },
+    {
+      "id": "runed_compass",
+      "fields": {
+        "name": "Boussole runique",
+        "description": "Une boussole fonctionnelle portant une rune associée à la {{ rules.name }} ; le MJ en détermine la fonction précise."
+      }
+    },
+    {
+      "id": "runed_chain",
+      "fields": {
+        "name": "Chaîne runique",
+        "description": "Une longueur de chaîne robuste portant une rune associée à la {{ rules.name }} ; le MJ en détermine la fonction précise."
+      }
     }
   ]
 }

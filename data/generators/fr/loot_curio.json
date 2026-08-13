@@ -120,6 +120,48 @@
         "name": "Poulet de voyage",
         "description": "Un poulet étonnamment calme, dressé à suivre le porteur et à signaler certaines créatures."
       }
+    },
+    {
+      "id": "runed_amulet",
+      "fields": {
+        "name": "Amulette runique",
+        "description": "Une amulette gravée d’une rune associée à la {{ rules.name }} ; le MJ en détermine la fonction précise."
+      }
+    },
+    {
+      "id": "runed_ring",
+      "fields": {
+        "name": "Anneau runique",
+        "description": "Un anneau gravé d’une rune associée à la {{ rules.name }} ; le MJ en détermine la fonction précise."
+      }
+    },
+    {
+      "id": "runed_cloak",
+      "fields": {
+        "name": "Cape runique",
+        "description": "Une cape brodée d’une rune associée à la {{ rules.name }} ; le MJ en détermine la fonction précise."
+      }
+    },
+    {
+      "id": "runed_boots",
+      "fields": {
+        "name": "Bottes runiques",
+        "description": "Une paire de bottes marquée d’une rune associée à la {{ rules.name }} ; le MJ en détermine la fonction précise."
+      }
+    },
+    {
+      "id": "runed_mirror",
+      "fields": {
+        "name": "Miroir runique",
+        "description": "Un miroir à main portant une rune associée à la {{ rules.name }} ; le MJ en détermine la fonction précise."
+      }
+    },
+    {
+      "id": "runed_key",
+      "fields": {
+        "name": "Clé runique",
+        "description": "Une clé portant une rune associée à la {{ rules.name }} ; le MJ en détermine la fonction précise."
+      }
     }
   ]
 }

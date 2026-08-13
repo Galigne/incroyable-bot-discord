@@ -62,6 +62,198 @@
     {
       "id": "round_spectacles",
       "value": "Round spectacles and a long, thoughtful face."
+    },
+    {
+      "id": "youthful_fine_boned",
+      "value": "Youthful-looking, with a fine-boned face and smooth complexion."
+    },
+    {
+      "id": "middle_aged_laugh_lines",
+      "value": "Middle-aged, with fine lines around the eyes and mouth."
+    },
+    {
+      "id": "elderly_stooped",
+      "value": "Elderly in appearance, with a slightly stooped posture and alert eyes."
+    },
+    {
+      "id": "tall_lanky",
+      "value": "Very tall and lanky, with long limbs and narrow shoulders."
+    },
+    {
+      "id": "average_even_proportions",
+      "value": "Average in height, with an evenly proportioned build."
+    },
+    {
+      "id": "short_stocky",
+      "value": "Short and stocky, with a thick neck and sturdy limbs."
+    },
+    {
+      "id": "broad_heavy_frame",
+      "value": "A broad, heavy frame accompanied by large hands."
+    },
+    {
+      "id": "thin_narrow_shoulders",
+      "value": "Thin, with narrow shoulders and delicate wrists."
+    },
+    {
+      "id": "gaunt_hollow_cheeks",
+      "value": "Gaunt, with hollow cheeks and prominent collarbones."
+    },
+    {
+      "id": "compact_muscular",
+      "value": "A compact, muscular build with powerful legs."
+    },
+    {
+      "id": "long_oval_face",
+      "value": "A long oval face with balanced features."
+    },
+    {
+      "id": "heart_shaped_face",
+      "value": "A heart-shaped face narrowing to a fine chin."
+    },
+    {
+      "id": "broad_flat_nose",
+      "value": "A broad, flat nose dominates an otherwise ordinary face."
+    },
+    {
+      "id": "hooked_nose",
+      "value": "A pronounced hooked nose seen clearly in profile."
+    },
+    {
+      "id": "strong_jaw",
+      "value": "A strong jaw and square chin."
+    },
+    {
+      "id": "receding_chin",
+      "value": "A receding chin beneath a prominent lower lip."
+    },
+    {
+      "id": "prominent_ears",
+      "value": "Prominent ears and close-set eyes."
+    },
+    {
+      "id": "arched_brows",
+      "value": "High arched brows over narrow eyes."
+    },
+    {
+      "id": "green_almond_eyes",
+      "value": "Green almond-shaped eyes with long lashes."
+    },
+    {
+      "id": "amber_wide_set_eyes",
+      "value": "Wide-set amber eyes beneath a smooth brow."
+    },
+    {
+      "id": "mismatched_eye_colors",
+      "value": "One eye is blue and the other brown."
+    },
+    {
+      "id": "straight_auburn_hair",
+      "value": "Straight auburn hair cut just below the ears."
+    },
+    {
+      "id": "wavy_blond_hair",
+      "value": "Wavy blond hair falling to the shoulders."
+    },
+    {
+      "id": "coarse_grey_hair",
+      "value": "Coarse grey hair worn short."
+    },
+    {
+      "id": "salt_and_pepper_hair",
+      "value": "Thick hair greying evenly at the temples."
+    },
+    {
+      "id": "shaved_head",
+      "value": "A clean-shaven scalp emphasizing the shape of the skull."
+    },
+    {
+      "id": "receding_hairline",
+      "value": "A receding hairline and carefully combed hair."
+    },
+    {
+      "id": "bald_crown",
+      "value": "Bald across the crown, with a fringe of soft hair."
+    },
+    {
+      "id": "dark_hair_silver_streak",
+      "value": "Dark hair marked by a single natural streak of silver."
+    },
+    {
+      "id": "trimmed_moustache",
+      "value": "A neatly trimmed moustache over a narrow mouth."
+    },
+    {
+      "id": "patchy_beard",
+      "value": "A patchy beard growing unevenly along the jaw."
+    },
+    {
+      "id": "short_grey_stubble",
+      "value": "Short grey stubble and heavy eyelids."
+    },
+    {
+      "id": "warm_brown_complexion",
+      "value": "A warm brown complexion with an even tone."
+    },
+    {
+      "id": "ruddy_complexion",
+      "value": "A ruddy complexion, especially across the cheeks and nose."
+    },
+    {
+      "id": "neck_birthmark",
+      "value": "A large irregular birthmark is visible along one side of the neck."
+    },
+    {
+      "id": "crooked_teeth",
+      "value": "Slightly crooked teeth show in an easy smile."
+    },
+    {
+      "id": "small_even_teeth",
+      "value": "Small, even teeth and a restrained smile."
+    },
+    {
+      "id": "lopsided_smile",
+      "value": "A naturally lopsided smile creases one cheek."
+    },
+    {
+      "id": "slouched_posture",
+      "value": "A relaxed slouch that makes them seem shorter than they are."
+    },
+    {
+      "id": "long_striding_gait",
+      "value": "A long-striding gait with arms swinging freely."
+    },
+    {
+      "id": "careful_uneven_gait",
+      "value": "A careful, slightly uneven gait left by an old ankle injury."
+    },
+    {
+      "id": "large_callused_hands",
+      "value": "Large hands with broad palms and thick calluses."
+    },
+    {
+      "id": "slender_long_fingers",
+      "value": "Slender hands with unusually long fingers."
+    },
+    {
+      "id": "crooked_finger",
+      "value": "One finger healed crooked after an old break."
+    },
+    {
+      "id": "thin_chin_scar",
+      "value": "A thin pale scar runs beneath the chin."
+    },
+    {
+      "id": "healed_broken_nose",
+      "value": "A nose that healed slightly crooked after an old break."
+    },
+    {
+      "id": "faded_forearm_tattoo",
+      "value": "A small faded tattoo is visible on one forearm."
+    },
+    {
+      "id": "inked_wrist_band",
+      "value": "A simple inked band circles one wrist."
     }
   ]
 }

@@ -236,6 +236,102 @@
         "name": "Présence inspirante",
         "description": "Une fois par scène, un allié qui entend le personnage bénéficie de +1 contre la peur."
       }
+    },
+    {
+      "id": "locksmith",
+      "weight": 2,
+      "fields": {
+        "name": "Serrurier",
+        "description": "+2 aux actions adaptées pour ouvrir ou comprendre les serrures mécaniques ordinaires."
+      }
+    },
+    {
+      "id": "burglar",
+      "fields": {
+        "name": "Cambrioleur",
+        "description": "+2 aux actions de Dextérité pour entrer discrètement dans un bâtiment sécurisé, le traverser ou en sortir."
+      }
+    },
+    {
+      "id": "marksman",
+      "fields": {
+        "name": "Tireur d’élite",
+        "description": "+1 aux attaques avec une arme à distance contre une cible visible située à au moins 10 mètres."
+      }
+    },
+    {
+      "id": "brawler",
+      "weight": 2,
+      "fields": {
+        "name": "Bagarreur",
+        "description": "+1 aux actions adaptées au combat à mains nues ou à la lutte."
+      }
+    },
+    {
+      "id": "herbalist",
+      "weight": 2,
+      "fields": {
+        "name": "Herboriste",
+        "description": "+2 pour identifier ou travailler avec des plantes médicinales ou toxiques."
+      }
+    },
+    {
+      "id": "alchemist",
+      "fields": {
+        "name": "Alchimiste",
+        "description": "+2 aux actions d’Intelligence pour identifier, préparer ou manipuler sans danger des substances alchimiques."
+      }
+    },
+    {
+      "id": "blacksmith",
+      "weight": 2,
+      "fields": {
+        "name": "Forgeron",
+        "description": "+2 aux actions adaptées pour forger, évaluer ou réparer des armes, armures et outils en métal."
+      }
+    },
+    {
+      "id": "acrobat",
+      "weight": 2,
+      "fields": {
+        "name": "Acrobate",
+        "description": "+2 aux actions de Dextérité impliquant l’équilibre, les roulades ou des déplacements acrobatiques."
+      }
+    },
+    {
+      "id": "investigator",
+      "fields": {
+        "name": "Enquêteur",
+        "description": "+2 aux actions de Perception pour examiner une scène à la recherche de preuves matérielles."
+      }
+    },
+    {
+      "id": "commander",
+      "fields": {
+        "name": "Commandant",
+        "description": "+1 aux actions de Charisme pour coordonner sous une pression immédiate un groupe disposé à suivre ses ordres."
+      }
+    },
+    {
+      "id": "impersonator",
+      "fields": {
+        "name": "Comédien et imitateur",
+        "description": "+2 aux actions de Charisme pour jouer un rôle ou imiter une personne étudiée au préalable."
+      }
+    },
+    {
+      "id": "historian",
+      "fields": {
+        "name": "Historien",
+        "description": "+2 aux actions d’Intelligence relevant des connaissances historiques."
+      }
+    },
+    {
+      "id": "runesmith",
+      "fields": {
+        "name": "Graveur de runes",
+        "description": "+2 aux actions adaptées pour identifier, comprendre ou créer des runes."
+      }
     }
   ]
 }

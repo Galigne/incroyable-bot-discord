@@ -323,6 +323,81 @@
         "name": "Portable Ballista",
         "description": "An oversized supported crossbow, extremely powerful but slow to move and prepare."
       }
+    },
+    {
+      "id": "javelin",
+      "weight": 3,
+      "fields": {
+        "name": "Javelin",
+        "description": "A light throwing spear balanced for ranged use but still practical in close combat."
+      }
+    },
+    {
+      "id": "lance",
+      "weight": 2,
+      "fields": {
+        "name": "Lance",
+        "description": "A long thrusting weapon designed for mounted charges and keeping targets at reach."
+      }
+    },
+    {
+      "id": "throwing_knives",
+      "weight": 3,
+      "fields": {
+        "name": "Throwing knives",
+        "description": "A set of small balanced blades made for quick throws at short range."
+      }
+    },
+    {
+      "id": "throwing_hammer",
+      "weight": 2,
+      "fields": {
+        "name": "Throwing hammer",
+        "description": "A compact weighted hammer balanced to strike reliably when thrown."
+      }
+    },
+    {
+      "id": "blowgun",
+      "weight": 2,
+      "fields": {
+        "name": "Blowgun",
+        "description": "A quiet tube that launches small darts accurately over short distances."
+      }
+    },
+    {
+      "id": "runed_sword",
+      "fields": {
+        "name": "Runed sword",
+        "description": "A sword bearing a rune of {{ rules.name }}; its precise function is left to the GM."
+      }
+    },
+    {
+      "id": "runed_dagger",
+      "fields": {
+        "name": "Runed dagger",
+        "description": "A dagger bearing a rune of {{ rules.name }}; its precise function is left to the GM."
+      }
+    },
+    {
+      "id": "runed_spear",
+      "fields": {
+        "name": "Runed spear",
+        "description": "A spear bearing a rune of {{ rules.name }}; its precise function is left to the GM."
+      }
+    },
+    {
+      "id": "runed_bow",
+      "fields": {
+        "name": "Runed bow",
+        "description": "A bow bearing a rune of {{ rules.name }}; its precise function is left to the GM."
+      }
+    },
+    {
+      "id": "runed_hammer",
+      "fields": {
+        "name": "Runed hammer",
+        "description": "A hammer bearing a rune of {{ rules.name }}; its precise function is left to the GM."
+      }
     }
   ]
 }

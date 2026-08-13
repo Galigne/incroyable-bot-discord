@@ -335,11 +335,11 @@ function checkStructuredGenerators(errors, generatorCatalog) {
 	}
 	const shields = generatorCatalog.getGenerator('shields');
 	const shieldRarities = {
-		common: { ar: 5, weight: 8 },
-		uncommon: { ar: 10, weight: 5 },
-		rare: { ar: 15, weight: 3 },
-		epic: { ar: 20, weight: 2 },
-		legendary: { ar: 25, weight: 1 },
+		common: { ar: 5, weights: [8, 8, 8] },
+		uncommon: { ar: 10, weights: [5, 5, 5] },
+		rare: { ar: 15, weights: [3, 3, 3, 1] },
+		epic: { ar: 20, weights: [2, 2, 2] },
+		legendary: { ar: 25, weights: [1, 1, 1] },
 	};
 	if (
 		JSON.stringify(shields?.entrySchema) !== JSON.stringify({
@@ -347,13 +347,12 @@ function checkStructuredGenerators(errors, generatorCatalog) {
 			required: ['name', 'rarity', 'description', 'ar_percentage'],
 			technical: ['rarity', 'ar_percentage'],
 		})
-		|| shields.entries.length !== 15
+		|| shields.entries.length !== 16
 		|| Object.entries(shieldRarities).some(([rarity, expected]) => {
 			const entries = shields.entries.filter(entry => entry.fields.rarity === rarity);
-			return entries.length !== 3 || entries.some(entry => (
-				entry.weight !== expected.weight
-				|| entry.fields.ar_percentage !== expected.ar
-			));
+			return JSON.stringify(entries.map(entry => entry.weight))
+				!== JSON.stringify(expected.weights)
+				|| entries.some(entry => entry.fields.ar_percentage !== expected.ar);
 		})
 	) {
 		errors.push('The shield generator has invalid rarity or AR data.');

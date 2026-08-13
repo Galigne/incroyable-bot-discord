@@ -87,6 +87,70 @@
         "name": "Spécialité régionale",
         "description": "Un mets caractéristique apprécié sur place et surprenant pour les étrangers."
       }
+    },
+    {
+      "id": "smoked_fish",
+      "weight": 6,
+      "fields": {
+        "name": "Poisson fumé",
+        "description": "Un poisson ferme et salé, conservé par fumage pour le voyage ou les réserves d’hiver."
+      }
+    },
+    {
+      "id": "pepper_root_stew",
+      "weight": 3,
+      "fields": {
+        "name": "Ragoût aux racines poivrées",
+        "description": "Un ragoût épais préparé avec une racine piquante et les légumes disponibles."
+      }
+    },
+    {
+      "id": "mushroom_broth",
+      "weight": 4,
+      "fields": {
+        "name": "Bouillon aux champignons",
+        "description": "Un bouillon sombre et savoureux préparé avec plusieurs variétés de champignons comestibles."
+      }
+    },
+    {
+      "id": "honey_cakes",
+      "weight": 4,
+      "fields": {
+        "name": "Gâteaux au miel",
+        "description": "De petits gâteaux denses, sucrés au miel et faciles à transporter."
+      }
+    },
+    {
+      "id": "spiced_nuts",
+      "weight": 5,
+      "fields": {
+        "name": "Noix épicées",
+        "description": "Des noix grillées enrobées de sel et d’un mélange d’épices réchauffant."
+      }
+    },
+    {
+      "id": "pickled_vegetables",
+      "weight": 5,
+      "fields": {
+        "name": "Légumes au vinaigre",
+        "description": "Des légumes saisonniers croquants conservés dans une saumure bien relevée."
+      }
+    },
+    {
+      "id": "fermented_milk",
+      "weight": 3,
+      "fields": {
+        "name": "Lait fermenté",
+        "description": "Une boisson fermentée acidulée, servie nature ou légèrement salée."
+      }
+    },
+    {
+      "id": "strong_herbal_tonic",
+      "weight": 2,
+      "fields": {
+        "name": "Tonique corsé aux herbes",
+        "description": "Une boisson amère et non magique infusée avec des racines et des herbes pour son goût prononcé."
+      }
     }
   ]
 }

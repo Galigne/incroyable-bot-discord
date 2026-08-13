@@ -183,6 +183,83 @@
         "name": "Magic Sense",
         "description": "+2 to Perception actions made to detect active spells or enchanted objects nearby."
       }
+    },
+    {
+      "id": "pounce",
+      "fields": {
+        "name": "Pounce",
+        "description": "+1 to the next action made to grapple or knock a target prone after moving at least 3 meters toward it in the same turn."
+      }
+    },
+    {
+      "id": "charge",
+      "fields": {
+        "name": "Charge",
+        "description": "+1 to the next melee attack after moving at least 5 meters straight toward the target in the same turn."
+      }
+    },
+    {
+      "id": "constrict",
+      "fields": {
+        "name": "Constrict",
+        "description": "+2 to Strength actions made to maintain or tighten an existing grapple."
+      }
+    },
+    {
+      "id": "wall_climber",
+      "fields": {
+        "name": "Wall Climber",
+        "description": "Can move along steep or vertical rough surfaces at half its normal movement speed without a routine climbing roll."
+      }
+    },
+    {
+      "id": "tremorsense",
+      "fields": {
+        "name": "Tremorsense",
+        "description": "Detects movement within 10 meters without sight while it and the source are in contact with the same ground."
+      }
+    },
+    {
+      "id": "heat_sense",
+      "fields": {
+        "name": "Heat Sense",
+        "description": "Detects nearby heat sources within 10 meters without sight, though solid barriers block this sense."
+      }
+    },
+    {
+      "id": "prehensile_tail",
+      "fields": {
+        "name": "Prehensile Tail",
+        "description": "Can hold or manipulate one light object with its tail, but gains no additional action."
+      }
+    },
+    {
+      "id": "powerful_leap",
+      "fields": {
+        "name": "Powerful Leap",
+        "description": "+2 to Strength or Dexterity actions made to jump."
+      }
+    },
+    {
+      "id": "swarm_body",
+      "fields": {
+        "name": "Swarm Body",
+        "description": "Can flow through openings large enough for one member and occupy another creature’s space, but remains one creature for actions and effects."
+      }
+    },
+    {
+      "id": "magic_resistance",
+      "fields": {
+        "name": "Magic Resistance",
+        "description": "+1 to actions made to resist hostile magical effects."
+      }
+    },
+    {
+      "id": "extended_reach",
+      "fields": {
+        "name": "Extended Reach",
+        "description": "Can make ordinary close attacks from up to 2 meters farther away than a similar-sized creature."
+      }
     }
   ]
 }

@@ -39,6 +39,90 @@
         "name": "Marques des éléments",
         "description": "Les intempéries ont laissé une apparence rude, patiente et visiblement éprouvée."
       }
+    },
+    {
+      "id": "one_eyed",
+      "fields": {
+        "name": "Borgne",
+        "description": "Un œil manque ou reste définitivement fermé, ce qui rend son visage immédiatement reconnaissable."
+      }
+    },
+    {
+      "id": "burn_scarred",
+      "fields": {
+        "name": "Brûlures étendues",
+        "description": "D’anciennes brûlures couvrent une partie bien visible du corps."
+      }
+    },
+    {
+      "id": "heavily_tattooed",
+      "fields": {
+        "name": "Largement tatoué",
+        "description": "Des tatouages denses et superposés couvrent une grande partie de la peau visible."
+      }
+    },
+    {
+      "id": "ritual_scarification",
+      "fields": {
+        "name": "Scarifications rituelles",
+        "description": "Des cicatrices volontaires en relief dessinent des motifs cérémoniels répétés sur la peau."
+      }
+    },
+    {
+      "id": "prosthetic_limb",
+      "fields": {
+        "name": "Membre prothétique",
+        "description": "Une prothèse bien visible remplace un bras ou une jambe, avec des matériaux et une facture adaptés à l’univers."
+      }
+    },
+    {
+      "id": "missing_fingers",
+      "fields": {
+        "name": "Doigts manquants",
+        "description": "Plusieurs doigts manquent à une main, ce qui lui donne un contour immédiatement reconnaissable."
+      }
+    },
+    {
+      "id": "noticeable_limp",
+      "fields": {
+        "name": "Boiterie marquée",
+        "description": "Une ancienne blessure imprime à la démarche une boiterie prononcée et reconnaissable."
+      }
+    },
+    {
+      "id": "unnatural_eyes",
+      "fields": {
+        "name": "Yeux surnaturels",
+        "description": "Les yeux présentent une couleur, une forme ou un reflet impossible à prendre pour une variation ordinaire."
+      }
+    },
+    {
+      "id": "magical_markings",
+      "fields": {
+        "name": "Marques magiques",
+        "description": "Des symboles visibles miroitent, se déplacent ou luisent faiblement sur la peau sans imposer d’effet précis."
+      }
+    },
+    {
+      "id": "discolored_veins",
+      "fields": {
+        "name": "Veines aux couleurs anormales",
+        "description": "Des veines d’une couleur inhabituelle apparaissent nettement sous la peau en réseaux ramifiés."
+      }
+    },
+    {
+      "id": "missing_ear",
+      "fields": {
+        "name": "Oreille manquante",
+        "description": "Une oreille externe manque en partie ou entièrement, dessinant un profil caractéristique."
+      }
+    },
+    {
+      "id": "stitch_scars",
+      "fields": {
+        "name": "Nombreuses cicatrices de suture",
+        "description": "De longues cicatrices chirurgicales ou grossièrement recousues traversent plusieurs zones visibles du corps."
+      }
     }
   ]
 }

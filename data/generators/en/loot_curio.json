@@ -120,6 +120,48 @@
         "name": "Travel Chicken",
         "description": "An unusually calm chicken trained to follow its carrier and signal certain creatures."
       }
+    },
+    {
+      "id": "runed_amulet",
+      "fields": {
+        "name": "Runed amulet",
+        "description": "An amulet engraved with a rune of {{ rules.name }}; its precise function is left to the GM."
+      }
+    },
+    {
+      "id": "runed_ring",
+      "fields": {
+        "name": "Runed ring",
+        "description": "A ring engraved with a rune of {{ rules.name }}; its precise function is left to the GM."
+      }
+    },
+    {
+      "id": "runed_cloak",
+      "fields": {
+        "name": "Runed cloak",
+        "description": "A cloak embroidered with a rune of {{ rules.name }}; its precise function is left to the GM."
+      }
+    },
+    {
+      "id": "runed_boots",
+      "fields": {
+        "name": "Runed boots",
+        "description": "A pair of boots marked with a rune of {{ rules.name }}; its precise function is left to the GM."
+      }
+    },
+    {
+      "id": "runed_mirror",
+      "fields": {
+        "name": "Runed mirror",
+        "description": "A hand mirror carrying a rune of {{ rules.name }}; its precise function is left to the GM."
+      }
+    },
+    {
+      "id": "runed_key",
+      "fields": {
+        "name": "Runed key",
+        "description": "A key carrying a rune of {{ rules.name }}; its precise function is left to the GM."
+      }
     }
   ]
 }

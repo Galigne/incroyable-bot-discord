@@ -225,6 +225,65 @@
         "name": "Méditatif",
         "description": "Le personnage est profondément concentré ; l’interrompre met fin au bénéfice recherché et provoque une brève désorientation."
       }
+    },
+    {
+      "id": "prone",
+      "weight": 2,
+      "fields": {
+        "name": "À terre",
+        "description": "Le personnage est étendu au sol, ce qui limite ses déplacements et sa défense jusqu’à ce qu’il se relève."
+      }
+    },
+    {
+      "id": "restrained",
+      "weight": 2,
+      "fields": {
+        "name": "Entravé",
+        "description": "Des liens, le terrain ou une autre force limitent fortement les mouvements du personnage."
+      }
+    },
+    {
+      "id": "grappled",
+      "weight": 2,
+      "fields": {
+        "name": "Agrippé",
+        "description": "Une autre créature maintient le personnage en place jusqu’à ce qu’il échappe à la prise ou la brise."
+      }
+    },
+    {
+      "id": "unconscious",
+      "fields": {
+        "name": "Inconscient",
+        "description": "Le personnage n’a conscience de rien et ne peut agir délibérément avant de reprendre connaissance."
+      }
+    },
+    {
+      "id": "suffocating",
+      "fields": {
+        "name": "En suffocation",
+        "description": "Le personnage ne respire pas suffisamment et doit retrouver de l’air avant que son état ne menace sa vie."
+      }
+    },
+    {
+      "id": "exhausted",
+      "fields": {
+        "name": "Épuisé",
+        "description": "Une fatigue extrême limite les activités prolongées jusqu’à ce que le personnage bénéficie d’un repos conséquent."
+      }
+    },
+    {
+      "id": "starving",
+      "fields": {
+        "name": "Affamé",
+        "description": "Un manque prolongé de nourriture affaiblit le personnage et rend tout effort supplémentaire difficile."
+      }
+    },
+    {
+      "id": "dehydrated",
+      "fields": {
+        "name": "Déshydraté",
+        "description": "Un manque prolongé d’eau provoque faiblesse, vertiges et difficultés croissantes à fournir des efforts."
+      }
     }
   ]
 }

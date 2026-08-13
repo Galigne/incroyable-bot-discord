@@ -237,6 +237,27 @@
         "name": "Quality Paper",
         "description": "Blank sheets and parchment suited to contracts, maps, spells, or forged documents."
       }
+    },
+    {
+      "id": "runed_lantern",
+      "fields": {
+        "name": "Runed lantern",
+        "description": "A practical hooded lantern carrying a rune of {{ rules.name }}; its precise function is left to the GM."
+      }
+    },
+    {
+      "id": "runed_compass",
+      "fields": {
+        "name": "Runed compass",
+        "description": "A working compass carrying a rune of {{ rules.name }}; its precise function is left to the GM."
+      }
+    },
+    {
+      "id": "runed_chain",
+      "fields": {
+        "name": "Runed chain",
+        "description": "A length of sturdy chain carrying a rune of {{ rules.name }}; its precise function is left to the GM."
+      }
     }
   ]
 }

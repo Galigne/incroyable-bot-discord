@@ -107,6 +107,66 @@
     {
       "id": "deliver_contested_goods",
       "value": "Deliver goods represented by {{ valuables }} to someone with the {{ background }} background, while several figures with the {{ background:criminal }} background carry the same parcel description."
+    },
+    {
+      "id": "treasure_hunt_site",
+      "value": "Locate a hidden cache represented by {{ valuables }} at or within {{ site }}."
+    },
+    {
+      "id": "cure_affliction",
+      "value": "Find the knowledge, material, or aid needed to cure or break the following affliction: {{ affliction }}"
+    },
+    {
+      "id": "investigate_rumor",
+      "value": "Determine whether this rumor is true and identify what supports or contradicts it: {{ rumor }}"
+    },
+    {
+      "id": "protect_secret",
+      "value": "Prevent the following secret from being discovered or revealed: {{ secret }}"
+    },
+    {
+      "id": "uncover_secret",
+      "value": "Discover the truth behind the following secret and obtain evidence that can withstand scrutiny: {{ secret }}"
+    },
+    {
+      "id": "locate_affliction_source",
+      "value": "Determine where the following disease or curse originated and how it first spread: {{ affliction }}"
+    },
+    {
+      "id": "retrieve_runed_item",
+      "value": "Recover an object bearing a rune of {{ rules.name }} from {{ site }}."
+    },
+    {
+      "id": "destroy_runed_item",
+      "value": "Find and destroy an object bearing a rune of {{ rules.name }} hidden within {{ site }}."
+    },
+    {
+      "id": "sabotage_faction_site",
+      "value": "Disable or disrupt an operation, device, route, or resource maintained by {{ faction }} at {{ site }}."
+    },
+    {
+      "id": "repair_settlement_resource",
+      "value": "Restore a damaged structure, route, device, or resource essential to {{ settlement }}."
+    },
+    {
+      "id": "steal_information_building",
+      "value": "Obtain protected records, correspondence, or plans kept inside {{ building }}."
+    },
+    {
+      "id": "expose_conspiracy",
+      "value": "Gather enough evidence to expose hidden cooperation or wrongdoing involving {{ faction }} and {{ government }}."
+    },
+    {
+      "id": "resolve_debt_oath",
+      "value": "Fulfill, transfer, recover, or resolve an important debt, promise, or oath linking someone with the {{ background }} background to {{ faction }}."
+    },
+    {
+      "id": "protect_during_crisis",
+      "value": "Protect a person, object, or vulnerable part of {{ site }} while the following crisis unfolds: {{ event }}"
+    },
+    {
+      "id": "negotiate_access",
+      "value": "Secure permission from {{ faction }} to enter, cross, inspect, or use {{ site }}."
     }
   ]
 }

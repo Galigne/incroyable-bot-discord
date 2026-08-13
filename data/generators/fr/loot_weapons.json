@@ -323,6 +323,81 @@
         "name": "Baliste portative",
         "description": "Une arbalète démesurée montée sur support, très puissante mais longue à déplacer et préparer."
       }
+    },
+    {
+      "id": "javelin",
+      "weight": 3,
+      "fields": {
+        "name": "Javeline",
+        "description": "Une lance légère équilibrée pour le jet, mais qui reste pratique au corps à corps."
+      }
+    },
+    {
+      "id": "lance",
+      "weight": 2,
+      "fields": {
+        "name": "Lance de cavalerie",
+        "description": "Une longue arme d’estoc conçue pour les charges montées et pour maintenir les cibles à distance."
+      }
+    },
+    {
+      "id": "throwing_knives",
+      "weight": 3,
+      "fields": {
+        "name": "Couteaux de lancer",
+        "description": "Un ensemble de petites lames équilibrées pour des jets rapides à courte portée."
+      }
+    },
+    {
+      "id": "throwing_hammer",
+      "weight": 2,
+      "fields": {
+        "name": "Marteau de lancer",
+        "description": "Un marteau compact et lesté pour frapper avec précision une fois lancé."
+      }
+    },
+    {
+      "id": "blowgun",
+      "weight": 2,
+      "fields": {
+        "name": "Sarbacane",
+        "description": "Un tube silencieux qui propulse avec précision de petites fléchettes à courte distance."
+      }
+    },
+    {
+      "id": "runed_sword",
+      "fields": {
+        "name": "Épée runique",
+        "description": "Une épée portant une rune associée à la {{ rules.name }} ; le MJ en détermine la fonction précise."
+      }
+    },
+    {
+      "id": "runed_dagger",
+      "fields": {
+        "name": "Dague runique",
+        "description": "Une dague portant une rune associée à la {{ rules.name }} ; le MJ en détermine la fonction précise."
+      }
+    },
+    {
+      "id": "runed_spear",
+      "fields": {
+        "name": "Lance runique",
+        "description": "Une lance portant une rune associée à la {{ rules.name }} ; le MJ en détermine la fonction précise."
+      }
+    },
+    {
+      "id": "runed_bow",
+      "fields": {
+        "name": "Arc runique",
+        "description": "Un arc portant une rune associée à la {{ rules.name }} ; le MJ en détermine la fonction précise."
+      }
+    },
+    {
+      "id": "runed_hammer",
+      "fields": {
+        "name": "Marteau runique",
+        "description": "Un marteau portant une rune associée à la {{ rules.name }} ; le MJ en détermine la fonction précise."
+      }
     }
   ]
 }

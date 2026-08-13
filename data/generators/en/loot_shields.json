@@ -159,6 +159,16 @@
         "description": "A legendary shield tied to an oath whose bearer, terms, and consequences remain open.",
         "ar_percentage": 25
       }
+    },
+    {
+      "id": "rare_runed_shield",
+      "weight": 1,
+      "fields": {
+        "name": "Runed shield",
+        "rarity": "rare",
+        "description": "A carefully made shield bearing a rune of {{ rules.name }}; its precise function is left to the GM.",
+        "ar_percentage": 15
+      }
     }
   ]
 }

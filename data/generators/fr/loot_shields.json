@@ -159,6 +159,16 @@
         "description": "Un bouclier légendaire lié à un serment dont le porteur, les termes et les conséquences restent libres.",
         "ar_percentage": 25
       }
+    },
+    {
+      "id": "rare_runed_shield",
+      "weight": 1,
+      "fields": {
+        "name": "Bouclier runique",
+        "rarity": "rare",
+        "description": "Un bouclier de belle facture portant une rune associée à la {{ rules.name }} ; le MJ en détermine la fonction précise.",
+        "ar_percentage": 15
+      }
     }
   ]
 }

@@ -82,15 +82,15 @@ test('production category routers resolve equal-weight public child generators',
 test('loot replaces every inventory entry across heterogeneous child schemas', () => {
 	assert.equal(generatorCatalog.getGenerator('inventory'), undefined);
 	for (const [generatorId, expectedCount, schemaType] of [
-		['weapons', 43, 'fields'],
-		['shields', 15, 'fields'],
+		['weapons', 53, 'fields'],
+		['shields', 16, 'fields'],
 		['armors', 15, 'fields'],
-		['supplies', 29, 'fields'],
+		['supplies', 32, 'fields'],
 		['consumable', 18, 'fields'],
-		['food_and_drink', 10, 'fields'],
+		['food_and_drink', 18, 'fields'],
 		['valuables', 15, 'fields'],
 		['material', 35, 'text'],
-		['curio', 16, 'fields'],
+		['curio', 22, 'fields'],
 	]) {
 		const generator = generatorCatalog.getGenerator(generatorId);
 		assert.equal(generator.entries.length, expectedCount, generatorId);
@@ -100,11 +100,11 @@ test('loot replaces every inventory entry across heterogeneous child schemas', (
 
 test('shield and affliction catalogs preserve their technical distributions', () => {
 	const shieldExpectations = new Map([
-		['common', { ar: 5, weight: 8 }],
-		['uncommon', { ar: 10, weight: 5 }],
-		['rare', { ar: 15, weight: 3 }],
-		['epic', { ar: 20, weight: 2 }],
-		['legendary', { ar: 25, weight: 1 }],
+		['common', { ar: 5, weights: [8, 8, 8] }],
+		['uncommon', { ar: 10, weights: [5, 5, 5] }],
+		['rare', { ar: 15, weights: [3, 3, 3, 1] }],
+		['epic', { ar: 20, weights: [2, 2, 2] }],
+		['legendary', { ar: 25, weights: [1, 1, 1] }],
 	]);
 	for (const locale of ['en', 'fr']) {
 		const shields = generatorCatalog.getGenerator('shields', locale);
@@ -115,11 +115,16 @@ test('shield and affliction catalogs preserve their technical distributions', ()
 		});
 		for (const [rarity, expected] of shieldExpectations) {
 			const entries = shields.entries.filter(entry => entry.fields.rarity === rarity);
-			assert.equal(entries.length, 3, `${locale}:${rarity}`);
-			assert.equal(entries.every(entry => (
-				entry.weight === expected.weight
-				&& entry.fields.ar_percentage === expected.ar
-			)), true);
+			assert.deepEqual(
+				entries.map(entry => entry.weight),
+				expected.weights,
+				`${locale}:${rarity}:weights`,
+			);
+			assert.equal(
+				entries.every(entry => entry.fields.ar_percentage === expected.ar),
+				true,
+				`${locale}:${rarity}:ar`,
+			);
 		}
 
 		const affliction = generatorCatalog.getGenerator('affliction', locale);

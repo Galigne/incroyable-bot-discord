@@ -183,6 +183,83 @@
         "name": "Sens de la magie",
         "description": "+2 aux actions de Perception pour détecter les sorts actifs ou objets enchantés proches."
       }
+    },
+    {
+      "id": "pounce",
+      "fields": {
+        "name": "Bond offensif",
+        "description": "+1 à la prochaine action visant à agripper ou mettre une cible à terre après avoir avancé d’au moins 3 mètres vers elle durant le même tour."
+      }
+    },
+    {
+      "id": "charge",
+      "fields": {
+        "name": "Charge",
+        "description": "+1 à la prochaine attaque au corps à corps après avoir avancé en ligne droite d’au moins 5 mètres vers la cible durant le même tour."
+      }
+    },
+    {
+      "id": "constrict",
+      "fields": {
+        "name": "Constriction",
+        "description": "+2 aux actions de Force pour maintenir ou resserrer une prise existante."
+      }
+    },
+    {
+      "id": "wall_climber",
+      "fields": {
+        "name": "Grimpeur de parois",
+        "description": "Peut se déplacer sur des surfaces rugueuses très inclinées ou verticales à la moitié de sa vitesse normale sans jet d’escalade ordinaire."
+      }
+    },
+    {
+      "id": "tremorsense",
+      "fields": {
+        "name": "Perception des vibrations",
+        "description": "Détecte sans la vue les mouvements dans un rayon de 10 mètres lorsque la créature et leur source touchent le même sol."
+      }
+    },
+    {
+      "id": "heat_sense",
+      "fields": {
+        "name": "Perception thermique",
+        "description": "Détecte sans la vue les sources de chaleur dans un rayon de 10 mètres, mais les obstacles solides bloquent ce sens."
+      }
+    },
+    {
+      "id": "prehensile_tail",
+      "fields": {
+        "name": "Queue préhensile",
+        "description": "Peut tenir ou manipuler un objet léger avec sa queue, sans obtenir d’action supplémentaire."
+      }
+    },
+    {
+      "id": "powerful_leap",
+      "fields": {
+        "name": "Bond puissant",
+        "description": "+2 aux actions de Force ou de Dextérité pour sauter."
+      }
+    },
+    {
+      "id": "swarm_body",
+      "fields": {
+        "name": "Corps en essaim",
+        "description": "Peut traverser toute ouverture assez large pour un de ses membres et occuper l’espace d’une autre créature, mais reste une seule créature pour les actions et les effets."
+      }
+    },
+    {
+      "id": "magic_resistance",
+      "fields": {
+        "name": "Résistance à la magie",
+        "description": "+1 aux actions pour résister aux effets magiques hostiles."
+      }
+    },
+    {
+      "id": "extended_reach",
+      "fields": {
+        "name": "Allonge supérieure",
+        "description": "Peut effectuer des attaques ordinaires au corps à corps jusqu’à 2 mètres plus loin qu’une créature de taille comparable."
+      }
     }
   ]
 }

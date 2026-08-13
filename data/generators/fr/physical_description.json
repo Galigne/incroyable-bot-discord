@@ -89,6 +89,198 @@
     {
       "id": "round_spectacles",
       "value": "Des lunettes rondes et un visage long et pensif."
+    },
+    {
+      "id": "youthful_fine_boned",
+      "value": "Une apparence juvénile, un visage aux os fins et un teint lisse."
+    },
+    {
+      "id": "middle_aged_laugh_lines",
+      "value": "L’âge mûr, avec de fines rides autour des yeux et de la bouche."
+    },
+    {
+      "id": "elderly_stooped",
+      "value": "Une apparence âgée, le dos légèrement voûté et le regard vif."
+    },
+    {
+      "id": "tall_lanky",
+      "value": "Très grand et dégingandé, avec de longs membres et des épaules étroites."
+    },
+    {
+      "id": "average_even_proportions",
+      "value": "Une taille moyenne et une silhouette aux proportions régulières."
+    },
+    {
+      "id": "short_stocky",
+      "value": "Petit et trapu, avec un cou épais et des membres robustes."
+    },
+    {
+      "id": "broad_heavy_frame",
+      "value": "Une ossature large et massive accompagnée de grandes mains."
+    },
+    {
+      "id": "thin_narrow_shoulders",
+      "value": "Une silhouette mince, des épaules étroites et des poignets délicats."
+    },
+    {
+      "id": "gaunt_hollow_cheeks",
+      "value": "Une silhouette décharnée, des joues creuses et des clavicules saillantes."
+    },
+    {
+      "id": "compact_muscular",
+      "value": "Une carrure compacte et musclée, avec des jambes puissantes."
+    },
+    {
+      "id": "long_oval_face",
+      "value": "Un visage long et ovale aux traits équilibrés."
+    },
+    {
+      "id": "heart_shaped_face",
+      "value": "Un visage en forme de cœur qui se resserre vers un menton fin."
+    },
+    {
+      "id": "broad_flat_nose",
+      "value": "Un nez large et plat domine un visage autrement ordinaire."
+    },
+    {
+      "id": "hooked_nose",
+      "value": "Un nez aquilin prononcé, particulièrement visible de profil."
+    },
+    {
+      "id": "strong_jaw",
+      "value": "Une mâchoire affirmée et un menton carré."
+    },
+    {
+      "id": "receding_chin",
+      "value": "Un menton fuyant sous une lèvre inférieure proéminente."
+    },
+    {
+      "id": "prominent_ears",
+      "value": "Des oreilles décollées et des yeux rapprochés."
+    },
+    {
+      "id": "arched_brows",
+      "value": "Des sourcils hauts et arqués au-dessus d’yeux étroits."
+    },
+    {
+      "id": "green_almond_eyes",
+      "value": "Des yeux verts en amande bordés de longs cils."
+    },
+    {
+      "id": "amber_wide_set_eyes",
+      "value": "Des yeux ambrés très espacés sous un front lisse."
+    },
+    {
+      "id": "mismatched_eye_colors",
+      "value": "Un œil bleu et l’autre brun."
+    },
+    {
+      "id": "straight_auburn_hair",
+      "value": "Des cheveux auburn et raides coupés juste sous les oreilles."
+    },
+    {
+      "id": "wavy_blond_hair",
+      "value": "Des cheveux blonds et ondulés tombant sur les épaules."
+    },
+    {
+      "id": "coarse_grey_hair",
+      "value": "Des cheveux gris, drus et coupés court."
+    },
+    {
+      "id": "salt_and_pepper_hair",
+      "value": "Des cheveux épais qui grisonnent régulièrement aux tempes."
+    },
+    {
+      "id": "shaved_head",
+      "value": "Un crâne rasé de près qui en souligne la forme."
+    },
+    {
+      "id": "receding_hairline",
+      "value": "Des cheveux soigneusement peignés malgré une ligne frontale qui recule."
+    },
+    {
+      "id": "bald_crown",
+      "value": "Le sommet du crâne dégarni, entouré d’une couronne de cheveux fins."
+    },
+    {
+      "id": "dark_hair_silver_streak",
+      "value": "Des cheveux foncés traversés par une unique mèche naturellement argentée."
+    },
+    {
+      "id": "trimmed_moustache",
+      "value": "Une moustache soigneusement taillée au-dessus d’une bouche étroite."
+    },
+    {
+      "id": "patchy_beard",
+      "value": "Une barbe clairsemée qui pousse irrégulièrement le long de la mâchoire."
+    },
+    {
+      "id": "short_grey_stubble",
+      "value": "Une courte barbe grise et des paupières lourdes."
+    },
+    {
+      "id": "warm_brown_complexion",
+      "value": "Un teint brun chaud et uniforme."
+    },
+    {
+      "id": "ruddy_complexion",
+      "value": "Un teint rougeaud, surtout sur les joues et le nez."
+    },
+    {
+      "id": "neck_birthmark",
+      "value": "Une large marque de naissance irrégulière apparaît sur un côté du cou."
+    },
+    {
+      "id": "crooked_teeth",
+      "value": "Des dents légèrement de travers apparaissent dans un sourire facile."
+    },
+    {
+      "id": "small_even_teeth",
+      "value": "De petites dents régulières et un sourire retenu."
+    },
+    {
+      "id": "lopsided_smile",
+      "value": "Un sourire naturellement de travers creuse une joue."
+    },
+    {
+      "id": "slouched_posture",
+      "value": "Une posture relâchée et voûtée qui fait paraître la personne plus petite."
+    },
+    {
+      "id": "long_striding_gait",
+      "value": "Une démarche à longues enjambées, les bras se balançant librement."
+    },
+    {
+      "id": "careful_uneven_gait",
+      "value": "Une démarche prudente et légèrement inégale laissée par une ancienne blessure à la cheville."
+    },
+    {
+      "id": "large_callused_hands",
+      "value": "De grandes mains aux paumes larges et couvertes de callosités épaisses."
+    },
+    {
+      "id": "slender_long_fingers",
+      "value": "Des mains fines aux doigts inhabituellement longs."
+    },
+    {
+      "id": "crooked_finger",
+      "value": "Un doigt resté tordu après une ancienne fracture."
+    },
+    {
+      "id": "thin_chin_scar",
+      "value": "Une fine cicatrice pâle court sous le menton."
+    },
+    {
+      "id": "healed_broken_nose",
+      "value": "Un nez qui s’est ressoudé légèrement de travers après une ancienne fracture."
+    },
+    {
+      "id": "faded_forearm_tattoo",
+      "value": "Un petit tatouage effacé reste visible sur un avant-bras."
+    },
+    {
+      "id": "inked_wrist_band",
+      "value": "Une simple bande tatouée fait le tour d’un poignet."
     }
   ]
 }

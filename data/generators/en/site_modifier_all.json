@@ -2,8 +2,8 @@
   "schemaVersion": 3,
   "id": "site_modifier_all",
   "visibility": "internal",
-  "name": "Historical site modifiers",
-  "description": "Descriptive historical variations compatible with specific location generators",
+  "name": "General site modifiers",
+  "description": "Persistent conditions and transient weather compatible with multiple site generators",
   "entrySchema": {
     "type": "fields",
     "required": ["name", "description"]
@@ -21,6 +21,79 @@
       "fields": {
         "name": "Immense",
         "description": "Internal distances exceed expectations and demand supplies, navigation, or several stages of exploration."
+      }
+    },
+    {
+      "id": "heavy_rain",
+      "weight": 2,
+      "fields": {
+        "name": "Heavy Rain",
+        "description": "Visibility is reduced, exposed ground turns muddy, tracks wash away, and leaks or rising water threaten low areas."
+      }
+    },
+    {
+      "id": "thunderstorm",
+      "fields": {
+        "name": "Thunderstorm",
+        "description": "Heavy rain and strong wind batter the site while thunder masks distant sounds and lightning endangers exposed heights."
+      }
+    },
+    {
+      "id": "dense_fog",
+      "weight": 2,
+      "fields": {
+        "name": "Dense Fog",
+        "description": "Visibility falls to a short distance, making landmarks, ranged observation, and long-distance orientation unreliable."
+      }
+    },
+    {
+      "id": "strong_winds",
+      "weight": 2,
+      "fields": {
+        "name": "Strong Winds",
+        "description": "Exposed movement, projectiles, loose objects, open flames, and elevated structures become difficult to manage."
+      }
+    },
+    {
+      "id": "heavy_snow",
+      "fields": {
+        "name": "Heavy Snow",
+        "description": "Falling snow reduces visibility and movement; fresh tracks stand out before gradually filling."
+      }
+    },
+    {
+      "id": "cold_snap",
+      "fields": {
+        "name": "Cold Snap",
+        "description": "Exposed water freezes, surfaces become slick, and prolonged outdoor activity demands shelter and warmth."
+      }
+    },
+    {
+      "id": "heat_wave",
+      "fields": {
+        "name": "Heat Wave",
+        "description": "Shade and drinking water become important, and prolonged exertion in exposed areas quickly becomes exhausting."
+      }
+    },
+    {
+      "id": "hailstorm",
+      "fields": {
+        "name": "Hailstorm",
+        "description": "Hard impacts make exposed travel difficult and create constant noise on roofs, armor, and bare ground."
+      }
+    },
+    {
+      "id": "dust_storm",
+      "fields": {
+        "name": "Dust Storm",
+        "description": "Airborne dust obscures landmarks, irritates breathing, and makes exposed routes difficult to navigate."
+      }
+    },
+    {
+      "id": "ashfall",
+      "fields": {
+        "name": "Ashfall",
+        "description": "Fine ash coats surfaces, obscures distant landmarks, reveals recent passage, and contaminates exposed supplies."
       }
     }
   ]

@@ -236,6 +236,102 @@
         "name": "Inspiring Presence",
         "description": "Once per scene, an ally who hears the character gains +1 against fear."
       }
+    },
+    {
+      "id": "locksmith",
+      "weight": 2,
+      "fields": {
+        "name": "Locksmith",
+        "description": "+2 to appropriate actions for opening or understanding ordinary mechanical locks."
+      }
+    },
+    {
+      "id": "burglar",
+      "fields": {
+        "name": "Burglar",
+        "description": "+2 to Dexterity actions for quietly entering, crossing, or leaving a secured building."
+      }
+    },
+    {
+      "id": "marksman",
+      "fields": {
+        "name": "Marksman",
+        "description": "+1 to ranged weapon attacks against a visible target at least 10 meters away."
+      }
+    },
+    {
+      "id": "brawler",
+      "weight": 2,
+      "fields": {
+        "name": "Brawler",
+        "description": "+1 to appropriate actions involving unarmed fighting or grappling."
+      }
+    },
+    {
+      "id": "herbalist",
+      "weight": 2,
+      "fields": {
+        "name": "Herbalist",
+        "description": "+2 when identifying or working with medicinal or poisonous plants."
+      }
+    },
+    {
+      "id": "alchemist",
+      "fields": {
+        "name": "Alchemist",
+        "description": "+2 to Intelligence actions for identifying, preparing, or safely handling alchemical substances."
+      }
+    },
+    {
+      "id": "blacksmith",
+      "weight": 2,
+      "fields": {
+        "name": "Blacksmith",
+        "description": "+2 to appropriate actions for forging, evaluating, or repairing metal weapons, armor, and tools."
+      }
+    },
+    {
+      "id": "acrobat",
+      "weight": 2,
+      "fields": {
+        "name": "Acrobat",
+        "description": "+2 to Dexterity actions involving balance, tumbling, or acrobatic movement."
+      }
+    },
+    {
+      "id": "investigator",
+      "fields": {
+        "name": "Investigator",
+        "description": "+2 to Perception actions when examining a scene for physical evidence."
+      }
+    },
+    {
+      "id": "commander",
+      "fields": {
+        "name": "Commander",
+        "description": "+1 to Charisma actions made to coordinate a willing group under immediate pressure."
+      }
+    },
+    {
+      "id": "impersonator",
+      "fields": {
+        "name": "Actor and Impersonator",
+        "description": "+2 to Charisma actions when performing or imitating a person studied in advance."
+      }
+    },
+    {
+      "id": "historian",
+      "fields": {
+        "name": "Historian",
+        "description": "+2 to Intelligence actions involving historical knowledge."
+      }
+    },
+    {
+      "id": "runesmith",
+      "fields": {
+        "name": "Runesmith",
+        "description": "+2 to appropriate actions involving identifying, understanding, or creating runes."
+      }
     }
   ]
 }

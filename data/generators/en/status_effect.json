@@ -225,6 +225,65 @@
         "name": "Meditative",
         "description": "The subject is deeply focused; interruption ends the sought benefit and leaves brief disorientation."
       }
+    },
+    {
+      "id": "prone",
+      "weight": 2,
+      "fields": {
+        "name": "Prone",
+        "description": "The subject is lying on the ground, limiting movement and defense until they stand."
+      }
+    },
+    {
+      "id": "restrained",
+      "weight": 2,
+      "fields": {
+        "name": "Restrained",
+        "description": "Bindings, terrain, or another force severely limit the subject’s movement."
+      }
+    },
+    {
+      "id": "grappled",
+      "weight": 2,
+      "fields": {
+        "name": "Grappled",
+        "description": "Another creature holds the subject in place until the grip is escaped or broken."
+      }
+    },
+    {
+      "id": "unconscious",
+      "fields": {
+        "name": "Unconscious",
+        "description": "The subject is unaware and cannot take deliberate actions until consciousness returns."
+      }
+    },
+    {
+      "id": "suffocating",
+      "fields": {
+        "name": "Suffocating",
+        "description": "The subject cannot breathe adequately and requires air before the condition becomes life-threatening."
+      }
+    },
+    {
+      "id": "exhausted",
+      "fields": {
+        "name": "Exhausted",
+        "description": "Severe weariness limits sustained activity until the subject receives substantial rest."
+      }
+    },
+    {
+      "id": "starving",
+      "fields": {
+        "name": "Starving",
+        "description": "Prolonged lack of food weakens the subject and makes further exertion difficult."
+      }
+    },
+    {
+      "id": "dehydrated",
+      "fields": {
+        "name": "Dehydrated",
+        "description": "Prolonged lack of water causes weakness, dizziness, and increasing difficulty with exertion."
+      }
     }
   ]
 }

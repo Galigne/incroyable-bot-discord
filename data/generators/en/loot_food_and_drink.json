@@ -87,6 +87,70 @@
         "name": "Regional delicacy",
         "description": "A distinctive dish prized locally and surprising to outsiders."
       }
+    },
+    {
+      "id": "smoked_fish",
+      "weight": 6,
+      "fields": {
+        "name": "Smoked fish",
+        "description": "Firm salted fish preserved over smoke for travel or winter stores."
+      }
+    },
+    {
+      "id": "pepper_root_stew",
+      "weight": 3,
+      "fields": {
+        "name": "Pepper-root stew",
+        "description": "A thick stew made with a sharp, peppery root and whatever vegetables are available."
+      }
+    },
+    {
+      "id": "mushroom_broth",
+      "weight": 4,
+      "fields": {
+        "name": "Mushroom broth",
+        "description": "A dark savory broth made from several varieties of edible mushroom."
+      }
+    },
+    {
+      "id": "honey_cakes",
+      "weight": 4,
+      "fields": {
+        "name": "Honey cakes",
+        "description": "Small dense cakes sweetened with honey and easy to carry."
+      }
+    },
+    {
+      "id": "spiced_nuts",
+      "weight": 5,
+      "fields": {
+        "name": "Spiced nuts",
+        "description": "Roasted nuts coated with salt and a warming blend of spices."
+      }
+    },
+    {
+      "id": "pickled_vegetables",
+      "weight": 5,
+      "fields": {
+        "name": "Pickled vegetables",
+        "description": "Crisp seasonal vegetables preserved in a sharp brine."
+      }
+    },
+    {
+      "id": "fermented_milk",
+      "weight": 3,
+      "fields": {
+        "name": "Fermented milk",
+        "description": "A tart cultured drink served plain or lightly salted."
+      }
+    },
+    {
+      "id": "strong_herbal_tonic",
+      "weight": 2,
+      "fields": {
+        "name": "Strong herbal tonic",
+        "description": "A bitter nonmagical drink brewed from roots and herbs for its sharp flavor."
+      }
     }
   ]
 }
