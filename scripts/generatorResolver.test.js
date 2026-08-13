@@ -116,14 +116,14 @@ test('inline references resolve text, structured display, explicit fields, and p
 	assert.equal(result.outputType, 'value');
 	assert.equal(
 		result.value,
-		'Recover Relic from Criminal — An outlaw at Relic — A valuable object.',
+		'Recover Relic from Outlaw — An outlaw at Relic — A valuable object.',
 	);
 	assert.deepEqual(
 		result.provenance.map(provenanceIdentity),
 		[
 			'entry:random:quest:recover_item',
 			'entry:random:item:relic',
-			'entry:fixed:person:criminal',
+			'entry:fixed:person:outlaw',
 			'entry:random:item:relic',
 		],
 	);
@@ -166,7 +166,7 @@ test('fixed inline references do not consume randomness for entry selection', ()
 			name: 'Fixed prompt',
 			description: 'A fixed prompt',
 			entrySchema: { type: 'text' },
-			entries: [{ id: 'fixed_role', value: 'Meet {{ person:criminal }}.' }],
+			entries: [{ id: 'fixed_role', value: 'Meet {{ person:outlaw }}.' }],
 		}],
 	]);
 	const resolver = createGeneratorResolver({ getGenerator: id => catalog.get(id) });
@@ -178,7 +178,7 @@ test('fixed inline references do not consume randomness for entry selection', ()
 		},
 	});
 
-	assert.equal(result.value, 'Meet Criminal — An outlaw.');
+	assert.equal(result.value, 'Meet Outlaw — An outlaw.');
 	assert.equal(calls, 1);
 	assert.equal(result.provenance[1].selection, 'fixed');
 });
@@ -191,17 +191,17 @@ test('selectors return values, complete field groups, individual fields, and dis
 	};
 	const fieldsResult = {
 		outputType: 'fields',
-		fields: { name: 'Criminal', description: 'An outlaw.' },
-		selectedField: 'Criminal',
-		display: 'Criminal — An outlaw.',
+		fields: { name: 'Outlaw', description: 'An outlaw.' },
+		selectedField: 'Outlaw',
+		display: 'Outlaw — An outlaw.',
 	};
 
 	assert.equal(selectResolvedOutput(valueResult, 'value'), 'Rain');
 	assert.equal(selectResolvedOutput(valueResult, 'display'), 'Rain');
 	assert.deepEqual(selectResolvedOutput(fieldsResult, 'fields'), fieldsResult.fields);
 	assert.notEqual(selectResolvedOutput(fieldsResult, 'fields'), fieldsResult.fields);
-	assert.equal(selectResolvedOutput(fieldsResult, 'fields.name'), 'Criminal');
-	assert.equal(selectResolvedOutput(fieldsResult, 'display'), 'Criminal — An outlaw.');
+	assert.equal(selectResolvedOutput(fieldsResult, 'fields.name'), 'Outlaw');
+	assert.equal(selectResolvedOutput(fieldsResult, 'display'), 'Outlaw — An outlaw.');
 	assert.throws(
 		() => selectResolvedOutput(valueResult, 'fields.name'),
 		error => error.code === 'INVALID_GENERATOR_SELECTOR',
@@ -317,10 +317,10 @@ test('/gen rendering preserves value and structured-field layouts', () => {
 
 	const fieldsEmbed = createGeneratedEmbed({
 		generatorName: 'People',
-		entryId: 'criminal',
+		entryId: 'outlaw',
 		outputType: 'fields',
-		fields: { name: 'Criminal', description: 'An outlaw.' },
-		displayFields: { name: 'Criminal', description: 'An outlaw.' },
+		fields: { name: 'Outlaw', description: 'An outlaw.' },
+		displayFields: { name: 'Outlaw', description: 'An outlaw.' },
 		provenance: [],
 		modifiers: [],
 	}).toJSON();
@@ -426,8 +426,8 @@ function createFixtureCatalog(locale, includeRequest) {
 			id: 'recover_item',
 			weight: 2,
 			value: french
-				? 'Récupérez {{ item.name }} auprès de {{ person:criminal }} à {{ item }}.'
-				: 'Recover {{ item.name }} from {{ person:criminal }} at {{ item }}.',
+				? 'Récupérez {{ item.name }} auprès de {{ person:outlaw }} à {{ item }}.'
+				: 'Recover {{ item.name }} from {{ person:outlaw }} at {{ item }}.',
 		}],
 	};
 	if (includeRequest) {
@@ -467,9 +467,9 @@ function createPersonGenerator(locale) {
 		description: french ? 'Rôles de personnages' : 'Character roles',
 		entrySchema: { type: 'fields', required: ['name', 'description'] },
 		entries: [{
-			id: 'criminal',
+			id: 'outlaw',
 			fields: {
-				name: french ? 'Criminel' : 'Criminal',
+				name: french ? 'Hors-la-loi' : 'Outlaw',
 				description: french ? 'Un hors-la-loi' : 'An outlaw',
 			},
 		}, {

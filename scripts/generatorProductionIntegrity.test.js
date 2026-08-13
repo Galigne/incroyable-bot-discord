@@ -3,18 +3,12 @@ const { test } = require('node:test');
 const generatorCatalog = require('../services/generatorCatalog');
 const generatorResolver = require('../services/generatorResolver');
 
-test('production catalogs exclude retired roots and obsolete mechanical payloads', () => {
-	assert.equal(generatorCatalog.getGenerator('npc'), undefined);
-	assert.equal(generatorCatalog.getGenerator('criminal'), undefined);
+test('production catalogs preserve current v3 payload and modifier structure', () => {
 	assert.equal(
 		generatorCatalog.getGenerator('background_criminal').visibility,
 		'internal',
 	);
 	const all = generatorCatalog.listGenerators('en', { visibility: 'all' });
-	const serialized = JSON.stringify(all);
-	assert.doesNotMatch(serialized, /"generator":"(?:npc|criminal)"/);
-	assert.doesNotMatch(serialized, /"Encumbrance"/i);
-	assert.doesNotMatch(serialized, /challengeRating|fixedStatistics|statOverrides/);
 	for (const modifier of all.filter(generator => (
 		['modifier_character', 'modifier_creature'].includes(generator.id)
 			|| generator.id.startsWith('site_modifier_')

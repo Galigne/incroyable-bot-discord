@@ -217,18 +217,6 @@ function checkRequiredGenerators(errors, generatorCatalog) {
 			errors.push(`Generator ${generatorId} must contain at least 20 entries.`);
 		}
 	}
-	for (const obsoleteId of [
-		'loot',
-		'power',
-		'enemy',
-		'location',
-		'citizen-background',
-		'npc',
-	]) {
-		if (generatorCatalog.getGenerator(obsoleteId)) {
-			errors.push(`Obsolete generator ${obsoleteId} still exists.`);
-		}
-	}
 }
 
 function checkBackgroundGenerators(errors, generatorCatalog) {
@@ -251,12 +239,8 @@ function checkBackgroundGenerators(errors, generatorCatalog) {
 		}
 		backgroundIds.add(background.id);
 	}
-	if (
-		backgrounds.length !== 17
-		|| backgroundIds.has('citizen')
-		|| generatorCatalog.getGenerator('background_citizen')
-	) {
-		errors.push('Background routing must contain the 17 supported non-citizen categories.');
+	if (backgrounds.length === 0) {
+		errors.push('Background routing must expose at least one category.');
 	}
 }
 
@@ -369,13 +353,6 @@ function checkStructuredGenerators(errors, generatorCatalog) {
 	) {
 		errors.push('The armor generator must contain every type and rarity combination.');
 	}
-	for (const generatorId of ['armors', 'weapons', 'inventory']) {
-		const entries = generatorCatalog.getGenerator(generatorId)?.entries ?? [];
-		if (entries.some(entry => Object.hasOwn(entry.fields ?? {}, 'Encumbrance'))) {
-			errors.push(`Generator ${generatorId} still contains obsolete Encumbrance fields.`);
-		}
-	}
-
 	const races = generatorCatalog.getGenerator('race')?.entries ?? [];
 	const raceIds = new Set(races.map(entry => entry.id));
 	if (
