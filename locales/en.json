@@ -149,27 +149,27 @@
       "title": "Generated {{category}}",
       "batchResultTitle": "Result {{index}}/{{count}} — {{category}}",
       "modifierTitle": "Generated modifier {{category}}",
-      "behavior": "Resolves one weighted result from the chosen localized public generator, then displays each configured automatic modifier as a separate result. The optional count generates 1 to 10 independent results in one response; it defaults to 1 and duplicate results are allowed. Inline references and modifier relationships share a maximum nesting depth of four and preserve technical provenance. The optional modifier source must be declared by the selected category; choosing it generates it once per result regardless of its automatic percentage."
+      "behavior": "Generates one weighted result from the chosen category. Some results include nested generation, and any automatic modifiers configured for the category are shown separately. The optional count generates 1 to 10 independent results in one response; it defaults to 1 and duplicate results are allowed. If a modifier source is selected, it must be available for the chosen category and is generated once per result alongside any modifiers applied automatically."
     },
     "genChar": {
       "description": "Generate a random character (configured DM role or server owner)",
       "schemaDescription": "Generate and save a complete random character",
-      "keyOption": "Unique save key, make it short and remember it.",
+      "keyOption": "Unique save key; keep it short and memorable.",
       "levelOption": "Character level; omitted means a random level from 1 to 10",
       "backgroundOption": "Character background; omitted means a random background",
       "levelChoice": "Level {{level}}",
       "success": "Generated character **{{name}}** with key `{{key}}`.",
-      "behavior": "Creates and saves a complete random character under a unique CharacterKey. Level must be 1–10 and is random when omitted; background is also optional and random by default. The public `background` router selects one broad category, then the generic v3 inline resolver independently selects an archetype and a reusable physical description. Backstory and goals start empty. A shared statistical profile allocates statistics, while resources, RULEs, armor, weapons, inventory, gold, temporary status effects, and persistent modifiers from the character pool follow the selected level and game rules. Encumbrance remains manual and defaults to 0 / 0."
+      "behavior": "Creates and saves a complete random character under a unique CharacterKey. Level must be 1–10 and is random when omitted; background is also optional and random by default. The selected background determines the character’s archetype, while the physical description is generated independently. Backstory and goals start empty. Statistics, resources, RULEs, armor, weapons, inventory, gold, temporary status effects, and persistent character modifiers follow the selected level and game rules. Encumbrance remains manual and defaults to 0 / 0."
     },
     "genCreature": {
       "description": "Generate a creature (configured DM role or server owner)",
       "schemaDescription": "Generate and save a complete random creature",
       "keyOption": "Globally unique creature save key",
       "typeOption": "Optional creature type from the public creature catalog; omitted means a random type",
-      "levelOption": "Creature level; randomly 1 to 10 when omitted",
+      "levelOption": "Creature level; random from 1 to 10 when omitted.",
       "levelChoice": "Level {{level}}",
       "success": "Generated **{{name}}** and saved it with CreatureKey `{{key}}`.",
-      "behavior": "Atomically creates and saves one complete creature by resolving an optional stable type entry from the public `creature` catalog, or randomly selecting one when type is omitted, then following its referenced detail generator. The CreatureKey is globally unique and level must be 1–10 or is random when omitted. Shared statistical profiles allocate statistics and derive resources; RULEs are granted only by explicit source references. Temporary status effects come from the status-effect catalog, while persistent modifiers come only from the creature modifier pool. Equipment, inventory, natural armor, and armor metadata are resolved and persisted with stable provenance. Encumbrance remains manual and defaults to 0 / 0. Only a configured DM or the server owner may use this command."
+      "behavior": "Creates and saves one complete creature. If a type is provided, the creature is generated from that category; otherwise, a category is selected at random. The CreatureKey is globally unique, and level must be 1–10 or is random when omitted. Statistics and derived resources follow the selected creature and game rules; RULEs are granted only when explicitly specified. Temporary status effects use the status-effect catalog, while persistent modifiers use the creature modifier catalog. Equipment, inventory, and natural armor are determined by the selected creature. Encumbrance remains manual and defaults to 0 / 0. Only a configured DM or the server owner may use this command."
     },
     "get": {
       "description": "Display an entity summary or one compatible detailed field",
@@ -415,7 +415,7 @@
     "statisticsNameUnknown": "Unknown statistic `{{stat}}`. Expected: {{statistics}}.",
     "statisticsDuplicate": "Statistic `{{stat}}` appears more than once.",
     "statisticsMissing": "Missing required statistic `{{stat}}`.",
-    "collectionValueRequired": "A value is required for the {{field}}.",
+    "collectionValueRequired": "A value is required for {{field}}.",
     "mustBeNumber": "{{field}} must be a number.",
     "pairFormat": "{{field}} must use exactly one `current:max` pair.",
     "ruleNameRequired": "A RULE name is required before the `:` separator.",
@@ -426,13 +426,13 @@
     "creatureLevelInvalid": "Creature level must be a whole number between 1 and 10.",
     "creatureLevelRange": "Creature level must be a whole number between 1 and 10.",
     "creatureStatisticRange": "Creature statistic `{{stat}}` must be between 0 and 100.",
-    "creatureResourceRange": "Creature resource `{{resource}}` must satisfy 0 ≤ current ≤ max; AP must also be whole and at most 10.",
+    "creatureResourceRange": "Creature resource `{{resource}}` must satisfy 0 ≤ current ≤ max; AP must also be a whole number and at most 10.",
     "apRange": "{{apLabel}} must be a whole number between 0 and {{max}}.",
     "apCurrentAboveMax": "Current {{apLabel}} cannot be greater than maximum {{apLabel}}.",
     "apMaxBelowCurrent": "Maximum {{apLabel}} cannot be lower than current {{apLabel}}.",
     "healResourcesOnly": "Only {{hpLabel}} and {{arLabel}} can be restored with the heal command.",
     "healResourceInvalid": "The heal resource must be {{hpLabel}}, {{arLabel}}, or both.",
-    "percentageInvalid": "The rest percentage must be between 0 and 100.",
+    "percentageInvalid": "The restoration percentage must be between 0 and 100.",
     "damageInvalid": "Damage must be a positive whole number.",
     "piercingInvalid": "Piercing must be true or false.",
     "characterLevelInvalid": "Character level must be a whole number between 1 and 10.",

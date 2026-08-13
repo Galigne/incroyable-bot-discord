@@ -166,8 +166,8 @@
       "id": "a_famous_adventurer_publicly_credits_the_party_for",
       "weight": 2,
       "fields": {
-        "name": "Un aventurier célèbre attribue publiquement au groupe un exploit qu’il n’a pas accompli et lui demande de préserver le mensonge.",
-        "description": "Un aventurier célèbre attribue publiquement au groupe un exploit qu’il n’a pas accompli et lui demande de préserver le mensonge."
+        "name": "Un aventurier célèbre attribue publiquement au groupe un exploit que le groupe n’a jamais accompli et lui demande d’entretenir le mensonge.",
+        "description": "Un aventurier célèbre attribue publiquement au groupe un exploit que le groupe n’a jamais accompli et lui demande d’entretenir le mensonge."
       }
     },
     {
@@ -334,7 +334,7 @@
       "id": "sudden_epidemic",
       "fields": {
         "name": "Épidémie soudaine",
-        "description": "Un membre du groupe montre les premiers signes d’une maladie que les habitants reconnaissent avec terreur."
+        "description": "Un membre du groupe montre les premiers signes d’une maladie que les habitants reconnaissent avec effroi."
       }
     },
     {

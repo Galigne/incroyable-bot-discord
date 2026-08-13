@@ -95,7 +95,7 @@
       "id": "outlander",
       "weight": 3,
       "fields": {
-        "name": "Sauvageon",
+        "name": "Habitant des terres sauvages",
         "description": "Chasseurs, nomades, ermites et membres de peuples tribaux",
         "generator": "{{ outlander }}"
       }

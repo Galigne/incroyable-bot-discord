@@ -76,8 +76,8 @@
       "id": "a_child_calmly_asks_the_party_to_remove",
       "weight": 2,
       "fields": {
-        "name": "A child calmly asks the party to remove the ghost living under their bed; the ghost claims the child is the haunting.",
-        "description": "A child calmly asks the party to remove the ghost living under their bed; the ghost claims the child is the haunting."
+        "name": "A child calmly asks the party to remove the ghost living under their bed; the ghost claims the child is the one haunting the house.",
+        "description": "A child calmly asks the party to remove the ghost living under their bed; the ghost claims the child is the one haunting the house."
       }
     },
     {
@@ -166,8 +166,8 @@
       "id": "a_famous_adventurer_publicly_credits_the_party_for",
       "weight": 2,
       "fields": {
-        "name": "A famous adventurer publicly credits the party for a deed they did not do and asks them to maintain the story.",
-        "description": "A famous adventurer publicly credits the party for a deed they did not do and asks them to maintain the story."
+        "name": "A famous adventurer publicly credits the party for a deed they never performed and asks them to maintain the story.",
+        "description": "A famous adventurer publicly credits the party for a deed they never performed and asks them to maintain the story."
       }
     },
     {
@@ -285,7 +285,7 @@
       "id": "fainting",
       "fields": {
         "name": "Fainting",
-        "description": "A background character loses consciousness just before revealing essential information."
+        "description": "An NPC loses consciousness just before revealing essential information."
       }
     },
     {
@@ -334,7 +334,7 @@
       "id": "sudden_epidemic",
       "fields": {
         "name": "Sudden Epidemic",
-        "description": "A group member shows the first signs of a disease the locals recognize with terror."
+        "description": "A group member shows the first signs of a disease the locals recognize with dread."
       }
     },
     {

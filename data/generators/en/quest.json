@@ -50,7 +50,7 @@
     },
     {
       "id": "first_contact",
-      "value": "Establish lasting first contact with a community of the {{ race }} people."
+      "value": "Establish first contact with a community of the {{ race }} people and build a lasting relationship."
     },
     {
       "id": "map_unknown_phenomenon",
@@ -106,11 +106,11 @@
     },
     {
       "id": "deliver_contested_goods",
-      "value": "Deliver goods represented by {{ valuables }} to someone with the {{ background }} background, while several figures with the {{ background:criminal }} background carry the same parcel description."
+      "value": "Deliver goods represented by {{ valuables }} to someone with the {{ background }} background, while several figures with the {{ background:criminal }} background have been given the same description of the parcel."
     },
     {
       "id": "treasure_hunt_site",
-      "value": "Locate {{ valuables }} in a cache hidden at or within {{ site }}."
+      "value": "Locate {{ valuables }} in a cache hidden within {{ site }}."
     },
     {
       "id": "cure_affliction",

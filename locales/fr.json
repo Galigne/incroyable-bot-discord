@@ -149,7 +149,7 @@
       "title": "{{category}} — résultat généré",
       "batchResultTitle": "Résultat {{index}}/{{count}} — {{category}}",
       "modifierTitle": "Modificateur généré : {{category}}",
-      "behavior": "Résout un résultat pondéré depuis le générateur public localisé choisi, puis affiche chaque modificateur automatique configuré comme un résultat distinct. Le nombre facultatif génère de 1 à 10 résultats indépendants dans une seule réponse ; sa valeur par défaut est 1 et les doublons sont autorisés. Les références intégrées et les relations de modificateurs partagent une profondeur maximale de quatre et conservent la provenance technique. La source de modificateur facultative doit être déclarée par la catégorie choisie ; la sélectionner la génère une fois par résultat, quelle que soit sa probabilité automatique."
+      "behavior": "Génère un résultat pondéré dans la catégorie choisie. Certains résultats comprennent des tirages imbriqués, et les modificateurs automatiques prévus pour la catégorie sont affichés séparément. Le nombre facultatif produit de 1 à 10 résultats indépendants dans une même réponse ; sa valeur par défaut est 1 et les doublons sont autorisés. Si une source de modificateur est choisie, elle doit être disponible pour la catégorie et est générée une fois par résultat, en plus de toute application automatique."
     },
     "genChar": {
       "description": "Générer un personnage (rôle MJ configuré ou propriétaire du serveur)",

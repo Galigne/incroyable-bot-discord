@@ -29,7 +29,7 @@
       "weight": 8,
       "fields": {
         "name": "Bread and hard cheese",
-        "description": "A durable, ordinary meal suited to travel."
+        "description": "A simple meal that keeps well and is suited to travel."
       }
     },
     {
@@ -93,7 +93,7 @@
       "weight": 6,
       "fields": {
         "name": "Smoked fish",
-        "description": "Firm salted fish preserved over smoke for travel or winter stores."
+        "description": "Firm salted fish smoked for travel or winter stores."
       }
     },
     {
@@ -109,7 +109,7 @@
       "weight": 4,
       "fields": {
         "name": "Mushroom broth",
-        "description": "A dark savory broth made from several varieties of edible mushroom."
+        "description": "A dark savory broth made from several varieties of edible mushrooms."
       }
     },
     {

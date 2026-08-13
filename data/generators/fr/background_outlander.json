@@ -2,8 +2,8 @@
   "schemaVersion": 3,
   "id": "outlander",
   "visibility": "internal",
-  "name": "Archétypes de sauvageon",
-  "description": "Rôles liés à la nature et aux frontières",
+  "name": "Archétypes des terres sauvages",
+  "description": "Rôles liés aux terres sauvages et aux régions frontalières",
   "entrySchema": {
     "type": "text"
   },

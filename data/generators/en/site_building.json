@@ -267,14 +267,14 @@
       "id": "great_gate",
       "fields": {
         "name": "Great Gate",
-        "description": "The city’s main entrance concentrates guards, taxes, stranded travelers, and suspicious goods."
+        "description": "The city’s main entrance is crowded with guards and tax collectors, stranded travelers, and suspicious goods."
       }
     },
     {
       "id": "bakery_and_pastry_shop",
       "fields": {
         "name": "Bakery and Pastry Shop",
-        "description": "The communal oven has burned without fuel for nights and draws visitors after closing."
+        "description": "The communal oven has burned without fuel for several nights and draws visitors after closing."
       }
     },
     {
@@ -316,7 +316,7 @@
       "id": "secondhand_shop",
       "fields": {
         "name": "Secondhand Shop",
-        "description": "Ordinary objects mingle with stolen keepsakes and relics whose true function the seller ignores."
+        "description": "Ordinary objects mingle with stolen keepsakes and relics whose true function the seller does not know."
       }
     },
     {

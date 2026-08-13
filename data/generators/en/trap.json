@@ -30,7 +30,7 @@
     {
       "id": "a_tripwire_releases_dozens_of_glass_marbles_while",
       "weight": 3,
-      "value": "A tripwire releases dozens of glass marbles while hidden shutters create a steep downhill floor."
+      "value": "A tripwire releases dozens of glass marbles while hidden panels sharply tilt the floor."
     },
     {
       "id": "a_door_handle_steals_the_openers_shadow_the",
@@ -81,7 +81,7 @@
     {
       "id": "a_music_box_puts_listeners_to_sleep_only",
       "weight": 2,
-      "value": "A music box puts listeners to sleep only when its melody stops, making destroying it immediately dangerous."
+      "value": "A music box puts listeners to sleep only when its melody stops, making immediate destruction dangerous."
     },
     {
       "id": "a_pantry_mimic_is_harmless_but_attacking_it",

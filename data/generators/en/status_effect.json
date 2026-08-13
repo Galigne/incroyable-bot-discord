@@ -110,7 +110,7 @@
       "weight": 2,
       "fields": {
         "name": "Confused",
-        "description": "the character has difficulty distinguishing allies, enemies, or directions."
+        "description": "has difficulty distinguishing allies, enemies, or directions."
       }
     },
     {
@@ -125,7 +125,7 @@
       "id": "stunned",
       "fields": {
         "name": "Stunned",
-        "description": "the character temporarily loses the ability to take normal actions."
+        "description": "temporarily loses the ability to take normal actions."
       }
     },
     {
@@ -152,7 +152,7 @@
     {
       "id": "petrifying",
       "fields": {
-        "name": "Petrifying",
+        "name": "Petrification",
         "description": "the body is slowly turning to stone and requires urgent intervention."
       }
     },
@@ -160,21 +160,21 @@
       "id": "possessed",
       "fields": {
         "name": "Possessed",
-        "description": "an outside will occasionally contests control of the character."
+        "description": "An outside will occasionally contest control of the subject."
       }
     },
     {
       "id": "marked",
       "fields": {
         "name": "Marked",
-        "description": "a magical sign allows a hostile creature or effect to track the character."
+        "description": "a magical sign allows a hostile creature or effect to track the subject."
       }
     },
     {
       "id": "invisible",
       "fields": {
         "name": "Invisible",
-        "description": "the character cannot be seen normally but still makes sound and leaves traces."
+        "description": "cannot be seen normally but still makes sound and leaves traces."
       }
     },
     {

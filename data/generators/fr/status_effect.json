@@ -54,7 +54,7 @@
       "weight": 2,
       "fields": {
         "name": "Transi",
-        "description": "les déplacements et les actions fondées sur la Vitesse sont réduits jusqu’à ce que le personnage soit réchauffé."
+        "description": "les déplacements et les actions fondées sur la Vitesse sont réduits jusqu’au réchauffement."
       }
     },
     {
@@ -110,7 +110,7 @@
       "weight": 2,
       "fields": {
         "name": "Confus",
-        "description": "Le personnage distingue difficilement ses alliés, ses ennemis et les directions."
+        "description": "distingue difficilement alliés, ennemis et directions."
       }
     },
     {
@@ -160,14 +160,14 @@
       "id": "possessed",
       "fields": {
         "name": "Possédé",
-        "description": "une volonté étrangère tente par moments de prendre le contrôle du personnage."
+        "description": "une volonté étrangère tente par moments de prendre le contrôle."
       }
     },
     {
       "id": "marked",
       "fields": {
         "name": "Marqué",
-        "description": "un signe magique permet à une créature ou à un effet hostile de suivre le personnage."
+        "description": "un signe magique permet à une créature ou à un effet hostile de suivre l’être marqué."
       }
     },
     {
@@ -195,7 +195,7 @@
       "id": "distracted",
       "fields": {
         "name": "Distrait",
-        "description": "Le personnage perd le fil de son environnement et subit un désavantage à sa prochaine action exigeant une attention soutenue."
+        "description": "L’attention portée à l’environnement se relâche, ce qui impose un désavantage à la prochaine action exigeant une attention soutenue."
       }
     },
     {
@@ -216,14 +216,14 @@
       "id": "feverish",
       "fields": {
         "name": "Fiévreux",
-        "description": "La maladie épuise le personnage et rend les efforts prolongés plus difficiles."
+        "description": "La maladie épuise l’organisme et rend les efforts prolongés plus difficiles."
       }
     },
     {
       "id": "meditative",
       "fields": {
         "name": "Méditatif",
-        "description": "Le personnage est profondément concentré ; l’interrompre met fin au bénéfice recherché et provoque une brève désorientation."
+        "description": "Une profonde concentration mobilise toute l’attention ; toute interruption met fin au bénéfice recherché et provoque une brève désorientation."
       }
     },
     {
@@ -231,7 +231,7 @@
       "weight": 2,
       "fields": {
         "name": "À terre",
-        "description": "Le personnage est étendu au sol, ce qui limite ses déplacements et sa défense jusqu’à ce qu’il se relève."
+        "description": "La position au sol limite les déplacements et la défense jusqu’à ce que l’on se relève."
       }
     },
     {
@@ -239,7 +239,7 @@
       "weight": 2,
       "fields": {
         "name": "Entravé",
-        "description": "Des liens, le terrain ou une autre force limitent fortement les mouvements du personnage."
+        "description": "Des liens, le terrain ou une autre force limitent fortement les mouvements."
       }
     },
     {
@@ -247,35 +247,35 @@
       "weight": 2,
       "fields": {
         "name": "Agrippé",
-        "description": "Une autre créature maintient le personnage en place jusqu’à ce qu’il se dégage ou rompe la prise."
+        "description": "Une autre créature maintient sa cible en place jusqu’à ce qu’elle se dégage ou rompe la prise."
       }
     },
     {
       "id": "unconscious",
       "fields": {
         "name": "Inconscient",
-        "description": "Le personnage ne perçoit plus son environnement et ne peut agir volontairement avant de reprendre connaissance."
+        "description": "L’inconscience empêche de percevoir l’environnement et d’agir volontairement jusqu’au réveil."
       }
     },
     {
       "id": "suffocating",
       "fields": {
         "name": "Privé d’air",
-        "description": "Le personnage manque d’air et doit pouvoir respirer avant que sa vie ne soit menacée."
+        "description": "Une respiration insuffisante met la vie en danger si l’accès à l’air n’est pas rapidement rétabli."
       }
     },
     {
       "id": "exhausted",
       "fields": {
         "name": "Épuisé",
-        "description": "Une fatigue extrême limite les activités prolongées jusqu’à ce que le personnage bénéficie d’un repos prolongé."
+        "description": "Une fatigue extrême limite les activités prolongées jusqu’à un repos suffisant."
       }
     },
     {
       "id": "starving",
       "fields": {
         "name": "Affamé",
-        "description": "Un manque prolongé de nourriture affaiblit le personnage et rend tout effort supplémentaire difficile."
+        "description": "Un manque prolongé de nourriture affaiblit l’organisme et rend tout effort supplémentaire difficile."
       }
     },
     {

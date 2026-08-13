@@ -50,7 +50,7 @@
     },
     {
       "id": "first_contact",
-      "value": "Établir un premier contact durable avec une communauté du peuple {{ race }}."
+      "value": "Établir un premier contact avec une communauté du peuple {{ race }} et nouer une relation durable."
     },
     {
       "id": "map_unknown_phenomenon",
@@ -90,7 +90,7 @@
     },
     {
       "id": "hide_item_from_faction",
-      "value": "Cacher {{ curio }} à {{ faction }}, capable de suivre toute personne l’ayant touché."
+      "value": "Cacher {{ curio }} à {{ faction }}, qui peut retrouver quiconque est entré en contact avec cet objet."
     },
     {
       "id": "conceal_adventure_site",
@@ -106,11 +106,11 @@
     },
     {
       "id": "deliver_contested_goods",
-      "value": "Livrer une marchandise représentée par {{ valuables }} à une personne au profil {{ background }}, alors que plusieurs individus au profil {{ background:criminal }} possèdent la même description du colis."
+      "value": "Livrer une marchandise représentée par {{ valuables }} à une personne au profil {{ background }}, alors que plusieurs individus au profil {{ background:criminal }} ont reçu la même description du colis."
     },
     {
       "id": "treasure_hunt_site",
-      "value": "Retrouver {{ valuables }} dans une cache située sur le site {{ site }} ou en son sein."
+      "value": "Retrouver {{ valuables }} dans une cache dissimulée au sein de {{ site }}."
     },
     {
       "id": "cure_affliction",

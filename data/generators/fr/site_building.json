@@ -225,14 +225,14 @@
       "id": "walled_garden",
       "fields": {
         "name": "Jardin clos",
-        "description": "Des plantes rares prospèrent autour d’une serre dont personne n’est officiellement responsable de la clé."
+        "description": "Des plantes rares prospèrent autour d’une serre dont personne ne détient officiellement la clé."
       }
     },
     {
       "id": "bank",
       "fields": {
         "name": "Banque",
-        "description": "Des coffres protégés par des gardes et des sceaux contiennent aussi des dépôts dont les propriétaires souhaitent l’oubli."
+        "description": "Des coffres protégés par des gardes et des sceaux contiennent aussi des dépôts que leurs propriétaires souhaitent voir oubliés."
       }
     },
     {
@@ -267,7 +267,7 @@
       "id": "great_gate",
       "fields": {
         "name": "Grande porte",
-        "description": "L’entrée principale de la ville concentre gardes, taxes, voyageurs bloqués et marchandises suspectes."
+        "description": "L’entrée principale de la ville rassemble gardes et percepteurs, ainsi que des voyageurs bloqués et des marchandises suspectes."
       }
     },
     {
@@ -295,7 +295,7 @@
       "id": "stable",
       "fields": {
         "name": "Écurie",
-        "description": "Montures, palefreniers et voyageurs entourent un animal dont personne ne peut approcher."
+        "description": "Montures, palefreniers et voyageurs entourent un animal dont personne ne peut s’approcher."
       }
     },
     {

@@ -47,7 +47,7 @@
       "weight": 3,
       "fields": {
         "name": "République marchande",
-        "structure": "Les guildes propriétaires et les familles commerçantes élisent les magistrats.",
+        "structure": "Les guildes possédant des biens et les familles commerçantes élisent les magistrats.",
         "leadership": "Un doge ou premier consul est contrôlé par des conseils commerciaux.",
         "strength": "Les finances, la diplomatie, les infrastructures et le commerce sont florissants.",
         "tension": "Les citoyens pauvres ont peu voix au chapitre et la corruption est devenue la norme."
@@ -69,7 +69,7 @@
       "weight": 2,
       "fields": {
         "name": "Théocratie",
-        "structure": "La loi religieuse et l'autorité civile ne font officiellement qu'une.",
+        "structure": "La loi religieuse et l’autorité civile ne forment officiellement qu’une seule autorité.",
         "leadership": "Le haut clergé interprète la doctrine et nomme les administrateurs.",
         "strength": "Une vision commune, des institutions d'entraide et une forte légitimité morale.",
         "tension": "Tout désaccord doctrinal est considéré comme une trahison politique."
