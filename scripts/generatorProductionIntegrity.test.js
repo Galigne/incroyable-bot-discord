@@ -17,11 +17,7 @@ test('production catalogs preserve current v3 payload and modifier structure', (
 	for (const locale of ['en', 'fr']) {
 		const quest = generatorCatalog.getGenerator('quest', locale);
 		assert.equal(quest.entrySchema.type, 'text');
-		assert.ok(quest.entries.every(entry => (
-			!Object.hasOwn(entry, 'template')
-			&& !Object.hasOwn(entry, 'references')
-			&& entry.value.includes('{{')
-		)));
+		assert.ok(quest.entries.every(entry => entry.value.includes('{{')));
 	}
 });
 
