@@ -41,6 +41,7 @@ const { validateCharacterSaveSchema } = require('../services/characterSaveSchema
 const { writeJsonAtomically } = require('../services/atomicJsonFile');
 const {
 	createEntityUndoResponse,
+	createEntityGetResponse,
 } = require('../util/entityCommandResponses');
 const {
 	getEntityHistoryMaxEntries,
@@ -220,13 +221,19 @@ test('/set creates history only after a successful modal submission', async () =
 		user,
 	}, config);
 
-	assert.equal((await getCharacter(characterKey)).name.firstName, 'Modal value');
+	const editedCharacter = await getCharacter(characterKey);
+	assert.equal(editedCharacter.name.firstName, 'Modal value');
 	const history = await readHistory(characterKey);
 	assert.equal(history.entries.length, 1);
 	assert.equal(history.entries[0].action, 'set');
 	assert.equal(history.entries[0].actorId, user.id);
 	assert.equal(history.entries[0].character.name.firstName, '');
-	assert.ok(response.flags);
+	assert.equal(response.flags, undefined);
+	assert.deepEqual(
+		response.embeds.map(embed => embed.toJSON()),
+		createEntityGetResponse(editedCharacter, 'name', 'en').embeds
+			.map(embed => embed.toJSON()),
+	);
 });
 
 test('authorization, validation, and serialization failures do not add history', async () => {

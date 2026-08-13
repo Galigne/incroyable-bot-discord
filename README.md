@@ -110,7 +110,9 @@ Discord provides native validation and choices for constrained options.
 Autocomplete suggests commands the current user may access, existing EntityKeys,
 type-compatible fields, generator categories, localized creature types, common
 dice expressions, levels, and common purge amounts. `/undo` autocomplete includes authorized active entities with
-usable history. The private form opens immediately after `/set` is submitted.
+usable history. The private form opens immediately after `/set` is submitted; a
+successful submission then posts the confirmation and the updated selected field
+detail publicly. Invalid, expired, and unauthorized submissions remain private.
 In `/gen` results, direct inline generator references are shown in inline code;
 references resolved inside them use square brackets at every recursive level.
 Character fields are `name`, `level`, `resources`, `status`, `statistics`, `rules`,

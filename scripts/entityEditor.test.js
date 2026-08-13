@@ -46,6 +46,7 @@ const { updateCharacter } = require('../services/characterStore');
 const {
 	translateEntityOutcome,
 } = require('../util/entityCommandErrors');
+const { createEntityGetResponse } = require('../util/entityCommandResponses');
 const english = require('../locales/en.json');
 const french = require('../locales/fr.json');
 
@@ -994,7 +995,7 @@ test('failed grouped application updates create neither mutation nor history', a
 	await assert.rejects(fsPromises.access(getCharacterHistoryPath(characterKey)));
 });
 
-test('modal routing submits all inputs once and repeats authorization', async () => {
+test('modal routing publishes canonical post-update details and repeats authorization', async () => {
 	const config = createConfig();
 	const characterKey = 'Editor.Routing';
 	const creator = createInteraction('creator');
@@ -1032,10 +1033,88 @@ test('modal routing submits all inputs once and repeats authorization', async ()
 	assert.equal(edited.background.goals, 'Cross every border');
 	assert.equal(replyCount, 1);
 	assert.match(successResponse.content, /Background updated/);
-	assert.ok(successResponse.flags);
+	assert.equal(successResponse.flags, undefined);
+	assert.deepEqual(
+		successResponse.embeds.map(embed => embed.toJSON()),
+		createEntityGetResponse(edited, 'background', 'en').embeds
+			.map(embed => embed.toJSON()),
+	);
 	assert.equal(
 		(await readCharacterHistory(characterKey)).document.entries.length,
 		1,
+	);
+
+	let expiredResponse;
+	await handleEntityInteraction({
+		...creator,
+		customId: modal.custom_id,
+		fields: {
+			getTextInputValue: customId => submittedValues[customId],
+		},
+		isModalSubmit: () => true,
+		reply: async value => {
+			expiredResponse = value;
+		},
+	}, config);
+	assert.equal(expiredResponse.embeds, undefined);
+	assert.ok(expiredResponse.flags);
+
+	const invalidKey = 'Editor.Routing.Invalid';
+	await createEntity(invalidKey, creator.user.id, 'character');
+	let invalidModal;
+	await openEntityEditor({
+		...creator,
+		showModal: async value => {
+			invalidModal = value.toJSON();
+		},
+	}, config, invalidKey, 'statistics');
+	let invalidResponse;
+	await handleEntityInteraction({
+		...creator,
+		customId: invalidModal.custom_id,
+		fields: {
+			getTextInputValue: () => 'luck: 10',
+		},
+		isModalSubmit: () => true,
+		reply: async value => {
+			invalidResponse = value;
+		},
+	}, config);
+	assert.equal(invalidResponse.embeds, undefined);
+	assert.ok(invalidResponse.flags);
+	assert.equal((await getEntity(invalidKey)).statistics.strength, 10);
+
+	const creatureKey = 'Editor.Routing.Creature';
+	const creature = createInteraction('creator');
+	await createEntity(creatureKey, creature.user.id, 'creature');
+	let creatureModal;
+	await openEntityEditor({
+		...creature,
+		showModal: async value => {
+			creatureModal = value.toJSON();
+		},
+	}, config, creatureKey, 'traits');
+	let creatureSuccessResponse;
+	await handleEntityInteraction({
+		...creature,
+		customId: creatureModal.custom_id,
+		fields: {
+			getTextInputValue: () => 'Keen scent:Tracks across stone',
+		},
+		isModalSubmit: () => true,
+		reply: async value => {
+			creatureSuccessResponse = value;
+		},
+	}, config);
+	const editedCreature = await getEntity(creatureKey);
+	assert.deepEqual(editedCreature.traits, [
+		{ name: 'Keen scent', description: 'Tracks across stone' },
+	]);
+	assert.equal(creatureSuccessResponse.flags, undefined);
+	assert.deepEqual(
+		creatureSuccessResponse.embeds.map(embed => embed.toJSON()),
+		createEntityGetResponse(editedCreature, 'traits', 'en').embeds
+			.map(embed => embed.toJSON()),
 	);
 
 	const authorizationKey = 'Editor.Reauthorize';
@@ -1066,6 +1145,7 @@ test('modal routing submits all inputs once and repeats authorization', async ()
 	}, config);
 	assert.equal((await getEntity(authorizationKey)).name.firstName, '');
 	assert.equal(deniedResponse.content, english.errors.entityEditor);
+	assert.equal(deniedResponse.embeds, undefined);
 	await assert.rejects(fsPromises.access(getCharacterHistoryPath(authorizationKey)));
 });
 

@@ -156,7 +156,11 @@ async function handleEntityEditSubmission(interaction, config) {
 			session.entityType,
 		);
 		deleteInteractionSession(session.id);
-		await interaction.reply(createEntityEditResponse(result, locale));
+		await interaction.reply(createEntityEditResponse(
+			result,
+			session.fieldName,
+			locale,
+		));
 	}
 	catch (error) {
 		if (!await replyToEntityError(interaction, error, locale)) {

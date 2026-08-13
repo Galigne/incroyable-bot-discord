@@ -97,7 +97,8 @@ function createEntityGetResponse(entity, fieldName, locale = 'en') {
 	return { embeds: [embed] };
 }
 
-function createEntityEditResponse(result, locale = 'en') {
+function createEntityEditResponse(result, fieldName, locale = 'en') {
+	const fieldResponse = createEntityGetResponse(result.entity, fieldName, locale);
 	return {
 		content: t(locale, 'rpg.editor.result', {
 			name: result.entity.displayName,
@@ -107,7 +108,7 @@ function createEntityEditResponse(result, locale = 'en') {
 				result.entity.type,
 			),
 		}),
-		flags: MessageFlags.Ephemeral,
+		embeds: fieldResponse.embeds,
 	};
 }
 
