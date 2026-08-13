@@ -10,11 +10,11 @@
   "entries": [
     {
       "id": "recover_item_before_criminal",
-      "value": "Recover the item known as {{ inventory }} from {{ dungeon }} before someone with the {{ background:criminal }} background takes it."
+      "value": "Recover the item known as {{ curio }} from {{ dungeon }} before someone with the {{ background:criminal }} background takes it."
     },
     {
       "id": "hunt_modified_monster",
-      "value": "Hunt a creature identified as {{ creature_monster }} after witnesses associate it with the trait {{ modifier_creature }}."
+      "value": "Hunt a creature identified as {{ monster }} after witnesses associate it with the trait {{ modifier_creature }}."
     },
     {
       "id": "defend_settlement_from_faction",
@@ -26,7 +26,7 @@
     },
     {
       "id": "steal_item_from_building",
-      "value": "Steal the item known as {{ inventory }} from a place identified as {{ building }} and return it to its rightful owner."
+      "value": "Steal the item known as {{ valuables }} from a place identified as {{ building }} and return it to its rightful owner."
     },
     {
       "id": "find_missing_person_at_site",
@@ -46,7 +46,7 @@
     },
     {
       "id": "anonymous_gift",
-      "value": "Give the item known as {{ inventory }} to someone with the {{ background }} background without revealing who commissioned the delivery."
+      "value": "Give the item known as {{ valuables }} to someone with the {{ background }} background without revealing who commissioned the delivery."
     },
     {
       "id": "first_contact",
@@ -58,7 +58,7 @@
     },
     {
       "id": "study_monster_alive",
-      "value": "Study a creature identified as {{ creature_monster }} without killing it to understand its link with {{ region }}."
+      "value": "Study a creature identified as {{ monster }} without killing it to understand its link with {{ region }}."
     },
     {
       "id": "solve_faction_murder",
@@ -78,7 +78,7 @@
     },
     {
       "id": "evacuate_before_monsters",
-      "value": "Evacuate {{ settlement }} before a group associated with {{ creature_monster }} arrives."
+      "value": "Evacuate {{ settlement }} before a group associated with {{ monster }} arrives."
     },
     {
       "id": "escape_site_with_prisoner",
@@ -90,7 +90,7 @@
     },
     {
       "id": "hide_item_from_faction",
-      "value": "Hide {{ inventory }} from {{ faction }}, which can track anyone who touched it."
+      "value": "Hide {{ curio }} from {{ faction }}, which can track anyone who touched it."
     },
     {
       "id": "conceal_adventure_site",
@@ -106,7 +106,7 @@
     },
     {
       "id": "deliver_contested_goods",
-      "value": "Deliver goods represented by {{ inventory }} to someone with the {{ background }} background, while several figures with the {{ background:criminal }} background carry the same parcel description."
+      "value": "Deliver goods represented by {{ valuables }} to someone with the {{ background }} background, while several figures with the {{ background:criminal }} background carry the same parcel description."
     }
   ]
 }

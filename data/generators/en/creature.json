@@ -15,7 +15,7 @@
       "fields": {
         "name": "animal",
         "description": "Ordinary and fantastic friendly wildlife",
-        "generator": "{{ creature_animal }}"
+        "generator": "{{ animal }}"
       }
     },
     {
@@ -23,7 +23,7 @@
       "fields": {
         "name": "companion",
         "description": "Pets, familiars, and small traveling creatures",
-        "generator": "{{ creature_companion }}"
+        "generator": "{{ companion }}"
       }
     },
     {
@@ -31,7 +31,7 @@
       "fields": {
         "name": "monster",
         "description": "Hostile creatures and supernatural predators",
-        "generator": "{{ creature_monster }}"
+        "generator": "{{ monster }}"
       }
     }
   ]

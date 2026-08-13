@@ -52,10 +52,8 @@ function validateCreatureGeneratorEnvelope(
 }
 
 function isCreatureDetailGenerator(generatorId, options = {}) {
-	if (options.creatureGeneratorIds instanceof Set) {
-		return options.creatureGeneratorIds.has(generatorId);
-	}
-	return /^creature_[a-z0-9]+(?:_[a-z0-9]+)*$/.test(generatorId);
+	return options.creatureGeneratorIds instanceof Set
+		&& options.creatureGeneratorIds.has(generatorId);
 }
 
 function validateCreatureGeneration(generation, location) {

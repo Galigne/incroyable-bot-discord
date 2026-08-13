@@ -21,21 +21,167 @@ test('production catalogs preserve current v3 payload and modifier structure', (
 	}
 });
 
-test('every production quest resolves role-oriented references with provenance', () => {
+test('every production quest, rumor, and secret resolves references with provenance', () => {
 	for (const locale of ['en', 'fr']) {
-		const quests = generatorCatalog.getGenerator('quest', locale).entries;
-		for (const quest of quests) {
-			const result = generatorResolver.resolveReference(
-				{ generator: 'quest', entry: quest.id, select: 'display' },
-				locale,
-				{ random: () => 0 },
-			);
-			assert.ok(result.value);
-			assert.doesNotMatch(result.value, /\{\{|\}\}|undefined/);
-			assert.ok(result.provenance.length > 1, `${locale}:${quest.id}`);
-			assert.equal(result.provenance[0].generatorId, 'quest');
-			assert.equal(result.provenance[0].entryId, quest.id);
+		for (const generatorId of ['quest', 'rumor', 'secret']) {
+			const entries = generatorCatalog.getGenerator(generatorId, locale).entries;
+			for (const entry of entries) {
+				const result = generatorResolver.resolveReference(
+					{ generator: generatorId, entry: entry.id, select: 'display' },
+					locale,
+					{ random: () => 0 },
+				);
+				assert.ok(result.value);
+				assert.doesNotMatch(result.value, /\{\{|\}\}|undefined/);
+				assert.ok(result.provenance.length > 1, `${locale}:${entry.id}`);
+				assert.equal(result.provenance[0].generatorId, generatorId);
+				assert.equal(result.provenance[0].entryId, entry.id);
+			}
 		}
+	}
+});
+
+test('production category routers resolve equal-weight public child generators', () => {
+	const routers = new Map([
+		['loot', [
+			'weapons',
+			'shields',
+			'armors',
+			'supplies',
+			'consumable',
+			'food_and_drink',
+			'valuables',
+			'material',
+			'curio',
+		]],
+		['site', ['building', 'dungeon', 'settlement', 'region', 'room']],
+		['group', ['government', 'faction', 'religion']],
+	]);
+	for (const locale of ['en', 'fr']) {
+		for (const [routerId, childIds] of routers) {
+			const router = generatorCatalog.getGenerator(routerId, locale);
+			assert.equal(router.visibility, 'public');
+			assert.deepEqual(router.entries.map(entry => entry.id), childIds);
+			for (const childId of childIds) {
+				assert.equal(generatorCatalog.getGenerator(childId, locale).visibility, 'public');
+				const result = generatorResolver.resolveReference(
+					{ generator: routerId, entry: childId, select: 'display' },
+					locale,
+					{ random: () => 0.5 },
+				);
+				assert.ok(result.value);
+				assert.deepEqual(
+					result.provenance.slice(0, 2).map(record => record.generatorId),
+					[routerId, childId],
+				);
+			}
+		}
+	}
+});
+
+test('loot replaces every inventory entry across heterogeneous child schemas', () => {
+	assert.equal(generatorCatalog.getGenerator('inventory'), undefined);
+	for (const [generatorId, expectedCount, schemaType] of [
+		['weapons', 43, 'fields'],
+		['shields', 15, 'fields'],
+		['armors', 15, 'fields'],
+		['supplies', 29, 'fields'],
+		['consumable', 18, 'fields'],
+		['food_and_drink', 10, 'fields'],
+		['valuables', 15, 'fields'],
+		['material', 35, 'text'],
+		['curio', 16, 'fields'],
+	]) {
+		const generator = generatorCatalog.getGenerator(generatorId);
+		assert.equal(generator.entries.length, expectedCount, generatorId);
+		assert.equal(generator.entrySchema.type, schemaType, generatorId);
+	}
+});
+
+test('shield and affliction catalogs preserve their technical distributions', () => {
+	const shieldExpectations = new Map([
+		['common', { ar: 5, weight: 8 }],
+		['uncommon', { ar: 10, weight: 5 }],
+		['rare', { ar: 15, weight: 3 }],
+		['epic', { ar: 20, weight: 2 }],
+		['legendary', { ar: 25, weight: 1 }],
+	]);
+	for (const locale of ['en', 'fr']) {
+		const shields = generatorCatalog.getGenerator('shields', locale);
+		assert.deepEqual(shields.entrySchema, {
+			type: 'fields',
+			required: ['name', 'rarity', 'description', 'ar_percentage'],
+			technical: ['rarity', 'ar_percentage'],
+		});
+		for (const [rarity, expected] of shieldExpectations) {
+			const entries = shields.entries.filter(entry => entry.fields.rarity === rarity);
+			assert.equal(entries.length, 3, `${locale}:${rarity}`);
+			assert.equal(entries.every(entry => (
+				entry.weight === expected.weight
+				&& entry.fields.ar_percentage === expected.ar
+			)), true);
+		}
+
+		const affliction = generatorCatalog.getGenerator('affliction', locale);
+		assert.deepEqual(affliction.entrySchema, {
+			type: 'fields',
+			required: ['name', 'type', 'description'],
+			technical: ['type'],
+		});
+		assert.equal(affliction.entries.length, 16);
+		assert.equal(affliction.entries.filter(entry => entry.fields.type === 'disease').length, 8);
+		assert.equal(affliction.entries.filter(entry => entry.fields.type === 'curse').length, 8);
+	}
+});
+
+test('migrated creature and quest references target classified loot concepts', () => {
+	for (const locale of ['en', 'fr']) {
+		const companion = generatorCatalog.getGenerator('companion', locale);
+		const references = Object.fromEntries(companion.entries.map(entry => [
+			entry.id,
+			entry.generation.inventory,
+		]));
+		assert.deepEqual(references.messenger_pigeon, [{
+			generator: 'curio',
+			entry: 'mysterious_sealed_letter',
+			select: 'fields',
+		}]);
+		assert.deepEqual(references.pack_goat, [{
+			generator: 'food_and_drink',
+			entry: 'three_travel_rations',
+			select: 'fields',
+		}]);
+		assert.deepEqual(references.mule, [{
+			generator: {
+				oneOf: [
+					{ id: 'supplies', weight: 3 },
+					{ id: 'weapons', weight: 1 },
+				],
+			},
+			select: 'fields',
+		}]);
+		assert.deepEqual(references.paper_dragon, [{
+			generator: 'supplies',
+			entry: 'writing_kit',
+			select: 'fields',
+		}]);
+
+		const questValues = Object.fromEntries(
+			generatorCatalog.getGenerator('quest', locale).entries
+				.map(entry => [entry.id, entry.value]),
+		);
+		assert.match(questValues.recover_item_before_criminal, /\{\{ curio \}\}/);
+		assert.match(questValues.hide_item_from_faction, /\{\{ curio \}\}/);
+		for (const id of [
+			'steal_item_from_building',
+			'anonymous_gift',
+			'deliver_contested_goods',
+		]) {
+			assert.match(questValues[id], /\{\{ valuables \}\}/);
+		}
+		assert.equal(Object.values(questValues).some(value => (
+			value.includes('{{ inventory }}') || value.includes('{{ creature_monster }}')
+		)), false);
 	}
 });
 

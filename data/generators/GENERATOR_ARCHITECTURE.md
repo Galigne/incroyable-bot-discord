@@ -32,6 +32,12 @@ Localized names and content never determine routing or provenance. Generator
 resolution returns data only; persistence belongs to the character and creature
 application workflows.
 
+Category roots use unprefixed filenames and IDs. Child files are prefixed for
+organization, but child IDs remain concept-only: for example,
+`background_criminal.json` has ID `criminal`, `creature_monster.json` has ID
+`monster`, and `loot_weapons.json` has ID `weapons`. References always use IDs,
+never filenames.
+
 ## Resolution and provenance
 
 `services/generatorResolver.js` resolves a public root for `/gen` or a reference
@@ -102,12 +108,13 @@ change only allocation constraints and weighting.
 reference resolution:
 
 1. It selects localized name, race, personality, RULE, talent, status, armor,
-   weapon, and inventory entries as required by character mechanics.
+   main equipment, and carried loot as required by character mechanics.
 2. It selects a stable entry from the public `background` router, or uses the
    requested category.
 3. That entry's technical `generator` field contains a wrapped inline reference to
-   the matching internal `background_<category>` text generator. Resolving it
-   supplies the reusable background archetype.
+   the matching internal `<category>` text generator stored in
+   `background_<category>.json`. Resolving it supplies the reusable background
+   archetype.
 4. It independently resolves `{{ physical_description }}`. Physical description is
    not part of the selected archetype route, so the two rolls remain combinable.
 5. It applies the character-only descriptive modifier policy through
@@ -115,8 +122,18 @@ reference resolution:
    complete character.
 
 The saved background contains `archetype` and `physicalDescription`; editable
-`backstory` and `goals` start empty. Generated equipment and inventory never alter
-the manual encumbrance resource.
+`backstory` and `goals` start empty. A generated character receives one compatible
+armor and one or two independent main-equipment slots. Each slot selects `weapons`
+with an 80% chance or `shields` with a 20% chance; multiple equipped shields are
+allowed, and their `ar_percentage` values add to the armor percentage before the
+normal max-HP-based AR calculation.
+
+Three carried items resolve independently through the equal-weight public `loot`
+router. The workflow consumes the resolved display string so text and structured
+loot children are compatible, and it uses stable child provenance to avoid exact
+duplicates with bounded retries. Carried armor, weapons, or shields are not
+equipped and do not affect AR. Generated equipment and inventory never alter the
+manual encumbrance resource.
 
 ## Creature routing, generation, and persistence
 
@@ -126,10 +143,11 @@ When `type` is omitted, the workflow selects a weighted router entry; otherwise 
 selects the requested stable entry. Each entry's technical `generator` field is one
 wrapped reference to an internal creature-detail generator.
 
-The current catalog routes `animal`, `companion`, and `monster` to their matching
-`creature_*` generators, but application code does not treat that list as a closed
-enum. Router entries are source classifications, not persistence types: every
-generated result is saved as the concrete `creature` type.
+The current catalog routes `animal`, `companion`, and `monster` to internal
+generators with those same concept IDs, stored in the corresponding `creature_*`
+files. Application code does not treat that list as a closed enum. Router entries
+are source classifications, not persistence types: every generated result is saved
+as the concrete `creature` type.
 
 `services/randomCreatureGenerator.js` resolves the route, then resolves one detail
 entry and consumes its localized identity plus validated generation metadata. That
@@ -163,10 +181,11 @@ mechanical formulas.
 
 ## Other composed generators
 
-Public text generators can compose ordinary concepts with inline references. For
-example, `quest` entries may combine inventory and fixed or random background
-selections. These resolutions keep nested provenance but do not create or persist
-the referenced people, creatures, locations, or items.
+Public text generators can compose ordinary concepts with inline references. The
+`loot`, `site`, and `group` roots are equal-weight text routers over their public
+children. `quest`, `rumor`, and `secret` entries combine these and other fixed or
+random concepts. These resolutions keep nested provenance but do not create or
+persist the referenced people, creatures, locations, or items.
 
 ## Validation coverage
 

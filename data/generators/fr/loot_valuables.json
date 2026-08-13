@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 3,
+  "id": "valuables",
+  "visibility": "public",
+  "name": "objets de valeur",
+  "description": "Richesses transportables, marchandises, objets de prestige et pièces de collection",
+  "entrySchema": {
+    "type": "fields",
+    "required": ["name", "description"]
+  },
+  "entries": [
+    {
+      "id": "coin_purse",
+      "fields": {
+        "name": "Bourse de pièces",
+        "description": "Une somme de monnaie locale mêlant petites pièces courantes et devises plus difficiles à écouler."
+      }
+    },
+    {
+      "id": "precious_jewel",
+      "fields": {
+        "name": "Bijou précieux",
+        "description": "Une pièce de joaillerie identifiable, facile à transporter mais risquée à revendre."
+      }
+    },
+    {
+      "id": "work_of_art",
+      "fields": {
+        "name": "Œuvre d’art",
+        "description": "Un tableau, une sculpture ou une pièce décorative possédant une valeur culturelle identifiable."
+      }
+    },
+    {
+      "id": "ceremonial_clothing",
+      "fields": {
+        "name": "Vêtement de cérémonie",
+        "description": "Une robe, cape, paire de bottes ou paire de gants associée à un rang ou une institution."
+      }
+    },
+    {
+      "id": "unfinished_crown",
+      "fields": {
+        "name": "Couronne inachevée",
+        "description": "Un symbole d’autorité auquel manque une gemme, une inscription ou une partie essentielle."
+      }
+    },
+    {
+      "id": "ornate_comb",
+      "fields": {
+        "name": "Peigne ouvragé",
+        "description": "Un objet personnel décoré d’un blason discret ou d’une inscription intime."
+      }
+    },
+    {
+      "id": "collectible_figurine",
+      "fields": {
+        "name": "Figurine de collection",
+        "description": "Une pièce d’une série recherchée, insignifiante seule mais précieuse pour la bonne personne."
+      }
+    },
+    {
+      "id": "gemstone",
+      "weight": 4,
+      "fields": {
+        "name": "Pierre précieuse",
+        "description": "Une pierre brute ou taillée dont la valeur dépend de sa qualité et de la demande locale."
+      }
+    },
+    {
+      "id": "antique_coins",
+      "weight": 3,
+      "fields": {
+        "name": "Monnaies anciennes",
+        "description": "Une vieille monnaie qui vaut davantage pour les collectionneurs que pour sa valeur faciale."
+      }
+    },
+    {
+      "id": "decorated_silverware",
+      "weight": 3,
+      "fields": {
+        "name": "Argenterie décorée",
+        "description": "Un petit service assorti portant un motif ou un blason identifiable."
+      }
+    },
+    {
+      "id": "luxury_fabric",
+      "weight": 3,
+      "fields": {
+        "name": "Étoffe de luxe",
+        "description": "Un rouleau compact de tissu fin destiné au commerce ou à des vêtements cérémoniels."
+      }
+    },
+    {
+      "id": "small_sculpture",
+      "weight": 2,
+      "fields": {
+        "name": "Petite sculpture",
+        "description": "Une œuvre transportable dont l’artiste, le sujet ou la matière fait la valeur."
+      }
+    },
+    {
+      "id": "rare_book",
+      "weight": 2,
+      "fields": {
+        "name": "Livre rare",
+        "description": "Un volume complet et recherché par les spécialistes et les collectionneurs."
+      }
+    },
+    {
+      "id": "ceremonial_jewelry",
+      "weight": 2,
+      "fields": {
+        "name": "Bijoux cérémoniels",
+        "description": "Des ornements associés à un rang, une charge ou une tradition officielle."
+      }
+    },
+    {
+      "id": "valuable_trade_goods",
+      "weight": 4,
+      "fields": {
+        "name": "Marchandises de valeur",
+        "description": "Des biens compacts dont le prix de revente varie selon les communautés."
+      }
+    }
+  ]
+}

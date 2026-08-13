@@ -151,13 +151,14 @@ test('production creature sources are strict localized types backed by profiles'
 
 test('creature metadata rejects mechanical overrides and armor conflicts', () => {
 	const { generatorId } = getCreatureFixture();
+	const validationOptions = { creatureGeneratorIds: new Set([generatorId]) };
 	const english = structuredClone(generatorCatalog.getGenerator(generatorId, 'en'));
 	delete english.locale;
 
 	const mechanical = structuredClone(english);
 	mechanical.entries[0].generation.statistics = { constitution: 20 };
 	assert.throws(
-		() => validateGeneratorDefinition(mechanical),
+		() => validateGeneratorDefinition(mechanical, '<generator>', validationOptions),
 		error => error.code === 'INVALID_GENERATOR_STRUCTURE',
 	);
 
@@ -168,13 +169,14 @@ test('creature metadata rejects mechanical overrides and armor conflicts', () =>
 		select: 'fields',
 	};
 	assert.throws(
-		() => validateGeneratorDefinition(armorConflict),
+		() => validateGeneratorDefinition(armorConflict, '<generator>', validationOptions),
 		error => error.code === 'CREATURE_ARMOR_SOURCE_CONFLICT',
 	);
 });
 
 test('creature metadata preserves English and French technical parity', () => {
 	const { generatorId } = getCreatureFixture();
+	const validationOptions = { creatureGeneratorIds: new Set([generatorId]) };
 	const english = structuredClone(generatorCatalog.getGenerator(generatorId, 'en'));
 	const french = structuredClone(generatorCatalog.getGenerator(generatorId, 'fr'));
 	delete english.locale;
@@ -183,7 +185,7 @@ test('creature metadata preserves English and French technical parity', () => {
 	french.entries[0].generation.statProfile = [...createStatProfileCandidate().keys()]
 		.find(profileId => profileId !== originalProfile);
 	assert.throws(
-		() => validateGeneratorPair(english, french),
+		() => validateGeneratorPair(english, french, '<generator>', validationOptions),
 		error => error.code === 'GENERATOR_LOCALE_PARITY_MISMATCH',
 	);
 
@@ -191,7 +193,7 @@ test('creature metadata preserves English and French technical parity', () => {
 	english.entries[0].generation.traits = ['Sense: {{ traits:keen_smell }}'];
 	french.entries[0].generation.traits = ['Sens : {{ traits:keen_hearing }}'];
 	assert.throws(
-		() => validateGeneratorPair(english, french),
+		() => validateGeneratorPair(english, french, '<generator>', validationOptions),
 		error => error.code === 'GENERATOR_LOCALE_PARITY_MISMATCH',
 	);
 });
@@ -257,6 +259,7 @@ test('creature generation references require compatible target payloads', () => 
 
 test('creature trait metadata accepts localized templates and rejects invalid strings', () => {
 	const { generatorId } = getCreatureFixture();
+	const validationOptions = { creatureGeneratorIds: new Set([generatorId]) };
 	const valid = structuredClone(generatorCatalog.getGenerator(generatorId, 'en'));
 	delete valid.locale;
 	for (const traits of [
@@ -272,7 +275,9 @@ test('creature trait metadata accepts localized templates and rejects invalid st
 	]) {
 		const candidate = structuredClone(valid);
 		candidate.entries[0].generation.traits = traits;
-		assert.doesNotThrow(() => validateGeneratorDefinition(candidate));
+		assert.doesNotThrow(() => (
+			validateGeneratorDefinition(candidate, '<generator>', validationOptions)
+		));
 	}
 
 	for (const traits of [
@@ -284,7 +289,9 @@ test('creature trait metadata accepts localized templates and rejects invalid st
 	]) {
 		const candidate = structuredClone(valid);
 		candidate.entries[0].generation.traits = traits;
-		assert.throws(() => validateGeneratorDefinition(candidate));
+		assert.throws(() => (
+			validateGeneratorDefinition(candidate, '<generator>', validationOptions)
+		));
 	}
 });
 
@@ -559,7 +566,7 @@ test('natural armor, generated armor, status, and weighted gear resolve to final
 	assert.ok(mule.source.provenance.some(record => (
 		record.type === 'generator-source'
 		&& record.selection === 'weighted'
-		&& record.generatorId === 'inventory'
+		&& record.generatorId === 'supplies'
 	)));
 	for (const creature of [cinderDrake, bellWraith, mule]) {
 		assert.deepEqual(creature.gear.encumbrance, { current: 0, max: 0 });

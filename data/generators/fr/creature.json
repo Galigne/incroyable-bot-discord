@@ -15,7 +15,7 @@
       "fields": {
         "name": "Animaux",
         "description": "Faune ordinaire et créatures fantastiques inoffensives",
-        "generator": "{{ creature_animal }}"
+        "generator": "{{ animal }}"
       }
     },
     {
@@ -23,7 +23,7 @@
       "fields": {
         "name": "Compagnons",
         "description": "Animaux de compagnie, familiers et petites créatures de voyage",
-        "generator": "{{ creature_companion }}"
+        "generator": "{{ companion }}"
       }
     },
     {
@@ -31,7 +31,7 @@
       "fields": {
         "name": "Monstres",
         "description": "Créatures hostiles et prédateurs surnaturels",
-        "generator": "{{ creature_monster }}"
+        "generator": "{{ monster }}"
       }
     }
   ]

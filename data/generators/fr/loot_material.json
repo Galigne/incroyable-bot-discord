@@ -157,6 +157,26 @@
       "id": "aether_crystal",
       "weight": 1,
       "value": "Cristal d’éther — minerai instable qui amplifie les sorts tout en accumulant une résonance dangereuse."
+    },
+    {
+      "id": "unidentified_rune_fragment",
+      "value": "Fragment de rune non identifié — Un morceau de matière magique portant une partie d'une inscription inconnue."
+    },
+    {
+      "id": "elemental_essence",
+      "value": "Essence élémentaire — Une substance instable conservant les propriétés d’un élément naturel ou magique."
+    },
+    {
+      "id": "creature_fragment",
+      "value": "Fragment de créature — Une écaille, peau, corne ou dent conservée comme trophée, preuve ou composant."
+    },
+    {
+      "id": "medicinal_plant",
+      "value": "Plante médicinale — Une plante fraîche dont l’efficacité dépend de sa préparation et de son état de conservation."
+    },
+    {
+      "id": "alchemical_ingredient",
+      "value": "Ingrédient alchimique — Un composant organique inhabituel, comme un œil de crapaud ou une glande venimeuse."
     }
   ]
 }

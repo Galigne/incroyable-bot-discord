@@ -157,6 +157,26 @@
       "id": "aether_crystal",
       "weight": 1,
       "value": "Aether Crystal — unstable mineral that amplifies spells while accumulating dangerous resonance."
+    },
+    {
+      "id": "unidentified_rune_fragment",
+      "value": "Unidentified rune fragment — A piece of magical material containing part of an unknown inscription."
+    },
+    {
+      "id": "elemental_essence",
+      "value": "Elemental Essence — An unstable substance retaining properties of a natural or magical element."
+    },
+    {
+      "id": "creature_fragment",
+      "value": "Creature Fragment — A preserved scale, hide, horn, or tooth kept as trophy, proof, or component."
+    },
+    {
+      "id": "medicinal_plant",
+      "value": "Medicinal Plant — A fresh plant whose effectiveness depends on preparation and preservation."
+    },
+    {
+      "id": "alchemical_ingredient",
+      "value": "Alchemical Ingredient — An unusual organic component such as a toad eye or venom gland."
     }
   ]
 }

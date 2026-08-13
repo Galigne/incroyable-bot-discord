@@ -90,7 +90,7 @@
       "id": "equipped",
       "fields": {
         "name": "Équipé",
-        "description": "La créature utilise une arme ou un objet issu de `weapons` ou `inventory`, adapté à son anatomie et à son comportement."
+        "description": "La créature semble porter des armes ou des objets adaptés à son anatomie ; aucun équipement n’est sélectionné ni ajouté."
       }
     },
     {

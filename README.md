@@ -44,6 +44,11 @@ retroactively. See the [generator authoring guide](data/generators/README.md) an
 [generator architecture](data/generators/GENERATOR_ARCHITECTURE.md) for the JSON
 contract and runtime design.
 
+The public `loot`, `site`, and `group` generators randomly route to their public
+category children. Loot includes weapons, shields, armor, supplies, consumables,
+food and drink, valuables, materials, and curios. Afflictions, rumors, and secrets
+are also available as direct public generators.
+
 Set the required runtime language in `config.json`. The complete configuration is:
 
 ```json
@@ -246,21 +251,35 @@ RULE Points come from Intelligence thresholds and are spent on at most two RULEs
 prioritizing the first RULE's level; HP, AP, MD, armor eligibility, AR,
 talent count, equipment, inventory, and gold are derived automatically. Encumbrance
 remains manually managed, so generated characters keep the normal `0 / 0` default.
+Each character receives one Constitution-compatible armor and one or two additional
+main-equipment items. Every additional slot independently selects a weapon 80% of
+the time or a shield 20% of the time, so two shields are possible. Equipped shield
+AR percentages stack with the armor percentage before AR is calculated from maximum
+HP.
+
+Three carried inventory items resolve through the equal-weight `loot` router and
+may come from any loot category. They remain carried only: a carried weapon, armor,
+or shield is not equipped and cannot change generated AR. Exact duplicate loot is
+avoided through bounded retries when the random source permits it; generated gold
+is appended as before.
 Generated talents are stored as unique localized list entries: levels 1–2 receive
 one talent, levels 3–5 receive two, levels 6–8 receive three, and levels 9–10
 receive four.
 If the optional level is omitted, a level from 1 to 10 is rolled. The optional
 background selects one of the configured broad background categories and is also
 chosen randomly when omitted. The selected category independently resolves one
-reusable archetype from the matching `background_<category>` generator, while the
-separate `physical_description` generator supplies the physical description.
+reusable archetype from the matching concept-only generator stored in
+`background_<category>.json`, while the separate `physical_description` generator
+supplies the physical description.
 Backstory and goals start empty and remain editable. Persistent character
 modifiers come only from the internal `modifier_character` pool.
 
 Random creatures select a stable type route from the public `creature` catalog
 (randomly when `type` is omitted), then generate from that entry’s referenced
 internal detail source. The current data provides `animal`, `companion`, and
-`monster`, but the router defines the available set. They share the character level budget, nonlinear statistic allocation,
+`monster`; the internal generator uses the same concept ID and a prefixed
+`creature_<type>.json` filename, while the router defines the available set. They
+share the character level budget, nonlinear statistic allocation,
 derived statistics, and resource formulas while using creature-specific profile
 distributions. Only explicit source references grant creature RULEs; Intelligence
 and descriptive modifiers never do. Natural armor or technical armor metadata may

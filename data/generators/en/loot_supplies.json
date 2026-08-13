@@ -1,0 +1,242 @@
+{
+  "schemaVersion": 3,
+  "id": "supplies",
+  "visibility": "public",
+  "name": "supplies",
+  "description": "Reusable practical objects for travel, exploration, professions, and everyday adventuring",
+  "entrySchema": {
+    "type": "fields",
+    "required": ["name", "description"]
+  },
+  "entries": [
+    {
+      "id": "coil_of_rope",
+      "weight": 8,
+      "fields": {
+        "name": "Coil of rope",
+        "description": "Ten meters of sturdy rope for climbing, binding, or securing loads."
+      }
+    },
+    {
+      "id": "lantern_and_oil",
+      "weight": 8,
+      "fields": {
+        "name": "Lantern and oil",
+        "description": "A hooded lantern with enough oil for several hours."
+      }
+    },
+    {
+      "id": "waterskin",
+      "weight": 7,
+      "fields": {
+        "name": "Waterskin",
+        "description": "A filled leather waterskin."
+      }
+    },
+    {
+      "id": "bedroll",
+      "weight": 7,
+      "fields": {
+        "name": "Bedroll",
+        "description": "A weather-resistant blanket and sleeping roll."
+      }
+    },
+    {
+      "id": "tinderbox",
+      "weight": 7,
+      "fields": {
+        "name": "Tinderbox",
+        "description": "Flint, steel, and dry tinder for starting fires."
+      }
+    },
+    {
+      "id": "lockpicking_kit",
+      "weight": 6,
+      "fields": {
+        "name": "Lockpicking kit",
+        "description": "Small tools for manipulating ordinary mechanical locks."
+      }
+    },
+    {
+      "id": "climbing_kit",
+      "weight": 6,
+      "fields": {
+        "name": "Climbing kit",
+        "description": "Pitons, a hammer, straps, and simple climbing aids."
+      }
+    },
+    {
+      "id": "chalk_and_charcoal",
+      "weight": 6,
+      "fields": {
+        "name": "Chalk and charcoal",
+        "description": "Useful for marking paths, sketching maps, and making notes."
+      }
+    },
+    {
+      "id": "small_mirror",
+      "weight": 6,
+      "fields": {
+        "name": "Small mirror",
+        "description": "A polished hand mirror useful for signals and checking corners."
+      }
+    },
+    {
+      "id": "crowbar",
+      "weight": 5,
+      "fields": {
+        "name": "Crowbar",
+        "description": "A sturdy iron lever for doors, crates, and obstacles."
+      }
+    },
+    {
+      "id": "grappling_hook",
+      "weight": 5,
+      "fields": {
+        "name": "Grappling hook",
+        "description": "A four-pronged hook designed for use with rope."
+      }
+    },
+    {
+      "id": "fishing_kit",
+      "weight": 5,
+      "fields": {
+        "name": "Fishing kit",
+        "description": "Line, hooks, floats, and a compact net."
+      }
+    },
+    {
+      "id": "writing_kit",
+      "weight": 5,
+      "fields": {
+        "name": "Writing kit",
+        "description": "Ink, quills, parchment, sealing wax, and a protective case."
+      }
+    },
+    {
+      "id": "herbalism_pouch",
+      "weight": 5,
+      "fields": {
+        "name": "Herbalism pouch",
+        "description": "Small tools and containers for gathering useful plants."
+      }
+    },
+    {
+      "id": "shovel",
+      "weight": 5,
+      "fields": {
+        "name": "Shovel",
+        "description": "A compact but sturdy digging tool."
+      }
+    },
+    {
+      "id": "bear_trap",
+      "weight": 4,
+      "fields": {
+        "name": "Bear trap",
+        "description": "A heavy mechanical trap capable of restraining a creature."
+      }
+    },
+    {
+      "id": "disguise_kit",
+      "weight": 4,
+      "fields": {
+        "name": "Disguise kit",
+        "description": "Cosmetics, dyes, false hair, and simple costume pieces."
+      }
+    },
+    {
+      "id": "merchants_scale",
+      "weight": 4,
+      "fields": {
+        "name": "Merchant's scale",
+        "description": "A folding balance and reference weights for checking trade goods."
+      }
+    },
+    {
+      "id": "bag_of_caltrops",
+      "weight": 3,
+      "fields": {
+        "name": "Bag of caltrops",
+        "description": "Sharp metal spikes used to slow pursuit or secure a passage."
+      }
+    },
+    {
+      "id": "spyglass",
+      "weight": 3,
+      "fields": {
+        "name": "Spyglass",
+        "description": "A compact optical tube for viewing distant details."
+      }
+    },
+    {
+      "id": "tent",
+      "weight": 3,
+      "fields": {
+        "name": "Tent",
+        "description": "A small shelter suitable for one or two travelers."
+      }
+    },
+    {
+      "id": "manacles",
+      "weight": 3,
+      "fields": {
+        "name": "Manacles",
+        "description": "A pair of iron restraints with a simple key."
+      }
+    },
+    {
+      "id": "holy_symbol",
+      "weight": 3,
+      "fields": {
+        "name": "Holy symbol",
+        "description": "A symbol tied to a faith, oath, ancestor, or personal ideal."
+      }
+    },
+    {
+      "id": "local_map",
+      "weight": 3,
+      "fields": {
+        "name": "Local map",
+        "description": "A practical but imperfect map of the surrounding region."
+      }
+    },
+    {
+      "id": "silvered_chain",
+      "weight": 2,
+      "fields": {
+        "name": "Silvered chain",
+        "description": "A short chain useful against creatures vulnerable to silver."
+      }
+    },
+    {
+      "id": "runic_chalk",
+      "weight": 2,
+      "fields": {
+        "name": "Runic chalk",
+        "description": "Rare chalk that makes magical inscriptions easier to see and study."
+      }
+    },
+    {
+      "id": "excavation_tools",
+      "fields": {
+        "name": "Excavation Tools",
+        "description": "A hook, small pick, and folding shovel for searching or crossing difficult ground."
+      }
+    },
+    {
+      "id": "musical_instrument",
+      "fields": {
+        "name": "Musical Instrument",
+        "description": "A portable lute, drum, violin, or other worn but functional instrument."
+      }
+    },
+    {
+      "id": "quality_paper",
+      "fields": {
+        "name": "Quality Paper",
+        "description": "Blank sheets and parchment suited to contracts, maps, spells, or forged documents."
+      }
+    }
+  ]
+}

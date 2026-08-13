@@ -1,20 +1,52 @@
 {
   "schemaVersion": 3,
-  "id": "background_sailor",
+  "id": "sailor",
   "visibility": "internal",
   "name": "Archétypes maritimes",
   "description": "Rôles liés à la mer et aux quais",
-  "entrySchema": { "type": "text" },
+  "entrySchema": {
+    "type": "text"
+  },
   "entries": [
-    { "id": "sailor", "value": "Marin" },
-    { "id": "fisher", "value": "Pêcheur" },
-    { "id": "pirate", "value": "Pirate" },
-    { "id": "navigator", "value": "Navigateur" },
-    { "id": "deckhand", "value": "Matelot" },
-    { "id": "dock_worker", "value": "Docker" },
-    { "id": "ship_captain", "value": "Capitaine de navire" },
-    { "id": "smuggler", "value": "Contrebandier" },
-    { "id": "salvager", "value": "Récupérateur d’épaves" },
-    { "id": "pilot", "value": "Pilote" }
+    {
+      "id": "sailor",
+      "value": "Marin"
+    },
+    {
+      "id": "fisher",
+      "value": "Pêcheur"
+    },
+    {
+      "id": "pirate",
+      "value": "Pirate"
+    },
+    {
+      "id": "navigator",
+      "value": "Navigateur"
+    },
+    {
+      "id": "deckhand",
+      "value": "Matelot"
+    },
+    {
+      "id": "dock_worker",
+      "value": "Docker"
+    },
+    {
+      "id": "ship_captain",
+      "value": "Capitaine de navire"
+    },
+    {
+      "id": "smuggler",
+      "value": "Contrebandier"
+    },
+    {
+      "id": "salvager",
+      "value": "Récupérateur d’épaves"
+    },
+    {
+      "id": "pilot",
+      "value": "Pilote"
+    }
   ]
 }

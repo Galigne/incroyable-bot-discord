@@ -1,0 +1,152 @@
+{
+  "schemaVersion": 3,
+  "id": "consumable",
+  "visibility": "public",
+  "name": "consumables",
+  "description": "Items normally consumed or exhausted through use",
+  "entrySchema": {
+    "type": "fields",
+    "required": ["name", "description"]
+  },
+  "entries": [
+    {
+      "id": "bandages",
+      "weight": 6,
+      "fields": {
+        "name": "Bandages",
+        "description": "Clean cloth and basic supplies for treating wounds."
+      }
+    },
+    {
+      "id": "antidote",
+      "weight": 4,
+      "fields": {
+        "name": "Antidote",
+        "description": "A general treatment granting another chance to resist ordinary poison."
+      }
+    },
+    {
+      "id": "smoke_bomb",
+      "weight": 4,
+      "fields": {
+        "name": "Smoke bomb",
+        "description": "Creates a dense cloud of smoke when ignited."
+      }
+    },
+    {
+      "id": "vial_of_basic_poison",
+      "weight": 3,
+      "fields": {
+        "name": "Vial of basic poison",
+        "description": "A limited dose of toxin suitable for one weapon or drink."
+      }
+    },
+    {
+      "id": "potion_of_night_vision",
+      "weight": 2,
+      "fields": {
+        "name": "Potion of night vision",
+        "description": "Grants clear sight in darkness for one hour."
+      }
+    },
+    {
+      "id": "potion_of_water_breathing",
+      "weight": 2,
+      "fields": {
+        "name": "Potion of water breathing",
+        "description": "Allows underwater breathing for thirty minutes."
+      }
+    },
+    {
+      "id": "acid_flask",
+      "weight": 2,
+      "fields": {
+        "name": "Acid flask",
+        "description": "A carefully sealed vial able to damage common materials."
+      }
+    },
+    {
+      "id": "healing_potion",
+      "fields": {
+        "name": "Healing Potion",
+        "description": "A stabilized vial that aids recovery from an injury when used correctly."
+      }
+    },
+    {
+      "id": "vigor_potion",
+      "fields": {
+        "name": "Vigor Potion",
+        "description": "A drink briefly improving physical ability before causing severe fatigue."
+      }
+    },
+    {
+      "id": "rule_scroll",
+      "fields": {
+        "name": "RULE Scroll",
+        "description": "A single-use medium containing {{ rules.name }}; its exact effect and interpretation remain with the GM."
+      }
+    },
+    {
+      "id": "specialized_ammunition",
+      "fields": {
+        "name": "Specialized Ammunition",
+        "description": "A small batch of projectiles made for a particular weapon or unusual target."
+      }
+    },
+    {
+      "id": "rare_medicine",
+      "fields": {
+        "name": "Rare Medicine",
+        "description": "A fragile, hard-to-replace treatment for one specific illness."
+      }
+    },
+    {
+      "id": "flash_powder",
+      "weight": 3,
+      "fields": {
+        "name": "Flash powder",
+        "description": "A measured packet that produces a sudden burst of light when ignited."
+      }
+    },
+    {
+      "id": "sleeping_draught",
+      "weight": 3,
+      "fields": {
+        "name": "Sleeping draught",
+        "description": "A bitter dose intended to induce a deep but ordinary sleep."
+      }
+    },
+    {
+      "id": "cleansing_salts",
+      "weight": 4,
+      "fields": {
+        "name": "Cleansing salts",
+        "description": "Mineral salts used to clean wounds, tools, water, or ritual spaces."
+      }
+    },
+    {
+      "id": "lamp_oil",
+      "weight": 6,
+      "fields": {
+        "name": "Lamp oil",
+        "description": "A sealed refill sufficient for several hours of steady light."
+      }
+    },
+    {
+      "id": "alchemical_oil",
+      "weight": 3,
+      "fields": {
+        "name": "Alchemical oil",
+        "description": "A prepared oil consumed when coating one object for a GM-defined purpose."
+      }
+    },
+    {
+      "id": "medicinal_poultice",
+      "weight": 5,
+      "fields": {
+        "name": "Medicinal poultice",
+        "description": "A wrapped herbal preparation applied once to soothe pain and swelling."
+      }
+    }
+  ]
+}

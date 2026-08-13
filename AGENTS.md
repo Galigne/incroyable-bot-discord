@@ -598,12 +598,24 @@ The durable implementation constraints are:
   relationships.
 - Keep inline-reference resolution and provenance in the resolver services. Do not
   parse references, select entries, or reconstruct provenance in command handlers.
-- Keep `background` routing aligned with one internal
-  `background_<category>` text generator per category. Resolve
+- Keep `background` routing aligned with one internal concept-only generator per
+  category, stored in `background_<category>.json`. Resolve
   `physical_description` independently when generating a character.
 - Derive supported `/gen-creature` types from the public `creature` router. Router
-  entries are generator classifications; the only persistent entity type is
+  entries reference internal concept-only IDs stored in `creature_<type>.json`;
+  they are generator classifications, and the only persistent entity type is
   `creature`.
+- Category roots keep unprefixed filenames and IDs. Child filenames use
+  `<category>_<concept>.json`, child IDs use only `<concept>`, and all references
+  use generator IDs rather than filenames. The public `loot`, `site`, and `group`
+  roots are equal-weight text routers over public children.
+- There is no `inventory` generator. Random character inventory resolves three
+  carried display values through `loot`, using child provenance for bounded
+  duplicate avoidance. Heterogeneous loot schemas must remain supported.
+- Random characters equip one compatible armor plus one or two independently
+  selected main items: 80% `weapons`, 20% `shields` per slot. Equipped shields may
+  stack and add their AR percentages to armor before resource generation; carried
+  loot never contributes AR.
 - Use only `modifier_character` for the character modifier policy and
   `modifier_creature` for the creature modifier policy. Modifiers and status
   effects remain descriptive and never execute mechanics.

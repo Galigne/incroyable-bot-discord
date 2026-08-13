@@ -60,6 +60,75 @@ test('production generator v3 data uses stable IDs, strict parity, and visibilit
 	}
 });
 
+test('production category children use prefixed filenames and concept-only IDs', async () => {
+	const backgroundIds = [
+		'adventurer',
+		'artisan',
+		'criminal',
+		'exile',
+		'mage',
+		'merchant',
+		'military',
+		'noble',
+		'official',
+		'outlander',
+		'peasant',
+		'performer',
+		'religious',
+		'sailor',
+		'scholar',
+		'servant',
+		'urchin',
+	];
+	const expectedFiles = new Map([
+		...backgroundIds.map(id => [`background_${id}.json`, id]),
+		...['animal', 'companion', 'monster'].map(id => [`creature_${id}.json`, id]),
+		...[
+			'weapons',
+			'shields',
+			'armors',
+			'supplies',
+			'consumable',
+			'food_and_drink',
+			'valuables',
+			'material',
+			'curio',
+		].map(id => [`loot_${id}.json`, id]),
+		...['building', 'dungeon', 'settlement', 'region', 'room']
+			.map(id => [`site_${id}.json`, id]),
+		...['government', 'faction', 'religion']
+			.map(id => [`group_${id}.json`, id]),
+	]);
+	const generatorRoot = path.join(__dirname, '..', 'data', 'generators');
+	for (const locale of ['en', 'fr']) {
+		const localeRoot = path.join(generatorRoot, locale);
+		const filenames = new Set(await fsPromises.readdir(localeRoot));
+		for (const [filename, id] of expectedFiles) {
+			const document = JSON.parse(await fsPromises.readFile(
+				path.join(localeRoot, filename),
+				'utf8',
+			));
+			assert.equal(document.id, id, `${locale}/${filename}`);
+		}
+		for (const removedFilename of [
+			'inventory.json',
+			'weapons.json',
+			'armors.json',
+			'material.json',
+			'building.json',
+			'dungeon.json',
+			'settlement.json',
+			'region.json',
+			'room.json',
+			'government.json',
+			'faction.json',
+			'religion.json',
+		]) {
+			assert.equal(filenames.has(removedFilename), false, `${locale}/${removedFilename}`);
+		}
+	}
+});
+
 test('generator and background autocomplete expose stable public values', () => {
 	const publicValues = getCommandOptionValues('generator-categories', 'fr');
 	const publicIds = new Set(
@@ -89,12 +158,12 @@ test('generator and background autocomplete expose stable public values', () => 
 
 test('wrapped inline reference parsing requires exactly one valid token', () => {
 	assert.deepEqual(
-		parseWrappedInlineReference('{{ creature_monster:dragon.name }}'),
-		{ generator: 'creature_monster', entry: 'dragon', field: 'name' },
+		parseWrappedInlineReference('{{ monster:dragon.name }}'),
+		{ generator: 'monster', entry: 'dragon', field: 'name' },
 	);
 	for (const invalid of [
-		'creature_monster',
-		'{{ creature_monster }} {{ creature_animal }}',
+		'monster',
+		'{{ monster }} {{ animal }}',
 		'{{ creature-monster }}',
 	]) {
 		assert.throws(

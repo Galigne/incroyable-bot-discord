@@ -1,20 +1,52 @@
 {
   "schemaVersion": 3,
-  "id": "background_servant",
+  "id": "servant",
   "visibility": "internal",
   "name": "Archétypes de serviteur",
   "description": "Rôles domestiques et de service",
-  "entrySchema": { "type": "text" },
+  "entrySchema": {
+    "type": "text"
+  },
   "entries": [
-    { "id": "household_servant", "value": "Serviteur domestique" },
-    { "id": "attendant", "value": "Assistant" },
-    { "id": "day_laborer", "value": "Journalier" },
-    { "id": "cook", "value": "Cuisinier" },
-    { "id": "stable_hand", "value": "Palefrenier" },
-    { "id": "courier", "value": "Courrier" },
-    { "id": "driver", "value": "Conducteur" },
-    { "id": "steward", "value": "Intendant" },
-    { "id": "groundskeeper", "value": "Garde des domaines" },
-    { "id": "messenger", "value": "Messager" }
+    {
+      "id": "household_servant",
+      "value": "Serviteur domestique"
+    },
+    {
+      "id": "attendant",
+      "value": "Assistant"
+    },
+    {
+      "id": "day_laborer",
+      "value": "Journalier"
+    },
+    {
+      "id": "cook",
+      "value": "Cuisinier"
+    },
+    {
+      "id": "stable_hand",
+      "value": "Palefrenier"
+    },
+    {
+      "id": "courier",
+      "value": "Courrier"
+    },
+    {
+      "id": "driver",
+      "value": "Conducteur"
+    },
+    {
+      "id": "steward",
+      "value": "Intendant"
+    },
+    {
+      "id": "groundskeeper",
+      "value": "Garde des domaines"
+    },
+    {
+      "id": "messenger",
+      "value": "Messager"
+    }
   ]
 }

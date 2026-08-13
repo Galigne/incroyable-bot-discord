@@ -1,0 +1,52 @@
+{
+  "schemaVersion": 3,
+  "id": "rumor",
+  "visibility": "public",
+  "name": "rumor",
+  "description": "Circulating claims whose truth is left to the GM",
+  "entrySchema": {
+    "type": "text"
+  },
+  "entries": [
+    {
+      "id": "rumor_1",
+      "value": "A {{ monster }} was supposedly seen near {{ settlement }}."
+    },
+    {
+      "id": "rumor_2",
+      "value": "{{ faction }} is said to be buying unusual quantities of {{ material }}."
+    },
+    {
+      "id": "rumor_3",
+      "value": "Treasure is allegedly hidden beneath {{ building }}."
+    },
+    {
+      "id": "rumor_4",
+      "value": "{{ government }} is supposedly preparing a secret action against a nearby rival."
+    },
+    {
+      "id": "rumor_5",
+      "value": "Followers of {{ religion }} are said to be announcing—or concealing—an omen."
+    },
+    {
+      "id": "rumor_6",
+      "value": "The road through {{ region }} has suddenly become unsafe for reasons no traveler agrees on."
+    },
+    {
+      "id": "rumor_7",
+      "value": "A missing person with the {{ background }} background was reportedly seen inside {{ building }}."
+    },
+    {
+      "id": "rumor_8",
+      "value": "An abandoned place described as {{ site }} is supposedly still occupied."
+    },
+    {
+      "id": "rumor_9",
+      "value": "An object described as {{ curio }} is said to have changed hands several times this week."
+    },
+    {
+      "id": "rumor_10",
+      "value": "{{ government }} is discreetly paying for a particular service without explaining why."
+    }
+  ]
+}

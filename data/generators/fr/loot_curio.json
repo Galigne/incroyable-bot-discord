@@ -1,0 +1,125 @@
+{
+  "schemaVersion": 3,
+  "id": "curio",
+  "visibility": "public",
+  "name": "curiosités",
+  "description": "Objets inhabituels présentant un intérêt narratif, mystérieux, personnel ou circonstanciel",
+  "entrySchema": {
+    "type": "fields",
+    "required": ["name", "description"]
+  },
+  "entries": [
+    {
+      "id": "whispering_compass",
+      "fields": {
+        "name": "Boussole murmurante",
+        "description": "Une étrange boussole qui se plaint à voix basse chaque fois qu'elle indique le nord."
+      }
+    },
+    {
+      "id": "everlasting_candle",
+      "fields": {
+        "name": "Bougie éternelle",
+        "description": "Une bougie dont la petite flamme ne consume jamais la cire."
+      }
+    },
+    {
+      "id": "mysterious_sealed_letter",
+      "fields": {
+        "name": "Mystérieuse lettre scellée",
+        "description": "Une lettre adressée à une personne que le personnage n'a jamais rencontrée."
+      }
+    },
+    {
+      "id": "rule_book",
+      "fields": {
+        "name": "Livre de LOI",
+        "description": "Un traité rare consacré à {{ rules.name }}, à ses usages possibles et aux risques d’une mauvaise interprétation."
+      }
+    },
+    {
+      "id": "unknown_key",
+      "fields": {
+        "name": "Clef inconnue",
+        "description": "Une clef sans serrure identifiée, marquée d’un symbole correspondant à une organisation ou un bâtiment."
+      }
+    },
+    {
+      "id": "coded_notes",
+      "fields": {
+        "name": "Notes chiffrées",
+        "description": "Plusieurs pages de notes dont le sens dépend d’un code, d’un contexte ou d’une personne disparue."
+      }
+    },
+    {
+      "id": "treasure_map",
+      "fields": {
+        "name": "Carte au trésor",
+        "description": "Un itinéraire incomplet accompagné de repères anciens, d’avertissements et d’une destination ambiguë."
+      }
+    },
+    {
+      "id": "ceremonial_doll",
+      "fields": {
+        "name": "Poupée cérémonielle",
+        "description": "Une figurine de tissu portant le nom effacé d’une personne et les traces d’un ancien rituel."
+      }
+    },
+    {
+      "id": "locked_grimoire",
+      "fields": {
+        "name": "Grimoire verrouillé",
+        "description": "Un livre protégé par une serrure ou une énigme, dont le contenu ne peut être consulté directement."
+      }
+    },
+    {
+      "id": "old_toy",
+      "fields": {
+        "name": "Jouet ancien",
+        "description": "Un jouet ou ours en peluche reconnaissable par une famille, un collectionneur ou un esprit."
+      }
+    },
+    {
+      "id": "incomplete_manuscript",
+      "fields": {
+        "name": "Manuscrit incomplet",
+        "description": "Un texte historique ou scientifique dont plusieurs pages ont été retirées intentionnellement."
+      }
+    },
+    {
+      "id": "sealed_vase",
+      "fields": {
+        "name": "Vase scellé",
+        "description": "Un récipient fragile dont le contenu produit un bruit ou une chaleur inhabituelle."
+      }
+    },
+    {
+      "id": "enchanted_toothbrush",
+      "fields": {
+        "name": "Brosse à dents enchantée",
+        "description": "Un objet absurdement spécifique qui nettoie parfaitement les dents et mord les autres saletés."
+      }
+    },
+    {
+      "id": "unidentified_egg",
+      "fields": {
+        "name": "Œuf non identifié",
+        "description": "Un œuf vivant dont l’espèce, les besoins et le danger restent inconnus."
+      }
+    },
+    {
+      "id": "attuned_stone",
+      "fields": {
+        "name": "Pierre accordée",
+        "description": "Une pierre minérale ou magique réagissant à un lieu, une personne ou une LOI particulière."
+      }
+    },
+    {
+      "id": "travel_chicken",
+      "fields": {
+        "name": "Poulet de voyage",
+        "description": "Un poulet étonnamment calme, dressé à suivre le porteur et à signaler certaines créatures."
+      }
+    }
+  ]
+}

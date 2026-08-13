@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "id": "creature_animal",
+  "id": "animal",
   "visibility": "internal",
   "name": "Animaux",
   "description": "Faune ordinaire et créatures fantastiques inoffensives",

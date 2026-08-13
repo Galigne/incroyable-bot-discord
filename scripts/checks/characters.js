@@ -347,9 +347,25 @@ module.exports = function createCharacterChecks(context) {
 			const armorName = character.gear.equipment[0].split(' — ')[0];
 			const armor = generatorCatalog.getGenerator('armors').entries
 				.find(entry => entry.fields.name === armorName);
-			const armorPercentage = Number(armor?.fields.ar_percentage);
+			const weapons = generatorCatalog.getGenerator('weapons').entries;
+			const shields = generatorCatalog.getGenerator('shields').entries;
+			const mainEquipment = character.gear.equipment.slice(1).map(value => {
+				const name = value.split(' — ')[0];
+				const shield = shields.find(entry => entry.fields.name === name);
+				return {
+					entry: shield ?? weapons.find(entry => entry.fields.name === name),
+					isShield: Boolean(shield),
+				};
+			});
+			const armorPercentage = Number(armor?.fields.ar_percentage)
+				+ mainEquipment.reduce((total, item) => (
+					item.isShield
+						? total + Number(item.entry?.fields.ar_percentage)
+						: total
+				), 0);
 			if (
 				!armor
+				|| mainEquipment.some(item => !item.entry)
 				|| Number(armor.fields.constitution_requirement) > character.statistics.constitution
 				|| character.resources.ar.max !== Math.round(expectedHp * armorPercentage / 100)
 				|| character.resources.ar.current !== character.resources.ar.max

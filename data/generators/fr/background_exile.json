@@ -1,20 +1,52 @@
 {
   "schemaVersion": 3,
-  "id": "background_exile",
+  "id": "exile",
   "visibility": "internal",
   "name": "Archétypes d’exilé",
   "description": "Rôles sociaux de personnes déplacées ou traquées",
-  "entrySchema": { "type": "text" },
+  "entrySchema": {
+    "type": "text"
+  },
   "entries": [
-    { "id": "refugee", "value": "Réfugié" },
-    { "id": "fugitive", "value": "Fugitif" },
-    { "id": "banished_noble", "value": "Noble banni" },
-    { "id": "displaced_survivor", "value": "Rescapé déplacé" },
-    { "id": "political_exile", "value": "Exilé politique" },
-    { "id": "deserter", "value": "Déserteur" },
-    { "id": "migrant", "value": "Migré" },
-    { "id": "wanderer", "value": "Vagabond" },
-    { "id": "dissident", "value": "Dissident" },
-    { "id": "outlaw", "value": "Hors-la-loi" }
+    {
+      "id": "refugee",
+      "value": "Réfugié"
+    },
+    {
+      "id": "fugitive",
+      "value": "Fugitif"
+    },
+    {
+      "id": "banished_noble",
+      "value": "Noble banni"
+    },
+    {
+      "id": "displaced_survivor",
+      "value": "Rescapé déplacé"
+    },
+    {
+      "id": "political_exile",
+      "value": "Exilé politique"
+    },
+    {
+      "id": "deserter",
+      "value": "Déserteur"
+    },
+    {
+      "id": "migrant",
+      "value": "Migré"
+    },
+    {
+      "id": "wanderer",
+      "value": "Vagabond"
+    },
+    {
+      "id": "dissident",
+      "value": "Dissident"
+    },
+    {
+      "id": "outlaw",
+      "value": "Hors-la-loi"
+    }
   ]
 }

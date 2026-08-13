@@ -1,0 +1,142 @@
+{
+  "schemaVersion": 3,
+  "id": "affliction",
+  "visibility": "public",
+  "name": "affliction",
+  "description": "Maladies et malédictions persistantes",
+  "entrySchema": {
+    "type": "fields",
+    "required": ["name", "type", "description"],
+    "technical": ["type"]
+  },
+  "entries": [
+    {
+      "id": "ash_fever",
+      "fields": {
+        "name": "Fièvre des cendres",
+        "type": "disease",
+        "description": "Une fièvre enfumée rend le malade {{ status_effect:feverish }} et sensible aux flammes nues."
+      }
+    },
+    {
+      "id": "marsh_lung",
+      "fields": {
+        "name": "Poumon des marais",
+        "type": "disease",
+        "description": "Une toux humide et un souffle court associés aux eaux stagnantes."
+      }
+    },
+    {
+      "id": "red_flux",
+      "fields": {
+        "name": "Flux rouge",
+        "type": "disease",
+        "description": "Une maladie intestinale épuisante accompagnée de crampes, de soif et d’une faiblesse rapide."
+      }
+    },
+    {
+      "id": "glass_cough",
+      "fields": {
+        "name": "Toux de verre",
+        "type": "disease",
+        "description": "Une toux sèche et douloureuse qui produit de minuscules cristaux translucides d’origine incertaine."
+      }
+    },
+    {
+      "id": "sleeping_sickness",
+      "fields": {
+        "name": "Maladie du sommeil",
+        "type": "disease",
+        "description": "Des accès de sommeil de plus en plus fréquents interrompent les activités ordinaires et deviennent difficiles à repousser."
+      }
+    },
+    {
+      "id": "frost_rot",
+      "fields": {
+        "name": "Pourriture de givre",
+        "type": "disease",
+        "description": "Des tissus engourdis et décolorés se dégradent après une exposition prolongée au froid ou au surnaturel."
+      }
+    },
+    {
+      "id": "spore_fever",
+      "fields": {
+        "name": "Fièvre des spores",
+        "type": "disease",
+        "description": "Une fièvre fongique provoque des rêves intenses et des épisodes de comportement {{ status_effect:confused }}."
+      }
+    },
+    {
+      "id": "black_vein",
+      "fields": {
+        "name": "Veine noire",
+        "type": "disease",
+        "description": "Des veines assombries s’étendent lentement depuis une blessure infectée tandis que les forces déclinent."
+      }
+    },
+    {
+      "id": "oathbrand",
+      "fields": {
+        "name": "Marque du serment",
+        "type": "curse",
+        "description": "Une marque visible réagit lorsque son porteur s’apprête à rompre une promesse jurée."
+      }
+    },
+    {
+      "id": "mirror_curse",
+      "fields": {
+        "name": "Malédiction du miroir",
+        "type": "curse",
+        "description": "Les reflets rejouent parfois des intentions que leur propriétaire cherchait à dissimuler."
+      }
+    },
+    {
+      "id": "hunger_mark",
+      "fields": {
+        "name": "Marque de la faim",
+        "type": "curse",
+        "description": "Aucun repas ordinaire ne rassasie durablement son porteur, quelle que soit son abondance."
+      }
+    },
+    {
+      "id": "stone_sleep",
+      "fields": {
+        "name": "Sommeil de pierre",
+        "type": "curse",
+        "description": "Après chaque sommeil profond, une partie du corps devient brièvement froide, lourde et semblable à la pierre."
+      }
+    },
+    {
+      "id": "whispering_mark",
+      "fields": {
+        "name": "Marque murmurante",
+        "type": "curse",
+        "description": "Une marque cachée répète des fragments de secrets proches lorsque les environs sont silencieux."
+      }
+    },
+    {
+      "id": "nightmare_chain",
+      "fields": {
+        "name": "Chaîne des cauchemars",
+        "type": "curse",
+        "description": "Des rêves récurrents relient le porteur à un lieu, un objet ou un dormeur inconnu."
+      }
+    },
+    {
+      "id": "withering_touch",
+      "fields": {
+        "name": "Contact flétrissant",
+        "type": "curse",
+        "description": "Les plantes fragiles et les denrées périssables se dégradent anormalement vite dans les mains du porteur."
+      }
+    },
+    {
+      "id": "borrowed_shadow",
+      "fields": {
+        "name": "Ombre empruntée",
+        "type": "curse",
+        "description": "L’ombre du porteur reproduit parfois les gestes de quelqu’un d’autre."
+      }
+    }
+  ]
+}

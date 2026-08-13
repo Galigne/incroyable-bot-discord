@@ -1,0 +1,242 @@
+{
+  "schemaVersion": 3,
+  "id": "supplies",
+  "visibility": "public",
+  "name": "matériel",
+  "description": "Objets pratiques et réutilisables pour le voyage, l’exploration, les métiers et l’aventure quotidienne",
+  "entrySchema": {
+    "type": "fields",
+    "required": ["name", "description"]
+  },
+  "entries": [
+    {
+      "id": "coil_of_rope",
+      "weight": 8,
+      "fields": {
+        "name": "Rouleau de corde",
+        "description": "Dix mètres de corde solide pour grimper, attacher ou arrimer une charge."
+      }
+    },
+    {
+      "id": "lantern_and_oil",
+      "weight": 8,
+      "fields": {
+        "name": "Lanterne et huile",
+        "description": "Une lanterne à capuchon contenant assez d'huile pour plusieurs heures."
+      }
+    },
+    {
+      "id": "waterskin",
+      "weight": 7,
+      "fields": {
+        "name": "Gourde",
+        "description": "Une gourde en cuir remplie d'eau."
+      }
+    },
+    {
+      "id": "bedroll",
+      "weight": 7,
+      "fields": {
+        "name": "Nécessaire de couchage",
+        "description": "Une couverture résistante aux intempéries et un couchage roulé."
+      }
+    },
+    {
+      "id": "tinderbox",
+      "weight": 7,
+      "fields": {
+        "name": "Boîte à amadou",
+        "description": "Un silex, un briquet en acier et de l'amadou sec pour allumer un feu."
+      }
+    },
+    {
+      "id": "lockpicking_kit",
+      "weight": 6,
+      "fields": {
+        "name": "Nécessaire de crochetage",
+        "description": "De petits outils permettant de manipuler les serrures mécaniques ordinaires."
+      }
+    },
+    {
+      "id": "climbing_kit",
+      "weight": 6,
+      "fields": {
+        "name": "Matériel d'escalade",
+        "description": "Des pitons, un marteau, des sangles et quelques accessoires d'escalade simples."
+      }
+    },
+    {
+      "id": "chalk_and_charcoal",
+      "weight": 6,
+      "fields": {
+        "name": "Craie et fusain",
+        "description": "De quoi baliser un chemin, esquisser une carte ou prendre des notes."
+      }
+    },
+    {
+      "id": "small_mirror",
+      "weight": 6,
+      "fields": {
+        "name": "Petit miroir",
+        "description": "Un miroir à main poli, utile pour envoyer des signaux et regarder au-delà des angles."
+      }
+    },
+    {
+      "id": "crowbar",
+      "weight": 5,
+      "fields": {
+        "name": "Pied-de-biche",
+        "description": "Un solide levier en fer pour forcer des portes, des caisses ou d'autres obstacles."
+      }
+    },
+    {
+      "id": "grappling_hook",
+      "weight": 5,
+      "fields": {
+        "name": "Grappin",
+        "description": "Un crochet à quatre pointes conçu pour être utilisé avec une corde."
+      }
+    },
+    {
+      "id": "fishing_kit",
+      "weight": 5,
+      "fields": {
+        "name": "Matériel de pêche",
+        "description": "Du fil, des hameçons, des flotteurs et un filet compact."
+      }
+    },
+    {
+      "id": "writing_kit",
+      "weight": 5,
+      "fields": {
+        "name": "Nécessaire d'écriture",
+        "description": "De l'encre, des plumes, du parchemin, de la cire à cacheter et un étui de protection."
+      }
+    },
+    {
+      "id": "herbalism_pouch",
+      "weight": 5,
+      "fields": {
+        "name": "Trousse d'herboriste",
+        "description": "De petits outils et récipients pour récolter des plantes utiles."
+      }
+    },
+    {
+      "id": "shovel",
+      "weight": 5,
+      "fields": {
+        "name": "Pelle",
+        "description": "Un outil compact mais solide pour creuser."
+      }
+    },
+    {
+      "id": "bear_trap",
+      "weight": 4,
+      "fields": {
+        "name": "Piège à ours",
+        "description": "Un lourd piège mécanique capable d'immobiliser une créature."
+      }
+    },
+    {
+      "id": "disguise_kit",
+      "weight": 4,
+      "fields": {
+        "name": "Nécessaire de déguisement",
+        "description": "Des produits cosmétiques, des teintures, de faux cheveux et quelques éléments de costume simples."
+      }
+    },
+    {
+      "id": "merchants_scale",
+      "weight": 4,
+      "fields": {
+        "name": "Balance de marchand",
+        "description": "Une balance pliante et des poids de référence pour vérifier les marchandises."
+      }
+    },
+    {
+      "id": "bag_of_caltrops",
+      "weight": 3,
+      "fields": {
+        "name": "Sac de chausse-trappes",
+        "description": "Des pointes métalliques acérées permettant de ralentir des poursuivants ou de protéger un passage."
+      }
+    },
+    {
+      "id": "spyglass",
+      "weight": 3,
+      "fields": {
+        "name": "Longue-vue",
+        "description": "Un tube optique compact permettant d'observer des détails éloignés."
+      }
+    },
+    {
+      "id": "tent",
+      "weight": 3,
+      "fields": {
+        "name": "Tente",
+        "description": "Un petit abri adapté à un ou deux voyageurs."
+      }
+    },
+    {
+      "id": "manacles",
+      "weight": 3,
+      "fields": {
+        "name": "Menottes",
+        "description": "Une paire d'entraves en fer accompagnée d'une clé simple."
+      }
+    },
+    {
+      "id": "holy_symbol",
+      "weight": 3,
+      "fields": {
+        "name": "Symbole sacré",
+        "description": "Un symbole associé à une foi, un serment, un ancêtre ou un idéal personnel."
+      }
+    },
+    {
+      "id": "local_map",
+      "weight": 3,
+      "fields": {
+        "name": "Carte locale",
+        "description": "Une carte pratique mais imparfaite des environs."
+      }
+    },
+    {
+      "id": "silvered_chain",
+      "weight": 2,
+      "fields": {
+        "name": "Chaîne argentée",
+        "description": "Une courte chaîne utile contre les créatures vulnérables à l'argent."
+      }
+    },
+    {
+      "id": "runic_chalk",
+      "weight": 2,
+      "fields": {
+        "name": "Craie runique",
+        "description": "Une craie rare qui rend les inscriptions magiques plus faciles à voir et à étudier."
+      }
+    },
+    {
+      "id": "excavation_tools",
+      "fields": {
+        "name": "Outils d’excavation",
+        "description": "Un crochet, une petite pioche et une pelle repliable pour fouiller ou franchir un terrain difficile."
+      }
+    },
+    {
+      "id": "musical_instrument",
+      "fields": {
+        "name": "Instrument de musique",
+        "description": "Un luth, tambour, violon ou autre instrument transportable, usé mais fonctionnel."
+      }
+    },
+    {
+      "id": "quality_paper",
+      "fields": {
+        "name": "Papier de qualité",
+        "description": "Des feuilles et un parchemin vierges adaptés aux contrats, cartes, sorts ou faux documents."
+      }
+    }
+  ]
+}

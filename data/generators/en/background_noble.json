@@ -1,20 +1,52 @@
 {
   "schemaVersion": 3,
-  "id": "background_noble",
+  "id": "noble",
   "visibility": "internal",
   "name": "Noble archetypes",
   "description": "Aristocratic and courtly roles",
-  "entrySchema": { "type": "text" },
+  "entrySchema": {
+    "type": "text"
+  },
   "entries": [
-    { "id": "king", "value": "King" },
-    { "id": "queen", "value": "Queen" },
-    { "id": "prince", "value": "Prince" },
-    { "id": "heir", "value": "Heir" },
-    { "id": "lord", "value": "Lord" },
-    { "id": "lady", "value": "Lady" },
-    { "id": "courtier", "value": "Courtier" },
-    { "id": "aristocrat", "value": "Aristocrat" },
-    { "id": "regent", "value": "Regent" },
-    { "id": "royal_advisor", "value": "Royal advisor" }
+    {
+      "id": "king",
+      "value": "King"
+    },
+    {
+      "id": "queen",
+      "value": "Queen"
+    },
+    {
+      "id": "prince",
+      "value": "Prince"
+    },
+    {
+      "id": "heir",
+      "value": "Heir"
+    },
+    {
+      "id": "lord",
+      "value": "Lord"
+    },
+    {
+      "id": "lady",
+      "value": "Lady"
+    },
+    {
+      "id": "courtier",
+      "value": "Courtier"
+    },
+    {
+      "id": "aristocrat",
+      "value": "Aristocrat"
+    },
+    {
+      "id": "regent",
+      "value": "Regent"
+    },
+    {
+      "id": "royal_advisor",
+      "value": "Royal advisor"
+    }
   ]
 }

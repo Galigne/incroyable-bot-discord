@@ -143,14 +143,14 @@ test('creature hydration preserves final localized state and technical provenanc
 	saved.name = 'Ash Wolf';
 	saved.description = 'A scarred guardian.';
 	saved.source = {
-		generatorId: 'creature_monster',
+		generatorId: 'monster',
 		entryId: 'ash_wolf',
 		archetypeId: 'monster',
 		statProfileId: 'creature-balanced',
 		provenance: [{
 			type: 'entry',
 			selection: 'random',
-			generatorId: 'creature_monster',
+			generatorId: 'monster',
 			entryId: 'ash_wolf',
 			path: 'root',
 		}],

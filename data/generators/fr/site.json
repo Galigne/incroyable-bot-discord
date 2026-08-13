@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 3,
+  "id": "site",
+  "visibility": "public",
+  "name": "lieu",
+  "description": "Bâtiments, donjons, communautés, régions et salles aléatoires",
+  "entrySchema": {
+    "type": "text"
+  },
+  "entries": [
+    {
+      "id": "building",
+      "value": "{{ building }}"
+    },
+    {
+      "id": "dungeon",
+      "value": "{{ dungeon }}"
+    },
+    {
+      "id": "settlement",
+      "value": "{{ settlement }}"
+    },
+    {
+      "id": "region",
+      "value": "{{ region }}"
+    },
+    {
+      "id": "room",
+      "value": "{{ room }}"
+    }
+  ]
+}

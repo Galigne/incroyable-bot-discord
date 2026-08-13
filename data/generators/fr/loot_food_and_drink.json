@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 3,
+  "id": "food_and_drink",
+  "visibility": "public",
+  "name": "nourriture et boissons",
+  "description": "Provisions, repas et boissons ordinaires ou inhabituels",
+  "entrySchema": {
+    "type": "fields",
+    "required": ["name", "description"]
+  },
+  "entries": [
+    {
+      "id": "three_travel_rations",
+      "weight": 8,
+      "fields": {
+        "name": "Trois rations de voyage",
+        "description": "Des provisions compactes suffisantes pour trois jours."
+      }
+    },
+    {
+      "id": "exotic_fruit",
+      "fields": {
+        "name": "Fruit exotique",
+        "description": "Un fruit rare dont la graine, la saveur ou les propriétés intéressent plusieurs acheteurs."
+      }
+    },
+    {
+      "id": "bread_and_hard_cheese",
+      "weight": 8,
+      "fields": {
+        "name": "Pain et fromage sec",
+        "description": "Un repas ordinaire et durable, adapté au voyage."
+      }
+    },
+    {
+      "id": "dried_meat",
+      "weight": 7,
+      "fields": {
+        "name": "Viande séchée",
+        "description": "Des lamelles salées qui se conservent bien dans un paquetage."
+      }
+    },
+    {
+      "id": "preserved_fruit",
+      "weight": 6,
+      "fields": {
+        "name": "Fruits conservés",
+        "description": "Des fruits séchés ou confits préparés pour un long trajet."
+      }
+    },
+    {
+      "id": "fresh_provisions",
+      "weight": 5,
+      "fields": {
+        "name": "Provisions fraîches",
+        "description": "Des produits de saison et d’autres aliments destinés à être consommés rapidement."
+      }
+    },
+    {
+      "id": "strong_ale",
+      "weight": 5,
+      "fields": {
+        "name": "Bière forte",
+        "description": "Une bière locale robuste vendue dans une cruche bouchée."
+      }
+    },
+    {
+      "id": "local_wine",
+      "weight": 4,
+      "fields": {
+        "name": "Vin local",
+        "description": "Une bouteille dont la qualité et la réputation dépendent de la région."
+      }
+    },
+    {
+      "id": "herbal_tea",
+      "weight": 5,
+      "fields": {
+        "name": "Tisane",
+        "description": "Un mélange parfumé préparé pour se réchauffer, accueillir un invité ou apporter un léger réconfort."
+      }
+    },
+    {
+      "id": "regional_delicacy",
+      "weight": 2,
+      "fields": {
+        "name": "Spécialité régionale",
+        "description": "Un mets caractéristique apprécié sur place et surprenant pour les étrangers."
+      }
+    }
+  ]
+}

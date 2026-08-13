@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 3,
+  "id": "loot",
+  "visibility": "public",
+  "name": "butin",
+  "description": "Objets aléatoires issus de toutes les catégories de butin",
+  "entrySchema": {
+    "type": "text"
+  },
+  "entries": [
+    {
+      "id": "weapons",
+      "value": "{{ weapons }}"
+    },
+    {
+      "id": "shields",
+      "value": "{{ shields }}"
+    },
+    {
+      "id": "armors",
+      "value": "{{ armors }}"
+    },
+    {
+      "id": "supplies",
+      "value": "{{ supplies }}"
+    },
+    {
+      "id": "consumable",
+      "value": "{{ consumable }}"
+    },
+    {
+      "id": "food_and_drink",
+      "value": "{{ food_and_drink }}"
+    },
+    {
+      "id": "valuables",
+      "value": "{{ valuables }}"
+    },
+    {
+      "id": "material",
+      "value": "{{ material }}"
+    },
+    {
+      "id": "curio",
+      "value": "{{ curio }}"
+    }
+  ]
+}

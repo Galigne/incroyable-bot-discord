@@ -19,6 +19,10 @@ const {
 	createGeneratedResources,
 } = require('./mechanics/resources');
 
+const MAIN_EQUIPMENT_WEAPON_CHANCE = 0.8;
+const CARRIED_LOOT_COUNT = 3;
+const LOOT_DUPLICATE_MAX_ATTEMPTS = 10;
+
 function populateRandomCharacter(character, options = {}) {
 	const random = options.random ?? Math.random;
 	const locale = options.locale ?? 'en';
@@ -117,10 +121,22 @@ function populateRandomCharacter(character, options = {}) {
 			getField(entry, 'constitution_requirement'),
 		),
 	);
-	const weaponCount = randomInteger(1, 2, random);
-	const weapons = pickMany('weapons', weaponCount, locale, random);
-	const inventoryItems = pickMany('inventory', 3, locale, random);
-	const armorPercentage = Number(getField(armor, 'ar_percentage'));
+	const mainEquipmentCount = randomInteger(1, 2, random);
+	const mainEquipment = pickMainEquipment(
+		mainEquipmentCount,
+		locale,
+		random,
+	);
+	const inventoryItems = pickCarriedLoot(
+		CARRIED_LOOT_COUNT,
+		locale,
+		random,
+		resolver,
+	);
+	const armorPercentage = calculateGeneratedArmorPercentage(
+		armor,
+		mainEquipment,
+	);
 
 	Object.assign(character.resources, createGeneratedResources(
 		character.statistics,
@@ -129,17 +145,105 @@ function populateRandomCharacter(character, options = {}) {
 	));
 	character.gear.equipment = [
 		formatNamedEntry(armor),
-		...weapons.map(formatNamedEntry),
+		...mainEquipment.map(item => formatNamedEntry(item.entry)),
 	];
 
 	const gold = level * randomInteger(1, 20, random) + 5;
 	character.gear.inventory = [
-		...inventoryItems.map(formatNamedEntry),
+		...inventoryItems,
 		formatGold(gold),
 	];
 	character.status.modifiers = backgroundModifiers.map(modifier => structuredClone(modifier));
 
 	return character;
+}
+
+function pickMainEquipment(count, locale, random) {
+	const generatorIds = Array.from(
+		{ length: count },
+		() => selectMainEquipmentGenerator(random),
+	);
+	const entriesByGenerator = new Map();
+	for (const generatorId of new Set(generatorIds)) {
+		const generatorCount = generatorIds.filter(id => id === generatorId).length;
+		entriesByGenerator.set(
+			generatorId,
+			pickMany(generatorId, generatorCount, locale, random),
+		);
+	}
+	return generatorIds.map(generatorId => ({
+		generatorId,
+		entry: entriesByGenerator.get(generatorId).shift(),
+	}));
+}
+
+function selectMainEquipmentGenerator(random) {
+	return readRandom(random) < MAIN_EQUIPMENT_WEAPON_CHANCE
+		? 'weapons'
+		: 'shields';
+}
+
+function calculateGeneratedArmorPercentage(armor, mainEquipment) {
+	return Number(getField(armor, 'ar_percentage'))
+		+ mainEquipment.reduce((total, item) => (
+			item.generatorId === 'shields'
+				? total + Number(getField(item.entry, 'ar_percentage'))
+				: total
+		), 0);
+}
+
+function pickCarriedLoot(count, locale, random, resolver) {
+	const selectedIdentities = new Set();
+	const selectedValues = [];
+	for (let index = 0; index < count; index += 1) {
+		let selected;
+		for (let attempt = 0; attempt < LOOT_DUPLICATE_MAX_ATTEMPTS; attempt += 1) {
+			const resolved = resolver.resolveReference(
+				{ generator: 'loot', select: 'display' },
+				locale,
+				{
+					path: `root.character.inventory.${index}.attempt.${attempt}`,
+					random,
+				},
+			);
+			selected = {
+				identity: getLootSelectionIdentity(resolved?.provenance),
+				value: getResolvedDisplayValue(resolved),
+			};
+			if (!selectedIdentities.has(selected.identity)) {
+				break;
+			}
+		}
+		selectedIdentities.add(selected.identity);
+		selectedValues.push(selected.value);
+	}
+	return selectedValues;
+}
+
+function getLootSelectionIdentity(provenance) {
+	const selections = (provenance ?? []).filter(record => (
+		record.type === 'entry' && record.generatorId && record.entryId
+	));
+	const routerIndex = selections.findIndex(record => record.generatorId === 'loot');
+	const selection = selections[routerIndex + 1];
+	if (!selection) {
+		throw generationError(
+			'Loot resolution omitted child selection provenance.',
+			'errors.generatorMissing',
+			{ category: 'loot' },
+		);
+	}
+	return `${selection.generatorId}:${selection.entryId}`;
+}
+
+function getResolvedDisplayValue(result) {
+	if (typeof result?.value !== 'string' || !result.value.trim()) {
+		throw generationError(
+			'Loot resolution did not produce display text.',
+			'errors.generatorTextExpected',
+		);
+	}
+	return result.value;
 }
 
 function resolveBackground(requestedBackground, locale, random) {
@@ -247,8 +351,12 @@ function randomInteger(min, max, random) {
 }
 
 function randomIndex(length, random) {
-	const randomValue = Math.max(0, Math.min(0.9999999999999999, random()));
+	const randomValue = readRandom(random);
 	return Math.floor(randomValue * length);
+}
+
+function readRandom(random) {
+	return Math.max(0, Math.min(0.9999999999999999, random()));
 }
 
 function generationError(message, translationKey, translationVariables = {}) {
@@ -260,11 +368,18 @@ function generationError(message, translationKey, translationVariables = {}) {
 }
 
 module.exports = {
+	CARRIED_LOOT_COUNT,
+	LOOT_DUPLICATE_MAX_ATTEMPTS,
+	MAIN_EQUIPMENT_WEAPON_CHANCE,
 	allocateRuleLevels,
+	calculateGeneratedArmorPercentage,
 	calculateMaxAp,
 	calculateRulePoints,
 	calculateStatBudget,
 	calculateStatCost,
 	generateStats,
+	pickCarriedLoot,
+	pickMainEquipment,
 	populateRandomCharacter,
+	selectMainEquipmentGenerator,
 };

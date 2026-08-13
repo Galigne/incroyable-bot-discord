@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "id": "creature_monster",
+  "id": "monster",
   "visibility": "internal",
   "name": "Monstres",
   "description": "Créatures hostiles et prédateurs surnaturels",

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 3,
-  "id": "creature_companion",
+  "id": "companion",
   "visibility": "internal",
   "name": "Compagnons",
   "description": "Animaux de compagnie, familiers et petites créatures de voyage",
@@ -61,7 +61,7 @@
         "equipment": [],
         "inventory": [
           {
-            "generator": "inventory",
+            "generator": "curio",
             "entry": "mysterious_sealed_letter",
             "select": "fields"
           }
@@ -84,7 +84,7 @@
         "equipment": [],
         "inventory": [
           {
-            "generator": "inventory",
+            "generator": "food_and_drink",
             "entry": "three_travel_rations",
             "select": "fields"
           }
@@ -163,7 +163,7 @@
             "generator": {
               "oneOf": [
                 {
-                  "id": "inventory",
+                  "id": "supplies",
                   "weight": 3
                 },
                 {
@@ -408,7 +408,7 @@
         "equipment": [],
         "inventory": [
           {
-            "generator": "inventory",
+            "generator": "supplies",
             "entry": "writing_kit",
             "select": "fields"
           }

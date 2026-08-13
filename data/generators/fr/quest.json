@@ -10,11 +10,11 @@
   "entries": [
     {
       "id": "recover_item_before_criminal",
-      "value": "Retrouver l’objet appelé {{ inventory }} dans {{ dungeon }} avant qu’une personne au profil {{ background:criminal }} ne s’en empare."
+      "value": "Retrouver l’objet appelé {{ curio }} dans {{ dungeon }} avant qu’une personne au profil {{ background:criminal }} ne s’en empare."
     },
     {
       "id": "hunt_modified_monster",
-      "value": "Traquer une créature identifiée comme {{ creature_monster }} après que des témoins lui ont associé le qualificatif {{ modifier_creature }}."
+      "value": "Traquer une créature identifiée comme {{ monster }} après que des témoins lui ont associé le qualificatif {{ modifier_creature }}."
     },
     {
       "id": "defend_settlement_from_faction",
@@ -26,7 +26,7 @@
     },
     {
       "id": "steal_item_from_building",
-      "value": "Voler l’objet appelé {{ inventory }} dans un lieu identifié comme {{ building }} afin de le rendre à son propriétaire légitime."
+      "value": "Voler l’objet appelé {{ valuables }} dans un lieu identifié comme {{ building }} afin de le rendre à son propriétaire légitime."
     },
     {
       "id": "find_missing_person_at_site",
@@ -46,7 +46,7 @@
     },
     {
       "id": "anonymous_gift",
-      "value": "Offrir l’objet appelé {{ inventory }} à une personne au profil {{ background }} sans révéler l’identité du commanditaire."
+      "value": "Offrir l’objet appelé {{ valuables }} à une personne au profil {{ background }} sans révéler l’identité du commanditaire."
     },
     {
       "id": "first_contact",
@@ -58,7 +58,7 @@
     },
     {
       "id": "study_monster_alive",
-      "value": "Étudier une créature identifiée comme {{ creature_monster }} sans la tuer afin de comprendre son lien avec {{ region }}."
+      "value": "Étudier une créature identifiée comme {{ monster }} sans la tuer afin de comprendre son lien avec {{ region }}."
     },
     {
       "id": "solve_faction_murder",
@@ -78,7 +78,7 @@
     },
     {
       "id": "evacuate_before_monsters",
-      "value": "Évacuer {{ settlement }} avant l’arrivée d’un groupe associé à {{ creature_monster }}."
+      "value": "Évacuer {{ settlement }} avant l’arrivée d’un groupe associé à {{ monster }}."
     },
     {
       "id": "escape_site_with_prisoner",
@@ -90,7 +90,7 @@
     },
     {
       "id": "hide_item_from_faction",
-      "value": "Cacher {{ inventory }} à {{ faction }}, capable de suivre toute personne l’ayant touché."
+      "value": "Cacher {{ curio }} à {{ faction }}, capable de suivre toute personne l’ayant touché."
     },
     {
       "id": "conceal_adventure_site",
@@ -106,7 +106,7 @@
     },
     {
       "id": "deliver_contested_goods",
-      "value": "Livrer une marchandise représentée par {{ inventory }} à une personne au profil {{ background }}, alors que plusieurs individus au profil {{ background:criminal }} possèdent la même description du colis."
+      "value": "Livrer une marchandise représentée par {{ valuables }} à une personne au profil {{ background }}, alors que plusieurs individus au profil {{ background:criminal }} possèdent la même description du colis."
     }
   ]
 }

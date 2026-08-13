@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 3,
+  "id": "site",
+  "visibility": "public",
+  "name": "site",
+  "description": "Random buildings, dungeons, settlements, regions, and rooms",
+  "entrySchema": {
+    "type": "text"
+  },
+  "entries": [
+    {
+      "id": "building",
+      "value": "{{ building }}"
+    },
+    {
+      "id": "dungeon",
+      "value": "{{ dungeon }}"
+    },
+    {
+      "id": "settlement",
+      "value": "{{ settlement }}"
+    },
+    {
+      "id": "region",
+      "value": "{{ region }}"
+    },
+    {
+      "id": "room",
+      "value": "{{ room }}"
+    }
+  ]
+}

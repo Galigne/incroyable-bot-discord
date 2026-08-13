@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 3,
+  "id": "valuables",
+  "visibility": "public",
+  "name": "valuables",
+  "description": "Portable wealth, trade goods, status objects, and collectibles",
+  "entrySchema": {
+    "type": "fields",
+    "required": ["name", "description"]
+  },
+  "entries": [
+    {
+      "id": "coin_purse",
+      "fields": {
+        "name": "Coin Purse",
+        "description": "Local currency mixing common small coins with harder-to-spend foreign money."
+      }
+    },
+    {
+      "id": "precious_jewel",
+      "fields": {
+        "name": "Precious Jewel",
+        "description": "An identifiable piece of jewelry, portable but risky to resell."
+      }
+    },
+    {
+      "id": "work_of_art",
+      "fields": {
+        "name": "Work of Art",
+        "description": "A painting, sculpture, or decoration with recognizable cultural value."
+      }
+    },
+    {
+      "id": "ceremonial_clothing",
+      "fields": {
+        "name": "Ceremonial Clothing",
+        "description": "A robe, cloak, boots, or gloves associated with a rank or institution."
+      }
+    },
+    {
+      "id": "unfinished_crown",
+      "fields": {
+        "name": "Unfinished Crown",
+        "description": "A symbol of authority missing a gem, inscription, or essential piece."
+      }
+    },
+    {
+      "id": "ornate_comb",
+      "fields": {
+        "name": "Ornate Comb",
+        "description": "A personal item decorated with a discreet crest or intimate inscription."
+      }
+    },
+    {
+      "id": "collectible_figurine",
+      "fields": {
+        "name": "Collectible Figurine",
+        "description": "One piece of a sought-after series, trivial alone but valuable to the right person."
+      }
+    },
+    {
+      "id": "gemstone",
+      "weight": 4,
+      "fields": {
+        "name": "Gemstone",
+        "description": "A cut or rough stone whose value depends on quality and local demand."
+      }
+    },
+    {
+      "id": "antique_coins",
+      "weight": 3,
+      "fields": {
+        "name": "Antique coins",
+        "description": "Old currency valued more by collectors than at its stamped denomination."
+      }
+    },
+    {
+      "id": "decorated_silverware",
+      "weight": 3,
+      "fields": {
+        "name": "Decorated silverware",
+        "description": "A small matched set marked with an identifiable pattern or crest."
+      }
+    },
+    {
+      "id": "luxury_fabric",
+      "weight": 3,
+      "fields": {
+        "name": "Luxury fabric",
+        "description": "A compact bolt of fine cloth suitable for trade or ceremonial clothing."
+      }
+    },
+    {
+      "id": "small_sculpture",
+      "weight": 2,
+      "fields": {
+        "name": "Small sculpture",
+        "description": "A portable work whose maker, subject, or material gives it value."
+      }
+    },
+    {
+      "id": "rare_book",
+      "weight": 2,
+      "fields": {
+        "name": "Rare book",
+        "description": "A complete and collectible volume sought by specialists."
+      }
+    },
+    {
+      "id": "ceremonial_jewelry",
+      "weight": 2,
+      "fields": {
+        "name": "Ceremonial jewelry",
+        "description": "Ornaments associated with rank, office, or a formal tradition."
+      }
+    },
+    {
+      "id": "valuable_trade_goods",
+      "weight": 4,
+      "fields": {
+        "name": "Valuable trade goods",
+        "description": "Compact merchandise whose resale value varies between settlements."
+      }
+    }
+  ]
+}

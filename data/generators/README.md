@@ -10,6 +10,12 @@ directories. Both locale trees are validated as one candidate. A missing file,
 duplicate ID, invalid relationship, or structural mismatch rejects the candidate;
 there is no locale fallback.
 
+Category roots keep their unprefixed filename and ID. Their child filenames use
+`<category>_<concept>.json`, while each child generator ID is only `<concept>`.
+For example, `loot_weapons.json` has ID `weapons`, and references use
+`{{ weapons }}` rather than the filename. The current category families are
+`background`, `creature`, `loot`, `site`, and `group`.
+
 ## Content guidelines
 
 Generators provide reusable inspiration rather than complete stories. Prefer
@@ -154,17 +160,29 @@ Some stable IDs and fields have application-level meaning and must stay aligned
 with their consumers:
 
 - Every public `background` entry has a technical `generator` field containing one
-  wrapped reference to the corresponding internal `background_<category>` text
-  generator. Character generation resolves that archetype and independently
-  resolves the internal `physical_description` generator.
+  wrapped reference to the corresponding internal `<category>` text generator,
+  stored in `background_<category>.json`. Character generation resolves that
+  archetype and independently resolves the internal `physical_description`
+  generator.
 - The public `creature` router defines every supported `/gen-creature` type. Each
   entry's technical `generator` field contains one wrapped reference to an internal
-  creature-detail generator. Adding or removing router entries changes the
+  creature-detail generator whose concept ID matches the route and whose filename
+  is `creature_<concept>.json`. Adding or removing router entries changes the
   available types; they are not a hard-coded enum or additional persistence types.
 - Creature-detail entries use localized `name` and `description` fields plus the
   validated `generation` metadata described by the schema checks. Statistical
   profile IDs come from the separate non-localized `stat-profile.json` schema and
   remain kebab-case.
+- The public `loot`, `site`, and `group` text routers contain equal-weight wrapped
+  references to their public children. Resolving a router returns the selected
+  child's normal display output and retains both selections in provenance. Loot
+  children may use different schemas: `material` is text, while equipment and the
+  other item tables are structured.
+
+`inventory` is an entity storage field, not a generator ID. Random carried items
+come from the `loot` router. The public `shields` table exposes technical `rarity`
+and `ar_percentage` fields, and the public `affliction` table exposes a technical
+`type` distinguishing persistent diseases from curses.
 
 Creature metadata relationships for profiles, traits, fixed RULEs, status effects,
 modifiers, armor, equipment, and inventory are validated with the catalog. They do

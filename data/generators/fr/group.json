@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 3,
+  "id": "group",
+  "visibility": "public",
+  "name": "groupe",
+  "description": "Gouvernements, factions et religions aléatoires",
+  "entrySchema": {
+    "type": "text"
+  },
+  "entries": [
+    {
+      "id": "government",
+      "value": "{{ government }}"
+    },
+    {
+      "id": "faction",
+      "value": "{{ faction }}"
+    },
+    {
+      "id": "religion",
+      "value": "{{ religion }}"
+    }
+  ]
+}

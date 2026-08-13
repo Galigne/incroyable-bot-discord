@@ -1,0 +1,92 @@
+{
+  "schemaVersion": 3,
+  "id": "food_and_drink",
+  "visibility": "public",
+  "name": "food and drink",
+  "description": "Ordinary and unusual provisions, meals, and drinks",
+  "entrySchema": {
+    "type": "fields",
+    "required": ["name", "description"]
+  },
+  "entries": [
+    {
+      "id": "three_travel_rations",
+      "weight": 8,
+      "fields": {
+        "name": "Three travel rations",
+        "description": "Compact food sufficient for three days."
+      }
+    },
+    {
+      "id": "exotic_fruit",
+      "fields": {
+        "name": "Exotic Fruit",
+        "description": "A rare fruit whose seed, flavor, or properties interest several buyers."
+      }
+    },
+    {
+      "id": "bread_and_hard_cheese",
+      "weight": 8,
+      "fields": {
+        "name": "Bread and hard cheese",
+        "description": "A durable, ordinary meal suited to travel."
+      }
+    },
+    {
+      "id": "dried_meat",
+      "weight": 7,
+      "fields": {
+        "name": "Dried meat",
+        "description": "Salted strips that keep well in a pack."
+      }
+    },
+    {
+      "id": "preserved_fruit",
+      "weight": 6,
+      "fields": {
+        "name": "Preserved fruit",
+        "description": "Dried or sugared fruit packed for a long journey."
+      }
+    },
+    {
+      "id": "fresh_provisions",
+      "weight": 5,
+      "fields": {
+        "name": "Fresh provisions",
+        "description": "Seasonal produce and other food meant to be eaten soon."
+      }
+    },
+    {
+      "id": "strong_ale",
+      "weight": 5,
+      "fields": {
+        "name": "Strong ale",
+        "description": "A robust local brew sold in a stoppered jug."
+      }
+    },
+    {
+      "id": "local_wine",
+      "weight": 4,
+      "fields": {
+        "name": "Local wine",
+        "description": "A bottle whose quality and reputation depend on the region."
+      }
+    },
+    {
+      "id": "herbal_tea",
+      "weight": 5,
+      "fields": {
+        "name": "Herbal tea",
+        "description": "A fragrant blend prepared for warmth, hospitality, or mild comfort."
+      }
+    },
+    {
+      "id": "regional_delicacy",
+      "weight": 2,
+      "fields": {
+        "name": "Regional delicacy",
+        "description": "A distinctive dish prized locally and surprising to outsiders."
+      }
+    }
+  ]
+}

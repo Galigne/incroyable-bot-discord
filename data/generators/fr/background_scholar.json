@@ -1,21 +1,56 @@
 {
   "schemaVersion": 3,
-  "id": "background_scholar",
+  "id": "scholar",
   "visibility": "internal",
   "name": "Archétypes d’érudit",
   "description": "Rôles liés au savoir, aux archives et à la recherche",
-  "entrySchema": { "type": "text" },
+  "entrySchema": {
+    "type": "text"
+  },
   "entries": [
-    { "id": "student", "value": "Étudiant" },
-    { "id": "researcher", "value": "Chercheur" },
-    { "id": "scribe", "value": "Scribe" },
-    { "id": "librarian", "value": "Bibliothécaire" },
-    { "id": "historian", "value": "Historien" },
-    { "id": "cartographer", "value": "Cartographe" },
-    { "id": "physician", "value": "Médecin" },
-    { "id": "theologian", "value": "Théologien" },
-    { "id": "archivist", "value": "Archiviste" },
-    { "id": "professor", "value": "Professeur" },
-    { "id": "chronicler", "value": "Chroniqueur" }
+    {
+      "id": "student",
+      "value": "Étudiant"
+    },
+    {
+      "id": "researcher",
+      "value": "Chercheur"
+    },
+    {
+      "id": "scribe",
+      "value": "Scribe"
+    },
+    {
+      "id": "librarian",
+      "value": "Bibliothécaire"
+    },
+    {
+      "id": "historian",
+      "value": "Historien"
+    },
+    {
+      "id": "cartographer",
+      "value": "Cartographe"
+    },
+    {
+      "id": "physician",
+      "value": "Médecin"
+    },
+    {
+      "id": "theologian",
+      "value": "Théologien"
+    },
+    {
+      "id": "archivist",
+      "value": "Archiviste"
+    },
+    {
+      "id": "professor",
+      "value": "Professeur"
+    },
+    {
+      "id": "chronicler",
+      "value": "Chroniqueur"
+    }
   ]
 }

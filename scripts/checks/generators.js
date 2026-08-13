@@ -82,6 +82,7 @@ module.exports = function createGeneratorChecks(context) {
 
 			checkRequiredGenerators(errors, generatorCatalog);
 			checkBackgroundGenerators(errors, generatorCatalog);
+			checkCategoryRouters(errors, generatorCatalog);
 			checkPhysicalDescriptionGenerator(errors, generatorCatalog);
 			checkCreatureGenerators(errors, generatorCatalog);
 			checkStructuredGenerators(errors, generatorCatalog);
@@ -100,15 +101,20 @@ module.exports = function createGeneratorChecks(context) {
 
 function checkRequiredGenerators(errors, generatorCatalog) {
 	const requiredPublicGenerators = [
+		'affliction',
 		'armors',
 		'background',
 		'building',
+		'consumable',
 		'creature',
+		'curio',
 		'dungeon',
 		'event',
 		'faction',
+		'food_and_drink',
 		'government',
-		'inventory',
+		'group',
+		'loot',
 		'material',
 		'name',
 		'personality',
@@ -118,10 +124,16 @@ function checkRequiredGenerators(errors, generatorCatalog) {
 		'religion',
 		'room',
 		'rules',
+		'rumor',
+		'secret',
 		'settlement',
+		'shields',
+		'site',
 		'status_effect',
+		'supplies',
 		'talents',
 		'trap',
+		'valuables',
 		'weapons',
 	];
 	const publicIds = new Set(
@@ -131,6 +143,9 @@ function checkRequiredGenerators(errors, generatorCatalog) {
 		if (!publicIds.has(generatorId)) {
 			errors.push(`Missing public generator: ${generatorId}.`);
 		}
+	}
+	if (generatorCatalog.getGenerator('inventory')) {
+		errors.push('The removed inventory generator is still available.');
 	}
 
 	for (const generatorId of [
@@ -162,8 +177,9 @@ function checkBackgroundGenerators(errors, generatorCatalog) {
 			|| !background.fields?.name
 			|| !background.fields?.description
 			|| backgroundIds.has(background.id)
-			|| routedGeneratorId !== `background_${background.id}`
+			|| routedGeneratorId !== background.id
 			|| details.length === 0
+			|| generatorCatalog.getGenerator(routedGeneratorId)?.visibility !== 'internal'
 			|| generatorCatalog.getGenerator(routedGeneratorId)?.entrySchema.type !== 'text'
 			|| details.some(entry => typeof entry.value !== 'string' || !entry.value.trim())
 		) {
@@ -173,6 +189,41 @@ function checkBackgroundGenerators(errors, generatorCatalog) {
 	}
 	if (backgrounds.length === 0) {
 		errors.push('Background routing must expose at least one category.');
+	}
+}
+
+function checkCategoryRouters(errors, generatorCatalog) {
+	for (const [routerId, childIds] of [
+		['loot', [
+			'weapons',
+			'shields',
+			'armors',
+			'supplies',
+			'consumable',
+			'food_and_drink',
+			'valuables',
+			'material',
+			'curio',
+		]],
+		['site', ['building', 'dungeon', 'settlement', 'region', 'room']],
+		['group', ['government', 'faction', 'religion']],
+	]) {
+		const router = generatorCatalog.getGenerator(routerId);
+		if (
+			router?.visibility !== 'public'
+			|| router.entrySchema.type !== 'text'
+			|| JSON.stringify(router.entries.map(entry => entry.id))
+				!== JSON.stringify(childIds)
+			|| router.entries.some(entry => (
+				entry.weight !== undefined
+				|| getInlineGeneratorId(entry.value) !== entry.id
+			))
+			|| childIds.some(childId => (
+				generatorCatalog.getGenerator(childId)?.visibility !== 'public'
+			))
+		) {
+			errors.push(`Invalid public ${routerId} category router.`);
+		}
 	}
 }
 
@@ -203,6 +254,7 @@ function checkCreatureGenerators(errors, generatorCatalog) {
 		const generator = generatorCatalog.getGenerator(generatorId);
 		if (
 			!generatorId
+			|| generatorId !== route.id
 			|| !generator
 			|| generator.visibility !== 'internal'
 			|| generator.entries.some(entry => !entry.generation)
@@ -280,6 +332,45 @@ function checkStructuredGenerators(errors, generatorCatalog) {
 		|| expectedArmorCombinations.some(value => !armorCombinations.has(value))
 	) {
 		errors.push('The armor generator must contain every type and rarity combination.');
+	}
+	const shields = generatorCatalog.getGenerator('shields');
+	const shieldRarities = {
+		common: { ar: 5, weight: 8 },
+		uncommon: { ar: 10, weight: 5 },
+		rare: { ar: 15, weight: 3 },
+		epic: { ar: 20, weight: 2 },
+		legendary: { ar: 25, weight: 1 },
+	};
+	if (
+		JSON.stringify(shields?.entrySchema) !== JSON.stringify({
+			type: 'fields',
+			required: ['name', 'rarity', 'description', 'ar_percentage'],
+			technical: ['rarity', 'ar_percentage'],
+		})
+		|| shields.entries.length !== 15
+		|| Object.entries(shieldRarities).some(([rarity, expected]) => {
+			const entries = shields.entries.filter(entry => entry.fields.rarity === rarity);
+			return entries.length !== 3 || entries.some(entry => (
+				entry.weight !== expected.weight
+				|| entry.fields.ar_percentage !== expected.ar
+			));
+		})
+	) {
+		errors.push('The shield generator has invalid rarity or AR data.');
+	}
+	const affliction = generatorCatalog.getGenerator('affliction');
+	if (
+		JSON.stringify(affliction?.entrySchema) !== JSON.stringify({
+			type: 'fields',
+			required: ['name', 'type', 'description'],
+			technical: ['type'],
+		})
+		|| affliction.entries.length !== 16
+		|| ['disease', 'curse'].some(type => (
+			affliction.entries.filter(entry => entry.fields.type === type).length !== 8
+		))
+	) {
+		errors.push('The affliction generator must contain eight diseases and eight curses.');
 	}
 	const races = generatorCatalog.getGenerator('race')?.entries ?? [];
 	const raceIds = new Set(races.map(entry => entry.id));

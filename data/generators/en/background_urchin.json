@@ -1,20 +1,52 @@
 {
   "schemaVersion": 3,
-  "id": "background_urchin",
+  "id": "urchin",
   "visibility": "internal",
   "name": "Urchin archetypes",
   "description": "Street and survival roles",
-  "entrySchema": { "type": "text" },
+  "entrySchema": {
+    "type": "text"
+  },
   "entries": [
-    { "id": "orphan", "value": "Orphan" },
-    { "id": "beggar", "value": "Beggar" },
-    { "id": "street_child", "value": "Street child" },
-    { "id": "scavenger", "value": "Scavenger" },
-    { "id": "runaway", "value": "Runaway" },
-    { "id": "street_messenger", "value": "Street messenger" },
-    { "id": "pickpocket", "value": "Pickpocket" },
-    { "id": "street_performer", "value": "Street performer" },
-    { "id": "urchin", "value": "Urchin" },
-    { "id": "errand_runner", "value": "Errand runner" }
+    {
+      "id": "orphan",
+      "value": "Orphan"
+    },
+    {
+      "id": "beggar",
+      "value": "Beggar"
+    },
+    {
+      "id": "street_child",
+      "value": "Street child"
+    },
+    {
+      "id": "scavenger",
+      "value": "Scavenger"
+    },
+    {
+      "id": "runaway",
+      "value": "Runaway"
+    },
+    {
+      "id": "street_messenger",
+      "value": "Street messenger"
+    },
+    {
+      "id": "pickpocket",
+      "value": "Pickpocket"
+    },
+    {
+      "id": "street_performer",
+      "value": "Street performer"
+    },
+    {
+      "id": "urchin",
+      "value": "Urchin"
+    },
+    {
+      "id": "errand_runner",
+      "value": "Errand runner"
+    }
   ]
 }
