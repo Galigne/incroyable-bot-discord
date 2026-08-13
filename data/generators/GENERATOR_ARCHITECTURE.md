@@ -13,8 +13,11 @@ The JSON contract and catalog-editing rules are documented in
 catalog trees. `services/generatorSchema.js` and its focused validators accept only
 generator schema v3 and validate the complete locale pair, including stable IDs,
 entry shapes, weights, technical fields, references, modifier relationships, and
-creature metadata. Candidate generator and statistical-profile caches are prepared
-together and replaced only after validation succeeds, including during `/reload`.
+creature metadata. During `/reload`, `reloadGenerationData()` prepares generator and
+statistical-profile candidates together, validates creature/profile relationships,
+and replaces both active caches only after validation succeeds. Normal process
+startup instead initializes the generator catalog and statistical profiles through
+their existing loading behavior; it does not run that joint reload workflow.
 
 Visibility controls entry points, not resolvability:
 

@@ -607,8 +607,10 @@ The durable implementation constraints are:
 - Creature RULEs come only from explicit `fixedRules`; only natural-armor metadata
   or an explicit armor reference initializes AR; generation never derives manual
   encumbrance.
-- Prepare and validate the generator and statistical-profile candidates before
-  replacing either active cache during startup or `/reload`.
+- During `/reload`, use `reloadGenerationData()` to prepare generator and
+  statistical-profile candidates together, validate creature/profile relationships,
+  and replace both active caches only after validation succeeds. Normal startup
+  uses the catalogs' existing loading behavior rather than this joint reload workflow.
 
 Random character generation depends on exact stable generator IDs and field keys.
 Inspect `services/randomCharacterGenerator.js` and the coupled schema checks before
