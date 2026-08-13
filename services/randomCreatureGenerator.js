@@ -6,7 +6,9 @@ const {
 const {
 	CREATURE_ROUTER_ID,
 } = require('./generatorSchema');
-const { parseInlineReference } = require('./generatorSchema/referenceValidation');
+const {
+	parseWrappedInlineReference,
+} = require('./generatorSchema/referenceValidation');
 const { generateStats } = require('./mechanics/characterGeneration');
 const { createGeneratedResources } = require('./mechanics/resources');
 const { getStatProfile } = require('./statProfileCatalog');
@@ -14,10 +16,11 @@ const { getStatProfile } = require('./statProfileCatalog');
 function populateRandomCreature(creature, options = {}) {
 	const random = options.random ?? Math.random;
 	const locale = options.locale ?? 'en';
-	const requestedType = options.type ?? options.archetype;
+	const requestedType = options.type;
 	const resolver = options.resolver ?? generatorResolver;
 	const getGenerator = options.getGenerator ?? generatorCatalog.getGenerator;
 	const getProfile = options.getStatProfile ?? getStatProfile;
+	generatorResolver.assertGeneratorResolverInterface(resolver);
 	const level = options.level ?? randomInteger(1, 10, random);
 	validateLevel(level);
 	const router = getGenerator(CREATURE_ROUTER_ID, locale);
@@ -51,9 +54,13 @@ function populateRandomCreature(creature, options = {}) {
 	);
 	const selectedType = getEntrySelection(route.provenance).entryId;
 	const routeExpression = route.fields?.generator ?? route.value?.generator;
-	const parsedRoute = typeof routeExpression === 'string'
-		? parseInlineReference(routeExpression.replace(/^\s*\{\{([^{}]+)\}\}\s*$/, '$1'), 'creature route')
-		: null;
+	let parsedRoute = null;
+	try {
+		parsedRoute = parseWrappedInlineReference(routeExpression, 'creature route');
+	}
+	catch {
+		// The route-specific generation error below describes unavailable routes.
+	}
 	if (
 		!parsedRoute
 		|| parsedRoute.entry
@@ -66,19 +73,11 @@ function populateRandomCreature(creature, options = {}) {
 			{ category: selectedType },
 		);
 	}
-	const result = resolver.resolveInlineReference
-		? resolver.resolveInlineReference(
-			routeExpression,
-			locale,
-			{ path: 'root.creature.details', random },
-		)
-		: resolveGenerationReference(
-			{ generator: parsedRoute.generator, select: 'fields' },
-			locale,
-			random,
-			resolver,
-			'root.creature.details',
-		);
+	const result = resolver.resolveInlineReference(
+		routeExpression,
+		locale,
+		{ path: 'root.creature.details', random },
+	);
 	const selection = getEntrySelection(result.provenance);
 	const generatorId = selection.generatorId;
 	if (generatorId !== parsedRoute.generator) {
@@ -137,20 +136,20 @@ function populateRandomCreature(creature, options = {}) {
 		resolver,
 		sourceProvenance,
 	);
-	resolveStatusEffects(
-		creature,
+	creature.status.effects.push(...resolveDescribedReferences(
 		generation.statusEffects ?? [],
 		locale,
 		random,
 		resolver,
-	);
-	resolveModifiers(
-		creature,
+		'root.generation.statusEffects',
+	));
+	creature.status.modifiers.push(...resolveDescribedReferences(
 		generation.modifiers ?? [],
 		locale,
 		random,
 		resolver,
-	);
+		'root.generation.modifiers',
+	));
 
 	let armorPercentage = generation.naturalArmorPercentage ?? 0;
 	creature.naturalArmor = {
@@ -202,26 +201,6 @@ function populateRandomCreature(creature, options = {}) {
 	return creature;
 }
 
-function resolveModifiers(creature, references, locale, random, resolver) {
-	for (const [index, reference] of references.entries()) {
-		const resolved = resolveGenerationReference(
-			reference,
-			locale,
-			random,
-			resolver,
-			`root.generation.modifiers.${index}`,
-		);
-		const selection = getEntrySelection(resolved.provenance);
-		creature.status.modifiers.push({
-			generatorId: selection.generatorId,
-			entryId: selection.entryId,
-			name: requireLocalizedField(resolved.value, 'name'),
-			description: requireLocalizedField(resolved.value, 'description'),
-			provenance: resolved.provenance,
-		});
-	}
-}
-
 function resolveFixedRules(
 	creature,
 	fixedRules,
@@ -252,24 +231,24 @@ function resolveFixedRules(
 	}
 }
 
-function resolveStatusEffects(creature, references, locale, random, resolver) {
-	for (const [index, reference] of references.entries()) {
+function resolveDescribedReferences(references, locale, random, resolver, path) {
+	return references.map((reference, index) => {
 		const resolved = resolveGenerationReference(
 			reference,
 			locale,
 			random,
 			resolver,
-			`root.generation.statusEffects.${index}`,
+			`${path}.${index}`,
 		);
 		const selection = getEntrySelection(resolved.provenance);
-		creature.status.effects.push({
+		return {
 			generatorId: selection.generatorId,
 			entryId: selection.entryId,
 			name: requireLocalizedField(resolved.value, 'name'),
 			description: requireLocalizedField(resolved.value, 'description'),
 			provenance: resolved.provenance,
-		});
-	}
+		};
+	});
 }
 
 function resolveGearReferences(

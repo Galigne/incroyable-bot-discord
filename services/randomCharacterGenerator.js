@@ -24,6 +24,7 @@ function populateRandomCharacter(character, options = {}) {
 	const locale = options.locale ?? 'en';
 	const formatGold = options.formatGold ?? (gold => `${gold} gold`);
 	const resolver = options.resolver ?? generatorResolver;
+	generatorResolver.assertGeneratorResolverInterface(resolver);
 	const level = options.level ?? randomInteger(1, 10, random);
 	if (!Number.isInteger(level) || level < 1 || level > 10) {
 		throw generationError(
@@ -44,10 +45,7 @@ function populateRandomCharacter(character, options = {}) {
 	character.race.traits.physicalAbility = getField(race, 'physical_ability');
 
 	const background = resolveBackground(options.background, locale, random);
-	const routeResolver = hasReferenceResolution(resolver)
-		? resolver
-		: generatorResolver;
-	const route = routeResolver.resolveReference(
+	const route = resolver.resolveReference(
 		{
 			generator: 'background',
 			entry: background.id,
@@ -57,12 +55,12 @@ function populateRandomCharacter(character, options = {}) {
 		{ path: 'root.character.background', random },
 	);
 	const routeFields = route.fields ?? route.value;
-	const archetypeResult = routeResolver.resolveInlineReference(
+	const archetypeResult = resolver.resolveInlineReference(
 		routeFields.generator,
 		locale,
 		{ path: 'root.character.background.archetype', random },
 	);
-	const physicalDescriptionResult = routeResolver.resolveInlineReference(
+	const physicalDescriptionResult = resolver.resolveInlineReference(
 		'{{ physical_description }}',
 		locale,
 		{ path: 'root.character.background.physicalDescription', random },
@@ -162,25 +160,25 @@ function resolveBackground(requestedBackground, locale, random) {
 	return background;
 }
 
-function pickOne(categoryName, locale, random, predicate = () => true) {
-	return pickMany(categoryName, 1, locale, random, predicate)[0];
+function pickOne(generatorId, locale, random, predicate = () => true) {
+	return pickMany(generatorId, 1, locale, random, predicate)[0];
 }
 
-function pickMany(categoryName, count, locale, random, predicate = () => true) {
-	const category = generatorCatalog.getGenerator(categoryName, locale);
-	if (!category) {
+function pickMany(generatorId, count, locale, random, predicate = () => true) {
+	const generator = generatorCatalog.getGenerator(generatorId, locale);
+	if (!generator) {
 		throw generationError(
-			`Missing generator category: ${categoryName}.`,
+			`Missing generator category: ${generatorId}.`,
 			'errors.generatorMissing',
-			{ category: categoryName },
+			{ category: generatorId },
 		);
 	}
-	const availableEntries = category.entries.filter(predicate);
+	const availableEntries = generator.entries.filter(predicate);
 	if (availableEntries.length < count) {
 		throw generationError(
-			`Generator category ${categoryName} needs at least ${count} eligible entries.`,
+			`Generator category ${generatorId} needs at least ${count} eligible entries.`,
 			'errors.generatorNeedsEntries',
-			{ category: categoryName, count },
+			{ category: generatorId, count },
 		);
 	}
 
@@ -229,11 +227,6 @@ function getResolvedTextValue(result) {
 		);
 	}
 	return result.value;
-}
-
-function hasReferenceResolution(resolver) {
-	return typeof resolver?.resolveReference === 'function'
-		&& typeof resolver.resolveInlineReference === 'function';
 }
 
 function formatNamedEntry(entry) {

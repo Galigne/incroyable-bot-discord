@@ -444,8 +444,6 @@
   "generatorFields": {
     "arPercentage": "AR percentage",
     "allies": "Allies",
-    "appearance": "Appearance",
-    "backstory": "Backstory",
     "commandment": "Commandment",
     "constitutionRequirement": "Constitution requirement",
     "deityOrBelief": "Deity or belief",
@@ -454,7 +452,6 @@
     "firstName": "First name",
     "generator": "Generator",
     "goal": "Goal",
-    "goals": "Goals",
     "hierarchy": "Hierarchy",
     "holyPlace": "Holy place",
     "lastName": "Last name",

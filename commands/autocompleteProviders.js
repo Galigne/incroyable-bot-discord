@@ -1,6 +1,9 @@
 const generatorCatalog = require('../services/generatorCatalog');
 const { filterAutocompleteChoices } = require('../util/autocomplete');
 const {
+	getLocalizedRouterChoices,
+} = require('../util/generatorRouterChoices');
+const {
 	canManageEntity,
 	hasDmPermission,
 } = require('../util/authorization');
@@ -73,17 +76,8 @@ function normalizeStaticChoice(choice, locale) {
 }
 
 function getBackgroundChoices(option, context, focused) {
-	const english = generatorCatalog.getGenerator('background', 'en')?.entries ?? [];
-	const localized = generatorCatalog.getGenerator(
-		'background',
-		context.locale,
-	)?.entries ?? [];
-	const englishById = new Map(english.map(entry => [entry.id, entry]));
 	return filterAutocompleteChoices(
-		localized.map(entry => ({
-			name: `${entry.fields.name} — ${entry.fields.description}`.slice(0, 100),
-			value: englishById.get(entry.id)?.id ?? entry.id,
-		})),
+		getLocalizedRouterChoices('background', context.locale),
 		focused.value,
 	);
 }
@@ -139,17 +133,8 @@ function getManageableEntityChoices(option, context, focused) {
 }
 
 function getCreatureTypeChoices(option, context, focused) {
-	const english = generatorCatalog.getGenerator('creature', 'en')?.entries ?? [];
-	const localized = generatorCatalog.getGenerator(
-		'creature',
-		context.locale,
-	)?.entries ?? [];
-	const englishById = new Map(english.map(entry => [entry.id, entry]));
 	return filterAutocompleteChoices(
-		localized.map(entry => ({
-			name: `${entry.fields.name} — ${entry.fields.description}`.slice(0, 100),
-			value: englishById.get(entry.id)?.id ?? entry.id,
-		})),
+		getLocalizedRouterChoices('creature', context.locale),
 		focused.value,
 	);
 }

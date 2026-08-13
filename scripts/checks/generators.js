@@ -6,6 +6,9 @@ const {
 	getEntryWeight,
 	selectWeightedEntry,
 } = require('../../services/weightedSelector');
+const {
+	parseWrappedInlineReference,
+} = require('../../services/generatorSchema/referenceValidation');
 const generatorResolver = require('../../services/generatorResolver');
 
 module.exports = function createGeneratorChecks(context) {
@@ -334,8 +337,11 @@ function checkStatProfiles(errors) {
 }
 
 function getInlineGeneratorId(value) {
-	const match = typeof value === 'string'
-		? value.match(/^\s*\{\{\s*([a-z0-9]+(?:_[a-z0-9]+)*)\s*\}\}\s*$/)
-		: null;
-	return match?.[1];
+	try {
+		const reference = parseWrappedInlineReference(value, 'generator check');
+		return reference.entry || reference.field ? undefined : reference.generator;
+	}
+	catch {
+		return undefined;
+	}
 }

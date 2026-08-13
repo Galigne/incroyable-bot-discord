@@ -727,6 +727,15 @@ canonical rulebook.
 
 ## Task branch and delivery workflow
 
+Before choosing the workflow, perform a bounded read-only scoping pass. Inspect
+the repository guidance and the files, tests, and data most likely coupled to the
+request, then use that evidence to estimate affected layers, risk, and the value
+of an independent pull-request review. Do not edit files, create or switch
+branches, pull, or commit during this pass. The initial prompt may make the pass
+brief when it clearly describes a cross-cutting change, but do not decide solely
+from the prompt when the scope is uncertain. Once there is enough context to
+choose confidently, follow the preflight below before editing.
+
 Choose the workflow that matches the change's scope, risk, and usefulness of an
 independent pull-request review. Do not use a rigid technical threshold. If it
 is genuinely unclear which workflow applies, ask the user before editing.

@@ -2,7 +2,9 @@ const { generatorSchemaError } = require('./assertions');
 const {
 	CREATURE_ROUTER_ID,
 } = require('./constants');
-const { parseInlineReference } = require('./referenceValidation');
+const {
+	parseWrappedInlineReference,
+} = require('./referenceValidation');
 
 function validateCreatureGenerationRelationships(
 	generator,
@@ -27,13 +29,14 @@ function validateCreatureGenerationRelationships(
 			`Creature archetype ${ownerId} references an unknown fixed RULE.`,
 		);
 	}
-	for (const reference of generation.statusEffects ?? []) {
-		const sources = validateReferenceRelationship(reference, catalog, ownerId);
-		assertReferenceFields(sources, ['name', 'description'], ownerId, 'status effect');
-	}
-	for (const reference of generation.modifiers ?? []) {
-		const sources = validateReferenceRelationship(reference, catalog, ownerId);
-		assertReferenceFields(sources, ['name', 'description'], ownerId, 'modifier');
+	for (const [references, label] of [
+		[generation.statusEffects ?? [], 'status effect'],
+		[generation.modifiers ?? [], 'modifier'],
+	]) {
+		for (const reference of references) {
+			const sources = validateReferenceRelationship(reference, catalog, ownerId);
+			assertReferenceFields(sources, ['name', 'description'], ownerId, label);
+		}
 	}
 	if (generation.armor) {
 		const sources = validateReferenceRelationship(generation.armor, catalog, ownerId);
@@ -107,13 +110,10 @@ function validateCreatureStatProfileRelationships(catalogs, profiles) {
 			);
 		}
 		for (const route of router.entries) {
-			const archetypeId = route.id;
+			const typeId = route.id;
 			const routeExpression = route?.fields?.generator;
 			const routeReference = typeof routeExpression === 'string'
-				? parseInlineReference(
-					routeExpression.replace(/^\s*\{\{([^{}]+)\}\}\s*$/, '$1'),
-					`${locale} creature route`,
-				)
+				? parseWrappedInlineReference(routeExpression, `${locale} creature route`)
 				: null;
 			const generatorId = routeReference?.generator;
 			if (
@@ -124,7 +124,7 @@ function validateCreatureStatProfileRelationships(catalogs, profiles) {
 			) {
 				throw generatorSchemaError(
 					'CREATURE_ROUTE_INVALID',
-					`Creature generation has an invalid ${locale} ${archetypeId} route.`,
+					`Creature generation has an invalid ${locale} ${typeId} route.`,
 				);
 			}
 			const generator = catalog.get(generatorId);

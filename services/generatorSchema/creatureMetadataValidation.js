@@ -107,16 +107,16 @@ function validateCreatureGeneration(generation, location) {
 	}
 	validateCreatureTraits(generation.traits, location);
 	validateFixedRules(generation.fixedRules ?? [], location);
-	validateReferenceList(
-		generation.statusEffects ?? [],
-		`${location} status effects`,
-		{ requiredSelector: 'fields' },
-	);
-	validateReferenceList(
-		generation.modifiers ?? [],
-		`${location} modifiers`,
-		{ requiredSelector: 'fields' },
-	);
+	for (const [references, label] of [
+		[generation.statusEffects ?? [], 'status effects'],
+		[generation.modifiers ?? [], 'modifiers'],
+	]) {
+		validateReferenceList(
+			references,
+			`${location} ${label}`,
+			{ requiredSelector: 'fields' },
+		);
+	}
 	if (generation.armor !== undefined) {
 		if (generation.naturalArmorPercentage !== undefined) {
 			throw generatorSchemaError(

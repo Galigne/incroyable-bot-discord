@@ -44,6 +44,9 @@ const {
 	calculateStatBudget,
 	calculateStatCost,
 } = require('../services/mechanics/characterGeneration');
+const {
+	parseWrappedInlineReference,
+} = require('../services/generatorSchema/referenceValidation');
 const { BASE_STATS } = require('../services/mechanics/constants');
 const { calculateArmorRating } = require('../services/mechanics/armor');
 const {
@@ -75,17 +78,17 @@ after(() => {
 	fs.rmSync(testSaveDirectory, { recursive: true, force: true });
 });
 
-test('production creature sources are strict localized archetypes backed by profiles', () => {
+test('production creature sources are strict localized types backed by profiles', () => {
 	const creatureTypes = getCreatureTypes();
 	const profileIds = new Set();
 	for (const locale of ['en', 'fr']) {
 		const router = generatorCatalog.getGenerator(CREATURE_ROUTER_ID, locale);
 		assert.equal(router.visibility, 'public');
 		assert.deepEqual(router.entries.map(entry => entry.id), creatureTypes);
-		for (const archetype of creatureTypes) {
-			const generatorId = getCreatureGeneratorId(archetype, locale);
+		for (const type of creatureTypes) {
+			const generatorId = getCreatureGeneratorId(type, locale);
 			assert.equal(
-				router.entries.find(entry => entry.id === archetype).fields.generator,
+				router.entries.find(entry => entry.id === type).fields.generator,
 				`{{ ${generatorId} }}`,
 			);
 			const generator = generatorCatalog.getGenerator(generatorId, locale);
@@ -169,7 +172,7 @@ test('creature metadata preserves English and French technical parity', () => {
 	);
 });
 
-test('creature routers, archetypes, and statistical profiles validate relationships', () => {
+test('creature routers, types, and statistical profiles validate relationships', () => {
 	const catalogs = createGeneratorCatalogCandidate();
 	const profiles = createStatProfileCandidate();
 	const firstCreatureType = getCreatureTypes()[0];
@@ -229,14 +232,14 @@ test('creature generation references require compatible target payloads', () => 
 });
 
 test('equivalent random input selects the same stable IDs and statistics in both locales', () => {
-	for (const archetype of getCreatureTypes()) {
+	for (const type of getCreatureTypes()) {
 		const english = populateRandomCreature(
-			new Creature(`Deterministic.${archetype}.en`, 'creator'),
-			{ archetype, level: 6, locale: 'en', random: () => 0 },
+			new Creature(`Deterministic.${type}.en`, 'creator'),
+			{ type, level: 6, locale: 'en', random: () => 0 },
 		);
 		const french = populateRandomCreature(
-			new Creature(`Deterministic.${archetype}.fr`, 'creator'),
-			{ archetype, level: 6, locale: 'fr', random: () => 0 },
+			new Creature(`Deterministic.${type}.fr`, 'creator'),
+			{ type, level: 6, locale: 'fr', random: () => 0 },
 		);
 
 		assert.equal(english.source.entryId, french.source.entryId);
@@ -259,8 +262,8 @@ test('equivalent random input selects the same stable IDs and statistics in both
 test('all creature profiles use the shared nonlinear level budget and derived resources', () => {
 	const representatives = getCreatureRepresentatives();
 	const usedProfiles = new Set();
-	for (const [archetype, entryId] of representatives) {
-		const creature = generateEntry(archetype, entryId, { level: 8 });
+	for (const [type, entryId] of representatives) {
+		const creature = generateEntry(type, entryId, { level: 8 });
 		const profile = getStatProfile(creature.source.statProfileId);
 		usedProfiles.add(profile.id);
 		for (const stat of BASE_STATS) {
@@ -287,16 +290,16 @@ test('all creature profiles use the shared nonlinear level budget and derived re
 		);
 	}
 	assert.deepEqual(usedProfiles, new Set(
-		representatives.map(([archetype, entryId]) => (
+		representatives.map(([type, entryId]) => (
 			generatorCatalog.getGenerator(
-				getCreatureGeneratorId(archetype),
+				getCreatureGeneratorId(type),
 				'en',
 			).entries.find(entry => entry.id === entryId).generation.statProfile
 		)),
 	));
-	const [archetype, entryId] = representatives[0];
+	const [type, entryId] = representatives[0];
 	for (let level = 1; level <= 10; level += 1) {
-		const creature = generateEntry(archetype, entryId, { level });
+		const creature = generateEntry(type, entryId, { level });
 		assert.equal(creature.level, level);
 		assert.ok(
 			calculateStatCost(creature.statistics) <= calculateStatBudget(level),
@@ -308,7 +311,7 @@ test('all creature profiles use the shared nonlinear level budget and derived re
 	const randomLevel = populateRandomCreature(
 		new Creature('Random.Level', 'creator'),
 		{
-			archetype,
+			type,
 			random: sequenceRandom([0.999999, 0, 0.99]),
 		},
 	);
@@ -388,7 +391,7 @@ test('natural armor, generated armor, status, and weighted gear resolve to final
 });
 
 test('descriptive modifiers cannot change mechanical generation results', () => {
-	const { archetype, generatorId } = getCreatureFixture();
+	const { type, generatorId } = getCreatureFixture();
 	const baseResult = generatorResolver.resolveReference(
 		{ generator: generatorId, select: 'fields' },
 		'en',
@@ -413,7 +416,7 @@ test('descriptive modifiers cannot change mechanical generation results', () => 
 	const plain = populateRandomCreature(
 		new Creature('Modifier.Plain', 'creator'),
 		{
-			archetype,
+			type,
 			level: 7,
 			random: () => 0,
 			resolver: createDetailResolver(generatorId, withoutModifier),
@@ -422,7 +425,7 @@ test('descriptive modifiers cannot change mechanical generation results', () => 
 	const modified = populateRandomCreature(
 		new Creature('Modifier.Applied', 'creator'),
 		{
-			archetype,
+			type,
 			level: 7,
 			random: () => 0,
 			resolver: createDetailResolver(
@@ -490,12 +493,12 @@ test('/gen-creature is DM-only and atomically persists a complete generated crea
 	assert.equal(stored.source.archetypeId, generatedType);
 	assert.match(response.content, /Command\.Generated/);
 	assert.equal(response.embeds[0].toJSON().title, stored.displayName);
-	const archetypeName = getCreatureRoute(generatedType, 'en').fields.name;
+	const typeName = getCreatureRoute(generatedType, 'en').fields.name;
 	assert.ok(createCreatureFieldEmbed(stored, 'identity', 'en').toJSON().fields
 		.some(field => (
 			field.name === 'Archetype'
-			&& field.value === archetypeName[0].toLocaleUpperCase('en')
-				+ archetypeName.slice(1)
+			&& field.value === typeName[0].toLocaleUpperCase('en')
+				+ typeName.slice(1)
 		)));
 	assert.equal(await pathExists(getCreatureHistoryPath(stored.key)), false);
 	assert.equal(getEntityOperationQueueSize(), 0);
@@ -546,8 +549,8 @@ test('/gen-creature randomly selects a router entry when type is omitted', () =>
 test('generation, collision, and save failures leave no partial creature or history', async () => {
 	const validType = getCreatureTypes()[0];
 	for (const [entityKey, options] of [
-		['Validation.Type', { archetype: 'dragon', level: 1 }],
-		['Validation.Level', { archetype: validType, level: 11 }],
+		['Validation.Type', { type: 'dragon', level: 1 }],
+		['Validation.Level', { type: validType, level: 11 }],
 	]) {
 		await assert.rejects(
 			generateCreature(entityKey, 'creator', options),
@@ -560,7 +563,7 @@ test('generation, collision, and save failures leave no partial creature or hist
 	await createCharacter('Collision.Key', 'creator');
 	await assert.rejects(
 		generateCreature('Collision.Key', 'creator', {
-			archetype: validType,
+			type: validType,
 			level: 1,
 			random: () => 0,
 		}),
@@ -571,10 +574,15 @@ test('generation, collision, and save failures leave no partial creature or hist
 
 	await assert.rejects(
 		generateCreature('Generation.Failure', 'creator', {
-			archetype: validType,
+			type: validType,
 			level: 1,
 			resolver: {
 				resolveReference() {
+					throw Object.assign(new Error('injected generation failure'), {
+						code: 'INJECTED_GENERATION_FAILURE',
+					});
+				},
+				resolveInlineReference() {
 					throw Object.assign(new Error('injected generation failure'), {
 						code: 'INJECTED_GENERATION_FAILURE',
 					});
@@ -595,7 +603,7 @@ test('generation, collision, and save failures leave no partial creature or hist
 	try {
 		await assert.rejects(
 			generateCreature('Save.Failure', 'creator', {
-				archetype: validType,
+				type: validType,
 				level: 1,
 				random: () => 0,
 			}),
@@ -614,12 +622,12 @@ test('generation, collision, and save failures leave no partial creature or hist
 
 	const concurrent = await Promise.allSettled([
 		generateCreature('Concurrent.Key', 'creator-a', {
-			archetype: validType,
+			type: validType,
 			level: 2,
 			random: () => 0,
 		}),
 		generateCreature('Concurrent.Key', 'creator-b', {
-			archetype: validType,
+			type: validType,
 			level: 3,
 			random: () => 0,
 		}),
@@ -638,7 +646,7 @@ test('generation, collision, and save failures leave no partial creature or hist
 test('loading and rendering persisted creatures never reruns generation after reload', async () => {
 	const validType = getCreatureTypes().at(-1);
 	const generated = await generateCreature('Reload.Stable', 'creator', {
-		archetype: validType,
+		type: validType,
 		level: 6,
 		locale: 'fr',
 		random: () => 0,
@@ -673,18 +681,18 @@ test('loading and rendering persisted creatures never reruns generation after re
 	);
 });
 
-function generateEntry(archetype, entryId, {
+function generateEntry(type, entryId, {
 	level,
 	randomFallback = 0.5,
 } = {}) {
 	return populateRandomCreature(
-		new Creature(`Generated.${archetype}.${entryId}`, 'creator'),
+		new Creature(`Generated.${type}.${entryId}`, 'creator'),
 		{
-			archetype,
+			type,
 			level,
 			locale: 'en',
 			random: sequenceRandom([
-				getEntryMidpoint(archetype, entryId),
+				getEntryMidpoint(type, entryId),
 				0.99,
 			], randomFallback),
 		},
@@ -717,31 +725,37 @@ function getCreatureRoute(typeId, locale = 'en') {
 
 function getCreatureGeneratorId(typeId, locale = 'en') {
 	const route = getCreatureRoute(typeId, locale);
-	const match = route?.fields?.generator?.match(
-		/^\s*\{\{\s*([a-z0-9]+(?:_[a-z0-9]+)*)\s*\}\}\s*$/,
-	);
-	return match?.[1];
+	try {
+		const reference = parseWrappedInlineReference(
+			route?.fields?.generator,
+			'creature route test',
+		);
+		return reference.entry || reference.field ? undefined : reference.generator;
+	}
+	catch {
+		return undefined;
+	}
 }
 
 function getCreatureFixture(locale = 'en') {
-	const archetype = getCreatureTypes(locale)[0];
+	const type = getCreatureTypes(locale)[0];
 	return {
-		archetype,
-		generatorId: getCreatureGeneratorId(archetype, locale),
+		type,
+		generatorId: getCreatureGeneratorId(type, locale),
 	};
 }
 
 function getCreatureRepresentatives(locale = 'en') {
 	const representatives = [];
 	const profileIds = new Set();
-	for (const archetype of getCreatureTypes(locale)) {
-		const generatorId = getCreatureGeneratorId(archetype, locale);
+	for (const type of getCreatureTypes(locale)) {
+		const generatorId = getCreatureGeneratorId(type, locale);
 		const generator = generatorCatalog.getGenerator(generatorId, locale);
 		for (const entry of generator.entries) {
 			const profileId = entry.generation.statProfile;
 			if (!profileIds.has(profileId)) {
 				profileIds.add(profileId);
-				representatives.push([archetype, entry.id]);
+				representatives.push([type, entry.id]);
 			}
 		}
 	}
@@ -749,8 +763,8 @@ function getCreatureRepresentatives(locale = 'en') {
 }
 
 function getCreatureTypeForEntry(entryId, locale = 'en') {
-	return getCreatureTypes(locale).find(archetype => {
-		const generatorId = getCreatureGeneratorId(archetype, locale);
+	return getCreatureTypes(locale).find(type => {
+		const generatorId = getCreatureGeneratorId(type, locale);
 		return generatorCatalog.getGenerator(generatorId, locale).entries
 			.some(entry => entry.id === entryId);
 	});
@@ -782,10 +796,17 @@ function createDetailResolver(generatorId, result, modifierResult) {
 			if (reference.generator === generatorId && !reference.entry) {
 				return structuredClone(result);
 			}
-			if (reference.generator === 'modifier' && modifierResult) {
+			if (reference.generator === 'modifier_creature' && modifierResult) {
 				return structuredClone(modifierResult);
 			}
 			return generatorResolver.resolveReference(reference, locale, options);
+		},
+		resolveInlineReference(expression, locale, options) {
+			const reference = parseWrappedInlineReference(expression, 'creature detail test');
+			if (reference.generator === generatorId && !reference.entry && !reference.field) {
+				return structuredClone(result);
+			}
+			return generatorResolver.resolveInlineReference(expression, locale, options);
 		},
 	};
 }
