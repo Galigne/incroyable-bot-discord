@@ -725,61 +725,52 @@ solution, and ask the user to confirm the direction. Do not pause merely over
 personal taste or when the relevant behavior or data is explicitly defined by a
 canonical rulebook.
 
-## Task branch and delivery workflow
+## Direct-to-master delivery workflow
 
-Before choosing the workflow, perform a bounded read-only scoping pass. Inspect
-the repository guidance and the files, tests, and data most likely coupled to the
-request, then use that evidence to estimate affected layers, risk, and the value
-of an independent pull-request review. Do not edit files, create or switch
-branches, pull, or commit during this pass. The initial prompt may make the pass
-brief when it clearly describes a cross-cutting change, but do not decide solely
-from the prompt when the scope is uncertain. Once there is enough context to
-choose confidently, follow the preflight below before editing.
+The normal Codex workflow is always direct to `master`, regardless of the size
+or risk of the task. Do not create or use dedicated task branches or pull
+requests as part of this workflow.
 
-Choose the workflow that matches the change's scope, risk, and usefulness of an
-independent pull-request review. Do not use a rigid technical threshold. If it
-is genuinely unclear which workflow applies, ask the user before editing.
+Before starting a new task:
 
-Before starting a new task, complete this preflight; a review-fix continuation
-on an existing PR branch is not a new task and follows the substantial-change
-review-fix rule below:
+1. Check `git status` and never discard existing dirty work. If existing work
+   overlaps the task or a synchronization step could affect it, preserve it and
+   ask the user before taking a risky action.
+2. Synchronize remote information as appropriate, such as with `git fetch
+   origin`, without overwriting local work. Confirm that implementation will
+   proceed directly on `master`. If the current branch is not `master`, stop
+   and ask the user rather than switching branches as part of the normal
+   workflow.
 
-1. Check `git status`. Do not discard dirty work; resolve it or ask the user
-   before switching branches or pulling.
-2. Verify that the current branch is `master`.
-3. Pull the latest `master` with `git pull --ff-only origin master`.
-4. Verify again that the current branch is `master`, the working tree is clean,
-   and it is synchronized with `origin/master`.
+Implement the requested task directly on `master`. Run the appropriate
+validation, including the repository's normal full validation when applicable.
 
-Only after this preflight may a substantial task branch be created or a small
-change be edited directly on `master`.
+Stop before committing or pushing. Present the completed changes and validation
+results to the user for manual approval. Codex must never commit or push
+implementation work without explicit user approval.
 
-For substantial changes, new features, significant refactors, or other work
-where a pull request is useful:
+Only after explicit user approval:
 
-1. Start from `master` and create and switch to a dedicated task branch before
-   editing. Use a descriptive `codex/<short-task-name>` branch unless the user
-   specifies another name. Never implement directly on `master`.
-2. Implement the requested work and run the relevant validation.
-3. Stop before committing or pushing. Present the completed changes and
-   validation results, then wait for the user's explicit approval.
-4. After explicit approval, commit and push the task branch.
-5. Create a pull request from the task branch into `master`.
-6. Stop after creating the pull request. Never merge it; pull-request review and
-   merge approval remain user-controlled steps.
-7. If review findings are later provided for that pull request, continue on the
-   same PR branch. Implement and validate the requested fixes, then commit and
-   push them so the existing PR is updated. Do not create another branch or PR
-   for review fixes.
+1. Create one focused commit for the task whenever practical.
+2. Push that commit directly to `origin/master`.
+3. Report the resulting commit SHA.
 
-For small, straightforward changes where a pull request would add unnecessary
-overhead:
+The pushed commit may then be independently reviewed. A review should inspect
+the exact commit diff together with the relevant surrounding current code,
+`AGENTS.md`, the original implementation request, and applicable project
+documentation.
 
-1. Work directly on `master`. Do not create a task branch or pull request.
-2. Implement the change and run the relevant validation.
-3. Stop before committing or pushing so the user can manually review the
-   changes.
-4. After explicit approval, commit and push directly to `master`.
+If review findings require changes:
+
+1. Implement the fixes directly on `master` and validate them.
+2. Stop before committing or pushing and present the fixes and validation
+   results to the user for approval.
+3. After explicit approval, create a new focused corrective commit and push it
+   directly to `origin/master`.
+4. Never amend, rewrite, force-push, or replace the previously reviewed commit.
+
+Additional review and fix cycles follow the same pattern, with each approved
+correction represented by a new commit.
 
 ### GitHub authentication
 
@@ -791,9 +782,6 @@ through the runtime environment and must never be committed.
 - Use ordinary `git pull`, `git fetch`, and `git push` commands. Authentication
   is already injected into Git's runtime environment; do not configure or invoke
   a Git credential helper.
-- Use `C:\Program Files\GitHub CLI\gh.exe` for GitHub pull-request operations
-  when `gh` is not on `PATH`. Authentication is already supplied through the
-  environment.
 - Never run `gh auth login`, `gh auth setup-git`, browser/device authentication,
   Git Credential Manager setup, or any other reauthentication flow.
 - Never inspect, print, echo, expose, or modify `GH_TOKEN`, Git authorization
@@ -803,18 +791,11 @@ through the runtime environment and must never be committed.
 - If a remote Git or GitHub CLI operation fails because authentication is
   unavailable, stop immediately and report the failed command and error to the
   user. Do not attempt to repair or replace authentication yourself.
-- For substantial-change pull requests, after successfully pushing the branch,
-  create the pull request non-interactively with `gh pr create`, explicitly
-  specifying the repository, base branch, head branch, title, and body with
-  `--repo`, `--base`, `--head`, `--title`, and `--body` as needed.
-- After `gh pr create`, always verify that the pull request actually exists using
-  `gh pr view` and report its URL. Never claim that a pull request was created
-  unless that verification succeeds.
 
 ## Change methodology
 
-After selecting the applicable workflow above, use this methodology for every
-feature, behavior change, bug fix, or data update:
+After completing the preflight above, use this methodology for every feature,
+behavior change, bug fix, or data update:
 
 1. Read the relevant command, service, model, tests, and data files before
    editing; consult the rulebook or `data/generators/README.md` when the change
