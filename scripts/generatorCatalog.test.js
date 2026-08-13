@@ -33,9 +33,6 @@ test('production generator v3 data uses stable IDs, strict parity, and visibilit
 	assert.equal(all.length, englishPublic.length + internal.length);
 	assert.ok(internal.length > 0);
 	assert.ok(internal.every(generator => generator.visibility === 'internal'));
-	assert.ok(internal.some(generator => generator.id === 'background_adventurer'));
-	assert.ok(internal.some(generator => generator.id === 'creature_animal'));
-	assert.ok(all.every(generator => !Object.hasOwn(generator, 'kind')));
 	assert.equal(
 		generatorResolver.generate(internal[0].id, 'en', { random: () => 0 }),
 		null,

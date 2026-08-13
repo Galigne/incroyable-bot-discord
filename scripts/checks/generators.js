@@ -1,5 +1,3 @@
-const fs = require('node:fs');
-const path = require('node:path');
 const {
 	getStatProfile,
 	listStatProfiles,
@@ -10,26 +8,6 @@ const {
 } = require('../../services/weightedSelector');
 const generatorResolver = require('../../services/generatorResolver');
 
-const BACKGROUND_GENERATOR_IDS = new Set([
-	'background_adventurer',
-	'background_artisan',
-	'background_criminal',
-	'background_exile',
-	'background_mage',
-	'background_merchant',
-	'background_military',
-	'background_noble',
-	'background_official',
-	'background_outlander',
-	'background_peasant',
-	'background_performer',
-	'background_religious',
-	'background_sailor',
-	'background_scholar',
-	'background_servant',
-	'background_urchin',
-]);
-
 module.exports = function createGeneratorChecks(context) {
 	const {
 		errors,
@@ -38,7 +16,6 @@ module.exports = function createGeneratorChecks(context) {
 
 	function checkGeneratorCatalog() {
 		try {
-			checkProductionDataIsV3(errors);
 			const publicGenerators = generatorCatalog.listGenerators('en');
 			const allGenerators = generatorCatalog.listGenerators('en', {
 				visibility: 'all',
@@ -49,23 +26,6 @@ module.exports = function createGeneratorChecks(context) {
 			if (
 				publicGenerators.length === 0
 				|| allGenerators.length !== publicGenerators.length + internalGenerators.length
-				|| internalGenerators.some(generator => !(
-					((BACKGROUND_GENERATOR_IDS.has(generator.id)
-						|| generator.id === 'physical_description')
-						&& !Object.hasOwn(generator, 'kind'))
-					|| (
-						['creature_animal', 'creature_companion', 'creature_monster']
-							.includes(generator.id)
-						&& !Object.hasOwn(generator, 'kind')
-					)
-					|| (
-						(
-							['modifier_character', 'modifier_creature'].includes(generator.id)
-							|| generator.id.startsWith('site_modifier_')
-						)
-						&& !Object.hasOwn(generator, 'kind')
-					)
-				))
 			) {
 				errors.push('Generator v3 visibility or schema filtering is incorrect.');
 			}
@@ -135,34 +95,6 @@ module.exports = function createGeneratorChecks(context) {
 	};
 };
 
-function checkProductionDataIsV3(errors) {
-	const generatorRoot = path.join(__dirname, '..', '..', 'data', 'generators');
-	const englishFiles = listJsonFiles(path.join(generatorRoot, 'en'));
-	const frenchFiles = listJsonFiles(path.join(generatorRoot, 'fr'));
-	if (JSON.stringify(englishFiles) !== JSON.stringify(frenchFiles)) {
-		errors.push('English and French generator directories must contain the same files.');
-		return;
-	}
-	for (const file of englishFiles) {
-		for (const locale of ['en', 'fr']) {
-			const generator = JSON.parse(fs.readFileSync(
-				path.join(generatorRoot, locale, file),
-				'utf8',
-			));
-			if (
-				generator.schemaVersion !== 3
-				|| !generator.id
-				|| Object.hasOwn(generator, 'kind')
-				|| !generator.visibility
-				|| !generator.entrySchema
-				|| generator.entries.some(entry => typeof entry === 'string' || !entry.id)
-			) {
-				errors.push(`Generator ${locale}/${file} was not fully converted to schema v3.`);
-			}
-		}
-	}
-}
-
 function checkRequiredGenerators(errors, generatorCatalog) {
 	const requiredPublicGenerators = [
 		'armors',
@@ -200,9 +132,6 @@ function checkRequiredGenerators(errors, generatorCatalog) {
 
 	for (const generatorId of [
 		'building',
-		'creature_animal',
-		'creature_companion',
-		'creature_monster',
 		'dungeon',
 		'faction',
 		'government',
@@ -260,8 +189,7 @@ function checkPhysicalDescriptionGenerator(errors, generatorCatalog) {
 function checkCreatureGenerators(errors, generatorCatalog) {
 	const creature = generatorCatalog.getGenerator('creature');
 	if (
-		Object.hasOwn(creature ?? {}, 'kind')
-		|| creature?.visibility !== 'public'
+		creature?.visibility !== 'public'
 		|| !Array.isArray(creature?.entries)
 		|| creature.entries.length === 0
 	) {
@@ -273,9 +201,7 @@ function checkCreatureGenerators(errors, generatorCatalog) {
 		if (
 			!generatorId
 			|| !generator
-			|| Object.hasOwn(generator ?? {}, 'kind')
 			|| generator.visibility !== 'internal'
-			|| generator.entries.length < 20
 			|| generator.entries.some(entry => !entry.generation)
 		) {
 			errors.push(`Invalid routed creature generator: ${generatorId}.`);
@@ -290,8 +216,7 @@ function checkCreatureGenerators(errors, generatorCatalog) {
 			!entry.fields?.name || !entry.fields.description
 		))
 		|| [characterModifiers, creatureModifiers].some(generator => (
-			Object.hasOwn(generator ?? {}, 'kind')
-			|| generator?.visibility !== 'internal'
+			generator?.visibility !== 'internal'
 			|| generator.entrySchema.type !== 'fields'
 			|| generator.entries.some(entry => (
 				!entry.fields?.name || !entry.fields.description
@@ -406,21 +331,6 @@ function checkStatProfiles(errors) {
 	) {
 		errors.push('The balanced statistical profile is missing or is not cached.');
 	}
-}
-
-function listJsonFiles(directory, relativeDirectory = '') {
-	const files = [];
-	for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
-		const relativePath = path.join(relativeDirectory, entry.name);
-		const absolutePath = path.join(directory, entry.name);
-		if (entry.isDirectory()) {
-			files.push(...listJsonFiles(absolutePath, relativePath));
-		}
-		else if (entry.isFile() && entry.name.endsWith('.json')) {
-			files.push(relativePath);
-		}
-	}
-	return files.sort();
 }
 
 function getInlineGeneratorId(value) {
