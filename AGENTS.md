@@ -578,118 +578,42 @@ after successful deletion.
 
 ## Random generators
 
-The complete production design is documented in
-`data/generators/GENERATOR_ARCHITECTURE.md`; catalog-authoring details live in
-`data/generators/README.md`.
+Use `data/generators/README.md` as the schema-v3 authoring reference and
+`data/generators/GENERATOR_ARCHITECTURE.md` as the authority for current routing,
+resolution, provenance, modifiers, and character/creature generation. Keep command
+behavior in the root `README.md`; do not copy those documents into this guide.
 
-Generators are tools for GM inspiration, not automatic story writers. Author
-entries primarily as reusable concepts, archetypes, and evocative details, so a
-repeat result can still support a substantially different interpretation. Leave
-meaningful creative decisions to the GM; avoid unnecessary fixed personal
-history, motives, identity, relationships, or consequences; and prefer concise
-content when added detail would only make an entry more specific rather than
-more useful. References should not routinely assemble complete characters,
-locations, encounters, or scenarios automatically. Keep independent concepts
-independent when their random combination can create more varied results.
+The durable implementation constraints are:
 
-Generator schema v3 files are discovered recursively under `data/generators/en/`
-and `data/generators/fr/`. The French catalog must contain a structurally compatible
-counterpart for every English relative path; a missing or incompatible counterpart
-rejects the complete catalog instead of falling back to English. `/help command:gen`
-and `/gen` autocomplete expose only public roots. Internal generators remain
-available to application workflows, inline references, and modifier relationships.
-
-Each generator file declares `schemaVersion: 3`, a lowercase snake_case `id`,
-`visibility`, localized `name` and `description`, an entry schema, entries, and
-optionally a `modifiers` object mapping generator IDs to percentages from 0 through
-100. Entries are text `value`s or structured `fields` with lowercase snake_case
-keys. A field may be marked
-`technical`; technical fields are hidden from implicit display but may be read by
-an explicit inline field reference. There is no category or template entry type,
-named reference map, or compatibility parser.
-
-Inline references are written directly in values:
-
-```text
-{{ generator }}
-{{ generator.field }}
-{{ generator:entry }}
-{{ generator:entry.field }}
-```
-
-Every occurrence resolves independently. Missing entries use weighted selection;
-fixed entries consume no entry-selection randomness. References may be nested or
-point to internal generators. The resolver validates source, entry, field, and
-locale parity, preserves stable provenance, detects cycles across references and
-modifiers, and limits the shared active selection depth to four. `/reload`
-validates and atomically replaces the generator and statistical-profile caches.
-
-All generators, including former modifier catalogs, use the same schema. A
-consuming generator owns its optional modifier map; each configured source rolls
-independently, generates one weighted entry, resolves nested references and its own
-modifiers, and attaches a complete result separately from the base result. The
-mechanism is additive only and never executes technical-looking fields or changes
-statistics, resources, armor, RULEs, traits, status, gear, entity type, persistence,
-or other mechanics. Modifier IDs and percentages are technical data and must match
-between English and French.
-
-The public `background` and `creature` components route to internal components
-through ordinary technical `generator` fields containing inline references such as
-`{{ background_artisan }}` or `{{ creature_animal }}`. Background category IDs
-route to matching `background_<category>` internal text generators containing
-reusable archetypes, and character generation independently resolves the internal
-`physical_description` text generator. The public creature router entries define
-the available stable type IDs
-and reference their internal detail generators; `animal`, `companion`, and
-`monster` are the current entries, not a closed command list or persistence types.
-Detail components expose localized `name` and `description` fields plus validated
-generation metadata. `statProfile` IDs belong to the separate non-localized
-statistical-profile schema and remain kebab-case.
-
-`services/randomCreatureGenerator.js` resolves that data and persists the complete
-final state plus stable provenance through `creatureApplicationService` and the
-exclusive creature store workflow. Creature Intelligence never assigns RULEs;
-only `fixedRules` does. Status effects and modifiers remain descriptive. Gear may
-use fixed, random, nested, or weighted inline references. Only explicit natural
-armor or technical armor metadata initializes AR. Creature generation never derives
-or changes manual encumbrance.
+- Treat generators as reusable GM inspiration, not automatic story writers. Avoid
+  unnecessary fixed identity, history, motives, relationships, or consequences.
+- Preserve strict English/French structural parity and stable English technical
+  IDs, field keys, enum values, routing values, weights, and modifier percentages.
+  Never fall back to English or translate already persisted content.
+- Expose only `public` generators through `/gen`, autocomplete, and help. Keep
+  `internal` generators resolvable by workflows, inline references, and modifier
+  relationships.
+- Keep inline-reference resolution and provenance in the resolver services. Do not
+  parse references, select entries, or reconstruct provenance in command handlers.
+- Keep `background` routing aligned with one internal
+  `background_<category>` text generator per category. Resolve
+  `physical_description` independently when generating a character.
+- Derive supported `/gen-creature` types from the public `creature` router. Router
+  entries are generator classifications; the only persistent entity type is
+  `creature`.
+- Use only `modifier_character` for the character modifier policy and
+  `modifier_creature` for the creature modifier policy. Modifiers and status
+  effects remain descriptive and never execute mechanics.
+- Creature RULEs come only from explicit `fixedRules`; only natural-armor metadata
+  or an explicit armor reference initializes AR; generation never derives manual
+  encumbrance.
+- Prepare and validate the generator and statistical-profile candidates before
+  replacing either active cache during startup or `/reload`.
 
 Random character generation depends on exact stable generator IDs and field keys.
-Before renaming generator fields, inspect `services/randomCharacterGenerator.js`.
-Generator IDs, routing values, enum values, JSON keys, and field keys stay English
-in every locale. Newly generated content uses the guild locale and is then stored
-verbatim; never translate existing save content retroactively. Race entries expose
-`name`, `description`, `skill_bonus`, and `physical_ability`; generated characters
-copy the latter two into their racial traits. Historical quests are ordinary text
-components with inline references to random or fixed `background` entries.
-
-The historical migration is complete and its one-time audit remains in Git
-history. Preserve the resulting conflict winners and do not restore the retired
-complete-person roots. Changes to migrated production content must satisfy the
-normal schema, parity, inline-reference, and production-integrity tests.
-
-At present it:
-
-- rolls level 1–10 when omitted;
-- accepts an optional background category and otherwise rolls one from
-  `background.json`; its inline route supplies one reusable archetype, while an
-  independent `physical_description` roll supplies the visible physical
-  description; backstory and goals start empty;
-- spends the entire level-based stat budget using nonlinear point costs;
-- derives initiative and reflexes from speed;
-- awards RULE points at Intelligence 10, 12, 14, 16, 18, and 20, then spends them
-  on at most two RULEs by maximizing the first RULE before adding the second;
-- generates unique localized talents as separate array entries: one at levels
-  1–2, two at levels 3–5, three at levels 6–8, and four at levels 9–10;
-- derives HP, AP, and MD;
-- chooses armor that meets Constitution requirements and derives AR from it;
-- equips one armor and one or two weapons;
-- adds three inventory items plus `level * 1D20 + 5` gold;
-- leaves the manually managed encumbrance resource at its existing values, which
-  are `0 / 0` for a new character;
-- gives a generated status effect with a 25% chance;
-- rolls the ordinary internal `modifier` generator with a separate 25% application
-  policy and stores only its descriptive name, description, and provenance.
+Inspect `services/randomCharacterGenerator.js` and the coupled schema checks before
+renaming them. Creature routing and metadata changes likewise require inspecting
+`services/randomCreatureGenerator.js` and the creature relationship validators.
 
 ## Other bot behavior
 

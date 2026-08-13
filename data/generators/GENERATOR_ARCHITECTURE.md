@@ -1,39 +1,40 @@
-# Generator and Creature Architecture
+# Generator architecture
 
-## Status and authority
+This document is the authoritative description of current generator routing,
+resolution, visibility, provenance, modifiers, and character/creature generation.
+The JSON contract and catalog-editing rules are documented in
+[`README.md`](README.md); command behavior is summarized in the root
+[`README.md`](../../README.md); contributor constraints live in
+[`AGENTS.md`](../../AGENTS.md).
 
-This document describes the production generator and creature architecture. The
-historical source remains unchanged in `documentation/JDR_RANDOM_OLD.md`; its
-one-time migration audit is retained in Git history.
+## Catalog loading and visibility
 
-The English and French rulebooks remain the authority for game rules and
-terminology. They are not implementation synchronization files.
+`services/generatorCatalog.js` recursively loads the matching English and French
+catalog trees. `services/generatorSchema.js` and its focused validators accept only
+generator schema v3 and validate the complete locale pair, including stable IDs,
+entry shapes, weights, technical fields, references, modifier relationships, and
+creature metadata. Candidate generator and statistical-profile caches are prepared
+together and replaced only after validation succeeds, including during `/reload`.
 
-## Final decisions
+Visibility controls entry points, not resolvability:
 
-- Generator schema v3 is the only supported generator format.
-- Every generator uses one unified schema; generator kind is not a field.
-- English and French catalogs have strict structural parity and no locale fallback.
-- Stable lowercase snake_case IDs, not display text, own technical identity and provenance.
-- Component values use inline references; there are no template entries or named reference maps.
-- Complete humanoids are created only by `/gen-char`.
-- The saved entity type for animals, companions, and monsters is `creature`.
-- Descriptive modifiers and status effects never execute mechanics.
-- Creature RULEs come only from explicit entry metadata.
-- Encumbrance is always a manually edited saved resource.
+- `public` generators are available as direct `/gen` roots and appear in command
+  autocomplete and help;
+- `internal` generators are hidden from those user-facing lists but remain
+  available to application workflows, inline references, and modifier
+  relationships.
 
-## Catalogs and resolution
+Stable lowercase snake_case generator and entry IDs provide technical identity.
+Localized names and content never determine routing or provenance. Generator
+resolution returns data only; persistence belongs to the character and creature
+application workflows.
 
-Production catalogs are discovered recursively under matching
-`data/generators/en/` and `data/generators/fr/` paths. Every file declares
-`schemaVersion: 3`, a stable generator ID, visibility,
-localized `name` and `description`, an entry schema, and stable weighted entries.
+## Resolution and provenance
 
-Text and structured-field entries are the only generator payloads. Field keys are
-lowercase snake_case. Technical fields are identical across locales and omitted
-from implicit display, while explicit field references can access them.
-
-Inline references use these forms:
+`services/generatorResolver.js` resolves a public root for `/gen` or a reference
+requested by application code. A reference can select a random weighted entry, a
+fixed entry, an entry's display value, its complete fields object, or one explicit
+field. Inline syntax is:
 
 ```text
 {{ generator }}
@@ -42,109 +43,121 @@ Inline references use these forms:
 {{ generator:entry.field }}
 ```
 
-References may be nested, repeated, fixed, or weighted. Each occurrence selects
-independently. Fixed entries do not consume entry-selection randomness. The
-resolver validates source, entry, field, and locale parity, records stable
-provenance, detects active cycles, and caps active selection depth at four.
-Public generators appear in `/gen`, autocomplete, and help. Internal generators
-remain available to application workflows, inline references, and modifier maps.
+`services/referenceResolver.js` performs source and entry selection. Each inline
+occurrence is resolved independently, so repeated references can choose different
+entries. Nested references share one active selection stack: repeated active
+generator/entry pairs are rejected as cycles, and depth is capped at four. Fixed
+entries do not consume entry-selection randomness. Structured display excludes
+technical fields, while explicit field selection can read them.
 
-Resolved output preserves localized values, structured fields when selected,
-reference provenance, and separate complete modifier results. Resolution never
-creates or saves an entity. The resolver accepts injected randomness for
-deterministic tests.
+Every resolved selection adds provenance with the stable generator ID, entry ID,
+selection mode (`random` or `fixed`), and resolution path. Weighted generator-source
+selection adds its own source record. Nested inline references contribute their
+records to the parent result, so callers can retain the complete technical path
+without deriving identity from localized text. Completed results contain the
+localized value or structured fields, provenance, and a separate array of resolved
+modifier results.
 
-## Descriptive modifiers and status effects
+## Generator-level modifiers
 
-Modifier sources are ordinary generators. A consuming generator may declare a
-`modifiers` object mapping source IDs to independent percentages from 0 through
-100. A successful source selects one weighted entry, resolves it normally,
-including inline references and its own modifier map, and attaches the complete
-result in a separate modifier array. Modifier output never merges into the base
-result or changes game mechanics. Technical-looking fields remain inert output.
+A generator's optional `modifiers` map is an additive relationship between ordinary
+v3 generators. Every configured source rolls independently. A successful roll
+selects one weighted entry and resolves its inline references and own modifier
+relationships through the same stack. The completed modifier result is appended to
+the result's `modifiers` array; it never merges into the base payload.
 
-Character generation uses only the `modifier_character` pool, and all three
-creature detail components use only `modifier_creature`. Application code applies
-the descriptive modifier policy independently at 25%; it is not declared in those
-generator maps. Site modifier generators remain ordinary internal catalogs, and
-site consumers retain their former independent 20% probabilities in their maps.
-The public `status_effect` component contains structured localized `name` and
-`description` fields for temporary conditions and remains separate from both
-persistent modifier pools.
+This mechanism is descriptive only. It does not interpret technical-looking fields
+or alter statistics, resources, armor, RULEs, traits, status, gear, entity type, or
+persistence. Site generators use these relationships for their own configured
+modifier sources.
 
-## Shared statistical profiles
+Persistent entity generation uses separate internal pools:
 
-`data/generators/stat-profile.json` contains non-localized reusable statistical
-profiles. Profile IDs and their schema are independent of generator schema v3 and
-remain kebab-case. Profiles contain only minimums, maximums, and allocation weights
-for the seven base statistics. They contain no localized prose, resource formulas,
-entity type, RULE allocation, traits, gear, or encumbrance behavior.
+- characters may receive one entry from `modifier_character`;
+- creatures may receive one entry from `modifier_creature`.
 
-Character and creature generation use the same level 1-10 budget, nonlinear
-statistic costs, derived statistics, and resource formulas. Profiles alter only
-allocation constraints and weighting.
+`services/descriptiveModifierGenerator.js` applies an independent 25% policy to
+each entity workflow and preserves the selected pool/entry IDs and reference
+provenance with the localized name and description. Creature detail metadata may
+also explicitly reference creature modifiers. Temporary conditions are resolved
+from `status_effect` and stored separately from persistent modifiers.
+
+## Shared statistical generation
+
+`data/generators/stat-profile.json` is a separate, non-localized schema. Its
+kebab-case profile IDs define minimums, maximums, and allocation weights for the
+seven base statistics. Profiles do not contain localized prose, entity types,
+resource formulas, RULE allocation, traits, gear, or encumbrance behavior.
+
+Characters and creatures share the level 1-10 stat budget, nonlinear point costs,
+derived-statistic calculations, and resource formulas. Their selected profiles
+change only allocation constraints and weighting.
 
 ## Character generation
 
-The public `background` component remains the broad category selector. Each stable
-category entry routes through its ordinary technical `generator` field to an
-internal text generator named `background_<category>`, such as
-`{{ background_artisan }}`. These
-internal generators contain only reusable occupation, role, or social-archetype
-text entries. Character generation independently resolves one entry from the
-internal `physical_description` text generator. The saved background contains
-`archetype` and `physicalDescription`; `backstory` and `goals` start empty and
-remain editable character fields.
+`services/randomCharacterGenerator.js` combines direct catalog selections with
+reference resolution:
 
-`/gen-char` creates a complete character, including name, race, background,
-personality, statistics, derived resources, explicit character RULE allocation,
-talents, temporary status effects, character-pool modifiers, gear, and manual
-encumbrance.
-Generated armor, weapons, inventory, and gold never alter encumbrance.
+1. It selects localized name, race, personality, RULE, talent, status, armor,
+   weapon, and inventory entries as required by character mechanics.
+2. It selects a stable entry from the public `background` router, or uses the
+   requested category.
+3. That entry's technical `generator` field contains a wrapped inline reference to
+   the matching internal `background_<category>` text generator. Resolving it
+   supplies the reusable background archetype.
+4. It independently resolves `{{ physical_description }}`. Physical description is
+   not part of the selected archetype route, so the two rolls remain combinable.
+5. It applies the character-only descriptive modifier policy through
+   `modifier_character`, calculates statistics and resources, and assembles the
+   complete character.
 
-## Creature generation and persistence
+The saved background contains `archetype` and `physicalDescription`; editable
+`backstory` and `goals` start empty. Generated equipment and inventory never alter
+the manual encumbrance resource.
 
-The public `creature` component defines the available stable type entries. Each
-entry points through its technical `generator` field to an internal detail
-generator; the current entries route `animal`, `companion`, and `monster` to their
-matching `creature_*` generators. These are source classifications, not saved
-entity types. `/gen-creature` accepts an optional creature type, level, and new
-CreatureKey, randomly selecting a router entry when type is omitted, then saves
-the complete entity atomically as type `creature`.
+## Creature routing, generation, and persistence
 
-Every detail entry supplies localized identity and explicit generation metadata:
-one shared statistical profile, intrinsic localized traits, optional natural armor
-or armor reference, explicit fixed RULE IDs and levels, optional temporary
-status-effect references, creature-pool modifier references, and optional equipment
-or inventory references. Entries cannot define
-fixed statistics, alternate budgets, challenge ratings, resource formulas, or
-automatic encumbrance. Loading and displaying a saved creature never reruns
-generation.
+The public `creature` generator is the creature-type router. Its entries are the
+complete dynamic set accepted by `/gen-creature` and displayed by autocomplete.
+When `type` is omitted, the workflow selects a weighted router entry; otherwise it
+selects the requested stable entry. Each entry's technical `generator` field is one
+wrapped reference to an internal creature-detail generator.
 
-## Humanoid and quest routing
+The current catalog routes `animal`, `companion`, and `monster` to their matching
+`creature_*` generators, but application code does not treat that list as a closed
+enum. Router entries are source classifications, not persistence types: every
+generated result is saved as the concrete `creature` type.
 
-Background categories route through matching internal `background_<category>` text
-generators, including `background_criminal` for the `criminal` category. Person
-concepts are routed through reusable broad-background archetype components.
-The public `quest` component is a
-normal text component whose values contain inline references, for example:
+`services/randomCreatureGenerator.js` resolves the route, then resolves one detail
+entry and consumes its localized identity plus validated generation metadata. That
+metadata chooses a statistical profile and may declare intrinsic traits, natural
+armor or an armor reference, fixed RULE IDs and levels, status-effect references,
+creature-modifier references, and equipment or inventory references. Gear
+references can be fixed, random, nested, or drawn from a weighted source.
 
-```text
-Recover {{ inventory }} before someone with the {{ background:criminal }} background arrives.
-```
+Creature Intelligence does not allocate RULEs; only explicit `fixedRules` metadata
+does. Only natural-armor metadata or an explicit armor reference initializes AR.
+Status effects and modifiers remain descriptive, and generation never derives
+manual encumbrance.
 
-Generic roles select a random `background` entry; specific roles use a fixed entry.
-Quest resolution records provenance but never creates or saves referenced people or
-creatures.
+The assembled creature stores its localized final state and stable source data:
+the router entry, detail generator and entry, statistical profile, and accumulated
+reference provenance. `services/creatureApplicationService.js` publishes that
+complete save atomically inside the shared EntityKey queue. Loading or displaying a
+saved creature never reruns localization, references, modifier selection, or
+mechanical formulas.
 
-## Reload and validation
+## Other composed generators
 
-Startup and `/reload` validate complete English/French schema v3 candidates and the
-statistical-profile candidate before replacing active caches. A failure leaves the
-previous validated caches active. Offline validation covers envelopes, IDs, weights,
-strict locale parity, inline references, fixed and weighted resolution, nested
-selection, cycles, depth bounds, provenance, modifiers, profiles, character and
-creature generation, persistence, and command workflows.
+Public text generators can compose ordinary concepts with inline references. For
+example, `quest` entries may combine inventory and fixed or random background
+selections. These resolutions keep nested provenance but do not create or persist
+the referenced people, creatures, locations, or items.
 
-The previous category/template format, display-name-derived IDs, locale fallback,
-API overloads, and runtime format detection are not supported.
+## Validation coverage
+
+Offline checks cover v3 envelopes, IDs, weights, strict locale parity, public and
+internal visibility, inline and structured references, fixed and weighted
+selection, nesting, cycles, depth bounds, provenance, modifiers, statistical
+profiles, background routes, dynamic creature routes, character and creature
+generation, persistence, and command integration.

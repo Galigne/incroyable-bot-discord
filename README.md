@@ -35,25 +35,14 @@ entity commands. Localized labels and resource abbreviations are resolved throug
 the display adapters. Resource abbreviations are unique within each language:
 HP/AR/AP/MD in English and PV/PR/PA/DD in French.
 
-Generator schema v3 catalogs follow the same server locale. English reference
-files live in `data/generators/en/` and matching French display content in
-`data/generators/fr/`; the complete catalog is rejected when a locale counterpart
-is missing or structurally incompatible. Public generators appear in `/gen`,
-autocomplete, and help, while internal components remain workflow-only.
-Autocomplete labels and generated text are localized, while stable generator and
-entry IDs, structured field keys, enum values, and routing values remain English.
-Component text and field values can contain inline references such as
-`{{ inventory }}`, `{{ background:criminal }}`, or `{{ creature_monster.name }}`.
-Each occurrence resolves independently, including nested and weighted sources.
-Completed results retain technical provenance, and configured narrative modifiers
-are displayed separately without changing base generated mechanics.
-The public `creature` catalog routes `animal`, `companion`, and `monster` types to
-their internal `creature_*` sources. Those sources use the same references and
-profiles to persist a complete final creature, including provenance, without
-rerunning generation on load or display. Temporary status effects come from the
-`status_effect` catalog; persistent character and creature modifiers come from
-their separate `modifier_character` and `modifier_creature` pools.
-Content already saved in an entity is never translated retroactively.
+Generator schema v3 catalogs use matching English and French files. Public
+generators appear in `/gen`, autocomplete, and help; internal generators support
+application workflows and composed results. Generated display text follows the
+configured locale, while stable IDs, fields, routing values, and provenance remain
+technical English values. Content already saved in an entity is never translated
+retroactively. See the [generator authoring guide](data/generators/README.md) and
+[generator architecture](data/generators/GENERATOR_ARCHITECTURE.md) for the JSON
+contract and runtime design.
 
 Set the required runtime language in `config.json`. The complete configuration is:
 
@@ -255,8 +244,10 @@ receive four.
 If the optional level is omitted, a level from 1 to 10 is rolled. The optional
 background selects one of the configured broad background categories and is also
 chosen randomly when omitted. The selected category independently resolves one
-reusable archetype and one reusable physical description through generator-v3
-inline references. Backstory and goals start empty and remain editable.
+reusable archetype from the matching `background_<category>` generator, while the
+separate `physical_description` generator supplies the physical description.
+Backstory and goals start empty and remain editable. Persistent character
+modifiers come only from the internal `modifier_character` pool.
 
 Random creatures select a stable type route from the public `creature` catalog
 (randomly when `type` is omitted), then generate from that entry’s referenced
@@ -266,7 +257,8 @@ derived statistics, and resource formulas while using creature-specific profile
 distributions. Only explicit source references grant creature RULEs; Intelligence
 and descriptive modifiers never do. Natural armor or technical armor metadata may
 initialize AR, status effects and modifiers remain descriptive, and generated gear
-does not alter manual encumbrance. The complete localized result and stable
+does not alter manual encumbrance. Persistent creature modifiers come only from the
+internal `modifier_creature` pool. The complete localized result and stable
 provenance are saved once and never regenerated during later loading or display.
 
 AP follows `0 ≤ current ≤ max ≤ 10` and uses 🌟 for available points and ⭐ for
@@ -315,9 +307,8 @@ registry behavior, architectural boundaries, slash-command schemas, autocomplete
 permissions, localization, character and creature save/generation invariants,
 required media, and voice dependencies.
 
-Every generator v3 entry is an object with a stable technical ID, an optional
-positive weight, and localized text, one atomic structured field group, or a
-localized component value with validated inline references. The resolver supports weighted
-sources, deterministic provenance, and strictly descriptive modifiers. Shared
-non-localized statistical profiles drive character and creature stat allocation. See
-[`data/generators/README.md`](data/generators/README.md) for the complete format.
+Generator JSON authoring is documented in
+[`data/generators/README.md`](data/generators/README.md). Current routing,
+resolution, visibility, inline-reference provenance, modifiers, and entity
+generation are documented in
+[`data/generators/GENERATOR_ARCHITECTURE.md`](data/generators/GENERATOR_ARCHITECTURE.md).
