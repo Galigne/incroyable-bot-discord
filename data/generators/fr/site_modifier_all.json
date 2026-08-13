@@ -3,7 +3,7 @@
   "id": "site_modifier_all",
   "visibility": "internal",
   "name": "Modificateurs généraux de site",
-  "description": "États persistants et conditions météorologiques passagères compatibles avec plusieurs générateurs de sites",
+  "description": "Variations durables et conditions météorologiques passagères adaptées à de nombreux lieux",
   "entrySchema": {
     "type": "fields",
     "required": ["name", "description"]
@@ -43,7 +43,7 @@
       "weight": 2,
       "fields": {
         "name": "Brouillard dense",
-        "description": "La visibilité se réduit à une courte distance, rendant peu fiables les repères, l’observation à distance et l’orientation sur de longs trajets."
+        "description": "On ne voit plus qu’à courte distance ; les repères, l’observation lointaine et l’orientation sur de longs trajets deviennent peu fiables."
       }
     },
     {
@@ -51,7 +51,7 @@
       "weight": 2,
       "fields": {
         "name": "Vents violents",
-        "description": "Les déplacements à découvert, les projectiles, les objets mal arrimés, les flammes nues et les structures en hauteur deviennent difficiles à maîtriser."
+        "description": "Les déplacements à découvert ou en hauteur se compliquent ; projectiles, objets mal arrimés et flammes nues deviennent difficiles à maîtriser."
       }
     },
     {
@@ -65,21 +65,21 @@
       "id": "cold_snap",
       "fields": {
         "name": "Vague de froid",
-        "description": "L’eau exposée gèle, les surfaces deviennent glissantes et toute activité extérieure prolongée exige chaleur et abri."
+        "description": "L’eau exposée gèle, les surfaces deviennent glissantes et toute activité extérieure prolongée impose de trouver chaleur et abri."
       }
     },
     {
       "id": "heat_wave",
       "fields": {
         "name": "Canicule",
-        "description": "L’ombre et l’eau potable deviennent essentielles, et les efforts prolongés à découvert deviennent rapidement épuisants."
+        "description": "L’ombre et l’eau potable deviennent essentielles ; tout effort prolongé à découvert devient rapidement épuisant."
       }
     },
     {
       "id": "hailstorm",
       "fields": {
         "name": "Averse de grêle",
-        "description": "Les impacts rendent les trajets à découvert difficiles et produisent un vacarme constant sur les toits, les armures et le sol nu."
+        "description": "Les grêlons rendent les trajets à découvert difficiles et provoquent un vacarme constant sur les toits, les armures et le sol nu."
       }
     },
     {
@@ -93,7 +93,7 @@
       "id": "ashfall",
       "fields": {
         "name": "Pluie de cendres",
-        "description": "Une cendre fine recouvre les surfaces, masque les repères lointains, révèle les passages récents et souille les provisions exposées."
+        "description": "De fines cendres recouvrent les surfaces, masquent les repères lointains, révèlent les passages récents et souillent les provisions exposées."
       }
     }
   ]

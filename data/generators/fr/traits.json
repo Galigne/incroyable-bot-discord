@@ -202,28 +202,28 @@
       "id": "constrict",
       "fields": {
         "name": "Constriction",
-        "description": "+2 aux actions de Force pour maintenir ou resserrer une prise existante."
+        "description": "+2 aux actions de Force pour maintenir ou resserrer une prise déjà établie."
       }
     },
     {
       "id": "wall_climber",
       "fields": {
         "name": "Grimpeur de parois",
-        "description": "Peut se déplacer sur des surfaces rugueuses très inclinées ou verticales à la moitié de sa vitesse normale sans jet d’escalade ordinaire."
+        "description": "Peut se déplacer sur des surfaces rugueuses très inclinées ou verticales à la moitié de sa vitesse normale sans devoir effectuer un jet d’escalade ordinaire."
       }
     },
     {
       "id": "tremorsense",
       "fields": {
         "name": "Perception des vibrations",
-        "description": "Détecte sans la vue les mouvements dans un rayon de 10 mètres lorsque la créature et leur source touchent le même sol."
+        "description": "Détecte sans la vue les mouvements dans un rayon de 10 mètres, à condition que la créature et ce qui bouge touchent le même sol."
       }
     },
     {
       "id": "heat_sense",
       "fields": {
         "name": "Perception thermique",
-        "description": "Détecte sans la vue les sources de chaleur dans un rayon de 10 mètres, mais les obstacles solides bloquent ce sens."
+        "description": "Détecte sans la vue les sources de chaleur dans un rayon de 10 mètres, mais cette perception ne traverse pas les obstacles solides."
       }
     },
     {
@@ -244,21 +244,21 @@
       "id": "swarm_body",
       "fields": {
         "name": "Corps en essaim",
-        "description": "Peut traverser toute ouverture assez large pour un de ses membres et occuper l’espace d’une autre créature, mais reste une seule créature pour les actions et les effets."
+        "description": "Peut traverser toute ouverture assez large pour laisser passer un élément de l’essaim et occuper l’espace d’une autre créature, mais reste une seule créature pour les actions et les effets."
       }
     },
     {
       "id": "magic_resistance",
       "fields": {
         "name": "Résistance à la magie",
-        "description": "+1 aux actions pour résister aux effets magiques hostiles."
+        "description": "+1 aux actions visant à résister aux effets magiques hostiles."
       }
     },
     {
       "id": "extended_reach",
       "fields": {
         "name": "Allonge supérieure",
-        "description": "Peut effectuer des attaques ordinaires au corps à corps jusqu’à 2 mètres plus loin qu’une créature de taille comparable."
+        "description": "Peut porter ses attaques ordinaires au corps à corps 2 mètres plus loin qu’une créature de taille comparable."
       }
     }
   ]

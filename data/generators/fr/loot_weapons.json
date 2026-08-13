@@ -329,7 +329,7 @@
       "weight": 3,
       "fields": {
         "name": "Javeline",
-        "description": "Une lance légère équilibrée pour le jet, mais qui reste pratique au corps à corps."
+        "description": "Une lance légère conçue pour être lancée, mais qui reste pratique au corps à corps."
       }
     },
     {
@@ -345,7 +345,7 @@
       "weight": 3,
       "fields": {
         "name": "Couteaux de lancer",
-        "description": "Un ensemble de petites lames équilibrées pour des jets rapides à courte portée."
+        "description": "Un ensemble de petites lames équilibrées pour des lancers rapides à courte portée."
       }
     },
     {
@@ -353,7 +353,7 @@
       "weight": 2,
       "fields": {
         "name": "Marteau de lancer",
-        "description": "Un marteau compact et lesté pour frapper avec précision une fois lancé."
+        "description": "Un marteau compact et lesté, conçu pour atteindre sa cible avec précision lorsqu’il est lancé."
       }
     },
     {

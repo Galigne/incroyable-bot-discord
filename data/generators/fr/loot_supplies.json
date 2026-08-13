@@ -256,7 +256,7 @@
       "id": "runed_chain",
       "fields": {
         "name": "Chaîne runique",
-        "description": "Une longueur de chaîne robuste portant une rune associée à la {{ rules.name }} ; le MJ en détermine la fonction précise."
+        "description": "Une chaîne robuste portant une rune associée à la {{ rules.name }} ; le MJ en détermine la fonction précise."
       }
     }
   ]

@@ -110,7 +110,7 @@
     },
     {
       "id": "treasure_hunt_site",
-      "value": "Locate a hidden cache represented by {{ valuables }} at or within {{ site }}."
+      "value": "Locate {{ valuables }} in a cache hidden at or within {{ site }}."
     },
     {
       "id": "cure_affliction",
@@ -130,7 +130,7 @@
     },
     {
       "id": "locate_affliction_source",
-      "value": "Determine where the following disease or curse originated and how it first spread: {{ affliction }}"
+      "value": "Discover the origin of the following disease or curse and how or why it first took hold: {{ affliction }}"
     },
     {
       "id": "retrieve_runed_item",
@@ -158,7 +158,7 @@
     },
     {
       "id": "resolve_debt_oath",
-      "value": "Fulfill, transfer, recover, or resolve an important debt, promise, or oath linking someone with the {{ background }} background to {{ faction }}."
+      "value": "Settle an important obligation linking someone with the {{ background }} background to {{ faction }}: fulfill a promise or oath, transfer responsibility, collect a debt where applicable, or negotiate another resolution."
     },
     {
       "id": "protect_during_crisis",

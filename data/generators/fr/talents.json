@@ -242,14 +242,14 @@
       "weight": 2,
       "fields": {
         "name": "Serrurier",
-        "description": "+2 aux actions adaptées pour ouvrir ou comprendre les serrures mécaniques ordinaires."
+        "description": "+2 aux actions visant à ouvrir ou examiner les serrures mécaniques ordinaires."
       }
     },
     {
       "id": "burglar",
       "fields": {
         "name": "Cambrioleur",
-        "description": "+2 aux actions de Dextérité pour entrer discrètement dans un bâtiment sécurisé, le traverser ou en sortir."
+        "description": "+2 aux actions de Dextérité pour s’introduire discrètement dans un bâtiment protégé, s’y déplacer ou en ressortir."
       }
     },
     {
@@ -264,7 +264,7 @@
       "weight": 2,
       "fields": {
         "name": "Bagarreur",
-        "description": "+1 aux actions adaptées au combat à mains nues ou à la lutte."
+        "description": "+1 aux actions de combat à mains nues ou de lutte."
       }
     },
     {
@@ -272,7 +272,7 @@
       "weight": 2,
       "fields": {
         "name": "Herboriste",
-        "description": "+2 pour identifier ou travailler avec des plantes médicinales ou toxiques."
+        "description": "+2 pour identifier ou utiliser des plantes médicinales ou toxiques."
       }
     },
     {
@@ -287,7 +287,7 @@
       "weight": 2,
       "fields": {
         "name": "Forgeron",
-        "description": "+2 aux actions adaptées pour forger, évaluer ou réparer des armes, armures et outils en métal."
+        "description": "+2 aux actions de forge, d’évaluation ou de réparation d’armes, d’armures et d’outils en métal."
       }
     },
     {
@@ -309,28 +309,28 @@
       "id": "commander",
       "fields": {
         "name": "Commandant",
-        "description": "+1 aux actions de Charisme pour coordonner sous une pression immédiate un groupe disposé à suivre ses ordres."
+        "description": "+1 aux actions de Charisme pour coordonner dans l’urgence un groupe disposé à suivre ses ordres."
       }
     },
     {
       "id": "impersonator",
       "fields": {
         "name": "Comédien et imitateur",
-        "description": "+2 aux actions de Charisme pour jouer un rôle ou imiter une personne étudiée au préalable."
+        "description": "+2 aux actions de Charisme pour jouer un rôle ou imiter une personne observée au préalable."
       }
     },
     {
       "id": "historian",
       "fields": {
         "name": "Historien",
-        "description": "+2 aux actions d’Intelligence relevant des connaissances historiques."
+        "description": "+2 aux actions d’Intelligence portant sur l’histoire."
       }
     },
     {
       "id": "runesmith",
       "fields": {
         "name": "Graveur de runes",
-        "description": "+2 aux actions adaptées pour identifier, comprendre ou créer des runes."
+        "description": "+2 aux actions visant à identifier, comprendre ou créer des runes."
       }
     }
   ]

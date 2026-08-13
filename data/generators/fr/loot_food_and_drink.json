@@ -100,8 +100,8 @@
       "id": "pepper_root_stew",
       "weight": 3,
       "fields": {
-        "name": "Ragoût aux racines poivrées",
-        "description": "Un ragoût épais préparé avec une racine piquante et les légumes disponibles."
+        "name": "Ragoût à la racine-poivre",
+        "description": "Un ragoût épais préparé avec cette racine piquante et les légumes disponibles."
       }
     },
     {
@@ -141,7 +141,7 @@
       "weight": 3,
       "fields": {
         "name": "Lait fermenté",
-        "description": "Une boisson fermentée acidulée, servie nature ou légèrement salée."
+        "description": "Une boisson lactée acidulée, servie nature ou légèrement salée."
       }
     },
     {
@@ -149,7 +149,7 @@
       "weight": 2,
       "fields": {
         "name": "Tonique corsé aux herbes",
-        "description": "Une boisson amère et non magique infusée avec des racines et des herbes pour son goût prononcé."
+        "description": "Une boisson amère et non magique préparée à partir de racines et d’herbes pour son goût prononcé."
       }
     }
   ]

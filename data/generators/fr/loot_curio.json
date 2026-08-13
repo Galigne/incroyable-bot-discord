@@ -146,7 +146,7 @@
       "id": "runed_boots",
       "fields": {
         "name": "Bottes runiques",
-        "description": "Une paire de bottes marquée d’une rune associée à la {{ rules.name }} ; le MJ en détermine la fonction précise."
+        "description": "Une paire de bottes portant une rune associée à la {{ rules.name }} ; le MJ en détermine la fonction précise."
       }
     },
     {

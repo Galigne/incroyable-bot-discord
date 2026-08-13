@@ -110,15 +110,15 @@
     },
     {
       "id": "treasure_hunt_site",
-      "value": "Trouver une cache au trésor représentée par {{ valuables }} sur le site {{ site }} ou à l’intérieur de celui-ci."
+      "value": "Retrouver {{ valuables }} dans une cache située sur le site {{ site }} ou en son sein."
     },
     {
       "id": "cure_affliction",
-      "value": "Trouver le savoir, la matière ou l’aide nécessaire pour soigner ou lever l’affliction suivante : {{ affliction }}"
+      "value": "Trouver les connaissances, l’ingrédient ou l’aide nécessaires pour guérir ou lever l’affliction suivante : {{ affliction }}"
     },
     {
       "id": "investigate_rumor",
-      "value": "Déterminer si cette rumeur est vraie et relever ce qui la confirme ou la contredit : {{ rumor }}"
+      "value": "Déterminer si cette rumeur est vraie et établir les faits qui la confirment ou l’infirment : {{ rumor }}"
     },
     {
       "id": "protect_secret",
@@ -126,11 +126,11 @@
     },
     {
       "id": "uncover_secret",
-      "value": "Découvrir la vérité derrière le secret suivant et obtenir des preuves capables de résister à un examen attentif : {{ secret }}"
+      "value": "Faire la lumière sur le secret suivant et réunir des preuves solides pour étayer cette découverte : {{ secret }}"
     },
     {
       "id": "locate_affliction_source",
-      "value": "Déterminer où la maladie ou malédiction suivante est apparue et comment elle s’est propagée pour la première fois : {{ affliction }}"
+      "value": "Découvrir l’origine de la maladie ou de la malédiction suivante et comprendre comment ou pourquoi elle a frappé pour la première fois : {{ affliction }}"
     },
     {
       "id": "retrieve_runed_item",
@@ -142,7 +142,7 @@
     },
     {
       "id": "sabotage_faction_site",
-      "value": "Neutraliser ou perturber une opération, un dispositif, une route ou une ressource entretenue par {{ faction }} sur le site {{ site }}."
+      "value": "Neutraliser ou perturber une opération, un dispositif, une voie ou une ressource appartenant à {{ faction }} sur le site {{ site }}."
     },
     {
       "id": "repair_settlement_resource",
@@ -158,15 +158,15 @@
     },
     {
       "id": "resolve_debt_oath",
-      "value": "Honorer, transférer, recouvrer ou régler une dette, une promesse ou un serment important qui lie une personne au profil {{ background }} à {{ faction }}."
+      "value": "Régler une obligation importante qui lie une personne au profil {{ background }} à {{ faction }} : honorer une promesse ou un serment, transférer la responsabilité, recouvrer une dette le cas échéant ou négocier une autre issue."
     },
     {
       "id": "protect_during_crisis",
-      "value": "Protéger une personne, un objet ou une partie vulnérable de {{ site }} pendant le déroulement de la crise suivante : {{ event }}"
+      "value": "Protéger une personne, un objet ou une partie vulnérable de {{ site }} pendant que se déroule la crise suivante : {{ event }}"
     },
     {
       "id": "negotiate_access",
-      "value": "Obtenir de {{ faction }} l’autorisation d’entrer dans {{ site }}, de le traverser, de l’inspecter ou de l’utiliser."
+      "value": "Obtenir de {{ faction }} l’autorisation d’accéder à {{ site }}, de traverser ce lieu, de l’inspecter ou de l’utiliser."
     }
   ]
 }

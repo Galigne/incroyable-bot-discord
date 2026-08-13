@@ -92,15 +92,15 @@
     },
     {
       "id": "youthful_fine_boned",
-      "value": "Une apparence juvénile, un visage aux os fins et un teint lisse."
+      "value": "Un visage juvénile aux traits fins et au teint lisse."
     },
     {
       "id": "middle_aged_laugh_lines",
-      "value": "L’âge mûr, avec de fines rides autour des yeux et de la bouche."
+      "value": "Un visage d’âge mûr marqué de fines rides autour des yeux et de la bouche."
     },
     {
       "id": "elderly_stooped",
-      "value": "Une apparence âgée, le dos légèrement voûté et le regard vif."
+      "value": "D’apparence âgée, la personne a le dos légèrement voûté et le regard vif."
     },
     {
       "id": "tall_lanky",
@@ -108,7 +108,7 @@
     },
     {
       "id": "average_even_proportions",
-      "value": "Une taille moyenne et une silhouette aux proportions régulières."
+      "value": "Une taille moyenne et une silhouette harmonieusement proportionnée."
     },
     {
       "id": "short_stocky",
@@ -116,11 +116,11 @@
     },
     {
       "id": "broad_heavy_frame",
-      "value": "Une ossature large et massive accompagnée de grandes mains."
+      "value": "Une carrure large et massive, avec de grandes mains."
     },
     {
       "id": "thin_narrow_shoulders",
-      "value": "Une silhouette mince, des épaules étroites et des poignets délicats."
+      "value": "Une silhouette mince, des épaules étroites et des poignets fins."
     },
     {
       "id": "gaunt_hollow_cheeks",
@@ -140,7 +140,7 @@
     },
     {
       "id": "broad_flat_nose",
-      "value": "Un nez large et plat domine un visage autrement ordinaire."
+      "value": "Un nez large et plat se détache sur des traits par ailleurs ordinaires."
     },
     {
       "id": "hooked_nose",
@@ -168,7 +168,7 @@
     },
     {
       "id": "amber_wide_set_eyes",
-      "value": "Des yeux ambrés très espacés sous un front lisse."
+      "value": "Des yeux ambrés très écartés sous un front lisse."
     },
     {
       "id": "mismatched_eye_colors",
@@ -188,19 +188,19 @@
     },
     {
       "id": "salt_and_pepper_hair",
-      "value": "Des cheveux épais qui grisonnent régulièrement aux tempes."
+      "value": "Des cheveux épais qui grisonnent aux tempes."
     },
     {
       "id": "shaved_head",
-      "value": "Un crâne rasé de près qui en souligne la forme."
+      "value": "Un crâne rasé de près dont la forme ressort nettement."
     },
     {
       "id": "receding_hairline",
-      "value": "Des cheveux soigneusement peignés malgré une ligne frontale qui recule."
+      "value": "Des cheveux soigneusement peignés malgré un front qui se dégarnit."
     },
     {
       "id": "bald_crown",
-      "value": "Le sommet du crâne dégarni, entouré d’une couronne de cheveux fins."
+      "value": "Le sommet du crâne est dégarni, entouré d’une couronne de cheveux fins."
     },
     {
       "id": "dark_hair_silver_streak",
@@ -216,7 +216,7 @@
     },
     {
       "id": "short_grey_stubble",
-      "value": "Une courte barbe grise et des paupières lourdes."
+      "value": "Une barbe grise de quelques jours et des paupières lourdes."
     },
     {
       "id": "warm_brown_complexion",
@@ -228,11 +228,11 @@
     },
     {
       "id": "neck_birthmark",
-      "value": "Une large marque de naissance irrégulière apparaît sur un côté du cou."
+      "value": "Une large marque de naissance irrégulière couvre un côté du cou."
     },
     {
       "id": "crooked_teeth",
-      "value": "Des dents légèrement de travers apparaissent dans un sourire facile."
+      "value": "Des dents légèrement de travers se découvrent dans un sourire spontané."
     },
     {
       "id": "small_even_teeth",
@@ -244,7 +244,7 @@
     },
     {
       "id": "slouched_posture",
-      "value": "Une posture relâchée et voûtée qui fait paraître la personne plus petite."
+      "value": "Des épaules voûtées et une posture relâchée font paraître la personne plus petite."
     },
     {
       "id": "long_striding_gait",
@@ -252,11 +252,11 @@
     },
     {
       "id": "careful_uneven_gait",
-      "value": "Une démarche prudente et légèrement inégale laissée par une ancienne blessure à la cheville."
+      "value": "Une ancienne blessure à la cheville rend la démarche prudente et légèrement irrégulière."
     },
     {
       "id": "large_callused_hands",
-      "value": "De grandes mains aux paumes larges et couvertes de callosités épaisses."
+      "value": "De grandes mains aux paumes larges marquées d’épaisses callosités."
     },
     {
       "id": "slender_long_fingers",
@@ -272,11 +272,11 @@
     },
     {
       "id": "healed_broken_nose",
-      "value": "Un nez qui s’est ressoudé légèrement de travers après une ancienne fracture."
+      "value": "Un nez légèrement de travers, mal remis d’une ancienne fracture."
     },
     {
       "id": "faded_forearm_tattoo",
-      "value": "Un petit tatouage effacé reste visible sur un avant-bras."
+      "value": "Un petit tatouage décoloré reste visible sur un avant-bras."
     },
     {
       "id": "inked_wrist_band",
