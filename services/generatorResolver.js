@@ -56,6 +56,16 @@ function createGeneratorResolver({ getGenerator = generatorCatalog.getGenerator 
 		return resolveInlineReferenceInState(expression, state, options.path ?? 'root.inline');
 	}
 
+	function resolveInlineString(value, locale = 'en', options = {}) {
+		if (typeof value !== 'string') {
+			throw new TypeError('Generator inline text must be a string.');
+		}
+		validateOptions(locale, options);
+		const random = options.random ?? Math.random;
+		const state = options.state ?? createState(locale, options, random);
+		return resolveTemplateString(value, state, options.path ?? 'root.inline');
+	}
+
 	function resolveInlineReferenceInState(expression, state, path) {
 		const parsed = parseWrappedInlineReference(expression, path);
 		const resolved = referenceResolver.resolveReference(
@@ -162,7 +172,7 @@ function createGeneratorResolver({ getGenerator = generatorCatalog.getGenerator 
 
 	function resolvePayload(generator, entry, state, path, requestedField) {
 		if (generator.entrySchema.type === 'text') {
-			const resolved = resolveInlineString(entry.value, state, `${path}.value`);
+			const resolved = resolveTemplateString(entry.value, state, `${path}.value`);
 			return {
 				outputType: 'value',
 				value: resolved.value,
@@ -184,7 +194,7 @@ function createGeneratorResolver({ getGenerator = generatorCatalog.getGenerator 
 				if (technical.has(field)) {
 					continue;
 				}
-				const resolved = resolveInlineString(
+				const resolved = resolveTemplateString(
 					String(fields[field]),
 					state,
 					`${path}.fields.${field}`,
@@ -206,7 +216,7 @@ function createGeneratorResolver({ getGenerator = generatorCatalog.getGenerator 
 				);
 			}
 			if (typeof fields[requestedField] === 'string') {
-				const resolved = resolveInlineString(
+				const resolved = resolveTemplateString(
 					fields[requestedField],
 					state,
 					`${path}.fields.${requestedField}`,
@@ -246,7 +256,7 @@ function createGeneratorResolver({ getGenerator = generatorCatalog.getGenerator 
 		};
 	}
 
-	function resolveInlineString(value, state, path) {
+	function resolveTemplateString(value, state, path) {
 		if (typeof value !== 'string') {
 			return {
 				value: String(value),
@@ -292,6 +302,7 @@ function createGeneratorResolver({ getGenerator = generatorCatalog.getGenerator 
 	return {
 		generate,
 		resolveInlineReference,
+		resolveInlineString,
 		resolveReference,
 	};
 
@@ -430,5 +441,6 @@ module.exports = {
 	createGeneratorResolver,
 	generate: defaultResolver.generate,
 	resolveInlineReference: defaultResolver.resolveInlineReference,
+	resolveInlineString: defaultResolver.resolveInlineString,
 	resolveReference: defaultResolver.resolveReference,
 };

@@ -157,11 +157,7 @@ test('creature hydration preserves final localized state and technical provenanc
 	};
 	saved.naturalArmor.percentage = 25;
 	saved.resources.ar = { current: 30, max: 30 };
-	saved.traits = [{
-		name: 'Keen Scent',
-		description: 'Tracks by scent.',
-		id: 'keen_scent',
-	}];
+	saved.traits = ['Keen Scent — Tracks by scent.'];
 	saved.status.effects = [{
 		generatorId: 'status_effect',
 		entryId: 'burning',
@@ -197,6 +193,7 @@ test('creature hydration preserves final localized state and technical provenanc
 	assert.deepEqual(hydrated.source, saved.source);
 	assert.deepEqual(hydrated.status.effects, saved.status.effects);
 	assert.deepEqual(hydrated.status.modifiers, saved.status.modifiers);
+	assert.deepEqual(hydrated.traits, ['Keen Scent — Tracks by scent.']);
 	saved.source.entryId = 'changed-after-hydration';
 	assert.equal(hydrated.source.entryId, 'ash_wolf');
 });
@@ -206,12 +203,16 @@ test('creature saves reject missing, unsupported, mismatched, and invalid state'
 		() => validateCreatureSaveSchema({}),
 		error => error.code === 'MISSING_CREATURE_SCHEMA_VERSION',
 	);
-	const unsupported = JSON.parse(JSON.stringify(new Creature('Schema.Bad', 'creator')));
-	unsupported.schemaVersion = 99;
-	assert.throws(
-		() => validateCreatureSaveSchema(unsupported),
-		error => error.code === 'UNSUPPORTED_CREATURE_SCHEMA_VERSION',
-	);
+	for (const schemaVersion of [2, 99]) {
+		const unsupported = JSON.parse(JSON.stringify(
+			new Creature(`Schema.Bad.${schemaVersion}`, 'creator'),
+		));
+		unsupported.schemaVersion = schemaVersion;
+		assert.throws(
+			() => validateCreatureSaveSchema(unsupported),
+			error => error.code === 'UNSUPPORTED_CREATURE_SCHEMA_VERSION',
+		);
+	}
 	const mismatched = JSON.parse(JSON.stringify(new Creature('Schema.One', 'creator')));
 	assert.throws(
 		() => validateCreatureSaveSchema(mismatched, 'Schema.Two'),
@@ -221,6 +222,14 @@ test('creature saves reject missing, unsupported, mismatched, and invalid state'
 	invalid.resources.hp.current = 101;
 	assert.throws(
 		() => validateCreatureSaveSchema(invalid),
+		error => error.code === 'INVALID_CREATURE_SAVE',
+	);
+	const invalidTraits = JSON.parse(JSON.stringify(
+		new Creature('Schema.Invalid.Traits', 'creator'),
+	));
+	invalidTraits.traits = [{ name: 'Legacy object', description: 'Not supported.' }];
+	assert.throws(
+		() => validateCreatureSaveSchema(invalidTraits),
 		error => error.code === 'INVALID_CREATURE_SAVE',
 	);
 	const unknown = JSON.parse(JSON.stringify(new Creature('Schema.Unknown', 'creator')));
@@ -539,14 +548,14 @@ test('character and creature field orders stay explicit and type-compatible', as
 	await updateEditableEntity(
 		entityKey,
 		'traits',
-		'Keen Scent:Tracks across stone\n- Night Eyes:Sees in darkness',
+		'Keen Scent — Tracks across stone\n- Night Eyes — Sees in darkness',
 		() => true,
 		{ actorId: 'owner', maxEntries: 3 },
 		'creature',
 	);
 	assert.deepEqual((await getEntity(entityKey)).traits, [
-		{ name: 'Keen Scent', description: 'Tracks across stone' },
-		{ name: 'Night Eyes', description: 'Sees in darkness' },
+		'Keen Scent — Tracks across stone',
+		'Night Eyes — Sees in darkness',
 	]);
 	const characterKey = 'Character.Modifiers';
 	await createEntity(characterKey, 'owner', 'character');

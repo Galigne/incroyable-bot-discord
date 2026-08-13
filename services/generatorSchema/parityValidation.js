@@ -142,28 +142,12 @@ function validateCreatureGenerationPair(english, french, file, index) {
 	}
 	assertParity(english.traits.length, french.traits.length, file, `${location}.traits.length`);
 	for (let traitIndex = 0; traitIndex < english.traits.length; traitIndex += 1) {
-		const englishTrait = english.traits[traitIndex];
-		const frenchTrait = french.traits[traitIndex];
 		assertParity(
-			Object.keys(englishTrait).sort(),
-			Object.keys(frenchTrait).sort(),
+			extractInlineReferences(english.traits[traitIndex], file),
+			extractInlineReferences(french.traits[traitIndex], file),
 			file,
-			`${location}.traits.${traitIndex}.keys`,
+			`${location}.traits.${traitIndex}.inlineReferences`,
 		);
-		assertParity(
-			englishTrait.id,
-			frenchTrait.id,
-			file,
-			`${location}.traits.${traitIndex}.id`,
-		);
-		for (const property of ['name', 'description']) {
-			assertParity(
-				extractInlineReferences(englishTrait[property], file),
-				extractInlineReferences(frenchTrait[property], file),
-				file,
-				`${location}.traits.${traitIndex}.${property}.inlineReferences`,
-			);
-		}
 	}
 }
 

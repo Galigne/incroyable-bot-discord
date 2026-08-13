@@ -18,13 +18,7 @@
       },
       "generation": {
         "statProfile": "creature-companion",
-        "traits": [
-          {
-            "id": "loyal_hound_nature",
-            "name": "Bonded Aptitude",
-            "description": "tracks familiar scents, guards sleepers, and distrusts one apparently harmless NPC."
-          }
-        ],
+        "traits": ["{{ traits:keen_smell }}"],
         "fixedRules": [],
         "statusEffects": [],
         "equipment": [],
@@ -41,13 +35,7 @@
       },
       "generation": {
         "statProfile": "creature-companion",
-        "traits": [
-          {
-            "id": "barn_cat_nature",
-            "name": "Bonded Aptitude",
-            "description": "excellent at finding hidden vermin, warm places, and unattended food."
-          }
-        ],
+        "traits": ["{{ traits:keen_hearing }}", "{{ traits:darkvision }}"],
         "fixedRules": [],
         "statusEffects": [],
         "equipment": [],
@@ -65,11 +53,8 @@
       "generation": {
         "statProfile": "creature-companion",
         "traits": [
-          {
-            "id": "messenger_pigeon_nature",
-            "name": "Bonded Aptitude",
-            "description": "reliably returns to one chosen home carrying a very small message."
-          }
+          "{{ traits:flight }}",
+          "Homing Instinct — Can always determine the direction of a home it has occupied for at least one week."
         ],
         "fixedRules": [],
         "statusEffects": [],
@@ -93,13 +78,7 @@
       },
       "generation": {
         "statProfile": "creature-companion",
-        "traits": [
-          {
-            "id": "pack_goat_nature",
-            "name": "Bonded Aptitude",
-            "description": "carries modest supplies, eats almost anything, and refuses obviously cursed paths."
-          }
-        ],
+        "traits": ["{{ traits:sure_footed }}", "{{ traits:powerful_build }}"],
         "fixedRules": [],
         "statusEffects": [],
         "equipment": [],
@@ -122,13 +101,7 @@
       },
       "generation": {
         "statProfile": "creature-companion",
-        "traits": [
-          {
-            "id": "clever_rat_nature",
-            "name": "Bonded Aptitude",
-            "description": "squeezes through tiny spaces and learns simple object-based instructions."
-          }
-        ],
+        "traits": [],
         "fixedRules": [],
         "statusEffects": [],
         "equipment": [],
@@ -146,11 +119,7 @@
       "generation": {
         "statProfile": "creature-companion",
         "traits": [
-          {
-            "id": "watch_goose_nature",
-            "name": "Bonded Aptitude",
-            "description": "loudly challenges strangers, invisible creatures, and anyone carrying bread."
-          }
+          "Warning Call — Allies able to hear the call gain +1 to Initiative against a threat the creature has detected."
         ],
         "fixedRules": [],
         "statusEffects": [],
@@ -168,13 +137,7 @@
       },
       "generation": {
         "statProfile": "creature-companion",
-        "traits": [
-          {
-            "id": "pocket_ferret_nature",
-            "name": "Bonded Aptitude",
-            "description": "retrieves small loose objects and hides them in inconvenient places."
-          }
-        ],
+        "traits": [],
         "fixedRules": [],
         "statusEffects": [],
         "equipment": [],
@@ -191,13 +154,7 @@
       },
       "generation": {
         "statProfile": "creature-companion",
-        "traits": [
-          {
-            "id": "mule_nature",
-            "name": "Bonded Aptitude",
-            "description": "dependable transport with excellent footing and absolute veto power over unsafe bridges."
-          }
-        ],
+        "traits": ["{{ traits:sure_footed }}", "{{ traits:powerful_build }}"],
         "fixedRules": [],
         "statusEffects": [],
         "equipment": [],
@@ -231,11 +188,8 @@
       "generation": {
         "statProfile": "creature-companion",
         "traits": [
-          {
-            "id": "lantern_finch_nature",
-            "name": "Bonded Aptitude",
-            "description": "emits gentle light and becomes silent when predators are nearby."
-          }
+          "{{ traits:flight }}",
+          "Luminous Plumage — Sheds gentle light in a 5-meter radius and can extinguish or restore it at will."
         ],
         "fixedRules": [],
         "statusEffects": [],
@@ -253,13 +207,7 @@
       },
       "generation": {
         "statProfile": "creature-companion",
-        "traits": [
-          {
-            "id": "ember_newt_nature",
-            "name": "Bonded Aptitude",
-            "description": "provides warmth, lights dry tinder, and sleeps inside cookware."
-          }
-        ],
+        "traits": ["{{ traits:amphibious }}", "{{ traits:fire_immunity }}"],
         "fixedRules": [],
         "statusEffects": [],
         "equipment": [],
@@ -277,11 +225,7 @@
       "generation": {
         "statProfile": "creature-companion",
         "traits": [
-          {
-            "id": "moss_tortoise_nature",
-            "name": "Bonded Aptitude",
-            "description": "slowly grows common medicinal herbs across its shell."
-          }
+          "Medicinal Garden — Once per day, produces enough common herbs to grant +1 to one healing action."
         ],
         "fixedRules": [],
         "statusEffects": [],
@@ -300,11 +244,8 @@
       "generation": {
         "statProfile": "creature-companion",
         "traits": [
-          {
-            "id": "whisper_crow_nature",
-            "name": "Bonded Aptitude",
-            "description": "remembers voices and can repeat several short phrases with alarming accuracy."
-          }
+          "{{ traits:flight }}",
+          "Perfect Mimicry — Can reproduce any short phrase or familiar voice it has heard clearly."
         ],
         "fixedRules": [],
         "statusEffects": [],
@@ -323,11 +264,9 @@
       "generation": {
         "statProfile": "creature-companion",
         "traits": [
-          {
-            "id": "miniature_slime_nature",
-            "name": "Bonded Aptitude",
-            "description": "harmlessly dissolves dirt, spoiled food, and occasionally important paper."
-          }
+          "{{ traits:poison_immunity }}",
+          "{{ traits:disease_immunity }}",
+          "Cleansing Ooze — Can dissolve dirt and spoiled organic matter without harming healthy living tissue."
         ],
         "fixedRules": [],
         "statusEffects": [],
@@ -346,11 +285,9 @@
       "generation": {
         "statProfile": "creature-companion",
         "traits": [
-          {
-            "id": "clockwork_beetle_nature",
-            "name": "Bonded Aptitude",
-            "description": "records one hour of sound and plays it back when wound."
-          }
+          "{{ traits:poison_immunity }}",
+          "{{ traits:disease_immunity }}",
+          "Sound Replay — Can record up to one hour of nearby sound and reproduce it exactly once before recording again."
         ],
         "fixedRules": [],
         "statusEffects": [],
@@ -368,13 +305,7 @@
       },
       "generation": {
         "statProfile": "creature-companion",
-        "traits": [
-          {
-            "id": "breeze_lizard_nature",
-            "name": "Bonded Aptitude",
-            "description": "changes color with the weather and glides short distances between people."
-          }
-        ],
+        "traits": ["{{ traits:gliding }}"],
         "fixedRules": [],
         "statusEffects": [],
         "equipment": [],
@@ -391,13 +322,7 @@
       },
       "generation": {
         "statProfile": "creature-companion",
-        "traits": [
-          {
-            "id": "cave_bat_nature",
-            "name": "Bonded Aptitude",
-            "description": "navigates complete darkness and returns when called with a specific whistle."
-          }
-        ],
+        "traits": ["{{ traits:flight }}", "{{ traits:echolocation }}"],
         "fixedRules": [],
         "statusEffects": [],
         "equipment": [],
@@ -414,13 +339,7 @@
       },
       "generation": {
         "statProfile": "creature-companion",
-        "traits": [
-          {
-            "id": "river_otter_nature",
-            "name": "Bonded Aptitude",
-            "description": "swims, retrieves floating objects, and insists on opening shellfish during serious scenes."
-          }
-        ],
+        "traits": ["{{ traits:amphibious }}", "{{ traits:aquatic_speed }}"],
         "fixedRules": [],
         "statusEffects": [],
         "equipment": [],
@@ -437,13 +356,7 @@
       },
       "generation": {
         "statProfile": "creature-companion",
-        "traits": [
-          {
-            "id": "tiny_griffin_nature",
-            "name": "Bonded Aptitude",
-            "description": "fiercely guards a single backpack and hunts insects with dramatic dives."
-          }
-        ],
+        "traits": ["{{ traits:flight }}", "{{ traits:natural_weapons }}"],
         "fixedRules": [],
         "statusEffects": [],
         "equipment": [],
@@ -461,11 +374,8 @@
       "generation": {
         "statProfile": "creature-companion",
         "traits": [
-          {
-            "id": "blink_rabbit_nature",
-            "name": "Bonded Aptitude",
-            "description": "teleports a few meters when startled but rarely chooses the safest direction."
-          }
+          "{{ traits:swift_reflexes }}",
+          "Short Blink — Once per turn when startled or attacked, may teleport up to 3 meters to an open space it can see."
         ],
         "fixedRules": [],
         "statusEffects": [],
@@ -484,11 +394,9 @@
       "generation": {
         "statProfile": "creature-companion",
         "traits": [
-          {
-            "id": "paper_dragon_nature",
-            "name": "Bonded Aptitude",
-            "description": "folds itself flat, carries written notes, and breathes enough flame to seal wax."
-          }
+          "{{ traits:flight }}",
+          "Fold Flat — Can flatten itself enough to pass through a gap as narrow as a sheet of paper.",
+          "Wax Flame — Can breathe a tiny flame sufficient to light tinder or seal wax, but not to deal damage."
         ],
         "fixedRules": [
           {
@@ -517,13 +425,7 @@
       },
       "generation": {
         "statProfile": "creature-companion",
-        "traits": [
-          {
-            "id": "ghost_mouse_nature",
-            "name": "Bonded Aptitude",
-            "description": "passes through thin walls and becomes visible after eating cheese."
-          }
-        ],
+        "traits": ["{{ traits:incorporeal }}"],
         "fixedRules": [],
         "statusEffects": [],
         "equipment": [],
@@ -541,11 +443,7 @@
       "generation": {
         "statProfile": "creature-companion",
         "traits": [
-          {
-            "id": "cloud_pup_nature",
-            "name": "Bonded Aptitude",
-            "description": "a floating canine made of mist that can briefly conceal a person's face."
-          }
+          "Mist Veil — Once per scene, creates a 2-meter cloud that conceals one creature until the start of its next turn."
         ],
         "fixedRules": [],
         "statusEffects": [],
@@ -564,11 +462,8 @@
       "generation": {
         "statProfile": "creature-elemental",
         "traits": [
-          {
-            "id": "pebble_elemental_nature",
-            "name": "Bonded Aptitude",
-            "description": "a fist-sized stone creature able to sense nearby tunnels and worked masonry."
-          }
+          "{{ traits:stone_body }}",
+          "Masonry Sense — +2 to Perception actions made to locate tunnels, cavities, or weaknesses in worked stone."
         ],
         "fixedRules": [],
         "statusEffects": [],
@@ -586,13 +481,7 @@
       },
       "generation": {
         "statProfile": "creature-companion",
-        "traits": [
-          {
-            "id": "moon_moth_nature",
-            "name": "Bonded Aptitude",
-            "description": "absorbs weak magical residue and glows in the presence of active enchantments."
-          }
-        ],
+        "traits": ["{{ traits:flight }}", "{{ traits:magic_sense }}"],
         "fixedRules": [],
         "statusEffects": [],
         "equipment": [],
@@ -609,11 +498,8 @@
       "generation": {
         "statProfile": "creature-companion",
         "traits": [
-          {
-            "id": "messenger_raptor_nature",
-            "name": "Intrinsic Nature",
-            "description": "A territorial bird trainable to recognize people, emblems, and routes."
-          }
+          "{{ traits:flight }}",
+          "Keen Sight — +2 to Perception actions that rely on vision at long range."
         ],
         "fixedRules": [],
         "statusEffects": [],
@@ -632,11 +518,9 @@
       "generation": {
         "statProfile": "creature-companion",
         "traits": [
-          {
-            "id": "sir_candlewick_nature",
-            "name": "Animated Helper",
-            "description": "a tiny animated suit of armor searching for a person large enough to be its squire."
-          }
+          "{{ traits:poison_immunity }}",
+          "{{ traits:disease_immunity }}",
+          "Animated Armor — Does not need to eat, drink, breathe, or sleep."
         ],
         "fixedRules": [],
         "statusEffects": [],

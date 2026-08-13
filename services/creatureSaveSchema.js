@@ -1,7 +1,7 @@
 const { BASE_STATS, DERIVED_STATS, MAX_AP } = require('./mechanics/constants');
 const { validateEntityKey } = require('./entityStoragePaths');
 
-const CURRENT_CREATURE_SAVE_SCHEMA_VERSION = 2;
+const CURRENT_CREATURE_SAVE_SCHEMA_VERSION = 3;
 const CREATURE_STAT_IDS = Object.freeze([...BASE_STATS, ...DERIVED_STATS]);
 const TECHNICAL_ID = /^[a-z0-9]+(?:_[a-z0-9]+)*$/;
 const STAT_PROFILE_ID = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
@@ -70,7 +70,7 @@ function validateCreatureSaveSchema(rawSaveData, expectedKey = rawSaveData?.key)
 	validateStatistics(rawSaveData.statistics);
 	validateResources(rawSaveData.resources);
 	validateStatus(rawSaveData.status);
-	validateDescribedRecords(rawSaveData.traits, 'traits', { recordId: 'id' });
+	validateNonEmptyStringList(rawSaveData.traits, 'traits');
 	validateRules(rawSaveData.rules);
 	validateGear(rawSaveData.gear);
 	return rawSaveData;
@@ -261,6 +261,13 @@ function validateGear(gear) {
 function validateStringList(value, path) {
 	if (!Array.isArray(value) || value.some(item => typeof item !== 'string')) {
 		throw invalidSave(`${path} must be an array of strings.`);
+	}
+}
+
+function validateNonEmptyStringList(value, path) {
+	validateStringList(value, path);
+	for (const [index, item] of value.entries()) {
+		assertNonEmptyString(item, `${path}[${index}]`);
 	}
 }
 

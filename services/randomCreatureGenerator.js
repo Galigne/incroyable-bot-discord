@@ -21,6 +21,9 @@ function populateRandomCreature(creature, options = {}) {
 	const getGenerator = options.getGenerator ?? generatorCatalog.getGenerator;
 	const getProfile = options.getStatProfile ?? getStatProfile;
 	generatorResolver.assertGeneratorResolverInterface(resolver);
+	if (typeof resolver.resolveInlineString !== 'function') {
+		throw new TypeError('Creature generation requires inline-string resolution.');
+	}
 	const level = options.level ?? randomInteger(1, 10, random);
 	validateLevel(level);
 	const router = getGenerator(CREATURE_ROUTER_ID, locale);
@@ -112,11 +115,13 @@ function populateRandomCreature(creature, options = {}) {
 	creature.name = requireLocalizedField(detailFields, 'name');
 	creature.description = requireLocalizedField(detailFields, 'description');
 	creature.statistics = generateStats({ level, profile, random });
-	creature.traits = generation.traits.map(trait => ({
-		id: trait.id,
-		name: trait.name,
-		description: trait.description,
-	}));
+	const sourceProvenance = [...route.provenance, ...result.provenance];
+	creature.traits = resolveTraitTemplates(
+		generation.traits,
+		locale,
+		random,
+		resolver,
+	);
 	creature.rules = [];
 	creature.status.effects = [];
 	creature.status.modifiers = maybeGenerateDescriptiveModifiers({
@@ -127,7 +132,6 @@ function populateRandomCreature(creature, options = {}) {
 		path: 'root.creature.modifier',
 	});
 
-	const sourceProvenance = [...route.provenance, ...result.provenance];
 	resolveFixedRules(
 		creature,
 		generation.fixedRules ?? [],
@@ -199,6 +203,21 @@ function populateRandomCreature(creature, options = {}) {
 		provenance: sourceProvenance,
 	};
 	return creature;
+}
+
+function resolveTraitTemplates(
+	traits,
+	locale,
+	random,
+	resolver,
+) {
+	return traits.map((trait, index) => {
+		const resolved = resolver.resolveInlineString(trait, locale, {
+			path: `root.generation.traits.${index}`,
+			random,
+		});
+		return resolved.value;
+	});
 }
 
 function resolveFixedRules(

@@ -137,34 +137,18 @@ function validateCreatureGeneration(generation, location) {
 }
 
 function validateCreatureTraits(traits, location) {
-	if (!Array.isArray(traits) || traits.length === 0 || traits.length > 25) {
+	if (!Array.isArray(traits) || traits.length > 25) {
 		throw generatorSchemaError(
 			'INVALID_CREATURE_TRAITS',
-			`Creature archetype ${location} must define 1 to 25 intrinsic traits.`,
+			`Creature archetype ${location} must define up to 25 intrinsic traits.`,
 		);
 	}
-	const ids = new Set();
 	for (const [index, trait] of traits.entries()) {
-		assertPlainObject(trait, `Creature trait ${location}.${index} is invalid.`);
-		assertExactKeys(
-			trait,
-			['id', 'name', 'description'],
-			`Creature trait ${location}.${index} has invalid properties.`,
-		);
-		validateTechnicalId(trait.id, `trait ID in ${location}`);
-		validateDisplayText(trait.name, 256, `trait name in ${location}`);
 		validateDisplayText(
-			trait.description,
+			trait,
 			MAX_ENTRY_TEXT_LENGTH,
-			`trait description in ${location}`,
+			`trait ${index + 1} in ${location}`,
 		);
-		if (ids.has(trait.id)) {
-			throw generatorSchemaError(
-				'DUPLICATE_CREATURE_TRAIT_ID',
-				`Creature archetype ${location} repeats trait ${trait.id}.`,
-			);
-		}
-		ids.add(trait.id);
 	}
 }
 

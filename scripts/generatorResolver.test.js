@@ -140,6 +140,16 @@ test('inline references resolve text, structured display, explicit fields, and p
 		resolver.resolveInlineReference('{{ item:relic.name }}', 'en').value,
 		'Relic',
 	);
+	const inlineString = resolver.resolveInlineString(
+		'Found {{ item:relic }} beneath the altar.',
+		'en',
+		{ random: () => 0 },
+	);
+	assert.equal(
+		inlineString.value,
+		'Found Relic — A valuable object beneath the altar.',
+	);
+	assert.equal(inlineString.provenance[0].entryId, 'relic');
 });
 
 test('/gen formats direct substitutions without changing the generated value', () => {

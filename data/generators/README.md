@@ -169,3 +169,26 @@ with their consumers:
 Creature metadata relationships for profiles, traits, fixed RULEs, status effects,
 modifiers, armor, equipment, and inventory are validated with the catalog. They do
 not define alternate entity types, formulas, or automatic encumbrance.
+
+Creature-detail `generation.traits` is an array of zero to 25 non-empty template
+strings. Each item may be literal text, a complete inline reference, or ordinary
+text containing one or more inline references. The same syntax and catalog
+relationship validation described above applies; there is no trait-specific
+reference format. For example:
+
+```json
+"traits": [
+  "Huge — +1 to Strength actions involving pushing or lifting.",
+  "{{ traits:keen_smell }}",
+  "Inherited capability: {{ traits }}"
+]
+```
+
+The public structured `traits` generator exposes reusable localized `{ name,
+description }` entries. Omitting the field in `{{ traits }}` or
+`{{ traits:keen_smell }}` produces the normal display string, with the name and
+rules description joined by an em dash. Creature generation resolves every
+configured template once and persists only the resulting strings. Trait rules text
+is descriptive and never applies automatic statistics, resources, effects, armor,
+or other mechanics. Trait templates and their selection metadata are not copied
+into creature saves.

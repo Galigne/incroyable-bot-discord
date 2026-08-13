@@ -27,6 +27,9 @@ const {
 	getCreatureSavePath,
 } = require('../services/entityStoragePaths');
 const { getCreature } = require('../services/creatureStore');
+const {
+	validateCreatureSaveSchema,
+} = require('../services/creatureSaveSchema');
 const { reloadGenerationData } = require('../services/generationData');
 const generatorCatalog = require('../services/generatorCatalog');
 const {
@@ -103,7 +106,11 @@ test('production creature sources are strict localized types backed by profiles'
 				assert.deepEqual(Object.keys(entry.fields), ['name', 'description']);
 				assert.ok(entry.fields.name);
 				assert.ok(entry.fields.description);
-				assert.ok(entry.generation.traits.length > 0);
+				assert.ok(Array.isArray(entry.generation.traits));
+				assert.ok(entry.generation.traits.length <= 25);
+				assert.ok(entry.generation.traits.every(trait => (
+					typeof trait === 'string' && trait.trim()
+				)));
 				assert.ok(Array.isArray(entry.generation.equipment));
 				assert.ok(Array.isArray(entry.generation.inventory));
 				for (const forbidden of [
@@ -120,6 +127,15 @@ test('production creature sources are strict localized types backed by profiles'
 		}
 	}
 	assert.ok(profileIds.size > 0);
+	const traits = generatorCatalog.getGenerator('traits', 'en');
+	assert.equal(traits.visibility, 'public');
+	assert.deepEqual(traits.entrySchema, {
+		type: 'fields',
+		required: ['name', 'description'],
+	});
+	assert.ok(traits.entries.every(entry => (
+		entry.fields.name && entry.fields.description
+	)));
 
 	for (const generatorId of ['modifier_character', 'modifier_creature']) {
 		const modifier = generatorCatalog.getGenerator(generatorId, 'en');
@@ -166,6 +182,14 @@ test('creature metadata preserves English and French technical parity', () => {
 	const originalProfile = english.entries[0].generation.statProfile;
 	french.entries[0].generation.statProfile = [...createStatProfileCandidate().keys()]
 		.find(profileId => profileId !== originalProfile);
+	assert.throws(
+		() => validateGeneratorPair(english, french),
+		error => error.code === 'GENERATOR_LOCALE_PARITY_MISMATCH',
+	);
+
+	french.entries[0].generation.statProfile = originalProfile;
+	english.entries[0].generation.traits = ['Sense: {{ traits:keen_smell }}'];
+	french.entries[0].generation.traits = ['Sens : {{ traits:keen_hearing }}'];
 	assert.throws(
 		() => validateGeneratorPair(english, french),
 		error => error.code === 'GENERATOR_LOCALE_PARITY_MISMATCH',
@@ -231,6 +255,57 @@ test('creature generation references require compatible target payloads', () => 
 	);
 });
 
+test('creature trait metadata accepts localized templates and rejects invalid strings', () => {
+	const { generatorId } = getCreatureFixture();
+	const valid = structuredClone(generatorCatalog.getGenerator(generatorId, 'en'));
+	delete valid.locale;
+	for (const traits of [
+		[],
+		['Cannot be blinded by ordinary darkness.'],
+		['{{ traits:amphibious }}'],
+		['{{ traits }}'],
+		[
+			'Huge — +1 to Strength actions involving pushing or lifting.',
+			'Inherited capability: {{ traits:keen_smell }}',
+			'{{ traits }}',
+		],
+	]) {
+		const candidate = structuredClone(valid);
+		candidate.entries[0].generation.traits = traits;
+		assert.doesNotThrow(() => validateGeneratorDefinition(candidate));
+	}
+
+	for (const traits of [
+		null,
+		[{}],
+		[''],
+		['   '],
+		['{{ invalid reference }}'],
+	]) {
+		const candidate = structuredClone(valid);
+		candidate.entries[0].generation.traits = traits;
+		assert.throws(() => validateGeneratorDefinition(candidate));
+	}
+});
+
+test('creature trait references use normal catalog relationship validation', () => {
+	for (const [trait, code] of [
+		['{{ missing_traits }}', 'GENERATOR_REFERENCE_MISSING'],
+		['{{ traits:missing_trait }}', 'GENERATOR_ENTRY_NOT_FOUND'],
+		['{{ traits.missing_field }}', 'INVALID_GENERATOR_SELECTOR'],
+	]) {
+		const catalog = new Map(createGeneratorCatalogCandidate().get('en'));
+		const { generatorId } = getCreatureFixture();
+		const detail = structuredClone(catalog.get(generatorId));
+		detail.entries[0].generation.traits = [trait];
+		catalog.set(generatorId, detail);
+		assert.throws(
+			() => validateGeneratorRelationships(catalog),
+			error => error.code === code,
+		);
+	}
+});
+
 test('equivalent random input selects the same stable IDs and statistics in both locales', () => {
 	for (const type of getCreatureTypes()) {
 		const english = populateRandomCreature(
@@ -248,15 +323,116 @@ test('equivalent random input selects the same stable IDs and statistics in both
 		assert.deepEqual(english.statistics, french.statistics);
 		assert.deepEqual(english.resources.hp, french.resources.hp);
 		assert.deepEqual(english.resources.ar, french.resources.ar);
-		assert.deepEqual(
-			english.traits.map(trait => trait.id),
-			french.traits.map(trait => trait.id),
-		);
+		assert.equal(english.traits.length, french.traits.length);
+		assert.ok(english.traits.every(trait => typeof trait === 'string'));
+		assert.ok(french.traits.every(trait => typeof trait === 'string'));
 		assert.deepEqual(
 			english.status.modifiers.map(modifier => modifier.entryId),
 			french.status.modifiers.map(modifier => modifier.entryId),
 		);
 	}
+});
+
+test('creature generation resolves literal, fixed, random, mixed, and inline traits', () => {
+	const animalType = getCreatureTypeForEntry('mossback_deer');
+	const traitless = generateEntry(animalType, 'mossback_deer', { level: 3 });
+	assert.deepEqual(traitless.traits, []);
+
+	const literal = generateEntry(
+		getCreatureTypeForEntry('lantern_finch'),
+		'lantern_finch',
+		{ level: 3 },
+	);
+	assert.match(literal.traits[0], /^Luminous Plumage — /);
+
+	const englishFixed = generateLocalizedEntry(animalType, 'river_otter', 'en');
+	const frenchFixed = generateLocalizedEntry(animalType, 'river_otter', 'fr');
+	assert.deepEqual(englishFixed.traits, [
+		generatorResolver.resolveInlineReference(
+			'{{ traits:amphibious }}',
+			'en',
+			{ random: () => 0 },
+		).value,
+		generatorResolver.resolveInlineReference(
+			'{{ traits:aquatic_speed }}',
+			'en',
+			{ random: () => 0 },
+		).value,
+	]);
+	assert.deepEqual(frenchFixed.traits, [
+		generatorResolver.resolveInlineReference(
+			'{{ traits:amphibious }}',
+			'fr',
+			{ random: () => 0 },
+		).value,
+		generatorResolver.resolveInlineReference(
+			'{{ traits:aquatic_speed }}',
+			'fr',
+			{ random: () => 0 },
+		).value,
+	]);
+	assert.notDeepEqual(englishFixed.traits, frenchFixed.traits);
+
+	const random = generateEntry(getCreatureTypeForEntry('imp'), 'imp', { level: 3 });
+	assert.equal(random.traits.length, 2);
+	assert.ok(getTraitDisplays('en').has(random.traits[1]));
+
+	const mixed = generateEntry(
+		getCreatureTypeForEntry('unstable_chimera'),
+		'unstable_chimera',
+		{ level: 3 },
+	);
+	assert.equal(mixed.traits.length, 2);
+	assert.match(mixed.traits[0], /^Composite Instinct — .+: .+ — .+/);
+	assert.ok(mixed.traits.every(trait => !trait.includes('{{')));
+	assert.ok(getTraitDisplays('en').has(mixed.traits[1]));
+});
+
+test('every production creature resolves localized traits into valid final state', () => {
+	for (const locale of ['en', 'fr']) {
+		for (const type of getCreatureTypes(locale)) {
+			const generator = generatorCatalog.getGenerator(
+				getCreatureGeneratorId(type, locale),
+				locale,
+			);
+			for (const entry of generator.entries) {
+				const creature = generateLocalizedEntry(type, entry.id, locale);
+				assert.equal(creature.source.entryId, entry.id);
+				assert.ok(creature.traits.every(trait => (
+					typeof trait === 'string'
+					&& trait.trim()
+					&& !trait.includes('{{')
+				)));
+				assert.ok(creature.source.provenance.every(record => (
+					record.generatorId !== 'traits'
+				)));
+				assert.doesNotThrow(() => validateCreatureSaveSchema(creature));
+			}
+		}
+	}
+});
+
+test('generated creature saves persist only final trait strings', async () => {
+	const type = getCreatureTypeForEntry('river_otter');
+	const generated = await generateCreature('Trait.Persistence', 'creator', {
+		type,
+		level: 4,
+		locale: 'en',
+		random: sequenceRandom([getEntryMidpoint(type, 'river_otter')], 0),
+	});
+	const persisted = JSON.parse(await fsPromises.readFile(
+		getCreatureSavePath(generated.key),
+		'utf8',
+	));
+	assert.equal(persisted.schemaVersion, 3);
+	assert.deepEqual(persisted.traits, generated.traits);
+	assert.ok(persisted.traits.every(trait => (
+		typeof trait === 'string' && !trait.includes('{{')
+	)));
+	assert.doesNotMatch(JSON.stringify(persisted.traits), /generatorId|entryId/);
+	assert.ok(persisted.source.provenance.every(record => (
+		record.generatorId !== 'traits'
+	)));
 });
 
 test('all creature profiles use the shared nonlinear level budget and derived resources', () => {
@@ -613,6 +789,11 @@ test('generation, collision, and save failures leave no partial creature or hist
 						code: 'INJECTED_GENERATION_FAILURE',
 					});
 				},
+				resolveInlineString() {
+					throw Object.assign(new Error('injected generation failure'), {
+						code: 'INJECTED_GENERATION_FAILURE',
+					});
+				},
 			},
 		}),
 		{ code: 'INJECTED_GENERATION_FAILURE' },
@@ -725,6 +906,24 @@ function generateEntry(type, entryId, {
 	);
 }
 
+function generateLocalizedEntry(type, entryId, locale) {
+	return populateRandomCreature(
+		new Creature(`Generated.${locale}.${type}.${entryId}`, 'creator'),
+		{
+			type,
+			level: 3,
+			locale,
+			random: sequenceRandom([getEntryMidpoint(type, entryId)], 0.5),
+		},
+	);
+}
+
+function getTraitDisplays(locale) {
+	return new Set(generatorCatalog.getGenerator('traits', locale).entries.map(entry => (
+		`${entry.fields.name} — ${entry.fields.description}`
+	)));
+}
+
 function getEntryMidpoint(generatorId, entryId) {
 	const detailGeneratorId = getCreatureGeneratorId(generatorId) ?? generatorId;
 	const entries = generatorCatalog.getGenerator(detailGeneratorId, 'en').entries;
@@ -833,6 +1032,9 @@ function createDetailResolver(generatorId, result, modifierResult) {
 				return structuredClone(result);
 			}
 			return generatorResolver.resolveInlineReference(expression, locale, options);
+		},
+		resolveInlineString(value, locale, options) {
+			return generatorResolver.resolveInlineString(value, locale, options);
 		},
 	};
 }

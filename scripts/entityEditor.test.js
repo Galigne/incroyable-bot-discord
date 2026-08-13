@@ -1099,7 +1099,7 @@ test('modal routing publishes canonical post-update details and repeats authoriz
 		...creature,
 		customId: creatureModal.custom_id,
 		fields: {
-			getTextInputValue: () => 'Keen scent:Tracks across stone',
+			getTextInputValue: () => 'Keen scent — Tracks across stone',
 		},
 		isModalSubmit: () => true,
 		reply: async value => {
@@ -1108,7 +1108,7 @@ test('modal routing publishes canonical post-update details and repeats authoriz
 	}, config);
 	const editedCreature = await getEntity(creatureKey);
 	assert.deepEqual(editedCreature.traits, [
-		{ name: 'Keen scent', description: 'Tracks across stone' },
+		'Keen scent — Tracks across stone',
 	]);
 	assert.equal(creatureSuccessResponse.flags, undefined);
 	assert.deepEqual(

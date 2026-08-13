@@ -138,10 +138,21 @@ armor or an armor reference, fixed RULE IDs and levels, status-effect references
 creature-modifier references, and equipment or inventory references. Gear
 references can be fixed, random, nested, or drawn from a weighted source.
 
+Intrinsic traits are zero or more ordinary inline-template strings. Literal text
+passes through unchanged; fixed, random, nested, and surrounding-text references
+use the same resolver and relationship rules as every other generator string. The
+public structured `traits` generator supplies reusable localized capability text,
+but creature details may also define specific literal traits. Generation resolves
+each template and stores only its localized final string, so persisted traits match
+the character-talent representation and never retain template expressions or
+embedded generator records. Trait selections do not add trait-specific records to
+the saved source provenance.
+
 Creature Intelligence does not allocate RULEs; only explicit `fixedRules` metadata
 does. Only natural-armor metadata or an explicit armor reference initializes AR.
 Status effects and modifiers remain descriptive, and generation never derives
-manual encumbrance.
+manual encumbrance. Trait rules text is likewise non-executable and never alters
+statistics, resources, armor, status, RULEs, or gear.
 
 The assembled creature stores its localized final state and stable source data:
 the router entry, detail generator and entry, statistical profile, and accumulated

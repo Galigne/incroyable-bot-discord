@@ -429,16 +429,18 @@ on submit:
 - Empty multiline content clears the field.
 - Talents are stored as `string[]`; each element combines the complete
   user-editable talent name and description.
+- Creature intrinsic traits are also stored as `string[]`; each element combines
+  the complete user-editable trait name and rules description.
 - RULEs use `Name:Level:Description`, one RULE per line. Name and description are
   required, the level is a positive whole number, and descriptions may contain
   additional colons.
 
 The models still store traits, talents, RULEs, status effects, descriptive
 modifiers, equipment, and inventory in arrays because generation and display logic
-depend on them. Character talents and status effects remain plain strings, while
-descriptive modifier records use localized names and descriptions for both entity
-types. “No list system” refers to the command UX, not removal of the internal
-schema.
+depend on them. Character talents, creature intrinsic traits, and character status
+effects remain plain strings, while descriptive modifier records use localized
+names and descriptions for both entity types. “No list system” refers to the command
+UX, not removal of the internal schema.
 
 ## Persistent entity types
 
@@ -607,6 +609,9 @@ The durable implementation constraints are:
 - Creature RULEs come only from explicit `fixedRules`; only natural-armor metadata
   or an explicit armor reference initializes AR; generation never derives manual
   encumbrance.
+- Creature-detail `traits` are zero to 25 non-empty inline-template strings. Resolve
+  them through the shared generator semantics during creation and persist only the
+  localized final strings; trait rules text never executes mechanics.
 - During `/reload`, use `reloadGenerationData()` to prepare generator and
   statistical-profile candidates together, validate creature/profile relationships,
   and replace both active caches only after validation succeeds. Normal startup

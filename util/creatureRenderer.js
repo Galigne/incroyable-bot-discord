@@ -52,7 +52,7 @@ function createCreatureSummaryEmbed(creature, locale = 'en') {
 	if (creature.traits.length > 0) {
 		rightSections.push({
 			label: label(locale, 'traits'),
-			value: formatDescribedRecords(creature.traits, 250, locale),
+			value: formatStringList(creature.traits, 250, locale),
 		});
 	}
 	const rightColumn = rightSections
@@ -159,11 +159,7 @@ function createCreatureFieldEmbed(creature, fieldName, locale = 'en') {
 	case 'rules':
 		return embed.setDescription(formatRules(creature.rules, 4_096, locale));
 	case 'traits':
-		return embed.setDescription(formatDescribedRecords(
-			creature.traits,
-			4_096,
-			locale,
-		));
+		return embed.setDescription(formatStringList(creature.traits, 4_096, locale));
 	case 'gear':
 		return embed.addFields(
 			{

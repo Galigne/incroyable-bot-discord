@@ -238,7 +238,7 @@ test('creature summaries match the concise character layout with intrinsic trait
 	creature.status.effects = [{ name: 'Inspired', description: 'Moves boldly.' }];
 	creature.status.modifiers = [{ name: 'Moonlit', description: 'Glows softly.' }];
 	creature.rules = [{ name: 'Fire', level: 2, description: 'Controls flames.' }];
-	creature.traits = [{ name: 'Night sight', description: 'Sees in darkness.' }];
+	creature.traits = ['Night sight — Sees in darkness.'];
 
 	const populatedSummary = createEntityGetResponse(creature, null, 'en')
 		.embeds[0].toJSON();
@@ -254,7 +254,7 @@ test('creature summaries match the concise character layout with intrinsic trait
 	assert.match(populatedSummary.fields[2].value, /1\. Fire \(Level 2\)/);
 	assert.match(
 		populatedSummary.fields[2].value,
-		/\*\*Intrinsic traits\*\*\n\*\*Night sight\*\*/,
+		/\*\*Intrinsic traits\*\*\n1\. Night sight — Sees in darkness\./,
 	);
 	assert.doesNotMatch(JSON.stringify(populatedSummary), /Equipment|Inventory|Gear/);
 

@@ -19,11 +19,9 @@
       "generation": {
         "statProfile": "creature-predator",
         "traits": [
-          {
-            "id": "grave_hound_nature",
-            "name": "Predatory Nature",
-            "description": "a corpse-pale pack hunter that follows the scent of fear and drags isolated prey underground."
-          }
+          "{{ traits:keen_smell }}",
+          "{{ traits:pack_tactics }}",
+          "{{ traits:burrower }}"
         ],
         "fixedRules": [],
         "statusEffects": [],
@@ -41,13 +39,7 @@
       },
       "generation": {
         "statProfile": "creature-brute",
-        "traits": [
-          {
-            "id": "mire_troll_nature",
-            "name": "Predatory Nature",
-            "description": "a regenerating swamp brute covered in reeds, leeches, and stolen fishing hooks."
-          }
-        ],
+        "traits": ["{{ traits:regeneration }}"],
         "fixedRules": [
           {
             "entry": "root_rule",
@@ -70,11 +62,9 @@
       "generation": {
         "statProfile": "creature-elemental",
         "traits": [
-          {
-            "id": "cinder_drake_nature",
-            "name": "Predatory Nature",
-            "description": "a dog-sized wingless dragon that spits burning resin and nests in chimneys."
-          }
+          "{{ traits:fire_immunity }}",
+          "{{ traits:natural_weapons }}",
+          "Burning Resin — A natural attack may ignite dry material; a creature hit by it takes 1 additional fire damage at the start of its next turn."
         ],
         "fixedRules": [
           {
@@ -103,13 +93,7 @@
       },
       "generation": {
         "statProfile": "creature-predator",
-        "traits": [
-          {
-            "id": "glass_spider_nature",
-            "name": "Predatory Nature",
-            "description": "a nearly invisible ambush predator whose brittle web cuts like wire."
-          }
-        ],
+        "traits": ["{{ traits:camouflage }}", "{{ traits:web_spinner }}"],
         "fixedRules": [
           {
             "entry": "glass_rule",
@@ -132,11 +116,7 @@
       "generation": {
         "statProfile": "creature-caster",
         "traits": [
-          {
-            "id": "bell_wraith_nature",
-            "name": "Predatory Nature",
-            "description": "an armored ghost that becomes solid whenever a nearby bell rings."
-          }
+          "Bellbound Form — Is incorporeal while no bell can be heard nearby and becomes solid until the end of its next turn when a bell rings."
         ],
         "fixedRules": [
           {
@@ -176,11 +156,8 @@
       "generation": {
         "statProfile": "creature-predator",
         "traits": [
-          {
-            "id": "lantern_maw_nature",
-            "name": "Predatory Nature",
-            "description": "a floating lure of warm light attached to a huge subterranean mouth."
-          }
+          "{{ traits:camouflage }}",
+          "False Beacon — +2 to Charisma actions made to lure a creature that mistakes its glow for a safe light."
         ],
         "fixedRules": [],
         "statusEffects": [],
@@ -199,11 +176,9 @@
       "generation": {
         "statProfile": "creature-brute",
         "traits": [
-          {
-            "id": "bone_orchard_nature",
-            "name": "Predatory Nature",
-            "description": "a rooted colony of skeletal arms that grabs creatures and plants their bones."
-          }
+          "{{ traits:poison_immunity }}",
+          "{{ traits:disease_immunity }}",
+          "Bone Grasp — A target hit by its grasp cannot move away until it succeeds on a Strength action to escape."
         ],
         "fixedRules": [],
         "statusEffects": [],
@@ -221,13 +196,7 @@
       },
       "generation": {
         "statProfile": "creature-caster",
-        "traits": [
-          {
-            "id": "frost_widow_nature",
-            "name": "Predatory Nature",
-            "description": "a white cavern beast that freezes moisture into decoy silhouettes."
-          }
-        ],
+        "traits": ["{{ traits:cold_immunity }}", "{{ traits:camouflage }}"],
         "fixedRules": [
           {
             "entry": "cold_rule",
@@ -256,11 +225,8 @@
       "generation": {
         "statProfile": "creature-predator",
         "traits": [
-          {
-            "id": "ink_leviathan_nature",
-            "name": "Predatory Nature",
-            "description": "a river monster that blinds boats with black mist before striking from below."
-          }
+          "{{ traits:aquatic_speed }}",
+          "Ink Cloud — Once per scene underwater, creates a 5-meter cloud that blinds other creatures until they leave it."
         ],
         "fixedRules": [],
         "statusEffects": [],
@@ -279,11 +245,7 @@
       "generation": {
         "statProfile": "creature-brute",
         "traits": [
-          {
-            "id": "rust_eater_nature",
-            "name": "Predatory Nature",
-            "description": "an armored insect that rapidly corrodes metal and swarms the best-equipped target."
-          }
+          "Corrosive Bite — Natural attacks against metal objects or armor deal +2 damage."
         ],
         "fixedRules": [],
         "statusEffects": [],
@@ -302,11 +264,7 @@
       "generation": {
         "statProfile": "creature-caster",
         "traits": [
-          {
-            "id": "dream_leech_nature",
-            "name": "Predatory Nature",
-            "description": "a translucent parasite that leaves sleeping victims awake but without memories."
-          }
+          "Memory Drain — After touching a helpless creature for one minute, erases its memory of the previous hour."
         ],
         "fixedRules": [],
         "statusEffects": [],
@@ -325,11 +283,8 @@
       "generation": {
         "statProfile": "creature-brute",
         "traits": [
-          {
-            "id": "thornback_horror_nature",
-            "name": "Predatory Nature",
-            "description": "a territorial plant-beast that launches barbed seeds into open wounds."
-          }
+          "{{ traits:natural_weapons }}",
+          "Barbed Seeds — Can make a ranged natural attack; a damaged target suffers -1 to Speed until the barb is removed."
         ],
         "fixedRules": [],
         "statusEffects": [],
@@ -348,11 +303,7 @@
       "generation": {
         "statProfile": "creature-caster",
         "traits": [
-          {
-            "id": "mirror_stalker_nature",
-            "name": "Predatory Nature",
-            "description": "a thin humanoid able to move only through reflections and polished surfaces."
-          }
+          "Mirror Passage — Can enter one reflection and emerge from another visible reflection within 10 meters."
         ],
         "fixedRules": [
           {
@@ -381,13 +332,7 @@
       },
       "generation": {
         "statProfile": "creature-elemental",
-        "traits": [
-          {
-            "id": "ash_giant_nature",
-            "name": "Predatory Nature",
-            "description": "a smoldering humanoid that collapses into choking ash when wounded, then reforms."
-          }
-        ],
+        "traits": ["{{ traits:fire_immunity }}", "{{ traits:regeneration }}"],
         "fixedRules": [],
         "statusEffects": [],
         "equipment": [
@@ -411,11 +356,8 @@
       "generation": {
         "statProfile": "creature-brute",
         "traits": [
-          {
-            "id": "moon_eyed_basilisk_nature",
-            "name": "Predatory Nature",
-            "description": "a six-legged reptile whose gaze petrifies only creatures standing in moonlight."
-          }
+          "{{ traits:natural_weapons }}",
+          "Moonlit Petrification — A creature meeting its gaze while standing in moonlight cannot move until the end of its next turn."
         ],
         "fixedRules": [
           {
@@ -439,11 +381,8 @@
       "generation": {
         "statProfile": "creature-predator",
         "traits": [
-          {
-            "id": "choir_worm_nature",
-            "name": "Predatory Nature",
-            "description": "a tunnel predator that imitates several familiar voices at once."
-          }
+          "{{ traits:burrower }}",
+          "Familiar Voices — +2 to Charisma actions made to lure or confuse someone by imitating voices it has heard."
         ],
         "fixedRules": [],
         "statusEffects": [],
@@ -462,11 +401,7 @@
       "generation": {
         "statProfile": "creature-caster",
         "traits": [
-          {
-            "id": "oath_devourer_nature",
-            "name": "Predatory Nature",
-            "description": "a faceless fiend strengthened whenever someone nearby breaks a promise."
-          }
+          "Broken-Oath Feast — Gains +1 to all actions until the end of its next turn whenever someone nearby knowingly breaks a promise."
         ],
         "fixedRules": [
           {
@@ -490,11 +425,9 @@
       "generation": {
         "statProfile": "creature-brute",
         "traits": [
-          {
-            "id": "storm_roc_nature",
-            "name": "Predatory Nature",
-            "description": "a colossal bird nesting inside thunderclouds and hunting anything carrying metal."
-          }
+          "{{ traits:flight }}",
+          "{{ traits:powerful_build }}",
+          "Stormborn — Takes no damage from ordinary lightning and can fly normally through strong wind."
         ],
         "fixedRules": [],
         "statusEffects": [],
@@ -513,11 +446,9 @@
       "generation": {
         "statProfile": "creature-brute",
         "traits": [
-          {
-            "id": "cathedral_mimic_nature",
-            "name": "Predatory Nature",
-            "description": "an ancient colony-creature disguised as an abandoned place of worship."
-          }
+          "{{ traits:camouflage }}",
+          "{{ traits:powerful_build }}",
+          "Living Structure — While motionless, mundane inspection cannot distinguish it from the building or monument it imitates."
         ],
         "fixedRules": [],
         "statusEffects": [],
@@ -536,11 +467,8 @@
       "generation": {
         "statProfile": "creature-caster",
         "traits": [
-          {
-            "id": "time_starved_hunter_nature",
-            "name": "Predatory Nature",
-            "description": "a flickering predator that steals seconds from its prey to move impossibly fast."
-          }
+          "{{ traits:swift_reflexes }}",
+          "Stolen Seconds — After dealing damage, may immediately move up to half its normal movement speed."
         ],
         "fixedRules": [],
         "statusEffects": [],
@@ -559,11 +487,9 @@
       "generation": {
         "statProfile": "creature-brute",
         "traits": [
-          {
-            "id": "crown_hydra_nature",
-            "name": "Predatory Nature",
-            "description": "each severed head regrows wearing the face and memories of its killer."
-          }
+          "{{ traits:regeneration }}",
+          "{{ traits:natural_weapons }}",
+          "Many-Headed — Cannot be surprised while at least two heads remain conscious."
         ],
         "fixedRules": [],
         "statusEffects": [],
@@ -582,11 +508,8 @@
       "generation": {
         "statProfile": "creature-caster",
         "traits": [
-          {
-            "id": "hollow_saint_nature",
-            "name": "Predatory Nature",
-            "description": "a radiant undead figure offering miraculous healing that slowly replaces the recipient's will."
-          }
+          "{{ traits:disease_immunity }}",
+          "False Miracle — Once per scene, restores 10% of a touched creature’s maximum HP; that creature suffers -1 to Intelligence actions until it next rests."
         ],
         "fixedRules": [],
         "statusEffects": [],
@@ -615,11 +538,8 @@
       "generation": {
         "statProfile": "creature-brute",
         "traits": [
-          {
-            "id": "abyssal_grazer_nature",
-            "name": "Predatory Nature",
-            "description": "an enormous peaceful-looking shape whose shadow aggressively consumes living creatures."
-          }
+          "{{ traits:powerful_build }}",
+          "Living Shadow — Its shadow can make natural attacks against a target up to 5 meters from its body."
         ],
         "fixedRules": [],
         "statusEffects": [],
@@ -638,11 +558,8 @@
       "generation": {
         "statProfile": "creature-elemental",
         "traits": [
-          {
-            "id": "red_comet_beast_nature",
-            "name": "Predatory Nature",
-            "description": "a crystalline predator that falls from the sky and multiplies when exposed to magic."
-          }
+          "{{ traits:stone_body }}",
+          "Magic Fission — The first time each scene it is affected by a spell, creates a fragile copy with 1 HP in an adjacent open space."
         ],
         "fixedRules": [],
         "modifiers": [
@@ -666,11 +583,9 @@
       "generation": {
         "statProfile": "creature-elemental",
         "traits": [
-          {
-            "id": "ash_phoenix_nature",
-            "name": "Intrinsic Nature",
-            "description": "A great incandescent bird reborn from a nearby hearth, carrying memories of those who fed the flame."
-          }
+          "{{ traits:flight }}",
+          "{{ traits:fire_immunity }}",
+          "{{ traits:regeneration }}"
         ],
         "fixedRules": [
           {
@@ -699,13 +614,7 @@
       },
       "generation": {
         "statProfile": "creature-brute",
-        "traits": [
-          {
-            "id": "juvenile_ogre_nature",
-            "name": "Intrinsic Nature",
-            "description": "A hungry young giant imitates absent adults and turns every game into real danger."
-          }
-        ],
+        "traits": ["{{ traits:powerful_build }}"],
         "fixedRules": [],
         "statusEffects": [],
         "equipment": [],
@@ -723,11 +632,7 @@
       "generation": {
         "statProfile": "creature-caster",
         "traits": [
-          {
-            "id": "hungry_changeling_nature",
-            "name": "Intrinsic Nature",
-            "description": "A creature copies a person’s appearance but poorly understands their habits and bonds."
-          }
+          "Imperfect Mimicry — Can copy a humanoid appearance, but gains -2 to Charisma actions involving that person’s habits or relationships."
         ],
         "fixedRules": [
           {
@@ -750,13 +655,7 @@
       },
       "generation": {
         "statProfile": "creature-caster",
-        "traits": [
-          {
-            "id": "imp_nature",
-            "name": "Intrinsic Nature",
-            "description": "A small demon offers trivial bargains whose wording hides disproportionate consequences."
-          }
-        ],
+        "traits": ["{{ traits:flight }}", "{{ traits }}"],
         "fixedRules": [],
         "statusEffects": [],
         "equipment": [],
@@ -774,11 +673,9 @@
       "generation": {
         "statProfile": "creature-brute",
         "traits": [
-          {
-            "id": "dissolving_ooze_nature",
-            "name": "Intrinsic Nature",
-            "description": "A slow mass digests organic matter and soft metal, leaving objects it cannot understand."
-          }
+          "{{ traits:poison_immunity }}",
+          "{{ traits:disease_immunity }}",
+          "Corrosive Body — Deals 2 damage per turn to ordinary organic matter or soft metal it completely covers."
         ],
         "fixedRules": [],
         "statusEffects": [],
@@ -797,11 +694,8 @@
       "generation": {
         "statProfile": "creature-brute",
         "traits": [
-          {
-            "id": "uprooted_treant_nature",
-            "name": "Intrinsic Nature",
-            "description": "A plant guardian walks far from its forest because its territory’s roots were poisoned."
-          }
+          "{{ traits:powerful_build }}",
+          "Rooted Stance — While touching natural ground, gains +2 to Strength actions made to resist forced movement."
         ],
         "fixedRules": [
           {
@@ -825,11 +719,8 @@
       "generation": {
         "statProfile": "creature-brute",
         "traits": [
-          {
-            "id": "stubborn_undead_nature",
-            "name": "Intrinsic Nature",
-            "description": "An animated corpse continues a daily task without realizing the world has changed."
-          }
+          "{{ traits:poison_immunity }}",
+          "{{ traits:disease_immunity }}"
         ],
         "fixedRules": [],
         "statusEffects": [],
@@ -848,11 +739,8 @@
       "generation": {
         "statProfile": "creature-brute",
         "traits": [
-          {
-            "id": "patrol_skeleton_nature",
-            "name": "Intrinsic Nature",
-            "description": "Armed bones repeat a military route and treat every breach of protocol as intrusion."
-          }
+          "{{ traits:poison_immunity }}",
+          "{{ traits:disease_immunity }}"
         ],
         "fixedRules": [],
         "statusEffects": [],
@@ -876,13 +764,7 @@
       },
       "generation": {
         "statProfile": "creature-predator",
-        "traits": [
-          {
-            "id": "mutant_animal_nature",
-            "name": "Intrinsic Nature",
-            "description": "An ordinary beast bears an impossible adaptation caused by magical or alchemical pollution."
-          }
-        ],
+        "traits": ["{{ traits }}"],
         "fixedRules": [],
         "statusEffects": [],
         "equipment": [],
@@ -900,11 +782,9 @@
       "generation": {
         "statProfile": "creature-brute",
         "traits": [
-          {
-            "id": "abandoned_golem_nature",
-            "name": "Intrinsic Nature",
-            "description": "An artificial servant follows an order made dangerous by the absence of a master able to change it."
-          }
+          "{{ traits:stone_body }}",
+          "{{ traits:poison_immunity }}",
+          "{{ traits:disease_immunity }}"
         ],
         "fixedRules": [],
         "statusEffects": [],
@@ -923,11 +803,8 @@
       "generation": {
         "statProfile": "creature-predator",
         "traits": [
-          {
-            "id": "imp_chicken_nature",
-            "name": "Intrinsic Nature",
-            "description": "A possessed fowl displays absurd aggression, supernatural leaps, and resilience far beyond its size."
-          }
+          "{{ traits:swift_reflexes }}",
+          "{{ traits:natural_weapons }}"
         ],
         "fixedRules": [],
         "statusEffects": [],
@@ -945,13 +822,7 @@
       },
       "generation": {
         "statProfile": "creature-brute",
-        "traits": [
-          {
-            "id": "giant_insect_nature",
-            "name": "Intrinsic Nature",
-            "description": "A colossal arthropod defends a nest built around a source of heat or magic."
-          }
-        ],
+        "traits": ["{{ traits:natural_weapons }}"],
         "fixedRules": [],
         "statusEffects": [],
         "equipment": [],
@@ -969,11 +840,9 @@
       "generation": {
         "statProfile": "creature-brute",
         "traits": [
-          {
-            "id": "animated_statue_nature",
-            "name": "Intrinsic Nature",
-            "description": "A sculpture leaves its plinth to correct anyone contradicting the official event it depicts."
-          }
+          "{{ traits:stone_body }}",
+          "{{ traits:poison_immunity }}",
+          "{{ traits:disease_immunity }}"
         ],
         "fixedRules": [],
         "statusEffects": [],
@@ -992,11 +861,7 @@
       "generation": {
         "statProfile": "creature-brute",
         "traits": [
-          {
-            "id": "voracious_slug_nature",
-            "name": "Intrinsic Nature",
-            "description": "A slow creature secretes a substance that dissolves walls, armor, or memories according to its diet."
-          }
+          "Corrosive Trail — Leaves a trail that deals 1 damage per turn to one material chosen by its current diet."
         ],
         "fixedRules": [],
         "statusEffects": [],
@@ -1014,13 +879,7 @@
       },
       "generation": {
         "statProfile": "creature-elemental",
-        "traits": [
-          {
-            "id": "fiery_salamander_nature",
-            "name": "Intrinsic Nature",
-            "description": "A supernatural reptile lives in fire and unintentionally spreads flames when frightened."
-          }
-        ],
+        "traits": ["{{ traits:fire_immunity }}"],
         "fixedRules": [
           {
             "entry": "candle_rule",
@@ -1049,11 +908,8 @@
       "generation": {
         "statProfile": "creature-predator",
         "traits": [
-          {
-            "id": "cliff_harpy_nature",
-            "name": "Intrinsic Nature",
-            "description": "A winged predator imitates familiar calls to lure travelers onto dangerous ground."
-          }
+          "{{ traits:flight }}",
+          "Familiar Voices — +2 to Charisma actions made to lure or confuse someone by imitating voices it has heard."
         ],
         "fixedRules": [],
         "statusEffects": [],
@@ -1072,11 +928,9 @@
       "generation": {
         "statProfile": "creature-caster",
         "traits": [
-          {
-            "id": "murky_water_siren_nature",
-            "name": "Intrinsic Nature",
-            "description": "An aquatic creature uses song and reflections to isolate a target from the group."
-          }
+          "{{ traits:amphibious }}",
+          "{{ traits:aquatic_speed }}",
+          "Luring Song — +2 to Charisma actions made to isolate a listener that can hear the creature."
         ],
         "fixedRules": [
           {
@@ -1100,11 +954,8 @@
       "generation": {
         "statProfile": "creature-brute",
         "traits": [
-          {
-            "id": "watcher_cyclops_nature",
-            "name": "Intrinsic Nature",
-            "description": "A solitary giant guards a passage whose destination is forgotten but whose prohibition remains."
-          }
+          "{{ traits:powerful_build }}",
+          "Keen Sight — +2 to Perception actions that rely on vision at long range."
         ],
         "fixedRules": [],
         "statusEffects": [],
@@ -1123,11 +974,9 @@
       "generation": {
         "statProfile": "creature-caster",
         "traits": [
-          {
-            "id": "hungry_vampire_nature",
-            "name": "Intrinsic Nature",
-            "description": "An immortal predator maintains a civil facade while scarcity makes control increasingly fragile."
-          }
+          "{{ traits:darkvision }}",
+          "{{ traits:regeneration }}",
+          "{{ traits:natural_weapons }}"
         ],
         "fixedRules": [
           {
@@ -1151,11 +1000,8 @@
       "generation": {
         "statProfile": "creature-caster",
         "traits": [
-          {
-            "id": "memory_parasite_nature",
-            "name": "Intrinsic Nature",
-            "description": "A small creature feeds on recent memories and leaves victims unable to explain their presence."
-          }
+          "{{ traits:camouflage }}",
+          "Memory Drain — After touching a helpless creature for one minute, erases its memory of the previous hour."
         ],
         "fixedRules": [
           {
@@ -1179,11 +1025,8 @@
       "generation": {
         "statProfile": "creature-caster",
         "traits": [
-          {
-            "id": "repetitive_ghost_nature",
-            "name": "Intrinsic Nature",
-            "description": "A spirit reenacts an incomplete scene and turns violent when witnesses change its course."
-          }
+          "{{ traits:incorporeal }}",
+          "Haunting Loop — Repeats one scene; witnesses who deliberately interrupt it suffer -1 to Intelligence actions until the spirit is appeased."
         ],
         "fixedRules": [],
         "modifiers": [
@@ -1208,11 +1051,8 @@
       "generation": {
         "statProfile": "creature-brute",
         "traits": [
-          {
-            "id": "unstable_chimera_nature",
-            "name": "Intrinsic Nature",
-            "description": "Several incompatible anatomies struggle to control one artificially created body."
-          }
+          "Composite Instinct — Its mismatched anatomy supports this additional capability: {{ traits }}",
+          "{{ traits }}"
         ],
         "fixedRules": [],
         "statusEffects": [],
@@ -1230,13 +1070,7 @@
       },
       "generation": {
         "statProfile": "creature-elemental",
-        "traits": [
-          {
-            "id": "unleashed_elemental_nature",
-            "name": "Intrinsic Nature",
-            "description": "An animated natural force restores balance without understanding the lives in its path."
-          }
-        ],
+        "traits": ["{{ traits }}"],
         "fixedRules": [],
         "statusEffects": [],
         "equipment": [],
@@ -1253,13 +1087,7 @@
       },
       "generation": {
         "statProfile": "creature-brute",
-        "traits": [
-          {
-            "id": "territorial_gargoyle_nature",
-            "name": "Intrinsic Nature",
-            "description": "A stone sentinel changes buildings nightly and treats each new position as sacred."
-          }
-        ],
+        "traits": ["{{ traits:stone_body }}", "{{ traits:flight }}"],
         "fixedRules": [],
         "statusEffects": [],
         "equipment": [],
@@ -1276,13 +1104,7 @@
       },
       "generation": {
         "statProfile": "creature-predator",
-        "traits": [
-          {
-            "id": "highland_griffin_nature",
-            "name": "Intrinsic Nature",
-            "description": "A majestic predator protects its aerie and shiny objects mistaken for eggs."
-          }
-        ],
+        "traits": ["{{ traits:flight }}", "{{ traits:natural_weapons }}"],
         "fixedRules": [],
         "statusEffects": [],
         "equipment": [],
@@ -1300,11 +1122,7 @@
       "generation": {
         "statProfile": "creature-caster",
         "traits": [
-          {
-            "id": "reclusive_gorgon_nature",
-            "name": "Intrinsic Nature",
-            "description": "A cursed creature petrifies from fear more than cruelty and collects statues of visitors."
-          }
+          "Petrifying Gaze — Once per scene, a visible target that meets its gaze cannot move until the end of its next turn."
         ],
         "fixedRules": [
           {
@@ -1328,11 +1146,9 @@
       "generation": {
         "statProfile": "creature-predator",
         "traits": [
-          {
-            "id": "hunted_werewolf_nature",
-            "name": "Intrinsic Nature",
-            "description": "A transformed person leads hunters away from loved ones before losing control."
-          }
+          "{{ traits:keen_smell }}",
+          "{{ traits:natural_weapons }}",
+          "{{ traits:regeneration }}"
         ],
         "fixedRules": [],
         "statusEffects": [],
@@ -1351,11 +1167,8 @@
       "generation": {
         "statProfile": "creature-brute",
         "traits": [
-          {
-            "id": "guardian_mummy_nature",
-            "name": "Intrinsic Nature",
-            "description": "An ancient dignitary preserves a place, oath, or error that descendants would rather forget."
-          }
+          "{{ traits:poison_immunity }}",
+          "{{ traits:disease_immunity }}"
         ],
         "fixedRules": [],
         "statusEffects": [],
@@ -1374,11 +1187,8 @@
       "generation": {
         "statProfile": "creature-brute",
         "traits": [
-          {
-            "id": "architect_minotaur_nature",
-            "name": "Intrinsic Nature",
-            "description": "A creature endlessly alters its labyrinth and considers every lost traveler a willing intruder."
-          }
+          "{{ traits:powerful_build }}",
+          "Maze Sense — Always knows the shortest traversable route back to any place it visited within the last day."
         ],
         "fixedRules": [],
         "statusEffects": [],
@@ -1396,13 +1206,7 @@
       },
       "generation": {
         "statProfile": "creature-brute",
-        "traits": [
-          {
-            "id": "giant_burrowing_worm_nature",
-            "name": "Intrinsic Nature",
-            "description": "A subterranean predator follows vibration and heat, causing collapses and displaced ground."
-          }
-        ],
+        "traits": ["{{ traits:burrower }}", "{{ traits:powerful_build }}"],
         "fixedRules": [],
         "statusEffects": [],
         "equipment": [],
@@ -1420,11 +1224,8 @@
       "generation": {
         "statProfile": "creature-brute",
         "traits": [
-          {
-            "id": "carnivorous_plant_nature",
-            "name": "Intrinsic Nature",
-            "description": "A plant colony imitates scents, voices, and shapes to attract prey."
-          }
+          "{{ traits:camouflage }}",
+          "Alluring Mimicry — +2 to Charisma actions made to lure prey by imitating familiar scents, sounds, or shapes."
         ],
         "fixedRules": [],
         "statusEffects": [],
@@ -1443,11 +1244,9 @@
       "generation": {
         "statProfile": "creature-caster",
         "traits": [
-          {
-            "id": "ancient_dragon_nature",
-            "name": "Intrinsic Nature",
-            "description": "An immensely powerful creature guards a region-shaping secret more than material treasure."
-          }
+          "{{ traits:flight }}",
+          "{{ traits:powerful_build }}",
+          "{{ traits:natural_weapons }}"
         ],
         "fixedRules": [],
         "statusEffects": [],
@@ -1466,11 +1265,9 @@
       "generation": {
         "statProfile": "creature-brute",
         "traits": [
-          {
-            "id": "shoal_kraken_nature",
-            "name": "Intrinsic Nature",
-            "description": "A sea monster blocks a trade route and builds a nest from wrecks."
-          }
+          "{{ traits:amphibious }}",
+          "{{ traits:aquatic_speed }}",
+          "{{ traits:powerful_build }}"
         ],
         "fixedRules": [],
         "statusEffects": [],
@@ -1488,13 +1285,7 @@
       },
       "generation": {
         "statProfile": "creature-brute",
-        "traits": [
-          {
-            "id": "migrating_behemoth_nature",
-            "name": "Intrinsic Nature",
-            "description": "A gigantic creature periodically crosses communities built on its ancient route."
-          }
-        ],
+        "traits": ["{{ traits:powerful_build }}"],
         "fixedRules": [],
         "statusEffects": [],
         "equipment": [],
@@ -1512,11 +1303,8 @@
       "generation": {
         "statProfile": "creature-caster",
         "traits": [
-          {
-            "id": "vengeful_spirit_nature",
-            "name": "Intrinsic Nature",
-            "description": "An entity bound to a specific injustice strikes the culprit’s symbols rather than true heirs."
-          }
+          "{{ traits:incorporeal }}",
+          "Symbol-Bound — Can sense and move directly toward any visible symbol of the injustice that binds it."
         ],
         "fixedRules": [
           {
@@ -1546,11 +1334,8 @@
       "generation": {
         "statProfile": "creature-caster",
         "traits": [
-          {
-            "id": "insect_queen_nature",
-            "name": "Intrinsic Nature",
-            "description": "An intelligent creature coordinates a colony and negotiates as if every individual were part of its body."
-          }
+          "{{ traits:pack_tactics }}",
+          "Hive Mind — Can perceive through any allied insect within 100 meters and cannot be flanked by creatures they detect."
         ],
         "fixedRules": [],
         "statusEffects": [],

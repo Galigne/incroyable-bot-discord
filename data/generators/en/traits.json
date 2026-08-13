@@ -1,0 +1,188 @@
+{
+  "schemaVersion": 3,
+  "id": "traits",
+  "visibility": "public",
+  "name": "Traits",
+  "description": "Concrete intrinsic creature capabilities and bonuses",
+  "entrySchema": {
+    "type": "fields",
+    "required": ["name", "description"]
+  },
+  "entries": [
+    {
+      "id": "amphibious",
+      "fields": {
+        "name": "Amphibious",
+        "description": "Can breathe and act normally both underwater and on land."
+      }
+    },
+    {
+      "id": "keen_smell",
+      "fields": {
+        "name": "Keen Smell",
+        "description": "+2 to Perception actions when detecting or tracking by scent."
+      }
+    },
+    {
+      "id": "keen_hearing",
+      "fields": {
+        "name": "Keen Hearing",
+        "description": "+2 to Perception actions that rely on hearing."
+      }
+    },
+    {
+      "id": "darkvision",
+      "fields": {
+        "name": "Darkvision",
+        "description": "Cannot be blinded by ordinary darkness."
+      }
+    },
+    {
+      "id": "echolocation",
+      "fields": {
+        "name": "Echolocation",
+        "description": "Can perceive nearby creatures and obstacles without sight while able to emit and hear sound."
+      }
+    },
+    {
+      "id": "sure_footed",
+      "fields": {
+        "name": "Sure-Footed",
+        "description": "+2 to Dexterity actions made to climb or keep balance on difficult ground."
+      }
+    },
+    {
+      "id": "powerful_build",
+      "fields": {
+        "name": "Powerful Build",
+        "description": "+1 to Strength actions involving pushing, lifting, or breaking objects."
+      }
+    },
+    {
+      "id": "swift_reflexes",
+      "fields": {
+        "name": "Swift Reflexes",
+        "description": "+1 to Reflexes against threats the creature can perceive."
+      }
+    },
+    {
+      "id": "flight",
+      "fields": {
+        "name": "Flight",
+        "description": "Can fly at its normal movement speed while its wings are free."
+      }
+    },
+    {
+      "id": "gliding",
+      "fields": {
+        "name": "Gliding",
+        "description": "Ignores damage from the first 10 meters of a fall and may move 2 meters horizontally per meter descended."
+      }
+    },
+    {
+      "id": "burrower",
+      "fields": {
+        "name": "Burrower",
+        "description": "Can move through loose earth at half its normal movement speed and leaves a traversable tunnel."
+      }
+    },
+    {
+      "id": "aquatic_speed",
+      "fields": {
+        "name": "Aquatic Speed",
+        "description": "Moves through water at its normal movement speed and gains +1 to Dexterity actions made to swim."
+      }
+    },
+    {
+      "id": "regeneration",
+      "fields": {
+        "name": "Regeneration",
+        "description": "At the start of its turn, recovers 5% of maximum HP if it has at least 1 HP; fire damage prevents this recovery for that turn."
+      }
+    },
+    {
+      "id": "fire_immunity",
+      "fields": {
+        "name": "Fire Immunity",
+        "description": "Takes no damage and suffers no harmful effects from ordinary fire or heat."
+      }
+    },
+    {
+      "id": "cold_immunity",
+      "fields": {
+        "name": "Cold Immunity",
+        "description": "Takes no damage and suffers no harmful effects from ordinary cold or ice."
+      }
+    },
+    {
+      "id": "poison_immunity",
+      "fields": {
+        "name": "Poison Immunity",
+        "description": "Cannot be poisoned and takes no damage from mundane toxins."
+      }
+    },
+    {
+      "id": "disease_immunity",
+      "fields": {
+        "name": "Disease Immunity",
+        "description": "Cannot contract or transmit ordinary diseases."
+      }
+    },
+    {
+      "id": "incorporeal",
+      "fields": {
+        "name": "Incorporeal",
+        "description": "Can pass through nonmagical creatures and solid objects at half speed but must end movement in an open space."
+      }
+    },
+    {
+      "id": "camouflage",
+      "fields": {
+        "name": "Natural Camouflage",
+        "description": "+2 to Dexterity actions made to hide in the creature's native environment."
+      }
+    },
+    {
+      "id": "pack_tactics",
+      "fields": {
+        "name": "Pack Tactics",
+        "description": "+1 to attack actions against a target adjacent to one of the creature's allies."
+      }
+    },
+    {
+      "id": "natural_weapons",
+      "fields": {
+        "name": "Natural Weapons",
+        "description": "+1 damage with unarmed attacks made using claws, fangs, horns, or another natural weapon."
+      }
+    },
+    {
+      "id": "venomous",
+      "fields": {
+        "name": "Venomous",
+        "description": "After a natural attack deals damage, the target loses 1 AP unless it resists the poison."
+      }
+    },
+    {
+      "id": "web_spinner",
+      "fields": {
+        "name": "Web Spinner",
+        "description": "Can create strong restraining webs and gains +2 to Dexterity actions made to move across them."
+      }
+    },
+    {
+      "id": "stone_body",
+      "fields": {
+        "name": "Stone Body",
+        "description": "Does not need to breathe and gains +2 to Constitution actions made to resist impacts."
+      }
+    },
+    {
+      "id": "magic_sense",
+      "fields": {
+        "name": "Magic Sense",
+        "description": "+2 to Perception actions made to detect active spells or enchanted objects nearby."
+      }
+    }
+  ]
+}

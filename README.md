@@ -143,13 +143,13 @@ Statistics use one prefilled `statName: statValue` line for each of
 order but must each appear exactly once; the complete group is validated before
 any statistic changes.
 
-Personality traits, talents, equipment, and inventory use one
-entry per line. Optional leading `- ` or `* ` markers are normalized away, empty
-lines are ignored, and an empty submission clears the complete collection. Talent
-names and descriptions remain combined in each list entry. RULEs use
-`Name:Level:Description`, one per line. Each value is required, the level must be a
-positive whole number, and only the first two colons are separators, so descriptions
-may contain additional colons.
+Personality traits, talents, creature intrinsic traits, equipment, and inventory
+use one entry per line. Optional leading `- ` or `* ` markers are normalized away,
+empty lines are ignored, and an empty submission clears the complete collection.
+Talent and creature-trait names and descriptions remain combined in each list
+entry. RULEs use `Name:Level:Description`, one per line. Each value is required, the
+level must be a positive whole number, and only the first two colons are separators,
+so descriptions may contain additional colons.
 
 Status Effects and Modifiers each use one `Name:Description` record per line and
 can be cleared independently. Status Effects describe temporary conditions;
@@ -265,7 +265,12 @@ distributions. Only explicit source references grant creature RULEs; Intelligenc
 and descriptive modifiers never do. Natural armor or technical armor metadata may
 initialize AR, status effects and modifiers remain descriptive, and generated gear
 does not alter manual encumbrance. Persistent creature modifiers come only from the
-internal `modifier_creature` pool. The complete localized result and stable
+internal `modifier_creature` pool. Creature detail sources declare intrinsic traits
+as string templates: literal text is preserved, while ordinary `{{ ... }}` generator
+references resolve during generation. The public `traits` generator provides shared
+talent-like capabilities for both direct `/gen` use and creature templates. Only the
+localized final strings are saved; trait text never changes statistics or resources.
+The complete localized result and stable
 provenance are saved once and never regenerated during later loading or display.
 
 AP follows `0 ≤ current ≤ max ≤ 10` and uses 🌟 for available points and ⭐ for

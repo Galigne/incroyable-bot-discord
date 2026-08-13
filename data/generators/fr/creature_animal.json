@@ -18,13 +18,7 @@
       },
       "generation": {
         "statProfile": "creature-predator",
-        "traits": [
-          {
-            "id": "mossback_deer_nature",
-            "name": "Adaptation naturelle",
-            "description": "paisible herbivore forestier dont les bois abritent fleurs, insectes et herbes médicinales."
-          }
-        ],
+        "traits": [],
         "fixedRules": [],
         "statusEffects": [],
         "equipment": [],
@@ -42,11 +36,7 @@
       "generation": {
         "statProfile": "creature-predator",
         "traits": [
-          {
-            "id": "lantern_finch_nature",
-            "name": "Adaptation naturelle",
-            "description": "minuscule oiseau aux plumes lumineuses qui se rassemble près des campements sûrs."
-          }
+          "Plumage lumineux — Émet une douce lumière dans un rayon de 5 mètres et peut l’éteindre ou la raviver à volonté."
         ],
         "fixedRules": [],
         "statusEffects": [],
@@ -64,13 +54,7 @@
       },
       "generation": {
         "statProfile": "creature-predator",
-        "traits": [
-          {
-            "id": "river_otter_nature",
-            "name": "Adaptation naturelle",
-            "description": "nageuse joueuse et rusée qui échange des pierres polies contre de la nourriture."
-          }
-        ],
+        "traits": ["{{ traits:amphibious }}", "{{ traits:aquatic_speed }}"],
         "fixedRules": [],
         "statusEffects": [],
         "equipment": [],
@@ -87,13 +71,7 @@
       },
       "generation": {
         "statProfile": "creature-predator",
-        "traits": [
-          {
-            "id": "cloud_sheep_nature",
-            "name": "Adaptation naturelle",
-            "description": "animal laineux des montagnes, assez léger pour survivre à de longues chutes."
-          }
-        ],
+        "traits": ["{{ traits:gliding }}"],
         "fixedRules": [],
         "statusEffects": [],
         "equipment": [],
@@ -110,13 +88,7 @@
       },
       "generation": {
         "statProfile": "creature-predator",
-        "traits": [
-          {
-            "id": "copper_fox_nature",
-            "name": "Adaptation naturelle",
-            "description": "renard roux curieux, attiré par les pièces, les clés et les mélodies paisibles."
-          }
-        ],
+        "traits": [],
         "fixedRules": [],
         "statusEffects": [],
         "equipment": [],
@@ -133,13 +105,7 @@
       },
       "generation": {
         "statProfile": "creature-predator",
-        "traits": [
-          {
-            "id": "burrow_pig_nature",
-            "name": "Adaptation naturelle",
-            "description": "robuste chercheur de nourriture capable de dénicher racines, truffes et objets enterrés à faible profondeur."
-          }
-        ],
+        "traits": ["{{ traits:keen_smell }}", "{{ traits:burrower }}"],
         "fixedRules": [],
         "statusEffects": [],
         "equipment": [],
@@ -156,13 +122,7 @@
       },
       "generation": {
         "statProfile": "creature-predator",
-        "traits": [
-          {
-            "id": "long_eared_hare_nature",
-            "name": "Adaptation naturelle",
-            "description": "animal vigilant des prairies qui frappe le sol avant une tempête ou à l’approche d’un danger."
-          }
-        ],
+        "traits": ["{{ traits:keen_hearing }}", "{{ traits:swift_reflexes }}"],
         "fixedRules": [],
         "statusEffects": [],
         "equipment": [],
@@ -179,13 +139,7 @@
       },
       "generation": {
         "statProfile": "creature-predator",
-        "traits": [
-          {
-            "id": "bluehorn_goat_nature",
-            "name": "Adaptation naturelle",
-            "description": "herbivore au pied sûr qui vit sur les falaises et possède des cornes bleues riches en minéraux."
-          }
-        ],
+        "traits": ["{{ traits:sure_footed }}", "{{ traits:natural_weapons }}"],
         "fixedRules": [],
         "statusEffects": [],
         "equipment": [],
@@ -202,13 +156,7 @@
       },
       "generation": {
         "statProfile": "creature-predator",
-        "traits": [
-          {
-            "id": "reed_crane_nature",
-            "name": "Adaptation naturelle",
-            "description": "patient oiseau des marais qui guide souvent les voyageurs à travers les eaux sans danger."
-          }
-        ],
+        "traits": ["{{ traits:flight }}"],
         "fixedRules": [],
         "statusEffects": [],
         "equipment": [],
@@ -225,13 +173,7 @@
       },
       "generation": {
         "statProfile": "creature-brute",
-        "traits": [
-          {
-            "id": "honey_bear_nature",
-            "name": "Adaptation naturelle",
-            "description": "petit ours docile à la fourrure dorée, doté d’une excellente mémoire pour les gestes de bonté."
-          }
-        ],
+        "traits": ["{{ traits:keen_smell }}"],
         "fixedRules": [],
         "statusEffects": [],
         "equipment": [],
@@ -248,13 +190,7 @@
       },
       "generation": {
         "statProfile": "creature-predator",
-        "traits": [
-          {
-            "id": "sailback_turtle_nature",
-            "name": "Adaptation naturelle",
-            "description": "large tortue de rivière dont la carapace prend le vent lorsqu’elle nage."
-          }
-        ],
+        "traits": ["{{ traits:amphibious }}", "{{ traits:aquatic_speed }}"],
         "fixedRules": [],
         "statusEffects": [],
         "equipment": [],
@@ -271,13 +207,7 @@
       },
       "generation": {
         "statProfile": "creature-predator",
-        "traits": [
-          {
-            "id": "ember_newt_nature",
-            "name": "Adaptation naturelle",
-            "description": "amphibien au corps chaud que l’on trouve souvent endormi près des fours."
-          }
-        ],
+        "traits": ["{{ traits:amphibious }}", "{{ traits:fire_immunity }}"],
         "fixedRules": [],
         "statusEffects": [],
         "equipment": [],
@@ -294,13 +224,7 @@
       },
       "generation": {
         "statProfile": "creature-predator",
-        "traits": [
-          {
-            "id": "silk_alpaca_nature",
-            "name": "Adaptation naturelle",
-            "description": "paisible animal de troupeau produisant une fibre exceptionnellement douce et résistante."
-          }
-        ],
+        "traits": [],
         "fixedRules": [],
         "statusEffects": [],
         "equipment": [],
@@ -318,11 +242,8 @@
       "generation": {
         "statProfile": "creature-predator",
         "traits": [
-          {
-            "id": "rain_frog_nature",
-            "name": "Adaptation naturelle",
-            "description": "grenouille aux couleurs vives dont le chant annonce avec fiabilité la pluie plusieurs heures à l’avance."
-          }
+          "{{ traits:amphibious }}",
+          "Sens du climat — +2 aux actions de Perception pour prévoir la pluie ou un temps violent au cours des six prochaines heures."
         ],
         "fixedRules": [],
         "statusEffects": [],
@@ -340,13 +261,7 @@
       },
       "generation": {
         "statProfile": "creature-predator",
-        "traits": [
-          {
-            "id": "moon_moth_nature",
-            "name": "Adaptation naturelle",
-            "description": "papillon argenté grand comme une main qui se nourrit de résidus magiques sans altérer les sorts."
-          }
-        ],
+        "traits": ["{{ traits:flight }}", "{{ traits:magic_sense }}"],
         "fixedRules": [],
         "statusEffects": [],
         "equipment": [],
@@ -363,13 +278,7 @@
       },
       "generation": {
         "statProfile": "creature-predator",
-        "traits": [
-          {
-            "id": "pebble_crab_nature",
-            "name": "Adaptation naturelle",
-            "description": "crabe côtier inoffensif qui décore sa carapace de pierres colorées."
-          }
-        ],
+        "traits": [],
         "fixedRules": [],
         "statusEffects": [],
         "equipment": [],
@@ -387,11 +296,8 @@
       "generation": {
         "statProfile": "creature-predator",
         "traits": [
-          {
-            "id": "whistle_marmot_nature",
-            "name": "Adaptation naturelle",
-            "description": "rongeur alpin sociable dont les cris d’alerte varient selon le type de menace."
-          }
+          "{{ traits:keen_hearing }}",
+          "Cri d’alarme — Les alliés capables de l’entendre gagnent +1 en Initiative contre une menace détectée par la créature."
         ],
         "fixedRules": [],
         "statusEffects": [],
@@ -410,11 +316,7 @@
       "generation": {
         "statProfile": "creature-predator",
         "traits": [
-          {
-            "id": "orchard_drake_nature",
-            "name": "Adaptation naturelle",
-            "description": "lézard incapable de voler qui dévore les nuisibles et réchauffe les arbres fruitiers pendant les gelées."
-          }
+          "Sang de foyer — Peut réchauffer une petite créature ou un objet par contact et allumer de l’amadou sec après une minute sans interruption."
         ],
         "fixedRules": [],
         "statusEffects": [],
@@ -432,13 +334,7 @@
       },
       "generation": {
         "statProfile": "creature-predator",
-        "traits": [
-          {
-            "id": "mist_dolphin_nature",
-            "name": "Adaptation naturelle",
-            "description": "dauphin pâle des côtes qui éloigne les navires perdus des récifs."
-          }
-        ],
+        "traits": ["{{ traits:aquatic_speed }}", "{{ traits:echolocation }}"],
         "fixedRules": [],
         "statusEffects": [],
         "equipment": [],
@@ -455,13 +351,7 @@
       },
       "generation": {
         "statProfile": "creature-brute",
-        "traits": [
-          {
-            "id": "star_elk_nature",
-            "name": "Adaptation naturelle",
-            "description": "cervidé nocturne rare dont le pelage reproduit le ciel de la nuit présente."
-          }
-        ],
+        "traits": ["{{ traits:darkvision }}", "{{ traits:camouflage }}"],
         "fixedRules": [],
         "statusEffects": [],
         "equipment": [],
@@ -479,11 +369,8 @@
       "generation": {
         "statProfile": "creature-predator",
         "traits": [
-          {
-            "id": "memory_crow_nature",
-            "name": "Adaptation naturelle",
-            "description": "oiseau noir amical capable de répéter une phrase entendue des années auparavant."
-          }
+          "{{ traits:flight }}",
+          "Imitation parfaite — Peut reproduire toute phrase courte ou voix familière qu’elle a clairement entendue."
         ],
         "fixedRules": [],
         "statusEffects": [],
@@ -501,13 +388,7 @@
       },
       "generation": {
         "statProfile": "creature-brute",
-        "traits": [
-          {
-            "id": "glimmer_whale_nature",
-            "name": "Adaptation naturelle",
-            "description": "paisible géante des profondeurs dont le chant fait luire le plancton."
-          }
-        ],
+        "traits": ["{{ traits:aquatic_speed }}", "{{ traits:echolocation }}"],
         "fixedRules": [],
         "statusEffects": [],
         "equipment": [],
@@ -524,11 +405,7 @@
       "generation": {
         "statProfile": "creature-predator",
         "traits": [
-          {
-            "id": "solar_lizard_nature",
-            "name": "Nature intrinsèque",
-            "description": "Un reptile placide qui stocke la chaleur dans ses écailles et"
-          }
+          "Réserve solaire — Après une heure en plein soleil, ignore le prochain effet néfaste causé par un froid ordinaire."
         ],
         "fixedRules": [],
         "statusEffects": [],
@@ -546,13 +423,7 @@
       },
       "generation": {
         "statProfile": "creature-predator",
-        "traits": [
-          {
-            "id": "reed_snake_nature",
-            "name": "Nature intrinsèque",
-            "description": "Un serpent aquatique discret dont la morsure est"
-          }
-        ],
+        "traits": ["{{ traits:amphibious }}", "{{ traits:venomous }}"],
         "fixedRules": [],
         "statusEffects": [],
         "equipment": [],
@@ -569,13 +440,7 @@
       },
       "generation": {
         "statProfile": "creature-predator",
-        "traits": [
-          {
-            "id": "scavenger_rat_nature",
-            "name": "Nature intrinsèque",
-            "description": "Un rongeur curieux qui emporte petits outils, boutons et"
-          }
-        ],
+        "traits": [],
         "fixedRules": [],
         "statusEffects": [],
         "equipment": [],
@@ -592,13 +457,7 @@
       },
       "generation": {
         "statProfile": "creature-predator",
-        "traits": [
-          {
-            "id": "weaver_spider_nature",
-            "name": "Nature intrinsèque",
-            "description": "Une grosse araignée non agressive dont la toile solide est"
-          }
-        ],
+        "traits": ["{{ traits:web_spinner }}"],
         "fixedRules": [],
         "statusEffects": [],
         "equipment": [],
@@ -615,13 +474,7 @@
       },
       "generation": {
         "statProfile": "creature-predator",
-        "traits": [
-          {
-            "id": "hill_wolf_nature",
-            "name": "Nature intrinsèque",
-            "description": "Un prédateur social prudent qui observe longtemps un"
-          }
-        ],
+        "traits": ["{{ traits:keen_smell }}", "{{ traits:pack_tactics }}"],
         "fixedRules": [],
         "statusEffects": [],
         "equipment": [],
@@ -638,13 +491,7 @@
       },
       "generation": {
         "statProfile": "creature-brute",
-        "traits": [
-          {
-            "id": "armored_crab_nature",
-            "name": "Nature intrinsèque",
-            "description": "Un crustacé de grande taille utilisant débris et coquillages"
-          }
-        ],
+        "traits": ["{{ traits:amphibious }}"],
         "fixedRules": [],
         "statusEffects": [],
         "equipment": [],
@@ -661,13 +508,7 @@
       },
       "generation": {
         "statProfile": "creature-brute",
-        "traits": [
-          {
-            "id": "burrowing_armadillo_nature",
-            "name": "Nature intrinsèque",
-            "description": "Un animal robuste capable de localiser eau, racines et"
-          }
-        ],
+        "traits": ["{{ traits:burrower }}"],
         "fixedRules": [],
         "statusEffects": [],
         "equipment": [],
@@ -685,11 +526,7 @@
       "generation": {
         "statProfile": "creature-predator",
         "traits": [
-          {
-            "id": "thieving_monkey_nature",
-            "name": "Nature intrinsèque",
-            "description": "Un animal intelligent qui échange volontiers les objets"
-          }
+          "Mains agiles — +2 aux actions de Dextérité pour saisir, dérober ou manipuler de petits objets."
         ],
         "fixedRules": [],
         "statusEffects": [],
@@ -707,13 +544,7 @@
       },
       "generation": {
         "statProfile": "creature-predator",
-        "traits": [
-          {
-            "id": "cave_bat_nature",
-            "name": "Nature intrinsèque",
-            "description": "Un petit animal nocturne dont les mouvements"
-          }
-        ],
+        "traits": ["{{ traits:flight }}", "{{ traits:echolocation }}"],
         "fixedRules": [],
         "statusEffects": [],
         "equipment": [],

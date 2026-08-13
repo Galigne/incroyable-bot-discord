@@ -1,0 +1,188 @@
+{
+  "schemaVersion": 3,
+  "id": "traits",
+  "visibility": "public",
+  "name": "Dons intrinsèques",
+  "description": "Capacités et bonus intrinsèques concrets pour les créatures",
+  "entrySchema": {
+    "type": "fields",
+    "required": ["name", "description"]
+  },
+  "entries": [
+    {
+      "id": "amphibious",
+      "fields": {
+        "name": "Amphibie",
+        "description": "Peut respirer et agir normalement sous l’eau comme sur terre."
+      }
+    },
+    {
+      "id": "keen_smell",
+      "fields": {
+        "name": "Odorat aiguisé",
+        "description": "+2 aux actions de Perception pour détecter ou pister grâce à l’odorat."
+      }
+    },
+    {
+      "id": "keen_hearing",
+      "fields": {
+        "name": "Ouïe fine",
+        "description": "+2 aux actions de Perception reposant sur l’ouïe."
+      }
+    },
+    {
+      "id": "darkvision",
+      "fields": {
+        "name": "Vision nocturne",
+        "description": "Ne peut pas être aveuglée par les ténèbres ordinaires."
+      }
+    },
+    {
+      "id": "echolocation",
+      "fields": {
+        "name": "Écholocalisation",
+        "description": "Peut percevoir les créatures et obstacles proches sans la vue tant qu’elle peut émettre et entendre des sons."
+      }
+    },
+    {
+      "id": "sure_footed",
+      "fields": {
+        "name": "Pied sûr",
+        "description": "+2 aux actions de Dextérité pour grimper ou garder l’équilibre sur un terrain difficile."
+      }
+    },
+    {
+      "id": "powerful_build",
+      "fields": {
+        "name": "Carrure puissante",
+        "description": "+1 aux actions de Force pour pousser, soulever ou briser des objets."
+      }
+    },
+    {
+      "id": "swift_reflexes",
+      "fields": {
+        "name": "Réflexes fulgurants",
+        "description": "+1 en Réflexes contre les menaces que la créature peut percevoir."
+      }
+    },
+    {
+      "id": "flight",
+      "fields": {
+        "name": "Vol",
+        "description": "Peut voler à sa vitesse de déplacement normale tant que ses ailes sont libres."
+      }
+    },
+    {
+      "id": "gliding",
+      "fields": {
+        "name": "Vol plané",
+        "description": "Ignore les dégâts des 10 premiers mètres d’une chute et peut parcourir 2 mètres horizontalement par mètre de descente."
+      }
+    },
+    {
+      "id": "burrower",
+      "fields": {
+        "name": "Fouisseur",
+        "description": "Peut traverser la terre meuble à la moitié de sa vitesse de déplacement normale en laissant un tunnel praticable."
+      }
+    },
+    {
+      "id": "aquatic_speed",
+      "fields": {
+        "name": "Nageur-né",
+        "description": "Se déplace dans l’eau à sa vitesse normale et gagne +1 aux actions de Dextérité pour nager."
+      }
+    },
+    {
+      "id": "regeneration",
+      "fields": {
+        "name": "Régénération",
+        "description": "Au début de son tour, récupère 5 % de ses PV maximums s’il lui reste au moins 1 PV ; des dégâts de feu empêchent cette récupération pour ce tour."
+      }
+    },
+    {
+      "id": "fire_immunity",
+      "fields": {
+        "name": "Immunité au feu",
+        "description": "Ne subit ni dégâts ni effets néfastes dus au feu ou à la chaleur ordinaires."
+      }
+    },
+    {
+      "id": "cold_immunity",
+      "fields": {
+        "name": "Immunité au froid",
+        "description": "Ne subit ni dégâts ni effets néfastes dus au froid ou à la glace ordinaires."
+      }
+    },
+    {
+      "id": "poison_immunity",
+      "fields": {
+        "name": "Immunité au poison",
+        "description": "Ne peut pas être empoisonnée et ne subit aucun dégât des toxines ordinaires."
+      }
+    },
+    {
+      "id": "disease_immunity",
+      "fields": {
+        "name": "Immunité aux maladies",
+        "description": "Ne peut ni contracter ni transmettre de maladie ordinaire."
+      }
+    },
+    {
+      "id": "incorporeal",
+      "fields": {
+        "name": "Incorporel",
+        "description": "Peut traverser les créatures et objets solides non magiques à la moitié de sa vitesse, mais doit terminer son déplacement dans un espace libre."
+      }
+    },
+    {
+      "id": "camouflage",
+      "fields": {
+        "name": "Camouflage naturel",
+        "description": "+2 aux actions de Dextérité pour se cacher dans l’environnement naturel de la créature."
+      }
+    },
+    {
+      "id": "pack_tactics",
+      "fields": {
+        "name": "Tactique de meute",
+        "description": "+1 aux actions d’attaque contre une cible adjacente à l’un des alliés de la créature."
+      }
+    },
+    {
+      "id": "natural_weapons",
+      "fields": {
+        "name": "Armes naturelles",
+        "description": "+1 dégât aux attaques à mains nues portées avec des griffes, crocs, cornes ou une autre arme naturelle."
+      }
+    },
+    {
+      "id": "venomous",
+      "fields": {
+        "name": "Venimeux",
+        "description": "Lorsqu’une attaque naturelle inflige des dégâts, la cible perd 1 PA sauf si elle résiste au poison."
+      }
+    },
+    {
+      "id": "web_spinner",
+      "fields": {
+        "name": "Tisseur de toile",
+        "description": "Peut produire de solides toiles entravantes et gagne +2 aux actions de Dextérité pour s’y déplacer."
+      }
+    },
+    {
+      "id": "stone_body",
+      "fields": {
+        "name": "Corps minéral",
+        "description": "N’a pas besoin de respirer et gagne +2 aux actions de Constitution pour résister aux impacts."
+      }
+    },
+    {
+      "id": "magic_sense",
+      "fields": {
+        "name": "Sens de la magie",
+        "description": "+2 aux actions de Perception pour détecter les sorts actifs ou objets enchantés proches."
+      }
+    }
+  ]
+}

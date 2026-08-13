@@ -72,7 +72,6 @@ add('rules.value', 'character.fields.rules', stored(['rules'], 'text', {
 	rules: true,
 }));
 add('traits.value', 'creature.fields.traits', stored(['traits'], 'text', {
-	described: true,
 	multiline: true,
 	paragraph: true,
 }));

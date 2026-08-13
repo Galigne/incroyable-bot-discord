@@ -18,13 +18,7 @@
       },
       "generation": {
         "statProfile": "creature-companion",
-        "traits": [
-          {
-            "id": "loyal_hound_nature",
-            "name": "Aptitude de compagnon",
-            "description": "suit les odeurs familières, veille sur les dormeurs et se méfie d’un PNJ en apparence inoffensif."
-          }
-        ],
+        "traits": ["{{ traits:keen_smell }}"],
         "fixedRules": [],
         "statusEffects": [],
         "equipment": [],
@@ -41,13 +35,7 @@
       },
       "generation": {
         "statProfile": "creature-companion",
-        "traits": [
-          {
-            "id": "barn_cat_nature",
-            "name": "Aptitude de compagnon",
-            "description": "excelle à débusquer la vermine, les coins chauds et la nourriture laissée sans surveillance."
-          }
-        ],
+        "traits": ["{{ traits:keen_hearing }}", "{{ traits:darkvision }}"],
         "fixedRules": [],
         "statusEffects": [],
         "equipment": [],
@@ -65,11 +53,8 @@
       "generation": {
         "statProfile": "creature-companion",
         "traits": [
-          {
-            "id": "messenger_pigeon_nature",
-            "name": "Aptitude de compagnon",
-            "description": "retourne fidèlement au foyer choisi en transportant un message très court."
-          }
+          "{{ traits:flight }}",
+          "Instinct de retour — Connaît toujours la direction d’un foyer qu’elle a occupé pendant au moins une semaine."
         ],
         "fixedRules": [],
         "statusEffects": [],
@@ -93,13 +78,7 @@
       },
       "generation": {
         "statProfile": "creature-companion",
-        "traits": [
-          {
-            "id": "pack_goat_nature",
-            "name": "Aptitude de compagnon",
-            "description": "porte une quantité raisonnable de matériel, mange presque tout et refuse obstinément les chemins manifestement maudits."
-          }
-        ],
+        "traits": ["{{ traits:sure_footed }}", "{{ traits:powerful_build }}"],
         "fixedRules": [],
         "statusEffects": [],
         "equipment": [],
@@ -122,13 +101,7 @@
       },
       "generation": {
         "statProfile": "creature-companion",
-        "traits": [
-          {
-            "id": "clever_rat_nature",
-            "name": "Aptitude de compagnon",
-            "description": "se faufile dans les espaces minuscules et apprend des consignes simples associées à des objets."
-          }
-        ],
+        "traits": [],
         "fixedRules": [],
         "statusEffects": [],
         "equipment": [],
@@ -146,11 +119,7 @@
       "generation": {
         "statProfile": "creature-companion",
         "traits": [
-          {
-            "id": "watch_goose_nature",
-            "name": "Aptitude de compagnon",
-            "description": "interpelle bruyamment les inconnus, les créatures invisibles et toute personne munie de pain."
-          }
+          "Cri d’alarme — Les alliés capables de l’entendre gagnent +1 en Initiative contre une menace détectée par la créature."
         ],
         "fixedRules": [],
         "statusEffects": [],
@@ -168,13 +137,7 @@
       },
       "generation": {
         "statProfile": "creature-companion",
-        "traits": [
-          {
-            "id": "pocket_ferret_nature",
-            "name": "Aptitude de compagnon",
-            "description": "rapporte de petits objets et les cache dans les endroits les moins pratiques."
-          }
-        ],
+        "traits": [],
         "fixedRules": [],
         "statusEffects": [],
         "equipment": [],
@@ -191,13 +154,7 @@
       },
       "generation": {
         "statProfile": "creature-companion",
-        "traits": [
-          {
-            "id": "mule_nature",
-            "name": "Aptitude de compagnon",
-            "description": "monture fiable au pied très sûr, qui oppose un veto absolu aux ponts dangereux."
-          }
-        ],
+        "traits": ["{{ traits:sure_footed }}", "{{ traits:powerful_build }}"],
         "fixedRules": [],
         "statusEffects": [],
         "equipment": [],
@@ -231,11 +188,8 @@
       "generation": {
         "statProfile": "creature-companion",
         "traits": [
-          {
-            "id": "lantern_finch_nature",
-            "name": "Aptitude de compagnon",
-            "description": "diffuse une douce lumière et se tait lorsque des prédateurs approchent."
-          }
+          "{{ traits:flight }}",
+          "Plumage lumineux — Émet une douce lumière dans un rayon de 5 mètres et peut l’éteindre ou la raviver à volonté."
         ],
         "fixedRules": [],
         "statusEffects": [],
@@ -253,13 +207,7 @@
       },
       "generation": {
         "statProfile": "creature-companion",
-        "traits": [
-          {
-            "id": "ember_newt_nature",
-            "name": "Aptitude de compagnon",
-            "description": "réchauffe son entourage, allume l’amadou sec et dort dans les ustensiles de cuisine."
-          }
-        ],
+        "traits": ["{{ traits:amphibious }}", "{{ traits:fire_immunity }}"],
         "fixedRules": [],
         "statusEffects": [],
         "equipment": [],
@@ -277,11 +225,7 @@
       "generation": {
         "statProfile": "creature-companion",
         "traits": [
-          {
-            "id": "moss_tortoise_nature",
-            "name": "Aptitude de compagnon",
-            "description": "fait lentement pousser des herbes médicinales communes sur sa carapace."
-          }
+          "Jardin médicinal — Une fois par jour, produit assez d’herbes communes pour accorder +1 à une action de soins."
         ],
         "fixedRules": [],
         "statusEffects": [],
@@ -300,11 +244,8 @@
       "generation": {
         "statProfile": "creature-companion",
         "traits": [
-          {
-            "id": "whisper_crow_nature",
-            "name": "Aptitude de compagnon",
-            "description": "mémorise les voix et répète plusieurs phrases courtes avec une précision inquiétante."
-          }
+          "{{ traits:flight }}",
+          "Imitation parfaite — Peut reproduire toute phrase courte ou voix familière qu’elle a clairement entendue."
         ],
         "fixedRules": [],
         "statusEffects": [],
@@ -323,11 +264,9 @@
       "generation": {
         "statProfile": "creature-companion",
         "traits": [
-          {
-            "id": "miniature_slime_nature",
-            "name": "Aptitude de compagnon",
-            "description": "dissout sans danger la saleté, les aliments avariés et, parfois, un document important."
-          }
+          "{{ traits:poison_immunity }}",
+          "{{ traits:disease_immunity }}",
+          "Gelée nettoyeuse — Peut dissoudre la saleté et la matière organique avariée sans blesser les tissus vivants sains."
         ],
         "fixedRules": [],
         "statusEffects": [],
@@ -346,11 +285,9 @@
       "generation": {
         "statProfile": "creature-companion",
         "traits": [
-          {
-            "id": "clockwork_beetle_nature",
-            "name": "Aptitude de compagnon",
-            "description": "enregistre une heure de son et la restitue lorsqu’on remonte son mécanisme."
-          }
+          "{{ traits:poison_immunity }}",
+          "{{ traits:disease_immunity }}",
+          "Restitution sonore — Peut enregistrer jusqu’à une heure de sons proches et les reproduire exactement une fois avant un nouvel enregistrement."
         ],
         "fixedRules": [],
         "statusEffects": [],
@@ -368,13 +305,7 @@
       },
       "generation": {
         "statProfile": "creature-companion",
-        "traits": [
-          {
-            "id": "breeze_lizard_nature",
-            "name": "Aptitude de compagnon",
-            "description": "change de couleur avec le temps et plane sur de courtes distances d’une personne à l’autre."
-          }
-        ],
+        "traits": ["{{ traits:gliding }}"],
         "fixedRules": [],
         "statusEffects": [],
         "equipment": [],
@@ -391,13 +322,7 @@
       },
       "generation": {
         "statProfile": "creature-companion",
-        "traits": [
-          {
-            "id": "cave_bat_nature",
-            "name": "Aptitude de compagnon",
-            "description": "se repère dans l’obscurité totale et revient lorsqu’elle entend un sifflement précis."
-          }
-        ],
+        "traits": ["{{ traits:flight }}", "{{ traits:echolocation }}"],
         "fixedRules": [],
         "statusEffects": [],
         "equipment": [],
@@ -414,13 +339,7 @@
       },
       "generation": {
         "statProfile": "creature-companion",
-        "traits": [
-          {
-            "id": "river_otter_nature",
-            "name": "Aptitude de compagnon",
-            "description": "nage, rapporte les objets flottants et tient absolument à ouvrir des coquillages pendant les scènes sérieuses."
-          }
-        ],
+        "traits": ["{{ traits:amphibious }}", "{{ traits:aquatic_speed }}"],
         "fixedRules": [],
         "statusEffects": [],
         "equipment": [],
@@ -437,13 +356,7 @@
       },
       "generation": {
         "statProfile": "creature-companion",
-        "traits": [
-          {
-            "id": "tiny_griffin_nature",
-            "name": "Aptitude de compagnon",
-            "description": "défend férocement un sac à dos précis et chasse les insectes au moyen de piqués spectaculaires."
-          }
-        ],
+        "traits": ["{{ traits:flight }}", "{{ traits:natural_weapons }}"],
         "fixedRules": [],
         "statusEffects": [],
         "equipment": [],
@@ -461,11 +374,8 @@
       "generation": {
         "statProfile": "creature-companion",
         "traits": [
-          {
-            "id": "blink_rabbit_nature",
-            "name": "Aptitude de compagnon",
-            "description": "se téléporte de quelques mètres lorsqu’il prend peur, rarement dans la direction la plus sûre."
-          }
+          "{{ traits:swift_reflexes }}",
+          "Bond éclair — Une fois par tour lorsqu’il est surpris ou attaqué, peut se téléporter jusqu’à 3 mètres dans un espace libre visible."
         ],
         "fixedRules": [],
         "statusEffects": [],
@@ -484,11 +394,9 @@
       "generation": {
         "statProfile": "creature-companion",
         "traits": [
-          {
-            "id": "paper_dragon_nature",
-            "name": "Aptitude de compagnon",
-            "description": "se replie à plat, transporte des messages écrits et crache juste assez de feu pour cacheter de la cire."
-          }
+          "{{ traits:flight }}",
+          "Corps pliable — Peut s’aplatir assez pour franchir une fente aussi étroite qu’une feuille de papier.",
+          "Flamme à cacheter — Peut souffler une flammèche suffisante pour allumer de l’amadou ou sceller de la cire, mais pas pour infliger des dégâts."
         ],
         "fixedRules": [
           {
@@ -517,13 +425,7 @@
       },
       "generation": {
         "statProfile": "creature-companion",
-        "traits": [
-          {
-            "id": "ghost_mouse_nature",
-            "name": "Aptitude de compagnon",
-            "description": "traverse les cloisons minces et devient visible après avoir mangé du fromage."
-          }
-        ],
+        "traits": ["{{ traits:incorporeal }}"],
         "fixedRules": [],
         "statusEffects": [],
         "equipment": [],
@@ -541,11 +443,7 @@
       "generation": {
         "statProfile": "creature-companion",
         "traits": [
-          {
-            "id": "cloud_pup_nature",
-            "name": "Aptitude de compagnon",
-            "description": "petit chien flottant fait de brume, capable de dissimuler brièvement le visage d’une personne."
-          }
+          "Voile de brume — Une fois par scène, crée un nuage de 2 mètres qui dissimule une créature jusqu’au début de son prochain tour."
         ],
         "fixedRules": [],
         "statusEffects": [],
@@ -564,11 +462,8 @@
       "generation": {
         "statProfile": "creature-elemental",
         "traits": [
-          {
-            "id": "pebble_elemental_nature",
-            "name": "Aptitude de compagnon",
-            "description": "créature de pierre grosse comme un poing qui détecte les tunnels proches et la maçonnerie ouvragée."
-          }
+          "{{ traits:stone_body }}",
+          "Sens de la maçonnerie — +2 aux actions de Perception pour repérer tunnels, cavités ou fragilités dans la pierre taillée."
         ],
         "fixedRules": [],
         "statusEffects": [],
@@ -586,13 +481,7 @@
       },
       "generation": {
         "statProfile": "creature-companion",
-        "traits": [
-          {
-            "id": "moon_moth_nature",
-            "name": "Aptitude de compagnon",
-            "description": "absorbe les faibles résidus magiques et luit en présence d’enchantements actifs."
-          }
-        ],
+        "traits": ["{{ traits:flight }}", "{{ traits:magic_sense }}"],
         "fixedRules": [],
         "statusEffects": [],
         "equipment": [],
@@ -609,11 +498,8 @@
       "generation": {
         "statProfile": "creature-companion",
         "traits": [
-          {
-            "id": "messenger_raptor_nature",
-            "name": "Nature intrinsèque",
-            "description": "Un oiseau territorial pouvant être dressé à reconnaître des"
-          }
+          "{{ traits:flight }}",
+          "Vue perçante — +2 aux actions de Perception reposant sur la vue à longue distance."
         ],
         "fixedRules": [],
         "statusEffects": [],
@@ -632,11 +518,9 @@
       "generation": {
         "statProfile": "creature-companion",
         "traits": [
-          {
-            "id": "sir_candlewick_nature",
-            "name": "Auxiliaire animé",
-            "description": "une minuscule armure animée qui cherche une personne assez grande pour devenir son écuyer."
-          }
+          "{{ traits:poison_immunity }}",
+          "{{ traits:disease_immunity }}",
+          "Armure animée — N’a besoin ni de manger, ni de boire, ni de respirer, ni de dormir."
         ],
         "fixedRules": [],
         "statusEffects": [],
