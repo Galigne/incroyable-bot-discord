@@ -772,22 +772,32 @@ overhead:
    changes.
 4. After explicit approval, commit and push directly to `master`.
 
-Before publishing, verify GitHub access from the Codex shell, not only from the
-user's interactive PowerShell session. The Codex shell may use a separate
-Windows profile and credential store, so a host-side `gh auth status` does not
-prove that the agent can push or create a pull request. Run `gh auth status`
-from the task environment; on this Windows setup, use
-`C:\Program Files\GitHub CLI\gh.exe` when `gh` is not on `PATH`.
+### GitHub authentication
 
-If the Codex-shell status is invalid, use the browser OAuth flow from that same
+Keep `origin` as the credential-free HTTPS URL
+`https://github.com/Galigne/incroyable-bot-discord.git`. Use persistent secure
+credential storage: prefer Git Credential Manager backed by the operating
+system's secure credential store for Git, and use the GitHub CLI's normal OS
+keyring for `gh`. Never use Git's plaintext `credential.store`, a shell profile,
+or a plaintext environment/configuration file.
+
+Before publishing, verify access from the Codex shell, not only from the user's
+interactive PowerShell session. The Codex shell may use a separate Windows
+profile and credential store, so run `gh auth status` from the task environment;
+on this Windows setup, use `C:\Program Files\GitHub CLI\gh.exe` when `gh` is not
+on `PATH`. When valid credentials are available, Codex must reuse them for Git
+pushes and pull-request operations instead of starting a new interactive login.
+
+If authentication is invalid or unavailable, reauthenticate from that same
 shell with `gh auth login --hostname github.com --git-protocol https --web`.
-Do not request, print, paste, store, or commit a personal access token merely to
-work around this check. A successful login may survive an application restart
-when the task environment and its keyring persist, but access must be verified
-again before publishing and re-established after an environment reset, token
-revocation or expiration, or permission change. If the GitHub connector cannot
-perform a write, use the authenticated local `gh` CLI as the publishing
-fallback.
+If a personal access token must be entered, use only an interactive
+credential-manager or GitHub CLI PAT flow so the user enters it directly. Never
+request, print, echo, paste into chat, commit, or store tokens or other
+credentials in repository files, `AGENTS.md`, `.env` files, Git configuration,
+scripts, shell history, remote URLs, or plaintext credential stores. Verify
+access again before publishing and after an environment reset, token
+revocation/expiration, or permission change. If the GitHub connector cannot
+perform a write, use the authenticated local `gh` CLI as the fallback.
 
 ## Change methodology
 
