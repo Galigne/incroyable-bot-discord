@@ -175,6 +175,7 @@ test('registry exposes autocomplete, option, and choice metadata', async () => {
 	const roll = commandRegistry.getAutocompleteMetadata('roll', 'expression', 'rpg');
 	assert.equal(roll.type, 'string');
 	assert.equal(roll.autocomplete.provider, 'static');
+	assert.ok(roll.autocomplete.values.includes('1d2'));
 	assert.ok(roll.autocomplete.values.includes('1d20'));
 
 	const getField = commandRegistry.getAutocompleteMetadata('get', 'field', 'rpg');
@@ -219,6 +220,7 @@ test('registry exposes autocomplete, option, and choice metadata', async () => {
 		},
 	});
 	assert.deepEqual(response, [
+		{ name: '1d2', value: '1d2' },
 		{ name: '1d20', value: '1d20' },
 	]);
 });

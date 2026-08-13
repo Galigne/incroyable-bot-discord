@@ -251,6 +251,7 @@ const COMMAND_METADATA = [
 				autocomplete: {
 					provider: 'static',
 					values: [
+						'1d2',
 						'1d4',
 						'1d6',
 						'2d6',
