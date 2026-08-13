@@ -11,7 +11,9 @@ module.exports = {
 	async execute({ config, interaction }) {
 		const locale = getLocale(config);
 		const entityKey = interaction.options.getString('creature-key', true);
-		const type = interaction.options.getString('type');
+		// discord.js returns null for an omitted optional string option. The
+		// generator uses undefined to distinguish omission from an invalid value.
+		const type = interaction.options.getString('type') ?? undefined;
 		const level = interaction.options.getInteger('level');
 		try {
 			const creature = await generateCreature(

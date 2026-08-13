@@ -532,6 +532,32 @@ test('/gen-creature type autocomplete uses localized router entries and stable I
 	);
 });
 
+test('/gen-creature treats an omitted Discord type option as random selection', async () => {
+	const dm = createInteraction('dm-user', [config.roles.dm]);
+	let response;
+	const interaction = {
+		...dm,
+		options: {
+			getInteger: () => null,
+			getString: option => option === 'creature-key'
+				? 'Command.Random'
+				: null,
+		},
+		reply: async payload => {
+			response = payload;
+		},
+	};
+
+	await commandRegistry.getRuntimeCommands().get('gen-creature').execute({
+		config,
+		interaction,
+	});
+
+	const stored = await getCreature('Command.Random');
+	assert.ok(getCreatureTypes().includes(stored.source.archetypeId));
+	assert.match(response.content, /Command\.Random/);
+});
+
 test('/gen-creature randomly selects a router entry when type is omitted', () => {
 	const creature = populateRandomCreature(
 		new Creature('Random.Type', 'creator'),
