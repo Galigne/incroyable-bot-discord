@@ -47,8 +47,8 @@
     {
       "id": "coded_notes",
       "fields": {
-        "name": "Notes chiffrées",
-        "description": "Plusieurs pages de notes dont le sens dépend d’un code, d’un contexte ou d’une personne disparue."
+        "name": "Notes codées",
+        "description": "Plusieurs pages dont le sens dépend d’un code, d’un contexte manquant ou d’une personne absente."
       }
     },
     {
@@ -76,7 +76,7 @@
       "id": "old_toy",
       "fields": {
         "name": "Jouet ancien",
-        "description": "Un jouet ou ours en peluche reconnaissable par une famille, un collectionneur ou un esprit."
+        "description": "Un jouet ou un ours en peluche reconnaissable par une famille, un collectionneur ou un esprit."
       }
     },
     {
@@ -104,14 +104,14 @@
       "id": "unidentified_egg",
       "fields": {
         "name": "Œuf non identifié",
-        "description": "Un œuf vivant dont l’espèce, les besoins et le danger restent inconnus."
+        "description": "Un œuf qui semble vivant, mais dont l’espèce, les besoins et le danger restent inconnus."
       }
     },
     {
       "id": "attuned_stone",
       "fields": {
-        "name": "Pierre accordée",
-        "description": "Une pierre minérale ou magique réagissant à un lieu, une personne ou une LOI particulière."
+        "name": "Pierre d’affinité",
+        "description": "Une pierre naturelle ou magique qui réagit à un lieu, une personne ou une LOI particulière."
       }
     },
     {

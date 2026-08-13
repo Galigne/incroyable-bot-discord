@@ -28,8 +28,8 @@
       "id": "bread_and_hard_cheese",
       "weight": 8,
       "fields": {
-        "name": "Pain et fromage sec",
-        "description": "Un repas ordinaire et durable, adapté au voyage."
+        "name": "Pain et fromage à pâte dure",
+        "description": "Un repas simple qui se conserve bien et convient au voyage."
       }
     },
     {
@@ -61,7 +61,7 @@
       "weight": 5,
       "fields": {
         "name": "Bière forte",
-        "description": "Une bière locale robuste vendue dans une cruche bouchée."
+        "description": "Une bière locale corsée vendue dans une cruche bouchée."
       }
     },
     {
@@ -85,7 +85,7 @@
       "weight": 2,
       "fields": {
         "name": "Spécialité régionale",
-        "description": "Un mets caractéristique apprécié sur place et surprenant pour les étrangers."
+        "description": "Un mets caractéristique apprécié sur place, mais parfois surprenant pour les visiteurs."
       }
     },
     {

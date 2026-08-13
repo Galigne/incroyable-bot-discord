@@ -121,7 +121,7 @@
       "weight": 4,
       "fields": {
         "name": "Sels purifiants",
-        "description": "Des sels minéraux servant à nettoyer des blessures, des outils, de l’eau ou un espace rituel."
+        "description": "Des sels minéraux servant à nettoyer des blessures et des outils, à purifier de l’eau ou à préparer un espace rituel."
       }
     },
     {
@@ -137,7 +137,7 @@
       "weight": 3,
       "fields": {
         "name": "Huile alchimique",
-        "description": "Une huile préparée, consommée en enduisant un objet pour un usage défini par le MJ."
+        "description": "Une huile préparée pour enduire un objet et produire un effet défini par le MJ."
       }
     },
     {
@@ -145,7 +145,7 @@
       "weight": 5,
       "fields": {
         "name": "Cataplasme médicinal",
-        "description": "Une préparation végétale enveloppée, appliquée une fois pour calmer la douleur et l’enflure."
+        "description": "Un emplâtre à base de plantes, à usage unique, qui apaise la douleur et l’enflure."
       }
     }
   ]

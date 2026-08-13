@@ -13,7 +13,7 @@
       "id": "coin_purse",
       "fields": {
         "name": "Bourse de pièces",
-        "description": "Une somme de monnaie locale mêlant petites pièces courantes et devises plus difficiles à écouler."
+        "description": "Une bourse de monnaie locale mêlant petites pièces courantes et devises plus difficiles à écouler."
       }
     },
     {
@@ -27,7 +27,7 @@
       "id": "work_of_art",
       "fields": {
         "name": "Œuvre d’art",
-        "description": "Un tableau, une sculpture ou une pièce décorative possédant une valeur culturelle identifiable."
+        "description": "Un tableau, une sculpture ou une pièce décorative dont la valeur culturelle est reconnue."
       }
     },
     {
@@ -71,7 +71,7 @@
       "weight": 3,
       "fields": {
         "name": "Monnaies anciennes",
-        "description": "Une vieille monnaie qui vaut davantage pour les collectionneurs que pour sa valeur faciale."
+        "description": "Des pièces anciennes qui valent davantage pour les collectionneurs que pour leur valeur faciale."
       }
     },
     {
@@ -95,7 +95,7 @@
       "weight": 2,
       "fields": {
         "name": "Petite sculpture",
-        "description": "Une œuvre transportable dont l’artiste, le sujet ou la matière fait la valeur."
+        "description": "Une œuvre transportable dont l’artiste, le sujet ou la matière détermine la valeur."
       }
     },
     {
@@ -119,7 +119,7 @@
       "weight": 4,
       "fields": {
         "name": "Marchandises de valeur",
-        "description": "Des biens compacts dont le prix de revente varie selon les communautés."
+        "description": "Des biens compacts dont le prix de revente varie selon les marchés locaux."
       }
     }
   ]

@@ -139,6 +139,36 @@ test('shield and affliction catalogs preserve their technical distributions', ()
 	}
 });
 
+test('affliction symptom references resolve as grammatical localized status labels', () => {
+	const expectations = {
+		en: {
+			ash_fever: 'A smoky fever causes the Feverish status effect and sensitivity to open flame.',
+			spore_fever: 'An invasive fungus causes vivid dreams and the Confused status effect.',
+		},
+		fr: {
+			ash_fever: 'Une fièvre chargée de cendres inflige l’état Fiévreux et rend le malade sensible aux flammes nues.',
+			spore_fever: 'Une infection fongique provoque des rêves intenses et inflige l’état Confus.',
+		},
+	};
+	for (const [locale, entries] of Object.entries(expectations)) {
+		for (const [entry, expected] of Object.entries(entries)) {
+			const result = generatorResolver.resolveReference(
+				{ generator: 'affliction', entry, select: 'fields.description' },
+				locale,
+				{ random: () => 0 },
+			);
+			assert.equal(result.value, expected);
+			assert.deepEqual(
+				result.provenance.map(record => [record.generatorId, record.entryId]),
+				[
+					['affliction', entry],
+					['status_effect', entry === 'ash_fever' ? 'feverish' : 'confused'],
+				],
+			);
+		}
+	}
+});
+
 test('migrated creature and quest references target classified loot concepts', () => {
 	for (const locale of ['en', 'fr']) {
 		const companion = generatorCatalog.getGenerator('companion', locale);

@@ -15,7 +15,7 @@
       "fields": {
         "name": "Fièvre des cendres",
         "type": "disease",
-        "description": "Une fièvre enfumée rend le malade {{ status_effect:feverish }} et sensible aux flammes nues."
+        "description": "Une fièvre chargée de cendres inflige l’état {{ status_effect:feverish.name }} et rend le malade sensible aux flammes nues."
       }
     },
     {
@@ -23,7 +23,7 @@
       "fields": {
         "name": "Poumon des marais",
         "type": "disease",
-        "description": "Une toux humide et un souffle court associés aux eaux stagnantes."
+        "description": "Une toux grasse et un essoufflement liés aux marais et aux eaux stagnantes."
       }
     },
     {
@@ -31,7 +31,7 @@
       "fields": {
         "name": "Flux rouge",
         "type": "disease",
-        "description": "Une maladie intestinale épuisante accompagnée de crampes, de soif et d’une faiblesse rapide."
+        "description": "Une maladie intestinale épuisante accompagnée de crampes, de soif et d’un affaiblissement rapide."
       }
     },
     {
@@ -55,7 +55,7 @@
       "fields": {
         "name": "Pourriture de givre",
         "type": "disease",
-        "description": "Des tissus engourdis et décolorés se dégradent après une exposition prolongée au froid ou au surnaturel."
+        "description": "Des tissus engourdis et décolorés se dégradent après une exposition prolongée au froid ou à une influence surnaturelle."
       }
     },
     {
@@ -63,7 +63,7 @@
       "fields": {
         "name": "Fièvre des spores",
         "type": "disease",
-        "description": "Une fièvre fongique provoque des rêves intenses et des épisodes de comportement {{ status_effect:confused }}."
+        "description": "Une infection fongique provoque des rêves intenses et inflige l’état {{ status_effect:confused.name }}."
       }
     },
     {
@@ -111,7 +111,7 @@
       "fields": {
         "name": "Marque murmurante",
         "type": "curse",
-        "description": "Une marque cachée répète des fragments de secrets proches lorsque les environs sont silencieux."
+        "description": "Une marque cachée répète des fragments de secrets entendus aux alentours lorsque tout est silencieux."
       }
     },
     {

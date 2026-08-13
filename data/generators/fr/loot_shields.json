@@ -3,7 +3,7 @@
   "id": "shields",
   "visibility": "public",
   "name": "boucliers",
-  "description": "Boucliers accordant des PR selon leur rareté",
+  "description": "Boucliers offrant des PR selon leur rareté",
   "entrySchema": {
     "type": "fields",
     "required": ["name", "rarity", "description", "ar_percentage"],
@@ -16,7 +16,7 @@
       "fields": {
         "name": "Rondache",
         "rarity": "common",
-        "description": "Un bouclier compact dont la matière et la forme exacte conviennent à son porteur.",
+        "description": "Un bouclier compact dont la matière et la forme exactes conviennent à son porteur.",
         "ar_percentage": 5
       }
     },
@@ -36,7 +36,7 @@
       "fields": {
         "name": "Écu",
         "rarity": "common",
-        "description": "Un large bouclier offrant une protection ordinaire sans imposer d’héraldique.",
+        "description": "Un large bouclier offrant une protection ordinaire sans armoiries prédéfinies.",
         "ar_percentage": 5
       }
     },
@@ -66,7 +66,7 @@
       "fields": {
         "name": "Bouclier de duel",
         "rarity": "uncommon",
-        "description": "Un bouclier maniable équilibré pour la défense active et les échanges rapprochés.",
+        "description": "Un bouclier maniable équilibré pour la défense active et les combats rapprochés.",
         "ar_percentage": 10
       }
     },
@@ -76,7 +76,7 @@
       "fields": {
         "name": "Bouclier-miroir",
         "rarity": "rare",
-        "description": "Un bouclier poli à la surface inhabituelle dont la signification revient au MJ.",
+        "description": "Un bouclier poli dont la surface inhabituelle conserve une signification laissée au choix du MJ.",
         "ar_percentage": 15
       }
     },
@@ -96,7 +96,7 @@
       "fields": {
         "name": "Bouclier repliable",
         "rarity": "rare",
-        "description": "Un bouclier ingénieux capable de changer de profil sans imposer son mécanisme exact.",
+        "description": "Un bouclier ingénieux qui se replie ou se déploie selon un mécanisme laissé à l’imagination du MJ.",
         "ar_percentage": 15
       }
     },
@@ -146,7 +146,7 @@
       "fields": {
         "name": "Bouclier de l’éclipse",
         "rarity": "legendary",
-        "description": "Un bouclier unique portant l’image d’une éclipse et un héritage volontairement indéfini.",
+        "description": "Un bouclier unique portant l’image d’une éclipse et dont l’héritage demeure mystérieux.",
         "ar_percentage": 25
       }
     },
@@ -156,7 +156,7 @@
       "fields": {
         "name": "Bouclier du serment",
         "rarity": "legendary",
-        "description": "Un bouclier légendaire lié à un serment dont le porteur, les termes et les conséquences restent libres.",
+        "description": "Un bouclier légendaire lié à un serment dont le porteur, les termes et les conséquences restent à déterminer.",
         "ar_percentage": 25
       }
     },

@@ -3,7 +3,7 @@
   "id": "rumor",
   "visibility": "public",
   "name": "rumeur",
-  "description": "Affirmations en circulation dont le MJ décide de la véracité",
+  "description": "Rumeurs dont le MJ décide si elles sont fondées",
   "entrySchema": {
     "type": "text"
   },

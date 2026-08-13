@@ -15,7 +15,7 @@
       "fields": {
         "name": "Ash Fever",
         "type": "disease",
-        "description": "A smoky fever that leaves the patient {{ status_effect:feverish }} and sensitive to open flame."
+        "description": "A smoky fever causes the {{ status_effect:feverish.name }} status effect and sensitivity to open flame."
       }
     },
     {
@@ -63,7 +63,7 @@
       "fields": {
         "name": "Spore Fever",
         "type": "disease",
-        "description": "A fungal fever causing vivid dreams and bouts of {{ status_effect:confused }} behavior."
+        "description": "An invasive fungus causes vivid dreams and the {{ status_effect:confused.name }} status effect."
       }
     },
     {
