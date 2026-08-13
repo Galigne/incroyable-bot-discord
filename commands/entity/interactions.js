@@ -306,15 +306,28 @@ function createEditInput(type, field, inputDefinition, locale) {
 
 function getEditInputDescription(type, field, target, locale) {
 	if (target.inputKind === 'pair') {
+		if (target.resourceId === 'ap') {
+			return t(locale, type === 'creature'
+				? 'rpg.editor.creatureApPairDescription'
+				: 'rpg.editor.apPairDescription');
+		}
+		if (type === 'creature') {
+			return t(locale, 'rpg.editor.creaturePairDescription');
+		}
 		return t(locale, 'rpg.editor.pairDescription');
 	}
 	if (field.editKind === 'named-lines') {
-		return t(locale, 'rpg.editor.statisticsDescription');
+		return t(locale, type === 'creature'
+			? 'rpg.editor.creatureStatisticsDescription'
+			: 'rpg.editor.statisticsDescription');
 	}
-	if (target.rules) {
+	if (type === 'creature' && (target.id === 'level.value' || field.id === 'level')) {
+		return t(locale, 'rpg.editor.creatureLevelDescription');
+	}
+	if (target.rules || field.id === 'rules') {
 		return t(locale, 'rpg.editor.rulesDescription');
 	}
-	if (target.described) {
+	if (target.described || field.id === 'traits') {
 		return t(locale, 'rpg.editor.describedDescription');
 	}
 	if (target.id === 'gear.equipment') {
@@ -323,7 +336,7 @@ function getEditInputDescription(type, field, target, locale) {
 	if (target.id === 'gear.inventory') {
 		return t(locale, 'rpg.editor.inventoryDescription');
 	}
-	if (target.multiline) {
+	if (target.multiline || field.editKind === 'multiline') {
 		return t(locale, 'rpg.editor.collectionDescription');
 	}
 	if (target.type === 'text') {
@@ -341,10 +354,13 @@ function getEditInputPlaceholder(field, target, locale) {
 	if (field.editKind === 'named-lines') {
 		return t(locale, 'rpg.editor.statisticsPlaceholder');
 	}
-	if (target.described) {
+	if (target.rules || field.id === 'rules') {
+		return t(locale, 'rpg.editor.rulesPlaceholder');
+	}
+	if (target.described || field.id === 'traits') {
 		return t(locale, 'rpg.editor.describedPlaceholder');
 	}
-	if (target.multiline) {
+	if (target.multiline || field.editKind === 'multiline') {
 		return t(locale, 'rpg.editor.collectionPlaceholder');
 	}
 	return t(locale, 'rpg.editor.valuePlaceholder');

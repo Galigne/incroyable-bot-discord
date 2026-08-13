@@ -11,6 +11,7 @@ const testSaveDirectory = fs.mkdtempSync(
 process.env.INCREDIBLE_BOT_SAVE_DIRECTORY = testSaveDirectory;
 
 const Character = require('../models/Character');
+const Creature = require('../models/Creature');
 const {
 	createEntityFieldModal,
 	handleEntityInteraction,
@@ -27,6 +28,9 @@ const {
 	getEditableFieldValue,
 	setEditableFieldValue,
 } = require('../services/characterEditor');
+const {
+	getEditableEntityFieldValue,
+} = require('../services/entityEditor');
 const {
 	createEntity,
 	getEntity,
@@ -537,9 +541,15 @@ test('name, resources, status, and gear modals use the required prefilled inputs
 		resourcesModal.components.map(component => component.component.required),
 		[true, true, true, true],
 	);
-	assert.ok(resourcesModal.components.every(component => (
-		component.description === english.rpg.editor.pairDescription
-	)));
+	assert.deepEqual(
+		resourcesModal.components.map(component => component.description),
+		[
+			english.rpg.editor.pairDescription,
+			english.rpg.editor.pairDescription,
+			english.rpg.editor.apPairDescription,
+			english.rpg.editor.pairDescription,
+		],
+	);
 
 	const statusValues = getEditableFieldValue(character, 'status');
 	const statusModal = createEntityFieldModal(
@@ -582,6 +592,14 @@ test('name, resources, status, and gear modals use the required prefilled inputs
 	assert.deepEqual(
 		gearModal.components.map(component => component.component.value),
 		['Sword\nShield', 'Potion\nRope', '3:8'],
+	);
+	assert.deepEqual(
+		gearModal.components.map(component => component.description),
+		[
+			english.rpg.editor.equipmentDescription,
+			english.rpg.editor.inventoryDescription,
+			english.rpg.editor.pairDescription,
+		],
 	);
 
 	const frenchName = createEntityFieldModal('session', 'character', 'name', nameValues, 'fr').toJSON();
@@ -627,9 +645,33 @@ test('level and statistics each use one appropriately styled prefilled input', (
 		modal.components[0].description,
 		english.rpg.editor.statisticsDescription,
 	);
+
+	const creature = new Creature('Modal.Creature', 'tester');
+	const creatureLevelModal = createEntityFieldModal(
+		'session',
+		'creature',
+		'level',
+		getEditableEntityFieldValue(creature, 'level'),
+		'en',
+	).toJSON();
+	assert.equal(
+		creatureLevelModal.components[0].description,
+		english.rpg.editor.creatureLevelDescription,
+	);
+	const creatureStatisticsModal = createEntityFieldModal(
+		'session',
+		'creature',
+		'statistics',
+		getEditableEntityFieldValue(creature, 'statistics'),
+		'en',
+	).toJSON();
+	assert.equal(
+		creatureStatisticsModal.components[0].description,
+		english.rpg.editor.creatureStatisticsDescription,
+	);
 });
 
-test('character and creature RULE modals use the full-size paragraph input', () => {
+test('character and creature RULE modals show the complete format guidance', () => {
 	for (const type of ['character', 'creature']) {
 		const modal = createEntityFieldModal(
 			'session',
@@ -640,7 +682,163 @@ test('character and creature RULE modals use the full-size paragraph input', () 
 		).toJSON();
 		assert.equal(modal.components.length, 1);
 		assert.equal(modal.components[0].component.style, 2, type);
+		assert.equal(
+			modal.components[0].description,
+			english.rpg.editor.rulesDescription,
+			type,
+		);
+
+		const emptyModal = createEntityFieldModal(
+			'session',
+			type,
+			'rules',
+			'',
+			'en',
+		).toJSON();
+		assert.equal(
+			emptyModal.components[0].component.placeholder,
+			english.rpg.editor.rulesPlaceholder,
+			type,
+		);
 	}
+	const frenchModal = createEntityFieldModal(
+		'session',
+		'character',
+		'rules',
+		'',
+		'fr',
+	).toJSON();
+	assert.equal(
+		frenchModal.components[0].description,
+		french.rpg.editor.rulesDescription,
+	);
+	assert.equal(
+		frenchModal.components[0].component.placeholder,
+		french.rpg.editor.rulesPlaceholder,
+	);
+});
+
+test('collection modal instructions match each parser format and clearing behavior', () => {
+	const talentModal = createEntityFieldModal(
+		'session',
+		'character',
+		'talents',
+		'',
+		'en',
+	).toJSON();
+	assert.equal(talentModal.components[0].description, english.rpg.editor.collectionDescription);
+	assert.equal(
+		talentModal.components[0].component.placeholder,
+		english.rpg.editor.collectionPlaceholder,
+	);
+
+	const personalityModal = createEntityFieldModal(
+		'session',
+		'character',
+		'personality',
+		{
+			'personality.traits': '',
+			'personality.description': '',
+		},
+		'en',
+	).toJSON();
+	assert.equal(
+		personalityModal.components[0].description,
+		english.rpg.editor.collectionDescription,
+	);
+	assert.equal(
+		personalityModal.components[0].component.placeholder,
+		english.rpg.editor.collectionPlaceholder,
+	);
+
+	const gearModal = createEntityFieldModal(
+		'session',
+		'character',
+		'gear',
+		{
+			'gear.equipment': '',
+			'gear.inventory': '',
+			'gear.encumbrance': '0:0',
+		},
+		'en',
+	).toJSON();
+	assert.equal(gearModal.components[0].description, english.rpg.editor.equipmentDescription);
+	assert.equal(gearModal.components[1].description, english.rpg.editor.inventoryDescription);
+	assert.equal(
+		gearModal.components[0].component.placeholder,
+		english.rpg.editor.collectionPlaceholder,
+	);
+	assert.equal(
+		gearModal.components[1].component.placeholder,
+		english.rpg.editor.collectionPlaceholder,
+	);
+
+	const statusModal = createEntityFieldModal(
+		'session',
+		'character',
+		'status',
+		{
+			'status.effects': '',
+			'status.modifiers': '',
+		},
+		'en',
+	).toJSON();
+	assert.deepEqual(
+		statusModal.components.map(component => component.description),
+		[
+			english.rpg.editor.describedDescription,
+			english.rpg.editor.describedDescription,
+		],
+	);
+	assert.deepEqual(
+		statusModal.components.map(component => component.component.placeholder),
+		[
+			english.rpg.editor.describedPlaceholder,
+			english.rpg.editor.describedPlaceholder,
+		],
+	);
+
+	const creatureTraitsModal = createEntityFieldModal(
+		'session',
+		'creature',
+		'traits',
+		'',
+		'fr',
+	).toJSON();
+	assert.equal(
+		creatureTraitsModal.components[0].description,
+		french.rpg.editor.describedDescription,
+	);
+	assert.equal(
+		creatureTraitsModal.components[0].component.placeholder,
+		french.rpg.editor.describedPlaceholder,
+	);
+
+	const resourceModal = createEntityFieldModal(
+		'session',
+		'creature',
+		'resources',
+		{
+			'resources.hp': '',
+			'resources.ar': '',
+			'resources.ap': '',
+			'resources.md': '',
+		},
+		'fr',
+	).toJSON();
+	assert.deepEqual(
+		resourceModal.components.map(component => component.description),
+		[
+			french.rpg.editor.creaturePairDescription,
+			french.rpg.editor.creaturePairDescription,
+			french.rpg.editor.creatureApPairDescription,
+			french.rpg.editor.creaturePairDescription,
+		],
+	);
+	assert.deepEqual(
+		resourceModal.components.map(component => component.component.placeholder),
+		['50:100', '50:100', '50:100', '50:100'],
+	);
 });
 
 test('one grouped status update creates one history entry and keeps save keys', async () => {

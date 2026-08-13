@@ -126,9 +126,12 @@ archetype and physical description, while its editable form contains separate
 backstory and goals inputs. Personality uses separate description and traits
 inputs.
 
-The resources form uses separate required Current and Maximum numeric inputs for
-HP, AR, AP, and MD. Every grouped form is prefilled, validated completely, and
-saved as one atomic update. Encumbrance is a manually managed resource that defaults to
+The resources form uses one required `current:max` pair for each of HP, AR, AP,
+and MD, such as `50:100`; encumbrance uses the same format. Every grouped form is
+prefilled, validated completely, and saved as one atomic update. AP values are
+whole numbers from 0 to 10, and current AP cannot exceed maximum AP. Creature
+edits also require level 1–10, statistics 0–100, and current resources no greater
+than their maximum. Encumbrance is a manually managed resource that defaults to
 `0 / 0`; it is not derived from Constitution, equipment, inventory, or any other
 character property.
 

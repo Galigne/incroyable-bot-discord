@@ -140,16 +140,33 @@ test('/help command:get and command:set list both explicit entity field orders',
 			assert.ok(getRendered.includes(`\`${field.viewId}\``), `${locale}: ${field.viewId}`);
 		}
 	}
-	const english = renderDetail('set', createInteraction('regular'), 'en');
-	for (const format of [
-		'The `resources` modal has four short current:max inputs',
-		'creature groups use `identity`',
-		'Name:Description',
-		'EntityKey, type, schema metadata',
+	for (const [locale, formats] of [
+		['en', [
+			'`current:max` pairs for resources and encumbrance',
+			'`statName:value` lines for all nine statistics exactly once',
+			'`Name:Level:Description` per RULE',
+			'`Name:Description` per descriptive record',
+			'Creature edits also require level 1–10',
+			'EntityKey, type, schema metadata',
+		]],
+		['fr', [
+			'des paires de nombres pour les ressources et l’encombrement',
+			'des lignes `statName:valeur` avec chacun des neuf noms exactement une fois',
+			'`Nom:Niveau:Description` pour chaque LOI',
+			'`Nom:Description` pour chaque élément descriptif',
+			'Les créatures exigent aussi un niveau de 1 à 10',
+			'L’EntityKey, le type, le schéma',
+		]],
 	]) {
-		assert.ok(english.includes(format), format);
+		const rendered = renderDetail('set', createInteraction('regular'), locale);
+		for (const format of formats) {
+			assert.ok(rendered.includes(format), `${locale}: ${format}`);
+		}
 	}
-	assert.equal(english.includes('`firstName:lastName`'), false);
+	assert.equal(
+		renderDetail('set', createInteraction('regular'), 'en').includes('`firstName:lastName`'),
+		false,
+	);
 });
 
 test('/help command:get explains summary, detailed field, and autocomplete behavior', () => {
