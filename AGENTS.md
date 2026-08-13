@@ -725,15 +725,37 @@ solution, and ask the user to confirm the direction. Do not pause merely over
 personal taste or when the relevant behavior or data is explicitly defined by a
 canonical rulebook.
 
+## Task branch and delivery workflow
+
+This workflow is authoritative for every task that changes repository files,
+including documentation-only changes:
+
+1. Perform any needed read-only inspection, check `git status`, then create and
+   switch to a dedicated task branch from the intended base, normally `master`.
+   Use a descriptive `codex/<short-task-name>` branch unless the user specifies
+   another name. Never edit directly on `master`.
+2. Implement the requested changes and run the relevant validation, including
+   the repository checks required by the implementation methodology below.
+3. After implementation and validation are complete, stop before committing or
+   pushing. Present the completed changes and validation results, then wait for
+   the user's explicit approval.
+4. Only after explicit approval, commit the approved changes and push the task
+   branch to the remote repository.
+5. After the push succeeds, create a pull request from the task branch into
+   `master`.
+6. Stop after creating the pull request. Do not merge it; pull-request review
+   and merge approval remain user-controlled steps.
+
 ## Change methodology
 
-Use this workflow for every feature, behavior change, bug fix, or data update:
+After completing the task-branch step above, use this workflow for every feature,
+behavior change, bug fix, or data update:
 
-1. Inspect the current implementation and `git status` before editing. Read the
-   relevant command, service, model, tests, and data files; consult the rulebook or
-   `data/generators/README.md` when the change touches those areas. Existing dirty
-   changes and real entity saves belong to the user unless explicitly stated
-   otherwise.
+1. On the task branch, inspect the current implementation and `git status` before
+   editing. Read the relevant command, service, model, tests, and data files;
+   consult the rulebook or `data/generators/README.md` when the change touches
+   those areas. Existing dirty changes and real entity saves belong to the user
+   unless explicitly stated otherwise.
 2. Identify all coupled surfaces before implementing. Depending on the change, this
    can include slash-command schema and routing, autocomplete, authorization,
    persistence, editing, rendering, generator data, and error handling. Decide which
