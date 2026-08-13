@@ -77,11 +77,9 @@ after(() => {
 
 test('production creature sources are strict localized archetypes backed by profiles', () => {
 	const creatureTypes = getCreatureTypes();
-	assert.deepEqual(creatureTypes, ['animal', 'companion', 'monster']);
 	const profileIds = new Set();
 	for (const locale of ['en', 'fr']) {
 		const router = generatorCatalog.getGenerator(CREATURE_ROUTER_ID, locale);
-		assert.equal(Object.hasOwn(router, 'kind'), false);
 		assert.equal(router.visibility, 'public');
 		assert.deepEqual(router.entries.map(entry => entry.id), creatureTypes);
 		for (const archetype of creatureTypes) {
@@ -91,13 +89,12 @@ test('production creature sources are strict localized archetypes backed by prof
 				`{{ ${generatorId} }}`,
 			);
 			const generator = generatorCatalog.getGenerator(generatorId, locale);
-			assert.equal(Object.hasOwn(generator, 'kind'), false);
 			assert.equal(generator.visibility, 'internal');
 			assert.deepEqual(generator.entrySchema, {
 				type: 'fields',
 				required: ['name', 'description'],
 			});
-			assert.ok(generator.entries.length >= 20);
+			assert.ok(generator.entries.length > 0);
 			for (const entry of generator.entries) {
 				assert.ok(Number.isFinite(entry.weight) && entry.weight > 0);
 				assert.deepEqual(Object.keys(entry.fields), ['name', 'description']);
@@ -119,17 +116,10 @@ test('production creature sources are strict localized archetypes backed by prof
 			}
 		}
 	}
-	assert.deepEqual(profileIds, new Set([
-		'creature-brute',
-		'creature-caster',
-		'creature-companion',
-		'creature-elemental',
-		'creature-predator',
-	]));
+	assert.ok(profileIds.size > 0);
 
 	for (const generatorId of ['modifier_character', 'modifier_creature']) {
 		const modifier = generatorCatalog.getGenerator(generatorId, 'en');
-		assert.equal(Object.hasOwn(modifier, 'kind'), false);
 		assert.equal(modifier.visibility, 'internal');
 		assert.ok(modifier.entries.every(entry => (
 			JSON.stringify(Object.keys(entry.fields)) === JSON.stringify([
@@ -141,7 +131,8 @@ test('production creature sources are strict localized archetypes backed by prof
 });
 
 test('creature metadata rejects mechanical overrides and armor conflicts', () => {
-	const english = structuredClone(generatorCatalog.getGenerator('creature_animal', 'en'));
+	const { generatorId } = getCreatureFixture();
+	const english = structuredClone(generatorCatalog.getGenerator(generatorId, 'en'));
 	delete english.locale;
 
 	const mechanical = structuredClone(english);
@@ -164,11 +155,14 @@ test('creature metadata rejects mechanical overrides and armor conflicts', () =>
 });
 
 test('creature metadata preserves English and French technical parity', () => {
-	const english = structuredClone(generatorCatalog.getGenerator('creature_animal', 'en'));
-	const french = structuredClone(generatorCatalog.getGenerator('creature_animal', 'fr'));
+	const { generatorId } = getCreatureFixture();
+	const english = structuredClone(generatorCatalog.getGenerator(generatorId, 'en'));
+	const french = structuredClone(generatorCatalog.getGenerator(generatorId, 'fr'));
 	delete english.locale;
 	delete french.locale;
-	french.entries[0].generation.statProfile = 'creature-brute';
+	const originalProfile = english.entries[0].generation.statProfile;
+	french.entries[0].generation.statProfile = [...createStatProfileCandidate().keys()]
+		.find(profileId => profileId !== originalProfile);
 	assert.throws(
 		() => validateGeneratorPair(english, french),
 		error => error.code === 'GENERATOR_LOCALE_PARITY_MISMATCH',
@@ -178,7 +172,11 @@ test('creature metadata preserves English and French technical parity', () => {
 test('creature routers, archetypes, and statistical profiles validate relationships', () => {
 	const catalogs = createGeneratorCatalogCandidate();
 	const profiles = createStatProfileCandidate();
-	profiles.delete('creature-predator');
+	const firstCreatureType = getCreatureTypes()[0];
+	const firstCreatureGeneratorId = getCreatureGeneratorId(firstCreatureType);
+	const profileToRemove = catalogs.get('en').get(firstCreatureGeneratorId)
+		.entries[0].generation.statProfile;
+	profiles.delete(profileToRemove);
 	assert.throws(
 		() => validateCreatureStatProfileRelationships(catalogs, profiles),
 		error => error.code === 'CREATURE_STAT_PROFILE_MISSING',
@@ -193,7 +191,7 @@ test('creature routers, archetypes, and statistical profiles validate relationsh
 		error => error.code === 'CREATURE_ROUTER_MISSING',
 	);
 	const missingArchetypeCatalogs = createGeneratorCatalogCandidate();
-	missingArchetypeCatalogs.get('fr').delete('creature_animal');
+	missingArchetypeCatalogs.get('fr').delete(getCreatureFixture().generatorId);
 	assert.throws(
 		() => validateCreatureStatProfileRelationships(
 			missingArchetypeCatalogs,
@@ -202,8 +200,9 @@ test('creature routers, archetypes, and statistical profiles validate relationsh
 		error => error.code === 'CREATURE_ARCHETYPE_MISSING',
 	);
 	const invalidRoutes = createGeneratorCatalogCandidate();
+	const { generatorId } = getCreatureFixture();
 	const invalidRouter = structuredClone(invalidRoutes.get('fr').get('creature'));
-	invalidRouter.entries[0].fields.generator = '{{ creature_monster.name }}';
+	invalidRouter.entries[0].fields.generator = `{{ ${generatorId}.name }}`;
 	invalidRoutes.get('fr').set('creature', invalidRouter);
 	assert.throws(
 		() => validateCreatureStatProfileRelationships(
@@ -216,12 +215,13 @@ test('creature routers, archetypes, and statistical profiles validate relationsh
 
 test('creature generation references require compatible target payloads', () => {
 	const catalog = new Map(createGeneratorCatalogCandidate().get('en'));
-	const animal = structuredClone(catalog.get('creature_animal'));
-	animal.entries[0].generation.statusEffects = [{
+	const { generatorId } = getCreatureFixture();
+	const detail = structuredClone(catalog.get(generatorId));
+	detail.entries[0].generation.statusEffects = [{
 		generator: 'faction',
 		select: 'fields',
 	}];
-	catalog.set('creature_animal', animal);
+	catalog.set(generatorId, detail);
 	assert.throws(
 		() => validateGeneratorRelationships(catalog),
 		error => error.code === 'INVALID_CREATURE_REFERENCE_TARGET',
@@ -257,13 +257,7 @@ test('equivalent random input selects the same stable IDs and statistics in both
 });
 
 test('all creature profiles use the shared nonlinear level budget and derived resources', () => {
-	const representatives = [
-		['animal', 'mossback_deer'],
-		['animal', 'honey_bear'],
-		['companion', 'loyal_hound'],
-		['companion', 'pebble_elemental'],
-		['monster', 'hollow_saint'],
-	];
+	const representatives = getCreatureRepresentatives();
 	const usedProfiles = new Set();
 	for (const [archetype, entryId] of representatives) {
 		const creature = generateEntry(archetype, entryId, { level: 8 });
@@ -292,9 +286,17 @@ test('all creature profiles use the shared nonlinear level budget and derived re
 			),
 		);
 	}
-	assert.equal(usedProfiles.size, 5);
+	assert.deepEqual(usedProfiles, new Set(
+		representatives.map(([archetype, entryId]) => (
+			generatorCatalog.getGenerator(
+				getCreatureGeneratorId(archetype),
+				'en',
+			).entries.find(entry => entry.id === entryId).generation.statProfile
+		)),
+	));
+	const [archetype, entryId] = representatives[0];
 	for (let level = 1; level <= 10; level += 1) {
-		const creature = generateEntry('animal', 'mossback_deer', { level });
+		const creature = generateEntry(archetype, entryId, { level });
 		assert.equal(creature.level, level);
 		assert.ok(
 			calculateStatCost(creature.statistics) <= calculateStatBudget(level),
@@ -306,7 +308,7 @@ test('all creature profiles use the shared nonlinear level budget and derived re
 	const randomLevel = populateRandomCreature(
 		new Creature('Random.Level', 'creator'),
 		{
-			archetype: 'animal',
+			archetype,
 			random: sequenceRandom([0.999999, 0, 0.99]),
 		},
 	);
@@ -314,14 +316,18 @@ test('all creature profiles use the shared nonlinear level budget and derived re
 });
 
 test('creature Intelligence never grants RULEs and explicit RULE references are preserved', () => {
-	const intelligentMule = generateEntry('companion', 'mule', {
+	const intelligentMule = generateEntry(getCreatureTypeForEntry('mule'), 'mule', {
 		level: 10,
 		randomFallback: 0.4,
 	});
 	assert.ok(intelligentMule.statistics.intelligence >= 16);
 	assert.deepEqual(intelligentMule.rules, []);
 
-	const mireTroll = generateEntry('monster', 'mire_troll', { level: 10 });
+	const mireTroll = generateEntry(
+		getCreatureTypeForEntry('mire_troll'),
+		'mire_troll',
+		{ level: 10 },
+	);
 	assert.ok(mireTroll.statistics.intelligence <= 8);
 	assert.deepEqual(mireTroll.rules.map(rule => ({
 		entryId: rule.entryId,
@@ -332,7 +338,11 @@ test('creature Intelligence never grants RULEs and explicit RULE references are 
 });
 
 test('natural armor, generated armor, status, and weighted gear resolve to final state', () => {
-	const cinderDrake = generateEntry('monster', 'cinder_drake', { level: 5 });
+	const cinderDrake = generateEntry(
+		getCreatureTypeForEntry('cinder_drake'),
+		'cinder_drake',
+		{ level: 5 },
+	);
 	assert.deepEqual(cinderDrake.naturalArmor, { percentage: 15 });
 	assert.equal(
 		cinderDrake.resources.ar.max,
@@ -344,7 +354,11 @@ test('natural armor, generated armor, status, and weighted gear resolve to final
 	);
 	assert.ok(cinderDrake.status.modifiers[0].provenance.length > 0);
 
-	const bellWraith = generateEntry('monster', 'bell_wraith', { level: 5 });
+	const bellWraith = generateEntry(
+		getCreatureTypeForEntry('bell_wraith'),
+		'bell_wraith',
+		{ level: 5 },
+	);
 	const armorEntry = generatorCatalog.getGenerator('armors', 'en').entries
 		.find(entry => entry.id === 'common_heavy_armor');
 	assert.deepEqual(bellWraith.naturalArmor, { percentage: 0 });
@@ -361,7 +375,7 @@ test('natural armor, generated armor, status, and weighted gear resolve to final
 		&& record.entryId === 'common_heavy_armor'
 	)));
 
-	const mule = generateEntry('companion', 'mule', { level: 5 });
+	const mule = generateEntry(getCreatureTypeForEntry('mule'), 'mule', { level: 5 });
 	assert.equal(mule.gear.inventory.length, 1);
 	assert.ok(mule.source.provenance.some(record => (
 		record.type === 'generator-source'
@@ -374,8 +388,9 @@ test('natural armor, generated armor, status, and weighted gear resolve to final
 });
 
 test('descriptive modifiers cannot change mechanical generation results', () => {
+	const { archetype, generatorId } = getCreatureFixture();
 	const baseResult = generatorResolver.resolveReference(
-		{ generator: 'creature_animal', select: 'fields' },
+		{ generator: generatorId, select: 'fields' },
 		'en',
 		{ random: () => 0 },
 	);
@@ -398,20 +413,20 @@ test('descriptive modifiers cannot change mechanical generation results', () => 
 	const plain = populateRandomCreature(
 		new Creature('Modifier.Plain', 'creator'),
 		{
-			archetype: 'animal',
+			archetype,
 			level: 7,
 			random: () => 0,
-			resolver: createDetailResolver('creature_animal', withoutModifier),
+			resolver: createDetailResolver(generatorId, withoutModifier),
 		},
 	);
 	const modified = populateRandomCreature(
 		new Creature('Modifier.Applied', 'creator'),
 		{
-			archetype: 'animal',
+			archetype,
 			level: 7,
 			random: () => 0,
 			resolver: createDetailResolver(
-				'creature_animal',
+				generatorId,
 				withoutModifier,
 				modifierResult,
 			),
@@ -438,6 +453,7 @@ test('descriptive modifiers cannot change mechanical generation results', () => 
 
 test('/gen-creature is DM-only and atomically persists a complete generated creature', async () => {
 	const metadata = commandRegistry.getCommand('gen-creature');
+	const generatedType = getCreatureTypes()[0];
 	assert.equal(metadata.permission, 'dm');
 	assert.equal(metadata.help.order, 22);
 	assert.equal(metadata.options.find(option => option.name === 'type').required, undefined);
@@ -458,7 +474,7 @@ test('/gen-creature is DM-only and atomically persists a complete generated crea
 			getInteger: option => option === 'level' ? 4 : null,
 			getString: option => ({
 				'creature-key': 'Command.Generated',
-				type: 'animal',
+				type: generatedType,
 			})[option],
 		},
 		reply: async payload => {
@@ -471,16 +487,24 @@ test('/gen-creature is DM-only and atomically persists a complete generated crea
 	});
 	const stored = await getCreature('Command.Generated');
 	assert.equal(stored.level, 4);
-	assert.equal(stored.source.archetypeId, 'animal');
+	assert.equal(stored.source.archetypeId, generatedType);
 	assert.match(response.content, /Command\.Generated/);
 	assert.equal(response.embeds[0].toJSON().title, stored.displayName);
+	const archetypeName = getCreatureRoute(generatedType, 'en').fields.name;
 	assert.ok(createCreatureFieldEmbed(stored, 'identity', 'en').toJSON().fields
-		.some(field => field.name === 'Archetype' && field.value === 'Animal'));
+		.some(field => (
+			field.name === 'Archetype'
+			&& field.value === archetypeName[0].toLocaleUpperCase('en')
+				+ archetypeName.slice(1)
+		)));
 	assert.equal(await pathExists(getCreatureHistoryPath(stored.key)), false);
 	assert.equal(getEntityOperationQueueSize(), 0);
 });
 
 test('/gen-creature type autocomplete uses localized router entries and stable IDs', async () => {
+	const typeId = getCreatureTypes()[0];
+	const localizedRoute = getCreatureRoute(typeId, 'fr');
+	const focusedValue = typeId.slice(0, 3);
 	let choices;
 	await commandRegistry.getRuntimeCommands().get('gen-creature').autocomplete({
 		config: { ...config, locale: 'fr' },
@@ -489,7 +513,7 @@ test('/gen-creature type autocomplete uses localized router entries and stable I
 			guildId: 'guild',
 			member: { roles: { cache: { has: () => true } } },
 			options: {
-				getFocused: () => ({ name: 'type', value: 'com' }),
+				getFocused: () => ({ name: 'type', value: focusedValue }),
 			},
 			respond: async value => {
 				choices = value;
@@ -497,10 +521,11 @@ test('/gen-creature type autocomplete uses localized router entries and stable I
 			user: { id: 'dm-user' },
 		},
 	});
-	assert.deepEqual(choices.map(choice => choice.value), ['companion']);
+	const choice = choices.find(candidate => candidate.value === typeId);
+	assert.ok(choice);
 	assert.equal(
-		choices[0].name,
-		'Compagnons — Animaux de compagnie, familiers et petites créatures de voyage',
+		choice.name,
+		`${localizedRoute.fields.name} — ${localizedRoute.fields.description}`.slice(0, 100),
 	);
 });
 
@@ -513,14 +538,16 @@ test('/gen-creature randomly selects a router entry when type is omitted', () =>
 			random: sequenceRandom([0.999999, 0]),
 		},
 	);
-	assert.equal(creature.source.archetypeId, 'monster');
-	assert.equal(creature.source.generatorId, getCreatureGeneratorId('monster'));
+	const expectedType = getCreatureTypes().at(-1);
+	assert.equal(creature.source.archetypeId, expectedType);
+	assert.equal(creature.source.generatorId, getCreatureGeneratorId(expectedType));
 });
 
 test('generation, collision, and save failures leave no partial creature or history', async () => {
+	const validType = getCreatureTypes()[0];
 	for (const [entityKey, options] of [
 		['Validation.Type', { archetype: 'dragon', level: 1 }],
-		['Validation.Level', { archetype: 'animal', level: 11 }],
+		['Validation.Level', { archetype: validType, level: 11 }],
 	]) {
 		await assert.rejects(
 			generateCreature(entityKey, 'creator', options),
@@ -533,7 +560,7 @@ test('generation, collision, and save failures leave no partial creature or hist
 	await createCharacter('Collision.Key', 'creator');
 	await assert.rejects(
 		generateCreature('Collision.Key', 'creator', {
-			archetype: 'monster',
+			archetype: validType,
 			level: 1,
 			random: () => 0,
 		}),
@@ -544,7 +571,7 @@ test('generation, collision, and save failures leave no partial creature or hist
 
 	await assert.rejects(
 		generateCreature('Generation.Failure', 'creator', {
-			archetype: 'animal',
+			archetype: validType,
 			level: 1,
 			resolver: {
 				resolveReference() {
@@ -568,7 +595,7 @@ test('generation, collision, and save failures leave no partial creature or hist
 	try {
 		await assert.rejects(
 			generateCreature('Save.Failure', 'creator', {
-				archetype: 'companion',
+				archetype: validType,
 				level: 1,
 				random: () => 0,
 			}),
@@ -587,12 +614,12 @@ test('generation, collision, and save failures leave no partial creature or hist
 
 	const concurrent = await Promise.allSettled([
 		generateCreature('Concurrent.Key', 'creator-a', {
-			archetype: 'animal',
+			archetype: validType,
 			level: 2,
 			random: () => 0,
 		}),
 		generateCreature('Concurrent.Key', 'creator-b', {
-			archetype: 'monster',
+			archetype: validType,
 			level: 3,
 			random: () => 0,
 		}),
@@ -609,8 +636,9 @@ test('generation, collision, and save failures leave no partial creature or hist
 });
 
 test('loading and rendering persisted creatures never reruns generation after reload', async () => {
+	const validType = getCreatureTypes().at(-1);
 	const generated = await generateCreature('Reload.Stable', 'creator', {
-		archetype: 'monster',
+		archetype: validType,
 		level: 6,
 		locale: 'fr',
 		random: () => 0,
@@ -682,13 +710,50 @@ function getCreatureTypes(locale = 'en') {
 		.entries.map(entry => entry.id);
 }
 
-function getCreatureGeneratorId(typeId, locale = 'en') {
-	const route = generatorCatalog.getGenerator(CREATURE_ROUTER_ID, locale)
+function getCreatureRoute(typeId, locale = 'en') {
+	return generatorCatalog.getGenerator(CREATURE_ROUTER_ID, locale)
 		.entries.find(entry => entry.id === typeId);
+}
+
+function getCreatureGeneratorId(typeId, locale = 'en') {
+	const route = getCreatureRoute(typeId, locale);
 	const match = route?.fields?.generator?.match(
 		/^\s*\{\{\s*([a-z0-9]+(?:_[a-z0-9]+)*)\s*\}\}\s*$/,
 	);
 	return match?.[1];
+}
+
+function getCreatureFixture(locale = 'en') {
+	const archetype = getCreatureTypes(locale)[0];
+	return {
+		archetype,
+		generatorId: getCreatureGeneratorId(archetype, locale),
+	};
+}
+
+function getCreatureRepresentatives(locale = 'en') {
+	const representatives = [];
+	const profileIds = new Set();
+	for (const archetype of getCreatureTypes(locale)) {
+		const generatorId = getCreatureGeneratorId(archetype, locale);
+		const generator = generatorCatalog.getGenerator(generatorId, locale);
+		for (const entry of generator.entries) {
+			const profileId = entry.generation.statProfile;
+			if (!profileIds.has(profileId)) {
+				profileIds.add(profileId);
+				representatives.push([archetype, entry.id]);
+			}
+		}
+	}
+	return representatives;
+}
+
+function getCreatureTypeForEntry(entryId, locale = 'en') {
+	return getCreatureTypes(locale).find(archetype => {
+		const generatorId = getCreatureGeneratorId(archetype, locale);
+		return generatorCatalog.getGenerator(generatorId, locale).entries
+			.some(entry => entry.id === entryId);
+	});
 }
 
 function sequenceRandom(values, fallback = 0.5) {

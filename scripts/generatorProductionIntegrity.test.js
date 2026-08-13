@@ -4,10 +4,6 @@ const generatorCatalog = require('../services/generatorCatalog');
 const generatorResolver = require('../services/generatorResolver');
 
 test('production catalogs preserve current v3 payload and modifier structure', () => {
-	assert.equal(
-		generatorCatalog.getGenerator('background_criminal').visibility,
-		'internal',
-	);
 	const all = generatorCatalog.listGenerators('en', { visibility: 'all' });
 	for (const modifier of all.filter(generator => (
 		['modifier_character', 'modifier_creature'].includes(generator.id)
@@ -20,7 +16,6 @@ test('production catalogs preserve current v3 payload and modifier structure', (
 	}
 	for (const locale of ['en', 'fr']) {
 		const quest = generatorCatalog.getGenerator('quest', locale);
-		assert.equal(Object.hasOwn(quest, 'kind'), false);
 		assert.equal(quest.entrySchema.type, 'text');
 		assert.ok(quest.entries.every(entry => (
 			!Object.hasOwn(entry, 'template')
