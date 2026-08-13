@@ -727,32 +727,61 @@ canonical rulebook.
 
 ## Task branch and delivery workflow
 
-This workflow is authoritative for every task that changes repository files,
-including documentation-only changes:
+Choose the workflow that matches the change's scope, risk, and usefulness of an
+independent pull-request review. Do not use a rigid technical threshold. If it
+is genuinely unclear which workflow applies, ask the user before editing.
 
-1. Perform any needed read-only inspection, check `git status`, then create and
-   switch to a dedicated task branch from the intended base, normally `master`.
-   Use a descriptive `codex/<short-task-name>` branch unless the user specifies
-   another name. Never edit directly on `master`.
-2. Implement the requested changes and run the relevant validation, including
-   the repository checks required by the implementation methodology below.
-3. After implementation and validation are complete, stop before committing or
-   pushing. Present the completed changes and validation results, then wait for
-   the user's explicit approval.
-4. Only after explicit approval, commit the approved changes and push the task
-   branch to the remote repository.
-5. After the push succeeds, create a pull request from the task branch into
-   `master`.
-6. Stop after creating the pull request. Do not merge it; pull-request review
-   and merge approval remain user-controlled steps.
+For substantial changes, new features, significant refactors, or other work
+where a pull request is useful:
+
+1. Start from `master` and create and switch to a dedicated task branch before
+   editing. Use a descriptive `codex/<short-task-name>` branch unless the user
+   specifies another name. Never implement directly on `master`.
+2. Implement the requested work and run the relevant validation.
+3. Stop before committing or pushing. Present the completed changes and
+   validation results, then wait for the user's explicit approval.
+4. After explicit approval, commit and push the task branch.
+5. Create a pull request from the task branch into `master`.
+6. Stop after creating the pull request. Never merge it; pull-request review and
+   merge approval remain user-controlled steps.
+7. If review findings are later provided for that pull request, continue on the
+   same PR branch. Implement and validate the requested fixes, then commit and
+   push them so the existing PR is updated. Do not create another branch or PR
+   for review fixes.
+
+For small, straightforward changes where a pull request would add unnecessary
+overhead:
+
+1. Work directly on `master`. Do not create a task branch or pull request.
+2. Implement the change and run the relevant validation.
+3. Stop before committing or pushing so the user can manually review the
+   changes.
+4. After explicit approval, commit and push directly to `master`.
+
+Before publishing, verify GitHub access from the Codex shell, not only from the
+user's interactive PowerShell session. The Codex shell may use a separate
+Windows profile and credential store, so a host-side `gh auth status` does not
+prove that the agent can push or create a pull request. Run `gh auth status`
+from the task environment; on this Windows setup, use
+`C:\Program Files\GitHub CLI\gh.exe` when `gh` is not on `PATH`.
+
+If the Codex-shell status is invalid, use the browser OAuth flow from that same
+shell with `gh auth login --hostname github.com --git-protocol https --web`.
+Do not request, print, paste, store, or commit a personal access token merely to
+work around this check. A successful login may survive an application restart
+when the task environment and its keyring persist, but access must be verified
+again before publishing and re-established after an environment reset, token
+revocation or expiration, or permission change. If the GitHub connector cannot
+perform a write, use the authenticated local `gh` CLI as the publishing
+fallback.
 
 ## Change methodology
 
-After completing the task-branch step above, use this workflow for every feature,
-behavior change, bug fix, or data update:
+After selecting the applicable workflow above, use this methodology for every
+feature, behavior change, bug fix, or data update:
 
-1. On the task branch, inspect the current implementation and `git status` before
-   editing. Read the relevant command, service, model, tests, and data files;
+1. Inspect the current implementation and `git status` before editing. Read the
+   relevant command, service, model, tests, and data files;
    consult the rulebook or `data/generators/README.md` when the change touches
    those areas. Existing dirty changes and real entity saves belong to the user
    unless explicitly stated otherwise.
