@@ -123,9 +123,9 @@ generation.
 
 ## Humanoid and quest routing
 
-The former complete-person `npc` root and the former structured `criminal` root
-are retired; `criminal` is now reused as a simple internal archetype generator.
-Person concepts are routed through reusable broad-background archetype components.
+Background categories route through matching internal `background_<category>` text
+generators, including `background_criminal` for the `criminal` category. Person
+concepts are routed through reusable broad-background archetype components.
 The public `quest` component is a
 normal text component whose values contain inline references, for example:
 

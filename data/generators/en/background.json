@@ -3,7 +3,7 @@
   "id": "background",
   "visibility": "public",
   "name": "background",
-  "description": "NPC background categories",
+  "description": "Background categories",
   "entrySchema": {
     "type": "fields",
     "required": ["name", "description", "generator"],

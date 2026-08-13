@@ -3,7 +3,7 @@
   "id": "background",
   "visibility": "public",
   "name": "Backgrounds",
-  "description": "Catégories de Background pour les PNJ",
+  "description": "Catégories de background",
   "entrySchema": {
     "type": "fields",
     "required": ["name", "description", "generator"],
