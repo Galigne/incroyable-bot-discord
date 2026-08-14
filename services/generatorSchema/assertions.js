@@ -26,6 +26,16 @@ function validateDisplayText(value, maximumLength, label) {
 	}
 }
 
+function validateGeneratorName(value, label) {
+	validateDisplayText(value, 256, label);
+	if (!/^\p{Lu}/u.test(value)) {
+		throw generatorSchemaError(
+			'INVALID_GENERATOR_TEXT',
+			`Generator name for ${label} must begin with a capital letter.`,
+		);
+	}
+}
+
 function assertPlainObject(value, message) {
 	if (!value || typeof value !== 'object' || Array.isArray(value)) {
 		throw generatorSchemaError('INVALID_GENERATOR_STRUCTURE', message);
@@ -67,5 +77,6 @@ module.exports = {
 	assertRequiredKeys,
 	generatorSchemaError,
 	validateDisplayText,
+	validateGeneratorName,
 	validateStableId,
 };

@@ -2,7 +2,7 @@
   "schemaVersion": 3,
   "id": "loot",
   "visibility": "public",
-  "name": "butin",
+  "name": "Butin",
   "description": "Objets aléatoires issus de toutes les catégories de butin",
   "entrySchema": {
     "type": "fields",

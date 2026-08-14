@@ -592,8 +592,9 @@ The durable implementation constraints are:
 
 - Treat generators as reusable GM inspiration, not automatic story writers. Avoid
   unnecessary fixed identity, history, motives, relationships, or consequences.
-- Preserve strict English/French structural parity and stable English IDs, field
-  keys, routing values, weights, non-string fields, functional metadata, and
+- Preserve strict English/French structural parity, lowercase stable English IDs,
+  capitalized generator names, field keys, routing values, weights, non-string
+  fields, functional metadata, and
   modifier percentages. Localize generated string fields. Never fall back to
   English or translate already persisted content.
 - Expose only `public` generators as initial `/gen` roots, autocomplete roots, and

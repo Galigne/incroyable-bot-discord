@@ -2,7 +2,7 @@
   "schemaVersion": 3,
   "id": "government",
   "visibility": "internal",
-  "name": "gouvernements",
+  "name": "Gouvernements",
   "description": "Systèmes politiques, structures dirigeantes, forces et tensions",
   "entrySchema": {
     "type": "fields",

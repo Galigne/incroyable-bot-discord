@@ -2,7 +2,7 @@
   "schemaVersion": 3,
   "id": "shields",
   "visibility": "internal",
-  "name": "boucliers",
+  "name": "Boucliers",
   "description": "Boucliers offrant des PR selon leur rareté",
   "entrySchema": {
     "type": "fields",

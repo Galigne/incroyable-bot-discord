@@ -2,7 +2,7 @@
   "schemaVersion": 3,
   "id": "site",
   "visibility": "public",
-  "name": "site",
+  "name": "Site",
   "description": "Random buildings, dungeons, settlements, regions, and rooms",
   "entrySchema": {
     "type": "fields",

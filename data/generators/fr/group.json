@@ -2,7 +2,7 @@
   "schemaVersion": 3,
   "id": "group",
   "visibility": "public",
-  "name": "groupe",
+  "name": "Groupe",
   "description": "Gouvernements, factions et religions aléatoires",
   "entrySchema": {
     "type": "fields",

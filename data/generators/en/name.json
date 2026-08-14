@@ -2,7 +2,7 @@
   "schemaVersion": 3,
   "id": "name",
   "visibility": "public",
-  "name": "name",
+  "name": "Name",
   "description": "Fantasy character first and last names",
   "entrySchema": {
     "type": "fields",

@@ -2,7 +2,7 @@
   "schemaVersion": 3,
   "id": "animal",
   "visibility": "internal",
-  "name": "animal",
+  "name": "Animal",
   "description": "Ordinary and fantastic friendly wildlife",
   "entrySchema": {
     "type": "fields",

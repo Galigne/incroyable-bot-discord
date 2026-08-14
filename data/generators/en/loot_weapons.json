@@ -2,7 +2,7 @@
   "schemaVersion": 3,
   "id": "weapons",
   "visibility": "internal",
-  "name": "weapons",
+  "name": "Weapons",
   "description": "Weapons suitable for generated characters",
   "entrySchema": {
     "type": "fields",

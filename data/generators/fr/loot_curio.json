@@ -2,7 +2,7 @@
   "schemaVersion": 3,
   "id": "curio",
   "visibility": "internal",
-  "name": "curiosités",
+  "name": "Curiosités",
   "description": "Objets inhabituels présentant un intérêt narratif, mystérieux, personnel ou circonstanciel",
   "entrySchema": {
     "type": "fields",

@@ -2,7 +2,7 @@
   "schemaVersion": 3,
   "id": "supplies",
   "visibility": "internal",
-  "name": "supplies",
+  "name": "Supplies",
   "description": "Reusable practical objects for travel, exploration, professions, and everyday adventuring",
   "entrySchema": {
     "type": "fields",

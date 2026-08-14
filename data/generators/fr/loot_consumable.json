@@ -2,7 +2,7 @@
   "schemaVersion": 3,
   "id": "consumable",
   "visibility": "internal",
-  "name": "consommables",
+  "name": "Consommables",
   "description": "Objets normalement consommés ou épuisés par leur utilisation",
   "entrySchema": {
     "type": "fields",

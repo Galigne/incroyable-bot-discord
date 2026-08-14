@@ -2,7 +2,7 @@
   "schemaVersion": 3,
   "id": "faction",
   "visibility": "internal",
-  "name": "faction",
+  "name": "Faction",
   "description": "Organizations with goals, resources, hierarchy, allies, and enemies",
   "entrySchema": {
     "type": "fields",

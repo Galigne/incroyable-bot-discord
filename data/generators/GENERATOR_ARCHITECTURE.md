@@ -28,7 +28,8 @@ Visibility controls entry points, not resolvability:
   and modifier relationships.
 
 Stable lowercase snake_case generator and entry IDs provide durable identity.
-Localized names and content never determine routing or provenance. Generator
+Localized generator names begin with a capital letter, while names and content
+never determine routing or provenance. Generator
 resolution returns data only; persistence belongs to the character and creature
 application workflows.
 

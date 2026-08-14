@@ -2,7 +2,7 @@
   "schemaVersion": 3,
   "id": "talents",
   "visibility": "public",
-  "name": "talents",
+  "name": "Talents",
   "description": "Character talents and specialties",
   "entrySchema": {
     "type": "fields",

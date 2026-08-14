@@ -2,7 +2,7 @@
   "schemaVersion": 3,
   "id": "religion",
   "visibility": "internal",
-  "name": "religions",
+  "name": "Religions",
   "description": "Divinités, croyances, rites, préceptes, symboles, ordres, lieux saints et rapport à la magie",
   "entrySchema": {
     "type": "fields",

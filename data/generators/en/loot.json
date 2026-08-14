@@ -2,7 +2,7 @@
   "schemaVersion": 3,
   "id": "loot",
   "visibility": "public",
-  "name": "loot",
+  "name": "Loot",
   "description": "Random items from every loot category",
   "entrySchema": {
     "type": "fields",

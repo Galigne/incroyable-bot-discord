@@ -2,7 +2,7 @@
   "schemaVersion": 3,
   "id": "background",
   "visibility": "public",
-  "name": "background",
+  "name": "Background",
   "description": "Background categories",
   "entrySchema": {
     "type": "fields",

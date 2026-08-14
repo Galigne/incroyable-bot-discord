@@ -2,7 +2,7 @@
   "schemaVersion": 3,
   "id": "modifier",
   "visibility": "public",
-  "name": "modifier",
+  "name": "Modifier",
   "description": "Descriptive modifier families",
   "entrySchema": {
     "type": "fields",

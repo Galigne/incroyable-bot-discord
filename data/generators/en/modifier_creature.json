@@ -2,7 +2,7 @@
   "schemaVersion": 3,
   "id": "modifier_creature",
   "visibility": "internal",
-  "name": "creature modifiers",
+  "name": "Creature modifiers",
   "description": "Persistent descriptive variations for generated creatures",
   "entrySchema": {
     "type": "fields",

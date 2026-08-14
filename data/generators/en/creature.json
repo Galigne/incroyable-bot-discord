@@ -2,7 +2,7 @@
   "schemaVersion": 3,
   "id": "creature",
   "visibility": "public",
-  "name": "creature",
+  "name": "Creature",
   "description": "Creature categories available for generation",
   "entrySchema": {
     "type": "fields",

@@ -2,7 +2,7 @@
   "schemaVersion": 3,
   "id": "affliction",
   "visibility": "public",
-  "name": "affliction",
+  "name": "Affliction",
   "description": "Persistent diseases and curses",
   "entrySchema": {
     "type": "fields",

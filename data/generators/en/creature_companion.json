@@ -2,7 +2,7 @@
   "schemaVersion": 3,
   "id": "companion",
   "visibility": "internal",
-  "name": "companion",
+  "name": "Companion",
   "description": "Pets, familiars, and small traveling creatures",
   "entrySchema": {
     "type": "fields",

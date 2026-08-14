@@ -2,7 +2,7 @@
   "schemaVersion": 3,
   "id": "event",
   "visibility": "public",
-  "name": "event",
+  "name": "Event",
   "description": "Unexpected scenes and world complications",
   "entrySchema": {
     "type": "fields",

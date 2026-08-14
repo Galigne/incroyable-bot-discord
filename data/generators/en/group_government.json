@@ -2,7 +2,7 @@
   "schemaVersion": 3,
   "id": "government",
   "visibility": "internal",
-  "name": "government",
+  "name": "Government",
   "description": "Political systems, leadership structures, strengths, and tensions",
   "entrySchema": {
     "type": "fields",

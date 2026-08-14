@@ -2,7 +2,7 @@
   "schemaVersion": 3,
   "id": "settlement",
   "visibility": "internal",
-  "name": "settlement",
+  "name": "Settlement",
   "description": "Communities, strongholds, camps, and population centers",
   "entrySchema": {
     "type": "fields",

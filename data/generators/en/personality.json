@@ -2,7 +2,7 @@
   "schemaVersion": 3,
   "id": "personality",
   "visibility": "public",
-  "name": "personality",
+  "name": "Personality",
   "description": "Traits, ideals, quirks, bonds, and flaws",
   "entrySchema": {
     "type": "text"

@@ -2,7 +2,7 @@
   "schemaVersion": 3,
   "id": "race",
   "visibility": "public",
-  "name": "race",
+  "name": "Race",
   "description": "Ancestries with culture, appearance, and suggested traits",
   "entrySchema": {
     "type": "fields",

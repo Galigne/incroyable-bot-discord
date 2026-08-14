@@ -2,7 +2,7 @@
   "schemaVersion": 3,
   "id": "trap",
   "visibility": "public",
-  "name": "trap",
+  "name": "Trap",
   "description": "Mechanical, magical, and social hazards",
   "entrySchema": {
     "type": "text"

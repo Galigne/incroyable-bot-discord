@@ -2,7 +2,7 @@
   "schemaVersion": 3,
   "id": "monster",
   "visibility": "internal",
-  "name": "monster",
+  "name": "Monster",
   "description": "Hostile creatures and supernatural predators",
   "entrySchema": {
     "type": "fields",

@@ -2,7 +2,7 @@
   "schemaVersion": 3,
   "id": "trap",
   "visibility": "public",
-  "name": "pièges",
+  "name": "Pièges",
   "description": "Dangers mécaniques, magiques et sociaux",
   "entrySchema": {
     "type": "text"

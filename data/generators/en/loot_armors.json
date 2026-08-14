@@ -2,7 +2,7 @@
   "schemaVersion": 3,
   "id": "armors",
   "visibility": "internal",
-  "name": "armors",
+  "name": "Armors",
   "description": "Every armor type and rarity combination",
   "entrySchema": {
     "type": "fields",

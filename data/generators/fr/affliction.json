@@ -2,7 +2,7 @@
   "schemaVersion": 3,
   "id": "affliction",
   "visibility": "public",
-  "name": "affliction",
+  "name": "Affliction",
   "description": "Maladies et malédictions persistantes",
   "entrySchema": {
     "type": "fields",

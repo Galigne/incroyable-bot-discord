@@ -4,6 +4,7 @@ const {
 	assertRequiredKeys,
 	generatorSchemaError,
 	validateDisplayText,
+	validateGeneratorName,
 	validateStableId,
 } = require('./assertions');
 const {
@@ -61,7 +62,7 @@ function validateGeneratorDefinition(generator, file = '<generator>', options = 
 			`Generator ${file} has an unsupported visibility.`,
 		);
 	}
-	validateDisplayText(generator.name, 256, `generator name in ${file}`);
+	validateGeneratorName(generator.name, `generator name in ${file}`);
 	extractInlineReferences(generator.name, `generator name in ${file}`);
 	validateDisplayText(
 		generator.description,

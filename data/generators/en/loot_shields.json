@@ -2,7 +2,7 @@
   "schemaVersion": 3,
   "id": "shields",
   "visibility": "internal",
-  "name": "shields",
+  "name": "Shields",
   "description": "Shields with rarity-based armor contributions",
   "entrySchema": {
     "type": "fields",

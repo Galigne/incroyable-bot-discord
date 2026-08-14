@@ -2,7 +2,7 @@
   "schemaVersion": 3,
   "id": "modifier_character",
   "visibility": "internal",
-  "name": "modificateurs de personnage",
+  "name": "Modificateurs de personnage",
   "description": "Variations descriptives persistantes pour les personnages générés",
   "entrySchema": {
     "type": "fields",

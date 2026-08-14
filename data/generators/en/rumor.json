@@ -2,7 +2,7 @@
   "schemaVersion": 3,
   "id": "rumor",
   "visibility": "public",
-  "name": "rumor",
+  "name": "Rumor",
   "description": "Circulating claims whose truth is left to the GM",
   "entrySchema": {
     "type": "text"

@@ -55,7 +55,8 @@ The required envelope properties are:
 - `schemaVersion`: exactly `3`;
 - `id`: a stable lowercase snake_case generator ID;
 - `visibility`: `public` or `internal`;
-- `name` and `description`: localized display text;
+- `name`: localized display text beginning with a capital letter;
+- `description`: localized display text;
 - `entrySchema`: the single payload shape shared by every entry;
 - `entries`: a non-empty array of entries.
 

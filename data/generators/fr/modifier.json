@@ -2,7 +2,7 @@
   "schemaVersion": 3,
   "id": "modifier",
   "visibility": "public",
-  "name": "modificateur",
+  "name": "Modificateur",
   "description": "Familles de modificateurs descriptifs",
   "entrySchema": {
     "type": "fields",

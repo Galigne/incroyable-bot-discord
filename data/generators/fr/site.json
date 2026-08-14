@@ -2,7 +2,7 @@
   "schemaVersion": 3,
   "id": "site",
   "visibility": "public",
-  "name": "lieu",
+  "name": "Lieu",
   "description": "Bâtiments, donjons, communautés, régions et salles aléatoires",
   "entrySchema": {
     "type": "fields",

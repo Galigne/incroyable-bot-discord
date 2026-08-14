@@ -2,7 +2,7 @@
   "schemaVersion": 3,
   "id": "rules",
   "visibility": "public",
-  "name": "rules",
+  "name": "Rules",
   "description": "RULE concepts with useful limits and complications",
   "entrySchema": {
     "type": "fields",

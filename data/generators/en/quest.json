@@ -2,7 +2,7 @@
   "schemaVersion": 3,
   "id": "quest",
   "visibility": "public",
-  "name": "quest",
+  "name": "Quest",
   "description": "Adventure hooks, objectives, and dilemmas",
   "entrySchema": {
     "type": "text"

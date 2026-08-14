@@ -2,7 +2,7 @@
   "schemaVersion": 3,
   "id": "status_effect",
   "visibility": "public",
-  "name": "status effect",
+  "name": "Status effect",
   "description": "Descriptive conditions that may affect a character or creature",
   "entrySchema": {
     "type": "fields",

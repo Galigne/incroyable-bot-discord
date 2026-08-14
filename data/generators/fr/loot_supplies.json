@@ -2,7 +2,7 @@
   "schemaVersion": 3,
   "id": "supplies",
   "visibility": "internal",
-  "name": "matériel",
+  "name": "Matériel",
   "description": "Objets pratiques et réutilisables pour le voyage, l’exploration, les métiers et l’aventure quotidienne",
   "entrySchema": {
     "type": "fields",

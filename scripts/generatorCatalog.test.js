@@ -43,6 +43,7 @@ test('production generator v3 data uses stable IDs, strict parity, and visibilit
 	for (const generator of all) {
 		assert.equal(generator.schemaVersion, 3);
 		assert.match(generator.id, /^[a-z0-9]+(?:_[a-z0-9]+)*$/);
+		assert.match(generator.name, /^\p{Lu}/u);
 		assert.equal(
 			new Set(generator.entries.map(entry => entry.id)).size,
 			generator.entries.length,
@@ -208,6 +209,7 @@ test('generator schema validates unified v3 envelopes', () => {
 	for (const invalid of [
 		{ ...english, schemaVersion: 1 },
 		{ ...english, id: 'Invalid ID' },
+		{ ...english, name: 'weather' },
 		{ ...english, kind: 'template' },
 		{ ...english, visibility: 'hidden' },
 	]) {
