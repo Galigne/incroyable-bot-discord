@@ -1,6 +1,6 @@
 const { GENERATOR_ID_PATTERN } = require('./constants');
 
-function validateTechnicalId(id, label) {
+function validateStableId(id, label) {
 	if (
 		typeof id !== 'string'
 		|| id.length > 100
@@ -8,7 +8,7 @@ function validateTechnicalId(id, label) {
 	) {
 		throw generatorSchemaError(
 			'INVALID_GENERATOR_ID',
-			`Invalid stable technical ${label}.`,
+			`Invalid stable ${label}.`,
 		);
 	}
 }
@@ -67,5 +67,5 @@ module.exports = {
 	assertRequiredKeys,
 	generatorSchemaError,
 	validateDisplayText,
-	validateTechnicalId,
+	validateStableId,
 };

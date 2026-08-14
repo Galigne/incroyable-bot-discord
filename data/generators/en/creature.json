@@ -6,33 +6,32 @@
   "description": "Creature categories available for generation",
   "entrySchema": {
     "type": "fields",
-    "required": ["name", "description", "generator"],
-    "technical": ["generator"]
+    "required": ["name", "description"]
   },
   "entries": [
     {
       "id": "animal",
       "fields": {
         "name": "animal",
-        "description": "Ordinary and fantastic friendly wildlife",
-        "generator": "{{ animal }}"
-      }
+        "description": "Ordinary and fantastic friendly wildlife"
+      },
+      "generator": "animal"
     },
     {
       "id": "companion",
       "fields": {
         "name": "companion",
-        "description": "Pets, familiars, and small traveling creatures",
-        "generator": "{{ companion }}"
-      }
+        "description": "Pets, familiars, and small traveling creatures"
+      },
+      "generator": "companion"
     },
     {
       "id": "monster",
       "fields": {
         "name": "monster",
-        "description": "Hostile creatures and supernatural predators",
-        "generator": "{{ monster }}"
-      }
+        "description": "Hostile creatures and supernatural predators"
+      },
+      "generator": "monster"
     }
   ]
 }

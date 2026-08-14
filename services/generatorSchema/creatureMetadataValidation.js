@@ -5,7 +5,7 @@ const {
 	assertRequiredKeys,
 	generatorSchemaError,
 	validateDisplayText,
-	validateTechnicalId,
+	validateStableId,
 } = require('./assertions');
 const {
 	CREATURE_ROUTER_ID,
@@ -24,13 +24,11 @@ function validateCreatureGeneratorEnvelope(
 			generator.visibility !== 'public'
 			|| entrySchema.type !== 'fields'
 			|| JSON.stringify(entrySchema.required)
-				!== JSON.stringify(['name', 'description', 'generator'])
-			|| JSON.stringify(entrySchema.technical ?? [])
-				!== JSON.stringify(['generator'])
+				!== JSON.stringify(['name', 'description'])
 		) {
 			throw generatorSchemaError(
 				'INVALID_CREATURE_ROUTER_SCHEMA',
-				`Creature router ${file} must expose localized name and description fields plus a technical generator field.`,
+				`Creature router ${file} must expose localized name and description fields with structural routes.`,
 			);
 		}
 		return;
@@ -42,7 +40,6 @@ function validateCreatureGeneratorEnvelope(
 		generator.visibility !== 'internal'
 		|| entrySchema.type !== 'fields'
 		|| JSON.stringify(entrySchema.required) !== JSON.stringify(['name', 'description'])
-		|| (entrySchema.technical?.length ?? 0) !== 0
 	) {
 		throw generatorSchemaError(
 			'INVALID_CREATURE_ARCHETYPE_SCHEMA',
@@ -165,7 +162,7 @@ function validateFixedRules(rules, location) {
 			['entry', 'level'],
 			`Creature archetype ${location} fixed RULE has invalid properties.`,
 		);
-		validateTechnicalId(rule.entry, `fixed RULE entry in ${location}`);
+		validateStableId(rule.entry, `fixed RULE entry in ${location}`);
 		if (!Number.isInteger(rule.level) || rule.level < 1 || rule.level > 10) {
 			throw generatorSchemaError(
 				'INVALID_CREATURE_FIXED_RULE_LEVEL',

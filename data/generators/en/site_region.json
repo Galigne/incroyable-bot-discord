@@ -1,7 +1,7 @@
 {
   "schemaVersion": 3,
   "id": "region",
-  "visibility": "public",
+  "visibility": "internal",
   "name": "region",
   "description": "Broad natural and cultivated geographic regions",
   "entrySchema": {

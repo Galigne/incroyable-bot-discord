@@ -1,7 +1,7 @@
 {
   "schemaVersion": 3,
   "id": "consumable",
-  "visibility": "public",
+  "visibility": "internal",
   "name": "consumables",
   "description": "Items normally consumed or exhausted through use",
   "entrySchema": {

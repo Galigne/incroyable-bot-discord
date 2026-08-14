@@ -14,7 +14,7 @@ Category roots keep their unprefixed filename and ID. Their child filenames use
 `<category>_<concept>.json`, while each child generator ID is only `<concept>`.
 For example, `loot_weapons.json` has ID `weapons`, and references use
 `{{ weapons }}` rather than the filename. The current category families are
-`background`, `creature`, `loot`, `site`, and `group`.
+`background`, `creature`, `loot`, `site`, `group`, and `modifier`.
 
 ## Content guidelines
 
@@ -92,20 +92,26 @@ A structured generator declares between one and 25 required fields:
 ```json
 "entrySchema": {
   "type": "fields",
-  "required": ["name", "description", "generator"],
-  "technical": ["generator"]
+  "required": ["name", "description", "rarity", "ar_percentage"]
 }
 ```
 
 Each entry must contain exactly those fields. Field names use lowercase
-snake_case. Player-facing fields are localized strings. Technical fields may also
-be numbers or booleans; they are omitted from implicit display but can be selected
-explicitly by a reference.
+snake_case. Every field is ordinary generated data, is included in normal display,
+and can be selected explicitly. String fields are localized; fields may also be
+finite numbers or booleans.
+
+Entry properties are strict. In addition to `id`, optional `weight`, and exactly
+one payload (`value` or `fields`), an entry may define `generator` as a direct
+stable child-generator ID. Creature-detail entries may define the separately
+validated `generation` object. These reserved properties are functional metadata,
+are never displayed as generated fields, and arbitrary extra metadata is rejected.
 
 English and French counterparts must preserve the same relative path, generator
 ID, visibility, entry schema, modifier map, entry IDs, entry order, weights,
-technical values, and inline-reference structure. Localize only display text and
-other player-facing values.
+structural `generator` routes, functional `generation` metadata, non-string field
+values, and inline-reference structure. Localize string payload fields and other
+player-facing text.
 
 ## Inline references
 
@@ -121,8 +127,8 @@ References are embedded directly in text or string fields:
 Generator, entry, and field names are stable lowercase snake_case IDs. Omitting the
 entry performs weighted random selection; naming an entry fixes the selection.
 Omitting the field returns the selected entry's display value. For a structured
-entry, that display value joins its non-technical fields in declared order. An
-explicit field may select either a display or technical field.
+entry, that display value joins every field in declared order. An explicit field
+selects that one public generated field.
 
 References may be repeated and nested, and every occurrence resolves
 independently. All referenced generators, entries, and fields must exist in both
@@ -143,8 +149,52 @@ percentages:
 
 Each percentage is numeric and between `0` and `100`. When a relationship applies,
 one weighted entry from that source is resolved normally. The modifier is returned
-separately from the base result; fields that look technical or mechanical remain
+separately from the base result; fields that look mechanical remain
 descriptive data and never execute behavior.
+
+`/gen` has no command-level modifier option. The public `modifier` router exposes
+the useful internal character, creature, and site modifier pools through ordinary
+`.generator` traversal. Generating a modifier this way does not apply it to another
+result.
+
+## Structural traversal
+
+The top-level entry property `generator` is structural routing metadata and must be
+a direct stable generator ID:
+
+```json
+{
+  "id": "criminal",
+  "fields": {
+    "name": "Criminal",
+    "description": "Outlaws, thieves, smugglers..."
+  },
+  "generator": "criminal"
+}
+```
+
+Do not wrap structural routes in `{{ ... }}`. Inline references remain valid only
+inside actual generated text and fields; they compose content, while `generator`
+defines an explicit route.
+
+`/gen category:` accepts a traversal path. `:entry` fixes the current generator's
+entry, `.field` returns one field, and `.generator` follows the selected entry's
+route. A missing entry is selected with normal weights, and routing may repeat:
+
+```text
+background:criminal.description
+site:dungeon.generator
+site:dungeon.generator:buried_temple.name
+loot:shields.generator:wooden_shield.ar_percentage
+```
+
+Only the root is required to be public. The routed children in these families are
+internal and cannot be submitted as direct roots. A bare router generates only its selected entry's visible fields;
+it never follows the route automatically. A path ending on a generator performs
+ordinary generation and applies that final generator's automatic modifiers. A path
+ending on a field returns only that field and does not roll the final generator's
+automatic modifiers. Autocomplete follows the current path context, while valid
+manually submitted paths are not limited to its first 25 suggestions.
 
 Modifier sources use the same v3 document and entry formats as every other
 generator. Relationships must name existing sources, match across locales, and be
@@ -159,13 +209,13 @@ conditions come from `status_effect` and are not modifiers.
 Some stable IDs and fields have application-level meaning and must stay aligned
 with their consumers:
 
-- Every public `background` entry has a technical `generator` field containing one
-  wrapped reference to the corresponding internal `<category>` text generator,
+- Every public `background` entry has a top-level `generator` route containing the
+  direct ID of the corresponding internal `<category>` text generator,
   stored in `background_<category>.json`. Character generation resolves that
   archetype and independently resolves the internal `physical_description`
   generator.
 - The public `creature` router defines every supported `/gen-creature` type. Each
-  entry's technical `generator` field contains one wrapped reference to an internal
+  entry's top-level `generator` property directly names an internal
   creature-detail generator whose concept ID matches the route and whose filename
   is `creature_<concept>.json`. Adding or removing router entries changes the
   available types; they are not a hard-coded enum or additional persistence types.
@@ -173,16 +223,17 @@ with their consumers:
   validated `generation` metadata described by the schema checks. Statistical
   profile IDs come from the separate non-localized `stat-profile.json` schema and
   remain kebab-case.
-- The public `loot`, `site`, and `group` text routers contain equal-weight wrapped
-  references to their public children. Resolving a router returns the selected
-  child's normal display output and retains both selections in provenance. Loot
+- The public `loot`, `site`, `group`, and `modifier` structured routers contain
+  localized visible fields plus direct top-level routes to internal children. Bare
+  router generation displays only the route entry; explicit `.generator` traversal
+  resolves the child and retains both selections in provenance. Loot
   children may use different schemas: `material` is text, while equipment and the
   other item tables are structured.
 
 `inventory` is an entity storage field, not a generator ID. Random carried items
-come from the `loot` router. The public `shields` table exposes technical `rarity`
-and `ar_percentage` fields, and the public `affliction` table exposes a technical
-`type` distinguishing persistent diseases from curses.
+come through the `loot` router. The internal `shields` table exposes ordinary
+`rarity` and `ar_percentage` fields, and the public `affliction` table exposes an
+ordinary localized `type` distinguishing persistent diseases from curses.
 
 Creature metadata relationships for profiles, traits, fixed RULEs, status effects,
 modifiers, armor, equipment, and inventory are validated with the catalog. They do

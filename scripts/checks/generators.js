@@ -6,9 +6,6 @@ const {
 	getEntryWeight,
 	selectWeightedEntry,
 } = require('../../services/weightedSelector');
-const {
-	parseWrappedInlineReference,
-} = require('../../services/generatorSchema/referenceValidation');
 const generatorResolver = require('../../services/generatorResolver');
 
 module.exports = function createGeneratorChecks(context) {
@@ -102,39 +99,24 @@ module.exports = function createGeneratorChecks(context) {
 function checkRequiredGenerators(errors, generatorCatalog) {
 	const requiredPublicGenerators = [
 		'affliction',
-		'armors',
 		'background',
-		'building',
-		'consumable',
 		'creature',
-		'curio',
-		'dungeon',
 		'event',
-		'faction',
-		'food_and_drink',
-		'government',
 		'group',
 		'loot',
-		'material',
+		'modifier',
 		'name',
 		'personality',
 		'quest',
 		'race',
-		'region',
-		'religion',
-		'room',
 		'rules',
 		'rumor',
 		'secret',
-		'settlement',
-		'shields',
 		'site',
 		'status_effect',
-		'supplies',
 		'talents',
 		'trap',
-		'valuables',
-		'weapons',
+		'traits',
 	];
 	const publicIds = new Set(
 		generatorCatalog.listGenerators('en').map(generator => generator.id),
@@ -170,7 +152,7 @@ function checkBackgroundGenerators(errors, generatorCatalog) {
 	const backgrounds = generatorCatalog.getGenerator('background')?.entries ?? [];
 	const backgroundIds = new Set();
 	for (const background of backgrounds) {
-		const routedGeneratorId = getInlineGeneratorId(background.fields?.generator);
+		const routedGeneratorId = background.generator;
 		const details = generatorCatalog.getGenerator(routedGeneratorId)?.entries ?? [];
 		if (
 			!background.id
@@ -191,7 +173,6 @@ function checkBackgroundGenerators(errors, generatorCatalog) {
 		errors.push('Background routing must expose at least one category.');
 	}
 }
-
 function checkCategoryRouters(errors, generatorCatalog) {
 	for (const [routerId, childIds] of [
 		['loot', [
@@ -207,19 +188,27 @@ function checkCategoryRouters(errors, generatorCatalog) {
 		]],
 		['site', ['building', 'dungeon', 'settlement', 'region', 'room']],
 		['group', ['government', 'faction', 'religion']],
+		['modifier', [
+			'modifier_character',
+			'modifier_creature',
+			'site_modifier_all',
+			'site_modifier_building',
+			'site_modifier_interiors',
+			'site_modifier_structures',
+		]],
 	]) {
 		const router = generatorCatalog.getGenerator(routerId);
 		if (
 			router?.visibility !== 'public'
-			|| router.entrySchema.type !== 'text'
-			|| JSON.stringify(router.entries.map(entry => entry.id))
-				!== JSON.stringify(childIds)
+			|| router.entrySchema.type !== 'fields'
 			|| router.entries.some(entry => (
 				entry.weight !== undefined
-				|| getInlineGeneratorId(entry.value) !== entry.id
+					|| !entry.fields?.name
 			))
-			|| childIds.some(childId => (
-				generatorCatalog.getGenerator(childId)?.visibility !== 'public'
+			|| JSON.stringify(router.entries.map(entry => entry.generator))
+				!== JSON.stringify(childIds)
+			|| router.entries.some(entry => (
+				generatorCatalog.getGenerator(entry.generator)?.visibility !== 'internal'
 			))
 		) {
 			errors.push(`Invalid public ${routerId} category router.`);
@@ -250,7 +239,7 @@ function checkCreatureGenerators(errors, generatorCatalog) {
 		errors.push('The public creature router does not expose any valid creature types.');
 	}
 	for (const route of creature?.entries ?? []) {
-		const generatorId = getInlineGeneratorId(route.fields?.generator);
+		const generatorId = route.generator;
 		const generator = generatorCatalog.getGenerator(generatorId);
 		if (
 			!generatorId
@@ -345,7 +334,6 @@ function checkStructuredGenerators(errors, generatorCatalog) {
 		JSON.stringify(shields?.entrySchema) !== JSON.stringify({
 			type: 'fields',
 			required: ['name', 'rarity', 'description', 'ar_percentage'],
-			technical: ['rarity', 'ar_percentage'],
 		})
 		|| shields.entries.length !== 16
 		|| Object.entries(shieldRarities).some(([rarity, expected]) => {
@@ -362,7 +350,6 @@ function checkStructuredGenerators(errors, generatorCatalog) {
 		JSON.stringify(affliction?.entrySchema) !== JSON.stringify({
 			type: 'fields',
 			required: ['name', 'type', 'description'],
-			technical: ['type'],
 		})
 		|| affliction.entries.length !== 16
 		|| ['disease', 'curse'].some(type => (
@@ -423,15 +410,5 @@ function checkStatProfiles(errors) {
 		|| balanced !== getStatProfile('character-balanced')
 	) {
 		errors.push('The balanced statistical profile is missing or is not cached.');
-	}
-}
-
-function getInlineGeneratorId(value) {
-	try {
-		const reference = parseWrappedInlineReference(value, 'generator check');
-		return reference.entry || reference.field ? undefined : reference.generator;
-	}
-	catch {
-		return undefined;
 	}
 }

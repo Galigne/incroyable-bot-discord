@@ -5,44 +5,72 @@
   "name": "loot",
   "description": "Random items from every loot category",
   "entrySchema": {
-    "type": "text"
+    "type": "fields",
+    "required": ["name"]
   },
   "entries": [
     {
       "id": "weapons",
-      "value": "{{ weapons }}"
+      "generator": "weapons",
+      "fields": {
+        "name": "weapons"
+      }
     },
     {
       "id": "shields",
-      "value": "{{ shields }}"
+      "generator": "shields",
+      "fields": {
+        "name": "shields"
+      }
     },
     {
       "id": "armors",
-      "value": "{{ armors }}"
+      "generator": "armors",
+      "fields": {
+        "name": "armors"
+      }
     },
     {
       "id": "supplies",
-      "value": "{{ supplies }}"
+      "generator": "supplies",
+      "fields": {
+        "name": "supplies"
+      }
     },
     {
       "id": "consumable",
-      "value": "{{ consumable }}"
+      "generator": "consumable",
+      "fields": {
+        "name": "consumables"
+      }
     },
     {
       "id": "food_and_drink",
-      "value": "{{ food_and_drink }}"
+      "generator": "food_and_drink",
+      "fields": {
+        "name": "food and drink"
+      }
     },
     {
       "id": "valuables",
-      "value": "{{ valuables }}"
+      "generator": "valuables",
+      "fields": {
+        "name": "valuables"
+      }
     },
     {
       "id": "material",
-      "value": "{{ material }}"
+      "generator": "material",
+      "fields": {
+        "name": "material"
+      }
     },
     {
       "id": "curio",
-      "value": "{{ curio }}"
+      "generator": "curio",
+      "fields": {
+        "name": "curios"
+      }
     }
   ]
 }

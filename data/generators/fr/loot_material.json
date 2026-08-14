@@ -1,7 +1,7 @@
 {
   "schemaVersion": 3,
   "id": "material",
-  "visibility": "public",
+  "visibility": "internal",
   "name": "Matériaux",
   "description": "Matériaux naturels, manufacturés, précieux et magiques",
   "entrySchema": {

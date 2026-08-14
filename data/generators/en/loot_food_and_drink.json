@@ -1,7 +1,7 @@
 {
   "schemaVersion": 3,
   "id": "food_and_drink",
-  "visibility": "public",
+  "visibility": "internal",
   "name": "food and drink",
   "description": "Ordinary and unusual provisions, meals, and drinks",
   "entrySchema": {

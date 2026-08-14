@@ -31,7 +31,8 @@ test('every production quest, rumor, and secret resolves references with provena
 					locale,
 					{ random: () => 0 },
 				);
-				assert.ok(result.value);
+				assert.ok(result);
+				assert.ok(result.value || Object.keys(result.displayFields ?? {}).length > 0);
 				assert.doesNotMatch(result.value, /\{\{|\}\}|undefined/);
 				assert.ok(result.provenance.length > 1, `${locale}:${entry.id}`);
 				assert.equal(result.provenance[0].generatorId, generatorId);
@@ -41,7 +42,7 @@ test('every production quest, rumor, and secret resolves references with provena
 	}
 });
 
-test('production category routers resolve equal-weight public child generators', () => {
+test('production category routers traverse equal-weight internal child generators', () => {
 	const routers = new Map([
 		['loot', [
 			'weapons',
@@ -63,13 +64,14 @@ test('production category routers resolve equal-weight public child generators',
 			assert.equal(router.visibility, 'public');
 			assert.deepEqual(router.entries.map(entry => entry.id), childIds);
 			for (const childId of childIds) {
-				assert.equal(generatorCatalog.getGenerator(childId, locale).visibility, 'public');
-				const result = generatorResolver.resolveReference(
-					{ generator: routerId, entry: childId, select: 'display' },
+				assert.equal(generatorCatalog.getGenerator(childId, locale).visibility, 'internal');
+				const result = generatorResolver.generate(
+					`${routerId}:${childId}.generator`,
 					locale,
 					{ random: () => 0.5 },
 				);
-				assert.ok(result.value);
+				assert.ok(result);
+				assert.ok(result.value || Object.keys(result.displayFields ?? {}).length > 0);
 				assert.deepEqual(
 					result.provenance.slice(0, 2).map(record => record.generatorId),
 					[routerId, childId],
@@ -98,7 +100,7 @@ test('loot replaces every inventory entry across heterogeneous child schemas', (
 	}
 });
 
-test('shield and affliction catalogs preserve their technical distributions', () => {
+test('shield and affliction fields are public, localized, and mechanically stable', () => {
 	const shieldExpectations = new Map([
 		['common', { ar: 5, weights: [8, 8, 8] }],
 		['uncommon', { ar: 10, weights: [5, 5, 5] }],
@@ -106,37 +108,35 @@ test('shield and affliction catalogs preserve their technical distributions', ()
 		['epic', { ar: 20, weights: [2, 2, 2] }],
 		['legendary', { ar: 25, weights: [1, 1, 1] }],
 	]);
-	for (const locale of ['en', 'fr']) {
-		const shields = generatorCatalog.getGenerator('shields', locale);
-		assert.deepEqual(shields.entrySchema, {
-			type: 'fields',
-			required: ['name', 'rarity', 'description', 'ar_percentage'],
-			technical: ['rarity', 'ar_percentage'],
-		});
-		for (const [rarity, expected] of shieldExpectations) {
-			const entries = shields.entries.filter(entry => entry.fields.rarity === rarity);
-			assert.deepEqual(
-				entries.map(entry => entry.weight),
-				expected.weights,
-				`${locale}:${rarity}:weights`,
-			);
-			assert.equal(
-				entries.every(entry => entry.fields.ar_percentage === expected.ar),
-				true,
-				`${locale}:${rarity}:ar`,
-			);
-		}
-
-		const affliction = generatorCatalog.getGenerator('affliction', locale);
-		assert.deepEqual(affliction.entrySchema, {
-			type: 'fields',
-			required: ['name', 'type', 'description'],
-			technical: ['type'],
-		});
-		assert.equal(affliction.entries.length, 16);
-		assert.equal(affliction.entries.filter(entry => entry.fields.type === 'disease').length, 8);
-		assert.equal(affliction.entries.filter(entry => entry.fields.type === 'curse').length, 8);
+	const shields = generatorCatalog.getGenerator('shields', 'en');
+	assert.deepEqual(shields.entrySchema, {
+		type: 'fields',
+		required: ['name', 'rarity', 'description', 'ar_percentage'],
+	});
+	for (const [rarity, expected] of shieldExpectations) {
+		const entries = shields.entries.filter(entry => entry.fields.rarity === rarity);
+		assert.deepEqual(entries.map(entry => entry.weight), expected.weights);
+		assert.ok(entries.every(entry => entry.fields.ar_percentage === expected.ar));
 	}
+	const frenchShields = generatorCatalog.getGenerator('shields', 'fr');
+	assert.deepEqual(
+		frenchShields.entries.map(entry => entry.fields.ar_percentage),
+		shields.entries.map(entry => entry.fields.ar_percentage),
+	);
+	assert.notEqual(frenchShields.entries[0].fields.rarity, shields.entries[0].fields.rarity);
+
+	const affliction = generatorCatalog.getGenerator('affliction', 'en');
+	assert.deepEqual(affliction.entrySchema, {
+		type: 'fields',
+		required: ['name', 'type', 'description'],
+	});
+	assert.equal(affliction.entries.filter(entry => entry.fields.type === 'disease').length, 8);
+	assert.equal(affliction.entries.filter(entry => entry.fields.type === 'curse').length, 8);
+	const frenchAffliction = generatorCatalog.getGenerator('affliction', 'fr');
+	assert.equal(new Set(frenchAffliction.entries.map(entry => entry.fields.type)).size, 2);
+	assert.ok(frenchAffliction.entries.every(entry => (
+		!['disease', 'curse'].includes(entry.fields.type)
+	)));
 });
 
 test('affliction symptom references resolve as grammatical localized status labels', () => {

@@ -130,7 +130,7 @@ test('production category children use prefixed filenames and concept-only IDs',
 });
 
 test('generator and background autocomplete expose stable public values', () => {
-	const publicValues = getCommandOptionValues('generator-categories', 'fr');
+	const publicValues = getCommandOptionValues('generator-paths', 'fr');
 	const publicIds = new Set(
 		generatorCatalog.listGenerators('en').map(generator => generator.id),
 	);
@@ -173,41 +173,32 @@ test('wrapped inline reference parsing requires exactly one valid token', () => 
 	}
 });
 
-test('/gen modifier autocomplete follows the selected category map', () => {
-	const context = {
-		locale: 'fr',
-		interaction: {
-			options: {
-				getString: name => name === 'category' ? 'building' : '',
-			},
-		},
-	};
-	const choices = AUTOCOMPLETE_PROVIDERS['generator-modifiers'](
+test('/gen traversal autocomplete follows entries, fields, and structural routes', () => {
+	const complete = value => AUTOCOMPLETE_PROVIDERS['generator-paths'](
 		{},
-		context,
-		{ value: '' },
-	);
-	assert.deepEqual(
-		choices.map(choice => choice.value),
-		[
-			'site_modifier_all',
-			'site_modifier_structures',
-			'site_modifier_interiors',
-			'site_modifier_building',
-		],
-	);
-	assert.ok(choices.every(choice => choice.name.length <= 100));
-	assert.deepEqual(
-		AUTOCOMPLETE_PROVIDERS['generator-modifiers'](
-			{},
-			{
-				...context,
-				interaction: { options: { getString: () => 'unknown' } },
-			},
-			{ value: '' },
-		),
-		[],
-	);
+		{ locale: 'en' },
+		{ value },
+	).map(choice => choice.value);
+
+	assert.ok(complete('').includes('modifier'));
+	assert.ok(!complete('').includes('dungeon'));
+	assert.ok(complete('background:').includes('background:criminal'));
+	assert.deepEqual(complete('background:criminal.'), [
+		'background:criminal.name',
+		'background:criminal.description',
+		'background:criminal.generator',
+	]);
+	assert.ok(complete('background:criminal.generator:')
+		.includes('background:criminal.generator:pickpocket'));
+	assert.deepEqual(complete('site:dungeon.generator.'), [
+		'site:dungeon.generator.name',
+		'site:dungeon.generator.description',
+	]);
+	assert.ok(complete('loot:shields.generator.')
+		.includes('loot:shields.generator.ar_percentage'));
+	assert.deepEqual(complete('loot:shields.generator:w'), [
+		'loot:shields.generator:wooden_shield',
+	]);
 });
 
 test('generator schema validates unified v3 envelopes', () => {
@@ -241,6 +232,25 @@ test('generator schema validates entry schemas and payloads', () => {
 
 	const fields = createFieldsGenerator();
 	assert.equal(validateGeneratorDefinition(fields), fields);
+	assert.throws(
+		() => validateGeneratorDefinition({
+			...fields,
+			entrySchema: { ...fields.entrySchema, technical: ['type'] },
+		}),
+		error => error.name === 'GeneratorSchemaError',
+	);
+	for (const reservedField of ['generator', 'generation']) {
+		assert.throws(
+			() => validateGeneratorDefinition({
+				...fields,
+				entrySchema: {
+					...fields.entrySchema,
+					required: [...fields.entrySchema.required, reservedField],
+				},
+			}),
+			error => error.name === 'GeneratorSchemaError',
+		);
+	}
 	for (const modifiers of [
 		[],
 		{ quest_modifier: -1 },
@@ -254,11 +264,11 @@ test('generator schema validates entry schemas and payloads', () => {
 	}
 });
 
-test('generator schema validates localized technical parity', () => {
+test('generator schema localizes string fields and preserves functional parity', () => {
 	const english = createTextGenerator();
 	const french = structuredClone(english);
-	french.name = 'Météo';
-	french.description = 'Conditions météorologiques';
+	french.name = 'M\u00e9t\u00e9o';
+	french.description = 'Conditions m\u00e9t\u00e9orologiques';
 	french.entries[0].value = 'Une pluie douce commence.';
 	assert.equal(validateGeneratorPair(english, french, 'weather.json'), true);
 
@@ -266,14 +276,16 @@ test('generator schema validates localized technical parity', () => {
 	const fieldsFrench = structuredClone(fieldsEnglish);
 	fieldsFrench.name = 'Armures';
 	fieldsFrench.description = 'Armures disponibles';
-	fieldsFrench.entries[0].fields.name = 'Armure légère';
+	fieldsFrench.entries[0].fields.name = 'Armure l\u00e9g\u00e8re';
+	fieldsFrench.entries[0].fields.type = 'l\u00e9ger';
 	assert.equal(validateGeneratorPair(fieldsEnglish, fieldsFrench), true);
-	fieldsFrench.entries[0].fields.type = 'léger';
+	fieldsEnglish.entries[0].generator = 'armor_detail';
+	fieldsFrench.entries[0].generator = 'armure_detail';
 	assert.throws(
 		() => validateGeneratorPair(fieldsEnglish, fieldsFrench),
 		error => error.code === 'GENERATOR_LOCALE_PARITY_MISMATCH',
 	);
-	fieldsFrench.entries[0].fields.type = 'light';
+	fieldsFrench.entries[0].generator = 'armor_detail';
 	fieldsFrench.entries[0].id = 'armure_legere';
 	assert.throws(
 		() => validateGeneratorPair(fieldsEnglish, fieldsFrench),
@@ -410,7 +422,6 @@ function createFieldsGenerator() {
 		entrySchema: {
 			type: 'fields',
 			required: ['name', 'type'],
-			technical: ['type'],
 		},
 		entries: [{
 			id: 'light_armor',

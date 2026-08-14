@@ -6,15 +6,14 @@
   "description": "Maladies et malédictions persistantes",
   "entrySchema": {
     "type": "fields",
-    "required": ["name", "type", "description"],
-    "technical": ["type"]
+    "required": ["name", "type", "description"]
   },
   "entries": [
     {
       "id": "ash_fever",
       "fields": {
         "name": "Fièvre des cendres",
-        "type": "disease",
+        "type": "maladie",
         "description": "Une fièvre chargée de cendres inflige l’état {{ status_effect:feverish.name }} et rend le malade sensible aux flammes nues."
       }
     },
@@ -22,7 +21,7 @@
       "id": "marsh_lung",
       "fields": {
         "name": "Poumon des marais",
-        "type": "disease",
+        "type": "maladie",
         "description": "Une toux grasse et un essoufflement liés aux marais et aux eaux stagnantes."
       }
     },
@@ -30,7 +29,7 @@
       "id": "red_flux",
       "fields": {
         "name": "Flux rouge",
-        "type": "disease",
+        "type": "maladie",
         "description": "Une maladie intestinale épuisante accompagnée de crampes, de soif et d’un affaiblissement rapide."
       }
     },
@@ -38,7 +37,7 @@
       "id": "glass_cough",
       "fields": {
         "name": "Toux de verre",
-        "type": "disease",
+        "type": "maladie",
         "description": "Une toux sèche et douloureuse qui produit de minuscules cristaux translucides d’origine incertaine."
       }
     },
@@ -46,7 +45,7 @@
       "id": "sleeping_sickness",
       "fields": {
         "name": "Maladie du sommeil",
-        "type": "disease",
+        "type": "maladie",
         "description": "Des accès de sommeil de plus en plus fréquents interrompent les activités ordinaires et deviennent difficiles à repousser."
       }
     },
@@ -54,7 +53,7 @@
       "id": "frost_rot",
       "fields": {
         "name": "Pourriture de givre",
-        "type": "disease",
+        "type": "maladie",
         "description": "Des tissus engourdis et décolorés se dégradent après une exposition prolongée au froid ou à une influence surnaturelle."
       }
     },
@@ -62,7 +61,7 @@
       "id": "spore_fever",
       "fields": {
         "name": "Fièvre des spores",
-        "type": "disease",
+        "type": "maladie",
         "description": "Une infection fongique provoque des rêves intenses et inflige l’état {{ status_effect:confused.name }}."
       }
     },
@@ -70,7 +69,7 @@
       "id": "black_vein",
       "fields": {
         "name": "Veine noire",
-        "type": "disease",
+        "type": "maladie",
         "description": "Des veines assombries s’étendent lentement depuis une blessure infectée tandis que les forces déclinent."
       }
     },
@@ -78,7 +77,7 @@
       "id": "oathbrand",
       "fields": {
         "name": "Marque du serment",
-        "type": "curse",
+        "type": "malédiction",
         "description": "Une marque visible réagit lorsque son porteur s’apprête à rompre une promesse jurée."
       }
     },
@@ -86,7 +85,7 @@
       "id": "mirror_curse",
       "fields": {
         "name": "Malédiction du miroir",
-        "type": "curse",
+        "type": "malédiction",
         "description": "Les reflets rejouent parfois des intentions que leur propriétaire cherchait à dissimuler."
       }
     },
@@ -94,7 +93,7 @@
       "id": "hunger_mark",
       "fields": {
         "name": "Marque de la faim",
-        "type": "curse",
+        "type": "malédiction",
         "description": "Aucun repas ordinaire ne rassasie durablement son porteur, quelle que soit son abondance."
       }
     },
@@ -102,7 +101,7 @@
       "id": "stone_sleep",
       "fields": {
         "name": "Sommeil de pierre",
-        "type": "curse",
+        "type": "malédiction",
         "description": "Après chaque sommeil profond, une partie du corps devient brièvement froide, lourde et semblable à la pierre."
       }
     },
@@ -110,7 +109,7 @@
       "id": "whispering_mark",
       "fields": {
         "name": "Marque murmurante",
-        "type": "curse",
+        "type": "malédiction",
         "description": "Une marque cachée répète des fragments de secrets entendus aux alentours lorsque tout est silencieux."
       }
     },
@@ -118,7 +117,7 @@
       "id": "nightmare_chain",
       "fields": {
         "name": "Chaîne des cauchemars",
-        "type": "curse",
+        "type": "malédiction",
         "description": "Des rêves récurrents relient le porteur à un lieu, un objet ou un dormeur inconnu."
       }
     },
@@ -126,7 +125,7 @@
       "id": "withering_touch",
       "fields": {
         "name": "Contact flétrissant",
-        "type": "curse",
+        "type": "malédiction",
         "description": "Les plantes fragiles et les denrées périssables se dégradent anormalement vite dans les mains du porteur."
       }
     },
@@ -134,7 +133,7 @@
       "id": "borrowed_shadow",
       "fields": {
         "name": "Ombre empruntée",
-        "type": "curse",
+        "type": "malédiction",
         "description": "L’ombre du porteur reproduit parfois les gestes de quelqu’un d’autre."
       }
     }

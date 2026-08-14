@@ -1,7 +1,7 @@
 {
   "schemaVersion": 3,
   "id": "valuables",
-  "visibility": "public",
+  "visibility": "internal",
   "name": "valuables",
   "description": "Portable wealth, trade goods, status objects, and collectibles",
   "entrySchema": {

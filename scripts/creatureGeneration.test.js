@@ -95,8 +95,8 @@ test('production creature sources are strict localized types backed by profiles'
 		for (const type of creatureTypes) {
 			const generatorId = getCreatureGeneratorId(type, locale);
 			assert.equal(
-				router.entries.find(entry => entry.id === type).fields.generator,
-				`{{ ${generatorId} }}`,
+				router.entries.find(entry => entry.id === type).generator,
+				generatorId,
 			);
 			const generator = generatorCatalog.getGenerator(generatorId, locale);
 			assert.equal(generator.visibility, 'internal');
@@ -178,7 +178,7 @@ test('creature metadata rejects mechanical overrides and armor conflicts', () =>
 	);
 });
 
-test('creature metadata preserves English and French technical parity', () => {
+test('creature metadata preserves English and French functional parity', () => {
 	const { generatorId } = getCreatureFixture();
 	const validationOptions = { creatureGeneratorIds: new Set([generatorId]) };
 	const english = structuredClone(generatorCatalog.getGenerator(generatorId, 'en'));
@@ -233,9 +233,8 @@ test('creature routers, types, and statistical profiles validate relationships',
 		error => error.code === 'CREATURE_ARCHETYPE_MISSING',
 	);
 	const invalidRoutes = createGeneratorCatalogCandidate();
-	const { generatorId } = getCreatureFixture();
 	const invalidRouter = structuredClone(invalidRoutes.get('fr').get('creature'));
-	invalidRouter.entries[0].fields.generator = `{{ ${generatorId}.name }}`;
+	delete invalidRouter.entries[0].generator;
 	invalidRoutes.get('fr').set('creature', invalidRouter);
 	assert.throws(
 		() => validateCreatureStatProfileRelationships(
@@ -806,6 +805,11 @@ test('generation, collision, and save failures leave no partial creature or hist
 			type: validType,
 			level: 1,
 			resolver: {
+				generate() {
+					throw Object.assign(new Error('injected generation failure'), {
+						code: 'INJECTED_GENERATION_FAILURE',
+					});
+				},
 				resolveReference() {
 					throw Object.assign(new Error('injected generation failure'), {
 						code: 'INJECTED_GENERATION_FAILURE',
@@ -976,17 +980,7 @@ function getCreatureRoute(typeId, locale = 'en') {
 }
 
 function getCreatureGeneratorId(typeId, locale = 'en') {
-	const route = getCreatureRoute(typeId, locale);
-	try {
-		const reference = parseWrappedInlineReference(
-			route?.fields?.generator,
-			'creature route test',
-		);
-		return reference.entry || reference.field ? undefined : reference.generator;
-	}
-	catch {
-		return undefined;
-	}
+	return getCreatureRoute(typeId, locale)?.generator;
 }
 
 function getCreatureFixture(locale = 'en') {
@@ -1044,6 +1038,34 @@ function getArmorPercentage(creature) {
 
 function createDetailResolver(generatorId, result, modifierResult) {
 	return {
+		generate(traversalPath, locale, options) {
+			if (traversalPath.startsWith(`${CREATURE_ROUTER_ID}:`) && traversalPath.endsWith('.generator')) {
+				const type = getCreatureTypes(locale).find(candidate => (
+					getCreatureGeneratorId(candidate, locale) === generatorId
+				));
+				const selection = result.provenance.find(record => (
+					record.type === 'entry' && record.generatorId === generatorId
+				));
+				const fields = result.fields ?? result.value;
+				return {
+					generatorId,
+					generatorName: generatorCatalog.getGenerator(generatorId, locale).name,
+					entryId: selection.entryId,
+					outputType: 'fields',
+					fields,
+					displayFields: fields,
+					provenance: [{
+						type: 'entry',
+						selection: 'fixed',
+						generatorId: CREATURE_ROUTER_ID,
+						entryId: type,
+						path: 'root.traversal.0',
+					}, ...result.provenance],
+					modifiers: result.modifiers ?? [],
+				};
+			}
+			return generatorResolver.generate(path, locale, options);
+		},
 		resolveReference(reference, locale, options) {
 			if (reference.generator === generatorId && !reference.entry) {
 				return structuredClone(result);

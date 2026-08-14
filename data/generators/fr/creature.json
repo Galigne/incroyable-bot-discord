@@ -6,33 +6,32 @@
   "description": "Catégories de créatures pouvant être générées",
   "entrySchema": {
     "type": "fields",
-    "required": ["name", "description", "generator"],
-    "technical": ["generator"]
+    "required": ["name", "description"]
   },
   "entries": [
     {
       "id": "animal",
       "fields": {
         "name": "Animaux",
-        "description": "Faune ordinaire et créatures fantastiques inoffensives",
-        "generator": "{{ animal }}"
-      }
+        "description": "Faune ordinaire et créatures fantastiques inoffensives"
+      },
+      "generator": "animal"
     },
     {
       "id": "companion",
       "fields": {
         "name": "Compagnons",
-        "description": "Animaux de compagnie, familiers et petites créatures de voyage",
-        "generator": "{{ companion }}"
-      }
+        "description": "Animaux de compagnie, familiers et petites créatures de voyage"
+      },
+      "generator": "companion"
     },
     {
       "id": "monster",
       "fields": {
         "name": "Monstres",
-        "description": "Créatures hostiles et prédateurs surnaturels",
-        "generator": "{{ monster }}"
-      }
+        "description": "Créatures hostiles et prédateurs surnaturels"
+      },
+      "generator": "monster"
     }
   ]
 }

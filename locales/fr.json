@@ -140,16 +140,14 @@
     },
     "gen": {
       "description": "Générer une inspiration (rôle MJ configuré ou propriétaire du serveur)",
-      "schemaDescription": "Générer une inspiration pour le MJ dans la catégorie choisie",
-      "categoryOption": "Catégorie de génération",
+      "schemaDescription": "Générer une inspiration pour le MJ à partir d’un chemin",
+      "categoryOption": "Chemin partant d’un générateur public",
       "countOption": "Nombre de résultats indépendants à générer ; 1 par défaut",
-      "modifierOption": "Source de modificateur facultative configurée pour la catégorie choisie",
-      "unknownCategory": "Catégorie de génération inconnue : **{{category}}**. Utilisez `/help command:gen` pour consulter les détails.",
-      "invalidModifier": "La source de modificateur **{{modifier}}** n'est pas configurée pour la catégorie **{{category}}**.",
+      "unknownCategory": "Chemin de génération inconnu ou invalide : **{{category}}**. Utilisez `/help command:gen` pour consulter les détails.",
       "title": "{{category}} — résultat généré",
       "batchResultTitle": "Résultat {{index}}/{{count}} — {{category}}",
       "modifierTitle": "Modificateur généré : {{category}}",
-      "behavior": "Génère un résultat pondéré dans la catégorie choisie. Certains résultats comprennent des tirages imbriqués, et les modificateurs automatiques prévus pour la catégorie sont affichés séparément. Le nombre facultatif produit de 1 à 10 résultats indépendants dans une même réponse ; sa valeur par défaut est 1 et les doublons sont autorisés. Si une source de modificateur est choisie, elle doit être disponible pour la catégorie et est générée une fois par résultat, en plus de toute application automatique."
+      "behavior": "Part d’un générateur public et suit un chemin assisté par la saisie semi-automatique. Utilisez `:entry` pour choisir une entrée stable, `.field` pour ne renvoyer qu’un champ et `.generator` pour suivre la route structurelle de l’entrée ; ces segments peuvent se répéter. Sans entrée précisée, la sélection pondérée habituelle s’applique. Un chemin qui se termine sur un générateur effectue un tirage ordinaire et peut appliquer ses modificateurs automatiques. Un chemin qui se termine sur un champ ne renvoie que ce champ et n’applique pas les modificateurs automatiques du dernier générateur. Les générateurs internes ne peuvent pas servir de racine directe, mais restent accessibles par une route valide. Le nombre facultatif produit de 1 à 10 résultats indépendants et vaut 1 par défaut."
     },
     "genChar": {
       "description": "Générer un personnage (rôle MJ configuré ou propriétaire du serveur)",
@@ -456,7 +454,6 @@
     "description": "Description",
     "enemies": "Ennemis",
     "firstName": "Prénom",
-    "generator": "Générateur",
     "goal": "Objectif",
     "hierarchy": "Hiérarchie",
     "holyPlace": "Lieu saint",

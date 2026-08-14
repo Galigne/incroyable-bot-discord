@@ -1,7 +1,7 @@
 {
   "schemaVersion": 3,
   "id": "dungeon",
-  "visibility": "public",
+  "visibility": "internal",
   "name": "Donjons",
   "description": "Sites d’aventure, ruines, repaires et complexes hostiles",
   "entrySchema": {

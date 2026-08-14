@@ -1,7 +1,7 @@
 {
   "schemaVersion": 3,
   "id": "building",
-  "visibility": "public",
+  "visibility": "internal",
   "name": "Bâtiments",
   "description": "Bâtiments urbains et ruraux dotés d’un intérêt immédiat",
   "entrySchema": {

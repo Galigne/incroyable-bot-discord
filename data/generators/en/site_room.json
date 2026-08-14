@@ -1,7 +1,7 @@
 {
   "schemaVersion": 3,
   "id": "room",
-  "visibility": "public",
+  "visibility": "internal",
   "name": "room",
   "description": "Rooms and interior spaces for buildings or dungeons",
   "entrySchema": {

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 3,
   "id": "settlement",
-  "visibility": "public",
+  "visibility": "internal",
   "name": "Communautés",
   "description": "Hameaux, villes, camps et autres foyers de population",
   "entrySchema": {

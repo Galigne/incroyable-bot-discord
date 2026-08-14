@@ -12,7 +12,7 @@ The JSON contract and catalog-editing rules are documented in
 `services/generatorCatalog.js` recursively loads the matching English and French
 catalog trees. `services/generatorSchema.js` and its focused validators accept only
 generator schema v3 and validate the complete locale pair, including stable IDs,
-entry shapes, weights, technical fields, references, modifier relationships, and
+entry shapes, weights, structural routes, references, modifier relationships, and
 creature metadata. During `/reload`, `reloadGenerationData()` prepares generator and
 statistical-profile candidates together, validates creature/profile relationships,
 and replaces both active caches only after validation succeeds. Normal process
@@ -21,13 +21,13 @@ their existing loading behavior; it does not run that joint reload workflow.
 
 Visibility controls entry points, not resolvability:
 
-- `public` generators are available as direct `/gen` roots and appear in command
+- `public` generators are available as initial `/gen` roots and appear in command
   autocomplete and help;
 - `internal` generators are hidden from those user-facing lists but remain
-  available to application workflows, inline references, and modifier
-  relationships.
+  available to application workflows, inline references, structural traversal,
+  and modifier relationships.
 
-Stable lowercase snake_case generator and entry IDs provide technical identity.
+Stable lowercase snake_case generator and entry IDs provide durable identity.
 Localized names and content never determine routing or provenance. Generator
 resolution returns data only; persistence belongs to the character and creature
 application workflows.
@@ -40,8 +40,8 @@ never filenames.
 
 ## Resolution and provenance
 
-`services/generatorResolver.js` resolves a public root for `/gen` or a reference
-requested by application code. A reference can select a random weighted entry, a
+`services/generatorResolver.js` resolves a public traversal root for `/gen` or a
+reference requested by application code. A reference can select a random weighted entry, a
 fixed entry, an entry's display value, its complete fields object, or one explicit
 field. Inline syntax is:
 
@@ -56,16 +56,43 @@ field. Inline syntax is:
 occurrence is resolved independently, so repeated references can choose different
 entries. Nested references share one active selection stack: repeated active
 generator/entry pairs are rejected as cycles, and depth is capped at four. Fixed
-entries do not consume entry-selection randomness. Structured display excludes
-technical fields, while explicit field selection can read them.
+entries do not consume entry-selection randomness. Every structured field is
+ordinary displayable generated data.
 
 Every resolved selection adds provenance with the stable generator ID, entry ID,
 selection mode (`random` or `fixed`), and resolution path. Weighted generator-source
 selection adds its own source record. Nested inline references contribute their
-records to the parent result, so callers can retain the complete technical path
+records to the parent result, so callers can retain the complete stable path
 without deriving identity from localized text. Completed results contain the
 localized value or structured fields, provenance, and a separate array of resolved
 modifier results.
+
+## Structural routes and `/gen` traversal
+
+An entry's optional top-level `generator` property is a direct stable generator ID.
+It is reserved routing metadata, never part of `fields`, and never appears as raw
+output. It is distinct from inline `{{ ... }}` references: structural routes move
+the traversal to another generator, while inline references compose generated
+content inside strings.
+
+The `/gen category:` path grammar uses `:entry` to fix an entry and `.field` to
+select one field. `.generator` follows the selected entry's structural route and
+may be followed by another entry, route, or field. Missing entries use normal
+weighted selection. Autocomplete derives roots, entries, fields, and routes from
+the current path context, but manual valid paths remain accepted independently of
+the 25-choice suggestion limit.
+
+Only the initial generator must be public. Every child reached through the
+`background`, `creature`, `loot`, `site`, `group`, or `modifier` routers is
+internal, so a child such as `dungeon` is invalid as a direct root but reachable
+through `site:dungeon.generator`. Bare router generation displays only the selected
+router entry and does not follow its route.
+
+When traversal ends on a generator, the resolver performs ordinary generation from
+that final generator and applies its automatic modifier relationships. When it ends
+on a field, the resolver returns only that field and suppresses the final
+generator's automatic modifiers. Route and final selections share cycle, depth,
+localization, weighting, and provenance behavior.
 
 ## Generator-level modifiers
 
@@ -75,7 +102,7 @@ selects one weighted entry and resolves its inline references and own modifier
 relationships through the same stack. The completed modifier result is appended to
 the result's `modifiers` array; it never merges into the base payload.
 
-This mechanism is descriptive only. It does not interpret technical-looking fields
+This mechanism is descriptive only. It does not interpret mechanical-looking fields
 or alter statistics, resources, armor, RULEs, traits, status, gear, entity type, or
 persistence. Site generators use these relationships for their own configured
 modifier sources.
@@ -90,6 +117,10 @@ each entity workflow and preserves the selected pool/entry IDs and reference
 provenance with the localized name and description. Creature detail metadata may
 also explicitly reference creature modifiers. Temporary conditions are resolved
 from `status_effect` and stored separately from persistent modifiers.
+
+Users access the same useful pools through the public `modifier` router and normal
+`.generator` traversal. This produces a standalone modifier result; `/gen` has no
+special option that applies or forces it on another result.
 
 ## Shared statistical generation
 
@@ -111,8 +142,8 @@ reference resolution:
    main equipment, and carried loot as required by character mechanics.
 2. It selects a stable entry from the public `background` router, or uses the
    requested category.
-3. That entry's technical `generator` field contains a wrapped inline reference to
-   the matching internal `<category>` text generator stored in
+3. That entry's top-level `generator` property directly names the matching internal
+   `<category>` text generator stored in
    `background_<category>.json`. Resolving it supplies the reusable background
    archetype.
 4. It independently resolves `{{ physical_description }}`. Physical description is
@@ -128,9 +159,9 @@ with an 80% chance or `shields` with a 20% chance; multiple equipped shields are
 allowed, and their `ar_percentage` values add to the armor percentage before the
 normal max-HP-based AR calculation.
 
-Three carried items resolve independently through the equal-weight public `loot`
-router. The workflow consumes the resolved display string so text and structured
-loot children are compatible, and it uses stable child provenance to avoid exact
+Three carried items resolve independently through the public `loot` router's
+structural routes. The workflow consumes the child display string so text and
+structured loot children are compatible, and it uses stable child provenance to avoid exact
 duplicates with bounded retries. Carried armor, weapons, or shields are not
 equipped and do not affect AR. Generated equipment and inventory never alter the
 manual encumbrance resource.
@@ -140,8 +171,8 @@ manual encumbrance resource.
 The public `creature` generator is the creature-type router. Its entries are the
 complete dynamic set accepted by `/gen-creature` and displayed by autocomplete.
 When `type` is omitted, the workflow selects a weighted router entry; otherwise it
-selects the requested stable entry. Each entry's technical `generator` field is one
-wrapped reference to an internal creature-detail generator.
+selects the requested stable entry. Each entry's top-level `generator` property
+directly names an internal creature-detail generator.
 
 The current catalog routes `animal`, `companion`, and `monster` to internal
 generators with those same concept IDs, stored in the corresponding `creature_*`
@@ -182,15 +213,16 @@ mechanical formulas.
 ## Other composed generators
 
 Public text generators can compose ordinary concepts with inline references. The
-`loot`, `site`, and `group` roots are equal-weight text routers over their public
-children. `quest`, `rumor`, and `secret` entries combine these and other fixed or
-random concepts. These resolutions keep nested provenance but do not create or
+`loot`, `site`, and `group` roots are structured routers over internal children;
+application workflows or explicit `.generator` paths follow those routes.
+`quest`, `rumor`, and `secret` entries combine these and other fixed or random
+concepts. These resolutions keep nested provenance but do not create or
 persist the referenced people, creatures, locations, or items.
 
 ## Validation coverage
 
 Offline checks cover v3 envelopes, IDs, weights, strict locale parity, public and
-internal visibility, inline and structured references, fixed and weighted
-selection, nesting, cycles, depth bounds, provenance, modifiers, statistical
-profiles, background routes, dynamic creature routes, character and creature
+internal visibility, inline and structural routes, traversal autocomplete, fixed
+and weighted selection, field targeting, nesting, cycles, depth bounds,
+provenance, modifiers, statistical profiles, background routes, dynamic creature routes, character and creature
 generation, persistence, and command integration.

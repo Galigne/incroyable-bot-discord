@@ -5,28 +5,44 @@
   "name": "site",
   "description": "Random buildings, dungeons, settlements, regions, and rooms",
   "entrySchema": {
-    "type": "text"
+    "type": "fields",
+    "required": ["name"]
   },
   "entries": [
     {
       "id": "building",
-      "value": "{{ building }}"
+      "generator": "building",
+      "fields": {
+        "name": "building"
+      }
     },
     {
       "id": "dungeon",
-      "value": "{{ dungeon }}"
+      "generator": "dungeon",
+      "fields": {
+        "name": "dungeon"
+      }
     },
     {
       "id": "settlement",
-      "value": "{{ settlement }}"
+      "generator": "settlement",
+      "fields": {
+        "name": "settlement"
+      }
     },
     {
       "id": "region",
-      "value": "{{ region }}"
+      "generator": "region",
+      "fields": {
+        "name": "region"
+      }
     },
     {
       "id": "room",
-      "value": "{{ room }}"
+      "generator": "room",
+      "fields": {
+        "name": "room"
+      }
     }
   ]
 }

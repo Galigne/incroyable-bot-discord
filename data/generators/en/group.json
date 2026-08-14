@@ -5,20 +5,30 @@
   "name": "group",
   "description": "Random governments, factions, and religions",
   "entrySchema": {
-    "type": "text"
+    "type": "fields",
+    "required": ["name"]
   },
   "entries": [
     {
       "id": "government",
-      "value": "{{ government }}"
+      "generator": "government",
+      "fields": {
+        "name": "government"
+      }
     },
     {
       "id": "faction",
-      "value": "{{ faction }}"
+      "generator": "faction",
+      "fields": {
+        "name": "faction"
+      }
     },
     {
       "id": "religion",
-      "value": "{{ religion }}"
+      "generator": "religion",
+      "fields": {
+        "name": "religion"
+      }
     }
   ]
 }

@@ -124,8 +124,10 @@ write real saves.
 - `services/generatorCatalog.js`: recursively loads the complete generator-v3
   locale pair and exposes stable-ID lookup plus public visibility filtering.
 - `services/generatorResolver.js`: resolves public roots into localized structured
-  results, coordinates nested references and generator-level modifier results, and
-  preserves stable technical provenance.
+  results, owns repeated entry/route/field traversal, coordinates nested references
+  and generator-level modifier results, and preserves stable provenance.
+- `services/generatorTraversal.js`: parses `/gen` traversal paths and derives
+  contextual root, entry, field, and structural-route autocomplete candidates.
 - `services/referenceResolver.js`: resolves random and fixed entries, selectors,
   weighted generator sources, cycles, and bounded nesting.
 - `services/descriptiveModifierGenerator.js`: applies the independent 25%
@@ -590,25 +592,43 @@ The durable implementation constraints are:
 
 - Treat generators as reusable GM inspiration, not automatic story writers. Avoid
   unnecessary fixed identity, history, motives, relationships, or consequences.
-- Preserve strict English/French structural parity and stable English technical
-  IDs, field keys, enum values, routing values, weights, and modifier percentages.
-  Never fall back to English or translate already persisted content.
-- Expose only `public` generators through `/gen`, autocomplete, and help. Keep
-  `internal` generators resolvable by workflows, inline references, and modifier
-  relationships.
-- Keep inline-reference resolution and provenance in the resolver services. Do not
-  parse references, select entries, or reconstruct provenance in command handlers.
+- Preserve strict English/French structural parity and stable English IDs, field
+  keys, routing values, weights, non-string fields, functional metadata, and
+  modifier percentages. Localize generated string fields. Never fall back to
+  English or translate already persisted content.
+- Expose only `public` generators as initial `/gen` roots, autocomplete roots, and
+  help values. Keep `internal` generators resolvable by structural traversal,
+  workflows, inline references, and modifier relationships.
+- Every structured field is ordinary displayable generated data. Functional entry
+  metadata is restricted to the top-level `id`, `weight`, `generator`, and
+  creature-detail `generation` properties alongside exactly one `fields` or
+  `value` payload. Never add `entrySchema.technical` or hide a field because it is
+  mechanically useful.
+- Keep structural traversal, inline-reference resolution, selection, cycle/depth
+  protection, final-field modifier suppression, and provenance in resolver
+  services. Do not parse paths or references, select entries, or reconstruct
+  provenance in command handlers.
+- `/gen category:` uses `:entry` for a fixed entry and `.field` for a selected
+  field; `.generator` follows the selected entry's route and may repeat. A path
+  ending on a generator performs ordinary generation with that final generator's
+  automatic modifiers. A path ending on a field returns only that field without
+  the final generator's automatic modifiers. Only the initial generator may be a
+  public root; internal children are reachable only through valid traversal.
 - Keep `background` routing aligned with one internal concept-only generator per
-  category, stored in `background_<category>.json`. Resolve
+  category, stored in `background_<category>.json`. Each router entry uses a direct
+  top-level `generator` ID, never a wrapped inline reference. Resolve
   `physical_description` independently when generating a character.
 - Derive supported `/gen-creature` types from the public `creature` router. Router
-  entries reference internal concept-only IDs stored in `creature_<type>.json`;
+  entries use top-level `generator` properties naming internal concept-only IDs
+  stored in `creature_<type>.json`;
   they are generator classifications, and the only persistent entity type is
   `creature`.
 - Category roots keep unprefixed filenames and IDs. Child filenames use
   `<category>_<concept>.json`, child IDs use only `<concept>`, and all references
-  use generator IDs rather than filenames. The public `loot`, `site`, and `group`
-  roots are equal-weight text routers over public children.
+  use generator IDs rather than filenames. The public `loot`, `site`, `group`, and
+  `modifier` roots are structured routers over internal children. Bare router
+  generation displays only the selected route entry; `.generator` traversal
+  follows its direct structural route.
 - There is no `inventory` generator. Random character inventory resolves three
   carried display values through `loot`, using child provenance for bounded
   duplicate avoidance. Heterogeneous loot schemas must remain supported.
@@ -618,7 +638,9 @@ The durable implementation constraints are:
   loot never contributes AR.
 - Use only `modifier_character` for the character modifier policy and
   `modifier_creature` for the creature modifier policy. Modifiers and status
-  effects remain descriptive and never execute mechanics.
+  effects remain descriptive and never execute mechanics. `/gen` has no modifier
+  option; the public `modifier` router provides standalone access to useful
+  internal modifier pools.
 - Creature RULEs come only from explicit `fixedRules`; only natural-armor metadata
   or an explicit armor reference initializes AR; generation never derives manual
   encumbrance.

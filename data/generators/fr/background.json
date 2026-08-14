@@ -6,8 +6,7 @@
   "description": "Catégories de profils de personnage",
   "entrySchema": {
     "type": "fields",
-    "required": ["name", "description", "generator"],
-    "technical": ["generator"]
+    "required": ["name", "description"]
   },
   "entries": [
     {
@@ -15,153 +14,153 @@
       "weight": 4,
       "fields": {
         "name": "Criminel",
-        "description": "Hors-la-loi, voleurs, contrebandiers, fonctionnaires corrompus et membres du crime organisé",
-        "generator": "{{ criminal }}"
-      }
+        "description": "Hors-la-loi, voleurs, contrebandiers, fonctionnaires corrompus et membres du crime organisé"
+      },
+      "generator": "criminal"
     },
     {
       "id": "adventurer",
       "weight": 5,
       "fields": {
         "name": "Aventurier",
-        "description": "Explorateurs, mercenaires, chasseurs de monstres, pèlerins et chasseurs de trésors",
-        "generator": "{{ adventurer }}"
-      }
+        "description": "Explorateurs, mercenaires, chasseurs de monstres, pèlerins et chasseurs de trésors"
+      },
+      "generator": "adventurer"
     },
     {
       "id": "noble",
       "weight": 2,
       "fields": {
         "name": "Noble",
-        "description": "Aristocrates, courtisans, héritiers et petits seigneurs",
-        "generator": "{{ noble }}"
-      }
+        "description": "Aristocrates, courtisans, héritiers et petits seigneurs"
+      },
+      "generator": "noble"
     },
     {
       "id": "peasant",
       "weight": 5,
       "fields": {
         "name": "Paysan",
-        "description": "Agriculteurs, éleveurs et travailleurs ruraux",
-        "generator": "{{ peasant }}"
-      }
+        "description": "Agriculteurs, éleveurs et travailleurs ruraux"
+      },
+      "generator": "peasant"
     },
     {
       "id": "artisan",
       "weight": 5,
       "fields": {
         "name": "Artisan",
-        "description": "Forgerons, charpentiers, tailleurs, alchimistes et autres artisans",
-        "generator": "{{ artisan }}"
-      }
+        "description": "Forgerons, charpentiers, tailleurs, alchimistes et autres artisans"
+      },
+      "generator": "artisan"
     },
     {
       "id": "merchant",
       "weight": 5,
       "fields": {
         "name": "Marchand",
-        "description": "Négociants, boutiquiers, caravaniers et agents commerciaux",
-        "generator": "{{ merchant }}"
-      }
+        "description": "Négociants, boutiquiers, caravaniers et agents commerciaux"
+      },
+      "generator": "merchant"
     },
     {
       "id": "scholar",
       "weight": 3,
       "fields": {
         "name": "Érudit",
-        "description": "Étudiants, chercheurs, scribes et bibliothécaires",
-        "generator": "{{ scholar }}"
-      }
+        "description": "Étudiants, chercheurs, scribes et bibliothécaires"
+      },
+      "generator": "scholar"
     },
     {
       "id": "religious",
       "weight": 3,
       "fields": {
         "name": "Religieux",
-        "description": "Prêtres, moines, serviteurs de temple et pèlerins",
-        "generator": "{{ religious }}"
-      }
+        "description": "Prêtres, moines, serviteurs de temple et pèlerins"
+      },
+      "generator": "religious"
     },
     {
       "id": "military",
       "weight": 4,
       "fields": {
         "name": "Militaire",
-        "description": "Soldats, gardes, officiers et vétérans",
-        "generator": "{{ military }}"
-      }
+        "description": "Soldats, gardes, officiers et vétérans"
+      },
+      "generator": "military"
     },
     {
       "id": "outlander",
       "weight": 3,
       "fields": {
         "name": "Habitant des terres sauvages",
-        "description": "Chasseurs, nomades, ermites et membres de peuples tribaux",
-        "generator": "{{ outlander }}"
-      }
+        "description": "Chasseurs, nomades, ermites et membres de peuples tribaux"
+      },
+      "generator": "outlander"
     },
     {
       "id": "sailor",
       "weight": 4,
       "fields": {
         "name": "Marin",
-        "description": "Marins, pêcheurs, pirates et dockers",
-        "generator": "{{ sailor }}"
-      }
+        "description": "Marins, pêcheurs, pirates et dockers"
+      },
+      "generator": "sailor"
     },
     {
       "id": "performer",
       "weight": 3,
       "fields": {
         "name": "Artiste",
-        "description": "Musiciens, comédiens, conteurs et artistes de spectacle",
-        "generator": "{{ performer }}"
-      }
+        "description": "Musiciens, comédiens, conteurs et artistes de spectacle"
+      },
+      "generator": "performer"
     },
     {
       "id": "servant",
       "weight": 4,
       "fields": {
         "name": "Serviteur",
-        "description": "Domestiques, assistants personnels et ouvriers",
-        "generator": "{{ servant }}"
-      }
+        "description": "Domestiques, assistants personnels et ouvriers"
+      },
+      "generator": "servant"
     },
     {
       "id": "official",
       "weight": 3,
       "fields": {
         "name": "Fonctionnaire",
-        "description": "Administrateurs, diplomates, collecteurs d’impôts et juges",
-        "generator": "{{ official }}"
-      }
+        "description": "Administrateurs, diplomates, collecteurs d’impôts et juges"
+      },
+      "generator": "official"
     },
     {
       "id": "mage",
       "weight": 2,
       "fields": {
         "name": "Mage",
-        "description": "Apprentis, mages autodidactes et chercheurs en magie",
-        "generator": "{{ mage }}"
-      }
+        "description": "Apprentis, mages autodidactes et chercheurs en magie"
+      },
+      "generator": "mage"
     },
     {
       "id": "exile",
       "weight": 3,
       "fields": {
         "name": "Exilé",
-        "description": "Réfugiés, fugitifs, nobles bannis et survivants déplacés",
-        "generator": "{{ exile }}"
-      }
+        "description": "Réfugiés, fugitifs, nobles bannis et survivants déplacés"
+      },
+      "generator": "exile"
     },
     {
       "id": "urchin",
       "weight": 3,
       "fields": {
         "name": "Enfant des rues",
-        "description": "Orphelins, mendiants, enfants des rues et récupérateurs",
-        "generator": "{{ urchin }}"
-      }
+        "description": "Orphelins, mendiants, enfants des rues et récupérateurs"
+      },
+      "generator": "urchin"
     }
   ]
 }

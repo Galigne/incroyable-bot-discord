@@ -1,7 +1,7 @@
 {
   "schemaVersion": 3,
   "id": "room",
-  "visibility": "public",
+  "visibility": "internal",
   "name": "Pièces",
   "description": "Pièces et espaces intérieurs de bâtiments ou de donjons",
   "entrySchema": {

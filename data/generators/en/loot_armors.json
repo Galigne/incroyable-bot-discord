@@ -1,7 +1,7 @@
 {
   "schemaVersion": 3,
   "id": "armors",
-  "visibility": "public",
+  "visibility": "internal",
   "name": "armors",
   "description": "Every armor type and rarity combination",
   "entrySchema": {
@@ -13,8 +13,7 @@
       "description",
       "constitution_requirement",
       "ar_percentage"
-    ],
-    "technical": ["type", "rarity", "constitution_requirement", "ar_percentage"]
+    ]
   },
   "entries": [
     {

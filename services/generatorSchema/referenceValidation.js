@@ -4,7 +4,7 @@ const {
 	assertPlainObject,
 	assertRequiredKeys,
 	generatorSchemaError,
-	validateTechnicalId,
+	validateStableId,
 } = require('./assertions');
 
 const INLINE_REFERENCE_PATTERN = /^[a-z0-9]+(?:_[a-z0-9]+)*(?::[a-z0-9]+(?:_[a-z0-9]+)*)?(?:\.[a-z0-9]+(?:_[a-z0-9]+)*)?$/;
@@ -22,7 +22,7 @@ function validateReference(reference, location) {
 		`Generator ${location} is missing a source or selector.`,
 	);
 	if (typeof reference.generator === 'string') {
-		validateTechnicalId(reference.generator, `source generator in ${location}`);
+		validateStableId(reference.generator, `source generator in ${location}`);
 	}
 	else {
 		validateWeightedGeneratorSource(reference.generator, location);
@@ -34,7 +34,7 @@ function validateReference(reference, location) {
 		}
 	}
 	if (reference.entry !== undefined) {
-		validateTechnicalId(reference.entry, `fixed entry in ${location}`);
+		validateStableId(reference.entry, `fixed entry in ${location}`);
 	}
 	validateSelector(reference.select, location);
 }
@@ -69,7 +69,7 @@ function validateWeightedGeneratorSource(source, location) {
 			['id'],
 			`Generator ${location} source candidate is missing an ID.`,
 		);
-		validateTechnicalId(candidate.id, `weighted source in ${location}`);
+		validateStableId(candidate.id, `weighted source in ${location}`);
 		if (
 			candidate.weight !== undefined
 			&& (!Number.isFinite(candidate.weight) || candidate.weight <= 0)

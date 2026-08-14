@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 3,
+  "id": "modifier",
+  "visibility": "public",
+  "name": "modificateur",
+  "description": "Familles de modificateurs descriptifs",
+  "entrySchema": {
+    "type": "fields",
+    "required": ["name", "description"]
+  },
+  "entries": [
+    {
+      "id": "character",
+      "fields": {
+        "name": "Modificateurs de personnage",
+        "description": "Variations descriptives persistantes pour les personnages générés"
+      },
+      "generator": "modifier_character"
+    },
+    {
+      "id": "creature",
+      "fields": {
+        "name": "Modificateurs de créature",
+        "description": "Variations descriptives persistantes pour les créatures générées"
+      },
+      "generator": "modifier_creature"
+    },
+    {
+      "id": "site_general",
+      "fields": {
+        "name": "Modificateurs généraux de lieu",
+        "description": "Conditions et météo adaptées à de nombreux lieux"
+      },
+      "generator": "site_modifier_all"
+    },
+    {
+      "id": "site_building",
+      "fields": {
+        "name": "Modificateurs historiques de bâtiment",
+        "description": "Variations historiques adaptées aux bâtiments"
+      },
+      "generator": "site_modifier_building"
+    },
+    {
+      "id": "site_interiors",
+      "fields": {
+        "name": "Modificateurs de lieux intérieurs",
+        "description": "Variations adaptées aux salles et aux lieux clos"
+      },
+      "generator": "site_modifier_interiors"
+    },
+    {
+      "id": "site_structures",
+      "fields": {
+        "name": "Modificateurs d’état des structures",
+        "description": "Variations de dégâts et de ruines pour les structures"
+      },
+      "generator": "site_modifier_structures"
+    }
+  ]
+}

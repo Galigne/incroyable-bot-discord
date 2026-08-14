@@ -1,7 +1,7 @@
 {
   "schemaVersion": 3,
   "id": "weapons",
-  "visibility": "public",
+  "visibility": "internal",
   "name": "armes",
   "description": "Armes adaptées aux personnages générés",
   "entrySchema": {

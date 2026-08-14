@@ -1,7 +1,7 @@
 {
   "schemaVersion": 3,
   "id": "armors",
-  "visibility": "public",
+  "visibility": "internal",
   "name": "Armures",
   "description": "Armures de chaque type et de chaque rareté",
   "entrySchema": {
@@ -13,8 +13,7 @@
       "description",
       "constitution_requirement",
       "ar_percentage"
-    ],
-    "technical": ["type", "rarity", "constitution_requirement", "ar_percentage"]
+    ]
   },
   "entries": [
     {
@@ -22,8 +21,8 @@
       "weight": 8,
       "fields": {
         "name": "Armure légère commune",
-        "type": "light",
-        "rarity": "common",
+        "type": "légère",
+        "rarity": "commune",
         "description": "Vêtements ordinaires ou rembourrage léger qui préservent la mobilité mais n’offrent presque aucun PR.",
         "constitution_requirement": 0,
         "ar_percentage": 5
@@ -34,8 +33,8 @@
       "weight": 5,
       "fields": {
         "name": "Armure légère peu commune",
-        "type": "light",
-        "rarity": "uncommon",
+        "type": "légère",
+        "rarity": "peu commune",
         "description": "Vêtements renforcés bien ajustés offrant une protection modeste.",
         "constitution_requirement": 0,
         "ar_percentage": 15
@@ -46,7 +45,7 @@
       "weight": 3,
       "fields": {
         "name": "Armure légère rare",
-        "type": "light",
+        "type": "légère",
         "rarity": "rare",
         "description": "Armure souple de qualité supérieure, confectionnée dans un matériau exceptionnellement résistant.",
         "constitution_requirement": 0,
@@ -58,8 +57,8 @@
       "weight": 2,
       "fields": {
         "name": "Armure légère épique",
-        "type": "light",
-        "rarity": "epic",
+        "type": "légère",
+        "rarity": "épique",
         "description": "Protection remarquable et presque sans poids, réalisée grâce à des techniques rares.",
         "constitution_requirement": 0,
         "ar_percentage": 35
@@ -69,8 +68,8 @@
       "id": "legendary_light_armor",
       "fields": {
         "name": "Armure légère légendaire",
-        "type": "light",
-        "rarity": "legendary",
+        "type": "légère",
+        "rarity": "légendaire",
         "description": "Une seconde peau unique offrant une protection exceptionnelle sans restreindre le mouvement.",
         "constitution_requirement": 0,
         "ar_percentage": 45
@@ -81,8 +80,8 @@
       "weight": 8,
       "fields": {
         "name": "Armure intermédiaire commune",
-        "type": "medium",
-        "rarity": "common",
+        "type": "intermédiaire",
+        "rarity": "commune",
         "description": "Protection standard en cuir renforcé, en écailles ou en cotte de mailles partielle.",
         "constitution_requirement": 12,
         "ar_percentage": 25
@@ -93,8 +92,8 @@
       "weight": 5,
       "fields": {
         "name": "Armure intermédiaire peu commune",
-        "type": "medium",
-        "rarity": "uncommon",
+        "type": "intermédiaire",
+        "rarity": "peu commune",
         "description": "Armure professionnelle fiable offrant un bon équilibre entre protection et mobilité.",
         "constitution_requirement": 12,
         "ar_percentage": 35
@@ -105,7 +104,7 @@
       "weight": 3,
       "fields": {
         "name": "Armure intermédiaire rare",
-        "type": "medium",
+        "type": "intermédiaire",
         "rarity": "rare",
         "description": "Armure multicouche de maître offrant une excellente couverture.",
         "constitution_requirement": 12,
@@ -117,8 +116,8 @@
       "weight": 2,
       "fields": {
         "name": "Armure intermédiaire épique",
-        "type": "medium",
-        "rarity": "epic",
+        "type": "intermédiaire",
+        "rarity": "épique",
         "description": "Armure exceptionnelle renforcée par des matériaux ou runes magiques.",
         "constitution_requirement": 12,
         "ar_percentage": 55
@@ -128,8 +127,8 @@
       "id": "legendary_medium_armor",
       "fields": {
         "name": "Armure intermédiaire légendaire",
-        "type": "medium",
-        "rarity": "legendary",
+        "type": "intermédiaire",
+        "rarity": "légendaire",
         "description": "Armure renommée offrant une protection extraordinaire sans devenir encombrante.",
         "constitution_requirement": 12,
         "ar_percentage": 65
@@ -140,8 +139,8 @@
       "weight": 8,
       "fields": {
         "name": "Armure lourde commune",
-        "type": "heavy",
-        "rarity": "common",
+        "type": "lourde",
+        "rarity": "commune",
         "description": "Une armure de plates complète et basique, ou une protection massive équivalente.",
         "constitution_requirement": 14,
         "ar_percentage": 45
@@ -152,8 +151,8 @@
       "weight": 5,
       "fields": {
         "name": "Armure lourde peu commune",
-        "type": "heavy",
-        "rarity": "uncommon",
+        "type": "lourde",
+        "rarity": "peu commune",
         "description": "Armure lourde soigneusement ajustée, dotée d’articulations renforcées.",
         "constitution_requirement": 14,
         "ar_percentage": 55
@@ -164,7 +163,7 @@
       "weight": 3,
       "fields": {
         "name": "Armure lourde rare",
-        "type": "heavy",
+        "type": "lourde",
         "rarity": "rare",
         "description": "Armure lourde de maître forgée dans un métal supérieur ou constituée de plaques de monstre.",
         "constitution_requirement": 14,
@@ -176,8 +175,8 @@
       "weight": 2,
       "fields": {
         "name": "Armure lourde épique",
-        "type": "heavy",
-        "rarity": "epic",
+        "type": "lourde",
+        "rarity": "épique",
         "description": "Formidable armure runique capable d’encaisser des dégâts extraordinaires.",
         "constitution_requirement": 14,
         "ar_percentage": 75
@@ -187,8 +186,8 @@
       "id": "legendary_heavy_armor",
       "fields": {
         "name": "Armure lourde légendaire",
-        "type": "heavy",
-        "rarity": "legendary",
+        "type": "lourde",
+        "rarity": "légendaire",
         "description": "Armure unique semblable à une forteresse, célébrée dans les chants et les chroniques militaires.",
         "constitution_requirement": 14,
         "ar_percentage": 85

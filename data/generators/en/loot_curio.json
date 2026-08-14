@@ -1,7 +1,7 @@
 {
   "schemaVersion": 3,
   "id": "curio",
-  "visibility": "public",
+  "visibility": "internal",
   "name": "curios",
   "description": "Unusual objects with narrative, mysterious, personal, or situational interest",
   "entrySchema": {

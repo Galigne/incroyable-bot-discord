@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 3,
+  "id": "modifier",
+  "visibility": "public",
+  "name": "modifier",
+  "description": "Descriptive modifier families",
+  "entrySchema": {
+    "type": "fields",
+    "required": ["name", "description"]
+  },
+  "entries": [
+    {
+      "id": "character",
+      "fields": {
+        "name": "Character modifiers",
+        "description": "Persistent descriptive variations for generated characters"
+      },
+      "generator": "modifier_character"
+    },
+    {
+      "id": "creature",
+      "fields": {
+        "name": "Creature modifiers",
+        "description": "Persistent descriptive variations for generated creatures"
+      },
+      "generator": "modifier_creature"
+    },
+    {
+      "id": "site_general",
+      "fields": {
+        "name": "General site modifiers",
+        "description": "Conditions and weather suitable for many sites"
+      },
+      "generator": "site_modifier_all"
+    },
+    {
+      "id": "site_building",
+      "fields": {
+        "name": "Building history modifiers",
+        "description": "Historical variations suitable for buildings"
+      },
+      "generator": "site_modifier_building"
+    },
+    {
+      "id": "site_interiors",
+      "fields": {
+        "name": "Interior site modifiers",
+        "description": "Variations suitable for rooms and enclosed sites"
+      },
+      "generator": "site_modifier_interiors"
+    },
+    {
+      "id": "site_structures",
+      "fields": {
+        "name": "Structure condition modifiers",
+        "description": "Damage and ruin variations for structures"
+      },
+      "generator": "site_modifier_structures"
+    }
+  ]
+}

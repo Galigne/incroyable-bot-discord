@@ -5,28 +5,44 @@
   "name": "lieu",
   "description": "Bâtiments, donjons, communautés, régions et salles aléatoires",
   "entrySchema": {
-    "type": "text"
+    "type": "fields",
+    "required": ["name"]
   },
   "entries": [
     {
       "id": "building",
-      "value": "{{ building }}"
+      "generator": "building",
+      "fields": {
+        "name": "Bâtiments"
+      }
     },
     {
       "id": "dungeon",
-      "value": "{{ dungeon }}"
+      "generator": "dungeon",
+      "fields": {
+        "name": "Donjons"
+      }
     },
     {
       "id": "settlement",
-      "value": "{{ settlement }}"
+      "generator": "settlement",
+      "fields": {
+        "name": "Communautés"
+      }
     },
     {
       "id": "region",
-      "value": "{{ region }}"
+      "generator": "region",
+      "fields": {
+        "name": "Régions"
+      }
     },
     {
       "id": "room",
-      "value": "{{ room }}"
+      "generator": "room",
+      "fields": {
+        "name": "Pièces"
+      }
     }
   ]
 }

@@ -140,16 +140,14 @@
     },
     "gen": {
       "description": "Generate GM inspiration (configured DM role or server owner)",
-      "schemaDescription": "Generate GM inspiration from a chosen category",
-      "categoryOption": "Generator category",
+      "schemaDescription": "Generate GM inspiration from a traversal path",
+      "categoryOption": "Public generator traversal path",
       "countOption": "Number of independent results to generate; defaults to 1",
-      "modifierOption": "Optional modifier source configured for the selected category",
-      "unknownCategory": "Unknown generator category: **{{category}}**. Use `/help command:gen` for command details.",
-      "invalidModifier": "Modifier source **{{modifier}}** is not configured for category **{{category}}**.",
+      "unknownCategory": "Unknown or invalid generator path: **{{category}}**. Use `/help command:gen` for command details.",
       "title": "Generated {{category}}",
       "batchResultTitle": "Result {{index}}/{{count}} — {{category}}",
       "modifierTitle": "Generated modifier {{category}}",
-      "behavior": "Generates one weighted result from the chosen category. Some results include nested generation, and any automatic modifiers configured for the category are shown separately. The optional count generates 1 to 10 independent results in one response; it defaults to 1 and duplicate results are allowed. If a modifier source is selected, it must be available for the chosen category and is generated once per result alongside any modifiers applied automatically."
+      "behavior": "Starts from a public generator and follows an autocomplete-aware path. Use `:entry` to select a stable entry, `.field` to return only one field, and `.generator` to follow that entry’s structural route; these segments may repeat. Omitting an entry performs the normal weighted selection. A path ending on a generator performs ordinary generation and may apply that generator’s automatic modifiers. A path ending on a field returns only that field and does not apply the final generator’s automatic modifiers. Internal generators are unavailable as direct roots but remain reachable through valid routes. The optional count produces 1 to 10 independent results and defaults to 1."
     },
     "genChar": {
       "description": "Generate a random character (configured DM role or server owner)",
@@ -456,7 +454,6 @@
     "description": "Description",
     "enemies": "Enemies",
     "firstName": "First name",
-    "generator": "Generator",
     "goal": "Goal",
     "hierarchy": "Hierarchy",
     "holyPlace": "Holy place",

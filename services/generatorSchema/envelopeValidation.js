@@ -4,7 +4,7 @@ const {
 	assertRequiredKeys,
 	generatorSchemaError,
 	validateDisplayText,
-	validateTechnicalId,
+	validateStableId,
 } = require('./assertions');
 const {
 	GENERATOR_SCHEMA_VERSION,
@@ -54,7 +54,7 @@ function validateGeneratorDefinition(generator, file = '<generator>', options = 
 			`Generator ${file} must use schemaVersion ${GENERATOR_SCHEMA_VERSION}.`,
 		);
 	}
-	validateTechnicalId(generator.id, `generator ID in ${file}`);
+	validateStableId(generator.id, `generator ID in ${file}`);
 	if (!GENERATOR_VISIBILITIES.has(generator.visibility)) {
 		throw generatorSchemaError(
 			'INVALID_GENERATOR_VISIBILITY',

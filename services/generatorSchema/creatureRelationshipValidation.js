@@ -2,9 +2,6 @@ const { generatorSchemaError } = require('./assertions');
 const {
 	CREATURE_ROUTER_ID,
 } = require('./constants');
-const {
-	parseWrappedInlineReference,
-} = require('./referenceValidation');
 
 function validateCreatureGenerationRelationships(
 	generator,
@@ -111,17 +108,8 @@ function validateCreatureStatProfileRelationships(catalogs, profiles) {
 		}
 		for (const route of router.entries) {
 			const typeId = route.id;
-			const routeExpression = route?.fields?.generator;
-			const routeReference = typeof routeExpression === 'string'
-				? parseWrappedInlineReference(routeExpression, `${locale} creature route`)
-				: null;
-			const generatorId = routeReference?.generator;
-			if (
-				!routeReference
-				|| routeReference.entry
-				|| routeReference.field
-				|| !generatorId
-			) {
+			const generatorId = route.generator;
+			if (!generatorId) {
 				throw generatorSchemaError(
 					'CREATURE_ROUTE_INVALID',
 					`Creature generation has an invalid ${locale} ${typeId} route.`,

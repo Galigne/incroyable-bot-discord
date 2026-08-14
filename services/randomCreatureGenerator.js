@@ -6,9 +6,6 @@ const {
 const {
 	CREATURE_ROUTER_ID,
 } = require('./generatorSchema');
-const {
-	parseWrappedInlineReference,
-} = require('./generatorSchema/referenceValidation');
 const { generateStats } = require('./mechanics/characterGeneration');
 const { createGeneratedResources } = require('./mechanics/resources');
 const { getStatProfile } = require('./statProfileCatalog');
@@ -44,55 +41,28 @@ function populateRandomCreature(creature, options = {}) {
 		);
 	}
 
-	const route = resolveGenerationReference(
-		{
-			generator: CREATURE_ROUTER_ID,
-			...(requestedType === undefined ? {} : { entry: requestedType }),
-			select: 'fields',
-		},
+	const result = resolver.generate(
+		requestedType === undefined
+			? `${CREATURE_ROUTER_ID}.generator`
+			: `${CREATURE_ROUTER_ID}:${requestedType}.generator`,
 		locale,
-		random,
-		resolver,
-		'root.creature',
+		{ random },
 	);
-	const selectedType = getEntrySelection(route.provenance).entryId;
-	const routeExpression = route.fields?.generator ?? route.value?.generator;
-	let parsedRoute = null;
-	try {
-		parsedRoute = parseWrappedInlineReference(routeExpression, 'creature route');
-	}
-	catch {
-		// The route-specific generation error below describes unavailable routes.
-	}
-	if (
-		!parsedRoute
-		|| parsedRoute.entry
-		|| parsedRoute.field
-		|| !parsedRoute.generator
-	) {
+	if (!result) {
 		throw creatureGenerationError(
-			`Creature type route ${selectedType} is unavailable.`,
+			`Creature type route ${requestedType ?? 'random'} is unavailable.`,
 			'errors.generatorMissing',
-			{ category: selectedType },
+			{ category: requestedType ?? CREATURE_ROUTER_ID },
 		);
 	}
-	const result = resolver.resolveInlineReference(
-		routeExpression,
-		locale,
-		{ path: 'root.creature.details', random },
-	);
-	const selection = getEntrySelection(result.provenance);
-	const generatorId = selection.generatorId;
-	if (generatorId !== parsedRoute.generator) {
-		throw creatureGenerationError(
-			`Creature type route ${selectedType} resolved to an unexpected generator.`,
-			'errors.generatorMissing',
-			{ category: selectedType },
-		);
-	}
+	const selectedType = result.provenance.find(record => (
+		record.type === 'entry'
+		&& record.generatorId === CREATURE_ROUTER_ID
+	))?.entryId;
+	const generatorId = result.generatorId;
 	const generator = getGenerator(generatorId, locale);
-	const entry = generator?.entries.find(candidate => candidate.id === selection.entryId);
-	if (!entry?.generation || !result.value) {
+	const entry = generator?.entries.find(candidate => candidate.id === result.entryId);
+	if (!selectedType || !entry?.generation || result.outputType !== 'fields') {
 		throw creatureGenerationError(
 			`Creature detail generator ${generatorId} is unavailable.`,
 			'errors.generatorMissing',
@@ -111,11 +81,11 @@ function populateRandomCreature(creature, options = {}) {
 	}
 
 	creature.level = level;
-	const detailFields = result.fields ?? result.value;
+	const detailFields = result.displayFields ?? result.fields;
 	creature.name = requireLocalizedField(detailFields, 'name');
 	creature.description = requireLocalizedField(detailFields, 'description');
 	creature.statistics = generateStats({ level, profile, random });
-	const sourceProvenance = [...route.provenance, ...result.provenance];
+	const sourceProvenance = [...result.provenance];
 	creature.traits = resolveTraitTemplates(
 		generation.traits,
 		locale,
@@ -197,7 +167,7 @@ function populateRandomCreature(creature, options = {}) {
 	);
 	creature.source = {
 		generatorId,
-		entryId: selection.entryId,
+		entryId: result.entryId,
 		archetypeId: selectedType,
 		statProfileId: generation.statProfile,
 		provenance: sourceProvenance,

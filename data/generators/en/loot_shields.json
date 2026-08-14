@@ -1,13 +1,12 @@
 {
   "schemaVersion": 3,
   "id": "shields",
-  "visibility": "public",
+  "visibility": "internal",
   "name": "shields",
   "description": "Shields with rarity-based armor contributions",
   "entrySchema": {
     "type": "fields",
-    "required": ["name", "rarity", "description", "ar_percentage"],
-    "technical": ["rarity", "ar_percentage"]
+    "required": ["name", "rarity", "description", "ar_percentage"]
   },
   "entries": [
     {
@@ -21,12 +20,12 @@
       }
     },
     {
-      "id": "common_round_shield",
+      "id": "wooden_shield",
       "weight": 8,
       "fields": {
-        "name": "Round shield",
+        "name": "Wooden shield",
         "rarity": "common",
-        "description": "A practical circular shield with an appearance chosen for the setting.",
+        "description": "A practical wooden shield reinforced for ordinary combat.",
         "ar_percentage": 5
       }
     },

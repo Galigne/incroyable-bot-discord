@@ -1,7 +1,7 @@
 const {
 	assertPlainObject,
 	generatorSchemaError,
-	validateTechnicalId,
+	validateStableId,
 } = require('./assertions');
 const { MAX_MODIFIER_SOURCES } = require('./constants');
 
@@ -15,7 +15,7 @@ function validateModifierMap(modifiers, location) {
 		);
 	}
 	for (const sourceId of sourceIds) {
-		validateTechnicalId(sourceId, `modifier generator in ${location}`);
+		validateStableId(sourceId, `modifier generator in ${location}`);
 		const percentage = modifiers[sourceId];
 		if (!Number.isFinite(percentage) || percentage < 0 || percentage > 100) {
 			throw generatorSchemaError(

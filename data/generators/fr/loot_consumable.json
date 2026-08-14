@@ -1,7 +1,7 @@
 {
   "schemaVersion": 3,
   "id": "consumable",
-  "visibility": "public",
+  "visibility": "internal",
   "name": "consommables",
   "description": "Objets normalement consommés ou épuisés par leur utilisation",
   "entrySchema": {

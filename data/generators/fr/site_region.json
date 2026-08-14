@@ -1,7 +1,7 @@
 {
   "schemaVersion": 3,
   "id": "region",
-  "visibility": "public",
+  "visibility": "internal",
   "name": "Régions",
   "description": "Régions naturelles, habitées ou transformées par la magie",
   "entrySchema": {

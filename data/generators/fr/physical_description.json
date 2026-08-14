@@ -4,15 +4,26 @@
   "visibility": "internal",
   "name": "Descriptions physiques",
   "description": "Traits physiques visibles et réutilisables",
-  "entrySchema": { "type": "text" },
+  "entrySchema": {
+    "type": "text"
+  },
   "entries": [
-    { "id": "tall_broad_shoulders", "value": "Grand et large d’épaules." },
-    { "id": "short_wiry", "value": "Petit et nerveux." },
+    {
+      "id": "tall_broad_shoulders",
+      "value": "Grand et large d’épaules."
+    },
+    {
+      "id": "short_wiry",
+      "value": "Petit et nerveux."
+    },
     {
       "id": "lean_angular",
       "value": "Une silhouette fine et un visage anguleux."
     },
-    { "id": "round_soft_features", "value": "Un visage rond aux traits doux." },
+    {
+      "id": "round_soft_features",
+      "value": "Un visage rond aux traits doux."
+    },
     {
       "id": "weathered_square_jaw",
       "value": "Une mâchoire carrée et une peau burinée."
@@ -21,7 +32,10 @@
       "id": "pale_sharp_cheekbones",
       "value": "Un teint pâle et des pommettes saillantes."
     },
-    { "id": "freckles", "value": "Des taches de rousseur parsèment le nez." },
+    {
+      "id": "freckles",
+      "value": "Des taches de rousseur parsèment le nez."
+    },
     {
       "id": "curly_dark_hair",
       "value": "Une masse de cheveux noirs et bouclés."

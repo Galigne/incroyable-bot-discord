@@ -310,11 +310,11 @@ test('autocomplete respects Discord\'s 25-choice limit and filters values', asyn
 	const filteredCategories = await autocompleteOption(
 		'gen',
 		'category',
-		'weapons',
+		'loot:wea',
 		dm,
 	);
 	assert.equal(filteredCategories.length, 1);
-	assert.equal(filteredCategories[0].value, 'weapons');
+	assert.equal(filteredCategories[0].value, 'loot:weapons');
 
 	const initialFields = await autocompleteOption(
 		'set',

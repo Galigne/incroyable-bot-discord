@@ -34,7 +34,6 @@ function validateGeneratorPair(
 	);
 	assertParity(english.entries.length, french.entries.length, file, 'entries.length');
 
-	const technicalFields = new Set(english.entrySchema.technical ?? []);
 	for (let index = 0; index < english.entries.length; index += 1) {
 		const englishEntry = english.entries[index];
 		const frenchEntry = french.entries[index];
@@ -44,7 +43,7 @@ function validateGeneratorPair(
 			file,
 			`entries.${index}.keys`,
 		);
-		for (const property of ['id', 'weight']) {
+		for (const property of ['id', 'weight', 'generator']) {
 			assertParity(
 				englishEntry[property],
 				frenchEntry[property],
@@ -57,7 +56,6 @@ function validateGeneratorPair(
 				englishEntry,
 				frenchEntry,
 				english.entrySchema,
-				technicalFields,
 				file,
 				index,
 			);
@@ -87,7 +85,6 @@ function validateFieldsPair(
 	englishEntry,
 	frenchEntry,
 	entrySchema,
-	technicalFields,
 	file,
 	index,
 ) {
@@ -105,7 +102,7 @@ function validateFieldsPair(
 			file,
 			`${location}.type`,
 		);
-		if (technicalFields.has(field)) {
+		if (typeof englishEntry.fields[field] !== 'string') {
 			assertParity(
 				englishEntry.fields[field],
 				frenchEntry.fields[field],
@@ -113,7 +110,7 @@ function validateFieldsPair(
 				location,
 			);
 		}
-		else if (typeof englishEntry.fields[field] === 'string') {
+		else {
 			assertParity(
 				extractInlineReferences(englishEntry.fields[field], file),
 				extractInlineReferences(frenchEntry.fields[field], file),
@@ -126,7 +123,7 @@ function validateFieldsPair(
 
 function validateCreatureGenerationPair(english, french, file, index) {
 	const location = `entries.${index}.generation`;
-	const technicalProperties = [
+	const functionalProperties = [
 		'statProfile',
 		'naturalArmorPercentage',
 		'fixedRules',
@@ -137,7 +134,7 @@ function validateCreatureGenerationPair(english, french, file, index) {
 		'inventory',
 	];
 	assertParity(Object.keys(english).sort(), Object.keys(french).sort(), file, `${location}.keys`);
-	for (const property of technicalProperties) {
+	for (const property of functionalProperties) {
 		assertParity(english[property], french[property], file, `${location}.${property}`);
 	}
 	assertParity(english.traits.length, french.traits.length, file, `${location}.traits.length`);

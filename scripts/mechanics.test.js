@@ -402,6 +402,19 @@ test('equipped shield AR stacks while carried shield loot remains non-mechanical
 	assert.equal(calculateGeneratedArmorPercentage(armor, equipment), 50);
 
 	const resolver = {
+		generate(path, locale, options) {
+			if (path === 'loot.generator') {
+				return {
+					outputType: 'value',
+					value: 'Legendary carried shield \u2014 25% AR when equipped.',
+					provenance: [
+						{ type: 'entry', generatorId: 'loot', entryId: 'shields' },
+						{ type: 'entry', generatorId: 'shields', entryId: 'carried' },
+					],
+				};
+			}
+			return generatorResolver.generate(path, locale, options);
+		},
 		resolveReference(reference, locale, options) {
 			if (reference.generator === 'loot') {
 				return {
@@ -454,7 +467,7 @@ test('carried loot uses heterogeneous display results and bounded provenance ded
 	];
 	let calls = 0;
 	const resolver = {
-		resolveReference() {
+		generate() {
 			const result = results[Math.min(calls, results.length - 1)];
 			calls += 1;
 			return result;
@@ -472,7 +485,7 @@ test('carried loot uses heterogeneous display results and bounded provenance ded
 
 	let repeatedCalls = 0;
 	const repeated = {
-		resolveReference() {
+		generate() {
 			repeatedCalls += 1;
 			return lootResult('curio', 'unknown_key', 'Unknown key — Its lock is unknown.');
 		},
@@ -531,6 +544,7 @@ function randomWithModifierChance(chance) {
 
 function createCharacterModifierResolver(modifierResult) {
 	return {
+		generate: generatorResolver.generate,
 		resolveReference(reference, locale, options) {
 			if (reference.generator === 'modifier_character') {
 				return structuredClone(modifierResult);
@@ -634,6 +648,7 @@ function findNamedEquipmentEntry(generator, value) {
 
 function lootResult(generatorId, entryId, value) {
 	return {
+		outputType: 'value',
 		value,
 		provenance: [
 			{ type: 'entry', generatorId: 'loot', entryId: generatorId },

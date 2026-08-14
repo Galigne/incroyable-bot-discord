@@ -5,7 +5,7 @@ const MIN_GENERATOR_COUNT = 1;
 const MAX_GENERATOR_COUNT = 10;
 
 function generateGeneratorResults(
-	generatorId,
+	traversalPath,
 	locale = 'en',
 	options = {},
 	resolver = generatorResolver,
@@ -27,7 +27,7 @@ function generateGeneratorResults(
 	const generationOptions = { ...options };
 	delete generationOptions.count;
 	return Array.from({ length: count }, () => resolver.generate(
-		generatorId,
+		traversalPath,
 		locale,
 		generationOptions,
 	));

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 3,
   "id": "dungeon",
-  "visibility": "public",
+  "visibility": "internal",
   "name": "dungeon",
   "description": "Adventure sites, ruins, lairs, and hostile complexes",
   "entrySchema": {

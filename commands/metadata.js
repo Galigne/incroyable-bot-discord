@@ -106,7 +106,7 @@ const COMMAND_METADATA = [
 				descriptionKey: 'rpg.gen.categoryOption',
 				required: true,
 				autocomplete: {
-					provider: 'generator-categories',
+					provider: 'generator-paths',
 					showAllInHelp: true,
 				},
 			},
@@ -117,17 +117,13 @@ const COMMAND_METADATA = [
 				minValue: 1,
 				maxValue: 10,
 			},
-			{
-				name: 'modifier',
-				type: 'string',
-				descriptionKey: 'rpg.gen.modifierOption',
-				autocomplete: { provider: 'generator-modifiers' },
-			},
 		],
 		examples: [
 			'/gen category:<category>',
 			'/gen category:<category> count:<2-10>',
-			'/gen category:<category> modifier:<modifier>',
+			'/gen category:background:criminal.description',
+			'/gen category:site:dungeon.generator',
+			'/gen category:loot:shields.generator.ar_percentage',
 		],
 		help: {
 			order: 20,

@@ -37,17 +37,19 @@ HP/AR/AP/MD in English and PV/PR/PA/DD in French.
 
 Generator schema v3 catalogs use matching English and French files. Public
 generators appear in `/gen`, autocomplete, and help; internal generators support
-application workflows and composed results. Generated display text follows the
-configured locale, while stable IDs, fields, routing values, and provenance remain
-technical English values. Content already saved in an entity is never translated
+structural traversal, application workflows, and composed results. Generated
+display text follows the configured locale, while stable IDs, field keys, routing
+values, and provenance remain stable English values. Content already saved in an entity is never translated
 retroactively. See the [generator authoring guide](data/generators/README.md) and
 [generator architecture](data/generators/GENERATOR_ARCHITECTURE.md) for the JSON
 contract and runtime design.
 
-The public `loot`, `site`, and `group` generators randomly route to their public
-category children. Loot includes weapons, shields, armor, supplies, consumables,
-food and drink, valuables, materials, and curios. Afflictions, rumors, and secrets
-are also available as direct public generators.
+The public `loot`, `site`, `group`, `background`, `creature`, and `modifier`
+generators expose visible route entries whose children are internal. Bare router
+generation displays the selected route entry; following its child is explicit with
+`.generator`. Loot includes weapons, shields, armor, supplies, consumables, food
+and drink, valuables, materials, and curios. Afflictions, rumors, and secrets are
+also available as direct public generators.
 
 Set the required runtime language in `config.json`. The complete configuration is:
 
@@ -98,7 +100,7 @@ restart-only: changing it requires restarting the bot, and reconnects during
 - `/purge amount:<2-100>`
 - `/reload` — reload supported runtime state and reconnect the existing Discord client
 - `/rules`
-- `/gen category:<category>` — generate a random prompt (configured DM role or server owner)
+- `/gen category:<traversal-path> [count]` — generate from a public root, optionally selecting entries, routes, or fields (configured DM role or server owner)
 - `/gen-char character-key:<new key> [level] [background]` — generate and save a complete character (configured DM role or server owner)
 - `/gen-creature creature-key:<new key> [level] [type]` — generate and atomically save a complete creature; type is optional and comes from the public `creature` router (configured DM role or server owner)
 - `/roll expression:<dice expression>` — roll expressions such as `2d6+3`
@@ -113,13 +115,29 @@ restart-only: changing it requires restarting the bot, and reconnects during
 
 Discord provides native validation and choices for constrained options.
 Autocomplete suggests commands the current user may access, existing EntityKeys,
-type-compatible fields, generator categories, localized creature types, common
+type-compatible fields, contextual generator traversal paths, localized creature types, common
 dice expressions, levels, and common purge amounts. `/undo` autocomplete includes authorized active entities with
 usable history. The private form opens immediately after `/set` is submitted; a
 successful submission then posts the confirmation and the updated selected field
 detail publicly. Invalid, expired, and unauthorized submissions remain private.
 In `/gen` results, direct inline generator references are shown in inline code;
 references resolved inside them use square brackets at every recursive level.
+The traversal syntax uses `:entry` to select a stable entry, `.field` to return one
+field, and `.generator` to follow that entry's structural route. Segments may
+repeat, for example:
+
+```text
+/gen category:background:criminal.description
+/gen category:site:dungeon.generator
+/gen category:site:dungeon.generator:buried_temple.name
+/gen category:loot:shields.generator:wooden_shield.ar_percentage
+/gen category:modifier:site_general.generator
+```
+
+Omitting an entry performs the normal weighted selection. Paths ending on a
+generator apply that final generator's normal automatic modifiers; paths ending on
+a field return only that field and do not apply the final generator's modifiers.
+Internal children such as `dungeon` are invalid as direct roots.
 Character fields are `name`, `level`, `resources`, `status`, `statistics`, `rules`,
 `talents`, `gear`, `race`, `background`, `personality`. Creature fields independently
 use `identity`, `level`, `resources`, `status`, `statistics`, `rules`, `traits`, and
@@ -162,8 +180,10 @@ can be cleared independently. Status Effects describe temporary conditions;
 Modifiers describe persistent distinguishing alterations.
 
 Discord displays at most 25 autocomplete suggestions at once, so type part of a
-name or value to filter longer lists. `/help command:gen` lists every localized
-generator category, and `/help command:set` lists every editable field grouped by
+name or value to filter longer lists. `/gen category:` autocomplete follows the
+current root, entry, route, or field segment, while manually entered valid paths
+remain accepted. `/help command:gen` lists every localized public root, and
+`/help command:set` lists every editable field grouped by
 section. Both lists are generated from the same catalogs used by autocomplete.
 
 Dice expressions use one `COUNTdSIDES` group with an optional `+MODIFIER` or
@@ -282,7 +302,7 @@ internal detail source. The current data provides `animal`, `companion`, and
 share the character level budget, nonlinear statistic allocation,
 derived statistics, and resource formulas while using creature-specific profile
 distributions. Only explicit source references grant creature RULEs; Intelligence
-and descriptive modifiers never do. Natural armor or technical armor metadata may
+and descriptive modifiers never do. Natural armor or explicit armor fields may
 initialize AR, status effects and modifiers remain descriptive, and generated gear
 does not alter manual encumbrance. Persistent creature modifiers come only from the
 internal `modifier_creature` pool. Creature detail sources declare intrinsic traits

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 3,
   "id": "building",
-  "visibility": "public",
+  "visibility": "internal",
   "name": "building",
   "description": "Urban and rural buildings with an immediate point of interest",
   "entrySchema": {

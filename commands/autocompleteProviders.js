@@ -1,4 +1,6 @@
-const generatorCatalog = require('../services/generatorCatalog');
+const {
+	getGeneratorTraversalSuggestions,
+} = require('../services/generatorTraversal');
 const { filterAutocompleteChoices } = require('../util/autocomplete');
 const {
 	getLocalizedRouterChoices,
@@ -41,10 +43,10 @@ const AUTOCOMPLETE_PROVIDERS = {
 			getCanonicalValueChoices,
 		]),
 	),
+	'generator-paths': getGeneratorPathChoices,
 	static: getStaticChoices,
 	backgrounds: getBackgroundChoices,
 	'creature-types': getCreatureTypeChoices,
-	'generator-modifiers': getGeneratorModifierChoices,
 	entities: (option, context, focused) => getEntityChoices(
 		focused.value,
 		context.locale,
@@ -87,6 +89,17 @@ function getCanonicalValueChoices(option, context, focused) {
 		getCommandOptionValues(option.autocomplete.provider, context.locale),
 		focused.value,
 	);
+}
+
+function getGeneratorPathChoices(option, context, focused) {
+	const choices = getGeneratorTraversalSuggestions(
+		focused.value,
+		context.locale,
+	).filter(choice => choice.value.length <= 100).map(choice => ({
+		name: `${choice.label} - ${choice.value}`.slice(0, 100),
+		value: choice.value,
+	}));
+	return filterAutocompleteChoices(choices, focused.value);
 }
 
 function getHelpCommandChoices(option, context, focused) {
@@ -135,30 +148,6 @@ function getManageableEntityChoices(option, context, focused) {
 function getCreatureTypeChoices(option, context, focused) {
 	return filterAutocompleteChoices(
 		getLocalizedRouterChoices('creature', context.locale),
-		focused.value,
-	);
-}
-
-function getGeneratorModifierChoices(option, context, focused) {
-	const categoryId = context.interaction.options.getString?.('category');
-	const category = generatorCatalog.getGenerator(categoryId, 'en');
-	if (!category || category.visibility !== 'public') {
-		return [];
-	}
-	const localizedGenerators = new Map(
-		(generatorCatalog.listGenerators(context.locale, { visibility: 'all' }) ?? [])
-			.map(generator => [generator.id, generator]),
-	);
-	return filterAutocompleteChoices(
-		Object.keys(category.modifiers ?? {}).map(generatorId => {
-			const generator = localizedGenerators.get(generatorId)
-				?? generatorCatalog.getGenerator(generatorId, context.locale);
-			return {
-				name: `${generator?.name ?? generatorId} — ${generator?.description ?? ''}`
-					.slice(0, 100),
-				value: generatorId,
-			};
-		}),
 		focused.value,
 	);
 }

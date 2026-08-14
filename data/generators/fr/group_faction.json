@@ -1,7 +1,7 @@
 {
   "schemaVersion": 3,
   "id": "faction",
-  "visibility": "public",
+  "visibility": "internal",
   "name": "factions",
   "description": "Organisations avec leurs objectifs, ressources, hiérarchie, alliés et ennemis",
   "entrySchema": {
@@ -14,8 +14,7 @@
       "hierarchy",
       "allies",
       "enemies"
-    ],
-    "technical": ["type"]
+    ]
   },
   "entries": [
     {
@@ -23,7 +22,7 @@
       "weight": 3,
       "fields": {
         "name": "La Guilde des Voyageurs",
-        "type": "Adventurers' guild",
+        "type": "Guilde d’aventuriers",
         "goal": "Rendre les voyages dangereux et l'exploration rentables sans qu'ils deviennent suicidaires.",
         "resources": "Cartes, maisons de guilde, guides vétérans et fonds de sauvetage.",
         "hierarchy": "Maître de guilde élu, capitaines régionaux et membres accrédités.",
@@ -36,7 +35,7 @@
       "weight": 3,
       "fields": {
         "name": "Maison Valeward",
-        "type": "Noble house",
+        "type": "Maison noble",
         "goal": "Conclure un mariage royal et contrôler le commerce fluvial de l'ouest.",
         "resources": "Domaines fertiles, cavalerie, alliances matrimoniales et péages fluviaux.",
         "hierarchy": "Duchesse, conseil de famille et officiers de maison assermentés.",
@@ -49,7 +48,7 @@
       "weight": 3,
       "fields": {
         "name": "Les Lanternes Cendrées",
-        "type": "Religious order",
+        "type": "Ordre religieux",
         "goal": "Repérer et éradiquer les foyers de morts-vivants avant que la panique ne se propage.",
         "resources": "Exorcistes, feu consacré, hospices secrets et registres funéraires.",
         "hierarchy": "Grand Gardien, porteurs de lanterne et informateurs laïcs.",
@@ -62,7 +61,7 @@
       "weight": 3,
       "fields": {
         "name": "Le Pacte de Cuivre",
-        "type": "Merchant guild",
+        "type": "Guilde marchande",
         "goal": "Uniformiser les poids, les contrats et la monnaie dans toute la région.",
         "resources": "Entrepôts, caravanes, banques et gardes mercenaires.",
         "hierarchy": "Conseil de négociants, commissaires aux comptes et compagnies membres.",
@@ -75,7 +74,7 @@
       "weight": 2,
       "fields": {
         "name": "Les Couteaux Rouges",
-        "type": "Criminal syndicate",
+        "type": "Syndicat du crime",
         "goal": "Contrôler la contrebande tout en empêchant que la violence de rue ne leur échappe.",
         "resources": "Routes de contrebande, gardes soudoyés, refuges et informateurs.",
         "hierarchy": "Conseil secret, chefs de quartier et équipes.",
@@ -88,7 +87,7 @@
       "weight": 2,
       "fields": {
         "name": "Le Pacte Verdoyant",
-        "type": "Druidic circle",
+        "type": "Cercle druidique",
         "goal": "Empêcher les colonies de franchir d'anciennes limites écologiques.",
         "resources": "Métamorphes, bosquets sacrés, animaux messagers et savoir météorologique.",
         "hierarchy": "Conseil saisonnier et cercles locaux autonomes.",
@@ -101,7 +100,7 @@
       "weight": 2,
       "fields": {
         "name": "La Septième Bannière",
-        "type": "Mercenary army",
+        "type": "Armée mercenaire",
         "goal": "Obtenir des terres et une reconnaissance légale après des décennies de guerres à l'étranger.",
         "resources": "Infanterie disciplinée, ingénieurs, engins de siège et vétérans.",
         "hierarchy": "Maréchal, capitaines de bannière et sergents élus.",
@@ -114,7 +113,7 @@
       "weight": 2,
       "fields": {
         "name": "Les Archives Silencieuses",
-        "type": "Scholarly society",
+        "type": "Société savante",
         "goal": "Rassembler les savoirs dangereux et en limiter l'accès.",
         "resources": "Bibliothèques secrètes, traducteurs, magie de la mémoire et agents universitaires.",
         "hierarchy": "Conservateurs, comités secrets et chercheurs de terrain.",
@@ -127,7 +126,7 @@
       "weight": 2,
       "fields": {
         "name": "Le Trône de Sel",
-        "type": "Pirate confederacy",
+        "type": "Confédération pirate",
         "goal": "Contraindre les États côtiers à reconnaître un territoire maritime libre.",
         "resources": "Navires rapides, criques insulaires, cartes marines volées et espions côtiers.",
         "hierarchy": "Amiral élu et assemblée des capitaines.",
@@ -140,7 +139,7 @@
       "weight": 2,
       "fields": {
         "name": "Le Voile Blanc",
-        "type": "Assassins' order",
+        "type": "Ordre d’assassins",
         "goal": "Éliminer les dirigeants jugés susceptibles de provoquer des souffrances à grande échelle.",
         "resources": "Déguisements, poisons, réseaux de renseignement et fausses identités.",
         "hierarchy": "Juges anonymes, agents de liaison et exécutants isolés.",
@@ -153,7 +152,7 @@
       "weight": 2,
       "fields": {
         "name": "L'Union du Foyer",
-        "type": "Workers' league",
+        "type": "Ligue ouvrière",
         "goal": "Obtenir des contrats équitables, des lieux de travail sûrs et une représentation politique.",
         "resources": "Caisses de grève, main-d'œuvre qualifiée, salles de réunion et soutien populaire.",
         "hierarchy": "Délégués locaux et comité central tournant.",
@@ -166,7 +165,7 @@
       "weight": 2,
       "fields": {
         "name": "L'Étendard d'Ivoire",
-        "type": "Knightly order",
+        "type": "Ordre chevaleresque",
         "goal": "Rétablir l'ordre sur les routes et défendre les communautés abandonnées par la couronne.",
         "resources": "Forteresses, cavalerie entraînée, écuyers et prestige populaire.",
         "hierarchy": "Grand commandeur, châtelains et chevaliers assermentés.",
@@ -179,7 +178,7 @@
       "weight": 1,
       "fields": {
         "name": "L'Assemblée de l'Aube Nouvelle",
-        "type": "Revolutionary movement",
+        "type": "Mouvement révolutionnaire",
         "goal": "Remplacer le pouvoir héréditaire par des conseils régionaux élus.",
         "resources": "Imprimeries clandestines, cellules de quartier, transfuges et dons.",
         "hierarchy": "Congrès secret, porte-paroles locaux et cellules indépendantes.",
@@ -192,7 +191,7 @@
       "weight": 1,
       "fields": {
         "name": "Le Chœur Creux",
-        "type": "Apocalyptic cult",
+        "type": "Culte apocalyptique",
         "goal": "Faire taire toute source sonore afin de réveiller un dieu endormi.",
         "resources": "Convertis fanatiques, magie du silence et musiciens infiltrés.",
         "hierarchy": "Prophète muet, chefs d'orchestre et choristes.",
@@ -205,7 +204,7 @@
       "weight": 1,
       "fields": {
         "name": "L'Ambassade de Saphir",
-        "type": "Foreign political network",
+        "type": "Réseau politique étranger",
         "goal": "Rendre les États voisins économiquement dépendants sans déclarer de guerre ouverte.",
         "resources": "Diplomates, prêts, produits de luxe et agents entraînés.",
         "hierarchy": "Ambassadeur, attachés commerciaux et bureau clandestin.",
@@ -218,7 +217,7 @@
       "weight": 1,
       "fields": {
         "name": "Les Briseurs de Chaînes",
-        "type": "Liberation network",
+        "type": "Réseau de libération",
         "goal": "Abolir l'esclavage et mettre les personnes libérées à l'abri des représailles.",
         "resources": "Refuges, faux papiers, marins sympathisants et fonds secrets.",
         "hierarchy": "Filières indépendantes coordonnées par des messagers masqués.",
@@ -231,7 +230,7 @@
       "weight": 1,
       "fields": {
         "name": "La Balance Dorée",
-        "type": "Banking consortium",
+        "type": "Consortium bancaire",
         "goal": "Contrôler la dette souveraine et rendre toute guerre financièrement impossible sans leur concours.",
         "resources": "Coffres-forts, registres de crédit, agents de recouvrement et influence politique.",
         "hierarchy": "Cinq familles associées et des employés professionnels.",
@@ -244,7 +243,7 @@
       "weight": 1,
       "fields": {
         "name": "La Société des Étoiles Tombées",
-        "type": "Arcane research society",
+        "type": "Société de recherche arcanique",
         "goal": "Récupérer les objets célestes avant que les gouvernements n'en fassent des armes.",
         "resources": "Observatoires, mages, équipes d'expédition et fragments de météorite.",
         "hierarchy": "Conseil scientifique, chercheurs principaux et apprentis.",
@@ -257,7 +256,7 @@
       "weight": 1,
       "fields": {
         "name": "Le Verger Noir",
-        "type": "Poisoners' cartel",
+        "type": "Cartel d’empoisonneurs",
         "goal": "Obtenir le monopole des toxines rares et des antidotes permettant de les maîtriser.",
         "resources": "Jardins secrets, alchimistes, officines d'apothicaires et dossiers compromettants.",
         "hierarchy": "Maîtres jardiniers, distributeurs et récolteurs sous contrat.",
@@ -270,7 +269,7 @@
       "weight": 1,
       "fields": {
         "name": "Le Bouclier du Peuple",
-        "type": "Citizen militia",
+        "type": "Milice citoyenne",
         "goal": "Confier la défense locale à la communauté plutôt qu'aux armées de la noblesse.",
         "resources": "Volontaires, arsenaux municipaux, tours de guet et connaissance du terrain.",
         "hierarchy": "Capitaines élus responsables devant les assemblées publiques.",

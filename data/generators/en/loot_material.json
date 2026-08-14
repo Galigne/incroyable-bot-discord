@@ -1,7 +1,7 @@
 {
   "schemaVersion": 3,
   "id": "material",
-  "visibility": "public",
+  "visibility": "internal",
   "name": "material",
   "description": "Natural, crafted, precious, and magical materials",
   "entrySchema": {

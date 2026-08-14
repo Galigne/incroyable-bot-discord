@@ -5,44 +5,72 @@
   "name": "butin",
   "description": "Objets aléatoires issus de toutes les catégories de butin",
   "entrySchema": {
-    "type": "text"
+    "type": "fields",
+    "required": ["name"]
   },
   "entries": [
     {
       "id": "weapons",
-      "value": "{{ weapons }}"
+      "generator": "weapons",
+      "fields": {
+        "name": "armes"
+      }
     },
     {
       "id": "shields",
-      "value": "{{ shields }}"
+      "generator": "shields",
+      "fields": {
+        "name": "boucliers"
+      }
     },
     {
       "id": "armors",
-      "value": "{{ armors }}"
+      "generator": "armors",
+      "fields": {
+        "name": "Armures"
+      }
     },
     {
       "id": "supplies",
-      "value": "{{ supplies }}"
+      "generator": "supplies",
+      "fields": {
+        "name": "matériel"
+      }
     },
     {
       "id": "consumable",
-      "value": "{{ consumable }}"
+      "generator": "consumable",
+      "fields": {
+        "name": "consommables"
+      }
     },
     {
       "id": "food_and_drink",
-      "value": "{{ food_and_drink }}"
+      "generator": "food_and_drink",
+      "fields": {
+        "name": "nourriture et boissons"
+      }
     },
     {
       "id": "valuables",
-      "value": "{{ valuables }}"
+      "generator": "valuables",
+      "fields": {
+        "name": "objets de valeur"
+      }
     },
     {
       "id": "material",
-      "value": "{{ material }}"
+      "generator": "material",
+      "fields": {
+        "name": "Matériaux"
+      }
     },
     {
       "id": "curio",
-      "value": "{{ curio }}"
+      "generator": "curio",
+      "fields": {
+        "name": "curiosités"
+      }
     }
   ]
 }

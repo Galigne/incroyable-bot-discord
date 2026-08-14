@@ -1,7 +1,7 @@
 {
   "schemaVersion": 3,
   "id": "valuables",
-  "visibility": "public",
+  "visibility": "internal",
   "name": "objets de valeur",
   "description": "Richesses transportables, marchandises, objets de prestige et pièces de collection",
   "entrySchema": {

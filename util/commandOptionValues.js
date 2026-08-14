@@ -10,7 +10,7 @@ const { t } = require('./i18n');
 const OPTION_VALUE_PROVIDERS = Object.freeze({
 	'character-sections': getCharacterSectionValues,
 	'entity-sections': getEntitySectionValues,
-	'generator-categories': getGeneratorCategoryValues,
+	'generator-paths': getGeneratorRootValues,
 });
 
 function getCommandOptionValues(providerName, locale = 'en') {
@@ -54,7 +54,7 @@ function createEntitySectionValues(type, sections, locale) {
 	});
 }
 
-function getGeneratorCategoryValues(locale) {
+function getGeneratorRootValues(locale) {
 	return generatorCatalog.listGenerators(locale).map(category => ({
 		description: category.description,
 		label: category.name,

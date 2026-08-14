@@ -5,9 +5,10 @@ const {
 	assertRequiredKeys,
 	generatorSchemaError,
 	validateDisplayText,
-	validateTechnicalId,
+	validateStableId,
 } = require('./assertions');
 const {
+	CREATURE_ROUTER_ID,
 	MAX_ENTRY_TEXT_LENGTH,
 	MAX_FIELD_VALUE_LENGTH,
 } = require('./constants');
@@ -34,19 +35,15 @@ function validateEntrySchema(entrySchema, file) {
 	}
 	assertAllowedKeys(
 		entrySchema,
-		['type', 'required', 'technical'],
+		['type', 'required'],
 		`Generator ${file} has unsupported entrySchema properties.`,
 	);
 	validateFieldNameList(entrySchema.required, file, 'required');
-	if (entrySchema.technical !== undefined) {
-		validateFieldNameList(entrySchema.technical, file, 'technical', true);
-		const required = new Set(entrySchema.required);
-		if (entrySchema.technical.some(field => !required.has(field))) {
-			throw generatorSchemaError(
-				'INVALID_GENERATOR_ENTRY_SCHEMA',
-				`Generator ${file} declares an unknown technical field.`,
-			);
-		}
+	if (entrySchema.required.some(field => ['generator', 'generation'].includes(field))) {
+		throw generatorSchemaError(
+			'INVALID_GENERATOR_ENTRY_SCHEMA',
+			`Generator ${file} must store functional metadata outside fields.`,
+		);
 	}
 	return entrySchema;
 }
@@ -82,7 +79,7 @@ function validateGeneratorEntry(
 	const location = `${file} entry ${index + 1}`;
 	assertPlainObject(entry, `Invalid generator entry: ${location}.`);
 	validateInlineStrings(entry, location);
-	validateTechnicalId(entry.id, `entry ID at ${location}`);
+	validateStableId(entry.id, `entry ID at ${location}`);
 	if (
 		entry.weight !== undefined
 		&& (!Number.isFinite(entry.weight) || entry.weight <= 0)
@@ -95,8 +92,18 @@ function validateGeneratorEntry(
 	const commonKeys = [
 		'id',
 		'weight',
+		'generator',
 		...(isCreatureDetailGenerator(generator.id, options) ? ['generation'] : []),
 	];
+	if (entry.generator !== undefined) {
+		validateStableId(entry.generator, `structural route at ${location}`);
+	}
+	if (generator.id === CREATURE_ROUTER_ID && entry.generator === undefined) {
+		throw generatorSchemaError(
+			'INVALID_CREATURE_ROUTER_SCHEMA',
+			`Creature router ${location} must define a structural route.`,
+		);
+	}
 	if (entrySchema.type === 'text') {
 		assertAllowedKeys(
 			entry,
@@ -127,7 +134,6 @@ function validateGeneratorEntry(
 		entrySchema.required,
 		`Generator ${location} does not match its required field schema.`,
 	);
-	const technicalFields = new Set(entrySchema.technical ?? []);
 	for (const [field, value] of Object.entries(entry.fields)) {
 		if (
 			!['string', 'number', 'boolean'].includes(typeof value)
@@ -137,12 +143,6 @@ function validateGeneratorEntry(
 			throw generatorSchemaError(
 				'INVALID_GENERATOR_FIELD_VALUE',
 				`Generator ${location} has an invalid ${field} value.`,
-			);
-		}
-		if (typeof value !== 'string' && !technicalFields.has(field)) {
-			throw generatorSchemaError(
-				'INVALID_GENERATOR_ENTRY_SCHEMA',
-				`Generator ${location} must declare non-text field ${field} as technical.`,
 			);
 		}
 	}

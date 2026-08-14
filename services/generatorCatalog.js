@@ -5,9 +5,6 @@ const {
 	validateGeneratorRelationships,
 } = require('./generatorSchema');
 const { CREATURE_ROUTER_ID } = require('./generatorSchema/constants');
-const {
-	parseWrappedInlineReference,
-} = require('./generatorSchema/referenceValidation');
 
 const generatorsDirectory = path.join(__dirname, '..', 'data', 'generators');
 const DEFAULT_LOCALE = 'en';
@@ -118,15 +115,8 @@ function discoverCreatureGeneratorIds(definitions) {
 	))?.english;
 	const ids = new Set();
 	for (const entry of router?.entries ?? []) {
-		const expression = entry.fields?.generator;
-		try {
-			const reference = parseWrappedInlineReference(expression, 'creature route');
-			if (!reference.entry && !reference.field) {
-				ids.add(reference.generator);
-			}
-		}
-		catch {
-			// The normal generator validation reports malformed route syntax.
+		if (entry.generator) {
+			ids.add(entry.generator);
 		}
 	}
 	return ids;

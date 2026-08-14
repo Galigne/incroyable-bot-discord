@@ -49,21 +49,18 @@ function populateRandomCharacter(character, options = {}) {
 	character.race.traits.physicalAbility = getField(race, 'physical_ability');
 
 	const background = resolveBackground(options.background, locale, random);
-	const route = resolver.resolveReference(
-		{
-			generator: 'background',
-			entry: background.id,
-			select: 'fields',
-		},
+	const archetypeResult = resolver.generate(
+		`background:${background.id}.generator`,
 		locale,
-		{ path: 'root.character.background', random },
+		{ random },
 	);
-	const routeFields = route.fields ?? route.value;
-	const archetypeResult = resolver.resolveInlineReference(
-		routeFields.generator,
-		locale,
-		{ path: 'root.character.background.archetype', random },
-	);
+	if (!archetypeResult) {
+		throw generationError(
+			`Background route ${background.id} is unavailable.`,
+			'errors.generatorMissing',
+			{ category: background.id },
+		);
+	}
 	const physicalDescriptionResult = resolver.resolveInlineReference(
 		'{{ physical_description }}',
 		locale,
@@ -198,13 +195,10 @@ function pickCarriedLoot(count, locale, random, resolver) {
 	for (let index = 0; index < count; index += 1) {
 		let selected;
 		for (let attempt = 0; attempt < LOOT_DUPLICATE_MAX_ATTEMPTS; attempt += 1) {
-			const resolved = resolver.resolveReference(
-				{ generator: 'loot', select: 'display' },
+			const resolved = resolver.generate(
+				'loot.generator',
 				locale,
-				{
-					path: `root.character.inventory.${index}.attempt.${attempt}`,
-					random,
-				},
+				{ random },
 			);
 			selected = {
 				identity: getLootSelectionIdentity(resolved?.provenance),
@@ -237,13 +231,16 @@ function getLootSelectionIdentity(provenance) {
 }
 
 function getResolvedDisplayValue(result) {
-	if (typeof result?.value !== 'string' || !result.value.trim()) {
+	const value = result?.outputType === 'fields'
+		? Object.values(result.displayFields ?? {}).join(' â€” ')
+		: result?.value;
+	if (typeof value !== 'string' || !value.trim()) {
 		throw generationError(
 			'Loot resolution did not produce display text.',
 			'errors.generatorTextExpected',
 		);
 	}
-	return result.value;
+	return value;
 }
 
 function resolveBackground(requestedBackground, locale, random) {

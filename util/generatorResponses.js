@@ -10,7 +10,6 @@ const GENERATOR_FIELD_KEYS = {
 	description: 'description',
 	enemies: 'enemies',
 	first_name: 'firstName',
-	generator: 'generator',
 	goal: 'goal',
 	hierarchy: 'hierarchy',
 	holy_place: 'holyPlace',
@@ -36,20 +35,12 @@ function createGeneratorResponse(
 	result,
 	requestedCategory,
 	locale = 'en',
-	requestedModifier,
 ) {
 	if (!result) {
 		return {
-			content: t(
-				locale,
-				requestedModifier
-					? 'rpg.gen.invalidModifier'
-					: 'rpg.gen.unknownCategory',
-				{
-					category: requestedCategory,
-					modifier: requestedModifier,
-				},
-			),
+			content: t(locale, 'rpg.gen.unknownCategory', {
+				category: requestedCategory,
+			}),
 			flags: MessageFlags.Ephemeral,
 		};
 	}
@@ -64,7 +55,6 @@ function createGeneratorBatchResponse(
 	results,
 	requestedCategory,
 	locale = 'en',
-	requestedModifier,
 ) {
 	const firstResult = results.find(Boolean);
 	if (!firstResult || results.some(result => !result)) {
@@ -72,7 +62,6 @@ function createGeneratorBatchResponse(
 			null,
 			requestedCategory,
 			locale,
-			requestedModifier,
 		);
 	}
 	return {
@@ -86,21 +75,18 @@ function createGeneratorResultsResponse(
 	results,
 	requestedCategory,
 	locale = 'en',
-	requestedModifier,
 ) {
 	if (results.length === 1) {
 		return createGeneratorResponse(
 			results[0],
 			requestedCategory,
 			locale,
-			results[0] ? requestedModifier : undefined,
 		);
 	}
 	return createGeneratorBatchResponse(
 		results,
 		requestedCategory,
 		locale,
-		results.every(Boolean) ? requestedModifier : undefined,
 	);
 }
 

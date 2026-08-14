@@ -23,7 +23,7 @@ test('generator batches call the single-result resolver independently', () => {
 	const results = generateGeneratorResults(
 		'fixture',
 		'en',
-		{ count: 3, modifier: 'fixture_modifier' },
+		{ count: 3 },
 		{
 			generate(...args) {
 				calls.push(args);
@@ -36,9 +36,9 @@ test('generator batches call the single-result resolver independently', () => {
 	assert.deepEqual(results, [generated, generated, generated]);
 	assert.equal(calls.length, 3);
 	assert.deepEqual(calls, [
-		['fixture', 'en', { modifier: 'fixture_modifier' }],
-		['fixture', 'en', { modifier: 'fixture_modifier' }],
-		['fixture', 'en', { modifier: 'fixture_modifier' }],
+		['fixture', 'en', {}],
+		['fixture', 'en', {}],
+		['fixture', 'en', {}],
 	]);
 	for (const count of [0, 11, 1.5]) {
 		assert.throws(
@@ -344,7 +344,7 @@ test('resolution reports stable cycle and a maximum of four active selections', 
 	);
 });
 
-test('modifier sources use percentage maps, ordinary resolution, and explicit selection', () => {
+test('modifier sources use percentage maps and ordinary resolution', () => {
 	const catalogs = createLocalizedCatalogs();
 	const resolver = createFixtureResolver(catalogs);
 	const automatic = resolver.generate('quest', 'en', {
@@ -357,12 +357,6 @@ test('modifier sources use percentage maps, ordinary resolution, and explicit se
 	catalogs.get('en').get('quest').modifiers.quest_modifier = 25;
 	const boundary = resolver.generate('quest', 'en', { random: () => 0.25 });
 	assert.deepEqual(boundary.modifiers, []);
-	const explicit = resolver.generate('quest', 'en', {
-		modifier: 'quest_modifier',
-		random: sequenceRandom([0, 0.999999]),
-	});
-	assert.equal(explicit.modifiers.length, 1);
-	assert.equal(explicit.modifiers[0].generatorId, 'quest_modifier');
 });
 
 test('schema v3 rejects obsolete kinds, template entries, malformed references, and parity drift', () => {
@@ -452,7 +446,7 @@ test('/gen renders complete modifier results as separate embeds', () => {
 	assert.match(response.embeds[1].data.title, /modifier/i);
 });
 
-test('/gen omits technical fields while retaining them in structured results', () => {
+test('/gen displays every field while keeping structural routes outside fields', () => {
 	const generator = {
 		schemaVersion: 3,
 		id: 'armors',
@@ -461,14 +455,13 @@ test('/gen omits technical fields while retaining them in structured results', (
 		description: 'Armor catalog',
 		entrySchema: {
 			type: 'fields',
-			required: ['name', 'generator', 'type', 'description', 'ar_percentage'],
-			technical: ['generator', 'type', 'ar_percentage'],
+			required: ['name', 'type', 'description', 'ar_percentage'],
 		},
 		entries: [{
 			id: 'light_armor',
+			generator: 'armor_details',
 			fields: {
 				name: 'Light armor',
-				generator: 'armor_details',
 				type: 'light',
 				description: 'Flexible protection.',
 				ar_percentage: 25,
@@ -481,12 +474,90 @@ test('/gen omits technical fields while retaining them in structured results', (
 	assert.deepEqual(result.fields, generator.entries[0].fields);
 	assert.deepEqual(result.displayFields, {
 		name: 'Light armor',
+		type: 'light',
 		description: 'Flexible protection.',
+		ar_percentage: '25',
 	});
 	assert.deepEqual(
 		createGeneratedEmbed(result).toJSON().fields.map(field => field.name),
-		['Name', 'Description'],
+		['Name', 'Type', 'Description', 'AR percentage'],
 	);
+});
+
+test('/gen traversal follows structural routes, targets fields, and preserves modifiers', () => {
+	const router = {
+		schemaVersion: 3,
+		id: 'router',
+		visibility: 'public',
+		name: 'Router',
+		description: 'Routes to details',
+		entrySchema: { type: 'fields', required: ['name'] },
+		entries: [{
+			id: 'details',
+			fields: { name: 'Details' },
+			generator: 'details',
+		}],
+	};
+	const details = {
+		schemaVersion: 3,
+		id: 'details',
+		visibility: 'internal',
+		name: 'Details',
+		description: 'Detailed results',
+		entrySchema: { type: 'fields', required: ['name', 'score'] },
+		modifiers: { detail_modifier: 100 },
+		entries: [
+			{ id: 'first', fields: { name: 'First', score: 10 } },
+			{ id: 'second', fields: { name: 'Second', score: 20 } },
+		],
+	};
+	const modifier = createModifierGenerator('en');
+	modifier.id = 'detail_modifier';
+	const catalog = new Map([
+		['router', router],
+		['details', details],
+		['detail_modifier', modifier],
+	]);
+	const resolver = createGeneratorResolver({ getGenerator: id => catalog.get(id) });
+
+	const bareRouter = resolver.generate('router', 'en', { random: () => 0 });
+	assert.deepEqual(bareRouter.displayFields, { name: 'Details' });
+	assert.equal(bareRouter.generatorId, 'router');
+	assert.equal(resolver.generate('details', 'en', { random: () => 0 }), null);
+
+	const routed = resolver.generate('router:details.generator:second', 'en', {
+		random: () => 0,
+	});
+	assert.equal(routed.generatorId, 'details');
+	assert.equal(routed.entryId, 'second');
+	assert.equal(routed.modifiers.length, 1);
+	assert.deepEqual(
+		routed.provenance.map(provenanceIdentity),
+		['entry:fixed:router:details', 'entry:fixed:details:second'],
+	);
+
+	const field = resolver.generate('router.generator:second.score', 'en', {
+		random: () => 0,
+	});
+	assert.deepEqual(field.fields, { score: 20 });
+	assert.deepEqual(field.displayFields, { score: 20 });
+	assert.deepEqual(field.modifiers, []);
+	assert.equal(resolver.generate('router:missing.generator', 'en'), null);
+});
+
+test('structural route relationships use direct stable generator IDs', () => {
+	const owner = createTextGenerator('owner', 'Owner');
+	owner.entries[0].generator = 'missing';
+	assert.throws(
+		() => validateGeneratorRelationships(new Map([['owner', owner]])),
+		error => error.code === 'GENERATOR_REFERENCE_MISSING',
+	);
+	owner.entries[0].generator = 'target';
+	const target = createTextGenerator('target', 'Target', 'internal');
+	assert.equal(validateGeneratorRelationships(new Map([
+		['owner', owner],
+		['target', target],
+	])), true);
 });
 
 test('modifier relationships reject unknown sources and statically visible cycles', () => {

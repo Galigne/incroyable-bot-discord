@@ -6,8 +6,7 @@
   "description": "Persistent diseases and curses",
   "entrySchema": {
     "type": "fields",
-    "required": ["name", "type", "description"],
-    "technical": ["type"]
+    "required": ["name", "type", "description"]
   },
   "entries": [
     {

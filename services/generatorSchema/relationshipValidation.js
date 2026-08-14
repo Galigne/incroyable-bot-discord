@@ -17,6 +17,7 @@ function validateGeneratorRelationships(catalog) {
 	const modifierGraph = new Map();
 	for (const generator of catalog.values()) {
 		validateInlineRelationships(generator, catalog);
+		validateStructuralRoutes(generator, catalog);
 		validateModifierRelationships(generator, catalog);
 		modifierGraph.set(generator.id, new Set(Object.keys(generator.modifiers ?? {})));
 		for (const entry of generator.entries) {
@@ -32,6 +33,17 @@ function validateGeneratorRelationships(catalog) {
 	}
 	validateModifierCycles(modifierGraph);
 	return true;
+}
+
+function validateStructuralRoutes(generator, catalog) {
+	for (const entry of generator.entries) {
+		if (entry.generator !== undefined && !catalog.has(entry.generator)) {
+			throw generatorSchemaError(
+				'GENERATOR_REFERENCE_MISSING',
+				`Generator ${generator.id}:${entry.id} has an unknown structural route.`,
+			);
+		}
+	}
 }
 
 function validateModifierCycles(graph) {

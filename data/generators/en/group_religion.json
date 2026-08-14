@@ -1,7 +1,7 @@
 {
   "schemaVersion": 3,
   "id": "religion",
-  "visibility": "public",
+  "visibility": "internal",
   "name": "religion",
   "description": "Gods, beliefs, rites, laws, symbols, orders, holy places, and magic",
   "entrySchema": {

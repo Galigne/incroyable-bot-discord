@@ -1,7 +1,7 @@
 {
   "schemaVersion": 3,
   "id": "food_and_drink",
-  "visibility": "public",
+  "visibility": "internal",
   "name": "nourriture et boissons",
   "description": "Provisions, repas et boissons ordinaires ou inhabituels",
   "entrySchema": {
