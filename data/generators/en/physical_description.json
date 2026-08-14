@@ -59,7 +59,7 @@
     },
     {
       "id": "curly_dark_hair",
-      "name": "A mass of dark",
+      "name": "Dark, curly hair",
       "fields": {
         "description": "A mass of dark, curly hair."
       }
@@ -150,7 +150,7 @@
     },
     {
       "id": "athletic_build",
-      "name": "An athletic build and an easy",
+      "name": "An athletic build and balanced stance",
       "fields": {
         "description": "An athletic build and an easy, balanced stance."
       }
@@ -171,7 +171,7 @@
     },
     {
       "id": "round_spectacles",
-      "name": "Round spectacles and a long",
+      "name": "Round spectacles and a long, thoughtful face",
       "fields": {
         "description": "Round spectacles and a long, thoughtful face."
       }
@@ -241,7 +241,7 @@
     },
     {
       "id": "compact_muscular",
-      "name": "A compact",
+      "name": "A compact, muscular build",
       "fields": {
         "description": "A compact, muscular build with powerful legs."
       }
@@ -430,7 +430,7 @@
     },
     {
       "id": "small_even_teeth",
-      "name": "Small",
+      "name": "Small, even teeth",
       "fields": {
         "description": "Small, even teeth and a restrained smile."
       }
@@ -458,7 +458,7 @@
     },
     {
       "id": "careful_uneven_gait",
-      "name": "A careful",
+      "name": "A careful, uneven gait",
       "fields": {
         "description": "A careful, slightly uneven gait left by an old ankle injury."
       }

@@ -601,9 +601,12 @@ The durable implementation constraints are:
   help values. Keep `internal` generators resolvable by structural traversal,
   workflows, inline references, and modifier relationships.
 - Every entry has a stable `id` and mandatory localized top-level `name`.
-  `entrySchema.required` lists only the zero to 25 additional fields shared by all
-  entries; an empty list makes the name the complete generated value, while a
-  non-empty list requires an exact `fields` object. Never use `entrySchema.type`,
+  Each name is a concise, meaningful summary of its concept for traversal and
+  autocomplete, never a punctuation-truncated fragment of its description.
+  `entrySchema.required` lists only the zero to 24 additional fields shared by all
+  entries; the mandatory displayed name occupies the remaining Discord embed field.
+  An empty list makes the name the complete generated value, while a non-empty list
+  requires an exact `fields` object. Never use `entrySchema.type`,
   an entry `value`, or `fields.name`. Functional entry metadata is restricted to
   top-level `weight`, `generator`, and creature-detail `generation`. Every name and
   additional field is ordinary displayable generated data; never hide a field

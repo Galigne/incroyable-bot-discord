@@ -9,6 +9,7 @@ const {
 } = require('./assertions');
 const {
 	CREATURE_ROUTER_ID,
+	MAX_ADDITIONAL_ENTRY_FIELDS,
 	MAX_ENTRY_NAME_LENGTH,
 	MAX_FIELD_VALUE_LENGTH,
 } = require('./constants');
@@ -40,7 +41,7 @@ function validateFieldNameList(fields, file, property, allowEmpty = false) {
 	if (
 		!Array.isArray(fields)
 		|| (!allowEmpty && fields.length === 0)
-		|| fields.length > 25
+		|| fields.length > MAX_ADDITIONAL_ENTRY_FIELDS
 		|| new Set(fields).size !== fields.length
 		|| fields.some(field => (
 			typeof field !== 'string'

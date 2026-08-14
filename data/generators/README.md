@@ -71,13 +71,16 @@ references, and modifier relationships, but users cannot select them directly as
 
 Every entry has a stable lowercase snake_case `id`, a mandatory localized `name`,
 and may have a positive finite `weight`; omitted weights default to `1`. Entry
-names must be unambiguous within their generator after ignoring case,
+names must be concise, meaningful summaries of their concepts, suitable for
+traversal and autocomplete; never derive them by blindly truncating descriptions at
+punctuation. They must be unambiguous within their generator after ignoring case,
 accents/diacritics, repeated whitespace, and separating punctuation. Public
 generator names follow the same rule within each locale.
 
-Every generator declares `entrySchema.required` as an array of zero to 25
-additional fields shared by all of its entries. A name-only generator uses an empty
-array:
+Every generator declares `entrySchema.required` as an array of zero to 24
+additional fields shared by all of its entries. Discord embeds support at most 25
+displayed fields, and the mandatory top-level `name` always occupies one of them.
+A name-only generator uses an empty array:
 
 ```json
 "entrySchema": { "required": [] }

@@ -296,6 +296,31 @@ test('generator schema requires entry names and exact additional fields', () => 
 	}
 });
 
+test('generator schema allows at most 24 additional fields beside the name', () => {
+	const createBoundaryGenerator = count => {
+		const required = Array.from(
+			{ length: count },
+			(_, index) => `field_${index + 1}`,
+		);
+		return {
+			...createFieldsGenerator(),
+			entrySchema: { required },
+			entries: [{
+				id: 'boundary_entry',
+				name: 'Boundary entry',
+				fields: Object.fromEntries(required.map(field => [field, 'value'])),
+			}],
+		};
+	};
+
+	const maximum = createBoundaryGenerator(24);
+	assert.equal(validateGeneratorDefinition(maximum), maximum);
+	assert.throws(
+		() => validateGeneratorDefinition(createBoundaryGenerator(25)),
+		error => error.code === 'INVALID_GENERATOR_ENTRY_SCHEMA',
+	);
+});
+
 test('generator schema localizes string fields and preserves functional parity', () => {
 	const english = createTextGenerator();
 	const french = structuredClone(english);
