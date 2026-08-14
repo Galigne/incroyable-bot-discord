@@ -1,56 +1,56 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "adventurer",
   "visibility": "internal",
   "name": "Archétypes d’aventurier",
   "description": "Rôles liés à l’exploration et aux expéditions",
   "entrySchema": {
-    "type": "text"
+    "required": []
   },
   "entries": [
     {
       "id": "explorer",
-      "value": "Explorateur"
+      "name": "Explorateur"
     },
     {
       "id": "mercenary",
-      "value": "Mercenaire"
+      "name": "Mercenaire"
     },
     {
       "id": "monster_hunter",
-      "value": "Chasseur de monstres"
+      "name": "Chasseur de monstres"
     },
     {
       "id": "bounty_hunter",
-      "value": "Chasseur de primes"
+      "name": "Chasseur de primes"
     },
     {
       "id": "scout",
-      "value": "Éclaireur"
+      "name": "Éclaireur"
     },
     {
       "id": "treasure_hunter",
-      "value": "Chercheur de trésors"
+      "name": "Chercheur de trésors"
     },
     {
       "id": "pilgrim",
-      "value": "Pèlerin"
+      "name": "Pèlerin"
     },
     {
       "id": "frontier_guide",
-      "value": "Guide des frontières"
+      "name": "Guide des frontières"
     },
     {
       "id": "ruins_delver",
-      "value": "Fouilleur de ruines"
+      "name": "Fouilleur de ruines"
     },
     {
       "id": "demon_hunter",
-      "value": "Chasseur de démons"
+      "name": "Chasseur de démons"
     },
     {
       "id": "protector",
-      "value": "Protecteur"
+      "name": "Protecteur"
     }
   ]
 }

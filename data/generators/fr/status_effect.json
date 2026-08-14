@@ -1,287 +1,286 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "status_effect",
   "visibility": "public",
   "name": "Effets d’état",
   "description": "États descriptifs pouvant affecter un personnage ou une créature",
   "entrySchema": {
-    "type": "fields",
-    "required": ["name", "description"]
+    "required": ["description"]
   },
   "entries": [
     {
       "id": "bruised",
+      "name": "Contusionné",
       "weight": 3,
       "fields": {
-        "name": "Contusionné",
         "description": "la douleur légère impose un malus de -1 à la prochaine action physique exigeante."
       }
     },
     {
       "id": "fatigued",
+      "name": "Fatigué",
       "weight": 3,
       "fields": {
-        "name": "Fatigué",
         "description": "les efforts prolongés et les voyages restent plus difficiles jusqu’au prochain repos."
       }
     },
     {
       "id": "shaken",
+      "name": "Ébranlé",
       "weight": 3,
       "fields": {
-        "name": "Ébranlé",
         "description": "subit un malus de -1 contre le prochain effet de peur ou d’intimidation."
       }
     },
     {
       "id": "bleeding",
+      "name": "Saignement",
       "weight": 2,
       "fields": {
-        "name": "Saignement",
         "description": "perd une petite quantité de PV après chaque effort intense jusqu’à recevoir des soins."
       }
     },
     {
       "id": "burning",
+      "name": "En feu",
       "weight": 2,
       "fields": {
-        "name": "En feu",
         "description": "subit régulièrement des dégâts de feu jusqu’à l’extinction des flammes."
       }
     },
     {
       "id": "chilled",
+      "name": "Transi",
       "weight": 2,
       "fields": {
-        "name": "Transi",
         "description": "les déplacements et les actions fondées sur la Vitesse sont réduits jusqu’au réchauffement."
       }
     },
     {
       "id": "dazed",
+      "name": "Étourdi",
       "weight": 2,
       "fields": {
-        "name": "Étourdi",
         "description": "les réactions demandent un effort supplémentaire pendant le prochain tour."
       }
     },
     {
       "id": "blinded",
+      "name": "Aveuglé",
       "weight": 2,
       "fields": {
-        "name": "Aveuglé",
         "description": "les actions qui dépendent de la vue échouent ou subissent un lourd malus."
       }
     },
     {
       "id": "deafened",
+      "name": "Assourdi",
       "weight": 2,
       "fields": {
-        "name": "Assourdi",
         "description": "n’entend plus clairement les paroles, les avertissements ni les effets sonores."
       }
     },
     {
       "id": "poisoned",
+      "name": "Empoisonné",
       "weight": 2,
       "fields": {
-        "name": "Empoisonné",
         "description": "doit réussir des résistances fondées sur la Constitution à mesure que le poison progresse."
       }
     },
     {
       "id": "slowed",
+      "name": "Ralenti",
       "weight": 2,
       "fields": {
-        "name": "Ralenti",
         "description": "la DD est réduite jusqu’à la fin de l’effet."
       }
     },
     {
       "id": "weakened",
+      "name": "Affaibli",
       "weight": 2,
       "fields": {
-        "name": "Affaibli",
         "description": "les actions fondées sur la Force subissent un malus."
       }
     },
     {
       "id": "confused",
+      "name": "Confus",
       "weight": 2,
       "fields": {
-        "name": "Confus",
         "description": "distingue difficilement alliés, ennemis et directions."
       }
     },
     {
       "id": "frightened",
+      "name": "Effrayé",
       "weight": 2,
       "fields": {
-        "name": "Effrayé",
         "description": "ne peut pas s’approcher volontairement de la source de sa peur sans réussir un jet."
       }
     },
     {
       "id": "stunned",
+      "name": "Sonné",
       "fields": {
-        "name": "Sonné",
         "description": "perd temporairement la possibilité d’effectuer des actions normales."
       }
     },
     {
       "id": "paralyzed",
+      "name": "Paralysé",
       "fields": {
-        "name": "Paralysé",
         "description": "ne peut effectuer aucun mouvement volontaire jusqu’à ce que l’état soit dissipé."
       }
     },
     {
       "id": "silenced",
+      "name": "Réduit au silence",
       "fields": {
-        "name": "Réduit au silence",
         "description": "ne peut ni parler ni utiliser de capacités qui dépendent de la voix."
       }
     },
     {
       "id": "cursed",
+      "name": "Maudit",
       "fields": {
-        "name": "Maudit",
         "description": "subit une pénalité surnaturelle jusqu’à ce que sa condition précise de levée soit remplie."
       }
     },
     {
       "id": "petrifying",
+      "name": "Pétrification",
       "fields": {
-        "name": "Pétrification",
         "description": "le corps se transforme lentement en pierre et nécessite une intervention urgente."
       }
     },
     {
       "id": "possessed",
+      "name": "Possédé",
       "fields": {
-        "name": "Possédé",
         "description": "une volonté étrangère tente par moments de prendre le contrôle."
       }
     },
     {
       "id": "marked",
+      "name": "Marqué",
       "fields": {
-        "name": "Marqué",
         "description": "un signe magique permet à une créature ou à un effet hostile de suivre l’être marqué."
       }
     },
     {
       "id": "invisible",
+      "name": "Invisible",
       "fields": {
-        "name": "Invisible",
         "description": "ne peut pas être vu normalement, mais produit toujours des sons et laisse des traces."
       }
     },
     {
       "id": "regenerating",
+      "name": "Régénération",
       "fields": {
-        "name": "Régénération",
         "description": "récupère une petite quantité de PV à la fin de chaque tour."
       }
     },
     {
       "id": "inspired",
+      "name": "Inspiré",
       "fields": {
-        "name": "Inspiré",
         "description": "peut relancer un dé de son choix, après quoi cet état prend fin."
       }
     },
     {
       "id": "distracted",
+      "name": "Distrait",
       "fields": {
-        "name": "Distrait",
         "description": "L’attention portée à l’environnement se relâche, ce qui impose un désavantage à la prochaine action exigeant une attention soutenue."
       }
     },
     {
       "id": "drunk",
+      "name": "Ivre",
       "fields": {
-        "name": "Ivre",
         "description": "La coordination et le jugement sont altérés jusqu’au repos ou à un traitement adapté."
       }
     },
     {
       "id": "intoxicated",
+      "name": "Intoxiqué",
       "fields": {
-        "name": "Intoxiqué",
         "description": "Une substance inconnue altère les perceptions ou les réactions ; l’effet exact dépend du produit."
       }
     },
     {
       "id": "feverish",
+      "name": "Fiévreux",
       "fields": {
-        "name": "Fiévreux",
         "description": "La maladie épuise l’organisme et rend les efforts prolongés plus difficiles."
       }
     },
     {
       "id": "meditative",
+      "name": "Méditatif",
       "fields": {
-        "name": "Méditatif",
         "description": "Une profonde concentration mobilise toute l’attention ; toute interruption met fin au bénéfice recherché et provoque une brève désorientation."
       }
     },
     {
       "id": "prone",
+      "name": "À terre",
       "weight": 2,
       "fields": {
-        "name": "À terre",
         "description": "La position au sol limite les déplacements et la défense jusqu’à ce que l’on se relève."
       }
     },
     {
       "id": "restrained",
+      "name": "Entravé",
       "weight": 2,
       "fields": {
-        "name": "Entravé",
         "description": "Des liens, le terrain ou une autre force limitent fortement les mouvements."
       }
     },
     {
       "id": "grappled",
+      "name": "Agrippé",
       "weight": 2,
       "fields": {
-        "name": "Agrippé",
         "description": "Une autre créature maintient sa cible en place jusqu’à ce qu’elle se dégage ou rompe la prise."
       }
     },
     {
       "id": "unconscious",
+      "name": "Inconscient",
       "fields": {
-        "name": "Inconscient",
         "description": "L’inconscience empêche de percevoir l’environnement et d’agir volontairement jusqu’au réveil."
       }
     },
     {
       "id": "suffocating",
+      "name": "Privé d’air",
       "fields": {
-        "name": "Privé d’air",
         "description": "Une respiration insuffisante met la vie en danger si l’accès à l’air n’est pas rapidement rétabli."
       }
     },
     {
       "id": "exhausted",
+      "name": "Épuisé",
       "fields": {
-        "name": "Épuisé",
         "description": "Une fatigue extrême limite les activités prolongées jusqu’à un repos suffisant."
       }
     },
     {
       "id": "starving",
+      "name": "Affamé",
       "fields": {
-        "name": "Affamé",
         "description": "Un manque prolongé de nourriture affaiblit l’organisme et rend tout effort supplémentaire difficile."
       }
     },
     {
       "id": "dehydrated",
+      "name": "Déshydraté",
       "fields": {
-        "name": "Déshydraté",
         "description": "Un manque prolongé d’eau provoque faiblesse et vertiges, et rend l’effort de plus en plus difficile."
       }
     }

@@ -1,60 +1,60 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "artisan",
   "visibility": "internal",
   "name": "Artisan archetypes",
   "description": "Craft and workshop occupations",
   "entrySchema": {
-    "type": "text"
+    "required": []
   },
   "entries": [
     {
       "id": "blacksmith",
-      "value": "Blacksmith"
+      "name": "Blacksmith"
     },
     {
       "id": "carpenter",
-      "value": "Carpenter"
+      "name": "Carpenter"
     },
     {
       "id": "tailor",
-      "value": "Tailor"
+      "name": "Tailor"
     },
     {
       "id": "alchemist",
-      "value": "Alchemist"
+      "name": "Alchemist"
     },
     {
       "id": "clockmaker",
-      "value": "Clockmaker"
+      "name": "Clockmaker"
     },
     {
       "id": "baker",
-      "value": "Baker"
+      "name": "Baker"
     },
     {
       "id": "butcher",
-      "value": "Butcher"
+      "name": "Butcher"
     },
     {
       "id": "cook",
-      "value": "Cook"
+      "name": "Cook"
     },
     {
       "id": "mechanic",
-      "value": "Mechanic"
+      "name": "Mechanic"
     },
     {
       "id": "engineer",
-      "value": "Engineer"
+      "name": "Engineer"
     },
     {
       "id": "runesmith",
-      "value": "Runesmith"
+      "name": "Runesmith"
     },
     {
       "id": "potter",
-      "value": "Potter"
+      "name": "Potter"
     }
   ]
 }

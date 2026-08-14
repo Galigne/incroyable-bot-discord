@@ -1,18 +1,17 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "race",
   "visibility": "public",
   "name": "Race",
   "description": "Ancestries with culture, appearance, and suggested traits",
   "entrySchema": {
-    "type": "fields",
-    "required": ["name", "description", "skill_bonus", "physical_ability"]
+    "required": ["description", "skill_bonus", "physical_ability"]
   },
   "entries": [
     {
       "id": "human",
+      "name": "Human",
       "fields": {
-        "name": "Human",
         "description": "Highly diverse communities whose traditions emphasize adaptation, alliances, and rapid transmission of knowledge.",
         "skill_bonus": "Versatility: a bonus in one skill chosen at creation.",
         "physical_ability": "Adaptive endurance: better withstands abrupt changes of climate or pace."
@@ -20,8 +19,8 @@
     },
     {
       "id": "elf",
+      "name": "Elf",
       "fields": {
-        "name": "Elf",
         "description": "A long-lived people with keen senses, attached to the memory of places and the distant consequences of decisions.",
         "skill_bonus": "Careful perception of natural and magical details.",
         "physical_ability": "Effective twilight vision in low light."
@@ -29,8 +28,8 @@
     },
     {
       "id": "dwarf",
+      "name": "Dwarf",
       "fields": {
-        "name": "Dwarf",
         "description": "A people of builders whose communities define status through craft mastery and one’s given word.",
         "skill_bonus": "Crafting stone, metal, or mechanisms.",
         "physical_ability": "Stability: better resists impacts and forced movement."
@@ -38,8 +37,8 @@
     },
     {
       "id": "orc",
+      "name": "Orc",
       "fields": {
-        "name": "Orc",
         "description": "A robust people organized around community ties, public challenges, and a strong oral tradition.",
         "skill_bonus": "Intimidation or survival in hostile territory.",
         "physical_ability": "Physical power during a brief, intense effort."
@@ -47,8 +46,8 @@
     },
     {
       "id": "goblin",
+      "name": "Goblin",
       "fields": {
-        "name": "Goblin",
         "description": "An ingenious people quick to turn waste, tools, and unexpected opportunities into useful solutions.",
         "skill_bonus": "Tinkering, traps, and material recovery.",
         "physical_ability": "Small size: slips through narrow passages and cluttered cover."
@@ -56,8 +55,8 @@
     },
     {
       "id": "halfling",
+      "name": "Halfling",
       "fields": {
-        "name": "Halfling",
         "description": "Travelers and rural communities valuing hospitality, discretion, and shared stories.",
         "skill_bonus": "Stealth in crowds or domestic settings.",
         "physical_ability": "Quick footing: keeps balance more easily."
@@ -65,8 +64,8 @@
     },
     {
       "id": "reptilian",
+      "name": "Reptilian",
       "fields": {
-        "name": "Reptilian",
         "description": "A scaled people adapted to heat, long stillness, and humid environments.",
         "skill_bonus": "Tracking through marks, heat, and scent.",
         "physical_ability": "Natural scales provide light protection."
@@ -74,8 +73,8 @@
     },
     {
       "id": "fishfolk",
+      "name": "Fishfolk",
       "fields": {
-        "name": "Fishfolk",
         "description": "An amphibious people living among coastal communities, reefs, and partly submerged cities.",
         "skill_bonus": "Navigation, fishing, and knowledge of currents.",
         "physical_ability": "Aquatic breathing and natural underwater movement."
@@ -83,8 +82,8 @@
     },
     {
       "id": "avian",
+      "name": "Avian",
       "fields": {
-        "name": "Avian",
         "description": "A feathered highland people who prize currents, distances, and messages.",
         "skill_bonus": "Long-range observation and aerial orientation.",
         "physical_ability": "Gliding flight slows falls and crosses short gaps."
@@ -92,8 +91,8 @@
     },
     {
       "id": "sylvan",
+      "name": "Sylvan",
       "fields": {
-        "name": "Sylvan",
         "description": "A plantlike or tree-bonded people whose memory passes through seasons and roots.",
         "skill_bonus": "Plant knowledge and communication with ecosystems.",
         "physical_ability": "Photosynthesis: light and water can sustain them briefly."
@@ -101,8 +100,8 @@
     },
     {
       "id": "slugfolk",
+      "name": "Slugfolk",
       "fields": {
-        "name": "Slugfolk",
         "description": "A flexible people adapted to damp places, vertical surfaces, and hard-to-reach spaces.",
         "skill_bonus": "Detects substances through touch and taste.",
         "physical_ability": "Adhesion: moves slowly across very steep surfaces."
@@ -110,8 +109,8 @@
     },
     {
       "id": "beastfolk",
+      "name": "Beastfolk",
       "fields": {
-        "name": "Beastfolk",
         "description": "Humanoid lineages sharing animal traits and traditions closely tied to their environment.",
         "skill_bonus": "Instinct and interaction with the related species.",
         "physical_ability": "One heightened animal sense chosen for the lineage."
@@ -119,8 +118,8 @@
     },
     {
       "id": "fairy",
+      "name": "Fairy",
       "fields": {
-        "name": "Fairy",
         "description": "A small supernatural people bound to promises, emotions, and magically charged places.",
         "skill_bonus": "Reading intentions and understanding pacts.",
         "physical_ability": "Levitation or limited flight while lightly loaded."
@@ -128,8 +127,8 @@
     },
     {
       "id": "giant",
+      "name": "Giant",
       "fields": {
-        "name": "Giant",
         "description": "A very large people whose homes, tools, and stories use an unusual scale.",
         "skill_bonus": "Strength work and knowledge of monumental terrain.",
         "physical_ability": "Far greater reach and carrying capacity."
@@ -137,8 +136,8 @@
     },
     {
       "id": "centaur",
+      "name": "Centaur",
       "fields": {
-        "name": "Centaur",
         "description": "A nomadic people with humanoid torsos and quadrupedal bodies, adapted to open land and long travel.",
         "skill_bonus": "Land travel, tracking, and mounted combat.",
         "physical_ability": "Fast running on open terrain and great carrying capacity."

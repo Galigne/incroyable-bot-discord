@@ -1,52 +1,52 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "performer",
   "visibility": "internal",
   "name": "Archétypes d’artiste",
   "description": "Rôles liés au spectacle et à la parole publique",
   "entrySchema": {
-    "type": "text"
+    "required": []
   },
   "entries": [
     {
       "id": "musician",
-      "value": "Musicien"
+      "name": "Musicien"
     },
     {
       "id": "actor",
-      "value": "Comédien"
+      "name": "Comédien"
     },
     {
       "id": "storyteller",
-      "value": "Conteur"
+      "name": "Conteur"
     },
     {
       "id": "acrobat",
-      "value": "Acrobate"
+      "name": "Acrobate"
     },
     {
       "id": "singer",
-      "value": "Chanteur"
+      "name": "Chanteur"
     },
     {
       "id": "troubadour",
-      "value": "Troubadour"
+      "name": "Troubadour"
     },
     {
       "id": "jester",
-      "value": "Bouffon"
+      "name": "Bouffon"
     },
     {
       "id": "fortune_teller",
-      "value": "Diseuse de bonne aventure"
+      "name": "Diseuse de bonne aventure"
     },
     {
       "id": "dancer",
-      "value": "Danseur"
+      "name": "Danseur"
     },
     {
       "id": "street_entertainer",
-      "value": "Artiste de rue"
+      "name": "Artiste de rue"
     }
   ]
 }

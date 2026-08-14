@@ -1,52 +1,52 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "sailor",
   "visibility": "internal",
   "name": "Sailor archetypes",
   "description": "Maritime and dockside roles",
   "entrySchema": {
-    "type": "text"
+    "required": []
   },
   "entries": [
     {
       "id": "sailor",
-      "value": "Sailor"
+      "name": "Sailor"
     },
     {
       "id": "fisher",
-      "value": "Fisher"
+      "name": "Fisher"
     },
     {
       "id": "pirate",
-      "value": "Pirate"
+      "name": "Pirate"
     },
     {
       "id": "navigator",
-      "value": "Navigator"
+      "name": "Navigator"
     },
     {
       "id": "deckhand",
-      "value": "Deckhand"
+      "name": "Deckhand"
     },
     {
       "id": "dock_worker",
-      "value": "Dock worker"
+      "name": "Dock worker"
     },
     {
       "id": "ship_captain",
-      "value": "Ship captain"
+      "name": "Ship captain"
     },
     {
       "id": "smuggler",
-      "value": "Smuggler"
+      "name": "Smuggler"
     },
     {
       "id": "salvager",
-      "value": "Salvager"
+      "name": "Salvager"
     },
     {
       "id": "pilot",
-      "value": "Pilot"
+      "name": "Pilot"
     }
   ]
 }

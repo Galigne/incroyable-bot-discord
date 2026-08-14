@@ -1,19 +1,18 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "animal",
   "visibility": "internal",
   "name": "Animal",
   "description": "Ordinary and fantastic friendly wildlife",
   "entrySchema": {
-    "type": "fields",
-    "required": ["name", "description"]
+    "required": ["description"]
   },
   "entries": [
     {
       "id": "mossback_deer",
+      "name": "Mossback Deer",
       "weight": 4,
       "fields": {
-        "name": "Mossback Deer",
         "description": "a calm forest grazer whose antlers host flowers, insects, and medicinal herbs."
       },
       "generation": {
@@ -28,9 +27,9 @@
     },
     {
       "id": "lantern_finch",
+      "name": "Lantern Finch",
       "weight": 4,
       "fields": {
-        "name": "Lantern Finch",
         "description": "a tiny bird with glowing feathers that gathers near safe campsites."
       },
       "generation": {
@@ -47,9 +46,9 @@
     },
     {
       "id": "river_otter",
+      "name": "River Otter",
       "weight": 4,
       "fields": {
-        "name": "River Otter",
         "description": "a playful, clever swimmer that trades polished stones for food."
       },
       "generation": {
@@ -64,9 +63,9 @@
     },
     {
       "id": "cloud_sheep",
+      "name": "Cloud Sheep",
       "weight": 3,
       "fields": {
-        "name": "Cloud Sheep",
         "description": "a woolly mountain animal light enough to survive long falls."
       },
       "generation": {
@@ -81,9 +80,9 @@
     },
     {
       "id": "copper_fox",
+      "name": "Copper Fox",
       "weight": 3,
       "fields": {
-        "name": "Copper Fox",
         "description": "a curious red fox attracted to coins, keys, and quiet music."
       },
       "generation": {
@@ -98,9 +97,9 @@
     },
     {
       "id": "burrow_pig",
+      "name": "Burrow Pig",
       "weight": 3,
       "fields": {
-        "name": "Burrow Pig",
         "description": "a sturdy forager able to locate roots, truffles, and shallow buried objects."
       },
       "generation": {
@@ -115,9 +114,9 @@
     },
     {
       "id": "long_eared_hare",
+      "name": "Long-Eared Hare",
       "weight": 3,
       "fields": {
-        "name": "Long-Eared Hare",
         "description": "an alert grassland animal that stamps before storms or approaching danger."
       },
       "generation": {
@@ -132,9 +131,9 @@
     },
     {
       "id": "bluehorn_goat",
+      "name": "Bluehorn Goat",
       "weight": 3,
       "fields": {
-        "name": "Bluehorn Goat",
         "description": "a sure-footed cliff grazer with mineral-rich blue horns."
       },
       "generation": {
@@ -149,9 +148,9 @@
     },
     {
       "id": "reed_crane",
+      "name": "Reed Crane",
       "weight": 3,
       "fields": {
-        "name": "Reed Crane",
         "description": "a patient marsh bird often following travelers through safe water."
       },
       "generation": {
@@ -166,9 +165,9 @@
     },
     {
       "id": "honey_bear",
+      "name": "Honey Bear",
       "weight": 3,
       "fields": {
-        "name": "Honey Bear",
         "description": "a small gentle bear with golden fur and an excellent memory for kindness."
       },
       "generation": {
@@ -183,9 +182,9 @@
     },
     {
       "id": "sailback_turtle",
+      "name": "Sailback Turtle",
       "weight": 2,
       "fields": {
-        "name": "Sailback Turtle",
         "description": "a broad river turtle whose shell catches wind while swimming."
       },
       "generation": {
@@ -200,9 +199,9 @@
     },
     {
       "id": "ember_newt",
+      "name": "Ember Newt",
       "weight": 2,
       "fields": {
-        "name": "Ember Newt",
         "description": "a warm-bodied amphibian commonly found sleeping beside ovens."
       },
       "generation": {
@@ -217,9 +216,9 @@
     },
     {
       "id": "silk_alpaca",
+      "name": "Silk Alpaca",
       "weight": 2,
       "fields": {
-        "name": "Silk Alpaca",
         "description": "a mild-tempered herd animal producing unusually strong, soft fiber."
       },
       "generation": {
@@ -234,9 +233,9 @@
     },
     {
       "id": "rain_frog",
+      "name": "Rain Frog",
       "weight": 2,
       "fields": {
-        "name": "Rain Frog",
         "description": "a bright frog whose call reliably predicts rainfall several hours ahead."
       },
       "generation": {
@@ -254,9 +253,9 @@
     },
     {
       "id": "moon_moth",
+      "name": "Moon Moth",
       "weight": 2,
       "fields": {
-        "name": "Moon Moth",
         "description": "a hand-sized silver moth that feeds on magical residue without harming spells."
       },
       "generation": {
@@ -271,9 +270,9 @@
     },
     {
       "id": "pebble_crab",
+      "name": "Pebble Crab",
       "weight": 2,
       "fields": {
-        "name": "Pebble Crab",
         "description": "a harmless shore crab that decorates its shell with colorful stones."
       },
       "generation": {
@@ -288,9 +287,9 @@
     },
     {
       "id": "whistle_marmot",
+      "name": "Whistle Marmot",
       "weight": 2,
       "fields": {
-        "name": "Whistle Marmot",
         "description": "a social alpine rodent with distinct warning calls for different threats."
       },
       "generation": {
@@ -308,9 +307,9 @@
     },
     {
       "id": "orchard_drake",
+      "name": "Orchard Drake",
       "weight": 2,
       "fields": {
-        "name": "Orchard Drake",
         "description": "a flightless lizard that eats pests and warms fruit trees during frost."
       },
       "generation": {
@@ -327,9 +326,9 @@
     },
     {
       "id": "mist_dolphin",
+      "name": "Mist Dolphin",
       "weight": 1,
       "fields": {
-        "name": "Mist Dolphin",
         "description": "a pale coastal dolphin that guides lost vessels away from reefs."
       },
       "generation": {
@@ -344,9 +343,9 @@
     },
     {
       "id": "star_elk",
+      "name": "Star Elk",
       "weight": 1,
       "fields": {
-        "name": "Star Elk",
         "description": "a rare nocturnal deer whose coat resembles the current night sky."
       },
       "generation": {
@@ -361,9 +360,9 @@
     },
     {
       "id": "memory_crow",
+      "name": "Memory Crow",
       "weight": 1,
       "fields": {
-        "name": "Memory Crow",
         "description": "a friendly black bird able to repeat one sentence it heard years ago."
       },
       "generation": {
@@ -381,9 +380,9 @@
     },
     {
       "id": "glimmer_whale",
+      "name": "Glimmer Whale",
       "weight": 1,
       "fields": {
-        "name": "Glimmer Whale",
         "description": "a gentle deep-sea giant whose songs make plankton shine."
       },
       "generation": {
@@ -398,8 +397,9 @@
     },
     {
       "id": "solar_lizard",
+      "name": "Solar Lizard",
+      "weight": 1,
       "fields": {
-        "name": "Solar Lizard",
         "description": "A placid reptile that stores heat in its scales and seeks sun-exposed surfaces."
       },
       "generation": {
@@ -412,13 +412,13 @@
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 10
-      },
-      "weight": 1
+      }
     },
     {
       "id": "reed_snake",
+      "name": "Reed Snake",
+      "weight": 1,
       "fields": {
-        "name": "Reed Snake",
         "description": "A discreet aquatic snake whose bite is painful but rarely lethal."
       },
       "generation": {
@@ -429,13 +429,13 @@
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 5
-      },
-      "weight": 1
+      }
     },
     {
       "id": "scavenger_rat",
+      "name": "Scavenger Rat",
+      "weight": 1,
       "fields": {
-        "name": "Scavenger Rat",
         "description": "A curious rodent that carries tools, buttons, and shiny objects to a surprisingly organized nest."
       },
       "generation": {
@@ -446,13 +446,13 @@
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 0
-      },
-      "weight": 1
+      }
     },
     {
       "id": "weaver_spider",
+      "name": "Weaver Spider",
+      "weight": 1,
       "fields": {
-        "name": "Weaver Spider",
         "description": "A large nonaggressive spider whose strong silk is prized by craftspeople."
       },
       "generation": {
@@ -463,13 +463,13 @@
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 10
-      },
-      "weight": 1
+      }
     },
     {
       "id": "hill_wolf",
+      "name": "Hill Wolf",
+      "weight": 1,
       "fields": {
-        "name": "Hill Wolf",
         "description": "A cautious social predator that watches a group before choosing avoidance or approach."
       },
       "generation": {
@@ -480,13 +480,13 @@
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 10
-      },
-      "weight": 1
+      }
     },
     {
       "id": "armored_crab",
+      "name": "Armored Crab",
+      "weight": 1,
       "fields": {
-        "name": "Armored Crab",
         "description": "A large crustacean that reinforces its shell with debris and seashells."
       },
       "generation": {
@@ -497,13 +497,13 @@
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 35
-      },
-      "weight": 1
+      }
     },
     {
       "id": "burrowing_armadillo",
+      "name": "Burrowing Armadillo",
+      "weight": 1,
       "fields": {
-        "name": "Burrowing Armadillo",
         "description": "A sturdy animal able to locate water, roots, and hollows beneath dry ground."
       },
       "generation": {
@@ -514,13 +514,13 @@
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 30
-      },
-      "weight": 1
+      }
     },
     {
       "id": "thieving_monkey",
+      "name": "Thieving Monkey",
+      "weight": 1,
       "fields": {
-        "name": "Thieving Monkey",
         "description": "An intelligent animal that trades stolen objects for food or new curiosities."
       },
       "generation": {
@@ -533,13 +533,13 @@
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 5
-      },
-      "weight": 1
+      }
     },
     {
       "id": "cave_bat",
+      "name": "Cave Bat",
+      "weight": 1,
       "fields": {
-        "name": "Cave Bat",
         "description": "A small nocturnal animal whose movement reveals air currents and hidden passages."
       },
       "generation": {
@@ -550,8 +550,7 @@
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 0
-      },
-      "weight": 1
+      }
     }
   ]
 }

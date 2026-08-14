@@ -130,7 +130,7 @@ test('/gen-char consumes current generator fields and persists the current schem
 		firstName: nameEntry.fields.first_name,
 		lastName: nameEntry.fields.last_name,
 	});
-	assert.equal(rawSave.race.name, raceEntry.fields.name);
+	assert.equal(rawSave.race.name, raceEntry.name);
 	assert.equal(rawSave.race.physicalDescription, raceEntry.fields.description);
 	assert.equal(rawSave.race.traits.skillBonus, raceEntry.fields.skill_bonus);
 	assert.equal(
@@ -146,7 +146,7 @@ test('/gen-char consumes current generator fields and persists the current schem
 	const statusEntry = generatorCatalog.getGenerator('status_effect', 'en').entries[0];
 	assert.deepEqual(rawSave.status.effects, [
 		{
-			name: statusEntry.fields.name,
+			name: statusEntry.name,
 			description: statusEntry.fields.description,
 		},
 	]);

@@ -155,6 +155,35 @@ test('inline references resolve text, structured display, explicit fields, and p
 	assert.equal(inlineString.provenance[0].entryId, 'relic');
 });
 
+test('name-only and additional-field entries resolve names through normal and explicit selection', () => {
+	const weather = createTextGenerator('weather', 'Gentle rain');
+	const person = createPersonGenerator('en');
+	person.visibility = 'public';
+	const catalog = new Map([
+		['weather', weather],
+		['person', person],
+	]);
+	const resolver = createGeneratorResolver({ getGenerator: id => catalog.get(id) });
+
+	const nameOnly = resolver.generate('weather', 'en', { random: () => 0 });
+	assert.equal(nameOnly.outputType, 'value');
+	assert.equal(nameOnly.value, 'Gentle rain');
+	assert.deepEqual(
+		resolver.generate('weather.name', 'en', { random: () => 0 }).fields,
+		{ name: 'Gentle rain' },
+	);
+
+	const structured = resolver.generate('person', 'en', { random: () => 0 });
+	assert.deepEqual(structured.displayFields, {
+		name: 'Outlaw',
+		description: 'An outlaw',
+	});
+	assert.deepEqual(
+		resolver.generate('person.name', 'en', { random: () => 0 }).fields,
+		{ name: 'Outlaw' },
+	);
+});
+
 test('/gen formats direct substitutions without changing the generated value', () => {
 	const resolver = createInlineFormattingResolver(new Map([
 		['quest', createTextGenerator('quest', 'Go to {{ city }}.')],
@@ -223,16 +252,16 @@ test('/gen brackets every level of deeper recursive substitutions', () => {
 test('/gen applies the same substitution formatting to displayed generator fields', () => {
 	const resolver = createInlineFormattingResolver(new Map([
 		['person', {
-			schemaVersion: 3,
+			schemaVersion: 4,
 			id: 'person',
 			visibility: 'public',
 			name: 'People',
 			description: 'People',
-			entrySchema: { type: 'fields', required: ['name', 'description'] },
+			entrySchema: { required: ['description'] },
 			entries: [{
 				id: 'merchant',
+				name: 'Merchant from {{ city }}',
 				fields: {
-					name: 'Merchant from {{ city }}',
 					description: 'A traveler.',
 				},
 			}],
@@ -267,13 +296,13 @@ test('fixed inline references do not consume randomness for entry selection', ()
 	const catalog = new Map([
 		['person', createPersonGenerator('en')],
 		['fixed_prompt', {
-			schemaVersion: 3,
+			schemaVersion: 4,
 			id: 'fixed_prompt',
 			visibility: 'public',
 			name: 'Fixed prompt',
 			description: 'A fixed prompt',
-			entrySchema: { type: 'text' },
-			entries: [{ id: 'fixed_role', value: 'Meet {{ person:outlaw }}.' }],
+			entrySchema: { required: [] },
+			entries: [{ id: 'fixed_role', name: 'Meet {{ person:outlaw }}.' }],
 		}],
 	]);
 	const resolver = createGeneratorResolver({ getGenerator: id => catalog.get(id) });
@@ -325,17 +354,17 @@ test('resolution reports stable cycle and a maximum of four active selections', 
 
 	const chain = new Map([
 		['chain', {
-			schemaVersion: 3,
+			schemaVersion: 4,
 			id: 'chain',
 			visibility: 'public',
 			name: 'Chain',
 			description: 'Nested chain',
-			entrySchema: { type: 'text' },
+			entrySchema: { required: [] },
 			entries: [
-				{ id: 'first', value: '{{ chain:second }}' },
-				{ id: 'second', value: '{{ chain:third }}' },
-				{ id: 'third', value: '{{ chain:fourth }}' },
-				{ id: 'fourth', value: '{{ ending }}' },
+				{ id: 'first', name: '{{ chain:second }}' },
+				{ id: 'second', name: '{{ chain:third }}' },
+				{ id: 'third', name: '{{ chain:fourth }}' },
+				{ id: 'fourth', name: '{{ ending }}' },
 			],
 		}],
 		['ending', createTextGenerator('ending', 'Done')],
@@ -362,7 +391,7 @@ test('modifier sources use percentage maps and ordinary resolution', () => {
 	assert.deepEqual(boundary.modifiers, []);
 });
 
-test('schema v3 rejects obsolete kinds, template entries, malformed references, and parity drift', () => {
+test('schema v4 rejects obsolete kinds, payloads, malformed references, and parity drift', () => {
 	const text = createTextGenerator();
 	assert.equal(validateGeneratorDefinition(text), text);
 	for (const invalid of [
@@ -370,7 +399,7 @@ test('schema v3 rejects obsolete kinds, template entries, malformed references, 
 		{ ...text, kind: 'category' },
 		{ ...text, kind: 'template' },
 		{ ...text, entries: [{ id: 'rain', template: '{{ weather }}', references: {} }] },
-		{ ...text, entries: [{ id: 'rain', value: '{{ weather.bad-field }}' }] },
+		{ ...text, entries: [{ id: 'rain', name: '{{ weather.bad-field }}' }] },
 	]) {
 		assert.throws(
 			() => validateGeneratorDefinition(invalid),
@@ -380,10 +409,10 @@ test('schema v3 rejects obsolete kinds, template entries, malformed references, 
 
 	const french = structuredClone(text);
 	french.name = 'Météo';
-	french.entries[0].value = 'Une pluie douce commence.';
+	french.entries[0].name = 'Une pluie douce commence.';
 	assert.equal(validateGeneratorPair(text, french, 'weather.json'), true);
 	const mismatched = structuredClone(french);
-	mismatched.entries[0].value = 'Une pluie douce {{ other }} commence.';
+	mismatched.entries[0].name = 'Une pluie douce {{ other }} commence.';
 	assert.throws(
 		() => validateGeneratorPair(text, mismatched, 'weather.json'),
 		error => error.code === 'GENERATOR_LOCALE_PARITY_MISMATCH',
@@ -398,7 +427,7 @@ test('inline relationships reject unknown generators, entries, and fields', () =
 		() => validateGeneratorRelationships(catalog),
 		error => error.code === 'INVALID_GENERATOR_SELECTOR',
 	);
-	owner.entries[0].value = '{{ missing }}';
+	owner.entries[0].name = '{{ missing }}';
 	assert.throws(
 		() => validateGeneratorRelationships(catalog),
 		error => error.code === 'GENERATOR_REFERENCE_MISSING',
@@ -451,20 +480,19 @@ test('/gen renders complete modifier results as separate embeds', () => {
 
 test('/gen displays every field while keeping structural routes outside fields', () => {
 	const generator = {
-		schemaVersion: 3,
+		schemaVersion: 4,
 		id: 'armors',
 		visibility: 'public',
 		name: 'Armors',
 		description: 'Armor catalog',
 		entrySchema: {
-			type: 'fields',
-			required: ['name', 'type', 'description', 'ar_percentage'],
+			required: ['type', 'description', 'ar_percentage'],
 		},
 		entries: [{
 			id: 'light_armor',
+			name: 'Light armor',
 			generator: 'armor_details',
 			fields: {
-				name: 'Light armor',
 				type: 'light',
 				description: 'Flexible protection.',
 				ar_percentage: 25,
@@ -474,7 +502,10 @@ test('/gen displays every field while keeping structural routes outside fields',
 	const result = createGeneratorResolver({ getGenerator: () => generator })
 		.generate('armors', 'en', { random: () => 0 });
 
-	assert.deepEqual(result.fields, generator.entries[0].fields);
+	assert.deepEqual(result.fields, {
+		name: generator.entries[0].name,
+		...generator.entries[0].fields,
+	});
 	assert.deepEqual(result.displayFields, {
 		name: 'Light armor',
 		type: 'light',
@@ -489,29 +520,29 @@ test('/gen displays every field while keeping structural routes outside fields',
 
 test('/gen traversal follows structural routes, targets fields, and preserves modifiers', () => {
 	const router = {
-		schemaVersion: 3,
+		schemaVersion: 4,
 		id: 'router',
 		visibility: 'public',
 		name: 'Router',
 		description: 'Routes to details',
-		entrySchema: { type: 'fields', required: ['name'] },
+		entrySchema: { required: [] },
 		entries: [{
 			id: 'details',
-			fields: { name: 'Details' },
+			name: 'Details',
 			generator: 'details',
 		}],
 	};
 	const details = {
-		schemaVersion: 3,
+		schemaVersion: 4,
 		id: 'details',
 		visibility: 'internal',
 		name: 'Details',
 		description: 'Detailed results',
-		entrySchema: { type: 'fields', required: ['name', 'score'] },
+		entrySchema: { required: ['score'] },
 		modifiers: { detail_modifier: 100 },
 		entries: [
-			{ id: 'first', fields: { name: 'First', score: 10 } },
-			{ id: 'second', fields: { name: 'Second', score: 20 } },
+			{ id: 'first', name: 'First', fields: { score: 10 } },
+			{ id: 'second', name: 'Second', fields: { score: 20 } },
 		],
 	};
 	const modifier = createModifierGenerator('en');
@@ -524,7 +555,7 @@ test('/gen traversal follows structural routes, targets fields, and preserves mo
 	const resolver = createGeneratorResolver({ getGenerator: id => catalog.get(id) });
 
 	const bareRouter = resolver.generate('router', 'en', { random: () => 0 });
-	assert.deepEqual(bareRouter.displayFields, { name: 'Details' });
+	assert.equal(bareRouter.value, 'Details');
 	assert.equal(bareRouter.generatorId, 'router');
 	assert.equal(resolver.generate('details', 'en', { random: () => 0 }), null);
 
@@ -573,7 +604,7 @@ test('/gen validates unresolved route continuations before random selection', ()
 
 	const bare = resolver.generate('router', 'en', { random: () => 0 });
 	assert.equal(bare.generatorId, 'router');
-	assert.deepEqual(bare.displayFields, { name: 'left_route' });
+	assert.equal(bare.value, 'left_route');
 	assert.equal(
 		resolver.generate('router.generator', 'en', { random: () => 0 }).generatorId,
 		'left',
@@ -769,16 +800,16 @@ function createLocalizedCatalogs({ includeRequest = true } = {}) {
 function createFixtureCatalog(locale, includeRequest) {
 	const french = locale === 'fr';
 	const quest = {
-		schemaVersion: 3,
+		schemaVersion: 4,
 		id: 'quest',
 		visibility: 'public',
 		name: french ? 'Quêtes' : 'Quests',
 		description: french ? 'Amorces de quêtes' : 'Quest prompts',
-		entrySchema: { type: 'text' },
+		entrySchema: { required: [] },
 		entries: [{
 			id: 'recover_item',
 			weight: 2,
-			value: french
+			name: french
 				? 'Récupérez {{ item.name }} auprès de {{ person:outlaw }} à {{ item }}.'
 				: 'Recover {{ item.name }} from {{ person:outlaw }} at {{ item }}.',
 		}],
@@ -799,14 +830,17 @@ function createFixtureCatalog(locale, includeRequest) {
 }
 
 function createTextGenerator(id = 'weather', value = 'Rain', visibility = 'public') {
+	const displayName = id.split('_')
+		.map(word => word[0].toUpperCase() + word.slice(1))
+		.join(' ');
 	return {
-		schemaVersion: 3,
+		schemaVersion: 4,
 		id,
 		visibility,
-		name: 'Weather',
-		description: 'Weather prompts',
-		entrySchema: { type: 'text' },
-		entries: [{ id: 'rain', value }],
+		name: displayName,
+		description: `${displayName} prompts`,
+		entrySchema: { required: [] },
+		entries: [{ id: 'rain', name: value }],
 	};
 }
 
@@ -819,22 +853,22 @@ function createInlineFormattingResolver(catalog) {
 function createPersonGenerator(locale) {
 	const french = locale === 'fr';
 	return {
-		schemaVersion: 3,
+		schemaVersion: 4,
 		id: 'person',
 		visibility: 'internal',
 		name: french ? 'Personnes' : 'People',
 		description: french ? 'Rôles de personnages' : 'Character roles',
-		entrySchema: { type: 'fields', required: ['name', 'description'] },
+		entrySchema: { required: ['description'] },
 		entries: [{
 			id: 'outlaw',
+			name: french ? 'Hors-la-loi' : 'Outlaw',
 			fields: {
-				name: french ? 'Hors-la-loi' : 'Outlaw',
 				description: french ? 'Un hors-la-loi' : 'An outlaw',
 			},
 		}, {
 			id: 'noble',
+			name: 'Noble',
 			fields: {
-				name: french ? 'Noble' : 'Noble',
 				description: french ? 'Un aristocrate' : 'An aristocrat',
 			},
 		}],
@@ -843,12 +877,12 @@ function createPersonGenerator(locale) {
 
 function createFieldsGenerator(id, name, values) {
 	return {
-		schemaVersion: 3,
+		schemaVersion: 4,
 		id,
 		visibility: 'internal',
 		name,
 		description: name,
-		entrySchema: { type: 'fields', required: ['name', 'description'] },
+		entrySchema: { required: ['description'] },
 		entries: values.map(value => ({
 			id: value === 'Harbor' || value === 'Port'
 				? 'harbor'
@@ -857,7 +891,8 @@ function createFieldsGenerator(id, name, values) {
 					: value === 'Relic' || value === 'Relique'
 						? 'relic'
 						: 'ledger',
-			fields: { name: value, description: 'A valuable object' },
+			name: value,
+			fields: { description: 'A valuable object' },
 		})),
 	};
 }
@@ -865,23 +900,23 @@ function createFieldsGenerator(id, name, values) {
 function createModifierGenerator(locale) {
 	const french = locale === 'fr';
 	return {
-		schemaVersion: 3,
+		schemaVersion: 4,
 		id: 'quest_modifier',
 		visibility: 'internal',
 		name: french ? 'Modificateurs de quête' : 'Quest modifiers',
 		description: french ? 'Variantes descriptives' : 'Descriptive variants',
-		entrySchema: { type: 'fields', required: ['name', 'description'] },
+		entrySchema: { required: ['description'] },
 		entries: [{
 			id: 'urgent',
+			name: 'Urgent',
 			fields: {
-				name: 'Urgent',
 				description: french ? 'Le temps presse.' : 'Time is running out.',
 			},
 		}, {
 			id: 'enraged',
+			name: french ? 'Furieux' : 'Enraged',
 			weight: 2,
 			fields: {
-				name: french ? 'Furieux' : 'Enraged',
 				description: french
 					? 'Les tensions ont atteint leur paroxysme.'
 					: 'Tensions have reached a breaking point.',
@@ -892,31 +927,33 @@ function createModifierGenerator(locale) {
 
 function createTraversalRouter(id, visibility, routes) {
 	return {
-		schemaVersion: 3,
+		schemaVersion: 4,
 		id,
 		visibility,
 		name: id,
 		description: id,
-		entrySchema: { type: 'fields', required: ['name'] },
+		entrySchema: { required: [] },
 		entries: routes.map(([entryId, generator]) => ({
 			id: entryId,
-			fields: { name: entryId },
+			name: entryId,
 			generator,
 		})),
 	};
 }
 
 function createTraversalFieldsGenerator(id, required, entryIds) {
+	const additionalFields = required.filter(field => field !== 'name');
 	return {
-		schemaVersion: 3,
+		schemaVersion: 4,
 		id,
 		visibility: 'internal',
 		name: id,
 		description: id,
-		entrySchema: { type: 'fields', required },
+		entrySchema: { required: additionalFields },
 		entries: entryIds.map(entryId => ({
 			id: entryId,
-			fields: Object.fromEntries(required.map(field => (
+			name: `${id}:${entryId}:name`,
+			fields: Object.fromEntries(additionalFields.map(field => (
 				[field, `${id}:${entryId}:${field}`]
 			))),
 		})),

@@ -1,98 +1,97 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "site_modifier_all",
   "visibility": "internal",
   "name": "Modificateurs généraux de site",
   "description": "Variations durables et conditions météorologiques passagères adaptées à de nombreux lieux",
   "entrySchema": {
-    "type": "fields",
-    "required": ["name", "description"]
+    "required": ["description"]
   },
   "entries": [
     {
       "id": "abandoned",
+      "name": "Abandonné",
       "fields": {
-        "name": "Abandonné",
         "description": "Le lieu fonctionne encore partiellement, mais ses occupants sont partis sans emporter leurs affaires essentielles."
       }
     },
     {
       "id": "immense",
+      "name": "Immense",
       "fields": {
-        "name": "Immense",
         "description": "Les distances intérieures dépassent les attentes et imposent ravitaillement, navigation ou plusieurs étapes d’exploration."
       }
     },
     {
       "id": "heavy_rain",
+      "name": "Pluie battante",
       "weight": 2,
       "fields": {
-        "name": "Pluie battante",
         "description": "La visibilité baisse, le sol exposé se change en boue, les traces s’effacent et des infiltrations ou une montée des eaux menacent les zones basses."
       }
     },
     {
       "id": "thunderstorm",
+      "name": "Orage violent",
       "fields": {
-        "name": "Orage violent",
         "description": "Une pluie battante et des vents forts frappent le site, tandis que le tonnerre couvre les sons lointains et que la foudre menace les hauteurs exposées."
       }
     },
     {
       "id": "dense_fog",
+      "name": "Brouillard dense",
       "weight": 2,
       "fields": {
-        "name": "Brouillard dense",
         "description": "On ne voit plus qu’à courte distance ; les repères, l’observation lointaine et l’orientation sur de longs trajets deviennent peu fiables."
       }
     },
     {
       "id": "strong_winds",
+      "name": "Vents violents",
       "weight": 2,
       "fields": {
-        "name": "Vents violents",
         "description": "Les déplacements à découvert ou en hauteur se compliquent ; projectiles, objets mal arrimés et flammes nues deviennent difficiles à maîtriser."
       }
     },
     {
       "id": "heavy_snow",
+      "name": "Fortes chutes de neige",
       "fields": {
-        "name": "Fortes chutes de neige",
         "description": "La neige réduit la visibilité et gêne les déplacements ; les traces fraîches ressortent nettement avant de se combler peu à peu."
       }
     },
     {
       "id": "cold_snap",
+      "name": "Vague de froid",
       "fields": {
-        "name": "Vague de froid",
         "description": "L’eau exposée gèle, les surfaces deviennent glissantes et toute activité extérieure prolongée impose de trouver chaleur et abri."
       }
     },
     {
       "id": "heat_wave",
+      "name": "Canicule",
       "fields": {
-        "name": "Canicule",
         "description": "L’ombre et l’eau potable deviennent essentielles ; tout effort prolongé à découvert devient rapidement épuisant."
       }
     },
     {
       "id": "hailstorm",
+      "name": "Averse de grêle",
       "fields": {
-        "name": "Averse de grêle",
         "description": "Les grêlons rendent les trajets à découvert difficiles et provoquent un vacarme constant sur les toits, les armures et le sol nu."
       }
     },
     {
       "id": "dust_storm",
+      "name": "Tempête de poussière",
       "fields": {
-        "name": "Tempête de poussière",
         "description": "La poussière en suspension masque les repères, irrite les voies respiratoires et complique l’orientation sur les itinéraires exposés."
       }
     },
     {
       "id": "ashfall",
+      "name": "Pluie de cendres",
       "fields": {
-        "name": "Pluie de cendres",
         "description": "De fines cendres recouvrent les surfaces, masquent les repères lointains, révèlent les passages récents et souillent les provisions exposées."
       }
     }

@@ -1,165 +1,164 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "curio",
   "visibility": "internal",
   "name": "Curios",
   "description": "Unusual objects with narrative, mysterious, personal, or situational interest",
   "entrySchema": {
-    "type": "fields",
-    "required": ["name", "description"]
+    "required": ["description"]
   },
   "entries": [
     {
       "id": "whispering_compass",
+      "name": "Whispering compass",
       "fields": {
-        "name": "Whispering compass",
         "description": "A strange compass that quietly complains whenever it points north."
       }
     },
     {
       "id": "everlasting_candle",
+      "name": "Everlasting candle",
       "fields": {
-        "name": "Everlasting candle",
         "description": "A candle whose small flame never consumes its wax."
       }
     },
     {
       "id": "mysterious_sealed_letter",
+      "name": "Mysterious sealed letter",
       "fields": {
-        "name": "Mysterious sealed letter",
         "description": "A letter addressed to someone the character has never met."
       }
     },
     {
       "id": "rule_book",
+      "name": "RULE Book",
       "fields": {
-        "name": "RULE Book",
         "description": "A rare treatise discussing {{ rules.name }}, its possible uses, and the risks of misinterpretation."
       }
     },
     {
       "id": "unknown_key",
+      "name": "Unknown Key",
       "fields": {
-        "name": "Unknown Key",
         "description": "A key with no known lock, marked by a symbol tied to an organization or building."
       }
     },
     {
       "id": "coded_notes",
+      "name": "Coded Notes",
       "fields": {
-        "name": "Coded Notes",
         "description": "Pages whose meaning depends on a code, missing context, or absent person."
       }
     },
     {
       "id": "treasure_map",
+      "name": "Treasure Map",
       "fields": {
-        "name": "Treasure Map",
         "description": "An incomplete route with old landmarks, warnings, and an ambiguous destination."
       }
     },
     {
       "id": "ceremonial_doll",
+      "name": "Ceremonial Doll",
       "fields": {
-        "name": "Ceremonial Doll",
         "description": "A cloth figure bearing an erased name and traces of an old ritual."
       }
     },
     {
       "id": "locked_grimoire",
+      "name": "Locked Grimoire",
       "fields": {
-        "name": "Locked Grimoire",
         "description": "A book protected by a lock or riddle whose contents cannot be read directly."
       }
     },
     {
       "id": "old_toy",
+      "name": "Old Toy",
       "fields": {
-        "name": "Old Toy",
         "description": "A toy or stuffed bear recognizable to a family, collector, or spirit."
       }
     },
     {
       "id": "incomplete_manuscript",
+      "name": "Incomplete Manuscript",
       "fields": {
-        "name": "Incomplete Manuscript",
         "description": "A historical or scientific text with pages deliberately removed."
       }
     },
     {
       "id": "sealed_vase",
+      "name": "Sealed Vase",
       "fields": {
-        "name": "Sealed Vase",
         "description": "A fragile container whose contents produce an unusual sound or warmth."
       }
     },
     {
       "id": "enchanted_toothbrush",
+      "name": "Enchanted Toothbrush",
       "fields": {
-        "name": "Enchanted Toothbrush",
         "description": "An absurdly specific tool that cleans teeth perfectly and bites other dirt."
       }
     },
     {
       "id": "unidentified_egg",
+      "name": "Unidentified Egg",
       "fields": {
-        "name": "Unidentified Egg",
         "description": "A living egg whose species, needs, and danger remain unknown."
       }
     },
     {
       "id": "attuned_stone",
+      "name": "Attuned Stone",
       "fields": {
-        "name": "Attuned Stone",
         "description": "A mineral or magical stone reacting to a place, person, or particular RULE."
       }
     },
     {
       "id": "travel_chicken",
+      "name": "Travel Chicken",
       "fields": {
-        "name": "Travel Chicken",
         "description": "An unusually calm chicken trained to follow its carrier and signal certain creatures."
       }
     },
     {
       "id": "runed_amulet",
+      "name": "Runed amulet",
       "fields": {
-        "name": "Runed amulet",
         "description": "An amulet engraved with a rune of {{ rules.name }}; its precise function is left to the GM."
       }
     },
     {
       "id": "runed_ring",
+      "name": "Runed ring",
       "fields": {
-        "name": "Runed ring",
         "description": "A ring engraved with a rune of {{ rules.name }}; its precise function is left to the GM."
       }
     },
     {
       "id": "runed_cloak",
+      "name": "Runed cloak",
       "fields": {
-        "name": "Runed cloak",
         "description": "A cloak embroidered with a rune of {{ rules.name }}; its precise function is left to the GM."
       }
     },
     {
       "id": "runed_boots",
+      "name": "Runed boots",
       "fields": {
-        "name": "Runed boots",
         "description": "A pair of boots marked with a rune of {{ rules.name }}; its precise function is left to the GM."
       }
     },
     {
       "id": "runed_mirror",
+      "name": "Runed mirror",
       "fields": {
-        "name": "Runed mirror",
         "description": "A hand mirror carrying a rune of {{ rules.name }}; its precise function is left to the GM."
       }
     },
     {
       "id": "runed_key",
+      "name": "Runed key",
       "fields": {
-        "name": "Runed key",
         "description": "A key carrying a rune of {{ rules.name }}; its precise function is left to the GM."
       }
     }

@@ -1,142 +1,220 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "room",
   "visibility": "internal",
   "name": "Room",
   "description": "Rooms and interior spaces for buildings or dungeons",
   "entrySchema": {
-    "type": "text"
+    "required": ["description"]
   },
   "entries": [
     {
       "id": "bedroom",
+      "name": "Bedroom",
       "weight": 4,
-      "value": "Bedroom — bed, chest, washstand, personal keepsakes, and evidence of the occupant's last activity."
+      "fields": {
+        "description": "bed, chest, washstand, personal keepsakes, and evidence of the occupant's last activity."
+      }
     },
     {
       "id": "living_room",
+      "name": "Living Room",
       "weight": 4,
-      "value": "Living Room — worn seating around a hearth with family objects and a concealed letter."
+      "fields": {
+        "description": "worn seating around a hearth with family objects and a concealed letter."
+      }
     },
     {
       "id": "kitchen",
+      "name": "Kitchen",
       "weight": 4,
-      "value": "Kitchen — preparation tables, ovens, knives, stored food, and something recently left cooking."
+      "fields": {
+        "description": "preparation tables, ovens, knives, stored food, and something recently left cooking."
+      }
     },
     {
       "id": "dining_hall",
+      "name": "Dining Hall",
       "weight": 4,
-      "value": "Dining Hall — long tables, serving doors, faded decoration, and seating arranged by status."
+      "fields": {
+        "description": "long tables, serving doors, faded decoration, and seating arranged by status."
+      }
     },
     {
       "id": "toilet",
+      "name": "Toilet",
       "weight": 3,
-      "value": "Toilet — basic sanitation, a narrow vent, cleaning supplies, and graffiti from previous users."
+      "fields": {
+        "description": "basic sanitation, a narrow vent, cleaning supplies, and graffiti from previous users."
+      }
     },
     {
       "id": "pantry",
+      "name": "Pantry",
       "weight": 3,
-      "value": "Pantry — shelves of preserved food with one wall sounding hollow when struck."
+      "fields": {
+        "description": "shelves of preserved food with one wall sounding hollow when struck."
+      }
     },
     {
       "id": "storeroom",
+      "name": "Storeroom",
       "weight": 3,
-      "value": "Storeroom — labeled crates, spare furniture, dust, and one item that clearly does not belong."
+      "fields": {
+        "description": "labeled crates, spare furniture, dust, and one item that clearly does not belong."
+      }
     },
     {
       "id": "office",
+      "name": "Office",
       "weight": 3,
-      "value": "Office — desk, correspondence, account books, locked drawers, and an appointment calendar."
+      "fields": {
+        "description": "desk, correspondence, account books, locked drawers, and an appointment calendar."
+      }
     },
     {
       "id": "workshop",
+      "name": "Workshop",
       "weight": 3,
-      "value": "Workshop — specialized tools, unfinished work, material scraps, and a dangerous active device."
+      "fields": {
+        "description": "specialized tools, unfinished work, material scraps, and a dangerous active device."
+      }
     },
     {
       "id": "guardroom",
+      "name": "Guardroom",
       "weight": 3,
-      "value": "Guardroom — weapon racks, duty roster, cards, half-eaten meals, and an alarm mechanism."
+      "fields": {
+        "description": "weapon racks, duty roster, cards, half-eaten meals, and an alarm mechanism."
+      }
     },
     {
       "id": "cell",
+      "name": "Cell",
       "weight": 3,
-      "value": "Cell — restraints, scratched messages, stale water, and signs of an impossible escape."
+      "fields": {
+        "description": "restraints, scratched messages, stale water, and signs of an impossible escape."
+      }
     },
     {
       "id": "library",
+      "name": "Library",
       "weight": 2,
-      "value": "Library — packed shelves, reading desks, ladders, catalogues, and a deliberately misfiled book."
+      "fields": {
+        "description": "packed shelves, reading desks, ladders, catalogues, and a deliberately misfiled book."
+      }
     },
     {
       "id": "laboratory",
+      "name": "Laboratory",
       "weight": 2,
-      "value": "Laboratory — stained benches, fragile instruments, sealed samples, and an experiment still progressing."
+      "fields": {
+        "description": "stained benches, fragile instruments, sealed samples, and an experiment still progressing."
+      }
     },
     {
       "id": "armory",
+      "name": "Armory",
       "weight": 2,
-      "value": "Armory — maintained weapons, armor stands, issue records, and several conspicuous empty spaces."
+      "fields": {
+        "description": "maintained weapons, armor stands, issue records, and several conspicuous empty spaces."
+      }
     },
     {
       "id": "infirmary",
+      "name": "Infirmary",
       "weight": 2,
-      "value": "Infirmary — narrow beds, medical tools, medicine cabinets, and patient notes written in code."
+      "fields": {
+        "description": "narrow beds, medical tools, medicine cabinets, and patient notes written in code."
+      }
     },
     {
       "id": "chapel",
+      "name": "Chapel",
       "weight": 2,
-      "value": "Chapel — benches, sacred images, offerings, and a small private confessional passage."
+      "fields": {
+        "description": "benches, sacred images, offerings, and a small private confessional passage."
+      }
     },
     {
       "id": "bathing_room",
+      "name": "Bathing Room",
       "weight": 2,
-      "value": "Bathing Room — heated pool, drains, towels, privacy screens, and access to maintenance tunnels."
+      "fields": {
+        "description": "heated pool, drains, towels, privacy screens, and access to maintenance tunnels."
+      }
     },
     {
       "id": "nursery",
+      "name": "Nursery",
       "weight": 2,
-      "value": "Nursery — small beds, toys, lesson boards, and protective symbols painted beneath the furniture."
+      "fields": {
+        "description": "small beds, toys, lesson boards, and protective symbols painted beneath the furniture."
+      }
     },
     {
       "id": "ballroom",
+      "name": "Ballroom",
       "weight": 2,
-      "value": "Ballroom — polished floor, musicians' gallery, chandeliers, and balconies designed for observation."
+      "fields": {
+        "description": "polished floor, musicians' gallery, chandeliers, and balconies designed for observation."
+      }
     },
     {
       "id": "map_room",
+      "name": "Map Room",
       "weight": 2,
-      "value": "Map Room — wall maps, surveying tools, campaign markers, and one region intentionally erased."
+      "fields": {
+        "description": "wall maps, surveying tools, campaign markers, and one region intentionally erased."
+      }
     },
     {
       "id": "treasury",
+      "name": "Treasury",
       "weight": 2,
-      "value": "Treasury — counted valuables, sealed chests, ownership records, and multiple layers of security."
+      "fields": {
+        "description": "counted valuables, sealed chests, ownership records, and multiple layers of security."
+      }
     },
     {
       "id": "secret_passage",
+      "name": "Secret Passage",
       "weight": 1,
-      "value": "Secret Passage — a cramped route with spy holes, old footprints, and a mechanism opening elsewhere."
+      "fields": {
+        "description": "a cramped route with spy holes, old footprints, and a mechanism opening elsewhere."
+      }
     },
     {
       "id": "ritual_chamber",
+      "name": "Ritual Chamber",
       "weight": 1,
-      "value": "Ritual Chamber — geometric markings, restraints, consumed offerings, and lingering supernatural pressure."
+      "fields": {
+        "description": "geometric markings, restraints, consumed offerings, and lingering supernatural pressure."
+      }
     },
     {
       "id": "portal_room",
+      "name": "Portal Room",
       "weight": 1,
-      "value": "Portal Room — a reinforced chamber centered on an inactive gate and emergency shutdown controls."
+      "fields": {
+        "description": "a reinforced chamber centered on an inactive gate and emergency shutdown controls."
+      }
     },
     {
       "id": "trophy_gallery",
+      "name": "Trophy Gallery",
       "weight": 1,
-      "value": "Trophy Gallery — preserved beasts, captured banners, named weapons, and a display that is still alive."
+      "fields": {
+        "description": "preserved beasts, captured banners, named weapons, and a display that is still alive."
+      }
     },
     {
       "id": "interrogation_room",
+      "name": "Interrogation Room",
       "weight": 1,
-      "value": "Interrogation Room — fixed chair, soundproof walls, drainage channel, and carefully organized questions."
+      "fields": {
+        "description": "fixed chair, soundproof walls, drainage channel, and carefully organized questions."
+      }
     }
   ]
 }

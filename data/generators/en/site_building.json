@@ -1,342 +1,341 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "building",
   "visibility": "internal",
   "name": "Building",
   "description": "Urban and rural buildings with an immediate point of interest",
   "entrySchema": {
-    "type": "fields",
-    "required": ["name", "description"]
+    "required": ["description"]
   },
   "entries": [
     {
       "id": "blacksmith",
+      "name": "Blacksmith",
       "weight": 3,
       "fields": {
-        "name": "Blacksmith",
         "description": "a hot stone workshop taking commissions while quietly repairing forbidden weapons."
       }
     },
     {
       "id": "public_bathhouse",
+      "name": "Public Bathhouse",
       "weight": 3,
       "fields": {
-        "name": "Public Bathhouse",
         "description": "tiled pools, rented lockers, gossiping attendants, and discreet meeting rooms."
       }
     },
     {
       "id": "brothel",
+      "name": "Brothel",
       "weight": 3,
       "fields": {
-        "name": "Brothel",
         "description": "a guarded, professionally run house offering companionship, information, and strict privacy."
       }
     },
     {
       "id": "temple",
+      "name": "Temple",
       "weight": 3,
       "fields": {
-        "name": "Temple",
         "description": "a public sanctuary with an altar, charitable kitchen, archives, and restricted crypt."
       }
     },
     {
       "id": "apothecary",
+      "name": "Apothecary",
       "weight": 2,
       "fields": {
-        "name": "Apothecary",
         "description": "fragrant shelves of remedies, poisons, preserved creatures, and mislabeled experiments."
       }
     },
     {
       "id": "guildhall",
+      "name": "Guildhall",
       "weight": 2,
       "fields": {
-        "name": "Guildhall",
         "description": "offices, training spaces, a contract board, and a members-only meeting chamber."
       }
     },
     {
       "id": "warehouse",
+      "name": "Warehouse",
       "weight": 2,
       "fields": {
-        "name": "Warehouse",
         "description": "stacked cargo, overhead walkways, night watchmen, and one shipment missing from the ledger."
       }
     },
     {
       "id": "theater",
+      "name": "Theater",
       "weight": 2,
       "fields": {
-        "name": "Theater",
         "description": "ornate public seating, cramped backstage passages, workshops, and hidden royal boxes."
       }
     },
     {
       "id": "schoolhouse",
+      "name": "Schoolhouse",
       "weight": 2,
       "fields": {
-        "name": "Schoolhouse",
         "description": "a single crowded classroom whose teacher knows every family secret in the district."
       }
     },
     {
       "id": "mill",
+      "name": "Mill",
       "weight": 2,
       "fields": {
-        "name": "Mill",
         "description": "a water- or wind-powered workplace surrounded by dust, noise, laborers, and moving machinery."
       }
     },
     {
       "id": "courthouse",
+      "name": "Courthouse",
       "weight": 2,
       "fields": {
-        "name": "Courthouse",
         "description": "public hearing chamber, evidence rooms, legal archives, and judges' private offices."
       }
     },
     {
       "id": "wizards_tower",
+      "name": "Wizard's Tower",
       "weight": 1,
       "fields": {
-        "name": "Wizard's Tower",
         "description": "an eccentric vertical residence whose rooms do not follow exterior dimensions."
       }
     },
     {
       "id": "embassy",
+      "name": "Embassy",
       "weight": 1,
       "fields": {
-        "name": "Embassy",
         "description": "a fortified noble residence operating under foreign laws and constant surveillance."
       }
     },
     {
       "id": "observatory",
+      "name": "Observatory",
       "weight": 1,
       "fields": {
-        "name": "Observatory",
         "description": "a domed hilltop laboratory tracking stars, weather, and something approaching from above."
       }
     },
     {
       "id": "abandoned_manor",
+      "name": "Abandoned Manor",
       "weight": 1,
       "fields": {
-        "name": "Abandoned Manor",
         "description": "a decaying estate left furnished after its occupants vanished during dinner."
       }
     },
     {
       "id": "underground_fighting_pit",
+      "name": "Underground Fighting Pit",
       "weight": 1,
       "fields": {
-        "name": "Underground Fighting Pit",
         "description": "a concealed arena with betting rooms, healers, cages, and bribed officials."
       }
     },
     {
       "id": "municipal_museum",
+      "name": "Municipal Museum",
       "fields": {
-        "name": "Municipal Museum",
         "description": "A poorly guarded local collection contains an object whose official origin is false."
       }
     },
     {
       "id": "library",
+      "name": "Library",
       "fields": {
-        "name": "Library",
         "description": "The most-read books all lack the same page, while a sealed shelf still seems visited."
       }
     },
     {
       "id": "general_store",
+      "name": "General Store",
       "fields": {
-        "name": "General Store",
         "description": "A cluttered shop whose owner knows visitors’ needs before they voice them."
       }
     },
     {
       "id": "guardhouse",
+      "name": "Barracks",
       "fields": {
-        "name": "Barracks",
         "description": "A tense garrison hides the repeated disappearance of its sentries."
       }
     },
     {
       "id": "armory",
+      "name": "Armory",
       "fields": {
-        "name": "Armory",
         "description": "A secure workshop sells and repairs weapons but conceals the origin of a prestigious order."
       }
     },
     {
       "id": "town_hall",
+      "name": "Town Hall",
       "fields": {
-        "name": "Town Hall",
         "description": "Municipal records contradict residents’ memories of an entire district."
       }
     },
     {
       "id": "crowded_tavern",
+      "name": "Tavern",
       "fields": {
-        "name": "Tavern",
         "description": "A noisy establishment trading rumors, contracts, and messages for absent clients."
       }
     },
     {
       "id": "restaurant",
+      "name": "Restaurant",
       "fields": {
-        "name": "Restaurant",
         "description": "A celebrated kitchen depends on a rare ingredient whose supply has stopped."
       }
     },
     {
       "id": "roadside_inn",
+      "name": "Inn",
       "fields": {
-        "name": "Inn",
         "description": "Simple rooms surround a common hall where travelers and residents exchange news and suspicions."
       }
     },
     {
       "id": "town_house",
+      "name": "Town House",
       "fields": {
-        "name": "Town House",
         "description": "An attached home hides rooms whose windows do not match its facade."
       }
     },
     {
       "id": "farmstead",
+      "name": "Isolated Farm",
       "fields": {
-        "name": "Isolated Farm",
         "description": "Crops flourish in sterile soil, and the family refuses every inspection."
       }
     },
     {
       "id": "public_park",
+      "name": "Public Park",
       "fields": {
-        "name": "Public Park",
         "description": "At night, statues, kiosks, and paths form a different plan from the one seen by day."
       }
     },
     {
       "id": "walled_garden",
+      "name": "Walled Garden",
       "fields": {
-        "name": "Walled Garden",
         "description": "Rare plants thrive around a greenhouse that officially has no keyholder."
       }
     },
     {
       "id": "bank",
+      "name": "Bank",
       "fields": {
-        "name": "Bank",
         "description": "Guarded and sealed vaults also hold deposits their owners want forgotten."
       }
     },
     {
       "id": "monumental_fountain",
+      "name": "Monumental Fountain",
       "fields": {
-        "name": "Monumental Fountain",
         "description": "Offerings thrown into the water reappear in strangers’ pockets."
       }
     },
     {
       "id": "public_square",
+      "name": "Public Square",
       "fields": {
-        "name": "Public Square",
         "description": "Markets, proclamations, and protests compete beneath a controversial monument."
       }
     },
     {
       "id": "church",
+      "name": "Church",
       "fields": {
-        "name": "Church",
         "description": "An active congregation maintains a place of worship whose crypt predates the city."
       }
     },
     {
       "id": "cathedral",
+      "name": "Cathedral",
       "fields": {
-        "name": "Cathedral",
         "description": "A vast spiritual and political institution keeps jealously guarded relics."
       }
     },
     {
       "id": "great_gate",
+      "name": "Great Gate",
       "fields": {
-        "name": "Great Gate",
         "description": "The city’s main entrance is crowded with guards and tax collectors, stranded travelers, and suspicious goods."
       }
     },
     {
       "id": "bakery_and_pastry_shop",
+      "name": "Bakery and Pastry Shop",
       "fields": {
-        "name": "Bakery and Pastry Shop",
         "description": "The communal oven has burned without fuel for several nights and draws visitors after closing."
       }
     },
     {
       "id": "butcher_and_delicatessen",
+      "name": "Butcher and Delicatessen",
       "fields": {
-        "name": "Butcher and Delicatessen",
         "description": "The shop receives unusual meat from a supplier absent from every record."
       }
     },
     {
       "id": "craft_workshop",
+      "name": "Craft Workshop",
       "fields": {
-        "name": "Craft Workshop",
         "description": "A cramped workshop makes a remarkable object at the cost of time or a rare material."
       }
     },
     {
       "id": "stable",
+      "name": "Stable",
       "fields": {
-        "name": "Stable",
         "description": "Mounts, grooms, and travelers surround an animal no one can approach."
       }
     },
     {
       "id": "manor",
+      "name": "Manor",
       "fields": {
-        "name": "Manor",
         "description": "A prestigious residence gathers servants, guests, and heirs around a family secret."
       }
     },
     {
       "id": "prison",
+      "name": "Prison",
       "fields": {
-        "name": "Prison",
         "description": "The administration insists a cell occupied for years has never existed."
       }
     },
     {
       "id": "secondhand_shop",
+      "name": "Secondhand Shop",
       "fields": {
-        "name": "Secondhand Shop",
         "description": "Ordinary objects mingle with stolen keepsakes and relics whose true function the seller does not know."
       }
     },
     {
       "id": "tenement",
+      "name": "Tenement",
       "fields": {
-        "name": "Tenement",
         "description": "Many households share stairs, a courtyard, and disputes around a bricked-up apartment."
       }
     },
     {
       "id": "dump",
+      "name": "Dump",
       "fields": {
-        "name": "Dump",
         "description": "Salvagers search heaps of waste around an object slowly transforming nearby materials."
       }
     },
     {
       "id": "mechanical_scrapyard",
+      "name": "Mechanical Scrapyard",
       "fields": {
-        "name": "Mechanical Scrapyard",
         "description": "Machine and vehicle wrecks supply parts to an intensely protective mechanic."
       }
     }

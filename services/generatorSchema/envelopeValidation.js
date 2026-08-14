@@ -3,6 +3,7 @@ const {
 	assertPlainObject,
 	assertRequiredKeys,
 	generatorSchemaError,
+	normalizeDisplayName,
 	validateDisplayText,
 	validateGeneratorName,
 	validateStableId,
@@ -83,6 +84,7 @@ function validateGeneratorDefinition(generator, file = '<generator>', options = 
 	}
 
 	const entryIds = new Set();
+	const entryNames = new Set();
 	generator.entries.forEach((entry, index) => {
 		validateGeneratorEntry(entry, entrySchema, generator, file, index, options);
 		if (entryIds.has(entry.id)) {
@@ -92,6 +94,20 @@ function validateGeneratorDefinition(generator, file = '<generator>', options = 
 			);
 		}
 		entryIds.add(entry.id);
+		const normalizedName = normalizeDisplayName(entry.name);
+		if (!normalizedName) {
+			throw generatorSchemaError(
+				'INVALID_GENERATOR_TEXT',
+				`Generator ${file} entry ${entry.id} must have a readable name.`,
+			);
+		}
+		if (entryNames.has(normalizedName)) {
+			throw generatorSchemaError(
+				'DUPLICATE_GENERATOR_ENTRY_NAME',
+				`Generator ${file} contains ambiguous entry name ${entry.name}.`,
+			);
+		}
+		entryNames.add(normalizedName);
 	});
 	const totalWeight = generator.entries.reduce(
 		(total, entry) => total + (entry.weight ?? 1),

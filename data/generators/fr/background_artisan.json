@@ -1,60 +1,60 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "artisan",
   "visibility": "internal",
   "name": "Archétypes d’artisan",
   "description": "Métiers de l’artisanat et de l’atelier",
   "entrySchema": {
-    "type": "text"
+    "required": []
   },
   "entries": [
     {
       "id": "blacksmith",
-      "value": "Forgeron"
+      "name": "Forgeron"
     },
     {
       "id": "carpenter",
-      "value": "Charpentier"
+      "name": "Charpentier"
     },
     {
       "id": "tailor",
-      "value": "Tailleur"
+      "name": "Tailleur"
     },
     {
       "id": "alchemist",
-      "value": "Alchimiste"
+      "name": "Alchimiste"
     },
     {
       "id": "clockmaker",
-      "value": "Horloger"
+      "name": "Horloger"
     },
     {
       "id": "baker",
-      "value": "Boulanger"
+      "name": "Boulanger"
     },
     {
       "id": "butcher",
-      "value": "Boucher"
+      "name": "Boucher"
     },
     {
       "id": "cook",
-      "value": "Cuisinier"
+      "name": "Cuisinier"
     },
     {
       "id": "mechanic",
-      "value": "Mécanicien"
+      "name": "Mécanicien"
     },
     {
       "id": "engineer",
-      "value": "Ingénieur"
+      "name": "Ingénieur"
     },
     {
       "id": "runesmith",
-      "value": "Graveur de runes"
+      "name": "Graveur de runes"
     },
     {
       "id": "potter",
-      "value": "Potier"
+      "name": "Potier"
     }
   ]
 }

@@ -1,287 +1,286 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "status_effect",
   "visibility": "public",
   "name": "Status effect",
   "description": "Descriptive conditions that may affect a character or creature",
   "entrySchema": {
-    "type": "fields",
-    "required": ["name", "description"]
+    "required": ["description"]
   },
   "entries": [
     {
       "id": "bruised",
+      "name": "Bruised",
       "weight": 3,
       "fields": {
-        "name": "Bruised",
         "description": "minor pain causes -1 on the next demanding physical action."
       }
     },
     {
       "id": "fatigued",
+      "name": "Fatigued",
       "weight": 3,
       "fields": {
-        "name": "Fatigued",
         "description": "prolonged effort and travel are more difficult until resting."
       }
     },
     {
       "id": "shaken",
+      "name": "Shaken",
       "weight": 3,
       "fields": {
-        "name": "Shaken",
         "description": "-1 against the next fear or intimidation effect."
       }
     },
     {
       "id": "bleeding",
+      "name": "Bleeding",
       "weight": 2,
       "fields": {
-        "name": "Bleeding",
         "description": "loses a small amount of HP after strenuous actions until treated."
       }
     },
     {
       "id": "burning",
+      "name": "Burning",
       "weight": 2,
       "fields": {
-        "name": "Burning",
         "description": "takes recurring fire damage until the flames are extinguished."
       }
     },
     {
       "id": "chilled",
+      "name": "Chilled",
       "weight": 2,
       "fields": {
-        "name": "Chilled",
         "description": "movement and Speed-based actions are reduced until warmed."
       }
     },
     {
       "id": "dazed",
+      "name": "Dazed",
       "weight": 2,
       "fields": {
-        "name": "Dazed",
         "description": "reactions cost additional effort during the next turn."
       }
     },
     {
       "id": "blinded",
+      "name": "Blinded",
       "weight": 2,
       "fields": {
-        "name": "Blinded",
         "description": "sight-based actions fail or suffer a major penalty."
       }
     },
     {
       "id": "deafened",
+      "name": "Deafened",
       "weight": 2,
       "fields": {
-        "name": "Deafened",
         "description": "cannot hear speech, warnings, or sound-based effects clearly."
       }
     },
     {
       "id": "poisoned",
+      "name": "Poisoned",
       "weight": 2,
       "fields": {
-        "name": "Poisoned",
         "description": "Constitution-based resistance is required as the poison progresses."
       }
     },
     {
       "id": "slowed",
+      "name": "Slowed",
       "weight": 2,
       "fields": {
-        "name": "Slowed",
         "description": "MD is reduced until the effect ends."
       }
     },
     {
       "id": "weakened",
+      "name": "Weakened",
       "weight": 2,
       "fields": {
-        "name": "Weakened",
         "description": "Strength-based actions suffer a penalty."
       }
     },
     {
       "id": "confused",
+      "name": "Confused",
       "weight": 2,
       "fields": {
-        "name": "Confused",
         "description": "has difficulty distinguishing allies, enemies, or directions."
       }
     },
     {
       "id": "frightened",
+      "name": "Frightened",
       "weight": 2,
       "fields": {
-        "name": "Frightened",
         "description": "cannot willingly approach the source of fear without succeeding on a roll."
       }
     },
     {
       "id": "stunned",
+      "name": "Stunned",
       "fields": {
-        "name": "Stunned",
         "description": "temporarily loses the ability to take normal actions."
       }
     },
     {
       "id": "paralyzed",
+      "name": "Paralyzed",
       "fields": {
-        "name": "Paralyzed",
         "description": "voluntary movement is impossible until the condition is broken."
       }
     },
     {
       "id": "silenced",
+      "name": "Silenced",
       "fields": {
-        "name": "Silenced",
         "description": "speech and voice-dependent abilities cannot be used."
       }
     },
     {
       "id": "cursed",
+      "name": "Cursed",
       "fields": {
-        "name": "Cursed",
         "description": "a supernatural penalty persists until its specific condition is resolved."
       }
     },
     {
       "id": "petrifying",
+      "name": "Petrification",
       "fields": {
-        "name": "Petrification",
         "description": "the body is slowly turning to stone and requires urgent intervention."
       }
     },
     {
       "id": "possessed",
+      "name": "Possessed",
       "fields": {
-        "name": "Possessed",
         "description": "An outside will occasionally contest control of the subject."
       }
     },
     {
       "id": "marked",
+      "name": "Marked",
       "fields": {
-        "name": "Marked",
         "description": "a magical sign allows a hostile creature or effect to track the subject."
       }
     },
     {
       "id": "invisible",
+      "name": "Invisible",
       "fields": {
-        "name": "Invisible",
         "description": "cannot be seen normally but still makes sound and leaves traces."
       }
     },
     {
       "id": "regenerating",
+      "name": "Regenerating",
       "fields": {
-        "name": "Regenerating",
         "description": "restores a small amount of HP at the end of each turn."
       }
     },
     {
       "id": "inspired",
+      "name": "Inspired",
       "fields": {
-        "name": "Inspired",
         "description": "may reroll one chosen die, after which this status ends."
       }
     },
     {
       "id": "distracted",
+      "name": "Distracted",
       "fields": {
-        "name": "Distracted",
         "description": "The subject loses track of their surroundings and is disadvantaged on the next action requiring sustained attention."
       }
     },
     {
       "id": "drunk",
+      "name": "Drunk",
       "fields": {
-        "name": "Drunk",
         "description": "Coordination and judgment are impaired until rest or suitable treatment."
       }
     },
     {
       "id": "intoxicated",
+      "name": "Intoxicated",
       "fields": {
-        "name": "Intoxicated",
         "description": "An unknown substance alters perception or reactions; the exact effect depends on the product."
       }
     },
     {
       "id": "feverish",
+      "name": "Feverish",
       "fields": {
-        "name": "Feverish",
         "description": "Illness drains the subject and makes prolonged effort more difficult."
       }
     },
     {
       "id": "meditative",
+      "name": "Meditative",
       "fields": {
-        "name": "Meditative",
         "description": "The subject is deeply focused; interruption ends the sought benefit and leaves brief disorientation."
       }
     },
     {
       "id": "prone",
+      "name": "Prone",
       "weight": 2,
       "fields": {
-        "name": "Prone",
         "description": "The subject is lying on the ground, limiting movement and defense until they stand."
       }
     },
     {
       "id": "restrained",
+      "name": "Restrained",
       "weight": 2,
       "fields": {
-        "name": "Restrained",
         "description": "Bindings, terrain, or another force severely limit the subject’s movement."
       }
     },
     {
       "id": "grappled",
+      "name": "Grappled",
       "weight": 2,
       "fields": {
-        "name": "Grappled",
         "description": "Another creature holds the subject in place until the grip is escaped or broken."
       }
     },
     {
       "id": "unconscious",
+      "name": "Unconscious",
       "fields": {
-        "name": "Unconscious",
         "description": "The subject is unaware and cannot take deliberate actions until consciousness returns."
       }
     },
     {
       "id": "suffocating",
+      "name": "Suffocating",
       "fields": {
-        "name": "Suffocating",
         "description": "The subject cannot breathe adequately and requires air before the condition becomes life-threatening."
       }
     },
     {
       "id": "exhausted",
+      "name": "Exhausted",
       "fields": {
-        "name": "Exhausted",
         "description": "Severe weariness limits sustained activity until the subject receives substantial rest."
       }
     },
     {
       "id": "starving",
+      "name": "Starving",
       "fields": {
-        "name": "Starving",
         "description": "Prolonged lack of food weakens the subject and makes further exertion difficult."
       }
     },
     {
       "id": "dehydrated",
+      "name": "Dehydrated",
       "fields": {
-        "name": "Dehydrated",
         "description": "Prolonged lack of water causes weakness, dizziness, and increasing difficulty with exertion."
       }
     }

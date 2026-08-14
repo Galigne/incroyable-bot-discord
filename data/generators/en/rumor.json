@@ -1,52 +1,82 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "rumor",
   "visibility": "public",
   "name": "Rumor",
   "description": "Circulating claims whose truth is left to the GM",
   "entrySchema": {
-    "type": "text"
+    "required": ["description"]
   },
   "entries": [
     {
       "id": "rumor_1",
-      "value": "A {{ monster }} was supposedly seen near {{ settlement }}."
+      "name": "Creature sighting",
+      "fields": {
+        "description": "A {{ monster }} was supposedly seen near {{ settlement }}."
+      }
     },
     {
       "id": "rumor_2",
-      "value": "{{ faction }} is said to be buying unusual quantities of {{ material }}."
+      "name": "Unusual material purchases",
+      "fields": {
+        "description": "{{ faction }} is said to be buying unusual quantities of {{ material }}."
+      }
     },
     {
       "id": "rumor_3",
-      "value": "Treasure is allegedly hidden beneath {{ building }}."
+      "name": "Hidden treasure",
+      "fields": {
+        "description": "Treasure is allegedly hidden beneath {{ building }}."
+      }
     },
     {
       "id": "rumor_4",
-      "value": "{{ government }} is supposedly preparing a secret action against a nearby rival."
+      "name": "Secret government action",
+      "fields": {
+        "description": "{{ government }} is supposedly preparing a secret action against a nearby rival."
+      }
     },
     {
       "id": "rumor_5",
-      "value": "Followers of {{ religion }} are said to be announcing—or concealing—an omen."
+      "name": "Concealed omen",
+      "fields": {
+        "description": "Followers of {{ religion }} are said to be announcing—or concealing—an omen."
+      }
     },
     {
       "id": "rumor_6",
-      "value": "The road through {{ region }} has suddenly become unsafe for reasons no traveler agrees on."
+      "name": "Unsafe road",
+      "fields": {
+        "description": "The road through {{ region }} has suddenly become unsafe for reasons no traveler agrees on."
+      }
     },
     {
       "id": "rumor_7",
-      "value": "A missing person with the {{ background }} background was reportedly seen inside {{ building }}."
+      "name": "Missing person sighting",
+      "fields": {
+        "description": "A missing person with the {{ background }} background was reportedly seen inside {{ building }}."
+      }
     },
     {
       "id": "rumor_8",
-      "value": "An abandoned place described as {{ site }} is supposedly still occupied."
+      "name": "Occupied abandoned site",
+      "fields": {
+        "description": "An abandoned place described as {{ site }} is supposedly still occupied."
+      }
     },
     {
       "id": "rumor_9",
-      "value": "An object described as {{ curio }} is said to have changed hands several times this week."
+      "name": "Curio changing hands",
+      "fields": {
+        "description": "An object described as {{ curio }} is said to have changed hands several times this week."
+      }
     },
     {
       "id": "rumor_10",
-      "value": "{{ government }} is discreetly paying for a particular service without explaining why."
+      "name": "Discreet paid service",
+      "fields": {
+        "description": "{{ government }} is discreetly paying for a particular service without explaining why."
+      }
     }
   ]
 }

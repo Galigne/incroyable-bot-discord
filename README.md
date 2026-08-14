@@ -35,7 +35,7 @@ entity commands. Localized labels and resource abbreviations are resolved throug
 the display adapters. Resource abbreviations are unique within each language:
 HP/AR/AP/MD in English and PV/PR/PA/DD in French.
 
-Generator schema v3 catalogs use matching English and French files. Public
+Generator schema v4 catalogs use matching English and French files. Public
 generators appear in `/gen`, autocomplete, and help; internal generators support
 structural traversal, application workflows, and composed results. Generated
 display text follows the configured locale, while stable IDs, field keys, routing

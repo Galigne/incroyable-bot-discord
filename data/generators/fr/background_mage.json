@@ -1,52 +1,52 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "mage",
   "visibility": "internal",
   "name": "Archétypes de mage",
   "description": "Rôles liés à l’étude et à la pratique de la magie",
   "entrySchema": {
-    "type": "text"
+    "required": []
   },
   "entries": [
     {
       "id": "apprentice",
-      "value": "Apprenti"
+      "name": "Apprenti"
     },
     {
       "id": "hedge_mage",
-      "value": "Mage autodidacte"
+      "name": "Mage autodidacte"
     },
     {
       "id": "magical_researcher",
-      "value": "Chercheur en magie"
+      "name": "Chercheur en magie"
     },
     {
       "id": "battle_mage",
-      "value": "Mage de bataille"
+      "name": "Mage de bataille"
     },
     {
       "id": "ritualist",
-      "value": "Ritualiste"
+      "name": "Ritualiste"
     },
     {
       "id": "alchemist",
-      "value": "Alchimiste"
+      "name": "Alchimiste"
     },
     {
       "id": "runesmith",
-      "value": "Graveur de runes"
+      "name": "Graveur de runes"
     },
     {
       "id": "diviner",
-      "value": "Voyant"
+      "name": "Voyant"
     },
     {
       "id": "court_mage",
-      "value": "Mage de cour"
+      "name": "Mage de cour"
     },
     {
       "id": "enchanter",
-      "value": "Enchanteur"
+      "name": "Enchanteur"
     }
   ]
 }

@@ -1,52 +1,52 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "religious",
   "visibility": "internal",
   "name": "Archétypes religieux",
   "description": "Rôles liés à la foi, aux temples et aux pèlerinages",
   "entrySchema": {
-    "type": "text"
+    "required": []
   },
   "entries": [
     {
       "id": "priest",
-      "value": "Prêtre"
+      "name": "Prêtre"
     },
     {
       "id": "monk",
-      "value": "Moine"
+      "name": "Moine"
     },
     {
       "id": "temple_servant",
-      "value": "Serviteur du temple"
+      "name": "Serviteur du temple"
     },
     {
       "id": "pilgrim",
-      "value": "Pèlerin"
+      "name": "Pèlerin"
     },
     {
       "id": "theologian",
-      "value": "Théologien"
+      "name": "Théologien"
     },
     {
       "id": "prophet",
-      "value": "Prophète"
+      "name": "Prophète"
     },
     {
       "id": "healer",
-      "value": "Guérisseur"
+      "name": "Guérisseur"
     },
     {
       "id": "paladin",
-      "value": "Paladin"
+      "name": "Paladin"
     },
     {
       "id": "shrine_keeper",
-      "value": "Gardien de sanctuaire"
+      "name": "Gardien de sanctuaire"
     },
     {
       "id": "religious_scholar",
-      "value": "Érudit religieux"
+      "name": "Érudit religieux"
     }
   ]
 }

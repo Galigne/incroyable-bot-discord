@@ -1,300 +1,516 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "physical_description",
   "visibility": "internal",
   "name": "Physical descriptions",
   "description": "Reusable visible physical traits",
   "entrySchema": {
-    "type": "text"
+    "required": ["description"]
   },
   "entries": [
     {
       "id": "tall_broad_shoulders",
-      "value": "Tall and broad-shouldered."
+      "name": "Tall and broad-shouldered",
+      "fields": {
+        "description": "Tall and broad-shouldered."
+      }
     },
     {
       "id": "short_wiry",
-      "value": "Short and wiry."
+      "name": "Short and wiry",
+      "fields": {
+        "description": "Short and wiry."
+      }
     },
     {
       "id": "lean_angular",
-      "value": "Lean, with an angular face."
+      "name": "Lean",
+      "fields": {
+        "description": "Lean, with an angular face."
+      }
     },
     {
       "id": "round_soft_features",
-      "value": "A round face and soft features."
+      "name": "A round face and soft features",
+      "fields": {
+        "description": "A round face and soft features."
+      }
     },
     {
       "id": "weathered_square_jaw",
-      "value": "A square jaw and weathered skin."
+      "name": "A square jaw and weathered skin",
+      "fields": {
+        "description": "A square jaw and weathered skin."
+      }
     },
     {
       "id": "pale_sharp_cheekbones",
-      "value": "A pale complexion and sharp cheekbones."
+      "name": "A pale complexion and sharp cheekbones",
+      "fields": {
+        "description": "A pale complexion and sharp cheekbones."
+      }
     },
     {
       "id": "freckles",
-      "value": "Freckles scattered across the nose."
+      "name": "Freckles scattered across the nose",
+      "fields": {
+        "description": "Freckles scattered across the nose."
+      }
     },
     {
       "id": "curly_dark_hair",
-      "value": "A mass of dark, curly hair."
+      "name": "A mass of dark",
+      "fields": {
+        "description": "A mass of dark, curly hair."
+      }
     },
     {
       "id": "long_braided_hair",
-      "value": "Long hair gathered into neat braids."
+      "name": "Long hair gathered into neat braids",
+      "fields": {
+        "description": "Long hair gathered into neat braids."
+      }
     },
     {
       "id": "close_cropped_hair",
-      "value": "Close-cropped hair and steady grey eyes."
+      "name": "Close-cropped hair and steady grey eyes",
+      "fields": {
+        "description": "Close-cropped hair and steady grey eyes."
+      }
     },
     {
       "id": "thick_eyebrows",
-      "value": "Thick eyebrows and deep-set eyes."
+      "name": "Thick eyebrows and deep-set eyes",
+      "fields": {
+        "description": "Thick eyebrows and deep-set eyes."
+      }
     },
     {
       "id": "brow_scar",
-      "value": "A noticeable scar over one eyebrow."
+      "name": "A noticeable scar over one eyebrow",
+      "fields": {
+        "description": "A noticeable scar over one eyebrow."
+      }
     },
     {
       "id": "cheek_birthmark",
-      "value": "A small birthmark on one cheek."
+      "name": "A small birthmark on one cheek",
+      "fields": {
+        "description": "A small birthmark on one cheek."
+      }
     },
     {
       "id": "upright_posture",
-      "value": "An upright posture and a composed expression."
+      "name": "An upright posture and a composed expression",
+      "fields": {
+        "description": "An upright posture and a composed expression."
+      }
     },
     {
       "id": "broad_smile",
-      "value": "A broad smile and a deep dimple."
+      "name": "A broad smile and a deep dimple",
+      "fields": {
+        "description": "A broad smile and a deep dimple."
+      }
     },
     {
       "id": "high_cheekbones",
-      "value": "A narrow face with high cheekbones."
+      "name": "A narrow face with high cheekbones",
+      "fields": {
+        "description": "A narrow face with high cheekbones."
+      }
     },
     {
       "id": "brown_eyes_curled_hair",
-      "value": "Warm brown eyes and tightly curled hair."
+      "name": "Warm brown eyes and tightly curled hair",
+      "fields": {
+        "description": "Warm brown eyes and tightly curled hair."
+      }
     },
     {
       "id": "pale_blue_eyes",
-      "value": "Pale blue eyes beneath a heavy fringe."
+      "name": "Pale blue eyes beneath a heavy fringe",
+      "fields": {
+        "description": "Pale blue eyes beneath a heavy fringe."
+      }
     },
     {
       "id": "small_stature",
-      "value": "Small in stature, with quick, precise movements."
+      "name": "Small in stature",
+      "fields": {
+        "description": "Small in stature, with quick, precise movements."
+      }
     },
     {
       "id": "heavyset",
-      "value": "Heavyset, with a calm, open face."
+      "name": "Heavyset",
+      "fields": {
+        "description": "Heavyset, with a calm, open face."
+      }
     },
     {
       "id": "athletic_build",
-      "value": "An athletic build and an easy, balanced stance."
+      "name": "An athletic build and an easy",
+      "fields": {
+        "description": "An athletic build and an easy, balanced stance."
+      }
     },
     {
       "id": "missing_tooth",
-      "value": "A missing tooth shows when they smile."
+      "name": "A missing tooth shows when they smile",
+      "fields": {
+        "description": "A missing tooth shows when they smile."
+      }
     },
     {
       "id": "full_beard",
-      "value": "A full beard frames a serious face."
+      "name": "A full beard frames a serious face",
+      "fields": {
+        "description": "A full beard frames a serious face."
+      }
     },
     {
       "id": "round_spectacles",
-      "value": "Round spectacles and a long, thoughtful face."
+      "name": "Round spectacles and a long",
+      "fields": {
+        "description": "Round spectacles and a long, thoughtful face."
+      }
     },
     {
       "id": "youthful_fine_boned",
-      "value": "Youthful-looking, with a fine-boned face and smooth complexion."
+      "name": "Youthful-looking",
+      "fields": {
+        "description": "Youthful-looking, with a fine-boned face and smooth complexion."
+      }
     },
     {
       "id": "middle_aged_laugh_lines",
-      "value": "Middle-aged, with fine lines around the eyes and mouth."
+      "name": "Middle-aged",
+      "fields": {
+        "description": "Middle-aged, with fine lines around the eyes and mouth."
+      }
     },
     {
       "id": "elderly_stooped",
-      "value": "Elderly in appearance, with a slightly stooped posture and alert eyes."
+      "name": "Elderly in appearance",
+      "fields": {
+        "description": "Elderly in appearance, with a slightly stooped posture and alert eyes."
+      }
     },
     {
       "id": "tall_lanky",
-      "value": "Very tall and lanky, with long limbs and narrow shoulders."
+      "name": "Very tall and lanky",
+      "fields": {
+        "description": "Very tall and lanky, with long limbs and narrow shoulders."
+      }
     },
     {
       "id": "average_even_proportions",
-      "value": "Average in height, with an evenly proportioned build."
+      "name": "Average in height",
+      "fields": {
+        "description": "Average in height, with an evenly proportioned build."
+      }
     },
     {
       "id": "short_stocky",
-      "value": "Short and stocky, with a thick neck and sturdy limbs."
+      "name": "Short and stocky",
+      "fields": {
+        "description": "Short and stocky, with a thick neck and sturdy limbs."
+      }
     },
     {
       "id": "broad_heavy_frame",
-      "value": "A broad, heavy frame accompanied by large hands."
+      "name": "A broad, heavy frame",
+      "fields": {
+        "description": "A broad, heavy frame accompanied by large hands."
+      }
     },
     {
       "id": "thin_narrow_shoulders",
-      "value": "Thin, with narrow shoulders and delicate wrists."
+      "name": "Thin",
+      "fields": {
+        "description": "Thin, with narrow shoulders and delicate wrists."
+      }
     },
     {
       "id": "gaunt_hollow_cheeks",
-      "value": "Gaunt, with hollow cheeks and prominent collarbones."
+      "name": "Gaunt",
+      "fields": {
+        "description": "Gaunt, with hollow cheeks and prominent collarbones."
+      }
     },
     {
       "id": "compact_muscular",
-      "value": "A compact, muscular build with powerful legs."
+      "name": "A compact",
+      "fields": {
+        "description": "A compact, muscular build with powerful legs."
+      }
     },
     {
       "id": "long_oval_face",
-      "value": "A long oval face with balanced features."
+      "name": "A long oval face with balanced features",
+      "fields": {
+        "description": "A long oval face with balanced features."
+      }
     },
     {
       "id": "heart_shaped_face",
-      "value": "A heart-shaped face narrowing to a fine chin."
+      "name": "A heart-shaped face narrowing to a fine chin",
+      "fields": {
+        "description": "A heart-shaped face narrowing to a fine chin."
+      }
     },
     {
       "id": "broad_flat_nose",
-      "value": "A broad, flat nose dominates an otherwise ordinary face."
+      "name": "A broad, flat nose",
+      "fields": {
+        "description": "A broad, flat nose dominates an otherwise ordinary face."
+      }
     },
     {
       "id": "hooked_nose",
-      "value": "A pronounced hooked nose seen clearly in profile."
+      "name": "A pronounced hooked nose seen clearly in profile",
+      "fields": {
+        "description": "A pronounced hooked nose seen clearly in profile."
+      }
     },
     {
       "id": "strong_jaw",
-      "value": "A strong jaw and square chin."
+      "name": "A strong jaw and square chin",
+      "fields": {
+        "description": "A strong jaw and square chin."
+      }
     },
     {
       "id": "receding_chin",
-      "value": "A receding chin beneath a prominent lower lip."
+      "name": "A receding chin beneath a prominent lower lip",
+      "fields": {
+        "description": "A receding chin beneath a prominent lower lip."
+      }
     },
     {
       "id": "prominent_ears",
-      "value": "Prominent ears and close-set eyes."
+      "name": "Prominent ears and close-set eyes",
+      "fields": {
+        "description": "Prominent ears and close-set eyes."
+      }
     },
     {
       "id": "arched_brows",
-      "value": "High arched brows over narrow eyes."
+      "name": "High arched brows over narrow eyes",
+      "fields": {
+        "description": "High arched brows over narrow eyes."
+      }
     },
     {
       "id": "green_almond_eyes",
-      "value": "Green almond-shaped eyes with long lashes."
+      "name": "Green almond-shaped eyes with long lashes",
+      "fields": {
+        "description": "Green almond-shaped eyes with long lashes."
+      }
     },
     {
       "id": "amber_wide_set_eyes",
-      "value": "Wide-set amber eyes beneath a smooth brow."
+      "name": "Wide-set amber eyes beneath a smooth brow",
+      "fields": {
+        "description": "Wide-set amber eyes beneath a smooth brow."
+      }
     },
     {
       "id": "mismatched_eye_colors",
-      "value": "One eye is blue and the other brown."
+      "name": "One eye is blue and the other brown",
+      "fields": {
+        "description": "One eye is blue and the other brown."
+      }
     },
     {
       "id": "straight_auburn_hair",
-      "value": "Straight auburn hair cut just below the ears."
+      "name": "Straight auburn hair cut just below the ears",
+      "fields": {
+        "description": "Straight auburn hair cut just below the ears."
+      }
     },
     {
       "id": "wavy_blond_hair",
-      "value": "Wavy blond hair falling to the shoulders."
+      "name": "Wavy blond hair falling to the shoulders",
+      "fields": {
+        "description": "Wavy blond hair falling to the shoulders."
+      }
     },
     {
       "id": "coarse_grey_hair",
-      "value": "Coarse grey hair worn short."
+      "name": "Coarse grey hair worn short",
+      "fields": {
+        "description": "Coarse grey hair worn short."
+      }
     },
     {
       "id": "salt_and_pepper_hair",
-      "value": "Thick hair greying evenly at the temples."
+      "name": "Thick hair greying evenly at the temples",
+      "fields": {
+        "description": "Thick hair greying evenly at the temples."
+      }
     },
     {
       "id": "shaved_head",
-      "value": "A clean-shaven scalp emphasizing the shape of the skull."
+      "name": "A clean-shaven scalp emphasizing the shape of the skull",
+      "fields": {
+        "description": "A clean-shaven scalp emphasizing the shape of the skull."
+      }
     },
     {
       "id": "receding_hairline",
-      "value": "A receding hairline and carefully combed hair."
+      "name": "A receding hairline and carefully combed hair",
+      "fields": {
+        "description": "A receding hairline and carefully combed hair."
+      }
     },
     {
       "id": "bald_crown",
-      "value": "Bald across the crown, with a fringe of soft hair."
+      "name": "Bald across the crown",
+      "fields": {
+        "description": "Bald across the crown, with a fringe of soft hair."
+      }
     },
     {
       "id": "dark_hair_silver_streak",
-      "value": "Dark hair marked by a single natural streak of silver."
+      "name": "Dark hair marked by a single natural streak of silver",
+      "fields": {
+        "description": "Dark hair marked by a single natural streak of silver."
+      }
     },
     {
       "id": "trimmed_moustache",
-      "value": "A neatly trimmed moustache over a narrow mouth."
+      "name": "A neatly trimmed moustache over a narrow mouth",
+      "fields": {
+        "description": "A neatly trimmed moustache over a narrow mouth."
+      }
     },
     {
       "id": "patchy_beard",
-      "value": "A patchy beard growing unevenly along the jaw."
+      "name": "A patchy beard growing unevenly along the jaw",
+      "fields": {
+        "description": "A patchy beard growing unevenly along the jaw."
+      }
     },
     {
       "id": "short_grey_stubble",
-      "value": "Short grey stubble and heavy eyelids."
+      "name": "Short grey stubble and heavy eyelids",
+      "fields": {
+        "description": "Short grey stubble and heavy eyelids."
+      }
     },
     {
       "id": "warm_brown_complexion",
-      "value": "A warm brown complexion with an even tone."
+      "name": "A warm brown complexion with an even tone",
+      "fields": {
+        "description": "A warm brown complexion with an even tone."
+      }
     },
     {
       "id": "ruddy_complexion",
-      "value": "A ruddy complexion, especially across the cheeks and nose."
+      "name": "A ruddy complexion",
+      "fields": {
+        "description": "A ruddy complexion, especially across the cheeks and nose."
+      }
     },
     {
       "id": "neck_birthmark",
-      "value": "A large irregular birthmark is visible along one side of the neck."
+      "name": "A large irregular birthmark is visible along one side of the neck",
+      "fields": {
+        "description": "A large irregular birthmark is visible along one side of the neck."
+      }
     },
     {
       "id": "crooked_teeth",
-      "value": "Slightly crooked teeth show in an easy smile."
+      "name": "Slightly crooked teeth show in an easy smile",
+      "fields": {
+        "description": "Slightly crooked teeth show in an easy smile."
+      }
     },
     {
       "id": "small_even_teeth",
-      "value": "Small, even teeth and a restrained smile."
+      "name": "Small",
+      "fields": {
+        "description": "Small, even teeth and a restrained smile."
+      }
     },
     {
       "id": "lopsided_smile",
-      "value": "A naturally lopsided smile creases one cheek."
+      "name": "A naturally lopsided smile creases one cheek",
+      "fields": {
+        "description": "A naturally lopsided smile creases one cheek."
+      }
     },
     {
       "id": "slouched_posture",
-      "value": "A relaxed slouch that makes them seem shorter than they are."
+      "name": "A relaxed slouch that makes them seem shorter than they are",
+      "fields": {
+        "description": "A relaxed slouch that makes them seem shorter than they are."
+      }
     },
     {
       "id": "long_striding_gait",
-      "value": "A long-striding gait with arms swinging freely."
+      "name": "A long-striding gait with arms swinging freely",
+      "fields": {
+        "description": "A long-striding gait with arms swinging freely."
+      }
     },
     {
       "id": "careful_uneven_gait",
-      "value": "A careful, slightly uneven gait left by an old ankle injury."
+      "name": "A careful",
+      "fields": {
+        "description": "A careful, slightly uneven gait left by an old ankle injury."
+      }
     },
     {
       "id": "large_callused_hands",
-      "value": "Large hands with broad palms and thick calluses."
+      "name": "Large hands with broad palms and thick calluses",
+      "fields": {
+        "description": "Large hands with broad palms and thick calluses."
+      }
     },
     {
       "id": "slender_long_fingers",
-      "value": "Slender hands with unusually long fingers."
+      "name": "Slender hands with unusually long fingers",
+      "fields": {
+        "description": "Slender hands with unusually long fingers."
+      }
     },
     {
       "id": "crooked_finger",
-      "value": "One finger healed crooked after an old break."
+      "name": "One finger healed crooked after an old break",
+      "fields": {
+        "description": "One finger healed crooked after an old break."
+      }
     },
     {
       "id": "thin_chin_scar",
-      "value": "A thin pale scar runs beneath the chin."
+      "name": "A thin pale scar runs beneath the chin",
+      "fields": {
+        "description": "A thin pale scar runs beneath the chin."
+      }
     },
     {
       "id": "healed_broken_nose",
-      "value": "A nose that healed slightly crooked after an old break."
+      "name": "A nose that healed slightly crooked after an old break",
+      "fields": {
+        "description": "A nose that healed slightly crooked after an old break."
+      }
     },
     {
       "id": "faded_forearm_tattoo",
-      "value": "A small faded tattoo is visible on one forearm."
+      "name": "A small faded tattoo is visible on one forearm",
+      "fields": {
+        "description": "A small faded tattoo is visible on one forearm."
+      }
     },
     {
       "id": "inked_wrist_band",
-      "value": "A simple inked band circles one wrist."
+      "name": "A simple inked band circles one wrist",
+      "fields": {
+        "description": "A simple inked band circles one wrist."
+      }
     }
   ]
 }

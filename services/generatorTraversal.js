@@ -98,8 +98,8 @@ function analyzeGeneratorTraversalPath(
 	if (
 		traversal.field !== undefined
 		&& contexts.some(context => (
-			context.generator.entrySchema.type !== 'fields'
-			|| !context.generator.entrySchema.required.includes(traversal.field)
+			traversal.field !== 'name'
+			&& !context.generator.entrySchema.required.includes(traversal.field)
 		))
 	) {
 		return null;
@@ -202,15 +202,13 @@ function createMemberSuggestions(prefix, contexts, isValid) {
 	const suggestions = [];
 	const seen = new Set();
 	for (const context of contexts) {
-		if (context.generator.entrySchema.type === 'fields') {
-			for (const field of context.generator.entrySchema.required) {
-				addSuggestion(suggestions, seen, isValid, {
-					kind: 'field',
-					label: field,
-					description: context.generator.name,
-					value: `${prefix}.${field}`,
-				});
-			}
+		for (const field of ['name', ...context.generator.entrySchema.required]) {
+			addSuggestion(suggestions, seen, isValid, {
+				kind: 'field',
+				label: field,
+				description: context.generator.name,
+				value: `${prefix}.${field}`,
+			});
 		}
 		if (getContextEntries(context).some(entry => entry.generator)) {
 			addSuggestion(suggestions, seen, isValid, {
@@ -232,7 +230,7 @@ function addSuggestion(suggestions, seen, isValid, suggestion) {
 }
 
 function getEntryLabel(entry) {
-	return entry.fields?.name ?? entry.value ?? entry.id;
+	return entry.name;
 }
 
 module.exports = {

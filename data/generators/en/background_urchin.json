@@ -1,52 +1,52 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "urchin",
   "visibility": "internal",
   "name": "Urchin archetypes",
   "description": "Street and survival roles",
   "entrySchema": {
-    "type": "text"
+    "required": []
   },
   "entries": [
     {
       "id": "orphan",
-      "value": "Orphan"
+      "name": "Orphan"
     },
     {
       "id": "beggar",
-      "value": "Beggar"
+      "name": "Beggar"
     },
     {
       "id": "street_child",
-      "value": "Street child"
+      "name": "Street child"
     },
     {
       "id": "scavenger",
-      "value": "Scavenger"
+      "name": "Scavenger"
     },
     {
       "id": "runaway",
-      "value": "Runaway"
+      "name": "Runaway"
     },
     {
       "id": "street_messenger",
-      "value": "Street messenger"
+      "name": "Street messenger"
     },
     {
       "id": "pickpocket",
-      "value": "Pickpocket"
+      "name": "Pickpocket"
     },
     {
       "id": "street_performer",
-      "value": "Street performer"
+      "name": "Street performer"
     },
     {
       "id": "urchin",
-      "value": "Urchin"
+      "name": "Urchin"
     },
     {
       "id": "errand_runner",
-      "value": "Errand runner"
+      "name": "Errand runner"
     }
   ]
 }

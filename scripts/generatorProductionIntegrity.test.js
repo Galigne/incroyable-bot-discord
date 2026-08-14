@@ -3,7 +3,10 @@ const { test } = require('node:test');
 const generatorCatalog = require('../services/generatorCatalog');
 const generatorResolver = require('../services/generatorResolver');
 
-test('production catalogs preserve current v3 payload and modifier structure', () => {
+test('complete production catalogs validate in both locales under schema v4', () => {
+	const catalogs = generatorCatalog.createGeneratorCatalogCandidate();
+	assert.equal(catalogs.get('en').size, catalogs.get('fr').size);
+	assert.ok(catalogs.get('en').size > 0);
 	const all = generatorCatalog.listGenerators('en', { visibility: 'all' });
 	for (const modifier of all.filter(generator => (
 		['modifier_character', 'modifier_creature'].includes(generator.id)
@@ -11,13 +14,13 @@ test('production catalogs preserve current v3 payload and modifier structure', (
 	))) {
 		assert.equal(modifier.visibility, 'internal');
 		assert.ok(modifier.entries.every(entry => (
-			Object.keys(entry).every(key => ['id', 'weight', 'fields'].includes(key))
+			Object.keys(entry).every(key => ['id', 'name', 'weight', 'fields'].includes(key))
 		)));
 	}
 	for (const locale of ['en', 'fr']) {
 		const quest = generatorCatalog.getGenerator('quest', locale);
-		assert.equal(quest.entrySchema.type, 'text');
-		assert.ok(quest.entries.every(entry => entry.value.includes('{{')));
+		assert.deepEqual(quest.entrySchema.required, ['description']);
+		assert.ok(quest.entries.every(entry => entry.fields.description.includes('{{')));
 	}
 });
 
@@ -81,22 +84,22 @@ test('production category routers traverse equal-weight internal child generator
 	}
 });
 
-test('loot replaces every inventory entry across heterogeneous child schemas', () => {
+test('loot replaces every inventory entry across heterogeneous additional fields', () => {
 	assert.equal(generatorCatalog.getGenerator('inventory'), undefined);
-	for (const [generatorId, expectedCount, schemaType] of [
-		['weapons', 53, 'fields'],
-		['shields', 16, 'fields'],
-		['armors', 15, 'fields'],
-		['supplies', 32, 'fields'],
-		['consumable', 18, 'fields'],
-		['food_and_drink', 18, 'fields'],
-		['valuables', 15, 'fields'],
-		['material', 35, 'text'],
-		['curio', 22, 'fields'],
+	for (const [generatorId, expectedCount, requiredFields] of [
+		['weapons', 53, ['description']],
+		['shields', 16, ['rarity', 'description', 'ar_percentage']],
+		['armors', 15, ['type', 'rarity', 'description', 'constitution_requirement', 'ar_percentage']],
+		['supplies', 32, ['description']],
+		['consumable', 18, ['description']],
+		['food_and_drink', 18, ['description']],
+		['valuables', 15, ['description']],
+		['material', 35, ['description']],
+		['curio', 22, ['description']],
 	]) {
 		const generator = generatorCatalog.getGenerator(generatorId);
 		assert.equal(generator.entries.length, expectedCount, generatorId);
-		assert.equal(generator.entrySchema.type, schemaType, generatorId);
+		assert.deepEqual(generator.entrySchema.required, requiredFields, generatorId);
 	}
 });
 
@@ -110,8 +113,7 @@ test('shield and affliction fields are public, localized, and mechanically stabl
 	]);
 	const shields = generatorCatalog.getGenerator('shields', 'en');
 	assert.deepEqual(shields.entrySchema, {
-		type: 'fields',
-		required: ['name', 'rarity', 'description', 'ar_percentage'],
+		required: ['rarity', 'description', 'ar_percentage'],
 	});
 	for (const [rarity, expected] of shieldExpectations) {
 		const entries = shields.entries.filter(entry => entry.fields.rarity === rarity);
@@ -127,8 +129,7 @@ test('shield and affliction fields are public, localized, and mechanically stabl
 
 	const affliction = generatorCatalog.getGenerator('affliction', 'en');
 	assert.deepEqual(affliction.entrySchema, {
-		type: 'fields',
-		required: ['name', 'type', 'description'],
+		required: ['type', 'description'],
 	});
 	assert.equal(affliction.entries.filter(entry => entry.fields.type === 'disease').length, 8);
 	assert.equal(affliction.entries.filter(entry => entry.fields.type === 'curse').length, 8);
@@ -203,7 +204,7 @@ test('migrated creature and quest references target classified loot concepts', (
 
 		const questValues = Object.fromEntries(
 			generatorCatalog.getGenerator('quest', locale).entries
-				.map(entry => [entry.id, entry.value]),
+				.map(entry => [entry.id, entry.fields.description]),
 		);
 		assert.match(questValues.recover_item_before_criminal, /\{\{ curio \}\}/);
 		assert.match(questValues.hide_item_from_faction, /\{\{ curio \}\}/);

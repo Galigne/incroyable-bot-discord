@@ -1,56 +1,56 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "criminal",
   "visibility": "internal",
   "name": "Archétypes criminels",
   "description": "Métiers et rôles de la pègre",
   "entrySchema": {
-    "type": "text"
+    "required": []
   },
   "entries": [
     {
       "id": "pickpocket",
-      "value": "Coupe-bourse"
+      "name": "Coupe-bourse"
     },
     {
       "id": "smuggler",
-      "value": "Contrebandier"
+      "name": "Contrebandier"
     },
     {
       "id": "bandit",
-      "value": "Bandit"
+      "name": "Bandit"
     },
     {
       "id": "fence",
-      "value": "Receleur"
+      "name": "Receleur"
     },
     {
       "id": "forger",
-      "value": "Faussaire"
+      "name": "Faussaire"
     },
     {
       "id": "poisoner",
-      "value": "Empoisonneur"
+      "name": "Empoisonneur"
     },
     {
       "id": "assassin",
-      "value": "Assassin"
+      "name": "Assassin"
     },
     {
       "id": "pirate",
-      "value": "Pirate"
+      "name": "Pirate"
     },
     {
       "id": "corrupt_official",
-      "value": "Fonctionnaire corrompu"
+      "name": "Fonctionnaire corrompu"
     },
     {
       "id": "blackmailer",
-      "value": "Maître chanteur"
+      "name": "Maître chanteur"
     },
     {
       "id": "grave_robber",
-      "value": "Pilleur de tombes"
+      "name": "Pilleur de tombes"
     }
   ]
 }

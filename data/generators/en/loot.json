@@ -1,76 +1,57 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "loot",
   "visibility": "public",
   "name": "Loot",
   "description": "Random items from every loot category",
   "entrySchema": {
-    "type": "fields",
-    "required": ["name"]
+    "required": []
   },
   "entries": [
     {
       "id": "weapons",
-      "generator": "weapons",
-      "fields": {
-        "name": "weapons"
-      }
+      "name": "weapons",
+      "generator": "weapons"
     },
     {
       "id": "shields",
-      "generator": "shields",
-      "fields": {
-        "name": "shields"
-      }
+      "name": "shields",
+      "generator": "shields"
     },
     {
       "id": "armors",
-      "generator": "armors",
-      "fields": {
-        "name": "armors"
-      }
+      "name": "armors",
+      "generator": "armors"
     },
     {
       "id": "supplies",
-      "generator": "supplies",
-      "fields": {
-        "name": "supplies"
-      }
+      "name": "supplies",
+      "generator": "supplies"
     },
     {
       "id": "consumable",
-      "generator": "consumable",
-      "fields": {
-        "name": "consumables"
-      }
+      "name": "consumables",
+      "generator": "consumable"
     },
     {
       "id": "food_and_drink",
-      "generator": "food_and_drink",
-      "fields": {
-        "name": "food and drink"
-      }
+      "name": "food and drink",
+      "generator": "food_and_drink"
     },
     {
       "id": "valuables",
-      "generator": "valuables",
-      "fields": {
-        "name": "valuables"
-      }
+      "name": "valuables",
+      "generator": "valuables"
     },
     {
       "id": "material",
-      "generator": "material",
-      "fields": {
-        "name": "material"
-      }
+      "name": "material",
+      "generator": "material"
     },
     {
       "id": "curio",
-      "generator": "curio",
-      "fields": {
-        "name": "curios"
-      }
+      "name": "curios",
+      "generator": "curio"
     }
   ]
 }

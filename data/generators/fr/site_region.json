@@ -1,218 +1,217 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "region",
   "visibility": "internal",
   "name": "Régions",
   "description": "Régions naturelles, habitées ou transformées par la magie",
   "entrySchema": {
-    "type": "fields",
-    "required": ["name", "description"]
+    "required": ["description"]
   },
   "entries": [
     {
       "id": "temperate_forest",
+      "name": "Forêt tempérée",
       "weight": 4,
       "fields": {
-        "name": "Forêt tempérée",
         "description": "bois mêlés traversés de pistes animales, de chemins forestiers et de ruisseaux limpides."
       }
     },
     {
       "id": "dry_scrubland",
+      "name": "Brousse aride",
       "weight": 3,
       "fields": {
-        "name": "Brousse aride",
         "description": "buissons épineux, terre rouge, cours d’eau saisonniers et puits très éloignés les uns des autres."
       }
     },
     {
       "id": "frozen_tundra",
+      "name": "Toundra gelée",
       "weight": 2,
       "fields": {
-        "name": "Toundra gelée",
         "description": "pergélisol, végétation basse, animaux migrateurs et étés brefs mais violents."
       }
     },
     {
       "id": "salt_desert",
+      "name": "Désert de sel",
       "weight": 2,
       "fields": {
-        "name": "Désert de sel",
         "description": "étendues aveuglantes, ruines ensevelies, caravanes de minerais et presque aucune eau douce."
       }
     },
     {
       "id": "badlands",
+      "name": "Terres désolées",
       "weight": 2,
       "fields": {
-        "name": "Terres désolées",
         "description": "canyons érodés, fossiles à ciel ouvert, eau rare et excellentes cachettes."
       }
     },
     {
       "id": "wine_hills",
+      "name": "Collines viticoles",
       "weight": 2,
       "fields": {
-        "name": "Collines viticoles",
         "description": "coteaux cultivés, riches domaines, vieilles caves et rivalités locales acharnées."
       }
     },
     {
       "id": "flooded_forest",
+      "name": "Forêt inondée",
       "weight": 2,
       "fields": {
-        "name": "Forêt inondée",
         "description": "arbres à demi submergés entre lesquels on circule en canoë pendant la longue saison des pluies."
       }
     },
     {
       "id": "crystal_expanse",
+      "name": "Étendue cristalline",
       "weight": 1,
       "fields": {
-        "name": "Étendue cristalline",
         "description": "formations naturelles de verre qui déforment lumière, sons, directions et magie."
       }
     },
     {
       "id": "dead_magic_basin",
+      "name": "Bassin sans magie",
       "weight": 1,
       "fields": {
-        "name": "Bassin sans magie",
         "description": "dépression d’apparence fertile où tout effet surnaturel cesse brusquement de fonctionner."
       }
     },
     {
       "id": "storm_belt",
+      "name": "Ceinture des tempêtes",
       "weight": 1,
       "fields": {
-        "name": "Ceinture des tempêtes",
         "description": "région côtière presque constamment battue par le vent, la pluie et les orages."
       }
     },
     {
       "id": "mushroom_wilds",
+      "name": "Contrée fongique",
       "weight": 1,
       "fields": {
-        "name": "Contrée fongique",
         "description": "terres humides dominées par les champignons géants, les spores et les communautés souterraines."
       }
     },
     {
       "id": "ancient_woodland",
+      "name": "Forêt profonde",
       "fields": {
-        "name": "Forêt profonde",
         "description": "Une forêt ancienne aux sentiers effacés et aux clairières isolées, dont la faune revendique les territoires."
       }
     },
     {
       "id": "deep_jungle",
+      "name": "Jungle étouffante",
       "fields": {
-        "name": "Jungle étouffante",
         "description": "Une végétation dense, des pluies violentes et des ruines lentement englouties par les racines."
       }
     },
     {
       "id": "arid_desert",
+      "name": "Désert aride",
       "fields": {
-        "name": "Désert aride",
         "description": "Une étendue de dunes et de plateaux rocheux où les points d’eau déterminent les itinéraires et les conflits."
       }
     },
     {
       "id": "grassland_steppe",
+      "name": "Prairie ouverte",
       "fields": {
-        "name": "Prairie ouverte",
         "description": "De vastes terres herbeuses exposées au vent, propices aux troupeaux, aux voyageurs et aux embuscades visibles de loin."
       }
     },
     {
       "id": "lake_country",
+      "name": "Région lacustre",
       "fields": {
-        "name": "Région lacustre",
         "description": "Un ensemble de lacs, d’îlots et de villages de pêche reliés par des bateaux et des chemins exposés aux crues."
       }
     },
     {
       "id": "rocky_coast",
+      "name": "Côte de falaises",
       "fields": {
-        "name": "Côte de falaises",
         "description": "Un littoral escarpé creusé de criques, de grottes marines et de passages dangereux."
       }
     },
     {
       "id": "river_valley",
+      "name": "Vallée fluviale",
       "fields": {
-        "name": "Vallée fluviale",
         "description": "Une région fertile organisée autour d’un fleuve, de ponts fortifiés et de ports rivaux."
       }
     },
     {
       "id": "high_mountains",
+      "name": "Chaîne montagneuse",
       "fields": {
-        "name": "Chaîne montagneuse",
         "description": "Des sommets difficiles d’accès abritant des mines, des monastères et des cols stratégiques."
       }
     },
     {
       "id": "pack_ice",
+      "name": "Banquise",
       "fields": {
-        "name": "Banquise",
         "description": "Une mer gelée instable où les itinéraires changent avec les fractures et les migrations animales."
       }
     },
     {
       "id": "monumental_glacier",
+      "name": "Glacier monumental",
       "fields": {
-        "name": "Glacier monumental",
         "description": "Une masse de glace parcourue de crevasses, de cavernes bleues et de vestiges prisonniers de la glace."
       }
     },
     {
       "id": "island_chain",
+      "name": "Archipel",
       "fields": {
-        "name": "Archipel",
         "description": "Des îles séparées par des récifs, des courants imprévisibles et des voies maritimes disputées."
       }
     },
     {
       "id": "levitating_archipelago",
+      "name": "Archipel flottant",
       "fields": {
-        "name": "Archipel flottant",
         "description": "Des terres suspendues reliées par des ponts et des aéronefs, avec des cascades tombant dans le vide."
       }
     },
     {
       "id": "volcanic_highlands",
+      "name": "Hautes terres volcaniques",
       "fields": {
-        "name": "Hautes terres volcaniques",
         "description": "Des pentes de cendre, des sources brûlantes et des filons précieux sous un volcan actif."
       }
     },
     {
       "id": "marshland",
+      "name": "Marais brumeux",
       "fields": {
-        "name": "Marais brumeux",
         "description": "Des eaux peu profondes, des tourbières et des îlots dont les chemins changent avec les saisons."
       }
     },
     {
       "id": "rolling_farmland",
+      "name": "Collines agricoles",
       "fields": {
-        "name": "Collines agricoles",
         "description": "Des cultures en terrasses, des fermes dispersées et des routes commerciales gardées."
       }
     },
     {
       "id": "shattered_battlefield",
+      "name": "Champ de bataille abandonné",
       "fields": {
-        "name": "Champ de bataille abandonné",
         "description": "Un territoire marqué par les tranchées, les épaves et les traces surnaturelles d’une guerre ancienne."
       }
     },
     {
       "id": "celestial_region",
+      "name": "Région céleste",
       "fields": {
-        "name": "Région céleste",
         "description": "Des courants aériens, des nuages solides et des phénomènes météorologiques forment un territoire praticable mais instable."
       }
     }

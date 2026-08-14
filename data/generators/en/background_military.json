@@ -1,52 +1,52 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "military",
   "visibility": "internal",
   "name": "Military archetypes",
   "description": "Military and defensive roles",
   "entrySchema": {
-    "type": "text"
+    "required": []
   },
   "entries": [
     {
       "id": "soldier",
-      "value": "Soldier"
+      "name": "Soldier"
     },
     {
       "id": "guard",
-      "value": "Guard"
+      "name": "Guard"
     },
     {
       "id": "officer",
-      "value": "Officer"
+      "name": "Officer"
     },
     {
       "id": "veteran",
-      "value": "Veteran"
+      "name": "Veteran"
     },
     {
       "id": "mercenary",
-      "value": "Mercenary"
+      "name": "Mercenary"
     },
     {
       "id": "military_engineer",
-      "value": "Military engineer"
+      "name": "Military engineer"
     },
     {
       "id": "sentry",
-      "value": "Sentry"
+      "name": "Sentry"
     },
     {
       "id": "captain",
-      "value": "Captain"
+      "name": "Captain"
     },
     {
       "id": "quartermaster",
-      "value": "Quartermaster"
+      "name": "Quartermaster"
     },
     {
       "id": "military_scout",
-      "value": "Military scout"
+      "name": "Military scout"
     }
   ]
 }

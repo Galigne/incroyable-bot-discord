@@ -11,6 +11,7 @@ const generatorResolver = require('../services/generatorResolver');
 const {
 	validateGeneratorDefinition,
 	validateGeneratorPair,
+	validateGeneratorRelationships,
 } = require('../services/generatorSchema');
 const {
 	parseWrappedInlineReference,
@@ -23,7 +24,7 @@ const {
 } = require('../services/weightedSelector');
 const { getCommandOptionValues } = require('../util/commandOptionValues');
 
-test('production generator v3 data uses stable IDs, strict parity, and visibility', () => {
+test('production generator v4 data uses stable IDs, entry names, strict parity, and visibility', () => {
 	const englishPublic = generatorCatalog.listGenerators('en');
 	const frenchPublic = generatorCatalog.listGenerators('fr');
 	const internal = generatorCatalog.listGenerators('en', { visibility: 'internal' });
@@ -41,7 +42,7 @@ test('production generator v3 data uses stable IDs, strict parity, and visibilit
 		null,
 	);
 	for (const generator of all) {
-		assert.equal(generator.schemaVersion, 3);
+		assert.equal(generator.schemaVersion, 4);
 		assert.match(generator.id, /^[a-z0-9]+(?:_[a-z0-9]+)*$/);
 		assert.match(generator.name, /^\p{Lu}/u);
 		assert.equal(
@@ -51,6 +52,8 @@ test('production generator v3 data uses stable IDs, strict parity, and visibilit
 		assert.ok(generator.entries.every(entry => (
 			typeof entry === 'object'
 			&& /^[a-z0-9]+(?:_[a-z0-9]+)*$/.test(entry.id)
+			&& typeof entry.name === 'string'
+			&& entry.name.trim()
 		)));
 	}
 	for (const randomValue of [0, 0.1, 0.5, 0.999999]) {
@@ -154,7 +157,7 @@ test('generator and background autocomplete expose stable public values', () => 
 		choices.map(choice => choice.value),
 		englishBackgrounds.map(entry => entry.id),
 	);
-	assert.ok(choices[0].name.startsWith(frenchBackgrounds[0].fields.name));
+	assert.ok(choices[0].name.startsWith(frenchBackgrounds[0].name));
 });
 
 test('wrapped inline reference parsing requires exactly one valid token', () => {
@@ -202,7 +205,7 @@ test('/gen traversal autocomplete follows entries, fields, and structural routes
 	]);
 });
 
-test('generator schema validates unified v3 envelopes', () => {
+test('generator schema validates unified v4 envelopes', () => {
 	const english = createTextGenerator();
 	assert.equal(validateGeneratorDefinition(english), english);
 
@@ -219,12 +222,21 @@ test('generator schema validates unified v3 envelopes', () => {
 	}
 });
 
-test('generator schema validates entry schemas and payloads', () => {
+test('generator schema requires entry names and exact additional fields', () => {
 	const english = createTextGenerator();
 	for (const invalid of [
-		{ ...english, entrySchema: { type: 'fields', required: [] } },
-		{ ...english, entries: [{ id: 'rain', value: 'Rain', weight: 0 }] },
-		{ ...english, entries: [{ id: 'rain', value: 'Rain' }, { id: 'rain', value: 'Storm' }] },
+		{ ...english, entrySchema: { type: 'text' } },
+		{ ...english, entries: [{ id: 'rain', name: 'Rain', value: 'Legacy' }] },
+		{ ...english, entries: [{ id: 'rain', fields: { name: 'Rain' } }] },
+		{ ...english, entries: [{ id: 'rain', name: '---' }] },
+		{ ...english, entries: [{ id: 'rain', name: 'Rain', weight: 0 }] },
+		{
+			...english,
+			entries: [
+				{ id: 'rain', name: 'Rain' },
+				{ id: 'rain', name: 'Storm' },
+			],
+		},
 		{ ...english, entries: ['Legacy string'] },
 	]) {
 		assert.throws(() => validateGeneratorDefinition(invalid), error => (
@@ -241,7 +253,7 @@ test('generator schema validates entry schemas and payloads', () => {
 		}),
 		error => error.name === 'GeneratorSchemaError',
 	);
-	for (const reservedField of ['generator', 'generation']) {
+	for (const reservedField of ['name', 'generator', 'generation']) {
 		assert.throws(
 			() => validateGeneratorDefinition({
 				...fields,
@@ -250,6 +262,24 @@ test('generator schema validates entry schemas and payloads', () => {
 					required: [...fields.entrySchema.required, reservedField],
 				},
 			}),
+			error => error.name === 'GeneratorSchemaError',
+		);
+	}
+	for (const invalidEntries of [
+		[{ id: 'light_armor', name: 'Light armor' }],
+		[{
+			id: 'light_armor',
+			name: 'Light armor',
+			fields: { type: 'light', description: 'Extra' },
+		}],
+		[{
+			id: 'light_armor',
+			name: 'Light armor',
+			fields: { type: 'light', name: 'Legacy duplicate' },
+		}],
+	]) {
+		assert.throws(
+			() => validateGeneratorDefinition({ ...fields, entries: invalidEntries }),
 			error => error.name === 'GeneratorSchemaError',
 		);
 	}
@@ -271,14 +301,14 @@ test('generator schema localizes string fields and preserves functional parity',
 	const french = structuredClone(english);
 	french.name = 'M\u00e9t\u00e9o';
 	french.description = 'Conditions m\u00e9t\u00e9orologiques';
-	french.entries[0].value = 'Une pluie douce commence.';
+	french.entries[0].name = 'Une pluie douce commence.';
 	assert.equal(validateGeneratorPair(english, french, 'weather.json'), true);
 
 	const fieldsEnglish = createFieldsGenerator();
 	const fieldsFrench = structuredClone(fieldsEnglish);
 	fieldsFrench.name = 'Armures';
 	fieldsFrench.description = 'Armures disponibles';
-	fieldsFrench.entries[0].fields.name = 'Armure l\u00e9g\u00e8re';
+	fieldsFrench.entries[0].name = 'Armure l\u00e9g\u00e8re';
 	fieldsFrench.entries[0].fields.type = 'l\u00e9ger';
 	assert.equal(validateGeneratorPair(fieldsEnglish, fieldsFrench), true);
 	fieldsEnglish.entries[0].generator = 'armor_detail';
@@ -295,8 +325,31 @@ test('generator schema localizes string fields and preserves functional parity',
 	);
 });
 
+test('generator names reject normalized collisions within their input scope', () => {
+	const entries = createTextGenerator();
+	entries.entries.push({ id: 'second_rain', name: '  À gentle---&---RAIN begins  ' });
+	assert.throws(
+		() => validateGeneratorDefinition(entries),
+		error => error.code === 'DUPLICATE_GENERATOR_ENTRY_NAME',
+	);
+
+	const first = createTextGenerator();
+	const second = {
+		...createTextGenerator(),
+		id: 'climate',
+		name: 'Wéather!',
+	};
+	assert.throws(
+		() => validateGeneratorRelationships(new Map([
+			[first.id, first],
+			[second.id, second],
+		])),
+		error => error.code === 'DUPLICATE_PUBLIC_GENERATOR_NAME',
+	);
+});
+
 test('recursive catalog discovery rejects a missing locale counterpart', async t => {
-	const root = await fsPromises.mkdtemp(path.join(os.tmpdir(), 'generator-v3-'));
+	const root = await fsPromises.mkdtemp(path.join(os.tmpdir(), 'generator-v4-'));
 	t.after(() => fsPromises.rm(root, { recursive: true, force: true }));
 	await fsPromises.mkdir(path.join(root, 'en', 'nested'), { recursive: true });
 	await fsPromises.mkdir(path.join(root, 'fr', 'nested'), { recursive: true });
@@ -312,14 +365,14 @@ test('recursive catalog discovery rejects a missing locale counterpart', async t
 	const french = createTextGenerator();
 	french.name = 'Météo';
 	french.description = 'Conditions météorologiques';
-	french.entries[0].value = 'Une pluie douce commence.';
+	french.entries[0].name = 'Une pluie douce commence.';
 	await fsPromises.writeFile(
 		path.join(root, 'fr', 'nested', 'weather.json'),
 		JSON.stringify(french),
 	);
 	const candidate = generatorCatalog.createGeneratorCatalogCandidate(root);
 	assert.equal(candidate.get('en').get('weather').entries[0].id, 'gentle_rain');
-	assert.equal(candidate.get('fr').get('weather').entries[0].value, 'Une pluie douce commence.');
+	assert.equal(candidate.get('fr').get('weather').entries[0].name, 'Une pluie douce commence.');
 });
 
 test('weighted selection honors default weights and deterministic boundaries', () => {
@@ -404,30 +457,30 @@ test('clearing the generator cache rebuilds both localized catalogs', () => {
 
 function createTextGenerator() {
 	return {
-		schemaVersion: 3,
+		schemaVersion: 4,
 		id: 'weather',
 		visibility: 'public',
 		name: 'Weather',
 		description: 'Weather conditions',
-		entrySchema: { type: 'text' },
-		entries: [{ id: 'gentle_rain', weight: 2, value: 'A gentle rain begins.' }],
+		entrySchema: { required: [] },
+		entries: [{ id: 'gentle_rain', name: 'A gentle rain begins.', weight: 2 }],
 	};
 }
 
 function createFieldsGenerator() {
 	return {
-		schemaVersion: 3,
+		schemaVersion: 4,
 		id: 'armor',
 		visibility: 'public',
 		name: 'Armor',
 		description: 'Available armor',
 		entrySchema: {
-			type: 'fields',
-			required: ['name', 'type'],
+			required: ['type'],
 		},
 		entries: [{
 			id: 'light_armor',
-			fields: { name: 'Light armor', type: 'light' },
+			name: 'Light armor',
+			fields: { type: 'light' },
 		}],
 	};
 }

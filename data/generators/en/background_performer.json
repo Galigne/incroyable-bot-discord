@@ -1,52 +1,52 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "performer",
   "visibility": "internal",
   "name": "Performer archetypes",
   "description": "Entertainment and public-speaking roles",
   "entrySchema": {
-    "type": "text"
+    "required": []
   },
   "entries": [
     {
       "id": "musician",
-      "value": "Musician"
+      "name": "Musician"
     },
     {
       "id": "actor",
-      "value": "Actor"
+      "name": "Actor"
     },
     {
       "id": "storyteller",
-      "value": "Storyteller"
+      "name": "Storyteller"
     },
     {
       "id": "acrobat",
-      "value": "Acrobat"
+      "name": "Acrobat"
     },
     {
       "id": "singer",
-      "value": "Singer"
+      "name": "Singer"
     },
     {
       "id": "troubadour",
-      "value": "Troubadour"
+      "name": "Troubadour"
     },
     {
       "id": "jester",
-      "value": "Jester"
+      "name": "Jester"
     },
     {
       "id": "fortune_teller",
-      "value": "Fortune teller"
+      "name": "Fortune teller"
     },
     {
       "id": "dancer",
-      "value": "Dancer"
+      "name": "Dancer"
     },
     {
       "id": "street_entertainer",
-      "value": "Street entertainer"
+      "name": "Street entertainer"
     }
   ]
 }

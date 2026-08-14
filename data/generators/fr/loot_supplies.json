@@ -1,261 +1,260 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "supplies",
   "visibility": "internal",
   "name": "Matériel",
   "description": "Objets pratiques et réutilisables pour le voyage, l’exploration, les métiers et l’aventure quotidienne",
   "entrySchema": {
-    "type": "fields",
-    "required": ["name", "description"]
+    "required": ["description"]
   },
   "entries": [
     {
       "id": "coil_of_rope",
+      "name": "Rouleau de corde",
       "weight": 8,
       "fields": {
-        "name": "Rouleau de corde",
         "description": "Dix mètres de corde solide pour grimper, attacher ou arrimer une charge."
       }
     },
     {
       "id": "lantern_and_oil",
+      "name": "Lanterne et huile",
       "weight": 8,
       "fields": {
-        "name": "Lanterne et huile",
         "description": "Une lanterne à capuchon contenant assez d'huile pour plusieurs heures."
       }
     },
     {
       "id": "waterskin",
+      "name": "Gourde",
       "weight": 7,
       "fields": {
-        "name": "Gourde",
         "description": "Une gourde en cuir remplie d'eau."
       }
     },
     {
       "id": "bedroll",
+      "name": "Nécessaire de couchage",
       "weight": 7,
       "fields": {
-        "name": "Nécessaire de couchage",
         "description": "Une couverture résistante aux intempéries et un couchage roulé."
       }
     },
     {
       "id": "tinderbox",
+      "name": "Boîte à amadou",
       "weight": 7,
       "fields": {
-        "name": "Boîte à amadou",
         "description": "Un silex, un briquet en acier et de l'amadou sec pour allumer un feu."
       }
     },
     {
       "id": "lockpicking_kit",
+      "name": "Nécessaire de crochetage",
       "weight": 6,
       "fields": {
-        "name": "Nécessaire de crochetage",
         "description": "De petits outils permettant de manipuler les serrures mécaniques ordinaires."
       }
     },
     {
       "id": "climbing_kit",
+      "name": "Matériel d'escalade",
       "weight": 6,
       "fields": {
-        "name": "Matériel d'escalade",
         "description": "Des pitons, un marteau, des sangles et quelques accessoires d'escalade simples."
       }
     },
     {
       "id": "chalk_and_charcoal",
+      "name": "Craie et fusain",
       "weight": 6,
       "fields": {
-        "name": "Craie et fusain",
         "description": "De quoi baliser un chemin, esquisser une carte ou prendre des notes."
       }
     },
     {
       "id": "small_mirror",
+      "name": "Petit miroir",
       "weight": 6,
       "fields": {
-        "name": "Petit miroir",
         "description": "Un miroir à main poli, utile pour envoyer des signaux et observer discrètement ce qui se trouve hors de vue."
       }
     },
     {
       "id": "crowbar",
+      "name": "Pied-de-biche",
       "weight": 5,
       "fields": {
-        "name": "Pied-de-biche",
         "description": "Un solide levier en fer pour forcer des portes, des caisses ou d'autres obstacles."
       }
     },
     {
       "id": "grappling_hook",
+      "name": "Grappin",
       "weight": 5,
       "fields": {
-        "name": "Grappin",
         "description": "Un crochet à quatre pointes conçu pour être utilisé avec une corde."
       }
     },
     {
       "id": "fishing_kit",
+      "name": "Matériel de pêche",
       "weight": 5,
       "fields": {
-        "name": "Matériel de pêche",
         "description": "Du fil, des hameçons, des flotteurs et un filet compact."
       }
     },
     {
       "id": "writing_kit",
+      "name": "Nécessaire d'écriture",
       "weight": 5,
       "fields": {
-        "name": "Nécessaire d'écriture",
         "description": "De l'encre, des plumes, du parchemin, de la cire à cacheter et un étui de protection."
       }
     },
     {
       "id": "herbalism_pouch",
+      "name": "Trousse d'herboriste",
       "weight": 5,
       "fields": {
-        "name": "Trousse d'herboriste",
         "description": "De petits outils et récipients pour récolter des plantes utiles."
       }
     },
     {
       "id": "shovel",
+      "name": "Pelle",
       "weight": 5,
       "fields": {
-        "name": "Pelle",
         "description": "Un outil compact mais solide pour creuser."
       }
     },
     {
       "id": "bear_trap",
+      "name": "Piège à ours",
       "weight": 4,
       "fields": {
-        "name": "Piège à ours",
         "description": "Un lourd piège mécanique capable d'immobiliser une créature."
       }
     },
     {
       "id": "disguise_kit",
+      "name": "Nécessaire de déguisement",
       "weight": 4,
       "fields": {
-        "name": "Nécessaire de déguisement",
         "description": "Des produits cosmétiques, des teintures, de faux cheveux et quelques éléments de costume simples."
       }
     },
     {
       "id": "merchants_scale",
+      "name": "Balance de marchand",
       "weight": 4,
       "fields": {
-        "name": "Balance de marchand",
         "description": "Une balance pliante et des poids de référence pour vérifier les marchandises."
       }
     },
     {
       "id": "bag_of_caltrops",
+      "name": "Sac de chausse-trappes",
       "weight": 3,
       "fields": {
-        "name": "Sac de chausse-trappes",
         "description": "Des pointes métalliques acérées permettant de ralentir des poursuivants ou de protéger un passage."
       }
     },
     {
       "id": "spyglass",
+      "name": "Longue-vue",
       "weight": 3,
       "fields": {
-        "name": "Longue-vue",
         "description": "Un tube optique compact permettant d'observer des détails éloignés."
       }
     },
     {
       "id": "tent",
+      "name": "Tente",
       "weight": 3,
       "fields": {
-        "name": "Tente",
         "description": "Un petit abri adapté à un ou deux voyageurs."
       }
     },
     {
       "id": "manacles",
+      "name": "Menottes",
       "weight": 3,
       "fields": {
-        "name": "Menottes",
         "description": "Une paire d'entraves en fer accompagnée d'une clé simple."
       }
     },
     {
       "id": "holy_symbol",
+      "name": "Symbole sacré",
       "weight": 3,
       "fields": {
-        "name": "Symbole sacré",
         "description": "Un symbole associé à une foi, un serment, un ancêtre ou un idéal personnel."
       }
     },
     {
       "id": "local_map",
+      "name": "Carte locale",
       "weight": 3,
       "fields": {
-        "name": "Carte locale",
         "description": "Une carte pratique mais imparfaite des environs."
       }
     },
     {
       "id": "silvered_chain",
+      "name": "Chaîne argentée",
       "weight": 2,
       "fields": {
-        "name": "Chaîne argentée",
         "description": "Une courte chaîne utile contre les créatures vulnérables à l'argent."
       }
     },
     {
       "id": "runic_chalk",
+      "name": "Craie runique",
       "weight": 2,
       "fields": {
-        "name": "Craie runique",
         "description": "Une craie rare qui rend les inscriptions magiques plus faciles à voir et à étudier."
       }
     },
     {
       "id": "excavation_tools",
+      "name": "Outils d’excavation",
       "fields": {
-        "name": "Outils d’excavation",
         "description": "Un crochet, une petite pioche et une pelle repliable pour fouiller ou franchir un terrain difficile."
       }
     },
     {
       "id": "musical_instrument",
+      "name": "Instrument de musique",
       "fields": {
-        "name": "Instrument de musique",
         "description": "Un luth, tambour, violon ou autre instrument transportable, usé mais fonctionnel."
       }
     },
     {
       "id": "quality_paper",
+      "name": "Papier de qualité",
       "fields": {
-        "name": "Papier de qualité",
         "description": "Des feuilles et un parchemin vierges adaptés aux contrats, cartes, sorts ou faux documents."
       }
     },
     {
       "id": "runed_lantern",
+      "name": "Lanterne runique",
       "fields": {
-        "name": "Lanterne runique",
         "description": "Une lanterne à volets fonctionnelle portant une rune associée à la {{ rules.name }} ; le MJ en détermine la fonction précise."
       }
     },
     {
       "id": "runed_compass",
+      "name": "Boussole runique",
       "fields": {
-        "name": "Boussole runique",
         "description": "Une boussole fonctionnelle portant une rune associée à la {{ rules.name }} ; le MJ en détermine la fonction précise."
       }
     },
     {
       "id": "runed_chain",
+      "name": "Chaîne runique",
       "fields": {
-        "name": "Chaîne runique",
         "description": "Une chaîne robuste portant une rune associée à la {{ rules.name }} ; le MJ en détermine la fonction précise."
       }
     }

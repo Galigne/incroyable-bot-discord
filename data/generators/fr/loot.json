@@ -1,76 +1,57 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "loot",
   "visibility": "public",
   "name": "Butin",
   "description": "Objets aléatoires issus de toutes les catégories de butin",
   "entrySchema": {
-    "type": "fields",
-    "required": ["name"]
+    "required": []
   },
   "entries": [
     {
       "id": "weapons",
-      "generator": "weapons",
-      "fields": {
-        "name": "armes"
-      }
+      "name": "armes",
+      "generator": "weapons"
     },
     {
       "id": "shields",
-      "generator": "shields",
-      "fields": {
-        "name": "boucliers"
-      }
+      "name": "boucliers",
+      "generator": "shields"
     },
     {
       "id": "armors",
-      "generator": "armors",
-      "fields": {
-        "name": "Armures"
-      }
+      "name": "Armures",
+      "generator": "armors"
     },
     {
       "id": "supplies",
-      "generator": "supplies",
-      "fields": {
-        "name": "matériel"
-      }
+      "name": "matériel",
+      "generator": "supplies"
     },
     {
       "id": "consumable",
-      "generator": "consumable",
-      "fields": {
-        "name": "consommables"
-      }
+      "name": "consommables",
+      "generator": "consumable"
     },
     {
       "id": "food_and_drink",
-      "generator": "food_and_drink",
-      "fields": {
-        "name": "nourriture et boissons"
-      }
+      "name": "nourriture et boissons",
+      "generator": "food_and_drink"
     },
     {
       "id": "valuables",
-      "generator": "valuables",
-      "fields": {
-        "name": "objets de valeur"
-      }
+      "name": "objets de valeur",
+      "generator": "valuables"
     },
     {
       "id": "material",
-      "generator": "material",
-      "fields": {
-        "name": "Matériaux"
-      }
+      "name": "Matériaux",
+      "generator": "material"
     },
     {
       "id": "curio",
-      "generator": "curio",
-      "fields": {
-        "name": "curiosités"
-      }
+      "name": "curiosités",
+      "generator": "curio"
     }
   ]
 }

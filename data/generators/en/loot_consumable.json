@@ -1,150 +1,149 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "consumable",
   "visibility": "internal",
   "name": "Consumables",
   "description": "Items normally consumed or exhausted through use",
   "entrySchema": {
-    "type": "fields",
-    "required": ["name", "description"]
+    "required": ["description"]
   },
   "entries": [
     {
       "id": "bandages",
+      "name": "Bandages",
       "weight": 6,
       "fields": {
-        "name": "Bandages",
         "description": "Clean cloth and basic supplies for treating wounds."
       }
     },
     {
       "id": "antidote",
+      "name": "Antidote",
       "weight": 4,
       "fields": {
-        "name": "Antidote",
         "description": "A general treatment granting another chance to resist ordinary poison."
       }
     },
     {
       "id": "smoke_bomb",
+      "name": "Smoke bomb",
       "weight": 4,
       "fields": {
-        "name": "Smoke bomb",
         "description": "Creates a dense cloud of smoke when ignited."
       }
     },
     {
       "id": "vial_of_basic_poison",
+      "name": "Vial of basic poison",
       "weight": 3,
       "fields": {
-        "name": "Vial of basic poison",
         "description": "A limited dose of toxin suitable for one weapon or drink."
       }
     },
     {
       "id": "potion_of_night_vision",
+      "name": "Potion of night vision",
       "weight": 2,
       "fields": {
-        "name": "Potion of night vision",
         "description": "Grants clear sight in darkness for one hour."
       }
     },
     {
       "id": "potion_of_water_breathing",
+      "name": "Potion of water breathing",
       "weight": 2,
       "fields": {
-        "name": "Potion of water breathing",
         "description": "Allows underwater breathing for thirty minutes."
       }
     },
     {
       "id": "acid_flask",
+      "name": "Acid flask",
       "weight": 2,
       "fields": {
-        "name": "Acid flask",
         "description": "A carefully sealed vial able to damage common materials."
       }
     },
     {
       "id": "healing_potion",
+      "name": "Healing Potion",
       "fields": {
-        "name": "Healing Potion",
         "description": "A stabilized vial that aids recovery from an injury when used correctly."
       }
     },
     {
       "id": "vigor_potion",
+      "name": "Vigor Potion",
       "fields": {
-        "name": "Vigor Potion",
         "description": "A drink briefly improving physical ability before causing severe fatigue."
       }
     },
     {
       "id": "rule_scroll",
+      "name": "RULE Scroll",
       "fields": {
-        "name": "RULE Scroll",
         "description": "A single-use medium containing {{ rules.name }}; its exact effect and interpretation remain with the GM."
       }
     },
     {
       "id": "specialized_ammunition",
+      "name": "Specialized Ammunition",
       "fields": {
-        "name": "Specialized Ammunition",
         "description": "A small batch of projectiles made for a particular weapon or unusual target."
       }
     },
     {
       "id": "rare_medicine",
+      "name": "Rare Medicine",
       "fields": {
-        "name": "Rare Medicine",
         "description": "A fragile, hard-to-replace treatment for one specific illness."
       }
     },
     {
       "id": "flash_powder",
+      "name": "Flash powder",
       "weight": 3,
       "fields": {
-        "name": "Flash powder",
         "description": "A measured packet that produces a sudden burst of light when ignited."
       }
     },
     {
       "id": "sleeping_draught",
+      "name": "Sleeping draught",
       "weight": 3,
       "fields": {
-        "name": "Sleeping draught",
         "description": "A bitter dose intended to induce a deep but ordinary sleep."
       }
     },
     {
       "id": "cleansing_salts",
+      "name": "Cleansing salts",
       "weight": 4,
       "fields": {
-        "name": "Cleansing salts",
         "description": "Mineral salts used to clean wounds, tools, water, or ritual spaces."
       }
     },
     {
       "id": "lamp_oil",
+      "name": "Lamp oil",
       "weight": 6,
       "fields": {
-        "name": "Lamp oil",
         "description": "A sealed refill sufficient for several hours of steady light."
       }
     },
     {
       "id": "alchemical_oil",
+      "name": "Alchemical oil",
       "weight": 3,
       "fields": {
-        "name": "Alchemical oil",
         "description": "A prepared oil consumed when coating one object for a GM-defined purpose."
       }
     },
     {
       "id": "medicinal_poultice",
+      "name": "Medicinal poultice",
       "weight": 5,
       "fields": {
-        "name": "Medicinal poultice",
         "description": "A wrapped herbal preparation applied once to soothe pain and swelling."
       }
     }

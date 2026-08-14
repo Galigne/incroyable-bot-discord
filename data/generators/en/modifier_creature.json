@@ -1,126 +1,125 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "modifier_creature",
   "visibility": "internal",
   "name": "Creature modifiers",
   "description": "Persistent descriptive variations for generated creatures",
   "entrySchema": {
-    "type": "fields",
-    "required": ["name", "description"]
+    "required": ["description"]
   },
   "entries": [
     {
       "id": "alpha",
+      "name": "Alpha",
       "fields": {
-        "name": "Alpha",
         "description": "The subject has the bearing of a dominant leader that coordinates peers and protects group cohesion."
       }
     },
     {
       "id": "hybrid",
+      "name": "Hybrid",
       "fields": {
-        "name": "Hybrid",
         "description": "The subject shows traits from a second species, suggesting one useful ability and a contradictory weakness."
       }
     },
     {
       "id": "undead",
+      "name": "Undead",
       "fields": {
-        "name": "Undead",
         "description": "The subject appears free of several biological needs and bound to the cause or rite of reanimation."
       }
     },
     {
       "id": "reinforced",
+      "name": "Reinforced",
       "fields": {
-        "name": "Reinforced",
         "description": "Armor, mutation, or magical protection visibly suggests unusual resilience against ordinary attacks."
       }
     },
     {
       "id": "gigantic",
+      "name": "Gigantic",
       "fields": {
-        "name": "Gigantic",
         "description": "The subject is extraordinarily large, with imposing reach and presence but difficulty in narrow spaces."
       }
     },
     {
       "id": "enraged",
+      "name": "Enraged",
       "fields": {
-        "name": "Enraged",
         "description": "The subject appears recklessly aggressive after injury, dangerous in manner but increasingly predictable."
       }
     },
     {
       "id": "pack",
+      "name": "Pack",
       "fields": {
-        "name": "Pack",
         "description": "The encounter is narrated as a coordinated pack, without changing generated group size or mechanics."
       }
     },
     {
       "id": "swarm",
+      "name": "Swarm",
       "fields": {
-        "name": "Swarm",
         "description": "The encounter is narrated as many small creatures acting as one threat, without changing generated group size or mechanics."
       }
     },
     {
       "id": "ectoplasmic",
+      "name": "Ectoplasmic",
       "fields": {
-        "name": "Ectoplasmic",
         "description": "The subject appears partly able to cross matter but must seem material to affect the physical world."
       }
     },
     {
       "id": "invisible",
+      "name": "Invisible",
       "fields": {
-        "name": "Invisible",
         "description": "The subject is hard to see, though scent, sound, and interaction with the surroundings may reveal it."
       }
     },
     {
       "id": "rule_bearer",
+      "name": "RULE Bearer",
       "fields": {
-        "name": "RULE Bearer",
         "description": "The subject appears to wield a RULE-like phenomenon with an ordinary user’s limitations; no RULE is selected or granted."
       }
     },
     {
       "id": "equipped",
+      "name": "Equipped",
       "fields": {
-        "name": "Equipped",
         "description": "The subject appears to carry anatomy-appropriate weapons or objects; no equipment is selected or added."
       }
     },
     {
       "id": "restless",
+      "name": "Restless",
       "weight": 3,
       "fields": {
-        "name": "Restless",
         "description": "It never becomes completely still and constantly watches its surroundings."
       }
     },
     {
       "id": "smoldering",
+      "name": "Smoldering",
       "weight": 2,
       "fields": {
-        "name": "Smoldering",
         "description": "Thin smoke and dim embers drift from its body without an enforced mechanical effect."
       }
     },
     {
       "id": "frost_rimed",
+      "name": "Frost-Rimed",
       "weight": 2,
       "fields": {
-        "name": "Frost-Rimed",
         "description": "A persistent layer of frost coats part of its body and nearby surfaces."
       }
     },
     {
       "id": "shadowed",
+      "name": "Shadowed",
       "fields": {
-        "name": "Shadowed",
         "description": "Its outline remains difficult to separate from the shadows around it."
       }
     }

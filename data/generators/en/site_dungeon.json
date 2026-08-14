@@ -1,219 +1,218 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "dungeon",
   "visibility": "internal",
   "name": "Dungeon",
   "description": "Adventure sites, ruins, lairs, and hostile complexes",
   "entrySchema": {
-    "type": "fields",
-    "required": ["name", "description"]
+    "required": ["description"]
   },
   "entries": [
     {
       "id": "buried_temple",
+      "name": "Buried Temple",
       "weight": 3,
       "fields": {
-        "name": "Buried Temple",
         "description": "collapsed sacred chambers surrounding a sealed altar that still receives offerings."
       }
     },
     {
       "id": "bandit_cavern",
+      "name": "Bandit Cavern",
       "weight": 3,
       "fields": {
-        "name": "Bandit Cavern",
         "description": "natural tunnels expanded with barricades, storerooms, cells, and hidden exits."
       }
     },
     {
       "id": "ruined_fortress",
+      "name": "Ruined Fortress",
       "weight": 3,
       "fields": {
-        "name": "Ruined Fortress",
         "description": "broken walls above intact arsenals, command tunnels, and forgotten defenders."
       }
     },
     {
       "id": "ancient_crypt",
+      "name": "Ancient Crypt",
       "weight": 3,
       "fields": {
-        "name": "Ancient Crypt",
         "description": "family tombs, funerary traps, ancestral records, and disturbed sealed chambers."
       }
     },
     {
       "id": "wizards_tower",
+      "name": "Wizard's Tower",
       "weight": 2,
       "fields": {
-        "name": "Wizard's Tower",
         "description": "stacked laboratories where failed experiments have altered gravity and space."
       }
     },
     {
       "id": "sunken_palace",
+      "name": "Sunken Palace",
       "weight": 2,
       "fields": {
-        "name": "Sunken Palace",
         "description": "flooded halls accessible during low tide, through diving, or by ancient pumps."
       }
     },
     {
       "id": "monster_warren",
+      "name": "Monster Warren",
       "weight": 2,
       "fields": {
-        "name": "Monster Warren",
         "description": "interconnected nests shaped by generations of increasingly large inhabitants."
       }
     },
     {
       "id": "collapsed_city_district",
+      "name": "Collapsed City District",
       "weight": 2,
       "fields": {
-        "name": "Collapsed City District",
         "description": "buried streets and homes connected through basements and sinkholes."
       }
     },
     {
       "id": "cursed_manor",
+      "name": "Cursed Manor",
       "weight": 2,
       "fields": {
-        "name": "Cursed Manor",
         "description": "a noble residence repeating the final night before its household's destruction."
       }
     },
     {
       "id": "volcanic_shrine",
+      "name": "Volcanic Shrine",
       "weight": 2,
       "fields": {
-        "name": "Volcanic Shrine",
         "description": "heat-blasted tunnels, sacrificial bridges, lava channels, and fireproof guardians."
       }
     },
     {
       "id": "frozen_tomb",
+      "name": "Frozen Tomb",
       "weight": 2,
       "fields": {
-        "name": "Frozen Tomb",
         "description": "ice-preserved halls where opening doors releases ancient air, disease, and occupants."
       }
     },
     {
       "id": "cult_sanctuary",
+      "name": "Cult Sanctuary",
       "weight": 2,
       "fields": {
-        "name": "Cult Sanctuary",
         "description": "disguised meeting rooms descending into ritual chambers and an unfinished summoning site."
       }
     },
     {
       "id": "living_dungeon",
+      "name": "Living Dungeon",
       "weight": 1,
       "fields": {
-        "name": "Living Dungeon",
         "description": "an enormous organism whose chambers digest intruders and rearrange like organs."
       }
     },
     {
       "id": "dream_prison",
+      "name": "Dream Prison",
       "weight": 1,
       "fields": {
-        "name": "Dream Prison",
         "description": "a mental complex entered through sleep, with exits hidden in prisoners' memories."
       }
     },
     {
       "id": "inverted_tower",
+      "name": "Inverted Tower",
       "weight": 1,
       "fields": {
-        "name": "Inverted Tower",
         "description": "a structure descending into the earth while gravity points toward its distant roof."
       }
     },
     {
       "id": "planar_embassy",
+      "name": "Planar Embassy",
       "weight": 1,
       "fields": {
-        "name": "Planar Embassy",
         "description": "an abandoned diplomatic complex built for visitors with incompatible bodies and physics."
       }
     },
     {
       "id": "clockwork_vault",
+      "name": "Clockwork Vault",
       "weight": 1,
       "fields": {
-        "name": "Clockwork Vault",
         "description": "precise mechanical rooms that reset traps and rotate corridors on a fixed schedule."
       }
     },
     {
       "id": "worldroot_hollow",
+      "name": "Worldroot Hollow",
       "weight": 1,
       "fields": {
-        "name": "Worldroot Hollow",
         "description": "primeval tunnels inside a colossal root system infected by a spreading corruption."
       }
     },
     {
       "id": "astral_observatory",
+      "name": "Astral Observatory",
       "weight": 1,
       "fields": {
-        "name": "Astral Observatory",
         "description": "a remote ruin whose lenses open physical paths toward dangerous celestial objects."
       }
     },
     {
       "id": "forgotten_ruins",
+      "name": "Forgotten Ruins",
       "fields": {
-        "name": "Forgotten Ruins",
         "description": "Unstable remains of an abandoned domain, still protected by traps, guardians, or oaths."
       }
     },
     {
       "id": "abandoned_mine",
+      "name": "Condemned Mine",
       "fields": {
-        "name": "Condemned Mine",
         "description": "Galleries abandoned after an accident whose official cause contradicts the traces below."
       }
     },
     {
       "id": "inhabited_cave",
+      "name": "Inhabited Cave",
       "fields": {
-        "name": "Inhabited Cave",
         "description": "A natural network adapted by a creature, a community, or fugitives."
       }
     },
     {
       "id": "prison_complex",
+      "name": "Decommissioned Prison",
       "fields": {
-        "name": "Decommissioned Prison",
         "description": "Cells, archives, and service passages preserve evidence of a detention erased from history."
       }
     },
     {
       "id": "sewer_labyrinth",
+      "name": "Ancient Sewers",
       "fields": {
-        "name": "Ancient Sewers",
         "description": "A network larger than the present city, linking cisterns, crypts, and forbidden foundations."
       }
     },
     {
       "id": "desecrated_cemetery",
+      "name": "Desecrated Cemetery",
       "fields": {
-        "name": "Desecrated Cemetery",
         "description": "Open graves and displaced monuments surround a vault someone is trying to reach."
       }
     },
     {
       "id": "anomalous_crater",
+      "name": "Anomalous Crater",
       "fields": {
-        "name": "Anomalous Crater",
         "description": "A recent depression where stone, magic, or time behaves differently."
       }
     },
     {
       "id": "ruined_sanctuary",
+      "name": "Ruined Sanctuary",
       "fields": {
-        "name": "Ruined Sanctuary",
         "description": "An abandoned chapel or temple whose rites still produce effects without an officiant."
       }
     }

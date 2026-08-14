@@ -1,335 +1,334 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "talents",
   "visibility": "public",
   "name": "Talents",
   "description": "Talents et spécialités des personnages",
   "entrySchema": {
-    "type": "fields",
-    "required": ["name", "description"]
+    "required": ["description"]
   },
   "entries": [
     {
       "id": "athlete",
+      "name": "Athlète",
       "weight": 3,
       "fields": {
-        "name": "Athlète",
         "description": "+1 aux actions physiques impliquant un effort prolongé, de l'escalade ou un saut."
       }
     },
     {
       "id": "keen_eye",
+      "name": "Œil aiguisé",
       "weight": 3,
       "fields": {
-        "name": "Œil aiguisé",
         "description": "+1 pour rechercher de petits détails, des traces, des pièges ou des objets cachés."
       }
     },
     {
       "id": "silver_tongue",
+      "name": "Beau parleur",
       "weight": 3,
       "fields": {
-        "name": "Beau parleur",
         "description": "+1 en persuasion lorsque le personnage a le temps d'exposer son point de vue."
       }
     },
     {
       "id": "survivor",
+      "name": "Survivant",
       "weight": 3,
       "fields": {
-        "name": "Survivant",
         "description": "+1 pour résister aux intempéries, à la faim, à l'épuisement ou aux voyages éprouvants."
       }
     },
     {
       "id": "assassin",
+      "name": "Assassin",
       "weight": 2,
       "fields": {
-        "name": "Assassin",
         "description": "Les attaques sont plus efficaces lorsque la cible n'a pas repéré le personnage."
       }
     },
     {
       "id": "bodybuilder",
+      "name": "Force herculéenne",
       "weight": 2,
       "fields": {
-        "name": "Force herculéenne",
         "description": "+1 aux actions reposant sur la Force brute."
       }
     },
     {
       "id": "politician",
+      "name": "Politicien",
       "weight": 2,
       "fields": {
-        "name": "Politicien",
         "description": "+2 en Charisme lors de négociations officielles et de discussions politiques."
       }
     },
     {
       "id": "field_medic",
+      "name": "Médecin de terrain",
       "weight": 2,
       "fields": {
-        "name": "Médecin de terrain",
         "description": "+1 pour stabiliser des blessures ou utiliser du matériel médical ordinaire."
       }
     },
     {
       "id": "quick_draw",
+      "name": "Dégainage rapide",
       "weight": 2,
       "fields": {
-        "name": "Dégainage rapide",
         "description": "Dégainer ou changer une arme préparée ne ralentit pas la première action du personnage."
       }
     },
     {
       "id": "shield_expert",
+      "name": "Expert du bouclier",
       "weight": 2,
       "fields": {
-        "name": "Expert du bouclier",
         "description": "+1 pour bloquer avec un bouclier ou protéger un allié adjacent."
       }
     },
     {
       "id": "tracker",
+      "name": "Pisteur",
       "weight": 2,
       "fields": {
-        "name": "Pisteur",
         "description": "+2 pour suivre la piste laissée par une créature connue."
       }
     },
     {
       "id": "arcane_student",
+      "name": "Érudit des arcanes",
       "weight": 2,
       "fields": {
-        "name": "Érudit des arcanes",
         "description": "+1 pour identifier une LOI, une rune ou un phénomène magique."
       }
     },
     {
       "id": "craftsperson",
+      "name": "Artisan",
       "weight": 2,
       "fields": {
-        "name": "Artisan",
         "description": "+1 pour réparer, évaluer ou fabriquer de l'équipement ordinaire."
       }
     },
     {
       "id": "duelist",
+      "name": "Duelliste",
       "weight": 2,
       "fields": {
-        "name": "Duelliste",
         "description": "+1 pour combattre un seul adversaire visible sans intervention à proximité."
       }
     },
     {
       "id": "beast_friend",
+      "name": "Ami des bêtes",
       "weight": 2,
       "fields": {
-        "name": "Ami des bêtes",
         "description": "+2 pour calmer ou comprendre les animaux ordinaires."
       }
     },
     {
       "id": "sailor",
+      "name": "Marin",
       "weight": 2,
       "fields": {
-        "name": "Marin",
         "description": "+2 en navigation, pour manœuvrer le gréement et pour garder l'équilibre à bord d'un navire."
       }
     },
     {
       "id": "streetwise",
+      "name": "Enfant des rues",
       "weight": 2,
       "fields": {
-        "name": "Enfant des rues",
         "description": "+1 pour trouver des marchandises illicites, des rumeurs ou des itinéraires sûrs en ville."
       }
     },
     {
       "id": "unshakable",
+      "name": "Inébranlable",
       "weight": 2,
       "fields": {
-        "name": "Inébranlable",
         "description": "+1 pour résister à la peur, à l'intimidation et à l'effroi surnaturel."
       }
     },
     {
       "id": "cold_immunity",
+      "name": "Immunité au froid",
       "fields": {
-        "name": "Immunité au froid",
         "description": "Le personnage ne peut pas être gelé par un froid ordinaire."
       }
     },
     {
       "id": "poison_tolerance",
+      "name": "Résistance au poison",
       "fields": {
-        "name": "Résistance au poison",
         "description": "+2 pour résister au poison et reconnaître les toxines courantes au goût ou à l'odeur."
       }
     },
     {
       "id": "ambidextrous",
+      "name": "Ambidextre",
       "fields": {
-        "name": "Ambidextre",
         "description": "Le personnage manie ses deux mains avec la même précision."
       }
     },
     {
       "id": "battle_rhythm",
+      "name": "Rythme de bataille",
       "fields": {
-        "name": "Rythme de bataille",
         "description": "Après une attaque coordonnée réussie, la prochaine action alliée du même tour bénéficie de +1."
       }
     },
     {
       "id": "rune_listener",
+      "name": "À l'écoute des runes",
       "fields": {
-        "name": "À l'écoute des runes",
         "description": "Le personnage peut sentir si une rune touchée est dormante ou active."
       }
     },
     {
       "id": "perfect_memory",
+      "name": "Mémoire parfaite",
       "fields": {
-        "name": "Mémoire parfaite",
         "description": "+2 pour se rappeler une scène, un itinéraire, un visage ou les mots exacts qui ont été prononcés."
       }
     },
     {
       "id": "improviser",
+      "name": "Improvisateur",
       "fields": {
-        "name": "Improvisateur",
         "description": "+1 pour détourner un objet ordinaire de son usage de manière plausible."
       }
     },
     {
       "id": "last_stand",
+      "name": "Dernier rempart",
       "fields": {
-        "name": "Dernier rempart",
         "description": "+1 aux actions lorsque les PV actuels sont inférieurs ou égaux à 20 % des PV maximaux."
       }
     },
     {
       "id": "danger_sense",
+      "name": "Sens du danger",
       "fields": {
-        "name": "Sens du danger",
         "description": "+1 en Réflexes pour réagir à une menace invisible ou inattendue."
       }
     },
     {
       "id": "heavy_hitter",
+      "name": "Frappeur puissant",
       "fields": {
-        "name": "Frappeur puissant",
         "description": "Une attaque lourde au corps à corps réussie produit un effet de placement plus important."
       }
     },
     {
       "id": "lucky_break",
+      "name": "Coup de chance",
       "fields": {
-        "name": "Coup de chance",
         "description": "Une fois par session, permet de relancer un jet utilitaire non critique raté."
       }
     },
     {
       "id": "inspiring_presence",
+      "name": "Présence inspirante",
       "fields": {
-        "name": "Présence inspirante",
         "description": "Une fois par scène, un allié qui entend le personnage bénéficie de +1 contre la peur."
       }
     },
     {
       "id": "locksmith",
+      "name": "Serrurier",
       "weight": 2,
       "fields": {
-        "name": "Serrurier",
         "description": "+2 aux actions visant à ouvrir ou examiner les serrures mécaniques ordinaires."
       }
     },
     {
       "id": "burglar",
+      "name": "Cambrioleur",
       "fields": {
-        "name": "Cambrioleur",
         "description": "+2 aux actions de Dextérité pour s’introduire discrètement dans un bâtiment protégé, s’y déplacer ou en ressortir."
       }
     },
     {
       "id": "marksman",
+      "name": "Tireur d’élite",
       "fields": {
-        "name": "Tireur d’élite",
         "description": "+1 aux attaques avec une arme à distance contre une cible visible située à au moins 10 mètres."
       }
     },
     {
       "id": "brawler",
+      "name": "Bagarreur",
       "weight": 2,
       "fields": {
-        "name": "Bagarreur",
         "description": "+1 aux actions de combat à mains nues ou de lutte."
       }
     },
     {
       "id": "herbalist",
+      "name": "Herboriste",
       "weight": 2,
       "fields": {
-        "name": "Herboriste",
         "description": "+2 pour identifier ou utiliser des plantes médicinales ou toxiques."
       }
     },
     {
       "id": "alchemist",
+      "name": "Alchimiste",
       "fields": {
-        "name": "Alchimiste",
         "description": "+2 aux actions d’Intelligence pour identifier, préparer ou manipuler sans danger des substances alchimiques."
       }
     },
     {
       "id": "blacksmith",
+      "name": "Forgeron",
       "weight": 2,
       "fields": {
-        "name": "Forgeron",
         "description": "+2 aux actions de forge, d’évaluation ou de réparation d’armes, d’armures et d’outils en métal."
       }
     },
     {
       "id": "acrobat",
+      "name": "Acrobate",
       "weight": 2,
       "fields": {
-        "name": "Acrobate",
         "description": "+2 aux actions de Dextérité impliquant l’équilibre, les roulades ou des déplacements acrobatiques."
       }
     },
     {
       "id": "investigator",
+      "name": "Enquêteur",
       "fields": {
-        "name": "Enquêteur",
         "description": "+2 aux actions de Perception pour examiner une scène à la recherche de preuves matérielles."
       }
     },
     {
       "id": "commander",
+      "name": "Commandant",
       "fields": {
-        "name": "Commandant",
         "description": "+1 aux actions de Charisme pour coordonner dans l’urgence un groupe disposé à suivre ses ordres."
       }
     },
     {
       "id": "impersonator",
+      "name": "Comédien et imitateur",
       "fields": {
-        "name": "Comédien et imitateur",
         "description": "+2 aux actions de Charisme pour jouer un rôle ou imiter une personne observée au préalable."
       }
     },
     {
       "id": "historian",
+      "name": "Historien",
       "fields": {
-        "name": "Historien",
         "description": "+2 aux actions d’Intelligence portant sur l’histoire."
       }
     },
     {
       "id": "runesmith",
+      "name": "Graveur de runes",
       "fields": {
-        "name": "Graveur de runes",
         "description": "+2 aux actions visant à identifier, comprendre ou créer des runes."
       }
     }

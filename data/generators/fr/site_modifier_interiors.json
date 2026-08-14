@@ -1,25 +1,24 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "site_modifier_interiors",
   "visibility": "internal",
   "name": "Modificateurs de site historiques",
   "description": "Variations historiques descriptives compatibles avec des générateurs de lieux précis",
   "entrySchema": {
-    "type": "fields",
-    "required": ["name", "description"]
+    "required": ["description"]
   },
   "entries": [
     {
       "id": "hidden",
+      "name": "Caché",
       "fields": {
-        "name": "Caché",
         "description": "L’accès est dissimulé par le terrain, une construction plus récente ou une illusion entretenue."
       }
     },
     {
       "id": "cramped",
+      "name": "Exigu",
       "fields": {
-        "name": "Exigu",
         "description": "Les passages et espaces utilisables limitent les mouvements, la visibilité et l’emploi d’équipements encombrants."
       }
     }

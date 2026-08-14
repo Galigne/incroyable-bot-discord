@@ -1,263 +1,262 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "traits",
   "visibility": "public",
   "name": "Dons intrinsèques",
   "description": "Capacités et bonus intrinsèques concrets pour les créatures",
   "entrySchema": {
-    "type": "fields",
-    "required": ["name", "description"]
+    "required": ["description"]
   },
   "entries": [
     {
       "id": "amphibious",
+      "name": "Amphibie",
       "fields": {
-        "name": "Amphibie",
         "description": "Peut respirer et agir normalement sous l’eau comme sur terre."
       }
     },
     {
       "id": "keen_smell",
+      "name": "Odorat aiguisé",
       "fields": {
-        "name": "Odorat aiguisé",
         "description": "+2 aux actions de Perception pour détecter ou pister grâce à l’odorat."
       }
     },
     {
       "id": "keen_hearing",
+      "name": "Ouïe fine",
       "fields": {
-        "name": "Ouïe fine",
         "description": "+2 aux actions de Perception reposant sur l’ouïe."
       }
     },
     {
       "id": "darkvision",
+      "name": "Vision nocturne",
       "fields": {
-        "name": "Vision nocturne",
         "description": "Ne peut pas être aveuglée par les ténèbres ordinaires."
       }
     },
     {
       "id": "echolocation",
+      "name": "Écholocalisation",
       "fields": {
-        "name": "Écholocalisation",
         "description": "Peut percevoir les créatures et obstacles proches sans la vue tant qu’elle peut émettre et entendre des sons."
       }
     },
     {
       "id": "sure_footed",
+      "name": "Pied sûr",
       "fields": {
-        "name": "Pied sûr",
         "description": "+2 aux actions de Dextérité pour grimper ou garder l’équilibre sur un terrain difficile."
       }
     },
     {
       "id": "powerful_build",
+      "name": "Carrure puissante",
       "fields": {
-        "name": "Carrure puissante",
         "description": "+1 aux actions de Force pour pousser, soulever ou briser des objets."
       }
     },
     {
       "id": "swift_reflexes",
+      "name": "Réflexes fulgurants",
       "fields": {
-        "name": "Réflexes fulgurants",
         "description": "+1 en Réflexes contre les menaces que la créature peut percevoir."
       }
     },
     {
       "id": "flight",
+      "name": "Vol",
       "fields": {
-        "name": "Vol",
         "description": "Peut voler à sa vitesse de déplacement normale tant que ses ailes sont libres."
       }
     },
     {
       "id": "gliding",
+      "name": "Vol plané",
       "fields": {
-        "name": "Vol plané",
         "description": "Ignore les dégâts des 10 premiers mètres d’une chute et peut parcourir 2 mètres horizontalement par mètre de descente."
       }
     },
     {
       "id": "burrower",
+      "name": "Fouisseur",
       "fields": {
-        "name": "Fouisseur",
         "description": "Peut traverser la terre meuble à la moitié de sa vitesse de déplacement normale en laissant un tunnel praticable."
       }
     },
     {
       "id": "aquatic_speed",
+      "name": "Nageur-né",
       "fields": {
-        "name": "Nageur-né",
         "description": "Se déplace dans l’eau à sa vitesse normale et gagne +1 aux actions de Dextérité pour nager."
       }
     },
     {
       "id": "regeneration",
+      "name": "Régénération",
       "fields": {
-        "name": "Régénération",
         "description": "Au début de son tour, récupère 5 % de ses PV maximums s’il lui reste au moins 1 PV ; des dégâts de feu empêchent cette récupération pour ce tour."
       }
     },
     {
       "id": "fire_immunity",
+      "name": "Immunité au feu",
       "fields": {
-        "name": "Immunité au feu",
         "description": "Ne subit ni dégâts ni effets néfastes dus au feu ou à la chaleur ordinaires."
       }
     },
     {
       "id": "cold_immunity",
+      "name": "Immunité au froid",
       "fields": {
-        "name": "Immunité au froid",
         "description": "Ne subit ni dégâts ni effets néfastes dus au froid ou à la glace ordinaires."
       }
     },
     {
       "id": "poison_immunity",
+      "name": "Immunité au poison",
       "fields": {
-        "name": "Immunité au poison",
         "description": "Ne peut pas être empoisonnée et ne subit aucun dégât des toxines ordinaires."
       }
     },
     {
       "id": "disease_immunity",
+      "name": "Immunité aux maladies",
       "fields": {
-        "name": "Immunité aux maladies",
         "description": "Ne peut ni contracter ni transmettre de maladie ordinaire."
       }
     },
     {
       "id": "incorporeal",
+      "name": "Incorporel",
       "fields": {
-        "name": "Incorporel",
         "description": "Peut traverser les créatures et objets solides non magiques à la moitié de sa vitesse, mais doit terminer son déplacement dans un espace libre."
       }
     },
     {
       "id": "camouflage",
+      "name": "Camouflage naturel",
       "fields": {
-        "name": "Camouflage naturel",
         "description": "+2 aux actions de Dextérité pour se cacher dans l’environnement naturel de la créature."
       }
     },
     {
       "id": "pack_tactics",
+      "name": "Tactique de meute",
       "fields": {
-        "name": "Tactique de meute",
         "description": "+1 aux actions d’attaque contre une cible adjacente à l’un des alliés de la créature."
       }
     },
     {
       "id": "natural_weapons",
+      "name": "Armes naturelles",
       "fields": {
-        "name": "Armes naturelles",
         "description": "+1 dégât aux attaques à mains nues portées avec des griffes, crocs, cornes ou une autre arme naturelle."
       }
     },
     {
       "id": "venomous",
+      "name": "Venimeux",
       "fields": {
-        "name": "Venimeux",
         "description": "Lorsqu’une attaque naturelle inflige des dégâts, la cible perd 1 PA sauf si elle résiste au poison."
       }
     },
     {
       "id": "web_spinner",
+      "name": "Tisseur de toile",
       "fields": {
-        "name": "Tisseur de toile",
         "description": "Peut produire de solides toiles entravantes et gagne +2 aux actions de Dextérité pour s’y déplacer."
       }
     },
     {
       "id": "stone_body",
+      "name": "Corps minéral",
       "fields": {
-        "name": "Corps minéral",
         "description": "N’a pas besoin de respirer et gagne +2 aux actions de Constitution pour résister aux impacts."
       }
     },
     {
       "id": "magic_sense",
+      "name": "Sens de la magie",
       "fields": {
-        "name": "Sens de la magie",
         "description": "+2 aux actions de Perception pour détecter les sorts actifs ou objets enchantés proches."
       }
     },
     {
       "id": "pounce",
+      "name": "Bond offensif",
       "fields": {
-        "name": "Bond offensif",
         "description": "+1 à la prochaine action visant à agripper ou mettre une cible à terre après avoir avancé d’au moins 3 mètres vers elle durant le même tour."
       }
     },
     {
       "id": "charge",
+      "name": "Charge",
       "fields": {
-        "name": "Charge",
         "description": "+1 à la prochaine attaque au corps à corps après avoir avancé en ligne droite d’au moins 5 mètres vers la cible durant le même tour."
       }
     },
     {
       "id": "constrict",
+      "name": "Constriction",
       "fields": {
-        "name": "Constriction",
         "description": "+2 aux actions de Force pour maintenir ou resserrer une prise déjà établie."
       }
     },
     {
       "id": "wall_climber",
+      "name": "Grimpeur de parois",
       "fields": {
-        "name": "Grimpeur de parois",
         "description": "Peut se déplacer sur des surfaces rugueuses très inclinées ou verticales à la moitié de sa vitesse normale sans devoir effectuer un jet d’escalade ordinaire."
       }
     },
     {
       "id": "tremorsense",
+      "name": "Perception des vibrations",
       "fields": {
-        "name": "Perception des vibrations",
         "description": "Détecte sans la vue les mouvements dans un rayon de 10 mètres, à condition que la créature et ce qui bouge touchent le même sol."
       }
     },
     {
       "id": "heat_sense",
+      "name": "Perception thermique",
       "fields": {
-        "name": "Perception thermique",
         "description": "Détecte sans la vue les sources de chaleur dans un rayon de 10 mètres, mais cette perception ne traverse pas les obstacles solides."
       }
     },
     {
       "id": "prehensile_tail",
+      "name": "Queue préhensile",
       "fields": {
-        "name": "Queue préhensile",
         "description": "Peut tenir ou manipuler un objet léger avec sa queue, sans obtenir d’action supplémentaire."
       }
     },
     {
       "id": "powerful_leap",
+      "name": "Bond puissant",
       "fields": {
-        "name": "Bond puissant",
         "description": "+2 aux actions de Force ou de Dextérité pour sauter."
       }
     },
     {
       "id": "swarm_body",
+      "name": "Corps en essaim",
       "fields": {
-        "name": "Corps en essaim",
         "description": "Peut traverser toute ouverture assez large pour laisser passer un élément de l’essaim et occuper l’espace d’une autre créature, mais reste une seule créature pour les actions et les effets."
       }
     },
     {
       "id": "magic_resistance",
+      "name": "Résistance à la magie",
       "fields": {
-        "name": "Résistance à la magie",
         "description": "+1 aux actions visant à résister aux effets magiques hostiles."
       }
     },
     {
       "id": "extended_reach",
+      "name": "Allonge supérieure",
       "fields": {
-        "name": "Allonge supérieure",
         "description": "Peut porter ses attaques ordinaires au corps à corps 2 mètres plus loin qu’une créature de taille comparable."
       }
     }

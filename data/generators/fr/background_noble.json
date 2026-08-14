@@ -1,52 +1,52 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "noble",
   "visibility": "internal",
   "name": "Archétypes nobles",
   "description": "Rôles aristocratiques et de cour",
   "entrySchema": {
-    "type": "text"
+    "required": []
   },
   "entries": [
     {
       "id": "king",
-      "value": "Roi"
+      "name": "Roi"
     },
     {
       "id": "queen",
-      "value": "Reine"
+      "name": "Reine"
     },
     {
       "id": "prince",
-      "value": "Prince"
+      "name": "Prince"
     },
     {
       "id": "heir",
-      "value": "Héritier"
+      "name": "Héritier"
     },
     {
       "id": "lord",
-      "value": "Seigneur"
+      "name": "Seigneur"
     },
     {
       "id": "lady",
-      "value": "Dame"
+      "name": "Dame"
     },
     {
       "id": "courtier",
-      "value": "Courtisan"
+      "name": "Courtisan"
     },
     {
       "id": "aristocrat",
-      "value": "Aristocrate"
+      "name": "Aristocrate"
     },
     {
       "id": "regent",
-      "value": "Régent"
+      "name": "Régent"
     },
     {
       "id": "royal_advisor",
-      "value": "Conseiller royal"
+      "name": "Conseiller royal"
     }
   ]
 }

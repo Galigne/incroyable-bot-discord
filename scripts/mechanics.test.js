@@ -664,7 +664,7 @@ function sequenceRandom(values) {
 
 function findNamedEquipmentEntry(generator, value) {
 	const name = value.split(' — ')[0];
-	return generator.entries.find(entry => entry.fields.name === name);
+	return generator.entries.find(entry => entry.name === name);
 }
 
 function lootResult(generatorId, entryId, value) {

@@ -36,6 +36,15 @@ function validateGeneratorName(value, label) {
 	}
 }
 
+function normalizeDisplayName(value) {
+	return value
+		.normalize('NFKD')
+		.replace(/\p{M}/gu, '')
+		.toLocaleLowerCase()
+		.replace(/[\p{P}\p{S}\s]+/gu, ' ')
+		.trim();
+}
+
 function assertPlainObject(value, message) {
 	if (!value || typeof value !== 'object' || Array.isArray(value)) {
 		throw generatorSchemaError('INVALID_GENERATOR_STRUCTURE', message);
@@ -76,6 +85,7 @@ module.exports = {
 	assertPlainObject,
 	assertRequiredKeys,
 	generatorSchemaError,
+	normalizeDisplayName,
 	validateDisplayText,
 	validateGeneratorName,
 	validateStableId,

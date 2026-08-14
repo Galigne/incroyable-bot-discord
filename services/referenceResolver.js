@@ -91,10 +91,8 @@ function selectResolvedOutput(resolved, selector) {
 	if (selector === 'fields' && resolved.outputType === 'fields') {
 		return { ...resolved.fields };
 	}
-	if (selector.startsWith('fields.') && resolved.outputType === 'fields') {
-		if (resolved.selectedField !== undefined) {
-			return resolved.selectedField;
-		}
+	if (selector.startsWith('fields.') && resolved.selectedField !== undefined) {
+		return resolved.selectedField;
 	}
 	throw generatorResolutionError(
 		'INVALID_GENERATOR_SELECTOR',
@@ -109,7 +107,7 @@ function selectResolvedTemplate(resolved, selector) {
 	if (selector === 'value' && resolved.outputType === 'value') {
 		return resolved.displayTemplate;
 	}
-	if (selector.startsWith('fields.') && resolved.outputType === 'fields') {
+	if (selector.startsWith('fields.') && resolved.selectedDisplayTemplate) {
 		return resolved.selectedDisplayTemplate;
 	}
 	return undefined;

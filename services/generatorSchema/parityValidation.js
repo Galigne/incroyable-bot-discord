@@ -51,22 +51,19 @@ function validateGeneratorPair(
 				`entries.${index}.${property}`,
 			);
 		}
-		if (english.entrySchema.type === 'fields') {
+		assertParity(
+			extractInlineReferences(englishEntry.name, file),
+			extractInlineReferences(frenchEntry.name, file),
+			file,
+			`entries.${index}.name.inlineReferences`,
+		);
+		if (english.entrySchema.required.length > 0) {
 			validateFieldsPair(
 				englishEntry,
 				frenchEntry,
 				english.entrySchema,
 				file,
 				index,
-			);
-		}
-		else {
-			const localizedProperty = 'value';
-			assertParity(
-				extractInlineReferences(englishEntry[localizedProperty], file),
-				extractInlineReferences(frenchEntry[localizedProperty], file),
-				file,
-				`entries.${index}.${localizedProperty}.inlineReferences`,
 			);
 		}
 		if (isCreatureDetailGenerator(english.id, options)) {

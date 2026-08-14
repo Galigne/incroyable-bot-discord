@@ -11,7 +11,7 @@ The JSON contract and catalog-editing rules are documented in
 
 `services/generatorCatalog.js` recursively loads the matching English and French
 catalog trees. `services/generatorSchema.js` and its focused validators accept only
-generator schema v3 and validate the complete locale pair, including stable IDs,
+generator schema v4 and validate the complete locale pair, including stable IDs,
 entry shapes, weights, structural routes, references, modifier relationships, and
 creature metadata. During `/reload`, `reloadGenerationData()` prepares generator and
 statistical-profile candidates together, validates creature/profile relationships,
@@ -57,16 +57,16 @@ field. Inline syntax is:
 occurrence is resolved independently, so repeated references can choose different
 entries. Nested references share one active selection stack: repeated active
 generator/entry pairs are rejected as cycles, and depth is capped at four. Fixed
-entries do not consume entry-selection randomness. Every structured field is
-ordinary displayable generated data.
+entries do not consume entry-selection randomness. Every top-level name and
+additional field is ordinary displayable generated data.
 
 Every resolved selection adds provenance with the stable generator ID, entry ID,
 selection mode (`random` or `fixed`), and resolution path. Weighted generator-source
 selection adds its own source record. Nested inline references contribute their
 records to the parent result, so callers can retain the complete stable path
 without deriving identity from localized text. Completed results contain the
-localized value or structured fields, provenance, and a separate array of resolved
-modifier results.
+localized name-only value or resolved field group, provenance, and a separate array
+of resolved modifier results.
 
 ## Structural routes and `/gen` traversal
 
@@ -105,7 +105,7 @@ localization, weighting, and provenance behavior.
 ## Generator-level modifiers
 
 A generator's optional `modifiers` map is an additive relationship between ordinary
-v3 generators. Every configured source rolls independently. A successful roll
+v4 generators. Every configured source rolls independently. A successful roll
 selects one weighted entry and resolves its inline references and own modifier
 relationships through the same stack. The completed modifier result is appended to
 the result's `modifiers` array; it never merges into the base payload.
@@ -151,10 +151,10 @@ reference resolution:
 2. It selects a stable entry from the public `background` router, or uses the
    requested category.
 3. That entry's top-level `generator` property directly names the matching internal
-   `<category>` text generator stored in
+   name-only `<category>` generator stored in
    `background_<category>.json`. Resolving it supplies the reusable background
    archetype.
-4. It independently resolves `{{ physical_description }}`. Physical description is
+4. It independently resolves `{{ physical_description.description }}`. Physical description is
    not part of the selected archetype route, so the two rolls remain combinable.
 5. It applies the character-only descriptive modifier policy through
    `modifier_character`, calculates statistics and resources, and assembles the
@@ -168,8 +168,8 @@ allowed, and their `ar_percentage` values add to the armor percentage before the
 normal max-HP-based AR calculation.
 
 Three carried items resolve independently through the public `loot` router's
-structural routes. The workflow consumes the child display string so text and
-structured loot children are compatible, and it uses stable child provenance to avoid exact
+structural routes. The workflow consumes the child display string so varying loot
+field schemas are compatible, and it uses stable child provenance to avoid exact
 duplicates with bounded retries. Carried armor, weapons, or shields are not
 equipped and do not affect AR. Generated equipment and inventory never alter the
 manual encumbrance resource.
@@ -198,8 +198,9 @@ references can be fixed, random, nested, or drawn from a weighted source.
 Intrinsic traits are zero or more ordinary inline-template strings. Literal text
 passes through unchanged; fixed, random, nested, and surrounding-text references
 use the same resolver and relationship rules as every other generator string. The
-public structured `traits` generator supplies reusable localized capability text,
-but creature details may also define specific literal traits. Generation resolves
+public `traits` generator supplies top-level names and additional localized
+capability descriptions, but creature details may also define specific literal
+traits. Generation resolves
 each template and stores only its localized final string, so persisted traits match
 the character-talent representation and never retain template expressions or
 embedded generator records. Trait selections do not add trait-specific records to
@@ -220,8 +221,8 @@ mechanical formulas.
 
 ## Other composed generators
 
-Public text generators can compose ordinary concepts with inline references. The
-`loot`, `site`, and `group` roots are structured routers over internal children;
+Public generators can compose ordinary concepts with inline references. The
+`loot`, `site`, and `group` roots are name-only routers over internal children;
 application workflows or explicit `.generator` paths follow those routes.
 `quest`, `rumor`, and `secret` entries combine these and other fixed or random
 concepts. These resolutions keep nested provenance but do not create or
@@ -229,7 +230,8 @@ persist the referenced people, creatures, locations, or items.
 
 ## Validation coverage
 
-Offline checks cover v3 envelopes, IDs, weights, strict locale parity, public and
+Offline checks cover v4 envelopes, mandatory entry names, normalized name
+uniqueness, IDs, weights, strict locale parity, public and
 internal visibility, inline and structural routes, traversal autocomplete, fixed
 and weighted selection, field targeting, nesting, cycles, depth bounds,
 provenance, modifiers, statistical profiles, background routes, dynamic creature routes, character and creature

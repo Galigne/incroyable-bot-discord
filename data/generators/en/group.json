@@ -1,34 +1,27 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "group",
   "visibility": "public",
   "name": "Group",
   "description": "Random governments, factions, and religions",
   "entrySchema": {
-    "type": "fields",
-    "required": ["name"]
+    "required": []
   },
   "entries": [
     {
       "id": "government",
-      "generator": "government",
-      "fields": {
-        "name": "government"
-      }
+      "name": "government",
+      "generator": "government"
     },
     {
       "id": "faction",
-      "generator": "faction",
-      "fields": {
-        "name": "faction"
-      }
+      "name": "faction",
+      "generator": "faction"
     },
     {
       "id": "religion",
-      "generator": "religion",
-      "fields": {
-        "name": "religion"
-      }
+      "name": "religion",
+      "generator": "religion"
     }
   ]
 }

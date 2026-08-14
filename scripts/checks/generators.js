@@ -27,7 +27,7 @@ module.exports = function createGeneratorChecks(context) {
 				publicGenerators.length === 0
 				|| allGenerators.length !== publicGenerators.length + internalGenerators.length
 			) {
-				errors.push('Generator v3 visibility or schema filtering is incorrect.');
+				errors.push('Generator v4 visibility or schema filtering is incorrect.');
 			}
 
 			const englishRace = generatorCatalog.getGenerator('race', 'en');
@@ -38,8 +38,8 @@ module.exports = function createGeneratorChecks(context) {
 				|| frenchRace?.id !== 'race'
 				|| englishRace?.entries[0]?.id !== 'human'
 				|| frenchRace?.entries[0]?.id !== 'human'
-				|| englishRace?.entries[0]?.fields?.name !== 'Human'
-				|| frenchRace?.entries[0]?.fields?.name !== 'Humain'
+				|| englishRace?.entries[0]?.name !== 'Human'
+				|| frenchRace?.entries[0]?.name !== 'Humain'
 				|| generatorCatalog.getGenerator('race', 'fr') !== frenchRace
 			) {
 				errors.push('Generator catalogs are not localized and cached by stable ID.');
@@ -65,8 +65,8 @@ module.exports = function createGeneratorChecks(context) {
 			}
 
 			const weightedEntries = [
-				{ id: 'default-weight', value: 'Default weight' },
-				{ id: 'double-weight', value: 'Double weight', weight: 2 },
+				{ id: 'default-weight', name: 'Default weight' },
+				{ id: 'double-weight', name: 'Double weight', weight: 2 },
 			];
 			if (
 				getEntryWeight(weightedEntries[0]) !== 1
@@ -156,14 +156,14 @@ function checkBackgroundGenerators(errors, generatorCatalog) {
 		const details = generatorCatalog.getGenerator(routedGeneratorId)?.entries ?? [];
 		if (
 			!background.id
-			|| !background.fields?.name
+			|| !background.name
 			|| !background.fields?.description
 			|| backgroundIds.has(background.id)
 			|| routedGeneratorId !== background.id
 			|| details.length === 0
 			|| generatorCatalog.getGenerator(routedGeneratorId)?.visibility !== 'internal'
-			|| generatorCatalog.getGenerator(routedGeneratorId)?.entrySchema.type !== 'text'
-			|| details.some(entry => typeof entry.value !== 'string' || !entry.value.trim())
+			|| generatorCatalog.getGenerator(routedGeneratorId)?.entrySchema.required.length !== 0
+			|| details.some(entry => typeof entry.name !== 'string' || !entry.name.trim())
 		) {
 			errors.push(`Invalid routed background generator: ${background.id ?? 'unknown'}.`);
 		}
@@ -200,10 +200,10 @@ function checkCategoryRouters(errors, generatorCatalog) {
 		const router = generatorCatalog.getGenerator(routerId);
 		if (
 			router?.visibility !== 'public'
-			|| router.entrySchema.type !== 'fields'
+			|| !Array.isArray(router.entrySchema.required)
 			|| router.entries.some(entry => (
 				entry.weight !== undefined
-					|| !entry.fields?.name
+					|| !entry.name
 			))
 			|| JSON.stringify(router.entries.map(entry => entry.generator))
 				!== JSON.stringify(childIds)
@@ -221,11 +221,14 @@ function checkPhysicalDescriptionGenerator(errors, generatorCatalog) {
 	if (
 		!generator
 		|| generator.visibility !== 'internal'
-		|| generator.entrySchema.type !== 'text'
+		|| JSON.stringify(generator.entrySchema.required) !== JSON.stringify(['description'])
 		|| generator.entries.length < 20
-		|| generator.entries.some(entry => typeof entry.value !== 'string' || !entry.value.trim())
+		|| generator.entries.some(entry => (
+			typeof entry.name !== 'string'
+			|| typeof entry.fields?.description !== 'string'
+		))
 	) {
-		errors.push('Physical descriptions must be a reusable internal text generator.');
+		errors.push('Physical descriptions must be a reusable internal descriptive generator.');
 	}
 }
 
@@ -255,15 +258,14 @@ function checkCreatureGenerators(errors, generatorCatalog) {
 	const characterModifiers = generatorCatalog.getGenerator('modifier_character');
 	const creatureModifiers = generatorCatalog.getGenerator('modifier_creature');
 	if (
-		statusEffects?.entrySchema.type !== 'fields'
+		!statusEffects
 		|| statusEffects.entries.some(entry => (
-			!entry.fields?.name || !entry.fields.description
+			!entry.name || !entry.fields?.description
 		))
 		|| [characterModifiers, creatureModifiers].some(generator => (
 			generator?.visibility !== 'internal'
-			|| generator.entrySchema.type !== 'fields'
 			|| generator.entries.some(entry => (
-				!entry.fields?.name || !entry.fields.description
+				!entry.name || !entry.fields?.description
 			))
 		))
 		|| JSON.stringify(generatorCatalog.getGenerator('region').modifiers)
@@ -282,12 +284,11 @@ function checkCreatureGenerators(errors, generatorCatalog) {
 
 function checkStructuredGenerators(errors, generatorCatalog) {
 	for (const [generatorId, requiredFields] of [
-		['faction', ['name', 'type', 'goal', 'resources', 'hierarchy', 'allies', 'enemies']],
-		['government', ['name', 'structure', 'leadership', 'strength', 'tension']],
+		['faction', ['type', 'goal', 'resources', 'hierarchy', 'allies', 'enemies']],
+		['government', ['structure', 'leadership', 'strength', 'tension']],
 		[
 			'religion',
 			[
-				'name',
 				'deity_or_belief',
 				'rites',
 				'commandment',
@@ -303,7 +304,9 @@ function checkStructuredGenerators(errors, generatorCatalog) {
 		if (
 			JSON.stringify(generator?.entrySchema.required)
 				!== JSON.stringify(requiredFields)
-			|| generator.entries.some(entry => requiredFields.some(field => !entry.fields?.[field]))
+			|| generator.entries.some(entry => (
+				!entry.name || requiredFields.some(field => !entry.fields?.[field])
+			))
 		) {
 			errors.push(`Generator ${generatorId} is missing required fields.`);
 		}
@@ -332,8 +335,7 @@ function checkStructuredGenerators(errors, generatorCatalog) {
 	};
 	if (
 		JSON.stringify(shields?.entrySchema) !== JSON.stringify({
-			type: 'fields',
-			required: ['name', 'rarity', 'description', 'ar_percentage'],
+			required: ['rarity', 'description', 'ar_percentage'],
 		})
 		|| shields.entries.length !== 16
 		|| Object.entries(shieldRarities).some(([rarity, expected]) => {
@@ -348,8 +350,7 @@ function checkStructuredGenerators(errors, generatorCatalog) {
 	const affliction = generatorCatalog.getGenerator('affliction');
 	if (
 		JSON.stringify(affliction?.entrySchema) !== JSON.stringify({
-			type: 'fields',
-			required: ['name', 'type', 'description'],
+			required: ['type', 'description'],
 		})
 		|| affliction.entries.length !== 16
 		|| ['disease', 'curse'].some(type => (
@@ -393,11 +394,11 @@ function checkGeneratorResponses(errors, generatorCatalog, weightedEntries) {
 	const weightedTextEmbed = createGeneratedEmbed({
 		generatorName: 'test',
 		outputType: 'value',
-		value: weightedEntries[1].value,
+		value: weightedEntries[1].name,
 		modifiers: [],
 	}).toJSON();
 	if (weightedTextEmbed.description !== 'Double weight') {
-		errors.push('Weighted text generator entries are not rendered correctly.');
+		errors.push('Weighted name-only generator entries are not rendered correctly.');
 	}
 }
 

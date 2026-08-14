@@ -1,56 +1,56 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "scholar",
   "visibility": "internal",
   "name": "Archétypes d’érudit",
   "description": "Rôles liés au savoir, aux archives et à la recherche",
   "entrySchema": {
-    "type": "text"
+    "required": []
   },
   "entries": [
     {
       "id": "student",
-      "value": "Étudiant"
+      "name": "Étudiant"
     },
     {
       "id": "researcher",
-      "value": "Chercheur"
+      "name": "Chercheur"
     },
     {
       "id": "scribe",
-      "value": "Scribe"
+      "name": "Scribe"
     },
     {
       "id": "librarian",
-      "value": "Bibliothécaire"
+      "name": "Bibliothécaire"
     },
     {
       "id": "historian",
-      "value": "Historien"
+      "name": "Historien"
     },
     {
       "id": "cartographer",
-      "value": "Cartographe"
+      "name": "Cartographe"
     },
     {
       "id": "physician",
-      "value": "Médecin"
+      "name": "Médecin"
     },
     {
       "id": "theologian",
-      "value": "Théologien"
+      "name": "Théologien"
     },
     {
       "id": "archivist",
-      "value": "Archiviste"
+      "name": "Archiviste"
     },
     {
       "id": "professor",
-      "value": "Professeur"
+      "name": "Professeur"
     },
     {
       "id": "chronicler",
-      "value": "Chroniqueur"
+      "name": "Chroniqueur"
     }
   ]
 }

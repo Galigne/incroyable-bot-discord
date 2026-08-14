@@ -1,19 +1,18 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "companion",
   "visibility": "internal",
   "name": "Companion",
   "description": "Pets, familiars, and small traveling creatures",
   "entrySchema": {
-    "type": "fields",
-    "required": ["name", "description"]
+    "required": ["description"]
   },
   "entries": [
     {
       "id": "loyal_hound",
+      "name": "Loyal Hound",
       "weight": 4,
       "fields": {
-        "name": "Loyal Hound",
         "description": "tracks familiar scents, guards sleepers, and distrusts one apparently harmless NPC."
       },
       "generation": {
@@ -28,9 +27,9 @@
     },
     {
       "id": "barn_cat",
+      "name": "Barn Cat",
       "weight": 4,
       "fields": {
-        "name": "Barn Cat",
         "description": "excellent at finding hidden vermin, warm places, and unattended food."
       },
       "generation": {
@@ -45,9 +44,9 @@
     },
     {
       "id": "messenger_pigeon",
+      "name": "Messenger Pigeon",
       "weight": 4,
       "fields": {
-        "name": "Messenger Pigeon",
         "description": "reliably returns to one chosen home carrying a very small message."
       },
       "generation": {
@@ -71,9 +70,9 @@
     },
     {
       "id": "pack_goat",
+      "name": "Pack Goat",
       "weight": 3,
       "fields": {
-        "name": "Pack Goat",
         "description": "carries modest supplies, eats almost anything, and refuses obviously cursed paths."
       },
       "generation": {
@@ -94,9 +93,9 @@
     },
     {
       "id": "clever_rat",
+      "name": "Clever Rat",
       "weight": 3,
       "fields": {
-        "name": "Clever Rat",
         "description": "squeezes through tiny spaces and learns simple object-based instructions."
       },
       "generation": {
@@ -111,9 +110,9 @@
     },
     {
       "id": "watch_goose",
+      "name": "Watch Goose",
       "weight": 3,
       "fields": {
-        "name": "Watch Goose",
         "description": "loudly challenges strangers, invisible creatures, and anyone carrying bread."
       },
       "generation": {
@@ -130,9 +129,9 @@
     },
     {
       "id": "pocket_ferret",
+      "name": "Pocket Ferret",
       "weight": 3,
       "fields": {
-        "name": "Pocket Ferret",
         "description": "retrieves small loose objects and hides them in inconvenient places."
       },
       "generation": {
@@ -147,9 +146,9 @@
     },
     {
       "id": "mule",
+      "name": "Mule",
       "weight": 3,
       "fields": {
-        "name": "Mule",
         "description": "dependable transport with excellent footing and absolute veto power over unsafe bridges."
       },
       "generation": {
@@ -180,9 +179,9 @@
     },
     {
       "id": "lantern_finch",
+      "name": "Lantern Finch",
       "weight": 2,
       "fields": {
-        "name": "Lantern Finch",
         "description": "emits gentle light and becomes silent when predators are nearby."
       },
       "generation": {
@@ -200,9 +199,9 @@
     },
     {
       "id": "ember_newt",
+      "name": "Ember Newt",
       "weight": 2,
       "fields": {
-        "name": "Ember Newt",
         "description": "provides warmth, lights dry tinder, and sleeps inside cookware."
       },
       "generation": {
@@ -217,9 +216,9 @@
     },
     {
       "id": "moss_tortoise",
+      "name": "Moss Tortoise",
       "weight": 2,
       "fields": {
-        "name": "Moss Tortoise",
         "description": "slowly grows common medicinal herbs across its shell."
       },
       "generation": {
@@ -236,9 +235,9 @@
     },
     {
       "id": "whisper_crow",
+      "name": "Whisper Crow",
       "weight": 2,
       "fields": {
-        "name": "Whisper Crow",
         "description": "remembers voices and can repeat several short phrases with alarming accuracy."
       },
       "generation": {
@@ -256,9 +255,9 @@
     },
     {
       "id": "miniature_slime",
+      "name": "Miniature Slime",
       "weight": 2,
       "fields": {
-        "name": "Miniature Slime",
         "description": "harmlessly dissolves dirt, spoiled food, and occasionally important paper."
       },
       "generation": {
@@ -277,9 +276,9 @@
     },
     {
       "id": "clockwork_beetle",
+      "name": "Clockwork Beetle",
       "weight": 2,
       "fields": {
-        "name": "Clockwork Beetle",
         "description": "records one hour of sound and plays it back when wound."
       },
       "generation": {
@@ -298,9 +297,9 @@
     },
     {
       "id": "breeze_lizard",
+      "name": "Breeze Lizard",
       "weight": 2,
       "fields": {
-        "name": "Breeze Lizard",
         "description": "changes color with the weather and glides short distances between people."
       },
       "generation": {
@@ -315,9 +314,9 @@
     },
     {
       "id": "cave_bat",
+      "name": "Cave Bat",
       "weight": 2,
       "fields": {
-        "name": "Cave Bat",
         "description": "navigates complete darkness and returns when called with a specific whistle."
       },
       "generation": {
@@ -332,9 +331,9 @@
     },
     {
       "id": "river_otter",
+      "name": "River Otter",
       "weight": 2,
       "fields": {
-        "name": "River Otter",
         "description": "swims, retrieves floating objects, and insists on opening shellfish during serious scenes."
       },
       "generation": {
@@ -349,9 +348,9 @@
     },
     {
       "id": "tiny_griffin",
+      "name": "Tiny Griffin",
       "weight": 1,
       "fields": {
-        "name": "Tiny Griffin",
         "description": "fiercely guards a single backpack and hunts insects with dramatic dives."
       },
       "generation": {
@@ -366,9 +365,9 @@
     },
     {
       "id": "blink_rabbit",
+      "name": "Blink Rabbit",
       "weight": 1,
       "fields": {
-        "name": "Blink Rabbit",
         "description": "teleports a few meters when startled but rarely chooses the safest direction."
       },
       "generation": {
@@ -386,9 +385,9 @@
     },
     {
       "id": "paper_dragon",
+      "name": "Paper Dragon",
       "weight": 1,
       "fields": {
-        "name": "Paper Dragon",
         "description": "folds itself flat, carries written notes, and breathes enough flame to seal wax."
       },
       "generation": {
@@ -418,9 +417,9 @@
     },
     {
       "id": "ghost_mouse",
+      "name": "Ghost Mouse",
       "weight": 1,
       "fields": {
-        "name": "Ghost Mouse",
         "description": "passes through thin walls and becomes visible after eating cheese."
       },
       "generation": {
@@ -435,9 +434,9 @@
     },
     {
       "id": "cloud_pup",
+      "name": "Cloud Pup",
       "weight": 1,
       "fields": {
-        "name": "Cloud Pup",
         "description": "a floating canine made of mist that can briefly conceal a person's face."
       },
       "generation": {
@@ -454,9 +453,9 @@
     },
     {
       "id": "pebble_elemental",
+      "name": "Pebble Elemental",
       "weight": 1,
       "fields": {
-        "name": "Pebble Elemental",
         "description": "a fist-sized stone creature able to sense nearby tunnels and worked masonry."
       },
       "generation": {
@@ -474,9 +473,9 @@
     },
     {
       "id": "moon_moth",
+      "name": "Moon Moth",
       "weight": 1,
       "fields": {
-        "name": "Moon Moth",
         "description": "absorbs weak magical residue and glows in the presence of active enchantments."
       },
       "generation": {
@@ -491,8 +490,9 @@
     },
     {
       "id": "messenger_raptor",
+      "name": "Messenger Raptor",
+      "weight": 1,
       "fields": {
-        "name": "Messenger Raptor",
         "description": "A territorial bird trainable to recognize people, emblems, and routes."
       },
       "generation": {
@@ -506,13 +506,13 @@
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 0
-      },
-      "weight": 1
+      }
     },
     {
       "id": "sir_candlewick",
+      "name": "Sir Candlewick",
+      "weight": 1,
       "fields": {
-        "name": "Sir Candlewick",
         "description": "a tiny animated suit of armor searching for a person large enough to be its squire."
       },
       "generation": {
@@ -527,8 +527,7 @@
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 35
-      },
-      "weight": 1
+      }
     }
   ]
 }

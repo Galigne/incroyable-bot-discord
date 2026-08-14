@@ -22,13 +22,12 @@ function validateCreatureGeneratorEnvelope(
 	if (generator.id === CREATURE_ROUTER_ID) {
 		if (
 			generator.visibility !== 'public'
-			|| entrySchema.type !== 'fields'
 			|| JSON.stringify(entrySchema.required)
-				!== JSON.stringify(['name', 'description'])
+				!== JSON.stringify(['description'])
 		) {
 			throw generatorSchemaError(
 				'INVALID_CREATURE_ROUTER_SCHEMA',
-				`Creature router ${file} must expose localized name and description fields with structural routes.`,
+				`Creature router ${file} must expose localized names and description fields with structural routes.`,
 			);
 		}
 		return;
@@ -38,12 +37,11 @@ function validateCreatureGeneratorEnvelope(
 	}
 	if (
 		generator.visibility !== 'internal'
-		|| entrySchema.type !== 'fields'
-		|| JSON.stringify(entrySchema.required) !== JSON.stringify(['name', 'description'])
+		|| JSON.stringify(entrySchema.required) !== JSON.stringify(['description'])
 	) {
 		throw generatorSchemaError(
 			'INVALID_CREATURE_ARCHETYPE_SCHEMA',
-			`Creature detail generator ${file} must be an internal generator exposing localized name and description fields.`,
+			`Creature detail generator ${file} must be internal with localized names and description fields.`,
 		);
 	}
 }

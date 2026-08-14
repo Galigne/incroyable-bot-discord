@@ -1,52 +1,52 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "exile",
   "visibility": "internal",
   "name": "Exile archetypes",
   "description": "Displaced and fugitive social roles",
   "entrySchema": {
-    "type": "text"
+    "required": []
   },
   "entries": [
     {
       "id": "refugee",
-      "value": "Refugee"
+      "name": "Refugee"
     },
     {
       "id": "fugitive",
-      "value": "Fugitive"
+      "name": "Fugitive"
     },
     {
       "id": "banished_noble",
-      "value": "Banished noble"
+      "name": "Banished noble"
     },
     {
       "id": "displaced_survivor",
-      "value": "Displaced survivor"
+      "name": "Displaced survivor"
     },
     {
       "id": "political_exile",
-      "value": "Political exile"
+      "name": "Political exile"
     },
     {
       "id": "deserter",
-      "value": "Deserter"
+      "name": "Deserter"
     },
     {
       "id": "migrant",
-      "value": "Migrant"
+      "name": "Migrant"
     },
     {
       "id": "wanderer",
-      "value": "Wanderer"
+      "name": "Wanderer"
     },
     {
       "id": "dissident",
-      "value": "Dissident"
+      "name": "Dissident"
     },
     {
       "id": "outlaw",
-      "value": "Outlaw"
+      "name": "Outlaw"
     }
   ]
 }

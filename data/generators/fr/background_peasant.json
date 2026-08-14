@@ -1,52 +1,52 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "peasant",
   "visibility": "internal",
   "name": "Archétypes paysans",
   "description": "Métiers ruraux et rôles communautaires",
   "entrySchema": {
-    "type": "text"
+    "required": []
   },
   "entries": [
     {
       "id": "farmer",
-      "value": "Fermier"
+      "name": "Fermier"
     },
     {
       "id": "herder",
-      "value": "Éleveur"
+      "name": "Éleveur"
     },
     {
       "id": "shepherd",
-      "value": "Berger"
+      "name": "Berger"
     },
     {
       "id": "miller",
-      "value": "Meunier"
+      "name": "Meunier"
     },
     {
       "id": "farmhand",
-      "value": "Ouvrier agricole"
+      "name": "Ouvrier agricole"
     },
     {
       "id": "lumberjack",
-      "value": "Bûcheron"
+      "name": "Bûcheron"
     },
     {
       "id": "miner",
-      "value": "Mineur"
+      "name": "Mineur"
     },
     {
       "id": "village_elder",
-      "value": "Ancien du village"
+      "name": "Ancien du village"
     },
     {
       "id": "rural_laborer",
-      "value": "Travailleur rural"
+      "name": "Travailleur rural"
     },
     {
       "id": "village_healer",
-      "value": "Guérisseur du village"
+      "name": "Guérisseur du village"
     }
   ]
 }

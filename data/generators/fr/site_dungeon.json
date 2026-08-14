@@ -1,219 +1,218 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "dungeon",
   "visibility": "internal",
   "name": "Donjons",
   "description": "Sites d’aventure, ruines, repaires et complexes hostiles",
   "entrySchema": {
-    "type": "fields",
-    "required": ["name", "description"]
+    "required": ["description"]
   },
   "entries": [
     {
       "id": "buried_temple",
+      "name": "Temple enseveli",
       "weight": 3,
       "fields": {
-        "name": "Temple enseveli",
         "description": "salles sacrées effondrées autour d’un autel scellé qui reçoit encore des offrandes."
       }
     },
     {
       "id": "bandit_cavern",
+      "name": "Caverne de bandits",
       "weight": 3,
       "fields": {
-        "name": "Caverne de bandits",
         "description": "tunnels naturels agrandis et aménagés avec barricades, réserves, cellules et issues secrètes."
       }
     },
     {
       "id": "ruined_fortress",
+      "name": "Forteresse en ruine",
       "weight": 3,
       "fields": {
-        "name": "Forteresse en ruine",
         "description": "murailles éventrées au-dessus d’arsenaux intacts, de tunnels de commandement et de défenseurs oubliés."
       }
     },
     {
       "id": "ancient_crypt",
+      "name": "Crypte antique",
       "weight": 3,
       "fields": {
-        "name": "Crypte antique",
         "description": "tombeaux familiaux, pièges funéraires, archives ancestrales et chambres scellées récemment profanées."
       }
     },
     {
       "id": "wizards_tower",
+      "name": "Tour de mage",
       "weight": 2,
       "fields": {
-        "name": "Tour de mage",
         "description": "laboratoires superposés où des expériences ratées ont déformé la gravité et l’espace."
       }
     },
     {
       "id": "sunken_palace",
+      "name": "Palais englouti",
       "weight": 2,
       "fields": {
-        "name": "Palais englouti",
         "description": "salles inondées accessibles à marée basse, en plongée ou grâce à d’anciennes pompes."
       }
     },
     {
       "id": "monster_warren",
+      "name": "Terriers de monstres",
       "weight": 2,
       "fields": {
-        "name": "Terriers de monstres",
         "description": "nids reliés entre eux et remodelés par des générations d’habitants toujours plus imposants."
       }
     },
     {
       "id": "collapsed_city_district",
+      "name": "Quartier urbain effondré",
       "weight": 2,
       "fields": {
-        "name": "Quartier urbain effondré",
         "description": "rues et maisons ensevelies, reliées par les caves et des gouffres."
       }
     },
     {
       "id": "cursed_manor",
+      "name": "Manoir maudit",
       "weight": 2,
       "fields": {
-        "name": "Manoir maudit",
         "description": "demeure noble condamnée à revivre la dernière nuit précédant l’anéantissement de ses habitants."
       }
     },
     {
       "id": "volcanic_shrine",
+      "name": "Sanctuaire volcanique",
       "weight": 2,
       "fields": {
-        "name": "Sanctuaire volcanique",
         "description": "tunnels ravagés par la chaleur, ponts sacrificiels, canaux de lave et gardiens insensibles au feu."
       }
     },
     {
       "id": "frozen_tomb",
+      "name": "Tombeau gelé",
       "weight": 2,
       "fields": {
-        "name": "Tombeau gelé",
         "description": "salles préservées par la glace où chaque porte ouverte libère air antique, maladies et anciens occupants."
       }
     },
     {
       "id": "cult_sanctuary",
+      "name": "Sanctuaire d’un culte",
       "weight": 2,
       "fields": {
-        "name": "Sanctuaire d’un culte",
         "description": "salles de réunion camouflées qui descendent vers des chambres rituelles et un site d’invocation inachevé."
       }
     },
     {
       "id": "living_dungeon",
+      "name": "Donjon vivant",
       "weight": 1,
       "fields": {
-        "name": "Donjon vivant",
         "description": "organisme gigantesque dont les cavités digèrent les intrus et se réorganisent comme des organes."
       }
     },
     {
       "id": "dream_prison",
+      "name": "Prison onirique",
       "weight": 1,
       "fields": {
-        "name": "Prison onirique",
         "description": "complexe mental auquel on accède en dormant, dont les sorties se cachent dans les souvenirs des prisonniers."
       }
     },
     {
       "id": "inverted_tower",
+      "name": "Tour inversée",
       "weight": 1,
       "fields": {
-        "name": "Tour inversée",
         "description": "édifice qui s’enfonce dans la terre tandis que la gravité attire vers son toit lointain."
       }
     },
     {
       "id": "planar_embassy",
+      "name": "Ambassade planaire",
       "weight": 1,
       "fields": {
-        "name": "Ambassade planaire",
         "description": "complexe diplomatique abandonné, construit pour des visiteurs aux corps et aux lois physiques incompatibles."
       }
     },
     {
       "id": "clockwork_vault",
+      "name": "Caveau mécanique",
       "weight": 1,
       "fields": {
-        "name": "Caveau mécanique",
         "description": "salles aux mécanismes précis qui réarment les pièges et font pivoter les couloirs selon un horaire fixe."
       }
     },
     {
       "id": "worldroot_hollow",
+      "name": "Creux de la Racine-monde",
       "weight": 1,
       "fields": {
-        "name": "Creux de la Racine-monde",
         "description": "tunnels primordiaux au cœur d’un réseau de racines colossal gagné par une corruption grandissante."
       }
     },
     {
       "id": "astral_observatory",
+      "name": "Observatoire astral",
       "weight": 1,
       "fields": {
-        "name": "Observatoire astral",
         "description": "ruine isolée dont les lentilles ouvrent des passages physiques vers de dangereux corps célestes."
       }
     },
     {
       "id": "forgotten_ruins",
+      "name": "Ruines oubliées",
       "fields": {
-        "name": "Ruines oubliées",
         "description": "Les vestiges instables d’un domaine abandonné restent protégés par des pièges, des gardiens ou des serments."
       }
     },
     {
       "id": "abandoned_mine",
+      "name": "Mine condamnée",
       "fields": {
-        "name": "Mine condamnée",
         "description": "Des galeries désertées après un accident dont la cause officielle contredit les traces découvertes plus bas."
       }
     },
     {
       "id": "inhabited_cave",
+      "name": "Grotte habitée",
       "fields": {
-        "name": "Grotte habitée",
         "description": "Un réseau naturel aménagé par une créature, une communauté ou des fugitifs."
       }
     },
     {
       "id": "prison_complex",
+      "name": "Prison désaffectée",
       "fields": {
-        "name": "Prison désaffectée",
         "description": "Des cellules, des archives et des passages de service conservent les preuves d’une détention effacée de l’histoire."
       }
     },
     {
       "id": "sewer_labyrinth",
+      "name": "Égouts anciens",
       "fields": {
-        "name": "Égouts anciens",
         "description": "Un réseau plus vaste que la ville actuelle relie citernes, cryptes et fondations interdites."
       }
     },
     {
       "id": "desecrated_cemetery",
+      "name": "Cimetière profané",
       "fields": {
-        "name": "Cimetière profané",
         "description": "Des tombes ouvertes et des monuments déplacés entourent un caveau que quelqu’un tente d’atteindre."
       }
     },
     {
       "id": "anomalous_crater",
+      "name": "Cratère anormal",
       "fields": {
-        "name": "Cratère anormal",
         "description": "Une dépression récente où la pierre, la magie ou le temps se comportent différemment."
       }
     },
     {
       "id": "ruined_sanctuary",
+      "name": "Sanctuaire en ruine",
       "fields": {
-        "name": "Sanctuaire en ruine",
         "description": "Une chapelle ou un temple abandonné dont les rites produisent encore des effets sans officiant."
       }
     }

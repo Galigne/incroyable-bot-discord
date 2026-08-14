@@ -1,58 +1,57 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "modifier",
   "visibility": "public",
   "name": "Modificateur",
   "description": "Familles de modificateurs descriptifs",
   "entrySchema": {
-    "type": "fields",
-    "required": ["name", "description"]
+    "required": ["description"]
   },
   "entries": [
     {
       "id": "character",
+      "name": "Modificateurs de personnage",
       "fields": {
-        "name": "Modificateurs de personnage",
         "description": "Variations descriptives persistantes pour les personnages générés"
       },
       "generator": "modifier_character"
     },
     {
       "id": "creature",
+      "name": "Modificateurs de créature",
       "fields": {
-        "name": "Modificateurs de créature",
         "description": "Variations descriptives persistantes pour les créatures générées"
       },
       "generator": "modifier_creature"
     },
     {
       "id": "site_general",
+      "name": "Modificateurs généraux de lieu",
       "fields": {
-        "name": "Modificateurs généraux de lieu",
         "description": "Conditions et météo adaptées à de nombreux lieux"
       },
       "generator": "site_modifier_all"
     },
     {
       "id": "site_building",
+      "name": "Modificateurs historiques de bâtiment",
       "fields": {
-        "name": "Modificateurs historiques de bâtiment",
         "description": "Variations historiques adaptées aux bâtiments"
       },
       "generator": "site_modifier_building"
     },
     {
       "id": "site_interiors",
+      "name": "Modificateurs de lieux intérieurs",
       "fields": {
-        "name": "Modificateurs de lieux intérieurs",
         "description": "Variations adaptées aux salles et aux lieux clos"
       },
       "generator": "site_modifier_interiors"
     },
     {
       "id": "site_structures",
+      "name": "Modificateurs d’état des structures",
       "fields": {
-        "name": "Modificateurs d’état des structures",
         "description": "Variations de dégâts et de ruines pour les structures"
       },
       "generator": "site_modifier_structures"

@@ -1,52 +1,52 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "urchin",
   "visibility": "internal",
   "name": "Archétypes d’enfant des rues",
   "description": "Rôles liés à la rue et à la débrouille",
   "entrySchema": {
-    "type": "text"
+    "required": []
   },
   "entries": [
     {
       "id": "orphan",
-      "value": "Orphelin"
+      "name": "Orphelin"
     },
     {
       "id": "beggar",
-      "value": "Mendiant"
+      "name": "Mendiant"
     },
     {
       "id": "street_child",
-      "value": "Enfant des rues"
+      "name": "Enfant des rues"
     },
     {
       "id": "scavenger",
-      "value": "Chiffonnier"
+      "name": "Chiffonnier"
     },
     {
       "id": "runaway",
-      "value": "Fugueur"
+      "name": "Fugueur"
     },
     {
       "id": "street_messenger",
-      "value": "Messager des rues"
+      "name": "Messager des rues"
     },
     {
       "id": "pickpocket",
-      "value": "Coupe-bourse"
+      "name": "Coupe-bourse"
     },
     {
       "id": "street_performer",
-      "value": "Artiste de rue"
+      "name": "Artiste de rue"
     },
     {
       "id": "urchin",
-      "value": "Gamin des rues"
+      "name": "Gamin des rues"
     },
     {
       "id": "errand_runner",
-      "value": "Commissionnaire"
+      "name": "Commissionnaire"
     }
   ]
 }

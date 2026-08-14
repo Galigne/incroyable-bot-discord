@@ -1,126 +1,125 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "modifier_character",
   "visibility": "internal",
   "name": "Character modifiers",
   "description": "Persistent descriptive variations for generated characters",
   "entrySchema": {
-    "type": "fields",
-    "required": ["name", "description"]
+    "required": ["description"]
   },
   "entries": [
     {
       "id": "scarred",
+      "name": "Scarred",
       "weight": 3,
       "fields": {
-        "name": "Scarred",
         "description": "Old scars mark their body and hint at dangers they survived."
       }
     },
     {
       "id": "pale",
+      "name": "Pale",
       "weight": 2,
       "fields": {
-        "name": "Pale",
         "description": "Their coloring is unnaturally pale, making familiar features seem strange."
       }
     },
     {
       "id": "ornate_markings",
+      "name": "Ornate Markings",
       "weight": 2,
       "fields": {
-        "name": "Ornate Markings",
         "description": "Distinctive natural markings form elaborate patterns across their body."
       }
     },
     {
       "id": "weathered",
+      "name": "Weathered",
       "fields": {
-        "name": "Weathered",
         "description": "Exposure to harsh weather has left their features roughened and visibly worn."
       }
     },
     {
       "id": "one_eyed",
+      "name": "One-Eyed",
       "fields": {
-        "name": "One-Eyed",
         "description": "One eye is missing or permanently closed, making their face immediately recognizable."
       }
     },
     {
       "id": "burn_scarred",
+      "name": "Burn-Scarred",
       "fields": {
-        "name": "Burn-Scarred",
         "description": "Extensive old burn scars cover a clearly visible part of their body."
       }
     },
     {
       "id": "heavily_tattooed",
+      "name": "Heavily Tattooed",
       "fields": {
-        "name": "Heavily Tattooed",
         "description": "Dense tattoos cover much of their visible skin in layered designs."
       }
     },
     {
       "id": "ritual_scarification",
+      "name": "Ritual Scarification",
       "fields": {
-        "name": "Ritual Scarification",
         "description": "Deliberate raised scars form repeated ceremonial patterns across their skin."
       }
     },
     {
       "id": "prosthetic_limb",
+      "name": "Prosthetic Limb",
       "fields": {
-        "name": "Prosthetic Limb",
         "description": "A clearly visible prosthetic replaces an arm or leg, with materials and workmanship suited to the setting."
       }
     },
     {
       "id": "missing_fingers",
+      "name": "Missing Fingers",
       "fields": {
-        "name": "Missing Fingers",
         "description": "Several fingers are missing from one hand, leaving an unmistakable silhouette."
       }
     },
     {
       "id": "noticeable_limp",
+      "name": "Noticeable Limp",
       "fields": {
-        "name": "Noticeable Limp",
         "description": "An old injury gives their walk a pronounced and recognizable limp."
       }
     },
     {
       "id": "unnatural_eyes",
+      "name": "Unnatural Eyes",
       "fields": {
-        "name": "Unnatural Eyes",
         "description": "Their eyes have an impossible color, shape, or reflection that cannot be mistaken for ordinary variation."
       }
     },
     {
       "id": "magical_markings",
+      "name": "Magical Markings",
       "fields": {
-        "name": "Magical Markings",
         "description": "Visible symbols shimmer, shift, or faintly glow across their skin without defining a specific effect."
       }
     },
     {
       "id": "discolored_veins",
+      "name": "Discolored Veins",
       "fields": {
-        "name": "Discolored Veins",
         "description": "Veins of an unusual color show clearly beneath the skin in branching patterns."
       }
     },
     {
       "id": "missing_ear",
+      "name": "Missing Ear",
       "fields": {
-        "name": "Missing Ear",
         "description": "One outer ear is partly or entirely missing, leaving a distinctive profile."
       }
     },
     {
       "id": "stitch_scars",
+      "name": "Extensive Stitch Scars",
       "fields": {
-        "name": "Extensive Stitch Scars",
         "description": "Long surgical or roughly stitched scars cross several visible areas of their body."
       }
     }

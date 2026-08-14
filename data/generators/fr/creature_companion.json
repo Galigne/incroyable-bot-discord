@@ -1,19 +1,18 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "companion",
   "visibility": "internal",
   "name": "Compagnons",
   "description": "Animaux de compagnie, familiers et petites créatures de voyage",
   "entrySchema": {
-    "type": "fields",
-    "required": ["name", "description"]
+    "required": ["description"]
   },
   "entries": [
     {
       "id": "loyal_hound",
+      "name": "Chien fidèle",
       "weight": 4,
       "fields": {
-        "name": "Chien fidèle",
         "description": "suit les odeurs familières, veille sur les dormeurs et se méfie d’un PNJ en apparence inoffensif."
       },
       "generation": {
@@ -28,9 +27,9 @@
     },
     {
       "id": "barn_cat",
+      "name": "Chat de grange",
       "weight": 4,
       "fields": {
-        "name": "Chat de grange",
         "description": "excelle à débusquer la vermine, les coins chauds et la nourriture laissée sans surveillance."
       },
       "generation": {
@@ -45,9 +44,9 @@
     },
     {
       "id": "messenger_pigeon",
+      "name": "Pigeon voyageur",
       "weight": 4,
       "fields": {
-        "name": "Pigeon voyageur",
         "description": "retourne fidèlement au foyer choisi en transportant un message très court."
       },
       "generation": {
@@ -71,9 +70,9 @@
     },
     {
       "id": "pack_goat",
+      "name": "Chèvre de bât",
       "weight": 3,
       "fields": {
-        "name": "Chèvre de bât",
         "description": "porte une quantité raisonnable de matériel, mange presque tout et refuse obstinément les chemins manifestement maudits."
       },
       "generation": {
@@ -94,9 +93,9 @@
     },
     {
       "id": "clever_rat",
+      "name": "Rat savant",
       "weight": 3,
       "fields": {
-        "name": "Rat savant",
         "description": "se faufile dans les espaces minuscules et apprend des consignes simples associées à des objets."
       },
       "generation": {
@@ -111,9 +110,9 @@
     },
     {
       "id": "watch_goose",
+      "name": "Oie de garde",
       "weight": 3,
       "fields": {
-        "name": "Oie de garde",
         "description": "interpelle bruyamment les inconnus, les créatures invisibles et toute personne munie de pain."
       },
       "generation": {
@@ -130,9 +129,9 @@
     },
     {
       "id": "pocket_ferret",
+      "name": "Furet de poche",
       "weight": 3,
       "fields": {
-        "name": "Furet de poche",
         "description": "rapporte de petits objets et les cache dans les endroits les moins pratiques."
       },
       "generation": {
@@ -147,9 +146,9 @@
     },
     {
       "id": "mule",
+      "name": "Mule",
       "weight": 3,
       "fields": {
-        "name": "Mule",
         "description": "monture fiable au pied très sûr, qui oppose un veto absolu aux ponts dangereux."
       },
       "generation": {
@@ -180,9 +179,9 @@
     },
     {
       "id": "lantern_finch",
+      "name": "Pinson-lanterne",
       "weight": 2,
       "fields": {
-        "name": "Pinson-lanterne",
         "description": "diffuse une douce lumière et se tait lorsque des prédateurs approchent."
       },
       "generation": {
@@ -200,9 +199,9 @@
     },
     {
       "id": "ember_newt",
+      "name": "Triton de braise",
       "weight": 2,
       "fields": {
-        "name": "Triton de braise",
         "description": "réchauffe son entourage, allume l’amadou sec et dort dans les ustensiles de cuisine."
       },
       "generation": {
@@ -217,9 +216,9 @@
     },
     {
       "id": "moss_tortoise",
+      "name": "Tortue moussue",
       "weight": 2,
       "fields": {
-        "name": "Tortue moussue",
         "description": "fait lentement pousser des herbes médicinales communes sur sa carapace."
       },
       "generation": {
@@ -236,9 +235,9 @@
     },
     {
       "id": "whisper_crow",
+      "name": "Corbeau murmurant",
       "weight": 2,
       "fields": {
-        "name": "Corbeau murmurant",
         "description": "mémorise les voix et répète plusieurs phrases courtes avec une précision inquiétante."
       },
       "generation": {
@@ -256,9 +255,9 @@
     },
     {
       "id": "miniature_slime",
+      "name": "Gelée miniature",
       "weight": 2,
       "fields": {
-        "name": "Gelée miniature",
         "description": "dissout sans danger la saleté, les aliments avariés et, parfois, un document important."
       },
       "generation": {
@@ -277,9 +276,9 @@
     },
     {
       "id": "clockwork_beetle",
+      "name": "Scarabée mécanique",
       "weight": 2,
       "fields": {
-        "name": "Scarabée mécanique",
         "description": "enregistre une heure de son et la restitue lorsqu’on remonte son mécanisme."
       },
       "generation": {
@@ -298,9 +297,9 @@
     },
     {
       "id": "breeze_lizard",
+      "name": "Lézard des brises",
       "weight": 2,
       "fields": {
-        "name": "Lézard des brises",
         "description": "change de couleur avec le temps et plane sur de courtes distances d’une personne à l’autre."
       },
       "generation": {
@@ -315,9 +314,9 @@
     },
     {
       "id": "cave_bat",
+      "name": "Chauve-souris des cavernes",
       "weight": 2,
       "fields": {
-        "name": "Chauve-souris des cavernes",
         "description": "se repère dans l’obscurité totale et revient lorsqu’elle entend un sifflement précis."
       },
       "generation": {
@@ -332,9 +331,9 @@
     },
     {
       "id": "river_otter",
+      "name": "Loutre de rivière",
       "weight": 2,
       "fields": {
-        "name": "Loutre de rivière",
         "description": "nage, rapporte les objets flottants et tient absolument à ouvrir des coquillages pendant les scènes sérieuses."
       },
       "generation": {
@@ -349,9 +348,9 @@
     },
     {
       "id": "tiny_griffin",
+      "name": "Griffon miniature",
       "weight": 1,
       "fields": {
-        "name": "Griffon miniature",
         "description": "défend férocement un sac à dos précis et chasse les insectes au moyen de piqués spectaculaires."
       },
       "generation": {
@@ -366,9 +365,9 @@
     },
     {
       "id": "blink_rabbit",
+      "name": "Lapin fugace",
       "weight": 1,
       "fields": {
-        "name": "Lapin fugace",
         "description": "se téléporte de quelques mètres lorsqu’il prend peur, rarement dans la direction la plus sûre."
       },
       "generation": {
@@ -386,9 +385,9 @@
     },
     {
       "id": "paper_dragon",
+      "name": "Dragon de papier",
       "weight": 1,
       "fields": {
-        "name": "Dragon de papier",
         "description": "se replie à plat, transporte des messages écrits et crache juste assez de feu pour cacheter de la cire."
       },
       "generation": {
@@ -418,9 +417,9 @@
     },
     {
       "id": "ghost_mouse",
+      "name": "Souris fantôme",
       "weight": 1,
       "fields": {
-        "name": "Souris fantôme",
         "description": "traverse les cloisons minces et devient visible après avoir mangé du fromage."
       },
       "generation": {
@@ -435,9 +434,9 @@
     },
     {
       "id": "cloud_pup",
+      "name": "Chiot-nuage",
       "weight": 1,
       "fields": {
-        "name": "Chiot-nuage",
         "description": "petit chien flottant fait de brume, capable de dissimuler brièvement le visage d’une personne."
       },
       "generation": {
@@ -454,9 +453,9 @@
     },
     {
       "id": "pebble_elemental",
+      "name": "Élémentaire-galet",
       "weight": 1,
       "fields": {
-        "name": "Élémentaire-galet",
         "description": "créature de pierre grosse comme un poing qui détecte les tunnels proches et la maçonnerie ouvragée."
       },
       "generation": {
@@ -474,9 +473,9 @@
     },
     {
       "id": "moon_moth",
+      "name": "Phalène lunaire",
       "weight": 1,
       "fields": {
-        "name": "Phalène lunaire",
         "description": "absorbe les faibles résidus magiques et luit en présence d’enchantements actifs."
       },
       "generation": {
@@ -491,8 +490,9 @@
     },
     {
       "id": "messenger_raptor",
+      "name": "Rapace messager",
+      "weight": 1,
       "fields": {
-        "name": "Rapace messager",
         "description": "Un oiseau territorial pouvant être dressé à reconnaître des personnes, des emblèmes et des itinéraires."
       },
       "generation": {
@@ -506,13 +506,13 @@
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 0
-      },
-      "weight": 1
+      }
     },
     {
       "id": "sir_candlewick",
+      "name": "Sir Candlewick",
+      "weight": 1,
       "fields": {
-        "name": "Sir Candlewick",
         "description": "une minuscule armure animée qui cherche une personne assez grande pour devenir son écuyer."
       },
       "generation": {
@@ -527,8 +527,7 @@
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 35
-      },
-      "weight": 1
+      }
     }
   ]
 }

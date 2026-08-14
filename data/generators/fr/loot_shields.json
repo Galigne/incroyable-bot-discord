@@ -1,19 +1,18 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "shields",
   "visibility": "internal",
   "name": "Boucliers",
   "description": "Boucliers offrant des PR selon leur rareté",
   "entrySchema": {
-    "type": "fields",
-    "required": ["name", "rarity", "description", "ar_percentage"]
+    "required": ["rarity", "description", "ar_percentage"]
   },
   "entries": [
     {
       "id": "common_buckler",
+      "name": "Rondache",
       "weight": 8,
       "fields": {
-        "name": "Rondache",
         "rarity": "commune",
         "description": "Un bouclier compact dont la matière et la forme exactes conviennent à son porteur.",
         "ar_percentage": 5
@@ -21,9 +20,9 @@
     },
     {
       "id": "wooden_shield",
+      "name": "Bouclier en bois",
       "weight": 8,
       "fields": {
-        "name": "Bouclier en bois",
         "rarity": "commune",
         "description": "Un bouclier circulaire pratique dont l’apparence s’adapte à l’univers de jeu.",
         "ar_percentage": 5
@@ -31,9 +30,9 @@
     },
     {
       "id": "common_kite_shield",
+      "name": "Écu",
       "weight": 8,
       "fields": {
-        "name": "Écu",
         "rarity": "commune",
         "description": "Un large bouclier offrant une protection ordinaire sans armoiries prédéfinies.",
         "ar_percentage": 5
@@ -41,9 +40,9 @@
     },
     {
       "id": "uncommon_reinforced_shield",
+      "name": "Bouclier renforcé",
       "weight": 5,
       "fields": {
-        "name": "Bouclier renforcé",
         "rarity": "peu commune",
         "description": "Un bouclier soigneusement consolidé dont la fabrication reste libre d’interprétation.",
         "ar_percentage": 10
@@ -51,9 +50,9 @@
     },
     {
       "id": "uncommon_tower_shield",
+      "name": "Pavois",
       "weight": 5,
       "fields": {
-        "name": "Pavois",
         "rarity": "peu commune",
         "description": "Un haut bouclier défensif adapté à la taille et au style de combat de son porteur.",
         "ar_percentage": 10
@@ -61,9 +60,9 @@
     },
     {
       "id": "uncommon_dueling_shield",
+      "name": "Bouclier de duel",
       "weight": 5,
       "fields": {
-        "name": "Bouclier de duel",
         "rarity": "peu commune",
         "description": "Un bouclier maniable équilibré pour la défense active et les combats rapprochés.",
         "ar_percentage": 10
@@ -71,9 +70,9 @@
     },
     {
       "id": "rare_mirrored_shield",
+      "name": "Bouclier-miroir",
       "weight": 3,
       "fields": {
-        "name": "Bouclier-miroir",
         "rarity": "rare",
         "description": "Un bouclier poli dont la surface inhabituelle conserve une signification laissée au choix du MJ.",
         "ar_percentage": 15
@@ -81,9 +80,9 @@
     },
     {
       "id": "rare_monster_hide_shield",
+      "name": "Bouclier en peau de monstre",
       "weight": 3,
       "fields": {
-        "name": "Bouclier en peau de monstre",
         "rarity": "rare",
         "description": "Un bouclier intégrant une matière issue d’une créature remarquable sans en fixer les pouvoirs.",
         "ar_percentage": 15
@@ -91,9 +90,9 @@
     },
     {
       "id": "rare_folding_shield",
+      "name": "Bouclier repliable",
       "weight": 3,
       "fields": {
-        "name": "Bouclier repliable",
         "rarity": "rare",
         "description": "Un bouclier ingénieux qui se replie ou se déploie selon un mécanisme laissé à l’imagination du MJ.",
         "ar_percentage": 15
@@ -101,9 +100,9 @@
     },
     {
       "id": "epic_guardian_shield",
+      "name": "Bouclier du gardien",
       "weight": 2,
       "fields": {
-        "name": "Bouclier du gardien",
         "rarity": "épique",
         "description": "Un bouclier exceptionnel associé à la protection, dont l’histoire et les effets restent libres.",
         "ar_percentage": 20
@@ -111,9 +110,9 @@
     },
     {
       "id": "epic_stormward_shield",
+      "name": "Bouclier des tempêtes",
       "weight": 2,
       "fields": {
-        "name": "Bouclier des tempêtes",
         "rarity": "épique",
         "description": "Un bouclier remarquable orné de motifs orageux sans enchantement prédéterminé.",
         "ar_percentage": 20
@@ -121,9 +120,9 @@
     },
     {
       "id": "epic_living_wood_shield",
+      "name": "Bouclier de bois vivant",
       "weight": 2,
       "fields": {
-        "name": "Bouclier de bois vivant",
         "rarity": "épique",
         "description": "Un bouclier façonné dans un bois étrange dont la nature et le comportement sont laissés au MJ.",
         "ar_percentage": 20
@@ -131,9 +130,9 @@
     },
     {
       "id": "legendary_bastion_relic",
+      "name": "Relique du bastion",
       "weight": 1,
       "fields": {
-        "name": "Relique du bastion",
         "rarity": "légendaire",
         "description": "Un bouclier renommé, symbole d’une défense qui ne céda jamais.",
         "ar_percentage": 25
@@ -141,9 +140,9 @@
     },
     {
       "id": "legendary_eclipse_shield",
+      "name": "Bouclier de l’éclipse",
       "weight": 1,
       "fields": {
-        "name": "Bouclier de l’éclipse",
         "rarity": "légendaire",
         "description": "Un bouclier unique portant l’image d’une éclipse et dont l’héritage demeure mystérieux.",
         "ar_percentage": 25
@@ -151,9 +150,9 @@
     },
     {
       "id": "legendary_oathkeeper_shield",
+      "name": "Bouclier du serment",
       "weight": 1,
       "fields": {
-        "name": "Bouclier du serment",
         "rarity": "légendaire",
         "description": "Un bouclier légendaire lié à un serment dont le porteur, les termes et les conséquences restent à déterminer.",
         "ar_percentage": 25
@@ -161,9 +160,9 @@
     },
     {
       "id": "rare_runed_shield",
+      "name": "Bouclier runique",
       "weight": 1,
       "fields": {
-        "name": "Bouclier runique",
         "rarity": "rare",
         "description": "Un bouclier de belle facture portant une rune associée à la {{ rules.name }} ; le MJ en détermine la fonction précise.",
         "ar_percentage": 15

@@ -1,300 +1,516 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "physical_description",
   "visibility": "internal",
   "name": "Descriptions physiques",
   "description": "Traits physiques visibles et réutilisables",
   "entrySchema": {
-    "type": "text"
+    "required": ["description"]
   },
   "entries": [
     {
       "id": "tall_broad_shoulders",
-      "value": "Grand et large d’épaules."
+      "name": "Grand et large d’épaules",
+      "fields": {
+        "description": "Grand et large d’épaules."
+      }
     },
     {
       "id": "short_wiry",
-      "value": "Petit et nerveux."
+      "name": "Petit et nerveux",
+      "fields": {
+        "description": "Petit et nerveux."
+      }
     },
     {
       "id": "lean_angular",
-      "value": "Une silhouette fine et un visage anguleux."
+      "name": "Une silhouette fine et un visage anguleux",
+      "fields": {
+        "description": "Une silhouette fine et un visage anguleux."
+      }
     },
     {
       "id": "round_soft_features",
-      "value": "Un visage rond aux traits doux."
+      "name": "Un visage rond aux traits doux",
+      "fields": {
+        "description": "Un visage rond aux traits doux."
+      }
     },
     {
       "id": "weathered_square_jaw",
-      "value": "Une mâchoire carrée et une peau burinée."
+      "name": "Une mâchoire carrée et une peau burinée",
+      "fields": {
+        "description": "Une mâchoire carrée et une peau burinée."
+      }
     },
     {
       "id": "pale_sharp_cheekbones",
-      "value": "Un teint pâle et des pommettes saillantes."
+      "name": "Un teint pâle et des pommettes saillantes",
+      "fields": {
+        "description": "Un teint pâle et des pommettes saillantes."
+      }
     },
     {
       "id": "freckles",
-      "value": "Des taches de rousseur parsèment le nez."
+      "name": "Des taches de rousseur parsèment le nez",
+      "fields": {
+        "description": "Des taches de rousseur parsèment le nez."
+      }
     },
     {
       "id": "curly_dark_hair",
-      "value": "Une masse de cheveux noirs et bouclés."
+      "name": "Une masse de cheveux noirs et bouclés",
+      "fields": {
+        "description": "Une masse de cheveux noirs et bouclés."
+      }
     },
     {
       "id": "long_braided_hair",
-      "value": "De longs cheveux réunis en nattes soignées."
+      "name": "De longs cheveux réunis en nattes soignées",
+      "fields": {
+        "description": "De longs cheveux réunis en nattes soignées."
+      }
     },
     {
       "id": "close_cropped_hair",
-      "value": "Des cheveux courts et des yeux gris attentifs."
+      "name": "Des cheveux courts et des yeux gris attentifs",
+      "fields": {
+        "description": "Des cheveux courts et des yeux gris attentifs."
+      }
     },
     {
       "id": "thick_eyebrows",
-      "value": "Des sourcils épais et des yeux profondément enfoncés."
+      "name": "Des sourcils épais et des yeux profondément enfoncés",
+      "fields": {
+        "description": "Des sourcils épais et des yeux profondément enfoncés."
+      }
     },
     {
       "id": "brow_scar",
-      "value": "Une cicatrice visible au-dessus d’un sourcil."
+      "name": "Une cicatrice visible au-dessus d’un sourcil",
+      "fields": {
+        "description": "Une cicatrice visible au-dessus d’un sourcil."
+      }
     },
     {
       "id": "cheek_birthmark",
-      "value": "Une petite marque de naissance sur une joue."
+      "name": "Une petite marque de naissance sur une joue",
+      "fields": {
+        "description": "Une petite marque de naissance sur une joue."
+      }
     },
     {
       "id": "upright_posture",
-      "value": "Une posture droite et une expression posée."
+      "name": "Une posture droite et une expression posée",
+      "fields": {
+        "description": "Une posture droite et une expression posée."
+      }
     },
     {
       "id": "broad_smile",
-      "value": "Un large sourire accompagné d’une fossette profonde."
+      "name": "Un large sourire accompagné d’une fossette profonde",
+      "fields": {
+        "description": "Un large sourire accompagné d’une fossette profonde."
+      }
     },
     {
       "id": "high_cheekbones",
-      "value": "Un visage étroit aux pommettes hautes."
+      "name": "Un visage étroit aux pommettes hautes",
+      "fields": {
+        "description": "Un visage étroit aux pommettes hautes."
+      }
     },
     {
       "id": "brown_eyes_curled_hair",
-      "value": "Des yeux bruns chaleureux et des cheveux très bouclés."
+      "name": "Des yeux bruns chaleureux et des cheveux très bouclés",
+      "fields": {
+        "description": "Des yeux bruns chaleureux et des cheveux très bouclés."
+      }
     },
     {
       "id": "pale_blue_eyes",
-      "value": "Des yeux bleu pâle sous une lourde mèche."
+      "name": "Des yeux bleu pâle sous une lourde mèche",
+      "fields": {
+        "description": "Des yeux bleu pâle sous une lourde mèche."
+      }
     },
     {
       "id": "small_stature",
-      "value": "De petite taille, avec des gestes rapides et précis."
+      "name": "De petite taille",
+      "fields": {
+        "description": "De petite taille, avec des gestes rapides et précis."
+      }
     },
     {
       "id": "heavyset",
-      "value": "Une forte corpulence et un visage calme et ouvert."
+      "name": "Une forte corpulence et un visage calme et ouvert",
+      "fields": {
+        "description": "Une forte corpulence et un visage calme et ouvert."
+      }
     },
     {
       "id": "athletic_build",
-      "value": "Une carrure athlétique et une posture naturellement équilibrée."
+      "name": "Une carrure athlétique et une posture naturellement équilibrée",
+      "fields": {
+        "description": "Une carrure athlétique et une posture naturellement équilibrée."
+      }
     },
     {
       "id": "missing_tooth",
-      "value": "Une dent manquante apparaît quand la personne sourit."
+      "name": "Une dent manquante apparaît quand la personne sourit",
+      "fields": {
+        "description": "Une dent manquante apparaît quand la personne sourit."
+      }
     },
     {
       "id": "full_beard",
-      "value": "Une barbe fournie encadre un visage sérieux."
+      "name": "Une barbe fournie encadre un visage sérieux",
+      "fields": {
+        "description": "Une barbe fournie encadre un visage sérieux."
+      }
     },
     {
       "id": "round_spectacles",
-      "value": "Des lunettes rondes et un visage long et pensif."
+      "name": "Des lunettes rondes et un visage long et pensif",
+      "fields": {
+        "description": "Des lunettes rondes et un visage long et pensif."
+      }
     },
     {
       "id": "youthful_fine_boned",
-      "value": "Un visage juvénile aux traits fins et au teint lisse."
+      "name": "Un visage juvénile aux traits fins et au teint lisse",
+      "fields": {
+        "description": "Un visage juvénile aux traits fins et au teint lisse."
+      }
     },
     {
       "id": "middle_aged_laugh_lines",
-      "value": "Un visage d’âge mûr marqué de fines rides autour des yeux et de la bouche."
+      "name": "Un visage d’âge mûr marqué de fines rides autour des yeux et de la bouche",
+      "fields": {
+        "description": "Un visage d’âge mûr marqué de fines rides autour des yeux et de la bouche."
+      }
     },
     {
       "id": "elderly_stooped",
-      "value": "D’apparence âgée, la personne a le dos légèrement voûté et le regard vif."
+      "name": "D’apparence âgée",
+      "fields": {
+        "description": "D’apparence âgée, la personne a le dos légèrement voûté et le regard vif."
+      }
     },
     {
       "id": "tall_lanky",
-      "value": "Très grand et dégingandé, avec de longs membres et des épaules étroites."
+      "name": "Très grand et dégingandé",
+      "fields": {
+        "description": "Très grand et dégingandé, avec de longs membres et des épaules étroites."
+      }
     },
     {
       "id": "average_even_proportions",
-      "value": "Une taille moyenne et une silhouette harmonieusement proportionnée."
+      "name": "Une taille moyenne et une silhouette harmonieusement proportionnée",
+      "fields": {
+        "description": "Une taille moyenne et une silhouette harmonieusement proportionnée."
+      }
     },
     {
       "id": "short_stocky",
-      "value": "Petit et trapu, avec un cou épais et des membres robustes."
+      "name": "Petit et trapu",
+      "fields": {
+        "description": "Petit et trapu, avec un cou épais et des membres robustes."
+      }
     },
     {
       "id": "broad_heavy_frame",
-      "value": "Une carrure large et massive, avec de grandes mains."
+      "name": "Une carrure large et massive",
+      "fields": {
+        "description": "Une carrure large et massive, avec de grandes mains."
+      }
     },
     {
       "id": "thin_narrow_shoulders",
-      "value": "Une silhouette mince, des épaules étroites et des poignets fins."
+      "name": "Une silhouette mince",
+      "fields": {
+        "description": "Une silhouette mince, des épaules étroites et des poignets fins."
+      }
     },
     {
       "id": "gaunt_hollow_cheeks",
-      "value": "Une silhouette décharnée, des joues creuses et des clavicules saillantes."
+      "name": "Une silhouette décharnée",
+      "fields": {
+        "description": "Une silhouette décharnée, des joues creuses et des clavicules saillantes."
+      }
     },
     {
       "id": "compact_muscular",
-      "value": "Une carrure compacte et musclée, avec des jambes puissantes."
+      "name": "Une carrure compacte et musclée",
+      "fields": {
+        "description": "Une carrure compacte et musclée, avec des jambes puissantes."
+      }
     },
     {
       "id": "long_oval_face",
-      "value": "Un visage long et ovale aux traits équilibrés."
+      "name": "Un visage long et ovale aux traits équilibrés",
+      "fields": {
+        "description": "Un visage long et ovale aux traits équilibrés."
+      }
     },
     {
       "id": "heart_shaped_face",
-      "value": "Un visage en forme de cœur qui se resserre vers un menton fin."
+      "name": "Un visage en forme de cœur qui se resserre vers un menton fin",
+      "fields": {
+        "description": "Un visage en forme de cœur qui se resserre vers un menton fin."
+      }
     },
     {
       "id": "broad_flat_nose",
-      "value": "Un nez large et plat se détache sur des traits par ailleurs ordinaires."
+      "name": "Un nez large et plat se détache sur des traits par ailleurs ordinaires",
+      "fields": {
+        "description": "Un nez large et plat se détache sur des traits par ailleurs ordinaires."
+      }
     },
     {
       "id": "hooked_nose",
-      "value": "Un nez aquilin prononcé, particulièrement visible de profil."
+      "name": "Un nez aquilin prononcé",
+      "fields": {
+        "description": "Un nez aquilin prononcé, particulièrement visible de profil."
+      }
     },
     {
       "id": "strong_jaw",
-      "value": "Une mâchoire affirmée et un menton carré."
+      "name": "Une mâchoire affirmée et un menton carré",
+      "fields": {
+        "description": "Une mâchoire affirmée et un menton carré."
+      }
     },
     {
       "id": "receding_chin",
-      "value": "Un menton fuyant sous une lèvre inférieure proéminente."
+      "name": "Un menton fuyant sous une lèvre inférieure proéminente",
+      "fields": {
+        "description": "Un menton fuyant sous une lèvre inférieure proéminente."
+      }
     },
     {
       "id": "prominent_ears",
-      "value": "Des oreilles décollées et des yeux rapprochés."
+      "name": "Des oreilles décollées et des yeux rapprochés",
+      "fields": {
+        "description": "Des oreilles décollées et des yeux rapprochés."
+      }
     },
     {
       "id": "arched_brows",
-      "value": "Des sourcils hauts et arqués au-dessus d’yeux étroits."
+      "name": "Des sourcils hauts et arqués au-dessus d’yeux étroits",
+      "fields": {
+        "description": "Des sourcils hauts et arqués au-dessus d’yeux étroits."
+      }
     },
     {
       "id": "green_almond_eyes",
-      "value": "Des yeux verts en amande bordés de longs cils."
+      "name": "Des yeux verts en amande bordés de longs cils",
+      "fields": {
+        "description": "Des yeux verts en amande bordés de longs cils."
+      }
     },
     {
       "id": "amber_wide_set_eyes",
-      "value": "Des yeux ambrés très écartés sous un front lisse."
+      "name": "Des yeux ambrés très écartés sous un front lisse",
+      "fields": {
+        "description": "Des yeux ambrés très écartés sous un front lisse."
+      }
     },
     {
       "id": "mismatched_eye_colors",
-      "value": "Un œil bleu et l’autre brun."
+      "name": "Un œil bleu et l’autre brun",
+      "fields": {
+        "description": "Un œil bleu et l’autre brun."
+      }
     },
     {
       "id": "straight_auburn_hair",
-      "value": "Des cheveux auburn et raides coupés juste sous les oreilles."
+      "name": "Des cheveux auburn et raides coupés juste sous les oreilles",
+      "fields": {
+        "description": "Des cheveux auburn et raides coupés juste sous les oreilles."
+      }
     },
     {
       "id": "wavy_blond_hair",
-      "value": "Des cheveux blonds et ondulés tombant sur les épaules."
+      "name": "Des cheveux blonds et ondulés tombant sur les épaules",
+      "fields": {
+        "description": "Des cheveux blonds et ondulés tombant sur les épaules."
+      }
     },
     {
       "id": "coarse_grey_hair",
-      "value": "Des cheveux gris, drus et coupés court."
+      "name": "Des cheveux gris",
+      "fields": {
+        "description": "Des cheveux gris, drus et coupés court."
+      }
     },
     {
       "id": "salt_and_pepper_hair",
-      "value": "Des cheveux épais qui grisonnent aux tempes."
+      "name": "Des cheveux épais qui grisonnent aux tempes",
+      "fields": {
+        "description": "Des cheveux épais qui grisonnent aux tempes."
+      }
     },
     {
       "id": "shaved_head",
-      "value": "Un crâne rasé de près dont la forme ressort nettement."
+      "name": "Un crâne rasé de près dont la forme ressort nettement",
+      "fields": {
+        "description": "Un crâne rasé de près dont la forme ressort nettement."
+      }
     },
     {
       "id": "receding_hairline",
-      "value": "Des cheveux soigneusement peignés malgré un front qui se dégarnit."
+      "name": "Des cheveux soigneusement peignés malgré un front qui se dégarnit",
+      "fields": {
+        "description": "Des cheveux soigneusement peignés malgré un front qui se dégarnit."
+      }
     },
     {
       "id": "bald_crown",
-      "value": "Le sommet du crâne est dégarni, entouré d’une couronne de cheveux fins."
+      "name": "Le sommet du crâne est dégarni",
+      "fields": {
+        "description": "Le sommet du crâne est dégarni, entouré d’une couronne de cheveux fins."
+      }
     },
     {
       "id": "dark_hair_silver_streak",
-      "value": "Des cheveux foncés traversés par une unique mèche naturellement argentée."
+      "name": "Des cheveux foncés traversés par une unique mèche naturellement argentée",
+      "fields": {
+        "description": "Des cheveux foncés traversés par une unique mèche naturellement argentée."
+      }
     },
     {
       "id": "trimmed_moustache",
-      "value": "Une moustache soigneusement taillée au-dessus d’une bouche étroite."
+      "name": "Une moustache soigneusement taillée au-dessus d’une bouche étroite",
+      "fields": {
+        "description": "Une moustache soigneusement taillée au-dessus d’une bouche étroite."
+      }
     },
     {
       "id": "patchy_beard",
-      "value": "Une barbe clairsemée qui pousse irrégulièrement le long de la mâchoire."
+      "name": "Une barbe clairsemée qui pousse irrégulièrement le long de la mâchoire",
+      "fields": {
+        "description": "Une barbe clairsemée qui pousse irrégulièrement le long de la mâchoire."
+      }
     },
     {
       "id": "short_grey_stubble",
-      "value": "Une barbe grise de quelques jours et des paupières lourdes."
+      "name": "Une barbe grise de quelques jours et des paupières lourdes",
+      "fields": {
+        "description": "Une barbe grise de quelques jours et des paupières lourdes."
+      }
     },
     {
       "id": "warm_brown_complexion",
-      "value": "Un teint brun chaud et uniforme."
+      "name": "Un teint brun chaud et uniforme",
+      "fields": {
+        "description": "Un teint brun chaud et uniforme."
+      }
     },
     {
       "id": "ruddy_complexion",
-      "value": "Un teint rougeaud, surtout sur les joues et le nez."
+      "name": "Un teint rougeaud",
+      "fields": {
+        "description": "Un teint rougeaud, surtout sur les joues et le nez."
+      }
     },
     {
       "id": "neck_birthmark",
-      "value": "Une large marque de naissance irrégulière couvre un côté du cou."
+      "name": "Une large marque de naissance irrégulière couvre un côté du cou",
+      "fields": {
+        "description": "Une large marque de naissance irrégulière couvre un côté du cou."
+      }
     },
     {
       "id": "crooked_teeth",
-      "value": "Des dents légèrement de travers se découvrent dans un sourire spontané."
+      "name": "Des dents légèrement de travers se découvrent dans un sourire spontané",
+      "fields": {
+        "description": "Des dents légèrement de travers se découvrent dans un sourire spontané."
+      }
     },
     {
       "id": "small_even_teeth",
-      "value": "De petites dents régulières et un sourire retenu."
+      "name": "De petites dents régulières et un sourire retenu",
+      "fields": {
+        "description": "De petites dents régulières et un sourire retenu."
+      }
     },
     {
       "id": "lopsided_smile",
-      "value": "Un sourire naturellement de travers creuse une joue."
+      "name": "Un sourire naturellement de travers creuse une joue",
+      "fields": {
+        "description": "Un sourire naturellement de travers creuse une joue."
+      }
     },
     {
       "id": "slouched_posture",
-      "value": "Des épaules voûtées et une posture relâchée font paraître la personne plus petite."
+      "name": "Posture voûtée",
+      "fields": {
+        "description": "Des épaules voûtées et une posture relâchée font paraître la personne plus petite."
+      }
     },
     {
       "id": "long_striding_gait",
-      "value": "Une démarche à longues enjambées, les bras se balançant librement."
+      "name": "Une démarche à longues enjambées",
+      "fields": {
+        "description": "Une démarche à longues enjambées, les bras se balançant librement."
+      }
     },
     {
       "id": "careful_uneven_gait",
-      "value": "Une ancienne blessure à la cheville rend la démarche prudente et légèrement irrégulière."
+      "name": "Démarche prudente et irrégulière",
+      "fields": {
+        "description": "Une ancienne blessure à la cheville rend la démarche prudente et légèrement irrégulière."
+      }
     },
     {
       "id": "large_callused_hands",
-      "value": "De grandes mains aux paumes larges marquées d’épaisses callosités."
+      "name": "De grandes mains aux paumes larges marquées d’épaisses callosités",
+      "fields": {
+        "description": "De grandes mains aux paumes larges marquées d’épaisses callosités."
+      }
     },
     {
       "id": "slender_long_fingers",
-      "value": "Des mains fines aux doigts inhabituellement longs."
+      "name": "Des mains fines aux doigts inhabituellement longs",
+      "fields": {
+        "description": "Des mains fines aux doigts inhabituellement longs."
+      }
     },
     {
       "id": "crooked_finger",
-      "value": "Un doigt resté tordu après une ancienne fracture."
+      "name": "Un doigt resté tordu après une ancienne fracture",
+      "fields": {
+        "description": "Un doigt resté tordu après une ancienne fracture."
+      }
     },
     {
       "id": "thin_chin_scar",
-      "value": "Une fine cicatrice pâle court sous le menton."
+      "name": "Une fine cicatrice pâle court sous le menton",
+      "fields": {
+        "description": "Une fine cicatrice pâle court sous le menton."
+      }
     },
     {
       "id": "healed_broken_nose",
-      "value": "Un nez légèrement de travers, mal remis d’une ancienne fracture."
+      "name": "Un nez légèrement de travers",
+      "fields": {
+        "description": "Un nez légèrement de travers, mal remis d’une ancienne fracture."
+      }
     },
     {
       "id": "faded_forearm_tattoo",
-      "value": "Un petit tatouage décoloré reste visible sur un avant-bras."
+      "name": "Un petit tatouage décoloré reste visible sur un avant-bras",
+      "fields": {
+        "description": "Un petit tatouage décoloré reste visible sur un avant-bras."
+      }
     },
     {
       "id": "inked_wrist_band",
-      "value": "Une simple bande tatouée fait le tour d’un poignet."
+      "name": "Une simple bande tatouée fait le tour d’un poignet",
+      "fields": {
+        "description": "Une simple bande tatouée fait le tour d’un poignet."
+      }
     }
   ]
 }

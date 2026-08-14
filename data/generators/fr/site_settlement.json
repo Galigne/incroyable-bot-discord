@@ -1,201 +1,200 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "settlement",
   "visibility": "internal",
   "name": "Communautés",
   "description": "Hameaux, villes, camps et autres foyers de population",
   "entrySchema": {
-    "type": "fields",
-    "required": ["name", "description"]
+    "required": ["description"]
   },
   "entries": [
     {
       "id": "crossroads_village",
+      "name": "Village-carrefour",
       "weight": 4,
       "fields": {
-        "name": "Village-carrefour",
         "description": "auberges, écuries, marchands et artisans au service des voyageurs de trois routes."
       }
     },
     {
       "id": "fishing_village",
+      "name": "Village de pêcheurs",
       "weight": 4,
       "fields": {
-        "name": "Village de pêcheurs",
         "description": "bateaux, fumoirs, remises à filets et maisons surélevées contre les crues saisonnières."
       }
     },
     {
       "id": "mining_town",
+      "name": "Ville minière",
       "weight": 3,
       "fields": {
-        "name": "Ville minière",
         "description": "Des logements rudimentaires et des fonderies affairées se regroupent autour des bureaux opulents d’une compagnie et de dangereux puits de mine."
       }
     },
     {
       "id": "pilgrim_town",
+      "name": "Ville de pèlerinage",
       "weight": 3,
       "fields": {
-        "name": "Ville de pèlerinage",
         "description": "hospices, vendeurs de reliques, guérisseurs et temples rivaux autour d’un lieu sacré."
       }
     },
     {
       "id": "frontier_fort",
+      "name": "Fort frontalier",
       "weight": 3,
       "fields": {
-        "name": "Fort frontalier",
         "description": "soldats, colons, ateliers et réfugiés abrités derrière des défenses inachevées."
       }
     },
     {
       "id": "adventurer_camp",
+      "name": "Camp d’aventuriers",
       "weight": 3,
       "fields": {
-        "name": "Camp d’aventuriers",
         "description": "tentes, échoppes de ravitaillement, guérisseurs, mercenaires et tableaux de rumeurs près de ruines inexplorées."
       }
     },
     {
       "id": "hill_castle",
+      "name": "Château sur la colline",
       "weight": 3,
       "fields": {
-        "name": "Château sur la colline",
         "description": "demeure noble et garnison dominant les fermes placées sous leur protection."
       }
     },
     {
       "id": "river_port",
+      "name": "Port fluvial",
       "weight": 2,
       "fields": {
-        "name": "Port fluvial",
         "description": "entrepôts, bacs, chantiers navals, douaniers et quartiers flottants."
       }
     },
     {
       "id": "monastery_community",
+      "name": "Communauté monastique",
       "weight": 2,
       "fields": {
-        "name": "Communauté monastique",
         "description": "moines, fermiers tenanciers, visiteurs, bibliothèques et ateliers derrière des murs paisibles."
       }
     },
     {
       "id": "forest_enclave",
+      "name": "Enclave forestière",
       "weight": 2,
       "fields": {
-        "name": "Enclave forestière",
         "description": "maisons intégrées aux arbres vivants et protégées par des éclaireurs qui contrôlent tous les sentiers."
       }
     },
     {
       "id": "mountain_hold",
+      "name": "Bastion montagnard",
       "weight": 2,
       "fields": {
-        "name": "Bastion montagnard",
         "description": "communauté souterraine fortifiée organisée autour de mines, de citernes et de salles ancestrales."
       }
     },
     {
       "id": "island_commune",
+      "name": "Commune insulaire",
       "weight": 2,
       "fields": {
-        "name": "Commune insulaire",
         "description": "communauté portuaire autosuffisante gouvernée par des assemblées publiques et le travail partagé."
       }
     },
     {
       "id": "free_city",
+      "name": "Ville libre",
       "weight": 1,
       "fields": {
-        "name": "Ville libre",
         "description": "métropole marchande indépendante qui compose avec les guildes, les puissances étrangères et les factions citoyennes."
       }
     },
     {
       "id": "underground_refuge",
+      "name": "Refuge souterrain",
       "weight": 1,
       "fields": {
-        "name": "Refuge souterrain",
         "description": "descendants de survivants vivant grâce à des réserves limitées d’eau et de lumière ainsi qu’à d’anciennes machines."
       }
     },
     {
       "id": "ruined_city_camp",
+      "name": "Camp dans une cité en ruine",
       "weight": 1,
       "fields": {
-        "name": "Camp dans une cité en ruine",
         "description": "récupérateurs et érudits occupent les quartiers défendables d’une métropole morte bien plus vaste."
       }
     },
     {
       "id": "farming_hamlet",
+      "name": "Village agricole",
       "fields": {
-        "name": "Village agricole",
         "description": "Une petite communauté centrée sur les granges, le moulin, un marché hebdomadaire et des terres communes."
       }
     },
     {
       "id": "walled_market_town",
+      "name": "Ville marchande",
       "fields": {
-        "name": "Ville marchande",
         "description": "Un centre régional façonné par les guildes, les entrepôts, les taxes et les rivalités commerciales."
       }
     },
     {
       "id": "coastal_city",
+      "name": "Port fortifié",
       "fields": {
-        "name": "Port fortifié",
         "description": "Des quais protégés par des tours, une capitainerie exigeante et des quartiers de marins venus de loin."
       }
     },
     {
       "id": "nomad_encampment",
+      "name": "Campement nomade",
       "fields": {
-        "name": "Campement nomade",
         "description": "Des habitations mobiles organisées autour des troupeaux, des artisans et d’un conseil de clan."
       }
     },
     {
       "id": "siege_camp",
+      "name": "Camp militaire",
       "fields": {
-        "name": "Camp militaire",
         "description": "Une implantation temporaire de soldats, d’ingénieurs, de soigneurs et de fournisseurs civils."
       }
     },
     {
       "id": "royal_capital",
+      "name": "Capitale",
       "fields": {
-        "name": "Capitale",
         "description": "Une métropole où palais, administrations, casernes, marchés et quartiers pauvres se disputent l’espace."
       }
     },
     {
       "id": "underground_city",
+      "name": "Ville souterraine",
       "fields": {
-        "name": "Ville souterraine",
         "description": "Une communauté privée de lumière construite autour de puits, de cavernes et de machines anciennes."
       }
     },
     {
       "id": "floating_settlement",
+      "name": "Ville flottante",
       "fields": {
-        "name": "Ville flottante",
         "description": "Des navires et des plateformes reliés en permanence autour d’un mouillage, d’un récif ou d’une créature gigantesque."
       }
     },
     {
       "id": "slum",
+      "name": "Bidonville",
       "fields": {
-        "name": "Bidonville",
         "description": "Un quartier dense bâti avec des matériaux récupérés et gouverné par des réseaux d’entraide et des autorités informelles."
       }
     },
     {
       "id": "tribal_enclave",
+      "name": "Enclave tribale",
       "fields": {
-        "name": "Enclave tribale",
         "description": "Une communauté soudée autour d’une tradition, d’un territoire sacré et d’une autorité coutumière."
       }
     }

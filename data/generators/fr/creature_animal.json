@@ -1,19 +1,18 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "animal",
   "visibility": "internal",
   "name": "Animaux",
   "description": "Faune ordinaire et créatures fantastiques inoffensives",
   "entrySchema": {
-    "type": "fields",
-    "required": ["name", "description"]
+    "required": ["description"]
   },
   "entries": [
     {
       "id": "mossback_deer",
+      "name": "Cerf au dos moussu",
       "weight": 4,
       "fields": {
-        "name": "Cerf au dos moussu",
         "description": "paisible herbivore forestier dont les bois abritent fleurs, insectes et herbes médicinales."
       },
       "generation": {
@@ -28,9 +27,9 @@
     },
     {
       "id": "lantern_finch",
+      "name": "Pinson-lanterne",
       "weight": 4,
       "fields": {
-        "name": "Pinson-lanterne",
         "description": "minuscule oiseau aux plumes lumineuses qui se rassemble près des campements sûrs."
       },
       "generation": {
@@ -47,9 +46,9 @@
     },
     {
       "id": "river_otter",
+      "name": "Loutre de rivière",
       "weight": 4,
       "fields": {
-        "name": "Loutre de rivière",
         "description": "nageuse joueuse et rusée qui échange des pierres polies contre de la nourriture."
       },
       "generation": {
@@ -64,9 +63,9 @@
     },
     {
       "id": "cloud_sheep",
+      "name": "Mouton-nuage",
       "weight": 3,
       "fields": {
-        "name": "Mouton-nuage",
         "description": "animal laineux des montagnes, assez léger pour survivre à de longues chutes."
       },
       "generation": {
@@ -81,9 +80,9 @@
     },
     {
       "id": "copper_fox",
+      "name": "Renard cuivré",
       "weight": 3,
       "fields": {
-        "name": "Renard cuivré",
         "description": "renard roux curieux, attiré par les pièces, les clés et les mélodies paisibles."
       },
       "generation": {
@@ -98,9 +97,9 @@
     },
     {
       "id": "burrow_pig",
+      "name": "Cochon fouisseur",
       "weight": 3,
       "fields": {
-        "name": "Cochon fouisseur",
         "description": "robuste chercheur de nourriture capable de dénicher racines, truffes et objets enterrés à faible profondeur."
       },
       "generation": {
@@ -115,9 +114,9 @@
     },
     {
       "id": "long_eared_hare",
+      "name": "Lièvre à longues oreilles",
       "weight": 3,
       "fields": {
-        "name": "Lièvre à longues oreilles",
         "description": "animal vigilant des prairies qui frappe le sol avant une tempête ou à l’approche d’un danger."
       },
       "generation": {
@@ -132,9 +131,9 @@
     },
     {
       "id": "bluehorn_goat",
+      "name": "Chèvre aux cornes bleues",
       "weight": 3,
       "fields": {
-        "name": "Chèvre aux cornes bleues",
         "description": "herbivore au pied sûr qui vit sur les falaises et possède des cornes bleues riches en minéraux."
       },
       "generation": {
@@ -149,9 +148,9 @@
     },
     {
       "id": "reed_crane",
+      "name": "Grue des roseaux",
       "weight": 3,
       "fields": {
-        "name": "Grue des roseaux",
         "description": "patient oiseau des marais qui guide souvent les voyageurs à travers les eaux sans danger."
       },
       "generation": {
@@ -166,9 +165,9 @@
     },
     {
       "id": "honey_bear",
+      "name": "Ours à miel",
       "weight": 3,
       "fields": {
-        "name": "Ours à miel",
         "description": "petit ours docile à la fourrure dorée, doté d’une excellente mémoire pour les gestes de bonté."
       },
       "generation": {
@@ -183,9 +182,9 @@
     },
     {
       "id": "sailback_turtle",
+      "name": "Tortue à carapace-voile",
       "weight": 2,
       "fields": {
-        "name": "Tortue à carapace-voile",
         "description": "large tortue de rivière dont la carapace prend le vent lorsqu’elle nage."
       },
       "generation": {
@@ -200,9 +199,9 @@
     },
     {
       "id": "ember_newt",
+      "name": "Triton de braise",
       "weight": 2,
       "fields": {
-        "name": "Triton de braise",
         "description": "amphibien au corps chaud que l’on trouve souvent endormi près des fours."
       },
       "generation": {
@@ -217,9 +216,9 @@
     },
     {
       "id": "silk_alpaca",
+      "name": "Alpaga de soie",
       "weight": 2,
       "fields": {
-        "name": "Alpaga de soie",
         "description": "paisible animal de troupeau produisant une fibre exceptionnellement douce et résistante."
       },
       "generation": {
@@ -234,9 +233,9 @@
     },
     {
       "id": "rain_frog",
+      "name": "Grenouille de pluie",
       "weight": 2,
       "fields": {
-        "name": "Grenouille de pluie",
         "description": "grenouille aux couleurs vives dont le chant annonce avec fiabilité la pluie plusieurs heures à l’avance."
       },
       "generation": {
@@ -254,9 +253,9 @@
     },
     {
       "id": "moon_moth",
+      "name": "Phalène lunaire",
       "weight": 2,
       "fields": {
-        "name": "Phalène lunaire",
         "description": "papillon argenté grand comme une main qui se nourrit de résidus magiques sans altérer les sorts."
       },
       "generation": {
@@ -271,9 +270,9 @@
     },
     {
       "id": "pebble_crab",
+      "name": "Crabe-galet",
       "weight": 2,
       "fields": {
-        "name": "Crabe-galet",
         "description": "crabe côtier inoffensif qui décore sa carapace de pierres colorées."
       },
       "generation": {
@@ -288,9 +287,9 @@
     },
     {
       "id": "whistle_marmot",
+      "name": "Marmotte siffleuse",
       "weight": 2,
       "fields": {
-        "name": "Marmotte siffleuse",
         "description": "rongeur alpin sociable dont les cris d’alerte varient selon le type de menace."
       },
       "generation": {
@@ -308,9 +307,9 @@
     },
     {
       "id": "orchard_drake",
+      "name": "Drac des vergers",
       "weight": 2,
       "fields": {
-        "name": "Drac des vergers",
         "description": "lézard incapable de voler qui dévore les nuisibles et réchauffe les arbres fruitiers pendant les gelées."
       },
       "generation": {
@@ -327,9 +326,9 @@
     },
     {
       "id": "mist_dolphin",
+      "name": "Dauphin des brumes",
       "weight": 1,
       "fields": {
-        "name": "Dauphin des brumes",
         "description": "dauphin pâle des côtes qui éloigne les navires perdus des récifs."
       },
       "generation": {
@@ -344,9 +343,9 @@
     },
     {
       "id": "star_elk",
+      "name": "Cerf étoilé",
       "weight": 1,
       "fields": {
-        "name": "Cerf étoilé",
         "description": "cervidé nocturne rare dont le pelage reproduit le ciel de la nuit présente."
       },
       "generation": {
@@ -361,9 +360,9 @@
     },
     {
       "id": "memory_crow",
+      "name": "Corbeau-mémoire",
       "weight": 1,
       "fields": {
-        "name": "Corbeau-mémoire",
         "description": "oiseau noir amical capable de répéter une phrase entendue des années auparavant."
       },
       "generation": {
@@ -381,9 +380,9 @@
     },
     {
       "id": "glimmer_whale",
+      "name": "Baleine scintillante",
       "weight": 1,
       "fields": {
-        "name": "Baleine scintillante",
         "description": "paisible géante des profondeurs dont le chant fait luire le plancton."
       },
       "generation": {
@@ -398,8 +397,9 @@
     },
     {
       "id": "solar_lizard",
+      "name": "Lézard solaire",
+      "weight": 1,
       "fields": {
-        "name": "Lézard solaire",
         "description": "Un reptile placide qui stocke la chaleur dans ses écailles et recherche les surfaces exposées au soleil."
       },
       "generation": {
@@ -412,13 +412,13 @@
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 10
-      },
-      "weight": 1
+      }
     },
     {
       "id": "reed_snake",
+      "name": "Serpent des roseaux",
+      "weight": 1,
       "fields": {
-        "name": "Serpent des roseaux",
         "description": "Un serpent aquatique discret dont la morsure est douloureuse mais rarement mortelle."
       },
       "generation": {
@@ -429,13 +429,13 @@
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 5
-      },
-      "weight": 1
+      }
     },
     {
       "id": "scavenger_rat",
+      "name": "Rat récupérateur",
+      "weight": 1,
       "fields": {
-        "name": "Rat récupérateur",
         "description": "Un rongeur curieux qui emporte petits outils, boutons et objets brillants vers un nid étonnamment bien organisé."
       },
       "generation": {
@@ -446,13 +446,13 @@
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 0
-      },
-      "weight": 1
+      }
     },
     {
       "id": "weaver_spider",
+      "name": "Araignée tisseuse",
+      "weight": 1,
       "fields": {
-        "name": "Araignée tisseuse",
         "description": "Une grosse araignée non agressive dont la toile résistante est recherchée par les artisans."
       },
       "generation": {
@@ -463,13 +463,13 @@
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 10
-      },
-      "weight": 1
+      }
     },
     {
       "id": "hill_wolf",
+      "name": "Loup des collines",
+      "weight": 1,
       "fields": {
-        "name": "Loup des collines",
         "description": "Un prédateur social prudent qui observe longuement un groupe avant de décider de l’éviter ou de s’en approcher."
       },
       "generation": {
@@ -480,13 +480,13 @@
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 10
-      },
-      "weight": 1
+      }
     },
     {
       "id": "armored_crab",
+      "name": "Crabe cuirassé",
+      "weight": 1,
       "fields": {
-        "name": "Crabe cuirassé",
         "description": "Un grand crustacé qui renforce sa carapace avec des débris et des coquillages."
       },
       "generation": {
@@ -497,13 +497,13 @@
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 35
-      },
-      "weight": 1
+      }
     },
     {
       "id": "burrowing_armadillo",
+      "name": "Tatou fouisseur",
+      "weight": 1,
       "fields": {
-        "name": "Tatou fouisseur",
         "description": "Un animal robuste capable de localiser l’eau, les racines et les cavités sous un sol sec."
       },
       "generation": {
@@ -514,13 +514,13 @@
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 30
-      },
-      "weight": 1
+      }
     },
     {
       "id": "thieving_monkey",
+      "name": "Singe chapardeur",
+      "weight": 1,
       "fields": {
-        "name": "Singe chapardeur",
         "description": "Un animal intelligent qui échange volontiers les objets volés contre de la nourriture ou de nouvelles curiosités."
       },
       "generation": {
@@ -533,13 +533,13 @@
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 5
-      },
-      "weight": 1
+      }
     },
     {
       "id": "cave_bat",
+      "name": "Chauve-souris cavernicole",
+      "weight": 1,
       "fields": {
-        "name": "Chauve-souris cavernicole",
         "description": "Un petit animal nocturne dont les mouvements révèlent les courants d’air et les passages cachés."
       },
       "generation": {
@@ -550,8 +550,7 @@
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 0
-      },
-      "weight": 1
+      }
     }
   ]
 }

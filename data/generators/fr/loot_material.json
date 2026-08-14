@@ -1,182 +1,287 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "material",
   "visibility": "internal",
   "name": "Matériaux",
   "description": "Matériaux naturels, manufacturés, précieux et magiques",
   "entrySchema": {
-    "type": "text"
+    "required": ["description"]
   },
   "entries": [
     {
       "id": "iron",
+      "name": "Fer",
       "weight": 5,
-      "value": "Fer — métal courant et robuste employé pour les outils, les armes, les ferrures et les armures."
+      "fields": {
+        "description": "métal courant et robuste employé pour les outils, les armes, les ferrures et les armures."
+      }
     },
     {
       "id": "copper",
+      "name": "Cuivre",
       "weight": 5,
-      "value": "Cuivre — métal rougeâtre facile à travailler, apprécié pour les récipients, les fils, les pièces et les alliages."
+      "fields": {
+        "description": "métal rougeâtre facile à travailler, apprécié pour les récipients, les fils, les pièces et les alliages."
+      }
     },
     {
       "id": "oak",
+      "name": "Chêne",
       "weight": 5,
-      "value": "Chêne — bois dense et durable utilisé dans la construction, les boucliers, les tonneaux et les navires."
+      "fields": {
+        "description": "bois dense et durable utilisé dans la construction, les boucliers, les tonneaux et les navires."
+      }
     },
     {
       "id": "limestone",
+      "name": "Calcaire",
       "weight": 5,
-      "value": "Calcaire — pierre pâle facile à tailler, courante dans les murs, les sculptures, le mortier et les grottes."
+      "fields": {
+        "description": "pierre pâle facile à tailler, courante dans les murs, les sculptures, le mortier et les grottes."
+      }
     },
     {
       "id": "bronze",
+      "name": "Bronze",
       "weight": 4,
-      "value": "Bronze — alliage de cuivre résistant à la corrosion, utilisé pour les armes, les cloches, les statues et les mécanismes."
+      "fields": {
+        "description": "alliage de cuivre résistant à la corrosion, utilisé pour les armes, les cloches, les statues et les mécanismes."
+      }
     },
     {
       "id": "steel",
+      "name": "Acier",
       "weight": 4,
-      "value": "Acier — alliage de fer raffiné, solide et capable de conserver durablement un tranchant."
+      "fields": {
+        "description": "alliage de fer raffiné, solide et capable de conserver durablement un tranchant."
+      }
     },
     {
       "id": "silver",
+      "name": "Argent",
       "weight": 4,
-      "value": "Argent — métal précieux brillant associé à la monnaie, aux miroirs, aux objets rituels et à certains monstres."
+      "fields": {
+        "description": "métal précieux brillant associé à la monnaie, aux miroirs, aux objets rituels et à certains monstres."
+      }
     },
     {
       "id": "leather",
+      "name": "Cuir",
       "weight": 4,
-      "value": "Cuir — peau traitée et souple utilisée pour les vêtements, les armures, les contenants, les sangles et les livres."
+      "fields": {
+        "description": "peau traitée et souple utilisée pour les vêtements, les armures, les contenants, les sangles et les livres."
+      }
     },
     {
       "id": "granite",
+      "name": "Granit",
       "weight": 4,
-      "value": "Granit — pierre mouchetée extrêmement dure, adaptée aux monuments, aux fortifications et aux meules."
+      "fields": {
+        "description": "pierre mouchetée extrêmement dure, adaptée aux monuments, aux fortifications et aux meules."
+      }
     },
     {
       "id": "gold",
+      "name": "Or",
       "weight": 3,
-      "value": "Or — métal précieux et malléable, recherché comme richesse, ornement, symbole de pureté rituelle et conducteur magique."
+      "fields": {
+        "description": "métal précieux et malléable, recherché comme richesse, ornement, symbole de pureté rituelle et conducteur magique."
+      }
     },
     {
       "id": "marble",
+      "name": "Marbre",
       "weight": 3,
-      "value": "Marbre — pierre décorative employée dans les demeures fastueuses, les sculptures, les sols et les tombeaux."
+      "fields": {
+        "description": "pierre décorative employée dans les demeures fastueuses, les sculptures, les sols et les tombeaux."
+      }
     },
     {
       "id": "obsidian",
+      "name": "Obsidienne",
       "weight": 3,
-      "value": "Obsidienne — verre volcanique capable de produire un tranchant exceptionnel, mais cassant."
+      "fields": {
+        "description": "verre volcanique capable de produire un tranchant exceptionnel, mais cassant."
+      }
     },
     {
       "id": "jade",
+      "name": "Jade",
       "weight": 3,
-      "value": "Jade — pierre ornementale tenace associée au prestige, aux sceaux, à la médecine et aux charmes protecteurs."
+      "fields": {
+        "description": "pierre ornementale tenace associée au prestige, aux sceaux, à la médecine et aux charmes protecteurs."
+      }
     },
     {
       "id": "quartz",
+      "name": "Quartz",
       "weight": 3,
-      "value": "Quartz — cristal abondant utilisé pour les lentilles, les mécanismes d’horlogerie, la décoration et les focaliseurs magiques simples."
+      "fields": {
+        "description": "cristal abondant utilisé pour les lentilles, les mécanismes d’horlogerie, la décoration et les focaliseurs magiques simples."
+      }
     },
     {
       "id": "amber",
+      "name": "Ambre",
       "weight": 3,
-      "value": "Ambre — résine fossilisée qui conserve insectes, odeurs, électricité statique et parfois souvenirs."
+      "fields": {
+        "description": "résine fossilisée qui conserve insectes, odeurs, électricité statique et parfois souvenirs."
+      }
     },
     {
       "id": "pearl",
+      "name": "Perle",
       "weight": 3,
-      "value": "Perle — gemme organique prisée en joaillerie, en diplomatie, dans les rites liés à l’eau et en médecine."
+      "fields": {
+        "description": "gemme organique prisée en joaillerie, en diplomatie, dans les rites liés à l’eau et en médecine."
+      }
     },
     {
       "id": "amethyst",
+      "name": "Améthyste",
       "weight": 2,
-      "value": "Améthyste — quartz violet associé à la lucidité, à la sobriété, aux rêves et à la protection spirituelle."
+      "fields": {
+        "description": "quartz violet associé à la lucidité, à la sobriété, aux rêves et à la protection spirituelle."
+      }
     },
     {
       "id": "ruby",
+      "name": "Rubis",
       "weight": 2,
-      "value": "Rubis — gemme rouge et dure associée à la passion, au sang, au feu et à l’autorité royale."
+      "fields": {
+        "description": "gemme rouge et dure associée à la passion, au sang, au feu et à l’autorité royale."
+      }
     },
     {
       "id": "sapphire",
+      "name": "Saphir",
       "weight": 2,
-      "value": "Saphir — gemme bleue et dure associée à la vérité, au ciel, à l’eau et à une magie rigoureuse."
+      "fields": {
+        "description": "gemme bleue et dure associée à la vérité, au ciel, à l’eau et à une magie rigoureuse."
+      }
     },
     {
       "id": "emerald",
+      "name": "Émeraude",
       "weight": 2,
-      "value": "Émeraude — gemme verte associée à la croissance, au poison, aux prophéties et aux liens durables."
+      "fields": {
+        "description": "gemme verte associée à la croissance, au poison, aux prophéties et aux liens durables."
+      }
     },
     {
       "id": "diamond",
+      "name": "Diamant",
       "weight": 2,
-      "value": "Diamant — cristal transparent d’une dureté exceptionnelle, employé pour tailler, afficher son rang et créer des enchantements durables."
+      "fields": {
+        "description": "cristal transparent d’une dureté exceptionnelle, employé pour tailler, afficher son rang et créer des enchantements durables."
+      }
     },
     {
       "id": "meteoric_iron",
+      "name": "Fer météorique",
       "weight": 2,
-      "value": "Fer météorique — métal rare tombé du ciel, parcouru de motifs inhabituels et résistant à la magie."
+      "fields": {
+        "description": "métal rare tombé du ciel, parcouru de motifs inhabituels et résistant à la magie."
+      }
     },
     {
       "id": "dragonbone",
+      "name": "Os de dragon",
       "weight": 2,
-      "value": "Os de dragon — matière légère et résistante qui conserve des traces de la nature élémentaire de la créature."
+      "fields": {
+        "description": "matière légère et résistante qui conserve des traces de la nature élémentaire de la créature."
+      }
     },
     {
       "id": "spider_silk",
+      "name": "Soie d’araignée",
       "weight": 2,
-      "value": "Soie d’araignée — fibre extrêmement légère et solide utilisée pour les cordes, les vêtements, les sutures et les pièges."
+      "fields": {
+        "description": "fibre extrêmement légère et solide utilisée pour les cordes, les vêtements, les sutures et les pièges."
+      }
     },
     {
       "id": "mithral",
+      "name": "Mithral",
       "weight": 1,
-      "value": "Mithral — métal argenté rare qui combine une résistance exceptionnelle à un poids très faible."
+      "fields": {
+        "description": "métal argenté rare qui combine une résistance exceptionnelle à un poids très faible."
+      }
     },
     {
       "id": "adamant",
+      "name": "Adamant",
       "weight": 1,
-      "value": "Adamant — alliage sombre presque incassable qui exige une chaleur et des outils extraordinaires pour être façonné."
+      "fields": {
+        "description": "alliage sombre presque incassable qui exige une chaleur et des outils extraordinaires pour être façonné."
+      }
     },
     {
       "id": "sunstone",
+      "name": "Pierre solaire",
       "weight": 1,
-      "value": "Pierre solaire — cristal translucide et chaud qui emmagasine la lumière du jour et affaiblit les créatures des ténèbres."
+      "fields": {
+        "description": "cristal translucide et chaud qui emmagasine la lumière du jour et affaiblit les créatures des ténèbres."
+      }
     },
     {
       "id": "voidglass",
+      "name": "Verre du Vide",
       "weight": 1,
-      "value": "Verre du Vide — verre noir et froid qui absorbe la lumière, les sons et de petites quantités d’énergie magique."
+      "fields": {
+        "description": "verre noir et froid qui absorbe la lumière, les sons et de petites quantités d’énergie magique."
+      }
     },
     {
       "id": "living_wood",
+      "name": "Bois vivant",
       "weight": 1,
-      "value": "Bois vivant — récolté sans tuer l’arbre, il peut réparer lentement les objets auxquels on lui a donné forme."
+      "fields": {
+        "description": "récolté sans tuer l’arbre, il peut réparer lentement les objets auxquels on lui a donné forme."
+      }
     },
     {
       "id": "aether_crystal",
+      "name": "Cristal d’éther",
       "weight": 1,
-      "value": "Cristal d’éther — minerai instable qui amplifie les sorts tout en accumulant une résonance dangereuse."
+      "fields": {
+        "description": "minerai instable qui amplifie les sorts tout en accumulant une résonance dangereuse."
+      }
     },
     {
       "id": "unidentified_rune_fragment",
-      "value": "Fragment de rune non identifié — Un morceau de matière magique portant une partie d'une inscription inconnue."
+      "name": "Fragment de rune non identifié",
+      "fields": {
+        "description": "Un morceau de matière magique portant une partie d'une inscription inconnue."
+      }
     },
     {
       "id": "elemental_essence",
-      "value": "Essence élémentaire — Une substance instable conservant les propriétés d’un élément naturel ou magique."
+      "name": "Essence élémentaire",
+      "fields": {
+        "description": "Une substance instable conservant les propriétés d’un élément naturel ou magique."
+      }
     },
     {
       "id": "creature_fragment",
-      "value": "Fragment de créature — Une écaille, peau, corne ou dent conservée comme trophée, preuve ou composant."
+      "name": "Fragment de créature",
+      "fields": {
+        "description": "Une écaille, peau, corne ou dent conservée comme trophée, preuve ou composant."
+      }
     },
     {
       "id": "medicinal_plant",
-      "value": "Plante médicinale — Une plante fraîche dont l’efficacité dépend de sa préparation et de son état de conservation."
+      "name": "Plante médicinale",
+      "fields": {
+        "description": "Une plante fraîche dont l’efficacité dépend de sa préparation et de son état de conservation."
+      }
     },
     {
       "id": "alchemical_ingredient",
-      "value": "Ingrédient alchimique — Un composant organique inhabituel, comme un œil de crapaud ou une glande venimeuse."
+      "name": "Ingrédient alchimique",
+      "fields": {
+        "description": "Un composant organique inhabituel, comme un œil de crapaud ou une glande venimeuse."
+      }
     }
   ]
 }

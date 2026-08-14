@@ -1,138 +1,137 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "affliction",
   "visibility": "public",
   "name": "Affliction",
   "description": "Persistent diseases and curses",
   "entrySchema": {
-    "type": "fields",
-    "required": ["name", "type", "description"]
+    "required": ["type", "description"]
   },
   "entries": [
     {
       "id": "ash_fever",
+      "name": "Ash Fever",
       "fields": {
-        "name": "Ash Fever",
         "type": "disease",
         "description": "A smoky fever causes the {{ status_effect:feverish.name }} status effect and sensitivity to open flame."
       }
     },
     {
       "id": "marsh_lung",
+      "name": "Marsh Lung",
       "fields": {
-        "name": "Marsh Lung",
         "type": "disease",
         "description": "A damp cough and shortness of breath associated with stagnant wetlands."
       }
     },
     {
       "id": "red_flux",
+      "name": "Red Flux",
       "fields": {
-        "name": "Red Flux",
         "type": "disease",
         "description": "A draining intestinal illness marked by cramps, thirst, and rapid weakness."
       }
     },
     {
       "id": "glass_cough",
+      "name": "Glass Cough",
       "fields": {
-        "name": "Glass Cough",
         "type": "disease",
         "description": "A painful dry cough that produces tiny translucent crystals of uncertain origin."
       }
     },
     {
       "id": "sleeping_sickness",
+      "name": "Sleeping Sickness",
       "fields": {
-        "name": "Sleeping Sickness",
         "type": "disease",
         "description": "Increasing bouts of sleep interrupt ordinary activity and become difficult to resist."
       }
     },
     {
       "id": "frost_rot",
+      "name": "Frost Rot",
       "fields": {
-        "name": "Frost Rot",
         "type": "disease",
         "description": "Numb, discolored tissue spreads after prolonged cold or supernatural exposure."
       }
     },
     {
       "id": "spore_fever",
+      "name": "Spore Fever",
       "fields": {
-        "name": "Spore Fever",
         "type": "disease",
         "description": "An invasive fungus causes vivid dreams and the {{ status_effect:confused.name }} status effect."
       }
     },
     {
       "id": "black_vein",
+      "name": "Black Vein",
       "fields": {
-        "name": "Black Vein",
         "type": "disease",
         "description": "Darkened veins slowly spread from an infected wound as strength fades."
       }
     },
     {
       "id": "oathbrand",
+      "name": "Oathbrand",
       "fields": {
-        "name": "Oathbrand",
         "type": "curse",
         "description": "A visible mark reacts whenever the bearer approaches breaking a sworn promise."
       }
     },
     {
       "id": "mirror_curse",
+      "name": "Mirror Curse",
       "fields": {
-        "name": "Mirror Curse",
         "type": "curse",
         "description": "Reflections occasionally act out intentions the bearer has tried to conceal."
       }
     },
     {
       "id": "hunger_mark",
+      "name": "Hunger Mark",
       "fields": {
-        "name": "Hunger Mark",
         "type": "curse",
         "description": "Ordinary meals no longer bring lasting satisfaction, regardless of abundance."
       }
     },
     {
       "id": "stone_sleep",
+      "name": "Stone Sleep",
       "fields": {
-        "name": "Stone Sleep",
         "type": "curse",
         "description": "Each deep sleep leaves part of the body briefly cold, heavy, and stone-like."
       }
     },
     {
       "id": "whispering_mark",
+      "name": "Whispering Mark",
       "fields": {
-        "name": "Whispering Mark",
         "type": "curse",
         "description": "A hidden mark repeats fragments of nearby secrets when the surroundings are quiet."
       }
     },
     {
       "id": "nightmare_chain",
+      "name": "Nightmare Chain",
       "fields": {
-        "name": "Nightmare Chain",
         "type": "curse",
         "description": "Recurring dreams connect the bearer to a place, object, or unknown sleeper."
       }
     },
     {
       "id": "withering_touch",
+      "name": "Withering Touch",
       "fields": {
-        "name": "Withering Touch",
         "type": "curse",
         "description": "Delicate plants and perishable goods deteriorate unusually quickly in the bearer’s hands."
       }
     },
     {
       "id": "borrowed_shadow",
+      "name": "Borrowed Shadow",
       "fields": {
-        "name": "Borrowed Shadow",
         "type": "curse",
         "description": "The bearer’s shadow sometimes follows movements belonging to someone else."
       }

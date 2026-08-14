@@ -1,201 +1,200 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "settlement",
   "visibility": "internal",
   "name": "Settlement",
   "description": "Communities, strongholds, camps, and population centers",
   "entrySchema": {
-    "type": "fields",
-    "required": ["name", "description"]
+    "required": ["description"]
   },
   "entries": [
     {
       "id": "crossroads_village",
+      "name": "Crossroads Village",
       "weight": 4,
       "fields": {
-        "name": "Crossroads Village",
         "description": "inns, stables, traders, and craftspeople serving traffic from three roads."
       }
     },
     {
       "id": "fishing_village",
+      "name": "Fishing Village",
       "weight": 4,
       "fields": {
-        "name": "Fishing Village",
         "description": "boats, smokehouses, net sheds, and homes raised against seasonal floods."
       }
     },
     {
       "id": "mining_town",
+      "name": "Mining Town",
       "weight": 3,
       "fields": {
-        "name": "Mining Town",
         "description": "Rough housing and busy foundries cluster around a wealthy company office and dangerous mine shafts."
       }
     },
     {
       "id": "pilgrim_town",
+      "name": "Pilgrim Town",
       "weight": 3,
       "fields": {
-        "name": "Pilgrim Town",
         "description": "hostels, relic sellers, healers, and rival temples surrounding a sacred destination."
       }
     },
     {
       "id": "frontier_fort",
+      "name": "Frontier Fort",
       "weight": 3,
       "fields": {
-        "name": "Frontier Fort",
         "description": "soldiers, settlers, workshops, and refugees sheltered behind unfinished defenses."
       }
     },
     {
       "id": "adventurer_camp",
+      "name": "Adventurer Camp",
       "weight": 3,
       "fields": {
-        "name": "Adventurer Camp",
         "description": "tents, supply stalls, healers, mercenaries, and rumor boards beside unexplored ruins."
       }
     },
     {
       "id": "hill_castle",
+      "name": "Hill Castle",
       "weight": 3,
       "fields": {
-        "name": "Hill Castle",
         "description": "a noble household and garrison overlooking farms gathered beneath its protection."
       }
     },
     {
       "id": "river_port",
+      "name": "River Port",
       "weight": 2,
       "fields": {
-        "name": "River Port",
         "description": "warehouses, ferries, shipyards, customs officers, and floating neighborhoods."
       }
     },
     {
       "id": "monastery_community",
+      "name": "Monastery Community",
       "weight": 2,
       "fields": {
-        "name": "Monastery Community",
         "description": "monks, tenant farmers, guests, libraries, and workshops behind peaceful walls."
       }
     },
     {
       "id": "forest_enclave",
+      "name": "Forest Enclave",
       "weight": 2,
       "fields": {
-        "name": "Forest Enclave",
         "description": "homes integrated into living trees and protected by scouts who control every path."
       }
     },
     {
       "id": "mountain_hold",
+      "name": "Mountain Hold",
       "weight": 2,
       "fields": {
-        "name": "Mountain Hold",
         "description": "a fortified underground settlement built around mines, cisterns, and ancestral halls."
       }
     },
     {
       "id": "island_commune",
+      "name": "Island Commune",
       "weight": 2,
       "fields": {
-        "name": "Island Commune",
         "description": "a self-sufficient harbor settlement governed through public meetings and shared labor."
       }
     },
     {
       "id": "free_city",
+      "name": "Free City",
       "weight": 1,
       "fields": {
-        "name": "Free City",
         "description": "an independent trade metropolis balancing guilds, foreign powers, and citizen factions."
       }
     },
     {
       "id": "underground_refuge",
+      "name": "Underground Refuge",
       "weight": 1,
       "fields": {
-        "name": "Underground Refuge",
         "description": "descendants of disaster survivors living around finite water, light, and old machinery."
       }
     },
     {
       "id": "ruined_city_camp",
+      "name": "Ruined City Camp",
       "weight": 1,
       "fields": {
-        "name": "Ruined City Camp",
         "description": "scavengers and scholars occupying defensible blocks of a much larger dead metropolis."
       }
     },
     {
       "id": "farming_hamlet",
+      "name": "Farming Village",
       "fields": {
-        "name": "Farming Village",
         "description": "A small community centered on barns, a mill, a weekly market, and common land."
       }
     },
     {
       "id": "walled_market_town",
+      "name": "Market Town",
       "fields": {
-        "name": "Market Town",
         "description": "A regional center shaped by guilds, warehouses, taxes, and commercial rivalries."
       }
     },
     {
       "id": "coastal_city",
+      "name": "Fortified Port",
       "fields": {
-        "name": "Fortified Port",
         "description": "Quays protected by towers, a demanding harbor office, and districts of far-traveled sailors."
       }
     },
     {
       "id": "nomad_encampment",
+      "name": "Nomad Encampment",
       "fields": {
-        "name": "Nomad Encampment",
         "description": "Mobile homes organized around herds, craftspeople, and a clan council."
       }
     },
     {
       "id": "siege_camp",
+      "name": "Military Camp",
       "fields": {
-        "name": "Military Camp",
         "description": "A temporary settlement of soldiers, engineers, healers, and civilian suppliers."
       }
     },
     {
       "id": "royal_capital",
+      "name": "Capital",
       "fields": {
-        "name": "Capital",
         "description": "A metropolis where palaces, offices, barracks, markets, and poor districts compete for space."
       }
     },
     {
       "id": "underground_city",
+      "name": "Underground City",
       "fields": {
-        "name": "Underground City",
         "description": "A lightless community built around shafts, caves, and ancient machines."
       }
     },
     {
       "id": "floating_settlement",
+      "name": "Floating City",
       "fields": {
-        "name": "Floating City",
         "description": "Ships and platforms permanently linked around an anchorage, reef, or gigantic creature."
       }
     },
     {
       "id": "slum",
+      "name": "Slum",
       "fields": {
-        "name": "Slum",
         "description": "A dense district built from salvaged materials and governed by mutual-aid networks and informal authorities."
       }
     },
     {
       "id": "tribal_enclave",
+      "name": "Tribal Enclave",
       "fields": {
-        "name": "Tribal Enclave",
         "description": "A close community centered on tradition, sacred territory, and customary authority."
       }
     }

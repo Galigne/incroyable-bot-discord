@@ -1,263 +1,262 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "traits",
   "visibility": "public",
   "name": "Traits",
   "description": "Concrete intrinsic creature capabilities and bonuses",
   "entrySchema": {
-    "type": "fields",
-    "required": ["name", "description"]
+    "required": ["description"]
   },
   "entries": [
     {
       "id": "amphibious",
+      "name": "Amphibious",
       "fields": {
-        "name": "Amphibious",
         "description": "Can breathe and act normally both underwater and on land."
       }
     },
     {
       "id": "keen_smell",
+      "name": "Keen Smell",
       "fields": {
-        "name": "Keen Smell",
         "description": "+2 to Perception actions when detecting or tracking by scent."
       }
     },
     {
       "id": "keen_hearing",
+      "name": "Keen Hearing",
       "fields": {
-        "name": "Keen Hearing",
         "description": "+2 to Perception actions that rely on hearing."
       }
     },
     {
       "id": "darkvision",
+      "name": "Darkvision",
       "fields": {
-        "name": "Darkvision",
         "description": "Cannot be blinded by ordinary darkness."
       }
     },
     {
       "id": "echolocation",
+      "name": "Echolocation",
       "fields": {
-        "name": "Echolocation",
         "description": "Can perceive nearby creatures and obstacles without sight while able to emit and hear sound."
       }
     },
     {
       "id": "sure_footed",
+      "name": "Sure-Footed",
       "fields": {
-        "name": "Sure-Footed",
         "description": "+2 to Dexterity actions made to climb or keep balance on difficult ground."
       }
     },
     {
       "id": "powerful_build",
+      "name": "Powerful Build",
       "fields": {
-        "name": "Powerful Build",
         "description": "+1 to Strength actions involving pushing, lifting, or breaking objects."
       }
     },
     {
       "id": "swift_reflexes",
+      "name": "Swift Reflexes",
       "fields": {
-        "name": "Swift Reflexes",
         "description": "+1 to Reflexes against threats the creature can perceive."
       }
     },
     {
       "id": "flight",
+      "name": "Flight",
       "fields": {
-        "name": "Flight",
         "description": "Can fly at its normal movement speed while its wings are free."
       }
     },
     {
       "id": "gliding",
+      "name": "Gliding",
       "fields": {
-        "name": "Gliding",
         "description": "Ignores damage from the first 10 meters of a fall and may move 2 meters horizontally per meter descended."
       }
     },
     {
       "id": "burrower",
+      "name": "Burrower",
       "fields": {
-        "name": "Burrower",
         "description": "Can move through loose earth at half its normal movement speed and leaves a traversable tunnel."
       }
     },
     {
       "id": "aquatic_speed",
+      "name": "Aquatic Speed",
       "fields": {
-        "name": "Aquatic Speed",
         "description": "Moves through water at its normal movement speed and gains +1 to Dexterity actions made to swim."
       }
     },
     {
       "id": "regeneration",
+      "name": "Regeneration",
       "fields": {
-        "name": "Regeneration",
         "description": "At the start of its turn, recovers 5% of maximum HP if it has at least 1 HP; fire damage prevents this recovery for that turn."
       }
     },
     {
       "id": "fire_immunity",
+      "name": "Fire Immunity",
       "fields": {
-        "name": "Fire Immunity",
         "description": "Takes no damage and suffers no harmful effects from ordinary fire or heat."
       }
     },
     {
       "id": "cold_immunity",
+      "name": "Cold Immunity",
       "fields": {
-        "name": "Cold Immunity",
         "description": "Takes no damage and suffers no harmful effects from ordinary cold or ice."
       }
     },
     {
       "id": "poison_immunity",
+      "name": "Poison Immunity",
       "fields": {
-        "name": "Poison Immunity",
         "description": "Cannot be poisoned and takes no damage from mundane toxins."
       }
     },
     {
       "id": "disease_immunity",
+      "name": "Disease Immunity",
       "fields": {
-        "name": "Disease Immunity",
         "description": "Cannot contract or transmit ordinary diseases."
       }
     },
     {
       "id": "incorporeal",
+      "name": "Incorporeal",
       "fields": {
-        "name": "Incorporeal",
         "description": "Can pass through nonmagical creatures and solid objects at half speed but must end movement in an open space."
       }
     },
     {
       "id": "camouflage",
+      "name": "Natural Camouflage",
       "fields": {
-        "name": "Natural Camouflage",
         "description": "+2 to Dexterity actions made to hide in the creature's native environment."
       }
     },
     {
       "id": "pack_tactics",
+      "name": "Pack Tactics",
       "fields": {
-        "name": "Pack Tactics",
         "description": "+1 to attack actions against a target adjacent to one of the creature's allies."
       }
     },
     {
       "id": "natural_weapons",
+      "name": "Natural Weapons",
       "fields": {
-        "name": "Natural Weapons",
         "description": "+1 damage with unarmed attacks made using claws, fangs, horns, or another natural weapon."
       }
     },
     {
       "id": "venomous",
+      "name": "Venomous",
       "fields": {
-        "name": "Venomous",
         "description": "After a natural attack deals damage, the target loses 1 AP unless it resists the poison."
       }
     },
     {
       "id": "web_spinner",
+      "name": "Web Spinner",
       "fields": {
-        "name": "Web Spinner",
         "description": "Can create strong restraining webs and gains +2 to Dexterity actions made to move across them."
       }
     },
     {
       "id": "stone_body",
+      "name": "Stone Body",
       "fields": {
-        "name": "Stone Body",
         "description": "Does not need to breathe and gains +2 to Constitution actions made to resist impacts."
       }
     },
     {
       "id": "magic_sense",
+      "name": "Magic Sense",
       "fields": {
-        "name": "Magic Sense",
         "description": "+2 to Perception actions made to detect active spells or enchanted objects nearby."
       }
     },
     {
       "id": "pounce",
+      "name": "Pounce",
       "fields": {
-        "name": "Pounce",
         "description": "+1 to the next action made to grapple or knock a target prone after moving at least 3 meters toward it in the same turn."
       }
     },
     {
       "id": "charge",
+      "name": "Charge",
       "fields": {
-        "name": "Charge",
         "description": "+1 to the next melee attack after moving at least 5 meters straight toward the target in the same turn."
       }
     },
     {
       "id": "constrict",
+      "name": "Constrict",
       "fields": {
-        "name": "Constrict",
         "description": "+2 to Strength actions made to maintain or tighten an existing grapple."
       }
     },
     {
       "id": "wall_climber",
+      "name": "Wall Climber",
       "fields": {
-        "name": "Wall Climber",
         "description": "Can move along steep or vertical rough surfaces at half its normal movement speed without a routine climbing roll."
       }
     },
     {
       "id": "tremorsense",
+      "name": "Tremorsense",
       "fields": {
-        "name": "Tremorsense",
         "description": "Detects movement within 10 meters without sight while it and the source are in contact with the same ground."
       }
     },
     {
       "id": "heat_sense",
+      "name": "Heat Sense",
       "fields": {
-        "name": "Heat Sense",
         "description": "Detects nearby heat sources within 10 meters without sight, though solid barriers block this sense."
       }
     },
     {
       "id": "prehensile_tail",
+      "name": "Prehensile Tail",
       "fields": {
-        "name": "Prehensile Tail",
         "description": "Can hold or manipulate one light object with its tail, but gains no additional action."
       }
     },
     {
       "id": "powerful_leap",
+      "name": "Powerful Leap",
       "fields": {
-        "name": "Powerful Leap",
         "description": "+2 to Strength or Dexterity actions made to jump."
       }
     },
     {
       "id": "swarm_body",
+      "name": "Swarm Body",
       "fields": {
-        "name": "Swarm Body",
         "description": "Can flow through openings large enough for one member and occupy another creature’s space, but remains one creature for actions and effects."
       }
     },
     {
       "id": "magic_resistance",
+      "name": "Magic Resistance",
       "fields": {
-        "name": "Magic Resistance",
         "description": "+1 to actions made to resist hostile magical effects."
       }
     },
     {
       "id": "extended_reach",
+      "name": "Extended Reach",
       "fields": {
-        "name": "Extended Reach",
         "description": "Can make ordinary close attacks from up to 2 meters farther away than a similar-sized creature."
       }
     }

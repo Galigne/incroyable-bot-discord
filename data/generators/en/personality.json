@@ -1,506 +1,824 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "personality",
   "visibility": "public",
   "name": "Personality",
   "description": "Traits, ideals, quirks, bonds, and flaws",
   "entrySchema": {
-    "type": "text"
+    "required": ["description"]
   },
   "entries": [
     {
       "id": "cheerfully_fatalistic_treats_every_disaster_as_confirmation_of",
+      "name": "Cheerfully fatalistic",
       "weight": 2,
-      "value": "Cheerfully fatalistic; treats every disaster as confirmation of a prediction nobody remembers hearing."
+      "fields": {
+        "description": "Cheerfully fatalistic; treats every disaster as confirmation of a prediction nobody remembers hearing."
+      }
     },
     {
       "id": "painfully_honest_but_highly_skilled_at_changing_the",
+      "name": "Painfully honest deflector",
       "weight": 2,
-      "value": "Painfully honest but highly skilled at changing the subject before revealing anything personal."
+      "fields": {
+        "description": "Painfully honest but highly skilled at changing the subject before revealing anything personal."
+      }
     },
     {
       "id": "suspicious_of_all_magic_except_one_obviously_fraudulent",
+      "name": "Selectively superstitious",
       "weight": 2,
-      "value": "Suspicious of all magic except one obviously fraudulent superstition followed with complete devotion."
+      "fields": {
+        "description": "Suspicious of all magic except one obviously fraudulent superstition followed with complete devotion."
+      }
     },
     {
       "id": "grandly_theatrical_in_public_quiet_and_observant_in",
+      "name": "Grandly theatrical in public",
       "weight": 2,
-      "value": "Grandly theatrical in public, quiet and observant in private, and terrified of being considered ordinary."
+      "fields": {
+        "description": "Grandly theatrical in public, quiet and observant in private, and terrified of being considered ordinary."
+      }
     },
     {
       "id": "collects_favors_instead_of_money_and_remembers_every",
+      "name": "Favor collector",
       "weight": 2,
-      "value": "Collects favors instead of money and remembers every promise with unsettling precision."
+      "fields": {
+        "description": "Collects favors instead of money and remembers every promise with unsettling precision."
+      }
     },
     {
       "id": "protective_of_underdogs_openly_rude_to_authority_and",
+      "name": "Protective of underdogs",
       "weight": 3,
-      "value": "Protective of underdogs, openly rude to authority, and unable to resist proving a bully wrong."
+      "fields": {
+        "description": "Protective of underdogs, openly rude to authority, and unable to resist proving a bully wrong."
+      }
     },
     {
       "id": "polite_to_enemies_and_brutally_critical_of_friends",
+      "name": "Polite to enemies, harsh with friends",
       "weight": 2,
-      "value": "Polite to enemies and brutally critical of friends because respect is expressed through honesty."
+      "fields": {
+        "description": "Polite to enemies and brutally critical of friends because respect is expressed through honesty."
+      }
     },
     {
       "id": "believes_every_problem_has_a_practical_solution_even",
-      "value": "Believes every problem has a practical solution, even when facing ghosts, prophecy, or divine judgment."
+      "name": "Believes every problem has a practical solution",
+      "fields": {
+        "description": "Believes every problem has a practical solution, even when facing ghosts, prophecy, or divine judgment."
+      }
     },
     {
       "id": "compulsively_adopts_stray_animals_and_assigns_each_one",
-      "value": "Compulsively adopts stray animals and assigns each one a military rank."
+      "name": "Stray-animal quartermaster",
+      "fields": {
+        "description": "Compulsively adopts stray animals and assigns each one a military rank."
+      }
     },
     {
       "id": "treats_coincidences_as_sacred_messages_and_constantly_rearranges",
-      "value": "Treats coincidences as sacred messages and constantly rearranges plans to follow them."
+      "name": "Follower of coincidences",
+      "fields": {
+        "description": "Treats coincidences as sacred messages and constantly rearranges plans to follow them."
+      }
     },
     {
       "id": "generous_with_possessions_but_jealous_of_attention_especially",
+      "name": "Generous with possessions but jealous of attention",
       "weight": 2,
-      "value": "Generous with possessions but jealous of attention, especially when a rival tells a better story."
+      "fields": {
+        "description": "Generous with possessions but jealous of attention, especially when a rival tells a better story."
+      }
     },
     {
       "id": "never_raises_their_voice_the_calmer_they_sound",
+      "name": "Never raises their voice",
       "weight": 2,
-      "value": "Never raises their voice; the calmer they sound, the angrier and more dangerous they are."
+      "fields": {
+        "description": "Never raises their voice; the calmer they sound, the angrier and more dangerous they are."
+      }
     },
     {
       "id": "obsessed_with_etiquette_from_a_culture_they_only",
-      "value": "Obsessed with etiquette from a culture they only understand through an inaccurate old book."
+      "name": "Misguided etiquette devotee",
+      "fields": {
+        "description": "Obsessed with etiquette from a culture they only understand through an inaccurate old book."
+      }
     },
     {
       "id": "claims_to_fear_nothing_except_geese_and_refuses",
-      "value": "Claims to fear nothing except geese, and refuses to explain the very specific reason."
+      "name": "Claims to fear nothing except geese",
+      "fields": {
+        "description": "Claims to fear nothing except geese, and refuses to explain the very specific reason."
+      }
     },
     {
       "id": "loyal_to_any_agreements_exact_wording_while_exploiting",
+      "name": "Literal-minded loophole exploiter",
       "weight": 2,
-      "value": "Loyal to any agreement's exact wording while exploiting every loophole without guilt."
+      "fields": {
+        "description": "Loyal to any agreement's exact wording while exploiting every loophole without guilt."
+      }
     },
     {
       "id": "eager_to_forgive_personal_insults_but_incapable_of",
+      "name": "Forgiving protector of strangers",
       "weight": 2,
-      "value": "Eager to forgive personal insults but incapable of overlooking harm done to a stranger."
+      "fields": {
+        "description": "Eager to forgive personal insults but incapable of overlooking harm done to a stranger."
+      }
     },
     {
       "id": "constantly_invents_impressive_former_careers_a_surprising_number",
-      "value": "Constantly invents impressive former careers; a surprising number later prove true."
+      "name": "Constantly invents impressive former careers",
+      "fields": {
+        "description": "Constantly invents impressive former careers; a surprising number later prove true."
+      }
     },
     {
       "id": "treats_combat_like_a_puzzle_and_social_interaction",
+      "name": "Tactical but socially awkward",
       "weight": 2,
-      "value": "Treats combat like a puzzle and social interaction like an unavoidable natural disaster."
+      "fields": {
+        "description": "Treats combat like a puzzle and social interaction like an unavoidable natural disaster."
+      }
     },
     {
       "id": "wants_to_be_feared_but_automatically_comforts_anyone",
+      "name": "Tender would-be intimidator",
       "weight": 2,
-      "value": "Wants to be feared but automatically comforts anyone who looks upset."
+      "fields": {
+        "description": "Wants to be feared but automatically comforts anyone who looks upset."
+      }
     },
     {
       "id": "keeps_meticulous_journals_yet_replaces_every_persons_name",
+      "name": "Meticulous nicknaming diarist",
       "weight": 2,
-      "value": "Keeps meticulous journals yet replaces every person's name with an increasingly confusing nickname."
+      "fields": {
+        "description": "Keeps meticulous journals yet replaces every person's name with an increasingly confusing nickname."
+      }
     },
     {
       "id": "sees_wealth_as_a_burden_and_spends_it",
-      "value": "Sees wealth as a burden and spends it recklessly on memorable experiences and ridiculous gifts."
+      "name": "Reckless giver",
+      "fields": {
+        "description": "Sees wealth as a burden and spends it recklessly on memorable experiences and ridiculous gifts."
+      }
     },
     {
       "id": "deeply_religious_but_argues_with_their_deity_as",
+      "name": "Argumentative believer",
       "weight": 2,
-      "value": "Deeply religious but argues with their deity as if speaking to an irritating family member."
+      "fields": {
+        "description": "Deeply religious but argues with their deity as if speaking to an irritating family member."
+      }
     },
     {
       "id": "cannot_admit_ignorance_and_improvises_explanations_that_often",
+      "name": "Improvised expert",
       "weight": 2,
-      "value": "Cannot admit ignorance and improvises explanations that often become accidental local legends."
+      "fields": {
+        "description": "Cannot admit ignorance and improvises explanations that often become accidental local legends."
+      }
     },
     {
       "id": "values_freedom_above_safety_but_becomes_controlling_whenever",
+      "name": "Protective libertarian",
       "weight": 2,
-      "value": "Values freedom above safety but becomes controlling whenever companions are genuinely endangered."
+      "fields": {
+        "description": "Values freedom above safety but becomes controlling whenever companions are genuinely endangered."
+      }
     },
     {
       "id": "apologizes_to_every_defeated_enemy_and_becomes_offended",
+      "name": "Apologetic victor",
       "weight": 2,
-      "value": "Apologizes to every defeated enemy and becomes offended if the apology is rejected."
+      "fields": {
+        "description": "Apologizes to every defeated enemy and becomes offended if the apology is rejected."
+      }
     },
     {
       "id": "speaks_in_proverbs_most_of_which_are_invented",
-      "value": "Speaks in proverbs, most of which are invented on the spot and only loosely relevant."
+      "name": "Speaks in proverbs",
+      "fields": {
+        "description": "Speaks in proverbs, most of which are invented on the spot and only loosely relevant."
+      }
     },
     {
       "id": "appears_cynical_and_mercenary_but_secretly_sends_most",
+      "name": "Secretly generous cynic",
       "weight": 2,
-      "value": "Appears cynical and mercenary but secretly sends most earnings to rebuild a ruined hometown."
+      "fields": {
+        "description": "Appears cynical and mercenary but secretly sends most earnings to rebuild a ruined hometown."
+      }
     },
     {
       "id": "always_assumes_the_best_of_monsters_and_the",
+      "name": "Trusts monsters, distrusts institutions",
       "weight": 2,
-      "value": "Always assumes the best of monsters and the worst of institutions."
+      "fields": {
+        "description": "Always assumes the best of monsters and the worst of institutions."
+      }
     },
     {
       "id": "keeps_trophies_from_failures_rather_than_victories_and",
+      "name": "Collector of lessons from failure",
       "weight": 2,
-      "value": "Keeps trophies from failures rather than victories and can recount every lesson attached to them."
+      "fields": {
+        "description": "Keeps trophies from failures rather than victories and can recount every lesson attached to them."
+      }
     },
     {
       "id": "desperate_to_leave_a_heroic_legacy_yet_freezes",
+      "name": "Desperate to leave a heroic legacy",
       "weight": 2,
-      "value": "Desperate to leave a heroic legacy, yet freezes whenever someone recognizes them in public."
+      "fields": {
+        "description": "Desperate to leave a heroic legacy, yet freezes whenever someone recognizes them in public."
+      }
     },
     {
       "id": "welcoming_and_attentive",
-      "value": "Welcoming and attentive, puts newcomers at ease but becomes involved in their problems too quickly."
+      "name": "Welcoming and attentive",
+      "fields": {
+        "description": "Welcoming and attentive, puts newcomers at ease but becomes involved in their problems too quickly."
+      }
     },
     {
       "id": "ambitious",
-      "value": "Ambitious, measures every relationship by what it may help them accomplish."
+      "name": "Ambitious",
+      "fields": {
+        "description": "Ambitious, measures every relationship by what it may help them accomplish."
+      }
     },
     {
       "id": "playful_humorist",
-      "value": "Playful and funny, defuses tense situations with humor even when the moment is inappropriate.",
-      "weight": 2
+      "name": "Playful and funny",
+      "weight": 2,
+      "fields": {
+        "description": "Playful and funny, defuses tense situations with humor even when the moment is inappropriate."
+      }
     },
     {
       "id": "arrogant",
-      "value": "Arrogant, treats competence as self-evident and every correction as a personal attack.",
-      "weight": 2
+      "name": "Arrogant",
+      "weight": 2,
+      "fields": {
+        "description": "Arrogant, treats competence as self-evident and every correction as a personal attack."
+      }
     },
     {
       "id": "passionate_artist",
-      "value": "A passionate artist who seeks beauty even in dangerous places and neglects practical needs.",
-      "weight": 2
+      "name": "Beauty-seeking artist",
+      "weight": 2,
+      "fields": {
+        "description": "A passionate artist who seeks beauty even in dangerous places and neglects practical needs."
+      }
     },
     {
       "id": "authoritarian",
-      "value": "Authoritarian, naturally organizes others but struggles when a decision escapes their control.",
-      "weight": 2
+      "name": "Authoritarian",
+      "weight": 2,
+      "fields": {
+        "description": "Authoritarian, naturally organizes others but struggles when a decision escapes their control."
+      }
     },
     {
       "id": "miserly",
-      "value": "Miserly, hoards money, information, and favors until spending them becomes absolutely necessary.",
-      "weight": 2
+      "name": "Miserly",
+      "weight": 2,
+      "fields": {
+        "description": "Miserly, hoards money, information, and favors until spending them becomes absolutely necessary."
+      }
     },
     {
       "id": "talkative",
-      "value": "Talkative, readily shares stories and rumors but sometimes reveals protected information.",
-      "weight": 2
+      "name": "Talkative",
+      "weight": 2,
+      "fields": {
+        "description": "Talkative, readily shares stories and rumors but sometimes reveals protected information."
+      }
     },
     {
       "id": "smooth_talker",
-      "value": "A smooth talker who makes proposals attractive without directly lying about their flaws."
+      "name": "Persuasive without lying",
+      "fields": {
+        "description": "A smooth talker who makes proposals attractive without directly lying about their flaws."
+      }
     },
     {
       "id": "jaded",
-      "value": "Jaded, greets wonders and disasters with equal weariness while carefully watching everyone else.",
-      "weight": 2
+      "name": "Jaded",
+      "weight": 2,
+      "fields": {
+        "description": "Jaded, greets wonders and disasters with equal weariness while carefully watching everyone else."
+      }
     },
     {
       "id": "gruff_but_loyal",
-      "value": "Gruff but loyal, expresses affection through practical deeds rather than kind words.",
-      "weight": 2
+      "name": "Gruff but loyal",
+      "weight": 2,
+      "fields": {
+        "description": "Gruff but loyal, expresses affection through practical deeds rather than kind words."
+      }
     },
     {
       "id": "capricious",
-      "value": "Capricious, abruptly changes priorities and expects close companions to follow without explanation."
+      "name": "Capricious",
+      "fields": {
+        "description": "Capricious, abruptly changes priorities and expects close companions to follow without explanation."
+      }
     },
     {
       "id": "charismatic",
-      "value": "Charismatic, naturally draws attention but feels responsible for everyone who follows.",
-      "weight": 2
+      "name": "Charismatic",
+      "weight": 2,
+      "fields": {
+        "description": "Charismatic, naturally draws attention but feels responsible for everyone who follows."
+      }
     },
     {
       "id": "chaotically_unpredictable",
-      "value": "Wildly unpredictable, follows a private logic that others struggle to understand in the moment.",
-      "weight": 2
+      "name": "Wildly unpredictable",
+      "weight": 2,
+      "fields": {
+        "description": "Wildly unpredictable, follows a private logic that others struggle to understand in the moment."
+      }
     },
     {
       "id": "hot_tempered",
-      "value": "Hot-tempered, reacts sharply to provocation and regrets the damage after calming down.",
-      "weight": 2
+      "name": "Hot-tempered",
+      "weight": 2,
+      "fields": {
+        "description": "Hot-tempered, reacts sharply to provocation and regrets the damage after calming down."
+      }
     },
     {
       "id": "courageous",
-      "value": "Courageous, moves through fear and downplays danger to reassure others.",
-      "weight": 2
+      "name": "Courageous",
+      "weight": 2,
+      "fields": {
+        "description": "Courageous, moves through fear and downplays danger to reassure others."
+      }
     },
     {
       "id": "courteous",
-      "value": "Courteous even toward enemies and immediately notices every breach of etiquette.",
-      "weight": 2
+      "name": "Exacting courtesy",
+      "weight": 2,
+      "fields": {
+        "description": "Courteous even toward enemies and immediately notices every breach of etiquette."
+      }
     },
     {
       "id": "creative",
-      "value": "Creative, improvises unexpected solutions but quickly loses interest in implementing them."
+      "name": "Creative",
+      "fields": {
+        "description": "Creative, improvises unexpected solutions but quickly loses interest in implementing them."
+      }
     },
     {
       "id": "cultured",
-      "value": "Cultured, relates every situation to scholarship and forgets that others may not share the reference.",
-      "weight": 2
+      "name": "Cultured",
+      "weight": 2,
+      "fields": {
+        "description": "Cultured, relates every situation to scholarship and forgets that others may not share the reference."
+      }
     },
     {
       "id": "curious",
-      "value": "Curious, asks the question everyone avoids and willingly touches what should remain intact."
+      "name": "Curious",
+      "fields": {
+        "description": "Curious, asks the question everyone avoids and willingly touches what should remain intact."
+      }
     },
     {
       "id": "cynical",
-      "value": "Cynical about institutions, yet quietly helps people who prove sincere."
+      "name": "Cynical about institutions",
+      "fields": {
+        "description": "Cynical about institutions, yet quietly helps people who prove sincere."
+      }
     },
     {
       "id": "disorganized",
-      "value": "Disorganized, effortlessly finds personal belongings in chaos nobody else understands."
+      "name": "Disorganized",
+      "fields": {
+        "description": "Disorganized, effortlessly finds personal belongings in chaos nobody else understands."
+      }
     },
     {
       "id": "depressed",
-      "value": "Depressed and deeply discouraged, withdraws and struggles to find interest or energy for action."
+      "name": "Depressed and deeply discouraged",
+      "fields": {
+        "description": "Depressed and deeply discouraged, withdraws and struggles to find interest or energy for action."
+      }
     },
     {
       "id": "devoted",
-      "value": "Devoted, places a person or cause before comfort and misses when that loyalty is exploited."
+      "name": "Devoted",
+      "fields": {
+        "description": "Devoted, places a person or cause before comfort and misses when that loyalty is exploited."
+      }
     },
     {
       "id": "reserved",
-      "value": "Reserved, listens more than speaks and dislikes public recognition.",
-      "weight": 2
+      "name": "Reserved",
+      "weight": 2,
+      "fields": {
+        "description": "Reserved, listens more than speaks and dislikes public recognition."
+      }
     },
     {
       "id": "absent_minded",
-      "value": "Absent-minded, notices unusual details while forgetting obvious obligations.",
-      "weight": 2
+      "name": "Absent-minded",
+      "weight": 2,
+      "fields": {
+        "description": "Absent-minded, notices unusual details while forgetting obvious obligations."
+      }
     },
     {
       "id": "selfish",
-      "value": "Selfish about personal safety but surprisingly generous toward the few considered family.",
-      "weight": 2
+      "name": "Self-protective but loyal",
+      "weight": 2,
+      "fields": {
+        "description": "Selfish about personal safety but surprisingly generous toward the few considered family."
+      }
     },
     {
       "id": "emotional",
-      "value": "Emotional, openly shows joy, fear, and anger, making intentions easy to read."
+      "name": "Emotional",
+      "fields": {
+        "description": "Emotional, openly shows joy, fear, and anger, making intentions easy to read."
+      }
     },
     {
       "id": "energetic",
-      "value": "Energetic, turns every delay into activity and sometimes exhausts companions.",
-      "weight": 2
+      "name": "Energetic",
+      "weight": 2,
+      "fields": {
+        "description": "Energetic, turns every delay into activity and sometimes exhausts companions."
+      }
     },
     {
       "id": "enigmatic",
-      "value": "Enigmatic, answers with images and half-truths because being understood feels more dangerous than being judged."
+      "name": "Enigmatic",
+      "fields": {
+        "description": "Enigmatic, answers with images and half-truths because being understood feels more dangerous than being judged."
+      }
     },
     {
       "id": "ingeniously_lazy",
-      "value": "Ingeniously lazy, works hard to invent ways around repetitive labor.",
-      "weight": 2
+      "name": "Ingeniously lazy",
+      "weight": 2,
+      "fields": {
+        "description": "Ingeniously lazy, works hard to invent ways around repetitive labor."
+      }
     },
     {
       "id": "proud",
-      "value": "Proud, welcomes challenges but refuses help that might imply inadequacy."
+      "name": "Proud",
+      "fields": {
+        "description": "Proud, welcomes challenges but refuses help that might imply inadequacy."
+      }
     },
     {
       "id": "party_lover",
-      "value": "A party-lover who quickly starts celebrations and accepts every rough morning as the price of a good story."
+      "name": "Tireless celebrant",
+      "fields": {
+        "description": "A party-lover who quickly starts celebrations and accepts every rough morning as the price of a good story."
+      }
     },
     {
       "id": "devious",
-      "value": "Devious, bends rules rather than openly breaking them and always keeps an escape route.",
-      "weight": 2
+      "name": "Devious",
+      "weight": 2,
+      "fields": {
+        "description": "Devious, bends rules rather than openly breaking them and always keeps an escape route."
+      }
     },
     {
       "id": "blunt",
-      "value": "Blunt, speaks plainly and sometimes confuses honesty with tactlessness.",
-      "weight": 2
+      "name": "Blunt",
+      "weight": 2,
+      "fields": {
+        "description": "Blunt, speaks plainly and sometimes confuses honesty with tactlessness."
+      }
     },
     {
       "id": "outwardly_cold",
-      "value": "Outwardly cold, controls reactions to protect a much deeper attachment.",
-      "weight": 2
+      "name": "Outwardly cold",
+      "weight": 2,
+      "fields": {
+        "description": "Outwardly cold, controls reactions to protect a much deeper attachment."
+      }
     },
     {
       "id": "accident_prone",
-      "value": "Accident-prone in ordinary moments but surprisingly effective in a real crisis.",
-      "weight": 2
+      "name": "Crisis-ready klutz",
+      "weight": 2,
+      "fields": {
+        "description": "Accident-prone in ordinary moments but surprisingly effective in a real crisis."
+      }
     },
     {
       "id": "haughty",
-      "value": "Haughty, judges people by bearing and reputation until forced to revise the opinion.",
-      "weight": 2
+      "name": "Haughty",
+      "weight": 2,
+      "fields": {
+        "description": "Haughty, judges people by bearing and reputation until forced to revise the opinion."
+      }
     },
     {
       "id": "foolish",
-      "value": "Foolish, repeatedly misreads situations and confidently commits to poor decisions.",
-      "weight": 2
+      "name": "Foolish",
+      "weight": 2,
+      "fields": {
+        "description": "Foolish, repeatedly misreads situations and confidently commits to poor decisions."
+      }
     },
     {
       "id": "impatient_and_impulsive",
-      "value": "Impatient and impulsive, prefers an immediate bad decision to waiting without information."
+      "name": "Impatient and impulsive",
+      "fields": {
+        "description": "Impatient and impulsive, prefers an immediate bad decision to waiting without information."
+      }
     },
     {
       "id": "insolent",
-      "value": "Insolent, challenges authority by reflex but respects people who justify decisions clearly.",
-      "weight": 2
+      "name": "Insolent",
+      "weight": 2,
+      "fields": {
+        "description": "Insolent, challenges authority by reflex but respects people who justify decisions clearly."
+      }
     },
     {
       "id": "ironic",
-      "value": "Ironic, uses sarcasm for distance and becomes direct when someone is truly endangered."
+      "name": "Ironic",
+      "fields": {
+        "description": "Ironic, uses sarcasm for distance and becomes direct when someone is truly endangered."
+      }
     },
     {
       "id": "jealous",
-      "value": "Jealous, constantly compares their place with others while feeling ashamed of needing recognition.",
-      "weight": 2
+      "name": "Jealous",
+      "weight": 2,
+      "fields": {
+        "description": "Jealous, constantly compares their place with others while feeling ashamed of needing recognition."
+      }
     },
     {
       "id": "nervous",
-      "value": "Nervous, anticipates every possible failure and is often better prepared than the optimists.",
-      "weight": 2
+      "name": "Nervous",
+      "weight": 2,
+      "fields": {
+        "description": "Nervous, anticipates every possible failure and is often better prepared than the optimists."
+      }
     },
     {
       "id": "fair_minded",
-      "value": "Fair-minded, applies the same principles to allies and enemies even at personal cost.",
-      "weight": 2
+      "name": "Fair-minded",
+      "weight": 2,
+      "fields": {
+        "description": "Fair-minded, applies the same principles to allies and enemies even at personal cost."
+      }
     },
     {
       "id": "logical",
-      "value": "Logical, seeks verifiable causes and treats magic as an underdocumented problem."
+      "name": "Logical",
+      "fields": {
+        "description": "Logical, seeks verifiable causes and treats magic as an underdocumented problem."
+      }
     },
     {
       "id": "clumsy",
-      "value": "Clumsy, lacks physical ease but quickly recognizes people who feel awkward or excluded.",
-      "weight": 2
+      "name": "Clumsy",
+      "weight": 2,
+      "fields": {
+        "description": "Clumsy, lacks physical ease but quickly recognizes people who feel awkward or excluded."
+      }
     },
     {
       "id": "compulsively_orderly",
-      "value": "Compulsively orderly, relies on precise rituals of control that become fragile under pressure."
+      "name": "Compulsively orderly",
+      "fields": {
+        "description": "Compulsively orderly, relies on precise rituals of control that become fragile under pressure."
+      }
     },
     {
       "id": "mysterious",
-      "value": "Mysterious, protects the past with vague answers but never lies about present danger."
+      "name": "Mysterious",
+      "fields": {
+        "description": "Mysterious, protects the past with vague answers but never lies about present danger."
+      }
     },
     {
       "id": "modest",
-      "value": "Modest, minimizes achievements and gives away credit until someone claims the work."
+      "name": "Modest",
+      "fields": {
+        "description": "Modest, minimizes achievements and gives away credit until someone claims the work."
+      }
     },
     {
       "id": "compulsive_fabulist",
-      "value": "A compulsive fabulist who embellishes personal history and becomes trapped in invented stories.",
-      "weight": 2
+      "name": "Compulsive fabulist",
+      "weight": 2,
+      "fields": {
+        "description": "A compulsive fabulist who embellishes personal history and becomes trapped in invented stories."
+      }
     },
     {
       "id": "naive",
-      "value": "Naive, trusts first but remembers every betrayal for a long time.",
-      "weight": 2
+      "name": "Naive",
+      "weight": 2,
+      "fields": {
+        "description": "Naive, trusts first but remembers every betrayal for a long time."
+      }
     },
     {
       "id": "optimistic",
-      "value": "Optimistic, seeks opportunity in every crisis and refuses to let fatalism decide.",
-      "weight": 2
+      "name": "Optimistic",
+      "weight": 2,
+      "fields": {
+        "description": "Optimistic, seeks opportunity in every crisis and refuses to let fatalism decide."
+      }
     },
     {
       "id": "pacifist",
-      "value": "Pacifist, always seeks a nonviolent solution but prepares carefully in case it fails.",
-      "weight": 2
+      "name": "Pacifist",
+      "weight": 2,
+      "fields": {
+        "description": "Pacifist, always seeks a nonviolent solution but prepares carefully in case it fails."
+      }
     },
     {
       "id": "passionate",
-      "value": "Passionate, gives everything to one project and forgets the world while enthusiasm lasts.",
-      "weight": 2
+      "name": "Passionate",
+      "weight": 2,
+      "fields": {
+        "description": "Passionate, gives everything to one project and forgets the world while enthusiasm lasts."
+      }
     },
     {
       "id": "patient",
-      "value": "Patient, lets others reveal themselves and acts only at the decisive moment."
+      "name": "Patient",
+      "fields": {
+        "description": "Patient, lets others reveal themselves and acts only at the decisive moment."
+      }
     },
     {
       "id": "sexually_inappropriate",
-      "value": "Sexually inappropriate, frequently turns exchanges toward sexual concerns or innuendo and crosses social boundaries.",
-      "weight": 2
+      "name": "Sexually inappropriate",
+      "weight": 2,
+      "fields": {
+        "description": "Sexually inappropriate, frequently turns exchanges toward sexual concerns or innuendo and crosses social boundaries."
+      }
     },
     {
       "id": "fearful_but_cautious",
-      "value": "Fearful but cautious, avoids needless risk and often spots danger before bolder heroes.",
-      "weight": 2
+      "name": "Fearful but cautious",
+      "weight": 2,
+      "fields": {
+        "description": "Fearful but cautious, avoids needless risk and often spots danger before bolder heroes."
+      }
     },
     {
       "id": "protective",
-      "value": "Protective, takes responsibility for vulnerable people and struggles when unable to control every risk."
+      "name": "Protective",
+      "fields": {
+        "description": "Protective, takes responsibility for vulnerable people and struggles when unable to control every risk."
+      }
     },
     {
       "id": "resentful",
-      "value": "Resentful, remembers offenses exactly but may abandon revenge after sincere amends.",
-      "weight": 2
+      "name": "Resentful",
+      "weight": 2,
+      "fields": {
+        "description": "Resentful, remembers offenses exactly but may abandon revenge after sincere amends."
+      }
     },
     {
       "id": "rebellious",
-      "value": "Rebellious, rejects rules based only on tradition and demands that authority prove legitimacy.",
-      "weight": 2
+      "name": "Rebellious",
+      "weight": 2,
+      "fields": {
+        "description": "Rebellious, rejects rules based only on tradition and demands that authority prove legitimacy."
+      }
     },
     {
       "id": "dreamer",
-      "value": "A dreamer who imagines other lives and worlds, sometimes missing what happens nearby.",
-      "weight": 2
+      "name": "A dreamer who imagines other lives and worlds",
+      "weight": 2,
+      "fields": {
+        "description": "A dreamer who imagines other lives and worlds, sometimes missing what happens nearby."
+      }
     },
     {
       "id": "wise",
-      "value": "Wise, prefers the right question to an immediate answer and admits ignorance.",
-      "weight": 2
+      "name": "Wise",
+      "weight": 2,
+      "fields": {
+        "description": "Wise, prefers the right question to an immediate answer and admits ignorance."
+      }
     },
     {
       "id": "schizophrenic",
-      "value": "Schizophrenic, currently experiences disorganized or altered reality without that defining intentions or dangerousness."
+      "name": "Schizophrenic",
+      "fields": {
+        "description": "Schizophrenic, currently experiences disorganized or altered reality without that defining intentions or dangerousness."
+      }
     },
     {
       "id": "sensitive",
-      "value": "Sensitive, quickly reads a group’s emotions but readily absorbs its tensions.",
-      "weight": 2
+      "name": "Sensitive",
+      "weight": 2,
+      "fields": {
+        "description": "Sensitive, quickly reads a group’s emotions but readily absorbs its tensions."
+      }
     },
     {
       "id": "serious",
-      "value": "Serious, treats every commitment rigorously and does not always understand others’ need for levity."
+      "name": "Serious",
+      "fields": {
+        "description": "Serious, treats every commitment rigorously and does not always understand others’ need for levity."
+      }
     },
     {
       "id": "helpful",
-      "value": "Helpful, offers assistance before being asked and often hides personal exhaustion."
+      "name": "Helpful",
+      "fields": {
+        "description": "Helpful, offers assistance before being asked and often hides personal exhaustion."
+      }
     },
     {
       "id": "solitary",
-      "value": "Solitary, fiercely protects independence while secretly hoping to be invited to stay.",
-      "weight": 2
+      "name": "Solitary",
+      "weight": 2,
+      "fields": {
+        "description": "Solitary, fiercely protects independence while secretly hoping to be invited to stay."
+      }
     },
     {
       "id": "submissive",
-      "value": "Submissive, yields to confident authority and prefers following a decision to risking confrontation."
+      "name": "Submissive",
+      "fields": {
+        "description": "Submissive, yields to confident authority and prefers following a decision to risking confrontation."
+      }
     },
     {
       "id": "touchy",
-      "value": "Touchy, hears ordinary criticism as a global judgment but fiercely defends unfairly criticized people."
+      "name": "Touchy",
+      "fields": {
+        "description": "Touchy, hears ordinary criticism as a global judgment but fiercely defends unfairly criticized people."
+      }
     },
     {
       "id": "stubborn",
-      "value": "Stubborn, holds decisions past reason but remains an exceptionally constant ally.",
-      "weight": 2
+      "name": "Stubborn",
+      "weight": 2,
+      "fields": {
+        "description": "Stubborn, holds decisions past reason but remains an exceptionally constant ally."
+      }
     },
     {
       "id": "shy",
-      "value": "Shy, avoids attention while carefully preparing what to say if invited to speak.",
-      "weight": 2
+      "name": "Shy",
+      "weight": 2,
+      "fields": {
+        "description": "Shy, avoids attention while carefully preparing what to say if invited to speak."
+      }
     },
     {
       "id": "cheater",
-      "value": "A cheater who sees rules as negotiable obstacles and respects opponents who expose the method.",
-      "weight": 2
+      "name": "Rule-bending competitor",
+      "weight": 2,
+      "fields": {
+        "description": "A cheater who sees rules as negotiable obstacles and respects opponents who expose the method."
+      }
     },
     {
       "id": "boastful",
-      "value": "Boastful, exaggerates exploits but nearly always accepts the challenge needed to prove them.",
-      "weight": 2
+      "name": "Boastful",
+      "weight": 2,
+      "fields": {
+        "description": "Boastful, exaggerates exploits but nearly always accepts the challenge needed to prove them."
+      }
     },
     {
       "id": "violent",
-      "value": "Violent, turns to force too quickly and seeks moral justification afterward.",
-      "weight": 2
+      "name": "Violent",
+      "weight": 2,
+      "fields": {
+        "description": "Violent, turns to force too quickly and seeks moral justification afterward."
+      }
     },
     {
       "id": "bon_vivant",
-      "value": "A bon vivant who values food, company, and comfort without abandoning friends when the party ends."
+      "name": "A bon vivant who values food",
+      "fields": {
+        "description": "A bon vivant who values food, company, and comfort without abandoning friends when the party ends."
+      }
     }
   ]
 }

@@ -1,124 +1,123 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "valuables",
   "visibility": "internal",
   "name": "Objets de valeur",
   "description": "Richesses transportables, marchandises, objets de prestige et pièces de collection",
   "entrySchema": {
-    "type": "fields",
-    "required": ["name", "description"]
+    "required": ["description"]
   },
   "entries": [
     {
       "id": "coin_purse",
+      "name": "Bourse de pièces",
       "fields": {
-        "name": "Bourse de pièces",
         "description": "Une bourse de monnaie locale mêlant petites pièces courantes et devises plus difficiles à écouler."
       }
     },
     {
       "id": "precious_jewel",
+      "name": "Bijou précieux",
       "fields": {
-        "name": "Bijou précieux",
         "description": "Une pièce de joaillerie identifiable, facile à transporter mais risquée à revendre."
       }
     },
     {
       "id": "work_of_art",
+      "name": "Œuvre d’art",
       "fields": {
-        "name": "Œuvre d’art",
         "description": "Un tableau, une sculpture ou une pièce décorative dont la valeur culturelle est reconnue."
       }
     },
     {
       "id": "ceremonial_clothing",
+      "name": "Vêtement de cérémonie",
       "fields": {
-        "name": "Vêtement de cérémonie",
         "description": "Une robe, cape, paire de bottes ou paire de gants associée à un rang ou une institution."
       }
     },
     {
       "id": "unfinished_crown",
+      "name": "Couronne inachevée",
       "fields": {
-        "name": "Couronne inachevée",
         "description": "Un symbole d’autorité auquel manque une gemme, une inscription ou une partie essentielle."
       }
     },
     {
       "id": "ornate_comb",
+      "name": "Peigne ouvragé",
       "fields": {
-        "name": "Peigne ouvragé",
         "description": "Un objet personnel décoré d’un blason discret ou d’une inscription intime."
       }
     },
     {
       "id": "collectible_figurine",
+      "name": "Figurine de collection",
       "fields": {
-        "name": "Figurine de collection",
         "description": "Une pièce d’une série recherchée, insignifiante seule mais précieuse pour la bonne personne."
       }
     },
     {
       "id": "gemstone",
+      "name": "Pierre précieuse",
       "weight": 4,
       "fields": {
-        "name": "Pierre précieuse",
         "description": "Une pierre brute ou taillée dont la valeur dépend de sa qualité et de la demande locale."
       }
     },
     {
       "id": "antique_coins",
+      "name": "Monnaies anciennes",
       "weight": 3,
       "fields": {
-        "name": "Monnaies anciennes",
         "description": "Des pièces anciennes qui valent davantage pour les collectionneurs que pour leur valeur faciale."
       }
     },
     {
       "id": "decorated_silverware",
+      "name": "Argenterie décorée",
       "weight": 3,
       "fields": {
-        "name": "Argenterie décorée",
         "description": "Un petit service assorti portant un motif ou un blason identifiable."
       }
     },
     {
       "id": "luxury_fabric",
+      "name": "Étoffe de luxe",
       "weight": 3,
       "fields": {
-        "name": "Étoffe de luxe",
         "description": "Un rouleau compact de tissu fin destiné au commerce ou à des vêtements cérémoniels."
       }
     },
     {
       "id": "small_sculpture",
+      "name": "Petite sculpture",
       "weight": 2,
       "fields": {
-        "name": "Petite sculpture",
         "description": "Une œuvre transportable dont l’artiste, le sujet ou la matière détermine la valeur."
       }
     },
     {
       "id": "rare_book",
+      "name": "Livre rare",
       "weight": 2,
       "fields": {
-        "name": "Livre rare",
         "description": "Un volume complet et recherché par les spécialistes et les collectionneurs."
       }
     },
     {
       "id": "ceremonial_jewelry",
+      "name": "Bijoux cérémoniels",
       "weight": 2,
       "fields": {
-        "name": "Bijoux cérémoniels",
         "description": "Des ornements associés à un rang, une charge ou une tradition officielle."
       }
     },
     {
       "id": "valuable_trade_goods",
+      "name": "Marchandises de valeur",
       "weight": 4,
       "fields": {
-        "name": "Marchandises de valeur",
         "description": "Des biens compacts dont le prix de revente varie selon les marchés locaux."
       }
     }

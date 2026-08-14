@@ -1,48 +1,48 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "outlander",
   "visibility": "internal",
   "name": "Outlander archetypes",
   "description": "Wilderness and frontier roles",
   "entrySchema": {
-    "type": "text"
+    "required": []
   },
   "entries": [
     {
       "id": "hunter",
-      "value": "Hunter"
+      "name": "Hunter"
     },
     {
       "id": "nomad",
-      "value": "Nomad"
+      "name": "Nomad"
     },
     {
       "id": "hermit",
-      "value": "Hermit"
+      "name": "Hermit"
     },
     {
       "id": "tribal_envoy",
-      "value": "Tribal envoy"
+      "name": "Tribal envoy"
     },
     {
       "id": "frontier_guide",
-      "value": "Frontier guide"
+      "name": "Frontier guide"
     },
     {
       "id": "ranger",
-      "value": "Ranger"
+      "name": "Ranger"
     },
     {
       "id": "wilderness_healer",
-      "value": "Wilderness healer"
+      "name": "Wilderness healer"
     },
     {
       "id": "tracker",
-      "value": "Tracker"
+      "name": "Tracker"
     },
     {
       "id": "wilderness_scout",
-      "value": "Wilderness scout"
+      "name": "Wilderness scout"
     }
   ]
 }

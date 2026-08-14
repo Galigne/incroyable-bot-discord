@@ -1,4 +1,7 @@
-const { generatorSchemaError } = require('./assertions');
+const {
+	generatorSchemaError,
+	normalizeDisplayName,
+} = require('./assertions');
 const {
 	validateCreatureGenerationRelationships,
 } = require('./creatureRelationshipValidation');
@@ -15,6 +18,7 @@ function validateGeneratorRelationships(catalog) {
 		throw new TypeError('Generator relationship validation requires a catalog map.');
 	}
 	const modifierGraph = new Map();
+	validatePublicGeneratorNames(catalog);
 	for (const generator of catalog.values()) {
 		validateInlineRelationships(generator, catalog);
 		validateStructuralRoutes(generator, catalog);
@@ -92,7 +96,11 @@ function validateInlineRelationships(generator, catalog) {
 						`Generator ${generator.id} references an unknown inline entry.`,
 					);
 				}
-				if (reference.field && !source.entrySchema.required?.includes(reference.field)) {
+				if (
+					reference.field
+					&& reference.field !== 'name'
+					&& !source.entrySchema.required.includes(reference.field)
+				) {
 					throw generatorSchemaError(
 						'INVALID_GENERATOR_SELECTOR',
 						`Generator ${generator.id} references an unknown inline field.`,
@@ -145,15 +153,15 @@ function validateSelectorForGenerator(selector, source, ownerId) {
 	if (selector === 'display') {
 		return;
 	}
-	if (selector === 'value' && source.entrySchema.type === 'text') {
+	if (selector === 'value' && source.entrySchema.required.length === 0) {
 		return;
 	}
-	if (selector === 'fields' && source.entrySchema.type === 'fields') {
+	if (selector === 'fields' && source.entrySchema.required.length > 0) {
 		return;
 	}
-	if (selector.startsWith('fields.') && source.entrySchema.type === 'fields') {
+	if (selector.startsWith('fields.')) {
 		const field = selector.slice('fields.'.length);
-		if (source.entrySchema.required.includes(field)) {
+		if (field === 'name' || source.entrySchema.required.includes(field)) {
 			return;
 		}
 	}
@@ -161,6 +169,24 @@ function validateSelectorForGenerator(selector, source, ownerId) {
 		'INVALID_GENERATOR_SELECTOR',
 		`Generator ${ownerId} uses a selector unsupported by ${source.id}.`,
 	);
+}
+
+function validatePublicGeneratorNames(catalog) {
+	const names = new Map();
+	for (const generator of catalog.values()) {
+		if (generator.visibility !== 'public') {
+			continue;
+		}
+		const normalizedName = normalizeDisplayName(generator.name);
+		const existingId = names.get(normalizedName);
+		if (existingId) {
+			throw generatorSchemaError(
+				'DUPLICATE_PUBLIC_GENERATOR_NAME',
+				`Public generators ${existingId} and ${generator.id} have ambiguous names.`,
+			);
+		}
+		names.set(normalizedName, generator.id);
+	}
 }
 
 module.exports = { validateGeneratorRelationships };

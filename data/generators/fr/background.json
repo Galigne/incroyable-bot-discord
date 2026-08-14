@@ -1,163 +1,162 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "background",
   "visibility": "public",
   "name": "Profils",
   "description": "Catégories de profils de personnage",
   "entrySchema": {
-    "type": "fields",
-    "required": ["name", "description"]
+    "required": ["description"]
   },
   "entries": [
     {
       "id": "criminal",
+      "name": "Criminel",
       "weight": 4,
       "fields": {
-        "name": "Criminel",
         "description": "Hors-la-loi, voleurs, contrebandiers, fonctionnaires corrompus et membres du crime organisé"
       },
       "generator": "criminal"
     },
     {
       "id": "adventurer",
+      "name": "Aventurier",
       "weight": 5,
       "fields": {
-        "name": "Aventurier",
         "description": "Explorateurs, mercenaires, chasseurs de monstres, pèlerins et chasseurs de trésors"
       },
       "generator": "adventurer"
     },
     {
       "id": "noble",
+      "name": "Noble",
       "weight": 2,
       "fields": {
-        "name": "Noble",
         "description": "Aristocrates, courtisans, héritiers et petits seigneurs"
       },
       "generator": "noble"
     },
     {
       "id": "peasant",
+      "name": "Paysan",
       "weight": 5,
       "fields": {
-        "name": "Paysan",
         "description": "Agriculteurs, éleveurs et travailleurs ruraux"
       },
       "generator": "peasant"
     },
     {
       "id": "artisan",
+      "name": "Artisan",
       "weight": 5,
       "fields": {
-        "name": "Artisan",
         "description": "Forgerons, charpentiers, tailleurs, alchimistes et autres artisans"
       },
       "generator": "artisan"
     },
     {
       "id": "merchant",
+      "name": "Marchand",
       "weight": 5,
       "fields": {
-        "name": "Marchand",
         "description": "Négociants, boutiquiers, caravaniers et agents commerciaux"
       },
       "generator": "merchant"
     },
     {
       "id": "scholar",
+      "name": "Érudit",
       "weight": 3,
       "fields": {
-        "name": "Érudit",
         "description": "Étudiants, chercheurs, scribes et bibliothécaires"
       },
       "generator": "scholar"
     },
     {
       "id": "religious",
+      "name": "Religieux",
       "weight": 3,
       "fields": {
-        "name": "Religieux",
         "description": "Prêtres, moines, serviteurs de temple et pèlerins"
       },
       "generator": "religious"
     },
     {
       "id": "military",
+      "name": "Militaire",
       "weight": 4,
       "fields": {
-        "name": "Militaire",
         "description": "Soldats, gardes, officiers et vétérans"
       },
       "generator": "military"
     },
     {
       "id": "outlander",
+      "name": "Habitant des terres sauvages",
       "weight": 3,
       "fields": {
-        "name": "Habitant des terres sauvages",
         "description": "Chasseurs, nomades, ermites et membres de peuples tribaux"
       },
       "generator": "outlander"
     },
     {
       "id": "sailor",
+      "name": "Marin",
       "weight": 4,
       "fields": {
-        "name": "Marin",
         "description": "Marins, pêcheurs, pirates et dockers"
       },
       "generator": "sailor"
     },
     {
       "id": "performer",
+      "name": "Artiste",
       "weight": 3,
       "fields": {
-        "name": "Artiste",
         "description": "Musiciens, comédiens, conteurs et artistes de spectacle"
       },
       "generator": "performer"
     },
     {
       "id": "servant",
+      "name": "Serviteur",
       "weight": 4,
       "fields": {
-        "name": "Serviteur",
         "description": "Domestiques, assistants personnels et ouvriers"
       },
       "generator": "servant"
     },
     {
       "id": "official",
+      "name": "Fonctionnaire",
       "weight": 3,
       "fields": {
-        "name": "Fonctionnaire",
         "description": "Administrateurs, diplomates, collecteurs d’impôts et juges"
       },
       "generator": "official"
     },
     {
       "id": "mage",
+      "name": "Mage",
       "weight": 2,
       "fields": {
-        "name": "Mage",
         "description": "Apprentis, mages autodidactes et chercheurs en magie"
       },
       "generator": "mage"
     },
     {
       "id": "exile",
+      "name": "Exilé",
       "weight": 3,
       "fields": {
-        "name": "Exilé",
         "description": "Réfugiés, fugitifs, nobles bannis et survivants déplacés"
       },
       "generator": "exile"
     },
     {
       "id": "urchin",
+      "name": "Enfant des rues",
       "weight": 3,
       "fields": {
-        "name": "Enfant des rues",
         "description": "Orphelins, mendiants, enfants des rues et récupérateurs"
       },
       "generator": "urchin"

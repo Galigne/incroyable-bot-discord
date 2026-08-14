@@ -1,154 +1,153 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "food_and_drink",
   "visibility": "internal",
   "name": "Food and drink",
   "description": "Ordinary and unusual provisions, meals, and drinks",
   "entrySchema": {
-    "type": "fields",
-    "required": ["name", "description"]
+    "required": ["description"]
   },
   "entries": [
     {
       "id": "three_travel_rations",
+      "name": "Three travel rations",
       "weight": 8,
       "fields": {
-        "name": "Three travel rations",
         "description": "Compact food sufficient for three days."
       }
     },
     {
       "id": "exotic_fruit",
+      "name": "Exotic Fruit",
       "fields": {
-        "name": "Exotic Fruit",
         "description": "A rare fruit whose seed, flavor, or properties interest several buyers."
       }
     },
     {
       "id": "bread_and_hard_cheese",
+      "name": "Bread and hard cheese",
       "weight": 8,
       "fields": {
-        "name": "Bread and hard cheese",
         "description": "A simple meal that keeps well and is suited to travel."
       }
     },
     {
       "id": "dried_meat",
+      "name": "Dried meat",
       "weight": 7,
       "fields": {
-        "name": "Dried meat",
         "description": "Salted strips that keep well in a pack."
       }
     },
     {
       "id": "preserved_fruit",
+      "name": "Preserved fruit",
       "weight": 6,
       "fields": {
-        "name": "Preserved fruit",
         "description": "Dried or sugared fruit packed for a long journey."
       }
     },
     {
       "id": "fresh_provisions",
+      "name": "Fresh provisions",
       "weight": 5,
       "fields": {
-        "name": "Fresh provisions",
         "description": "Seasonal produce and other food meant to be eaten soon."
       }
     },
     {
       "id": "strong_ale",
+      "name": "Strong ale",
       "weight": 5,
       "fields": {
-        "name": "Strong ale",
         "description": "A robust local brew sold in a stoppered jug."
       }
     },
     {
       "id": "local_wine",
+      "name": "Local wine",
       "weight": 4,
       "fields": {
-        "name": "Local wine",
         "description": "A bottle whose quality and reputation depend on the region."
       }
     },
     {
       "id": "herbal_tea",
+      "name": "Herbal tea",
       "weight": 5,
       "fields": {
-        "name": "Herbal tea",
         "description": "A fragrant blend prepared for warmth, hospitality, or mild comfort."
       }
     },
     {
       "id": "regional_delicacy",
+      "name": "Regional delicacy",
       "weight": 2,
       "fields": {
-        "name": "Regional delicacy",
         "description": "A distinctive dish prized locally and surprising to outsiders."
       }
     },
     {
       "id": "smoked_fish",
+      "name": "Smoked fish",
       "weight": 6,
       "fields": {
-        "name": "Smoked fish",
         "description": "Firm salted fish smoked for travel or winter stores."
       }
     },
     {
       "id": "pepper_root_stew",
+      "name": "Pepper-root stew",
       "weight": 3,
       "fields": {
-        "name": "Pepper-root stew",
         "description": "A thick stew made with a sharp, peppery root and whatever vegetables are available."
       }
     },
     {
       "id": "mushroom_broth",
+      "name": "Mushroom broth",
       "weight": 4,
       "fields": {
-        "name": "Mushroom broth",
         "description": "A dark savory broth made from several varieties of edible mushrooms."
       }
     },
     {
       "id": "honey_cakes",
+      "name": "Honey cakes",
       "weight": 4,
       "fields": {
-        "name": "Honey cakes",
         "description": "Small dense cakes sweetened with honey and easy to carry."
       }
     },
     {
       "id": "spiced_nuts",
+      "name": "Spiced nuts",
       "weight": 5,
       "fields": {
-        "name": "Spiced nuts",
         "description": "Roasted nuts coated with salt and a warming blend of spices."
       }
     },
     {
       "id": "pickled_vegetables",
+      "name": "Pickled vegetables",
       "weight": 5,
       "fields": {
-        "name": "Pickled vegetables",
         "description": "Crisp seasonal vegetables preserved in a sharp brine."
       }
     },
     {
       "id": "fermented_milk",
+      "name": "Fermented milk",
       "weight": 3,
       "fields": {
-        "name": "Fermented milk",
         "description": "A tart cultured drink served plain or lightly salted."
       }
     },
     {
       "id": "strong_herbal_tonic",
+      "name": "Strong herbal tonic",
       "weight": 2,
       "fields": {
-        "name": "Strong herbal tonic",
         "description": "A bitter nonmagical drink brewed from roots and herbs for its sharp flavor."
       }
     }

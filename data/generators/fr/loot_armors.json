@@ -1,13 +1,11 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "armors",
   "visibility": "internal",
   "name": "Armures",
   "description": "Armures de chaque type et de chaque rareté",
   "entrySchema": {
-    "type": "fields",
     "required": [
-      "name",
       "type",
       "rarity",
       "description",
@@ -18,9 +16,9 @@
   "entries": [
     {
       "id": "common_light_armor",
+      "name": "Armure légère commune",
       "weight": 8,
       "fields": {
-        "name": "Armure légère commune",
         "type": "légère",
         "rarity": "commune",
         "description": "Vêtements ordinaires ou rembourrage léger qui préservent la mobilité mais n’offrent presque aucun PR.",
@@ -30,9 +28,9 @@
     },
     {
       "id": "uncommon_light_armor",
+      "name": "Armure légère peu commune",
       "weight": 5,
       "fields": {
-        "name": "Armure légère peu commune",
         "type": "légère",
         "rarity": "peu commune",
         "description": "Vêtements renforcés bien ajustés offrant une protection modeste.",
@@ -42,9 +40,9 @@
     },
     {
       "id": "rare_light_armor",
+      "name": "Armure légère rare",
       "weight": 3,
       "fields": {
-        "name": "Armure légère rare",
         "type": "légère",
         "rarity": "rare",
         "description": "Armure souple de qualité supérieure, confectionnée dans un matériau exceptionnellement résistant.",
@@ -54,9 +52,9 @@
     },
     {
       "id": "epic_light_armor",
+      "name": "Armure légère épique",
       "weight": 2,
       "fields": {
-        "name": "Armure légère épique",
         "type": "légère",
         "rarity": "épique",
         "description": "Protection remarquable et presque sans poids, réalisée grâce à des techniques rares.",
@@ -66,8 +64,8 @@
     },
     {
       "id": "legendary_light_armor",
+      "name": "Armure légère légendaire",
       "fields": {
-        "name": "Armure légère légendaire",
         "type": "légère",
         "rarity": "légendaire",
         "description": "Une seconde peau unique offrant une protection exceptionnelle sans restreindre le mouvement.",
@@ -77,9 +75,9 @@
     },
     {
       "id": "common_medium_armor",
+      "name": "Armure intermédiaire commune",
       "weight": 8,
       "fields": {
-        "name": "Armure intermédiaire commune",
         "type": "intermédiaire",
         "rarity": "commune",
         "description": "Protection standard en cuir renforcé, en écailles ou en cotte de mailles partielle.",
@@ -89,9 +87,9 @@
     },
     {
       "id": "uncommon_medium_armor",
+      "name": "Armure intermédiaire peu commune",
       "weight": 5,
       "fields": {
-        "name": "Armure intermédiaire peu commune",
         "type": "intermédiaire",
         "rarity": "peu commune",
         "description": "Armure professionnelle fiable offrant un bon équilibre entre protection et mobilité.",
@@ -101,9 +99,9 @@
     },
     {
       "id": "rare_medium_armor",
+      "name": "Armure intermédiaire rare",
       "weight": 3,
       "fields": {
-        "name": "Armure intermédiaire rare",
         "type": "intermédiaire",
         "rarity": "rare",
         "description": "Armure multicouche de maître offrant une excellente couverture.",
@@ -113,9 +111,9 @@
     },
     {
       "id": "epic_medium_armor",
+      "name": "Armure intermédiaire épique",
       "weight": 2,
       "fields": {
-        "name": "Armure intermédiaire épique",
         "type": "intermédiaire",
         "rarity": "épique",
         "description": "Armure exceptionnelle renforcée par des matériaux ou runes magiques.",
@@ -125,8 +123,8 @@
     },
     {
       "id": "legendary_medium_armor",
+      "name": "Armure intermédiaire légendaire",
       "fields": {
-        "name": "Armure intermédiaire légendaire",
         "type": "intermédiaire",
         "rarity": "légendaire",
         "description": "Armure renommée offrant une protection extraordinaire sans devenir encombrante.",
@@ -136,9 +134,9 @@
     },
     {
       "id": "common_heavy_armor",
+      "name": "Armure lourde commune",
       "weight": 8,
       "fields": {
-        "name": "Armure lourde commune",
         "type": "lourde",
         "rarity": "commune",
         "description": "Une armure de plates complète et basique, ou une protection massive équivalente.",
@@ -148,9 +146,9 @@
     },
     {
       "id": "uncommon_heavy_armor",
+      "name": "Armure lourde peu commune",
       "weight": 5,
       "fields": {
-        "name": "Armure lourde peu commune",
         "type": "lourde",
         "rarity": "peu commune",
         "description": "Armure lourde soigneusement ajustée, dotée d’articulations renforcées.",
@@ -160,9 +158,9 @@
     },
     {
       "id": "rare_heavy_armor",
+      "name": "Armure lourde rare",
       "weight": 3,
       "fields": {
-        "name": "Armure lourde rare",
         "type": "lourde",
         "rarity": "rare",
         "description": "Armure lourde de maître forgée dans un métal supérieur ou constituée de plaques de monstre.",
@@ -172,9 +170,9 @@
     },
     {
       "id": "epic_heavy_armor",
+      "name": "Armure lourde épique",
       "weight": 2,
       "fields": {
-        "name": "Armure lourde épique",
         "type": "lourde",
         "rarity": "épique",
         "description": "Formidable armure runique capable d’encaisser des dégâts extraordinaires.",
@@ -184,8 +182,8 @@
     },
     {
       "id": "legendary_heavy_armor",
+      "name": "Armure lourde légendaire",
       "fields": {
-        "name": "Armure lourde légendaire",
         "type": "lourde",
         "rarity": "légendaire",
         "description": "Armure unique semblable à une forteresse, célébrée dans les chants et les chroniques militaires.",

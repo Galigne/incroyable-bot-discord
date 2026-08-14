@@ -1,56 +1,56 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "criminal",
   "visibility": "internal",
   "name": "Criminal archetypes",
   "description": "Underworld occupations and roles",
   "entrySchema": {
-    "type": "text"
+    "required": []
   },
   "entries": [
     {
       "id": "pickpocket",
-      "value": "Pickpocket"
+      "name": "Pickpocket"
     },
     {
       "id": "smuggler",
-      "value": "Smuggler"
+      "name": "Smuggler"
     },
     {
       "id": "bandit",
-      "value": "Bandit"
+      "name": "Bandit"
     },
     {
       "id": "fence",
-      "value": "Fence"
+      "name": "Fence"
     },
     {
       "id": "forger",
-      "value": "Forger"
+      "name": "Forger"
     },
     {
       "id": "poisoner",
-      "value": "Poisoner"
+      "name": "Poisoner"
     },
     {
       "id": "assassin",
-      "value": "Assassin"
+      "name": "Assassin"
     },
     {
       "id": "pirate",
-      "value": "Pirate"
+      "name": "Pirate"
     },
     {
       "id": "corrupt_official",
-      "value": "Corrupt official"
+      "name": "Corrupt official"
     },
     {
       "id": "blackmailer",
-      "value": "Blackmailer"
+      "name": "Blackmailer"
     },
     {
       "id": "grave_robber",
-      "value": "Grave robber"
+      "name": "Grave robber"
     }
   ]
 }

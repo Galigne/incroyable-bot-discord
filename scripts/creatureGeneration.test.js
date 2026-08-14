@@ -101,14 +101,13 @@ test('production creature sources are strict localized types backed by profiles'
 			const generator = generatorCatalog.getGenerator(generatorId, locale);
 			assert.equal(generator.visibility, 'internal');
 			assert.deepEqual(generator.entrySchema, {
-				type: 'fields',
-				required: ['name', 'description'],
+				required: ['description'],
 			});
 			assert.ok(generator.entries.length > 0);
 			for (const entry of generator.entries) {
 				assert.ok(Number.isFinite(entry.weight) && entry.weight > 0);
-				assert.deepEqual(Object.keys(entry.fields), ['name', 'description']);
-				assert.ok(entry.fields.name);
+				assert.deepEqual(Object.keys(entry.fields), ['description']);
+				assert.ok(entry.name);
 				assert.ok(entry.fields.description);
 				assert.ok(Array.isArray(entry.generation.traits));
 				assert.ok(entry.generation.traits.length <= 25);
@@ -134,19 +133,18 @@ test('production creature sources are strict localized types backed by profiles'
 	const traits = generatorCatalog.getGenerator('traits', 'en');
 	assert.equal(traits.visibility, 'public');
 	assert.deepEqual(traits.entrySchema, {
-		type: 'fields',
-		required: ['name', 'description'],
+		required: ['description'],
 	});
 	assert.ok(traits.entries.every(entry => (
-		entry.fields.name && entry.fields.description
+		entry.name && entry.fields.description
 	)));
 
 	for (const generatorId of ['modifier_character', 'modifier_creature']) {
 		const modifier = generatorCatalog.getGenerator(generatorId, 'en');
 		assert.equal(modifier.visibility, 'internal');
 		assert.ok(modifier.entries.every(entry => (
-			JSON.stringify(Object.keys(entry.fields)) === JSON.stringify([
-				'name',
+			entry.name
+			&& JSON.stringify(Object.keys(entry.fields)) === JSON.stringify([
 				'description',
 			])
 		)));
@@ -693,7 +691,7 @@ test('/gen-creature is DM-only and atomically persists a complete generated crea
 		expectedFollowUps.map(followUp => followUp.embeds[0].toJSON()),
 	);
 	assert.equal(response.embeds[0].toJSON().title, stored.displayName);
-	const typeName = getCreatureRoute(generatedType, 'en').fields.name;
+	const typeName = getCreatureRoute(generatedType, 'en').name;
 	assert.ok(createCreatureFieldEmbed(stored, 'identity', 'en').toJSON().fields
 		.some(field => (
 			field.name === 'Archetype'
@@ -728,7 +726,7 @@ test('/gen-creature type autocomplete uses localized router entries and stable I
 	assert.ok(choice);
 	assert.equal(
 		choice.name,
-		`${localizedRoute.fields.name} — ${localizedRoute.fields.description}`.slice(0, 100),
+		`${localizedRoute.name} — ${localizedRoute.fields.description}`.slice(0, 100),
 	);
 });
 
@@ -951,7 +949,7 @@ function generateLocalizedEntry(type, entryId, locale) {
 
 function getTraitDisplays(locale) {
 	return new Set(generatorCatalog.getGenerator('traits', locale).entries.map(entry => (
-		`${entry.fields.name} — ${entry.fields.description}`
+		`${entry.name} — ${entry.fields.description}`
 	)));
 }
 

@@ -1,46 +1,45 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "site_modifier_building",
   "visibility": "internal",
   "name": "Historical site modifiers",
   "description": "Descriptive historical variations compatible with specific location generators",
   "entrySchema": {
-    "type": "fields",
-    "required": ["name", "description"]
+    "required": ["description"]
   },
   "entries": [
     {
       "id": "local_center",
+      "name": "Local Center",
       "fields": {
-        "name": "Local Center",
         "description": "The place is the community’s most important and concentrates resources, reputation, and local conflict."
       }
     },
     {
       "id": "national_institution",
+      "name": "National Institution",
       "fields": {
-        "name": "National Institution",
         "description": "The place influences the whole country and benefits from exceptional political protection."
       }
     },
     {
       "id": "continental_site",
+      "name": "Continental Site",
       "fields": {
-        "name": "Continental Site",
         "description": "The place is unique on the continent and attracts experts, pilgrims, spies, and foreign powers."
       }
     },
     {
       "id": "closed_after_an_incident",
+      "name": "Closed After an Incident",
       "fields": {
-        "name": "Closed After an Incident",
         "description": "Official access is forbidden during an inquiry, contamination, or crisis that authorities minimize."
       }
     },
     {
       "id": "under_renovation",
+      "name": "Under Renovation",
       "fields": {
-        "name": "Under Renovation",
         "description": "Part of the place is inaccessible while workers, scaffolding, and old plans create new routes."
       }
     }

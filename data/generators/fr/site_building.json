@@ -1,342 +1,341 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "building",
   "visibility": "internal",
   "name": "Bâtiments",
   "description": "Bâtiments urbains et ruraux dotés d’un intérêt immédiat",
   "entrySchema": {
-    "type": "fields",
-    "required": ["name", "description"]
+    "required": ["description"]
   },
   "entries": [
     {
       "id": "blacksmith",
+      "name": "Forge",
       "weight": 3,
       "fields": {
-        "name": "Forge",
         "description": "atelier de pierre brûlant qui accepte les commandes tout en réparant discrètement des armes interdites."
       }
     },
     {
       "id": "public_bathhouse",
+      "name": "Bains publics",
       "weight": 3,
       "fields": {
-        "name": "Bains publics",
         "description": "bassins carrelés, casiers en location, personnel friand de commérages et salles de réunion discrètes."
       }
     },
     {
       "id": "brothel",
+      "name": "Maison close",
       "weight": 3,
       "fields": {
-        "name": "Maison close",
         "description": "établissement surveillé et tenu avec professionnalisme, qui garantit compagnie, renseignements et confidentialité absolue."
       }
     },
     {
       "id": "temple",
+      "name": "Temple",
       "weight": 3,
       "fields": {
-        "name": "Temple",
         "description": "sanctuaire public comprenant un autel, une cuisine caritative, des archives et une crypte à l’accès restreint."
       }
     },
     {
       "id": "apothecary",
+      "name": "Apothicairerie",
       "weight": 2,
       "fields": {
-        "name": "Apothicairerie",
         "description": "étagères odorantes chargées de remèdes, de poisons, de créatures conservées et d’expériences mal étiquetées."
       }
     },
     {
       "id": "guildhall",
+      "name": "Maison de guilde",
       "weight": 2,
       "fields": {
-        "name": "Maison de guilde",
         "description": "bureaux, salles d’entraînement, tableau des contrats et salle de réunion réservée aux membres."
       }
     },
     {
       "id": "warehouse",
+      "name": "Entrepôt",
       "weight": 2,
       "fields": {
-        "name": "Entrepôt",
         "description": "cargaisons empilées, passerelles en hauteur, gardiens de nuit et livraison absente du registre."
       }
     },
     {
       "id": "theater",
+      "name": "Théâtre",
       "weight": 2,
       "fields": {
-        "name": "Théâtre",
         "description": "salle richement ornée, coulisses exiguës, ateliers et loges royales dissimulées."
       }
     },
     {
       "id": "schoolhouse",
+      "name": "École",
       "weight": 2,
       "fields": {
-        "name": "École",
         "description": "unique salle de classe surchargée dont l’enseignant connaît tous les secrets de famille du quartier."
       }
     },
     {
       "id": "mill",
+      "name": "Moulin",
       "weight": 2,
       "fields": {
-        "name": "Moulin",
         "description": "lieu de travail mû par l’eau ou le vent, entouré de poussière, de vacarme, d’ouvriers et de mécanismes en mouvement."
       }
     },
     {
       "id": "courthouse",
+      "name": "Palais de justice",
       "weight": 2,
       "fields": {
-        "name": "Palais de justice",
         "description": "salle d’audience publique, pièces réservées aux preuves, archives judiciaires et bureaux privés des juges."
       }
     },
     {
       "id": "wizards_tower",
+      "name": "Tour de mage",
       "weight": 1,
       "fields": {
-        "name": "Tour de mage",
         "description": "demeure verticale excentrique dont l’agencement intérieur ne respecte pas les dimensions extérieures."
       }
     },
     {
       "id": "embassy",
+      "name": "Ambassade",
       "weight": 1,
       "fields": {
-        "name": "Ambassade",
         "description": "résidence noble fortifiée, soumise aux lois d’un pays étranger et placée sous surveillance constante."
       }
     },
     {
       "id": "observatory",
+      "name": "Observatoire",
       "weight": 1,
       "fields": {
-        "name": "Observatoire",
         "description": "laboratoire coiffé d’un dôme qui surveille les étoiles, le climat et quelque chose qui approche depuis le ciel."
       }
     },
     {
       "id": "abandoned_manor",
+      "name": "Manoir abandonné",
       "weight": 1,
       "fields": {
-        "name": "Manoir abandonné",
         "description": "domaine délabré resté entièrement meublé depuis la disparition de ses occupants en plein dîner."
       }
     },
     {
       "id": "underground_fighting_pit",
+      "name": "Arène clandestine",
       "weight": 1,
       "fields": {
-        "name": "Arène clandestine",
         "description": "enceinte dissimulée comprenant salles de paris, guérisseurs, cages et fonctionnaires soudoyés."
       }
     },
     {
       "id": "municipal_museum",
+      "name": "Musée municipal",
       "fields": {
-        "name": "Musée municipal",
         "description": "Une collection locale mal surveillée contient un objet dont l’origine officielle est mensongère."
       }
     },
     {
       "id": "library",
+      "name": "Bibliothèque",
       "fields": {
-        "name": "Bibliothèque",
         "description": "Les ouvrages les plus consultés ont tous perdu la même page, tandis qu’une étagère scellée semble encore visitée."
       }
     },
     {
       "id": "general_store",
+      "name": "Magasin général",
       "fields": {
-        "name": "Magasin général",
         "description": "Une échoppe encombrée où le propriétaire connaît les besoins des visiteurs avant qu’ils ne les expriment."
       }
     },
     {
       "id": "guardhouse",
+      "name": "Caserne",
       "fields": {
-        "name": "Caserne",
         "description": "Une garnison sous tension dissimule la disparition répétée de ses sentinelles."
       }
     },
     {
       "id": "armory",
+      "name": "Armurerie",
       "fields": {
-        "name": "Armurerie",
         "description": "Un atelier sécurisé vend et répare des armes, mais dissimule l’origine d’une commande prestigieuse."
       }
     },
     {
       "id": "town_hall",
+      "name": "Mairie",
       "fields": {
-        "name": "Mairie",
         "description": "Les registres municipaux contredisent les souvenirs des habitants d’un quartier entier."
       }
     },
     {
       "id": "crowded_tavern",
+      "name": "Taverne",
       "fields": {
-        "name": "Taverne",
         "description": "Un établissement bruyant où s’échangent rumeurs, contrats et messages destinés à des clients absents."
       }
     },
     {
       "id": "restaurant",
+      "name": "Restaurant",
       "fields": {
-        "name": "Restaurant",
         "description": "Une cuisine réputée dépend d’un ingrédient rare dont l’approvisionnement s’est interrompu."
       }
     },
     {
       "id": "roadside_inn",
+      "name": "Auberge",
       "fields": {
-        "name": "Auberge",
         "description": "Des chambres simples entourent une salle commune où voyageurs et habitants échangent nouvelles et soupçons."
       }
     },
     {
       "id": "town_house",
+      "name": "Maison de ville",
       "fields": {
-        "name": "Maison de ville",
         "description": "Une habitation mitoyenne cache des pièces dont les fenêtres ne correspondent pas à sa façade."
       }
     },
     {
       "id": "farmstead",
+      "name": "Ferme isolée",
       "fields": {
-        "name": "Ferme isolée",
         "description": "Les cultures prospèrent dans un sol stérile, et la famille refuse toute inspection."
       }
     },
     {
       "id": "public_park",
+      "name": "Parc public",
       "fields": {
-        "name": "Parc public",
         "description": "La nuit, statues, kiosques et allées dessinent un plan différent de celui que l’on voit le jour."
       }
     },
     {
       "id": "walled_garden",
+      "name": "Jardin clos",
       "fields": {
-        "name": "Jardin clos",
         "description": "Des plantes rares prospèrent autour d’une serre dont personne ne détient officiellement la clé."
       }
     },
     {
       "id": "bank",
+      "name": "Banque",
       "fields": {
-        "name": "Banque",
         "description": "Des coffres protégés par des gardes et des sceaux contiennent aussi des dépôts que leurs propriétaires souhaitent voir oubliés."
       }
     },
     {
       "id": "monumental_fountain",
+      "name": "Fontaine monumentale",
       "fields": {
-        "name": "Fontaine monumentale",
         "description": "Les offrandes jetées dans l’eau réapparaissent dans les poches d’inconnus."
       }
     },
     {
       "id": "public_square",
+      "name": "Place publique",
       "fields": {
-        "name": "Place publique",
         "description": "Marchés, proclamations et manifestations se disputent l’espace sous un monument controversé."
       }
     },
     {
       "id": "church",
+      "name": "Église",
       "fields": {
-        "name": "Église",
         "description": "Une communauté religieuse active entretient un lieu de culte dont la crypte est antérieure à la ville."
       }
     },
     {
       "id": "cathedral",
+      "name": "Cathédrale",
       "fields": {
-        "name": "Cathédrale",
         "description": "Une vaste institution spirituelle et politique conserve des reliques jalousement gardées."
       }
     },
     {
       "id": "great_gate",
+      "name": "Grande porte",
       "fields": {
-        "name": "Grande porte",
         "description": "L’entrée principale de la ville rassemble gardes et percepteurs, ainsi que des voyageurs bloqués et des marchandises suspectes."
       }
     },
     {
       "id": "bakery_and_pastry_shop",
+      "name": "Boulangerie-pâtisserie",
       "fields": {
-        "name": "Boulangerie-pâtisserie",
         "description": "Le four communal brûle sans combustible depuis plusieurs nuits et attire des visiteurs après la fermeture."
       }
     },
     {
       "id": "butcher_and_delicatessen",
+      "name": "Boucherie-charcuterie",
       "fields": {
-        "name": "Boucherie-charcuterie",
         "description": "Le commerce reçoit une viande inhabituelle provenant d’un fournisseur absent de tous les registres."
       }
     },
     {
       "id": "craft_workshop",
+      "name": "Échoppe d’artisan",
       "fields": {
-        "name": "Échoppe d’artisan",
         "description": "Un atelier exigu fabrique un objet remarquable au prix de longues heures ou d’un matériau rare."
       }
     },
     {
       "id": "stable",
+      "name": "Écurie",
       "fields": {
-        "name": "Écurie",
         "description": "Montures, palefreniers et voyageurs entourent un animal dont personne ne peut s’approcher."
       }
     },
     {
       "id": "manor",
+      "name": "Manoir",
       "fields": {
-        "name": "Manoir",
         "description": "Une demeure prestigieuse réunit domestiques, invités et héritiers autour d’un secret de famille."
       }
     },
     {
       "id": "prison",
+      "name": "Prison",
       "fields": {
-        "name": "Prison",
         "description": "L’administration affirme qu’une cellule occupée depuis des années n’a jamais existé."
       }
     },
     {
       "id": "secondhand_shop",
+      "name": "Brocante",
       "fields": {
-        "name": "Brocante",
         "description": "Des objets ordinaires côtoient des souvenirs volés et des reliques dont le vendeur ignore la véritable fonction."
       }
     },
     {
       "id": "tenement",
+      "name": "Immeuble populaire",
       "fields": {
-        "name": "Immeuble populaire",
         "description": "De nombreux foyers partagent escaliers, cour intérieure et querelles autour d’un appartement muré."
       }
     },
     {
       "id": "dump",
+      "name": "Décharge",
       "fields": {
-        "name": "Décharge",
         "description": "Des récupérateurs fouillent des montagnes de déchets autour d’un objet qui transforme lentement les matériaux voisins."
       }
     },
     {
       "id": "mechanical_scrapyard",
+      "name": "Casse mécanique",
       "fields": {
-        "name": "Casse mécanique",
         "description": "Des carcasses de machines et de véhicules fournissent des pièces à un mécanicien qui les protège farouchement."
       }
     }

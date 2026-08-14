@@ -1,52 +1,52 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "noble",
   "visibility": "internal",
   "name": "Noble archetypes",
   "description": "Aristocratic and courtly roles",
   "entrySchema": {
-    "type": "text"
+    "required": []
   },
   "entries": [
     {
       "id": "king",
-      "value": "King"
+      "name": "King"
     },
     {
       "id": "queen",
-      "value": "Queen"
+      "name": "Queen"
     },
     {
       "id": "prince",
-      "value": "Prince"
+      "name": "Prince"
     },
     {
       "id": "heir",
-      "value": "Heir"
+      "name": "Heir"
     },
     {
       "id": "lord",
-      "value": "Lord"
+      "name": "Lord"
     },
     {
       "id": "lady",
-      "value": "Lady"
+      "name": "Lady"
     },
     {
       "id": "courtier",
-      "value": "Courtier"
+      "name": "Courtier"
     },
     {
       "id": "aristocrat",
-      "value": "Aristocrat"
+      "name": "Aristocrat"
     },
     {
       "id": "regent",
-      "value": "Regent"
+      "name": "Regent"
     },
     {
       "id": "royal_advisor",
-      "value": "Royal advisor"
+      "name": "Royal advisor"
     }
   ]
 }

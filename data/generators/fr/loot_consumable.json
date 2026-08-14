@@ -1,150 +1,149 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "consumable",
   "visibility": "internal",
   "name": "Consommables",
   "description": "Objets normalement consommés ou épuisés par leur utilisation",
   "entrySchema": {
-    "type": "fields",
-    "required": ["name", "description"]
+    "required": ["description"]
   },
   "entries": [
     {
       "id": "bandages",
+      "name": "Bandages",
       "weight": 6,
       "fields": {
-        "name": "Bandages",
         "description": "Du tissu propre et du matériel de base pour soigner les blessures."
       }
     },
     {
       "id": "antidote",
+      "name": "Antidote",
       "weight": 4,
       "fields": {
-        "name": "Antidote",
         "description": "Un traitement général qui accorde une nouvelle chance de résister à un poison ordinaire."
       }
     },
     {
       "id": "smoke_bomb",
+      "name": "Bombe fumigène",
       "weight": 4,
       "fields": {
-        "name": "Bombe fumigène",
         "description": "Crée un épais nuage de fumée lorsqu'elle est allumée."
       }
     },
     {
       "id": "vial_of_basic_poison",
+      "name": "Fiole de poison ordinaire",
       "weight": 3,
       "fields": {
-        "name": "Fiole de poison ordinaire",
         "description": "Une dose limitée de toxine, suffisante pour empoisonner une arme ou une boisson."
       }
     },
     {
       "id": "potion_of_night_vision",
+      "name": "Potion de vision nocturne",
       "weight": 2,
       "fields": {
-        "name": "Potion de vision nocturne",
         "description": "Permet de voir clairement dans l'obscurité pendant une heure."
       }
     },
     {
       "id": "potion_of_water_breathing",
+      "name": "Potion de respiration aquatique",
       "weight": 2,
       "fields": {
-        "name": "Potion de respiration aquatique",
         "description": "Permet de respirer sous l'eau pendant trente minutes."
       }
     },
     {
       "id": "acid_flask",
+      "name": "Fiole d'acide",
       "weight": 2,
       "fields": {
-        "name": "Fiole d'acide",
         "description": "Un flacon soigneusement scellé dont le contenu peut endommager les matériaux ordinaires."
       }
     },
     {
       "id": "healing_potion",
+      "name": "Potion de soin",
       "fields": {
-        "name": "Potion de soin",
         "description": "Une fiole stabilisée qui facilite la récupération d’une blessure lorsqu’elle est utilisée correctement."
       }
     },
     {
       "id": "vigor_potion",
+      "name": "Potion de vigueur",
       "fields": {
-        "name": "Potion de vigueur",
         "description": "Un breuvage augmentant brièvement les capacités physiques avant de provoquer une forte fatigue."
       }
     },
     {
       "id": "rule_scroll",
+      "name": "Parchemin de LOI",
       "fields": {
-        "name": "Parchemin de LOI",
         "description": "Un support à usage unique contenant {{ rules.name }} ; son effet exact et son interprétation restent à la discrétion du MJ."
       }
     },
     {
       "id": "specialized_ammunition",
+      "name": "Munitions spécialisées",
       "fields": {
-        "name": "Munitions spécialisées",
         "description": "Un petit lot de projectiles adaptés à une arme précise ou à une cible inhabituelle."
       }
     },
     {
       "id": "rare_medicine",
+      "name": "Médicament rare",
       "fields": {
-        "name": "Médicament rare",
         "description": "Un traitement destiné à une maladie précise, fragile et difficile à remplacer."
       }
     },
     {
       "id": "flash_powder",
+      "name": "Poudre aveuglante",
       "weight": 3,
       "fields": {
-        "name": "Poudre aveuglante",
         "description": "Une dose mesurée qui produit un éclat de lumière soudain lorsqu’elle est enflammée."
       }
     },
     {
       "id": "sleeping_draught",
+      "name": "Breuvage soporifique",
       "weight": 3,
       "fields": {
-        "name": "Breuvage soporifique",
         "description": "Une dose amère destinée à provoquer un sommeil profond mais ordinaire."
       }
     },
     {
       "id": "cleansing_salts",
+      "name": "Sels purifiants",
       "weight": 4,
       "fields": {
-        "name": "Sels purifiants",
         "description": "Des sels minéraux servant à nettoyer des blessures et des outils, à purifier de l’eau ou à préparer un espace rituel."
       }
     },
     {
       "id": "lamp_oil",
+      "name": "Huile de lampe",
       "weight": 6,
       "fields": {
-        "name": "Huile de lampe",
         "description": "Une recharge scellée assurant plusieurs heures de lumière régulière."
       }
     },
     {
       "id": "alchemical_oil",
+      "name": "Huile alchimique",
       "weight": 3,
       "fields": {
-        "name": "Huile alchimique",
         "description": "Une huile préparée pour enduire un objet et produire un effet défini par le MJ."
       }
     },
     {
       "id": "medicinal_poultice",
+      "name": "Cataplasme médicinal",
       "weight": 5,
       "fields": {
-        "name": "Cataplasme médicinal",
         "description": "Un emplâtre à base de plantes, à usage unique, qui apaise la douleur et l’enflure."
       }
     }

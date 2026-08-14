@@ -1,19 +1,18 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "monster",
   "visibility": "internal",
   "name": "Monstres",
   "description": "Créatures hostiles et prédateurs surnaturels",
   "entrySchema": {
-    "type": "fields",
-    "required": ["name", "description"]
+    "required": ["description"]
   },
   "entries": [
     {
       "id": "grave_hound",
+      "name": "Molosse des tombes",
       "weight": 3,
       "fields": {
-        "name": "Molosse des tombes",
         "description": "chasseur en meute au teint cadavérique qui flaire la peur et entraîne sous terre les proies isolées."
       },
       "generation": {
@@ -32,9 +31,9 @@
     },
     {
       "id": "mire_troll",
+      "name": "Troll des fondrières",
       "weight": 3,
       "fields": {
-        "name": "Troll des fondrières",
         "description": "brute des marais capable de se régénérer, couverte de roseaux, de sangsues et d’hameçons volés."
       },
       "generation": {
@@ -54,9 +53,9 @@
     },
     {
       "id": "cinder_drake",
+      "name": "Drac de cendre",
       "weight": 3,
       "fields": {
-        "name": "Drac de cendre",
         "description": "dragon sans ailes grand comme un chien, qui crache de la résine enflammée et niche dans les cheminées."
       },
       "generation": {
@@ -86,9 +85,9 @@
     },
     {
       "id": "glass_spider",
+      "name": "Araignée de verre",
       "weight": 2,
       "fields": {
-        "name": "Araignée de verre",
         "description": "prédatrice presque invisible qui chasse à l’affût et dont la toile cassante tranche comme du fil de fer."
       },
       "generation": {
@@ -108,9 +107,9 @@
     },
     {
       "id": "bell_wraith",
+      "name": "Spectre de la cloche",
       "weight": 2,
       "fields": {
-        "name": "Spectre de la cloche",
         "description": "fantôme en armure qui prend corps chaque fois qu’une cloche sonne à proximité."
       },
       "generation": {
@@ -148,9 +147,9 @@
     },
     {
       "id": "lantern_maw",
+      "name": "Gueule-lanterne",
       "weight": 2,
       "fields": {
-        "name": "Gueule-lanterne",
         "description": "lueur chaude flottante qui sert d’appât à une immense bouche souterraine."
       },
       "generation": {
@@ -168,9 +167,9 @@
     },
     {
       "id": "bone_orchard",
+      "name": "Verger d’ossements",
       "weight": 2,
       "fields": {
-        "name": "Verger d’ossements",
         "description": "colonie enracinée de bras squelettiques qui saisit les créatures et plante leurs os."
       },
       "generation": {
@@ -189,9 +188,9 @@
     },
     {
       "id": "frost_widow",
+      "name": "Veuve de givre",
       "weight": 2,
       "fields": {
-        "name": "Veuve de givre",
         "description": "bête cavernicole blanche qui gèle l’humidité pour former des silhouettes leurres."
       },
       "generation": {
@@ -217,9 +216,9 @@
     },
     {
       "id": "ink_leviathan",
+      "name": "Léviathan d’encre",
       "weight": 2,
       "fields": {
-        "name": "Léviathan d’encre",
         "description": "monstre fluvial qui aveugle les embarcations d’une brume noire avant de frapper par-dessous."
       },
       "generation": {
@@ -237,9 +236,9 @@
     },
     {
       "id": "rust_eater",
+      "name": "Mange-rouille",
       "weight": 2,
       "fields": {
-        "name": "Mange-rouille",
         "description": "insecte cuirassé qui corrode rapidement le métal et attaque en essaim la cible la mieux équipée."
       },
       "generation": {
@@ -256,9 +255,9 @@
     },
     {
       "id": "dream_leech",
+      "name": "Sangsue des rêves",
       "weight": 2,
       "fields": {
-        "name": "Sangsue des rêves",
         "description": "parasite translucide qui laisse ses victimes endormies conscientes, mais privées de leurs souvenirs."
       },
       "generation": {
@@ -275,9 +274,9 @@
     },
     {
       "id": "thornback_horror",
+      "name": "Horreur épineuse",
       "weight": 2,
       "fields": {
-        "name": "Horreur épineuse",
         "description": "bête végétale territoriale qui projette des graines barbelées dans les plaies ouvertes."
       },
       "generation": {
@@ -295,9 +294,9 @@
     },
     {
       "id": "mirror_stalker",
+      "name": "Traqueur des miroirs",
       "weight": 2,
       "fields": {
-        "name": "Traqueur des miroirs",
         "description": "humanoïde décharné qui ne peut se déplacer qu’à travers les reflets et les surfaces polies."
       },
       "generation": {
@@ -325,9 +324,9 @@
     },
     {
       "id": "ash_giant",
+      "name": "Géant de cendre",
       "weight": 2,
       "fields": {
-        "name": "Géant de cendre",
         "description": "humanoïde incandescent qui s’effondre en cendres suffocantes lorsqu’il est blessé, puis se reconstitue."
       },
       "generation": {
@@ -348,9 +347,9 @@
     },
     {
       "id": "moon_eyed_basilisk",
+      "name": "Basilic aux yeux de lune",
       "weight": 2,
       "fields": {
-        "name": "Basilic aux yeux de lune",
         "description": "reptile à six pattes dont le regard ne pétrifie que les créatures éclairées par la lune."
       },
       "generation": {
@@ -373,9 +372,9 @@
     },
     {
       "id": "choir_worm",
+      "name": "Ver-chorale",
       "weight": 1,
       "fields": {
-        "name": "Ver-chorale",
         "description": "prédateur des tunnels qui imite simultanément plusieurs voix familières."
       },
       "generation": {
@@ -393,9 +392,9 @@
     },
     {
       "id": "oath_devourer",
+      "name": "Dévoreur de serments",
       "weight": 1,
       "fields": {
-        "name": "Dévoreur de serments",
         "description": "démon sans visage qui se renforce chaque fois qu’une personne proche rompt une promesse."
       },
       "generation": {
@@ -417,9 +416,9 @@
     },
     {
       "id": "storm_roc",
+      "name": "Roc des tempêtes",
       "weight": 1,
       "fields": {
-        "name": "Roc des tempêtes",
         "description": "oiseau colossal qui niche dans les nuages d’orage et chasse tout ce qui porte du métal."
       },
       "generation": {
@@ -438,9 +437,9 @@
     },
     {
       "id": "cathedral_mimic",
+      "name": "Mimique-cathédrale",
       "weight": 1,
       "fields": {
-        "name": "Mimique-cathédrale",
         "description": "ancienne créature coloniale déguisée en lieu de culte abandonné."
       },
       "generation": {
@@ -459,9 +458,9 @@
     },
     {
       "id": "time_starved_hunter",
+      "name": "Chasseur affamé de temps",
       "weight": 1,
       "fields": {
-        "name": "Chasseur affamé de temps",
         "description": "prédateur vacillant qui vole des secondes à ses proies pour se déplacer à une vitesse impossible."
       },
       "generation": {
@@ -479,9 +478,9 @@
     },
     {
       "id": "crown_hydra",
+      "name": "Hydre couronnée",
       "weight": 1,
       "fields": {
-        "name": "Hydre couronnée",
         "description": "chaque tête tranchée repousse avec le visage et les souvenirs de la personne qui l’a abattue."
       },
       "generation": {
@@ -500,9 +499,9 @@
     },
     {
       "id": "hollow_saint",
+      "name": "Saint creux",
       "weight": 1,
       "fields": {
-        "name": "Saint creux",
         "description": "mort-vivant radieux dont les soins miraculeux remplacent peu à peu la volonté du bénéficiaire."
       },
       "generation": {
@@ -530,9 +529,9 @@
     },
     {
       "id": "abyssal_grazer",
+      "name": "Brouteur abyssal",
       "weight": 1,
       "fields": {
-        "name": "Brouteur abyssal",
         "description": "immense silhouette d’apparence paisible dont l’ombre dévore férocement les êtres vivants."
       },
       "generation": {
@@ -550,9 +549,9 @@
     },
     {
       "id": "red_comet_beast",
+      "name": "Bête de la comète rouge",
       "weight": 1,
       "fields": {
-        "name": "Bête de la comète rouge",
         "description": "prédateur cristallin tombé du ciel, qui se multiplie au contact de la magie."
       },
       "generation": {
@@ -576,8 +575,9 @@
     },
     {
       "id": "ash_phoenix",
+      "name": "Phénix de cendre",
+      "weight": 1,
       "fields": {
-        "name": "Phénix de cendre",
         "description": "Un grand oiseau incandescent renaît d’un foyer voisin en portant les souvenirs de ceux qui ont nourri la flamme."
       },
       "generation": {
@@ -603,13 +603,13 @@
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 10
-      },
-      "weight": 1
+      }
     },
     {
       "id": "juvenile_ogre",
+      "name": "Ogre juvénile",
+      "weight": 1,
       "fields": {
-        "name": "Ogre juvénile",
         "description": "Un jeune géant affamé imite des adultes absents et transforme chaque jeu en véritable danger."
       },
       "generation": {
@@ -620,13 +620,13 @@
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 15
-      },
-      "weight": 1
+      }
     },
     {
       "id": "hungry_changeling",
+      "name": "Changelin affamé",
+      "weight": 1,
       "fields": {
-        "name": "Changelin affamé",
         "description": "Une créature copie l’apparence d’une personne mais comprend mal ses habitudes et ses liens."
       },
       "generation": {
@@ -644,13 +644,13 @@
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 10
-      },
-      "weight": 1
+      }
     },
     {
       "id": "imp",
+      "name": "Diablotin",
+      "weight": 1,
       "fields": {
-        "name": "Diablotin",
         "description": "Un petit démon propose des marchés insignifiants dont la formulation dissimule des conséquences disproportionnées."
       },
       "generation": {
@@ -661,13 +661,13 @@
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 5
-      },
-      "weight": 1
+      }
     },
     {
       "id": "dissolving_ooze",
+      "name": "Limon dissolvant",
+      "weight": 1,
       "fields": {
-        "name": "Limon dissolvant",
         "description": "Une masse lente digère la matière organique et le métal tendre, laissant intacts les objets qu’elle ne comprend pas."
       },
       "generation": {
@@ -682,13 +682,13 @@
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 15
-      },
-      "weight": 1
+      }
     },
     {
       "id": "uprooted_treant",
+      "name": "Tréant déraciné",
+      "weight": 1,
       "fields": {
-        "name": "Tréant déraciné",
         "description": "Un gardien végétal s’éloigne de sa forêt parce que les racines de son territoire ont été empoisonnées."
       },
       "generation": {
@@ -707,13 +707,13 @@
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 35
-      },
-      "weight": 1
+      }
     },
     {
       "id": "stubborn_undead",
+      "name": "Mort-vivant obstiné",
+      "weight": 1,
       "fields": {
-        "name": "Mort-vivant obstiné",
         "description": "Un cadavre animé poursuit une tâche quotidienne sans comprendre que le monde a changé."
       },
       "generation": {
@@ -727,13 +727,13 @@
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 10
-      },
-      "weight": 1
+      }
     },
     {
       "id": "patrol_skeleton",
+      "name": "Squelette de patrouille",
+      "weight": 1,
       "fields": {
-        "name": "Squelette de patrouille",
         "description": "Des ossements armés répètent un itinéraire militaire et considèrent toute entorse au protocole comme une intrusion."
       },
       "generation": {
@@ -753,13 +753,13 @@
         ],
         "inventory": [],
         "naturalArmorPercentage": 10
-      },
-      "weight": 1
+      }
     },
     {
       "id": "mutant_animal",
+      "name": "Animal mutant",
+      "weight": 1,
       "fields": {
-        "name": "Animal mutant",
         "description": "Une bête ordinaire porte une adaptation impossible provoquée par une pollution magique ou alchimique."
       },
       "generation": {
@@ -770,13 +770,13 @@
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 10
-      },
-      "weight": 1
+      }
     },
     {
       "id": "abandoned_golem",
+      "name": "Golem abandonné",
+      "weight": 1,
       "fields": {
-        "name": "Golem abandonné",
         "description": "Un serviteur artificiel continue d’exécuter un ordre devenu dangereux en l’absence d’un maître capable de le modifier."
       },
       "generation": {
@@ -791,13 +791,13 @@
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 50
-      },
-      "weight": 1
+      }
     },
     {
       "id": "imp_chicken",
+      "name": "Poulet diablotin",
+      "weight": 1,
       "fields": {
-        "name": "Poulet diablotin",
         "description": "Une volaille possédée manifeste une agressivité absurde, des bonds surnaturels et une résistance sans commune mesure avec sa taille."
       },
       "generation": {
@@ -811,13 +811,13 @@
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 5
-      },
-      "weight": 1
+      }
     },
     {
       "id": "giant_insect",
+      "name": "Insecte géant",
+      "weight": 1,
       "fields": {
-        "name": "Insecte géant",
         "description": "Un arthropode colossal défend un nid construit autour d’une source de chaleur ou de magie."
       },
       "generation": {
@@ -828,13 +828,13 @@
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 30
-      },
-      "weight": 1
+      }
     },
     {
       "id": "animated_statue",
+      "name": "Statue animée",
+      "weight": 1,
       "fields": {
-        "name": "Statue animée",
         "description": "Une sculpture quitte son socle pour corriger toute personne qui contredit la version officielle de l’événement qu’elle représente."
       },
       "generation": {
@@ -849,13 +849,13 @@
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 50
-      },
-      "weight": 1
+      }
     },
     {
       "id": "voracious_slug",
+      "name": "Limace vorace",
+      "weight": 1,
       "fields": {
-        "name": "Limace vorace",
         "description": "Une créature lente sécrète une substance qui dissout murs, armures ou souvenirs selon son alimentation."
       },
       "generation": {
@@ -868,13 +868,13 @@
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 15
-      },
-      "weight": 1
+      }
     },
     {
       "id": "fiery_salamander",
+      "name": "Salamandre ardente",
+      "weight": 1,
       "fields": {
-        "name": "Salamandre ardente",
         "description": "Un reptile surnaturel vit dans les flammes et propage involontairement le feu lorsqu’il prend peur."
       },
       "generation": {
@@ -896,13 +896,13 @@
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 25
-      },
-      "weight": 1
+      }
     },
     {
       "id": "cliff_harpy",
+      "name": "Harpie des falaises",
+      "weight": 1,
       "fields": {
-        "name": "Harpie des falaises",
         "description": "Une prédatrice ailée imite des appels familiers pour attirer les voyageurs sur un terrain dangereux."
       },
       "generation": {
@@ -916,13 +916,13 @@
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 10
-      },
-      "weight": 1
+      }
     },
     {
       "id": "murky_water_siren",
+      "name": "Sirène des eaux troubles",
+      "weight": 1,
       "fields": {
-        "name": "Sirène des eaux troubles",
         "description": "Une créature aquatique utilise chants et reflets pour isoler une cible du groupe."
       },
       "generation": {
@@ -942,13 +942,13 @@
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 10
-      },
-      "weight": 1
+      }
     },
     {
       "id": "watcher_cyclops",
+      "name": "Cyclope veilleur",
+      "weight": 1,
       "fields": {
-        "name": "Cyclope veilleur",
         "description": "Un géant solitaire garde un passage dont la destination a été oubliée, mais dont l’interdiction demeure."
       },
       "generation": {
@@ -962,13 +962,13 @@
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 20
-      },
-      "weight": 1
+      }
     },
     {
       "id": "hungry_vampire",
+      "name": "Vampire affamé",
+      "weight": 1,
       "fields": {
-        "name": "Vampire affamé",
         "description": "Un prédateur immortel maintient une façade civilisée tandis que la pénurie rend son contrôle de plus en plus fragile."
       },
       "generation": {
@@ -988,13 +988,13 @@
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 10
-      },
-      "weight": 1
+      }
     },
     {
       "id": "memory_parasite",
+      "name": "Parasite mémoriel",
+      "weight": 1,
       "fields": {
-        "name": "Parasite mémoriel",
         "description": "Une petite créature se nourrit de souvenirs récents et laisse ses victimes incapables d’expliquer sa présence."
       },
       "generation": {
@@ -1013,13 +1013,13 @@
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 5
-      },
-      "weight": 1
+      }
     },
     {
       "id": "repetitive_ghost",
+      "name": "Fantôme répétitif",
+      "weight": 1,
       "fields": {
-        "name": "Fantôme répétitif",
         "description": "Un esprit rejoue une scène incomplète et devient violent lorsque des témoins en modifient le déroulement."
       },
       "generation": {
@@ -1039,13 +1039,13 @@
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 0
-      },
-      "weight": 1
+      }
     },
     {
       "id": "unstable_chimera",
+      "name": "Chimère instable",
+      "weight": 1,
       "fields": {
-        "name": "Chimère instable",
         "description": "Plusieurs anatomies incompatibles luttent pour contrôler un même corps créé artificiellement."
       },
       "generation": {
@@ -1059,13 +1059,13 @@
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 25
-      },
-      "weight": 1
+      }
     },
     {
       "id": "unleashed_elemental",
+      "name": "Élémentaire déchaîné",
+      "weight": 1,
       "fields": {
-        "name": "Élémentaire déchaîné",
         "description": "Une force naturelle animée cherche à rétablir l’équilibre sans comprendre les vies qui se trouvent sur son chemin."
       },
       "generation": {
@@ -1076,13 +1076,13 @@
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 25
-      },
-      "weight": 1
+      }
     },
     {
       "id": "territorial_gargoyle",
+      "name": "Gargouille territoriale",
+      "weight": 1,
       "fields": {
-        "name": "Gargouille territoriale",
         "description": "Une sentinelle de pierre change de bâtiment chaque nuit et considère chacun de ses nouveaux emplacements comme sacré."
       },
       "generation": {
@@ -1093,13 +1093,13 @@
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 45
-      },
-      "weight": 1
+      }
     },
     {
       "id": "highland_griffin",
+      "name": "Griffon des hauteurs",
+      "weight": 1,
       "fields": {
-        "name": "Griffon des hauteurs",
         "description": "Un prédateur majestueux protège son aire et les objets brillants qu’il prend pour des œufs."
       },
       "generation": {
@@ -1110,13 +1110,13 @@
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 20
-      },
-      "weight": 1
+      }
     },
     {
       "id": "reclusive_gorgon",
+      "name": "Gorgone recluse",
+      "weight": 1,
       "fields": {
-        "name": "Gorgone recluse",
         "description": "Une créature maudite pétrifie davantage par peur que par cruauté et collectionne les statues de ses visiteurs."
       },
       "generation": {
@@ -1134,13 +1134,13 @@
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 20
-      },
-      "weight": 1
+      }
     },
     {
       "id": "hunted_werewolf",
+      "name": "Loup-garou traqué",
+      "weight": 1,
       "fields": {
-        "name": "Loup-garou traqué",
         "description": "Une personne transformée entraîne les chasseurs loin de ses proches avant de perdre le contrôle."
       },
       "generation": {
@@ -1155,13 +1155,13 @@
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 15
-      },
-      "weight": 1
+      }
     },
     {
       "id": "guardian_mummy",
+      "name": "Momie gardienne",
+      "weight": 1,
       "fields": {
-        "name": "Momie gardienne",
         "description": "Un ancien dignitaire préserve un lieu, un serment ou une erreur que ses descendants préféreraient oublier."
       },
       "generation": {
@@ -1175,13 +1175,13 @@
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 25
-      },
-      "weight": 1
+      }
     },
     {
       "id": "architect_minotaur",
+      "name": "Minotaure architecte",
+      "weight": 1,
       "fields": {
-        "name": "Minotaure architecte",
         "description": "Une créature modifie sans cesse son labyrinthe et considère chaque voyageur égaré comme un intrus volontaire."
       },
       "generation": {
@@ -1195,13 +1195,13 @@
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 25
-      },
-      "weight": 1
+      }
     },
     {
       "id": "giant_burrowing_worm",
+      "name": "Ver fouisseur géant",
+      "weight": 1,
       "fields": {
-        "name": "Ver fouisseur géant",
         "description": "Un prédateur souterrain suit les vibrations et la chaleur, provoquant effondrements et déplacements du sol."
       },
       "generation": {
@@ -1212,13 +1212,13 @@
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 30
-      },
-      "weight": 1
+      }
     },
     {
       "id": "carnivorous_plant",
+      "name": "Plante carnivore",
+      "weight": 1,
       "fields": {
-        "name": "Plante carnivore",
         "description": "Une colonie végétale imite odeurs, voix et silhouettes pour attirer ses proies."
       },
       "generation": {
@@ -1232,13 +1232,13 @@
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 15
-      },
-      "weight": 1
+      }
     },
     {
       "id": "ancient_dragon",
+      "name": "Dragon ancien",
+      "weight": 1,
       "fields": {
-        "name": "Dragon ancien",
         "description": "Une créature immensément puissante protège davantage un secret capable de façonner une région qu’un trésor matériel."
       },
       "generation": {
@@ -1253,13 +1253,13 @@
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 50
-      },
-      "weight": 1
+      }
     },
     {
       "id": "shoal_kraken",
+      "name": "Kraken des hauts-fonds",
+      "weight": 1,
       "fields": {
-        "name": "Kraken des hauts-fonds",
         "description": "Un monstre marin bloque une route commerciale et construit un nid à partir d’épaves."
       },
       "generation": {
@@ -1274,13 +1274,13 @@
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 25
-      },
-      "weight": 1
+      }
     },
     {
       "id": "migrating_behemoth",
+      "name": "Béhémoth migrateur",
+      "weight": 1,
       "fields": {
-        "name": "Béhémoth migrateur",
         "description": "Une créature gigantesque traverse périodiquement des communautés bâties sur son ancienne route migratoire."
       },
       "generation": {
@@ -1291,13 +1291,13 @@
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 50
-      },
-      "weight": 1
+      }
     },
     {
       "id": "vengeful_spirit",
+      "name": "Esprit vengeur",
+      "weight": 1,
       "fields": {
-        "name": "Esprit vengeur",
         "description": "Une entité liée à une injustice précise frappe les symboles du coupable plutôt que ses véritables héritiers."
       },
       "generation": {
@@ -1322,13 +1322,13 @@
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 0
-      },
-      "weight": 1
+      }
     },
     {
       "id": "insect_queen",
+      "name": "Reine insecte",
+      "weight": 1,
       "fields": {
-        "name": "Reine insecte",
         "description": "Une créature intelligente coordonne une colonie et négocie comme si chaque individu faisait partie de son propre corps."
       },
       "generation": {
@@ -1342,8 +1342,7 @@
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 25
-      },
-      "weight": 1
+      }
     }
   ]
 }

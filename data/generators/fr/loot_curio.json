@@ -1,165 +1,164 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "curio",
   "visibility": "internal",
   "name": "Curiosités",
   "description": "Objets inhabituels présentant un intérêt narratif, mystérieux, personnel ou circonstanciel",
   "entrySchema": {
-    "type": "fields",
-    "required": ["name", "description"]
+    "required": ["description"]
   },
   "entries": [
     {
       "id": "whispering_compass",
+      "name": "Boussole murmurante",
       "fields": {
-        "name": "Boussole murmurante",
         "description": "Une étrange boussole qui se plaint à voix basse chaque fois qu'elle indique le nord."
       }
     },
     {
       "id": "everlasting_candle",
+      "name": "Bougie éternelle",
       "fields": {
-        "name": "Bougie éternelle",
         "description": "Une bougie dont la petite flamme ne consume jamais la cire."
       }
     },
     {
       "id": "mysterious_sealed_letter",
+      "name": "Mystérieuse lettre scellée",
       "fields": {
-        "name": "Mystérieuse lettre scellée",
         "description": "Une lettre adressée à une personne que le personnage n'a jamais rencontrée."
       }
     },
     {
       "id": "rule_book",
+      "name": "Livre de LOI",
       "fields": {
-        "name": "Livre de LOI",
         "description": "Un traité rare consacré à {{ rules.name }}, à ses usages possibles et aux risques d’une mauvaise interprétation."
       }
     },
     {
       "id": "unknown_key",
+      "name": "Clef inconnue",
       "fields": {
-        "name": "Clef inconnue",
         "description": "Une clef sans serrure identifiée, marquée d’un symbole correspondant à une organisation ou un bâtiment."
       }
     },
     {
       "id": "coded_notes",
+      "name": "Notes codées",
       "fields": {
-        "name": "Notes codées",
         "description": "Plusieurs pages dont le sens dépend d’un code, d’un contexte manquant ou d’une personne absente."
       }
     },
     {
       "id": "treasure_map",
+      "name": "Carte au trésor",
       "fields": {
-        "name": "Carte au trésor",
         "description": "Un itinéraire incomplet accompagné de repères anciens, d’avertissements et d’une destination ambiguë."
       }
     },
     {
       "id": "ceremonial_doll",
+      "name": "Poupée cérémonielle",
       "fields": {
-        "name": "Poupée cérémonielle",
         "description": "Une figurine de tissu portant le nom effacé d’une personne et les traces d’un ancien rituel."
       }
     },
     {
       "id": "locked_grimoire",
+      "name": "Grimoire verrouillé",
       "fields": {
-        "name": "Grimoire verrouillé",
         "description": "Un livre protégé par une serrure ou une énigme, dont le contenu ne peut être consulté directement."
       }
     },
     {
       "id": "old_toy",
+      "name": "Jouet ancien",
       "fields": {
-        "name": "Jouet ancien",
         "description": "Un jouet ou un ours en peluche reconnaissable par une famille, un collectionneur ou un esprit."
       }
     },
     {
       "id": "incomplete_manuscript",
+      "name": "Manuscrit incomplet",
       "fields": {
-        "name": "Manuscrit incomplet",
         "description": "Un texte historique ou scientifique dont plusieurs pages ont été retirées intentionnellement."
       }
     },
     {
       "id": "sealed_vase",
+      "name": "Vase scellé",
       "fields": {
-        "name": "Vase scellé",
         "description": "Un récipient fragile dont le contenu produit un bruit ou une chaleur inhabituelle."
       }
     },
     {
       "id": "enchanted_toothbrush",
+      "name": "Brosse à dents enchantée",
       "fields": {
-        "name": "Brosse à dents enchantée",
         "description": "Un objet absurdement spécifique qui nettoie parfaitement les dents et mord les autres saletés."
       }
     },
     {
       "id": "unidentified_egg",
+      "name": "Œuf non identifié",
       "fields": {
-        "name": "Œuf non identifié",
         "description": "Un œuf qui semble vivant, mais dont l’espèce, les besoins et le danger restent inconnus."
       }
     },
     {
       "id": "attuned_stone",
+      "name": "Pierre d’affinité",
       "fields": {
-        "name": "Pierre d’affinité",
         "description": "Une pierre naturelle ou magique qui réagit à un lieu, une personne ou une LOI particulière."
       }
     },
     {
       "id": "travel_chicken",
+      "name": "Poulet de voyage",
       "fields": {
-        "name": "Poulet de voyage",
         "description": "Un poulet étonnamment calme, dressé à suivre le porteur et à signaler certaines créatures."
       }
     },
     {
       "id": "runed_amulet",
+      "name": "Amulette runique",
       "fields": {
-        "name": "Amulette runique",
         "description": "Une amulette gravée d’une rune associée à la {{ rules.name }} ; le MJ en détermine la fonction précise."
       }
     },
     {
       "id": "runed_ring",
+      "name": "Anneau runique",
       "fields": {
-        "name": "Anneau runique",
         "description": "Un anneau gravé d’une rune associée à la {{ rules.name }} ; le MJ en détermine la fonction précise."
       }
     },
     {
       "id": "runed_cloak",
+      "name": "Cape runique",
       "fields": {
-        "name": "Cape runique",
         "description": "Une cape brodée d’une rune associée à la {{ rules.name }} ; le MJ en détermine la fonction précise."
       }
     },
     {
       "id": "runed_boots",
+      "name": "Bottes runiques",
       "fields": {
-        "name": "Bottes runiques",
         "description": "Une paire de bottes portant une rune associée à la {{ rules.name }} ; le MJ en détermine la fonction précise."
       }
     },
     {
       "id": "runed_mirror",
+      "name": "Miroir runique",
       "fields": {
-        "name": "Miroir runique",
         "description": "Un miroir à main portant une rune associée à la {{ rules.name }} ; le MJ en détermine la fonction précise."
       }
     },
     {
       "id": "runed_key",
+      "name": "Clé runique",
       "fields": {
-        "name": "Clé runique",
         "description": "Une clé portant une rune associée à la {{ rules.name }} ; le MJ en détermine la fonction précise."
       }
     }

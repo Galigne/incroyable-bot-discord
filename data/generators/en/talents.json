@@ -1,335 +1,334 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "talents",
   "visibility": "public",
   "name": "Talents",
   "description": "Character talents and specialties",
   "entrySchema": {
-    "type": "fields",
-    "required": ["name", "description"]
+    "required": ["description"]
   },
   "entries": [
     {
       "id": "athlete",
+      "name": "Athlete",
       "weight": 3,
       "fields": {
-        "name": "Athlete",
         "description": "+1 to physical actions involving sustained movement, climbing, or jumping."
       }
     },
     {
       "id": "keen_eye",
+      "name": "Keen Eye",
       "weight": 3,
       "fields": {
-        "name": "Keen Eye",
         "description": "+1 when searching for small details, tracks, traps, or hidden objects."
       }
     },
     {
       "id": "silver_tongue",
+      "name": "Silver Tongue",
       "weight": 3,
       "fields": {
-        "name": "Silver Tongue",
         "description": "+1 to persuasion when the character has time to explain their position."
       }
     },
     {
       "id": "survivor",
+      "name": "Survivor",
       "weight": 3,
       "fields": {
-        "name": "Survivor",
         "description": "+1 to endure harsh weather, hunger, exhaustion, or difficult travel."
       }
     },
     {
       "id": "assassin",
+      "name": "Assassin",
       "weight": 2,
       "fields": {
-        "name": "Assassin",
         "description": "Attacks are more effective when the target has not detected the character."
       }
     },
     {
       "id": "bodybuilder",
+      "name": "Bodybuilder",
       "weight": 2,
       "fields": {
-        "name": "Bodybuilder",
         "description": "+1 to actions based on raw Strength."
       }
     },
     {
       "id": "politician",
+      "name": "Politician",
       "weight": 2,
       "fields": {
-        "name": "Politician",
         "description": "+2 to Charisma during formal negotiations and political discussions."
       }
     },
     {
       "id": "field_medic",
+      "name": "Field Medic",
       "weight": 2,
       "fields": {
-        "name": "Field Medic",
         "description": "+1 when stabilizing injuries or using mundane medical supplies."
       }
     },
     {
       "id": "quick_draw",
+      "name": "Quick Draw",
       "weight": 2,
       "fields": {
-        "name": "Quick Draw",
         "description": "Drawing or changing a readied weapon does not slow the character's first action."
       }
     },
     {
       "id": "shield_expert",
+      "name": "Shield Expert",
       "weight": 2,
       "fields": {
-        "name": "Shield Expert",
         "description": "+1 when blocking with a shield or protecting an adjacent ally."
       }
     },
     {
       "id": "tracker",
+      "name": "Tracker",
       "weight": 2,
       "fields": {
-        "name": "Tracker",
         "description": "+2 when following a trail left by a known creature."
       }
     },
     {
       "id": "arcane_student",
+      "name": "Arcane Student",
       "weight": 2,
       "fields": {
-        "name": "Arcane Student",
         "description": "+1 when identifying a RULE, rune, or magical phenomenon."
       }
     },
     {
       "id": "craftsperson",
+      "name": "Craftsperson",
       "weight": 2,
       "fields": {
-        "name": "Craftsperson",
         "description": "+1 when repairing, evaluating, or creating mundane equipment."
       }
     },
     {
       "id": "duelist",
+      "name": "Duelist",
       "weight": 2,
       "fields": {
-        "name": "Duelist",
         "description": "+1 when fighting a single visible opponent without nearby interference."
       }
     },
     {
       "id": "beast_friend",
+      "name": "Beast Friend",
       "weight": 2,
       "fields": {
-        "name": "Beast Friend",
         "description": "+2 when calming or understanding ordinary animals."
       }
     },
     {
       "id": "sailor",
+      "name": "Sailor",
       "weight": 2,
       "fields": {
-        "name": "Sailor",
         "description": "+2 to navigation, rigging, and balance aboard a vessel."
       }
     },
     {
       "id": "streetwise",
+      "name": "Streetwise",
       "weight": 2,
       "fields": {
-        "name": "Streetwise",
         "description": "+1 when finding illicit goods, rumors, or safe routes through a city."
       }
     },
     {
       "id": "unshakable",
+      "name": "Unshakable",
       "weight": 2,
       "fields": {
-        "name": "Unshakable",
         "description": "+1 to resist fear, intimidation, and supernatural dread."
       }
     },
     {
       "id": "cold_immunity",
+      "name": "Cold Immunity",
       "fields": {
-        "name": "Cold Immunity",
         "description": "The character cannot be frozen by ordinary cold."
       }
     },
     {
       "id": "poison_tolerance",
+      "name": "Poison Tolerance",
       "fields": {
-        "name": "Poison Tolerance",
         "description": "+2 to resist poison and identify common toxins by taste or smell."
       }
     },
     {
       "id": "ambidextrous",
+      "name": "Ambidextrous",
       "fields": {
-        "name": "Ambidextrous",
         "description": "The character can use either hand with equal precision."
       }
     },
     {
       "id": "battle_rhythm",
+      "name": "Battle Rhythm",
       "fields": {
-        "name": "Battle Rhythm",
         "description": "After a successful coordinated attack, the next allied action in the same turn gains +1."
       }
     },
     {
       "id": "rune_listener",
+      "name": "Rune Listener",
       "fields": {
-        "name": "Rune Listener",
         "description": "The character can sense whether a touched rune is dormant or active."
       }
     },
     {
       "id": "perfect_memory",
+      "name": "Perfect Memory",
       "fields": {
-        "name": "Perfect Memory",
         "description": "+2 when recalling a scene, route, face, or exact spoken detail."
       }
     },
     {
       "id": "improviser",
+      "name": "Improviser",
       "fields": {
-        "name": "Improviser",
         "description": "+1 when using an ordinary object for an unintended but plausible purpose."
       }
     },
     {
       "id": "last_stand",
+      "name": "Last Stand",
       "fields": {
-        "name": "Last Stand",
         "description": "+1 to actions while at or below 20% of maximum HP."
       }
     },
     {
       "id": "danger_sense",
+      "name": "Danger Sense",
       "fields": {
-        "name": "Danger Sense",
         "description": "+1 to Reflexes when reacting to an unseen or unexpected threat."
       }
     },
     {
       "id": "heavy_hitter",
+      "name": "Heavy Hitter",
       "fields": {
-        "name": "Heavy Hitter",
         "description": "A successful heavy melee attack produces a stronger positional effect."
       }
     },
     {
       "id": "lucky_break",
+      "name": "Lucky Break",
       "fields": {
-        "name": "Lucky Break",
         "description": "Once per session, reroll a failed non-critical utility roll."
       }
     },
     {
       "id": "inspiring_presence",
+      "name": "Inspiring Presence",
       "fields": {
-        "name": "Inspiring Presence",
         "description": "Once per scene, an ally who hears the character gains +1 against fear."
       }
     },
     {
       "id": "locksmith",
+      "name": "Locksmith",
       "weight": 2,
       "fields": {
-        "name": "Locksmith",
         "description": "+2 to actions made to open or inspect ordinary mechanical locks."
       }
     },
     {
       "id": "burglar",
+      "name": "Burglar",
       "fields": {
-        "name": "Burglar",
         "description": "+2 to Dexterity actions for quietly entering, crossing, or leaving a secured building."
       }
     },
     {
       "id": "marksman",
+      "name": "Marksman",
       "fields": {
-        "name": "Marksman",
         "description": "+1 to ranged weapon attacks against a visible target at least 10 meters away."
       }
     },
     {
       "id": "brawler",
+      "name": "Brawler",
       "weight": 2,
       "fields": {
-        "name": "Brawler",
         "description": "+1 to actions involving unarmed fighting or grappling."
       }
     },
     {
       "id": "herbalist",
+      "name": "Herbalist",
       "weight": 2,
       "fields": {
-        "name": "Herbalist",
         "description": "+2 when identifying or working with medicinal or poisonous plants."
       }
     },
     {
       "id": "alchemist",
+      "name": "Alchemist",
       "fields": {
-        "name": "Alchemist",
         "description": "+2 to Intelligence actions for identifying, preparing, or safely handling alchemical substances."
       }
     },
     {
       "id": "blacksmith",
+      "name": "Blacksmith",
       "weight": 2,
       "fields": {
-        "name": "Blacksmith",
         "description": "+2 to actions involving forging, evaluating, or repairing metal weapons, armor, and tools."
       }
     },
     {
       "id": "acrobat",
+      "name": "Acrobat",
       "weight": 2,
       "fields": {
-        "name": "Acrobat",
         "description": "+2 to Dexterity actions involving balance, tumbling, or acrobatic movement."
       }
     },
     {
       "id": "investigator",
+      "name": "Investigator",
       "fields": {
-        "name": "Investigator",
         "description": "+2 to Perception actions when examining a scene for physical evidence."
       }
     },
     {
       "id": "commander",
+      "name": "Commander",
       "fields": {
-        "name": "Commander",
         "description": "+1 to Charisma actions made to coordinate a willing group under immediate pressure."
       }
     },
     {
       "id": "impersonator",
+      "name": "Actor and Impersonator",
       "fields": {
-        "name": "Actor and Impersonator",
         "description": "+2 to Charisma actions when performing or imitating a person studied in advance."
       }
     },
     {
       "id": "historian",
+      "name": "Historian",
       "fields": {
-        "name": "Historian",
         "description": "+2 to Intelligence actions involving historical knowledge."
       }
     },
     {
       "id": "runesmith",
+      "name": "Runesmith",
       "fields": {
-        "name": "Runesmith",
         "description": "+2 to actions involving identifying, understanding, or creating runes."
       }
     }

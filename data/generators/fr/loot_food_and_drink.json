@@ -1,154 +1,153 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "food_and_drink",
   "visibility": "internal",
   "name": "Nourriture et boissons",
   "description": "Provisions, repas et boissons ordinaires ou inhabituels",
   "entrySchema": {
-    "type": "fields",
-    "required": ["name", "description"]
+    "required": ["description"]
   },
   "entries": [
     {
       "id": "three_travel_rations",
+      "name": "Trois rations de voyage",
       "weight": 8,
       "fields": {
-        "name": "Trois rations de voyage",
         "description": "Des provisions compactes suffisantes pour trois jours."
       }
     },
     {
       "id": "exotic_fruit",
+      "name": "Fruit exotique",
       "fields": {
-        "name": "Fruit exotique",
         "description": "Un fruit rare dont la graine, la saveur ou les propriétés intéressent plusieurs acheteurs."
       }
     },
     {
       "id": "bread_and_hard_cheese",
+      "name": "Pain et fromage à pâte dure",
       "weight": 8,
       "fields": {
-        "name": "Pain et fromage à pâte dure",
         "description": "Un repas simple qui se conserve bien et convient au voyage."
       }
     },
     {
       "id": "dried_meat",
+      "name": "Viande séchée",
       "weight": 7,
       "fields": {
-        "name": "Viande séchée",
         "description": "Des lamelles salées qui se conservent bien dans un paquetage."
       }
     },
     {
       "id": "preserved_fruit",
+      "name": "Fruits conservés",
       "weight": 6,
       "fields": {
-        "name": "Fruits conservés",
         "description": "Des fruits séchés ou confits préparés pour un long trajet."
       }
     },
     {
       "id": "fresh_provisions",
+      "name": "Provisions fraîches",
       "weight": 5,
       "fields": {
-        "name": "Provisions fraîches",
         "description": "Des produits de saison et d’autres aliments destinés à être consommés rapidement."
       }
     },
     {
       "id": "strong_ale",
+      "name": "Bière forte",
       "weight": 5,
       "fields": {
-        "name": "Bière forte",
         "description": "Une bière locale corsée vendue dans une cruche bouchée."
       }
     },
     {
       "id": "local_wine",
+      "name": "Vin local",
       "weight": 4,
       "fields": {
-        "name": "Vin local",
         "description": "Une bouteille dont la qualité et la réputation dépendent de la région."
       }
     },
     {
       "id": "herbal_tea",
+      "name": "Tisane",
       "weight": 5,
       "fields": {
-        "name": "Tisane",
         "description": "Un mélange parfumé préparé pour se réchauffer, accueillir un invité ou apporter un léger réconfort."
       }
     },
     {
       "id": "regional_delicacy",
+      "name": "Spécialité régionale",
       "weight": 2,
       "fields": {
-        "name": "Spécialité régionale",
         "description": "Un mets caractéristique apprécié sur place, mais parfois surprenant pour les visiteurs."
       }
     },
     {
       "id": "smoked_fish",
+      "name": "Poisson fumé",
       "weight": 6,
       "fields": {
-        "name": "Poisson fumé",
         "description": "Un poisson ferme et salé, conservé par fumage pour le voyage ou les réserves d’hiver."
       }
     },
     {
       "id": "pepper_root_stew",
+      "name": "Ragoût à la racine-poivre",
       "weight": 3,
       "fields": {
-        "name": "Ragoût à la racine-poivre",
         "description": "Un ragoût épais préparé avec cette racine piquante et les légumes disponibles."
       }
     },
     {
       "id": "mushroom_broth",
+      "name": "Bouillon aux champignons",
       "weight": 4,
       "fields": {
-        "name": "Bouillon aux champignons",
         "description": "Un bouillon sombre et savoureux préparé avec plusieurs variétés de champignons comestibles."
       }
     },
     {
       "id": "honey_cakes",
+      "name": "Gâteaux au miel",
       "weight": 4,
       "fields": {
-        "name": "Gâteaux au miel",
         "description": "De petits gâteaux denses, sucrés au miel et faciles à transporter."
       }
     },
     {
       "id": "spiced_nuts",
+      "name": "Noix épicées",
       "weight": 5,
       "fields": {
-        "name": "Noix épicées",
         "description": "Des noix grillées enrobées de sel et d’un mélange d’épices réchauffant."
       }
     },
     {
       "id": "pickled_vegetables",
+      "name": "Légumes au vinaigre",
       "weight": 5,
       "fields": {
-        "name": "Légumes au vinaigre",
         "description": "Des légumes saisonniers croquants conservés dans une saumure bien relevée."
       }
     },
     {
       "id": "fermented_milk",
+      "name": "Lait fermenté",
       "weight": 3,
       "fields": {
-        "name": "Lait fermenté",
         "description": "Une boisson lactée acidulée, servie nature ou légèrement salée."
       }
     },
     {
       "id": "strong_herbal_tonic",
+      "name": "Tonique corsé aux herbes",
       "weight": 2,
       "fields": {
-        "name": "Tonique corsé aux herbes",
         "description": "Une boisson amère et non magique préparée à partir de racines et d’herbes pour son goût prononcé."
       }
     }

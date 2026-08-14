@@ -62,7 +62,7 @@ function populateRandomCharacter(character, options = {}) {
 		);
 	}
 	const physicalDescriptionResult = resolver.resolveInlineReference(
-		'{{ physical_description }}',
+		'{{ physical_description.description }}',
 		locale,
 		{ path: 'root.character.background.physicalDescription', random },
 	);
@@ -81,7 +81,7 @@ function populateRandomCharacter(character, options = {}) {
 	character.background.goals = '';
 
 	character.personality.traits = pickMany('personality', 2, locale, random)
-		.map(getTextValue);
+		.map(entry => getField(entry, 'description'));
 	const profile = getStatProfile('character-balanced');
 	if (!profile) {
 		throw generationError(
@@ -293,9 +293,12 @@ function pickMany(generatorId, count, locale, random, predicate = () => true) {
 }
 
 function getField(entry, requestedField) {
+	if (requestedField === 'name' && typeof entry?.name === 'string') {
+		return entry.name;
+	}
 	if (!entry?.fields) {
 		throw generationError(
-			`Expected a structured generator entry with ${requestedField}.`,
+			`Expected a generator entry with additional field ${requestedField}.`,
 			'errors.generatorStructuredExpected',
 			{ field: requestedField },
 		);
@@ -310,20 +313,10 @@ function getField(entry, requestedField) {
 	return entry.fields[requestedField];
 }
 
-function getTextValue(entry) {
-	if (entry?.value !== undefined) {
-		return entry.value;
-	}
-	throw generationError(
-		'Expected a text generator entry.',
-		'errors.generatorTextExpected',
-	);
-}
-
 function getResolvedTextValue(result) {
-	if (result?.fields !== undefined || typeof result?.value !== 'string') {
+	if (typeof result?.value !== 'string') {
 		throw generationError(
-			'Expected a text generator result.',
+			'Expected a generator result containing one selected string.',
 			'errors.generatorTextExpected',
 		);
 	}

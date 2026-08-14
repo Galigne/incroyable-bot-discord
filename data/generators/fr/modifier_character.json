@@ -1,126 +1,125 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "modifier_character",
   "visibility": "internal",
   "name": "Modificateurs de personnage",
   "description": "Variations descriptives persistantes pour les personnages générés",
   "entrySchema": {
-    "type": "fields",
-    "required": ["name", "description"]
+    "required": ["description"]
   },
   "entries": [
     {
       "id": "scarred",
+      "name": "Cicatrices anciennes",
       "weight": 3,
       "fields": {
-        "name": "Cicatrices anciennes",
         "description": "De vieilles cicatrices marquent le corps et témoignent des dangers surmontés."
       }
     },
     {
       "id": "pale",
+      "name": "Pâleur inhabituelle",
       "weight": 2,
       "fields": {
-        "name": "Pâleur inhabituelle",
         "description": "Une coloration anormalement pâle donne un aspect étrange à des traits pourtant familiers."
       }
     },
     {
       "id": "ornate_markings",
+      "name": "Marques ouvragées",
       "weight": 2,
       "fields": {
-        "name": "Marques ouvragées",
         "description": "Des marques naturelles caractéristiques dessinent des motifs complexes sur le corps."
       }
     },
     {
       "id": "weathered",
+      "name": "Marques des éléments",
       "fields": {
-        "name": "Marques des éléments",
         "description": "Les intempéries ont laissé des traits burinés et une apparence visiblement éprouvée."
       }
     },
     {
       "id": "one_eyed",
+      "name": "Borgne",
       "fields": {
-        "name": "Borgne",
         "description": "Un œil manque ou reste définitivement fermé, ce qui rend son visage immédiatement reconnaissable."
       }
     },
     {
       "id": "burn_scarred",
+      "name": "Cicatrices de brûlure",
       "fields": {
-        "name": "Cicatrices de brûlure",
         "description": "D’anciennes cicatrices de brûlure couvrent une partie bien visible du corps."
       }
     },
     {
       "id": "heavily_tattooed",
+      "name": "Largement tatoué",
       "fields": {
-        "name": "Largement tatoué",
         "description": "De nombreux tatouages superposés couvrent une grande partie de la peau visible."
       }
     },
     {
       "id": "ritual_scarification",
+      "name": "Scarifications rituelles",
       "fields": {
-        "name": "Scarifications rituelles",
         "description": "Des scarifications en relief dessinent des motifs cérémoniels répétés sur la peau."
       }
     },
     {
       "id": "prosthetic_limb",
+      "name": "Membre prothétique",
       "fields": {
-        "name": "Membre prothétique",
         "description": "Une prothèse bien visible remplace un bras ou une jambe, avec des matériaux et une facture adaptés à l’univers."
       }
     },
     {
       "id": "missing_fingers",
+      "name": "Doigts manquants",
       "fields": {
-        "name": "Doigts manquants",
         "description": "Plusieurs doigts manquent à une main, une particularité immédiatement visible."
       }
     },
     {
       "id": "noticeable_limp",
+      "name": "Boiterie marquée",
       "fields": {
-        "name": "Boiterie marquée",
         "description": "Une ancienne blessure provoque une boiterie prononcée et facile à reconnaître."
       }
     },
     {
       "id": "unnatural_eyes",
+      "name": "Yeux surnaturels",
       "fields": {
-        "name": "Yeux surnaturels",
         "description": "Les yeux ont une couleur, une forme ou des reflets manifestement surnaturels."
       }
     },
     {
       "id": "magical_markings",
+      "name": "Marques magiques",
       "fields": {
-        "name": "Marques magiques",
         "description": "Des symboles visibles miroitent, se déplacent ou luisent faiblement sur la peau sans qu’une fonction précise soit évidente."
       }
     },
     {
       "id": "discolored_veins",
+      "name": "Veines aux couleurs anormales",
       "fields": {
-        "name": "Veines aux couleurs anormales",
         "description": "Des veines d’une couleur inhabituelle se dessinent nettement sous la peau."
       }
     },
     {
       "id": "missing_ear",
+      "name": "Oreille manquante",
       "fields": {
-        "name": "Oreille manquante",
         "description": "Une oreille manque en partie ou entièrement, donnant au profil une forme caractéristique."
       }
     },
     {
       "id": "stitch_scars",
+      "name": "Cicatrices chirurgicales étendues",
       "fields": {
-        "name": "Cicatrices chirurgicales étendues",
         "description": "De longues marques laissées par des opérations ou des sutures grossières traversent plusieurs zones visibles du corps."
       }
     }

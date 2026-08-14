@@ -1,401 +1,400 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "weapons",
   "visibility": "internal",
   "name": "Armes",
   "description": "Armes adaptées aux personnages générés",
   "entrySchema": {
-    "type": "fields",
-    "required": ["name", "description"]
+    "required": ["description"]
   },
   "entries": [
     {
       "id": "short_sword",
+      "name": "Épée courte",
       "weight": 5,
       "fields": {
-        "name": "Épée courte",
         "description": "Une lame rapide et polyvalente, adaptée au combat rapproché."
       }
     },
     {
       "id": "hunting_bow",
+      "name": "Arc de chasse",
       "weight": 5,
       "fields": {
-        "name": "Arc de chasse",
         "description": "Une arme à distance pratique disposant de munitions ordinaires illimitées."
       }
     },
     {
       "id": "mace",
+      "name": "Masse d'armes",
       "weight": 4,
       "fields": {
-        "name": "Masse d'armes",
         "description": "Une arme contondante à une main, efficace contre les protections rigides."
       }
     },
     {
       "id": "quarterstaff",
+      "name": "Bâton de combat",
       "weight": 4,
       "fields": {
-        "name": "Bâton de combat",
         "description": "Un simple bâton à deux mains offrant défense, allonge et effet de levier."
       }
     },
     {
       "id": "greatsword",
+      "name": "Espadon",
       "weight": 3,
       "fields": {
-        "name": "Espadon",
         "description": "Une imposante épée à deux mains conçue pour de puissantes attaques amples."
       }
     },
     {
       "id": "rapier",
+      "name": "Rapière",
       "weight": 3,
       "fields": {
-        "name": "Rapière",
         "description": "Une épée d'estoc précise qui privilégie la Dextérité et un jeu de jambes maîtrisé."
       }
     },
     {
       "id": "recurve_bow",
+      "name": "Arc recourbé",
       "weight": 3,
       "fields": {
-        "name": "Arc recourbé",
         "description": "Un arc compact qui reste efficace à cheval ou dans les espaces exigus."
       }
     },
     {
       "id": "hand_axe",
+      "name": "Hachette",
       "weight": 3,
       "fields": {
-        "name": "Hachette",
         "description": "Une arme tranchante compacte, assez bien équilibrée pour être lancée."
       }
     },
     {
       "id": "scimitar",
+      "name": "Cimeterre",
       "weight": 3,
       "fields": {
-        "name": "Cimeterre",
         "description": "Une large épée courbe conçue pour enchaîner des coups de taille fluides."
       }
     },
     {
       "id": "glaive",
+      "name": "Glaive",
       "weight": 2,
       "fields": {
-        "name": "Glaive",
         "description": "Une longue arme d'hast munie d'une lame tranchante et offrant une excellente allonge."
       }
     },
     {
       "id": "twin_fighting_knives",
+      "name": "Paire de couteaux de combat",
       "weight": 2,
       "fields": {
-        "name": "Paire de couteaux de combat",
         "description": "Deux lames rapides et assorties, conçues pour être maniées ensemble."
       }
     },
     {
       "id": "heavy_repeating_crossbow",
+      "name": "Arbalète lourde à répétition",
       "weight": 2,
       "fields": {
-        "name": "Arbalète lourde à répétition",
         "description": "Un mécanisme encombrant capable de tirer rapidement plusieurs traits avant d'être rechargé."
       }
     },
     {
       "id": "trident",
+      "name": "Trident",
       "weight": 2,
       "fields": {
-        "name": "Trident",
         "description": "Une lance à trois pointes adaptée à la pêche, à l'immobilisation et au combat sous-marin."
       }
     },
     {
       "id": "sling",
+      "name": "Fronde",
       "weight": 2,
       "fields": {
-        "name": "Fronde",
         "description": "Une arme à distance légère utilisant des pierres ou de petites billes de plomb."
       }
     },
     {
       "id": "runesmiths_hammer",
+      "name": "Marteau de maître runique",
       "fields": {
-        "name": "Marteau de maître runique",
         "description": "Un marteau d'artisan renforcé, équilibré pour le combat comme pour l'art runique."
       }
     },
     {
       "id": "bladed_chain",
+      "name": "Chaîne hérissée de lames",
       "fields": {
-        "name": "Chaîne hérissée de lames",
         "description": "Une arme souple et difficile à manier, qui offre une grande allonge au prix de risques considérables."
       }
     },
     {
       "id": "crystal_scepter",
+      "name": "Sceptre de cristal",
       "fields": {
-        "name": "Sceptre de cristal",
         "description": "Un instrument magique robuste qui peut également servir de masse légère."
       }
     },
     {
       "id": "meteor_iron_maul",
+      "name": "Maillet en fer météorique",
       "fields": {
-        "name": "Maillet en fer météorique",
         "description": "Un marteau à deux mains exceptionnellement lourd, dont les impacts sont dévastateurs."
       }
     },
     {
       "id": "moon_silver_chakram",
+      "name": "Chakram en argent lunaire",
       "fields": {
-        "name": "Chakram en argent lunaire",
         "description": "Une lame de jet circulaire qui brille sous la lumière de la lune."
       }
     },
     {
       "id": "bone_longbow",
+      "name": "Arc long en os",
       "fields": {
-        "name": "Arc long en os",
         "description": "Un arc puissant assemblé à partir des ossements d'une bête gigantesque."
       }
     },
     {
       "id": "longsword",
+      "name": "Épée longue",
       "fields": {
-        "name": "Épée longue",
         "description": "Une lame polyvalente à une main, adaptée aux tailles comme aux attaques d’estoc."
       }
     },
     {
       "id": "dagger",
+      "name": "Dague",
       "fields": {
-        "name": "Dague",
         "description": "Une lame courte, facile à dissimuler et utile au combat comme pour les travaux précis."
       }
     },
     {
       "id": "spear",
+      "name": "Lance",
       "fields": {
-        "name": "Lance",
         "description": "Une arme d’hast simple offrant allonge, contrôle de l’espace et efficacité contre une charge."
       }
     },
     {
       "id": "harpoon",
+      "name": "Harpon",
       "fields": {
-        "name": "Harpon",
         "description": "Une lourde pointe barbelée reliée à une corde, conçue pour retenir une cible après l’impact."
       }
     },
     {
       "id": "halberd",
+      "name": "Hallebarde",
       "fields": {
-        "name": "Hallebarde",
         "description": "Une arme d’hast combinant pointe, lame de hache et crochet pour menacer plusieurs types de défense."
       }
     },
     {
       "id": "morning_star",
+      "name": "Morgenstern",
       "fields": {
-        "name": "Morgenstern",
         "description": "Une masse hérissée concentrant son impact sur une petite surface."
       }
     },
     {
       "id": "club",
+      "name": "Massue",
       "fields": {
-        "name": "Massue",
         "description": "Une arme contondante robuste, facile à fabriquer et efficace pour repousser un adversaire."
       }
     },
     {
       "id": "katana",
+      "name": "Katana",
       "fields": {
-        "name": "Katana",
         "description": "Une longue lame courbe privilégiant les coupes rapides et un maniement précis à deux mains."
       }
     },
     {
       "id": "saber",
+      "name": "Sabre",
       "fields": {
-        "name": "Sabre",
         "description": "Une lame courbe à une main, légère et adaptée au combat mobile."
       }
     },
     {
       "id": "flail",
+      "name": "Fléau",
       "fields": {
-        "name": "Fléau",
         "description": "Une masse articulée difficile à maîtriser, capable de contourner certaines gardes."
       }
     },
     {
       "id": "twin_blades",
+      "name": "Lames jumelles",
       "fields": {
-        "name": "Lames jumelles",
         "description": "Deux armes courtes équilibrées pour un style rapide exigeant coordination et proximité."
       }
     },
     {
       "id": "battle_axe",
+      "name": "Hache de bataille",
       "fields": {
-        "name": "Hache de bataille",
         "description": "Une arme de taille puissante, efficace contre les boucliers et les obstacles en bois."
       }
     },
     {
       "id": "warhammer",
+      "name": "Marteau de guerre",
       "fields": {
-        "name": "Marteau de guerre",
         "description": "Une arme lourde concentrant sa force contre les armures rigides et les structures."
       }
     },
     {
       "id": "greataxe",
+      "name": "Grande hache",
       "fields": {
-        "name": "Grande hache",
         "description": "Une arme massive à deux mains produisant des frappes larges au prix d’une défense réduite."
       }
     },
     {
       "id": "great_hammer",
+      "name": "Grand marteau",
       "fields": {
-        "name": "Grand marteau",
         "description": "Un marteau à deux mains extrêmement lourd, conçu pour briser protections et fortifications."
       }
     },
     {
       "id": "war_scythe",
+      "name": "Faux de guerre",
       "fields": {
-        "name": "Faux de guerre",
         "description": "Une longue lame recourbée transformée en arme d’hast pour accrocher et faucher."
       }
     },
     {
       "id": "whip",
+      "name": "Fouet",
       "fields": {
-        "name": "Fouet",
         "description": "Une arme flexible utile pour maintenir la distance, désarmer ou entraver une cible."
       }
     },
     {
       "id": "fighting_claws",
+      "name": "Griffes de combat",
       "fields": {
-        "name": "Griffes de combat",
         "description": "Des lames fixées aux mains qui prolongent les attaques naturelles sans libérer la prise."
       }
     },
     {
       "id": "longbow",
+      "name": "Arc long",
       "fields": {
-        "name": "Arc long",
         "description": "Un arc puissant exigeant de l’espace et de la force, efficace à grande distance."
       }
     },
     {
       "id": "crossbow",
+      "name": "Arbalète",
       "fields": {
-        "name": "Arbalète",
         "description": "Une arme mécanique précise dont la puissance compense un rechargement plus lent."
       }
     },
     {
       "id": "combat_wand",
+      "name": "Baguette de combat",
       "fields": {
-        "name": "Baguette de combat",
         "description": "Un focaliseur court et renforcé permettant de canaliser une LOI tout en parant des coups légers."
       }
     },
     {
       "id": "combat_scepter",
+      "name": "Sceptre de combat",
       "fields": {
-        "name": "Sceptre de combat",
         "description": "Un focaliseur robuste pouvant servir de masse légère lorsque la magie devient impraticable."
       }
     },
     {
       "id": "portable_ballista",
+      "name": "Baliste portative",
       "fields": {
-        "name": "Baliste portative",
         "description": "Une arbalète démesurée montée sur support, très puissante mais longue à déplacer et préparer."
       }
     },
     {
       "id": "javelin",
+      "name": "Javeline",
       "weight": 3,
       "fields": {
-        "name": "Javeline",
         "description": "Une lance légère conçue pour être lancée, mais qui reste pratique au corps à corps."
       }
     },
     {
       "id": "lance",
+      "name": "Lance de cavalerie",
       "weight": 2,
       "fields": {
-        "name": "Lance de cavalerie",
         "description": "Une longue arme d’estoc conçue pour les charges montées et pour maintenir les cibles à distance."
       }
     },
     {
       "id": "throwing_knives",
+      "name": "Couteaux de lancer",
       "weight": 3,
       "fields": {
-        "name": "Couteaux de lancer",
         "description": "Un ensemble de petites lames équilibrées pour des lancers rapides à courte portée."
       }
     },
     {
       "id": "throwing_hammer",
+      "name": "Marteau de lancer",
       "weight": 2,
       "fields": {
-        "name": "Marteau de lancer",
         "description": "Un marteau compact et lesté, conçu pour atteindre sa cible avec précision lorsqu’il est lancé."
       }
     },
     {
       "id": "blowgun",
+      "name": "Sarbacane",
       "weight": 2,
       "fields": {
-        "name": "Sarbacane",
         "description": "Un tube silencieux qui propulse avec précision de petites fléchettes à courte distance."
       }
     },
     {
       "id": "runed_sword",
+      "name": "Épée runique",
       "fields": {
-        "name": "Épée runique",
         "description": "Une épée portant une rune associée à la {{ rules.name }} ; le MJ en détermine la fonction précise."
       }
     },
     {
       "id": "runed_dagger",
+      "name": "Dague runique",
       "fields": {
-        "name": "Dague runique",
         "description": "Une dague portant une rune associée à la {{ rules.name }} ; le MJ en détermine la fonction précise."
       }
     },
     {
       "id": "runed_spear",
+      "name": "Lance runique",
       "fields": {
-        "name": "Lance runique",
         "description": "Une lance portant une rune associée à la {{ rules.name }} ; le MJ en détermine la fonction précise."
       }
     },
     {
       "id": "runed_bow",
+      "name": "Arc runique",
       "fields": {
-        "name": "Arc runique",
         "description": "Un arc portant une rune associée à la {{ rules.name }} ; le MJ en détermine la fonction précise."
       }
     },
     {
       "id": "runed_hammer",
+      "name": "Marteau runique",
       "fields": {
-        "name": "Marteau runique",
         "description": "Un marteau portant une rune associée à la {{ rules.name }} ; le MJ en détermine la fonction précise."
       }
     }

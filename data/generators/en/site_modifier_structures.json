@@ -1,25 +1,24 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "site_modifier_structures",
   "visibility": "internal",
   "name": "Historical site modifiers",
   "description": "Descriptive historical variations compatible with specific location generators",
   "entrySchema": {
-    "type": "fields",
-    "required": ["name", "description"]
+    "required": ["description"]
   },
   "entries": [
     {
       "id": "ruined",
+      "name": "Ruined",
       "fields": {
-        "name": "Ruined",
         "description": "The structure is unstable, some accessways are blocked, and movement may reveal or destroy a passage."
       }
     },
     {
       "id": "recently_destroyed",
+      "name": "Recently Destroyed",
       "fields": {
-        "name": "Recently Destroyed",
         "description": "Fresh traces still reveal the event and allow pursuit of those responsible or surviving."
       }
     }

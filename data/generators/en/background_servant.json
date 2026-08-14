@@ -1,52 +1,52 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "servant",
   "visibility": "internal",
   "name": "Servant archetypes",
   "description": "Household and service roles",
   "entrySchema": {
-    "type": "text"
+    "required": []
   },
   "entries": [
     {
       "id": "household_servant",
-      "value": "Household servant"
+      "name": "Household servant"
     },
     {
       "id": "attendant",
-      "value": "Attendant"
+      "name": "Attendant"
     },
     {
       "id": "day_laborer",
-      "value": "Day laborer"
+      "name": "Day laborer"
     },
     {
       "id": "cook",
-      "value": "Cook"
+      "name": "Cook"
     },
     {
       "id": "stable_hand",
-      "value": "Stable hand"
+      "name": "Stable hand"
     },
     {
       "id": "courier",
-      "value": "Courier"
+      "name": "Courier"
     },
     {
       "id": "driver",
-      "value": "Driver"
+      "name": "Driver"
     },
     {
       "id": "steward",
-      "value": "Steward"
+      "name": "Steward"
     },
     {
       "id": "groundskeeper",
-      "value": "Groundskeeper"
+      "name": "Groundskeeper"
     },
     {
       "id": "messenger",
-      "value": "Messenger"
+      "name": "Messenger"
     }
   ]
 }

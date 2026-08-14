@@ -116,12 +116,12 @@ write real saves.
   pre-mutation validation, and domain mutation.
 - `services/mechanics/`: Discord-independent combatant and character constants,
   validation, statistics, resources, armor, damage, and generation formulas.
-- `services/generatorSchema.js`: stable public façade for generator-v3 validation
+- `services/generatorSchema.js`: stable public façade for generator-v4 validation
   and the public creature router identifier.
 - `services/generatorSchema/`: focused internal validators for shared assertions,
   envelopes, entries, parity, modifiers, references, creature metadata, and catalog
   relationships.
-- `services/generatorCatalog.js`: recursively loads the complete generator-v3
+- `services/generatorCatalog.js`: recursively loads the complete generator-v4
   locale pair and exposes stable-ID lookup plus public visibility filtering.
 - `services/generatorResolver.js`: resolves public roots into localized structured
   results, owns repeated entry/route/field traversal, coordinates nested references
@@ -583,7 +583,7 @@ after successful deletion.
 
 ## Random generators
 
-Use `data/generators/README.md` as the schema-v3 authoring reference and
+Use `data/generators/README.md` as the schema-v4 authoring reference and
 `data/generators/GENERATOR_ARCHITECTURE.md` as the authority for current routing,
 resolution, provenance, modifiers, and character/creature generation. Keep command
 behavior in the root `README.md`; do not copy those documents into this guide.
@@ -600,11 +600,17 @@ The durable implementation constraints are:
 - Expose only `public` generators as initial `/gen` roots, autocomplete roots, and
   help values. Keep `internal` generators resolvable by structural traversal,
   workflows, inline references, and modifier relationships.
-- Every structured field is ordinary displayable generated data. Functional entry
-  metadata is restricted to the top-level `id`, `weight`, `generator`, and
-  creature-detail `generation` properties alongside exactly one `fields` or
-  `value` payload. Never add `entrySchema.technical` or hide a field because it is
-  mechanically useful.
+- Every entry has a stable `id` and mandatory localized top-level `name`.
+  `entrySchema.required` lists only the zero to 25 additional fields shared by all
+  entries; an empty list makes the name the complete generated value, while a
+  non-empty list requires an exact `fields` object. Never use `entrySchema.type`,
+  an entry `value`, or `fields.name`. Functional entry metadata is restricted to
+  top-level `weight`, `generator`, and creature-detail `generation`. Every name and
+  additional field is ordinary displayable generated data; never hide a field
+  because it is mechanically useful.
+- Entry names must be unambiguous within each localized generator, and public
+  generator names must be unambiguous within each locale, after ignoring case,
+  accents or diacritics, repeated whitespace, and separating punctuation.
 - Keep structural traversal, inline-reference resolution, selection, cycle/depth
   protection, final-field modifier suppression, and provenance in resolver
   services. Do not parse paths or references, select entries, or reconstruct
@@ -632,7 +638,7 @@ The durable implementation constraints are:
 - Category roots keep unprefixed filenames and IDs. Child filenames use
   `<category>_<concept>.json`, child IDs use only `<concept>`, and all references
   use generator IDs rather than filenames. The public `loot`, `site`, `group`, and
-  `modifier` roots are structured routers over internal children. Bare router
+  `modifier` roots are name-only routers over internal children. Bare router
   generation displays only the selected route entry; `.generator` traversal
   follows its direct structural route.
 - There is no `inventory` generator. Random character inventory resolves three

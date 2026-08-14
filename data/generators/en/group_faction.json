@@ -1,27 +1,18 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "faction",
   "visibility": "internal",
   "name": "Faction",
   "description": "Organizations with goals, resources, hierarchy, allies, and enemies",
   "entrySchema": {
-    "type": "fields",
-    "required": [
-      "name",
-      "type",
-      "goal",
-      "resources",
-      "hierarchy",
-      "allies",
-      "enemies"
-    ]
+    "required": ["type", "goal", "resources", "hierarchy", "allies", "enemies"]
   },
   "entries": [
     {
       "id": "the_wayfarers_guild",
+      "name": "The Wayfarers' Guild",
       "weight": 3,
       "fields": {
-        "name": "The Wayfarers' Guild",
         "type": "Adventurers' guild",
         "goal": "Make dangerous travel and exploration profitable but survivable.",
         "resources": "Maps, chapterhouses, veteran guides, rescue funds.",
@@ -32,9 +23,9 @@
     },
     {
       "id": "house_valeward",
+      "name": "House Valeward",
       "weight": 3,
       "fields": {
-        "name": "House Valeward",
         "type": "Noble house",
         "goal": "Secure a royal marriage and control the western river trade.",
         "resources": "Fertile estates, cavalry, marriage ties, river tolls.",
@@ -45,9 +36,9 @@
     },
     {
       "id": "the_ashen_lanterns",
+      "name": "The Ashen Lanterns",
       "weight": 3,
       "fields": {
-        "name": "The Ashen Lanterns",
         "type": "Religious order",
         "goal": "Find and safely destroy undead outbreaks before panic spreads.",
         "resources": "Exorcists, sanctified fire, hidden hospices, burial records.",
@@ -58,9 +49,9 @@
     },
     {
       "id": "the_brass_compact",
+      "name": "The Brass Compact",
       "weight": 3,
       "fields": {
-        "name": "The Brass Compact",
         "type": "Merchant guild",
         "goal": "Standardize weights, contracts, and currency across the region.",
         "resources": "Warehouses, caravans, banks, hired guards.",
@@ -71,9 +62,9 @@
     },
     {
       "id": "the_red_knives",
+      "name": "The Red Knives",
       "weight": 2,
       "fields": {
-        "name": "The Red Knives",
         "type": "Criminal syndicate",
         "goal": "Control contraband without allowing uncontrolled street violence.",
         "resources": "Smuggling routes, bribed guards, safehouses, informants.",
@@ -84,9 +75,9 @@
     },
     {
       "id": "the_verdant_covenant",
+      "name": "The Verdant Covenant",
       "weight": 2,
       "fields": {
-        "name": "The Verdant Covenant",
         "type": "Druidic circle",
         "goal": "Prevent settlement from crossing ancient ecological boundaries.",
         "resources": "Shape-shifters, sacred groves, animal messengers, weather lore.",
@@ -97,9 +88,9 @@
     },
     {
       "id": "the_seventh_banner",
+      "name": "The Seventh Banner",
       "weight": 2,
       "fields": {
-        "name": "The Seventh Banner",
         "type": "Mercenary army",
         "goal": "Win land and legal recognition after decades of foreign wars.",
         "resources": "Disciplined infantry, engineers, siege equipment, veterans.",
@@ -110,9 +101,9 @@
     },
     {
       "id": "the_quiet_archive",
+      "name": "The Quiet Archive",
       "weight": 2,
       "fields": {
-        "name": "The Quiet Archive",
         "type": "Scholarly society",
         "goal": "Collect dangerous knowledge and restrict access to it.",
         "resources": "Secret libraries, translators, memory magic, academic agents.",
@@ -123,9 +114,9 @@
     },
     {
       "id": "the_salt_throne",
+      "name": "The Salt Throne",
       "weight": 2,
       "fields": {
-        "name": "The Salt Throne",
         "type": "Pirate confederacy",
         "goal": "Force coastal states to recognize a free maritime territory.",
         "resources": "Fast ships, island coves, stolen charts, coastal spies.",
@@ -136,9 +127,9 @@
     },
     {
       "id": "the_white_veil",
+      "name": "The White Veil",
       "weight": 2,
       "fields": {
-        "name": "The White Veil",
         "type": "Assassins' order",
         "goal": "Remove leaders judged likely to cause mass suffering.",
         "resources": "Disguises, poisons, intelligence networks, false identities.",
@@ -149,9 +140,9 @@
     },
     {
       "id": "the_hearth_union",
+      "name": "The Hearth Union",
       "weight": 2,
       "fields": {
-        "name": "The Hearth Union",
         "type": "Workers' league",
         "goal": "Secure fair contracts, safe workplaces, and political representation.",
         "resources": "Strike funds, skilled labor, meeting halls, public support.",
@@ -162,9 +153,9 @@
     },
     {
       "id": "the_ivory_standard",
+      "name": "The Ivory Standard",
       "weight": 2,
       "fields": {
-        "name": "The Ivory Standard",
         "type": "Knightly order",
         "goal": "Restore lawful roads and defend communities abandoned by the crown.",
         "resources": "Fortified keeps, trained cavalry, squires, public prestige.",
@@ -175,9 +166,9 @@
     },
     {
       "id": "the_new_dawn_assembly",
+      "name": "The New Dawn Assembly",
       "weight": 1,
       "fields": {
-        "name": "The New Dawn Assembly",
         "type": "Revolutionary movement",
         "goal": "Replace hereditary rule with elected regional councils.",
         "resources": "Pamphlet presses, neighborhood cells, defectors, donations.",
@@ -188,9 +179,9 @@
     },
     {
       "id": "the_hollow_choir",
+      "name": "The Hollow Choir",
       "weight": 1,
       "fields": {
-        "name": "The Hollow Choir",
         "type": "Apocalyptic cult",
         "goal": "Silence every source of sound to awaken a sleeping god.",
         "resources": "Fanatical converts, silence magic, infiltrated musicians.",
@@ -201,9 +192,9 @@
     },
     {
       "id": "the_sapphire_embassy",
+      "name": "The Sapphire Embassy",
       "weight": 1,
       "fields": {
-        "name": "The Sapphire Embassy",
         "type": "Foreign political network",
         "goal": "Make neighboring states economically dependent without open war.",
         "resources": "Diplomats, loans, luxury goods, trained agents.",
@@ -214,9 +205,9 @@
     },
     {
       "id": "the_chainbreakers",
+      "name": "The Chainbreakers",
       "weight": 1,
       "fields": {
-        "name": "The Chainbreakers",
         "type": "Liberation network",
         "goal": "End slavery and relocate freed people beyond retaliation.",
         "resources": "Safehouses, forged papers, sympathetic sailors, hidden funds.",
@@ -227,9 +218,9 @@
     },
     {
       "id": "the_gilded_scale",
+      "name": "The Gilded Scale",
       "weight": 1,
       "fields": {
-        "name": "The Gilded Scale",
         "type": "Banking consortium",
         "goal": "Control sovereign debt and make warfare financially impossible without them.",
         "resources": "Vaults, credit ledgers, debt collectors, political leverage.",
@@ -240,9 +231,9 @@
     },
     {
       "id": "the_starfall_society",
+      "name": "The Starfall Society",
       "weight": 1,
       "fields": {
-        "name": "The Starfall Society",
         "type": "Arcane research society",
         "goal": "Recover celestial objects before governments weaponize them.",
         "resources": "Observatories, mages, expedition teams, meteor fragments.",
@@ -253,9 +244,9 @@
     },
     {
       "id": "the_black_orchard",
+      "name": "The Black Orchard",
       "weight": 1,
       "fields": {
-        "name": "The Black Orchard",
         "type": "Poisoners' cartel",
         "goal": "Monopolize rare toxins and the antidotes that control them.",
         "resources": "Hidden gardens, alchemists, apothecary fronts, blackmail files.",
@@ -266,9 +257,9 @@
     },
     {
       "id": "the_common_shield",
+      "name": "The Common Shield",
       "weight": 1,
       "fields": {
-        "name": "The Common Shield",
         "type": "Citizen militia",
         "goal": "Keep local defense under community control rather than noble armies.",
         "resources": "Volunteers, town arsenals, watchtowers, local knowledge.",

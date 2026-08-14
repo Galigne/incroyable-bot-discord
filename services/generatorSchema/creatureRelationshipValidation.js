@@ -15,8 +15,6 @@ function validateCreatureGenerationRelationships(
 	if (
 		generation.fixedRules?.some(rule => (
 			!rules
-			|| rules.entrySchema.type !== 'fields'
-			|| !rules.entrySchema.required.includes('name')
 			|| !rules.entrySchema.required.includes('description')
 			|| !rules.entries.some(candidate => candidate.id === rule.entry)
 		))
@@ -55,8 +53,9 @@ function validateCreatureGenerationRelationships(
 
 function assertReferenceFields(sources, fields, ownerId, label) {
 	if (sources.some(source => (
-		source.entrySchema.type !== 'fields'
-		|| fields.some(field => !source.entrySchema.required.includes(field))
+		fields.some(field => (
+			field !== 'name' && !source.entrySchema.required.includes(field)
+		))
 	))) {
 		throw generatorSchemaError(
 			'INVALID_CREATURE_REFERENCE_TARGET',

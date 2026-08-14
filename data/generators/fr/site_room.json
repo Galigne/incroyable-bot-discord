@@ -1,142 +1,220 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "room",
   "visibility": "internal",
   "name": "Pièces",
   "description": "Pièces et espaces intérieurs de bâtiments ou de donjons",
   "entrySchema": {
-    "type": "text"
+    "required": ["description"]
   },
   "entries": [
     {
       "id": "bedroom",
+      "name": "Chambre",
       "weight": 4,
-      "value": "Chambre — lit, coffre, nécessaire de toilette, souvenirs personnels et traces de la dernière activité de l’occupant."
+      "fields": {
+        "description": "lit, coffre, nécessaire de toilette, souvenirs personnels et traces de la dernière activité de l’occupant."
+      }
     },
     {
       "id": "living_room",
+      "name": "Salle commune",
       "weight": 4,
-      "value": "Salle commune — sièges usés autour d’un foyer, objets familiaux et lettre dissimulée."
+      "fields": {
+        "description": "sièges usés autour d’un foyer, objets familiaux et lettre dissimulée."
+      }
     },
     {
       "id": "kitchen",
+      "name": "Cuisine",
       "weight": 4,
-      "value": "Cuisine — plans de travail, fours, couteaux, provisions et plat récemment laissé sur le feu."
+      "fields": {
+        "description": "plans de travail, fours, couteaux, provisions et plat récemment laissé sur le feu."
+      }
     },
     {
       "id": "dining_hall",
+      "name": "Salle à manger",
       "weight": 4,
-      "value": "Salle à manger — longues tables, portes de service, décorations fanées et places attribuées selon le rang."
+      "fields": {
+        "description": "longues tables, portes de service, décorations fanées et places attribuées selon le rang."
+      }
     },
     {
       "id": "toilet",
+      "name": "Toilettes",
       "weight": 3,
-      "value": "Toilettes — installations rudimentaires, conduit étroit, produits d’entretien et graffitis des précédents utilisateurs."
+      "fields": {
+        "description": "installations rudimentaires, conduit étroit, produits d’entretien et graffitis des précédents utilisateurs."
+      }
     },
     {
       "id": "pantry",
+      "name": "Garde-manger",
       "weight": 3,
-      "value": "Garde-manger — rayonnages de conserves et mur qui sonne creux lorsqu’on le frappe."
+      "fields": {
+        "description": "rayonnages de conserves et mur qui sonne creux lorsqu’on le frappe."
+      }
     },
     {
       "id": "storeroom",
+      "name": "Réserve",
       "weight": 3,
-      "value": "Réserve — caisses étiquetées, mobilier de rechange, poussière et objet qui n’a manifestement rien à faire ici."
+      "fields": {
+        "description": "caisses étiquetées, mobilier de rechange, poussière et objet qui n’a manifestement rien à faire ici."
+      }
     },
     {
       "id": "office",
+      "name": "Bureau",
       "weight": 3,
-      "value": "Bureau — table de travail, correspondance, livres de comptes, tiroirs fermés à clé et calendrier de rendez-vous."
+      "fields": {
+        "description": "table de travail, correspondance, livres de comptes, tiroirs fermés à clé et calendrier de rendez-vous."
+      }
     },
     {
       "id": "workshop",
+      "name": "Atelier",
       "weight": 3,
-      "value": "Atelier — outils spécialisés, ouvrage inachevé, chutes de matériaux et appareil dangereux toujours en marche."
+      "fields": {
+        "description": "outils spécialisés, ouvrage inachevé, chutes de matériaux et appareil dangereux toujours en marche."
+      }
     },
     {
       "id": "guardroom",
+      "name": "Salle des gardes",
       "weight": 3,
-      "value": "Salle des gardes — râteliers d’armes, tableau de service, cartes, repas à moitié terminés et mécanisme d’alarme."
+      "fields": {
+        "description": "râteliers d’armes, tableau de service, cartes, repas à moitié terminés et mécanisme d’alarme."
+      }
     },
     {
       "id": "cell",
+      "name": "Cellule",
       "weight": 3,
-      "value": "Cellule — entraves, messages gravés, eau croupie et traces d’une évasion impossible."
+      "fields": {
+        "description": "entraves, messages gravés, eau croupie et traces d’une évasion impossible."
+      }
     },
     {
       "id": "library",
+      "name": "Bibliothèque",
       "weight": 2,
-      "value": "Bibliothèque — rayonnages surchargés, pupitres de lecture, échelles, catalogues et livre volontairement rangé au mauvais endroit."
+      "fields": {
+        "description": "rayonnages surchargés, pupitres de lecture, échelles, catalogues et livre volontairement rangé au mauvais endroit."
+      }
     },
     {
       "id": "laboratory",
+      "name": "Laboratoire",
       "weight": 2,
-      "value": "Laboratoire — paillasses tachées, instruments fragiles, échantillons scellés et expérience toujours en cours."
+      "fields": {
+        "description": "paillasses tachées, instruments fragiles, échantillons scellés et expérience toujours en cours."
+      }
     },
     {
       "id": "armory",
+      "name": "Armurerie",
       "weight": 2,
-      "value": "Armurerie — armes entretenues, supports d’armure, registres de distribution et plusieurs emplacements ostensiblement vides."
+      "fields": {
+        "description": "armes entretenues, supports d’armure, registres de distribution et plusieurs emplacements ostensiblement vides."
+      }
     },
     {
       "id": "infirmary",
+      "name": "Infirmerie",
       "weight": 2,
-      "value": "Infirmerie — lits étroits, instruments médicaux, armoires à remèdes et notes sur les patients rédigées en code."
+      "fields": {
+        "description": "lits étroits, instruments médicaux, armoires à remèdes et notes sur les patients rédigées en code."
+      }
     },
     {
       "id": "chapel",
+      "name": "Chapelle",
       "weight": 2,
-      "value": "Chapelle — bancs, images sacrées, offrandes et petit passage menant à un confessionnal privé."
+      "fields": {
+        "description": "bancs, images sacrées, offrandes et petit passage menant à un confessionnal privé."
+      }
     },
     {
       "id": "bathing_room",
+      "name": "Salle des bains",
       "weight": 2,
-      "value": "Salle des bains — bassin chauffé, évacuations, serviettes, paravents et accès aux tunnels d’entretien."
+      "fields": {
+        "description": "bassin chauffé, évacuations, serviettes, paravents et accès aux tunnels d’entretien."
+      }
     },
     {
       "id": "nursery",
+      "name": "Chambre d’enfants",
       "weight": 2,
-      "value": "Chambre d’enfants — petits lits, jouets, tableaux d’étude et symboles protecteurs peints sous les meubles."
+      "fields": {
+        "description": "petits lits, jouets, tableaux d’étude et symboles protecteurs peints sous les meubles."
+      }
     },
     {
       "id": "ballroom",
+      "name": "Salle de bal",
       "weight": 2,
-      "value": "Salle de bal — parquet lustré, galerie des musiciens, lustres et balcons conçus pour observer les invités."
+      "fields": {
+        "description": "parquet lustré, galerie des musiciens, lustres et balcons conçus pour observer les invités."
+      }
     },
     {
       "id": "map_room",
+      "name": "Salle des cartes",
       "weight": 2,
-      "value": "Salle des cartes — cartes murales, instruments d’arpentage, marqueurs de campagne et région volontairement effacée."
+      "fields": {
+        "description": "cartes murales, instruments d’arpentage, marqueurs de campagne et région volontairement effacée."
+      }
     },
     {
       "id": "treasury",
+      "name": "Trésorerie",
       "weight": 2,
-      "value": "Trésorerie — objets de valeur inventoriés, coffres scellés, titres de propriété et plusieurs niveaux de sécurité."
+      "fields": {
+        "description": "objets de valeur inventoriés, coffres scellés, titres de propriété et plusieurs niveaux de sécurité."
+      }
     },
     {
       "id": "secret_passage",
+      "name": "Passage secret",
       "weight": 1,
-      "value": "Passage secret — conduit exigu percé de judas, marqué d’anciennes empreintes et muni d’un mécanisme qui s’ouvre ailleurs."
+      "fields": {
+        "description": "conduit exigu percé de judas, marqué d’anciennes empreintes et muni d’un mécanisme qui s’ouvre ailleurs."
+      }
     },
     {
       "id": "ritual_chamber",
+      "name": "Chambre rituelle",
       "weight": 1,
-      "value": "Chambre rituelle — motifs géométriques, entraves, offrandes consumées et pression surnaturelle persistante."
+      "fields": {
+        "description": "motifs géométriques, entraves, offrandes consumées et pression surnaturelle persistante."
+      }
     },
     {
       "id": "portal_room",
+      "name": "Salle du portail",
       "weight": 1,
-      "value": "Salle du portail — chambre renforcée organisée autour d’une porte inactive et de commandes d’arrêt d’urgence."
+      "fields": {
+        "description": "chambre renforcée organisée autour d’une porte inactive et de commandes d’arrêt d’urgence."
+      }
     },
     {
       "id": "trophy_gallery",
+      "name": "Galerie des trophées",
       "weight": 1,
-      "value": "Galerie des trophées — bêtes naturalisées, bannières prises à l’ennemi, armes célèbres et pièce exposée encore vivante."
+      "fields": {
+        "description": "bêtes naturalisées, bannières prises à l’ennemi, armes célèbres et pièce exposée encore vivante."
+      }
     },
     {
       "id": "interrogation_room",
+      "name": "Salle d’interrogatoire",
       "weight": 1,
-      "value": "Salle d’interrogatoire — chaise fixée au sol, murs insonorisés, rigole d’évacuation et liste de questions méticuleusement ordonnée."
+      "fields": {
+        "description": "chaise fixée au sol, murs insonorisés, rigole d’évacuation et liste de questions méticuleusement ordonnée."
+      }
     }
   ]
 }

@@ -1,19 +1,18 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "monster",
   "visibility": "internal",
   "name": "Monster",
   "description": "Hostile creatures and supernatural predators",
   "entrySchema": {
-    "type": "fields",
-    "required": ["name", "description"]
+    "required": ["description"]
   },
   "entries": [
     {
       "id": "grave_hound",
+      "name": "Grave Hound",
       "weight": 3,
       "fields": {
-        "name": "Grave Hound",
         "description": "a corpse-pale pack hunter that follows the scent of fear and drags isolated prey underground."
       },
       "generation": {
@@ -32,9 +31,9 @@
     },
     {
       "id": "mire_troll",
+      "name": "Mire Troll",
       "weight": 3,
       "fields": {
-        "name": "Mire Troll",
         "description": "a regenerating swamp brute covered in reeds, leeches, and stolen fishing hooks."
       },
       "generation": {
@@ -54,9 +53,9 @@
     },
     {
       "id": "cinder_drake",
+      "name": "Cinder Drake",
       "weight": 3,
       "fields": {
-        "name": "Cinder Drake",
         "description": "a dog-sized wingless dragon that spits burning resin and nests in chimneys."
       },
       "generation": {
@@ -86,9 +85,9 @@
     },
     {
       "id": "glass_spider",
+      "name": "Glass Spider",
       "weight": 2,
       "fields": {
-        "name": "Glass Spider",
         "description": "a nearly invisible ambush predator whose brittle web cuts like wire."
       },
       "generation": {
@@ -108,9 +107,9 @@
     },
     {
       "id": "bell_wraith",
+      "name": "Bell Wraith",
       "weight": 2,
       "fields": {
-        "name": "Bell Wraith",
         "description": "an armored ghost that becomes solid whenever a nearby bell rings."
       },
       "generation": {
@@ -148,9 +147,9 @@
     },
     {
       "id": "lantern_maw",
+      "name": "Lantern Maw",
       "weight": 2,
       "fields": {
-        "name": "Lantern Maw",
         "description": "a floating lure of warm light attached to a huge subterranean mouth."
       },
       "generation": {
@@ -168,9 +167,9 @@
     },
     {
       "id": "bone_orchard",
+      "name": "Bone Orchard",
       "weight": 2,
       "fields": {
-        "name": "Bone Orchard",
         "description": "a rooted colony of skeletal arms that grabs creatures and plants their bones."
       },
       "generation": {
@@ -189,9 +188,9 @@
     },
     {
       "id": "frost_widow",
+      "name": "Frost Widow",
       "weight": 2,
       "fields": {
-        "name": "Frost Widow",
         "description": "a white cavern beast that freezes moisture into decoy silhouettes."
       },
       "generation": {
@@ -217,9 +216,9 @@
     },
     {
       "id": "ink_leviathan",
+      "name": "Ink Leviathan",
       "weight": 2,
       "fields": {
-        "name": "Ink Leviathan",
         "description": "a river monster that blinds boats with black mist before striking from below."
       },
       "generation": {
@@ -237,9 +236,9 @@
     },
     {
       "id": "rust_eater",
+      "name": "Rust Eater",
       "weight": 2,
       "fields": {
-        "name": "Rust Eater",
         "description": "an armored insect that rapidly corrodes metal and swarms the best-equipped target."
       },
       "generation": {
@@ -256,9 +255,9 @@
     },
     {
       "id": "dream_leech",
+      "name": "Dream Leech",
       "weight": 2,
       "fields": {
-        "name": "Dream Leech",
         "description": "a translucent parasite that leaves sleeping victims awake but without memories."
       },
       "generation": {
@@ -275,9 +274,9 @@
     },
     {
       "id": "thornback_horror",
+      "name": "Thornback Horror",
       "weight": 2,
       "fields": {
-        "name": "Thornback Horror",
         "description": "a territorial plant-beast that launches barbed seeds into open wounds."
       },
       "generation": {
@@ -295,9 +294,9 @@
     },
     {
       "id": "mirror_stalker",
+      "name": "Mirror Stalker",
       "weight": 2,
       "fields": {
-        "name": "Mirror Stalker",
         "description": "a thin humanoid able to move only through reflections and polished surfaces."
       },
       "generation": {
@@ -325,9 +324,9 @@
     },
     {
       "id": "ash_giant",
+      "name": "Ash Giant",
       "weight": 2,
       "fields": {
-        "name": "Ash Giant",
         "description": "a smoldering humanoid that collapses into choking ash when wounded, then reforms."
       },
       "generation": {
@@ -348,9 +347,9 @@
     },
     {
       "id": "moon_eyed_basilisk",
+      "name": "Moon-Eyed Basilisk",
       "weight": 2,
       "fields": {
-        "name": "Moon-Eyed Basilisk",
         "description": "a six-legged reptile whose gaze petrifies only creatures standing in moonlight."
       },
       "generation": {
@@ -373,9 +372,9 @@
     },
     {
       "id": "choir_worm",
+      "name": "Choir Worm",
       "weight": 1,
       "fields": {
-        "name": "Choir Worm",
         "description": "a tunnel predator that imitates several familiar voices at once."
       },
       "generation": {
@@ -393,9 +392,9 @@
     },
     {
       "id": "oath_devourer",
+      "name": "Oath Devourer",
       "weight": 1,
       "fields": {
-        "name": "Oath Devourer",
         "description": "a faceless fiend strengthened whenever someone nearby breaks a promise."
       },
       "generation": {
@@ -417,9 +416,9 @@
     },
     {
       "id": "storm_roc",
+      "name": "Storm Roc",
       "weight": 1,
       "fields": {
-        "name": "Storm Roc",
         "description": "a colossal bird nesting inside thunderclouds and hunting anything carrying metal."
       },
       "generation": {
@@ -438,9 +437,9 @@
     },
     {
       "id": "cathedral_mimic",
+      "name": "Cathedral Mimic",
       "weight": 1,
       "fields": {
-        "name": "Cathedral Mimic",
         "description": "an ancient colony-creature disguised as an abandoned place of worship."
       },
       "generation": {
@@ -459,9 +458,9 @@
     },
     {
       "id": "time_starved_hunter",
+      "name": "Time-Starved Hunter",
       "weight": 1,
       "fields": {
-        "name": "Time-Starved Hunter",
         "description": "a flickering predator that steals seconds from its prey to move impossibly fast."
       },
       "generation": {
@@ -479,9 +478,9 @@
     },
     {
       "id": "crown_hydra",
+      "name": "Crown Hydra",
       "weight": 1,
       "fields": {
-        "name": "Crown Hydra",
         "description": "each severed head regrows wearing the face and memories of its killer."
       },
       "generation": {
@@ -500,9 +499,9 @@
     },
     {
       "id": "hollow_saint",
+      "name": "Hollow Saint",
       "weight": 1,
       "fields": {
-        "name": "Hollow Saint",
         "description": "a radiant undead figure offering miraculous healing that slowly replaces the recipient's will."
       },
       "generation": {
@@ -530,9 +529,9 @@
     },
     {
       "id": "abyssal_grazer",
+      "name": "Abyssal Grazer",
       "weight": 1,
       "fields": {
-        "name": "Abyssal Grazer",
         "description": "an enormous peaceful-looking shape whose shadow aggressively consumes living creatures."
       },
       "generation": {
@@ -550,9 +549,9 @@
     },
     {
       "id": "red_comet_beast",
+      "name": "Red Comet Beast",
       "weight": 1,
       "fields": {
-        "name": "Red Comet Beast",
         "description": "a crystalline predator that falls from the sky and multiplies when exposed to magic."
       },
       "generation": {
@@ -576,8 +575,9 @@
     },
     {
       "id": "ash_phoenix",
+      "name": "Ash Phoenix",
+      "weight": 1,
       "fields": {
-        "name": "Ash Phoenix",
         "description": "A great incandescent bird reborn from a nearby hearth, carrying memories of those who fed the flame."
       },
       "generation": {
@@ -603,13 +603,13 @@
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 10
-      },
-      "weight": 1
+      }
     },
     {
       "id": "juvenile_ogre",
+      "name": "Juvenile Ogre",
+      "weight": 1,
       "fields": {
-        "name": "Juvenile Ogre",
         "description": "A hungry young giant imitates absent adults and turns every game into real danger."
       },
       "generation": {
@@ -620,13 +620,13 @@
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 15
-      },
-      "weight": 1
+      }
     },
     {
       "id": "hungry_changeling",
+      "name": "Hungry Changeling",
+      "weight": 1,
       "fields": {
-        "name": "Hungry Changeling",
         "description": "A creature copies a person’s appearance but poorly understands their habits and bonds."
       },
       "generation": {
@@ -644,13 +644,13 @@
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 10
-      },
-      "weight": 1
+      }
     },
     {
       "id": "imp",
+      "name": "Imp",
+      "weight": 1,
       "fields": {
-        "name": "Imp",
         "description": "A small demon offers trivial bargains whose wording hides disproportionate consequences."
       },
       "generation": {
@@ -661,13 +661,13 @@
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 5
-      },
-      "weight": 1
+      }
     },
     {
       "id": "dissolving_ooze",
+      "name": "Dissolving Ooze",
+      "weight": 1,
       "fields": {
-        "name": "Dissolving Ooze",
         "description": "A slow mass digests organic matter and soft metal, leaving objects it cannot understand."
       },
       "generation": {
@@ -682,13 +682,13 @@
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 15
-      },
-      "weight": 1
+      }
     },
     {
       "id": "uprooted_treant",
+      "name": "Uprooted Treant",
+      "weight": 1,
       "fields": {
-        "name": "Uprooted Treant",
         "description": "A plant guardian walks far from its forest because its territory’s roots were poisoned."
       },
       "generation": {
@@ -707,13 +707,13 @@
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 35
-      },
-      "weight": 1
+      }
     },
     {
       "id": "stubborn_undead",
+      "name": "Stubborn Undead",
+      "weight": 1,
       "fields": {
-        "name": "Stubborn Undead",
         "description": "An animated corpse continues a daily task without realizing the world has changed."
       },
       "generation": {
@@ -727,13 +727,13 @@
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 10
-      },
-      "weight": 1
+      }
     },
     {
       "id": "patrol_skeleton",
+      "name": "Patrol Skeleton",
+      "weight": 1,
       "fields": {
-        "name": "Patrol Skeleton",
         "description": "Armed bones repeat a military route and treat every breach of protocol as intrusion."
       },
       "generation": {
@@ -753,13 +753,13 @@
         ],
         "inventory": [],
         "naturalArmorPercentage": 10
-      },
-      "weight": 1
+      }
     },
     {
       "id": "mutant_animal",
+      "name": "Mutant Animal",
+      "weight": 1,
       "fields": {
-        "name": "Mutant Animal",
         "description": "An ordinary beast bears an impossible adaptation caused by magical or alchemical pollution."
       },
       "generation": {
@@ -770,13 +770,13 @@
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 10
-      },
-      "weight": 1
+      }
     },
     {
       "id": "abandoned_golem",
+      "name": "Abandoned Golem",
+      "weight": 1,
       "fields": {
-        "name": "Abandoned Golem",
         "description": "An artificial servant follows an order made dangerous by the absence of a master able to change it."
       },
       "generation": {
@@ -791,13 +791,13 @@
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 50
-      },
-      "weight": 1
+      }
     },
     {
       "id": "imp_chicken",
+      "name": "Imp Chicken",
+      "weight": 1,
       "fields": {
-        "name": "Imp Chicken",
         "description": "A possessed fowl displays absurd aggression, supernatural leaps, and resilience far beyond its size."
       },
       "generation": {
@@ -811,13 +811,13 @@
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 5
-      },
-      "weight": 1
+      }
     },
     {
       "id": "giant_insect",
+      "name": "Giant Insect",
+      "weight": 1,
       "fields": {
-        "name": "Giant Insect",
         "description": "A colossal arthropod defends a nest built around a source of heat or magic."
       },
       "generation": {
@@ -828,13 +828,13 @@
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 30
-      },
-      "weight": 1
+      }
     },
     {
       "id": "animated_statue",
+      "name": "Animated Statue",
+      "weight": 1,
       "fields": {
-        "name": "Animated Statue",
         "description": "A sculpture leaves its plinth to correct anyone contradicting the official event it depicts."
       },
       "generation": {
@@ -849,13 +849,13 @@
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 50
-      },
-      "weight": 1
+      }
     },
     {
       "id": "voracious_slug",
+      "name": "Voracious Slug",
+      "weight": 1,
       "fields": {
-        "name": "Voracious Slug",
         "description": "A slow creature secretes a substance that dissolves walls, armor, or memories according to its diet."
       },
       "generation": {
@@ -868,13 +868,13 @@
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 15
-      },
-      "weight": 1
+      }
     },
     {
       "id": "fiery_salamander",
+      "name": "Fiery Salamander",
+      "weight": 1,
       "fields": {
-        "name": "Fiery Salamander",
         "description": "A supernatural reptile lives in fire and unintentionally spreads flames when frightened."
       },
       "generation": {
@@ -896,13 +896,13 @@
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 25
-      },
-      "weight": 1
+      }
     },
     {
       "id": "cliff_harpy",
+      "name": "Cliff Harpy",
+      "weight": 1,
       "fields": {
-        "name": "Cliff Harpy",
         "description": "A winged predator imitates familiar calls to lure travelers onto dangerous ground."
       },
       "generation": {
@@ -916,13 +916,13 @@
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 10
-      },
-      "weight": 1
+      }
     },
     {
       "id": "murky_water_siren",
+      "name": "Murky-Water Siren",
+      "weight": 1,
       "fields": {
-        "name": "Murky-Water Siren",
         "description": "An aquatic creature uses song and reflections to isolate a target from the group."
       },
       "generation": {
@@ -942,13 +942,13 @@
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 10
-      },
-      "weight": 1
+      }
     },
     {
       "id": "watcher_cyclops",
+      "name": "Watcher Cyclops",
+      "weight": 1,
       "fields": {
-        "name": "Watcher Cyclops",
         "description": "A solitary giant guards a passage whose destination is forgotten but whose prohibition remains."
       },
       "generation": {
@@ -962,13 +962,13 @@
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 20
-      },
-      "weight": 1
+      }
     },
     {
       "id": "hungry_vampire",
+      "name": "Hungry Vampire",
+      "weight": 1,
       "fields": {
-        "name": "Hungry Vampire",
         "description": "An immortal predator maintains a civil facade while scarcity makes control increasingly fragile."
       },
       "generation": {
@@ -988,13 +988,13 @@
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 10
-      },
-      "weight": 1
+      }
     },
     {
       "id": "memory_parasite",
+      "name": "Memory Parasite",
+      "weight": 1,
       "fields": {
-        "name": "Memory Parasite",
         "description": "A small creature feeds on recent memories and leaves victims unable to explain their presence."
       },
       "generation": {
@@ -1013,13 +1013,13 @@
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 5
-      },
-      "weight": 1
+      }
     },
     {
       "id": "repetitive_ghost",
+      "name": "Repetitive Ghost",
+      "weight": 1,
       "fields": {
-        "name": "Repetitive Ghost",
         "description": "A spirit reenacts an incomplete scene and turns violent when witnesses change its course."
       },
       "generation": {
@@ -1039,13 +1039,13 @@
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 0
-      },
-      "weight": 1
+      }
     },
     {
       "id": "unstable_chimera",
+      "name": "Unstable Chimera",
+      "weight": 1,
       "fields": {
-        "name": "Unstable Chimera",
         "description": "Several incompatible anatomies struggle to control one artificially created body."
       },
       "generation": {
@@ -1059,13 +1059,13 @@
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 25
-      },
-      "weight": 1
+      }
     },
     {
       "id": "unleashed_elemental",
+      "name": "Unleashed Elemental",
+      "weight": 1,
       "fields": {
-        "name": "Unleashed Elemental",
         "description": "An animated natural force restores balance without understanding the lives in its path."
       },
       "generation": {
@@ -1076,13 +1076,13 @@
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 25
-      },
-      "weight": 1
+      }
     },
     {
       "id": "territorial_gargoyle",
+      "name": "Territorial Gargoyle",
+      "weight": 1,
       "fields": {
-        "name": "Territorial Gargoyle",
         "description": "A stone sentinel changes buildings nightly and treats each new position as sacred."
       },
       "generation": {
@@ -1093,13 +1093,13 @@
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 45
-      },
-      "weight": 1
+      }
     },
     {
       "id": "highland_griffin",
+      "name": "Highland Griffin",
+      "weight": 1,
       "fields": {
-        "name": "Highland Griffin",
         "description": "A majestic predator protects its aerie and shiny objects mistaken for eggs."
       },
       "generation": {
@@ -1110,13 +1110,13 @@
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 20
-      },
-      "weight": 1
+      }
     },
     {
       "id": "reclusive_gorgon",
+      "name": "Reclusive Gorgon",
+      "weight": 1,
       "fields": {
-        "name": "Reclusive Gorgon",
         "description": "A cursed creature petrifies from fear more than cruelty and collects statues of visitors."
       },
       "generation": {
@@ -1134,13 +1134,13 @@
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 20
-      },
-      "weight": 1
+      }
     },
     {
       "id": "hunted_werewolf",
+      "name": "Hunted Werewolf",
+      "weight": 1,
       "fields": {
-        "name": "Hunted Werewolf",
         "description": "A transformed person leads hunters away from loved ones before losing control."
       },
       "generation": {
@@ -1155,13 +1155,13 @@
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 15
-      },
-      "weight": 1
+      }
     },
     {
       "id": "guardian_mummy",
+      "name": "Guardian Mummy",
+      "weight": 1,
       "fields": {
-        "name": "Guardian Mummy",
         "description": "An ancient dignitary preserves a place, oath, or error that descendants would rather forget."
       },
       "generation": {
@@ -1175,13 +1175,13 @@
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 25
-      },
-      "weight": 1
+      }
     },
     {
       "id": "architect_minotaur",
+      "name": "Architect Minotaur",
+      "weight": 1,
       "fields": {
-        "name": "Architect Minotaur",
         "description": "A creature endlessly alters its labyrinth and considers every lost traveler a willing intruder."
       },
       "generation": {
@@ -1195,13 +1195,13 @@
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 25
-      },
-      "weight": 1
+      }
     },
     {
       "id": "giant_burrowing_worm",
+      "name": "Giant Burrowing Worm",
+      "weight": 1,
       "fields": {
-        "name": "Giant Burrowing Worm",
         "description": "A subterranean predator follows vibration and heat, causing collapses and displaced ground."
       },
       "generation": {
@@ -1212,13 +1212,13 @@
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 30
-      },
-      "weight": 1
+      }
     },
     {
       "id": "carnivorous_plant",
+      "name": "Carnivorous Plant",
+      "weight": 1,
       "fields": {
-        "name": "Carnivorous Plant",
         "description": "A plant colony imitates scents, voices, and shapes to attract prey."
       },
       "generation": {
@@ -1232,13 +1232,13 @@
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 15
-      },
-      "weight": 1
+      }
     },
     {
       "id": "ancient_dragon",
+      "name": "Ancient Dragon",
+      "weight": 1,
       "fields": {
-        "name": "Ancient Dragon",
         "description": "An immensely powerful creature guards a region-shaping secret more than material treasure."
       },
       "generation": {
@@ -1253,13 +1253,13 @@
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 50
-      },
-      "weight": 1
+      }
     },
     {
       "id": "shoal_kraken",
+      "name": "Shoal Kraken",
+      "weight": 1,
       "fields": {
-        "name": "Shoal Kraken",
         "description": "A sea monster blocks a trade route and builds a nest from wrecks."
       },
       "generation": {
@@ -1274,13 +1274,13 @@
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 25
-      },
-      "weight": 1
+      }
     },
     {
       "id": "migrating_behemoth",
+      "name": "Migrating Behemoth",
+      "weight": 1,
       "fields": {
-        "name": "Migrating Behemoth",
         "description": "A gigantic creature periodically crosses communities built on its ancient route."
       },
       "generation": {
@@ -1291,13 +1291,13 @@
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 50
-      },
-      "weight": 1
+      }
     },
     {
       "id": "vengeful_spirit",
+      "name": "Vengeful Spirit",
+      "weight": 1,
       "fields": {
-        "name": "Vengeful Spirit",
         "description": "An entity bound to a specific injustice strikes the culprit’s symbols rather than true heirs."
       },
       "generation": {
@@ -1322,13 +1322,13 @@
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 0
-      },
-      "weight": 1
+      }
     },
     {
       "id": "insect_queen",
+      "name": "Insect Queen",
+      "weight": 1,
       "fields": {
-        "name": "Insect Queen",
         "description": "An intelligent creature coordinates a colony and negotiates as if every individual were part of its body."
       },
       "generation": {
@@ -1342,8 +1342,7 @@
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 25
-      },
-      "weight": 1
+      }
     }
   ]
 }

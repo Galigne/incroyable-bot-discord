@@ -1,52 +1,52 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "servant",
   "visibility": "internal",
   "name": "Archétypes de serviteur",
   "description": "Rôles domestiques et de service",
   "entrySchema": {
-    "type": "text"
+    "required": []
   },
   "entries": [
     {
       "id": "household_servant",
-      "value": "Serviteur domestique"
+      "name": "Serviteur domestique"
     },
     {
       "id": "attendant",
-      "value": "Assistant"
+      "name": "Assistant"
     },
     {
       "id": "day_laborer",
-      "value": "Journalier"
+      "name": "Journalier"
     },
     {
       "id": "cook",
-      "value": "Cuisinier"
+      "name": "Cuisinier"
     },
     {
       "id": "stable_hand",
-      "value": "Palefrenier"
+      "name": "Palefrenier"
     },
     {
       "id": "courier",
-      "value": "Courrier"
+      "name": "Courrier"
     },
     {
       "id": "driver",
-      "value": "Conducteur"
+      "name": "Conducteur"
     },
     {
       "id": "steward",
-      "value": "Intendant"
+      "name": "Intendant"
     },
     {
       "id": "groundskeeper",
-      "value": "Garde des domaines"
+      "name": "Garde des domaines"
     },
     {
       "id": "messenger",
-      "value": "Messager"
+      "name": "Messager"
     }
   ]
 }

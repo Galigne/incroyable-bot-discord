@@ -1,56 +1,56 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "adventurer",
   "visibility": "internal",
   "name": "Adventurer archetypes",
   "description": "Exploration and expedition roles",
   "entrySchema": {
-    "type": "text"
+    "required": []
   },
   "entries": [
     {
       "id": "explorer",
-      "value": "Explorer"
+      "name": "Explorer"
     },
     {
       "id": "mercenary",
-      "value": "Mercenary"
+      "name": "Mercenary"
     },
     {
       "id": "monster_hunter",
-      "value": "Monster hunter"
+      "name": "Monster hunter"
     },
     {
       "id": "bounty_hunter",
-      "value": "Bounty hunter"
+      "name": "Bounty hunter"
     },
     {
       "id": "scout",
-      "value": "Scout"
+      "name": "Scout"
     },
     {
       "id": "treasure_hunter",
-      "value": "Treasure hunter"
+      "name": "Treasure hunter"
     },
     {
       "id": "pilgrim",
-      "value": "Pilgrim"
+      "name": "Pilgrim"
     },
     {
       "id": "frontier_guide",
-      "value": "Frontier guide"
+      "name": "Frontier guide"
     },
     {
       "id": "ruins_delver",
-      "value": "Ruins delver"
+      "name": "Ruins delver"
     },
     {
       "id": "demon_hunter",
-      "value": "Demon hunter"
+      "name": "Demon hunter"
     },
     {
       "id": "protector",
-      "value": "Protector"
+      "name": "Protector"
     }
   ]
 }

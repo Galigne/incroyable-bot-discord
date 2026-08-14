@@ -1,4 +1,4 @@
-# Generator schema v3 authoring guide
+# Generator schema v4 authoring guide
 
 This is the authoritative reference for writing generator JSON. See
 [`GENERATOR_ARCHITECTURE.md`](GENERATOR_ARCHITECTURE.md) for routing, resolution,
@@ -25,24 +25,23 @@ independent concepts separate when random combinations make them more reusable.
 
 ## Generator document
 
-Every file uses generator schema v3:
+Every file uses generator schema v4:
 
 ```json
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "race",
   "visibility": "public",
   "name": "Races",
   "description": "Ancestries and cultures",
   "entrySchema": {
-    "type": "fields",
-    "required": ["name", "description"]
+    "required": ["description"]
   },
   "entries": [
     {
       "id": "human",
+      "name": "Human",
       "fields": {
-        "name": "Human",
         "description": "Adaptable people from many cultures."
       }
     }
@@ -52,12 +51,12 @@ Every file uses generator schema v3:
 
 The required envelope properties are:
 
-- `schemaVersion`: exactly `3`;
+- `schemaVersion`: exactly `4`;
 - `id`: a stable lowercase snake_case generator ID;
 - `visibility`: `public` or `internal`;
 - `name`: localized display text beginning with a capital letter;
 - `description`: localized display text;
-- `entrySchema`: the single payload shape shared by every entry;
+- `entrySchema`: the ordered additional-field contract shared by every entry;
 - `entries`: a non-empty array of entries.
 
 The optional `modifiers` object declares automatic modifier relationships. No
@@ -70,53 +69,61 @@ references, and modifier relationships, but users cannot select them directly as
 
 ## Entries
 
-Every entry has a stable lowercase snake_case `id` and may have a positive finite
-`weight`; omitted weights default to `1`.
+Every entry has a stable lowercase snake_case `id`, a mandatory localized `name`,
+and may have a positive finite `weight`; omitted weights default to `1`. Entry
+names must be unambiguous within their generator after ignoring case,
+accents/diacritics, repeated whitespace, and separating punctuation. Public
+generator names follow the same rule within each locale.
 
-A text generator declares:
+Every generator declares `entrySchema.required` as an array of zero to 25
+additional fields shared by all of its entries. A name-only generator uses an empty
+array:
 
 ```json
-"entrySchema": { "type": "text" }
+"entrySchema": { "required": [] }
 ```
 
-Each entry then contains one localized `value`:
+Its generated content lives directly in `name`, with no `fields` object:
 
 ```json
 {
   "id": "short_hook",
-  "value": "Investigate {{ dungeon }} before {{ faction }} arrives."
+  "name": "Investigate the abandoned shrine"
 }
 ```
 
-A structured generator declares between one and 25 required fields:
+A generator with additional generated values declares them in order:
 
 ```json
 "entrySchema": {
-  "type": "fields",
-  "required": ["name", "description", "rarity", "ar_percentage"]
+  "required": ["description", "rarity", "ar_percentage"]
 }
 ```
 
-Each entry must contain exactly those fields. Field names use lowercase
-snake_case. Every field is ordinary generated data, is included in normal display,
-and can be selected explicitly. String fields are localized; fields may also be
-finite numbers or booleans.
+Each entry then contains exactly those additional values in `fields`. `name` stays
+top-level: it is never listed in `entrySchema.required` or duplicated inside
+`fields`. Field names use lowercase snake_case. The name and every additional field
+are ordinary generated data, are included in normal display, and can be selected
+explicitly. String content is localized; additional fields may also be finite
+numbers or booleans.
 
 Entry properties are strict. In addition to `id`, optional `weight`, and exactly
-one payload (`value` or `fields`), an entry may define `generator` as a direct
-stable child-generator ID. Creature-detail entries may define the separately
-validated `generation` object. These reserved properties are functional metadata,
-are never displayed as generated fields, and arbitrary extra metadata is rejected.
+one top-level localized `name`, an entry with declared additional fields has exactly
+one matching `fields` object. An entry may define `generator` as a direct stable
+child-generator ID. Creature-detail entries may define the separately validated
+`generation` object. These reserved properties are functional metadata, are never
+displayed as generated fields, and arbitrary extra metadata is rejected. The old
+`entrySchema.type`, entry `value`, and `fields.name` forms are invalid.
 
 English and French counterparts must preserve the same relative path, generator
 ID, visibility, entry schema, modifier map, entry IDs, entry order, weights,
 structural `generator` routes, functional `generation` metadata, non-string field
-values, and inline-reference structure. Localize string payload fields and other
-player-facing text.
+values, and inline-reference structure. Top-level entry names and ordinary string
+fields are localized.
 
 ## Inline references
 
-References are embedded directly in text or string fields:
+References are embedded directly in localized names or string fields:
 
 ```text
 {{ generator }}
@@ -127,9 +134,10 @@ References are embedded directly in text or string fields:
 
 Generator, entry, and field names are stable lowercase snake_case IDs. Omitting the
 entry performs weighted random selection; naming an entry fixes the selection.
-Omitting the field returns the selected entry's display value. For a structured
-entry, that display value joins every field in declared order. An explicit field
-selects that one public generated field.
+Omitting the field returns the selected entry's display value. A name-only entry
+displays its name. An entry with additional fields displays its name followed by
+every field in declared order. `.name` always selects the top-level name; another
+explicit field selects one field declared by `entrySchema.required`.
 
 References may be repeated and nested, and every occurrence resolves
 independently. All referenced generators, entries, and fields must exist in both
@@ -166,8 +174,8 @@ a direct stable generator ID:
 ```json
 {
   "id": "criminal",
+  "name": "Criminal",
   "fields": {
-    "name": "Criminal",
     "description": "Outlaws, thieves, smugglers..."
   },
   "generator": "criminal"
@@ -203,10 +211,10 @@ ending on a field returns only that field and does not roll the final generator'
 automatic modifiers. Autocomplete follows the current path context, while valid
 manually submitted paths are not limited to its first 25 suggestions.
 
-Modifier sources use the same v3 document and entry formats as every other
+Modifier sources use the same v4 document and entry formats as every other
 generator. Relationships must name existing sources, match across locales, and be
 free of recursive cycles. The character and creature workflows use separate
-internal `{ name, description }` pools: `modifier_character` and
+internal top-level-name plus `description` pools: `modifier_character` and
 `modifier_creature`. Their independent 25% application policy belongs to
 application code, not to a consuming generator's `modifiers` map. Temporary
 conditions come from `status_effect` and are not modifiers.
@@ -217,7 +225,7 @@ Some stable IDs and fields have application-level meaning and must stay aligned
 with their consumers:
 
 - Every public `background` entry has a top-level `generator` route containing the
-  direct ID of the corresponding internal `<category>` text generator,
+  direct ID of the corresponding internal name-only `<category>` generator,
   stored in `background_<category>.json`. Character generation resolves that
   archetype and independently resolves the internal `physical_description`
   generator.
@@ -226,16 +234,18 @@ with their consumers:
   creature-detail generator whose concept ID matches the route and whose filename
   is `creature_<concept>.json`. Adding or removing router entries changes the
   available types; they are not a hard-coded enum or additional persistence types.
-- Creature-detail entries use localized `name` and `description` fields plus the
-  validated `generation` metadata described by the schema checks. Statistical
+- Creature-detail entries use a localized top-level `name`, an additional
+  `description` field, and the validated `generation` metadata described by the
+  schema checks. Statistical
   profile IDs come from the separate non-localized `stat-profile.json` schema and
   remain kebab-case.
-- The public `loot`, `site`, `group`, and `modifier` structured routers contain
-  localized visible fields plus direct top-level routes to internal children. Bare
+- The public `loot`, `site`, `group`, and `modifier` name-only routers contain
+  localized top-level names plus direct top-level routes to internal children. Bare
   router generation displays only the route entry; explicit `.generator` traversal
   resolves the child and retains both selections in provenance. Loot
-  children may use different schemas: `material` is text, while equipment and the
-  other item tables are structured.
+  children declare only the additional fields each concept needs: materials use a
+  description, while equipment may also expose technical fields such as rarity or
+  armor percentage.
 
 `inventory` is an entity storage field, not a generator ID. Random carried items
 come through the `loot` router. The internal `shields` table exposes ordinary
@@ -260,8 +270,8 @@ reference format. For example:
 ]
 ```
 
-The public structured `traits` generator exposes reusable localized `{ name,
-description }` entries. Omitting the field in `{{ traits }}` or
+The public `traits` generator exposes reusable localized entries with a top-level
+name and additional description. Omitting the field in `{{ traits }}` or
 `{{ traits:keen_smell }}` produces the normal display string, with the name and
 rules description joined by an em dash. Creature generation resolves every
 configured template once and persists only the resulting strings. Trait rules text

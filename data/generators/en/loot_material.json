@@ -1,182 +1,287 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "material",
   "visibility": "internal",
   "name": "Material",
   "description": "Natural, crafted, precious, and magical materials",
   "entrySchema": {
-    "type": "text"
+    "required": ["description"]
   },
   "entries": [
     {
       "id": "iron",
+      "name": "Iron",
       "weight": 5,
-      "value": "Iron — common strong metal used for tools, weapons, fittings, and armor."
+      "fields": {
+        "description": "common strong metal used for tools, weapons, fittings, and armor."
+      }
     },
     {
       "id": "copper",
+      "name": "Copper",
       "weight": 5,
-      "value": "Copper — workable reddish metal valued for vessels, wiring, coins, and alloys."
+      "fields": {
+        "description": "workable reddish metal valued for vessels, wiring, coins, and alloys."
+      }
     },
     {
       "id": "oak",
+      "name": "Oak",
       "weight": 5,
-      "value": "Oak — dense durable timber used in buildings, shields, barrels, and ships."
+      "fields": {
+        "description": "dense durable timber used in buildings, shields, barrels, and ships."
+      }
     },
     {
       "id": "limestone",
+      "name": "Limestone",
       "weight": 5,
-      "value": "Limestone — pale workable stone common in walls, sculpture, mortar, and caves."
+      "fields": {
+        "description": "pale workable stone common in walls, sculpture, mortar, and caves."
+      }
     },
     {
       "id": "bronze",
+      "name": "Bronze",
       "weight": 4,
-      "value": "Bronze — corrosion-resistant copper alloy used for arms, bells, statues, and mechanisms."
+      "fields": {
+        "description": "corrosion-resistant copper alloy used for arms, bells, statues, and mechanisms."
+      }
     },
     {
       "id": "steel",
+      "name": "Steel",
       "weight": 4,
-      "value": "Steel — refined iron alloy providing reliable strength and a durable cutting edge."
+      "fields": {
+        "description": "refined iron alloy providing reliable strength and a durable cutting edge."
+      }
     },
     {
       "id": "silver",
+      "name": "Silver",
       "weight": 4,
-      "value": "Silver — precious bright metal associated with currency, mirrors, ritual objects, and certain monsters."
+      "fields": {
+        "description": "precious bright metal associated with currency, mirrors, ritual objects, and certain monsters."
+      }
     },
     {
       "id": "leather",
+      "name": "Leather",
       "weight": 4,
-      "value": "Leather — flexible treated hide used for clothing, armor, containers, straps, and books."
+      "fields": {
+        "description": "flexible treated hide used for clothing, armor, containers, straps, and books."
+      }
     },
     {
       "id": "granite",
+      "name": "Granite",
       "weight": 4,
-      "value": "Granite — extremely hard speckled stone suited to monuments, fortifications, and millstones."
+      "fields": {
+        "description": "extremely hard speckled stone suited to monuments, fortifications, and millstones."
+      }
     },
     {
       "id": "gold",
+      "name": "Gold",
       "weight": 3,
-      "value": "Gold — soft precious metal prized for wealth, ornament, ritual purity, and magical conductance."
+      "fields": {
+        "description": "soft precious metal prized for wealth, ornament, ritual purity, and magical conductance."
+      }
     },
     {
       "id": "marble",
+      "name": "Marble",
       "weight": 3,
-      "value": "Marble — decorative stone used in wealthy architecture, sculpture, floors, and tombs."
+      "fields": {
+        "description": "decorative stone used in wealthy architecture, sculpture, floors, and tombs."
+      }
     },
     {
       "id": "obsidian",
+      "name": "Obsidian",
       "weight": 3,
-      "value": "Obsidian — volcanic glass capable of an exceptionally sharp but brittle edge."
+      "fields": {
+        "description": "volcanic glass capable of an exceptionally sharp but brittle edge."
+      }
     },
     {
       "id": "jade",
+      "name": "Jade",
       "weight": 3,
-      "value": "Jade — tough ornamental stone associated with status, seals, medicine, and protective charms."
+      "fields": {
+        "description": "tough ornamental stone associated with status, seals, medicine, and protective charms."
+      }
     },
     {
       "id": "quartz",
+      "name": "Quartz",
       "weight": 3,
-      "value": "Quartz — abundant crystal used in lenses, timepieces, decoration, and basic magical focuses."
+      "fields": {
+        "description": "abundant crystal used in lenses, timepieces, decoration, and basic magical focuses."
+      }
     },
     {
       "id": "amber",
+      "name": "Amber",
       "weight": 3,
-      "value": "Amber — fossilized resin preserving insects, scents, static charge, and sometimes memories."
+      "fields": {
+        "description": "fossilized resin preserving insects, scents, static charge, and sometimes memories."
+      }
     },
     {
       "id": "pearl",
+      "name": "Pearl",
       "weight": 3,
-      "value": "Pearl — organic gemstone valued in jewelry, diplomacy, water rites, and medicines."
+      "fields": {
+        "description": "organic gemstone valued in jewelry, diplomacy, water rites, and medicines."
+      }
     },
     {
       "id": "amethyst",
+      "name": "Amethyst",
       "weight": 2,
-      "value": "Amethyst — purple quartz associated with clarity, sobriety, dreams, and spiritual protection."
+      "fields": {
+        "description": "purple quartz associated with clarity, sobriety, dreams, and spiritual protection."
+      }
     },
     {
       "id": "ruby",
+      "name": "Ruby",
       "weight": 2,
-      "value": "Ruby — hard red gemstone associated with passion, blood, fire, and royal authority."
+      "fields": {
+        "description": "hard red gemstone associated with passion, blood, fire, and royal authority."
+      }
     },
     {
       "id": "sapphire",
+      "name": "Sapphire",
       "weight": 2,
-      "value": "Sapphire — hard blue gemstone associated with truth, sky, water, and disciplined magic."
+      "fields": {
+        "description": "hard blue gemstone associated with truth, sky, water, and disciplined magic."
+      }
     },
     {
       "id": "emerald",
+      "name": "Emerald",
       "weight": 2,
-      "value": "Emerald — green gemstone associated with growth, poison, prophecy, and enduring bonds."
+      "fields": {
+        "description": "green gemstone associated with growth, poison, prophecy, and enduring bonds."
+      }
     },
     {
       "id": "diamond",
+      "name": "Diamond",
       "weight": 2,
-      "value": "Diamond — exceptionally hard clear crystal used for cutting, status, and durable enchantments."
+      "fields": {
+        "description": "exceptionally hard clear crystal used for cutting, status, and durable enchantments."
+      }
     },
     {
       "id": "meteoric_iron",
+      "name": "Meteoric Iron",
       "weight": 2,
-      "value": "Meteoric Iron — rare sky-fallen metal carrying unusual patterns and resistance to magic."
+      "fields": {
+        "description": "rare sky-fallen metal carrying unusual patterns and resistance to magic."
+      }
     },
     {
       "id": "dragonbone",
+      "name": "Dragonbone",
       "weight": 2,
-      "value": "Dragonbone — light resilient bone retaining traces of the creature's elemental nature."
+      "fields": {
+        "description": "light resilient bone retaining traces of the creature's elemental nature."
+      }
     },
     {
       "id": "spider_silk",
+      "name": "Spider Silk",
       "weight": 2,
-      "value": "Spider Silk — extremely strong light fiber used in rope, clothing, sutures, and traps."
+      "fields": {
+        "description": "extremely strong light fiber used in rope, clothing, sutures, and traps."
+      }
     },
     {
       "id": "mithral",
+      "name": "Mithral",
       "weight": 1,
-      "value": "Mithral — rare silvery metal combining exceptional strength with very low weight."
+      "fields": {
+        "description": "rare silvery metal combining exceptional strength with very low weight."
+      }
     },
     {
       "id": "adamant",
+      "name": "Adamant",
       "weight": 1,
-      "value": "Adamant — nearly unbreakable dark alloy requiring extraordinary heat and tools to shape."
+      "fields": {
+        "description": "nearly unbreakable dark alloy requiring extraordinary heat and tools to shape."
+      }
     },
     {
       "id": "sunstone",
+      "name": "Sunstone",
       "weight": 1,
-      "value": "Sunstone — warm translucent crystal that stores daylight and weakens creatures of darkness."
+      "fields": {
+        "description": "warm translucent crystal that stores daylight and weakens creatures of darkness."
+      }
     },
     {
       "id": "voidglass",
+      "name": "Voidglass",
       "weight": 1,
-      "value": "Voidglass — cold black glass that absorbs light, sound, and small amounts of magical energy."
+      "fields": {
+        "description": "cold black glass that absorbs light, sound, and small amounts of magical energy."
+      }
     },
     {
       "id": "living_wood",
+      "name": "Living Wood",
       "weight": 1,
-      "value": "Living Wood — harvested without killing its tree and capable of slowly repairing shaped objects."
+      "fields": {
+        "description": "harvested without killing its tree and capable of slowly repairing shaped objects."
+      }
     },
     {
       "id": "aether_crystal",
+      "name": "Aether Crystal",
       "weight": 1,
-      "value": "Aether Crystal — unstable mineral that amplifies spells while accumulating dangerous resonance."
+      "fields": {
+        "description": "unstable mineral that amplifies spells while accumulating dangerous resonance."
+      }
     },
     {
       "id": "unidentified_rune_fragment",
-      "value": "Unidentified rune fragment — A piece of magical material containing part of an unknown inscription."
+      "name": "Unidentified rune fragment",
+      "fields": {
+        "description": "A piece of magical material containing part of an unknown inscription."
+      }
     },
     {
       "id": "elemental_essence",
-      "value": "Elemental Essence — An unstable substance retaining properties of a natural or magical element."
+      "name": "Elemental Essence",
+      "fields": {
+        "description": "An unstable substance retaining properties of a natural or magical element."
+      }
     },
     {
       "id": "creature_fragment",
-      "value": "Creature Fragment — A preserved scale, hide, horn, or tooth kept as trophy, proof, or component."
+      "name": "Creature Fragment",
+      "fields": {
+        "description": "A preserved scale, hide, horn, or tooth kept as trophy, proof, or component."
+      }
     },
     {
       "id": "medicinal_plant",
-      "value": "Medicinal Plant — A fresh plant whose effectiveness depends on preparation and preservation."
+      "name": "Medicinal Plant",
+      "fields": {
+        "description": "A fresh plant whose effectiveness depends on preparation and preservation."
+      }
     },
     {
       "id": "alchemical_ingredient",
-      "value": "Alchemical Ingredient — An unusual organic component such as a toad eye or venom gland."
+      "name": "Alchemical Ingredient",
+      "fields": {
+        "description": "An unusual organic component such as a toad eye or venom gland."
+      }
     }
   ]
 }

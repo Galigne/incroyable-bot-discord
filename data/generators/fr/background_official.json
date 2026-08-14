@@ -1,52 +1,52 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "official",
   "visibility": "internal",
   "name": "Archétypes de fonctionnaire",
   "description": "Rôles administratifs et civiques",
   "entrySchema": {
-    "type": "text"
+    "required": []
   },
   "entries": [
     {
       "id": "administrator",
-      "value": "Administrateur"
+      "name": "Administrateur"
     },
     {
       "id": "diplomat",
-      "value": "Diplomate"
+      "name": "Diplomate"
     },
     {
       "id": "tax_collector",
-      "value": "Collecteur d’impôts"
+      "name": "Collecteur d’impôts"
     },
     {
       "id": "judge",
-      "value": "Juge"
+      "name": "Juge"
     },
     {
       "id": "inspector",
-      "value": "Inspecteur"
+      "name": "Inspecteur"
     },
     {
       "id": "clerk",
-      "value": "Greffier"
+      "name": "Greffier"
     },
     {
       "id": "magistrate",
-      "value": "Magistrat"
+      "name": "Magistrat"
     },
     {
       "id": "bailiff",
-      "value": "Bailli"
+      "name": "Bailli"
     },
     {
       "id": "notary",
-      "value": "Notaire"
+      "name": "Notaire"
     },
     {
       "id": "envoy",
-      "value": "Émissaire"
+      "name": "Émissaire"
     }
   ]
 }

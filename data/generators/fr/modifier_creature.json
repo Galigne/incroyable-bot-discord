@@ -1,126 +1,125 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "modifier_creature",
   "visibility": "internal",
   "name": "Modificateurs de créature",
   "description": "Variations descriptives persistantes pour les créatures générées",
   "entrySchema": {
-    "type": "fields",
-    "required": ["name", "description"]
+    "required": ["description"]
   },
   "entries": [
     {
       "id": "alpha",
+      "name": "Alpha",
       "fields": {
-        "name": "Alpha",
         "description": "Un chef ou dominant coordonne les autres créatures et protège en priorité la cohésion du groupe."
       }
     },
     {
       "id": "hybrid",
+      "name": "Hybride",
       "fields": {
-        "name": "Hybride",
         "description": "La créature possède des traits empruntés à une seconde espèce, avec une capacité utile et une faiblesse contradictoire."
       }
     },
     {
       "id": "undead",
+      "name": "Mort-vivant",
       "fields": {
-        "name": "Mort-vivant",
         "description": "Le monstre ignore plusieurs besoins biologiques mais reste lié à la cause ou au rituel de sa réanimation."
       }
     },
     {
       "id": "reinforced",
+      "name": "Renforcé",
       "fields": {
-        "name": "Renforcé",
         "description": "Une armure, une mutation ou une protection magique réduit l’efficacité des attaques ordinaires."
       }
     },
     {
       "id": "gigantic",
+      "name": "Gigantesque",
       "fields": {
-        "name": "Gigantesque",
         "description": "Sa taille augmente allonge, force et résistance, mais l’empêche de se déplacer facilement dans les espaces étroits."
       }
     },
     {
       "id": "enraged",
+      "name": "Enragé",
       "fields": {
-        "name": "Enragé",
         "description": "La créature attaque sans prudence après avoir été blessée et devient plus dangereuse mais plus prévisible."
       }
     },
     {
       "id": "pack",
+      "name": "Meute",
       "fields": {
-        "name": "Meute",
         "description": "Le résultat représente trois individus coordonnés plutôt qu’une créature solitaire."
       }
     },
     {
       "id": "swarm",
+      "name": "Nuée",
       "fields": {
-        "name": "Nuée",
         "description": "Une multitude de petites créatures agit comme une seule menace et résiste aux attaques visant un individu."
       }
     },
     {
       "id": "ectoplasmic",
+      "name": "Ectoplasmique",
       "fields": {
-        "name": "Ectoplasmique",
         "description": "La créature traverse partiellement la matière mais doit se matérialiser pour affecter le monde physique."
       }
     },
     {
       "id": "invisible",
+      "name": "Invisible",
       "fields": {
-        "name": "Invisible",
         "description": "La créature reste difficile à voir, mais son odeur, ses sons et son interaction avec le décor peuvent la trahir."
       }
     },
     {
       "id": "rule_bearer",
+      "name": "Porteur de LOI",
       "fields": {
-        "name": "Porteur de LOI",
         "description": "Le monstre manifeste une LOI issue de `rules`, soumise à la même limitation qu’un utilisateur ordinaire."
       }
     },
     {
       "id": "equipped",
+      "name": "Équipé",
       "fields": {
-        "name": "Équipé",
         "description": "La créature semble porter des armes ou des objets adaptés à son anatomie ; aucun équipement n’est sélectionné ni ajouté."
       }
     },
     {
       "id": "restless",
+      "name": "Agitée",
       "weight": 3,
       "fields": {
-        "name": "Agitée",
         "description": "Elle ne reste jamais parfaitement immobile et surveille constamment les alentours."
       }
     },
     {
       "id": "smoldering",
+      "name": "Incandescente",
       "weight": 2,
       "fields": {
-        "name": "Incandescente",
         "description": "Une fumée légère et de faibles braises s’échappent de son corps sans imposer d’effet mécanique."
       }
     },
     {
       "id": "frost_rimed",
+      "name": "Couverte de givre",
       "weight": 2,
       "fields": {
-        "name": "Couverte de givre",
         "description": "Une couche de givre persistante recouvre une partie de son corps et les surfaces proches."
       }
     },
     {
       "id": "shadowed",
+      "name": "Voilée d’ombre",
       "fields": {
-        "name": "Voilée d’ombre",
         "description": "Sa silhouette reste difficile à distinguer des ombres qui l’entourent."
       }
     }

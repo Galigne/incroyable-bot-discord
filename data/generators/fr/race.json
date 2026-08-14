@@ -1,18 +1,17 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "race",
   "visibility": "public",
   "name": "Races",
   "description": "Peuples jouables, avec leur culture, leur apparence et des dons suggérés",
   "entrySchema": {
-    "type": "fields",
-    "required": ["name", "description", "skill_bonus", "physical_ability"]
+    "required": ["description", "skill_bonus", "physical_ability"]
   },
   "entries": [
     {
       "id": "human",
+      "name": "Humain",
       "fields": {
-        "name": "Humain",
         "description": "Des communautés très diverses dont les traditions reposent sur l’adaptation, les alliances et la transmission rapide des savoirs.",
         "skill_bonus": "Polyvalence : bonus dans une compétence choisie à la création.",
         "physical_ability": "Endurance adaptable : supporte mieux un changement brutal de climat ou de rythme."
@@ -20,8 +19,8 @@
     },
     {
       "id": "elf",
+      "name": "Elfe",
       "fields": {
-        "name": "Elfe",
         "description": "Un peuple longévif aux sens précis, attaché à la mémoire des lieux et aux conséquences lointaines de chaque décision.",
         "skill_bonus": "Perception attentive des détails naturels et magiques.",
         "physical_ability": "Vision crépusculaire efficace sous une faible lumière."
@@ -29,8 +28,8 @@
     },
     {
       "id": "dwarf",
+      "name": "Nain",
       "fields": {
-        "name": "Nain",
         "description": "Un peuple de bâtisseurs vivant dans des communautés où la maîtrise artisanale et la parole donnée définissent le statut.",
         "skill_bonus": "Artisanat de la pierre, du métal ou des mécanismes.",
         "physical_ability": "Stabilité : résiste mieux aux chocs et aux déplacements forcés."
@@ -38,8 +37,8 @@
     },
     {
       "id": "orc",
+      "name": "Orque",
       "fields": {
-        "name": "Orque",
         "description": "Un peuple robuste organisé autour de liens communautaires, de défis publics et d’une forte tradition orale.",
         "skill_bonus": "Intimidation ou survie en territoire hostile.",
         "physical_ability": "Puissance physique lors d’un effort bref et intense."
@@ -47,8 +46,8 @@
     },
     {
       "id": "goblin",
+      "name": "Gobelin",
       "fields": {
-        "name": "Gobelin",
         "description": "Un peuple ingénieux qui transforme rapidement déchets, outils et occasions imprévues en solutions utiles.",
         "skill_bonus": "Bricolage, pièges et récupération de matériaux.",
         "physical_ability": "Petite taille : se faufile dans les passages étroits et les couverts encombrés."
@@ -56,8 +55,8 @@
     },
     {
       "id": "halfling",
+      "name": "Halfelin",
       "fields": {
-        "name": "Halfelin",
         "description": "Un peuple de voyageurs et de communautés rurales valorisant hospitalité, discrétion et récits partagés.",
         "skill_bonus": "Discrétion dans les foules ou les environnements domestiques.",
         "physical_ability": "Appuis rapides : conserve plus facilement son équilibre."
@@ -65,8 +64,8 @@
     },
     {
       "id": "reptilian",
+      "name": "Reptilien",
       "fields": {
-        "name": "Reptilien",
         "description": "Un peuple écailleux adapté aux climats chauds, aux longues périodes d’immobilité et aux environnements humides.",
         "skill_bonus": "Pistage par les traces, la chaleur et les odeurs.",
         "physical_ability": "Écailles naturelles offrant une protection légère."
@@ -74,8 +73,8 @@
     },
     {
       "id": "fishfolk",
+      "name": "Peuple-poisson",
       "fields": {
-        "name": "Peuple-poisson",
         "description": "Un peuple amphibie vivant entre communautés côtières, récifs et cités partiellement immergées.",
         "skill_bonus": "Navigation, pêche et connaissance des courants.",
         "physical_ability": "Respiration aquatique et déplacement naturel sous l’eau."
@@ -83,8 +82,8 @@
     },
     {
       "id": "avian",
+      "name": "Peuple aviaire",
       "fields": {
-        "name": "Peuple aviaire",
         "description": "Un peuple à plumes vivant sur les hauteurs et accordant une grande importance aux courants, aux distances et aux messages.",
         "skill_bonus": "Observation à longue distance et orientation aérienne.",
         "physical_ability": "Vol plané permettant de ralentir une chute et franchir de courtes distances."
@@ -92,8 +91,8 @@
     },
     {
       "id": "sylvan",
+      "name": "Sylvestre",
       "fields": {
-        "name": "Sylvestre",
         "description": "Un peuple végétal ou étroitement lié aux arbres, dont la mémoire se transmet par les saisons et les racines.",
         "skill_bonus": "Connaissance des plantes et communication avec les écosystèmes.",
         "physical_ability": "Photosynthèse : peut se soutenir brièvement avec lumière et eau."
@@ -101,8 +100,8 @@
     },
     {
       "id": "slugfolk",
+      "name": "Homme-limace",
       "fields": {
-        "name": "Homme-limace",
         "description": "Un peuple souple adapté aux milieux humides, aux surfaces verticales et aux espaces difficiles d’accès.",
         "skill_bonus": "Détection des substances par le toucher et le goût.",
         "physical_ability": "Adhérence : se déplace lentement sur des surfaces très inclinées."
@@ -110,8 +109,8 @@
     },
     {
       "id": "beastfolk",
+      "name": "Homme-bête",
       "fields": {
-        "name": "Homme-bête",
         "description": "Un ensemble de lignées humanoïdes partageant des traits animaux et des traditions fortement liées à leur environnement.",
         "skill_bonus": "Instinct et interaction avec l’espèce apparentée.",
         "physical_ability": "Sens animal développé choisi selon la lignée."
@@ -119,8 +118,8 @@
     },
     {
       "id": "fairy",
+      "name": "Fée",
       "fields": {
-        "name": "Fée",
         "description": "Un petit peuple surnaturel lié aux promesses, aux émotions et aux lieux chargés de magie.",
         "skill_bonus": "Lecture des intentions et connaissance des pactes.",
         "physical_ability": "Lévitation ou vol limité avec une charge légère."
@@ -128,8 +127,8 @@
     },
     {
       "id": "giant",
+      "name": "Géant",
       "fields": {
-        "name": "Géant",
         "description": "Un peuple de très grande taille dont les habitats, outils et récits sont conçus à une échelle inhabituelle.",
         "skill_bonus": "Travail de force et connaissance des terrains monumentaux.",
         "physical_ability": "Allonge et capacité de port nettement supérieures."
@@ -137,8 +136,8 @@
     },
     {
       "id": "centaur",
+      "name": "Centaure",
       "fields": {
-        "name": "Centaure",
         "description": "Un peuple nomade au torse humanoïde et au corps de quadrupède, adapté aux grands espaces et aux déplacements prolongés.",
         "skill_bonus": "Voyage terrestre, pistage et combat monté.",
         "physical_ability": "Course rapide sur terrain ouvert et grande capacité de transport."

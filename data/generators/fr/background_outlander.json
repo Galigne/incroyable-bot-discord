@@ -1,48 +1,48 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "outlander",
   "visibility": "internal",
   "name": "Archétypes des terres sauvages",
   "description": "Rôles liés aux terres sauvages et aux régions frontalières",
   "entrySchema": {
-    "type": "text"
+    "required": []
   },
   "entries": [
     {
       "id": "hunter",
-      "value": "Chasseur"
+      "name": "Chasseur"
     },
     {
       "id": "nomad",
-      "value": "Nomade"
+      "name": "Nomade"
     },
     {
       "id": "hermit",
-      "value": "Ermite"
+      "name": "Ermite"
     },
     {
       "id": "tribal_envoy",
-      "value": "Émissaire tribal"
+      "name": "Émissaire tribal"
     },
     {
       "id": "frontier_guide",
-      "value": "Guide des frontières"
+      "name": "Guide des frontières"
     },
     {
       "id": "ranger",
-      "value": "Rôdeur"
+      "name": "Rôdeur"
     },
     {
       "id": "wilderness_healer",
-      "value": "Guérisseur des terres sauvages"
+      "name": "Guérisseur des terres sauvages"
     },
     {
       "id": "tracker",
-      "value": "Pisteur"
+      "name": "Pisteur"
     },
     {
       "id": "wilderness_scout",
-      "value": "Éclaireur des terres sauvages"
+      "name": "Éclaireur des terres sauvages"
     }
   ]
 }

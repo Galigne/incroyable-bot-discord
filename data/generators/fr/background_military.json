@@ -1,52 +1,52 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "military",
   "visibility": "internal",
   "name": "Archétypes militaires",
   "description": "Rôles militaires et défensifs",
   "entrySchema": {
-    "type": "text"
+    "required": []
   },
   "entries": [
     {
       "id": "soldier",
-      "value": "Soldat"
+      "name": "Soldat"
     },
     {
       "id": "guard",
-      "value": "Garde"
+      "name": "Garde"
     },
     {
       "id": "officer",
-      "value": "Officier"
+      "name": "Officier"
     },
     {
       "id": "veteran",
-      "value": "Vétéran"
+      "name": "Vétéran"
     },
     {
       "id": "mercenary",
-      "value": "Mercenaire"
+      "name": "Mercenaire"
     },
     {
       "id": "military_engineer",
-      "value": "Ingénieur militaire"
+      "name": "Ingénieur militaire"
     },
     {
       "id": "sentry",
-      "value": "Sentinelle"
+      "name": "Sentinelle"
     },
     {
       "id": "captain",
-      "value": "Capitaine"
+      "name": "Capitaine"
     },
     {
       "id": "quartermaster",
-      "value": "Intendant militaire"
+      "name": "Intendant militaire"
     },
     {
       "id": "military_scout",
-      "value": "Éclaireur militaire"
+      "name": "Éclaireur militaire"
     }
   ]
 }

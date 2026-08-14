@@ -54,10 +54,8 @@ function createGeneratorResolver({ getGenerator = generatorCatalog.getGenerator 
 		}
 		if (
 			traversal.field !== undefined
-			&& (
-				generator.entrySchema.type !== 'fields'
-				|| !generator.entrySchema.required.includes(traversal.field)
-			)
+			&& traversal.field !== 'name'
+			&& !generator.entrySchema.required.includes(traversal.field)
 		) {
 			return null;
 		}
@@ -215,8 +213,8 @@ function createGeneratorResolver({ getGenerator = generatorCatalog.getGenerator 
 	}
 
 	function resolvePayload(generator, entry, state, path, requestedField) {
-		if (generator.entrySchema.type === 'text') {
-			const resolved = resolveTemplateString(entry.value, state, `${path}.value`);
+		if (generator.entrySchema.required.length === 0 && requestedField === undefined) {
+			const resolved = resolveTemplateString(entry.name, state, `${path}.name`);
 			return {
 				outputType: 'value',
 				value: resolved.value,
@@ -227,17 +225,18 @@ function createGeneratorResolver({ getGenerator = generatorCatalog.getGenerator 
 			};
 		}
 
-		const fields = { ...entry.fields };
+		const fields = { name: entry.name, ...(entry.fields ?? {}) };
+		const fieldOrder = ['name', ...generator.entrySchema.required];
 		const displayFields = {};
 		const displayFieldTemplates = {};
 		let provenance = [];
 		let modifiers = [];
 		if (requestedField === undefined) {
-			for (const field of generator.entrySchema.required) {
+			for (const field of fieldOrder) {
 				const resolved = resolveTemplateString(
 					String(fields[field]),
 					state,
-					`${path}.fields.${field}`,
+					field === 'name' ? `${path}.name` : `${path}.fields.${field}`,
 				);
 				displayFields[field] = resolved.value;
 				displayFieldTemplates[field] = resolved.template;
@@ -259,7 +258,9 @@ function createGeneratorResolver({ getGenerator = generatorCatalog.getGenerator 
 				const resolved = resolveTemplateString(
 					fields[requestedField],
 					state,
-					`${path}.fields.${requestedField}`,
+					requestedField === 'name'
+						? `${path}.name`
+						: `${path}.fields.${requestedField}`,
 				);
 				selectedField = resolved.value;
 				selectedDisplayTemplate = resolved.template;
@@ -273,11 +274,11 @@ function createGeneratorResolver({ getGenerator = generatorCatalog.getGenerator 
 		}
 
 		const displayTemplate = joinTemplates(
-			generator.entrySchema.required
+			fieldOrder
 				.map(field => displayFieldTemplates[field]),
 			' — ',
 		);
-		const display = generator.entrySchema.required
+		const display = fieldOrder
 			.map(field => displayFields[field])
 			.join(' — ');
 		return {

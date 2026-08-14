@@ -9,7 +9,7 @@ const {
 } = require('./assertions');
 const {
 	CREATURE_ROUTER_ID,
-	MAX_ENTRY_TEXT_LENGTH,
+	MAX_ENTRY_NAME_LENGTH,
 	MAX_FIELD_VALUE_LENGTH,
 } = require('./constants');
 const {
@@ -19,30 +19,18 @@ const {
 const { extractInlineReferences } = require('./referenceValidation');
 function validateEntrySchema(entrySchema, file) {
 	assertPlainObject(entrySchema, `Generator ${file} has an invalid entrySchema.`);
-	if (entrySchema.type === 'text') {
-		assertExactKeys(
-			entrySchema,
-			['type'],
-			`Generator ${file} may only define entrySchema.type for this payload.`,
-		);
-		return entrySchema;
-	}
-	if (entrySchema.type !== 'fields') {
-		throw generatorSchemaError(
-			'INVALID_GENERATOR_ENTRY_SCHEMA',
-			`Generator ${file} must use a text or fields entry schema.`,
-		);
-	}
-	assertAllowedKeys(
+	assertExactKeys(
 		entrySchema,
-		['type', 'required'],
-		`Generator ${file} has unsupported entrySchema properties.`,
+		['required'],
+		`Generator ${file} entrySchema must contain only required.`,
 	);
-	validateFieldNameList(entrySchema.required, file, 'required');
-	if (entrySchema.required.some(field => ['generator', 'generation'].includes(field))) {
+	validateFieldNameList(entrySchema.required, file, 'required', true);
+	if (entrySchema.required.some(field => (
+		['name', 'generator', 'generation'].includes(field)
+	))) {
 		throw generatorSchemaError(
 			'INVALID_GENERATOR_ENTRY_SCHEMA',
-			`Generator ${file} must store functional metadata outside fields.`,
+			`Generator ${file} must keep name and functional metadata outside fields.`,
 		);
 	}
 	return entrySchema;
@@ -91,6 +79,7 @@ function validateGeneratorEntry(
 	}
 	const commonKeys = [
 		'id',
+		'name',
 		'weight',
 		'generator',
 		...(isCreatureDetailGenerator(generator.id, options) ? ['generation'] : []),
@@ -104,18 +93,21 @@ function validateGeneratorEntry(
 			`Creature router ${location} must define a structural route.`,
 		);
 	}
-	if (entrySchema.type === 'text') {
+	assertRequiredKeys(
+		entry,
+		['id', 'name'],
+		`Generator ${location} must contain an ID and localized name.`,
+	);
+	validateDisplayText(entry.name, MAX_ENTRY_NAME_LENGTH, `${location} name`);
+	if (entrySchema.required.length === 0) {
 		assertAllowedKeys(
 			entry,
-			[...commonKeys, 'value'],
+			commonKeys,
 			`Generator ${location} has unsupported properties.`,
 		);
-		assertRequiredKeys(
-			entry,
-			['id', 'value'],
-			`Generator ${location} must contain one text value.`,
-		);
-		validateDisplayText(entry.value, MAX_ENTRY_TEXT_LENGTH, location);
+		if (isCreatureDetailGenerator(generator.id, options)) {
+			validateCreatureGeneration(entry.generation, location);
+		}
 		return;
 	}
 	assertAllowedKeys(
@@ -125,8 +117,8 @@ function validateGeneratorEntry(
 	);
 	assertRequiredKeys(
 		entry,
-		['id', 'fields'],
-		`Generator ${location} must contain one fields object.`,
+		['id', 'name', 'fields'],
+		`Generator ${location} must contain its declared additional fields.`,
 	);
 	assertPlainObject(entry.fields, `Generator ${location} has invalid fields.`);
 	assertExactKeys(

@@ -1,52 +1,82 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "rumor",
   "visibility": "public",
   "name": "Rumeur",
   "description": "Rumeurs dont le MJ décide si elles sont fondées",
   "entrySchema": {
-    "type": "text"
+    "required": ["description"]
   },
   "entries": [
     {
       "id": "rumor_1",
-      "value": "Une créature décrite comme {{ monster }} aurait été aperçue près de {{ settlement }}."
+      "name": "Créature aperçue",
+      "fields": {
+        "description": "Une créature décrite comme {{ monster }} aurait été aperçue près de {{ settlement }}."
+      }
     },
     {
       "id": "rumor_2",
-      "value": "{{ faction }} achèterait des quantités inhabituelles de {{ material }}."
+      "name": "Achats inhabituels de matériaux",
+      "fields": {
+        "description": "{{ faction }} achèterait des quantités inhabituelles de {{ material }}."
+      }
     },
     {
       "id": "rumor_3",
-      "value": "Un trésor serait caché sous {{ building }}."
+      "name": "Trésor caché",
+      "fields": {
+        "description": "Un trésor serait caché sous {{ building }}."
+      }
     },
     {
       "id": "rumor_4",
-      "value": "{{ government }} préparerait une action secrète contre un rival voisin."
+      "name": "Action gouvernementale secrète",
+      "fields": {
+        "description": "{{ government }} préparerait une action secrète contre un rival voisin."
+      }
     },
     {
       "id": "rumor_5",
-      "value": "Les fidèles de {{ religion }} annonceraient — ou dissimuleraient — un présage."
+      "name": "Présage dissimulé",
+      "fields": {
+        "description": "Les fidèles de {{ religion }} annonceraient — ou dissimuleraient — un présage."
+      }
     },
     {
       "id": "rumor_6",
-      "value": "La route traversant {{ region }} serait soudain devenue dangereuse, sans que les voyageurs s’accordent sur la raison."
+      "name": "Route devenue dangereuse",
+      "fields": {
+        "description": "La route traversant {{ region }} serait soudain devenue dangereuse, sans que les voyageurs s’accordent sur la raison."
+      }
     },
     {
       "id": "rumor_7",
-      "value": "Une personne disparue au profil {{ background }} aurait été aperçue dans {{ building }}."
+      "name": "Personne disparue aperçue",
+      "fields": {
+        "description": "Une personne disparue au profil {{ background }} aurait été aperçue dans {{ building }}."
+      }
     },
     {
       "id": "rumor_8",
-      "value": "Un lieu abandonné décrit comme {{ site }} serait encore occupé."
+      "name": "Lieu abandonné occupé",
+      "fields": {
+        "description": "Un lieu abandonné décrit comme {{ site }} serait encore occupé."
+      }
     },
     {
       "id": "rumor_9",
-      "value": "Un objet décrit comme {{ curio }} aurait changé plusieurs fois de mains cette semaine."
+      "name": "Objet passé de main en main",
+      "fields": {
+        "description": "Un objet décrit comme {{ curio }} aurait changé plusieurs fois de mains cette semaine."
+      }
     },
     {
       "id": "rumor_10",
-      "value": "{{ government }} paierait discrètement pour un service précis sans en expliquer la raison."
+      "name": "Service payé discrètement",
+      "fields": {
+        "description": "{{ government }} paierait discrètement pour un service précis sans en expliquer la raison."
+      }
     }
   ]
 }

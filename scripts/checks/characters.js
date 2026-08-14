@@ -270,7 +270,7 @@ module.exports = function createCharacterChecks(context) {
 			const character = new Character('D.Robert', 'dm');
 			populateRandomCharacter(character, { level: 10, random });
 			const generatedRace = generatorCatalog.getGenerator('race').entries
-				.find(entry => entry.fields.name === character.race.name);
+				.find(entry => entry.name === character.race.name);
 
 			if (
 				character.key !== 'D.Robert'
@@ -346,14 +346,14 @@ module.exports = function createCharacterChecks(context) {
 
 			const armorName = character.gear.equipment[0].split(' — ')[0];
 			const armor = generatorCatalog.getGenerator('armors').entries
-				.find(entry => entry.fields.name === armorName);
+				.find(entry => entry.name === armorName);
 			const weapons = generatorCatalog.getGenerator('weapons').entries;
 			const shields = generatorCatalog.getGenerator('shields').entries;
 			const mainEquipment = character.gear.equipment.slice(1).map(value => {
 				const name = value.split(' — ')[0];
-				const shield = shields.find(entry => entry.fields.name === name);
+				const shield = shields.find(entry => entry.name === name);
 				return {
-					entry: shield ?? weapons.find(entry => entry.fields.name === name),
+					entry: shield ?? weapons.find(entry => entry.name === name),
 					isShield: Boolean(shield),
 				};
 			});
@@ -382,7 +382,7 @@ module.exports = function createCharacterChecks(context) {
 
 			const routedBackgrounds = generatorCatalog.getGenerator('background').entries;
 			for (const routedBackground of routedBackgrounds) {
-				const backgroundName = routedBackground.fields.name;
+				const backgroundName = routedBackground.name;
 				const routedCharacter = new Character(`background.${backgroundName}`, 'dm');
 				populateRandomCharacter(routedCharacter, {
 					level: 1,

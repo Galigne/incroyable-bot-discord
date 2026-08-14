@@ -1,353 +1,352 @@
 {
-  "schemaVersion": 3,
+  "schemaVersion": 4,
   "id": "event",
   "visibility": "public",
   "name": "Event",
   "description": "Unexpected scenes and world complications",
   "entrySchema": {
-    "type": "fields",
-    "required": ["name", "description"]
+    "required": ["description"]
   },
   "entries": [
     {
       "id": "every_flame_in_the_area_turns_green_and",
+      "name": "Every flame in the area turns green and points toward the same distant ruin for one minute.",
       "weight": 2,
       "fields": {
-        "name": "Every flame in the area turns green and points toward the same distant ruin for one minute.",
         "description": "Every flame in the area turns green and points toward the same distant ruin for one minute."
       }
     },
     {
       "id": "a_terrified_courier_mistakes_a_party_member_for",
+      "name": "A terrified courier mistakes a party member for their contact and hands over a sealed royal confession.",
       "weight": 3,
       "fields": {
-        "name": "A terrified courier mistakes a party member for their contact and hands over a sealed royal confession.",
         "description": "A terrified courier mistakes a party member for their contact and hands over a sealed royal confession."
       }
     },
     {
       "id": "a_localized_rainstorm_follows_one_character_while_the",
+      "name": "A localized rainstorm follows one character while the sky remains clear everywhere else.",
       "weight": 2,
       "fields": {
-        "name": "A localized rainstorm follows one character while the sky remains clear everywhere else.",
         "description": "A localized rainstorm follows one character while the sky remains clear everywhere else."
       }
     },
     {
       "id": "two_merchants_begin_an_escalating_auction_for_an",
+      "name": "Two merchants begin an escalating auction for an ordinary item carried by the party, refusing to explain why.",
       "weight": 3,
       "fields": {
-        "name": "Two merchants begin an escalating auction for an ordinary item carried by the party, refusing to explain why.",
         "description": "Two merchants begin an escalating auction for an ordinary item carried by the party, refusing to explain why."
       }
     },
     {
       "id": "a_wounded_monster_crashes_into_the_scene_fleeing",
+      "name": "A wounded monster crashes into the scene, fleeing from something far more dangerous just out of sight.",
       "weight": 3,
       "fields": {
-        "name": "A wounded monster crashes into the scene, fleeing from something far more dangerous just out of sight.",
         "description": "A wounded monster crashes into the scene, fleeing from something far more dangerous just out of sight."
       }
     },
     {
       "id": "all_spoken_lies_become_visible_as_black_smoke",
+      "name": "All spoken lies become visible as black smoke until sunset, causing immediate panic in the nearest settlement.",
       "fields": {
-        "name": "All spoken lies become visible as black smoke until sunset, causing immediate panic in the nearest settlement.",
         "description": "All spoken lies become visible as black smoke until sunset, causing immediate panic in the nearest settlement."
       }
     },
     {
       "id": "a_festival_starts_unexpectedly_its_central_competition_recreates",
+      "name": "A festival starts unexpectedly; its central competition recreates a recent party achievement with wildly incorrect details.",
       "weight": 3,
       "fields": {
-        "name": "A festival starts unexpectedly; its central competition recreates a recent party achievement with wildly incorrect details.",
         "description": "A festival starts unexpectedly; its central competition recreates a recent party achievement with wildly incorrect details."
       }
     },
     {
       "id": "an_earthquake_opens_a_stairway_beneath_the_road",
+      "name": "An earthquake opens a stairway beneath the road and seals the path ahead.",
       "weight": 2,
       "fields": {
-        "name": "An earthquake opens a stairway beneath the road and seals the path ahead.",
         "description": "An earthquake opens a stairway beneath the road and seals the path ahead."
       }
     },
     {
       "id": "a_child_calmly_asks_the_party_to_remove",
+      "name": "A child calmly asks the party to remove the ghost living under their bed; the ghost claims the child is the one haunting the house.",
       "weight": 2,
       "fields": {
-        "name": "A child calmly asks the party to remove the ghost living under their bed; the ghost claims the child is the one haunting the house.",
         "description": "A child calmly asks the party to remove the ghost living under their bed; the ghost claims the child is the one haunting the house."
       }
     },
     {
       "id": "a_shower_of_tiny_harmless_frogs_falls_from",
+      "name": "A shower of tiny harmless frogs falls from a cloudless sky, each bearing the same golden rune.",
       "fields": {
-        "name": "A shower of tiny harmless frogs falls from a cloudless sky, each bearing the same golden rune.",
         "description": "A shower of tiny harmless frogs falls from a cloudless sky, each bearing the same golden rune."
       }
     },
     {
       "id": "the_party_encounters_their_own_wanted_posters_issued",
+      "name": "The party encounters their own wanted posters, issued tomorrow and accusing them of a crime that has not happened yet.",
       "fields": {
-        "name": "The party encounters their own wanted posters, issued tomorrow and accusing them of a crime that has not happened yet.",
         "description": "The party encounters their own wanted posters, issued tomorrow and accusing them of a crime that has not happened yet."
       }
     },
     {
       "id": "a_nearby_statue_turns_its_head_and_whispers",
+      "name": "A nearby statue turns its head and whispers a warning to the character with the lowest perception.",
       "weight": 2,
       "fields": {
-        "name": "A nearby statue turns its head and whispers a warning to the character with the lowest perception.",
         "description": "A nearby statue turns its head and whispers a warning to the character with the lowest perception."
       }
     },
     {
       "id": "a_caravan_offers_safe_passage_but_every_traveler",
+      "name": "A caravan offers safe passage, but every traveler insists they have always known one of the heroes.",
       "weight": 3,
       "fields": {
-        "name": "A caravan offers safe passage, but every traveler insists they have always known one of the heroes.",
         "description": "A caravan offers safe passage, but every traveler insists they have always known one of the heroes."
       }
     },
     {
       "id": "for_one_hour_shadows_detach_from_their_owners",
+      "name": "For one hour, shadows detach from their owners and act out their owners' hidden intentions.",
       "fields": {
-        "name": "For one hour, shadows detach from their owners and act out their owners' hidden intentions.",
         "description": "For one hour, shadows detach from their owners and act out their owners' hidden intentions."
       }
     },
     {
       "id": "a_bridge_collapses_after_the_party_crosses_separating",
+      "name": "A bridge collapses after the party crosses, separating them from pursuing enemies and their easiest route home.",
       "weight": 3,
       "fields": {
-        "name": "A bridge collapses after the party crosses, separating them from pursuing enemies and their easiest route home.",
         "description": "A bridge collapses after the party crosses, separating them from pursuing enemies and their easiest route home."
       }
     },
     {
       "id": "a_magical_market_appears_between_two_trees_and",
+      "name": "A magical market appears between two trees and will vanish after exactly thirteen purchases.",
       "fields": {
-        "name": "A magical market appears between two trees and will vanish after exactly thirteen purchases.",
         "description": "A magical market appears between two trees and will vanish after exactly thirteen purchases."
       }
     },
     {
       "id": "a_dying_raven_delivers_a_signet_ring_and",
+      "name": "A dying raven delivers a signet ring and repeats a place name no map records.",
       "weight": 2,
       "fields": {
-        "name": "A dying raven delivers a signet ring and repeats a place name no map records.",
         "description": "A dying raven delivers a signet ring and repeats a place name no map records."
       }
     },
     {
       "id": "an_eclipse_begins_years_ahead_of_schedule_magical",
+      "name": "An eclipse begins years ahead of schedule; magical powers behave in reversed or symbolic ways.",
       "fields": {
-        "name": "An eclipse begins years ahead of schedule; magical powers behave in reversed or symbolic ways.",
         "description": "An eclipse begins years ahead of schedule; magical powers behave in reversed or symbolic ways."
       }
     },
     {
       "id": "a_noble_procession_blocks_the_road_while_masked",
+      "name": "A noble procession blocks the road while masked rebels prepare an ambush from both sides.",
       "weight": 3,
       "fields": {
-        "name": "A noble procession blocks the road while masked rebels prepare an ambush from both sides.",
         "description": "A noble procession blocks the road while masked rebels prepare an ambush from both sides."
       }
     },
     {
       "id": "the_nearest_river_runs_backward_exposing_a_wreck",
+      "name": "The nearest river runs backward, exposing a wreck full of sealed cargo and awakening its drowned crew.",
       "fields": {
-        "name": "The nearest river runs backward, exposing a wreck full of sealed cargo and awakening its drowned crew.",
         "description": "The nearest river runs backward, exposing a wreck full of sealed cargo and awakening its drowned crew."
       }
     },
     {
       "id": "a_famous_adventurer_publicly_credits_the_party_for",
+      "name": "A famous adventurer publicly credits the party for a deed they never performed and asks them to maintain the story.",
       "weight": 2,
       "fields": {
-        "name": "A famous adventurer publicly credits the party for a deed they never performed and asks them to maintain the story.",
         "description": "A famous adventurer publicly credits the party for a deed they never performed and asks them to maintain the story."
       }
     },
     {
       "id": "everyone_in_a_village_has_fallen_asleep_except",
+      "name": "Everyone in a village has fallen asleep except one deeply suspicious baker.",
       "weight": 2,
       "fields": {
-        "name": "Everyone in a village has fallen asleep except one deeply suspicious baker.",
         "description": "Everyone in a village has fallen asleep except one deeply suspicious baker."
       }
     },
     {
       "id": "a_wandering_judge_declares_an_improvised_trial_over",
+      "name": "A wandering judge declares an improvised trial over ownership of a talking sword that chose a party member.",
       "weight": 2,
       "fields": {
-        "name": "A wandering judge declares an improvised trial over ownership of a talking sword that chose a party member.",
         "description": "A wandering judge declares an improvised trial over ownership of a talking sword that chose a party member."
       }
     },
     {
       "id": "a_harmless_animal_begins_speaking_with_the_voice",
+      "name": "A harmless animal begins speaking with the voice of an absent ally and asks for urgent help.",
       "weight": 2,
       "fields": {
-        "name": "A harmless animal begins speaking with the voice of an absent ally and asks for urgent help.",
         "description": "A harmless animal begins speaking with the voice of an absent ally and asks for urgent help."
       }
     },
     {
       "id": "the_moon_briefly_shows_a_second_face_after",
+      "name": "The moon briefly shows a second face, after which every compass points toward the party.",
       "fields": {
-        "name": "The moon briefly shows a second face, after which every compass points toward the party.",
         "description": "The moon briefly shows a second face, after which every compass points toward the party."
       }
     },
     {
       "id": "a_battlefield_from_the_distant_past_overlays_the",
+      "name": "A battlefield from the distant past overlays the present landscape, and ghostly actions cause real damage.",
       "fields": {
-        "name": "A battlefield from the distant past overlays the present landscape, and ghostly actions cause real damage.",
         "description": "A battlefield from the distant past overlays the present landscape, and ghostly actions cause real damage."
       }
     },
     {
       "id": "a_thief_steals_something_trivial_but_leaves_behind",
+      "name": "A thief steals something trivial but leaves behind an item far more valuable and dangerously recognizable.",
       "weight": 3,
       "fields": {
-        "name": "A thief steals something trivial but leaves behind an item far more valuable and dangerously recognizable.",
         "description": "A thief steals something trivial but leaves behind an item far more valuable and dangerously recognizable."
       }
     },
     {
       "id": "a_bell_rings_underground_local_elders_insist_there",
+      "name": "A bell rings underground; local elders insist there is no bell and order everyone indoors.",
       "weight": 2,
       "fields": {
-        "name": "A bell rings underground; local elders insist there is no bell and order everyone indoors.",
         "description": "A bell rings underground; local elders insist there is no bell and order everyone indoors."
       }
     },
     {
       "id": "a_spontaneous_peace_negotiation_begins_between_two_hostile",
+      "name": "A spontaneous peace negotiation begins between two hostile factions, and both choose the party as neutral witnesses.",
       "weight": 3,
       "fields": {
-        "name": "A spontaneous peace negotiation begins between two hostile factions, and both choose the party as neutral witnesses.",
         "description": "A spontaneous peace negotiation begins between two hostile factions, and both choose the party as neutral witnesses."
       }
     },
     {
       "id": "time_skips_forward_three_hours_for_everyone_except",
+      "name": "Time skips forward three hours for everyone except the party, who are now blamed for what happened during the gap.",
       "fields": {
-        "name": "Time skips forward three hours for everyone except the party, who are now blamed for what happened during the gap.",
         "description": "Time skips forward three hours for everyone except the party, who are now blamed for what happened during the gap."
       }
     },
     {
       "id": "sudden_tremor",
+      "name": "Sudden Tremor",
       "fields": {
-        "name": "Sudden Tremor",
         "description": "The ground shakes hard enough to interrupt events and reveal a fissure, passage, or weakened structure."
       }
     },
     {
       "id": "panicked_animals",
+      "name": "Panicked Animals",
       "fields": {
-        "name": "Panicked Animals",
         "description": "Cries draw nearer as wildlife flees a threat that is still unseen."
       }
     },
     {
       "id": "distress_call",
+      "name": "Distress Call",
       "fields": {
-        "name": "Distress Call",
         "description": "A voice calls for help from a place where nobody should survive."
       }
     },
     {
       "id": "nauseating_odor",
+      "name": "Nauseating Odor",
       "fields": {
-        "name": "Nauseating Odor",
         "description": "An unusual stench fills the area, leading toward its source while warning of danger."
       }
     },
     {
       "id": "bewitching_perfume",
+      "name": "Bewitching Perfume",
       "fields": {
-        "name": "Bewitching Perfume",
         "description": "A pleasant scent subtly alters the attention, emotions, or behavior of those exposed."
       }
     },
     {
       "id": "shared_pain",
+      "name": "Shared Pain",
       "fields": {
-        "name": "Shared Pain",
         "description": "Several people feel the same pain at once without visible injury."
       }
     },
     {
       "id": "fainting",
+      "name": "Fainting",
       "fields": {
-        "name": "Fainting",
         "description": "An NPC loses consciousness just before revealing essential information."
       }
     },
     {
       "id": "gathering_storm",
+      "name": "Gathering Storm",
       "fields": {
-        "name": "Gathering Storm",
         "description": "The weather changes abruptly, complicating travel, combat, or communication."
       }
     },
     {
       "id": "unexpected_arrival",
+      "name": "Unexpected Arrival",
       "fields": {
-        "name": "Unexpected Arrival",
         "description": "A newcomer appears and claims to have known one of the characters for years."
       }
     },
     {
       "id": "hostile_migration",
+      "name": "Hostile Migration",
       "fields": {
-        "name": "Hostile Migration",
         "description": "Several creatures enter the area after a greater threat drives them from their territory."
       }
     },
     {
       "id": "disrupted_cycle",
+      "name": "Disrupted Cycle",
       "fields": {
-        "name": "Disrupted Cycle",
         "description": "Night falls or day breaks hours too early, while clocks and memories disagree."
       }
     },
     {
       "id": "impossible_message",
+      "name": "Impossible Message",
       "fields": {
-        "name": "Impossible Message",
         "description": "A call for help comes from someone absent, dead, or impossibly far away."
       }
     },
     {
       "id": "return_of_the_past",
+      "name": "Return of the Past",
       "fields": {
-        "name": "Return of the Past",
         "description": "A character’s history returns as a witness, debt, or accusation."
       }
     },
     {
       "id": "sudden_epidemic",
+      "name": "Sudden Epidemic",
       "fields": {
-        "name": "Sudden Epidemic",
         "description": "A group member shows the first signs of a disease the locals recognize with dread."
       }
     },
     {
       "id": "supplies_exhausted",
+      "name": "Supplies Exhausted",
       "fields": {
-        "name": "Supplies Exhausted",
         "description": "Food disappears, spoils, or becomes inedible at the worst moment."
       }
     },
     {
       "id": "extreme_temperature",
+      "name": "Extreme Temperature",
       "fields": {
-        "name": "Extreme Temperature",
         "description": "Abnormal heat or cold forces everyone to seek shelter or an explanation quickly."
       }
     }
