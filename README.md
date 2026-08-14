@@ -137,6 +137,10 @@ repeat, for example:
 Omitting an entry performs the normal weighted selection. Paths ending on a
 generator apply that final generator's normal automatic modifiers; paths ending on
 a field return only that field and do not apply the final generator's modifiers.
+If an unfixed entry's `.generator` route is followed by another entry, route, or
+field, that continuation must be valid for every possible routed child. Invalid
+paths are rejected before weighted selection, while a path ending at the unresolved
+`.generator` continues with normal weighted route and child generation.
 Internal children such as `dungeon` are invalid as direct roots.
 Character fields are `name`, `level`, `resources`, `status`, `statistics`, `rules`,
 `talents`, `gear`, `race`, `background`, `personality`. Creature fields independently

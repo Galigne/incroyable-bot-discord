@@ -614,6 +614,11 @@ The durable implementation constraints are:
   automatic modifiers. A path ending on a field returns only that field without
   the final generator's automatic modifiers. Only the initial generator may be a
   public root; internal children are reachable only through valid traversal.
+- Validate a complete structural traversal before consuming randomness. After an
+  unresolved entry follows `.generator`, any later fixed entry, field, or repeated
+  route must be valid for every possible routed child at that point. An unresolved
+  `.generator` may remain the final target when every possible selected entry has
+  a route. Autocomplete must omit continuations that fail this universal check.
 - Keep `background` routing aligned with one internal concept-only generator per
   category, stored in `background_<category>.json`. Each router entry uses a direct
   top-level `generator` ID, never a wrapped inline reference. Resolve

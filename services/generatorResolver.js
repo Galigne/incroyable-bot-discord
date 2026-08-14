@@ -5,7 +5,7 @@ const {
 	parseWrappedInlineReference,
 } = require('./generatorSchema/referenceValidation');
 const {
-	parseGeneratorTraversalPath,
+	analyzeGeneratorTraversalPath,
 } = require('./generatorTraversal');
 const { selectWeightedEntry } = require('./weightedSelector');
 
@@ -20,14 +20,16 @@ function createGeneratorResolver({ getGenerator = generatorCatalog.getGenerator 
 
 	function generate(traversalPath, locale = 'en', options = {}) {
 		validateOptions(locale, options);
-		const traversal = parseGeneratorTraversalPath(traversalPath);
-		if (!traversal) {
+		const analysis = analyzeGeneratorTraversalPath(
+			traversalPath,
+			locale,
+			{ getGenerator },
+		);
+		if (!analysis) {
 			return null;
 		}
+		const { traversal } = analysis;
 		let generator = getGenerator(traversal.rootId, locale);
-		if (!generator || generator.visibility !== 'public') {
-			return null;
-		}
 		const random = options.random ?? Math.random;
 		const state = createState(locale, options, random);
 		let entryId = traversal.rootEntryId;

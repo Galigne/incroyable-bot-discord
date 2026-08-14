@@ -494,6 +494,27 @@ test('carried loot uses heterogeneous display results and bounded provenance ded
 	assert.equal(repeatedCalls, 21);
 });
 
+test('structured carried loot uses a proper em dash separator', () => {
+	const resolver = {
+		generate() {
+			return {
+				outputType: 'fields',
+				displayFields: {
+					name: 'Buckler',
+					description: 'A compact shield.',
+				},
+				provenance: [
+					{ type: 'entry', generatorId: 'loot', entryId: 'shields' },
+					{ type: 'entry', generatorId: 'shields', entryId: 'buckler' },
+				],
+			};
+		},
+	};
+	const [value] = pickCarriedLoot(1, 'en', () => 0, resolver);
+	assert.equal(value, 'Buckler \u2014 A compact shield.');
+	assert.equal(value.includes('\u00e2\u20ac\u201d'), false);
+});
+
 test('seeded random character generation remains equivalent', () => {
 	const first = createCharacterFixture();
 	const second = createCharacterFixture();

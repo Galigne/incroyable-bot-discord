@@ -188,6 +188,12 @@ site:dungeon.generator:buried_temple.name
 loot:shields.generator:wooden_shield.ar_percentage
 ```
 
+The complete traversal is validated before random selection. When `.generator`
+follows an unfixed entry, every later fixed entry, field, or repeated route must be
+compatible with every possible routed child at that point. Ending at the unresolved
+`.generator` remains valid when every possible selected entry has a structural
+route; normal weighted route selection and child generation then continue.
+
 Only the root is required to be public. The routed children in these families are
 internal and cannot be submitted as direct roots. A bare router generates only its selected entry's visible fields;
 it never follows the route automatically. A path ending on a generator performs

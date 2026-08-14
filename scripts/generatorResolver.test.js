@@ -5,6 +5,9 @@ const {
 	generateGeneratorResults,
 } = require('../services/generatorApplicationService');
 const { createGeneratorResolver } = require('../services/generatorResolver');
+const {
+	getGeneratorTraversalSuggestions,
+} = require('../services/generatorTraversal');
 const { selectResolvedOutput } = require('../services/referenceResolver');
 const {
 	validateGeneratorDefinition,
@@ -545,6 +548,181 @@ test('/gen traversal follows structural routes, targets fields, and preserves mo
 	assert.equal(resolver.generate('router:missing.generator', 'en'), null);
 });
 
+test('/gen validates unresolved route continuations before random selection', () => {
+	const router = createTraversalRouter('router', 'public', [
+		['left_route', 'left'],
+		['right_route', 'right'],
+	]);
+	const left = createTraversalFieldsGenerator(
+		'left',
+		['name', 'shared', 'left_only'],
+		['shared_entry', 'left_entry'],
+	);
+	const right = createTraversalFieldsGenerator(
+		'right',
+		['name', 'shared', 'right_only'],
+		['shared_entry', 'right_entry'],
+	);
+	const catalog = new Map([
+		['router', router],
+		['left', left],
+		['right', right],
+	]);
+	const getGenerator = id => catalog.get(id);
+	const resolver = createGeneratorResolver({ getGenerator });
+
+	const bare = resolver.generate('router', 'en', { random: () => 0 });
+	assert.equal(bare.generatorId, 'router');
+	assert.deepEqual(bare.displayFields, { name: 'left_route' });
+	assert.equal(
+		resolver.generate('router.generator', 'en', { random: () => 0 }).generatorId,
+		'left',
+	);
+	assert.deepEqual(
+		resolver.generate('router.generator.shared', 'en', {
+			random: sequenceRandom([0.999, 0]),
+		}).fields,
+		{ shared: 'right:shared_entry:shared' },
+	);
+	assert.equal(
+		resolver.generate('router.generator:shared_entry.name', 'en', {
+			random: () => 0.999,
+		}).entryId,
+		'shared_entry',
+	);
+
+	for (const invalidPath of [
+		'router.generator.left_only',
+		'router.generator:right_only',
+		'router.generator:left_entry',
+	]) {
+		let randomCalls = 0;
+		assert.equal(resolver.generate(invalidPath, 'en', {
+			random() {
+				randomCalls += 1;
+				return 0;
+			},
+		}), null);
+		assert.equal(randomCalls, 0, invalidPath);
+	}
+
+	assert.deepEqual(
+		resolver.generate('router:left_route.generator.left_only', 'en', {
+			random: () => 0,
+		}).fields,
+		{ left_only: 'left:shared_entry:left_only' },
+	);
+	assert.equal(
+		resolver.generate('router:left_route.generator:left_entry.name', 'en').entryId,
+		'left_entry',
+	);
+
+	const suggest = value => getGeneratorTraversalSuggestions(value, 'en', {
+		getGenerator,
+		listGenerators: () => [router],
+	}).map(choice => choice.value);
+	assert.deepEqual(suggest('router.generator:'), [
+		'router.generator:shared_entry',
+	]);
+	assert.deepEqual(suggest('router.generator.'), [
+		'router.generator.name',
+		'router.generator.shared',
+	]);
+	assert.deepEqual(suggest('router:left_route.generator:'), [
+		'router:left_route.generator:shared_entry',
+		'router:left_route.generator:left_entry',
+	]);
+	assert.deepEqual(suggest('router:left_route.generator.'), [
+		'router:left_route.generator.name',
+		'router:left_route.generator.shared',
+		'router:left_route.generator.left_only',
+	]);
+});
+
+test('/gen applies universal continuation validation through repeated random routes', () => {
+	const root = createTraversalRouter('multi', 'public', [
+		['left', 'branch_left'],
+		['right', 'branch_right'],
+	]);
+	const branchLeft = createTraversalRouter('branch_left', 'internal', [
+		['first', 'leaf_first'],
+		['second', 'leaf_second'],
+	]);
+	const branchRight = createTraversalRouter('branch_right', 'internal', [
+		['third', 'leaf_third'],
+	]);
+	const leafFirst = createTraversalFieldsGenerator(
+		'leaf_first',
+		['name', 'common', 'exclusive'],
+		['shared_leaf', 'first_only'],
+	);
+	const leafSecond = createTraversalFieldsGenerator(
+		'leaf_second',
+		['name', 'common'],
+		['shared_leaf', 'second_only'],
+	);
+	const leafThird = createTraversalFieldsGenerator(
+		'leaf_third',
+		['name', 'common'],
+		['shared_leaf', 'third_only'],
+	);
+	const catalog = new Map([
+		['multi', root],
+		['branch_left', branchLeft],
+		['branch_right', branchRight],
+		['leaf_first', leafFirst],
+		['leaf_second', leafSecond],
+		['leaf_third', leafThird],
+	]);
+	const getGenerator = id => catalog.get(id);
+	const resolver = createGeneratorResolver({ getGenerator });
+
+	assert.deepEqual(
+		resolver.generate('multi.generator.generator.common', 'en', {
+			random: sequenceRandom([0.999, 0, 0]),
+		}).fields,
+		{ common: 'leaf_third:shared_leaf:common' },
+	);
+	assert.equal(
+		resolver.generate('multi.generator.generator:shared_leaf.name', 'en', {
+			random: sequenceRandom([0.999, 0]),
+		}).entryId,
+		'shared_leaf',
+	);
+
+	for (const invalidPath of [
+		'multi.generator.generator.exclusive',
+		'multi.generator.generator:first_only',
+		'multi:left.generator.generator.exclusive',
+	]) {
+		let randomCalls = 0;
+		assert.equal(resolver.generate(invalidPath, 'en', {
+			random() {
+				randomCalls += 1;
+				return 0;
+			},
+		}), null);
+		assert.equal(randomCalls, 0, invalidPath);
+	}
+
+	assert.deepEqual(
+		resolver.generate('multi:left.generator:first.generator.exclusive', 'en', {
+			random: () => 0,
+		}).fields,
+		{ exclusive: 'leaf_first:shared_leaf:exclusive' },
+	);
+	assert.deepEqual(
+		getGeneratorTraversalSuggestions('multi.generator.generator.', 'en', {
+			getGenerator,
+			listGenerators: () => [root],
+		}).map(choice => choice.value),
+		[
+			'multi.generator.generator.name',
+			'multi.generator.generator.common',
+		],
+	);
+});
+
 test('structural route relationships use direct stable generator IDs', () => {
 	const owner = createTextGenerator('owner', 'Owner');
 	owner.entries[0].generator = 'missing';
@@ -709,6 +887,39 @@ function createModifierGenerator(locale) {
 					: 'Tensions have reached a breaking point.',
 			},
 		}],
+	};
+}
+
+function createTraversalRouter(id, visibility, routes) {
+	return {
+		schemaVersion: 3,
+		id,
+		visibility,
+		name: id,
+		description: id,
+		entrySchema: { type: 'fields', required: ['name'] },
+		entries: routes.map(([entryId, generator]) => ({
+			id: entryId,
+			fields: { name: entryId },
+			generator,
+		})),
+	};
+}
+
+function createTraversalFieldsGenerator(id, required, entryIds) {
+	return {
+		schemaVersion: 3,
+		id,
+		visibility: 'internal',
+		name: id,
+		description: id,
+		entrySchema: { type: 'fields', required },
+		entries: entryIds.map(entryId => ({
+			id: entryId,
+			fields: Object.fromEntries(required.map(field => (
+				[field, `${id}:${entryId}:${field}`]
+			))),
+		})),
 	};
 }
 

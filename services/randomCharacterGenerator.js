@@ -232,7 +232,7 @@ function getLootSelectionIdentity(provenance) {
 
 function getResolvedDisplayValue(result) {
 	const value = result?.outputType === 'fields'
-		? Object.values(result.displayFields ?? {}).join(' â€” ')
+		? Object.values(result.displayFields ?? {}).join(' \u2014 ')
 		: result?.value;
 	if (typeof value !== 'string' || !value.trim()) {
 		throw generationError(

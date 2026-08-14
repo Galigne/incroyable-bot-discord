@@ -82,6 +82,13 @@ weighted selection. Autocomplete derives roots, entries, fields, and routes from
 the current path context, but manual valid paths remain accepted independently of
 the 25-choice suggestion limit.
 
+Traversal validity is resolved across all possible contexts before any random
+selection. If `.generator` follows an unfixed entry and the path continues, the
+next fixed entry, field, or route must be supported by every possible routed child;
+the same rule applies after each repeated unresolved route. A path may end at an
+unresolved `.generator` when every possible selected entry has a route, after which
+normal weighted route and child generation proceed.
+
 Only the initial generator must be public. Every child reached through the
 `background`, `creature`, `loot`, `site`, `group`, or `modifier` routers is
 internal, so a child such as `dungeon` is invalid as a direct root but reachable
