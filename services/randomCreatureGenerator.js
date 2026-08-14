@@ -44,7 +44,7 @@ function populateRandomCreature(creature, options = {}) {
 	const result = resolver.generate(
 		requestedType === undefined
 			? `${CREATURE_ROUTER_ID}.generator`
-			: `${CREATURE_ROUTER_ID}:${requestedType}.generator`,
+			: `${CREATURE_ROUTER_ID}:${requestedType}`,
 		locale,
 		{ random },
 	);

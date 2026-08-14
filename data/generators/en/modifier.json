@@ -5,55 +5,37 @@
   "name": "Modifier",
   "description": "Descriptive modifier families",
   "entrySchema": {
-    "required": ["description"]
+    "required": []
   },
   "entries": [
     {
       "id": "character",
       "name": "Character modifiers",
-      "fields": {
-        "description": "Persistent descriptive variations for generated characters"
-      },
       "generator": "modifier_character"
     },
     {
       "id": "creature",
       "name": "Creature modifiers",
-      "fields": {
-        "description": "Persistent descriptive variations for generated creatures"
-      },
       "generator": "modifier_creature"
     },
     {
       "id": "site_general",
       "name": "General site modifiers",
-      "fields": {
-        "description": "Conditions and weather suitable for many sites"
-      },
       "generator": "site_modifier_all"
     },
     {
       "id": "site_building",
       "name": "Building history modifiers",
-      "fields": {
-        "description": "Historical variations suitable for buildings"
-      },
       "generator": "site_modifier_building"
     },
     {
       "id": "site_interiors",
       "name": "Interior site modifiers",
-      "fields": {
-        "description": "Variations suitable for rooms and enclosed sites"
-      },
       "generator": "site_modifier_interiors"
     },
     {
       "id": "site_structures",
       "name": "Structure condition modifiers",
-      "fields": {
-        "description": "Damage and ruin variations for structures"
-      },
       "generator": "site_modifier_structures"
     }
   ]

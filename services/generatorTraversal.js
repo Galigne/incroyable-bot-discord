@@ -6,6 +6,9 @@ const {
 const {
 	GENERATOR_ID_PATTERN,
 } = require('./generatorSchema/constants');
+const {
+	isGeneratorRouter,
+} = require('./generatorSchema/routerValidation');
 
 const TRAVERSAL_ALIAS_PATTERN = /^[\p{L}\p{M}\p{N}]+(?:_[\p{L}\p{M}\p{N}]+)*$/u;
 
@@ -23,15 +26,21 @@ function parseGeneratorTraversalPath(value) {
 	}
 	const traversal = {
 		rootId: root.id,
-		rootEntryId: root.entryId,
-		routes: [],
+		operations: root.entryIds.map(entryId => ({
+			entryId,
+			type: 'selection',
+		})),
 		field: undefined,
 	};
 	for (let index = 1; index < segments.length; index += 1) {
 		const segment = segments[index];
-		const route = parseSelectionSegment(segment);
-		if (route?.id === 'generator') {
-			traversal.routes.push({ entryId: route.entryId });
+		const selection = parseSelectionSegment(segment);
+		if (selection?.id === 'generator') {
+			traversal.operations.push({ type: 'route' });
+			traversal.operations.push(...selection.entryIds.map(entryId => ({
+				entryId,
+				type: 'selection',
+			})));
 			continue;
 		}
 		if (
@@ -49,15 +58,12 @@ function parseGeneratorTraversalPath(value) {
 
 function parseSelectionSegment(segment) {
 	const parts = segment.split(':');
-	if (
-		parts.length > 2
-		|| parts.some(part => !TRAVERSAL_ALIAS_PATTERN.test(part))
-	) {
+	if (parts.some(part => !TRAVERSAL_ALIAS_PATTERN.test(part))) {
 		return null;
 	}
 	return {
 		id: parts[0],
-		entryId: parts[1],
+		entryIds: parts.slice(1),
 	};
 }
 
@@ -80,58 +86,69 @@ function analyzeGeneratorTraversalPath(
 	if (!root) {
 		return null;
 	}
-	const rootEntry = resolveEntrySegment(root, parsedTraversal.rootEntryId);
-	if (parsedTraversal.rootEntryId !== undefined && !rootEntry) {
-		return null;
-	}
 	const traversal = {
 		rootId: root.id,
-		rootEntryId: rootEntry?.id,
-		routes: [],
+		steps: [],
+		entryId: undefined,
 		field: parsedTraversal.field,
 	};
 	let localizedPath = createGeneratorTraversalAlias(root.name);
-	if (rootEntry) {
-		localizedPath += `:${createGeneratorTraversalAlias(rootEntry.name)}`;
-	}
-	let contexts = [{ generator: root, entryId: traversal.rootEntryId }];
-	if (!hasValidContextSelections(contexts)) {
-		return null;
-	}
+	let contexts = [{ generator: root, entryId: undefined }];
+	let previousSelectionRouted = false;
+	let usesRedundantRoute = false;
 
-	for (const route of parsedTraversal.routes) {
-		const nextGenerators = [];
-		for (const context of contexts) {
-			const entries = getContextEntries(context);
-			if (entries.some(entry => !entry.generator)) {
+	for (const operation of parsedTraversal.operations) {
+		if (operation.type === 'route') {
+			localizedPath += '.generator';
+			if (previousSelectionRouted) {
+				usesRedundantRoute = true;
+				previousSelectionRouted = false;
+				continue;
+			}
+			const routed = routeContexts(contexts, locale, getGenerator);
+			if (!routed) {
 				return null;
 			}
-			for (const entry of entries) {
-				const generator = getGenerator(entry.generator, locale);
-				if (!generator) {
-					return null;
-				}
-				nextGenerators.push(generator);
-			}
+			traversal.steps.push({ entryId: undefined });
+			contexts = routed;
+			previousSelectionRouted = false;
+			continue;
 		}
-		const selection = resolveCommonEntrySelection(nextGenerators, route.entryId);
+
+		if (contexts.some(context => context.entryId !== undefined)) {
+			return null;
+		}
+		const selection = resolveCommonEntrySelection(contexts, operation.entryId);
 		if (!selection.valid) {
 			return null;
 		}
-		contexts = deduplicateContexts(nextGenerators.map(generator => ({
-			generator,
+		localizedPath += `:${getCommonLocalizedEntryAlias(
+			contexts,
+			selection.entryId,
+		) ?? selection.entryId}`;
+		const selectedContexts = contexts.map(context => ({
+			generator: context.generator,
 			entryId: selection.entryId,
-		})));
-		if (!hasValidContextSelections(contexts)) {
+		}));
+		const routerSelections = selectedContexts.map(context => (
+			isGeneratorRouter(context.generator)
+		));
+		if (routerSelections.some(Boolean) && !routerSelections.every(Boolean)) {
 			return null;
 		}
-		traversal.routes.push({ entryId: selection.entryId });
-		localizedPath += '.generator';
-		if (selection.entryId !== undefined) {
-			localizedPath += `:${getCommonLocalizedEntryAlias(
-				contexts,
-				selection.entryId,
-			) ?? selection.entryId}`;
+		if (routerSelections.every(Boolean)) {
+			const routed = routeContexts(selectedContexts, locale, getGenerator);
+			if (!routed) {
+				return null;
+			}
+			traversal.steps.push({ entryId: selection.entryId });
+			contexts = routed;
+			previousSelectionRouted = true;
+		}
+		else {
+			contexts = selectedContexts;
+			traversal.entryId = selection.entryId;
+			previousSelectionRouted = false;
 		}
 	}
 
@@ -147,7 +164,12 @@ function analyzeGeneratorTraversalPath(
 	if (traversal.field !== undefined) {
 		localizedPath += `.${traversal.field}`;
 	}
-	return { contexts, localizedPath, traversal };
+	return {
+		contexts,
+		localizedPath,
+		traversal,
+		usesRedundantRoute,
+	};
 }
 
 function resolvePublicGeneratorSegment(segment, locale, options) {
@@ -163,9 +185,6 @@ function resolvePublicGeneratorSegment(segment, locale, options) {
 }
 
 function resolveEntrySegment(generator, segment) {
-	if (segment === undefined) {
-		return undefined;
-	}
 	const direct = generator.entries.find(entry => entry.id === segment);
 	if (direct) {
 		return direct;
@@ -177,11 +196,10 @@ function resolveEntrySegment(generator, segment) {
 	return matches.length === 1 ? matches[0] : undefined;
 }
 
-function resolveCommonEntrySelection(generators, segment) {
-	if (segment === undefined) {
-		return { valid: true, entryId: undefined };
-	}
-	const entries = generators.map(generator => resolveEntrySegment(generator, segment));
+function resolveCommonEntrySelection(contexts, segment) {
+	const entries = contexts.map(context => (
+		resolveEntrySegment(context.generator, segment)
+	));
 	if (entries.some(entry => !entry)) {
 		return { valid: false, entryId: undefined };
 	}
@@ -191,10 +209,22 @@ function resolveCommonEntrySelection(generators, segment) {
 		: { valid: false, entryId: undefined };
 }
 
-function hasValidContextSelections(contexts) {
-	return contexts.length > 0 && contexts.every(context => (
-		getContextEntries(context).length > 0
-	));
+function routeContexts(contexts, locale, getGenerator) {
+	const nextContexts = [];
+	for (const context of contexts) {
+		const entries = getContextEntries(context);
+		if (entries.length === 0 || entries.some(entry => !entry.generator)) {
+			return null;
+		}
+		for (const entry of entries) {
+			const generator = getGenerator(entry.generator, locale);
+			if (!generator) {
+				return null;
+			}
+			nextContexts.push({ generator, entryId: undefined });
+		}
+	}
+	return deduplicateContexts(nextContexts);
 }
 
 function getGeneratorTraversalSuggestions(
@@ -232,14 +262,17 @@ function getGeneratorTraversalSuggestions(
 		locale,
 		{ getGenerator, listGenerators },
 	);
-	if (!analysis) {
+	if (!analysis || analysis.usesRedundantRoute) {
 		return [];
 	}
-	const isValid = candidate => analyzeGeneratorTraversalPath(
-		candidate,
-		locale,
-		{ getGenerator, listGenerators },
-	) !== null;
+	const isValid = candidate => {
+		const candidateAnalysis = analyzeGeneratorTraversalPath(
+			candidate,
+			locale,
+			{ getGenerator, listGenerators },
+		);
+		return candidateAnalysis !== null && !candidateAnalysis.usesRedundantRoute;
+	};
 	const suggestions = delimiter === ':'
 		? createEntrySuggestions(
 			analysis.localizedPath,
@@ -315,6 +348,13 @@ function createMemberSuggestions(prefix, contexts, isValid) {
 	const seen = new Set();
 	for (const context of contexts) {
 		for (const field of ['name', ...context.generator.entrySchema.required]) {
+			if (
+				field === 'name'
+				&& context.entryId === undefined
+				&& isGeneratorRouter(context.generator)
+			) {
+				continue;
+			}
 			addSuggestion(suggestions, seen, isValid, {
 				kind: 'field',
 				label: field,
@@ -323,15 +363,17 @@ function createMemberSuggestions(prefix, contexts, isValid) {
 				value: `${prefix}.${field}`,
 			});
 		}
-		if (getContextEntries(context).some(entry => entry.generator)) {
-			addSuggestion(suggestions, seen, isValid, {
-				kind: 'route',
-				label: 'generator',
-				description: context.generator.name,
-				segment: 'generator',
-				value: `${prefix}.generator`,
-			});
-		}
+	}
+	if (contexts.every(context => (
+		context.entryId === undefined && isGeneratorRouter(context.generator)
+	))) {
+		addSuggestion(suggestions, seen, isValid, {
+			kind: 'route',
+			label: 'generator',
+			description: contexts[0].generator.name,
+			segment: 'generator',
+			value: `${prefix}.generator`,
+		});
 	}
 	return suggestions;
 }

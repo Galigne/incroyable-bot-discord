@@ -119,10 +119,10 @@ are ordinary generated data, are included in normal display, and can be selected
 explicitly. String content is localized; additional fields may also be finite
 numbers or booleans.
 
-Entry properties are strict. In addition to `id`, optional `weight`, and exactly
-one top-level localized `name`, an entry with declared additional fields has exactly
-one matching `fields` object. An entry may define `generator` as a direct stable
-child-generator ID. Creature-detail entries may define the separately validated
+Entry properties are strict. A content entry has `id`, optional `weight`, exactly
+one top-level localized `name`, and exactly one matching `fields` object when it
+declares additional fields. Content entries never contain a structural `generator`
+route. Creature-detail content entries may define the separately validated
 `generation` object. These reserved properties are functional metadata, are never
 displayed as generated fields, and arbitrary extra metadata is rejected. The old
 `entrySchema.type`, entry `value`, and `fields.name` forms are invalid.
@@ -173,51 +173,62 @@ one weighted entry from that source is resolved normally. The modifier is return
 separately from the base result; fields that look mechanical remain
 descriptive data and never execute behavior.
 
-`/gen` has no command-level modifier option. The public `modifier` router exposes
-the useful internal character, creature, and site modifier pools through ordinary
-`.generator` traversal. Generating a modifier this way does not apply it to another
-result.
+`/gen` has no command-level modifier option. Fixed entries in the public `modifier`
+router expose the useful internal character, creature, and site modifier pools.
+Generating a modifier this way does not apply it to another result.
 
 ## Structural traversal
 
-The top-level entry property `generator` is structural routing metadata and must be
-a direct stable generator ID:
+Routers are detected from their entries rather than a `type` or `kind` property. If
+any entry contains the top-level structural `generator` property, every entry must
+contain it and the generator is a router. A router has an empty
+`entrySchema.required` array, and each entry contains only `id`, localized `name`,
+optional `weight`, and a direct stable child-generator ID:
 
 ```json
 {
   "id": "criminal",
   "name": "Criminal",
-  "fields": {
-    "description": "Outlaws, thieves, smugglers..."
-  },
   "generator": "criminal"
 }
 ```
 
+Router entries never contain `fields`, and a content generator never contains a
+structural route. Mixed generators in which only some entries route are invalid.
 Do not wrap structural routes in `{{ ... }}`. Inline references remain valid only
 inside actual generated text and fields; they compose content, while `generator`
-defines an explicit route.
+defines routing.
 
 `/gen category:` accepts a traversal path whose generator and entry segments use
 localized name aliases. Stable IDs remain accepted as manual input and are resolved
-to the same internal identities. `:entry` fixes the current generator's entry,
-`.field` returns one field, and `.generator` follows the selected entry's route. The
-`.generator` token and field keys such as `.name`, `.description`, and
-`.ar_percentage` remain stable English syntax. A missing entry is selected with
-normal weights, and routing may repeat:
+to the same internal identities. A bare router selects and displays one category.
+`.generator` selects an unresolved category with normal weights and follows its
+route, while `:category` fixes a router category and follows that route
+automatically. Consecutive `:entry` selections cross fixed router boundaries, and
+`.field` selects a field from the effective generated content. The `.generator`
+token and field keys such as `.name`, `.description`, and `.ar_percentage` remain
+stable English syntax:
 
 ```text
-background:criminal.description
-site:dungeon.generator
-site:dungeon.generator:buried_temple.name
-loot:shields.generator:wooden_shield.ar_percentage
+loot
+loot.generator
+loot:weapons
+loot:weapons:long_sword
+loot:weapons.description
+site:dungeon
+site:dungeon:buried_temple.name
 ```
 
 The French catalog expresses the same kind of path as
-`butin:boucliers.generator:bouclier_en_bois.ar_percentage`. Autocomplete always
+`butin:armes:épée_longue.description`. Autocomplete always
 presents localized paths, filters against only the segment currently being entered,
 and matches case- and accent-insensitively. It searches every valid contextual
 candidate before returning Discord's best 25 exact, prefix, then substring matches.
+
+`.generator` remains meaningful for unresolved random routing, including repeated
+unresolved router boundaries. Bare router `.name` also remains valid manual syntax,
+but autocomplete omits it when the bare name-only router already produces the same
+category name.
 
 The complete traversal is validated before random selection. When `.generator`
 follows an unfixed entry, every later fixed entry, field, or repeated route must be
@@ -226,8 +237,9 @@ compatible with every possible routed child at that point. Ending at the unresol
 route; normal weighted route selection and child generation then continue.
 
 Only the root is required to be public. The routed children in these families are
-internal and cannot be submitted as direct roots. A bare router generates only its selected entry's visible fields;
-it never follows the route automatically. A path ending on a generator performs
+internal and cannot be submitted as direct roots. A bare router generates only its
+selected category and does not follow its route. A fixed router entry follows its
+route automatically. A path ending on a generator performs
 ordinary generation and applies that final generator's automatic modifiers. A path
 ending on a field returns only that field and does not roll the final generator's
 automatic modifiers. Autocomplete follows the current path context, while valid
@@ -246,8 +258,8 @@ conditions come from `status_effect` and are not modifiers.
 Some stable IDs and fields have application-level meaning and must stay aligned
 with their consumers:
 
-- Every public `background` entry has a top-level `generator` route containing the
-  direct ID of the corresponding internal name-only `<category>` generator,
+- Every public `background` entry is a minimal router entry whose top-level
+  `generator` route contains the direct ID of the corresponding internal name-only `<category>` generator,
   stored in `background_<category>.json`. Character generation resolves that
   archetype and independently resolves the internal `physical_description`
   generator.
@@ -263,7 +275,7 @@ with their consumers:
   remain kebab-case.
 - The public `loot`, `site`, `group`, and `modifier` name-only routers contain
   localized top-level names plus direct top-level routes to internal children. Bare
-  router generation displays only the route entry; explicit `.generator` traversal
+  router generation displays only the route entry; a fixed entry implicitly
   resolves the child and retains both selections in provenance. Loot
   children declare only the additional fields each concept needs: materials use a
   description, while equipment may also expose technical fields such as rarity or

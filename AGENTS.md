@@ -607,10 +607,14 @@ The durable implementation constraints are:
   entries; the mandatory displayed name occupies the remaining Discord embed field.
   An empty list makes the name the complete generated value, while a non-empty list
   requires an exact `fields` object. Never use `entrySchema.type`,
-  an entry `value`, or `fields.name`. Functional entry metadata is restricted to
-  top-level `weight`, `generator`, and creature-detail `generation`. Every name and
-  additional field is ordinary displayable generated data; never hide a field
-  because it is mechanically useful.
+  an entry `value`, or `fields.name`. A content entry may use top-level `weight` and
+  creature-detail `generation`, but never a structural `generator` route. Detect a
+  router structurally when its entries contain routes: every entry must then have a
+  direct top-level `generator`, `entrySchema.required` must be empty, and entries
+  may contain only `id`, localized `name`, optional `weight`, and `generator`.
+  Reject mixed generators, router `fields`, and routed content entries. Every content
+  name and additional field is ordinary displayable generated data; never hide a
+  field because it is mechanically useful.
 - Entry names must be unambiguous within each localized generator, and public
   generator names must be unambiguous within each locale, after ignoring case,
   accents or diacritics, repeated whitespace, and separating punctuation. Reject a
@@ -626,9 +630,14 @@ The durable implementation constraints are:
   stable IDs before traversal, while continuing to accept stable-ID paths manually.
   Autocomplete filters and ranks the active segment case- and accent-insensitively,
   searches all valid candidates before the 25-choice limit, and submits only the
-  localized path without appended technical IDs. `:entry` fixes an entry and
-  `.field` selects a field; `.generator` follows the selected entry's route and may
-  repeat. `.generator` and field keys remain stable English syntax. A path
+  localized path without appended technical IDs. A bare router selects and displays
+  one category; `.generator` selects an unresolved category and follows its route;
+  `:category` fixes a router entry and follows its route automatically; another
+  `:entry` may select a fixed child across that boundary; and `.field` selects from
+  the effective generated content. `.generator` may repeat across unresolved router
+  boundaries, and it and all field keys remain stable English syntax. Preserve
+  resolution compatibility for redundant legacy fixed-route paths, but never emit,
+  suggest, or document them. A path
   ending on a generator performs ordinary generation with that final generator's
   automatic modifiers. A path ending on a field returns only that field without
   the final generator's automatic modifiers. Only the initial generator may be a
@@ -640,19 +649,21 @@ The durable implementation constraints are:
   a route. Autocomplete must omit continuations that fail this universal check.
 - Keep `background` routing aligned with one internal concept-only generator per
   category, stored in `background_<category>.json`. Each router entry uses a direct
-  top-level `generator` ID, never a wrapped inline reference. Resolve
+  top-level `generator` ID, never a wrapped inline reference, and follows the minimal
+  router-entry contract without fields. Resolve
   `physical_description` independently when generating a character.
 - Derive supported `/gen-creature` types from the public `creature` router. Router
   entries use top-level `generator` properties naming internal concept-only IDs
-  stored in `creature_<type>.json`;
+  stored in `creature_<type>.json` and follow the minimal router-entry contract;
   they are generator classifications, and the only persistent entity type is
   `creature`.
 - Category roots keep unprefixed filenames and IDs. Child filenames use
   `<category>_<concept>.json`, child IDs use only `<concept>`, and all references
   use generator IDs rather than filenames. The public `loot`, `site`, `group`, and
-  `modifier` roots are name-only routers over internal children. Bare router
-  generation displays only the selected route entry; `.generator` traversal
-  follows its direct structural route.
+  `modifier` roots are minimal name-only routers over internal children. The same
+  contract also applies to `background` and `creature`. Bare router generation
+  displays only the selected route entry; fixing a router entry follows its direct
+  structural route automatically.
 - There is no `inventory` generator. Random character inventory resolves three
   carried display values through `loot`, using child provenance for bounded
   duplicate avoidance. Heterogeneous loot schemas must remain supported.

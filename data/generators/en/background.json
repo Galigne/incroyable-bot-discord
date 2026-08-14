@@ -5,160 +5,109 @@
   "name": "Background",
   "description": "Background categories",
   "entrySchema": {
-    "required": ["description"]
+    "required": []
   },
   "entries": [
     {
       "id": "criminal",
       "name": "criminal",
       "weight": 4,
-      "fields": {
-        "description": "Outlaws, thieves, smugglers, corrupt officials, and organized criminals"
-      },
       "generator": "criminal"
     },
     {
       "id": "adventurer",
       "name": "adventurer",
       "weight": 5,
-      "fields": {
-        "description": "Explorers, mercenaries, monster hunters, pilgrims, and treasure seekers"
-      },
       "generator": "adventurer"
     },
     {
       "id": "noble",
       "name": "noble",
       "weight": 2,
-      "fields": {
-        "description": "Aristocrats, courtiers, heirs, and minor lords"
-      },
       "generator": "noble"
     },
     {
       "id": "peasant",
       "name": "peasant",
       "weight": 5,
-      "fields": {
-        "description": "Farmers, herders, and rural workers"
-      },
       "generator": "peasant"
     },
     {
       "id": "artisan",
       "name": "artisan",
       "weight": 5,
-      "fields": {
-        "description": "Blacksmiths, carpenters, tailors, alchemists, and craftspeople"
-      },
       "generator": "artisan"
     },
     {
       "id": "merchant",
       "name": "merchant",
       "weight": 5,
-      "fields": {
-        "description": "Traders, shopkeepers, caravan workers, and commercial agents"
-      },
       "generator": "merchant"
     },
     {
       "id": "scholar",
       "name": "scholar",
       "weight": 3,
-      "fields": {
-        "description": "Students, researchers, scribes, and librarians"
-      },
       "generator": "scholar"
     },
     {
       "id": "religious",
       "name": "religious",
       "weight": 3,
-      "fields": {
-        "description": "Priests, monks, temple servants, and pilgrims"
-      },
       "generator": "religious"
     },
     {
       "id": "military",
       "name": "military",
       "weight": 4,
-      "fields": {
-        "description": "Soldiers, guards, officers, and veterans"
-      },
       "generator": "military"
     },
     {
       "id": "outlander",
       "name": "outlander",
       "weight": 3,
-      "fields": {
-        "description": "Hunters, nomads, hermits, and tribal members"
-      },
       "generator": "outlander"
     },
     {
       "id": "sailor",
       "name": "sailor",
       "weight": 4,
-      "fields": {
-        "description": "Sailors, fishers, pirates, and dock workers"
-      },
       "generator": "sailor"
     },
     {
       "id": "performer",
       "name": "performer",
       "weight": 3,
-      "fields": {
-        "description": "Musicians, actors, storytellers, and entertainers"
-      },
       "generator": "performer"
     },
     {
       "id": "servant",
       "name": "servant",
       "weight": 4,
-      "fields": {
-        "description": "Household servants, attendants, and laborers"
-      },
       "generator": "servant"
     },
     {
       "id": "official",
       "name": "official",
       "weight": 3,
-      "fields": {
-        "description": "Administrators, diplomats, tax collectors, and judges"
-      },
       "generator": "official"
     },
     {
       "id": "mage",
       "name": "mage",
       "weight": 2,
-      "fields": {
-        "description": "Apprentices, hedge mages, and magical researchers"
-      },
       "generator": "mage"
     },
     {
       "id": "exile",
       "name": "exile",
       "weight": 3,
-      "fields": {
-        "description": "Refugees, fugitives, banished nobles, and displaced survivors"
-      },
       "generator": "exile"
     },
     {
       "id": "urchin",
       "name": "urchin",
       "weight": 3,
-      "fields": {
-        "description": "Orphans, beggars, street children, and scavengers"
-      },
       "generator": "urchin"
     }
   ]

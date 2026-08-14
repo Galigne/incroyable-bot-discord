@@ -8,7 +8,6 @@ const {
 	validateStableId,
 } = require('./assertions');
 const {
-	CREATURE_ROUTER_ID,
 	MAX_ADDITIONAL_ENTRY_FIELDS,
 	MAX_ENTRY_NAME_LENGTH,
 	MAX_FIELD_VALUE_LENGTH,
@@ -78,21 +77,19 @@ function validateGeneratorEntry(
 			`Generator ${location} has an invalid weight.`,
 		);
 	}
-	const commonKeys = [
+	const commonKeys = options.isRouter ? [
 		'id',
 		'name',
 		'weight',
 		'generator',
+	] : [
+		'id',
+		'name',
+		'weight',
 		...(isCreatureDetailGenerator(generator.id, options) ? ['generation'] : []),
 	];
-	if (entry.generator !== undefined) {
+	if (options.isRouter) {
 		validateStableId(entry.generator, `structural route at ${location}`);
-	}
-	if (generator.id === CREATURE_ROUTER_ID && entry.generator === undefined) {
-		throw generatorSchemaError(
-			'INVALID_CREATURE_ROUTER_SCHEMA',
-			`Creature router ${location} must define a structural route.`,
-		);
 	}
 	assertRequiredKeys(
 		entry,
@@ -100,7 +97,7 @@ function validateGeneratorEntry(
 		`Generator ${location} must contain an ID and localized name.`,
 	);
 	validateDisplayText(entry.name, MAX_ENTRY_NAME_LENGTH, `${location} name`);
-	if (entrySchema.required.length === 0) {
+	if (options.isRouter || entrySchema.required.length === 0) {
 		assertAllowedKeys(
 			entry,
 			commonKeys,

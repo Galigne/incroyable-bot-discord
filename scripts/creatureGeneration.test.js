@@ -38,6 +38,7 @@ const {
 const generatorResolver = require('../services/generatorResolver');
 const {
 	CREATURE_ROUTER_ID,
+	isGeneratorRouter,
 	validateCreatureStatProfileRelationships,
 	validateGeneratorDefinition,
 	validateGeneratorPair,
@@ -100,6 +101,7 @@ test('production creature sources are strict localized types backed by profiles'
 			);
 			const generator = generatorCatalog.getGenerator(generatorId, locale);
 			assert.equal(generator.visibility, 'internal');
+			assert.equal(isGeneratorRouter(generator), false);
 			assert.deepEqual(generator.entrySchema, {
 				required: ['description'],
 			});
@@ -724,10 +726,7 @@ test('/gen-creature type autocomplete uses localized router entries and stable I
 	});
 	const choice = choices.find(candidate => candidate.value === typeId);
 	assert.ok(choice);
-	assert.equal(
-		choice.name,
-		`${localizedRoute.name} — ${localizedRoute.fields.description}`.slice(0, 100),
-	);
+	assert.equal(choice.name, localizedRoute.name);
 });
 
 test('/gen-creature treats an omitted Discord type option as random selection', async () => {
@@ -1037,7 +1036,10 @@ function getArmorPercentage(creature) {
 function createDetailResolver(generatorId, result, modifierResult) {
 	return {
 		generate(traversalPath, locale, options) {
-			if (traversalPath.startsWith(`${CREATURE_ROUTER_ID}:`) && traversalPath.endsWith('.generator')) {
+			if (
+				traversalPath.startsWith(`${CREATURE_ROUTER_ID}:`)
+				&& !traversalPath.includes('.generator')
+			) {
 				const type = getCreatureTypes(locale).find(candidate => (
 					getCreatureGeneratorId(candidate, locale) === generatorId
 				));

@@ -46,9 +46,10 @@ retroactively. See the [generator authoring guide](data/generators/README.md) an
 contract and runtime design.
 
 The public `loot`, `site`, `group`, `background`, `creature`, and `modifier`
-generators expose visible route entries whose children are internal. Bare router
-generation displays the selected route entry; following its child is explicit with
-`.generator`. Loot includes weapons, shields, armor, supplies, consumables, food
+generators are structurally detected routers: every minimal entry has a localized
+name and a direct route to an internal child. Bare router generation displays the
+selected category only; fixing a category automatically generates from its child.
+Loot includes weapons, shields, armor, supplies, consumables, food
 and drink, valuables, materials, and curios. Afflictions, rumors, and secrets are
 also available as direct public generators.
 
@@ -125,22 +126,32 @@ In `/gen` results, direct inline generator references are shown in inline code;
 references resolved inside them use square brackets at every recursive level.
 The traversal syntax uses localized generator and entry aliases. Aliases are
 lowercase, replace spaces and separating punctuation with underscores, and retain
-localized accents. `:entry` selects an entry, `.field` returns one field, and
-`.generator` follows that entry's structural route. `.generator`, `.name`, and all
-other field keys remain stable English syntax. Segments may repeat, for example:
+localized accents. A bare router selects and displays one category. `.generator`
+selects a random category and follows its route, while `:category` fixes a router
+category and follows that route automatically. Another `:entry` fixes an entry in
+the routed child, and `.field` reads a field from the effective generated content.
+`.generator`, `.name`, and all other field keys remain stable English syntax. For
+example:
 
 ```text
-/gen category:background:criminal.description
-/gen category:site:dungeon.generator
-/gen category:site:dungeon.generator:buried_temple.name
-/gen category:loot:shields.generator:wooden_shield.ar_percentage
-/gen category:modifier:general_site_modifiers.generator
+/gen category:loot
+/gen category:loot.generator
+/gen category:loot:weapons
+/gen category:loot:weapons:long_sword
+/gen category:loot:weapons.description
+/gen category:site:dungeon
+/gen category:site:dungeon:buried_temple.name
 ```
 
 With the French catalog, corresponding paths include
-`butin:boucliers.generator:bouclier_en_bois.ar_percentage` and
-`lieu:donjons.generator:temple_enseveli.name`. Stable generator and entry IDs remain
+`butin`, `butin.generator`, `butin:armes`,
+`butin:armes:épée_longue.description`, and
+`lieu:donjons:temple_enseveli.name`. Stable generator and entry IDs remain
 accepted for manual input and are resolved to the same internal identities.
+
+`.generator` remains necessary for unresolved random routing and may repeat across
+unresolved router boundaries. The redundant `.name` form for a bare name-only
+router remains valid manual input but is not suggested.
 
 Omitting an entry performs the normal weighted selection. Paths ending on a
 generator apply that final generator's normal automatic modifiers; paths ending on

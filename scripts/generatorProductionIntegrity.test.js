@@ -2,6 +2,7 @@ const assert = require('node:assert/strict');
 const { test } = require('node:test');
 const generatorCatalog = require('../services/generatorCatalog');
 const generatorResolver = require('../services/generatorResolver');
+const { isGeneratorRouter } = require('../services/generatorSchema');
 
 test('complete production catalogs validate in both locales under schema v4', () => {
 	const catalogs = generatorCatalog.createGeneratorCatalogCandidate();
@@ -13,6 +14,7 @@ test('complete production catalogs validate in both locales under schema v4', ()
 			|| generator.id.startsWith('site_modifier_')
 	))) {
 		assert.equal(modifier.visibility, 'internal');
+		assert.equal(isGeneratorRouter(modifier), false);
 		assert.ok(modifier.entries.every(entry => (
 			Object.keys(entry).every(key => ['id', 'name', 'weight', 'fields'].includes(key))
 		)));
@@ -45,8 +47,28 @@ test('every production quest, rumor, and secret resolves references with provena
 	}
 });
 
-test('production category routers traverse equal-weight internal child generators', () => {
+test('production category routers are minimal and traverse internal child generators', () => {
 	const routers = new Map([
+		['background', [
+			'criminal',
+			'adventurer',
+			'noble',
+			'peasant',
+			'artisan',
+			'merchant',
+			'scholar',
+			'religious',
+			'military',
+			'outlander',
+			'sailor',
+			'performer',
+			'servant',
+			'official',
+			'mage',
+			'exile',
+			'urchin',
+		]],
+		['creature', ['animal', 'companion', 'monster']],
 		['loot', [
 			'weapons',
 			'shields',
@@ -60,16 +82,32 @@ test('production category routers traverse equal-weight internal child generator
 		]],
 		['site', ['building', 'dungeon', 'settlement', 'region', 'room']],
 		['group', ['government', 'faction', 'religion']],
+		['modifier', [
+			'modifier_character',
+			'modifier_creature',
+			'site_modifier_all',
+			'site_modifier_building',
+			'site_modifier_interiors',
+			'site_modifier_structures',
+		]],
 	]);
 	for (const locale of ['en', 'fr']) {
 		for (const [routerId, childIds] of routers) {
 			const router = generatorCatalog.getGenerator(routerId, locale);
 			assert.equal(router.visibility, 'public');
-			assert.deepEqual(router.entries.map(entry => entry.id), childIds);
-			for (const childId of childIds) {
+			assert.equal(isGeneratorRouter(router), true);
+			assert.deepEqual(router.entrySchema.required, []);
+			assert.ok(router.entries.every(entry => (
+				Object.keys(entry).every(key => (
+					['id', 'name', 'weight', 'generator'].includes(key)
+				))
+			)));
+			assert.deepEqual(router.entries.map(entry => entry.generator), childIds);
+			for (const route of router.entries) {
+				const childId = route.generator;
 				assert.equal(generatorCatalog.getGenerator(childId, locale).visibility, 'internal');
 				const result = generatorResolver.generate(
-					`${routerId}:${childId}.generator`,
+					`${routerId}:${route.id}`,
 					locale,
 					{ random: () => 0.5 },
 				);
@@ -79,6 +117,13 @@ test('production category routers traverse equal-weight internal child generator
 					result.provenance.slice(0, 2).map(record => record.generatorId),
 					[routerId, childId],
 				);
+				const explicitResult = generatorResolver.generate(
+					`${routerId}:${route.id}.generator`,
+					locale,
+					{ random: () => 0.5 },
+				);
+				assert.equal(explicitResult.generatorId, result.generatorId);
+				assert.equal(explicitResult.entryId, result.entryId);
 			}
 		}
 	}

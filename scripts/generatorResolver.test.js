@@ -478,7 +478,7 @@ test('/gen renders complete modifier results as separate embeds', () => {
 	assert.match(response.embeds[1].data.title, /modifier/i);
 });
 
-test('/gen displays every field while keeping structural routes outside fields', () => {
+test('/gen displays every declared content field', () => {
 	const generator = {
 		schemaVersion: 4,
 		id: 'armors',
@@ -491,7 +491,6 @@ test('/gen displays every field while keeping structural routes outside fields',
 		entries: [{
 			id: 'light_armor',
 			name: 'Light armor',
-			generator: 'armor_details',
 			fields: {
 				type: 'light',
 				description: 'Flexible protection.',
@@ -559,7 +558,7 @@ test('/gen traversal follows structural routes, targets fields, and preserves mo
 	assert.equal(bareRouter.generatorId, 'router');
 	assert.equal(resolver.generate('details', 'en', { random: () => 0 }), null);
 
-	const routed = resolver.generate('router:details.generator:second', 'en', {
+	const routed = resolver.generate('router:details:second', 'en', {
 		random: () => 0,
 	});
 	assert.equal(routed.generatorId, 'details');
@@ -569,14 +568,26 @@ test('/gen traversal follows structural routes, targets fields, and preserves mo
 		routed.provenance.map(provenanceIdentity),
 		['entry:fixed:router:details', 'entry:fixed:details:second'],
 	);
+	const explicitRouted = resolver.generate(
+		'router:details.generator:second',
+		'en',
+		{ random: () => 0 },
+	);
+	assert.equal(explicitRouted.generatorId, routed.generatorId);
+	assert.equal(explicitRouted.entryId, routed.entryId);
+	assert.deepEqual(explicitRouted.provenance, routed.provenance);
 
-	const field = resolver.generate('router.generator:second.score', 'en', {
+	const field = resolver.generate('router:details:second.score', 'en', {
 		random: () => 0,
 	});
 	assert.deepEqual(field.fields, { score: 20 });
 	assert.deepEqual(field.displayFields, { score: 20 });
 	assert.deepEqual(field.modifiers, []);
-	assert.equal(resolver.generate('router:missing.generator', 'en'), null);
+	assert.deepEqual(
+		resolver.generate('router:details.score', 'en', { random: () => 0 }).fields,
+		{ score: 10 },
+	);
+	assert.equal(resolver.generate('router:missing', 'en'), null);
 });
 
 test('/gen validates unresolved route continuations before random selection', () => {
@@ -605,6 +616,10 @@ test('/gen validates unresolved route continuations before random selection', ()
 	const bare = resolver.generate('router', 'en', { random: () => 0 });
 	assert.equal(bare.generatorId, 'router');
 	assert.equal(bare.value, 'left_route');
+	assert.deepEqual(
+		resolver.generate('router.name', 'en', { random: () => 0 }).fields,
+		{ name: 'left_route' },
+	);
 	assert.equal(
 		resolver.generate('router.generator', 'en', { random: () => 0 }).generatorId,
 		'left',
@@ -638,13 +653,13 @@ test('/gen validates unresolved route continuations before random selection', ()
 	}
 
 	assert.deepEqual(
-		resolver.generate('router:left_route.generator.left_only', 'en', {
+		resolver.generate('router:left_route.left_only', 'en', {
 			random: () => 0,
 		}).fields,
 		{ left_only: 'left:shared_entry:left_only' },
 	);
 	assert.equal(
-		resolver.generate('router:left_route.generator:left_entry.name', 'en').entryId,
+		resolver.generate('router:left_route:left_entry.name', 'en').entryId,
 		'left_entry',
 	);
 
@@ -659,15 +674,16 @@ test('/gen validates unresolved route continuations before random selection', ()
 		'router.generator.name',
 		'router.generator.shared',
 	]);
-	assert.deepEqual(suggest('router:left_route.generator:'), [
-		'router:left_route.generator:shared_entry',
-		'router:left_route.generator:left_entry',
+	assert.deepEqual(suggest('router:left_route:'), [
+		'router:left_route:shared_entry',
+		'router:left_route:left_entry',
 	]);
-	assert.deepEqual(suggest('router:left_route.generator.'), [
-		'router:left_route.generator.name',
-		'router:left_route.generator.shared',
-		'router:left_route.generator.left_only',
+	assert.deepEqual(suggest('router:left_route.'), [
+		'router:left_route.name',
+		'router:left_route.shared',
+		'router:left_route.left_only',
 	]);
+	assert.deepEqual(suggest('router:left_route.generator:'), []);
 });
 
 test('/gen applies universal continuation validation through repeated random routes', () => {
@@ -737,7 +753,7 @@ test('/gen applies universal continuation validation through repeated random rou
 	}
 
 	assert.deepEqual(
-		resolver.generate('multi:left.generator:first.generator.exclusive', 'en', {
+		resolver.generate('multi:left:first.exclusive', 'en', {
 			random: () => 0,
 		}).fields,
 		{ exclusive: 'leaf_first:shared_leaf:exclusive' },
@@ -784,7 +800,7 @@ test('/gen autocomplete ranks the active segment without filtering on earlier se
 });
 
 test('structural route relationships use direct stable generator IDs', () => {
-	const owner = createTextGenerator('owner', 'Owner');
+	const owner = createTraversalRouter('owner', 'public', [['route', 'missing']]);
 	owner.entries[0].generator = 'missing';
 	assert.throws(
 		() => validateGeneratorRelationships(new Map([['owner', owner]])),

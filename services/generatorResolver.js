@@ -35,10 +35,9 @@ function createGeneratorResolver({
 		let generator = getGenerator(traversal.rootId, locale);
 		const random = options.random ?? Math.random;
 		const state = createState(locale, options, random);
-		let entryId = traversal.rootEntryId;
 		const routeProvenance = [];
-		for (const [index, route] of traversal.routes.entries()) {
-			const entry = selectTraversalEntry(generator, entryId, random);
+		for (const [index, step] of traversal.steps.entries()) {
+			const entry = selectTraversalEntry(generator, step.entryId, random);
 			if (!entry?.generator) {
 				return null;
 			}
@@ -46,14 +45,13 @@ function createGeneratorResolver({
 			routeProvenance.push(createEntryProvenance(
 				generator,
 				entry,
-				entryId === undefined ? 'random' : 'fixed',
+				step.entryId === undefined ? 'random' : 'fixed',
 				`root.traversal.${index}`,
 			));
 			generator = getGenerator(entry.generator, locale);
 			if (!generator) {
 				return null;
 			}
-			entryId = route.entryId;
 		}
 		if (
 			traversal.field !== undefined
@@ -62,16 +60,16 @@ function createGeneratorResolver({
 		) {
 			return null;
 		}
-		const entry = selectTraversalEntry(generator, entryId, random);
+		const entry = selectTraversalEntry(generator, traversal.entryId, random);
 		if (!entry) {
 			return null;
 		}
 		const resolved = resolveSelection(
 			generator,
 			entry,
-			entryId === undefined ? 'random' : 'fixed',
+			traversal.entryId === undefined ? 'random' : 'fixed',
 			state,
-			`root.traversal.${traversal.routes.length}`,
+			`root.traversal.${traversal.steps.length}`,
 			traversal.field,
 			{ applyModifiers: traversal.field === undefined },
 		);

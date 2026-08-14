@@ -12,6 +12,7 @@ const {
 	createGeneratorTraversalAlias,
 } = require('../services/generatorTraversal');
 const {
+	isGeneratorRouter,
 	validateGeneratorDefinition,
 	validateGeneratorPair,
 	validateGeneratorRelationships,
@@ -157,7 +158,7 @@ test('generator autocomplete and help expose localized public aliases', () => {
 		choices.map(choice => choice.value),
 		englishBackgrounds.map(entry => entry.id),
 	);
-	assert.ok(choices[0].name.startsWith(frenchBackgrounds[0].name));
+	assert.equal(choices[0].name, frenchBackgrounds[0].name);
 });
 
 test('wrapped inline reference parsing requires exactly one valid token', () => {
@@ -189,26 +190,28 @@ test('/gen traversal autocomplete follows entries, fields, and structural routes
 	assert.ok(complete('background:').includes('background:criminal'));
 	assert.deepEqual(complete('background:criminal.'), [
 		'background:criminal.name',
-		'background:criminal.description',
-		'background:criminal.generator',
 	]);
-	assert.ok(complete('background:criminal.generator:')
-		.includes('background:criminal.generator:pickpocket'));
-	assert.deepEqual(complete('site:dungeon.generator.'), [
-		'site:dungeon.generator.name',
-		'site:dungeon.generator.description',
+	assert.ok(complete('background:criminal:')
+		.includes('background:criminal:pickpocket'));
+	assert.deepEqual(complete('site:dungeon.'), [
+		'site:dungeon.name',
+		'site:dungeon.description',
 	]);
-	assert.ok(complete('loot:shields.generator.')
-		.includes('loot:shields.generator.ar_percentage'));
-	assert.deepEqual(complete('loot:shields.generator:w'), [
-		'loot:shields.generator:wooden_shield',
-		'loot:shields.generator:tower_shield',
-		'loot:shields.generator:stormward_shield',
-		'loot:shields.generator:living_wood_shield',
+	assert.ok(complete('loot:shields.')
+		.includes('loot:shields.ar_percentage'));
+	assert.deepEqual(complete('loot:shields:w'), [
+		'loot:shields:wooden_shield',
+		'loot:shields:tower_shield',
+		'loot:shields:stormward_shield',
+		'loot:shields:living_wood_shield',
 	]);
-	assert.deepEqual(complete('loot:shields.generator:wooden_shield'), [
-		'loot:shields.generator:wooden_shield',
+	assert.deepEqual(complete('loot:shields:wooden_shield'), [
+		'loot:shields:wooden_shield',
 	]);
+	assert.deepEqual(complete('loot.'), ['loot.generator']);
+	assert.ok(!complete('loot.').includes('loot.name'));
+	assert.ok(!complete('loot:weapons.').includes('loot:weapons.generator'));
+	assert.deepEqual(complete('loot:weapons.generator:'), []);
 });
 
 test('localized generator aliases are predictable and resolve to stable identities', () => {
@@ -222,12 +225,13 @@ test('localized generator aliases are predictable and resolve to stable identiti
 	const french = generatorResolver.generate('butin:boucliers', 'fr', {
 		random: () => 0,
 	});
-	assert.equal(english.generatorId, 'loot');
-	assert.equal(french.generatorId, 'loot');
-	assert.equal(english.entryId, 'shields');
-	assert.equal(french.entryId, 'shields');
+	assert.equal(english.generatorId, 'shields');
+	assert.equal(french.generatorId, 'shields');
+	assert.equal(english.entryId, 'common_buckler');
+	assert.equal(french.entryId, 'common_buckler');
 	assert.equal(
-		generatorResolver.generate('BuTiN:BOUCLIERS', 'fr', { random: () => 0 }).entryId,
+		generatorResolver.generate('BuTiN:BOUCLIERS', 'fr', { random: () => 0 })
+			.generatorId,
 		'shields',
 	);
 });
@@ -243,22 +247,22 @@ test('/gen autocomplete uses localized paths and active accent-insensitive segme
 		value: 'butin:boucliers',
 	}]);
 	assert.deepEqual(complete('loot:'), complete('butin:'));
-	assert.deepEqual(complete('butin:armes.generator:epee_longue'), [{
-		name: 'butin:armes.generator:épée_longue',
-		value: 'butin:armes.generator:épée_longue',
+	assert.deepEqual(complete('butin:armes:epee_longue'), [{
+		name: 'butin:armes:épée_longue',
+		value: 'butin:armes:épée_longue',
 	}]);
 	assert.deepEqual(
-		complete('butin:boucliers.generator:bouclier_en_b'),
+		complete('butin:boucliers:bouclier_en_b'),
 		[{
-			name: 'butin:boucliers.generator:bouclier_en_bois',
-			value: 'butin:boucliers.generator:bouclier_en_bois',
+			name: 'butin:boucliers:bouclier_en_bois',
+			value: 'butin:boucliers:bouclier_en_bois',
 		}],
 	);
 });
 
 test('localized traversal continues through routes and keeps stable field syntax', () => {
 	const result = generatorResolver.generate(
-		'butin:boucliers.generator:bouclier_en_bois.ar_percentage',
+		'butin:boucliers:bouclier_en_bois.ar_percentage',
 		'fr',
 		{ random: () => 0 },
 	);
@@ -267,7 +271,7 @@ test('localized traversal continues through routes and keeps stable field syntax
 	assert.deepEqual(result.fields, { ar_percentage: 5 });
 	assert.deepEqual(
 		generatorResolver.generate(
-			'butin:boucliers.generator:bouclier_en_bois.name',
+			'butin:boucliers:bouclier_en_bois.name',
 			'fr',
 			{ random: () => 0 },
 		).fields,
@@ -281,6 +285,34 @@ test('localized traversal continues through routes and keeps stable field syntax
 		).entryId,
 		'wooden_shield',
 	);
+	assert.deepEqual(
+		generatorResolver.generate(
+			'loot:shields:wooden_shield.name',
+			'en',
+			{ random: () => 0 },
+		).fields,
+		{ name: 'Wooden shield' },
+	);
+	const aliasedWeapon = generatorResolver.generate(
+		'loot:weapons:long_sword.description',
+		'en',
+		{ random: () => 0 },
+	);
+	const stableWeapon = generatorResolver.generate(
+		'loot:weapons:longsword.description',
+		'en',
+		{ random: () => 0 },
+	);
+	assert.equal(aliasedWeapon.entryId, 'longsword');
+	assert.deepEqual(aliasedWeapon.fields, stableWeapon.fields);
+	assert.equal(
+		generatorResolver.generate(
+			'background:criminal.name',
+			'en',
+			{ random: () => 0 },
+		).generatorId,
+		'criminal',
+	);
 });
 
 test('generator autocomplete searches beyond the first 25 localized entries', () => {
@@ -289,16 +321,16 @@ test('generator autocomplete searches beyond the first 25 localized entries', ()
 		{ locale: 'fr' },
 		{ value },
 	);
-	const initial = complete('butin:armes.generator:');
+	const initial = complete('butin:armes:');
 	assert.equal(initial.length, 25);
 	assert.ok(!initial.some(choice => choice.value.endsWith(':épée_runique')));
-	assert.deepEqual(complete('butin:armes.generator:epee_runique'), [{
-		name: 'butin:armes.generator:épée_runique',
-		value: 'butin:armes.generator:épée_runique',
+	assert.deepEqual(complete('butin:armes:epee_runique'), [{
+		name: 'butin:armes:épée_runique',
+		value: 'butin:armes:épée_runique',
 	}]);
 	assert.equal(
 		generatorResolver.generate(
-			'butin:armes.generator:épée_runique',
+			'butin:armes:épée_runique',
 			'fr',
 			{ random: () => 0 },
 		).entryId,
@@ -422,6 +454,41 @@ test('generator schema allows at most 24 additional fields beside the name', () 
 	);
 });
 
+test('generator routers are structural, complete, and minimal', () => {
+	const router = createRouterGenerator();
+	assert.equal(isGeneratorRouter(router), true);
+	assert.equal(validateGeneratorDefinition(router), router);
+	assert.equal(isGeneratorRouter(createTextGenerator()), false);
+
+	const mixed = structuredClone(router);
+	delete mixed.entries[1].generator;
+	assert.throws(
+		() => validateGeneratorDefinition(mixed),
+		error => error.code === 'INVALID_GENERATOR_ROUTER_SCHEMA',
+	);
+
+	const fields = structuredClone(router);
+	fields.entries[0].fields = {};
+	assert.throws(
+		() => validateGeneratorDefinition(fields),
+		error => error.code === 'INVALID_GENERATOR_STRUCTURE',
+	);
+
+	const required = structuredClone(router);
+	required.entrySchema.required = ['description'];
+	assert.throws(
+		() => validateGeneratorDefinition(required),
+		error => error.code === 'INVALID_GENERATOR_ROUTER_SCHEMA',
+	);
+
+	const routedContent = createFieldsGenerator();
+	routedContent.entries[0].generator = 'armor_detail';
+	assert.throws(
+		() => validateGeneratorDefinition(routedContent),
+		error => error.code === 'INVALID_GENERATOR_ROUTER_SCHEMA',
+	);
+});
+
 test('generator schema localizes string fields and preserves functional parity', () => {
 	const english = createTextGenerator();
 	const french = structuredClone(english);
@@ -437,16 +504,22 @@ test('generator schema localizes string fields and preserves functional parity',
 	fieldsFrench.entries[0].name = 'Armure l\u00e9g\u00e8re';
 	fieldsFrench.entries[0].fields.type = 'l\u00e9ger';
 	assert.equal(validateGeneratorPair(fieldsEnglish, fieldsFrench), true);
-	fieldsEnglish.entries[0].generator = 'armor_detail';
-	fieldsFrench.entries[0].generator = 'armure_detail';
+	fieldsFrench.entries[0].id = 'armure_legere';
 	assert.throws(
 		() => validateGeneratorPair(fieldsEnglish, fieldsFrench),
 		error => error.code === 'GENERATOR_LOCALE_PARITY_MISMATCH',
 	);
-	fieldsFrench.entries[0].generator = 'armor_detail';
-	fieldsFrench.entries[0].id = 'armure_legere';
+
+	const routerEnglish = createRouterGenerator();
+	const routerFrench = structuredClone(routerEnglish);
+	routerFrench.name = 'Aiguillage';
+	routerFrench.description = 'Routes disponibles';
+	routerFrench.entries[0].name = 'Gauche';
+	routerFrench.entries[1].name = 'Droite';
+	assert.equal(validateGeneratorPair(routerEnglish, routerFrench), true);
+	routerFrench.entries[0].generator = 'autre_enfant';
 	assert.throws(
-		() => validateGeneratorPair(fieldsEnglish, fieldsFrench),
+		() => validateGeneratorPair(routerEnglish, routerFrench),
 		error => error.code === 'GENERATOR_LOCALE_PARITY_MISMATCH',
 	);
 });
@@ -633,6 +706,21 @@ function createFieldsGenerator() {
 			name: 'Light armor',
 			fields: { type: 'light' },
 		}],
+	};
+}
+
+function createRouterGenerator() {
+	return {
+		schemaVersion: 4,
+		id: 'router',
+		visibility: 'public',
+		name: 'Router',
+		description: 'Available routes',
+		entrySchema: { required: [] },
+		entries: [
+			{ id: 'left', name: 'Left', generator: 'left_child' },
+			{ id: 'right', name: 'Right', weight: 2, generator: 'right_child' },
+		],
 	};
 }
 

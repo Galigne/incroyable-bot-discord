@@ -97,9 +97,11 @@ test('/help command:gen lists every localized generator category', () => {
 				`${locale}: ${category.description}`,
 			);
 		}
-		assert.ok(rendered.includes(locale === 'fr'
-			? 'butin:boucliers.generator:bouclier_en_bois.ar_percentage'
-			: 'loot:shields.generator:wooden_shield.ar_percentage'));
+		for (const example of locale === 'fr'
+			? ['butin:armes:épée_longue', 'butin:armes.description']
+			: ['loot:weapons:long_sword', 'loot:weapons.description']) {
+			assert.ok(rendered.includes(example), `${locale}: ${example}`);
+		}
 	}
 });
 

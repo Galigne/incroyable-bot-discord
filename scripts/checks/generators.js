@@ -157,7 +157,6 @@ function checkBackgroundGenerators(errors, generatorCatalog) {
 		if (
 			!background.id
 			|| !background.name
-			|| !background.fields?.description
 			|| backgroundIds.has(background.id)
 			|| routedGeneratorId !== background.id
 			|| details.length === 0
@@ -175,6 +174,26 @@ function checkBackgroundGenerators(errors, generatorCatalog) {
 }
 function checkCategoryRouters(errors, generatorCatalog) {
 	for (const [routerId, childIds] of [
+		['background', [
+			'criminal',
+			'adventurer',
+			'noble',
+			'peasant',
+			'artisan',
+			'merchant',
+			'scholar',
+			'religious',
+			'military',
+			'outlander',
+			'sailor',
+			'performer',
+			'servant',
+			'official',
+			'mage',
+			'exile',
+			'urchin',
+		]],
+		['creature', ['animal', 'companion', 'monster']],
 		['loot', [
 			'weapons',
 			'shields',
@@ -200,10 +219,12 @@ function checkCategoryRouters(errors, generatorCatalog) {
 		const router = generatorCatalog.getGenerator(routerId);
 		if (
 			router?.visibility !== 'public'
-			|| !Array.isArray(router.entrySchema.required)
+			|| JSON.stringify(router.entrySchema.required) !== JSON.stringify([])
 			|| router.entries.some(entry => (
-				entry.weight !== undefined
-					|| !entry.name
+				!entry.name
+					|| Object.keys(entry).some(key => (
+						!['id', 'name', 'weight', 'generator'].includes(key)
+					))
 			))
 			|| JSON.stringify(router.entries.map(entry => entry.generator))
 				!== JSON.stringify(childIds)

@@ -71,27 +71,46 @@ of resolved modifier results.
 
 ## Structural routes and `/gen` traversal
 
-An entry's optional top-level `generator` property is a direct stable generator ID.
-It is reserved routing metadata, never part of `fields`, and never appears as raw
-output. It is distinct from inline `{{ ... }}` references: structural routes move
-the traversal to another generator, while inline references compose generated
-content inside strings.
+A router is detected structurally when its entries contain top-level `generator`
+routes; there is no generator type or kind property. Every entry in that generator
+must route, `entrySchema.required` must be empty, and each entry is limited to `id`,
+localized `name`, optional `weight`, and a direct stable child-generator ID. Mixed
+generators, router fields, and structural routes on content entries are invalid.
+Creature-detail generators and modifier sources remain ordinary content generators
+with their specialized relationship validation. Structural routes never appear as
+raw output and remain distinct from inline `{{ ... }}` references, which compose
+generated content inside strings.
 
 The `/gen category:` path grammar uses localized aliases derived only from generator
 and entry names. Aliases lowercase the localized text, replace spaces and separating
 punctuation with underscores, collapse repeated separators, and retain accents.
 Stable generator and entry IDs remain valid manual segments. Both forms resolve to
-stable IDs before normal traversal. `:entry` fixes an entry and `.field` selects one
-field. `.generator` follows the selected entry's structural route and may be followed
-by another entry, route, or field. `.generator` and field keys remain stable English
-syntax. Missing entries use normal weighted selection.
+stable IDs before normal traversal. A bare router selects and displays one category.
+`.generator` selects an unresolved category with normal weights and follows its
+route. A fixed `:category` follows its route automatically, consecutive `:entry`
+segments can select fixed entries across router boundaries, and `.field` selects a
+field from the effective generated content. `.generator` and field keys remain
+stable English syntax, and unresolved routing may repeat.
 
-Autocomplete derives localized roots, entries, fields, and routes from the current
-path context. It filters only the active segment, compares case- and
-accent-insensitively, searches all structurally valid candidates, and ranks exact,
-prefix, then substring matches before applying Discord's 25-choice limit. The
-submitted suggestion is the localized path itself. Manual valid alias or stable-ID
-paths remain accepted independently of the displayed choices.
+```text
+loot
+loot.generator
+loot:weapons
+loot:weapons:long_sword
+loot:weapons.description
+site:dungeon
+site:dungeon:buried_temple.name
+```
+
+Autocomplete derives localized roots, entries, fields, and unresolved routes from
+the effective current context. After a fixed router entry it directly exposes the
+routed child's entries and fields without suggesting a redundant route token. For
+an unresolved name-only router it exposes `.generator` but omits redundant `.name`.
+It filters only the active segment, compares case- and accent-insensitively, searches
+all structurally valid candidates, and ranks exact, prefix, then substring matches
+before applying Discord's 25-choice limit. The submitted suggestion is the localized
+path itself. Manual valid alias or stable-ID paths remain accepted independently of
+the displayed choices.
 
 Traversal validity is resolved across all possible contexts before any random
 selection. If `.generator` follows an unfixed entry and the path continues, the
@@ -103,8 +122,8 @@ normal weighted route and child generation proceed.
 Only the initial generator must be public. Every child reached through the
 `background`, `creature`, `loot`, `site`, `group`, or `modifier` routers is
 internal, so a child such as `dungeon` is invalid as a direct root but reachable
-through `site:dungeon.generator`. Bare router generation displays only the selected
-router entry and does not follow its route.
+through `site:dungeon`. Bare router generation displays only the selected router
+entry and does not follow its route; fixing that entry follows the route.
 
 When traversal ends on a generator, the resolver performs ordinary generation from
 that final generator and applies its automatic modifier relationships. When it ends
@@ -136,8 +155,8 @@ provenance with the localized name and description. Creature detail metadata may
 also explicitly reference creature modifiers. Temporary conditions are resolved
 from `status_effect` and stored separately from persistent modifiers.
 
-Users access the same useful pools through the public `modifier` router and normal
-`.generator` traversal. This produces a standalone modifier result; `/gen` has no
+Users access the same useful pools through fixed entries in the public `modifier`
+router. This produces a standalone modifier result; `/gen` has no
 special option that applies or forces it on another result.
 
 ## Shared statistical generation
@@ -233,7 +252,7 @@ mechanical formulas.
 
 Public generators can compose ordinary concepts with inline references. The
 `loot`, `site`, and `group` roots are name-only routers over internal children;
-application workflows or explicit `.generator` paths follow those routes.
+application workflows or fixed router entries follow those routes.
 `quest`, `rumor`, and `secret` entries combine these and other fixed or random
 concepts. These resolutions keep nested provenance but do not create or
 persist the referenced people, creatures, locations, or items.

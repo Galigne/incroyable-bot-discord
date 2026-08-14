@@ -14,10 +14,14 @@ const {
 const {
 	validateGeneratorRelationships,
 } = require('./generatorSchema/relationshipValidation');
+const {
+	isGeneratorRouter,
+} = require('./generatorSchema/routerValidation');
 
 module.exports = {
 	CREATURE_ROUTER_ID,
 	GENERATOR_SCHEMA_VERSION,
+	isGeneratorRouter,
 	validateCreatureStatProfileRelationships,
 	validateGeneratorDefinition,
 	validateGeneratorPair,
