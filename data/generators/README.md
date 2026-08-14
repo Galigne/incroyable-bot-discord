@@ -77,6 +77,15 @@ punctuation. They must be unambiguous within their generator after ignoring case
 accents/diacritics, repeated whitespace, and separating punctuation. Public
 generator names follow the same rule within each locale.
 
+`/gen` derives the user-facing path alias for every generator and entry exclusively
+from that localized `name`. It lowercases the name, replaces spaces and separating
+punctuation with `_`, collapses repeated separators, and retains localized letters
+and accents: `Épée longue` becomes `épée_longue`. There is no fallback to an entry
+ID, old `value` content, a field, a description, or resolved text. Within the same
+input scope, a localized alias must not collide with another candidate's stable ID
+under the same case-, accent-, whitespace-, and punctuation-insensitive
+normalization. Such a collision rejects the catalog.
+
 Every generator declares `entrySchema.required` as an array of zero to 24
 additional fields shared by all of its entries. Discord embeds support at most 25
 displayed fields, and the mandatory top-level `name` always occupies one of them.
@@ -189,9 +198,13 @@ Do not wrap structural routes in `{{ ... }}`. Inline references remain valid onl
 inside actual generated text and fields; they compose content, while `generator`
 defines an explicit route.
 
-`/gen category:` accepts a traversal path. `:entry` fixes the current generator's
-entry, `.field` returns one field, and `.generator` follows the selected entry's
-route. A missing entry is selected with normal weights, and routing may repeat:
+`/gen category:` accepts a traversal path whose generator and entry segments use
+localized name aliases. Stable IDs remain accepted as manual input and are resolved
+to the same internal identities. `:entry` fixes the current generator's entry,
+`.field` returns one field, and `.generator` follows the selected entry's route. The
+`.generator` token and field keys such as `.name`, `.description`, and
+`.ar_percentage` remain stable English syntax. A missing entry is selected with
+normal weights, and routing may repeat:
 
 ```text
 background:criminal.description
@@ -199,6 +212,12 @@ site:dungeon.generator
 site:dungeon.generator:buried_temple.name
 loot:shields.generator:wooden_shield.ar_percentage
 ```
+
+The French catalog expresses the same kind of path as
+`butin:boucliers.generator:bouclier_en_bois.ar_percentage`. Autocomplete always
+presents localized paths, filters against only the segment currently being entered,
+and matches case- and accent-insensitively. It searches every valid contextual
+candidate before returning Discord's best 25 exact, prefix, then substring matches.
 
 The complete traversal is validated before random selection. When `.generator`
 follows an unfixed entry, every later fixed entry, field, or repeated route must be

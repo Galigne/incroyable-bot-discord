@@ -12,7 +12,10 @@ const { selectWeightedEntry } = require('./weightedSelector');
 const DEFAULT_MAX_DEPTH = 4;
 const MAX_ALLOWED_DEPTH = 4;
 
-function createGeneratorResolver({ getGenerator = generatorCatalog.getGenerator } = {}) {
+function createGeneratorResolver({
+	getGenerator = generatorCatalog.getGenerator,
+	listGenerators = generatorCatalog.listGenerators,
+} = {}) {
 	const referenceResolver = createReferenceResolver({
 		getGenerator,
 		resolveSelection,
@@ -23,7 +26,7 @@ function createGeneratorResolver({ getGenerator = generatorCatalog.getGenerator 
 		const analysis = analyzeGeneratorTraversalPath(
 			traversalPath,
 			locale,
-			{ getGenerator },
+			{ getGenerator, listGenerators },
 		);
 		if (!analysis) {
 			return null;

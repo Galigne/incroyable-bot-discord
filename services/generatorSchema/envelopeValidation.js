@@ -109,6 +109,7 @@ function validateGeneratorDefinition(generator, file = '<generator>', options = 
 		}
 		entryNames.add(normalizedName);
 	});
+	validateEntryAliasIdCollisions(generator, file);
 	const totalWeight = generator.entries.reduce(
 		(total, entry) => total + (entry.weight ?? 1),
 		0,
@@ -120,6 +121,22 @@ function validateGeneratorDefinition(generator, file = '<generator>', options = 
 		);
 	}
 	return generator;
+}
+
+function validateEntryAliasIdCollisions(generator, file) {
+	const stableIds = new Map(generator.entries.map(entry => [
+		normalizeDisplayName(entry.id),
+		entry.id,
+	]));
+	for (const entry of generator.entries) {
+		const conflictingId = stableIds.get(normalizeDisplayName(entry.name));
+		if (conflictingId && conflictingId !== entry.id) {
+			throw generatorSchemaError(
+				'AMBIGUOUS_GENERATOR_ENTRY_ALIAS',
+				`Generator ${file} entry ${entry.id} has an alias that conflicts with stable ID ${conflictingId}.`,
+			);
+		}
+	}
 }
 
 module.exports = { validateGeneratorDefinition };

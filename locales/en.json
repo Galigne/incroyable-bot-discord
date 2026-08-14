@@ -141,13 +141,13 @@
     "gen": {
       "description": "Generate GM inspiration (configured DM role or server owner)",
       "schemaDescription": "Generate GM inspiration from a traversal path",
-      "categoryOption": "Public generator traversal path",
+      "categoryOption": "Localized path starting from a public generator",
       "countOption": "Number of independent results to generate; defaults to 1",
       "unknownCategory": "Unknown or invalid generator path: **{{category}}**. Use `/help command:gen` for command details.",
       "title": "Generated {{category}}",
       "batchResultTitle": "Result {{index}}/{{count}} — {{category}}",
       "modifierTitle": "Generated modifier {{category}}",
-      "behavior": "Starts from a public generator and follows an autocomplete-aware path. Use `:entry` to select a stable entry, `.field` to return only one field, and `.generator` to follow that entry’s structural route; these segments may repeat. Omitting an entry performs the normal weighted selection. If an unfixed entry’s `.generator` route is followed by another entry, route, or field, that continuation must be valid for every possible routed child; invalid paths are rejected before selection. A path ending on a generator performs ordinary generation and may apply that generator’s automatic modifiers. A path ending on a field returns only that field and does not apply the final generator’s automatic modifiers. Internal generators are unavailable as direct roots but remain reachable through valid routes. The optional count produces 1 to 10 independent results and defaults to 1."
+      "behavior": "Starts from a public generator using localized aliases derived only from generator and entry names. Aliases are lowercase, replace spaces and separating punctuation with underscores, and preserve localized accents. Examples include `loot:shields.generator:wooden_shield.ar_percentage` and `modifier:general_site_modifiers.generator`. Autocomplete displays localized paths, searches only the segment being entered without regard to case or accents, and ranks exact, prefix, then substring matches. Stable English generator and entry IDs remain accepted as manual input. Use `:entry` to select an entry and `.generator` to follow its structural route; `.generator`, `.name`, and every other field key remain stable English syntax. Omitting an entry performs normal weighted selection. A continuation after an unfixed `.generator` route must be valid for every possible child. A path ending on a generator performs ordinary generation with its automatic modifiers, while a path ending on a field returns only that field without the final generator’s modifiers. Internal generators remain reachable only through valid routes. The optional count produces 1 to 10 independent results and defaults to 1."
     },
     "genChar": {
       "description": "Generate a random character (configured DM role or server owner)",

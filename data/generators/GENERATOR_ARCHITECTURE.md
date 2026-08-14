@@ -28,8 +28,9 @@ Visibility controls entry points, not resolvability:
   and modifier relationships.
 
 Stable lowercase snake_case generator and entry IDs provide durable identity.
-Localized generator names begin with a capital letter, while names and content
-never determine routing or provenance. Generator
+Localized generator and entry names provide `/gen` path aliases that are resolved
+back to those stable IDs before traversal; names never replace routing or provenance
+identity. Generator
 resolution returns data only; persistence belongs to the character and creature
 application workflows.
 
@@ -76,12 +77,21 @@ output. It is distinct from inline `{{ ... }}` references: structural routes mov
 the traversal to another generator, while inline references compose generated
 content inside strings.
 
-The `/gen category:` path grammar uses `:entry` to fix an entry and `.field` to
-select one field. `.generator` follows the selected entry's structural route and
-may be followed by another entry, route, or field. Missing entries use normal
-weighted selection. Autocomplete derives roots, entries, fields, and routes from
-the current path context, but manual valid paths remain accepted independently of
-the 25-choice suggestion limit.
+The `/gen category:` path grammar uses localized aliases derived only from generator
+and entry names. Aliases lowercase the localized text, replace spaces and separating
+punctuation with underscores, collapse repeated separators, and retain accents.
+Stable generator and entry IDs remain valid manual segments. Both forms resolve to
+stable IDs before normal traversal. `:entry` fixes an entry and `.field` selects one
+field. `.generator` follows the selected entry's structural route and may be followed
+by another entry, route, or field. `.generator` and field keys remain stable English
+syntax. Missing entries use normal weighted selection.
+
+Autocomplete derives localized roots, entries, fields, and routes from the current
+path context. It filters only the active segment, compares case- and
+accent-insensitively, searches all structurally valid candidates, and ranks exact,
+prefix, then substring matches before applying Discord's 25-choice limit. The
+submitted suggestion is the localized path itself. Manual valid alias or stable-ID
+paths remain accepted independently of the displayed choices.
 
 Traversal validity is resolved across all possible contexts before any random
 selection. If `.generator` follows an unfixed entry and the path continues, the
@@ -231,8 +241,9 @@ persist the referenced people, creatures, locations, or items.
 ## Validation coverage
 
 Offline checks cover v4 envelopes, mandatory entry names, normalized name
-uniqueness, IDs, weights, strict locale parity, public and
-internal visibility, inline and structural routes, traversal autocomplete, fixed
+uniqueness, alias-to-stable-ID ambiguity, localized alias resolution and active-segment
+autocomplete, IDs, weights, strict locale parity, public and internal visibility,
+inline and structural routes, traversal autocomplete, fixed
 and weighted selection, field targeting, nesting, cycles, depth bounds,
 provenance, modifiers, statistical profiles, background routes, dynamic creature routes, character and creature
 generation, persistence, and command integration.

@@ -173,10 +173,14 @@ function validateSelectorForGenerator(selector, source, ownerId) {
 
 function validatePublicGeneratorNames(catalog) {
 	const names = new Map();
-	for (const generator of catalog.values()) {
-		if (generator.visibility !== 'public') {
-			continue;
-		}
+	const publicGenerators = [...catalog.values()].filter(generator => (
+		generator.visibility === 'public'
+	));
+	const stableIds = new Map(publicGenerators.map(generator => [
+		normalizeDisplayName(generator.id),
+		generator.id,
+	]));
+	for (const generator of publicGenerators) {
 		const normalizedName = normalizeDisplayName(generator.name);
 		const existingId = names.get(normalizedName);
 		if (existingId) {
@@ -186,6 +190,13 @@ function validatePublicGeneratorNames(catalog) {
 			);
 		}
 		names.set(normalizedName, generator.id);
+		const conflictingId = stableIds.get(normalizedName);
+		if (conflictingId && conflictingId !== generator.id) {
+			throw generatorSchemaError(
+				'AMBIGUOUS_PUBLIC_GENERATOR_ALIAS',
+				`Public generator ${generator.id} has an alias that conflicts with stable ID ${conflictingId}.`,
+			);
+		}
 	}
 }
 

@@ -45,6 +45,14 @@ function normalizeDisplayName(value) {
 		.trim();
 }
 
+function createGeneratorTraversalAlias(value) {
+	return value
+		.normalize('NFC')
+		.toLocaleLowerCase()
+		.replace(/[\p{P}\p{S}\s]+/gu, '_')
+		.replace(/^_+|_+$/gu, '');
+}
+
 function assertPlainObject(value, message) {
 	if (!value || typeof value !== 'object' || Array.isArray(value)) {
 		throw generatorSchemaError('INVALID_GENERATOR_STRUCTURE', message);
@@ -85,6 +93,7 @@ module.exports = {
 	assertPlainObject,
 	assertRequiredKeys,
 	generatorSchemaError,
+	createGeneratorTraversalAlias,
 	normalizeDisplayName,
 	validateDisplayText,
 	validateGeneratorName,

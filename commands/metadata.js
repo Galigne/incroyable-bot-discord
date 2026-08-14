@@ -119,11 +119,8 @@ const COMMAND_METADATA = [
 			},
 		],
 		examples: [
-			'/gen category:<category>',
-			'/gen category:<category> count:<2-10>',
-			'/gen category:background:criminal.description',
-			'/gen category:site:dungeon.generator',
-			'/gen category:loot:shields.generator.ar_percentage',
+			'/gen category:<localized-path>',
+			'/gen category:<localized-path> count:<2-10>',
 		],
 		help: {
 			order: 20,

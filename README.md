@@ -38,8 +38,9 @@ HP/AR/AP/MD in English and PV/PR/PA/DD in French.
 Generator schema v4 catalogs use matching English and French files. Public
 generators appear in `/gen`, autocomplete, and help; internal generators support
 structural traversal, application workflows, and composed results. Generated
-display text follows the configured locale, while stable IDs, field keys, routing
-values, and provenance remain stable English values. Content already saved in an entity is never translated
+display text follows the configured locale. `/gen` derives localized path aliases
+from generator and entry names, while stable IDs, field keys, routing values, and
+provenance remain stable English values. Content already saved in an entity is never translated
 retroactively. See the [generator authoring guide](data/generators/README.md) and
 [generator architecture](data/generators/GENERATOR_ARCHITECTURE.md) for the JSON
 contract and runtime design.
@@ -122,17 +123,24 @@ successful submission then posts the confirmation and the updated selected field
 detail publicly. Invalid, expired, and unauthorized submissions remain private.
 In `/gen` results, direct inline generator references are shown in inline code;
 references resolved inside them use square brackets at every recursive level.
-The traversal syntax uses `:entry` to select a stable entry, `.field` to return one
-field, and `.generator` to follow that entry's structural route. Segments may
-repeat, for example:
+The traversal syntax uses localized generator and entry aliases. Aliases are
+lowercase, replace spaces and separating punctuation with underscores, and retain
+localized accents. `:entry` selects an entry, `.field` returns one field, and
+`.generator` follows that entry's structural route. `.generator`, `.name`, and all
+other field keys remain stable English syntax. Segments may repeat, for example:
 
 ```text
 /gen category:background:criminal.description
 /gen category:site:dungeon.generator
 /gen category:site:dungeon.generator:buried_temple.name
 /gen category:loot:shields.generator:wooden_shield.ar_percentage
-/gen category:modifier:site_general.generator
+/gen category:modifier:general_site_modifiers.generator
 ```
+
+With the French catalog, corresponding paths include
+`butin:boucliers.generator:bouclier_en_bois.ar_percentage` and
+`lieu:donjons.generator:temple_enseveli.name`. Stable generator and entry IDs remain
+accepted for manual input and are resolved to the same internal identities.
 
 Omitting an entry performs the normal weighted selection. Paths ending on a
 generator apply that final generator's normal automatic modifiers; paths ending on
@@ -183,10 +191,13 @@ Status Effects and Modifiers each use one `Name:Description` record per line and
 can be cleared independently. Status Effects describe temporary conditions;
 Modifiers describe persistent distinguishing alterations.
 
-Discord displays at most 25 autocomplete suggestions at once, so type part of a
-name or value to filter longer lists. `/gen category:` autocomplete follows the
-current root, entry, route, or field segment, while manually entered valid paths
-remain accepted. `/help command:gen` lists every localized public root, and
+Discord displays at most 25 autocomplete suggestions at once, so type part of the
+current segment to filter longer lists. `/gen category:` autocomplete searches all
+valid candidates before applying that limit, matches without regard to case or
+accents, and returns localized paths that can immediately be extended with `:` or
+`.`. Exact matches rank before prefixes and other substring matches. Manually
+entered valid localized aliases and stable-ID paths remain accepted even when they
+are absent from the current suggestions. `/help command:gen` lists every localized public root, and
 `/help command:set` lists every editable field grouped by
 section. Both lists are generated from the same catalogs used by autocomplete.
 

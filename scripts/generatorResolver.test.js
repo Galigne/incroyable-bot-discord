@@ -754,6 +754,35 @@ test('/gen applies universal continuation validation through repeated random rou
 	);
 });
 
+test('/gen autocomplete ranks the active segment without filtering on earlier segments', () => {
+	const ranked = {
+		schemaVersion: 4,
+		id: 'ranked',
+		visibility: 'public',
+		name: 'Ranked choices',
+		description: 'Ranking fixture',
+		entrySchema: { required: [] },
+		entries: [
+			{ id: 'long_sword', name: 'Long sword' },
+			{ id: 'swordfish', name: 'Swordfish' },
+			{ id: 'sword', name: 'Sword' },
+		],
+	};
+	const getGenerator = id => id === ranked.id ? ranked : undefined;
+	const listGenerators = () => [ranked];
+	assert.deepEqual(
+		getGeneratorTraversalSuggestions('ranked_choices:sword', 'en', {
+			getGenerator,
+			listGenerators,
+		}).map(choice => choice.value),
+		[
+			'ranked_choices:sword',
+			'ranked_choices:swordfish',
+			'ranked_choices:long_sword',
+		],
+	);
+});
+
 test('structural route relationships use direct stable generator IDs', () => {
 	const owner = createTextGenerator('owner', 'Owner');
 	owner.entries[0].generator = 'missing';
@@ -952,7 +981,7 @@ function createTraversalFieldsGenerator(id, required, entryIds) {
 		entrySchema: { required: additionalFields },
 		entries: entryIds.map(entryId => ({
 			id: entryId,
-			name: `${id}:${entryId}:name`,
+			name: entryId,
 			fields: Object.fromEntries(additionalFields.map(field => (
 				[field, `${id}:${entryId}:${field}`]
 			))),

@@ -613,13 +613,22 @@ The durable implementation constraints are:
   because it is mechanically useful.
 - Entry names must be unambiguous within each localized generator, and public
   generator names must be unambiguous within each locale, after ignoring case,
-  accents or diacritics, repeated whitespace, and separating punctuation.
+  accents or diacritics, repeated whitespace, and separating punctuation. Reject a
+  catalog when a localized alias conflicts with another candidate's stable ID in
+  the same traversal scope under that normalization.
 - Keep structural traversal, inline-reference resolution, selection, cycle/depth
   protection, final-field modifier suppression, and provenance in resolver
   services. Do not parse paths or references, select entries, or reconstruct
   provenance in command handlers.
-- `/gen category:` uses `:entry` for a fixed entry and `.field` for a selected
-  field; `.generator` follows the selected entry's route and may repeat. A path
+- `/gen category:` presents localized generator and entry aliases derived only from
+  mandatory `name` values. Lowercase them, replace spaces and separating punctuation
+  with `_`, collapse separators, and preserve localized accents. Resolve aliases to
+  stable IDs before traversal, while continuing to accept stable-ID paths manually.
+  Autocomplete filters and ranks the active segment case- and accent-insensitively,
+  searches all valid candidates before the 25-choice limit, and submits only the
+  localized path without appended technical IDs. `:entry` fixes an entry and
+  `.field` selects a field; `.generator` follows the selected entry's route and may
+  repeat. `.generator` and field keys remain stable English syntax. A path
   ending on a generator performs ordinary generation with that final generator's
   automatic modifiers. A path ending on a field returns only that field without
   the final generator's automatic modifiers. Only the initial generator may be a

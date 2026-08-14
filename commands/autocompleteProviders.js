@@ -1,7 +1,10 @@
 const {
 	getGeneratorTraversalSuggestions,
 } = require('../services/generatorTraversal');
-const { filterAutocompleteChoices } = require('../util/autocomplete');
+const {
+	filterAutocompleteChoices,
+	MAX_AUTOCOMPLETE_CHOICES,
+} = require('../util/autocomplete');
 const {
 	getLocalizedRouterChoices,
 } = require('../util/generatorRouterChoices');
@@ -92,14 +95,16 @@ function getCanonicalValueChoices(option, context, focused) {
 }
 
 function getGeneratorPathChoices(option, context, focused) {
-	const choices = getGeneratorTraversalSuggestions(
+	return getGeneratorTraversalSuggestions(
 		focused.value,
 		context.locale,
-	).filter(choice => choice.value.length <= 100).map(choice => ({
-		name: `${choice.label} - ${choice.value}`.slice(0, 100),
-		value: choice.value,
-	}));
-	return filterAutocompleteChoices(choices, focused.value);
+	)
+		.filter(choice => choice.value.length <= 100)
+		.slice(0, MAX_AUTOCOMPLETE_CHOICES)
+		.map(choice => ({
+			name: choice.value,
+			value: choice.value,
+		}));
 }
 
 function getHelpCommandChoices(option, context, focused) {

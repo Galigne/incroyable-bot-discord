@@ -14,6 +14,9 @@ const {
 	CREATURE_SECTION_IDS,
 } = require('../services/creatureFieldCatalog');
 const generatorCatalog = require('../services/generatorCatalog');
+const {
+	createGeneratorTraversalAlias,
+} = require('../services/generatorTraversal');
 const { MAX_AUTOCOMPLETE_CHOICES } = require('../util/autocomplete');
 const { createHelpResponse } = require('../util/helpResponses');
 
@@ -87,12 +90,16 @@ test('/help command:gen lists every localized generator category', () => {
 		assert.ok(categories.length > 0);
 		const rendered = renderDetail('gen', interaction, locale);
 		for (const category of categories) {
-			assert.ok(rendered.includes(`\`${category.id}\``), `${locale}: ${category.id}`);
+			const alias = createGeneratorTraversalAlias(category.name);
+			assert.ok(rendered.includes(`\`${alias}\``), `${locale}: ${alias}`);
 			assert.ok(
 				rendered.includes(category.description),
 				`${locale}: ${category.description}`,
 			);
 		}
+		assert.ok(rendered.includes(locale === 'fr'
+			? 'butin:boucliers.generator:bouclier_en_bois.ar_percentage'
+			: 'loot:shields.generator:wooden_shield.ar_percentage'));
 	}
 });
 
@@ -307,6 +314,7 @@ test('autocomplete respects Discord\'s 25-choice limit and filters values', asyn
 		),
 	);
 	assert.ok(initialCategories.length <= MAX_AUTOCOMPLETE_CHOICES);
+	assert.ok(initialCategories.every(choice => choice.name === choice.value));
 	const filteredCategories = await autocompleteOption(
 		'gen',
 		'category',

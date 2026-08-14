@@ -1,5 +1,8 @@
 const generatorCatalog = require('../services/generatorCatalog');
 const {
+	createGeneratorTraversalAlias,
+} = require('../services/generatorTraversal');
+const {
 	getCharacterSections,
 } = require('../services/characterFieldCatalog');
 const { getAllEntitySections } = require('../services/entityFieldCatalog');
@@ -58,8 +61,8 @@ function getGeneratorRootValues(locale) {
 	return generatorCatalog.listGenerators(locale).map(category => ({
 		description: category.description,
 		label: category.name,
-		name: `${category.name} — ${category.description}`,
-		value: category.id,
+		name: createGeneratorTraversalAlias(category.name),
+		value: createGeneratorTraversalAlias(category.name),
 	}));
 }
 

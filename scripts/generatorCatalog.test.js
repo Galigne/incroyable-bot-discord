@@ -9,6 +9,9 @@ const {
 const generatorCatalog = require('../services/generatorCatalog');
 const generatorResolver = require('../services/generatorResolver');
 const {
+	createGeneratorTraversalAlias,
+} = require('../services/generatorTraversal');
+const {
 	validateGeneratorDefinition,
 	validateGeneratorPair,
 	validateGeneratorRelationships,
@@ -133,18 +136,15 @@ test('production category children use prefixed filenames and concept-only IDs',
 	}
 });
 
-test('generator and background autocomplete expose stable public values', () => {
+test('generator autocomplete and help expose localized public aliases', () => {
+	const frenchGenerators = generatorCatalog.listGenerators('fr');
 	const publicValues = getCommandOptionValues('generator-paths', 'fr');
-	const publicIds = new Set(
-		generatorCatalog.listGenerators('en').map(generator => generator.id),
-	);
 	assert.deepEqual(
-		new Set(publicValues.map(value => value.value)),
-		publicIds,
+		publicValues.map(value => value.value),
+		frenchGenerators.map(generator => createGeneratorTraversalAlias(generator.name)),
 	);
-	assert.ok(publicValues.every(value => (
-		generatorCatalog.getGenerator(value.value, 'en')?.visibility === 'public'
-	)));
+	assert.ok(publicValues.some(value => value.value === 'butin'));
+	assert.ok(publicValues.every(value => value.name === value.value));
 
 	const englishBackgrounds = generatorCatalog.getGenerator('background', 'en').entries;
 	const frenchBackgrounds = generatorCatalog.getGenerator('background', 'fr').entries;
@@ -202,7 +202,108 @@ test('/gen traversal autocomplete follows entries, fields, and structural routes
 		.includes('loot:shields.generator.ar_percentage'));
 	assert.deepEqual(complete('loot:shields.generator:w'), [
 		'loot:shields.generator:wooden_shield',
+		'loot:shields.generator:tower_shield',
+		'loot:shields.generator:stormward_shield',
+		'loot:shields.generator:living_wood_shield',
 	]);
+	assert.deepEqual(complete('loot:shields.generator:wooden_shield'), [
+		'loot:shields.generator:wooden_shield',
+	]);
+});
+
+test('localized generator aliases are predictable and resolve to stable identities', () => {
+	assert.equal(
+		createGeneratorTraversalAlias('  L\'Épée—longue !  '),
+		'l_épée_longue',
+	);
+	const english = generatorResolver.generate('loot:shields', 'en', {
+		random: () => 0,
+	});
+	const french = generatorResolver.generate('butin:boucliers', 'fr', {
+		random: () => 0,
+	});
+	assert.equal(english.generatorId, 'loot');
+	assert.equal(french.generatorId, 'loot');
+	assert.equal(english.entryId, 'shields');
+	assert.equal(french.entryId, 'shields');
+	assert.equal(
+		generatorResolver.generate('BuTiN:BOUCLIERS', 'fr', { random: () => 0 }).entryId,
+		'shields',
+	);
+});
+
+test('/gen autocomplete uses localized paths and active accent-insensitive segments', () => {
+	const complete = value => AUTOCOMPLETE_PROVIDERS['generator-paths'](
+		{},
+		{ locale: 'fr' },
+		{ value },
+	);
+	assert.deepEqual(complete('butin:bou'), [{
+		name: 'butin:boucliers',
+		value: 'butin:boucliers',
+	}]);
+	assert.deepEqual(complete('loot:'), complete('butin:'));
+	assert.deepEqual(complete('butin:armes.generator:epee_longue'), [{
+		name: 'butin:armes.generator:épée_longue',
+		value: 'butin:armes.generator:épée_longue',
+	}]);
+	assert.deepEqual(
+		complete('butin:boucliers.generator:bouclier_en_b'),
+		[{
+			name: 'butin:boucliers.generator:bouclier_en_bois',
+			value: 'butin:boucliers.generator:bouclier_en_bois',
+		}],
+	);
+});
+
+test('localized traversal continues through routes and keeps stable field syntax', () => {
+	const result = generatorResolver.generate(
+		'butin:boucliers.generator:bouclier_en_bois.ar_percentage',
+		'fr',
+		{ random: () => 0 },
+	);
+	assert.equal(result.generatorId, 'shields');
+	assert.equal(result.entryId, 'wooden_shield');
+	assert.deepEqual(result.fields, { ar_percentage: 5 });
+	assert.deepEqual(
+		generatorResolver.generate(
+			'butin:boucliers.generator:bouclier_en_bois.name',
+			'fr',
+			{ random: () => 0 },
+		).fields,
+		{ name: 'Bouclier en bois' },
+	);
+	assert.equal(
+		generatorResolver.generate(
+			'loot:shields.generator:wooden_shield.name',
+			'fr',
+			{ random: () => 0 },
+		).entryId,
+		'wooden_shield',
+	);
+});
+
+test('generator autocomplete searches beyond the first 25 localized entries', () => {
+	const complete = value => AUTOCOMPLETE_PROVIDERS['generator-paths'](
+		{},
+		{ locale: 'fr' },
+		{ value },
+	);
+	const initial = complete('butin:armes.generator:');
+	assert.equal(initial.length, 25);
+	assert.ok(!initial.some(choice => choice.value.endsWith(':épée_runique')));
+	assert.deepEqual(complete('butin:armes.generator:epee_runique'), [{
+		name: 'butin:armes.generator:épée_runique',
+		value: 'butin:armes.generator:épée_runique',
+	}]);
+	assert.equal(
+		generatorResolver.generate(
+			'butin:armes.generator:épée_runique',
+			'fr',
+			{ random: () => 0 },
+		).entryId,
+		'runed_sword',
+	);
 });
 
 test('generator schema validates unified v4 envelopes', () => {
@@ -370,6 +471,31 @@ test('generator names reject normalized collisions within their input scope', ()
 			[second.id, second],
 		])),
 		error => error.code === 'DUPLICATE_PUBLIC_GENERATOR_NAME',
+	);
+
+	const entryAliasConflict = createTextGenerator();
+	entryAliasConflict.entries = [
+		{ id: 'first', name: 'Storm' },
+		{ id: 'storm', name: 'Drizzle' },
+	];
+	assert.throws(
+		() => validateGeneratorDefinition(entryAliasConflict),
+		error => error.code === 'AMBIGUOUS_GENERATOR_ENTRY_ALIAS',
+	);
+
+	const generatorAliasConflict = createTextGenerator();
+	generatorAliasConflict.name = 'Climate';
+	const stableClimate = {
+		...createTextGenerator(),
+		id: 'climate',
+		name: 'Storms',
+	};
+	assert.throws(
+		() => validateGeneratorRelationships(new Map([
+			[generatorAliasConflict.id, generatorAliasConflict],
+			[stableClimate.id, stableClimate],
+		])),
+		error => error.code === 'AMBIGUOUS_PUBLIC_GENERATOR_ALIAS',
 	);
 });
 
