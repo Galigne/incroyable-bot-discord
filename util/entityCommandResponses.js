@@ -97,6 +97,13 @@ function createEntityGetResponse(entity, fieldName, locale = 'en') {
 	return { embeds: [embed] };
 }
 
+function createEntityGearResponse(entity, locale = 'en') {
+	if (entity.gear.equipment.length === 0 && entity.gear.inventory.length === 0) {
+		return null;
+	}
+	return createEntityGetResponse(entity, 'gear', locale);
+}
+
 function createEntityEditResponse(result, fieldName, locale = 'en') {
 	const fieldResponse = createEntityGetResponse(result.entity, fieldName, locale);
 	return {
@@ -122,14 +129,20 @@ function createGeneratedCreatureResponse(creature, locale = 'en') {
 	};
 }
 
+function createGeneratedCreatureFollowUpResponses(creature, locale = 'en') {
+	return [createEntityGearResponse(creature, locale)].filter(Boolean);
+}
+
 module.exports = {
 	createEndEntityTurnResponse,
 	createEntityAddedResponse,
 	createEntityDamageResponse,
 	createEntityDeletedResponse,
 	createEntityEditResponse,
+	createEntityGearResponse,
 	createEntityGetResponse,
 	createEntityHealResponse,
 	createEntityUndoResponse,
+	createGeneratedCreatureFollowUpResponses,
 	createGeneratedCreatureResponse,
 };

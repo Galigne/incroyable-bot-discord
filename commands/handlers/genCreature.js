@@ -3,6 +3,7 @@ const {
 } = require('../../services/creatureApplicationService');
 const {
 	createGeneratedCreatureResponse,
+	createGeneratedCreatureFollowUpResponses,
 } = require('../../util/entityCommandResponses');
 const { replyToEntityError } = require('../../util/entityCommandErrors');
 const { getLocale } = require('../../util/i18n');
@@ -22,6 +23,9 @@ module.exports = {
 				{ type, level, locale },
 			);
 			await interaction.reply(createGeneratedCreatureResponse(creature, locale));
+			for (const response of createGeneratedCreatureFollowUpResponses(creature, locale)) {
+				await interaction.followUp(response);
+			}
 		}
 		catch (error) {
 			if (!await replyToEntityError(interaction, error, locale)) {

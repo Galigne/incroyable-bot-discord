@@ -67,6 +67,10 @@ const {
 	createCreatureFieldEmbed,
 	createCreatureSummaryEmbed,
 } = require('../util/creatureRenderer');
+const {
+	createEntityGetResponse,
+	createGeneratedCreatureResponse,
+} = require('../util/entityCommandResponses');
 
 afterEach(() => {
 	for (const entry of fs.readdirSync(testSaveDirectory)) {
@@ -653,6 +657,7 @@ test('/gen-creature is DM-only and atomically persists a complete generated crea
 	assert.equal(authorizeCommand(metadata, regular, config).allowed, false);
 
 	let response;
+	const followUps = [];
 	const interaction = {
 		...dm,
 		guildId: 'guild',
@@ -666,6 +671,7 @@ test('/gen-creature is DM-only and atomically persists a complete generated crea
 		reply: async payload => {
 			response = payload;
 		},
+		followUp: async payload => followUps.push(payload),
 	};
 	await commandRegistry.getRuntimeCommands().get('gen-creature').execute({
 		config,
@@ -675,6 +681,18 @@ test('/gen-creature is DM-only and atomically persists a complete generated crea
 	assert.equal(stored.level, 4);
 	assert.equal(stored.source.archetypeId, generatedType);
 	assert.match(response.content, /Command\.Generated/);
+	assert.deepEqual(
+		response.embeds[0].toJSON(),
+		createGeneratedCreatureResponse(stored, config.locale).embeds[0].toJSON(),
+	);
+	const expectedFollowUps = stored.gear.equipment.length > 0
+		|| stored.gear.inventory.length > 0
+		? [createEntityGetResponse(stored, 'gear', config.locale)]
+		: [];
+	assert.deepEqual(
+		followUps.map(followUp => followUp.embeds[0].toJSON()),
+		expectedFollowUps.map(followUp => followUp.embeds[0].toJSON()),
+	);
 	assert.equal(response.embeds[0].toJSON().title, stored.displayName);
 	const typeName = getCreatureRoute(generatedType, 'en').fields.name;
 	assert.ok(createCreatureFieldEmbed(stored, 'identity', 'en').toJSON().fields
@@ -718,6 +736,7 @@ test('/gen-creature type autocomplete uses localized router entries and stable I
 test('/gen-creature treats an omitted Discord type option as random selection', async () => {
 	const dm = createInteraction('dm-user', [config.roles.dm]);
 	let response;
+	const followUps = [];
 	const interaction = {
 		...dm,
 		options: {
@@ -729,6 +748,7 @@ test('/gen-creature treats an omitted Discord type option as random selection', 
 		reply: async payload => {
 			response = payload;
 		},
+		followUp: async payload => followUps.push(payload),
 	};
 
 	await commandRegistry.getRuntimeCommands().get('gen-creature').execute({

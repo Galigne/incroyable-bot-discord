@@ -10,6 +10,7 @@ const testSaveDirectory = fs.mkdtempSync(
 );
 process.env.INCREDIBLE_BOT_SAVE_DIRECTORY = testSaveDirectory;
 
+const commandRegistry = require('../commands/registry');
 const {
 	CURRENT_CHARACTER_SAVE_SCHEMA_VERSION,
 } = require('../services/characterSaveSchema');
@@ -33,6 +34,10 @@ const {
 	createCharacterFieldEmbed,
 	createCharacterSummaryEmbed,
 } = require('../util/characterRenderer');
+const {
+	createGeneratedCharacterResponse,
+} = require('../util/characterCommandResponses');
+const { createEntityGetResponse } = require('../util/entityCommandResponses');
 
 afterEach(() => {
 	for (const entry of fs.readdirSync(testSaveDirectory)) {
@@ -153,6 +158,43 @@ test('/gen-char consumes current generator fields and persists the current schem
 	assert.equal(rawSave.gear.inventory.length, 4);
 	assert.deepEqual(rawSave.gear.encumbrance, { current: 0, max: 0 });
 	assert.deepEqual(JSON.parse(JSON.stringify(generated)), rawSave);
+});
+
+test('/gen-char sends personality and populated gear after its unchanged summary', async () => {
+	const characterKey = 'Command.Generated';
+	const replies = [];
+	const followUps = [];
+	const interaction = {
+		user: { id: 'creator' },
+		options: {
+			getInteger: option => option === 'level' ? 1 : null,
+			getString: option => option === 'character-key' ? characterKey : null,
+		},
+		reply: async response => replies.push(response),
+		followUp: async response => followUps.push(response),
+	};
+
+	await commandRegistry.getRuntimeCommands().get('gen-char').execute({
+		config: { locale: 'en' },
+		interaction,
+	});
+
+	const generated = await getCharacter(characterKey);
+	assert.equal(replies.length, 1);
+	assert.deepEqual(
+		replies[0].embeds[0].toJSON(),
+		createGeneratedCharacterResponse(generated, 'en').embeds[0].toJSON(),
+	);
+	assert.equal(followUps.length, 2);
+	assert.deepEqual(
+		followUps[0].embeds[0].toJSON(),
+		createEntityGetResponse(generated, 'personality', 'en').embeds[0].toJSON(),
+	);
+	assert.deepEqual(
+		followUps[1].embeds[0].toJSON(),
+		createEntityGetResponse(generated, 'gear', 'en').embeds[0].toJSON(),
+	);
+	assert.doesNotMatch(JSON.stringify(followUps), /Derived statistics|RULE descriptions/);
 });
 
 test('saves without schemaVersion are rejected without being rewritten', async () => {

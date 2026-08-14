@@ -5,8 +5,12 @@ const Character = require('../models/Character');
 const Creature = require('../models/Creature');
 const {
 	createGeneratedCharacterResponse,
+	createGeneratedCharacterFollowUpResponses,
 } = require('../util/characterCommandResponses');
-const { createEntityGetResponse } = require('../util/entityCommandResponses');
+const {
+	createEntityGetResponse,
+	createGeneratedCreatureFollowUpResponses,
+} = require('../util/entityCommandResponses');
 const { createGeneratedEmbed } = require('../util/generatorResponses');
 const { flattenKeys, translations } = require('../util/i18n');
 
@@ -271,6 +275,39 @@ test('generated character embeds have no footer', () => {
 		.embeds[0].toJSON();
 
 	assert.equal(embed.footer, undefined);
+});
+
+test('generated character follow-ups reuse /get personality and conditionally include gear', () => {
+	const character = new Character('Generated.FollowUps', 'creator');
+	character.personality = {
+		traits: ['Patient', 'Observant'],
+		description: 'Quiet and curious',
+	};
+	const personality = createEntityGetResponse(character, 'personality', 'en');
+	let followUps = createGeneratedCharacterFollowUpResponses(character, 'en');
+
+	assert.equal(followUps.length, 1);
+	assert.deepEqual(
+		followUps[0].embeds[0].toJSON(),
+		personality.embeds[0].toJSON(),
+	);
+
+	character.gear.inventory = ['Potion'];
+	const gear = createEntityGetResponse(character, 'gear', 'en');
+	followUps = createGeneratedCharacterFollowUpResponses(character, 'en');
+	assert.equal(followUps.length, 2);
+	assert.deepEqual(followUps[1].embeds[0].toJSON(), gear.embeds[0].toJSON());
+});
+
+test('generated creature follow-ups conditionally reuse /get gear', () => {
+	const creature = new Creature('Generated.Creature.FollowUps', 'creator');
+	assert.deepEqual(createGeneratedCreatureFollowUpResponses(creature, 'en'), []);
+
+	creature.gear.equipment = ['Claws'];
+	const gear = createEntityGetResponse(creature, 'gear', 'en');
+	const followUps = createGeneratedCreatureFollowUpResponses(creature, 'en');
+	assert.equal(followUps.length, 1);
+	assert.deepEqual(followUps[0].embeds[0].toJSON(), gear.embeds[0].toJSON());
 });
 
 test('locale catalogs have identical structures and no footer keys', () => {

@@ -3,6 +3,7 @@ const {
 } = require('../../services/characterApplicationService');
 const {
 	createGeneratedCharacterResponse,
+	createGeneratedCharacterFollowUpResponses,
 } = require('../../util/characterCommandResponses');
 const {
 	createLocalizedCharacterGenerationOptions,
@@ -23,6 +24,9 @@ module.exports = {
 				createLocalizedCharacterGenerationOptions({ background, level }, locale),
 			);
 			await interaction.reply(createGeneratedCharacterResponse(character, locale));
+			for (const response of createGeneratedCharacterFollowUpResponses(character, locale)) {
+				await interaction.followUp(response);
+			}
 		}
 		catch (error) {
 			if (!await replyToCharacterError(interaction, error, locale)) {
