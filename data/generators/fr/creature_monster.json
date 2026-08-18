@@ -22,10 +22,6 @@
           "{{ traits:pack_tactics }}",
           "{{ traits:burrower }}"
         ],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 15
       }
     },
@@ -45,9 +41,6 @@
             "level": 1
           }
         ],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 15
       }
     },
@@ -78,8 +71,6 @@
             "select": "fields"
           }
         ],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 15
       }
     },
@@ -99,9 +90,6 @@
             "level": 1
           }
         ],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 20
       }
     },
@@ -137,7 +125,6 @@
             "select": "fields"
           }
         ],
-        "inventory": [],
         "armor": {
           "generator": "armors",
           "entry": "common_heavy_armor",
@@ -158,10 +145,6 @@
           "{{ traits:camouflage }}",
           "Faux fanal — +2 aux actions de Charisme pour attirer une créature qui prend sa lueur pour une lumière sûre."
         ],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 15
       }
     },
@@ -179,10 +162,6 @@
           "{{ traits:disease_immunity }}",
           "Étreinte d’ossements — Une cible saisie ne peut pas s’éloigner avant de réussir une action de Force pour s’échapper."
         ],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 15
       }
     },
@@ -209,8 +188,6 @@
             "select": "fields"
           }
         ],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 15
       }
     },
@@ -227,10 +204,6 @@
           "{{ traits:aquatic_speed }}",
           "Nuage d’encre — Une fois par scène sous l’eau, crée un nuage de 5 mètres qui aveugle les autres créatures jusqu’à leur sortie."
         ],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 15
       }
     },
@@ -246,10 +219,6 @@
         "traits": [
           "Morsure corrosive — Les attaques naturelles contre des objets ou armures métalliques infligent +2 dégâts."
         ],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 40
       }
     },
@@ -265,10 +234,6 @@
         "traits": [
           "Drain de mémoire — Après une minute de contact avec une créature sans défense, efface ses souvenirs de l’heure précédente."
         ],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 15
       }
     },
@@ -285,10 +250,6 @@
           "{{ traits:natural_weapons }}",
           "Graines barbelées — Peut porter une attaque naturelle à distance ; une cible blessée subit -1 en Vitesse jusqu’au retrait du barbillon."
         ],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 15
       }
     },
@@ -317,8 +278,6 @@
             "select": "fields"
           }
         ],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 15
       }
     },
@@ -332,8 +291,6 @@
       "generation": {
         "statProfile": "creature-elemental",
         "traits": ["{{ traits:fire_immunity }}", "{{ traits:regeneration }}"],
-        "fixedRules": [],
-        "statusEffects": [],
         "equipment": [
           {
             "generator": "weapons",
@@ -341,7 +298,6 @@
             "select": "fields"
           }
         ],
-        "inventory": [],
         "naturalArmorPercentage": 15
       }
     },
@@ -364,9 +320,6 @@
             "level": 1
           }
         ],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 30
       }
     },
@@ -383,10 +336,6 @@
           "{{ traits:burrower }}",
           "Voix familières — +2 aux actions de Charisme pour attirer ou désorienter quelqu’un en imitant des voix déjà entendues."
         ],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 15
       }
     },
@@ -408,9 +357,6 @@
             "level": 2
           }
         ],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 15
       }
     },
@@ -428,10 +374,6 @@
           "{{ traits:powerful_build }}",
           "Enfant de l’orage — Ne subit aucun dégât de la foudre ordinaire et vole normalement dans les vents violents."
         ],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 15
       }
     },
@@ -449,10 +391,6 @@
           "{{ traits:powerful_build }}",
           "Édifice vivant — Tant qu’elle reste immobile, une inspection ordinaire ne peut pas la distinguer du bâtiment ou monument imité."
         ],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 50
       }
     },
@@ -469,10 +407,6 @@
           "{{ traits:swift_reflexes }}",
           "Secondes volées — Après avoir infligé des dégâts, peut immédiatement parcourir jusqu’à la moitié de sa vitesse de déplacement normale."
         ],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 15
       }
     },
@@ -490,10 +424,6 @@
           "{{ traits:natural_weapons }}",
           "Têtes multiples — Ne peut pas être surprise tant qu’au moins deux de ses têtes restent conscientes."
         ],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 35
       }
     },
@@ -510,8 +440,6 @@
           "{{ traits:disease_immunity }}",
           "Faux miracle — Une fois par scène, rend 10 % de ses PV maximums à une créature touchée ; celle-ci subit -1 aux actions d’Intelligence jusqu’à son prochain repos."
         ],
-        "fixedRules": [],
-        "statusEffects": [],
         "equipment": [
           {
             "generator": "weapons",
@@ -519,7 +447,6 @@
             "select": "fields"
           }
         ],
-        "inventory": [],
         "armor": {
           "generator": "armors",
           "entry": "rare_medium_armor",
@@ -540,10 +467,6 @@
           "{{ traits:powerful_build }}",
           "Ombre vivante — Son ombre peut porter des attaques naturelles contre une cible située jusqu’à 5 mètres de son corps."
         ],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 15
       }
     },
@@ -560,7 +483,6 @@
           "{{ traits:stone_body }}",
           "Fission magique — La première fois par scène qu’un sort l’affecte, crée dans un espace libre adjacent une copie fragile dotée de 1 PV."
         ],
-        "fixedRules": [],
         "modifiers": [
           {
             "generator": "modifier_creature",
@@ -568,8 +490,6 @@
             "select": "fields"
           }
         ],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 15
       }
     },
@@ -600,8 +520,6 @@
             "select": "fields"
           }
         ],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 10
       }
     },
@@ -615,10 +533,6 @@
       "generation": {
         "statProfile": "creature-brute",
         "traits": ["{{ traits:powerful_build }}"],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 15
       }
     },
@@ -640,9 +554,6 @@
             "level": 1
           }
         ],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 10
       }
     },
@@ -656,10 +567,6 @@
       "generation": {
         "statProfile": "creature-caster",
         "traits": ["{{ traits:flight }}", "{{ traits }}"],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 5
       }
     },
@@ -677,10 +584,6 @@
           "{{ traits:disease_immunity }}",
           "Corps corrosif — Inflige 2 dégâts par tour à la matière organique ordinaire ou au métal tendre qu’elle recouvre entièrement."
         ],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 15
       }
     },
@@ -703,9 +606,6 @@
             "level": 2
           }
         ],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 35
       }
     },
@@ -722,10 +622,6 @@
           "{{ traits:poison_immunity }}",
           "{{ traits:disease_immunity }}"
         ],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 10
       }
     },
@@ -742,8 +638,6 @@
           "{{ traits:poison_immunity }}",
           "{{ traits:disease_immunity }}"
         ],
-        "fixedRules": [],
-        "statusEffects": [],
         "equipment": [
           {
             "generator": "weapons",
@@ -751,7 +645,6 @@
             "select": "fields"
           }
         ],
-        "inventory": [],
         "naturalArmorPercentage": 10
       }
     },
@@ -765,10 +658,6 @@
       "generation": {
         "statProfile": "creature-predator",
         "traits": ["{{ traits }}"],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 10
       }
     },
@@ -786,10 +675,6 @@
           "{{ traits:poison_immunity }}",
           "{{ traits:disease_immunity }}"
         ],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 50
       }
     },
@@ -806,10 +691,6 @@
           "{{ traits:swift_reflexes }}",
           "{{ traits:natural_weapons }}"
         ],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 5
       }
     },
@@ -823,10 +704,6 @@
       "generation": {
         "statProfile": "creature-brute",
         "traits": ["{{ traits:natural_weapons }}"],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 30
       }
     },
@@ -844,10 +721,6 @@
           "{{ traits:poison_immunity }}",
           "{{ traits:disease_immunity }}"
         ],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 50
       }
     },
@@ -863,10 +736,6 @@
         "traits": [
           "Sillage corrosif — Laisse une trace qui inflige 1 dégât par tour à un matériau déterminé par son alimentation actuelle."
         ],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 15
       }
     },
@@ -893,8 +762,6 @@
             "select": "fields"
           }
         ],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 25
       }
     },
@@ -911,10 +778,6 @@
           "{{ traits:flight }}",
           "Voix familières — +2 aux actions de Charisme pour attirer ou désorienter quelqu’un en imitant des voix déjà entendues."
         ],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 10
       }
     },
@@ -938,9 +801,6 @@
             "level": 1
           }
         ],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 10
       }
     },
@@ -957,10 +817,6 @@
           "{{ traits:powerful_build }}",
           "Vue perçante — +2 aux actions de Perception reposant sur la vue à longue distance."
         ],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 20
       }
     },
@@ -984,9 +840,6 @@
             "level": 2
           }
         ],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 10
       }
     },
@@ -1009,9 +862,6 @@
             "level": 1
           }
         ],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 5
       }
     },
@@ -1028,17 +878,13 @@
           "{{ traits:incorporeal }}",
           "Boucle spectrale — Répète une scène ; les témoins qui l’interrompent volontairement subissent -1 aux actions d’Intelligence jusqu’à l’apaisement de l’esprit."
         ],
-        "fixedRules": [],
         "modifiers": [
           {
             "generator": "modifier_creature",
             "entry": "shadowed",
             "select": "fields"
           }
-        ],
-        "equipment": [],
-        "inventory": [],
-        "naturalArmorPercentage": 0
+        ]
       }
     },
     {
@@ -1054,10 +900,6 @@
           "Instinct composite — Son anatomie disparate lui confère aussi cette capacité : {{ traits }}",
           "{{ traits }}"
         ],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 25
       }
     },
@@ -1071,10 +913,6 @@
       "generation": {
         "statProfile": "creature-elemental",
         "traits": ["{{ traits }}"],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 25
       }
     },
@@ -1088,10 +926,6 @@
       "generation": {
         "statProfile": "creature-brute",
         "traits": ["{{ traits:stone_body }}", "{{ traits:flight }}"],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 45
       }
     },
@@ -1105,10 +939,6 @@
       "generation": {
         "statProfile": "creature-predator",
         "traits": ["{{ traits:flight }}", "{{ traits:natural_weapons }}"],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 20
       }
     },
@@ -1130,9 +960,6 @@
             "level": 2
           }
         ],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 20
       }
     },
@@ -1150,10 +977,6 @@
           "{{ traits:natural_weapons }}",
           "{{ traits:regeneration }}"
         ],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 15
       }
     },
@@ -1170,10 +993,6 @@
           "{{ traits:poison_immunity }}",
           "{{ traits:disease_immunity }}"
         ],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 25
       }
     },
@@ -1190,10 +1009,6 @@
           "{{ traits:powerful_build }}",
           "Sens du dédale — Connaît toujours le plus court chemin praticable vers tout lieu visité au cours de la dernière journée."
         ],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 25
       }
     },
@@ -1207,10 +1022,6 @@
       "generation": {
         "statProfile": "creature-brute",
         "traits": ["{{ traits:burrower }}", "{{ traits:powerful_build }}"],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 30
       }
     },
@@ -1227,10 +1038,6 @@
           "{{ traits:camouflage }}",
           "Mimétisme alléchant — +2 aux actions de Charisme pour attirer une proie en imitant des odeurs, sons ou formes familiers."
         ],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 15
       }
     },
@@ -1248,10 +1055,6 @@
           "{{ traits:powerful_build }}",
           "{{ traits:natural_weapons }}"
         ],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 50
       }
     },
@@ -1269,10 +1072,6 @@
           "{{ traits:aquatic_speed }}",
           "{{ traits:powerful_build }}"
         ],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 25
       }
     },
@@ -1286,10 +1085,6 @@
       "generation": {
         "statProfile": "creature-brute",
         "traits": ["{{ traits:powerful_build }}"],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 50
       }
     },
@@ -1318,10 +1113,7 @@
             "entry": "shadowed",
             "select": "fields"
           }
-        ],
-        "equipment": [],
-        "inventory": [],
-        "naturalArmorPercentage": 0
+        ]
       }
     },
     {
@@ -1337,10 +1129,6 @@
           "{{ traits:pack_tactics }}",
           "Esprit de ruche — Peut percevoir par l’intermédiaire de tout insecte allié à moins de 100 mètres et ne peut pas être prise en tenaille par les créatures qu’ils détectent."
         ],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 25
       }
     },
@@ -1354,8 +1142,6 @@
       "generation": {
         "statProfile": "creature-predator",
         "traits": ["{{ traits:darkvision }}", "{{ traits:pack_tactics }}"],
-        "fixedRules": [],
-        "statusEffects": [],
         "equipment": [
           {
             "generator": "weapons",
@@ -1363,7 +1149,6 @@
             "select": "fields"
           }
         ],
-        "inventory": [],
         "naturalArmorPercentage": 5
       }
     },
@@ -1381,8 +1166,6 @@
           "{{ traits:pack_tactics }}",
           "{{ traits:natural_weapons }}"
         ],
-        "fixedRules": [],
-        "statusEffects": [],
         "equipment": [
           {
             "generator": "weapons",
@@ -1390,7 +1173,6 @@
             "select": "fields"
           }
         ],
-        "inventory": [],
         "naturalArmorPercentage": 10
       }
     },
@@ -1407,10 +1189,6 @@
           "{{ traits:poison_immunity }}",
           "{{ traits:disease_immunity }}"
         ],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 5
       }
     },
@@ -1430,10 +1208,6 @@
           "{{ traits:natural_weapons }}",
           "Griffes paralysantes — Après qu’une attaque naturelle a infligé des dégâts, la cible perd 1 PA à moins qu’elle ne résiste à la paralysie."
         ],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 10
       }
     },
@@ -1451,10 +1225,6 @@
           "{{ traits:pack_tactics }}",
           "{{ traits:natural_weapons }}"
         ],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 5
       }
     },
@@ -1472,10 +1242,6 @@
           "{{ traits:wall_climber }}",
           "{{ traits:venomous }}"
         ],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 15
       }
     },
@@ -1489,10 +1255,6 @@
       "generation": {
         "statProfile": "creature-brute",
         "traits": ["{{ traits:natural_weapons }}", "{{ traits:venomous }}"],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 30
       }
     },
@@ -1510,10 +1272,6 @@
           "{{ traits:constrict }}",
           "{{ traits:natural_weapons }}"
         ],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 10
       }
     },
@@ -1532,10 +1290,6 @@
           "{{ traits:pounce }}",
           "{{ traits:natural_weapons }}"
         ],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 15
       }
     },
@@ -1553,10 +1307,6 @@
           "{{ traits:natural_weapons }}",
           "Peau adhésive — +2 aux actions de Force pour maintenir une lutte contre une créature qui le touche."
         ],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 20
       }
     },
@@ -1575,10 +1325,6 @@
           "{{ traits:constrict }}",
           "Corps transparent — +2 aux actions de Dextérité pour passer inaperçu tant qu’il reste immobile dans une faible lumière."
         ],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 10
       }
     },
@@ -1596,10 +1342,6 @@
           "{{ traits:natural_weapons }}",
           "Morsure pétrifiante — Une fois par scène, une créature blessée par sa morsure ne peut plus se déplacer jusqu’à la fin de son prochain tour, sauf si elle résiste à la pétrification."
         ],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 10
       }
     },
@@ -1617,10 +1359,6 @@
           "{{ traits:natural_weapons }}",
           "Piquants caudaux — Peut effectuer des attaques naturelles ordinaires à distance avec les piquants de sa queue."
         ],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 15
       }
     },
@@ -1638,10 +1376,6 @@
           "{{ traits:natural_weapons }}",
           "{{ traits:venomous }}"
         ],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 20
       }
     },
@@ -1659,8 +1393,6 @@
           "{{ traits:natural_weapons }}",
           "Deux têtes — Ne peut pas être surpris tant que ses deux têtes sont conscientes."
         ],
-        "fixedRules": [],
-        "statusEffects": [],
         "equipment": [
           {
             "generator": "weapons",
@@ -1668,7 +1400,6 @@
             "select": "fields"
           }
         ],
-        "inventory": [],
         "naturalArmorPercentage": 20
       }
     },
@@ -1686,10 +1417,6 @@
           "{{ traits:regeneration }}",
           "{{ traits:constrict }}"
         ],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 25
       }
     },
@@ -1718,7 +1445,6 @@
             "level": 2
           }
         ],
-        "statusEffects": [],
         "equipment": [
           {
             "generator": "weapons",
@@ -1726,7 +1452,6 @@
             "select": "fields"
           }
         ],
-        "inventory": [],
         "naturalArmorPercentage": 10
       }
     },
@@ -1746,10 +1471,6 @@
           "{{ traits:natural_weapons }}",
           "Souffle ardent — Une fois par scène, peut effectuer une attaque naturelle contre chaque créature dans un cône de 3 mètres."
         ],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 15
       }
     }

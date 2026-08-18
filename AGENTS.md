@@ -108,8 +108,8 @@ write real saves.
 - `services/characterFieldCatalog.js`: canonical character field identities,
   aliases, storage paths, types, and editable/viewable capabilities.
 - `services/creatureFieldCatalog.js`: independent explicit creature field order and
-  editable/viewable capabilities; source IDs, provenance, type, key, schema metadata,
-  and natural-armor metadata are not editable.
+  editable/viewable capabilities; source IDs, provenance, type, key, and schema
+  metadata are not editable.
 - `services/entityFieldEditor.js`: shared grouped parser/serializer foundation used
   by the type-specific character and creature editor adapters.
 - `services/characterEditor.js`: grouped editable-value parsing, complete
@@ -119,8 +119,8 @@ write real saves.
 - `services/generatorSchema.js`: stable public façade for generator-v4 validation
   and the public creature router identifier.
 - `services/generatorSchema/`: focused internal validators for shared assertions,
-  envelopes, entries, parity, modifiers, references, background and creature
-  metadata, and catalog relationships.
+  envelopes, entries, parity, modifiers, references, shared optional character and
+  creature generation metadata, and catalog relationships.
 - `services/generatorCatalog.js`: recursively loads the complete generator-v4
   locale pair and exposes stable-ID lookup plus public visibility filtering.
 - `services/generatorResolver.js`: resolves public roots into localized structured
@@ -139,9 +139,9 @@ write real saves.
 - `services/generationData.js`: prepares generator and profile candidates, validates
   their background and creature relationships, then atomically replaces both active
   caches during `/reload`.
-- `services/randomCharacterGenerator.js`: selects generator data, uses the selected
-  background archetype's statistical profile, and assembles complete random
-  characters using `services/mechanics/`.
+- `services/randomCharacterGenerator.js`: selects generator data, applies the
+  selected background archetype's optional generation overrides, and assembles
+  complete random characters using `services/mechanics/`.
 - `services/randomCreatureGenerator.js`: resolves creature sources, descriptive
   records, RULEs, armor, and gear, then assembles complete final creatures through
   the shared profile and mechanics infrastructure.
@@ -651,11 +651,9 @@ The durable implementation constraints are:
 - Keep `background` routing aligned with one internal concept-only generator per
   category, stored in `background_<category>.json`. Each router entry uses a direct
   top-level `generator` ID, never a wrapped inline reference, and follows the minimal
-  router-entry contract without fields. Every routed archetype entry requires a
-  `generation` object containing only `statProfile`; validate that profile against
-  the shared profile catalog and keep its stable ID identical across locales. Use
-  the selected archetype's profile only for character statistical allocation, and
-  resolve `physical_description` independently.
+  router-entry contract without fields. Routed archetype entries may omit
+  `generation`; when `statProfile` is omitted, use `default`. Resolve
+  `physical_description` independently.
 - Derive supported `/gen-creature` types from the public `creature` router. Router
   entries use top-level `generator` properties naming internal concept-only IDs
   stored in `creature_<type>.json` and follow the minimal router-entry contract;
@@ -675,17 +673,26 @@ The durable implementation constraints are:
   selected main items: 80% `weapons`, 20% `shields` per slot. Equipped shields may
   stack and add their AR percentages to armor before resource generation; carried
   loot never contributes AR.
+- Background archetypes and creature details share one optional `generation`
+  override model. Every property is optional; omission preserves that entity type's
+  normal category behavior, while an explicitly present value replaces it. Both
+  concepts support `statProfile`, `naturalArmorPercentage`, `fixedRules`,
+  `statusEffects`, `modifiers`, `armor`, `equipment`, and `inventory`. Characters
+  support `talents`, creatures support `traits`, and neither accepts the other's
+  template collection.
 - Use only `modifier_character` for the character modifier policy and
   `modifier_creature` for the creature modifier policy. Modifiers and status
   effects remain descriptive and never execute mechanics. `/gen` has no modifier
   option; the public `modifier` router provides standalone access to useful
   internal modifier pools.
-- Creature RULEs come only from explicit `fixedRules`; only natural-armor metadata
-  or an explicit armor reference initializes AR; generation never derives manual
-  encumbrance.
-- Creature-detail `traits` are zero to 25 non-empty inline-template strings. Resolve
-  them through the shared generator semantics during creation and persist only the
-  localized final strings; trait rules text never executes mechanics.
+- Creature RULEs come only from explicit `fixedRules`. Natural-armor metadata, the
+  separate armor reference, and resolved AR-providing equipped items stack before
+  AR generation; inventory never contributes AR and generation never derives manual
+  encumbrance. Persist only final AR, never natural-armor metadata.
+- Character `talents` and creature `traits` overrides are zero to 25 non-empty
+  inline-template strings. Resolve them through the shared generator semantics
+  during creation and persist only the localized final strings; their text never
+  executes mechanics.
 - During `/reload`, use `reloadGenerationData()` to prepare generator and
   statistical-profile candidates together, validate background/profile and
   creature/profile relationships, and replace both active caches only after

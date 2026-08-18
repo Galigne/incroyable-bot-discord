@@ -317,8 +317,13 @@ chosen randomly when omitted. The selected category independently resolves one
 reusable archetype from the matching concept-only generator stored in
 `background_<category>.json`, while the separate `physical_description` generator
 supplies the physical description. Each selected archetype chooses its own existing
-character statistical profile; this affects only statistical allocation, while all
-other character content keeps its independent random generation behavior.
+character statistical profile, defaulting to the shared `default` profile when the
+archetype does not specify one. Background archetypes and creature details share an
+optional generation-override model for statistical profile, natural armor, fixed
+RULEs, status effects, modifiers, armor, equipment, and inventory. Characters use
+template-based `talents`, while creatures use template-based `traits`. Omitted
+properties keep the entity type's normal generation behavior; explicitly present
+properties replace it, including empty arrays.
 Backstory and goals start empty and remain editable. Persistent character
 modifiers come only from the internal `modifier_character` pool.
 
@@ -330,9 +335,11 @@ internal detail source. The current data provides `animal`, `companion`, and
 share the character level budget, nonlinear statistic allocation,
 derived statistics, and resource formulas while using creature-specific profile
 distributions. Only explicit source references grant creature RULEs; Intelligence
-and descriptive modifiers never do. Natural armor or explicit armor fields may
-initialize AR, status effects and modifiers remain descriptive, and generated gear
-does not alter manual encumbrance. Persistent creature modifiers come only from the
+and descriptive modifiers never do. Natural armor, a separate generated armor, and
+AR-providing equipped items stack before final AR is calculated; inventory does not
+contribute AR. Natural-armor percentages remain generation metadata and are not
+persisted separately. Status effects and modifiers remain descriptive, and
+generated gear does not alter manual encumbrance. Persistent creature modifiers come only from the
 internal `modifier_creature` pool. Creature detail sources declare intrinsic traits
 as string templates: literal text is preserved, while ordinary `{{ ... }}` generator
 references resolve during generation. The public `traits` generator provides shared

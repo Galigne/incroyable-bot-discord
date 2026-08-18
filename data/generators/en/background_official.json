@@ -45,10 +45,7 @@
     },
     {
       "id": "clerk",
-      "name": "Clerk",
-      "generation": {
-        "statProfile": "character-balanced"
-      }
+      "name": "Clerk"
     },
     {
       "id": "magistrate",

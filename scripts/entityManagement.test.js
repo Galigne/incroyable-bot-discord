@@ -117,7 +117,7 @@ test('blank creatures use a strict persistent schema with immutable identity', (
 	assert.equal(Object.getOwnPropertyDescriptor(creature, 'type').writable, false);
 	assert.equal(Object.getOwnPropertyDescriptor(creature, 'key').writable, false);
 	assert.deepEqual(creature.gear.encumbrance, { current: 0, max: 0 });
-	assert.deepEqual(creature.naturalArmor, { percentage: 0 });
+	assert.equal(Object.hasOwn(creature, 'naturalArmor'), false);
 	assert.deepEqual(Object.keys(creature), [
 		'schemaVersion',
 		'type',
@@ -127,7 +127,6 @@ test('blank creatures use a strict persistent schema with immutable identity', (
 		'name',
 		'description',
 		'source',
-		'naturalArmor',
 		'statistics',
 		'resources',
 		'status',
@@ -155,7 +154,6 @@ test('creature hydration preserves final localized state and technical provenanc
 			path: 'root',
 		}],
 	};
-	saved.naturalArmor.percentage = 25;
 	saved.resources.ar = { current: 30, max: 30 };
 	saved.traits = ['Keen Scent — Tracks by scent.'];
 	saved.status.effects = [{
@@ -189,7 +187,7 @@ test('creature hydration preserves final localized state and technical provenanc
 	const hydrated = Creature.fromSave(saved);
 	assert.equal(hydrated.name, 'Ash Wolf');
 	assert.equal(hydrated.resources.ar.max, 30);
-	assert.equal(hydrated.naturalArmor.percentage, 25);
+	assert.equal(Object.hasOwn(hydrated, 'naturalArmor'), false);
 	assert.deepEqual(hydrated.source, saved.source);
 	assert.deepEqual(hydrated.status.effects, saved.status.effects);
 	assert.deepEqual(hydrated.status.modifiers, saved.status.modifiers);
@@ -236,6 +234,14 @@ test('creature saves reject missing, unsupported, mismatched, and invalid state'
 	unknown.generatedAt = new Date().toISOString();
 	assert.throws(
 		() => validateCreatureSaveSchema(unknown),
+		error => error.code === 'INVALID_CREATURE_SAVE',
+	);
+	const legacyNaturalArmor = JSON.parse(JSON.stringify(
+		new Creature('Schema.Legacy.NaturalArmor', 'creator'),
+	));
+	legacyNaturalArmor.naturalArmor = { percentage: 20 };
+	assert.throws(
+		() => validateCreatureSaveSchema(legacyNaturalArmor),
 		error => error.code === 'INVALID_CREATURE_SAVE',
 	);
 });

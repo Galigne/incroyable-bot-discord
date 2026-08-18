@@ -17,12 +17,7 @@
       },
       "generation": {
         "statProfile": "creature-companion",
-        "traits": ["{{ traits:keen_smell }}"],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
-        "naturalArmorPercentage": 0
+        "traits": ["{{ traits:keen_smell }}"]
       }
     },
     {
@@ -34,12 +29,7 @@
       },
       "generation": {
         "statProfile": "creature-companion",
-        "traits": ["{{ traits:keen_hearing }}", "{{ traits:darkvision }}"],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
-        "naturalArmorPercentage": 0
+        "traits": ["{{ traits:keen_hearing }}", "{{ traits:darkvision }}"]
       }
     },
     {
@@ -55,17 +45,13 @@
           "{{ traits:flight }}",
           "Homing Instinct — Can always determine the direction of a home it has occupied for at least one week."
         ],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
         "inventory": [
           {
             "generator": "curio",
             "entry": "mysterious_sealed_letter",
             "select": "fields"
           }
-        ],
-        "naturalArmorPercentage": 0
+        ]
       }
     },
     {
@@ -78,17 +64,13 @@
       "generation": {
         "statProfile": "creature-companion-magic",
         "traits": ["{{ traits:sure_footed }}", "{{ traits:powerful_build }}"],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
         "inventory": [
           {
             "generator": "food_and_drink",
             "entry": "three_travel_rations",
             "select": "fields"
           }
-        ],
-        "naturalArmorPercentage": 0
+        ]
       }
     },
     {
@@ -99,13 +81,7 @@
         "description": "squeezes through tiny spaces and learns simple object-based instructions."
       },
       "generation": {
-        "statProfile": "creature-companion",
-        "traits": [],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
-        "naturalArmorPercentage": 0
+        "statProfile": "creature-companion"
       }
     },
     {
@@ -119,12 +95,7 @@
         "statProfile": "creature-companion-magic",
         "traits": [
           "Warning Call — Allies able to hear the call gain +1 to Initiative against a threat the creature has detected."
-        ],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
-        "naturalArmorPercentage": 0
+        ]
       }
     },
     {
@@ -135,13 +106,7 @@
         "description": "retrieves small loose objects and hides them in inconvenient places."
       },
       "generation": {
-        "statProfile": "creature-companion",
-        "traits": [],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
-        "naturalArmorPercentage": 0
+        "statProfile": "creature-companion"
       }
     },
     {
@@ -154,9 +119,6 @@
       "generation": {
         "statProfile": "creature-companion",
         "traits": ["{{ traits:sure_footed }}", "{{ traits:powerful_build }}"],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
         "inventory": [
           {
             "generator": {
@@ -173,8 +135,7 @@
             },
             "select": "fields"
           }
-        ],
-        "naturalArmorPercentage": 0
+        ]
       }
     },
     {
@@ -189,12 +150,7 @@
         "traits": [
           "{{ traits:flight }}",
           "Luminous Plumage — Sheds gentle light in a 5-meter radius and can extinguish or restore it at will."
-        ],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
-        "naturalArmorPercentage": 0
+        ]
       }
     },
     {
@@ -206,12 +162,7 @@
       },
       "generation": {
         "statProfile": "creature-companion-magic",
-        "traits": ["{{ traits:amphibious }}", "{{ traits:fire_immunity }}"],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
-        "naturalArmorPercentage": 0
+        "traits": ["{{ traits:amphibious }}", "{{ traits:fire_immunity }}"]
       }
     },
     {
@@ -225,12 +176,7 @@
         "statProfile": "creature-companion",
         "traits": [
           "Medicinal Garden — Once per day, produces enough common herbs to grant +1 to one healing action."
-        ],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
-        "naturalArmorPercentage": 0
+        ]
       }
     },
     {
@@ -245,12 +191,7 @@
         "traits": [
           "{{ traits:flight }}",
           "Perfect Mimicry — Can reproduce any short phrase or familiar voice it has heard clearly."
-        ],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
-        "naturalArmorPercentage": 0
+        ]
       }
     },
     {
@@ -266,12 +207,7 @@
           "{{ traits:poison_immunity }}",
           "{{ traits:disease_immunity }}",
           "Cleansing Ooze — Can dissolve dirt and spoiled organic matter without harming healthy living tissue."
-        ],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
-        "naturalArmorPercentage": 0
+        ]
       }
     },
     {
@@ -288,10 +224,6 @@
           "{{ traits:disease_immunity }}",
           "Sound Replay — Can record up to one hour of nearby sound and reproduce it exactly once before recording again."
         ],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 20
       }
     },
@@ -304,12 +236,7 @@
       },
       "generation": {
         "statProfile": "creature-companion",
-        "traits": ["{{ traits:gliding }}"],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
-        "naturalArmorPercentage": 0
+        "traits": ["{{ traits:gliding }}"]
       }
     },
     {
@@ -321,12 +248,7 @@
       },
       "generation": {
         "statProfile": "creature-companion",
-        "traits": ["{{ traits:flight }}", "{{ traits:echolocation }}"],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
-        "naturalArmorPercentage": 0
+        "traits": ["{{ traits:flight }}", "{{ traits:echolocation }}"]
       }
     },
     {
@@ -338,12 +260,7 @@
       },
       "generation": {
         "statProfile": "creature-companion",
-        "traits": ["{{ traits:amphibious }}", "{{ traits:aquatic_speed }}"],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
-        "naturalArmorPercentage": 0
+        "traits": ["{{ traits:amphibious }}", "{{ traits:aquatic_speed }}"]
       }
     },
     {
@@ -355,12 +272,7 @@
       },
       "generation": {
         "statProfile": "creature-companion-magic",
-        "traits": ["{{ traits:flight }}", "{{ traits:natural_weapons }}"],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
-        "naturalArmorPercentage": 0
+        "traits": ["{{ traits:flight }}", "{{ traits:natural_weapons }}"]
       }
     },
     {
@@ -375,12 +287,7 @@
         "traits": [
           "{{ traits:swift_reflexes }}",
           "Short Blink — Once per turn when startled or attacked, may teleport up to 3 meters to an open space it can see."
-        ],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
-        "naturalArmorPercentage": 0
+        ]
       }
     },
     {
@@ -403,16 +310,13 @@
             "level": 1
           }
         ],
-        "statusEffects": [],
-        "equipment": [],
         "inventory": [
           {
             "generator": "supplies",
             "entry": "writing_kit",
             "select": "fields"
           }
-        ],
-        "naturalArmorPercentage": 0
+        ]
       }
     },
     {
@@ -424,12 +328,7 @@
       },
       "generation": {
         "statProfile": "creature-companion-magic",
-        "traits": ["{{ traits:incorporeal }}"],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
-        "naturalArmorPercentage": 0
+        "traits": ["{{ traits:incorporeal }}"]
       }
     },
     {
@@ -443,12 +342,7 @@
         "statProfile": "creature-companion-magic",
         "traits": [
           "Mist Veil — Once per scene, creates a 2-meter cloud that conceals one creature until the start of its next turn."
-        ],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
-        "naturalArmorPercentage": 0
+        ]
       }
     },
     {
@@ -464,10 +358,6 @@
           "{{ traits:stone_body }}",
           "Masonry Sense — +2 to Perception actions made to locate tunnels, cavities, or weaknesses in worked stone."
         ],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 20
       }
     },
@@ -480,12 +370,7 @@
       },
       "generation": {
         "statProfile": "creature-companion-magic",
-        "traits": ["{{ traits:flight }}", "{{ traits:magic_sense }}"],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
-        "naturalArmorPercentage": 0
+        "traits": ["{{ traits:flight }}", "{{ traits:magic_sense }}"]
       }
     },
     {
@@ -500,12 +385,7 @@
         "traits": [
           "{{ traits:flight }}",
           "Keen Sight — +2 to Perception actions that rely on vision at long range."
-        ],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
-        "naturalArmorPercentage": 0
+        ]
       }
     },
     {
@@ -522,10 +402,6 @@
           "{{ traits:disease_immunity }}",
           "Animated Armor — Does not need to eat, drink, breathe, or sleep."
         ],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 35
       }
     },
@@ -539,10 +415,6 @@
       "generation": {
         "statProfile": "creature-companion",
         "traits": ["{{ traits:charge }}"],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 5
       }
     },
@@ -556,10 +428,6 @@
       "generation": {
         "statProfile": "creature-companion",
         "traits": ["{{ traits:sure_footed }}"],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 5
       }
     },
@@ -573,10 +441,6 @@
       "generation": {
         "statProfile": "creature-companion",
         "traits": ["{{ traits:sure_footed }}", "{{ traits:powerful_build }}"],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 5
       }
     },
@@ -593,10 +457,6 @@
           "{{ traits:powerful_build }}",
           "Desert Endurance — +2 to Constitution actions made to endure ordinary heat, thirst, or long desert travel."
         ],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 5
       }
     },
@@ -613,12 +473,7 @@
           "{{ traits:flight }}",
           "{{ traits:keen_hearing }}",
           "{{ traits:darkvision }}"
-        ],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
-        "naturalArmorPercentage": 0
+        ]
       }
     },
     {
@@ -633,12 +488,7 @@
         "traits": [
           "{{ traits:flight }}",
           "Clever Forager — +2 to Perception actions made to locate hidden food or small unattended objects."
-        ],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
-        "naturalArmorPercentage": 0
+        ]
       }
     },
     {
@@ -653,12 +503,7 @@
         "traits": [
           "{{ traits:flight }}",
           "Perfect Mimicry — Can reproduce any short phrase or familiar voice it has heard clearly."
-        ],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
-        "naturalArmorPercentage": 0
+        ]
       }
     },
     {
@@ -670,12 +515,7 @@
       },
       "generation": {
         "statProfile": "creature-companion",
-        "traits": ["{{ traits:amphibious }}"],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
-        "naturalArmorPercentage": 0
+        "traits": ["{{ traits:amphibious }}"]
       }
     }
   ]

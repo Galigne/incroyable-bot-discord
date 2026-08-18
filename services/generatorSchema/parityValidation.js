@@ -70,19 +70,21 @@ function validateGeneratorPair(
 			);
 		}
 		if (isCreatureDetailGenerator(english.id, options)) {
-			validateCreatureGenerationPair(
+			validateGenerationPair(
 				englishEntry.generation,
 				frenchEntry.generation,
 				file,
 				index,
+				'traits',
 			);
 		}
 		if (isBackgroundArchetypeGenerator(english.id, options)) {
-			assertParity(
+			validateGenerationPair(
 				englishEntry.generation,
 				frenchEntry.generation,
 				file,
-				`entries.${index}.generation`,
+				index,
+				'talents',
 			);
 		}
 	}
@@ -129,8 +131,11 @@ function validateFieldsPair(
 	}
 }
 
-function validateCreatureGenerationPair(english, french, file, index) {
+function validateGenerationPair(english, french, file, index, templateProperty) {
 	const location = `entries.${index}.generation`;
+	if (english === undefined && french === undefined) {
+		return;
+	}
 	const functionalProperties = [
 		'statProfile',
 		'naturalArmorPercentage',
@@ -145,13 +150,25 @@ function validateCreatureGenerationPair(english, french, file, index) {
 	for (const property of functionalProperties) {
 		assertParity(english[property], french[property], file, `${location}.${property}`);
 	}
-	assertParity(english.traits.length, french.traits.length, file, `${location}.traits.length`);
-	for (let traitIndex = 0; traitIndex < english.traits.length; traitIndex += 1) {
+	if (english[templateProperty] === undefined) {
+		return;
+	}
+	assertParity(
+		english[templateProperty].length,
+		french[templateProperty].length,
+		file,
+		`${location}.${templateProperty}.length`,
+	);
+	for (
+		let templateIndex = 0;
+		templateIndex < english[templateProperty].length;
+		templateIndex += 1
+	) {
 		assertParity(
-			extractInlineReferences(english.traits[traitIndex], file),
-			extractInlineReferences(french.traits[traitIndex], file),
+			extractInlineReferences(english[templateProperty][templateIndex], file),
+			extractInlineReferences(french[templateProperty][templateIndex], file),
 			file,
-			`${location}.traits.${traitIndex}.inlineReferences`,
+			`${location}.${templateProperty}.${templateIndex}.inlineReferences`,
 		);
 	}
 }

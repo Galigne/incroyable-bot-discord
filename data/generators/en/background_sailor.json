@@ -10,17 +10,11 @@
   "entries": [
     {
       "id": "sailor",
-      "name": "Sailor",
-      "generation": {
-        "statProfile": "character-balanced"
-      }
+      "name": "Sailor"
     },
     {
       "id": "fisher",
-      "name": "Fisher",
-      "generation": {
-        "statProfile": "character-balanced"
-      }
+      "name": "Fisher"
     },
     {
       "id": "pirate",

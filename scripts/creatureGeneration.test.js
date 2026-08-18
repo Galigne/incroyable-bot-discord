@@ -61,6 +61,10 @@ const {
 } = require('../services/randomCreatureGenerator');
 const { getStatProfile } = require('../services/statProfileCatalog');
 const {
+	DEFAULT_STAT_PROFILE_ID,
+	getGenerationStatProfileId,
+} = require('../services/generationMetadata');
+const {
 	createStatProfileCandidate,
 } = require('../services/statProfileCatalog');
 const { authorizeCommand } = require('../util/authorization');
@@ -111,23 +115,35 @@ test('production creature sources are strict localized types backed by profiles'
 				assert.deepEqual(Object.keys(entry.fields), ['description']);
 				assert.ok(entry.name);
 				assert.ok(entry.fields.description);
-				assert.ok(Array.isArray(entry.generation.traits));
-				assert.ok(entry.generation.traits.length <= 25);
-				assert.ok(entry.generation.traits.every(trait => (
-					typeof trait === 'string' && trait.trim()
-				)));
-				assert.ok(Array.isArray(entry.generation.equipment));
-				assert.ok(Array.isArray(entry.generation.inventory));
+				const generation = entry.generation ?? {};
+				if (generation.traits !== undefined) {
+					assert.ok(generation.traits.length <= 25);
+					assert.ok(generation.traits.every(trait => (
+						typeof trait === 'string' && trait.trim()
+					)));
+				}
+				for (const property of [
+					'traits',
+					'fixedRules',
+					'statusEffects',
+					'modifiers',
+					'equipment',
+					'inventory',
+				]) {
+					assert.notDeepEqual(generation[property], []);
+				}
+				assert.notEqual(generation.naturalArmorPercentage, 0);
 				for (const forbidden of [
 					'statistics',
 					'resources',
 					'encumbrance',
 					'entityType',
 				]) {
-					assert.equal(Object.hasOwn(entry.generation, forbidden), false);
+					assert.equal(Object.hasOwn(generation, forbidden), false);
 				}
-				assert.ok(getStatProfile(entry.generation.statProfile));
-				profileIds.add(entry.generation.statProfile);
+				const profileId = getGenerationStatProfileId(generation);
+				assert.ok(getStatProfile(profileId));
+				profileIds.add(profileId);
 			}
 		}
 	}
@@ -153,7 +169,7 @@ test('production creature sources are strict localized types backed by profiles'
 	}
 });
 
-test('creature metadata rejects mechanical overrides and armor conflicts', () => {
+test('creature metadata rejects mechanical overrides and allows stacked armor sources', () => {
 	const { generatorId } = getCreatureFixture();
 	const validationOptions = { creatureGeneratorIds: new Set([generatorId]) };
 	const english = structuredClone(generatorCatalog.getGenerator(generatorId, 'en'));
@@ -167,14 +183,24 @@ test('creature metadata rejects mechanical overrides and armor conflicts', () =>
 	);
 
 	const armorConflict = structuredClone(english);
+	armorConflict.entries[0].generation.naturalArmorPercentage = 20;
 	armorConflict.entries[0].generation.armor = {
 		generator: 'armors',
 		entry: 'common_light_armor',
 		select: 'fields',
 	};
-	assert.throws(
+	assert.doesNotThrow(
 		() => validateGeneratorDefinition(armorConflict, '<generator>', validationOptions),
-		error => error.code === 'CREATURE_ARMOR_SOURCE_CONFLICT',
+	);
+	const characterSpecific = structuredClone(english);
+	characterSpecific.entries[0].generation.talents = [];
+	assert.throws(
+		() => validateGeneratorDefinition(
+			characterSpecific,
+			'<generator>',
+			validationOptions,
+		),
+		error => error.code === 'INVALID_GENERATOR_STRUCTURE',
 	);
 });
 
@@ -256,7 +282,7 @@ test('creature generation references require compatible target payloads', () => 
 	catalog.set(generatorId, detail);
 	assert.throws(
 		() => validateGeneratorRelationships(catalog),
-		error => error.code === 'INVALID_CREATURE_REFERENCE_TARGET',
+		error => error.code === 'INVALID_GENERATION_REFERENCE_TARGET',
 	);
 });
 
@@ -434,7 +460,7 @@ test('generated creature saves persist only final trait strings', async () => {
 		getCreatureSavePath(generated.key),
 		'utf8',
 	));
-	assert.equal(persisted.schemaVersion, 3);
+	assert.equal(persisted.schemaVersion, 4);
 	assert.deepEqual(persisted.traits, generated.traits);
 	assert.ok(persisted.traits.every(trait => (
 		typeof trait === 'string' && !trait.includes('{{')
@@ -532,7 +558,7 @@ test('natural armor, generated armor, status, and weighted gear resolve to final
 		'cinder_drake',
 		{ level: 5 },
 	);
-	assert.deepEqual(cinderDrake.naturalArmor, { percentage: 15 });
+	assert.equal(Object.hasOwn(cinderDrake, 'naturalArmor'), false);
 	assert.equal(
 		cinderDrake.resources.ar.max,
 		calculateArmorRating(cinderDrake.resources.hp.max, 15),
@@ -550,7 +576,7 @@ test('natural armor, generated armor, status, and weighted gear resolve to final
 	);
 	const armorEntry = generatorCatalog.getGenerator('armors', 'en').entries
 		.find(entry => entry.id === 'common_heavy_armor');
-	assert.deepEqual(bellWraith.naturalArmor, { percentage: 0 });
+	assert.equal(Object.hasOwn(bellWraith, 'naturalArmor'), false);
 	assert.equal(
 		bellWraith.resources.ar.max,
 		calculateArmorRating(
@@ -574,6 +600,91 @@ test('natural armor, generated armor, status, and weighted gear resolve to final
 	for (const creature of [cinderDrake, bellWraith, mule]) {
 		assert.deepEqual(creature.gear.encumbrance, { current: 0, max: 0 });
 	}
+
+	const { type, generatorId } = getCreatureFixture();
+	const detail = structuredClone(generatorCatalog.getGenerator(generatorId, 'en'));
+	const entry = detail.entries[0];
+	entry.generation = {
+		statProfile: entry.generation.statProfile,
+		naturalArmorPercentage: 20,
+		traits: [],
+		fixedRules: [],
+		statusEffects: [],
+		modifiers: [],
+		armor: {
+			generator: 'armors',
+			entry: 'common_light_armor',
+			select: 'fields',
+		},
+		equipment: [{
+			generator: 'shields',
+			entry: 'common_buckler',
+			select: 'display',
+		}],
+		inventory: [{
+			generator: 'shields',
+			entry: 'wooden_shield',
+			select: 'fields',
+		}],
+	};
+	const stacked = populateRandomCreature(
+		new Creature('Generated.Stacked.Armor', 'creator'),
+		{
+			getGenerator: (requestedId, locale) => (
+				requestedId === generatorId
+					? detail
+					: generatorCatalog.getGenerator(requestedId, locale)
+			),
+			level: 5,
+			random: sequenceRandom([getEntryMidpoint(type, entry.id)], 0.5),
+			type,
+		},
+	);
+	assert.deepEqual(stacked.traits, []);
+	assert.deepEqual(stacked.rules, []);
+	assert.deepEqual(stacked.status.effects, []);
+	assert.deepEqual(stacked.status.modifiers, []);
+	assert.equal(stacked.gear.equipment.length, 2);
+	assert.equal(stacked.gear.inventory.length, 1);
+	assert.equal(
+		stacked.resources.ar.max,
+		calculateArmorRating(stacked.resources.hp.max, 30),
+	);
+	assert.equal(Object.hasOwn(stacked, 'naturalArmor'), false);
+});
+
+test('omitted creature generation metadata uses the shared default profile and normal empty categories', () => {
+	const { type, generatorId } = getCreatureFixture();
+	const detail = structuredClone(generatorCatalog.getGenerator(generatorId, 'en'));
+	const entry = detail.entries[0];
+	delete entry.generation;
+	const profileRequests = [];
+	const creature = populateRandomCreature(
+		new Creature('Generated.Default.Metadata', 'creator'),
+		{
+			getGenerator: (requestedId, locale) => (
+				requestedId === generatorId
+					? detail
+					: generatorCatalog.getGenerator(requestedId, locale)
+			),
+			getStatProfile(profileId) {
+				profileRequests.push(profileId);
+				return getStatProfile(profileId);
+			},
+			level: 3,
+			random: sequenceRandom([getEntryMidpoint(type, entry.id)], 0.99),
+			type,
+		},
+	);
+	assert.deepEqual(profileRequests, [DEFAULT_STAT_PROFILE_ID]);
+	assert.equal(creature.source.statProfileId, DEFAULT_STAT_PROFILE_ID);
+	assert.deepEqual(creature.traits, []);
+	assert.deepEqual(creature.rules, []);
+	assert.deepEqual(creature.status.effects, []);
+	assert.deepEqual(creature.status.modifiers, []);
+	assert.deepEqual(creature.gear.equipment, []);
+	assert.deepEqual(creature.gear.inventory, []);
+	assert.deepEqual(creature.resources.ar, { current: 0, max: 0 });
 });
 
 test('descriptive modifiers cannot change mechanical generation results', () => {
@@ -624,7 +735,6 @@ test('descriptive modifiers cannot change mechanical generation results', () => 
 	assert.equal(modified.status.modifiers.length, 1);
 	for (const property of [
 		'level',
-		'naturalArmor',
 		'statistics',
 		'resources',
 		'traits',
@@ -995,7 +1105,7 @@ function getCreatureRepresentatives(locale = 'en') {
 		const generatorId = getCreatureGeneratorId(type, locale);
 		const generator = generatorCatalog.getGenerator(generatorId, locale);
 		for (const entry of generator.entries) {
-			const profileId = entry.generation.statProfile;
+			const profileId = getGenerationStatProfileId(entry.generation);
 			if (!profileIds.has(profileId)) {
 				profileIds.add(profileId);
 				representatives.push([type, entry.id]);
@@ -1019,18 +1129,25 @@ function sequenceRandom(values, fallback = 0.5) {
 }
 
 function getArmorPercentage(creature) {
-	if (creature.naturalArmor.percentage > 0) {
-		return creature.naturalArmor.percentage;
+	const sourceEntry = generatorCatalog
+		.getGenerator(creature.source.generatorId, 'en')
+		.entries.find(entry => entry.id === creature.source.entryId);
+	let percentage = sourceEntry.generation?.naturalArmorPercentage ?? 0;
+	for (const record of creature.source.provenance) {
+		if (
+			record.type !== 'entry'
+			|| !record.entryId
+			|| !/^root\.generation\.(?:armor|equipment)/.test(record.path)
+		) {
+			continue;
+		}
+		const gearEntry = generatorCatalog.getGenerator(record.generatorId, 'en')
+			?.entries.find(entry => entry.id === record.entryId);
+		if (Number.isFinite(gearEntry?.fields?.['ar_percentage'])) {
+			percentage += gearEntry.fields['ar_percentage'];
+		}
 	}
-	const armorSelection = creature.source.provenance.find(record => (
-		record.generatorId === 'armors'
-	));
-	if (!armorSelection) {
-		return 0;
-	}
-	return generatorCatalog.getGenerator('armors', 'en').entries
-		.find(entry => entry.id === armorSelection.entryId)
-		.fields['ar_percentage'];
+	return percentage;
 }
 
 function createDetailResolver(generatorId, result, modifierResult) {

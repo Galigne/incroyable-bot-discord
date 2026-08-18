@@ -22,6 +22,10 @@ const {
 	parseWrappedInlineReference,
 } = require('../services/generatorSchema/referenceValidation');
 const { BASE_STATS } = require('../services/mechanics/constants');
+const {
+	DEFAULT_STAT_PROFILE_ID,
+	getGenerationStatProfileId,
+} = require('../services/generationMetadata');
 const statProfileCatalog = require('../services/statProfileCatalog');
 const {
 	getEntryWeight,
@@ -29,7 +33,7 @@ const {
 } = require('../services/weightedSelector');
 const { getCommandOptionValues } = require('../util/commandOptionValues');
 
-test('background archetypes define strict localized profile metadata', () => {
+test('background archetypes define optional localized generation metadata', () => {
 	const catalogs = generatorCatalog.createGeneratorCatalogCandidate();
 	const profiles = statProfileCatalog.createStatProfileCandidate();
 	const usedProfileIds = new Set();
@@ -49,19 +53,22 @@ test('background archetypes define strict localized profile metadata', () => {
 			french.entries.map(entry => entry.id),
 		);
 		for (const [index, entry] of english.entries.entries()) {
-			assert.deepEqual(Object.keys(entry.generation), ['statProfile']);
+			assert.deepEqual(Object.keys(entry.generation ?? {}), entry.generation
+				? ['statProfile']
+				: []);
 			assert.deepEqual(entry.generation, french.entries[index].generation);
-			assert.ok(profiles.has(entry.generation.statProfile));
-			usedProfileIds.add(entry.generation.statProfile);
+			const profileId = getGenerationStatProfileId(entry.generation);
+			assert.ok(profiles.has(profileId));
+			usedProfileIds.add(profileId);
 		}
 	}
 	assert.deepEqual([...usedProfileIds].sort(), [
-		'character-balanced',
 		'character-cleric',
 		'character-diplomat',
 		'character-fighter',
 		'character-mage',
 		'character-rogue',
+		DEFAULT_STAT_PROFILE_ID,
 	]);
 	const militaryProfiles = new Map(
 		catalogs.get('en').get('military').entries.map(entry => [
@@ -79,7 +86,7 @@ test('background archetypes define strict localized profile metadata', () => {
 	);
 });
 
-test('background metadata rejects missing, creature-specific, mismatched, and unknown profiles', () => {
+test('background metadata supports optional shared overrides and rejects traits or invalid profiles', () => {
 	const catalogs = generatorCatalog.createGeneratorCatalogCandidate();
 	const generatorId = catalogs.get('en').get('background').entries[0].generator;
 	const validationOptions = { backgroundGeneratorIds: new Set([generatorId]) };
@@ -90,12 +97,34 @@ test('background metadata rejects missing, creature-specific, mismatched, and un
 
 	const missing = structuredClone(english);
 	delete missing.entries[0].generation;
-	assert.throws(
+	assert.doesNotThrow(
 		() => validateGeneratorDefinition(missing, '<generator>', validationOptions),
-		error => error.name === 'GeneratorSchemaError',
 	);
 
-	const creatureSpecific = structuredClone(english);
+	const sharedOverrides = structuredClone(english);
+	sharedOverrides.entries[0].generation = {
+		naturalArmorPercentage: 20,
+		talents: ['{{ talents:athlete }}'],
+		fixedRules: [],
+		statusEffects: [],
+		modifiers: [],
+		armor: {
+			generator: 'armors',
+			entry: 'common_light_armor',
+			select: 'fields',
+		},
+		equipment: [],
+		inventory: [],
+	};
+	assert.doesNotThrow(
+		() => validateGeneratorDefinition(
+			sharedOverrides,
+			'<generator>',
+			validationOptions,
+		),
+	);
+
+	const creatureSpecific = structuredClone(sharedOverrides);
 	creatureSpecific.entries[0].generation.traits = [];
 	assert.throws(
 		() => validateGeneratorDefinition(
@@ -105,21 +134,61 @@ test('background metadata rejects missing, creature-specific, mismatched, and un
 		),
 		error => error.name === 'GeneratorSchemaError',
 	);
-	const creatureProfile = structuredClone(english);
-	creatureProfile.entries[0].generation.statProfile = 'creature-brute';
+	const invalidProfile = structuredClone(english);
+	invalidProfile.entries[0].generation = { statProfile: 'Invalid profile' };
 	assert.throws(
 		() => validateGeneratorDefinition(
-			creatureProfile,
+			invalidProfile,
 			'<generator>',
 			validationOptions,
 		),
-		error => error.code === 'INVALID_BACKGROUND_STAT_PROFILE',
+		error => error.code === 'INVALID_GENERATION_STAT_PROFILE',
+	);
+	const englishTalents = structuredClone(english);
+	const frenchTalents = structuredClone(french);
+	englishTalents.entries[0].generation = {
+		talents: ['Gifted: {{ talents:athlete }}'],
+	};
+	frenchTalents.entries[0].generation = {
+		talents: ['Doué : {{ talents:athlete }}'],
+	};
+	assert.doesNotThrow(() => validateGeneratorPair(
+		englishTalents,
+		frenchTalents,
+		'<generator>',
+		validationOptions,
+	));
+	frenchTalents.entries[0].generation.talents = [
+		'Doué : {{ talents:keen_eye }}',
+	];
+	assert.throws(
+		() => validateGeneratorPair(
+			englishTalents,
+			frenchTalents,
+			'<generator>',
+			validationOptions,
+		),
+		error => error.code === 'GENERATOR_LOCALE_PARITY_MISMATCH',
 	);
 
-	const originalProfileId = french.entries[0].generation.statProfile;
-	french.entries[0].generation.statProfile = originalProfileId === 'character-balanced'
-		? 'character-fighter'
-		: 'character-balanced';
+	const relationshipCatalog = new Map(catalogs.get('en'));
+	const invalidRelationships = structuredClone(
+		relationshipCatalog.get(generatorId),
+	);
+	invalidRelationships.entries[0].generation = {
+		statusEffects: [{ generator: 'faction', select: 'fields' }],
+	};
+	relationshipCatalog.set(generatorId, invalidRelationships);
+	assert.throws(
+		() => validateGeneratorRelationships(relationshipCatalog),
+		error => error.code === 'INVALID_GENERATION_REFERENCE_TARGET',
+	);
+
+	const explicitIndex = french.entries.findIndex(entry => entry.generation?.statProfile);
+	const originalProfileId = french.entries[explicitIndex].generation.statProfile;
+	french.entries[explicitIndex].generation.statProfile = originalProfileId === 'character-fighter'
+		? 'character-rogue'
+		: 'character-fighter';
 	assert.throws(
 		() => validateGeneratorPair(
 			english,
@@ -130,10 +199,8 @@ test('background metadata rejects missing, creature-specific, mismatched, and un
 		error => error.code === 'GENERATOR_LOCALE_PARITY_MISMATCH',
 	);
 
-	const missingProfileId = catalogs.get('en').get(generatorId)
-		.entries[0].generation.statProfile;
 	const profiles = statProfileCatalog.createStatProfileCandidate();
-	profiles.delete(missingProfileId);
+	profiles.delete(DEFAULT_STAT_PROFILE_ID);
 	assert.throws(
 		() => validateBackgroundStatProfileRelationships(catalogs, profiles),
 		error => error.code === 'BACKGROUND_STAT_PROFILE_MISSING',
@@ -729,23 +796,23 @@ test('weighted selection honors default weights and deterministic boundaries', (
 	);
 });
 
-test('statistical profile catalog validates and caches the balanced profile', () => {
-	const balanced = statProfileCatalog.getStatProfile('character-balanced');
-	assert.equal(balanced.id, 'character-balanced');
-	assert.deepEqual(Object.keys(balanced.minimums), BASE_STATS);
+test('statistical profile catalog validates and caches the default profile', () => {
+	const defaultProfile = statProfileCatalog.getStatProfile(DEFAULT_STAT_PROFILE_ID);
+	assert.equal(defaultProfile.id, DEFAULT_STAT_PROFILE_ID);
+	assert.deepEqual(Object.keys(defaultProfile.minimums), BASE_STATS);
 	assert.ok(BASE_STATS.every(stat => (
-		balanced.minimums[stat] === 4
-		&& balanced.maximums[stat] === 20
-		&& balanced.weights[stat] === 1
+		defaultProfile.minimums[stat] === 4
+		&& defaultProfile.maximums[stat] === 20
+		&& defaultProfile.weights[stat] === 1
 	)));
 	assert.equal(
-		statProfileCatalog.getStatProfile('character-balanced'),
-		balanced,
+		statProfileCatalog.getStatProfile(DEFAULT_STAT_PROFILE_ID),
+		defaultProfile,
 	);
 	statProfileCatalog.clearStatProfileCache();
 	assert.notEqual(
-		statProfileCatalog.getStatProfile('character-balanced'),
-		balanced,
+		statProfileCatalog.getStatProfile(DEFAULT_STAT_PROFILE_ID),
+		defaultProfile,
 	);
 
 	const valid = createStatProfileDocument();

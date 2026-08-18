@@ -46,6 +46,7 @@ const {
 const generatorCatalog = require('../services/generatorCatalog');
 const generatorResolver = require('../services/generatorResolver');
 const { getStatProfile } = require('../services/statProfileCatalog');
+const { DEFAULT_STAT_PROFILE_ID } = require('../services/generationMetadata');
 const {
 	createLocalizedCharacterGenerationOptions,
 } = require('../util/characterGenerationLocalization');
@@ -156,7 +157,7 @@ test('statistics and derived-stat recalculation preserve existing values', () =>
 	};
 	const generated = generateStats({
 		level: 10,
-		profile: getStatProfile('character-balanced'),
+		profile: getStatProfile(DEFAULT_STAT_PROFILE_ID),
 		random,
 	});
 	assert.deepEqual(generated, {
@@ -676,6 +677,102 @@ test('random character generation creates localized unique talent arrays by leve
 	});
 	assert.match(englishCharacter.talents[0], /^Athlete —/);
 	assert.match(frenchCharacter.talents[0], /^Athlète —/);
+});
+
+test('character generation metadata replaces normal categories and stacks equipped AR', () => {
+	const backgroundRoute = generatorCatalog.getGenerator('background', 'en').entries
+		.find(route => generatorCatalog.getGenerator(route.generator, 'en').entries
+			.some(entry => entry.generation === undefined));
+	const backgroundGenerator = structuredClone(
+		generatorCatalog.getGenerator(backgroundRoute.generator, 'en'),
+	);
+	const archetype = backgroundGenerator.entries.find(entry => (
+		entry.generation === undefined
+	));
+	archetype.generation = {
+		naturalArmorPercentage: 20,
+		talents: ['Gifted: {{ talents:athlete }}'],
+		fixedRules: [{ entry: 'thread_rule', level: 2 }],
+		statusEffects: [{
+			generator: 'status_effect',
+			entry: 'bruised',
+			select: 'fields',
+		}],
+		modifiers: [{
+			generator: 'modifier_character',
+			entry: 'scarred',
+			select: 'fields',
+		}],
+		armor: {
+			generator: 'armors',
+			entry: 'common_light_armor',
+			select: 'fields',
+		},
+		equipment: [{
+			generator: 'shields',
+			entry: 'common_buckler',
+			select: 'display',
+		}],
+		inventory: [{
+			generator: 'shields',
+			entry: 'wooden_shield',
+			select: 'fields',
+		}],
+	};
+	const profileRequests = [];
+	const resolver = {
+		generate(path, locale, options) {
+			if (path === `background:${backgroundRoute.id}.generator`) {
+				return {
+					generatorId: backgroundGenerator.id,
+					entryId: archetype.id,
+					outputType: 'value',
+					value: archetype.name,
+					provenance: [],
+					modifiers: [],
+				};
+			}
+			return generatorResolver.generate(path, locale, options);
+		},
+		resolveInlineReference: generatorResolver.resolveInlineReference,
+		resolveInlineString: generatorResolver.resolveInlineString,
+		resolveReference: generatorResolver.resolveReference,
+	};
+	const character = createCharacterFixture();
+	populateRandomCharacter(character, {
+		background: backgroundRoute.id,
+		getGenerator: (generatorId, locale) => (
+			generatorId === backgroundGenerator.id
+				? backgroundGenerator
+				: generatorCatalog.getGenerator(generatorId, locale)
+		),
+		getStatProfile(profileId) {
+			profileRequests.push(profileId);
+			return getStatProfile(profileId);
+		},
+		level: 5,
+		locale: 'en',
+		random: () => 0,
+		resolver,
+	});
+
+	assert.deepEqual(profileRequests, [DEFAULT_STAT_PROFILE_ID]);
+	assert.deepEqual(character.rules.map(rule => [rule.name, rule.level]), [
+		['Thread RULE', 2],
+	]);
+	assert.equal(character.talents.length, 1);
+	assert.match(character.talents[0], /^Gifted: Athlete —/);
+	assert.deepEqual(character.status.effects.map(effect => effect.entryId), ['bruised']);
+	assert.deepEqual(character.status.modifiers.map(modifier => modifier.entryId), [
+		'scarred',
+	]);
+	assert.equal(character.gear.equipment.length, 2);
+	assert.equal(character.gear.inventory.length, 1);
+	assert.equal(character.gear.inventory.some(item => item.endsWith(' gold')), false);
+	assert.equal(
+		character.resources.ar.max,
+		calculateArmorRating(character.resources.hp.max, 30),
+	);
 });
 
 test('random character generation uses localized content without changing identifiers', () => {

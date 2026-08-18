@@ -45,10 +45,7 @@
     },
     {
       "id": "clerk",
-      "name": "Greffier",
-      "generation": {
-        "statProfile": "character-balanced"
-      }
+      "name": "Greffier"
     },
     {
       "id": "magistrate",

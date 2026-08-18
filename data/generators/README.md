@@ -122,15 +122,16 @@ numbers or booleans.
 Entry properties are strict. A content entry has `id`, optional `weight`, exactly
 one top-level localized `name`, and exactly one matching `fields` object when it
 declares additional fields. Content entries never contain a structural `generator`
-route. Routed background-archetype and creature-detail content entries define their
-separately validated `generation` objects. These reserved properties are functional
+route. Routed background-archetype and creature-detail content entries may define
+validated `generation` objects. These reserved properties are functional
 metadata, are never displayed as generated fields, and arbitrary extra metadata is
 rejected. The old
 `entrySchema.type`, entry `value`, and `fields.name` forms are invalid.
 
 English and French counterparts must preserve the same relative path, generator
 ID, visibility, entry schema, modifier map, entry IDs, entry order, weights,
-structural `generator` routes, functional `generation` metadata, non-string field
+structural `generator` routes, functional `generation` property presence and
+non-localized values, non-string field
 values, and inline-reference structure. Top-level entry names and ordinary string
 fields are localized.
 
@@ -262,19 +263,16 @@ with their consumers:
 - Every public `background` entry is a minimal router entry whose top-level
   `generator` route contains the direct ID of the corresponding internal name-only `<category>` generator,
   stored in `background_<category>.json`. Character generation resolves that
-  archetype and uses its required `generation.statProfile` to select one of the
-  character statistical profiles. Background `generation` contains exactly that
-  one property: creature-only traits, RULEs, status effects, modifiers, armor,
-  equipment, inventory, and similar metadata are invalid. Character generation
-  independently resolves the internal `physical_description` generator.
+  archetype and independently resolves the internal `physical_description`
+  generator.
 - The public `creature` router defines every supported `/gen-creature` type. Each
   entry's top-level `generator` property directly names an internal
   creature-detail generator whose concept ID matches the route and whose filename
   is `creature_<concept>.json`. Adding or removing router entries changes the
   available types; they are not a hard-coded enum or additional persistence types.
 - Creature-detail entries use a localized top-level `name`, an additional
-  `description` field, and the validated `generation` metadata described by the
-  schema checks. Statistical
+  `description` field, and may use the same optional `generation` override model as
+  background archetypes. Statistical
   profile IDs come from the separate non-localized `stat-profile.json` schema and
   remain kebab-case.
 - The public `loot`, `site`, `group`, and `modifier` name-only routers contain
@@ -290,17 +288,34 @@ come through the `loot` router. The internal `shields` table exposes ordinary
 `rarity` and `ar_percentage` fields, and the public `affliction` table exposes an
 ordinary localized `type` distinguishing persistent diseases from curses.
 
-Background and creature profile references are validated against the statistical
-profile catalog. Creature metadata relationships for traits, fixed RULEs, status
-effects, modifiers, armor, equipment, and inventory are also validated with the
-generator catalog. They do not define alternate entity types, formulas, or
-automatic encumbrance.
+### Character and creature generation overrides
 
-Creature-detail `generation.traits` is an array of zero to 25 non-empty template
-strings. Each item may be literal text, a complete inline reference, or ordinary
-text containing one or more inline references. The same syntax and catalog
-relationship validation described above applies; there is no trait-specific
-reference format. For example:
+The complete `generation` object is optional for both background archetypes and
+creature-detail entries. When it is present, every property inside it is optional.
+Property presence is significant: omission keeps that entity type's normal
+generation behavior, while an explicitly present value replaces the complete
+normal category. An explicit empty array therefore suppresses normal generation for
+that category. Do not keep empty arrays, zero `naturalArmorPercentage`, redundant
+`statProfile: "default"`, or an empty `generation` object in production data.
+
+Both entity types support these properties:
+
+- `statProfile`: a kebab-case ID from `stat-profile.json`; omission selects
+  `default`;
+- `naturalArmorPercentage`: a finite percentage from `0` to `100`;
+- `fixedRules`: up to 25 unique `{ "entry": "rule_id", "level": 1 }` records;
+- `statusEffects` and `modifiers`: up to 25 references selecting complete `fields`;
+- `armor`: one reference selecting complete `fields`, kept separate from
+  `equipment`;
+- `equipment` and `inventory`: up to 25 ordinary generator references each.
+
+The only concept-specific property is the localized template-string collection:
+background archetypes support `talents`, creature details support `traits`, and the
+opposite property is invalid. Both collections contain up to 25 non-empty strings.
+Each item may be literal text, a complete inline reference, or ordinary text
+containing one or more inline references. The same syntax and catalog relationship
+validation described above applies; there is no talent- or trait-specific reference
+format. For example:
 
 ```json
 "traits": [
@@ -310,11 +325,23 @@ reference format. For example:
 ]
 ```
 
-The public `traits` generator exposes reusable localized entries with a top-level
-name and additional description. Omitting the field in `{{ traits }}` or
-`{{ traits:keen_smell }}` produces the normal display string, with the name and
-rules description joined by an em dash. Creature generation resolves every
-configured template once and persists only the resulting strings. Trait rules text
-is descriptive and never applies automatic statistics, resources, effects, armor,
-or other mechanics. Trait templates and their selection metadata are not copied
-into creature saves.
+The public `talents` and `traits` generators expose reusable localized entries with
+a top-level name and additional description. Omitting the field in an inline
+reference produces the normal display string, with the name and description joined
+by an em dash. Generation resolves every configured template once into the entity's
+talent or trait string collection. This descriptive text never applies automatic
+statistics, resources, effects, armor, or other mechanics.
+
+For characters, omitting `talents`, `fixedRules`, `statusEffects`, `modifiers`,
+`armor`, `equipment`, or `inventory` preserves the existing random character
+workflow for that category. Omitted natural armor contributes `0%`. For creatures,
+omitted traits, RULEs, status effects, armor, equipment, and inventory keep their
+normal empty behavior, omitted modifiers keep the independent creature-modifier
+policy, and omitted natural armor contributes `0%`.
+
+Natural armor, the separate armor reference, and every resolved equipped item with
+a numeric `ar_percentage` all stack before AR is calculated from maximum HP.
+Inventory references never contribute AR. `naturalArmorPercentage` is generation
+metadata only: characters never persist it, and creature saves persist only the
+resulting final AR. Generation metadata relationships and functional EN/FR parity
+are validated for both concepts.

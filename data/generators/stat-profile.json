@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "profiles": [
     {
-      "id": "character-balanced",
+      "id": "default",
       "minimums": {
         "constitution": 4,
         "strength": 4,

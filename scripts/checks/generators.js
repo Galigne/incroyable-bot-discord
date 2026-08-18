@@ -7,6 +7,11 @@ const {
 	selectWeightedEntry,
 } = require('../../services/weightedSelector');
 const generatorResolver = require('../../services/generatorResolver');
+const {
+	COMMON_GENERATION_PROPERTIES,
+	DEFAULT_STAT_PROFILE_ID,
+	getGenerationStatProfileId,
+} = require('../../services/generationMetadata');
 
 module.exports = function createGeneratorChecks(context) {
 	const {
@@ -165,10 +170,11 @@ function checkBackgroundGenerators(errors, generatorCatalog) {
 			|| details.some(entry => (
 				typeof entry.name !== 'string'
 				|| !entry.name.trim()
-				|| JSON.stringify(Object.keys(entry.generation ?? {})) !== JSON.stringify([
-					'statProfile',
-				])
-				|| !getStatProfile(entry.generation.statProfile)
+				|| Object.keys(entry.generation ?? {}).some(property => (
+					![...COMMON_GENERATION_PROPERTIES, 'talents'].includes(property)
+				))
+				|| Object.hasOwn(entry.generation ?? {}, 'traits')
+				|| !getStatProfile(getGenerationStatProfileId(entry.generation))
 			))
 		) {
 			errors.push(`Invalid routed background generator: ${background.id ?? 'unknown'}.`);
@@ -277,7 +283,9 @@ function checkCreatureGenerators(errors, generatorCatalog) {
 			|| generatorId !== route.id
 			|| !generator
 			|| generator.visibility !== 'internal'
-			|| generator.entries.some(entry => !entry.generation)
+			|| generator.entries.some(entry => (
+				Object.hasOwn(entry.generation ?? {}, 'talents')
+			))
 		) {
 			errors.push(`Invalid routed creature generator: ${generatorId}.`);
 		}
@@ -432,12 +440,12 @@ function checkGeneratorResponses(errors, generatorCatalog, weightedEntries) {
 
 function checkStatProfiles(errors) {
 	const profiles = listStatProfiles();
-	const balanced = getStatProfile('character-balanced');
+	const defaultProfile = getStatProfile(DEFAULT_STAT_PROFILE_ID);
 	if (
 		profiles.length === 0
-		|| profiles.filter(profile => profile.id === 'character-balanced').length !== 1
-		|| balanced !== getStatProfile('character-balanced')
+		|| profiles.filter(profile => profile.id === DEFAULT_STAT_PROFILE_ID).length !== 1
+		|| defaultProfile !== getStatProfile(DEFAULT_STAT_PROFILE_ID)
 	) {
-		errors.push('The balanced statistical profile is missing or is not cached.');
+		errors.push('The default statistical profile is missing or is not cached.');
 	}
 }

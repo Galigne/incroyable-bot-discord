@@ -10,10 +10,7 @@
   "entries": [
     {
       "id": "student",
-      "name": "Student",
-      "generation": {
-        "statProfile": "character-balanced"
-      }
+      "name": "Student"
     },
     {
       "id": "researcher",
@@ -24,10 +21,7 @@
     },
     {
       "id": "scribe",
-      "name": "Scribe",
-      "generation": {
-        "statProfile": "character-balanced"
-      }
+      "name": "Scribe"
     },
     {
       "id": "librarian",

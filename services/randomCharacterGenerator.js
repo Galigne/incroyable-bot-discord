@@ -3,6 +3,18 @@ const generatorResolver = require('./generatorResolver');
 const {
 	maybeGenerateDescriptiveModifiers,
 } = require('./descriptiveModifierGenerator');
+const {
+	getGenerationMetadata,
+	getGenerationStatProfileId,
+	hasGenerationOverride,
+} = require('./generationMetadata');
+const {
+	resolveArmorReference,
+	resolveDescribedReferences,
+	resolveFixedRules,
+	resolveGearReferences,
+	resolveGenerationTemplates,
+} = require('./generationReferenceResolver');
 const { getStatProfile } = require('./statProfileCatalog');
 const { selectWeightedEntry } = require('./weightedSelector');
 const {
@@ -28,6 +40,8 @@ function populateRandomCharacter(character, options = {}) {
 	const locale = options.locale ?? 'en';
 	const formatGold = options.formatGold ?? (gold => `${gold} gold`);
 	const resolver = options.resolver ?? generatorResolver;
+	const getGenerator = options.getGenerator ?? generatorCatalog.getGenerator;
+	const getProfile = options.getStatProfile ?? getStatProfile;
 	generatorResolver.assertGeneratorResolverInterface(resolver);
 	const level = options.level ?? randomInteger(1, 10, random);
 	if (!Number.isInteger(level) || level < 1 || level > 10) {
@@ -61,18 +75,28 @@ function populateRandomCharacter(character, options = {}) {
 			{ category: background.id },
 		);
 	}
+	const archetype = getArchetypeEntry(archetypeResult, locale, getGenerator);
+	const generation = getGenerationMetadata(archetype);
 	const physicalDescriptionResult = resolver.resolveInlineReference(
 		'{{ physical_description.description }}',
 		locale,
 		{ path: 'root.character.background.physicalDescription', random },
 	);
-	const backgroundModifiers = maybeGenerateDescriptiveModifiers({
-		generator: 'modifier_character',
-		resolver,
-		locale,
-		random,
-		path: 'root.character.modifier',
-	});
+	const backgroundModifiers = hasGenerationOverride(generation, 'modifiers')
+		? resolveDescribedReferences(generation.modifiers, {
+			createError: generationError,
+			locale,
+			path: 'root.generation.modifiers',
+			random,
+			resolver,
+		})
+		: maybeGenerateDescriptiveModifiers({
+			generator: 'modifier_character',
+			resolver,
+			locale,
+			random,
+			path: 'root.character.modifier',
+		});
 	character.background.archetype = getResolvedTextValue(archetypeResult);
 	character.background.physicalDescription = getResolvedTextValue(
 		physicalDescriptionResult,
@@ -82,8 +106,8 @@ function populateRandomCharacter(character, options = {}) {
 
 	character.personality.traits = pickMany('personality', 2, locale, random)
 		.map(entry => getField(entry, 'description'));
-	const statProfileId = getArchetypeStatProfileId(archetypeResult, locale);
-	const profile = getStatProfile(statProfileId);
+	const statProfileId = getGenerationStatProfileId(generation);
+	const profile = getProfile(statProfileId);
 	if (!profile) {
 		throw generationError(
 			`Missing statistical profile: ${statProfileId}.`,
@@ -93,82 +117,154 @@ function populateRandomCharacter(character, options = {}) {
 	}
 	character.statistics = generateStats({ level, profile, random });
 
-	const rulePointCount = calculateRulePoints(character.statistics.intelligence);
-	const ruleLevels = allocateRuleLevels(rulePointCount);
-	character.rules = pickMany('rules', ruleLevels.length, locale, random)
-		.map((entry, index) => ({
-			name: getField(entry, 'name'),
-			description: getField(entry, 'description'),
-			level: ruleLevels[index],
-		}));
+	if (hasGenerationOverride(generation, 'fixedRules')) {
+		character.rules = resolveFixedRules(generation.fixedRules, {
+			createError: generationError,
+			locale,
+			path: 'root.generation.fixedRules',
+			random,
+			resolver,
+		}).rules;
+	}
+	else {
+		const rulePointCount = calculateRulePoints(character.statistics.intelligence);
+		const ruleLevels = allocateRuleLevels(rulePointCount);
+		character.rules = pickMany('rules', ruleLevels.length, locale, random)
+			.map((entry, index) => ({
+				name: getField(entry, 'name'),
+				description: getField(entry, 'description'),
+				level: ruleLevels[index],
+			}));
+	}
 
-	const talentCount = calculateTalentCount(level);
-	character.talents = pickMany('talents', talentCount, locale, random)
-		.map(entry => `${getField(entry, 'name')} — ${getField(entry, 'description')}`);
+	if (hasGenerationOverride(generation, 'talents')) {
+		character.talents = resolveGenerationTemplates(generation.talents, {
+			locale,
+			path: 'root.generation.talents',
+			random,
+			resolver,
+		});
+	}
+	else {
+		const talentCount = calculateTalentCount(level);
+		character.talents = pickMany('talents', talentCount, locale, random)
+			.map(entry => (
+				`${getField(entry, 'name')} — ${getField(entry, 'description')}`
+			));
+	}
 
-	character.status.effects = random() < 0.25
-		? [createDescribedRecord(pickOne('status_effect', locale, random))]
-		: [];
+	character.status.effects = hasGenerationOverride(generation, 'statusEffects')
+		? resolveDescribedReferences(generation.statusEffects, {
+			createError: generationError,
+			locale,
+			path: 'root.generation.statusEffects',
+			random,
+			resolver,
+		})
+		: (
+			random() < 0.25
+				? [createDescribedRecord(pickOne('status_effect', locale, random))]
+				: []
+		);
 
-	const armor = pickOne(
-		'armors',
-		locale,
-		random,
-		entry => canEquipArmor(
-			character.statistics.constitution,
-			getField(entry, 'constitution_requirement'),
-		),
-	);
-	const mainEquipmentCount = randomInteger(1, 2, random);
-	const mainEquipment = pickMainEquipment(
-		mainEquipmentCount,
-		locale,
-		random,
-	);
-	const inventoryItems = pickCarriedLoot(
-		CARRIED_LOOT_COUNT,
-		locale,
-		random,
-		resolver,
-	);
-	const armorPercentage = calculateGeneratedArmorPercentage(
-		armor,
-		mainEquipment,
-	);
+	let armorPercentage = generation.naturalArmorPercentage ?? 0;
+	let armorValue;
+	if (hasGenerationOverride(generation, 'armor')) {
+		const resolvedArmor = resolveArmorReference(generation.armor, {
+			createError: generationError,
+			locale,
+			path: 'root.generation.armor',
+			random,
+			resolver,
+		});
+		armorPercentage += resolvedArmor.armorPercentage;
+		armorValue = resolvedArmor.value;
+	}
+	else {
+		const armor = pickOne(
+			'armors',
+			locale,
+			random,
+			entry => canEquipArmor(
+				character.statistics.constitution,
+				getField(entry, 'constitution_requirement'),
+			),
+		);
+		armorPercentage += Number(getField(armor, 'ar_percentage'));
+		armorValue = formatNamedEntry(armor);
+	}
+
+	let equipmentValues;
+	if (hasGenerationOverride(generation, 'equipment')) {
+		const resolvedEquipment = resolveGearReferences(generation.equipment, {
+			createError: generationError,
+			locale,
+			path: 'root.generation.equipment',
+			random,
+			resolver,
+		});
+		armorPercentage += resolvedEquipment.armorPercentage;
+		equipmentValues = resolvedEquipment.values;
+	}
+	else {
+		const mainEquipmentCount = randomInteger(1, 2, random);
+		const mainEquipment = pickMainEquipment(
+			mainEquipmentCount,
+			locale,
+			random,
+		);
+		armorPercentage += mainEquipment.reduce((total, item) => (
+			item.generatorId === 'shields'
+				? total + Number(getField(item.entry, 'ar_percentage'))
+				: total
+		), 0);
+		equipmentValues = mainEquipment.map(item => formatNamedEntry(item.entry));
+	}
+
+	let inventoryItems;
+	if (hasGenerationOverride(generation, 'inventory')) {
+		inventoryItems = resolveGearReferences(generation.inventory, {
+			createError: generationError,
+			locale,
+			path: 'root.generation.inventory',
+			random,
+			resolver,
+		}).values;
+	}
+	else {
+		inventoryItems = pickCarriedLoot(
+			CARRIED_LOOT_COUNT,
+			locale,
+			random,
+			resolver,
+		);
+		const gold = level * randomInteger(1, 20, random) + 5;
+		inventoryItems.push(formatGold(gold));
+	}
 
 	Object.assign(character.resources, createGeneratedResources(
 		character.statistics,
 		level,
 		armorPercentage,
 	));
-	character.gear.equipment = [
-		formatNamedEntry(armor),
-		...mainEquipment.map(item => formatNamedEntry(item.entry)),
-	];
-
-	const gold = level * randomInteger(1, 20, random) + 5;
-	character.gear.inventory = [
-		...inventoryItems,
-		formatGold(gold),
-	];
+	character.gear.equipment = [armorValue, ...equipmentValues];
+	character.gear.inventory = inventoryItems;
 	character.status.modifiers = backgroundModifiers.map(modifier => structuredClone(modifier));
 
 	return character;
 }
 
-function getArchetypeStatProfileId(archetypeResult, locale) {
-	const archetype = generatorCatalog
-		.getGenerator(archetypeResult.generatorId, locale)
+function getArchetypeEntry(archetypeResult, locale, getGenerator) {
+	const archetype = getGenerator(archetypeResult.generatorId, locale)
 		?.entries.find(entry => entry.id === archetypeResult.entryId);
-	const statProfileId = archetype?.generation?.statProfile;
-	if (typeof statProfileId !== 'string' || !statProfileId) {
+	if (!archetype) {
 		throw generationError(
-			'Selected background archetype has no statistical profile.',
+			'Selected background archetype is unavailable.',
 			'errors.generatorMissing',
 			{ category: archetypeResult.entryId },
 		);
 	}
-	return statProfileId;
+	return archetype;
 }
 
 function pickMainEquipment(count, locale, random) {

@@ -10,10 +10,7 @@
   "entries": [
     {
       "id": "refugee",
-      "name": "Refugee",
-      "generation": {
-        "statProfile": "character-balanced"
-      }
+      "name": "Refugee"
     },
     {
       "id": "fugitive",
@@ -31,10 +28,7 @@
     },
     {
       "id": "displaced_survivor",
-      "name": "Displaced survivor",
-      "generation": {
-        "statProfile": "character-balanced"
-      }
+      "name": "Displaced survivor"
     },
     {
       "id": "political_exile",
@@ -52,17 +46,11 @@
     },
     {
       "id": "migrant",
-      "name": "Migrant",
-      "generation": {
-        "statProfile": "character-balanced"
-      }
+      "name": "Migrant"
     },
     {
       "id": "wanderer",
-      "name": "Wanderer",
-      "generation": {
-        "statProfile": "character-balanced"
-      }
+      "name": "Wanderer"
     },
     {
       "id": "dissident",

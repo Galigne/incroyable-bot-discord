@@ -17,11 +17,6 @@
       },
       "generation": {
         "statProfile": "creature-animal-runner",
-        "traits": [],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 5
       }
     },
@@ -37,10 +32,6 @@
         "traits": [
           "Plumage lumineux — Émet une douce lumière dans un rayon de 5 mètres et peut l’éteindre ou la raviver à volonté."
         ],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 5
       }
     },
@@ -54,10 +45,6 @@
       "generation": {
         "statProfile": "creature-animal-runner",
         "traits": ["{{ traits:amphibious }}", "{{ traits:aquatic_speed }}"],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 5
       }
     },
@@ -71,10 +58,6 @@
       "generation": {
         "statProfile": "creature-animal-magic",
         "traits": ["{{ traits:gliding }}"],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 5
       }
     },
@@ -87,11 +70,6 @@
       },
       "generation": {
         "statProfile": "creature-predator",
-        "traits": [],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 5
       }
     },
@@ -105,10 +83,6 @@
       "generation": {
         "statProfile": "creature-animal-tank",
         "traits": ["{{ traits:keen_smell }}", "{{ traits:burrower }}"],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 5
       }
     },
@@ -122,10 +96,6 @@
       "generation": {
         "statProfile": "creature-animal-runner",
         "traits": ["{{ traits:keen_hearing }}", "{{ traits:swift_reflexes }}"],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 5
       }
     },
@@ -139,10 +109,6 @@
       "generation": {
         "statProfile": "creature-animal-runner",
         "traits": ["{{ traits:sure_footed }}", "{{ traits:natural_weapons }}"],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 5
       }
     },
@@ -156,10 +122,6 @@
       "generation": {
         "statProfile": "creature-animal-runner",
         "traits": ["{{ traits:flight }}"],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 5
       }
     },
@@ -173,10 +135,6 @@
       "generation": {
         "statProfile": "creature-brute",
         "traits": ["{{ traits:keen_smell }}"],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 5
       }
     },
@@ -190,10 +148,6 @@
       "generation": {
         "statProfile": "creature-animal-tank",
         "traits": ["{{ traits:amphibious }}", "{{ traits:aquatic_speed }}"],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 20
       }
     },
@@ -207,10 +161,6 @@
       "generation": {
         "statProfile": "creature-animal-magic",
         "traits": ["{{ traits:amphibious }}", "{{ traits:fire_immunity }}"],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 5
       }
     },
@@ -223,11 +173,6 @@
       },
       "generation": {
         "statProfile": "creature-animal-tank",
-        "traits": [],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 5
       }
     },
@@ -244,10 +189,6 @@
           "{{ traits:amphibious }}",
           "Sens du climat — +2 aux actions de Perception pour prévoir la pluie ou un temps violent au cours des six prochaines heures."
         ],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 5
       }
     },
@@ -261,10 +202,6 @@
       "generation": {
         "statProfile": "creature-animal-magic",
         "traits": ["{{ traits:flight }}", "{{ traits:magic_sense }}"],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 5
       }
     },
@@ -277,11 +214,6 @@
       },
       "generation": {
         "statProfile": "creature-animal-tank",
-        "traits": [],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 20
       }
     },
@@ -298,10 +230,6 @@
           "{{ traits:keen_hearing }}",
           "Cri d’alarme — Les alliés capables de l’entendre gagnent +1 en Initiative contre une menace détectée par la créature."
         ],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 5
       }
     },
@@ -317,10 +245,6 @@
         "traits": [
           "Sang de foyer — Peut réchauffer une petite créature ou un objet par contact et allumer de l’amadou sec après une minute sans interruption."
         ],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 5
       }
     },
@@ -334,10 +258,6 @@
       "generation": {
         "statProfile": "creature-animal-runner",
         "traits": ["{{ traits:aquatic_speed }}", "{{ traits:echolocation }}"],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 5
       }
     },
@@ -351,10 +271,6 @@
       "generation": {
         "statProfile": "creature-animal-magic",
         "traits": ["{{ traits:darkvision }}", "{{ traits:camouflage }}"],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 5
       }
     },
@@ -371,10 +287,6 @@
           "{{ traits:flight }}",
           "Imitation parfaite — Peut reproduire toute phrase courte ou voix familière qu’elle a clairement entendue."
         ],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 5
       }
     },
@@ -388,10 +300,6 @@
       "generation": {
         "statProfile": "creature-animal-tank",
         "traits": ["{{ traits:aquatic_speed }}", "{{ traits:echolocation }}"],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 5
       }
     },
@@ -407,10 +315,6 @@
         "traits": [
           "Réserve solaire — Après une heure en plein soleil, ignore le prochain effet néfaste causé par un froid ordinaire."
         ],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 10
       }
     },
@@ -424,10 +328,6 @@
       "generation": {
         "statProfile": "creature-predator",
         "traits": ["{{ traits:amphibious }}", "{{ traits:venomous }}"],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 5
       }
     },
@@ -439,13 +339,7 @@
         "description": "Un rongeur curieux qui emporte petits outils, boutons et objets brillants vers un nid étonnamment bien organisé."
       },
       "generation": {
-        "statProfile": "creature-animal-runner",
-        "traits": [],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
-        "naturalArmorPercentage": 0
+        "statProfile": "creature-animal-runner"
       }
     },
     {
@@ -458,10 +352,6 @@
       "generation": {
         "statProfile": "creature-animal-runner",
         "traits": ["{{ traits:web_spinner }}"],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 10
       }
     },
@@ -475,10 +365,6 @@
       "generation": {
         "statProfile": "creature-predator",
         "traits": ["{{ traits:keen_smell }}", "{{ traits:pack_tactics }}"],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 10
       }
     },
@@ -492,10 +378,6 @@
       "generation": {
         "statProfile": "creature-animal-tank",
         "traits": ["{{ traits:amphibious }}"],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 35
       }
     },
@@ -509,10 +391,6 @@
       "generation": {
         "statProfile": "creature-animal-tank",
         "traits": ["{{ traits:burrower }}"],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 30
       }
     },
@@ -528,10 +406,6 @@
         "traits": [
           "Mains agiles — +2 aux actions de Dextérité pour saisir, dérober ou manipuler de petits objets."
         ],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 5
       }
     },
@@ -544,12 +418,7 @@
       },
       "generation": {
         "statProfile": "creature-animal-runner",
-        "traits": ["{{ traits:flight }}", "{{ traits:echolocation }}"],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
-        "naturalArmorPercentage": 0
+        "traits": ["{{ traits:flight }}", "{{ traits:echolocation }}"]
       }
     },
     {
@@ -562,10 +431,6 @@
       "generation": {
         "statProfile": "creature-animal-runner",
         "traits": ["{{ traits:charge }}"],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 5
       }
     },
@@ -579,10 +444,6 @@
       "generation": {
         "statProfile": "creature-animal-tank",
         "traits": ["{{ traits:powerful_build }}"],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 10
       }
     },
@@ -596,10 +457,6 @@
       "generation": {
         "statProfile": "creature-brute",
         "traits": ["{{ traits:powerful_build }}", "{{ traits:charge }}"],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 10
       }
     },
@@ -617,10 +474,6 @@
           "{{ traits:charge }}",
           "{{ traits:natural_weapons }}"
         ],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 15
       }
     },
@@ -638,10 +491,6 @@
           "{{ traits:powerful_build }}",
           "{{ traits:natural_weapons }}"
         ],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 15
       }
     },
@@ -659,10 +508,6 @@
           "{{ traits:charge }}",
           "{{ traits:natural_weapons }}"
         ],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 10
       }
     },
@@ -680,10 +525,6 @@
           "{{ traits:natural_weapons }}",
           "Vue perçante — +2 aux actions de Perception reposant sur la vue à longue distance."
         ],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 5
       }
     },
@@ -700,12 +541,7 @@
           "{{ traits:flight }}",
           "{{ traits:keen_hearing }}",
           "{{ traits:darkvision }}"
-        ],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
-        "naturalArmorPercentage": 0
+        ]
       }
     },
     {
@@ -722,10 +558,6 @@
           "{{ traits:keen_smell }}",
           "{{ traits:natural_weapons }}"
         ],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 10
       }
     },
@@ -743,10 +575,6 @@
           "{{ traits:aquatic_speed }}",
           "Abatteur d’arbres — +2 aux actions de Force pour ronger ou déplacer du bois ordinaire."
         ],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 10
       }
     },
@@ -765,10 +593,6 @@
           "{{ traits:camouflage }}",
           "{{ traits:natural_weapons }}"
         ],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 30
       }
     },
@@ -786,10 +610,6 @@
           "{{ traits:keen_smell }}",
           "{{ traits:natural_weapons }}"
         ],
-        "fixedRules": [],
-        "statusEffects": [],
-        "equipment": [],
-        "inventory": [],
         "naturalArmorPercentage": 15
       }
     }

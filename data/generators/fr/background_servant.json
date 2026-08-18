@@ -10,10 +10,7 @@
   "entries": [
     {
       "id": "household_servant",
-      "name": "Serviteur domestique",
-      "generation": {
-        "statProfile": "character-balanced"
-      }
+      "name": "Serviteur domestique"
     },
     {
       "id": "attendant",
@@ -31,10 +28,7 @@
     },
     {
       "id": "cook",
-      "name": "Cuisinier",
-      "generation": {
-        "statProfile": "character-balanced"
-      }
+      "name": "Cuisinier"
     },
     {
       "id": "stable_hand",
@@ -66,10 +60,7 @@
     },
     {
       "id": "groundskeeper",
-      "name": "Garde des domaines",
-      "generation": {
-        "statProfile": "character-balanced"
-      }
+      "name": "Garde des domaines"
     },
     {
       "id": "messenger",

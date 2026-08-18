@@ -10,10 +10,7 @@
   "entries": [
     {
       "id": "orphan",
-      "name": "Orphelin",
-      "generation": {
-        "statProfile": "character-balanced"
-      }
+      "name": "Orphelin"
     },
     {
       "id": "beggar",
@@ -66,10 +63,7 @@
     },
     {
       "id": "urchin",
-      "name": "Gamin des rues",
-      "generation": {
-        "statProfile": "character-balanced"
-      }
+      "name": "Gamin des rues"
     },
     {
       "id": "errand_runner",

@@ -1,9 +1,6 @@
-const {
-	assertExactKeys,
-	assertPlainObject,
-	generatorSchemaError,
-} = require('./assertions');
+const { generatorSchemaError } = require('./assertions');
 const { BACKGROUND_ROUTER_ID } = require('./constants');
+const { validateGenerationMetadata } = require('./generationMetadataValidation');
 
 function validateBackgroundGeneratorEnvelope(
 	generator,
@@ -41,24 +38,7 @@ function isBackgroundArchetypeGenerator(generatorId, options = {}) {
 }
 
 function validateBackgroundGeneration(generation, location) {
-	assertPlainObject(
-		generation,
-		`Background archetype ${location} must define generation metadata.`,
-	);
-	assertExactKeys(
-		generation,
-		['statProfile'],
-		`Background archetype ${location} generation metadata must contain only statProfile.`,
-	);
-	if (
-		typeof generation.statProfile !== 'string'
-		|| !/^character-[a-z0-9]+(?:-[a-z0-9]+)*$/.test(generation.statProfile)
-	) {
-		throw generatorSchemaError(
-			'INVALID_BACKGROUND_STAT_PROFILE',
-			`Background archetype ${location} has an invalid statistical profile.`,
-		);
-	}
+	validateGenerationMetadata(generation, location, 'character');
 }
 
 module.exports = {

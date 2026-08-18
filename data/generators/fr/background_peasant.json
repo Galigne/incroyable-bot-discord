@@ -10,31 +10,19 @@
   "entries": [
     {
       "id": "farmer",
-      "name": "Fermier",
-      "generation": {
-        "statProfile": "character-balanced"
-      }
+      "name": "Fermier"
     },
     {
       "id": "herder",
-      "name": "Éleveur",
-      "generation": {
-        "statProfile": "character-balanced"
-      }
+      "name": "Éleveur"
     },
     {
       "id": "shepherd",
-      "name": "Berger",
-      "generation": {
-        "statProfile": "character-balanced"
-      }
+      "name": "Berger"
     },
     {
       "id": "miller",
-      "name": "Meunier",
-      "generation": {
-        "statProfile": "character-balanced"
-      }
+      "name": "Meunier"
     },
     {
       "id": "farmhand",

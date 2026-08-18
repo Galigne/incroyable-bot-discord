@@ -10,10 +10,7 @@
   "entries": [
     {
       "id": "explorer",
-      "name": "Explorateur",
-      "generation": {
-        "statProfile": "character-balanced"
-      }
+      "name": "Explorateur"
     },
     {
       "id": "mercenary",

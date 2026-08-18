@@ -164,7 +164,8 @@ special option that applies or forces it on another result.
 
 `data/generators/stat-profile.json` is a separate, non-localized schema. Its
 kebab-case profile IDs define minimums, maximums, and allocation weights for the
-seven base statistics. Profiles do not contain localized prose, entity types,
+seven base statistics. The `default` profile is used by both entity types whenever
+generation metadata omits `statProfile`. Profiles do not contain localized prose, entity types,
 resource formulas, RULE allocation, traits, gear, or encumbrance behavior.
 
 Characters and creatures share the level 1-10 stat budget, nonlinear point costs,
@@ -183,26 +184,35 @@ reference resolution:
 3. That entry's top-level `generator` property directly names the matching internal
    name-only `<category>` generator stored in
    `background_<category>.json`. Resolving it supplies the reusable background
-   archetype, whose required `generation.statProfile` selects the statistical
-   allocation profile for this character. The metadata contains only that profile
-   ID and is functionally identical in both locales.
+   archetype. Its optional `generation.statProfile` selects the statistical
+   allocation profile for this character; omission selects `default`.
 4. It independently resolves `{{ physical_description.description }}`. Physical description is
    not part of the selected archetype route, so the two rolls remain combinable.
-5. It applies the character-only descriptive modifier policy through
-   `modifier_character`, calculates statistics from the selected archetype's
-   profile, calculates resources, and assembles the complete character.
+5. It applies each explicitly present archetype generation override and uses the
+   normal character behavior for every omitted category, calculates resources, and
+   assembles the complete character.
 
-The archetype profile changes only statistical allocation constraints and weights.
-RULEs, talents, personality, status effects, descriptive modifiers, race, physical
-description, armor, equipment, inventory, and every other character selection keep
-their independent existing random behavior.
+Background and creature archetypes share one optional `generation` model. Both can
+override `statProfile`, `naturalArmorPercentage`, `fixedRules`, `statusEffects`,
+`modifiers`, `armor`, `equipment`, and `inventory`; characters additionally use
+`talents`, while creatures use `traits`. An explicit value replaces the normal
+category, including an explicit empty array. The two locale catalogs preserve
+functional property presence and reference structure, while talent and trait
+template text remains localized.
+
+For characters, omitted RULEs, talents, status effects, modifiers, armor,
+equipment, and inventory retain their existing independent random behavior.
+Omitted natural armor contributes zero. Template-based talent overrides use the
+same inline-string resolver as creature traits and store the resulting localized
+strings.
 
 The saved background contains `archetype` and `physicalDescription`; editable
 `backstory` and `goals` start empty. A generated character receives one compatible
 armor and one or two independent main-equipment slots. Each slot selects `weapons`
 with an 80% chance or `shields` with a 20% chance; multiple equipped shields are
 allowed, and their `ar_percentage` values add to the armor percentage before the
-normal max-HP-based AR calculation.
+normal max-HP-based AR calculation. Explicit natural armor, armor, and equipped-item
+percentages stack in the same way.
 
 Three carried items resolve independently through the public `loot` router's
 structural routes. The workflow consumes the child display string so varying loot
@@ -227,9 +237,10 @@ as the concrete `creature` type.
 
 `services/randomCreatureGenerator.js` resolves the route, then resolves one detail
 entry and consumes its localized identity plus validated generation metadata. That
-metadata chooses a statistical profile and may declare intrinsic traits, natural
-armor or an armor reference, fixed RULE IDs and levels, status-effect references,
-creature-modifier references, and equipment or inventory references. Gear
+metadata may be absent and every individual property is optional. It may choose a
+statistical profile, declare intrinsic traits, natural armor, a separate armor
+reference, fixed RULE IDs and levels, status-effect references, creature-modifier
+references, and equipment or inventory references. Gear
 references can be fixed, random, nested, or drawn from a weighted source.
 
 Intrinsic traits are zero or more ordinary inline-template strings. Literal text
@@ -244,12 +255,17 @@ embedded generator records. Trait selections do not add trait-specific records t
 the saved source provenance.
 
 Creature Intelligence does not allocate RULEs; only explicit `fixedRules` metadata
-does. Only natural-armor metadata or an explicit armor reference initializes AR.
-Status effects and modifiers remain descriptive, and generation never derives
-manual encumbrance. Trait rules text is likewise non-executable and never alters
-statistics, resources, armor, status, RULEs, or gear.
+does. Omitted traits, RULEs, status effects, armor, equipment, and inventory keep
+their normal empty behavior, while omitted modifiers keep the independent 25%
+creature-modifier policy. Explicit properties replace those normal categories.
+Natural armor, the separate armor reference, and AR-providing equipment stack;
+inventory never contributes AR. Status effects and modifiers remain descriptive,
+and generation never derives manual encumbrance. Trait rules text is likewise
+non-executable and never alters statistics, resources, armor, status, RULEs, or
+gear.
 
-The assembled creature stores its localized final state and stable source data:
+`naturalArmorPercentage` is not persisted. The assembled creature stores only its
+localized final state (including calculated AR) and stable source data:
 the router entry, detail generator and entry, statistical profile, and accumulated
 reference provenance. `services/creatureApplicationService.js` publishes that
 complete save atomically inside the shared EntityKey queue. Loading or displaying a

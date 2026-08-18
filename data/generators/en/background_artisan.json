@@ -17,17 +17,11 @@
     },
     {
       "id": "carpenter",
-      "name": "Carpenter",
-      "generation": {
-        "statProfile": "character-balanced"
-      }
+      "name": "Carpenter"
     },
     {
       "id": "tailor",
-      "name": "Tailor",
-      "generation": {
-        "statProfile": "character-balanced"
-      }
+      "name": "Tailor"
     },
     {
       "id": "alchemist",
@@ -45,10 +39,7 @@
     },
     {
       "id": "baker",
-      "name": "Baker",
-      "generation": {
-        "statProfile": "character-balanced"
-      }
+      "name": "Baker"
     },
     {
       "id": "butcher",
@@ -59,10 +50,7 @@
     },
     {
       "id": "cook",
-      "name": "Cook",
-      "generation": {
-        "statProfile": "character-balanced"
-      }
+      "name": "Cook"
     },
     {
       "id": "mechanic",
@@ -87,10 +75,7 @@
     },
     {
       "id": "potter",
-      "name": "Potter",
-      "generation": {
-        "statProfile": "character-balanced"
-      }
+      "name": "Potter"
     }
   ]
 }

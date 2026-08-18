@@ -112,10 +112,16 @@ function validateGeneratorEntry(
 			commonKeys,
 			`Generator ${location} has unsupported properties.`,
 		);
-		if (isCreatureDetailGenerator(generator.id, options)) {
+		if (
+			entry.generation !== undefined
+			&& isCreatureDetailGenerator(generator.id, options)
+		) {
 			validateCreatureGeneration(entry.generation, location);
 		}
-		if (isBackgroundArchetypeGenerator(generator.id, options)) {
+		if (
+			entry.generation !== undefined
+			&& isBackgroundArchetypeGenerator(generator.id, options)
+		) {
 			validateBackgroundGeneration(entry.generation, location);
 		}
 		return;
@@ -148,10 +154,16 @@ function validateGeneratorEntry(
 			);
 		}
 	}
-	if (isCreatureDetailGenerator(generator.id, options)) {
+	if (
+		entry.generation !== undefined
+		&& isCreatureDetailGenerator(generator.id, options)
+	) {
 		validateCreatureGeneration(entry.generation, location);
 	}
-	if (isBackgroundArchetypeGenerator(generator.id, options)) {
+	if (
+		entry.generation !== undefined
+		&& isBackgroundArchetypeGenerator(generator.id, options)
+	) {
 		validateBackgroundGeneration(entry.generation, location);
 	}
 }

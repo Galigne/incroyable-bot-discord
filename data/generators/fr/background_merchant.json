@@ -24,10 +24,7 @@
     },
     {
       "id": "caravaner",
-      "name": "Caravanier",
-      "generation": {
-        "statProfile": "character-balanced"
-      }
+      "name": "Caravanier"
     },
     {
       "id": "factor",
@@ -52,10 +49,7 @@
     },
     {
       "id": "fishmonger",
-      "name": "Poissonnier",
-      "generation": {
-        "statProfile": "character-balanced"
-      }
+      "name": "Poissonnier"
     },
     {
       "id": "supplier",

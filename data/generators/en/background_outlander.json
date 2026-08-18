@@ -17,17 +17,11 @@
     },
     {
       "id": "nomad",
-      "name": "Nomad",
-      "generation": {
-        "statProfile": "character-balanced"
-      }
+      "name": "Nomad"
     },
     {
       "id": "hermit",
-      "name": "Hermit",
-      "generation": {
-        "statProfile": "character-balanced"
-      }
+      "name": "Hermit"
     },
     {
       "id": "tribal_envoy",

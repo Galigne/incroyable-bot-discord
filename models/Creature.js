@@ -14,7 +14,6 @@ class Creature {
 		creature.source = data.source === null
 			? null
 			: structuredClone(data.source);
-		creature.naturalArmor = structuredClone(data.naturalArmor);
 		creature.statistics = structuredClone(data.statistics);
 		creature.resources = structuredClone(data.resources);
 		creature.status = structuredClone(data.status);
@@ -41,7 +40,6 @@ class Creature {
 		this.name = '';
 		this.description = '';
 		this.source = null;
-		this.naturalArmor = { percentage: 0 };
 		this.statistics = createStats();
 		this.resources = {
 			hp: { current: 100, max: 100 },

@@ -31,10 +31,7 @@
     },
     {
       "id": "heir",
-      "name": "Heir",
-      "generation": {
-        "statProfile": "character-balanced"
-      }
+      "name": "Heir"
     },
     {
       "id": "lord",

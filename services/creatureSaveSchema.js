@@ -1,7 +1,7 @@
 const { BASE_STATS, DERIVED_STATS, MAX_AP } = require('./mechanics/constants');
 const { validateEntityKey } = require('./entityStoragePaths');
 
-const CURRENT_CREATURE_SAVE_SCHEMA_VERSION = 3;
+const CURRENT_CREATURE_SAVE_SCHEMA_VERSION = 4;
 const CREATURE_STAT_IDS = Object.freeze([...BASE_STATS, ...DERIVED_STATS]);
 const TECHNICAL_ID = /^[a-z0-9]+(?:_[a-z0-9]+)*$/;
 const STAT_PROFILE_ID = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
@@ -34,7 +34,6 @@ function validateCreatureSaveSchema(rawSaveData, expectedKey = rawSaveData?.key)
 		'name',
 		'description',
 		'source',
-		'naturalArmor',
 		'statistics',
 		'resources',
 		'status',
@@ -66,7 +65,6 @@ function validateCreatureSaveSchema(rawSaveData, expectedKey = rawSaveData?.key)
 	assertBoundedString(rawSaveData.name, 'name', 256);
 	assertBoundedString(rawSaveData.description, 'description', 4_000);
 	validateSource(rawSaveData.source);
-	validateNaturalArmor(rawSaveData.naturalArmor);
 	validateStatistics(rawSaveData.statistics);
 	validateResources(rawSaveData.resources);
 	validateStatus(rawSaveData.status);
@@ -104,17 +102,6 @@ function validateSource(source) {
 		}
 	}
 	validateProvenance(source.provenance ?? [], 'source.provenance');
-}
-
-function validateNaturalArmor(naturalArmor) {
-	assertRecord(naturalArmor, 'naturalArmor');
-	assertExactKeys(naturalArmor, 'naturalArmor', ['percentage']);
-	assertFiniteInRange(
-		naturalArmor.percentage,
-		'naturalArmor.percentage',
-		0,
-		100,
-	);
 }
 
 function validateStatistics(statistics) {

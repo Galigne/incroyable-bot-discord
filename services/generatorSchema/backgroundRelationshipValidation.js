@@ -1,4 +1,5 @@
 const { generatorSchemaError } = require('./assertions');
+const { getGenerationStatProfileId } = require('../generationMetadata');
 const { BACKGROUND_ROUTER_ID } = require('./constants');
 
 function validateBackgroundStatProfileRelationships(catalogs, profiles) {
@@ -39,7 +40,8 @@ function validateBackgroundStatProfileRelationships(catalogs, profiles) {
 				);
 			}
 			for (const entry of generator.entries) {
-				if (!profiles.has(entry.generation.statProfile)) {
+				const profileId = getGenerationStatProfileId(entry.generation);
+				if (!profiles.has(profileId)) {
 					throw generatorSchemaError(
 						'BACKGROUND_STAT_PROFILE_MISSING',
 						`Background archetype ${generatorId}:${entry.id} references an unknown statistical profile.`,

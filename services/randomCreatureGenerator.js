@@ -6,6 +6,18 @@ const {
 const {
 	CREATURE_ROUTER_ID,
 } = require('./generatorSchema');
+const {
+	getGenerationMetadata,
+	getGenerationStatProfileId,
+	hasGenerationOverride,
+} = require('./generationMetadata');
+const {
+	resolveArmorReference,
+	resolveDescribedReferences,
+	resolveFixedRules,
+	resolveGearReferences,
+	resolveGenerationTemplates,
+} = require('./generationReferenceResolver');
 const { generateStats } = require('./mechanics/characterGeneration');
 const { createGeneratedResources } = require('./mechanics/resources');
 const { getStatProfile } = require('./statProfileCatalog');
@@ -62,7 +74,7 @@ function populateRandomCreature(creature, options = {}) {
 	const generatorId = result.generatorId;
 	const generator = getGenerator(generatorId, locale);
 	const entry = generator?.entries.find(candidate => candidate.id === result.entryId);
-	if (!selectedType || !entry?.generation || result.outputType !== 'fields') {
+	if (!selectedType || !entry || result.outputType !== 'fields') {
 		throw creatureGenerationError(
 			`Creature detail generator ${generatorId} is unavailable.`,
 			'errors.generatorMissing',
@@ -70,13 +82,14 @@ function populateRandomCreature(creature, options = {}) {
 		);
 	}
 
-	const generation = entry.generation;
-	const profile = getProfile(generation.statProfile);
+	const generation = getGenerationMetadata(entry);
+	const statProfileId = getGenerationStatProfileId(generation);
+	const profile = getProfile(statProfileId);
 	if (!profile) {
 		throw creatureGenerationError(
-			`Missing creature statistical profile: ${generation.statProfile}.`,
+			`Missing creature statistical profile: ${statProfileId}.`,
 			'errors.generatorMissing',
-			{ category: generation.statProfile },
+			{ category: statProfileId },
 		);
 	}
 
@@ -86,81 +99,94 @@ function populateRandomCreature(creature, options = {}) {
 	creature.description = requireLocalizedField(detailFields, 'description');
 	creature.statistics = generateStats({ level, profile, random });
 	const sourceProvenance = [...result.provenance];
-	creature.traits = resolveTraitTemplates(
-		generation.traits,
-		locale,
-		random,
-		resolver,
-	);
-	creature.rules = [];
-	creature.status.effects = [];
-	creature.status.modifiers = maybeGenerateDescriptiveModifiers({
-		generator: 'modifier_creature',
-		resolver,
-		locale,
-		random,
-		path: 'root.creature.modifier',
-	});
-
-	resolveFixedRules(
-		creature,
-		generation.fixedRules ?? [],
-		locale,
-		random,
-		resolver,
-		sourceProvenance,
-	);
-	creature.status.effects.push(...resolveDescribedReferences(
-		generation.statusEffects ?? [],
-		locale,
-		random,
-		resolver,
-		'root.generation.statusEffects',
-	));
-	creature.status.modifiers.push(...resolveDescribedReferences(
-		generation.modifiers ?? [],
-		locale,
-		random,
-		resolver,
-		'root.generation.modifiers',
-	));
-
-	let armorPercentage = generation.naturalArmorPercentage ?? 0;
-	creature.naturalArmor = {
-		percentage: generation.naturalArmorPercentage ?? 0,
-	};
-	creature.gear.equipment = [];
-	if (generation.armor) {
-		const resolvedArmor = resolveGenerationReference(
-			generation.armor,
+	creature.traits = hasGenerationOverride(generation, 'traits')
+		? resolveGenerationTemplates(generation.traits, {
 			locale,
+			path: 'root.generation.traits',
 			random,
 			resolver,
-			'root.generation.armor',
-		);
-		armorPercentage = requireTechnicalNumber(
-			resolvedArmor.value,
-			'ar_percentage',
-		);
-		creature.gear.equipment.push(formatReferenceValue(resolvedArmor.value));
+		})
+		: [];
+	if (hasGenerationOverride(generation, 'fixedRules')) {
+		const resolvedRules = resolveFixedRules(generation.fixedRules, {
+			createError: creatureGenerationError,
+			includeEntryId: true,
+			locale,
+			path: 'root.generation.fixedRules',
+			random,
+			resolver,
+		});
+		creature.rules = resolvedRules.rules;
+		sourceProvenance.push(...resolvedRules.provenance);
+	}
+	else {
+		creature.rules = [];
+	}
+	creature.status.effects = hasGenerationOverride(generation, 'statusEffects')
+		? resolveDescribedReferences(generation.statusEffects, {
+			createError: creatureGenerationError,
+			locale,
+			path: 'root.generation.statusEffects',
+			random,
+			resolver,
+		})
+		: [];
+	creature.status.modifiers = hasGenerationOverride(generation, 'modifiers')
+		? resolveDescribedReferences(generation.modifiers, {
+			createError: creatureGenerationError,
+			locale,
+			path: 'root.generation.modifiers',
+			random,
+			resolver,
+		})
+		: maybeGenerateDescriptiveModifiers({
+			generator: 'modifier_creature',
+			resolver,
+			locale,
+			random,
+			path: 'root.creature.modifier',
+		});
+
+	let armorPercentage = generation.naturalArmorPercentage ?? 0;
+	creature.gear.equipment = [];
+	if (hasGenerationOverride(generation, 'armor')) {
+		const resolvedArmor = resolveArmorReference(generation.armor, {
+			createError: creatureGenerationError,
+			locale,
+			path: 'root.generation.armor',
+			random,
+			resolver,
+		});
+		armorPercentage += resolvedArmor.armorPercentage;
+		creature.gear.equipment.push(resolvedArmor.value);
 		sourceProvenance.push(...resolvedArmor.provenance);
 	}
-	creature.gear.equipment.push(...resolveGearReferences(
-		generation.equipment,
-		locale,
-		random,
-		resolver,
-		'root.generation.equipment',
-		sourceProvenance,
-	));
-	creature.gear.inventory = resolveGearReferences(
-		generation.inventory,
-		locale,
-		random,
-		resolver,
-		'root.generation.inventory',
-		sourceProvenance,
-	);
+	if (hasGenerationOverride(generation, 'equipment')) {
+		const resolvedEquipment = resolveGearReferences(generation.equipment, {
+			createError: creatureGenerationError,
+			locale,
+			path: 'root.generation.equipment',
+			random,
+			resolver,
+		});
+		armorPercentage += resolvedEquipment.armorPercentage;
+		creature.gear.equipment.push(...resolvedEquipment.values);
+		sourceProvenance.push(...resolvedEquipment.provenance);
+	}
+	if (hasGenerationOverride(generation, 'inventory')) {
+		const resolvedInventory = resolveGearReferences(generation.inventory, {
+			createError: creatureGenerationError,
+			locale,
+			path: 'root.generation.inventory',
+			random,
+			resolver,
+		});
+		creature.gear.inventory = resolvedInventory.values;
+		sourceProvenance.push(...resolvedInventory.provenance);
+	}
+	else {
+		creature.gear.inventory = [];
+	}
 	Object.assign(
 		creature.resources,
 		createGeneratedResources(creature.statistics, level, armorPercentage),
@@ -169,108 +195,10 @@ function populateRandomCreature(creature, options = {}) {
 		generatorId,
 		entryId: result.entryId,
 		archetypeId: selectedType,
-		statProfileId: generation.statProfile,
+		statProfileId,
 		provenance: sourceProvenance,
 	};
 	return creature;
-}
-
-function resolveTraitTemplates(
-	traits,
-	locale,
-	random,
-	resolver,
-) {
-	return traits.map((trait, index) => {
-		const resolved = resolver.resolveInlineString(trait, locale, {
-			path: `root.generation.traits.${index}`,
-			random,
-		});
-		return resolved.value;
-	});
-}
-
-function resolveFixedRules(
-	creature,
-	fixedRules,
-	locale,
-	random,
-	resolver,
-	sourceProvenance,
-) {
-	for (const [index, fixedRule] of fixedRules.entries()) {
-		const resolved = resolveGenerationReference(
-			{
-				generator: 'rules',
-				entry: fixedRule.entry,
-				select: 'fields',
-			},
-			locale,
-			random,
-			resolver,
-			`root.generation.fixedRules.${index}`,
-		);
-		creature.rules.push({
-			entryId: fixedRule.entry,
-			name: requireLocalizedField(resolved.value, 'name'),
-			description: requireLocalizedField(resolved.value, 'description'),
-			level: fixedRule.level,
-		});
-		sourceProvenance.push(...resolved.provenance);
-	}
-}
-
-function resolveDescribedReferences(references, locale, random, resolver, path) {
-	return references.map((reference, index) => {
-		const resolved = resolveGenerationReference(
-			reference,
-			locale,
-			random,
-			resolver,
-			`${path}.${index}`,
-		);
-		const selection = getEntrySelection(resolved.provenance);
-		return {
-			generatorId: selection.generatorId,
-			entryId: selection.entryId,
-			name: requireLocalizedField(resolved.value, 'name'),
-			description: requireLocalizedField(resolved.value, 'description'),
-			provenance: resolved.provenance,
-		};
-	});
-}
-
-function resolveGearReferences(
-	references,
-	locale,
-	random,
-	resolver,
-	path,
-	sourceProvenance,
-) {
-	return references.map((reference, index) => {
-		const resolved = resolveGenerationReference(
-			reference,
-			locale,
-			random,
-			resolver,
-			`${path}.${index}`,
-		);
-		sourceProvenance.push(...resolved.provenance);
-		return formatReferenceValue(resolved.value);
-	});
-}
-
-function resolveGenerationReference(reference, locale, random, resolver, path) {
-	return resolver.resolveReference(reference, locale, { path, random });
-}
-
-function formatReferenceValue(value) {
-	if (typeof value === 'string') {
-		return value;
-	}
-	return `${requireLocalizedField(value, 'name')} — `
-		+ requireLocalizedField(value, 'description');
 }
 
 function requireLocalizedField(fields, field) {
@@ -283,30 +211,6 @@ function requireLocalizedField(fields, field) {
 		);
 	}
 	return value;
-}
-
-function requireTechnicalNumber(fields, field) {
-	const value = fields?.[field];
-	if (!Number.isFinite(value)) {
-		throw creatureGenerationError(
-			`Creature generation requires numeric ${field}.`,
-			'errors.generatorFieldMissing',
-			{ field },
-		);
-	}
-	return value;
-}
-
-function getEntrySelection(provenance) {
-	const selection = provenance.find(record => record.type === 'entry' && record.entryId);
-	if (!selection) {
-		throw creatureGenerationError(
-			'Creature generation reference omitted selection provenance.',
-			'errors.generatorMissing',
-			{ category: 'provenance' },
-		);
-	}
-	return selection;
 }
 
 function validateLevel(level) {
