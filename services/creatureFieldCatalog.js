@@ -1,9 +1,9 @@
 const { BASE_STATS, DERIVED_STATS } = require('./mechanics/constants');
-
-const definitions = [];
-const definitionsById = new Map();
-const aliases = new Map();
-const editableAliases = new Map();
+const {
+	createFieldCatalogBuilder,
+	definePairInput: pairInput,
+	defineStoredField: stored,
+} = require('./fieldCatalogBuilder');
 
 const SECTION_IDS = Object.freeze([
 	'identity',
@@ -15,6 +15,11 @@ const SECTION_IDS = Object.freeze([
 	'traits',
 	'gear',
 ]);
+
+const catalogBuilder = createFieldCatalogBuilder({
+	catalogName: 'creature',
+	sectionIds: SECTION_IDS,
+});
 
 addSection('identity', 'multi', ['identity.name', 'identity.description']);
 addSection('level', 'scalar', ['level.value']);
@@ -129,90 +134,30 @@ for (const resourceId of ['hp', 'ar', 'ap', 'md']) {
 }
 
 function addSection(id, editKind, editInputIds, options = {}) {
-	add(id, `creature.fields.${id}`, {
-		...options,
-		editId: id,
-		editInputIds: Object.freeze([...editInputIds]),
+	catalogBuilder.addSection(
+		id,
+		`creature.fields.${id}`,
 		editKind,
-		sectionId: id,
-		sectionOrder: SECTION_IDS.indexOf(id),
-		viewId: id,
-		viewTargetIds: Object.freeze([...editInputIds]),
-	});
-}
-
-function stored(path, type, options = {}) {
-	return { ...options, path: Object.freeze([...path]), type };
-}
-
-function pairInput(inputTargetIds) {
-	return {
-		inputKind: 'pair',
-		inputTargetIds: Object.freeze([...inputTargetIds]),
-	};
+		editInputIds,
+		options,
+	);
 }
 
 function add(id, labelKey, options = {}) {
-	if (definitionsById.has(id)) {
-		throw new Error(`Duplicate creature field: ${id}`);
-	}
-	const definition = Object.freeze({ id, labelKey, ...options });
-	definitions.push(definition);
-	definitionsById.set(id, definition);
-	for (const alias of [id, ...(options.aliases ?? [])]) {
-		registerAlias(aliases, alias, definition, 'creature field');
-	}
-	if (definition.editId) {
-		registerAlias(editableAliases, definition.editId, definition, 'editable field');
-	}
+	catalogBuilder.addField(id, labelKey, options);
 }
 
-function registerAlias(map, alias, definition, label) {
-	for (const key of [alias, alias.toLowerCase(), normalizeLoose(alias)]) {
-		const existing = map.get(key);
-		if (existing && existing !== definition) {
-			throw new Error(`Duplicate ${label} alias: ${alias}`);
-		}
-		map.set(key, definition);
-	}
-}
-
-function normalizeLoose(value) {
-	return String(value).toLowerCase().replace(/[^a-z]/g, '');
-}
-
-function getCreatureFieldDefinition(fieldId) {
-	if (typeof fieldId !== 'string') {
-		return null;
-	}
-	return definitionsById.get(fieldId)
-		?? aliases.get(fieldId)
-		?? aliases.get(fieldId.toLowerCase())
-		?? aliases.get(normalizeLoose(fieldId))
-		?? null;
-}
-
-function getEditableCreatureFieldDefinition(fieldId) {
-	if (typeof fieldId !== 'string') {
-		return null;
-	}
-	return editableAliases.get(fieldId)
-		?? editableAliases.get(fieldId.toLowerCase())
-		?? editableAliases.get(normalizeLoose(fieldId))
-		?? null;
-}
-
-function getCreatureSections() {
-	return SECTION_IDS.map(id => definitionsById.get(id));
-}
-
-function getViewableCreatureFieldDefinition(fieldId) {
-	const definition = getCreatureFieldDefinition(fieldId);
-	return definition?.sectionId ? definition : null;
-}
+const catalog = catalogBuilder.build();
+const {
+	definitions: CREATURE_FIELD_DEFINITIONS,
+	getEditableFieldDefinition: getEditableCreatureFieldDefinition,
+	getFieldDefinition: getCreatureFieldDefinition,
+	getSections: getCreatureSections,
+	getViewableFieldDefinition: getViewableCreatureFieldDefinition,
+} = catalog;
 
 module.exports = {
-	CREATURE_FIELD_DEFINITIONS: Object.freeze([...definitions]),
+	CREATURE_FIELD_DEFINITIONS,
 	CREATURE_SECTION_IDS: SECTION_IDS,
 	getCreatureFieldDefinition,
 	getCreatureSections,

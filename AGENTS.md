@@ -105,11 +105,15 @@ write real saves.
   history stores: type-specific schemas, hydration, errors, and adapters over the
   consolidated persistence helpers.
 - `services/entityKeyRegistry.js`: global character/creature key collision checks.
+- `services/fieldCatalogBuilder.js`: shared field registration, normalized alias
+  lookup, capability filtering, ordered-section assembly, immutable stored paths,
+  and pair-input metadata; it never owns concrete entity declarations.
 - `services/characterFieldCatalog.js`: canonical character field identities,
-  aliases, storage paths, types, and editable/viewable capabilities.
-- `services/creatureFieldCatalog.js`: independent explicit creature field order and
-  editable/viewable capabilities; source IDs, provenance, type, key, and schema
-  metadata are not editable.
+  aliases, storage paths, types, section order, and editable/viewable capabilities.
+- `services/creatureFieldCatalog.js`: independent creature field identities,
+  aliases, storage paths, types, explicit section order, and editable/viewable
+  capabilities; source IDs, provenance, type, key, and schema metadata are not
+  editable.
 - `services/entityFieldEditor.js`: shared grouped parser/serializer foundation used
   by the type-specific character and creature editor adapters.
 - `services/characterEditor.js`: grouped editable-value parsing, complete
@@ -368,7 +372,10 @@ editor/viewer choices, aliases, storage paths, and presentation labels from that
 catalog; do not create parallel field maps in commands, models, services, or tests.
 Register creature fields independently in `services/creatureFieldCatalog.js` and
 preserve both explicit orders through `services/entityFieldCatalog.js`. Add localized
-labels through the matching display adapter and both locale catalogs.
+labels through the matching display adapter and both locale catalogs. Both concrete
+catalogs must use `services/fieldCatalogBuilder.js` for generic registration and
+lookup behavior, including the same alias normalization for equivalent editable and
+viewable capabilities. Never move their declarations into one combined field list.
 
 For private interaction responses, use:
 

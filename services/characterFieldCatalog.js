@@ -1,9 +1,9 @@
 const { BASE_STATS, DERIVED_STATS } = require('./mechanics/constants');
-
-const definitions = [];
-const definitionsById = new Map();
-const aliases = new Map();
-const editableAliases = new Map();
+const {
+	createFieldCatalogBuilder,
+	definePairInput: pairInput,
+	defineStoredField: stored,
+} = require('./fieldCatalogBuilder');
 
 const SECTION_IDS = Object.freeze([
 	'name',
@@ -18,6 +18,11 @@ const SECTION_IDS = Object.freeze([
 	'background',
 	'personality',
 ]);
+
+const catalogBuilder = createFieldCatalogBuilder({
+	catalogName: 'character',
+	sectionIds: SECTION_IDS,
+});
 
 addSection('name', 'name', 'multi', ['name.firstName', 'name.lastName']);
 addSection('level', 'level', 'scalar', ['level.value']);
@@ -242,121 +247,36 @@ for (const resourceId of ['hp', 'ar', 'ap', 'md']) {
 }
 
 function addSection(id, labelName, editKind, editInputIds, options = {}) {
-	const viewTargetIds = options.viewTargetIds ?? editInputIds;
-	add(id, labelName, {
-		...options,
-		editId: id,
-		editInputIds: Object.freeze([...editInputIds]),
+	catalogBuilder.addSection(
+		id,
+		`character.fields.${labelName}`,
 		editKind,
-		sectionId: id,
-		sectionOrder: SECTION_IDS.indexOf(id),
-		viewId: id,
-		viewTargetIds: Object.freeze([...viewTargetIds]),
-	});
-}
-
-function stored(path, type, options = {}) {
-	return { ...options, path: Object.freeze([...path]), type };
-}
-
-function pairInput(inputTargetIds) {
-	return {
-		inputKind: 'pair',
-		inputTargetIds: Object.freeze([...inputTargetIds]),
-	};
+		editInputIds,
+		options,
+	);
 }
 
 function add(id, labelName, options = {}) {
-	if (definitionsById.has(id)) {
-		throw new Error(`Duplicate character field: ${id}`);
-	}
-	const definition = Object.freeze({
+	catalogBuilder.addField(
 		id,
-		...(labelName ? { labelKey: `character.fields.${labelName}` } : {}),
-		...options,
-	});
-	definitions.push(definition);
-	definitionsById.set(id, definition);
-	registerAlias(id, definition);
-	for (const alias of options.aliases ?? []) {
-		registerAlias(alias, definition);
-	}
-	if (definition.editId) {
-		registerEditableAlias(definition.editId, definition);
-	}
+		labelName ? `character.fields.${labelName}` : undefined,
+		options,
+	);
 }
 
-function registerAlias(alias, definition) {
-	registerMappedAlias(aliases, alias, definition, 'character field');
-}
-
-function registerEditableAlias(alias, definition) {
-	for (const key of [alias, alias.toLowerCase()]) {
-		const existing = editableAliases.get(key);
-		if (existing && existing !== definition) {
-			throw new Error(`Duplicate editable field alias: ${alias}`);
-		}
-		editableAliases.set(key, definition);
-	}
-}
-
-function registerMappedAlias(map, alias, definition, label) {
-	for (const key of [alias, alias.toLowerCase(), normalizeLoose(alias)]) {
-		const existing = map.get(key);
-		if (existing && existing !== definition) {
-			throw new Error(`Duplicate ${label} alias: ${alias}`);
-		}
-		map.set(key, definition);
-	}
-}
-
-function normalizeLoose(value) {
-	return String(value).toLowerCase().replace(/[^a-z]/g, '');
-}
-
-function getCharacterFieldDefinition(fieldId) {
-	if (typeof fieldId !== 'string') {
-		return null;
-	}
-	return definitionsById.get(fieldId)
-		?? aliases.get(fieldId)
-		?? aliases.get(fieldId.toLowerCase())
-		?? aliases.get(normalizeLoose(fieldId))
-		?? null;
-}
-
-function getEditableFieldDefinition(fieldId) {
-	if (typeof fieldId !== 'string') {
-		return null;
-	}
-	return editableAliases.get(fieldId)
-		?? editableAliases.get(fieldId.toLowerCase())
-		?? null;
-}
-
-function getCharacterSections() {
-	return SECTION_IDS.map(id => definitionsById.get(id));
-}
-
-function getEditableFields() {
-	return getCharacterSections();
-}
-
-function getViewableFieldDefinition(fieldId) {
-	if (typeof fieldId !== 'string') {
-		return null;
-	}
-	const definition = definitionsById.get(fieldId)
-		?? definitionsById.get(fieldId.toLowerCase());
-	return definition?.sectionId ? definition : null;
-}
-
-function getViewableFields() {
-	return getCharacterSections();
-}
+const catalog = catalogBuilder.build();
+const {
+	definitions: CHARACTER_FIELD_DEFINITIONS,
+	getEditableFieldDefinition,
+	getEditableFields,
+	getFieldDefinition: getCharacterFieldDefinition,
+	getSections: getCharacterSections,
+	getViewableFieldDefinition,
+	getViewableFields,
+} = catalog;
 
 module.exports = {
-	CHARACTER_FIELD_DEFINITIONS: Object.freeze([...definitions]),
+	CHARACTER_FIELD_DEFINITIONS,
 	CHARACTER_SECTION_IDS: SECTION_IDS,
 	getCharacterFieldDefinition,
 	getCharacterSections,
