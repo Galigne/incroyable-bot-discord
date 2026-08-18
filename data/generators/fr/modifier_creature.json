@@ -3,7 +3,7 @@
   "id": "modifier_creature",
   "visibility": "internal",
   "name": "Modificateurs de créature",
-  "description": "Variations descriptives persistantes pour les créatures générées",
+  "description": "Variantes persistantes de créature ayant des conséquences concrètes en jeu",
   "entrySchema": {
     "required": ["description"]
   },
@@ -11,94 +11,122 @@
     {
       "id": "alpha",
       "name": "Alpha",
+      "weight": 3,
       "fields": {
-        "description": "Un chef ou dominant coordonne les autres créatures et protège en priorité la cohésion du groupe."
+        "description": "Cet individu dominant coordonne ses semblables proches, défie les rivaux manifestes et protège la cohésion du groupe ; l’isoler de ses alliés ou provoquer son orgueil peut briser cette emprise."
       }
     },
     {
       "id": "hybrid",
       "name": "Hybride",
       "fields": {
-        "description": "La créature possède des traits empruntés à une seconde espèce, avec une capacité utile et une faiblesse contradictoire."
+        "description": "Une seconde lignée a modifié ses sens, sa locomotion ou ses attaques naturelles, tandis que cette anatomie mal assortie crée une limite claire ou un point faible à définir par le MJ."
       }
     },
     {
       "id": "undead",
-      "name": "Mort-vivant",
+      "name": "Mort-vivante",
       "fields": {
-        "description": "Le monstre ignore plusieurs besoins biologiques mais reste lié à la cause ou au rituel de sa réanimation."
+        "description": "La réanimation l’affranchit de la respiration, du sommeil et de la nourriture ordinaire, et de nombreux dangers biologiques perdent leur pertinence ; un rituel de contrôle, une force consacrée ou la destruction de son ancrage peut exploiter cet état contre nature."
       }
     },
     {
       "id": "reinforced",
-      "name": "Renforcé",
+      "name": "Renforcée",
+      "weight": 3,
       "fields": {
-        "description": "Une armure, une mutation ou une protection magique réduit l’efficacité des attaques ordinaires."
+        "description": "Des plaques épaisses, des greffes ou un renforcement magique diminuent l’efficacité des coups ordinaires mal ajustés, mais les articulations, les organes sensoriels ou un ventre sans protection restent exploitables."
       }
     },
     {
       "id": "gigantic",
       "name": "Gigantesque",
       "fields": {
-        "description": "Sa taille augmente allonge, force et résistance, mais l’empêche de se déplacer facilement dans les espaces étroits."
+        "description": "Une taille extraordinaire lui confère une allonge et une force imposantes ainsi que la maîtrise des espaces ouverts, mais complique toute dissimulation et rend périlleux le passage dans les lieux étroits ou fragiles."
       }
     },
     {
       "id": "enraged",
-      "name": "Enragé",
+      "name": "Enragée",
+      "weight": 2,
       "fields": {
-        "description": "La créature attaque sans prudence après avoir été blessée et devient plus dangereuse mais plus prévisible."
+        "description": "Une fureur permanente la pousse à réduire les distances et à poursuivre ses attaques malgré le danger ; cette agressivité inhabituelle la rend aussi plus facile à attirer, distraire ou contourner avec une cible évidente."
       }
     },
     {
-      "id": "pack",
-      "name": "Meute",
+      "id": "juvenile",
+      "name": "Juvénile",
+      "weight": 3,
       "fields": {
-        "description": "Le résultat représente trois individus coordonnés plutôt qu’une créature solitaire."
+        "description": "Ce spécimen immature est plus petit, moins résistant et inexpérimenté, mais il fuit plus vite, se glisse dans des passages réduits et réagit de manière imprévisible lorsqu’il est acculé."
       }
     },
     {
-      "id": "swarm",
-      "name": "Nuée",
+      "id": "diminutive",
+      "name": "Minuscule",
+      "weight": 2,
       "fields": {
-        "description": "Une multitude de petites créatures agit comme une seule menace et résiste aux attaques visant un individu."
+        "description": "Son corps anormalement petit se dissimule facilement et passe par des ouvertures minuscules, mais manque d’allonge, de levier et de résistance lorsqu’une force cherche à le déplacer."
       }
     },
     {
       "id": "ectoplasmic",
       "name": "Ectoplasmique",
       "fields": {
-        "description": "La créature traverse partiellement la matière mais doit se matérialiser pour affecter le monde physique."
+        "description": "Son corps instable peut s’infiltrer à travers la matière solide, mais doit devenir tangible pour frapper, porter un objet ou tenir une position, créant alors des occasions de l’atteindre normalement."
       }
     },
     {
       "id": "invisible",
       "name": "Invisible",
       "fields": {
-        "description": "La créature reste difficile à voir, mais son odeur, ses sons et son interaction avec le décor peuvent la trahir."
+        "description": "La créature ne peut normalement pas être vue, ce qui rend le suivi visuel et les attaques ajustées peu fiables ; son odeur, ses bruits, les débris déplacés et ses contacts avec le décor peuvent néanmoins révéler sa position."
       }
     },
     {
       "id": "rule_bearer",
-      "name": "Porteur de LOI",
+      "name": "Porteuse de LOI",
       "weight": 10,
       "fields": {
-        "description": "Le monstre manifeste une LOI {{ rules }}, cela change son apparence et ses facultés."
+        "description": "La créature manifeste la LOI suivante : {{ rules }} Cette LOI persistante transforme ses facultés et son comportement, tandis que les limites propres à la LOI offrent au MJ des moyens concrets de la mettre en difficulté."
       }
     },
     {
-      "id": "equipped",
-      "name": "Équipé",
+      "id": "armed",
+      "name": "Armée",
+      "weight": 2,
       "fields": {
-        "description": "La créature semble porter des armes ou des objets adaptés à son anatomie ; aucun équipement n’est sélectionné ni ajouté."
+        "description": "Quelle que soit l’anatomie normalement associée à son espèce, cet individu possède la morphologie, la coordination et l’entraînement nécessaires pour manier efficacement l’arme suivante : {{ weapons }} Le MJ détermine ses conséquences concrètes en jeu."
       }
     },
     {
-      "id": "restless",
-      "name": "Agitée",
-      "weight": 3,
+      "id": "armored",
+      "name": "En armure",
+      "weight": 2,
       "fields": {
-        "description": "Elle ne reste jamais parfaitement immobile et surveille constamment les alentours."
+        "description": "L’armure suivante a été ajustée, remodelée ou construite autour de cette créature afin qu’elle puisse la porter et profiter réellement de sa protection : {{ armors }} Le MJ détermine ses conséquences concrètes en jeu."
+      }
+    },
+    {
+      "id": "afflicted",
+      "name": "Affligée",
+      "weight": 10,
+      "fields": {
+        "description": "La créature souffre de l’affliction persistante suivante : {{ affliction }} Le MJ détermine quand et comment cette condition entraîne des conséquences concrètes en jeu."
+      }
+    },
+    {
+      "id": "gifted",
+      "name": "Douée",
+      "fields": {
+        "description": "Cet individu possède la faculté inhabituelle suivante en plus de ce que son espèce laisse normalement attendre : {{ traits }} Le MJ détermine l’importance de cette capacité supplémentaire en jeu."
+      }
+    },
+    {
+      "id": "regenerating",
+      "name": "Régénérante",
+      "fields": {
+        "description": "Les chairs endommagées se reforment constamment, à moins qu’une substance, une source de dégâts ou un organe exposé choisi par le MJ n’interrompe cette régénération."
       }
     },
     {
@@ -106,7 +134,7 @@
       "name": "Incandescente",
       "weight": 2,
       "fields": {
-        "description": "Une fumée légère et de faibles braises s’échappent de son corps sans imposer d’effet mécanique."
+        "description": "Une chaleur intérieure persistante dégage fumée et braises, menace les matières inflammables alentour et rend tout contact rapproché dangereux ; l’eau, le grand froid ou l’étouffement peuvent neutraliser cet avantage."
       }
     },
     {
@@ -114,14 +142,46 @@
       "name": "Couverte de givre",
       "weight": 2,
       "fields": {
-        "description": "Une couche de givre persistante recouvre une partie de son corps et les surfaces proches."
+        "description": "Un froid surnaturel recouvre son corps et glace les surfaces proches, gênant la poursuite au contact et les prises à mains nues ; une chaleur soutenue fait fondre le givre et expose la créature qu’il protégeait."
       }
     },
     {
       "id": "shadowed",
       "name": "Voilée d’ombre",
+      "weight": 2,
       "fields": {
-        "description": "Sa silhouette reste difficile à distinguer des ombres qui l’entourent."
+        "description": "Sa silhouette se confond avec les environnements faiblement éclairés, ce qui facilite la dissimulation et les embuscades dans l’obscurité, tandis qu’une lumière directe et intense révèle un contour net et vulnérable."
+      }
+    },
+    {
+      "id": "elder",
+      "name": "Vénérable",
+      "fields": {
+        "description": "Un âge avancé lui apporte patience, expérience et résistance inhabituelle aux dangers familiers, mais une vitesse déclinante et des habitudes enracinées rendent ses réactions posées et prévisibles."
+      }
+    },
+    {
+      "id": "frail",
+      "name": "Fragile",
+      "weight": 2,
+      "fields": {
+        "description": "Une constitution cassante supporte mal les forces prolongées et les impacts lourds ; la créature dépend donc de la distance, des abris, de la prudence ou d’alliés plus robustes pour rester efficace."
+      }
+    },
+    {
+      "id": "crippled",
+      "name": "Estropiée",
+      "weight": 2,
+      "fields": {
+        "description": "Un membre, une aile ou un organe locomoteur définitivement endommagé limite fortement une forme de déplacement et oblige la créature à se défendre ou à chasser d’une manière compensatoire."
+      }
+    },
+    {
+      "id": "scarred_weak_point",
+      "name": "Cicatrice vulnérable",
+      "weight": 2,
+      "fields": {
+        "description": "Une ancienne blessure ne s’est jamais correctement refermée ; repérer puis atteindre la cicatrice permet de contourner la protection habituelle de la créature ou de provoquer une douleur qui modifie son comportement."
       }
     }
   ]

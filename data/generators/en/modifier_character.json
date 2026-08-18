@@ -3,124 +3,131 @@
   "id": "modifier_character",
   "visibility": "internal",
   "name": "Character modifiers",
-  "description": "Persistent descriptive variations for generated characters",
+  "description": "Persistent character variations with concrete implications for play",
   "entrySchema": {
     "required": ["description"]
   },
   "entries": [
     {
       "id": "scarred",
-      "name": "Scarred",
+      "name": "Old Wound",
       "weight": 3,
       "fields": {
-        "description": "Old scars mark their body and hint at dangers they survived."
+        "description": "An old injury has left dense scar tissue and a tender weak point; blows or strenuous motion involving it can cause sudden pain and restricted movement."
       }
     },
     {
-      "id": "pale",
-      "name": "Pale",
+      "id": "light_sensitive",
+      "name": "Light-Sensitive",
       "weight": 2,
       "fields": {
-        "description": "Their coloring is unnaturally pale, making familiar features seem strange."
+        "description": "Their eyes and skin react painfully to strong light; glare impairs perception, and prolonged exposure forces them to seek shade or protection."
       }
     },
     {
-      "id": "ornate_markings",
-      "name": "Ornate Markings",
+      "id": "unmistakable",
+      "name": "Unmistakable",
       "weight": 2,
       "fields": {
-        "description": "Distinctive natural markings form elaborate patterns across their body."
+        "description": "A permanent combination of voice, mannerisms, and distinctive features makes them difficult to disguise; witnesses can recognize them after even a brief encounter."
       }
     },
     {
       "id": "weathered",
-      "name": "Weathered",
+      "name": "Weather-Hardened",
+      "weight": 2,
       "fields": {
-        "description": "Exposure to harsh weather has left their features roughened and visibly worn."
+        "description": "Long exposure has made cold, rain, and rough travel easier to endure, but dulled skin and calloused hands miss faint touch and other fine tactile cues."
       }
     },
     {
       "id": "one_eyed",
       "name": "One-Eyed",
+      "weight": 2,
       "fields": {
-        "description": "One eye is missing or permanently closed, making their face immediately recognizable."
+        "description": "The permanent loss of one eye narrows their field of view and depth perception; threats on the blind side and precise distance judgments are harder to notice."
       }
     },
     {
-      "id": "burn_scarred",
-      "name": "Burn-Scarred",
+      "id": "damaged_lungs",
+      "name": "Damaged Lungs",
       "fields": {
-        "description": "Extensive old burn scars cover a clearly visible part of their body."
+        "description": "Old smoke, disease, or injury has permanently reduced their breath; sustained exertion, choking air, and holding their breath become serious limitations."
       }
     },
     {
-      "id": "heavily_tattooed",
-      "name": "Heavily Tattooed",
+      "id": "publicly_branded",
+      "name": "Publicly Branded",
       "fields": {
-        "description": "Dense tattoos cover much of their visible skin in layered designs."
+        "description": "An unmistakable legal, religious, or factional brand marks them; those who understand it may identify them immediately, deny aid, or demand particular conduct."
       }
     },
     {
-      "id": "ritual_scarification",
-      "name": "Ritual Scarification",
+      "id": "oathbound",
+      "name": "Oathbound",
       "fields": {
-        "description": "Deliberate raised scars form repeated ceremonial patterns across their skin."
+        "description": "A persistent ritual bond imposes a prohibition or duty chosen by the GM; approaching a breach produces an obvious warning and invites a fitting complication."
       }
     },
     {
       "id": "prosthetic_limb",
       "name": "Prosthetic Limb",
+      "weight": 2,
       "fields": {
-        "description": "A clearly visible prosthetic replaces an arm or leg, with materials and workmanship suited to the setting."
+        "description": "A prosthetic arm or leg restores ordinary function and can brace against some hazards, but fine control or uneven ground is harder and damage requires specialist repair."
       }
     },
     {
       "id": "missing_fingers",
       "name": "Missing Fingers",
+      "weight": 2,
       "fields": {
-        "description": "Several fingers are missing from one hand, leaving an unmistakable silhouette."
+        "description": "Several fingers are permanently missing from one hand; a full grip, fine manipulation, and tools made for two complete hands require adaptation or extra time."
       }
     },
     {
       "id": "noticeable_limp",
       "name": "Noticeable Limp",
+      "weight": 2,
       "fields": {
-        "description": "An old injury gives their walk a pronounced and recognizable limp."
+        "description": "An old injury causes a pronounced limp; sprinting, climbing, and balancing are more difficult, and the uneven gait is easy to track or recognize."
       }
     },
     {
-      "id": "unnatural_eyes",
-      "name": "Unnatural Eyes",
+      "id": "chronic_tremor",
+      "name": "Chronic Tremor",
       "fields": {
-        "description": "Their eyes have an impossible color, shape, or reflection that cannot be mistaken for ordinary variation."
+        "description": "A persistent tremor worsens under stress; steady aim, delicate manipulation, and remaining perfectly still are unreliable even when the character is otherwise capable."
       }
     },
     {
-      "id": "magical_markings",
-      "name": "Magical Markings",
+      "id": "magic_saturated",
+      "name": "Magic-Saturated",
       "fields": {
-        "description": "Visible symbols shimmer, shift, or faintly glow across their skin without defining a specific effect."
+        "description": "Persistent magical residue clings to them; wards, magical detection, and supernatural predators may notice or react to their presence more readily."
       }
     },
     {
-      "id": "discolored_veins",
-      "name": "Discolored Veins",
+      "id": "afflicted",
+      "name": "Afflicted",
+      "weight": 10,
       "fields": {
-        "description": "Veins of an unusual color show clearly beneath the skin in branching patterns."
+        "description": "They live with the following persistent affliction: {{ affliction }} The GM determines when and how the condition has concrete consequences in play."
       }
     },
     {
-      "id": "missing_ear",
-      "name": "Missing Ear",
+      "id": "impaired_hearing",
+      "name": "Impaired Hearing",
+      "weight": 2,
       "fields": {
-        "description": "One outer ear is partly or entirely missing, leaving a distinctive profile."
+        "description": "Permanent hearing loss makes quiet speech and the direction of distant sounds difficult to judge, especially amid noise or when danger approaches from the affected side."
       }
     },
     {
-      "id": "stitch_scars",
-      "name": "Extensive Stitch Scars",
+      "id": "haunted",
+      "name": "Haunted",
       "fields": {
-        "description": "Long surgical or roughly stitched scars cross several visible areas of their body."
+        "description": "A persistent unseen presence disturbs sleep, silence, and attempts at stealth, but its reactions may also warn of nearby supernatural danger."
       }
     }
   ]
