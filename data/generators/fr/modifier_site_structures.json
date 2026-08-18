@@ -1,6 +1,6 @@
 {
   "schemaVersion": 4,
-  "id": "site_modifier_structures",
+  "id": "modifier_site_structures",
   "visibility": "internal",
   "name": "Modificateurs de site historiques",
   "description": "Variations historiques descriptives compatibles avec des générateurs de lieux précis",

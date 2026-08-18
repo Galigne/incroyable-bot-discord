@@ -210,10 +210,10 @@ function checkCategoryRouters(errors, generatorCatalog) {
 		['modifier', [
 			'modifier_character',
 			'modifier_creature',
-			'site_modifier_all',
-			'site_modifier_building',
-			'site_modifier_interiors',
-			'site_modifier_structures',
+			'modifier_site_all',
+			'modifier_site_building',
+			'modifier_site_interiors',
+			'modifier_site_structures',
 		]],
 	]) {
 		const router = generatorCatalog.getGenerator(routerId);
@@ -290,13 +290,13 @@ function checkCreatureGenerators(errors, generatorCatalog) {
 			))
 		))
 		|| JSON.stringify(generatorCatalog.getGenerator('region').modifiers)
-			!== JSON.stringify({ site_modifier_all: 5 })
+			!== JSON.stringify({ modifier_site_all: 5 })
 		|| JSON.stringify(generatorCatalog.getGenerator('building').modifiers)
 			!== JSON.stringify({
-				site_modifier_all: 5,
-				site_modifier_structures: 5,
-				site_modifier_interiors: 5,
-				site_modifier_building: 5,
+				modifier_site_all: 5,
+				modifier_site_structures: 5,
+				modifier_site_interiors: 5,
+				modifier_site_building: 5,
 			})
 	) {
 		errors.push('Status effects and character/creature modifiers are not valid generation catalogs.');

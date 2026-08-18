@@ -81,8 +81,9 @@
     {
       "id": "rule_bearer",
       "name": "Porteur de LOI",
+      "weight": 10,
       "fields": {
-        "description": "Le monstre manifeste une LOI issue de `rules`, soumise à la même limitation qu’un utilisateur ordinaire."
+        "description": "Le monstre manifeste une LOI {{ rules }}, cela change son apparence et ses facultés."
       }
     },
     {

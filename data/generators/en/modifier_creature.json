@@ -81,8 +81,9 @@
     {
       "id": "rule_bearer",
       "name": "RULE Bearer",
+      "weight": 10,
       "fields": {
-        "description": "The subject appears to wield a RULE-like phenomenon with an ordinary user’s limitations; no RULE is selected or granted."
+        "description": "The subject manifest a RULE {{ rules }} which changes its appearance and abilities."
       }
     },
     {

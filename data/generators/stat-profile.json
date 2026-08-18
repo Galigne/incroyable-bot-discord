@@ -32,6 +32,156 @@
       }
     },
     {
+      "id": "character-fighter",
+      "minimums": {
+        "constitution": 4,
+        "strength": 4,
+        "dexterity": 4,
+        "intelligence": 4,
+        "speed": 4,
+        "perception": 4,
+        "charisma": 4
+      },
+      "maximums": {
+        "constitution": 20,
+        "strength": 20,
+        "dexterity": 12,
+        "intelligence": 14,
+        "speed": 20,
+        "perception": 20,
+        "charisma": 14
+      },
+      "weights": {
+        "constitution": 3,
+        "strength": 3,
+        "dexterity": 0.8,
+        "intelligence": 0.8,
+        "speed": 2,
+        "perception": 1,
+        "charisma": 0.8
+      }
+    },
+    {
+      "id": "character-rogue",
+      "minimums": {
+        "constitution": 4,
+        "strength": 4,
+        "dexterity": 4,
+        "intelligence": 4,
+        "speed": 4,
+        "perception": 4,
+        "charisma": 4
+      },
+      "maximums": {
+        "constitution": 14,
+        "strength": 12,
+        "dexterity": 20,
+        "intelligence": 14,
+        "speed": 20,
+        "perception": 20,
+        "charisma": 20
+      },
+      "weights": {
+        "constitution": 0.8,
+        "strength": 0.8,
+        "dexterity": 3,
+        "intelligence": 2,
+        "speed": 3,
+        "perception": 1,
+        "charisma": 0.8
+      }
+    },
+    {
+      "id": "character-mage",
+      "minimums": {
+        "constitution": 4,
+        "strength": 4,
+        "dexterity": 4,
+        "intelligence": 4,
+        "speed": 4,
+        "perception": 4,
+        "charisma": 4
+      },
+      "maximums": {
+        "constitution": 14,
+        "strength": 12,
+        "dexterity": 14,
+        "intelligence": 20,
+        "speed": 20,
+        "perception": 20,
+        "charisma": 20
+      },
+      "weights": {
+        "constitution": 0.8,
+        "strength": 0.8,
+        "dexterity": 2,
+        "intelligence": 4,
+        "speed": 0.8,
+        "perception": 1,
+        "charisma": 2
+      }
+    },
+    {
+      "id": "character-cleric",
+      "minimums": {
+        "constitution": 4,
+        "strength": 4,
+        "dexterity": 4,
+        "intelligence": 4,
+        "speed": 4,
+        "perception": 4,
+        "charisma": 4
+      },
+      "maximums": {
+        "constitution": 20,
+        "strength": 20,
+        "dexterity": 12,
+        "intelligence": 20,
+        "speed": 14,
+        "perception": 14,
+        "charisma": 20
+      },
+      "weights": {
+        "constitution": 3,
+        "strength": 3,
+        "dexterity": 0.8,
+        "intelligence": 3,
+        "speed": 0.8,
+        "perception": 0.8,
+        "charisma": 1
+      }
+    },
+    {
+      "id": "character-diplomat",
+      "minimums": {
+        "constitution": 4,
+        "strength": 4,
+        "dexterity": 4,
+        "intelligence": 4,
+        "speed": 4,
+        "perception": 4,
+        "charisma": 4
+      },
+      "maximums": {
+        "constitution": 14,
+        "strength": 12,
+        "dexterity": 12,
+        "intelligence": 20,
+        "speed": 20,
+        "perception": 20,
+        "charisma": 20
+      },
+      "weights": {
+        "constitution": 0.8,
+        "strength": 0.8,
+        "dexterity": 0.8,
+        "intelligence": 1.5,
+        "speed": 1,
+        "perception": 2.5,
+        "charisma": 2.5
+      }
+    },
+    {
       "id": "creature-predator",
       "minimums": {
         "constitution": 4,
@@ -152,6 +302,96 @@
       }
     },
     {
+      "id": "creature-animal-tank",
+      "minimums": {
+        "constitution": 4,
+        "strength": 4,
+        "dexterity": 4,
+        "intelligence": 4,
+        "speed": 4,
+        "perception": 4,
+        "charisma": 4
+      },
+      "maximums": {
+        "constitution": 20,
+        "strength": 14,
+        "dexterity": 14,
+        "intelligence": 20,
+        "speed": 20,
+        "perception": 20,
+        "charisma": 20
+      },
+      "weights": {
+        "constitution": 4,
+        "strength": 0.8,
+        "dexterity": 0.8,
+        "intelligence": 1,
+        "speed": 2,
+        "perception": 2,
+        "charisma": 0.8
+      }
+    },
+    {
+      "id": "creature-animal-runner",
+      "minimums": {
+        "constitution": 4,
+        "strength": 4,
+        "dexterity": 4,
+        "intelligence": 4,
+        "speed": 4,
+        "perception": 4,
+        "charisma": 4
+      },
+      "maximums": {
+        "constitution": 14,
+        "strength": 14,
+        "dexterity": 20,
+        "intelligence": 20,
+        "speed": 20,
+        "perception": 20,
+        "charisma": 20
+      },
+      "weights": {
+        "constitution": 0.8,
+        "strength": 0.8,
+        "dexterity": 2,
+        "intelligence": 1,
+        "speed": 4,
+        "perception": 3,
+        "charisma": 0.8
+      }
+    },
+    {
+      "id": "creature-animal-magic",
+      "minimums": {
+        "constitution": 4,
+        "strength": 4,
+        "dexterity": 4,
+        "intelligence": 4,
+        "speed": 4,
+        "perception": 4,
+        "charisma": 4
+      },
+      "maximums": {
+        "constitution": 20,
+        "strength": 14,
+        "dexterity": 20,
+        "intelligence": 20,
+        "speed": 20,
+        "perception": 20,
+        "charisma": 20
+      },
+      "weights": {
+        "constitution": 1,
+        "strength": 0.8,
+        "dexterity": 1,
+        "intelligence": 4,
+        "speed": 3,
+        "perception": 2,
+        "charisma": 0.8
+      }
+    },
+    {
       "id": "creature-companion",
       "minimums": {
         "constitution": 4,
@@ -173,10 +413,40 @@
       },
       "weights": {
         "constitution": 1,
-        "strength": 0.75,
-        "dexterity": 2,
-        "intelligence": 1.5,
-        "speed": 2,
+        "strength": 0.8,
+        "dexterity": 3,
+        "intelligence": 1,
+        "speed": 3,
+        "perception": 2,
+        "charisma": 2
+      }
+    },
+    {
+      "id": "creature-companion-magic",
+      "minimums": {
+        "constitution": 4,
+        "strength": 4,
+        "dexterity": 4,
+        "intelligence": 4,
+        "speed": 4,
+        "perception": 4,
+        "charisma": 4
+      },
+      "maximums": {
+        "constitution": 16,
+        "strength": 16,
+        "dexterity": 20,
+        "intelligence": 20,
+        "speed": 20,
+        "perception": 20,
+        "charisma": 20
+      },
+      "weights": {
+        "constitution": 1,
+        "strength": 0.8,
+        "dexterity": 1,
+        "intelligence": 4,
+        "speed": 1,
         "perception": 2,
         "charisma": 2
       }

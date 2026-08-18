@@ -21,22 +21,22 @@
     {
       "id": "site_general",
       "name": "Modificateurs généraux de lieu",
-      "generator": "site_modifier_all"
+      "generator": "modifier_site_all"
     },
     {
       "id": "site_building",
       "name": "Modificateurs historiques de bâtiment",
-      "generator": "site_modifier_building"
+      "generator": "modifier_site_building"
     },
     {
       "id": "site_interiors",
       "name": "Modificateurs de lieux intérieurs",
-      "generator": "site_modifier_interiors"
+      "generator": "modifier_site_interiors"
     },
     {
       "id": "site_structures",
       "name": "Modificateurs d’état des structures",
-      "generator": "site_modifier_structures"
+      "generator": "modifier_site_structures"
     }
   ]
 }

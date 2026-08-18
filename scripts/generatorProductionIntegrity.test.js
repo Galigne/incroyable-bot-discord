@@ -85,10 +85,10 @@ test('production category routers are minimal and traverse internal child genera
 		['modifier', [
 			'modifier_character',
 			'modifier_creature',
-			'site_modifier_all',
-			'site_modifier_building',
-			'site_modifier_interiors',
-			'site_modifier_structures',
+			'modifier_site_all',
+			'modifier_site_building',
+			'modifier_site_interiors',
+			'modifier_site_structures',
 		]],
 	]);
 	for (const locale of ['en', 'fr']) {

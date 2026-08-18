@@ -1,6 +1,6 @@
 {
   "schemaVersion": 4,
-  "id": "site_modifier_interiors",
+  "id": "modifier_site_interiors",
   "visibility": "internal",
   "name": "Historical site modifiers",
   "description": "Descriptive historical variations compatible with specific location generators",
