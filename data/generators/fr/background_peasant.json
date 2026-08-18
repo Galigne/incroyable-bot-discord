@@ -10,43 +10,73 @@
   "entries": [
     {
       "id": "farmer",
-      "name": "Fermier"
+      "name": "Fermier",
+      "generation": {
+        "statProfile": "character-balanced"
+      }
     },
     {
       "id": "herder",
-      "name": "Éleveur"
+      "name": "Éleveur",
+      "generation": {
+        "statProfile": "character-balanced"
+      }
     },
     {
       "id": "shepherd",
-      "name": "Berger"
+      "name": "Berger",
+      "generation": {
+        "statProfile": "character-balanced"
+      }
     },
     {
       "id": "miller",
-      "name": "Meunier"
+      "name": "Meunier",
+      "generation": {
+        "statProfile": "character-balanced"
+      }
     },
     {
       "id": "farmhand",
-      "name": "Ouvrier agricole"
+      "name": "Ouvrier agricole",
+      "generation": {
+        "statProfile": "character-fighter"
+      }
     },
     {
       "id": "lumberjack",
-      "name": "Bûcheron"
+      "name": "Bûcheron",
+      "generation": {
+        "statProfile": "character-fighter"
+      }
     },
     {
       "id": "miner",
-      "name": "Mineur"
+      "name": "Mineur",
+      "generation": {
+        "statProfile": "character-fighter"
+      }
     },
     {
       "id": "village_elder",
-      "name": "Ancien du village"
+      "name": "Ancien du village",
+      "generation": {
+        "statProfile": "character-diplomat"
+      }
     },
     {
       "id": "rural_laborer",
-      "name": "Travailleur rural"
+      "name": "Travailleur rural",
+      "generation": {
+        "statProfile": "character-fighter"
+      }
     },
     {
       "id": "village_healer",
-      "name": "Guérisseur du village"
+      "name": "Guérisseur du village",
+      "generation": {
+        "statProfile": "character-cleric"
+      }
     }
   ]
 }

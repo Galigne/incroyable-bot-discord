@@ -10,43 +10,73 @@
   "entries": [
     {
       "id": "sailor",
-      "name": "Marin"
+      "name": "Marin",
+      "generation": {
+        "statProfile": "character-balanced"
+      }
     },
     {
       "id": "fisher",
-      "name": "Pêcheur"
+      "name": "Pêcheur",
+      "generation": {
+        "statProfile": "character-balanced"
+      }
     },
     {
       "id": "pirate",
-      "name": "Pirate"
+      "name": "Pirate",
+      "generation": {
+        "statProfile": "character-fighter"
+      }
     },
     {
       "id": "navigator",
-      "name": "Navigateur"
+      "name": "Navigateur",
+      "generation": {
+        "statProfile": "character-rogue"
+      }
     },
     {
       "id": "deckhand",
-      "name": "Matelot"
+      "name": "Matelot",
+      "generation": {
+        "statProfile": "character-fighter"
+      }
     },
     {
       "id": "dock_worker",
-      "name": "Docker"
+      "name": "Docker",
+      "generation": {
+        "statProfile": "character-fighter"
+      }
     },
     {
       "id": "ship_captain",
-      "name": "Capitaine de navire"
+      "name": "Capitaine de navire",
+      "generation": {
+        "statProfile": "character-diplomat"
+      }
     },
     {
       "id": "smuggler",
-      "name": "Contrebandier"
+      "name": "Contrebandier",
+      "generation": {
+        "statProfile": "character-rogue"
+      }
     },
     {
       "id": "salvager",
-      "name": "Récupérateur d’épaves"
+      "name": "Récupérateur d’épaves",
+      "generation": {
+        "statProfile": "character-rogue"
+      }
     },
     {
       "id": "pilot",
-      "name": "Pilote"
+      "name": "Pilote",
+      "generation": {
+        "statProfile": "character-rogue"
+      }
     }
   ]
 }

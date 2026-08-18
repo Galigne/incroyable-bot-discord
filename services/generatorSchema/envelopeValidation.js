@@ -13,6 +13,9 @@ const {
 	GENERATOR_VISIBILITIES,
 	MAX_ENTRY_TEXT_LENGTH,
 } = require('./constants');
+const {
+	validateBackgroundGeneratorEnvelope,
+} = require('./backgroundMetadataValidation');
 const { validateCreatureGeneratorEnvelope } = require('./creatureMetadataValidation');
 const {
 	validateEntrySchema,
@@ -85,6 +88,12 @@ function validateGeneratorDefinition(generator, file = '<generator>', options = 
 		);
 	}
 	const isRouter = validateGeneratorRouterStructure(generator, file);
+	validateBackgroundGeneratorEnvelope(
+		generator,
+		entrySchema,
+		file,
+		{ ...options, isRouter },
+	);
 	validateCreatureGeneratorEnvelope(
 		generator,
 		entrySchema,

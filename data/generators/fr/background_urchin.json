@@ -10,43 +10,73 @@
   "entries": [
     {
       "id": "orphan",
-      "name": "Orphelin"
+      "name": "Orphelin",
+      "generation": {
+        "statProfile": "character-balanced"
+      }
     },
     {
       "id": "beggar",
-      "name": "Mendiant"
+      "name": "Mendiant",
+      "generation": {
+        "statProfile": "character-diplomat"
+      }
     },
     {
       "id": "street_child",
-      "name": "Enfant des rues"
+      "name": "Enfant des rues",
+      "generation": {
+        "statProfile": "character-rogue"
+      }
     },
     {
       "id": "scavenger",
-      "name": "Chiffonnier"
+      "name": "Chiffonnier",
+      "generation": {
+        "statProfile": "character-rogue"
+      }
     },
     {
       "id": "runaway",
-      "name": "Fugueur"
+      "name": "Fugueur",
+      "generation": {
+        "statProfile": "character-rogue"
+      }
     },
     {
       "id": "street_messenger",
-      "name": "Messager des rues"
+      "name": "Messager des rues",
+      "generation": {
+        "statProfile": "character-rogue"
+      }
     },
     {
       "id": "pickpocket",
-      "name": "Coupe-bourse"
+      "name": "Coupe-bourse",
+      "generation": {
+        "statProfile": "character-rogue"
+      }
     },
     {
       "id": "street_performer",
-      "name": "Artiste de rue"
+      "name": "Artiste de rue",
+      "generation": {
+        "statProfile": "character-diplomat"
+      }
     },
     {
       "id": "urchin",
-      "name": "Gamin des rues"
+      "name": "Gamin des rues",
+      "generation": {
+        "statProfile": "character-balanced"
+      }
     },
     {
       "id": "errand_runner",
-      "name": "Commissionnaire"
+      "name": "Commissionnaire",
+      "generation": {
+        "statProfile": "character-rogue"
+      }
     }
   ]
 }

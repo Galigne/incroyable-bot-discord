@@ -10,43 +10,73 @@
   "entries": [
     {
       "id": "apprentice",
-      "name": "Apprenti"
+      "name": "Apprenti",
+      "generation": {
+        "statProfile": "character-mage"
+      }
     },
     {
       "id": "hedge_mage",
-      "name": "Mage autodidacte"
+      "name": "Mage autodidacte",
+      "generation": {
+        "statProfile": "character-mage"
+      }
     },
     {
       "id": "magical_researcher",
-      "name": "Chercheur en magie"
+      "name": "Chercheur en magie",
+      "generation": {
+        "statProfile": "character-mage"
+      }
     },
     {
       "id": "battle_mage",
-      "name": "Mage de bataille"
+      "name": "Mage de bataille",
+      "generation": {
+        "statProfile": "character-mage"
+      }
     },
     {
       "id": "ritualist",
-      "name": "Ritualiste"
+      "name": "Ritualiste",
+      "generation": {
+        "statProfile": "character-mage"
+      }
     },
     {
       "id": "alchemist",
-      "name": "Alchimiste"
+      "name": "Alchimiste",
+      "generation": {
+        "statProfile": "character-mage"
+      }
     },
     {
       "id": "runesmith",
-      "name": "Graveur de runes"
+      "name": "Graveur de runes",
+      "generation": {
+        "statProfile": "character-mage"
+      }
     },
     {
       "id": "diviner",
-      "name": "Voyant"
+      "name": "Voyant",
+      "generation": {
+        "statProfile": "character-mage"
+      }
     },
     {
       "id": "court_mage",
-      "name": "Mage de cour"
+      "name": "Mage de cour",
+      "generation": {
+        "statProfile": "character-mage"
+      }
     },
     {
       "id": "enchanter",
-      "name": "Enchanteur"
+      "name": "Enchanteur",
+      "generation": {
+        "statProfile": "character-mage"
+      }
     }
   ]
 }

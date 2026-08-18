@@ -4,7 +4,10 @@ const {
 	validateGeneratorPair,
 	validateGeneratorRelationships,
 } = require('./generatorSchema');
-const { CREATURE_ROUTER_ID } = require('./generatorSchema/constants');
+const {
+	BACKGROUND_ROUTER_ID,
+	CREATURE_ROUTER_ID,
+} = require('./generatorSchema/constants');
 
 const generatorsDirectory = path.join(__dirname, '..', 'data', 'generators');
 const DEFAULT_LOCALE = 'en';
@@ -86,13 +89,21 @@ function readGeneratorCatalog(rootDirectory) {
 			`fr/${relativePath}`,
 		),
 	}));
-	const creatureGeneratorIds = discoverCreatureGeneratorIds(definitions);
+	const backgroundGeneratorIds = discoverRoutedGeneratorIds(
+		definitions,
+		BACKGROUND_ROUTER_ID,
+	);
+	const creatureGeneratorIds = discoverRoutedGeneratorIds(
+		definitions,
+		CREATURE_ROUTER_ID,
+	);
 	const catalogs = new Map([
 		['en', new Map()],
 		['fr', new Map()],
 	]);
 	for (const { relativePath, english, french } of definitions) {
 		validateGeneratorPair(english, french, relativePath, {
+			backgroundGeneratorIds,
 			creatureGeneratorIds,
 		});
 		if (catalogs.get('en').has(english.id)) {
@@ -109,9 +120,9 @@ function readGeneratorCatalog(rootDirectory) {
 	return catalogs;
 }
 
-function discoverCreatureGeneratorIds(definitions) {
+function discoverRoutedGeneratorIds(definitions, routerId) {
 	const router = definitions.find(({ english }) => (
-		english.id === CREATURE_ROUTER_ID
+		english.id === routerId
 	))?.english;
 	const ids = new Set();
 	for (const entry of router?.entries ?? []) {

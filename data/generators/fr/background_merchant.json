@@ -10,43 +10,73 @@
   "entries": [
     {
       "id": "trader",
-      "name": "Marchand"
+      "name": "Marchand",
+      "generation": {
+        "statProfile": "character-diplomat"
+      }
     },
     {
       "id": "shopkeeper",
-      "name": "Boutiquier"
+      "name": "Boutiquier",
+      "generation": {
+        "statProfile": "character-diplomat"
+      }
     },
     {
       "id": "caravaner",
-      "name": "Caravanier"
+      "name": "Caravanier",
+      "generation": {
+        "statProfile": "character-balanced"
+      }
     },
     {
       "id": "factor",
-      "name": "Facteur de commerce"
+      "name": "Facteur de commerce",
+      "generation": {
+        "statProfile": "character-diplomat"
+      }
     },
     {
       "id": "appraiser",
-      "name": "Expert"
+      "name": "Expert",
+      "generation": {
+        "statProfile": "character-diplomat"
+      }
     },
     {
       "id": "innkeeper",
-      "name": "Aubergiste"
+      "name": "Aubergiste",
+      "generation": {
+        "statProfile": "character-diplomat"
+      }
     },
     {
       "id": "fishmonger",
-      "name": "Poissonnier"
+      "name": "Poissonnier",
+      "generation": {
+        "statProfile": "character-balanced"
+      }
     },
     {
       "id": "supplier",
-      "name": "Fournisseur"
+      "name": "Fournisseur",
+      "generation": {
+        "statProfile": "character-diplomat"
+      }
     },
     {
       "id": "peddler",
-      "name": "Colporteur"
+      "name": "Colporteur",
+      "generation": {
+        "statProfile": "character-diplomat"
+      }
     },
     {
       "id": "market_broker",
-      "name": "Courtier du marché"
+      "name": "Courtier du marché",
+      "generation": {
+        "statProfile": "character-diplomat"
+      }
     }
   ]
 }

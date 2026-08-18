@@ -523,6 +523,56 @@ test('seeded random character generation remains equivalent', () => {
 	assert.deepEqual(first, second);
 });
 
+test('random character statistics use the individually selected background archetype profile', () => {
+	const archetypeProfiles = new Map([
+		['soldier', 'character-fighter'],
+		['military_engineer', 'character-mage'],
+		['quartermaster', 'character-diplomat'],
+		['military_scout', 'character-rogue'],
+	]);
+	for (const locale of ['en', 'fr']) {
+		for (const [entryId, profileId] of archetypeProfiles) {
+			const entry = generatorCatalog.getGenerator('military', locale).entries
+				.find(candidate => candidate.id === entryId);
+			assert.equal(entry.generation.statProfile, profileId);
+			const resolver = {
+				generate(traversalPath, resolvedLocale, options) {
+					if (traversalPath === 'background:military.generator') {
+						return {
+							generatorId: 'military',
+							entryId,
+							outputType: 'value',
+							value: entry.name,
+							provenance: [],
+							modifiers: [],
+						};
+					}
+					return generatorResolver.generate(traversalPath, resolvedLocale, options);
+				},
+				resolveReference: generatorResolver.resolveReference,
+				resolveInlineReference: generatorResolver.resolveInlineReference,
+			};
+			const character = createCharacterFixture();
+			populateRandomCharacter(character, {
+				background: 'military',
+				level: 10,
+				locale,
+				random: () => 0.61,
+				resolver,
+			});
+			assert.deepEqual(
+				character.statistics,
+				generateStats({
+					level: 10,
+					profile: getStatProfile(profileId),
+					random: () => 0.61,
+				}),
+				`${locale}:${entryId}`,
+			);
+		}
+	}
+});
+
 test('character modifiers attach without changing generated base state', () => {
 	const plain = createCharacterFixture();
 	const modified = createCharacterFixture();

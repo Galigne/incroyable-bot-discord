@@ -10,47 +10,80 @@
   "entries": [
     {
       "id": "explorer",
-      "name": "Explorateur"
+      "name": "Explorateur",
+      "generation": {
+        "statProfile": "character-balanced"
+      }
     },
     {
       "id": "mercenary",
-      "name": "Mercenaire"
+      "name": "Mercenaire",
+      "generation": {
+        "statProfile": "character-fighter"
+      }
     },
     {
       "id": "monster_hunter",
-      "name": "Chasseur de monstres"
+      "name": "Chasseur de monstres",
+      "generation": {
+        "statProfile": "character-fighter"
+      }
     },
     {
       "id": "bounty_hunter",
-      "name": "Chasseur de primes"
+      "name": "Chasseur de primes",
+      "generation": {
+        "statProfile": "character-rogue"
+      }
     },
     {
       "id": "scout",
-      "name": "Éclaireur"
+      "name": "Éclaireur",
+      "generation": {
+        "statProfile": "character-rogue"
+      }
     },
     {
       "id": "treasure_hunter",
-      "name": "Chercheur de trésors"
+      "name": "Chercheur de trésors",
+      "generation": {
+        "statProfile": "character-rogue"
+      }
     },
     {
       "id": "pilgrim",
-      "name": "Pèlerin"
+      "name": "Pèlerin",
+      "generation": {
+        "statProfile": "character-cleric"
+      }
     },
     {
       "id": "frontier_guide",
-      "name": "Guide des frontières"
+      "name": "Guide des frontières",
+      "generation": {
+        "statProfile": "character-rogue"
+      }
     },
     {
       "id": "ruins_delver",
-      "name": "Fouilleur de ruines"
+      "name": "Fouilleur de ruines",
+      "generation": {
+        "statProfile": "character-rogue"
+      }
     },
     {
       "id": "demon_hunter",
-      "name": "Chasseur de démons"
+      "name": "Chasseur de démons",
+      "generation": {
+        "statProfile": "character-fighter"
+      }
     },
     {
       "id": "protector",
-      "name": "Protecteur"
+      "name": "Protecteur",
+      "generation": {
+        "statProfile": "character-fighter"
+      }
     }
   ]
 }

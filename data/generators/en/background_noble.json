@@ -10,43 +10,73 @@
   "entries": [
     {
       "id": "king",
-      "name": "King"
+      "name": "King",
+      "generation": {
+        "statProfile": "character-diplomat"
+      }
     },
     {
       "id": "queen",
-      "name": "Queen"
+      "name": "Queen",
+      "generation": {
+        "statProfile": "character-diplomat"
+      }
     },
     {
       "id": "prince",
-      "name": "Prince"
+      "name": "Prince",
+      "generation": {
+        "statProfile": "character-diplomat"
+      }
     },
     {
       "id": "heir",
-      "name": "Heir"
+      "name": "Heir",
+      "generation": {
+        "statProfile": "character-balanced"
+      }
     },
     {
       "id": "lord",
-      "name": "Lord"
+      "name": "Lord",
+      "generation": {
+        "statProfile": "character-diplomat"
+      }
     },
     {
       "id": "lady",
-      "name": "Lady"
+      "name": "Lady",
+      "generation": {
+        "statProfile": "character-diplomat"
+      }
     },
     {
       "id": "courtier",
-      "name": "Courtier"
+      "name": "Courtier",
+      "generation": {
+        "statProfile": "character-diplomat"
+      }
     },
     {
       "id": "aristocrat",
-      "name": "Aristocrat"
+      "name": "Aristocrat",
+      "generation": {
+        "statProfile": "character-diplomat"
+      }
     },
     {
       "id": "regent",
-      "name": "Regent"
+      "name": "Regent",
+      "generation": {
+        "statProfile": "character-diplomat"
+      }
     },
     {
       "id": "royal_advisor",
-      "name": "Royal advisor"
+      "name": "Royal advisor",
+      "generation": {
+        "statProfile": "character-diplomat"
+      }
     }
   ]
 }

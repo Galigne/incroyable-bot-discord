@@ -10,43 +10,73 @@
   "entries": [
     {
       "id": "soldier",
-      "name": "Soldier"
+      "name": "Soldier",
+      "generation": {
+        "statProfile": "character-fighter"
+      }
     },
     {
       "id": "guard",
-      "name": "Guard"
+      "name": "Guard",
+      "generation": {
+        "statProfile": "character-fighter"
+      }
     },
     {
       "id": "officer",
-      "name": "Officer"
+      "name": "Officer",
+      "generation": {
+        "statProfile": "character-fighter"
+      }
     },
     {
       "id": "veteran",
-      "name": "Veteran"
+      "name": "Veteran",
+      "generation": {
+        "statProfile": "character-fighter"
+      }
     },
     {
       "id": "mercenary",
-      "name": "Mercenary"
+      "name": "Mercenary",
+      "generation": {
+        "statProfile": "character-fighter"
+      }
     },
     {
       "id": "military_engineer",
-      "name": "Military engineer"
+      "name": "Military engineer",
+      "generation": {
+        "statProfile": "character-mage"
+      }
     },
     {
       "id": "sentry",
-      "name": "Sentry"
+      "name": "Sentry",
+      "generation": {
+        "statProfile": "character-fighter"
+      }
     },
     {
       "id": "captain",
-      "name": "Captain"
+      "name": "Captain",
+      "generation": {
+        "statProfile": "character-fighter"
+      }
     },
     {
       "id": "quartermaster",
-      "name": "Quartermaster"
+      "name": "Quartermaster",
+      "generation": {
+        "statProfile": "character-diplomat"
+      }
     },
     {
       "id": "military_scout",
-      "name": "Military scout"
+      "name": "Military scout",
+      "generation": {
+        "statProfile": "character-rogue"
+      }
     }
   ]
 }

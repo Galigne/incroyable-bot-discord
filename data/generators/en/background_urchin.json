@@ -10,43 +10,73 @@
   "entries": [
     {
       "id": "orphan",
-      "name": "Orphan"
+      "name": "Orphan",
+      "generation": {
+        "statProfile": "character-balanced"
+      }
     },
     {
       "id": "beggar",
-      "name": "Beggar"
+      "name": "Beggar",
+      "generation": {
+        "statProfile": "character-diplomat"
+      }
     },
     {
       "id": "street_child",
-      "name": "Street child"
+      "name": "Street child",
+      "generation": {
+        "statProfile": "character-rogue"
+      }
     },
     {
       "id": "scavenger",
-      "name": "Scavenger"
+      "name": "Scavenger",
+      "generation": {
+        "statProfile": "character-rogue"
+      }
     },
     {
       "id": "runaway",
-      "name": "Runaway"
+      "name": "Runaway",
+      "generation": {
+        "statProfile": "character-rogue"
+      }
     },
     {
       "id": "street_messenger",
-      "name": "Street messenger"
+      "name": "Street messenger",
+      "generation": {
+        "statProfile": "character-rogue"
+      }
     },
     {
       "id": "pickpocket",
-      "name": "Pickpocket"
+      "name": "Pickpocket",
+      "generation": {
+        "statProfile": "character-rogue"
+      }
     },
     {
       "id": "street_performer",
-      "name": "Street performer"
+      "name": "Street performer",
+      "generation": {
+        "statProfile": "character-diplomat"
+      }
     },
     {
       "id": "urchin",
-      "name": "Urchin"
+      "name": "Urchin",
+      "generation": {
+        "statProfile": "character-balanced"
+      }
     },
     {
       "id": "errand_runner",
-      "name": "Errand runner"
+      "name": "Errand runner",
+      "generation": {
+        "statProfile": "character-rogue"
+      }
     }
   ]
 }

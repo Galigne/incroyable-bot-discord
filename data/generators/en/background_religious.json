@@ -10,43 +10,73 @@
   "entries": [
     {
       "id": "priest",
-      "name": "Priest"
+      "name": "Priest",
+      "generation": {
+        "statProfile": "character-cleric"
+      }
     },
     {
       "id": "monk",
-      "name": "Monk"
+      "name": "Monk",
+      "generation": {
+        "statProfile": "character-cleric"
+      }
     },
     {
       "id": "temple_servant",
-      "name": "Temple servant"
+      "name": "Temple servant",
+      "generation": {
+        "statProfile": "character-cleric"
+      }
     },
     {
       "id": "pilgrim",
-      "name": "Pilgrim"
+      "name": "Pilgrim",
+      "generation": {
+        "statProfile": "character-cleric"
+      }
     },
     {
       "id": "theologian",
-      "name": "Theologian"
+      "name": "Theologian",
+      "generation": {
+        "statProfile": "character-cleric"
+      }
     },
     {
       "id": "prophet",
-      "name": "Prophet"
+      "name": "Prophet",
+      "generation": {
+        "statProfile": "character-cleric"
+      }
     },
     {
       "id": "healer",
-      "name": "Healer"
+      "name": "Healer",
+      "generation": {
+        "statProfile": "character-cleric"
+      }
     },
     {
       "id": "paladin",
-      "name": "Paladin"
+      "name": "Paladin",
+      "generation": {
+        "statProfile": "character-cleric"
+      }
     },
     {
       "id": "shrine_keeper",
-      "name": "Shrine keeper"
+      "name": "Shrine keeper",
+      "generation": {
+        "statProfile": "character-cleric"
+      }
     },
     {
       "id": "religious_scholar",
-      "name": "Religious scholar"
+      "name": "Religious scholar",
+      "generation": {
+        "statProfile": "character-cleric"
+      }
     }
   ]
 }

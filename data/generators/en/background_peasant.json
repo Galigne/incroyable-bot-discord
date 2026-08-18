@@ -10,43 +10,73 @@
   "entries": [
     {
       "id": "farmer",
-      "name": "Farmer"
+      "name": "Farmer",
+      "generation": {
+        "statProfile": "character-balanced"
+      }
     },
     {
       "id": "herder",
-      "name": "Herder"
+      "name": "Herder",
+      "generation": {
+        "statProfile": "character-balanced"
+      }
     },
     {
       "id": "shepherd",
-      "name": "Shepherd"
+      "name": "Shepherd",
+      "generation": {
+        "statProfile": "character-balanced"
+      }
     },
     {
       "id": "miller",
-      "name": "Miller"
+      "name": "Miller",
+      "generation": {
+        "statProfile": "character-balanced"
+      }
     },
     {
       "id": "farmhand",
-      "name": "Farmhand"
+      "name": "Farmhand",
+      "generation": {
+        "statProfile": "character-fighter"
+      }
     },
     {
       "id": "lumberjack",
-      "name": "Lumberjack"
+      "name": "Lumberjack",
+      "generation": {
+        "statProfile": "character-fighter"
+      }
     },
     {
       "id": "miner",
-      "name": "Miner"
+      "name": "Miner",
+      "generation": {
+        "statProfile": "character-fighter"
+      }
     },
     {
       "id": "village_elder",
-      "name": "Village elder"
+      "name": "Village elder",
+      "generation": {
+        "statProfile": "character-diplomat"
+      }
     },
     {
       "id": "rural_laborer",
-      "name": "Rural laborer"
+      "name": "Rural laborer",
+      "generation": {
+        "statProfile": "character-fighter"
+      }
     },
     {
       "id": "village_healer",
-      "name": "Village healer"
+      "name": "Village healer",
+      "generation": {
+        "statProfile": "character-cleric"
+      }
     }
   ]
 }

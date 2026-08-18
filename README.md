@@ -316,7 +316,9 @@ background selects one of the configured broad background categories and is also
 chosen randomly when omitted. The selected category independently resolves one
 reusable archetype from the matching concept-only generator stored in
 `background_<category>.json`, while the separate `physical_description` generator
-supplies the physical description.
+supplies the physical description. Each selected archetype chooses its own existing
+character statistical profile; this affects only statistical allocation, while all
+other character content keeps its independent random generation behavior.
 Backstory and goals start empty and remain editable. Persistent character
 modifiers come only from the internal `modifier_character` pool.
 

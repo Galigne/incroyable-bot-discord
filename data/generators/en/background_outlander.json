@@ -10,39 +10,66 @@
   "entries": [
     {
       "id": "hunter",
-      "name": "Hunter"
+      "name": "Hunter",
+      "generation": {
+        "statProfile": "character-rogue"
+      }
     },
     {
       "id": "nomad",
-      "name": "Nomad"
+      "name": "Nomad",
+      "generation": {
+        "statProfile": "character-balanced"
+      }
     },
     {
       "id": "hermit",
-      "name": "Hermit"
+      "name": "Hermit",
+      "generation": {
+        "statProfile": "character-balanced"
+      }
     },
     {
       "id": "tribal_envoy",
-      "name": "Tribal envoy"
+      "name": "Tribal envoy",
+      "generation": {
+        "statProfile": "character-diplomat"
+      }
     },
     {
       "id": "frontier_guide",
-      "name": "Frontier guide"
+      "name": "Frontier guide",
+      "generation": {
+        "statProfile": "character-rogue"
+      }
     },
     {
       "id": "ranger",
-      "name": "Ranger"
+      "name": "Ranger",
+      "generation": {
+        "statProfile": "character-rogue"
+      }
     },
     {
       "id": "wilderness_healer",
-      "name": "Wilderness healer"
+      "name": "Wilderness healer",
+      "generation": {
+        "statProfile": "character-cleric"
+      }
     },
     {
       "id": "tracker",
-      "name": "Tracker"
+      "name": "Tracker",
+      "generation": {
+        "statProfile": "character-rogue"
+      }
     },
     {
       "id": "wilderness_scout",
-      "name": "Wilderness scout"
+      "name": "Wilderness scout",
+      "generation": {
+        "statProfile": "character-rogue"
+      }
     }
   ]
 }

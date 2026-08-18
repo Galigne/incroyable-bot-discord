@@ -10,43 +10,73 @@
   "entries": [
     {
       "id": "refugee",
-      "name": "Refugee"
+      "name": "Refugee",
+      "generation": {
+        "statProfile": "character-balanced"
+      }
     },
     {
       "id": "fugitive",
-      "name": "Fugitive"
+      "name": "Fugitive",
+      "generation": {
+        "statProfile": "character-rogue"
+      }
     },
     {
       "id": "banished_noble",
-      "name": "Banished noble"
+      "name": "Banished noble",
+      "generation": {
+        "statProfile": "character-diplomat"
+      }
     },
     {
       "id": "displaced_survivor",
-      "name": "Displaced survivor"
+      "name": "Displaced survivor",
+      "generation": {
+        "statProfile": "character-balanced"
+      }
     },
     {
       "id": "political_exile",
-      "name": "Political exile"
+      "name": "Political exile",
+      "generation": {
+        "statProfile": "character-diplomat"
+      }
     },
     {
       "id": "deserter",
-      "name": "Deserter"
+      "name": "Deserter",
+      "generation": {
+        "statProfile": "character-fighter"
+      }
     },
     {
       "id": "migrant",
-      "name": "Migrant"
+      "name": "Migrant",
+      "generation": {
+        "statProfile": "character-balanced"
+      }
     },
     {
       "id": "wanderer",
-      "name": "Wanderer"
+      "name": "Wanderer",
+      "generation": {
+        "statProfile": "character-balanced"
+      }
     },
     {
       "id": "dissident",
-      "name": "Dissident"
+      "name": "Dissident",
+      "generation": {
+        "statProfile": "character-diplomat"
+      }
     },
     {
       "id": "outlaw",
-      "name": "Outlaw"
+      "name": "Outlaw",
+      "generation": {
+        "statProfile": "character-rogue"
+      }
     }
   ]
 }

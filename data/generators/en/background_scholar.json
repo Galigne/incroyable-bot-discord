@@ -10,47 +10,80 @@
   "entries": [
     {
       "id": "student",
-      "name": "Student"
+      "name": "Student",
+      "generation": {
+        "statProfile": "character-balanced"
+      }
     },
     {
       "id": "researcher",
-      "name": "Researcher"
+      "name": "Researcher",
+      "generation": {
+        "statProfile": "character-mage"
+      }
     },
     {
       "id": "scribe",
-      "name": "Scribe"
+      "name": "Scribe",
+      "generation": {
+        "statProfile": "character-balanced"
+      }
     },
     {
       "id": "librarian",
-      "name": "Librarian"
+      "name": "Librarian",
+      "generation": {
+        "statProfile": "character-mage"
+      }
     },
     {
       "id": "historian",
-      "name": "Historian"
+      "name": "Historian",
+      "generation": {
+        "statProfile": "character-mage"
+      }
     },
     {
       "id": "cartographer",
-      "name": "Cartographer"
+      "name": "Cartographer",
+      "generation": {
+        "statProfile": "character-rogue"
+      }
     },
     {
       "id": "physician",
-      "name": "Physician"
+      "name": "Physician",
+      "generation": {
+        "statProfile": "character-cleric"
+      }
     },
     {
       "id": "theologian",
-      "name": "Theologian"
+      "name": "Theologian",
+      "generation": {
+        "statProfile": "character-cleric"
+      }
     },
     {
       "id": "archivist",
-      "name": "Archivist"
+      "name": "Archivist",
+      "generation": {
+        "statProfile": "character-mage"
+      }
     },
     {
       "id": "professor",
-      "name": "Professor"
+      "name": "Professor",
+      "generation": {
+        "statProfile": "character-mage"
+      }
     },
     {
       "id": "chronicler",
-      "name": "Chronicler"
+      "name": "Chronicler",
+      "generation": {
+        "statProfile": "character-diplomat"
+      }
     }
   ]
 }

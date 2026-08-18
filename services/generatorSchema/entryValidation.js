@@ -13,6 +13,10 @@ const {
 	MAX_FIELD_VALUE_LENGTH,
 } = require('./constants');
 const {
+	isBackgroundArchetypeGenerator,
+	validateBackgroundGeneration,
+} = require('./backgroundMetadataValidation');
+const {
 	isCreatureDetailGenerator,
 	validateCreatureGeneration,
 } = require('./creatureMetadataValidation');
@@ -86,7 +90,12 @@ function validateGeneratorEntry(
 		'id',
 		'name',
 		'weight',
-		...(isCreatureDetailGenerator(generator.id, options) ? ['generation'] : []),
+		...(
+			isBackgroundArchetypeGenerator(generator.id, options)
+			|| isCreatureDetailGenerator(generator.id, options)
+				? ['generation']
+				: []
+		),
 	];
 	if (options.isRouter) {
 		validateStableId(entry.generator, `structural route at ${location}`);
@@ -105,6 +114,9 @@ function validateGeneratorEntry(
 		);
 		if (isCreatureDetailGenerator(generator.id, options)) {
 			validateCreatureGeneration(entry.generation, location);
+		}
+		if (isBackgroundArchetypeGenerator(generator.id, options)) {
+			validateBackgroundGeneration(entry.generation, location);
 		}
 		return;
 	}
@@ -138,6 +150,9 @@ function validateGeneratorEntry(
 	}
 	if (isCreatureDetailGenerator(generator.id, options)) {
 		validateCreatureGeneration(entry.generation, location);
+	}
+	if (isBackgroundArchetypeGenerator(generator.id, options)) {
+		validateBackgroundGeneration(entry.generation, location);
 	}
 }
 

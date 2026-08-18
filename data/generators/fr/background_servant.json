@@ -10,43 +10,73 @@
   "entries": [
     {
       "id": "household_servant",
-      "name": "Serviteur domestique"
+      "name": "Serviteur domestique",
+      "generation": {
+        "statProfile": "character-balanced"
+      }
     },
     {
       "id": "attendant",
-      "name": "Assistant"
+      "name": "Assistant",
+      "generation": {
+        "statProfile": "character-diplomat"
+      }
     },
     {
       "id": "day_laborer",
-      "name": "Journalier"
+      "name": "Journalier",
+      "generation": {
+        "statProfile": "character-fighter"
+      }
     },
     {
       "id": "cook",
-      "name": "Cuisinier"
+      "name": "Cuisinier",
+      "generation": {
+        "statProfile": "character-balanced"
+      }
     },
     {
       "id": "stable_hand",
-      "name": "Palefrenier"
+      "name": "Palefrenier",
+      "generation": {
+        "statProfile": "character-fighter"
+      }
     },
     {
       "id": "courier",
-      "name": "Courrier"
+      "name": "Courrier",
+      "generation": {
+        "statProfile": "character-rogue"
+      }
     },
     {
       "id": "driver",
-      "name": "Conducteur"
+      "name": "Conducteur",
+      "generation": {
+        "statProfile": "character-rogue"
+      }
     },
     {
       "id": "steward",
-      "name": "Intendant"
+      "name": "Intendant",
+      "generation": {
+        "statProfile": "character-diplomat"
+      }
     },
     {
       "id": "groundskeeper",
-      "name": "Garde des domaines"
+      "name": "Garde des domaines",
+      "generation": {
+        "statProfile": "character-balanced"
+      }
     },
     {
       "id": "messenger",
-      "name": "Messager"
+      "name": "Messager",
+      "generation": {
+        "statProfile": "character-rogue"
+      }
     }
   ]
 }

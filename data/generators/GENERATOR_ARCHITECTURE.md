@@ -12,10 +12,11 @@ The JSON contract and catalog-editing rules are documented in
 `services/generatorCatalog.js` recursively loads the matching English and French
 catalog trees. `services/generatorSchema.js` and its focused validators accept only
 generator schema v4 and validate the complete locale pair, including stable IDs,
-entry shapes, weights, structural routes, references, modifier relationships, and
-creature metadata. During `/reload`, `reloadGenerationData()` prepares generator and
-statistical-profile candidates together, validates creature/profile relationships,
-and replaces both active caches only after validation succeeds. Normal process
+entry shapes, weights, structural routes, references, modifier relationships,
+background metadata, and creature metadata. During `/reload`,
+`reloadGenerationData()` prepares generator and statistical-profile candidates
+together, validates background/profile and creature/profile relationships, and
+replaces both active caches only after validation succeeds. Normal process
 startup instead initializes the generator catalog and statistical profiles through
 their existing loading behavior; it does not run that joint reload workflow.
 
@@ -182,12 +183,19 @@ reference resolution:
 3. That entry's top-level `generator` property directly names the matching internal
    name-only `<category>` generator stored in
    `background_<category>.json`. Resolving it supplies the reusable background
-   archetype.
+   archetype, whose required `generation.statProfile` selects the statistical
+   allocation profile for this character. The metadata contains only that profile
+   ID and is functionally identical in both locales.
 4. It independently resolves `{{ physical_description.description }}`. Physical description is
    not part of the selected archetype route, so the two rolls remain combinable.
 5. It applies the character-only descriptive modifier policy through
-   `modifier_character`, calculates statistics and resources, and assembles the
-   complete character.
+   `modifier_character`, calculates statistics from the selected archetype's
+   profile, calculates resources, and assembles the complete character.
+
+The archetype profile changes only statistical allocation constraints and weights.
+RULEs, talents, personality, status effects, descriptive modifiers, race, physical
+description, armor, equipment, inventory, and every other character selection keep
+their independent existing random behavior.
 
 The saved background contains `archetype` and `physicalDescription`; editable
 `backstory` and `goals` start empty. A generated character receives one compatible

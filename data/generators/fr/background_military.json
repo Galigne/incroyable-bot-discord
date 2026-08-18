@@ -10,43 +10,73 @@
   "entries": [
     {
       "id": "soldier",
-      "name": "Soldat"
+      "name": "Soldat",
+      "generation": {
+        "statProfile": "character-fighter"
+      }
     },
     {
       "id": "guard",
-      "name": "Garde"
+      "name": "Garde",
+      "generation": {
+        "statProfile": "character-fighter"
+      }
     },
     {
       "id": "officer",
-      "name": "Officier"
+      "name": "Officier",
+      "generation": {
+        "statProfile": "character-fighter"
+      }
     },
     {
       "id": "veteran",
-      "name": "Vétéran"
+      "name": "Vétéran",
+      "generation": {
+        "statProfile": "character-fighter"
+      }
     },
     {
       "id": "mercenary",
-      "name": "Mercenaire"
+      "name": "Mercenaire",
+      "generation": {
+        "statProfile": "character-fighter"
+      }
     },
     {
       "id": "military_engineer",
-      "name": "Ingénieur militaire"
+      "name": "Ingénieur militaire",
+      "generation": {
+        "statProfile": "character-mage"
+      }
     },
     {
       "id": "sentry",
-      "name": "Sentinelle"
+      "name": "Sentinelle",
+      "generation": {
+        "statProfile": "character-fighter"
+      }
     },
     {
       "id": "captain",
-      "name": "Capitaine"
+      "name": "Capitaine",
+      "generation": {
+        "statProfile": "character-fighter"
+      }
     },
     {
       "id": "quartermaster",
-      "name": "Intendant militaire"
+      "name": "Intendant militaire",
+      "generation": {
+        "statProfile": "character-diplomat"
+      }
     },
     {
       "id": "military_scout",
-      "name": "Éclaireur militaire"
+      "name": "Éclaireur militaire",
+      "generation": {
+        "statProfile": "character-rogue"
+      }
     }
   ]
 }

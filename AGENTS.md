@@ -119,8 +119,8 @@ write real saves.
 - `services/generatorSchema.js`: stable public façade for generator-v4 validation
   and the public creature router identifier.
 - `services/generatorSchema/`: focused internal validators for shared assertions,
-  envelopes, entries, parity, modifiers, references, creature metadata, and catalog
-  relationships.
+  envelopes, entries, parity, modifiers, references, background and creature
+  metadata, and catalog relationships.
 - `services/generatorCatalog.js`: recursively loads the complete generator-v4
   locale pair and exposes stable-ID lookup plus public visibility filtering.
 - `services/generatorResolver.js`: resolves public roots into localized structured
@@ -137,10 +137,11 @@ write real saves.
 - `services/weightedSelector.js`: shared injectable weighted selection for
   generator entries and statistical allocation.
 - `services/generationData.js`: prepares generator and profile candidates, validates
-  their creature relationships, then atomically replaces both active caches during
-  `/reload`.
-- `services/randomCharacterGenerator.js`: selects generator data and assembles
-  complete random characters using `services/mechanics/`.
+  their background and creature relationships, then atomically replaces both active
+  caches during `/reload`.
+- `services/randomCharacterGenerator.js`: selects generator data, uses the selected
+  background archetype's statistical profile, and assembles complete random
+  characters using `services/mechanics/`.
 - `services/randomCreatureGenerator.js`: resolves creature sources, descriptive
   records, RULEs, armor, and gear, then assembles complete final creatures through
   the shared profile and mechanics infrastructure.
@@ -650,8 +651,11 @@ The durable implementation constraints are:
 - Keep `background` routing aligned with one internal concept-only generator per
   category, stored in `background_<category>.json`. Each router entry uses a direct
   top-level `generator` ID, never a wrapped inline reference, and follows the minimal
-  router-entry contract without fields. Resolve
-  `physical_description` independently when generating a character.
+  router-entry contract without fields. Every routed archetype entry requires a
+  `generation` object containing only `statProfile`; validate that profile against
+  the shared profile catalog and keep its stable ID identical across locales. Use
+  the selected archetype's profile only for character statistical allocation, and
+  resolve `physical_description` independently.
 - Derive supported `/gen-creature` types from the public `creature` router. Router
   entries use top-level `generator` properties naming internal concept-only IDs
   stored in `creature_<type>.json` and follow the minimal router-entry contract;
@@ -683,9 +687,10 @@ The durable implementation constraints are:
   them through the shared generator semantics during creation and persist only the
   localized final strings; trait rules text never executes mechanics.
 - During `/reload`, use `reloadGenerationData()` to prepare generator and
-  statistical-profile candidates together, validate creature/profile relationships,
-  and replace both active caches only after validation succeeds. Normal startup
-  uses the catalogs' existing loading behavior rather than this joint reload workflow.
+  statistical-profile candidates together, validate background/profile and
+  creature/profile relationships, and replace both active caches only after
+  validation succeeds. Normal startup uses the catalogs' existing loading behavior
+  rather than this joint reload workflow.
 
 Random character generation depends on exact stable generator IDs and field keys.
 Inspect `services/randomCharacterGenerator.js` and the coupled schema checks before

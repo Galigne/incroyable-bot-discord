@@ -10,47 +10,80 @@
   "entries": [
     {
       "id": "pickpocket",
-      "name": "Coupe-bourse"
+      "name": "Coupe-bourse",
+      "generation": {
+        "statProfile": "character-rogue"
+      }
     },
     {
       "id": "smuggler",
-      "name": "Contrebandier"
+      "name": "Contrebandier",
+      "generation": {
+        "statProfile": "character-rogue"
+      }
     },
     {
       "id": "bandit",
-      "name": "Bandit"
+      "name": "Bandit",
+      "generation": {
+        "statProfile": "character-fighter"
+      }
     },
     {
       "id": "fence",
-      "name": "Receleur"
+      "name": "Receleur",
+      "generation": {
+        "statProfile": "character-diplomat"
+      }
     },
     {
       "id": "forger",
-      "name": "Faussaire"
+      "name": "Faussaire",
+      "generation": {
+        "statProfile": "character-rogue"
+      }
     },
     {
       "id": "poisoner",
-      "name": "Empoisonneur"
+      "name": "Empoisonneur",
+      "generation": {
+        "statProfile": "character-rogue"
+      }
     },
     {
       "id": "assassin",
-      "name": "Assassin"
+      "name": "Assassin",
+      "generation": {
+        "statProfile": "character-rogue"
+      }
     },
     {
       "id": "pirate",
-      "name": "Pirate"
+      "name": "Pirate",
+      "generation": {
+        "statProfile": "character-fighter"
+      }
     },
     {
       "id": "corrupt_official",
-      "name": "Fonctionnaire corrompu"
+      "name": "Fonctionnaire corrompu",
+      "generation": {
+        "statProfile": "character-diplomat"
+      }
     },
     {
       "id": "blackmailer",
-      "name": "Maître chanteur"
+      "name": "Maître chanteur",
+      "generation": {
+        "statProfile": "character-diplomat"
+      }
     },
     {
       "id": "grave_robber",
-      "name": "Pilleur de tombes"
+      "name": "Pilleur de tombes",
+      "generation": {
+        "statProfile": "character-rogue"
+      }
     }
   ]
 }

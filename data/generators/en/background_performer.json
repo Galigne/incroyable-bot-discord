@@ -10,43 +10,73 @@
   "entries": [
     {
       "id": "musician",
-      "name": "Musician"
+      "name": "Musician",
+      "generation": {
+        "statProfile": "character-diplomat"
+      }
     },
     {
       "id": "actor",
-      "name": "Actor"
+      "name": "Actor",
+      "generation": {
+        "statProfile": "character-diplomat"
+      }
     },
     {
       "id": "storyteller",
-      "name": "Storyteller"
+      "name": "Storyteller",
+      "generation": {
+        "statProfile": "character-diplomat"
+      }
     },
     {
       "id": "acrobat",
-      "name": "Acrobat"
+      "name": "Acrobat",
+      "generation": {
+        "statProfile": "character-rogue"
+      }
     },
     {
       "id": "singer",
-      "name": "Singer"
+      "name": "Singer",
+      "generation": {
+        "statProfile": "character-diplomat"
+      }
     },
     {
       "id": "troubadour",
-      "name": "Troubadour"
+      "name": "Troubadour",
+      "generation": {
+        "statProfile": "character-diplomat"
+      }
     },
     {
       "id": "jester",
-      "name": "Jester"
+      "name": "Jester",
+      "generation": {
+        "statProfile": "character-diplomat"
+      }
     },
     {
       "id": "fortune_teller",
-      "name": "Fortune teller"
+      "name": "Fortune teller",
+      "generation": {
+        "statProfile": "character-mage"
+      }
     },
     {
       "id": "dancer",
-      "name": "Dancer"
+      "name": "Dancer",
+      "generation": {
+        "statProfile": "character-rogue"
+      }
     },
     {
       "id": "street_entertainer",
-      "name": "Street entertainer"
+      "name": "Street entertainer",
+      "generation": {
+        "statProfile": "character-diplomat"
+      }
     }
   ]
 }

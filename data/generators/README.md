@@ -122,9 +122,10 @@ numbers or booleans.
 Entry properties are strict. A content entry has `id`, optional `weight`, exactly
 one top-level localized `name`, and exactly one matching `fields` object when it
 declares additional fields. Content entries never contain a structural `generator`
-route. Creature-detail content entries may define the separately validated
-`generation` object. These reserved properties are functional metadata, are never
-displayed as generated fields, and arbitrary extra metadata is rejected. The old
+route. Routed background-archetype and creature-detail content entries define their
+separately validated `generation` objects. These reserved properties are functional
+metadata, are never displayed as generated fields, and arbitrary extra metadata is
+rejected. The old
 `entrySchema.type`, entry `value`, and `fields.name` forms are invalid.
 
 English and French counterparts must preserve the same relative path, generator
@@ -261,8 +262,11 @@ with their consumers:
 - Every public `background` entry is a minimal router entry whose top-level
   `generator` route contains the direct ID of the corresponding internal name-only `<category>` generator,
   stored in `background_<category>.json`. Character generation resolves that
-  archetype and independently resolves the internal `physical_description`
-  generator.
+  archetype and uses its required `generation.statProfile` to select one of the
+  character statistical profiles. Background `generation` contains exactly that
+  one property: creature-only traits, RULEs, status effects, modifiers, armor,
+  equipment, inventory, and similar metadata are invalid. Character generation
+  independently resolves the internal `physical_description` generator.
 - The public `creature` router defines every supported `/gen-creature` type. Each
   entry's top-level `generator` property directly names an internal
   creature-detail generator whose concept ID matches the route and whose filename
@@ -286,9 +290,11 @@ come through the `loot` router. The internal `shields` table exposes ordinary
 `rarity` and `ar_percentage` fields, and the public `affliction` table exposes an
 ordinary localized `type` distinguishing persistent diseases from curses.
 
-Creature metadata relationships for profiles, traits, fixed RULEs, status effects,
-modifiers, armor, equipment, and inventory are validated with the catalog. They do
-not define alternate entity types, formulas, or automatic encumbrance.
+Background and creature profile references are validated against the statistical
+profile catalog. Creature metadata relationships for traits, fixed RULEs, status
+effects, modifiers, armor, equipment, and inventory are also validated with the
+generator catalog. They do not define alternate entity types, formulas, or
+automatic encumbrance.
 
 Creature-detail `generation.traits` is an array of zero to 25 non-empty template
 strings. Each item may be literal text, a complete inline reference, or ordinary

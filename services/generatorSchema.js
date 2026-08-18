@@ -1,7 +1,11 @@
 const {
+	BACKGROUND_ROUTER_ID,
 	CREATURE_ROUTER_ID,
 	GENERATOR_SCHEMA_VERSION,
 } = require('./generatorSchema/constants');
+const {
+	validateBackgroundStatProfileRelationships,
+} = require('./generatorSchema/backgroundRelationshipValidation');
 const {
 	validateCreatureStatProfileRelationships,
 } = require('./generatorSchema/creatureRelationshipValidation');
@@ -19,9 +23,11 @@ const {
 } = require('./generatorSchema/routerValidation');
 
 module.exports = {
+	BACKGROUND_ROUTER_ID,
 	CREATURE_ROUTER_ID,
 	GENERATOR_SCHEMA_VERSION,
 	isGeneratorRouter,
+	validateBackgroundStatProfileRelationships,
 	validateCreatureStatProfileRelationships,
 	validateGeneratorDefinition,
 	validateGeneratorPair,

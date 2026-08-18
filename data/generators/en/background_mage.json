@@ -10,43 +10,73 @@
   "entries": [
     {
       "id": "apprentice",
-      "name": "Apprentice"
+      "name": "Apprentice",
+      "generation": {
+        "statProfile": "character-mage"
+      }
     },
     {
       "id": "hedge_mage",
-      "name": "Hedge mage"
+      "name": "Hedge mage",
+      "generation": {
+        "statProfile": "character-mage"
+      }
     },
     {
       "id": "magical_researcher",
-      "name": "Magical researcher"
+      "name": "Magical researcher",
+      "generation": {
+        "statProfile": "character-mage"
+      }
     },
     {
       "id": "battle_mage",
-      "name": "Battle mage"
+      "name": "Battle mage",
+      "generation": {
+        "statProfile": "character-mage"
+      }
     },
     {
       "id": "ritualist",
-      "name": "Ritualist"
+      "name": "Ritualist",
+      "generation": {
+        "statProfile": "character-mage"
+      }
     },
     {
       "id": "alchemist",
-      "name": "Alchemist"
+      "name": "Alchemist",
+      "generation": {
+        "statProfile": "character-mage"
+      }
     },
     {
       "id": "runesmith",
-      "name": "Runesmith"
+      "name": "Runesmith",
+      "generation": {
+        "statProfile": "character-mage"
+      }
     },
     {
       "id": "diviner",
-      "name": "Diviner"
+      "name": "Diviner",
+      "generation": {
+        "statProfile": "character-mage"
+      }
     },
     {
       "id": "court_mage",
-      "name": "Court mage"
+      "name": "Court mage",
+      "generation": {
+        "statProfile": "character-mage"
+      }
     },
     {
       "id": "enchanter",
-      "name": "Enchanter"
+      "name": "Enchanter",
+      "generation": {
+        "statProfile": "character-mage"
+      }
     }
   ]
 }

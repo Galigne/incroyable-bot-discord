@@ -10,51 +10,87 @@
   "entries": [
     {
       "id": "blacksmith",
-      "name": "Forgeron"
+      "name": "Forgeron",
+      "generation": {
+        "statProfile": "character-fighter"
+      }
     },
     {
       "id": "carpenter",
-      "name": "Charpentier"
+      "name": "Charpentier",
+      "generation": {
+        "statProfile": "character-balanced"
+      }
     },
     {
       "id": "tailor",
-      "name": "Tailleur"
+      "name": "Tailleur",
+      "generation": {
+        "statProfile": "character-balanced"
+      }
     },
     {
       "id": "alchemist",
-      "name": "Alchimiste"
+      "name": "Alchimiste",
+      "generation": {
+        "statProfile": "character-mage"
+      }
     },
     {
       "id": "clockmaker",
-      "name": "Horloger"
+      "name": "Horloger",
+      "generation": {
+        "statProfile": "character-mage"
+      }
     },
     {
       "id": "baker",
-      "name": "Boulanger"
+      "name": "Boulanger",
+      "generation": {
+        "statProfile": "character-balanced"
+      }
     },
     {
       "id": "butcher",
-      "name": "Boucher"
+      "name": "Boucher",
+      "generation": {
+        "statProfile": "character-fighter"
+      }
     },
     {
       "id": "cook",
-      "name": "Cuisinier"
+      "name": "Cuisinier",
+      "generation": {
+        "statProfile": "character-balanced"
+      }
     },
     {
       "id": "mechanic",
-      "name": "Mécanicien"
+      "name": "Mécanicien",
+      "generation": {
+        "statProfile": "character-mage"
+      }
     },
     {
       "id": "engineer",
-      "name": "Ingénieur"
+      "name": "Ingénieur",
+      "generation": {
+        "statProfile": "character-mage"
+      }
     },
     {
       "id": "runesmith",
-      "name": "Graveur de runes"
+      "name": "Graveur de runes",
+      "generation": {
+        "statProfile": "character-mage"
+      }
     },
     {
       "id": "potter",
-      "name": "Potier"
+      "name": "Potier",
+      "generation": {
+        "statProfile": "character-balanced"
+      }
     }
   ]
 }

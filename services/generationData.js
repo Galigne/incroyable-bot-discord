@@ -7,12 +7,14 @@ const {
 	replaceStatProfiles,
 } = require('./statProfileCatalog');
 const {
+	validateBackgroundStatProfileRelationships,
 	validateCreatureStatProfileRelationships,
 } = require('./generatorSchema');
 
 function reloadGenerationData() {
 	const generatorCatalog = createGeneratorCatalogCandidate();
 	const statProfiles = createStatProfileCandidate();
+	validateBackgroundStatProfileRelationships(generatorCatalog, statProfiles);
 	validateCreatureStatProfileRelationships(generatorCatalog, statProfiles);
 	replaceGeneratorCatalog(generatorCatalog);
 	replaceStatProfiles(statProfiles);

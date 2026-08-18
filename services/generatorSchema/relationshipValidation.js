@@ -3,6 +3,10 @@ const {
 	normalizeDisplayName,
 } = require('./assertions');
 const {
+	isCreatureDetailGenerator,
+} = require('./creatureMetadataValidation');
+const { CREATURE_ROUTER_ID } = require('./constants');
+const {
 	validateCreatureGenerationRelationships,
 } = require('./creatureRelationshipValidation');
 const {
@@ -18,6 +22,9 @@ function validateGeneratorRelationships(catalog) {
 		throw new TypeError('Generator relationship validation requires a catalog map.');
 	}
 	const modifierGraph = new Map();
+	const creatureGeneratorIds = new Set(
+		catalog.get(CREATURE_ROUTER_ID)?.entries.map(entry => entry.generator) ?? [],
+	);
 	validatePublicGeneratorNames(catalog);
 	for (const generator of catalog.values()) {
 		validateInlineRelationships(generator, catalog);
@@ -25,7 +32,7 @@ function validateGeneratorRelationships(catalog) {
 		validateModifierRelationships(generator, catalog);
 		modifierGraph.set(generator.id, new Set(Object.keys(generator.modifiers ?? {})));
 		for (const entry of generator.entries) {
-			if (entry.generation) {
+			if (isCreatureDetailGenerator(generator.id, { creatureGeneratorIds })) {
 				validateCreatureGenerationRelationships(
 					generator,
 					entry,

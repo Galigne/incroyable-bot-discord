@@ -10,43 +10,73 @@
   "entries": [
     {
       "id": "sailor",
-      "name": "Sailor"
+      "name": "Sailor",
+      "generation": {
+        "statProfile": "character-balanced"
+      }
     },
     {
       "id": "fisher",
-      "name": "Fisher"
+      "name": "Fisher",
+      "generation": {
+        "statProfile": "character-balanced"
+      }
     },
     {
       "id": "pirate",
-      "name": "Pirate"
+      "name": "Pirate",
+      "generation": {
+        "statProfile": "character-fighter"
+      }
     },
     {
       "id": "navigator",
-      "name": "Navigator"
+      "name": "Navigator",
+      "generation": {
+        "statProfile": "character-rogue"
+      }
     },
     {
       "id": "deckhand",
-      "name": "Deckhand"
+      "name": "Deckhand",
+      "generation": {
+        "statProfile": "character-fighter"
+      }
     },
     {
       "id": "dock_worker",
-      "name": "Dock worker"
+      "name": "Dock worker",
+      "generation": {
+        "statProfile": "character-fighter"
+      }
     },
     {
       "id": "ship_captain",
-      "name": "Ship captain"
+      "name": "Ship captain",
+      "generation": {
+        "statProfile": "character-diplomat"
+      }
     },
     {
       "id": "smuggler",
-      "name": "Smuggler"
+      "name": "Smuggler",
+      "generation": {
+        "statProfile": "character-rogue"
+      }
     },
     {
       "id": "salvager",
-      "name": "Salvager"
+      "name": "Salvager",
+      "generation": {
+        "statProfile": "character-rogue"
+      }
     },
     {
       "id": "pilot",
-      "name": "Pilot"
+      "name": "Pilot",
+      "generation": {
+        "statProfile": "character-rogue"
+      }
     }
   ]
 }

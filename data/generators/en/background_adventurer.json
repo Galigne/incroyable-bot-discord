@@ -10,47 +10,80 @@
   "entries": [
     {
       "id": "explorer",
-      "name": "Explorer"
+      "name": "Explorer",
+      "generation": {
+        "statProfile": "character-balanced"
+      }
     },
     {
       "id": "mercenary",
-      "name": "Mercenary"
+      "name": "Mercenary",
+      "generation": {
+        "statProfile": "character-fighter"
+      }
     },
     {
       "id": "monster_hunter",
-      "name": "Monster hunter"
+      "name": "Monster hunter",
+      "generation": {
+        "statProfile": "character-fighter"
+      }
     },
     {
       "id": "bounty_hunter",
-      "name": "Bounty hunter"
+      "name": "Bounty hunter",
+      "generation": {
+        "statProfile": "character-rogue"
+      }
     },
     {
       "id": "scout",
-      "name": "Scout"
+      "name": "Scout",
+      "generation": {
+        "statProfile": "character-rogue"
+      }
     },
     {
       "id": "treasure_hunter",
-      "name": "Treasure hunter"
+      "name": "Treasure hunter",
+      "generation": {
+        "statProfile": "character-rogue"
+      }
     },
     {
       "id": "pilgrim",
-      "name": "Pilgrim"
+      "name": "Pilgrim",
+      "generation": {
+        "statProfile": "character-cleric"
+      }
     },
     {
       "id": "frontier_guide",
-      "name": "Frontier guide"
+      "name": "Frontier guide",
+      "generation": {
+        "statProfile": "character-rogue"
+      }
     },
     {
       "id": "ruins_delver",
-      "name": "Ruins delver"
+      "name": "Ruins delver",
+      "generation": {
+        "statProfile": "character-rogue"
+      }
     },
     {
       "id": "demon_hunter",
-      "name": "Demon hunter"
+      "name": "Demon hunter",
+      "generation": {
+        "statProfile": "character-fighter"
+      }
     },
     {
       "id": "protector",
-      "name": "Protector"
+      "name": "Protector",
+      "generation": {
+        "statProfile": "character-fighter"
+      }
     }
   ]
 }

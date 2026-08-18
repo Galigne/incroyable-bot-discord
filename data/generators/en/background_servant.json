@@ -10,43 +10,73 @@
   "entries": [
     {
       "id": "household_servant",
-      "name": "Household servant"
+      "name": "Household servant",
+      "generation": {
+        "statProfile": "character-balanced"
+      }
     },
     {
       "id": "attendant",
-      "name": "Attendant"
+      "name": "Attendant",
+      "generation": {
+        "statProfile": "character-diplomat"
+      }
     },
     {
       "id": "day_laborer",
-      "name": "Day laborer"
+      "name": "Day laborer",
+      "generation": {
+        "statProfile": "character-fighter"
+      }
     },
     {
       "id": "cook",
-      "name": "Cook"
+      "name": "Cook",
+      "generation": {
+        "statProfile": "character-balanced"
+      }
     },
     {
       "id": "stable_hand",
-      "name": "Stable hand"
+      "name": "Stable hand",
+      "generation": {
+        "statProfile": "character-fighter"
+      }
     },
     {
       "id": "courier",
-      "name": "Courier"
+      "name": "Courier",
+      "generation": {
+        "statProfile": "character-rogue"
+      }
     },
     {
       "id": "driver",
-      "name": "Driver"
+      "name": "Driver",
+      "generation": {
+        "statProfile": "character-rogue"
+      }
     },
     {
       "id": "steward",
-      "name": "Steward"
+      "name": "Steward",
+      "generation": {
+        "statProfile": "character-diplomat"
+      }
     },
     {
       "id": "groundskeeper",
-      "name": "Groundskeeper"
+      "name": "Groundskeeper",
+      "generation": {
+        "statProfile": "character-balanced"
+      }
     },
     {
       "id": "messenger",
-      "name": "Messenger"
+      "name": "Messenger",
+      "generation": {
+        "statProfile": "character-rogue"
+      }
     }
   ]
 }

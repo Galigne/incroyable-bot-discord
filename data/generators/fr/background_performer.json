@@ -10,43 +10,73 @@
   "entries": [
     {
       "id": "musician",
-      "name": "Musicien"
+      "name": "Musicien",
+      "generation": {
+        "statProfile": "character-diplomat"
+      }
     },
     {
       "id": "actor",
-      "name": "Comédien"
+      "name": "Comédien",
+      "generation": {
+        "statProfile": "character-diplomat"
+      }
     },
     {
       "id": "storyteller",
-      "name": "Conteur"
+      "name": "Conteur",
+      "generation": {
+        "statProfile": "character-diplomat"
+      }
     },
     {
       "id": "acrobat",
-      "name": "Acrobate"
+      "name": "Acrobate",
+      "generation": {
+        "statProfile": "character-rogue"
+      }
     },
     {
       "id": "singer",
-      "name": "Chanteur"
+      "name": "Chanteur",
+      "generation": {
+        "statProfile": "character-diplomat"
+      }
     },
     {
       "id": "troubadour",
-      "name": "Troubadour"
+      "name": "Troubadour",
+      "generation": {
+        "statProfile": "character-diplomat"
+      }
     },
     {
       "id": "jester",
-      "name": "Bouffon"
+      "name": "Bouffon",
+      "generation": {
+        "statProfile": "character-diplomat"
+      }
     },
     {
       "id": "fortune_teller",
-      "name": "Diseuse de bonne aventure"
+      "name": "Diseuse de bonne aventure",
+      "generation": {
+        "statProfile": "character-mage"
+      }
     },
     {
       "id": "dancer",
-      "name": "Danseur"
+      "name": "Danseur",
+      "generation": {
+        "statProfile": "character-rogue"
+      }
     },
     {
       "id": "street_entertainer",
-      "name": "Artiste de rue"
+      "name": "Artiste de rue",
+      "generation": {
+        "statProfile": "character-diplomat"
+      }
     }
   ]
 }

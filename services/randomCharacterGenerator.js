@@ -82,12 +82,13 @@ function populateRandomCharacter(character, options = {}) {
 
 	character.personality.traits = pickMany('personality', 2, locale, random)
 		.map(entry => getField(entry, 'description'));
-	const profile = getStatProfile('character-balanced');
+	const statProfileId = getArchetypeStatProfileId(archetypeResult, locale);
+	const profile = getStatProfile(statProfileId);
 	if (!profile) {
 		throw generationError(
-			'Missing statistical profile: character-balanced.',
+			`Missing statistical profile: ${statProfileId}.`,
 			'errors.generatorMissing',
-			{ category: 'character-balanced' },
+			{ category: statProfileId },
 		);
 	}
 	character.statistics = generateStats({ level, profile, random });
@@ -153,6 +154,21 @@ function populateRandomCharacter(character, options = {}) {
 	character.status.modifiers = backgroundModifiers.map(modifier => structuredClone(modifier));
 
 	return character;
+}
+
+function getArchetypeStatProfileId(archetypeResult, locale) {
+	const archetype = generatorCatalog
+		.getGenerator(archetypeResult.generatorId, locale)
+		?.entries.find(entry => entry.id === archetypeResult.entryId);
+	const statProfileId = archetype?.generation?.statProfile;
+	if (typeof statProfileId !== 'string' || !statProfileId) {
+		throw generationError(
+			'Selected background archetype has no statistical profile.',
+			'errors.generatorMissing',
+			{ category: archetypeResult.entryId },
+		);
+	}
+	return statProfileId;
 }
 
 function pickMainEquipment(count, locale, random) {

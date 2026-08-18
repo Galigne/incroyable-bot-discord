@@ -10,47 +10,80 @@
   "entries": [
     {
       "id": "pickpocket",
-      "name": "Pickpocket"
+      "name": "Pickpocket",
+      "generation": {
+        "statProfile": "character-rogue"
+      }
     },
     {
       "id": "smuggler",
-      "name": "Smuggler"
+      "name": "Smuggler",
+      "generation": {
+        "statProfile": "character-rogue"
+      }
     },
     {
       "id": "bandit",
-      "name": "Bandit"
+      "name": "Bandit",
+      "generation": {
+        "statProfile": "character-fighter"
+      }
     },
     {
       "id": "fence",
-      "name": "Fence"
+      "name": "Fence",
+      "generation": {
+        "statProfile": "character-diplomat"
+      }
     },
     {
       "id": "forger",
-      "name": "Forger"
+      "name": "Forger",
+      "generation": {
+        "statProfile": "character-rogue"
+      }
     },
     {
       "id": "poisoner",
-      "name": "Poisoner"
+      "name": "Poisoner",
+      "generation": {
+        "statProfile": "character-rogue"
+      }
     },
     {
       "id": "assassin",
-      "name": "Assassin"
+      "name": "Assassin",
+      "generation": {
+        "statProfile": "character-rogue"
+      }
     },
     {
       "id": "pirate",
-      "name": "Pirate"
+      "name": "Pirate",
+      "generation": {
+        "statProfile": "character-fighter"
+      }
     },
     {
       "id": "corrupt_official",
-      "name": "Corrupt official"
+      "name": "Corrupt official",
+      "generation": {
+        "statProfile": "character-diplomat"
+      }
     },
     {
       "id": "blackmailer",
-      "name": "Blackmailer"
+      "name": "Blackmailer",
+      "generation": {
+        "statProfile": "character-diplomat"
+      }
     },
     {
       "id": "grave_robber",
-      "name": "Grave robber"
+      "name": "Grave robber",
+      "generation": {
+        "statProfile": "character-rogue"
+      }
     }
   ]
 }

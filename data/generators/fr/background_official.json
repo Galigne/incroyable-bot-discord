@@ -10,43 +10,73 @@
   "entries": [
     {
       "id": "administrator",
-      "name": "Administrateur"
+      "name": "Administrateur",
+      "generation": {
+        "statProfile": "character-diplomat"
+      }
     },
     {
       "id": "diplomat",
-      "name": "Diplomate"
+      "name": "Diplomate",
+      "generation": {
+        "statProfile": "character-diplomat"
+      }
     },
     {
       "id": "tax_collector",
-      "name": "Collecteur d’impôts"
+      "name": "Collecteur d’impôts",
+      "generation": {
+        "statProfile": "character-diplomat"
+      }
     },
     {
       "id": "judge",
-      "name": "Juge"
+      "name": "Juge",
+      "generation": {
+        "statProfile": "character-diplomat"
+      }
     },
     {
       "id": "inspector",
-      "name": "Inspecteur"
+      "name": "Inspecteur",
+      "generation": {
+        "statProfile": "character-rogue"
+      }
     },
     {
       "id": "clerk",
-      "name": "Greffier"
+      "name": "Greffier",
+      "generation": {
+        "statProfile": "character-balanced"
+      }
     },
     {
       "id": "magistrate",
-      "name": "Magistrat"
+      "name": "Magistrat",
+      "generation": {
+        "statProfile": "character-diplomat"
+      }
     },
     {
       "id": "bailiff",
-      "name": "Bailli"
+      "name": "Bailli",
+      "generation": {
+        "statProfile": "character-fighter"
+      }
     },
     {
       "id": "notary",
-      "name": "Notaire"
+      "name": "Notaire",
+      "generation": {
+        "statProfile": "character-diplomat"
+      }
     },
     {
       "id": "envoy",
-      "name": "Émissaire"
+      "name": "Émissaire",
+      "generation": {
+        "statProfile": "character-diplomat"
+      }
     }
   ]
 }

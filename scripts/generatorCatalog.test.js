@@ -13,6 +13,7 @@ const {
 } = require('../services/generatorTraversal');
 const {
 	isGeneratorRouter,
+	validateBackgroundStatProfileRelationships,
 	validateGeneratorDefinition,
 	validateGeneratorPair,
 	validateGeneratorRelationships,
@@ -27,6 +28,117 @@ const {
 	selectWeightedEntry,
 } = require('../services/weightedSelector');
 const { getCommandOptionValues } = require('../util/commandOptionValues');
+
+test('background archetypes define strict localized profile metadata', () => {
+	const catalogs = generatorCatalog.createGeneratorCatalogCandidate();
+	const profiles = statProfileCatalog.createStatProfileCandidate();
+	const usedProfileIds = new Set();
+	const englishRouter = catalogs.get('en').get('background');
+	const frenchRouter = catalogs.get('fr').get('background');
+	assert.deepEqual(
+		englishRouter.entries.map(entry => entry.generator),
+		frenchRouter.entries.map(entry => entry.generator),
+	);
+	for (const route of englishRouter.entries) {
+		const english = catalogs.get('en').get(route.generator);
+		const french = catalogs.get('fr').get(route.generator);
+		assert.equal(english.visibility, 'internal');
+		assert.deepEqual(english.entrySchema.required, []);
+		assert.deepEqual(
+			english.entries.map(entry => entry.id),
+			french.entries.map(entry => entry.id),
+		);
+		for (const [index, entry] of english.entries.entries()) {
+			assert.deepEqual(Object.keys(entry.generation), ['statProfile']);
+			assert.deepEqual(entry.generation, french.entries[index].generation);
+			assert.ok(profiles.has(entry.generation.statProfile));
+			usedProfileIds.add(entry.generation.statProfile);
+		}
+	}
+	assert.deepEqual([...usedProfileIds].sort(), [
+		'character-balanced',
+		'character-cleric',
+		'character-diplomat',
+		'character-fighter',
+		'character-mage',
+		'character-rogue',
+	]);
+	const militaryProfiles = new Map(
+		catalogs.get('en').get('military').entries.map(entry => [
+			entry.id,
+			entry.generation.statProfile,
+		]),
+	);
+	assert.equal(militaryProfiles.get('soldier'), 'character-fighter');
+	assert.equal(militaryProfiles.get('military_engineer'), 'character-mage');
+	assert.equal(militaryProfiles.get('quartermaster'), 'character-diplomat');
+	assert.equal(militaryProfiles.get('military_scout'), 'character-rogue');
+	assert.equal(
+		validateBackgroundStatProfileRelationships(catalogs, profiles),
+		true,
+	);
+});
+
+test('background metadata rejects missing, creature-specific, mismatched, and unknown profiles', () => {
+	const catalogs = generatorCatalog.createGeneratorCatalogCandidate();
+	const generatorId = catalogs.get('en').get('background').entries[0].generator;
+	const validationOptions = { backgroundGeneratorIds: new Set([generatorId]) };
+	const english = structuredClone(catalogs.get('en').get(generatorId));
+	const french = structuredClone(catalogs.get('fr').get(generatorId));
+	delete english.locale;
+	delete french.locale;
+
+	const missing = structuredClone(english);
+	delete missing.entries[0].generation;
+	assert.throws(
+		() => validateGeneratorDefinition(missing, '<generator>', validationOptions),
+		error => error.name === 'GeneratorSchemaError',
+	);
+
+	const creatureSpecific = structuredClone(english);
+	creatureSpecific.entries[0].generation.traits = [];
+	assert.throws(
+		() => validateGeneratorDefinition(
+			creatureSpecific,
+			'<generator>',
+			validationOptions,
+		),
+		error => error.name === 'GeneratorSchemaError',
+	);
+	const creatureProfile = structuredClone(english);
+	creatureProfile.entries[0].generation.statProfile = 'creature-brute';
+	assert.throws(
+		() => validateGeneratorDefinition(
+			creatureProfile,
+			'<generator>',
+			validationOptions,
+		),
+		error => error.code === 'INVALID_BACKGROUND_STAT_PROFILE',
+	);
+
+	const originalProfileId = french.entries[0].generation.statProfile;
+	french.entries[0].generation.statProfile = originalProfileId === 'character-balanced'
+		? 'character-fighter'
+		: 'character-balanced';
+	assert.throws(
+		() => validateGeneratorPair(
+			english,
+			french,
+			'<generator>',
+			validationOptions,
+		),
+		error => error.code === 'GENERATOR_LOCALE_PARITY_MISMATCH',
+	);
+
+	const missingProfileId = catalogs.get('en').get(generatorId)
+		.entries[0].generation.statProfile;
+	const profiles = statProfileCatalog.createStatProfileCandidate();
+	profiles.delete(missingProfileId);
+	assert.throws(
+		() => validateBackgroundStatProfileRelationships(catalogs, profiles),
+		error => error.code === 'BACKGROUND_STAT_PROFILE_MISSING',
+	);
+});
 
 test('production generator v4 data uses stable IDs, entry names, strict parity, and visibility', () => {
 	const englishPublic = generatorCatalog.listGenerators('en');

@@ -10,39 +10,66 @@
   "entries": [
     {
       "id": "hunter",
-      "name": "Chasseur"
+      "name": "Chasseur",
+      "generation": {
+        "statProfile": "character-rogue"
+      }
     },
     {
       "id": "nomad",
-      "name": "Nomade"
+      "name": "Nomade",
+      "generation": {
+        "statProfile": "character-balanced"
+      }
     },
     {
       "id": "hermit",
-      "name": "Ermite"
+      "name": "Ermite",
+      "generation": {
+        "statProfile": "character-balanced"
+      }
     },
     {
       "id": "tribal_envoy",
-      "name": "Émissaire tribal"
+      "name": "Émissaire tribal",
+      "generation": {
+        "statProfile": "character-diplomat"
+      }
     },
     {
       "id": "frontier_guide",
-      "name": "Guide des frontières"
+      "name": "Guide des frontières",
+      "generation": {
+        "statProfile": "character-rogue"
+      }
     },
     {
       "id": "ranger",
-      "name": "Rôdeur"
+      "name": "Rôdeur",
+      "generation": {
+        "statProfile": "character-rogue"
+      }
     },
     {
       "id": "wilderness_healer",
-      "name": "Guérisseur des terres sauvages"
+      "name": "Guérisseur des terres sauvages",
+      "generation": {
+        "statProfile": "character-cleric"
+      }
     },
     {
       "id": "tracker",
-      "name": "Pisteur"
+      "name": "Pisteur",
+      "generation": {
+        "statProfile": "character-rogue"
+      }
     },
     {
       "id": "wilderness_scout",
-      "name": "Éclaireur des terres sauvages"
+      "name": "Éclaireur des terres sauvages",
+      "generation": {
+        "statProfile": "character-rogue"
+      }
     }
   ]
 }

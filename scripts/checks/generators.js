@@ -162,7 +162,14 @@ function checkBackgroundGenerators(errors, generatorCatalog) {
 			|| details.length === 0
 			|| generatorCatalog.getGenerator(routedGeneratorId)?.visibility !== 'internal'
 			|| generatorCatalog.getGenerator(routedGeneratorId)?.entrySchema.required.length !== 0
-			|| details.some(entry => typeof entry.name !== 'string' || !entry.name.trim())
+			|| details.some(entry => (
+				typeof entry.name !== 'string'
+				|| !entry.name.trim()
+				|| JSON.stringify(Object.keys(entry.generation ?? {})) !== JSON.stringify([
+					'statProfile',
+				])
+				|| !getStatProfile(entry.generation.statProfile)
+			))
 		) {
 			errors.push(`Invalid routed background generator: ${background.id ?? 'unknown'}.`);
 		}

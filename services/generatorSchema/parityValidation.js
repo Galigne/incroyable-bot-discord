@@ -1,4 +1,7 @@
 const { generatorSchemaError } = require('./assertions');
+const {
+	isBackgroundArchetypeGenerator,
+} = require('./backgroundMetadataValidation');
 const { isCreatureDetailGenerator } = require('./creatureMetadataValidation');
 const { validateGeneratorDefinition } = require('./envelopeValidation');
 const { extractInlineReferences } = require('./referenceValidation');
@@ -72,6 +75,14 @@ function validateGeneratorPair(
 				frenchEntry.generation,
 				file,
 				index,
+			);
+		}
+		if (isBackgroundArchetypeGenerator(english.id, options)) {
+			assertParity(
+				englishEntry.generation,
+				frenchEntry.generation,
+				file,
+				`entries.${index}.generation`,
 			);
 		}
 	}

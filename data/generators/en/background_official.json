@@ -10,43 +10,73 @@
   "entries": [
     {
       "id": "administrator",
-      "name": "Administrator"
+      "name": "Administrator",
+      "generation": {
+        "statProfile": "character-diplomat"
+      }
     },
     {
       "id": "diplomat",
-      "name": "Diplomat"
+      "name": "Diplomat",
+      "generation": {
+        "statProfile": "character-diplomat"
+      }
     },
     {
       "id": "tax_collector",
-      "name": "Tax collector"
+      "name": "Tax collector",
+      "generation": {
+        "statProfile": "character-diplomat"
+      }
     },
     {
       "id": "judge",
-      "name": "Judge"
+      "name": "Judge",
+      "generation": {
+        "statProfile": "character-diplomat"
+      }
     },
     {
       "id": "inspector",
-      "name": "Inspector"
+      "name": "Inspector",
+      "generation": {
+        "statProfile": "character-rogue"
+      }
     },
     {
       "id": "clerk",
-      "name": "Clerk"
+      "name": "Clerk",
+      "generation": {
+        "statProfile": "character-balanced"
+      }
     },
     {
       "id": "magistrate",
-      "name": "Magistrate"
+      "name": "Magistrate",
+      "generation": {
+        "statProfile": "character-diplomat"
+      }
     },
     {
       "id": "bailiff",
-      "name": "Bailiff"
+      "name": "Bailiff",
+      "generation": {
+        "statProfile": "character-fighter"
+      }
     },
     {
       "id": "notary",
-      "name": "Notary"
+      "name": "Notary",
+      "generation": {
+        "statProfile": "character-diplomat"
+      }
     },
     {
       "id": "envoy",
-      "name": "Envoy"
+      "name": "Envoy",
+      "generation": {
+        "statProfile": "character-diplomat"
+      }
     }
   ]
 }

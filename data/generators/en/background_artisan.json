@@ -10,51 +10,87 @@
   "entries": [
     {
       "id": "blacksmith",
-      "name": "Blacksmith"
+      "name": "Blacksmith",
+      "generation": {
+        "statProfile": "character-fighter"
+      }
     },
     {
       "id": "carpenter",
-      "name": "Carpenter"
+      "name": "Carpenter",
+      "generation": {
+        "statProfile": "character-balanced"
+      }
     },
     {
       "id": "tailor",
-      "name": "Tailor"
+      "name": "Tailor",
+      "generation": {
+        "statProfile": "character-balanced"
+      }
     },
     {
       "id": "alchemist",
-      "name": "Alchemist"
+      "name": "Alchemist",
+      "generation": {
+        "statProfile": "character-mage"
+      }
     },
     {
       "id": "clockmaker",
-      "name": "Clockmaker"
+      "name": "Clockmaker",
+      "generation": {
+        "statProfile": "character-mage"
+      }
     },
     {
       "id": "baker",
-      "name": "Baker"
+      "name": "Baker",
+      "generation": {
+        "statProfile": "character-balanced"
+      }
     },
     {
       "id": "butcher",
-      "name": "Butcher"
+      "name": "Butcher",
+      "generation": {
+        "statProfile": "character-fighter"
+      }
     },
     {
       "id": "cook",
-      "name": "Cook"
+      "name": "Cook",
+      "generation": {
+        "statProfile": "character-balanced"
+      }
     },
     {
       "id": "mechanic",
-      "name": "Mechanic"
+      "name": "Mechanic",
+      "generation": {
+        "statProfile": "character-mage"
+      }
     },
     {
       "id": "engineer",
-      "name": "Engineer"
+      "name": "Engineer",
+      "generation": {
+        "statProfile": "character-mage"
+      }
     },
     {
       "id": "runesmith",
-      "name": "Runesmith"
+      "name": "Runesmith",
+      "generation": {
+        "statProfile": "character-mage"
+      }
     },
     {
       "id": "potter",
-      "name": "Potter"
+      "name": "Potter",
+      "generation": {
+        "statProfile": "character-balanced"
+      }
     }
   ]
 }

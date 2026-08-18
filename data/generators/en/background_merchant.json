@@ -10,43 +10,73 @@
   "entries": [
     {
       "id": "trader",
-      "name": "Trader"
+      "name": "Trader",
+      "generation": {
+        "statProfile": "character-diplomat"
+      }
     },
     {
       "id": "shopkeeper",
-      "name": "Shopkeeper"
+      "name": "Shopkeeper",
+      "generation": {
+        "statProfile": "character-diplomat"
+      }
     },
     {
       "id": "caravaner",
-      "name": "Caravaner"
+      "name": "Caravaner",
+      "generation": {
+        "statProfile": "character-balanced"
+      }
     },
     {
       "id": "factor",
-      "name": "Factor"
+      "name": "Factor",
+      "generation": {
+        "statProfile": "character-diplomat"
+      }
     },
     {
       "id": "appraiser",
-      "name": "Appraiser"
+      "name": "Appraiser",
+      "generation": {
+        "statProfile": "character-diplomat"
+      }
     },
     {
       "id": "innkeeper",
-      "name": "Innkeeper"
+      "name": "Innkeeper",
+      "generation": {
+        "statProfile": "character-diplomat"
+      }
     },
     {
       "id": "fishmonger",
-      "name": "Fishmonger"
+      "name": "Fishmonger",
+      "generation": {
+        "statProfile": "character-balanced"
+      }
     },
     {
       "id": "supplier",
-      "name": "Supplier"
+      "name": "Supplier",
+      "generation": {
+        "statProfile": "character-diplomat"
+      }
     },
     {
       "id": "peddler",
-      "name": "Peddler"
+      "name": "Peddler",
+      "generation": {
+        "statProfile": "character-diplomat"
+      }
     },
     {
       "id": "market_broker",
-      "name": "Market broker"
+      "name": "Market broker",
+      "generation": {
+        "statProfile": "character-diplomat"
+      }
     }
   ]
 }
