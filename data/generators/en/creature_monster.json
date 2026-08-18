@@ -11,7 +11,7 @@
     {
       "id": "grave_hound",
       "name": "Grave Hound",
-      "weight": 3,
+      "weight": 2,
       "fields": {
         "description": "a corpse-pale pack hunter that follows the scent of fear and drags isolated prey underground."
       },
@@ -32,7 +32,7 @@
     {
       "id": "mire_troll",
       "name": "Mire Troll",
-      "weight": 3,
+      "weight": 2,
       "fields": {
         "description": "a regenerating swamp brute covered in reeds, leeches, and stolen fishing hooks."
       },
@@ -54,7 +54,7 @@
     {
       "id": "cinder_drake",
       "name": "Cinder Drake",
-      "weight": 3,
+      "weight": 2,
       "fields": {
         "description": "a dog-sized wingless dragon that spits burning resin and nests in chimneys."
       },
@@ -1342,6 +1342,415 @@
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 25
+      }
+    },
+    {
+      "id": "kobold",
+      "name": "Kobold",
+      "weight": 4,
+      "fields": {
+        "description": "A small reptilian humanoid that relies on traps, numbers, and narrow tunnels."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": ["{{ traits:darkvision }}", "{{ traits:pack_tactics }}"],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [
+          {
+            "generator": "weapons",
+            "entry": "dagger",
+            "select": "fields"
+          }
+        ],
+        "inventory": [],
+        "naturalArmorPercentage": 5
+      }
+    },
+    {
+      "id": "gnoll",
+      "name": "Gnoll",
+      "weight": 3,
+      "fields": {
+        "description": "A hyena-headed humanoid that hunts in packs and favors isolated prey."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          "{{ traits:keen_smell }}",
+          "{{ traits:pack_tactics }}",
+          "{{ traits:natural_weapons }}"
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [
+          {
+            "generator": "weapons",
+            "entry": "spear",
+            "select": "fields"
+          }
+        ],
+        "inventory": [],
+        "naturalArmorPercentage": 10
+      }
+    },
+    {
+      "id": "zombie",
+      "name": "Zombie",
+      "weight": 4,
+      "fields": {
+        "description": "An animated corpse that advances relentlessly and follows simple orders."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          "{{ traits:poison_immunity }}",
+          "{{ traits:disease_immunity }}"
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 5
+      }
+    },
+    {
+      "id": "ghoul",
+      "name": "Ghoul",
+      "weight": 3,
+      "fields": {
+        "description": "A ravenous undead that stalks abandoned places in search of flesh."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          "{{ traits:darkvision }}",
+          "{{ traits:poison_immunity }}",
+          "{{ traits:disease_immunity }}",
+          "{{ traits:natural_weapons }}",
+          "Paralyzing Claws — After a natural attack deals damage, the target loses 1 AP unless it resists the paralysis."
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 10
+      }
+    },
+    {
+      "id": "giant_rat",
+      "name": "Giant Rat",
+      "weight": 4,
+      "fields": {
+        "description": "An oversized scavenging rodent that nests in ruins, sewers, and refuse heaps."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          "{{ traits:keen_smell }}",
+          "{{ traits:pack_tactics }}",
+          "{{ traits:natural_weapons }}"
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 5
+      }
+    },
+    {
+      "id": "giant_spider",
+      "name": "Giant Spider",
+      "weight": 3,
+      "fields": {
+        "description": "A massive hunting spider that builds restraining webs across enclosed terrain."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          "{{ traits:web_spinner }}",
+          "{{ traits:wall_climber }}",
+          "{{ traits:venomous }}"
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 15
+      }
+    },
+    {
+      "id": "giant_scorpion",
+      "name": "Giant Scorpion",
+      "weight": 3,
+      "fields": {
+        "description": "A heavily armored desert arthropod with crushing pincers and a venomous tail."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": ["{{ traits:natural_weapons }}", "{{ traits:venomous }}"],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 30
+      }
+    },
+    {
+      "id": "giant_snake",
+      "name": "Giant Snake",
+      "weight": 3,
+      "fields": {
+        "description": "A huge serpent that ambushes prey before wrapping it in powerful coils."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          "{{ traits:heat_sense }}",
+          "{{ traits:constrict }}",
+          "{{ traits:natural_weapons }}"
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 10
+      }
+    },
+    {
+      "id": "dire_wolf",
+      "name": "Dire Wolf",
+      "weight": 3,
+      "fields": {
+        "description": "An enormous wolf that brings down large prey through speed and coordinated attacks."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          "{{ traits:keen_smell }}",
+          "{{ traits:pack_tactics }}",
+          "{{ traits:pounce }}",
+          "{{ traits:natural_weapons }}"
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 15
+      }
+    },
+    {
+      "id": "mimic",
+      "name": "Mimic",
+      "weight": 2,
+      "fields": {
+        "description": "A shapeshifting predator that imitates an ordinary object until prey comes close."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          "{{ traits:camouflage }}",
+          "{{ traits:natural_weapons }}",
+          "Adhesive Hide — +2 to Strength actions made to maintain a grapple against a creature touching it."
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 20
+      }
+    },
+    {
+      "id": "gelatinous_cube",
+      "name": "Gelatinous Cube",
+      "weight": 2,
+      "fields": {
+        "description": "A nearly transparent ooze that slowly fills passages and digests organic matter."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          "{{ traits:poison_immunity }}",
+          "{{ traits:disease_immunity }}",
+          "{{ traits:constrict }}",
+          "Transparent Body — +2 to Dexterity actions made to remain unnoticed while motionless in dim light."
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 10
+      }
+    },
+    {
+      "id": "cockatrice",
+      "name": "Cockatrice",
+      "weight": 2,
+      "fields": {
+        "description": "A small winged reptile whose bite can briefly stiffen living flesh into stone."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          "{{ traits:flight }}",
+          "{{ traits:natural_weapons }}",
+          "Petrifying Bite — Once per scene, a creature damaged by its bite cannot move until the end of its next turn unless it resists petrification."
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 10
+      }
+    },
+    {
+      "id": "manticore",
+      "name": "Manticore",
+      "weight": 2,
+      "fields": {
+        "description": "A winged leonine monster armed with claws, fangs, and volleys of tail spikes."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          "{{ traits:flight }}",
+          "{{ traits:natural_weapons }}",
+          "Tail Spikes — Can make ordinary ranged natural attacks with its tail spikes."
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 15
+      }
+    },
+    {
+      "id": "wyvern",
+      "name": "Wyvern",
+      "weight": 2,
+      "fields": {
+        "description": "A two-legged flying reptile that hunts with a venomous tail and powerful jaws."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          "{{ traits:flight }}",
+          "{{ traits:natural_weapons }}",
+          "{{ traits:venomous }}"
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 20
+      }
+    },
+    {
+      "id": "ettin",
+      "name": "Ettin",
+      "weight": 2,
+      "fields": {
+        "description": "A two-headed giant whose independent attention makes it difficult to surprise."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          "{{ traits:powerful_build }}",
+          "{{ traits:natural_weapons }}",
+          "Two Heads — Cannot be surprised while both heads are conscious."
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [
+          {
+            "generator": "weapons",
+            "entry": "club",
+            "select": "fields"
+          }
+        ],
+        "inventory": [],
+        "naturalArmorPercentage": 20
+      }
+    },
+    {
+      "id": "shambling_mound",
+      "name": "Shambling Mound",
+      "weight": 2,
+      "fields": {
+        "description": "A moving mass of roots, vines, and wet vegetation that seizes nearby creatures."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          "{{ traits:camouflage }}",
+          "{{ traits:regeneration }}",
+          "{{ traits:constrict }}"
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 25
+      }
+    },
+    {
+      "id": "lich",
+      "name": "Lich",
+      "weight": 1,
+      "fields": {
+        "description": "An undead spellcaster sustained by powerful necromancy and long preparation."
+      },
+      "generation": {
+        "statProfile": "creature-caster",
+        "traits": [
+          "{{ traits:darkvision }}",
+          "{{ traits:poison_immunity }}",
+          "{{ traits:disease_immunity }}",
+          "{{ traits:magic_resistance }}"
+        ],
+        "fixedRules": [
+          {
+            "entry": "dead_rule",
+            "level": 3
+          },
+          {
+            "entry": "curse_rule",
+            "level": 2
+          }
+        ],
+        "statusEffects": [],
+        "equipment": [
+          {
+            "generator": "weapons",
+            "entry": "combat_scepter",
+            "select": "fields"
+          }
+        ],
+        "inventory": [],
+        "naturalArmorPercentage": 10
+      }
+    },
+    {
+      "id": "hell_hound",
+      "name": "Hell Hound",
+      "weight": 2,
+      "fields": {
+        "description": "A supernatural hunting hound that exhales fire and pursues prey in coordinated packs."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          "{{ traits:keen_smell }}",
+          "{{ traits:pack_tactics }}",
+          "{{ traits:fire_immunity }}",
+          "{{ traits:natural_weapons }}",
+          "Flame Breath — Once per scene, can make one natural attack against every creature in a 3-meter cone."
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 15
       }
     }
   ]

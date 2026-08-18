@@ -129,6 +129,172 @@ test('production category routers are minimal and traverse internal child genera
 	}
 });
 
+test('creature catalogs include generic archetypes and intentional statistical profiles', () => {
+	const animalProfiles = createExpectedProfileMap({
+		'creature-animal-runner': [
+			'mossback_deer',
+			'river_otter',
+			'long_eared_hare',
+			'bluehorn_goat',
+			'reed_crane',
+			'whistle_marmot',
+			'mist_dolphin',
+			'scavenger_rat',
+			'weaver_spider',
+			'thieving_monkey',
+			'cave_bat',
+			'horse',
+		],
+		'creature-animal-tank': [
+			'burrow_pig',
+			'sailback_turtle',
+			'silk_alpaca',
+			'pebble_crab',
+			'glimmer_whale',
+			'armored_crab',
+			'burrowing_armadillo',
+			'cattle_cow',
+			'badger',
+			'beaver',
+		],
+		'creature-animal-magic': [
+			'lantern_finch',
+			'cloud_sheep',
+			'ember_newt',
+			'rain_frog',
+			'moon_moth',
+			'orchard_drake',
+			'star_elk',
+			'memory_crow',
+			'solar_lizard',
+		],
+		'creature-predator': [
+			'copper_fox',
+			'reed_snake',
+			'hill_wolf',
+			'eagle',
+			'owl',
+			'crocodile',
+			'shark',
+		],
+		'creature-brute': [
+			'honey_bear',
+			'ox',
+			'wild_boar',
+			'brown_bear',
+			'moose',
+		],
+	});
+	const companionProfiles = createExpectedProfileMap({
+		'creature-companion': [
+			'loyal_hound',
+			'barn_cat',
+			'messenger_pigeon',
+			'clever_rat',
+			'pocket_ferret',
+			'mule',
+			'moss_tortoise',
+			'whisper_crow',
+			'breeze_lizard',
+			'cave_bat',
+			'river_otter',
+			'messenger_raptor',
+			'riding_horse',
+			'pony',
+			'donkey',
+			'camel',
+			'owl',
+			'raven',
+			'parrot',
+			'toad_frog',
+		],
+		'creature-companion-magic': [
+			'pack_goat',
+			'watch_goose',
+			'lantern_finch',
+			'ember_newt',
+			'miniature_slime',
+			'clockwork_beetle',
+			'tiny_griffin',
+			'blink_rabbit',
+			'paper_dragon',
+			'ghost_mouse',
+			'cloud_pup',
+			'moon_moth',
+			'sir_candlewick',
+		],
+		'creature-elemental': ['pebble_elemental'],
+	});
+	const genericMonsterProfiles = createExpectedProfileMap({
+		'creature-predator': [
+			'kobold',
+			'gnoll',
+			'ghoul',
+			'giant_rat',
+			'giant_spider',
+			'giant_snake',
+			'dire_wolf',
+			'cockatrice',
+			'manticore',
+			'wyvern',
+			'hell_hound',
+		],
+		'creature-brute': [
+			'zombie',
+			'giant_scorpion',
+			'mimic',
+			'gelatinous_cube',
+			'ettin',
+			'shambling_mound',
+		],
+		'creature-caster': ['lich'],
+	});
+
+	for (const locale of ['en', 'fr']) {
+		const animal = generatorCatalog.getGenerator('animal', locale);
+		assert.equal(
+			animal.description,
+			locale === 'en'
+				? 'Ordinary and fantastical wildlife'
+				: 'Faune ordinaire et fantastique',
+		);
+		assertExactCreatureProfiles(animal, animalProfiles);
+		assertHigherCreatureWeights(
+			animal,
+			['horse', 'cattle_cow', 'long_eared_hare', 'cave_bat'],
+			['lantern_finch', 'cloud_sheep', 'moon_moth', 'star_elk'],
+		);
+
+		const companion = generatorCatalog.getGenerator('companion', locale);
+		assertExactCreatureProfiles(companion, companionProfiles);
+		assertHigherCreatureWeights(
+			companion,
+			['barn_cat', 'riding_horse', 'pony', 'donkey'],
+			['pack_goat', 'lantern_finch', 'blink_rabbit', 'paper_dragon'],
+		);
+
+		const monster = generatorCatalog.getGenerator('monster', locale);
+		const monstersById = new Map(monster.entries.map(entry => [entry.id, entry]));
+		for (const [entryId, profileId] of genericMonsterProfiles) {
+			const entry = monstersById.get(entryId);
+			assert.ok(entry, `${locale}:monster:${entryId}`);
+			assert.ok(entry.name, `${locale}:monster:${entryId}:name`);
+			assert.ok(entry.fields.description, `${locale}:monster:${entryId}:description`);
+			assert.equal(
+				entry.generation.statProfile,
+				profileId,
+				`${locale}:monster:${entryId}:profile`,
+			);
+		}
+		assertHigherCreatureWeights(
+			monster,
+			['kobold', 'zombie', 'giant_rat'],
+			['grave_hound', 'cinder_drake', 'lich'],
+		);
+		assert.equal(monstersById.has('goblin'), false);
+	}
+});
+
 test('loot replaces every inventory entry across heterogeneous additional fields', () => {
 	assert.equal(generatorCatalog.getGenerator('inventory'), undefined);
 	for (const [generatorId, expectedCount, requiredFields] of [
@@ -289,3 +455,32 @@ test('production catalogs preserve deterministic IDs across locales', () => {
 		}
 	}
 });
+
+function createExpectedProfileMap(groups) {
+	return new Map(Object.entries(groups).flatMap(([profileId, entryIds]) => (
+		entryIds.map(entryId => [entryId, profileId])
+	)));
+}
+
+function assertExactCreatureProfiles(generator, expectedProfiles) {
+	assert.equal(generator.entries.length, expectedProfiles.size, generator.id);
+	for (const entry of generator.entries) {
+		assert.equal(
+			entry.generation.statProfile,
+			expectedProfiles.get(entry.id),
+			`${generator.locale}:${generator.id}:${entry.id}`,
+		);
+	}
+}
+
+function assertHigherCreatureWeights(generator, basicEntryIds, exceptionalEntryIds) {
+	const weights = new Map(generator.entries.map(entry => [entry.id, entry.weight]));
+	const basicWeights = basicEntryIds.map(entryId => weights.get(entryId));
+	const exceptionalWeights = exceptionalEntryIds.map(entryId => weights.get(entryId));
+	assert.ok(basicWeights.every(Number.isFinite), `${generator.id}:basic weights`);
+	assert.ok(exceptionalWeights.every(Number.isFinite), `${generator.id}:exceptional weights`);
+	assert.ok(
+		Math.min(...basicWeights) > Math.max(...exceptionalWeights),
+		`${generator.id}: basic creatures should be more common`,
+	);
+}

@@ -71,12 +71,12 @@
     {
       "id": "pack_goat",
       "name": "Pack Goat",
-      "weight": 3,
+      "weight": 2,
       "fields": {
         "description": "carries modest supplies, eats almost anything, and refuses obviously cursed paths."
       },
       "generation": {
-        "statProfile": "creature-companion",
+        "statProfile": "creature-companion-magic",
         "traits": ["{{ traits:sure_footed }}", "{{ traits:powerful_build }}"],
         "fixedRules": [],
         "statusEffects": [],
@@ -111,12 +111,12 @@
     {
       "id": "watch_goose",
       "name": "Watch Goose",
-      "weight": 3,
+      "weight": 2,
       "fields": {
         "description": "loudly challenges strangers, invisible creatures, and anyone carrying bread."
       },
       "generation": {
-        "statProfile": "creature-companion",
+        "statProfile": "creature-companion-magic",
         "traits": [
           "Warning Call — Allies able to hear the call gain +1 to Initiative against a threat the creature has detected."
         ],
@@ -185,7 +185,7 @@
         "description": "emits gentle light and becomes silent when predators are nearby."
       },
       "generation": {
-        "statProfile": "creature-companion",
+        "statProfile": "creature-companion-magic",
         "traits": [
           "{{ traits:flight }}",
           "Luminous Plumage — Sheds gentle light in a 5-meter radius and can extinguish or restore it at will."
@@ -205,7 +205,7 @@
         "description": "provides warmth, lights dry tinder, and sleeps inside cookware."
       },
       "generation": {
-        "statProfile": "creature-companion",
+        "statProfile": "creature-companion-magic",
         "traits": ["{{ traits:amphibious }}", "{{ traits:fire_immunity }}"],
         "fixedRules": [],
         "statusEffects": [],
@@ -261,7 +261,7 @@
         "description": "harmlessly dissolves dirt, spoiled food, and occasionally important paper."
       },
       "generation": {
-        "statProfile": "creature-companion",
+        "statProfile": "creature-companion-magic",
         "traits": [
           "{{ traits:poison_immunity }}",
           "{{ traits:disease_immunity }}",
@@ -282,7 +282,7 @@
         "description": "records one hour of sound and plays it back when wound."
       },
       "generation": {
-        "statProfile": "creature-companion",
+        "statProfile": "creature-companion-magic",
         "traits": [
           "{{ traits:poison_immunity }}",
           "{{ traits:disease_immunity }}",
@@ -315,7 +315,7 @@
     {
       "id": "cave_bat",
       "name": "Cave Bat",
-      "weight": 2,
+      "weight": 3,
       "fields": {
         "description": "navigates complete darkness and returns when called with a specific whistle."
       },
@@ -332,7 +332,7 @@
     {
       "id": "river_otter",
       "name": "River Otter",
-      "weight": 2,
+      "weight": 3,
       "fields": {
         "description": "swims, retrieves floating objects, and insists on opening shellfish during serious scenes."
       },
@@ -354,7 +354,7 @@
         "description": "fiercely guards a single backpack and hunts insects with dramatic dives."
       },
       "generation": {
-        "statProfile": "creature-companion",
+        "statProfile": "creature-companion-magic",
         "traits": ["{{ traits:flight }}", "{{ traits:natural_weapons }}"],
         "fixedRules": [],
         "statusEffects": [],
@@ -371,7 +371,7 @@
         "description": "teleports a few meters when startled but rarely chooses the safest direction."
       },
       "generation": {
-        "statProfile": "creature-companion",
+        "statProfile": "creature-companion-magic",
         "traits": [
           "{{ traits:swift_reflexes }}",
           "Short Blink — Once per turn when startled or attacked, may teleport up to 3 meters to an open space it can see."
@@ -391,7 +391,7 @@
         "description": "folds itself flat, carries written notes, and breathes enough flame to seal wax."
       },
       "generation": {
-        "statProfile": "creature-companion",
+        "statProfile": "creature-companion-magic",
         "traits": [
           "{{ traits:flight }}",
           "Fold Flat — Can flatten itself enough to pass through a gap as narrow as a sheet of paper.",
@@ -423,7 +423,7 @@
         "description": "passes through thin walls and becomes visible after eating cheese."
       },
       "generation": {
-        "statProfile": "creature-companion",
+        "statProfile": "creature-companion-magic",
         "traits": ["{{ traits:incorporeal }}"],
         "fixedRules": [],
         "statusEffects": [],
@@ -440,7 +440,7 @@
         "description": "a floating canine made of mist that can briefly conceal a person's face."
       },
       "generation": {
-        "statProfile": "creature-companion",
+        "statProfile": "creature-companion-magic",
         "traits": [
           "Mist Veil — Once per scene, creates a 2-meter cloud that conceals one creature until the start of its next turn."
         ],
@@ -479,7 +479,7 @@
         "description": "absorbs weak magical residue and glows in the presence of active enchantments."
       },
       "generation": {
-        "statProfile": "creature-companion",
+        "statProfile": "creature-companion-magic",
         "traits": ["{{ traits:flight }}", "{{ traits:magic_sense }}"],
         "fixedRules": [],
         "statusEffects": [],
@@ -491,7 +491,7 @@
     {
       "id": "messenger_raptor",
       "name": "Messenger Raptor",
-      "weight": 1,
+      "weight": 2,
       "fields": {
         "description": "A territorial bird trainable to recognize people, emblems, and routes."
       },
@@ -516,7 +516,7 @@
         "description": "a tiny animated suit of armor searching for a person large enough to be its squire."
       },
       "generation": {
-        "statProfile": "creature-companion",
+        "statProfile": "creature-companion-magic",
         "traits": [
           "{{ traits:poison_immunity }}",
           "{{ traits:disease_immunity }}",
@@ -527,6 +527,155 @@
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 35
+      }
+    },
+    {
+      "id": "riding_horse",
+      "name": "Riding Horse",
+      "weight": 4,
+      "fields": {
+        "description": "A trained mount accustomed to carrying a rider along roads and open terrain."
+      },
+      "generation": {
+        "statProfile": "creature-companion",
+        "traits": ["{{ traits:charge }}"],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 5
+      }
+    },
+    {
+      "id": "pony",
+      "name": "Pony",
+      "weight": 4,
+      "fields": {
+        "description": "A small, steady mount suited to light riders, pack work, and narrow trails."
+      },
+      "generation": {
+        "statProfile": "creature-companion",
+        "traits": ["{{ traits:sure_footed }}"],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 5
+      }
+    },
+    {
+      "id": "donkey",
+      "name": "Donkey",
+      "weight": 4,
+      "fields": {
+        "description": "A patient pack animal valued for endurance, caution, and secure footing."
+      },
+      "generation": {
+        "statProfile": "creature-companion",
+        "traits": ["{{ traits:sure_footed }}", "{{ traits:powerful_build }}"],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 5
+      }
+    },
+    {
+      "id": "camel",
+      "name": "Camel",
+      "weight": 3,
+      "fields": {
+        "description": "A desert mount and pack animal able to travel long distances with little water."
+      },
+      "generation": {
+        "statProfile": "creature-companion",
+        "traits": [
+          "{{ traits:powerful_build }}",
+          "Desert Endurance — +2 to Constitution actions made to endure ordinary heat, thirst, or long desert travel."
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 5
+      }
+    },
+    {
+      "id": "owl",
+      "name": "Owl",
+      "weight": 3,
+      "fields": {
+        "description": "A quiet nocturnal bird trained to scout, hunt pests, or carry very small objects."
+      },
+      "generation": {
+        "statProfile": "creature-companion",
+        "traits": [
+          "{{ traits:flight }}",
+          "{{ traits:keen_hearing }}",
+          "{{ traits:darkvision }}"
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 0
+      }
+    },
+    {
+      "id": "raven",
+      "name": "Raven",
+      "weight": 3,
+      "fields": {
+        "description": "An observant corvid able to learn routines, recognize faces, and imitate simple sounds."
+      },
+      "generation": {
+        "statProfile": "creature-companion",
+        "traits": [
+          "{{ traits:flight }}",
+          "Clever Forager — +2 to Perception actions made to locate hidden food or small unattended objects."
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 0
+      }
+    },
+    {
+      "id": "parrot",
+      "name": "Parrot",
+      "weight": 3,
+      "fields": {
+        "description": "A colorful social bird that learns familiar voices and short spoken phrases."
+      },
+      "generation": {
+        "statProfile": "creature-companion",
+        "traits": [
+          "{{ traits:flight }}",
+          "Perfect Mimicry — Can reproduce any short phrase or familiar voice it has heard clearly."
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 0
+      }
+    },
+    {
+      "id": "toad_frog",
+      "name": "Toad / Frog",
+      "weight": 3,
+      "fields": {
+        "description": "A small amphibian companion comfortable in damp ground, ponds, and packs."
+      },
+      "generation": {
+        "statProfile": "creature-companion",
+        "traits": ["{{ traits:amphibious }}"],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 0
       }
     }
   ]

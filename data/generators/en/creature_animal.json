@@ -3,7 +3,7 @@
   "id": "animal",
   "visibility": "internal",
   "name": "Animal",
-  "description": "Ordinary and fantastic friendly wildlife",
+  "description": "Ordinary and fantastical wildlife",
   "entrySchema": {
     "required": ["description"]
   },
@@ -11,12 +11,12 @@
     {
       "id": "mossback_deer",
       "name": "Mossback Deer",
-      "weight": 4,
+      "weight": 2,
       "fields": {
         "description": "a calm forest grazer whose antlers host flowers, insects, and medicinal herbs."
       },
       "generation": {
-        "statProfile": "creature-predator",
+        "statProfile": "creature-animal-runner",
         "traits": [],
         "fixedRules": [],
         "statusEffects": [],
@@ -28,12 +28,12 @@
     {
       "id": "lantern_finch",
       "name": "Lantern Finch",
-      "weight": 4,
+      "weight": 2,
       "fields": {
         "description": "a tiny bird with glowing feathers that gathers near safe campsites."
       },
       "generation": {
-        "statProfile": "creature-predator",
+        "statProfile": "creature-animal-magic",
         "traits": [
           "Luminous Plumage — Sheds gentle light in a 5-meter radius and can extinguish or restore it at will."
         ],
@@ -47,12 +47,12 @@
     {
       "id": "river_otter",
       "name": "River Otter",
-      "weight": 4,
+      "weight": 3,
       "fields": {
         "description": "a playful, clever swimmer that trades polished stones for food."
       },
       "generation": {
-        "statProfile": "creature-predator",
+        "statProfile": "creature-animal-runner",
         "traits": ["{{ traits:amphibious }}", "{{ traits:aquatic_speed }}"],
         "fixedRules": [],
         "statusEffects": [],
@@ -64,12 +64,12 @@
     {
       "id": "cloud_sheep",
       "name": "Cloud Sheep",
-      "weight": 3,
+      "weight": 2,
       "fields": {
         "description": "a woolly mountain animal light enough to survive long falls."
       },
       "generation": {
-        "statProfile": "creature-predator",
+        "statProfile": "creature-animal-magic",
         "traits": ["{{ traits:gliding }}"],
         "fixedRules": [],
         "statusEffects": [],
@@ -103,7 +103,7 @@
         "description": "a sturdy forager able to locate roots, truffles, and shallow buried objects."
       },
       "generation": {
-        "statProfile": "creature-predator",
+        "statProfile": "creature-animal-tank",
         "traits": ["{{ traits:keen_smell }}", "{{ traits:burrower }}"],
         "fixedRules": [],
         "statusEffects": [],
@@ -115,12 +115,12 @@
     {
       "id": "long_eared_hare",
       "name": "Long-Eared Hare",
-      "weight": 3,
+      "weight": 4,
       "fields": {
         "description": "an alert grassland animal that stamps before storms or approaching danger."
       },
       "generation": {
-        "statProfile": "creature-predator",
+        "statProfile": "creature-animal-runner",
         "traits": ["{{ traits:keen_hearing }}", "{{ traits:swift_reflexes }}"],
         "fixedRules": [],
         "statusEffects": [],
@@ -132,12 +132,12 @@
     {
       "id": "bluehorn_goat",
       "name": "Bluehorn Goat",
-      "weight": 3,
+      "weight": 2,
       "fields": {
         "description": "a sure-footed cliff grazer with mineral-rich blue horns."
       },
       "generation": {
-        "statProfile": "creature-predator",
+        "statProfile": "creature-animal-runner",
         "traits": ["{{ traits:sure_footed }}", "{{ traits:natural_weapons }}"],
         "fixedRules": [],
         "statusEffects": [],
@@ -149,12 +149,12 @@
     {
       "id": "reed_crane",
       "name": "Reed Crane",
-      "weight": 3,
+      "weight": 4,
       "fields": {
         "description": "a patient marsh bird often following travelers through safe water."
       },
       "generation": {
-        "statProfile": "creature-predator",
+        "statProfile": "creature-animal-runner",
         "traits": ["{{ traits:flight }}"],
         "fixedRules": [],
         "statusEffects": [],
@@ -166,7 +166,7 @@
     {
       "id": "honey_bear",
       "name": "Honey Bear",
-      "weight": 3,
+      "weight": 2,
       "fields": {
         "description": "a small gentle bear with golden fur and an excellent memory for kindness."
       },
@@ -188,7 +188,7 @@
         "description": "a broad river turtle whose shell catches wind while swimming."
       },
       "generation": {
-        "statProfile": "creature-predator",
+        "statProfile": "creature-animal-tank",
         "traits": ["{{ traits:amphibious }}", "{{ traits:aquatic_speed }}"],
         "fixedRules": [],
         "statusEffects": [],
@@ -205,7 +205,7 @@
         "description": "a warm-bodied amphibian commonly found sleeping beside ovens."
       },
       "generation": {
-        "statProfile": "creature-predator",
+        "statProfile": "creature-animal-magic",
         "traits": ["{{ traits:amphibious }}", "{{ traits:fire_immunity }}"],
         "fixedRules": [],
         "statusEffects": [],
@@ -217,12 +217,12 @@
     {
       "id": "silk_alpaca",
       "name": "Silk Alpaca",
-      "weight": 2,
+      "weight": 3,
       "fields": {
         "description": "a mild-tempered herd animal producing unusually strong, soft fiber."
       },
       "generation": {
-        "statProfile": "creature-predator",
+        "statProfile": "creature-animal-tank",
         "traits": [],
         "fixedRules": [],
         "statusEffects": [],
@@ -239,7 +239,7 @@
         "description": "a bright frog whose call reliably predicts rainfall several hours ahead."
       },
       "generation": {
-        "statProfile": "creature-predator",
+        "statProfile": "creature-animal-magic",
         "traits": [
           "{{ traits:amphibious }}",
           "Weather Sense — +2 to Perception actions made to predict rain or severe weather during the next six hours."
@@ -259,7 +259,7 @@
         "description": "a hand-sized silver moth that feeds on magical residue without harming spells."
       },
       "generation": {
-        "statProfile": "creature-predator",
+        "statProfile": "creature-animal-magic",
         "traits": ["{{ traits:flight }}", "{{ traits:magic_sense }}"],
         "fixedRules": [],
         "statusEffects": [],
@@ -276,7 +276,7 @@
         "description": "a harmless shore crab that decorates its shell with colorful stones."
       },
       "generation": {
-        "statProfile": "creature-predator",
+        "statProfile": "creature-animal-tank",
         "traits": [],
         "fixedRules": [],
         "statusEffects": [],
@@ -288,12 +288,12 @@
     {
       "id": "whistle_marmot",
       "name": "Whistle Marmot",
-      "weight": 2,
+      "weight": 3,
       "fields": {
         "description": "a social alpine rodent with distinct warning calls for different threats."
       },
       "generation": {
-        "statProfile": "creature-predator",
+        "statProfile": "creature-animal-runner",
         "traits": [
           "{{ traits:keen_hearing }}",
           "Warning Call — Allies able to hear the call gain +1 to Initiative against a threat the creature has detected."
@@ -313,7 +313,7 @@
         "description": "a flightless lizard that eats pests and warms fruit trees during frost."
       },
       "generation": {
-        "statProfile": "creature-predator",
+        "statProfile": "creature-animal-magic",
         "traits": [
           "Hearthblood — Can warm a small creature or object by touch and ignite dry tinder after one uninterrupted minute."
         ],
@@ -332,7 +332,7 @@
         "description": "a pale coastal dolphin that guides lost vessels away from reefs."
       },
       "generation": {
-        "statProfile": "creature-predator",
+        "statProfile": "creature-animal-runner",
         "traits": ["{{ traits:aquatic_speed }}", "{{ traits:echolocation }}"],
         "fixedRules": [],
         "statusEffects": [],
@@ -349,7 +349,7 @@
         "description": "a rare nocturnal deer whose coat resembles the current night sky."
       },
       "generation": {
-        "statProfile": "creature-brute",
+        "statProfile": "creature-animal-magic",
         "traits": ["{{ traits:darkvision }}", "{{ traits:camouflage }}"],
         "fixedRules": [],
         "statusEffects": [],
@@ -366,7 +366,7 @@
         "description": "a friendly black bird able to repeat one sentence it heard years ago."
       },
       "generation": {
-        "statProfile": "creature-predator",
+        "statProfile": "creature-animal-magic",
         "traits": [
           "{{ traits:flight }}",
           "Perfect Mimicry — Can reproduce any short phrase or familiar voice it has heard clearly."
@@ -386,7 +386,7 @@
         "description": "a gentle deep-sea giant whose songs make plankton shine."
       },
       "generation": {
-        "statProfile": "creature-brute",
+        "statProfile": "creature-animal-tank",
         "traits": ["{{ traits:aquatic_speed }}", "{{ traits:echolocation }}"],
         "fixedRules": [],
         "statusEffects": [],
@@ -403,7 +403,7 @@
         "description": "A placid reptile that stores heat in its scales and seeks sun-exposed surfaces."
       },
       "generation": {
-        "statProfile": "creature-predator",
+        "statProfile": "creature-animal-magic",
         "traits": [
           "Solar Reserve — After one hour in direct sunlight, ignores the next harmful effect caused by ordinary cold."
         ],
@@ -417,7 +417,7 @@
     {
       "id": "reed_snake",
       "name": "Reed Snake",
-      "weight": 1,
+      "weight": 3,
       "fields": {
         "description": "A discreet aquatic snake whose bite is painful but rarely lethal."
       },
@@ -434,12 +434,12 @@
     {
       "id": "scavenger_rat",
       "name": "Scavenger Rat",
-      "weight": 1,
+      "weight": 4,
       "fields": {
         "description": "A curious rodent that carries tools, buttons, and shiny objects to a surprisingly organized nest."
       },
       "generation": {
-        "statProfile": "creature-predator",
+        "statProfile": "creature-animal-runner",
         "traits": [],
         "fixedRules": [],
         "statusEffects": [],
@@ -451,12 +451,12 @@
     {
       "id": "weaver_spider",
       "name": "Weaver Spider",
-      "weight": 1,
+      "weight": 3,
       "fields": {
         "description": "A large nonaggressive spider whose strong silk is prized by craftspeople."
       },
       "generation": {
-        "statProfile": "creature-predator",
+        "statProfile": "creature-animal-runner",
         "traits": ["{{ traits:web_spinner }}"],
         "fixedRules": [],
         "statusEffects": [],
@@ -468,7 +468,7 @@
     {
       "id": "hill_wolf",
       "name": "Hill Wolf",
-      "weight": 1,
+      "weight": 4,
       "fields": {
         "description": "A cautious social predator that watches a group before choosing avoidance or approach."
       },
@@ -485,12 +485,12 @@
     {
       "id": "armored_crab",
       "name": "Armored Crab",
-      "weight": 1,
+      "weight": 2,
       "fields": {
         "description": "A large crustacean that reinforces its shell with debris and seashells."
       },
       "generation": {
-        "statProfile": "creature-brute",
+        "statProfile": "creature-animal-tank",
         "traits": ["{{ traits:amphibious }}"],
         "fixedRules": [],
         "statusEffects": [],
@@ -502,12 +502,12 @@
     {
       "id": "burrowing_armadillo",
       "name": "Burrowing Armadillo",
-      "weight": 1,
+      "weight": 3,
       "fields": {
         "description": "A sturdy animal able to locate water, roots, and hollows beneath dry ground."
       },
       "generation": {
-        "statProfile": "creature-brute",
+        "statProfile": "creature-animal-tank",
         "traits": ["{{ traits:burrower }}"],
         "fixedRules": [],
         "statusEffects": [],
@@ -519,12 +519,12 @@
     {
       "id": "thieving_monkey",
       "name": "Thieving Monkey",
-      "weight": 1,
+      "weight": 3,
       "fields": {
         "description": "An intelligent animal that trades stolen objects for food or new curiosities."
       },
       "generation": {
-        "statProfile": "creature-predator",
+        "statProfile": "creature-animal-runner",
         "traits": [
           "Nimble Hands — +2 to Dexterity actions made to grasp, steal, or manipulate small objects."
         ],
@@ -538,18 +538,259 @@
     {
       "id": "cave_bat",
       "name": "Cave Bat",
-      "weight": 1,
+      "weight": 4,
       "fields": {
         "description": "A small nocturnal animal whose movement reveals air currents and hidden passages."
       },
       "generation": {
-        "statProfile": "creature-predator",
+        "statProfile": "creature-animal-runner",
         "traits": ["{{ traits:flight }}", "{{ traits:echolocation }}"],
         "fixedRules": [],
         "statusEffects": [],
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 0
+      }
+    },
+    {
+      "id": "horse",
+      "name": "Horse",
+      "weight": 4,
+      "fields": {
+        "description": "A swift herd grazer found in open country and around settled lands."
+      },
+      "generation": {
+        "statProfile": "creature-animal-runner",
+        "traits": ["{{ traits:charge }}"],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 5
+      }
+    },
+    {
+      "id": "cattle_cow",
+      "name": "Cattle / Cow",
+      "weight": 4,
+      "fields": {
+        "description": "A sturdy herd animal commonly raised for milk, meat, hides, and labor."
+      },
+      "generation": {
+        "statProfile": "creature-animal-tank",
+        "traits": ["{{ traits:powerful_build }}"],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 10
+      }
+    },
+    {
+      "id": "ox",
+      "name": "Ox",
+      "weight": 4,
+      "fields": {
+        "description": "A powerful draft animal bred to pull heavy loads across difficult ground."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": ["{{ traits:powerful_build }}", "{{ traits:charge }}"],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 10
+      }
+    },
+    {
+      "id": "wild_boar",
+      "name": "Wild Boar",
+      "weight": 3,
+      "fields": {
+        "description": "A tough, short-tempered forest forager armed with sharp tusks."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          "{{ traits:keen_smell }}",
+          "{{ traits:charge }}",
+          "{{ traits:natural_weapons }}"
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 15
+      }
+    },
+    {
+      "id": "brown_bear",
+      "name": "Brown Bear",
+      "weight": 3,
+      "fields": {
+        "description": "A large omnivore with great strength, a keen nose, and a defensive temperament."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          "{{ traits:keen_smell }}",
+          "{{ traits:powerful_build }}",
+          "{{ traits:natural_weapons }}"
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 15
+      }
+    },
+    {
+      "id": "moose",
+      "name": "Moose",
+      "weight": 3,
+      "fields": {
+        "description": "A towering woodland grazer capable of sudden, forceful charges."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          "{{ traits:powerful_build }}",
+          "{{ traits:charge }}",
+          "{{ traits:natural_weapons }}"
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 10
+      }
+    },
+    {
+      "id": "eagle",
+      "name": "Eagle",
+      "weight": 3,
+      "fields": {
+        "description": "A large bird of prey that hunts from high above open ground and mountain slopes."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          "{{ traits:flight }}",
+          "{{ traits:natural_weapons }}",
+          "Keen Sight — +2 to Perception actions that rely on vision at long range."
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 5
+      }
+    },
+    {
+      "id": "owl",
+      "name": "Owl",
+      "weight": 3,
+      "fields": {
+        "description": "A silent nocturnal hunter with acute hearing and excellent vision in darkness."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          "{{ traits:flight }}",
+          "{{ traits:keen_hearing }}",
+          "{{ traits:darkvision }}"
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 0
+      }
+    },
+    {
+      "id": "badger",
+      "name": "Badger",
+      "weight": 3,
+      "fields": {
+        "description": "A compact burrowing animal known for persistence and fierce self-defense."
+      },
+      "generation": {
+        "statProfile": "creature-animal-tank",
+        "traits": [
+          "{{ traits:burrower }}",
+          "{{ traits:keen_smell }}",
+          "{{ traits:natural_weapons }}"
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 10
+      }
+    },
+    {
+      "id": "beaver",
+      "name": "Beaver",
+      "weight": 3,
+      "fields": {
+        "description": "An industrious aquatic rodent that builds dams and shelters from timber and mud."
+      },
+      "generation": {
+        "statProfile": "creature-animal-tank",
+        "traits": [
+          "{{ traits:amphibious }}",
+          "{{ traits:aquatic_speed }}",
+          "Tree Feller — +2 to Strength actions made to gnaw through or move ordinary wood."
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 10
+      }
+    },
+    {
+      "id": "crocodile",
+      "name": "Crocodile",
+      "weight": 3,
+      "fields": {
+        "description": "A heavily scaled ambush predator that waits in warm rivers, marshes, and estuaries."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          "{{ traits:amphibious }}",
+          "{{ traits:aquatic_speed }}",
+          "{{ traits:camouflage }}",
+          "{{ traits:natural_weapons }}"
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 30
+      }
+    },
+    {
+      "id": "shark",
+      "name": "Shark",
+      "weight": 3,
+      "fields": {
+        "description": "A swift marine predator able to detect prey across dark or murky water."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          "{{ traits:aquatic_speed }}",
+          "{{ traits:keen_smell }}",
+          "{{ traits:natural_weapons }}"
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 15
       }
     }
   ]

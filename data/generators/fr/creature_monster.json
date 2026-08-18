@@ -11,7 +11,7 @@
     {
       "id": "grave_hound",
       "name": "Molosse des tombes",
-      "weight": 3,
+      "weight": 2,
       "fields": {
         "description": "chasseur en meute au teint cadavérique qui flaire la peur et entraîne sous terre les proies isolées."
       },
@@ -32,7 +32,7 @@
     {
       "id": "mire_troll",
       "name": "Troll des fondrières",
-      "weight": 3,
+      "weight": 2,
       "fields": {
         "description": "brute des marais capable de se régénérer, couverte de roseaux, de sangsues et d’hameçons volés."
       },
@@ -54,7 +54,7 @@
     {
       "id": "cinder_drake",
       "name": "Drac de cendre",
-      "weight": 3,
+      "weight": 2,
       "fields": {
         "description": "dragon sans ailes grand comme un chien, qui crache de la résine enflammée et niche dans les cheminées."
       },
@@ -1342,6 +1342,415 @@
         "equipment": [],
         "inventory": [],
         "naturalArmorPercentage": 25
+      }
+    },
+    {
+      "id": "kobold",
+      "name": "Kobold",
+      "weight": 4,
+      "fields": {
+        "description": "Un petit humanoïde reptilien qui compte sur les pièges, le nombre et les galeries étroites."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": ["{{ traits:darkvision }}", "{{ traits:pack_tactics }}"],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [
+          {
+            "generator": "weapons",
+            "entry": "dagger",
+            "select": "fields"
+          }
+        ],
+        "inventory": [],
+        "naturalArmorPercentage": 5
+      }
+    },
+    {
+      "id": "gnoll",
+      "name": "Gnoll",
+      "weight": 3,
+      "fields": {
+        "description": "Un humanoïde à tête d’hyène qui chasse en meute et privilégie les proies isolées."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          "{{ traits:keen_smell }}",
+          "{{ traits:pack_tactics }}",
+          "{{ traits:natural_weapons }}"
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [
+          {
+            "generator": "weapons",
+            "entry": "spear",
+            "select": "fields"
+          }
+        ],
+        "inventory": [],
+        "naturalArmorPercentage": 10
+      }
+    },
+    {
+      "id": "zombie",
+      "name": "Zombie",
+      "weight": 4,
+      "fields": {
+        "description": "Un cadavre animé qui avance sans relâche et obéit à des ordres simples."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          "{{ traits:poison_immunity }}",
+          "{{ traits:disease_immunity }}"
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 5
+      }
+    },
+    {
+      "id": "ghoul",
+      "name": "Goule",
+      "weight": 3,
+      "fields": {
+        "description": "Un mort-vivant famélique qui rôde dans les lieux abandonnés à la recherche de chair."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          "{{ traits:darkvision }}",
+          "{{ traits:poison_immunity }}",
+          "{{ traits:disease_immunity }}",
+          "{{ traits:natural_weapons }}",
+          "Griffes paralysantes — Après qu’une attaque naturelle a infligé des dégâts, la cible perd 1 PA à moins qu’elle ne résiste à la paralysie."
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 10
+      }
+    },
+    {
+      "id": "giant_rat",
+      "name": "Rat géant",
+      "weight": 4,
+      "fields": {
+        "description": "Un rongeur charognard démesuré qui niche dans les ruines, les égouts et les tas d’ordures."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          "{{ traits:keen_smell }}",
+          "{{ traits:pack_tactics }}",
+          "{{ traits:natural_weapons }}"
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 5
+      }
+    },
+    {
+      "id": "giant_spider",
+      "name": "Araignée géante",
+      "weight": 3,
+      "fields": {
+        "description": "Une immense araignée prédatrice qui tend des toiles entravantes dans les espaces clos."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          "{{ traits:web_spinner }}",
+          "{{ traits:wall_climber }}",
+          "{{ traits:venomous }}"
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 15
+      }
+    },
+    {
+      "id": "giant_scorpion",
+      "name": "Scorpion géant",
+      "weight": 3,
+      "fields": {
+        "description": "Un arthropode du désert lourdement cuirassé, doté de pinces broyeuses et d’une queue venimeuse."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": ["{{ traits:natural_weapons }}", "{{ traits:venomous }}"],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 30
+      }
+    },
+    {
+      "id": "giant_snake",
+      "name": "Serpent géant",
+      "weight": 3,
+      "fields": {
+        "description": "Un serpent colossal qui surprend ses proies avant de les broyer dans ses puissants anneaux."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          "{{ traits:heat_sense }}",
+          "{{ traits:constrict }}",
+          "{{ traits:natural_weapons }}"
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 10
+      }
+    },
+    {
+      "id": "dire_wolf",
+      "name": "Loup sanguinaire",
+      "weight": 3,
+      "fields": {
+        "description": "Un loup gigantesque qui abat de grandes proies grâce à sa vitesse et à des attaques coordonnées."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          "{{ traits:keen_smell }}",
+          "{{ traits:pack_tactics }}",
+          "{{ traits:pounce }}",
+          "{{ traits:natural_weapons }}"
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 15
+      }
+    },
+    {
+      "id": "mimic",
+      "name": "Mimique",
+      "weight": 2,
+      "fields": {
+        "description": "Un prédateur métamorphe qui imite un objet ordinaire jusqu’à ce qu’une proie s’approche."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          "{{ traits:camouflage }}",
+          "{{ traits:natural_weapons }}",
+          "Peau adhésive — +2 aux actions de Force pour maintenir une lutte contre une créature qui le touche."
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 20
+      }
+    },
+    {
+      "id": "gelatinous_cube",
+      "name": "Cube gélatineux",
+      "weight": 2,
+      "fields": {
+        "description": "Une vase presque transparente qui emplit lentement les passages et digère la matière organique."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          "{{ traits:poison_immunity }}",
+          "{{ traits:disease_immunity }}",
+          "{{ traits:constrict }}",
+          "Corps transparent — +2 aux actions de Dextérité pour passer inaperçu tant qu’il reste immobile dans une faible lumière."
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 10
+      }
+    },
+    {
+      "id": "cockatrice",
+      "name": "Cocatrix",
+      "weight": 2,
+      "fields": {
+        "description": "Un petit reptile ailé dont la morsure peut brièvement changer la chair vivante en pierre."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          "{{ traits:flight }}",
+          "{{ traits:natural_weapons }}",
+          "Morsure pétrifiante — Une fois par scène, une créature blessée par sa morsure ne peut plus se déplacer jusqu’à la fin de son prochain tour, sauf si elle résiste à la pétrification."
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 10
+      }
+    },
+    {
+      "id": "manticore",
+      "name": "Manticore",
+      "weight": 2,
+      "fields": {
+        "description": "Un monstre léonin ailé, armé de griffes, de crocs et de volées de piquants caudaux."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          "{{ traits:flight }}",
+          "{{ traits:natural_weapons }}",
+          "Piquants caudaux — Peut effectuer des attaques naturelles ordinaires à distance avec les piquants de sa queue."
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 15
+      }
+    },
+    {
+      "id": "wyvern",
+      "name": "Wyverne",
+      "weight": 2,
+      "fields": {
+        "description": "Un reptile volant bipède qui chasse à l’aide d’une queue venimeuse et de puissantes mâchoires."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          "{{ traits:flight }}",
+          "{{ traits:natural_weapons }}",
+          "{{ traits:venomous }}"
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 20
+      }
+    },
+    {
+      "id": "ettin",
+      "name": "Ettin",
+      "weight": 2,
+      "fields": {
+        "description": "Un géant à deux têtes dont l’attention partagée le rend difficile à surprendre."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          "{{ traits:powerful_build }}",
+          "{{ traits:natural_weapons }}",
+          "Deux têtes — Ne peut pas être surpris tant que ses deux têtes sont conscientes."
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [
+          {
+            "generator": "weapons",
+            "entry": "club",
+            "select": "fields"
+          }
+        ],
+        "inventory": [],
+        "naturalArmorPercentage": 20
+      }
+    },
+    {
+      "id": "shambling_mound",
+      "name": "Tertre errant",
+      "weight": 2,
+      "fields": {
+        "description": "Une masse mouvante de racines, de lianes et de végétation détrempée qui saisit les créatures proches."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          "{{ traits:camouflage }}",
+          "{{ traits:regeneration }}",
+          "{{ traits:constrict }}"
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 25
+      }
+    },
+    {
+      "id": "lich",
+      "name": "Liche",
+      "weight": 1,
+      "fields": {
+        "description": "Un lanceur de sorts mort-vivant préservé par une puissante nécromancie et de longs préparatifs."
+      },
+      "generation": {
+        "statProfile": "creature-caster",
+        "traits": [
+          "{{ traits:darkvision }}",
+          "{{ traits:poison_immunity }}",
+          "{{ traits:disease_immunity }}",
+          "{{ traits:magic_resistance }}"
+        ],
+        "fixedRules": [
+          {
+            "entry": "dead_rule",
+            "level": 3
+          },
+          {
+            "entry": "curse_rule",
+            "level": 2
+          }
+        ],
+        "statusEffects": [],
+        "equipment": [
+          {
+            "generator": "weapons",
+            "entry": "combat_scepter",
+            "select": "fields"
+          }
+        ],
+        "inventory": [],
+        "naturalArmorPercentage": 10
+      }
+    },
+    {
+      "id": "hell_hound",
+      "name": "Chien infernal",
+      "weight": 2,
+      "fields": {
+        "description": "Un chien de chasse surnaturel qui crache du feu et poursuit ses proies en meute coordonnée."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          "{{ traits:keen_smell }}",
+          "{{ traits:pack_tactics }}",
+          "{{ traits:fire_immunity }}",
+          "{{ traits:natural_weapons }}",
+          "Souffle ardent — Une fois par scène, peut effectuer une attaque naturelle contre chaque créature dans un cône de 3 mètres."
+        ],
+        "fixedRules": [],
+        "statusEffects": [],
+        "equipment": [],
+        "inventory": [],
+        "naturalArmorPercentage": 15
       }
     }
   ]
