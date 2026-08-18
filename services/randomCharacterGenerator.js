@@ -18,6 +18,10 @@ const {
 const { getStatProfile } = require('./statProfileCatalog');
 const { selectWeightedEntry } = require('./weightedSelector');
 const {
+	randomInteger,
+	readNormalizedRandom,
+} = require('./random');
+const {
 	allocateRuleLevels,
 	calculateRulePoints,
 	calculateStatBudget,
@@ -287,7 +291,7 @@ function pickMainEquipment(count, locale, random) {
 }
 
 function selectMainEquipmentGenerator(random) {
-	return readRandom(random) < MAIN_EQUIPMENT_WEAPON_CHANCE
+	return readNormalizedRandom(random) < MAIN_EQUIPMENT_WEAPON_CHANCE
 		? 'weapons'
 		: 'shields';
 }
@@ -446,19 +450,6 @@ function createDescribedRecord(entry) {
 		name: getField(entry, 'name'),
 		description: getField(entry, 'description'),
 	};
-}
-
-function randomInteger(min, max, random) {
-	return min + randomIndex(max - min + 1, random);
-}
-
-function randomIndex(length, random) {
-	const randomValue = readRandom(random);
-	return Math.floor(randomValue * length);
-}
-
-function readRandom(random) {
-	return Math.max(0, Math.min(0.9999999999999999, random()));
 }
 
 function generationError(message, translationKey, translationVariables = {}) {

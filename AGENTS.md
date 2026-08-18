@@ -136,6 +136,8 @@ write real saves.
   profiles shared by character and creature generation.
 - `services/weightedSelector.js`: shared injectable weighted selection for
   generator entries and statistical allocation.
+- `services/random.js`: shared boundary-preserving normalization for injectable
+  random functions plus trivial random index and inclusive-integer helpers.
 - `services/generationData.js`: prepares generator and profile candidates, validates
   their background and creature relationships, then atomically replaces both active
   caches during `/reload`.

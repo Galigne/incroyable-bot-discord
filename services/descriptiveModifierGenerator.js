@@ -1,3 +1,5 @@
+const { readNormalizedRandom } = require('./random');
+
 const DESCRIPTIVE_MODIFIER_CHANCE = 0.25;
 
 function maybeGenerateDescriptiveModifiers({
@@ -7,7 +9,7 @@ function maybeGenerateDescriptiveModifiers({
 	random = Math.random,
 	path = 'root.descriptiveModifier',
 }) {
-	if (readRandom(random) >= DESCRIPTIVE_MODIFIER_CHANCE) {
+	if (readNormalizedRandom(random) >= DESCRIPTIVE_MODIFIER_CHANCE) {
 		return [];
 	}
 	return [generateDescriptiveModifier({
@@ -51,10 +53,6 @@ function generateDescriptiveModifier({
 		};
 	}
 	throw new Error('The descriptive modifier generator returned an invalid result.');
-}
-
-function readRandom(random) {
-	return Math.max(0, Math.min(0.9999999999999999, random()));
 }
 
 module.exports = {

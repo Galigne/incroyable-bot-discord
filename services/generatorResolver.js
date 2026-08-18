@@ -8,6 +8,7 @@ const {
 	analyzeGeneratorTraversalPath,
 } = require('./generatorTraversal');
 const { selectWeightedEntry } = require('./weightedSelector');
+const { readNormalizedRandom } = require('./random');
 
 const DEFAULT_MAX_DEPTH = 4;
 const MAX_ALLOWED_DEPTH = 4;
@@ -190,7 +191,7 @@ function createGeneratorResolver({
 			[modifierId, percentage],
 			index,
 		) => {
-			if (readRandom(state.random) >= percentage / 100) {
+			if (readNormalizedRandom(state.random) >= percentage / 100) {
 				return [];
 			}
 			const modifierGenerator = getGenerator(modifierId, state.locale);
@@ -364,10 +365,6 @@ function formatInlineValue(value) {
 		'GENERATOR_INLINE_REFERENCE_INVALID',
 		'An inline generator reference resolved to an unsupported value.',
 	);
-}
-
-function readRandom(random) {
-	return Math.max(0, Math.min(0.9999999999999999, random()));
 }
 
 function createCompletedResult(generator, entry, resolved) {

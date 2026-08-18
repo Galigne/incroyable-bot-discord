@@ -21,6 +21,7 @@ const {
 const { generateStats } = require('./mechanics/characterGeneration');
 const { createGeneratedResources } = require('./mechanics/resources');
 const { getStatProfile } = require('./statProfileCatalog');
+const { randomInteger } = require('./random');
 
 function populateRandomCreature(creature, options = {}) {
 	const random = options.random ?? Math.random;
@@ -220,11 +221,6 @@ function validateLevel(level) {
 			'errors.creatureLevelInvalid',
 		);
 	}
-}
-
-function randomInteger(minimum, maximum, random) {
-	const value = Math.max(0, Math.min(0.9999999999999999, random()));
-	return minimum + Math.floor(value * (maximum - minimum + 1));
 }
 
 function creatureGenerationError(message, translationKey, translationVariables = {}) {

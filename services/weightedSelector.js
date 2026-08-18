@@ -1,3 +1,5 @@
+const { readNormalizedRandom } = require('./random');
+
 function selectWeightedEntry(entries, random = Math.random) {
 	if (!Array.isArray(entries) || entries.length === 0) {
 		throw new TypeError('Weighted selection requires at least one entry.');
@@ -11,7 +13,7 @@ function selectWeightedEntry(entries, random = Math.random) {
 		throw new TypeError('Weighted selection requires a positive finite total weight.');
 	}
 
-	const randomValue = Math.max(0, Math.min(0.9999999999999999, random()));
+	const randomValue = readNormalizedRandom(random);
 	let target = randomValue * totalWeight;
 	for (const entry of entries) {
 		target -= getEntryWeight(entry);
