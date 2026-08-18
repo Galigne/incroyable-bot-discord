@@ -88,7 +88,7 @@
       "name": "RULE Bearer",
       "weight": 10,
       "fields": {
-        "description": "The creature manifests the following RULE: {{ rules }} This persistent RULE reshapes its capabilities and behavior, while the RULE’s own limits give the GM concrete ways to challenge it."
+        "description": "The subject manifest a RULE {{ rules }} which changes its appearance and abilities."
       }
     },
     {

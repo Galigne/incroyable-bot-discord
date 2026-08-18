@@ -13,7 +13,7 @@
       "name": "Ancienne blessure",
       "weight": 3,
       "fields": {
-        "description": "Une ancienne blessure a laissé des tissus cicatriciels rigides et un point sensible ; un coup ou un effort sollicitant cette zone peut provoquer une douleur soudaine et limiter les mouvements."
+        "description": "Une ancienne blessure a laissé une cicatrice rigide et sensible ; les coups ou les efforts qui la sollicitent peuvent causer une douleur soudaine et gêner les mouvements."
       }
     },
     {
@@ -21,7 +21,7 @@
       "name": "Photosensible",
       "weight": 2,
       "fields": {
-        "description": "Les yeux et la peau réagissent douloureusement aux lumières intenses ; l’éblouissement gêne la perception et une exposition prolongée impose de chercher de l’ombre ou une protection."
+        "description": "Ses yeux et sa peau supportent mal la lumière vive ; l’éblouissement gêne sa perception et une longue exposition l’oblige à se protéger."
       }
     },
     {
@@ -29,7 +29,7 @@
       "name": "Reconnaissable entre mille",
       "weight": 2,
       "fields": {
-        "description": "Une combinaison permanente de voix, de manières et de particularités rend le personnage difficile à déguiser ; même une brève rencontre suffit souvent pour le reconnaître."
+        "description": "Sa voix, ses manières et ses traits distinctifs le rendent difficile à déguiser ; un témoin peut le reconnaître après une brève rencontre."
       }
     },
     {
@@ -37,7 +37,7 @@
       "name": "Endurci par les éléments",
       "weight": 2,
       "fields": {
-        "description": "De longues expositions facilitent la résistance au froid, à la pluie et aux voyages éprouvants, mais une peau insensible et des mains calleuses perçoivent mal les contacts légers et les indices tactiles subtils."
+        "description": "L’exposition prolongée l’a endurci au froid, à la pluie et aux voyages pénibles, mais sa peau et ses mains calleuses perçoivent mal les contacts légers et les indices tactiles."
       }
     },
     {
@@ -45,28 +45,28 @@
       "name": "Borgne",
       "weight": 2,
       "fields": {
-        "description": "La perte définitive d’un œil réduit le champ de vision et la perception des distances ; il devient plus difficile de remarquer une menace du côté aveugle ou d’évaluer précisément un éloignement."
+        "description": "La perte d’un œil réduit son champ de vision et sa perception des distances ; les menaces du côté aveugle sont moins visibles et les distances plus difficiles à évaluer avec précision."
       }
     },
     {
       "id": "damaged_lungs",
       "name": "Poumons lésés",
       "fields": {
-        "description": "La fumée, la maladie ou une ancienne blessure a durablement réduit le souffle ; les efforts prolongés, les atmosphères irrespirables et l’apnée deviennent de sérieuses contraintes."
+        "description": "La fumée, la maladie ou une ancienne blessure a durablement réduit son souffle ; les efforts prolongés, l’air irrespirable et l’apnée le limitent fortement."
       }
     },
     {
       "id": "publicly_branded",
       "name": "Marque infamante",
       "fields": {
-        "description": "Une marque juridique, religieuse ou factionnelle impossible à confondre désigne le personnage ; ceux qui en connaissent le sens peuvent l’identifier aussitôt, lui refuser leur aide ou exiger une conduite particulière."
+        "description": "Une marque juridique, religieuse ou factionnelle le désigne clairement ; ceux qui la connaissent peuvent l’identifier, lui refuser leur aide ou lui dicter sa conduite."
       }
     },
     {
       "id": "oathbound",
       "name": "Serment contraignant",
       "fields": {
-        "description": "Un lien rituel persistant impose un interdit ou un devoir choisi par le MJ ; s’approcher d’une rupture déclenche un avertissement manifeste et appelle une complication appropriée."
+        "description": "Un lien rituel durable impose un interdit ou un devoir choisi par le MJ ; s’en écarter déclenche un avertissement clair et une complication adaptée."
       }
     },
     {
@@ -74,7 +74,7 @@
       "name": "Membre prothétique",
       "weight": 2,
       "fields": {
-        "description": "Une prothèse de bras ou de jambe rétablit les fonctions ordinaires et peut résister à certains dangers, mais les gestes précis ou les sols irréguliers restent difficiles et toute avarie exige une réparation spécialisée."
+        "description": "Une prothèse rétablit l’usage d’un bras ou d’une jambe et résiste à certains dangers, mais gêne les gestes précis ou les terrains irréguliers et exige des réparations spécialisées."
       }
     },
     {
@@ -82,7 +82,7 @@
       "name": "Doigts manquants",
       "weight": 2,
       "fields": {
-        "description": "Plusieurs doigts manquent définitivement à une main ; saisir à pleine main, effectuer des manipulations fines ou employer des outils conçus pour deux mains intactes demande une adaptation ou davantage de temps."
+        "description": "Plusieurs doigts manquent à une main ; la prise ferme, les gestes précis et les outils prévus pour deux mains intactes demandent une adaptation ou plus de temps."
       }
     },
     {
@@ -90,21 +90,21 @@
       "name": "Boiterie marquée",
       "weight": 2,
       "fields": {
-        "description": "Une ancienne blessure provoque une boiterie prononcée ; courir, grimper et garder l’équilibre devient plus difficile, et cette démarche irrégulière est facile à suivre ou à reconnaître."
+        "description": "Une ancienne blessure cause une forte boiterie ; courir, grimper et garder l’équilibre deviennent plus difficiles, et sa démarche irrégulière est facile à suivre ou à reconnaître."
       }
     },
     {
       "id": "chronic_tremor",
       "name": "Tremblements chroniques",
       "fields": {
-        "description": "Des tremblements persistants s’aggravent sous la pression ; viser avec stabilité, manipuler un objet délicat ou rester parfaitement immobile demeure peu fiable malgré les autres compétences du personnage."
+        "description": "Un tremblement persistant empire sous pression ; viser, manipuler un objet délicat ou rester parfaitement immobile demeure difficile malgré les autres capacités du personnage."
       }
     },
     {
       "id": "magic_saturated",
       "name": "Imprégnation magique",
       "fields": {
-        "description": "Des résidus magiques persistants imprègnent le personnage ; les protections, les moyens de détection magique et les prédateurs surnaturels peuvent remarquer sa présence ou y réagir plus facilement."
+        "description": "Des résidus magiques persistants l’imprègnent ; les protections magiques, la détection et les prédateurs surnaturels peuvent plus facilement remarquer sa présence ou y réagir."
       }
     },
     {
@@ -112,7 +112,7 @@
       "name": "Affligé",
       "weight": 10,
       "fields": {
-        "description": "Le personnage vit avec l’affliction persistante suivante : {{ affliction }} Le MJ détermine quand et comment cette condition entraîne des conséquences concrètes en jeu."
+        "description": "Le personnage souffre de cette affliction persistante : {{ affliction }} Le MJ décide quand et comment elle affecte concrètement le jeu."
       }
     },
     {
@@ -120,14 +120,14 @@
       "name": "Audition altérée",
       "weight": 2,
       "fields": {
-        "description": "Une perte auditive permanente rend les paroles discrètes et la direction des sons lointains difficiles à discerner, surtout dans le bruit ou lorsqu’un danger approche du côté atteint."
+        "description": "Une perte auditive permanente gêne les paroles discrètes et la localisation des sons lointains, surtout dans le bruit ou si le danger vient du côté atteint."
       }
     },
     {
       "id": "haunted",
       "name": "Présence obsédante",
       "fields": {
-        "description": "Une présence invisible et persistante trouble le sommeil, le silence et les tentatives de discrétion, mais ses réactions peuvent aussi avertir d’un danger surnaturel proche."
+        "description": "Une présence invisible persistante trouble son sommeil, le silence et sa discrétion, mais peut aussi signaler un danger surnaturel proche."
       }
     }
   ]
