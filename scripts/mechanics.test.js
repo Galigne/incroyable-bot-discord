@@ -14,10 +14,7 @@ const {
 const {
 	allocateRuleLevels,
 	calculateRulePoints,
-	calculateStatBudget,
-	calculateStatCost,
 	calculateTalentCount,
-	generateStats,
 } = require('../services/mechanics/characterGeneration');
 const { dealDamage } = require('../services/mechanics/damage');
 const { BASE_STATS } = require('../services/mechanics/constants');
@@ -36,6 +33,11 @@ const {
 	createStats,
 	recalculateDerivedStats,
 } = require('../services/mechanics/statistics');
+const {
+	calculateStatBudget,
+	calculateStatCost,
+	generateStats,
+} = require('../services/mechanics/statGeneration');
 const {
 	calculateGeneratedArmorPercentage,
 	pickCarriedLoot,

@@ -37,9 +37,11 @@ const {
 const {
 	allocateRuleLevels,
 	calculateRulePoints,
+} = require('../services/mechanics/characterGeneration');
+const {
 	calculateStatBudget,
 	calculateStatCost,
-} = require('../services/mechanics/characterGeneration');
+} = require('../services/mechanics/statGeneration');
 const {
 	authorizeCommand,
 	canManageEntity,

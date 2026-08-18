@@ -172,6 +172,10 @@ Characters and creatures share the level 1-10 stat budget, nonlinear point costs
 derived-statistic calculations, and resource formulas. Their selected profiles
 change only allocation constraints and weighting.
 
+`services/mechanics/statGeneration.js` owns the shared profile-driven allocation
+and stat-budget/cost formulas. Character-only RULE-point allocation and talent-count
+progression remain in `services/mechanics/characterGeneration.js`.
+
 ## Character generation
 
 `services/randomCharacterGenerator.js` combines direct catalog selections with

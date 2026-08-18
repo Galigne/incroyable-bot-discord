@@ -47,7 +47,7 @@ const {
 const {
 	calculateStatBudget,
 	calculateStatCost,
-} = require('../services/mechanics/characterGeneration');
+} = require('../services/mechanics/statGeneration');
 const {
 	parseWrappedInlineReference,
 } = require('../services/generatorSchema/referenceValidation');

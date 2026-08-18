@@ -18,7 +18,7 @@ const {
 	resolveGearReferences,
 	resolveGenerationTemplates,
 } = require('./generationReferenceResolver');
-const { generateStats } = require('./mechanics/characterGeneration');
+const { generateStats } = require('./mechanics/statGeneration');
 const { createGeneratedResources } = require('./mechanics/resources');
 const { getStatProfile } = require('./statProfileCatalog');
 const { randomInteger } = require('./random');

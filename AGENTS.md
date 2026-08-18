@@ -116,6 +116,9 @@ write real saves.
   pre-mutation validation, and domain mutation.
 - `services/mechanics/`: Discord-independent combatant and character constants,
   validation, statistics, resources, armor, damage, and generation formulas.
+  Shared profile-driven statistical allocation lives in `statGeneration.js`;
+  character-only RULE-point and talent progression lives in
+  `characterGeneration.js`.
 - `services/generatorSchema.js`: stable public façade for generator-v4 validation
   and the public creature router identifier.
 - `services/generatorSchema/`: focused internal validators for shared assertions,

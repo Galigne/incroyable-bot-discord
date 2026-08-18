@@ -24,11 +24,9 @@ const {
 const {
 	allocateRuleLevels,
 	calculateRulePoints,
-	calculateStatBudget,
-	calculateStatCost,
 	calculateTalentCount,
-	generateStats,
 } = require('./mechanics/characterGeneration');
+const { generateStats } = require('./mechanics/statGeneration');
 const { canEquipArmor } = require('./mechanics/armor');
 const {
 	calculateMaxAp,
@@ -468,9 +466,6 @@ module.exports = {
 	calculateGeneratedArmorPercentage,
 	calculateMaxAp,
 	calculateRulePoints,
-	calculateStatBudget,
-	calculateStatCost,
-	generateStats,
 	pickCarriedLoot,
 	pickMainEquipment,
 	populateRandomCharacter,
