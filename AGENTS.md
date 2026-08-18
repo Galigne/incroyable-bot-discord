@@ -148,12 +148,15 @@ write real saves.
 - `services/generationData.js`: prepares generator and profile candidates, validates
   their background and creature relationships, then atomically replaces both active
   caches during `/reload`.
-- `services/randomCharacterGenerator.js`: selects generator data, applies the
-  selected background archetype's optional generation overrides, and assembles
-  complete random characters using `services/mechanics/`.
-- `services/randomCreatureGenerator.js`: resolves creature sources, descriptive
-  records, RULEs, armor, and gear, then assembles complete final creatures through
-  the shared profile and mechanics infrastructure.
+- `services/generationMetadata.js`: shared runtime for interpreting and resolving
+  common character/creature `generation` metadata, while accepting entity-specific
+  defaults and policies.
+- `services/randomCharacterGenerator.js`: selects generator data, supplies
+  character-specific defaults to the shared generation-metadata runtime, and
+  assembles complete random characters using `services/mechanics/`.
+- `services/randomCreatureGenerator.js`: resolves creature sources and descriptive
+  identity, supplies creature-specific defaults to the shared generation-metadata
+  runtime, and assembles complete final creatures through the shared mechanics.
 - `runtime/runtimeState.js`: owns the active validated configuration, command
   registry, and runtime command collection.
 - `runtime/runtimeReloader.js`: runs the ordered `/reload` stages without clearing
