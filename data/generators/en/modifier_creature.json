@@ -19,6 +19,7 @@
     {
       "id": "hybrid",
       "name": "Hybrid",
+      "weight": 3,
       "fields": {
         "description": "This creature is the product of hybridization with {{ creature.generator.name }}. Its physical appearance and abilities are affected as a result."
       }
@@ -96,7 +97,7 @@
       "name": "Armed",
       "weight": 2,
       "fields": {
-        "description": "Whatever its species would normally suggest, this individual has the anatomy, coordination, and training to wield and effectively use the following weapon: {{ weapons }} The GM determines its concrete consequences in play."
+        "description": "Whatever its species would normally suggest, this individual has the anatomy, coordination, and training to wield and effectively use the following weapon: {{ weapons.name }} The GM determines its concrete consequences in play."
       }
     },
     {
@@ -104,7 +105,7 @@
       "name": "Armored",
       "weight": 2,
       "fields": {
-        "description": "The following armor has been fitted, reshaped, or built around this creature so it can wear and meaningfully benefit from its protection: {{ armors }} The GM determines its concrete consequences in play."
+        "description": "The following armor has been fitted, reshaped, or built around this creature so it can wear and meaningfully benefit from its protection: {{ armors.name }} The GM determines its concrete consequences in play."
       }
     },
     {

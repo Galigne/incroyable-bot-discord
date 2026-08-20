@@ -19,6 +19,7 @@
     {
       "id": "hybrid",
       "name": "Hybride",
+      "weight": 3,
       "fields": {
         "description": "Cette créature est issue d'une hybridation avec {{ creature.generator.name }}. Son apparence physique et ses facultés s'en retrouvent impactées."
       }
@@ -96,7 +97,7 @@
       "name": "Armée",
       "weight": 2,
       "fields": {
-        "description": "Même si son espèce ne le suggère pas, cet individu possède l’anatomie, la coordination et l’entraînement nécessaires pour manier efficacement cette arme : {{ weapons }} Le MJ décide de ses conséquences en jeu."
+        "description": "Même si son espèce ne le suggère pas, cet individu possède l’anatomie, la coordination et l’entraînement nécessaires pour manier efficacement cette arme : {{ weapons.name }} Le MJ décide de ses conséquences en jeu."
       }
     },
     {
@@ -104,7 +105,7 @@
       "name": "En armure",
       "weight": 2,
       "fields": {
-        "description": "Cette armure a été ajustée, remodelée ou fabriquée pour la créature, qui bénéficie réellement de sa protection : {{ armors }} Le MJ décide de ses conséquences en jeu."
+        "description": "Cette armure a été ajustée, remodelée ou fabriquée pour la créature, qui bénéficie réellement de sa protection : {{ armors.name }} Le MJ décide de ses conséquences en jeu."
       }
     },
     {
