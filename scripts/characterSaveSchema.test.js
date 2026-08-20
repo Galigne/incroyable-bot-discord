@@ -112,7 +112,7 @@ test('unsupported previous schemas are rejected without rewriting', async () => 
 	}
 });
 
-test('/gen-char consumes current generator fields and persists the current schema', async () => {
+test('/gen-character consumes current generator fields and persists the current schema', async () => {
 	const characterKey = 'Schema.Generated';
 	const generated = await generateCharacter(characterKey, {
 		formatGold: gold => `${gold} gold`,
@@ -160,7 +160,7 @@ test('/gen-char consumes current generator fields and persists the current schem
 	assert.deepEqual(JSON.parse(JSON.stringify(generated)), rawSave);
 });
 
-test('/gen-char sends personality and populated gear after its unchanged summary', async () => {
+test('/gen-character sends personality and populated gear after its unchanged summary', async () => {
 	const characterKey = 'Command.Generated';
 	const replies = [];
 	const followUps = [];
@@ -174,7 +174,7 @@ test('/gen-char sends personality and populated gear after its unchanged summary
 		followUp: async response => followUps.push(response),
 	};
 
-	await commandRegistry.getRuntimeCommands().get('gen-char').execute({
+	await commandRegistry.getRuntimeCommands().get('gen-character').execute({
 		config: { locale: 'en' },
 		interaction,
 	});

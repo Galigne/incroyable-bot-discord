@@ -319,7 +319,7 @@ with their consumers:
   `generator` route contains the direct ID of the corresponding internal name-only `<category>` generator,
   stored in `background_<category>.json`. Character generation resolves that
   archetype and independently resolves the internal `physical_description`
-  generator. `/gen-char background:` accepts the same localized traversal relative
+  generator. `/gen-character background:` accepts the same localized traversal relative
   to this root: `<category>`, `<category>:<archetype>`, or the explicit
   `<category>.generator:<archetype>`. It must end at an archetype; fields and
   unrelated generators are invalid.

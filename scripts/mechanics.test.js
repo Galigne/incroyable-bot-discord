@@ -540,7 +540,7 @@ test('random character statistics use the individually selected background arche
 	}
 });
 
-test('/gen-char background rejects field terminals before archetype generation', () => {
+test('/gen-character background rejects field terminals before archetype generation', () => {
 	let randomCalls = 0;
 	assert.throws(
 		() => populateRandomCharacter(createCharacterFixture(), {

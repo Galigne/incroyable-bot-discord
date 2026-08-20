@@ -78,7 +78,7 @@ write real saves.
 - `services/`: Discord-independent domain behavior and application workflows,
   including parsing, validation, calculations, persistence, and generation.
 - `services/characterApplicationService.js`: genuinely character-only workflows,
-  currently random character generation for `/gen-char`.
+  currently random character generation for `/gen-character`.
 - `services/creatureApplicationService.js`: atomic `/gen-creature` generation and
   exclusive creature publication inside the shared EntityKey queue.
 - `services/entityApplicationService.js`: command-facing shared management
@@ -145,7 +145,7 @@ write real saves.
 - `services/referenceResolver.js`: preserves the specialized weighted `oneOf`
   generator-source selection flow; ordinary references use canonical string paths.
 - `services/routedArchetypeSelection.js`: applies the shared traversal to relative
-  `/gen-char background` and `/gen-creature type` paths and enforces terminal
+  `/gen-character background` and `/gen-creature type` paths and enforces terminal
   archetype targets before selection.
 - `services/descriptiveModifierGenerator.js`: applies the independent 25%
   application policy for character and creature descriptive modifiers.
@@ -197,7 +197,7 @@ write real saves.
 - `util/characterRenderer.js`: Discord embed rendering for character summaries and
   detailed fields.
 - `util/characterCommandResponses.js` and `util/characterCommandErrors.js`:
-  character-generation response and error presentation for `/gen-char`.
+  character-generation response and error presentation for `/gen-character`.
 - `util/entityCommandResponses.js`, `util/entityCommandErrors.js`, and
   `util/creatureRenderer.js`: entity-neutral command presentation and creature embeds.
 
@@ -300,7 +300,7 @@ command/subcommand -> response adapter (service outcome -> Discord payload)
 
 Shared management commands and interaction handlers must call
 `services/entityApplicationService.js`; character-only workflows such as
-`/gen-char` use `services/characterApplicationService.js`, while `/gen-creature`
+`/gen-character` use `services/characterApplicationService.js`, while `/gen-creature`
 uses `services/creatureApplicationService.js`. They must not compose concrete stores
 and mechanics directly. Models own state and hydration only. They must not import
 Discord or localization code; entity embeds belong in the renderer adapters under
@@ -351,7 +351,7 @@ preserves Discord schema ordering. The generation commands must appear in this
 exact sequence:
 
 1. `/gen category:<category>`
-2. `/gen-char character-key:<new key> [level] [background]`
+2. `/gen-character character-key:<new key> [level] [background]`
 3. `/gen-creature creature-key:<new key> [level] [type]`
 
 Declare autocomplete on the option metadata using a provider name. Put fixed
@@ -498,7 +498,7 @@ without rerunning random generation, localization, references, modifiers, or
 formulas. No older `creatorId` save compatibility or migration exists.
 
 Shared management commands are `/add`, `/get`, `/access`, `/set`, `/damage`,
-`/heal`, `/end-turn`, `/delete`, and `/undo`, all using `entity-key`. `/gen-char`
+`/heal`, `/end-turn`, `/delete`, and `/undo`, all using `entity-key`. `/gen-character`
 remains character-only and keeps `character-key`. `/gen-creature` creates the persistent
 `creature` type from an optional stable type entry in the public `creature` catalog;
 when omitted, the router selects a type randomly, and its referenced detail
@@ -552,14 +552,14 @@ Permissions:
 - Explicit `partial` users may set, heal, damage, end turns, and undo, but may not
   delete or change access.
 - When configured, the DM role may perform those actions on every entity and may
-  use `/gen`, `/gen-char`, and `/gen-creature`; otherwise those additional
+  use `/gen`, `/gen-character`, and `/gen-creature`; otherwise those additional
   permissions are server-owner-only.
 - When configured, the moderator role may use `/say`, `/purge`, and `/reload`;
   otherwise those commands are server-owner-only.
 - The actual Discord server owner from `guild.ownerId` bypasses every role check
   and may use every command and manage every entity.
 - DM and server-owner authority is implicit and must never be added to a persisted
-  access list merely because the user invoked `/gen-char` or `/gen-creature`;
+  access list merely because the user invoked `/gen-character` or `/gen-creature`;
   generated entities start with an empty explicit access list.
 
 `/reload` replies ephemerally before lifecycle work, then validates and replaces
@@ -723,7 +723,7 @@ The durable implementation constraints are:
   top-level `generator` ID, never a wrapped inline reference, and follows the minimal
   router-entry contract without fields. Routed archetype entries may omit
   `generation`; when `statProfile` is omitted, use `default`. Resolve
-  `physical_description` independently. `/gen-char background` is a localized path
+  `physical_description` independently. `/gen-character background` is a localized path
   relative to `background` and may select a category or exact archetype, including
   the explicit `.generator` spelling. It must end on a background archetype;
   reject fields and unrelated generators before archetype selection.

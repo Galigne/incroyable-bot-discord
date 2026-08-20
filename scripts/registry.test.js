@@ -20,7 +20,7 @@ const RPG_COMMAND_NAMES = [
 	'delete',
 	'end-turn',
 	'gen',
-	'gen-char',
+	'gen-character',
 	'gen-creature',
 	'get',
 	'heal',
@@ -162,7 +162,7 @@ test('registry permission filtering delegates to the existing authorization serv
 		delete: 'everyone',
 		'end-turn': 'everyone',
 		gen: 'dm',
-		'gen-char': 'dm',
+		'gen-character': 'dm',
 		'gen-creature': 'dm',
 		get: 'everyone',
 		heal: 'everyone',
@@ -242,6 +242,14 @@ test('registry exposes autocomplete, option, and choice metadata', async () => {
 		{ name: '1d2', value: '1d2' },
 		{ name: '1d20', value: '1d20' },
 	]);
+});
+
+test('character generation keeps its stable ID while using the renamed Discord command', () => {
+	const metadata = commandRegistry.getCommand('gen-char');
+	assert.equal(metadata.name, 'gen-character');
+	assert.equal(commandRegistry.getCommand('gen-character'), metadata);
+	assert.equal(commandRegistry.getRuntimeCommands().has('gen-character'), true);
+	assert.equal(commandRegistry.getRuntimeCommands().has('gen-char'), false);
 });
 
 test('/gen exposes an optional count from 1 through 10', () => {

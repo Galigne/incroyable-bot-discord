@@ -22,7 +22,7 @@ module.exports = function createAuthorizationChecks(context) {
 			commands.get('purge'),
 			commands.get('reload'),
 			commands.get('gen'),
-			commands.get('gen-char'),
+			commands.get('gen-character'),
 			commands.get('gen-creature'),
 		];
 		for (const command of privilegedCommands) {
@@ -38,7 +38,7 @@ module.exports = function createAuthorizationChecks(context) {
 			errors.push('The server owner should bypass all privileged role checks.');
 		}
 
-		for (const name of ['gen', 'gen-char', 'gen-creature']) {
+		for (const name of ['gen', 'gen-character', 'gen-creature']) {
 			const command = commands.get(name);
 			if (!authorizeCommand(command, dm, config).allowed) {
 				errors.push(`The DM role should be allowed to use ${name}.`);

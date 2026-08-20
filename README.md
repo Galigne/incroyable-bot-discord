@@ -108,7 +108,7 @@ restart-only: changing it requires restarting the bot, and reconnects during
 - `/reload` — reload supported runtime state and reconnect the existing Discord client
 - `/rules`
 - `/gen category:<traversal-path> [count]` — generate from a public root, optionally selecting entries, routes, or fields (configured DM role or server owner)
-- `/gen-char character-key:<new key> [level] [background]` — generate and save a complete character with no explicit user access; background may select a category or exact archetype relative to `background` (configured DM role or server owner)
+- `/gen-character character-key:<new key> [level] [background]` — generate and save a complete character with no explicit user access; background may select a category or exact archetype relative to `background` (configured DM role or server owner)
 - `/gen-creature creature-key:<new key> [level] [type]` — generate and atomically save a complete creature with no explicit user access; type may select a category or exact archetype relative to `creature` (configured DM role or server owner)
 - `/roll expression:<dice expression>` — roll expressions such as `2d6+3`
 - `/add entity-key:<new key> [type:<character|creature>]` — create a blank entity and grant yourself explicit `owner` access; character is the default
@@ -253,7 +253,7 @@ or remove any user's access, including their own, without transferring or removi
 other owners.
 
 When configured, the DM role has implicit full authority over every entity and may
-use `/gen`, `/gen-char`, and `/gen-creature`; without that role, those additional DM
+use `/gen`, `/gen-character`, and `/gen-creature`; without that role, those additional DM
 permissions are server-owner-only. DM and server-owner authority is not persisted in
 entity access lists. When configured, the
 moderator role lets its members use `/say`, `/purge`, and `/reload`; without it,
@@ -270,7 +270,7 @@ every successful and failed stage. Invalid configuration or localization
 replacements do not replace the previous valid state. Source-code changes—including startup,
 event-routing, mechanics, model, metadata, and handler changes—still require
 manually restarting `node index.js`.
-The identifier supplied to `/add`, `/gen-char`, or `/gen-creature` remains the stable
+The identifier supplied to `/add`, `/gen-character`, or `/gen-creature` remains the stable
 command/save key and cannot be edited. Character sheets store `firstName` and
 `lastName` separately for display.
 Keys may contain internal periods, hyphens, and underscores, such as `D.Robert`.
@@ -315,7 +315,7 @@ operation is rolled back before an error is returned.
 Example workflows:
 
 ```text
-/gen-char character-key:D.Robert level:5 background:adventurer:treasure_hunter
+/gen-character character-key:D.Robert level:5 background:adventurer:treasure_hunter
 /gen-creature creature-key:Ash.Wolf level:5 type:monster:ancient_dragon
 /set entity-key:D.Robert field:statistics
 /get entity-key:Ash.Wolf field:traits

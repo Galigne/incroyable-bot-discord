@@ -132,7 +132,7 @@ const COMMAND_METADATA = [
 	},
 	{
 		id: 'gen-char',
-		name: 'gen-char',
+		name: 'gen-character',
 		registrationOrder: 10,
 		category: 'rpg',
 		permission: 'dm',
@@ -169,8 +169,8 @@ const COMMAND_METADATA = [
 			},
 		],
 		examples: [
-			'/gen-char character-key:<new key> [level] [background]',
-			'/gen-char character-key:<new key> background:<category>:<archetype>',
+			'/gen-character character-key:<new key> [level] [background]',
+			'/gen-character character-key:<new key> background:<category>:<archetype>',
 		],
 		help: {
 			order: 21,
