@@ -77,7 +77,15 @@
       "name": "Marque du serment",
       "fields": {
         "type": "malédiction",
-        "description": "Une marque visible réagit lorsque son porteur s’apprête à rompre une promesse jurée."
+        "description": "Une marque visible impose un devoir ou un interdit juré ; elle brûle en guise d’avertissement à l’approche d’une faute, et toute désobéissance délibérée déclenche une conséquence surnaturelle choisie par le MJ."
+      }
+    },
+    {
+      "id": "haunting_presence",
+      "name": "Présence obsédante",
+      "fields": {
+        "type": "malédiction",
+        "description": "Une présence invisible suit le porteur et trouble son repos, le silence et sa discrétion ; son agitation peut aussi trahir un danger surnaturel proche."
       }
     },
     {

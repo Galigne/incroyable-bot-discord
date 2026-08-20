@@ -37,7 +37,15 @@
       "name": "Survivor",
       "weight": 3,
       "fields": {
-        "description": "+1 to endure harsh weather, hunger, exhaustion, or difficult travel."
+        "description": "+1 to find shelter, ration supplies, or choose a safe route through hostile wilderness."
+      }
+    },
+    {
+      "id": "weather_hardened",
+      "name": "Weather-Hardened",
+      "weight": 2,
+      "fields": {
+        "description": "+2 to resist exposure to natural heat, cold, wind, or heavy rain during travel."
       }
     },
     {

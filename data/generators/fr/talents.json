@@ -37,7 +37,15 @@
       "name": "Survivant",
       "weight": 3,
       "fields": {
-        "description": "+1 pour résister aux intempéries, à la faim, à l'épuisement ou aux voyages éprouvants."
+        "description": "+1 pour trouver un abri, rationner les provisions ou choisir un itinéraire sûr en milieu sauvage hostile."
+      }
+    },
+    {
+      "id": "weather_hardened",
+      "name": "Endurci par les éléments",
+      "weight": 2,
+      "fields": {
+        "description": "+2 pour résister à l’exposition à la chaleur, au froid, au vent ou aux fortes pluies d’origine naturelle pendant un voyage."
       }
     },
     {

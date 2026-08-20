@@ -189,6 +189,13 @@ again inside every nested reference.
 
 ## Automatic modifier relationships
 
+Keep character content categories distinct. Status effects are temporary current
+conditions; talents are focused persistent advantages or training; character
+modifiers are rare, adventure-relevant variations that substantially change the
+whole character's capabilities or limitations; afflictions are persistent diseases
+and curses. Modifier prose may suggest concrete bonuses, penalties, or weaknesses,
+but remains descriptive and never executes those effects.
+
 A consuming generator may map ordinary generator IDs to independent application
 percentages:
 

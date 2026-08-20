@@ -48,6 +48,7 @@ function resolveGenerationMetadata({
 	getProfile = getStatProfile,
 	createError,
 	defaults = {},
+	modifierReferenceOptions = {},
 	categoryOrder = [
 		'templates',
 		'fixedRules',
@@ -79,6 +80,7 @@ function resolveGenerationMetadata({
 		generation: metadata,
 		level,
 		locale,
+		modifierReferenceOptions,
 		random,
 		resolver,
 		statistics: undefined,
@@ -151,6 +153,9 @@ function resolveCategory(category, {
 		locale: context.locale,
 		path: `root.generation.${category === 'templates' ? templateProperty : category}`,
 		random: context.random,
+		referenceOptions: category === 'modifiers'
+			? context.modifierReferenceOptions
+			: undefined,
 		resolver: context.resolver,
 	};
 

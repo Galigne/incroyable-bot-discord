@@ -77,7 +77,15 @@
       "name": "Oathbrand",
       "fields": {
         "type": "curse",
-        "description": "A visible mark reacts whenever the bearer approaches breaking a sworn promise."
+        "description": "A visible mark enforces a sworn duty or prohibition; it burns as a warning near a breach, and deliberate defiance invokes a supernatural consequence chosen by the GM."
+      }
+    },
+    {
+      "id": "haunting_presence",
+      "name": "Haunting Presence",
+      "fields": {
+        "type": "curse",
+        "description": "An unseen presence follows the bearer, disturbing rest, silence, and stealth; its agitation may also betray nearby supernatural danger."
       }
     },
     {

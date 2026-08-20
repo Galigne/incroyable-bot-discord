@@ -3,131 +3,217 @@
   "id": "modifier_character",
   "visibility": "internal",
   "name": "Character modifiers",
-  "description": "Persistent character variations with concrete implications for play",
+  "description": "Rare persistent variations that substantially change a character's capabilities or limitations",
   "entrySchema": {
     "required": ["description"]
   },
   "entries": [
     {
       "id": "scarred",
-      "name": "Old Wound",
-      "weight": 3,
+      "name": "Scarred Weak Point",
+      "weight": 4,
       "fields": {
-        "description": "An old injury has left dense scar tissue and a tender weak point; blows or strenuous motion involving it can cause sudden pain and restricted movement."
-      }
-    },
-    {
-      "id": "light_sensitive",
-      "name": "Light-Sensitive",
-      "weight": 2,
-      "fields": {
-        "description": "Their eyes and skin react painfully to strong light; glare impairs perception, and prolonged exposure forces them to seek shade or protection."
-      }
-    },
-    {
-      "id": "unmistakable",
-      "name": "Unmistakable",
-      "weight": 2,
-      "fields": {
-        "description": "A permanent combination of voice, mannerisms, and distinctive features makes them difficult to disguise; witnesses can recognize them after even a brief encounter."
-      }
-    },
-    {
-      "id": "weathered",
-      "name": "Weather-Hardened",
-      "weight": 2,
-      "fields": {
-        "description": "Long exposure has made cold, rain, and rough travel easier to endure, but dulled skin and calloused hands miss faint touch and other fine tactile cues."
+        "description": "An old adventuring wound never healed correctly; a foe who notices and reaches the scar may bypass some protection or trigger pain severe enough to interrupt strenuous movement."
       }
     },
     {
       "id": "one_eyed",
       "name": "One-Eyed",
-      "weight": 2,
+      "weight": 4,
       "fields": {
-        "description": "The permanent loss of one eye narrows their field of view and depth perception; threats on the blind side and precise distance judgments are harder to notice."
+        "description": "The permanent loss of one eye narrows their field of view and depth perception; threats on the blind side and precise distance judgments are substantially harder to notice."
       }
     },
     {
       "id": "damaged_lungs",
-      "name": "Damaged Lungs",
+      "name": "Ruined Lungs",
+      "weight": 3,
       "fields": {
-        "description": "Old smoke, disease, or injury has permanently reduced their breath; sustained exertion, choking air, and holding their breath become serious limitations."
-      }
-    },
-    {
-      "id": "publicly_branded",
-      "name": "Publicly Branded",
-      "fields": {
-        "description": "An unmistakable legal, religious, or factional brand marks them; those who understand it may identify them immediately, deny aid, or demand particular conduct."
-      }
-    },
-    {
-      "id": "oathbound",
-      "name": "Oathbound",
-      "fields": {
-        "description": "A persistent ritual bond imposes a prohibition or duty chosen by the GM; approaching a breach produces an obvious warning and invites a fitting complication."
+        "description": "Fire, poison gas, drowning, or crushing trauma has permanently scarred their lungs; extended chases, underwater action, choking air, and repeated heavy exertion can rapidly leave them unable to continue."
       }
     },
     {
       "id": "prosthetic_limb",
       "name": "Prosthetic Limb",
-      "weight": 2,
+      "weight": 4,
       "fields": {
-        "description": "A prosthetic arm or leg restores ordinary function and can brace against some hazards, but fine control or uneven ground is harder and damage requires specialist repair."
+        "description": "A prosthetic arm or leg restores broad function and can brace against some hazards, but delicate control or unstable ground remains difficult and serious damage requires specialist repair."
       }
     },
     {
       "id": "missing_fingers",
       "name": "Missing Fingers",
-      "weight": 2,
+      "weight": 4,
       "fields": {
-        "description": "Several fingers are permanently missing from one hand; a full grip, fine manipulation, and tools made for two complete hands require adaptation or extra time."
+        "description": "Several fingers are permanently missing from one hand; a full grip, fine manipulation, climbing holds, and tools made for two complete hands require adaptation or extra time."
       }
     },
     {
       "id": "noticeable_limp",
       "name": "Noticeable Limp",
-      "weight": 2,
+      "weight": 4,
       "fields": {
-        "description": "An old injury causes a pronounced limp; sprinting, climbing, and balancing are more difficult, and the uneven gait is easy to track or recognize."
-      }
-    },
-    {
-      "id": "chronic_tremor",
-      "name": "Chronic Tremor",
-      "fields": {
-        "description": "A persistent tremor worsens under stress; steady aim, delicate manipulation, and remaining perfectly still are unreliable even when the character is otherwise capable."
-      }
-    },
-    {
-      "id": "magic_saturated",
-      "name": "Magic-Saturated",
-      "fields": {
-        "description": "Persistent magical residue clings to them; wards, magical detection, and supernatural predators may notice or react to their presence more readily."
-      }
-    },
-    {
-      "id": "afflicted",
-      "name": "Afflicted",
-      "weight": 10,
-      "fields": {
-        "description": "They live with the following persistent affliction: {{ affliction }} The GM determines when and how the condition has concrete consequences in play."
+        "description": "A badly damaged leg causes a pronounced limp; sprinting, climbing, balancing, and crossing unstable terrain are substantially harder, and the uneven gait is easy to track or recognize."
       }
     },
     {
       "id": "impaired_hearing",
       "name": "Impaired Hearing",
-      "weight": 2,
+      "weight": 4,
       "fields": {
-        "description": "Permanent hearing loss makes quiet speech and the direction of distant sounds difficult to judge, especially amid noise or when danger approaches from the affected side."
+        "description": "Permanent hearing loss makes quiet speech, distant warnings, and the direction of approaching sounds difficult to judge, especially amid battle noise or from the affected side."
       }
     },
     {
-      "id": "haunted",
-      "name": "Haunted",
+      "id": "missing_hand",
+      "name": "Missing Hand",
+      "weight": 3,
       "fields": {
-        "description": "A persistent unseen presence disturbs sleep, silence, and attempts at stealth, but its reactions may also warn of nearby supernatural danger."
+        "description": "One hand is missing; weapons, shields, climbing, restraints, and tasks designed for two hands demand a prosthesis, specialized equipment, or a different approach."
+      }
+    },
+    {
+      "id": "missing_arm",
+      "name": "Missing Arm",
+      "weight": 3,
+      "fields": {
+        "description": "One arm is missing at or above the elbow; two-handed equipment and many climbing or grappling techniques are unavailable without a capable prosthesis or substantial adaptation."
+      }
+    },
+    {
+      "id": "missing_leg",
+      "name": "Missing Leg",
+      "weight": 3,
+      "fields": {
+        "description": "One leg is missing at or above the knee; without a suitable prosthesis or aid, rapid movement, jumping, climbing, and keeping balance under force are severely limited."
+      }
+    },
+    {
+      "id": "afflicted",
+      "name": "Afflicted",
+      "weight": 6,
+      "fields": {
+        "description": "They live with the following persistent affliction: {{ affliction }} The GM determines when and how the disease or curse has concrete consequences in play."
+      }
+    },
+    {
+      "id": "giant_blooded",
+      "name": "Giant-Blooded",
+      "weight": 1,
+      "fields": {
+        "description": "Giant ancestry makes them exceptionally large, strong, durable, and difficult to move, but stealth, ordinary equipment, crowds, fragile floors, and cramped passages become serious complications."
+      }
+    },
+    {
+      "id": "juggernaut",
+      "name": "Juggernaut",
+      "weight": 1,
+      "fields": {
+        "description": "Overwhelming mass and resilience let them break obstacles, hold ground, and keep advancing through punishment, but they turn and accelerate slowly and have little capacity for subtle or delicate action."
+      }
+    },
+    {
+      "id": "unbreakable",
+      "name": "Unbreakable",
+      "weight": 1,
+      "fields": {
+        "description": "They remain conscious and functional through pain, shock, and injuries that would incapacitate most people; this endurance can conceal life-threatening damage until the immediate danger has passed."
+      }
+    },
+    {
+      "id": "arcane_vessel",
+      "name": "Arcane Vessel",
+      "weight": 1,
+      "fields": {
+        "description": "Their body stores an extraordinary reserve of magical power and can sustain effects beyond an ordinary caster's reach, but it shines to magical senses, readily triggers wards, and attracts hungry spirits and supernatural predators."
+      }
+    },
+    {
+      "id": "living_conduit",
+      "name": "Living Conduit",
+      "weight": 1,
+      "fields": {
+        "description": "Magic passes through them with unusual ease, magnifying what they channel and allowing them to carry immense flows; hostile spells, magical possession, and uncontrolled surges can exploit that same openness."
+      }
+    },
+    {
+      "id": "berserker",
+      "name": "Berserker",
+      "weight": 1,
+      "fields": {
+        "description": "Wounds or fury unlock terrifying speed and violence, letting them overwhelm nearby threats and ignore hesitation, but precision, caution, retreat, and distinguishing priorities become increasingly difficult."
+      }
+    },
+    {
+      "id": "shadow_touched",
+      "name": "Shadow-Touched",
+      "weight": 1,
+      "fields": {
+        "description": "In darkness they move with unnatural silence, blur into dim surroundings, and perceive hidden movement, while strong direct light painfully exposes them and suppresses these advantages."
+      }
+    },
+    {
+      "id": "phoenix_touched",
+      "name": "Phoenix-Touched",
+      "weight": 1,
+      "fields": {
+        "description": "Fire and extreme heat barely harm them, and intense flame can spur startling recovery from injury, but deep cold rapidly weakens them and can prevent that renewal entirely."
+      }
+    },
+    {
+      "id": "predatory_senses",
+      "name": "Predatory Senses",
+      "weight": 1,
+      "fields": {
+        "description": "They can track minute scents, hear concealed movement, and see through poor light with predatory clarity, but explosions, overpowering odors, sudden glare, and other sensory assaults can overwhelm them."
+      }
+    },
+    {
+      "id": "runic_body",
+      "name": "Runic Body",
+      "weight": 1,
+      "fields": {
+        "description": "Permanent runes carved through skin and bone grant a major supernatural protection or capability chosen by the GM, but defacing, suppressing, or correctly invoking those visible runes can disable or invert their power."
+      }
+    },
+    {
+      "id": "monstrous_physique",
+      "name": "Monstrous Physique",
+      "weight": 1,
+      "fields": {
+        "description": "An inhuman frame grants broadly superior strength, speed, reach, and resilience, but conspicuous claws, plating, altered proportions, or other abnormalities cannot be hidden with ordinary clothing or disguise."
+      }
+    },
+    {
+      "id": "unstable_mutation",
+      "name": "Unstable Mutation",
+      "weight": 1,
+      "fields": {
+        "description": "One dramatic mutation grants a powerful useful capability chosen by the GM, but the same altered organ or anatomy creates a directly related vulnerability, loss of control, or demanding physical need."
+      }
+    },
+    {
+      "id": "rule_bearer",
+      "name": "RULE Bearer",
+      "weight": 1,
+      "fields": {
+        "description": "The character visibly and fundamentally manifests an exceptional RULE: {{ rules }} Its presence changes their appearance and extends that RULE beyond ordinary training; the GM defines the major advantage and exploitable limitation it creates."
+      }
+    },
+    {
+      "id": "race_hybrid",
+      "name": "Race Hybrid",
+      "weight": 1,
+      "fields": {
+        "description": "The character is a hybrid of their normal race and {{ race.name }}. Their appearance and capabilities may combine major physical characteristics from both ancestries, including advantages and limitations that neither possesses alone."
+      }
+    },
+    {
+      "id": "creature_hybrid",
+      "name": "Creature Hybrid",
+      "weight": 1,
+      "fields": {
+        "description": "The character has been partially hybridized with {{ creature.generator.name }}. Distinctive anatomy and capabilities from that creature reshape their appearance and adventuring potential without replacing their mind or identity."
       }
     }
   ]

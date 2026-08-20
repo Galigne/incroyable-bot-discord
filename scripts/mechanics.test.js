@@ -590,6 +590,40 @@ test('character modifiers attach without changing generated base state', () => {
 	assert.deepEqual(modifiedBase, plainBase);
 });
 
+test('Race Hybrid selects a secondary race different from the generated base race', () => {
+	const backgroundRoute = generatorCatalog.getGenerator('background', 'en').entries[0];
+	const backgroundGenerator = structuredClone(
+		generatorCatalog.getGenerator(backgroundRoute.generator, 'en'),
+	);
+	const archetype = backgroundGenerator.entries[0];
+	archetype.generation = {
+		...(archetype.generation ?? {}),
+		modifiers: ['modifier_character:race_hybrid'],
+	};
+	const getGenerator = (generatorId, locale) => (
+		generatorId === backgroundGenerator.id
+			? backgroundGenerator
+			: generatorCatalog.getGenerator(generatorId, locale)
+	);
+	const resolver = generatorResolver.createGeneratorResolver({ getGenerator });
+	const character = createCharacterFixture();
+	populateRandomCharacter(character, {
+		background: `${backgroundRoute.id}:${archetype.id}`,
+		getGenerator,
+		level: 1,
+		random: () => 0,
+		resolver,
+	});
+
+	assert.equal(character.race.name, 'Human');
+	assert.equal(character.status.modifiers[0].entryId, 'race_hybrid');
+	assert.match(character.status.modifiers[0].description, /\bElf\b/);
+	const secondaryRace = character.status.modifiers[0].provenance
+		.find(record => record.generatorId === 'race');
+	assert.equal(secondaryRace.entryId, 'elf');
+	assert.notEqual(secondaryRace.entryId, 'human');
+});
+
 function randomWithModifierChance(chance) {
 	let calls = 0;
 	return () => {

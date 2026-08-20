@@ -50,7 +50,7 @@ function resolveFixedRules(
 
 function resolveDescribedReferences(
 	references,
-	{ createError, locale, path, random, resolver },
+	{ createError, locale, path, random, referenceOptions, resolver },
 ) {
 	return references.map((reference, index) => {
 		const resolved = resolveGenerationReference(
@@ -59,6 +59,7 @@ function resolveDescribedReferences(
 			random,
 			resolver,
 			`${path}.${index}`,
+			referenceOptions,
 		);
 		const selection = getResolvedSelection(resolved, createError);
 		const fields = resolved.displayFields ?? resolved.fields ?? resolved.value;
@@ -136,8 +137,19 @@ function resolveArmorReference(
 	};
 }
 
-function resolveGenerationReference(reference, locale, random, resolver, path) {
-	return resolver.resolveReference(reference, locale, { path, random });
+function resolveGenerationReference(
+	reference,
+	locale,
+	random,
+	resolver,
+	path,
+	referenceOptions = {},
+) {
+	return resolver.resolveReference(reference, locale, {
+		...referenceOptions,
+		path,
+		random,
+	});
 }
 
 function formatReferenceValue(resolved, createError, locale) {

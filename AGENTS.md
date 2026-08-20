@@ -780,6 +780,13 @@ The durable implementation constraints are:
   modifier-identity exception used for armor and shield AR. `/gen` has no modifier
   option; the public `modifier` router provides standalone access to useful
   internal modifier pools.
+- Keep character content categories distinct: status effects are temporary current
+  conditions, talents are focused persistent advantages or training, modifiers are
+  rare adventure-relevant whole-character variations, and afflictions are
+  persistent diseases or curses. During character generation, random `race`
+  references inside character modifiers exclude the selected base race so Race
+  Hybrid always receives a different secondary race; standalone modifier
+  generation has no such character context.
 - Creature RULEs come only from explicit `fixedRules`. Natural-armor metadata, the
   separate armor reference, and resolved AR-providing equipped items stack before
   AR generation; inventory never contributes AR and generation never derives manual

@@ -186,6 +186,12 @@ provenance with the localized name and description. Creature detail metadata may
 also explicitly reference creature modifiers. Temporary conditions are resolved
 from `status_effect` and stored separately from persistent modifiers.
 
+Character modifier references are resolved with the selected base race excluded
+from random `race` selections. This makes `modifier_character:race_hybrid` choose a
+genuinely different secondary race during character generation, including when the
+modifier comes from background generation metadata. Standalone modifier generation
+has no base-race context and uses ordinary weighted reference resolution.
+
 Users access the same useful pools through fixed entries in the public `modifier`
 router. This produces a standalone modifier result; `/gen` has no
 special option that applies or forces it on another result.
@@ -235,6 +241,11 @@ reference resolution:
 5. It applies each explicitly present archetype generation override and uses the
    normal character behavior for every omitted category, calculates resources, and
    assembles the complete character.
+
+Modifier resolution receives the selected race's stable entry ID as a contextual
+random-selection exclusion. The exclusion affects only random `race` references
+inside character modifiers; fixed references and all other generation categories
+retain their normal behavior.
 
 Background and creature archetypes share one optional `generation` model. Both can
 override `statProfile`, `naturalArmorPercentage`, `fixedRules`, `statusEffects`,

@@ -8,6 +8,7 @@ function maybeGenerateDescriptiveModifiers({
 	locale = 'en',
 	random = Math.random,
 	path = 'root.descriptiveModifier',
+	resolverOptions = {},
 }) {
 	if (readNormalizedRandom(random) >= DESCRIPTIVE_MODIFIER_CHANCE) {
 		return [];
@@ -18,6 +19,7 @@ function maybeGenerateDescriptiveModifiers({
 		locale,
 		random,
 		path,
+		resolverOptions,
 	})];
 }
 
@@ -27,6 +29,7 @@ function generateDescriptiveModifier({
 	locale = 'en',
 	random = Math.random,
 	path = 'root.descriptiveModifier',
+	resolverOptions = {},
 }) {
 	if (typeof resolver?.resolveReference !== 'function') {
 		throw new TypeError('Descriptive modifier generation requires a resolver.');
@@ -34,7 +37,7 @@ function generateDescriptiveModifier({
 	const resolved = resolver.resolveReference(
 		generator,
 		locale,
-		{ path, random },
+		{ ...resolverOptions, path, random },
 	);
 	const fields = resolved?.displayFields ?? resolved?.fields;
 	if (

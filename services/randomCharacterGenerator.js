@@ -125,6 +125,9 @@ function populateRandomCharacter(character, options = {}) {
 		resolver,
 		getProfile: options.getStatProfile ?? undefined,
 		createError: generationError,
+		modifierReferenceOptions: {
+			excludedEntryIdsByGenerator: { race: [race.id] },
+		},
 		preStatisticsCategories: ['modifiers'],
 		categoryOrder: [
 			'modifiers',
@@ -168,13 +171,14 @@ function createCharacterGenerationDefaults({ character, formatGold }) {
 			character.personality.traits = pickMany('personality', 2, locale, random)
 				.map(entry => getField(entry, 'description'));
 		},
-		modifiers({ locale, random, resolver }) {
+		modifiers({ locale, modifierReferenceOptions, random, resolver }) {
 			return maybeGenerateDescriptiveModifiers({
 				generator: 'modifier_character',
 				resolver,
 				locale,
 				random,
 				path: 'root.character.modifier',
+				resolverOptions: modifierReferenceOptions,
 			});
 		},
 		fixedRules({ locale, random, statistics }) {

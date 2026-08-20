@@ -132,7 +132,7 @@ function createGeneratorResolver({
 		const initialDepth = state.activeSelections.length;
 		try {
 			for (const [index, step] of traversal.steps.entries()) {
-				const entry = selectTraversalEntry(generator, step.entryId, state.random);
+				const entry = selectTraversalEntry(generator, step.entryId, state);
 				if (!entry?.generator) {
 					return null;
 				}
@@ -153,7 +153,7 @@ function createGeneratorResolver({
 			const entry = selectTraversalEntry(
 				generator,
 				traversal.entryId,
-				state.random,
+				state,
 			);
 			if (!entry) {
 				return null;
@@ -400,6 +400,9 @@ function createGeneratorResolver({
 	function createState(locale, options, random) {
 		return {
 			activeSelections: [],
+			excludedEntryIdsByGenerator: normalizeEntryExclusions(
+				options.excludedEntryIdsByGenerator,
+			),
 			locale,
 			maxDepth: options.maxDepth ?? DEFAULT_MAX_DEPTH,
 			random,
@@ -458,10 +461,27 @@ function createCompletedFieldResult(generator, entry, resolved, field) {
 	};
 }
 
-function selectTraversalEntry(generator, entryId, random) {
-	return entryId === undefined
-		? selectWeightedEntry(generator.entries, random)
-		: generator.entries.find(entry => entry.id === entryId);
+function selectTraversalEntry(generator, entryId, state) {
+	if (entryId !== undefined) {
+		return generator.entries.find(entry => entry.id === entryId);
+	}
+	const exclusions = state.excludedEntryIdsByGenerator?.[generator.id];
+	const eligibleEntries = exclusions?.size
+		? generator.entries.filter(entry => !exclusions.has(entry.id))
+		: generator.entries;
+	if (eligibleEntries.length === 0) {
+		throw generatorResolutionError(
+			'GENERATOR_NO_ELIGIBLE_ENTRY',
+			'The generator has no eligible random entry.',
+		);
+	}
+	return selectWeightedEntry(eligibleEntries, state.random);
+}
+
+function normalizeEntryExclusions(exclusions = {}) {
+	return Object.fromEntries(Object.entries(exclusions).map((
+		[generatorId, entryIds],
+	) => [generatorId, new Set(entryIds)]));
 }
 
 function pushActiveSelection(state, generator, entry) {
@@ -540,6 +560,25 @@ function validateOptions(locale, options) {
 		&& (typeof options.path !== 'string' || !options.path.trim())
 	) {
 		throw new TypeError('Generator reference path must be a non-empty string.');
+	}
+	if (options.excludedEntryIdsByGenerator !== undefined) {
+		const exclusions = options.excludedEntryIdsByGenerator;
+		if (
+			!exclusions
+			|| typeof exclusions !== 'object'
+			|| Array.isArray(exclusions)
+			|| Object.entries(exclusions).some(([generatorId, entryIds]) => (
+				!generatorId
+				|| !Array.isArray(entryIds)
+				|| entryIds.some(entryId => (
+					typeof entryId !== 'string' || !entryId.trim()
+				))
+			))
+		) {
+			throw new TypeError(
+				'Generator entry exclusions must map generator IDs to entry ID arrays.',
+			);
+		}
 	}
 }
 

@@ -77,6 +77,79 @@ test('complete production catalogs validate in both locales under schema v4', ()
 	}
 });
 
+test('character modifiers keep major impairments distinct from rare transformations', () => {
+	const impairmentIds = [
+		'scarred',
+		'one_eyed',
+		'damaged_lungs',
+		'prosthetic_limb',
+		'missing_fingers',
+		'noticeable_limp',
+		'impaired_hearing',
+		'missing_hand',
+		'missing_arm',
+		'missing_leg',
+	];
+	const transformationIds = [
+		'giant_blooded',
+		'juggernaut',
+		'unbreakable',
+		'arcane_vessel',
+		'living_conduit',
+		'berserker',
+		'shadow_touched',
+		'phoenix_touched',
+		'predatory_senses',
+		'runic_body',
+		'monstrous_physique',
+		'unstable_mutation',
+		'rule_bearer',
+		'race_hybrid',
+		'creature_hybrid',
+	];
+	const removedModifierIds = [
+		'light_sensitive',
+		'unmistakable',
+		'weathered',
+		'publicly_branded',
+		'oathbound',
+		'chronic_tremor',
+		'magic_saturated',
+		'haunted',
+	];
+
+	for (const locale of ['en', 'fr']) {
+		const modifiers = generatorCatalog.getGenerator('modifier_character', locale);
+		const entries = new Map(modifiers.entries.map(entry => [entry.id, entry]));
+		assert.ok(impairmentIds.every(id => entries.has(id)));
+		assert.ok(transformationIds.every(id => entries.has(id)));
+		assert.ok(removedModifierIds.every(id => !entries.has(id)));
+		assert.ok(transformationIds.every(id => entries.get(id).weight === 1));
+		assert.ok(impairmentIds.every(id => entries.get(id).weight > 1));
+		assert.ok(
+			transformationIds.reduce((total, id) => total + entries.get(id).weight, 0)
+			< impairmentIds.reduce((total, id) => total + entries.get(id).weight, 0),
+		);
+		assert.deepEqual(
+			extractInlineReferences(entries.get('race_hybrid').fields.description),
+			['race.name'],
+		);
+		assert.deepEqual(
+			extractInlineReferences(entries.get('creature_hybrid').fields.description),
+			['creature.generator.name'],
+		);
+
+		const talents = generatorCatalog.getGenerator('talents', locale);
+		assert.ok(talents.entries.some(entry => entry.id === 'weather_hardened'));
+		const afflictions = generatorCatalog.getGenerator('affliction', locale);
+		for (const id of ['oathbrand', 'haunting_presence']) {
+			const affliction = afflictions.entries.find(entry => entry.id === id);
+			assert.ok(affliction);
+			assert.equal(affliction.fields.type, locale === 'fr' ? 'malédiction' : 'curse');
+		}
+	}
+});
+
 test('every production quest, rumor, and secret resolves references with provenance', () => {
 	for (const locale of ['en', 'fr']) {
 		for (const generatorId of ['quest', 'rumor', 'secret']) {

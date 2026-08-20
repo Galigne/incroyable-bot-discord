@@ -31,6 +31,45 @@ test('random character and creature modifiers use fully resolved localized field
 	}
 });
 
+test('descriptive modifier references can exclude an existing random identity', () => {
+	const catalog = new Map([
+		['race', {
+			schemaVersion: 4,
+			id: 'race',
+			visibility: 'public',
+			name: 'Race',
+			description: 'Races',
+			entrySchema: { required: [] },
+			entries: [
+				{ id: 'human', name: 'Human' },
+				{ id: 'elf', name: 'Elf' },
+			],
+		}],
+		['modifier_character', createFieldsGenerator('modifier_character', [{
+			id: 'race_hybrid',
+			name: 'Race Hybrid',
+			fields: {
+				description: 'Hybridized with {{ race.name }}.',
+			},
+		}])],
+	]);
+	const resolver = createGeneratorResolver({ getGenerator: id => catalog.get(id) });
+	const modifier = generateDescriptiveModifier({
+		generator: 'modifier_character:race_hybrid',
+		random: () => 0,
+		resolver,
+		resolverOptions: {
+			excludedEntryIdsByGenerator: { race: ['human'] },
+		},
+	});
+
+	assert.equal(modifier.description, 'Hybridized with Elf.');
+	assert.equal(
+		modifier.provenance.find(record => record.generatorId === 'race').entryId,
+		'elf',
+	);
+});
+
 test('explicit character and creature modifier metadata uses fully resolved fields', () => {
 	for (const [entityType, generator] of [
 		['character', 'modifier_character'],

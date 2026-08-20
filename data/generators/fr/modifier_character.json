@@ -3,131 +3,217 @@
   "id": "modifier_character",
   "visibility": "internal",
   "name": "Modificateurs de personnage",
-  "description": "Variations persistantes de personnage ayant des conséquences concrètes en jeu",
+  "description": "Variations persistantes rares qui bouleversent les capacités ou les limites d’un personnage",
   "entrySchema": {
     "required": ["description"]
   },
   "entries": [
     {
       "id": "scarred",
-      "name": "Ancienne blessure",
-      "weight": 3,
+      "name": "Cicatrice vulnérable",
+      "weight": 4,
       "fields": {
-        "description": "Une ancienne blessure a laissé une cicatrice rigide et sensible ; les coups ou les efforts qui la sollicitent peuvent causer une douleur soudaine et gêner les mouvements."
-      }
-    },
-    {
-      "id": "light_sensitive",
-      "name": "Photosensible",
-      "weight": 2,
-      "fields": {
-        "description": "Ses yeux et sa peau supportent mal la lumière vive ; l’éblouissement gêne sa perception et une longue exposition l’oblige à se protéger."
-      }
-    },
-    {
-      "id": "unmistakable",
-      "name": "Reconnaissable entre mille",
-      "weight": 2,
-      "fields": {
-        "description": "Sa voix, ses manières et ses traits distinctifs le rendent difficile à déguiser ; un témoin peut le reconnaître après une brève rencontre."
-      }
-    },
-    {
-      "id": "weathered",
-      "name": "Endurci par les éléments",
-      "weight": 2,
-      "fields": {
-        "description": "L’exposition prolongée l’a endurci au froid, à la pluie et aux voyages pénibles, mais sa peau et ses mains calleuses perçoivent mal les contacts légers et les indices tactiles."
+        "description": "Une ancienne blessure d’aventure a mal cicatrisé ; un adversaire qui la repère et parvient à l’atteindre peut contourner une partie de la protection ou provoquer une douleur assez vive pour interrompre un effort intense."
       }
     },
     {
       "id": "one_eyed",
       "name": "Borgne",
-      "weight": 2,
+      "weight": 4,
       "fields": {
-        "description": "La perte d’un œil réduit son champ de vision et sa perception des distances ; les menaces du côté aveugle sont moins visibles et les distances plus difficiles à évaluer avec précision."
+        "description": "La perte définitive d’un œil réduit son champ de vision et sa perception des distances ; les menaces du côté aveugle et les évaluations précises sont nettement plus difficiles à percevoir."
       }
     },
     {
       "id": "damaged_lungs",
-      "name": "Poumons lésés",
+      "name": "Poumons ravagés",
+      "weight": 3,
       "fields": {
-        "description": "La fumée, la maladie ou une ancienne blessure a durablement réduit son souffle ; les efforts prolongés, l’air irrespirable et l’apnée le limitent fortement."
-      }
-    },
-    {
-      "id": "publicly_branded",
-      "name": "Marque infamante",
-      "fields": {
-        "description": "Une marque juridique, religieuse ou factionnelle le désigne clairement ; ceux qui la connaissent peuvent l’identifier, lui refuser leur aide ou lui dicter sa conduite."
-      }
-    },
-    {
-      "id": "oathbound",
-      "name": "Serment contraignant",
-      "fields": {
-        "description": "Un lien rituel durable impose un interdit ou un devoir choisi par le MJ ; s’en écarter déclenche un avertissement clair et une complication adaptée."
+        "description": "Le feu, un gaz toxique, une noyade ou un écrasement a irrémédiablement lésé ses poumons ; les longues poursuites, les actions sous l’eau, l’air irrespirable et les efforts violents répétés peuvent rapidement l’empêcher de continuer."
       }
     },
     {
       "id": "prosthetic_limb",
       "name": "Membre prothétique",
-      "weight": 2,
+      "weight": 4,
       "fields": {
-        "description": "Une prothèse rétablit l’usage d’un bras ou d’une jambe et résiste à certains dangers, mais gêne les gestes précis ou les terrains irréguliers et exige des réparations spécialisées."
+        "description": "Une prothèse de bras ou de jambe rétablit l’essentiel de ses fonctions et peut résister à certains dangers, mais les gestes délicats ou les sols instables restent difficiles et les dégâts sérieux exigent un spécialiste."
       }
     },
     {
       "id": "missing_fingers",
       "name": "Doigts manquants",
-      "weight": 2,
+      "weight": 4,
       "fields": {
-        "description": "Plusieurs doigts manquent à une main ; la prise ferme, les gestes précis et les outils prévus pour deux mains intactes demandent une adaptation ou plus de temps."
+        "description": "Plusieurs doigts manquent définitivement à une main ; les prises fermes, les gestes précis, l’escalade et les outils conçus pour deux mains intactes demandent une adaptation ou davantage de temps."
       }
     },
     {
       "id": "noticeable_limp",
       "name": "Boiterie marquée",
-      "weight": 2,
+      "weight": 4,
       "fields": {
-        "description": "Une ancienne blessure cause une forte boiterie ; courir, grimper et garder l’équilibre deviennent plus difficiles, et sa démarche irrégulière est facile à suivre ou à reconnaître."
+        "description": "Une jambe gravement blessée cause une forte boiterie ; courir, grimper, garder l’équilibre et franchir un terrain instable devient nettement plus difficile, et sa démarche est facile à suivre ou à reconnaître."
       }
     },
     {
-      "id": "chronic_tremor",
-      "name": "Tremblements chroniques",
+      "id": "impaired_hearing",
+      "name": "Ouïe altérée",
+      "weight": 4,
       "fields": {
-        "description": "Un tremblement persistant empire sous pression ; viser, manipuler un objet délicat ou rester parfaitement immobile demeure difficile malgré les autres capacités du personnage."
+        "description": "Une perte auditive permanente gêne les paroles discrètes, les avertissements lointains et la localisation des sons qui approchent, surtout dans le tumulte d’un combat ou du côté atteint."
       }
     },
     {
-      "id": "magic_saturated",
-      "name": "Imprégnation magique",
+      "id": "missing_hand",
+      "name": "Main manquante",
+      "weight": 3,
       "fields": {
-        "description": "Des résidus magiques persistants l’imprègnent ; les protections magiques, la détection et les prédateurs surnaturels peuvent plus facilement remarquer sa présence ou y réagir."
+        "description": "Il lui manque une main ; les armes, les boucliers, l’escalade, les entraves et les tâches prévues pour deux mains exigent une prothèse, un équipement adapté ou une autre méthode."
+      }
+    },
+    {
+      "id": "missing_arm",
+      "name": "Bras manquant",
+      "weight": 3,
+      "fields": {
+        "description": "Il lui manque un bras au niveau du coude ou plus haut ; sans prothèse fonctionnelle ni adaptation importante, l’équipement à deux mains et de nombreuses techniques d’escalade ou de lutte lui sont inaccessibles."
+      }
+    },
+    {
+      "id": "missing_leg",
+      "name": "Jambe manquante",
+      "weight": 3,
+      "fields": {
+        "description": "Il lui manque une jambe au niveau du genou ou plus haut ; sans prothèse ni aide adaptée, les déplacements rapides, les sauts, l’escalade et l’équilibre sous la contrainte sont sévèrement limités."
       }
     },
     {
       "id": "afflicted",
       "name": "Affligé",
-      "weight": 10,
+      "weight": 6,
       "fields": {
-        "description": "Le personnage souffre de cette affliction persistante : {{ affliction }} Le MJ décide quand et comment elle affecte concrètement le jeu."
+        "description": "Le personnage souffre de cette affliction persistante : {{ affliction }} Le MJ décide quand et comment cette maladie ou malédiction affecte concrètement le jeu."
       }
     },
     {
-      "id": "impaired_hearing",
-      "name": "Audition altérée",
-      "weight": 2,
+      "id": "giant_blooded",
+      "name": "Sang de géant",
+      "weight": 1,
       "fields": {
-        "description": "Une perte auditive permanente gêne les paroles discrètes et la localisation des sons lointains, surtout dans le bruit ou si le danger vient du côté atteint."
+        "description": "Son ascendance géante lui confère une taille, une force et une robustesse exceptionnelles, mais la discrétion, l’équipement ordinaire, les foules, les sols fragiles et les passages étroits deviennent de sérieux obstacles."
       }
     },
     {
-      "id": "haunted",
-      "name": "Présence obsédante",
+      "id": "juggernaut",
+      "name": "Colosse inexorable",
+      "weight": 1,
       "fields": {
-        "description": "Une présence invisible persistante trouble son sommeil, le silence et sa discrétion, mais peut aussi signaler un danger surnaturel proche."
+        "description": "Sa masse et sa résistance écrasantes lui permettent de briser des obstacles, tenir sa position et avancer malgré les coups, mais il change lentement de direction ou d’allure et se prête mal aux actions subtiles ou délicates."
+      }
+    },
+    {
+      "id": "unbreakable",
+      "name": "Inébranlable",
+      "weight": 1,
+      "fields": {
+        "description": "Il reste conscient et capable d’agir malgré une douleur, un choc ou des blessures qui neutraliseraient la plupart des gens ; cette endurance peut toutefois masquer un état mortel jusqu’à la fin du danger immédiat."
+      }
+    },
+    {
+      "id": "arcane_vessel",
+      "name": "Réceptacle arcanique",
+      "weight": 1,
+      "fields": {
+        "description": "Son corps emmagasine une réserve de puissance magique extraordinaire et peut soutenir des effets hors de portée d’un mage ordinaire, mais il rayonne aux sens magiques, déclenche facilement les sceaux de protection et attire les esprits affamés comme les prédateurs surnaturels."
+      }
+    },
+    {
+      "id": "living_conduit",
+      "name": "Conduit vivant",
+      "weight": 1,
+      "fields": {
+        "description": "La magie le traverse avec une facilité inhabituelle, amplifiant ce qu’il canalise et lui permettant de supporter des flux immenses ; les sorts hostiles, la possession et les décharges incontrôlées peuvent exploiter cette même ouverture."
+      }
+    },
+    {
+      "id": "berserker",
+      "name": "Berserker",
+      "weight": 1,
+      "fields": {
+        "description": "Les blessures ou la fureur libèrent en lui une vitesse et une violence terrifiantes, capables de submerger les menaces proches, mais la précision, la prudence, la retraite et le choix des priorités deviennent de plus en plus difficiles."
+      }
+    },
+    {
+      "id": "shadow_touched",
+      "name": "Touché par l’ombre",
+      "weight": 1,
+      "fields": {
+        "description": "Dans l’obscurité, il se déplace avec un silence surnaturel, se fond dans la pénombre et perçoit les mouvements cachés, tandis qu’une lumière directe et intense le révèle douloureusement et neutralise ces avantages."
+      }
+    },
+    {
+      "id": "phoenix_touched",
+      "name": "Touché par le phénix",
+      "weight": 1,
+      "fields": {
+        "description": "Le feu et la chaleur extrême l’affectent à peine, et des flammes intenses peuvent accélérer spectaculairement sa guérison, mais le grand froid l’affaiblit vite et peut bloquer entièrement ce renouveau."
+      }
+    },
+    {
+      "id": "predatory_senses",
+      "name": "Sens de prédateur",
+      "weight": 1,
+      "fields": {
+        "description": "Il suit des odeurs infimes, entend les mouvements dissimulés et voit dans la pénombre avec une acuité de prédateur, mais les explosions, les senteurs violentes, les éblouissements soudains et les autres agressions sensorielles peuvent le submerger."
+      }
+    },
+    {
+      "id": "runic_body",
+      "name": "Corps runique",
+      "weight": 1,
+      "fields": {
+        "description": "Des runes permanentes gravées jusque dans sa chair et ses os lui accordent une protection ou une faculté surnaturelle majeure choisie par le MJ, mais les altérer, les étouffer ou les invoquer correctement peut neutraliser ou inverser leur pouvoir."
+      }
+    },
+    {
+      "id": "monstrous_physique",
+      "name": "Physique monstrueux",
+      "weight": 1,
+      "fields": {
+        "description": "Une morphologie inhumaine lui confère une force, une vitesse, une allonge et une robustesse globalement supérieures, mais ses griffes, ses plaques, ses proportions déformées ou ses autres anomalies résistent aux vêtements et déguisements ordinaires."
+      }
+    },
+    {
+      "id": "unstable_mutation",
+      "name": "Mutation instable",
+      "weight": 1,
+      "fields": {
+        "description": "Une mutation spectaculaire lui accorde une puissante faculté choisie par le MJ, mais l’organe ou l’anatomie qui la produit entraîne une vulnérabilité directement liée, une perte de contrôle ou un besoin physique exigeant."
+      }
+    },
+    {
+      "id": "rule_bearer",
+      "name": "Porteur de LOI",
+      "weight": 1,
+      "fields": {
+        "description": "Le personnage manifeste de façon visible et fondamentale une LOI exceptionnelle : {{ rules }} Sa présence transforme son apparence et dépasse le simple entraînement ; le MJ définit l’avantage majeur et la faiblesse exploitable qu’elle crée."
+      }
+    },
+    {
+      "id": "race_hybrid",
+      "name": "Ascendance hybride",
+      "weight": 1,
+      "fields": {
+        "description": "Le personnage mêle son ascendance d’origine à une seconde ascendance : {{ race.name }}. Son apparence et ses facultés peuvent combiner des caractéristiques physiques majeures des deux peuples, avec des atouts et des limites que ni l’un ni l’autre ne possède seul."
+      }
+    },
+    {
+      "id": "creature_hybrid",
+      "name": "Hybride de créature",
+      "weight": 1,
+      "fields": {
+        "description": "Le personnage a été partiellement hybridé à partir de la créature suivante : {{ creature.generator.name }}. Son anatomie et ses facultés distinctives transforment l’apparence et le potentiel d’aventurier du personnage sans remplacer son esprit ni son identité."
       }
     }
   ]
