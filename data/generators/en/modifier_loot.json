@@ -47,24 +47,11 @@
       }
     },
     {
-      "id": "possessed_animal",
+      "id": "possessed",
       "name": "Possessed",
+      "weight": 3,
       "fields": {
-        "description": "The presence of {{ animal.name }} inhabits or influences the item."
-      }
-    },
-    {
-      "id": "possessed_companion",
-      "name": "Possessed",
-      "fields": {
-        "description": "The presence of {{ companion.name }} inhabits or influences the item."
-      }
-    },
-    {
-      "id": "possessed_monster",
-      "name": "Possessed",
-      "fields": {
-        "description": "The presence of {{ monster.name }} inhabits or influences the item."
+        "description": "The presence of {{ creature.generator.name }} inhabits or influences the item."
       }
     },
     {

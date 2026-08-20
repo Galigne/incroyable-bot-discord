@@ -47,24 +47,11 @@
       }
     },
     {
-      "id": "possessed_animal",
+      "id": "possessed",
       "name": "Possédé",
+      "weight": 3,
       "fields": {
-        "description": "La présence de {{ animal.name }} habite ou influence l’objet."
-      }
-    },
-    {
-      "id": "possessed_companion",
-      "name": "Possédé",
-      "fields": {
-        "description": "La présence de {{ companion.name }} habite ou influence l’objet."
-      }
-    },
-    {
-      "id": "possessed_monster",
-      "name": "Possédé",
-      "fields": {
-        "description": "La présence de {{ monster.name }} habite ou influence l’objet."
+        "description": "La présence de {{ creature.generator.name }} habite ou influence l’objet."
       }
     },
     {

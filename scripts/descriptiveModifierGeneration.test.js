@@ -180,7 +180,8 @@ test('modifier inline references preserve cycle and nesting-depth protections', 
 	depthCatalog.set('depth_one', createTextGenerator('depth_one', '{{ depth_two }}'));
 	depthCatalog.set('depth_two', createTextGenerator('depth_two', '{{ depth_three }}'));
 	depthCatalog.set('depth_three', createTextGenerator('depth_three', '{{ depth_four }}'));
-	depthCatalog.set('depth_four', createTextGenerator('depth_four', 'Done'));
+	depthCatalog.set('depth_four', createTextGenerator('depth_four', '{{ depth_five }}'));
+	depthCatalog.set('depth_five', createTextGenerator('depth_five', 'Done'));
 	const depthResolver = createGeneratorResolver({
 		getGenerator: id => depthCatalog.get(id),
 	});

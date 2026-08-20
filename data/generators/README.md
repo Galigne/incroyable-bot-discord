@@ -180,7 +180,7 @@ to `/gen` and the scoped entity options.
 
 References may be repeated and nested, and every occurrence resolves
 independently. All referenced generators, entries, and fields must exist in both
-locales with compatible structure. Active cycles and nesting beyond four
+locales with compatible structure. Active cycles and nesting beyond five
 selections are rejected. There is no template entry type or named reference map.
 Resolving complete final content applies that final content generator's automatic
 modifiers. A terminal field suppresses its automatic modifiers. Routers do not

@@ -344,7 +344,7 @@ test('selectors return values, complete field groups, individual fields, and dis
 	);
 });
 
-test('resolution reports stable cycle and a maximum of four active selections', () => {
+test('resolution reports stable cycle and a maximum of five active selections', () => {
 	const cycle = new Map([['loop', createTextGenerator('loop', '{{ loop:rain }}')]]);
 	const cycleResolver = createGeneratorResolver({ getGenerator: id => cycle.get(id) });
 	assert.throws(
@@ -364,7 +364,8 @@ test('resolution reports stable cycle and a maximum of four active selections', 
 				{ id: 'first', name: '{{ chain:second }}' },
 				{ id: 'second', name: '{{ chain:third }}' },
 				{ id: 'third', name: '{{ chain:fourth }}' },
-				{ id: 'fourth', name: '{{ ending }}' },
+				{ id: 'fourth', name: '{{ chain:fifth }}' },
+				{ id: 'fifth', name: '{{ ending }}' },
 			],
 		}],
 		['ending', createTextGenerator('ending', 'Done')],

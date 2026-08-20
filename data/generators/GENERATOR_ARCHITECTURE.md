@@ -72,7 +72,7 @@ Inline and application references use stable IDs and explicit routing:
 the child name. Each inline occurrence is resolved independently, so repeated
 references can choose different entries. Nested references share one active
 selection stack: repeated active generator/entry pairs are rejected as cycles, and
-depth is capped at four. Fixed entries do not consume entry-selection randomness.
+depth is capped at five. Fixed entries do not consume entry-selection randomness.
 Every top-level name and additional field is ordinary displayable generated data.
 
 Ordinary references stored in `generation` metadata are canonical path strings;

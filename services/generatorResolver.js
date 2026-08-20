@@ -13,8 +13,8 @@ const {
 const { selectWeightedEntry } = require('./weightedSelector');
 const { readNormalizedRandom } = require('./random');
 
-const DEFAULT_MAX_DEPTH = 4;
-const MAX_ALLOWED_DEPTH = 4;
+const DEFAULT_MAX_DEPTH = 5;
+const MAX_ALLOWED_DEPTH = 5;
 
 function createGeneratorResolver({
 	getGenerator = generatorCatalog.getGenerator,
