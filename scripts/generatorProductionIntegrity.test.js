@@ -7,6 +7,9 @@ const {
 	validateRoutedArchetypeStatProfileRelationships,
 } = require('../services/generatorSchema');
 const {
+	extractInlineReferences,
+} = require('../services/generatorSchema/referenceValidation');
+const {
 	getGenerationStatProfileId,
 } = require('../services/generationMetadata');
 const {
@@ -487,3 +490,241 @@ test('production catalogs preserve deterministic IDs across locales', () => {
 		}
 	}
 });
+
+test('every production generator entry resolves through a valid localized path', () => {
+	const catalogs = generatorCatalog.createGeneratorCatalogCandidate();
+	const englishCatalog = catalogs.get('en');
+	const frenchCatalog = catalogs.get('fr');
+	const routedEntryPaths = new Map([
+		['en', collectRoutedEntryPaths(englishCatalog)],
+		['fr', collectRoutedEntryPaths(frenchCatalog)],
+	]);
+
+	assert.deepEqual(
+		[...englishCatalog.keys()],
+		[...frenchCatalog.keys()],
+		'production catalogs must expose the same stable generator IDs',
+	);
+
+	let checkedEntries = 0;
+	for (const englishGenerator of englishCatalog.values()) {
+		const frenchGenerator = frenchCatalog.get(englishGenerator.id);
+		assert.ok(frenchGenerator, `Missing French generator ${englishGenerator.id}.`);
+		assert.deepEqual(
+			getFunctionalGeneratorProjection(englishGenerator),
+			getFunctionalGeneratorProjection(frenchGenerator),
+			`Functional EN/FR divergence for ${englishGenerator.id}.`,
+		);
+
+		for (const englishEntry of englishGenerator.entries) {
+			const frenchEntry = frenchGenerator.entries.find(entry => (
+				entry.id === englishEntry.id
+			));
+			assert.ok(
+				frenchEntry,
+				`Missing French entry ${englishGenerator.id}:${englishEntry.id}.`,
+			);
+
+			const results = new Map();
+			for (const [locale, catalog] of catalogs) {
+				const generator = catalog.get(englishGenerator.id);
+				const entry = generator.entries.find(candidate => (
+					candidate.id === englishEntry.id
+				));
+				const result = resolveProductionEntry(
+					catalog,
+					generator,
+					entry,
+					routedEntryPaths.get(locale),
+				);
+				const context = `${locale}:${generator.id}:${entry.id}`;
+				assert.ok(result, `${context} did not resolve.`);
+				assertFinalGeneratorOutput(result, catalog, context);
+				assertProvenanceReferencesCatalog(result, catalog, context);
+				assert.ok(
+					result.provenance.some(record => (
+						record.generatorId === generator.id
+						&& record.entryId === entry.id
+					)),
+					`${context} is missing its source provenance.`,
+				);
+				results.set(locale, result);
+				checkedEntries += 1;
+			}
+
+			const englishResult = results.get('en');
+			const frenchResult = results.get('fr');
+			assert.deepEqual(
+				getStableResultProjection(englishResult),
+				getStableResultProjection(frenchResult),
+				`Resolved EN/FR identity divergence for ${englishGenerator.id}:${englishEntry.id}.`,
+			);
+		}
+	}
+	assert.ok(checkedEntries > 0);
+});
+
+function collectRoutedEntryPaths(catalog) {
+	const paths = new Map();
+	for (const generator of catalog.values()) {
+		if (generator.visibility !== 'public') {
+			continue;
+		}
+		collectEntryPaths(generator, generator.id, new Set(), paths, catalog);
+	}
+	return paths;
+}
+
+function collectEntryPaths(generator, prefix, ancestors, paths, catalog) {
+	if (ancestors.has(generator.id)) {
+		return;
+	}
+	const nextAncestors = new Set(ancestors).add(generator.id);
+	for (const entry of generator.entries) {
+		const entryPath = `${prefix}:${entry.id}`;
+		const entryKey = `${generator.id}:${entry.id}`;
+		if (!paths.has(entryKey)) {
+			paths.set(entryKey, entryPath);
+		}
+		if (!isGeneratorRouter(generator)) {
+			continue;
+		}
+		const child = catalog.get(entry.generator);
+		if (child) {
+			collectEntryPaths(child, entryPath, nextAncestors, paths, catalog);
+		}
+	}
+}
+
+function resolveProductionEntry(catalog, generator, entry, routedEntryPaths) {
+	const directPath = `${generator.id}:${entry.id}`;
+	const routedPath = routedEntryPaths.get(`${generator.id}:${entry.id}`);
+	const random = createDataDrivenRandom(directPath);
+	if (generator.visibility === 'public') {
+		return generatorResolver.generate(directPath, generator.locale, { random });
+	}
+	if (routedPath && routedPath.split(':')[0] !== generator.id) {
+		return generatorResolver.generate(routedPath, generator.locale, { random });
+	}
+	return generatorResolver.resolveReference(directPath, generator.locale, { random });
+}
+
+function createDataDrivenRandom(seed) {
+	let state = 2166136261;
+	for (const character of seed) {
+		state = Math.imul(state ^ character.charCodeAt(0), 16777619) >>> 0;
+	}
+	return () => {
+		state = (Math.imul(state, 1664525) + 1013904223) >>> 0;
+		return state / 0x100000000;
+	};
+}
+
+function assertFinalGeneratorOutput(result, catalog, context) {
+	assert.equal(typeof result.display, 'string', `${context} has no display output.`);
+	assert.ok(result.display.trim(), `${context} has an empty display output.`);
+	assert.doesNotMatch(result.display, /\{\{|\}\}/, `${context} left template syntax in display.`);
+	const finalGenerator = catalog.get(result.generatorId);
+	assert.ok(finalGenerator, `${context} has unknown final generator provenance.`);
+	if (result.outputType === 'value') {
+		assert.equal(finalGenerator.entrySchema.required.length, 0, `${context} has invalid value output.`);
+		assert.equal(typeof result.value, 'string', `${context} has no final value.`);
+		assert.ok(result.value.trim(), `${context} has an empty final value.`);
+		assert.doesNotMatch(result.value, /\{\{|\}\}/, `${context} left template syntax in value.`);
+	}
+	else {
+		assert.equal(result.outputType, 'fields', `${context} has an invalid output type.`);
+		assert.deepEqual(
+			Object.keys(result.displayFields ?? {}),
+			['name', ...finalGenerator.entrySchema.required],
+			`${context} has an incomplete final field set.`,
+		);
+		for (const [field, value] of Object.entries(result.displayFields ?? {})) {
+			assert.equal(typeof value, 'string', `${context} field ${field} is not displayable.`);
+			assert.ok(value.trim(), `${context} field ${field} is empty.`);
+			assert.doesNotMatch(value, /\{\{|\}\}/, `${context} field ${field} left template syntax.`);
+		}
+	}
+	for (const modifier of result.modifiers ?? []) {
+		assertFinalGeneratorOutput(modifier, catalog, `${context}:modifier:${modifier.generatorId}`);
+	}
+}
+
+function assertProvenanceReferencesCatalog(result, catalog, context) {
+	assert.ok(Array.isArray(result.provenance) && result.provenance.length > 0, `${context} has no provenance.`);
+	for (const record of result.provenance) {
+		assert.equal(record.type, 'entry', `${context} has an invalid provenance type.`);
+		assert.ok(['fixed', 'random'].includes(record.selection), `${context} has an invalid provenance selection.`);
+		assert.equal(typeof record.path, 'string', `${context} has an invalid provenance path.`);
+		const generator = catalog.get(record.generatorId);
+		assert.ok(generator, `${context} references unknown generator ${record.generatorId}.`);
+		assert.ok(
+			generator.entries.some(entry => entry.id === record.entryId),
+			`${context} references unknown entry ${record.generatorId}:${record.entryId}.`,
+		);
+	}
+	for (const modifier of result.modifiers ?? []) {
+		assertProvenanceReferencesCatalog(modifier, catalog, `${context}:modifier:${modifier.generatorId}`);
+	}
+}
+
+function getFunctionalGeneratorProjection(generator) {
+	return {
+		schemaVersion: generator.schemaVersion,
+		id: generator.id,
+		visibility: generator.visibility,
+		entrySchema: generator.entrySchema,
+		modifiers: generator.modifiers,
+		nameReferences: extractInlineReferences(generator.name),
+		descriptionReferences: extractInlineReferences(generator.description),
+		entries: generator.entries.map(entry => ({
+			id: entry.id,
+			weight: entry.weight,
+			generator: entry.generator,
+			nameReferences: extractInlineReferences(entry.name),
+			fields: entry.fields === undefined
+				? undefined
+				: Object.fromEntries(Object.entries(entry.fields).map(([field, value]) => (
+					[field, projectLocalizedValue(value)]
+				))),
+			generation: projectGeneration(entry.generation),
+		})),
+	};
+}
+
+function projectLocalizedValue(value) {
+	return typeof value === 'string'
+		? {
+			type: 'localized-text',
+			references: extractInlineReferences(value),
+		}
+		: value;
+}
+
+function projectGeneration(generation) {
+	if (generation === undefined) {
+		return undefined;
+	}
+	return Object.fromEntries(Object.entries(generation).map(([property, value]) => (
+		[property, ['talents', 'traits'].includes(property)
+			? value.map(template => extractInlineReferences(template))
+			: value]
+	)));
+}
+
+function getStableResultProjection(result) {
+	return {
+		generatorId: result.generatorId,
+		entryId: result.entryId,
+		outputType: result.outputType,
+		fieldNames: Object.keys(result.displayFields ?? {}),
+		provenance: result.provenance.map(record => ({
+			type: record.type,
+			selection: record.selection,
+			generatorId: record.generatorId,
+			entryId: record.entryId,
+			path: record.path,
+		})),
+		modifiers: (result.modifiers ?? []).map(getStableResultProjection),
+	};
+}
