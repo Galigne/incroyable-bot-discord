@@ -131,6 +131,10 @@ test('character modifiers keep major impairments distinct from rare transformati
 			< impairmentIds.reduce((total, id) => total + entries.get(id).weight, 0),
 		);
 		assert.deepEqual(
+			extractInlineReferences(entries.get('rule_bearer').fields.description),
+			['rules.name'],
+		);
+		assert.deepEqual(
 			extractInlineReferences(entries.get('race_hybrid').fields.description),
 			['race.name'],
 		);

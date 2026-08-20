@@ -197,7 +197,7 @@
       "name": "RULE Bearer",
       "weight": 1,
       "fields": {
-        "description": "The character visibly and fundamentally manifests an exceptional RULE: {{ rules }} Its presence changes their appearance and extends that RULE beyond ordinary training; the GM defines the major advantage and exploitable limitation it creates."
+        "description": "The character visibly and fundamentally manifests an exceptional RULE: {{ rules.name }}. Its presence changes their appearance and extends that RULE beyond ordinary training; the GM defines the major advantage and exploitable limitation it creates."
       }
     },
     {
