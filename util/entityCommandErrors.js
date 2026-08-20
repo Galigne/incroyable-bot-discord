@@ -29,6 +29,8 @@ const replyableErrorCodes = new Set([
 	'NOT_ENTITY_OWNER',
 	'NOT_ENTITY_ACCESS_OWNER',
 	'INVALID_ENTITY_ACCESS_OPERATION',
+	'INVALID_ENTITY_ACCESS_REQUEST',
+	'INVALID_DISCORD_USER_ID',
 	'UNSUPPORTED_CHARACTER_HISTORY_SCHEMA',
 	'UNSUPPORTED_CREATURE_HISTORY_SCHEMA',
 	'CHARACTER_HISTORY_CONSISTENCY_FAILED',
@@ -53,6 +55,8 @@ async function replyToEntityError(interaction, error, locale = 'en') {
 		INVALID_ENTITY_KEY: t(locale, 'errors.invalidEntityKey'),
 		INVALID_ENTITY_TYPE: t(locale, 'errors.invalidEntityType'),
 		INVALID_ENTITY_ACCESS_OPERATION: t(locale, 'errors.invalidAccessOperation'),
+		INVALID_ENTITY_ACCESS_REQUEST: t(locale, 'errors.invalidAccessRequest'),
+		INVALID_DISCORD_USER_ID: t(locale, 'errors.invalidDiscordUserId'),
 		NOT_ENTITY_ACCESS_OWNER: t(locale, 'errors.entityAccessOwner'),
 	};
 	const historyCodes = [

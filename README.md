@@ -115,6 +115,7 @@ restart-only: changing it requires restarting the bot, and reconnects during
 - `/get entity-key:<key> [field]` — display the summary or one type-compatible field
 - `/access entity-key:<key>` — display every explicit `owner` and `partial` user entry
 - `/access entity-key:<key> user:<Discord user> level:<owner|partial|none>` — grant, change, or remove explicit access (full authority required)
+- `/access entity-key:<key> user-id:<Discord user ID> level:<owner|partial|none>` — modify a stale entry that cannot be selected through Discord (full authority required)
 - `/set entity-key:<key> field:<field>` — set one grouped field in a prefilled form
 - `/heal entity-key:<key> resource:<hp|armor|both> percentage:<0-100>` — restore one or both resources
 - `/damage entity-key:<key> damage-amount:<number> [piercing]` — apply damage to AR, then HP
@@ -234,8 +235,12 @@ also contain no owners. A `partial` entry grants normal `/set`, `/damage`, `/hea
 `/end-turn`, and `/undo` control, but cannot delete the entity or change access.
 `none` is never persisted: it removes the selected user's explicit entry. Anyone
 may use `/get` or view `/access`, including entries for users who have left the
-server. Explicit owners may grant, change, or remove any user's access, including
-their own, without transferring or removing other owners.
+server. Each access-list row always includes the persisted Discord user ID and uses
+cached display information when available without requiring a Discord fetch. A
+full-authority user can copy a stale ID into `user-id`; access changes require
+`level` and exactly one of `user` or `user-id`. Explicit owners may grant, change,
+or remove any user's access, including their own, without transferring or removing
+other owners.
 
 When configured, the DM role has implicit full authority over every entity and may
 use `/gen`, `/gen-char`, and `/gen-creature`; without that role, those additional DM
@@ -305,6 +310,7 @@ Example workflows:
 /set entity-key:D.Robert field:statistics
 /get entity-key:Ash.Wolf field:traits
 /access entity-key:Ash.Wolf user:@Player level:partial
+/access entity-key:Ash.Wolf user-id:123456789012345678 level:none
 /damage entity-key:Ash.Wolf damage-amount:25 piercing:false
 /heal entity-key:Ash.Wolf resource:both percentage:50
 /end-turn entity-key:Ash.Wolf

@@ -111,8 +111,10 @@
     "access": {
       "description": "Afficher ou modifier les accès explicites d’une entité",
       "entityOption": "Personnage ou créature dont les accès seront affichés ou modifiés",
-      "userOption": "Utilisateur Discord dont l’accès explicite sera modifié ; à utiliser avec level",
-      "levelOption": "Accès explicite à accorder, ou none pour le retirer ; à utiliser avec user",
+      "userOption": "Utilisateur Discord dont l’accès sera modifié ; à utiliser avec level, sans user-id",
+      "userIdOption": "Identifiant Discord brut à modifier lorsque l’utilisateur ne peut pas être sélectionné",
+      "userIdAccepted": "Un identifiant utilisateur Discord de 17 à 20 chiffres affiché dans la liste des accès",
+      "levelOption": "Accès à accorder ou retirer ; à utiliser avec une seule cible, user ou user-id",
       "listTitle": "**Accès explicites à `{{key}}`**",
       "listEntry": "- {{user}} — **{{level}}**",
       "empty": "Aucun utilisateur ne possède d’accès explicite à cette entité.",
@@ -124,7 +126,7 @@
         "partial": "Partiel",
         "none": "Aucun"
       },
-      "behavior": "Avec le seul paramètre `entity-key`, affiche toutes les entrées d’accès explicite enregistrées ; tout le monde peut consulter cette liste. Ajoutez à la fois `user` et `level` pour modifier les accès. `owner` accorde tous les pouvoirs sur l’entité sans retirer les autres propriétaires, `partial` autorise les actions normales de modification et de jeu mais pas la suppression ni la gestion des accès, et `none` retire l’entrée explicite de l’utilisateur. Réappliquer le même niveau ou retirer une entrée absente réussit sans erreur inutile. Le propriétaire du serveur et les utilisateurs ayant la permission MJ conservent toujours tous les pouvoirs implicitement, sans entrée enregistrée. Seuls le propriétaire du serveur, un MJ ou un propriétaire explicite de l’entité peuvent modifier les accès, y compris le leur."
+      "behavior": "Avec le seul paramètre `entity-key`, affiche toutes les entrées d’accès explicite enregistrées ; tout le monde peut consulter cette liste. Chaque ligne contient l’identifiant utilisateur enregistré, même lorsque Discord ne parvient plus à retrouver cet utilisateur. Pour modifier les accès, indiquez `level` et une seule cible : utilisez normalement `user`, ou copiez dans `user-id` l’identifiant d’un utilisateur absent depuis la liste. `owner` accorde tous les pouvoirs sur l’entité sans retirer les autres propriétaires, `partial` autorise les actions normales de modification et de jeu mais pas la suppression ni la gestion des accès, et `none` retire l’entrée explicite de l’utilisateur. Réappliquer le même niveau ou retirer une entrée absente réussit sans erreur inutile. Le propriétaire du serveur et les utilisateurs ayant la permission MJ conservent toujours tous les pouvoirs implicitement, sans entrée enregistrée. Seuls le propriétaire du serveur, un MJ ou un propriétaire explicite de l’entité peuvent modifier les accès, y compris le leur."
     },
     "damage": {
       "description": "Infliger des dégâts à une entité, d’abord aux PR puis aux PV",
@@ -420,7 +422,9 @@
     "entityOwnerDelete": "Seuls un propriétaire explicite de l’entité, un MJ ou le propriétaire du serveur peuvent la supprimer.",
     "entityEditor": "Seuls un utilisateur disposant d’un accès explicite, un MJ ou le propriétaire du serveur peuvent la gérer.",
     "entityAccessOwner": "Seuls un propriétaire explicite de l’entité, un MJ ou le propriétaire du serveur peuvent modifier ses accès.",
-    "invalidAccessOperation": "Indiquez à la fois `user` et `level` pour modifier les accès, et utilisez uniquement `owner`, `partial` ou `none`.",
+    "invalidAccessOperation": "Utilisez uniquement `owner`, `partial` ou `none` comme niveau d’accès.",
+    "invalidAccessRequest": "Pour modifier les accès, indiquez `level` et une seule cible : `user` ou `user-id`. Omettez ces trois paramètres pour afficher la liste.",
+    "invalidDiscordUserId": "`user-id` doit être un identifiant utilisateur Discord de 17 à 20 chiffres copié depuis la liste des accès.",
     "invalidEntityKey": "Une EntityKey doit commencer et se terminer par une lettre ou un chiffre. Elle peut contenir des lettres, des chiffres, des points, des tirets et des tirets bas.",
     "invalidEntityType": "Le type d’entité doit être `character` ou `creature`.",
     "characterExists": "Cette CharacterKey est déjà utilisée.",

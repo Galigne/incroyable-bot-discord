@@ -364,6 +364,14 @@ const COMMAND_METADATA = [
 				descriptionKey: 'rpg.access.userOption',
 			},
 			{
+				name: 'user-id',
+				type: 'string',
+				descriptionKey: 'rpg.access.userIdOption',
+				acceptedValuesKey: 'rpg.access.userIdAccepted',
+				minLength: 17,
+				maxLength: 20,
+			},
+			{
 				name: 'level',
 				type: 'string',
 				descriptionKey: 'rpg.access.levelOption',
@@ -377,6 +385,7 @@ const COMMAND_METADATA = [
 		examples: [
 			'/access entity-key:<key>',
 			'/access entity-key:<key> user:<Discord user> level:<owner|partial|none>',
+			'/access entity-key:<key> user-id:<Discord user ID> level:<owner|partial|none>',
 		],
 		help: {
 			order: 45,

@@ -410,6 +410,11 @@ The current viewing and editing decisions are intentional:
   full-authority user add or change an `owner` or `partial` entry, or remove it with
   `none`. Changes are idempotent, do not transfer ownership, and may leave no
   explicit owners.
+- `/access entity-key:<key> user-id:<Discord user ID> level:<owner|partial|none>`
+  provides the same mutation workflow for a persisted
+  user who can no longer be selected through Discord. A mutation must provide
+  `level` and exactly one of `user` or `user-id`; incomplete or ambiguous forms are
+  invalid.
 - There is intentionally no `/get-all` command.
 - `/set entity-key:<key> field:<field>` has no value argument. Submitting
   the command immediately opens one private modal prefilled with the saved value
@@ -531,6 +536,10 @@ properties displayed directly below level and race in the public summary.
 Permissions:
 
 - Anyone with normal bot access can view entity sheets and explicit access lists.
+- Access-list rendering must use cached member or user display information when
+  available, must never fetch or require Discord resolution for every entry, and
+  must always show the persisted user ID with a mention-compatible fallback so a
+  stale entry can be copied into `/access user-id:`.
 - Every explicit access entry contains exactly `userId` plus level `owner` or
   `partial`; duplicate user IDs and persisted `none` entries are invalid.
 - Explicit `owner` users may set, heal, damage, end turns, undo, delete, and grant,

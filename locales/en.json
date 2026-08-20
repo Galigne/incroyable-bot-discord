@@ -111,8 +111,10 @@
     "access": {
       "description": "View or change explicit user access for an entity",
       "entityOption": "Character or creature whose access will be viewed or changed",
-      "userOption": "Discord user whose explicit access will be changed; use with level",
-      "levelOption": "Explicit access to grant, or none to remove it; use with user",
+      "userOption": "Discord user whose explicit access will be changed; use with level, not user-id",
+      "userIdOption": "Raw Discord user ID to change when the user cannot be selected",
+      "userIdAccepted": "A 17-20 digit Discord user ID shown in the access list",
+      "levelOption": "Access to grant or remove; use with exactly one of user or user-id",
       "listTitle": "**Explicit access for `{{key}}`**",
       "listEntry": "- {{user}} — **{{level}}**",
       "empty": "No users have explicit access to this entity.",
@@ -124,7 +126,7 @@
         "partial": "Partial",
         "none": "None"
       },
-      "behavior": "With only `entity-key`, displays every persisted explicit user-access entry; anyone may view this list. Add both `user` and `level` to change access. `owner` grants full entity authority without removing other owners, `partial` grants normal editing and gameplay actions but not deletion or access changes, and `none` removes the user’s explicit entry. Setting an existing level or removing an absent entry succeeds without an unnecessary error. The server owner and configured DM users always retain implicit full authority without persisted entries. Only a server owner, DM, or explicit entity owner may change access, including their own access."
+      "behavior": "With only `entity-key`, displays every persisted explicit user-access entry; anyone may view this list. Every row includes the persisted user ID, even when Discord can no longer resolve that user. To change access, provide `level` and exactly one target: use `user` normally, or copy a stale user’s ID from the list into `user-id`. `owner` grants full entity authority without removing other owners, `partial` grants normal editing and gameplay actions but not deletion or access changes, and `none` removes the user’s explicit entry. Setting an existing level or removing an absent entry succeeds without an unnecessary error. The server owner and configured DM users always retain implicit full authority without persisted entries. Only a server owner, DM, or explicit entity owner may change access, including their own access."
     },
     "damage": {
       "description": "Deal damage to an entity, reducing AR before HP",
@@ -420,7 +422,9 @@
     "entityOwnerDelete": "Only an explicit entity owner, a DM, or the server owner can delete it.",
     "entityEditor": "Only an explicitly authorized user, a DM, or the server owner can manage it.",
     "entityAccessOwner": "Only an explicit entity owner, a DM, or the server owner can change access.",
-    "invalidAccessOperation": "Provide both `user` and `level` to change access, and use only `owner`, `partial`, or `none`.",
+    "invalidAccessOperation": "Use only `owner`, `partial`, or `none` as the access level.",
+    "invalidAccessRequest": "To change access, provide `level` and exactly one target: either `user` or `user-id`. Omit all three to list access.",
+    "invalidDiscordUserId": "`user-id` must be a 17-20 digit Discord user ID copied from the access list.",
     "invalidEntityKey": "Entity keys must start and end with a letter or number and may contain letters, numbers, periods, hyphens, and underscores.",
     "invalidEntityType": "Entity type must be character or creature.",
     "characterExists": "A character with that key already exists.",

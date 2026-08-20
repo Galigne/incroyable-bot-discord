@@ -176,6 +176,14 @@ test('registry permission filtering delegates to the existing authorization serv
 test('registry exposes autocomplete, option, and choice metadata', async () => {
 	const accessUser = commandRegistry.getAutocompleteMetadata('access', 'user', 'rpg');
 	assert.equal(accessUser.type, 'user');
+	const accessUserId = commandRegistry.getAutocompleteMetadata(
+		'access',
+		'user-id',
+		'rpg',
+	);
+	assert.equal(accessUserId.type, 'string');
+	assert.equal(accessUserId.minLength, 17);
+	assert.equal(accessUserId.maxLength, 20);
 	assert.deepEqual(
 		commandRegistry.getCommand('access').options
 			.find(option => option.name === 'level')

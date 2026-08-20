@@ -3,6 +3,7 @@ const ENTITY_ACCESS_OPERATIONS = Object.freeze([
 	...ENTITY_ACCESS_LEVELS,
 	'none',
 ]);
+const DISCORD_USER_ID_PATTERN = /^\d{17,20}$/;
 
 function validateEntityAccess(access, createError = message => new TypeError(message)) {
 	if (!Array.isArray(access)) {
@@ -46,6 +47,46 @@ function getEntityAccessLevel(entity, userId) {
 	return entity.access.find(entry => entry.userId === userId)?.level ?? null;
 }
 
+function resolveEntityAccessRequest({
+	level = null,
+	rawUserId = null,
+	selectedUserId = null,
+} = {}) {
+	const hasLevel = level !== null && level !== undefined;
+	const hasRawUserId = rawUserId !== null && rawUserId !== undefined;
+	const hasSelectedUser = selectedUserId !== null && selectedUserId !== undefined;
+	const targetCount = Number(hasRawUserId) + Number(hasSelectedUser);
+	if (targetCount === 0 && !hasLevel) {
+		return { kind: 'list' };
+	}
+	if (targetCount !== 1 || !hasLevel) {
+		throw entityAccessError(
+			'INVALID_ENTITY_ACCESS_REQUEST',
+			'An access update requires a level and exactly one user target.',
+		);
+	}
+	if (!ENTITY_ACCESS_OPERATIONS.includes(level)) {
+		throw accessOperationError('Access level must be owner, partial, or none.');
+	}
+	if (hasRawUserId) {
+		const normalizedUserId = typeof rawUserId === 'string'
+			? rawUserId.trim()
+			: '';
+		if (!DISCORD_USER_ID_PATTERN.test(normalizedUserId)) {
+			throw entityAccessError(
+				'INVALID_DISCORD_USER_ID',
+				'Raw user IDs must contain 17 to 20 digits.',
+			);
+		}
+		return { kind: 'update', level, userId: normalizedUserId };
+	}
+	assertUserId(selectedUserId, 'selectedUserId', message => entityAccessError(
+		'INVALID_ENTITY_ACCESS_REQUEST',
+		message,
+	));
+	return { kind: 'update', level, userId: selectedUserId };
+}
+
 function setEntityUserAccess(entity, userId, level) {
 	if (!entity || typeof entity !== 'object') {
 		throw accessOperationError('An entity is required.');
@@ -82,9 +123,13 @@ function assertUserId(userId, path, createError = message => new TypeError(messa
 }
 
 function accessOperationError(message) {
+	return entityAccessError('INVALID_ENTITY_ACCESS_OPERATION', message);
+}
+
+function entityAccessError(code, message) {
 	const error = new Error(message);
 	error.name = 'EntityAccessError';
-	error.code = 'INVALID_ENTITY_ACCESS_OPERATION';
+	error.code = code;
 	return error;
 }
 
@@ -93,6 +138,7 @@ module.exports = {
 	ENTITY_ACCESS_OPERATIONS,
 	createOwnerAccess,
 	getEntityAccessLevel,
+	resolveEntityAccessRequest,
 	setEntityUserAccess,
 	validateEntityAccess,
 };

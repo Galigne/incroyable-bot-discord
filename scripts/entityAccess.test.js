@@ -13,6 +13,7 @@ const commandRegistry = require('../commands/registry');
 const {
 	ENTITY_ACCESS_LEVELS,
 	ENTITY_ACCESS_OPERATIONS,
+	resolveEntityAccessRequest,
 	setEntityUserAccess,
 	validateEntityAccess,
 } = require('../services/entityAccess');
@@ -70,6 +71,19 @@ test('shared access entries validate owner and partial while none remains operat
 	assert.equal(setEntityUserAccess(entity, 'user', 'none').changed, true);
 	assert.equal(setEntityUserAccess(entity, 'user', 'none').changed, false);
 	assert.deepEqual(entity.access, []);
+	assert.deepEqual(resolveEntityAccessRequest(), { kind: 'list' });
+	assert.deepEqual(resolveEntityAccessRequest({
+		level: 'partial',
+		rawUserId: '123456789012345678',
+	}), {
+		kind: 'update',
+		level: 'partial',
+		userId: '123456789012345678',
+	});
+	assert.throws(() => resolveEntityAccessRequest({
+		level: 'partial',
+		rawUserId: 'not-a-user-id',
+	}), { code: 'INVALID_DISCORD_USER_ID' });
 });
 
 test('application access changes support multiple owners, partial control, and empty ownership', async () => {
@@ -165,26 +179,39 @@ test('undo preserves current access instead of restoring historical permissions'
 
 test('/access listing is unrestricted and retains users absent from guild caches', async () => {
 	const entityKey = 'Access.Command.List';
-	await createEntity(entityKey, 'persisted-owner', 'character');
-	await updateEntityAccess(entityKey, 'departed-user', 'partial', () => true);
+	const ownerId = '123456789012345678';
+	const departedUserId = '234567890123456789';
+	await createEntity(entityKey, ownerId, 'character');
+	await updateEntityAccess(entityKey, departedUserId, 'partial', () => true);
 	const interaction = createCommandInteraction('viewer', {
 		entityKey,
-		level: null,
-		user: null,
 	});
+	interaction.guild.members.cache.set(ownerId, {
+		displayName: 'Known Owner',
+		user: { id: ownerId, username: 'known-owner' },
+	});
+	interaction.guild.members.fetch = async () => {
+		throw new Error('Access listing must not fetch guild members.');
+	};
+	interaction.client.users.fetch = async () => {
+		throw new Error('Access listing must not fetch users.');
+	};
 
 	await commandRegistry.getRuntimeCommands().get('access').execute({
 		config,
 		interaction,
 	});
 	assert.match(interaction.response.content, /Explicit access/);
-	assert.match(interaction.response.content, /<@persisted-owner>/);
+	assert.match(interaction.response.content, /Known Owner/);
+	assert.match(interaction.response.content, new RegExp(`<@${ownerId}>`));
 	assert.match(interaction.response.content, /Owner/);
-	assert.match(interaction.response.content, /<@departed-user>/);
+	assert.match(interaction.response.content, new RegExp(departedUserId));
+	assert.match(interaction.response.content, new RegExp(`<@${departedUserId}>`));
 	assert.match(interaction.response.content, /Partial/);
+	assert.deepEqual(interaction.response.allowedMentions, { users: [] });
 });
 
-test('/access modification is idempotent, requires paired options, and reauthorizes', async () => {
+test('/access native-user modification is idempotent and reauthorizes', async () => {
 	const entityKey = 'Access.Command.Modify';
 	await createEntity(entityKey, 'owner', 'creature');
 	const targetUser = { id: 'target', username: 'Target_User' };
@@ -210,18 +237,6 @@ test('/access modification is idempotent, requires paired options, and reauthori
 	});
 	assert.match(unchanged.response.content, /already.*Partial/i);
 
-	const incomplete = createCommandInteraction('owner', {
-		entityKey,
-		level: null,
-		user: targetUser,
-	});
-	await commandRegistry.getRuntimeCommands().get('access').execute({
-		config,
-		interaction: incomplete,
-	});
-	assert.match(incomplete.response.content, /both `user` and `level`/);
-	assert.ok(incomplete.response.flags);
-
 	const partial = createCommandInteraction('target', {
 		entityKey,
 		level: 'owner',
@@ -235,6 +250,115 @@ test('/access modification is idempotent, requires paired options, and reauthori
 	assert.deepEqual((await getEntity(entityKey)).access, [
 		{ userId: 'owner', level: 'owner' },
 		{ userId: 'target', level: 'partial' },
+	]);
+});
+
+test('owners and DMs can remove stale entries by raw Discord user ID', async () => {
+	const ownerEntityKey = 'Access.Command.RawOwner';
+	const dmEntityKey = 'Access.Command.RawDm';
+	const staleOwnerTarget = '345678901234567890';
+	const staleDmTarget = '456789012345678901';
+	await createEntity(ownerEntityKey, 'owner', 'character');
+	await updateEntityAccess(ownerEntityKey, staleOwnerTarget, 'partial', () => true);
+	await createEntity(dmEntityKey, 'other-owner', 'creature');
+	await updateEntityAccess(dmEntityKey, staleDmTarget, 'owner', () => true);
+
+	const ownerRemoval = createCommandInteraction('owner', {
+		entityKey: ownerEntityKey,
+		level: 'none',
+		rawUserId: staleOwnerTarget,
+	});
+	await commandRegistry.getRuntimeCommands().get('access').execute({
+		config,
+		interaction: ownerRemoval,
+	});
+	assert.match(ownerRemoval.response.content, new RegExp(staleOwnerTarget));
+	assert.match(ownerRemoval.response.content, /Partial.*None/);
+	assert.deepEqual((await getEntity(ownerEntityKey)).access, [
+		{ userId: 'owner', level: 'owner' },
+	]);
+
+	const dmRemoval = createCommandInteraction('dm-user', {
+		entityKey: dmEntityKey,
+		level: 'none',
+		rawUserId: staleDmTarget,
+	}, ['dm-role']);
+	await commandRegistry.getRuntimeCommands().get('access').execute({
+		config,
+		interaction: dmRemoval,
+	});
+	assert.match(dmRemoval.response.content, new RegExp(staleDmTarget));
+	assert.deepEqual((await getEntity(dmEntityKey)).access, [
+		{ userId: 'other-owner', level: 'owner' },
+	]);
+});
+
+test('partial and unauthorized users cannot modify access by raw Discord user ID', async () => {
+	const entityKey = 'Access.Command.RawDenied';
+	const staleUserId = '567890123456789012';
+	await createEntity(entityKey, 'owner', 'character');
+	await updateEntityAccess(entityKey, 'partial-user', 'partial', () => true);
+	await updateEntityAccess(entityKey, staleUserId, 'partial', () => true);
+
+	for (const userId of ['partial-user', 'outsider']) {
+		const interaction = createCommandInteraction(userId, {
+			entityKey,
+			level: 'none',
+			rawUserId: staleUserId,
+		});
+		await commandRegistry.getRuntimeCommands().get('access').execute({
+			config,
+			interaction,
+		});
+		assert.match(interaction.response.content, /entity owner.*DM.*server owner/i);
+		assert.ok(interaction.response.flags);
+	}
+	assert.deepEqual((await getEntity(entityKey)).access, [
+		{ userId: 'owner', level: 'owner' },
+		{ userId: 'partial-user', level: 'partial' },
+		{ userId: staleUserId, level: 'partial' },
+	]);
+});
+
+test('/access rejects incomplete, ambiguous, and invalid raw-ID changes', async () => {
+	const entityKey = 'Access.Command.InvalidTargets';
+	await createEntity(entityKey, 'owner', 'character');
+	const cases = [
+		{ level: null, user: { id: 'target', username: 'Target' } },
+		{ level: null, rawUserId: '678901234567890123' },
+		{ level: 'partial' },
+		{
+			level: 'partial',
+			rawUserId: '678901234567890123',
+			user: { id: 'target', username: 'Target' },
+		},
+	];
+	for (const options of cases) {
+		const interaction = createCommandInteraction('owner', {
+			entityKey,
+			...options,
+		});
+		await commandRegistry.getRuntimeCommands().get('access').execute({
+			config,
+			interaction,
+		});
+		assert.match(interaction.response.content, /exactly one target/i);
+		assert.ok(interaction.response.flags);
+	}
+
+	const invalidId = createCommandInteraction('owner', {
+		entityKey,
+		level: 'partial',
+		rawUserId: 'not-a-user-id',
+	});
+	await commandRegistry.getRuntimeCommands().get('access').execute({
+		config,
+		interaction: invalidId,
+	});
+	assert.match(invalidId.response.content, /17-20 digit Discord user ID/);
+	assert.ok(invalidId.response.flags);
+	assert.deepEqual((await getEntity(entityKey)).access, [
+		{ userId: 'owner', level: 'owner' },
 	]);
 });
 
@@ -260,7 +384,7 @@ test('entity autocomplete separates controllable, full-authority, and public vie
 	]));
 });
 
-test('/access metadata and help document the two forms and user option', () => {
+test('/access metadata and help document all forms and both target options', () => {
 	const metadata = commandRegistry.getCommand('access');
 	assert.equal(metadata.permission, 'everyone');
 	assert.equal(metadata.handler, './handlers/access');
@@ -268,7 +392,11 @@ test('/access metadata and help document the two forms and user option', () => {
 		'string',
 		'user',
 		'string',
+		'string',
 	]);
+	const rawUserId = metadata.options.find(option => option.name === 'user-id');
+	assert.equal(rawUserId.minLength, 17);
+	assert.equal(rawUserId.maxLength, 20);
 	const rendered = JSON.stringify(createHelpResponse({
 		avatarUrl: 'https://example.com/avatar.png',
 		commandName: 'access',
@@ -278,6 +406,8 @@ test('/access metadata and help document the two forms and user option', () => {
 		registry: commandRegistry,
 	}).embeds[0].toJSON());
 	assert.match(rendered, /Discord user/);
+	assert.match(rendered, /user-id/);
+	assert.match(rendered, /17-20 digit/);
 	assert.match(rendered, /owner.*partial.*none/i);
 	assert.match(rendered, /anyone may view/i);
 });
@@ -307,12 +437,20 @@ async function autocomplete(commandName, userId, focusedValue) {
 	return response;
 }
 
-function createCommandInteraction(userId, { entityKey, level, user }) {
-	const interaction = createInteraction(userId);
+function createCommandInteraction(
+	userId,
+	{ entityKey, level = null, rawUserId = null, user = null },
+	roleIds = [],
+) {
+	const interaction = createInteraction(userId, roleIds);
 	interaction.client = { users: { cache: new Map() } };
 	interaction.guild.members = { cache: new Map() };
 	interaction.options = {
-		getString: optionName => optionName === 'entity-key' ? entityKey : level,
+		getString: optionName => ({
+			'entity-key': entityKey,
+			level,
+			'user-id': rawUserId,
+		})[optionName],
 		getUser: () => user,
 	};
 	interaction.reply = async response => {

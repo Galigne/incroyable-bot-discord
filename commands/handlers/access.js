@@ -2,6 +2,7 @@ const {
 	getEntityAccess,
 	updateEntityAccess,
 } = require('../../services/entityApplicationService');
+const { resolveEntityAccessRequest } = require('../../services/entityAccess');
 const { hasFullEntityAuthority } = require('../../util/authorization');
 const { replyToEntityError } = require('../../util/entityCommandErrors');
 const {
@@ -15,9 +16,15 @@ module.exports = {
 		const locale = getLocale(config);
 		const entityKey = interaction.options.getString('entity-key', true);
 		const user = interaction.options.getUser('user');
+		const rawUserId = interaction.options.getString('user-id');
 		const level = interaction.options.getString('level');
 		try {
-			if (!user && !level) {
+			const request = resolveEntityAccessRequest({
+				level,
+				rawUserId,
+				selectedUserId: user?.id,
+			});
+			if (request.kind === 'list') {
 				const result = await getEntityAccess(entityKey);
 				await interaction.reply(createEntityAccessListResponse(
 					result,
@@ -28,8 +35,8 @@ module.exports = {
 			}
 			const result = await updateEntityAccess(
 				entityKey,
-				user?.id,
-				level,
+				request.userId,
+				request.level,
 				entity => hasFullEntityAuthority(interaction, entity, config),
 			);
 			await interaction.reply(createEntityAccessUpdateResponse(
