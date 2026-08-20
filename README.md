@@ -51,9 +51,12 @@ name and a direct route to an internal child. Bare router generation displays th
 selected category only; fixing a category automatically generates from its child.
 Loot includes weapons, shields, armor, supplies, consumables, food
 and drink, valuables, materials, and curios. Afflictions, rumors, and secrets are
-also available as direct public generators. Item identity is independent from its
-rarity, material, and special loot property. Direct `/gen` output displays applied
-modifiers separately from the base item.
+also available as direct public generators. The public name-only `ability`
+generator supplies an open-ended vocabulary of RANDOM statistics, familiar skills,
+and other areas of expertise; it supports reusable results such as ability potions
+without defining a closed skill system. Item identity is independent from its rarity,
+material, and special loot property. Direct `/gen` output displays applied modifiers
+separately from the base item.
 
 Set the required runtime language in `config.json`. The complete configuration is:
 

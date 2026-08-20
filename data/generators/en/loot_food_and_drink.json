@@ -20,18 +20,19 @@
       }
     },
     {
-      "id": "exotic_fruit",
-      "name": "Exotic Fruit",
+      "id": "fresh_bread",
+      "name": "Fresh bread",
+      "weight": 8,
       "fields": {
-        "description": "A rare fruit whose seed, flavor, or properties interest several buyers."
+        "description": "A fresh loaf with a crisp crust, suitable for an everyday meal."
       }
     },
     {
-      "id": "bread_and_hard_cheese",
-      "name": "Bread and hard cheese",
-      "weight": 8,
+      "id": "cheese_wheel",
+      "name": "Cheese wheel",
+      "weight": 7,
       "fields": {
-        "description": "A simple meal that keeps well and is suited to travel."
+        "description": "A small wheel of firm cheese that travels and stores well."
       }
     },
     {
@@ -43,54 +44,6 @@
       }
     },
     {
-      "id": "preserved_fruit",
-      "name": "Preserved fruit",
-      "weight": 6,
-      "fields": {
-        "description": "Dried or sugared fruit packed for a long journey."
-      }
-    },
-    {
-      "id": "fresh_provisions",
-      "name": "Fresh provisions",
-      "weight": 5,
-      "fields": {
-        "description": "Seasonal produce and other food meant to be eaten soon."
-      }
-    },
-    {
-      "id": "strong_ale",
-      "name": "Strong ale",
-      "weight": 5,
-      "fields": {
-        "description": "A robust local brew sold in a stoppered jug."
-      }
-    },
-    {
-      "id": "local_wine",
-      "name": "Local wine",
-      "weight": 4,
-      "fields": {
-        "description": "A bottle whose quality and reputation depend on the region."
-      }
-    },
-    {
-      "id": "herbal_tea",
-      "name": "Herbal tea",
-      "weight": 5,
-      "fields": {
-        "description": "A fragrant blend prepared for warmth, hospitality, or mild comfort."
-      }
-    },
-    {
-      "id": "regional_delicacy",
-      "name": "Regional delicacy",
-      "weight": 2,
-      "fields": {
-        "description": "A distinctive dish prized locally and surprising to outsiders."
-      }
-    },
-    {
       "id": "smoked_fish",
       "name": "Smoked fish",
       "weight": 6,
@@ -99,35 +52,27 @@
       }
     },
     {
-      "id": "pepper_root_stew",
-      "name": "Pepper-root stew",
-      "weight": 3,
+      "id": "fresh_fruit",
+      "name": "Fresh fruit",
+      "weight": 7,
       "fields": {
-        "description": "A thick stew made with a sharp, peppery root and whatever vegetables are available."
+        "description": "Seasonal fruit ready to eat before it spoils."
       }
     },
     {
-      "id": "mushroom_broth",
-      "name": "Mushroom broth",
-      "weight": 4,
+      "id": "preserved_fruit",
+      "name": "Preserved fruit",
+      "weight": 6,
       "fields": {
-        "description": "A dark savory broth made from several varieties of edible mushrooms."
+        "description": "Dried, sugared, or jarred fruit prepared for a longer journey."
       }
     },
     {
-      "id": "honey_cakes",
-      "name": "Honey cakes",
-      "weight": 4,
+      "id": "vegetables",
+      "name": "Vegetables",
+      "weight": 7,
       "fields": {
-        "description": "Small dense cakes sweetened with honey and easy to carry."
-      }
-    },
-    {
-      "id": "spiced_nuts",
-      "name": "Spiced nuts",
-      "weight": 5,
-      "fields": {
-        "description": "Roasted nuts coated with salt and a warming blend of spices."
+        "description": "A practical assortment of fresh roots, greens, and seasonal produce."
       }
     },
     {
@@ -139,19 +84,139 @@
       }
     },
     {
-      "id": "fermented_milk",
-      "name": "Fermented milk",
-      "weight": 3,
+      "id": "roasted_chicken",
+      "name": "Roasted chicken",
+      "weight": 6,
       "fields": {
-        "description": "A tart cultured drink served plain or lightly salted."
+        "description": "A whole chicken roasted with salt and common herbs."
       }
     },
     {
-      "id": "strong_herbal_tonic",
-      "name": "Strong herbal tonic",
+      "id": "roasted_meat",
+      "name": "Roasted meat",
+      "weight": 6,
+      "fields": {
+        "description": "A generous cut of meat roasted over a fire or in an oven."
+      }
+    },
+    {
+      "id": "soup",
+      "name": "Soup",
+      "weight": 7,
+      "fields": {
+        "description": "A hot, simple soup made from whatever vegetables and scraps are available."
+      }
+    },
+    {
+      "id": "stew",
+      "name": "Stew",
+      "weight": 7,
+      "fields": {
+        "description": "A thick, filling stew slowly cooked from ordinary local ingredients."
+      }
+    },
+    {
+      "id": "porridge",
+      "name": "Porridge",
+      "weight": 7,
+      "fields": {
+        "description": "A warm bowl of grain cooked with water or milk."
+      }
+    },
+    {
+      "id": "eggs",
+      "name": "Eggs",
+      "weight": 7,
+      "fields": {
+        "description": "Several fresh eggs ready to boil, fry, bake, or trade."
+      }
+    },
+    {
+      "id": "ale",
+      "name": "Ale",
+      "weight": 6,
+      "fields": {
+        "description": "A mug or stoppered jug of ordinary local ale."
+      }
+    },
+    {
+      "id": "beer",
+      "name": "Beer",
+      "weight": 6,
+      "fields": {
+        "description": "A common brewed drink whose color and bitterness reflect local grain and hops."
+      }
+    },
+    {
+      "id": "mead",
+      "name": "Mead",
+      "weight": 4,
+      "fields": {
+        "description": "A fermented honey drink ranging from light and dry to rich and sweet."
+      }
+    },
+    {
+      "id": "cider",
+      "name": "Cider",
+      "weight": 5,
+      "fields": {
+        "description": "A fermented fruit drink, usually made from local apples or pears."
+      }
+    },
+    {
+      "id": "wine",
+      "name": "Wine",
+      "weight": 5,
+      "fields": {
+        "description": "A bottle or jug whose character and quality depend on the region."
+      }
+    },
+    {
+      "id": "spirits",
+      "name": "Spirits",
+      "weight": 3,
+      "fields": {
+        "description": "A small bottle of strong distilled drink meant to be served sparingly."
+      }
+    },
+    {
+      "id": "water",
+      "name": "Water",
+      "weight": 8,
+      "fields": {
+        "description": "Clean drinking water stored in a sealed jug or skin."
+      }
+    },
+    {
+      "id": "herbal_tea",
+      "name": "Herbal tea",
+      "weight": 5,
+      "fields": {
+        "description": "A fragrant blend prepared for warmth, hospitality, or mild comfort."
+      }
+    },
+    {
+      "id": "exotic_fruit",
+      "name": "Exotic fruit",
+      "weight": 1,
+      "fields": {
+        "description": "A rare fruit whose unfamiliar shape and flavor attract curious buyers."
+      }
+    },
+    {
+      "id": "regional_delicacy",
+      "name": "Regional delicacy",
       "weight": 2,
       "fields": {
-        "description": "A bitter nonmagical drink brewed from roots and herbs for its sharp flavor."
+        "description": "A distinctive dish prized locally and surprising to outsiders."
+      }
+    },
+    {
+      "id": "mushroom_broth",
+      "name": "Mushroom broth",
+      "weight": 2,
+      "fields": {
+        "description": "A dark savory broth made from several varieties of edible mushrooms."
       }
     }
   ]

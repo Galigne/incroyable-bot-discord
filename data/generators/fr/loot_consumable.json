@@ -70,8 +70,73 @@
     {
       "id": "healing_potion",
       "name": "Potion de soin",
+      "weight": 4,
       "fields": {
         "description": "Une fiole stabilisée qui facilite la récupération d’une blessure lorsqu’elle est utilisée correctement."
+      }
+    },
+    {
+      "id": "strong_healing_potion",
+      "name": "Potion de soin puissante",
+      "weight": 2,
+      "fields": {
+        "description": "Un puissant concentré réparateur qui peut favoriser la guérison d’une blessure grave ; le rétablissement exact reste à l’appréciation du MJ."
+      }
+    },
+    {
+      "id": "holy_water",
+      "name": "Eau bénite",
+      "weight": 3,
+      "fields": {
+        "description": "De l’eau consacrée pour les rites de purification ou la confrontation avec des influences impies ; son effet exact reste à l’appréciation du MJ."
+      }
+    },
+    {
+      "id": "incendiary_flask",
+      "name": "Fiole incendiaire",
+      "weight": 3,
+      "fields": {
+        "description": "Une fiole cassable dont le contenu visqueux s’embrase au contact d’une flamme."
+      }
+    },
+    {
+      "id": "potion_of_fire_resistance",
+      "name": "Potion de résistance au feu",
+      "weight": 2,
+      "fields": {
+        "description": "Aide temporairement à résister au feu et aux chaleurs extrêmes ; la protection exacte et sa durée restent à l’appréciation du MJ."
+      }
+    },
+    {
+      "id": "potion_of_cold_resistance",
+      "name": "Potion de résistance au froid",
+      "weight": 2,
+      "fields": {
+        "description": "Aide temporairement à résister au froid et au gel ; la protection exacte et sa durée restent à l’appréciation du MJ."
+      }
+    },
+    {
+      "id": "potion_of_invisibility",
+      "name": "Potion d’invisibilité",
+      "weight": 1,
+      "fields": {
+        "description": "Rend temporairement la personne qui la boit difficile, voire impossible, à voir ; les limites exactes et la durée restent à l’appréciation du MJ."
+      }
+    },
+    {
+      "id": "potion_of_ability",
+      "name": "Potion de {{ ability.name }}",
+      "weight": 3,
+      "fields": {
+        "description": "Renforce temporairement l’aptitude indiquée ; l’ampleur exacte et la durée restent à l’appréciation du MJ."
+      }
+    },
+    {
+      "id": "affliction_remedy",
+      "name": "Remède contre {{ affliction.name }}",
+      "weight": 2,
+      "fields": {
+        "description": "Un médicament, antidote, préparatif rituel ou autre traitement spécialisé destiné à l’affliction indiquée ; son utilisation exacte reste à l’appréciation du MJ."
       }
     },
     {

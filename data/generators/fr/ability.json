@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 4,
+  "id": "ability",
+  "visibility": "public",
+  "name": "Aptitudes",
+  "description": "Caractéristiques, compétences et autres domaines ouverts dans lesquels un personnage peut progresser",
+  "entrySchema": {
+    "required": []
+  },
+  "entries": [
+    { "id": "constitution", "name": "Constitution" },
+    { "id": "strength", "name": "Force" },
+    { "id": "dexterity", "name": "Dextérité" },
+    { "id": "intelligence", "name": "Intelligence" },
+    { "id": "speed", "name": "Vitesse" },
+    { "id": "perception", "name": "Perception" },
+    { "id": "charisma", "name": "Charisme" },
+    { "id": "acrobatics", "name": "Acrobaties" },
+    { "id": "animal_handling", "name": "Dressage" },
+    { "id": "arcana", "name": "Arcanes" },
+    { "id": "athletics", "name": "Athlétisme" },
+    { "id": "deception", "name": "Tromperie" },
+    { "id": "history", "name": "Histoire" },
+    { "id": "insight", "name": "Intuition" },
+    { "id": "intimidation", "name": "Intimidation" },
+    { "id": "investigation", "name": "Investigation" },
+    { "id": "medicine", "name": "Médecine" },
+    { "id": "nature", "name": "Nature" },
+    { "id": "performance", "name": "Représentation" },
+    { "id": "persuasion", "name": "Persuasion" },
+    { "id": "religion", "name": "Religion" },
+    { "id": "sleight_of_hand", "name": "Escamotage" },
+    { "id": "stealth", "name": "Discrétion" },
+    { "id": "survival", "name": "Survie" },
+    { "id": "lockpicking", "name": "Crochetage" },
+    { "id": "tracking", "name": "Pistage" },
+    { "id": "navigation", "name": "Navigation" },
+    { "id": "crafting", "name": "Artisanat" },
+    { "id": "leadership", "name": "Commandement" }
+  ]
+}

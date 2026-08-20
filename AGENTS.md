@@ -690,6 +690,11 @@ The durable implementation constraints are:
 - There is no `inventory` generator. Random character inventory resolves three
   carried display values through `loot`, using child provenance for bounded
   duplicate avoidance. Heterogeneous loot schemas must remain supported.
+- Keep the standalone public `ability` generator name-only and open-ended. It is a
+  reusable vocabulary of RANDOM base statistics, familiar skills, and other areas
+  of expertise, not a closed mechanical skill enum. Prefer `{{ ability.name }}`
+  over isolated stat- or skill-specific loot variants when one generic reference
+  expresses the concept.
 - Loot identity, rarity, material, and special properties are independent. Weapons,
   armor, and shields always resolve `modifier_rarity`, optionally resolve
   `modifier_material`, and may resolve the merged `modifier_loot` pool in that

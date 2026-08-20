@@ -123,6 +123,86 @@
       "fields": {
         "description": "Compact merchandise whose resale value varies between settlements."
       }
+    },
+    {
+      "id": "gold_ingot",
+      "name": "Gold ingot",
+      "weight": 2,
+      "fields": {
+        "description": "A stamped bar of refined gold whose value depends on weight, purity, and local trust in its mark."
+      }
+    },
+    {
+      "id": "silver_ingot",
+      "name": "Silver ingot",
+      "weight": 3,
+      "fields": {
+        "description": "A portable bar of refined silver suitable for trade, craft, or reserve wealth."
+      }
+    },
+    {
+      "id": "signet_ring",
+      "name": "Signet ring",
+      "weight": 3,
+      "fields": {
+        "description": "A ring engraved to press a distinctive seal into wax or clay."
+      }
+    },
+    {
+      "id": "fine_ring",
+      "name": "Fine ring",
+      "weight": 4,
+      "fields": {
+        "description": "A carefully made ring valued for its workmanship and finish."
+      }
+    },
+    {
+      "id": "necklace",
+      "name": "Necklace",
+      "weight": 4,
+      "fields": {
+        "description": "A decorative necklace whose value comes from its materials and craftsmanship."
+      }
+    },
+    {
+      "id": "bracelet",
+      "name": "Bracelet",
+      "weight": 4,
+      "fields": {
+        "description": "A well-crafted wrist ornament suitable for trade, fashion, or ceremony."
+      }
+    },
+    {
+      "id": "amulet",
+      "name": "Amulet",
+      "weight": 3,
+      "fields": {
+        "description": "A pendant shaped as a protective, devotional, or personal emblem."
+      }
+    },
+    {
+      "id": "pearl_necklace",
+      "name": "Pearl necklace",
+      "weight": 2,
+      "fields": {
+        "description": "A matched string of pearls selected for consistent color and luster."
+      }
+    },
+    {
+      "id": "rare_spices",
+      "name": "Rare spices",
+      "weight": 3,
+      "fields": {
+        "description": "Small sealed packets of fragrant spices worth far more away from their source."
+      }
+    },
+    {
+      "id": "perfume",
+      "name": "Perfume",
+      "weight": 3,
+      "fields": {
+        "description": "A stoppered bottle of concentrated fragrance made by a skilled perfumer."
+      }
     }
   ]
 }

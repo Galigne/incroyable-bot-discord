@@ -57,7 +57,7 @@
       "id": "treasure_map",
       "name": "Treasure Map",
       "fields": {
-        "description": "An incomplete route with old landmarks, warnings, and an ambiguous destination."
+        "description": "An incomplete route to {{ dungeon.name }}, marked with old landmarks, warnings, and doubtful promises of treasure."
       }
     },
     {
@@ -121,6 +121,62 @@
       "name": "Travel Chicken",
       "fields": {
         "description": "An unusually calm chicken trained to follow its carrier and signal certain creatures."
+      }
+    },
+    {
+      "id": "strange_coin",
+      "name": "Strange coin",
+      "fields": {
+        "description": "A coin bearing an unfamiliar ruler, impossible date, or denomination nobody recognizes."
+      }
+    },
+    {
+      "id": "mechanical_music_box",
+      "name": "Mechanical music box",
+      "fields": {
+        "description": "A pocket-sized mechanism that plays a delicate tune with one note conspicuously missing."
+      }
+    },
+    {
+      "id": "miniature_portrait",
+      "name": "Miniature portrait",
+      "fields": {
+        "description": "A tiny painted likeness whose subject seems almost familiar."
+      }
+    },
+    {
+      "id": "unusual_deck_of_cards",
+      "name": "Unusual deck of cards",
+      "fields": {
+        "description": "A complete deck with unfamiliar suits, peculiar court figures, and one card that resists shuffling."
+      }
+    },
+    {
+      "id": "petrified_eye",
+      "name": "Petrified eye",
+      "fields": {
+        "description": "A stone eye from an unknown creature, polished smooth without losing its unsettling detail."
+      }
+    },
+    {
+      "id": "impossible_weather_bottle",
+      "name": "Bottle of impossible miniature weather",
+      "fields": {
+        "description": "A sealed bottle containing a tiny storm, snowfall, rainbow, or other weather that ignores the world outside."
+      }
+    },
+    {
+      "id": "nonexistent_settlement_map",
+      "name": "Map of a nonexistent settlement",
+      "fields": {
+        "description": "A detailed street map of a settlement that no traveler, archive, or current chart acknowledges."
+      }
+    },
+    {
+      "id": "broken_magical_focus",
+      "name": "Broken magical focus",
+      "fields": {
+        "description": "A cracked wand, orb, rod, or other focus that still reacts faintly to nearby magic."
       }
     }
   ]

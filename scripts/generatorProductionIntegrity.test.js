@@ -335,15 +335,15 @@ test('creature catalogs include generic archetypes and intentional statistical p
 test('loot replaces every inventory entry across heterogeneous additional fields', () => {
 	assert.equal(generatorCatalog.getGenerator('inventory'), undefined);
 	for (const [generatorId, expectedCount, requiredFields] of [
-		['weapons', 47, ['description']],
+		['weapons', 52, ['description']],
 		['shields', 14, ['description']],
 		['armors', 16, ['type', 'description']],
-		['supplies', 29, ['description']],
-		['consumable', 18, ['description']],
-		['food_and_drink', 18, ['description']],
-		['valuables', 15, ['description']],
-		['material', 35, ['description']],
-		['curio', 16, ['description']],
+		['supplies', 38, ['description']],
+		['consumable', 26, ['description']],
+		['food_and_drink', 26, ['description']],
+		['valuables', 25, ['description']],
+		['material', 46, ['description']],
+		['curio', 24, ['description']],
 	]) {
 		const generator = generatorCatalog.getGenerator(generatorId);
 		assert.equal(generator.entries.length, expectedCount, generatorId);
@@ -538,6 +538,260 @@ test('armor and shield forms keep identity separate from mechanical rarity', () 
 			&& !Object.hasOwn(entry.fields, 'ar_percentage')
 		)));
 	}
+});
+
+test('ability is an open-ended public name-only vocabulary', () => {
+	const expectedIds = [
+		'constitution',
+		'strength',
+		'dexterity',
+		'intelligence',
+		'speed',
+		'perception',
+		'charisma',
+		'acrobatics',
+		'animal_handling',
+		'arcana',
+		'athletics',
+		'deception',
+		'history',
+		'insight',
+		'intimidation',
+		'investigation',
+		'medicine',
+		'nature',
+		'performance',
+		'persuasion',
+		'religion',
+		'sleight_of_hand',
+		'stealth',
+		'survival',
+		'lockpicking',
+		'tracking',
+		'navigation',
+		'crafting',
+		'leadership',
+	];
+	const expectedEnglishNames = [
+		'Constitution',
+		'Strength',
+		'Dexterity',
+		'Intelligence',
+		'Speed',
+		'Perception',
+		'Charisma',
+		'Acrobatics',
+		'Animal Handling',
+		'Arcana',
+		'Athletics',
+		'Deception',
+		'History',
+		'Insight',
+		'Intimidation',
+		'Investigation',
+		'Medicine',
+		'Nature',
+		'Performance',
+		'Persuasion',
+		'Religion',
+		'Sleight of Hand',
+		'Stealth',
+		'Survival',
+		'Lockpicking',
+		'Tracking',
+		'Navigation',
+		'Crafting',
+		'Leadership',
+	];
+	for (const locale of ['en', 'fr']) {
+		const ability = generatorCatalog.getGenerator('ability', locale);
+		assert.equal(ability.visibility, 'public');
+		assert.deepEqual(ability.entrySchema.required, []);
+		assert.deepEqual(ability.entries.map(entry => entry.id), expectedIds);
+		assert.ok(ability.entries.every(entry => (
+			Object.keys(entry).length === 2
+			&& typeof entry.name === 'string'
+			&& entry.name.length > 0
+		)));
+	}
+	const english = generatorCatalog.getGenerator('ability', 'en');
+	assert.deepEqual(english.entries.map(entry => entry.name), expectedEnglishNames);
+	assert.equal(english.entries.filter(entry => entry.id === 'perception').length, 1);
+});
+
+test('expanded consumables reuse ability and affliction without fixed numerical effects', () => {
+	const consumable = generatorCatalog.getGenerator('consumable', 'en');
+	const entries = new Map(consumable.entries.map(entry => [entry.id, entry]));
+	assert.equal(entries.get('healing_potion').weight, 4);
+	for (const entryId of [
+		'strong_healing_potion',
+		'holy_water',
+		'incendiary_flask',
+		'potion_of_fire_resistance',
+		'potion_of_cold_resistance',
+		'potion_of_invisibility',
+		'potion_of_ability',
+		'affliction_remedy',
+	]) {
+		assert.ok(entries.has(entryId), entryId);
+	}
+	assert.equal(entries.has('potion_of_climbing'), false);
+	assert.equal(entries.has('potion_of_speed'), false);
+	assert.match(entries.get('potion_of_ability').name, /\{\{ ability\.name \}\}/);
+	assert.match(
+		entries.get('potion_of_ability').fields.description,
+		/exact magnitude and duration remain with the GM/,
+	);
+	assert.match(entries.get('affliction_remedy').name, /\{\{ affliction\.name \}\}/);
+	assert.match(
+		entries.get('affliction_remedy').fields.description,
+		/medicine, antidote, ritual preparation, or other treatment/,
+	);
+
+	for (const locale of ['en', 'fr']) {
+		for (const entryId of ['potion_of_ability', 'affliction_remedy']) {
+			const result = generatorResolver.generate(
+				`loot:consumable:${entryId}`,
+				locale,
+				{ random: () => 0 },
+			);
+			assert.doesNotMatch(Object.values(result.displayFields).join(' '), /\{\{|\}\}/);
+		}
+	}
+});
+
+test('expanded loot catalogs cover useful basics, reusable references, and fun outliers', () => {
+	const idsFor = generatorId => new Set(
+		generatorCatalog.getGenerator(generatorId, 'en').entries.map(entry => entry.id),
+	);
+	const requireIds = (generatorId, requiredIds) => {
+		const ids = idsFor(generatorId);
+		for (const entryId of requiredIds) {
+			assert.ok(ids.has(entryId), `${generatorId}:${entryId}`);
+		}
+	};
+
+	requireIds('weapons', [
+		'pike', 'sickle', 'hand_crossbow', 'darts', 'net', 'chakram', 'maul',
+	]);
+	requireIds('supplies', [
+		'backpack',
+		'torches',
+		'compass',
+		'chain',
+		'cloak',
+		'boots',
+		'cooking_kit',
+		'sewing_repair_kit',
+		'whetstone',
+		'empty_bottles_and_vials',
+	]);
+	requireIds('valuables', [
+		'gold_ingot',
+		'silver_ingot',
+		'signet_ring',
+		'fine_ring',
+		'necklace',
+		'bracelet',
+		'amulet',
+		'pearl_necklace',
+		'rare_spices',
+		'perfume',
+	]);
+	requireIds('material', [
+		'glass',
+		'clay',
+		'wool',
+		'silk',
+		'bone',
+		'salt',
+		'coal',
+		'sulfur',
+		'monster_hide',
+		'dragon_scales',
+		'dirt',
+	]);
+	for (const forbiddenId of ['tin', 'lead', 'brass', 'linen', 'ivory', 'chitin']) {
+		assert.equal(idsFor('material').has(forbiddenId), false, forbiddenId);
+	}
+	const materials = new Map(generatorCatalog.getGenerator('material', 'en').entries
+		.map(entry => [entry.id, entry]));
+	assert.equal(materials.get('dirt').weight, 1);
+	assert.ok(materials.get('dirt').weight < materials.get('glass').weight);
+
+	requireIds('curio', [
+		'strange_coin',
+		'mechanical_music_box',
+		'miniature_portrait',
+		'unusual_deck_of_cards',
+		'petrified_eye',
+		'impossible_weather_bottle',
+		'nonexistent_settlement_map',
+		'broken_magical_focus',
+	]);
+	const supplies = new Map(generatorCatalog.getGenerator('supplies', 'en').entries
+		.map(entry => [entry.id, entry]));
+	assert.match(supplies.get('holy_symbol').fields.description, /\{\{ religion\.sacred_symbol \}\}/);
+	assert.match(supplies.get('local_map').fields.description, /\{\{ region\.name \}\}/);
+	const curios = new Map(generatorCatalog.getGenerator('curio', 'en').entries
+		.map(entry => [entry.id, entry]));
+	assert.match(curios.get('treasure_map').fields.description, /\{\{ dungeon\.name \}\}/);
+
+	const food = new Map(generatorCatalog.getGenerator('food_and_drink', 'en').entries
+		.map(entry => [entry.id, entry]));
+	for (const entryId of [
+		'fresh_bread',
+		'cheese_wheel',
+		'dried_meat',
+		'smoked_fish',
+		'fresh_fruit',
+		'preserved_fruit',
+		'vegetables',
+		'three_travel_rations',
+		'roasted_chicken',
+		'roasted_meat',
+		'soup',
+		'stew',
+		'porridge',
+		'eggs',
+		'ale',
+		'beer',
+		'mead',
+		'cider',
+		'wine',
+		'spirits',
+		'water',
+		'herbal_tea',
+	]) {
+		assert.ok(food.has(entryId), entryId);
+	}
+	for (const removedId of [
+		'honey_cakes',
+		'spiced_nuts',
+		'pepper_root_stew',
+		'fermented_milk',
+		'strong_herbal_tonic',
+	]) {
+		assert.equal(food.has(removedId), false, removedId);
+	}
+	const lowestStapleWeight = Math.min(...[
+		'fresh_bread',
+		'cheese_wheel',
+		'dried_meat',
+		'fresh_fruit',
+		'vegetables',
+		'soup',
+		'stew',
+		'porridge',
+		'eggs',
+		'water',
+	].map(entryId => food.get(entryId).weight));
+	const highestUnusualWeight = Math.max(...[
+		'exotic_fruit',
+		'regional_delicacy',
+		'mushroom_broth',
+	].map(entryId => food.get(entryId).weight));
+	assert.ok(lowestStapleWeight > highestUnusualWeight);
 });
 
 test('affliction fields are localized while their classifications remain data', () => {

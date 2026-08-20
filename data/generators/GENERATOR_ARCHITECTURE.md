@@ -28,6 +28,11 @@ Visibility controls entry points, not resolvability:
   available to application workflows, inline references, structural traversal,
   and modifier relationships.
 
+The public name-only `ability` generator is a standalone, open-ended vocabulary of
+RANDOM statistics, familiar skills, and other areas of expertise. It is directly
+selectable through `/gen` and reusable through `{{ ability.name }}`; consumers must
+not interpret its current entries as a closed mechanical skill enum.
+
 Stable lowercase snake_case generator and entry IDs provide durable identity.
 Localized generator and entry names provide `/gen` path aliases that are resolved
 back to those stable IDs before traversal; names never replace routing or provenance
@@ -295,6 +300,13 @@ application workflows or fixed router entries follow those routes.
 `quest`, `rumor`, and `secret` entries combine these and other fixed or random
 concepts. These resolutions keep nested provenance but do not create or
 persist the referenced people, creatures, locations, or items.
+
+Consumables reuse the standalone `ability` and `affliction` generators for broad
+ability potions and specialized remedies. Supplies and curios likewise reuse
+specific `religion`, `region`, and `dungeon` fields when an existing concept can
+provide a coherent symbol or destination. These references remain descriptive;
+exact strength, duration, treatment, and other mechanics stay with the GM unless a
+RANDOM rule explicitly defines them.
 
 ## Validation coverage
 

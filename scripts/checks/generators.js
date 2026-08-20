@@ -103,6 +103,7 @@ module.exports = function createGeneratorChecks(context) {
 
 function checkRequiredGenerators(errors, generatorCatalog) {
 	const requiredPublicGenerators = [
+		'ability',
 		'affliction',
 		'background',
 		'creature',

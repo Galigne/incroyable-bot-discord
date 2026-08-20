@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 4,
+  "id": "ability",
+  "visibility": "public",
+  "name": "Abilities",
+  "description": "Stats, skills, and other open-ended areas in which a character can improve",
+  "entrySchema": {
+    "required": []
+  },
+  "entries": [
+    { "id": "constitution", "name": "Constitution" },
+    { "id": "strength", "name": "Strength" },
+    { "id": "dexterity", "name": "Dexterity" },
+    { "id": "intelligence", "name": "Intelligence" },
+    { "id": "speed", "name": "Speed" },
+    { "id": "perception", "name": "Perception" },
+    { "id": "charisma", "name": "Charisma" },
+    { "id": "acrobatics", "name": "Acrobatics" },
+    { "id": "animal_handling", "name": "Animal Handling" },
+    { "id": "arcana", "name": "Arcana" },
+    { "id": "athletics", "name": "Athletics" },
+    { "id": "deception", "name": "Deception" },
+    { "id": "history", "name": "History" },
+    { "id": "insight", "name": "Insight" },
+    { "id": "intimidation", "name": "Intimidation" },
+    { "id": "investigation", "name": "Investigation" },
+    { "id": "medicine", "name": "Medicine" },
+    { "id": "nature", "name": "Nature" },
+    { "id": "performance", "name": "Performance" },
+    { "id": "persuasion", "name": "Persuasion" },
+    { "id": "religion", "name": "Religion" },
+    { "id": "sleight_of_hand", "name": "Sleight of Hand" },
+    { "id": "stealth", "name": "Stealth" },
+    { "id": "survival", "name": "Survival" },
+    { "id": "lockpicking", "name": "Lockpicking" },
+    { "id": "tracking", "name": "Tracking" },
+    { "id": "navigation", "name": "Navigation" },
+    { "id": "crafting", "name": "Crafting" },
+    { "id": "leadership", "name": "Leadership" }
+  ]
+}

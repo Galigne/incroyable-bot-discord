@@ -282,6 +282,94 @@
       "fields": {
         "description": "An unusual organic component such as a toad eye or venom gland."
       }
+    },
+    {
+      "id": "glass",
+      "name": "Glass",
+      "weight": 5,
+      "fields": {
+        "description": "transparent but brittle material used for vessels, windows, lenses, and decoration."
+      }
+    },
+    {
+      "id": "clay",
+      "name": "Clay",
+      "weight": 5,
+      "fields": {
+        "description": "workable earth shaped into pottery, bricks, tablets, molds, and sculpture."
+      }
+    },
+    {
+      "id": "wool",
+      "name": "Wool",
+      "weight": 5,
+      "fields": {
+        "description": "warm animal fiber spun into clothing, blankets, padding, and felt."
+      }
+    },
+    {
+      "id": "silk",
+      "name": "Silk",
+      "weight": 4,
+      "fields": {
+        "description": "fine strong fiber prized for light cloth, cord, embroidery, and luxury goods."
+      }
+    },
+    {
+      "id": "bone",
+      "name": "Bone",
+      "weight": 4,
+      "fields": {
+        "description": "hard organic material carved into tools, handles, ornaments, needles, and gaming pieces."
+      }
+    },
+    {
+      "id": "salt",
+      "name": "Salt",
+      "weight": 5,
+      "fields": {
+        "description": "essential mineral used for seasoning, preservation, trade, medicine, and ritual boundaries."
+      }
+    },
+    {
+      "id": "coal",
+      "name": "Coal",
+      "weight": 5,
+      "fields": {
+        "description": "dense black fuel used in forges, furnaces, heating, pigments, and filtration."
+      }
+    },
+    {
+      "id": "sulfur",
+      "name": "Sulfur",
+      "weight": 3,
+      "fields": {
+        "description": "sharp-smelling yellow mineral used in alchemy, medicine, fumigation, and incendiary mixtures."
+      }
+    },
+    {
+      "id": "monster_hide",
+      "name": "Monster hide",
+      "weight": 2,
+      "fields": {
+        "description": "preserved hide from an unusual creature, valued for its texture, resilience, or rarity."
+      }
+    },
+    {
+      "id": "dragon_scales",
+      "name": "Dragon scales",
+      "weight": 1,
+      "fields": {
+        "description": "rare overlapping scales retaining remarkable hardness and traces of draconic nature."
+      }
+    },
+    {
+      "id": "dirt",
+      "name": "Dirt",
+      "weight": 1,
+      "fields": {
+        "description": "ordinary loose soil, unremarkable until someone finds an unexpectedly important use for it."
+      }
     }
   ]
 }

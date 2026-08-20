@@ -57,7 +57,7 @@
       "id": "treasure_map",
       "name": "Carte au trésor",
       "fields": {
-        "description": "Un itinéraire incomplet accompagné de repères anciens, d’avertissements et d’une destination ambiguë."
+        "description": "Un itinéraire incomplet vers {{ dungeon.name }}, accompagné de repères anciens, d’avertissements et de promesses de trésor peu fiables."
       }
     },
     {
@@ -121,6 +121,62 @@
       "name": "Poulet de voyage",
       "fields": {
         "description": "Un poulet étonnamment calme, dressé à suivre le porteur et à signaler certaines créatures."
+      }
+    },
+    {
+      "id": "strange_coin",
+      "name": "Étrange pièce",
+      "fields": {
+        "description": "Une pièce portant l’effigie d’un souverain inconnu, une date impossible ou une valeur que personne ne reconnaît."
+      }
+    },
+    {
+      "id": "mechanical_music_box",
+      "name": "Boîte à musique mécanique",
+      "fields": {
+        "description": "Un mécanisme de poche qui joue une mélodie délicate dans laquelle une note manque ostensiblement."
+      }
+    },
+    {
+      "id": "miniature_portrait",
+      "name": "Portrait miniature",
+      "fields": {
+        "description": "Un minuscule portrait peint dont le sujet paraît presque familier."
+      }
+    },
+    {
+      "id": "unusual_deck_of_cards",
+      "name": "Étrange jeu de cartes",
+      "fields": {
+        "description": "Un jeu complet aux enseignes inconnues et aux figures singulières, dont une carte résiste obstinément au mélange."
+      }
+    },
+    {
+      "id": "petrified_eye",
+      "name": "Œil pétrifié",
+      "fields": {
+        "description": "L’œil minéral d’une créature inconnue, poli jusqu’à devenir lisse sans rien perdre de ses détails inquiétants."
+      }
+    },
+    {
+      "id": "impossible_weather_bottle",
+      "name": "Bouteille de météo miniature impossible",
+      "fields": {
+        "description": "Une bouteille scellée contenant un minuscule orage, une chute de neige, un arc-en-ciel ou un autre phénomène qui ignore le temps extérieur."
+      }
+    },
+    {
+      "id": "nonexistent_settlement_map",
+      "name": "Plan d’une communauté inexistante",
+      "fields": {
+        "description": "Un plan détaillé des rues d’une communauté dont aucun voyageur, aucune archive et aucune carte actuelle ne reconnaît l’existence."
+      }
+    },
+    {
+      "id": "broken_magical_focus",
+      "name": "Focaliseur magique brisé",
+      "fields": {
+        "description": "Une baguette, un orbe, un sceptre ou un autre focaliseur fendu qui réagit encore faiblement à la magie proche."
       }
     }
   ]

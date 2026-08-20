@@ -192,7 +192,7 @@
       "name": "Holy symbol",
       "weight": 3,
       "fields": {
-        "description": "A symbol tied to a faith, oath, ancestor, or personal ideal."
+        "description": "A portable emblem whose form follows this sacred symbol: {{ religion.sacred_symbol }}"
       }
     },
     {
@@ -200,7 +200,7 @@
       "name": "Local map",
       "weight": 3,
       "fields": {
-        "description": "A practical but imperfect map of the surrounding region."
+        "description": "A practical but imperfect map depicting the following region: {{ region.name }}"
       }
     },
     {
@@ -238,6 +238,78 @@
       "name": "Quality Paper",
       "fields": {
         "description": "Blank sheets and parchment suited to contracts, maps, spells, or forged documents."
+      }
+    },
+    {
+      "id": "backpack",
+      "name": "Backpack",
+      "weight": 8,
+      "fields": {
+        "description": "A sturdy travel pack with straps and several practical compartments."
+      }
+    },
+    {
+      "id": "torches",
+      "name": "Torches",
+      "weight": 8,
+      "fields": {
+        "description": "A bundle of resin-soaked torches ready to provide light or start a larger fire."
+      }
+    },
+    {
+      "id": "compass",
+      "name": "Compass",
+      "weight": 4,
+      "fields": {
+        "description": "A simple magnetic compass in a protective case."
+      }
+    },
+    {
+      "id": "cloak",
+      "name": "Cloak",
+      "weight": 6,
+      "fields": {
+        "description": "A durable traveling cloak offering ordinary protection from wind and rain."
+      }
+    },
+    {
+      "id": "boots",
+      "name": "Boots",
+      "weight": 6,
+      "fields": {
+        "description": "A practical pair of hard-wearing boots suited to long days on the road."
+      }
+    },
+    {
+      "id": "cooking_kit",
+      "name": "Cooking kit",
+      "weight": 5,
+      "fields": {
+        "description": "A compact pot, pan, utensils, and basic tools for preparing meals while traveling."
+      }
+    },
+    {
+      "id": "sewing_repair_kit",
+      "name": "Sewing and repair kit",
+      "weight": 5,
+      "fields": {
+        "description": "Needles, thread, patches, awl, and small tools for mending clothing and gear."
+      }
+    },
+    {
+      "id": "whetstone",
+      "name": "Whetstone",
+      "weight": 5,
+      "fields": {
+        "description": "A fine abrasive stone for maintaining ordinary blades and metal tools."
+      }
+    },
+    {
+      "id": "empty_bottles_and_vials",
+      "name": "Empty bottles and vials",
+      "weight": 5,
+      "fields": {
+        "description": "Several clean stoppered containers for samples, ingredients, or prepared liquids."
       }
     }
   ]

@@ -360,6 +360,46 @@
       "fields": {
         "description": "Un tube silencieux qui propulse avec précision de petites fléchettes à courte distance."
       }
+    },
+    {
+      "id": "pike",
+      "name": "Pique",
+      "weight": 3,
+      "fields": {
+        "description": "Une lance exceptionnellement longue conçue pour tenir une ligne et garder les adversaires en charge à distance."
+      }
+    },
+    {
+      "id": "sickle",
+      "name": "Faucille",
+      "weight": 4,
+      "fields": {
+        "description": "Un outil agricole courant dont la lame recourbée peut servir d’arme compacte."
+      }
+    },
+    {
+      "id": "hand_crossbow",
+      "name": "Arbalète de poing",
+      "weight": 3,
+      "fields": {
+        "description": "Une arbalète compacte maniable d’une seule main, adaptée aux espaces étroits et facile à dissimuler."
+      }
+    },
+    {
+      "id": "darts",
+      "name": "Fléchettes",
+      "weight": 4,
+      "fields": {
+        "description": "Un jeu de petites pointes lestées conçues pour des lancers rapides et précis."
+      }
+    },
+    {
+      "id": "net",
+      "name": "Filet",
+      "weight": 3,
+      "fields": {
+        "description": "Un filet de lancer lesté destiné à entraver une cible sans recourir à un coup mortel."
+      }
     }
   ]
 }

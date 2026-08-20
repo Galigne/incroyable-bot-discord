@@ -360,6 +360,46 @@
       "fields": {
         "description": "A quiet tube that launches small darts accurately over short distances."
       }
+    },
+    {
+      "id": "pike",
+      "name": "Pike",
+      "weight": 3,
+      "fields": {
+        "description": "An exceptionally long spear used to hold a line and keep charging enemies at a distance."
+      }
+    },
+    {
+      "id": "sickle",
+      "name": "Sickle",
+      "weight": 4,
+      "fields": {
+        "description": "A common harvesting blade that can serve as a compact hooked weapon."
+      }
+    },
+    {
+      "id": "hand_crossbow",
+      "name": "Hand crossbow",
+      "weight": 3,
+      "fields": {
+        "description": "A compact one-handed crossbow suited to close quarters and concealment."
+      }
+    },
+    {
+      "id": "darts",
+      "name": "Darts",
+      "weight": 4,
+      "fields": {
+        "description": "A set of small weighted points made for quick, accurate throws."
+      }
+    },
+    {
+      "id": "net",
+      "name": "Net",
+      "weight": 3,
+      "fields": {
+        "description": "A weighted throwing net intended to entangle a target without relying on a killing blow."
+      }
     }
   ]
 }

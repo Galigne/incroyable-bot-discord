@@ -123,6 +123,86 @@
       "fields": {
         "description": "Des biens compacts dont le prix de revente varie selon les marchés locaux."
       }
+    },
+    {
+      "id": "gold_ingot",
+      "name": "Lingot d’or",
+      "weight": 2,
+      "fields": {
+        "description": "Une barre d’or raffiné portant un poinçon, dont la valeur dépend du poids, de la pureté et de la confiance accordée à cette marque."
+      }
+    },
+    {
+      "id": "silver_ingot",
+      "name": "Lingot d’argent",
+      "weight": 3,
+      "fields": {
+        "description": "Une barre d’argent raffiné et transportable, adaptée au commerce, à l’artisanat ou à la constitution de réserves."
+      }
+    },
+    {
+      "id": "signet_ring",
+      "name": "Chevalière",
+      "weight": 3,
+      "fields": {
+        "description": "Une bague gravée pour imprimer un sceau distinctif dans la cire ou l’argile."
+      }
+    },
+    {
+      "id": "fine_ring",
+      "name": "Bague raffinée",
+      "weight": 4,
+      "fields": {
+        "description": "Une bague soigneusement ouvragée, appréciée pour la qualité de sa fabrication et de sa finition."
+      }
+    },
+    {
+      "id": "necklace",
+      "name": "Collier",
+      "weight": 4,
+      "fields": {
+        "description": "Un collier décoratif dont la valeur provient de ses matières et du travail accompli."
+      }
+    },
+    {
+      "id": "bracelet",
+      "name": "Bracelet",
+      "weight": 4,
+      "fields": {
+        "description": "Un ornement de poignet bien ouvragé, destiné au commerce, à la parure ou aux cérémonies."
+      }
+    },
+    {
+      "id": "amulet",
+      "name": "Amulette",
+      "weight": 3,
+      "fields": {
+        "description": "Un pendentif façonné comme emblème protecteur, religieux ou personnel."
+      }
+    },
+    {
+      "id": "pearl_necklace",
+      "name": "Collier de perles",
+      "weight": 2,
+      "fields": {
+        "description": "Un rang de perles assorties, choisies pour l’uniformité de leur couleur et de leur éclat."
+      }
+    },
+    {
+      "id": "rare_spices",
+      "name": "Épices rares",
+      "weight": 3,
+      "fields": {
+        "description": "De petits sachets scellés d’épices parfumées qui valent bien davantage loin de leur région d’origine."
+      }
+    },
+    {
+      "id": "perfume",
+      "name": "Parfum",
+      "weight": 3,
+      "fields": {
+        "description": "Un flacon bouché contenant une fragrance concentrée composée par un parfumeur expérimenté."
+      }
     }
   ]
 }

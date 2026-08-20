@@ -282,6 +282,94 @@
       "fields": {
         "description": "Un composant organique inhabituel, comme un œil de crapaud ou une glande venimeuse."
       }
+    },
+    {
+      "id": "glass",
+      "name": "Verre",
+      "weight": 5,
+      "fields": {
+        "description": "matière transparente mais fragile utilisée pour les récipients, les fenêtres, les lentilles et la décoration."
+      }
+    },
+    {
+      "id": "clay",
+      "name": "Argile",
+      "weight": 5,
+      "fields": {
+        "description": "terre malléable façonnée en poteries, briques, tablettes, moules et sculptures."
+      }
+    },
+    {
+      "id": "wool",
+      "name": "Laine",
+      "weight": 5,
+      "fields": {
+        "description": "fibre animale chaude filée pour fabriquer vêtements, couvertures, rembourrages et feutre."
+      }
+    },
+    {
+      "id": "silk",
+      "name": "Soie",
+      "weight": 4,
+      "fields": {
+        "description": "fibre fine et résistante prisée pour les étoffes légères, les cordons, les broderies et les objets de luxe."
+      }
+    },
+    {
+      "id": "bone",
+      "name": "Os",
+      "weight": 4,
+      "fields": {
+        "description": "matière organique dure taillée en outils, manches, ornements, aiguilles et pièces de jeu."
+      }
+    },
+    {
+      "id": "salt",
+      "name": "Sel",
+      "weight": 5,
+      "fields": {
+        "description": "minéral essentiel employé pour assaisonner, conserver, commercer, soigner et tracer des limites rituelles."
+      }
+    },
+    {
+      "id": "coal",
+      "name": "Charbon",
+      "weight": 5,
+      "fields": {
+        "description": "combustible noir et dense utilisé dans les forges, les fours, le chauffage, les pigments et la filtration."
+      }
+    },
+    {
+      "id": "sulfur",
+      "name": "Soufre",
+      "weight": 3,
+      "fields": {
+        "description": "minéral jaune à l’odeur âcre utilisé en alchimie, en médecine, pour les fumigations et dans les mélanges incendiaires."
+      }
+    },
+    {
+      "id": "monster_hide",
+      "name": "Peau de monstre",
+      "weight": 2,
+      "fields": {
+        "description": "peau préservée d’une créature inhabituelle, recherchée pour sa texture, sa résistance ou sa rareté."
+      }
+    },
+    {
+      "id": "dragon_scales",
+      "name": "Écailles de dragon",
+      "weight": 1,
+      "fields": {
+        "description": "rares écailles imbriquées qui conservent une dureté remarquable et des traces de leur nature draconique."
+      }
+    },
+    {
+      "id": "dirt",
+      "name": "Terre",
+      "weight": 1,
+      "fields": {
+        "description": "sol meuble parfaitement ordinaire, jusqu’à ce que quelqu’un lui découvre une importance inattendue."
+      }
     }
   ]
 }

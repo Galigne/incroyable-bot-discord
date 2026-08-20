@@ -16,6 +16,12 @@ For example, `loot_weapons.json` has ID `weapons`, and references use
 `{{ weapons }}` rather than the filename. The current category families are
 `background`, `creature`, `loot`, `site`, `group`, and `modifier`.
 
+The unprefixed public `ability` generator is a standalone name-only vocabulary for
+statistics, skills, and other areas in which a character might improve. Its current
+entries are a useful starting set, not a closed mechanical skill list. Reuse
+`{{ ability.name }}` when content needs one such area, as with the generic ability
+potion, rather than duplicating fixed Strength, Speed, or skill-specific variants.
+
 ## Content guidelines
 
 Generators provide reusable inspiration rather than complete stories. Prefer

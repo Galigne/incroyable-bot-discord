@@ -70,8 +70,73 @@
     {
       "id": "healing_potion",
       "name": "Healing Potion",
+      "weight": 4,
       "fields": {
         "description": "A stabilized vial that aids recovery from an injury when used correctly."
+      }
+    },
+    {
+      "id": "strong_healing_potion",
+      "name": "Strong healing potion",
+      "weight": 2,
+      "fields": {
+        "description": "A concentrated restorative that can aid recovery from a serious injury; the exact recovery remains with the GM."
+      }
+    },
+    {
+      "id": "holy_water",
+      "name": "Holy water",
+      "weight": 3,
+      "fields": {
+        "description": "Consecrated water prepared for cleansing rites or confronting unholy influences; its exact effect remains with the GM."
+      }
+    },
+    {
+      "id": "incendiary_flask",
+      "name": "Incendiary flask",
+      "weight": 3,
+      "fields": {
+        "description": "A breakable flask whose sticky contents ignite when exposed to flame."
+      }
+    },
+    {
+      "id": "potion_of_fire_resistance",
+      "name": "Potion of fire resistance",
+      "weight": 2,
+      "fields": {
+        "description": "Temporarily helps the drinker withstand fire and extreme heat; the exact protection and duration remain with the GM."
+      }
+    },
+    {
+      "id": "potion_of_cold_resistance",
+      "name": "Potion of cold resistance",
+      "weight": 2,
+      "fields": {
+        "description": "Temporarily helps the drinker withstand cold and freezing conditions; the exact protection and duration remain with the GM."
+      }
+    },
+    {
+      "id": "potion_of_invisibility",
+      "name": "Potion of invisibility",
+      "weight": 1,
+      "fields": {
+        "description": "Temporarily makes the drinker difficult or impossible to see; the exact limits and duration remain with the GM."
+      }
+    },
+    {
+      "id": "potion_of_ability",
+      "name": "Potion of {{ ability.name }}",
+      "weight": 3,
+      "fields": {
+        "description": "Temporarily enhances the referenced ability; the exact magnitude and duration remain with the GM."
+      }
+    },
+    {
+      "id": "affliction_remedy",
+      "name": "Remedy for {{ affliction.name }}",
+      "weight": 2,
+      "fields": {
+        "description": "A specialized medicine, antidote, ritual preparation, or other treatment intended for the referenced affliction; its exact use remains with the GM."
       }
     },
     {

@@ -192,7 +192,7 @@
       "name": "Symbole sacré",
       "weight": 3,
       "fields": {
-        "description": "Un symbole associé à une foi, un serment, un ancêtre ou un idéal personnel."
+        "description": "Un emblème transportable dont la forme reprend ce symbole sacré : {{ religion.sacred_symbol }}"
       }
     },
     {
@@ -200,7 +200,7 @@
       "name": "Carte locale",
       "weight": 3,
       "fields": {
-        "description": "Une carte pratique mais imparfaite des environs."
+        "description": "Une carte pratique mais imparfaite représentant la région suivante : {{ region.name }}"
       }
     },
     {
@@ -238,6 +238,78 @@
       "name": "Papier de qualité",
       "fields": {
         "description": "Des feuilles et un parchemin vierges adaptés aux contrats, cartes, sorts ou faux documents."
+      }
+    },
+    {
+      "id": "backpack",
+      "name": "Sac à dos",
+      "weight": 8,
+      "fields": {
+        "description": "Un sac de voyage robuste muni de sangles et de plusieurs compartiments pratiques."
+      }
+    },
+    {
+      "id": "torches",
+      "name": "Torches",
+      "weight": 8,
+      "fields": {
+        "description": "Un faisceau de torches enduites de résine, prêtes à éclairer ou à allumer un feu plus important."
+      }
+    },
+    {
+      "id": "compass",
+      "name": "Boussole",
+      "weight": 4,
+      "fields": {
+        "description": "Une simple boussole magnétique rangée dans un boîtier protecteur."
+      }
+    },
+    {
+      "id": "cloak",
+      "name": "Cape",
+      "weight": 6,
+      "fields": {
+        "description": "Une cape de voyage résistante qui protège normalement du vent et de la pluie."
+      }
+    },
+    {
+      "id": "boots",
+      "name": "Bottes",
+      "weight": 6,
+      "fields": {
+        "description": "Une paire de bottes robustes et pratiques, adaptée aux longues journées de marche."
+      }
+    },
+    {
+      "id": "cooking_kit",
+      "name": "Nécessaire de cuisine",
+      "weight": 5,
+      "fields": {
+        "description": "Une petite marmite, une poêle, des ustensiles et le nécessaire pour préparer les repas en voyage."
+      }
+    },
+    {
+      "id": "sewing_repair_kit",
+      "name": "Nécessaire de couture et de réparation",
+      "weight": 5,
+      "fields": {
+        "description": "Des aiguilles, du fil, des pièces de tissu, une alêne et de petits outils pour raccommoder vêtements et matériel."
+      }
+    },
+    {
+      "id": "whetstone",
+      "name": "Pierre à aiguiser",
+      "weight": 5,
+      "fields": {
+        "description": "Une pierre abrasive fine pour entretenir les lames et les outils métalliques ordinaires."
+      }
+    },
+    {
+      "id": "empty_bottles_and_vials",
+      "name": "Bouteilles et fioles vides",
+      "weight": 5,
+      "fields": {
+        "description": "Plusieurs récipients propres munis d’un bouchon pour conserver échantillons, ingrédients ou préparations liquides."
       }
     }
   ]
