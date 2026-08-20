@@ -319,33 +319,32 @@ test('Discord reconnect reuses the client without duplicating listeners', async 
 	client.on('interaction', () => null);
 	const originalClient = client;
 
-	await reconnectClient(client, 'test-token', {
+	const reconnect = reconnectClient(client, 'test-token', {
 		log: message => diagnosticLogs.push(message),
 	});
+	await new Promise(resolve => setImmediate(resolve));
+	assert.deepEqual(calls, ['destroy']);
+	assert.deepEqual(diagnosticLogs, [
+		'[reload] discordReconnect: destruction invoked.',
+	]);
+
+	resolveDestruction();
+	await reconnect;
 	assert.equal(client, originalClient);
 	assert.deepEqual(calls, ['destroy', 'login:test-token']);
 	assert.equal(client.listenerCount('interaction'), 1);
 	assert.deepEqual(diagnosticLogs, [
 		'[reload] discordReconnect: destruction invoked.',
-		'[reload] discordReconnect: login beginning.',
-		'[reload] discordReconnect: login completed.',
-	]);
-
-	resolveDestruction();
-	await new Promise(resolve => setImmediate(resolve));
-	assert.deepEqual(diagnosticLogs, [
-		'[reload] discordReconnect: destruction invoked.',
-		'[reload] discordReconnect: login beginning.',
-		'[reload] discordReconnect: login completed.',
 		'[reload] discordReconnect: destruction completed.',
+		'[reload] discordReconnect: login beginning.',
+		'[reload] discordReconnect: login completed.',
 	]);
 });
 
-test('Discord reconnect logs asynchronous destruction rejection without changing login ordering', async () => {
+test('failed destruction prevents login and fails the discord reconnect stage', async () => {
 	const client = new EventEmitter();
 	const calls = [];
 	const diagnosticLogs = [];
-	const diagnosticErrors = [];
 	let rejectDestruction;
 	const destruction = new Promise((resolve, reject) => {
 		rejectDestruction = reject;
@@ -355,26 +354,56 @@ test('Discord reconnect logs asynchronous destruction rejection without changing
 		return destruction;
 	};
 	client.login = async token => calls.push(`login:${token}`);
-
-	await reconnectClient(client, 'test-token', {
-		error: (...parts) => diagnosticErrors.push(parts),
-		log: message => diagnosticLogs.push(message),
+	client.on('interaction', () => null);
+	const originalClient = client;
+	const logged = [];
+	const runtimeState = {
+		getConfig: () => ({ locale: 'en' }),
+	};
+	const operations = Object.fromEntries(
+		RELOAD_STAGES
+			.filter(id => id !== 'discordReconnect')
+			.map(id => [id, async () => undefined]),
+	);
+	const runtimeReloader = createRuntimeReloader({
+		client,
+		discordToken: 'startup-token',
+		logger: {
+			log: message => diagnosticLogs.push(message),
+			error: (...parts) => logged.push(parts),
+		},
+		operations,
+		runtimeState,
 	});
-	assert.deepEqual(calls, ['destroy', 'login:test-token']);
-	assert.deepEqual(diagnosticLogs, [
-		'[reload] discordReconnect: destruction invoked.',
-		'[reload] discordReconnect: login beginning.',
-		'[reload] discordReconnect: login completed.',
-	]);
-	assert.deepEqual(diagnosticErrors, []);
 
 	const destructionError = new Error('destroy failed');
-	rejectDestruction(destructionError);
+	const reload = runtimeReloader.reload();
 	await new Promise(resolve => setImmediate(resolve));
-	assert.deepEqual(diagnosticErrors, [[
-		'[reload] discordReconnect: destruction failed:',
+	assert.deepEqual(calls, ['destroy']);
+	rejectDestruction(destructionError);
+	const outcome = await reload;
+
+	assert.equal(client, originalClient);
+	assert.equal(client.listenerCount('interaction'), 1);
+	assert.deepEqual(calls, ['destroy']);
+	assert.equal(outcome.success, false);
+	assert.deepEqual(
+		outcome.stages.filter(stage => !stage.success).map(stage => stage.id),
+		['discordReconnect'],
+	);
+	assert.deepEqual(logged, [[
+		'[reload] discordReconnect failed:',
 		destructionError,
 	]]);
+	assert.equal(
+		diagnosticLogs.includes('[reload] discordReconnect: login beginning.'),
+		false,
+	);
+	assert.equal(
+		diagnosticLogs.includes('[reload] discordReconnect: destruction completed.'),
+		false,
+	);
+	assert.equal(diagnosticLogs.at(-1), '[reload] lifecycle finished.');
 });
 
 test('/reload validates a changed token but reconnects with the startup token', async () => {
