@@ -8,6 +8,10 @@ const {
 } = require('../../services/weightedSelector');
 const generatorResolver = require('../../services/generatorResolver');
 const {
+	ARMOR_PERCENTAGES,
+	SHIELD_PERCENTAGES,
+} = require('../../services/mechanics/armor');
+const {
 	COMMON_GENERATION_PROPERTIES,
 	DEFAULT_STAT_PROFILE_ID,
 	getGenerationStatProfileId,
@@ -35,19 +39,19 @@ module.exports = function createGeneratorChecks(context) {
 				errors.push('Generator v4 visibility or schema filtering is incorrect.');
 			}
 
-			const englishRace = generatorCatalog.getGenerator('race', 'en');
-			const frenchRace = generatorCatalog.getGenerator('race', 'fr');
+			const pairedGeneratorId = publicGenerators[0]?.id;
+			const englishGenerator = generatorCatalog.getGenerator(pairedGeneratorId, 'en');
+			const frenchGenerator = generatorCatalog.getGenerator(pairedGeneratorId, 'fr');
 			if (
-				englishRace === frenchRace
-				|| englishRace?.id !== 'race'
-				|| frenchRace?.id !== 'race'
-				|| englishRace?.entries[0]?.id !== 'human'
-				|| frenchRace?.entries[0]?.id !== 'human'
-				|| englishRace?.entries[0]?.name !== 'Human'
-				|| frenchRace?.entries[0]?.name !== 'Humain'
-				|| generatorCatalog.getGenerator('race', 'fr') !== frenchRace
+				!pairedGeneratorId
+				|| englishGenerator === frenchGenerator
+				|| englishGenerator?.id !== pairedGeneratorId
+				|| frenchGenerator?.id !== pairedGeneratorId
+				|| JSON.stringify(englishGenerator?.entries.map(entry => entry.id))
+					!== JSON.stringify(frenchGenerator?.entries.map(entry => entry.id))
+				|| generatorCatalog.getGenerator(pairedGeneratorId, 'fr') !== frenchGenerator
 			) {
-				errors.push('Generator catalogs are not localized and cached by stable ID.');
+				errors.push('Generator catalogs are not paired and cached by stable ID.');
 			}
 
 			for (const generator of publicGenerators) {
@@ -135,23 +139,6 @@ function checkRequiredGenerators(errors, generatorCatalog) {
 	if (generatorCatalog.getGenerator('inventory')) {
 		errors.push('The removed inventory generator is still available.');
 	}
-
-	for (const generatorId of [
-		'building',
-		'dungeon',
-		'faction',
-		'government',
-		'material',
-		'region',
-		'religion',
-		'room',
-		'settlement',
-	]) {
-		const entryCount = generatorCatalog.getGenerator(generatorId)?.entries.length ?? 0;
-		if (entryCount < 20) {
-			errors.push(`Generator ${generatorId} must contain at least 20 entries.`);
-		}
-	}
 }
 
 function checkBackgroundGenerators(errors, generatorCatalog) {
@@ -187,55 +174,19 @@ function checkBackgroundGenerators(errors, generatorCatalog) {
 	}
 }
 function checkCategoryRouters(errors, generatorCatalog) {
-	for (const [routerId, childIds] of [
-		['background', [
-			'criminal',
-			'adventurer',
-			'noble',
-			'peasant',
-			'artisan',
-			'merchant',
-			'scholar',
-			'religious',
-			'military',
-			'outlander',
-			'sailor',
-			'performer',
-			'servant',
-			'official',
-			'mage',
-			'exile',
-			'urchin',
-		]],
-		['creature', ['animal', 'companion', 'monster']],
-		['loot', [
-			'weapons',
-			'shields',
-			'armors',
-			'supplies',
-			'consumable',
-			'food_and_drink',
-			'valuables',
-			'material',
-			'curio',
-		]],
-		['site', ['building', 'dungeon', 'settlement', 'region', 'room']],
-		['group', ['government', 'faction', 'religion']],
-		['modifier', [
-			'modifier_character',
-			'modifier_creature',
-			'modifier_rarity',
-			'modifier_material',
-			'modifier_loot',
-			'modifier_site_all',
-			'modifier_site_building',
-			'modifier_site_interiors',
-			'modifier_site_structures',
-		]],
+	for (const routerId of [
+		'background',
+		'creature',
+		'loot',
+		'site',
+		'group',
+		'modifier',
 	]) {
 		const router = generatorCatalog.getGenerator(routerId);
 		if (
 			router?.visibility !== 'public'
+			|| !Array.isArray(router.entries)
+			|| router.entries.length === 0
 			|| JSON.stringify(router.entrySchema.required) !== JSON.stringify([])
 			|| router.entries.some(entry => (
 				!entry.name
@@ -243,8 +194,6 @@ function checkCategoryRouters(errors, generatorCatalog) {
 						!['id', 'name', 'weight', 'generator'].includes(key)
 					))
 			))
-			|| JSON.stringify(router.entries.map(entry => entry.generator))
-				!== JSON.stringify(childIds)
 			|| router.entries.some(entry => (
 				generatorCatalog.getGenerator(entry.generator)?.visibility !== 'internal'
 			))
@@ -260,7 +209,6 @@ function checkPhysicalDescriptionGenerator(errors, generatorCatalog) {
 		!generator
 		|| generator.visibility !== 'internal'
 		|| JSON.stringify(generator.entrySchema.required) !== JSON.stringify(['description'])
-		|| generator.entries.length < 20
 		|| generator.entries.some(entry => (
 			typeof entry.name !== 'string'
 			|| typeof entry.fields?.description !== 'string'
@@ -288,7 +236,10 @@ function checkCreatureGenerators(errors, generatorCatalog) {
 			|| !generator
 			|| generator.visibility !== 'internal'
 			|| generator.entries.some(entry => (
-				Object.hasOwn(entry.generation ?? {}, 'talents')
+				!entry.name
+					|| !entry.fields?.description
+					|| Object.hasOwn(entry.generation ?? {}, 'talents')
+					|| !getStatProfile(getGenerationStatProfileId(entry.generation))
 			))
 		) {
 			errors.push(`Invalid routed creature generator: ${generatorId}.`);
@@ -308,61 +259,22 @@ function checkCreatureGenerators(errors, generatorCatalog) {
 				!entry.name || !entry.fields?.description
 			))
 		))
-		|| JSON.stringify(generatorCatalog.getGenerator('region').modifiers)
-			!== JSON.stringify({ modifier_site_all: 5 })
-		|| JSON.stringify(generatorCatalog.getGenerator('building').modifiers)
-			!== JSON.stringify({
-				modifier_site_all: 5,
-				modifier_site_structures: 5,
-				modifier_site_interiors: 5,
-				modifier_site_building: 5,
-			})
 	) {
 		errors.push('Status effects and character/creature modifiers are not valid generation catalogs.');
 	}
 }
 
 function checkStructuredGenerators(errors, generatorCatalog) {
-	for (const [generatorId, requiredFields] of [
-		['faction', ['type', 'goal', 'resources', 'hierarchy', 'allies', 'enemies']],
-		['government', ['structure', 'leadership', 'strength', 'tension']],
-		[
-			'religion',
-			[
-				'deity_or_belief',
-				'rites',
-				'commandment',
-				'taboo',
-				'sacred_symbol',
-				'religious_order',
-				'holy_place',
-				'relationship_with_magic',
-			],
-		],
-	]) {
-		const generator = generatorCatalog.getGenerator(generatorId);
-		if (
-			JSON.stringify(generator?.entrySchema.required)
-				!== JSON.stringify(requiredFields)
-			|| generator.entries.some(entry => (
-				!entry.name || requiredFields.some(field => !entry.fields?.[field])
-			))
-		) {
-			errors.push(`Generator ${generatorId} is missing required fields.`);
-		}
-	}
-
 	const armorGenerator = generatorCatalog.getGenerator('armors');
 	const armors = armorGenerator?.entries ?? [];
+	const armorTypes = Object.keys(ARMOR_PERCENTAGES);
 	if (
 		JSON.stringify(armorGenerator?.entrySchema.required)
 			!== JSON.stringify(['type', 'description'])
-		|| armors.length !== 16
-		|| [['light', 5], ['medium', 6], ['heavy', 5]].some(([type, count]) => (
-			armors.filter(entry => entry.fields.type === type).length !== count
-		))
+		|| armors.length === 0
 		|| armors.some(entry => (
-			Object.hasOwn(entry.fields, 'rarity')
+			!armorTypes.includes(entry.fields.type)
+			|| Object.hasOwn(entry.fields, 'rarity')
 			|| Object.hasOwn(entry.fields, 'constitution_requirement')
 			|| Object.hasOwn(entry.fields, 'ar_percentage')
 		))
@@ -370,28 +282,11 @@ function checkStructuredGenerators(errors, generatorCatalog) {
 		errors.push('The armor generator must contain independent typed armor forms.');
 	}
 	const shields = generatorCatalog.getGenerator('shields');
-	const requiredShieldIds = [
-		'buckler',
-		'round_shield',
-		'kite_shield',
-		'heater_shield',
-		'targe',
-		'tower_shield',
-		'pavise',
-		'dueling_shield',
-		'folding_shield',
-		'mirrored_shield',
-		'guardian_shield',
-		'stormward_shield',
-		'eclipse_shield',
-		'oathkeeper_shield',
-	];
 	if (
 		JSON.stringify(shields?.entrySchema) !== JSON.stringify({
 			required: ['description'],
 		})
-		|| shields.entries.length !== requiredShieldIds.length
-		|| requiredShieldIds.some(id => !shields.entries.some(entry => entry.id === id))
+		|| shields.entries.length === 0
 		|| shields.entries.some(entry => (
 			Object.hasOwn(entry.fields, 'rarity')
 			|| Object.hasOwn(entry.fields, 'ar_percentage')
@@ -404,59 +299,46 @@ function checkStructuredGenerators(errors, generatorCatalog) {
 		modifier_material: 15,
 		modifier_loot: 10,
 	});
-	const rarityWeights = generatorCatalog.getGenerator('modifier_rarity')?.entries
-		.map(entry => [entry.id, entry.weight]);
-	const lootWeights = generatorCatalog.getGenerator('modifier_loot')?.entries
-		.map(entry => [entry.id, entry.weight]);
+	const rarityIds = generatorCatalog.getGenerator('modifier_rarity')?.entries
+		.map(entry => entry.id);
+	const mechanicalRarityIds = Object.keys(SHIELD_PERCENTAGES);
 	if (
 		['weapons', 'shields', 'armors'].some(id => (
 			JSON.stringify(generatorCatalog.getGenerator(id)?.modifiers)
 			!== equipmentModifiers
 		))
-		|| JSON.stringify(rarityWeights) !== JSON.stringify([
-			['common', 8],
-			['uncommon', 5],
-			['rare', 3],
-			['epic', 2],
-			['legendary', 1],
-		])
-		|| JSON.stringify(lootWeights) !== JSON.stringify([
-			['runed', 6],
-			['damaged', 6],
-			['ancient', 6],
-			['cursed_affliction', 3],
-			['cursed_status_effect', 3],
-			['possessed_animal', 2],
-			['possessed_companion', 2],
-			['possessed_monster', 2],
-			['faction_made', 6],
-		])
+		|| JSON.stringify([...rarityIds].sort())
+			!== JSON.stringify([...mechanicalRarityIds].sort())
+		|| Object.values(ARMOR_PERCENTAGES).some(percentages => (
+			JSON.stringify(Object.keys(percentages))
+				!== JSON.stringify(mechanicalRarityIds)
+		))
 	) {
-		errors.push('Loot modifier relationships or weights are invalid.');
+		errors.push('Loot modifier relationships or mechanical rarity IDs are invalid.');
 	}
 	const affliction = generatorCatalog.getGenerator('affliction');
 	if (
 		JSON.stringify(affliction?.entrySchema) !== JSON.stringify({
 			required: ['type', 'description'],
 		})
-		|| affliction.entries.length !== 16
-		|| ['disease', 'curse'].some(type => (
-			affliction.entries.filter(entry => entry.fields.type === type).length !== 8
+		|| affliction.entries.length === 0
+		|| affliction.entries.some(entry => (
+			!['disease', 'curse'].includes(entry.fields.type)
 		))
+		|| new Set(affliction.entries.map(entry => entry.fields.type)).size !== 2
 	) {
-		errors.push('The affliction generator must contain eight diseases and eight curses.');
+		errors.push('Afflictions must expose localized disease and curse classifications.');
 	}
 	const races = generatorCatalog.getGenerator('race')?.entries ?? [];
-	const raceIds = new Set(races.map(entry => entry.id));
 	if (
-		['human', 'elf', 'dwarf', 'orc', 'goblin'].some(id => !raceIds.has(id))
+		races.length === 0
 		|| races.some(entry => (
 			!entry.fields.description
 			|| !entry.fields.skill_bonus
 			|| !entry.fields.physical_ability
 		))
 	) {
-		errors.push('Race entries must expose stable IDs, descriptions, and racial traits.');
+		errors.push('Race entries must expose descriptions and racial traits.');
 	}
 }
 

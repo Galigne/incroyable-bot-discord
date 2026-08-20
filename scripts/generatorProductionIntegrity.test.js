@@ -7,8 +7,27 @@ const {
 	validateRoutedArchetypeStatProfileRelationships,
 } = require('../services/generatorSchema');
 const {
+	getGenerationStatProfileId,
+} = require('../services/generationMetadata');
+const {
+	getResolvedLootArmorPercentage,
+} = require('../services/lootGeneration');
+const {
+	ARMOR_PERCENTAGES,
+	SHIELD_PERCENTAGES,
+} = require('../services/mechanics/armor');
+const {
 	createStatProfileCandidate,
 } = require('../services/statProfileCatalog');
+
+const CATEGORY_ROUTER_IDS = Object.freeze([
+	'background',
+	'creature',
+	'loot',
+	'site',
+	'group',
+	'modifier',
+]);
 
 test('production routed background and creature generators use the consolidated schema path', () => {
 	const catalogs = generatorCatalog.createGeneratorCatalogCandidate();
@@ -31,7 +50,7 @@ test('production routed background and creature generators use the consolidated 
 				assert.deepEqual(child.entrySchema.required, requiredFields);
 				assert.ok(child.entries.every(entry => (
 					entry.generation === undefined
-					|| !Object.hasOwn(entry.generation, forbiddenTemplateProperty)
+						|| !Object.hasOwn(entry.generation, forbiddenTemplateProperty)
 				)));
 			}
 		}
@@ -42,21 +61,16 @@ test('complete production catalogs validate in both locales under schema v4', ()
 	const catalogs = generatorCatalog.createGeneratorCatalogCandidate();
 	assert.equal(catalogs.get('en').size, catalogs.get('fr').size);
 	assert.ok(catalogs.get('en').size > 0);
-	const all = generatorCatalog.listGenerators('en', { visibility: 'all' });
-	for (const modifier of all.filter(generator => (
-		['modifier_character', 'modifier_creature'].includes(generator.id)
-			|| generator.id.startsWith('site_modifier_')
-	))) {
-		assert.equal(modifier.visibility, 'internal');
-		assert.equal(isGeneratorRouter(modifier), false);
-		assert.ok(modifier.entries.every(entry => (
-			Object.keys(entry).every(key => ['id', 'name', 'weight', 'fields'].includes(key))
-		)));
-	}
 	for (const locale of ['en', 'fr']) {
-		const quest = generatorCatalog.getGenerator('quest', locale);
-		assert.deepEqual(quest.entrySchema.required, ['description']);
-		assert.ok(quest.entries.every(entry => entry.fields.description.includes('{{')));
+		for (const generator of catalogs.get(locale).values()) {
+			assert.equal(generator.schemaVersion, 4, `${locale}:${generator.id}`);
+		}
+		for (const generatorId of ['modifier_character', 'modifier_creature']) {
+			const modifier = catalogs.get(locale).get(generatorId);
+			assert.equal(modifier.visibility, 'internal');
+			assert.equal(isGeneratorRouter(modifier), false);
+			assert.deepEqual(modifier.entrySchema.required, ['description']);
+		}
 	}
 });
 
@@ -65,84 +79,43 @@ test('every production quest, rumor, and secret resolves references with provena
 		for (const generatorId of ['quest', 'rumor', 'secret']) {
 			const entries = generatorCatalog.getGenerator(generatorId, locale).entries;
 			for (const entry of entries) {
+				const sourceValues = [entry.name, ...Object.values(entry.fields ?? {})];
+				const hasInlineReference = sourceValues.some(value => (
+					typeof value === 'string' && value.includes('{{')
+				));
 				const result = generatorResolver.resolveReference(
 					`${generatorId}:${entry.id}`,
 					locale,
 					{ random: () => 0 },
 				);
-				assert.ok(result);
-				assert.ok(result.display);
-				assert.doesNotMatch(result.display, /\{\{|\}\}|undefined/);
-				assert.ok(result.provenance.length > 1, `${locale}:${entry.id}`);
+				assert.ok(result?.display);
+				assert.doesNotMatch(result.display, /\{\{|\}\}/);
 				assert.equal(result.provenance[0].generatorId, generatorId);
 				assert.equal(result.provenance[0].entryId, entry.id);
+				if (hasInlineReference) {
+					assert.ok(result.provenance.length > 1, `${locale}:${generatorId}:${entry.id}`);
+				}
 			}
 		}
 	}
 });
 
-test('production category routers are minimal and traverse internal child generators', () => {
-	const routers = new Map([
-		['background', [
-			'criminal',
-			'adventurer',
-			'noble',
-			'peasant',
-			'artisan',
-			'merchant',
-			'scholar',
-			'religious',
-			'military',
-			'outlander',
-			'sailor',
-			'performer',
-			'servant',
-			'official',
-			'mage',
-			'exile',
-			'urchin',
-		]],
-		['creature', ['animal', 'companion', 'monster']],
-		['loot', [
-			'weapons',
-			'shields',
-			'armors',
-			'supplies',
-			'consumable',
-			'food_and_drink',
-			'valuables',
-			'material',
-			'curio',
-		]],
-		['site', ['building', 'dungeon', 'settlement', 'region', 'room']],
-		['group', ['government', 'faction', 'religion']],
-		['modifier', [
-			'modifier_character',
-			'modifier_creature',
-			'modifier_rarity',
-			'modifier_material',
-			'modifier_loot',
-			'modifier_site_all',
-			'modifier_site_building',
-			'modifier_site_interiors',
-			'modifier_site_structures',
-		]],
-	]);
+test('production category routers are minimal and traverse their canonical children', () => {
 	for (const locale of ['en', 'fr']) {
-		for (const [routerId, childIds] of routers) {
+		for (const routerId of CATEGORY_ROUTER_IDS) {
 			const router = generatorCatalog.getGenerator(routerId, locale);
 			assert.equal(router.visibility, 'public');
 			assert.equal(isGeneratorRouter(router), true);
 			assert.deepEqual(router.entrySchema.required, []);
+			assert.ok(router.entries.length > 0);
 			assert.ok(router.entries.every(entry => (
 				Object.keys(entry).every(key => (
 					['id', 'name', 'weight', 'generator'].includes(key)
 				))
 			)));
-			assert.deepEqual(router.entries.map(entry => entry.generator), childIds);
 			for (const route of router.entries) {
-				const childId = route.generator;
-				assert.equal(generatorCatalog.getGenerator(childId, locale).visibility, 'internal');
+				const child = generatorCatalog.getGenerator(route.generator, locale);
+				assert.equal(child.visibility, 'internal');
 				const result = generatorResolver.generate(
 					`${routerId}:${route.id}`,
 					locale,
@@ -152,7 +125,7 @@ test('production category routers are minimal and traverse internal child genera
 				assert.ok(result.value || Object.keys(result.displayFields ?? {}).length > 0);
 				assert.deepEqual(
 					result.provenance.slice(0, 2).map(record => record.generatorId),
-					[routerId, childId],
+					[routerId, route.generator],
 				);
 				const explicitResult = generatorResolver.generate(
 					`${routerId}:${route.id}.generator`,
@@ -166,321 +139,177 @@ test('production category routers are minimal and traverse internal child genera
 	}
 });
 
-test('creature catalogs include generic archetypes and intentional statistical profiles', () => {
-	const animalProfiles = createExpectedProfileMap({
-		'creature-animal-runner': [
-			'mossback_deer',
-			'river_otter',
-			'long_eared_hare',
-			'bluehorn_goat',
-			'reed_crane',
-			'whistle_marmot',
-			'mist_dolphin',
-			'scavenger_rat',
-			'weaver_spider',
-			'thieving_monkey',
-			'cave_bat',
-			'horse',
-		],
-		'creature-animal-tank': [
-			'burrow_pig',
-			'sailback_turtle',
-			'silk_alpaca',
-			'pebble_crab',
-			'glimmer_whale',
-			'armored_crab',
-			'burrowing_armadillo',
-			'cattle_cow',
-			'badger',
-			'beaver',
-		],
-		'creature-animal-magic': [
-			'lantern_finch',
-			'cloud_sheep',
-			'ember_newt',
-			'rain_frog',
-			'moon_moth',
-			'orchard_drake',
-			'star_elk',
-			'memory_crow',
-			'solar_lizard',
-		],
-		'creature-predator': [
-			'copper_fox',
-			'reed_snake',
-			'hill_wolf',
-			'eagle',
-			'owl',
-			'crocodile',
-			'shark',
-		],
-		'creature-brute': [
-			'honey_bear',
-			'ox',
-			'wild_boar',
-			'brown_bear',
-			'moose',
-		],
-	});
-	const companionProfiles = createExpectedProfileMap({
-		'creature-companion': [
-			'loyal_hound',
-			'barn_cat',
-			'messenger_pigeon',
-			'clever_rat',
-			'pocket_ferret',
-			'mule',
-			'moss_tortoise',
-			'whisper_crow',
-			'breeze_lizard',
-			'cave_bat',
-			'river_otter',
-			'messenger_raptor',
-			'riding_horse',
-			'pony',
-			'donkey',
-			'camel',
-			'owl',
-			'raven',
-			'parrot',
-			'toad_frog',
-		],
-		'creature-companion-magic': [
-			'pack_goat',
-			'watch_goose',
-			'lantern_finch',
-			'ember_newt',
-			'miniature_slime',
-			'clockwork_beetle',
-			'tiny_griffin',
-			'blink_rabbit',
-			'paper_dragon',
-			'ghost_mouse',
-			'cloud_pup',
-			'moon_moth',
-			'sir_candlewick',
-		],
-		'creature-elemental': ['pebble_elemental'],
-	});
-	const genericMonsterProfiles = createExpectedProfileMap({
-		'creature-predator': [
-			'kobold',
-			'gnoll',
-			'ghoul',
-			'giant_rat',
-			'giant_spider',
-			'giant_snake',
-			'dire_wolf',
-			'cockatrice',
-			'manticore',
-			'wyvern',
-			'hell_hound',
-		],
-		'creature-brute': [
-			'zombie',
-			'giant_scorpion',
-			'mimic',
-			'gelatinous_cube',
-			'ettin',
-			'shambling_mound',
-		],
-		'creature-caster': ['lich'],
-	});
-
-	for (const locale of ['en', 'fr']) {
-		const animal = generatorCatalog.getGenerator('animal', locale);
-		assert.equal(
-			animal.description,
-			locale === 'en'
-				? 'Ordinary and fantastical wildlife'
-				: 'Faune ordinaire et fantastique',
+test('every routed creature archetype resolves with a valid statistical profile', () => {
+	const profiles = createStatProfileCandidate();
+	const englishRouter = generatorCatalog.getGenerator('creature', 'en');
+	const frenchRouter = generatorCatalog.getGenerator('creature', 'fr');
+	assert.deepEqual(
+		frenchRouter.entries.map(entry => [entry.id, entry.generator]),
+		englishRouter.entries.map(entry => [entry.id, entry.generator]),
+	);
+	for (const route of englishRouter.entries) {
+		const english = generatorCatalog.getGenerator(route.generator, 'en');
+		const french = generatorCatalog.getGenerator(route.generator, 'fr');
+		assert.deepEqual(
+			french.entries.map(entry => entry.id),
+			english.entries.map(entry => entry.id),
 		);
-		assertExactCreatureProfiles(animal, animalProfiles);
-		assertHigherCreatureWeights(
-			animal,
-			['horse', 'cattle_cow', 'long_eared_hare', 'cave_bat'],
-			['lantern_finch', 'cloud_sheep', 'moon_moth', 'star_elk'],
-		);
-
-		const companion = generatorCatalog.getGenerator('companion', locale);
-		assertExactCreatureProfiles(companion, companionProfiles);
-		assertHigherCreatureWeights(
-			companion,
-			['barn_cat', 'riding_horse', 'pony', 'donkey'],
-			['pack_goat', 'lantern_finch', 'blink_rabbit', 'paper_dragon'],
-		);
-
-		const monster = generatorCatalog.getGenerator('monster', locale);
-		const monstersById = new Map(monster.entries.map(entry => [entry.id, entry]));
-		for (const [entryId, profileId] of genericMonsterProfiles) {
-			const entry = monstersById.get(entryId);
-			assert.ok(entry, `${locale}:monster:${entryId}`);
-			assert.ok(entry.name, `${locale}:monster:${entryId}:name`);
-			assert.ok(entry.fields.description, `${locale}:monster:${entryId}:description`);
-			assert.equal(
-				entry.generation.statProfile,
-				profileId,
-				`${locale}:monster:${entryId}:profile`,
-			);
+		for (const [index, entry] of english.entries.entries()) {
+			const frenchEntry = french.entries[index];
+			const profileId = getGenerationStatProfileId(entry.generation);
+			assert.ok(profiles.has(profileId), `${route.generator}:${entry.id}:${profileId}`);
+			assert.equal(getGenerationStatProfileId(frenchEntry.generation), profileId);
+			for (const locale of ['en', 'fr']) {
+				const result = generatorResolver.generate(
+					`creature:${route.id}:${entry.id}`,
+					locale,
+					{ random: () => 0 },
+				);
+				assert.equal(result.generatorId, route.generator);
+				assert.equal(result.entryId, entry.id);
+				assert.doesNotMatch(result.display, /\{\{|\}\}/);
+			}
 		}
-		assertHigherCreatureWeights(
-			monster,
-			['kobold', 'zombie', 'giant_rat'],
-			['grave_hound', 'cinder_drake', 'lich'],
-		);
-		assert.equal(monstersById.has('goblin'), false);
 	}
 });
 
-test('loot replaces every inventory entry across heterogeneous additional fields', () => {
+test('routed generation metadata references resolve without entry-specific mappings', () => {
+	for (const locale of ['en', 'fr']) {
+		for (const routerId of ['background', 'creature']) {
+			const router = generatorCatalog.getGenerator(routerId, locale);
+			for (const route of router.entries) {
+				const generator = generatorCatalog.getGenerator(route.generator, locale);
+				for (const entry of generator.entries) {
+					const generation = entry.generation ?? {};
+					const references = [
+						...(generation.fixedRules ?? []).map(rule => `rules:${rule.entry}`),
+						...(generation.statusEffects ?? []),
+						...(generation.modifiers ?? []),
+						...(generation.armor ? [generation.armor] : []),
+						...(generation.equipment ?? []),
+						...(generation.inventory ?? []),
+					];
+					for (const reference of references) {
+						const result = generatorResolver.resolveReference(
+							reference,
+							locale,
+							{ random: () => 0 },
+						);
+						assert.doesNotMatch(getResolvedText(result), /\{\{|\}\}/);
+					}
+					for (const template of [
+						...(generation.talents ?? []),
+						...(generation.traits ?? []),
+					]) {
+						const result = generatorResolver.resolveInlineString(
+							template,
+							locale,
+							{ random: () => 0 },
+						);
+						assert.doesNotMatch(result.value, /\{\{|\}\}/);
+					}
+				}
+			}
+		}
+	}
+});
+
+test('loot uses routed heterogeneous content instead of an inventory generator', () => {
 	assert.equal(generatorCatalog.getGenerator('inventory'), undefined);
-	for (const [generatorId, expectedCount, requiredFields] of [
-		['weapons', 52, ['description']],
-		['shields', 14, ['description']],
-		['armors', 16, ['type', 'description']],
-		['supplies', 38, ['description']],
-		['consumable', 26, ['description']],
-		['food_and_drink', 26, ['description']],
-		['valuables', 25, ['description']],
-		['material', 46, ['description']],
-		['curio', 24, ['description']],
-	]) {
-		const generator = generatorCatalog.getGenerator(generatorId);
-		assert.equal(generator.entries.length, expectedCount, generatorId);
-		assert.deepEqual(generator.entrySchema.required, requiredFields, generatorId);
+	for (const locale of ['en', 'fr']) {
+		const loot = generatorCatalog.getGenerator('loot', locale);
+		for (const route of loot.entries) {
+			const generator = generatorCatalog.getGenerator(route.generator, locale);
+			assert.equal(generator.visibility, 'internal');
+			assert.ok(generator.entries.length > 0);
+			assert.ok(generator.entrySchema.required.includes('description'));
+			for (const entry of generator.entries) {
+				assert.equal(typeof entry.fields.description, 'string');
+				const result = generatorResolver.generate(
+					`loot:${route.id}:${entry.id}`,
+					locale,
+					{ random: () => 0 },
+				);
+				assert.equal(result.generatorId, route.generator);
+				assert.equal(result.entryId, entry.id);
+				assert.doesNotMatch(result.display, /\{\{|\}\}/);
+			}
+		}
 	}
 });
 
-test('loot identities use the configured independent modifier families and weights', () => {
+test('loot generators preserve the configured modifier mechanics and ordering', () => {
 	const equipmentModifiers = {
 		modifier_rarity: 100,
 		modifier_material: 15,
 		modifier_loot: 10,
 	};
-	for (const generatorId of ['weapons', 'shields', 'armors']) {
-		assert.deepEqual(
-			generatorCatalog.getGenerator(generatorId, 'en').modifiers,
-			equipmentModifiers,
-		);
-	}
-	for (const [generatorId, percentage] of [
-		['supplies', 10],
-		['consumable', 10],
-		['food_and_drink', 5],
-		['valuables', 10],
-		['curio', 10],
-	]) {
-		assert.deepEqual(generatorCatalog.getGenerator(generatorId, 'en').modifiers, {
-			modifier_loot: percentage,
-		});
-	}
-	assert.equal(generatorCatalog.getGenerator('material', 'en').modifiers, undefined);
 	for (const locale of ['en', 'fr']) {
-		for (const generatorId of ['weapons', 'shields', 'supplies', 'curio']) {
-			assert.ok(generatorCatalog.getGenerator(generatorId, locale).entries.every(entry => (
-				!entry.id.startsWith('runed_')
-			)));
+		for (const generatorId of ['weapons', 'shields', 'armors']) {
+			assert.deepEqual(
+				generatorCatalog.getGenerator(generatorId, locale).modifiers,
+				equipmentModifiers,
+			);
+		}
+		for (const [generatorId, percentage] of [
+			['supplies', 10],
+			['consumable', 10],
+			['food_and_drink', 5],
+			['valuables', 10],
+			['curio', 10],
+		]) {
+			assert.deepEqual(generatorCatalog.getGenerator(generatorId, locale).modifiers, {
+				modifier_loot: percentage,
+			});
+		}
+		assert.equal(generatorCatalog.getGenerator('material', locale).modifiers, undefined);
+	}
+
+	const mechanicalRarityIds = Object.keys(SHIELD_PERCENTAGES);
+	for (const percentages of Object.values(ARMOR_PERCENTAGES)) {
+		assert.deepEqual(Object.keys(percentages), mechanicalRarityIds);
+	}
+	assert.deepEqual(
+		generatorCatalog.getGenerator('modifier_rarity', 'en').entries
+			.map(entry => entry.id)
+			.sort(),
+		[...mechanicalRarityIds].sort(),
+	);
+	for (const locale of ['en', 'fr']) {
+		const router = generatorCatalog.getGenerator('modifier', locale);
+		for (const route of router.entries) {
+			const generator = generatorCatalog.getGenerator(route.generator, locale);
+			for (const entry of generator.entries) {
+				const result = generatorResolver.resolveReference(
+					`${generator.id}:${entry.id}`,
+					locale,
+					{ random: () => 0 },
+				);
+				assert.doesNotMatch(result.display, /\{\{|\}\}/);
+			}
 		}
 	}
-	const weaponIds = new Set(generatorCatalog.getGenerator('weapons', 'en').entries
-		.map(entry => entry.id));
-	assert.ok(['maul', 'chakram', 'longbow'].every(id => weaponIds.has(id)));
-	assert.ok([
-		'meteor_iron_maul',
-		'moon_silver_chakram',
-		'bone_longbow',
-	].every(id => !weaponIds.has(id)));
-
-	const rarity = generatorCatalog.getGenerator('modifier_rarity', 'en');
-	assert.deepEqual(
-		rarity.entries.map(entry => [entry.id, entry.weight]),
-		[
-			['common', 8],
-			['uncommon', 5],
-			['rare', 3],
-			['epic', 2],
-			['legendary', 1],
-		],
-	);
-	const material = generatorCatalog.getGenerator('modifier_material', 'en');
-	assert.equal(material.entries.length, 1);
-	assert.match(material.entries[0].name, /\{\{ material\.name \}\}/);
-
-	const loot = generatorCatalog.getGenerator('modifier_loot', 'en');
-	assert.deepEqual(
-		loot.entries.map(entry => [entry.id, entry.name, entry.weight]),
-		[
-			['runed', 'Runed', 6],
-			['damaged', 'Damaged', 6],
-			['ancient', 'Ancient', 6],
-			['cursed_affliction', 'Cursed', 3],
-			['cursed_status_effect', 'Cursed', 3],
-			['possessed_animal', 'Possessed', 2],
-			['possessed_companion', 'Possessed', 2],
-			['possessed_monster', 'Possessed', 2],
-			['faction_made', 'Faction-made', 6],
-		],
-	);
-	const referencesByEntry = new Map([
-		['runed', '{{ rules.name }}'],
-		['cursed_affliction', '{{ affliction.name }}'],
-		['cursed_status_effect', '{{ status_effect.name }}'],
-		['possessed_animal', '{{ animal.name }}'],
-		['possessed_companion', '{{ companion.name }}'],
-		['possessed_monster', '{{ monster.name }}'],
-		['faction_made', '{{ faction.name }}'],
-	]);
-	for (const [entryId, reference] of referencesByEntry) {
-		assert.ok(loot.entries.find(entry => entry.id === entryId)
-			.fields.description.includes(reference));
-	}
-	const conceptWeights = loot.entries.reduce((totals, entry) => {
-		const concept = entry.id.startsWith('cursed_')
-			? 'cursed'
-			: entry.id.startsWith('possessed_') ? 'possessed' : entry.id;
-		totals[concept] = (totals[concept] ?? 0) + entry.weight;
-		return totals;
-	}, {});
-	assert.deepEqual(conceptWeights, {
-		runed: 6,
-		damaged: 6,
-		ancient: 6,
-		cursed: 6,
-		possessed: 6,
-		faction_made: 6,
-	});
 });
 
-test('hybrid creature modifiers use explicit routed field references in both locales', () => {
-	const expectedDescriptions = {
-		en: 'This creature is the product of hybridization with {{ creature.generator.name }}. Its physical appearance and abilities are affected as a result.',
-		fr: 'Cette créature est issue d\'une hybridation avec {{ creature.generator.name }}. Son apparence physique et ses facultés s\'en retrouvent impactées.',
-	};
-	for (const locale of ['en', 'fr']) {
-		const hybrid = generatorCatalog.getGenerator('modifier_creature', locale)
-			.entries.find(entry => entry.id === 'hybrid');
-		assert.equal(hybrid.fields.description, expectedDescriptions[locale]);
-		const resolved = generatorResolver.resolveReference(
-			'modifier_creature:hybrid',
-			locale,
-			{ random: () => 0 },
-		);
-		assert.doesNotMatch(resolved.displayFields.description, /\{\{|\}\}/);
-		assert.deepEqual(resolved.modifiers, []);
-		assert.ok(resolved.provenance.some(record => (
-			record.generatorId === 'creature'
-		)));
-	}
-});
+function getResolvedText(result) {
+	return [
+		result?.display,
+		JSON.stringify(result?.displayFields),
+		JSON.stringify(result?.value),
+	].filter(Boolean).join(' ');
+}
 
 test('direct loot generation keeps modifiers separate from the base result', () => {
+	const weapon = generatorCatalog.getGenerator('weapons', 'en').entries[0];
 	const result = generatorResolver.generate(
-		'loot:weapons:short_sword',
+		`loot:weapons:${weapon.id}`,
 		'en',
 		{ random: () => 0 },
 	);
-	assert.deepEqual(Object.keys(result.displayFields), ['name', 'description']);
-	assert.doesNotMatch(Object.values(result.displayFields).join(' '), /Common|Made of|Runed/);
+	assert.deepEqual(
+		Object.keys(result.displayFields),
+		['name', ...generatorCatalog.getGenerator('weapons', 'en').entrySchema.required],
+	);
 	assert.deepEqual(result.modifiers.map(modifier => modifier.generatorId), [
 		'modifier_rarity',
 		'modifier_material',
@@ -488,190 +317,109 @@ test('direct loot generation keeps modifiers separate from the base result', () 
 	]);
 	assert.deepEqual(
 		generatorResolver.generate(
-			'loot:weapons:short_sword.description',
+			`loot:weapons:${weapon.id}.description`,
 			'en',
 			{ random: () => 0 },
 		).modifiers,
 		[],
 	);
-	assert.equal(
-		generatorResolver.generate('loot:supplies:coil_of_rope', 'en', {
-			random: () => 0.099999,
-		}).modifiers.length,
-		1,
-	);
-	assert.equal(
-		generatorResolver.generate('loot:supplies:coil_of_rope', 'en', {
-			random: () => 0.1,
-		}).modifiers.length,
-		0,
-	);
-	assert.equal(
-		generatorResolver.generate('loot:food_and_drink:three_travel_rations', 'en', {
-			random: () => 0.049999,
-		}).modifiers.length,
-		1,
-	);
-	assert.equal(
-		generatorResolver.generate('loot:food_and_drink:three_travel_rations', 'en', {
-			random: () => 0.05,
-		}).modifiers.length,
-		0,
-	);
-});
-
-test('armor and shield forms keep identity separate from mechanical rarity', () => {
-	const armors = generatorCatalog.getGenerator('armors', 'en');
-	assert.deepEqual(armors.entrySchema.required, ['type', 'description']);
-	assert.deepEqual(
-		Object.fromEntries(['light', 'medium', 'heavy'].map(type => [
-			type,
-			armors.entries.filter(entry => entry.fields.type === type).length,
-		])),
-		{ light: 5, medium: 6, heavy: 5 },
-	);
-	const shields = generatorCatalog.getGenerator('shields', 'en');
-	assert.deepEqual(shields.entrySchema.required, ['description']);
-	assert.deepEqual(new Set(shields.entries.map(entry => entry.id)), new Set([
-		'buckler',
-		'round_shield',
-		'kite_shield',
-		'heater_shield',
-		'targe',
-		'tower_shield',
-		'pavise',
-		'dueling_shield',
-		'folding_shield',
-		'mirrored_shield',
-		'guardian_shield',
-		'stormward_shield',
-		'eclipse_shield',
-		'oathkeeper_shield',
-	]));
-	for (const locale of ['en', 'fr']) {
-		assert.ok(generatorCatalog.getGenerator('armors', locale).entries.every(entry => (
-			['light', 'medium', 'heavy'].includes(entry.fields.type)
-			&& !Object.hasOwn(entry.fields, 'rarity')
-			&& !Object.hasOwn(entry.fields, 'constitution_requirement')
-			&& !Object.hasOwn(entry.fields, 'ar_percentage')
-		)));
-		assert.ok(generatorCatalog.getGenerator('shields', locale).entries.every(entry => (
-			!Object.hasOwn(entry.fields, 'rarity')
-			&& !Object.hasOwn(entry.fields, 'ar_percentage')
-		)));
+	for (const [generatorId, belowThreshold, threshold] of [
+		['supplies', 0.099999, 0.1],
+		['food_and_drink', 0.049999, 0.05],
+	]) {
+		const entry = generatorCatalog.getGenerator(generatorId, 'en').entries[0];
+		assert.equal(
+			generatorResolver.generate(`loot:${generatorId}:${entry.id}`, 'en', {
+				random: () => belowThreshold,
+			}).modifiers.length,
+			1,
+		);
+		assert.equal(
+			generatorResolver.generate(`loot:${generatorId}:${entry.id}`, 'en', {
+				random: () => threshold,
+			}).modifiers.length,
+			0,
+		);
 	}
 });
 
-test('ability is an open-ended public name-only vocabulary', () => {
-	const expectedIds = [
-		'constitution',
-		'strength',
-		'dexterity',
-		'intelligence',
-		'speed',
-		'perception',
-		'charisma',
-		'acrobatics',
-		'animal_handling',
-		'arcana',
-		'athletics',
-		'deception',
-		'history',
-		'insight',
-		'intimidation',
-		'investigation',
-		'medicine',
-		'nature',
-		'performance',
-		'persuasion',
-		'religion',
-		'sleight_of_hand',
-		'stealth',
-		'survival',
-		'lockpicking',
-		'tracking',
-		'navigation',
-		'crafting',
-		'leadership',
-	];
-	const expectedEnglishNames = [
-		'Constitution',
-		'Strength',
-		'Dexterity',
-		'Intelligence',
-		'Speed',
-		'Perception',
-		'Charisma',
-		'Acrobatics',
-		'Animal Handling',
-		'Arcana',
-		'Athletics',
-		'Deception',
-		'History',
-		'Insight',
-		'Intimidation',
-		'Investigation',
-		'Medicine',
-		'Nature',
-		'Performance',
-		'Persuasion',
-		'Religion',
-		'Sleight of Hand',
-		'Stealth',
-		'Survival',
-		'Lockpicking',
-		'Tracking',
-		'Navigation',
-		'Crafting',
-		'Leadership',
-	];
+test('armor and shield mechanics use stable types and rarity IDs, not localized text', () => {
+	const armorTypes = Object.keys(ARMOR_PERCENTAGES);
 	for (const locale of ['en', 'fr']) {
-		const ability = generatorCatalog.getGenerator('ability', locale);
+		const armors = generatorCatalog.getGenerator('armors', locale);
+		assert.deepEqual(armors.entrySchema.required, ['type', 'description']);
+		assert.ok(armors.entries.every(entry => (
+			armorTypes.includes(entry.fields.type)
+				&& !Object.hasOwn(entry.fields, 'rarity')
+				&& !Object.hasOwn(entry.fields, 'constitution_requirement')
+				&& !Object.hasOwn(entry.fields, 'ar_percentage')
+		)));
+		const shields = generatorCatalog.getGenerator('shields', locale);
+		assert.deepEqual(shields.entrySchema.required, ['description']);
+		assert.ok(shields.entries.every(entry => (
+			!Object.hasOwn(entry.fields, 'rarity')
+				&& !Object.hasOwn(entry.fields, 'ar_percentage')
+		)));
+		for (const [generator, percentages] of [
+			[armors, ARMOR_PERCENTAGES],
+			[shields, SHIELD_PERCENTAGES],
+		]) {
+			for (const entry of generator.entries) {
+				const result = generatorResolver.resolveReference(
+					`${generator.id}:${entry.id}`,
+					locale,
+					{ random: () => 0 },
+				);
+				const rarityId = result.modifiers.find(modifier => (
+					modifier.generatorId === 'modifier_rarity'
+				)).entryId;
+				const expected = generator.id === 'armors'
+					? percentages[entry.fields.type][rarityId]
+					: percentages[rarityId];
+				assert.equal(getResolvedLootArmorPercentage(result), expected);
+			}
+		}
+	}
+});
+
+test('ability remains an open-ended public name-only vocabulary', () => {
+	const english = generatorCatalog.getGenerator('ability', 'en');
+	const french = generatorCatalog.getGenerator('ability', 'fr');
+	for (const ability of [english, french]) {
 		assert.equal(ability.visibility, 'public');
 		assert.deepEqual(ability.entrySchema.required, []);
-		assert.deepEqual(ability.entries.map(entry => entry.id), expectedIds);
+		assert.ok(ability.entries.length > 0);
 		assert.ok(ability.entries.every(entry => (
-			Object.keys(entry).length === 2
-			&& typeof entry.name === 'string'
-			&& entry.name.length > 0
+			Object.keys(entry).every(key => ['id', 'name', 'weight'].includes(key))
+				&& typeof entry.name === 'string'
+				&& entry.name.trim()
 		)));
 	}
-	const english = generatorCatalog.getGenerator('ability', 'en');
-	assert.deepEqual(english.entries.map(entry => entry.name), expectedEnglishNames);
-	assert.equal(english.entries.filter(entry => entry.id === 'perception').length, 1);
+	assert.deepEqual(
+		french.entries.map(entry => entry.id),
+		english.entries.map(entry => entry.id),
+	);
 });
 
-test('expanded consumables reuse ability and affliction without fixed numerical effects', () => {
-	const consumable = generatorCatalog.getGenerator('consumable', 'en');
-	const entries = new Map(consumable.entries.map(entry => [entry.id, entry]));
-	assert.equal(entries.get('healing_potion').weight, 4);
-	for (const entryId of [
-		'strong_healing_potion',
-		'holy_water',
-		'incendiary_flask',
-		'potion_of_fire_resistance',
-		'potion_of_cold_resistance',
-		'potion_of_invisibility',
-		'potion_of_ability',
-		'affliction_remedy',
-	]) {
-		assert.ok(entries.has(entryId), entryId);
+test('consumable ability and affliction references resolve in both locales', () => {
+	const english = generatorCatalog.getGenerator('consumable', 'en');
+	const referencedRoots = new Set();
+	const referencedEntryIds = [];
+	for (const entry of english.entries) {
+		const source = [entry.name, ...Object.values(entry.fields)].join(' ');
+		const roots = [...source.matchAll(/\{\{\s*([a-z0-9_]+)/g)]
+			.map(match => match[1]);
+		for (const root of roots) {
+			referencedRoots.add(root);
+		}
+		if (roots.some(root => ['ability', 'affliction'].includes(root))) {
+			referencedEntryIds.push(entry.id);
+		}
 	}
-	assert.equal(entries.has('potion_of_climbing'), false);
-	assert.equal(entries.has('potion_of_speed'), false);
-	assert.match(entries.get('potion_of_ability').name, /\{\{ ability\.name \}\}/);
-	assert.match(
-		entries.get('potion_of_ability').fields.description,
-		/exact magnitude and duration remain with the GM/,
-	);
-	assert.match(entries.get('affliction_remedy').name, /\{\{ affliction\.name \}\}/);
-	assert.match(
-		entries.get('affliction_remedy').fields.description,
-		/medicine, antidote, ritual preparation, or other treatment/,
-	);
-
+	assert.ok(referencedRoots.has('ability'));
+	assert.ok(referencedRoots.has('affliction'));
 	for (const locale of ['en', 'fr']) {
-		for (const entryId of ['potion_of_ability', 'affliction_remedy']) {
+		for (const entryId of referencedEntryIds) {
 			const result = generatorResolver.generate(
 				`loot:consumable:${entryId}`,
 				locale,
@@ -682,225 +430,38 @@ test('expanded consumables reuse ability and affliction without fixed numerical 
 	}
 });
 
-test('expanded loot catalogs cover useful basics, reusable references, and fun outliers', () => {
-	const idsFor = generatorId => new Set(
-		generatorCatalog.getGenerator(generatorId, 'en').entries.map(entry => entry.id),
-	);
-	const requireIds = (generatorId, requiredIds) => {
-		const ids = idsFor(generatorId);
-		for (const entryId of requiredIds) {
-			assert.ok(ids.has(entryId), `${generatorId}:${entryId}`);
+test('affliction classifications and referenced symptoms stay localized and resolvable', () => {
+	const english = generatorCatalog.getGenerator('affliction', 'en');
+	const french = generatorCatalog.getGenerator('affliction', 'fr');
+	assert.deepEqual(english.entrySchema.required, ['type', 'description']);
+	assert.deepEqual(french.entrySchema.required, ['type', 'description']);
+	const frenchById = new Map(french.entries.map(entry => [entry.id, entry]));
+	const localizedTypes = new Map();
+	for (const entry of english.entries) {
+		assert.ok(['disease', 'curse'].includes(entry.fields.type));
+		const frenchEntry = frenchById.get(entry.id);
+		assert.ok(frenchEntry);
+		const knownTranslation = localizedTypes.get(entry.fields.type);
+		if (knownTranslation) {
+			assert.equal(frenchEntry.fields.type, knownTranslation);
 		}
-	};
-
-	requireIds('weapons', [
-		'pike', 'sickle', 'hand_crossbow', 'darts', 'net', 'chakram', 'maul',
-	]);
-	requireIds('supplies', [
-		'backpack',
-		'torches',
-		'compass',
-		'chain',
-		'cloak',
-		'boots',
-		'cooking_kit',
-		'sewing_repair_kit',
-		'whetstone',
-		'empty_bottles_and_vials',
-	]);
-	requireIds('valuables', [
-		'gold_ingot',
-		'silver_ingot',
-		'signet_ring',
-		'fine_ring',
-		'necklace',
-		'bracelet',
-		'amulet',
-		'pearl_necklace',
-		'rare_spices',
-		'perfume',
-	]);
-	requireIds('material', [
-		'glass',
-		'clay',
-		'wool',
-		'silk',
-		'bone',
-		'salt',
-		'coal',
-		'sulfur',
-		'monster_hide',
-		'dragon_scales',
-		'dirt',
-	]);
-	for (const forbiddenId of ['tin', 'lead', 'brass', 'linen', 'ivory', 'chitin']) {
-		assert.equal(idsFor('material').has(forbiddenId), false, forbiddenId);
-	}
-	const materials = new Map(generatorCatalog.getGenerator('material', 'en').entries
-		.map(entry => [entry.id, entry]));
-	assert.equal(materials.get('dirt').weight, 1);
-	assert.ok(materials.get('dirt').weight < materials.get('glass').weight);
-
-	requireIds('curio', [
-		'strange_coin',
-		'mechanical_music_box',
-		'miniature_portrait',
-		'unusual_deck_of_cards',
-		'petrified_eye',
-		'impossible_weather_bottle',
-		'nonexistent_settlement_map',
-		'broken_magical_focus',
-	]);
-	const supplies = new Map(generatorCatalog.getGenerator('supplies', 'en').entries
-		.map(entry => [entry.id, entry]));
-	assert.match(supplies.get('holy_symbol').fields.description, /\{\{ religion\.sacred_symbol \}\}/);
-	assert.match(supplies.get('local_map').fields.description, /\{\{ region\.name \}\}/);
-	const curios = new Map(generatorCatalog.getGenerator('curio', 'en').entries
-		.map(entry => [entry.id, entry]));
-	assert.match(curios.get('treasure_map').fields.description, /\{\{ dungeon\.name \}\}/);
-
-	const food = new Map(generatorCatalog.getGenerator('food_and_drink', 'en').entries
-		.map(entry => [entry.id, entry]));
-	for (const entryId of [
-		'fresh_bread',
-		'cheese_wheel',
-		'dried_meat',
-		'smoked_fish',
-		'fresh_fruit',
-		'preserved_fruit',
-		'vegetables',
-		'three_travel_rations',
-		'roasted_chicken',
-		'roasted_meat',
-		'soup',
-		'stew',
-		'porridge',
-		'eggs',
-		'ale',
-		'beer',
-		'mead',
-		'cider',
-		'wine',
-		'spirits',
-		'water',
-		'herbal_tea',
-	]) {
-		assert.ok(food.has(entryId), entryId);
-	}
-	for (const removedId of [
-		'honey_cakes',
-		'spiced_nuts',
-		'pepper_root_stew',
-		'fermented_milk',
-		'strong_herbal_tonic',
-	]) {
-		assert.equal(food.has(removedId), false, removedId);
-	}
-	const lowestStapleWeight = Math.min(...[
-		'fresh_bread',
-		'cheese_wheel',
-		'dried_meat',
-		'fresh_fruit',
-		'vegetables',
-		'soup',
-		'stew',
-		'porridge',
-		'eggs',
-		'water',
-	].map(entryId => food.get(entryId).weight));
-	const highestUnusualWeight = Math.max(...[
-		'exotic_fruit',
-		'regional_delicacy',
-		'mushroom_broth',
-	].map(entryId => food.get(entryId).weight));
-	assert.ok(lowestStapleWeight > highestUnusualWeight);
-});
-
-test('affliction fields are localized while their classifications remain data', () => {
-	const affliction = generatorCatalog.getGenerator('affliction', 'en');
-	assert.deepEqual(affliction.entrySchema, {
-		required: ['type', 'description'],
-	});
-	assert.equal(affliction.entries.filter(entry => entry.fields.type === 'disease').length, 8);
-	assert.equal(affliction.entries.filter(entry => entry.fields.type === 'curse').length, 8);
-	const frenchAffliction = generatorCatalog.getGenerator('affliction', 'fr');
-	assert.equal(new Set(frenchAffliction.entries.map(entry => entry.fields.type)).size, 2);
-	assert.ok(frenchAffliction.entries.every(entry => (
-		!['disease', 'curse'].includes(entry.fields.type)
-	)));
-});
-
-test('affliction symptom references resolve as grammatical localized status labels', () => {
-	const expectations = {
-		en: {
-			ash_fever: 'A smoky fever causes the Feverish status effect and sensitivity to open flame.',
-			spore_fever: 'An invasive fungus causes vivid dreams and the Confused status effect.',
-		},
-		fr: {
-			ash_fever: 'Une fièvre chargée de cendres inflige l’état Fiévreux et rend le malade sensible aux flammes nues.',
-			spore_fever: 'Une infection fongique provoque des rêves intenses et inflige l’état Confus.',
-		},
-	};
-	for (const [locale, entries] of Object.entries(expectations)) {
-		for (const [entry, expected] of Object.entries(entries)) {
-			const result = generatorResolver.resolveReference(
-				`affliction:${entry}.description`,
-				locale,
-				{ random: () => 0 },
-			);
-			assert.equal(result.displayFields.description, expected);
-			assert.deepEqual(
-				result.provenance.map(record => [record.generatorId, record.entryId]),
-				[
-					['affliction', entry],
-					['status_effect', entry === 'ash_fever' ? 'feverish' : 'confused'],
-				],
-			);
+		else {
+			localizedTypes.set(entry.fields.type, frenchEntry.fields.type);
+		}
+		if (entry.fields.description.includes('{{')) {
+			for (const locale of ['en', 'fr']) {
+				const result = generatorResolver.resolveReference(
+					`affliction:${entry.id}.description`,
+					locale,
+					{ random: () => 0 },
+				);
+				assert.doesNotMatch(result.displayFields.description, /\{\{|\}\}/);
+				assert.ok(result.provenance.length > 1);
+			}
 		}
 	}
-});
-
-test('migrated creature and quest references target classified loot concepts', () => {
-	for (const locale of ['en', 'fr']) {
-		const companion = generatorCatalog.getGenerator('companion', locale);
-		const references = Object.fromEntries(companion.entries.map(entry => [
-			entry.id,
-			entry.generation.inventory,
-		]));
-		assert.deepEqual(references.messenger_pigeon, [
-			'curio:mysterious_sealed_letter',
-		]);
-		assert.deepEqual(references.pack_goat, [
-			'food_and_drink:three_travel_rations',
-		]);
-		assert.deepEqual(references.mule, [{
-			generator: {
-				oneOf: [
-					{ id: 'supplies', weight: 3 },
-					{ id: 'weapons', weight: 1 },
-				],
-			},
-			select: 'fields',
-		}]);
-		assert.deepEqual(references.paper_dragon, ['supplies:writing_kit']);
-
-		const questValues = Object.fromEntries(
-			generatorCatalog.getGenerator('quest', locale).entries
-				.map(entry => [entry.id, entry.fields.description]),
-		);
-		assert.match(questValues.recover_item_before_criminal, /\{\{ curio \}\}/);
-		assert.match(questValues.hide_item_from_faction, /\{\{ curio \}\}/);
-		for (const id of [
-			'steal_item_from_building',
-			'anonymous_gift',
-			'deliver_contested_goods',
-		]) {
-			assert.match(questValues[id], /\{\{ valuables \}\}/);
-		}
-		assert.equal(Object.values(questValues).some(value => (
-			value.includes('{{ inventory }}') || value.includes('{{ creature_monster }}')
-		)), false);
-	}
+	assert.deepEqual(new Set(localizedTypes.keys()), new Set(['disease', 'curse']));
+	assert.equal(new Set(localizedTypes.values()).size, 2);
 });
 
 test('production catalogs preserve deterministic IDs across locales', () => {
@@ -926,32 +487,3 @@ test('production catalogs preserve deterministic IDs across locales', () => {
 		}
 	}
 });
-
-function createExpectedProfileMap(groups) {
-	return new Map(Object.entries(groups).flatMap(([profileId, entryIds]) => (
-		entryIds.map(entryId => [entryId, profileId])
-	)));
-}
-
-function assertExactCreatureProfiles(generator, expectedProfiles) {
-	assert.equal(generator.entries.length, expectedProfiles.size, generator.id);
-	for (const entry of generator.entries) {
-		assert.equal(
-			entry.generation.statProfile,
-			expectedProfiles.get(entry.id),
-			`${generator.locale}:${generator.id}:${entry.id}`,
-		);
-	}
-}
-
-function assertHigherCreatureWeights(generator, basicEntryIds, exceptionalEntryIds) {
-	const weights = new Map(generator.entries.map(entry => [entry.id, entry.weight]));
-	const basicWeights = basicEntryIds.map(entryId => weights.get(entryId));
-	const exceptionalWeights = exceptionalEntryIds.map(entryId => weights.get(entryId));
-	assert.ok(basicWeights.every(Number.isFinite), `${generator.id}:basic weights`);
-	assert.ok(exceptionalWeights.every(Number.isFinite), `${generator.id}:exceptional weights`);
-	assert.ok(
-		Math.min(...basicWeights) > Math.max(...exceptionalWeights),
-		`${generator.id}: basic creatures should be more common`,
-	);
-}

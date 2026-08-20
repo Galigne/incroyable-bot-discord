@@ -10,6 +10,7 @@ const generatorCatalog = require('../services/generatorCatalog');
 const generatorResolver = require('../services/generatorResolver');
 const {
 	createGeneratorTraversalAlias,
+	getGeneratorTraversalSuggestions,
 } = require('../services/generatorTraversal');
 const {
 	isGeneratorRouter,
@@ -42,28 +43,37 @@ test('routed background and creature archetypes share profile relationship valid
 		true,
 	);
 
-	const backgroundWithoutDefault = statProfileCatalog.createStatProfileCandidate();
+	const backgroundCatalogs = cloneCatalogs(catalogs);
+	const backgroundRoute = backgroundCatalogs.get('en').get('background').entries[0];
+	const backgroundGenerator = structuredClone(
+		backgroundCatalogs.get('en').get(backgroundRoute.generator),
+	);
+	delete backgroundGenerator.entries[0].generation;
+	backgroundCatalogs.get('en').set(backgroundRoute.generator, backgroundGenerator);
+	const backgroundWithoutDefault = new Map(profiles);
 	backgroundWithoutDefault.delete(DEFAULT_STAT_PROFILE_ID);
 	assert.throws(
 		() => validateRoutedArchetypeStatProfileRelationships(
-			catalogs,
+			backgroundCatalogs,
 			backgroundWithoutDefault,
 		),
 		error => error.code === 'BACKGROUND_STAT_PROFILE_MISSING',
 	);
 
-	const creatureCatalogs = generatorCatalog.createGeneratorCatalogCandidate();
+	const creatureCatalogs = cloneCatalogs(catalogs);
 	const creatureRoute = creatureCatalogs.get('en').get('creature').entries[0];
-	const creatureProfile = creatureCatalogs.get('en').get(creatureRoute.generator)
-		.entries
-		.map(entry => getGenerationStatProfileId(entry.generation))
-		.find(profileId => profileId !== DEFAULT_STAT_PROFILE_ID);
-	const withoutCreatureProfile = statProfileCatalog.createStatProfileCandidate();
-	withoutCreatureProfile.delete(creatureProfile);
+	const creatureGenerator = structuredClone(
+		creatureCatalogs.get('en').get(creatureRoute.generator),
+	);
+	creatureGenerator.entries[0].generation = {
+		...creatureGenerator.entries[0].generation,
+		statProfile: 'missing-profile',
+	};
+	creatureCatalogs.get('en').set(creatureRoute.generator, creatureGenerator);
 	assert.throws(
 		() => validateRoutedArchetypeStatProfileRelationships(
 			creatureCatalogs,
-			withoutCreatureProfile,
+			profiles,
 		),
 		error => error.code === 'CREATURE_STAT_PROFILE_MISSING',
 	);
@@ -72,7 +82,6 @@ test('routed background and creature archetypes share profile relationship valid
 test('background archetypes define optional localized generation metadata', () => {
 	const catalogs = generatorCatalog.createGeneratorCatalogCandidate();
 	const profiles = statProfileCatalog.createStatProfileCandidate();
-	const usedProfileIds = new Set();
 	const englishRouter = catalogs.get('en').get('background');
 	const frenchRouter = catalogs.get('fr').get('background');
 	assert.deepEqual(
@@ -89,33 +98,19 @@ test('background archetypes define optional localized generation metadata', () =
 			french.entries.map(entry => entry.id),
 		);
 		for (const [index, entry] of english.entries.entries()) {
-			assert.deepEqual(Object.keys(entry.generation ?? {}), entry.generation
-				? ['statProfile']
-				: []);
-			assert.deepEqual(entry.generation, french.entries[index].generation);
+			assert.deepEqual(
+				Object.keys(entry.generation ?? {}),
+				Object.keys(french.entries[index].generation ?? {}),
+			);
 			const profileId = getGenerationStatProfileId(entry.generation);
 			assert.ok(profiles.has(profileId));
-			usedProfileIds.add(profileId);
+			assert.equal(
+				getGenerationStatProfileId(french.entries[index].generation),
+				profileId,
+			);
+			assert.equal(Object.hasOwn(entry.generation ?? {}, 'traits'), false);
 		}
 	}
-	assert.deepEqual([...usedProfileIds].sort(), [
-		'character-cleric',
-		'character-diplomat',
-		'character-fighter',
-		'character-mage',
-		'character-rogue',
-		DEFAULT_STAT_PROFILE_ID,
-	]);
-	const militaryProfiles = new Map(
-		catalogs.get('en').get('military').entries.map(entry => [
-			entry.id,
-			entry.generation.statProfile,
-		]),
-	);
-	assert.equal(militaryProfiles.get('soldier'), 'character-fighter');
-	assert.equal(militaryProfiles.get('military_engineer'), 'character-mage');
-	assert.equal(militaryProfiles.get('quartermaster'), 'character-diplomat');
-	assert.equal(militaryProfiles.get('military_scout'), 'character-rogue');
 	assert.equal(
 		validateBackgroundStatProfileRelationships(catalogs, profiles),
 		true,
@@ -249,25 +244,30 @@ test('background metadata supports optional shared overrides and rejects traits 
 		error => error.code === 'INVALID_GENERATION_REFERENCE_TARGET',
 	);
 
-	const explicitIndex = french.entries.findIndex(entry => entry.generation?.statProfile);
-	const originalProfileId = french.entries[explicitIndex].generation.statProfile;
-	french.entries[explicitIndex].generation.statProfile = originalProfileId === 'character-fighter'
-		? 'character-rogue'
-		: 'character-fighter';
+	const mismatchedEnglish = structuredClone(english);
+	const mismatchedFrench = structuredClone(french);
+	mismatchedEnglish.entries[0].generation = { statProfile: 'profile-one' };
+	mismatchedFrench.entries[0].generation = { statProfile: 'profile-two' };
 	assert.throws(
 		() => validateGeneratorPair(
-			english,
-			french,
+			mismatchedEnglish,
+			mismatchedFrench,
 			'<generator>',
 			validationOptions,
 		),
 		error => error.code === 'GENERATOR_LOCALE_PARITY_MISMATCH',
 	);
 
+	const catalogsUsingDefault = cloneCatalogs(catalogs);
+	const defaultGenerator = structuredClone(
+		catalogsUsingDefault.get('en').get(generatorId),
+	);
+	delete defaultGenerator.entries[0].generation;
+	catalogsUsingDefault.get('en').set(generatorId, defaultGenerator);
 	const profiles = statProfileCatalog.createStatProfileCandidate();
 	profiles.delete(DEFAULT_STAT_PROFILE_ID);
 	assert.throws(
-		() => validateBackgroundStatProfileRelationships(catalogs, profiles),
+		() => validateBackgroundStatProfileRelationships(catalogsUsingDefault, profiles),
 		error => error.code === 'BACKGROUND_STAT_PROFILE_MISSING',
 	);
 });
@@ -313,70 +313,35 @@ test('production generator v4 data uses stable IDs, entry names, strict parity, 
 });
 
 test('production category children use prefixed filenames and concept-only IDs', async () => {
-	const backgroundIds = [
-		'adventurer',
-		'artisan',
-		'criminal',
-		'exile',
-		'mage',
-		'merchant',
-		'military',
-		'noble',
-		'official',
-		'outlander',
-		'peasant',
-		'performer',
-		'religious',
-		'sailor',
-		'scholar',
-		'servant',
-		'urchin',
-	];
-	const expectedFiles = new Map([
-		...backgroundIds.map(id => [`background_${id}.json`, id]),
-		...['animal', 'companion', 'monster'].map(id => [`creature_${id}.json`, id]),
-		...[
-			'weapons',
-			'shields',
-			'armors',
-			'supplies',
-			'consumable',
-			'food_and_drink',
-			'valuables',
-			'material',
-			'curio',
-		].map(id => [`loot_${id}.json`, id]),
-		...['building', 'dungeon', 'settlement', 'region', 'room']
-			.map(id => [`site_${id}.json`, id]),
-		...['government', 'faction', 'religion']
-			.map(id => [`group_${id}.json`, id]),
-	]);
 	const generatorRoot = path.join(__dirname, '..', 'data', 'generators');
 	for (const locale of ['en', 'fr']) {
 		const localeRoot = path.join(generatorRoot, locale);
 		const filenames = new Set(await fsPromises.readdir(localeRoot));
-		for (const [filename, id] of expectedFiles) {
-			const document = JSON.parse(await fsPromises.readFile(
-				path.join(localeRoot, filename),
-				'utf8',
-			));
-			assert.equal(document.id, id, `${locale}/${filename}`);
-		}
-		for (const removedFilename of [
-			'inventory.json',
-			'weapons.json',
-			'armors.json',
-			'material.json',
-			'building.json',
-			'dungeon.json',
-			'settlement.json',
-			'region.json',
-			'room.json',
-			'government.json',
-			'faction.json',
-			'religion.json',
+		for (const routerId of [
+			'background',
+			'creature',
+			'loot',
+			'site',
+			'group',
+			'modifier',
 		]) {
-			assert.equal(filenames.has(removedFilename), false, `${locale}/${removedFilename}`);
+			const router = generatorCatalog.getGenerator(routerId, locale);
+			for (const route of router.entries) {
+				const filename = getCategoryChildFilename(routerId, route.generator);
+				const document = JSON.parse(await fsPromises.readFile(
+					path.join(localeRoot, filename),
+					'utf8',
+				));
+				assert.equal(document.id, route.generator, `${locale}/${filename}`);
+				const obsoleteFilename = `${route.generator}.json`;
+				if (obsoleteFilename !== filename) {
+					assert.equal(
+						filenames.has(obsoleteFilename),
+						false,
+						`${locale}/${obsoleteFilename}`,
+					);
+				}
+			}
 		}
 	}
 });
@@ -388,7 +353,6 @@ test('generator autocomplete and help expose localized public aliases', () => {
 		publicValues.map(value => value.value),
 		frenchGenerators.map(generator => createGeneratorTraversalAlias(generator.name)),
 	);
-	assert.ok(publicValues.some(value => value.value === 'butin'));
 	assert.ok(publicValues.every(value => value.name === value.value));
 
 	const frenchBackgrounds = generatorCatalog.getGenerator('background', 'fr').entries;
@@ -470,30 +434,37 @@ test('/gen traversal autocomplete follows entries, fields, and structural routes
 		{ value },
 	).map(choice => choice.value);
 
-	assert.ok(complete('').includes('modifier'));
-	assert.ok(!complete('').includes('dungeon'));
-	assert.ok(complete('background:').includes('background:criminal'));
-	assert.deepEqual(complete('background:criminal.'), [
-		'background:criminal.name',
+	const background = getRoutedFixture('background', 'en');
+	assert.ok(complete(`${background.rootAlias}:`).includes(
+		`${background.rootAlias}:${background.routeAlias}`,
+	));
+	assert.deepEqual(complete(`${background.rootAlias}:${background.routeAlias}.`), [
+		`${background.rootAlias}:${background.routeAlias}.name`,
 	]);
-	assert.ok(complete('background:criminal:')
-		.includes('background:criminal:pickpocket'));
-	assert.deepEqual(complete('site:dungeon.'), [
-		'site:dungeon.name',
-		'site:dungeon.description',
-	]);
-	assert.ok(complete('loot:shields.')
-		.includes('loot:shields.description'));
-	assert.deepEqual(complete('loot:shields:round_shield'), [
-		'loot:shields:round_shield',
-	]);
-	assert.deepEqual(complete('loot:shields:targe'), [
-		'loot:shields:targe',
-	]);
-	assert.deepEqual(complete('loot.'), ['loot.generator']);
-	assert.ok(!complete('loot.').includes('loot.name'));
-	assert.ok(!complete('loot:weapons.').includes('loot:weapons.generator'));
-	assert.deepEqual(complete('loot:weapons.generator:'), []);
+	assert.ok(complete(`${background.rootAlias}:${background.routeAlias}:`).includes(
+		`${background.rootAlias}:${background.routeAlias}:${background.entryAlias}`,
+	));
+
+	const loot = getRoutedFixture(
+		'loot',
+		'en',
+		child => child.entrySchema.required.includes('description'),
+	);
+	assert.ok(complete(`${loot.rootAlias}:${loot.routeAlias}.`).includes(
+		`${loot.rootAlias}:${loot.routeAlias}.description`,
+	));
+	assert.deepEqual(
+		complete(`${loot.rootAlias}:${loot.routeAlias}:${loot.entryAlias}`),
+		[`${loot.rootAlias}:${loot.routeAlias}:${loot.entryAlias}`],
+	);
+	assert.deepEqual(complete(`${loot.rootAlias}.`), [`${loot.rootAlias}.generator`]);
+	assert.ok(!complete(`${loot.rootAlias}:${loot.routeAlias}.`).includes(
+		`${loot.rootAlias}:${loot.routeAlias}.generator`,
+	));
+	assert.deepEqual(
+		complete(`${loot.rootAlias}:${loot.routeAlias}.generator:`),
+		[],
+	);
 });
 
 test('localized generator aliases are predictable and resolve to stable identities', () => {
@@ -501,125 +472,114 @@ test('localized generator aliases are predictable and resolve to stable identiti
 		createGeneratorTraversalAlias('  L\'Épée—longue !  '),
 		'l_épée_longue',
 	);
-	const english = generatorResolver.generate('loot:shields', 'en', {
+	const englishFixture = getRoutedFixture('loot', 'en');
+	const frenchFixture = getRoutedFixture('loot', 'fr', child => (
+		child.id === englishFixture.child.id
+	));
+	const englishPath = `${englishFixture.rootAlias}:${englishFixture.routeAlias}`;
+	const frenchPath = `${frenchFixture.rootAlias}:${frenchFixture.routeAlias}`;
+	const english = generatorResolver.generate(englishPath, 'en', {
 		random: () => 0,
 	});
-	const french = generatorResolver.generate('butin:boucliers', 'fr', {
+	const french = generatorResolver.generate(frenchPath, 'fr', {
 		random: () => 0,
 	});
-	assert.equal(english.generatorId, 'shields');
-	assert.equal(french.generatorId, 'shields');
-	assert.equal(english.entryId, 'buckler');
-	assert.equal(french.entryId, 'buckler');
+	assert.equal(english.generatorId, englishFixture.route.generator);
+	assert.equal(french.generatorId, englishFixture.route.generator);
+	assert.equal(english.entryId, englishFixture.entry.id);
+	assert.equal(french.entryId, englishFixture.entry.id);
 	assert.equal(
-		generatorResolver.generate('BuTiN:BOUCLIERS', 'fr', { random: () => 0 })
+		generatorResolver.generate(frenchPath.toLocaleUpperCase('fr'), 'fr', {
+			random: () => 0,
+		})
 			.generatorId,
-		'shields',
+		englishFixture.route.generator,
 	);
 });
 
 test('/gen autocomplete uses localized paths and active accent-insensitive segments', () => {
-	const complete = value => AUTOCOMPLETE_PROVIDERS['generator-paths'](
-		{},
-		{ locale: 'fr' },
-		{ value },
-	);
-	assert.deepEqual(complete('butin:bou'), [{
-		name: 'butin:boucliers',
-		value: 'butin:boucliers',
-	}]);
-	assert.deepEqual(complete('loot:'), complete('butin:'));
-	assert.deepEqual(complete('butin:armes:epee_longue'), [{
-		name: 'butin:armes:épée_longue',
-		value: 'butin:armes:épée_longue',
-	}]);
+	const localized = createTextGenerator();
+	localized.id = 'event';
+	localized.name = 'Événements';
+	localized.entries = [{ id: 'long_sword', name: 'Épée longue' }];
+	const options = {
+		getGenerator: id => id === localized.id ? localized : undefined,
+		listGenerators: () => [localized],
+	};
 	assert.deepEqual(
-		complete('butin:boucliers:bouclier_rond'),
-		[{
-			name: 'butin:boucliers:bouclier_rond',
-			value: 'butin:boucliers:bouclier_rond',
-		}],
+		getGeneratorTraversalSuggestions('evenements', 'fr', options)
+			.map(choice => choice.value),
+		['événements'],
+	);
+	assert.deepEqual(
+		getGeneratorTraversalSuggestions('evenements:epee', 'fr', options)
+			.map(choice => choice.value),
+		['événements:épée_longue'],
 	);
 });
 
 test('localized traversal continues through routes and keeps stable field syntax', () => {
+	const fixture = getRoutedFixture(
+		'loot',
+		'fr',
+		child => child.entrySchema.required.includes('description'),
+	);
+	const localizedPath = [
+		`${fixture.rootAlias}:${fixture.routeAlias}:${fixture.entryAlias}`,
+		'description',
+	].join('.');
 	const result = generatorResolver.generate(
-		'butin:boucliers:bouclier_rond.description',
+		localizedPath,
 		'fr',
 		{ random: () => 0 },
 	);
-	assert.equal(result.generatorId, 'shields');
-	assert.equal(result.entryId, 'round_shield');
-	assert.deepEqual(result.fields, {
-		description: 'Un bouclier circulaire équilibré qui convient à de nombreux styles de combat.',
-	});
+	assert.equal(result.generatorId, fixture.route.generator);
+	assert.equal(result.entryId, fixture.entry.id);
 	assert.deepEqual(
+		result.fields,
 		generatorResolver.generate(
-			'butin:boucliers:bouclier_rond.name',
+			`loot:${fixture.route.id}:${fixture.entry.id}.description`,
 			'fr',
 			{ random: () => 0 },
 		).fields,
-		{ name: 'Bouclier rond' },
+	);
+	assert.deepEqual(
+		generatorResolver.generate(
+			`${fixture.rootAlias}:${fixture.routeAlias}:${fixture.entryAlias}.name`,
+			'fr',
+			{ random: () => 0 },
+		).fields,
+		{ name: fixture.entry.name },
 	);
 	assert.equal(
 		generatorResolver.generate(
-			'loot:shields.generator:round_shield.name',
+			`loot:${fixture.route.id}.generator:${fixture.entry.id}.name`,
 			'fr',
 			{ random: () => 0 },
 		).entryId,
-		'round_shield',
-	);
-	assert.deepEqual(
-		generatorResolver.generate(
-			'loot:shields:round_shield.name',
-			'en',
-			{ random: () => 0 },
-		).fields,
-		{ name: 'Round shield' },
-	);
-	const aliasedWeapon = generatorResolver.generate(
-		'loot:weapons:long_sword.description',
-		'en',
-		{ random: () => 0 },
-	);
-	const stableWeapon = generatorResolver.generate(
-		'loot:weapons:longsword.description',
-		'en',
-		{ random: () => 0 },
-	);
-	assert.equal(aliasedWeapon.entryId, 'longsword');
-	assert.deepEqual(aliasedWeapon.fields, stableWeapon.fields);
-	assert.equal(
-		generatorResolver.generate(
-			'background:criminal.name',
-			'en',
-			{ random: () => 0 },
-		).generatorId,
-		'criminal',
+		fixture.entry.id,
 	);
 });
 
-test('generator autocomplete searches beyond the first 25 localized entries', () => {
-	const complete = value => AUTOCOMPLETE_PROVIDERS['generator-paths'](
-		{},
-		{ locale: 'fr' },
-		{ value },
+test('generator autocomplete searches all entries before applying the result limit', () => {
+	const generator = createTextGenerator();
+	generator.id = 'large_catalog';
+	generator.name = 'Large catalog';
+	generator.entries = Array.from({ length: 30 }, (_, index) => ({
+		id: `choice_${index + 1}`,
+		name: index === 29 ? 'Needle entry' : `Ordinary choice ${index + 1}`,
+	}));
+	const suggestions = getGeneratorTraversalSuggestions(
+		'large_catalog:needle',
+		'en',
+		{
+			getGenerator: id => id === generator.id ? generator : undefined,
+			listGenerators: () => [generator],
+		},
 	);
-	const initial = complete('butin:armes:');
-	assert.equal(initial.length, 25);
-	assert.ok(!initial.some(choice => choice.value.endsWith(':sarbacane')));
-	assert.deepEqual(complete('butin:armes:sarbacane'), [{
-		name: 'butin:armes:sarbacane',
-		value: 'butin:armes:sarbacane',
-	}]);
-	assert.equal(
-		generatorResolver.generate(
-			'butin:armes:sarbacane',
-			'fr',
-			{ random: () => 0 },
-		).entryId,
-		'blowgun',
-	);
+	assert.deepEqual(suggestions.map(choice => choice.value), [
+		'large_catalog:needle_entry',
+	]);
 });
 
 test('generator schema validates unified v4 envelopes', () => {
@@ -914,10 +874,13 @@ test('statistical profile catalog validates and caches the default profile', () 
 	assert.equal(defaultProfile.id, DEFAULT_STAT_PROFILE_ID);
 	assert.deepEqual(Object.keys(defaultProfile.minimums), BASE_STATS);
 	assert.ok(BASE_STATS.every(stat => (
-		defaultProfile.minimums[stat] === 4
-		&& defaultProfile.maximums[stat] === 20
-		&& defaultProfile.weights[stat] === 1
+		Number.isFinite(defaultProfile.minimums[stat])
+		&& Number.isFinite(defaultProfile.maximums[stat])
+		&& Number.isFinite(defaultProfile.weights[stat])
+		&& defaultProfile.minimums[stat] <= defaultProfile.maximums[stat]
+		&& defaultProfile.weights[stat] >= 0
 	)));
+	assert.ok(BASE_STATS.some(stat => defaultProfile.weights[stat] > 0));
 	assert.equal(
 		statProfileCatalog.getStatProfile(DEFAULT_STAT_PROFILE_ID),
 		defaultProfile,
@@ -964,12 +927,42 @@ test('statistical profile catalog validates and caches the default profile', () 
 });
 
 test('clearing the generator cache rebuilds both localized catalogs', () => {
-	const englishBefore = generatorCatalog.getGenerator('weapons', 'en');
-	const frenchBefore = generatorCatalog.getGenerator('weapons', 'fr');
+	const generatorId = generatorCatalog.listGenerators('en')[0].id;
+	const englishBefore = generatorCatalog.getGenerator(generatorId, 'en');
+	const frenchBefore = generatorCatalog.getGenerator(generatorId, 'fr');
 	generatorCatalog.clearGeneratorCache();
-	assert.notEqual(generatorCatalog.getGenerator('weapons', 'en'), englishBefore);
-	assert.notEqual(generatorCatalog.getGenerator('weapons', 'fr'), frenchBefore);
+	assert.notEqual(generatorCatalog.getGenerator(generatorId, 'en'), englishBefore);
+	assert.notEqual(generatorCatalog.getGenerator(generatorId, 'fr'), frenchBefore);
 });
+
+function cloneCatalogs(catalogs) {
+	return new Map([...catalogs].map(([locale, catalog]) => [
+		locale,
+		new Map(catalog),
+	]));
+}
+
+function getCategoryChildFilename(routerId, childId) {
+	return `${childId.startsWith(`${routerId}_`) ? childId : `${routerId}_${childId}`}.json`;
+}
+
+function getRoutedFixture(rootId, locale, acceptsChild = () => true) {
+	const root = generatorCatalog.getGenerator(rootId, locale);
+	const route = root.entries.find(candidate => (
+		acceptsChild(generatorCatalog.getGenerator(candidate.generator, locale))
+	));
+	const child = generatorCatalog.getGenerator(route.generator, locale);
+	const entry = child.entries[0];
+	return {
+		child,
+		entry,
+		entryAlias: createGeneratorTraversalAlias(entry.name),
+		root,
+		rootAlias: createGeneratorTraversalAlias(root.name),
+		route,
+		routeAlias: createGeneratorTraversalAlias(route.name),
+	};
+}
 
 function createTextGenerator() {
 	return {

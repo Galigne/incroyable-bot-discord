@@ -547,25 +547,52 @@ test('all creature profiles use the shared nonlinear level budget and derived re
 });
 
 test('creature Intelligence never grants RULEs and explicit RULE references are preserved', () => {
-	const intelligentMule = generateEntry(getCreatureTypeForEntry('mule'), 'mule', {
-		level: 10,
-		randomFallback: 0.4,
-	});
-	assert.ok(intelligentMule.statistics.intelligence >= 16);
-	assert.deepEqual(intelligentMule.rules, []);
+	const { type, generatorId } = getCreatureFixture();
+	const source = generatorCatalog.getGenerator(generatorId, 'en');
+	const entryId = source.entries[0].id;
+	const profile = structuredClone(getStatProfile(DEFAULT_STAT_PROFILE_ID));
+	profile.id = 'test-intelligent-creature';
+	profile.minimums.intelligence = 16;
+	profile.weights.intelligence = 2;
+	const generateWithRules = fixedRules => {
+		const detail = structuredClone(source);
+		detail.entries[0].generation = {
+			statProfile: profile.id,
+			traits: [],
+			fixedRules,
+			statusEffects: [],
+			modifiers: [],
+			equipment: [],
+			inventory: [],
+		};
+		return populateRandomCreature(
+			new Creature(`Generated.Intelligent.Rules.${fixedRules.length}`),
+			{
+				getGenerator: (requestedId, locale) => (
+					requestedId === generatorId
+						? detail
+						: generatorCatalog.getGenerator(requestedId, locale)
+				),
+				getStatProfile: () => profile,
+				level: 10,
+				random: sequenceRandom([getEntryMidpoint(type, entryId)], 0.5),
+				type,
+			},
+		);
+	};
 
-	const mireTroll = generateEntry(
-		getCreatureTypeForEntry('mire_troll'),
-		'mire_troll',
-		{ level: 10 },
-	);
-	assert.ok(mireTroll.statistics.intelligence <= 8);
-	assert.deepEqual(mireTroll.rules.map(rule => ({
+	const intelligent = generateWithRules([]);
+	assert.ok(intelligent.statistics.intelligence >= 16);
+	assert.deepEqual(intelligent.rules, []);
+
+	const fixedRule = generatorCatalog.getGenerator('rules', 'en').entries[0];
+	const explicit = generateWithRules([{ entry: fixedRule.id, level: 1 }]);
+	assert.deepEqual(explicit.rules.map(rule => ({
 		entryId: rule.entryId,
 		level: rule.level,
-	})), [{ entryId: 'root_rule', level: 1 }]);
-	assert.ok(mireTroll.rules[0].name);
-	assert.ok(mireTroll.rules[0].description);
+	})), [{ entryId: fixedRule.id, level: 1 }]);
+	assert.ok(explicit.rules[0].name);
+	assert.ok(explicit.rules[0].description);
 });
 
 test('natural armor, generated armor, status, and weighted gear resolve to final state', () => {
