@@ -160,6 +160,7 @@ module.exports = function createRuntimeChecks(context) {
 		const localAudioFile = path.join('media', 'Poutouyemoun.mp3');
 		for (const file of [
 			path.join('documentation', 'TTRPG_RANDOM_RULES_EN.md'),
+			path.join('documentation', 'JDR_RANDOM_RULES_FR.md'),
 			path.join('media', 'HEADS.gif'),
 			path.join('media', 'LOGO.jpg'),
 			localAudioFile,
