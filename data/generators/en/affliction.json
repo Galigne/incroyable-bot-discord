@@ -13,23 +13,7 @@
       "name": "Ash Fever",
       "fields": {
         "type": "disease",
-        "description": "A smoky fever causes the {{ status_effect:feverish.name }} status effect and sensitivity to open flame."
-      }
-    },
-    {
-      "id": "marsh_lung",
-      "name": "Marsh Lung",
-      "fields": {
-        "type": "disease",
-        "description": "A damp cough and shortness of breath associated with stagnant wetlands."
-      }
-    },
-    {
-      "id": "red_flux",
-      "name": "Red Flux",
-      "fields": {
-        "type": "disease",
-        "description": "A draining intestinal illness marked by cramps, thirst, and rapid weakness."
+        "description": "A smoky fever causes the {{ status_effect:feverish.name }} status effect; exposure to open flame worsens the illness and can make its symptoms flare."
       }
     },
     {
@@ -37,7 +21,7 @@
       "name": "Glass Cough",
       "fields": {
         "type": "disease",
-        "description": "A painful dry cough that produces tiny translucent crystals of uncertain origin."
+        "description": "A painful dry cough produces tiny translucent crystals; severe fits can compromise stealth, and strenuous activity may provoke or worsen the {{ status_effect:bleeding.name }} status effect."
       }
     },
     {
@@ -45,7 +29,7 @@
       "name": "Sleeping Sickness",
       "fields": {
         "type": "disease",
-        "description": "Increasing bouts of sleep interrupt ordinary activity and become difficult to resist."
+        "description": "Recurring bouts of sleep interrupt ordinary activity and become difficult to resist; severe episodes can cause the {{ status_effect:unconscious.name }} status effect."
       }
     },
     {
@@ -53,7 +37,7 @@
       "name": "Frost Rot",
       "fields": {
         "type": "disease",
-        "description": "Numb, discolored tissue spreads after prolonged cold or supernatural exposure."
+        "description": "Numb, discolored tissue spreads after prolonged cold or supernatural exposure; cold worsens the disease and may inflict either the {{ status_effect:chilled.name }} or {{ status_effect:slowed.name }} status effect, while warmth provides temporary relief."
       }
     },
     {
@@ -69,7 +53,7 @@
       "name": "Black Vein",
       "fields": {
         "type": "disease",
-        "description": "Darkened veins slowly spread from an infected wound as strength fades."
+        "description": "Darkened veins slowly spread from an infected wound, interfering with healing and passive recovery; severe or newly opened wounds accelerate its progression."
       }
     },
     {
@@ -85,15 +69,7 @@
       "name": "Haunting Presence",
       "fields": {
         "type": "curse",
-        "description": "An unseen presence follows the bearer, disturbing rest, silence, and stealth; its agitation may also betray nearby supernatural danger."
-      }
-    },
-    {
-      "id": "mirror_curse",
-      "name": "Mirror Curse",
-      "fields": {
-        "type": "curse",
-        "description": "Reflections occasionally act out intentions the bearer has tried to conceal."
+        "description": "An unseen presence follows the bearer, disturbing rest and reliably disrupting attempts at silence or stealth with involuntary sounds or other signs; its agitation may also betray nearby supernatural danger."
       }
     },
     {
@@ -101,7 +77,7 @@
       "name": "Hunger Mark",
       "fields": {
         "type": "curse",
-        "description": "Ordinary meals no longer bring lasting satisfaction, regardless of abundance."
+        "description": "Ordinary food cannot properly satisfy the curse or prevent the consequences of the {{ status_effect:starving.name }} status effect; only an unusual form of sustenance chosen by the GM can do so."
       }
     },
     {
@@ -109,7 +85,7 @@
       "name": "Stone Sleep",
       "fields": {
         "type": "curse",
-        "description": "Each deep sleep leaves part of the body briefly cold, heavy, and stone-like."
+        "description": "After deep sleep, part of the body remains temporarily cold, heavy, and stone-like, leaving the bearer with either the {{ status_effect:slowed.name }} or {{ status_effect:weakened.name }} status effect until it recovers."
       }
     },
     {
@@ -117,7 +93,7 @@
       "name": "Whispering Mark",
       "fields": {
         "type": "curse",
-        "description": "A hidden mark repeats fragments of nearby secrets when the surroundings are quiet."
+        "description": "A hidden mark can uncontrollably reveal fragments of nearby hidden conversations or secrets; its utterances may betray the bearer’s position or create social complications."
       }
     },
     {
@@ -125,7 +101,7 @@
       "name": "Nightmare Chain",
       "fields": {
         "type": "curse",
-        "description": "Recurring dreams connect the bearer to a place, object, or unknown sleeper."
+        "description": "Recurring nightmares connect the bearer to a creature, place, or object; while the curse persists, rest provides reduced or no normal passive healing or recovery, and the dreams offer clues about what is linked."
       }
     },
     {
@@ -133,15 +109,7 @@
       "name": "Withering Touch",
       "fields": {
         "type": "curse",
-        "description": "Delicate plants and perishable goods deteriorate unusually quickly in the bearer’s hands."
-      }
-    },
-    {
-      "id": "borrowed_shadow",
-      "name": "Borrowed Shadow",
-      "fields": {
-        "type": "curse",
-        "description": "The bearer’s shadow sometimes follows movements belonging to someone else."
+        "description": "Prolonged handling rapidly spoils vulnerable organic materials such as food, herbs, medicine, and similar supplies."
       }
     }
   ]

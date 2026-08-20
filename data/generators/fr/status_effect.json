@@ -57,14 +57,6 @@
       }
     },
     {
-      "id": "dazed",
-      "name": "Étourdi",
-      "weight": 2,
-      "fields": {
-        "description": "les réactions demandent un effort supplémentaire pendant le prochain tour."
-      }
-    },
-    {
       "id": "blinded",
       "name": "Aveuglé",
       "weight": 2,
@@ -142,13 +134,6 @@
       }
     },
     {
-      "id": "cursed",
-      "name": "Maudit",
-      "fields": {
-        "description": "subit une pénalité surnaturelle jusqu’à ce que sa condition précise de levée soit remplie."
-      }
-    },
-    {
       "id": "petrifying",
       "name": "Pétrification",
       "fields": {
@@ -201,14 +186,14 @@
       "id": "drunk",
       "name": "Ivre",
       "fields": {
-        "description": "La coordination et le jugement sont altérés jusqu’au repos ou à un traitement adapté."
+        "description": "L’alcool altère la coordination et le jugement jusqu’au repos ou à un traitement adapté."
       }
     },
     {
       "id": "intoxicated",
       "name": "Intoxiqué",
       "fields": {
-        "description": "Une substance inconnue altère les perceptions ou les réactions ; l’effet exact dépend du produit."
+        "description": "Des drogues, substances alchimiques, émanations, produits chimiques ou autres substances non alcoolisées de même nature altèrent les perceptions ou les réactions ; l’effet exact dépend de la substance."
       }
     },
     {
@@ -246,7 +231,7 @@
       "name": "Agrippé",
       "weight": 2,
       "fields": {
-        "description": "Une autre créature maintient sa cible en place jusqu’à ce qu’elle se dégage ou rompe la prise."
+        "description": "{{ creature.generator.name }} maintient le sujet en place jusqu’à ce qu’il se dégage ou rompe la prise."
       }
     },
     {
@@ -261,13 +246,6 @@
       "name": "Privé d’air",
       "fields": {
         "description": "Une respiration insuffisante met la vie en danger si l’accès à l’air n’est pas rapidement rétabli."
-      }
-    },
-    {
-      "id": "exhausted",
-      "name": "Épuisé",
-      "fields": {
-        "description": "Une fatigue extrême limite les activités prolongées jusqu’à un repos suffisant."
       }
     },
     {

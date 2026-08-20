@@ -57,14 +57,6 @@
       }
     },
     {
-      "id": "dazed",
-      "name": "Dazed",
-      "weight": 2,
-      "fields": {
-        "description": "reactions cost additional effort during the next turn."
-      }
-    },
-    {
       "id": "blinded",
       "name": "Blinded",
       "weight": 2,
@@ -142,13 +134,6 @@
       }
     },
     {
-      "id": "cursed",
-      "name": "Cursed",
-      "fields": {
-        "description": "a supernatural penalty persists until its specific condition is resolved."
-      }
-    },
-    {
       "id": "petrifying",
       "name": "Petrification",
       "fields": {
@@ -201,14 +186,14 @@
       "id": "drunk",
       "name": "Drunk",
       "fields": {
-        "description": "Coordination and judgment are impaired until rest or suitable treatment."
+        "description": "Alcohol impairs coordination and judgment until rest or suitable treatment."
       }
     },
     {
       "id": "intoxicated",
       "name": "Intoxicated",
       "fields": {
-        "description": "An unknown substance alters perception or reactions; the exact effect depends on the product."
+        "description": "Drugs, alchemical substances, fumes, chemicals, or similar non-alcoholic substances alter perception or reactions; the exact effect depends on the substance."
       }
     },
     {
@@ -246,7 +231,7 @@
       "name": "Grappled",
       "weight": 2,
       "fields": {
-        "description": "Another creature holds the subject in place until the grip is escaped or broken."
+        "description": "{{ creature.generator.name }} holds the subject in place until the grip is escaped or broken."
       }
     },
     {
@@ -261,13 +246,6 @@
       "name": "Suffocating",
       "fields": {
         "description": "The subject cannot breathe adequately and requires air before the condition becomes life-threatening."
-      }
-    },
-    {
-      "id": "exhausted",
-      "name": "Exhausted",
-      "fields": {
-        "description": "Severe weariness limits sustained activity until the subject receives substantial rest."
       }
     },
     {

@@ -154,6 +154,93 @@ test('character modifiers keep major impairments distinct from rare transformati
 	}
 });
 
+test('production condition content keeps temporary statuses separate from persistent afflictions', () => {
+	const removedStatusEffectIds = ['exhausted', 'dazed', 'cursed'];
+	const requiredStatusEffectIds = ['fatigued', 'drunk', 'intoxicated', 'grappled'];
+	const removedAfflictionIds = [
+		'marsh_lung',
+		'red_flux',
+		'mirror_curse',
+		'borrowed_shadow',
+	];
+	const requiredAfflictionIds = [
+		'ash_fever',
+		'glass_cough',
+		'sleeping_sickness',
+		'frost_rot',
+		'spore_fever',
+		'black_vein',
+		'oathbrand',
+		'haunting_presence',
+		'hunger_mark',
+		'stone_sleep',
+		'whispering_mark',
+		'nightmare_chain',
+		'withering_touch',
+	];
+	const expectedTraitReferences = {
+		venomous: ['status_effect:poisoned.name'],
+		web_spinner: ['status_effect:restrained.name'],
+		pounce: ['status_effect:prone.name'],
+	};
+	const expectedAfflictionReferences = {
+		ash_fever: ['status_effect:feverish.name'],
+		glass_cough: ['status_effect:bleeding.name'],
+		sleeping_sickness: ['status_effect:unconscious.name'],
+		frost_rot: ['status_effect:chilled.name', 'status_effect:slowed.name'],
+		spore_fever: ['status_effect:confused.name'],
+		hunger_mark: ['status_effect:starving.name'],
+		stone_sleep: ['status_effect:slowed.name', 'status_effect:weakened.name'],
+	};
+
+	for (const locale of ['en', 'fr']) {
+		const statusEffects = generatorCatalog.getGenerator('status_effect', locale);
+		const statusById = new Map(statusEffects.entries.map(entry => [entry.id, entry]));
+		for (const id of removedStatusEffectIds) {
+			assert.equal(statusById.has(id), false, `${locale}:${id}`);
+		}
+		for (const id of requiredStatusEffectIds) {
+			assert.ok(statusById.has(id), `${locale}:${id}`);
+		}
+		assert.deepEqual(
+			extractInlineReferences(statusById.get('grappled').fields.description),
+			['creature.generator.name'],
+		);
+		assert.match(
+			statusById.get('drunk').fields.description,
+			locale === 'en' ? /Alcohol/ : /L’alcool/,
+		);
+		assert.match(
+			statusById.get('intoxicated').fields.description,
+			locale === 'en' ? /non-alcoholic/ : /non alcoolisées/,
+		);
+
+		const traits = generatorCatalog.getGenerator('traits', locale);
+		const traitsById = new Map(traits.entries.map(entry => [entry.id, entry]));
+		for (const [id, references] of Object.entries(expectedTraitReferences)) {
+			assert.deepEqual(
+				extractInlineReferences(traitsById.get(id).fields.description),
+				references,
+			);
+		}
+
+		const afflictions = generatorCatalog.getGenerator('affliction', locale);
+		const afflictionsById = new Map(afflictions.entries.map(entry => [entry.id, entry]));
+		for (const id of removedAfflictionIds) {
+			assert.equal(afflictionsById.has(id), false, `${locale}:${id}`);
+		}
+		for (const id of requiredAfflictionIds) {
+			assert.ok(afflictionsById.has(id), `${locale}:${id}`);
+		}
+		for (const [id, references] of Object.entries(expectedAfflictionReferences)) {
+			assert.deepEqual(
+				extractInlineReferences(afflictionsById.get(id).fields.description),
+				references,
+			);
+		}
+	}
+});
+
 test('every production quest, rumor, and secret resolves references with provenance', () => {
 	for (const locale of ['en', 'fr']) {
 		for (const generatorId of ['quest', 'rumor', 'secret']) {

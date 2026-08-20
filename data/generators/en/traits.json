@@ -96,7 +96,7 @@
       "id": "regeneration",
       "name": "Regeneration",
       "fields": {
-        "description": "At the start of its turn, recovers 5% of maximum HP if it has at least 1 HP; fire damage prevents this recovery for that turn."
+        "description": "At the start of its turn, recovers 5% of maximum HP if it has at least 1 HP; an element chosen by the GM prevents this recovery for that turn."
       }
     },
     {
@@ -159,14 +159,14 @@
       "id": "venomous",
       "name": "Venomous",
       "fields": {
-        "description": "After a natural attack deals damage, the target loses 1 AP unless it resists the poison."
+        "description": "After a natural attack deals damage, the target gains the {{ status_effect:poisoned.name }} status effect and loses 1 AP unless it resists the poison."
       }
     },
     {
       "id": "web_spinner",
       "name": "Web Spinner",
       "fields": {
-        "description": "Can create strong restraining webs and gains +2 to Dexterity actions made to move across them."
+        "description": "Can create strong webs that inflict the {{ status_effect:restrained.name }} status effect on a target and gains +2 to Dexterity actions made to move across them."
       }
     },
     {
@@ -187,7 +187,7 @@
       "id": "pounce",
       "name": "Pounce",
       "fields": {
-        "description": "+1 to the next action made to grapple or knock a target prone after moving at least 3 meters toward it in the same turn."
+        "description": "+1 to the next action made to grapple or inflict the {{ status_effect:prone.name }} status effect on a target after moving at least 3 meters toward it in the same turn."
       }
     },
     {
