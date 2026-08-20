@@ -1,10 +1,9 @@
 const { generatorSchemaError } = require('./assertions');
-const {
-	isBackgroundArchetypeGenerator,
-} = require('./backgroundMetadataValidation');
-const { isCreatureDetailGenerator } = require('./creatureMetadataValidation');
 const { validateGeneratorDefinition } = require('./envelopeValidation');
 const { extractInlineReferences } = require('./referenceValidation');
+const {
+	getRoutedArchetypeDefinitionsForGenerator,
+} = require('./routedArchetypeValidation');
 
 function validateGeneratorPair(
 	english,
@@ -69,22 +68,17 @@ function validateGeneratorPair(
 				index,
 			);
 		}
-		if (isCreatureDetailGenerator(english.id, options)) {
+		const routedArchetypes = getRoutedArchetypeDefinitionsForGenerator(
+			english.id,
+			options,
+		);
+		for (const routedArchetype of routedArchetypes) {
 			validateGenerationPair(
 				englishEntry.generation,
 				frenchEntry.generation,
 				file,
 				index,
-				'traits',
-			);
-		}
-		if (isBackgroundArchetypeGenerator(english.id, options)) {
-			validateGenerationPair(
-				englishEntry.generation,
-				frenchEntry.generation,
-				file,
-				index,
-				'talents',
+				routedArchetype.templateProperty,
 			);
 		}
 	}

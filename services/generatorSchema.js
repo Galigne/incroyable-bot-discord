@@ -19,6 +19,9 @@ const {
 	validateGeneratorRelationships,
 } = require('./generatorSchema/relationshipValidation');
 const {
+	validateRoutedArchetypeStatProfileRelationships,
+} = require('./generatorSchema/routedArchetypeValidation');
+const {
 	isGeneratorRouter,
 } = require('./generatorSchema/routerValidation');
 
@@ -32,4 +35,5 @@ module.exports = {
 	validateGeneratorDefinition,
 	validateGeneratorPair,
 	validateGeneratorRelationships,
+	validateRoutedArchetypeStatProfileRelationships,
 };

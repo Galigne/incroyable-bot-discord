@@ -1,6 +1,9 @@
-const { generatorSchemaError } = require('./assertions');
-const { BACKGROUND_ROUTER_ID } = require('./constants');
-const { validateGenerationMetadata } = require('./generationMetadataValidation');
+const {
+	BACKGROUND_ROUTED_ARCHETYPE,
+	isRoutedArchetypeGenerator,
+	validateRoutedArchetypeGeneration,
+	validateRoutedArchetypeGeneratorEnvelope,
+} = require('./routedArchetypeValidation');
 
 function validateBackgroundGeneratorEnvelope(
 	generator,
@@ -8,37 +11,29 @@ function validateBackgroundGeneratorEnvelope(
 	file,
 	options = {},
 ) {
-	if (generator.id === BACKGROUND_ROUTER_ID) {
-		if (generator.visibility !== 'public' || !options.isRouter) {
-			throw generatorSchemaError(
-				'INVALID_BACKGROUND_ROUTER_SCHEMA',
-				`Background router ${file} must be a public structural router.`,
-			);
-		}
-		return;
-	}
-	if (!isBackgroundArchetypeGenerator(generator.id, options)) {
-		return;
-	}
-	if (
-		generator.visibility !== 'internal'
-		|| options.isRouter
-		|| entrySchema.required.length !== 0
-	) {
-		throw generatorSchemaError(
-			'INVALID_BACKGROUND_ARCHETYPE_SCHEMA',
-			`Background archetype generator ${file} must be internal and name-only.`,
-		);
-	}
+	validateRoutedArchetypeGeneratorEnvelope(
+		generator,
+		entrySchema,
+		file,
+		options,
+		BACKGROUND_ROUTED_ARCHETYPE,
+	);
 }
 
 function isBackgroundArchetypeGenerator(generatorId, options = {}) {
-	return options.backgroundGeneratorIds instanceof Set
-		&& options.backgroundGeneratorIds.has(generatorId);
+	return isRoutedArchetypeGenerator(
+		generatorId,
+		options,
+		BACKGROUND_ROUTED_ARCHETYPE,
+	);
 }
 
 function validateBackgroundGeneration(generation, location) {
-	validateGenerationMetadata(generation, location, 'character');
+	validateRoutedArchetypeGeneration(
+		generation,
+		location,
+		BACKGROUND_ROUTED_ARCHETYPE,
+	);
 }
 
 module.exports = {

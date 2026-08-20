@@ -3,15 +3,8 @@ const {
 	normalizeDisplayName,
 } = require('./assertions');
 const {
-	isBackgroundArchetypeGenerator,
-} = require('./backgroundMetadataValidation');
-const {
-	isCreatureDetailGenerator,
-} = require('./creatureMetadataValidation');
-const { BACKGROUND_ROUTER_ID, CREATURE_ROUTER_ID } = require('./constants');
-const {
-	validateGenerationRelationships,
-} = require('./generationRelationshipValidation');
+	validateRoutedArchetypeRelationships,
+} = require('./routedArchetypeValidation');
 const {
 	validateModifierRelationships,
 } = require('./modifierMapValidation');
@@ -25,34 +18,14 @@ function validateGeneratorRelationships(catalog) {
 		throw new TypeError('Generator relationship validation requires a catalog map.');
 	}
 	const modifierGraph = new Map();
-	const creatureGeneratorIds = new Set(
-		catalog.get(CREATURE_ROUTER_ID)?.entries.map(entry => entry.generator) ?? [],
-	);
-	const backgroundGeneratorIds = new Set(
-		catalog.get(BACKGROUND_ROUTER_ID)?.entries.map(entry => entry.generator) ?? [],
-	);
 	validatePublicGeneratorNames(catalog);
 	for (const generator of catalog.values()) {
 		validateInlineRelationships(generator, catalog);
 		validateStructuralRoutes(generator, catalog);
 		validateModifierRelationships(generator, catalog);
 		modifierGraph.set(generator.id, new Set(Object.keys(generator.modifiers ?? {})));
-		for (const entry of generator.entries) {
-			if (
-				isCreatureDetailGenerator(generator.id, { creatureGeneratorIds })
-				|| isBackgroundArchetypeGenerator(generator.id, {
-					backgroundGeneratorIds,
-				})
-			) {
-				validateGenerationRelationships(
-					generator,
-					entry,
-					catalog,
-					validateReferenceRelationship,
-				);
-			}
-		}
 	}
+	validateRoutedArchetypeRelationships(catalog, validateReferenceRelationship);
 	validateModifierCycles(modifierGraph);
 	return true;
 }

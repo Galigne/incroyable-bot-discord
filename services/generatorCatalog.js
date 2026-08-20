@@ -5,9 +5,8 @@ const {
 	validateGeneratorRelationships,
 } = require('./generatorSchema');
 const {
-	BACKGROUND_ROUTER_ID,
-	CREATURE_ROUTER_ID,
-} = require('./generatorSchema/constants');
+	createRoutedArchetypeValidationOptions,
+} = require('./generatorSchema/routedArchetypeValidation');
 
 const generatorsDirectory = path.join(__dirname, '..', 'data', 'generators');
 const DEFAULT_LOCALE = 'en';
@@ -89,23 +88,20 @@ function readGeneratorCatalog(rootDirectory) {
 			`fr/${relativePath}`,
 		),
 	}));
-	const backgroundGeneratorIds = discoverRoutedGeneratorIds(
+	const routedArchetypeValidationOptions = createRoutedArchetypeValidationOptions(
 		definitions,
-		BACKGROUND_ROUTER_ID,
-	);
-	const creatureGeneratorIds = discoverRoutedGeneratorIds(
-		definitions,
-		CREATURE_ROUTER_ID,
 	);
 	const catalogs = new Map([
 		['en', new Map()],
 		['fr', new Map()],
 	]);
 	for (const { relativePath, english, french } of definitions) {
-		validateGeneratorPair(english, french, relativePath, {
-			backgroundGeneratorIds,
-			creatureGeneratorIds,
-		});
+		validateGeneratorPair(
+			english,
+			french,
+			relativePath,
+			routedArchetypeValidationOptions,
+		);
 		if (catalogs.get('en').has(english.id)) {
 			throw generatorCatalogError(
 				'DUPLICATE_GENERATOR_ID',
@@ -118,19 +114,6 @@ function readGeneratorCatalog(rootDirectory) {
 	validateGeneratorRelationships(catalogs.get('en'));
 	validateGeneratorRelationships(catalogs.get('fr'));
 	return catalogs;
-}
-
-function discoverRoutedGeneratorIds(definitions, routerId) {
-	const router = definitions.find(({ english }) => (
-		english.id === routerId
-	))?.english;
-	const ids = new Set();
-	for (const entry of router?.entries ?? []) {
-		if (entry.generator) {
-			ids.add(entry.generator);
-		}
-	}
-	return ids;
 }
 
 function listJsonFiles(directory, relativeDirectory = '') {

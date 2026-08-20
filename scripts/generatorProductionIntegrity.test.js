@@ -2,7 +2,41 @@ const assert = require('node:assert/strict');
 const { test } = require('node:test');
 const generatorCatalog = require('../services/generatorCatalog');
 const generatorResolver = require('../services/generatorResolver');
-const { isGeneratorRouter } = require('../services/generatorSchema');
+const {
+	isGeneratorRouter,
+	validateRoutedArchetypeStatProfileRelationships,
+} = require('../services/generatorSchema');
+const {
+	createStatProfileCandidate,
+} = require('../services/statProfileCatalog');
+
+test('production routed background and creature generators use the consolidated schema path', () => {
+	const catalogs = generatorCatalog.createGeneratorCatalogCandidate();
+	assert.equal(
+		validateRoutedArchetypeStatProfileRelationships(
+			catalogs,
+			createStatProfileCandidate(),
+		),
+		true,
+	);
+	for (const [routerId, requiredFields, forbiddenTemplateProperty] of [
+		['background', [], 'traits'],
+		['creature', ['description'], 'talents'],
+	]) {
+		for (const locale of ['en', 'fr']) {
+			const router = catalogs.get(locale).get(routerId);
+			for (const route of router.entries) {
+				const child = catalogs.get(locale).get(route.generator);
+				assert.equal(child.visibility, 'internal');
+				assert.deepEqual(child.entrySchema.required, requiredFields);
+				assert.ok(child.entries.every(entry => (
+					entry.generation === undefined
+					|| !Object.hasOwn(entry.generation, forbiddenTemplateProperty)
+				)));
+			}
+		}
+	}
+});
 
 test('complete production catalogs validate in both locales under schema v4', () => {
 	const catalogs = generatorCatalog.createGeneratorCatalogCandidate();

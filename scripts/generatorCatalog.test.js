@@ -17,6 +17,7 @@ const {
 	validateGeneratorDefinition,
 	validateGeneratorPair,
 	validateGeneratorRelationships,
+	validateRoutedArchetypeStatProfileRelationships,
 } = require('../services/generatorSchema');
 const {
 	parseWrappedInlineReference,
@@ -32,6 +33,41 @@ const {
 	selectWeightedEntry,
 } = require('../services/weightedSelector');
 const { getCommandOptionValues } = require('../util/commandOptionValues');
+
+test('routed background and creature archetypes share profile relationship validation', () => {
+	const catalogs = generatorCatalog.createGeneratorCatalogCandidate();
+	const profiles = statProfileCatalog.createStatProfileCandidate();
+	assert.equal(
+		validateRoutedArchetypeStatProfileRelationships(catalogs, profiles),
+		true,
+	);
+
+	const backgroundWithoutDefault = statProfileCatalog.createStatProfileCandidate();
+	backgroundWithoutDefault.delete(DEFAULT_STAT_PROFILE_ID);
+	assert.throws(
+		() => validateRoutedArchetypeStatProfileRelationships(
+			catalogs,
+			backgroundWithoutDefault,
+		),
+		error => error.code === 'BACKGROUND_STAT_PROFILE_MISSING',
+	);
+
+	const creatureCatalogs = generatorCatalog.createGeneratorCatalogCandidate();
+	const creatureRoute = creatureCatalogs.get('en').get('creature').entries[0];
+	const creatureProfile = creatureCatalogs.get('en').get(creatureRoute.generator)
+		.entries
+		.map(entry => getGenerationStatProfileId(entry.generation))
+		.find(profileId => profileId !== DEFAULT_STAT_PROFILE_ID);
+	const withoutCreatureProfile = statProfileCatalog.createStatProfileCandidate();
+	withoutCreatureProfile.delete(creatureProfile);
+	assert.throws(
+		() => validateRoutedArchetypeStatProfileRelationships(
+			creatureCatalogs,
+			withoutCreatureProfile,
+		),
+		error => error.code === 'CREATURE_STAT_PROFILE_MISSING',
+	);
+});
 
 test('background archetypes define optional localized generation metadata', () => {
 	const catalogs = generatorCatalog.createGeneratorCatalogCandidate();

@@ -13,13 +13,9 @@ const {
 	MAX_FIELD_VALUE_LENGTH,
 } = require('./constants');
 const {
-	isBackgroundArchetypeGenerator,
-	validateBackgroundGeneration,
-} = require('./backgroundMetadataValidation');
-const {
-	isCreatureDetailGenerator,
-	validateCreatureGeneration,
-} = require('./creatureMetadataValidation');
+	getRoutedArchetypeDefinitionsForGenerator,
+	validateRoutedArchetypeGeneration,
+} = require('./routedArchetypeValidation');
 const { extractInlineReferences } = require('./referenceValidation');
 function validateEntrySchema(entrySchema, file) {
 	assertPlainObject(entrySchema, `Generator ${file} has an invalid entrySchema.`);
@@ -81,6 +77,10 @@ function validateGeneratorEntry(
 			`Generator ${location} has an invalid weight.`,
 		);
 	}
+	const routedArchetypes = getRoutedArchetypeDefinitionsForGenerator(
+		generator.id,
+		options,
+	);
 	const commonKeys = options.isRouter ? [
 		'id',
 		'name',
@@ -90,12 +90,7 @@ function validateGeneratorEntry(
 		'id',
 		'name',
 		'weight',
-		...(
-			isBackgroundArchetypeGenerator(generator.id, options)
-			|| isCreatureDetailGenerator(generator.id, options)
-				? ['generation']
-				: []
-		),
+		...(routedArchetypes.length > 0 ? ['generation'] : []),
 	];
 	if (options.isRouter) {
 		validateStableId(entry.generator, `structural route at ${location}`);
@@ -112,17 +107,14 @@ function validateGeneratorEntry(
 			commonKeys,
 			`Generator ${location} has unsupported properties.`,
 		);
-		if (
-			entry.generation !== undefined
-			&& isCreatureDetailGenerator(generator.id, options)
-		) {
-			validateCreatureGeneration(entry.generation, location);
-		}
-		if (
-			entry.generation !== undefined
-			&& isBackgroundArchetypeGenerator(generator.id, options)
-		) {
-			validateBackgroundGeneration(entry.generation, location);
+		if (entry.generation !== undefined) {
+			for (const routedArchetype of routedArchetypes) {
+				validateRoutedArchetypeGeneration(
+					entry.generation,
+					location,
+					routedArchetype,
+				);
+			}
 		}
 		return;
 	}
@@ -154,17 +146,14 @@ function validateGeneratorEntry(
 			);
 		}
 	}
-	if (
-		entry.generation !== undefined
-		&& isCreatureDetailGenerator(generator.id, options)
-	) {
-		validateCreatureGeneration(entry.generation, location);
-	}
-	if (
-		entry.generation !== undefined
-		&& isBackgroundArchetypeGenerator(generator.id, options)
-	) {
-		validateBackgroundGeneration(entry.generation, location);
+	if (entry.generation !== undefined) {
+		for (const routedArchetype of routedArchetypes) {
+			validateRoutedArchetypeGeneration(
+				entry.generation,
+				location,
+				routedArchetype,
+			);
+		}
 	}
 }
 
