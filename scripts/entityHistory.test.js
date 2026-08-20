@@ -288,7 +288,7 @@ test('authorization, validation, and serialization failures do not add history',
 				action: 'set',
 			},
 		),
-		TypeError,
+		{ code: 'INVALID_CHARACTER_SAVE' },
 	);
 	assert.equal(await historyExists(serializationKey), false);
 	assert.equal((await getCharacter(serializationKey)).name.firstName, '');

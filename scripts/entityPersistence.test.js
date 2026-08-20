@@ -43,29 +43,20 @@ test('talent arrays round-trip in the current save schema', async () => {
 	assert.deepEqual((await getCharacter(arrayKey)).talents, talents);
 	assert.deepEqual(JSON.parse(await readSave(arrayKey)).talents, talents);
 
-	const legacyKey = 'Talents.Legacy';
-	await fsPromises.writeFile(
-		getSavePath(legacyKey),
-		JSON.stringify({
-			schemaVersion: 3,
-			key: legacyKey,
-			creatorId: 'creator',
-			talents: [
-				'Athlete — +1 to sustained movement.',
-				'Cold Immunity — Ordinary cold cannot freeze the character.',
-			].join('\n'),
-		}),
-		'utf8',
+	const malformedKey = 'Talents.Malformed';
+	const malformedSave = JSON.parse(await readSave(arrayKey));
+	malformedSave.key = malformedKey;
+	malformedSave.talents = talents.join('\n');
+	const malformedSerialized = JSON.stringify(malformedSave);
+	await fsPromises.writeFile(getSavePath(malformedKey), malformedSerialized, 'utf8');
+	await assert.rejects(
+		getCharacter(malformedKey),
+		{ code: 'INVALID_CHARACTER_SAVE' },
 	);
-	assert.deepEqual((await getCharacter(legacyKey)).talents, talents);
-
-	await updateCharacter(legacyKey, () => true, character => {
-		character.level = 2;
-	});
-	assert.deepEqual(JSON.parse(await readSave(legacyKey)).talents, talents);
+	assert.equal(await readSave(malformedKey), malformedSerialized);
 });
 
-test('encumbrance defaults and explicit values round-trip without rewriting on load', async () => {
+test('encumbrance defaults and explicit values round-trip in complete saves', async () => {
 	const defaultKey = 'Encumbrance.Default';
 	await createCharacter(defaultKey, 'creator');
 	assert.deepEqual((await getCharacter(defaultKey)).gear.encumbrance, { current: 0, max: 0 });
@@ -74,23 +65,17 @@ test('encumbrance defaults and explicit values round-trip without rewriting on l
 		{ current: 0, max: 0 },
 	);
 
-	const legacyKey = 'Encumbrance.Legacy';
-	const legacySave = JSON.stringify({
-		schemaVersion: 3,
-		key: legacyKey,
-		creatorId: 'creator',
-		gear: { encumbrance: { current: 3 } },
-		resources: {
-			hp: { current: 100, max: 100 },
-			ar: { current: 0, max: 0 },
-			ap: { current: 4, max: 4 },
-			md: { current: 5, max: 5 },
-		},
-		status: { effects: [], modifiers: [] },
-	});
-	await fsPromises.writeFile(getSavePath(legacyKey), legacySave, 'utf8');
-	assert.deepEqual((await getCharacter(legacyKey)).gear.encumbrance, { current: 3, max: 0 });
-	assert.equal(await readSave(legacyKey), legacySave);
+	const malformedKey = 'Encumbrance.Malformed';
+	const malformedSave = JSON.parse(await readSave(defaultKey));
+	malformedSave.key = malformedKey;
+	delete malformedSave.gear.encumbrance.max;
+	const malformedSerialized = JSON.stringify(malformedSave);
+	await fsPromises.writeFile(getSavePath(malformedKey), malformedSerialized, 'utf8');
+	await assert.rejects(
+		getCharacter(malformedKey),
+		{ code: 'INVALID_CHARACTER_SAVE' },
+	);
+	assert.equal(await readSave(malformedKey), malformedSerialized);
 
 	const explicitKey = 'Encumbrance.Explicit';
 	await createCharacter(explicitKey, 'creator', character => {
@@ -153,7 +138,7 @@ test('queued numeric updates do not lose changes', async () => {
 				firstStarted.resolve();
 				await releaseFirst.promise;
 			}
-			character.level += 1;
+			character.gear.encumbrance.max += 1;
 		})
 	));
 
@@ -162,7 +147,7 @@ test('queued numeric updates do not lose changes', async () => {
 	releaseFirst.resolve();
 	await Promise.all(updates);
 
-	assert.equal((await getCharacter(characterKey)).level, updateCount + 1);
+	assert.equal((await getCharacter(characterKey)).gear.encumbrance.max, updateCount);
 	assert.equal(getEntityOperationQueueSize(), 0);
 });
 
@@ -277,7 +262,7 @@ test('a throwing mutation does not persist changes or retain its lock', async ()
 	assert.equal(getEntityOperationQueueSize(), 0);
 });
 
-test('serialization failure preserves the previous save and cleans the lock', async () => {
+test('invalid persisted shape preserves the previous save and cleans the lock', async () => {
 	const characterKey = 'Failure.Serialization';
 	await createCharacter(characterKey, 'creator', character => {
 		character.name.firstName = 'Valid';
@@ -288,7 +273,7 @@ test('serialization failure preserves the previous save and cleans the lock', as
 		updateCharacter(characterKey, () => true, character => {
 			character.circularReference = character;
 		}),
-		TypeError,
+		{ code: 'INVALID_CHARACTER_SAVE' },
 	);
 
 	assert.equal(await readSave(characterKey), previousSave);

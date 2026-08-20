@@ -46,41 +46,8 @@ function validateActionPointPair(current, maximum) {
 	}
 }
 
-function copyStringList(value) {
-	return Array.isArray(value) ? value.filter(item => typeof item === 'string') : [];
-}
-
-function copyTalentList(value) {
-	if (Array.isArray(value)) {
-		return copyStringList(value);
-	}
-	if (typeof value !== 'string') {
-		return [];
-	}
-	return value
-		.split(/\r?\n/)
-		.map(line => line.trim())
-		.filter(Boolean);
-}
-
-function copyRules(value) {
-	if (!Array.isArray(value)) {
-		return [];
-	}
-	return value
-		.filter(rule => rule && typeof rule.name === 'string')
-		.map(rule => ({
-			name: rule.name,
-			description: typeof rule.description === 'string' ? rule.description : '',
-			level: Number.isInteger(rule.level) && rule.level > 0 ? rule.level : 1,
-		}));
-}
-
 module.exports = {
 	characterEditError,
-	copyRules,
-	copyStringList,
-	copyTalentList,
 	validateActionPointEdit,
 	validateActionPointPair,
 };

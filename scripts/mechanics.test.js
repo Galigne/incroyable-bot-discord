@@ -6,9 +6,6 @@ const {
 	canEquipArmor,
 } = require('../services/mechanics/armor');
 const {
-	copyRules,
-	copyStringList,
-	copyTalentList,
 	validateActionPointEdit,
 } = require('../services/mechanics/characterValidation');
 const {
@@ -24,7 +21,6 @@ const {
 	calculateMaxMovementDistance,
 	calculateRestoredResourceValue,
 	createGeneratedResources,
-	createResourcesFromSave,
 	resetTurnResources,
 	restoreHealingResources,
 	restoreResource,
@@ -250,30 +246,7 @@ test('statistical profiles preserve minimums, maximums, weights, and legal remai
 	assert.ok(calculateStatCost(remainder) < calculateStatBudget(1));
 });
 
-test('character validation preserves save list trimming and AP constraints', () => {
-	assert.deepEqual(copyStringList(['valid', 2, null]), ['valid']);
-	assert.deepEqual(copyTalentList('First\r\n- Second\n* Third\n\n'), [
-		'First',
-		'- Second',
-		'* Third',
-	]);
-	assert.deepEqual(copyRules([
-		{ name: 'Legacy', description: 2 },
-		{ name: 'Valid', description: 'Description', level: 2 },
-		null,
-	]), [
-		{ name: 'Legacy', description: '', level: 1 },
-		{ name: 'Valid', description: 'Description', level: 2 },
-	]);
-	assert.deepEqual(createResourcesFromSave({
-		ap: { current: 12, max: 11 },
-	}), {
-		hp: { current: 100, max: 100 },
-		ar: { current: 0, max: 0 },
-		ap: { current: 10, max: 10 },
-		md: { current: 5, max: 5 },
-	});
-
+test('character validation preserves AP constraints', () => {
 	const character = createCharacterFixture();
 	assert.throws(
 		() => validateActionPointEdit(character, ['resources', 'ap', 'max'], 11),
@@ -281,7 +254,7 @@ test('character validation preserves save list trimming and AP constraints', () 
 	);
 });
 
-test('blank characters and hydrated saves use talent arrays', () => {
+test('blank characters and hydrated saves use validated talent arrays', () => {
 	const blankCharacter = new Character('Blank', 'creator');
 	assert.deepEqual(blankCharacter.talents, []);
 
@@ -289,70 +262,34 @@ test('blank characters and hydrated saves use talent arrays', () => {
 		'Athlete — +1 to sustained movement.',
 		'Cold Immunity — Ordinary cold cannot freeze the character.',
 	];
-	const hydratedCharacter = Character.fromSave({
-		schemaVersion: 3,
-		creatorId: 'creator',
-		key: 'Array.Save',
-		talents: savedTalents,
-	});
+	const saved = JSON.parse(JSON.stringify(new Character('Array.Save', 'creator')));
+	saved.talents = savedTalents;
+	const hydratedCharacter = Character.fromSave(saved);
 	assert.deepEqual(hydratedCharacter.talents, savedTalents);
 	assert.notEqual(hydratedCharacter.talents, savedTalents);
 
-	const hydratedTextCharacter = Character.fromSave({
-		schemaVersion: 3,
-		creatorId: 'creator',
-		key: 'Text.Save',
-		talents: [
-			'  Athlete — +1 to sustained movement.  ',
-			'- Cold Immunity — Ordinary cold cannot freeze the character.',
-			'',
-			'* Keen Eye — +1 when searching for details.',
-		].join('\r\n'),
-	});
-	assert.deepEqual(hydratedTextCharacter.talents, [
-		'Athlete — +1 to sustained movement.',
-		'- Cold Immunity — Ordinary cold cannot freeze the character.',
-		'* Keen Eye — +1 when searching for details.',
-	]);
+	const malformed = JSON.parse(JSON.stringify(new Character('Text.Save', 'creator')));
+	malformed.talents = 'Athlete — +1 to sustained movement.';
+	assert.throws(
+		() => Character.fromSave(malformed),
+		error => error.code === 'INVALID_CHARACTER_SAVE',
+	);
 });
 
-test('character encumbrance defaults each absent value and preserves explicit values', () => {
+test('character hydration rejects incomplete resources and preserves explicit encumbrance', () => {
 	const blankCharacter = new Character('Blank.Encumbrance', 'creator');
 	assert.deepEqual(blankCharacter.gear.encumbrance, { current: 0, max: 0 });
 
-	const missingEncumbrance = Character.fromSave({
-		schemaVersion: 3,
-		creatorId: 'creator',
-		key: 'Missing.Encumbrance',
-		statistics: { constitution: 20 },
-	});
-	assert.deepEqual(missingEncumbrance.gear.encumbrance, { current: 0, max: 0 });
+	const incomplete = JSON.parse(JSON.stringify(blankCharacter));
+	delete incomplete.gear.encumbrance.current;
+	assert.throws(
+		() => Character.fromSave(incomplete),
+		error => error.code === 'INVALID_CHARACTER_SAVE',
+	);
 
-	const missingMaximum = Character.fromSave({
-		schemaVersion: 3,
-		creatorId: 'creator',
-		gear: { encumbrance: { current: 3 } },
-		key: 'Missing.Maximum.Encumbrance',
-		statistics: { constitution: 20 },
-	});
-	assert.deepEqual(missingMaximum.gear.encumbrance, { current: 3, max: 0 });
-
-	const missingCurrent = Character.fromSave({
-		schemaVersion: 3,
-		creatorId: 'creator',
-		gear: { encumbrance: { max: 8 } },
-		key: 'Missing.Current.Encumbrance',
-		statistics: { constitution: 20 },
-	});
-	assert.deepEqual(missingCurrent.gear.encumbrance, { current: 0, max: 8 });
-
-	const explicitEncumbrance = Character.fromSave({
-		schemaVersion: 3,
-		creatorId: 'creator',
-		gear: { encumbrance: { current: 4, max: 11 } },
-		key: 'Explicit.Encumbrance',
-		statistics: { constitution: 20 },
-	});
+	const saved = JSON.parse(JSON.stringify(new Character('Explicit.Encumbrance', 'creator')));
+	saved.gear.encumbrance = { current: 4, max: 11 };
+	const explicitEncumbrance = Character.fromSave(saved);
 	assert.deepEqual(explicitEncumbrance.gear.encumbrance, { current: 4, max: 11 });
 });
 

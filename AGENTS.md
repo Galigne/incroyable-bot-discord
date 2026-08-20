@@ -97,6 +97,9 @@ write real saves.
   rotation, restoration, and prepared-write workflow used by both history stores.
 - `services/entityPersistenceTransaction.js`: shared ordered two-file commit,
   permanent-deletion, and rollback coordination for active saves and history.
+- `services/combatantSaveSchema.js`: shared strict validators for persisted
+  statistics, resources, status, RULEs, gear, encumbrance, and other common
+  combatant state consumed by both concrete save schemas.
 - `services/characterSaveSchema.js`: owns the current character-save schema version
   and validates raw save metadata before model hydration.
 - `services/creatureSaveSchema.js`: owns the strict creature-save schema and

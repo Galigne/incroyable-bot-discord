@@ -10,6 +10,7 @@ const testSaveDirectory = fs.mkdtempSync(
 );
 process.env.INCREDIBLE_BOT_SAVE_DIRECTORY = testSaveDirectory;
 
+const Character = require('../models/Character');
 const commandRegistry = require('../commands/registry');
 const {
 	CURRENT_CHARACTER_SAVE_SCHEMA_VERSION,
@@ -85,11 +86,9 @@ test('newly created characters persist the current schema version', async () => 
 
 test('current-version saves load successfully', async () => {
 	const characterKey = 'Schema.Current';
-	await writeRawSave(characterKey, {
-		schemaVersion: CURRENT_CHARACTER_SAVE_SCHEMA_VERSION,
-		creatorId: 'creator',
-		name: { firstName: 'Current', lastName: '' },
-	});
+	const save = createValidCharacterSave(characterKey);
+	save.name.firstName = 'Current';
+	await writeRawSave(characterKey, save);
 
 	const character = await getCharacter(characterKey);
 
@@ -256,11 +255,10 @@ test('malformed schemaVersion values are rejected', async () => {
 });
 
 test('character listing skips and reports saves with invalid versions', async () => {
-	await writeRawSave('Schema.Listed.Valid', {
-		schemaVersion: CURRENT_CHARACTER_SAVE_SCHEMA_VERSION,
-		creatorId: 'creator',
-		name: { firstName: 'Valid', lastName: '' },
-	});
+	await writeRawSave(
+		'Schema.Listed.Valid',
+		createValidCharacterSave('Schema.Listed.Valid'),
+	);
 	const invalidSave = await writeRawSave('Schema.Listed.Invalid', {
 		schemaVersion: CURRENT_CHARACTER_SAVE_SCHEMA_VERSION + 1,
 		creatorId: 'creator',
@@ -324,6 +322,37 @@ test('schemaVersion is excluded from character editing and display surfaces', as
 	);
 	assert.doesNotMatch(JSON.stringify(summary), /schemaVersion/);
 });
+
+test('character saves reject incomplete or malformed persisted combatant state', async () => {
+	const cases = [
+		['missing statistics', save => delete save.statistics],
+		['incomplete resources', save => delete save.resources.hp.max],
+		['invalid status effect', save => {
+			save.status.effects = [{ name: 'Broken' }];
+		}],
+		['invalid RULE', save => {
+			save.rules = [{ name: 'Broken', description: '', level: 1 }];
+		}],
+		['incomplete gear', save => delete save.gear.encumbrance.current],
+	];
+
+	for (const [label, mutate] of cases) {
+		const characterKey = `Schema.Invalid.${label.replaceAll(' ', '.')}`;
+		const save = createValidCharacterSave(characterKey);
+		mutate(save);
+		const originalSave = await writeRawSave(characterKey, save);
+		await assert.rejects(
+			getCharacter(characterKey),
+			{ code: 'INVALID_CHARACTER_SAVE' },
+			label,
+		);
+		assert.equal(await readSaveText(characterKey), originalSave);
+	}
+});
+
+function createValidCharacterSave(characterKey, creatorId = 'creator') {
+	return JSON.parse(JSON.stringify(new Character(characterKey, creatorId)));
+}
 
 function getSavePath(characterKey) {
 	return getCharacterSavePath(characterKey);

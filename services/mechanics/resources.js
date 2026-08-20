@@ -31,28 +31,6 @@ function createGeneratedResources(stats, level, armorPercentage) {
 	};
 }
 
-function createResourcesFromSave(resources = {}) {
-	const apMax = clampActionPoints(resources.ap?.max ?? 4);
-	return {
-		hp: {
-			current: resources.hp?.current ?? 100,
-			max: resources.hp?.max ?? 100,
-		},
-		ar: {
-			current: resources.ar?.current ?? 0,
-			max: resources.ar?.max ?? 0,
-		},
-		ap: {
-			current: Math.min(clampActionPoints(resources.ap?.current ?? 4), apMax),
-			max: apMax,
-		},
-		md: {
-			current: resources.md?.current ?? 5,
-			max: resources.md?.max ?? 5,
-		},
-	};
-}
-
 function calculateRestoredResourceValue(maximum, percentage) {
 	validateRestorationPercentage(percentage);
 	return Math.min(maximum, Math.round(maximum * percentage / 100));
@@ -124,7 +102,6 @@ module.exports = {
 	calculateRestoredResourceValue,
 	clampActionPoints,
 	createGeneratedResources,
-	createResourcesFromSave,
 	resetTurnResources,
 	restoreHealingResources,
 	restoreResource,

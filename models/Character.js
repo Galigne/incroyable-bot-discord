@@ -1,59 +1,24 @@
 const {
-	copyRules,
-	copyStringList,
-	copyTalentList,
-} = require('../services/mechanics/characterValidation');
-const { createResourcesFromSave } = require('../services/mechanics/resources');
-const { createStats } = require('../services/mechanics/statistics');
-const {
 	CURRENT_CHARACTER_SAVE_SCHEMA_VERSION,
 	validateCharacterSaveSchema,
 } = require('../services/characterSaveSchema');
+const { createStats } = require('../services/mechanics/statistics');
 
 class Character {
-	static fromSave(data, characterKey = data.key) {
-		validateCharacterSaveSchema(data);
+	static fromSave(data, characterKey = data?.key) {
+		validateCharacterSaveSchema(data, characterKey);
 		const character = new Character(characterKey, data.creatorId);
-		character.name = {
-			firstName: data.name?.firstName ?? '',
-			lastName: data.name?.lastName ?? '',
-		};
-		character.level = data.level ?? 1;
-		character.race = {
-			name: data.race?.name ?? '',
-			physicalDescription: data.race?.physicalDescription ?? '',
-			lore: data.race?.lore ?? '',
-			traits: {
-				skillBonus: data.race?.traits?.skillBonus ?? '',
-				physicalAbility: data.race?.traits?.physicalAbility ?? '',
-			},
-		};
-		character.background = {
-			archetype: data.background?.archetype ?? '',
-			physicalDescription: data.background?.physicalDescription ?? '',
-			backstory: data.background?.backstory ?? '',
-			goals: data.background?.goals ?? '',
-		};
-		character.personality = {
-			traits: copyStringList(data.personality?.traits),
-			description: data.personality?.description ?? '',
-		};
-		character.statistics = createStats(data.statistics);
-		character.resources = createResourcesFromSave(data.resources);
-		character.status = {
-			effects: structuredClone(data.status?.effects ?? []),
-			modifiers: structuredClone(data.status?.modifiers ?? []),
-		};
-		character.rules = copyRules(data.rules);
-		character.talents = copyTalentList(data.talents);
-		character.gear = {
-			equipment: copyStringList(data.gear?.equipment),
-			inventory: copyStringList(data.gear?.inventory),
-			encumbrance: {
-				current: data.gear?.encumbrance?.current ?? 0,
-				max: data.gear?.encumbrance?.max ?? 0,
-			},
-		};
+		character.name = structuredClone(data.name);
+		character.level = data.level;
+		character.race = structuredClone(data.race);
+		character.background = structuredClone(data.background);
+		character.personality = structuredClone(data.personality);
+		character.statistics = structuredClone(data.statistics);
+		character.resources = structuredClone(data.resources);
+		character.status = structuredClone(data.status);
+		character.rules = structuredClone(data.rules);
+		character.talents = structuredClone(data.talents);
+		character.gear = structuredClone(data.gear);
 		return character;
 	}
 
