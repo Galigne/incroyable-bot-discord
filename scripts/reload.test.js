@@ -306,15 +306,75 @@ test('voice cleanup stops players and destroys active connections', async () => 
 test('Discord reconnect reuses the client without duplicating listeners', async () => {
 	const client = new EventEmitter();
 	const calls = [];
-	client.destroy = () => calls.push('destroy');
+	const diagnosticLogs = [];
+	let resolveDestruction;
+	const destruction = new Promise(resolve => {
+		resolveDestruction = resolve;
+	});
+	client.destroy = () => {
+		calls.push('destroy');
+		return destruction;
+	};
 	client.login = async token => calls.push(`login:${token}`);
 	client.on('interaction', () => null);
 	const originalClient = client;
 
-	await reconnectClient(client, 'test-token');
+	await reconnectClient(client, 'test-token', {
+		log: message => diagnosticLogs.push(message),
+	});
 	assert.equal(client, originalClient);
 	assert.deepEqual(calls, ['destroy', 'login:test-token']);
 	assert.equal(client.listenerCount('interaction'), 1);
+	assert.deepEqual(diagnosticLogs, [
+		'[reload] discordReconnect: destruction invoked.',
+		'[reload] discordReconnect: login beginning.',
+		'[reload] discordReconnect: login completed.',
+	]);
+
+	resolveDestruction();
+	await new Promise(resolve => setImmediate(resolve));
+	assert.deepEqual(diagnosticLogs, [
+		'[reload] discordReconnect: destruction invoked.',
+		'[reload] discordReconnect: login beginning.',
+		'[reload] discordReconnect: login completed.',
+		'[reload] discordReconnect: destruction completed.',
+	]);
+});
+
+test('Discord reconnect logs asynchronous destruction rejection without changing login ordering', async () => {
+	const client = new EventEmitter();
+	const calls = [];
+	const diagnosticLogs = [];
+	const diagnosticErrors = [];
+	let rejectDestruction;
+	const destruction = new Promise((resolve, reject) => {
+		rejectDestruction = reject;
+	});
+	client.destroy = () => {
+		calls.push('destroy');
+		return destruction;
+	};
+	client.login = async token => calls.push(`login:${token}`);
+
+	await reconnectClient(client, 'test-token', {
+		error: (...parts) => diagnosticErrors.push(parts),
+		log: message => diagnosticLogs.push(message),
+	});
+	assert.deepEqual(calls, ['destroy', 'login:test-token']);
+	assert.deepEqual(diagnosticLogs, [
+		'[reload] discordReconnect: destruction invoked.',
+		'[reload] discordReconnect: login beginning.',
+		'[reload] discordReconnect: login completed.',
+	]);
+	assert.deepEqual(diagnosticErrors, []);
+
+	const destructionError = new Error('destroy failed');
+	rejectDestruction(destructionError);
+	await new Promise(resolve => setImmediate(resolve));
+	assert.deepEqual(diagnosticErrors, [[
+		'[reload] discordReconnect: destruction failed:',
+		destructionError,
+	]]);
 });
 
 test('/reload validates a changed token but reconnects with the startup token', async () => {
@@ -340,6 +400,7 @@ test('/reload validates a changed token but reconnects with the startup token', 
 		client,
 		configPath,
 		discordToken: 'startup-token',
+		logger: createSilentLogger(),
 		operations,
 		runtimeState,
 	});
@@ -353,6 +414,7 @@ test('/reload validates a changed token but reconnects with the startup token', 
 
 test('runtime reload reports a failed registration and continues later stages', async () => {
 	const calls = [];
+	const diagnosticLogs = [];
 	const logged = [];
 	const runtimeState = {
 		getConfig: () => ({ locale: 'en' }),
@@ -370,6 +432,7 @@ test('runtime reload reports a failed registration and continues later stages', 
 		client: {},
 		discordToken: 'sensitive-token',
 		logger: {
+			log: message => diagnosticLogs.push(message),
 			error: (...parts) => logged.push(parts),
 		},
 		operations,
@@ -384,6 +447,16 @@ test('runtime reload reports a failed registration and continues later stages', 
 		['registration'],
 	);
 	assert.equal(logged.length, 1);
+	assert.equal(logged[0][0], '[reload] registration failed:');
+	const expectedDiagnosticLogs = ['[reload] lifecycle started.'];
+	for (const id of RELOAD_STAGES) {
+		expectedDiagnosticLogs.push(`[reload] stage ${id} starting.`);
+		if (id !== 'registration') {
+			expectedDiagnosticLogs.push(`[reload] stage ${id} completed.`);
+		}
+	}
+	expectedDiagnosticLogs.push('[reload] lifecycle finished.');
+	assert.deepEqual(diagnosticLogs, expectedDiagnosticLogs);
 	assert.equal(JSON.stringify(outcome).includes('sensitive-token'), false);
 	assert.equal(calls.includes('discordReconnect'), true);
 });
@@ -400,6 +473,7 @@ test('concurrent reload requests share one stage run', async () => {
 	const runtimeReloader = createRuntimeReloader({
 		client: {},
 		discordToken: 'test-token',
+		logger: createSilentLogger(),
 		operations,
 		runtimeState: {
 			getConfig: () => ({ locale: 'en' }),
@@ -499,5 +573,12 @@ function createGenerationDataFactories(calls) {
 			calls.push('profiles');
 			return createStatProfileCandidate();
 		},
+	};
+}
+
+function createSilentLogger() {
+	return {
+		error: () => undefined,
+		log: () => undefined,
 	};
 }

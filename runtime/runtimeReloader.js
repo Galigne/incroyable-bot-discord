@@ -41,7 +41,7 @@ function createRuntimeReloader({
 			),
 		),
 		voiceCleanup: () => disconnectVoiceResources(),
-		discordReconnect: () => reconnectClient(client, discordToken),
+		discordReconnect: () => reconnectClient(client, discordToken, logger),
 		...operations,
 	};
 	let activeReload = null;
@@ -56,22 +56,30 @@ function createRuntimeReloader({
 	}
 
 	async function runStages() {
+		logger.log('[reload] lifecycle started.');
 		const stages = [];
-		for (const id of RELOAD_STAGES) {
-			try {
-				await stageOperations[id]();
-				stages.push({ id, success: true });
+		try {
+			for (const id of RELOAD_STAGES) {
+				logger.log(`[reload] stage ${id} starting.`);
+				try {
+					await stageOperations[id]();
+					logger.log(`[reload] stage ${id} completed.`);
+					stages.push({ id, success: true });
+				}
+				catch (error) {
+					logger.error(`[reload] ${id} failed:`, error);
+					stages.push({ id, success: false });
+				}
 			}
-			catch (error) {
-				logger.error(`[reload] ${id} failed:`, error);
-				stages.push({ id, success: false });
-			}
+			return {
+				locale: getLocale(runtimeState.getConfig()),
+				stages,
+				success: stages.every(stage => stage.success),
+			};
 		}
-		return {
-			locale: getLocale(runtimeState.getConfig()),
-			stages,
-			success: stages.every(stage => stage.success),
-		};
+		finally {
+			logger.log('[reload] lifecycle finished.');
+		}
 	}
 
 	return { reload };
