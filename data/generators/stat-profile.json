@@ -34,8 +34,8 @@
     {
       "id": "character-fighter",
       "minimums": {
-        "constitution": 4,
-        "strength": 4,
+        "constitution": 8,
+        "strength": 10,
         "dexterity": 4,
         "intelligence": 4,
         "speed": 4,
@@ -45,11 +45,11 @@
       "maximums": {
         "constitution": 20,
         "strength": 20,
-        "dexterity": 12,
-        "intelligence": 14,
+        "dexterity": 14,
+        "intelligence": 16,
         "speed": 20,
         "perception": 20,
-        "charisma": 14
+        "charisma": 16
       },
       "weights": {
         "constitution": 3,
@@ -66,17 +66,17 @@
       "minimums": {
         "constitution": 4,
         "strength": 4,
-        "dexterity": 4,
+        "dexterity": 10,
         "intelligence": 4,
-        "speed": 4,
+        "speed": 8,
         "perception": 4,
         "charisma": 4
       },
       "maximums": {
-        "constitution": 14,
-        "strength": 12,
+        "constitution": 16,
+        "strength": 14,
         "dexterity": 20,
-        "intelligence": 14,
+        "intelligence": 16,
         "speed": 20,
         "perception": 20,
         "charisma": 20
@@ -97,15 +97,15 @@
         "constitution": 4,
         "strength": 4,
         "dexterity": 4,
-        "intelligence": 4,
+        "intelligence": 10,
         "speed": 4,
         "perception": 4,
         "charisma": 4
       },
       "maximums": {
-        "constitution": 14,
-        "strength": 12,
-        "dexterity": 14,
+        "constitution": 16,
+        "strength": 14,
+        "dexterity": 16,
         "intelligence": 20,
         "speed": 20,
         "perception": 20,
@@ -124,10 +124,10 @@
     {
       "id": "character-cleric",
       "minimums": {
-        "constitution": 4,
+        "constitution": 10,
         "strength": 4,
         "dexterity": 4,
-        "intelligence": 4,
+        "intelligence": 10,
         "speed": 4,
         "perception": 4,
         "charisma": 4
@@ -135,10 +135,10 @@
       "maximums": {
         "constitution": 20,
         "strength": 20,
-        "dexterity": 12,
+        "dexterity": 14,
         "intelligence": 20,
-        "speed": 14,
-        "perception": 14,
+        "speed": 16,
+        "perception": 16,
         "charisma": 20
       },
       "weights": {
@@ -160,12 +160,12 @@
         "intelligence": 4,
         "speed": 4,
         "perception": 4,
-        "charisma": 4
+        "charisma": 10
       },
       "maximums": {
-        "constitution": 14,
-        "strength": 12,
-        "dexterity": 12,
+        "constitution": 16,
+        "strength": 14,
+        "dexterity": 14,
         "intelligence": 20,
         "speed": 20,
         "perception": 20,
@@ -196,10 +196,10 @@
         "constitution": 20,
         "strength": 18,
         "dexterity": 20,
-        "intelligence": 12,
+        "intelligence": 14,
         "speed": 20,
         "perception": 20,
-        "charisma": 12
+        "charisma": 14
       },
       "weights": {
         "constitution": 2,
@@ -225,11 +225,11 @@
       "maximums": {
         "constitution": 20,
         "strength": 20,
-        "dexterity": 14,
-        "intelligence": 8,
-        "speed": 14,
-        "perception": 14,
-        "charisma": 10
+        "dexterity": 16,
+        "intelligence": 14,
+        "speed": 16,
+        "perception": 16,
+        "charisma": 14
       },
       "weights": {
         "constitution": 3,
@@ -247,14 +247,14 @@
         "constitution": 4,
         "strength": 4,
         "dexterity": 4,
-        "intelligence": 16,
+        "intelligence": 10,
         "speed": 4,
         "perception": 4,
         "charisma": 4
       },
       "maximums": {
         "constitution": 16,
-        "strength": 12,
+        "strength": 14,
         "dexterity": 18,
         "intelligence": 20,
         "speed": 18,
@@ -274,7 +274,7 @@
     {
       "id": "creature-elemental",
       "minimums": {
-        "constitution": 12,
+        "constitution": 10,
         "strength": 4,
         "dexterity": 4,
         "intelligence": 10,
