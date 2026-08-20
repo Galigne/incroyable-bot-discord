@@ -77,7 +77,7 @@
       "name": "Hunger Mark",
       "fields": {
         "type": "curse",
-        "description": "Ordinary food cannot properly satisfy the curse or prevent the consequences of the {{ status_effect:starving.name }} status effect; only an unusual form of sustenance chosen by the GM can do so."
+        "description": "Ordinary food cannot satisfy the supernatural hunger imposed by the curse or prevent the consequences of the {{ status_effect:starving.name }} status effect; only an unusual form of sustenance chosen by the GM can do so."
       }
     },
     {
@@ -101,7 +101,7 @@
       "name": "Nightmare Chain",
       "fields": {
         "type": "curse",
-        "description": "Recurring nightmares connect the bearer to a creature, place, or object; while the curse persists, rest provides reduced or no normal passive healing or recovery, and the dreams offer clues about what is linked."
+        "description": "Recurring nightmares connect the bearer to a creature, place, or object; while the curse persists, normal passive healing and recovery from rest are greatly reduced and may be entirely prevented, and the dreams offer clues about the linked creature, place, or object."
       }
     },
     {

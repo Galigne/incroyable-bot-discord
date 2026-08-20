@@ -77,7 +77,7 @@
       "name": "Marque de la faim",
       "fields": {
         "type": "malédiction",
-        "description": "La nourriture ordinaire ne peut ni satisfaire véritablement la malédiction ni empêcher les conséquences de l’état {{ status_effect:starving.name }} ; seule une forme inhabituelle de subsistance choisie par le MJ peut y parvenir."
+        "description": "La nourriture ordinaire ne peut pas assouvir la faim surnaturelle imposée par la malédiction ni empêcher les conséquences de l’état {{ status_effect:starving.name }} ; seule une forme inhabituelle de subsistance choisie par le MJ peut y parvenir."
       }
     },
     {
@@ -101,7 +101,7 @@
       "name": "Chaîne des cauchemars",
       "fields": {
         "type": "malédiction",
-        "description": "Des cauchemars récurrents relient le porteur à une créature, un lieu ou un objet ; tant que la malédiction persiste, le repos n’apporte qu’une guérison ou une récupération passive normale réduite, voire aucune, et les rêves fournissent des indices sur ce lien."
+        "description": "Des cauchemars récurrents relient le porteur à une créature, un lieu ou un objet ; tant que la malédiction persiste, la guérison et la récupération passives normales apportées par le repos sont fortement réduites, voire totalement empêchées, et les rêves fournissent des indices sur la créature, le lieu ou l’objet lié."
       }
     },
     {
