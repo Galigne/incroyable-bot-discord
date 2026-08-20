@@ -37,7 +37,7 @@
       "name": "Maudit",
       "weight": 3,
       "fields": {
-        "description": "L’objet est associé à {{ affliction.name }} ; le MJ décide comment la malédiction se manifeste."
+        "description": "L’objet est associé à {{ affliction }} ; le MJ décide comment la malédiction se manifeste."
       }
     },
     {
@@ -45,7 +45,7 @@
       "name": "Maudit",
       "weight": 3,
       "fields": {
-        "description": "L’objet est associé à l’état {{ status_effect.name }} ; le MJ décide comment la malédiction se manifeste."
+        "description": "L’objet est associé à l’état {{ status_effect }} ; le MJ décide comment la malédiction se manifeste."
       }
     },
     {

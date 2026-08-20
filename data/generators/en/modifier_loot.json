@@ -37,7 +37,7 @@
       "name": "Cursed",
       "weight": 3,
       "fields": {
-        "description": "The item is associated with {{ affliction.name }}; the GM decides how the curse manifests."
+        "description": "The item is associated with {{ affliction }}; the GM decides how the curse manifests."
       }
     },
     {
@@ -45,7 +45,7 @@
       "name": "Cursed",
       "weight": 3,
       "fields": {
-        "description": "The item is associated with the {{ status_effect.name }} status effect; the GM decides how the curse manifests."
+        "description": "The item is associated with the {{ status_effect }} status effect; the GM decides how the curse manifests."
       }
     },
     {

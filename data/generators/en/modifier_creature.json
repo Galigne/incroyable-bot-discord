@@ -88,7 +88,7 @@
       "name": "RULE Bearer",
       "weight": 10,
       "fields": {
-        "description": "The subject manifest a RULE {{ rules }} which changes its appearance and abilities."
+        "description": "The subject manifest a RULE {{ rules.name }} which changes its appearance and abilities."
       }
     },
     {
