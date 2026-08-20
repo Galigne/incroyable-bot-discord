@@ -11,7 +11,7 @@
     {
       "id": "scarred",
       "name": "Scarred Weak Point",
-      "weight": 4,
+      "weight": 2,
       "fields": {
         "description": "An old adventuring wound never healed correctly; a foe who notices and reaches the scar may bypass some protection or trigger pain severe enough to interrupt strenuous movement."
       }
@@ -19,23 +19,15 @@
     {
       "id": "one_eyed",
       "name": "One-Eyed",
-      "weight": 4,
+      "weight": 2,
       "fields": {
         "description": "The permanent loss of one eye narrows their field of view and depth perception; threats on the blind side and precise distance judgments are substantially harder to notice."
       }
     },
     {
-      "id": "damaged_lungs",
-      "name": "Ruined Lungs",
-      "weight": 3,
-      "fields": {
-        "description": "Fire, poison gas, drowning, or crushing trauma has permanently scarred their lungs; extended chases, underwater action, choking air, and repeated heavy exertion can rapidly leave them unable to continue."
-      }
-    },
-    {
       "id": "prosthetic_limb",
       "name": "Prosthetic Limb",
-      "weight": 4,
+      "weight": 3,
       "fields": {
         "description": "A prosthetic arm or leg restores broad function and can brace against some hazards, but delicate control or unstable ground remains difficult and serious damage requires specialist repair."
       }
@@ -43,23 +35,15 @@
     {
       "id": "missing_fingers",
       "name": "Missing Fingers",
-      "weight": 4,
+      "weight": 2,
       "fields": {
         "description": "Several fingers are permanently missing from one hand; a full grip, fine manipulation, climbing holds, and tools made for two complete hands require adaptation or extra time."
       }
     },
     {
-      "id": "noticeable_limp",
-      "name": "Noticeable Limp",
-      "weight": 4,
-      "fields": {
-        "description": "A badly damaged leg causes a pronounced limp; sprinting, climbing, balancing, and crossing unstable terrain are substantially harder, and the uneven gait is easy to track or recognize."
-      }
-    },
-    {
       "id": "impaired_hearing",
       "name": "Impaired Hearing",
-      "weight": 4,
+      "weight": 2,
       "fields": {
         "description": "Permanent hearing loss makes quiet speech, distant warnings, and the direction of approaching sounds difficult to judge, especially amid battle noise or from the affected side."
       }
@@ -67,7 +51,7 @@
     {
       "id": "missing_hand",
       "name": "Missing Hand",
-      "weight": 3,
+      "weight": 1,
       "fields": {
         "description": "One hand is missing; weapons, shields, climbing, restraints, and tasks designed for two hands demand a prosthesis, specialized equipment, or a different approach."
       }
@@ -75,7 +59,7 @@
     {
       "id": "missing_arm",
       "name": "Missing Arm",
-      "weight": 3,
+      "weight": 1,
       "fields": {
         "description": "One arm is missing at or above the elbow; two-handed equipment and many climbing or grappling techniques are unavailable without a capable prosthesis or substantial adaptation."
       }
@@ -83,7 +67,7 @@
     {
       "id": "missing_leg",
       "name": "Missing Leg",
-      "weight": 3,
+      "weight": 1,
       "fields": {
         "description": "One leg is missing at or above the knee; without a suitable prosthesis or aid, rapid movement, jumping, climbing, and keeping balance under force are severely limited."
       }
@@ -187,7 +171,7 @@
     {
       "id": "unstable_mutation",
       "name": "Unstable Mutation",
-      "weight": 1,
+      "weight": 2,
       "fields": {
         "description": "One dramatic mutation grants a powerful useful capability chosen by the GM, but the same altered organ or anatomy creates a directly related vulnerability, loss of control, or demanding physical need."
       }
@@ -195,7 +179,7 @@
     {
       "id": "rule_bearer",
       "name": "RULE Bearer",
-      "weight": 1,
+      "weight": 3,
       "fields": {
         "description": "The character visibly and fundamentally manifests an exceptional RULE: {{ rules.name }}. Its presence changes their appearance and extends that RULE beyond ordinary training; the GM defines the major advantage and exploitable limitation it creates."
       }
@@ -203,7 +187,7 @@
     {
       "id": "race_hybrid",
       "name": "Race Hybrid",
-      "weight": 1,
+      "weight": 3,
       "fields": {
         "description": "The character is a hybrid of their normal race and {{ race.name }}. Their appearance and capabilities may combine major physical characteristics from both ancestries, including advantages and limitations that neither possesses alone."
       }
@@ -211,7 +195,7 @@
     {
       "id": "creature_hybrid",
       "name": "Creature Hybrid",
-      "weight": 1,
+      "weight": 3,
       "fields": {
         "description": "The character has been partially hybridized with {{ creature.generator.name }}. Distinctive anatomy and capabilities from that creature reshape their appearance and adventuring potential without replacing their mind or identity."
       }

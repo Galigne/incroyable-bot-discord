@@ -11,7 +11,7 @@
     {
       "id": "scarred",
       "name": "Cicatrice vulnérable",
-      "weight": 4,
+      "weight": 2,
       "fields": {
         "description": "Une ancienne blessure reçue au cours de ses aventures a mal cicatrisé ; un adversaire qui la repère et parvient à l’atteindre peut contourner une partie de la protection ou provoquer une douleur assez vive pour interrompre un effort intense."
       }
@@ -19,23 +19,15 @@
     {
       "id": "one_eyed",
       "name": "Borgne",
-      "weight": 4,
+      "weight": 2,
       "fields": {
         "description": "La perte définitive d’un œil réduit son champ de vision et sa perception de la profondeur ; il lui est nettement plus difficile de repérer les menaces du côté aveugle et d’évaluer précisément les distances."
       }
     },
     {
-      "id": "damaged_lungs",
-      "name": "Poumons ravagés",
-      "weight": 3,
-      "fields": {
-        "description": "Le feu, un gaz toxique, une noyade ou un écrasement a irrémédiablement lésé ses poumons ; les longues poursuites, les actions sous l’eau, l’air irrespirable et les efforts violents répétés peuvent rapidement l’empêcher de continuer."
-      }
-    },
-    {
       "id": "prosthetic_limb",
       "name": "Membre prothétique",
-      "weight": 4,
+      "weight": 3,
       "fields": {
         "description": "Une prothèse de bras ou de jambe lui rend l’essentiel de ses capacités et peut lui offrir un appui dans certaines situations dangereuses, mais les gestes délicats ou les déplacements sur un sol instable restent difficiles et les dégâts sérieux exigent une réparation spécialisée."
       }
@@ -43,23 +35,15 @@
     {
       "id": "missing_fingers",
       "name": "Doigts manquants",
-      "weight": 4,
+      "weight": 2,
       "fields": {
         "description": "Plusieurs doigts manquent définitivement à une main ; les prises fermes, les gestes précis, l’escalade et les outils conçus pour deux mains intactes demandent une adaptation ou davantage de temps."
       }
     },
     {
-      "id": "noticeable_limp",
-      "name": "Boiterie marquée",
-      "weight": 4,
-      "fields": {
-        "description": "Une jambe gravement blessée cause une forte boiterie ; courir, grimper, garder l’équilibre et franchir un terrain instable deviennent nettement plus difficiles, et sa démarche irrégulière permet de suivre sa piste ou de le reconnaître facilement."
-      }
-    },
-    {
       "id": "impaired_hearing",
       "name": "Ouïe altérée",
-      "weight": 4,
+      "weight": 2,
       "fields": {
         "description": "Une perte auditive permanente gêne la compréhension des paroles à voix basse, la perception des avertissements lointains et la localisation des bruits annonçant une approche, surtout dans le tumulte d’un combat ou du côté atteint."
       }
@@ -67,7 +51,7 @@
     {
       "id": "missing_hand",
       "name": "Main manquante",
-      "weight": 3,
+      "weight": 1,
       "fields": {
         "description": "Il lui manque une main ; les armes, les boucliers, l’escalade, les entraves et les tâches prévues pour deux mains exigent une prothèse, un équipement adapté ou une autre méthode."
       }
@@ -75,7 +59,7 @@
     {
       "id": "missing_arm",
       "name": "Bras manquant",
-      "weight": 3,
+      "weight": 1,
       "fields": {
         "description": "Il lui manque un bras au niveau du coude ou plus haut ; sans prothèse fonctionnelle ni adaptation importante, l’équipement à deux mains et de nombreuses techniques d’escalade ou de lutte lui sont inaccessibles."
       }
@@ -83,7 +67,7 @@
     {
       "id": "missing_leg",
       "name": "Jambe manquante",
-      "weight": 3,
+      "weight": 1,
       "fields": {
         "description": "Il lui manque une jambe au niveau du genou ou plus haut ; sans prothèse ni aide adaptée, les déplacements rapides, les sauts, l’escalade et le maintien de l’équilibre lorsqu’une force s’exerce sur lui sont sévèrement limités."
       }
@@ -187,7 +171,7 @@
     {
       "id": "unstable_mutation",
       "name": "Mutation instable",
-      "weight": 1,
+      "weight": 2,
       "fields": {
         "description": "Une mutation spectaculaire lui confère une faculté aussi utile que puissante, choisie par le MJ, mais l’organe ou la modification anatomique qui la rend possible entraîne une vulnérabilité directement liée, une perte de contrôle ou un besoin physiologique contraignant."
       }
@@ -195,7 +179,7 @@
     {
       "id": "rule_bearer",
       "name": "Porteur de LOI",
-      "weight": 1,
+      "weight": 3,
       "fields": {
         "description": "Le personnage manifeste de façon visible et fondamentale une LOI exceptionnelle : {{ rules.name }}. Cette manifestation transforme son apparence et donne à cette LOI une portée qui dépasse le simple entraînement ; le MJ définit l’avantage majeur et la faiblesse exploitable qu’elle crée."
       }
@@ -203,7 +187,7 @@
     {
       "id": "race_hybrid",
       "name": "Ascendance hybride",
-      "weight": 1,
+      "weight": 3,
       "fields": {
         "description": "Le personnage mêle son ascendance d’origine à une seconde ascendance : {{ race.name }}. Son apparence et ses facultés peuvent combiner des caractéristiques physiques majeures des deux peuples, avec des atouts et des limites que ni l’un ni l’autre ne possède seul."
       }
@@ -211,7 +195,7 @@
     {
       "id": "creature_hybrid",
       "name": "Hybride de créature",
-      "weight": 1,
+      "weight": 3,
       "fields": {
         "description": "Le personnage a été partiellement hybridé avec la créature suivante : {{ creature.generator.name }}. L’anatomie et les facultés distinctives de cette créature transforment l’apparence et le potentiel d’aventurier du personnage sans remplacer son esprit ni son identité."
       }
