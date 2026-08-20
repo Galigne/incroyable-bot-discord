@@ -12,6 +12,7 @@ const { createInteractionHandler } = require('./runtime/interactionHandler');
 const { createRuntimeReloader } = require('./runtime/runtimeReloader');
 const { RuntimeState } = require('./runtime/runtimeState');
 const { createVoiceStateHandler } = require('./runtime/voiceStateHandler');
+const { initializeGenerationData } = require('./services/generationData');
 const { authorizeCommand } = require('./util/authorization');
 const {
 	getConfigurationErrorMessage,
@@ -78,6 +79,14 @@ async function start() {
 	}
 	catch (error) {
 		console.error(getConfigurationErrorMessage(error, runtimeState.getConfig()));
+		process.exitCode = 1;
+		return;
+	}
+	try {
+		initializeGenerationData();
+	}
+	catch (error) {
+		console.error('Could not initialize generation data:', error);
 		process.exitCode = 1;
 		return;
 	}

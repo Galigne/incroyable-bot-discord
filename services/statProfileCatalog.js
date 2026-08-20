@@ -1,6 +1,10 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const { BASE_STATS } = require('./mechanics/constants');
+const {
+	clearGenerationData,
+	getGenerationData,
+} = require('./generationDataState');
 
 const STAT_PROFILE_SCHEMA_VERSION = 1;
 const STAT_PROFILE_ID_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
@@ -11,8 +15,6 @@ const statProfilePath = path.join(
 	'generators',
 	'stat-profile.json',
 );
-let cachedProfiles = null;
-
 function getStatProfile(profileId) {
 	return loadStatProfiles().get(profileId);
 }
@@ -22,11 +24,11 @@ function listStatProfiles() {
 }
 
 function clearStatProfileCache() {
-	cachedProfiles = null;
+	clearGenerationData();
 }
 
 function reloadStatProfiles() {
-	return replaceStatProfiles(createStatProfileCandidate());
+	return require('./generationData').reloadGenerationData().statProfiles;
 }
 
 function createStatProfileCandidate() {
@@ -34,15 +36,17 @@ function createStatProfileCandidate() {
 }
 
 function replaceStatProfiles(profiles) {
-	cachedProfiles = profiles;
-	return profiles;
+	return require('./generationData').reloadGenerationData({
+		createStatProfileCandidate: () => profiles,
+	}).statProfiles;
 }
 
 function loadStatProfiles() {
-	if (!cachedProfiles) {
-		cachedProfiles = readStatProfiles();
+	const activeGenerationData = getGenerationData();
+	if (!activeGenerationData.statProfiles) {
+		require('./generationData').ensureGenerationData();
 	}
-	return cachedProfiles;
+	return getGenerationData().statProfiles;
 }
 
 function readStatProfiles() {

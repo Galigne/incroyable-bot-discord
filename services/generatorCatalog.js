@@ -7,13 +7,15 @@ const {
 const {
 	createRoutedArchetypeValidationOptions,
 } = require('./generatorSchema/routedArchetypeValidation');
+const {
+	clearGenerationData,
+	getGenerationData,
+} = require('./generationDataState');
 
 const generatorsDirectory = path.join(__dirname, '..', 'data', 'generators');
 const DEFAULT_LOCALE = 'en';
 const SUPPORTED_LOCALES = new Set(['en', 'fr']);
 const VISIBILITY_FILTERS = new Set(['all', 'internal', 'public']);
-let cachedCatalog = null;
-
 function getGenerator(id, locale = DEFAULT_LOCALE) {
 	if (typeof id !== 'string') {
 		return undefined;
@@ -36,11 +38,11 @@ function listGenerators(locale = DEFAULT_LOCALE, options = {}) {
 }
 
 function clearGeneratorCache() {
-	cachedCatalog = null;
+	clearGenerationData();
 }
 
 function reloadGeneratorCatalog() {
-	return replaceGeneratorCatalog(createGeneratorCatalogCandidate());
+	return require('./generationData').reloadGenerationData().generatorCatalog;
 }
 
 function createGeneratorCatalogCandidate(rootDirectory = generatorsDirectory) {
@@ -48,15 +50,17 @@ function createGeneratorCatalogCandidate(rootDirectory = generatorsDirectory) {
 }
 
 function replaceGeneratorCatalog(catalog) {
-	cachedCatalog = catalog;
-	return catalog;
+	return require('./generationData').reloadGenerationData({
+		createGeneratorCatalogCandidate: () => catalog,
+	}).generatorCatalog;
 }
 
 function loadGeneratorCatalog() {
-	if (!cachedCatalog) {
-		cachedCatalog = readGeneratorCatalog(generatorsDirectory);
+	const activeGenerationData = getGenerationData();
+	if (!activeGenerationData.generatorCatalog) {
+		require('./generationData').ensureGenerationData();
 	}
-	return cachedCatalog;
+	return getGenerationData().generatorCatalog;
 }
 
 function readGeneratorCatalog(rootDirectory) {

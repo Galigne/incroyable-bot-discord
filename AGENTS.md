@@ -708,11 +708,12 @@ The durable implementation constraints are:
   inline-template strings. Resolve them through the shared generator semantics
   during creation and persist only the localized final strings; their text never
   executes mechanics.
-- During `/reload`, use `reloadGenerationData()` to prepare generator and
-  statistical-profile candidates together, validate background/profile and
-  creature/profile relationships, and replace both active caches only after
-  validation succeeds. Normal startup uses the catalogs' existing loading behavior
-  rather than this joint reload workflow.
+- Startup and `/reload` use `initializeGenerationData()` and
+  `reloadGenerationData()` respectively, which share one lifecycle that prepares
+  generator and statistical-profile candidates together, validates all generator
+  relationships plus background/profile and creature/profile relationships, and
+  publishes the pair only after validation succeeds. Lazy catalog access uses the
+  same lifecycle when the active pair has not yet been initialized.
 
 Random character generation depends on exact stable generator IDs and field keys.
 Inspect `services/randomCharacterGenerator.js` and the coupled schema checks before

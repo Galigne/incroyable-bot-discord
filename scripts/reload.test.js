@@ -17,13 +17,22 @@ const commandRegistry = require('../commands/registry');
 const { COMMAND_METADATA } = require('../commands/metadata');
 const {
 	clearGeneratorCache,
+	createGeneratorCatalogCandidate,
 	getGenerator,
 } = require('../services/generatorCatalog');
 const {
 	clearStatProfileCache,
+	createStatProfileCandidate,
 	getStatProfile,
 } = require('../services/statProfileCatalog');
-const { DEFAULT_STAT_PROFILE_ID } = require('../services/generationMetadata');
+const {
+	DEFAULT_STAT_PROFILE_ID,
+} = require('../services/generationMetadata');
+const {
+	getGenerationData,
+	initializeGenerationData,
+	reloadGenerationData,
+} = require('../services/generationData');
 const {
 	RELOAD_STAGES,
 	createRuntimeReloader,
@@ -153,6 +162,64 @@ test('generation-data cache clearing rebuilds both locales and statistical profi
 	assert.notEqual(getGenerator('weapons', 'en'), englishBefore);
 	assert.notEqual(getGenerator('weapons', 'fr'), frenchBefore);
 	assert.notEqual(getStatProfile(DEFAULT_STAT_PROFILE_ID), profileBefore);
+});
+
+test('startup, reload, and lazy generation access share one complete lifecycle', () => {
+	clearGeneratorCache();
+	clearStatProfileCache();
+	const startupCalls = [];
+	const startup = initializeGenerationData(createGenerationDataFactories(startupCalls));
+	assert.deepEqual(startupCalls, ['generators', 'profiles']);
+	assert.strictEqual(getGenerationData().generatorCatalog, startup.generatorCatalog);
+	assert.strictEqual(getGenerationData().statProfiles, startup.statProfiles);
+
+	const reloadCalls = [];
+	const reloaded = reloadGenerationData(createGenerationDataFactories(reloadCalls));
+	assert.deepEqual(reloadCalls, ['generators', 'profiles']);
+	assert.strictEqual(getGenerationData().generatorCatalog, reloaded.generatorCatalog);
+	assert.strictEqual(getGenerationData().statProfiles, reloaded.statProfiles);
+
+	clearGeneratorCache();
+	assert.equal(getGenerationData().generatorCatalog, null);
+	assert.equal(getGenerationData().statProfiles, null);
+	assert.ok(getGenerator('weapons', 'en'));
+	assert.ok(getStatProfile(DEFAULT_STAT_PROFILE_ID));
+	assert.ok(getGenerationData().generatorCatalog);
+	assert.ok(getGenerationData().statProfiles);
+});
+
+test('failed generation-data preparation preserves the previously published pair', () => {
+	const previous = getGenerationData();
+	const invalidProfiles = createStatProfileCandidate();
+	invalidProfiles.delete(DEFAULT_STAT_PROFILE_ID);
+
+	assert.throws(
+		() => reloadGenerationData({
+			createGeneratorCatalogCandidate,
+			createStatProfileCandidate: () => invalidProfiles,
+		}),
+		error => error.code === 'BACKGROUND_STAT_PROFILE_MISSING',
+	);
+	assert.strictEqual(getGenerationData(), previous);
+	assert.strictEqual(
+		getGenerator('weapons', 'en'),
+		previous.generatorCatalog.get('en').get('weapons'),
+	);
+	assert.strictEqual(
+		getStatProfile(DEFAULT_STAT_PROFILE_ID),
+		previous.statProfiles.get(DEFAULT_STAT_PROFILE_ID),
+	);
+
+	assert.throws(
+		() => initializeGenerationData({
+			createGeneratorCatalogCandidate,
+			createStatProfileCandidate: () => {
+				throw new Error('profile candidate failed');
+			},
+		}),
+		/profile candidate failed/,
+	);
+	assert.strictEqual(getGenerationData(), previous);
 });
 
 test('command registry replacement is atomic and does not duplicate commands or listeners', () => {
@@ -420,4 +487,17 @@ function createInteraction(userId, roleIds, ownerId = 'owner') {
 
 function writeJson(filePath, value) {
 	fs.writeFileSync(filePath, JSON.stringify(value), 'utf8');
+}
+
+function createGenerationDataFactories(calls) {
+	return {
+		createGeneratorCatalogCandidate: () => {
+			calls.push('generators');
+			return createGeneratorCatalogCandidate();
+		},
+		createStatProfileCandidate: () => {
+			calls.push('profiles');
+			return createStatProfileCandidate();
+		},
+	};
 }
