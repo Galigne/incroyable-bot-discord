@@ -52,11 +52,11 @@
         "charisma": 16
       },
       "weights": {
-        "constitution": 3,
-        "strength": 3,
+        "constitution": 2,
+        "strength": 2,
         "dexterity": 0.8,
         "intelligence": 0.8,
-        "speed": 2,
+        "speed": 1.5,
         "perception": 1,
         "charisma": 0.8
       }
@@ -84,9 +84,9 @@
       "weights": {
         "constitution": 0.8,
         "strength": 0.8,
-        "dexterity": 3,
-        "intelligence": 2,
-        "speed": 3,
+        "dexterity": 2,
+        "intelligence": 1.5,
+        "speed": 2,
         "perception": 1,
         "charisma": 0.8
       }
@@ -115,7 +115,7 @@
         "constitution": 0.8,
         "strength": 0.8,
         "dexterity": 2,
-        "intelligence": 4,
+        "intelligence": 3,
         "speed": 0.8,
         "perception": 1,
         "charisma": 2
@@ -142,10 +142,10 @@
         "charisma": 20
       },
       "weights": {
-        "constitution": 3,
-        "strength": 3,
+        "constitution": 2,
+        "strength": 2,
         "dexterity": 0.8,
-        "intelligence": 3,
+        "intelligence": 2,
         "speed": 0.8,
         "perception": 0.8,
         "charisma": 1
@@ -177,8 +177,8 @@
         "dexterity": 0.8,
         "intelligence": 1.5,
         "speed": 1,
-        "perception": 2.5,
-        "charisma": 2.5
+        "perception": 2,
+        "charisma": 2
       }
     },
     {
@@ -202,13 +202,13 @@
         "charisma": 14
       },
       "weights": {
-        "constitution": 2,
+        "constitution": 1.5,
         "strength": 1,
-        "dexterity": 3,
-        "intelligence": 0.25,
-        "speed": 3,
-        "perception": 2,
-        "charisma": 0.25
+        "dexterity": 2,
+        "intelligence": 0.5,
+        "speed": 2,
+        "perception": 1.5,
+        "charisma": 0.5
       }
     },
     {
@@ -232,13 +232,13 @@
         "charisma": 14
       },
       "weights": {
-        "constitution": 3,
-        "strength": 4,
+        "constitution": 2,
+        "strength": 3,
         "dexterity": 1,
-        "intelligence": 0.1,
+        "intelligence": 0.5,
         "speed": 1,
         "perception": 1,
-        "charisma": 0.3
+        "charisma": 0.5
       }
     },
     {
@@ -263,9 +263,9 @@
       },
       "weights": {
         "constitution": 1,
-        "strength": 0.25,
+        "strength": 0.5,
         "dexterity": 1,
-        "intelligence": 4,
+        "intelligence": 3,
         "speed": 1,
         "perception": 2,
         "charisma": 1
@@ -292,13 +292,13 @@
         "charisma": 14
       },
       "weights": {
-        "constitution": 3,
-        "strength": 2,
+        "constitution": 2,
+        "strength": 1.5,
         "dexterity": 1,
-        "intelligence": 2,
+        "intelligence": 1.5,
         "speed": 1,
         "perception": 1,
-        "charisma": 0.25
+        "charisma": 0.5
       }
     },
     {
@@ -322,7 +322,7 @@
         "charisma": 20
       },
       "weights": {
-        "constitution": 4,
+        "constitution": 3,
         "strength": 0.8,
         "dexterity": 0.8,
         "intelligence": 1,
@@ -354,10 +354,10 @@
       "weights": {
         "constitution": 0.8,
         "strength": 0.8,
-        "dexterity": 2,
+        "dexterity": 1.5,
         "intelligence": 1,
-        "speed": 4,
-        "perception": 3,
+        "speed": 3,
+        "perception": 2,
         "charisma": 0.8
       }
     },
@@ -385,9 +385,9 @@
         "constitution": 1,
         "strength": 0.8,
         "dexterity": 1,
-        "intelligence": 4,
-        "speed": 3,
-        "perception": 2,
+        "intelligence": 3,
+        "speed": 2,
+        "perception": 1.5,
         "charisma": 0.8
       }
     },
@@ -445,7 +445,7 @@
         "constitution": 1,
         "strength": 0.8,
         "dexterity": 1,
-        "intelligence": 4,
+        "intelligence": 3,
         "speed": 1,
         "perception": 2,
         "charisma": 2
