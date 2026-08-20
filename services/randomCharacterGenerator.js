@@ -277,7 +277,7 @@ function pickCarriedLoot(count, locale, random, resolver) {
 			);
 			selected = {
 				identity: getLootSelectionIdentity(resolved?.provenance),
-				value: getResolvedDisplayValue(resolved),
+				value: getResolvedDisplayValue(resolved, locale),
 			};
 			if (!selectedIdentities.has(selected.identity)) {
 				break;
@@ -305,10 +305,10 @@ function getLootSelectionIdentity(provenance) {
 	return `${selection.generatorId}:${selection.entryId}`;
 }
 
-function getResolvedDisplayValue(result) {
+function getResolvedDisplayValue(result, locale) {
 	let value;
 	try {
-		value = formatResolvedLootItem(result);
+		value = formatResolvedLootItem(result, locale);
 	}
 	catch {
 		throw generationError(

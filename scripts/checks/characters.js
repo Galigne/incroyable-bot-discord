@@ -365,7 +365,9 @@ module.exports = function createCharacterChecks(context) {
 				errors.push('Generated HP, AP, or MD values are incorrect.');
 			}
 
-			const armorName = character.gear.equipment[0].split(' — ')[0];
+			const armorName = character.gear.equipment[0]
+				.split(' — ')[0]
+				.replace(/ \((?:Light|Medium|Heavy|Légère|Moyenne|Lourde)\)$/, '');
 			const armor = generatorCatalog.getGenerator('armors').entries
 				.find(entry => entry.name === armorName);
 			const weapons = generatorCatalog.getGenerator('weapons').entries;

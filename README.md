@@ -333,9 +333,9 @@ Three carried inventory items resolve through the equal-weight `loot` router and
 may come from any loot category. They remain carried only: a carried weapon, armor,
 or shield is not equipped and cannot change generated AR. Exact duplicate loot is
 avoided through bounded retries when the random source permits it; generated gold
-is appended as before. Generated entity gear remains string-based: each line keeps
-the base item followed by its resolved rarity, material, and special property in
-that order.
+is appended as before. Generated entity gear remains string-based: armor lines add
+their localized type after the name, and every line then keeps the resolved rarity,
+material, and special property in that order.
 Generated talents are stored as unique localized list entries: levels 1–2 receive
 one talent, levels 3–5 receive two, levels 6–8 receive three, and levels 9–10
 receive four.

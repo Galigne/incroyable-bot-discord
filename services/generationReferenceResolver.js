@@ -95,7 +95,7 @@ function resolveGearReferences(
 		);
 		provenance.push(...getResolvedLootProvenance(resolved));
 		armorPercentage += getResolvedLootArmorPercentage(resolved);
-		return formatReferenceValue(resolved, createError);
+		return formatReferenceValue(resolved, createError, locale);
 	});
 	return { armorPercentage, provenance, values };
 }
@@ -135,7 +135,7 @@ function resolveArmorReference(
 	return {
 		armorPercentage,
 		provenance: getResolvedLootProvenance(resolved),
-		value: formatReferenceValue(resolved, createError),
+		value: formatReferenceValue(resolved, createError, locale),
 	};
 }
 
@@ -143,9 +143,9 @@ function resolveGenerationReference(reference, locale, random, resolver, path) {
 	return resolver.resolveReference(reference, locale, { path, random });
 }
 
-function formatReferenceValue(resolved, createError) {
+function formatReferenceValue(resolved, createError, locale) {
 	try {
-		return formatResolvedLootItem(resolved);
+		return formatResolvedLootItem(resolved, locale);
 	}
 	catch {
 		throw createGenerationError(

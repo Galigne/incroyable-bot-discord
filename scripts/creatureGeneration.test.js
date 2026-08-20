@@ -605,6 +605,7 @@ test('natural armor, generated armor, status, and weighted gear resolve to final
 		calculateArmorRating(bellWraith.resources.hp.max, 55),
 	);
 	assert.equal(bellWraith.gear.equipment.length, 2);
+	assert.match(bellWraith.gear.equipment[0], /^Chain mail \(Heavy\) — /);
 	assert.ok(bellWraith.source.provenance.some(record => (
 		record.generatorId === 'armors'
 		&& record.entryId === 'chain_mail'
@@ -613,6 +614,12 @@ test('natural armor, generated armor, status, and weighted gear resolve to final
 		record.generatorId === 'modifier_rarity'
 		&& record.entryId === 'uncommon'
 	)));
+	const frenchBellWraith = generateLocalizedEntry(
+		getCreatureTypeForEntry('bell_wraith', 'fr'),
+		'bell_wraith',
+		'fr',
+	);
+	assert.match(frenchBellWraith.gear.equipment[0], /^Cotte de mailles \(Lourde\) — /);
 
 	const mule = generateEntry(getCreatureTypeForEntry('mule'), 'mule', { level: 5 });
 	assert.equal(mule.gear.inventory.length, 1);

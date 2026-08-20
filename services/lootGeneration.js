@@ -10,14 +10,30 @@ const LOOT_MODIFIER_ORDER = Object.freeze([
 	'modifier_loot',
 ]);
 
-function formatResolvedLootItem(result) {
-	const baseValue = getResolvedBaseValue(result);
+const ARMOR_DISPLAY_TYPES = Object.freeze({
+	en: Object.freeze({
+		light: 'Light',
+		medium: 'Medium',
+		heavy: 'Heavy',
+	}),
+	fr: Object.freeze({
+		light: 'Légère',
+		medium: 'Moyenne',
+		heavy: 'Lourde',
+	}),
+});
+
+function formatResolvedLootItem(result, locale = 'en') {
+	const baseValue = getResolvedBaseValue(result, locale);
 	const modifierValues = orderLootModifiers(result?.modifiers)
-		.flatMap(formatResolvedModifier);
+		.flatMap(modifier => formatResolvedModifier(modifier, locale));
 	return [baseValue, ...modifierValues].join(' — ');
 }
 
-function getResolvedBaseValue(result) {
+function getResolvedBaseValue(result, locale = 'en') {
+	if (getResolvedBaseSelection(result).generatorId === 'armors') {
+		return formatResolvedArmorBaseValue(result, locale);
+	}
 	if (typeof result?.value === 'string' && result.value.trim()) {
 		return result.value;
 	}
@@ -40,10 +56,30 @@ function getResolvedBaseValue(result) {
 	throw new TypeError('Loot resolution did not produce readable display text.');
 }
 
-function formatResolvedModifier(modifier) {
+function formatResolvedArmorBaseValue(result, locale) {
+	const fields = result?.displayFields ?? result?.fields;
+	const name = fields?.name;
+	const description = fields?.description;
+	const type = fields?.type;
+	const localizedType = ARMOR_DISPLAY_TYPES[locale === 'fr' ? 'fr' : 'en']?.[type];
+	if (
+		type === undefined
+		|| !localizedType
+		|| typeof name !== 'string'
+		|| !name.trim()
+		|| typeof description !== 'string'
+		|| !description.trim()
+	) {
+		throw new TypeError('Armor resolution did not produce readable typed display text.');
+	}
+	return `${name} (${localizedType}) — ${description}`;
+}
+
+function formatResolvedModifier(modifier, locale) {
 	return [
-		getResolvedBaseValue(modifier),
-		...orderLootModifiers(modifier?.modifiers).flatMap(formatResolvedModifier),
+		getResolvedBaseValue(modifier, locale),
+		...orderLootModifiers(modifier?.modifiers)
+			.flatMap(child => formatResolvedModifier(child, locale)),
 	];
 }
 

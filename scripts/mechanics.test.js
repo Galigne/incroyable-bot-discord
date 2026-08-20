@@ -343,6 +343,7 @@ test('default character armor, equipment, and carried loot preserve every loot m
 		...character.gear.inventory.slice(0, -1),
 	];
 	assert.ok(generatedItems.length >= 5);
+	assert.match(character.gear.equipment[0], /^.+ \((?:Light|Medium|Heavy)\) — /);
 	for (const item of generatedItems) {
 		assert.match(item, / — Common — Made of [^—]+ — Runed — /);
 	}
@@ -420,7 +421,19 @@ test('stable rarity modifier IDs drive armor mechanics and readable flattening o
 	}), 0);
 	assert.equal(
 		formatResolvedLootItem(armor),
-		'Breastplate — A shaped rigid cuirass. — Epic — Made of Iron — '
+		'Breastplate (Medium) — A shaped rigid cuirass. — Epic — Made of Iron — '
+			+ 'Runed — A GM-defined rune marks the item.',
+	);
+	assert.equal(
+		formatResolvedLootItem({
+			...armor,
+			displayFields: {
+				...armor.displayFields,
+				name: 'Cuirasse',
+				description: 'Une cuirasse rigide et ajustée.',
+			},
+		}, 'fr'),
+		'Cuirasse (Moyenne) — Une cuirasse rigide et ajustée. — Epic — Made of Iron — '
 			+ 'Runed — A GM-defined rune marks the item.',
 	);
 });
