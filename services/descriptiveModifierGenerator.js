@@ -37,13 +37,15 @@ function generateDescriptiveModifier({
 		{ path, random },
 	);
 	const fields = resolved?.displayFields ?? resolved?.fields;
-	if (typeof fields?.name === 'string' && typeof fields.description === 'string') {
-		const selection = resolved.provenance?.find(record => (
-			record.type === 'entry' && record.generatorId && record.entryId
-		));
+	if (
+		typeof resolved?.generatorId === 'string'
+		&& typeof resolved.entryId === 'string'
+		&& typeof fields?.name === 'string'
+		&& typeof fields.description === 'string'
+	) {
 		return {
-			generatorId: selection?.generatorId ?? generator,
-			entryId: selection?.entryId,
+			generatorId: resolved.generatorId,
+			entryId: resolved.entryId,
 			name: fields.name,
 			description: fields.description,
 			provenance: resolved.provenance ?? [],

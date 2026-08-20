@@ -568,6 +568,8 @@ test('character modifiers attach without changing generated base state', () => {
 		level: 7,
 		random: randomWithModifierChance(0),
 		resolver: createCharacterModifierResolver({
+			generatorId: 'modifier_character',
+			entryId: 'scarred',
 			fields: {
 				name: 'Scarred',
 				description: 'Old scars remain visible.',

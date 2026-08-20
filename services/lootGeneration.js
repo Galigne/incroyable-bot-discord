@@ -122,10 +122,7 @@ function getResolvedBaseSelection(result) {
 			generatorId: result.generatorId,
 		};
 	}
-	const selection = result?.provenance?.find(record => (
-		record.type === 'entry' && record.generatorId && record.entryId
-	));
-	return selection ?? {};
+	return {};
 }
 
 function getResolvedLootProvenance(result) {

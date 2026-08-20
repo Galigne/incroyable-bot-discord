@@ -96,3 +96,160 @@ test('shared generation metadata resolution preserves defaults and suppresses ex
 		assert.equal(resolved.armorPercentage, 7);
 	}
 });
+
+test('described generation references retain final identities through routes', () => {
+	const catalog = createDescribedReferenceCatalog();
+	const resolver = generatorResolver.createGeneratorResolver({
+		getGenerator: id => catalog.get(id),
+	});
+	const weightedStatusReference = {
+		generator: {
+			oneOf: [{ id: 'status_effect', weight: 1 }],
+		},
+		select: 'fields',
+	};
+	const resolved = resolveGenerationMetadata({
+		entityType: 'creature',
+		generation: {
+			statusEffects: [
+				'condition:status.generator:bruised',
+				'status_effect:bruised',
+				weightedStatusReference,
+			],
+			modifiers: ['modifier:creature.generator:shadowed'],
+		},
+		level: 1,
+		locale: 'en',
+		random: () => 0,
+		resolver,
+		getProfile: getStatProfile,
+	});
+
+	assert.deepEqual(resolved.modifiers[0], {
+		generatorId: 'modifier_creature',
+		entryId: 'shadowed',
+		name: 'Shadowed',
+		description: 'The final creature modifier.',
+		provenance: [
+			{
+				type: 'entry',
+				selection: 'fixed',
+				generatorId: 'modifier',
+				entryId: 'creature',
+				path: 'root.generation.modifiers.0.routes.0',
+			},
+			{
+				type: 'entry',
+				selection: 'fixed',
+				generatorId: 'modifier_creature',
+				entryId: 'shadowed',
+				path: 'root.generation.modifiers.0',
+			},
+		],
+	});
+	assert.deepEqual(resolved.statusEffects[0], {
+		generatorId: 'status_effect',
+		entryId: 'bruised',
+		name: 'Bruised',
+		description: 'The final status effect.',
+		provenance: [
+			{
+				type: 'entry',
+				selection: 'fixed',
+				generatorId: 'condition',
+				entryId: 'status',
+				path: 'root.generation.statusEffects.0.routes.0',
+			},
+			{
+				type: 'entry',
+				selection: 'fixed',
+				generatorId: 'status_effect',
+				entryId: 'bruised',
+				path: 'root.generation.statusEffects.0',
+			},
+		],
+	});
+	assert.deepEqual(
+		resolved.statusEffects[1],
+		{
+			generatorId: 'status_effect',
+			entryId: 'bruised',
+			name: 'Bruised',
+			description: 'The final status effect.',
+			provenance: [{
+				type: 'entry',
+				selection: 'fixed',
+				generatorId: 'status_effect',
+				entryId: 'bruised',
+				path: 'root.generation.statusEffects.1',
+			}],
+		},
+	);
+	assert.deepEqual(
+		resolved.statusEffects[2],
+		{
+			generatorId: 'status_effect',
+			entryId: 'bruised',
+			name: 'Bruised',
+			description: 'The final status effect.',
+			provenance: [
+				{
+					type: 'generator-source',
+					selection: 'weighted',
+					generatorId: 'status_effect',
+					path: 'root.generation.statusEffects.2',
+				},
+				{
+					type: 'entry',
+					selection: 'random',
+					generatorId: 'status_effect',
+					entryId: 'bruised',
+					path: 'root.generation.statusEffects.2',
+				},
+			],
+		},
+	);
+});
+
+function createDescribedReferenceCatalog() {
+	return new Map([
+		['modifier', createRouteGenerator('modifier', 'creature', 'modifier_creature')],
+		['condition', createRouteGenerator('condition', 'status', 'status_effect')],
+		['modifier_creature', createDescribedGenerator(
+			'modifier_creature',
+			'shadowed',
+			'Shadowed',
+			'The final creature modifier.',
+		)],
+		['status_effect', createDescribedGenerator(
+			'status_effect',
+			'bruised',
+			'Bruised',
+			'The final status effect.',
+		)],
+	]);
+}
+
+function createRouteGenerator(id, entryId, targetGeneratorId) {
+	return {
+		schemaVersion: 4,
+		id,
+		visibility: 'public',
+		name: id,
+		description: id,
+		entrySchema: { required: [] },
+		entries: [{ id: entryId, name: entryId, generator: targetGeneratorId }],
+	};
+}
+
+function createDescribedGenerator(id, entryId, name, description) {
+	return {
+		schemaVersion: 4,
+		id,
+		visibility: 'internal',
+		name: id,
+		description: id,
+		entrySchema: { required: ['description'] },
+		entries: [{ id: entryId, name, fields: { description } }],
+	};
+}

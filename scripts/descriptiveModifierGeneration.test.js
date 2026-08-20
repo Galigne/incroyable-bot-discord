@@ -57,6 +57,36 @@ test('explicit character and creature modifier metadata uses fully resolved fiel
 	}
 });
 
+test('routed descriptive modifiers use the final entry identity and retain route provenance', () => {
+	const catalog = createModifierCatalog();
+	catalog.set('modifier', createRouteGenerator(
+		'modifier',
+		'creature',
+		'modifier_creature',
+	));
+	const resolver = createGeneratorResolver({
+		getGenerator: id => catalog.get(id),
+	});
+	const modifier = generateDescriptiveModifier({
+		generator: 'modifier:creature.generator:manifested',
+		resolver,
+		random: () => 0,
+	});
+
+	assert.equal(modifier.generatorId, 'modifier_creature');
+	assert.equal(modifier.entryId, 'manifested');
+	assert.equal(modifier.name, RESOLVED_NAME);
+	assert.equal(modifier.description, RESOLVED_DESCRIPTION);
+	assert.deepEqual(
+		modifier.provenance.slice(0, 2)
+			.map(({ generatorId, entryId }) => ({ generatorId, entryId })),
+		[
+			{ generatorId: 'modifier', entryId: 'creature' },
+			{ generatorId: 'modifier_creature', entryId: 'manifested' },
+		],
+	);
+});
+
 test('resolved display fields do not replace raw typed fields for technical consumers', () => {
 	const catalog = createModifierCatalog();
 	catalog.set('technical', {
@@ -158,6 +188,18 @@ function createFieldsGenerator(id, entries) {
 		description: id,
 		entrySchema: { required: ['description'] },
 		entries,
+	};
+}
+
+function createRouteGenerator(id, entryId, targetGeneratorId) {
+	return {
+		schemaVersion: 4,
+		id,
+		visibility: 'public',
+		name: id,
+		description: id,
+		entrySchema: { required: [] },
+		entries: [{ id: entryId, name: entryId, generator: targetGeneratorId }],
 	};
 }
 

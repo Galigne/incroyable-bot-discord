@@ -711,6 +711,8 @@ test('descriptive modifiers cannot change mechanical generation results', () => 
 	const withoutModifier = structuredClone(baseResult);
 	withoutModifier.modifiers = [];
 	const modifierResult = {
+		generatorId: 'modifier_creature',
+		entryId: 'scarred',
 		fields: {
 			name: 'Scarred',
 			description: 'Old scars remain visible.',

@@ -60,7 +60,7 @@ function resolveDescribedReferences(
 			resolver,
 			`${path}.${index}`,
 		);
-		const selection = getEntrySelection(resolved.provenance, createError);
+		const selection = getResolvedSelection(resolved, createError);
 		const fields = resolved.displayFields ?? resolved.fields ?? resolved.value;
 		return {
 			generatorId: selection.generatorId,
@@ -167,17 +167,24 @@ function requireLocalizedField(fields, field, createError) {
 	return value;
 }
 
-function getEntrySelection(provenance, createError) {
-	const selection = provenance.find(record => record.type === 'entry' && record.entryId);
-	if (!selection) {
-		throw createGenerationError(
-			createError,
-			'Generation reference omitted selection provenance.',
-			'errors.generatorMissing',
-			{ category: 'provenance' },
-		);
+function getResolvedSelection(result, createError) {
+	if (
+		typeof result?.generatorId === 'string'
+		&& result.generatorId.trim()
+		&& typeof result.entryId === 'string'
+		&& result.entryId.trim()
+	) {
+		return {
+			generatorId: result.generatorId,
+			entryId: result.entryId,
+		};
 	}
-	return selection;
+	throw createGenerationError(
+		createError,
+		'Generation reference omitted its resolved identity.',
+		'errors.generatorMissing',
+		{ category: 'identity' },
+	);
 }
 
 function createGenerationError(createError, message, translationKey, variables) {
