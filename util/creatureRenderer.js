@@ -1,57 +1,51 @@
 const { EmbedBuilder } = require('discord.js');
-const { BASE_STATS } = require('../services/mechanics/constants');
 const generatorCatalog = require('../services/generatorCatalog');
 const {
 	getCreatureFieldDefinition,
 	getViewableCreatureFieldDefinition,
 } = require('../services/creatureFieldCatalog');
-const {
-	formatCombatantResource,
-	formatCombatantResources,
-} = require('./combatantDisplay');
-const { formatDescribedRecords } = require('./describedRecordDisplay');
 const { getEntityFieldLabel } = require('./entityDisplay');
+const {
+	formatCombatantGearFields,
+	formatCombatantResourceFields,
+	formatCombatantRuleDetails,
+	formatCombatantStatisticsFields,
+	formatCombatantStatusFields,
+	formatCombatantSummaryRules,
+	formatCombatantSummaryStatistics,
+	formatCombatantSummaryStatus,
+} = require('./combatantRendererPrimitives');
 const {
 	formatJoinedList,
 	formatNumberedJoinedList,
-	formatRuleList,
-	formatStatistics,
 	getStoredValue,
 	truncate,
 } = require('./entityRendererPrimitives');
 const { t } = require('./i18n');
 
 function createCreatureSummaryEmbed(creature, locale = 'en') {
-	const effects = creature.status.effects ?? [];
-	const modifiers = creature.status.modifiers ?? [];
-	const stats = BASE_STATS.map(stat => (
-		`${label(locale, `statistics.${stat}`)}: **${creature.statistics[stat]}**`
-	)).join('\n');
-	const statusSections = [
-		formatCombatantResources(creature, ['hp', 'ar', 'ap', 'md'], locale),
-	];
-	if (effects.length > 0) {
-		statusSections.push(
-			`**${label(locale, 'status.effects')}**\n`
-				+ formatDescribedRecords(effects, 1_024, locale),
-		);
-	}
-	if (modifiers.length > 0) {
-		statusSections.push(
-			`**${label(locale, 'status.modifiers')}**\n`
-				+ formatDescribedRecords(modifiers, 1_024, locale),
-		);
-	}
+	const getLabel = fieldId => label(locale, fieldId);
+	const status = formatCombatantSummaryStatus(creature, getLabel, locale);
+	const stats = formatCombatantSummaryStatistics(creature, getLabel);
 	const rightSections = [];
 	if (creature.rules.length > 0) {
 		rightSections.push({
-			label: label(locale, 'rules'),
-			value: formatSummaryRules(creature.rules, locale),
+			label: getLabel('rules'),
+			value: formatCombatantSummaryRules(
+				creature.rules,
+				rule => t(locale, 'creature.summary.ruleLevel', {
+					level: rule.level,
+					name: rule.name,
+				}),
+				formatNumberedJoinedList,
+				250,
+				locale,
+			),
 		});
 	}
 	if (creature.traits.length > 0) {
 		rightSections.push({
-			label: label(locale, 'traits'),
+			label: getLabel('traits'),
 			value: formatStringList(creature.traits, 250, locale),
 		});
 	}
@@ -70,11 +64,11 @@ function createCreatureSummaryEmbed(creature, locale = 'en') {
 	].join('\n');
 	const summaryFields = [
 		{
-			name: label(locale, 'status'),
-			value: truncate(statusSections.join('\n\n')),
+			name: getLabel('status'),
+			value: truncate(status),
 		},
 		{
-			name: label(locale, 'statistics'),
+			name: getLabel('statistics'),
 			value: truncate(stats),
 			inline: true,
 		},
@@ -100,9 +94,10 @@ function createCreatureFieldEmbed(creature, fieldName, locale = 'en') {
 	}
 	const field = definition.sectionId;
 	const targets = definition.viewTargetIds.map(getCreatureFieldDefinition);
+	const getLabel = fieldId => label(locale, fieldId);
 	const embed = new EmbedBuilder()
 		.setTitle(t(locale, 'creature.detail.title', {
-			field: label(locale, field),
+			field: getLabel(field),
 			name: creature.displayName,
 		}).slice(0, 256))
 		.setColor('#8B5CF6');
@@ -111,7 +106,7 @@ function createCreatureFieldEmbed(creature, fieldName, locale = 'en') {
 	case 'identity':
 		return embed.addFields(
 			...targets.map(target => ({
-				name: label(locale, target.id),
+				name: getLabel(target.id),
 				value: truncate(
 					getStoredValue(creature, target) || t(locale, 'common.empty'),
 				),
@@ -124,58 +119,41 @@ function createCreatureFieldEmbed(creature, fieldName, locale = 'en') {
 	case 'level':
 		return embed.setDescription(String(creature.level));
 	case 'resources':
-		return embed.addFields(
-			...targets.map(target => ({
-				name: label(locale, target.id),
-				value: formatCombatantResource(creature, target.resourceId, locale),
-			})),
-		);
+		return embed.addFields(...formatCombatantResourceFields(
+			creature,
+			targets,
+			getLabel,
+			locale,
+		));
 	case 'status':
-		return embed.addFields(
-			...targets
-				.filter(target => (getStoredValue(creature, target) ?? []).length > 0)
-				.map(target => ({
-					name: label(locale, target.id),
-					value: formatDescribedRecords(
-						getStoredValue(creature, target),
-						1_024,
-						locale,
-					),
-				})),
-		);
+		return embed.addFields(...formatCombatantStatusFields(
+			creature,
+			targets,
+			getLabel,
+			locale,
+		));
 	case 'statistics':
-		return embed.addFields(
-			{
-				name: label(locale, 'statistics.base'),
-				value: formatStats(creature, targets.slice(0, BASE_STATS.length), locale),
-				inline: true,
-			},
-			{
-				name: label(locale, 'statistics.derived'),
-				value: formatStats(creature, targets.slice(BASE_STATS.length), locale),
-				inline: true,
-			},
-		);
+		return embed.addFields(...formatCombatantStatisticsFields(
+			creature,
+			targets,
+			getLabel,
+		));
 	case 'rules':
-		return embed.setDescription(formatRules(creature.rules, 4_096, locale));
+		return embed.setDescription(formatCombatantRuleDetails(
+			creature.rules,
+			rule => `**${rule.name} (${rule.level})** - ${rule.description}`,
+			blocks => formatJoinedList(blocks, 4_096, locale),
+		));
 	case 'traits':
 		return embed.setDescription(formatStringList(creature.traits, 4_096, locale));
 	case 'gear':
-		return embed.addFields(
-			{
-				name: label(locale, 'gear.equipment'),
-				value: formatStringList(creature.gear.equipment, 1_024, locale),
-			},
-			{
-				name: label(locale, 'gear.inventory'),
-				value: formatStringList(creature.gear.inventory, 1_024, locale),
-			},
-			{
-				name: label(locale, 'gear.encumbrance'),
-				value: `**${creature.gear.encumbrance.current} / `
-					+ `${creature.gear.encumbrance.max}**`,
-			},
-		);
+		return embed.addFields(...formatCombatantGearFields(
+			creature,
+			targets,
+			getLabel,
+			getCreatureFieldDefinition,
+			{ locale, formatList: formatStringList, inlineEncumbrance: false },
+		));
 	default:
 		return null;
 	}
@@ -190,33 +168,6 @@ function getArchetype(creature, locale) {
 	const name = generatorCatalog.getGenerator('creature', locale)?.entries
 		.find(entry => entry.id === archetypeId)?.fields?.name ?? archetypeId;
 	return name ? name[0].toLocaleUpperCase(locale) + name.slice(1) : null;
-}
-
-function formatStats(creature, targets, locale) {
-	return formatStatistics(
-		creature,
-		targets,
-		target => label(locale, target.id),
-	);
-}
-
-function formatRules(rules, maxLength, locale) {
-	return formatRuleList(
-		rules,
-		rule => `**${rule.name} (${rule.level})** - ${rule.description}`,
-		blocks => formatJoinedList(blocks, maxLength, locale),
-	);
-}
-
-function formatSummaryRules(rules, locale) {
-	return formatNumberedJoinedList(
-		rules.map(rule => t(locale, 'creature.summary.ruleLevel', {
-			level: rule.level,
-			name: rule.name,
-		})),
-		250,
-		locale,
-	);
 }
 
 function formatStringList(items, maxLength, locale) {
