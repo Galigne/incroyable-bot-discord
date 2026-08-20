@@ -39,7 +39,7 @@ function generateDescriptiveModifier({
 		locale,
 		{ path, random },
 	);
-	const fields = resolved?.fields;
+	const fields = resolved?.displayFields ?? resolved?.fields;
 	if (typeof fields?.name === 'string' && typeof fields.description === 'string') {
 		const selection = resolved.provenance?.find(record => (
 			record.type === 'entry' && record.generatorId && record.entryId

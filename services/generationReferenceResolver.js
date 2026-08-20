@@ -57,12 +57,13 @@ function resolveDescribedReferences(
 			`${path}.${index}`,
 		);
 		const selection = getEntrySelection(resolved.provenance, createError);
+		const fields = resolved.displayFields ?? resolved.fields ?? resolved.value;
 		return {
 			generatorId: selection.generatorId,
 			entryId: selection.entryId,
-			name: requireLocalizedField(resolved.value, 'name', createError),
+			name: requireLocalizedField(fields, 'name', createError),
 			description: requireLocalizedField(
-				resolved.value,
+				fields,
 				'description',
 				createError,
 			),

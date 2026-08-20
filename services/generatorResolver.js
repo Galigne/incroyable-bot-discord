@@ -131,6 +131,7 @@ function createGeneratorResolver({
 				? resolved.display
 				: resolved.value,
 			fields: resolved.fields,
+			displayFields: resolved.displayFields,
 			template: resolved.template,
 			provenance: resolved.provenance,
 			modifiers: resolved.modifiers,

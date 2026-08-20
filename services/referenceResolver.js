@@ -25,6 +25,7 @@ function createReferenceResolver({ getGenerator, resolveSelection }) {
 			value: selectResolvedOutput(resolved, reference.select),
 			outputType: resolved.outputType,
 			fields: resolved.fields,
+			displayFields: resolved.displayFields,
 			display: resolved.display,
 			template: selectResolvedTemplate(resolved, reference.select),
 			provenance: [...sourceResult.provenance, ...resolved.provenance],
