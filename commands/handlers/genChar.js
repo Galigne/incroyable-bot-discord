@@ -20,7 +20,6 @@ module.exports = {
 		try {
 			const character = await generateCharacter(
 				characterKey,
-				interaction.user.id,
 				createLocalizedCharacterGenerationOptions({ background, level }, locale),
 			);
 			await interaction.reply(createGeneratedCharacterResponse(character, locale));

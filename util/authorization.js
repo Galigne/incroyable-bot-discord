@@ -2,6 +2,7 @@ const {
 	getConfigurationErrorMessage,
 	validateConfig,
 } = require('./configuration');
+const { getEntityAccessLevel } = require('../services/entityAccess');
 const { getLocale, t } = require('./i18n');
 
 function isGuildOwner(interaction) {
@@ -21,12 +22,25 @@ function hasModeratorPermission(interaction, config) {
 	return hasPrivilegedPermission(interaction, config, 'moderator');
 }
 
-function canManageEntity(interaction, character, config) {
+function canManageEntity(interaction, entity, config) {
+	const accessLevel = getEntityAccessLevel(entity, interaction?.user?.id);
 	return Boolean(
-		character
+		entity
 		&& interaction?.user?.id
 		&& (
-			character.creatorId === interaction.user.id
+			accessLevel === 'owner'
+			|| accessLevel === 'partial'
+			|| hasDmPermission(interaction, config)
+		),
+	);
+}
+
+function hasFullEntityAuthority(interaction, entity, config) {
+	return Boolean(
+		entity
+		&& interaction?.user?.id
+		&& (
+			getEntityAccessLevel(entity, interaction.user.id) === 'owner'
 			|| hasDmPermission(interaction, config)
 		),
 	);
@@ -112,6 +126,7 @@ function hasRole(memberRoles, roleId) {
 module.exports = {
 	authorizeCommand,
 	canManageEntity,
+	hasFullEntityAuthority,
 	hasDmPermission,
 	hasModeratorPermission,
 	isGuildOwner,

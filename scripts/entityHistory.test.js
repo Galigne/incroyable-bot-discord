@@ -94,7 +94,7 @@ test('entity history limit defaults to three and validates the retained configur
 
 test('default and custom retention rotate the oldest snapshots first', async () => {
 	const defaultKey = nextKey('Retention.Default');
-	await createCharacter(defaultKey, 'creator');
+	await createCharacter(defaultKey, ownerAccess('creator'));
 	for (const value of ['A', 'B', 'C', 'D']) {
 		await editFirstName(defaultKey, value, historyContext());
 	}
@@ -104,7 +104,7 @@ test('default and custom retention rotate the oldest snapshots first', async () 
 	);
 
 	const higherKey = nextKey('Retention.Higher');
-	await createCharacter(higherKey, 'creator');
+	await createCharacter(higherKey, ownerAccess('creator'));
 	for (const value of ['1', '2', '3', '4', '5', '6']) {
 		await editFirstName(higherKey, value, historyContext(5));
 	}
@@ -114,7 +114,7 @@ test('default and custom retention rotate the oldest snapshots first', async () 
 	);
 
 	const lowerKey = nextKey('Retention.Lower');
-	await createCharacter(lowerKey, 'creator');
+	await createCharacter(lowerKey, ownerAccess('creator'));
 	for (const value of ['A', 'B', 'C', 'D']) {
 		await editFirstName(lowerKey, value, historyContext(5));
 	}
@@ -135,7 +135,7 @@ test('a reloaded retention value affects later history operations', async () => 
 			activeConfig = replacement;
 		},
 	};
-	await createCharacter(characterKey, 'creator');
+	await createCharacter(characterKey, ownerAccess('creator'));
 	await editFirstName(
 		characterKey,
 		'A',
@@ -162,7 +162,7 @@ test('a reloaded retention value affects later history operations', async () => 
 test('every supported successful action stores a complete pre-change snapshot', async () => {
 	const characterKey = nextKey('Actions');
 	const context = historyContext(10, 'all-actions-actor');
-	await createCharacter(characterKey, 'creator');
+	await createCharacter(characterKey, ownerAccess('creator'));
 	await updateEditableEntity(
 		characterKey,
 		'name',
@@ -193,7 +193,7 @@ test('/set creates history only after a successful modal submission', async () =
 	const characterKey = nextKey('Modal.Set');
 	const user = { id: 'modal-creator' };
 	const config = createConfig();
-	await createCharacter(characterKey, user.id);
+	await createCharacter(characterKey, ownerAccess(user.id));
 	let modal;
 	await openEntityEditor({
 		guildId: 'guild',
@@ -238,7 +238,7 @@ test('/set creates history only after a successful modal submission', async () =
 
 test('authorization, validation, and serialization failures do not add history', async () => {
 	const authorizationKey = nextKey('Failure.Authorization');
-	await createCharacter(authorizationKey, 'creator');
+	await createCharacter(authorizationKey, ownerAccess('creator'));
 	await assert.rejects(
 		editFirstName(
 			authorizationKey,
@@ -251,7 +251,7 @@ test('authorization, validation, and serialization failures do not add history',
 	assert.equal(await historyExists(authorizationKey), false);
 
 	const validationKey = nextKey('Failure.Validation');
-	await createCharacter(validationKey, 'creator');
+	await createCharacter(validationKey, ownerAccess('creator'));
 	await assert.rejects(
 		updateEditableEntity(
 			validationKey,
@@ -275,7 +275,7 @@ test('authorization, validation, and serialization failures do not add history',
 	assert.equal(await historyExists(validationKey), false);
 
 	const serializationKey = nextKey('Failure.Serialization');
-	await createCharacter(serializationKey, 'creator');
+	await createCharacter(serializationKey, ownerAccess('creator'));
 	await assert.rejects(
 		updateCharacter(
 			serializationKey,
@@ -298,7 +298,7 @@ test('an active-save persistence failure rolls back its newly written history', 
 	const characterKey = nextKey('Failure.ActiveWrite');
 	const savePath = getCharacterSavePath(characterKey);
 	const displacedPath = `${savePath}.displaced`;
-	await createCharacter(characterKey, 'creator');
+	await createCharacter(characterKey, ownerAccess('creator'));
 
 	try {
 		await assert.rejects(
@@ -333,8 +333,8 @@ test('different characters keep independent histories', async () => {
 	const firstKey = nextKey('Independent.First');
 	const secondKey = nextKey('Independent.Second');
 	await Promise.all([
-		createCharacter(firstKey, 'creator'),
-		createCharacter(secondKey, 'creator'),
+		createCharacter(firstKey, ownerAccess('creator')),
+		createCharacter(secondKey, ownerAccess('creator')),
 	]);
 	await editFirstName(firstKey, 'First', historyContext(3, 'first-actor'));
 	await editFirstName(secondKey, 'Second', historyContext(3, 'second-actor'));
@@ -353,7 +353,7 @@ test('concurrent mutations preserve history ordering inside the per-key queue', 
 	const characterKey = nextKey('Concurrent');
 	const firstStarted = createDeferred();
 	const releaseFirst = createDeferred();
-	await createCharacter(characterKey, 'creator');
+	await createCharacter(characterKey, ownerAccess('creator'));
 
 	const first = updateCharacter(
 		characterKey,
@@ -491,7 +491,7 @@ test('unrecoverable rollback failures are logged and use a stable error code', a
 test('three default undos walk backward without toggling or creating redo state', async () => {
 	const characterKey = nextKey('Undo.Stack');
 	const context = historyContext(3, 'stack-actor');
-	await createCharacter(characterKey, 'creator');
+	await createCharacter(characterKey, ownerAccess('creator'));
 	for (const value of ['A', 'B', 'C', 'D']) {
 		await editFirstName(characterKey, value, context);
 	}
@@ -518,7 +518,7 @@ test('three default undos walk backward without toggling or creating redo state'
 
 test('the concrete character undo result uses the shared entity shape', async () => {
 	const characterKey = nextKey('Undo.ConcreteShape');
-	await createCharacter(characterKey, 'creator');
+	await createCharacter(characterKey, ownerAccess('creator'));
 	await updateCharacter(
 		characterKey,
 		() => true,
@@ -565,14 +565,14 @@ test('unsupported legacy snapshots are rejected without creating history', async
 
 test('undo rejects missing history and preserves state on permission failure', async () => {
 	const noHistoryKey = nextKey('Undo.Empty');
-	await createCharacter(noHistoryKey, 'creator');
+	await createCharacter(noHistoryKey, ownerAccess('creator'));
 	await assert.rejects(
 		undoEntity(noHistoryKey, () => true, historyContext()),
 		{ code: 'NO_CHARACTER_HISTORY' },
 	);
 
 	const deniedKey = nextKey('Undo.Denied');
-	await createCharacter(deniedKey, 'creator');
+	await createCharacter(deniedKey, ownerAccess('creator'));
 	await editFirstName(deniedKey, 'Current', historyContext());
 	const historyBefore = await readHistory(deniedKey);
 	await assert.rejects(
@@ -590,7 +590,7 @@ test('new history contexts exclude delete while legacy delete entries remain rea
 	);
 	const characterKey = nextKey('History.LegacyDelete');
 	const context = historyContext();
-	await createCharacter(characterKey, 'creator');
+	await createCharacter(characterKey, ownerAccess('creator'));
 	await editFirstName(characterKey, 'Legacy', context);
 	const legacyDocument = await readHistory(characterKey);
 	legacyDocument.entries[0].action = 'delete';
@@ -606,7 +606,7 @@ test('new history contexts exclude delete while legacy delete entries remain rea
 test('undo rejects invalid and unsupported snapshot schema versions', async () => {
 	const characterKey = nextKey('Undo.Schema');
 	const context = historyContext();
-	await createCharacter(characterKey, 'creator');
+	await createCharacter(characterKey, ownerAccess('creator'));
 	await editFirstName(characterKey, 'Current', context);
 	const historyPath = getCharacterHistoryPath(characterKey);
 	const invalidHistory = await readHistory(characterKey);
@@ -640,9 +640,9 @@ test('/undo autocomplete includes authorized active characters with history only
 	const userId = 'autocomplete-user';
 	const activeKey = nextKey('Autocomplete.Active');
 	const privateKey = nextKey('Autocomplete.Private');
-	await createCharacter(activeKey, userId);
+	await createCharacter(activeKey, ownerAccess(userId));
 	await editFirstName(activeKey, 'Active', historyContext(3, userId));
-	await createCharacter(privateKey, 'other-user');
+	await createCharacter(privateKey, ownerAccess('other-user'));
 	await editFirstName(privateKey, 'Private', historyContext(3, 'other-user'));
 
 	const choices = await autocompleteUndo(createInteraction(userId), createConfig());
@@ -824,6 +824,10 @@ async function listHistoryTemporaryFiles() {
 function nextKey(prefix) {
 	keyCounter += 1;
 	return `${prefix}.${keyCounter}`;
+}
+
+function ownerAccess(userId) {
+	return [{ userId, level: 'owner' }];
 }
 
 function createDeferred() {

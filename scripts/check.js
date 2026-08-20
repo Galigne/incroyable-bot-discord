@@ -46,6 +46,7 @@ const {
 	authorizeCommand,
 	canManageEntity,
 	hasDmPermission,
+	hasFullEntityAuthority,
 	hasModeratorPermission,
 	isGuildOwner,
 } = require('../util/authorization');
@@ -80,6 +81,7 @@ const context = {
 	generatorCatalog,
 	getEditableFieldValue,
 	hasDmPermission,
+	hasFullEntityAuthority,
 	hasModeratorPermission,
 	isGuildOwner,
 	path,

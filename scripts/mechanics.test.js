@@ -286,20 +286,20 @@ test('character validation preserves AP constraints', () => {
 });
 
 test('blank characters and hydrated saves use validated talent arrays', () => {
-	const blankCharacter = new Character('Blank', 'creator');
+	const blankCharacter = new Character('Blank');
 	assert.deepEqual(blankCharacter.talents, []);
 
 	const savedTalents = [
 		'Athlete — +1 to sustained movement.',
 		'Cold Immunity — Ordinary cold cannot freeze the character.',
 	];
-	const saved = JSON.parse(JSON.stringify(new Character('Array.Save', 'creator')));
+	const saved = JSON.parse(JSON.stringify(new Character('Array.Save')));
 	saved.talents = savedTalents;
 	const hydratedCharacter = Character.fromSave(saved);
 	assert.deepEqual(hydratedCharacter.talents, savedTalents);
 	assert.notEqual(hydratedCharacter.talents, savedTalents);
 
-	const malformed = JSON.parse(JSON.stringify(new Character('Text.Save', 'creator')));
+	const malformed = JSON.parse(JSON.stringify(new Character('Text.Save')));
 	malformed.talents = 'Athlete — +1 to sustained movement.';
 	assert.throws(
 		() => Character.fromSave(malformed),
@@ -308,7 +308,7 @@ test('blank characters and hydrated saves use validated talent arrays', () => {
 });
 
 test('character hydration rejects incomplete resources and preserves explicit encumbrance', () => {
-	const blankCharacter = new Character('Blank.Encumbrance', 'creator');
+	const blankCharacter = new Character('Blank.Encumbrance');
 	assert.deepEqual(blankCharacter.gear.encumbrance, { current: 0, max: 0 });
 
 	const incomplete = JSON.parse(JSON.stringify(blankCharacter));
@@ -318,18 +318,18 @@ test('character hydration rejects incomplete resources and preserves explicit en
 		error => error.code === 'INVALID_CHARACTER_SAVE',
 	);
 
-	const saved = JSON.parse(JSON.stringify(new Character('Explicit.Encumbrance', 'creator')));
+	const saved = JSON.parse(JSON.stringify(new Character('Explicit.Encumbrance')));
 	saved.gear.encumbrance = { current: 4, max: 11 };
 	const explicitEncumbrance = Character.fromSave(saved);
 	assert.deepEqual(explicitEncumbrance.gear.encumbrance, { current: 4, max: 11 });
 });
 
 test('random character generation leaves manual encumbrance unchanged', () => {
-	const blankCharacter = new Character('Generated.Blank.Encumbrance', 'creator');
+	const blankCharacter = new Character('Generated.Blank.Encumbrance');
 	populateRandomCharacter(blankCharacter, { level: 1, random: () => 0 });
 	assert.deepEqual(blankCharacter.gear.encumbrance, { current: 0, max: 0 });
 
-	const managedCharacter = new Character('Generated.Manual.Encumbrance', 'creator');
+	const managedCharacter = new Character('Generated.Manual.Encumbrance');
 	managedCharacter.gear.encumbrance = { current: 4, max: 9 };
 	populateRandomCharacter(managedCharacter, { level: 1, random: () => 0 });
 	assert.deepEqual(managedCharacter.gear.encumbrance, { current: 4, max: 9 });
@@ -762,7 +762,7 @@ test('random character generation uses localized content without changing identi
 });
 
 function createCharacterFixture() {
-	return new Character('Test', 'dm');
+	return new Character('Test');
 }
 
 function createSeededRandom(initialSeed) {

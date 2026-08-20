@@ -46,7 +46,7 @@ after(() => {
 
 test('/delete opens a private exact-key modal without deleting anything', async () => {
 	const characterKey = nextKey('Delete.Modal');
-	await createCharacter(characterKey, 'creator');
+	await createCharacter(characterKey, ownerAccess('creator'));
 	await createHistory(characterKey, 'Before modal');
 	const historyBefore = await fsPromises.readFile(
 		getCharacterHistoryPath(characterKey),
@@ -98,11 +98,11 @@ test('/delete opens a private exact-key modal without deleting anything', async 
 
 test('/delete validates existence and authorization before opening the modal', async () => {
 	const characterKey = nextKey('Delete.Authorization');
-	await createCharacter(characterKey, 'creator');
+	await createCharacter(characterKey, ownerAccess('creator'));
 
 	const denied = await openDeleteModal(characterKey, 'stranger');
 	assert.equal(denied.modal, undefined);
-	assert.match(denied.reply.content, /creator.*DM.*server owner/i);
+	assert.match(denied.reply.content, /entity owner.*DM.*server owner/i);
 	assert.ok(denied.reply.flags);
 	assert.equal((await getCharacter(characterKey)).key, characterKey);
 
@@ -127,7 +127,7 @@ test('/delete validates existence and authorization before opening the modal', a
 
 test('an exact confirmation permanently removes the active save and all history', async () => {
 	const characterKey = nextKey('Delete.Exact');
-	await createCharacter(characterKey, 'creator');
+	await createCharacter(characterKey, ownerAccess('creator'));
 	await createHistory(characterKey, 'With backup');
 	const opened = await openDeleteModal(characterKey, 'creator');
 
@@ -156,7 +156,7 @@ test('an exact confirmation permanently removes the active save and all history'
 
 test('permanent deletion succeeds when no history document exists', async () => {
 	const characterKey = nextKey('Delete.NoHistory');
-	await createCharacter(characterKey, 'creator');
+	await createCharacter(characterKey, ownerAccess('creator'));
 	assert.equal(await pathExists(getCharacterHistoryPath(characterKey)), false);
 	const opened = await openDeleteModal(characterKey, 'creator');
 	const submitted = await submitDeleteModal(
@@ -171,7 +171,7 @@ test('permanent deletion succeeds when no history document exists', async () => 
 
 test('an incorrect exact-key confirmation is rejected and consumes the session', async () => {
 	const characterKey = nextKey('Delete.WrongKey');
-	await createCharacter(characterKey, 'creator');
+	await createCharacter(characterKey, ownerAccess('creator'));
 	const opened = await openDeleteModal(characterKey, 'creator');
 
 	const incorrect = await submitDeleteModal(
@@ -193,7 +193,7 @@ test('an incorrect exact-key confirmation is rejected and consumes the session',
 
 test('another user cannot consume or submit the deletion session', async () => {
 	const characterKey = nextKey('Delete.WrongUser');
-	await createCharacter(characterKey, 'creator');
+	await createCharacter(characterKey, ownerAccess('creator'));
 	const opened = await openDeleteModal(characterKey, 'creator');
 
 	const stranger = await submitDeleteModal(
@@ -221,7 +221,7 @@ test('missing and expired deletion sessions return a localized failure', async (
 	assert.match(missing.reply.content, /missing or expired/i);
 
 	const characterKey = nextKey('Delete.Expired');
-	await createCharacter(characterKey, 'creator');
+	await createCharacter(characterKey, ownerAccess('creator'));
 	const opened = await openDeleteModal(characterKey, 'creator');
 	const sessionId = opened.modal.custom_id.slice('rpg-delete:'.length);
 	const session = getInteractionSession(sessionId, 'creator', 'delete');
@@ -237,7 +237,7 @@ test('missing and expired deletion sessions return a localized failure', async (
 
 test('submission reloads the entity, observes modifications, and reauthorizes', async () => {
 	const modifiedKey = nextKey('Delete.Modified');
-	await createCharacter(modifiedKey, 'creator');
+	await createCharacter(modifiedKey, ownerAccess('creator'));
 	const modifiedModal = await openDeleteModal(modifiedKey, 'creator');
 	await createHistory(modifiedKey, 'Modified after opening');
 	const modified = await submitDeleteModal(
@@ -249,21 +249,21 @@ test('submission reloads the entity, observes modifications, and reauthorizes', 
 	assert.equal(await pathExists(getCharacterHistoryPath(modifiedKey)), false);
 
 	const reassignedKey = nextKey('Delete.Reauthorized');
-	await createCharacter(reassignedKey, 'creator');
+	await createCharacter(reassignedKey, ownerAccess('creator'));
 	const reassignedModal = await openDeleteModal(reassignedKey, 'creator');
 	await updateCharacter(reassignedKey, () => true, character => {
-		character.creatorId = 'new-creator';
+		character.access = ownerAccess('new-owner');
 	});
 	const denied = await submitDeleteModal(
 		reassignedModal.modal.custom_id,
 		reassignedKey,
 		'creator',
 	);
-	assert.match(denied.reply.content, /creator.*DM.*server owner/i);
-	assert.equal((await getCharacter(reassignedKey)).creatorId, 'new-creator');
+	assert.match(denied.reply.content, /entity owner.*DM.*server owner/i);
+	assert.deepEqual((await getCharacter(reassignedKey)).access, ownerAccess('new-owner'));
 
 	const disappearedKey = nextKey('Delete.Disappeared');
-	await createCharacter(disappearedKey, 'creator');
+	await createCharacter(disappearedKey, ownerAccess('creator'));
 	const disappearedModal = await openDeleteModal(disappearedKey, 'creator');
 	await deleteEntity(disappearedKey, () => true);
 	const disappeared = await submitDeleteModal(
@@ -337,7 +337,7 @@ test('an unrecoverable deletion rollback is logged with a stable error code', as
 test('filesystem deletion failures return no partial success and preserve both files', async () => {
 	for (const failureTarget of ['history', 'active']) {
 		const characterKey = nextKey(`Delete.Rollback.${failureTarget}`);
-		await createCharacter(characterKey, 'creator');
+		await createCharacter(characterKey, ownerAccess('creator'));
 		await createHistory(characterKey, `Rollback ${failureTarget}`);
 		const savePath = getCharacterSavePath(characterKey);
 		const historyPath = getCharacterHistoryPath(characterKey);
@@ -382,7 +382,7 @@ test('/delete metadata, routing, help, and locale catalogs describe permanent de
 	assert.equal(
 		commandRegistry.getAutocompleteMetadata('delete', 'entity-key')
 			.autocomplete.provider,
-		'manageable-entities',
+		'full-authority-entities',
 	);
 	assert.ok(commandRegistry.getHelpMetadata('rpg').includes(metadata));
 	assert.match(english.rpg.delete.behavior, /exact, case-sensitive EntityKey/);
@@ -532,4 +532,8 @@ async function pathExists(filePath) {
 function nextKey(prefix) {
 	keyCounter += 1;
 	return `${prefix}.${keyCounter}`;
+}
+
+function ownerAccess(userId) {
+	return [{ userId, level: 'owner' }];
 }

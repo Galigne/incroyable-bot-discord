@@ -2,15 +2,15 @@ const { validateCharacterKey } = require('./entityStoragePaths');
 const {
 	assertBoundedString,
 	assertExactKeys,
-	assertNonEmptyString,
 	assertRecord,
 	isRecord,
 	validateCombatantLevel,
 	validateCombatantState,
 	validateNonEmptyStringList,
 } = require('./combatantSaveSchema');
+const { validateEntityAccess } = require('./entityAccess');
 
-const CURRENT_CHARACTER_SAVE_SCHEMA_VERSION = 3;
+const CURRENT_CHARACTER_SAVE_SCHEMA_VERSION = 4;
 
 function validateCharacterSaveSchema(rawSaveData, expectedKey = rawSaveData?.key) {
 	if (!isRecord(rawSaveData) || !Object.hasOwn(rawSaveData, 'schemaVersion')) {
@@ -37,7 +37,7 @@ function validateCharacterSaveSchema(rawSaveData, expectedKey = rawSaveData?.key
 	assertExactKeys(rawSaveData, 'character save', [
 		'schemaVersion',
 		'key',
-		'creatorId',
+		'access',
 		'name',
 		'level',
 		'race',
@@ -63,7 +63,7 @@ function validateCharacterSaveSchema(rawSaveData, expectedKey = rawSaveData?.key
 			'Character save key does not match its storage key.',
 		);
 	}
-	assertNonEmptyString(rawSaveData.creatorId, 'creatorId', invalidSave);
+	validateEntityAccess(rawSaveData.access, invalidSave);
 	validateCombatantLevel(rawSaveData.level, invalidSave);
 	validateName(rawSaveData.name, invalidSave);
 	validateRace(rawSaveData.race, invalidSave);

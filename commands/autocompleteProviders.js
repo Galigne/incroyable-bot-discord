@@ -10,7 +10,7 @@ const {
 } = require('../util/generatorRouterChoices');
 const {
 	canManageEntity,
-	hasDmPermission,
+	hasFullEntityAuthority,
 } = require('../util/authorization');
 const {
 	OPTION_VALUE_PROVIDERS,
@@ -56,6 +56,7 @@ const AUTOCOMPLETE_PROVIDERS = {
 	),
 	'entity-sections': getEntitySections,
 	'help-commands': getHelpCommandChoices,
+	'full-authority-entities': getFullAuthorityEntityChoices,
 	'manageable-entities': getManageableEntityChoices,
 	'undoable-entities': getUndoableEntities,
 };
@@ -144,9 +145,27 @@ function getManageableEntityChoices(option, context, focused) {
 	return getEntityChoices(
 		focused.value,
 		context.locale,
-		hasDmPermission(context.interaction, context.config)
-			? {}
-			: { creatorId: context.interaction.user.id },
+		{
+			filterEntity: entity => canManageEntity(
+				context.interaction,
+				entity,
+				context.config,
+			),
+		},
+	);
+}
+
+function getFullAuthorityEntityChoices(option, context, focused) {
+	return getEntityChoices(
+		focused.value,
+		context.locale,
+		{
+			filterEntity: entity => hasFullEntityAuthority(
+				context.interaction,
+				entity,
+				context.config,
+			),
+		},
 	);
 }
 

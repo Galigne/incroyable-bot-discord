@@ -344,6 +344,48 @@ const COMMAND_METADATA = [
 		handler: './handlers/get',
 	},
 	{
+		id: 'access',
+		name: 'access',
+		registrationOrder: 16,
+		category: 'rpg',
+		permission: 'everyone',
+		descriptionKey: 'rpg.access.description',
+		options: [
+			{
+				name: 'entity-key',
+				type: 'string',
+				descriptionKey: 'rpg.access.entityOption',
+				required: true,
+				autocomplete: { provider: 'entities' },
+			},
+			{
+				name: 'user',
+				type: 'user',
+				descriptionKey: 'rpg.access.userOption',
+			},
+			{
+				name: 'level',
+				type: 'string',
+				descriptionKey: 'rpg.access.levelOption',
+				choices: [
+					{ nameKey: 'rpg.access.levels.owner', value: 'owner' },
+					{ nameKey: 'rpg.access.levels.partial', value: 'partial' },
+					{ nameKey: 'rpg.access.levels.none', value: 'none' },
+				],
+			},
+		],
+		examples: [
+			'/access entity-key:<key>',
+			'/access entity-key:<key> user:<Discord user> level:<owner|partial|none>',
+		],
+		help: {
+			order: 45,
+			detailsKey: 'rpg.access.behavior',
+		},
+		guildOnly: true,
+		handler: './handlers/access',
+	},
+	{
 		id: 'set',
 		name: 'set',
 		registrationOrder: 7,
@@ -356,7 +398,7 @@ const COMMAND_METADATA = [
 				type: 'string',
 				descriptionKey: 'rpg.set.entityOption',
 				required: true,
-				autocomplete: { provider: 'entities' },
+				autocomplete: { provider: 'manageable-entities' },
 			},
 			{
 				name: 'field',
@@ -390,7 +432,7 @@ const COMMAND_METADATA = [
 				type: 'string',
 				descriptionKey: 'rpg.heal.entityOption',
 				required: true,
-				autocomplete: { provider: 'entities' },
+				autocomplete: { provider: 'manageable-entities' },
 			},
 			{
 				name: 'resource',
@@ -442,7 +484,7 @@ const COMMAND_METADATA = [
 				type: 'string',
 				descriptionKey: 'rpg.damage.entityOption',
 				required: true,
-				autocomplete: { provider: 'entities' },
+				autocomplete: { provider: 'manageable-entities' },
 			},
 			{
 				name: 'damage-amount',
@@ -488,7 +530,7 @@ const COMMAND_METADATA = [
 				type: 'string',
 				descriptionKey: 'rpg.endTurn.entityOption',
 				required: true,
-				autocomplete: { provider: 'entities' },
+				autocomplete: { provider: 'manageable-entities' },
 			},
 		],
 		examples: ['/end-turn entity-key:<key>'],
@@ -512,7 +554,7 @@ const COMMAND_METADATA = [
 				type: 'string',
 				descriptionKey: 'rpg.delete.entityOption',
 				required: true,
-				autocomplete: { provider: 'manageable-entities' },
+				autocomplete: { provider: 'full-authority-entities' },
 			},
 		],
 		examples: ['/delete entity-key:<key>'],

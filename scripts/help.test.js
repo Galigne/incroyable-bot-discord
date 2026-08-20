@@ -157,7 +157,7 @@ test('/help command:get and command:set list both explicit entity field orders',
 			'`Name:Description` per status effect or descriptive modifier',
 			'Plain collections, including creature intrinsic traits, use one entry per line; surrounding whitespace is trimmed',
 			'Creature edits also require level 1–10',
-			'EntityKey, type, schema metadata',
+			'EntityKey, type, access, schema metadata',
 		]],
 		['fr', [
 			'des paires de nombres pour les ressources et l’encombrement',
@@ -166,7 +166,7 @@ test('/help command:get and command:set list both explicit entity field orders',
 			'`Nom:Description` pour chaque effet d’état ou modificateur descriptif',
 			'Les collections simples, dont les dons intrinsèques des créatures, utilisent une entrée par ligne ; les espaces autour de chaque ligne sont supprimés',
 			'Les créatures exigent aussi un niveau de 1 à 10',
-			'L’EntityKey, le type, le schéma',
+			'L’EntityKey, le type, les accès, le schéma',
 		]],
 	]) {
 		const rendered = renderDetail('set', createInteraction('regular'), locale);
@@ -216,7 +216,7 @@ test('/help command:undo explains retention, consumption, and the lack of redo',
 		[
 			'en',
 			[
-				'complete pre-change entity state',
+				'without changing its type or current access list',
 				'current `characterHistory.maxEntries` limit applies to both types',
 				'characterHistory.maxEntries',
 				'Repeated undos walk backward',
@@ -226,7 +226,7 @@ test('/help command:undo explains retention, consumption, and the lack of redo',
 		[
 			'fr',
 			[
-				'l’état complet de l’entité avant modification',
+				'sans changer son type ni sa liste d’accès actuelle',
 				's’applique aux deux types',
 				'characterHistory.maxEntries',
 				'Des annulations répétées',

@@ -40,8 +40,8 @@ class CreatureHistoryLoadError extends Error {
 
 const store = createConcreteEntityStore({
 	createEditorError: creatureEditorError,
-	createEntityInstance: (entityKey, creatorId) => (
-		new Creature(entityKey, creatorId)
+	createEntityInstance: (entityKey, access) => (
+		new Creature(entityKey, access)
 	),
 	createHistoryLoadError: (entityKey, cause) => (
 		new CreatureHistoryLoadError(entityKey, cause)
@@ -80,7 +80,7 @@ function reportCreatureHistoryLoadError(error) {
 
 function creatureEditorError() {
 	const error = new Error(
-		'Only the creature creator, a DM, or the server owner can edit it.',
+		'Only an authorized creature user, a DM, or the server owner can edit it.',
 	);
 	error.code = 'NOT_CREATURE_EDITOR';
 	return error;
@@ -88,7 +88,7 @@ function creatureEditorError() {
 
 function creatureOwnerError() {
 	const error = new Error(
-		'Only the creature creator, a DM, or the server owner can delete it.',
+		'Only a creature owner, a DM, or the server owner can delete it.',
 	);
 	error.code = 'NOT_CREATURE_OWNER';
 	return error;

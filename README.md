@@ -108,11 +108,13 @@ restart-only: changing it requires restarting the bot, and reconnects during
 - `/reload` — reload supported runtime state and reconnect the existing Discord client
 - `/rules`
 - `/gen category:<traversal-path> [count]` — generate from a public root, optionally selecting entries, routes, or fields (configured DM role or server owner)
-- `/gen-char character-key:<new key> [level] [background]` — generate and save a complete character (configured DM role or server owner)
-- `/gen-creature creature-key:<new key> [level] [type]` — generate and atomically save a complete creature; type is optional and comes from the public `creature` router (configured DM role or server owner)
+- `/gen-char character-key:<new key> [level] [background]` — generate and save a complete character with no explicit user access (configured DM role or server owner)
+- `/gen-creature creature-key:<new key> [level] [type]` — generate and atomically save a complete creature with no explicit user access; type is optional and comes from the public `creature` router (configured DM role or server owner)
 - `/roll expression:<dice expression>` — roll expressions such as `2d6+3`
-- `/add entity-key:<new key> [type:<character|creature>]` — create a blank owned entity; character is the default
+- `/add entity-key:<new key> [type:<character|creature>]` — create a blank entity and grant yourself explicit `owner` access; character is the default
 - `/get entity-key:<key> [field]` — display the summary or one type-compatible field
+- `/access entity-key:<key>` — display every explicit `owner` and `partial` user entry
+- `/access entity-key:<key> user:<Discord user> level:<owner|partial|none>` — grant, change, or remove explicit access (full authority required)
 - `/set entity-key:<key> field:<field>` — set one grouped field in a prefilled form
 - `/heal entity-key:<key> resource:<hp|armor|both> percentage:<0-100>` — restore one or both resources
 - `/damage entity-key:<key> damage-amount:<number> [piercing]` — apply damage to AR, then HP
@@ -122,9 +124,11 @@ restart-only: changing it requires restarting the bot, and reconnects during
 
 Discord provides native validation and choices for constrained options.
 Autocomplete suggests commands the current user may access, existing EntityKeys,
-type-compatible fields, contextual generator traversal paths, localized creature types, common
-dice expressions, levels, and common purge amounts. `/undo` autocomplete includes authorized active entities with
-usable history. The private form opens immediately after `/set` is submitted; a
+controllable entities for management commands, type-compatible fields, contextual
+generator traversal paths, localized creature types, common dice expressions,
+levels, and common purge amounts. `/delete` suggestions require full authority,
+while `/undo` autocomplete includes explicitly authorized active entities with usable
+history. The private form opens immediately after `/set` is submitted; a
 successful submission then posts the confirmation and the updated selected field
 detail publicly. Invalid, expired, and unauthorized submissions remain private.
 In `/gen` results, direct inline generator references are shown in inline code;
@@ -224,11 +228,19 @@ multiple groups, parentheses, and other arithmetic are not supported. Exact
 `1d2` and `1d20` rolls return their corresponding GIF only; all other expressions
 return the textual roll breakdown.
 
-Entity creators can edit, delete, heal, damage, end turns, and undo retained changes
-for their own characters or creatures. When configured, the DM role lets its
-members perform those actions on every entity and use `/gen`, `/gen-char`, and
-`/gen-creature`; without that role, those additional DM permissions are
-server-owner-only. When configured, the
+Each persisted character and creature contains an explicit user-access list. An
+`owner` entry grants full authority; multiple owners are allowed, and the list may
+also contain no owners. A `partial` entry grants normal `/set`, `/damage`, `/heal`,
+`/end-turn`, and `/undo` control, but cannot delete the entity or change access.
+`none` is never persisted: it removes the selected user's explicit entry. Anyone
+may use `/get` or view `/access`, including entries for users who have left the
+server. Explicit owners may grant, change, or remove any user's access, including
+their own, without transferring or removing other owners.
+
+When configured, the DM role has implicit full authority over every entity and may
+use `/gen`, `/gen-char`, and `/gen-creature`; without that role, those additional DM
+permissions are server-owner-only. DM and server-owner authority is not persisted in
+entity access lists. When configured, the
 moderator role lets its members use `/say`, `/purge`, and `/reload`; without it,
 those moderation commands are server-owner-only. The actual Discord server owner,
 identified by Discord rather than configuration, may use every command and manage
@@ -266,9 +278,10 @@ subdirectories, it never appears in normal entity listings or autocomplete.
 Each push keeps the newest configured number of entries and discards older excess
 entries. A lower limit is applied the next time that entity's history changes.
 `/undo` validates and consumes the newest entry, then restores it atomically as the
-same concrete entity type. Repeated calls continue backward until the bounded stack
-is empty. Undo does not push the displaced state, so it cannot toggle between two
-states, and redo is not supported.
+same concrete entity type while preserving the active entity's current access list.
+Repeated calls continue backward until the bounded stack is empty. Undo does not
+push the displaced state, so it cannot toggle between two states, and redo is not
+supported. Access changes are atomic but do not create gameplay-history entries.
 
 Entity and history writes share the existing per-EntityKey queue. Both
 resulting JSON states are serialized before the first file operation. If the second
@@ -291,6 +304,7 @@ Example workflows:
 /gen-creature creature-key:Ash.Wolf level:5 type:monster
 /set entity-key:D.Robert field:statistics
 /get entity-key:Ash.Wolf field:traits
+/access entity-key:Ash.Wolf user:@Player level:partial
 /damage entity-key:Ash.Wolf damage-amount:25 piercing:false
 /heal entity-key:Ash.Wolf resource:both percentage:50
 /end-turn entity-key:Ash.Wolf

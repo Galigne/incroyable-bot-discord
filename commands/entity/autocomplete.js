@@ -13,8 +13,8 @@ const { t } = require('../../util/i18n');
 
 async function getEntityChoices(focusedValue, locale = 'en', options = {}) {
 	const entities = await listEntities();
-	const filteredEntities = options.creatorId
-		? entities.filter(entity => entity.creatorId === options.creatorId)
+	const filteredEntities = options.filterEntity
+		? entities.filter(options.filterEntity)
 		: entities;
 	return filterAutocompleteChoices(
 		filteredEntities.map(entity => createEntityChoice(entity, locale)),

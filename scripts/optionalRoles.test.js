@@ -6,6 +6,7 @@ const {
 	authorizeCommand,
 	canManageEntity,
 	hasDmPermission,
+	hasFullEntityAuthority,
 	hasModeratorPermission,
 } = require('../util/authorization');
 const { validateConfig } = require('../util/configuration');
@@ -99,17 +100,35 @@ test('each configured role grants only its corresponding permission', () => {
 	);
 });
 
-test('entity creators retain ownership permissions without configured roles', () => {
+test('explicit entity access and implicit privileged authority are distinct', () => {
 	const config = { ...BASE_CONFIG };
-	const creator = createInteraction('creator');
-	const owner = createInteraction('owner', [], 'owner');
-	const entity = { creatorId: 'creator' };
+	const explicitOwner = createInteraction('explicit-owner');
+	const partial = createInteraction('partial');
+	const serverOwner = createInteraction('owner', [], 'owner');
+	const entity = {
+		access: [
+			{ userId: 'explicit-owner', level: 'owner' },
+			{ userId: 'partial', level: 'partial' },
+		],
+	};
 
-	assert.equal(canManageEntity(creator, entity, config), true);
+	assert.equal(canManageEntity(explicitOwner, entity, config), true);
+	assert.equal(hasFullEntityAuthority(explicitOwner, entity, config), true);
+	assert.equal(canManageEntity(partial, entity, config), true);
+	assert.equal(hasFullEntityAuthority(partial, entity, config), false);
 	assert.equal(canManageEntity(createInteraction('regular'), entity, config), false);
-	assert.equal(canManageEntity(owner, entity, config), true);
+	assert.equal(canManageEntity(serverOwner, entity, config), true);
+	assert.equal(hasFullEntityAuthority(serverOwner, entity, config), true);
 	assert.equal(
 		canManageEntity(
+			createInteraction('dm', ['dm-role']),
+			entity,
+			{ ...BASE_CONFIG, roles: { dm: 'dm-role' } },
+		),
+		true,
+	);
+	assert.equal(
+		hasFullEntityAuthority(
 			createInteraction('dm', ['dm-role']),
 			entity,
 			{ ...BASE_CONFIG, roles: { dm: 'dm-role' } },

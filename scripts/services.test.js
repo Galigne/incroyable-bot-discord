@@ -35,7 +35,7 @@ after(() => {
 });
 
 test('RULE editing requires Name: Level: Description with a positive integer level', () => {
-	const character = new Character('Rules', 'tester');
+	const character = new Character('Rules');
 	setEditableFieldValue(character, 'rules', 'Fire: 2: Controls flames: intensely');
 	assert.deepEqual(character.rules, [{
 		name: 'Fire',
@@ -59,7 +59,7 @@ test('RULE editing requires Name: Level: Description with a positive integer lev
 });
 
 test('character editing returns localization-independent outcomes and errors', () => {
-	const character = new Character('Localization', 'tester');
+	const character = new Character('Localization');
 	const outcome = setEditableFieldValue(character, 'personality', {
 		'personality.description': 'Quiet and observant.',
 		'personality.traits': 'Patient',

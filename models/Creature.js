@@ -7,7 +7,7 @@ const { createStats } = require('../services/mechanics/statistics');
 class Creature {
 	static fromSave(data, entityKey = data?.key) {
 		validateCreatureSaveSchema(data, entityKey);
-		const creature = new Creature(entityKey, data.creatorId);
+		const creature = new Creature(entityKey, data.access);
 		creature.level = data.level;
 		creature.name = data.name;
 		creature.description = data.description;
@@ -23,7 +23,7 @@ class Creature {
 		return creature;
 	}
 
-	constructor(key, creatorId) {
+	constructor(key, access = []) {
 		this.schemaVersion = CURRENT_CREATURE_SAVE_SCHEMA_VERSION;
 		Object.defineProperty(this, 'type', {
 			enumerable: true,
@@ -35,7 +35,7 @@ class Creature {
 			value: key,
 			writable: false,
 		});
-		this.creatorId = creatorId;
+		this.access = structuredClone(access);
 		this.level = 1;
 		this.name = '';
 		this.description = '';

@@ -1,4 +1,8 @@
 const entityStore = require('./entityStore');
+const {
+	createOwnerAccess,
+	setEntityUserAccess,
+} = require('./entityAccess');
 const { assertEntityType } = require('./entityType');
 const {
 	getEditableEntityFieldValue,
@@ -10,8 +14,8 @@ const {
 	restoreHealingResources,
 } = require('./mechanics/resources');
 
-async function createEntity(entityKey, creatorId, type = 'character') {
-	return entityStore.createEntity(entityKey, creatorId, type);
+async function createEntity(entityKey, userId, type = 'character') {
+	return entityStore.createEntity(entityKey, type, createOwnerAccess(userId));
 }
 
 async function deleteEntity(entityKey, canManage, expectedType = null) {
@@ -23,6 +27,37 @@ async function deleteEntity(entityKey, canManage, expectedType = null) {
 
 async function getEntity(entityKey) {
 	return entityStore.getEntity(entityKey);
+}
+
+async function getEntityAccess(entityKey) {
+	const entity = await entityStore.getEntity(entityKey);
+	return {
+		access: structuredClone(entity.access),
+		entityKey: entity.key,
+		entityType: entity.type,
+	};
+}
+
+async function updateEntityAccess(entityKey, userId, level, hasFullAuthority) {
+	let accessOutcome;
+	const entity = await entityStore.updateEntity(
+		entityKey,
+		currentEntity => {
+			if (!hasFullAuthority(currentEntity)) {
+				throw entityAuthorizationError('ACCESS_OWNER');
+			}
+			return true;
+		},
+		currentEntity => {
+			accessOutcome = setEntityUserAccess(currentEntity, userId, level);
+		},
+	);
+	return {
+		...accessOutcome,
+		access: structuredClone(entity.access),
+		entityKey: entity.key,
+		entityType: entity.type,
+	};
 }
 
 async function listEntities(options) {
@@ -166,9 +201,11 @@ module.exports = {
 	getEditableEntity,
 	getEditableEntityField,
 	getEntity,
+	getEntityAccess,
 	healEntity,
 	listEntities,
 	listUndoableEntities,
 	undoEntity,
+	updateEntityAccess,
 	updateEditableEntity,
 };

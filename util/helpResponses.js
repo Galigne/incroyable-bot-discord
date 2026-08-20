@@ -135,6 +135,9 @@ function formatAcceptedValues(option, locale) {
 	if (option.type === 'boolean') {
 		return '`true`, `false`';
 	}
+	if (option.type === 'user') {
+		return t(locale, 'commands.help.accepted.user');
+	}
 	if (option.minValue !== undefined && option.maxValue !== undefined) {
 		return t(locale, 'commands.help.accepted.numberRange', {
 			max: option.maxValue,

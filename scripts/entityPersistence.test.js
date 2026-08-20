@@ -36,7 +36,7 @@ test('talent arrays round-trip in the current save schema', async () => {
 		'Athlete — +1 to sustained movement.',
 		'Cold Immunity — Ordinary cold cannot freeze the character.',
 	];
-	await createCharacter(arrayKey, 'creator', character => {
+	await createCharacter(arrayKey, ownerAccess('creator'), character => {
 		character.talents = [...talents];
 	});
 
@@ -58,7 +58,7 @@ test('talent arrays round-trip in the current save schema', async () => {
 
 test('encumbrance defaults and explicit values round-trip in complete saves', async () => {
 	const defaultKey = 'Encumbrance.Default';
-	await createCharacter(defaultKey, 'creator');
+	await createCharacter(defaultKey, ownerAccess('creator'));
 	assert.deepEqual((await getCharacter(defaultKey)).gear.encumbrance, { current: 0, max: 0 });
 	assert.deepEqual(
 		JSON.parse(await readSave(defaultKey)).gear.encumbrance,
@@ -78,7 +78,7 @@ test('encumbrance defaults and explicit values round-trip in complete saves', as
 	assert.equal(await readSave(malformedKey), malformedSerialized);
 
 	const explicitKey = 'Encumbrance.Explicit';
-	await createCharacter(explicitKey, 'creator', character => {
+	await createCharacter(explicitKey, ownerAccess('creator'), character => {
 		character.gear.encumbrance = { current: 5, max: 12 };
 	});
 	await updateCharacter(explicitKey, () => true, character => {
@@ -93,7 +93,7 @@ test('encumbrance defaults and explicit values round-trip in complete saves', as
 
 test('concurrent updates to one entity read the preceding saved result', async () => {
 	const characterKey = 'Concurrent.Fields';
-	await createCharacter(characterKey, 'creator');
+	await createCharacter(characterKey, ownerAccess('creator'));
 	const firstStarted = createDeferred();
 	const releaseFirst = createDeferred();
 	const mutationOrder = [];
@@ -126,7 +126,7 @@ test('concurrent updates to one entity read the preceding saved result', async (
 test('queued numeric updates do not lose changes', async () => {
 	const characterKey = 'Concurrent.Numeric';
 	const updateCount = 20;
-	await createCharacter(characterKey, 'creator');
+	await createCharacter(characterKey, ownerAccess('creator'));
 	const firstStarted = createDeferred();
 	const releaseFirst = createDeferred();
 	let mutationCount = 0;
@@ -155,8 +155,8 @@ test('updates to different entities can execute concurrently', { timeout: 2_000 
 	const firstKey = 'Concurrent.First';
 	const secondKey = 'Concurrent.Second';
 	await Promise.all([
-		createCharacter(firstKey, 'creator'),
-		createCharacter(secondKey, 'creator'),
+		createCharacter(firstKey, ownerAccess('creator')),
+		createCharacter(secondKey, ownerAccess('creator')),
 	]);
 	const firstStarted = createDeferred();
 	const secondStarted = createDeferred();
@@ -193,7 +193,7 @@ test('concurrent creation of the same key remains exclusive', async () => {
 
 	const firstCreation = createCharacter(
 		characterKey,
-		'first-creator',
+		ownerAccess('first-creator'),
 		async character => {
 			character.name.firstName = 'First';
 			firstStarted.resolve();
@@ -201,7 +201,7 @@ test('concurrent creation of the same key remains exclusive', async () => {
 		},
 	);
 	await firstStarted.promise;
-	const secondCreation = createCharacter(characterKey, 'second-creator');
+	const secondCreation = createCharacter(characterKey, ownerAccess('second-creator'));
 	assert.equal(getPendingEntityOperationCount(characterKey), 2);
 
 	releaseFirst.resolve();
@@ -213,13 +213,13 @@ test('concurrent creation of the same key remains exclusive', async () => {
 	assert.equal(firstResult.status, 'fulfilled');
 	assert.equal(secondResult.status, 'rejected');
 	assert.equal(secondResult.reason.code, 'EEXIST');
-	assert.equal((await getCharacter(characterKey)).creatorId, 'first-creator');
+	assert.deepEqual((await getCharacter(characterKey)).access, ownerAccess('first-creator'));
 	assert.equal(getEntityOperationQueueSize(), 0);
 });
 
 test('an update and deletion of one entity execute sequentially', async () => {
 	const characterKey = 'Concurrent.Deletion';
-	await createCharacter(characterKey, 'creator');
+	await createCharacter(characterKey, ownerAccess('creator'));
 	const updateStarted = createDeferred();
 	const releaseUpdate = createDeferred();
 
@@ -241,7 +241,7 @@ test('an update and deletion of one entity execute sequentially', async () => {
 
 test('a throwing mutation does not persist changes or retain its lock', async () => {
 	const characterKey = 'Failure.Mutation';
-	await createCharacter(characterKey, 'creator');
+	await createCharacter(characterKey, ownerAccess('creator'));
 	const mutationError = new Error('controlled mutation failure');
 
 	await assert.rejects(
@@ -264,7 +264,7 @@ test('a throwing mutation does not persist changes or retain its lock', async ()
 
 test('invalid persisted shape preserves the previous save and cleans the lock', async () => {
 	const characterKey = 'Failure.Serialization';
-	await createCharacter(characterKey, 'creator', character => {
+	await createCharacter(characterKey, ownerAccess('creator'), character => {
 		character.name.firstName = 'Valid';
 	});
 	const previousSave = await readSave(characterKey);
@@ -338,4 +338,8 @@ async function readSave(characterKey) {
 async function listTemporaryFiles() {
 	return (await fsPromises.readdir(characterSaveDirectory))
 		.filter(fileName => fileName.endsWith('.tmp'));
+}
+
+function ownerAccess(userId) {
+	return [{ userId, level: 'owner' }];
 }

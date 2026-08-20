@@ -19,7 +19,6 @@ module.exports = {
 		try {
 			const creature = await generateCreature(
 				entityKey,
-				interaction.user.id,
 				{ type, level, locale },
 			);
 			await interaction.reply(createGeneratedCreatureResponse(creature, locale));

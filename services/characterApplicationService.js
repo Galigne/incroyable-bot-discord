@@ -1,10 +1,10 @@
 const characterStore = require('./characterStore');
 const { populateRandomCharacter } = require('./randomCharacterGenerator');
 
-async function generateCharacter(characterKey, creatorId, options) {
+async function generateCharacter(characterKey, options) {
 	return characterStore.createCharacter(
 		characterKey,
-		creatorId,
+		[],
 		character => populateRandomCharacter(character, options),
 	);
 }

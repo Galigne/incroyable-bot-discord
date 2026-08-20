@@ -81,7 +81,7 @@ module.exports = function createLocalizationChecks(context) {
 		}
 
 		const Character = require('../../models/Character');
-		const localizedCharacter = new Character('Localisation', 'tester');
+		const localizedCharacter = new Character('Localisation');
 		localizedCharacter.race.traits.skillBonus = 'Arcanes';
 		localizedCharacter.rules = [{ name: 'Feu', level: 1, description: '' }];
 		const frenchSummary = createCharacterSummaryEmbed(localizedCharacter, 'fr')

@@ -26,7 +26,7 @@ test('generated prompt embeds have no footer', () => {
 });
 
 test('character summary and detail embeds have no footer', () => {
-	const character = new Character('Footer.Test', 'creator');
+	const character = new Character('Footer.Test');
 	const summary = createEntityGetResponse(character, null, 'en')
 		.embeds[0].toJSON();
 	const detail = createEntityGetResponse(character, 'race', 'en')
@@ -37,7 +37,7 @@ test('character summary and detail embeds have no footer', () => {
 });
 
 test('/get gear retains the manual encumbrance detail', () => {
-	const character = new Character('Encumbrance.Get', 'creator');
+	const character = new Character('Encumbrance.Get');
 	character.gear.encumbrance = { current: 3, max: 8 };
 	const detail = createEntityGetResponse(character, 'gear', 'en')
 		.embeds[0].toJSON();
@@ -49,7 +49,7 @@ test('/get gear retains the manual encumbrance detail', () => {
 });
 
 test('/get renders every grouped section from unchanged stored properties', () => {
-	const character = new Character('Grouped.Get', 'creator');
+	const character = new Character('Grouped.Get');
 	character.name.firstName = 'Ada';
 	character.name.lastName = 'Lovelace';
 	character.level = 4;
@@ -123,7 +123,7 @@ test('/get renders every grouped section from unchanged stored properties', () =
 });
 
 test('/get rejects former independent child views and safely truncates grouped lists', () => {
-	const character = new Character('Grouped.Bounds', 'creator');
+	const character = new Character('Grouped.Bounds');
 	for (const field of [
 		'firstName', 'lastName', 'backstory', 'goals', 'racialTraits',
 		'status-effects', 'hp', 'ar', 'ap', 'md', 'equipment', 'inventory',
@@ -141,7 +141,7 @@ test('/get rejects former independent child views and safely truncates grouped l
 });
 
 test('character summaries and talent details render localized bounded lists', () => {
-	const character = new Character('Talent.Render', 'creator');
+	const character = new Character('Talent.Render');
 	character.talents = [
 		'Athlete — +1 to sustained movement.',
 		'Cold Immunity — Ordinary cold cannot freeze the character.',
@@ -162,12 +162,12 @@ test('character summaries and talent details render localized bounded lists', ()
 	].join('\n'));
 
 	const emptyEnglish = createEntityGetResponse(
-		new Character('Empty.English', 'creator'),
+		new Character('Empty.English'),
 		'talents',
 		'en',
 	).embeds[0].toJSON();
 	const emptyFrench = createEntityGetResponse(
-		new Character('Empty.French', 'creator'),
+		new Character('Empty.French'),
 		'talents',
 		'fr',
 	).embeds[0].toJSON();
@@ -185,7 +185,7 @@ test('character summaries and talent details render localized bounded lists', ()
 });
 
 test('character summaries omit empty optional content and all gear lists', () => {
-	const character = new Character('Concise.Summary', 'creator');
+	const character = new Character('Concise.Summary');
 	character.gear.equipment = ['Sword'];
 	character.gear.inventory = ['Potion'];
 
@@ -224,7 +224,7 @@ test('character summaries omit empty optional content and all gear lists', () =>
 });
 
 test('creature summaries match the concise character layout with intrinsic traits', () => {
-	const creature = new Creature('Concise.Creature', 'creator');
+	const creature = new Creature('Concise.Creature');
 	creature.gear.equipment = ['Claws'];
 	creature.gear.inventory = ['Shiny stone'];
 
@@ -270,7 +270,7 @@ test('creature summaries match the concise character layout with intrinsic trait
 });
 
 test('generated character embeds have no footer', () => {
-	const character = new Character('Generated.Footer.Test', 'creator');
+	const character = new Character('Generated.Footer.Test');
 	const embed = createGeneratedCharacterResponse(character, 'en')
 		.embeds[0].toJSON();
 
@@ -278,7 +278,7 @@ test('generated character embeds have no footer', () => {
 });
 
 test('generated character follow-ups reuse /get personality and conditionally include gear', () => {
-	const character = new Character('Generated.FollowUps', 'creator');
+	const character = new Character('Generated.FollowUps');
 	character.personality = {
 		traits: ['Patient', 'Observant'],
 		description: 'Quiet and curious',
@@ -300,7 +300,7 @@ test('generated character follow-ups reuse /get personality and conditionally in
 });
 
 test('generated creature follow-ups conditionally reuse /get gear', () => {
-	const creature = new Creature('Generated.Creature.FollowUps', 'creator');
+	const creature = new Creature('Generated.Creature.FollowUps');
 	assert.deepEqual(createGeneratedCreatureFollowUpResponses(creature, 'en'), []);
 
 	creature.gear.equipment = ['Claws'];

@@ -20,6 +20,7 @@ const VALID_OPTION_TYPES = Object.freeze([
 	'integer',
 	'number',
 	'string',
+	'user',
 ]);
 
 function validateCommandMetadata(metadataList) {
@@ -190,6 +191,7 @@ function configureCommandOptions(builder, options) {
 			integer: 'addIntegerOption',
 			number: 'addNumberOption',
 			string: 'addStringOption',
+			user: 'addUserOption',
 		}[option.type];
 		builder[method](optionBuilder => configureOption(optionBuilder, option));
 	}

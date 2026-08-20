@@ -7,7 +7,7 @@ const { createStats } = require('../services/mechanics/statistics');
 class Character {
 	static fromSave(data, characterKey = data?.key) {
 		validateCharacterSaveSchema(data, characterKey);
-		const character = new Character(characterKey, data.creatorId);
+		const character = new Character(characterKey, data.access);
 		character.name = structuredClone(data.name);
 		character.level = data.level;
 		character.race = structuredClone(data.race);
@@ -22,10 +22,10 @@ class Character {
 		return character;
 	}
 
-	constructor(key, creatorId) {
+	constructor(key, access = []) {
 		this.schemaVersion = CURRENT_CHARACTER_SAVE_SCHEMA_VERSION;
 		this.key = key;
-		this.creatorId = creatorId;
+		this.access = structuredClone(access);
 		this.name = {
 			firstName: '',
 			lastName: '',

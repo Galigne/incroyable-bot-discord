@@ -3,7 +3,6 @@ const {
 	COMBATANT_STAT_IDS,
 	assertBoundedString,
 	assertExactKeys,
-	assertNonEmptyString,
 	assertRecord,
 	assertStatProfileId,
 	assertTechnicalId,
@@ -13,8 +12,9 @@ const {
 	validateNonEmptyStringList,
 	validateProvenance,
 } = require('./combatantSaveSchema');
+const { validateEntityAccess } = require('./entityAccess');
 
-const CURRENT_CREATURE_SAVE_SCHEMA_VERSION = 4;
+const CURRENT_CREATURE_SAVE_SCHEMA_VERSION = 5;
 const CREATURE_STAT_IDS = COMBATANT_STAT_IDS;
 
 function validateCreatureSaveSchema(rawSaveData, expectedKey = rawSaveData?.key) {
@@ -40,7 +40,7 @@ function validateCreatureSaveSchema(rawSaveData, expectedKey = rawSaveData?.key)
 		'schemaVersion',
 		'type',
 		'key',
-		'creatorId',
+		'access',
 		'level',
 		'name',
 		'description',
@@ -71,7 +71,7 @@ function validateCreatureSaveSchema(rawSaveData, expectedKey = rawSaveData?.key)
 			'Creature save type must be creature.',
 		);
 	}
-	assertNonEmptyString(rawSaveData.creatorId, 'creatorId', invalidSave);
+	validateEntityAccess(rawSaveData.access, invalidSave);
 	validateCombatantLevel(rawSaveData.level, invalidSave);
 	assertBoundedString(rawSaveData.name, 'name', 256, invalidSave);
 	assertBoundedString(rawSaveData.description, 'description', 4_000, invalidSave);

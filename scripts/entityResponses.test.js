@@ -22,7 +22,7 @@ const {
 } = require('../util/combatantDisplay');
 
 function createTestCharacter() {
-	const character = new Character('Response.Test', 'creator');
+	const character = new Character('Response.Test');
 	character.name.firstName = 'Response';
 	character.resources = {
 		hp: { current: 42, max: 100 },
@@ -99,7 +99,7 @@ test('character and creature render shared combatant sections with their establi
 		},
 		{
 			entity: configureSharedCombatantSections(
-				new Creature('Response.Creature', 'creator'),
+				new Creature('Response.Creature'),
 			),
 			summary: createCreatureSummaryEmbed,
 			field: createCreatureFieldEmbed,

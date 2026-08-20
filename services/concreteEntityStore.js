@@ -30,11 +30,11 @@ function createConcreteEntityStore({
 	validateKey,
 	validateSave,
 }) {
-	async function create(entityKey, creatorId, initialize = () => undefined) {
+	async function create(entityKey, access = [], initialize = () => undefined) {
 		validateKey(entityKey);
 		return runEntityOperation(entityKey, async () => {
 			await assertEntityKeyAvailable(entityKey);
-			const entity = createEntityInstance(entityKey, creatorId);
+			const entity = createEntityInstance(entityKey, access);
 			await initialize(entity);
 			prepareCreatedEntity(entity, entityKey);
 			validateSave(entity, entityKey);
@@ -170,6 +170,9 @@ function createConcreteEntityStore({
 			const entity = undoResult[entityProperty];
 			if (!current && !canManage(entity)) {
 				throw createEditorError();
+			}
+			if (current) {
+				entity.access = structuredClone(current.entity.access);
 			}
 
 			validateSave(entity, entityKey);

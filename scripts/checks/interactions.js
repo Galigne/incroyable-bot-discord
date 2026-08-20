@@ -22,7 +22,10 @@ module.exports = function createInteractionChecks(context) {
 		const englishConfig = { ...config, locale: 'en' };
 
 		try {
-			await characterStore.createCharacter(characterKey, user.id, character => {
+			await characterStore.createCharacter(characterKey, [{
+				userId: user.id,
+				level: 'owner',
+			}], character => {
 				character.name.firstName = 'Modal';
 				character.name.lastName = 'Tester';
 			});

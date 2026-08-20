@@ -5,6 +5,7 @@ module.exports = function createAuthorizationChecks(context) {
 		config,
 		errors,
 		hasDmPermission,
+		hasFullEntityAuthority,
 		hasModeratorPermission,
 		isGuildOwner,
 	} = context;
@@ -64,6 +65,7 @@ module.exports = function createAuthorizationChecks(context) {
 		}
 
 		const unrestrictedCommands = [
+			commands.get('access'),
 			commands.get('help'),
 			commands.get('get'),
 			commands.get('roll'),
@@ -92,10 +94,26 @@ module.exports = function createAuthorizationChecks(context) {
 			errors.push('Direct messages must never satisfy guild role checks.');
 		}
 
-		const ownedEntity = { creatorId: regular.user.id };
-		const otherEntity = { creatorId: 'someone-else' };
+		const ownedEntity = {
+			access: [{ userId: regular.user.id, level: 'owner' }],
+		};
+		const partialEntity = {
+			access: [{ userId: regular.user.id, level: 'partial' }],
+		};
+		const otherEntity = {
+			access: [{ userId: 'someone-else', level: 'owner' }],
+		};
 		if (!canManageEntity(regular, ownedEntity, config)) {
-			errors.push('Regular users should manage their own entities.');
+			errors.push('Explicit owners should manage their entities.');
+		}
+		if (!canManageEntity(regular, partialEntity, config)) {
+			errors.push('Partial users should manage normal entity operations.');
+		}
+		if (hasFullEntityAuthority(regular, partialEntity, config)) {
+			errors.push('Partial users should not have full entity authority.');
+		}
+		if (!hasFullEntityAuthority(regular, ownedEntity, config)) {
+			errors.push('Explicit owners should have full entity authority.');
 		}
 		if (canManageEntity(regular, otherEntity, config)) {
 			errors.push('Regular users should not manage other entities.');
@@ -103,8 +121,14 @@ module.exports = function createAuthorizationChecks(context) {
 		if (!canManageEntity(dm, otherEntity, config)) {
 			errors.push('The DM role should manage any entity.');
 		}
+		if (!hasFullEntityAuthority(dm, otherEntity, config)) {
+			errors.push('The DM role should have full authority over any entity.');
+		}
 		if (!canManageEntity(owner, otherEntity, config)) {
 			errors.push('The server owner should manage any entity.');
+		}
+		if (!hasFullEntityAuthority(owner, otherEntity, config)) {
+			errors.push('The server owner should have full authority over any entity.');
 		}
 		if (canManageEntity(moderator, otherEntity, config)) {
 			errors.push('The moderator role alone should not manage other entities.');

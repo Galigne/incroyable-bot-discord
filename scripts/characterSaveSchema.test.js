@@ -55,7 +55,7 @@ after(() => {
 
 test('newly created characters persist the current schema version', async () => {
 	const characterKey = 'Schema.Created';
-	const character = await createCharacter(characterKey, 'creator');
+	const character = await createCharacter(characterKey, ownerAccess('creator'));
 	const rawSave = await readRawSave(characterKey);
 
 	assert.equal(character.schemaVersion, CURRENT_CHARACTER_SAVE_SCHEMA_VERSION);
@@ -66,7 +66,7 @@ test('newly created characters persist the current schema version', async () => 
 	assert.deepEqual(Object.keys(rawSave), [
 		'schemaVersion',
 		'key',
-		'creatorId',
+		'access',
 		'name',
 		'level',
 		'race',
@@ -93,16 +93,16 @@ test('current-version saves load successfully', async () => {
 	const character = await getCharacter(characterKey);
 
 	assert.equal(character.schemaVersion, CURRENT_CHARACTER_SAVE_SCHEMA_VERSION);
-	assert.equal(character.creatorId, 'creator');
+	assert.deepEqual(character.access, ownerAccess('creator'));
 	assert.equal(character.name.firstName, 'Current');
 });
 
 test('unsupported previous schemas are rejected without rewriting', async () => {
-	for (const schemaVersion of [1, 2]) {
+	for (const schemaVersion of [1, 2, 3]) {
 		const characterKey = `Schema.Legacy.${schemaVersion}`;
 		const originalSave = await writeRawSave(characterKey, {
 			schemaVersion,
-			creatorId: 'creator',
+			access: ownerAccess('creator'),
 		});
 		await assert.rejects(
 			getCharacter(characterKey),
@@ -114,7 +114,7 @@ test('unsupported previous schemas are rejected without rewriting', async () => 
 
 test('/gen-char consumes current generator fields and persists the current schema', async () => {
 	const characterKey = 'Schema.Generated';
-	const generated = await generateCharacter(characterKey, 'creator', {
+	const generated = await generateCharacter(characterKey, {
 		formatGold: gold => `${gold} gold`,
 		level: 1,
 		locale: 'en',
@@ -125,6 +125,7 @@ test('/gen-char consumes current generator fields and persists the current schem
 	const raceEntry = generatorCatalog.getGenerator('race', 'en').entries[0];
 
 	assert.equal(rawSave.schemaVersion, CURRENT_CHARACTER_SAVE_SCHEMA_VERSION);
+	assert.deepEqual(rawSave.access, []);
 	assert.deepEqual(rawSave.name, {
 		firstName: nameEntry.fields.first_name,
 		lastName: nameEntry.fields.last_name,
@@ -199,7 +200,7 @@ test('/gen-char sends personality and populated gear after its unchanged summary
 test('saves without schemaVersion are rejected without being rewritten', async () => {
 	const characterKey = 'Schema.Missing';
 	const originalSave = await writeRawSave(characterKey, {
-		creatorId: 'creator',
+		access: ownerAccess('creator'),
 	});
 
 	await assert.rejects(
@@ -217,7 +218,7 @@ test('unsupported schema versions are rejected without being rewritten', async (
 	]) {
 		const originalSave = await writeRawSave(characterKey, {
 			schemaVersion,
-			creatorId: 'creator',
+			access: ownerAccess('creator'),
 		});
 
 		await assert.rejects(
@@ -243,7 +244,7 @@ test('malformed schemaVersion values are rejected', async () => {
 	for (const schemaVersion of invalidVersions) {
 		const originalSave = await writeRawSave(characterKey, {
 			schemaVersion,
-			creatorId: 'creator',
+			access: ownerAccess('creator'),
 		});
 		await assert.rejects(
 			getCharacter(characterKey),
@@ -261,7 +262,7 @@ test('character listing skips and reports saves with invalid versions', async ()
 	);
 	const invalidSave = await writeRawSave('Schema.Listed.Invalid', {
 		schemaVersion: CURRENT_CHARACTER_SAVE_SCHEMA_VERSION + 1,
-		creatorId: 'creator',
+		access: ownerAccess('creator'),
 	});
 	const errors = [];
 
@@ -288,7 +289,7 @@ test('character listing skips and reports saves with invalid versions', async ()
 
 test('character updates preserve schemaVersion', async () => {
 	const characterKey = 'Schema.Updated';
-	await createCharacter(characterKey, 'creator');
+	await createCharacter(characterKey, ownerAccess('creator'));
 
 	const character = await updateCharacter(
 		characterKey,
@@ -309,7 +310,7 @@ test('character updates preserve schemaVersion', async () => {
 });
 
 test('schemaVersion is excluded from character editing and display surfaces', async () => {
-	const character = await createCharacter('Schema.Hidden', 'creator');
+	const character = await createCharacter('Schema.Hidden', ownerAccess('creator'));
 	const editableFieldIds = getEditableFields().map(field => field.id);
 	const viewableFieldIds = getViewableFields().map(field => field.id);
 	const summary = createCharacterSummaryEmbed(character).toJSON();
@@ -334,6 +335,15 @@ test('character saves reject incomplete or malformed persisted combatant state',
 			save.rules = [{ name: 'Broken', description: '', level: 1 }];
 		}],
 		['incomplete gear', save => delete save.gear.encumbrance.current],
+		['persisted none access', save => {
+			save.access = [{ userId: 'creator', level: 'none' }];
+		}],
+		['duplicate access user', save => {
+			save.access.push({ userId: 'creator', level: 'partial' });
+		}],
+		['malformed access entry', save => {
+			save.access = [{ userId: '', level: 'owner' }];
+		}],
 	];
 
 	for (const [label, mutate] of cases) {
@@ -350,8 +360,12 @@ test('character saves reject incomplete or malformed persisted combatant state',
 	}
 });
 
-function createValidCharacterSave(characterKey, creatorId = 'creator') {
-	return JSON.parse(JSON.stringify(new Character(characterKey, creatorId)));
+function createValidCharacterSave(characterKey) {
+	return JSON.parse(JSON.stringify(new Character(characterKey, ownerAccess('creator'))));
+}
+
+function ownerAccess(userId) {
+	return [{ userId, level: 'owner' }];
 }
 
 function getSavePath(characterKey) {

@@ -368,11 +368,11 @@ test('creature trait references use normal catalog relationship validation', () 
 test('equivalent random input selects the same stable IDs and statistics in both locales', () => {
 	for (const type of getCreatureTypes()) {
 		const english = populateRandomCreature(
-			new Creature(`Deterministic.${type}.en`, 'creator'),
+			new Creature(`Deterministic.${type}.en`),
 			{ type, level: 6, locale: 'en', random: () => 0 },
 		);
 		const french = populateRandomCreature(
-			new Creature(`Deterministic.${type}.fr`, 'creator'),
+			new Creature(`Deterministic.${type}.fr`),
 			{ type, level: 6, locale: 'fr', random: () => 0 },
 		);
 
@@ -473,7 +473,7 @@ test('every production creature resolves localized traits into valid final state
 
 test('generated creature saves persist only final trait strings', async () => {
 	const type = getCreatureTypeForEntry('river_otter');
-	const generated = await generateCreature('Trait.Persistence', 'creator', {
+	const generated = await generateCreature('Trait.Persistence', {
 		type,
 		level: 4,
 		locale: 'en',
@@ -483,7 +483,8 @@ test('generated creature saves persist only final trait strings', async () => {
 		getCreatureSavePath(generated.key),
 		'utf8',
 	));
-	assert.equal(persisted.schemaVersion, 4);
+	assert.equal(persisted.schemaVersion, 5);
+	assert.deepEqual(persisted.access, []);
 	assert.deepEqual(persisted.traits, generated.traits);
 	assert.ok(persisted.traits.every(trait => (
 		typeof trait === 'string' && !trait.includes('{{')
@@ -544,7 +545,7 @@ test('all creature profiles use the shared nonlinear level budget and derived re
 	}
 
 	const randomLevel = populateRandomCreature(
-		new Creature('Random.Level', 'creator'),
+		new Creature('Random.Level'),
 		{
 			type,
 			random: sequenceRandom([0.999999, 0, 0.99]),
@@ -651,7 +652,7 @@ test('natural armor, generated armor, status, and weighted gear resolve to final
 		}],
 	};
 	const stacked = populateRandomCreature(
-		new Creature('Generated.Stacked.Armor', 'creator'),
+		new Creature('Generated.Stacked.Armor'),
 		{
 			getGenerator: (requestedId, locale) => (
 				requestedId === generatorId
@@ -686,7 +687,7 @@ test('omitted creature generation metadata uses the shared default profile and n
 	delete entry.generation;
 	const profileRequests = [];
 	const creature = populateRandomCreature(
-		new Creature('Generated.Default.Metadata', 'creator'),
+		new Creature('Generated.Default.Metadata'),
 		{
 			getGenerator: (requestedId, locale) => (
 				requestedId === generatorId
@@ -737,7 +738,7 @@ test('descriptive modifiers cannot change mechanical generation results', () => 
 	};
 
 	const plain = populateRandomCreature(
-		new Creature('Modifier.Plain', 'creator'),
+		new Creature('Modifier.Plain'),
 		{
 			type,
 			level: 7,
@@ -746,7 +747,7 @@ test('descriptive modifiers cannot change mechanical generation results', () => 
 		},
 	);
 	const modified = populateRandomCreature(
-		new Creature('Modifier.Applied', 'creator'),
+		new Creature('Modifier.Applied'),
 		{
 			type,
 			level: 7,
@@ -895,7 +896,7 @@ test('/gen-creature treats an omitted Discord type option as random selection', 
 
 test('/gen-creature randomly selects a router entry when type is omitted', () => {
 	const creature = populateRandomCreature(
-		new Creature('Random.Type', 'creator'),
+		new Creature('Random.Type'),
 		{
 			level: 4,
 			locale: 'en',
@@ -914,16 +915,16 @@ test('generation, collision, and save failures leave no partial creature or hist
 		['Validation.Level', { type: validType, level: 11 }],
 	]) {
 		await assert.rejects(
-			generateCreature(entityKey, 'creator', options),
+			generateCreature(entityKey, options),
 			{ code: 'INVALID_RANDOM_CREATURE' },
 		);
 		assert.equal(await pathExists(getCreatureSavePath(entityKey)), false);
 		assert.equal(await pathExists(getCreatureHistoryPath(entityKey)), false);
 	}
 
-	await createCharacter('Collision.Key', 'creator');
+	await createCharacter('Collision.Key', ownerAccess('creator'));
 	await assert.rejects(
-		generateCreature('Collision.Key', 'creator', {
+		generateCreature('Collision.Key', {
 			type: validType,
 			level: 1,
 			random: () => 0,
@@ -934,7 +935,7 @@ test('generation, collision, and save failures leave no partial creature or hist
 	assert.equal(await pathExists(getCreatureHistoryPath('Collision.Key')), false);
 
 	await assert.rejects(
-		generateCreature('Generation.Failure', 'creator', {
+		generateCreature('Generation.Failure', {
 			type: validType,
 			level: 1,
 			resolver: {
@@ -973,7 +974,7 @@ test('generation, collision, and save failures leave no partial creature or hist
 	};
 	try {
 		await assert.rejects(
-			generateCreature('Save.Failure', 'creator', {
+			generateCreature('Save.Failure', {
 				type: validType,
 				level: 1,
 				random: () => 0,
@@ -992,12 +993,12 @@ test('generation, collision, and save failures leave no partial creature or hist
 	)));
 
 	const concurrent = await Promise.allSettled([
-		generateCreature('Concurrent.Key', 'creator-a', {
+		generateCreature('Concurrent.Key', {
 			type: validType,
 			level: 2,
 			random: () => 0,
 		}),
-		generateCreature('Concurrent.Key', 'creator-b', {
+		generateCreature('Concurrent.Key', {
 			type: validType,
 			level: 3,
 			random: () => 0,
@@ -1016,7 +1017,7 @@ test('generation, collision, and save failures leave no partial creature or hist
 
 test('loading and rendering persisted creatures never reruns generation after reload', async () => {
 	const validType = getCreatureTypes().at(-1);
-	const generated = await generateCreature('Reload.Stable', 'creator', {
+	const generated = await generateCreature('Reload.Stable', {
 		type: validType,
 		level: 6,
 		locale: 'fr',
@@ -1057,7 +1058,7 @@ function generateEntry(type, entryId, {
 	randomFallback = 0.5,
 } = {}) {
 	return populateRandomCreature(
-		new Creature(`Generated.${type}.${entryId}`, 'creator'),
+		new Creature(`Generated.${type}.${entryId}`),
 		{
 			type,
 			level,
@@ -1072,7 +1073,7 @@ function generateEntry(type, entryId, {
 
 function generateLocalizedEntry(type, entryId, locale) {
 	return populateRandomCreature(
-		new Creature(`Generated.${locale}.${type}.${entryId}`, 'creator'),
+		new Creature(`Generated.${locale}.${type}.${entryId}`),
 		{
 			type,
 			level: 3,
@@ -1100,6 +1101,10 @@ function getEntryMidpoint(generatorId, entryId) {
 		previousWeight += entry.weight;
 	}
 	throw new Error(`Unknown ${generatorId} entry ${entryId}.`);
+}
+
+function ownerAccess(userId) {
+	return [{ userId, level: 'owner' }];
 }
 
 function getCreatureTypes(locale = 'en') {

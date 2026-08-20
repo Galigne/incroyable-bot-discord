@@ -50,7 +50,8 @@
         "boolean": "Boolean",
         "integer": "Whole number",
         "number": "Number",
-        "string": "Text"
+        "string": "Text",
+        "user": "Discord user"
       },
       "accepted": {
         "autocomplete": "Select or enter a value; autocomplete provides valid suggestions",
@@ -61,7 +62,8 @@
         "numberMinimum": "A number greater than or equal to {{min}}",
         "numberMaximum": "A number less than or equal to {{max}}",
         "lengthRange": "Text containing {{min}} to {{max}} characters",
-        "lengthMaximum": "Text containing at most {{max}} characters"
+        "lengthMaximum": "Text containing at most {{max}} characters",
+        "user": "Any Discord user selectable in this server"
       },
       "valueGroups": {
         "general": "General fields",
@@ -104,7 +106,25 @@
       "keyOption": "Unique entity save key; make it short and memorable",
       "typeOption": "Entity type; defaults to character",
       "success": "{{type}} with key `{{key}}` was created. This EntityKey and type cannot be changed. Use `/set` with a compatible field to open its prefilled private form.",
-      "behavior": "Creates and saves a blank entity owned by the invoking user. `type` accepts `character` or `creature` and defaults to `character`. EntityKeys are globally unique across both types, must start and end with a letter or number, and may contain internal periods, hyphens, and underscores."
+      "behavior": "Creates and saves a blank entity, granting the invoking user explicit `owner` access. `type` accepts `character` or `creature` and defaults to `character`. EntityKeys are globally unique across both types, must start and end with a letter or number, and may contain internal periods, hyphens, and underscores."
+    },
+    "access": {
+      "description": "View or change explicit user access for an entity",
+      "entityOption": "Character or creature whose access will be viewed or changed",
+      "userOption": "Discord user whose explicit access will be changed; use with level",
+      "levelOption": "Explicit access to grant, or none to remove it; use with user",
+      "listTitle": "**Explicit access for `{{key}}`**",
+      "listEntry": "- {{user}} — **{{level}}**",
+      "empty": "No users have explicit access to this entity.",
+      "listAttached": "The complete explicit access list for `{{key}}` is attached.",
+      "updated": "Explicit access for {{user}} on `{{key}}` changed from **{{previousLevel}}** to **{{level}}**.",
+      "unchanged": "Explicit access for {{user}} on `{{key}}` is already **{{level}}**; nothing changed.",
+      "levels": {
+        "owner": "Owner",
+        "partial": "Partial",
+        "none": "None"
+      },
+      "behavior": "With only `entity-key`, displays every persisted explicit user-access entry; anyone may view this list. Add both `user` and `level` to change access. `owner` grants full entity authority without removing other owners, `partial` grants normal editing and gameplay actions but not deletion or access changes, and `none` removes the user’s explicit entry. Setting an existing level or removing an absent entry succeeds without an unnecessary error. The server owner and configured DM users always retain implicit full authority without persisted entries. Only a server owner, DM, or explicit entity owner may change access, including their own access."
     },
     "damage": {
       "description": "Deal damage to an entity, reducing AR before HP",
@@ -115,7 +135,7 @@
       "piercingBreakdown": "{{amount}} piercing damage was dealt directly to {{hpLabel}}.",
       "normalBreakdown": "{{arDamage}} damage was absorbed by {{arLabel}} and {{hpDamage}} damage reached {{hpLabel}}.",
       "result": "**{{name}}** received **{{amount}} damage**. {{breakdown}}\n{{resources}}",
-      "behavior": "Applies a positive whole-number damage amount to the selected character or creature's current AR first, then current HP. When `piercing` is true, damage bypasses AR. Only the entity creator, a DM, or the server owner may use it."
+      "behavior": "Applies a positive whole-number damage amount to the selected character or creature's current AR first, then current HP. When `piercing` is true, damage bypasses AR. Explicit `owner` and `partial` users, DMs, and the server owner may use it."
     },
     "delete": {
       "description": "Permanently delete an entity and all retained backups",
@@ -130,13 +150,13 @@
       "wrongUser": "This deletion confirmation belongs to another user.",
       "success": "Entity **{{key}}** and all retained backups were permanently deleted.",
       "operationFailed": "The entity and its retained backups could not be deleted safely. Nothing was intentionally left partially deleted.",
-      "behavior": "Opens a private confirmation form. Type the exact, case-sensitive EntityKey to permanently delete both the active character or creature save and every retained backup. This cannot be undone. Only the entity creator, a DM, or the server owner may confirm deletion."
+      "behavior": "Opens a private confirmation form. Type the exact, case-sensitive EntityKey to permanently delete both the active character or creature save and every retained backup. This cannot be undone. Only an explicit entity `owner`, a DM, or the server owner may confirm deletion; `partial` access is insufficient."
     },
     "endTurn": {
       "description": "Restore current AP and MD to their maximum values",
       "entityOption": "Character or creature ending its turn",
       "result": "**{{name}}** starts a new turn.\n{{resources}}",
-      "behavior": "Restores the selected character or creature's current AP and MD to their respective maximum values. Only the entity creator, a DM, or the server owner may use it."
+      "behavior": "Restores the selected character or creature's current AP and MD to their respective maximum values. Explicit `owner` and `partial` users, DMs, and the server owner may use it."
     },
     "gen": {
       "description": "Generate GM inspiration (configured DM role or server owner)",
@@ -157,7 +177,7 @@
       "backgroundOption": "Character background; omitted means a random background",
       "levelChoice": "Level {{level}}",
       "success": "Generated character **{{name}}** with key `{{key}}`.",
-      "behavior": "Creates and saves a complete random character under a unique CharacterKey. Level must be 1–10 and is random when omitted; background is also optional and random by default. The selected background determines the character’s archetype, while the physical description is generated independently. Backstory and goals start empty. Statistics, resources, RULEs, armor, weapons, inventory, gold, temporary status effects, and persistent character modifiers follow the selected level and game rules. Encumbrance remains manual and defaults to 0 / 0."
+      "behavior": "Creates and saves a complete random character under a unique CharacterKey with an empty explicit access list. The DM or server owner already has implicit full authority. Level must be 1–10 and is random when omitted; background is also optional and random by default. The selected background determines the character’s archetype, while the physical description is generated independently. Backstory and goals start empty. Statistics, resources, RULEs, armor, weapons, inventory, gold, temporary status effects, and persistent character modifiers follow the selected level and game rules. Encumbrance remains manual and defaults to 0 / 0."
     },
     "genCreature": {
       "description": "Generate a creature (configured DM role or server owner)",
@@ -167,7 +187,7 @@
       "levelOption": "Creature level; random from 1 to 10 when omitted.",
       "levelChoice": "Level {{level}}",
       "success": "Generated **{{name}}** and saved it with CreatureKey `{{key}}`.",
-      "behavior": "Creates and saves one complete creature. If a type is provided, the creature is generated from that category; otherwise, a category is selected at random. The CreatureKey is globally unique, and level must be 1–10 or is random when omitted. Statistics and derived resources follow the selected creature and game rules; RULEs are granted only when explicitly specified. Temporary status effects use the status-effect catalog, while persistent modifiers use the creature modifier catalog. Equipment, inventory, and natural armor are determined by the selected creature. Encumbrance remains manual and defaults to 0 / 0. Only a configured DM or the server owner may use this command."
+      "behavior": "Creates and saves one complete creature with an empty explicit access list; the invoking DM or server owner already has implicit full authority. If a type is provided, the creature is generated from that category; otherwise, a category is selected at random. The CreatureKey is globally unique, and level must be 1–10 or is random when omitted. Statistics and derived resources follow the selected creature and game rules; RULEs are granted only when explicitly specified. Temporary status effects use the status-effect catalog, while persistent modifiers use the creature modifier catalog. Equipment, inventory, and natural armor are determined by the selected creature. Encumbrance remains manual and defaults to 0 / 0. Only a configured DM or the server owner may use this command."
     },
     "get": {
       "description": "Display an entity summary or one compatible detailed field",
@@ -187,7 +207,7 @@
       "both": "{{hp}} and {{ar}}",
       "change": "{{resource}}: **{{previous}}/{{max}} → {{current}}/{{max}}**",
       "result": "**{{name}}** restored to {{percentage}}%:\n{{resources}}",
-      "behavior": "Sets a character or creature's current HP, current AR, or both to the requested percentage of each resource's own maximum, using the shared rounding rule. Only the entity creator, a DM, or the server owner may use it."
+      "behavior": "Sets a character or creature's current HP, current AR, or both to the requested percentage of each resource's own maximum, using the shared rounding rule. Explicit `owner` and `partial` users, DMs, and the server owner may use it."
     },
     "roll": {
       "description": "Roll a standard dice expression",
@@ -211,13 +231,13 @@
       "description": "Set one compatible entity field group in a prefilled form",
       "entityOption": "Character or creature to edit",
       "fieldOption": "Field to edit",
-      "behavior": "Opens one private modal prefilled for the selected entity type. Character groups use `name`, `level`, `resources`, `status`, `statistics`, `rules`, `talents`, `gear`, `race`, `background`, and `personality`; creature groups use `identity`, `level`, `resources`, `status`, `statistics`, `rules`, `traits`, and `gear`. Non-obvious formats are `current:max` pairs for resources and encumbrance (for example `50:100`), `statName:value` lines for all nine statistics exactly once, `Name:Level:Description` per RULE, and `Name:Description` per status effect or descriptive modifier. Plain collections, including creature intrinsic traits, use one entry per line; surrounding whitespace is trimmed, blank lines are ignored, and empty multiline input clears the collection. RULE levels must be positive whole numbers. Creature edits also require level 1–10, statistics 0–100, and current ≤ max; AP values are whole numbers from 0 to 10 and current cannot exceed max. EntityKey, type, schema metadata, source IDs, natural-armor metadata, and provenance are never editable. Every group is validated and saved atomically as one undoable operation. After a successful submission, the public response includes the edit confirmation and the updated detail for the selected field. Invalid, expired, and unauthorized submissions remain private. Only the entity creator, a DM, or the server owner may edit it."
+      "behavior": "Opens one private modal prefilled for the selected entity type. Character groups use `name`, `level`, `resources`, `status`, `statistics`, `rules`, `talents`, `gear`, `race`, `background`, and `personality`; creature groups use `identity`, `level`, `resources`, `status`, `statistics`, `rules`, `traits`, and `gear`. Non-obvious formats are `current:max` pairs for resources and encumbrance (for example `50:100`), `statName:value` lines for all nine statistics exactly once, `Name:Level:Description` per RULE, and `Name:Description` per status effect or descriptive modifier. Plain collections, including creature intrinsic traits, use one entry per line; surrounding whitespace is trimmed, blank lines are ignored, and empty multiline input clears the collection. RULE levels must be positive whole numbers. Creature edits also require level 1–10, statistics 0–100, and current ≤ max; AP values are whole numbers from 0 to 10 and current cannot exceed max. EntityKey, type, access, schema metadata, source IDs, natural-armor metadata, and provenance are never editable. Every group is validated and saved atomically as one undoable operation. After a successful submission, the public response includes the edit confirmation and the updated detail for the selected field. Invalid, expired, and unauthorized submissions remain private. Explicit `owner` and `partial` users, DMs, and the server owner may edit it."
     },
     "undo": {
       "description": "Restore the newest retained pre-change entity snapshot",
       "entityOption": "Character or creature whose newest backup will be restored",
       "success": "Restored entity `{{key}}`. The **{{action}}** backup created {{timestamp}} by {{actor}} was consumed.",
-      "behavior": "Restores and consumes the newest available backup for an active character or creature without changing its type. Successful `/set`, `/damage`, `/heal`, and `/end-turn` operations save the complete pre-change entity state. The current `characterHistory.maxEntries` limit applies to both types. Repeated undos walk backward; redo is unsupported, and permanent `/delete` removes all backups. Only the entity creator, a DM, or the server owner may use it.",
+      "behavior": "Restores and consumes the newest available gameplay backup for an active character or creature without changing its type or current access list. Successful `/set`, `/damage`, `/heal`, and `/end-turn` operations save the pre-change entity state. The current `characterHistory.maxEntries` limit applies to both types. Repeated undos walk backward; redo is unsupported, and permanent `/delete` removes all backups. Explicit `owner` and `partial` users, DMs, and the server owner may use it.",
       "actions": {
         "set": "field edit",
         "damage": "damage",
@@ -397,14 +417,16 @@
     "entityMissing": "That entity does not exist.",
     "entityKeyCollision": "That EntityKey is present for more than one entity type. Resolve the storage collision before continuing.",
     "entityTypeChanged": "That EntityKey now belongs to a different entity type. Run the command again.",
-    "entityOwnerDelete": "Only the entity creator, a DM, or the server owner can delete it.",
-    "entityEditor": "Only the entity creator, a DM, or the server owner can manage it.",
+    "entityOwnerDelete": "Only an explicit entity owner, a DM, or the server owner can delete it.",
+    "entityEditor": "Only an explicitly authorized user, a DM, or the server owner can manage it.",
+    "entityAccessOwner": "Only an explicit entity owner, a DM, or the server owner can change access.",
+    "invalidAccessOperation": "Provide both `user` and `level` to change access, and use only `owner`, `partial`, or `none`.",
     "invalidEntityKey": "Entity keys must start and end with a letter or number and may contain letters, numbers, periods, hyphens, and underscores.",
     "invalidEntityType": "Entity type must be character or creature.",
     "characterExists": "A character with that key already exists.",
     "characterMissing": "That character does not exist.",
-    "characterOwnerDelete": "Only the character creator, a DM, or the server owner can delete it.",
-    "characterEditor": "Only the character creator, a DM, or the server owner can manage it.",
+    "characterOwnerDelete": "Only an explicit character owner, a DM, or the server owner can delete it.",
+    "characterEditor": "Only an explicitly authorized user, a DM, or the server owner can manage this character.",
     "invalidCharacterKey": "Character keys must start and end with a letter or number and may contain letters, numbers, periods, hyphens, and underscores.",
     "unknownEditField": "Unknown field: {{field}}.",
     "valueRequired": "A value is required for {{field}}.",

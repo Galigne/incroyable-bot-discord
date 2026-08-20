@@ -15,7 +15,10 @@ const {
 const {
 	getEditableEntityFieldDefinition,
 } = require('../../services/entityFieldCatalog');
-const { canManageEntity } = require('../../util/authorization');
+const {
+	canManageEntity,
+	hasFullEntityAuthority,
+} = require('../../util/authorization');
 const {
 	createEntityDeletedResponse,
 	createEntityEditResponse,
@@ -95,7 +98,11 @@ async function openEntityDeletionConfirmation(
 	try {
 		const entity = await getDeletableEntity(
 			entityKey,
-			currentEntity => canManageEntity(interaction, currentEntity, config),
+			currentEntity => hasFullEntityAuthority(
+				interaction,
+				currentEntity,
+				config,
+			),
 		);
 		const confirmationInputId = 'entity-key-confirmation';
 		const session = createInteractionSession('delete', interaction.user.id, {
@@ -210,7 +217,7 @@ async function handleEntityDeletionSubmission(interaction, config) {
 	try {
 		await deleteEntity(
 			session.entityKey,
-			entity => canManageEntity(interaction, entity, config),
+			entity => hasFullEntityAuthority(interaction, entity, config),
 			session.entityType,
 		);
 		await interaction.reply(createEntityDeletedResponse(session.entityKey, locale));

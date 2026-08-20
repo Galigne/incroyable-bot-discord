@@ -110,7 +110,7 @@ test('entity storage paths use symmetric type directories beneath the configured
 });
 
 test('blank creatures use a strict persistent schema with immutable identity', () => {
-	const creature = new Creature('Creature.Blank', 'creator');
+	const creature = new Creature('Creature.Blank', ownerAccess('creator'));
 	assert.equal(creature.schemaVersion, CURRENT_CREATURE_SAVE_SCHEMA_VERSION);
 	assert.equal(creature.type, 'creature');
 	assert.equal(creature.key, 'Creature.Blank');
@@ -122,7 +122,7 @@ test('blank creatures use a strict persistent schema with immutable identity', (
 		'schemaVersion',
 		'type',
 		'key',
-		'creatorId',
+		'access',
 		'level',
 		'name',
 		'description',
@@ -138,7 +138,9 @@ test('blank creatures use a strict persistent schema with immutable identity', (
 });
 
 test('creature hydration preserves final localized state and technical provenance', () => {
-	const saved = JSON.parse(JSON.stringify(new Creature('Creature.Hydrated', 'creator')));
+	const saved = JSON.parse(JSON.stringify(
+		new Creature('Creature.Hydrated', ownerAccess('creator')),
+	));
 	saved.name = 'Ash Wolf';
 	saved.description = 'A scarred guardian.';
 	saved.source = {
@@ -203,7 +205,7 @@ test('creature saves reject missing, unsupported, mismatched, and invalid state'
 	);
 	for (const schemaVersion of [2, 99]) {
 		const unsupported = JSON.parse(JSON.stringify(
-			new Creature(`Schema.Bad.${schemaVersion}`, 'creator'),
+			new Creature(`Schema.Bad.${schemaVersion}`),
 		));
 		unsupported.schemaVersion = schemaVersion;
 		assert.throws(
@@ -211,33 +213,33 @@ test('creature saves reject missing, unsupported, mismatched, and invalid state'
 			error => error.code === 'UNSUPPORTED_CREATURE_SCHEMA_VERSION',
 		);
 	}
-	const mismatched = JSON.parse(JSON.stringify(new Creature('Schema.One', 'creator')));
+	const mismatched = JSON.parse(JSON.stringify(new Creature('Schema.One')));
 	assert.throws(
 		() => validateCreatureSaveSchema(mismatched, 'Schema.Two'),
 		error => error.code === 'CREATURE_KEY_MISMATCH',
 	);
-	const invalid = JSON.parse(JSON.stringify(new Creature('Schema.Invalid', 'creator')));
+	const invalid = JSON.parse(JSON.stringify(new Creature('Schema.Invalid')));
 	invalid.resources.hp.current = 101;
 	assert.throws(
 		() => validateCreatureSaveSchema(invalid),
 		error => error.code === 'INVALID_CREATURE_SAVE',
 	);
 	const invalidTraits = JSON.parse(JSON.stringify(
-		new Creature('Schema.Invalid.Traits', 'creator'),
+		new Creature('Schema.Invalid.Traits'),
 	));
 	invalidTraits.traits = [{ name: 'Legacy object', description: 'Not supported.' }];
 	assert.throws(
 		() => validateCreatureSaveSchema(invalidTraits),
 		error => error.code === 'INVALID_CREATURE_SAVE',
 	);
-	const unknown = JSON.parse(JSON.stringify(new Creature('Schema.Unknown', 'creator')));
+	const unknown = JSON.parse(JSON.stringify(new Creature('Schema.Unknown')));
 	unknown.generatedAt = new Date().toISOString();
 	assert.throws(
 		() => validateCreatureSaveSchema(unknown),
 		error => error.code === 'INVALID_CREATURE_SAVE',
 	);
 	const legacyNaturalArmor = JSON.parse(JSON.stringify(
-		new Creature('Schema.Legacy.NaturalArmor', 'creator'),
+		new Creature('Schema.Legacy.NaturalArmor'),
 	));
 	legacyNaturalArmor.naturalArmor = { percentage: 20 };
 	assert.throws(
@@ -247,14 +249,14 @@ test('creature saves reject missing, unsupported, mismatched, and invalid state'
 });
 
 test('character saves use the current schema without a required discriminator', () => {
-	const character = new Character('Character.Compatible', 'creator');
+	const character = new Character('Character.Compatible', ownerAccess('creator'));
 	const saved = JSON.parse(JSON.stringify(character));
-	assert.equal(saved.schemaVersion, 3);
+	assert.equal(saved.schemaVersion, 4);
 	assert.equal(Object.hasOwn(saved, 'type'), false);
 	assert.deepEqual(Object.keys(saved), [
 		'schemaVersion',
 		'key',
-		'creatorId',
+		'access',
 		'name',
 		'level',
 		'race',
@@ -272,7 +274,7 @@ test('character saves use the current schema without a required discriminator', 
 test('entity creation defaults to character after required arguments', async () => {
 	const entity = await createEntity('Creation.DefaultType', 'owner');
 	assert.ok(entity instanceof Character);
-	assert.equal(entity.creatorId, 'owner');
+	assert.deepEqual(entity.access, ownerAccess('owner'));
 	await assert.rejects(
 		createEntity('Creation.InvalidType', 'owner', 'other'),
 		error => error.code === 'INVALID_ENTITY_TYPE',
@@ -624,6 +626,7 @@ test('combined entity listing and autocomplete include both concrete types', asy
 test('management metadata is entity-neutral while generators use concrete save keys', () => {
 	const managementCommands = [
 		'add',
+		'access',
 		'get',
 		'set',
 		'damage',
@@ -655,6 +658,10 @@ test('management metadata is entity-neutral while generators use concrete save k
 	assert.equal(creatureType.required, undefined);
 	assert.equal(creatureType.autocomplete.provider, 'creature-types');
 });
+
+function ownerAccess(userId) {
+	return [{ userId, level: 'owner' }];
+}
 
 test('registered management handlers create, mutate, and display creatures', async () => {
 	const entityKey = 'Handlers.Creature';

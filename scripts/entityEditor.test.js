@@ -121,7 +121,7 @@ test('the editable catalog exposes only the final grouped field list', () => {
 });
 
 test('name, status, and gear groups are prefilled and trim valid submissions', () => {
-	const character = new Character('Groups', 'tester');
+	const character = new Character('Groups');
 	assert.deepEqual(getEditableFieldValue(character, 'name'), {
 		'name.firstName': '', 'name.lastName': '',
 	});
@@ -207,7 +207,7 @@ test('name, status, and gear groups are prefilled and trim valid submissions', (
 });
 
 test('statistics use one named line per base and derived value', () => {
-	const character = new Character('Statistics', 'tester');
+	const character = new Character('Statistics');
 	assert.equal(
 		getEditableFieldValue(character, 'statistics'),
 		[
@@ -248,7 +248,7 @@ test('statistics use one named line per base and derived value', () => {
 });
 
 test('either saved name component can be cleared', () => {
-	const character = new Character('Names', 'tester');
+	const character = new Character('Names');
 	setEditableFieldValue(character, 'name', {
 		firstName: 'First',
 		lastName: 'Last',
@@ -294,7 +294,7 @@ test('resources and gear reject incomplete or malformed pairs atomically', () =>
 		['resources', { ...validResources, 'resources.ap': '1.5:4' }, 'errors.apRange'],
 		['gear', { equipment: 'Changed', inventory: 'Changed', encumbrance: '2' }, 'errors.pairFormat'],
 	]) {
-		const character = new Character(`Invalid-${field}`, 'tester');
+		const character = new Character(`Invalid-${field}`);
 		const before = JSON.stringify(character);
 		assert.throws(
 			() => setEditableFieldValue(character, field, value),
@@ -327,7 +327,7 @@ test('statistics reject malformed, unknown, duplicate, missing, and invalid line
 		[null, 'errors.statisticsMissing'],
 		['constitution: nope', 'errors.mustBeNumber'],
 	]) {
-		const character = new Character('Invalid-Statistics', 'tester');
+		const character = new Character('Invalid-Statistics');
 		const before = JSON.stringify(character);
 		const lines = [...validLines];
 		if (replacement === null) {
@@ -352,7 +352,7 @@ test('statistics reject malformed, unknown, duplicate, missing, and invalid line
 });
 
 test('multi-input groups replace every stored target together', () => {
-	const character = new Character('Groups', 'tester');
+	const character = new Character('Groups');
 	setEditableFieldValue(character, 'race', {
 		'race.name': 'Ashborn',
 		'race.physicalDescription': 'Silver eyes',
@@ -404,7 +404,7 @@ test('multi-input groups replace every stored target together', () => {
 });
 
 test('RULE parsing requires all values, uses two separators, and is atomic', () => {
-	const character = new Character('Rules', 'tester');
+	const character = new Character('Rules');
 	setEditableFieldValue(
 		character,
 		'rules',
@@ -440,7 +440,7 @@ test('RULE parsing requires all values, uses two separators, and is atomic', () 
 
 test('multiline collections use one entry per line, trim, serialize, and clear', () => {
 	for (const [field, property] of [['talents', 'talents']]) {
-		const character = new Character(`List-${field}`, 'tester');
+		const character = new Character(`List-${field}`);
 		const outcome = setEditableFieldValue(
 			character,
 			field,
@@ -647,7 +647,7 @@ test('level and statistics each use one appropriately styled prefilled input', (
 		english.rpg.editor.statisticsDescription,
 	);
 
-	const creature = new Creature('Modal.Creature', 'tester');
+	const creature = new Creature('Modal.Creature');
 	const creatureLevelModal = createEntityFieldModal(
 		'session',
 		'creature',
@@ -1158,7 +1158,7 @@ test('modal routing publishes canonical post-update details and repeats authoriz
 		},
 	}, config, authorizationKey, 'name');
 	await updateCharacter(authorizationKey, () => true, character => {
-		character.creatorId = 'new-owner';
+		character.access = [{ userId: 'new-owner', level: 'owner' }];
 	});
 	let deniedResponse;
 	await handleEntityInteraction({
@@ -1225,7 +1225,7 @@ test('grouped modal validation messages and descriptions are localized', () => {
 });
 
 function createFilledCharacter() {
-	const character = new Character('Modal', 'tester');
+	const character = new Character('Modal');
 	character.name.firstName = 'Ada';
 	character.name.lastName = 'Lovelace';
 	character.race = {

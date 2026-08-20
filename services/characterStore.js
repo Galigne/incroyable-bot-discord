@@ -40,8 +40,8 @@ class CharacterHistoryLoadError extends Error {
 
 const store = createConcreteEntityStore({
 	createEditorError: characterEditorError,
-	createEntityInstance: (characterKey, creatorId) => (
-		new Character(characterKey, creatorId)
+	createEntityInstance: (characterKey, access) => (
+		new Character(characterKey, access)
 	),
 	createHistoryLoadError: (characterKey, cause) => (
 		new CharacterHistoryLoadError(characterKey, cause)
@@ -87,14 +87,16 @@ function reportCharacterHistoryLoadError(error) {
 
 function characterEditorError() {
 	const error = new Error(
-		'Only the character creator, a DM, or the server owner can edit it.',
+		'Only an authorized character user, a DM, or the server owner can edit it.',
 	);
 	error.code = 'NOT_CHARACTER_EDITOR';
 	return error;
 }
 
 function characterOwnerError() {
-	const error = new Error('Only the creature creator, a DM, or the server owner can delete it.');
+	const error = new Error(
+		'Only a character owner, a DM, or the server owner can delete it.',
+	);
 	error.code = 'NOT_CHARACTER_OWNER';
 	return error;
 }

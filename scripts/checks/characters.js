@@ -35,7 +35,7 @@ module.exports = function createCharacterChecks(context) {
 
 	function checkCharacterModel() {
 		try {
-			const original = new Character('Test', '0');
+			const original = new Character('Test', ownerAccess('0'));
 			setEditableFieldValue(original, 'name', {
 				firstName: 'Diego',
 				lastName: 'Robert',
@@ -155,7 +155,8 @@ module.exports = function createCharacterChecks(context) {
 			resetTurnResources(original);
 			const character = Character.fromSave(JSON.parse(JSON.stringify(original)));
 			if (
-				character.creatorId !== '0'
+				character.access[0]?.userId !== '0'
+				|| character.access[0]?.level !== 'owner'
 				|| character.key !== 'Test'
 				|| character.name.firstName !== 'Diego'
 				|| character.name.lastName !== 'Robert'
@@ -272,7 +273,7 @@ module.exports = function createCharacterChecks(context) {
 				seed = (seed * 1_664_525 + 1_013_904_223) % 4_294_967_296;
 				return seed / 4_294_967_296;
 			};
-			const character = new Character('D.Robert', 'dm');
+			const character = new Character('D.Robert');
 			let generatedArmorPercentage = 0;
 			const resolver = {
 				...generatorResolver,
@@ -398,7 +399,7 @@ module.exports = function createCharacterChecks(context) {
 			const routedBackgrounds = generatorCatalog.getGenerator('background').entries;
 			for (const routedBackground of routedBackgrounds) {
 				const backgroundName = routedBackground.name;
-				const routedCharacter = new Character(`background.${backgroundName}`, 'dm');
+				const routedCharacter = new Character(`background.${backgroundName}`);
 				populateRandomCharacter(routedCharacter, {
 					level: 1,
 					background: routedBackground.id,
@@ -425,9 +426,9 @@ module.exports = function createCharacterChecks(context) {
 		const savePath = path.join(root, 'save', `${originalName}.json`);
 
 		try {
-			await characterStore.createCharacter(originalName, 'creator');
+			await characterStore.createCharacter(originalName, ownerAccess('creator'));
 			try {
-				await characterStore.createCharacter(originalName, 'creator');
+				await characterStore.createCharacter(originalName, ownerAccess('creator'));
 				errors.push('A duplicate character key was allowed.');
 			}
 			catch (error) {
@@ -487,3 +488,7 @@ module.exports = function createCharacterChecks(context) {
 		checkCharacterStore,
 	};
 };
+
+function ownerAccess(userId) {
+	return [{ userId, level: 'owner' }];
+}

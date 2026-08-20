@@ -29,9 +29,9 @@ const storesByType = Object.freeze({
 	},
 });
 
-async function createEntity(entityKey, creatorId, type = 'character', initialize) {
+async function createEntity(entityKey, type = 'character', access = [], initialize) {
 	validateEntityKey(entityKey);
-	return getTypeStore(type).create(entityKey, creatorId, initialize);
+	return getTypeStore(type).create(entityKey, access, initialize);
 }
 
 async function deleteEntity(entityKey, canManage) {
