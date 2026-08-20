@@ -111,6 +111,30 @@
         "type": "curse",
         "description": "Prolonged handling rapidly spoils vulnerable organic materials such as food, herbs, medicine, and similar supplies."
       }
+    },
+    {
+      "id": "monsters_mark",
+      "name": "Monster's Mark",
+      "fields": {
+        "type": "curse",
+        "description": "{{ creature:monster.generator.name }} can sense or track the bearer from an unusually great distance. The mark also reacts when one of those creatures is nearby, giving the bearer some warning."
+      }
+    },
+    {
+      "id": "truthbound",
+      "name": "Truthbound",
+      "fields": {
+        "type": "curse",
+        "description": "A deliberate lie causes immediate supernatural pain and imposes -2 on all actions until the bearer truthfully corrects or retracts it. Mistakes, uncertainty, and statements the bearer genuinely believes do not trigger the curse."
+      }
+    },
+    {
+      "id": "crystal_bloom",
+      "name": "Crystal Bloom",
+      "fields": {
+        "type": "disease",
+        "description": "Supernatural crystals grow around wounds and joints. Serious injury can restrict movement and inflict the {{ status_effect:slowed.name }} status effect, while breaking or forcibly removing the growth risks inflicting the {{ status_effect:bleeding.name }} status effect."
+      }
     }
   ]
 }

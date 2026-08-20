@@ -261,6 +261,76 @@
       "fields": {
         "description": "Prolonged lack of water causes weakness, dizziness, and increasing difficulty with exertion."
       }
+    },
+    {
+      "id": "hunted",
+      "name": "Hunted",
+      "fields": {
+        "description": "{{ creature:monster.generator.name }} is actively hunting or tracking the subject. This status ends when the subject escapes or diverts the pursuit, defeats the hunter, or otherwise resolves the threat."
+      }
+    },
+    {
+      "id": "bestial_mutation",
+      "name": "Bestial Mutation",
+      "fields": {
+        "description": "The subject temporarily develops physical or instinctive characteristics of {{ creature:animal.generator.name }}, gaining an appropriate advantage associated with that animal but also an animalistic limitation, instinct, or loss of control chosen by the GM. Severe, repeated, or untreated transformations may become permanent and can then be represented by the {{ modifier_character:creature_hybrid.name }} character modifier; this is descriptive guidance only and never happens automatically."
+      }
+    },
+    {
+      "id": "charmed",
+      "name": "Charmed",
+      "fields": {
+        "description": "The subject treats the source of the effect as trusted or friendly and cannot willingly harm it without resisting or breaking the effect."
+      }
+    },
+    {
+      "id": "hasted",
+      "name": "Hasted",
+      "fields": {
+        "description": "Movement and Speed-based actions are temporarily improved until the effect ends."
+      }
+    },
+    {
+      "id": "exposed",
+      "name": "Exposed",
+      "fields": {
+        "description": "The next attack against the subject receives a significant advantage, after which this status ends."
+      }
+    },
+    {
+      "id": "guarded",
+      "name": "Guarded",
+      "fields": {
+        "description": "The subject gains a temporary defensive advantage until leaving the defensive posture, acting in a way that breaks it, or the effect otherwise ends."
+      }
+    },
+    {
+      "id": "surprised",
+      "name": "Surprised",
+      "fields": {
+        "description": "Reactions and the subject’s first immediate response to an unexpected threat are temporarily impaired."
+      }
+    },
+    {
+      "id": "disarmed",
+      "name": "Disarmed",
+      "fields": {
+        "description": "The subject has lost control of a held weapon or similar item and cannot use it until it is recovered."
+      }
+    },
+    {
+      "id": "enraged",
+      "name": "Enraged",
+      "fields": {
+        "description": "The subject temporarily gains +1 to offensive actions but suffers -1 to actions made to defend, act cautiously, or exercise judgment."
+      }
+    },
+    {
+      "id": "taunted",
+      "name": "Taunted",
+      "fields": {
+        "description": "The subject must resist the effect to deliberately ignore its source in favor of another target."
+      }
     }
   ]
 }

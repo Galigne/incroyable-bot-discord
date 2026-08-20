@@ -1134,7 +1134,11 @@ function generateLocalizedEntry(type, entryId, locale) {
 
 function getTraitDisplays(locale) {
 	return new Set(generatorCatalog.getGenerator('traits', locale).entries.map(entry => (
-		`${entry.name} — ${entry.fields.description}`
+		generatorResolver.resolveReference(
+			`traits:${entry.id}`,
+			locale,
+			{ random: () => 0 },
+		).display
 	)));
 }
 

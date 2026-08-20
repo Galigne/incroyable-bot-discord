@@ -111,6 +111,30 @@
         "type": "malédiction",
         "description": "Une manipulation prolongée fait rapidement se gâter les matières organiques vulnérables, comme la nourriture, les herbes, les médicaments et autres provisions similaires."
       }
+    },
+    {
+      "id": "monsters_mark",
+      "name": "Marque du monstre",
+      "fields": {
+        "type": "malédiction",
+        "description": "{{ creature:monster.generator.name }} peut sentir ou pister le porteur à une distance anormalement grande. La marque réagit également lorsque l’une de ces créatures se trouve à proximité, ce qui avertit quelque peu le porteur."
+      }
+    },
+    {
+      "id": "truthbound",
+      "name": "Lié par la vérité",
+      "fields": {
+        "type": "malédiction",
+        "description": "Tout mensonge délibéré provoque immédiatement une douleur surnaturelle et impose un malus de -2 à toutes les actions jusqu’à ce que le porteur le corrige ou le rétracte en disant la vérité. Les erreurs, les incertitudes et les affirmations auxquelles le porteur croit sincèrement ne déclenchent pas la malédiction."
+      }
+    },
+    {
+      "id": "crystal_bloom",
+      "name": "Floraison cristalline",
+      "fields": {
+        "type": "maladie",
+        "description": "Des cristaux surnaturels se développent autour des blessures et des articulations. Une blessure grave peut entraver les mouvements et infliger l’état {{ status_effect:slowed.name }}, tandis que briser ou arracher de force ces excroissances risque d’infliger l’état {{ status_effect:bleeding.name }}."
+      }
     }
   ]
 }

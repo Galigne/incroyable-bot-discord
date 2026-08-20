@@ -261,6 +261,76 @@
       "fields": {
         "description": "Un manque prolongé d’eau provoque faiblesse et vertiges, et rend l’effort de plus en plus difficile."
       }
+    },
+    {
+      "id": "hunted",
+      "name": "Traqué",
+      "fields": {
+        "description": "{{ creature:monster.generator.name }} chasse ou piste activement le sujet. Cet état prend fin lorsque le sujet sème son poursuivant, détourne la chasse, vainc le monstre ou met fin à la menace d’une autre manière."
+      }
+    },
+    {
+      "id": "bestial_mutation",
+      "name": "Mutation bestiale",
+      "fields": {
+        "description": "Le sujet développe temporairement des caractéristiques physiques ou instinctives de {{ creature:animal.generator.name }}. Il bénéficie d’un avantage approprié associé à cet animal, mais subit aussi une limitation, un instinct ou une perte de contrôle bestiale choisie par le MJ. Des transformations graves, répétées ou non traitées peuvent devenir permanentes et être alors représentées par le modificateur de personnage {{ modifier_character:creature_hybrid.name }} ; il s’agit uniquement d’une indication descriptive et cette évolution n’est jamais automatique."
+      }
+    },
+    {
+      "id": "charmed",
+      "name": "Charmé",
+      "fields": {
+        "description": "Le sujet considère la source de l’effet comme digne de confiance ou amicale et ne peut pas lui nuire volontairement sans résister à l’effet ou le rompre."
+      }
+    },
+    {
+      "id": "hasted",
+      "name": "Accéléré",
+      "fields": {
+        "description": "Les déplacements et les actions fondées sur la Vitesse sont temporairement améliorés jusqu’à la fin de l’effet."
+      }
+    },
+    {
+      "id": "exposed",
+      "name": "Exposé",
+      "fields": {
+        "description": "La prochaine attaque contre le sujet bénéficie d’un avantage important, après quoi cet état prend fin."
+      }
+    },
+    {
+      "id": "guarded",
+      "name": "En garde",
+      "fields": {
+        "description": "Le sujet bénéficie d’un avantage défensif temporaire jusqu’à ce qu’il quitte sa posture défensive, agisse d’une manière qui la rompt ou que l’effet prenne fin autrement."
+      }
+    },
+    {
+      "id": "surprised",
+      "name": "Surpris",
+      "fields": {
+        "description": "Les réactions et la première réponse immédiate du sujet face à une menace inattendue sont temporairement entravées."
+      }
+    },
+    {
+      "id": "disarmed",
+      "name": "Désarmé",
+      "fields": {
+        "description": "Le sujet a perdu le contrôle d’une arme tenue en main ou d’un objet similaire et ne peut plus l’utiliser avant de l’avoir récupéré."
+      }
+    },
+    {
+      "id": "enraged",
+      "name": "Enragé",
+      "fields": {
+        "description": "Le sujet bénéficie temporairement de +1 aux actions offensives, mais subit un malus de -1 aux actions visant à se défendre, à agir prudemment ou à faire preuve de discernement."
+      }
+    },
+    {
+      "id": "taunted",
+      "name": "Provoqué",
+      "fields": {
+        "description": "Le sujet doit résister à l’effet pour ignorer délibérément sa source au profit d’une autre cible."
+      }
     }
   ]
 }

@@ -259,6 +259,62 @@
       "fields": {
         "description": "Peut porter ses attaques ordinaires au corps à corps 2 mètres plus loin qu’une créature de taille comparable."
       }
+    },
+    {
+      "id": "telepathy",
+      "name": "Télépathie",
+      "fields": {
+        "description": "Peut communiquer mentalement avec les créatures proches sans devoir partager avec elles une langue parlée."
+      }
+    },
+    {
+      "id": "ambusher",
+      "name": "Prédateur en embuscade",
+      "fields": {
+        "description": "+2 à sa première action offensive contre une cible qui ne l’a pas repérée."
+      }
+    },
+    {
+      "id": "life_drain",
+      "name": "Drain de vie",
+      "fields": {
+        "description": "La première fois à chacun de ses tours qu’une attaque naturelle inflige des dégâts, récupère 5 % de ses PV maximums, en arrondissant à l’inférieur avec un minimum de 1 PV ; les attaques suivantes de ce tour ne lui rendent aucun PV."
+      }
+    },
+    {
+      "id": "blood_frenzy",
+      "name": "Frénésie sanglante",
+      "fields": {
+        "description": "+1 aux attaques et aux actions de poursuite fondées sur la Vitesse contre les créatures dont les PV actuels ne dépassent pas la moitié des PV maximums ou qui saignent visiblement."
+      }
+    },
+    {
+      "id": "reactive_spines",
+      "name": "Épines réactives",
+      "fields": {
+        "description": "Toute créature qui lui inflige des dégâts par une attaque directe au corps à corps doit résister ou subir 1 dégât à cause de ses épines ou d’une défense naturelle similaire."
+      }
+    },
+    {
+      "id": "death_burst",
+      "name": "Explosion funeste",
+      "fields": {
+        "description": "À sa mort, toute autre créature dans un rayon de 2 mètres doit résister ou subir des dégâts égaux à 5 % des PV maximums de la créature, en arrondissant à l’inférieur avec un minimum de 1 dégât."
+      }
+    },
+    {
+      "id": "multiattack",
+      "name": "Attaques multiples",
+      "fields": {
+        "description": "Une fois par tour après avoir effectué une attaque naturelle, peut porter une attaque naturelle supplémentaire avec un malus de -2 à l’attaque ; celle-ci n’inflige que la moitié de ses dégâts normaux, en arrondissant à l’inférieur avec un minimum de 1 dégât."
+      }
+    },
+    {
+      "id": "fearless",
+      "name": "Sans peur",
+      "fields": {
+        "description": "Ne peut pas recevoir l’état {{ status_effect:frightened.name }}."
+      }
     }
   ]
 }

@@ -259,6 +259,62 @@
       "fields": {
         "description": "Can make ordinary close attacks from up to 2 meters farther away than a similar-sized creature."
       }
+    },
+    {
+      "id": "telepathy",
+      "name": "Telepathy",
+      "fields": {
+        "description": "Can communicate mentally with nearby creatures without requiring a shared spoken language."
+      }
+    },
+    {
+      "id": "ambusher",
+      "name": "Ambusher",
+      "fields": {
+        "description": "+2 on its first offensive action against a target that has not detected it."
+      }
+    },
+    {
+      "id": "life_drain",
+      "name": "Life Drain",
+      "fields": {
+        "description": "The first time on each of its turns that a natural attack deals damage, recovers 5% of its maximum HP, rounded down to a minimum of 1 HP; later attacks that turn restore no HP."
+      }
+    },
+    {
+      "id": "blood_frenzy",
+      "name": "Blood Frenzy",
+      "fields": {
+        "description": "+1 to attacks and Speed-based pursuit actions against creatures at or below half their maximum HP or visibly bleeding."
+      }
+    },
+    {
+      "id": "reactive_spines",
+      "name": "Reactive Spines",
+      "fields": {
+        "description": "A creature that damages it with a direct close attack must resist or take 1 damage from spines or a similar natural defense."
+      }
+    },
+    {
+      "id": "death_burst",
+      "name": "Death Burst",
+      "fields": {
+        "description": "When it dies, each other creature within 2 meters must resist or take damage equal to 5% of this creature’s maximum HP, rounded down to a minimum of 1 damage."
+      }
+    },
+    {
+      "id": "multiattack",
+      "name": "Multiattack",
+      "fields": {
+        "description": "Once per turn after making a natural attack, can make one additional natural attack with a -2 attack penalty that deals half its normal damage, rounded down to a minimum of 1 damage."
+      }
+    },
+    {
+      "id": "fearless",
+      "name": "Fearless",
+      "fields": {
+        "description": "Cannot gain the {{ status_effect:frightened.name }} status effect."
+      }
     }
   ]
 }

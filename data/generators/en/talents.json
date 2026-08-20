@@ -339,6 +339,55 @@
       "fields": {
         "description": "+2 to actions involving identifying, understanding, or creating runes."
       }
+    },
+    {
+      "id": "weapon_specialist",
+      "name": "Weapon Specialist",
+      "fields": {
+        "description": "Specialized weapon: {{ weapons.name }}. The character gains +2 to attacks or other relevant actions using that weapon."
+      }
+    },
+    {
+      "id": "monster_hunter",
+      "name": "Monster Hunter",
+      "fields": {
+        "description": "Specializes in hunting {{ creature:monster.generator.name }} and gains +2 when tracking or identifying one, recalling its weaknesses, or preparing to face it."
+      }
+    },
+    {
+      "id": "cultural_expert",
+      "name": "Cultural Expert",
+      "fields": {
+        "description": "Studied culture: {{ race.name }}. The character gains +2 to relevant knowledge or social actions involving that race."
+      }
+    },
+    {
+      "id": "rider",
+      "name": "Rider",
+      "fields": {
+        "description": "+2 to relevant Animal Handling, control, and balance actions while mounted."
+      }
+    },
+    {
+      "id": "ghost_step",
+      "name": "Ghost Step",
+      "fields": {
+        "description": "+2 to Stealth while moving cautiously rather than rushing."
+      }
+    },
+    {
+      "id": "fast_learner",
+      "name": "Fast Learner",
+      "fields": {
+        "description": "After observing another character successfully perform an action, gains +1 on the first attempt to reproduce that action during the same scene."
+      }
+    },
+    {
+      "id": "scavenger",
+      "name": "Scavenger",
+      "fields": {
+        "description": "+2 when searching explored locations for useful supplies, components, ammunition, or salvage."
+      }
     }
   ]
 }

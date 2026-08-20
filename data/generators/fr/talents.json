@@ -339,6 +339,55 @@
       "fields": {
         "description": "+2 aux actions visant à identifier, comprendre ou créer des runes."
       }
+    },
+    {
+      "id": "weapon_specialist",
+      "name": "Spécialiste d’une arme",
+      "fields": {
+        "description": "Arme de prédilection : {{ weapons.name }}. Le personnage bénéficie de +2 aux attaques ou autres actions pertinentes effectuées avec cette arme."
+      }
+    },
+    {
+      "id": "monster_hunter",
+      "name": "Chasseur de monstres",
+      "fields": {
+        "description": "Se spécialise dans la chasse à la créature suivante : {{ creature:monster.generator.name }}. Bénéficie de +2 pour la pister ou l’identifier, se rappeler ses faiblesses ou préparer un affrontement contre elle."
+      }
+    },
+    {
+      "id": "cultural_expert",
+      "name": "Expert culturel",
+      "fields": {
+        "description": "Culture étudiée : {{ race.name }}. Le personnage bénéficie de +2 aux actions pertinentes de connaissance ou d’interaction sociale impliquant ce peuple."
+      }
+    },
+    {
+      "id": "rider",
+      "name": "Cavalier",
+      "fields": {
+        "description": "+2 aux actions pertinentes de Dressage, de contrôle et d’équilibre lorsque le personnage est en selle."
+      }
+    },
+    {
+      "id": "ghost_step",
+      "name": "Pas fantôme",
+      "fields": {
+        "description": "+2 en Discrétion lorsque le personnage se déplace prudemment au lieu de se précipiter."
+      }
+    },
+    {
+      "id": "fast_learner",
+      "name": "Apprentissage rapide",
+      "fields": {
+        "description": "Après avoir vu un autre personnage réussir une action, bénéficie de +1 lors de sa première tentative pour reproduire cette action au cours de la même scène."
+      }
+    },
+    {
+      "id": "scavenger",
+      "name": "Récupérateur",
+      "fields": {
+        "description": "+2 pour fouiller des lieux déjà explorés à la recherche de provisions, de composants, de munitions ou de matériaux récupérables utiles."
+      }
     }
   ]
 }

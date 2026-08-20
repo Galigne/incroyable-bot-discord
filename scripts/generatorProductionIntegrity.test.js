@@ -241,6 +241,108 @@ test('production condition content keeps temporary statuses separate from persis
 	}
 });
 
+test('agreed talent, trait, status, and affliction entries preserve stable IDs and references', () => {
+	const expectedIds = {
+		talents: [
+			'weapon_specialist',
+			'monster_hunter',
+			'cultural_expert',
+			'rider',
+			'ghost_step',
+			'fast_learner',
+			'scavenger',
+		],
+		traits: [
+			'telepathy',
+			'ambusher',
+			'life_drain',
+			'blood_frenzy',
+			'reactive_spines',
+			'death_burst',
+			'multiattack',
+			'fearless',
+		],
+		status_effect: [
+			'hunted',
+			'bestial_mutation',
+			'charmed',
+			'hasted',
+			'exposed',
+			'guarded',
+			'surprised',
+			'disarmed',
+			'enraged',
+			'taunted',
+		],
+		affliction: ['monsters_mark', 'truthbound', 'crystal_bloom'],
+	};
+	const expectedReferences = {
+		talents: {
+			weapon_specialist: ['weapons.name'],
+			monster_hunter: ['creature:monster.generator.name'],
+			cultural_expert: ['race.name'],
+		},
+		traits: {
+			fearless: ['status_effect:frightened.name'],
+		},
+		status_effect: {
+			hunted: ['creature:monster.generator.name'],
+			bestial_mutation: [
+				'creature:animal.generator.name',
+				'modifier_character:creature_hybrid.name',
+			],
+		},
+		affliction: {
+			monsters_mark: ['creature:monster.generator.name'],
+			crystal_bloom: [
+				'status_effect:slowed.name',
+				'status_effect:bleeding.name',
+			],
+		},
+	};
+
+	for (const locale of ['en', 'fr']) {
+		for (const [generatorId, ids] of Object.entries(expectedIds)) {
+			const generator = generatorCatalog.getGenerator(generatorId, locale);
+			const entriesById = new Map(generator.entries.map(entry => [entry.id, entry]));
+			for (const id of ids) {
+				assert.ok(entriesById.has(id), `${locale}:${generatorId}:${id}`);
+				const result = generatorResolver.resolveReference(
+					`${generatorId}:${id}`,
+					locale,
+					{ random: () => 0 },
+				);
+				assert.doesNotMatch(result.display, /\{\{|\}\}/);
+			}
+			for (const [id, references] of Object.entries(
+				expectedReferences[generatorId] ?? {},
+			)) {
+				assert.deepEqual(
+					extractInlineReferences(entriesById.get(id).fields.description),
+					references,
+				);
+			}
+		}
+
+		const afflictions = new Map(
+			generatorCatalog.getGenerator('affliction', locale).entries
+				.map(entry => [entry.id, entry]),
+		);
+		assert.equal(
+			afflictions.get('monsters_mark').fields.type,
+			locale === 'fr' ? 'malédiction' : 'curse',
+		);
+		assert.equal(
+			afflictions.get('truthbound').fields.type,
+			locale === 'fr' ? 'malédiction' : 'curse',
+		);
+		assert.equal(
+			afflictions.get('crystal_bloom').fields.type,
+			locale === 'fr' ? 'maladie' : 'disease',
+		);
+	}
+});
+
 test('every production quest, rumor, and secret resolves references with provenance', () => {
 	for (const locale of ['en', 'fr']) {
 		for (const generatorId of ['quest', 'rumor', 'secret']) {
