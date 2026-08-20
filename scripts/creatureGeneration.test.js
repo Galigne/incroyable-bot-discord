@@ -52,7 +52,11 @@ const {
 	parseWrappedInlineReference,
 } = require('../services/generatorSchema/referenceValidation');
 const { BASE_STATS } = require('../services/mechanics/constants');
-const { calculateArmorRating } = require('../services/mechanics/armor');
+const {
+	calculateArmorRating,
+	getArmorPercentage: getArmorTypePercentage,
+	getShieldPercentage,
+} = require('../services/mechanics/armor');
 const {
 	createGeneratedResources,
 } = require('../services/mechanics/resources');
@@ -186,7 +190,7 @@ test('creature metadata rejects mechanical overrides and allows stacked armor so
 	armorConflict.entries[0].generation.naturalArmorPercentage = 20;
 	armorConflict.entries[0].generation.armor = {
 		generator: 'armors',
-		entry: 'common_light_armor',
+		entry: 'padded_armor',
 		select: 'fields',
 	};
 	assert.doesNotThrow(
@@ -282,6 +286,25 @@ test('creature generation references require compatible target payloads', () => 
 	catalog.set(generatorId, detail);
 	assert.throws(
 		() => validateGeneratorRelationships(catalog),
+		error => error.code === 'INVALID_GENERATION_REFERENCE_TARGET',
+	);
+
+	const missingRarityCatalog = new Map(createGeneratorCatalogCandidate().get('en'));
+	const missingRarityDetail = structuredClone(missingRarityCatalog.get(generatorId));
+	missingRarityDetail.entries[0].generation = {
+		...(missingRarityDetail.entries[0].generation ?? {}),
+		armor: {
+			generator: 'armors',
+			entry: 'padded_armor',
+			select: 'fields',
+		},
+	};
+	const armorGenerator = structuredClone(missingRarityCatalog.get('armors'));
+	delete armorGenerator.modifiers.modifier_rarity;
+	missingRarityCatalog.set(generatorId, missingRarityDetail);
+	missingRarityCatalog.set('armors', armorGenerator);
+	assert.throws(
+		() => validateGeneratorRelationships(missingRarityCatalog),
 		error => error.code === 'INVALID_GENERATION_REFERENCE_TARGET',
 	);
 });
@@ -574,20 +597,20 @@ test('natural armor, generated armor, status, and weighted gear resolve to final
 		'bell_wraith',
 		{ level: 5 },
 	);
-	const armorEntry = generatorCatalog.getGenerator('armors', 'en').entries
-		.find(entry => entry.id === 'common_heavy_armor');
 	assert.equal(Object.hasOwn(bellWraith, 'naturalArmor'), false);
+	assert.equal(getArmorPercentage(bellWraith), 55);
 	assert.equal(
 		bellWraith.resources.ar.max,
-		calculateArmorRating(
-			bellWraith.resources.hp.max,
-			armorEntry.fields['ar_percentage'],
-		),
+		calculateArmorRating(bellWraith.resources.hp.max, 55),
 	);
 	assert.equal(bellWraith.gear.equipment.length, 2);
 	assert.ok(bellWraith.source.provenance.some(record => (
 		record.generatorId === 'armors'
-		&& record.entryId === 'common_heavy_armor'
+		&& record.entryId === 'chain_mail'
+	)));
+	assert.ok(bellWraith.source.provenance.some(record => (
+		record.generatorId === 'modifier_rarity'
+		&& record.entryId === 'uncommon'
 	)));
 
 	const mule = generateEntry(getCreatureTypeForEntry('mule'), 'mule', { level: 5 });
@@ -613,17 +636,17 @@ test('natural armor, generated armor, status, and weighted gear resolve to final
 		modifiers: [],
 		armor: {
 			generator: 'armors',
-			entry: 'common_light_armor',
+			entry: 'padded_armor',
 			select: 'fields',
 		},
 		equipment: [{
 			generator: 'shields',
-			entry: 'common_buckler',
+			entry: 'buckler',
 			select: 'display',
 		}],
 		inventory: [{
 			generator: 'shields',
-			entry: 'wooden_shield',
+			entry: 'round_shield',
 			select: 'fields',
 		}],
 	};
@@ -636,7 +659,7 @@ test('natural armor, generated armor, status, and weighted gear resolve to final
 					: generatorCatalog.getGenerator(requestedId, locale)
 			),
 			level: 5,
-			random: sequenceRandom([getEntryMidpoint(type, entry.id)], 0.5),
+			random: sequenceRandom([getEntryMidpoint(type, entry.id)], 0),
 			type,
 		},
 	);
@@ -646,6 +669,9 @@ test('natural armor, generated armor, status, and weighted gear resolve to final
 	assert.deepEqual(stacked.status.modifiers, []);
 	assert.equal(stacked.gear.equipment.length, 2);
 	assert.equal(stacked.gear.inventory.length, 1);
+	for (const item of [...stacked.gear.equipment, ...stacked.gear.inventory]) {
+		assert.match(item, / — Common — Made of [^—]+ — Runed — /);
+	}
 	assert.equal(
 		stacked.resources.ar.max,
 		calculateArmorRating(stacked.resources.hp.max, 30),
@@ -1137,14 +1163,21 @@ function getArmorPercentage(creature) {
 		if (
 			record.type !== 'entry'
 			|| !record.entryId
-			|| !/^root\.generation\.(?:armor|equipment)/.test(record.path)
+			|| !/^root\.generation\.(?:armor|equipment\.\d+)$/.test(record.path)
 		) {
 			continue;
 		}
 		const gearEntry = generatorCatalog.getGenerator(record.generatorId, 'en')
 			?.entries.find(entry => entry.id === record.entryId);
-		if (Number.isFinite(gearEntry?.fields?.['ar_percentage'])) {
-			percentage += gearEntry.fields['ar_percentage'];
+		const rarityId = creature.source.provenance.find(candidate => (
+			candidate.generatorId === 'modifier_rarity'
+			&& candidate.path.startsWith(`${record.path}.modifiers.`)
+		))?.entryId;
+		if (record.generatorId === 'armors') {
+			percentage += getArmorTypePercentage(gearEntry?.fields?.type, rarityId);
+		}
+		else if (record.generatorId === 'shields') {
+			percentage += getShieldPercentage(rarityId);
 		}
 	}
 	return percentage;

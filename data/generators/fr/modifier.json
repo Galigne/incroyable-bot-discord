@@ -19,6 +19,21 @@
       "generator": "modifier_creature"
     },
     {
+      "id": "rarity",
+      "name": "Modificateurs de rareté",
+      "generator": "modifier_rarity"
+    },
+    {
+      "id": "material",
+      "name": "Modificateurs de matériau",
+      "generator": "modifier_material"
+    },
+    {
+      "id": "loot",
+      "name": "Modificateurs de butin",
+      "generator": "modifier_loot"
+    },
+    {
       "id": "site_general",
       "name": "Modificateurs généraux de lieu",
       "generator": "modifier_site_all"

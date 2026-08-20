@@ -119,7 +119,10 @@ function validateGeneratorDefinition(generator, file = '<generator>', options = 
 				`Generator ${file} entry ${entry.id} must have a readable name.`,
 			);
 		}
-		if (entryNames.has(normalizedName)) {
+		if (
+			entryNames.has(normalizedName)
+			&& generator.visibility !== 'internal'
+		) {
 			throw generatorSchemaError(
 				'DUPLICATE_GENERATOR_ENTRY_NAME',
 				`Generator ${file} contains ambiguous entry name ${entry.name}.`,

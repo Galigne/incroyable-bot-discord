@@ -7,6 +7,9 @@
   "entrySchema": {
     "required": ["description"]
   },
+  "modifiers": {
+    "modifier_loot": 10
+  },
   "entries": [
     {
       "id": "coil_of_rope",
@@ -201,11 +204,11 @@
       }
     },
     {
-      "id": "silvered_chain",
-      "name": "Silvered chain",
+      "id": "chain",
+      "name": "Chain",
       "weight": 2,
       "fields": {
-        "description": "A short chain useful against creatures vulnerable to silver."
+        "description": "A short sturdy chain for hauling, securing, or unusual restraints."
       }
     },
     {
@@ -235,27 +238,6 @@
       "name": "Quality Paper",
       "fields": {
         "description": "Blank sheets and parchment suited to contracts, maps, spells, or forged documents."
-      }
-    },
-    {
-      "id": "runed_lantern",
-      "name": "Runed lantern",
-      "fields": {
-        "description": "A practical hooded lantern carrying a rune of {{ rules.name }}; its precise function is left to the GM."
-      }
-    },
-    {
-      "id": "runed_compass",
-      "name": "Runed compass",
-      "fields": {
-        "description": "A working compass carrying a rune of {{ rules.name }}; its precise function is left to the GM."
-      }
-    },
-    {
-      "id": "runed_chain",
-      "name": "Runed chain",
-      "fields": {
-        "description": "A length of sturdy chain carrying a rune of {{ rules.name }}; its precise function is left to the GM."
       }
     }
   ]

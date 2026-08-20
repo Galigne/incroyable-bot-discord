@@ -146,7 +146,7 @@ test('background metadata supports optional shared overrides and rejects traits 
 		modifiers: [],
 		armor: {
 			generator: 'armors',
-			entry: 'common_light_armor',
+			entry: 'padded_armor',
 			select: 'fields',
 		},
 		equipment: [],
@@ -413,15 +413,12 @@ test('/gen traversal autocomplete follows entries, fields, and structural routes
 		'site:dungeon.description',
 	]);
 	assert.ok(complete('loot:shields.')
-		.includes('loot:shields.ar_percentage'));
-	assert.deepEqual(complete('loot:shields:w'), [
-		'loot:shields:wooden_shield',
-		'loot:shields:tower_shield',
-		'loot:shields:stormward_shield',
-		'loot:shields:living_wood_shield',
+		.includes('loot:shields.description'));
+	assert.deepEqual(complete('loot:shields:round_shield'), [
+		'loot:shields:round_shield',
 	]);
-	assert.deepEqual(complete('loot:shields:wooden_shield'), [
-		'loot:shields:wooden_shield',
+	assert.deepEqual(complete('loot:shields:targe'), [
+		'loot:shields:targe',
 	]);
 	assert.deepEqual(complete('loot.'), ['loot.generator']);
 	assert.ok(!complete('loot.').includes('loot.name'));
@@ -442,8 +439,8 @@ test('localized generator aliases are predictable and resolve to stable identiti
 	});
 	assert.equal(english.generatorId, 'shields');
 	assert.equal(french.generatorId, 'shields');
-	assert.equal(english.entryId, 'common_buckler');
-	assert.equal(french.entryId, 'common_buckler');
+	assert.equal(english.entryId, 'buckler');
+	assert.equal(french.entryId, 'buckler');
 	assert.equal(
 		generatorResolver.generate('BuTiN:BOUCLIERS', 'fr', { random: () => 0 })
 			.generatorId,
@@ -467,46 +464,48 @@ test('/gen autocomplete uses localized paths and active accent-insensitive segme
 		value: 'butin:armes:épée_longue',
 	}]);
 	assert.deepEqual(
-		complete('butin:boucliers:bouclier_en_b'),
+		complete('butin:boucliers:bouclier_rond'),
 		[{
-			name: 'butin:boucliers:bouclier_en_bois',
-			value: 'butin:boucliers:bouclier_en_bois',
+			name: 'butin:boucliers:bouclier_rond',
+			value: 'butin:boucliers:bouclier_rond',
 		}],
 	);
 });
 
 test('localized traversal continues through routes and keeps stable field syntax', () => {
 	const result = generatorResolver.generate(
-		'butin:boucliers:bouclier_en_bois.ar_percentage',
+		'butin:boucliers:bouclier_rond.description',
 		'fr',
 		{ random: () => 0 },
 	);
 	assert.equal(result.generatorId, 'shields');
-	assert.equal(result.entryId, 'wooden_shield');
-	assert.deepEqual(result.fields, { ar_percentage: 5 });
+	assert.equal(result.entryId, 'round_shield');
+	assert.deepEqual(result.fields, {
+		description: 'Un bouclier circulaire équilibré qui convient à de nombreux styles de combat.',
+	});
 	assert.deepEqual(
 		generatorResolver.generate(
-			'butin:boucliers:bouclier_en_bois.name',
+			'butin:boucliers:bouclier_rond.name',
 			'fr',
 			{ random: () => 0 },
 		).fields,
-		{ name: 'Bouclier en bois' },
+		{ name: 'Bouclier rond' },
 	);
 	assert.equal(
 		generatorResolver.generate(
-			'loot:shields.generator:wooden_shield.name',
+			'loot:shields.generator:round_shield.name',
 			'fr',
 			{ random: () => 0 },
 		).entryId,
-		'wooden_shield',
+		'round_shield',
 	);
 	assert.deepEqual(
 		generatorResolver.generate(
-			'loot:shields:wooden_shield.name',
+			'loot:shields:round_shield.name',
 			'en',
 			{ random: () => 0 },
 		).fields,
-		{ name: 'Wooden shield' },
+		{ name: 'Round shield' },
 	);
 	const aliasedWeapon = generatorResolver.generate(
 		'loot:weapons:long_sword.description',
@@ -538,18 +537,18 @@ test('generator autocomplete searches beyond the first 25 localized entries', ()
 	);
 	const initial = complete('butin:armes:');
 	assert.equal(initial.length, 25);
-	assert.ok(!initial.some(choice => choice.value.endsWith(':épée_runique')));
-	assert.deepEqual(complete('butin:armes:epee_runique'), [{
-		name: 'butin:armes:épée_runique',
-		value: 'butin:armes:épée_runique',
+	assert.ok(!initial.some(choice => choice.value.endsWith(':sarbacane')));
+	assert.deepEqual(complete('butin:armes:sarbacane'), [{
+		name: 'butin:armes:sarbacane',
+		value: 'butin:armes:sarbacane',
 	}]);
 	assert.equal(
 		generatorResolver.generate(
-			'butin:armes:épée_runique',
+			'butin:armes:sarbacane',
 			'fr',
 			{ random: () => 0 },
 		).entryId,
-		'runed_sword',
+		'blowgun',
 	);
 });
 
@@ -746,6 +745,14 @@ test('generator names reject normalized collisions within their input scope', ()
 		() => validateGeneratorDefinition(entries),
 		error => error.code === 'DUPLICATE_GENERATOR_ENTRY_NAME',
 	);
+
+	const internalOutcomes = createTextGenerator();
+	internalOutcomes.visibility = 'internal';
+	internalOutcomes.entries.push({
+		id: 'second_rain',
+		name: internalOutcomes.entries[0].name,
+	});
+	assert.equal(validateGeneratorDefinition(internalOutcomes), internalOutcomes);
 
 	const first = createTextGenerator();
 	const second = {

@@ -2,9 +2,18 @@ const assert = require('node:assert/strict');
 const { test } = require('node:test');
 const Character = require('../models/Character');
 const {
+	ARMOR_CONSTITUTION_REQUIREMENTS,
+	ARMOR_PERCENTAGES,
+	SHIELD_PERCENTAGES,
 	calculateArmorRating,
 	canEquipArmor,
+	getArmorPercentage,
+	getShieldPercentage,
 } = require('../services/mechanics/armor');
+const {
+	formatResolvedLootItem,
+	getResolvedLootArmorPercentage,
+} = require('../services/lootGeneration');
 const {
 	validateActionPointEdit,
 } = require('../services/mechanics/characterValidation');
@@ -35,7 +44,6 @@ const {
 	generateStats,
 } = require('../services/mechanics/statGeneration');
 const {
-	calculateGeneratedArmorPercentage,
 	pickCarriedLoot,
 	pickMainEquipment,
 	populateRandomCharacter,
@@ -125,8 +133,31 @@ test('resource, armor, AP, and movement formulas preserve generated values', () 
 	assert.equal(calculateMaxAp(10), 8);
 	assert.equal(calculateMaxMovementDistance(15), 7.5);
 	assert.equal(calculateArmorRating(280, 5), 14);
-	assert.equal(canEquipArmor(12, 12), true);
-	assert.equal(canEquipArmor(11, 12), false);
+	assert.deepEqual(ARMOR_CONSTITUTION_REQUIREMENTS, {
+		light: 0,
+		medium: 12,
+		heavy: 14,
+	});
+	assert.equal(canEquipArmor(0, 'light'), true);
+	assert.equal(canEquipArmor(12, 'medium'), true);
+	assert.equal(canEquipArmor(11, 'medium'), false);
+	assert.equal(canEquipArmor(14, 'heavy'), true);
+	assert.equal(canEquipArmor(13, 'heavy'), false);
+	assert.equal(canEquipArmor(20, 'unknown'), false);
+	assert.deepEqual(ARMOR_PERCENTAGES, {
+		light: { common: 5, uncommon: 15, rare: 25, epic: 35, legendary: 45 },
+		medium: { common: 25, uncommon: 35, rare: 45, epic: 55, legendary: 65 },
+		heavy: { common: 45, uncommon: 55, rare: 65, epic: 75, legendary: 85 },
+	});
+	assert.deepEqual(SHIELD_PERCENTAGES, {
+		common: 5,
+		uncommon: 10,
+		rare: 15,
+		epic: 20,
+		legendary: 25,
+	});
+	assert.equal(getArmorPercentage('heavy', 'legendary'), 85);
+	assert.equal(getShieldPercentage('epic'), 20);
 	assert.deepEqual(createGeneratedResources(
 		{ constitution: 10, speed: 15 },
 		10,
@@ -304,6 +335,19 @@ test('random character generation leaves manual encumbrance unchanged', () => {
 	assert.deepEqual(managedCharacter.gear.encumbrance, { current: 4, max: 9 });
 });
 
+test('default character armor, equipment, and carried loot preserve every loot modifier', () => {
+	const character = createCharacterFixture();
+	populateRandomCharacter(character, { level: 1, random: () => 0 });
+	const generatedItems = [
+		...character.gear.equipment,
+		...character.gear.inventory.slice(0, -1),
+	];
+	assert.ok(generatedItems.length >= 5);
+	for (const item of generatedItems) {
+		assert.match(item, / — Common — Made of [^—]+ — Runed — /);
+	}
+});
+
 test('main equipment rolls weapon and shield types independently at the 80 percent boundary', () => {
 	assert.equal(selectMainEquipmentGenerator(() => 0), 'weapons');
 	assert.equal(selectMainEquipmentGenerator(() => 0.799999), 'weapons');
@@ -332,69 +376,52 @@ test('main equipment rolls weapon and shield types independently at the 80 perce
 	}
 });
 
-test('equipped shield AR stacks while carried shield loot remains non-mechanical', () => {
-	const armor = { fields: { ar_percentage: 35 } };
-	const equipment = [
-		{ generatorId: 'shields', entry: { fields: { ar_percentage: 10 } } },
-		{ generatorId: 'shields', entry: { fields: { ar_percentage: 5 } } },
-		{ generatorId: 'weapons', entry: { fields: {} } },
-	];
-	assert.equal(calculateGeneratedArmorPercentage(armor, equipment), 50);
-
-	const resolver = {
-		generate(path, locale, options) {
-			if (path === 'loot.generator') {
-				return {
-					outputType: 'value',
-					value: 'Legendary carried shield \u2014 25% AR when equipped.',
-					provenance: [
-						{ type: 'entry', generatorId: 'loot', entryId: 'shields' },
-						{ type: 'entry', generatorId: 'shields', entryId: 'carried' },
-					],
-				};
-			}
-			return generatorResolver.generate(path, locale, options);
-		},
-		resolveReference(reference, locale, options) {
-			if (reference.generator === 'loot') {
-				return {
-					value: 'Legendary carried shield — 25% AR when equipped.',
-					provenance: [
-						{ type: 'entry', generatorId: 'loot', entryId: 'shields' },
-						{ type: 'entry', generatorId: 'shields', entryId: 'carried' },
-					],
-				};
-			}
-			return generatorResolver.resolveReference(reference, locale, options);
-		},
-		resolveInlineReference: generatorResolver.resolveInlineReference,
+test('stable rarity modifier IDs drive armor mechanics and readable flattening order', () => {
+	const rarity = {
+		entryId: 'epic',
+		generatorId: 'modifier_rarity',
+		outputType: 'value',
+		value: 'Epic',
 	};
-	const character = createCharacterFixture();
-	populateRandomCharacter(character, {
-		level: 10,
-		random: () => 0.999999,
-		resolver,
-	});
-	const armorEntry = findNamedEquipmentEntry(
-		generatorCatalog.getGenerator('armors'),
-		character.gear.equipment[0],
-	);
-	const equippedShields = character.gear.equipment.slice(1).map(value => (
-		findNamedEquipmentEntry(generatorCatalog.getGenerator('shields'), value)
-	));
-	assert.equal(equippedShields.every(Boolean), true);
-	const expectedPercentage = Number(armorEntry.fields.ar_percentage)
-		+ equippedShields.reduce((total, shield) => (
-			total + Number(shield.fields.ar_percentage)
-		), 0);
+	const material = {
+		entryId: 'made_of_material',
+		generatorId: 'modifier_material',
+		outputType: 'value',
+		value: 'Made of Iron',
+	};
+	const lootModifier = {
+		entryId: 'runed',
+		generatorId: 'modifier_loot',
+		outputType: 'fields',
+		displayFields: {
+			name: 'Runed',
+			description: 'A GM-defined rune marks the item.',
+		},
+	};
+	const armor = {
+		entryId: 'breastplate',
+		generatorId: 'armors',
+		fields: { type: 'medium' },
+		displayFields: {
+			name: 'Breastplate',
+			description: 'A shaped rigid cuirass.',
+			type: 'medium',
+		},
+		modifiers: [lootModifier, material, rarity],
+	};
+	assert.equal(getResolvedLootArmorPercentage(armor), 55);
+	assert.equal(getResolvedLootArmorPercentage({
+		...armor,
+		generatorId: 'shields',
+	}), 20);
+	assert.equal(getResolvedLootArmorPercentage({
+		...armor,
+		generatorId: 'weapons',
+	}), 0);
 	assert.equal(
-		character.resources.ar.max,
-		Math.round(character.resources.hp.max * expectedPercentage / 100),
-	);
-	assert.equal(character.gear.inventory.length, 4);
-	assert.equal(
-		character.gear.inventory.slice(0, 3).every(value => value.startsWith('Legendary carried')),
-		true,
+		formatResolvedLootItem(armor),
+		'Breastplate — A shaped rigid cuirass. — Epic — Made of Iron — '
+			+ 'Runed — A GM-defined rune marks the item.',
 	);
 });
 
@@ -403,7 +430,7 @@ test('carried loot uses heterogeneous display results and bounded provenance ded
 		lootResult('weapons', 'short_sword', 'Short sword — A practical blade.'),
 		lootResult('weapons', 'short_sword', 'Short sword — A practical blade.'),
 		lootResult('material', 'iron', 'Iron — Common crafting metal.'),
-		lootResult('shields', 'common_buckler', 'Buckler — A compact shield.'),
+		lootResult('shields', 'buckler', 'Buckler — A compact shield.'),
 	];
 	let calls = 0;
 	const resolver = {
@@ -644,17 +671,17 @@ test('character generation metadata replaces normal categories and stacks equipp
 		}],
 		armor: {
 			generator: 'armors',
-			entry: 'common_light_armor',
+			entry: 'padded_armor',
 			select: 'fields',
 		},
 		equipment: [{
 			generator: 'shields',
-			entry: 'common_buckler',
+			entry: 'buckler',
 			select: 'display',
 		}],
 		inventory: [{
 			generator: 'shields',
-			entry: 'wooden_shield',
+			entry: 'round_shield',
 			select: 'fields',
 		}],
 	};
@@ -708,6 +735,9 @@ test('character generation metadata replaces normal categories and stacks equipp
 	assert.equal(character.gear.equipment.length, 2);
 	assert.equal(character.gear.inventory.length, 1);
 	assert.equal(character.gear.inventory.some(item => item.endsWith(' gold')), false);
+	for (const item of [...character.gear.equipment, ...character.gear.inventory]) {
+		assert.match(item, / — Common — Made of [^—]+ — Runed — /);
+	}
 	assert.equal(
 		character.resources.ar.max,
 		calculateArmorRating(character.resources.hp.max, 30),
@@ -746,11 +776,6 @@ function createSeededRandom(initialSeed) {
 function sequenceRandom(values) {
 	let index = 0;
 	return () => values[Math.min(index++, values.length - 1)];
-}
-
-function findNamedEquipmentEntry(generator, value) {
-	const name = value.split(' — ')[0];
-	return generator.entries.find(entry => entry.name === name);
 }
 
 function lootResult(generatorId, entryId, value) {

@@ -19,6 +19,21 @@
       "generator": "modifier_creature"
     },
     {
+      "id": "rarity",
+      "name": "Rarity modifiers",
+      "generator": "modifier_rarity"
+    },
+    {
+      "id": "material",
+      "name": "Material modifiers",
+      "generator": "modifier_material"
+    },
+    {
+      "id": "loot",
+      "name": "Loot modifiers",
+      "generator": "modifier_loot"
+    },
+    {
       "id": "site_general",
       "name": "General site modifiers",
       "generator": "modifier_site_all"

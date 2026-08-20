@@ -3,192 +3,142 @@
   "id": "armors",
   "visibility": "internal",
   "name": "Armors",
-  "description": "Every armor type and rarity combination",
+  "description": "Concrete armor forms with independent rarity and materials",
   "entrySchema": {
-    "required": [
-      "type",
-      "rarity",
-      "description",
-      "constitution_requirement",
-      "ar_percentage"
-    ]
+    "required": ["type", "description"]
+  },
+  "modifiers": {
+    "modifier_rarity": 100,
+    "modifier_material": 15,
+    "modifier_loot": 10
   },
   "entries": [
     {
-      "id": "common_light_armor",
-      "name": "Common light armor",
-      "weight": 8,
+      "id": "padded_armor",
+      "name": "Padded armor",
       "fields": {
         "type": "light",
-        "rarity": "common",
-        "description": "Ordinary clothing or light padding that offers mobility but no meaningful AR.",
-        "constitution_requirement": 0,
-        "ar_percentage": 5
+        "description": "Layers of quilted cloth soften impacts while preserving freedom of movement."
       }
     },
     {
-      "id": "uncommon_light_armor",
-      "name": "Uncommon light armor",
-      "weight": 5,
+      "id": "gambeson",
+      "name": "Gambeson",
       "fields": {
         "type": "light",
-        "rarity": "uncommon",
-        "description": "Well-fitted reinforced clothing offering modest protection.",
-        "constitution_requirement": 0,
-        "ar_percentage": 15
+        "description": "A fitted, heavily quilted coat worn alone or beneath harder protection."
       }
     },
     {
-      "id": "rare_light_armor",
-      "name": "Rare light armor",
-      "weight": 3,
+      "id": "leather_armor",
+      "name": "Leather armor",
       "fields": {
         "type": "light",
-        "rarity": "rare",
-        "description": "Superior flexible armor made from unusually resilient material.",
-        "constitution_requirement": 0,
-        "ar_percentage": 25
+        "description": "A flexible suit of shaped panels suited to travel and mobile combat."
       }
     },
     {
-      "id": "epic_light_armor",
-      "name": "Epic light armor",
-      "weight": 2,
+      "id": "reinforced_leather_armor",
+      "name": "Reinforced leather armor",
       "fields": {
         "type": "light",
-        "rarity": "epic",
-        "description": "Remarkable weightless protection crafted through rare techniques.",
-        "constitution_requirement": 0,
-        "ar_percentage": 35
+        "description": "Flexible armor strengthened at vulnerable points without becoming cumbersome."
       }
     },
     {
-      "id": "legendary_light_armor",
-      "name": "Legendary light armor",
+      "id": "duelist_coat",
+      "name": "Duelist coat",
       "fields": {
         "type": "light",
-        "rarity": "legendary",
-        "description": "A unique second skin offering exceptional protection without restricting movement.",
-        "constitution_requirement": 0,
-        "ar_percentage": 45
+        "description": "A close-fitted protective coat cut for quick footwork and precise movement."
       }
     },
     {
-      "id": "common_medium_armor",
-      "name": "Common medium armor",
-      "weight": 8,
+      "id": "chain_shirt",
+      "name": "Chain shirt",
       "fields": {
         "type": "medium",
-        "rarity": "common",
-        "description": "Standard reinforced leather, scale, or partial mail.",
-        "constitution_requirement": 12,
-        "ar_percentage": 25
+        "description": "A short linked shirt that protects the torso without the weight of a full hauberk."
       }
     },
     {
-      "id": "uncommon_medium_armor",
-      "name": "Uncommon medium armor",
-      "weight": 5,
+      "id": "scale_armor",
+      "name": "Scale armor",
       "fields": {
         "type": "medium",
-        "rarity": "uncommon",
-        "description": "Reliable professional armor balancing protection and mobility.",
-        "constitution_requirement": 12,
-        "ar_percentage": 35
+        "description": "Overlapping scales cover a flexible backing and turn aside glancing blows."
       }
     },
     {
-      "id": "rare_medium_armor",
-      "name": "Rare medium armor",
-      "weight": 3,
+      "id": "brigandine",
+      "name": "Brigandine",
       "fields": {
         "type": "medium",
-        "rarity": "rare",
-        "description": "Master-crafted layered armor with excellent coverage.",
-        "constitution_requirement": 12,
-        "ar_percentage": 45
+        "description": "Small overlapping plates are riveted inside a sturdy fitted garment."
       }
     },
     {
-      "id": "epic_medium_armor",
-      "name": "Epic medium armor",
-      "weight": 2,
+      "id": "lamellar_armor",
+      "name": "Lamellar armor",
       "fields": {
         "type": "medium",
-        "rarity": "epic",
-        "description": "Exceptional armor reinforced by magical materials or runes.",
-        "constitution_requirement": 12,
-        "ar_percentage": 55
+        "description": "Rows of small rigid plates are laced together into resilient protection."
       }
     },
     {
-      "id": "legendary_medium_armor",
-      "name": "Legendary medium armor",
+      "id": "breastplate",
+      "name": "Breastplate",
       "fields": {
         "type": "medium",
-        "rarity": "legendary",
-        "description": "A celebrated suit offering extraordinary protection without becoming cumbersome.",
-        "constitution_requirement": 12,
-        "ar_percentage": 65
+        "description": "A shaped rigid cuirass protects the torso while leaving the limbs relatively free."
       }
     },
     {
-      "id": "common_heavy_armor",
-      "name": "Common heavy armor",
-      "weight": 8,
+      "id": "coat_of_plates",
+      "name": "Coat of plates",
       "fields": {
-        "type": "heavy",
-        "rarity": "common",
-        "description": "A basic full suit of plate or similarly massive protection.",
-        "constitution_requirement": 14,
-        "ar_percentage": 45
+        "type": "medium",
+        "description": "Broad hidden plates line a heavy coat for balanced coverage and mobility."
       }
     },
     {
-      "id": "uncommon_heavy_armor",
-      "name": "Uncommon heavy armor",
-      "weight": 5,
+      "id": "chain_mail",
+      "name": "Chain mail",
       "fields": {
         "type": "heavy",
-        "rarity": "uncommon",
-        "description": "A carefully fitted heavy suit with reinforced joints.",
-        "constitution_requirement": 14,
-        "ar_percentage": 55
+        "description": "A long, dense suit of interlocking links provides extensive protection."
       }
     },
     {
-      "id": "rare_heavy_armor",
-      "name": "Rare heavy armor",
-      "weight": 3,
+      "id": "splint_armor",
+      "name": "Splint armor",
       "fields": {
         "type": "heavy",
-        "rarity": "rare",
-        "description": "Masterwork heavy armor built from superior metal or monster plates.",
-        "constitution_requirement": 14,
-        "ar_percentage": 65
+        "description": "Long rigid strips reinforce a heavy backing across the body and limbs."
       }
     },
     {
-      "id": "epic_heavy_armor",
-      "name": "Epic heavy armor",
-      "weight": 2,
+      "id": "plate_armor",
+      "name": "Plate armor",
       "fields": {
         "type": "heavy",
-        "rarity": "epic",
-        "description": "A formidable runic suit capable of withstanding extraordinary punishment.",
-        "constitution_requirement": 14,
-        "ar_percentage": 75
+        "description": "Articulated plates protect most of the body with carefully fitted joints."
       }
     },
     {
-      "id": "legendary_heavy_armor",
-      "name": "Legendary heavy armor",
+      "id": "full_plate",
+      "name": "Full plate",
       "fields": {
         "type": "heavy",
-        "rarity": "legendary",
-        "description": "A unique fortress-like suit remembered in songs and military histories.",
-        "constitution_requirement": 14,
-        "ar_percentage": 85
+        "description": "A complete articulated harness encloses its wearer from head to foot."
+      }
+    },
+    {
+      "id": "siege_armor",
+      "name": "Siege armor",
+      "fields": {
+        "type": "heavy",
+        "description": "Massive reinforced protection is built for the most punishing assaults."
       }
     }
   ]

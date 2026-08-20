@@ -634,11 +634,14 @@ The durable implementation constraints are:
   Reject mixed generators, router `fields`, and routed content entries. Every content
   name and additional field is ordinary displayable generated data; never hide a
   field because it is mechanically useful.
-- Entry names must be unambiguous within each localized generator, and public
+- Entry names must be unambiguous within each localized public generator, and public
   generator names must be unambiguous within each locale, after ignoring case,
-  accents or diacritics, repeated whitespace, and separating punctuation. Reject a
-  catalog when a localized alias conflicts with another candidate's stable ID in
-  the same traversal scope under that normalization.
+  accents or diacritics, repeated whitespace, and separating punctuation. Internal
+  generators may repeat display names for separately weighted implementations of
+  one visible concept; ambiguous localized names are not valid fixed-entry aliases,
+  so fixed internal selection uses stable IDs. Reject a catalog when a localized
+  alias conflicts with another candidate's stable ID in the same traversal scope
+  under that normalization.
 - Keep structural traversal, inline-reference resolution, selection, cycle/depth
   protection, final-field modifier suppression, and provenance in resolver
   services. Do not parse paths or references, select entries, or reconstruct
@@ -687,10 +690,20 @@ The durable implementation constraints are:
 - There is no `inventory` generator. Random character inventory resolves three
   carried display values through `loot`, using child provenance for bounded
   duplicate avoidance. Heterogeneous loot schemas must remain supported.
+- Loot identity, rarity, material, and special properties are independent. Weapons,
+  armor, and shields always resolve `modifier_rarity`, optionally resolve
+  `modifier_material`, and may resolve the merged `modifier_loot` pool in that
+  order. Other loot children use only their configured `modifier_loot` chance, and
+  materials have no automatic modifier. Direct `/gen` preserves separate modifier
+  results; entity gear flattens the base item and every modifier into one readable
+  string in rarity, material, loot order.
 - Random characters equip one compatible armor plus one or two independently
   selected main items: 80% `weapons`, 20% `shields` per slot. Equipped shields may
-  stack and add their AR percentages to armor before resource generation; carried
-  loot never contributes AR.
+  stack and add rarity-derived AR to armor before resource generation; carried loot
+  never contributes AR. Armor Constitution requirements and AR come from its stable
+  `light`, `medium`, or `heavy` type plus the stable `modifier_rarity` entry ID;
+  shield AR uses only that stable rarity ID. Never compare localized rarity text for
+  mechanics.
 - Background archetypes and creature details share one optional `generation`
   override model. Every property is optional; omission preserves that entity type's
   normal category behavior, while an explicitly present value replaces it. Both
@@ -699,8 +712,9 @@ The durable implementation constraints are:
   support `talents`, creatures support `traits`, and neither accepts the other's
   template collection.
 - Use only `modifier_character` for the character modifier policy and
-  `modifier_creature` for the creature modifier policy. Modifiers and status
-  effects remain descriptive and never execute mechanics. `/gen` has no modifier
+  `modifier_creature` for the creature modifier policy. Entity modifiers and status
+  effects remain descriptive and never execute mechanics. Loot rarity is the sole
+  modifier-identity exception used for armor and shield AR. `/gen` has no modifier
   option; the public `modifier` router provides standalone access to useful
   internal modifier pools.
 - Creature RULEs come only from explicit `fixedRules`. Natural-armor metadata, the

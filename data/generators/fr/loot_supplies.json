@@ -7,6 +7,9 @@
   "entrySchema": {
     "required": ["description"]
   },
+  "modifiers": {
+    "modifier_loot": 10
+  },
   "entries": [
     {
       "id": "coil_of_rope",
@@ -201,11 +204,11 @@
       }
     },
     {
-      "id": "silvered_chain",
-      "name": "Chaîne argentée",
+      "id": "chain",
+      "name": "Chaîne",
       "weight": 2,
       "fields": {
-        "description": "Une courte chaîne utile contre les créatures vulnérables à l'argent."
+        "description": "Une courte chaîne robuste pour tirer, arrimer ou constituer des entraves inhabituelles."
       }
     },
     {
@@ -235,27 +238,6 @@
       "name": "Papier de qualité",
       "fields": {
         "description": "Des feuilles et un parchemin vierges adaptés aux contrats, cartes, sorts ou faux documents."
-      }
-    },
-    {
-      "id": "runed_lantern",
-      "name": "Lanterne runique",
-      "fields": {
-        "description": "Une lanterne à volets fonctionnelle portant une rune associée à la {{ rules.name }} ; le MJ en détermine la fonction précise."
-      }
-    },
-    {
-      "id": "runed_compass",
-      "name": "Boussole runique",
-      "fields": {
-        "description": "Une boussole fonctionnelle portant une rune associée à la {{ rules.name }} ; le MJ en détermine la fonction précise."
-      }
-    },
-    {
-      "id": "runed_chain",
-      "name": "Chaîne runique",
-      "fields": {
-        "description": "Une chaîne robuste portant une rune associée à la {{ rules.name }} ; le MJ en détermine la fonction précise."
       }
     }
   ]

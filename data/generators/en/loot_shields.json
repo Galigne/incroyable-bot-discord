@@ -3,169 +3,112 @@
   "id": "shields",
   "visibility": "internal",
   "name": "Shields",
-  "description": "Shields with rarity-based armor contributions",
+  "description": "Concrete shield forms with independent rarity and materials",
   "entrySchema": {
-    "required": ["rarity", "description", "ar_percentage"]
+    "required": ["description"]
+  },
+  "modifiers": {
+    "modifier_rarity": 100,
+    "modifier_material": 15,
+    "modifier_loot": 10
   },
   "entries": [
     {
-      "id": "common_buckler",
+      "id": "buckler",
       "name": "Buckler",
-      "weight": 8,
       "fields": {
-        "rarity": "common",
-        "description": "A compact shield whose material and exact form suit its bearer.",
-        "ar_percentage": 5
+        "description": "A compact hand shield suited to deflection and close exchanges."
       }
     },
     {
-      "id": "wooden_shield",
-      "name": "Wooden shield",
-      "weight": 8,
+      "id": "round_shield",
+      "name": "Round shield",
       "fields": {
-        "rarity": "common",
-        "description": "A practical wooden shield reinforced for ordinary combat.",
-        "ar_percentage": 5
+        "description": "A balanced circular shield useful across many fighting styles."
       }
     },
     {
-      "id": "common_kite_shield",
+      "id": "kite_shield",
       "name": "Kite shield",
-      "weight": 8,
       "fields": {
-        "rarity": "common",
-        "description": "A broad shield offering ordinary coverage without a fixed heraldry.",
-        "ar_percentage": 5
+        "description": "A long tapered shield that protects the bearer’s torso and leading leg."
       }
     },
     {
-      "id": "uncommon_reinforced_shield",
-      "name": "Reinforced shield",
-      "weight": 5,
+      "id": "heater_shield",
+      "name": "Heater shield",
       "fields": {
-        "rarity": "uncommon",
-        "description": "A carefully strengthened shield whose construction remains open to interpretation.",
-        "ar_percentage": 10
+        "description": "A compact triangular shield shaped for mounted or foot combat."
       }
     },
     {
-      "id": "uncommon_tower_shield",
+      "id": "targe",
+      "name": "Targe",
+      "fields": {
+        "description": "A sturdy round shield strapped close to the forearm for active defense."
+      }
+    },
+    {
+      "id": "tower_shield",
       "name": "Tower shield",
-      "weight": 5,
       "fields": {
-        "rarity": "uncommon",
-        "description": "A tall defensive shield adapted to the bearer’s size and fighting style.",
-        "ar_percentage": 10
+        "description": "A tall shield that prioritizes broad personal coverage."
       }
     },
     {
-      "id": "uncommon_dueling_shield",
+      "id": "pavise",
+      "name": "Pavise",
+      "fields": {
+        "description": "A large shield built to provide stable cover, especially for ranged fighters."
+      }
+    },
+    {
+      "id": "dueling_shield",
       "name": "Dueling shield",
-      "weight": 5,
       "fields": {
-        "rarity": "uncommon",
-        "description": "A responsive shield balanced for active defense and close exchanges.",
-        "ar_percentage": 10
+        "description": "A responsive shield balanced for quick defense in close combat."
       }
     },
     {
-      "id": "rare_mirrored_shield",
-      "name": "Mirrored shield",
-      "weight": 3,
-      "fields": {
-        "rarity": "rare",
-        "description": "A polished shield with an unusual surface whose significance is left to the GM.",
-        "ar_percentage": 15
-      }
-    },
-    {
-      "id": "rare_monster_hide_shield",
-      "name": "Monster-hide shield",
-      "weight": 3,
-      "fields": {
-        "rarity": "rare",
-        "description": "A shield incorporating material from a notable creature without prescribing its powers.",
-        "ar_percentage": 15
-      }
-    },
-    {
-      "id": "rare_folding_shield",
+      "id": "folding_shield",
       "name": "Folding shield",
-      "weight": 3,
       "fields": {
-        "rarity": "rare",
-        "description": "An ingenious shield designed to change profile while keeping its exact mechanism undefined.",
-        "ar_percentage": 15
+        "description": "An ingenious shield designed to change profile for transport or battle."
       }
     },
     {
-      "id": "epic_guardian_shield",
+      "id": "mirrored_shield",
+      "name": "Mirrored shield",
+      "fields": {
+        "description": "A polished shield with a reflective face whose significance is left to the GM."
+      }
+    },
+    {
+      "id": "guardian_shield",
       "name": "Guardian shield",
-      "weight": 2,
       "fields": {
-        "rarity": "epic",
-        "description": "An exceptional shield associated with protection, its history and effects left open.",
-        "ar_percentage": 20
+        "description": "A distinctive shield associated with steadfast protection."
       }
     },
     {
-      "id": "epic_stormward_shield",
+      "id": "stormward_shield",
       "name": "Stormward shield",
-      "weight": 2,
       "fields": {
-        "rarity": "epic",
-        "description": "A remarkable shield carrying stormlike motifs without a predetermined enchantment.",
-        "ar_percentage": 20
+        "description": "A remarkable shield carrying stormlike motifs without a predetermined enchantment."
       }
     },
     {
-      "id": "epic_living_wood_shield",
-      "name": "Living-wood shield",
-      "weight": 2,
-      "fields": {
-        "rarity": "epic",
-        "description": "A shield of uncanny wood whose nature and behavior are determined by the GM.",
-        "ar_percentage": 20
-      }
-    },
-    {
-      "id": "legendary_bastion_relic",
-      "name": "Bastion relic",
-      "weight": 1,
-      "fields": {
-        "rarity": "legendary",
-        "description": "A renowned shield remembered as a symbol of an unbroken defense.",
-        "ar_percentage": 25
-      }
-    },
-    {
-      "id": "legendary_eclipse_shield",
+      "id": "eclipse_shield",
       "name": "Eclipse shield",
-      "weight": 1,
       "fields": {
-        "rarity": "legendary",
-        "description": "A singular shield bearing eclipse imagery and an intentionally undefined legacy.",
-        "ar_percentage": 25
+        "description": "A singular shield bearing eclipse imagery and an intentionally undefined legacy."
       }
     },
     {
-      "id": "legendary_oathkeeper_shield",
+      "id": "oathkeeper_shield",
       "name": "Oathkeeper shield",
-      "weight": 1,
       "fields": {
-        "rarity": "legendary",
-        "description": "A legendary shield tied to an oath whose bearer, terms, and consequences remain open.",
-        "ar_percentage": 25
-      }
-    },
-    {
-      "id": "rare_runed_shield",
-      "name": "Runed shield",
-      "weight": 1,
-      "fields": {
-        "rarity": "rare",
-        "description": "A carefully made shield bearing a rune of {{ rules.name }}; its precise function is left to the GM.",
-        "ar_percentage": 15
+        "description": "A renowned shield tied to an oath whose bearer and terms remain open."
       }
     }
   ]

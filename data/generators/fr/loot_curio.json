@@ -7,6 +7,9 @@
   "entrySchema": {
     "required": ["description"]
   },
+  "modifiers": {
+    "modifier_loot": 10
+  },
   "entries": [
     {
       "id": "whispering_compass",
@@ -118,48 +121,6 @@
       "name": "Poulet de voyage",
       "fields": {
         "description": "Un poulet étonnamment calme, dressé à suivre le porteur et à signaler certaines créatures."
-      }
-    },
-    {
-      "id": "runed_amulet",
-      "name": "Amulette runique",
-      "fields": {
-        "description": "Une amulette gravée d’une rune associée à la {{ rules.name }} ; le MJ en détermine la fonction précise."
-      }
-    },
-    {
-      "id": "runed_ring",
-      "name": "Anneau runique",
-      "fields": {
-        "description": "Un anneau gravé d’une rune associée à la {{ rules.name }} ; le MJ en détermine la fonction précise."
-      }
-    },
-    {
-      "id": "runed_cloak",
-      "name": "Cape runique",
-      "fields": {
-        "description": "Une cape brodée d’une rune associée à la {{ rules.name }} ; le MJ en détermine la fonction précise."
-      }
-    },
-    {
-      "id": "runed_boots",
-      "name": "Bottes runiques",
-      "fields": {
-        "description": "Une paire de bottes portant une rune associée à la {{ rules.name }} ; le MJ en détermine la fonction précise."
-      }
-    },
-    {
-      "id": "runed_mirror",
-      "name": "Miroir runique",
-      "fields": {
-        "description": "Un miroir à main portant une rune associée à la {{ rules.name }} ; le MJ en détermine la fonction précise."
-      }
-    },
-    {
-      "id": "runed_key",
-      "name": "Clé runique",
-      "fields": {
-        "description": "Une clé portant une rune associée à la {{ rules.name }} ; le MJ en détermine la fonction précise."
       }
     }
   ]

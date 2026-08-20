@@ -51,7 +51,9 @@ name and a direct route to an internal child. Bare router generation displays th
 selected category only; fixing a category automatically generates from its child.
 Loot includes weapons, shields, armor, supplies, consumables, food
 and drink, valuables, materials, and curios. Afflictions, rumors, and secrets are
-also available as direct public generators.
+also available as direct public generators. Item identity is independent from its
+rarity, material, and special loot property. Direct `/gen` output displays applied
+modifiers separately from the base item.
 
 Set the required runtime language in `config.json`. The complete configuration is:
 
@@ -299,15 +301,18 @@ talent count, equipment, inventory, and gold are derived automatically. Encumbra
 remains manually managed, so generated characters keep the normal `0 / 0` default.
 Each character receives one Constitution-compatible armor and one or two additional
 main-equipment items. Every additional slot independently selects a weapon 80% of
-the time or a shield 20% of the time, so two shields are possible. Equipped shield
-AR percentages stack with the armor percentage before AR is calculated from maximum
-HP.
+the time or a shield 20% of the time, so two shields are possible. Armor type and
+the stable generated rarity determine armor AR; shield AR depends on that same
+stable rarity identity. Equipped shield AR stacks with armor before AR is calculated
+from maximum HP.
 
 Three carried inventory items resolve through the equal-weight `loot` router and
 may come from any loot category. They remain carried only: a carried weapon, armor,
 or shield is not equipped and cannot change generated AR. Exact duplicate loot is
 avoided through bounded retries when the random source permits it; generated gold
-is appended as before.
+is appended as before. Generated entity gear remains string-based: each line keeps
+the base item followed by its resolved rarity, material, and special property in
+that order.
 Generated talents are stored as unique localized list entries: levels 1–2 receive
 one talent, levels 3–5 receive two, levels 6–8 receive three, and levels 9–10
 receive four.
@@ -336,7 +341,8 @@ share the character level budget, nonlinear statistic allocation,
 derived statistics, and resource formulas while using creature-specific profile
 distributions. Only explicit source references grant creature RULEs; Intelligence
 and descriptive modifiers never do. Natural armor, a separate generated armor, and
-AR-providing equipped items stack before final AR is calculated; inventory does not
+rarity-derived AR from equipped armor or shields stack before final AR is
+calculated; inventory does not
 contribute AR. Natural-armor percentages remain generation metadata and are not
 persisted separately. Status effects and modifiers remain descriptive, and
 generated gear does not alter manual encumbrance. Persistent creature modifiers come only from the

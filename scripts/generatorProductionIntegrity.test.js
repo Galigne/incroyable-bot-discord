@@ -119,6 +119,9 @@ test('production category routers are minimal and traverse internal child genera
 		['modifier', [
 			'modifier_character',
 			'modifier_creature',
+			'modifier_rarity',
+			'modifier_material',
+			'modifier_loot',
 			'modifier_site_all',
 			'modifier_site_building',
 			'modifier_site_interiors',
@@ -332,15 +335,15 @@ test('creature catalogs include generic archetypes and intentional statistical p
 test('loot replaces every inventory entry across heterogeneous additional fields', () => {
 	assert.equal(generatorCatalog.getGenerator('inventory'), undefined);
 	for (const [generatorId, expectedCount, requiredFields] of [
-		['weapons', 53, ['description']],
-		['shields', 16, ['rarity', 'description', 'ar_percentage']],
-		['armors', 15, ['type', 'rarity', 'description', 'constitution_requirement', 'ar_percentage']],
-		['supplies', 32, ['description']],
+		['weapons', 47, ['description']],
+		['shields', 14, ['description']],
+		['armors', 16, ['type', 'description']],
+		['supplies', 29, ['description']],
 		['consumable', 18, ['description']],
 		['food_and_drink', 18, ['description']],
 		['valuables', 15, ['description']],
 		['material', 35, ['description']],
-		['curio', 22, ['description']],
+		['curio', 16, ['description']],
 	]) {
 		const generator = generatorCatalog.getGenerator(generatorId);
 		assert.equal(generator.entries.length, expectedCount, generatorId);
@@ -348,30 +351,196 @@ test('loot replaces every inventory entry across heterogeneous additional fields
 	}
 });
 
-test('shield and affliction fields are public, localized, and mechanically stable', () => {
-	const shieldExpectations = new Map([
-		['common', { ar: 5, weights: [8, 8, 8] }],
-		['uncommon', { ar: 10, weights: [5, 5, 5] }],
-		['rare', { ar: 15, weights: [3, 3, 3, 1] }],
-		['epic', { ar: 20, weights: [2, 2, 2] }],
-		['legendary', { ar: 25, weights: [1, 1, 1] }],
-	]);
-	const shields = generatorCatalog.getGenerator('shields', 'en');
-	assert.deepEqual(shields.entrySchema, {
-		required: ['rarity', 'description', 'ar_percentage'],
-	});
-	for (const [rarity, expected] of shieldExpectations) {
-		const entries = shields.entries.filter(entry => entry.fields.rarity === rarity);
-		assert.deepEqual(entries.map(entry => entry.weight), expected.weights);
-		assert.ok(entries.every(entry => entry.fields.ar_percentage === expected.ar));
+test('loot identities use the configured independent modifier families and weights', () => {
+	const equipmentModifiers = {
+		modifier_rarity: 100,
+		modifier_material: 15,
+		modifier_loot: 10,
+	};
+	for (const generatorId of ['weapons', 'shields', 'armors']) {
+		assert.deepEqual(
+			generatorCatalog.getGenerator(generatorId, 'en').modifiers,
+			equipmentModifiers,
+		);
 	}
-	const frenchShields = generatorCatalog.getGenerator('shields', 'fr');
-	assert.deepEqual(
-		frenchShields.entries.map(entry => entry.fields.ar_percentage),
-		shields.entries.map(entry => entry.fields.ar_percentage),
-	);
-	assert.notEqual(frenchShields.entries[0].fields.rarity, shields.entries[0].fields.rarity);
+	for (const [generatorId, percentage] of [
+		['supplies', 10],
+		['consumable', 10],
+		['food_and_drink', 5],
+		['valuables', 10],
+		['curio', 10],
+	]) {
+		assert.deepEqual(generatorCatalog.getGenerator(generatorId, 'en').modifiers, {
+			modifier_loot: percentage,
+		});
+	}
+	assert.equal(generatorCatalog.getGenerator('material', 'en').modifiers, undefined);
+	for (const locale of ['en', 'fr']) {
+		for (const generatorId of ['weapons', 'shields', 'supplies', 'curio']) {
+			assert.ok(generatorCatalog.getGenerator(generatorId, locale).entries.every(entry => (
+				!entry.id.startsWith('runed_')
+			)));
+		}
+	}
+	const weaponIds = new Set(generatorCatalog.getGenerator('weapons', 'en').entries
+		.map(entry => entry.id));
+	assert.ok(['maul', 'chakram', 'longbow'].every(id => weaponIds.has(id)));
+	assert.ok([
+		'meteor_iron_maul',
+		'moon_silver_chakram',
+		'bone_longbow',
+	].every(id => !weaponIds.has(id)));
 
+	const rarity = generatorCatalog.getGenerator('modifier_rarity', 'en');
+	assert.deepEqual(
+		rarity.entries.map(entry => [entry.id, entry.weight]),
+		[
+			['common', 8],
+			['uncommon', 5],
+			['rare', 3],
+			['epic', 2],
+			['legendary', 1],
+		],
+	);
+	const material = generatorCatalog.getGenerator('modifier_material', 'en');
+	assert.equal(material.entries.length, 1);
+	assert.match(material.entries[0].name, /\{\{ material\.name \}\}/);
+
+	const loot = generatorCatalog.getGenerator('modifier_loot', 'en');
+	assert.deepEqual(
+		loot.entries.map(entry => [entry.id, entry.name, entry.weight]),
+		[
+			['runed', 'Runed', 6],
+			['damaged', 'Damaged', 6],
+			['ancient', 'Ancient', 6],
+			['cursed_affliction', 'Cursed', 3],
+			['cursed_status_effect', 'Cursed', 3],
+			['possessed_animal', 'Possessed', 2],
+			['possessed_companion', 'Possessed', 2],
+			['possessed_monster', 'Possessed', 2],
+			['faction_made', 'Faction-made', 6],
+		],
+	);
+	const referencesByEntry = new Map([
+		['runed', '{{ rules.name }}'],
+		['cursed_affliction', '{{ affliction.name }}'],
+		['cursed_status_effect', '{{ status_effect.name }}'],
+		['possessed_animal', '{{ animal.name }}'],
+		['possessed_companion', '{{ companion.name }}'],
+		['possessed_monster', '{{ monster.name }}'],
+		['faction_made', '{{ faction.name }}'],
+	]);
+	for (const [entryId, reference] of referencesByEntry) {
+		assert.ok(loot.entries.find(entry => entry.id === entryId)
+			.fields.description.includes(reference));
+	}
+	const conceptWeights = loot.entries.reduce((totals, entry) => {
+		const concept = entry.id.startsWith('cursed_')
+			? 'cursed'
+			: entry.id.startsWith('possessed_') ? 'possessed' : entry.id;
+		totals[concept] = (totals[concept] ?? 0) + entry.weight;
+		return totals;
+	}, {});
+	assert.deepEqual(conceptWeights, {
+		runed: 6,
+		damaged: 6,
+		ancient: 6,
+		cursed: 6,
+		possessed: 6,
+		faction_made: 6,
+	});
+});
+
+test('direct loot generation keeps modifiers separate from the base result', () => {
+	const result = generatorResolver.generate(
+		'loot:weapons:short_sword',
+		'en',
+		{ random: () => 0 },
+	);
+	assert.deepEqual(Object.keys(result.displayFields), ['name', 'description']);
+	assert.doesNotMatch(Object.values(result.displayFields).join(' '), /Common|Made of|Runed/);
+	assert.deepEqual(result.modifiers.map(modifier => modifier.generatorId), [
+		'modifier_rarity',
+		'modifier_material',
+		'modifier_loot',
+	]);
+	assert.deepEqual(
+		generatorResolver.generate(
+			'loot:weapons:short_sword.description',
+			'en',
+			{ random: () => 0 },
+		).modifiers,
+		[],
+	);
+	assert.equal(
+		generatorResolver.generate('loot:supplies:coil_of_rope', 'en', {
+			random: () => 0.099999,
+		}).modifiers.length,
+		1,
+	);
+	assert.equal(
+		generatorResolver.generate('loot:supplies:coil_of_rope', 'en', {
+			random: () => 0.1,
+		}).modifiers.length,
+		0,
+	);
+	assert.equal(
+		generatorResolver.generate('loot:food_and_drink:three_travel_rations', 'en', {
+			random: () => 0.049999,
+		}).modifiers.length,
+		1,
+	);
+	assert.equal(
+		generatorResolver.generate('loot:food_and_drink:three_travel_rations', 'en', {
+			random: () => 0.05,
+		}).modifiers.length,
+		0,
+	);
+});
+
+test('armor and shield forms keep identity separate from mechanical rarity', () => {
+	const armors = generatorCatalog.getGenerator('armors', 'en');
+	assert.deepEqual(armors.entrySchema.required, ['type', 'description']);
+	assert.deepEqual(
+		Object.fromEntries(['light', 'medium', 'heavy'].map(type => [
+			type,
+			armors.entries.filter(entry => entry.fields.type === type).length,
+		])),
+		{ light: 5, medium: 6, heavy: 5 },
+	);
+	const shields = generatorCatalog.getGenerator('shields', 'en');
+	assert.deepEqual(shields.entrySchema.required, ['description']);
+	assert.deepEqual(new Set(shields.entries.map(entry => entry.id)), new Set([
+		'buckler',
+		'round_shield',
+		'kite_shield',
+		'heater_shield',
+		'targe',
+		'tower_shield',
+		'pavise',
+		'dueling_shield',
+		'folding_shield',
+		'mirrored_shield',
+		'guardian_shield',
+		'stormward_shield',
+		'eclipse_shield',
+		'oathkeeper_shield',
+	]));
+	for (const locale of ['en', 'fr']) {
+		assert.ok(generatorCatalog.getGenerator('armors', locale).entries.every(entry => (
+			['light', 'medium', 'heavy'].includes(entry.fields.type)
+			&& !Object.hasOwn(entry.fields, 'rarity')
+			&& !Object.hasOwn(entry.fields, 'constitution_requirement')
+			&& !Object.hasOwn(entry.fields, 'ar_percentage')
+		)));
+		assert.ok(generatorCatalog.getGenerator('shields', locale).entries.every(entry => (
+			!Object.hasOwn(entry.fields, 'rarity')
+			&& !Object.hasOwn(entry.fields, 'ar_percentage')
+		)));
+	}
+});
+
+test('affliction fields are localized while their classifications remain data', () => {
 	const affliction = generatorCatalog.getGenerator('affliction', 'en');
 	assert.deepEqual(affliction.entrySchema, {
 		required: ['type', 'description'],

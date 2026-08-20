@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 4,
+  "id": "modifier_rarity",
+  "visibility": "internal",
+  "name": "Rarity modifiers",
+  "description": "Independent item rarity",
+  "entrySchema": {
+    "required": []
+  },
+  "entries": [
+    {
+      "id": "common",
+      "name": "Common",
+      "weight": 8
+    },
+    {
+      "id": "uncommon",
+      "name": "Uncommon",
+      "weight": 5
+    },
+    {
+      "id": "rare",
+      "name": "Rare",
+      "weight": 3
+    },
+    {
+      "id": "epic",
+      "name": "Epic",
+      "weight": 2
+    },
+    {
+      "id": "legendary",
+      "name": "Legendary",
+      "weight": 1
+    }
+  ]
+}

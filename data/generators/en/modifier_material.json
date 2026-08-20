@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 4,
+  "id": "modifier_material",
+  "visibility": "internal",
+  "name": "Material modifiers",
+  "description": "Independent item materials",
+  "entrySchema": {
+    "required": []
+  },
+  "entries": [
+    {
+      "id": "made_of_material",
+      "name": "Made of {{ material.name }}"
+    }
+  ]
+}

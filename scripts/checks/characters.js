@@ -2,6 +2,11 @@ const {
 	createCharacterFieldEmbed,
 	createCharacterSummaryEmbed,
 } = require('../../util/characterRenderer');
+const generatorResolver = require('../../services/generatorResolver');
+const {
+	getResolvedLootArmorPercentage,
+} = require('../../services/lootGeneration');
+const { canEquipArmor } = require('../../services/mechanics/armor');
 
 module.exports = function createCharacterChecks(context) {
 	const {
@@ -268,7 +273,22 @@ module.exports = function createCharacterChecks(context) {
 				return seed / 4_294_967_296;
 			};
 			const character = new Character('D.Robert', 'dm');
-			populateRandomCharacter(character, { level: 10, random });
+			let generatedArmorPercentage = 0;
+			const resolver = {
+				...generatorResolver,
+				resolveReference(reference, locale, options) {
+					const result = generatorResolver.resolveReference(
+						reference,
+						locale,
+						options,
+					);
+					if (/^root\.character\.(?:armor|equipment)/.test(options.path)) {
+						generatedArmorPercentage += getResolvedLootArmorPercentage(result);
+					}
+					return result;
+				},
+			};
+			populateRandomCharacter(character, { level: 10, random, resolver });
 			const generatedRace = generatorCatalog.getGenerator('race').entries
 				.find(entry => entry.name === character.race.name);
 
@@ -357,17 +377,12 @@ module.exports = function createCharacterChecks(context) {
 					isShield: Boolean(shield),
 				};
 			});
-			const armorPercentage = Number(armor?.fields.ar_percentage)
-				+ mainEquipment.reduce((total, item) => (
-					item.isShield
-						? total + Number(item.entry?.fields.ar_percentage)
-						: total
-				), 0);
 			if (
 				!armor
 				|| mainEquipment.some(item => !item.entry)
-				|| Number(armor.fields.constitution_requirement) > character.statistics.constitution
-				|| character.resources.ar.max !== Math.round(expectedHp * armorPercentage / 100)
+				|| !canEquipArmor(character.statistics.constitution, armor.fields.type)
+				|| character.resources.ar.max
+					!== Math.round(expectedHp * generatedArmorPercentage / 100)
 				|| character.resources.ar.current !== character.resources.ar.max
 				|| character.gear.equipment.length < 2
 				|| character.gear.equipment.length > 3

@@ -140,10 +140,12 @@ selects one weighted entry and resolves its inline references and own modifier
 relationships through the same stack. The completed modifier result is appended to
 the result's `modifiers` array; it never merges into the base payload.
 
-This mechanism is descriptive only. It does not interpret mechanical-looking fields
-or alter statistics, resources, armor, RULEs, traits, status, gear, entity type, or
-persistence. Site generators use these relationships for their own configured
-modifier sources.
+Ordinary modifier prose is descriptive only. It does not alter statistics,
+resources, RULEs, traits, status, entity type, or persistence. The deliberate
+exception is loot rarity: armor and shield mechanics read the stable entry ID from
+`modifier_rarity` before entity gear is flattened. They never compare localized
+rarity text. Site generators use modifier relationships only for descriptive
+sources.
 
 Persistent entity generation uses separate internal pools:
 
@@ -159,6 +161,14 @@ from `status_effect` and stored separately from persistent modifiers.
 Users access the same useful pools through fixed entries in the public `modifier`
 router. This produces a standalone modifier result; `/gen` has no
 special option that applies or forces it on another result.
+
+Loot identity, rarity, material, and special properties remain separate throughout
+resolution. Equipment rolls rarity, then optional material, then an optional merged
+loot-property pool; other loot categories apply only their configured loot-property
+chance. Direct `/gen` keeps those completed modifier results separate from the base
+result. Character and creature generation calculate armor from the structured base
+type and stable rarity ID, then persist one readable string containing the base item
+followed by rarity, material, and loot modifiers.
 
 ## Shared statistical generation
 
@@ -214,14 +224,14 @@ The saved background contains `archetype` and `physicalDescription`; editable
 `backstory` and `goals` start empty. A generated character receives one compatible
 armor and one or two independent main-equipment slots. Each slot selects `weapons`
 with an 80% chance or `shields` with a 20% chance; multiple equipped shields are
-allowed, and their `ar_percentage` values add to the armor percentage before the
-normal max-HP-based AR calculation. Explicit natural armor, armor, and equipped-item
-percentages stack in the same way.
+allowed. Armor type and the stable `modifier_rarity` entry determine armor AR, while
+the same stable rarity entry determines each shield's AR. These values stack with
+explicit natural armor before the normal max-HP-based AR calculation.
 
 Three carried items resolve independently through the public `loot` router's
-structural routes. The workflow consumes the child display string so varying loot
-field schemas are compatible, and it uses stable child provenance to avoid exact
-duplicates with bounded retries. Carried armor, weapons, or shields are not
+structural routes. The workflow consumes the structured child result, flattens its
+base display and modifiers into one readable line, and uses stable child provenance
+to avoid exact duplicates with bounded retries. Carried armor, weapons, or shields are not
 equipped and do not affect AR. Generated equipment and inventory never alter the
 manual encumbrance resource.
 
@@ -262,9 +272,10 @@ Creature Intelligence does not allocate RULEs; only explicit `fixedRules` metada
 does. Omitted traits, RULEs, status effects, armor, equipment, and inventory keep
 their normal empty behavior, while omitted modifiers keep the independent 25%
 creature-modifier policy. Explicit properties replace those normal categories.
-Natural armor, the separate armor reference, and AR-providing equipment stack;
-inventory never contributes AR. Status effects and modifiers remain descriptive,
-and generation never derives manual encumbrance. Trait rules text is likewise
+Natural armor, the separate armor reference, and rarity-derived AR from equipped
+armor or shields stack; inventory never contributes AR. Resolved loot modifiers are
+flattened into each gear line, while entity status effects and creature modifiers
+remain descriptive. Generation never derives manual encumbrance. Trait rules text is likewise
 non-executable and never alters statistics, resources, armor, status, RULEs, or
 gear.
 

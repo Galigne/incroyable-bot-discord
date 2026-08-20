@@ -30,17 +30,17 @@ test('shared generation metadata resolution replaces common categories for both 
 				}],
 				armor: {
 					generator: 'armors',
-					entry: 'common_light_armor',
+					entry: 'padded_armor',
 					select: 'fields',
 				},
 				equipment: [{
 					generator: 'shields',
-					entry: 'common_buckler',
+					entry: 'buckler',
 					select: 'display',
 				}],
 				inventory: [{
 					generator: 'shields',
-					entry: 'wooden_shield',
+					entry: 'round_shield',
 					select: 'fields',
 				}],
 			},
@@ -67,7 +67,14 @@ test('shared generation metadata resolution replaces common categories for both 
 		assert.equal(resolved.modifiers.length, 1);
 		assert.equal(resolved.gear.equipment.length, 1);
 		assert.equal(resolved.gear.inventory.length, 1);
-		assert.ok(resolved.armorPercentage > resolved.naturalArmorPercentage);
+		assert.equal(resolved.armorPercentage, 22);
+		for (const item of [
+			resolved.gear.armor,
+			...resolved.gear.equipment,
+			...resolved.gear.inventory,
+		]) {
+			assert.match(item, / — Common — Made of [^—]+ — Runed — /);
+		}
 	}
 });
 

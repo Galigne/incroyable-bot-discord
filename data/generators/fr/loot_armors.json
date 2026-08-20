@@ -3,192 +3,142 @@
   "id": "armors",
   "visibility": "internal",
   "name": "Armures",
-  "description": "Armures de chaque type et de chaque rareté",
+  "description": "Formes d’armure concrètes dont la rareté et le matériau sont indépendants",
   "entrySchema": {
-    "required": [
-      "type",
-      "rarity",
-      "description",
-      "constitution_requirement",
-      "ar_percentage"
-    ]
+    "required": ["type", "description"]
+  },
+  "modifiers": {
+    "modifier_rarity": 100,
+    "modifier_material": 15,
+    "modifier_loot": 10
   },
   "entries": [
     {
-      "id": "common_light_armor",
-      "name": "Armure légère commune",
-      "weight": 8,
+      "id": "padded_armor",
+      "name": "Armure matelassée",
       "fields": {
-        "type": "légère",
-        "rarity": "commune",
-        "description": "Vêtements ordinaires ou rembourrage léger qui préservent la mobilité mais n’offrent presque aucun PR.",
-        "constitution_requirement": 0,
-        "ar_percentage": 5
+        "type": "light",
+        "description": "Des couches de tissu rembourré amortissent les coups sans entraver les mouvements."
       }
     },
     {
-      "id": "uncommon_light_armor",
-      "name": "Armure légère peu commune",
-      "weight": 5,
+      "id": "gambeson",
+      "name": "Gambison",
       "fields": {
-        "type": "légère",
-        "rarity": "peu commune",
-        "description": "Vêtements renforcés bien ajustés offrant une protection modeste.",
-        "constitution_requirement": 0,
-        "ar_percentage": 15
+        "type": "light",
+        "description": "Un épais vêtement matelassé et ajusté, porté seul ou sous une protection rigide."
       }
     },
     {
-      "id": "rare_light_armor",
-      "name": "Armure légère rare",
-      "weight": 3,
+      "id": "leather_armor",
+      "name": "Armure de cuir",
       "fields": {
-        "type": "légère",
-        "rarity": "rare",
-        "description": "Armure souple de qualité supérieure, confectionnée dans un matériau exceptionnellement résistant.",
-        "constitution_requirement": 0,
-        "ar_percentage": 25
+        "type": "light",
+        "description": "Une protection souple faite de pièces ajustées, adaptée au voyage et au combat mobile."
       }
     },
     {
-      "id": "epic_light_armor",
-      "name": "Armure légère épique",
-      "weight": 2,
+      "id": "reinforced_leather_armor",
+      "name": "Armure de cuir renforcée",
       "fields": {
-        "type": "légère",
-        "rarity": "épique",
-        "description": "Protection remarquable et presque sans poids, réalisée grâce à des techniques rares.",
-        "constitution_requirement": 0,
-        "ar_percentage": 35
+        "type": "light",
+        "description": "Une armure souple consolidée aux endroits vulnérables sans devenir encombrante."
       }
     },
     {
-      "id": "legendary_light_armor",
-      "name": "Armure légère légendaire",
+      "id": "duelist_coat",
+      "name": "Manteau de duelliste",
       "fields": {
-        "type": "légère",
-        "rarity": "légendaire",
-        "description": "Une seconde peau unique offrant une protection exceptionnelle sans restreindre le mouvement.",
-        "constitution_requirement": 0,
-        "ar_percentage": 45
+        "type": "light",
+        "description": "Un manteau protecteur cintré, conçu pour les déplacements rapides et les gestes précis."
       }
     },
     {
-      "id": "common_medium_armor",
-      "name": "Armure intermédiaire commune",
-      "weight": 8,
+      "id": "chain_shirt",
+      "name": "Chemise de mailles",
       "fields": {
-        "type": "intermédiaire",
-        "rarity": "commune",
-        "description": "Protection standard en cuir renforcé, en écailles ou en cotte de mailles partielle.",
-        "constitution_requirement": 12,
-        "ar_percentage": 25
+        "type": "medium",
+        "description": "Une courte cotte de mailles protège le torse sans peser autant qu’un long haubert."
       }
     },
     {
-      "id": "uncommon_medium_armor",
-      "name": "Armure intermédiaire peu commune",
-      "weight": 5,
+      "id": "scale_armor",
+      "name": "Armure d’écailles",
       "fields": {
-        "type": "intermédiaire",
-        "rarity": "peu commune",
-        "description": "Armure professionnelle fiable offrant un bon équilibre entre protection et mobilité.",
-        "constitution_requirement": 12,
-        "ar_percentage": 35
+        "type": "medium",
+        "description": "Des écailles superposées couvrent un support souple et dévient les coups obliques."
       }
     },
     {
-      "id": "rare_medium_armor",
-      "name": "Armure intermédiaire rare",
-      "weight": 3,
+      "id": "brigandine",
+      "name": "Brigandine",
       "fields": {
-        "type": "intermédiaire",
-        "rarity": "rare",
-        "description": "Armure multicouche de maître offrant une excellente couverture.",
-        "constitution_requirement": 12,
-        "ar_percentage": 45
+        "type": "medium",
+        "description": "De petites plaques superposées sont rivetées à l’intérieur d’un vêtement robuste et ajusté."
       }
     },
     {
-      "id": "epic_medium_armor",
-      "name": "Armure intermédiaire épique",
-      "weight": 2,
+      "id": "lamellar_armor",
+      "name": "Armure lamellaire",
       "fields": {
-        "type": "intermédiaire",
-        "rarity": "épique",
-        "description": "Armure exceptionnelle renforcée par des matériaux ou runes magiques.",
-        "constitution_requirement": 12,
-        "ar_percentage": 55
+        "type": "medium",
+        "description": "Des rangées de petites plaques rigides sont lacées ensemble pour former une protection résistante."
       }
     },
     {
-      "id": "legendary_medium_armor",
-      "name": "Armure intermédiaire légendaire",
+      "id": "breastplate",
+      "name": "Cuirasse",
       "fields": {
-        "type": "intermédiaire",
-        "rarity": "légendaire",
-        "description": "Armure renommée offrant une protection extraordinaire sans devenir encombrante.",
-        "constitution_requirement": 12,
-        "ar_percentage": 65
+        "type": "medium",
+        "description": "Une cuirasse rigide et profilée protège le torse tout en laissant les membres assez libres."
       }
     },
     {
-      "id": "common_heavy_armor",
-      "name": "Armure lourde commune",
-      "weight": 8,
+      "id": "coat_of_plates",
+      "name": "Cotte de plates",
       "fields": {
-        "type": "lourde",
-        "rarity": "commune",
-        "description": "Une armure de plates complète et basique, ou une protection massive équivalente.",
-        "constitution_requirement": 14,
-        "ar_percentage": 45
+        "type": "medium",
+        "description": "De larges plaques dissimulées doublent un lourd vêtement pour concilier protection et mobilité."
       }
     },
     {
-      "id": "uncommon_heavy_armor",
-      "name": "Armure lourde peu commune",
-      "weight": 5,
+      "id": "chain_mail",
+      "name": "Cotte de mailles",
       "fields": {
-        "type": "lourde",
-        "rarity": "peu commune",
-        "description": "Armure lourde soigneusement ajustée, dotée d’articulations renforcées.",
-        "constitution_requirement": 14,
-        "ar_percentage": 55
+        "type": "heavy",
+        "description": "Une longue armure dense composée d’anneaux entrelacés offre une protection étendue."
       }
     },
     {
-      "id": "rare_heavy_armor",
-      "name": "Armure lourde rare",
-      "weight": 3,
+      "id": "splint_armor",
+      "name": "Armure à éclisses",
       "fields": {
-        "type": "lourde",
-        "rarity": "rare",
-        "description": "Armure lourde de maître forgée dans un métal supérieur ou constituée de plaques de monstre.",
-        "constitution_requirement": 14,
-        "ar_percentage": 65
+        "type": "heavy",
+        "description": "De longues bandes rigides renforcent un support épais sur le corps et les membres."
       }
     },
     {
-      "id": "epic_heavy_armor",
-      "name": "Armure lourde épique",
-      "weight": 2,
+      "id": "plate_armor",
+      "name": "Armure de plates",
       "fields": {
-        "type": "lourde",
-        "rarity": "épique",
-        "description": "Formidable armure runique capable d’encaisser des dégâts extraordinaires.",
-        "constitution_requirement": 14,
-        "ar_percentage": 75
+        "type": "heavy",
+        "description": "Des plaques articulées protègent presque tout le corps grâce à des jointures soigneusement ajustées."
       }
     },
     {
-      "id": "legendary_heavy_armor",
-      "name": "Armure lourde légendaire",
+      "id": "full_plate",
+      "name": "Harnois complet",
       "fields": {
-        "type": "lourde",
-        "rarity": "légendaire",
-        "description": "Armure unique semblable à une forteresse, célébrée dans les chants et les chroniques militaires.",
-        "constitution_requirement": 14,
-        "ar_percentage": 85
+        "type": "heavy",
+        "description": "Une armure articulée complète enveloppe son porteur de la tête aux pieds."
+      }
+    },
+    {
+      "id": "siege_armor",
+      "name": "Armure de siège",
+      "fields": {
+        "type": "heavy",
+        "description": "Une protection massive et renforcée est conçue pour résister aux assauts les plus violents."
       }
     }
   ]

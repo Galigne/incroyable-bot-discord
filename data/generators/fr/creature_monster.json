@@ -127,7 +127,7 @@
         ],
         "armor": {
           "generator": "armors",
-          "entry": "common_heavy_armor",
+          "entry": "chain_mail",
           "select": "fields"
         }
       }
@@ -294,7 +294,7 @@
         "equipment": [
           {
             "generator": "weapons",
-            "entry": "meteor_iron_maul",
+            "entry": "maul",
             "select": "fields"
           }
         ],
@@ -443,13 +443,13 @@
         "equipment": [
           {
             "generator": "weapons",
-            "entry": "crystal_scepter",
+            "entry": "arcane_scepter",
             "select": "fields"
           }
         ],
         "armor": {
           "generator": "armors",
-          "entry": "rare_medium_armor",
+          "entry": "breastplate",
           "select": "fields"
         }
       }

@@ -7,6 +7,11 @@
   "entrySchema": {
     "required": ["description"]
   },
+  "modifiers": {
+    "modifier_rarity": 100,
+    "modifier_material": 15,
+    "modifier_loot": 10
+  },
   "entries": [
     {
       "id": "short_sword",
@@ -121,10 +126,10 @@
       }
     },
     {
-      "id": "runesmiths_hammer",
-      "name": "Runesmith's hammer",
+      "id": "smiths_hammer",
+      "name": "Smith's hammer",
       "fields": {
-        "description": "A reinforced crafting hammer balanced for combat and runic work."
+        "description": "A reinforced crafting hammer balanced for combat and precise metalwork."
       }
     },
     {
@@ -135,31 +140,24 @@
       }
     },
     {
-      "id": "crystal_scepter",
-      "name": "Crystal scepter",
+      "id": "arcane_scepter",
+      "name": "Arcane scepter",
       "fields": {
         "description": "A durable arcane implement that also functions as a light mace."
       }
     },
     {
-      "id": "meteor_iron_maul",
-      "name": "Meteor-iron maul",
+      "id": "maul",
+      "name": "Maul",
       "fields": {
         "description": "An exceptionally heavy two-handed hammer with devastating impact."
       }
     },
     {
-      "id": "moon_silver_chakram",
-      "name": "Moon-silver chakram",
+      "id": "chakram",
+      "name": "Chakram",
       "fields": {
-        "description": "A circular throwing blade that shines under moonlight."
-      }
-    },
-    {
-      "id": "bone_longbow",
-      "name": "Bone longbow",
-      "fields": {
-        "description": "A powerful bow assembled from the remains of a giant beast."
+        "description": "A circular throwing blade balanced to cut along a curving flight."
       }
     },
     {
@@ -361,41 +359,6 @@
       "weight": 2,
       "fields": {
         "description": "A quiet tube that launches small darts accurately over short distances."
-      }
-    },
-    {
-      "id": "runed_sword",
-      "name": "Runed sword",
-      "fields": {
-        "description": "A sword bearing a rune of {{ rules.name }}; its precise function is left to the GM."
-      }
-    },
-    {
-      "id": "runed_dagger",
-      "name": "Runed dagger",
-      "fields": {
-        "description": "A dagger bearing a rune of {{ rules.name }}; its precise function is left to the GM."
-      }
-    },
-    {
-      "id": "runed_spear",
-      "name": "Runed spear",
-      "fields": {
-        "description": "A spear bearing a rune of {{ rules.name }}; its precise function is left to the GM."
-      }
-    },
-    {
-      "id": "runed_bow",
-      "name": "Runed bow",
-      "fields": {
-        "description": "A bow bearing a rune of {{ rules.name }}; its precise function is left to the GM."
-      }
-    },
-    {
-      "id": "runed_hammer",
-      "name": "Runed hammer",
-      "fields": {
-        "description": "A hammer bearing a rune of {{ rules.name }}; its precise function is left to the GM."
       }
     }
   ]

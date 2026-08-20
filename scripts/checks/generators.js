@@ -223,6 +223,9 @@ function checkCategoryRouters(errors, generatorCatalog) {
 		['modifier', [
 			'modifier_character',
 			'modifier_creature',
+			'modifier_rarity',
+			'modifier_material',
+			'modifier_loot',
 			'modifier_site_all',
 			'modifier_site_building',
 			'modifier_site_interiors',
@@ -348,40 +351,87 @@ function checkStructuredGenerators(errors, generatorCatalog) {
 		}
 	}
 
-	const armors = generatorCatalog.getGenerator('armors')?.entries ?? [];
-	const armorCombinations = new Set(armors.map(
-		entry => `${entry.fields.type}:${entry.fields.rarity}`,
-	));
-	const expectedArmorCombinations = ['light', 'medium', 'heavy']
-		.flatMap(type => ['common', 'uncommon', 'rare', 'epic', 'legendary']
-			.map(rarity => `${type}:${rarity}`));
+	const armorGenerator = generatorCatalog.getGenerator('armors');
+	const armors = armorGenerator?.entries ?? [];
 	if (
-		armors.length !== 15
-		|| expectedArmorCombinations.some(value => !armorCombinations.has(value))
+		JSON.stringify(armorGenerator?.entrySchema.required)
+			!== JSON.stringify(['type', 'description'])
+		|| armors.length !== 16
+		|| [['light', 5], ['medium', 6], ['heavy', 5]].some(([type, count]) => (
+			armors.filter(entry => entry.fields.type === type).length !== count
+		))
+		|| armors.some(entry => (
+			Object.hasOwn(entry.fields, 'rarity')
+			|| Object.hasOwn(entry.fields, 'constitution_requirement')
+			|| Object.hasOwn(entry.fields, 'ar_percentage')
+		))
 	) {
-		errors.push('The armor generator must contain every type and rarity combination.');
+		errors.push('The armor generator must contain independent typed armor forms.');
 	}
 	const shields = generatorCatalog.getGenerator('shields');
-	const shieldRarities = {
-		common: { ar: 5, weights: [8, 8, 8] },
-		uncommon: { ar: 10, weights: [5, 5, 5] },
-		rare: { ar: 15, weights: [3, 3, 3, 1] },
-		epic: { ar: 20, weights: [2, 2, 2] },
-		legendary: { ar: 25, weights: [1, 1, 1] },
-	};
+	const requiredShieldIds = [
+		'buckler',
+		'round_shield',
+		'kite_shield',
+		'heater_shield',
+		'targe',
+		'tower_shield',
+		'pavise',
+		'dueling_shield',
+		'folding_shield',
+		'mirrored_shield',
+		'guardian_shield',
+		'stormward_shield',
+		'eclipse_shield',
+		'oathkeeper_shield',
+	];
 	if (
 		JSON.stringify(shields?.entrySchema) !== JSON.stringify({
-			required: ['rarity', 'description', 'ar_percentage'],
+			required: ['description'],
 		})
-		|| shields.entries.length !== 16
-		|| Object.entries(shieldRarities).some(([rarity, expected]) => {
-			const entries = shields.entries.filter(entry => entry.fields.rarity === rarity);
-			return JSON.stringify(entries.map(entry => entry.weight))
-				!== JSON.stringify(expected.weights)
-				|| entries.some(entry => entry.fields.ar_percentage !== expected.ar);
-		})
+		|| shields.entries.length !== requiredShieldIds.length
+		|| requiredShieldIds.some(id => !shields.entries.some(entry => entry.id === id))
+		|| shields.entries.some(entry => (
+			Object.hasOwn(entry.fields, 'rarity')
+			|| Object.hasOwn(entry.fields, 'ar_percentage')
+		))
 	) {
-		errors.push('The shield generator has invalid rarity or AR data.');
+		errors.push('The shield generator must contain independent shield forms.');
+	}
+	const equipmentModifiers = JSON.stringify({
+		modifier_rarity: 100,
+		modifier_material: 15,
+		modifier_loot: 10,
+	});
+	const rarityWeights = generatorCatalog.getGenerator('modifier_rarity')?.entries
+		.map(entry => [entry.id, entry.weight]);
+	const lootWeights = generatorCatalog.getGenerator('modifier_loot')?.entries
+		.map(entry => [entry.id, entry.weight]);
+	if (
+		['weapons', 'shields', 'armors'].some(id => (
+			JSON.stringify(generatorCatalog.getGenerator(id)?.modifiers)
+			!== equipmentModifiers
+		))
+		|| JSON.stringify(rarityWeights) !== JSON.stringify([
+			['common', 8],
+			['uncommon', 5],
+			['rare', 3],
+			['epic', 2],
+			['legendary', 1],
+		])
+		|| JSON.stringify(lootWeights) !== JSON.stringify([
+			['runed', 6],
+			['damaged', 6],
+			['ancient', 6],
+			['cursed_affliction', 3],
+			['cursed_status_effect', 3],
+			['possessed_animal', 2],
+			['possessed_companion', 2],
+			['possessed_monster', 2],
+			['faction_made', 6],
+		])
+	) {
+		errors.push('Loot modifier relationships or weights are invalid.');
 	}
 	const affliction = generatorCatalog.getGenerator('affliction');
 	if (

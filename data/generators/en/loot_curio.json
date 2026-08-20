@@ -7,6 +7,9 @@
   "entrySchema": {
     "required": ["description"]
   },
+  "modifiers": {
+    "modifier_loot": 10
+  },
   "entries": [
     {
       "id": "whispering_compass",
@@ -118,48 +121,6 @@
       "name": "Travel Chicken",
       "fields": {
         "description": "An unusually calm chicken trained to follow its carrier and signal certain creatures."
-      }
-    },
-    {
-      "id": "runed_amulet",
-      "name": "Runed amulet",
-      "fields": {
-        "description": "An amulet engraved with a rune of {{ rules.name }}; its precise function is left to the GM."
-      }
-    },
-    {
-      "id": "runed_ring",
-      "name": "Runed ring",
-      "fields": {
-        "description": "A ring engraved with a rune of {{ rules.name }}; its precise function is left to the GM."
-      }
-    },
-    {
-      "id": "runed_cloak",
-      "name": "Runed cloak",
-      "fields": {
-        "description": "A cloak embroidered with a rune of {{ rules.name }}; its precise function is left to the GM."
-      }
-    },
-    {
-      "id": "runed_boots",
-      "name": "Runed boots",
-      "fields": {
-        "description": "A pair of boots marked with a rune of {{ rules.name }}; its precise function is left to the GM."
-      }
-    },
-    {
-      "id": "runed_mirror",
-      "name": "Runed mirror",
-      "fields": {
-        "description": "A hand mirror carrying a rune of {{ rules.name }}; its precise function is left to the GM."
-      }
-    },
-    {
-      "id": "runed_key",
-      "name": "Runed key",
-      "fields": {
-        "description": "A key carrying a rune of {{ rules.name }}; its precise function is left to the GM."
       }
     }
   ]

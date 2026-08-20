@@ -1,0 +1,84 @@
+{
+  "schemaVersion": 4,
+  "id": "modifier_loot",
+  "visibility": "internal",
+  "name": "Loot modifiers",
+  "description": "Independent special properties for loot",
+  "entrySchema": {
+    "required": ["description"]
+  },
+  "entries": [
+    {
+      "id": "runed",
+      "name": "Runed",
+      "weight": 6,
+      "fields": {
+        "description": "A rune derived from {{ rules.name }} marks the item; the GM decides its exact function and strength."
+      }
+    },
+    {
+      "id": "damaged",
+      "name": "Damaged",
+      "weight": 6,
+      "fields": {
+        "description": "The item is visibly damaged; the GM decides whether that has any concrete consequences."
+      }
+    },
+    {
+      "id": "ancient",
+      "name": "Ancient",
+      "weight": 6,
+      "fields": {
+        "description": "The item comes from a distant age; the GM decides what its history means in play."
+      }
+    },
+    {
+      "id": "cursed_affliction",
+      "name": "Cursed",
+      "weight": 3,
+      "fields": {
+        "description": "The item is associated with {{ affliction.name }}; the GM decides how the curse manifests."
+      }
+    },
+    {
+      "id": "cursed_status_effect",
+      "name": "Cursed",
+      "weight": 3,
+      "fields": {
+        "description": "The item is associated with the {{ status_effect.name }} status effect; the GM decides how the curse manifests."
+      }
+    },
+    {
+      "id": "possessed_animal",
+      "name": "Possessed",
+      "weight": 2,
+      "fields": {
+        "description": "The presence of {{ animal.name }} inhabits or influences the item."
+      }
+    },
+    {
+      "id": "possessed_companion",
+      "name": "Possessed",
+      "weight": 2,
+      "fields": {
+        "description": "The presence of {{ companion.name }} inhabits or influences the item."
+      }
+    },
+    {
+      "id": "possessed_monster",
+      "name": "Possessed",
+      "weight": 2,
+      "fields": {
+        "description": "The presence of {{ monster.name }} inhabits or influences the item."
+      }
+    },
+    {
+      "id": "faction_made",
+      "name": "Faction-made",
+      "weight": 6,
+      "fields": {
+        "description": "The item was made, issued, modified, or marked by {{ faction.name }}."
+      }
+    }
+  ]
+}

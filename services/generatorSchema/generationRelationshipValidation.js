@@ -32,12 +32,17 @@ function validateGenerationRelationships(
 	}
 	if (generation.armor) {
 		const sources = validateReferenceRelationship(generation.armor, catalog, ownerId);
-		assertReferenceFields(
-			sources,
-			['name', 'description', 'ar_percentage'],
-			ownerId,
-			'armor',
-		);
+		if (sources.some(source => (
+			source.id !== 'armors'
+			|| !source.entrySchema.required.includes('type')
+			|| !source.entrySchema.required.includes('description')
+			|| source.modifiers?.modifier_rarity !== 100
+		))) {
+			throw generatorSchemaError(
+				'INVALID_GENERATION_REFERENCE_TARGET',
+				`Archetype ${ownerId} has an invalid armor reference.`,
+			);
+		}
 	}
 	for (const reference of [
 		...(generation.equipment ?? []),

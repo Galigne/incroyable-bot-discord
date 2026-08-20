@@ -7,6 +7,11 @@
   "entrySchema": {
     "required": ["description"]
   },
+  "modifiers": {
+    "modifier_rarity": 100,
+    "modifier_material": 15,
+    "modifier_loot": 10
+  },
   "entries": [
     {
       "id": "short_sword",
@@ -121,10 +126,10 @@
       }
     },
     {
-      "id": "runesmiths_hammer",
-      "name": "Marteau de maître runique",
+      "id": "smiths_hammer",
+      "name": "Marteau de forgeron",
       "fields": {
-        "description": "Un marteau d'artisan renforcé, équilibré pour le combat comme pour l'art runique."
+        "description": "Un marteau d’artisan renforcé, équilibré pour le combat comme pour le travail précis du métal."
       }
     },
     {
@@ -135,31 +140,24 @@
       }
     },
     {
-      "id": "crystal_scepter",
-      "name": "Sceptre de cristal",
+      "id": "arcane_scepter",
+      "name": "Sceptre arcanique",
       "fields": {
         "description": "Un instrument magique robuste qui peut également servir de masse légère."
       }
     },
     {
-      "id": "meteor_iron_maul",
-      "name": "Maillet en fer météorique",
+      "id": "maul",
+      "name": "Maillet de guerre",
       "fields": {
         "description": "Un marteau à deux mains exceptionnellement lourd, dont les impacts sont dévastateurs."
       }
     },
     {
-      "id": "moon_silver_chakram",
-      "name": "Chakram en argent lunaire",
+      "id": "chakram",
+      "name": "Chakram",
       "fields": {
-        "description": "Une lame de jet circulaire qui brille sous la lumière de la lune."
-      }
-    },
-    {
-      "id": "bone_longbow",
-      "name": "Arc long en os",
-      "fields": {
-        "description": "Un arc puissant assemblé à partir des ossements d'une bête gigantesque."
+        "description": "Une lame de jet circulaire équilibrée pour trancher au cours d’une trajectoire courbe."
       }
     },
     {
@@ -361,41 +359,6 @@
       "weight": 2,
       "fields": {
         "description": "Un tube silencieux qui propulse avec précision de petites fléchettes à courte distance."
-      }
-    },
-    {
-      "id": "runed_sword",
-      "name": "Épée runique",
-      "fields": {
-        "description": "Une épée portant une rune associée à la {{ rules.name }} ; le MJ en détermine la fonction précise."
-      }
-    },
-    {
-      "id": "runed_dagger",
-      "name": "Dague runique",
-      "fields": {
-        "description": "Une dague portant une rune associée à la {{ rules.name }} ; le MJ en détermine la fonction précise."
-      }
-    },
-    {
-      "id": "runed_spear",
-      "name": "Lance runique",
-      "fields": {
-        "description": "Une lance portant une rune associée à la {{ rules.name }} ; le MJ en détermine la fonction précise."
-      }
-    },
-    {
-      "id": "runed_bow",
-      "name": "Arc runique",
-      "fields": {
-        "description": "Un arc portant une rune associée à la {{ rules.name }} ; le MJ en détermine la fonction précise."
-      }
-    },
-    {
-      "id": "runed_hammer",
-      "name": "Marteau runique",
-      "fields": {
-        "description": "Un marteau portant une rune associée à la {{ rules.name }} ; le MJ en détermine la fonction précise."
       }
     }
   ]

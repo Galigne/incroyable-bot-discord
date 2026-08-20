@@ -1,3 +1,10 @@
+const {
+	formatResolvedLootItem,
+	getResolvedBaseSelection,
+	getResolvedLootArmorPercentage,
+	getResolvedLootProvenance,
+} = require('./lootGeneration');
+
 function resolveGenerationTemplates(
 	templates,
 	{ locale, path, random, resolver },
@@ -86,9 +93,9 @@ function resolveGearReferences(
 			resolver,
 			`${path}.${index}`,
 		);
-		provenance.push(...resolved.provenance);
-		armorPercentage += getArmorPercentage(resolved.fields ?? resolved.value);
-		return formatReferenceValue(resolved.value, createError);
+		provenance.push(...getResolvedLootProvenance(resolved));
+		armorPercentage += getResolvedLootArmorPercentage(resolved);
+		return formatReferenceValue(resolved, createError);
 	});
 	return { armorPercentage, provenance, values };
 }
@@ -104,20 +111,31 @@ function resolveArmorReference(
 		resolver,
 		path,
 	);
-	const armorFields = resolved.fields ?? resolved.value;
-	const armorPercentage = getArmorPercentage(armorFields);
-	if (!Number.isFinite(armorFields?.ar_percentage)) {
+	const selection = getResolvedBaseSelection(resolved);
+	if (selection.generatorId !== 'armors') {
 		throw createGenerationError(
 			createError,
-			'Generation requires numeric ar_percentage.',
+			'Generation armor must resolve from the armor generator.',
 			'errors.generatorFieldMissing',
-			{ field: 'ar_percentage' },
+			{ field: 'armor' },
+		);
+	}
+	let armorPercentage;
+	try {
+		armorPercentage = getResolvedLootArmorPercentage(resolved);
+	}
+	catch {
+		throw createGenerationError(
+			createError,
+			'Generation armor requires a stable type and rarity modifier.',
+			'errors.generatorFieldMissing',
+			{ field: 'modifier_rarity' },
 		);
 	}
 	return {
 		armorPercentage,
-		provenance: resolved.provenance,
-		value: formatReferenceValue(resolved.value, createError),
+		provenance: getResolvedLootProvenance(resolved),
+		value: formatReferenceValue(resolved, createError),
 	};
 }
 
@@ -125,16 +143,18 @@ function resolveGenerationReference(reference, locale, random, resolver, path) {
 	return resolver.resolveReference(reference, locale, { path, random });
 }
 
-function formatReferenceValue(value, createError) {
-	if (typeof value === 'string') {
-		return value;
+function formatReferenceValue(resolved, createError) {
+	try {
+		return formatResolvedLootItem(resolved);
 	}
-	return `${requireLocalizedField(value, 'name', createError)} — `
-		+ requireLocalizedField(value, 'description', createError);
-}
-
-function getArmorPercentage(value) {
-	return Number.isFinite(value?.ar_percentage) ? value.ar_percentage : 0;
+	catch {
+		throw createGenerationError(
+			createError,
+			'Generation gear requires readable localized text.',
+			'errors.generatorTextExpected',
+			{},
+		);
+	}
 }
 
 function requireLocalizedField(fields, field, createError) {

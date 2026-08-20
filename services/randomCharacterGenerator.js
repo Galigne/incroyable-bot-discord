@@ -7,6 +7,11 @@ const {
 	getGenerationMetadata,
 	resolveGenerationMetadata,
 } = require('./generationMetadata');
+const {
+	resolveArmorReference,
+	resolveGearReferences,
+} = require('./generationReferenceResolver');
+const { formatResolvedLootItem } = require('./lootGeneration');
 const { selectWeightedEntry } = require('./weightedSelector');
 const {
 	randomInteger,
@@ -163,36 +168,49 @@ function createCharacterGenerationDefaults({ character, formatGold }) {
 				? [createDescribedRecord(pickOne('status_effect', locale, random))]
 				: [];
 		},
-		armor({ locale, random, statistics }) {
+		armor({ locale, random, resolver, statistics }) {
 			const armor = pickOne(
 				'armors',
 				locale,
 				random,
 				entry => canEquipArmor(
 					statistics.constitution,
-					getField(entry, 'constitution_requirement'),
+					getField(entry, 'type'),
 				),
 			);
-			return {
-				armorPercentage: Number(getField(armor, 'ar_percentage')),
-				value: formatNamedEntry(armor),
-			};
+			return resolveArmorReference({
+				generator: 'armors',
+				entry: armor.id,
+				select: 'fields',
+			}, {
+				createError: generationError,
+				locale,
+				path: 'root.character.armor',
+				random,
+				resolver,
+			});
 		},
-		equipment({ locale, random }) {
+		equipment({ locale, random, resolver }) {
 			const mainEquipmentCount = randomInteger(1, 2, random);
 			const mainEquipment = pickMainEquipment(
 				mainEquipmentCount,
 				locale,
 				random,
 			);
-			return {
-				armorPercentage: mainEquipment.reduce((total, item) => (
-					item.generatorId === 'shields'
-						? total + Number(getField(item.entry, 'ar_percentage'))
-						: total
-				), 0),
-				values: mainEquipment.map(item => formatNamedEntry(item.entry)),
-			};
+			return resolveGearReferences(
+				mainEquipment.map(item => ({
+					generator: item.generatorId,
+					entry: item.entry.id,
+					select: 'fields',
+				})),
+				{
+					createError: generationError,
+					locale,
+					path: 'root.character.equipment',
+					random,
+					resolver,
+				},
+			);
 		},
 		inventory({ level, locale, random, resolver }) {
 			const inventory = pickCarriedLoot(
@@ -246,15 +264,6 @@ function selectMainEquipmentGenerator(random) {
 		: 'shields';
 }
 
-function calculateGeneratedArmorPercentage(armor, mainEquipment) {
-	return Number(getField(armor, 'ar_percentage'))
-		+ mainEquipment.reduce((total, item) => (
-			item.generatorId === 'shields'
-				? total + Number(getField(item.entry, 'ar_percentage'))
-				: total
-		), 0);
-}
-
 function pickCarriedLoot(count, locale, random, resolver) {
 	const selectedIdentities = new Set();
 	const selectedValues = [];
@@ -297,10 +306,11 @@ function getLootSelectionIdentity(provenance) {
 }
 
 function getResolvedDisplayValue(result) {
-	const value = result?.outputType === 'fields'
-		? Object.values(result.displayFields ?? {}).join(' \u2014 ')
-		: result?.value;
-	if (typeof value !== 'string' || !value.trim()) {
+	let value;
+	try {
+		value = formatResolvedLootItem(result);
+	}
+	catch {
 		throw generationError(
 			'Loot resolution did not produce display text.',
 			'errors.generatorTextExpected',
@@ -389,12 +399,6 @@ function getResolvedTextValue(result) {
 	return result.value;
 }
 
-function formatNamedEntry(entry) {
-	const name = getField(entry, 'name');
-	const description = getField(entry, 'description');
-	return `${name} — ${description}`;
-}
-
 function createDescribedRecord(entry) {
 	return {
 		name: getField(entry, 'name'),
@@ -415,7 +419,6 @@ module.exports = {
 	LOOT_DUPLICATE_MAX_ATTEMPTS,
 	MAIN_EQUIPMENT_WEAPON_CHANCE,
 	allocateRuleLevels,
-	calculateGeneratedArmorPercentage,
 	calculateMaxAp,
 	calculateRulePoints,
 	pickCarriedLoot,

@@ -7,6 +7,9 @@
   "entrySchema": {
     "required": ["description"]
   },
+  "modifiers": {
+    "modifier_loot": 5
+  },
   "entries": [
     {
       "id": "three_travel_rations",

@@ -73,9 +73,13 @@ Every entry has a stable lowercase snake_case `id`, a mandatory localized `name`
 and may have a positive finite `weight`; omitted weights default to `1`. Entry
 names must be concise, meaningful summaries of their concepts, suitable for
 traversal and autocomplete; never derive them by blindly truncating descriptions at
-punctuation. They must be unambiguous within their generator after ignoring case,
-accents/diacritics, repeated whitespace, and separating punctuation. Public
-generator names follow the same rule within each locale.
+punctuation. They must be unambiguous within public generators after ignoring case,
+accents/diacritics, repeated whitespace, and separating punctuation. Internal
+generators may repeat a display name when multiple weighted implementation entries
+represent one visible concept, as in the Cursed and Possessed loot modifiers.
+Those ambiguous names are not valid localized fixed-entry aliases; use stable entry
+IDs when a fixed internal variant is required. Public generator names follow the
+same rule within each locale.
 
 `/gen` derives the user-facing path alias for every generator and entry exclusively
 from that localized `name`. It lowercases the name, replaces spaces and separating
@@ -108,7 +112,7 @@ A generator with additional generated values declares them in order:
 
 ```json
 "entrySchema": {
-  "required": ["description", "rarity", "ar_percentage"]
+  "required": ["type", "description"]
 }
 ```
 
@@ -172,12 +176,28 @@ percentages:
 
 Each percentage is numeric and between `0` and `100`. When a relationship applies,
 one weighted entry from that source is resolved normally. The modifier is returned
-separately from the base result; fields that look mechanical remain
-descriptive data and never execute behavior.
+separately from the base result. Ordinary modifier prose remains descriptive. The
+one mechanical exception is item rarity: armor and shield AR use the stable entry
+ID selected from `modifier_rarity`, never its localized display text.
 
 `/gen` has no command-level modifier option. Fixed entries in the public `modifier`
-router expose the useful internal character, creature, and site modifier pools.
+router expose the useful internal character, creature, loot, rarity, material, and
+site modifier pools.
 Generating a modifier this way does not apply it to another result.
+
+Loot applies independent modifier families through each child generator's
+`modifiers` map:
+
+- `weapons`, `armors`, and `shields`: `modifier_rarity` at `100%`,
+  `modifier_material` at `15%`, then `modifier_loot` at `10%`;
+- `supplies`, `consumable`, `valuables`, and `curio`: `modifier_loot` at `10%`;
+- `food_and_drink`: `modifier_loot` at `5%`;
+- `material`: no automatic modifier.
+
+Keep that map order for readable entity gear. Direct `/gen` results continue to
+return modifiers separately. Entity generation instead flattens the base item and
+all applied modifiers into one localized string in rarity, material, then loot
+order. Do not add per-entry compatibility filters to `modifier_loot`.
 
 ## Structural traversal
 
@@ -208,7 +228,7 @@ to the same internal identities. A bare router selects and displays one category
 route, while `:category` fixes a router category and follows that route
 automatically. Consecutive `:entry` selections cross fixed router boundaries, and
 `.field` selects a field from the effective generated content. The `.generator`
-token and field keys such as `.name`, `.description`, and `.ar_percentage` remain
+token and field keys such as `.name`, `.type`, and `.description` remain
 stable English syntax:
 
 ```text
@@ -279,14 +299,16 @@ with their consumers:
   localized top-level names plus direct top-level routes to internal children. Bare
   router generation displays only the route entry; a fixed entry implicitly
   resolves the child and retains both selections in provenance. Loot
-  children declare only the additional fields each concept needs: materials use a
-  description, while equipment may also expose technical fields such as rarity or
-  armor percentage.
+  children declare only the additional fields each concept needs. Every loot item
+  has a description, armor also has the stable technical `type`, and rarity,
+  material, and special properties come from independent modifier results.
 
 `inventory` is an entity storage field, not a generator ID. Random carried items
-come through the `loot` router. The internal `shields` table exposes ordinary
-`rarity` and `ar_percentage` fields, and the public `affliction` table exposes an
-ordinary localized `type` distinguishing persistent diseases from curses.
+come through the `loot` router. Armor `type` is one of the stable values `light`,
+`medium`, or `heavy` in both locales. Constitution requirements and armor/shield AR
+percentages belong to code and are derived from that type plus the stable
+`modifier_rarity` entry ID. The public `affliction` table exposes an ordinary
+localized `type` distinguishing persistent diseases from curses.
 
 ### Character and creature generation overrides
 
@@ -339,8 +361,10 @@ omitted traits, RULEs, status effects, armor, equipment, and inventory keep thei
 normal empty behavior, omitted modifiers keep the independent creature-modifier
 policy, and omitted natural armor contributes `0%`.
 
-Natural armor, the separate armor reference, and every resolved equipped item with
-a numeric `ar_percentage` all stack before AR is calculated from maximum HP.
+Natural armor, the separate resolved armor, and every resolved equipped armor or
+shield all stack before AR is calculated from maximum HP. Resolve their structured
+rarity modifier before flattening gear text; never calculate AR from localized
+rarity labels.
 Inventory references never contribute AR. `naturalArmorPercentage` is generation
 metadata only: characters never persist it, and creature saves persist only the
 resulting final AR. Generation metadata relationships and functional EN/FR parity

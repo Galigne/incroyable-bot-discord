@@ -22,6 +22,8 @@ function createReferenceResolver({ getGenerator, resolveSelection }) {
 			requestedField,
 		);
 		return {
+			generatorId: sourceResult.generator.id,
+			entryId: entry.id,
 			value: selectResolvedOutput(resolved, reference.select),
 			outputType: resolved.outputType,
 			fields: resolved.fields,
