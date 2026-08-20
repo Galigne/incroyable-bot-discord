@@ -19,7 +19,7 @@
     {
       "id": "damaged",
       "name": "Endommagé",
-      "weight": 6,
+      "weight": 3,
       "fields": {
         "description": "L’objet est visiblement endommagé ; le MJ décide si cela entraîne des conséquences concrètes."
       }
@@ -27,7 +27,7 @@
     {
       "id": "ancient",
       "name": "Ancien",
-      "weight": 6,
+      "weight": 3,
       "fields": {
         "description": "L’objet provient d’un âge lointain ; le MJ décide de l’importance de son histoire en jeu."
       }
@@ -35,7 +35,6 @@
     {
       "id": "cursed_affliction",
       "name": "Maudit",
-      "weight": 3,
       "fields": {
         "description": "L’objet est associé à {{ affliction }} ; le MJ décide comment la malédiction se manifeste."
       }
@@ -43,7 +42,6 @@
     {
       "id": "cursed_status_effect",
       "name": "Maudit",
-      "weight": 3,
       "fields": {
         "description": "L’objet est associé à l’état {{ status_effect }} ; le MJ décide comment la malédiction se manifeste."
       }
@@ -51,7 +49,6 @@
     {
       "id": "possessed_animal",
       "name": "Possédé",
-      "weight": 2,
       "fields": {
         "description": "La présence de {{ animal.name }} habite ou influence l’objet."
       }
@@ -59,7 +56,6 @@
     {
       "id": "possessed_companion",
       "name": "Possédé",
-      "weight": 2,
       "fields": {
         "description": "La présence de {{ companion.name }} habite ou influence l’objet."
       }
@@ -67,7 +63,6 @@
     {
       "id": "possessed_monster",
       "name": "Possédé",
-      "weight": 2,
       "fields": {
         "description": "La présence de {{ monster.name }} habite ou influence l’objet."
       }
@@ -75,7 +70,7 @@
     {
       "id": "faction_made",
       "name": "Marqué par une faction",
-      "weight": 6,
+      "weight": 3,
       "fields": {
         "description": "L’objet a été fabriqué, fourni, modifié ou marqué par {{ faction.name }}."
       }
