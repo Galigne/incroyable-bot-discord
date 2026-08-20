@@ -32,10 +32,7 @@ function generateDescriptiveModifier({
 		throw new TypeError('Descriptive modifier generation requires a resolver.');
 	}
 	const resolved = resolver.resolveReference(
-		{
-			generator,
-			select: 'fields',
-		},
+		generator,
 		locale,
 		{ path, random },
 	);

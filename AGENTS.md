@@ -139,10 +139,14 @@ write real saves.
 - `services/generatorResolver.js`: resolves public roots into localized structured
   results, owns repeated entry/route/field traversal, coordinates nested references
   and generator-level modifier results, and preserves stable provenance.
-- `services/generatorTraversal.js`: parses `/gen` traversal paths and derives
-  contextual root, entry, field, and structural-route autocomplete candidates.
-- `services/referenceResolver.js`: resolves random and fixed entries, selectors,
-  weighted generator sources, cycles, and bounded nesting.
+- `services/generatorTraversal.js`: owns canonical generator-path parsing and
+  analysis plus contextual root, entry, field, structural-route, and scoped entity
+  autocomplete candidates.
+- `services/referenceResolver.js`: preserves the specialized weighted `oneOf`
+  generator-source selection flow; ordinary references use canonical string paths.
+- `services/routedArchetypeSelection.js`: applies the shared traversal to relative
+  `/gen-char background` and `/gen-creature type` paths and enforces terminal
+  archetype targets before selection.
 - `services/descriptiveModifierGenerator.js`: applies the independent 25%
   application policy for character and creature descriptive modifiers.
 - `services/statProfileCatalog.js`: loads and validates non-localized statistical
@@ -677,8 +681,9 @@ The durable implementation constraints are:
   so fixed internal selection uses stable IDs. Reject a catalog when a localized
   alias conflicts with another candidate's stable ID in the same traversal scope
   under that normalization.
-- Keep structural traversal, inline-reference resolution, selection, cycle/depth
-  protection, final-field modifier suppression, and provenance in resolver
+- Keep canonical path parsing, structural traversal, inline-reference resolution,
+  generation-metadata references, scoped entity selection, cycle/depth protection,
+  final-field modifier suppression, and provenance in shared traversal and resolver
   services. Do not parse paths or references, select entries, or reconstruct
   provenance in command handlers.
 - `/gen category:` presents localized generator and entry aliases derived only from
@@ -692,13 +697,22 @@ The durable implementation constraints are:
   `:category` fixes a router entry and follows its route automatically; another
   `:entry` may select a fixed child across that boundary; and `.field` selects from
   the effective generated content. `.generator` may repeat across unresolved router
-  boundaries, and it and all field keys remain stable English syntax. Preserve
-  resolution compatibility for redundant legacy fixed-route paths, but never emit,
-  suggest, or document them. A path
-  ending on a generator performs ordinary generation with that final generator's
-  automatic modifiers. A path ending on a field returns only that field without
-  the final generator's automatic modifiers. Only the initial generator may be a
-  public root; internal children are reachable only through valid traversal.
+  boundaries, and it and all field keys remain stable English syntax. Accept the
+  explicit fixed-route equivalent (`creature:monster.generator:ancient_dragon`)
+  while autocomplete favors the shorter implicit form
+  (`creature:monster:ancient_dragon`). Normalize both before resolution. A path
+  ending on complete content applies the automatic modifiers of the final content
+  generator. A path ending on a field returns only that field without its final
+  modifiers, and structural routers never acquire or apply modifiers merely by
+  being traversed. Only the initial generator may be a public root; internal
+  children are reachable only through valid traversal.
+- Inline `{{ ... }}` and ordinary generation-metadata references use the same
+  stable canonical syntax but never infer fixed-router hops. `{{ creature:monster }}`
+  returns the router entry itself, while `{{ creature:monster.generator }}` follows
+  it and `{{ creature.generator.name }}` randomly routes before selecting the
+  child's name. `:entry`, `.generator`, and another `:entry` may repeat. Apply the
+  same weights, depth, cycle, localization, provenance, and modifier rules at every
+  nested level.
 - Validate a complete structural traversal before consuming randomness. After an
   unresolved entry follows `.generator`, any later fixed entry, field, or repeated
   route must be valid for every possible routed child at that point. An unresolved
@@ -709,12 +723,17 @@ The durable implementation constraints are:
   top-level `generator` ID, never a wrapped inline reference, and follows the minimal
   router-entry contract without fields. Routed archetype entries may omit
   `generation`; when `statProfile` is omitted, use `default`. Resolve
-  `physical_description` independently.
+  `physical_description` independently. `/gen-char background` is a localized path
+  relative to `background` and may select a category or exact archetype, including
+  the explicit `.generator` spelling. It must end on a background archetype;
+  reject fields and unrelated generators before archetype selection.
 - Derive supported `/gen-creature` types from the public `creature` router. Router
   entries use top-level `generator` properties naming internal concept-only IDs
   stored in `creature_<type>.json` and follow the minimal router-entry contract;
   they are generator classifications, and the only persistent entity type is
-  `creature`.
+  `creature`. `/gen-creature type` is the corresponding localized path relative to
+  `creature`; it may select a type or exact archetype and must reject fields or
+  unrelated generators before archetype selection.
 - Category roots keep unprefixed filenames and IDs. Child filenames use
   `<category>_<concept>.json`, child IDs use only `<concept>`, and all references
   use generator IDs rather than filenames. The public `loot`, `site`, `group`, and
@@ -750,7 +769,11 @@ The durable implementation constraints are:
   concepts support `statProfile`, `naturalArmorPercentage`, `fixedRules`,
   `statusEffects`, `modifiers`, `armor`, `equipment`, and `inventory`. Characters
   support `talents`, creatures support `traits`, and neither accepts the other's
-  template collection.
+  template collection. Store every ordinary generator reference in this metadata
+  as a canonical string path; the consuming category owns the required result
+  shape. Reject the old ordinary object with string `generator`, optional `entry`,
+  and `select`. Preserve the existing weighted `generator.oneOf` object unchanged,
+  and keep `fixedRules` as its specialized stable-ID form.
 - Use only `modifier_character` for the character modifier policy and
   `modifier_creature` for the creature modifier policy. Entity modifiers and status
   effects remain descriptive and never execute mechanics. Loot rarity is the sole

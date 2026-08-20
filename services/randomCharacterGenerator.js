@@ -7,11 +7,16 @@ const {
 	getGenerationMetadata,
 	resolveGenerationMetadata,
 } = require('./generationMetadata');
+const { BACKGROUND_ROUTER_ID } = require('./generatorSchema');
 const {
 	resolveArmorReference,
 	resolveGearReferences,
 } = require('./generationReferenceResolver');
 const { formatResolvedLootItem } = require('./lootGeneration');
+const {
+	prepareScopedRoutedArchetype,
+	resolveScopedRoutedArchetype,
+} = require('./routedArchetypeSelection');
 const { selectWeightedEntry } = require('./weightedSelector');
 const {
 	randomInteger,
@@ -39,6 +44,26 @@ function populateRandomCharacter(character, options = {}) {
 	const resolver = options.resolver ?? generatorResolver;
 	const getGenerator = options.getGenerator ?? generatorCatalog.getGenerator;
 	generatorResolver.assertGeneratorResolverInterface(resolver);
+	const preparedBackground = prepareScopedRoutedArchetype({
+		getGenerator,
+		locale,
+		rootId: BACKGROUND_ROUTER_ID,
+		scopedPath: options.background,
+	});
+	if (!preparedBackground.ok && preparedBackground.reason === 'invalid-path') {
+		throw generationError(
+			`Unknown background traversal path: ${options.background}.`,
+			'errors.backgroundUnknown',
+			{ background: options.background },
+		);
+	}
+	if (!preparedBackground.ok) {
+		throw generationError(
+			`Background route ${options.background ?? 'random'} is unavailable.`,
+			'errors.generatorMissing',
+			{ category: options.background ?? BACKGROUND_ROUTER_ID },
+		);
+	}
 	const level = options.level ?? randomInteger(1, 10, random);
 	if (!Number.isInteger(level) || level < 1 || level > 10) {
 		throw generationError(
@@ -58,20 +83,26 @@ function populateRandomCharacter(character, options = {}) {
 	character.race.traits.skillBonus = getField(race, 'skill_bonus');
 	character.race.traits.physicalAbility = getField(race, 'physical_ability');
 
-	const background = resolveBackground(options.background, locale, random);
-	const archetypeResult = resolver.generate(
-		`background:${background.id}.generator`,
+	const backgroundSelection = resolveScopedRoutedArchetype({
+		getGenerator,
 		locale,
-		{ random },
-	);
-	if (!archetypeResult) {
+		prepared: preparedBackground,
+		random,
+		resolver,
+		rootId: BACKGROUND_ROUTER_ID,
+		scopedPath: options.background,
+	});
+	if (!backgroundSelection.ok) {
 		throw generationError(
-			`Background route ${background.id} is unavailable.`,
+			`Background route ${options.background ?? 'random'} is unavailable.`,
 			'errors.generatorMissing',
-			{ category: background.id },
+			{ category: options.background ?? BACKGROUND_ROUTER_ID },
 		);
 	}
-	const archetype = getArchetypeEntry(archetypeResult, locale, getGenerator);
+	const {
+		entry: archetype,
+		result: archetypeResult,
+	} = backgroundSelection;
 	const generation = getGenerationMetadata(archetype);
 	const physicalDescriptionResult = resolver.resolveInlineReference(
 		'{{ physical_description.description }}',
@@ -178,11 +209,7 @@ function createCharacterGenerationDefaults({ character, formatGold }) {
 					getField(entry, 'type'),
 				),
 			);
-			return resolveArmorReference({
-				generator: 'armors',
-				entry: armor.id,
-				select: 'fields',
-			}, {
+			return resolveArmorReference(`armors:${armor.id}`, {
 				createError: generationError,
 				locale,
 				path: 'root.character.armor',
@@ -198,11 +225,7 @@ function createCharacterGenerationDefaults({ character, formatGold }) {
 				random,
 			);
 			return resolveGearReferences(
-				mainEquipment.map(item => ({
-					generator: item.generatorId,
-					entry: item.entry.id,
-					select: 'fields',
-				})),
+				mainEquipment.map(item => `${item.generatorId}:${item.entry.id}`),
 				{
 					createError: generationError,
 					locale,
@@ -224,19 +247,6 @@ function createCharacterGenerationDefaults({ character, formatGold }) {
 			return { values: inventory };
 		},
 	};
-}
-
-function getArchetypeEntry(archetypeResult, locale, getGenerator) {
-	const archetype = getGenerator(archetypeResult.generatorId, locale)
-		?.entries.find(entry => entry.id === archetypeResult.entryId);
-	if (!archetype) {
-		throw generationError(
-			'Selected background archetype is unavailable.',
-			'errors.generatorMissing',
-			{ category: archetypeResult.entryId },
-		);
-	}
-	return archetype;
 }
 
 function pickMainEquipment(count, locale, random) {
@@ -317,24 +327,6 @@ function getResolvedDisplayValue(result, locale) {
 		);
 	}
 	return value;
-}
-
-function resolveBackground(requestedBackground, locale, random) {
-	if (!requestedBackground) {
-		return pickOne('background', locale, random);
-	}
-	const localizedCategory = generatorCatalog.getGenerator('background', locale);
-	const background = localizedCategory?.entries.find(entry => (
-		entry.id === requestedBackground
-	));
-	if (!background) {
-		throw generationError(
-			`Unknown background category: ${requestedBackground}.`,
-			'errors.backgroundUnknown',
-			{ background: requestedBackground },
-		);
-	}
-	return background;
 }
 
 function pickOne(generatorId, locale, random, predicate = () => true) {

@@ -6,10 +6,15 @@ const {
 	generatorSchemaError,
 	validateStableId,
 } = require('./assertions');
-
-const INLINE_REFERENCE_PATTERN = /^[a-z0-9]+(?:_[a-z0-9]+)*(?::[a-z0-9]+(?:_[a-z0-9]+)*)?(?:\.[a-z0-9]+(?:_[a-z0-9]+)*)?$/;
+const {
+	parseGeneratorTraversalPath,
+} = require('../generatorTraversal');
 
 function validateReference(reference, location) {
+	if (typeof reference === 'string') {
+		parseReferencePath(reference, location);
+		return;
+	}
 	assertPlainObject(reference, `Invalid generator reference: ${location}.`);
 	assertAllowedKeys(
 		reference,
@@ -22,19 +27,17 @@ function validateReference(reference, location) {
 		`Generator ${location} is missing a source or selector.`,
 	);
 	if (typeof reference.generator === 'string') {
-		validateStableId(reference.generator, `source generator in ${location}`);
+		throw generatorSchemaError(
+			'INVALID_GENERATOR_REFERENCE',
+			`Generator ${location} must use a canonical path string.`,
+		);
 	}
-	else {
-		validateWeightedGeneratorSource(reference.generator, location);
-		if (reference.entry !== undefined) {
-			throw generatorSchemaError(
-				'INVALID_GENERATOR_FIXED_REFERENCE',
-				`Generator ${location} cannot fix an entry across weighted sources.`,
-			);
-		}
-	}
+	validateWeightedGeneratorSource(reference.generator, location);
 	if (reference.entry !== undefined) {
-		validateStableId(reference.entry, `fixed entry in ${location}`);
+		throw generatorSchemaError(
+			'INVALID_GENERATOR_FIXED_REFERENCE',
+			`Generator ${location} cannot fix an entry across weighted sources.`,
+		);
 	}
 	validateSelector(reference.select, location);
 }
@@ -111,15 +114,24 @@ function validateSelector(selector, location) {
 
 function parseInlineReference(expression, location = 'generator reference') {
 	const normalized = typeof expression === 'string' ? expression.trim() : '';
-	if (!INLINE_REFERENCE_PATTERN.test(normalized)) {
+	const traversal = parseGeneratorTraversalPath(normalized, {
+		allowAliases: false,
+	});
+	if (!traversal) {
 		throw generatorSchemaError(
 			'INVALID_GENERATOR_INLINE_REFERENCE',
 			`Generator ${location} contains an invalid inline reference.`,
 		);
 	}
-	const [sourceAndEntry, field] = normalized.split('.');
-	const [generator, entry] = sourceAndEntry.split(':');
-	return { generator, entry, field };
+	return {
+		...traversal,
+		path: normalized,
+	};
+}
+
+function parseReferencePath(reference, location = 'generator reference') {
+	const parsed = parseInlineReference(reference, location);
+	return parsed.path;
 }
 
 function parseWrappedInlineReference(expression, location = 'generator reference') {
@@ -171,6 +183,7 @@ function extractInlineReferences(value, location = 'generator text') {
 module.exports = {
 	extractInlineReferences,
 	parseInlineReference,
+	parseReferencePath,
 	parseWrappedInlineReference,
 	validateReference,
 	validateSelector,

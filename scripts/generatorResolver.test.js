@@ -132,10 +132,10 @@ test('inline references resolve text, structured display, explicit fields, and p
 	);
 
 	const fields = resolver.resolveReference(
-		{ generator: 'item', entry: 'relic', select: 'fields' },
+		'item:relic',
 		'en',
 	);
-	assert.deepEqual(fields.value, {
+	assert.deepEqual(fields.fields, {
 		name: 'Relic',
 		description: 'A valuable object',
 	});
@@ -525,6 +525,7 @@ test('/gen traversal follows structural routes, targets fields, and preserves mo
 		name: 'Router',
 		description: 'Routes to details',
 		entrySchema: { required: [] },
+		modifiers: { detail_modifier: 100 },
 		entries: [{
 			id: 'details',
 			name: 'Details',
@@ -556,6 +557,7 @@ test('/gen traversal follows structural routes, targets fields, and preserves mo
 	const bareRouter = resolver.generate('router', 'en', { random: () => 0 });
 	assert.equal(bareRouter.value, 'Details');
 	assert.equal(bareRouter.generatorId, 'router');
+	assert.deepEqual(bareRouter.modifiers, []);
 	assert.equal(resolver.generate('details', 'en', { random: () => 0 }), null);
 
 	const routed = resolver.generate('router:details:second', 'en', {
@@ -576,6 +578,32 @@ test('/gen traversal follows structural routes, targets fields, and preserves mo
 	assert.equal(explicitRouted.generatorId, routed.generatorId);
 	assert.equal(explicitRouted.entryId, routed.entryId);
 	assert.deepEqual(explicitRouted.provenance, routed.provenance);
+	assert.equal(
+		resolver.resolveInlineReference('{{ router:details }}', 'en').value,
+		'Details',
+	);
+	const inlineRouted = resolver.resolveInlineReference(
+		'{{ router:details.generator:second }}',
+		'en',
+		{ random: () => 0 },
+	);
+	assert.equal(inlineRouted.value, 'Second — 20');
+	assert.equal(inlineRouted.modifiers.length, 1);
+	const inlineField = resolver.resolveInlineReference(
+		'{{ router:details.generator:second.score }}',
+		'en',
+		{ random: () => 0 },
+	);
+	assert.equal(inlineField.value, 20);
+	assert.deepEqual(inlineField.modifiers, []);
+	assert.equal(
+		resolver.resolveReference(
+			'router:details.generator:second.score',
+			'en',
+			{ random: () => 0 },
+		).displayFields.score,
+		20,
+	);
 
 	const field = resolver.generate('router:details:second.score', 'en', {
 		random: () => 0,

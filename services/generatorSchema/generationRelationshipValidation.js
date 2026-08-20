@@ -26,13 +26,24 @@ function validateGenerationRelationships(
 		[generation.modifiers ?? [], 'modifier'],
 	]) {
 		for (const reference of references) {
-			const sources = validateReferenceRelationship(reference, catalog, ownerId);
-			assertReferenceFields(sources, ['name', 'description'], ownerId, label);
+			const target = validateReferenceRelationship(reference, catalog, ownerId);
+			if (target.field !== undefined) {
+				throw generatorSchemaError(
+					'INVALID_GENERATION_REFERENCE_TARGET',
+					`Archetype ${ownerId} has an invalid ${label} reference.`,
+				);
+			}
+			assertReferenceFields(
+				target.sources,
+				['name', 'description'],
+				ownerId,
+				label,
+			);
 		}
 	}
 	if (generation.armor) {
-		const sources = validateReferenceRelationship(generation.armor, catalog, ownerId);
-		if (sources.some(source => (
+		const target = validateReferenceRelationship(generation.armor, catalog, ownerId);
+		if (target.field !== undefined || target.sources.some(source => (
 			source.id !== 'armors'
 			|| !source.entrySchema.required.includes('type')
 			|| !source.entrySchema.required.includes('description')
@@ -48,8 +59,8 @@ function validateGenerationRelationships(
 		...(generation.equipment ?? []),
 		...(generation.inventory ?? []),
 	]) {
-		const sources = validateReferenceRelationship(reference, catalog, ownerId);
-		assertGearReferenceResult(sources, reference.select, ownerId);
+		const target = validateReferenceRelationship(reference, catalog, ownerId);
+		assertGearReferenceResult(target, ownerId);
 	}
 }
 
@@ -66,17 +77,16 @@ function assertReferenceFields(sources, fields, ownerId, label) {
 	}
 }
 
-function assertGearReferenceResult(sources, selector, ownerId) {
-	if (selector === 'value' || selector === 'display') {
+function assertGearReferenceResult(target, ownerId) {
+	if (target.selector === 'value' || target.selector === 'display') {
 		return;
 	}
-	if (selector === 'fields') {
-		assertReferenceFields(sources, ['name', 'description'], ownerId, 'gear');
+	if (target.selector === 'fields' || target.selector === 'content') {
 		return;
 	}
-	const field = selector.slice('fields.'.length);
-	if (sources.some(source => source.entries.some(entry => (
-		typeof entry.fields?.[field] !== 'string'
+	const field = target.field;
+	if (target.sources.some(source => source.entries.some(entry => (
+		typeof (field === 'name' ? entry.name : entry.fields?.[field]) !== 'string'
 	)))) {
 		throw generatorSchemaError(
 			'INVALID_GENERATION_REFERENCE_TARGET',

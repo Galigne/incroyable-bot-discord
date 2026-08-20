@@ -108,8 +108,8 @@ restart-only: changing it requires restarting the bot, and reconnects during
 - `/reload` — reload supported runtime state and reconnect the existing Discord client
 - `/rules`
 - `/gen category:<traversal-path> [count]` — generate from a public root, optionally selecting entries, routes, or fields (configured DM role or server owner)
-- `/gen-char character-key:<new key> [level] [background]` — generate and save a complete character with no explicit user access (configured DM role or server owner)
-- `/gen-creature creature-key:<new key> [level] [type]` — generate and atomically save a complete creature with no explicit user access; type is optional and comes from the public `creature` router (configured DM role or server owner)
+- `/gen-char character-key:<new key> [level] [background]` — generate and save a complete character with no explicit user access; background may select a category or exact archetype relative to `background` (configured DM role or server owner)
+- `/gen-creature creature-key:<new key> [level] [type]` — generate and atomically save a complete creature with no explicit user access; type may select a category or exact archetype relative to `creature` (configured DM role or server owner)
 - `/roll expression:<dice expression>` — roll expressions such as `2d6+3`
 - `/add entity-key:<new key> [type:<character|creature>]` — create a blank entity and grant yourself explicit `owner` access; character is the default
 - `/get entity-key:<key> [field]` — display the summary or one type-compatible field
@@ -138,7 +138,9 @@ The traversal syntax uses localized generator and entry aliases. Aliases are
 lowercase, replace spaces and separating punctuation with underscores, and retain
 localized accents. A bare router selects and displays one category. `.generator`
 selects a random category and follows its route, while `:category` fixes a router
-category and follows that route automatically. Another `:entry` fixes an entry in
+category and follows that route automatically. The fully explicit fixed route uses
+`:category.generator`; `/gen` normalizes both forms to the same canonical path.
+Another `:entry` fixes an entry in
 the routed child, and `.field` reads a field from the effective generated content.
 `.generator`, `.name`, and all other field keys remain stable English syntax. For
 example:
@@ -148,6 +150,7 @@ example:
 /gen category:loot.generator
 /gen category:loot:weapons
 /gen category:loot:weapons:long_sword
+/gen category:loot:weapons.generator:long_sword
 /gen category:loot:weapons.description
 /gen category:site:dungeon
 /gen category:site:dungeon:buried_temple.name
@@ -163,9 +166,16 @@ accepted for manual input and are resolved to the same internal identities.
 unresolved router boundaries. The redundant `.name` form for a bare name-only
 router remains valid manual input but is not suggested.
 
-Omitting an entry performs the normal weighted selection. Paths ending on a
-generator apply that final generator's normal automatic modifiers; paths ending on
-a field return only that field and do not apply the final generator's modifiers.
+Inline `{{ ... }}` and generator-data references use the same stable path grammar
+but require explicit routing. For example, `{{ creature:monster }}` resolves the
+router entry itself, `{{ creature:monster.generator }}` generates a random monster,
+and `{{ creature.generator.name }}` randomly routes before selecting the final
+name. `:entry`, `.generator`, and another `:entry` may repeat at deeper levels.
+
+Omitting an entry performs the normal weighted selection. Paths ending on complete
+content apply the final content generator's normal automatic modifiers; paths
+ending on a field return only that field and do not apply the final generator's
+modifiers. Structural routers never acquire modifiers merely by being traversed.
 If an unfixed entry's `.generator` route is followed by another entry, route, or
 field, that continuation must be valid for every possible routed child. Invalid
 paths are rejected before weighted selection, while a path ending at the unresolved
@@ -305,8 +315,8 @@ operation is rolled back before an error is returned.
 Example workflows:
 
 ```text
-/gen-char character-key:D.Robert level:5 background:adventurer
-/gen-creature creature-key:Ash.Wolf level:5 type:monster
+/gen-char character-key:D.Robert level:5 background:adventurer:treasure_hunter
+/gen-creature creature-key:Ash.Wolf level:5 type:monster:ancient_dragon
 /set entity-key:D.Robert field:statistics
 /get entity-key:Ash.Wolf field:traits
 /access entity-key:Ash.Wolf user:@Player level:partial
@@ -340,8 +350,11 @@ Generated talents are stored as unique localized list entries: levels 1–2 rece
 one talent, levels 3–5 receive two, levels 6–8 receive three, and levels 9–10
 receive four.
 If the optional level is omitted, a level from 1 to 10 is rolled. The optional
-background selects one of the configured broad background categories and is also
-chosen randomly when omitted. The selected category independently resolves one
+background is a localized traversal relative to the public `background` router.
+A category such as `adventurer` selects a random archetype, while
+`adventurer:treasure_hunter` fixes it; the explicit
+`adventurer.generator:treasure_hunter` form is equivalent. Omission is fully
+random, and field terminals are invalid. The selected category resolves one
 reusable archetype from the matching concept-only generator stored in
 `background_<category>.json`, while the separate `physical_description` generator
 supplies the physical description. Each selected archetype chooses its own existing
@@ -355,9 +368,11 @@ properties replace it, including empty arrays.
 Backstory and goals start empty and remain editable. Persistent character
 modifiers come only from the internal `modifier_character` pool.
 
-Random creatures select a stable type route from the public `creature` catalog
-(randomly when `type` is omitted), then generate from that entry’s referenced
-internal detail source. The current data provides `animal`, `companion`, and
+Random creatures use a localized traversal relative to the public `creature`
+catalog. A type such as `monster` selects a random detail entry,
+`monster:ancient_dragon` fixes the archetype, and the explicit
+`monster.generator:ancient_dragon` form is equivalent. Omission is fully random,
+and field terminals are invalid. The current data provides `animal`, `companion`, and
 `monster`; the internal generator uses the same concept ID and a prefixed
 `creature_<type>.json` filename, while the router defines the available set. They
 share the character level budget, nonlinear statistic allocation,

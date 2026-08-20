@@ -42,11 +42,7 @@ test('explicit character and creature modifier metadata uses fully resolved fiel
 		const resolved = resolveGenerationMetadata({
 			entityType,
 			generation: {
-				modifiers: [{
-					generator,
-					entry: 'manifested',
-					select: 'fields',
-				}],
+				modifiers: [`${generator}:manifested`],
 			},
 			level: 1,
 			locale: 'en',
@@ -83,17 +79,13 @@ test('resolved display fields do not replace raw typed fields for technical cons
 	const resolver = createGeneratorResolver({
 		getGenerator: id => catalog.get(id),
 	});
-	const result = resolver.resolveReference({
-		generator: 'technical',
-		entry: 'typed',
-		select: 'fields',
-	}, 'en');
+	const result = resolver.resolveReference('technical:typed', 'en');
 
 	assert.equal(result.fields.ar_percentage, 42);
 	assert.equal(result.fields.is_magical, true);
 	assert.equal(result.displayFields.ar_percentage, '42');
 	assert.equal(result.displayFields.is_magical, 'true');
-	assert.deepEqual(result.value, result.fields);
+	assert.equal(result.display, 'Arcane armor — A reinforced shell. — 42 — true');
 });
 
 test('modifier inline references preserve cycle and nesting-depth protections', () => {

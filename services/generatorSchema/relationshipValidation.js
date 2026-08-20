@@ -12,6 +12,9 @@ const {
 	extractInlineReferences,
 	parseInlineReference,
 } = require('./referenceValidation');
+const {
+	analyzeGeneratorTraversalPath,
+} = require('../generatorTraversal');
 
 function validateGeneratorRelationships(catalog) {
 	if (!(catalog instanceof Map)) {
@@ -70,33 +73,12 @@ function validateInlineRelationships(generator, catalog) {
 	const visit = (value, location) => {
 		if (typeof value === 'string') {
 			for (const expression of extractInlineReferences(value, location)) {
-				const reference = parseInlineReference(expression, location);
-				const source = catalog.get(reference.generator);
-				if (!source) {
-					throw generatorSchemaError(
-						'GENERATOR_REFERENCE_MISSING',
-						`Generator ${generator.id} references an unknown inline generator.`,
-					);
-				}
-				const entry = reference.entry
-					? source.entries.find(candidate => candidate.id === reference.entry)
-					: undefined;
-				if (reference.entry && !entry) {
-					throw generatorSchemaError(
-						'GENERATOR_ENTRY_NOT_FOUND',
-						`Generator ${generator.id} references an unknown inline entry.`,
-					);
-				}
-				if (
-					reference.field
-					&& reference.field !== 'name'
-					&& !source.entrySchema.required.includes(reference.field)
-				) {
-					throw generatorSchemaError(
-						'INVALID_GENERATOR_SELECTOR',
-						`Generator ${generator.id} references an unknown inline field.`,
-					);
-				}
+				validateCanonicalReferenceRelationship(
+					expression,
+					catalog,
+					generator.id,
+					location,
+				);
 			}
 			return;
 		}
@@ -118,9 +100,21 @@ function validateInlineRelationships(generator, catalog) {
 }
 
 function validateReferenceRelationship(reference, catalog, ownerId) {
-	const sourceIds = typeof reference.generator === 'string'
-		? [reference.generator]
-		: reference.generator.oneOf.map(source => source.id);
+	if (typeof reference === 'string') {
+		return validateCanonicalReferenceRelationship(
+			reference,
+			catalog,
+			ownerId,
+			`${ownerId} generation reference`,
+		);
+	}
+	if (!reference?.generator?.oneOf) {
+		throw generatorSchemaError(
+			'INVALID_GENERATOR_REFERENCE',
+			`Generator ${ownerId} must use a canonical path string.`,
+		);
+	}
+	const sourceIds = reference.generator.oneOf.map(source => source.id);
 	for (const sourceId of sourceIds) {
 		const source = catalog.get(sourceId);
 		if (!source) {
@@ -129,15 +123,113 @@ function validateReferenceRelationship(reference, catalog, ownerId) {
 				`Generator ${ownerId} references an unknown generator.`,
 			);
 		}
-		if (reference.entry && !source.entries.some(entry => entry.id === reference.entry)) {
-			throw generatorSchemaError(
-				'GENERATOR_ENTRY_NOT_FOUND',
-				`Generator ${ownerId} references an unknown fixed entry.`,
-			);
-		}
 		validateSelectorForGenerator(reference.select, source, ownerId);
 	}
-	return sourceIds.map(sourceId => catalog.get(sourceId));
+	return {
+		field: reference.select.startsWith('fields.')
+			? reference.select.slice('fields.'.length)
+			: undefined,
+		selector: reference.select,
+		sources: sourceIds.map(sourceId => catalog.get(sourceId)),
+	};
+}
+
+function validateCanonicalReferenceRelationship(
+	referencePath,
+	catalog,
+	ownerId,
+	location,
+) {
+	const parsed = parseInlineReference(referencePath, location);
+	if (!catalog.has(parsed.rootId)) {
+		throw generatorSchemaError(
+			'GENERATOR_REFERENCE_MISSING',
+			`Generator ${ownerId} references an unknown generator.`,
+		);
+	}
+	const analysis = analyzeGeneratorTraversalPath(
+		referencePath,
+		'en',
+		{
+			allowAliases: false,
+			getGenerator: id => catalog.get(id),
+			implicitRouterSelections: false,
+			listGenerators: () => [...catalog.values()],
+			rootVisibility: 'all',
+		},
+	);
+	if (!analysis) {
+		classifyInvalidCanonicalPath(parsed, catalog, ownerId);
+		if (parsed.field !== undefined) {
+			const withoutField = referencePath.slice(0, referencePath.lastIndexOf('.'));
+			const sourceAnalysis = analyzeGeneratorTraversalPath(
+				withoutField,
+				'en',
+				{
+					allowAliases: false,
+					getGenerator: id => catalog.get(id),
+					implicitRouterSelections: false,
+					listGenerators: () => [...catalog.values()],
+					rootVisibility: 'all',
+				},
+			);
+			if (sourceAnalysis) {
+				throw generatorSchemaError(
+					'INVALID_GENERATOR_SELECTOR',
+					`Generator ${ownerId} references an unknown field.`,
+				);
+			}
+		}
+		throw generatorSchemaError(
+			'INVALID_GENERATOR_REFERENCE_PATH',
+			`Generator ${ownerId} has an invalid reference path.`,
+		);
+	}
+	return {
+		field: analysis.traversal.field,
+		selector: analysis.traversal.field === undefined ? 'content' : 'field',
+		sources: analysis.contexts.map(context => context.generator),
+	};
+}
+
+function classifyInvalidCanonicalPath(parsed, catalog, ownerId) {
+	let contexts = [{ generator: catalog.get(parsed.rootId), entry: undefined }];
+	for (const operation of parsed.operations) {
+		if (operation.type === 'selection') {
+			if (contexts.some(context => context.entry !== undefined)) {
+				return;
+			}
+			const entries = contexts.map(context => (
+				context.generator.entries.find(entry => entry.id === operation.entryId)
+			));
+			if (entries.some(entry => !entry)) {
+				throw generatorSchemaError(
+					'GENERATOR_ENTRY_NOT_FOUND',
+					`Generator ${ownerId} references an unknown fixed entry.`,
+				);
+			}
+			contexts = contexts.map((context, index) => ({
+				generator: context.generator,
+				entry: entries[index],
+			}));
+			continue;
+		}
+
+		const entries = contexts.flatMap(context => (
+			context.entry ? [context.entry] : context.generator.entries
+		));
+		if (entries.some(entry => !entry.generator)) {
+			return;
+		}
+		const generators = entries.map(entry => catalog.get(entry.generator));
+		if (generators.some(generator => !generator)) {
+			throw generatorSchemaError(
+				'GENERATOR_REFERENCE_MISSING',
+				`Generator ${ownerId} references an unknown generator.`,
+			);
+		}
+		contexts = generators.map(generator => ({ generator, entry: undefined }));
+	}
 }
 
 function validateSelectorForGenerator(selector, source, ownerId) {

@@ -151,22 +151,41 @@ References are embedded directly in localized names or string fields:
 
 ```text
 {{ generator }}
-{{ generator.field }}
 {{ generator:entry }}
+{{ generator.field }}
 {{ generator:entry.field }}
+{{ generator.generator }}
+{{ generator:entry.generator }}
+{{ generator:entry.generator:entry.field }}
 ```
 
-Generator, entry, and field names are stable lowercase snake_case IDs. Omitting the
-entry performs weighted random selection; naming an entry fixes the selection.
-Omitting the field returns the selected entry's display value. A name-only entry
-displays its name. An entry with additional fields displays its name followed by
-every field in declared order. `.name` always selects the top-level name; another
-explicit field selects one field declared by `entrySchema.required`.
+Generator, entry, and field names are stable lowercase snake_case IDs. `:entry`
+fixes the selection in the current generator, `.generator` follows the selected
+entry's structural route, and `.field` selects a field from the effective content.
+Selection and routing may repeat. Omitting an entry performs weighted random
+selection. Omitting the field returns the selected entry's display value. A
+name-only entry displays its name. An entry with additional fields displays its name
+followed by every field in declared order. `.name` always selects the top-level
+name; another explicit field selects one field declared by
+`entrySchema.required`.
+
+Inline paths are always explicit at router boundaries. `{{ creature:monster }}`
+resolves the `monster` entry of the `creature` router itself. It does not follow the
+route. `{{ creature:monster.generator }}` follows that fixed route and randomly
+selects a monster, `{{ creature.generator.name }}` randomly routes and returns the
+selected creature's name, and
+`{{ creature:monster.generator:ancient_dragon.description }}` fixes the complete
+routed selection. The implicit fixed-router shorthand described below belongs only
+to `/gen` and the scoped entity options.
 
 References may be repeated and nested, and every occurrence resolves
 independently. All referenced generators, entries, and fields must exist in both
 locales with compatible structure. Active cycles and nesting beyond four
 selections are rejected. There is no template entry type or named reference map.
+Resolving complete final content applies that final content generator's automatic
+modifiers. A terminal field suppresses its automatic modifiers. Routers do not
+acquire or apply modifiers merely because a path traverses them; these rules apply
+again inside every nested reference.
 
 ## Automatic modifier relationships
 
@@ -232,7 +251,10 @@ localized name aliases. Stable IDs remain accepted as manual input and are resol
 to the same internal identities. A bare router selects and displays one category.
 `.generator` selects an unresolved category with normal weights and follows its
 route, while `:category` fixes a router category and follows that route
-automatically. Consecutive `:entry` selections cross fixed router boundaries, and
+automatically. This command-only shorthand is normalized to an explicit route, so
+`creature:monster` is equivalent to `creature:monster.generator` and
+`creature:monster:ancient_dragon` is equivalent to
+`creature:monster.generator:ancient_dragon`. Consecutive `:entry` selections cross fixed router boundaries, and
 `.field` selects a field from the effective generated content. The `.generator`
 token and field keys such as `.name`, `.type`, and `.description` remain
 stable English syntax:
@@ -290,12 +312,18 @@ with their consumers:
   `generator` route contains the direct ID of the corresponding internal name-only `<category>` generator,
   stored in `background_<category>.json`. Character generation resolves that
   archetype and independently resolves the internal `physical_description`
-  generator.
+  generator. `/gen-char background:` accepts the same localized traversal relative
+  to this root: `<category>`, `<category>:<archetype>`, or the explicit
+  `<category>.generator:<archetype>`. It must end at an archetype; fields and
+  unrelated generators are invalid.
 - The public `creature` router defines every supported `/gen-creature` type. Each
   entry's top-level `generator` property directly names an internal
   creature-detail generator whose concept ID matches the route and whose filename
   is `creature_<concept>.json`. Adding or removing router entries changes the
   available types; they are not a hard-coded enum or additional persistence types.
+  `/gen-creature type:` accepts the equivalent localized path relative to this
+  root and may fix either only the type or both the type and final archetype. It
+  rejects field terminals and unrelated generators.
 - Creature-detail entries use a localized top-level `name`, an additional
   `description` field, and may use the same optional `generation` override model as
   background archetypes. Statistical
@@ -332,10 +360,40 @@ Both entity types support these properties:
   `default`;
 - `naturalArmorPercentage`: a finite percentage from `0` to `100`;
 - `fixedRules`: up to 25 unique `{ "entry": "rule_id", "level": 1 }` records;
-- `statusEffects` and `modifiers`: up to 25 references selecting complete `fields`;
-- `armor`: one reference selecting complete `fields`, kept separate from
-  `equipment`;
+- `statusEffects` and `modifiers`: up to 25 canonical paths ending on complete
+  content with `name` and `description`;
+- `armor`: one canonical path ending on a complete armor record, kept separate
+  from `equipment`;
 - `equipment` and `inventory`: up to 25 ordinary generator references each.
+
+Every ordinary generation reference is a canonical string path. The category that
+contains it decides whether the resolved content must be a structured field group,
+an armor record, or readable gear text:
+
+```json
+{
+  "armor": "armors:chain_mail",
+  "statusEffects": ["status_effect:blinded"],
+  "equipment": ["weapons", "loot:shields.generator:round_shield"]
+}
+```
+
+The former ordinary object form with string `generator`, optional `entry`, and
+`select` properties is invalid and has no compatibility path. The specialized
+weighted-source `oneOf` reference remains unchanged when a category genuinely
+needs to choose among generator sources:
+
+```json
+{
+  "generator": {
+    "oneOf": [
+      { "id": "supplies", "weight": 3 },
+      { "id": "weapons", "weight": 1 }
+    ]
+  },
+  "select": "fields"
+}
+```
 
 The only concept-specific property is the localized template-string collection:
 background archetypes support `talents`, creature details support `traits`, and the

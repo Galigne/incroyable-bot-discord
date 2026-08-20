@@ -48,24 +48,38 @@ never filenames.
 
 ## Resolution and provenance
 
-`services/generatorResolver.js` resolves a public traversal root for `/gen` or a
-reference requested by application code. A reference can select a random weighted entry, a
-fixed entry, an entry's display value, its complete fields object, or one explicit
-field. Inline syntax is:
+`services/generatorTraversal.js` parses and analyzes the canonical path grammar;
+`services/generatorResolver.js` uses that same analysis for `/gen`, ordinary
+generation references, inline `{{ ... }}` references, and scoped character or
+creature archetype selection. The operations are `:entry` for selection,
+`.generator` for a structural route, and `.field` for a terminal field. Selection
+and routing may repeat. Inline syntax includes:
 
 ```text
 {{ generator }}
 {{ generator.field }}
 {{ generator:entry }}
 {{ generator:entry.field }}
+{{ generator.generator }}
+{{ generator:entry.generator }}
+{{ generator:entry.generator:entry.field }}
 ```
 
-`services/referenceResolver.js` performs source and entry selection. Each inline
-occurrence is resolved independently, so repeated references can choose different
-entries. Nested references share one active selection stack: repeated active
-generator/entry pairs are rejected as cycles, and depth is capped at four. Fixed
-entries do not consume entry-selection randomness. Every top-level name and
-additional field is ordinary displayable generated data.
+Inline and application references use stable IDs and explicit routing:
+`{{ creature:monster }}` returns the router entry itself,
+`{{ creature:monster.generator }}` follows it, and
+`{{ creature.generator.name }}` follows a randomly selected route before returning
+the child name. Each inline occurrence is resolved independently, so repeated
+references can choose different entries. Nested references share one active
+selection stack: repeated active generator/entry pairs are rejected as cycles, and
+depth is capped at four. Fixed entries do not consume entry-selection randomness.
+Every top-level name and additional field is ordinary displayable generated data.
+
+Ordinary references stored in `generation` metadata are canonical path strings;
+their containing category interprets the resolved content shape. The legacy
+ordinary `{ generator: "...", entry, select }` object is rejected. The existing
+weighted `generator.oneOf` object remains a specialized source-selection form and
+is the only reference flow delegated to `services/referenceResolver.js`.
 
 Every resolved selection adds provenance with the stable generator ID, entry ID,
 selection mode (`random` or `fixed`), and resolution path. Weighted generator-source
@@ -97,6 +111,13 @@ route. A fixed `:category` follows its route automatically, consecutive `:entry`
 segments can select fixed entries across router boundaries, and `.field` selects a
 field from the effective generated content. `.generator` and field keys remain
 stable English syntax, and unresolved routing may repeat.
+
+The automatic fixed-router hop is an input convenience for `/gen` and the scoped
+entity options only. It is normalized to the explicit canonical route before
+resolution: `/gen creature:monster` is equivalent to
+`creature:monster.generator`, and `creature:monster:ancient_dragon` is equivalent
+to `creature:monster.generator:ancient_dragon`. Autocomplete favors the shorter
+form. Inline and stored ordinary references do not infer the route.
 
 ```text
 loot
@@ -131,11 +152,13 @@ internal, so a child such as `dungeon` is invalid as a direct root but reachable
 through `site:dungeon`. Bare router generation displays only the selected router
 entry and does not follow its route; fixing that entry follows the route.
 
-When traversal ends on a generator, the resolver performs ordinary generation from
-that final generator and applies its automatic modifier relationships. When it ends
-on a field, the resolver returns only that field and suppresses the final
-generator's automatic modifiers. Route and final selections share cycle, depth,
-localization, weighting, and provenance behavior.
+When traversal ends on complete content, the resolver performs ordinary generation
+from the final content generator and applies its automatic modifier relationships.
+When it ends on a field, the resolver returns only that field and suppresses the
+final generator's automatic modifiers. Structural routers never gain or apply
+modifiers merely because they were traversed. Route and final selections share
+cycle, depth, localization, weighting, and provenance behavior, including inside
+nested references.
 
 ## Generator-level modifiers
 
@@ -198,8 +221,10 @@ reference resolution:
 
 1. It selects localized name, race, personality, RULE, talent, status, armor,
    main equipment, and carried loot as required by character mechanics.
-2. It selects a stable entry from the public `background` router, or uses the
-   requested category.
+2. It resolves the optional background path relative to the public `background`
+   router. A category selects a random archetype; appending `:archetype` fixes the
+   archetype, and `.generator:archetype` is the explicit equivalent. Omission is
+   random. Only a terminal background archetype is accepted.
 3. That entry's top-level `generator` property directly names the matching internal
    name-only `<category>` generator stored in
    `background_<category>.json`. Resolving it supplies the reusable background
@@ -244,9 +269,13 @@ manual encumbrance resource.
 
 The public `creature` generator is the creature-type router. Its entries are the
 complete dynamic set accepted by `/gen-creature` and displayed by autocomplete.
-When `type` is omitted, the workflow selects a weighted router entry; otherwise it
-selects the requested stable entry. Each entry's top-level `generator` property
-directly names an internal creature-detail generator.
+The optional `type` value is a traversal relative to that root: a type selects a
+random final creature, `type:archetype` fixes it, and
+`type.generator:archetype` is the explicit equivalent. Omission is fully random.
+Autocomplete derives localized relative paths through the shared traversal logic
+and favors the shorter implicit form. A terminal field or unrelated generator is
+rejected before archetype randomness is consumed. Each router entry's top-level
+`generator` property directly names an internal creature-detail generator.
 
 The current catalog routes `animal`, `companion`, and `monster` to internal
 generators with those same concept IDs, stored in the corresponding `creature_*`

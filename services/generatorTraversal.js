@@ -1,4 +1,3 @@
-const generatorCatalog = require('./generatorCatalog');
 const {
 	createGeneratorTraversalAlias,
 	normalizeDisplayName,
@@ -12,7 +11,7 @@ const {
 
 const TRAVERSAL_ALIAS_PATTERN = /^[\p{L}\p{M}\p{N}]+(?:_[\p{L}\p{M}\p{N}]+)*$/u;
 
-function parseGeneratorTraversalPath(value) {
+function parseGeneratorTraversalPath(value, options = {}) {
 	if (typeof value !== 'string' || !value || value !== value.trim()) {
 		return null;
 	}
@@ -20,7 +19,7 @@ function parseGeneratorTraversalPath(value) {
 	if (segments.some(segment => !segment)) {
 		return null;
 	}
-	const root = parseSelectionSegment(segments[0]);
+	const root = parseSelectionSegment(segments[0], options);
 	if (!root || root.id === 'generator') {
 		return null;
 	}
@@ -34,7 +33,7 @@ function parseGeneratorTraversalPath(value) {
 	};
 	for (let index = 1; index < segments.length; index += 1) {
 		const segment = segments[index];
-		const selection = parseSelectionSegment(segment);
+		const selection = parseSelectionSegment(segment, options);
 		if (selection?.id === 'generator') {
 			traversal.operations.push({ type: 'route' });
 			traversal.operations.push(...selection.entryIds.map(entryId => ({
@@ -56,9 +55,12 @@ function parseGeneratorTraversalPath(value) {
 	return traversal;
 }
 
-function parseSelectionSegment(segment) {
+function parseSelectionSegment(segment, options) {
 	const parts = segment.split(':');
-	if (parts.some(part => !TRAVERSAL_ALIAS_PATTERN.test(part))) {
+	const pattern = options.allowAliases === false
+		? GENERATOR_ID_PATTERN
+		: TRAVERSAL_ALIAS_PATTERN;
+	if (parts.some(part => !pattern.test(part))) {
 		return null;
 	}
 	return {
@@ -72,16 +74,20 @@ function analyzeGeneratorTraversalPath(
 	locale = 'en',
 	options = {},
 ) {
-	const parsedTraversal = parseGeneratorTraversalPath(value);
+	const parsedTraversal = parseGeneratorTraversalPath(value, options);
 	if (!parsedTraversal) {
 		return null;
 	}
-	const getGenerator = options.getGenerator ?? generatorCatalog.getGenerator;
-	const listGenerators = options.listGenerators ?? generatorCatalog.listGenerators;
-	const root = resolvePublicGeneratorSegment(
+	const { getGenerator, listGenerators } = getCatalogFunctions(options);
+	const root = resolveGeneratorSegment(
 		parsedTraversal.rootId,
 		locale,
-		{ getGenerator, listGenerators },
+		{
+			allowAliases: options.allowAliases !== false,
+			getGenerator,
+			listGenerators,
+			rootVisibility: options.rootVisibility ?? 'public',
+		},
 	);
 	if (!root) {
 		return null;
@@ -96,6 +102,7 @@ function analyzeGeneratorTraversalPath(
 	let contexts = [{ generator: root, entryId: undefined }];
 	let previousSelectionRouted = false;
 	let usesRedundantRoute = false;
+	const implicitRouterSelections = options.implicitRouterSelections !== false;
 
 	for (const operation of parsedTraversal.operations) {
 		if (operation.type === 'route') {
@@ -109,8 +116,9 @@ function analyzeGeneratorTraversalPath(
 			if (!routed) {
 				return null;
 			}
-			traversal.steps.push({ entryId: undefined });
+			traversal.steps.push({ entryId: contexts[0].entryId });
 			contexts = routed;
+			traversal.entryId = undefined;
 			previousSelectionRouted = false;
 			continue;
 		}
@@ -118,7 +126,11 @@ function analyzeGeneratorTraversalPath(
 		if (contexts.some(context => context.entryId !== undefined)) {
 			return null;
 		}
-		const selection = resolveCommonEntrySelection(contexts, operation.entryId);
+		const selection = resolveCommonEntrySelection(
+			contexts,
+			operation.entryId,
+			options.allowAliases !== false,
+		);
 		if (!selection.valid) {
 			return null;
 		}
@@ -136,7 +148,7 @@ function analyzeGeneratorTraversalPath(
 		if (routerSelections.some(Boolean) && !routerSelections.every(Boolean)) {
 			return null;
 		}
-		if (routerSelections.every(Boolean)) {
+		if (implicitRouterSelections && routerSelections.every(Boolean)) {
 			const routed = routeContexts(selectedContexts, locale, getGenerator);
 			if (!routed) {
 				return null;
@@ -172,22 +184,35 @@ function analyzeGeneratorTraversalPath(
 	};
 }
 
-function resolvePublicGeneratorSegment(segment, locale, options) {
+function resolveGeneratorSegment(segment, locale, options) {
 	const direct = options.getGenerator(segment, locale);
-	if (direct?.visibility === 'public') {
+	if (direct && isAllowedRootVisibility(direct, options.rootVisibility)) {
 		return direct;
+	}
+	if (!options.allowAliases) {
+		return undefined;
 	}
 	const normalizedSegment = normalizeDisplayName(segment);
 	const matches = options.listGenerators(locale)
-		.filter(generator => generator.visibility === 'public')
+		.filter(generator => isAllowedRootVisibility(
+			generator,
+			options.rootVisibility,
+		))
 		.filter(generator => normalizeDisplayName(generator.name) === normalizedSegment);
 	return matches.length === 1 ? matches[0] : undefined;
 }
 
-function resolveEntrySegment(generator, segment) {
+function isAllowedRootVisibility(generator, visibility) {
+	return visibility === 'all' || generator.visibility === visibility;
+}
+
+function resolveEntrySegment(generator, segment, allowAliases) {
 	const direct = generator.entries.find(entry => entry.id === segment);
 	if (direct) {
 		return direct;
+	}
+	if (!allowAliases) {
+		return undefined;
 	}
 	const normalizedSegment = normalizeDisplayName(segment);
 	const matches = generator.entries.filter(entry => (
@@ -196,9 +221,9 @@ function resolveEntrySegment(generator, segment) {
 	return matches.length === 1 ? matches[0] : undefined;
 }
 
-function resolveCommonEntrySelection(contexts, segment) {
+function resolveCommonEntrySelection(contexts, segment, allowAliases) {
 	const entries = contexts.map(context => (
-		resolveEntrySegment(context.generator, segment)
+		resolveEntrySegment(context.generator, segment, allowAliases)
 	));
 	if (entries.some(entry => !entry)) {
 		return { valid: false, entryId: undefined };
@@ -233,8 +258,7 @@ function getGeneratorTraversalSuggestions(
 	options = {},
 ) {
 	const input = String(value ?? '').trim();
-	const getGenerator = options.getGenerator ?? generatorCatalog.getGenerator;
-	const listGenerators = options.listGenerators ?? generatorCatalog.listGenerators;
+	const { getGenerator, listGenerators } = getCatalogFunctions(options);
 	const delimiterIndex = Math.max(input.lastIndexOf(':'), input.lastIndexOf('.'));
 	if (delimiterIndex === -1) {
 		return rankActiveSegmentSuggestions(
@@ -285,6 +309,94 @@ function getGeneratorTraversalSuggestions(
 			isValid,
 		);
 	return rankActiveSegmentSuggestions(suggestions, activeSegment);
+}
+
+function createScopedGeneratorTraversalPath(rootId, value) {
+	if (!GENERATOR_ID_PATTERN.test(rootId) || typeof value !== 'string') {
+		return null;
+	}
+	const normalized = value.trim();
+	if (!normalized || normalized !== value) {
+		return null;
+	}
+	return normalized === 'generator'
+		|| normalized.startsWith('generator:')
+		|| normalized.startsWith('generator.')
+		? `${rootId}.${normalized}`
+		: `${rootId}:${normalized}`;
+}
+
+function getScopedGeneratorTraversalSuggestions(
+	value,
+	rootId,
+	locale = 'en',
+	options = {},
+) {
+	if (!GENERATOR_ID_PATTERN.test(rootId)) {
+		return [];
+	}
+	const input = String(value ?? '').trim();
+	const fullInput = input === 'generator'
+		|| input.startsWith('generator:')
+		|| input.startsWith('generator.')
+		? `${rootId}.${input}`
+		: `${rootId}:${input}`;
+	const { getGenerator, listGenerators } = getCatalogFunctions(options);
+	const analysisOptions = {
+		getGenerator,
+		listGenerators,
+		implicitRouterSelections: true,
+	};
+	const terminalGeneratorIds = options.terminalGeneratorIds;
+	return getGeneratorTraversalSuggestions(
+		fullInput,
+		locale,
+		analysisOptions,
+	)
+		.filter(suggestion => {
+			if (!(terminalGeneratorIds instanceof Set)) {
+				return true;
+			}
+			const analysis = analyzeGeneratorTraversalPath(
+				suggestion.value,
+				locale,
+				analysisOptions,
+			);
+			return Boolean(
+				analysis
+				&& analysis.traversal.field === undefined
+				&& analysis.contexts.every(context => (
+					terminalGeneratorIds.has(context.generator.id)
+				)),
+			);
+		})
+		.map(suggestion => ({
+			...suggestion,
+			value: getRelativeTraversalValue(suggestion.value),
+		}));
+}
+
+function getRelativeTraversalValue(value) {
+	const colonIndex = value.indexOf(':');
+	const periodIndex = value.indexOf('.');
+	const delimiterIndex = [colonIndex, periodIndex]
+		.filter(index => index >= 0)
+		.sort((left, right) => left - right)[0];
+	return delimiterIndex === undefined ? value : value.slice(delimiterIndex + 1);
+}
+
+function getCatalogFunctions(options) {
+	if (options.getGenerator && options.listGenerators) {
+		return {
+			getGenerator: options.getGenerator,
+			listGenerators: options.listGenerators,
+		};
+	}
+	const generatorCatalog = require('./generatorCatalog');
+	return {
+		getGenerator: options.getGenerator ?? generatorCatalog.getGenerator,
+		listGenerators: options.listGenerators ?? generatorCatalog.listGenerators,
+	};
 }
 
 function getContextEntries(context) {
@@ -413,7 +525,9 @@ function getMatchRank(candidate, query) {
 
 module.exports = {
 	analyzeGeneratorTraversalPath,
+	createScopedGeneratorTraversalPath,
 	createGeneratorTraversalAlias,
 	getGeneratorTraversalSuggestions,
+	getScopedGeneratorTraversalSuggestions,
 	parseGeneratorTraversalPath,
 };

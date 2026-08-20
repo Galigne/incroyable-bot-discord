@@ -64,13 +64,7 @@
             "level": 1
           }
         ],
-        "modifiers": [
-          {
-            "generator": "modifier_creature",
-            "entry": "smoldering",
-            "select": "fields"
-          }
-        ],
+        "modifiers": ["modifier_creature:smoldering"],
         "naturalArmorPercentage": 15
       }
     },
@@ -111,25 +105,9 @@
             "level": 1
           }
         ],
-        "modifiers": [
-          {
-            "generator": "modifier_creature",
-            "entry": "shadowed",
-            "select": "fields"
-          }
-        ],
-        "equipment": [
-          {
-            "generator": "weapons",
-            "entry": "mace",
-            "select": "fields"
-          }
-        ],
-        "armor": {
-          "generator": "armors",
-          "entry": "chain_mail",
-          "select": "fields"
-        }
+        "modifiers": ["modifier_creature:shadowed"],
+        "equipment": ["weapons:mace"],
+        "armor": "armors:chain_mail"
       }
     },
     {
@@ -181,13 +159,7 @@
             "level": 1
           }
         ],
-        "modifiers": [
-          {
-            "generator": "modifier_creature",
-            "entry": "frost_rimed",
-            "select": "fields"
-          }
-        ],
+        "modifiers": ["modifier_creature:frost_rimed"],
         "naturalArmorPercentage": 15
       }
     },
@@ -271,13 +243,7 @@
             "level": 1
           }
         ],
-        "modifiers": [
-          {
-            "generator": "modifier_creature",
-            "entry": "shadowed",
-            "select": "fields"
-          }
-        ],
+        "modifiers": ["modifier_creature:shadowed"],
         "naturalArmorPercentage": 15
       }
     },
@@ -291,13 +257,7 @@
       "generation": {
         "statProfile": "creature-elemental",
         "traits": ["{{ traits:fire_immunity }}", "{{ traits:regeneration }}"],
-        "equipment": [
-          {
-            "generator": "weapons",
-            "entry": "maul",
-            "select": "fields"
-          }
-        ],
+        "equipment": ["weapons:maul"],
         "naturalArmorPercentage": 15
       }
     },
@@ -440,18 +400,8 @@
           "{{ traits:disease_immunity }}",
           "Faux miracle — Une fois par scène, rend 10 % de ses PV maximums à une créature touchée ; celle-ci subit -1 aux actions d’Intelligence jusqu’à son prochain repos."
         ],
-        "equipment": [
-          {
-            "generator": "weapons",
-            "entry": "arcane_scepter",
-            "select": "fields"
-          }
-        ],
-        "armor": {
-          "generator": "armors",
-          "entry": "breastplate",
-          "select": "fields"
-        }
+        "equipment": ["weapons:arcane_scepter"],
+        "armor": "armors:breastplate"
       }
     },
     {
@@ -483,13 +433,7 @@
           "{{ traits:stone_body }}",
           "Fission magique — La première fois par scène qu’un sort l’affecte, crée dans un espace libre adjacent une copie fragile dotée de 1 PV."
         ],
-        "modifiers": [
-          {
-            "generator": "modifier_creature",
-            "entry": "smoldering",
-            "select": "fields"
-          }
-        ],
+        "modifiers": ["modifier_creature:smoldering"],
         "naturalArmorPercentage": 15
       }
     },
@@ -513,13 +457,7 @@
             "level": 2
           }
         ],
-        "modifiers": [
-          {
-            "generator": "modifier_creature",
-            "entry": "smoldering",
-            "select": "fields"
-          }
-        ],
+        "modifiers": ["modifier_creature:smoldering"],
         "naturalArmorPercentage": 10
       }
     },
@@ -638,13 +576,7 @@
           "{{ traits:poison_immunity }}",
           "{{ traits:disease_immunity }}"
         ],
-        "equipment": [
-          {
-            "generator": "weapons",
-            "entry": "spear",
-            "select": "fields"
-          }
-        ],
+        "equipment": ["weapons:spear"],
         "naturalArmorPercentage": 10
       }
     },
@@ -755,13 +687,7 @@
             "level": 1
           }
         ],
-        "modifiers": [
-          {
-            "generator": "modifier_creature",
-            "entry": "smoldering",
-            "select": "fields"
-          }
-        ],
+        "modifiers": ["modifier_creature:smoldering"],
         "naturalArmorPercentage": 25
       }
     },
@@ -878,13 +804,7 @@
           "{{ traits:incorporeal }}",
           "Boucle spectrale — Répète une scène ; les témoins qui l’interrompent volontairement subissent -1 aux actions d’Intelligence jusqu’à l’apaisement de l’esprit."
         ],
-        "modifiers": [
-          {
-            "generator": "modifier_creature",
-            "entry": "shadowed",
-            "select": "fields"
-          }
-        ]
+        "modifiers": ["modifier_creature:shadowed"]
       }
     },
     {
@@ -1107,13 +1027,7 @@
             "level": 2
           }
         ],
-        "modifiers": [
-          {
-            "generator": "modifier_creature",
-            "entry": "shadowed",
-            "select": "fields"
-          }
-        ]
+        "modifiers": ["modifier_creature:shadowed"]
       }
     },
     {
@@ -1142,13 +1056,7 @@
       "generation": {
         "statProfile": "creature-predator",
         "traits": ["{{ traits:darkvision }}", "{{ traits:pack_tactics }}"],
-        "equipment": [
-          {
-            "generator": "weapons",
-            "entry": "dagger",
-            "select": "fields"
-          }
-        ],
+        "equipment": ["weapons:dagger"],
         "naturalArmorPercentage": 5
       }
     },
@@ -1166,13 +1074,7 @@
           "{{ traits:pack_tactics }}",
           "{{ traits:natural_weapons }}"
         ],
-        "equipment": [
-          {
-            "generator": "weapons",
-            "entry": "spear",
-            "select": "fields"
-          }
-        ],
+        "equipment": ["weapons:spear"],
         "naturalArmorPercentage": 10
       }
     },
@@ -1393,13 +1295,7 @@
           "{{ traits:natural_weapons }}",
           "Deux têtes — Ne peut pas être surpris tant que ses deux têtes sont conscientes."
         ],
-        "equipment": [
-          {
-            "generator": "weapons",
-            "entry": "club",
-            "select": "fields"
-          }
-        ],
+        "equipment": ["weapons:club"],
         "naturalArmorPercentage": 20
       }
     },
@@ -1445,13 +1341,7 @@
             "level": 2
           }
         ],
-        "equipment": [
-          {
-            "generator": "weapons",
-            "entry": "combat_scepter",
-            "select": "fields"
-          }
-        ],
+        "equipment": ["weapons:combat_scepter"],
         "naturalArmorPercentage": 10
       }
     },

@@ -7,6 +7,9 @@ const {
 const {
 	analyzeGeneratorTraversalPath,
 } = require('./generatorTraversal');
+const {
+	isGeneratorRouter,
+} = require('./generatorSchema/routerValidation');
 const { selectWeightedEntry } = require('./weightedSelector');
 const { readNormalizedRandom } = require('./random');
 
@@ -32,63 +35,32 @@ function createGeneratorResolver({
 		if (!analysis) {
 			return null;
 		}
-		const { traversal } = analysis;
-		let generator = getGenerator(traversal.rootId, locale);
 		const random = options.random ?? Math.random;
 		const state = createState(locale, options, random);
-		const routeProvenance = [];
-		for (const [index, step] of traversal.steps.entries()) {
-			const entry = selectTraversalEntry(generator, step.entryId, random);
-			if (!entry?.generator) {
-				return null;
-			}
-			pushActiveSelection(state, generator, entry);
-			routeProvenance.push(createEntryProvenance(
-				generator,
-				entry,
-				step.entryId === undefined ? 'random' : 'fixed',
-				`root.traversal.${index}`,
-			));
-			generator = getGenerator(entry.generator, locale);
-			if (!generator) {
-				return null;
-			}
-		}
-		if (
-			traversal.field !== undefined
-			&& traversal.field !== 'name'
-			&& !generator.entrySchema.required.includes(traversal.field)
-		) {
-			return null;
-		}
-		const entry = selectTraversalEntry(generator, traversal.entryId, random);
-		if (!entry) {
-			return null;
-		}
-		const resolved = resolveSelection(
-			generator,
-			entry,
-			traversal.entryId === undefined ? 'random' : 'fixed',
+		return resolveAnalyzedTraversal(
+			analysis,
 			state,
-			`root.traversal.${traversal.steps.length}`,
-			traversal.field,
-			{ applyModifiers: traversal.field === undefined },
+			'root.traversal',
+			{ indexedPaths: true },
 		);
-		resolved.provenance = [...routeProvenance, ...resolved.provenance];
-		return traversal.field === undefined
-			? createCompletedResult(generator, entry, resolved)
-			: createCompletedFieldResult(
-				generator,
-				entry,
-				resolved,
-				traversal.field,
-			);
 	}
 
 	function resolveReference(reference, locale = 'en', options = {}) {
 		validateOptions(locale, options);
 		const random = options.random ?? Math.random;
 		const state = createState(locale, options, random);
+		if (typeof reference === 'string') {
+			return resolveCanonicalPath(
+				reference,
+				state,
+				options.path ?? 'root.reference',
+			);
+		}
+		if (!reference?.generator?.oneOf) {
+			throw new TypeError(
+				'Ordinary generator references must use a canonical path string.',
+			);
+		}
 		return referenceResolver.resolveReference(
 			reference,
 			locale,
@@ -116,26 +88,103 @@ function createGeneratorResolver({
 
 	function resolveInlineReferenceInState(expression, state, path) {
 		const parsed = parseWrappedInlineReference(expression, path);
-		const resolved = referenceResolver.resolveReference(
-			{
-				generator: parsed.generator,
-				...(parsed.entry ? { entry: parsed.entry } : {}),
-				select: parsed.field ? `fields.${parsed.field}` : 'display',
-			},
-			state.locale,
-			state,
-			path,
-		);
+		const resolved = resolveCanonicalPath(parsed.path, state, path);
+		const field = parsed.field;
 		return {
-			value: resolved.outputType === 'fields' && !parsed.field
+			value: field === undefined
 				? resolved.display
-				: resolved.value,
+				: resolved.displayFields[field],
 			fields: resolved.fields,
 			displayFields: resolved.displayFields,
-			template: resolved.template,
+			template: field === undefined
+				? resolved.displayTemplate
+				: resolved.displayFieldTemplates[field],
 			provenance: resolved.provenance,
 			modifiers: resolved.modifiers,
 		};
+	}
+
+	function resolveCanonicalPath(referencePath, state, path) {
+		const analysis = analyzeGeneratorTraversalPath(
+			referencePath,
+			state.locale,
+			{
+				allowAliases: false,
+				getGenerator,
+				implicitRouterSelections: false,
+				listGenerators,
+				rootVisibility: 'all',
+			},
+		);
+		if (!analysis) {
+			throw generatorResolutionError(
+				'INVALID_GENERATOR_REFERENCE_PATH',
+				'The generator reference path is invalid.',
+			);
+		}
+		return resolveAnalyzedTraversal(analysis, state, path);
+	}
+
+	function resolveAnalyzedTraversal(analysis, state, path, options = {}) {
+		const { traversal } = analysis;
+		let generator = getGenerator(traversal.rootId, state.locale);
+		const routeProvenance = [];
+		const initialDepth = state.activeSelections.length;
+		try {
+			for (const [index, step] of traversal.steps.entries()) {
+				const entry = selectTraversalEntry(generator, step.entryId, state.random);
+				if (!entry?.generator) {
+					return null;
+				}
+				pushActiveSelection(state, generator, entry);
+				routeProvenance.push(createEntryProvenance(
+					generator,
+					entry,
+					step.entryId === undefined ? 'random' : 'fixed',
+					options.indexedPaths
+						? `${path}.${index}`
+						: `${path}.routes.${index}`,
+				));
+				generator = getGenerator(entry.generator, state.locale);
+				if (!generator) {
+					return null;
+				}
+			}
+			const entry = selectTraversalEntry(
+				generator,
+				traversal.entryId,
+				state.random,
+			);
+			if (!entry) {
+				return null;
+			}
+			const resolved = resolveSelection(
+				generator,
+				entry,
+				traversal.entryId === undefined ? 'random' : 'fixed',
+				state,
+				options.indexedPaths
+					? `${path}.${traversal.steps.length}`
+					: path,
+				traversal.field,
+				{
+					applyModifiers: traversal.field === undefined
+						&& !isGeneratorRouter(generator),
+				},
+			);
+			resolved.provenance = [...routeProvenance, ...resolved.provenance];
+			return traversal.field === undefined
+				? createCompletedResult(generator, entry, resolved)
+				: createCompletedFieldResult(
+					generator,
+					entry,
+					resolved,
+					traversal.field,
+				);
+		}
+		finally {
+			state.activeSelections.length = initialDepth;
+		}
 	}
 
 	function resolveSelection(
@@ -374,6 +423,8 @@ function createCompletedResult(generator, entry, resolved) {
 		generatorName: generator.name,
 		entryId: entry.id,
 		outputType: resolved.outputType,
+		display: resolved.display,
+		displayTemplate: resolved.displayTemplate,
 		provenance: resolved.provenance,
 		modifiers: resolved.modifiers,
 	};
@@ -395,6 +446,8 @@ function createCompletedFieldResult(generator, entry, resolved, field) {
 		generatorName: generator.name,
 		entryId: entry.id,
 		outputType: 'fields',
+		display: String(resolved.selectedField),
+		displayTemplate: resolved.selectedDisplayTemplate,
 		fields: { [field]: resolved.selectedField },
 		displayFields: { [field]: resolved.selectedField },
 		displayFieldTemplates: {
@@ -495,6 +548,7 @@ function assertGeneratorResolverInterface(resolver) {
 		typeof resolver?.generate !== 'function'
 		|| typeof resolver.resolveReference !== 'function'
 		|| typeof resolver.resolveInlineReference !== 'function'
+		|| typeof resolver.resolveInlineString !== 'function'
 	) {
 		throw new TypeError(
 			'Random generation requires a resolver with reference and inline-reference resolution.',

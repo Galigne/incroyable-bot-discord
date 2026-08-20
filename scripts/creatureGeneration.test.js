@@ -37,6 +37,9 @@ const {
 } = require('../services/generatorCatalog');
 const generatorResolver = require('../services/generatorResolver');
 const {
+	createGeneratorTraversalAlias,
+} = require('../services/generatorTraversal');
+const {
 	CREATURE_ROUTER_ID,
 	isGeneratorRouter,
 	validateCreatureStatProfileRelationships,
@@ -188,11 +191,7 @@ test('creature metadata rejects mechanical overrides and allows stacked armor so
 
 	const armorConflict = structuredClone(english);
 	armorConflict.entries[0].generation.naturalArmorPercentage = 20;
-	armorConflict.entries[0].generation.armor = {
-		generator: 'armors',
-		entry: 'padded_armor',
-		select: 'fields',
-	};
+	armorConflict.entries[0].generation.armor = 'armors:padded_armor';
 	assert.doesNotThrow(
 		() => validateGeneratorDefinition(armorConflict, '<generator>', validationOptions),
 	);
@@ -279,10 +278,7 @@ test('creature generation references require compatible target payloads', () => 
 	const catalog = new Map(createGeneratorCatalogCandidate().get('en'));
 	const { generatorId } = getCreatureFixture();
 	const detail = structuredClone(catalog.get(generatorId));
-	detail.entries[0].generation.statusEffects = [{
-		generator: 'faction',
-		select: 'fields',
-	}];
+	detail.entries[0].generation.statusEffects = ['faction'];
 	catalog.set(generatorId, detail);
 	assert.throws(
 		() => validateGeneratorRelationships(catalog),
@@ -293,11 +289,7 @@ test('creature generation references require compatible target payloads', () => 
 	const missingRarityDetail = structuredClone(missingRarityCatalog.get(generatorId));
 	missingRarityDetail.entries[0].generation = {
 		...(missingRarityDetail.entries[0].generation ?? {}),
-		armor: {
-			generator: 'armors',
-			entry: 'padded_armor',
-			select: 'fields',
-		},
+		armor: 'armors:padded_armor',
 	};
 	const armorGenerator = structuredClone(missingRarityCatalog.get('armors'));
 	delete armorGenerator.modifiers.modifier_rarity;
@@ -642,21 +634,9 @@ test('natural armor, generated armor, status, and weighted gear resolve to final
 		fixedRules: [],
 		statusEffects: [],
 		modifiers: [],
-		armor: {
-			generator: 'armors',
-			entry: 'padded_armor',
-			select: 'fields',
-		},
-		equipment: [{
-			generator: 'shields',
-			entry: 'buckler',
-			select: 'display',
-		}],
-		inventory: [{
-			generator: 'shields',
-			entry: 'round_shield',
-			select: 'fields',
-		}],
+		armor: 'armors:padded_armor',
+		equipment: ['shields:buckler'],
+		inventory: ['shields:round_shield'],
 	};
 	const stacked = populateRandomCreature(
 		new Creature('Generated.Stacked.Armor'),
@@ -724,7 +704,7 @@ test('omitted creature generation metadata uses the shared default profile and n
 test('descriptive modifiers cannot change mechanical generation results', () => {
 	const { type, generatorId } = getCreatureFixture();
 	const baseResult = generatorResolver.resolveReference(
-		{ generator: generatorId, select: 'fields' },
+		generatorId,
 		'en',
 		{ random: () => 0 },
 	);
@@ -848,10 +828,11 @@ test('/gen-creature is DM-only and atomically persists a complete generated crea
 	assert.equal(getEntityOperationQueueSize(), 0);
 });
 
-test('/gen-creature type autocomplete uses localized router entries and stable IDs', async () => {
+test('/gen-creature type autocomplete submits localized scoped paths', async () => {
 	const typeId = getCreatureTypes()[0];
 	const localizedRoute = getCreatureRoute(typeId, 'fr');
-	const focusedValue = typeId.slice(0, 3);
+	const localizedPath = createGeneratorTraversalAlias(localizedRoute.name);
+	const focusedValue = localizedPath.slice(0, 3);
 	let choices;
 	await commandRegistry.getRuntimeCommands().get('gen-creature').autocomplete({
 		config: { ...config, locale: 'fr' },
@@ -868,9 +849,9 @@ test('/gen-creature type autocomplete uses localized router entries and stable I
 			user: { id: 'dm-user' },
 		},
 	});
-	const choice = choices.find(candidate => candidate.value === typeId);
+	const choice = choices.find(candidate => candidate.value === localizedPath);
 	assert.ok(choice);
-	assert.equal(choice.name, localizedRoute.name);
+	assert.equal(choice.name, localizedPath);
 });
 
 test('/gen-creature treats an omitted Discord type option as random selection', async () => {
@@ -913,6 +894,38 @@ test('/gen-creature randomly selects a router entry when type is omitted', () =>
 	const expectedType = getCreatureTypes().at(-1);
 	assert.equal(creature.source.archetypeId, expectedType);
 	assert.equal(creature.source.generatorId, getCreatureGeneratorId(expectedType));
+});
+
+test('/gen-creature type accepts scoped implicit and explicit archetype traversal', () => {
+	const type = getCreatureTypeForEntry('ancient_dragon');
+	for (const traversalPath of [
+		`${type}:ancient_dragon`,
+		`${type}.generator:ancient_dragon`,
+	]) {
+		const creature = populateRandomCreature(
+			new Creature(`Scoped.${traversalPath}`),
+			{ level: 4, random: () => 0, type: traversalPath },
+		);
+		assert.equal(creature.source.archetypeId, type);
+		assert.equal(creature.source.entryId, 'ancient_dragon');
+	}
+
+	let randomCalls = 0;
+	assert.throws(
+		() => populateRandomCreature(
+			new Creature('Scoped.Invalid.Field'),
+			{
+				level: 4,
+				random() {
+					randomCalls += 1;
+					return 0;
+				},
+				type: `${type}:ancient_dragon.name`,
+			},
+		),
+		error => error.translationKey === 'errors.creatureTypeInvalid',
+	);
+	assert.equal(randomCalls, 0);
 });
 
 test('generation, collision, and save failures leave no partial creature or history', async () => {
@@ -1226,20 +1239,24 @@ function createDetailResolver(generatorId, result, modifierResult) {
 					modifiers: result.modifiers ?? [],
 				};
 			}
-			return generatorResolver.generate(path, locale, options);
+			return generatorResolver.generate(traversalPath, locale, options);
 		},
 		resolveReference(reference, locale, options) {
-			if (reference.generator === generatorId && !reference.entry) {
+			if (reference === generatorId) {
 				return structuredClone(result);
 			}
-			if (reference.generator === 'modifier_creature' && modifierResult) {
+			if (reference === 'modifier_creature' && modifierResult) {
 				return structuredClone(modifierResult);
 			}
 			return generatorResolver.resolveReference(reference, locale, options);
 		},
 		resolveInlineReference(expression, locale, options) {
 			const reference = parseWrappedInlineReference(expression, 'creature detail test');
-			if (reference.generator === generatorId && !reference.entry && !reference.field) {
+			if (
+				reference.rootId === generatorId
+				&& reference.operations.length === 0
+				&& !reference.field
+			) {
 				return structuredClone(result);
 			}
 			return generatorResolver.resolveInlineReference(expression, locale, options);

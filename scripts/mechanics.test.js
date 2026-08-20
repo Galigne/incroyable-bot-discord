@@ -515,42 +515,45 @@ test('random character statistics use the individually selected background arche
 			const entry = generatorCatalog.getGenerator('military', locale).entries
 				.find(candidate => candidate.id === entryId);
 			assert.equal(entry.generation.statProfile, profileId);
-			const resolver = {
-				generate(traversalPath, resolvedLocale, options) {
-					if (traversalPath === 'background:military.generator') {
-						return {
-							generatorId: 'military',
-							entryId,
-							outputType: 'value',
-							value: entry.name,
-							provenance: [],
-							modifiers: [],
-						};
-					}
-					return generatorResolver.generate(traversalPath, resolvedLocale, options);
-				},
-				resolveReference: generatorResolver.resolveReference,
-				resolveInlineReference: generatorResolver.resolveInlineReference,
-			};
-			const character = createCharacterFixture();
-			populateRandomCharacter(character, {
-				background: 'military',
-				level: 10,
-				locale,
-				random: () => 0.61,
-				resolver,
-			});
-			assert.deepEqual(
-				character.statistics,
-				generateStats({
+			for (const background of [
+				`military:${entryId}`,
+				`military.generator:${entryId}`,
+			]) {
+				const character = createCharacterFixture();
+				populateRandomCharacter(character, {
+					background,
 					level: 10,
-					profile: getStatProfile(profileId),
+					locale,
 					random: () => 0.61,
-				}),
-				`${locale}:${entryId}`,
-			);
+				});
+				assert.deepEqual(
+					character.statistics,
+					generateStats({
+						level: 10,
+						profile: getStatProfile(profileId),
+						random: () => 0.61,
+					}),
+					`${locale}:${background}`,
+				);
+			}
 		}
 	}
+});
+
+test('/gen-char background rejects field terminals before archetype generation', () => {
+	let randomCalls = 0;
+	assert.throws(
+		() => populateRandomCharacter(createCharacterFixture(), {
+			background: 'criminal:smuggler.name',
+			level: 1,
+			random() {
+				randomCalls += 1;
+				return 0;
+			},
+		}),
+		error => error.translationKey === 'errors.backgroundUnknown',
+	);
+	assert.equal(randomCalls, 0);
 });
 
 test('character modifiers attach without changing generated base state', () => {
@@ -597,12 +600,13 @@ function createCharacterModifierResolver(modifierResult) {
 	return {
 		generate: generatorResolver.generate,
 		resolveReference(reference, locale, options) {
-			if (reference.generator === 'modifier_character') {
+			if (reference === 'modifier_character') {
 				return structuredClone(modifierResult);
 			}
 			return generatorResolver.resolveReference(reference, locale, options);
 		},
 		resolveInlineReference: generatorResolver.resolveInlineReference,
+		resolveInlineString: generatorResolver.resolveInlineString,
 	};
 }
 
@@ -672,54 +676,23 @@ test('character generation metadata replaces normal categories and stacks equipp
 		naturalArmorPercentage: 20,
 		talents: ['Gifted: {{ talents:athlete }}'],
 		fixedRules: [{ entry: 'thread_rule', level: 2 }],
-		statusEffects: [{
-			generator: 'status_effect',
-			entry: 'bruised',
-			select: 'fields',
-		}],
-		modifiers: [{
-			generator: 'modifier_character',
-			entry: 'scarred',
-			select: 'fields',
-		}],
-		armor: {
-			generator: 'armors',
-			entry: 'padded_armor',
-			select: 'fields',
-		},
-		equipment: [{
-			generator: 'shields',
-			entry: 'buckler',
-			select: 'display',
-		}],
-		inventory: [{
-			generator: 'shields',
-			entry: 'round_shield',
-			select: 'fields',
-		}],
+		statusEffects: ['status_effect:bruised'],
+		modifiers: ['modifier_character:scarred'],
+		armor: 'armors:padded_armor',
+		equipment: ['shields:buckler'],
+		inventory: ['shields:round_shield'],
 	};
 	const profileRequests = [];
-	const resolver = {
-		generate(path, locale, options) {
-			if (path === `background:${backgroundRoute.id}.generator`) {
-				return {
-					generatorId: backgroundGenerator.id,
-					entryId: archetype.id,
-					outputType: 'value',
-					value: archetype.name,
-					provenance: [],
-					modifiers: [],
-				};
-			}
-			return generatorResolver.generate(path, locale, options);
-		},
-		resolveInlineReference: generatorResolver.resolveInlineReference,
-		resolveInlineString: generatorResolver.resolveInlineString,
-		resolveReference: generatorResolver.resolveReference,
-	};
+	const resolver = generatorResolver.createGeneratorResolver({
+		getGenerator: (generatorId, locale) => (
+			generatorId === backgroundGenerator.id
+				? backgroundGenerator
+				: generatorCatalog.getGenerator(generatorId, locale)
+		),
+	});
 	const character = createCharacterFixture();
 	populateRandomCharacter(character, {
-		background: backgroundRoute.id,
+		background: `${backgroundRoute.id}:${archetype.id}`,
 		getGenerator: (generatorId, locale) => (
 			generatorId === backgroundGenerator.id
 				? backgroundGenerator

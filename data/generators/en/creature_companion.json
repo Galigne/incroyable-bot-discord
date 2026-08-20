@@ -45,13 +45,7 @@
           "{{ traits:flight }}",
           "Homing Instinct — Can always determine the direction of a home it has occupied for at least one week."
         ],
-        "inventory": [
-          {
-            "generator": "curio",
-            "entry": "mysterious_sealed_letter",
-            "select": "fields"
-          }
-        ]
+        "inventory": ["curio:mysterious_sealed_letter"]
       }
     },
     {
@@ -64,13 +58,7 @@
       "generation": {
         "statProfile": "creature-companion-magic",
         "traits": ["{{ traits:sure_footed }}", "{{ traits:powerful_build }}"],
-        "inventory": [
-          {
-            "generator": "food_and_drink",
-            "entry": "three_travel_rations",
-            "select": "fields"
-          }
-        ]
+        "inventory": ["food_and_drink:three_travel_rations"]
       }
     },
     {
@@ -310,13 +298,7 @@
             "level": 1
           }
         ],
-        "inventory": [
-          {
-            "generator": "supplies",
-            "entry": "writing_kit",
-            "select": "fields"
-          }
-        ]
+        "inventory": ["supplies:writing_kit"]
       }
     },
     {

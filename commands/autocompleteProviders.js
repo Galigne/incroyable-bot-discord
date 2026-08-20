@@ -1,13 +1,12 @@
 const {
 	getGeneratorTraversalSuggestions,
+	getScopedGeneratorTraversalSuggestions,
 } = require('../services/generatorTraversal');
+const generatorCatalog = require('../services/generatorCatalog');
 const {
 	filterAutocompleteChoices,
 	MAX_AUTOCOMPLETE_CHOICES,
 } = require('../util/autocomplete');
-const {
-	getLocalizedRouterChoices,
-} = require('../util/generatorRouterChoices');
 const {
 	canManageEntity,
 	hasFullEntityAuthority,
@@ -82,8 +81,9 @@ function normalizeStaticChoice(choice, locale) {
 }
 
 function getBackgroundChoices(option, context, focused) {
-	return filterAutocompleteChoices(
-		getLocalizedRouterChoices('background', context.locale),
+	return getRoutedArchetypePathChoices(
+		'background',
+		context.locale,
 		focused.value,
 	);
 }
@@ -170,10 +170,31 @@ function getFullAuthorityEntityChoices(option, context, focused) {
 }
 
 function getCreatureTypeChoices(option, context, focused) {
-	return filterAutocompleteChoices(
-		getLocalizedRouterChoices('creature', context.locale),
+	return getRoutedArchetypePathChoices(
+		'creature',
+		context.locale,
 		focused.value,
 	);
+}
+
+function getRoutedArchetypePathChoices(rootId, locale, focusedValue) {
+	const terminalGeneratorIds = new Set(
+		(generatorCatalog.getGenerator(rootId, locale)?.entries ?? [])
+			.map(entry => entry.generator)
+			.filter(Boolean),
+	);
+	return getScopedGeneratorTraversalSuggestions(
+		focusedValue,
+		rootId,
+		locale,
+		{ terminalGeneratorIds },
+	)
+		.filter(choice => choice.value.length <= 100)
+		.slice(0, MAX_AUTOCOMPLETE_CHOICES)
+		.map(choice => ({
+			name: choice.value,
+			value: choice.value,
+		}));
 }
 
 function getUndoableEntities(option, context, focused) {

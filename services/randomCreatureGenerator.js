@@ -12,6 +12,10 @@ const {
 } = require('./generationMetadata');
 const { createGeneratedResources } = require('./mechanics/resources');
 const { randomInteger } = require('./random');
+const {
+	prepareScopedRoutedArchetype,
+	resolveScopedRoutedArchetype,
+} = require('./routedArchetypeSelection');
 
 function populateRandomCreature(creature, options = {}) {
 	const random = options.random ?? Math.random;
@@ -23,48 +27,46 @@ function populateRandomCreature(creature, options = {}) {
 	if (typeof resolver.resolveInlineString !== 'function') {
 		throw new TypeError('Creature generation requires inline-string resolution.');
 	}
-	const level = options.level ?? randomInteger(1, 10, random);
-	validateLevel(level);
-	const router = getGenerator(CREATURE_ROUTER_ID, locale);
-	const routeEntry = requestedType === undefined
-		? null
-		: router?.entries?.find(entry => entry.id === requestedType);
-	if (!router || !Array.isArray(router.entries) || router.entries.length === 0) {
+	const preparedType = prepareScopedRoutedArchetype({
+		getGenerator,
+		locale,
+		rootId: CREATURE_ROUTER_ID,
+		scopedPath: requestedType,
+	});
+	if (!preparedType.ok && preparedType.reason === 'router-missing') {
 		throw creatureGenerationError(
 			'Creature router is unavailable.',
 			'errors.generatorMissing',
 			{ category: CREATURE_ROUTER_ID },
 		);
 	}
-	if (requestedType !== undefined && !routeEntry) {
+	if (!preparedType.ok) {
 		throw creatureGenerationError(
-			`Unsupported creature type: ${requestedType}.`,
+			`Unsupported creature traversal path: ${requestedType}.`,
 			'errors.creatureTypeInvalid',
 		);
 	}
-
-	const result = resolver.generate(
-		requestedType === undefined
-			? `${CREATURE_ROUTER_ID}.generator`
-			: `${CREATURE_ROUTER_ID}:${requestedType}`,
+	const level = options.level ?? randomInteger(1, 10, random);
+	validateLevel(level);
+	const selection = resolveScopedRoutedArchetype({
+		getGenerator,
 		locale,
-		{ random },
-	);
-	if (!result) {
+		prepared: preparedType,
+		random,
+		resolver,
+		rootId: CREATURE_ROUTER_ID,
+		scopedPath: requestedType,
+	});
+	if (!selection.ok) {
 		throw creatureGenerationError(
 			`Creature type route ${requestedType ?? 'random'} is unavailable.`,
 			'errors.generatorMissing',
 			{ category: requestedType ?? CREATURE_ROUTER_ID },
 		);
 	}
-	const selectedType = result.provenance.find(record => (
-		record.type === 'entry'
-		&& record.generatorId === CREATURE_ROUTER_ID
-	))?.entryId;
+	const { entry, result, routeEntryId: selectedType } = selection;
 	const generatorId = result.generatorId;
-	const generator = getGenerator(generatorId, locale);
-	const entry = generator?.entries.find(candidate => candidate.id === result.entryId);
-	if (!selectedType || !entry || result.outputType !== 'fields') {
+	if (result.outputType !== 'fields') {
 		throw creatureGenerationError(
 			`Creature detail generator ${generatorId} is unavailable.`,
 			'errors.generatorMissing',

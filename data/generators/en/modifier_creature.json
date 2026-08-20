@@ -20,7 +20,7 @@
       "id": "hybrid",
       "name": "Hybrid",
       "fields": {
-        "description": "A second lineage has changed its senses, locomotion, or natural attacks, while mismatched anatomy creates a clear limitation or weak point for the GM to define."
+        "description": "This creature is the product of hybridization with {{ creature.generator.name }}. Its physical appearance and abilities are affected as a result."
       }
     },
     {

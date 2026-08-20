@@ -16,7 +16,9 @@ module.exports = {
 		const locale = getLocale(config);
 		const characterKey = interaction.options.getString('character-key', true);
 		const level = interaction.options.getInteger('level');
-		const background = interaction.options.getString('background');
+		// discord.js returns null for an omitted optional string option. The
+		// generator uses undefined to distinguish omission from an invalid value.
+		const background = interaction.options.getString('background') ?? undefined;
 		try {
 			const character = await generateCharacter(
 				characterKey,

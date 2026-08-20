@@ -144,17 +144,46 @@ test('background metadata supports optional shared overrides and rejects traits 
 		fixedRules: [],
 		statusEffects: [],
 		modifiers: [],
-		armor: {
-			generator: 'armors',
-			entry: 'padded_armor',
-			select: 'fields',
-		},
+		armor: 'armors:padded_armor',
 		equipment: [],
 		inventory: [],
 	};
 	assert.doesNotThrow(
 		() => validateGeneratorDefinition(
 			sharedOverrides,
+			'<generator>',
+			validationOptions,
+		),
+	);
+
+	const legacyReference = structuredClone(sharedOverrides);
+	legacyReference.entries[0].generation.armor = {
+		generator: 'armors',
+		entry: 'padded_armor',
+		select: 'fields',
+	};
+	assert.throws(
+		() => validateGeneratorDefinition(
+			legacyReference,
+			'<generator>',
+			validationOptions,
+		),
+		error => error.code === 'INVALID_GENERATOR_REFERENCE',
+	);
+
+	const weightedReference = structuredClone(sharedOverrides);
+	weightedReference.entries[0].generation.inventory = [{
+		generator: {
+			oneOf: [
+				{ id: 'supplies', weight: 3 },
+				{ id: 'weapons', weight: 1 },
+			],
+		},
+		select: 'fields',
+	}];
+	assert.doesNotThrow(
+		() => validateGeneratorDefinition(
+			weightedReference,
 			'<generator>',
 			validationOptions,
 		),
@@ -212,7 +241,7 @@ test('background metadata supports optional shared overrides and rejects traits 
 		relationshipCatalog.get(generatorId),
 	);
 	invalidRelationships.entries[0].generation = {
-		statusEffects: [{ generator: 'faction', select: 'fields' }],
+		statusEffects: ['faction'],
 	};
 	relationshipCatalog.set(generatorId, invalidRelationships);
 	assert.throws(
@@ -362,7 +391,6 @@ test('generator autocomplete and help expose localized public aliases', () => {
 	assert.ok(publicValues.some(value => value.value === 'butin'));
 	assert.ok(publicValues.every(value => value.name === value.value));
 
-	const englishBackgrounds = generatorCatalog.getGenerator('background', 'en').entries;
 	const frenchBackgrounds = generatorCatalog.getGenerator('background', 'fr').entries;
 	const choices = AUTOCOMPLETE_PROVIDERS.backgrounds(
 		{},
@@ -371,15 +399,57 @@ test('generator autocomplete and help expose localized public aliases', () => {
 	);
 	assert.deepEqual(
 		choices.map(choice => choice.value),
-		englishBackgrounds.map(entry => entry.id),
+		frenchBackgrounds.map(entry => createGeneratorTraversalAlias(entry.name)),
 	);
-	assert.equal(choices[0].name, frenchBackgrounds[0].name);
+	assert.equal(choices[0].name, choices[0].value);
+	const firstBackgroundPath = createGeneratorTraversalAlias(frenchBackgrounds[0].name);
+	const backgroundEntries = AUTOCOMPLETE_PROVIDERS.backgrounds(
+		{},
+		{ locale: 'fr' },
+		{ value: `${firstBackgroundPath}:` },
+	);
+	assert.ok(backgroundEntries.length > 0);
+	assert.ok(backgroundEntries.every(choice => (
+		choice.value.startsWith(`${firstBackgroundPath}:`)
+	)));
+
+	const frenchCreatureRoutes = generatorCatalog.getGenerator('creature', 'fr').entries;
+	const firstCreaturePath = createGeneratorTraversalAlias(frenchCreatureRoutes[0].name);
+	const creatureEntries = AUTOCOMPLETE_PROVIDERS['creature-types'](
+		{},
+		{ locale: 'fr' },
+		{ value: `${firstCreaturePath}:` },
+	);
+	assert.ok(creatureEntries.length > 0);
+	assert.ok(creatureEntries.every(choice => (
+		choice.value.startsWith(`${firstCreaturePath}:`)
+	)));
 });
 
 test('wrapped inline reference parsing requires exactly one valid token', () => {
 	assert.deepEqual(
 		parseWrappedInlineReference('{{ monster:dragon.name }}'),
-		{ generator: 'monster', entry: 'dragon', field: 'name' },
+		{
+			rootId: 'monster',
+			operations: [{ type: 'selection', entryId: 'dragon' }],
+			field: 'name',
+			path: 'monster:dragon.name',
+		},
+	);
+	assert.deepEqual(
+		parseWrappedInlineReference(
+			'{{ creature:monster.generator:dragon.description }}',
+		),
+		{
+			rootId: 'creature',
+			operations: [
+				{ type: 'selection', entryId: 'monster' },
+				{ type: 'route' },
+				{ type: 'selection', entryId: 'dragon' },
+			],
+			field: 'description',
+			path: 'creature:monster.generator:dragon.description',
+		},
 	);
 	for (const invalid of [
 		'monster',

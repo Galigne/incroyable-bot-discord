@@ -60,7 +60,10 @@ function validateGenerationMetadata(generation, location, entityType) {
 	}
 	if (generation.armor !== undefined) {
 		validateReference(generation.armor, `${location} armor`);
-		if (generation.armor.select !== 'fields') {
+		if (
+			typeof generation.armor !== 'string'
+			&& generation.armor.select !== 'fields'
+		) {
 			throw generatorSchemaError(
 				'INVALID_GENERATION_ARMOR_REFERENCE',
 				`${entityLabel(entityType)} archetype ${location} armor must select complete fields.`,
@@ -161,6 +164,7 @@ function validateReferenceList(references, location, entityType, options = {}) {
 		validateReference(reference, `${location}.${index}`);
 		if (
 			options.requiredSelector
+			&& typeof reference !== 'string'
 			&& reference.select !== options.requiredSelector
 		) {
 			throw generatorSchemaError(

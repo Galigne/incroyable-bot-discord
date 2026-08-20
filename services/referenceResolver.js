@@ -7,16 +7,20 @@ function createReferenceResolver({ getGenerator, resolveSelection }) {
 	}
 
 	function resolveReference(reference, locale, state, path) {
-		const sourceResult = resolveSource(reference.generator, locale, state.random, path);
-		const entry = resolveEntry(sourceResult.generator, reference, state.random);
-		const selection = reference.entry ? 'fixed' : 'random';
+		const sourceResult = resolveWeightedSource(
+			reference.generator.oneOf,
+			locale,
+			state.random,
+			path,
+		);
+		const entry = selectWeightedEntry(sourceResult.generator.entries, state.random);
 		const requestedField = reference.select.startsWith('fields.')
 			? reference.select.slice('fields.'.length)
 			: undefined;
 		const resolved = resolveSelection(
 			sourceResult.generator,
 			entry,
-			selection,
+			'random',
 			state,
 			path,
 			requestedField,
@@ -35,14 +39,8 @@ function createReferenceResolver({ getGenerator, resolveSelection }) {
 		};
 	}
 
-	function resolveSource(source, locale, random, path) {
-		if (typeof source === 'string') {
-			return {
-				generator: requireGenerator(source, locale),
-				provenance: [],
-			};
-		}
-		const selected = selectWeightedEntry(source.oneOf, random);
+	function resolveWeightedSource(sources, locale, random, path) {
+		const selected = selectWeightedEntry(sources, random);
 		return {
 			generator: requireGenerator(selected.id, locale),
 			provenance: [{
@@ -68,20 +66,6 @@ function createReferenceResolver({ getGenerator, resolveSelection }) {
 	return {
 		resolveReference,
 	};
-}
-
-function resolveEntry(generator, reference, random) {
-	if (reference.entry) {
-		const entry = generator.entries.find(candidate => candidate.id === reference.entry);
-		if (!entry) {
-			throw generatorResolutionError(
-				'GENERATOR_ENTRY_NOT_FOUND',
-				'The requested fixed generator entry is unavailable.',
-			);
-		}
-		return entry;
-	}
-	return selectWeightedEntry(generator.entries, random);
 }
 
 function selectResolvedOutput(resolved, selector) {

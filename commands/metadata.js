@@ -168,7 +168,10 @@ const COMMAND_METADATA = [
 				autocomplete: { provider: 'backgrounds' },
 			},
 		],
-		examples: ['/gen-char character-key:<new key> [level] [background]'],
+		examples: [
+			'/gen-char character-key:<new key> [level] [background]',
+			'/gen-char character-key:<new key> background:<category>:<archetype>',
+		],
 		help: {
 			order: 21,
 			summaryKey: 'rpg.genChar.description',
@@ -217,7 +220,7 @@ const COMMAND_METADATA = [
 		],
 		examples: [
 			'/gen-creature creature-key:<new key> [level] [type]',
-			'/gen-creature creature-key:<new key> level:<1-10> type:<type>',
+			'/gen-creature creature-key:<new key> type:<type>:<archetype>',
 		],
 		help: {
 			order: 22,

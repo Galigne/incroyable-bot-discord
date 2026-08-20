@@ -26,22 +26,19 @@ function resolveFixedRules(
 	const provenance = [];
 	const rules = fixedRules.map((fixedRule, index) => {
 		const resolved = resolveGenerationReference(
-			{
-				generator: 'rules',
-				entry: fixedRule.entry,
-				select: 'fields',
-			},
+			`rules:${fixedRule.entry}`,
 			locale,
 			random,
 			resolver,
 			`${path}.${index}`,
 		);
 		provenance.push(...resolved.provenance);
+		const fields = resolved.displayFields ?? resolved.fields ?? resolved.value;
 		return {
 			...(includeEntryId ? { entryId: fixedRule.entry } : {}),
-			name: requireLocalizedField(resolved.value, 'name', createError),
+			name: requireLocalizedField(fields, 'name', createError),
 			description: requireLocalizedField(
-				resolved.value,
+				fields,
 				'description',
 				createError,
 			),

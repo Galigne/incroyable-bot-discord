@@ -20,7 +20,7 @@
       "id": "hybrid",
       "name": "Hybride",
       "fields": {
-        "description": "Une seconde lignée a modifié ses sens, ses déplacements ou ses attaques naturelles, mais son anatomie hybride crée une limite ou un point faible choisi par le MJ."
+        "description": "Cette créature est issue d'une hybridation avec {{ creature.generator.name }}. Son apparence physique et ses facultés s'en retrouvent impactées."
       }
     },
     {

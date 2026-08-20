@@ -66,13 +66,13 @@ test('every production quest, rumor, and secret resolves references with provena
 			const entries = generatorCatalog.getGenerator(generatorId, locale).entries;
 			for (const entry of entries) {
 				const result = generatorResolver.resolveReference(
-					{ generator: generatorId, entry: entry.id, select: 'display' },
+					`${generatorId}:${entry.id}`,
 					locale,
 					{ random: () => 0 },
 				);
 				assert.ok(result);
-				assert.ok(result.value || Object.keys(result.displayFields ?? {}).length > 0);
-				assert.doesNotMatch(result.value, /\{\{|\}\}|undefined/);
+				assert.ok(result.display);
+				assert.doesNotMatch(result.display, /\{\{|\}\}|undefined/);
 				assert.ok(result.provenance.length > 1, `${locale}:${entry.id}`);
 				assert.equal(result.provenance[0].generatorId, generatorId);
 				assert.equal(result.provenance[0].entryId, entry.id);
@@ -451,6 +451,28 @@ test('loot identities use the configured independent modifier families and weigh
 	});
 });
 
+test('hybrid creature modifiers use explicit routed field references in both locales', () => {
+	const expectedDescriptions = {
+		en: 'This creature is the product of hybridization with {{ creature.generator.name }}. Its physical appearance and abilities are affected as a result.',
+		fr: 'Cette créature est issue d\'une hybridation avec {{ creature.generator.name }}. Son apparence physique et ses facultés s\'en retrouvent impactées.',
+	};
+	for (const locale of ['en', 'fr']) {
+		const hybrid = generatorCatalog.getGenerator('modifier_creature', locale)
+			.entries.find(entry => entry.id === 'hybrid');
+		assert.equal(hybrid.fields.description, expectedDescriptions[locale]);
+		const resolved = generatorResolver.resolveReference(
+			'modifier_creature:hybrid',
+			locale,
+			{ random: () => 0 },
+		);
+		assert.doesNotMatch(resolved.displayFields.description, /\{\{|\}\}/);
+		assert.deepEqual(resolved.modifiers, []);
+		assert.ok(resolved.provenance.some(record => (
+			record.generatorId === 'creature'
+		)));
+	}
+});
+
 test('direct loot generation keeps modifiers separate from the base result', () => {
 	const result = generatorResolver.generate(
 		'loot:weapons:short_sword',
@@ -822,11 +844,11 @@ test('affliction symptom references resolve as grammatical localized status labe
 	for (const [locale, entries] of Object.entries(expectations)) {
 		for (const [entry, expected] of Object.entries(entries)) {
 			const result = generatorResolver.resolveReference(
-				{ generator: 'affliction', entry, select: 'fields.description' },
+				`affliction:${entry}.description`,
 				locale,
 				{ random: () => 0 },
 			);
-			assert.equal(result.value, expected);
+			assert.equal(result.displayFields.description, expected);
 			assert.deepEqual(
 				result.provenance.map(record => [record.generatorId, record.entryId]),
 				[
@@ -845,16 +867,12 @@ test('migrated creature and quest references target classified loot concepts', (
 			entry.id,
 			entry.generation.inventory,
 		]));
-		assert.deepEqual(references.messenger_pigeon, [{
-			generator: 'curio',
-			entry: 'mysterious_sealed_letter',
-			select: 'fields',
-		}]);
-		assert.deepEqual(references.pack_goat, [{
-			generator: 'food_and_drink',
-			entry: 'three_travel_rations',
-			select: 'fields',
-		}]);
+		assert.deepEqual(references.messenger_pigeon, [
+			'curio:mysterious_sealed_letter',
+		]);
+		assert.deepEqual(references.pack_goat, [
+			'food_and_drink:three_travel_rations',
+		]);
 		assert.deepEqual(references.mule, [{
 			generator: {
 				oneOf: [
@@ -864,11 +882,7 @@ test('migrated creature and quest references target classified loot concepts', (
 			},
 			select: 'fields',
 		}]);
-		assert.deepEqual(references.paper_dragon, [{
-			generator: 'supplies',
-			entry: 'writing_kit',
-			select: 'fields',
-		}]);
+		assert.deepEqual(references.paper_dragon, ['supplies:writing_kit']);
 
 		const questValues = Object.fromEntries(
 			generatorCatalog.getGenerator('quest', locale).entries
