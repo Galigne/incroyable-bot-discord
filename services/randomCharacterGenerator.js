@@ -10,6 +10,7 @@ const {
 const { BACKGROUND_ROUTER_ID } = require('./generatorSchema');
 const {
 	resolveArmorReference,
+	resolveDescribedReferences,
 	resolveGearReferences,
 } = require('./generationReferenceResolver');
 const { formatResolvedLootItem } = require('./lootGeneration');
@@ -191,17 +192,35 @@ function createCharacterGenerationDefaults({ character, formatGold }) {
 					level: ruleLevels[index],
 				}));
 		},
-		templates({ level, locale, random }) {
+		templates({ level, locale, random, resolver }) {
 			const talentCount = calculateTalentCount(level);
-			return pickMany('talents', talentCount, locale, random)
-				.map(entry => (
-					`${getField(entry, 'name')} — ${getField(entry, 'description')}`
-				));
+			const selectedTalents = pickMany('talents', talentCount, locale, random);
+			return resolveSelectedDescribedEntries(
+				'talents',
+				selectedTalents,
+				{
+					locale,
+					path: 'root.character.talents',
+					random,
+					resolver,
+				},
+			).map(({ name, description }) => `${name} — ${description}`);
 		},
-		statusEffects({ locale, random }) {
-			return random() < 0.25
-				? [createDescribedRecord(pickOne('status_effect', locale, random))]
-				: [];
+		statusEffects({ locale, random, resolver }) {
+			if (random() >= 0.25) {
+				return [];
+			}
+			const selectedStatusEffect = pickOne('status_effect', locale, random);
+			return resolveSelectedDescribedEntries(
+				'status_effect',
+				[selectedStatusEffect],
+				{
+					locale,
+					path: 'root.character.status.effects',
+					random,
+					resolver,
+				},
+			).map(({ name, description }) => ({ name, description }));
 		},
 		armor({ locale, random, resolver, statistics }) {
 			const armor = pickOne(
@@ -395,11 +414,21 @@ function getResolvedTextValue(result) {
 	return result.value;
 }
 
-function createDescribedRecord(entry) {
-	return {
-		name: getField(entry, 'name'),
-		description: getField(entry, 'description'),
-	};
+function resolveSelectedDescribedEntries(
+	generatorId,
+	entries,
+	{ locale, path, random, resolver },
+) {
+	return resolveDescribedReferences(
+		entries.map(entry => `${generatorId}:${entry.id}`),
+		{
+			createError: generationError,
+			locale,
+			path,
+			random,
+			resolver,
+		},
+	);
 }
 
 function generationError(message, translationKey, translationVariables = {}) {

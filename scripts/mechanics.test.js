@@ -646,6 +646,92 @@ function createCharacterModifierResolver(modifierResult) {
 	};
 }
 
+test('default random character talents resolve selected inline references without rerolling', () => {
+	for (const locale of ['en', 'fr']) {
+		for (const talentId of [
+			'weapon_specialist',
+			'monster_hunter',
+			'cultural_expert',
+		]) {
+			const { options, resolvedReferences } = createReferenceResolutionOptions(locale);
+			const character = createCharacterFixture();
+			populateRandomCharacter(character, {
+				...options,
+				random: sequenceRandom([
+					0,
+					0,
+					0,
+					0,
+					0,
+					getWeightedEntryMidpoint('talents', talentId, locale),
+					0,
+					0.5,
+				]),
+			});
+
+			const expected = generatorResolver.resolveReference(
+				`talents:${talentId}`,
+				locale,
+				{ random: () => 0 },
+			).display;
+			assert.deepEqual(character.talents, [expected]);
+			assert.doesNotMatch(character.talents[0], /\{\{|\}\}/);
+			assert.deepEqual(
+				resolvedReferences.filter(reference => reference.startsWith('talents:')),
+				[`talents:${talentId}`],
+			);
+		}
+	}
+});
+
+test('default random character status effects resolve selected inline references without rerolling', () => {
+	for (const locale of ['en', 'fr']) {
+		for (const statusEffectId of ['grappled', 'hunted', 'bestial_mutation']) {
+			const { options, resolvedReferences } = createReferenceResolutionOptions(locale);
+			const character = createCharacterFixture();
+			populateRandomCharacter(character, {
+				...options,
+				random: sequenceRandom([
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					0,
+					getWeightedEntryMidpoint(
+						'status_effect',
+						statusEffectId,
+						locale,
+					),
+					0,
+					0,
+				]),
+			});
+
+			const expected = generatorResolver.resolveReference(
+				`status_effect:${statusEffectId}`,
+				locale,
+				{ random: () => 0 },
+			).displayFields;
+			assert.deepEqual(character.status.effects, [{
+				name: expected.name,
+				description: expected.description,
+			}]);
+			assert.doesNotMatch(
+				`${character.status.effects[0].name} ${character.status.effects[0].description}`,
+				/\{\{|\}\}/,
+			);
+			assert.deepEqual(
+				resolvedReferences.filter(reference => (
+					reference.startsWith('status_effect:')
+				)),
+				[`status_effect:${statusEffectId}`],
+			);
+		}
+	}
+});
+
 test('random character generation creates localized unique talent arrays by level', () => {
 	const talentCounts = new Map([
 		[1, 1],
@@ -785,6 +871,81 @@ test('random character generation uses localized content without changing identi
 
 function createCharacterFixture() {
 	return new Character('Test');
+}
+
+function createReferenceResolutionOptions(locale) {
+	const route = generatorCatalog.getGenerator('background', locale).entries[0];
+	const backgroundGenerator = structuredClone(
+		generatorCatalog.getGenerator(route.generator, locale),
+	);
+	const archetype = backgroundGenerator.entries[0];
+	archetype.generation = {
+		modifiers: [],
+		fixedRules: [],
+		armor: 'armors:padded_armor',
+		equipment: [],
+		inventory: [],
+	};
+	const getGenerator = (generatorId, requestedLocale) => (
+		generatorId === backgroundGenerator.id
+			? backgroundGenerator
+			: generatorCatalog.getGenerator(generatorId, requestedLocale)
+	);
+	const baseResolver = generatorResolver.createGeneratorResolver({ getGenerator });
+	const resolvedReferences = [];
+	const resolver = {
+		...baseResolver,
+		resolveReference(reference, requestedLocale, options) {
+			resolvedReferences.push(reference);
+			return baseResolver.resolveReference(reference, requestedLocale, options);
+		},
+	};
+	return {
+		options: {
+			background: `${route.id}:${archetype.id}`,
+			getGenerator,
+			getStatProfile: () => createFixedLevelOneStatProfile(),
+			level: 1,
+			locale,
+			resolver,
+		},
+		resolvedReferences,
+	};
+}
+
+function createFixedLevelOneStatProfile() {
+	const values = {
+		constitution: 10,
+		strength: 10,
+		dexterity: 10,
+		intelligence: 10,
+		speed: 9,
+		perception: 9,
+		charisma: 9,
+	};
+	return {
+		id: DEFAULT_STAT_PROFILE_ID,
+		minimums: { ...values },
+		maximums: { ...values },
+		weights: Object.fromEntries(BASE_STATS.map(stat => [stat, 1])),
+	};
+}
+
+function getWeightedEntryMidpoint(generatorId, entryId, locale) {
+	const entries = generatorCatalog.getGenerator(generatorId, locale).entries;
+	const totalWeight = entries.reduce(
+		(total, entry) => total + (entry.weight ?? 1),
+		0,
+	);
+	let previousWeight = 0;
+	for (const entry of entries) {
+		const weight = entry.weight ?? 1;
+		if (entry.id === entryId) {
+			return (previousWeight + weight / 2) / totalWeight;
+		}
+		previousWeight += weight;
+	}
+	throw new Error(`Unknown ${generatorId} entry ${entryId}.`);
 }
 
 function createSeededRandom(initialSeed) {
