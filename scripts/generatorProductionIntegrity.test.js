@@ -626,6 +626,15 @@ function assertFinalGeneratorOutput(result, catalog, context) {
 	assert.doesNotMatch(result.display, /\{\{|\}\}/, `${context} left template syntax in display.`);
 	const finalGenerator = catalog.get(result.generatorId);
 	assert.ok(finalGenerator, `${context} has unknown final generator provenance.`);
+	const finalEntry = finalGenerator?.entries.find(entry => entry.id === result.entryId);
+	assert.ok(finalEntry, `${context} has unknown final entry identity.`);
+	assert.ok(
+		result.provenance?.some(record => (
+			record.generatorId === result.generatorId
+			&& record.entryId === result.entryId
+		)),
+		`${context} final identity is missing from provenance.`,
+	);
 	if (result.outputType === 'value') {
 		assert.equal(finalGenerator.entrySchema.required.length, 0, `${context} has invalid value output.`);
 		assert.equal(typeof result.value, 'string', `${context} has no final value.`);
