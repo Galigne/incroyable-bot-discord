@@ -123,14 +123,14 @@
       "name": "LOI de l'équilibre",
       "weight": 2,
       "fields": {
-        "description": "Stabilise les objets ou les personnes consentantes."
+        "description": "Stabilise les objets et les personnes."
       }
     },
     {
       "id": "threshold_rule",
       "name": "LOI du seuil",
       "fields": {
-        "description": "Détecte le franchissement d'une limite désignée."
+        "description": "Détecte quand les limites sont franchies."
       }
     },
     {
@@ -144,7 +144,7 @@
       "id": "chance_rule",
       "name": "LOI du hasard",
       "fields": {
-        "description": "Infléchit le hasard vers un résultat insignifiant."
+        "description": "Manipule le hasard."
       }
     },
     {
@@ -165,7 +165,7 @@
       "id": "celerity_rule",
       "name": "LOI de la Célérité",
       "fields": {
-        "description": "Accélère les mouvements simples."
+        "description": "Accélère les mouvements."
       }
     },
     {
@@ -228,42 +228,42 @@
       "id": "blessing_rule",
       "name": "LOI de la Bénédiction",
       "fields": {
-        "description": "Accorde un avantage par l'intermédiaire d'un vœu."
+        "description": "Accorde un avantage."
       }
     },
     {
       "id": "summoning_rule",
       "name": "LOI de l’Invocation",
       "fields": {
-        "description": "Appelle une entité grâce à un symbole préparé."
+        "description": "Invoque des entités."
       }
     },
     {
       "id": "resurrection_rule",
       "name": "LOI de la Résurrection",
       "fields": {
-        "description": "Ramène les morts récents à la vie."
+        "description": "Ramène les morts à la vie."
       }
     },
     {
       "id": "curse_rule",
       "name": "LOI de la Malédiction",
       "fields": {
-        "description": "Lie une pénalité à une condition."
+        "description": "Inflige une malédiction."
       }
     },
     {
       "id": "vampirism_rule",
       "name": "LOI du Vampirisme",
       "fields": {
-        "description": "Draine ou transfère la vitalité par contact."
+        "description": "Draine ou transfère la vitalité."
       }
     },
     {
       "id": "telekinesis_rule",
       "name": "LOI de la Télékinésie",
       "fields": {
-        "description": "Déplace des objets visibles à distance."
+        "description": "Déplace les objets par la pensée."
       }
     },
     {
@@ -298,21 +298,21 @@
       "id": "soul_bond_rule",
       "name": "LOI du Lien d’âme",
       "fields": {
-        "description": "Partage des sensations ou émotions entre personnes liées."
+        "description": "Partage des sensations ou émotions."
       }
     },
     {
       "id": "ghost_rule",
       "name": "LOI du Fantôme",
       "fields": {
-        "description": "Rend une partie du corps intangible."
+        "description": "Devient intangible."
       }
     },
     {
       "id": "spirits_rule",
       "name": "LOI des Esprits",
       "fields": {
-        "description": "Manifeste des esprits liés à des souvenirs."
+        "description": "Manifeste des esprits."
       }
     },
     {
@@ -333,7 +333,7 @@
       "id": "beasts_rule",
       "name": "LOI des Bêtes",
       "fields": {
-        "description": "Communique des intentions simples aux animaux."
+        "description": "Communique avec les animaux."
       }
     },
     {
@@ -389,14 +389,14 @@
       "id": "time_rule",
       "name": "LOI du Temps",
       "fields": {
-        "description": "Accélère ou ralentit les processus locaux."
+        "description": "Manipule le temps."
       }
     },
     {
       "id": "space_rule",
       "name": "LOI de l’Espace",
       "fields": {
-        "description": "Ouvre des passages entre les lieux."
+        "description": "Ouvre des passages à travers l'espace."
       }
     },
     {
@@ -431,7 +431,7 @@
       "id": "shadow_rule",
       "name": "LOI de l’Ombre",
       "fields": {
-        "description": "Manipule les ombres existantes."
+        "description": "Manipule les ombres."
       }
     },
     {
@@ -452,7 +452,7 @@
       "id": "reflection_rule",
       "name": "LOI du Miroir",
       "fields": {
-        "description": "Copie l'apparence visible d'une autre LOI."
+        "description": "Copie l'apparence d'une autre LOI."
       }
     },
     {

@@ -127,7 +127,7 @@
       "id": "regenerating",
       "name": "Regenerating",
       "fields": {
-        "description": "Damaged flesh persistently knits itself back together unless interrupted or prevented by {{ weakness.name }}."
+        "description": "Damaged flesh persistently knits itself back together, but the following weakness interrupts or prevents its regeneration: {{ weakness.name }}."
       }
     },
     {

@@ -127,7 +127,7 @@
       "id": "regenerating",
       "name": "Régénérante",
       "fields": {
-        "description": "Ses chairs se reforment sans cesse, sauf si la régénération est interrompue ou empêchée par {{ weakness.name }}."
+        "description": "Ses chairs se reforment sans cesse, mais la faiblesse suivante interrompt ou empêche sa régénération : {{ weakness.name }}."
       }
     },
     {

@@ -123,14 +123,14 @@
       "name": "Balance RULE",
       "weight": 2,
       "fields": {
-        "description": "Stabilize objects or willing people."
+        "description": "Stabilize objects and people."
       }
     },
     {
       "id": "threshold_rule",
       "name": "Threshold RULE",
       "fields": {
-        "description": "Sense when a designated boundary is crossed."
+        "description": "Sense when boundaries are crossed."
       }
     },
     {
@@ -144,7 +144,7 @@
       "id": "chance_rule",
       "name": "Chance RULE",
       "fields": {
-        "description": "Nudge chance toward a trivial outcome."
+        "description": "Manipulate chance."
       }
     },
     {
@@ -165,7 +165,7 @@
       "id": "celerity_rule",
       "name": "Celerity RULE",
       "fields": {
-        "description": "Accelerate simple movements."
+        "description": "Accelerate movement."
       }
     },
     {
@@ -228,42 +228,42 @@
       "id": "blessing_rule",
       "name": "Blessing RULE",
       "fields": {
-        "description": "Grant an advantage through a vow."
+        "description": "Grant an advantage."
       }
     },
     {
       "id": "summoning_rule",
       "name": "Summoning RULE",
       "fields": {
-        "description": "Call an entity through a prepared symbol."
+        "description": "Summon entities."
       }
     },
     {
       "id": "resurrection_rule",
       "name": "Resurrection RULE",
       "fields": {
-        "description": "Restore life to the recently dead."
+        "description": "Restore life to the dead."
       }
     },
     {
       "id": "curse_rule",
       "name": "Curse RULE",
       "fields": {
-        "description": "Bind a penalty to a condition."
+        "description": "Inflict a curse."
       }
     },
     {
       "id": "vampirism_rule",
       "name": "Vampirism RULE",
       "fields": {
-        "description": "Drain or transfer vitality through contact."
+        "description": "Drain or transfer vitality."
       }
     },
     {
       "id": "telekinesis_rule",
       "name": "Telekinesis RULE",
       "fields": {
-        "description": "Move visible objects at a distance."
+        "description": "Move objects with the mind."
       }
     },
     {
@@ -298,21 +298,21 @@
       "id": "soul_bond_rule",
       "name": "Soul Bond RULE",
       "fields": {
-        "description": "Share sensations or emotions between linked people."
+        "description": "Share sensations or emotions."
       }
     },
     {
       "id": "ghost_rule",
       "name": "Ghost RULE",
       "fields": {
-        "description": "Make part of the body intangible."
+        "description": "Become intangible."
       }
     },
     {
       "id": "spirits_rule",
       "name": "Spirits RULE",
       "fields": {
-        "description": "Manifest spirits tied to memories."
+        "description": "Manifest spirits."
       }
     },
     {
@@ -333,7 +333,7 @@
       "id": "beasts_rule",
       "name": "Beasts RULE",
       "fields": {
-        "description": "Communicate simple intentions to animals."
+        "description": "Communicate with animals."
       }
     },
     {
@@ -389,14 +389,14 @@
       "id": "time_rule",
       "name": "Time RULE",
       "fields": {
-        "description": "Accelerate or slow local processes."
+        "description": "Manipulate time."
       }
     },
     {
       "id": "space_rule",
       "name": "Space RULE",
       "fields": {
-        "description": "Open passages between places."
+        "description": "Open passages through space."
       }
     },
     {
@@ -431,7 +431,7 @@
       "id": "shadow_rule",
       "name": "Shadow RULE",
       "fields": {
-        "description": "Manipulate existing shadows."
+        "description": "Manipulate shadows."
       }
     },
     {
@@ -452,7 +452,7 @@
       "id": "reflection_rule",
       "name": "Mirror RULE",
       "fields": {
-        "description": "Copy the visible appearance of another RULE."
+        "description": "Copy the appearance of another RULE."
       }
     },
     {

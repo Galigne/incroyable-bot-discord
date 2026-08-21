@@ -780,6 +780,12 @@ test('element and weakness catalogs provide localized reusable concepts', () => 
 			'modifier_creature',
 			locale,
 		).entries.find(entry => entry.id === 'regenerating');
+		assert.equal(
+			regenerating.fields.description,
+			locale === 'en'
+				? 'Damaged flesh persistently knits itself back together, but the following weakness interrupts or prevents its regeneration: {{ weakness.name }}.'
+				: 'Ses chairs se reforment sans cesse, mais la faiblesse suivante interrompt ou empêche sa régénération : {{ weakness.name }}.',
+		);
 		assert.deepEqual(
 			extractInlineReferences(regenerating.fields.description),
 			['weakness.name'],
@@ -789,9 +795,33 @@ test('element and weakness catalogs provide localized reusable concepts', () => 
 
 test('RULE catalog keeps concise concepts and adds the generic elemental RULE', () => {
 	const expectedDescriptions = {
+		balance_rule: [
+			'Stabilize objects and people.',
+			'Stabilise les objets et les personnes.',
+		],
+		chance_rule: [
+			'Manipulate chance.',
+			'Manipule le hasard.',
+		],
 		teleportation_rule: [
 			'Teleport yourself or other targets.',
 			'Téléporte le personnage ou d\'autres cibles.',
+		],
+		summoning_rule: [
+			'Summon entities.',
+			'Invoque des entités.',
+		],
+		resurrection_rule: [
+			'Restore life to the dead.',
+			'Ramène les morts à la vie.',
+		],
+		vampirism_rule: [
+			'Drain or transfer vitality.',
+			'Draine ou transfère la vitalité.',
+		],
+		telekinesis_rule: [
+			'Move objects with the mind.',
+			'Déplace les objets par la pensée.',
 		],
 		illusion_rule: [
 			'Create and manipulate illusions.',
@@ -804,6 +834,10 @@ test('RULE catalog keeps concise concepts and adds the generic elemental RULE', 
 		weight_rule: [
 			'Manipulate gravity.',
 			'Manipule la gravité.',
+		],
+		shadow_rule: [
+			'Manipulate shadows.',
+			'Manipule les ombres.',
 		],
 	};
 	for (const [localeIndex, locale] of ['en', 'fr'].entries()) {
