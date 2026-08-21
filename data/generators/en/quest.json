@@ -54,7 +54,7 @@
       "id": "stop_criminal_operation",
       "name": "Stop a criminal operation",
       "fields": {
-        "description": "Uncover and stop an operation centered on the following offense before its next target is harmed: {{ crime.name }}. The suspected organizer has the {{ background:criminal.generator.name }} background."
+        "description": "Uncover and stop an operation involving the following criminal activity: {{ crime.name }}. The suspected organizer has the {{ background:criminal.generator.name }} background."
       }
     },
     {
@@ -68,7 +68,7 @@
       "id": "negotiate_racial_peace",
       "name": "Negotiate peace between peoples",
       "fields": {
-        "description": "Negotiate a durable peace between a community of people known as {{ race.name }} and the inhabitants of the settlement called {{ settlement.name }}."
+        "description": "Negotiate a durable peace between a community whose people identify as {{ race.name }} and the inhabitants of the settlement called {{ settlement.name }}."
       }
     },
     {
@@ -82,7 +82,7 @@
       "id": "first_contact",
       "name": "Establish first contact",
       "fields": {
-        "description": "Establish first contact with a community of people known as {{ race.name }} and secure the basis for a lasting relationship."
+        "description": "Establish first contact with a community whose people identify as {{ race.name }} and secure the basis for a lasting relationship."
       }
     },
     {
@@ -129,9 +129,9 @@
     },
     {
       "id": "evacuate_before_monsters",
-      "name": "Evacuate before disaster",
+      "name": "Evacuate before creatures arrive",
       "fields": {
-        "description": "Evacuate everyone endangered at the settlement known as {{ settlement.name }} before this approaching crisis closes the safe routes: {{ event.description }}"
+        "description": "Evacuate everyone endangered at the settlement known as {{ settlement.name }} before creatures of the following kind reach it and block the remaining safe routes: {{ monster.name }}."
       }
     },
     {
@@ -264,7 +264,7 @@
       "id": "expose_conspiracy",
       "name": "Expose a conspiracy",
       "fields": {
-        "description": "Gather enough evidence to expose covert cooperation or wrongdoing involving {{ faction.name }} and a government organized as {{ government.name }}."
+        "description": "Gather enough evidence to expose covert cooperation or wrongdoing involving {{ faction.name }} and a government following the {{ government.name }} model."
       }
     },
     {
@@ -299,14 +299,14 @@
       "id": "fulfill_sensitive_service",
       "name": "Fulfill a sensitive commission",
       "fields": {
-        "description": "Provide work involving {{ service.name }} for a government organized as {{ government.name }} before a strict deadline while keeping the client’s involvement secret."
+        "description": "Provide work involving {{ service.name }} for a government following the {{ government.name }} model before a strict deadline while keeping the client’s involvement secret."
       }
     },
     {
       "id": "recover_crime_evidence",
       "name": "Recover evidence of a crime",
       "fields": {
-        "description": "Find and secure evidence connecting {{ faction.name }} to the following offense before the evidence is destroyed: {{ crime.name }}."
+        "description": "Find and secure evidence connecting {{ faction.name }} to the following criminal activity before the evidence is destroyed: {{ crime.name }}."
       }
     },
     {

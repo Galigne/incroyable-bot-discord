@@ -54,7 +54,7 @@
       "id": "stop_criminal_operation",
       "name": "Démanteler une opération criminelle",
       "fields": {
-        "description": "Découvrir puis interrompre une opération fondée sur l’infraction suivante avant qu’elle ne fasse une nouvelle victime : {{ crime.name }}. Son organisateur présumé a le profil {{ background:criminal.generator.name }}."
+        "description": "Découvrir puis interrompre une opération liée à l’activité criminelle suivante : {{ crime.name }}. Son organisateur présumé a le profil {{ background:criminal.generator.name }}."
       }
     },
     {
@@ -68,7 +68,7 @@
       "id": "negotiate_racial_peace",
       "name": "Négocier une paix entre peuples",
       "fields": {
-        "description": "Négocier une paix durable entre une communauté issue du peuple appelé {{ race.name }} et les habitants de la localité nommée {{ settlement.name }}."
+        "description": "Négocier une paix durable entre une communauté du peuple désigné comme « {{ race.name }} » et les habitants de la localité nommée {{ settlement.name }}."
       }
     },
     {
@@ -82,7 +82,7 @@
       "id": "first_contact",
       "name": "Établir un premier contact",
       "fields": {
-        "description": "Établir un premier contact avec une communauté issue du peuple appelé {{ race.name }} et poser les bases d’une relation durable."
+        "description": "Établir un premier contact avec une communauté du peuple désigné comme « {{ race.name }} » et poser les bases d’une relation durable."
       }
     },
     {
@@ -129,9 +129,9 @@
     },
     {
       "id": "evacuate_before_monsters",
-      "name": "Évacuer avant la catastrophe",
+      "name": "Évacuer avant l’arrivée des créatures",
       "fields": {
-        "description": "Évacuer toutes les personnes menacées dans la communauté appelée {{ settlement.name }} avant que cette crise imminente ne coupe les voies sûres : {{ event.description }}"
+        "description": "Évacuer toutes les personnes menacées dans la communauté appelée {{ settlement.name }} avant que des créatures du type suivant ne l’atteignent et ne coupent les dernières voies sûres : {{ monster.name }}."
       }
     },
     {
@@ -306,7 +306,7 @@
       "id": "recover_crime_evidence",
       "name": "Récupérer les preuves d’un crime",
       "fields": {
-        "description": "Retrouver et mettre à l’abri les preuves qui relient {{ faction.name }} à l’infraction suivante avant leur destruction : {{ crime.name }}."
+        "description": "Retrouver et mettre à l’abri les preuves qui relient {{ faction.name }} à l’activité criminelle suivante avant leur destruction : {{ crime.name }}."
       }
     },
     {

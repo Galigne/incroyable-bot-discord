@@ -12,7 +12,7 @@
       "id": "rumor_1",
       "name": "Créature aperçue",
       "fields": {
-        "description": "Une créature que les témoins décrivent comme {{ monster.name }} aurait été aperçue près de la localité appelée {{ settlement.name }}."
+        "description": "Une créature du type {{ monster.name }} aurait été aperçue près de la localité appelée {{ settlement.name }}."
       }
     },
     {
@@ -82,7 +82,7 @@
       "id": "faction_finances_crime",
       "name": "Soutien au crime organisé",
       "fields": {
-        "description": "D’après certains murmures, {{ faction.name }} tirerait indirectement profit de l’infraction suivante : {{ crime.name }}."
+        "description": "Selon certaines rumeurs, {{ faction.name }} favoriserait en secret l’activité criminelle suivante par l’intermédiaire de tiers : {{ crime.name }}."
       }
     },
     {
@@ -201,7 +201,7 @@
       "id": "hidden_creature_breeding",
       "name": "Élevage clandestin de créatures",
       "fields": {
-        "description": "{{ faction.name }} élèverait des créatures semblables à {{ monster.name }} sous le bâtiment appelé {{ building.name }}."
+        "description": "{{ faction.name }} élèverait des créatures du type {{ monster.name }} sous le bâtiment appelé {{ building.name }}."
       }
     }
   ]

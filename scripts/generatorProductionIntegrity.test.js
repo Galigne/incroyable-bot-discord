@@ -370,6 +370,96 @@ test('every production quest, rumor, and secret resolves references with provena
 	}
 });
 
+test('quest, rumor, and secret prose frames reusable catalog labels by type', () => {
+	for (const locale of ['en', 'fr']) {
+		const entriesByGenerator = new Map(
+			['quest', 'rumor', 'secret'].map(generatorId => [
+				generatorId,
+				new Map(
+					generatorCatalog.getGenerator(generatorId, locale).entries
+						.map(entry => [entry.id, entry]),
+				),
+			]),
+		);
+		const questEntries = entriesByGenerator.get('quest');
+		const rumorEntries = entriesByGenerator.get('rumor');
+		const secretEntries = entriesByGenerator.get('secret');
+
+		assert.deepEqual(
+			extractInlineReferences(
+				questEntries.get('evacuate_before_monsters').fields.description,
+			),
+			['settlement.name', 'monster.name'],
+		);
+		assert.deepEqual(
+			extractInlineReferences(
+				questEntries.get('stop_criminal_operation').fields.description,
+			),
+			['crime.name', 'background:criminal.generator.name'],
+		);
+		assert.deepEqual(
+			extractInlineReferences(
+				questEntries.get('recover_crime_evidence').fields.description,
+			),
+			['faction.name', 'crime.name'],
+		);
+		assert.deepEqual(
+			extractInlineReferences(
+				rumorEntries.get('faction_finances_crime').fields.description,
+			),
+			['faction.name', 'crime.name'],
+		);
+		assert.deepEqual(
+			extractInlineReferences(secretEntries.get('secret_11').fields.description),
+			['government.name', 'crime.name'],
+		);
+		assert.doesNotMatch(
+			questEntries.get('stop_criminal_operation').fields.description,
+			/next target|nouvelle victime/i,
+		);
+		assert.doesNotMatch(
+			rumorEntries.get('faction_finances_crime').fields.description,
+			/profits?|profit/i,
+		);
+
+		const raceFraming = locale === 'en'
+			? 'whose people identify as {{ race.name }}'
+			: 'peuple désigné comme « {{ race.name }} »';
+		for (const entryId of ['negotiate_racial_peace', 'first_contact']) {
+			assert.ok(questEntries.get(entryId).fields.description.includes(raceFraming));
+		}
+		const monsterFraming = locale === 'en'
+			? 'creatures of the {{ monster.name }} type'
+			: 'créatures du type {{ monster.name }}';
+		assert.ok(
+			rumorEntries.get('hidden_creature_breeding').fields.description
+				.includes(monsterFraming),
+		);
+		if (locale === 'en') {
+			assert.ok(
+				rumorEntries.get('fabricated_reputation').fields.description
+					.includes('person with the {{ background.generator.name }} background'),
+			);
+		}
+
+		const governmentFraming = locale === 'en'
+			? /\{\{ government\.name \}\} model/g
+			: /de type \{\{ government\.name \}\}/g;
+		for (const entries of entriesByGenerator.values()) {
+			for (const entry of entries.values()) {
+				const description = entry.fields.description;
+				const governmentReferences = extractInlineReferences(description)
+					.filter(reference => reference === 'government.name');
+				assert.equal(
+					description.match(governmentFraming)?.length ?? 0,
+					governmentReferences.length,
+					`${locale}:${entry.id}`,
+				);
+			}
+		}
+	}
+});
+
 test('production category routers are minimal and traverse their canonical children', () => {
 	for (const locale of ['en', 'fr']) {
 		for (const routerId of CATEGORY_ROUTER_IDS) {

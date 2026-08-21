@@ -12,7 +12,7 @@
       "id": "rumor_1",
       "name": "Creature sighting",
       "fields": {
-        "description": "A creature witnesses describe as {{ monster.name }} was supposedly seen near the settlement known as {{ settlement.name }}."
+        "description": "A creature of the {{ monster.name }} type was supposedly seen near the settlement known as {{ settlement.name }}."
       }
     },
     {
@@ -33,7 +33,7 @@
       "id": "rumor_4",
       "name": "Secret government action",
       "fields": {
-        "description": "A government organized as {{ government.name }} is supposedly preparing a secret action against a nearby rival."
+        "description": "A government following the {{ government.name }} model is supposedly preparing a secret action against a nearby rival."
       }
     },
     {
@@ -75,21 +75,21 @@
       "id": "rumor_10",
       "name": "Discreet paid service",
       "fields": {
-        "description": "A government organized as {{ government.name }} is reportedly paying discreetly for the following service without explaining why: {{ service.name }}."
+        "description": "A government following the {{ government.name }} model is reportedly paying discreetly for the following service without explaining why: {{ service.name }}."
       }
     },
     {
       "id": "faction_finances_crime",
       "name": "Organized crime backing",
       "fields": {
-        "description": "It is whispered that {{ faction.name }} profits through intermediaries from the following offense: {{ crime.name }}."
+        "description": "It is whispered that {{ faction.name }} covertly enables the following criminal activity through intermediaries: {{ crime.name }}."
       }
     },
     {
       "id": "disputed_succession",
       "name": "Disputed succession",
       "fields": {
-        "description": "Someone with the {{ background:noble.generator.name }} background is reportedly being prepared in secret to replace the leaders of a government organized as {{ government.name }}."
+        "description": "Someone with the {{ background:noble.generator.name }} background is reportedly being prepared in secret to replace the leaders of a government following the {{ government.name }} model."
       }
     },
     {
@@ -131,7 +131,7 @@
       "id": "fabricated_reputation",
       "name": "Fabricated reputation",
       "fields": {
-        "description": "A respected {{ background.generator.name }} allegedly built their reputation on falsified records and borrowed achievements."
+        "description": "A respected person with the {{ background.generator.name }} background allegedly built their reputation on falsified records and borrowed achievements."
       }
     },
     {
@@ -145,7 +145,7 @@
       "id": "counterfeit_currency",
       "name": "Counterfeit coinage",
       "fields": {
-        "description": "Coins issued by a government organized as {{ government.name }} are rumored to be counterfeited inside the building known as {{ building.name }}."
+        "description": "Coins issued by a government following the {{ government.name }} model are rumored to be counterfeited inside the building known as {{ building.name }}."
       }
     },
     {
@@ -173,7 +173,7 @@
       "id": "criminal_informants",
       "name": "Criminal informants",
       "fields": {
-        "description": "A government organized as {{ government.name }} is rumored to pay someone with the {{ background:criminal.generator.name }} background for information about prominent citizens."
+        "description": "A government following the {{ government.name }} model is rumored to pay someone with the {{ background:criminal.generator.name }} background for information about prominent citizens."
       }
     },
     {
@@ -194,14 +194,14 @@
       "id": "political_scandal",
       "name": "Political scandal",
       "fields": {
-        "description": "{{ faction.name }} is said to possess proof of a scandal that could destabilize a government organized as {{ government.name }}."
+        "description": "{{ faction.name }} is said to possess proof of a scandal that could destabilize a government following the {{ government.name }} model."
       }
     },
     {
       "id": "hidden_creature_breeding",
       "name": "Hidden creature breeding",
       "fields": {
-        "description": "{{ faction.name }} is rumored to be breeding creatures resembling {{ monster.name }} beneath the building known as {{ building.name }}."
+        "description": "{{ faction.name }} is rumored to be breeding creatures of the {{ monster.name }} type beneath the building known as {{ building.name }}."
       }
     }
   ]
