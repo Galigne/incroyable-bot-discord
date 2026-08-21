@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 4,
+  "id": "crime",
+  "visibility": "internal",
+  "name": "Crimes",
+  "description": "Crimes et activités criminelles réutilisables dans des aventures",
+  "entrySchema": {
+    "required": []
+  },
+  "entries": [
+    { "id": "theft", "name": "vol" },
+    { "id": "burglary", "name": "cambriolage" },
+    { "id": "robbery", "name": "vol à main armée" },
+    { "id": "smuggling", "name": "contrebande" },
+    { "id": "extortion", "name": "extorsion" },
+    { "id": "kidnapping", "name": "enlèvement" },
+    { "id": "assassination", "name": "assassinat" },
+    { "id": "forgery", "name": "falsification" },
+    { "id": "counterfeiting", "name": "contrefaçon" },
+    { "id": "sabotage", "name": "sabotage" },
+    { "id": "arson", "name": "incendie criminel" },
+    { "id": "blackmail", "name": "chantage" },
+    { "id": "bribery", "name": "corruption" },
+    { "id": "fraud", "name": "escroquerie" },
+    { "id": "grave_robbing", "name": "pillage de sépultures" },
+    { "id": "artifact_trafficking", "name": "trafic d’artefacts" },
+    { "id": "poaching", "name": "braconnage" },
+    { "id": "piracy", "name": "piraterie" },
+    { "id": "espionage", "name": "espionnage" },
+    { "id": "protection_racket", "name": "racket de protection" },
+    { "id": "banditry", "name": "banditisme" },
+    { "id": "embezzlement", "name": "détournement de fonds" },
+    { "id": "tax_evasion", "name": "fraude fiscale" },
+    { "id": "illegal_gambling", "name": "jeux d’argent clandestins" },
+    { "id": "contraband_magic", "name": "trafic de magie interdite" },
+    { "id": "tomb_raiding", "name": "pillage de tombeaux" },
+    { "id": "prison_break", "name": "organisation d’une évasion" },
+    { "id": "impersonation", "name": "usurpation d’identité" },
+    { "id": "treason", "name": "trahison" },
+    { "id": "stolen_goods_trafficking", "name": "trafic de biens volés" }
+  ]
+}

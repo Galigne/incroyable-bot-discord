@@ -349,6 +349,12 @@ application workflows or fixed router entries follow those routes.
 concepts. These resolutions keep nested provenance but do not create or
 persist the referenced people, creatures, locations, or items.
 
+The standalone internal `crime` and `service` generators provide name-only
+vocabularies for those compositions. They remain hidden as initial `/gen` roots
+and have no structural routes: `{{ crime.name }}` supplies an offense or criminal
+activity, while `{{ service.name }}` supplies work that a person or organization
+could request or purchase.
+
 Consumables reuse the internal `ability` and public `affliction` generators for
 broad ability potions and specialized remedies. Supplies and curios likewise reuse
 specific `religion`, `region`, and `dungeon` fields when an existing concept can

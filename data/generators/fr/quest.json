@@ -3,7 +3,7 @@
   "id": "quest",
   "visibility": "public",
   "name": "Quêtes",
-  "description": "Amorces d’aventure, objectifs et dilemmes",
+  "description": "Objectifs concrets, amorces d’aventure et dilemmes",
   "entrySchema": {
     "required": ["description"]
   },
@@ -12,189 +12,189 @@
       "id": "recover_item_before_criminal",
       "name": "Récupérer un objet convoité",
       "fields": {
-        "description": "Retrouver l’objet appelé {{ curio }} dans {{ dungeon }} avant qu’une personne au profil {{ background:criminal }} ne s’en empare."
+        "description": "Récupérer l’objet insolite appelé {{ curio.name }} dans le lieu décrit comme {{ dungeon.name }} avant qu’une personne au profil {{ background:criminal.generator.name }} ne le réclame pour le compte d’un rival."
       }
     },
     {
       "id": "hunt_modified_monster",
       "name": "Traquer une créature singulière",
       "fields": {
-        "description": "Traquer une créature identifiée comme {{ monster }} après que des témoins lui ont associé le qualificatif {{ modifier_creature }}."
+        "description": "Pister puis capturer ou abattre une créature identifiée comme {{ monster.name }}, que les témoins reconnaissent à cette particularité inhabituelle : {{ modifier_creature.name }}."
       }
     },
     {
       "id": "defend_settlement_from_faction",
       "name": "Défendre une communauté menacée",
       "fields": {
-        "description": "Défendre {{ settlement }} contre une menace liée à {{ faction }}."
+        "description": "Défendre la communauté appelée {{ settlement.name }} contre une attaque, une prise de pouvoir ou une exigence imposée par {{ faction.name }}."
       }
     },
     {
       "id": "escort_traveler_through_region",
       "name": "Escorter un voyageur",
       "fields": {
-        "description": "Escorter une personne au profil {{ background }} à travers la région appelée {{ region }} sans révéler la véritable raison du voyage."
+        "description": "Escorter une personne au profil {{ background.generator.name }} à travers la région appelée {{ region.name }} sans révéler le véritable but du voyage."
       }
     },
     {
       "id": "steal_item_from_building",
       "name": "Voler un objet à restituer",
       "fields": {
-        "description": "Voler l’objet appelé {{ valuables }} dans un lieu identifié comme {{ building }} afin de le rendre à son propriétaire légitime."
+        "description": "Voler l’objet de valeur appelé {{ valuables.name }} dans le bâtiment connu sous le nom de {{ building.name }} afin de le rendre à la personne capable de prouver qu’elle en est la propriétaire légitime."
       }
     },
     {
       "id": "find_missing_person_at_site",
       "name": "Retrouver une personne disparue",
       "fields": {
-        "description": "Retrouver une personne au profil {{ background }}, disparue après une dernière visite dans {{ dungeon }}."
+        "description": "Retrouver une personne disparue au profil {{ background.generator.name }}, dont la dernière destination connue était le lieu appelé {{ dungeon.name }}."
       }
     },
     {
       "id": "stop_criminal_operation",
       "name": "Démanteler une opération criminelle",
       "fields": {
-        "description": "Identifier puis arrêter un suspect au profil {{ background:criminal }} avant sa prochaine opération."
+        "description": "Découvrir puis interrompre une opération fondée sur l’infraction suivante avant qu’elle ne fasse une nouvelle victime : {{ crime.name }}. Son organisateur présumé a le profil {{ background:criminal.generator.name }}."
       }
     },
     {
       "id": "prevent_faction_war",
       "name": "Empêcher une guerre de factions",
       "fields": {
-        "description": "Empêcher {{ faction }} et {{ faction }} de déclencher une guerre autour de {{ settlement }}."
+        "description": "Empêcher {{ faction.name }} et {{ faction.name }} de transformer leur différend en guerre ouverte autour de la communauté appelée {{ settlement.name }}."
       }
     },
     {
       "id": "negotiate_racial_peace",
       "name": "Négocier une paix entre peuples",
       "fields": {
-        "description": "Négocier la paix entre une communauté du peuple {{ race }} et les habitants de {{ settlement }}."
+        "description": "Négocier une paix durable entre une communauté issue du peuple appelé {{ race.name }} et les habitants de la localité nommée {{ settlement.name }}."
       }
     },
     {
       "id": "anonymous_gift",
       "name": "Livrer un cadeau anonyme",
       "fields": {
-        "description": "Offrir l’objet appelé {{ valuables }} à une personne au profil {{ background }} sans révéler l’identité du commanditaire."
+        "description": "Remettre l’objet de valeur appelé {{ valuables.name }} à une personne au profil {{ background.generator.name }} sans révéler l’identité du commanditaire."
       }
     },
     {
       "id": "first_contact",
       "name": "Établir un premier contact",
       "fields": {
-        "description": "Établir un premier contact avec une communauté du peuple {{ race }} et nouer une relation durable."
+        "description": "Établir un premier contact avec une communauté issue du peuple appelé {{ race.name }} et poser les bases d’une relation durable."
       }
     },
     {
       "id": "map_unknown_phenomenon",
       "name": "Cartographier un phénomène inconnu",
       "fields": {
-        "description": "Explorer {{ region }} et rapporter la cause d’un phénomène absent des cartes."
+        "description": "Étudier un phénomène inexpliqué à travers la région appelée {{ region.name }}, cartographier son étendue et ses variations, puis rapporter ce que l’on peut apprendre de sa cause."
       }
     },
     {
       "id": "study_monster_alive",
       "name": "Étudier une créature vivante",
       "fields": {
-        "description": "Étudier une créature identifiée comme {{ monster }} sans la tuer afin de comprendre son lien avec {{ region }}."
+        "description": "Observer ou capturer une créature identifiée comme {{ monster.name }} sans la tuer afin de comprendre son lien avec la région appelée {{ region.name }}."
       }
     },
     {
       "id": "solve_faction_murder",
       "name": "Élucider un meurtre sous pression",
       "fields": {
-        "description": "Résoudre le meurtre d’une personne au profil {{ background }} malgré l’intervention de {{ faction }}."
+        "description": "Résoudre le meurtre d’une personne au profil {{ background.generator.name }} malgré les tentatives de {{ faction.name }} pour entraver l’enquête."
       }
     },
     {
       "id": "spy_on_secret_meeting",
       "name": "Espionner une rencontre secrète",
       "fields": {
-        "description": "Espionner une personne au profil {{ background }} pendant une rencontre secrète dans un lieu identifié comme {{ building }}."
+        "description": "Observer une personne au profil {{ background.generator.name }} pendant une rencontre secrète dans le bâtiment appelé {{ building.name }} et découvrir ce qui s’y prépare."
       }
     },
     {
       "id": "prevent_inside_assassination",
       "name": "Empêcher un assassinat clandestin",
       "fields": {
-        "description": "Empêcher l’assassinat d’une personne au profil {{ background }} sans révéler que le danger vient de {{ faction }}."
+        "description": "Empêcher l’assassinat d’une personne au profil {{ background.generator.name }} sans révéler que la menace vient de l’intérieur de {{ faction.name }}."
       }
     },
     {
       "id": "gather_remedy_material",
       "name": "Réunir des ingrédients médicinaux",
       "fields": {
-        "description": "Réunir plusieurs échantillons de {{ material }} nécessaires à la fabrication d’un remède."
+        "description": "Réunir assez du matériau appelé {{ material.name }} pour préparer un remède avant que l’état du patient ne devienne irréversible."
       }
     },
     {
       "id": "evacuate_before_monsters",
-      "name": "Évacuer avant l’arrivée des créatures",
+      "name": "Évacuer avant la catastrophe",
       "fields": {
-        "description": "Évacuer {{ settlement }} avant l’arrivée d’un groupe associé à {{ monster }}."
+        "description": "Évacuer toutes les personnes menacées dans la communauté appelée {{ settlement.name }} avant que cette crise imminente ne coupe les voies sûres : {{ event.description }}"
       }
     },
     {
       "id": "escape_site_with_prisoner",
       "name": "S’évader avec un prisonnier",
       "fields": {
-        "description": "S’échapper de {{ dungeon }} avec une personne au profil {{ background }} qui refuse d’expliquer son emprisonnement."
+        "description": "S’échapper du lieu appelé {{ dungeon.name }} avec une personne captive au profil {{ background.generator.name }}, qui refuse d’expliquer son emprisonnement."
       }
     },
     {
       "id": "rescue_criminal_captive",
       "name": "Libérer une personne captive",
       "fields": {
-        "description": "Sauver une personne au profil {{ background }}, retenue par un ravisseur au profil {{ background:criminal }} dans un lieu identifié comme {{ building }}."
+        "description": "Libérer une personne au profil {{ background.generator.name }}, retenue par un individu au profil {{ background:criminal.generator.name }} dans le bâtiment appelé {{ building.name }}."
       }
     },
     {
       "id": "hide_item_from_faction",
       "name": "Cacher un objet pisté",
       "fields": {
-        "description": "Cacher {{ curio }} à {{ faction }}, qui peut retrouver quiconque est entré en contact avec cet objet."
+        "description": "Cacher et protéger l’objet insolite appelé {{ curio.name }} de {{ faction.name }}, dont les agents peuvent retrouver par magie ou par d’autres moyens l’objet et toutes les personnes qui l’ont manipulé."
       }
     },
     {
       "id": "conceal_adventure_site",
       "name": "Préserver le secret d’un lieu",
       "fields": {
-        "description": "Empêcher une personne au profil {{ background }} de découvrir l’emplacement de {{ dungeon }}."
+        "description": "Empêcher une personne au profil {{ background.generator.name }} de découvrir ou de révéler l’emplacement du lieu appelé {{ dungeon.name }}."
       }
     },
     {
       "id": "tail_person_through_settlement",
       "name": "Suivre une personne en ville",
       "fields": {
-        "description": "Prendre une personne au profil {{ background }} en filature à travers {{ settlement }} sans attirer l’attention de ses alliés."
+        "description": "Prendre une personne au profil {{ background.generator.name }} en filature à travers la localité appelée {{ settlement.name }} sans alerter la cible ni ses alliés."
       }
     },
     {
       "id": "collect_seasonal_material",
-      "name": "Récolter un matériau saisonnier",
+      "name": "Récolter un matériau temporairement inaccessible",
       "fields": {
-        "description": "Collecter {{ material }} dans {{ region }} avant qu’un changement saisonnier ne le rende inaccessible."
+        "description": "Collecter le matériau appelé {{ material.name }} dans la région nommée {{ region.name }} avant qu’un changement saisonnier ne bloque l’accès au matériau ou à sa source."
       }
     },
     {
       "id": "deliver_contested_goods",
       "name": "Livrer une marchandise convoitée",
       "fields": {
-        "description": "Livrer une marchandise représentée par {{ valuables }} à une personne au profil {{ background }}, alors que plusieurs individus au profil {{ background:criminal }} ont reçu la même description du colis."
+        "description": "Livrer l’objet de valeur appelé {{ valuables.name }} à une personne au profil {{ background.generator.name }} tandis que plusieurs rivaux tentent de détourner le colis à l’aide de sceaux et d’instructions identiques."
       }
     },
     {
       "id": "treasure_hunt_site",
       "name": "Trouver une cache dissimulée",
       "fields": {
-        "description": "Retrouver {{ valuables }} dans une cache dissimulée au sein de {{ site }}."
+        "description": "Retrouver et récupérer l’objet de valeur appelé {{ valuables.name }} dans une cache dissimulée sur un site décrit comme {{ site.generator.name }}."
       }
     },
     {
       "id": "cure_affliction",
       "name": "Guérir une affliction",
       "fields": {
-        "description": "Trouver les connaissances, l’ingrédient ou l’aide nécessaires pour guérir ou lever l’affliction suivante : {{ affliction }}"
+        "description": "Trouver les connaissances, l’ingrédient ou l’aide nécessaires pour guérir ou lever l’affliction appelée {{ affliction.name }}."
       }
     },
     {
@@ -222,70 +222,98 @@
       "id": "locate_affliction_source",
       "name": "Trouver l’origine d’une affliction",
       "fields": {
-        "description": "Découvrir l’origine de la maladie ou de la malédiction suivante et comprendre comment ou pourquoi elle a frappé pour la première fois : {{ affliction }}"
+        "description": "Découvrir où l’affliction appelée {{ affliction.name }} a frappé pour la première fois et déterminer comment empêcher sa propagation ou son retour."
       }
     },
     {
       "id": "retrieve_runed_item",
       "name": "Récupérer un objet runique",
       "fields": {
-        "description": "Récupérer un objet portant une rune associée à la {{ rules.name }} dans {{ site }}."
+        "description": "Récupérer un objet portant une rune associée à {{ rules.name }} sur un site décrit comme {{ site.generator.name }}."
       }
     },
     {
       "id": "destroy_runed_item",
       "name": "Détruire un objet runique",
       "fields": {
-        "description": "Trouver et détruire un objet portant une rune associée à la {{ rules.name }} dissimulé dans {{ site }}."
+        "description": "Trouver et détruire sans danger un objet portant une rune associée à {{ rules.name }} dissimulé sur un site décrit comme {{ site.generator.name }}."
       }
     },
     {
       "id": "sabotage_faction_site",
       "name": "Saboter un site de faction",
       "fields": {
-        "description": "Neutraliser ou perturber une opération, un dispositif, une voie ou une ressource appartenant à {{ faction }} sur le site {{ site }}."
+        "description": "Neutraliser une opération, un dispositif, une voie ou une ressource entretenue par {{ faction.name }} sur un site décrit comme {{ site.generator.name }} sans blesser de personnes innocentes."
       }
     },
     {
       "id": "repair_settlement_resource",
       "name": "Réparer une ressource essentielle",
       "fields": {
-        "description": "Restaurer une structure, une route, un dispositif ou une ressource endommagée dont dépend {{ settlement }}."
+        "description": "Restaurer une structure, une route, un dispositif ou une ressource endommagée dont dépend la communauté appelée {{ settlement.name }}."
       }
     },
     {
       "id": "steal_information_building",
       "name": "Voler des informations protégées",
       "fields": {
-        "description": "Obtenir des archives, de la correspondance ou des plans protégés conservés dans {{ building }}."
+        "description": "Obtenir des archives, de la correspondance ou des plans protégés conservés dans le bâtiment appelé {{ building.name }} sans alerter leur gardien."
       }
     },
     {
       "id": "expose_conspiracy",
       "name": "Révéler une conspiration",
       "fields": {
-        "description": "Réunir assez de preuves pour révéler une coopération secrète ou des actes répréhensibles impliquant {{ faction }} et {{ government }}."
+        "description": "Réunir assez de preuves pour révéler une coopération secrète ou des actes répréhensibles impliquant {{ faction.name }} et un gouvernement de type {{ government.name }}."
       }
     },
     {
       "id": "resolve_debt_oath",
       "name": "Régler une dette ou un serment",
       "fields": {
-        "description": "Régler une obligation importante qui lie une personne au profil {{ background }} à {{ faction }} : honorer une promesse ou un serment, transférer la responsabilité, recouvrer une dette le cas échéant ou négocier une autre issue."
+        "description": "Résoudre une dette ou un engagement solennel qui lie une personne au profil {{ background.generator.name }} à {{ faction.name }} en l’honorant, en le transférant, en recouvrant ce qui est dû ou en négociant sa levée."
       }
     },
     {
       "id": "protect_during_crisis",
       "name": "Protéger pendant une crise",
       "fields": {
-        "description": "Protéger une personne, un objet ou une partie vulnérable de {{ site }} pendant que se déroule la crise suivante : {{ event }}"
+        "description": "Protéger une personne, un objet ou une partie vulnérable d’un site décrit comme {{ site.generator.name }} pendant que se déroule la crise suivante : {{ event.description }}"
       }
     },
     {
       "id": "negotiate_access",
       "name": "Négocier un droit d’accès",
       "fields": {
-        "description": "Obtenir de {{ faction }} l’autorisation d’accéder à {{ site }}, de traverser ce lieu, de l’inspecter ou de l’utiliser."
+        "description": "Obtenir de {{ faction.name }} l’autorisation d’accéder à un site décrit comme {{ site.generator.name }}, de traverser ce lieu, de l’inspecter ou de l’utiliser."
+      }
+    },
+    {
+      "id": "hide_person_from_faction",
+      "name": "Cacher une personne recherchée",
+      "fields": {
+        "description": "Cacher et protéger une personne au profil {{ background.generator.name }} pendant que {{ faction.name }} la recherche activement."
+      }
+    },
+    {
+      "id": "fulfill_sensitive_service",
+      "name": "Honorer une mission délicate",
+      "fields": {
+        "description": "Assurer une prestation de type {{ service.name }} pour un gouvernement de type {{ government.name }} avant une échéance stricte tout en dissimulant l’implication du commanditaire."
+      }
+    },
+    {
+      "id": "recover_crime_evidence",
+      "name": "Récupérer les preuves d’un crime",
+      "fields": {
+        "description": "Retrouver et mettre à l’abri les preuves qui relient {{ faction.name }} à l’infraction suivante avant leur destruction : {{ crime.name }}."
+      }
+    },
+    {
+      "id": "broker_hostage_exchange",
+      "name": "Négocier un échange d’otages",
+      "fields": {
+        "description": "Négocier puis sécuriser un échange de captifs entre {{ faction.name }} et {{ faction.name }} avant que l’un des camps n’abandonne l’accord."
       }
     }
   ]

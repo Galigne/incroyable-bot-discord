@@ -3,7 +3,7 @@
   "id": "quest",
   "visibility": "public",
   "name": "Quest",
-  "description": "Adventure hooks, objectives, and dilemmas",
+  "description": "Actionable objectives, adventure hooks, and dilemmas",
   "entrySchema": {
     "required": ["description"]
   },
@@ -12,189 +12,189 @@
       "id": "recover_item_before_criminal",
       "name": "Recover a contested item",
       "fields": {
-        "description": "Recover the item known as {{ curio }} from {{ dungeon }} before someone with the {{ background:criminal }} background takes it."
+        "description": "Recover the unusual item known as {{ curio.name }} from the place described as {{ dungeon.name }} before someone with the {{ background:criminal.generator.name }} background claims it for a rival."
       }
     },
     {
       "id": "hunt_modified_monster",
       "name": "Hunt a singular creature",
       "fields": {
-        "description": "Hunt a creature identified as {{ monster }} after witnesses associate it with the trait {{ modifier_creature }}."
+        "description": "Track and capture or kill a creature identified as {{ monster.name }}, which witnesses recognize by the following unusual trait: {{ modifier_creature.name }}."
       }
     },
     {
       "id": "defend_settlement_from_faction",
       "name": "Defend a threatened settlement",
       "fields": {
-        "description": "Defend {{ settlement }} against a threat tied to {{ faction }}."
+        "description": "Defend the settlement known as {{ settlement.name }} against an attack, takeover, or coercive demand tied to {{ faction.name }}."
       }
     },
     {
       "id": "escort_traveler_through_region",
       "name": "Escort a traveler",
       "fields": {
-        "description": "Escort someone with the {{ background }} background through the region known as {{ region }} without revealing the true reason for the journey."
+        "description": "Escort someone with the {{ background.generator.name }} background through the region known as {{ region.name }} without revealing the true purpose of the journey."
       }
     },
     {
       "id": "steal_item_from_building",
       "name": "Steal an item to return",
       "fields": {
-        "description": "Steal the item known as {{ valuables }} from a place identified as {{ building }} and return it to its rightful owner."
+        "description": "Steal the valuable item known as {{ valuables.name }} from the building known as {{ building.name }} and return it to the person who can prove rightful ownership."
       }
     },
     {
       "id": "find_missing_person_at_site",
       "name": "Find a missing person",
       "fields": {
-        "description": "Find someone with the {{ background }} background who vanished after a last visit to {{ dungeon }}."
+        "description": "Find a missing person with the {{ background.generator.name }} background whose last confirmed destination was the place known as {{ dungeon.name }}."
       }
     },
     {
       "id": "stop_criminal_operation",
       "name": "Stop a criminal operation",
       "fields": {
-        "description": "Identify and arrest a suspect with the {{ background:criminal }} background before the next operation."
+        "description": "Uncover and stop an operation centered on the following offense before its next target is harmed: {{ crime.name }}. The suspected organizer has the {{ background:criminal.generator.name }} background."
       }
     },
     {
       "id": "prevent_faction_war",
       "name": "Prevent a faction war",
       "fields": {
-        "description": "Prevent {{ faction }} and {{ faction }} from starting a war around {{ settlement }}."
+        "description": "Prevent {{ faction.name }} and {{ faction.name }} from turning their dispute into open war around the settlement known as {{ settlement.name }}."
       }
     },
     {
       "id": "negotiate_racial_peace",
       "name": "Negotiate peace between peoples",
       "fields": {
-        "description": "Negotiate peace between a community of the {{ race }} people and the inhabitants of {{ settlement }}."
+        "description": "Negotiate a durable peace between a community of people known as {{ race.name }} and the inhabitants of the settlement called {{ settlement.name }}."
       }
     },
     {
       "id": "anonymous_gift",
       "name": "Deliver an anonymous gift",
       "fields": {
-        "description": "Give the item known as {{ valuables }} to someone with the {{ background }} background without revealing who commissioned the delivery."
+        "description": "Deliver the valuable item known as {{ valuables.name }} to someone with the {{ background.generator.name }} background without revealing who commissioned the gift."
       }
     },
     {
       "id": "first_contact",
       "name": "Establish first contact",
       "fields": {
-        "description": "Establish first contact with a community of the {{ race }} people and build a lasting relationship."
+        "description": "Establish first contact with a community of people known as {{ race.name }} and secure the basis for a lasting relationship."
       }
     },
     {
       "id": "map_unknown_phenomenon",
       "name": "Map an unknown phenomenon",
       "fields": {
-        "description": "Explore {{ region }} and report the cause of a phenomenon absent from every map."
+        "description": "Survey an unexplained phenomenon across the region known as {{ region.name }}, map its extent and changes, and report what can be learned about its cause."
       }
     },
     {
       "id": "study_monster_alive",
       "name": "Study a creature alive",
       "fields": {
-        "description": "Study a creature identified as {{ monster }} without killing it to understand its link with {{ region }}."
+        "description": "Observe or capture a creature identified as {{ monster.name }} without killing it to understand its connection to the region known as {{ region.name }}."
       }
     },
     {
       "id": "solve_faction_murder",
       "name": "Solve an obstructed murder",
       "fields": {
-        "description": "Solve the murder of someone with the {{ background }} background despite interference from {{ faction }}."
+        "description": "Solve the murder of someone with the {{ background.generator.name }} background despite efforts by {{ faction.name }} to obstruct the investigation."
       }
     },
     {
       "id": "spy_on_secret_meeting",
       "name": "Spy on a secret meeting",
       "fields": {
-        "description": "Spy on someone with the {{ background }} background during a secret meeting in a place identified as {{ building }}."
+        "description": "Observe someone with the {{ background.generator.name }} background during a secret meeting inside the building known as {{ building.name }} and learn what is being arranged."
       }
     },
     {
       "id": "prevent_inside_assassination",
       "name": "Prevent a hidden assassination",
       "fields": {
-        "description": "Prevent the assassination of someone with the {{ background }} background without revealing that the threat comes from {{ faction }}."
+        "description": "Prevent the assassination of someone with the {{ background.generator.name }} background without exposing that the threat originates within {{ faction.name }}."
       }
     },
     {
       "id": "gather_remedy_material",
       "name": "Gather remedy materials",
       "fields": {
-        "description": "Gather several samples of {{ material }} needed to make a remedy."
+        "description": "Gather enough of the material known as {{ material.name }} to prepare a remedy before the patient’s condition becomes irreversible."
       }
     },
     {
       "id": "evacuate_before_monsters",
-      "name": "Evacuate before creatures arrive",
+      "name": "Evacuate before disaster",
       "fields": {
-        "description": "Evacuate {{ settlement }} before a group associated with {{ monster }} arrives."
+        "description": "Evacuate everyone endangered at the settlement known as {{ settlement.name }} before this approaching crisis closes the safe routes: {{ event.description }}"
       }
     },
     {
       "id": "escape_site_with_prisoner",
       "name": "Escape with a prisoner",
       "fields": {
-        "description": "Escape {{ dungeon }} with someone from the {{ background }} background who refuses to explain the imprisonment."
+        "description": "Escape the place known as {{ dungeon.name }} with a captive who has the {{ background.generator.name }} background and refuses to explain the imprisonment."
       }
     },
     {
       "id": "rescue_criminal_captive",
       "name": "Rescue a captive",
       "fields": {
-        "description": "Rescue someone with the {{ background }} background from a captor with the {{ background:criminal }} background inside a place identified as {{ building }}."
+        "description": "Rescue a captive with the {{ background.generator.name }} background from someone with the {{ background:criminal.generator.name }} background inside the building known as {{ building.name }}."
       }
     },
     {
       "id": "hide_item_from_faction",
       "name": "Hide a tracked item",
       "fields": {
-        "description": "Hide {{ curio }} from {{ faction }}, which can track anyone who touched it."
+        "description": "Hide and protect the unusual item known as {{ curio.name }} from {{ faction.name }}, whose agents can magically or otherwise track the object and anyone who has handled it."
       }
     },
     {
       "id": "conceal_adventure_site",
       "name": "Conceal a hidden site",
       "fields": {
-        "description": "Prevent someone with the {{ background }} background from discovering the location of {{ dungeon }}."
+        "description": "Prevent someone with the {{ background.generator.name }} background from discovering or revealing the location of the place known as {{ dungeon.name }}."
       }
     },
     {
       "id": "tail_person_through_settlement",
       "name": "Tail someone through a settlement",
       "fields": {
-        "description": "Follow someone with the {{ background }} background through {{ settlement }} without drawing the attention of their allies."
+        "description": "Follow someone with the {{ background.generator.name }} background through the settlement known as {{ settlement.name }} without alerting the target or their allies."
       }
     },
     {
       "id": "collect_seasonal_material",
-      "name": "Collect a seasonal material",
+      "name": "Collect a seasonally inaccessible material",
       "fields": {
-        "description": "Collect {{ material }} in {{ region }} before a seasonal change makes it inaccessible."
+        "description": "Collect the material known as {{ material.name }} in the region called {{ region.name }} before a seasonal change blocks access to the material or its source."
       }
     },
     {
       "id": "deliver_contested_goods",
       "name": "Deliver contested goods",
       "fields": {
-        "description": "Deliver goods represented by {{ valuables }} to someone with the {{ background }} background, while several figures with the {{ background:criminal }} background have been given the same description of the parcel."
+        "description": "Deliver the valuable item known as {{ valuables.name }} to someone with the {{ background.generator.name }} background while rival claimants use matching seals and instructions to divert the parcel."
       }
     },
     {
       "id": "treasure_hunt_site",
       "name": "Find a hidden cache",
       "fields": {
-        "description": "Locate {{ valuables }} in a cache hidden within {{ site }}."
+        "description": "Locate and recover the valuable item known as {{ valuables.name }} from a cache hidden within a site described as {{ site.generator.name }}."
       }
     },
     {
       "id": "cure_affliction",
       "name": "Cure an affliction",
       "fields": {
-        "description": "Find the knowledge, material, or aid needed to cure or break the following affliction: {{ affliction }}"
+        "description": "Find the knowledge, material, or aid needed to cure or break the affliction known as {{ affliction.name }}."
       }
     },
     {
@@ -222,70 +222,98 @@
       "id": "locate_affliction_source",
       "name": "Find an affliction’s source",
       "fields": {
-        "description": "Discover the origin of the following disease or curse and how or why it first took hold: {{ affliction }}"
+        "description": "Discover where the affliction known as {{ affliction.name }} first took hold and determine how to stop it from spreading or returning."
       }
     },
     {
       "id": "retrieve_runed_item",
       "name": "Retrieve a runed item",
       "fields": {
-        "description": "Recover an object bearing a rune of {{ rules.name }} from {{ site }}."
+        "description": "Recover an object bearing a rune of {{ rules.name }} from a site described as {{ site.generator.name }}."
       }
     },
     {
       "id": "destroy_runed_item",
       "name": "Destroy a runed item",
       "fields": {
-        "description": "Find and destroy an object bearing a rune of {{ rules.name }} hidden within {{ site }}."
+        "description": "Find and safely destroy an object bearing a rune of {{ rules.name }} hidden within a site described as {{ site.generator.name }}."
       }
     },
     {
       "id": "sabotage_faction_site",
       "name": "Sabotage a faction site",
       "fields": {
-        "description": "Disable or disrupt an operation, device, route, or resource maintained by {{ faction }} at {{ site }}."
+        "description": "Disable an operation, device, route, or resource maintained by {{ faction.name }} at a site described as {{ site.generator.name }} without harming bystanders."
       }
     },
     {
       "id": "repair_settlement_resource",
       "name": "Repair an essential resource",
       "fields": {
-        "description": "Restore a damaged structure, route, device, or resource essential to {{ settlement }}."
+        "description": "Restore a damaged structure, route, device, or resource on which the settlement known as {{ settlement.name }} depends."
       }
     },
     {
       "id": "steal_information_building",
       "name": "Steal protected information",
       "fields": {
-        "description": "Obtain protected records, correspondence, or plans kept inside {{ building }}."
+        "description": "Obtain protected records, correspondence, or plans kept inside the building known as {{ building.name }} without alerting their custodian."
       }
     },
     {
       "id": "expose_conspiracy",
       "name": "Expose a conspiracy",
       "fields": {
-        "description": "Gather enough evidence to expose hidden cooperation or wrongdoing involving {{ faction }} and {{ government }}."
+        "description": "Gather enough evidence to expose covert cooperation or wrongdoing involving {{ faction.name }} and a government organized as {{ government.name }}."
       }
     },
     {
       "id": "resolve_debt_oath",
       "name": "Settle a debt or oath",
       "fields": {
-        "description": "Settle an important obligation linking someone with the {{ background }} background to {{ faction }}: fulfill a promise or oath, transfer responsibility, collect a debt where applicable, or negotiate another resolution."
+        "description": "Resolve a debt or sworn obligation binding someone with the {{ background.generator.name }} background to {{ faction.name }} by fulfilling it, transferring it, collecting what is owed, or negotiating a release."
       }
     },
     {
       "id": "protect_during_crisis",
       "name": "Protect something during a crisis",
       "fields": {
-        "description": "Protect a person, object, or vulnerable part of {{ site }} while the following crisis unfolds: {{ event }}"
+        "description": "Protect a person, object, or vulnerable part of a site described as {{ site.generator.name }} while the following crisis unfolds: {{ event.description }}"
       }
     },
     {
       "id": "negotiate_access",
       "name": "Negotiate access",
       "fields": {
-        "description": "Secure permission from {{ faction }} to enter, cross, inspect, or use {{ site }}."
+        "description": "Secure permission from {{ faction.name }} to enter, cross, inspect, or use a site described as {{ site.generator.name }}."
+      }
+    },
+    {
+      "id": "hide_person_from_faction",
+      "name": "Shelter a hunted person",
+      "fields": {
+        "description": "Hide and protect someone with the {{ background.generator.name }} background while {{ faction.name }} actively searches for them."
+      }
+    },
+    {
+      "id": "fulfill_sensitive_service",
+      "name": "Fulfill a sensitive commission",
+      "fields": {
+        "description": "Provide work involving {{ service.name }} for a government organized as {{ government.name }} before a strict deadline while keeping the client’s involvement secret."
+      }
+    },
+    {
+      "id": "recover_crime_evidence",
+      "name": "Recover evidence of a crime",
+      "fields": {
+        "description": "Find and secure evidence connecting {{ faction.name }} to the following offense before the evidence is destroyed: {{ crime.name }}."
+      }
+    },
+    {
+      "id": "broker_hostage_exchange",
+      "name": "Broker a hostage exchange",
+      "fields": {
+        "description": "Negotiate and safeguard an exchange of captives between {{ faction.name }} and {{ faction.name }} before either side abandons the agreement."
       }
     }
   ]

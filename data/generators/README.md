@@ -34,6 +34,13 @@ concise concepts, archetypes, and evocative details that leave motives,
 relationships, consequences, and other meaningful choices to the GM. Keep
 independent concepts separate when random combinations make them more reusable.
 
+The standalone internal `crime` and `service` generators are name-only helper
+vocabularies for composed adventure prose. They are not public categories or
+routers. Keep crime entries as grammatically reusable offenses or criminal
+activities, and service entries as work that a person or organization could
+request or purchase. Consumers should normally select only their names with
+`{{ crime.name }}` or `{{ service.name }}`.
+
 ## Generator document
 
 Every file uses generator schema v4:

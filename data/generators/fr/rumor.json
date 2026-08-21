@@ -3,7 +3,7 @@
   "id": "rumor",
   "visibility": "public",
   "name": "Rumeur",
-  "description": "Rumeurs dont le MJ décide si elles sont fondées",
+  "description": "Affirmations invérifiées dont le MJ décide si elles sont fondées",
   "entrySchema": {
     "required": ["description"]
   },
@@ -12,70 +12,196 @@
       "id": "rumor_1",
       "name": "Créature aperçue",
       "fields": {
-        "description": "Une créature décrite comme {{ monster }} aurait été aperçue près de {{ settlement }}."
+        "description": "Une créature que les témoins décrivent comme {{ monster.name }} aurait été aperçue près de la localité appelée {{ settlement.name }}."
       }
     },
     {
       "id": "rumor_2",
       "name": "Achats inhabituels de matériaux",
       "fields": {
-        "description": "{{ faction }} achèterait des quantités inhabituelles de {{ material }}."
+        "description": "{{ faction.name }} achèterait des quantités inhabituelles du matériau appelé {{ material.name }}."
       }
     },
     {
       "id": "rumor_3",
       "name": "Trésor caché",
       "fields": {
-        "description": "Un trésor serait caché sous {{ building }}."
+        "description": "Une cache de grande valeur serait dissimulée sous le bâtiment appelé {{ building.name }}."
       }
     },
     {
       "id": "rumor_4",
       "name": "Action gouvernementale secrète",
       "fields": {
-        "description": "{{ government }} préparerait une action secrète contre un rival voisin."
+        "description": "Un gouvernement de type {{ government.name }} préparerait une action secrète contre un rival voisin."
       }
     },
     {
       "id": "rumor_5",
       "name": "Présage dissimulé",
       "fields": {
-        "description": "Les fidèles de {{ religion }} annonceraient — ou dissimuleraient — un présage."
+        "description": "Les fidèles de la religion appelée {{ religion.name }} annonceraient — ou dissimuleraient — une révélation de mauvais augure."
       }
     },
     {
       "id": "rumor_6",
       "name": "Route devenue dangereuse",
       "fields": {
-        "description": "La route traversant {{ region }} serait soudain devenue dangereuse, sans que les voyageurs s’accordent sur la raison."
+        "description": "Les voies traversant la région appelée {{ region.name }} seraient devenues dangereuses, sans que les voyageurs s’accordent sur la raison."
       }
     },
     {
       "id": "rumor_7",
       "name": "Personne disparue aperçue",
       "fields": {
-        "description": "Une personne disparue au profil {{ background }} aurait été aperçue dans {{ building }}."
+        "description": "Une personne disparue au profil {{ background.generator.name }} aurait été aperçue dans le bâtiment appelé {{ building.name }}."
       }
     },
     {
       "id": "rumor_8",
       "name": "Lieu abandonné occupé",
       "fields": {
-        "description": "Un lieu abandonné décrit comme {{ site }} serait encore occupé."
+        "description": "Un site décrit comme {{ site.generator.name }}, longtemps tenu pour abandonné, serait occupé."
       }
     },
     {
       "id": "rumor_9",
       "name": "Objet passé de main en main",
       "fields": {
-        "description": "Un objet décrit comme {{ curio }} aurait changé plusieurs fois de mains cette semaine."
+        "description": "L’objet insolite appelé {{ curio.name }} aurait changé plusieurs fois de mains en l’espace de quelques jours."
       }
     },
     {
       "id": "rumor_10",
       "name": "Service payé discrètement",
       "fields": {
-        "description": "{{ government }} paierait discrètement pour un service précis sans en expliquer la raison."
+        "description": "Un gouvernement de type {{ government.name }} rémunérerait discrètement une prestation de type {{ service.name }} sans en expliquer la raison."
+      }
+    },
+    {
+      "id": "faction_finances_crime",
+      "name": "Soutien au crime organisé",
+      "fields": {
+        "description": "D’après certains murmures, {{ faction.name }} tirerait indirectement profit de l’infraction suivante : {{ crime.name }}."
+      }
+    },
+    {
+      "id": "disputed_succession",
+      "name": "Succession contestée",
+      "fields": {
+        "description": "Une personne au profil {{ background:noble.generator.name }} serait secrètement préparée à remplacer les dirigeants d’un gouvernement de type {{ government.name }}."
+      }
+    },
+    {
+      "id": "manufactured_shortage",
+      "name": "Pénurie organisée",
+      "fields": {
+        "description": "Des marchands affirment que {{ faction.name }} retiendrait des stocks du matériau appelé {{ material.name }} afin de faire monter les prix."
+      }
+    },
+    {
+      "id": "forbidden_rite",
+      "name": "Rite interdit",
+      "fields": {
+        "description": "Les fidèles de la religion appelée {{ religion.name }} pratiqueraient un rite interdit sous le bâtiment appelé {{ building.name }}."
+      }
+    },
+    {
+      "id": "pattern_of_disappearances",
+      "name": "Série de disparitions",
+      "fields": {
+        "description": "Des voyageurs au profil {{ background.generator.name }} auraient disparu sur les voies traversant la région appelée {{ region.name }}."
+      }
+    },
+    {
+      "id": "repeating_strange_event",
+      "name": "Événement étrange récurrent",
+      "fields": {
+        "description": "Des témoins jurent que le phénomène étrange suivant s’est produit plus d’une fois : {{ event.description }}"
+      }
+    },
+    {
+      "id": "dangerous_site_after_dark",
+      "name": "Lieu captif de la nuit",
+      "fields": {
+        "description": "Il deviendrait impossible de quitter un site décrit comme {{ site.generator.name }} après la tombée de la nuit."
+      }
+    },
+    {
+      "id": "fabricated_reputation",
+      "name": "Réputation fabriquée",
+      "fields": {
+        "description": "Une personne respectée au profil {{ background.generator.name }} aurait bâti sa réputation sur de faux documents et les exploits d’autrui."
+      }
+    },
+    {
+      "id": "creature_protection_bargain",
+      "name": "Protection achetée à une créature",
+      "fields": {
+        "description": "Les habitants de la localité appelée {{ settlement.name }} offriraient des présents à une créature identifiée comme {{ monster.name }} en échange de sa protection."
+      }
+    },
+    {
+      "id": "counterfeit_currency",
+      "name": "Fausse monnaie",
+      "fields": {
+        "description": "La monnaie émise par un gouvernement de type {{ government.name }} serait contrefaite dans le bâtiment appelé {{ building.name }}."
+      }
+    },
+    {
+      "id": "stolen_relic",
+      "name": "Relique volée",
+      "fields": {
+        "description": "Une relique sacrée de la religion appelée {{ religion.name }} serait cachée sous la garde de {{ faction.name }}."
+      }
+    },
+    {
+      "id": "secret_passage",
+      "name": "Passage secret",
+      "fields": {
+        "description": "Un passage dissimulé relierait le bâtiment appelé {{ building.name }} à un site décrit comme {{ site.generator.name }}."
+      }
+    },
+    {
+      "id": "tainted_material_shipments",
+      "name": "Cargaisons contaminées",
+      "fields": {
+        "description": "Des cargaisons du matériau appelé {{ material.name }} venues de la région nommée {{ region.name }} seraient à l’origine de cas de l’affliction {{ affliction.name }}."
+      }
+    },
+    {
+      "id": "criminal_informants",
+      "name": "Informateurs criminels",
+      "fields": {
+        "description": "Un gouvernement de type {{ government.name }} rémunérerait une personne au profil {{ background:criminal.generator.name }} pour obtenir des renseignements sur des personnalités en vue."
+      }
+    },
+    {
+      "id": "pirates_returning",
+      "name": "Retour des pirates",
+      "fields": {
+        "description": "Des voyageurs affirment que l’activité de {{ crime:piracy.name }} aurait repris sur les voies qui bordent la région appelée {{ region.name }} après des années d’accalmie."
+      }
+    },
+    {
+      "id": "shared_prophetic_dream",
+      "name": "Rêve prophétique partagé",
+      "fields": {
+        "description": "Des personnes qui ne se connaissent pas feraient le même rêve au sujet d’un changement prochain sur un site décrit comme {{ site.generator.name }}."
+      }
+    },
+    {
+      "id": "political_scandal",
+      "name": "Scandale politique",
+      "fields": {
+        "description": "{{ faction.name }} détiendrait la preuve d’un scandale capable de déstabiliser un gouvernement de type {{ government.name }}."
+      }
+    },
+    {
+      "id": "hidden_creature_breeding",
+      "name": "Élevage clandestin de créatures",
+      "fields": {
+        "description": "{{ faction.name }} élèverait des créatures semblables à {{ monster.name }} sous le bâtiment appelé {{ building.name }}."
       }
     }
   ]

@@ -3,7 +3,7 @@
   "id": "rumor",
   "visibility": "public",
   "name": "Rumor",
-  "description": "Circulating claims whose truth is left to the GM",
+  "description": "Unverified circulating claims whose truth is left to the GM",
   "entrySchema": {
     "required": ["description"]
   },
@@ -12,70 +12,196 @@
       "id": "rumor_1",
       "name": "Creature sighting",
       "fields": {
-        "description": "A {{ monster }} was supposedly seen near {{ settlement }}."
+        "description": "A creature witnesses describe as {{ monster.name }} was supposedly seen near the settlement known as {{ settlement.name }}."
       }
     },
     {
       "id": "rumor_2",
       "name": "Unusual material purchases",
       "fields": {
-        "description": "{{ faction }} is said to be buying unusual quantities of {{ material }}."
+        "description": "{{ faction.name }} is said to be buying unusual quantities of the material known as {{ material.name }}."
       }
     },
     {
       "id": "rumor_3",
       "name": "Hidden treasure",
       "fields": {
-        "description": "Treasure is allegedly hidden beneath {{ building }}."
+        "description": "A valuable cache is allegedly hidden beneath the building known as {{ building.name }}."
       }
     },
     {
       "id": "rumor_4",
       "name": "Secret government action",
       "fields": {
-        "description": "{{ government }} is supposedly preparing a secret action against a nearby rival."
+        "description": "A government organized as {{ government.name }} is supposedly preparing a secret action against a nearby rival."
       }
     },
     {
       "id": "rumor_5",
       "name": "Concealed omen",
       "fields": {
-        "description": "Followers of {{ religion }} are said to be announcing—or concealing—an omen."
+        "description": "Followers of the religion known as {{ religion.name }} are said to be announcing—or concealing—an ominous revelation."
       }
     },
     {
       "id": "rumor_6",
       "name": "Unsafe road",
       "fields": {
-        "description": "The road through {{ region }} has suddenly become unsafe for reasons no traveler agrees on."
+        "description": "Routes through the region known as {{ region.name }} have supposedly become dangerous, though travelers disagree about why."
       }
     },
     {
       "id": "rumor_7",
       "name": "Missing person sighting",
       "fields": {
-        "description": "A missing person with the {{ background }} background was reportedly seen inside {{ building }}."
+        "description": "A missing person with the {{ background.generator.name }} background was reportedly seen inside the building known as {{ building.name }}."
       }
     },
     {
       "id": "rumor_8",
       "name": "Occupied abandoned site",
       "fields": {
-        "description": "An abandoned place described as {{ site }} is supposedly still occupied."
+        "description": "A site described as {{ site.generator.name }}, long believed abandoned, is supposedly occupied."
       }
     },
     {
       "id": "rumor_9",
       "name": "Curio changing hands",
       "fields": {
-        "description": "An object described as {{ curio }} is said to have changed hands several times this week."
+        "description": "The unusual item known as {{ curio.name }} is said to have changed hands several times in only a few days."
       }
     },
     {
       "id": "rumor_10",
       "name": "Discreet paid service",
       "fields": {
-        "description": "{{ government }} is discreetly paying for a particular service without explaining why."
+        "description": "A government organized as {{ government.name }} is reportedly paying discreetly for the following service without explaining why: {{ service.name }}."
+      }
+    },
+    {
+      "id": "faction_finances_crime",
+      "name": "Organized crime backing",
+      "fields": {
+        "description": "It is whispered that {{ faction.name }} profits through intermediaries from the following offense: {{ crime.name }}."
+      }
+    },
+    {
+      "id": "disputed_succession",
+      "name": "Disputed succession",
+      "fields": {
+        "description": "Someone with the {{ background:noble.generator.name }} background is reportedly being prepared in secret to replace the leaders of a government organized as {{ government.name }}."
+      }
+    },
+    {
+      "id": "manufactured_shortage",
+      "name": "Manufactured shortage",
+      "fields": {
+        "description": "Merchants claim that {{ faction.name }} is withholding the material known as {{ material.name }} to force prices higher."
+      }
+    },
+    {
+      "id": "forbidden_rite",
+      "name": "Forbidden rite",
+      "fields": {
+        "description": "Followers of the religion known as {{ religion.name }} are rumored to perform a forbidden rite beneath the building called {{ building.name }}."
+      }
+    },
+    {
+      "id": "pattern_of_disappearances",
+      "name": "Pattern of disappearances",
+      "fields": {
+        "description": "Travelers with the {{ background.generator.name }} background have supposedly vanished along routes through the region known as {{ region.name }}."
+      }
+    },
+    {
+      "id": "repeating_strange_event",
+      "name": "Repeating strange event",
+      "fields": {
+        "description": "Witnesses insist that the following strange occurrence has happened more than once: {{ event.description }}"
+      }
+    },
+    {
+      "id": "dangerous_site_after_dark",
+      "name": "Night-bound site",
+      "fields": {
+        "description": "A site described as {{ site.generator.name }} is said to become impossible to leave after nightfall."
+      }
+    },
+    {
+      "id": "fabricated_reputation",
+      "name": "Fabricated reputation",
+      "fields": {
+        "description": "A respected {{ background.generator.name }} allegedly built their reputation on falsified records and borrowed achievements."
+      }
+    },
+    {
+      "id": "creature_protection_bargain",
+      "name": "Creature protection bargain",
+      "fields": {
+        "description": "Residents of the settlement known as {{ settlement.name }} supposedly leave offerings for a creature identified as {{ monster.name }} in exchange for protection."
+      }
+    },
+    {
+      "id": "counterfeit_currency",
+      "name": "Counterfeit coinage",
+      "fields": {
+        "description": "Coins issued by a government organized as {{ government.name }} are rumored to be counterfeited inside the building known as {{ building.name }}."
+      }
+    },
+    {
+      "id": "stolen_relic",
+      "name": "Stolen relic",
+      "fields": {
+        "description": "A sacred relic of the religion known as {{ religion.name }} is said to be hidden in the custody of {{ faction.name }}."
+      }
+    },
+    {
+      "id": "secret_passage",
+      "name": "Secret passage",
+      "fields": {
+        "description": "A concealed passage allegedly connects the building known as {{ building.name }} to a site described as {{ site.generator.name }}."
+      }
+    },
+    {
+      "id": "tainted_material_shipments",
+      "name": "Tainted shipments",
+      "fields": {
+        "description": "Shipments of the material known as {{ material.name }} from the region called {{ region.name }} are blamed for cases of the affliction {{ affliction.name }}."
+      }
+    },
+    {
+      "id": "criminal_informants",
+      "name": "Criminal informants",
+      "fields": {
+        "description": "A government organized as {{ government.name }} is rumored to pay someone with the {{ background:criminal.generator.name }} background for information about prominent citizens."
+      }
+    },
+    {
+      "id": "pirates_returning",
+      "name": "Returning pirates",
+      "fields": {
+        "description": "Travelers claim that {{ crime:piracy.name }} has returned to routes bordering the region known as {{ region.name }} after years of calm."
+      }
+    },
+    {
+      "id": "shared_prophetic_dream",
+      "name": "Shared prophetic dream",
+      "fields": {
+        "description": "Unconnected people reportedly share the same dream about an approaching change at a site described as {{ site.generator.name }}."
+      }
+    },
+    {
+      "id": "political_scandal",
+      "name": "Political scandal",
+      "fields": {
+        "description": "{{ faction.name }} is said to possess proof of a scandal that could destabilize a government organized as {{ government.name }}."
+      }
+    },
+    {
+      "id": "hidden_creature_breeding",
+      "name": "Hidden creature breeding",
+      "fields": {
+        "description": "{{ faction.name }} is rumored to be breeding creatures resembling {{ monster.name }} beneath the building known as {{ building.name }}."
       }
     }
   ]

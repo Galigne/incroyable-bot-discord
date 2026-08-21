@@ -705,6 +705,78 @@ test('ability remains an open-ended internal name-only vocabulary', () => {
 	);
 });
 
+test('crime and service remain internal name-only helper vocabularies', () => {
+	const requiredEntryIds = {
+		crime: [
+			'theft',
+			'burglary',
+			'smuggling',
+			'extortion',
+			'kidnapping',
+			'assassination',
+			'forgery',
+			'counterfeiting',
+			'sabotage',
+			'arson',
+			'blackmail',
+			'bribery',
+			'fraud',
+			'grave_robbing',
+			'artifact_trafficking',
+			'poaching',
+			'piracy',
+			'espionage',
+			'protection_racket',
+		],
+		service: [
+			'escort',
+			'guard_duty',
+			'healing',
+			'translation',
+			'investigation',
+			'tracking',
+			'surveying',
+			'transportation',
+			'smuggling',
+			'forgery',
+			'mediation',
+			'exorcism',
+			'retrieval',
+			'construction',
+			'repair',
+			'bodyguard_work',
+			'information_gathering',
+			'magical_consultation',
+		],
+	};
+
+	for (const locale of ['en', 'fr']) {
+		const publicIds = new Set(
+			generatorCatalog.listGenerators(locale).map(generator => generator.id),
+		);
+		for (const [generatorId, requiredIds] of Object.entries(requiredEntryIds)) {
+			const generator = generatorCatalog.getGenerator(generatorId, locale);
+			assert.equal(generator.visibility, 'internal');
+			assert.deepEqual(generator.entrySchema.required, []);
+			assert.ok(requiredIds.every(id => (
+				generator.entries.some(entry => entry.id === id)
+			)));
+			assert.ok(generator.entries.every(entry => (
+				Object.keys(entry).every(key => ['id', 'name', 'weight'].includes(key))
+					&& typeof entry.name === 'string'
+					&& entry.name.trim()
+			)));
+			assert.equal(publicIds.has(generatorId), false);
+			const result = generatorResolver.resolveReference(
+				`${generatorId}:${generator.entries[0].id}.name`,
+				locale,
+				{ random: () => 0 },
+			);
+			assert.doesNotMatch(result.display, /\{\{|\}\}/);
+		}
+	}
+});
+
 test('element and weakness catalogs provide localized reusable concepts', () => {
 	const elementIds = [
 		'fire',

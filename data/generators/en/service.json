@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 4,
+  "id": "service",
+  "visibility": "internal",
+  "name": "Services",
+  "description": "Reusable services that people and organizations may request or purchase",
+  "entrySchema": {
+    "required": []
+  },
+  "entries": [
+    { "id": "escort", "name": "escort duty" },
+    { "id": "guard_duty", "name": "guard duty" },
+    { "id": "healing", "name": "healing" },
+    { "id": "translation", "name": "translation" },
+    { "id": "investigation", "name": "investigation" },
+    { "id": "tracking", "name": "tracking" },
+    { "id": "surveying", "name": "surveying" },
+    { "id": "transportation", "name": "transportation" },
+    { "id": "smuggling", "name": "smuggling" },
+    { "id": "forgery", "name": "forgery" },
+    { "id": "mediation", "name": "mediation" },
+    { "id": "exorcism", "name": "exorcism" },
+    { "id": "retrieval", "name": "retrieval" },
+    { "id": "construction", "name": "construction" },
+    { "id": "repair", "name": "repair work" },
+    { "id": "bodyguard_work", "name": "bodyguard work" },
+    { "id": "information_gathering", "name": "information gathering" },
+    { "id": "magical_consultation", "name": "magical consultation" },
+    { "id": "legal_representation", "name": "legal representation" },
+    { "id": "discreet_delivery", "name": "discreet delivery" },
+    { "id": "guiding", "name": "guiding" },
+    { "id": "training", "name": "training" },
+    { "id": "appraisal", "name": "appraisal" },
+    { "id": "warding", "name": "magical warding" },
+    { "id": "funerary_rites", "name": "funerary rites" },
+    { "id": "rescue", "name": "rescue work" },
+    { "id": "messenger_work", "name": "messenger work" },
+    { "id": "supply_procurement", "name": "supply procurement" }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 4,
+  "id": "crime",
+  "visibility": "internal",
+  "name": "Crimes",
+  "description": "Reusable crimes and criminal activities for adventure content",
+  "entrySchema": {
+    "required": []
+  },
+  "entries": [
+    { "id": "theft", "name": "theft" },
+    { "id": "burglary", "name": "burglary" },
+    { "id": "robbery", "name": "robbery" },
+    { "id": "smuggling", "name": "smuggling" },
+    { "id": "extortion", "name": "extortion" },
+    { "id": "kidnapping", "name": "kidnapping" },
+    { "id": "assassination", "name": "assassination" },
+    { "id": "forgery", "name": "forgery" },
+    { "id": "counterfeiting", "name": "counterfeiting" },
+    { "id": "sabotage", "name": "sabotage" },
+    { "id": "arson", "name": "arson" },
+    { "id": "blackmail", "name": "blackmail" },
+    { "id": "bribery", "name": "bribery" },
+    { "id": "fraud", "name": "fraud" },
+    { "id": "grave_robbing", "name": "grave robbing" },
+    { "id": "artifact_trafficking", "name": "artifact trafficking" },
+    { "id": "poaching", "name": "poaching" },
+    { "id": "piracy", "name": "piracy" },
+    { "id": "espionage", "name": "espionage" },
+    { "id": "protection_racket", "name": "a protection racket" },
+    { "id": "banditry", "name": "banditry" },
+    { "id": "embezzlement", "name": "embezzlement" },
+    { "id": "tax_evasion", "name": "tax evasion" },
+    { "id": "illegal_gambling", "name": "illegal gambling" },
+    { "id": "contraband_magic", "name": "trafficking in forbidden magic" },
+    { "id": "tomb_raiding", "name": "tomb raiding" },
+    { "id": "prison_break", "name": "organizing a prison break" },
+    { "id": "impersonation", "name": "criminal impersonation" },
+    { "id": "treason", "name": "treason" },
+    { "id": "stolen_goods_trafficking", "name": "trafficking in stolen goods" }
+  ]
+}
