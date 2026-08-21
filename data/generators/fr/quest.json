@@ -19,7 +19,7 @@
       "id": "hunt_modified_monster",
       "name": "Traquer une créature singulière",
       "fields": {
-        "description": "Pister puis capturer ou abattre une créature identifiée comme {{ monster.name }}, que les témoins reconnaissent à cette particularité inhabituelle : {{ modifier_creature.name }}."
+        "description": "Pister puis capturer ou abattre une créature du type {{ monster.name }}, que les témoins reconnaissent à cette particularité inhabituelle : {{ modifier_creature.name }}."
       }
     },
     {
@@ -68,7 +68,7 @@
       "id": "negotiate_racial_peace",
       "name": "Négocier une paix entre peuples",
       "fields": {
-        "description": "Négocier une paix durable entre une communauté du peuple désigné comme « {{ race.name }} » et les habitants de la localité nommée {{ settlement.name }}."
+        "description": "Négocier une paix durable entre une communauté issue du peuple connu dans la région sous le nom de « {{ race.name }} » et les habitants de la localité nommée {{ settlement.name }}."
       }
     },
     {
@@ -82,7 +82,7 @@
       "id": "first_contact",
       "name": "Établir un premier contact",
       "fields": {
-        "description": "Établir un premier contact avec une communauté du peuple désigné comme « {{ race.name }} » et poser les bases d’une relation durable."
+        "description": "Établir un premier contact avec une communauté issue du peuple connu dans la région sous le nom de « {{ race.name }} » et poser les bases d’une relation durable."
       }
     },
     {
@@ -96,7 +96,7 @@
       "id": "study_monster_alive",
       "name": "Étudier une créature vivante",
       "fields": {
-        "description": "Observer ou capturer une créature identifiée comme {{ monster.name }} sans la tuer afin de comprendre son lien avec la région appelée {{ region.name }}."
+        "description": "Observer ou capturer une créature du type {{ monster.name }} sans la tuer afin de comprendre son lien avec la région appelée {{ region.name }}."
       }
     },
     {

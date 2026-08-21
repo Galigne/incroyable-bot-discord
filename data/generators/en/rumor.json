@@ -138,7 +138,7 @@
       "id": "creature_protection_bargain",
       "name": "Creature protection bargain",
       "fields": {
-        "description": "Residents of the settlement known as {{ settlement.name }} supposedly leave offerings for a creature identified as {{ monster.name }} in exchange for protection."
+        "description": "Residents of the settlement known as {{ settlement.name }} supposedly leave offerings for a creature of the {{ monster.name }} type in exchange for protection."
       }
     },
     {

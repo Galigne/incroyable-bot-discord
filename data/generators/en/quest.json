@@ -19,7 +19,7 @@
       "id": "hunt_modified_monster",
       "name": "Hunt a singular creature",
       "fields": {
-        "description": "Track and capture or kill a creature identified as {{ monster.name }}, which witnesses recognize by the following unusual trait: {{ modifier_creature.name }}."
+        "description": "Track and capture or kill a creature of the {{ monster.name }} type, which witnesses recognize by the following unusual trait: {{ modifier_creature.name }}."
       }
     },
     {
@@ -68,7 +68,7 @@
       "id": "negotiate_racial_peace",
       "name": "Negotiate peace between peoples",
       "fields": {
-        "description": "Negotiate a durable peace between a community whose people identify as {{ race.name }} and the inhabitants of the settlement called {{ settlement.name }}."
+        "description": "Negotiate a durable peace between a community from the people known in the region as “{{ race.name }}” and the inhabitants of the settlement called {{ settlement.name }}."
       }
     },
     {
@@ -82,7 +82,7 @@
       "id": "first_contact",
       "name": "Establish first contact",
       "fields": {
-        "description": "Establish first contact with a community whose people identify as {{ race.name }} and secure the basis for a lasting relationship."
+        "description": "Establish first contact with a community from the people known in the region as “{{ race.name }}” and secure the basis for a lasting relationship."
       }
     },
     {
@@ -96,7 +96,7 @@
       "id": "study_monster_alive",
       "name": "Study a creature alive",
       "fields": {
-        "description": "Observe or capture a creature identified as {{ monster.name }} without killing it to understand its connection to the region known as {{ region.name }}."
+        "description": "Observe or capture a creature of the {{ monster.name }} type without killing it to understand its connection to the region known as {{ region.name }}."
       }
     },
     {

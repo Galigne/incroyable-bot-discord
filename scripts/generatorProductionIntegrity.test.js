@@ -413,6 +413,20 @@ test('quest, rumor, and secret prose frames reusable catalog labels by type', ()
 			extractInlineReferences(secretEntries.get('secret_11').fields.description),
 			['government.name', 'crime.name'],
 		);
+		for (const [generatorId, entryId, references] of [
+			['quest', 'hunt_modified_monster', ['monster.name', 'modifier_creature.name']],
+			['quest', 'study_monster_alive', ['monster.name', 'region.name']],
+			['rumor', 'creature_protection_bargain', ['settlement.name', 'monster.name']],
+			['secret', 'secret_6', ['monster.name']],
+			['secret', 'bound_creature', ['monster.name', 'site.generator.name']],
+		]) {
+			assert.deepEqual(
+				extractInlineReferences(
+					entriesByGenerator.get(generatorId).get(entryId).fields.description,
+				),
+				references,
+			);
+		}
 		assert.doesNotMatch(
 			questEntries.get('stop_criminal_operation').fields.description,
 			/next target|nouvelle victime/i,
@@ -423,18 +437,22 @@ test('quest, rumor, and secret prose frames reusable catalog labels by type', ()
 		);
 
 		const raceFraming = locale === 'en'
-			? 'whose people identify as {{ race.name }}'
-			: 'peuple désigné comme « {{ race.name }} »';
+			? /people known in the region as “\{\{ race\.name \}\}”/
+			: /peuple connu dans la région sous le nom de « \{\{ race\.name \}\} »/;
 		for (const entryId of ['negotiate_racial_peace', 'first_contact']) {
-			assert.ok(questEntries.get(entryId).fields.description.includes(raceFraming));
+			assert.match(questEntries.get(entryId).fields.description, raceFraming);
 		}
 		const monsterFraming = locale === 'en'
-			? 'creatures of the {{ monster.name }} type'
-			: 'créatures du type {{ monster.name }}';
-		assert.ok(
-			rumorEntries.get('hidden_creature_breeding').fields.description
-				.includes(monsterFraming),
-		);
+			? /(?:of the \{\{ monster\.name \}\} type|following kind.*\{\{ monster\.name \}\})/
+			: /(?:du type \{\{ monster\.name \}\}|du type suivant.*\{\{ monster\.name \}\})/;
+		for (const entries of entriesByGenerator.values()) {
+			for (const entry of entries.values()) {
+				const description = entry.fields.description;
+				if (extractInlineReferences(description).includes('monster.name')) {
+					assert.match(description, monsterFraming, `${locale}:${entry.id}`);
+				}
+			}
+		}
 		if (locale === 'en') {
 			assert.ok(
 				rumorEntries.get('fabricated_reputation').fields.description

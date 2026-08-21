@@ -138,7 +138,7 @@
       "id": "creature_protection_bargain",
       "name": "Protection achetée à une créature",
       "fields": {
-        "description": "Les habitants de la localité appelée {{ settlement.name }} offriraient des présents à une créature identifiée comme {{ monster.name }} en échange de sa protection."
+        "description": "Les habitants de la localité appelée {{ settlement.name }} offriraient des présents à une créature du type {{ monster.name }} en échange de sa protection."
       }
     },
     {
