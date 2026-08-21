@@ -31,6 +31,13 @@ function resolveFixedRules(
 			random,
 			resolver,
 			`${path}.${index}`,
+			fixedRule.element === undefined
+				? undefined
+				: {
+					fixedEntryIdsByGenerator: {
+						element: fixedRule.element,
+					},
+				},
 		);
 		provenance.push(...resolved.provenance);
 		const fields = resolved.displayFields ?? resolved.fields ?? resolved.value;

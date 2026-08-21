@@ -372,6 +372,8 @@ Both entity types support these properties:
   `default`;
 - `naturalArmorPercentage`: a finite percentage from `0` to `100`;
 - `fixedRules`: up to 25 unique `{ "entry": "rule_id", "level": 1 }` records;
+  a fixed `elemental_rule` must also provide an element stable ID, for example
+  `{ "entry": "elemental_rule", "element": "fire", "level": 1 }`;
 - `statusEffects` and `modifiers`: up to 25 canonical paths ending on complete
   content with `name` and `description`;
 - `armor`: one canonical path ending on a complete armor record, kept separate

@@ -403,6 +403,9 @@ function createGeneratorResolver({
 			excludedEntryIdsByGenerator: normalizeEntryExclusions(
 				options.excludedEntryIdsByGenerator,
 			),
+			fixedEntryIdsByGenerator: normalizeFixedEntryIds(
+				options.fixedEntryIdsByGenerator,
+			),
 			locale,
 			maxDepth: options.maxDepth ?? DEFAULT_MAX_DEPTH,
 			random,
@@ -465,6 +468,10 @@ function selectTraversalEntry(generator, entryId, state) {
 	if (entryId !== undefined) {
 		return generator.entries.find(entry => entry.id === entryId);
 	}
+	const fixedEntryId = state.fixedEntryIdsByGenerator?.[generator.id];
+	if (fixedEntryId !== undefined) {
+		return generator.entries.find(entry => entry.id === fixedEntryId);
+	}
 	const exclusions = state.excludedEntryIdsByGenerator?.[generator.id];
 	const eligibleEntries = exclusions?.size
 		? generator.entries.filter(entry => !exclusions.has(entry.id))
@@ -482,6 +489,10 @@ function normalizeEntryExclusions(exclusions = {}) {
 	return Object.fromEntries(Object.entries(exclusions).map((
 		[generatorId, entryIds],
 	) => [generatorId, new Set(entryIds)]));
+}
+
+function normalizeFixedEntryIds(fixedEntryIds = {}) {
+	return { ...fixedEntryIds };
 }
 
 function pushActiveSelection(state, generator, entry) {
@@ -577,6 +588,23 @@ function validateOptions(locale, options) {
 		) {
 			throw new TypeError(
 				'Generator entry exclusions must map generator IDs to entry ID arrays.',
+			);
+		}
+	}
+	if (options.fixedEntryIdsByGenerator !== undefined) {
+		const fixedEntryIds = options.fixedEntryIdsByGenerator;
+		if (
+			!fixedEntryIds
+			|| typeof fixedEntryIds !== 'object'
+			|| Array.isArray(fixedEntryIds)
+			|| Object.entries(fixedEntryIds).some(([generatorId, entryId]) => (
+				!generatorId
+				|| typeof entryId !== 'string'
+				|| !entryId.trim()
+			))
+		) {
+			throw new TypeError(
+				'Fixed generator entries must map generator IDs to entry IDs.',
 			);
 		}
 	}

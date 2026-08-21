@@ -131,12 +131,18 @@ function validateFixedRules(rules, location, entityType) {
 			rule,
 			`${entityLabel(entityType)} archetype ${location} has an invalid fixed RULE.`,
 		);
+		const allowedKeys = rule.entry === 'elemental_rule'
+			? ['entry', 'element', 'level']
+			: ['entry', 'level'];
 		assertExactKeys(
 			rule,
-			['entry', 'level'],
+			allowedKeys,
 			`${entityLabel(entityType)} archetype ${location} fixed RULE has invalid properties.`,
 		);
 		validateStableId(rule.entry, `fixed RULE entry in ${location}`);
+		if (rule.entry === 'elemental_rule') {
+			validateStableId(rule.element, `fixed RULE element in ${location}`);
+		}
 		if (!Number.isInteger(rule.level) || rule.level < 1 || rule.level > 10) {
 			throw generatorSchemaError(
 				'INVALID_GENERATION_FIXED_RULE_LEVEL',

@@ -595,6 +595,49 @@ test('creature Intelligence never grants RULEs and explicit RULE references are 
 	assert.ok(explicit.rules[0].description);
 });
 
+test('fixed elemental RULEs preserve their bound elements in both locales', () => {
+	const expected = {
+		mire_troll: ['plants', 1],
+		cinder_drake: ['fire', 1],
+		frost_widow: ['frost', 1],
+		ash_phoenix: ['fire', 2],
+		uprooted_treant: ['plants', 2],
+		fiery_salamander: ['fire', 1],
+	};
+	for (const locale of ['en', 'fr']) {
+		for (const [entryId, [elementId, level]] of Object.entries(expected)) {
+			const type = getCreatureTypeForEntry(entryId, locale);
+			const creature = generateLocalizedEntry(type, entryId, locale);
+			const element = generatorResolver.resolveReference(
+				`element:${elementId}`,
+				locale,
+				{ random: () => 0 },
+			).display;
+			assert.deepEqual(
+				creature.rules.map(rule => [rule.name, rule.level]),
+				[[
+					locale === 'en'
+						? `${element} RULE`
+						: `LOI élémentaire : ${element}`,
+					level,
+				]],
+				`${locale}:${entryId}`,
+			);
+		}
+		const firstElementRule = generatorResolver.resolveReference(
+			'rules:elemental_rule',
+			locale,
+			{ random: () => 0 },
+		).display;
+		const lastElementRule = generatorResolver.resolveReference(
+			'rules:elemental_rule',
+			locale,
+			{ random: () => 0.999999 },
+		).display;
+		assert.notEqual(firstElementRule, lastElementRule, `${locale}:random element RULE`);
+	}
+});
+
 test('natural armor, generated armor, status, and weighted gear resolve to final state', () => {
 	const cinderDrake = generateEntry(
 		getCreatureTypeForEntry('cinder_drake'),

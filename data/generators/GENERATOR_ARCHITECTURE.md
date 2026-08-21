@@ -320,7 +320,9 @@ embedded generator records. Trait selections do not add trait-specific records t
 the saved source provenance.
 
 Creature Intelligence does not allocate RULEs; only explicit `fixedRules` metadata
-does. Omitted traits, RULEs, status effects, armor, equipment, and inventory keep
+does. A fixed `elemental_rule` may bind its nested `element` reference to a stable
+element ID so a creature keeps a specific elemental RULE; ordinary generated
+`elemental_rule` entries continue to select their element randomly. Omitted traits, RULEs, status effects, armor, equipment, and inventory keep
 their normal empty behavior, while omitted modifiers keep the independent 25%
 creature-modifier policy. Explicit properties replace those normal categories.
 Natural armor, the separate armor reference, and rarity-derived AR from equipped
@@ -347,8 +349,8 @@ application workflows or fixed router entries follow those routes.
 concepts. These resolutions keep nested provenance but do not create or
 persist the referenced people, creatures, locations, or items.
 
-Consumables reuse the internal `ability` and `affliction` generators for broad
-ability potions and specialized remedies. Supplies and curios likewise reuse
+Consumables reuse the internal `ability` and public `affliction` generators for
+broad ability potions and specialized remedies. Supplies and curios likewise reuse
 specific `religion`, `region`, and `dungeon` fields when an existing concept can
 provide a coherent symbol or destination. These references remain descriptive;
 exact strength, duration, treatment, and other mechanics stay with the GM unless a

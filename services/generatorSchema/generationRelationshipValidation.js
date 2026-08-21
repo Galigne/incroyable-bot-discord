@@ -14,6 +14,11 @@ function validateGenerationRelationships(
 			!rules
 			|| !rules.entrySchema.required.includes('description')
 			|| !rules.entries.some(candidate => candidate.id === rule.entry)
+			|| (
+				rule.entry === 'elemental_rule'
+				&& (!catalog.get('element') || !catalog.get('element').entries.some(
+					candidate => candidate.id === rule.element,
+				)))
 		))
 	) {
 		throw generatorSchemaError(
