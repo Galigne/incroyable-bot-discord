@@ -436,11 +436,16 @@ test('quest, rumor, and secret prose frames reusable catalog labels by type', ()
 			/profits?|profit/i,
 		);
 
-		const raceFraming = locale === 'en'
-			? /people known in the region as “\{\{ race\.name \}\}”/
-			: /peuple connu dans la région sous le nom de « \{\{ race\.name \}\} »/;
+		const raceLabel = locale === 'en'
+			? /“\{\{ race\.name \}\}”/
+			: /« \{\{ race\.name \}\} »/;
+		const invalidRaceFraming = locale === 'en'
+			? /whose people identify as|people known in the region as/
+			: /peuple désigné comme|peuple connu dans la région sous le nom de/;
 		for (const entryId of ['negotiate_racial_peace', 'first_contact']) {
-			assert.match(questEntries.get(entryId).fields.description, raceFraming);
+			const description = questEntries.get(entryId).fields.description;
+			assert.match(description, raceLabel);
+			assert.doesNotMatch(description, invalidRaceFraming);
 		}
 		const monsterFraming = locale === 'en'
 			? /(?:of the \{\{ monster\.name \}\} type|following kind.*\{\{ monster\.name \}\})/

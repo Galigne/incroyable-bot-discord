@@ -68,7 +68,7 @@
       "id": "negotiate_racial_peace",
       "name": "Negotiate peace between peoples",
       "fields": {
-        "description": "Negotiate a durable peace between a community from the people known in the region as “{{ race.name }}” and the inhabitants of the settlement called {{ settlement.name }}."
+        "description": "Negotiate a durable peace between a community associated with the “{{ race.name }}” race and the inhabitants of the settlement called {{ settlement.name }}."
       }
     },
     {
@@ -82,7 +82,7 @@
       "id": "first_contact",
       "name": "Establish first contact",
       "fields": {
-        "description": "Establish first contact with a community from the people known in the region as “{{ race.name }}” and secure the basis for a lasting relationship."
+        "description": "Establish first contact with a community associated with the “{{ race.name }}” race and secure the basis for a lasting relationship."
       }
     },
     {
