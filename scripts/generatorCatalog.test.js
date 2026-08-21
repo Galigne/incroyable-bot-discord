@@ -324,6 +324,7 @@ test('production category children use prefixed filenames and concept-only IDs',
 			'site',
 			'group',
 			'modifier',
+			'aspect',
 		]) {
 			const router = generatorCatalog.getGenerator(routerId, locale);
 			for (const route of router.entries) {
@@ -353,6 +354,10 @@ test('generator autocomplete and help expose localized public aliases', () => {
 		publicValues.map(value => value.value),
 		frenchGenerators.map(generator => createGeneratorTraversalAlias(generator.name)),
 	);
+	assert.ok(publicValues.some(value => value.value === 'aspects'));
+	assert.ok(['aptitudes', 'éléments', 'faiblesses'].every(alias => (
+		!publicValues.some(value => value.value === alias)
+	)));
 	assert.ok(publicValues.every(value => value.name === value.value));
 
 	const frenchBackgrounds = generatorCatalog.getGenerator('background', 'fr').entries;

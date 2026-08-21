@@ -14,18 +14,18 @@ Category roots keep their unprefixed filename and ID. Their child filenames use
 `<category>_<concept>.json`, while each child generator ID is only `<concept>`.
 For example, `loot_weapons.json` has ID `weapons`, and references use
 `{{ weapons }}` rather than the filename. The current category families are
-`background`, `creature`, `loot`, `site`, `group`, and `modifier`.
+`background`, `creature`, `loot`, `site`, `group`, `modifier`, and `aspect`.
 
-The unprefixed public `ability` generator is a standalone name-only vocabulary for
-statistics, skills, and other areas in which a character might improve. Its current
-entries are a useful starting set, not a closed mechanical skill list. Reuse
-`{{ ability.name }}` when content needs one such area, as with the generic ability
-potion, rather than duplicating fixed Strength, Speed, or skill-specific variants.
+The public `aspect` category routes to the internal name-only `ability`, `element`,
+and `weakness` vocabularies. They are available to users through `/gen category:`
+aspects while keeping their stable IDs for inline references such as
+`{{ ability.name }}`, `{{ element.name }}`, and `{{ weakness.name }}`. Their current
+entries are useful starting points, not closed mechanical lists.
 
-The public name-only `element` and `weakness` generators provide broadly reusable
-fantasy domains and countermeasures. They can be embedded in generated text with
-`{{ element.name }}` and `{{ weakness.name }}`; the `weakness` catalog may also
-use unrestricted references such as `{{ material.name }}`.
+The `weakness` catalog may also use unrestricted references such as
+`{{ material.name }}`. Keep these vocabularies broadly reusable rather than adding
+highly contextual specialties or ordinary methods that could defeat almost any
+creature.
 
 ## Content guidelines
 

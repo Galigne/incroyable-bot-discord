@@ -176,20 +176,6 @@
       }
     },
     {
-      "id": "candle_rule",
-      "name": "LOI de la Flamme",
-      "fields": {
-        "description": "Crée et dirige le feu."
-      }
-    },
-    {
-      "id": "cold_rule",
-      "name": "LOI du Givre",
-      "fields": {
-        "description": "Retire la chaleur et forme de la glace."
-      }
-    },
-    {
       "id": "rain_rule",
       "name": "LOI de la Pluie",
       "fields": {
@@ -208,13 +194,6 @@
       "name": "LOI de la Téléportation",
       "fields": {
         "description": "Téléporte le personnage ou d'autres cibles."
-      }
-    },
-    {
-      "id": "electricity_rule",
-      "name": "LOI de l’Électricité",
-      "fields": {
-        "description": "Produit et guide les décharges électriques."
       }
     },
     {
@@ -323,13 +302,6 @@
       }
     },
     {
-      "id": "root_rule",
-      "name": "LOI des Plantes",
-      "fields": {
-        "description": "Accélère ou guide la croissance des plantes."
-      }
-    },
-    {
       "id": "beasts_rule",
       "name": "LOI des Bêtes",
       "fields": {
@@ -341,13 +313,6 @@
       "name": "LOI des Spores",
       "fields": {
         "description": "Produit des spores aux effets variés."
-      }
-    },
-    {
-      "id": "stone_rule",
-      "name": "LOI de la Pierre",
-      "fields": {
-        "description": "Façonne la pierre en structures et en formes."
       }
     },
     {
@@ -382,7 +347,7 @@
       "id": "double_rule",
       "name": "LOI du Double",
       "fields": {
-        "description": "Crée une copie imparfaite du personnage."
+        "description": "Crée une copie du personnage."
       }
     },
     {
@@ -414,41 +379,6 @@
       }
     },
     {
-      "id": "wind_rule",
-      "name": "LOI du Vent",
-      "fields": {
-        "description": "Dirige les courants d'air et les rafales."
-      }
-    },
-    {
-      "id": "blood_rule",
-      "name": "LOI du Sang",
-      "fields": {
-        "description": "Manipule le sang ou interagit avec lui."
-      }
-    },
-    {
-      "id": "shadow_rule",
-      "name": "LOI de l’Ombre",
-      "fields": {
-        "description": "Manipule les ombres."
-      }
-    },
-    {
-      "id": "sand_rule",
-      "name": "LOI du Sable",
-      "fields": {
-        "description": "Déplace et façonne le sable ou la poussière."
-      }
-    },
-    {
-      "id": "metal_rule",
-      "name": "LOI du Métal",
-      "fields": {
-        "description": "Plie et assemble le métal."
-      }
-    },
-    {
       "id": "reflection_rule",
       "name": "LOI du Miroir",
       "fields": {
@@ -465,6 +395,7 @@
     {
       "id": "elemental_rule",
       "name": "LOI élémentaire : {{ element.name }}",
+      "weight": 19,
       "fields": {
         "description": "Permet de manipuler cet élément."
       }

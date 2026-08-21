@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 4,
+  "id": "weakness",
+  "visibility": "internal",
+  "name": "Weaknesses",
+  "description": "Broadly useful fantasy weaknesses and countermeasures",
+  "entrySchema": {
+    "required": []
+  },
+  "entries": [
+    { "id": "elemental", "name": "{{ element.name }}" },
+    { "id": "material", "name": "{{ material.name }}" },
+    { "id": "slashing_damage", "name": "Slashing damage" },
+    { "id": "piercing_damage", "name": "Piercing damage" },
+    { "id": "blunt_damage", "name": "Blunt damage" },
+    { "id": "sunlight", "name": "Sunlight" },
+    {
+      "id": "visible_core_destruction",
+      "name": "Destruction of a visible core"
+    },
+    { "id": "loud_noise", "name": "Loud noise" },
+    { "id": "moonlight", "name": "Moonlight" },
+    { "id": "complete_darkness", "name": "Complete darkness" },
+    { "id": "healing_effects", "name": "Healing effects" },
+    {
+      "id": "repeated_damage_same_location",
+      "name": "Repeated damage to the same location"
+    },
+    {
+      "id": "simultaneous_attacks",
+      "name": "Simultaneous attacks from multiple sources"
+    },
+    { "id": "true_name", "name": "Speaking its true name" },
+    {
+      "id": "bound_object_destruction",
+      "name": "Destruction of a bound object"
+    },
+    { "id": "sacred_ground", "name": "Sacred ground" },
+    {
+      "id": "loss_of_ground_contact",
+      "name": "Loss of contact with the ground"
+    }
+  ]
+}

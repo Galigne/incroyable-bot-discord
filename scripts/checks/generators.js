@@ -107,11 +107,10 @@ module.exports = function createGeneratorChecks(context) {
 
 function checkRequiredGenerators(errors, generatorCatalog) {
 	const requiredPublicGenerators = [
-		'ability',
 		'affliction',
+		'aspect',
 		'background',
 		'creature',
-		'element',
 		'event',
 		'group',
 		'loot',
@@ -128,7 +127,6 @@ function checkRequiredGenerators(errors, generatorCatalog) {
 		'talents',
 		'trap',
 		'traits',
-		'weakness',
 	];
 	const publicIds = new Set(
 		generatorCatalog.listGenerators('en').map(generator => generator.id),
@@ -183,6 +181,7 @@ function checkCategoryRouters(errors, generatorCatalog) {
 		'site',
 		'group',
 		'modifier',
+		'aspect',
 	]) {
 		const router = generatorCatalog.getGenerator(routerId);
 		if (

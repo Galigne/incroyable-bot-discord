@@ -30,6 +30,7 @@ const CATEGORY_ROUTER_IDS = Object.freeze([
 	'site',
 	'group',
 	'modifier',
+	'aspect',
 ]);
 
 test('production routed background and creature generators use the consolidated schema path', () => {
@@ -651,7 +652,7 @@ test('armor and shield mechanics use stable types and rarity IDs, not localized 
 	}
 });
 
-test('ability remains an open-ended public name-only vocabulary', () => {
+test('ability remains an open-ended internal name-only vocabulary', () => {
 	const english = generatorCatalog.getGenerator('ability', 'en');
 	const french = generatorCatalog.getGenerator('ability', 'fr');
 	const requiredIds = [
@@ -670,23 +671,19 @@ test('ability remains an open-ended public name-only vocabulary', () => {
 		'climbing',
 		'swimming',
 		'disguise',
-		'streetwise',
 		'tactics',
 		'strategy',
-		'teaching',
 		'negotiation',
 		'gambling',
 		'music',
 		'cartography',
 		'appraisal',
 		'linguistics',
-		'research',
 		'monster_knowledge',
 		'warfare',
-		'etiquette',
 	];
 	for (const ability of [english, french]) {
-		assert.equal(ability.visibility, 'public');
+		assert.equal(ability.visibility, 'internal');
 		assert.deepEqual(ability.entrySchema.required, []);
 		assert.ok(ability.entries.length > 0);
 		assert.ok(requiredIds.every(id => ability.entries.some(entry => entry.id === id)));
@@ -737,22 +734,40 @@ test('element and weakness catalogs provide localized reusable concepts', () => 
 		'piercing_damage',
 		'blunt_damage',
 		'sunlight',
-		'running_water',
-		'decapitation',
-		'heart_destruction',
-		'brain_destruction',
 		'visible_core_destruction',
-		'consecrated_attacks',
+		'loud_noise',
+		'moonlight',
+		'complete_darkness',
+		'healing_effects',
+		'repeated_damage_same_location',
+		'simultaneous_attacks',
+		'true_name',
+		'bound_object_destruction',
+		'sacred_ground',
+		'loss_of_ground_contact',
 	];
 	for (const locale of ['en', 'fr']) {
 		const element = generatorCatalog.getGenerator('element', locale);
 		const weakness = generatorCatalog.getGenerator('weakness', locale);
-		assert.equal(element.visibility, 'public');
-		assert.equal(weakness.visibility, 'public');
+		const aspect = generatorCatalog.getGenerator('aspect', locale);
+		assert.equal(aspect.visibility, 'public');
+		assert.deepEqual(
+			aspect.entries.map(entry => [entry.id, entry.generator]),
+			[
+				['ability', 'ability'],
+				['element', 'element'],
+				['weakness', 'weakness'],
+			],
+		);
+		assert.equal(element.visibility, 'internal');
+		assert.equal(weakness.visibility, 'internal');
 		assert.deepEqual(element.entrySchema.required, []);
 		assert.deepEqual(weakness.entrySchema.required, []);
 		assert.deepEqual(element.entries.map(entry => entry.id), elementIds);
 		assert.deepEqual(weakness.entries.map(entry => entry.id), weaknessIds);
+		const publicIds = new Set(generatorCatalog.listGenerators(locale).map(entry => entry.id));
+		assert.ok(publicIds.has('aspect'));
+		assert.ok(['ability', 'element', 'weakness'].every(id => !publicIds.has(id)));
 		assert.ok(element.entries.every(entry => Object.keys(entry).every(key => (
 			['id', 'name', 'weight'].includes(key)
 		))));
@@ -827,28 +842,39 @@ test('RULE catalog keeps concise concepts and adds the generic elemental RULE', 
 			'Create and manipulate illusions.',
 			'Crée et manipule des illusions.',
 		],
-		blood_rule: [
-			'Manipulate or interact with blood.',
-			'Manipule le sang ou interagit avec lui.',
-		],
 		weight_rule: [
 			'Manipulate gravity.',
 			'Manipule la gravité.',
 		],
-		shadow_rule: [
-			'Manipulate shadows.',
-			'Manipule les ombres.',
+		double_rule: [
+			'Create a copy of yourself.',
+			'Crée une copie du personnage.',
 		],
 	};
+	const removedRuleIds = [
+		'candle_rule',
+		'cold_rule',
+		'electricity_rule',
+		'root_rule',
+		'stone_rule',
+		'wind_rule',
+		'blood_rule',
+		'shadow_rule',
+		'sand_rule',
+		'metal_rule',
+	];
 	for (const [localeIndex, locale] of ['en', 'fr'].entries()) {
 		const rules = generatorCatalog.getGenerator('rules', locale);
 		const elemental = rules.entries.find(entry => entry.id === 'elemental_rule');
+		assert.equal(elemental.weight, 19);
 		assert.equal(elemental.name, locale === 'en'
 			? '{{ element.name }} RULE'
 			: 'LOI élémentaire : {{ element.name }}');
 		assert.equal(elemental.fields.description, locale === 'en'
 			? 'Manipulate this element.'
 			: 'Permet de manipuler cet élément.');
+		assert.deepEqual(extractInlineReferences(elemental.name), ['element.name']);
+		assert.ok(removedRuleIds.every(id => rules.entries.every(entry => entry.id !== id)));
 		for (const [entryId, descriptions] of Object.entries(expectedDescriptions)) {
 			assert.equal(
 				rules.entries.find(entry => entry.id === entryId).fields.description,

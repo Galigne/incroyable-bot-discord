@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 4,
+  "id": "aspect",
+  "visibility": "public",
+  "name": "Aspects",
+  "description": "Aptitudes, éléments et faiblesses réutilisables",
+  "entrySchema": {
+    "required": []
+  },
+  "entries": [
+    { "id": "ability", "name": "Aptitudes", "generator": "ability" },
+    { "id": "element", "name": "Éléments", "generator": "element" },
+    {
+      "id": "weakness",
+      "name": "Faiblesses",
+      "generator": "weakness"
+    }
+  ]
+}

@@ -1,9 +1,9 @@
 {
   "schemaVersion": 4,
   "id": "element",
-  "visibility": "public",
+  "visibility": "internal",
   "name": "Éléments",
-  "description": "Éléments et domaines fantastiques largement réutilisables",
+  "description": "Éléments et domaines fantastiques largement utiles",
   "entrySchema": {
     "required": []
   },

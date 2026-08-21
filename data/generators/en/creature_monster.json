@@ -37,7 +37,7 @@
         "traits": ["{{ traits:regeneration }}"],
         "fixedRules": [
           {
-            "entry": "root_rule",
+            "entry": "elemental_rule",
             "level": 1
           }
         ],
@@ -60,7 +60,7 @@
         ],
         "fixedRules": [
           {
-            "entry": "candle_rule",
+            "entry": "elemental_rule",
             "level": 1
           }
         ],
@@ -155,7 +155,7 @@
         "traits": ["{{ traits:cold_immunity }}", "{{ traits:camouflage }}"],
         "fixedRules": [
           {
-            "entry": "cold_rule",
+            "entry": "elemental_rule",
             "level": 1
           }
         ],
@@ -453,7 +453,7 @@
         ],
         "fixedRules": [
           {
-            "entry": "candle_rule",
+            "entry": "elemental_rule",
             "level": 2
           }
         ],
@@ -540,7 +540,7 @@
         ],
         "fixedRules": [
           {
-            "entry": "root_rule",
+            "entry": "elemental_rule",
             "level": 2
           }
         ],
@@ -683,7 +683,7 @@
         "traits": ["{{ traits:fire_immunity }}"],
         "fixedRules": [
           {
-            "entry": "candle_rule",
+            "entry": "elemental_rule",
             "level": 1
           }
         ],

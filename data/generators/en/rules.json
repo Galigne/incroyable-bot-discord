@@ -176,20 +176,6 @@
       }
     },
     {
-      "id": "candle_rule",
-      "name": "Flame RULE",
-      "fields": {
-        "description": "Create and direct fire."
-      }
-    },
-    {
-      "id": "cold_rule",
-      "name": "Frost RULE",
-      "fields": {
-        "description": "Remove heat and form ice."
-      }
-    },
-    {
       "id": "rain_rule",
       "name": "Rain RULE",
       "fields": {
@@ -208,13 +194,6 @@
       "name": "Teleportation RULE",
       "fields": {
         "description": "Teleport yourself or other targets."
-      }
-    },
-    {
-      "id": "electricity_rule",
-      "name": "Electricity RULE",
-      "fields": {
-        "description": "Produce and guide electrical discharges."
       }
     },
     {
@@ -323,13 +302,6 @@
       }
     },
     {
-      "id": "root_rule",
-      "name": "Plants RULE",
-      "fields": {
-        "description": "Accelerate or guide plant growth."
-      }
-    },
-    {
       "id": "beasts_rule",
       "name": "Beasts RULE",
       "fields": {
@@ -341,13 +313,6 @@
       "name": "Spores RULE",
       "fields": {
         "description": "Produce spores with varied effects."
-      }
-    },
-    {
-      "id": "stone_rule",
-      "name": "Stone RULE",
-      "fields": {
-        "description": "Shape stone into structures and forms."
       }
     },
     {
@@ -382,7 +347,7 @@
       "id": "double_rule",
       "name": "Double RULE",
       "fields": {
-        "description": "Create an imperfect copy of yourself."
+        "description": "Create a copy of yourself."
       }
     },
     {
@@ -414,41 +379,6 @@
       }
     },
     {
-      "id": "wind_rule",
-      "name": "Wind RULE",
-      "fields": {
-        "description": "Direct air currents and gusts."
-      }
-    },
-    {
-      "id": "blood_rule",
-      "name": "Blood RULE",
-      "fields": {
-        "description": "Manipulate or interact with blood."
-      }
-    },
-    {
-      "id": "shadow_rule",
-      "name": "Shadow RULE",
-      "fields": {
-        "description": "Manipulate shadows."
-      }
-    },
-    {
-      "id": "sand_rule",
-      "name": "Sand RULE",
-      "fields": {
-        "description": "Move and shape sand or dust."
-      }
-    },
-    {
-      "id": "metal_rule",
-      "name": "Metal RULE",
-      "fields": {
-        "description": "Bend and join metal."
-      }
-    },
-    {
       "id": "reflection_rule",
       "name": "Mirror RULE",
       "fields": {
@@ -465,6 +395,7 @@
     {
       "id": "elemental_rule",
       "name": "{{ element.name }} RULE",
+      "weight": 19,
       "fields": {
         "description": "Manipulate this element."
       }

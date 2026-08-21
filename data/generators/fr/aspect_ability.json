@@ -1,7 +1,7 @@
 {
   "schemaVersion": 4,
   "id": "ability",
-  "visibility": "public",
+  "visibility": "internal",
   "name": "Aptitudes",
   "description": "Caractéristiques, compétences et autres domaines ouverts dans lesquels un personnage peut progresser",
   "entrySchema": {
@@ -52,19 +52,15 @@
     { "id": "climbing", "name": "Escalade" },
     { "id": "swimming", "name": "Natation" },
     { "id": "disguise", "name": "Déguisement" },
-    { "id": "streetwise", "name": "Connaissance de la rue" },
     { "id": "tactics", "name": "Tactique" },
     { "id": "strategy", "name": "Stratégie" },
-    { "id": "teaching", "name": "Enseignement" },
     { "id": "negotiation", "name": "Négociation" },
     { "id": "gambling", "name": "Jeux d’argent" },
     { "id": "music", "name": "Musique" },
     { "id": "cartography", "name": "Cartographie" },
     { "id": "appraisal", "name": "Estimation" },
     { "id": "linguistics", "name": "Linguistique" },
-    { "id": "research", "name": "Recherche" },
     { "id": "monster_knowledge", "name": "Connaissance des monstres" },
-    { "id": "warfare", "name": "Art de la guerre" },
-    { "id": "etiquette", "name": "Étiquette" }
+    { "id": "warfare", "name": "Art de la guerre" }
   ]
 }

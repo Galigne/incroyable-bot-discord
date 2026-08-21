@@ -88,6 +88,9 @@ test('/help command:gen lists every localized generator category', () => {
 	for (const locale of ['en', 'fr']) {
 		const categories = generatorCatalog.listGenerators(locale);
 		assert.ok(categories.length > 0);
+		const categoryIds = new Set(categories.map(category => category.id));
+		assert.ok(categoryIds.has('aspect'));
+		assert.ok(['ability', 'element', 'weakness'].every(id => !categoryIds.has(id)));
 		const rendered = renderDetail('gen', interaction, locale);
 		for (const category of categories) {
 			const alias = createGeneratorTraversalAlias(category.name);

@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 4,
+  "id": "weakness",
+  "visibility": "internal",
+  "name": "Faiblesses",
+  "description": "Faiblesses et contre-mesures fantastiques largement utiles",
+  "entrySchema": {
+    "required": []
+  },
+  "entries": [
+    { "id": "elemental", "name": "{{ element.name }}" },
+    { "id": "material", "name": "{{ material.name }}" },
+    { "id": "slashing_damage", "name": "Dégâts tranchants" },
+    { "id": "piercing_damage", "name": "Dégâts perforants" },
+    { "id": "blunt_damage", "name": "Dégâts contondants" },
+    { "id": "sunlight", "name": "Lumière du soleil" },
+    {
+      "id": "visible_core_destruction",
+      "name": "Destruction d’un noyau visible"
+    },
+    { "id": "loud_noise", "name": "Bruit intense" },
+    { "id": "moonlight", "name": "Clair de lune" },
+    { "id": "complete_darkness", "name": "Obscurité totale" },
+    { "id": "healing_effects", "name": "Effets de soin" },
+    {
+      "id": "repeated_damage_same_location",
+      "name": "Dégâts répétés au même endroit"
+    },
+    {
+      "id": "simultaneous_attacks",
+      "name": "Attaques simultanées provenant de plusieurs sources"
+    },
+    { "id": "true_name", "name": "Prononcer son vrai nom" },
+    {
+      "id": "bound_object_destruction",
+      "name": "Destruction d’un objet lié"
+    },
+    { "id": "sacred_ground", "name": "Terre sacrée" },
+    {
+      "id": "loss_of_ground_contact",
+      "name": "Perte de contact avec le sol"
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 4,
   "id": "element",
-  "visibility": "public",
+  "visibility": "internal",
   "name": "Elements",
   "description": "Broadly useful fantasy elements and domains",
   "entrySchema": {

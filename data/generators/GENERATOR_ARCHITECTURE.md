@@ -28,14 +28,16 @@ Visibility controls entry points, not resolvability:
   available to application workflows, inline references, structural traversal,
   and modifier relationships.
 
-The public name-only `ability` generator is a standalone, open-ended vocabulary of
-RANDOM statistics, familiar skills, and other areas of expertise. It is directly
-selectable through `/gen` and reusable through `{{ ability.name }}`; consumers must
-not interpret its current entries as a closed mechanical skill enum.
+The public `aspect` category routes to the internal name-only `ability`, `element`,
+and `weakness` vocabularies. They are selected through the Aspects `/gen category:`
+route rather than as separate initial roots, while their stable IDs remain available
+to inline references such as `{{ ability.name }}`, `{{ element.name }}`, and
+`{{ weakness.name }}`. Consumers must not interpret their current entries as closed
+mechanical enums.
 
-The public name-only `element` and `weakness` generators provide broadly reusable
-fantasy domains and countermeasures. Weaknesses may reference the unrestricted
-internal `material` generator through `{{ material.name }}`.
+These aspect vocabularies provide broadly reusable fantasy abilities, elements,
+weaknesses, and countermeasures. Weaknesses may reference the unrestricted internal
+`material` generator through `{{ material.name }}`.
 
 Stable lowercase snake_case generator and entry IDs provide durable identity.
 Localized generator and entry names provide `/gen` path aliases that are resolved
@@ -151,7 +153,7 @@ unresolved `.generator` when every possible selected entry has a route, after wh
 normal weighted route and child generation proceed.
 
 Only the initial generator must be public. Every child reached through the
-`background`, `creature`, `loot`, `site`, `group`, or `modifier` routers is
+`background`, `creature`, `loot`, `site`, `group`, `modifier`, or `aspect` routers is
 internal, so a child such as `dungeon` is invalid as a direct root but reachable
 through `site:dungeon`. Bare router generation displays only the selected router
 entry and does not follow its route; fixing that entry follows the route.
@@ -345,7 +347,7 @@ application workflows or fixed router entries follow those routes.
 concepts. These resolutions keep nested provenance but do not create or
 persist the referenced people, creatures, locations, or items.
 
-Consumables reuse the standalone `ability` and `affliction` generators for broad
+Consumables reuse the internal `ability` and `affliction` generators for broad
 ability potions and specialized remedies. Supplies and curios likewise reuse
 specific `religion`, `region`, and `dungeon` fields when an existing concept can
 provide a coherent symbol or destination. These references remain descriptive;
