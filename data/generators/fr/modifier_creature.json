@@ -127,7 +127,7 @@
       "id": "regenerating",
       "name": "Régénérante",
       "fields": {
-        "description": "Ses chairs se reforment sans cesse, sauf si une substance, un type de dégâts ou un organe exposé choisi par le MJ interrompt la régénération."
+        "description": "Ses chairs se reforment sans cesse, sauf si la régénération est interrompue ou empêchée par {{ weakness.name }}."
       }
     },
     {

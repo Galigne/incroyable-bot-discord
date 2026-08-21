@@ -22,6 +22,11 @@ entries are a useful starting set, not a closed mechanical skill list. Reuse
 `{{ ability.name }}` when content needs one such area, as with the generic ability
 potion, rather than duplicating fixed Strength, Speed, or skill-specific variants.
 
+The public name-only `element` and `weakness` generators provide broadly reusable
+fantasy domains and countermeasures. They can be embedded in generated text with
+`{{ element.name }}` and `{{ weakness.name }}`; the `weakness` catalog may also
+use unrestricted references such as `{{ material.name }}`.
+
 ## Content guidelines
 
 Generators provide reusable inspiration rather than complete stories. Prefer

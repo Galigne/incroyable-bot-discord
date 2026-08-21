@@ -111,6 +111,7 @@ function checkRequiredGenerators(errors, generatorCatalog) {
 		'affliction',
 		'background',
 		'creature',
+		'element',
 		'event',
 		'group',
 		'loot',
@@ -127,6 +128,7 @@ function checkRequiredGenerators(errors, generatorCatalog) {
 		'talents',
 		'trap',
 		'traits',
+		'weakness',
 	];
 	const publicIds = new Set(
 		generatorCatalog.listGenerators('en').map(generator => generator.id),

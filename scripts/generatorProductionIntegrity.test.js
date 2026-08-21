@@ -654,10 +654,48 @@ test('armor and shield mechanics use stable types and rarity IDs, not localized 
 test('ability remains an open-ended public name-only vocabulary', () => {
 	const english = generatorCatalog.getGenerator('ability', 'en');
 	const french = generatorCatalog.getGenerator('ability', 'fr');
+	const requiredIds = [
+		'alchemy',
+		'blacksmithing',
+		'cooking',
+		'herbalism',
+		'engineering',
+		'carpentry',
+		'tailoring',
+		'sailing',
+		'riding',
+		'hunting',
+		'fishing',
+		'foraging',
+		'climbing',
+		'swimming',
+		'disguise',
+		'streetwise',
+		'tactics',
+		'strategy',
+		'teaching',
+		'negotiation',
+		'gambling',
+		'music',
+		'cartography',
+		'appraisal',
+		'linguistics',
+		'research',
+		'monster_knowledge',
+		'warfare',
+		'etiquette',
+	];
 	for (const ability of [english, french]) {
 		assert.equal(ability.visibility, 'public');
 		assert.deepEqual(ability.entrySchema.required, []);
 		assert.ok(ability.entries.length > 0);
+		assert.ok(requiredIds.every(id => ability.entries.some(entry => entry.id === id)));
+		assert.ok([
+			'dancing',
+			'singing',
+			'instrument_playing',
+			'mining',
+		].every(id => ability.entries.every(entry => entry.id !== id)));
 		assert.ok(ability.entries.every(entry => (
 			Object.keys(entry).every(key => ['id', 'name', 'weight'].includes(key))
 				&& typeof entry.name === 'string'
@@ -668,6 +706,125 @@ test('ability remains an open-ended public name-only vocabulary', () => {
 		french.entries.map(entry => entry.id),
 		english.entries.map(entry => entry.id),
 	);
+});
+
+test('element and weakness catalogs provide localized reusable concepts', () => {
+	const elementIds = [
+		'fire',
+		'water',
+		'frost',
+		'wind',
+		'earth',
+		'stone',
+		'lightning',
+		'metal',
+		'sand',
+		'light',
+		'shadow',
+		'acid',
+		'poison',
+		'smoke',
+		'steam',
+		'crystal',
+		'lava',
+		'plants',
+		'blood',
+	];
+	const weaknessIds = [
+		'elemental',
+		'material',
+		'slashing_damage',
+		'piercing_damage',
+		'blunt_damage',
+		'sunlight',
+		'running_water',
+		'decapitation',
+		'heart_destruction',
+		'brain_destruction',
+		'visible_core_destruction',
+		'consecrated_attacks',
+	];
+	for (const locale of ['en', 'fr']) {
+		const element = generatorCatalog.getGenerator('element', locale);
+		const weakness = generatorCatalog.getGenerator('weakness', locale);
+		assert.equal(element.visibility, 'public');
+		assert.equal(weakness.visibility, 'public');
+		assert.deepEqual(element.entrySchema.required, []);
+		assert.deepEqual(weakness.entrySchema.required, []);
+		assert.deepEqual(element.entries.map(entry => entry.id), elementIds);
+		assert.deepEqual(weakness.entries.map(entry => entry.id), weaknessIds);
+		assert.ok(element.entries.every(entry => Object.keys(entry).every(key => (
+			['id', 'name', 'weight'].includes(key)
+		))));
+		assert.ok(weakness.entries.every(entry => Object.keys(entry).every(key => (
+			['id', 'name', 'weight'].includes(key)
+		))));
+		assert.deepEqual(
+			extractInlineReferences(weakness.entries[0].name),
+			['element.name'],
+		);
+		assert.deepEqual(
+			extractInlineReferences(weakness.entries[1].name),
+			['material.name'],
+		);
+		for (const entryId of ['elemental', 'material']) {
+			const result = generatorResolver.resolveReference(
+				`weakness:${entryId}`,
+				locale,
+				{ random: () => 0 },
+			);
+			assert.doesNotMatch(result.display, /\{\{|\}\}/);
+		}
+
+		const regenerating = generatorCatalog.getGenerator(
+			'modifier_creature',
+			locale,
+		).entries.find(entry => entry.id === 'regenerating');
+		assert.deepEqual(
+			extractInlineReferences(regenerating.fields.description),
+			['weakness.name'],
+		);
+	}
+});
+
+test('RULE catalog keeps concise concepts and adds the generic elemental RULE', () => {
+	const expectedDescriptions = {
+		teleportation_rule: [
+			'Teleport yourself or other targets.',
+			'Téléporte le personnage ou d\'autres cibles.',
+		],
+		illusion_rule: [
+			'Create and manipulate illusions.',
+			'Crée et manipule des illusions.',
+		],
+		blood_rule: [
+			'Manipulate or interact with blood.',
+			'Manipule le sang ou interagit avec lui.',
+		],
+		weight_rule: [
+			'Manipulate gravity.',
+			'Manipule la gravité.',
+		],
+	};
+	for (const [localeIndex, locale] of ['en', 'fr'].entries()) {
+		const rules = generatorCatalog.getGenerator('rules', locale);
+		const elemental = rules.entries.find(entry => entry.id === 'elemental_rule');
+		assert.equal(elemental.name, locale === 'en'
+			? '{{ element.name }} RULE'
+			: 'LOI élémentaire : {{ element.name }}');
+		assert.equal(elemental.fields.description, locale === 'en'
+			? 'Manipulate this element.'
+			: 'Permet de manipuler cet élément.');
+		for (const [entryId, descriptions] of Object.entries(expectedDescriptions)) {
+			assert.equal(
+				rules.entries.find(entry => entry.id === entryId).fields.description,
+				descriptions[localeIndex],
+			);
+		}
+		assert.ok(rules.entries.every(entry => (
+			entry.fields.description.split(/[.!?](?:\s|$)/u).filter(Boolean).length === 1
+		)));
+	}
 });
 
 test('consumable ability and affliction references resolve in both locales', () => {

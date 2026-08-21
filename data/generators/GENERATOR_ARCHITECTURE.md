@@ -33,6 +33,10 @@ RANDOM statistics, familiar skills, and other areas of expertise. It is directly
 selectable through `/gen` and reusable through `{{ ability.name }}`; consumers must
 not interpret its current entries as a closed mechanical skill enum.
 
+The public name-only `element` and `weakness` generators provide broadly reusable
+fantasy domains and countermeasures. Weaknesses may reference the unrestricted
+internal `material` generator through `{{ material.name }}`.
+
 Stable lowercase snake_case generator and entry IDs provide durable identity.
 Localized generator and entry names provide `/gen` path aliases that are resolved
 back to those stable IDs before traversal; names never replace routing or provenance

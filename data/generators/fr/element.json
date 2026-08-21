@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 4,
+  "id": "element",
+  "visibility": "public",
+  "name": "Éléments",
+  "description": "Éléments et domaines fantastiques largement réutilisables",
+  "entrySchema": {
+    "required": []
+  },
+  "entries": [
+    { "id": "fire", "name": "Feu" },
+    { "id": "water", "name": "Eau" },
+    { "id": "frost", "name": "Givre" },
+    { "id": "wind", "name": "Vent" },
+    { "id": "earth", "name": "Terre" },
+    { "id": "stone", "name": "Pierre" },
+    { "id": "lightning", "name": "Foudre" },
+    { "id": "metal", "name": "Métal" },
+    { "id": "sand", "name": "Sable" },
+    { "id": "light", "name": "Lumière" },
+    { "id": "shadow", "name": "Ombre" },
+    { "id": "acid", "name": "Acide" },
+    { "id": "poison", "name": "Poison" },
+    { "id": "smoke", "name": "Fumée" },
+    { "id": "steam", "name": "Vapeur" },
+    { "id": "crystal", "name": "Cristal" },
+    { "id": "lava", "name": "Lave" },
+    { "id": "plants", "name": "Plantes" },
+    { "id": "blood", "name": "Sang" }
+  ]
+}

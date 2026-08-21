@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 4,
+  "id": "weakness",
+  "visibility": "public",
+  "name": "Faiblesses",
+  "description": "Faiblesses et contre-mesures fantastiques largement réutilisables",
+  "entrySchema": {
+    "required": []
+  },
+  "entries": [
+    { "id": "elemental", "name": "{{ element.name }}" },
+    { "id": "material", "name": "{{ material.name }}" },
+    { "id": "slashing_damage", "name": "Dégâts tranchants" },
+    { "id": "piercing_damage", "name": "Dégâts perforants" },
+    { "id": "blunt_damage", "name": "Dégâts contondants" },
+    { "id": "sunlight", "name": "Lumière du soleil" },
+    { "id": "running_water", "name": "Eau courante" },
+    { "id": "decapitation", "name": "Décapitation" },
+    { "id": "heart_destruction", "name": "Destruction du cœur" },
+    { "id": "brain_destruction", "name": "Destruction du cerveau" },
+    {
+      "id": "visible_core_destruction",
+      "name": "Destruction d’un noyau visible"
+    },
+    { "id": "consecrated_attacks", "name": "Attaques consacrées" }
+  ]
+}

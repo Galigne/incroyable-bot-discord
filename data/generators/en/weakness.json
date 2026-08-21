@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 4,
+  "id": "weakness",
+  "visibility": "public",
+  "name": "Weaknesses",
+  "description": "Broadly useful fantasy weaknesses and countermeasures",
+  "entrySchema": {
+    "required": []
+  },
+  "entries": [
+    { "id": "elemental", "name": "{{ element.name }}" },
+    { "id": "material", "name": "{{ material.name }}" },
+    { "id": "slashing_damage", "name": "Slashing damage" },
+    { "id": "piercing_damage", "name": "Piercing damage" },
+    { "id": "blunt_damage", "name": "Blunt damage" },
+    { "id": "sunlight", "name": "Sunlight" },
+    { "id": "running_water", "name": "Running water" },
+    { "id": "decapitation", "name": "Decapitation" },
+    { "id": "heart_destruction", "name": "Destruction of the heart" },
+    { "id": "brain_destruction", "name": "Destruction of the brain" },
+    {
+      "id": "visible_core_destruction",
+      "name": "Destruction of a visible core"
+    },
+    { "id": "consecrated_attacks", "name": "Consecrated attacks" }
+  ]
+}

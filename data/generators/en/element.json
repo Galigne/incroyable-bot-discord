@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 4,
+  "id": "element",
+  "visibility": "public",
+  "name": "Elements",
+  "description": "Broadly useful fantasy elements and domains",
+  "entrySchema": {
+    "required": []
+  },
+  "entries": [
+    { "id": "fire", "name": "Fire" },
+    { "id": "water", "name": "Water" },
+    { "id": "frost", "name": "Frost" },
+    { "id": "wind", "name": "Wind" },
+    { "id": "earth", "name": "Earth" },
+    { "id": "stone", "name": "Stone" },
+    { "id": "lightning", "name": "Lightning" },
+    { "id": "metal", "name": "Metal" },
+    { "id": "sand", "name": "Sand" },
+    { "id": "light", "name": "Light" },
+    { "id": "shadow", "name": "Shadow" },
+    { "id": "acid", "name": "Acid" },
+    { "id": "poison", "name": "Poison" },
+    { "id": "smoke", "name": "Smoke" },
+    { "id": "steam", "name": "Steam" },
+    { "id": "crystal", "name": "Crystal" },
+    { "id": "lava", "name": "Lava" },
+    { "id": "plants", "name": "Plants" },
+    { "id": "blood", "name": "Blood" }
+  ]
+}

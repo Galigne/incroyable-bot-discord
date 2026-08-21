@@ -3,7 +3,7 @@
   "id": "rules",
   "visibility": "public",
   "name": "LOI",
-  "description": "Concepts de LOI assortis de limites et de complications",
+  "description": "Concepts concis de LOI pour inspirer le MJ et les joueurs",
   "entrySchema": {
     "required": ["description"]
   },
@@ -13,7 +13,7 @@
       "name": "LOI du fil",
       "weight": 2,
       "fields": {
-        "description": "Crée et contrôle quelques mètres de fil à portée de vue. Les fibres plus résistantes nécessitent une matière première transportée par le personnage, et le contrôle s'affaiblit rapidement avec la distance."
+        "description": "Crée et contrôle du fil."
       }
     },
     {
@@ -21,28 +21,28 @@
       "name": "LOI de l'écho",
       "weight": 2,
       "fields": {
-        "description": "Capture un son pour le rejouer ou le rediriger. Les sons puissants coûtent davantage de PA, et un seul son peut être conservé à la fois."
+        "description": "Capture, rejoue et redirige les sons."
       }
     },
     {
       "id": "rust_rule",
       "name": "LOI de la rouille",
       "fields": {
-        "description": "Accélère la corrosion du métal non magique touché. Les objets volumineux ou bien entretenus exigent un contact prolongé."
+        "description": "Accélère la corrosion du métal."
       }
     },
     {
       "id": "door_rule",
       "name": "LOI des portes",
       "fields": {
-        "description": "Détecte et manipule les portes ordinaires à proximité. Elle ne peut ni créer de passage ni agir sur un seuil que le personnage ne parvient pas à se représenter clairement."
+        "description": "Détecte et manipule les portes."
       }
     },
     {
       "id": "ink_rule",
       "name": "LOI de l'encre",
       "fields": {
-        "description": "Anime l'encre écrite sous forme de symboles mobiles et de formes simples. Détruire le texte d'origine met fin à l'effet."
+        "description": "Anime l'encre écrite en symboles et en formes."
       }
     },
     {
@@ -50,35 +50,35 @@
       "name": "LOI de la brume",
       "weight": 2,
       "fields": {
-        "description": "Produit et façonne une brume fraîche à proximité. Le vent la disperse, et le personnage ne voit pas naturellement au travers."
+        "description": "Produit et façonne la brume."
       }
     },
     {
       "id": "borrowed_face_rule",
       "name": "LOI du visage emprunté",
       "fields": {
-        "description": "Copie pendant une heure le visage d'une personne touchée. La voix, les vêtements, les souvenirs et les manières ne changent pas."
+        "description": "Copie le visage d'une autre personne."
       }
     },
     {
       "id": "glass_rule",
       "name": "LOI du verre",
       "fields": {
-        "description": "Courbe et remodèle le verre touché sans le chauffer. Les éclats restent dangereux, et aucune matière ne peut être créée."
+        "description": "Courbe et remodèle le verre."
       }
     },
     {
       "id": "promise_rule",
       "name": "LOI des promesses",
       "fields": {
-        "description": "Détecte la rupture d'une promesse prononcée de plein gré. Elle ne peut ni forcer la sincérité ni révéler pourquoi la promesse a été rompue."
+        "description": "Détecte les promesses rompues."
       }
     },
     {
       "id": "friction_rule",
       "name": "LOI du frottement",
       "fields": {
-        "description": "Augmente ou réduit le frottement sur une petite surface visible. Les effets extrêmes sont brefs et gênent les alliés aussi facilement que les ennemis."
+        "description": "Augmente ou réduit le frottement."
       }
     },
     {
@@ -86,28 +86,28 @@
       "name": "LOI des odeurs",
       "weight": 2,
       "fields": {
-        "description": "Crée, supprime et suit les odeurs ordinaires. Reproduire une odeur complexe nécessite un échantillon."
+        "description": "Crée, supprime et suit les odeurs."
       }
     },
     {
       "id": "paper_rule",
       "name": "LOI du papier",
       "fields": {
-        "description": "Plie du papier pour former des outils ou des créatures brièvement animés. L'eau, le feu et les chocs violents les détruisent facilement."
+        "description": "Plie le papier en outils ou créatures animés."
       }
     },
     {
       "id": "salt_rule",
       "name": "LOI du sel",
       "fields": {
-        "description": "Crée et façonne une poignée de sel. De plus grandes quantités provoquent de l'épuisement, et le sel invoqué se dissout au lever du jour."
+        "description": "Crée et façonne le sel."
       }
     },
     {
       "id": "heartbeat_rule",
       "name": "LOI des battements de cœur",
       "fields": {
-        "description": "Détecte les battements de cœur à proximité et permet de se synchroniser brièvement avec l'un d'eux. Les créatures artificielles et de nombreux morts-vivants lui échappent."
+        "description": "Détecte les battements de cœur et se synchronise avec eux."
       }
     },
     {
@@ -115,7 +115,7 @@
       "name": "LOI des couleurs",
       "weight": 2,
       "fields": {
-        "description": "Déplace ou modifie les couleurs de surfaces visibles. Ses effets sont purement visuels, mais peuvent servir au camouflage ou à transmettre des signaux codés."
+        "description": "Déplace et modifie les couleurs."
       }
     },
     {
@@ -123,343 +123,350 @@
       "name": "LOI de l'équilibre",
       "weight": 2,
       "fields": {
-        "description": "Stabilise un objet touché ou une personne consentante face aux mouvements ordinaires. Une force soudaine et puissante peut rompre l'effet."
+        "description": "Stabilise les objets ou les personnes consentantes."
       }
     },
     {
       "id": "threshold_rule",
       "name": "LOI du seuil",
       "fields": {
-        "description": "Avertit lorsqu'une limite désignée est franchie. Une seule limite peut être surveillée à la fois, et elle doit être marquée physiquement."
+        "description": "Détecte le franchissement d'une limite désignée."
       }
     },
     {
       "id": "swarm_rule",
       "name": "LOI de l'essaim",
       "fields": {
-        "description": "Communique des intentions simples à un petit groupe d'insectes ordinaires. Elle ne permet pas de contrôler directement les créatures surnaturelles."
+        "description": "Communique avec les essaims d'insectes."
       }
     },
     {
       "id": "chance_rule",
       "name": "LOI du hasard",
       "fields": {
-        "description": "Une fois par scène, infléchit légèrement un résultat aléatoire sans importance. Le MJ choisit ensuite un contretemps tout aussi improbable."
+        "description": "Infléchit le hasard vers un résultat insignifiant."
       }
     },
     {
       "id": "momentum_rule",
       "name": "LOI de l’Impact",
       "fields": {
-        "description": "Amplifie brièvement une charge, un coup ou un projectile ; l’effet ne change pas la trajectoire et transmet aussi une partie du recul à l’utilisateur."
+        "description": "Amplifie les charges, les coups et les projectiles."
       }
     },
     {
       "id": "ricochet_rule",
       "name": "LOI du Ricochet",
       "fields": {
-        "description": "Dévie un projectile vers une seconde surface visible ; chaque rebond réduit fortement sa puissance et exige un angle plausible."
+        "description": "Dévie les projectiles pour les faire rebondir sur des surfaces."
       }
     },
     {
       "id": "celerity_rule",
       "name": "LOI de la Célérité",
       "fields": {
-        "description": "Accélère un mouvement simple pendant quelques secondes ; les décisions et perceptions de l’utilisateur ne deviennent pas plus rapides."
+        "description": "Accélère les mouvements simples."
       }
     },
     {
       "id": "invisibility_rule",
       "name": "LOI de l’Invisibilité",
       "fields": {
-        "description": "Dissimule visuellement une cible immobile ; le son, les traces et les objets déplacés restent perceptibles."
+        "description": "Dissimule une cible à la vue."
       }
     },
     {
       "id": "candle_rule",
       "name": "LOI de la Flamme",
       "fields": {
-        "description": "Crée ou dirige un feu proche ; sa taille dépend du combustible disponible et il reste dangereux pour les alliés."
+        "description": "Crée et dirige le feu."
       }
     },
     {
       "id": "cold_rule",
       "name": "LOI du Givre",
       "fields": {
-        "description": "Retire rapidement la chaleur d’une petite surface ; elle peut créer de la glace mais pas geler instantanément une créature entière."
+        "description": "Retire la chaleur et forme de la glace."
       }
     },
     {
       "id": "rain_rule",
       "name": "LOI de la Pluie",
       "fields": {
-        "description": "Condense l’humidité pour provoquer une pluie locale ; l’effet est faible dans un environnement très sec."
+        "description": "Condense l'humidité en pluie."
       }
     },
     {
       "id": "mending_rule",
       "name": "LOI du Soin",
       "fields": {
-        "description": "Accélère la fermeture d’une blessure récente ; elle ne remplace ni le sang perdu ni un membre détruit."
+        "description": "Accélère la guérison des blessures."
       }
     },
     {
       "id": "teleportation_rule",
       "name": "LOI de la Téléportation",
       "fields": {
-        "description": "Déplace l’utilisateur vers un point visible et dégagé ; elle échoue si le trajet traverse une protection consacrée."
+        "description": "Téléporte le personnage ou d'autres cibles."
       }
     },
     {
       "id": "electricity_rule",
       "name": "LOI de l’Électricité",
       "fields": {
-        "description": "Produit ou guide une décharge entre deux conducteurs ; l’utilisateur doit maîtriser le chemin suivi par le courant."
+        "description": "Produit et guide les décharges électriques."
       }
     },
     {
       "id": "storm_rule",
       "name": "LOI de l’Orage",
       "fields": {
-        "description": "Renforce un phénomène météorologique déjà présent ; elle ne peut créer une tempête complète dans un ciel parfaitement calme."
+        "description": "Renforce et façonne les phénomènes météorologiques."
       }
     },
     {
       "id": "blessing_rule",
       "name": "LOI de la Bénédiction",
       "fields": {
-        "description": "Accorde un avantage limité à une action conforme à un vœu annoncé ; rompre ce vœu met immédiatement fin à l’effet."
+        "description": "Accorde un avantage par l'intermédiaire d'un vœu."
       }
     },
     {
       "id": "summoning_rule",
       "name": "LOI de l’Invocation",
       "fields": {
-        "description": "Appelle une entité mineure correspondant à un symbole préparé ; elle conserve sa volonté et exige une contrepartie raisonnable."
+        "description": "Appelle une entité grâce à un symbole préparé."
       }
     },
     {
       "id": "resurrection_rule",
       "name": "LOI de la Résurrection",
       "fields": {
-        "description": "Rappelle brièvement l’esprit d’un mort récent dans son corps ; chaque usage exige un prix durable et l’esprit peut refuser."
+        "description": "Ramène les morts récents à la vie."
       }
     },
     {
       "id": "curse_rule",
       "name": "LOI de la Malédiction",
       "fields": {
-        "description": "Lie une pénalité précise à une condition clairement formulée ; la cible doit pouvoir comprendre comment rompre l’effet."
+        "description": "Lie une pénalité à une condition."
       }
     },
     {
       "id": "vampirism_rule",
       "name": "LOI du Vampirisme",
       "fields": {
-        "description": "Transfère une petite quantité de vitalité par contact ; elle ne peut dépasser les blessures réellement infligées."
+        "description": "Draine ou transfère la vitalité par contact."
       }
     },
     {
       "id": "telekinesis_rule",
       "name": "LOI de la Télékinésie",
       "fields": {
-        "description": "Déplace à distance un objet visible ; la masse et la précision ne peuvent être maximales en même temps."
+        "description": "Déplace des objets visibles à distance."
       }
     },
     {
       "id": "influence_rule",
       "name": "LOI de l’Influence",
       "fields": {
-        "description": "Renforce une émotion ou suggestion déjà plausible ; elle ne crée ni loyauté durable ni action contraire aux valeurs centrales."
+        "description": "Renforce les émotions ou les suggestions."
       }
     },
     {
       "id": "dead_rule",
       "name": "LOI des Morts",
       "fields": {
-        "description": "Permet de donner un ordre simple à un cadavre animé ; celui-ci ne retrouve ni souvenirs complets ni intelligence perdue."
+        "description": "Commande les cadavres animés."
       }
     },
     {
       "id": "illusion_rule",
       "name": "LOI de l’Illusion",
       "fields": {
-        "description": "Produit une image ou un son crédible dans une zone limitée ; l’effet ne possède ni masse ni chaleur propre."
+        "description": "Crée et manipule des illusions."
       }
     },
     {
       "id": "sleep_rule",
       "name": "LOI du Sommeil",
       "fields": {
-        "description": "Renforce la fatigue d’une cible calme ; la douleur ou un danger immédiat peut la réveiller."
+        "description": "Provoque ou approfondit le sommeil."
       }
     },
     {
       "id": "soul_bond_rule",
       "name": "LOI du Lien d’âme",
       "fields": {
-        "description": "Permet à deux volontaires de partager une sensation ou une émotion ; une trop grande distance brouille le lien."
+        "description": "Partage des sensations ou émotions entre personnes liées."
       }
     },
     {
       "id": "ghost_rule",
       "name": "LOI du Fantôme",
       "fields": {
-        "description": "Rend brièvement une partie du corps intangible ; l’utilisateur ne peut pas maintenir l’effet en portant une charge importante."
+        "description": "Rend une partie du corps intangible."
       }
     },
     {
       "id": "spirits_rule",
       "name": "LOI des Esprits",
       "fields": {
-        "description": "Manifeste un esprit protecteur ou vengeur lié à un souvenir ; son comportement suit ce souvenir plutôt que les ordres exacts."
+        "description": "Manifeste des esprits liés à des souvenirs."
       }
     },
     {
       "id": "familiar_rule",
       "name": "LOI du Familier",
       "fields": {
-        "description": "Crée un lien sensoriel avec un petit animal consentant ; la confusion ou la douleur traverse le lien dans les deux sens."
+        "description": "Forme un lien sensoriel avec un animal."
       }
     },
     {
       "id": "root_rule",
       "name": "LOI des Plantes",
       "fields": {
-        "description": "Accélère ou oriente la croissance végétale ; elle exige eau, nutriments et une plante encore vivante."
+        "description": "Accélère ou guide la croissance des plantes."
       }
     },
     {
       "id": "beasts_rule",
       "name": "LOI des Bêtes",
       "fields": {
-        "description": "Transmet une intention simple à un animal ; elle ne supprime ni sa peur ni ses instincts."
+        "description": "Communique des intentions simples aux animaux."
       }
     },
     {
       "id": "spores_rule",
       "name": "LOI des Spores",
       "fields": {
-        "description": "Produit des spores toxiques, apaisantes ou curatives ; un seul effet peut être préparé et le vent reste incontrôlable."
+        "description": "Produit des spores aux effets variés."
       }
     },
     {
       "id": "stone_rule",
       "name": "LOI de la Pierre",
       "fields": {
-        "description": "Déplace ou façonne une quantité limitée de roche ; les structures complexes exigent du temps et une connaissance de leur charge."
+        "description": "Façonne la pierre en structures et en formes."
       }
     },
     {
       "id": "petrification_rule",
       "name": "LOI de la Pétrification",
       "fields": {
-        "description": "Transforme progressivement une petite partie exposée en pierre ; l’effet complet exige plusieurs applications et reste réversible au début."
+        "description": "Transforme la matière vivante en pierre."
       }
     },
     {
       "id": "decay_rule",
       "name": "LOI de la Décomposition",
       "fields": {
-        "description": "Accélère la détérioration d’une matière morte ; elle agit lentement sur les matériaux traités ou protégés."
+        "description": "Accélère la décomposition de la matière morte."
       }
     },
     {
       "id": "weight_rule",
       "name": "LOI de la Gravité",
       "fields": {
-        "description": "Augmente ou réduit le poids apparent dans une petite zone ; l’inertie et la solidité des objets ne changent pas."
+        "description": "Manipule la gravité."
       }
     },
     {
       "id": "magnetism_rule",
       "name": "LOI du Magnétisme",
       "fields": {
-        "description": "Attire ou repousse des métaux proches ; les objets non métalliques et les alliages rares réagissent peu."
+        "description": "Attire ou repousse le métal."
       }
     },
     {
       "id": "double_rule",
       "name": "LOI du Double",
       "fields": {
-        "description": "Produit une copie temporaire et imparfaite de l’utilisateur ; elle partage ses intentions mais pas ses souvenirs récents."
+        "description": "Crée une copie imparfaite du personnage."
       }
     },
     {
       "id": "time_rule",
       "name": "LOI du Temps",
       "fields": {
-        "description": "Accélère ou ralentit légèrement un processus local ; elle ne permet ni de réécrire le passé ni d’annuler une décision."
+        "description": "Accélère ou ralentit les processus locaux."
       }
     },
     {
       "id": "space_rule",
       "name": "LOI de l’Espace",
       "fields": {
-        "description": "Ouvre un passage bref entre deux surfaces préparées ; les deux points doivent avoir été marqués par le même utilisateur."
+        "description": "Ouvre des passages entre les lieux."
       }
     },
     {
       "id": "vision_rule",
       "name": "LOI de la Vision",
       "fields": {
-        "description": "Montre une conséquence future possible d’une décision immédiate ; la vision devient fausse si les circonstances changent."
+        "description": "Perçoit les conséquences futures possibles."
       }
     },
     {
       "id": "size_rule",
       "name": "LOI de la Taille",
       "fields": {
-        "description": "Agrandit ou réduit temporairement un objet ou une créature ; la masse devient instable et limite fortement la durée."
+        "description": "Agrandit ou rapetisse les créatures et les objets."
       }
     },
     {
       "id": "wind_rule",
       "name": "LOI du Vent",
       "fields": {
-        "description": "Oriente un courant d’air ou crée une rafale ; l’effet perd rapidement sa force dans un espace trop vaste."
+        "description": "Dirige les courants d'air et les rafales."
       }
     },
     {
       "id": "blood_rule",
       "name": "LOI du Sang",
       "fields": {
-        "description": "Permet de suivre ou d’identifier une personne à partir de son sang ; l’échantillon est consommé et peut être contaminé."
+        "description": "Manipule le sang ou interagit avec lui."
       }
     },
     {
       "id": "shadow_rule",
       "name": "LOI de l’Ombre",
       "fields": {
-        "description": "Épaissit ou déplace une ombre existante ; une lumière intense réduit sa portée et sa solidité."
+        "description": "Manipule les ombres existantes."
       }
     },
     {
       "id": "sand_rule",
       "name": "LOI du Sable",
       "fields": {
-        "description": "Déplace et compacte du sable ou de la poussière ; elle ne crée pas de matière et devient imprécise sous la pluie."
+        "description": "Déplace et façonne le sable ou la poussière."
       }
     },
     {
       "id": "metal_rule",
       "name": "LOI du Métal",
       "fields": {
-        "description": "Plie ou assemble une petite quantité de métal chauffé ; les alliages enchantés résistent à l’effet."
+        "description": "Plie et assemble le métal."
       }
     },
     {
       "id": "reflection_rule",
       "name": "LOI du Miroir",
       "fields": {
-        "description": "Reproduit l’apparence visible d’une LOI observée sans copier sa pleine puissance ; une seule imitation peut être conservée."
+        "description": "Copie l'apparence visible d'une autre LOI."
       }
     },
     {
       "id": "memory_rule",
       "name": "LOI de la Mémoire",
       "fields": {
-        "description": "Rend un souvenir plus clair ou plus flou ; elle ne peut inventer une information absente et laisse des traces perceptibles."
+        "description": "Clarifie ou brouille les souvenirs."
+      }
+    },
+    {
+      "id": "elemental_rule",
+      "name": "LOI élémentaire : {{ element.name }}",
+      "fields": {
+        "description": "Permet de manipuler cet élément."
       }
     }
   ]
