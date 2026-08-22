@@ -494,6 +494,47 @@ test('/gen traversal autocomplete follows entries, fields, and structural routes
 	);
 });
 
+test('/gen production traversal suggestions keep elemental essence labels and paths static', () => {
+	const expectedNames = {
+		en: 'Elemental Essence',
+		fr: 'Essence élémentaire',
+	};
+	for (const locale of ['en', 'fr']) {
+		const loot = generatorCatalog.getGenerator('loot', locale);
+		const materialRoute = loot.entries.find(entry => entry.generator === 'material');
+		const prefix = [
+			createGeneratorTraversalAlias(loot.name),
+			createGeneratorTraversalAlias(materialRoute.name),
+		].join(':');
+		const expectedPath = `${prefix}:${createGeneratorTraversalAlias(expectedNames[locale])}`;
+		const traversalSuggestion = getGeneratorTraversalSuggestions(
+			`${prefix}:element`,
+			locale,
+		).find(choice => choice.value === expectedPath);
+		assert.ok(traversalSuggestion, `${locale}: ${expectedPath}`);
+		assert.equal(traversalSuggestion.label, expectedNames[locale]);
+		assert.doesNotMatch(
+			`${traversalSuggestion.label}${traversalSuggestion.value}`,
+			/\{\{|\}\}/u,
+		);
+
+		const providerSuggestions = AUTOCOMPLETE_PROVIDERS['generator-paths'](
+			{},
+			{ locale },
+			{ value: `${prefix}:element` },
+		);
+		const providerSuggestion = providerSuggestions.find(choice => (
+			choice.value === expectedPath
+		));
+		assert.ok(providerSuggestion, `${locale}: ${expectedPath}`);
+		assert.equal(providerSuggestion.name, expectedPath);
+		assert.equal(providerSuggestion.value, expectedPath);
+		assert.ok(providerSuggestions.every(choice => (
+			!/[{}]/u.test(`${choice.name}${choice.value}`)
+		)));
+	}
+});
+
 test('localized generator aliases are predictable and resolve to stable identities', () => {
 	assert.equal(
 		createGeneratorTraversalAlias('  L\'Épée—longue !  '),

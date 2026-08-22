@@ -64,15 +64,24 @@ test('reviewed generator compositions preserve their intended roles', () => {
 			extractInlineReferences(trophyGallery.fields.description),
 			['weapons.name'],
 		);
-	}
 
-	const elementalEssence = getProductionEntry('material', 'elemental_essence', 'fr');
-	assert.equal(elementalEssence.name, 'Essence : {{ element.name }}');
-	assert.deepEqual(extractInlineReferences(elementalEssence.name), ['element.name']);
-	assert.deepEqual(
-		extractInlineReferences(elementalEssence.fields.description),
-		[],
-	);
+		const elementalEssence = getProductionEntry('material', 'elemental_essence', locale);
+		assert.equal(
+			elementalEssence.name,
+			locale === 'en' ? 'Elemental Essence' : 'Essence élémentaire',
+		);
+		assert.deepEqual(extractInlineReferences(elementalEssence.name), []);
+		assert.equal(
+			elementalEssence.fields.description,
+			locale === 'en'
+				? 'An unstable substance bound to the element {{ element.name }}, retaining its natural or magical properties.'
+				: 'Une substance instable liée à l’élément {{ element.name }}, dont elle conserve les propriétés naturelles ou magiques.',
+		);
+		assert.deepEqual(
+			extractInlineReferences(elementalEssence.fields.description),
+			['element.name'],
+		);
+	}
 
 	const wallClimber = getProductionEntry('traits', 'wall_climber', 'fr');
 	assert.equal(
