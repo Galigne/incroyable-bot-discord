@@ -315,6 +315,20 @@
       "fields": {
         "description": "Negotiate and safeguard an exchange of captives between {{ faction.name }} and {{ faction.name }} before either side abandons the agreement."
       }
+    },
+    {
+      "id": "clear_false_accusation",
+      "name": "Clear a false accusation",
+      "fields": {
+        "description": "Prove that someone with the {{ background.generator.name }} background was not involved in the following criminal activity—{{ crime.name }}—and identify who was."
+      }
+    },
+    {
+      "id": "find_service_specialist",
+      "name": "Find a capable specialist",
+      "fields": {
+        "description": "Find someone capable of carrying out work involving {{ service.name }} and bring them to {{ faction.name }} before an urgent need becomes a crisis."
+      }
     }
   ]
 }

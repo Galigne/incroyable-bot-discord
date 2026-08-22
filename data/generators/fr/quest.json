@@ -315,6 +315,20 @@
       "fields": {
         "description": "Négocier puis sécuriser un échange de captifs entre {{ faction.name }} et {{ faction.name }} avant que l’un des camps n’abandonne l’accord."
       }
+    },
+    {
+      "id": "clear_false_accusation",
+      "name": "Innocenter une personne accusée à tort",
+      "fields": {
+        "description": "Prouver qu’une personne au profil {{ background.generator.name }} n’a pas pris part à l’activité criminelle suivante — {{ crime.name }} — puis découvrir qui en est véritablement responsable."
+      }
+    },
+    {
+      "id": "find_service_specialist",
+      "name": "Trouver un spécialiste compétent",
+      "fields": {
+        "description": "Trouver une personne capable d’accomplir une prestation de type {{ service.name }} et la conduire auprès de {{ faction.name }} avant qu’un besoin urgent ne se transforme en crise."
+      }
     }
   ]
 }

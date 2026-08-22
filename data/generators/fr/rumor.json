@@ -203,6 +203,20 @@
       "fields": {
         "description": "{{ faction.name }} élèverait des créatures du type {{ monster.name }} sous le bâtiment appelé {{ building.name }}."
       }
+    },
+    {
+      "id": "notable_accused_of_crime",
+      "name": "Personnalité mise en cause",
+      "fields": {
+        "description": "Une personne respectée au profil {{ background.generator.name }} aurait pris part à l’activité criminelle suivante : {{ crime.name }}."
+      }
+    },
+    {
+      "id": "faction_hiring_for_service",
+      "name": "Recrutement discret d’une faction",
+      "fields": {
+        "description": "{{ faction.name }} recruterait discrètement des personnes extérieures pour accomplir une prestation de type {{ service.name }}."
+      }
     }
   ]
 }

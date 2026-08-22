@@ -37,7 +37,7 @@
       "name": "Surenchère marchande",
       "weight": 3,
       "fields": {
-        "description": "Deux marchands se disputent soudain un objet voisin d’apparence banale et refusent d’expliquer sa valeur."
+        "description": "Deux marchands se mettent soudain à surenchérir pour l’objet appelé {{ loot.generator.name }} et refusent d’expliquer sa valeur."
       }
     },
     {
@@ -68,7 +68,7 @@
       "name": "Passage mis au jour",
       "weight": 2,
       "fields": {
-        "description": "Une portion du sol s’effondre et révèle un vieil escalier maçonné tout en rendant le passage alentour dangereux."
+        "description": "Une portion du sol s’effondre et révèle un vieil escalier qui descend vers un lieu décrit comme {{ site:dungeon.generator.name }}, tout en rendant le passage alentour dangereux."
       }
     },
     {
@@ -83,14 +83,14 @@
       "id": "a_shower_of_tiny_harmless_frogs_falls_from",
       "name": "Pluie de grenouilles runiques",
       "fields": {
-        "description": "De minuscules grenouilles inoffensives tombent d’un ciel sans nuages, chacune marquée de la même rune dorée."
+        "description": "De minuscules grenouilles inoffensives tombent d’un ciel sans nuages, chacune marquée de la même rune dorée associée à {{ rules.name }}."
       }
     },
     {
       "id": "the_party_encounters_their_own_wanted_posters_issued",
       "name": "Avis de recherche de demain",
       "fields": {
-        "description": "De nouveaux avis de recherche apparaissent, datés du lendemain et accusant le groupe d’un crime qui n’a pas encore eu lieu."
+        "description": "De nouveaux avis de recherche apparaissent, datés du lendemain et accusant le groupe d’être impliqué dans l’activité criminelle suivante avant même qu’elle ait eu lieu : {{ crime.name }}."
       }
     },
     {
@@ -143,7 +143,7 @@
       "id": "an_eclipse_begins_years_ahead_of_schedule_magical",
       "name": "Éclipse prématurée",
       "fields": {
-        "description": "Une éclipse commence des années avant toutes les prédictions, et les pouvoirs magiques produisent des effets inversés ou symboliques."
+        "description": "Une éclipse commence des années avant toutes les prédictions, et la magie associée à {{ rules.name }} produit des effets inversés ou symboliques."
       }
     },
     {
@@ -151,7 +151,7 @@
       "name": "Procession prise pour cible",
       "weight": 3,
       "fields": {
-        "description": "Une procession officielle entre dans les environs au moment où des assaillants masqués profitent de la foule et de la confusion pour frapper."
+        "description": "Une procession officielle représentant {{ faction.name }} entre dans les environs au moment où des assaillants masqués profitent de la foule et de la confusion pour frapper."
       }
     },
     {
@@ -174,7 +174,7 @@
       "name": "Sommeil collectif",
       "weight": 2,
       "fields": {
-        "description": "Presque toutes les personnes des environs s’endorment en même temps, à l’exception d’un inconnu sur ses gardes."
+        "description": "Presque toutes les personnes des environs s’endorment en même temps ; seule reste éveillée une personne sur ses gardes au profil {{ background.generator.name }}."
       }
     },
     {
@@ -182,7 +182,7 @@
       "name": "Procès improvisé",
       "weight": 2,
       "fields": {
-        "description": "Un juge itinérant ouvre sur-le-champ un procès concernant la propriété d’une épée parlante et exige que les personnes présentes témoignent."
+        "description": "Un juge itinérant ouvre sur-le-champ un procès concernant la propriété de l’objet insolite appelé {{ loot:curio.generator.name }} et exige que les personnes présentes témoignent."
       }
     },
     {
@@ -212,7 +212,7 @@
       "name": "Échange inégal",
       "weight": 3,
       "fields": {
-        "description": "Un voleur dérobe un objet insignifiant à proximité, mais laisse quelque chose de bien plus précieux et dangereusement reconnaissable."
+        "description": "Un voleur dérobe un objet insignifiant à proximité, mais laisse l’objet de valeur appelé {{ loot:valuables.generator.name }}, dangereusement reconnaissable."
       }
     },
     {
@@ -249,7 +249,7 @@
       "id": "panicked_animals",
       "name": "Animaux affolés",
       "fields": {
-        "description": "Des cris se rapprochent tandis que la faune fuit une menace encore invisible."
+        "description": "Des cris se rapprochent tandis que la faune fuit une créature encore invisible du type {{ monster.name }}."
       }
     },
     {
@@ -298,14 +298,14 @@
       "id": "unexpected_arrival",
       "name": "Arrivée inattendue",
       "fields": {
-        "description": "Un nouveau venu apparaît et affirme connaître l’une des personnes présentes depuis des années."
+        "description": "Une personne au profil {{ background.generator.name }} apparaît et affirme connaître l’une des personnes présentes depuis des années."
       }
     },
     {
       "id": "hostile_migration",
       "name": "Migration hostile",
       "fields": {
-        "description": "Plusieurs créatures entrent dans la zone après qu’une menace plus importante les a chassées de leur territoire."
+        "description": "Plusieurs créatures du type {{ monster.name }} entrent dans la zone après qu’une menace plus importante les a chassées de leur territoire."
       }
     },
     {
@@ -333,7 +333,7 @@
       "id": "sudden_epidemic",
       "name": "Foyer épidémique soudain",
       "fields": {
-        "description": "Plusieurs personnes proches présentent en quelques minutes les mêmes symptômes inconnus."
+        "description": "Plusieurs personnes proches manifestent soudain les signes de l’affliction appelée {{ affliction.name }}."
       }
     },
     {
@@ -382,14 +382,14 @@
       "id": "arcane_blackout",
       "name": "Extinction des arcanes",
       "fields": {
-        "description": "Tous les effets magiques actifs s’éteignent ou s’assoupissent d’un coup, tandis que les lumières et les mécanismes ordinaires continuent de fonctionner."
+        "description": "Toute la magie active associée à {{ rules.name }} s’éteint ou s’assoupit d’un coup, tandis que les lumières et les mécanismes ordinaires continuent de fonctionner."
       }
     },
     {
       "id": "duplicated_object",
       "name": "Double impossible",
       "fields": {
-        "description": "La copie parfaite d’un objet ordinaire des environs apparaît, jusque dans des marques que personne n’avait remarquées."
+        "description": "La copie parfaite de l’objet appelé {{ loot.generator.name }} apparaît à côté de celui-ci, jusque dans des marques que personne n’avait remarquées sur l’original."
       }
     },
     {
@@ -403,14 +403,28 @@
       "id": "doorway_elsewhere",
       "name": "Ouverture sur l’ailleurs",
       "fields": {
-        "description": "Une porte, une arche ou une étroite brèche tout à fait ordinaire s’ouvre soudain sur un lieu incroyablement lointain."
+        "description": "Une porte, une arche ou une étroite brèche tout à fait ordinaire s’ouvre soudain sur le lieu incroyablement lointain décrit comme {{ site.generator.name }}."
       }
     },
     {
       "id": "falling_star_fragment",
       "name": "Étoile tombée",
       "fields": {
-        "description": "Un objet brillant traverse le ciel et s’écrase assez près pour ébranler les environs et attirer aussitôt l’attention."
+        "description": "Un objet brillant composé du matériau appelé {{ material.name }} traverse le ciel et s’écrase assez près pour ébranler les environs et attirer aussitôt l’attention."
+      }
+    },
+    {
+      "id": "exposed_crime_evidence",
+      "name": "Preuves au grand jour",
+      "fields": {
+        "description": "Un dossier tombé au sol s’ouvre brusquement devant des témoins qui s’attroupent, révélant des preuves reliant peut-être une personne proche à l’activité criminelle suivante : {{ crime.name }}."
+      }
+    },
+    {
+      "id": "urgent_service_commission",
+      "name": "Commande urgente",
+      "fields": {
+        "description": "Un agent à bout de souffle promet une rémunération immédiate à quiconque peut accomplir une prestation de type {{ service.name }}, mais exige que le travail commence sur-le-champ et reste discret."
       }
     },
     {

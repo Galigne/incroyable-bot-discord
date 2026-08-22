@@ -37,7 +37,7 @@
       "name": "Bidding War",
       "weight": 3,
       "fields": {
-        "description": "Two merchants begin competing for a seemingly ordinary nearby item and refuse to explain its value."
+        "description": "Two merchants abruptly begin bidding against each other for the item known as {{ loot.generator.name }} and refuse to explain its value."
       }
     },
     {
@@ -68,7 +68,7 @@
       "name": "Opened Passage",
       "weight": 2,
       "fields": {
-        "description": "A patch of ground gives way, revealing an old constructed stairway while making the surrounding route dangerous."
+        "description": "A patch of ground gives way, revealing an old stairway that descends toward a place described as {{ site:dungeon.generator.name }} while making the surrounding route dangerous."
       }
     },
     {
@@ -83,14 +83,14 @@
       "id": "a_shower_of_tiny_harmless_frogs_falls_from",
       "name": "Runed Frogfall",
       "fields": {
-        "description": "Tiny harmless frogs rain from a cloudless sky, each bearing the same golden rune."
+        "description": "Tiny harmless frogs rain from a cloudless sky, each bearing the same golden rune of {{ rules.name }}."
       }
     },
     {
       "id": "the_party_encounters_their_own_wanted_posters_issued",
       "name": "Tomorrow’s Wanted Posters",
       "fields": {
-        "description": "Fresh wanted posters appear, dated tomorrow and accusing the party of a crime that has not happened yet."
+        "description": "Fresh wanted posters appear, dated tomorrow and accusing the party of involvement in {{ crime.name }}, which has not happened yet."
       }
     },
     {
@@ -143,7 +143,7 @@
       "id": "an_eclipse_begins_years_ahead_of_schedule_magical",
       "name": "Untimely Eclipse",
       "fields": {
-        "description": "An eclipse begins years ahead of every prediction, and magical powers produce reversed or symbolic effects."
+        "description": "An eclipse begins years ahead of every prediction, and magic associated with {{ rules.name }} produces reversed or symbolic effects."
       }
     },
     {
@@ -151,7 +151,7 @@
       "name": "Procession Ambush",
       "weight": 3,
       "fields": {
-        "description": "A formal procession enters the area just as masked attackers exploit the crowd and confusion to strike."
+        "description": "A formal procession representing {{ faction.name }} enters the area just as masked attackers exploit the crowd and confusion to strike."
       }
     },
     {
@@ -174,7 +174,7 @@
       "name": "Widespread Slumber",
       "weight": 2,
       "fields": {
-        "description": "Nearly everyone in the immediate area falls asleep at once, leaving a single wary stranger awake."
+        "description": "Nearly everyone in the immediate area falls asleep at once, leaving awake only a wary stranger with the {{ background.generator.name }} background."
       }
     },
     {
@@ -182,7 +182,7 @@
       "name": "Improvised Trial",
       "weight": 2,
       "fields": {
-        "description": "A wandering judge convenes an immediate trial over ownership of a talking sword and demands witnesses from those present."
+        "description": "A wandering judge convenes an immediate trial over ownership of the unusual item known as {{ loot:curio.generator.name }} and demands witnesses from those present."
       }
     },
     {
@@ -212,7 +212,7 @@
       "name": "Unequal Exchange",
       "weight": 3,
       "fields": {
-        "description": "A thief steals something trivial nearby but leaves an item far more valuable and dangerously recognizable."
+        "description": "A thief steals something trivial nearby but leaves the valuable item known as {{ loot:valuables.generator.name }}, which is dangerously recognizable."
       }
     },
     {
@@ -249,7 +249,7 @@
       "id": "panicked_animals",
       "name": "Panicked Animals",
       "fields": {
-        "description": "Cries draw nearer as wildlife flees a threat that is still unseen."
+        "description": "Cries draw nearer as wildlife flees an unseen creature of the {{ monster.name }} type."
       }
     },
     {
@@ -298,14 +298,14 @@
       "id": "unexpected_arrival",
       "name": "Unexpected Arrival",
       "fields": {
-        "description": "A newcomer appears and claims to have known one of the people present for years."
+        "description": "A newcomer with the {{ background.generator.name }} background appears and claims to have known one of the people present for years."
       }
     },
     {
       "id": "hostile_migration",
       "name": "Hostile Migration",
       "fields": {
-        "description": "Several creatures enter the area after a greater threat drives them from their territory."
+        "description": "Several creatures of the {{ monster.name }} type enter the area after a greater threat drives them from their territory."
       }
     },
     {
@@ -333,7 +333,7 @@
       "id": "sudden_epidemic",
       "name": "Sudden Outbreak",
       "fields": {
-        "description": "Several nearby people develop the same unfamiliar symptoms within minutes."
+        "description": "Several nearby people suddenly show signs of the affliction known as {{ affliction.name }}."
       }
     },
     {
@@ -382,14 +382,14 @@
       "id": "arcane_blackout",
       "name": "Arcane Blackout",
       "fields": {
-        "description": "Active magical effects go dark or dormant at once while ordinary light and machinery continue to work."
+        "description": "All active magic associated with {{ rules.name }} goes dark or dormant at once while ordinary light and machinery continue to work."
       }
     },
     {
       "id": "duplicated_object",
       "name": "Impossible Duplicate",
       "fields": {
-        "description": "A perfect duplicate of a nearby mundane object appears, including marks that no observer had noticed."
+        "description": "A perfect duplicate of the item known as {{ loot.generator.name }} appears beside it, including marks no observer had noticed on the original."
       }
     },
     {
@@ -403,14 +403,28 @@
       "id": "doorway_elsewhere",
       "name": "Doorway Elsewhere",
       "fields": {
-        "description": "An ordinary door, arch, or narrow gap suddenly opens onto an impossibly distant place."
+        "description": "An ordinary door, arch, or narrow gap suddenly opens onto the impossibly distant place described as {{ site.generator.name }}."
       }
     },
     {
       "id": "falling_star_fragment",
       "name": "Fallen Star",
       "fields": {
-        "description": "A brilliant object crosses the sky and strikes close enough to shake the area and draw immediate attention."
+        "description": "A brilliant object made of {{ material.name }} crosses the sky and strikes close enough to shake the area and draw immediate attention."
+      }
+    },
+    {
+      "id": "exposed_crime_evidence",
+      "name": "Evidence in Plain Sight",
+      "fields": {
+        "description": "A dropped dossier bursts open in front of gathering witnesses, exposing evidence that someone nearby may be connected to {{ crime.name }}."
+      }
+    },
+    {
+      "id": "urgent_service_commission",
+      "name": "Urgent Commission",
+      "fields": {
+        "description": "A breathless agent offers immediate payment to anyone who can carry out work involving {{ service.name }}, but insists it must begin at once and remain discreet."
       }
     },
     {

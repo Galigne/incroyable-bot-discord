@@ -344,9 +344,9 @@ test('agreed talent, trait, status, and affliction entries preserve stable IDs a
 	}
 });
 
-test('every production quest, rumor, and secret resolves references with provenance', () => {
+test('every production quest, rumor, secret, and event resolves references with provenance', () => {
 	for (const locale of ['en', 'fr']) {
-		for (const generatorId of ['quest', 'rumor', 'secret']) {
+		for (const generatorId of ['quest', 'rumor', 'secret', 'event']) {
 			const entries = generatorCatalog.getGenerator(generatorId, locale).entries;
 			for (const entry of entries) {
 				const sourceValues = [entry.name, ...Object.values(entry.fields ?? {})];
@@ -366,6 +366,77 @@ test('every production quest, rumor, and secret resolves references with provena
 					assert.ok(result.provenance.length > 1, `${locale}:${generatorId}:${entry.id}`);
 				}
 			}
+		}
+	}
+});
+
+test('adventure composition reuses helper vocabularies and targeted event references', () => {
+	const generatorIds = ['quest', 'rumor', 'secret', 'event'];
+	const expectedConsumerRanges = new Map([
+		['crime.name', [10, 12]],
+		['service.name', [7, 9]],
+	]);
+
+	for (const locale of ['en', 'fr']) {
+		const entriesByGenerator = new Map(generatorIds.map(generatorId => [
+			generatorId,
+			generatorCatalog.getGenerator(generatorId, locale).entries,
+		]));
+		const referencesByGenerator = new Map(
+			[...entriesByGenerator].map(([generatorId, entries]) => [
+				generatorId,
+				entries.map(entry => (
+					[entry.name, ...Object.values(entry.fields ?? {})]
+						.flatMap(value => (
+							typeof value === 'string'
+								? extractInlineReferences(value)
+								: []
+						))
+				)),
+			]),
+		);
+
+		for (const [reference, [minimum, maximum]] of expectedConsumerRanges) {
+			const consumerCount = [...referencesByGenerator.values()]
+				.flat()
+				.filter(references => references.includes(reference))
+				.length;
+			assert.ok(
+				consumerCount >= minimum && consumerCount <= maximum,
+				`${locale}:${reference}:${consumerCount}`,
+			);
+			assert.ok(generatorIds.every(generatorId => (
+				referencesByGenerator.get(generatorId)
+					.some(references => references.includes(reference))
+			)));
+		}
+
+		const referencedEventCount = referencesByGenerator.get('event')
+			.filter(references => references.length > 0)
+			.length;
+		assert.ok(
+			referencedEventCount >= 15 && referencedEventCount <= 20,
+			`${locale}:event:${referencedEventCount}`,
+		);
+
+		const eventEntries = new Map(
+			entriesByGenerator.get('event').map(entry => [entry.id, entry]),
+		);
+		for (const [entryId, reference] of [
+			['two_merchants_begin_an_escalating_auction_for_an', 'loot.generator.name'],
+			['an_earthquake_opens_a_stairway_beneath_the_road', 'site:dungeon.generator.name'],
+			['a_wandering_judge_declares_an_improvised_trial_over', 'loot:curio.generator.name'],
+			['duplicated_object', 'loot.generator.name'],
+			['doorway_elsewhere', 'site.generator.name'],
+			['falling_star_fragment', 'material.name'],
+			['exposed_crime_evidence', 'crime.name'],
+			['urgent_service_commission', 'service.name'],
+		]) {
+			assert.ok(
+				extractInlineReferences(eventEntries.get(entryId).fields.description)
+					.includes(reference),
+				`${locale}:event:${entryId}:${reference}`,
+			);
 		}
 	}
 });
