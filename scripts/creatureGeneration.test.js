@@ -429,7 +429,8 @@ test('generated creature saves persist only final trait strings', async () => {
 		level: 4,
 		locale: 'en',
 		random: sequenceRandom([getEntryMidpoint(type, entryId)], 0),
-	});const persisted = JSON.parse(await fsPromises.readFile(
+	});
+	const persisted = JSON.parse(await fsPromises.readFile(
 		getCreatureSavePath(generated.key),
 		'utf8',
 	));
