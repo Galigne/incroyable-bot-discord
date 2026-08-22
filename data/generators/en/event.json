@@ -13,7 +13,7 @@
       "name": "Guiding Green Flames",
       "weight": 2,
       "fields": {
-        "description": "Green flames spring up spontaneously on nearby surfaces and lean toward the same distant direction for one minute."
+        "description": "Green flames spring up spontaneously on nearby surfaces and point toward the place described as {{ site.generator.name }} for one minute."
       }
     },
     {
@@ -21,7 +21,7 @@
       "name": "Misdelivered Confession",
       "weight": 3,
       "fields": {
-        "description": "A terrified courier mistakes someone present for a contact, delivers a sealed confession from a powerful figure, and flees."
+        "description": "A terrified courier mistakes someone present for a contact, delivers a powerful figure's sealed confession implicating {{ faction.name }}, and flees."
       }
     },
     {
@@ -42,10 +42,10 @@
     },
     {
       "id": "a_wounded_monster_crashes_into_the_scene_fleeing",
-      "name": "Fleeing Predator",
+      "name": "Fleeing Monster",
       "weight": 3,
       "fields": {
-        "description": "A wounded predator bursts into view, fleeing something much more dangerous that remains out of sight."
+        "description": "A wounded creature of the {{ monster.name }} type bursts into view, fleeing something much more dangerous that remains out of sight."
       }
     },
     {
@@ -60,7 +60,7 @@
       "name": "Impromptu Celebration",
       "weight": 3,
       "fields": {
-        "description": "Strangers abruptly begin a celebration centered on a wildly distorted version of a recent deed by someone present."
+        "description": "Strangers abruptly begin a celebration centered on a contest involving {{ ability.name }} that reenacts a wildly distorted version of a recent deed by someone present."
       }
     },
     {
@@ -76,7 +76,7 @@
       "name": "Disputed Haunting",
       "weight": 2,
       "fields": {
-        "description": "A child asks for help with a haunting, but the apparition insists that the child is the true intruder."
+        "description": "A child asks for help with a haunting at the place described as {{ building.name }}, but the apparition insists that the child is the true intruder."
       }
     },
     {
@@ -121,14 +121,14 @@
       "name": "Severed Route",
       "weight": 3,
       "fields": {
-        "description": "A nearby bridge, tunnel, or causeway collapses, dividing those present and cutting off the easiest way back."
+        "description": "A nearby bridge, tunnel, or causeway collapses, dividing those present and cutting off the easiest route to the settlement described as {{ settlement.name }}."
       }
     },
     {
       "id": "a_magical_market_appears_between_two_trees_and",
       "name": "Fleeting Market",
       "fields": {
-        "description": "A magical market unfolds in an ordinary open space and will vanish after exactly thirteen purchases."
+        "description": "A magical market unfolds in an ordinary open space and prominently offers the item known as {{ loot.generator.name }}. It will vanish after exactly thirteen purchases."
       }
     },
     {
@@ -136,7 +136,7 @@
       "name": "Unmapped Name",
       "weight": 2,
       "fields": {
-        "description": "A dying messenger bird delivers a signet ring and repeats the name of a place absent from every map."
+        "description": "A dying messenger bird delivers a signet ring and repeats the name of the settlement described as {{ settlement.name }}, although it appears on no map."
       }
     },
     {
@@ -158,7 +158,7 @@
       "id": "the_nearest_river_runs_backward_exposing_a_wreck",
       "name": "Reversed Waters",
       "fields": {
-        "description": "Nearby flowing water reverses direction, exposing something long submerged and stirring what rested beside it."
+        "description": "Nearby flowing water reverses direction, exposing a long-submerged wreck and an unusual find: {{ curio.name }}. Something beside them stirs."
       }
     },
     {
@@ -166,7 +166,7 @@
       "name": "Borrowed Glory",
       "weight": 2,
       "fields": {
-        "description": "A celebrated adventurer publicly credits someone present for a deed they never performed and asks them to maintain the story."
+        "description": "A celebrated adventurer with the {{ background:adventurer.generator.name }} background publicly credits someone present for a deed they never performed and asks them to maintain the story."
       }
     },
     {
@@ -190,14 +190,14 @@
       "name": "Borrowed Voice",
       "weight": 2,
       "fields": {
-        "description": "A harmless animal begins speaking with the voice of an absent acquaintance and asks for urgent help."
+        "description": "A harmless animal begins speaking with the voice of an absent acquaintance with the {{ background.generator.name }} background and asks for urgent help."
       }
     },
     {
       "id": "the_moon_briefly_shows_a_second_face_after",
       "name": "Second Moon-Face",
       "fields": {
-        "description": "The moon briefly reveals a second face, after which every compass nearby points toward the same person."
+        "description": "The moon briefly reveals a second face, after which every compass nearby points toward the settlement described as {{ settlement.name }}."
       }
     },
     {
@@ -220,7 +220,7 @@
       "name": "Buried Bell",
       "weight": 2,
       "fields": {
-        "description": "A bell rings beneath the ground while nearby residents deny that it exists and urgently seek shelter."
+        "description": "A bell consecrated to the faith known as {{ religion.name }} rings beneath the ground while nearby residents deny that it exists and urgently seek shelter."
       }
     },
     {
@@ -242,7 +242,7 @@
       "id": "sudden_tremor",
       "name": "Sudden Tremor",
       "fields": {
-        "description": "The ground shakes hard enough to interrupt events and reveal a fissure or weakened structure."
+        "description": "The ground shakes hard enough to interrupt events and open a fissure beneath the place described as {{ building.name }}."
       }
     },
     {
@@ -256,14 +256,14 @@
       "id": "distress_call",
       "name": "Distress Call",
       "fields": {
-        "description": "A voice calls for help from a place where nobody should be able to survive."
+        "description": "A voice calls for help from the place described as {{ site:dungeon.generator.name }}, although nobody should be able to survive there."
       }
     },
     {
       "id": "nauseating_odor",
       "name": "Nauseating Odor",
       "fields": {
-        "description": "An unusual stench fills the area, leading toward its source while warning of danger."
+        "description": "An unusual stench fills the area; its trail leads toward the place described as {{ building.name }} and warns of danger."
       }
     },
     {
@@ -284,14 +284,14 @@
       "id": "fainting",
       "name": "Sudden Collapse",
       "fields": {
-        "description": "Someone nearby loses consciousness moments after trying to warn others about an unclear danger."
+        "description": "Someone nearby with the {{ background.generator.name }} background loses consciousness moments after trying to warn others about an unclear danger."
       }
     },
     {
       "id": "gathering_storm",
       "name": "Gathering Storm",
       "fields": {
-        "description": "The weather changes abruptly, complicating travel, combat, or communication."
+        "description": "The weather changes abruptly with strange manifestations tied to the following element: {{ element.name }}. Travel, combat, or communication becomes more difficult."
       }
     },
     {
@@ -319,7 +319,7 @@
       "id": "impossible_message",
       "name": "Message from Elsewhen",
       "fields": {
-        "description": "A written message arrives from another time and contains details only its present recipient should know."
+        "description": "A written message names {{ faction.name }} and bears its mark, yet arrives from another time and contains details only its present recipient should know."
       }
     },
     {
@@ -340,7 +340,7 @@
       "id": "supplies_exhausted",
       "name": "Compromised Supplies",
       "fields": {
-        "description": "Essential food, water, or medicine suddenly disappears, spoils, or becomes unusable."
+        "description": "A crucial supply—{{ loot:supplies.generator.name }}—suddenly disappears or becomes unusable after being damaged, contaminated, sabotaged, or otherwise compromised."
       }
     },
     {
@@ -354,7 +354,7 @@
       "id": "gravity_turns_sideways",
       "name": "Sideways Gravity",
       "fields": {
-        "description": "For several minutes, gravity pulls sideways and sends unsecured people and objects sliding toward the same direction."
+        "description": "For several minutes, gravity pulls sideways and sends unsecured people and objects sliding toward the place described as {{ site.generator.name }}."
       }
     },
     {
@@ -368,14 +368,14 @@
       "id": "shared_memory",
       "name": "Borrowed Memory",
       "fields": {
-        "description": "Several nearby people simultaneously remember the same vivid event, though none of them lived it."
+        "description": "Several nearby people simultaneously remember visiting the place described as {{ site.generator.name }}, though none remembers ever going there."
       }
     },
     {
       "id": "vanishing_landmark",
       "name": "Missing Landmark",
       "fields": {
-        "description": "A familiar landmark visible moments ago vanishes, leaving altered terrain and contradictory recollections behind."
+        "description": "The familiar landmark described as {{ building.name }} vanishes, leaving altered terrain and contradictory recollections behind."
       }
     },
     {
@@ -396,7 +396,7 @@
       "id": "refugees_arrive",
       "name": "Unexpected Refugees",
       "fields": {
-        "description": "A weary group arrives seeking immediate shelter from a danger its members cannot clearly describe."
+        "description": "A weary group from the settlement described as {{ settlement.name }} arrives seeking immediate shelter as creatures of the {{ monster.name }} type close in behind them."
       }
     },
     {

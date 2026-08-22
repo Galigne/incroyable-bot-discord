@@ -13,7 +13,7 @@
       "name": "Flammes vertes directrices",
       "weight": 2,
       "fields": {
-        "description": "Des flammes vertes apparaissent spontanément sur les surfaces voisines et s’inclinent toutes dans la même direction lointaine pendant une minute."
+        "description": "Des flammes vertes apparaissent spontanément sur les surfaces voisines et désignent toutes le lieu décrit comme {{ site.generator.name }} pendant une minute."
       }
     },
     {
@@ -21,7 +21,7 @@
       "name": "Confession mal remise",
       "weight": 3,
       "fields": {
-        "description": "Un courrier terrifié prend une personne présente pour son contact, lui remet la confession scellée d’un puissant personnage, puis s’enfuit."
+        "description": "Un courrier terrifié prend une personne présente pour son contact, lui remet la confession scellée d’un puissant personnage qui met en cause {{ faction.name }}, puis s’enfuit."
       }
     },
     {
@@ -42,10 +42,10 @@
     },
     {
       "id": "a_wounded_monster_crashes_into_the_scene_fleeing",
-      "name": "Prédateur en fuite",
+      "name": "Monstre en fuite",
       "weight": 3,
       "fields": {
-        "description": "Un prédateur blessé surgit en fuyant une menace bien plus dangereuse qui reste hors de vue."
+        "description": "Une créature blessée du type {{ monster.name }} surgit en fuyant une menace bien plus dangereuse qui reste hors de vue."
       }
     },
     {
@@ -60,7 +60,7 @@
       "name": "Fête improvisée",
       "weight": 3,
       "fields": {
-        "description": "Des inconnus lancent soudain une fête consacrée à une version méconnaissable d’un exploit récent accompli par une personne présente."
+        "description": "Des inconnus lancent soudain une fête centrée sur un concours faisant appel à {{ ability.name }}, qui rejoue une version méconnaissable d’un exploit récent accompli par une personne présente."
       }
     },
     {
@@ -76,7 +76,7 @@
       "name": "Hantise contestée",
       "weight": 2,
       "fields": {
-        "description": "Un enfant demande de l’aide contre un fantôme, mais l’apparition affirme que l’enfant est le véritable intrus."
+        "description": "Un enfant demande de l’aide contre la hantise qui frappe le lieu décrit comme {{ building.name }}, mais l’apparition affirme que l’enfant est le véritable intrus."
       }
     },
     {
@@ -121,14 +121,14 @@
       "name": "Voie coupée",
       "weight": 3,
       "fields": {
-        "description": "Un pont, un tunnel ou une chaussée des environs s’effondre, séparant les personnes présentes et condamnant le chemin le plus simple pour repartir."
+        "description": "Un pont, un tunnel ou une chaussée des environs s’effondre, séparant les personnes présentes et coupant la voie la plus directe vers la localité décrite comme {{ settlement.name }}."
       }
     },
     {
       "id": "a_magical_market_appears_between_two_trees_and",
       "name": "Marché éphémère",
       "fields": {
-        "description": "Un marché magique se déploie dans un espace ouvert tout à fait ordinaire et disparaîtra après exactement treize achats."
+        "description": "Un marché magique se déploie dans un espace ouvert tout à fait ordinaire et propose bien en évidence l’objet appelé {{ loot.generator.name }}. Il disparaîtra après exactement treize achats."
       }
     },
     {
@@ -136,7 +136,7 @@
       "name": "Nom absent des cartes",
       "weight": 2,
       "fields": {
-        "description": "Un oiseau messager mourant apporte une chevalière et répète le nom d’un lieu absent de toutes les cartes."
+        "description": "Un oiseau messager mourant apporte une chevalière et répète le nom de la localité décrite comme {{ settlement.name }}, bien qu’elle ne figure sur aucune carte."
       }
     },
     {
@@ -158,7 +158,7 @@
       "id": "the_nearest_river_runs_backward_exposing_a_wreck",
       "name": "Eaux à rebours",
       "fields": {
-        "description": "Les eaux courantes des environs remontent leur cours, dévoilant ce qui gisait immergé depuis longtemps et réveillant ce qui reposait à ses côtés."
+        "description": "Les eaux courantes des environs remontent leur cours, dévoilant une épave immergée depuis longtemps et une trouvaille insolite : {{ curio.name }}. Quelque chose qui reposait à leurs côtés s’agite."
       }
     },
     {
@@ -166,7 +166,7 @@
       "name": "Gloire empruntée",
       "weight": 2,
       "fields": {
-        "description": "Un aventurier célèbre attribue publiquement à une personne présente un exploit qu’elle n’a jamais accompli et lui demande d’entretenir ce récit."
+        "description": "Un aventurier célèbre au profil {{ background:adventurer.generator.name }} attribue publiquement à une personne présente un exploit qu’elle n’a jamais accompli et lui demande d’entretenir ce récit."
       }
     },
     {
@@ -190,14 +190,14 @@
       "name": "Voix empruntée",
       "weight": 2,
       "fields": {
-        "description": "Un animal inoffensif se met à parler avec la voix d’une connaissance absente et réclame une aide urgente."
+        "description": "Un animal inoffensif se met à parler avec la voix d’une connaissance absente au profil {{ background.generator.name }} et réclame une aide urgente."
       }
     },
     {
       "id": "the_moon_briefly_shows_a_second_face_after",
       "name": "Second visage lunaire",
       "fields": {
-        "description": "La lune révèle brièvement un second visage, après quoi toutes les boussoles des environs pointent vers la même personne."
+        "description": "La lune révèle brièvement un second visage, après quoi toutes les boussoles des environs pointent vers la localité décrite comme {{ settlement.name }}."
       }
     },
     {
@@ -220,7 +220,7 @@
       "name": "Cloche enfouie",
       "weight": 2,
       "fields": {
-        "description": "Une cloche sonne sous terre tandis que les habitants des environs nient son existence et cherchent d’urgence un abri."
+        "description": "Une cloche consacrée au culte appelé {{ religion.name }} sonne sous terre tandis que les habitants des environs nient son existence et cherchent d’urgence un abri."
       }
     },
     {
@@ -242,7 +242,7 @@
       "id": "sudden_tremor",
       "name": "Secousse soudaine",
       "fields": {
-        "description": "Le sol tremble assez fortement pour interrompre les événements et révéler une fissure ou une structure fragilisée."
+        "description": "Le sol tremble assez fortement pour interrompre les événements et ouvrir une fissure sous le lieu décrit comme {{ building.name }}."
       }
     },
     {
@@ -256,14 +256,14 @@
       "id": "distress_call",
       "name": "Appel de détresse",
       "fields": {
-        "description": "Une voix appelle à l’aide depuis un endroit où personne ne devrait pouvoir survivre."
+        "description": "Une voix appelle à l’aide depuis le lieu décrit comme {{ site:dungeon.generator.name }}, bien que personne ne devrait pouvoir y survivre."
       }
     },
     {
       "id": "nauseating_odor",
       "name": "Odeur nauséabonde",
       "fields": {
-        "description": "Une puanteur inhabituelle envahit la zone et mène vers sa source tout en signalant un danger."
+        "description": "Une puanteur inhabituelle envahit la zone ; sa trace mène au lieu décrit comme {{ building.name }} et signale un danger."
       }
     },
     {
@@ -284,14 +284,14 @@
       "id": "fainting",
       "name": "Malaise soudain",
       "fields": {
-        "description": "Une personne proche perd connaissance quelques instants après avoir tenté d’en avertir d’autres d’un danger mal défini."
+        "description": "Une personne proche au profil {{ background.generator.name }} perd connaissance quelques instants après avoir tenté d’en avertir d’autres d’un danger mal défini."
       }
     },
     {
       "id": "gathering_storm",
       "name": "Tempête naissante",
       "fields": {
-        "description": "Le temps change brutalement et complique les déplacements, les combats ou la communication."
+        "description": "Le temps change brutalement et s’accompagne de manifestations étranges liées à l’élément suivant : {{ element.name }}. Les déplacements, les combats ou la communication deviennent plus difficiles."
       }
     },
     {
@@ -319,7 +319,7 @@
       "id": "impossible_message",
       "name": "Message venu d’un autre temps",
       "fields": {
-        "description": "Un message écrit arrive d’une autre époque et contient des détails que son destinataire actuel devrait être seul à connaître."
+        "description": "Un message écrit nomme {{ faction.name }} et porte sa marque, mais arrive d’une autre époque et contient des détails que son destinataire actuel devrait être seul à connaître."
       }
     },
     {
@@ -340,7 +340,7 @@
       "id": "supplies_exhausted",
       "name": "Provisions compromises",
       "fields": {
-        "description": "Des vivres, de l’eau ou des remèdes indispensables disparaissent, se gâtent ou deviennent soudain inutilisables."
+        "description": "Un matériel crucial — {{ loot:supplies.generator.name }} — disparaît soudain ou devient inutilisable après avoir été endommagé, contaminé, saboté ou compromis d’une autre manière."
       }
     },
     {
@@ -354,7 +354,7 @@
       "id": "gravity_turns_sideways",
       "name": "Gravité oblique",
       "fields": {
-        "description": "Pendant plusieurs minutes, la gravité tire de côté et entraîne dans la même direction les personnes et les objets qui ne sont pas arrimés."
+        "description": "Pendant plusieurs minutes, la gravité tire de côté et entraîne les personnes et les objets qui ne sont pas arrimés vers le lieu décrit comme {{ site.generator.name }}."
       }
     },
     {
@@ -368,14 +368,14 @@
       "id": "shared_memory",
       "name": "Souvenir emprunté",
       "fields": {
-        "description": "Plusieurs personnes proches se souviennent simultanément du même événement saisissant, alors qu’aucune ne l’a vécu."
+        "description": "Plusieurs personnes proches se souviennent simultanément d’avoir visité le lieu décrit comme {{ site.generator.name }}, alors qu’aucune ne se rappelle y être jamais allée."
       }
     },
     {
       "id": "vanishing_landmark",
       "name": "Repère disparu",
       "fields": {
-        "description": "Un repère familier encore visible quelques instants plus tôt disparaît en laissant derrière lui un terrain transformé et des souvenirs contradictoires."
+        "description": "Le repère familier décrit comme {{ building.name }} disparaît en laissant derrière lui un terrain transformé et des souvenirs contradictoires."
       }
     },
     {
@@ -396,7 +396,7 @@
       "id": "refugees_arrive",
       "name": "Réfugiés inattendus",
       "fields": {
-        "description": "Un groupe épuisé arrive et réclame immédiatement un abri contre un danger que ses membres ne parviennent pas à décrire clairement."
+        "description": "Un groupe épuisé venu de la localité décrite comme {{ settlement.name }} arrive et réclame immédiatement un abri tandis que des créatures du type {{ monster.name }} se rapprochent derrière lui."
       }
     },
     {
