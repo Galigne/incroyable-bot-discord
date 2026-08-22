@@ -78,58 +78,40 @@ test('complete production catalogs validate in both locales under schema v4', ()
 	}
 });
 
-test('character modifiers keep major impairments distinct from rare transformations', () => {
-	const impairmentIds = [
-		'scarred',
-		'one_eyed',
-		'damaged_lungs',
-		'prosthetic_limb',
-		'missing_fingers',
-		'noticeable_limp',
-		'impaired_hearing',
-		'missing_hand',
-		'missing_arm',
-		'missing_leg',
-	];
-	const transformationIds = [
-		'giant_blooded',
-		'juggernaut',
-		'unbreakable',
-		'arcane_vessel',
-		'living_conduit',
-		'berserker',
-		'shadow_touched',
-		'phoenix_touched',
-		'predatory_senses',
-		'runic_body',
-		'monstrous_physique',
-		'unstable_mutation',
-		'rule_bearer',
-		'race_hybrid',
-		'creature_hybrid',
-	];
-	const removedModifierIds = [
-		'light_sensitive',
-		'unmistakable',
-		'weathered',
-		'publicly_branded',
-		'oathbound',
-		'chronic_tremor',
-		'magic_saturated',
-		'haunted',
-	];
+test('character modifiers preserve the curated roster, weights, and references', () => {
+	const expectedWeights = {
+		scarred: 2,
+		one_eyed: 2,
+		prosthetic_limb: 3,
+		missing_fingers: 2,
+		impaired_hearing: 2,
+		missing_hand: 1,
+		missing_arm: 1,
+		missing_leg: 1,
+		afflicted: 6,
+		giant_blooded: 1,
+		juggernaut: 1,
+		unbreakable: 1,
+		arcane_vessel: 1,
+		living_conduit: 1,
+		berserker: 1,
+		shadow_touched: 1,
+		phoenix_touched: 1,
+		predatory_senses: 1,
+		runic_body: 1,
+		monstrous_physique: 1,
+		unstable_mutation: 2,
+		rule_bearer: 3,
+		race_hybrid: 3,
+		creature_hybrid: 3,
+	};
 
 	for (const locale of ['en', 'fr']) {
 		const modifiers = generatorCatalog.getGenerator('modifier_character', locale);
 		const entries = new Map(modifiers.entries.map(entry => [entry.id, entry]));
-		assert.ok(impairmentIds.every(id => entries.has(id)));
-		assert.ok(transformationIds.every(id => entries.has(id)));
-		assert.ok(removedModifierIds.every(id => !entries.has(id)));
-		assert.ok(transformationIds.every(id => entries.get(id).weight === 1));
-		assert.ok(impairmentIds.every(id => entries.get(id).weight > 1));
-		assert.ok(
-			transformationIds.reduce((total, id) => total + entries.get(id).weight, 0)
-			< impairmentIds.reduce((total, id) => total + entries.get(id).weight, 0),
+		assert.deepEqual(
+			modifiers.entries.map(entry => [entry.id, entry.weight]),
+			Object.entries(expectedWeights),
 		);
 		assert.deepEqual(
 			extractInlineReferences(entries.get('rule_bearer').fields.description),

@@ -57,9 +57,17 @@
     {
       "id": "faction_made",
       "name": "Faction-made",
-      "weight": 3,
+      "weight": 2,
       "fields": {
         "description": "The item was made, issued, modified, or marked by {{ faction.name }}."
+      }
+    },
+    {
+      "id": "government_made",
+      "name": "Government-made",
+      "weight": 2,
+      "fields": {
+        "description": "The item was made, issued, modified, or marked by {{ government.name }}."
       }
     }
   ]

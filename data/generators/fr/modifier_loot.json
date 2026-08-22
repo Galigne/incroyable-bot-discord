@@ -57,9 +57,17 @@
     {
       "id": "faction_made",
       "name": "Marqué par une faction",
-      "weight": 3,
+      "weight": 2,
       "fields": {
         "description": "L’objet a été fabriqué, fourni, modifié ou marqué par {{ faction.name }}."
+      }
+    },
+    {
+      "id": "government_made",
+      "name": "Marqué par un gouvernement",
+      "weight": 2,
+      "fields": {
+        "description": "L’objet a été fabriqué, fourni, modifié ou marqué par {{ government.name }}."
       }
     }
   ]
