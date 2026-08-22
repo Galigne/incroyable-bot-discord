@@ -299,7 +299,7 @@
       "id": "fulfill_sensitive_service",
       "name": "Honorer une mission délicate",
       "fields": {
-        "description": "Assurer une prestation de type {{ service.name }} pour un gouvernement de type {{ government.name }} avant une échéance stricte tout en dissimulant l’implication du commanditaire."
+        "description": "Assurer pour un gouvernement de type {{ government.name }} la prestation suivante — {{ service.name }} — avant une échéance stricte, tout en dissimulant l’implication du commanditaire."
       }
     },
     {
@@ -327,7 +327,7 @@
       "id": "find_service_specialist",
       "name": "Trouver un spécialiste compétent",
       "fields": {
-        "description": "Trouver une personne capable d’accomplir une prestation de type {{ service.name }} et la conduire auprès de {{ faction.name }} avant qu’un besoin urgent ne se transforme en crise."
+        "description": "Trouver une personne capable d’assurer la prestation suivante — {{ service.name }} — puis la conduire auprès de {{ faction.name }} avant qu’un besoin urgent ne se transforme en crise."
       }
     }
   ]

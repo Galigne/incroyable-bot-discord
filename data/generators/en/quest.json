@@ -299,7 +299,7 @@
       "id": "fulfill_sensitive_service",
       "name": "Fulfill a sensitive commission",
       "fields": {
-        "description": "Provide work involving {{ service.name }} for a government following the {{ government.name }} model before a strict deadline while keeping the client’s involvement secret."
+        "description": "Provide the following service for a government following the {{ government.name }} model before a strict deadline, while keeping the client’s involvement secret: {{ service.name }}."
       }
     },
     {
@@ -327,7 +327,7 @@
       "id": "find_service_specialist",
       "name": "Find a capable specialist",
       "fields": {
-        "description": "Find someone capable of carrying out work involving {{ service.name }} and bring them to {{ faction.name }} before an urgent need becomes a crisis."
+        "description": "Find someone capable of providing the following service — {{ service.name }} — and bring them to {{ faction.name }} before an urgent need becomes a crisis."
       }
     }
   ]

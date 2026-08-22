@@ -424,7 +424,7 @@
       "id": "urgent_service_commission",
       "name": "Urgent Commission",
       "fields": {
-        "description": "A breathless agent offers immediate payment to anyone who can carry out work involving {{ service.name }}, but insists it must begin at once and remain discreet."
+        "description": "A breathless agent offers immediate payment for the following service, but insists it must begin at once and remain discreet: {{ service.name }}."
       }
     },
     {

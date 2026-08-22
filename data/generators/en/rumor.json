@@ -215,7 +215,7 @@
       "id": "faction_hiring_for_service",
       "name": "Discreet faction recruitment",
       "fields": {
-        "description": "{{ faction.name }} is reportedly recruiting outsiders discreetly for work involving {{ service.name }}."
+        "description": "{{ faction.name }} is reportedly recruiting outsiders discreetly to provide the following service: {{ service.name }}."
       }
     }
   ]

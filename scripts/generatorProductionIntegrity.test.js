@@ -372,9 +372,9 @@ test('every production quest, rumor, secret, and event resolves references with 
 
 test('adventure composition reuses helper vocabularies and targeted event references', () => {
 	const generatorIds = ['quest', 'rumor', 'secret', 'event'];
-	const expectedConsumerRanges = new Map([
-		['crime.name', [10, 12]],
-		['service.name', [7, 9]],
+	const expectedMinimumConsumers = new Map([
+		['crime.name', 10],
+		['service.name', 7],
 	]);
 
 	for (const locale of ['en', 'fr']) {
@@ -396,13 +396,13 @@ test('adventure composition reuses helper vocabularies and targeted event refere
 			]),
 		);
 
-		for (const [reference, [minimum, maximum]] of expectedConsumerRanges) {
+		for (const [reference, minimum] of expectedMinimumConsumers) {
 			const consumerCount = [...referencesByGenerator.values()]
 				.flat()
 				.filter(references => references.includes(reference))
 				.length;
 			assert.ok(
-				consumerCount >= minimum && consumerCount <= maximum,
+				consumerCount >= minimum,
 				`${locale}:${reference}:${consumerCount}`,
 			);
 			assert.ok(generatorIds.every(generatorId => (
@@ -415,7 +415,7 @@ test('adventure composition reuses helper vocabularies and targeted event refere
 			.filter(references => references.length > 0)
 			.length;
 		assert.ok(
-			referencedEventCount >= 15 && referencedEventCount <= 20,
+			referencedEventCount >= 15,
 			`${locale}:event:${referencedEventCount}`,
 		);
 

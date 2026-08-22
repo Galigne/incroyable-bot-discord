@@ -75,7 +75,7 @@
       "id": "rumor_10",
       "name": "Service payé discrètement",
       "fields": {
-        "description": "Un gouvernement de type {{ government.name }} rémunérerait discrètement une prestation de type {{ service.name }} sans en expliquer la raison."
+        "description": "Un gouvernement de type {{ government.name }} rémunérerait discrètement la prestation suivante sans en expliquer la raison : {{ service.name }}."
       }
     },
     {
@@ -215,7 +215,7 @@
       "id": "faction_hiring_for_service",
       "name": "Recrutement discret d’une faction",
       "fields": {
-        "description": "{{ faction.name }} recruterait discrètement des personnes extérieures pour accomplir une prestation de type {{ service.name }}."
+        "description": "{{ faction.name }} recruterait discrètement des personnes extérieures pour assurer la prestation suivante : {{ service.name }}."
       }
     }
   ]

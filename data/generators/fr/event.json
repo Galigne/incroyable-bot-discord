@@ -424,7 +424,7 @@
       "id": "urgent_service_commission",
       "name": "Commande urgente",
       "fields": {
-        "description": "Un agent à bout de souffle promet une rémunération immédiate à quiconque peut accomplir une prestation de type {{ service.name }}, mais exige que le travail commence sur-le-champ et reste discret."
+        "description": "Un agent à bout de souffle promet une rémunération immédiate pour la prestation suivante — {{ service.name }} — mais exige qu’elle commence sur-le-champ et reste discrète."
       }
     },
     {
