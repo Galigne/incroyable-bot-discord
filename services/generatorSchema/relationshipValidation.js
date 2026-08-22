@@ -35,10 +35,20 @@ function validateGeneratorRelationships(catalog) {
 
 function validateStructuralRoutes(generator, catalog) {
 	for (const entry of generator.entries) {
-		if (entry.generator !== undefined && !catalog.has(entry.generator)) {
+		if (entry.generator === undefined) {
+			continue;
+		}
+		const target = catalog.get(entry.generator);
+		if (!target) {
 			throw generatorSchemaError(
 				'GENERATOR_REFERENCE_MISSING',
 				`Generator ${generator.id}:${entry.id} has an unknown structural route.`,
+			);
+		}
+		if (target.visibility !== 'internal') {
+			throw generatorSchemaError(
+				'INVALID_GENERATOR_ROUTE_TARGET',
+				`Generator ${generator.id}:${entry.id} must route to an internal generator.`,
 			);
 		}
 	}

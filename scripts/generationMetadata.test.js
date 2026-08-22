@@ -7,27 +7,30 @@ const {
 const { getStatProfile } = require('../services/statProfileCatalog');
 
 test('shared generation metadata resolution replaces common categories for both entity types', () => {
-	for (const [entityType, templateProperty, templateId, modifierGenerator, modifierId] of [
-		['character', 'talents', 'athlete', 'modifier_character', 'scarred'],
-		['creature', 'traits', 'keen_smell', 'modifier_creature', 'smoldering'],
+	const resolver = createMetadataFixtureResolver();
+	for (const [entityType, templateProperty] of [
+		['character', 'talents'],
+		['creature', 'traits'],
 	]) {
 		const resolved = resolveGenerationMetadata({
 			entityType,
 			generation: {
 				statProfile: 'default',
 				naturalArmorPercentage: 12,
-				[templateProperty]: [`{{ ${templateProperty}:${templateId} }}`],
-				fixedRules: [{ entry: 'thread_rule', level: 2 }],
-				statusEffects: ['status_effect:bruised'],
-				modifiers: [`${modifierGenerator}:${modifierId}`],
-				armor: 'armors:padded_armor',
-				equipment: ['shields:buckler'],
-				inventory: ['shields:round_shield'],
+				[templateProperty]: [
+					'{{ ' + templateProperty + ':fixture_template }}',
+				],
+				fixedRules: [{ entry: 'fixture_rule', level: 2 }],
+				statusEffects: ['status_effect:fixture_status'],
+				modifiers: ['modifier_' + entityType + ':fixture_modifier'],
+				armor: 'armors:fixture_armor',
+				equipment: ['shields:fixture_shield'],
+				inventory: ['shields:fixture_inventory'],
 			},
 			level: 5,
 			locale: 'en',
 			random: () => 0,
-			resolver: generatorResolver,
+			resolver,
 			getProfile: getStatProfile,
 			defaults: {
 				includeRuleEntryId: entityType === 'creature',
@@ -36,7 +39,7 @@ test('shared generation metadata resolution replaces common categories for both 
 
 		assert.equal(resolved.statProfileId, 'default');
 		assert.equal(resolved.naturalArmorPercentage, 12);
-		assert.equal(resolved.templates.length, 1);
+		assert.deepEqual(resolved.templates, ['Fixture template value']);
 		assert.equal(resolved.rules.length, 1);
 		assert.equal(resolved.rules[0].level, 2);
 		assert.equal(
@@ -53,11 +56,11 @@ test('shared generation metadata resolution replaces common categories for both 
 			...resolved.gear.equipment,
 			...resolved.gear.inventory,
 		]) {
-			assert.match(item, / — Common — Made of [^—]+ — Runed — /);
+			assert.equal(typeof item, 'string');
+			assert.ok(item.trim());
 		}
 	}
 });
-
 test('shared generation metadata resolution preserves defaults and suppresses explicit empty arrays', () => {
 	for (const entityType of ['character', 'creature']) {
 		const resolved = resolveGenerationMetadata({
@@ -211,6 +214,49 @@ test('described generation references retain final identities through routes', (
 	);
 });
 
+function createMetadataFixtureResolver() {
+	return {
+		resolveInlineString() {
+			return { value: 'Fixture template value' };
+		},
+		resolveReference(reference) {
+			const [generatorId, entryId] = reference.split(':');
+			const isArmor = generatorId === 'armors';
+			const isShield = generatorId === 'shields';
+			const fields = {
+				name: 'Fixture ' + generatorId,
+				description: 'Fixture ' + entryId + ' description.',
+			};
+			if (isArmor) {
+				fields.type = 'light';
+			}
+			return {
+				generatorId,
+				entryId,
+				fields,
+				displayFields: fields,
+				display: fields.name + ' — ' + fields.description,
+				outputType: 'fields',
+				provenance: [{
+					type: 'entry',
+					selection: 'fixed',
+					generatorId,
+					entryId,
+				}],
+				modifiers: isArmor || isShield
+					? [{
+						generatorId: 'modifier_rarity',
+						entryId: 'common',
+						value: 'Common',
+						outputType: 'value',
+						provenance: [],
+						modifiers: [],
+					}]
+					: [],
+			};
+		},
+	};
+}
 function createDescribedReferenceCatalog() {
 	return new Map([
 		['modifier', createRouteGenerator('modifier', 'creature', 'modifier_creature')],

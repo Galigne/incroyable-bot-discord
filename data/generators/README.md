@@ -16,6 +16,10 @@ For example, `loot_weapons.json` has ID `weapons`, and references use
 `{{ weapons }}` rather than the filename. The current category families are
 `background`, `creature`, `loot`, `site`, `group`, `modifier`, and `aspect`.
 
+The production catalog is intentionally extensible. Ordinary generator entries may be
+added, removed, renamed, reordered, reweighted, or rewritten in both locales without
+test changes. Optional roots and optional generation properties are not requirements
+unless the application-contract section or the mechanics explicitly names them.
 The public `aspect` category routes to the internal name-only `ability`, `element`,
 and `weakness` vocabularies. They are available to users through `/gen category:`
 aspects while keeping their stable IDs for inline references such as
@@ -235,19 +239,19 @@ router expose the useful internal character, creature, loot, rarity, material, a
 site modifier pools.
 Generating a modifier this way does not apply it to another result.
 
-Loot applies independent modifier families through each child generator's
-`modifiers` map:
+Loot applies independently configured modifier families through each child generator's
+modifiers map. The map, its weights, and the participating optional modifier sources
+are editable data: schema validation checks their shape, ranges, references, and
+localization parity, but does not require the current production percentages or
+ordinary modifier roster.
 
-- `weapons`, `armors`, and `shields`: `modifier_rarity` at `100%`,
-  `modifier_material` at `15%`, then `modifier_loot` at `10%`;
-- `supplies`, `consumable`, `valuables`, and `curio`: `modifier_loot` at `10%`;
-- `food_and_drink`: `modifier_loot` at `5%`;
-- `material`: no automatic modifier.
-
-Keep that map order for readable entity gear. Direct `/gen` results continue to
-return modifiers separately. Entity generation instead flattens the base item and
-all applied modifiers into one localized string in rarity, material, then loot
-order. Do not add per-entry compatibility filters to `modifier_loot`.
+Armor and shield generation has one code-level relationship: modifier_rarity must
+resolve at 100 percent so the stable rarity ID can drive armor mechanics. The
+mechanics own the supported armor types and rarity IDs; other modifier weights and
+content remain catalog choices. Runtime formatting orders whichever modifiers are
+present by their supported family, and direct generator results keep them separate.
+Entity generation flattens the base item and applied modifiers into one localized
+string. Do not add per-entry compatibility filters to modifier_loot.
 
 ## Structural traversal
 

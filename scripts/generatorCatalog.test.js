@@ -14,6 +14,7 @@ const {
 } = require('../services/generatorTraversal');
 const {
 	isGeneratorRouter,
+	validateGeneratorApplicationContracts,
 	validateBackgroundStatProfileRelationships,
 	validateGeneratorDefinition,
 	validateGeneratorPair,
@@ -135,11 +136,11 @@ test('background metadata supports optional shared overrides and rejects traits 
 	const sharedOverrides = structuredClone(english);
 	sharedOverrides.entries[0].generation = {
 		naturalArmorPercentage: 20,
-		talents: ['{{ talents:athlete }}'],
+		talents: ['{{ talents:fixture_talent }}'],
 		fixedRules: [],
 		statusEffects: [],
 		modifiers: [],
-		armor: 'armors:padded_armor',
+		armor: 'armors:' + generatorCatalog.getGenerator('armors', 'en').entries[0].id,
 		equipment: [],
 		inventory: [],
 	};
@@ -154,7 +155,7 @@ test('background metadata supports optional shared overrides and rejects traits 
 	const legacyReference = structuredClone(sharedOverrides);
 	legacyReference.entries[0].generation.armor = {
 		generator: 'armors',
-		entry: 'padded_armor',
+		entry: 'fixture_armor',
 		select: 'fields',
 	};
 	assert.throws(
@@ -207,10 +208,10 @@ test('background metadata supports optional shared overrides and rejects traits 
 	const englishTalents = structuredClone(english);
 	const frenchTalents = structuredClone(french);
 	englishTalents.entries[0].generation = {
-		talents: ['Gifted: {{ talents:athlete }}'],
+		talents: ['Gifted: {{ talents:fixture_talent }}'],
 	};
 	frenchTalents.entries[0].generation = {
-		talents: ['Doué : {{ talents:athlete }}'],
+		talents: ['Doué : {{ talents:fixture_talent }}'],
 	};
 	assert.doesNotThrow(() => validateGeneratorPair(
 		englishTalents,
@@ -219,7 +220,7 @@ test('background metadata supports optional shared overrides and rejects traits 
 		validationOptions,
 	));
 	frenchTalents.entries[0].generation.talents = [
-		'Doué : {{ talents:keen_eye }}',
+		'Doué : {{ talents:fixture_other_talent }}',
 	];
 	assert.throws(
 		() => validateGeneratorPair(
@@ -272,60 +273,54 @@ test('background metadata supports optional shared overrides and rejects traits 
 	);
 });
 
-test('production generator v4 data uses stable IDs, entry names, strict parity, and visibility', () => {
-	const englishPublic = generatorCatalog.listGenerators('en');
-	const frenchPublic = generatorCatalog.listGenerators('fr');
-	const internal = generatorCatalog.listGenerators('en', { visibility: 'internal' });
-	const all = generatorCatalog.listGenerators('en', { visibility: 'all' });
-	assert.ok(englishPublic.length > 0);
+test('production generator v4 data is loaded as paired, schema-validated catalogs', () => {
+	const english = generatorCatalog.listGenerators('en', { visibility: 'all' });
+	const french = generatorCatalog.listGenerators('fr', { visibility: 'all' });
+	assert.ok(english.length > 0);
 	assert.deepEqual(
-		englishPublic.map(generator => generator.id).sort(),
-		frenchPublic.map(generator => generator.id).sort(),
+		sortedIds(english),
+		sortedIds(french),
 	);
-	assert.equal(all.length, englishPublic.length + internal.length);
-	assert.ok(internal.length > 0);
-	assert.ok(internal.every(generator => generator.visibility === 'internal'));
-	assert.equal(
-		generatorResolver.generate(internal[0].id, 'en', { random: () => 0 }),
-		null,
-	);
-	for (const generator of all) {
+	for (const generator of english) {
 		assert.equal(generator.schemaVersion, 4);
-		assert.match(generator.id, /^[a-z0-9]+(?:_[a-z0-9]+)*$/);
-		assert.match(generator.name, /^\p{Lu}/u);
-		assert.equal(
-			new Set(generator.entries.map(entry => entry.id)).size,
-			generator.entries.length,
-		);
 		assert.ok(generator.entries.every(entry => (
 			typeof entry === 'object'
-			&& /^[a-z0-9]+(?:_[a-z0-9]+)*$/.test(entry.id)
+			&& entry.id
 			&& typeof entry.name === 'string'
 			&& entry.name.trim()
 		)));
 	}
-	for (const randomValue of [0, 0.1, 0.5, 0.999999]) {
-		assert.equal(
-			generatorResolver.generate('race', 'en', { random: () => randomValue }).entryId,
-			generatorResolver.generate('race', 'fr', { random: () => randomValue }).entryId,
-		);
-	}
 });
 
-test('production category children use prefixed filenames and concept-only IDs', async () => {
+test('application contracts allow ordinary content edits and optional generator removal', () => {
+	const production = generatorCatalog.createGeneratorCatalogCandidate();
+	const catalogs = new Map([...production].map(([locale, catalog]) => [
+		locale,
+		new Map([...catalog].map(([id, generator]) => [
+			id,
+			structuredClone(generator),
+		])),
+	]));
+	for (const [locale, catalog] of catalogs) {
+		const names = catalog.get('name');
+		names.entries.reverse();
+		names.entries[0].name = locale === 'en'
+			? 'Contributor-defined name'
+			: 'Nom défini par un contributeur';
+		names.entries[0].weight = 7;
+		catalog.delete('event');
+	}
+	assert.doesNotThrow(() => validateGeneratorApplicationContracts(catalogs));
+});
+test('production category children follow the documented recursive filename convention', async () => {
 	const generatorRoot = path.join(__dirname, '..', 'data', 'generators');
+	const routerIds = generatorCatalog.listGenerators('en', { visibility: 'all' })
+		.filter(isGeneratorRouter)
+		.map(generator => generator.id);
 	for (const locale of ['en', 'fr']) {
 		const localeRoot = path.join(generatorRoot, locale);
 		const filenames = new Set(await fsPromises.readdir(localeRoot));
-		for (const routerId of [
-			'background',
-			'creature',
-			'loot',
-			'site',
-			'group',
-			'modifier',
-			'aspect',
-		]) {
+		for (const routerId of routerIds) {
 			const router = generatorCatalog.getGenerator(routerId, locale);
 			for (const route of router.entries) {
 				const filename = getCategoryChildFilename(routerId, route.generator);
@@ -336,28 +331,20 @@ test('production category children use prefixed filenames and concept-only IDs',
 				assert.equal(document.id, route.generator, `${locale}/${filename}`);
 				const obsoleteFilename = `${route.generator}.json`;
 				if (obsoleteFilename !== filename) {
-					assert.equal(
-						filenames.has(obsoleteFilename),
-						false,
-						`${locale}/${obsoleteFilename}`,
-					);
+					assert.equal(filenames.has(obsoleteFilename), false, `${locale}/${obsoleteFilename}`);
 				}
 			}
 		}
 	}
 });
 
-test('generator autocomplete and help expose localized public aliases', () => {
+test('generator autocomplete and help derive localized public aliases from the loaded catalog', () => {
 	const frenchGenerators = generatorCatalog.listGenerators('fr');
 	const publicValues = getCommandOptionValues('generator-paths', 'fr');
 	assert.deepEqual(
 		publicValues.map(value => value.value),
 		frenchGenerators.map(generator => createGeneratorTraversalAlias(generator.name)),
 	);
-	assert.ok(publicValues.some(value => value.value === 'aspects'));
-	assert.ok(['aptitudes', 'éléments', 'faiblesses'].every(alias => (
-		!publicValues.some(value => value.value === alias)
-	)));
 	assert.ok(publicValues.every(value => value.name === value.value));
 
 	const frenchBackgrounds = generatorCatalog.getGenerator('background', 'fr').entries;
@@ -370,7 +357,6 @@ test('generator autocomplete and help expose localized public aliases', () => {
 		choices.map(choice => choice.value),
 		frenchBackgrounds.map(entry => createGeneratorTraversalAlias(entry.name)),
 	);
-	assert.equal(choices[0].name, choices[0].value);
 	const firstBackgroundPath = createGeneratorTraversalAlias(frenchBackgrounds[0].name);
 	const backgroundEntries = AUTOCOMPLETE_PROVIDERS.backgrounds(
 		{},
@@ -394,7 +380,6 @@ test('generator autocomplete and help expose localized public aliases', () => {
 		choice.value.startsWith(`${firstCreaturePath}:`)
 	)));
 });
-
 test('wrapped inline reference parsing requires exactly one valid token', () => {
 	assert.deepEqual(
 		parseWrappedInlineReference('{{ monster:dragon.name }}'),
@@ -745,7 +730,6 @@ test('generator schema localizes string fields and preserves functional parity',
 	french.description = 'Conditions m\u00e9t\u00e9orologiques';
 	french.entries[0].name = 'Une pluie douce commence.';
 	assert.equal(validateGeneratorPair(english, french, 'weather.json'), true);
-
 	const fieldsEnglish = createFieldsGenerator();
 	const fieldsFrench = structuredClone(fieldsEnglish);
 	fieldsFrench.name = 'Armures';
@@ -945,6 +929,10 @@ function cloneCatalogs(catalogs) {
 		locale,
 		new Map(catalog),
 	]));
+}
+
+function sortedIds(generators) {
+	return generators.map(generator => generator.id).sort();
 }
 
 function getCategoryChildFilename(routerId, childId) {

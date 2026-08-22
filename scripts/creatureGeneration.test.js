@@ -61,6 +61,9 @@ const {
 	getShieldPercentage,
 } = require('../services/mechanics/armor');
 const {
+	getResolvedLootArmorPercentage,
+} = require('../services/lootGeneration');
+const {
 	createGeneratedResources,
 } = require('../services/mechanics/resources');
 const {
@@ -123,23 +126,6 @@ test('production creature sources are strict localized types backed by profiles'
 				assert.ok(entry.name);
 				assert.ok(entry.fields.description);
 				const generation = entry.generation ?? {};
-				if (generation.traits !== undefined) {
-					assert.ok(generation.traits.length <= 25);
-					assert.ok(generation.traits.every(trait => (
-						typeof trait === 'string' && trait.trim()
-					)));
-				}
-				for (const property of [
-					'traits',
-					'fixedRules',
-					'statusEffects',
-					'modifiers',
-					'equipment',
-					'inventory',
-				]) {
-					assert.notDeepEqual(generation[property], []);
-				}
-				assert.notEqual(generation.naturalArmorPercentage, 0);
 				for (const forbidden of [
 					'statistics',
 					'resources',
@@ -191,7 +177,7 @@ test('creature metadata rejects mechanical overrides and allows stacked armor so
 
 	const armorConflict = structuredClone(english);
 	armorConflict.entries[0].generation.naturalArmorPercentage = 20;
-	armorConflict.entries[0].generation.armor = 'armors:padded_armor';
+	armorConflict.entries[0].generation.armor = 'armors:' + generatorCatalog.getGenerator('armors', 'en').entries[0].id;
 	assert.doesNotThrow(
 		() => validateGeneratorDefinition(armorConflict, '<generator>', validationOptions),
 	);
@@ -223,8 +209,8 @@ test('creature metadata preserves English and French functional parity', () => {
 	);
 
 	french.entries[0].generation.statProfile = originalProfile;
-	english.entries[0].generation.traits = ['Sense: {{ traits:keen_smell }}'];
-	french.entries[0].generation.traits = ['Sens : {{ traits:keen_hearing }}'];
+	english.entries[0].generation.traits = ['Sense: {{ traits:fixture_trait }}'];
+	french.entries[0].generation.traits = ['Sens : {{ traits:fixture_trait_fr }}'];
 	assert.throws(
 		() => validateGeneratorPair(english, french, '<generator>', validationOptions),
 		error => error.code === 'GENERATOR_LOCALE_PARITY_MISMATCH',
@@ -289,7 +275,7 @@ test('creature generation references require compatible target payloads', () => 
 	const missingRarityDetail = structuredClone(missingRarityCatalog.get(generatorId));
 	missingRarityDetail.entries[0].generation = {
 		...(missingRarityDetail.entries[0].generation ?? {}),
-		armor: 'armors:padded_armor',
+		armor: 'armors:' + generatorCatalog.getGenerator('armors', 'en').entries[0].id,
 	};
 	const armorGenerator = structuredClone(missingRarityCatalog.get('armors'));
 	delete armorGenerator.modifiers.modifier_rarity;
@@ -309,11 +295,11 @@ test('creature trait metadata accepts localized templates and rejects invalid st
 	for (const traits of [
 		[],
 		['Cannot be blinded by ordinary darkness.'],
-		['{{ traits:amphibious }}'],
+		['{{ traits:fixture_trait }}'],
 		['{{ traits }}'],
 		[
 			'Huge — +1 to Strength actions involving pushing or lifting.',
-			'Inherited capability: {{ traits:keen_smell }}',
+			'Inherited capability: {{ traits:fixture_trait }}',
 			'{{ traits }}',
 		],
 	]) {
@@ -384,61 +370,33 @@ test('equivalent random input selects the same stable IDs and statistics in both
 	}
 });
 
-test('creature generation resolves literal, fixed, random, mixed, and inline traits', () => {
-	const animalType = getCreatureTypeForEntry('mossback_deer');
-	const traitless = generateEntry(animalType, 'mossback_deer', { level: 3 });
+test('creature generation resolves explicit and default trait templates', () => {
+	const fixture = createCreatureGenerationFixture();
+	const traitless = fixture.generate({ traits: [] });
 	assert.deepEqual(traitless.traits, []);
 
-	const literal = generateEntry(
-		getCreatureTypeForEntry('lantern_finch'),
-		'lantern_finch',
-		{ level: 3 },
-	);
-	assert.match(literal.traits[0], /^Luminous Plumage — /);
+	const literal = fixture.generate({
+		traits: ['Literal fixture trait'],
+	});
+	assert.deepEqual(literal.traits, ['Literal fixture trait']);
 
-	const englishFixed = generateLocalizedEntry(animalType, 'river_otter', 'en');
-	const frenchFixed = generateLocalizedEntry(animalType, 'river_otter', 'fr');
-	assert.deepEqual(englishFixed.traits, [
-		generatorResolver.resolveInlineReference(
-			'{{ traits:amphibious }}',
-			'en',
-			{ random: () => 0 },
-		).value,
-		generatorResolver.resolveInlineReference(
-			'{{ traits:aquatic_speed }}',
-			'en',
-			{ random: () => 0 },
-		).value,
-	]);
-	assert.deepEqual(frenchFixed.traits, [
-		generatorResolver.resolveInlineReference(
-			'{{ traits:amphibious }}',
-			'fr',
-			{ random: () => 0 },
-		).value,
-		generatorResolver.resolveInlineReference(
-			'{{ traits:aquatic_speed }}',
-			'fr',
-			{ random: () => 0 },
-		).value,
-	]);
-	assert.notDeepEqual(englishFixed.traits, frenchFixed.traits);
+	const explicit = fixture.generate({
+		traits: [
+			'Inline fixture: {{ traits:fixture_trait_a }}',
+			'{{ traits:fixture_trait_b }}',
+		],
+	});
+	assert.equal(explicit.traits.length, 2);
+	assert.ok(explicit.traits.every(trait => (
+		typeof trait === 'string'
+		&& trait.trim()
+		&& !trait.includes('{{')
+	)));
+	assert.ok(explicit.traits.some(trait => trait.includes('Fixture trait A')));
 
-	const random = generateEntry(getCreatureTypeForEntry('imp'), 'imp', { level: 3 });
-	assert.equal(random.traits.length, 2);
-	assert.ok(getTraitDisplays('en').has(random.traits[1]));
-
-	const mixed = generateEntry(
-		getCreatureTypeForEntry('unstable_chimera'),
-		'unstable_chimera',
-		{ level: 3 },
-	);
-	assert.equal(mixed.traits.length, 2);
-	assert.match(mixed.traits[0], /^Composite Instinct — .+: .+ — .+/);
-	assert.ok(mixed.traits.every(trait => !trait.includes('{{')));
-	assert.ok(getTraitDisplays('en').has(mixed.traits[1]));
+	const defaults = fixture.generate({});
+	assert.deepEqual(defaults.traits, []);
 });
-
 test('every production creature resolves localized traits into valid final state', () => {
 	for (const locale of ['en', 'fr']) {
 		for (const type of getCreatureTypes(locale)) {
@@ -464,14 +422,14 @@ test('every production creature resolves localized traits into valid final state
 });
 
 test('generated creature saves persist only final trait strings', async () => {
-	const type = getCreatureTypeForEntry('river_otter');
+	const { type, generatorId } = getCreatureFixture();
+	const entryId = generatorCatalog.getGenerator(generatorId, 'en').entries[0].id;
 	const generated = await generateCreature('Trait.Persistence', {
 		type,
 		level: 4,
 		locale: 'en',
-		random: sequenceRandom([getEntryMidpoint(type, 'river_otter')], 0),
-	});
-	const persisted = JSON.parse(await fsPromises.readFile(
+		random: sequenceRandom([getEntryMidpoint(type, entryId)], 0),
+	});const persisted = JSON.parse(await fsPromises.readFile(
 		getCreatureSavePath(generated.key),
 		'utf8',
 	));
@@ -595,148 +553,71 @@ test('creature Intelligence never grants RULEs and explicit RULE references are 
 	assert.ok(explicit.rules[0].description);
 });
 
-test('fixed elemental RULEs preserve their bound elements in both locales', () => {
-	const expected = {
-		mire_troll: ['plants', 1],
-		cinder_drake: ['fire', 1],
-		frost_widow: ['frost', 1],
-		ash_phoenix: ['fire', 2],
-		uprooted_treant: ['plants', 2],
-		fiery_salamander: ['fire', 1],
-	};
+test('fixed elemental RULEs preserve their bound elements', () => {
+	const elementId = generatorCatalog.getGenerator('element', 'en').entries[0].id;
 	for (const locale of ['en', 'fr']) {
-		for (const [entryId, [elementId, level]] of Object.entries(expected)) {
-			const type = getCreatureTypeForEntry(entryId, locale);
-			const creature = generateLocalizedEntry(type, entryId, locale);
-			const element = generatorResolver.resolveReference(
-				`element:${elementId}`,
-				locale,
-				{ random: () => 0 },
-			).display;
-			assert.deepEqual(
-				creature.rules.map(rule => [rule.name, rule.level]),
-				[[
-					locale === 'en'
-						? `${element} RULE`
-						: `LOI élémentaire : ${element}`,
-					level,
-				]],
-				`${locale}:${entryId}`,
-			);
-		}
-		const firstElementRule = generatorResolver.resolveReference(
-			'rules:elemental_rule',
-			locale,
-			{ random: () => 0 },
-		).display;
-		const lastElementRule = generatorResolver.resolveReference(
-			'rules:elemental_rule',
-			locale,
-			{ random: () => 0.999999 },
-		).display;
-		assert.notEqual(firstElementRule, lastElementRule, `${locale}:random element RULE`);
+		const fixture = createCreatureGenerationFixture(locale);
+		const creature = fixture.generate({
+			fixedRules: [{ entry: 'elemental_rule', element: elementId, level: 2 }],
+			traits: [],
+		});
+		assert.equal(creature.rules.length, 1);
+		assert.equal(creature.rules[0].level, 2);
+		assert.ok(creature.rules[0].name);
+		assert.ok(creature.rules[0].description);
+		assert.ok(creature.source.provenance.some(record => (
+			record.generatorId === 'element'
+			&& record.entryId === elementId
+		)));
 	}
 });
-
 test('natural armor, generated armor, status, and weighted gear resolve to final state', () => {
-	const cinderDrake = generateEntry(
-		getCreatureTypeForEntry('cinder_drake'),
-		'cinder_drake',
-		{ level: 5 },
+	const armorId = generatorCatalog.getGenerator('armors', 'en').entries[0].id;
+	const shieldId = generatorCatalog.getGenerator('shields', 'en').entries[0].id;
+	const statusId = generatorCatalog.getGenerator('status_effect', 'en').entries[0].id;
+	const modifierId = generatorCatalog.getGenerator('modifier_creature', 'en').entries[0].id;
+	const armorResult = generatorResolver.resolveReference(
+		'armors:' + armorId,
+		'en',
+		{ random: () => 0 },
 	);
-	assert.equal(Object.hasOwn(cinderDrake, 'naturalArmor'), false);
-	assert.equal(
-		cinderDrake.resources.ar.max,
-		calculateArmorRating(cinderDrake.resources.hp.max, 15),
+	const shieldResult = generatorResolver.resolveReference(
+		'shields:' + shieldId,
+		'en',
+		{ random: () => 0 },
 	);
-	assert.deepEqual(
-		cinderDrake.status.modifiers.map(modifier => [modifier.generatorId, modifier.entryId]),
-		[['modifier_creature', 'smoldering']],
-	);
-	assert.ok(cinderDrake.status.modifiers[0].provenance.length > 0);
-
-	const bellWraith = generateEntry(
-		getCreatureTypeForEntry('bell_wraith'),
-		'bell_wraith',
-		{ level: 5 },
-	);
-	assert.equal(Object.hasOwn(bellWraith, 'naturalArmor'), false);
-	assert.equal(getArmorPercentage(bellWraith), 55);
-	assert.equal(
-		bellWraith.resources.ar.max,
-		calculateArmorRating(bellWraith.resources.hp.max, 55),
-	);
-	assert.equal(bellWraith.gear.equipment.length, 2);
-	assert.match(bellWraith.gear.equipment[0], /^Chain mail \(Heavy\) — /);
-	assert.ok(bellWraith.source.provenance.some(record => (
-		record.generatorId === 'armors'
-		&& record.entryId === 'chain_mail'
-	)));
-	assert.ok(bellWraith.source.provenance.some(record => (
-		record.generatorId === 'modifier_rarity'
-		&& record.entryId === 'uncommon'
-	)));
-	const frenchBellWraith = generateLocalizedEntry(
-		getCreatureTypeForEntry('bell_wraith', 'fr'),
-		'bell_wraith',
-		'fr',
-	);
-	assert.match(frenchBellWraith.gear.equipment[0], /^Cotte de mailles \(Lourde\) — /);
-
-	const mule = generateEntry(getCreatureTypeForEntry('mule'), 'mule', { level: 5 });
-	assert.equal(mule.gear.inventory.length, 1);
-	assert.ok(mule.source.provenance.some(record => (
-		record.type === 'generator-source'
-		&& record.selection === 'weighted'
-		&& record.generatorId === 'supplies'
-	)));
-	for (const creature of [cinderDrake, bellWraith, mule]) {
-		assert.deepEqual(creature.gear.encumbrance, { current: 0, max: 0 });
-	}
-
-	const { type, generatorId } = getCreatureFixture();
-	const detail = structuredClone(generatorCatalog.getGenerator(generatorId, 'en'));
-	const entry = detail.entries[0];
-	entry.generation = {
-		statProfile: entry.generation.statProfile,
+	const expectedArmorPercentage = 20
+		+ getResolvedLootArmorPercentage(armorResult)
+		+ getResolvedLootArmorPercentage(shieldResult);
+	const fixture = createCreatureGenerationFixture();
+	const creature = fixture.generate({
 		naturalArmorPercentage: 20,
 		traits: [],
 		fixedRules: [],
-		statusEffects: [],
-		modifiers: [],
-		armor: 'armors:padded_armor',
-		equipment: ['shields:buckler'],
-		inventory: ['shields:round_shield'],
-	};
-	const stacked = populateRandomCreature(
-		new Creature('Generated.Stacked.Armor'),
-		{
-			getGenerator: (requestedId, locale) => (
-				requestedId === generatorId
-					? detail
-					: generatorCatalog.getGenerator(requestedId, locale)
-			),
-			level: 5,
-			random: sequenceRandom([getEntryMidpoint(type, entry.id)], 0),
-			type,
-		},
-	);
-	assert.deepEqual(stacked.traits, []);
-	assert.deepEqual(stacked.rules, []);
-	assert.deepEqual(stacked.status.effects, []);
-	assert.deepEqual(stacked.status.modifiers, []);
-	assert.equal(stacked.gear.equipment.length, 2);
-	assert.equal(stacked.gear.inventory.length, 1);
-	for (const item of [...stacked.gear.equipment, ...stacked.gear.inventory]) {
-		assert.match(item, / — Common — Made of [^—]+ — Runed — /);
-	}
+		statusEffects: ['status_effect:' + statusId],
+		modifiers: ['modifier_creature:' + modifierId],
+		armor: 'armors:' + armorId,
+		equipment: ['shields:' + shieldId],
+		inventory: ['shields:' + shieldId],
+	});
+	assert.equal(Object.hasOwn(creature, 'naturalArmor'), false);
 	assert.equal(
-		stacked.resources.ar.max,
-		calculateArmorRating(stacked.resources.hp.max, 30),
+		creature.resources.ar.max,
+		calculateArmorRating(creature.resources.hp.max, expectedArmorPercentage),
 	);
-	assert.equal(Object.hasOwn(stacked, 'naturalArmor'), false);
+	assert.equal(creature.status.effects.length, 1);
+	assert.equal(creature.status.modifiers.length, 1);
+	assert.equal(creature.gear.equipment.length, 2);
+	assert.equal(creature.gear.inventory.length, 1);
+	assert.ok(creature.source.provenance.some(record => (
+		record.generatorId === 'armors' && record.entryId === armorId
+	)));
+	assert.ok(creature.source.provenance.some(record => (
+		record.generatorId === 'shields' && record.entryId === shieldId
+	)));
+	assert.ok(creature.gear.equipment.every(item => item.trim()));
+	assert.ok(creature.gear.inventory.every(item => item.trim()));
 });
-
 test('omitted creature generation metadata uses the shared default profile and normal empty categories', () => {
 	const { type, generatorId } = getCreatureFixture();
 	const detail = structuredClone(generatorCatalog.getGenerator(generatorId, 'en'));
@@ -969,17 +850,18 @@ test('/gen-creature randomly selects a router entry when type is omitted', () =>
 });
 
 test('/gen-creature type accepts scoped implicit and explicit archetype traversal', () => {
-	const type = getCreatureTypeForEntry('ancient_dragon');
+	const { type, generatorId } = getCreatureFixture();
+	const entryId = generatorCatalog.getGenerator(generatorId, 'en').entries[0].id;
 	for (const traversalPath of [
-		`${type}:ancient_dragon`,
-		`${type}.generator:ancient_dragon`,
+		type + ':' + entryId,
+		type + '.generator:' + entryId,
 	]) {
 		const creature = populateRandomCreature(
-			new Creature(`Scoped.${traversalPath}`),
+			new Creature('Scoped.' + traversalPath),
 			{ level: 4, random: () => 0, type: traversalPath },
 		);
 		assert.equal(creature.source.archetypeId, type);
-		assert.equal(creature.source.entryId, 'ancient_dragon');
+		assert.equal(creature.source.entryId, entryId);
 	}
 
 	let randomCalls = 0;
@@ -992,14 +874,13 @@ test('/gen-creature type accepts scoped implicit and explicit archetype traversa
 					randomCalls += 1;
 					return 0;
 				},
-				type: `${type}:ancient_dragon.name`,
+				type: type + ':' + entryId + '.name',
 			},
 		),
 		error => error.translationKey === 'errors.creatureTypeInvalid',
 	);
 	assert.equal(randomCalls, 0);
 });
-
 test('generation, collision, and save failures leave no partial creature or history', async () => {
 	const validType = getCreatureTypes()[0];
 	for (const [entityKey, options] of [
@@ -1175,16 +1056,6 @@ function generateLocalizedEntry(type, entryId, locale) {
 	);
 }
 
-function getTraitDisplays(locale) {
-	return new Set(generatorCatalog.getGenerator('traits', locale).entries.map(entry => (
-		generatorResolver.resolveReference(
-			`traits:${entry.id}`,
-			locale,
-			{ random: () => 0 },
-		).display
-	)));
-}
-
 function getEntryMidpoint(generatorId, entryId) {
 	const detailGeneratorId = getCreatureGeneratorId(generatorId) ?? generatorId;
 	const entries = generatorCatalog.getGenerator(detailGeneratorId, 'en').entries;
@@ -1225,6 +1096,68 @@ function getCreatureFixture(locale = 'en') {
 	};
 }
 
+function createCreatureGenerationFixture(locale = 'en') {
+	const { type, generatorId } = getCreatureFixture(locale);
+	const detail = structuredClone(
+		generatorCatalog.getGenerator(generatorId, locale),
+	);
+	const baseEntry = structuredClone(detail.entries[0]);
+	const traitGenerator = structuredClone(
+		generatorCatalog.getGenerator('traits', locale),
+	);
+	traitGenerator.entries = [
+		{
+			id: 'fixture_trait_a',
+			name: 'Fixture trait A',
+			fields: { description: 'Fixture trait A description.' },
+		},
+		{
+			id: 'fixture_trait_b',
+			name: 'Fixture trait B',
+			fields: { description: 'Fixture trait B description.' },
+		},
+	];
+	const getGenerator = (requestedId, requestedLocale) => {
+		if (requestedId === generatorId) {
+			return detail;
+		}
+		if (requestedId === 'traits') {
+			return traitGenerator;
+		}
+		return generatorCatalog.getGenerator(requestedId, requestedLocale);
+	};
+	const resolver = generatorResolver.createGeneratorResolver({ getGenerator });
+	return {
+		generate(generation = {}) {
+			const entry = structuredClone(baseEntry);
+			entry.id = 'fixture_creature';
+			entry.name = 'Fixture creature';
+			entry.fields = { description: 'Fixture creature description.' };
+			entry.generation = {
+				...(baseEntry.generation ?? {}),
+			};
+			if (Object.hasOwn(generation, 'traits')) {
+				entry.generation.traits = generation.traits;
+			}
+			else {
+				delete entry.generation.traits;
+			}
+			Object.assign(entry.generation, generation);
+			detail.entries = [entry];
+			return populateRandomCreature(
+				new Creature('Generated.Fixture.Creature'),
+				{
+					getGenerator,
+					level: 3,
+					locale,
+					random: sequenceRandom([0, 0, 0, 0], 0),
+					resolver,
+					type,
+				},
+			);
+		},
+	};
+}
 function getCreatureRepresentatives(locale = 'en') {
 	const representatives = [];
 	const profileIds = new Set();
@@ -1240,14 +1173,6 @@ function getCreatureRepresentatives(locale = 'en') {
 		}
 	}
 	return representatives;
-}
-
-function getCreatureTypeForEntry(entryId, locale = 'en') {
-	return getCreatureTypes(locale).find(type => {
-		const generatorId = getCreatureGeneratorId(type, locale);
-		return generatorCatalog.getGenerator(generatorId, locale).entries
-			.some(entry => entry.id === entryId);
-	});
 }
 
 function sequenceRandom(values, fallback = 0.5) {

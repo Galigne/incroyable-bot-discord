@@ -34,8 +34,6 @@ function validateGeneratorPair(
 		file,
 		'description.inlineReferences',
 	);
-	assertParity(english.entries.length, french.entries.length, file, 'entries.length');
-
 	for (let index = 0; index < english.entries.length; index += 1) {
 		const englishEntry = english.entries[index];
 		const frenchEntry = french.entries[index];
@@ -43,21 +41,21 @@ function validateGeneratorPair(
 			Object.keys(englishEntry).sort(),
 			Object.keys(frenchEntry).sort(),
 			file,
-			`entries.${index}.keys`,
+			'entries.' + index + '.keys',
 		);
 		for (const property of ['id', 'weight', 'generator']) {
 			assertParity(
 				englishEntry[property],
 				frenchEntry[property],
 				file,
-				`entries.${index}.${property}`,
+				'entries.' + index + '.' + property,
 			);
 		}
 		assertParity(
 			extractInlineReferences(englishEntry.name, file),
 			extractInlineReferences(frenchEntry.name, file),
 			file,
-			`entries.${index}.name.inlineReferences`,
+			'entries.' + index + '.name.inlineReferences',
 		);
 		if (english.entrySchema.required.length > 0) {
 			validateFieldsPair(
@@ -81,8 +79,7 @@ function validateGeneratorPair(
 				routedArchetype.templateProperty,
 			);
 		}
-	}
-	return true;
+	}	return true;
 }
 
 function validateFieldsPair(

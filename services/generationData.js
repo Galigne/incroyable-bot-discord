@@ -5,6 +5,7 @@ const {
 	createStatProfileCandidate,
 } = require('./statProfileCatalog');
 const {
+	validateGeneratorApplicationContracts,
 	validateGeneratorRelationships,
 	validateRoutedArchetypeStatProfileRelationships,
 } = require('./generatorSchema');
@@ -67,6 +68,8 @@ function validateGenerationData({ generatorCatalog, statProfiles } = {}) {
 		generatorCatalog,
 		statProfiles,
 	);
+
+	validateGeneratorApplicationContracts(generatorCatalog);
 	return true;
 }
 

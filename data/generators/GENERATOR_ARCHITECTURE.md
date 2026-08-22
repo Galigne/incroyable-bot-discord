@@ -19,6 +19,10 @@ together, validates background/profile and creature/profile relationships, and
 replaces both active caches only after validation succeeds. Normal process
 startup instead initializes the generator catalog and statistical profiles through
 their existing loading behavior; it does not run that joint reload workflow.
+The production catalog is data, not a closed test fixture. Contributors may add, remove,
+rename, reorder, reweight, or rewrite ordinary entries and optional roots. Validation
+protects schema and localization parity plus the stable IDs and fields consumed by
+application code; it does not preserve the current roster or descriptive wording.
 
 Visibility controls entry points, not resolvability:
 
@@ -33,7 +37,9 @@ and `weakness` vocabularies. They are selected through the Aspects `/gen categor
 route rather than as separate initial roots, while their stable IDs remain available
 to inline references such as `{{ ability.name }}`, `{{ element.name }}`, and
 `{{ weakness.name }}`. Consumers must not interpret their current entries as closed
-mechanical enums.
+mechanical enums. The listed vocabularies are examples of the current production catalog,
+not mandatory roots or fixed content sets. Remove or replace them freely unless an
+explicit reference or application contract still requires the corresponding stable ID.
 
 These aspect vocabularies provide broadly reusable fantasy abilities, elements,
 weaknesses, and countermeasures. Weaknesses may reference the unrestricted internal
@@ -342,9 +348,10 @@ mechanical formulas.
 
 ## Other composed generators
 
-Public generators can compose ordinary concepts with inline references. The
-`loot`, `site`, and `group` roots are name-only routers over internal children;
-application workflows or fixed router entries follow those routes.
+Public generators can compose ordinary concepts with inline references.
+When present, public loot, site, group, and modifier roots contain localized top-level names
+plus direct top-level routes to internal children.
+Application workflows or fixed router entries follow those routes.
 `quest`, `rumor`, and `secret` entries combine these and other fixed or random
 concepts. These resolutions keep nested provenance but do not create or
 persist the referenced people, creatures, locations, or items.
