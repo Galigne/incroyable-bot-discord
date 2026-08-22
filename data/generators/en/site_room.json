@@ -205,7 +205,7 @@
       "name": "Trophy Gallery",
       "weight": 1,
       "fields": {
-        "description": "preserved beasts, captured banners, named weapons, and one living display of the following kind: {{ creature.generator.name }}."
+        "description": "preserved beasts, captured banners, a named weapon such as {{ weapons.name }}, and one display that is still alive."
       }
     },
     {

@@ -24,7 +24,7 @@
     },
     {
       "id": "heavy_rain",
-      "name": "{{ weather:heavy_rain.name }}",
+      "name": "Pluie battante",
       "weight": 2,
       "fields": {
         "description": "{{ weather:heavy_rain.description }}"
@@ -32,14 +32,14 @@
     },
     {
       "id": "thunderstorm",
-      "name": "{{ weather:thunderstorm.name }}",
+      "name": "Orage violent",
       "fields": {
         "description": "{{ weather:thunderstorm.description }}"
       }
     },
     {
       "id": "dense_fog",
-      "name": "{{ weather:dense_fog.name }}",
+      "name": "Brouillard dense",
       "weight": 2,
       "fields": {
         "description": "{{ weather:dense_fog.description }}"
@@ -47,7 +47,7 @@
     },
     {
       "id": "strong_winds",
-      "name": "{{ weather:strong_winds.name }}",
+      "name": "Vents violents",
       "weight": 2,
       "fields": {
         "description": "{{ weather:strong_winds.description }}"
@@ -55,42 +55,42 @@
     },
     {
       "id": "heavy_snow",
-      "name": "{{ weather:heavy_snow.name }}",
+      "name": "Fortes chutes de neige",
       "fields": {
         "description": "{{ weather:heavy_snow.description }}"
       }
     },
     {
       "id": "cold_snap",
-      "name": "{{ weather:cold_snap.name }}",
+      "name": "Vague de froid",
       "fields": {
         "description": "{{ weather:cold_snap.description }}"
       }
     },
     {
       "id": "heat_wave",
-      "name": "{{ weather:heat_wave.name }}",
+      "name": "Canicule",
       "fields": {
         "description": "{{ weather:heat_wave.description }}"
       }
     },
     {
       "id": "hailstorm",
-      "name": "{{ weather:hailstorm.name }}",
+      "name": "Averse de grêle",
       "fields": {
         "description": "{{ weather:hailstorm.description }}"
       }
     },
     {
       "id": "dust_storm",
-      "name": "{{ weather:dust_storm.name }}",
+      "name": "Tempête de poussière",
       "fields": {
         "description": "{{ weather:dust_storm.description }}"
       }
     },
     {
       "id": "ashfall",
-      "name": "{{ weather:ashfall.name }}",
+      "name": "Pluie de cendres",
       "fields": {
         "description": "{{ weather:ashfall.description }}"
       }

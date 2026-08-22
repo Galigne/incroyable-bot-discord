@@ -47,9 +47,10 @@ request or purchase. Consumers should normally select only their names with
 
 The standalone internal `weather` generator is a structured helper rather than a
 public category or router. It owns reusable localized condition names and practical
-descriptions. Site modifiers reuse fixed `weather` fields, while composed prose that
-needs one coherent random condition should use one complete `{{ weather }}`
-reference instead of resolving its random name and description separately.
+descriptions. Site modifiers keep static localized names and reuse fixed `weather`
+descriptions, while composed prose that needs one coherent random condition should
+use one complete `{{ weather }}` reference instead of resolving its random name and
+description separately.
 
 ## Generator document
 

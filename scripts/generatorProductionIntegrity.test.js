@@ -7,6 +7,9 @@ const {
 	validateGeneratorApplicationContracts,
 } = require('../services/generatorSchema');
 const {
+	extractInlineReferences,
+} = require('../services/generatorSchema/referenceValidation');
+const {
 	createStatProfileCandidate,
 } = require('../services/statProfileCatalog');
 const {
@@ -26,6 +29,134 @@ test('production catalogs load as complete localized candidates under the applic
 		[...catalogs.get('en').keys()],
 		[...catalogs.get('fr').keys()],
 	);
+});
+
+function getProductionEntry(generatorId, entryId, locale) {
+	const entry = generatorCatalog.getGenerator(generatorId, locale).entries
+		.find(candidate => candidate.id === entryId);
+	assert.ok(entry, `${locale}:${generatorId}:${entryId}`);
+	return entry;
+}
+
+test('reviewed generator compositions preserve their intended roles', () => {
+	const expectedMonsterHunterDescriptions = {
+		en: 'Specializes in {{ ability:hunting.name }} focused on the following creature: {{ creature:monster.generator.name }}. Gains +2 when following it using {{ ability:tracking.name }}, identifying it, recalling its weaknesses, or preparing to face it.',
+		fr: 'Se spécialise dans une forme de {{ ability:hunting.name }} visant la créature suivante : {{ creature:monster.generator.name }}. Bénéficie de +2 pour la suivre grâce au {{ ability:tracking.name }}, l’identifier, se rappeler ses faiblesses ou préparer un affrontement contre elle.',
+	};
+
+	for (const locale of ['en', 'fr']) {
+		const monsterHunter = getProductionEntry('talents', 'monster_hunter', locale);
+		assert.equal(
+			monsterHunter.fields.description,
+			expectedMonsterHunterDescriptions[locale],
+		);
+		assert.deepEqual(
+			extractInlineReferences(monsterHunter.fields.description),
+			[
+				'ability:hunting.name',
+				'creature:monster.generator.name',
+				'ability:tracking.name',
+			],
+		);
+
+		const trophyGallery = getProductionEntry('room', 'trophy_gallery', locale);
+		assert.deepEqual(
+			extractInlineReferences(trophyGallery.fields.description),
+			['weapons.name'],
+		);
+	}
+
+	const elementalEssence = getProductionEntry('material', 'elemental_essence', 'fr');
+	assert.equal(elementalEssence.name, 'Essence : {{ element.name }}');
+	assert.deepEqual(extractInlineReferences(elementalEssence.name), ['element.name']);
+	assert.deepEqual(
+		extractInlineReferences(elementalEssence.fields.description),
+		[],
+	);
+
+	const wallClimber = getProductionEntry('traits', 'wall_climber', 'fr');
+	assert.equal(
+		wallClimber.fields.description,
+		'Peut se déplacer sur des surfaces rugueuses très inclinées ou verticales à la moitié de sa vitesse normale sans devoir effectuer un jet ordinaire d’{{ ability:climbing.name }}.',
+	);
+	assert.deepEqual(
+		extractInlineReferences(wallClimber.fields.description),
+		['ability:climbing.name'],
+	);
+});
+
+test('site weather modifiers keep static names and reuse only fixed descriptions', () => {
+	const expectedNames = {
+		en: {
+			heavy_rain: 'Heavy Rain',
+			thunderstorm: 'Thunderstorm',
+			dense_fog: 'Dense Fog',
+			strong_winds: 'Strong Winds',
+			heavy_snow: 'Heavy Snow',
+			cold_snap: 'Cold Snap',
+			heat_wave: 'Heat Wave',
+			hailstorm: 'Hailstorm',
+			dust_storm: 'Dust Storm',
+			ashfall: 'Ashfall',
+		},
+		fr: {
+			heavy_rain: 'Pluie battante',
+			thunderstorm: 'Orage violent',
+			dense_fog: 'Brouillard dense',
+			strong_winds: 'Vents violents',
+			heavy_snow: 'Fortes chutes de neige',
+			cold_snap: 'Vague de froid',
+			heat_wave: 'Canicule',
+			hailstorm: 'Averse de grêle',
+			dust_storm: 'Tempête de poussière',
+			ashfall: 'Pluie de cendres',
+		},
+	};
+
+	for (const locale of ['en', 'fr']) {
+		for (const [entryId, localizedName] of Object.entries(expectedNames[locale])) {
+			const modifier = getProductionEntry(
+				'modifier_site_all',
+				entryId,
+				locale,
+			);
+			assert.equal(modifier.name, localizedName);
+			assert.deepEqual(extractInlineReferences(modifier.name), []);
+			assert.deepEqual(
+				extractInlineReferences(modifier.fields.description),
+				[`weather:${entryId}.description`],
+			);
+
+			const resolved = generatorResolver.resolveReference(
+				`modifier_site_all:${entryId}`,
+				locale,
+				{ random: () => 0.999999 },
+			);
+			assert.deepEqual(
+				resolved.provenance
+					.filter(record => record.generatorId === 'weather')
+					.map(record => record.entryId),
+				[entryId],
+			);
+		}
+
+		const gatheringStorm = getProductionEntry('event', 'gathering_storm', locale);
+		assert.deepEqual(
+			extractInlineReferences(gatheringStorm.fields.description),
+			['weather'],
+		);
+		const resolvedStorm = generatorResolver.resolveReference(
+			'event:gathering_storm',
+			locale,
+			{ random: () => 0.999999 },
+		);
+		assert.deepEqual(
+			resolvedStorm.provenance
+				.filter(record => record.generatorId === 'weather')
+				.map(record => record.entryId),
+			['ashfall'],
+		);
+	}
 });
 
 test('every production entry resolves without leaking templates or invalid provenance', () => {

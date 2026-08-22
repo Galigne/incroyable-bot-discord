@@ -257,7 +257,7 @@
     },
     {
       "id": "elemental_essence",
-      "name": "Essence de {{ element.name }}",
+      "name": "Essence : {{ element.name }}",
       "fields": {
         "description": "Une substance instable qui conserve les propriétés de l’élément naturel ou magique auquel elle est liée."
       }

@@ -24,7 +24,7 @@
     },
     {
       "id": "heavy_rain",
-      "name": "{{ weather:heavy_rain.name }}",
+      "name": "Heavy Rain",
       "weight": 2,
       "fields": {
         "description": "{{ weather:heavy_rain.description }}"
@@ -32,14 +32,14 @@
     },
     {
       "id": "thunderstorm",
-      "name": "{{ weather:thunderstorm.name }}",
+      "name": "Thunderstorm",
       "fields": {
         "description": "{{ weather:thunderstorm.description }}"
       }
     },
     {
       "id": "dense_fog",
-      "name": "{{ weather:dense_fog.name }}",
+      "name": "Dense Fog",
       "weight": 2,
       "fields": {
         "description": "{{ weather:dense_fog.description }}"
@@ -47,7 +47,7 @@
     },
     {
       "id": "strong_winds",
-      "name": "{{ weather:strong_winds.name }}",
+      "name": "Strong Winds",
       "weight": 2,
       "fields": {
         "description": "{{ weather:strong_winds.description }}"
@@ -55,42 +55,42 @@
     },
     {
       "id": "heavy_snow",
-      "name": "{{ weather:heavy_snow.name }}",
+      "name": "Heavy Snow",
       "fields": {
         "description": "{{ weather:heavy_snow.description }}"
       }
     },
     {
       "id": "cold_snap",
-      "name": "{{ weather:cold_snap.name }}",
+      "name": "Cold Snap",
       "fields": {
         "description": "{{ weather:cold_snap.description }}"
       }
     },
     {
       "id": "heat_wave",
-      "name": "{{ weather:heat_wave.name }}",
+      "name": "Heat Wave",
       "fields": {
         "description": "{{ weather:heat_wave.description }}"
       }
     },
     {
       "id": "hailstorm",
-      "name": "{{ weather:hailstorm.name }}",
+      "name": "Hailstorm",
       "fields": {
         "description": "{{ weather:hailstorm.description }}"
       }
     },
     {
       "id": "dust_storm",
-      "name": "{{ weather:dust_storm.name }}",
+      "name": "Dust Storm",
       "fields": {
         "description": "{{ weather:dust_storm.description }}"
       }
     },
     {
       "id": "ashfall",
-      "name": "{{ weather:ashfall.name }}",
+      "name": "Ashfall",
       "fields": {
         "description": "{{ weather:ashfall.description }}"
       }

@@ -351,7 +351,7 @@
       "id": "monster_hunter",
       "name": "Chasseur de monstres",
       "fields": {
-        "description": "Se spécialise en {{ ability:hunting.name }} contre la créature suivante : {{ creature:monster.generator.name }}. Bénéficie de +2 en {{ ability:tracking.name }} pour la suivre ou l’identifier, se rappeler ses faiblesses ou préparer un affrontement contre elle."
+        "description": "Se spécialise dans une forme de {{ ability:hunting.name }} visant la créature suivante : {{ creature:monster.generator.name }}. Bénéficie de +2 pour la suivre grâce au {{ ability:tracking.name }}, l’identifier, se rappeler ses faiblesses ou préparer un affrontement contre elle."
       }
     },
     {

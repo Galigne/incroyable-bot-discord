@@ -351,7 +351,7 @@
       "id": "monster_hunter",
       "name": "Monster Hunter",
       "fields": {
-        "description": "Specializes in {{ ability:hunting.name }} {{ creature:monster.generator.name }} and gains +2 to {{ ability:tracking.name }} when following or identifying one, recalling its weaknesses, or preparing to face it."
+        "description": "Specializes in {{ ability:hunting.name }} focused on the following creature: {{ creature:monster.generator.name }}. Gains +2 when following it using {{ ability:tracking.name }}, identifying it, recalling its weaknesses, or preparing to face it."
       }
     },
     {

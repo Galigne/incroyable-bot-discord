@@ -208,7 +208,7 @@
       "id": "wall_climber",
       "name": "Grimpeur de parois",
       "fields": {
-        "description": "Peut se déplacer sur des surfaces rugueuses très inclinées ou verticales à la moitié de sa vitesse normale sans devoir effectuer le jet suivant : {{ ability:climbing.name }}."
+        "description": "Peut se déplacer sur des surfaces rugueuses très inclinées ou verticales à la moitié de sa vitesse normale sans devoir effectuer un jet ordinaire d’{{ ability:climbing.name }}."
       }
     },
     {

@@ -205,7 +205,7 @@
       "name": "Galerie des trophées",
       "weight": 1,
       "fields": {
-        "description": "bêtes naturalisées, bannières prises à l’ennemi, armes célèbres et pièce exposée encore vivante du type suivant : {{ creature.generator.name }}."
+        "description": "bêtes naturalisées, bannières prises à l’ennemi, une arme célèbre telle que {{ weapons.name }} et une pièce exposée encore vivante."
       }
     },
     {

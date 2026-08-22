@@ -363,10 +363,11 @@ activity, while `{{ service.name }}` supplies work that a person or organization
 could request or purchase.
 
 The structured internal `weather` generator owns reusable condition names and
-practical effects. `modifier_site_all` keeps non-weather concepts directly authored
-but reuses fixed weather names and descriptions from that catalog. `Gathering Storm`
-embeds one complete random `{{ weather }}` result, so the displayed identity and its
-effects always come from the same selection.
+practical effects. `modifier_site_all` keeps every modifier name static, keeps
+non-weather concepts directly authored, and reuses only fixed weather descriptions
+from that catalog. `Gathering Storm` embeds one complete random `{{ weather }}`
+result, so the displayed identity and its effects always come from the same
+selection.
 
 Consumables reuse the internal `ability` and public `affliction` generators for
 broad ability potions and specialized remedies. Supplies and curios likewise reuse
