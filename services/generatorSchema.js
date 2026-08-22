@@ -32,35 +32,71 @@ const {
 } = require('./generatorSchema/assertions');
 
 const CORE_GENERATOR_CONTRACTS = Object.freeze({
-	name: { visibility: 'public', required: ['first_name', 'last_name'], minimumEntries: 1 },
+	name: {
+		visibility: 'public',
+		fields: { first_name: 'string', last_name: 'string' },
+		minimumEntries: 1,
+	},
 	race: {
 		visibility: 'public',
-		required: ['description', 'skill_bonus', 'physical_ability'],
+		fields: {
+			description: 'string',
+			skill_bonus: 'string',
+			physical_ability: 'string',
+		},
 		minimumEntries: 1,
 	},
-	personality: { visibility: 'public', required: ['description'], minimumEntries: 2 },
-	rules: { visibility: 'public', required: ['description'], minimumEntries: 2 },
-	talents: { visibility: 'public', required: ['description'], minimumEntries: 4 },
-	status_effect: { visibility: 'public', required: ['description'], minimumEntries: 1 },
+	personality: {
+		visibility: 'public',
+		fields: { description: 'string' },
+		minimumEntries: 2,
+	},
+	rules: {
+		visibility: 'public',
+		fields: { description: 'string' },
+		minimumEntries: 2,
+	},
+	talents: {
+		visibility: 'public',
+		fields: { description: 'string' },
+		minimumEntries: 4,
+	},
+	status_effect: {
+		visibility: 'public',
+		fields: { description: 'string' },
+		minimumEntries: 1,
+	},
 	physical_description: {
 		visibility: 'internal',
-		required: ['description'],
+		fields: { description: 'string' },
 		minimumEntries: 1,
 	},
-	armors: { visibility: 'internal', required: ['type', 'description'], minimumEntries: 1 },
-	weapons: { visibility: 'internal', required: ['description'], minimumEntries: 1 },
-	shields: { visibility: 'internal', required: ['description'], minimumEntries: 1 },
+	armors: {
+		visibility: 'internal',
+		fields: { type: 'string', description: 'string' },
+		minimumEntries: 1,
+	},
+	weapons: {
+		visibility: 'internal',
+		fields: { description: 'string' },
+		minimumEntries: 2,
+	},
+	shields: {
+		visibility: 'internal',
+		fields: { description: 'string' },
+		minimumEntries: 2,
+	},
 	modifier_character: {
 		visibility: 'internal',
-		required: ['description'],
+		fields: { description: 'string' },
 		minimumEntries: 1,
 	},
 	modifier_creature: {
 		visibility: 'internal',
-		required: ['description'],
+		fields: { description: 'string' },
 		minimumEntries: 1,
 	},
-	modifier_rarity: { visibility: 'internal', required: [], minimumEntries: 1 },
+	modifier_rarity: { visibility: 'internal', fields: {}, minimumEntries: 1 },
 });
 
 const ROUTER_CONTRACTS = Object.freeze([
@@ -92,19 +128,13 @@ function validateGeneratorApplicationContracts(catalogs) {
 
 function validateCoreGenerator(catalog, locale, generatorId, contract) {
 	const generator = requireGenerator(catalog, locale, generatorId, contract.visibility);
-	if (
-		JSON.stringify(generator.entrySchema.required)
-			!== JSON.stringify(contract.required)
-		|| generator.entries.length < contract.minimumEntries
-	) {
+	if (generator.entries.length < contract.minimumEntries) {
 		throw applicationContractError(
 			'INVALID_GENERATOR_APPLICATION_SCHEMA',
 			`${locale}:${generatorId} does not provide the required application schema.`,
 		);
 	}
-	if (generatorId !== 'armors') {
-		assertStringFields(generator, locale);
-	}
+	assertApplicationFields(generator, locale, contract.fields);
 }
 
 function validateRouter(catalog, locale, contract) {
@@ -158,15 +188,20 @@ function validateRarityGenerator(catalog, locale) {
 	}
 }
 
-function assertStringFields(generator, locale) {
+function assertApplicationFields(generator, locale, fields) {
 	for (const entry of generator.entries) {
-		if (Object.values(entry.fields ?? {}).some(value => (
-			typeof value !== 'string' || !value.trim()
-		))) {
-			throw applicationContractError(
-				'INVALID_GENERATOR_APPLICATION_TEXT',
-				`${locale}:${generator.id}:${entry.id} contains a non-text application field.`,
-			);
+		for (const [field, expectedType] of Object.entries(fields)) {
+			const value = entry.fields?.[field];
+			if (
+				!Object.hasOwn(entry.fields ?? {}, field)
+				|| typeof value !== expectedType
+				|| (expectedType === 'string' && !value.trim())
+			) {
+				throw applicationContractError(
+					'INVALID_GENERATOR_APPLICATION_FIELDS',
+					`${locale}:${generator.id}:${entry.id} is missing a valid ${field} field.`,
+				);
+			}
 		}
 	}
 }

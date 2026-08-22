@@ -34,6 +34,12 @@ function validateGeneratorPair(
 		file,
 		'description.inlineReferences',
 	);
+	assertParity(
+		english.entries.length,
+		french.entries.length,
+		file,
+		'entries.length',
+	);
 	for (let index = 0; index < english.entries.length; index += 1) {
 		const englishEntry = english.entries[index];
 		const frenchEntry = french.entries[index];
@@ -79,7 +85,8 @@ function validateGeneratorPair(
 				routedArchetype.templateProperty,
 			);
 		}
-	}	return true;
+	}
+	return true;
 }
 
 function validateFieldsPair(

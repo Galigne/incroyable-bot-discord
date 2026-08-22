@@ -303,6 +303,14 @@ test('application contracts allow ordinary content edits and optional generator 
 	]));
 	for (const [locale, catalog] of catalogs) {
 		const names = catalog.get('name');
+		names.entrySchema.required.push('contributor_flag', 'source_rank');
+		for (const entry of names.entries) {
+			entry.fields.contributor_flag = true;
+			entry.fields.source_rank = 7;
+		}
+		const schemaCandidate = structuredClone(names);
+		delete schemaCandidate.locale;
+		validateGeneratorDefinition(schemaCandidate, `${locale}/name.json`);
 		names.entries.reverse();
 		names.entries[0].name = locale === 'en'
 			? 'Contributor-defined name'
@@ -312,6 +320,35 @@ test('application contracts allow ordinary content edits and optional generator 
 	}
 	assert.doesNotThrow(() => validateGeneratorApplicationContracts(catalogs));
 });
+
+test('generator locale parity rejects mismatched entry counts with a parity error', () => {
+	const english = createTextGenerator();
+	const french = structuredClone(english);
+	french.entries.push({ id: 'storm', name: 'Une tempête arrive.' });
+	assert.throws(
+		() => validateGeneratorPair(english, french, 'weather.json'),
+		error => error.code === 'GENERATOR_LOCALE_PARITY_MISMATCH',
+	);
+});
+
+test('application contracts require two entries for duplicate main equipment selection', () => {
+	for (const generatorId of ['weapons', 'shields']) {
+		const production = generatorCatalog.createGeneratorCatalogCandidate();
+		const catalogs = new Map([...production].map(([locale, catalog]) => [
+			locale,
+			new Map([...catalog].map(([id, generator]) => [id, structuredClone(generator)])),
+		]));
+		for (const catalog of catalogs.values()) {
+			catalog.get(generatorId).entries = catalog.get(generatorId).entries.slice(0, 1);
+		}
+		assert.throws(
+			() => validateGeneratorApplicationContracts(catalogs),
+			error => error.code === 'INVALID_GENERATOR_APPLICATION_SCHEMA',
+			`${generatorId} should fail its minimum-entry contract`,
+		);
+	}
+});
+
 test('production category children follow the documented recursive filename convention', async () => {
 	const generatorRoot = path.join(__dirname, '..', 'data', 'generators');
 	const routerIds = generatorCatalog.listGenerators('en', { visibility: 'all' })
