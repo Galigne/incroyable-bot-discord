@@ -13,7 +13,7 @@
       "name": "Athlete",
       "weight": 3,
       "fields": {
-        "description": "+1 to physical actions involving sustained movement, climbing, or jumping."
+        "description": "+1 to physical actions involving sustained movement, {{ ability:climbing.name }}, or jumping."
       }
     },
     {
@@ -29,7 +29,7 @@
       "name": "Silver Tongue",
       "weight": 3,
       "fields": {
-        "description": "+1 to persuasion when the character has time to explain their position."
+        "description": "+1 to {{ ability:persuasion.name }} when the character has time to explain their position."
       }
     },
     {
@@ -61,7 +61,7 @@
       "name": "Bodybuilder",
       "weight": 2,
       "fields": {
-        "description": "+1 to actions based on raw Strength."
+        "description": "+1 to actions based on raw {{ ability:strength.name }}."
       }
     },
     {
@@ -69,7 +69,7 @@
       "name": "Politician",
       "weight": 2,
       "fields": {
-        "description": "+2 to Charisma during formal negotiations and political discussions."
+        "description": "+2 to {{ ability:charisma.name }} during formal negotiations and political discussions."
       }
     },
     {
@@ -141,7 +141,7 @@
       "name": "Sailor",
       "weight": 2,
       "fields": {
-        "description": "+2 to navigation, rigging, and balance aboard a vessel."
+        "description": "+2 to {{ ability:navigation.name }}, rigging, and balance aboard a vessel."
       }
     },
     {
@@ -157,7 +157,7 @@
       "name": "Unshakable",
       "weight": 2,
       "fields": {
-        "description": "+1 to resist fear, intimidation, and supernatural dread."
+        "description": "+1 to resist fear, {{ ability:intimidation.name }}, and supernatural dread."
       }
     },
     {
@@ -256,7 +256,7 @@
       "id": "burglar",
       "name": "Burglar",
       "fields": {
-        "description": "+2 to Dexterity actions for quietly entering, crossing, or leaving a secured building."
+        "description": "+2 to {{ ability:dexterity.name }} actions for quietly entering, crossing, or leaving a secured building."
       }
     },
     {
@@ -286,7 +286,7 @@
       "id": "alchemist",
       "name": "Alchemist",
       "fields": {
-        "description": "+2 to Intelligence actions for identifying, preparing, or safely handling alchemical substances."
+        "description": "+2 to {{ ability:intelligence.name }} actions for identifying, preparing, or safely handling alchemical substances."
       }
     },
     {
@@ -302,35 +302,35 @@
       "name": "Acrobat",
       "weight": 2,
       "fields": {
-        "description": "+2 to Dexterity actions involving balance, tumbling, or acrobatic movement."
+        "description": "+2 to {{ ability:dexterity.name }} actions involving balance, tumbling, or acrobatic movement."
       }
     },
     {
       "id": "investigator",
       "name": "Investigator",
       "fields": {
-        "description": "+2 to Perception actions when examining a scene for physical evidence."
+        "description": "+2 to {{ ability:perception.name }} actions when examining a scene for physical evidence."
       }
     },
     {
       "id": "commander",
       "name": "Commander",
       "fields": {
-        "description": "+1 to Charisma actions made to coordinate a willing group under immediate pressure."
+        "description": "+1 to {{ ability:charisma.name }} actions made to coordinate a willing group under immediate pressure."
       }
     },
     {
       "id": "impersonator",
       "name": "Actor and Impersonator",
       "fields": {
-        "description": "+2 to Charisma actions when performing or imitating a person studied in advance."
+        "description": "+2 to {{ ability:charisma.name }} actions when performing or imitating a person studied in advance."
       }
     },
     {
       "id": "historian",
       "name": "Historian",
       "fields": {
-        "description": "+2 to Intelligence actions involving historical knowledge."
+        "description": "+2 to {{ ability:intelligence.name }} actions involving historical knowledge."
       }
     },
     {
@@ -351,7 +351,7 @@
       "id": "monster_hunter",
       "name": "Monster Hunter",
       "fields": {
-        "description": "Specializes in hunting {{ creature:monster.generator.name }} and gains +2 when tracking or identifying one, recalling its weaknesses, or preparing to face it."
+        "description": "Specializes in {{ ability:hunting.name }} {{ creature:monster.generator.name }} and gains +2 to {{ ability:tracking.name }} when following or identifying one, recalling its weaknesses, or preparing to face it."
       }
     },
     {
@@ -365,14 +365,14 @@
       "id": "rider",
       "name": "Rider",
       "fields": {
-        "description": "+2 to relevant Animal Handling, control, and balance actions while mounted."
+        "description": "+2 to relevant {{ ability:animal_handling.name }}, control, and balance actions while mounted."
       }
     },
     {
       "id": "ghost_step",
       "name": "Ghost Step",
       "fields": {
-        "description": "+2 to Stealth while moving cautiously rather than rushing."
+        "description": "+2 to {{ ability:stealth.name }} while moving cautiously rather than rushing."
       }
     },
     {

@@ -29,7 +29,7 @@
       "name": "Ébranlé",
       "weight": 3,
       "fields": {
-        "description": "subit un malus de -1 contre le prochain effet de peur ou d’intimidation."
+        "description": "subit un malus de -1 contre le prochain effet de peur ou d’{{ ability:intimidation.name }}."
       }
     },
     {
@@ -53,7 +53,7 @@
       "name": "Transi",
       "weight": 2,
       "fields": {
-        "description": "les déplacements et les actions fondées sur la Vitesse sont réduits jusqu’au réchauffement."
+        "description": "les déplacements et les actions fondées sur la {{ ability:speed.name }} sont réduits jusqu’au réchauffement."
       }
     },
     {
@@ -77,7 +77,7 @@
       "name": "Empoisonné",
       "weight": 2,
       "fields": {
-        "description": "doit réussir des résistances fondées sur la Constitution à mesure que le poison progresse."
+        "description": "doit réussir des résistances fondées sur la {{ ability:constitution.name }} à mesure que le poison progresse."
       }
     },
     {
@@ -93,7 +93,7 @@
       "name": "Affaibli",
       "weight": 2,
       "fields": {
-        "description": "les actions fondées sur la Force subissent un malus."
+        "description": "les actions fondées sur la {{ ability:strength.name }} subissent un malus."
       }
     },
     {
@@ -287,7 +287,7 @@
       "id": "hasted",
       "name": "Accéléré",
       "fields": {
-        "description": "Les déplacements et les actions fondées sur la Vitesse sont temporairement améliorés jusqu’à la fin de l’effet."
+        "description": "Les déplacements et les actions fondées sur la {{ ability:speed.name }} sont temporairement améliorés jusqu’à la fin de l’effet."
       }
     },
     {

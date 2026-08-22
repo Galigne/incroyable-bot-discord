@@ -13,7 +13,7 @@
       "name": "Buried Temple",
       "weight": 3,
       "fields": {
-        "description": "collapsed sacred chambers surrounding a sealed altar that still receives offerings."
+        "description": "collapsed sacred chambers of {{ religion.name }} surrounding a sealed altar that still receives offerings."
       }
     },
     {
@@ -37,7 +37,7 @@
       "name": "Ancient Crypt",
       "weight": 3,
       "fields": {
-        "description": "family tombs, funerary traps, ancestral records, and disturbed sealed chambers."
+        "description": "family tombs and ancestral records guarded by the following funerary trap: {{ trap.name }}; several sealed chambers have been disturbed."
       }
     },
     {
@@ -85,7 +85,7 @@
       "name": "Volcanic Shrine",
       "weight": 2,
       "fields": {
-        "description": "heat-blasted tunnels, sacrificial bridges, lava channels, and fireproof guardians."
+        "description": "a volcanic shrine associated with {{ religion.name }}, containing heat-blasted tunnels, sacrificial bridges, lava channels, and fireproof guardians."
       }
     },
     {
@@ -101,7 +101,7 @@
       "name": "Cult Sanctuary",
       "weight": 2,
       "fields": {
-        "description": "disguised meeting rooms descending into ritual chambers and an unfinished summoning site."
+        "description": "a splinter cult devoted to {{ religion.name }} uses disguised meeting rooms descending into ritual chambers and an unfinished summoning site."
       }
     },
     {
@@ -164,7 +164,7 @@
       "id": "forgotten_ruins",
       "name": "Forgotten Ruins",
       "fields": {
-        "description": "Unstable remains of an abandoned domain, still protected by traps, guardians, or oaths."
+        "description": "Unstable remains of an abandoned domain, still protected by the following trap: {{ trap.name }}, as well as guardians or oaths."
       }
     },
     {
@@ -213,7 +213,7 @@
       "id": "ruined_sanctuary",
       "name": "Ruined Sanctuary",
       "fields": {
-        "description": "An abandoned chapel or temple whose rites still produce effects without an officiant."
+        "description": "An abandoned chapel or temple of {{ religion.name }} whose rites still produce effects without an officiant."
       }
     }
   ],

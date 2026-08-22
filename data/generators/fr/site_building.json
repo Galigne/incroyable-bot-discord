@@ -37,7 +37,7 @@
       "name": "Temple",
       "weight": 3,
       "fields": {
-        "description": "sanctuaire public comprenant un autel, une cuisine caritative, des archives et une crypte à l’accès restreint."
+        "description": "sanctuaire public consacré à la religion suivante : {{ religion.name }} ; il comprend un autel, une cuisine caritative, des archives et une crypte à l’accès restreint."
       }
     },
     {
@@ -45,7 +45,7 @@
       "name": "Apothicairerie",
       "weight": 2,
       "fields": {
-        "description": "étagères odorantes chargées de remèdes, de poisons, de créatures conservées et d’expériences mal étiquetées."
+        "description": "Des étagères odorantes portent un remède censé traiter l’affliction suivante : {{ affliction.name }} ; elles contiennent aussi des poisons, des créatures conservées et des expériences mal étiquetées."
       }
     },
     {
@@ -168,7 +168,7 @@
       "id": "armory",
       "name": "Armurerie",
       "fields": {
-        "description": "Un atelier sécurisé vend et répare des armes, mais dissimule l’origine d’une commande prestigieuse."
+        "description": "Un atelier sécurisé vend et répare des armes du type suivant : {{ weapons.name }} ; il dissimule aussi l’origine d’une commande prestigieuse."
       }
     },
     {
@@ -252,14 +252,14 @@
       "id": "church",
       "name": "Église",
       "fields": {
-        "description": "Une communauté religieuse active entretient un lieu de culte dont la crypte est antérieure à la ville."
+        "description": "Une communauté active entretient un lieu de culte dont la crypte est antérieure à la ville. Elle suit la religion suivante : {{ religion.name }}."
       }
     },
     {
       "id": "cathedral",
       "name": "Cathédrale",
       "fields": {
-        "description": "Une vaste institution spirituelle et politique conserve des reliques jalousement gardées."
+        "description": "Une vaste institution spirituelle et politique conserve des reliques jalousement gardées. Elle est consacrée à la religion suivante : {{ religion.name }}."
       }
     },
     {
@@ -315,7 +315,7 @@
       "id": "secondhand_shop",
       "name": "Brocante",
       "fields": {
-        "description": "Des objets ordinaires côtoient des souvenirs volés et des reliques dont le vendeur ignore la véritable fonction."
+        "description": "Cette boutique mêle objets ordinaires, souvenirs volés et reliques ; le vendeur ignore notamment la véritable fonction de cette curiosité : {{ curio.name }}."
       }
     },
     {

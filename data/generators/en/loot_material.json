@@ -257,9 +257,9 @@
     },
     {
       "id": "elemental_essence",
-      "name": "Elemental Essence",
+      "name": "{{ element.name }} Essence",
       "fields": {
-        "description": "An unstable substance retaining properties of a natural or magical element."
+        "description": "An unstable substance retaining the properties of the natural or magical element bound within it."
       }
     },
     {

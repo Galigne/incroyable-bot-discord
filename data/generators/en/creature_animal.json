@@ -187,7 +187,7 @@
         "statProfile": "creature-animal-magic",
         "traits": [
           "{{ traits:amphibious }}",
-          "Weather Sense — +2 to Perception actions made to predict rain or severe weather during the next six hours."
+          "Weather Sense — +2 to {{ ability:perception.name }} actions made to predict rain or severe weather during the next six hours."
         ],
         "naturalArmorPercentage": 5
       }
@@ -404,7 +404,7 @@
       "generation": {
         "statProfile": "creature-animal-runner",
         "traits": [
-          "Nimble Hands — +2 to Dexterity actions made to grasp, steal, or manipulate small objects."
+          "Nimble Hands — +2 to {{ ability:dexterity.name }} actions made to grasp, steal, or manipulate small objects."
         ],
         "naturalArmorPercentage": 5
       }
@@ -523,7 +523,7 @@
         "traits": [
           "{{ traits:flight }}",
           "{{ traits:natural_weapons }}",
-          "Keen Sight — +2 to Perception actions that rely on vision at long range."
+          "Keen Sight — +2 to {{ ability:perception.name }} actions that rely on vision at long range."
         ],
         "naturalArmorPercentage": 5
       }
@@ -573,7 +573,7 @@
         "traits": [
           "{{ traits:amphibious }}",
           "{{ traits:aquatic_speed }}",
-          "Tree Feller — +2 to Strength actions made to gnaw through or move ordinary wood."
+          "Tree Feller — +2 to {{ ability:strength.name }} actions made to gnaw through or move ordinary wood."
         ],
         "naturalArmorPercentage": 10
       }

@@ -22,7 +22,7 @@
       "name": "Elf",
       "fields": {
         "description": "A long-lived people with keen senses, attached to the memory of places and the distant consequences of decisions.",
-        "skill_bonus": "Careful perception of natural and magical details.",
+        "skill_bonus": "{{ ability:perception.name }} applied carefully to natural and magical details.",
         "physical_ability": "Effective twilight vision in low light."
       }
     },
@@ -31,7 +31,7 @@
       "name": "Dwarf",
       "fields": {
         "description": "A people of builders whose communities define status through craft mastery and one’s given word.",
-        "skill_bonus": "Crafting stone, metal, or mechanisms.",
+        "skill_bonus": "{{ ability:crafting.name }} with stone, metal, or mechanisms.",
         "physical_ability": "Stability: better resists impacts and forced movement."
       }
     },
@@ -40,7 +40,7 @@
       "name": "Orc",
       "fields": {
         "description": "A robust people organized around community ties, public challenges, and a strong oral tradition.",
-        "skill_bonus": "Intimidation or survival in hostile territory.",
+        "skill_bonus": "{{ ability:intimidation.name }} or {{ ability:survival.name }} in hostile territory.",
         "physical_ability": "Physical power during a brief, intense effort."
       }
     },
@@ -58,7 +58,7 @@
       "name": "Halfling",
       "fields": {
         "description": "Travelers and rural communities valuing hospitality, discretion, and shared stories.",
-        "skill_bonus": "Stealth in crowds or domestic settings.",
+        "skill_bonus": "{{ ability:stealth.name }} in crowds or domestic settings.",
         "physical_ability": "Quick footing: keeps balance more easily."
       }
     },
@@ -67,7 +67,7 @@
       "name": "Reptilian",
       "fields": {
         "description": "A scaled people adapted to heat, long stillness, and humid environments.",
-        "skill_bonus": "Tracking through marks, heat, and scent.",
+        "skill_bonus": "{{ ability:tracking.name }} through marks, heat, and scent.",
         "physical_ability": "Natural scales provide light protection."
       }
     },
@@ -76,7 +76,7 @@
       "name": "Fishfolk",
       "fields": {
         "description": "An amphibious people living among coastal communities, reefs, and partly submerged cities.",
-        "skill_bonus": "Navigation, fishing, and knowledge of currents.",
+        "skill_bonus": "{{ ability:navigation.name }}, {{ ability:fishing.name }}, and knowledge of currents.",
         "physical_ability": "Aquatic breathing and natural underwater movement."
       }
     },
@@ -130,7 +130,7 @@
       "name": "Giant",
       "fields": {
         "description": "A very large people whose homes, tools, and stories use an unusual scale.",
-        "skill_bonus": "Strength work and knowledge of monumental terrain.",
+        "skill_bonus": "Work based on {{ ability:strength.name }} and knowledge of monumental terrain.",
         "physical_ability": "Far greater reach and carrying capacity."
       }
     },
@@ -139,7 +139,7 @@
       "name": "Centaur",
       "fields": {
         "description": "A nomadic people with humanoid torsos and quadrupedal bodies, adapted to open land and long travel.",
-        "skill_bonus": "Land travel, tracking, and mounted combat.",
+        "skill_bonus": "Land travel, {{ ability:tracking.name }}, and mounted combat.",
         "physical_ability": "Fast running on open terrain and great carrying capacity."
       }
     }

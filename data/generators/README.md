@@ -41,6 +41,12 @@ activities, and service entries as work that a person or organization could
 request or purchase. Consumers should normally select only their names with
 `{{ crime.name }}` or `{{ service.name }}`.
 
+The standalone internal `weather` generator is a structured helper rather than a
+public category or router. It owns reusable localized condition names and practical
+descriptions. Site modifiers reuse fixed `weather` fields, while composed prose that
+needs one coherent random condition should use one complete `{{ weather }}`
+reference instead of resolving its random name and description separately.
+
 ## Generator document
 
 Every file uses generator schema v4:

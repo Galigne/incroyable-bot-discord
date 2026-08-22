@@ -61,7 +61,7 @@
       "name": "Storeroom",
       "weight": 3,
       "fields": {
-        "description": "labeled crates, spare furniture, dust, and one item that clearly does not belong."
+        "description": "labeled crates, spare furniture, dust, and one object that clearly does not belong: {{ curio.name }}."
       }
     },
     {
@@ -117,7 +117,7 @@
       "name": "Armory",
       "weight": 2,
       "fields": {
-        "description": "maintained weapons, armor stands, issue records, and several conspicuous empty spaces."
+        "description": "maintained weapons, including {{ weapons.name }}; armor stands, issue records, and several conspicuous empty spaces."
       }
     },
     {
@@ -125,7 +125,7 @@
       "name": "Infirmary",
       "weight": 2,
       "fields": {
-        "description": "narrow beds, medical tools, medicine cabinets, and patient notes written in code."
+        "description": "narrow beds, medical tools, a treatment under study for {{ affliction.name }}, and patient notes written in code."
       }
     },
     {
@@ -133,7 +133,7 @@
       "name": "Chapel",
       "weight": 2,
       "fields": {
-        "description": "benches, sacred images, offerings, and a small private confessional passage."
+        "description": "benches, sacred images, and offerings dedicated to {{ religion.name }}, plus a small private confessional passage."
       }
     },
     {
@@ -173,7 +173,7 @@
       "name": "Treasury",
       "weight": 2,
       "fields": {
-        "description": "counted valuables, sealed chests, ownership records, and multiple layers of security."
+        "description": "counted valuables, including {{ valuables.name }}; sealed chests, ownership records, and multiple layers of security."
       }
     },
     {
@@ -205,7 +205,7 @@
       "name": "Trophy Gallery",
       "weight": 1,
       "fields": {
-        "description": "preserved beasts, captured banners, named weapons, and a display that is still alive."
+        "description": "preserved beasts, captured banners, named weapons, and one living display of the following kind: {{ creature.generator.name }}."
       }
     },
     {

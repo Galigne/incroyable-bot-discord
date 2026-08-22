@@ -13,7 +13,7 @@
       "name": "Athlète",
       "weight": 3,
       "fields": {
-        "description": "+1 aux actions physiques impliquant un effort prolongé, de l'escalade ou un saut."
+        "description": "+1 aux actions physiques impliquant l’une des activités suivantes : effort prolongé, {{ ability:climbing.name }} ou saut."
       }
     },
     {
@@ -29,7 +29,7 @@
       "name": "Beau parleur",
       "weight": 3,
       "fields": {
-        "description": "+1 en persuasion lorsque le personnage a le temps d'exposer son point de vue."
+        "description": "+1 en {{ ability:persuasion.name }} lorsque le personnage a le temps d’exposer son point de vue."
       }
     },
     {
@@ -61,7 +61,7 @@
       "name": "Force herculéenne",
       "weight": 2,
       "fields": {
-        "description": "+1 aux actions reposant sur la Force brute."
+        "description": "+1 aux actions reposant sur la {{ ability:strength.name }} brute."
       }
     },
     {
@@ -69,7 +69,7 @@
       "name": "Politicien",
       "weight": 2,
       "fields": {
-        "description": "+2 en Charisme lors de négociations officielles et de discussions politiques."
+        "description": "+2 en {{ ability:charisma.name }} lors de négociations officielles et de discussions politiques."
       }
     },
     {
@@ -141,7 +141,7 @@
       "name": "Marin",
       "weight": 2,
       "fields": {
-        "description": "+2 en navigation, pour manœuvrer le gréement et pour garder l'équilibre à bord d'un navire."
+        "description": "+2 en {{ ability:navigation.name }}, pour manœuvrer le gréement et pour garder l’équilibre à bord d’un navire."
       }
     },
     {
@@ -157,7 +157,7 @@
       "name": "Inébranlable",
       "weight": 2,
       "fields": {
-        "description": "+1 pour résister à la peur, à l'intimidation et à l'effroi surnaturel."
+        "description": "+1 pour résister à la peur, à l’{{ ability:intimidation.name }} et à l’effroi surnaturel."
       }
     },
     {
@@ -256,7 +256,7 @@
       "id": "burglar",
       "name": "Cambrioleur",
       "fields": {
-        "description": "+2 aux actions de Dextérité pour s’introduire discrètement dans un bâtiment protégé, s’y déplacer ou en ressortir."
+        "description": "+2 aux actions de {{ ability:dexterity.name }} pour s’introduire discrètement dans un bâtiment protégé, s’y déplacer ou en ressortir."
       }
     },
     {
@@ -286,7 +286,7 @@
       "id": "alchemist",
       "name": "Alchimiste",
       "fields": {
-        "description": "+2 aux actions d’Intelligence pour identifier, préparer ou manipuler sans danger des substances alchimiques."
+        "description": "+2 aux actions d’{{ ability:intelligence.name }} pour identifier, préparer ou manipuler sans danger des substances alchimiques."
       }
     },
     {
@@ -302,35 +302,35 @@
       "name": "Acrobate",
       "weight": 2,
       "fields": {
-        "description": "+2 aux actions de Dextérité impliquant l’équilibre, les roulades ou des déplacements acrobatiques."
+        "description": "+2 aux actions de {{ ability:dexterity.name }} impliquant l’équilibre, les roulades ou des déplacements acrobatiques."
       }
     },
     {
       "id": "investigator",
       "name": "Enquêteur",
       "fields": {
-        "description": "+2 aux actions de Perception pour examiner une scène à la recherche de preuves matérielles."
+        "description": "+2 aux actions de {{ ability:perception.name }} pour examiner une scène à la recherche de preuves matérielles."
       }
     },
     {
       "id": "commander",
       "name": "Commandant",
       "fields": {
-        "description": "+1 aux actions de Charisme pour coordonner dans l’urgence un groupe disposé à suivre ses ordres."
+        "description": "+1 aux actions de {{ ability:charisma.name }} pour coordonner dans l’urgence un groupe disposé à suivre ses ordres."
       }
     },
     {
       "id": "impersonator",
       "name": "Comédien et imitateur",
       "fields": {
-        "description": "+2 aux actions de Charisme pour jouer un rôle ou imiter une personne observée au préalable."
+        "description": "+2 aux actions de {{ ability:charisma.name }} pour jouer un rôle ou imiter une personne observée au préalable."
       }
     },
     {
       "id": "historian",
       "name": "Historien",
       "fields": {
-        "description": "+2 aux actions d’Intelligence portant sur l’histoire."
+        "description": "+2 aux actions d’{{ ability:intelligence.name }} portant sur l’histoire."
       }
     },
     {
@@ -351,7 +351,7 @@
       "id": "monster_hunter",
       "name": "Chasseur de monstres",
       "fields": {
-        "description": "Se spécialise dans la chasse à la créature suivante : {{ creature:monster.generator.name }}. Bénéficie de +2 pour la pister ou l’identifier, se rappeler ses faiblesses ou préparer un affrontement contre elle."
+        "description": "Se spécialise en {{ ability:hunting.name }} contre la créature suivante : {{ creature:monster.generator.name }}. Bénéficie de +2 en {{ ability:tracking.name }} pour la suivre ou l’identifier, se rappeler ses faiblesses ou préparer un affrontement contre elle."
       }
     },
     {
@@ -365,14 +365,14 @@
       "id": "rider",
       "name": "Cavalier",
       "fields": {
-        "description": "+2 aux actions pertinentes de Dressage, de contrôle et d’équilibre lorsque le personnage est en selle."
+        "description": "+2 aux actions pertinentes de {{ ability:animal_handling.name }}, de contrôle et d’équilibre lorsque le personnage est en selle."
       }
     },
     {
       "id": "ghost_step",
       "name": "Pas fantôme",
       "fields": {
-        "description": "+2 en Discrétion lorsque le personnage se déplace prudemment au lieu de se précipiter."
+        "description": "+2 en {{ ability:stealth.name }} lorsque le personnage se déplace prudemment au lieu de se précipiter."
       }
     },
     {

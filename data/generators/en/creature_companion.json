@@ -338,7 +338,7 @@
         "statProfile": "creature-elemental",
         "traits": [
           "{{ traits:stone_body }}",
-          "Masonry Sense — +2 to Perception actions made to locate tunnels, cavities, or weaknesses in worked stone."
+          "Masonry Sense — +2 to {{ ability:perception.name }} actions made to locate tunnels, cavities, or weaknesses in worked stone."
         ],
         "naturalArmorPercentage": 20
       }
@@ -366,7 +366,7 @@
         "statProfile": "creature-companion",
         "traits": [
           "{{ traits:flight }}",
-          "Keen Sight — +2 to Perception actions that rely on vision at long range."
+          "Keen Sight — +2 to {{ ability:perception.name }} actions that rely on vision at long range."
         ]
       }
     },
@@ -437,7 +437,7 @@
         "statProfile": "creature-companion",
         "traits": [
           "{{ traits:powerful_build }}",
-          "Desert Endurance — +2 to Constitution actions made to endure ordinary heat, thirst, or long desert travel."
+          "Desert Endurance — +2 to {{ ability:constitution.name }} actions made to endure ordinary heat, thirst, or long desert travel."
         ],
         "naturalArmorPercentage": 5
       }
@@ -469,7 +469,7 @@
         "statProfile": "creature-companion",
         "traits": [
           "{{ traits:flight }}",
-          "Clever Forager — +2 to Perception actions made to locate hidden food or small unattended objects."
+          "Clever Forager — +2 to {{ ability:perception.name }} actions made to locate hidden food or small unattended objects."
         ]
       }
     },

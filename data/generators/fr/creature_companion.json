@@ -338,7 +338,7 @@
         "statProfile": "creature-elemental",
         "traits": [
           "{{ traits:stone_body }}",
-          "Sens de la maçonnerie — +2 aux actions de Perception pour repérer tunnels, cavités ou fragilités dans la pierre taillée."
+          "Sens de la maçonnerie — +2 aux actions de {{ ability:perception.name }} pour repérer tunnels, cavités ou fragilités dans la pierre taillée."
         ],
         "naturalArmorPercentage": 20
       }
@@ -366,7 +366,7 @@
         "statProfile": "creature-companion",
         "traits": [
           "{{ traits:flight }}",
-          "Vue perçante — +2 aux actions de Perception reposant sur la vue à longue distance."
+          "Vue perçante — +2 aux actions de {{ ability:perception.name }} reposant sur la vue à longue distance."
         ]
       }
     },
@@ -437,7 +437,7 @@
         "statProfile": "creature-companion",
         "traits": [
           "{{ traits:powerful_build }}",
-          "Endurance du désert — +2 aux actions de Constitution pour résister à la chaleur ordinaire, à la soif ou aux longues traversées désertiques."
+          "Endurance du désert — +2 aux actions de {{ ability:constitution.name }} pour résister à la chaleur ordinaire, à la soif ou aux longues traversées désertiques."
         ],
         "naturalArmorPercentage": 5
       }
@@ -469,7 +469,7 @@
         "statProfile": "creature-companion",
         "traits": [
           "{{ traits:flight }}",
-          "Glaneur ingénieux — +2 aux actions de Perception pour repérer de la nourriture cachée ou de petits objets laissés sans surveillance."
+          "Glaneur ingénieux — +2 aux actions de {{ ability:perception.name }} pour repérer de la nourriture cachée ou de petits objets laissés sans surveillance."
         ]
       }
     },

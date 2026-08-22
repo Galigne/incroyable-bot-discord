@@ -19,14 +19,14 @@
       "id": "keen_smell",
       "name": "Keen Smell",
       "fields": {
-        "description": "+2 to Perception actions when detecting or tracking by scent."
+        "description": "+2 to {{ ability:perception.name }} actions when detecting or tracking by scent."
       }
     },
     {
       "id": "keen_hearing",
       "name": "Keen Hearing",
       "fields": {
-        "description": "+2 to Perception actions that rely on hearing."
+        "description": "+2 to {{ ability:perception.name }} actions that rely on hearing."
       }
     },
     {
@@ -47,14 +47,14 @@
       "id": "sure_footed",
       "name": "Sure-Footed",
       "fields": {
-        "description": "+2 to Dexterity actions made to climb or keep balance on difficult ground."
+        "description": "+2 to {{ ability:dexterity.name }} actions made to climb or keep balance on difficult ground."
       }
     },
     {
       "id": "powerful_build",
       "name": "Powerful Build",
       "fields": {
-        "description": "+1 to Strength actions involving pushing, lifting, or breaking objects."
+        "description": "+1 to {{ ability:strength.name }} actions involving pushing, lifting, or breaking objects."
       }
     },
     {
@@ -89,14 +89,14 @@
       "id": "aquatic_speed",
       "name": "Aquatic Speed",
       "fields": {
-        "description": "Moves through water at its normal movement speed and gains +1 to Dexterity actions made to swim."
+        "description": "Moves through water at its normal movement speed and gains +1 to {{ ability:dexterity.name }} actions made to swim."
       }
     },
     {
       "id": "regeneration",
       "name": "Regeneration",
       "fields": {
-        "description": "At the start of its turn, recovers 5% of maximum HP if it has at least 1 HP; an element chosen by the GM prevents this recovery for that turn."
+        "description": "At the start of its turn, recovers 5% of maximum HP if it has at least 1 HP; the following weakness prevents this recovery for that turn: {{ weakness.name }}."
       }
     },
     {
@@ -138,7 +138,7 @@
       "id": "camouflage",
       "name": "Natural Camouflage",
       "fields": {
-        "description": "+2 to Dexterity actions made to hide in the creature's native environment."
+        "description": "+2 to {{ ability:dexterity.name }} actions made to hide in the creature's native environment."
       }
     },
     {
@@ -166,21 +166,21 @@
       "id": "web_spinner",
       "name": "Web Spinner",
       "fields": {
-        "description": "Can create strong webs that inflict the {{ status_effect:restrained.name }} status effect on a target and gains +2 to Dexterity actions made to move across them."
+        "description": "Can create strong webs that inflict the {{ status_effect:restrained.name }} status effect on a target and gains +2 to {{ ability:dexterity.name }} actions made to move across them."
       }
     },
     {
       "id": "stone_body",
       "name": "Stone Body",
       "fields": {
-        "description": "Does not need to breathe and gains +2 to Constitution actions made to resist impacts."
+        "description": "Does not need to breathe and gains +2 to {{ ability:constitution.name }} actions made to resist impacts."
       }
     },
     {
       "id": "magic_sense",
       "name": "Magic Sense",
       "fields": {
-        "description": "+2 to Perception actions made to detect active spells or enchanted objects nearby."
+        "description": "+2 to {{ ability:perception.name }} actions made to detect active spells or enchanted objects nearby."
       }
     },
     {
@@ -201,14 +201,14 @@
       "id": "constrict",
       "name": "Constrict",
       "fields": {
-        "description": "+2 to Strength actions made to maintain or tighten an existing grapple."
+        "description": "+2 to {{ ability:strength.name }} actions made to maintain or tighten an existing grapple."
       }
     },
     {
       "id": "wall_climber",
       "name": "Wall Climber",
       "fields": {
-        "description": "Can move along steep or vertical rough surfaces at half its normal movement speed without a routine climbing roll."
+        "description": "Can move along steep or vertical rough surfaces at half its normal movement speed without a routine {{ ability:climbing.name }} roll."
       }
     },
     {
@@ -236,7 +236,7 @@
       "id": "powerful_leap",
       "name": "Powerful Leap",
       "fields": {
-        "description": "+2 to Strength or Dexterity actions made to jump."
+        "description": "+2 to {{ ability:strength.name }} or {{ ability:dexterity.name }} actions made to jump."
       }
     },
     {
@@ -285,7 +285,7 @@
       "id": "blood_frenzy",
       "name": "Blood Frenzy",
       "fields": {
-        "description": "+1 to attacks and Speed-based pursuit actions against creatures at or below half their maximum HP or visibly bleeding."
+        "description": "+1 to attacks and {{ ability:speed.name }}-based pursuit actions against creatures at or below half their maximum HP or visibly bleeding."
       }
     },
     {

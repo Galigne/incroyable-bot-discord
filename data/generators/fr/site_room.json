@@ -61,7 +61,7 @@
       "name": "Réserve",
       "weight": 3,
       "fields": {
-        "description": "caisses étiquetées, mobilier de rechange, poussière et objet qui n’a manifestement rien à faire ici."
+        "description": "caisses étiquetées, mobilier de rechange, poussière et objet qui n’a manifestement rien à faire ici : {{ curio.name }}."
       }
     },
     {
@@ -117,7 +117,7 @@
       "name": "Armurerie",
       "weight": 2,
       "fields": {
-        "description": "armes entretenues, supports d’armure, registres de distribution et plusieurs emplacements ostensiblement vides."
+        "description": "une arme entretenue du type suivant : {{ weapons.name }} ; supports d’armure, registres de distribution et plusieurs emplacements ostensiblement vides."
       }
     },
     {
@@ -125,7 +125,7 @@
       "name": "Infirmerie",
       "weight": 2,
       "fields": {
-        "description": "lits étroits, instruments médicaux, armoires à remèdes et notes sur les patients rédigées en code."
+        "description": "Des lits étroits et des instruments médicaux entourent un traitement à l’étude contre l’affliction suivante : {{ affliction.name }} ; les notes sur les patients sont rédigées en code."
       }
     },
     {
@@ -133,7 +133,7 @@
       "name": "Chapelle",
       "weight": 2,
       "fields": {
-        "description": "bancs, images sacrées, offrandes et petit passage menant à un confessionnal privé."
+        "description": "bancs, images sacrées et offrandes consacrées à la religion suivante : {{ religion.name }} ; petit passage menant à un confessionnal privé."
       }
     },
     {
@@ -173,7 +173,7 @@
       "name": "Trésorerie",
       "weight": 2,
       "fields": {
-        "description": "objets de valeur inventoriés, coffres scellés, titres de propriété et plusieurs niveaux de sécurité."
+        "description": "objets de valeur inventoriés, dont un exemplaire de ce type : {{ valuables.name }} ; coffres scellés, titres de propriété et plusieurs niveaux de sécurité."
       }
     },
     {
@@ -205,7 +205,7 @@
       "name": "Galerie des trophées",
       "weight": 1,
       "fields": {
-        "description": "bêtes naturalisées, bannières prises à l’ennemi, armes célèbres et pièce exposée encore vivante."
+        "description": "bêtes naturalisées, bannières prises à l’ennemi, armes célèbres et pièce exposée encore vivante du type suivant : {{ creature.generator.name }}."
       }
     },
     {

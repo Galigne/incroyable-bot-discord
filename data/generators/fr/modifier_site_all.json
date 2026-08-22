@@ -24,75 +24,75 @@
     },
     {
       "id": "heavy_rain",
-      "name": "Pluie battante",
+      "name": "{{ weather:heavy_rain.name }}",
       "weight": 2,
       "fields": {
-        "description": "La visibilité baisse, le sol exposé se change en boue, les traces s’effacent et des infiltrations ou une montée des eaux menacent les zones basses."
+        "description": "{{ weather:heavy_rain.description }}"
       }
     },
     {
       "id": "thunderstorm",
-      "name": "Orage violent",
+      "name": "{{ weather:thunderstorm.name }}",
       "fields": {
-        "description": "Une pluie battante et des vents forts frappent le site, tandis que le tonnerre couvre les sons lointains et que la foudre menace les hauteurs exposées."
+        "description": "{{ weather:thunderstorm.description }}"
       }
     },
     {
       "id": "dense_fog",
-      "name": "Brouillard dense",
+      "name": "{{ weather:dense_fog.name }}",
       "weight": 2,
       "fields": {
-        "description": "On ne voit plus qu’à courte distance ; les repères, l’observation lointaine et l’orientation sur de longs trajets deviennent peu fiables."
+        "description": "{{ weather:dense_fog.description }}"
       }
     },
     {
       "id": "strong_winds",
-      "name": "Vents violents",
+      "name": "{{ weather:strong_winds.name }}",
       "weight": 2,
       "fields": {
-        "description": "Les déplacements à découvert ou en hauteur se compliquent ; projectiles, objets mal arrimés et flammes nues deviennent difficiles à maîtriser."
+        "description": "{{ weather:strong_winds.description }}"
       }
     },
     {
       "id": "heavy_snow",
-      "name": "Fortes chutes de neige",
+      "name": "{{ weather:heavy_snow.name }}",
       "fields": {
-        "description": "La neige réduit la visibilité et gêne les déplacements ; les traces fraîches ressortent nettement avant de se combler peu à peu."
+        "description": "{{ weather:heavy_snow.description }}"
       }
     },
     {
       "id": "cold_snap",
-      "name": "Vague de froid",
+      "name": "{{ weather:cold_snap.name }}",
       "fields": {
-        "description": "L’eau exposée gèle, les surfaces deviennent glissantes et toute activité extérieure prolongée impose de trouver chaleur et abri."
+        "description": "{{ weather:cold_snap.description }}"
       }
     },
     {
       "id": "heat_wave",
-      "name": "Canicule",
+      "name": "{{ weather:heat_wave.name }}",
       "fields": {
-        "description": "L’ombre et l’eau potable deviennent essentielles ; tout effort prolongé à découvert devient rapidement épuisant."
+        "description": "{{ weather:heat_wave.description }}"
       }
     },
     {
       "id": "hailstorm",
-      "name": "Averse de grêle",
+      "name": "{{ weather:hailstorm.name }}",
       "fields": {
-        "description": "Les grêlons rendent les trajets à découvert difficiles et provoquent un vacarme constant sur les toits, les armures et le sol nu."
+        "description": "{{ weather:hailstorm.description }}"
       }
     },
     {
       "id": "dust_storm",
-      "name": "Tempête de poussière",
+      "name": "{{ weather:dust_storm.name }}",
       "fields": {
-        "description": "La poussière en suspension masque les repères, irrite les voies respiratoires et complique l’orientation sur les itinéraires exposés."
+        "description": "{{ weather:dust_storm.description }}"
       }
     },
     {
       "id": "ashfall",
-      "name": "Pluie de cendres",
+      "name": "{{ weather:ashfall.name }}",
       "fields": {
-        "description": "De fines cendres recouvrent les surfaces, masquent les repères lointains, révèlent les passages récents et souillent les provisions exposées."
+        "description": "{{ weather:ashfall.description }}"
       }
     }
   ]

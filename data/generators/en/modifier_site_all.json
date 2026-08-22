@@ -24,75 +24,75 @@
     },
     {
       "id": "heavy_rain",
-      "name": "Heavy Rain",
+      "name": "{{ weather:heavy_rain.name }}",
       "weight": 2,
       "fields": {
-        "description": "Visibility is reduced, exposed ground turns muddy, tracks wash away, and leaks or rising water threaten low areas."
+        "description": "{{ weather:heavy_rain.description }}"
       }
     },
     {
       "id": "thunderstorm",
-      "name": "Thunderstorm",
+      "name": "{{ weather:thunderstorm.name }}",
       "fields": {
-        "description": "Heavy rain and strong wind batter the site while thunder masks distant sounds and lightning endangers exposed heights."
+        "description": "{{ weather:thunderstorm.description }}"
       }
     },
     {
       "id": "dense_fog",
-      "name": "Dense Fog",
+      "name": "{{ weather:dense_fog.name }}",
       "weight": 2,
       "fields": {
-        "description": "Visibility falls to a short distance, making landmarks, ranged observation, and long-distance orientation unreliable."
+        "description": "{{ weather:dense_fog.description }}"
       }
     },
     {
       "id": "strong_winds",
-      "name": "Strong Winds",
+      "name": "{{ weather:strong_winds.name }}",
       "weight": 2,
       "fields": {
-        "description": "Exposed movement, projectiles, loose objects, open flames, and elevated structures become difficult to manage."
+        "description": "{{ weather:strong_winds.description }}"
       }
     },
     {
       "id": "heavy_snow",
-      "name": "Heavy Snow",
+      "name": "{{ weather:heavy_snow.name }}",
       "fields": {
-        "description": "Falling snow reduces visibility and movement; fresh tracks stand out before gradually filling."
+        "description": "{{ weather:heavy_snow.description }}"
       }
     },
     {
       "id": "cold_snap",
-      "name": "Cold Snap",
+      "name": "{{ weather:cold_snap.name }}",
       "fields": {
-        "description": "Exposed water freezes, surfaces become slick, and prolonged outdoor activity demands shelter and warmth."
+        "description": "{{ weather:cold_snap.description }}"
       }
     },
     {
       "id": "heat_wave",
-      "name": "Heat Wave",
+      "name": "{{ weather:heat_wave.name }}",
       "fields": {
-        "description": "Shade and drinking water become important, and prolonged exertion in exposed areas quickly becomes exhausting."
+        "description": "{{ weather:heat_wave.description }}"
       }
     },
     {
       "id": "hailstorm",
-      "name": "Hailstorm",
+      "name": "{{ weather:hailstorm.name }}",
       "fields": {
-        "description": "Hard impacts make exposed travel difficult and create constant noise on roofs, armor, and bare ground."
+        "description": "{{ weather:hailstorm.description }}"
       }
     },
     {
       "id": "dust_storm",
-      "name": "Dust Storm",
+      "name": "{{ weather:dust_storm.name }}",
       "fields": {
-        "description": "Airborne dust obscures landmarks, irritates breathing, and makes exposed routes difficult to navigate."
+        "description": "{{ weather:dust_storm.description }}"
       }
     },
     {
       "id": "ashfall",
-      "name": "Ashfall",
+      "name": "{{ weather:ashfall.name }}",
       "fields": {
-        "description": "Fine ash coats surfaces, obscures distant landmarks, reveals recent passage, and contaminates exposed supplies."
+        "description": "{{ weather:ashfall.description }}"
       }
     }
   ]

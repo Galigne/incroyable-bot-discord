@@ -163,7 +163,7 @@ test('production condition content keeps temporary statuses separate from persis
 	];
 	const expectedTraitReferences = {
 		venomous: ['status_effect:poisoned.name'],
-		web_spinner: ['status_effect:restrained.name'],
+		web_spinner: ['status_effect:restrained.name', 'ability:dexterity.name'],
 		pounce: ['status_effect:prone.name'],
 	};
 	const expectedAfflictionReferences = {
@@ -262,7 +262,11 @@ test('agreed talent, trait, status, and affliction entries preserve stable IDs a
 	const expectedReferences = {
 		talents: {
 			weapon_specialist: ['weapons.name'],
-			monster_hunter: ['creature:monster.generator.name'],
+			monster_hunter: [
+				'ability:hunting.name',
+				'creature:monster.generator.name',
+				'ability:tracking.name',
+			],
 			cultural_expert: ['race.name'],
 		},
 		traits: {
@@ -428,7 +432,7 @@ test('adventure composition reuses helper vocabularies and targeted event refere
 			['distress_call', 'site:dungeon.generator.name'],
 			['nauseating_odor', 'building.name'],
 			['fainting', 'background.generator.name'],
-			['gathering_storm', 'element.name'],
+			['gathering_storm', 'weather'],
 			['impossible_message', 'faction.name'],
 			['supplies_exhausted', 'loot:supplies.generator.name'],
 			['gravity_turns_sideways', 'site.generator.name'],
@@ -899,6 +903,262 @@ test('ability remains an open-ended internal name-only vocabulary', () => {
 	);
 });
 
+test('mechanical generator prose reuses fixed canonical ability entries', () => {
+	const expectedAbilityIds = {
+		talents: {
+			athlete: ['climbing'],
+			silver_tongue: ['persuasion'],
+			bodybuilder: ['strength'],
+			politician: ['charisma'],
+			sailor: ['navigation'],
+			unshakable: ['intimidation'],
+			burglar: ['dexterity'],
+			alchemist: ['intelligence'],
+			acrobat: ['dexterity'],
+			investigator: ['perception'],
+			commander: ['charisma'],
+			impersonator: ['charisma'],
+			historian: ['intelligence'],
+			monster_hunter: ['hunting', 'tracking'],
+			rider: ['animal_handling'],
+			ghost_step: ['stealth'],
+		},
+		traits: {
+			keen_smell: ['perception'],
+			keen_hearing: ['perception'],
+			sure_footed: ['dexterity'],
+			powerful_build: ['strength'],
+			aquatic_speed: ['dexterity'],
+			camouflage: ['dexterity'],
+			web_spinner: ['dexterity'],
+			stone_body: ['constitution'],
+			magic_sense: ['perception'],
+			constrict: ['strength'],
+			wall_climber: ['climbing'],
+			powerful_leap: ['strength', 'dexterity'],
+			blood_frenzy: ['speed'],
+		},
+		status_effect: {
+			shaken: ['intimidation'],
+			chilled: ['speed'],
+			poisoned: ['constitution'],
+			weakened: ['strength'],
+			hasted: ['speed'],
+		},
+		animal: {
+			rain_frog: ['perception'],
+			thieving_monkey: ['dexterity'],
+			eagle: ['perception'],
+			beaver: ['strength'],
+		},
+		companion: {
+			pebble_elemental: ['perception'],
+			messenger_raptor: ['perception'],
+			camel: ['constitution'],
+			raven: ['perception'],
+		},
+		monster: {
+			lantern_maw: ['charisma'],
+			bone_orchard: ['strength'],
+			thornback_horror: ['speed'],
+			choir_worm: ['charisma'],
+			hollow_saint: ['intelligence'],
+			hungry_changeling: ['charisma'],
+			uprooted_treant: ['strength'],
+			cliff_harpy: ['charisma'],
+			murky_water_siren: ['charisma'],
+			watcher_cyclops: ['perception'],
+			repetitive_ghost: ['intelligence'],
+			carnivorous_plant: ['charisma'],
+			mimic: ['strength'],
+			gelatinous_cube: ['dexterity'],
+		},
+		race: {
+			elf: ['perception'],
+			dwarf: ['crafting'],
+			orc: ['intimidation', 'survival'],
+			halfling: ['stealth'],
+			reptilian: ['tracking'],
+			fishfolk: ['navigation', 'fishing'],
+			giant: ['strength'],
+			centaur: ['tracking'],
+		},
+	};
+
+	for (const locale of ['en', 'fr']) {
+		for (const [generatorId, expectedByEntry] of Object.entries(expectedAbilityIds)) {
+			const entries = new Map(
+				generatorCatalog.getGenerator(generatorId, locale).entries
+					.map(entry => [entry.id, entry]),
+			);
+			for (const [entryId, abilityIds] of Object.entries(expectedByEntry)) {
+				const entry = entries.get(entryId);
+				assert.ok(entry, `${locale}:${generatorId}:${entryId}`);
+				const sourceValues = generatorId === 'race'
+					? [entry.fields.skill_bonus]
+					: ['animal', 'companion', 'monster'].includes(generatorId)
+						? entry.generation.traits
+						: [entry.fields.description];
+				const abilityReferences = sourceValues
+					.flatMap(extractInlineReferences)
+					.filter(reference => reference.startsWith('ability:'));
+				assert.deepEqual(
+					abilityReferences,
+					abilityIds.map(id => `ability:${id}.name`),
+					`${locale}:${generatorId}:${entryId}`,
+				);
+			}
+		}
+	}
+});
+
+test('requested generator hooks compose concrete existing concepts', () => {
+	const expectedReferences = {
+		building: {
+			temple: ['religion.name'],
+			church: ['religion.name'],
+			cathedral: ['religion.name'],
+			armory: ['weapons.name'],
+			secondhand_shop: ['curio.name'],
+			apothecary: ['affliction.name'],
+		},
+		room: {
+			chapel: ['religion.name'],
+			armory: ['weapons.name'],
+			treasury: ['valuables.name'],
+			infirmary: ['affliction.name'],
+			storeroom: ['curio.name'],
+			trophy_gallery: ['creature.generator.name'],
+		},
+		settlement: {
+			pilgrim_town: ['religion.name'],
+			monastery_community: ['religion.name'],
+		},
+		dungeon: {
+			buried_temple: ['religion.name'],
+			cult_sanctuary: ['religion.name'],
+			ruined_sanctuary: ['religion.name'],
+			volcanic_shrine: ['religion.name'],
+			ancient_crypt: ['trap.name'],
+			forgotten_ruins: ['trap.name'],
+		},
+		curio: {
+			mysterious_sealed_letter: ['name.name'],
+			miniature_portrait: ['name.name'],
+			attuned_stone: ['rules.name'],
+			unknown_key: ['faction.name'],
+		},
+		material: {
+			elemental_essence: ['element.name'],
+		},
+		traits: {
+			regeneration: ['weakness.name'],
+		},
+		event: {
+			gathering_storm: ['weather'],
+		},
+	};
+
+	for (const locale of ['en', 'fr']) {
+		for (const [generatorId, expectedByEntry] of Object.entries(expectedReferences)) {
+			const entries = new Map(
+				generatorCatalog.getGenerator(generatorId, locale).entries
+					.map(entry => [entry.id, entry]),
+			);
+			for (const [entryId, references] of Object.entries(expectedByEntry)) {
+				const entry = entries.get(entryId);
+				assert.ok(entry, `${locale}:${generatorId}:${entryId}`);
+				const sourceValues = [entry.name, ...Object.values(entry.fields ?? {})];
+				assert.deepEqual(
+					sourceValues.flatMap(value => (
+						typeof value === 'string' ? extractInlineReferences(value) : []
+					)),
+					references,
+					`${locale}:${generatorId}:${entryId}`,
+				);
+				const result = generatorResolver.resolveReference(
+					`${generatorId}:${entryId}`,
+					locale,
+					{ random: () => 0 },
+				);
+				assert.doesNotMatch(result.display, /\{\{|\}\}/);
+			}
+		}
+	}
+});
+
+test('internal weather conditions are reused without inconsistent random identities', () => {
+	const expectedEntries = [
+		['heavy_rain', 2],
+		['thunderstorm', undefined],
+		['dense_fog', 2],
+		['strong_winds', 2],
+		['heavy_snow', undefined],
+		['cold_snap', undefined],
+		['heat_wave', undefined],
+		['hailstorm', undefined],
+		['dust_storm', undefined],
+		['ashfall', undefined],
+	];
+
+	for (const locale of ['en', 'fr']) {
+		const weather = generatorCatalog.getGenerator('weather', locale);
+		assert.equal(weather.visibility, 'internal');
+		assert.deepEqual(weather.entrySchema.required, ['description']);
+		assert.deepEqual(
+			weather.entries.map(entry => [entry.id, entry.weight]),
+			expectedEntries,
+		);
+		assert.equal(
+			generatorCatalog.listGenerators(locale)
+				.some(generator => generator.id === 'weather'),
+			false,
+		);
+
+		const siteModifiers = new Map(
+			generatorCatalog.getGenerator('modifier_site_all', locale).entries
+				.map(entry => [entry.id, entry]),
+		);
+		for (const [entryId] of expectedEntries) {
+			const entry = siteModifiers.get(entryId);
+			assert.deepEqual(
+				[entry.name, entry.fields.description].flatMap(extractInlineReferences),
+				[`weather:${entryId}.name`, `weather:${entryId}.description`],
+			);
+			const resolved = generatorResolver.resolveReference(
+				`modifier_site_all:${entryId}`,
+				locale,
+				{ random: () => 0.999999 },
+			);
+			assert.deepEqual(
+				resolved.provenance
+					.filter(record => record.generatorId === 'weather')
+					.map(record => record.entryId),
+				[entryId, entryId],
+			);
+		}
+		for (const entryId of ['abandoned', 'immense']) {
+			const entry = siteModifiers.get(entryId);
+			assert.deepEqual(
+				[entry.name, entry.fields.description].flatMap(extractInlineReferences),
+				[],
+			);
+		}
+
+		const gatheringStorm = generatorResolver.resolveReference(
+			'event:gathering_storm',
+			locale,
+			{ random: () => 0.999999 },
+		);
+		assert.deepEqual(
+			gatheringStorm.provenance
+				.filter(record => record.generatorId === 'weather')
+				.map(record => record.entryId),
+			['ashfall'],
+		);
+		assert.doesNotMatch(gatheringStorm.display, /\{\{|\}\}/);
+	}
+});
 test('crime and service remain internal name-only helper vocabularies', () => {
 	const requiredEntryIds = {
 		crime: [

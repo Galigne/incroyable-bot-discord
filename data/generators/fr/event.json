@@ -291,7 +291,7 @@
       "id": "gathering_storm",
       "name": "Tempête naissante",
       "fields": {
-        "description": "Le temps change brutalement et s’accompagne de manifestations étranges liées à l’élément suivant : {{ element.name }}. Les déplacements, les combats ou la communication deviennent plus difficiles."
+        "description": "L’atmosphère change tandis que le phénomène météorologique suivant s’installe de manière surnaturelle : {{ weather }} Les déplacements, les combats ou la communication deviennent plus difficiles."
       }
     },
     {

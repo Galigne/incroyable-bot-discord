@@ -29,7 +29,7 @@
       "id": "mysterious_sealed_letter",
       "name": "Mysterious sealed letter",
       "fields": {
-        "description": "A letter addressed to someone the character has never met."
+        "description": "A sealed letter addressed to {{ name.name }}, a person the character has never met."
       }
     },
     {
@@ -43,7 +43,7 @@
       "id": "unknown_key",
       "name": "Unknown Key",
       "fields": {
-        "description": "A key with no known lock, marked by a symbol tied to an organization or building."
+        "description": "A key with no known lock, bearing an emblem associated with {{ faction.name }}."
       }
     },
     {
@@ -113,7 +113,7 @@
       "id": "attuned_stone",
       "name": "Attuned Stone",
       "fields": {
-        "description": "A mineral or magical stone reacting to a place, person, or particular RULE."
+        "description": "A mineral or magical stone that reacts in an unexplained way to {{ rules.name }}."
       }
     },
     {
@@ -141,7 +141,7 @@
       "id": "miniature_portrait",
       "name": "Miniature portrait",
       "fields": {
-        "description": "A tiny painted likeness whose subject seems almost familiar."
+        "description": "A tiny painted likeness of {{ name.name }}, a person who seems almost familiar."
       }
     },
     {

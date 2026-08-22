@@ -37,7 +37,7 @@
       "name": "Ville de pèlerinage",
       "weight": 3,
       "fields": {
-        "description": "hospices, vendeurs de reliques, guérisseurs et temples rivaux autour d’un lieu sacré."
+        "description": "hospices, vendeurs de reliques, guérisseurs et temples rivaux autour d’un lieu sacré de la religion suivante : {{ religion.name }}."
       }
     },
     {
@@ -77,7 +77,7 @@
       "name": "Communauté monastique",
       "weight": 2,
       "fields": {
-        "description": "moines, fermiers tenanciers, visiteurs, bibliothèques et ateliers derrière des murs paisibles."
+        "description": "moines de la religion suivante : {{ religion.name }} ; fermiers tenanciers, visiteurs, bibliothèques et ateliers derrière des murs paisibles."
       }
     },
     {

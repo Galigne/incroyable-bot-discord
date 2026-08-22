@@ -37,7 +37,7 @@
       "name": "Pilgrim Town",
       "weight": 3,
       "fields": {
-        "description": "hostels, relic sellers, healers, and rival temples surrounding a sacred destination."
+        "description": "hostels, relic sellers, healers, and rival temples surrounding a destination sacred to {{ religion.name }}."
       }
     },
     {
@@ -77,7 +77,7 @@
       "name": "Monastery Community",
       "weight": 2,
       "fields": {
-        "description": "monks, tenant farmers, guests, libraries, and workshops behind peaceful walls."
+        "description": "monks devoted to {{ religion.name }}, tenant farmers, guests, libraries, and workshops behind peaceful walls."
       }
     },
     {

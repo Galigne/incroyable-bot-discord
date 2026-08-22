@@ -291,7 +291,7 @@
       "id": "gathering_storm",
       "name": "Gathering Storm",
       "fields": {
-        "description": "The weather changes abruptly with strange manifestations tied to the following element: {{ element.name }}. Travel, combat, or communication becomes more difficult."
+        "description": "The atmosphere shifts as the following weather condition gathers unnaturally: {{ weather }} Travel, combat, or communication becomes more difficult."
       }
     },
     {

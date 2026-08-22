@@ -37,7 +37,7 @@
       "name": "Temple",
       "weight": 3,
       "fields": {
-        "description": "a public sanctuary with an altar, charitable kitchen, archives, and restricted crypt."
+        "description": "a public sanctuary dedicated to {{ religion.name }}, with an altar, charitable kitchen, archives, and restricted crypt."
       }
     },
     {
@@ -45,7 +45,7 @@
       "name": "Apothecary",
       "weight": 2,
       "fields": {
-        "description": "fragrant shelves of remedies, poisons, preserved creatures, and mislabeled experiments."
+        "description": "fragrant shelves holding a remedy claimed to treat {{ affliction.name }}, plus poisons, preserved creatures, and mislabeled experiments."
       }
     },
     {
@@ -168,7 +168,7 @@
       "id": "armory",
       "name": "Armory",
       "fields": {
-        "description": "A secure workshop sells and repairs weapons but conceals the origin of a prestigious order."
+        "description": "A secure workshop sells and repairs weapons of the following kind: {{ weapons.name }}; it also conceals the origin of a prestigious order."
       }
     },
     {
@@ -252,14 +252,14 @@
       "id": "church",
       "name": "Church",
       "fields": {
-        "description": "An active congregation maintains a place of worship whose crypt predates the city."
+        "description": "An active congregation devoted to {{ religion.name }} maintains a place of worship whose crypt predates the city."
       }
     },
     {
       "id": "cathedral",
       "name": "Cathedral",
       "fields": {
-        "description": "A vast spiritual and political institution keeps jealously guarded relics."
+        "description": "A vast spiritual and political institution dedicated to {{ religion.name }} keeps jealously guarded relics."
       }
     },
     {
@@ -315,7 +315,7 @@
       "id": "secondhand_shop",
       "name": "Secondhand Shop",
       "fields": {
-        "description": "Ordinary objects mingle with stolen keepsakes and relics whose true function the seller does not know."
+        "description": "Ordinary objects mingle with stolen keepsakes and relics; the seller does not know the true purpose of this curio: {{ curio.name }}."
       }
     },
     {

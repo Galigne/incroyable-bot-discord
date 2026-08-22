@@ -13,7 +13,7 @@
       "name": "Temple enseveli",
       "weight": 3,
       "fields": {
-        "description": "salles sacrées effondrées autour d’un autel scellé qui reçoit encore des offrandes."
+        "description": "salles sacrées effondrées de la religion suivante : {{ religion.name }} ; elles entourent un autel scellé qui reçoit encore des offrandes."
       }
     },
     {
@@ -37,7 +37,7 @@
       "name": "Crypte antique",
       "weight": 3,
       "fields": {
-        "description": "tombeaux familiaux, pièges funéraires, archives ancestrales et chambres scellées récemment profanées."
+        "description": "tombeaux familiaux et archives ancestrales protégés par le piège funéraire suivant : {{ trap.name }} ; plusieurs chambres scellées ont été récemment profanées."
       }
     },
     {
@@ -85,7 +85,7 @@
       "name": "Sanctuaire volcanique",
       "weight": 2,
       "fields": {
-        "description": "tunnels ravagés par la chaleur, ponts sacrificiels, canaux de lave et gardiens insensibles au feu."
+        "description": "sanctuaire volcanique associé à la religion suivante : {{ religion.name }} ; il comprend des tunnels ravagés par la chaleur, des ponts sacrificiels, des canaux de lave et des gardiens insensibles au feu."
       }
     },
     {
@@ -101,7 +101,7 @@
       "name": "Sanctuaire d’un culte",
       "weight": 2,
       "fields": {
-        "description": "salles de réunion camouflées qui descendent vers des chambres rituelles et un site d’invocation inachevé."
+        "description": "Un culte dissident utilise des salles de réunion camouflées descendant vers des chambres rituelles et un site d’invocation inachevé. Il s’est séparé de la religion suivante : {{ religion.name }}."
       }
     },
     {
@@ -164,7 +164,7 @@
       "id": "forgotten_ruins",
       "name": "Ruines oubliées",
       "fields": {
-        "description": "Les vestiges instables d’un domaine abandonné restent protégés par des pièges, des gardiens ou des serments."
+        "description": "Les vestiges instables d’un domaine abandonné restent protégés par le piège suivant : {{ trap.name }}, ainsi que par des gardiens ou des serments."
       }
     },
     {
@@ -213,7 +213,7 @@
       "id": "ruined_sanctuary",
       "name": "Sanctuaire en ruine",
       "fields": {
-        "description": "Une chapelle ou un temple abandonné dont les rites produisent encore des effets sans officiant."
+        "description": "Une chapelle ou un temple abandonné dont les rites produisent encore des effets sans officiant. Le sanctuaire appartenait à la religion suivante : {{ religion.name }}."
       }
     }
   ],

@@ -19,14 +19,14 @@
       "id": "keen_smell",
       "name": "Odorat aiguisé",
       "fields": {
-        "description": "+2 aux actions de Perception pour détecter ou pister grâce à l’odorat."
+        "description": "+2 aux actions de {{ ability:perception.name }} pour détecter ou pister grâce à l’odorat."
       }
     },
     {
       "id": "keen_hearing",
       "name": "Ouïe fine",
       "fields": {
-        "description": "+2 aux actions de Perception reposant sur l’ouïe."
+        "description": "+2 aux actions de {{ ability:perception.name }} reposant sur l’ouïe."
       }
     },
     {
@@ -47,14 +47,14 @@
       "id": "sure_footed",
       "name": "Pied sûr",
       "fields": {
-        "description": "+2 aux actions de Dextérité pour grimper ou garder l’équilibre sur un terrain difficile."
+        "description": "+2 aux actions de {{ ability:dexterity.name }} pour grimper ou garder l’équilibre sur un terrain difficile."
       }
     },
     {
       "id": "powerful_build",
       "name": "Carrure puissante",
       "fields": {
-        "description": "+1 aux actions de Force pour pousser, soulever ou briser des objets."
+        "description": "+1 aux actions de {{ ability:strength.name }} pour pousser, soulever ou briser des objets."
       }
     },
     {
@@ -89,14 +89,14 @@
       "id": "aquatic_speed",
       "name": "Nageur-né",
       "fields": {
-        "description": "Se déplace dans l’eau à sa vitesse normale et gagne +1 aux actions de Dextérité pour nager."
+        "description": "Se déplace dans l’eau à sa vitesse normale et gagne +1 aux actions de {{ ability:dexterity.name }} pour nager."
       }
     },
     {
       "id": "regeneration",
       "name": "Régénération",
       "fields": {
-        "description": "Au début de son tour, récupère 5 % de ses PV maximums s’il lui reste au moins 1 PV ; un élément choisi par le MJ empêche cette récupération pour ce tour."
+        "description": "Au début de son tour, récupère 5 % de ses PV maximums s’il lui reste au moins 1 PV ; la faiblesse suivante empêche cette récupération pour ce tour : {{ weakness.name }}."
       }
     },
     {
@@ -138,7 +138,7 @@
       "id": "camouflage",
       "name": "Camouflage naturel",
       "fields": {
-        "description": "+2 aux actions de Dextérité pour se cacher dans l’environnement naturel de la créature."
+        "description": "+2 aux actions de {{ ability:dexterity.name }} pour se cacher dans l’environnement naturel de la créature."
       }
     },
     {
@@ -166,21 +166,21 @@
       "id": "web_spinner",
       "name": "Tisseur de toile",
       "fields": {
-        "description": "Peut produire de solides toiles qui infligent l’état {{ status_effect:restrained.name }} à une cible et gagne +2 aux actions de Dextérité pour s’y déplacer."
+        "description": "Peut produire de solides toiles qui infligent l’état {{ status_effect:restrained.name }} à une cible et gagne +2 aux actions de {{ ability:dexterity.name }} pour s’y déplacer."
       }
     },
     {
       "id": "stone_body",
       "name": "Corps minéral",
       "fields": {
-        "description": "N’a pas besoin de respirer et gagne +2 aux actions de Constitution pour résister aux impacts."
+        "description": "N’a pas besoin de respirer et gagne +2 aux actions de {{ ability:constitution.name }} pour résister aux impacts."
       }
     },
     {
       "id": "magic_sense",
       "name": "Sens de la magie",
       "fields": {
-        "description": "+2 aux actions de Perception pour détecter les sorts actifs ou objets enchantés proches."
+        "description": "+2 aux actions de {{ ability:perception.name }} pour détecter les sorts actifs ou objets enchantés proches."
       }
     },
     {
@@ -201,14 +201,14 @@
       "id": "constrict",
       "name": "Constriction",
       "fields": {
-        "description": "+2 aux actions de Force pour maintenir ou resserrer une prise déjà établie."
+        "description": "+2 aux actions de {{ ability:strength.name }} pour maintenir ou resserrer une prise déjà établie."
       }
     },
     {
       "id": "wall_climber",
       "name": "Grimpeur de parois",
       "fields": {
-        "description": "Peut se déplacer sur des surfaces rugueuses très inclinées ou verticales à la moitié de sa vitesse normale sans devoir effectuer un jet d’escalade ordinaire."
+        "description": "Peut se déplacer sur des surfaces rugueuses très inclinées ou verticales à la moitié de sa vitesse normale sans devoir effectuer le jet suivant : {{ ability:climbing.name }}."
       }
     },
     {
@@ -236,7 +236,7 @@
       "id": "powerful_leap",
       "name": "Bond puissant",
       "fields": {
-        "description": "+2 aux actions de Force ou de Dextérité pour sauter."
+        "description": "+2 aux actions de {{ ability:strength.name }} ou de {{ ability:dexterity.name }} pour sauter."
       }
     },
     {
@@ -285,7 +285,7 @@
       "id": "blood_frenzy",
       "name": "Frénésie sanglante",
       "fields": {
-        "description": "+1 aux attaques et aux actions de poursuite fondées sur la Vitesse contre les créatures dont les PV actuels ne dépassent pas la moitié des PV maximums ou qui saignent visiblement."
+        "description": "+1 aux attaques et aux actions de poursuite fondées sur la {{ ability:speed.name }} contre les créatures dont les PV actuels ne dépassent pas la moitié des PV maximums ou qui saignent visiblement."
       }
     },
     {

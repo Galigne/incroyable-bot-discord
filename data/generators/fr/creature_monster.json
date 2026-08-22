@@ -123,7 +123,7 @@
         "statProfile": "creature-predator",
         "traits": [
           "{{ traits:camouflage }}",
-          "Faux fanal — +2 aux actions de Charisme pour attirer une créature qui prend sa lueur pour une lumière sûre."
+          "Faux fanal — +2 aux actions de {{ ability:charisma.name }} pour attirer une créature qui prend sa lueur pour une lumière sûre."
         ],
         "naturalArmorPercentage": 15
       }
@@ -140,7 +140,7 @@
         "traits": [
           "{{ traits:poison_immunity }}",
           "{{ traits:disease_immunity }}",
-          "Étreinte d’ossements — Une cible saisie ne peut pas s’éloigner avant de réussir une action de Force pour s’échapper."
+          "Étreinte d’ossements — Une cible saisie ne peut pas s’éloigner avant de réussir une action de {{ ability:strength.name }} pour s’échapper."
         ],
         "naturalArmorPercentage": 15
       }
@@ -223,7 +223,7 @@
         "statProfile": "creature-brute",
         "traits": [
           "{{ traits:natural_weapons }}",
-          "Graines barbelées — Peut porter une attaque naturelle à distance ; une cible blessée subit -1 en Vitesse jusqu’au retrait du barbillon."
+          "Graines barbelées — Peut porter une attaque naturelle à distance ; une cible blessée subit -1 en {{ ability:speed.name }} jusqu’au retrait du barbillon."
         ],
         "naturalArmorPercentage": 15
       }
@@ -297,7 +297,7 @@
         "statProfile": "creature-predator",
         "traits": [
           "{{ traits:burrower }}",
-          "Voix familières — +2 aux actions de Charisme pour attirer ou désorienter quelqu’un en imitant des voix déjà entendues."
+          "Voix familières — +2 aux actions de {{ ability:charisma.name }} pour attirer ou désorienter quelqu’un en imitant des voix déjà entendues."
         ],
         "naturalArmorPercentage": 15
       }
@@ -401,7 +401,7 @@
         "statProfile": "creature-caster",
         "traits": [
           "{{ traits:disease_immunity }}",
-          "Faux miracle — Une fois par scène, rend 10 % de ses PV maximums à une créature touchée ; celle-ci subit -1 aux actions d’Intelligence jusqu’à son prochain repos."
+          "Faux miracle — Une fois par scène, rend 10 % de ses PV maximums à une créature touchée ; celle-ci subit -1 aux actions d’{{ ability:intelligence.name }} jusqu’à son prochain repos."
         ],
         "equipment": ["weapons:arcane_scepter"],
         "armor": "armors:breastplate"
@@ -488,7 +488,7 @@
       "generation": {
         "statProfile": "creature-caster",
         "traits": [
-          "Imitation imparfaite — Peut copier l’apparence d’un humanoïde, mais subit -2 aux actions de Charisme liées aux habitudes ou relations de cette personne."
+          "Imitation imparfaite — Peut copier l’apparence d’un humanoïde, mais subit -2 aux actions de {{ ability:charisma.name }} liées aux habitudes ou relations de cette personne."
         ],
         "fixedRules": [
           {
@@ -540,7 +540,7 @@
         "statProfile": "creature-brute",
         "traits": [
           "{{ traits:powerful_build }}",
-          "Ancrage racinaire — Tant qu’elle touche un sol naturel, gagne +2 aux actions de Force pour résister à un déplacement forcé."
+          "Ancrage racinaire — Tant qu’elle touche un sol naturel, gagne +2 aux actions de {{ ability:strength.name }} pour résister à un déplacement forcé."
         ],
         "fixedRules": [
           {
@@ -708,7 +708,7 @@
         "statProfile": "creature-predator",
         "traits": [
           "{{ traits:flight }}",
-          "Voix familières — +2 aux actions de Charisme pour attirer ou désorienter quelqu’un en imitant des voix déjà entendues."
+          "Voix familières — +2 aux actions de {{ ability:charisma.name }} pour attirer ou désorienter quelqu’un en imitant des voix déjà entendues."
         ],
         "naturalArmorPercentage": 10
       }
@@ -725,7 +725,7 @@
         "traits": [
           "{{ traits:amphibious }}",
           "{{ traits:aquatic_speed }}",
-          "Chant enjôleur — +2 aux actions de Charisme pour isoler un auditeur capable d’entendre la créature."
+          "Chant enjôleur — +2 aux actions de {{ ability:charisma.name }} pour isoler un auditeur capable d’entendre la créature."
         ],
         "fixedRules": [
           {
@@ -747,7 +747,7 @@
         "statProfile": "creature-brute",
         "traits": [
           "{{ traits:powerful_build }}",
-          "Vue perçante — +2 aux actions de Perception reposant sur la vue à longue distance."
+          "Vue perçante — +2 aux actions de {{ ability:perception.name }} reposant sur la vue à longue distance."
         ],
         "naturalArmorPercentage": 20
       }
@@ -808,7 +808,7 @@
         "statProfile": "creature-caster",
         "traits": [
           "{{ traits:incorporeal }}",
-          "Boucle spectrale — Répète une scène ; les témoins qui l’interrompent volontairement subissent -1 aux actions d’Intelligence jusqu’à l’apaisement de l’esprit."
+          "Boucle spectrale — Répète une scène ; les témoins qui l’interrompent volontairement subissent -1 aux actions d’{{ ability:intelligence.name }} jusqu’à l’apaisement de l’esprit."
         ],
         "modifiers": ["modifier_creature:shadowed"]
       }
@@ -962,7 +962,7 @@
         "statProfile": "creature-brute",
         "traits": [
           "{{ traits:camouflage }}",
-          "Mimétisme alléchant — +2 aux actions de Charisme pour attirer une proie en imitant des odeurs, sons ou formes familiers."
+          "Mimétisme alléchant — +2 aux actions de {{ ability:charisma.name }} pour attirer une proie en imitant des odeurs, sons ou formes familiers."
         ],
         "naturalArmorPercentage": 15
       }
@@ -1213,7 +1213,7 @@
         "traits": [
           "{{ traits:camouflage }}",
           "{{ traits:natural_weapons }}",
-          "Peau adhésive — +2 aux actions de Force pour maintenir une lutte contre une créature qui le touche."
+          "Peau adhésive — +2 aux actions de {{ ability:strength.name }} pour maintenir une lutte contre une créature qui le touche."
         ],
         "naturalArmorPercentage": 20
       }
@@ -1231,7 +1231,7 @@
           "{{ traits:poison_immunity }}",
           "{{ traits:disease_immunity }}",
           "{{ traits:constrict }}",
-          "Corps transparent — +2 aux actions de Dextérité pour passer inaperçu tant qu’il reste immobile dans une faible lumière."
+          "Corps transparent — +2 aux actions de {{ ability:dexterity.name }} pour passer inaperçu tant qu’il reste immobile dans une faible lumière."
         ],
         "naturalArmorPercentage": 10
       }

@@ -22,7 +22,7 @@
       "name": "Elfe",
       "fields": {
         "description": "Un peuple longévif aux sens précis, attaché à la mémoire des lieux et aux conséquences lointaines de chaque décision.",
-        "skill_bonus": "Perception attentive des détails naturels et magiques.",
+        "skill_bonus": "{{ ability:perception.name }} attentive des détails naturels et magiques.",
         "physical_ability": "Vision crépusculaire efficace sous une faible lumière."
       }
     },
@@ -31,7 +31,7 @@
       "name": "Nain",
       "fields": {
         "description": "Un peuple de bâtisseurs vivant dans des communautés où la maîtrise artisanale et la parole donnée définissent le statut.",
-        "skill_bonus": "Artisanat de la pierre, du métal ou des mécanismes.",
+        "skill_bonus": "{{ ability:crafting.name }} de la pierre, du métal ou des mécanismes.",
         "physical_ability": "Stabilité : résiste mieux aux chocs et aux déplacements forcés."
       }
     },
@@ -40,7 +40,7 @@
       "name": "Orque",
       "fields": {
         "description": "Un peuple robuste organisé autour de liens communautaires, de défis publics et d’une forte tradition orale.",
-        "skill_bonus": "Intimidation ou survie en territoire hostile.",
+        "skill_bonus": "{{ ability:intimidation.name }} ou {{ ability:survival.name }} en territoire hostile.",
         "physical_ability": "Puissance physique lors d’un effort bref et intense."
       }
     },
@@ -58,7 +58,7 @@
       "name": "Halfelin",
       "fields": {
         "description": "Un peuple de voyageurs et de communautés rurales valorisant hospitalité, discrétion et récits partagés.",
-        "skill_bonus": "Discrétion dans les foules ou les environnements domestiques.",
+        "skill_bonus": "{{ ability:stealth.name }} dans les foules ou les environnements domestiques.",
         "physical_ability": "Appuis rapides : conserve plus facilement son équilibre."
       }
     },
@@ -67,7 +67,7 @@
       "name": "Reptilien",
       "fields": {
         "description": "Un peuple écailleux adapté aux climats chauds, aux longues périodes d’immobilité et aux environnements humides.",
-        "skill_bonus": "Pistage par les traces, la chaleur et les odeurs.",
+        "skill_bonus": "{{ ability:tracking.name }} par les traces, la chaleur et les odeurs.",
         "physical_ability": "Écailles naturelles offrant une protection légère."
       }
     },
@@ -76,7 +76,7 @@
       "name": "Peuple-poisson",
       "fields": {
         "description": "Un peuple amphibie vivant entre communautés côtières, récifs et cités partiellement immergées.",
-        "skill_bonus": "Navigation, pêche et connaissance des courants.",
+        "skill_bonus": "{{ ability:navigation.name }}, {{ ability:fishing.name }} et connaissance des courants.",
         "physical_ability": "Respiration aquatique et déplacement naturel sous l’eau."
       }
     },
@@ -130,7 +130,7 @@
       "name": "Géant",
       "fields": {
         "description": "Un peuple de très grande taille dont les habitats, outils et récits sont conçus à une échelle inhabituelle.",
-        "skill_bonus": "Travail de force et connaissance des terrains monumentaux.",
+        "skill_bonus": "Travail fondé sur la {{ ability:strength.name }} et connaissance des terrains monumentaux.",
         "physical_ability": "Allonge et capacité de port nettement supérieures."
       }
     },
@@ -139,7 +139,7 @@
       "name": "Centaure",
       "fields": {
         "description": "Un peuple nomade au torse humanoïde et au corps de quadrupède, adapté aux grands espaces et aux déplacements prolongés.",
-        "skill_bonus": "Voyage terrestre, pistage et combat monté.",
+        "skill_bonus": "Voyage terrestre, {{ ability:tracking.name }} et combat monté.",
         "physical_ability": "Course rapide sur terrain ouvert et grande capacité de transport."
       }
     }

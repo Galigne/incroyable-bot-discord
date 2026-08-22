@@ -29,7 +29,7 @@
       "name": "Shaken",
       "weight": 3,
       "fields": {
-        "description": "-1 against the next fear or intimidation effect."
+        "description": "-1 against the next fear or {{ ability:intimidation.name }} effect."
       }
     },
     {
@@ -53,7 +53,7 @@
       "name": "Chilled",
       "weight": 2,
       "fields": {
-        "description": "movement and Speed-based actions are reduced until warmed."
+        "description": "movement and {{ ability:speed.name }}-based actions are reduced until warmed."
       }
     },
     {
@@ -77,7 +77,7 @@
       "name": "Poisoned",
       "weight": 2,
       "fields": {
-        "description": "Constitution-based resistance is required as the poison progresses."
+        "description": "{{ ability:constitution.name }}-based resistance is required as the poison progresses."
       }
     },
     {
@@ -93,7 +93,7 @@
       "name": "Weakened",
       "weight": 2,
       "fields": {
-        "description": "Strength-based actions suffer a penalty."
+        "description": "{{ ability:strength.name }}-based actions suffer a penalty."
       }
     },
     {
@@ -287,7 +287,7 @@
       "id": "hasted",
       "name": "Hasted",
       "fields": {
-        "description": "Movement and Speed-based actions are temporarily improved until the effect ends."
+        "description": "Movement and {{ ability:speed.name }}-based actions are temporarily improved until the effect ends."
       }
     },
     {

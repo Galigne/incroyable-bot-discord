@@ -187,7 +187,7 @@
         "statProfile": "creature-animal-magic",
         "traits": [
           "{{ traits:amphibious }}",
-          "Sens du climat — +2 aux actions de Perception pour prévoir la pluie ou un temps violent au cours des six prochaines heures."
+          "Sens du climat — +2 aux actions de {{ ability:perception.name }} pour prévoir la pluie ou un temps violent au cours des six prochaines heures."
         ],
         "naturalArmorPercentage": 5
       }
@@ -404,7 +404,7 @@
       "generation": {
         "statProfile": "creature-animal-runner",
         "traits": [
-          "Mains agiles — +2 aux actions de Dextérité pour saisir, dérober ou manipuler de petits objets."
+          "Mains agiles — +2 aux actions de {{ ability:dexterity.name }} pour saisir, dérober ou manipuler de petits objets."
         ],
         "naturalArmorPercentage": 5
       }
@@ -523,7 +523,7 @@
         "traits": [
           "{{ traits:flight }}",
           "{{ traits:natural_weapons }}",
-          "Vue perçante — +2 aux actions de Perception reposant sur la vue à longue distance."
+          "Vue perçante — +2 aux actions de {{ ability:perception.name }} reposant sur la vue à longue distance."
         ],
         "naturalArmorPercentage": 5
       }
@@ -573,7 +573,7 @@
         "traits": [
           "{{ traits:amphibious }}",
           "{{ traits:aquatic_speed }}",
-          "Abatteur d’arbres — +2 aux actions de Force pour ronger ou déplacer du bois ordinaire."
+          "Abatteur d’arbres — +2 aux actions de {{ ability:strength.name }} pour ronger ou déplacer du bois ordinaire."
         ],
         "naturalArmorPercentage": 10
       }

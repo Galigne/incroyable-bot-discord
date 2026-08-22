@@ -29,7 +29,7 @@
       "id": "mysterious_sealed_letter",
       "name": "Mystérieuse lettre scellée",
       "fields": {
-        "description": "Une lettre adressée à une personne que le personnage n'a jamais rencontrée."
+        "description": "Une lettre scellée adressée à {{ name.name }}, une personne que le personnage n’a jamais rencontrée."
       }
     },
     {
@@ -43,7 +43,7 @@
       "id": "unknown_key",
       "name": "Clef inconnue",
       "fields": {
-        "description": "Une clef sans serrure identifiée, marquée d’un symbole correspondant à une organisation ou un bâtiment."
+        "description": "Une clef sans serrure identifiée, frappée d’un emblème dont l’origine semble liée à la faction suivante : {{ faction.name }}."
       }
     },
     {
@@ -113,7 +113,7 @@
       "id": "attuned_stone",
       "name": "Pierre d’affinité",
       "fields": {
-        "description": "Une pierre naturelle ou magique qui réagit à un lieu, une personne ou une LOI particulière."
+        "description": "Une pierre naturelle ou magique qui réagit de manière inexpliquée à la LOI suivante : {{ rules.name }}."
       }
     },
     {
@@ -141,7 +141,7 @@
       "id": "miniature_portrait",
       "name": "Portrait miniature",
       "fields": {
-        "description": "Un minuscule portrait peint dont le sujet paraît presque familier."
+        "description": "Le minuscule portrait représente {{ name.name }}, dont le visage paraît presque familier."
       }
     },
     {

@@ -123,7 +123,7 @@
         "statProfile": "creature-predator",
         "traits": [
           "{{ traits:camouflage }}",
-          "False Beacon — +2 to Charisma actions made to lure a creature that mistakes its glow for a safe light."
+          "False Beacon — +2 to {{ ability:charisma.name }} actions made to lure a creature that mistakes its glow for a safe light."
         ],
         "naturalArmorPercentage": 15
       }
@@ -140,7 +140,7 @@
         "traits": [
           "{{ traits:poison_immunity }}",
           "{{ traits:disease_immunity }}",
-          "Bone Grasp — A target hit by its grasp cannot move away until it succeeds on a Strength action to escape."
+          "Bone Grasp — A target hit by its grasp cannot move away until it succeeds on a {{ ability:strength.name }} action to escape."
         ],
         "naturalArmorPercentage": 15
       }
@@ -223,7 +223,7 @@
         "statProfile": "creature-brute",
         "traits": [
           "{{ traits:natural_weapons }}",
-          "Barbed Seeds — Can make a ranged natural attack; a damaged target suffers -1 to Speed until the barb is removed."
+          "Barbed Seeds — Can make a ranged natural attack; a damaged target suffers -1 to {{ ability:speed.name }} until the barb is removed."
         ],
         "naturalArmorPercentage": 15
       }
@@ -297,7 +297,7 @@
         "statProfile": "creature-predator",
         "traits": [
           "{{ traits:burrower }}",
-          "Familiar Voices — +2 to Charisma actions made to lure or confuse someone by imitating voices it has heard."
+          "Familiar Voices — +2 to {{ ability:charisma.name }} actions made to lure or confuse someone by imitating voices it has heard."
         ],
         "naturalArmorPercentage": 15
       }
@@ -401,7 +401,7 @@
         "statProfile": "creature-caster",
         "traits": [
           "{{ traits:disease_immunity }}",
-          "False Miracle — Once per scene, restores 10% of a touched creature’s maximum HP; that creature suffers -1 to Intelligence actions until it next rests."
+          "False Miracle — Once per scene, restores 10% of a touched creature’s maximum HP; that creature suffers -1 to {{ ability:intelligence.name }} actions until it next rests."
         ],
         "equipment": ["weapons:arcane_scepter"],
         "armor": "armors:breastplate"
@@ -488,7 +488,7 @@
       "generation": {
         "statProfile": "creature-caster",
         "traits": [
-          "Imperfect Mimicry — Can copy a humanoid appearance, but gains -2 to Charisma actions involving that person’s habits or relationships."
+          "Imperfect Mimicry — Can copy a humanoid appearance, but gains -2 to {{ ability:charisma.name }} actions involving that person’s habits or relationships."
         ],
         "fixedRules": [
           {
@@ -540,7 +540,7 @@
         "statProfile": "creature-brute",
         "traits": [
           "{{ traits:powerful_build }}",
-          "Rooted Stance — While touching natural ground, gains +2 to Strength actions made to resist forced movement."
+          "Rooted Stance — While touching natural ground, gains +2 to {{ ability:strength.name }} actions made to resist forced movement."
         ],
         "fixedRules": [
           {
@@ -708,7 +708,7 @@
         "statProfile": "creature-predator",
         "traits": [
           "{{ traits:flight }}",
-          "Familiar Voices — +2 to Charisma actions made to lure or confuse someone by imitating voices it has heard."
+          "Familiar Voices — +2 to {{ ability:charisma.name }} actions made to lure or confuse someone by imitating voices it has heard."
         ],
         "naturalArmorPercentage": 10
       }
@@ -725,7 +725,7 @@
         "traits": [
           "{{ traits:amphibious }}",
           "{{ traits:aquatic_speed }}",
-          "Luring Song — +2 to Charisma actions made to isolate a listener that can hear the creature."
+          "Luring Song — +2 to {{ ability:charisma.name }} actions made to isolate a listener that can hear the creature."
         ],
         "fixedRules": [
           {
@@ -747,7 +747,7 @@
         "statProfile": "creature-brute",
         "traits": [
           "{{ traits:powerful_build }}",
-          "Keen Sight — +2 to Perception actions that rely on vision at long range."
+          "Keen Sight — +2 to {{ ability:perception.name }} actions that rely on vision at long range."
         ],
         "naturalArmorPercentage": 20
       }
@@ -808,7 +808,7 @@
         "statProfile": "creature-caster",
         "traits": [
           "{{ traits:incorporeal }}",
-          "Haunting Loop — Repeats one scene; witnesses who deliberately interrupt it suffer -1 to Intelligence actions until the spirit is appeased."
+          "Haunting Loop — Repeats one scene; witnesses who deliberately interrupt it suffer -1 to {{ ability:intelligence.name }} actions until the spirit is appeased."
         ],
         "modifiers": ["modifier_creature:shadowed"]
       }
@@ -962,7 +962,7 @@
         "statProfile": "creature-brute",
         "traits": [
           "{{ traits:camouflage }}",
-          "Alluring Mimicry — +2 to Charisma actions made to lure prey by imitating familiar scents, sounds, or shapes."
+          "Alluring Mimicry — +2 to {{ ability:charisma.name }} actions made to lure prey by imitating familiar scents, sounds, or shapes."
         ],
         "naturalArmorPercentage": 15
       }
@@ -1213,7 +1213,7 @@
         "traits": [
           "{{ traits:camouflage }}",
           "{{ traits:natural_weapons }}",
-          "Adhesive Hide — +2 to Strength actions made to maintain a grapple against a creature touching it."
+          "Adhesive Hide — +2 to {{ ability:strength.name }} actions made to maintain a grapple against a creature touching it."
         ],
         "naturalArmorPercentage": 20
       }
@@ -1231,7 +1231,7 @@
           "{{ traits:poison_immunity }}",
           "{{ traits:disease_immunity }}",
           "{{ traits:constrict }}",
-          "Transparent Body — +2 to Dexterity actions made to remain unnoticed while motionless in dim light."
+          "Transparent Body — +2 to {{ ability:dexterity.name }} actions made to remain unnoticed while motionless in dim light."
         ],
         "naturalArmorPercentage": 10
       }
