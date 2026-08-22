@@ -60,7 +60,7 @@
       "name": "Fête improvisée",
       "weight": 3,
       "fields": {
-        "description": "Des inconnus lancent soudain une fête centrée sur un concours faisant appel à {{ ability.name }}, qui rejoue une version méconnaissable d’un exploit récent accompli par une personne présente."
+        "description": "Des inconnus lancent soudain une fête centrée sur un concours mettant à l’épreuve l’aptitude suivante : {{ ability.name }}. L’épreuve rejoue une version méconnaissable d’un exploit récent accompli par une personne présente."
       }
     },
     {
@@ -76,7 +76,7 @@
       "name": "Hantise contestée",
       "weight": 2,
       "fields": {
-        "description": "Un enfant demande de l’aide contre la hantise qui frappe le lieu décrit comme {{ building.name }}, mais l’apparition affirme que l’enfant est le véritable intrus."
+        "description": "Un enfant demande de l’aide contre une hantise qui frappe un site voisin du type suivant : {{ building.name }}. L’apparition affirme que l’enfant est le véritable intrus."
       }
     },
     {
@@ -242,7 +242,7 @@
       "id": "sudden_tremor",
       "name": "Secousse soudaine",
       "fields": {
-        "description": "Le sol tremble assez fortement pour interrompre les événements et ouvrir une fissure sous le lieu décrit comme {{ building.name }}."
+        "description": "Le sol tremble assez fortement pour interrompre les événements. Une fissure s’ouvre sous un site voisin du type suivant : {{ building.name }}."
       }
     },
     {
@@ -263,7 +263,7 @@
       "id": "nauseating_odor",
       "name": "Odeur nauséabonde",
       "fields": {
-        "description": "Une puanteur inhabituelle envahit la zone ; sa trace mène au lieu décrit comme {{ building.name }} et signale un danger."
+        "description": "Une puanteur inhabituelle envahit la zone et signale un danger. Sa trace mène à un site voisin du type suivant : {{ building.name }}."
       }
     },
     {
@@ -375,7 +375,7 @@
       "id": "vanishing_landmark",
       "name": "Repère disparu",
       "fields": {
-        "description": "Le repère familier décrit comme {{ building.name }} disparaît en laissant derrière lui un terrain transformé et des souvenirs contradictoires."
+        "description": "Un repère familier du type suivant disparaît : {{ building.name }}. Il laisse derrière lui un terrain transformé et des souvenirs contradictoires."
       }
     },
     {

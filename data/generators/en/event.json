@@ -76,7 +76,7 @@
       "name": "Disputed Haunting",
       "weight": 2,
       "fields": {
-        "description": "A child asks for help with a haunting at the place described as {{ building.name }}, but the apparition insists that the child is the true intruder."
+        "description": "A child asks for help with a haunting at a nearby site of the following kind: {{ building.name }}. The apparition insists that the child is the true intruder."
       }
     },
     {
@@ -242,7 +242,7 @@
       "id": "sudden_tremor",
       "name": "Sudden Tremor",
       "fields": {
-        "description": "The ground shakes hard enough to interrupt events and open a fissure beneath the place described as {{ building.name }}."
+        "description": "The ground shakes hard enough to interrupt events. A fissure opens beneath a nearby site of the following kind: {{ building.name }}."
       }
     },
     {
@@ -263,7 +263,7 @@
       "id": "nauseating_odor",
       "name": "Nauseating Odor",
       "fields": {
-        "description": "An unusual stench fills the area; its trail leads toward the place described as {{ building.name }} and warns of danger."
+        "description": "An unusual stench fills the area and warns of danger. Its trail leads to a nearby site of the following kind: {{ building.name }}."
       }
     },
     {
@@ -375,7 +375,7 @@
       "id": "vanishing_landmark",
       "name": "Missing Landmark",
       "fields": {
-        "description": "The familiar landmark described as {{ building.name }} vanishes, leaving altered terrain and contradictory recollections behind."
+        "description": "A familiar landmark of the following kind vanishes: {{ building.name }}. Altered terrain and contradictory recollections remain behind."
       }
     },
     {
