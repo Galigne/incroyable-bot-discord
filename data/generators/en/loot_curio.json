@@ -178,6 +178,94 @@
       "fields": {
         "description": "A cracked wand, orb, rod, or other focus that still reacts faintly to nearby magic."
       }
+    },
+    {
+      "id": "erotic_novel",
+      "name": "Erotic novel",
+      "weight": 0.75,
+      "fields": {
+        "description": "A well-thumbed novel about the elaborate romantic and sexual entanglements of an entirely adult cast."
+      }
+    },
+    {
+      "id": "explicit_illustrated_manuscript",
+      "name": "Explicit illustrated manuscript",
+      "weight": 0.5,
+      "fields": {
+        "description": "A lavishly illuminated manuscript whose unmistakably sexual illustrations concern adults and leave little to scholarly interpretation."
+      }
+    },
+    {
+      "id": "suggestive_statuette",
+      "name": "Suggestive statuette",
+      "weight": 0.75,
+      "fields": {
+        "description": "A small statuette posed with enough erotic confidence to embarrass a conservative collector."
+      }
+    },
+    {
+      "id": "decorative_restraints",
+      "name": "Decorative handcuffs and restraints",
+      "weight": 0.5,
+      "fields": {
+        "description": "Polished handcuffs, silk-lined restraints, and ornate fastenings designed more for consenting adult play than imprisonment."
+      }
+    },
+    {
+      "id": "leather_riding_crop",
+      "name": "Leather riding crop",
+      "weight": 0.75,
+      "fields": {
+        "description": "A finely made leather riding crop whose wear suggests it was not purchased solely for horses."
+      }
+    },
+    {
+      "id": "elaborate_blindfold",
+      "name": "Elaborate blindfold",
+      "weight": 0.75,
+      "fields": {
+        "description": "A padded, perfumed blindfold decorated with embroidery and adjustable straps."
+      }
+    },
+    {
+      "id": "perfumed_undergarment",
+      "name": "Perfumed undergarment",
+      "weight": 0.5,
+      "fields": {
+        "description": "An expensive undergarment made for an adult, carrying a distinctive perfume, an embroidered initial, and no obvious explanation for being here."
+      }
+    },
+    {
+      "id": "risque_portrait",
+      "name": "Risqué portrait",
+      "weight": 0.75,
+      "fields": {
+        "description": "A skillful portrait of an adult subject wearing very little and displaying a face recognizable in respectable circles."
+      }
+    },
+    {
+      "id": "brothel_token",
+      "name": "Brothel token",
+      "weight": 0.75,
+      "fields": {
+        "description": "A discreet token redeemable at a particular brothel, stamped with an emblem known to regular adult patrons."
+      }
+    },
+    {
+      "id": "questionable_bedroom_accessories",
+      "name": "Box of questionable bedroom accessories",
+      "weight": 0.5,
+      "fields": {
+        "description": "A locked box containing an assortment of unmistakably adult bedroom accessories, scented oils, straps, and discreet instructions."
+      }
+    },
+    {
+      "id": "fertility_idol",
+      "name": "Fertility idol",
+      "weight": 0.75,
+      "fields": {
+        "description": "A boldly carved fertility idol associated with adult rites, vigorous blessings, and a cult whose modern respectability is disputed."
+      }
     }
   ]
 }

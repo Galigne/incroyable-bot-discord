@@ -69,6 +69,49 @@
       "weight": 0.5
     },
     { "id": "illegal_dueling", "name": "illegal dueling" },
-    { "id": "livestock_rustling", "name": "livestock rustling" }
+    { "id": "livestock_rustling", "name": "livestock rustling" },
+    {
+      "id": "corpse_desecration",
+      "name": "corpse desecration",
+      "weight": 0.75
+    },
+    { "id": "public_indecency", "name": "public indecency", "weight": 0.75 },
+    { "id": "drunken_disorder", "name": "drunken disorder" },
+    { "id": "gambling_fraud", "name": "gambling fraud" },
+    { "id": "desertion", "name": "military desertion" },
+    { "id": "fake_medicine_sales", "name": "selling fake medicine" },
+    {
+      "id": "illegal_corpse_trafficking",
+      "name": "illegal corpse trafficking",
+      "weight": 0.5
+    },
+    { "id": "cannibalism", "name": "cannibalism", "weight": 0.25 },
+    {
+      "id": "illegal_blasphemy",
+      "name": "blasphemy where local law prohibits it",
+      "weight": 0.5
+    },
+    {
+      "id": "religious_site_desecration",
+      "name": "desecrating a religious site",
+      "weight": 0.75
+    },
+    { "id": "illegal_pit_fighting", "name": "running illegal pit fights" },
+    {
+      "id": "obscene_material_smuggling",
+      "name": "smuggling obscene or prohibited material",
+      "weight": 0.75
+    },
+    {
+      "id": "illegal_brothel",
+      "name": "running an illegal brothel",
+      "weight": 0.75
+    },
+    { "id": "voyeurism", "name": "voyeurism", "weight": 0.5 },
+    {
+      "id": "magical_privacy_invasion",
+      "name": "magically spying on people in private",
+      "weight": 0.5
+    }
   ]
 }

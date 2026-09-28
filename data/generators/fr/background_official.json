@@ -74,6 +74,22 @@
       "generation": {
         "statProfile": "character-diplomat"
       }
+    },
+    {
+      "id": "executioner",
+      "name": "Bourreau",
+      "weight": 0.75,
+      "generation": {
+        "statProfile": "character-fighter"
+      }
+    },
+    {
+      "id": "torturer",
+      "name": "Tortionnaire",
+      "weight": 0.5,
+      "generation": {
+        "statProfile": "character-fighter"
+      }
     }
   ]
 }

@@ -84,6 +84,38 @@
       "generation": {
         "statProfile": "character-rogue"
       }
+    },
+    {
+      "id": "brothel_keeper",
+      "name": "Brothel keeper",
+      "weight": 0.5,
+      "generation": {
+        "statProfile": "character-diplomat"
+      }
+    },
+    {
+      "id": "procurer",
+      "name": "Procurer",
+      "weight": 0.5,
+      "generation": {
+        "statProfile": "character-diplomat"
+      }
+    },
+    {
+      "id": "gambler",
+      "name": "Gambler",
+      "weight": 0.75,
+      "generation": {
+        "statProfile": "character-diplomat"
+      }
+    },
+    {
+      "id": "bootlegger",
+      "name": "Bootlegger",
+      "weight": 0.75,
+      "generation": {
+        "statProfile": "character-rogue"
+      }
     }
   ]
 }

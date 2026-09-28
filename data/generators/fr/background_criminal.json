@@ -84,6 +84,38 @@
       "generation": {
         "statProfile": "character-rogue"
       }
+    },
+    {
+      "id": "brothel_keeper",
+      "name": "Tenancier de maison close",
+      "weight": 0.5,
+      "generation": {
+        "statProfile": "character-diplomat"
+      }
+    },
+    {
+      "id": "procurer",
+      "name": "Proxénète",
+      "weight": 0.5,
+      "generation": {
+        "statProfile": "character-diplomat"
+      }
+    },
+    {
+      "id": "gambler",
+      "name": "Joueur professionnel",
+      "weight": 0.75,
+      "generation": {
+        "statProfile": "character-diplomat"
+      }
+    },
+    {
+      "id": "bootlegger",
+      "name": "Trafiquant d’alcool",
+      "weight": 0.75,
+      "generation": {
+        "statProfile": "character-rogue"
+      }
     }
   ]
 }

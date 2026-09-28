@@ -178,6 +178,94 @@
       "fields": {
         "description": "Une baguette, un orbe, un sceptre ou un autre focaliseur fendu qui réagit encore faiblement à la magie proche."
       }
+    },
+    {
+      "id": "erotic_novel",
+      "name": "Roman érotique",
+      "weight": 0.75,
+      "fields": {
+        "description": "Un roman très feuilleté consacré aux relations sentimentales et sexuelles complexes de personnages tous adultes."
+      }
+    },
+    {
+      "id": "explicit_illustrated_manuscript",
+      "name": "Manuscrit illustré explicite",
+      "weight": 0.5,
+      "fields": {
+        "description": "Un manuscrit richement enluminé dont les illustrations sexuelles sans équivoque mettent en scène des adultes et laissent peu de place à l’interprétation savante."
+      }
+    },
+    {
+      "id": "suggestive_statuette",
+      "name": "Statuette suggestive",
+      "weight": 0.75,
+      "fields": {
+        "description": "Une petite statuette qui affiche assez d’assurance érotique pour embarrasser un collectionneur conservateur."
+      }
+    },
+    {
+      "id": "decorative_restraints",
+      "name": "Menottes et liens décoratifs",
+      "weight": 0.5,
+      "fields": {
+        "description": "Des menottes polies, des liens doublés de soie et des attaches ouvragées, conçus davantage pour les jeux consentis entre adultes que pour l’emprisonnement."
+      }
+    },
+    {
+      "id": "leather_riding_crop",
+      "name": "Cravache en cuir",
+      "weight": 0.75,
+      "fields": {
+        "description": "Une cravache en cuir de belle facture dont l’usure laisse penser qu’elle n’a pas été achetée uniquement pour les chevaux."
+      }
+    },
+    {
+      "id": "elaborate_blindfold",
+      "name": "Bandeau élaboré",
+      "weight": 0.75,
+      "fields": {
+        "description": "Un bandeau rembourré et parfumé, orné de broderies et muni de lanières réglables."
+      }
+    },
+    {
+      "id": "perfumed_undergarment",
+      "name": "Sous-vêtement parfumé",
+      "weight": 0.5,
+      "fields": {
+        "description": "Un sous-vêtement coûteux conçu pour un adulte, portant un parfum distinctif, une initiale brodée et aucune explication évidente de sa présence ici."
+      }
+    },
+    {
+      "id": "risque_portrait",
+      "name": "Portrait osé",
+      "weight": 0.75,
+      "fields": {
+        "description": "Le portrait habile d’un modèle adulte très peu vêtu dont le visage est reconnaissable dans les milieux respectables."
+      }
+    },
+    {
+      "id": "brothel_token",
+      "name": "Jeton de maison close",
+      "weight": 0.75,
+      "fields": {
+        "description": "Un jeton discret utilisable dans une maison close particulière, frappé d’un emblème connu de ses habitués adultes."
+      }
+    },
+    {
+      "id": "questionable_bedroom_accessories",
+      "name": "Coffret d’accessoires de chambre douteux",
+      "weight": 0.5,
+      "fields": {
+        "description": "Un coffret fermé contenant un assortiment indéniablement adulte d’accessoires de chambre, d’huiles parfumées, de lanières et d’instructions discrètes."
+      }
+    },
+    {
+      "id": "fertility_idol",
+      "name": "Idole de fertilité",
+      "weight": 0.75,
+      "fields": {
+        "description": "Une idole de fertilité sculptée sans pudeur, associée à des rites d’adultes, à des bénédictions vigoureuses et à un culte dont la respectabilité moderne fait débat."
+      }
     }
   ]
 }

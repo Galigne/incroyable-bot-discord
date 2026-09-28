@@ -69,6 +69,36 @@
       "id": "ceremonial_impersonation",
       "name": "remplacement d’une personne lors d’une cérémonie ou d’une occasion officielle",
       "weight": 0.5
+    },
+    {
+      "id": "discreet_adult_encounter",
+      "name": "organisation d’une rencontre romantique ou sexuelle discrète entre adultes consentants",
+      "weight": 0.5
+    },
+    {
+      "id": "intimate_letter_delivery",
+      "name": "livraison d’une lettre intime sans se faire découvrir",
+      "weight": 0.75
+    },
+    {
+      "id": "secret_lover_search",
+      "name": "recherche du partenaire adulte clandestin de quelqu’un",
+      "weight": 0.75
+    },
+    {
+      "id": "infidelity_investigation",
+      "name": "enquête sur une infidélité présumée",
+      "weight": 0.75
+    },
+    {
+      "id": "adult_party_entertainment",
+      "name": "organisation des divertissements d’une soirée privée pour adultes",
+      "weight": 0.5
+    },
+    {
+      "id": "compromising_evidence_removal",
+      "name": "suppression de preuves compromettantes avant leur découverte",
+      "weight": 0.5
     }
   ]
 }

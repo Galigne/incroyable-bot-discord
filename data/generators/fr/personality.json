@@ -819,6 +819,160 @@
       "fields": {
         "description": "Bon vivant, valorise nourriture, compagnie et confort sans pour autant abandonner un ami lorsque la fête se termine."
       }
+    },
+    {
+      "id": "masochist",
+      "name": "Masochiste",
+      "weight": 0.75,
+      "fields": {
+        "description": "Masochiste, aime la douleur, l’humiliation ou la domination consentie et recherche parfois ces expériences aux moments les moins opportuns."
+      }
+    },
+    {
+      "id": "sadist",
+      "name": "Sadique",
+      "weight": 0.5,
+      "fields": {
+        "description": "Sadique, prend un plaisir inquiétant à infliger douleur, peur ou inconfort et cherche des prétextes pour s’y livrer."
+      }
+    },
+    {
+      "id": "exhibitionist",
+      "name": "Exhibitionniste",
+      "weight": 0.75,
+      "fields": {
+        "description": "Exhibitionniste, aime être regardé, admiré, exposé ou servir à scandaliser les adultes les plus conservateurs."
+      }
+    },
+    {
+      "id": "shameless_flirt",
+      "name": "Dragueur impénitent",
+      "fields": {
+        "description": "Drague sans vergogne tout adulte qui lui plaît, sans considération pour le moment, le danger, la solennité ou les complications évidentes."
+      }
+    },
+    {
+      "id": "hopelessly_horny",
+      "name": "Obsédé par le sexe",
+      "weight": 0.75,
+      "fields": {
+        "description": "Obsédé par le sexe, laisse ses envies passer avant les priorités raisonnables, le jugement professionnel et la simple lecture de l’ambiance."
+      }
+    },
+    {
+      "id": "serial_seducer",
+      "name": "Séducteur en série",
+      "weight": 0.75,
+      "fields": {
+        "description": "Séducteur en série, considère la conquête d’adultes attirants comme un passe-temps, un sport de compétition et une preuve d’excellence personnelle."
+      }
+    },
+    {
+      "id": "kink_enthusiast",
+      "name": "Adepte des pratiques érotiques atypiques",
+      "weight": 0.5,
+      "fields": {
+        "description": "Cultive de nombreuses préférences inhabituelles et n’hésite jamais à les décrire à d’autres adultes avec une franchise déconcertante."
+      }
+    },
+    {
+      "id": "dominant_partner",
+      "name": "Dominant",
+      "weight": 0.75,
+      "fields": {
+        "description": "Aime prendre le contrôle et apprécie tout particulièrement la soumission librement consentie de partenaires adultes de confiance."
+      }
+    },
+    {
+      "id": "consensually_submissive",
+      "name": "Volontairement soumis",
+      "weight": 0.75,
+      "fields": {
+        "description": "Aime céder volontairement le contrôle à des partenaires adultes de confiance et se montre exigeant sur le consentement, l’assurance et la discrétion."
+      }
+    },
+    {
+      "id": "compulsive_romantic",
+      "name": "Romantique compulsif",
+      "fields": {
+        "description": "Romantique compulsif, tombe passionnément amoureux beaucoup trop facilement et prend chaque nouvel engouement pour le destin."
+      }
+    },
+    {
+      "id": "no_strings_hedonist",
+      "name": "Hédoniste sans attaches",
+      "weight": 0.75,
+      "fields": {
+        "description": "Hédoniste sans attaches, place ouvertement le plaisir au premier plan, évite les promesses et juge la retenue largement surfaite."
+      }
+    },
+    {
+      "id": "prudish_hypocrite",
+      "name": "Pudibond hypocrite",
+      "weight": 0.75,
+      "fields": {
+        "description": "Pudibond hypocrite, condamne bruyamment l’indécence sexuelle en public tout en pratiquant en privé exactement ce qu’il dénonce."
+      }
+    },
+    {
+      "id": "proud_coward",
+      "name": "Lâche convaincu",
+      "fields": {
+        "description": "Lâche convaincu, a élaboré toute une philosophie pour expliquer pourquoi fuir le danger constitue la forme suprême de sagesse et de courage."
+      }
+    },
+    {
+      "id": "religious_hypocrite",
+      "name": "Dévot hypocrite",
+      "weight": 0.75,
+      "fields": {
+        "description": "Dévot hypocrite, invoque sans cesse morale, doctrine et jugement divin tout en inventant des exceptions privées pour chacun de ses vices."
+      }
+    },
+    {
+      "id": "classist_snob",
+      "name": "Snob classiste",
+      "fields": {
+        "description": "Snob classiste, voue une obsession à la richesse, au rang, à l’éducation, aux manières et à la prétendue infériorité de ceux qui en manquent."
+      }
+    },
+    {
+      "id": "bad_loser",
+      "name": "Mauvais perdant",
+      "fields": {
+        "description": "Mauvais perdant, considère la victoire comme la preuve de sa supériorité et la défaite comme celle que l’adversaire a triché, que les règles ont failli ou que le destin est corrompu."
+      }
+    },
+    {
+      "id": "proudly_ignorant",
+      "name": "Fier de son ignorance",
+      "fields": {
+        "description": "Fier de son ignorance, prend le fait de ne rien connaître à un sujet comme la preuve qu’il est prétentieux, inutile ou probablement inventé."
+      }
+    },
+    {
+      "id": "morbidly_inappropriate",
+      "name": "Humour morbide déplacé",
+      "weight": 0.75,
+      "fields": {
+        "description": "Incapable de se tenir, plaisante aux enterrements, aux exécutions, pendant les catastrophes et à tous les moments où une personne décente saurait se taire."
+      }
+    },
+    {
+      "id": "ancestry_bigot",
+      "name": "Raciste envers les peuples fantastiques",
+      "weight": 0.75,
+      "fields": {
+        "description": "S’accroche à des stéréotypes insultants sur un ou plusieurs peuples fantastiques et prend des préjugés hérités pour de l’expérience pratique."
+      }
+    },
+    {
+      "id": "profession_bigot",
+      "name": "Intolérant envers une profession",
+      "weight": 0.75,
+      "fields": {
+        "description": "Suppose que les mages, nobles, aventuriers, marchands, prêtres ou membres d’une autre profession du monde sont forcément corrompus et juge chaque individu en conséquence."
+      }
     }
   ]
 }

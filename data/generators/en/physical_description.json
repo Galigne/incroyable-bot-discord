@@ -511,6 +511,69 @@
       "fields": {
         "description": "A simple inked band circles one wrist."
       }
+    },
+    {
+      "id": "poorly_fitted_wig",
+      "name": "An obviously false and poorly fitted wig",
+      "fields": {
+        "description": "Their hair is an obviously false, poorly fitted wig that shifts slightly with quick movement."
+      }
+    },
+    {
+      "id": "large_beer_belly",
+      "name": "A large beer belly",
+      "fields": {
+        "description": "A large beer belly gives their torso a pronounced rounded shape."
+      }
+    },
+    {
+      "id": "permanently_bloodshot_eyes",
+      "name": "Permanently bloodshot eyes",
+      "fields": {
+        "description": "Their eyes are permanently bloodshot, whether from sleeplessness, smoke, drink, illness, or some unknown cause."
+      }
+    },
+    {
+      "id": "strong_sweat_odor",
+      "name": "A strong smell of sweat",
+      "fields": {
+        "description": "A strong smell of sweat remains noticeable even beneath perfume, soap, leather, or travel dust."
+      }
+    },
+    {
+      "id": "greasy_hair",
+      "name": "Greasy hair",
+      "fields": {
+        "description": "Their hair is visibly greasy and clings together in uneven strands."
+      }
+    },
+    {
+      "id": "extremely_hairy",
+      "name": "Extremely hairy",
+      "fields": {
+        "description": "They have exceptionally abundant body hair visible at the face, arms, neck, or open clothing."
+      }
+    },
+    {
+      "id": "proud_impressive_physique",
+      "name": "An impressive physique displayed with pride",
+      "fields": {
+        "description": "They possess an impressive physique and choose posture and clothing that display it proudly."
+      }
+    },
+    {
+      "id": "looks_much_older",
+      "name": "Looks considerably older than their age",
+      "fields": {
+        "description": "Their face, hair, posture, or manner makes them look considerably older than they actually are."
+      }
+    },
+    {
+      "id": "looks_much_younger",
+      "name": "Looks considerably younger than their age",
+      "fields": {
+        "description": "They are clearly an adult, but their face, voice, build, or manner makes them look considerably younger than they actually are."
+      }
     }
   ]
 }

@@ -492,6 +492,30 @@
       "fields": {
         "description": "Over several hours, gravity tilts a little farther every few minutes, steadily changing which surfaces are floors and which routes remain safe."
       }
+    },
+    {
+      "id": "prominent_figure_compromised",
+      "name": "Prominent Figure Caught Compromised",
+      "weight": 0.5,
+      "fields": {
+        "description": "A respected adult official, noble, priest, or other prominent figure is caught in a spectacularly compromising situation with another consenting adult as witnesses gather; the exact circumstances remain decorously obscured."
+      }
+    },
+    {
+      "id": "accurate_scandal_lists",
+      "name": "Accurate Scandal Lists",
+      "weight": 0.5,
+      "fields": {
+        "description": "Someone anonymously distributes accurate lists of local affairs between adults, debts, bribes, illegitimate children, and other scandals; copies spread faster than authorities can seize them."
+      }
+    },
+    {
+      "id": "uncontrollable_profanity",
+      "name": "Uncontrollable Profanity",
+      "weight": 0.75,
+      "fields": {
+        "description": "A magical or mundane influence causes widespread uncontrollable profanity, disrupting solemn rites, negotiations, trials, performances, and polite conversation."
+      }
     }
   ]
 }

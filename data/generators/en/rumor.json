@@ -266,6 +266,134 @@
       "fields": {
         "description": "The item known as {{ loot.generator.name }} may not be cursed at all; witnesses insist that it simply and actively dislikes its current owner."
       }
+    },
+    {
+      "id": "celibate_cleric_lovers",
+      "name": "Celibate cleric’s lovers",
+      "weight": 0.75,
+      "fields": {
+        "description": "A supposedly celibate adult priest or religious leader is rumored to maintain several adult lovers in different parts of the settlement."
+      }
+    },
+    {
+      "id": "noble_private_orgies",
+      "name": "Noble’s private orgies",
+      "weight": 0.5,
+      "fields": {
+        "description": "A local noble allegedly holds decadent private orgies for consenting adults and invites officials whose favors are useful afterward."
+      }
+    },
+    {
+      "id": "adventurer_seduces_quest_givers",
+      "name": "Adventurer seduces quest-givers",
+      "weight": 0.75,
+      "fields": {
+        "description": "A famous adult adventurer’s real talent is supposedly seducing adult quest-givers, rivals, witnesses, and anyone likely to forgive an unfinished job."
+      }
+    },
+    {
+      "id": "guard_captain_arrestees",
+      "name": "Guard captain’s compromised arrests",
+      "weight": 0.5,
+      "fields": {
+        "description": "The guard captain is accused of sleeping with adults they were supposed to arrest, raising serious questions about coercion, favoritism, and abuse of authority."
+      }
+    },
+    {
+      "id": "haunted_manor_gatherings",
+      "name": "Haunted manor’s secret gatherings",
+      "weight": 0.75,
+      "fields": {
+        "description": "A supposedly haunted manor is rumored to be used for secret sexual gatherings between consenting adults; the ghost stories merely discourage visitors."
+      }
+    },
+    {
+      "id": "promotion_through_affair",
+      "name": "Promotion through an affair",
+      "weight": 0.75,
+      "fields": {
+        "description": "Someone important allegedly obtained their office, command, title, or lucrative post through an affair with an adult superior."
+      }
+    },
+    {
+      "id": "illiterate_mayor",
+      "name": "Illiterate official",
+      "weight": 0.75,
+      "fields": {
+        "description": "The mayor or another important official is rumored to be functionally illiterate and to have pretended to read documents for years."
+      }
+    },
+    {
+      "id": "bards_invent_heroics",
+      "name": "Hero pays for invented exploits",
+      "weight": 0.75,
+      "fields": {
+        "description": "A famous hero supposedly pays bards to invent most of their adventures and pays witnesses even more to remain quiet."
+      }
+    },
+    {
+      "id": "unconsummated_royal_marriage",
+      "name": "Unconsummated royal marriage",
+      "weight": 0.5,
+      "fields": {
+        "description": "The royal marriage between two adults has reportedly never been consummated, and courtiers are discreetly taking bets on the reason."
+      }
+    },
+    {
+      "id": "embarrassing_curse",
+      "name": "Embarrassing concealed curse",
+      "weight": 0.75,
+      "fields": {
+        "description": "An important person is said to be concealing a curse whose effect is humiliating, indecent, inconvenient, or disastrous for their carefully managed dignity."
+      }
+    },
+    {
+      "id": "unwanted_advances",
+      "name": "Persistent unwanted advances",
+      "weight": 0.25,
+      "fields": {
+        "description": "A powerful adult is accused of repeatedly making unwanted sexual advances toward other adults and punishing those who refuse or complain."
+      }
+    },
+    {
+      "id": "scandal_suppression",
+      "name": "Sexual scandal suppressed",
+      "weight": 0.25,
+      "fields": {
+        "description": "A prominent figure allegedly used money, influence, threats, or blackmail to suppress a serious sexual scandal involving adults."
+      }
+    },
+    {
+      "id": "adventurers_manufacture_monsters",
+      "name": "Adventurers manufacture monster problems",
+      "weight": 0.5,
+      "fields": {
+        "description": "A celebrated adventuring company is rumored to lure or release monsters near vulnerable settlements, then demand payment to eliminate the threat it created."
+      }
+    },
+    {
+      "id": "necromantic_labor",
+      "name": "Necromantic unpaid labor",
+      "weight": 0.75,
+      "fields": {
+        "description": "Local necromancers are said to use the dead as unpaid labor while merchants and officials quietly profit from the arrangement."
+      }
+    },
+    {
+      "id": "party_ruler",
+      "name": "Ruler better at partying than governing",
+      "weight": 0.75,
+      "fields": {
+        "description": "The ruler is rumored to be hopeless at governing but exceptionally talented at throwing parties, winning drinking contests, and distracting the court."
+      }
+    },
+    {
+      "id": "body_part_relic",
+      "name": "Relic may be an unknown body part",
+      "weight": 0.5,
+      "fields": {
+        "description": "A supposedly holy relic is rumored to be an unidentified body part with no proven connection to the saint, deity, or miracle attributed to it."
+      }
     }
   ]
 }

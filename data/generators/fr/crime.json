@@ -69,6 +69,59 @@
       "weight": 0.5
     },
     { "id": "illegal_dueling", "name": "duels illégaux" },
-    { "id": "livestock_rustling", "name": "vol de bétail" }
+    { "id": "livestock_rustling", "name": "vol de bétail" },
+    {
+      "id": "corpse_desecration",
+      "name": "profanation de cadavres",
+      "weight": 0.75
+    },
+    {
+      "id": "public_indecency",
+      "name": "atteinte à la pudeur publique",
+      "weight": 0.75
+    },
+    {
+      "id": "drunken_disorder",
+      "name": "ivresse et tapage sur la voie publique"
+    },
+    { "id": "gambling_fraud", "name": "fraude aux jeux d’argent" },
+    { "id": "desertion", "name": "désertion militaire" },
+    { "id": "fake_medicine_sales", "name": "vente de faux remèdes" },
+    {
+      "id": "illegal_corpse_trafficking",
+      "name": "trafic illégal de cadavres",
+      "weight": 0.5
+    },
+    { "id": "cannibalism", "name": "cannibalisme", "weight": 0.25 },
+    {
+      "id": "illegal_blasphemy",
+      "name": "blasphème là où la loi locale l’interdit",
+      "weight": 0.5
+    },
+    {
+      "id": "religious_site_desecration",
+      "name": "profanation d’un site religieux",
+      "weight": 0.75
+    },
+    {
+      "id": "illegal_pit_fighting",
+      "name": "organisation de combats clandestins"
+    },
+    {
+      "id": "obscene_material_smuggling",
+      "name": "contrebande de matériel obscène ou interdit",
+      "weight": 0.75
+    },
+    {
+      "id": "illegal_brothel",
+      "name": "exploitation d’une maison close illégale",
+      "weight": 0.75
+    },
+    { "id": "voyeurism", "name": "voyeurisme", "weight": 0.5 },
+    {
+      "id": "magical_privacy_invasion",
+      "name": "espionnage magique de personnes dans leur intimité",
+      "weight": 0.5
+    }
   ]
 }

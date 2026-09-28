@@ -266,6 +266,134 @@
       "fields": {
         "description": "L’objet appelé {{ loot.generator.name }} ne serait pas maudit ; selon les témoins, il aurait simplement et activement pris son propriétaire actuel en grippe."
       }
+    },
+    {
+      "id": "celibate_cleric_lovers",
+      "name": "Amants d’un religieux célibataire",
+      "weight": 0.75,
+      "fields": {
+        "description": "Un prêtre ou chef religieux adulte censément voué au célibat entretiendrait plusieurs amants adultes dans différents quartiers de la localité."
+      }
+    },
+    {
+      "id": "noble_private_orgies",
+      "name": "Orgies privées d’un noble",
+      "weight": 0.5,
+      "fields": {
+        "description": "Un noble local organiserait des orgies privées décadentes entre adultes consentants et y inviterait des fonctionnaires dont les faveurs pourraient ensuite servir."
+      }
+    },
+    {
+      "id": "adventurer_seduces_quest_givers",
+      "name": "Aventurier séduisant les commanditaires",
+      "weight": 0.75,
+      "fields": {
+        "description": "Le véritable talent d’un célèbre aventurier adulte serait de séduire des commanditaires adultes, des rivaux, des témoins et toute personne susceptible de pardonner un travail inachevé."
+      }
+    },
+    {
+      "id": "guard_captain_arrestees",
+      "name": "Arrestations compromises du capitaine",
+      "weight": 0.5,
+      "fields": {
+        "description": "Le capitaine de la garde est accusé d’avoir couché avec des adultes qu’il devait arrêter, ce qui soulève de graves questions de contrainte, de favoritisme et d’abus d’autorité."
+      }
+    },
+    {
+      "id": "haunted_manor_gatherings",
+      "name": "Réunions secrètes du manoir hanté",
+      "weight": 0.75,
+      "fields": {
+        "description": "Un manoir censément hanté servirait à des rencontres sexuelles secrètes entre adultes consentants ; les histoires de fantômes ne feraient que décourager les visiteurs."
+      }
+    },
+    {
+      "id": "promotion_through_affair",
+      "name": "Poste obtenu par une liaison",
+      "weight": 0.75,
+      "fields": {
+        "description": "Une personne influente aurait obtenu sa fonction, son commandement, son titre ou son poste lucratif grâce à une liaison avec un supérieur adulte."
+      }
+    },
+    {
+      "id": "illiterate_mayor",
+      "name": "Responsable illettré",
+      "weight": 0.75,
+      "fields": {
+        "description": "Le maire ou un autre responsable important serait fonctionnellement illettré et ferait semblant de lire des documents depuis des années."
+      }
+    },
+    {
+      "id": "bards_invent_heroics",
+      "name": "Exploits inventés à prix d’or",
+      "weight": 0.75,
+      "fields": {
+        "description": "Un héros célèbre paierait des bardes pour inventer la plupart de ses aventures et verserait encore davantage aux témoins pour qu’ils se taisent."
+      }
+    },
+    {
+      "id": "unconsummated_royal_marriage",
+      "name": "Mariage royal non consommé",
+      "weight": 0.5,
+      "fields": {
+        "description": "Le mariage royal entre deux adultes n’aurait jamais été consommé, et les courtisans parieraient discrètement sur la raison."
+      }
+    },
+    {
+      "id": "embarrassing_curse",
+      "name": "Malédiction embarrassante dissimulée",
+      "weight": 0.75,
+      "fields": {
+        "description": "Une personnalité importante dissimulerait une malédiction aux effets humiliants, indécents, gênants ou désastreux pour sa dignité soigneusement entretenue."
+      }
+    },
+    {
+      "id": "unwanted_advances",
+      "name": "Avances sexuelles insistantes et non désirées",
+      "weight": 0.25,
+      "fields": {
+        "description": "Un adulte puissant est accusé de faire régulièrement des avances sexuelles non désirées à d’autres adultes et de punir ceux qui refusent ou se plaignent."
+      }
+    },
+    {
+      "id": "scandal_suppression",
+      "name": "Scandale sexuel étouffé",
+      "weight": 0.25,
+      "fields": {
+        "description": "Une personnalité aurait utilisé argent, influence, menaces ou chantage pour étouffer un grave scandale sexuel impliquant des adultes."
+      }
+    },
+    {
+      "id": "adventurers_manufacture_monsters",
+      "name": "Problèmes de monstres fabriqués par des aventuriers",
+      "weight": 0.5,
+      "fields": {
+        "description": "Une compagnie d’aventuriers renommée attirerait ou relâcherait des monstres près de communautés vulnérables avant d’exiger un paiement pour éliminer la menace qu’elle a créée."
+      }
+    },
+    {
+      "id": "necromantic_labor",
+      "name": "Main-d’œuvre nécromantique non rémunérée",
+      "weight": 0.75,
+      "fields": {
+        "description": "Les nécromanciens locaux emploieraient les morts comme main-d’œuvre gratuite tandis que marchands et fonctionnaires profiteraient discrètement de cet arrangement."
+      }
+    },
+    {
+      "id": "party_ruler",
+      "name": "Dirigeant meilleur fêtard que gouvernant",
+      "weight": 0.75,
+      "fields": {
+        "description": "Le dirigeant serait incapable de gouverner, mais exceptionnel pour organiser des fêtes, gagner des concours de boisson et distraire la cour."
+      }
+    },
+    {
+      "id": "body_part_relic",
+      "name": "Relique peut-être faite d’un morceau de corps",
+      "weight": 0.5,
+      "fields": {
+        "description": "Une prétendue sainte relique serait un morceau de corps non identifié sans aucun lien établi avec le saint, la divinité ou le miracle qu’on lui attribue."
+      }
     }
   ]
 }

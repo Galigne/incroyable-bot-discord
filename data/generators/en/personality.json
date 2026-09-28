@@ -819,6 +819,160 @@
       "fields": {
         "description": "A bon vivant who values food, company, and comfort without abandoning friends when the party ends."
       }
+    },
+    {
+      "id": "masochist",
+      "name": "Masochist",
+      "weight": 0.75,
+      "fields": {
+        "description": "A masochist who enjoys pain, humiliation, or consensual domination and sometimes pursues those experiences at deeply inconvenient moments."
+      }
+    },
+    {
+      "id": "sadist",
+      "name": "Sadist",
+      "weight": 0.5,
+      "fields": {
+        "description": "A sadist who takes an uncomfortable amount of pleasure in causing pain, fear, or discomfort and looks for excuses to indulge it."
+      }
+    },
+    {
+      "id": "exhibitionist",
+      "name": "Exhibitionist",
+      "weight": 0.75,
+      "fields": {
+        "description": "An exhibitionist who enjoys being watched, admired, exposed, or used to scandalize more conservative adults."
+      }
+    },
+    {
+      "id": "shameless_flirt",
+      "name": "Shameless flirt",
+      "fields": {
+        "description": "A shameless flirt who propositions any adult they find attractive regardless of timing, danger, solemnity, or obvious complications."
+      }
+    },
+    {
+      "id": "hopelessly_horny",
+      "name": "Hopelessly horny",
+      "weight": 0.75,
+      "fields": {
+        "description": "Hopelessly horny, lets sexual interest interfere with sensible priorities, professional judgment, and basic awareness of the room."
+      }
+    },
+    {
+      "id": "serial_seducer",
+      "name": "Serial seducer",
+      "weight": 0.75,
+      "fields": {
+        "description": "A serial seducer who treats winning over attractive adults as a hobby, a competitive sport, and proof of personal excellence."
+      }
+    },
+    {
+      "id": "kink_enthusiast",
+      "name": "Kink enthusiast",
+      "weight": 0.5,
+      "fields": {
+        "description": "A kink enthusiast with many unusual preferences and no hesitation about discussing them with other adults in startling detail."
+      }
+    },
+    {
+      "id": "dominant_partner",
+      "name": "Dominant",
+      "weight": 0.75,
+      "fields": {
+        "description": "Likes taking control and particularly enjoys the freely given submission of trusted adult partners."
+      }
+    },
+    {
+      "id": "consensually_submissive",
+      "name": "Consensually submissive",
+      "weight": 0.75,
+      "fields": {
+        "description": "Enjoys voluntarily surrendering control to trusted adult partners and is exacting about consent, confidence, and discretion."
+      }
+    },
+    {
+      "id": "compulsive_romantic",
+      "name": "Compulsive romantic",
+      "fields": {
+        "description": "A compulsive romantic who falls passionately in love far too easily and treats every new infatuation as destiny."
+      }
+    },
+    {
+      "id": "no_strings_hedonist",
+      "name": "No-strings hedonist",
+      "weight": 0.75,
+      "fields": {
+        "description": "A no-strings hedonist who openly prioritizes pleasure, avoids promises, and considers restraint an overrated virtue."
+      }
+    },
+    {
+      "id": "prudish_hypocrite",
+      "name": "Prudish hypocrite",
+      "weight": 0.75,
+      "fields": {
+        "description": "A prudish hypocrite who loudly condemns sexual impropriety in public while privately indulging in precisely what they denounce."
+      }
+    },
+    {
+      "id": "proud_coward",
+      "name": "Proud coward",
+      "fields": {
+        "description": "A proud coward with an elaborate philosophy explaining why avoiding danger is the highest form of wisdom and courage."
+      }
+    },
+    {
+      "id": "religious_hypocrite",
+      "name": "Religious hypocrite",
+      "weight": 0.75,
+      "fields": {
+        "description": "A religious hypocrite who constantly invokes morality, doctrine, and divine judgment while inventing private exceptions for every personal vice."
+      }
+    },
+    {
+      "id": "classist_snob",
+      "name": "Classist snob",
+      "fields": {
+        "description": "A classist snob obsessed with wealth, rank, education, manners, and the supposed inferiority of anyone lacking them."
+      }
+    },
+    {
+      "id": "bad_loser",
+      "name": "Bad loser",
+      "fields": {
+        "description": "A bad loser who considers victory proof of superiority and defeat proof that an opponent cheated, the rules failed, or fate was corrupt."
+      }
+    },
+    {
+      "id": "proudly_ignorant",
+      "name": "Proudly ignorant",
+      "fields": {
+        "description": "Proudly ignorant, treats not knowing something as evidence that the subject is pretentious, irrelevant, or probably invented."
+      }
+    },
+    {
+      "id": "morbidly_inappropriate",
+      "name": "Morbidly inappropriate",
+      "weight": 0.75,
+      "fields": {
+        "description": "Morbidly inappropriate, makes jokes at funerals, executions, disasters, and every other moment when decent people know to remain silent."
+      }
+    },
+    {
+      "id": "ancestry_bigot",
+      "name": "Ancestry bigot",
+      "weight": 0.75,
+      "fields": {
+        "description": "Clings to insulting stereotypes about one or more fantasy peoples and mistakes inherited prejudice for practical experience."
+      }
+    },
+    {
+      "id": "profession_bigot",
+      "name": "Profession bigot",
+      "weight": 0.75,
+      "fields": {
+        "description": "Assumes that mages, nobles, adventurers, merchants, priests, or another in-world profession is inherently corrupt and judges individuals accordingly."
+      }
     }
   ]
 }

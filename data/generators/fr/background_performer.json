@@ -77,6 +77,38 @@
       "generation": {
         "statProfile": "character-diplomat"
       }
+    },
+    {
+      "id": "prostitute",
+      "name": "Prostitué",
+      "weight": 0.5,
+      "generation": {
+        "statProfile": "character-diplomat"
+      }
+    },
+    {
+      "id": "professional_dominatrix",
+      "name": "Dominatrice professionnelle",
+      "weight": 0.5,
+      "generation": {
+        "statProfile": "character-diplomat"
+      }
+    },
+    {
+      "id": "erotic_writer",
+      "name": "Auteur de littérature érotique",
+      "weight": 0.75,
+      "generation": {
+        "statProfile": "character-diplomat"
+      }
+    },
+    {
+      "id": "pit_fighter",
+      "name": "Combattant d’arène clandestine",
+      "weight": 0.75,
+      "generation": {
+        "statProfile": "character-fighter"
+      }
     }
   ]
 }

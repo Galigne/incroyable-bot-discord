@@ -77,6 +77,14 @@
       "generation": {
         "statProfile": "character-cleric"
       }
+    },
+    {
+      "id": "fake_prophet",
+      "name": "Faux prophète",
+      "weight": 0.5,
+      "generation": {
+        "statProfile": "character-diplomat"
+      }
     }
   ]
 }

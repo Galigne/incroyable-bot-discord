@@ -69,6 +69,36 @@
       "id": "ceremonial_impersonation",
       "name": "impersonating someone at a ceremony or formal occasion",
       "weight": 0.5
+    },
+    {
+      "id": "discreet_adult_encounter",
+      "name": "arranging a discreet romantic or sexual encounter between consenting adults",
+      "weight": 0.5
+    },
+    {
+      "id": "intimate_letter_delivery",
+      "name": "delivering an intimate letter without being discovered",
+      "weight": 0.75
+    },
+    {
+      "id": "secret_lover_search",
+      "name": "finding someone’s secret adult lover",
+      "weight": 0.75
+    },
+    {
+      "id": "infidelity_investigation",
+      "name": "investigating suspected infidelity",
+      "weight": 0.75
+    },
+    {
+      "id": "adult_party_entertainment",
+      "name": "organizing entertainment for a private adult party",
+      "weight": 0.5
+    },
+    {
+      "id": "compromising_evidence_removal",
+      "name": "removing compromising evidence before it is discovered",
+      "weight": 0.5
     }
   ]
 }

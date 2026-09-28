@@ -492,6 +492,30 @@
       "fields": {
         "description": "Pendant plusieurs heures, la gravité s’incline un peu plus toutes les quelques minutes, transformant peu à peu certaines surfaces en sols et condamnant les itinéraires devenus dangereux."
       }
+    },
+    {
+      "id": "prominent_figure_compromised",
+      "name": "Personnalité surprise en fâcheuse posture",
+      "weight": 0.5,
+      "fields": {
+        "description": "Un fonctionnaire, noble, prêtre ou autre notable adulte et respecté est surpris dans une situation spectaculairement compromettante avec un autre adulte consentant tandis que les témoins s’accumulent ; les circonstances exactes restent pudiquement masquées."
+      }
+    },
+    {
+      "id": "accurate_scandal_lists",
+      "name": "Listes exactes des scandales",
+      "weight": 0.5,
+      "fields": {
+        "description": "Quelqu’un distribue anonymement des listes exactes de liaisons locales entre adultes, de dettes, de pots-de-vin, d’enfants illégitimes et d’autres scandales ; les copies circulent plus vite que les autorités ne peuvent les saisir."
+      }
+    },
+    {
+      "id": "uncontrollable_profanity",
+      "name": "Vulgarité incontrôlable",
+      "weight": 0.75,
+      "fields": {
+        "description": "Une influence magique ou ordinaire provoque une vague générale de grossièretés incontrôlables qui perturbe rites solennels, négociations, procès, spectacles et conversations polies."
+      }
     }
   ]
 }

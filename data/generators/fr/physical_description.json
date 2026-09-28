@@ -511,6 +511,69 @@
       "fields": {
         "description": "Une simple bande tatouée fait le tour d’un poignet."
       }
+    },
+    {
+      "id": "poorly_fitted_wig",
+      "name": "Une perruque manifestement fausse et mal ajustée",
+      "fields": {
+        "description": "Sa chevelure est une perruque manifestement fausse et mal ajustée qui se déplace légèrement lors des mouvements brusques."
+      }
+    },
+    {
+      "id": "large_beer_belly",
+      "name": "Un gros ventre à bière",
+      "fields": {
+        "description": "Un gros ventre à bière donne à son torse une forme arrondie très prononcée."
+      }
+    },
+    {
+      "id": "permanently_bloodshot_eyes",
+      "name": "Des yeux constamment injectés de sang",
+      "fields": {
+        "description": "Ses yeux sont constamment injectés de sang, que la cause en soit le manque de sommeil, la fumée, l’alcool, la maladie ou autre chose."
+      }
+    },
+    {
+      "id": "strong_sweat_odor",
+      "name": "Une forte odeur de transpiration",
+      "fields": {
+        "description": "Une forte odeur de transpiration reste perceptible malgré le parfum, le savon, le cuir ou la poussière du voyage."
+      }
+    },
+    {
+      "id": "greasy_hair",
+      "name": "Des cheveux gras",
+      "fields": {
+        "description": "Ses cheveux sont visiblement gras et collés en mèches irrégulières."
+      }
+    },
+    {
+      "id": "extremely_hairy",
+      "name": "Une pilosité extrêmement abondante",
+      "fields": {
+        "description": "Sa pilosité corporelle est exceptionnellement abondante et visible sur le visage, les bras, le cou ou aux ouvertures de ses vêtements."
+      }
+    },
+    {
+      "id": "proud_impressive_physique",
+      "name": "Un physique impressionnant fièrement affiché",
+      "fields": {
+        "description": "Possède un physique impressionnant et choisit posture et vêtements pour l’afficher avec fierté."
+      }
+    },
+    {
+      "id": "looks_much_older",
+      "name": "Paraît nettement plus âgé que son âge",
+      "fields": {
+        "description": "Son visage, ses cheveux, sa posture ou son comportement le font paraître nettement plus âgé qu’il ne l’est vraiment."
+      }
+    },
+    {
+      "id": "looks_much_younger",
+      "name": "Paraît nettement plus jeune que son âge",
+      "fields": {
+        "description": "C’est clairement un adulte, mais son visage, sa voix, sa carrure ou son comportement le font paraître nettement plus jeune qu’il ne l’est vraiment."
+      }
     }
   ]
 }
