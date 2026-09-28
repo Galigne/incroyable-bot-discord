@@ -465,14 +465,6 @@
       }
     },
     {
-      "id": "misassigned_shadows",
-      "name": "Misassigned Shadows",
-      "weight": 2,
-      "fields": {
-        "description": "Shadows throughout the area stop matching their owners and instead imitate the movements, posture, or habits of different nearby people."
-      }
-    },
-    {
       "id": "unfinished_mundane_business",
       "name": "The Dead’s Errands",
       "fields": {

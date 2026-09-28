@@ -465,14 +465,6 @@
       }
     },
     {
-      "id": "misassigned_shadows",
-      "name": "Ombres mal attribuées",
-      "weight": 2,
-      "fields": {
-        "description": "Dans toute la zone, les ombres cessent de correspondre à leurs propriétaires et imitent plutôt les gestes, la posture ou les habitudes d’autres personnes proches."
-      }
-    },
-    {
       "id": "unfinished_mundane_business",
       "name": "Affaires des défunts",
       "fields": {

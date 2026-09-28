@@ -43,7 +43,7 @@
     },
     {
       "id": "escaped_livestock_recovery",
-      "name": "recovery of escaped livestock"
+      "name": "recovery of an escaped {{ animal.name }}"
     },
     {
       "id": "no_ground_contact_transport",
@@ -52,22 +52,22 @@
     },
     {
       "id": "cursed_object_disposal",
-      "name": "safe removal or disposal of a cursed object",
+      "name": "safe removal or disposal of a cursed {{ loot.generator.name }}",
       "weight": 0.75
     },
     {
       "id": "suspicious_food_tasting",
-      "name": "taste-testing suspicious or potentially magical food",
+      "name": "taste-testing suspicious or potentially magical {{ food_and_drink.name }}",
       "weight": 0.5
     },
     {
       "id": "unusual_creature_training",
-      "name": "training an unusual creature",
+      "name": "training an unusual {{ creature.generator.name }}",
       "weight": 0.75
     },
     {
       "id": "ceremonial_impersonation",
-      "name": "impersonating someone at a ceremony or formal occasion",
+      "name": "impersonating a {{ background.generator.name }} at a ceremony or formal occasion",
       "weight": 0.5
     },
     {
