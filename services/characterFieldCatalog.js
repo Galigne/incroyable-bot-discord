@@ -1,4 +1,4 @@
-const { BASE_STATS, DERIVED_STATS } = require('./mechanics/constants');
+const { BASE_STATS } = require('./mechanics/constants');
 const {
 	createFieldCatalogBuilder,
 	definePairInput: pairInput,
@@ -40,7 +40,7 @@ addSection(
 	'statistics',
 	'statistics',
 	'named-lines',
-	[...BASE_STATS, ...DERIVED_STATS].map(stat => `statistics.${stat}`),
+	BASE_STATS.map(stat => `statistics.${stat}`),
 	{ aliases: ['stats'] },
 );
 addSection('rules', 'rules', 'multiline', ['rules.value']);
@@ -153,10 +153,7 @@ add('race.traits.physicalAbility', 'racialPhysicalAbility', stored(
 		paragraph: true,
 	},
 ));
-add('statistics.base', 'baseStatistics', { aliases: ['baseStatistics'] });
-add('statistics.derived', 'derivedStatistics', { aliases: ['derivedStatistics'] });
-
-for (const stat of [...BASE_STATS, ...DERIVED_STATS]) {
+for (const stat of BASE_STATS) {
 	add(`statistics.${stat}`, stat, stored(
 		['statistics', stat],
 		'number',

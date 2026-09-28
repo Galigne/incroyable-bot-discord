@@ -82,7 +82,7 @@
       "generation": {
         "statProfile": "creature-companion-magic",
         "traits": [
-          "Cri d’alarme — Les alliés capables de l’entendre gagnent +1 en Initiative contre une menace détectée par la créature."
+          "Cri d’alarme — Les alliés capables de l’entendre gagnent +1 en Vitesse pour déterminer l’Initiative contre une menace détectée par la créature."
         ]
       }
     },

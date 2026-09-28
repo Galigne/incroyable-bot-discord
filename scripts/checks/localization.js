@@ -113,8 +113,6 @@ module.exports = function createLocalizationChecks(context) {
 				'speed: 10',
 				'perception: 10',
 				'charisma: 10',
-				'initiative: 10',
-				'reflexes: 10',
 			].join('\n'),
 			'fr',
 		).toJSON();
@@ -133,7 +131,7 @@ module.exports = function createLocalizationChecks(context) {
 	}
 
 	function checkCharacterDisplayCatalog(commands) {
-		const { BASE_STATS, DERIVED_STATS } = require('../../services/mechanics/constants');
+		const { BASE_STATS } = require('../../services/mechanics/constants');
 		const expectedFieldIds = [
 			'key',
 			'name',
@@ -162,9 +160,7 @@ module.exports = function createLocalizationChecks(context) {
 			'race.traits',
 			'race.traits.skillBonus',
 			'race.traits.physicalAbility',
-			'statistics.base',
-			'statistics.derived',
-			...[...BASE_STATS, ...DERIVED_STATS].map(stat => `statistics.${stat}`),
+			...BASE_STATS.map(stat => `statistics.${stat}`),
 			'rules.value',
 			'rules.name',
 			'rules.level',

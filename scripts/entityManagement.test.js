@@ -12,6 +12,7 @@ process.env.INCREDIBLE_BOT_SAVE_DIRECTORY = testSaveDirectory;
 
 const Character = require('../models/Character');
 const Creature = require('../models/Creature');
+const { BASE_STATS } = require('../services/mechanics/constants');
 const {
 	getEntityChoices,
 	getEntitySectionChoices,
@@ -119,6 +120,7 @@ test('blank creatures use a strict persistent schema with immutable identity', (
 	assert.equal(Object.getOwnPropertyDescriptor(creature, 'key').writable, false);
 	assert.deepEqual(creature.gear.encumbrance, { current: 0, max: 0 });
 	assert.equal(Object.hasOwn(creature, 'naturalArmor'), false);
+	assert.deepEqual(Object.keys(creature.statistics), BASE_STATS);
 	assert.deepEqual(Object.keys(creature), [
 		'schemaVersion',
 		'type',
@@ -204,7 +206,7 @@ test('creature saves reject missing, unsupported, mismatched, and invalid state'
 		() => validateCreatureSaveSchema({}),
 		error => error.code === 'MISSING_CREATURE_SCHEMA_VERSION',
 	);
-	for (const schemaVersion of [2, 99]) {
+	for (const schemaVersion of [2, 5, 99]) {
 		const unsupported = JSON.parse(JSON.stringify(
 			new Creature(`Schema.Bad.${schemaVersion}`),
 		));
@@ -225,6 +227,16 @@ test('creature saves reject missing, unsupported, mismatched, and invalid state'
 		() => validateCreatureSaveSchema(invalid),
 		error => error.code === 'INVALID_CREATURE_SAVE',
 	);
+	for (const obsoleteStatistic of ['initiative', 'reflexes']) {
+		const legacyStatistic = JSON.parse(JSON.stringify(
+			new Creature(`Schema.Legacy.${obsoleteStatistic}`),
+		));
+		legacyStatistic.statistics[obsoleteStatistic] = legacyStatistic.statistics.speed;
+		assert.throws(
+			() => validateCreatureSaveSchema(legacyStatistic),
+			error => error.code === 'INVALID_CREATURE_SAVE',
+		);
+	}
 	const invalidTraits = JSON.parse(JSON.stringify(
 		new Creature('Schema.Invalid.Traits'),
 	));
@@ -252,7 +264,8 @@ test('creature saves reject missing, unsupported, mismatched, and invalid state'
 test('character saves use the current schema without a required discriminator', () => {
 	const character = new Character('Character.Compatible', ownerAccess('creator'));
 	const saved = JSON.parse(JSON.stringify(character));
-	assert.equal(saved.schemaVersion, 4);
+	assert.equal(saved.schemaVersion, 5);
+	assert.deepEqual(Object.keys(saved.statistics), BASE_STATS);
 	assert.equal(Object.hasOwn(saved, 'type'), false);
 	assert.deepEqual(Object.keys(saved), [
 		'schemaVersion',

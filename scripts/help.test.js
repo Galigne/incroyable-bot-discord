@@ -164,7 +164,7 @@ test('/help command:get and command:set list both explicit entity field orders',
 	for (const [locale, formats] of [
 		['en', [
 			'`current:max` pairs for resources and encumbrance',
-			'`statName:value` lines for all nine statistics exactly once',
+			'`statName:value` lines for all seven statistics exactly once',
 			'`Name:Level:Description` per RULE',
 			'`Name:Description` per status effect or descriptive modifier',
 			'Plain collections, including creature intrinsic traits, use one entry per line; surrounding whitespace is trimmed',
@@ -173,7 +173,7 @@ test('/help command:get and command:set list both explicit entity field orders',
 		]],
 		['fr', [
 			'des paires de nombres pour les ressources et l’encombrement',
-			'des lignes `statName:valeur` avec chacun des neuf noms exactement une fois',
+			'des lignes `statName:valeur` avec chacun des sept noms exactement une fois',
 			'`Nom:Niveau:Description` pour chaque LOI',
 			'`Nom:Description` pour chaque effet d’état ou modificateur descriptif',
 			'Les collections simples, dont les dons intrinsèques des créatures, utilisent une entrée par ligne ; les espaces autour de chaque ligne sont supprimés',

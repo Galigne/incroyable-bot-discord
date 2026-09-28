@@ -206,7 +206,7 @@ test('name, status, and gear groups are prefilled and trim valid submissions', (
 	assert.deepEqual(character.gear.inventory, []);
 });
 
-test('statistics use one named line per base and derived value', () => {
+test('statistics use one named line per real statistic', () => {
 	const character = new Character('Statistics');
 	assert.equal(
 		getEditableFieldValue(character, 'statistics'),
@@ -218,21 +218,17 @@ test('statistics use one named line per base and derived value', () => {
 			'speed: 10',
 			'perception: 10',
 			'charisma: 10',
-			'initiative: 10',
-			'reflexes: 10',
 		].join('\n'),
 	);
 
 	setEditableFieldValue(character, 'statistics', [
-		' reflexes : 19 ',
+		' charisma : 17 ',
 		'constitution: 11',
 		' strength : 12 ',
 		'dexterity: 13',
 		'intelligence: 14',
 		'speed: 15',
 		'perception: 16',
-		'charisma: 17',
-		'initiative: 18',
 	].join('\n'));
 	assert.deepEqual(character.statistics, {
 		constitution: 11,
@@ -242,8 +238,6 @@ test('statistics use one named line per base and derived value', () => {
 		speed: 15,
 		perception: 16,
 		charisma: 17,
-		initiative: 18,
-		reflexes: 19,
 	});
 });
 
@@ -317,8 +311,6 @@ test('statistics reject malformed, unknown, duplicate, missing, and invalid line
 		'speed: 15',
 		'perception: 16',
 		'charisma: 17',
-		'initiative: 18',
-		'reflexes: 19',
 	];
 	for (const [replacement, translationKey] of [
 		['constitution 11', 'errors.statisticsLineInvalid'],

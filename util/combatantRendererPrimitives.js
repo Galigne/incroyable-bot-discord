@@ -62,22 +62,12 @@ function formatCombatantStatusFields(combatant, targets, getLabel, locale = 'en'
 function formatCombatantStatisticsFields(combatant, targets, getLabel) {
 	return [
 		{
-			name: getLabel('statistics.base'),
+			name: getLabel('statistics'),
 			value: formatStatistics(
 				combatant,
-				targets.slice(0, BASE_STATS.length),
+				targets,
 				target => getLabel(target.id),
 			),
-			inline: true,
-		},
-		{
-			name: getLabel('statistics.derived'),
-			value: formatStatistics(
-				combatant,
-				targets.slice(BASE_STATS.length),
-				target => getLabel(target.id),
-			),
-			inline: true,
 		},
 	];
 }

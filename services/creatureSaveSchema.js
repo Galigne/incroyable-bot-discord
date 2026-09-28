@@ -14,7 +14,7 @@ const {
 } = require('./combatantSaveSchema');
 const { validateEntityAccess } = require('./entityAccess');
 
-const CURRENT_CREATURE_SAVE_SCHEMA_VERSION = 5;
+const CURRENT_CREATURE_SAVE_SCHEMA_VERSION = 6;
 const CREATURE_STAT_IDS = COMBATANT_STAT_IDS;
 
 function validateCreatureSaveSchema(rawSaveData, expectedKey = rawSaveData?.key) {

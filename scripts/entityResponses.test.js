@@ -53,8 +53,6 @@ function configureSharedCombatantSections(combatant) {
 		speed: 14,
 		perception: 15,
 		charisma: 16,
-		initiative: 17,
-		reflexes: 18,
 	};
 	combatant.status = {
 		effects: [{ name: 'Inspired', description: 'Temporary inspiration' }],
@@ -147,9 +145,7 @@ test('character and creature render shared combatant sections with their establi
 		assert.equal(status.fields[1].value, '**Moonlit** - Glows softly');
 
 		const statistics = fixture.field(fixture.entity, 'statistics', 'en').toJSON();
-		assert.deepEqual(statistics.fields.map(field => field.name), [
-			'Base statistics', 'Derived statistics',
-		]);
+		assert.deepEqual(statistics.fields.map(field => field.name), ['Statistics']);
 		assert.equal(statistics.fields[0].value, [
 			'Constitution: **10**',
 			'Strength: **11**',
@@ -159,11 +155,6 @@ test('character and creature render shared combatant sections with their establi
 			'Perception: **15**',
 			'Charisma: **16**',
 		].join('\n'));
-		assert.equal(statistics.fields[1].value, [
-			'Initiative: **17**',
-			'Reflexes: **18**',
-		].join('\n'));
-
 		const rules = fixture.field(fixture.entity, 'rules', 'en').toJSON();
 		assert.equal(rules.description, fixture.ruleDetail);
 

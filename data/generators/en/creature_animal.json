@@ -228,7 +228,7 @@
         "statProfile": "creature-animal-runner",
         "traits": [
           "{{ traits:keen_hearing }}",
-          "Warning Call — Allies able to hear the call gain +1 to Initiative against a threat the creature has detected."
+          "Warning Call — Allies able to hear the call gain +1 to Speed when determining Initiative against a threat the creature has detected."
         ],
         "naturalArmorPercentage": 5
       }

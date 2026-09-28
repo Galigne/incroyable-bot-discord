@@ -434,7 +434,7 @@ test('generated creature saves persist only final trait strings', async () => {
 		getCreatureSavePath(generated.key),
 		'utf8',
 	));
-	assert.equal(persisted.schemaVersion, 5);
+	assert.equal(persisted.schemaVersion, 6);
 	assert.deepEqual(persisted.access, []);
 	assert.deepEqual(persisted.traits, generated.traits);
 	assert.ok(persisted.traits.every(trait => (
@@ -446,7 +446,7 @@ test('generated creature saves persist only final trait strings', async () => {
 	)));
 });
 
-test('all creature profiles use the shared nonlinear level budget and derived resources', () => {
+test('all creature profiles use the shared nonlinear level budget and resources', () => {
 	const representatives = getCreatureRepresentatives();
 	const usedProfiles = new Set();
 	for (const [type, entryId] of representatives) {
@@ -460,8 +460,7 @@ test('all creature profiles use the shared nonlinear level budget and derived re
 		assert.ok(
 			calculateStatCost(creature.statistics) <= calculateStatBudget(creature.level),
 		);
-		assert.equal(creature.statistics.initiative, creature.statistics.speed);
-		assert.equal(creature.statistics.reflexes, creature.statistics.speed);
+		assert.deepEqual(Object.keys(creature.statistics), BASE_STATS);
 		assert.deepEqual(
 			{
 				hp: creature.resources.hp,

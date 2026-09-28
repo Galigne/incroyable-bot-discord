@@ -164,6 +164,15 @@ test('character and creature catalogs retain independent declarations', () => {
 		getCreatureFieldDefinition('identity').viewTargetIds,
 		['identity.name', 'identity.description'],
 	);
+	for (const removedField of [
+		'statistics.base',
+		'statistics.derived',
+		'statistics.initiative',
+		'statistics.reflexes',
+	]) {
+		assert.equal(getCharacterFieldDefinition(removedField), null, removedField);
+		assert.equal(getCreatureFieldDefinition(removedField), null, removedField);
+	}
 
 	assertCatalogDeclarations(
 		CHARACTER_FIELD_DEFINITIONS,

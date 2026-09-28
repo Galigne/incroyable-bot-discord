@@ -1,6 +1,6 @@
-const { BASE_STATS, DERIVED_STATS, MAX_AP } = require('./mechanics/constants');
+const { BASE_STATS, MAX_AP } = require('./mechanics/constants');
 
-const COMBATANT_STAT_IDS = Object.freeze([...BASE_STATS, ...DERIVED_STATS]);
+const COMBATANT_STAT_IDS = BASE_STATS;
 const COMBATANT_RESOURCE_IDS = Object.freeze(['hp', 'ar', 'ap', 'md']);
 const TECHNICAL_ID = /^[a-z0-9]+(?:_[a-z0-9]+)*$/;
 const STAT_PROFILE_ID = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;

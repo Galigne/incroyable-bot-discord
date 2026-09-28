@@ -211,9 +211,10 @@ character property.
 
 Statistics use one prefilled `statName: statValue` line for each of
 `constitution`, `strength`, `dexterity`, `intelligence`, `speed`, `perception`,
-`charisma`, `initiative`, and `reflexes`. These English names may appear in any
-order but must each appear exactly once; the complete group is validated before
-any statistic changes.
+and `charisma`. These seven English names may appear in any order but must each
+appear exactly once; the complete group is validated before any statistic changes.
+Initiative uses Speed directly for combat order, and Reflexes checks use Speed
+directly; neither is stored or edited as a separate statistic.
 
 Personality traits, talents, creature intrinsic traits, equipment, and inventory
 use one entry per line. Surrounding whitespace is trimmed, empty lines are
@@ -383,8 +384,8 @@ catalog. A type such as `monster` selects a random detail entry,
 and field terminals are invalid. The current data provides `animal`, `companion`, and
 `monster`; the internal generator uses the same concept ID and a prefixed
 `creature_<type>.json` filename, while the router defines the available set. They
-share the character level budget, nonlinear statistic allocation,
-derived statistics, and resource formulas while using creature-specific profile
+share the character level budget, nonlinear seven-statistic allocation, and
+resource formulas while using creature-specific profile
 distributions. Only explicit source references grant creature RULEs; Intelligence
 and descriptive modifiers never do. Natural armor, a separate generated armor, and
 rarity-derived AR from equipped armor or shields stack before final AR is

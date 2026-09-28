@@ -30,10 +30,9 @@
   - [Race, statistiques et magie](#race-statistiques-et-magie)
     - [Race](#race)
     - [Dons raciaux](#dons-raciaux)
-    - [Statistiques de base](#statistiques-de-base)
+    - [Statistiques](#statistiques)
     - [Coût en points selon la valeur](#coût-en-points-selon-la-valeur)
     - [Liste des statistiques](#liste-des-statistiques)
-    - [Autres statistiques dérivées](#autres-statistiques-dérivées)
     - [LOI](#loi)
     - [Exemple : LOI de Feu (`niveau 1`)](#exemple--loi-de-feu-niveau-1)
     - [Points de LOI](#points-de-loi)
@@ -182,7 +181,7 @@ Les dons raciaux sont des particularités partagées par les membres d'une même
 - un **bonus de compétence** : `+1` à un [jet](#jet) particulier (`furtivité`, `intimidation`, etc.) ;
 - une **capacité physique** : vision nocturne, respiration aquatique, endurance accrue, etc.
 
-### Statistiques de base
+### Statistiques
 
 - Les statistiques vont de `4` (`minimum`) à `20` (`maximum`).
 - Un personnage commence **niveau `1`** avec **`67` points** à répartir.
@@ -220,7 +219,7 @@ Détermine la maîtrise des [LOI](#loi), les [points de LOI](#points-de-loi) et 
 <a id="vitesse"></a>
 <u>Vitesse</u>
 
-Détermine l'[initiative](#initiative), les [réflexes](#réflexes), la distance de déplacement et les actions liées à la vitesse : rattraper quelqu'un, s'enfuir, dégainer une arme, etc.
+Détermine la distance de déplacement et les actions liées à la vitesse : rattraper quelqu'un, s'enfuir, dégainer une arme, etc. La Vitesse détermine aussi directement l'[initiative](#initiative) et sert de statistique pour les jets de [réflexes](#réflexes) et de réaction.
 
 <a id="perception"></a>
 <u>Perception</u>
@@ -231,18 +230,6 @@ Améliore la visée, les cinq sens, les instincts et toutes les actions liées �
 <u>Charisme</u>
 
 Intervient dans l'aisance en public, les interactions sociales, le marchandage, le contrôle de soi, la gestion des émotions, l'intimidation, le commandement, etc.
-
-### Autres statistiques dérivées
-
-<a id="initiative"></a>
-<u>Initiative</u>
-
-Détermine l'ordre de passage en combat. `Initiative = Vitesse`
-
-<a id="réflexes"></a>
-<u>Réflexes</u>
-
-Mesurent la capacité à réagir rapidement face à un péril inattendu. `Réflexes = Vitesse`
 
 ### LOI
 
@@ -404,13 +391,16 @@ Cette règle s'applique à tous les systèmes du jeu.
 
 **Points d'action (PA)** : base de **`4 PA` par [tour](#tour)**. Ils déterminent les [actions](#action) réalisables à chaque [tour](#tour). Il est possible d'économiser **`50 %` des [PA](#points-daction-pa) non dépensés** pour le [tour](#tour) suivant. Les [PA](#points-daction-pa) se récupèrent à la fin du [tour](#tour).
 
+<a id="réflexes"></a>
+Les **Réflexes** sont le concept de jeu qui représente la capacité à réagir rapidement face à un péril inattendu, et non une statistique distincte. Tout jet de Réflexes ou de réaction utilise directement la [Vitesse](#vitesse).
+
 <u>Coût des actions</u>
 
 - **`1 PA`** : petite action (`boire une potion`, `se déplacer de quelques pas`, `mouvement simple`, etc.).
 - **`2 PA`** : action de combat monocible (`attaquer`, `esquiver`, `parer`, `courir`, `tirer`, `lancer`, etc.).
 - **`3 PA`** : action de combat multicible ou grosse action monocible.
 - **`4 PA`** : grosse action de combat multicible.
-- **`+1 PA`** : réaction (`nécessite un [jet](#jet) de [réflexes](#réflexes)` pour agir rapidement face à une [action](#action) adverse).
+- **`+1 PA`** : réaction (`nécessite un [jet](#jet) de [Vitesse](#vitesse) pour les [Réflexes](#réflexes)` afin d'agir rapidement face à une [action](#action) adverse).
 - **`0 PA`** : [actions](#action) hors combat.
 
 ## Déplacements en combat
@@ -440,11 +430,12 @@ La **[distance de déplacement](#distance-de-déplacement-dd)** correspond à la
 
 ## Tour de jeu
 
-L'ordre de combat est déterminé par l'[initiative](#initiative).
+<a id="initiative"></a>
+L'ordre de combat est régi par l'**Initiative**, un concept de jeu et non une statistique distincte. Elle utilise directement la [Vitesse](#vitesse) de chaque combattant.
 
 <u>Ordre normal</u>
 
-- Les personnages agissent du plus haut score d'[initiative](#initiative) au plus bas.
+- Les personnages agissent de la [Vitesse](#vitesse) la plus élevée à la plus faible.
 - **Égalité entre alliés** : possibilité de jouer simultanément ou de déterminer l'ordre par discussion ou tirage au sort.
 - **Égalité avec un ennemi** : l'ordre est fixé par un jet de dé au début du combat et reste inchangé.
 
@@ -458,7 +449,7 @@ L'ordre de combat est déterminé par l'[initiative](#initiative).
 
 - bonus au jet d'attaque pour les assaillants ;
 - si l'engagement est totalement inattendu, les attaquants jouent **tout leur tour avant les adversaires** ;
-- l'ordre d'[initiative](#initiative) est respecté au sein de chaque équipe.
+- l'ordre d'[initiative](#initiative), de la [Vitesse](#vitesse) la plus élevée à la plus faible, est respecté au sein de chaque équipe.
 
 ## Attaques
 
@@ -916,11 +907,11 @@ Le [MJ](#mj) tranche en cas de doute. Si un objet est volumineux, gênant ou dif
 
 - **Jusqu'à la capacité normale** : aucune pénalité.
 - **Capacité + `1` à `2`** : personnage **chargé**.
-  - `-1` aux actions liées à la [vitesse](#vitesse), à l'[initiative](#initiative) et aux [réflexes](#réflexes) ;
+  - `-1` à la [Vitesse](#vitesse) pour les actions qui en dépendent, l'[initiative](#initiative) et les jets de [Réflexes](#réflexes) (cette pénalité ne s'applique qu'une fois) ;
   - **[DD](#distance-de-déplacement-dd)** réduite de **`25 %`** ;
   - **[PA](#points-daction-pa)** réduits de **`1`**.
 - **Capacité + `3` à `4`** : personnage **très chargé**.
-  - `-2` aux actions liées à la [vitesse](#vitesse), à l'[initiative](#initiative) et aux [réflexes](#réflexes) ;
+  - `-2` à la [Vitesse](#vitesse) pour les actions qui en dépendent, l'[initiative](#initiative) et les jets de [Réflexes](#réflexes) (cette pénalité ne s'applique qu'une fois) ;
   - **[DD](#distance-de-déplacement-dd)** réduite de **`50 %`** ;
   - **[PA](#points-daction-pa)** réduits de **`2`**.
 - **Au-delà de capacité + `4`** : charge **excessive**.

@@ -1,5 +1,4 @@
 const { BASE_STATS } = require('./constants');
-const { recalculateDerivedStats } = require('./statistics');
 const { validateStatProfile } = require('../statProfileCatalog');
 const { selectWeightedEntry } = require('../weightedSelector');
 
@@ -32,7 +31,7 @@ function generateStats({ level, profile, random = Math.random }) {
 		stats[stat] += 1;
 	}
 
-	return recalculateDerivedStats(stats);
+	return stats;
 }
 
 function calculateStatBudget(level) {

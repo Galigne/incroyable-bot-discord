@@ -34,10 +34,7 @@ const {
 	restoreHealingResources,
 	restoreResource,
 } = require('../services/mechanics/resources');
-const {
-	createStats,
-	recalculateDerivedStats,
-} = require('../services/mechanics/statistics');
+const { createStats } = require('../services/mechanics/statistics');
 const {
 	calculateStatBudget,
 	calculateStatCost,
@@ -170,14 +167,16 @@ test('resource, armor, AP, and movement formulas preserve generated values', () 
 	});
 });
 
-test('statistics and derived-stat recalculation preserve existing values', () => {
-	const loaded = createStats({ speed: 12, initiative: 9 });
-	assert.equal(loaded.initiative, 9);
-	assert.equal(loaded.reflexes, 12);
-	loaded.speed = 15;
-	assert.equal(recalculateDerivedStats(loaded), loaded);
-	assert.equal(loaded.initiative, 15);
-	assert.equal(loaded.reflexes, 15);
+test('statistics contain exactly the seven real values', () => {
+	assert.deepEqual(createStats({ speed: 12 }), {
+		constitution: 10,
+		strength: 10,
+		dexterity: 10,
+		intelligence: 10,
+		speed: 12,
+		perception: 10,
+		charisma: 10,
+	});
 
 	let seed = 12_345;
 	const random = () => {
@@ -197,8 +196,6 @@ test('statistics and derived-stat recalculation preserve existing values', () =>
 		speed: 16,
 		perception: 11,
 		charisma: 12,
-		initiative: 16,
-		reflexes: 16,
 	});
 	assert.equal(calculateStatCost(generated), calculateStatBudget(10));
 	assert.equal(calculateRulePoints(14), 3);
@@ -221,8 +218,6 @@ test('statistical profiles preserve minimums, maximums, weights, and legal remai
 		...minimums,
 		constitution: 5,
 		strength: 5,
-		initiative: 4,
-		reflexes: 4,
 	});
 
 	const onePointMinimums = Object.fromEntries(BASE_STATS.map(stat => [stat, 10]));

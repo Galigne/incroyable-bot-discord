@@ -456,7 +456,10 @@ separate prefilled modal inputs:
 
 `statistics` uses one prefilled `statName: statValue` line for each of
 `constitution`, `strength`, `dexterity`, `intelligence`, `speed`, `perception`,
-`charisma`, `initiative`, and `reflexes`. Keep these technical names in English.
+and `charisma`. Keep these seven technical names in English. Initiative uses Speed
+directly for combat order, while Reflexes checks and reaction rolls use Speed
+directly; neither concept has a separate stored, generated, editable, or displayed
+statistic.
 Accept them in any order, but require every name exactly once and reject unknown or
 duplicate names.
 Parse and validate a complete grouped submission before applying any value.
@@ -494,10 +497,10 @@ UX, not removal of the internal schema.
 Persistent concrete types are exactly `character` and `creature`. The public
 creature router's current animal, companion, and monster entries are generator
 types, never additional persistence types; the router may define more. EntityKeys
-are globally unique across both types. Character schema v4 uses the
+are globally unique across both types. Character schema v5 uses the
 shared `access` collection instead of `creatorId`; the shared
 `modifiers` list is appended and defaults to empty when
-absent, and character saves do not require a discriminator. Creature schema v5
+absent, and character saves do not require a discriminator. Creature schema v6
 also uses `access`, requires `type: "creature"`, and hydrates stored final state
 without rerunning random generation, localization, references, modifiers, or
 formulas. No older `creatorId` save compatibility or migration exists.

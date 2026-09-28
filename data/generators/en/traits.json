@@ -61,7 +61,7 @@
       "id": "swift_reflexes",
       "name": "Swift Reflexes",
       "fields": {
-        "description": "+1 to Reflexes against threats the creature can perceive."
+        "description": "+1 to Speed on Reflexes checks against threats the creature can perceive."
       }
     },
     {

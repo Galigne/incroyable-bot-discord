@@ -30,10 +30,9 @@
   - [Race, Stats, and Magic](#race-stats-and-magic)
     - [Race](#race)
     - [Racial Traits](#racial-traits)
-    - [Base Stats](#base-stats)
+    - [Statistics](#statistics)
     - [Point Cost by Value](#point-cost-by-value)
     - [List of Stats](#list-of-stats)
-    - [Derived Stats](#derived-stats)
     - [RULE](#rule)
     - [Example: Fire RULE (`level 1`)](#example-fire-rule-level-1)
     - [RULE Points](#rule-points)
@@ -182,7 +181,7 @@ Racial traits are characteristics shared by members of the same race. They may n
 - a **skill bonus**: `+1` to a specific [roll](#roll) (`stealth`, `intimidation`, etc.);
 - a **physical ability**: night vision, water breathing, greater endurance, etc.
 
-### Base Stats
+### Statistics
 
 - Stats range from `4` (`minimum`) to `20` (`maximum`).
 - A character starts at **level `1`** with **`67` points** to distribute.
@@ -220,7 +219,7 @@ Determines mastery of [RULE](#rule), [RULE Points](#rule-points), and actions ti
 <a id="speed"></a>
 <u>Speed</u>
 
-Determines [initiative](#initiative), [reflexes](#reflexes), movement distance, and actions tied to speed: catching up to someone, fleeing, drawing a weapon, etc.
+Determines movement distance and actions tied to speed: catching up to someone, fleeing, drawing a weapon, etc. Speed also directly determines [initiative](#initiative) and is the statistic rolled for [reflexes](#reflexes) and reactions.
 
 <a id="perception"></a>
 <u>Perception</u>
@@ -231,18 +230,6 @@ Improves aim, the five senses, instincts, and all actions tied to perception: sp
 <u>Charisma</u>
 
 Affects public ease, social interactions, bargaining, self-control, emotional management, intimidation, leadership, etc.
-
-### Derived Stats
-
-<a id="initiative"></a>
-<u>Initiative</u>
-
-Determines turn order in combat. `Initiative = Speed`
-
-<a id="reflexes"></a>
-<u>Reflexes</u>
-
-Measure the ability to react quickly to unexpected danger. `Reflexes = Speed`
 
 ### RULE
 
@@ -404,13 +391,16 @@ This rule applies to all systems in the game.
 
 **Action Points (AP)**: base of **`4 AP` per [turn](#turn)**. They determine the [actions](#action) you can perform each [turn](#turn). It is possible to save **`50 %` of unspent [AP](#action-points-ap)** for the next [turn](#turn). [AP](#action-points-ap) are recovered at the end of the [turn](#turn).
 
+<a id="reflexes"></a>
+**Reflexes** are the gameplay concept of reacting quickly to unexpected danger, not a separate statistic. Every Reflexes check or reaction roll uses [Speed](#speed) directly.
+
 <u>Action Costs</u>
 
 - **`1 AP`**: small action (`drink a potion`, `move a few steps`, `simple movement`, etc.).
 - **`2 AP`**: single-target combat action (`attack`, `dodge`, `parry`, `run`, `shoot`, `throw`, etc.).
 - **`3 AP`**: multi-target combat action or major single-target action.
 - **`4 AP`**: major multi-target combat action.
-- **`+1 AP`**: reaction (`requires a [roll](#roll) of [reflexes](#reflexes)` to act quickly against an enemy [action](#action)).
+- **`+1 AP`**: reaction (`requires a [Speed](#speed) [roll](#roll) for [Reflexes](#reflexes)` to act quickly against an enemy [action](#action)).
 - **`0 AP`**: out-of-combat [actions](#action).
 
 ## Movement in Combat
@@ -440,11 +430,12 @@ The **[movement distance](#movement-distance-md)** is the distance you can cover
 
 ## Turn Order
 
-Combat order is determined by [initiative](#initiative).
+<a id="initiative"></a>
+Combat order is governed by **Initiative**, which is a gameplay concept rather than a separate statistic. It uses each combatant's [Speed](#speed) directly.
 
 <u>Normal order</u>
 
-- Characters act from highest [initiative](#initiative) score to lowest.
+- Characters act from highest [Speed](#speed) to lowest.
 - **Tie between allies**: they may act simultaneously or determine order through discussion or a random draw.
 - **Tie with an enemy**: order is fixed by a die roll at the start of combat and remains unchanged.
 
@@ -458,7 +449,7 @@ Combat order is determined by [initiative](#initiative).
 
 - attack roll bonus for the attackers;
 - if the engagement is completely unexpected, the attackers play **their full turn before the defenders**;
-- the order of [initiative](#initiative) is respected within each team.
+- [initiative](#initiative) order, from highest [Speed](#speed) to lowest, is respected within each team.
 
 ## Attacks
 
@@ -919,11 +910,11 @@ The [GM](#gm) decides in case of doubt. If an item is bulky, awkward, or hard to
 
 - **Up to normal capacity**: no penalty.
 - **Capacity + `1` to `2`**: character is **loaded**.
-  - `-1` to actions tied to [speed](#speed), [initiative](#initiative), and [reflexes](#reflexes);
+  - `-1` to [Speed](#speed) for speed-related actions, [initiative](#initiative), and [Reflexes](#reflexes) rolls (apply this penalty only once);
   - **[MD](#movement-distance-md)** reduced by **`25 %`**;
   - **[AP](#action-points-ap)** reduced by **`1`**.
 - **Capacity + `3` to `4`**: character is **heavily loaded**.
-  - `-2` to actions tied to [speed](#speed), [initiative](#initiative), and [reflexes](#reflexes);
+  - `-2` to [Speed](#speed) for speed-related actions, [initiative](#initiative), and [Reflexes](#reflexes) rolls (apply this penalty only once);
   - **[MD](#movement-distance-md)** reduced by **`50 %`**;
   - **[AP](#action-points-ap)** reduced by **`2`**.
 - **Beyond capacity + `4`**: **excessive load**.

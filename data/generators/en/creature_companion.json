@@ -82,7 +82,7 @@
       "generation": {
         "statProfile": "creature-companion-magic",
         "traits": [
-          "Warning Call — Allies able to hear the call gain +1 to Initiative against a threat the creature has detected."
+          "Warning Call — Allies able to hear the call gain +1 to Speed when determining Initiative against a threat the creature has detected."
         ]
       }
     },

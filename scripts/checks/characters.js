@@ -51,8 +51,6 @@ module.exports = function createCharacterChecks(context) {
 					'speed: 10',
 					'perception: 10',
 					'charisma: 10',
-					'initiative: 10',
-					'reflexes: 10',
 				].join('\n'),
 			);
 			setEditableFieldValue(original, 'race', {
@@ -241,12 +239,13 @@ module.exports = function createCharacterChecks(context) {
 				) {
 					errors.push('The detailed encumbrance view is not formatted correctly.');
 				}
-				if (
-					field === 'statistics'
-					&& !fieldEmbed.fields?.find(item => item.name === 'Derived statistics')
-						?.value.includes('Initiative:')
-				) {
-					errors.push('The detailed statistics view should retain derived statistics.');
+				if (field === 'statistics' && (
+					fieldEmbed.fields?.length !== 1
+					|| fieldEmbed.fields[0].name !== 'Statistics'
+					|| fieldEmbed.fields[0].value.includes('Initiative:')
+					|| fieldEmbed.fields[0].value.includes('Reflexes:')
+				)) {
+					errors.push('The detailed statistics view should show only seven statistics.');
 				}
 			}
 			character.resources.ap.current = 2;
@@ -320,8 +319,7 @@ module.exports = function createCharacterChecks(context) {
 				|| BASE_STAT_NAMES.some(stat => (
 					character.statistics[stat] < 4 || character.statistics[stat] > 20
 				))
-				|| character.statistics.initiative !== character.statistics.speed
-				|| character.statistics.reflexes !== character.statistics.speed
+				|| Object.keys(character.statistics).length !== BASE_STAT_NAMES.length
 			) {
 				errors.push('Generated statistics do not follow the point-allocation rules.');
 			}

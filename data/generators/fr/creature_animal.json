@@ -228,7 +228,7 @@
         "statProfile": "creature-animal-runner",
         "traits": [
           "{{ traits:keen_hearing }}",
-          "Cri d’alarme — Les alliés capables de l’entendre gagnent +1 en Initiative contre une menace détectée par la créature."
+          "Cri d’alarme — Les alliés capables de l’entendre gagnent +1 en Vitesse pour déterminer l’Initiative contre une menace détectée par la créature."
         ],
         "naturalArmorPercentage": 5
       }

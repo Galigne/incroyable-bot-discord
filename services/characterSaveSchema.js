@@ -10,7 +10,7 @@ const {
 } = require('./combatantSaveSchema');
 const { validateEntityAccess } = require('./entityAccess');
 
-const CURRENT_CHARACTER_SAVE_SCHEMA_VERSION = 4;
+const CURRENT_CHARACTER_SAVE_SCHEMA_VERSION = 5;
 
 function validateCharacterSaveSchema(rawSaveData, expectedKey = rawSaveData?.key) {
 	if (!isRecord(rawSaveData) || !Object.hasOwn(rawSaveData, 'schemaVersion')) {

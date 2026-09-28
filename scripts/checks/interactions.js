@@ -50,8 +50,6 @@ module.exports = function createInteractionChecks(context) {
 						'speed: 10',
 						'perception: 10',
 						'charisma: 10',
-						'initiative: 10',
-						'reflexes: 10',
 					].join('\n')
 			) {
 				errors.push('The direct RPG editor did not prefill a valid statistics modal.');
@@ -72,8 +70,6 @@ module.exports = function createInteractionChecks(context) {
 						'speed: 10',
 						'perception: 10',
 						'charisma: 10',
-						'initiative: 10',
-						'reflexes: 10',
 					].join('\n'),
 				},
 				reply: async payload => {

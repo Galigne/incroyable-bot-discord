@@ -220,7 +220,7 @@
       "id": "danger_sense",
       "name": "Danger Sense",
       "fields": {
-        "description": "+1 to Reflexes when reacting to an unseen or unexpected threat."
+        "description": "+1 to Speed on Reflexes checks when reacting to an unseen or unexpected threat."
       }
     },
     {

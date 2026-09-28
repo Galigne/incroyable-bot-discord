@@ -11,6 +11,7 @@ const testSaveDirectory = fs.mkdtempSync(
 process.env.INCREDIBLE_BOT_SAVE_DIRECTORY = testSaveDirectory;
 
 const Character = require('../models/Character');
+const { BASE_STATS } = require('../services/mechanics/constants');
 const commandRegistry = require('../commands/registry');
 const {
 	CURRENT_CHARACTER_SAVE_SCHEMA_VERSION,
@@ -81,6 +82,7 @@ test('newly created characters persist the current schema version', async () => 
 	]);
 	assert.equal(Object.hasOwn(rawSave, 'firstName'), false);
 	assert.deepEqual(rawSave.status, { effects: [], modifiers: [] });
+	assert.deepEqual(Object.keys(rawSave.statistics), BASE_STATS);
 	assert.deepEqual(Object.keys(rawSave.resources), ['hp', 'ar', 'ap', 'md']);
 });
 
@@ -98,7 +100,7 @@ test('current-version saves load successfully', async () => {
 });
 
 test('unsupported previous schemas are rejected without rewriting', async () => {
-	for (const schemaVersion of [1, 2, 3]) {
+	for (const schemaVersion of [1, 2, 3, 4]) {
 		const characterKey = `Schema.Legacy.${schemaVersion}`;
 		const originalSave = await writeRawSave(characterKey, {
 			schemaVersion,
@@ -142,6 +144,7 @@ test('/gen-character consumes current generator fields and persists the current 
 	assert.equal(rawSave.background.backstory, '');
 	assert.equal(rawSave.background.goals, '');
 	assert.ok(rawSave.statistics.constitution);
+	assert.deepEqual(Object.keys(rawSave.statistics), BASE_STATS);
 	assert.ok(rawSave.resources.hp.max);
 	const statusEntry = generatorCatalog.getGenerator('status_effect', 'en').entries[0];
 	assert.deepEqual(rawSave.status.effects, [
@@ -194,7 +197,10 @@ test('/gen-character sends personality and populated gear after its unchanged su
 		followUps[1].embeds[0].toJSON(),
 		createEntityGetResponse(generated, 'gear', 'en').embeds[0].toJSON(),
 	);
-	assert.doesNotMatch(JSON.stringify(followUps), /Derived statistics|RULE descriptions/);
+	assert.doesNotMatch(
+		JSON.stringify(followUps),
+		/Derived statistics|Initiative|Reflexes|RULE descriptions/,
+	);
 });
 
 test('saves without schemaVersion are rejected without being rewritten', async () => {
@@ -327,6 +333,12 @@ test('schemaVersion is excluded from character editing and display surfaces', as
 test('character saves reject incomplete or malformed persisted combatant state', async () => {
 	const cases = [
 		['missing statistics', save => delete save.statistics],
+		['obsolete initiative statistic', save => {
+			save.statistics.initiative = save.statistics.speed;
+		}],
+		['obsolete reflexes statistic', save => {
+			save.statistics.reflexes = save.statistics.speed;
+		}],
 		['incomplete resources', save => delete save.resources.hp.max],
 		['invalid status effect', save => {
 			save.status.effects = [{ name: 'Broken' }];

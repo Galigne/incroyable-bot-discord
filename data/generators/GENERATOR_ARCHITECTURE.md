@@ -225,7 +225,7 @@ generation metadata omits `statProfile`. Profiles do not contain localized prose
 resource formulas, RULE allocation, traits, gear, or encumbrance behavior.
 
 Characters and creatures share the level 1-10 stat budget, nonlinear point costs,
-derived-statistic calculations, and resource formulas. Their selected profiles
+seven-statistic allocation and resource formulas. Their selected profiles
 change only allocation constraints and weighting.
 
 `services/mechanics/statGeneration.js` owns the shared profile-driven allocation

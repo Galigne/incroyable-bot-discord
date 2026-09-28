@@ -220,7 +220,7 @@
       "id": "danger_sense",
       "name": "Sens du danger",
       "fields": {
-        "description": "+1 en Réflexes pour réagir à une menace invisible ou inattendue."
+        "description": "+1 en Vitesse aux jets de Réflexes pour réagir à une menace invisible ou inattendue."
       }
     },
     {
