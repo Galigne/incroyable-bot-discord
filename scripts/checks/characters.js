@@ -63,11 +63,11 @@ module.exports = function createCharacterChecks(context) {
 				'racialTraits.physicalAbility': '',
 			});
 			setEditableFieldValue(original, 'background', {
+				'background.physicalDescription': 'Tall with silver hair.',
 				'background.backstory': 'Raised by cartographers',
 				'background.goals': 'Map the lost roads',
 			});
 			original.background.archetype = 'Cartographer';
-			original.background.physicalDescription = 'Tall with silver hair.';
 			setEditableFieldValue(original, 'gear', {
 				equipment: '- Longsword',
 				inventory: '',

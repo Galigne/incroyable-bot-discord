@@ -196,9 +196,9 @@ it is not an editable section and is not offered by `/set`.
 Name uses separate optional first-name and last-name inputs; emptying either input
 clears that component. Race uses separate inputs for its name, physical description,
 lore, skill bonus, and physical ability. Background displays the generated
-archetype and physical description, while its editable form contains separate
-backstory and goals inputs. Personality uses separate description and traits
-inputs.
+archetype, which remains read-only, while its editable form contains separate
+physical description, backstory, and goals inputs in that order. Personality uses
+separate description and traits inputs.
 
 The resources form uses one required `current:max` pair for each of HP, AR, AP,
 and MD, such as `50:100`; encumbrance uses the same format. Every grouped form is

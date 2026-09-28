@@ -361,6 +361,7 @@ test('multi-input groups replace every stored target together', () => {
 		'racialTraits.physicalAbility': 'Night sight',
 	});
 	setEditableFieldValue(character, 'background', {
+		'background.physicalDescription': 'Weathered face and silver hair',
 		'background.backstory': 'Raised by cartographers',
 		'background.goals': 'Map the lost roads',
 	});
@@ -379,7 +380,10 @@ test('multi-input groups replace every stored target together', () => {
 		},
 	});
 	assert.equal(character.background.archetype, '');
-	assert.equal(character.background.physicalDescription, '');
+	assert.equal(
+		character.background.physicalDescription,
+		'Weathered face and silver hair',
+	);
 	assert.equal(character.background.backstory, 'Raised by cartographers');
 	assert.equal(character.background.goals, 'Map the lost roads');
 	assert.deepEqual(character.personality, {
@@ -471,7 +475,7 @@ test('race, background, and personality modals prefill every separate input', ()
 	const character = createFilledCharacter();
 	for (const [field, labels] of [
 		['race', ['Name', 'Physical description', 'Lore', 'Skill bonus', 'Physical ability']],
-		['background', ['Backstory', 'Goals']],
+		['background', ['Physical description', 'Backstory', 'Goals']],
 		['personality', ['Traits', 'Description']],
 	]) {
 		const values = getEditableFieldValue(character, field);
@@ -970,6 +974,7 @@ test('name, race, background, and personality updates are atomic and undoable', 
 			assert.equal(character.race.traits.skillBonus, '');
 		}],
 		['background', {
+			'background.physicalDescription': 'Weathered face and silver hair',
 			'background.backstory': 'Former courier',
 			'background.goals': 'Map every road',
 		}, character => {
@@ -1040,6 +1045,7 @@ test('modal routing publishes canonical post-update details and repeats authoriz
 	}, config, characterKey, 'background');
 
 	const submittedValues = {
+		[getEntityEditInputId('background.physicalDescription')]: 'Green cloak and silver hair',
 		[getEntityEditInputId('background.backstory')]: 'Former courier',
 		[getEntityEditInputId('background.goals')]: 'Cross every border',
 	};
@@ -1059,7 +1065,10 @@ test('modal routing publishes canonical post-update details and repeats authoriz
 	}, config);
 	const edited = await getEntity(characterKey);
 	assert.equal(edited.background.archetype, '');
-	assert.equal(edited.background.physicalDescription, '');
+	assert.equal(
+		edited.background.physicalDescription,
+		'Green cloak and silver hair',
+	);
 	assert.equal(edited.background.backstory, 'Former courier');
 	assert.equal(edited.background.goals, 'Cross every border');
 	assert.equal(replyCount, 1);

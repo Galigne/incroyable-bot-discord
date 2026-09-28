@@ -144,6 +144,14 @@ test('character and creature catalogs retain independent declarations', () => {
 		'creature.fields.name',
 	);
 	assert.deepEqual(
+		getCharacterFieldDefinition('background').editInputIds,
+		[
+			'background.physicalDescription',
+			'background.backstory',
+			'background.goals',
+		],
+	);
+	assert.deepEqual(
 		getCharacterFieldDefinition('background').viewTargetIds,
 		[
 			'background.archetype',

@@ -448,8 +448,8 @@ separate prefilled modal inputs:
   input clears that component.
 - Race updates `race.name`, `race.physicalDescription`, `race.lore`,
   `racialTraits.skillBonus`, and `racialTraits.physicalAbility`.
-- Background updates `backstory` and `goals`; generated `archetype` and
-  `physicalDescription` are viewable but not editable.
+- Background updates `physicalDescription`, `backstory`, and `goals` in that order;
+  generated `archetype` is viewable but not editable.
 - Personality updates `personality.description` and `personality.traits`.
 - `hp`, `ar`, `ap`, `md`, and `encumbrance` each update separate `current` and
   `max` numeric inputs. Both inputs are required and retain their domain validation.
@@ -540,7 +540,8 @@ unless the user explicitly requests that work. This does not authorize modifying
 or deleting real files under `save/`; preserve them and keep tests isolated.
 `background.archetype` and `background.physicalDescription` are generated text
 properties displayed directly below level and race in the public summary.
-`background.backstory` and `background.goals` remain editable as one atomic group.
+`background.physicalDescription`, `background.backstory`, and `background.goals`
+remain editable as one atomic group; `background.archetype` remains read-only.
 
 Permissions:
 

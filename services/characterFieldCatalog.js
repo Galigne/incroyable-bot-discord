@@ -58,6 +58,7 @@ addSection('race', 'race', 'multi', [
 	'race.traits.physicalAbility',
 ]);
 addSection('background', 'background', 'multi', [
+	'background.physicalDescription',
 	'background.backstory',
 	'background.goals',
 ], {

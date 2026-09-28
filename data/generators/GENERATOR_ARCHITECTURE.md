@@ -273,9 +273,11 @@ Omitted natural armor contributes zero. Template-based talent overrides use the
 same inline-string resolver as creature traits and store the resulting localized
 strings.
 
-The saved background contains `archetype` and `physicalDescription`; editable
-`backstory` and `goals` start empty. A generated character receives one compatible
-armor and one or two independent main-equipment slots. Each slot selects `weapons`
+The saved background contains generated `archetype` and `physicalDescription`;
+`physicalDescription`, `backstory`, and `goals` are editable together, while
+`archetype` remains read-only. `backstory` and `goals` start empty. A generated
+character receives one compatible armor and one or two independent main-equipment
+slots. Each slot selects `weapons`
 with an 80% chance or `shields` with a 20% chance; multiple equipped shields are
 allowed. Armor type and the stable `modifier_rarity` entry determine armor AR, while
 the same stable rarity entry determines each shield's AR. These values stack with
