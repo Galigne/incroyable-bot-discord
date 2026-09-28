@@ -78,6 +78,9 @@ test('/help command:<command> renders centralized command details', () => {
 	assert.equal(embed.title, 'Help — /roll');
 	assert.match(rendered, /Required permission/);
 	assert.match(rendered, /expression/);
+	assert.match(rendered, /Optional/);
+	assert.match(rendered, /Without an expression, rolls `1d20`/);
+	assert.match(rendered, /`\/roll`/);
 	assert.match(rendered, /COUNTdSIDES/);
 	assert.match(rendered, /2d6\+3/);
 	assert.match(rendered, /Multiple dice groups/);
@@ -433,6 +436,8 @@ test('/help overview and details are localized in English and French', () => {
 	const rendered = JSON.stringify(frenchDetail);
 	assert.equal(frenchDetail.title, 'Aide — /roll');
 	assert.match(rendered, /Permission requise/);
+	assert.match(rendered, /Facultatif/);
+	assert.match(rendered, /Sans expression, lance `1d20`/);
 	assert.match(rendered, /NOMBREdFACES/);
 });
 

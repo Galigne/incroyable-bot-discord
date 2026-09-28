@@ -243,7 +243,6 @@ const COMMAND_METADATA = [
 				type: 'string',
 				descriptionKey: 'rpg.roll.expressionOption',
 				acceptedValuesKey: 'rpg.roll.acceptedValues',
-				required: true,
 				autocomplete: {
 					provider: 'static',
 					values: [
@@ -263,6 +262,7 @@ const COMMAND_METADATA = [
 			},
 		],
 		examples: [
+			'/roll',
 			'/roll expression:1d20',
 			'/roll expression:2d6+3',
 		],

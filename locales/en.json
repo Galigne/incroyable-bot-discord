@@ -213,10 +213,10 @@
       "behavior": "Sets a character or creature's current HP, current AR, or both to the requested percentage of each resource's own maximum, using the shared rounding rule. Explicit `owner` and `partial` users, DMs, and the server owner may use it."
     },
     "roll": {
-      "description": "Roll a standard dice expression",
-      "expressionOption": "Dice expression, for example 2d6+3",
+      "description": "Roll dice, defaulting to 1d20",
+      "expressionOption": "Optional dice expression; defaults to 1d20",
       "acceptedValues": "`COUNTdSIDES` with one optional `+MODIFIER` or `-MODIFIER`",
-      "behavior": "Rolls one standard dice group using `COUNTdSIDES`, optionally followed by one signed modifier, for example `1d20`, `2d6+3`, or `4d8-2`. Count must be 1–100, sides 2–1,000, and the absolute modifier at most 10,000. Multiple dice groups, parentheses, and other arithmetic are unsupported. Exact `1d2` and `1d20` rolls return their dedicated GIF; other expressions return a textual breakdown.",
+      "behavior": "Without an expression, rolls `1d20`. A supplied expression rolls one standard dice group using `COUNTdSIDES`, optionally followed by one signed modifier, for example `1d20`, `2d6+3`, or `4d8-2`. Count must be 1–100, sides 2–1,000, and the absolute modifier at most 10,000. Multiple dice groups, parentheses, and other arithmetic are unsupported. Exact `1d2` and `1d20` rolls return their dedicated GIF; other expressions return a textual breakdown.",
       "result": "**{{expression}}**\n\nRolls: {{rolls}}\nModifier: {{modifier}}\nTotal: **{{total}}**",
       "errors": {
         "invalidFormat": "Invalid dice expression. Use `COUNTdSIDES` with one optional modifier, for example `2d6+3`.",

@@ -213,10 +213,10 @@
       "behavior": "Fixe les PV actuels, les PR actuels ou les deux du personnage ou de la créature au pourcentage demandé de leur maximum respectif, selon la règle d’arrondi commune. Les utilisateurs disposant d’un accès explicite `owner` ou `partial`, les MJ et le propriétaire du serveur peuvent l’utiliser."
     },
     "roll": {
-      "description": "Lancer une expression de dés standard",
-      "expressionOption": "Expression de dés, par exemple 2d6+3",
+      "description": "Lancer des dés, avec 1d20 par défaut",
+      "expressionOption": "Expression de dés facultative ; 1d20 par défaut",
       "acceptedValues": "`NOMBREdFACES` suivi éventuellement d’un `+MODIFICATEUR` ou `-MODIFICATEUR`",
-      "behavior": "Lance un groupe de dés standard au format `NOMBREdFACES`, suivi éventuellement d’un modificateur signé, par exemple `1d20`, `2d6+3` ou `4d8-2`. Le nombre de dés doit être compris entre 1 et 100, les faces entre 2 et 1 000, et la valeur absolue du modificateur ne peut pas dépasser 10 000. Les groupes multiples, parenthèses et autres opérations ne sont pas pris en charge. Les jets exacts `1d2` et `1d20` renvoient leur GIF dédié ; les autres renvoient le détail textuel.",
+      "behavior": "Sans expression, lance `1d20`. Lorsqu’une expression est fournie, lance un groupe de dés standard au format `NOMBREdFACES`, suivi éventuellement d’un modificateur signé, par exemple `1d20`, `2d6+3` ou `4d8-2`. Le nombre de dés doit être compris entre 1 et 100, les faces entre 2 et 1 000, et la valeur absolue du modificateur ne peut pas dépasser 10 000. Les groupes multiples, parenthèses et autres opérations ne sont pas pris en charge. Les jets exacts `1d2` et `1d20` renvoient leur GIF dédié ; les autres renvoient le détail textuel.",
       "result": "**{{expression}}**\n\nLancers : {{rolls}}\nModificateur : {{modifier}}\nTotal : **{{total}}**",
       "errors": {
         "invalidFormat": "Expression de dés invalide. Utilisez `NOMBREdFACES` avec un modificateur facultatif, par exemple `2d6+3`.",

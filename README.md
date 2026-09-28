@@ -110,7 +110,7 @@ restart-only: changing it requires restarting the bot, and reconnects during
 - `/gen category:<traversal-path> [count]` — generate from a public root, optionally selecting entries, routes, or fields (configured DM role or server owner)
 - `/gen-character character-key:<new key> [level] [background]` — generate and save a complete character with no explicit user access; background may select a category or exact archetype relative to `background` (configured DM role or server owner)
 - `/gen-creature creature-key:<new key> [level] [type]` — generate and atomically save a complete creature with no explicit user access; type may select a category or exact archetype relative to `creature` (configured DM role or server owner)
-- `/roll expression:<dice expression>` — roll expressions such as `2d6+3`
+- `/roll [expression:<dice expression>]` — roll `1d20` by default or an expression such as `2d6+3`
 - `/add entity-key:<new key> [type:<character|creature>]` — create a blank entity and grant yourself explicit `owner` access; character is the default
 - `/get entity-key:<key> [field]` — display the summary followed by gear, one type-compatible category, or every category with `field:all`
 - `/access entity-key:<key>` — display every explicit `owner` and `partial` user entry
@@ -243,7 +243,8 @@ Dice expressions use one `COUNTdSIDES` group with an optional `+MODIFIER` or
 1,000 sides per die, and an absolute modifier of 10,000. Advanced dice operators,
 multiple groups, parentheses, and other arithmetic are not supported. Exact
 `1d2` and `1d20` rolls return their corresponding GIF only; all other expressions
-return the textual roll breakdown.
+return the textual roll breakdown. Invoking `/roll` without an expression is
+equivalent to `/roll expression:1d20`, including the dedicated `1d20` GIF response.
 
 Each persisted character and creature contains an explicit user-access list. An
 `owner` entry grants full authority; multiple owners are allowed, and the list may

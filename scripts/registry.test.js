@@ -193,9 +193,14 @@ test('registry exposes autocomplete, option, and choice metadata', async () => {
 
 	const roll = commandRegistry.getAutocompleteMetadata('roll', 'expression', 'rpg');
 	assert.equal(roll.type, 'string');
+	assert.equal(Boolean(roll.required), false);
 	assert.equal(roll.autocomplete.provider, 'static');
 	assert.ok(roll.autocomplete.values.includes('1d2'));
 	assert.ok(roll.autocomplete.values.includes('1d20'));
+	const registeredRoll = commandRegistry.getDiscordCommandData()
+		.find(data => data.name === 'roll')
+		.toJSON();
+	assert.equal(registeredRoll.options[0].required, false);
 
 	const getField = commandRegistry.getAutocompleteMetadata('get', 'field', 'rpg');
 	assert.equal(getField.autocomplete.provider, 'get-entity-sections');

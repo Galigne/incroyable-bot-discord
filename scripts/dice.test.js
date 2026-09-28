@@ -7,7 +7,10 @@ const {
 	parseDiceExpression,
 } = require('../services/diceParser');
 const { rollDice } = require('../services/diceRoller');
-const { rollDiceExpression } = require('../services/diceRollService');
+const {
+	DEFAULT_DICE_EXPRESSION,
+	rollDiceExpression,
+} = require('../services/diceRollService');
 const { t } = require('../util/i18n');
 const rollCommand = require('../commands/handlers/roll');
 
@@ -83,6 +86,15 @@ test('dice roller returns each die, the modifier, and the final total', () => {
 		rolls: [5, 2],
 		total: 10,
 	});
+});
+
+test('omitted roll expressions default to the dedicated 1d20 animation', () => {
+	assert.equal(DEFAULT_DICE_EXPRESSION, '1d20');
+	const defaultRoll = rollDiceExpression(null, { random: () => 0.95 });
+	const explicitRoll = rollDiceExpression('1d20', { random: () => 0.95 });
+	assert.deepEqual(defaultRoll, explicitRoll);
+	assert.equal(defaultRoll.animationFileName, 'D20-20.gif');
+	assert.equal(defaultRoll.type, 'animation');
 });
 
 test('dice errors and result labels are localized', () => {
@@ -168,6 +180,30 @@ test('roll command uses GIF-only replies exclusively for 1d2 and 1d20', async ()
 	assert.match(path.basename(coinReply.files[0].attachment), /^(?:HEADS|TAILS)\.gif$/);
 	const modifiedReply = await executeRollCommand('1d20+1');
 	assert.equal(typeof modifiedReply, 'string');
+});
+
+test('roll command accepts no expression and returns the 1d20 GIF response', async () => {
+	const optionCalls = [];
+	let reply;
+	await rollCommand.execute({
+		config: { locale: 'en' },
+		interaction: {
+			guildId: 'guild',
+			options: {
+				getString: (...arguments_) => {
+					optionCalls.push(arguments_);
+					return null;
+				},
+			},
+			reply: value => {
+				reply = value;
+			},
+		},
+	});
+
+	assert.deepEqual(optionCalls, [['expression']]);
+	assert.deepEqual(Object.keys(reply), ['files']);
+	assert.match(path.basename(reply.files[0].attachment), /^D20-(?:[1-9]|1\d|20)\.gif$/);
 });
 
 async function executeRollCommand(expression) {

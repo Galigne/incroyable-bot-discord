@@ -1,11 +1,14 @@
 const { DEFAULT_DICE_LIMITS, parseDiceExpression } = require('./diceParser');
 const { rollDice } = require('./diceRoller');
 
+const DEFAULT_DICE_EXPRESSION = '1d20';
+
 function rollDiceExpression(expression, {
 	limits = DEFAULT_DICE_LIMITS,
 	random = Math.random,
 } = {}) {
-	const result = rollDice(parseDiceExpression(expression, limits), random);
+	const requestedExpression = expression ?? DEFAULT_DICE_EXPRESSION;
+	const result = rollDice(parseDiceExpression(requestedExpression, limits), random);
 	const animationFileName = getAnimationFileName(result);
 
 	return {
@@ -25,4 +28,4 @@ function getAnimationFileName(result) {
 	return null;
 }
 
-module.exports = { rollDiceExpression };
+module.exports = { DEFAULT_DICE_EXPRESSION, rollDiceExpression };
