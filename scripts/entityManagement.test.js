@@ -35,6 +35,7 @@ const {
 const {
 	commitPermanentDeletion,
 } = require('../services/entityPersistenceTransaction');
+const { t } = require('../util/i18n');
 const {
 	characterHistoryDirectory,
 	characterSaveDirectory,
@@ -609,6 +610,16 @@ test('character and creature field orders stay explicit and type-compatible', as
 		choices.map(choice => choice.value),
 		getCreatureSections().map(field => field.id),
 	);
+	const getChoices = await getEntitySectionChoices(
+		'',
+		'en',
+		entityKey,
+		{ includeAll: true },
+	);
+	assert.deepEqual(
+		getChoices.map(choice => choice.value),
+		['all', ...getCreatureSections().map(field => field.id)],
+	);
 });
 
 test('combined entity listing and autocomplete include both concrete types', async () => {
@@ -711,6 +722,7 @@ test('registered management handlers create, mutate, and display creatures', asy
 	assert.equal((await getEntity(entityKey)).resources.hp.current, 93);
 
 	let getReply;
+	const getFollowUps = [];
 	await commandRegistry.getRuntimeCommands().get('get').execute({
 		config,
 		interaction: {
@@ -721,9 +733,18 @@ test('registered management handlers create, mutate, and display creatures', asy
 			reply: async response => {
 				getReply = response;
 			},
+			followUp: async response => {
+				getFollowUps.push(response);
+			},
 		},
 	});
 	assert.equal(getReply.embeds.length, 1);
 	assert.equal(getReply.embeds[0].toJSON().title, entityKey);
+	assert.equal(getFollowUps.length, 1);
+	assert.match(getFollowUps[0].embeds[0].toJSON().title, / — Gear$/);
+	assert.deepEqual(
+		getFollowUps[0].embeds[0].toJSON().fields.slice(0, 2).map(field => field.value),
+		[t('en', 'common.empty'), t('en', 'common.empty')],
+	);
 	await deleteEntity(entityKey, () => true, 'creature');
 });

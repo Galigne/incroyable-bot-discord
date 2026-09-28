@@ -405,8 +405,13 @@ The current viewing and editing decisions are intentional:
 - `/add entity-key:<new key> [type:<character|creature>]` creates a blank entity and
   grants the invoking user explicit `owner` access; omitted `type` means
   `character`. EntityKey and type are immutable.
-- `/get entity-key:<key>` posts the public character or creature summary.
+- `/get entity-key:<key>` posts the public character or creature summary followed
+  by the type-compatible `gear` view, even when equipment and inventory are empty.
 - `/get entity-key:<key> field:<field>` posts one complete type-compatible field.
+- `/get entity-key:<key> field:all` omits the summary and posts every viewable field
+  in the canonical order of the matching concrete field catalog, including normal
+  empty-state views. `all` is a `/get`-only special value, not a catalog field or an
+  editable section.
 - `/help command:get` explains the supported views.
 - `/access entity-key:<key>` publicly lists every explicit persisted user-access
   entry, including users no longer present in the server.

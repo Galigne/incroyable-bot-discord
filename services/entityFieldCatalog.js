@@ -23,6 +23,13 @@ function getViewableEntityFieldDefinition(type, fieldId) {
 		: characterCatalog.getViewableFieldDefinition(fieldId);
 }
 
+function getViewableEntityFields(type) {
+	assertEntityType(type);
+	return type === 'creature'
+		? creatureCatalog.getViewableCreatureFields()
+		: characterCatalog.getViewableFields();
+}
+
 function getEntitySections(type) {
 	assertEntityType(type);
 	return type === 'creature'
@@ -43,4 +50,5 @@ module.exports = {
 	getEntityFieldDefinition,
 	getEntitySections,
 	getViewableEntityFieldDefinition,
+	getViewableEntityFields,
 };

@@ -148,6 +148,8 @@ test('/help command:get and command:set list both explicit entity field orders',
 			assert.equal(rendered.includes(`\`${removedField}\``), false);
 		}
 		const getRendered = renderDetail('get', createInteraction('regular'), locale);
+		assert.ok(getRendered.includes('`all`'), locale);
+		assert.equal(rendered.includes('`all`'), false, locale);
 		for (const field of fields) {
 			assert.ok(getRendered.includes(`\`${field.viewId}\``), `${locale}: ${field.viewId}`);
 		}
@@ -183,22 +185,24 @@ test('/help command:get and command:set list both explicit entity field orders',
 	);
 });
 
-test('/help command:get explains summary, detailed field, and autocomplete behavior', () => {
+test('/help command:get explains summary plus gear, field:all, and individual fields', () => {
 	for (const [locale, expectedBehavior] of [
 		[
 			'en',
 			[
-				'Without `field`, posts the public entity summary.',
-				'Character fields use `name`, `level`, `resources`, `status`',
-				'Creature fields use the independent order `identity`',
+				'Without `field`, posts the public entity summary followed by its `gear` category',
+				'`field:all` skips the summary and posts every viewable category',
+				'Character categories use `name`, `level`, `resources`, `status`',
+				'Creature categories use the independent order `identity`',
 			],
 		],
 		[
 			'fr',
 			[
-				'Sans `field`, publie le résumé public de l’entité.',
-				'Les champs de personnage sont `name`, `level`, `resources`, `status`',
-				'Les champs de créature suivent leur propre ordre',
+				'Sans `field`, publie le résumé public de l’entité, puis sa catégorie `gear`',
+				'Avec `field:all`, n’affiche pas le résumé',
+				'Les catégories de personnage sont `name`, `level`, `resources`, `status`',
+				'Les catégories de créature suivent leur propre ordre',
 			],
 		],
 	]) {
@@ -206,6 +210,10 @@ test('/help command:get explains summary, detailed field, and autocomplete behav
 		assert.ok(rendered.includes('`/get entity-key:<key>`'), locale);
 		assert.ok(
 			rendered.includes('`/get entity-key:<key> field:<field>`'),
+			locale,
+		);
+		assert.ok(
+			rendered.includes('`/get entity-key:<key> field:all`'),
 			locale,
 		);
 		for (const behavior of expectedBehavior) {
@@ -359,9 +367,9 @@ test('autocomplete respects Discord\'s 25-choice limit and filters values', asyn
 	)).some(choice => choice.value === 'statistics'));
 });
 
-test('/get and /set autocomplete return identical localized section choices', async () => {
+test('/get autocomplete adds localized all without exposing it through /set', async () => {
 	for (const locale of ['en', 'fr']) {
-		for (const query of ['', 'stat', 'gear']) {
+		for (const query of ['stat', 'gear']) {
 			const getChoices = await autocompleteOption(
 				'get', 'field', query, createInteraction('regular'), locale,
 			);
@@ -377,16 +385,30 @@ test('/get and /set autocomplete return identical localized section choices', as
 					&& choice.name.includes(`(${choice.value})`)
 			)));
 		}
+		const getChoices = await autocompleteOption(
+			'get', 'field', '', createInteraction('regular'), locale,
+		);
+		const setChoices = await autocompleteOption(
+			'set', 'field', '', createInteraction('regular'), locale,
+		);
+		assert.equal(getChoices[0].value, 'all', locale);
+		assert.deepEqual(getChoices.slice(1), setChoices, locale);
+		assert.equal(setChoices.some(choice => choice.value === 'all'), false, locale);
 	}
 	const english = await autocompleteOption(
 		'get', 'field', '', createInteraction('regular'), 'en',
 	);
 	assert.deepEqual(english.map(choice => choice.value), [
+		'all',
 		...CHARACTER_SECTION_IDS,
 		...CREATURE_SECTION_IDS.filter(id => !CHARACTER_SECTION_IDS.includes(id)),
 	]);
 	const french = await autocompleteOption(
 		'get', 'field', '', createInteraction('regular'), 'fr',
+	);
+	assert.match(
+		french.find(choice => choice.value === 'all').name,
+		/Toutes les catégories consultables \(all\)/,
 	);
 	assert.match(french.find(choice => choice.value === 'status').name, /État \(status\)/);
 });

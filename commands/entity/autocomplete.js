@@ -30,7 +30,12 @@ async function getUndoableEntityChoices(focusedValue, locale, canManage) {
 	);
 }
 
-async function getEntitySectionChoices(focusedValue, locale, entityKey) {
+async function getEntitySectionChoices(
+	focusedValue,
+	locale,
+	entityKey,
+	{ includeAll = false } = {},
+) {
 	let choices;
 	try {
 		const entity = entityKey ? await getEntity(entityKey) : null;
@@ -43,6 +48,12 @@ async function getEntitySectionChoices(focusedValue, locale, entityKey) {
 			throw error;
 		}
 		choices = createAllSectionChoices(locale);
+	}
+	if (includeAll) {
+		choices.unshift({
+			name: `${t(locale, 'rpg.get.allField')} (all)`,
+			value: 'all',
+		});
 	}
 	return filterAutocompleteChoices(choices, focusedValue);
 }

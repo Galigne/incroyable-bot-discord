@@ -330,7 +330,7 @@ const COMMAND_METADATA = [
 				type: 'string',
 				descriptionKey: 'rpg.get.fieldOption',
 				autocomplete: {
-					provider: 'entity-sections',
+					provider: 'get-entity-sections',
 					showAllInHelp: true,
 				},
 			},
@@ -338,6 +338,7 @@ const COMMAND_METADATA = [
 		examples: [
 			'/get entity-key:<key>',
 			'/get entity-key:<key> field:<field>',
+			'/get entity-key:<key> field:all',
 		],
 		help: {
 			order: 40,

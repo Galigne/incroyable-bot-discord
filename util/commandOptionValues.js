@@ -13,6 +13,7 @@ const { t } = require('./i18n');
 const OPTION_VALUE_PROVIDERS = Object.freeze({
 	'character-sections': getCharacterSectionValues,
 	'entity-sections': getEntitySectionValues,
+	'get-entity-sections': getGetEntitySectionValues,
 	'generator-paths': getGeneratorRootValues,
 });
 
@@ -41,6 +42,17 @@ function getEntitySectionValues(locale) {
 	return choices.filter((choice, index) => (
 		choices.findIndex(candidate => candidate.value === choice.value) === index
 	));
+}
+
+function getGetEntitySectionValues(locale) {
+	return [
+		{
+			label: t(locale, 'rpg.get.allField'),
+			name: `${t(locale, 'rpg.get.allField')} (all)`,
+			value: 'all',
+		},
+		...getEntitySectionValues(locale),
+	];
 }
 
 function createEntitySectionValues(type, sections, locale) {

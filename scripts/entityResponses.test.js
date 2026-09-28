@@ -6,8 +6,11 @@ const Creature = require('../models/Creature');
 const {
 	createEndEntityTurnResponse,
 	createEntityDamageResponse,
+	createEntityGetResponse,
+	createEntityGetResponses,
 	createEntityHealResponse,
 } = require('../util/entityCommandResponses');
+const { getViewableEntityFields } = require('../services/entityFieldCatalog');
 const {
 	createCharacterSummaryEmbed,
 	createCharacterFieldEmbed,
@@ -20,6 +23,7 @@ const {
 	formatCombatantResource,
 	formatCombatantResources,
 } = require('../util/combatantDisplay');
+const { t } = require('../util/i18n');
 
 function createTestCharacter() {
 	const character = new Character('Response.Test');
@@ -172,6 +176,67 @@ test('character and creature render shared combatant sections with their establi
 		assert.equal(gear.fields[2].value, fixture.encumbrance);
 		assert.equal(gear.fields[2].inline, fixture.encumbranceInline);
 	}
+});
+
+test('/get without a field returns the summary followed by gear for both entity types', () => {
+	for (const entity of [
+		new Character('Get.Character'),
+		new Creature('Get.Creature'),
+	]) {
+		const responses = createEntityGetResponses(entity, null, 'en');
+		assert.equal(responses.length, 2, entity.type);
+		assert.deepEqual(
+			responses[0].embeds[0].toJSON(),
+			(entity.type === 'creature'
+				? createCreatureSummaryEmbed(entity, 'en')
+				: createCharacterSummaryEmbed(entity, 'en')).toJSON(),
+		);
+		assert.deepEqual(
+			responses[1].embeds[0].toJSON(),
+			createEntityGetResponse(entity, 'gear', 'en').embeds[0].toJSON(),
+		);
+		assert.deepEqual(
+			responses[1].embeds[0].toJSON().fields.slice(0, 2).map(field => field.value),
+			[t('en', 'common.empty'), t('en', 'common.empty')],
+			`${entity.type} empty gear`,
+		);
+	}
+});
+
+test('/get field:all returns every catalog view in canonical order without a summary', () => {
+	for (const entity of [
+		new Character('All.Character'),
+		new Creature('All.Creature'),
+	]) {
+		const fields = getViewableEntityFields(entity.type);
+		const responses = createEntityGetResponses(entity, 'all', 'en');
+		assert.equal(responses.length, fields.length, entity.type);
+		for (const [index, field] of fields.entries()) {
+			assert.deepEqual(
+				responses[index],
+				createEntityGetResponse(entity, field.viewId, 'en'),
+				`${entity.type}:${field.viewId}`,
+			);
+		}
+		const summary = entity.type === 'creature'
+			? createCreatureSummaryEmbed(entity, 'en').toJSON()
+			: createCharacterSummaryEmbed(entity, 'en').toJSON();
+		assert.equal(
+			responses.some(response => (
+				JSON.stringify(response.embeds[0].toJSON()) === JSON.stringify(summary)
+			)),
+			false,
+			`${entity.type} summary`,
+		);
+	}
+});
+
+test('/get with one field still returns only the unchanged category response', () => {
+	const character = new Character('Single.Character');
+	assert.deepEqual(
+		createEntityGetResponses(character, 'personality', 'fr'),
+		[createEntityGetResponse(character, 'personality', 'fr')],
+	);
 });
 
 test('damage response displays final HP before final AR without a plain final summary', () => {

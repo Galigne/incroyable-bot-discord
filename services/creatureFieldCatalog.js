@@ -154,6 +154,7 @@ const {
 	getFieldDefinition: getCreatureFieldDefinition,
 	getSections: getCreatureSections,
 	getViewableFieldDefinition: getViewableCreatureFieldDefinition,
+	getViewableFields: getViewableCreatureFields,
 } = catalog;
 
 module.exports = {
@@ -163,4 +164,5 @@ module.exports = {
 	getCreatureSections,
 	getEditableCreatureFieldDefinition,
 	getViewableCreatureFieldDefinition,
+	getViewableCreatureFields,
 };

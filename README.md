@@ -112,7 +112,7 @@ restart-only: changing it requires restarting the bot, and reconnects during
 - `/gen-creature creature-key:<new key> [level] [type]` — generate and atomically save a complete creature with no explicit user access; type may select a category or exact archetype relative to `creature` (configured DM role or server owner)
 - `/roll expression:<dice expression>` — roll expressions such as `2d6+3`
 - `/add entity-key:<new key> [type:<character|creature>]` — create a blank entity and grant yourself explicit `owner` access; character is the default
-- `/get entity-key:<key> [field]` — display the summary or one type-compatible field
+- `/get entity-key:<key> [field]` — display the summary followed by gear, one type-compatible category, or every category with `field:all`
 - `/access entity-key:<key>` — display every explicit `owner` and `partial` user entry
 - `/access entity-key:<key> user:<Discord user> level:<owner|partial|none>` — grant, change, or remove explicit access (full authority required)
 - `/access entity-key:<key> user-id:<Discord user ID> level:<owner|partial|none>` — modify a stale entry that cannot be selected through Discord (full authority required)
@@ -181,11 +181,17 @@ field, that continuation must be valid for every possible routed child. Invalid
 paths are rejected before weighted selection, while a path ending at the unresolved
 `.generator` continues with normal weighted route and child generation.
 Internal children such as `dungeon` are invalid as direct roots.
-Character fields are `name`, `level`, `resources`, `status`, `statistics`, `rules`,
-`talents`, `gear`, `race`, `background`, `personality`. Creature fields independently
-use `identity`, `level`, `resources`, `status`, `statistics`, `rules`, `traits`, and
-`gear`. The `resources` section contains HP, AR, AP, and MD. The `status` section
-contains independent Status Effects and Modifiers lists.
+Without `field`, `/get` displays the entity summary followed by its `gear` category,
+including the normal empty gear view when equipment and inventory are empty. A
+specific field displays only that category. `field:all` omits the summary and
+displays every viewable category, including empty categories, in the canonical
+catalog order. Character categories are `name`, `level`, `resources`, `status`,
+`statistics`, `rules`, `talents`, `gear`, `race`, `background`, and `personality`.
+Creature categories independently use `identity`, `level`, `resources`, `status`,
+`statistics`, `rules`, `traits`, and `gear`. The `resources` section contains HP,
+AR, AP, and MD. The `status` section contains independent Status Effects and
+Modifiers lists. The special `all` value is offered only by `/get` autocomplete;
+it is not an editable section and is not offered by `/set`.
 
 Name uses separate optional first-name and last-name inputs; emptying either input
 clears that component. Race uses separate inputs for its name, physical description,
@@ -319,6 +325,7 @@ Example workflows:
 /gen-creature creature-key:Ash.Wolf level:5 type:monster:ancient_dragon
 /set entity-key:D.Robert field:statistics
 /get entity-key:Ash.Wolf field:traits
+/get entity-key:D.Robert field:all
 /access entity-key:Ash.Wolf user:@Player level:partial
 /access entity-key:Ash.Wolf user-id:123456789012345678 level:none
 /damage entity-key:Ash.Wolf damage-amount:25 piercing:false

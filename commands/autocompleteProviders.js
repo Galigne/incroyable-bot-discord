@@ -54,6 +54,7 @@ const AUTOCOMPLETE_PROVIDERS = {
 		context.locale,
 	),
 	'entity-sections': getEntitySections,
+	'get-entity-sections': getGetEntitySections,
 	'help-commands': getHelpCommandChoices,
 	'full-authority-entities': getFullAuthorityEntityChoices,
 	'manageable-entities': getManageableEntityChoices,
@@ -210,6 +211,15 @@ function getEntitySections(option, context, focused) {
 		focused.value,
 		context.locale,
 		context.interaction.options.getString?.('entity-key') ?? '',
+	);
+}
+
+function getGetEntitySections(option, context, focused) {
+	return getEntitySectionChoices(
+		focused.value,
+		context.locale,
+		context.interaction.options.getString?.('entity-key') ?? '',
+		{ includeAll: true },
 	);
 }
 

@@ -14,6 +14,7 @@ const {
 const { translateEntityOutcome } = require('./entityCommandErrors');
 const { t } = require('./i18n');
 const { assertEntityType } = require('../services/entityType');
+const { getViewableEntityFields } = require('../services/entityFieldCatalog');
 
 function createEntityAddedResponse(entity, locale = 'en') {
 	assertEntityType(entity.type);
@@ -97,6 +98,21 @@ function createEntityGetResponse(entity, fieldName, locale = 'en') {
 	return { embeds: [embed] };
 }
 
+function createEntityGetResponses(entity, fieldName, locale = 'en') {
+	if (fieldName === 'all') {
+		return getViewableEntityFields(entity.type).map(field => (
+			createEntityGetResponse(entity, field.viewId, locale)
+		));
+	}
+	if (fieldName) {
+		return [createEntityGetResponse(entity, fieldName, locale)];
+	}
+	return [
+		createEntityGetResponse(entity, null, locale),
+		createEntityGetResponse(entity, 'gear', locale),
+	];
+}
+
 function createEntityGearResponse(entity, locale = 'en') {
 	if (entity.gear.equipment.length === 0 && entity.gear.inventory.length === 0) {
 		return null;
@@ -141,6 +157,7 @@ module.exports = {
 	createEntityEditResponse,
 	createEntityGearResponse,
 	createEntityGetResponse,
+	createEntityGetResponses,
 	createEntityHealResponse,
 	createEntityUndoResponse,
 	createGeneratedCreatureFollowUpResponses,
