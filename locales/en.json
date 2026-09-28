@@ -161,7 +161,7 @@
       "behavior": "Restores the selected character or creature's current AP and MD to their respective maximum values. Explicit `owner` and `partial` users, DMs, and the server owner may use it."
     },
     "gen": {
-      "description": "Generate GM inspiration (configured DM role or server owner)",
+      "description": "Generate GM inspiration",
       "schemaDescription": "Generate GM inspiration from a traversal path",
       "categoryOption": "Localized path starting from a public generator",
       "countOption": "Number of independent results to generate; defaults to 1",

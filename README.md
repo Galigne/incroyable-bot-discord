@@ -107,7 +107,7 @@ restart-only: changing it requires restarting the bot, and reconnects during
 - `/purge amount:<2-100>`
 - `/reload` — reload supported runtime state and reconnect the existing Discord client
 - `/rules`
-- `/gen category:<traversal-path> [count]` — generate from a public root, optionally selecting entries, routes, or fields (configured DM role or server owner)
+- `/gen category:<traversal-path> [count]` — generate from a public root, optionally selecting entries, routes, or fields
 - `/gen-character character-key:<new key> [level] [background]` — generate and save a complete character with no explicit user access; background may select a category or exact archetype relative to `background` (configured DM role or server owner)
 - `/gen-creature creature-key:<new key> [level] [type]` — generate and atomically save a complete creature with no explicit user access; type may select a category or exact archetype relative to `creature` (configured DM role or server owner)
 - `/roll [expression:<dice expression>]` — roll `1d20` by default or an expression such as `2d6+3`
@@ -259,10 +259,10 @@ full-authority user can copy a stale ID into `user-id`; access changes require
 or remove any user's access, including their own, without transferring or removing
 other owners.
 
-When configured, the DM role has implicit full authority over every entity and may
-use `/gen`, `/gen-character`, and `/gen-creature`; without that role, those additional DM
-permissions are server-owner-only. DM and server-owner authority is not persisted in
-entity access lists. When configured, the
+Anyone may use `/gen`. When configured, the DM role has implicit full authority over
+every entity and may use `/gen-character` and `/gen-creature`; without that role,
+those additional DM permissions are server-owner-only. DM and server-owner authority
+is not persisted in entity access lists. When configured, the
 moderator role lets its members use `/say`, `/purge`, and `/reload`; without it,
 those moderation commands are server-owner-only. The actual Discord server owner,
 identified by Discord rather than configuration, may use every command and manage

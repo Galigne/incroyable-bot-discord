@@ -161,7 +161,7 @@ test('registry permission filtering delegates to the existing authorization serv
 		damage: 'everyone',
 		delete: 'everyone',
 		'end-turn': 'everyone',
-		gen: 'dm',
+		gen: 'everyone',
 		'gen-character': 'dm',
 		'gen-creature': 'dm',
 		get: 'everyone',
@@ -275,6 +275,30 @@ test('/gen exposes an optional count from 1 through 10', () => {
 			maxValue: 10,
 			required: undefined,
 		},
+	);
+});
+
+test('/gen is available to regular users without changing entity generators', () => {
+	const regular = createInteraction('regular', []);
+	assert.equal(
+		authorizeCommand(commandRegistry.getCommand('gen'), regular, config).allowed,
+		true,
+	);
+	assert.equal(
+		authorizeCommand(
+			commandRegistry.getCommand('gen-character'),
+			regular,
+			config,
+		).allowed,
+		false,
+	);
+	assert.equal(
+		authorizeCommand(
+			commandRegistry.getCommand('gen-creature'),
+			regular,
+			config,
+		).allowed,
+		false,
 	);
 });
 

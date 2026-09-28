@@ -21,7 +21,6 @@ module.exports = function createAuthorizationChecks(context) {
 			commands.get('say'),
 			commands.get('purge'),
 			commands.get('reload'),
-			commands.get('gen'),
 			commands.get('gen-character'),
 			commands.get('gen-creature'),
 		];
@@ -38,7 +37,7 @@ module.exports = function createAuthorizationChecks(context) {
 			errors.push('The server owner should bypass all privileged role checks.');
 		}
 
-		for (const name of ['gen', 'gen-character', 'gen-creature']) {
+		for (const name of ['gen-character', 'gen-creature']) {
 			const command = commands.get(name);
 			if (!authorizeCommand(command, dm, config).allowed) {
 				errors.push(`The DM role should be allowed to use ${name}.`);
@@ -66,6 +65,7 @@ module.exports = function createAuthorizationChecks(context) {
 
 		const unrestrictedCommands = [
 			commands.get('access'),
+			commands.get('gen'),
 			commands.get('help'),
 			commands.get('get'),
 			commands.get('roll'),
@@ -139,14 +139,14 @@ module.exports = function createAuthorizationChecks(context) {
 			roles: { moderator: config.roles.moderator },
 		};
 		const invalidAuthorization = authorizeCommand(
-			commands.get('gen'),
+			commands.get('gen-character'),
 			dm,
 			missingDmConfig,
 		);
 		if (invalidAuthorization.allowed || !invalidAuthorization.message) {
 			errors.push('An omitted DM role should deny non-owner users cleanly.');
 		}
-		if (!authorizeCommand(commands.get('gen'), owner, missingDmConfig).allowed) {
+		if (!authorizeCommand(commands.get('gen-character'), owner, missingDmConfig).allowed) {
 			errors.push('An omitted DM role must preserve the server-owner bypass.');
 		}
 	}

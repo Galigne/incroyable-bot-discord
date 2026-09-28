@@ -545,7 +545,8 @@ remain editable as one atomic group; `background.archetype` remains read-only.
 
 Permissions:
 
-- Anyone with normal bot access can view entity sheets and explicit access lists.
+- Anyone with normal bot access can use `/gen` and view entity sheets and explicit
+  access lists.
 - Access-list rendering must use cached member or user display information when
   available, must never fetch or require Discord resolution for every entry, and
   must always show the persisted user ID with a mention-compatible fallback so a
@@ -558,8 +559,8 @@ Permissions:
 - Explicit `partial` users may set, heal, damage, end turns, and undo, but may not
   delete or change access.
 - When configured, the DM role may perform those actions on every entity and may
-  use `/gen`, `/gen-character`, and `/gen-creature`; otherwise those additional
-  permissions are server-owner-only.
+  use `/gen-character` and `/gen-creature`; otherwise those additional permissions
+  are server-owner-only.
 - When configured, the moderator role may use `/say`, `/purge`, and `/reload`;
   otherwise those commands are server-owner-only.
 - The actual Discord server owner from `guild.ownerId` bypasses every role check

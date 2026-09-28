@@ -61,7 +61,7 @@ test('omitted roles leave privileged commands owner-only', () => {
 	const config = { ...BASE_CONFIG };
 	const owner = createInteraction('owner', [], 'owner');
 	const regular = createInteraction('regular');
-	const dmCommand = commandRegistry.getCommand('gen');
+	const dmCommand = commandRegistry.getCommand('gen-character');
 	const moderatorCommand = commandRegistry.getCommand('reload');
 
 	assert.equal(hasDmPermission(owner, config), true);
@@ -85,7 +85,10 @@ test('each configured role grants only its corresponding permission', () => {
 	const dm = createInteraction('dm', ['dm-role']);
 	const moderator = createInteraction('moderator', ['moderator-role']);
 
-	assert.equal(authorizeCommand(commandRegistry.getCommand('gen'), dm, config).allowed, true);
+	assert.equal(
+		authorizeCommand(commandRegistry.getCommand('gen-character'), dm, config).allowed,
+		true,
+	);
 	assert.equal(
 		authorizeCommand(commandRegistry.getCommand('reload'), dm, config).allowed,
 		false,
@@ -95,7 +98,11 @@ test('each configured role grants only its corresponding permission', () => {
 		true,
 	);
 	assert.equal(
-		authorizeCommand(commandRegistry.getCommand('gen'), moderator, config).allowed,
+		authorizeCommand(
+			commandRegistry.getCommand('gen-character'),
+			moderator,
+			config,
+		).allowed,
 		false,
 	);
 });
@@ -149,21 +156,23 @@ test('help and help autocomplete handle omitted roles safely', async () => {
 		registry: commandRegistry,
 	});
 	const renderedOverview = JSON.stringify(overview.embeds[0].toJSON());
-	assert.doesNotMatch(renderedOverview, /\/gen/);
+	assert.match(renderedOverview, /\/gen/);
+	assert.doesNotMatch(renderedOverview, /\/gen-character/);
 	assert.doesNotMatch(renderedOverview, /\/reload/);
 
 	const detail = createHelpResponse({
 		avatarUrl: 'https://example.com/avatar.png',
 		commandName: 'gen',
 		config,
-		interaction: owner,
+		interaction: regular,
 		locale: 'en',
 		registry: commandRegistry,
 	});
-	assert.match(JSON.stringify(detail.embeds[0].toJSON()), /owner-only when the role is omitted/i);
+	assert.match(JSON.stringify(detail.embeds[0].toJSON()), /everyone with normal bot access/i);
 
 	const regularChoices = await autocompleteHelp(regular, config);
-	assert.equal(regularChoices.some(choice => choice.value === 'gen'), false);
+	assert.equal(regularChoices.some(choice => choice.value === 'gen'), true);
+	assert.equal(regularChoices.some(choice => choice.value === 'gen-character'), false);
 	assert.equal(regularChoices.some(choice => choice.value === 'reload'), false);
 	const ownerChoices = await autocompleteHelp(owner, config);
 	assert.equal(ownerChoices.some(choice => choice.value === 'gen'), true);

@@ -161,7 +161,7 @@
       "behavior": "Rétablit les PA et la DD actuels du personnage ou de la créature à leurs valeurs maximales respectives. Les utilisateurs disposant d’un accès explicite `owner` ou `partial`, les MJ et le propriétaire du serveur peuvent l’utiliser."
     },
     "gen": {
-      "description": "Générer une inspiration (rôle MJ configuré ou propriétaire du serveur)",
+      "description": "Générer une inspiration pour le MJ",
       "schemaDescription": "Générer une inspiration pour le MJ à partir d’un chemin",
       "categoryOption": "Chemin localisé partant d’un générateur public",
       "countOption": "Nombre de résultats indépendants à générer ; 1 par défaut",

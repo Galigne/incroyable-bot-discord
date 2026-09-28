@@ -97,7 +97,7 @@ const COMMAND_METADATA = [
 		name: 'gen',
 		registrationOrder: 9,
 		category: 'rpg',
-		permission: 'dm',
+		permission: 'everyone',
 		descriptionKey: 'rpg.gen.schemaDescription',
 		options: [
 			{

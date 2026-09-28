@@ -28,11 +28,13 @@ test('/help lists only commands available to a regular player', () => {
 	assert.match(rendered, /RPG/);
 	assert.match(rendered, /\*\*\/help\*\*/);
 	assert.match(rendered, /\*\*\/roll\*\*/);
-	assert.doesNotMatch(rendered, /\*\*\/gen\*\*/);
+	assert.match(rendered, /\*\*\/gen\*\*/);
+	assert.doesNotMatch(rendered, /\*\*\/gen-character\*\*/);
+	assert.doesNotMatch(rendered, /\*\*\/gen-creature\*\*/);
 	assert.doesNotMatch(rendered, /\*\*\/say\*\*/);
 });
 
-test('/help lists DM-only commands for a DM', () => {
+test('/help lists unrestricted and DM-only generation commands for a DM', () => {
 	const rendered = renderOverview(createInteraction('dm', [config.roles.dm]));
 	assert.match(rendered, /\*\*\/gen\*\*/);
 	assert.match(rendered, /\*\*\/gen-character\*\*/);
@@ -49,7 +51,9 @@ test('/help lists moderation commands for a moderator', () => {
 	assert.match(rendered, /\*\*\/say\*\*/);
 	assert.match(rendered, /\*\*\/purge\*\*/);
 	assert.match(rendered, /\*\*\/reload\*\*/);
-	assert.doesNotMatch(rendered, /\*\*\/gen\*\*/);
+	assert.match(rendered, /\*\*\/gen\*\*/);
+	assert.doesNotMatch(rendered, /\*\*\/gen-character\*\*/);
+	assert.doesNotMatch(rendered, /\*\*\/gen-creature\*\*/);
 });
 
 test('/help lists every executable command for the server owner', () => {
@@ -87,7 +91,7 @@ test('/help command:<command> renders centralized command details', () => {
 });
 
 test('/help command:gen lists every localized generator category', () => {
-	const interaction = createInteraction('dm', [config.roles.dm]);
+	const interaction = createInteraction('regular');
 	for (const locale of ['en', 'fr']) {
 		const categories = generatorCatalog.listGenerators(locale);
 		assert.ok(categories.length > 0);
@@ -261,7 +265,7 @@ test('/help command:undo explains retention, consumption, and the lack of redo',
 });
 
 test('/help rejects unknown and unavailable commands', () => {
-	for (const commandName of ['missing', 'gen']) {
+	for (const commandName of ['missing', 'gen-character']) {
 		const response = createHelpResponse({
 			avatarUrl: AVATAR_URL,
 			commandName,
@@ -279,8 +283,8 @@ test('/help command autocomplete filters commands by permission', async () => {
 	const cases = [
 		{
 			interaction: createInteraction('regular'),
-			includes: ['roll'],
-			excludes: ['gen', 'say'],
+			includes: ['gen', 'roll'],
+			excludes: ['gen-character', 'gen-creature', 'say'],
 		},
 		{
 			interaction: createInteraction('dm', [config.roles.dm]),
@@ -289,8 +293,8 @@ test('/help command autocomplete filters commands by permission', async () => {
 		},
 		{
 			interaction: createInteraction('moderator', [config.roles.moderator]),
-			includes: ['say'],
-			excludes: ['gen'],
+			includes: ['gen', 'say'],
+			excludes: ['gen-character', 'gen-creature'],
 		},
 		{
 			interaction: createInteraction('owner', [], 'owner'),
@@ -320,8 +324,8 @@ test('/help autocomplete falls back to every command without member role data', 
 });
 
 test('autocomplete respects Discord\'s 25-choice limit and filters values', async () => {
-	const dm = createInteraction('dm', [config.roles.dm]);
-	const initialCategories = await autocompleteOption('gen', 'category', '', dm);
+	const regular = createInteraction('regular');
+	const initialCategories = await autocompleteOption('gen', 'category', '', regular);
 	assert.equal(
 		initialCategories.length,
 		Math.min(
@@ -335,7 +339,7 @@ test('autocomplete respects Discord\'s 25-choice limit and filters values', asyn
 		'gen',
 		'category',
 		'loot:wea',
-		dm,
+		regular,
 	);
 	assert.equal(filteredCategories.length, 1);
 	assert.equal(filteredCategories[0].value, 'loot:weapons');
