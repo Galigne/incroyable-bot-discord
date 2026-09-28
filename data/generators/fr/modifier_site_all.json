@@ -94,6 +94,28 @@
       "fields": {
         "description": "{{ weather:ashfall.description }}"
       }
+    },
+    {
+      "id": "sentient",
+      "name": "Conscient",
+      "fields": {
+        "description": "Le lieu perçoit ce qui se passe dans son enceinte, possède la personnalité suivante et peut influencer subtilement les itinéraires, les conditions ou les coïncidences qui s’y produisent : {{ personality.description }}"
+      }
+    },
+    {
+      "id": "echoing",
+      "name": "Résonnant",
+      "weight": 2,
+      "fields": {
+        "description": "Les paroles et les sons émis dans une partie du lieu peuvent réapparaître ailleurs plus tard, privés de leur contexte d’origine."
+      }
+    },
+    {
+      "id": "sideways",
+      "name": "Incliné",
+      "fields": {
+        "description": "La gravité locale tire selon un angle manifeste, faisant dériver les objets non arrimés, compliquant les trajets familiers et rendant dangereuse une architecture ordinaire."
+      }
     }
   ]
 }

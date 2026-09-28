@@ -612,6 +612,54 @@
         ],
         "naturalArmorPercentage": 15
       }
+    },
+    {
+      "id": "chicken",
+      "name": "Poule",
+      "weight": 4,
+      "fields": {
+        "description": "Un oiseau de basse-cour courant, élevé pour ses œufs, sa viande et la lutte contre les petits nuisibles."
+      },
+      "generation": {
+        "statProfile": "creature-animal-runner"
+      }
+    },
+    {
+      "id": "goose",
+      "name": "Oie",
+      "weight": 4,
+      "fields": {
+        "description": "Un oiseau aquatique vigilant que l’on rencontre dans les fermes, les zones humides et près des cours d’eau."
+      },
+      "generation": {
+        "statProfile": "creature-animal-runner",
+        "traits": ["{{ traits:flight }}", "{{ traits:aquatic_speed }}"]
+      }
+    },
+    {
+      "id": "donkey",
+      "name": "Âne",
+      "weight": 4,
+      "fields": {
+        "description": "Un animal de bât domestique au pied sûr, apprécié pour son endurance et sa prudence."
+      },
+      "generation": {
+        "statProfile": "creature-animal-tank",
+        "traits": ["{{ traits:powerful_build }}"],
+        "naturalArmorPercentage": 5
+      }
+    },
+    {
+      "id": "sheep",
+      "name": "Mouton",
+      "weight": 4,
+      "fields": {
+        "description": "Un paisible herbivore grégaire, couramment élevé pour sa laine, son lait et sa viande."
+      },
+      "generation": {
+        "statProfile": "creature-animal-tank",
+        "naturalArmorPercentage": 5
+      }
     }
   ]
 }

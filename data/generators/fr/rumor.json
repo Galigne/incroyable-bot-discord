@@ -217,6 +217,55 @@
       "fields": {
         "description": "{{ faction.name }} recruterait discrètement des personnes extérieures pour assurer la prestation suivante : {{ service.name }}."
       }
+    },
+    {
+      "id": "rule_bearing_animal",
+      "name": "Animal doué d’une LOI",
+      "fields": {
+        "description": "On raconte qu’un animal apparemment ordinaire du type {{ animal.name }} se comporte comme s’il possédait {{ rules.name }}, mais les témoins hésitent entre magie, dressage et coïncidence."
+      }
+    },
+    {
+      "id": "monster_on_payroll",
+      "name": "Monstre à la solde",
+      "fields": {
+        "description": "Une créature redoutée du type {{ monster.name }} travaillerait pour {{ faction.name }} sous la protection d’un gouvernement de type {{ government.name }}."
+      }
+    },
+    {
+      "id": "counterfeit_true_relic",
+      "name": "Fausse relique aux vrais miracles",
+      "fields": {
+        "description": "Une relique sacrée de la religion appelée {{ religion.name }} serait une contrefaçon récente, mais les miracles qui lui sont attribués resteraient pourtant authentiques."
+      }
+    },
+    {
+      "id": "replaced_notable",
+      "name": "Personnalité remplacée",
+      "fields": {
+        "description": "Une personne respectée au profil {{ background.generator.name }} aurait été remplacée par un double ; ses proches invoquent de légers changements d’habitudes comme preuves."
+      }
+    },
+    {
+      "id": "faction_feeds_monster",
+      "name": "Monstre entretenu",
+      "fields": {
+        "description": "Des convois de ravitaillement liés à {{ faction.name }} nourriraient, abriteraient ou entretiendraient d’une autre manière une dangereuse créature du type {{ monster.name }}."
+      }
+    },
+    {
+      "id": "guardian_contains_worse",
+      "name": "Gardien nécessaire",
+      "fields": {
+        "description": "Des voyageurs affirment que la créature du type {{ monster.name }} qui garde le lieu décrit comme {{ site:dungeon.generator.name }} empêcherait en réalité quelque chose de pire de s’échapper."
+      }
+    },
+    {
+      "id": "item_dislikes_owner",
+      "name": "Malédiction sélective",
+      "fields": {
+        "description": "L’objet appelé {{ loot.generator.name }} ne serait pas maudit ; selon les témoins, il aurait simplement et activement pris son propriétaire actuel en grippe."
+      }
     }
   ]
 }

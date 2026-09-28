@@ -184,6 +184,41 @@
       "fields": {
         "description": "An old wound never healed correctly; noticing and reaching the scar can bypass the creature’s usual protection or provoke pain that changes its behavior."
       }
+    },
+    {
+      "id": "possessed",
+      "name": "Possessed",
+      "fields": {
+        "description": "A presence from {{ creature.generator.name }} inhabits or influences this creature, lending it unfamiliar urges, knowledge, or abilities while introducing a second will that may resist its own."
+      }
+    },
+    {
+      "id": "awakened",
+      "name": "Awakened",
+      "fields": {
+        "description": "Unexpectedly humanlike intelligence lets this creature reason, speak, and pursue a personality of its own: {{ personality.description }}"
+      }
+    },
+    {
+      "id": "clockwork",
+      "name": "Clockwork",
+      "fields": {
+        "description": "This artificial version is built from fitted mechanisms and animated components; it can be repaired like a machine but may jam, wind down, or betray its maker’s design."
+      }
+    },
+    {
+      "id": "volatile",
+      "name": "Volatile",
+      "fields": {
+        "description": "Its body contains unstable {{ element.name }} energy that injury or death can release in a sudden hazardous burst, making restraint and careful attacks safer than brute force."
+      }
+    },
+    {
+      "id": "two_headed",
+      "name": "Two-Headed",
+      "fields": {
+        "description": "Two independently alert heads broaden its awareness and make it harder to surprise, but conflicting instincts, attention, or timing can disrupt coordinated action."
+      }
     }
   ]
 }

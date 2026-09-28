@@ -433,6 +433,65 @@
       "fields": {
         "description": "For one hour, nobody in the area can remember or recognize proper names, titles, or written signatures."
       }
+    },
+    {
+      "id": "temporary_animal_speech",
+      "name": "Speaking Beasts",
+      "weight": 2,
+      "fields": {
+        "description": "For one hour, every nearby animal—including creatures of the {{ animal.name }} kind—can speak; each knows only what it has personally noticed and pursues its own priorities."
+      }
+    },
+    {
+      "id": "wandering_doors",
+      "name": "Wayward Doors",
+      "fields": {
+        "description": "Until dawn, every door in the area opens onto an unexpected or incorrect nearby location, and its destination changes again after it closes."
+      }
+    },
+    {
+      "id": "shared_dream_event",
+      "name": "Common Dream",
+      "weight": 2,
+      "fields": {
+        "description": "Everyone who sleeps in the area experiences the same vivid dream about the place described as {{ site.generator.name }}, though their memories of it begin to diverge after waking."
+      }
+    },
+    {
+      "id": "regional_rule_effect",
+      "name": "Regional RULE",
+      "fields": {
+        "description": "For one day, {{ rules.name }} temporarily affects an entire settlement and its surroundings; the GM decides its broad manifestation, limits, and practical complications."
+      }
+    },
+    {
+      "id": "misassigned_shadows",
+      "name": "Misassigned Shadows",
+      "weight": 2,
+      "fields": {
+        "description": "Shadows throughout the area stop matching their owners and instead imitate the movements, posture, or habits of different nearby people."
+      }
+    },
+    {
+      "id": "unfinished_mundane_business",
+      "name": "The Dead’s Errands",
+      "fields": {
+        "description": "The dead briefly return to settle debts, return borrowed items, deliver old messages, finish household tasks, or resolve similarly mundane unfinished business."
+      }
+    },
+    {
+      "id": "exchanged_voices",
+      "name": "Exchanged Voices",
+      "fields": {
+        "description": "Everyone in the area finds their voice randomly exchanged with someone else’s, while speech and identity otherwise remain unchanged."
+      }
+    },
+    {
+      "id": "tilting_gravity",
+      "name": "Tilting Gravity",
+      "fields": {
+        "description": "Over several hours, gravity tilts a little farther every few minutes, steadily changing which surfaces are floors and which routes remain safe."
+      }
     }
   ]
 }

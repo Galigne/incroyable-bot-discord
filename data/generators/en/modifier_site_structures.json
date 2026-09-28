@@ -21,6 +21,13 @@
       "fields": {
         "description": "Fresh traces still reveal the event and allow pursuit of those responsible or surviving."
       }
+    },
+    {
+      "id": "overly_secure",
+      "name": "Overly Secure",
+      "fields": {
+        "description": "An unreasonable number of locks, checkpoints, gates, passwords, inspections, and redundant barriers protects even trivial areas."
+      }
     }
   ]
 }

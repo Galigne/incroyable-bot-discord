@@ -612,6 +612,54 @@
         ],
         "naturalArmorPercentage": 15
       }
+    },
+    {
+      "id": "chicken",
+      "name": "Chicken",
+      "weight": 4,
+      "fields": {
+        "description": "A common farm bird kept for eggs, meat, and control of small pests."
+      },
+      "generation": {
+        "statProfile": "creature-animal-runner"
+      }
+    },
+    {
+      "id": "goose",
+      "name": "Goose",
+      "weight": 4,
+      "fields": {
+        "description": "A watchful waterfowl found around farms, wetlands, and waterways."
+      },
+      "generation": {
+        "statProfile": "creature-animal-runner",
+        "traits": ["{{ traits:flight }}", "{{ traits:aquatic_speed }}"]
+      }
+    },
+    {
+      "id": "donkey",
+      "name": "Donkey",
+      "weight": 4,
+      "fields": {
+        "description": "A sure-footed domestic pack animal valued for endurance and caution."
+      },
+      "generation": {
+        "statProfile": "creature-animal-tank",
+        "traits": ["{{ traits:powerful_build }}"],
+        "naturalArmorPercentage": 5
+      }
+    },
+    {
+      "id": "sheep",
+      "name": "Sheep",
+      "weight": 4,
+      "fields": {
+        "description": "A placid herd grazer commonly raised for wool, milk, and meat."
+      },
+      "generation": {
+        "statProfile": "creature-animal-tank",
+        "naturalArmorPercentage": 5
+      }
     }
   ]
 }

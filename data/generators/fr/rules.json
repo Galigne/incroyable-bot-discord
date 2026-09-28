@@ -393,6 +393,55 @@
       }
     },
     {
+      "id": "truth_rule",
+      "name": "LOI de la vérité",
+      "fields": {
+        "description": "Contraint, révèle ou extrait des paroles véridiques."
+      }
+    },
+    {
+      "id": "silence_rule",
+      "name": "LOI du silence",
+      "fields": {
+        "description": "Supprime et manipule les sons."
+      }
+    },
+    {
+      "id": "adhesion_rule",
+      "name": "LOI de l’adhérence",
+      "fields": {
+        "description": "Colle ou sépare des matières."
+      }
+    },
+    {
+      "id": "voice_rule",
+      "name": "LOI de la voix",
+      "fields": {
+        "description": "Copie, vole, échange et modifie les voix."
+      }
+    },
+    {
+      "id": "elasticity_rule",
+      "name": "LOI de l’élasticité",
+      "fields": {
+        "description": "Étire la matière ou la rend anormalement élastique et rebondissante."
+      }
+    },
+    {
+      "id": "ownership_rule",
+      "name": "LOI de la propriété",
+      "fields": {
+        "description": "Détecte et influence la propriété et la possession."
+      }
+    },
+    {
+      "id": "knot_rule",
+      "name": "LOI des nœuds",
+      "fields": {
+        "description": "Crée, resserre, desserre et défait les nœuds."
+      }
+    },
+    {
       "id": "elemental_rule",
       "name": "LOI élémentaire : {{ element.name }}",
       "weight": 19,

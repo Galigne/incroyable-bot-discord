@@ -37,6 +37,38 @@
     { "id": "prison_break", "name": "organizing a prison break" },
     { "id": "impersonation", "name": "criminal impersonation" },
     { "id": "treason", "name": "treason" },
-    { "id": "stolen_goods_trafficking", "name": "trafficking in stolen goods" }
+    { "id": "stolen_goods_trafficking", "name": "trafficking in stolen goods" },
+    {
+      "id": "unlicensed_necromancy",
+      "name": "unlicensed necromancy",
+      "weight": 0.5
+    },
+    {
+      "id": "fraudulent_miracles",
+      "name": "fraudulent miracles",
+      "weight": 0.5
+    },
+    {
+      "id": "magical_identity_theft",
+      "name": "magical identity theft",
+      "weight": 0.5
+    },
+    {
+      "id": "monster_smuggling",
+      "name": "monster smuggling",
+      "weight": 0.75
+    },
+    {
+      "id": "counterfeit_relics",
+      "name": "counterfeiting sacred relics",
+      "weight": 0.75
+    },
+    {
+      "id": "unauthorized_resurrection",
+      "name": "unauthorized resurrection",
+      "weight": 0.5
+    },
+    { "id": "illegal_dueling", "name": "illegal dueling" },
+    { "id": "livestock_rustling", "name": "livestock rustling" }
   ]
 }

@@ -217,6 +217,55 @@
       "fields": {
         "description": "{{ faction.name }} is reportedly recruiting outsiders discreetly to provide the following service: {{ service.name }}."
       }
+    },
+    {
+      "id": "rule_bearing_animal",
+      "name": "Animal with a RULE",
+      "fields": {
+        "description": "People claim that an otherwise ordinary {{ animal.name }} behaves as though it possesses {{ rules.name }}, though witnesses disagree whether the signs are magic, training, or coincidence."
+      }
+    },
+    {
+      "id": "monster_on_payroll",
+      "name": "Monster on the payroll",
+      "fields": {
+        "description": "A feared creature of the {{ monster.name }} type is rumored to work for {{ faction.name }} with the protection of a government following the {{ government.name }} model."
+      }
+    },
+    {
+      "id": "counterfeit_true_relic",
+      "name": "False relic, true miracles",
+      "fields": {
+        "description": "A sacred relic of the religion known as {{ religion.name }} is said to be a recent counterfeit, yet the miracles attributed to it reportedly remain genuine."
+      }
+    },
+    {
+      "id": "replaced_notable",
+      "name": "Replaced notable",
+      "fields": {
+        "description": "A respected person with the {{ background.generator.name }} background has supposedly been replaced by a duplicate; acquaintances cite small changes in habits as proof."
+      }
+    },
+    {
+      "id": "faction_feeds_monster",
+      "name": "Maintained monster",
+      "fields": {
+        "description": "Supply carts associated with {{ faction.name }} are rumored to feed, shelter, or otherwise maintain a dangerous creature of the {{ monster.name }} type."
+      }
+    },
+    {
+      "id": "guardian_contains_worse",
+      "name": "Necessary guardian",
+      "fields": {
+        "description": "Travelers claim that the creature of the {{ monster.name }} type guarding the place described as {{ site:dungeon.generator.name }} is actually preventing something worse from escaping."
+      }
+    },
+    {
+      "id": "item_dislikes_owner",
+      "name": "Selective curse",
+      "fields": {
+        "description": "The item known as {{ loot.generator.name }} may not be cursed at all; witnesses insist that it simply and actively dislikes its current owner."
+      }
     }
   ]
 }

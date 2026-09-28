@@ -37,6 +37,38 @@
     { "id": "prison_break", "name": "organisation d’une évasion" },
     { "id": "impersonation", "name": "usurpation d’identité" },
     { "id": "treason", "name": "trahison" },
-    { "id": "stolen_goods_trafficking", "name": "trafic de biens volés" }
+    { "id": "stolen_goods_trafficking", "name": "trafic de biens volés" },
+    {
+      "id": "unlicensed_necromancy",
+      "name": "nécromancie sans licence",
+      "weight": 0.5
+    },
+    {
+      "id": "fraudulent_miracles",
+      "name": "miracles frauduleux",
+      "weight": 0.5
+    },
+    {
+      "id": "magical_identity_theft",
+      "name": "usurpation magique d’identité",
+      "weight": 0.5
+    },
+    {
+      "id": "monster_smuggling",
+      "name": "contrebande de monstres",
+      "weight": 0.75
+    },
+    {
+      "id": "counterfeit_relics",
+      "name": "contrefaçon de reliques sacrées",
+      "weight": 0.75
+    },
+    {
+      "id": "unauthorized_resurrection",
+      "name": "résurrection non autorisée",
+      "weight": 0.5
+    },
+    { "id": "illegal_dueling", "name": "duels illégaux" },
+    { "id": "livestock_rustling", "name": "vol de bétail" }
   ]
 }

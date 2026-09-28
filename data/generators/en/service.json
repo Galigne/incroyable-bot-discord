@@ -35,6 +35,40 @@
     { "id": "funerary_rites", "name": "funerary rites" },
     { "id": "rescue", "name": "rescue work" },
     { "id": "messenger_work", "name": "messenger work" },
-    { "id": "supply_procurement", "name": "supply procurement" }
+    { "id": "supply_procurement", "name": "supply procurement" },
+    {
+      "id": "haunting_verification",
+      "name": "verification of whether a place or object is genuinely haunted",
+      "weight": 0.75
+    },
+    {
+      "id": "escaped_livestock_recovery",
+      "name": "recovery of escaped livestock"
+    },
+    {
+      "id": "no_ground_contact_transport",
+      "name": "transport of something that must not touch the ground",
+      "weight": 0.5
+    },
+    {
+      "id": "cursed_object_disposal",
+      "name": "safe removal or disposal of a cursed object",
+      "weight": 0.75
+    },
+    {
+      "id": "suspicious_food_tasting",
+      "name": "taste-testing suspicious or potentially magical food",
+      "weight": 0.5
+    },
+    {
+      "id": "unusual_creature_training",
+      "name": "training an unusual creature",
+      "weight": 0.75
+    },
+    {
+      "id": "ceremonial_impersonation",
+      "name": "impersonating someone at a ceremony or formal occasion",
+      "weight": 0.5
+    }
   ]
 }

@@ -184,6 +184,41 @@
       "fields": {
         "description": "Une ancienne blessure a mal cicatrisé ; atteindre la cicatrice peut contourner sa protection habituelle ou provoquer une douleur qui modifie son comportement."
       }
+    },
+    {
+      "id": "possessed",
+      "name": "Possédée",
+      "fields": {
+        "description": "Une présence issue de {{ creature.generator.name }} habite ou influence cette créature, lui insufflant des pulsions, des connaissances ou des facultés étrangères ainsi qu’une seconde volonté capable de résister à la sienne."
+      }
+    },
+    {
+      "id": "awakened",
+      "name": "Éveillée",
+      "fields": {
+        "description": "Une intelligence étonnamment humaine permet à cette créature de raisonner, de parler et d’affirmer sa propre personnalité : {{ personality.description }}"
+      }
+    },
+    {
+      "id": "clockwork",
+      "name": "Mécanique",
+      "fields": {
+        "description": "Cette version artificielle est faite de mécanismes ajustés et de pièces animées ; elle se répare comme une machine, mais peut se gripper, s’arrêter ou trahir les intentions de son créateur."
+      }
+    },
+    {
+      "id": "volatile",
+      "name": "Volatile",
+      "fields": {
+        "description": "Son corps renferme une énergie instable liée à {{ element.name }}, qu’une blessure ou sa mort peut libérer dans une brusque décharge dangereuse ; la maîtriser et frapper avec précaution est plus sûr que recourir à la force brute."
+      }
+    },
+    {
+      "id": "two_headed",
+      "name": "Bicéphale",
+      "fields": {
+        "description": "Deux têtes indépendantes élargissent sa vigilance et la rendent plus difficile à surprendre, mais des instincts, une attention ou un rythme contradictoires peuvent gêner ses actions coordonnées."
+      }
     }
   ]
 }

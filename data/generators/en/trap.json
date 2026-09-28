@@ -236,6 +236,66 @@
       "fields": {
         "description": "A pedestal grants the requested object, then announces an inconvenient but fair price that must be paid before leaving."
       }
+    },
+    {
+      "id": "truth_inducing_mist",
+      "name": "Truth mist",
+      "weight": 2,
+      "fields": {
+        "description": "Hidden vents release a pale mist that compels those breathing it to answer the next direct question truthfully, making silence or breath protection essential."
+      }
+    },
+    {
+      "id": "adhesive_surface",
+      "name": "Adhesive floor",
+      "weight": 2,
+      "fields": {
+        "description": "The floor becomes powerfully adhesive under pressure, trapping boots, dropped gear, and anyone who struggles without first loosening or covering the surface."
+      }
+    },
+    {
+      "id": "stolen_voice_toll",
+      "name": "Stolen voice toll",
+      "fields": {
+        "description": "A carved arch steals the first intruder’s voice and uses it to issue false orders elsewhere while the victim remains unable to speak above a whisper."
+      }
+    },
+    {
+      "id": "inventory_exchange",
+      "name": "Exchanged inventories",
+      "fields": {
+        "description": "A paired rune swaps every carried item between the first two affected creatures, redistributing keys, weapons, protections, and dangerous objects at the worst moment."
+      }
+    },
+    {
+      "id": "banished_equipment",
+      "name": "Banished equipment",
+      "fields": {
+        "description": "A ward leaves its victims in place but teleports their carried equipment into several visible locked cages beyond the surrounding obstacle."
+      }
+    },
+    {
+      "id": "identity_alarm",
+      "name": "Identity alarm",
+      "weight": 2,
+      "fields": {
+        "description": "An enchantment announces each intruder’s identity and a revealing personal detail loudly enough for distant defenders to hear."
+      }
+    },
+    {
+      "id": "indelible_color",
+      "name": "Indelible color",
+      "weight": 2,
+      "fields": {
+        "description": "A burst of vivid magical color marks the target, their tracks, and anything they touch; ordinary washing and concealment cannot fully hide it."
+      }
+    },
+    {
+      "id": "temporary_double",
+      "name": "Temporary double",
+      "fields": {
+        "description": "A mirror produces a temporary duplicate of the victim that knows their recent memories and tries to mislead allies or open the way for nearby guardians."
+      }
     }
   ]
 }

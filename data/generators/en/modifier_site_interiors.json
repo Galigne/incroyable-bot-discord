@@ -21,6 +21,27 @@
       "fields": {
         "description": "Passages and usable spaces restrict movement, visibility, and bulky equipment."
       }
+    },
+    {
+      "id": "non_euclidean",
+      "name": "Non-Euclidean",
+      "fields": {
+        "description": "The interior’s angles, distances, and connections cannot fit within its exterior, making maps locally accurate but globally contradictory."
+      }
+    },
+    {
+      "id": "rearranging",
+      "name": "Rearranging",
+      "fields": {
+        "description": "Rooms, corridors, doors, or other internal spaces change position whenever nobody is directly observing them."
+      }
+    },
+    {
+      "id": "mislabelled",
+      "name": "Mislabelled",
+      "fields": {
+        "description": "Signs, labels, directions, and room names are consistently and confidently wrong, even when replaced or corrected."
+      }
     }
   ]
 }

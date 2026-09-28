@@ -35,6 +35,40 @@
     { "id": "funerary_rites", "name": "rites funéraires" },
     { "id": "rescue", "name": "sauvetage" },
     { "id": "messenger_work", "name": "service de messagerie" },
-    { "id": "supply_procurement", "name": "approvisionnement" }
+    { "id": "supply_procurement", "name": "approvisionnement" },
+    {
+      "id": "haunting_verification",
+      "name": "expertise visant à déterminer si un lieu ou un objet est réellement hanté",
+      "weight": 0.75
+    },
+    {
+      "id": "escaped_livestock_recovery",
+      "name": "récupération de bétail échappé"
+    },
+    {
+      "id": "no_ground_contact_transport",
+      "name": "transport de quelque chose qui ne doit pas toucher le sol",
+      "weight": 0.5
+    },
+    {
+      "id": "cursed_object_disposal",
+      "name": "retrait ou élimination sécurisée d’un objet maudit",
+      "weight": 0.75
+    },
+    {
+      "id": "suspicious_food_tasting",
+      "name": "dégustation de nourriture suspecte ou potentiellement magique",
+      "weight": 0.5
+    },
+    {
+      "id": "unusual_creature_training",
+      "name": "dressage d’une créature inhabituelle",
+      "weight": 0.75
+    },
+    {
+      "id": "ceremonial_impersonation",
+      "name": "remplacement d’une personne lors d’une cérémonie ou d’une occasion officielle",
+      "weight": 0.5
+    }
   ]
 }

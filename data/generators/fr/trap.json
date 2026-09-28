@@ -236,6 +236,66 @@
       "fields": {
         "description": "Un piédestal accorde l'objet demandé, puis annonce un prix contraignant mais équitable, à régler avant de pouvoir partir."
       }
+    },
+    {
+      "id": "truth_inducing_mist",
+      "name": "Brume de vérité",
+      "weight": 2,
+      "fields": {
+        "description": "Des conduits cachés libèrent une brume pâle qui force quiconque la respire à répondre sincèrement à la prochaine question directe ; se taire ou protéger son souffle devient essentiel."
+      }
+    },
+    {
+      "id": "adhesive_surface",
+      "name": "Sol adhésif",
+      "weight": 2,
+      "fields": {
+        "description": "Sous la pression, le sol devient extrêmement collant et retient les bottes, l’équipement tombé ainsi que toute personne qui se débat sans d’abord le couvrir ou affaiblir son adhérence."
+      }
+    },
+    {
+      "id": "stolen_voice_toll",
+      "name": "Péage de la voix",
+      "fields": {
+        "description": "Une arche sculptée vole la voix du premier intrus et s’en sert pour donner de faux ordres ailleurs, tandis que la victime ne peut plus parler au-dessus d’un murmure."
+      }
+    },
+    {
+      "id": "inventory_exchange",
+      "name": "Inventaires échangés",
+      "fields": {
+        "description": "Deux runes liées échangent tous les objets portés par les deux premières créatures touchées, redistribuant clés, armes, protections et objets dangereux au pire moment."
+      }
+    },
+    {
+      "id": "banished_equipment",
+      "name": "Équipement banni",
+      "fields": {
+        "description": "Une protection magique laisse ses victimes sur place, mais téléporte leur équipement dans plusieurs cages verrouillées et bien visibles au-delà de l’obstacle environnant."
+      }
+    },
+    {
+      "id": "identity_alarm",
+      "name": "Alarme d’identité",
+      "weight": 2,
+      "fields": {
+        "description": "Un enchantement annonce l’identité de chaque intrus et un détail personnel révélateur assez fort pour que des défenseurs éloignés l’entendent."
+      }
+    },
+    {
+      "id": "indelible_color",
+      "name": "Couleur indélébile",
+      "weight": 2,
+      "fields": {
+        "description": "Une gerbe de couleur magique éclatante marque la cible, ses traces et tout ce qu’elle touche ; ni un lavage ordinaire ni un déguisement ne peuvent la dissimuler complètement."
+      }
+    },
+    {
+      "id": "temporary_double",
+      "name": "Double temporaire",
+      "fields": {
+        "description": "Un miroir crée un double temporaire de la victime, doté de ses souvenirs récents, qui tente d’égarer ses alliés ou d’ouvrir la voie aux gardiens proches."
+      }
     }
   ]
 }

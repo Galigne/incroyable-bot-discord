@@ -69,6 +69,50 @@
       "fields": {
         "description": "L’objet a été fabriqué, fourni, modifié ou marqué par {{ government.name }}."
       }
+    },
+    {
+      "id": "sentient",
+      "name": "Conscient",
+      "fields": {
+        "description": "L’objet perçoit ce qui l’entoure et possède sa propre personnalité : {{ personality.description }}"
+      }
+    },
+    {
+      "id": "noisy",
+      "name": "Bruyant",
+      "weight": 2,
+      "fields": {
+        "description": "L’objet chuchote, chante, cliquette, se plaint ou produit un autre bruit indésirable aux moments les moins opportuns."
+      }
+    },
+    {
+      "id": "self_moving",
+      "name": "Autonome",
+      "fields": {
+        "description": "Lorsqu’il reste sans surveillance, l’objet peut ramper, rouler, bondir ou se déplacer d’une autre manière sans prévenir."
+      }
+    },
+    {
+      "id": "oathbound",
+      "name": "Lié aux serments",
+      "fields": {
+        "description": "L’objet réagit aux promesses, aux serments et aux accords prononcés lorsqu’il est porté ou utilisé ; le MJ décide ce qu’il reconnaît et de quelle manière il répond."
+      }
+    },
+    {
+      "id": "living",
+      "name": "Vivant",
+      "fields": {
+        "description": "L’objet se comporte en partie comme un organisme vivant : il peut grandir, guérir, manger, dormir ou réagir lorsqu’on l’endommage."
+      }
+    },
+    {
+      "id": "conspicuous",
+      "name": "Voyant",
+      "weight": 2,
+      "fields": {
+        "description": "L’objet est surnaturellement difficile à dissimuler complètement ; une lueur, un bruit, une odeur, un mouvement ou un autre signe révélateur trahit sa présence."
+      }
     }
   ]
 }

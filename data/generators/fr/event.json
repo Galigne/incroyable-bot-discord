@@ -433,6 +433,65 @@
       "fields": {
         "description": "Pendant une heure, personne dans la zone ne parvient à se rappeler ni à reconnaître les noms propres, les titres ou les signatures."
       }
+    },
+    {
+      "id": "temporary_animal_speech",
+      "name": "Bêtes douées de parole",
+      "weight": 2,
+      "fields": {
+        "description": "Pendant une heure, tous les animaux des environs — y compris des créatures du type {{ animal.name }} — peuvent parler ; chacun ne sait que ce qu’il a lui-même remarqué et poursuit ses propres priorités."
+      }
+    },
+    {
+      "id": "wandering_doors",
+      "name": "Portes égarées",
+      "fields": {
+        "description": "Jusqu’à l’aube, chaque porte de la zone s’ouvre sur un lieu proche inattendu ou incorrect, puis change encore de destination après s’être refermée."
+      }
+    },
+    {
+      "id": "shared_dream_event",
+      "name": "Rêve commun",
+      "weight": 2,
+      "fields": {
+        "description": "Toutes les personnes qui dorment dans la zone font le même rêve saisissant au sujet du lieu décrit comme {{ site.generator.name }}, mais leurs souvenirs commencent à diverger après le réveil."
+      }
+    },
+    {
+      "id": "regional_rule_effect",
+      "name": "LOI régionale",
+      "fields": {
+        "description": "Pendant une journée, {{ rules.name }} affecte temporairement une localité entière et ses environs ; le MJ décide de sa manifestation générale, de ses limites et de ses complications pratiques."
+      }
+    },
+    {
+      "id": "misassigned_shadows",
+      "name": "Ombres mal attribuées",
+      "weight": 2,
+      "fields": {
+        "description": "Dans toute la zone, les ombres cessent de correspondre à leurs propriétaires et imitent plutôt les gestes, la posture ou les habitudes d’autres personnes proches."
+      }
+    },
+    {
+      "id": "unfinished_mundane_business",
+      "name": "Affaires des défunts",
+      "fields": {
+        "description": "Les morts reviennent brièvement pour régler des dettes, rendre des objets empruntés, remettre d’anciens messages, achever des tâches domestiques ou résoudre d’autres affaires inachevées tout aussi ordinaires."
+      }
+    },
+    {
+      "id": "exchanged_voices",
+      "name": "Voix redistribuées",
+      "fields": {
+        "description": "Toutes les personnes présentes découvrent que leur voix a été échangée au hasard avec celle d’une autre, tandis que leur parole et leur identité restent inchangées."
+      }
+    },
+    {
+      "id": "tilting_gravity",
+      "name": "Gravité basculante",
+      "fields": {
+        "description": "Pendant plusieurs heures, la gravité s’incline un peu plus toutes les quelques minutes, transformant peu à peu certaines surfaces en sols et condamnant les itinéraires devenus dangereux."
+      }
     }
   ]
 }

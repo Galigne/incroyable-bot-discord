@@ -21,6 +21,13 @@
       "fields": {
         "description": "Des traces fraîches permettent encore de reconstituer l’événement et de poursuivre ses responsables ou survivants."
       }
+    },
+    {
+      "id": "overly_secure",
+      "name": "Démesurément sécurisé",
+      "fields": {
+        "description": "Un nombre déraisonnable de serrures, de contrôles, de grilles, de mots de passe, d’inspections et de barrières redondantes protège jusqu’aux espaces les plus insignifiants."
+      }
     }
   ]
 }

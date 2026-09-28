@@ -393,6 +393,55 @@
       }
     },
     {
+      "id": "truth_rule",
+      "name": "Truth RULE",
+      "fields": {
+        "description": "Compel, reveal, or extract truthful statements."
+      }
+    },
+    {
+      "id": "silence_rule",
+      "name": "Silence RULE",
+      "fields": {
+        "description": "Suppress and manipulate sound."
+      }
+    },
+    {
+      "id": "adhesion_rule",
+      "name": "Adhesion RULE",
+      "fields": {
+        "description": "Make materials stick together or come apart."
+      }
+    },
+    {
+      "id": "voice_rule",
+      "name": "Voice RULE",
+      "fields": {
+        "description": "Copy, steal, exchange, and alter voices."
+      }
+    },
+    {
+      "id": "elasticity_rule",
+      "name": "Elasticity RULE",
+      "fields": {
+        "description": "Stretch matter or make it unusually elastic and bouncy."
+      }
+    },
+    {
+      "id": "ownership_rule",
+      "name": "Ownership RULE",
+      "fields": {
+        "description": "Sense and influence ownership and possession."
+      }
+    },
+    {
+      "id": "knot_rule",
+      "name": "Knot RULE",
+      "fields": {
+        "description": "Create, tighten, loosen, and undo knots."
+      }
+    },
+    {
       "id": "elemental_rule",
       "name": "{{ element.name }} RULE",
       "weight": 19,

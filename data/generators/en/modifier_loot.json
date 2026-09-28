@@ -69,6 +69,50 @@
       "fields": {
         "description": "The item was made, issued, modified, or marked by {{ government.name }}."
       }
+    },
+    {
+      "id": "sentient",
+      "name": "Sentient",
+      "fields": {
+        "description": "The item is aware of its surroundings and has a personality of its own: {{ personality.description }}"
+      }
+    },
+    {
+      "id": "noisy",
+      "name": "Noisy",
+      "weight": 2,
+      "fields": {
+        "description": "The item whispers, sings, rattles, complains, or produces some other unwanted noise at inconvenient moments."
+      }
+    },
+    {
+      "id": "self_moving",
+      "name": "Self-Moving",
+      "fields": {
+        "description": "When unattended, the item can crawl, roll, hop, or otherwise relocate itself without warning."
+      }
+    },
+    {
+      "id": "oathbound",
+      "name": "Oathbound",
+      "fields": {
+        "description": "The item reacts to promises, oaths, and agreements made while it is carried or used; the GM decides what it recognizes and how it responds."
+      }
+    },
+    {
+      "id": "living",
+      "name": "Living",
+      "fields": {
+        "description": "The item behaves partly like a living organism: it may grow, heal, eat, sleep, or react when harmed."
+      }
+    },
+    {
+      "id": "conspicuous",
+      "name": "Conspicuous",
+      "weight": 2,
+      "fields": {
+        "description": "The item is supernaturally difficult to conceal completely; some glow, sound, scent, movement, or other telltale sign betrays it."
+      }
     }
   ]
 }

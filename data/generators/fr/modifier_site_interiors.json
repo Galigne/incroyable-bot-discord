@@ -21,6 +21,27 @@
       "fields": {
         "description": "Les passages et espaces utilisables limitent les mouvements, la visibilité et l’emploi d’équipements encombrants."
       }
+    },
+    {
+      "id": "non_euclidean",
+      "name": "Non euclidien",
+      "fields": {
+        "description": "Les angles, les distances et les liaisons intérieures ne peuvent tenir dans les dimensions extérieures ; les cartes restent justes localement, mais se contredisent dans leur ensemble."
+      }
+    },
+    {
+      "id": "rearranging",
+      "name": "Changeant",
+      "fields": {
+        "description": "Les pièces, les couloirs, les portes ou d’autres espaces intérieurs changent de place dès que personne ne les observe directement."
+      }
+    },
+    {
+      "id": "mislabelled",
+      "name": "Mal étiqueté",
+      "fields": {
+        "description": "Les panneaux, les étiquettes, les indications et les noms de pièces sont systématiquement faux avec une assurance parfaite, même lorsqu’on les remplace ou les corrige."
+      }
     }
   ]
 }

@@ -94,6 +94,28 @@
       "fields": {
         "description": "{{ weather:ashfall.description }}"
       }
+    },
+    {
+      "id": "sentient",
+      "name": "Sentient",
+      "fields": {
+        "description": "The place is aware of what happens within its bounds, has the following personality, and can subtly influence routes, conditions, or coincidences inside it: {{ personality.description }}"
+      }
+    },
+    {
+      "id": "echoing",
+      "name": "Echoing",
+      "weight": 2,
+      "fields": {
+        "description": "Words and sounds spoken in one part of the place can reappear elsewhere later, stripped of their original context."
+      }
+    },
+    {
+      "id": "sideways",
+      "name": "Sideways",
+      "fields": {
+        "description": "Local gravity pulls at a noticeable angle, making unsecured objects drift, familiar routes awkward, and ordinary architecture unexpectedly hazardous."
+      }
     }
   ]
 }
