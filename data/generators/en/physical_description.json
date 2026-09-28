@@ -567,13 +567,6 @@
       "fields": {
         "description": "Their face, hair, posture, or manner makes them look considerably older than they actually are."
       }
-    },
-    {
-      "id": "looks_much_younger",
-      "name": "Looks considerably younger than their age",
-      "fields": {
-        "description": "They are clearly an adult, but their face, voice, build, or manner makes them look considerably younger than they actually are."
-      }
     }
   ]
 }

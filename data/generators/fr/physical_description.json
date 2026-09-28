@@ -567,13 +567,6 @@
       "fields": {
         "description": "Son visage, ses cheveux, sa posture ou son comportement le font paraître nettement plus âgé qu’il ne l’est vraiment."
       }
-    },
-    {
-      "id": "looks_much_younger",
-      "name": "Paraît nettement plus jeune que son âge",
-      "fields": {
-        "description": "C’est clairement un adulte, mais son visage, sa voix, sa carrure ou son comportement le font paraître nettement plus jeune qu’il ne l’est vraiment."
-      }
     }
   ]
 }
