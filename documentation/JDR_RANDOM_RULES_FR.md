@@ -288,7 +288,7 @@ Les talents sont chacun apprové et équilibré par le [MJ](#mj).
 
 Votre équipement regroupe les **[armes](#armes)**, les **[armures](#armures-et-protection)** et tout ce qui est destiné au combat.
 
-- Vous pouvez choisir **une armure de base** : légère, intermédiaire ou lourde. Son apparence est libre. Les capes, chaussures, amulettes et autres bijoux **n'accordent aucun effet** tant qu'ils ne sont pas magiques.
+- Vous pouvez choisir **une armure de base** autorisée par votre [constitution](#constitution) : légère à partir de `6`, intermédiaire à partir de `12` ou lourde à partir de `16`. Avec une Constitution inférieure à `6`, vous portez à la place des vêtements ordinaires ; ceux-ci ne sont pas une armure et n'accordent aucun [PR](#points-darmure-pr). L'apparence de l'armure est libre. Les capes, chaussures, amulettes et autres bijoux **n'accordent aucun effet** tant qu'ils ne sont pas magiques.
 - Vous commencez avec **jusqu'à `3` armes principales de base** de votre choix (`épée`, `bouclier`, `lance`, `arc`, `sceptre`, etc.).
 - Vous pouvez également prendre quelques **armes secondaires** ou **outils divers** (`couteaux de lancer`, `hachette`, `piège à ours`, `poison`, `chaînes`, etc.), en quantité limitée.
 - Les **flèches**, **carreaux** et autres munitions d'une arme principale non modifiée sont **illimités**.
@@ -569,9 +569,11 @@ Les **[points d'armure](#points-darmure-pr)** fonctionnent comme des [PV](#point
 
 Chaque armure est conçue pour absorber les dégâts physiques et magiques. Le niveau de **protection** varie selon sa rareté, sa fabrication et son état.
 
+Un personnage dont la [constitution](#constitution) est inférieure à `6` ne peut pas utiliser d'armure normale et est considéré comme portant des vêtements ordinaires à la place. Les vêtements ordinaires ne sont pas une armure et n'accordent aucun [PR](#points-darmure-pr).
+
 <u>Types d'armure selon la [constitution](#constitution)</u>
 
-- **Légère** (`Constitution >= 0`) : `0 à 45 %` des [PV](#points-de-vie-pv) convertis en armure.
+- **Légère** (`Constitution >= 6`) : `0 à 45 %` des [PV](#points-de-vie-pv) convertis en armure.
   - commun : `5 %`
   - peu commun : `15 %`
   - rare : `25 %`
@@ -583,7 +585,7 @@ Chaque armure est conçue pour absorber les dégâts physiques et magiques. Le n
   - rare : `45 %`
   - épique : `55 %`
   - légendaire : `65 %`
-- **Lourde** (`Constitution >= 14`) : `40 à 85 %` des [PV](#points-de-vie-pv) convertis en armure.
+- **Lourde** (`Constitution >= 16`) : `40 à 85 %` des [PV](#points-de-vie-pv) convertis en armure.
   - commun : `45 %`
   - peu commun : `55 %`
   - rare : `65 %`

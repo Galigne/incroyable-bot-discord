@@ -131,15 +131,16 @@ test('resource, armor, AP, and movement formulas preserve generated values', () 
 	assert.equal(calculateMaxMovementDistance(15), 7.5);
 	assert.equal(calculateArmorRating(280, 5), 14);
 	assert.deepEqual(ARMOR_CONSTITUTION_REQUIREMENTS, {
-		light: 0,
+		light: 6,
 		medium: 12,
-		heavy: 14,
+		heavy: 16,
 	});
-	assert.equal(canEquipArmor(0, 'light'), true);
+	assert.equal(canEquipArmor(5, 'light'), false);
+	assert.equal(canEquipArmor(6, 'light'), true);
 	assert.equal(canEquipArmor(12, 'medium'), true);
 	assert.equal(canEquipArmor(11, 'medium'), false);
-	assert.equal(canEquipArmor(14, 'heavy'), true);
-	assert.equal(canEquipArmor(13, 'heavy'), false);
+	assert.equal(canEquipArmor(15, 'heavy'), false);
+	assert.equal(canEquipArmor(16, 'heavy'), true);
 	assert.equal(canEquipArmor(20, 'unknown'), false);
 	assert.deepEqual(ARMOR_PERCENTAGES, {
 		light: { common: 5, uncommon: 15, rare: 25, epic: 35, legendary: 45 },
@@ -342,6 +343,67 @@ test('default character armor, equipment, and carried loot preserve every loot m
 	for (const item of generatedItems) {
 		assert.ok(typeof item === 'string' && item.trim());
 	}
+});
+
+test('default random armor selection respects Constitution thresholds', () => {
+	const background = getBackgroundWithoutGeneration();
+	for (const [constitution, expectedArmorType] of [
+		[5, undefined],
+		[6, 'Light'],
+		[11, 'Light'],
+		[12, 'Medium'],
+		[15, 'Medium'],
+		[16, 'Heavy'],
+	]) {
+		const character = createCharacterFixture();
+		populateRandomCharacter(character, {
+			background,
+			getStatProfile: () => createFixedConstitutionProfile(constitution),
+			level: 1,
+			random: () => 0.999,
+		});
+		const armor = character.gear.equipment.find(item => (
+			/ \((?:Light|Medium|Heavy)\) — /.test(item)
+		));
+		if (expectedArmorType === undefined) {
+			assert.equal(armor, undefined, `Constitution ${constitution}`);
+		}
+		else {
+			assert.match(
+				armor,
+				new RegExp(` \\(${expectedArmorType}\\) — `),
+				`Constitution ${constitution}`,
+			);
+		}
+	}
+});
+
+test('low-Constitution character generation omits armor and keeps shield AR', () => {
+	const options = {
+		background: getBackgroundWithoutGeneration(),
+		getStatProfile: () => createFixedConstitutionProfile(5),
+		level: 1,
+	};
+	const unarmored = createCharacterFixture();
+	populateRandomCharacter(unarmored, { ...options, random: () => 0 });
+	assert.equal(unarmored.statistics.constitution, 5);
+	assert.equal(unarmored.gear.equipment.length, 1);
+	assert.equal(unarmored.gear.equipment.every(item => (
+		typeof item === 'string' && item.trim() && !/clothes/i.test(item)
+	)), true);
+	assert.deepEqual(unarmored.resources.ar, { current: 0, max: 0 });
+
+	const shielded = createCharacterFixture();
+	populateRandomCharacter(shielded, { ...options, random: () => 0.999 });
+	assert.equal(shielded.gear.equipment.length, 2);
+	assert.equal(shielded.gear.equipment.every(item => (
+		typeof item === 'string'
+		&& item.trim()
+		&& !/ \((?:Light|Medium|Heavy)\) — /.test(item)
+		&& !/clothes/i.test(item)
+	)), true);
+	assert.ok(shielded.resources.ar.max > 0);
+	assert.equal(shielded.resources.ar.current, shielded.resources.ar.max);
 });
 
 test('main equipment rolls weapon and shield types independently at the 80 percent boundary', () => {
@@ -802,7 +864,10 @@ test('character generation metadata replaces normal categories and stacks equipp
 	const ruleId = generatorCatalog.getGenerator('rules', 'en').entries[0].id;
 	const statusEffectId = generatorCatalog.getGenerator('status_effect', 'en').entries[0].id;
 	const modifierId = generatorCatalog.getGenerator('modifier_character', 'en').entries[0].id;
-	const armorId = generatorCatalog.getGenerator('armors', 'en').entries[0].id;
+	const armorId = generatorCatalog.getGenerator('armors', 'en').entries
+		.find(entry => entry.fields.type === 'heavy').id;
+	const equipmentArmorId = generatorCatalog.getGenerator('armors', 'en').entries
+		.find(entry => entry.fields.type === 'medium').id;
 	const shieldId = generatorCatalog.getGenerator('shields', 'en').entries[0].id;
 	const naturalArmorPercentage = 20;
 	const resolver = generatorResolver.createGeneratorResolver({
@@ -817,6 +882,13 @@ test('character generation metadata replaces normal categories and stacks equipp
 			resolver.resolveReference('armors:' + armorId, 'en', { random: () => 0 }),
 		)
 		+ getResolvedLootArmorPercentage(
+			resolver.resolveReference(
+				'armors:' + equipmentArmorId,
+				'en',
+				{ random: () => 0 },
+			),
+		)
+		+ getResolvedLootArmorPercentage(
 			resolver.resolveReference('shields:' + shieldId, 'en', { random: () => 0 }),
 		);
 	archetype.generation = {
@@ -826,7 +898,7 @@ test('character generation metadata replaces normal categories and stacks equipp
 		statusEffects: ['status_effect:' + statusEffectId],
 		modifiers: ['modifier_character:' + modifierId],
 		armor: 'armors:' + armorId,
-		equipment: ['shields:' + shieldId],
+		equipment: ['armors:' + equipmentArmorId, 'shields:' + shieldId],
 		inventory: ['shields:' + shieldId],
 	};
 	const profileRequests = [];
@@ -840,7 +912,7 @@ test('character generation metadata replaces normal categories and stacks equipp
 		),
 		getStatProfile(profileId) {
 			profileRequests.push(profileId);
-			return getStatProfile(profileId);
+			return createFixedConstitutionProfile(5);
 		},
 		level: 5,
 		locale: 'en',
@@ -849,6 +921,7 @@ test('character generation metadata replaces normal categories and stacks equipp
 	});
 
 	assert.deepEqual(profileRequests, [DEFAULT_STAT_PROFILE_ID]);
+	assert.equal(character.statistics.constitution, 5);
 	assert.equal(character.rules.length, 1);
 	assert.equal(character.rules[0].level, 2);
 	assert.ok(character.rules[0].name);
@@ -858,7 +931,7 @@ test('character generation metadata replaces normal categories and stacks equipp
 	assert.deepEqual(character.status.modifiers.map(modifier => modifier.entryId), [
 		modifierId,
 	]);
-	assert.equal(character.gear.equipment.length, 2);
+	assert.equal(character.gear.equipment.length, 3);
 	assert.equal(character.gear.inventory.length, 1);
 	assert.equal(character.gear.inventory.some(item => item.endsWith(' gold')), false);
 	for (const item of [...character.gear.equipment, ...character.gear.inventory]) {
@@ -889,6 +962,29 @@ test('random character generation uses localized content without changing identi
 
 function createCharacterFixture() {
 	return new Character('Test');
+}
+
+function getBackgroundWithoutGeneration() {
+	const route = generatorCatalog.getGenerator('background', 'en').entries
+		.find(candidate => generatorCatalog.getGenerator(candidate.generator, 'en').entries
+			.some(entry => entry.generation === undefined));
+	const entry = generatorCatalog.getGenerator(route.generator, 'en').entries
+		.find(candidate => candidate.generation === undefined);
+	return `${route.id}:${entry.id}`;
+}
+
+function createFixedConstitutionProfile(constitution) {
+	const values = Object.fromEntries(BASE_STATS.map(stat => [stat, 4]));
+	values.constitution = constitution;
+	return {
+		id: 'fixed-constitution',
+		minimums: { ...values },
+		maximums: { ...values },
+		weights: Object.fromEntries(BASE_STATS.map(stat => [
+			stat,
+			stat === 'constitution' ? 1 : 0,
+		])),
+	};
 }
 
 function createReferenceResolutionOptions(locale) {

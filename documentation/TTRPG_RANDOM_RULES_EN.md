@@ -288,7 +288,7 @@ Talents are individually approved and balanced by the [GM](#gm).
 
 Your equipment includes **[weapons](#weapons)**, **[armor](#armor-and-protection)**, and everything intended for combat.
 
-- You may choose **one basic armor**: light, medium, or heavy. Its appearance is up to you. Capes, shoes, amulets, and other jewelry **grant no effect** unless they are magical.
+- You may choose **one basic armor** permitted by your [constitution](#constitution): light with `6` or more, medium with `12` or more, or heavy with `16` or more. With a Constitution below `6`, you wear ordinary clothes instead; these clothes are not armor and grant no [AR](#armor-ar). The appearance of armor is up to you. Capes, shoes, amulets, and other jewelry **grant no effect** unless they are magical.
 - You start with **up to `3` basic main weapons** of your choice (`sword`, `shield`, `spear`, `bow`, `scepter`, etc.).
 - You may also take a few **secondary weapons** or **miscellaneous tools** (`throwing knives`, `hatchet`, `bear trap`, `poison`, `chains`, etc.), in limited quantity.
 - **Arrows**, **bolts**, and other ammunition for an unmodified main weapon are **unlimited**.
@@ -571,9 +571,11 @@ When your [HP](#hit-points-hp) drop to `0`, you are **out of combat** and only h
 
 Each armor is designed to absorb physical and magical damage. The level of **protection** varies based on rarity, craftsmanship, and condition.
 
+A character with a [constitution](#constitution) below `6` cannot use normal armor and is considered to be wearing ordinary clothes instead. Ordinary clothes are not armor and grant no [AR](#armor-ar).
+
 <u>Armor types by [constitution](#constitution)</u>
 
-- **Light** (`Constitution >= 0`): `0 to 45 %` of [HP](#hit-points-hp) converted into armor.
+- **Light** (`Constitution >= 6`): `0 to 45 %` of [HP](#hit-points-hp) converted into armor.
   - common: `5 %`
   - uncommon: `15 %`
   - rare: `25 %`
@@ -585,7 +587,7 @@ Each armor is designed to absorb physical and magical damage. The level of **pro
   - rare: `45 %`
   - epic: `55 %`
   - legendary: `65 %`
-- **Heavy** (`Constitution >= 14`): `40 to 85 %` of [HP](#hit-points-hp) converted into armor.
+- **Heavy** (`Constitution >= 16`): `40 to 85 %` of [HP](#hit-points-hp) converted into armor.
   - common: `45 %`
   - uncommon: `55 %`
   - rare: `65 %`

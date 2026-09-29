@@ -276,12 +276,15 @@ strings.
 The saved background contains generated `archetype` and `physicalDescription`;
 `physicalDescription`, `backstory`, and `goals` are editable together, while
 `archetype` remains read-only. `backstory` and `goals` start empty. A generated
-character receives one compatible armor and one or two independent main-equipment
+character with Constitution 6 or higher receives one compatible armor; a character
+below 6 receives no armor item and no armor-derived AR. Ordinary clothes are not
+stored as equipment. Every character receives one or two independent main-equipment
 slots. Each slot selects `weapons`
 with an 80% chance or `shields` with a 20% chance; multiple equipped shields are
 allowed. Armor type and the stable `modifier_rarity` entry determine armor AR, while
 the same stable rarity entry determines each shield's AR. These values stack with
-explicit natural armor before the normal max-HP-based AR calculation.
+explicit natural armor before the normal max-HP-based AR calculation. Explicit
+generation armor and equipment overrides bypass the default Constitution filter.
 
 Three carried items resolve independently through the public `loot` router's
 structural routes. The workflow consumes the structured child result, flattens its

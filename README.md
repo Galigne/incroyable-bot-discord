@@ -341,7 +341,9 @@ RULE Points come from Intelligence thresholds and are spent on at most two RULEs
 prioritizing the first RULE's level; HP, AP, MD, armor eligibility, AR,
 talent count, equipment, inventory, and gold are derived automatically. Encumbrance
 remains manually managed, so generated characters keep the normal `0 / 0` default.
-Each character receives one Constitution-compatible armor and one or two additional
+Characters with Constitution 6 or higher receive one Constitution-compatible armor;
+characters below 6 are considered to wear ordinary clothes and receive no armor
+item or armor-derived AR. Every character receives one or two additional
 main-equipment items. Every additional slot independently selects a weapon 80% of
 the time or a shield 20% of the time, so two shields are possible. Armor type and
 the stable generated rarity determine armor AR; shield AR depends on that same

@@ -1,7 +1,7 @@
 const ARMOR_CONSTITUTION_REQUIREMENTS = Object.freeze({
-	light: 0,
+	light: 6,
 	medium: 12,
-	heavy: 14,
+	heavy: 16,
 });
 
 const ARMOR_PERCENTAGES = Object.freeze({

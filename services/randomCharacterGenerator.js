@@ -157,10 +157,9 @@ function populateRandomCharacter(character, options = {}) {
 		level,
 		resolvedGeneration.armorPercentage,
 	));
-	character.gear.equipment = [
-		resolvedGeneration.gear.armor,
-		...resolvedGeneration.gear.equipment,
-	];
+	character.gear.equipment = resolvedGeneration.gear.armor === undefined
+		? resolvedGeneration.gear.equipment
+		: [resolvedGeneration.gear.armor, ...resolvedGeneration.gear.equipment];
 	character.gear.inventory = resolvedGeneration.gear.inventory;
 
 	return character;
@@ -223,6 +222,9 @@ function createCharacterGenerationDefaults({ character, formatGold }) {
 			).map(({ name, description }) => ({ name, description }));
 		},
 		armor({ locale, random, resolver, statistics }) {
+			if (!canEquipArmor(statistics.constitution, 'light')) {
+				return {};
+			}
 			const armor = pickOne(
 				'armors',
 				locale,

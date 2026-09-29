@@ -766,13 +766,16 @@ The durable implementation constraints are:
   materials have no automatic modifier. Direct `/gen` preserves separate modifier
   results; entity gear flattens the base item and every modifier into one readable
   string in rarity, material, loot order.
-- Random characters equip one compatible armor plus one or two independently
-  selected main items: 80% `weapons`, 20% `shields` per slot. Equipped shields may
-  stack and add rarity-derived AR to armor before resource generation; carried loot
-  never contributes AR. Armor Constitution requirements and AR come from its stable
-  `light`, `medium`, or `heavy` type plus the stable `modifier_rarity` entry ID;
-  shield AR uses only that stable rarity ID. Never compare localized rarity text for
-  mechanics.
+- Random characters with Constitution 6 or higher equip one compatible armor;
+  characters below 6 equip no armor item and gain no armor-derived AR. Ordinary
+  clothes are not stored as equipment. Every random character also equips one or two
+  independently selected main items: 80% `weapons`, 20% `shields` per slot.
+  Equipped shields may stack and add rarity-derived AR before resource generation;
+  carried loot never contributes AR. Armor Constitution requirements and AR come
+  from its stable `light`, `medium`, or `heavy` type plus the stable
+  `modifier_rarity` entry ID; shield AR uses only that stable rarity ID. Explicit
+  generation armor or equipment overrides bypass the default Constitution filter.
+  Never compare localized rarity text for mechanics.
 - Background archetypes and creature details share one optional `generation`
   override model. Every property is optional; omission preserves that entity type's
   normal category behavior, while an explicitly present value replaces it. Both
