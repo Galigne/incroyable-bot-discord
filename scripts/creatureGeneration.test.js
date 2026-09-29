@@ -4,6 +4,7 @@ const fsPromises = require('node:fs/promises');
 const os = require('node:os');
 const path = require('node:path');
 const { after, afterEach, test } = require('node:test');
+const { MessageFlags } = require('discord.js');
 
 const testSaveDirectory = fs.mkdtempSync(
 	path.join(os.tmpdir(), 'incredible-bot-creature-generation-'),
@@ -434,8 +435,8 @@ test('generated creature saves persist only final trait strings', async () => {
 		getCreatureSavePath(generated.key),
 		'utf8',
 	));
-	assert.equal(persisted.schemaVersion, 6);
-	assert.deepEqual(persisted.access, []);
+	assert.equal(Object.hasOwn(persisted, 'schemaVersion'), false);
+	assert.deepEqual(persisted.settings, { visibility: 'private', access: [] });
 	assert.deepEqual(persisted.traits, generated.traits);
 	assert.ok(persisted.traits.every(trait => (
 		typeof trait === 'string' && !trait.includes('{{')
@@ -756,7 +757,15 @@ test('/gen-creature is DM-only and atomically persists a complete generated crea
 	const stored = await getCreature('Command.Generated');
 	assert.equal(stored.level, 4);
 	assert.equal(stored.source.archetypeId, generatedType);
+	assert.deepEqual(stored.settings, {
+		visibility: 'private',
+		access: [],
+	});
 	assert.match(response.content, /Command\.Generated/);
+	assert.equal(response.flags, MessageFlags.Ephemeral);
+	assert.ok(followUps.every(followUp => (
+		followUp.flags === MessageFlags.Ephemeral
+	)));
 	assert.deepEqual(
 		response.embeds[0].toJSON(),
 		createGeneratedCreatureResponse(stored, config.locale).embeds[0].toJSON(),

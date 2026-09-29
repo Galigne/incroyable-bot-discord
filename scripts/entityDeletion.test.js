@@ -252,7 +252,7 @@ test('submission reloads the entity, observes modifications, and reauthorizes', 
 	await createCharacter(reassignedKey, ownerAccess('creator'));
 	const reassignedModal = await openDeleteModal(reassignedKey, 'creator');
 	await updateCharacter(reassignedKey, () => true, character => {
-		character.access = ownerAccess('new-owner');
+		character.settings.access = ownerAccess('new-owner');
 	});
 	const denied = await submitDeleteModal(
 		reassignedModal.modal.custom_id,
@@ -260,7 +260,10 @@ test('submission reloads the entity, observes modifications, and reauthorizes', 
 		'creator',
 	);
 	assert.match(denied.reply.content, /entity owner.*DM.*server owner/i);
-	assert.deepEqual((await getCharacter(reassignedKey)).access, ownerAccess('new-owner'));
+	assert.deepEqual(
+		(await getCharacter(reassignedKey)).settings.access,
+		ownerAccess('new-owner'),
+	);
 
 	const disappearedKey = nextKey('Delete.Disappeared');
 	await createCharacter(disappearedKey, ownerAccess('creator'));

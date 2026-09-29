@@ -11,6 +11,7 @@ const {
 	getDeletableEntity,
 	getEditableEntityField,
 	updateEditableEntity,
+	updateEntitySettings,
 } = require('../../services/entityApplicationService');
 const {
 	getEditableEntityFieldDefinition,
@@ -22,6 +23,7 @@ const {
 const {
 	createEntityDeletedResponse,
 	createEntityEditResponse,
+	createEntitySettingsResponse,
 } = require('../../util/entityCommandResponses');
 const { replyToEntityError } = require('../../util/entityCommandErrors');
 const {
@@ -51,6 +53,7 @@ async function openEntityEditor(interaction, config, entityKey, fieldName) {
 			entityKey,
 			fieldName,
 			entity => canManageEntity(interaction, entity, config),
+			entity => hasFullEntityAuthority(interaction, entity, config),
 		);
 		const type = editorState.entity.type;
 		const normalizedField = getEditableEntityFieldDefinition(type, fieldName)?.editId;
@@ -150,24 +153,31 @@ async function handleEntityEditSubmission(interaction, config) {
 	}
 
 	try {
-		const result = await updateEditableEntity(
-			session.entityKey,
-			session.fieldName,
-			getSubmittedFieldValue(
-				interaction,
-				session.entityType,
-				session.fieldName,
-			),
-			entity => canManageEntity(interaction, entity, config),
-			createEntityHistoryContext(interaction, config),
+		const submittedValue = getSubmittedFieldValue(
+			interaction,
 			session.entityType,
-		);
-		deleteInteractionSession(session.id);
-		await interaction.reply(createEntityEditResponse(
-			result,
 			session.fieldName,
-			locale,
-		));
+		);
+		const isSettings = session.fieldName === 'settings';
+		const result = isSettings
+			? await updateEntitySettings(
+				session.entityKey,
+				submittedValue,
+				entity => hasFullEntityAuthority(interaction, entity, config),
+				session.entityType,
+			)
+			: await updateEditableEntity(
+				session.entityKey,
+				session.fieldName,
+				submittedValue,
+				entity => canManageEntity(interaction, entity, config),
+				createEntityHistoryContext(interaction, config),
+				session.entityType,
+			);
+		deleteInteractionSession(session.id);
+		await interaction.reply(isSettings
+			? createEntitySettingsResponse(result, locale)
+			: createEntityEditResponse(result, session.fieldName, locale));
 	}
 	catch (error) {
 		if (!await replyToEntityError(interaction, error, locale)) {
@@ -317,6 +327,15 @@ function createEditInput(type, field, inputDefinition, locale) {
 }
 
 function getEditInputDescription(type, field, target, locale) {
+	if (target.id === 'settings.key') {
+		return t(locale, 'rpg.editor.settingsKeyDescription');
+	}
+	if (target.id === 'settings.visibility') {
+		return t(locale, 'rpg.editor.settingsVisibilityDescription');
+	}
+	if (target.id === 'settings.access') {
+		return t(locale, 'rpg.editor.settingsAccessDescription');
+	}
 	if (target.inputKind === 'pair') {
 		if (target.resourceId === 'ap') {
 			return t(locale, type === 'creature'
@@ -360,6 +379,15 @@ function getEditInputDescription(type, field, target, locale) {
 }
 
 function getEditInputPlaceholder(field, target, locale) {
+	if (target.id === 'settings.key') {
+		return t(locale, 'rpg.editor.settingsKeyPlaceholder');
+	}
+	if (target.id === 'settings.visibility') {
+		return t(locale, 'rpg.editor.settingsVisibilityPlaceholder');
+	}
+	if (target.id === 'settings.access') {
+		return t(locale, 'rpg.editor.settingsAccessPlaceholder');
+	}
 	if (target.inputKind === 'pair') {
 		return t(locale, 'rpg.editor.pairPlaceholder');
 	}
@@ -382,7 +410,7 @@ function isEditInputRequired(field, target) {
 	if (field.editKind === 'named-lines') {
 		return true;
 	}
-	return target.inputKind === 'pair' || target.type !== 'text';
+	return target.required || target.inputKind === 'pair' || target.type !== 'text';
 }
 
 function createEntityDeletionModal(

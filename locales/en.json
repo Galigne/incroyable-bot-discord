@@ -105,28 +105,8 @@
       "description": "Create a blank character or creature with a stable EntityKey",
       "keyOption": "Unique entity save key; make it short and memorable",
       "typeOption": "Entity type; defaults to character",
-      "success": "{{type}} with key `{{key}}` was created. This EntityKey and type cannot be changed. Use `/set` with a compatible field to open its prefilled private form.",
-      "behavior": "Creates and saves a blank entity, granting the invoking user explicit `owner` access. `type` accepts `character` or `creature` and defaults to `character`. EntityKeys are globally unique across both types, must start and end with a letter or number, and may contain internal periods, hyphens, and underscores."
-    },
-    "access": {
-      "description": "View or change explicit user access for an entity",
-      "entityOption": "Character or creature whose access will be viewed or changed",
-      "userOption": "Discord user whose explicit access will be changed; use with level, not user-id",
-      "userIdOption": "Raw Discord user ID to change when the user cannot be selected",
-      "userIdAccepted": "A 17-20 digit Discord user ID shown in the access list",
-      "levelOption": "Access to grant or remove; use with exactly one of user or user-id",
-      "listTitle": "**Explicit access for `{{key}}`**",
-      "listEntry": "- {{user}} — **{{level}}**",
-      "empty": "No users have explicit access to this entity.",
-      "listAttached": "The complete explicit access list for `{{key}}` is attached.",
-      "updated": "Explicit access for {{user}} on `{{key}}` changed from **{{previousLevel}}** to **{{level}}**.",
-      "unchanged": "Explicit access for {{user}} on `{{key}}` is already **{{level}}**; nothing changed.",
-      "levels": {
-        "owner": "Owner",
-        "partial": "Partial",
-        "none": "None"
-      },
-      "behavior": "With only `entity-key`, displays every persisted explicit user-access entry; anyone may view this list. Every row includes the persisted user ID, even when Discord can no longer resolve that user. To change access, provide `level` and exactly one target: use `user` normally, or copy a stale user’s ID from the list into `user-id`. `owner` grants full entity authority without removing other owners, `partial` grants normal editing and gameplay actions but not deletion or access changes, and `none` removes the user’s explicit entry. Setting an existing level or removing an absent entry succeeds without an unnecessary error. The server owner and configured DM users always retain implicit full authority without persisted entries. Only a server owner, DM, or explicit entity owner may change access, including their own access."
+      "success": "{{type}} with key `{{key}}` was created. Use `/set` with a compatible field to open its prefilled private form.",
+      "behavior": "Creates and saves a public blank entity, granting the invoking user explicit `owner` access. `type` accepts `character` or `creature` and defaults to `character`. EntityKeys are globally unique across both types, must start and end with a letter or number, and may contain internal periods, hyphens, and underscores. Full-authority users may later change the key, visibility, and complete access list through `/set field:settings`."
     },
     "damage": {
       "description": "Deal damage to an entity, reducing AR before HP",
@@ -179,7 +159,7 @@
       "backgroundOption": "Background path relative to `background`; omitted means random",
       "levelChoice": "Level {{level}}",
       "success": "Generated character **{{name}}** with key `{{key}}`.",
-      "behavior": "Creates and saves a complete random character under a unique CharacterKey with an empty explicit access list. The DM or server owner already has implicit full authority. Level must be 1–10 and is random when omitted. Background is a path relative to the public `background` router: use a category such as `criminal` for a random archetype, `criminal:pickpocket` for an exact archetype, or the explicit equivalent `criminal.generator:pickpocket`; omission is random. Autocomplete favors shorter localized paths. The path must end on a background archetype, so fields and unrelated generators are rejected before archetype selection. The selected archetype determines the statistical profile and optional generation overrides, while the physical description is generated independently. Backstory and goals start empty. Statistics, resources, RULEs, armor, weapons, inventory, gold, temporary status effects, and persistent character modifiers follow the selected level and game rules. Encumbrance remains manual and defaults to 0 / 0."
+      "behavior": "Creates and saves a private complete random character under a unique CharacterKey with an empty explicit access list. The reply and follow-ups are private. The DM or server owner already has implicit full authority. Level must be 1–10 and is random when omitted. Background is a path relative to the public `background` router: use a category such as `criminal` for a random archetype, `criminal:pickpocket` for an exact archetype, or the explicit equivalent `criminal.generator:pickpocket`; omission is random. Autocomplete favors shorter localized paths. The path must end on a background archetype, so fields and unrelated generators are rejected before archetype selection. The selected archetype determines the statistical profile and optional generation overrides, while the physical description is generated independently. Backstory and goals start empty. Statistics, resources, RULEs, armor, weapons, inventory, gold, temporary status effects, and persistent character modifiers follow the selected level and game rules. Encumbrance remains manual and defaults to 0 / 0."
     },
     "genCreature": {
       "description": "Generate a creature (configured DM role or server owner)",
@@ -189,7 +169,7 @@
       "levelOption": "Creature level; random from 1 to 10 when omitted.",
       "levelChoice": "Level {{level}}",
       "success": "Generated **{{name}}** and saved it with CreatureKey `{{key}}`.",
-      "behavior": "Creates and saves one complete creature with an empty explicit access list; the invoking DM or server owner already has implicit full authority. Type is a path relative to the public `creature` router: use a category such as `monster` for a random creature, `monster:ancient_dragon` for an exact archetype, or the explicit equivalent `monster.generator:ancient_dragon`; omission is random. Autocomplete favors shorter localized paths. The path must end on a creature archetype, so fields and unrelated generators are rejected before archetype selection. The CreatureKey is globally unique, and level must be 1–10 or is random when omitted. Statistics and derived resources follow the selected creature and game rules; RULEs are granted only when explicitly specified. Temporary status effects use the status-effect catalog, while persistent modifiers use the creature modifier catalog. Equipment, inventory, and natural armor are determined by the selected creature. Encumbrance remains manual and defaults to 0 / 0. Only a configured DM or the server owner may use this command."
+      "behavior": "Creates and saves one private complete creature with an empty explicit access list; the reply and follow-ups are private, and the invoking DM or server owner already has implicit full authority. Type is a path relative to the public `creature` router: use a category such as `monster` for a random creature, `monster:ancient_dragon` for an exact archetype, or the explicit equivalent `monster.generator:ancient_dragon`; omission is random. Autocomplete favors shorter localized paths. The path must end on a creature archetype, so fields and unrelated generators are rejected before archetype selection. The CreatureKey is globally unique, and level must be 1–10 or is random when omitted. Statistics and derived resources follow the selected creature and game rules; RULEs are granted only when explicitly specified. Temporary status effects use the status-effect catalog, while persistent modifiers use the creature modifier catalog. Equipment, inventory, and natural armor are determined by the selected creature. Encumbrance remains manual and defaults to 0 / 0. Only a configured DM or the server owner may use this command."
     },
     "get": {
       "description": "Display an entity summary with gear, one category, or all categories",
@@ -197,7 +177,7 @@
       "fieldOption": "Optional detailed category, or all categories",
       "allField": "All viewable categories",
       "unknownField": "That field is not available for this entity: **{{field}}**. Use `/help command:get` for command details.",
-      "behavior": "Without `field`, posts the public entity summary followed by its `gear` category, even when equipment and inventory are empty. `field:all` skips the summary and posts every viewable category in the canonical catalog order, including categories whose content is empty. Any other compatible `field` still posts only that category. Character categories use `name`, `level`, `resources`, `status`, `statistics`, `rules`, `talents`, `gear`, `race`, `background`, and `personality`, in that order. Creature categories use the independent order `identity`, `level`, `resources`, `status`, `statistics`, `rules`, `traits`, and `gear`. The `resources` view shows HP, AR, AP, and MD. The `status` view shows separate Status Effects and Modifiers subsections, omitting empty lists. Autocomplete shows `all` plus only the categories compatible with the selected EntityKey."
+      "behavior": "Without `field`, posts the entity summary followed by its `gear` category, even when equipment and inventory are empty. Public entities are visible to everyone. Private entities are discoverable and readable only by explicitly listed `owner` or `partial` users, DMs, and the server owner; inaccessible private keys behave as though they do not exist, and authorized private reads reply ephemerally. `field:all` skips the summary and posts every normal viewable category in canonical order. Settings are never rendered. Character categories use `name`, `level`, `resources`, `status`, `statistics`, `rules`, `talents`, `gear`, `race`, `background`, and `personality`, in that order. Creature categories use the independent order `identity`, `level`, `resources`, `status`, `statistics`, `rules`, `traits`, and `gear`. Autocomplete applies the same visibility policy."
     },
     "heal": {
       "description": "Restore current HP, armor, or both to a percentage of maximum",
@@ -234,13 +214,13 @@
       "description": "Set one compatible entity field group in a prefilled form",
       "entityOption": "Character or creature to edit",
       "fieldOption": "Field to edit",
-      "behavior": "Opens one private modal prefilled for the selected entity type. Character groups use `name`, `level`, `resources`, `status`, `statistics`, `rules`, `talents`, `gear`, `race`, `background`, and `personality`; creature groups use `identity`, `level`, `resources`, `status`, `statistics`, `rules`, `traits`, and `gear`. Non-obvious formats are `current:max` pairs for resources and encumbrance (for example `50:100`), `statName:value` lines for all seven statistics exactly once, `Name:Level:Description` per RULE, and `Name:Description` per status effect or descriptive modifier. Plain collections, including creature intrinsic traits, use one entry per line; surrounding whitespace is trimmed, blank lines are ignored, and empty multiline input clears the collection. RULE levels must be positive whole numbers. Creature edits also require level 1–10, statistics 0–100, and current ≤ max; AP values are whole numbers from 0 to 10 and current cannot exceed max. EntityKey, type, access, schema metadata, source IDs, natural-armor metadata, and provenance are never editable. Every group is validated and saved atomically as one undoable operation. After a successful submission, the public response includes the edit confirmation and the updated detail for the selected field. Invalid, expired, and unauthorized submissions remain private. Explicit `owner` and `partial` users, DMs, and the server owner may edit it."
+      "behavior": "Opens one private modal prefilled for the selected entity type. Character groups use `name`, `level`, `resources`, `status`, `statistics`, `rules`, `talents`, `gear`, `race`, `background`, and `personality`; creature groups use `identity`, `level`, `resources`, `status`, `statistics`, `rules`, `traits`, and `gear`. Both types also provide the edit-only `settings` group to full-authority users. Settings replaces the complete Key, Visibility, and Access configuration atomically. Visibility accepts only `public` or `private`. Access uses one `<Discord user ID>:owner` or `<Discord user ID>:partial` line per unique user; removing a line removes access, and an empty field clears the list. Only explicit owners, DMs, and the server owner may open or submit Settings; partial users retain ordinary editing. Key changes move the save and retained history and are not undoable. Ordinary field formats include `current:max` resource pairs, all seven `statName:value` lines, `Name:Level:Description` per RULE, and one entry per line for collections. Ordinary successful edits create gameplay history and post their updated field, ephemerally when the entity is private. Settings changes create no gameplay-history entry and always reply privately."
     },
     "undo": {
       "description": "Restore the newest retained pre-change entity snapshot",
       "entityOption": "Character or creature whose newest backup will be restored",
       "success": "Restored entity `{{key}}`. The **{{action}}** backup created {{timestamp}} by {{actor}} was consumed.",
-      "behavior": "Restores and consumes the newest available gameplay backup for an active character or creature without changing its type or current access list. Successful `/set`, `/damage`, `/heal`, and `/end-turn` operations save the pre-change entity state. The current `characterHistory.maxEntries` limit applies to both types. Repeated undos walk backward; redo is unsupported, and permanent `/delete` removes all backups. Explicit `owner` and `partial` users, DMs, and the server owner may use it.",
+      "behavior": "Restores and consumes the newest available gameplay backup for an active character or creature without changing its current key, type, or complete Settings. Successful ordinary `/set`, `/damage`, `/heal`, and `/end-turn` operations save the pre-change entity state; Settings changes do not. The current `characterHistory.maxEntries` limit applies to both types. Repeated undos walk backward; redo is unsupported, and permanent `/delete` removes all backups. Explicit `owner` and `partial` users, DMs, and the server owner may use it.",
       "actions": {
         "set": "field edit",
         "damage": "damage",
@@ -251,7 +231,6 @@
       "errors": {
         "noHistory": "No backup is available for that entity.",
         "invalidBackup": "The newest entity backup is invalid and cannot be restored.",
-        "unsupportedSchema": "The newest entity backup uses an unsupported save schema and cannot be restored.",
         "operationFailed": "The entity and its history could not be updated safely. No retry was attempted."
       }
     },
@@ -260,6 +239,14 @@
       "tooLarge": "This field is larger than Discord’s 4,000-character modal limit.",
       "expired": "This form expired. Run `/set` again.",
       "result": "**{{name}}**: {{result}}",
+      "settingsUpdated": "Settings for `{{previousKey}}` were updated successfully. The current EntityKey is `{{key}}`.",
+      "settingsOperationFailed": "The entity settings, active save, and retained history could not be updated safely. No partial change was intentionally retained.",
+      "settingsKeyDescription": "Current EntityKey. Change it to rename the entity and its retained history.",
+      "settingsVisibilityDescription": "Required. Enter exactly public or private.",
+      "settingsAccessDescription": "Complete list: one Discord user ID:owner or ID:partial per line; empty clears it.",
+      "settingsKeyPlaceholder": "EntityKey",
+      "settingsVisibilityPlaceholder": "public or private",
+      "settingsAccessPlaceholder": "12345678901234567:owner",
       "collectionPlaceholder": "One entry per line; blank lines ignored; empty clears collection",
       "valuePlaceholder": "Enter the new value",
       "rulesDescription": "Name:Level:Description per line; positive whole-number level; 3 values required; empty clears RULEs",
@@ -302,6 +289,14 @@
     "types": {
       "character": "Character",
       "creature": "Creature"
+    },
+    "settings": {
+      "fields": {
+        "settings": "Settings",
+        "key": "Key",
+        "visibility": "Visibility",
+        "access": "Access"
+      }
     }
   },
   "creature": {
@@ -416,12 +411,14 @@
     "entityMissing": "That entity does not exist.",
     "entityKeyCollision": "That EntityKey is present for more than one entity type. Resolve the storage collision before continuing.",
     "entityTypeChanged": "That EntityKey now belongs to a different entity type. Run the command again.",
-    "entityOwnerDelete": "Only an explicit entity owner, a DM, or the server owner can delete it.",
+    "entityFullAuthority": "Only an explicit entity owner, a DM, or the server owner can delete the entity or edit its Settings.",
     "entityEditor": "Only an explicitly authorized user, a DM, or the server owner can manage it.",
-    "entityAccessOwner": "Only an explicit entity owner, a DM, or the server owner can change access.",
-    "invalidAccessOperation": "Use only `owner`, `partial`, or `none` as the access level.",
-    "invalidAccessRequest": "To change access, provide `level` and exactly one target: either `user` or `user-id`. Omit all three to list access.",
-    "invalidDiscordUserId": "`user-id` must be a 17-20 digit Discord user ID copied from the access list.",
+    "settingsGroupMissing": "The complete Settings form must be submitted.",
+    "invalidVisibility": "Visibility must be exactly `public` or `private`.",
+    "invalidSettingsAccessLine": "Each Access line must use `<Discord user ID>:owner` or `<Discord user ID>:partial`.",
+    "invalidSettingsUserId": "Each Access user ID must contain 17 to 20 digits.",
+    "invalidSettingsAccessLevel": "Persisted Access levels may only be `owner` or `partial`; remove a line to remove access.",
+    "duplicateSettingsUser": "Each Discord user may appear only once in Access.",
     "invalidEntityKey": "Entity keys must start and end with a letter or number and may contain letters, numbers, periods, hyphens, and underscores.",
     "invalidEntityType": "Entity type must be character or creature.",
     "characterExists": "A character with that key already exists.",

@@ -105,28 +105,8 @@
       "description": "Créer un personnage ou une créature vide avec une EntityKey permanente",
       "keyOption": "Clé de sauvegarde unique, courte et facile à retenir",
       "typeOption": "Type d’entité ; personnage par défaut",
-      "success": "L’entité de type {{type}} associée à la clé `{{key}}` a été créée. Cette EntityKey et ce type ne pourront plus être modifiés. Utilisez `/set` avec un champ compatible pour ouvrir son formulaire privé prérempli.",
-      "behavior": "Crée et sauvegarde une entité vide en accordant à l’utilisateur le niveau d’accès explicite `owner`. `type` accepte `character` ou `creature` et vaut `character` par défaut. Les EntityKeys sont uniques pour l’ensemble des deux types ; elles doivent commencer et finir par une lettre ou un chiffre, et peuvent contenir des points, tirets et tirets bas."
-    },
-    "access": {
-      "description": "Afficher ou modifier les accès explicites d’une entité",
-      "entityOption": "Personnage ou créature dont les accès seront affichés ou modifiés",
-      "userOption": "Utilisateur Discord dont l’accès sera modifié ; à utiliser avec level, sans user-id",
-      "userIdOption": "Identifiant Discord brut à modifier lorsque l’utilisateur ne peut pas être sélectionné",
-      "userIdAccepted": "Un identifiant utilisateur Discord de 17 à 20 chiffres affiché dans la liste des accès",
-      "levelOption": "Accès à accorder ou retirer ; à utiliser avec une seule cible, user ou user-id",
-      "listTitle": "**Accès explicites à `{{key}}`**",
-      "listEntry": "- {{user}} — **{{level}}**",
-      "empty": "Aucun utilisateur ne possède d’accès explicite à cette entité.",
-      "listAttached": "La liste complète des accès explicites à `{{key}}` est jointe.",
-      "updated": "L’accès explicite de {{user}} à `{{key}}` est passé de **{{previousLevel}}** à **{{level}}**.",
-      "unchanged": "L’accès explicite de {{user}} à `{{key}}` est déjà **{{level}}** ; aucun changement n’a été effectué.",
-      "levels": {
-        "owner": "Propriétaire",
-        "partial": "Partiel",
-        "none": "Aucun"
-      },
-      "behavior": "Avec le seul paramètre `entity-key`, affiche toutes les entrées d’accès explicite enregistrées ; tout le monde peut consulter cette liste. Chaque ligne contient l’identifiant utilisateur enregistré, même lorsque Discord ne parvient plus à retrouver cet utilisateur. Pour modifier les accès, indiquez `level` et une seule cible : utilisez normalement `user`, ou copiez dans `user-id` l’identifiant d’un utilisateur absent depuis la liste. `owner` accorde tous les pouvoirs sur l’entité sans retirer les autres propriétaires, `partial` autorise les actions normales de modification et de jeu mais pas la suppression ni la gestion des accès, et `none` retire l’entrée explicite de l’utilisateur. Réappliquer le même niveau ou retirer une entrée absente réussit sans erreur inutile. Le propriétaire du serveur et les utilisateurs ayant la permission MJ conservent toujours tous les pouvoirs implicitement, sans entrée enregistrée. Seuls le propriétaire du serveur, un MJ ou un propriétaire explicite de l’entité peuvent modifier les accès, y compris le leur."
+      "success": "L’entité de type {{type}} associée à la clé `{{key}}` a été créée. Utilisez `/set` avec un champ compatible pour ouvrir son formulaire privé prérempli.",
+      "behavior": "Crée et sauvegarde une entité publique vide en accordant à l’utilisateur le niveau d’accès explicite `owner`. `type` accepte `character` ou `creature` et vaut `character` par défaut. Les EntityKeys sont uniques pour l’ensemble des deux types ; elles doivent commencer et finir par une lettre ou un chiffre, et peuvent contenir des points, tirets et tirets bas. Les utilisateurs disposant de l’autorité complète peuvent ensuite modifier la clé, la visibilité et la liste complète des accès avec `/set field:settings`."
     },
     "damage": {
       "description": "Infliger des dégâts à une entité, d’abord aux PR puis aux PV",
@@ -179,7 +159,7 @@
       "backgroundOption": "Chemin de profil relatif à `background` ; tirage aléatoire si omis",
       "levelChoice": "Niveau {{level}}",
       "success": "Le personnage **{{name}}** a été généré avec la clé `{{key}}`.",
-      "behavior": "Crée et sauvegarde un personnage aléatoire complet sous une CharacterKey unique, avec une liste d’accès explicites vide. Le MJ ou le propriétaire du serveur dispose déjà implicitement de tous les pouvoirs. Le niveau est compris entre 1 et 10 et tiré aléatoirement s’il est omis. Le profil est un chemin relatif au routeur public `background` : utilisez une catégorie comme `criminel` pour un archétype aléatoire, `criminel:coupe_bourse` pour un archétype précis ou la forme explicite équivalente `criminel.generator:coupe_bourse` ; si le chemin est omis, tout est tiré aléatoirement. L’autocomplétion privilégie les chemins localisés les plus courts. Le chemin doit se terminer sur un archétype de profil : les champs et les générateurs étrangers sont rejetés avant sa sélection. L’archétype sélectionné détermine le profil statistique et les éventuelles adaptations de génération, tandis que la description physique est générée indépendamment. L’histoire personnelle et les objectifs commencent vides. Les ressources, LOI, armure, armes, objets, pièces d’or, effets d’état temporaires et modificateurs persistants propres aux personnages suivent le niveau choisi et les règles du jeu. L’encombrement reste manuel et vaut 0 / 0 par défaut."
+      "behavior": "Crée et sauvegarde un personnage aléatoire complet privé sous une CharacterKey unique, avec une liste d’accès explicites vide. La réponse et ses compléments sont privés. Le MJ ou le propriétaire du serveur dispose déjà implicitement de tous les pouvoirs. Le niveau est compris entre 1 et 10 et tiré aléatoirement s’il est omis. Le profil est un chemin relatif au routeur public `background` : utilisez une catégorie comme `criminel` pour un archétype aléatoire, `criminel:coupe_bourse` pour un archétype précis ou la forme explicite équivalente `criminel.generator:coupe_bourse` ; si le chemin est omis, tout est tiré aléatoirement. L’autocomplétion privilégie les chemins localisés les plus courts. Le chemin doit se terminer sur un archétype de profil : les champs et les générateurs étrangers sont rejetés avant sa sélection. L’archétype sélectionné détermine le profil statistique et les éventuelles adaptations de génération, tandis que la description physique est générée indépendamment. L’histoire personnelle et les objectifs commencent vides. Les ressources, LOI, armure, armes, objets, pièces d’or, effets d’état temporaires et modificateurs persistants propres aux personnages suivent le niveau choisi et les règles du jeu. L’encombrement reste manuel et vaut 0 / 0 par défaut."
     },
     "genCreature": {
       "description": "Générer une créature (rôle MJ configuré ou propriétaire du serveur)",
@@ -189,7 +169,7 @@
       "levelOption": "Niveau de la créature ; tirage aléatoire de 1 à 10 si omis",
       "levelChoice": "Niveau {{level}}",
       "success": "La créature **{{name}}** a été générée et sauvegardée avec la CreatureKey `{{key}}`.",
-      "behavior": "Crée et sauvegarde atomiquement une créature complète avec une liste d’accès explicites vide ; le MJ ou le propriétaire du serveur qui lance la commande dispose déjà implicitement de tous les pouvoirs. Le type est un chemin relatif au routeur public `creature` : utilisez une catégorie comme `monstres` pour une créature aléatoire, `monstres:dragon_ancien` pour un archétype précis ou la forme explicite équivalente `monstres.generator:dragon_ancien` ; si le chemin est omis, tout est tiré aléatoirement. L’autocomplétion privilégie les chemins localisés les plus courts. Le chemin doit se terminer sur un archétype de créature : les champs et les générateurs étrangers sont rejetés avant sa sélection. La CreatureKey est unique parmi toutes les entités et le niveau est compris entre 1 et 10, ou tiré aléatoirement s’il est omis. Des profils statistiques partagés répartissent les statistiques et calculent les ressources dérivées ; les LOI ne sont accordées que lorsqu’elles sont prévues explicitement. Les effets d’état temporaires proviennent du catalogue des effets d’état, tandis que les modificateurs persistants viennent du catalogue propre aux créatures. L’équipement, l’inventaire et l’armure naturelle sont déterminés par la créature choisie. L’encombrement reste manuel et vaut 0 / 0 par défaut. Seuls un MJ configuré ou le propriétaire du serveur peuvent utiliser cette commande."
+      "behavior": "Crée et sauvegarde atomiquement une créature complète privée avec une liste d’accès explicites vide ; la réponse et ses compléments sont privés, et le MJ ou le propriétaire du serveur qui lance la commande dispose déjà implicitement de tous les pouvoirs. Le type est un chemin relatif au routeur public `creature` : utilisez une catégorie comme `monstres` pour une créature aléatoire, `monstres:dragon_ancien` pour un archétype précis ou la forme explicite équivalente `monstres.generator:dragon_ancien` ; si le chemin est omis, tout est tiré aléatoirement. L’autocomplétion privilégie les chemins localisés les plus courts. Le chemin doit se terminer sur un archétype de créature : les champs et les générateurs étrangers sont rejetés avant sa sélection. La CreatureKey est unique parmi toutes les entités et le niveau est compris entre 1 et 10, ou tiré aléatoirement s’il est omis. Des profils statistiques partagés répartissent les statistiques et calculent les ressources dérivées ; les LOI ne sont accordées que lorsqu’elles sont prévues explicitement. Les effets d’état temporaires proviennent du catalogue des effets d’état, tandis que les modificateurs persistants viennent du catalogue propre aux créatures. L’équipement, l’inventaire et l’armure naturelle sont déterminés par la créature choisie. L’encombrement reste manuel et vaut 0 / 0 par défaut. Seuls un MJ configuré ou le propriétaire du serveur peuvent utiliser cette commande."
     },
     "get": {
       "description": "Afficher le résumé et l’équipement d’une entité, une catégorie ou toutes les catégories",
@@ -197,7 +177,7 @@
       "fieldOption": "Catégorie détaillée facultative, ou toutes les catégories",
       "allField": "Toutes les catégories consultables",
       "unknownField": "Ce champ n’est pas disponible pour cette entité : **{{field}}**. Utilisez `/help command:get` pour consulter les détails.",
-      "behavior": "Sans `field`, publie le résumé public de l’entité, puis sa catégorie `gear`, même si l’équipement et l’inventaire sont vides. Avec `field:all`, n’affiche pas le résumé et publie toutes les catégories consultables dans l’ordre canonique du catalogue, y compris celles dont le contenu est vide. Toute autre valeur `field` compatible continue de n’afficher que la catégorie demandée. Les catégories de personnage sont `name`, `level`, `resources`, `status`, `statistics`, `rules`, `talents`, `gear`, `race`, `background` et `personality`, dans cet ordre. Les catégories de créature suivent leur propre ordre : `identity`, `level`, `resources`, `status`, `statistics`, `rules`, `traits` et `gear`. La vue `resources` affiche les PV, PR, PA et DD. La vue `status` affiche séparément les Effets d’état et les Modificateurs, en omettant les listes vides. L’autocomplétion propose `all` ainsi que les seules catégories compatibles avec l’EntityKey choisie."
+      "behavior": "Sans `field`, publie le résumé de l’entité puis sa catégorie `gear`, même si l’équipement et l’inventaire sont vides. Les entités publiques sont visibles par tous. Les entités privées ne peuvent être découvertes et consultées que par les utilisateurs explicitement inscrits comme `owner` ou `partial`, les MJ et le propriétaire du serveur ; une clé privée inaccessible est traitée comme inexistante, et une consultation privée autorisée reçoit une réponse éphémère. Avec `field:all`, n’affiche pas le résumé et publie toutes les catégories normales consultables dans l’ordre canonique. Les paramètres ne sont jamais affichés. Les catégories de personnage sont `name`, `level`, `resources`, `status`, `statistics`, `rules`, `talents`, `gear`, `race`, `background` et `personality`, dans cet ordre. Les catégories de créature suivent leur propre ordre : `identity`, `level`, `resources`, `status`, `statistics`, `rules`, `traits` et `gear`. L’autocomplétion applique la même règle de visibilité."
     },
     "heal": {
       "description": "Restaurer les PV, les PR ou les deux jusqu’au pourcentage choisi",
@@ -234,13 +214,13 @@
       "description": "Modifier un groupe de champs compatible dans un formulaire prérempli",
       "entityOption": "Personnage ou créature à modifier",
       "fieldOption": "Champ à modifier",
-      "behavior": "Ouvre un formulaire privé prérempli adapté au type d’entité choisi. Les groupes de personnage sont `name`, `level`, `resources`, `status`, `statistics`, `rules`, `talents`, `gear`, `race`, `background` et `personality` ; ceux des créatures sont `identity`, `level`, `resources`, `status`, `statistics`, `rules`, `traits` et `gear`. Les formats particuliers sont des paires de nombres pour les ressources et l’encombrement (ex. `50:100`, premier nombre actuel, second maximal), des lignes `statName:valeur` avec chacun des sept noms exactement une fois, `Nom:Niveau:Description` pour chaque LOI et `Nom:Description` pour chaque effet d’état ou modificateur descriptif. Les collections simples, dont les dons intrinsèques des créatures, utilisent une entrée par ligne ; les espaces autour de chaque ligne sont supprimés, les lignes vides sont ignorées et vider une saisie multiligne efface la collection. Le niveau d’une LOI doit être un entier positif. Les créatures exigent aussi un niveau de 1 à 10, des statistiques de 0 à 100 et actuel ≤ maximum ; les PA sont des entiers de 0 à 10 et l’actuel ne peut pas dépasser le maximum. L’EntityKey, le type, les accès, le schéma, les identifiants sources, les données d’armure naturelle et la provenance ne sont jamais modifiables. Chaque groupe est validé et sauvegardé atomiquement comme une seule opération annulable. Après une validation réussie, la réponse publique contient la confirmation de modification et le détail mis à jour du champ sélectionné. Les soumissions invalides, expirées ou non autorisées restent privées. Les utilisateurs disposant d’un accès explicite `owner` ou `partial`, les MJ et le propriétaire du serveur peuvent la modifier."
+      "behavior": "Ouvre un formulaire privé prérempli adapté au type d’entité choisi. Les groupes de personnage sont `name`, `level`, `resources`, `status`, `statistics`, `rules`, `talents`, `gear`, `race`, `background` et `personality` ; ceux des créatures sont `identity`, `level`, `resources`, `status`, `statistics`, `rules`, `traits` et `gear`. Les deux types proposent aussi le groupe `settings`, réservé à la modification et aux utilisateurs disposant de l’autorité complète. Ce formulaire remplace atomiquement la clé, la visibilité et la liste complète des accès. La visibilité accepte uniquement `public` ou `private`. Les accès utilisent une ligne `<identifiant Discord>:owner` ou `<identifiant Discord>:partial` par utilisateur unique ; retirer une ligne supprime l’accès, et un champ vide efface la liste. Seuls les propriétaires explicites, les MJ et le propriétaire du serveur peuvent ouvrir ou envoyer ces paramètres ; les accès `partial` conservent les modifications ordinaires. Renommer la clé déplace la sauvegarde et l’historique conservé sans créer d’opération annulable. Les autres groupes conservent leurs formats actuels et enregistrent une sauvegarde de jeu avant modification. Leur réussite publie le champ mis à jour, avec une réponse éphémère pour une entité privée ; la modification des paramètres répond toujours en privé."
     },
     "undo": {
       "description": "Restaurer le plus récent état antérieur conservé d’une entité",
       "entityOption": "Personnage ou créature dont la sauvegarde la plus récente sera restaurée",
       "success": "L’entité `{{key}}` a été restaurée. La sauvegarde **{{action}}**, créée {{timestamp}} par {{actor}}, a été consommée.",
-      "behavior": "Restaure et consomme la sauvegarde de jeu disponible la plus récente d’un personnage ou d’une créature active sans changer son type ni sa liste d’accès actuelle. Chaque opération `/set`, `/damage`, `/heal` ou `/end-turn` réussie enregistre l’état antérieur de l’entité. La limite actuelle `characterHistory.maxEntries` s’applique aux deux types. Des annulations répétées remontent les anciens états ; aucun rétablissement n’est pris en charge et `/delete` supprime toutes les sauvegardes. Les utilisateurs disposant d’un accès explicite `owner` ou `partial`, les MJ et le propriétaire du serveur peuvent l’utiliser.",
+      "behavior": "Restaure et consomme la sauvegarde de jeu disponible la plus récente d’un personnage ou d’une créature active sans changer sa clé actuelle, son type ni l’intégralité de ses paramètres actuels. Chaque opération `/set` ordinaire, `/damage`, `/heal` ou `/end-turn` réussie enregistre l’état antérieur de l’entité ; les paramètres n’en créent pas. La limite actuelle `characterHistory.maxEntries` s’applique aux deux types. Des annulations répétées remontent les anciens états ; aucun rétablissement n’est pris en charge et `/delete` supprime toutes les sauvegardes. Les utilisateurs disposant d’un accès explicite `owner` ou `partial`, les MJ et le propriétaire du serveur peuvent l’utiliser.",
       "actions": {
         "set": "modification de champ",
         "damage": "dégâts",
@@ -251,7 +231,6 @@
       "errors": {
         "noHistory": "Aucune sauvegarde n’est disponible pour cette entité.",
         "invalidBackup": "La sauvegarde la plus récente de l’entité est invalide et ne peut pas être restaurée.",
-        "unsupportedSchema": "La sauvegarde la plus récente utilise un schéma non pris en charge et ne peut pas être restaurée.",
         "operationFailed": "L’entité et son historique n’ont pas pu être mis à jour en toute sécurité. Aucune nouvelle tentative n’a été effectuée."
       }
     },
@@ -260,6 +239,14 @@
       "tooLarge": "Ce champ dépasse la limite de 4 000 caractères imposée par Discord.",
       "expired": "Ce formulaire a expiré. Relancez `/set`.",
       "result": "**{{name}}** : {{result}}",
+      "settingsUpdated": "Les paramètres de `{{previousKey}}` ont été mis à jour. L’EntityKey actuelle est `{{key}}`.",
+      "settingsOperationFailed": "Les paramètres, la sauvegarde active et l’historique conservé n’ont pas pu être mis à jour en toute sécurité. Aucun état partiel n’a été conservé intentionnellement.",
+      "settingsKeyDescription": "EntityKey actuelle. Modifiez-la pour renommer l’entité et son historique.",
+      "settingsVisibilityDescription": "Obligatoire. Saisir exactement public ou private.",
+      "settingsAccessDescription": "Liste complète : une ligne identifiant Discord:owner ou identifiant:partial ; vide = effacer.",
+      "settingsKeyPlaceholder": "EntityKey",
+      "settingsVisibilityPlaceholder": "public ou private",
+      "settingsAccessPlaceholder": "12345678901234567:owner",
       "collectionPlaceholder": "Une entrée par ligne ; lignes vides ignorées ; vider efface la collection",
       "valuePlaceholder": "Saisir la nouvelle valeur",
       "rulesDescription": "Nom:Niveau:Description par ligne ; niveau entier positif ; 3 champs requis ; vide = effacer les LOI.",
@@ -302,6 +289,14 @@
     "types": {
       "character": "personnage",
       "creature": "créature"
+    },
+    "settings": {
+      "fields": {
+        "settings": "Paramètres",
+        "key": "Clé",
+        "visibility": "Visibilité",
+        "access": "Accès"
+      }
     }
   },
   "creature": {
@@ -416,12 +411,14 @@
     "entityMissing": "Entité introuvable.",
     "entityKeyCollision": "Cette EntityKey appartient à plusieurs types d’entités. Corrigez la collision de stockage avant de continuer.",
     "entityTypeChanged": "Cette EntityKey appartient désormais à un autre type d’entité. Relancez la commande.",
-    "entityOwnerDelete": "Seuls un propriétaire explicite de l’entité, un MJ ou le propriétaire du serveur peuvent la supprimer.",
+    "entityFullAuthority": "Seuls un propriétaire explicite de l’entité, un MJ ou le propriétaire du serveur peuvent supprimer l’entité ou modifier ses paramètres.",
     "entityEditor": "Seuls un utilisateur disposant d’un accès explicite, un MJ ou le propriétaire du serveur peuvent la gérer.",
-    "entityAccessOwner": "Seuls un propriétaire explicite de l’entité, un MJ ou le propriétaire du serveur peuvent modifier ses accès.",
-    "invalidAccessOperation": "Utilisez uniquement `owner`, `partial` ou `none` comme niveau d’accès.",
-    "invalidAccessRequest": "Pour modifier les accès, indiquez `level` et une seule cible : `user` ou `user-id`. Omettez ces trois paramètres pour afficher la liste.",
-    "invalidDiscordUserId": "`user-id` doit être un identifiant utilisateur Discord de 17 à 20 chiffres copié depuis la liste des accès.",
+    "settingsGroupMissing": "Le formulaire complet des paramètres doit être envoyé.",
+    "invalidVisibility": "La visibilité doit être exactement `public` ou `private`.",
+    "invalidSettingsAccessLine": "Chaque ligne d’accès doit utiliser `<identifiant Discord>:owner` ou `<identifiant Discord>:partial`.",
+    "invalidSettingsUserId": "Chaque identifiant utilisateur des accès doit contenir 17 à 20 chiffres.",
+    "invalidSettingsAccessLevel": "Les accès enregistrés acceptent uniquement `owner` ou `partial` ; retirez une ligne pour supprimer l’accès.",
+    "duplicateSettingsUser": "Chaque utilisateur Discord ne peut apparaître qu’une fois dans les accès.",
     "invalidEntityKey": "Une EntityKey doit commencer et se terminer par une lettre ou un chiffre. Elle peut contenir des lettres, des chiffres, des points, des tirets et des tirets bas.",
     "invalidEntityType": "Le type d’entité doit être `character` ou `creature`.",
     "characterExists": "Cette CharacterKey est déjà utilisée.",

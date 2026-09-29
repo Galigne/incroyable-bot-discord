@@ -16,11 +16,7 @@ const CREATURE_HISTORY_ACTIONS = new Set([
 
 const historyStore = createEntityHistoryStore({
 	actions: CREATURE_HISTORY_ACTIONS,
-	createDocument: entries => ({
-		schemaVersion: 1,
-		type: 'creature',
-		entries,
-	}),
+	createDocument: entries => ({ type: 'creature', entries }),
 	createHistoryError,
 	entityLabel: 'creature',
 	entityProperty: 'creature',
@@ -32,7 +28,7 @@ const historyStore = createEntityHistoryStore({
 			!document
 			|| typeof document !== 'object'
 			|| Array.isArray(document)
-			|| document.schemaVersion !== 1
+			|| Object.keys(document).length !== 2
 			|| document.type !== 'creature'
 			|| !Array.isArray(document.entries)
 		) {

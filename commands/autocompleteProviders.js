@@ -9,6 +9,7 @@ const {
 } = require('../util/autocomplete');
 const {
 	canManageEntity,
+	canViewEntity,
 	hasFullEntityAuthority,
 } = require('../util/authorization');
 const {
@@ -49,10 +50,7 @@ const AUTOCOMPLETE_PROVIDERS = {
 	static: getStaticChoices,
 	backgrounds: getBackgroundChoices,
 	'creature-types': getCreatureTypeChoices,
-	entities: (option, context, focused) => getEntityChoices(
-		focused.value,
-		context.locale,
-	),
+	entities: getVisibleEntityChoices,
 	'entity-sections': getEntitySections,
 	'get-entity-sections': getGetEntitySections,
 	'help-commands': getHelpCommandChoices,
@@ -156,6 +154,20 @@ function getManageableEntityChoices(option, context, focused) {
 	);
 }
 
+function getVisibleEntityChoices(option, context, focused) {
+	return getEntityChoices(
+		focused.value,
+		context.locale,
+		{
+			filterEntity: entity => canViewEntity(
+				context.interaction,
+				entity,
+				context.config,
+			),
+		},
+	);
+}
+
 function getFullAuthorityEntityChoices(option, context, focused) {
 	return getEntityChoices(
 		focused.value,
@@ -211,6 +223,18 @@ function getEntitySections(option, context, focused) {
 		focused.value,
 		context.locale,
 		context.interaction.options.getString?.('entity-key') ?? '',
+		{
+			canManage: entity => canManageEntity(
+				context.interaction,
+				entity,
+				context.config,
+			),
+			hasFullAuthority: entity => hasFullEntityAuthority(
+				context.interaction,
+				entity,
+				context.config,
+			),
+		},
 	);
 }
 
@@ -219,7 +243,15 @@ function getGetEntitySections(option, context, focused) {
 		focused.value,
 		context.locale,
 		context.interaction.options.getString?.('entity-key') ?? '',
-		{ includeAll: true },
+		{
+			canManage: entity => canViewEntity(
+				context.interaction,
+				entity,
+				context.config,
+			),
+			includeAll: true,
+			mode: 'get',
+		},
 	);
 }
 

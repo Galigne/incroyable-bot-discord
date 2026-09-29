@@ -54,6 +54,28 @@ function createDeletionConsistencyError(
 	return error;
 }
 
+function createSettingsPersistenceError(cause) {
+	const error = new Error('The entity settings could not be persisted safely.', {
+		cause,
+	});
+	error.name = 'EntitySettingsPersistenceError';
+	error.code = 'ENTITY_SETTINGS_PERSISTENCE_FAILED';
+	return error;
+}
+
+function createSettingsConsistencyError(cause, rollbackError) {
+	const error = new Error('The entity settings operation could not be rolled back.', {
+		cause,
+	});
+	error.name = 'EntitySettingsConsistencyError';
+	error.code = 'ENTITY_SETTINGS_CONSISTENCY_FAILED';
+	Object.defineProperty(error, 'rollbackError', {
+		configurable: true,
+		value: rollbackError,
+	});
+	return error;
+}
+
 async function commitHistoryThenMutation({
 	commitMutation,
 	entityKey,
@@ -150,6 +172,42 @@ async function commitPermanentDeletion({
 	}
 }
 
+async function commitEntityRename({
+	cleanupNewEntity,
+	cleanupNewHistory,
+	deleteOldEntity,
+	deleteOldHistory,
+	entityKey,
+	logger = console,
+	restoreOldEntity,
+	restoreOldHistory,
+	writeNewEntity,
+	writeNewHistory,
+}) {
+	try {
+		await writeNewHistory();
+		await writeNewEntity();
+		await deleteOldHistory();
+		await deleteOldEntity();
+	}
+	catch (error) {
+		try {
+			await restoreOldEntity();
+			await restoreOldHistory();
+			await cleanupNewEntity();
+			await cleanupNewHistory();
+		}
+		catch (rollbackError) {
+			logger.error(
+				`[entity-settings] Unrecoverable rename rollback failure for "${entityKey}":`,
+				rollbackError,
+			);
+			throw createSettingsConsistencyError(error, rollbackError);
+		}
+		throw createSettingsPersistenceError(error);
+	}
+}
+
 async function rollbackOrThrow({
 	cause,
 	entityKey,
@@ -179,6 +237,7 @@ function capitalize(value) {
 }
 
 module.exports = {
+	commitEntityRename,
 	commitHistoryThenMutation,
 	commitMutationThenHistory,
 	commitPermanentDeletion,

@@ -540,8 +540,8 @@ test('the concrete character undo result uses the shared entity shape', async ()
 	assert.equal(result.createdAt, '2026-08-06T10:00:00.000Z');
 });
 
-test('unsupported legacy snapshots are rejected without creating history', async () => {
-	const characterKey = nextKey('Undo.MixedSchema');
+test('structurally obsolete saves are rejected without creating history', async () => {
+	const characterKey = nextKey('Undo.ObsoleteSave');
 	await fsPromises.writeFile(
 		getCharacterSavePath(characterKey),
 		JSON.stringify({
@@ -556,7 +556,7 @@ test('unsupported legacy snapshots are rejected without creating history', async
 
 	await assert.rejects(
 		editFirstName(characterKey, 'First v2', historyContext(3, 'legacy-actor')),
-		error => error.code === 'UNSUPPORTED_CHARACTER_SCHEMA_VERSION',
+		error => error.code === 'INVALID_CHARACTER_SAVE',
 	);
 	await assert.rejects(readHistory(characterKey));
 });
@@ -601,14 +601,14 @@ test('new history contexts exclude delete while legacy delete entries remain rea
 	assert.equal(historyState.document.entries[0].action, 'delete');
 });
 
-test('undo rejects invalid and unsupported snapshot schema versions', async () => {
+test('undo rejects snapshots that do not match the current versionless structure', async () => {
 	const characterKey = nextKey('Undo.Schema');
 	const context = historyContext();
 	await createCharacter(characterKey, ownerAccess('creator'));
 	await editFirstName(characterKey, 'Current', context);
 	const historyPath = getCharacterHistoryPath(characterKey);
 	const invalidHistory = await readHistory(characterKey);
-	delete invalidHistory.entries.at(-1).character.schemaVersion;
+	delete invalidHistory.entries.at(-1).character.settings;
 	await fsPromises.writeFile(
 		historyPath,
 		JSON.stringify(invalidHistory, null, 2),
@@ -620,6 +620,10 @@ test('undo rejects invalid and unsupported snapshot schema versions', async () =
 	);
 	assert.equal((await getCharacter(characterKey)).name.firstName, 'Current');
 
+	invalidHistory.entries.at(-1).character.settings = {
+		visibility: 'public',
+		access: ownerAccess('creator'),
+	};
 	invalidHistory.entries.at(-1).character.schemaVersion = 999;
 	await fsPromises.writeFile(
 		historyPath,
@@ -628,7 +632,7 @@ test('undo rejects invalid and unsupported snapshot schema versions', async () =
 	);
 	await assert.rejects(
 		undoEntity(characterKey, () => true, context),
-		{ code: 'UNSUPPORTED_CHARACTER_HISTORY_SCHEMA' },
+		{ code: 'INVALID_CHARACTER_HISTORY_SNAPSHOT' },
 	);
 	assert.equal((await readHistory(characterKey)).entries.length, 1);
 	await fsPromises.rm(historyPath);

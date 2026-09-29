@@ -33,6 +33,19 @@ async function runEntityOperation(entityKey, operation) {
 	}
 }
 
+async function runEntityOperations(entityKeys, operation) {
+	const orderedKeys = [...new Set(entityKeys)].sort((left, right) => (
+		left.localeCompare(right)
+	));
+	async function acquire(index) {
+		if (index === orderedKeys.length) {
+			return operation();
+		}
+		return runEntityOperation(orderedKeys[index], () => acquire(index + 1));
+	}
+	return acquire(0);
+}
+
 function getEntityOperationQueueSize() {
 	return entityOperationQueues.size;
 }
@@ -45,4 +58,5 @@ module.exports = {
 	getEntityOperationQueueSize,
 	getPendingEntityOperationCount,
 	runEntityOperation,
+	runEntityOperations,
 };

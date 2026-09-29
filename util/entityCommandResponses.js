@@ -34,12 +34,12 @@ function createEntityDeletedResponse(entityKey, locale = 'en') {
 function createEntityUndoResponse(result, locale = 'en') {
 	const actionKey = result.action === 'end-turn' ? 'endTurn' : result.action;
 	const unixTimestamp = Math.floor(Date.parse(result.createdAt) / 1_000);
-	return t(locale, 'rpg.undo.success', {
+	return applyPrivateEntityVisibility(t(locale, 'rpg.undo.success', {
 		action: t(locale, `rpg.undo.actions.${actionKey}`),
 		actor: `<@${result.actorId}>`,
 		key: result.entity.key,
 		timestamp: `<t:${unixTimestamp}:F>`,
-	});
+	}), result.entity);
 }
 
 function createEntityDamageResponse(result, locale = 'en') {
@@ -55,29 +55,29 @@ function createEntityDamageResponse(result, locale = 'en') {
 			hpDamage: damage.hpDamage,
 			hpLabel: getResourceAbbreviation(locale, 'hp'),
 		});
-	return t(locale, 'rpg.damage.result', {
+	return applyPrivateEntityVisibility(t(locale, 'rpg.damage.result', {
 		amount: damageAmount,
 		breakdown: damageBreakdown,
 		name: entity.displayName,
 		resources: formatCombatantResources(entity, ['hp', 'ar'], locale),
-	});
+	}), entity);
 }
 
 function createEntityHealResponse(result, locale = 'en') {
 	const changedResources = new Set(result.changes.map(change => change.resource));
 	const resourceIds = ['hp', 'ar'].filter(resourceId => changedResources.has(resourceId));
-	return t(locale, 'rpg.heal.result', {
+	return applyPrivateEntityVisibility(t(locale, 'rpg.heal.result', {
 		name: result.entity.displayName,
 		percentage: result.percentage,
 		resources: formatCombatantResources(result.entity, resourceIds, locale),
-	});
+	}), result.entity);
 }
 
 function createEndEntityTurnResponse(result, locale = 'en') {
-	return t(locale, 'rpg.endTurn.result', {
+	return applyPrivateEntityVisibility(t(locale, 'rpg.endTurn.result', {
 		name: result.entity.displayName,
 		resources: formatCombatantResources(result.entity, ['ap', 'md'], locale),
-	});
+	}), result.entity);
 }
 
 function createEntityGetResponse(entity, fieldName, locale = 'en') {
@@ -95,7 +95,10 @@ function createEntityGetResponse(entity, fieldName, locale = 'en') {
 			flags: MessageFlags.Ephemeral,
 		};
 	}
-	return { embeds: [embed] };
+	return {
+		embeds: [embed],
+		...(isPrivateEntity(entity) ? { flags: MessageFlags.Ephemeral } : {}),
+	};
 }
 
 function createEntityGetResponses(entity, fieldName, locale = 'en') {
@@ -132,6 +135,19 @@ function createEntityEditResponse(result, fieldName, locale = 'en') {
 			),
 		}),
 		embeds: fieldResponse.embeds,
+		...(isPrivateEntity(result.entity)
+			? { flags: MessageFlags.Ephemeral }
+			: {}),
+	};
+}
+
+function createEntitySettingsResponse(result, locale = 'en') {
+	return {
+		content: t(locale, 'rpg.editor.settingsUpdated', {
+			key: result.entity.key,
+			previousKey: result.previousKey,
+		}),
+		flags: MessageFlags.Ephemeral,
 	};
 }
 
@@ -142,11 +158,24 @@ function createGeneratedCreatureResponse(creature, locale = 'en') {
 			name: creature.displayName,
 		}),
 		embeds: [createCreatureSummaryEmbed(creature, locale)],
+		flags: MessageFlags.Ephemeral,
 	};
 }
 
 function createGeneratedCreatureFollowUpResponses(creature, locale = 'en') {
-	return [createEntityGearResponse(creature, locale)].filter(Boolean);
+	return [createEntityGearResponse(creature, locale)]
+		.filter(Boolean)
+		.map(response => ({ ...response, flags: MessageFlags.Ephemeral }));
+}
+
+function applyPrivateEntityVisibility(content, entity) {
+	return isPrivateEntity(entity)
+		? { content, flags: MessageFlags.Ephemeral }
+		: content;
+}
+
+function isPrivateEntity(entity) {
+	return entity?.settings?.visibility === 'private';
 }
 
 module.exports = {
@@ -155,6 +184,7 @@ module.exports = {
 	createEntityDamageResponse,
 	createEntityDeletedResponse,
 	createEntityEditResponse,
+	createEntitySettingsResponse,
 	createEntityGearResponse,
 	createEntityGetResponse,
 	createEntityGetResponses,

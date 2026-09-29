@@ -15,6 +15,7 @@ const replyableErrorCodes = new Set([
 	'INVALID_RANDOM_CREATURE',
 	'INVALID_CHARACTER_EDIT',
 	'INVALID_CREATURE_EDIT',
+	'INVALID_ENTITY_SETTINGS',
 	'INVALID_CHARACTER_HISTORY',
 	'INVALID_CHARACTER_HISTORY_SNAPSHOT',
 	'INVALID_CREATURE_HISTORY',
@@ -27,12 +28,8 @@ const replyableErrorCodes = new Set([
 	'NOT_CREATURE_OWNER',
 	'NOT_ENTITY_EDITOR',
 	'NOT_ENTITY_OWNER',
-	'NOT_ENTITY_ACCESS_OWNER',
-	'INVALID_ENTITY_ACCESS_OPERATION',
-	'INVALID_ENTITY_ACCESS_REQUEST',
-	'INVALID_DISCORD_USER_ID',
-	'UNSUPPORTED_CHARACTER_HISTORY_SCHEMA',
-	'UNSUPPORTED_CREATURE_HISTORY_SCHEMA',
+	'ENTITY_SETTINGS_CONSISTENCY_FAILED',
+	'ENTITY_SETTINGS_PERSISTENCE_FAILED',
 	'CHARACTER_HISTORY_CONSISTENCY_FAILED',
 	'CHARACTER_HISTORY_PERSISTENCE_FAILED',
 	'CREATURE_HISTORY_CONSISTENCY_FAILED',
@@ -54,10 +51,6 @@ async function replyToEntityError(interaction, error, locale = 'en') {
 		ENTITY_TYPE_CHANGED: t(locale, 'errors.entityTypeChanged'),
 		INVALID_ENTITY_KEY: t(locale, 'errors.invalidEntityKey'),
 		INVALID_ENTITY_TYPE: t(locale, 'errors.invalidEntityType'),
-		INVALID_ENTITY_ACCESS_OPERATION: t(locale, 'errors.invalidAccessOperation'),
-		INVALID_ENTITY_ACCESS_REQUEST: t(locale, 'errors.invalidAccessRequest'),
-		INVALID_DISCORD_USER_ID: t(locale, 'errors.invalidDiscordUserId'),
-		NOT_ENTITY_ACCESS_OWNER: t(locale, 'errors.entityAccessOwner'),
 	};
 	const historyCodes = [
 		'INVALID_CHARACTER_HISTORY',
@@ -66,10 +59,6 @@ async function replyToEntityError(interaction, error, locale = 'en') {
 		'INVALID_CREATURE_HISTORY_SNAPSHOT',
 	];
 	const noHistoryCodes = ['NO_CHARACTER_HISTORY', 'NO_CREATURE_HISTORY'];
-	const unsupportedCodes = [
-		'UNSUPPORTED_CHARACTER_HISTORY_SCHEMA',
-		'UNSUPPORTED_CREATURE_HISTORY_SCHEMA',
-	];
 	const editorCodes = [
 		'NOT_CHARACTER_EDITOR',
 		'NOT_CREATURE_EDITOR',
@@ -94,17 +83,17 @@ async function replyToEntityError(interaction, error, locale = 'en') {
 	else if (noHistoryCodes.includes(error.code)) {
 		response = t(locale, 'rpg.undo.errors.noHistory');
 	}
-	else if (unsupportedCodes.includes(error.code)) {
-		response = t(locale, 'rpg.undo.errors.unsupportedSchema');
-	}
 	else if (editorCodes.includes(error.code)) {
 		response = t(locale, 'errors.entityEditor');
 	}
 	else if (ownerCodes.includes(error.code)) {
-		response = t(locale, 'errors.entityOwnerDelete');
+		response = t(locale, 'errors.entityFullAuthority');
 	}
 	else if (error.code.includes('DELETION')) {
 		response = t(locale, 'rpg.delete.operationFailed');
+	}
+	else if (error.code.includes('SETTINGS')) {
+		response = t(locale, 'rpg.editor.settingsOperationFailed');
 	}
 	else if (error.code.includes('HISTORY')) {
 		response = t(locale, 'rpg.undo.errors.operationFailed');

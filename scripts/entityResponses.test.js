@@ -1,5 +1,6 @@
 const assert = require('node:assert/strict');
 const { test } = require('node:test');
+const { MessageFlags } = require('discord.js');
 
 const Character = require('../models/Character');
 const Creature = require('../models/Creature');
@@ -9,6 +10,7 @@ const {
 	createEntityGetResponse,
 	createEntityGetResponses,
 	createEntityHealResponse,
+	createEntityUndoResponse,
 } = require('../util/entityCommandResponses');
 const { getViewableEntityFields } = require('../services/entityFieldCatalog');
 const {
@@ -228,6 +230,37 @@ test('/get with one field still returns only the unchanged category response', (
 		createEntityGetResponses(character, 'personality', 'fr'),
 		[createEntityGetResponse(character, 'personality', 'fr')],
 	);
+});
+
+test('authorized private entity reads and management results remain ephemeral', () => {
+	const entity = createTestCharacter();
+	entity.settings.visibility = 'private';
+	assert.ok(createEntityGetResponses(entity, 'all', 'en').every(response => (
+		response.flags === MessageFlags.Ephemeral
+	)));
+	const responses = [
+		createEntityDamageResponse({
+			entity,
+			damage: { arDamage: 1, hpDamage: 0, piercing: false },
+			damageAmount: 1,
+		}, 'en'),
+		createEntityHealResponse({
+			entity,
+			changes: [{ resource: 'hp' }],
+			percentage: 50,
+		}, 'en'),
+		createEndEntityTurnResponse({ entity }, 'en'),
+		createEntityUndoResponse({
+			action: 'set',
+			actorId: '12345678901234567',
+			createdAt: '2026-09-29T10:00:00.000Z',
+			entity,
+		}, 'en'),
+	];
+	assert.ok(responses.every(response => (
+		response.flags === MessageFlags.Ephemeral
+		&& typeof response.content === 'string'
+	)));
 });
 
 test('damage response displays final HP before final AR without a plain final summary', () => {

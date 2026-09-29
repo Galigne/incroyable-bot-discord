@@ -3,41 +3,17 @@ const {
 	assertBoundedString,
 	assertExactKeys,
 	assertRecord,
-	isRecord,
 	validateCombatantLevel,
 	validateCombatantState,
 	validateNonEmptyStringList,
 } = require('./combatantSaveSchema');
-const { validateEntityAccess } = require('./entityAccess');
-
-const CURRENT_CHARACTER_SAVE_SCHEMA_VERSION = 5;
+const { validateEntitySettings } = require('./entitySettings');
 
 function validateCharacterSaveSchema(rawSaveData, expectedKey = rawSaveData?.key) {
-	if (!isRecord(rawSaveData) || !Object.hasOwn(rawSaveData, 'schemaVersion')) {
-		throw schemaVersionError(
-			'MISSING_CHARACTER_SCHEMA_VERSION',
-			'Character save is missing schemaVersion.',
-		);
-	}
-
-	const { schemaVersion } = rawSaveData;
-	if (!Number.isInteger(schemaVersion) || schemaVersion < 0) {
-		throw schemaVersionError(
-			'INVALID_CHARACTER_SCHEMA_VERSION',
-			'Character save schemaVersion must be a non-negative integer.',
-		);
-	}
-	if (schemaVersion !== CURRENT_CHARACTER_SAVE_SCHEMA_VERSION) {
-		throw schemaVersionError(
-			'UNSUPPORTED_CHARACTER_SCHEMA_VERSION',
-			`Unsupported character save schemaVersion ${schemaVersion}; `
-			+ `expected ${CURRENT_CHARACTER_SAVE_SCHEMA_VERSION}.`,
-		);
-	}
+	assertRecord(rawSaveData, 'character save', invalidSave);
 	assertExactKeys(rawSaveData, 'character save', [
-		'schemaVersion',
 		'key',
-		'access',
+		'settings',
 		'name',
 		'level',
 		'race',
@@ -63,7 +39,7 @@ function validateCharacterSaveSchema(rawSaveData, expectedKey = rawSaveData?.key
 			'Character save key does not match its storage key.',
 		);
 	}
-	validateEntityAccess(rawSaveData.access, invalidSave);
+	validateEntitySettings(rawSaveData.settings, invalidSave);
 	validateCombatantLevel(rawSaveData.level, invalidSave);
 	validateName(rawSaveData.name, invalidSave);
 	validateRace(rawSaveData.race, invalidSave);
@@ -146,10 +122,6 @@ function invalidSave(message, cause) {
 	return schemaError('INVALID_CHARACTER_SAVE', message, cause);
 }
 
-function schemaVersionError(code, message) {
-	return schemaError(code, message);
-}
-
 function schemaError(code, message, cause) {
 	const error = new Error(message, cause ? { cause } : undefined);
 	error.name = 'CharacterSaveSchemaError';
@@ -158,6 +130,5 @@ function schemaError(code, message, cause) {
 }
 
 module.exports = {
-	CURRENT_CHARACTER_SAVE_SCHEMA_VERSION,
 	validateCharacterSaveSchema,
 };

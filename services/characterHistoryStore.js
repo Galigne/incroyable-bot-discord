@@ -35,6 +35,7 @@ const historyStore = createEntityHistoryStore({
 			!document
 			|| typeof document !== 'object'
 			|| Array.isArray(document)
+			|| Object.keys(document).length !== 1
 			|| !Array.isArray(document.entries)
 		) {
 			throw new TypeError('Character history must contain an entries array.');

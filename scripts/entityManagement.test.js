@@ -49,7 +49,6 @@ const {
 	saveRootDirectory,
 } = require('../services/entityStoragePaths');
 const {
-	CURRENT_CREATURE_SAVE_SCHEMA_VERSION,
 	validateCreatureSaveSchema,
 } = require('../services/creatureSaveSchema');
 const {
@@ -111,21 +110,19 @@ test('entity storage paths use symmetric type directories beneath the configured
 	);
 });
 
-test('blank creatures use a strict persistent schema with immutable identity', () => {
+test('blank creatures use a strict versionless schema with renameable key identity', () => {
 	const creature = new Creature('Creature.Blank', ownerAccess('creator'));
-	assert.equal(creature.schemaVersion, CURRENT_CREATURE_SAVE_SCHEMA_VERSION);
 	assert.equal(creature.type, 'creature');
 	assert.equal(creature.key, 'Creature.Blank');
 	assert.equal(Object.getOwnPropertyDescriptor(creature, 'type').writable, false);
-	assert.equal(Object.getOwnPropertyDescriptor(creature, 'key').writable, false);
+	assert.equal(Object.getOwnPropertyDescriptor(creature, 'key').writable, true);
 	assert.deepEqual(creature.gear.encumbrance, { current: 0, max: 0 });
 	assert.equal(Object.hasOwn(creature, 'naturalArmor'), false);
 	assert.deepEqual(Object.keys(creature.statistics), BASE_STATS);
 	assert.deepEqual(Object.keys(creature), [
-		'schemaVersion',
 		'type',
 		'key',
-		'access',
+		'settings',
 		'level',
 		'name',
 		'description',
@@ -201,21 +198,17 @@ test('creature hydration preserves final localized state and technical provenanc
 	assert.equal(hydrated.source.entryId, 'ash_wolf');
 });
 
-test('creature saves reject missing, unsupported, mismatched, and invalid state', () => {
+test('creature saves reject versioned, mismatched, and invalid state', () => {
 	assert.throws(
 		() => validateCreatureSaveSchema({}),
-		error => error.code === 'MISSING_CREATURE_SCHEMA_VERSION',
+		error => error.code === 'INVALID_CREATURE_SAVE',
 	);
-	for (const schemaVersion of [2, 5, 99]) {
-		const unsupported = JSON.parse(JSON.stringify(
-			new Creature(`Schema.Bad.${schemaVersion}`),
-		));
-		unsupported.schemaVersion = schemaVersion;
-		assert.throws(
-			() => validateCreatureSaveSchema(unsupported),
-			error => error.code === 'UNSUPPORTED_CREATURE_SCHEMA_VERSION',
-		);
-	}
+	const versioned = JSON.parse(JSON.stringify(new Creature('Schema.Versioned')));
+	versioned.schemaVersion = 6;
+	assert.throws(
+		() => validateCreatureSaveSchema(versioned),
+		error => error.code === 'INVALID_CREATURE_SAVE',
+	);
 	const mismatched = JSON.parse(JSON.stringify(new Creature('Schema.One')));
 	assert.throws(
 		() => validateCreatureSaveSchema(mismatched, 'Schema.Two'),
@@ -261,16 +254,15 @@ test('creature saves reject missing, unsupported, mismatched, and invalid state'
 	);
 });
 
-test('character saves use the current schema without a required discriminator', () => {
+test('character saves use versionless settings without a required discriminator', () => {
 	const character = new Character('Character.Compatible', ownerAccess('creator'));
 	const saved = JSON.parse(JSON.stringify(character));
-	assert.equal(saved.schemaVersion, 5);
+	assert.equal(Object.hasOwn(saved, 'schemaVersion'), false);
 	assert.deepEqual(Object.keys(saved.statistics), BASE_STATS);
 	assert.equal(Object.hasOwn(saved, 'type'), false);
 	assert.deepEqual(Object.keys(saved), [
-		'schemaVersion',
 		'key',
-		'access',
+		'settings',
 		'name',
 		'level',
 		'race',
@@ -288,7 +280,10 @@ test('character saves use the current schema without a required discriminator', 
 test('entity creation defaults to character after required arguments', async () => {
 	const entity = await createEntity('Creation.DefaultType', 'owner');
 	assert.ok(entity instanceof Character);
-	assert.deepEqual(entity.access, ownerAccess('owner'));
+	assert.deepEqual(entity.settings, {
+		visibility: 'public',
+		access: ownerAccess('owner'),
+	});
 	await assert.rejects(
 		createEntity('Creation.InvalidType', 'owner', 'other'),
 		error => error.code === 'INVALID_ENTITY_TYPE',
@@ -627,7 +622,7 @@ test('character and creature field orders stay explicit and type-compatible', as
 		'',
 		'en',
 		entityKey,
-		{ includeAll: true },
+		{ includeAll: true, mode: 'get' },
 	);
 	assert.deepEqual(
 		getChoices.map(choice => choice.value),
@@ -650,7 +645,6 @@ test('combined entity listing and autocomplete include both concrete types', asy
 test('management metadata is entity-neutral while generators use concrete save keys', () => {
 	const managementCommands = [
 		'add',
-		'access',
 		'get',
 		'set',
 		'damage',

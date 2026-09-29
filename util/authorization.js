@@ -46,6 +46,16 @@ function hasFullEntityAuthority(interaction, entity, config) {
 	);
 }
 
+function canViewEntity(interaction, entity, config) {
+	return Boolean(
+		entity
+		&& (
+			entity.settings?.visibility === 'public'
+			|| canManageEntity(interaction, entity, config)
+		),
+	);
+}
+
 function authorizeCommand(command, interaction, config) {
 	const locale = getLocale(config);
 	const metadata = command?.metadata ?? command;
@@ -126,6 +136,7 @@ function hasRole(memberRoles, roleId) {
 module.exports = {
 	authorizeCommand,
 	canManageEntity,
+	canViewEntity,
 	hasFullEntityAuthority,
 	hasDmPermission,
 	hasModeratorPermission,

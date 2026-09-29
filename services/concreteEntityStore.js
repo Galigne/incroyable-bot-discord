@@ -4,9 +4,13 @@ const {
 	writeJsonAtomically,
 	writeSerializedJsonAtomically,
 } = require('./atomicJsonFile');
-const { runEntityOperation } = require('./entityOperationQueue');
+const {
+	runEntityOperation,
+	runEntityOperations,
+} = require('./entityOperationQueue');
 const { assertEntityKeyAvailable } = require('./entityKeyRegistry');
 const {
+	commitEntityRename,
 	commitHistoryThenMutation,
 	commitMutationThenHistory,
 	commitPermanentDeletion,
@@ -30,11 +34,11 @@ function createConcreteEntityStore({
 	validateKey,
 	validateSave,
 }) {
-	async function create(entityKey, access = [], initialize = () => undefined) {
+	async function create(entityKey, settings, initialize = () => undefined) {
 		validateKey(entityKey);
 		return runEntityOperation(entityKey, async () => {
 			await assertEntityKeyAvailable(entityKey);
-			const entity = createEntityInstance(entityKey, access);
+			const entity = createEntityInstance(entityKey, settings);
 			await initialize(entity);
 			prepareCreatedEntity(entity, entityKey);
 			validateSave(entity, entityKey);
@@ -99,6 +103,71 @@ function createConcreteEntityStore({
 					historyState.path,
 					serializedHistory,
 				),
+			});
+			return entity;
+		});
+	}
+
+	async function updateSettings(
+		entityKey,
+		nextEntityKey,
+		settings,
+		canManage,
+		validateCurrent = () => undefined,
+	) {
+		validateKey(entityKey);
+		validateKey(nextEntityKey);
+		return runEntityOperations([entityKey, nextEntityKey], async () => {
+			const current = await readRecord(entityKey);
+			if (!canManage(current.entity)) {
+				throw createOwnerError();
+			}
+			validateCurrent(current.entity);
+			if (entityKey !== nextEntityKey) {
+				await assertEntityKeyAvailable(nextEntityKey);
+			}
+
+			const entity = current.entity;
+			entity.key = nextEntityKey;
+			entity.settings = structuredClone(settings);
+			validateSave(entity, nextEntityKey);
+			const serializedEntity = serializeJson(entity);
+			if (entityKey === nextEntityKey) {
+				await writeSerializedJsonAtomically(
+					getSavePath(entityKey),
+					serializedEntity,
+				);
+				return entity;
+			}
+
+			const historyState = await history.read(entityKey);
+			const nextHistoryDocument = structuredClone(historyState.document);
+			for (const entry of nextHistoryDocument.entries) {
+				entry[entityProperty].key = nextEntityKey;
+				validateSave(entry[entityProperty], nextEntityKey);
+			}
+			const serializedHistory = serializeJson(nextHistoryDocument);
+			const nextHistoryState = await history.readFileState(nextEntityKey);
+			await commitEntityRename({
+				cleanupNewEntity: () => unlinkIfPresent(getSavePath(nextEntityKey)),
+				cleanupNewHistory: () => unlinkIfPresent(nextHistoryState.path),
+				deleteOldEntity: () => fs.unlink(getSavePath(entityKey)),
+				deleteOldHistory: () => history.delete(historyState),
+				entityKey,
+				restoreOldEntity: () => restoreRecord(entityKey, current),
+				restoreOldHistory: () => history.restore(historyState),
+				writeNewEntity: () => writeSerializedJsonAtomically(
+					getSavePath(nextEntityKey),
+					serializedEntity,
+					{ exclusive: true },
+				),
+				writeNewHistory: () => historyState.exists
+					? writeSerializedJsonAtomically(
+						nextHistoryState.path,
+						serializedHistory,
+						{ exclusive: true },
+					)
+					: undefined,
 			});
 			return entity;
 		});
@@ -172,7 +241,8 @@ function createConcreteEntityStore({
 				throw createEditorError();
 			}
 			if (current) {
-				entity.access = structuredClone(current.entity.access);
+				entity.key = current.entity.key;
+				entity.settings = structuredClone(current.entity.settings);
 			}
 
 			validateSave(entity, entityKey);
@@ -232,7 +302,16 @@ function createConcreteEntityStore({
 		await unlinkIfPresent(savePath);
 	}
 
-	return { create, delete: deleteEntity, get, list, listUndoable, undo, update };
+	return {
+		create,
+		delete: deleteEntity,
+		get,
+		list,
+		listUndoable,
+		undo,
+		update,
+		updateSettings,
+	};
 }
 
 function sortEntities(entities) {

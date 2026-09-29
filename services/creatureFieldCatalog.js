@@ -148,6 +148,7 @@ function add(id, labelKey, options = {}) {
 const catalog = catalogBuilder.build();
 const {
 	definitions: CREATURE_FIELD_DEFINITIONS,
+	getEditableFields: getEditableCreatureFields,
 	getEditableFieldDefinition: getEditableCreatureFieldDefinition,
 	getFieldDefinition: getCreatureFieldDefinition,
 	getSections: getCreatureSections,
@@ -161,6 +162,7 @@ module.exports = {
 	getCreatureFieldDefinition,
 	getCreatureSections,
 	getEditableCreatureFieldDefinition,
+	getEditableCreatureFields,
 	getViewableCreatureFieldDefinition,
 	getViewableCreatureFields,
 };

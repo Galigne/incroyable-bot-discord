@@ -40,8 +40,8 @@ class CharacterHistoryLoadError extends Error {
 
 const store = createConcreteEntityStore({
 	createEditorError: characterEditorError,
-	createEntityInstance: (characterKey, access) => (
-		new Character(characterKey, access)
+	createEntityInstance: (characterKey, settings) => (
+		new Character(characterKey, settings)
 	),
 	createHistoryLoadError: (characterKey, cause) => (
 		new CharacterHistoryLoadError(characterKey, cause)
@@ -95,7 +95,7 @@ function characterEditorError() {
 
 function characterOwnerError() {
 	const error = new Error(
-		'Only a character owner, a DM, or the server owner can delete it.',
+		'Only a character owner, a DM, or the server owner has full authority.',
 	);
 	error.code = 'NOT_CHARACTER_OWNER';
 	return error;
@@ -111,4 +111,5 @@ module.exports = {
 	listUndoableCharacters: store.listUndoable,
 	undoCharacter: store.undo,
 	updateCharacter: store.update,
+	updateCharacterSettings: store.updateSettings,
 };

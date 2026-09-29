@@ -64,7 +64,6 @@ module.exports = function createAuthorizationChecks(context) {
 		}
 
 		const unrestrictedCommands = [
-			commands.get('access'),
 			commands.get('gen'),
 			commands.get('help'),
 			commands.get('get'),
@@ -95,13 +94,22 @@ module.exports = function createAuthorizationChecks(context) {
 		}
 
 		const ownedEntity = {
-			access: [{ userId: regular.user.id, level: 'owner' }],
+			settings: {
+				visibility: 'public',
+				access: [{ userId: regular.user.id, level: 'owner' }],
+			},
 		};
 		const partialEntity = {
-			access: [{ userId: regular.user.id, level: 'partial' }],
+			settings: {
+				visibility: 'public',
+				access: [{ userId: regular.user.id, level: 'partial' }],
+			},
 		};
 		const otherEntity = {
-			access: [{ userId: 'someone-else', level: 'owner' }],
+			settings: {
+				visibility: 'public',
+				access: [{ userId: 'someone-else', level: 'owner' }],
+			},
 		};
 		if (!canManageEntity(regular, ownedEntity, config)) {
 			errors.push('Explicit owners should manage their entities.');

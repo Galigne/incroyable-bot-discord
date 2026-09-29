@@ -108,15 +108,12 @@ restart-only: changing it requires restarting the bot, and reconnects during
 - `/reload` — reload supported runtime state and reconnect the existing Discord client
 - `/rules`
 - `/gen category:<traversal-path> [count]` — generate from a public root, optionally selecting entries, routes, or fields
-- `/gen-character character-key:<new key> [level] [background]` — generate and save a complete character with no explicit user access; background may select a category or exact archetype relative to `background` (configured DM role or server owner)
-- `/gen-creature creature-key:<new key> [level] [type]` — generate and atomically save a complete creature with no explicit user access; type may select a category or exact archetype relative to `creature` (configured DM role or server owner)
+- `/gen-character character-key:<new key> [level] [background]` — privately generate and save a complete private character with an empty access list; background may select a category or exact archetype relative to `background` (configured DM role or server owner)
+- `/gen-creature creature-key:<new key> [level] [type]` — privately generate and atomically save a complete private creature with an empty access list; type may select a category or exact archetype relative to `creature` (configured DM role or server owner)
 - `/roll [expression:<dice expression>]` — roll `1d20` by default or an expression such as `2d6+3`
-- `/add entity-key:<new key> [type:<character|creature>]` — create a blank entity and grant yourself explicit `owner` access; character is the default
-- `/get entity-key:<key> [field]` — display the summary followed by gear, one type-compatible category, or every category with `field:all`
-- `/access entity-key:<key>` — display every explicit `owner` and `partial` user entry
-- `/access entity-key:<key> user:<Discord user> level:<owner|partial|none>` — grant, change, or remove explicit access (full authority required)
-- `/access entity-key:<key> user-id:<Discord user ID> level:<owner|partial|none>` — modify a stale entry that cannot be selected through Discord (full authority required)
-- `/set entity-key:<key> field:<field>` — set one grouped field in a prefilled form
+- `/add entity-key:<new key> [type:<character|creature>]` — create a public blank entity and grant yourself explicit `owner` access; character is the default
+- `/get entity-key:<key> [field]` — display an authorized entity's summary followed by gear, one type-compatible category, or every viewable category with `field:all`
+- `/set entity-key:<key> field:<field>` — set one grouped field in a prefilled form; full-authority users may use `field:settings` to replace the key, visibility, and access list
 - `/heal entity-key:<key> resource:<hp|armor|both> percentage:<0-100>` — restore one or both resources
 - `/damage entity-key:<key> damage-amount:<number> [piercing]` — apply damage to AR, then HP
 - `/end-turn entity-key:<key>` — restore AP and MD to their maximum values
@@ -124,14 +121,16 @@ restart-only: changing it requires restarting the bot, and reconnects during
 - `/undo entity-key:<key>` — consume and restore the newest retained pre-change state
 
 Discord provides native validation and choices for constrained options.
-Autocomplete suggests commands the current user may access, existing EntityKeys,
-controllable entities for management commands, type-compatible fields, contextual
+Autocomplete suggests commands the current user may access, visible EntityKeys,
+controllable entities for management commands, authorized type-compatible fields, contextual
 generator traversal paths, localized creature types, common dice expressions,
 levels, and common purge amounts. `/delete` suggestions require full authority,
 while `/undo` autocomplete includes explicitly authorized active entities with usable
 history. The private form opens immediately after `/set` is submitted; a
-successful submission then posts the confirmation and the updated selected field
-detail publicly. Invalid, expired, and unauthorized submissions remain private.
+successful ordinary-field submission then posts the confirmation and updated field
+detail publicly for a public entity and privately for a private entity. Settings
+confirmations, invalid submissions, expired sessions, and unauthorized submissions
+remain private.
 In `/gen` results, direct inline generator references are shown in inline code;
 references resolved inside them use square brackets at every recursive level.
 The traversal syntax uses localized generator and entry aliases. Aliases are
@@ -194,6 +193,14 @@ AR, AP, and MD. The `status` section contains independent Status Effects and
 Modifiers lists. The special `all` value is offered only by `/get` autocomplete;
 it is not an editable section and is not offered by `/set`.
 
+`settings` is a shared edit-only `/set` field and is never rendered by `/get`,
+including `field:all`. Its private form contains the complete EntityKey, visibility,
+and access list. Visibility is exactly `public` or `private`. Access uses one
+`DiscordUserId:owner` or `DiscordUserId:partial` entry per line; blank content clears
+the list, duplicate IDs are invalid, and removing an entry means omitting its line.
+Only explicit owners, configured DM users, and the actual Discord server owner may
+open or submit this form.
+
 Name uses separate optional first-name and last-name inputs; emptying either input
 clears that component. Race uses separate inputs for its name, physical description,
 lore, skill bonus, and physical ability. Background displays the generated
@@ -248,23 +255,21 @@ multiple groups, parentheses, and other arithmetic are not supported. Exact
 return the textual roll breakdown. Invoking `/roll` without an expression is
 equivalent to `/roll expression:1d20`, including the dedicated `1d20` GIF response.
 
-Each persisted character and creature contains an explicit user-access list. An
-`owner` entry grants full authority; multiple owners are allowed, and the list may
-also contain no owners. A `partial` entry grants normal `/set`, `/damage`, `/heal`,
-`/end-turn`, and `/undo` control, but cannot delete the entity or change access.
-`none` is never persisted: it removes the selected user's explicit entry. Anyone
-may use `/get` or view `/access`, including entries for users who have left the
-server. Each access-list row always includes the persisted Discord user ID and uses
-cached display information when available without requiring a Discord fetch. A
-full-authority user can copy a stale ID into `user-id`; access changes require
-`level` and exactly one of `user` or `user-id`. Explicit owners may grant, change,
-or remove any user's access, including their own, without transferring or removing
-other owners.
+Each persisted character and creature contains exactly one `settings` object with
+`visibility` and `access`. An `owner` entry grants full authority; multiple owners
+and no owners are both valid. A `partial` entry grants ordinary `/set`, `/damage`,
+`/heal`, `/end-turn`, and `/undo` control, but cannot delete or edit Settings.
+Public entities may be viewed by anyone with normal bot access. Private entities may
+be viewed only by an explicit owner or partial user, a configured DM user, or the
+actual Discord server owner. Unauthorized private entities are omitted from
+autocomplete and behave exactly like missing keys on direct lookup, so their key,
+type, and fields are not disclosed. Authorized `/get` and management replies for a
+private entity are ephemeral so channel viewers cannot read its data.
 
 Anyone may use `/gen`. When configured, the DM role has implicit full authority over
 every entity and may use `/gen-character` and `/gen-creature`; without that role,
 those additional DM permissions are server-owner-only. DM and server-owner authority
-is not persisted in entity access lists. When configured, the
+is not persisted in entity Settings. When configured, the
 moderator role lets its members use `/say`, `/purge`, and `/reload`; without it,
 those moderation commands are server-owner-only. The actual Discord server owner,
 identified by Discord rather than configuration, may use every command and manage
@@ -279,9 +284,10 @@ every successful and failed stage. Invalid configuration or localization
 replacements do not replace the previous valid state. Source-code changes—including startup,
 event-routing, mechanics, model, metadata, and handler changes—still require
 manually restarting `node index.js`.
-The identifier supplied to `/add`, `/gen-character`, or `/gen-creature` remains the stable
-command/save key and cannot be edited. Character sheets store `firstName` and
-`lastName` separately for display.
+The identifier supplied to `/add`, `/gen-character`, or `/gen-creature` is the
+initial command/save key. A full-authority Settings edit can rename it to another
+globally unused EntityKey. Character sheets store `firstName` and `lastName`
+separately for display.
 Keys may contain internal periods, hyphens, and underscores, such as `D.Robert`.
 
 ## Entity history and undo
@@ -296,19 +302,23 @@ complete pre-change save into its type-specific history. Character saves use
 storage root and the same `characters/` and `creatures/` structure is created
 beneath it. History documents contain an oldest-to-newest
 `entries` stack; each entry records its ISO timestamp, actor Discord ID, action,
-and complete schema-versioned entity snapshot. Because history is stored in
+and complete entity snapshot. Because history is stored in
 subdirectories, it never appears in normal entity listings or autocomplete.
 
 Each push keeps the newest configured number of entries and discards older excess
 entries. A lower limit is applied the next time that entity's history changes.
 `/undo` validates and consumes the newest entry, then restores it atomically as the
-same concrete entity type while preserving the active entity's current access list.
+same concrete entity type while preserving the active entity's current key and
+complete Settings.
 Repeated calls continue backward until the bounded stack is empty. Undo does not
 push the displaced state, so it cannot toggle between two states, and redo is not
-supported. Access changes are atomic but do not create gameplay-history entries.
+supported. Settings changes are atomic but do not create gameplay-history entries.
 
-Entity and history writes share the existing per-EntityKey queue. Both
-resulting JSON states are serialized before the first file operation. If the second
+Entity and history writes share the existing per-EntityKey queue. Renames lock the
+old and new keys together, reject active or history collisions across both concrete
+types, move the active save and history document, and rewrite every retained
+snapshot key. Both resulting JSON states are serialized before the first file
+operation. If the second
 file operation fails, the first is rolled back; an unrecoverable rollback failure
 is logged server-side while Discord receives only a localized, filesystem-neutral
 error. Rejected, unauthorized, invalid, and failed mutations do not intentionally
@@ -329,8 +339,7 @@ Example workflows:
 /set entity-key:D.Robert field:statistics
 /get entity-key:Ash.Wolf field:traits
 /get entity-key:D.Robert field:all
-/access entity-key:Ash.Wolf user:@Player level:partial
-/access entity-key:Ash.Wolf user-id:123456789012345678 level:none
+/set entity-key:Ash.Wolf field:settings
 /damage entity-key:Ash.Wolf damage-amount:25 piercing:false
 /heal entity-key:Ash.Wolf resource:both percentage:50
 /end-turn entity-key:Ash.Wolf

@@ -113,10 +113,13 @@ test('explicit entity access and implicit privileged authority are distinct', ()
 	const partial = createInteraction('partial');
 	const serverOwner = createInteraction('owner', [], 'owner');
 	const entity = {
-		access: [
-			{ userId: 'explicit-owner', level: 'owner' },
-			{ userId: 'partial', level: 'partial' },
-		],
+		settings: {
+			visibility: 'public',
+			access: [
+				{ userId: 'explicit-owner', level: 'owner' },
+				{ userId: 'partial', level: 'partial' },
+			],
+		},
 	};
 
 	assert.equal(canManageEntity(explicitOwner, entity, config), true);

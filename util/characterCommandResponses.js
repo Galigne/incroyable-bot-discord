@@ -1,3 +1,4 @@
+const { MessageFlags } = require('discord.js');
 const { createCharacterSummaryEmbed } = require('./characterRenderer');
 const {
 	createEntityGearResponse,
@@ -12,6 +13,7 @@ function createGeneratedCharacterResponse(character, locale = 'en') {
 			name: character.displayName,
 		}),
 		embeds: [createCharacterSummaryEmbed(character, locale)],
+		flags: MessageFlags.Ephemeral,
 	};
 }
 
@@ -19,7 +21,10 @@ function createGeneratedCharacterFollowUpResponses(character, locale = 'en') {
 	return [
 		createEntityGetResponse(character, 'personality', locale),
 		createEntityGearResponse(character, locale),
-	].filter(Boolean);
+	].filter(Boolean).map(response => ({
+		...response,
+		flags: MessageFlags.Ephemeral,
+	}));
 }
 
 module.exports = {

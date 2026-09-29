@@ -1,6 +1,6 @@
 const {
-	getAllEntitySections,
-	getEntitySections,
+	getEditableEntityFields,
+	getViewableEntityFields,
 } = require('../../services/entityFieldCatalog');
 const {
 	getEntity,
@@ -34,38 +34,38 @@ async function getEntitySectionChoices(
 	focusedValue,
 	locale,
 	entityKey,
-	{ includeAll = false } = {},
+	{
+		canManage = () => true,
+		hasFullAuthority = () => false,
+		includeAll = false,
+		mode = 'set',
+	} = {},
 ) {
-	let choices;
 	try {
 		const entity = entityKey ? await getEntity(entityKey) : null;
-		choices = entity
-			? createSectionChoices(entity.type, getEntitySections(entity.type), locale)
-			: createAllSectionChoices(locale);
+		if (!entity || !canManage(entity)) {
+			return [];
+		}
+		const fields = mode === 'get'
+			? getViewableEntityFields(entity.type)
+			: getEditableEntityFields(entity.type).filter(field => (
+				field.id !== 'settings' || hasFullAuthority(entity)
+			));
+		const choices = createSectionChoices(entity.type, fields, locale);
+		if (includeAll) {
+			choices.unshift({
+				name: `${t(locale, 'rpg.get.allField')} (all)`,
+				value: 'all',
+			});
+		}
+		return filterAutocompleteChoices(choices, focusedValue);
 	}
 	catch (error) {
 		if (!['ENOENT', 'INVALID_ENTITY_KEY'].includes(error.code)) {
 			throw error;
 		}
-		choices = createAllSectionChoices(locale);
+		return [];
 	}
-	if (includeAll) {
-		choices.unshift({
-			name: `${t(locale, 'rpg.get.allField')} (all)`,
-			value: 'all',
-		});
-	}
-	return filterAutocompleteChoices(choices, focusedValue);
-}
-
-function createAllSectionChoices(locale) {
-	const catalogs = getAllEntitySections();
-	return [
-		...createSectionChoices('character', catalogs.character, locale),
-		...createSectionChoices('creature', catalogs.creature, locale),
-	].filter((choice, index, all) => (
-		all.findIndex(candidate => candidate.value === choice.value) === index
-	));
 }
 
 function createSectionChoices(type, sections, locale) {
@@ -73,7 +73,7 @@ function createSectionChoices(type, sections, locale) {
 		const sectionLabel = getEntityFieldLabel(locale, type, section.id);
 		return {
 			name: `${sectionLabel} (${section.sectionId})`,
-			value: section.sectionId,
+			value: section.sectionId ?? section.editId ?? section.viewId,
 		};
 	});
 }

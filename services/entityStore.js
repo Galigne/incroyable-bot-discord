@@ -17,6 +17,7 @@ const storesByType = Object.freeze({
 		listUndoable: characterStore.listUndoableCharacters,
 		undo: characterStore.undoCharacter,
 		update: characterStore.updateCharacter,
+		updateSettings: characterStore.updateCharacterSettings,
 	},
 	creature: {
 		create: creatureStore.createCreature,
@@ -26,12 +27,13 @@ const storesByType = Object.freeze({
 		listUndoable: creatureStore.listUndoableCreatures,
 		undo: creatureStore.undoCreature,
 		update: creatureStore.updateCreature,
+		updateSettings: creatureStore.updateCreatureSettings,
 	},
 });
 
-async function createEntity(entityKey, type = 'character', access = [], initialize) {
+async function createEntity(entityKey, type = 'character', settings, initialize) {
 	validateEntityKey(entityKey);
-	return getTypeStore(type).create(entityKey, access, initialize);
+	return getTypeStore(type).create(entityKey, settings, initialize);
 }
 
 async function deleteEntity(entityKey, canManage) {
@@ -47,6 +49,23 @@ async function getEntity(entityKey) {
 async function updateEntity(entityKey, canManage, update, historyContext) {
 	const type = await getEntityType(entityKey);
 	return getTypeStore(type).update(entityKey, canManage, update, historyContext);
+}
+
+async function updateEntitySettings(
+	entityKey,
+	nextEntityKey,
+	settings,
+	canManage,
+	validateCurrent,
+) {
+	const type = await getEntityType(entityKey);
+	return getTypeStore(type).updateSettings(
+		entityKey,
+		nextEntityKey,
+		settings,
+		canManage,
+		validateCurrent,
+	);
 }
 
 async function listEntities(options = {}) {
@@ -135,4 +154,5 @@ module.exports = {
 	listUndoableEntities,
 	undoEntity,
 	updateEntity,
+	updateEntitySettings,
 };

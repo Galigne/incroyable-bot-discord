@@ -204,15 +204,9 @@ function createEntityHistoryStore({
 			return hydrateSnapshot(structuredClone(snapshot), entityKey);
 		}
 		catch (error) {
-			const unsupported = error.code
-				=== `UNSUPPORTED_${entityLabel.toUpperCase()}_SCHEMA_VERSION`;
 			throw createHistoryError(
-				unsupported
-					? `UNSUPPORTED_${entityLabel.toUpperCase()}_HISTORY_SCHEMA`
-					: `INVALID_${entityLabel.toUpperCase()}_HISTORY_SNAPSHOT`,
-				unsupported
-					? `${capitalize(entityLabel)} history uses an unsupported save schema.`
-					: `${capitalize(entityLabel)} history snapshot is invalid.`,
+				`INVALID_${entityLabel.toUpperCase()}_HISTORY_SNAPSHOT`,
+				`${capitalize(entityLabel)} history snapshot is invalid.`,
 				error,
 			);
 		}

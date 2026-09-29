@@ -6,41 +6,20 @@ const {
 	assertRecord,
 	assertStatProfileId,
 	assertTechnicalId,
-	isRecord,
 	validateCombatantLevel,
 	validateCombatantState,
 	validateNonEmptyStringList,
 	validateProvenance,
 } = require('./combatantSaveSchema');
-const { validateEntityAccess } = require('./entityAccess');
-
-const CURRENT_CREATURE_SAVE_SCHEMA_VERSION = 6;
+const { validateEntitySettings } = require('./entitySettings');
 const CREATURE_STAT_IDS = COMBATANT_STAT_IDS;
 
 function validateCreatureSaveSchema(rawSaveData, expectedKey = rawSaveData?.key) {
-	if (!isRecord(rawSaveData) || !Object.hasOwn(rawSaveData, 'schemaVersion')) {
-		throw schemaError(
-			'MISSING_CREATURE_SCHEMA_VERSION',
-			'Creature save is missing schemaVersion.',
-		);
-	}
-	if (!Number.isInteger(rawSaveData.schemaVersion) || rawSaveData.schemaVersion < 0) {
-		throw schemaError(
-			'INVALID_CREATURE_SCHEMA_VERSION',
-			'Creature save schemaVersion must be a non-negative integer.',
-		);
-	}
-	if (rawSaveData.schemaVersion !== CURRENT_CREATURE_SAVE_SCHEMA_VERSION) {
-		throw schemaError(
-			'UNSUPPORTED_CREATURE_SCHEMA_VERSION',
-			`Unsupported creature save schemaVersion ${rawSaveData.schemaVersion}.`,
-		);
-	}
+	assertRecord(rawSaveData, 'creature save', invalidSave);
 	assertExactKeys(rawSaveData, 'creature save', [
-		'schemaVersion',
 		'type',
 		'key',
-		'access',
+		'settings',
 		'level',
 		'name',
 		'description',
@@ -71,7 +50,7 @@ function validateCreatureSaveSchema(rawSaveData, expectedKey = rawSaveData?.key)
 			'Creature save type must be creature.',
 		);
 	}
-	validateEntityAccess(rawSaveData.access, invalidSave);
+	validateEntitySettings(rawSaveData.settings, invalidSave);
 	validateCombatantLevel(rawSaveData.level, invalidSave);
 	assertBoundedString(rawSaveData.name, 'name', 256, invalidSave);
 	assertBoundedString(rawSaveData.description, 'description', 4_000, invalidSave);
@@ -124,6 +103,5 @@ function schemaError(code, message, cause) {
 
 module.exports = {
 	CREATURE_STAT_IDS,
-	CURRENT_CREATURE_SAVE_SCHEMA_VERSION,
 	validateCreatureSaveSchema,
 };

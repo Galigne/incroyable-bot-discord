@@ -153,8 +153,8 @@ module.exports = function createCharacterChecks(context) {
 			resetTurnResources(original);
 			const character = Character.fromSave(JSON.parse(JSON.stringify(original)));
 			if (
-				character.access[0]?.userId !== '0'
-				|| character.access[0]?.level !== 'owner'
+				character.settings.access[0]?.userId !== '0'
+				|| character.settings.access[0]?.level !== 'owner'
 				|| character.key !== 'Test'
 				|| character.name.firstName !== 'Diego'
 				|| character.name.lastName !== 'Robert'

@@ -1,8 +1,9 @@
 const entityStore = require('./entityStore');
 const {
-	createOwnerAccess,
-	setEntityUserAccess,
-} = require('./entityAccess');
+	createOwnedPublicSettings,
+	parseEntitySettingsSubmission,
+	serializeEntitySettings,
+} = require('./entitySettings');
 const { assertEntityType } = require('./entityType');
 const {
 	getEditableEntityFieldValue,
@@ -15,7 +16,7 @@ const {
 } = require('./mechanics/resources');
 
 async function createEntity(entityKey, userId, type = 'character') {
-	return entityStore.createEntity(entityKey, type, createOwnerAccess(userId));
+	return entityStore.createEntity(entityKey, type, createOwnedPublicSettings(userId));
 }
 
 async function deleteEntity(entityKey, canManage, expectedType = null) {
@@ -29,35 +30,14 @@ async function getEntity(entityKey) {
 	return entityStore.getEntity(entityKey);
 }
 
-async function getEntityAccess(entityKey) {
+async function getVisibleEntity(entityKey, canView) {
 	const entity = await entityStore.getEntity(entityKey);
-	return {
-		access: structuredClone(entity.access),
-		entityKey: entity.key,
-		entityType: entity.type,
-	};
-}
-
-async function updateEntityAccess(entityKey, userId, level, hasFullAuthority) {
-	let accessOutcome;
-	const entity = await entityStore.updateEntity(
-		entityKey,
-		currentEntity => {
-			if (!hasFullAuthority(currentEntity)) {
-				throw entityAuthorizationError('ACCESS_OWNER');
-			}
-			return true;
-		},
-		currentEntity => {
-			accessOutcome = setEntityUserAccess(currentEntity, userId, level);
-		},
-	);
-	return {
-		...accessOutcome,
-		access: structuredClone(entity.access),
-		entityKey: entity.key,
-		entityType: entity.type,
-	};
+	if (!canView(entity)) {
+		const error = new Error(`Entity "${entityKey}" does not exist.`);
+		error.code = 'ENOENT';
+		throw error;
+	}
+	return entity;
 }
 
 async function listEntities(options) {
@@ -132,12 +112,46 @@ async function getDeletableEntity(entityKey, canManage) {
 	return entity;
 }
 
-async function getEditableEntityField(entityKey, fieldName, canManage) {
-	const entity = await getEditableEntity(entityKey, canManage);
+async function getEditableEntityField(
+	entityKey,
+	fieldName,
+	canManage,
+	hasFullAuthority = canManage,
+) {
+	const normalizedFieldName = typeof fieldName === 'string'
+		? fieldName.toLowerCase()
+		: fieldName;
+	const entity = normalizedFieldName === 'settings'
+		? await getDeletableEntity(entityKey, hasFullAuthority)
+		: await getEditableEntity(entityKey, canManage);
 	return {
 		entity,
-		value: getEditableEntityFieldValue(entity, fieldName),
+		value: normalizedFieldName === 'settings'
+			? serializeEntitySettings(entity)
+			: getEditableEntityFieldValue(entity, normalizedFieldName),
 	};
+}
+
+async function updateEntitySettings(
+	entityKey,
+	submittedValue,
+	hasFullAuthority,
+	expectedType = null,
+) {
+	const parsed = parseEntitySettingsSubmission(submittedValue);
+	const entity = await entityStore.updateEntitySettings(
+		entityKey,
+		parsed.key,
+		parsed.settings,
+		currentEntity => {
+			if (!hasFullAuthority(currentEntity)) {
+				throw entityAuthorizationError('OWNER');
+			}
+			return true;
+		},
+		currentEntity => assertExpectedType(currentEntity, expectedType),
+	);
+	return { entity, previousKey: entityKey };
 }
 
 async function updateEditableEntity(
@@ -201,11 +215,11 @@ module.exports = {
 	getEditableEntity,
 	getEditableEntityField,
 	getEntity,
-	getEntityAccess,
+	getVisibleEntity,
 	healEntity,
 	listEntities,
 	listUndoableEntities,
 	undoEntity,
-	updateEntityAccess,
 	updateEditableEntity,
+	updateEntitySettings,
 };

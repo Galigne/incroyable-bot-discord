@@ -4,6 +4,7 @@ const fsPromises = require('node:fs/promises');
 const os = require('node:os');
 const path = require('node:path');
 const { after, afterEach, test } = require('node:test');
+const { MessageFlags } = require('discord.js');
 
 const testSaveDirectory = fs.mkdtempSync(
 	path.join(os.tmpdir(), 'incredible-bot-save-schema-'),
@@ -13,9 +14,6 @@ process.env.INCREDIBLE_BOT_SAVE_DIRECTORY = testSaveDirectory;
 const Character = require('../models/Character');
 const { BASE_STATS } = require('../services/mechanics/constants');
 const commandRegistry = require('../commands/registry');
-const {
-	CURRENT_CHARACTER_SAVE_SCHEMA_VERSION,
-} = require('../services/characterSaveSchema');
 const {
 	getEditableFields,
 	getViewableFields,
@@ -54,20 +52,15 @@ after(() => {
 	fs.rmSync(testSaveDirectory, { recursive: true, force: true });
 });
 
-test('newly created characters persist the current schema version', async () => {
+test('newly created characters persist the exact versionless settings shape', async () => {
 	const characterKey = 'Schema.Created';
 	const character = await createCharacter(characterKey, ownerAccess('creator'));
 	const rawSave = await readRawSave(characterKey);
 
-	assert.equal(character.schemaVersion, CURRENT_CHARACTER_SAVE_SCHEMA_VERSION);
-	assert.equal(
-		rawSave.schemaVersion,
-		CURRENT_CHARACTER_SAVE_SCHEMA_VERSION,
-	);
+	assert.equal(Object.hasOwn(character, 'schemaVersion'), false);
 	assert.deepEqual(Object.keys(rawSave), [
-		'schemaVersion',
 		'key',
-		'access',
+		'settings',
 		'name',
 		'level',
 		'race',
@@ -80,13 +73,17 @@ test('newly created characters persist the current schema version', async () => 
 		'talents',
 		'gear',
 	]);
+	assert.deepEqual(rawSave.settings, {
+		visibility: 'public',
+		access: ownerAccess('creator'),
+	});
 	assert.equal(Object.hasOwn(rawSave, 'firstName'), false);
 	assert.deepEqual(rawSave.status, { effects: [], modifiers: [] });
 	assert.deepEqual(Object.keys(rawSave.statistics), BASE_STATS);
 	assert.deepEqual(Object.keys(rawSave.resources), ['hp', 'ar', 'ap', 'md']);
 });
 
-test('current-version saves load successfully', async () => {
+test('versionless saves load successfully', async () => {
 	const characterKey = 'Schema.Current';
 	const save = createValidCharacterSave(characterKey);
 	save.name.firstName = 'Current';
@@ -94,27 +91,23 @@ test('current-version saves load successfully', async () => {
 
 	const character = await getCharacter(characterKey);
 
-	assert.equal(character.schemaVersion, CURRENT_CHARACTER_SAVE_SCHEMA_VERSION);
-	assert.deepEqual(character.access, ownerAccess('creator'));
+	assert.deepEqual(character.settings, {
+		visibility: 'public',
+		access: ownerAccess('creator'),
+	});
 	assert.equal(character.name.firstName, 'Current');
 });
 
-test('unsupported previous schemas are rejected without rewriting', async () => {
-	for (const schemaVersion of [1, 2, 3, 4]) {
-		const characterKey = `Schema.Legacy.${schemaVersion}`;
-		const originalSave = await writeRawSave(characterKey, {
-			schemaVersion,
-			access: ownerAccess('creator'),
-		});
-		await assert.rejects(
-			getCharacter(characterKey),
-			{ code: 'UNSUPPORTED_CHARACTER_SCHEMA_VERSION' },
-		);
-		assert.equal(await readSaveText(characterKey), originalSave);
-	}
+test('schemaVersion is rejected as an unknown save property without rewriting', async () => {
+	const characterKey = 'Schema.Versioned';
+	const save = createValidCharacterSave(characterKey);
+	save.schemaVersion = 5;
+	const originalSave = await writeRawSave(characterKey, save);
+	await assert.rejects(getCharacter(characterKey), { code: 'INVALID_CHARACTER_SAVE' });
+	assert.equal(await readSaveText(characterKey), originalSave);
 });
 
-test('/gen-character consumes current generator fields and persists the current schema', async () => {
+test('/gen-character consumes generator fields and persists private versionless settings', async () => {
 	const characterKey = 'Schema.Generated';
 	const generated = await generateCharacter(characterKey, {
 		formatGold: gold => `${gold} gold`,
@@ -126,8 +119,8 @@ test('/gen-character consumes current generator fields and persists the current 
 	const nameEntry = generatorCatalog.getGenerator('name', 'en').entries[0];
 	const raceEntry = generatorCatalog.getGenerator('race', 'en').entries[0];
 
-	assert.equal(rawSave.schemaVersion, CURRENT_CHARACTER_SAVE_SCHEMA_VERSION);
-	assert.deepEqual(rawSave.access, []);
+	assert.equal(Object.hasOwn(rawSave, 'schemaVersion'), false);
+	assert.deepEqual(rawSave.settings, { visibility: 'private', access: [] });
 	assert.deepEqual(rawSave.name, {
 		firstName: nameEntry.fields.first_name,
 		lastName: nameEntry.fields.last_name,
@@ -184,11 +177,13 @@ test('/gen-character sends personality and populated gear after its unchanged su
 
 	const generated = await getCharacter(characterKey);
 	assert.equal(replies.length, 1);
+	assert.equal(replies[0].flags, MessageFlags.Ephemeral);
 	assert.deepEqual(
 		replies[0].embeds[0].toJSON(),
 		createGeneratedCharacterResponse(generated, 'en').embeds[0].toJSON(),
 	);
 	assert.equal(followUps.length, 2);
+	assert.ok(followUps.every(response => response.flags === MessageFlags.Ephemeral));
 	assert.deepEqual(
 		followUps[0].embeds[0].toJSON(),
 		createEntityGetResponse(generated, 'personality', 'en').embeds[0].toJSON(),
@@ -203,73 +198,14 @@ test('/gen-character sends personality and populated gear after its unchanged su
 	);
 });
 
-test('saves without schemaVersion are rejected without being rewritten', async () => {
-	const characterKey = 'Schema.Missing';
-	const originalSave = await writeRawSave(characterKey, {
-		access: ownerAccess('creator'),
-	});
-
-	await assert.rejects(
-		getCharacter(characterKey),
-		{ code: 'MISSING_CHARACTER_SCHEMA_VERSION' },
-	);
-	assert.equal(await readSaveText(characterKey), originalSave);
-});
-
-test('unsupported schema versions are rejected without being rewritten', async () => {
-	const characterKey = 'Schema.Unsupported';
-	for (const schemaVersion of [
-		0,
-		CURRENT_CHARACTER_SAVE_SCHEMA_VERSION + 1,
-	]) {
-		const originalSave = await writeRawSave(characterKey, {
-			schemaVersion,
-			access: ownerAccess('creator'),
-		});
-
-		await assert.rejects(
-			getCharacter(characterKey),
-			{ code: 'UNSUPPORTED_CHARACTER_SCHEMA_VERSION' },
-		);
-		assert.equal(await readSaveText(characterKey), originalSave);
-	}
-});
-
-test('malformed schemaVersion values are rejected', async () => {
-	const characterKey = 'Schema.Invalid';
-	const invalidVersions = [
-		null,
-		true,
-		'1',
-		-1,
-		1.5,
-		{},
-		[],
-	];
-
-	for (const schemaVersion of invalidVersions) {
-		const originalSave = await writeRawSave(characterKey, {
-			schemaVersion,
-			access: ownerAccess('creator'),
-		});
-		await assert.rejects(
-			getCharacter(characterKey),
-			{ code: 'INVALID_CHARACTER_SCHEMA_VERSION' },
-			`schemaVersion ${JSON.stringify(schemaVersion)}`,
-		);
-		assert.equal(await readSaveText(characterKey), originalSave);
-	}
-});
-
-test('character listing skips and reports saves with invalid versions', async () => {
+test('character listing skips and reports structurally invalid versionless saves', async () => {
 	await writeRawSave(
 		'Schema.Listed.Valid',
 		createValidCharacterSave('Schema.Listed.Valid'),
 	);
-	const invalidSave = await writeRawSave('Schema.Listed.Invalid', {
-		schemaVersion: CURRENT_CHARACTER_SAVE_SCHEMA_VERSION + 1,
-		access: ownerAccess('creator'),
-	});
+	const malformed = createValidCharacterSave('Schema.Listed.Invalid');
+	delete malformed.settings;
+	const invalidSave = await writeRawSave('Schema.Listed.Invalid', malformed);
 	const errors = [];
 
 	const characters = await listCharacters({
@@ -283,17 +219,14 @@ test('character listing skips and reports saves with invalid versions', async ()
 	assert.ok(errors[0] instanceof CharacterLoadError);
 	assert.equal(errors[0].code, 'INVALID_CHARACTER_SAVE');
 	assert.equal(errors[0].characterKey, 'Schema.Listed.Invalid');
-	assert.equal(
-		errors[0].cause.code,
-		'UNSUPPORTED_CHARACTER_SCHEMA_VERSION',
-	);
+	assert.equal(errors[0].cause.code, 'INVALID_CHARACTER_SAVE');
 	assert.equal(
 		await readSaveText('Schema.Listed.Invalid'),
 		invalidSave,
 	);
 });
 
-test('character updates preserve schemaVersion', async () => {
+test('character updates preserve versionless settings', async () => {
 	const characterKey = 'Schema.Updated';
 	await createCharacter(characterKey, ownerAccess('creator'));
 
@@ -306,16 +239,13 @@ test('character updates preserve schemaVersion', async () => {
 	);
 	const rawSave = await readRawSave(characterKey);
 
-	assert.equal(character.schemaVersion, CURRENT_CHARACTER_SAVE_SCHEMA_VERSION);
 	assert.equal(character.name.firstName, 'Updated');
-	assert.equal(
-		rawSave.schemaVersion,
-		CURRENT_CHARACTER_SAVE_SCHEMA_VERSION,
-	);
+	assert.equal(Object.hasOwn(rawSave, 'schemaVersion'), false);
+	assert.deepEqual(rawSave.settings.access, ownerAccess('creator'));
 	assert.equal(rawSave.name.firstName, 'Updated');
 });
 
-test('schemaVersion is excluded from character editing and display surfaces', async () => {
+test('schema metadata is absent from character editing and display surfaces', async () => {
 	const character = await createCharacter('Schema.Hidden', ownerAccess('creator'));
 	const editableFieldIds = getEditableFields().map(field => field.id);
 	const viewableFieldIds = getViewableFields().map(field => field.id);
@@ -348,13 +278,19 @@ test('character saves reject incomplete or malformed persisted combatant state',
 		}],
 		['incomplete gear', save => delete save.gear.encumbrance.current],
 		['persisted none access', save => {
-			save.access = [{ userId: 'creator', level: 'none' }];
+			save.settings.access = [{ userId: 'creator', level: 'none' }];
 		}],
 		['duplicate access user', save => {
-			save.access.push({ userId: 'creator', level: 'partial' });
+			save.settings.access.push({ userId: 'creator', level: 'partial' });
 		}],
 		['malformed access entry', save => {
-			save.access = [{ userId: '', level: 'owner' }];
+			save.settings.access = [{ userId: '', level: 'owner' }];
+		}],
+		['invalid visibility', save => {
+			save.settings.visibility = 'hidden';
+		}],
+		['unknown settings property', save => {
+			save.settings.extra = true;
 		}],
 	];
 

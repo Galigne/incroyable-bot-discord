@@ -14,7 +14,6 @@ const {
 const { authorizeCommand } = require('../util/authorization');
 
 const RPG_COMMAND_NAMES = [
-	'access',
 	'add',
 	'damage',
 	'delete',
@@ -156,7 +155,6 @@ test('registry permission filtering delegates to the existing authorization serv
 			.map(metadata => [metadata.name, metadata.permission]),
 	);
 	assert.deepEqual(rpgPermissions, {
-		access: 'everyone',
 		add: 'everyone',
 		damage: 'everyone',
 		delete: 'everyone',
@@ -174,22 +172,8 @@ test('registry permission filtering delegates to the existing authorization serv
 });
 
 test('registry exposes autocomplete, option, and choice metadata', async () => {
-	const accessUser = commandRegistry.getAutocompleteMetadata('access', 'user', 'rpg');
-	assert.equal(accessUser.type, 'user');
-	const accessUserId = commandRegistry.getAutocompleteMetadata(
-		'access',
-		'user-id',
-		'rpg',
-	);
-	assert.equal(accessUserId.type, 'string');
-	assert.equal(accessUserId.minLength, 17);
-	assert.equal(accessUserId.maxLength, 20);
-	assert.deepEqual(
-		commandRegistry.getCommand('access').options
-			.find(option => option.name === 'level')
-			.choices.map(choice => choice.value),
-		['owner', 'partial', 'none'],
-	);
+	assert.equal(commandRegistry.getCommand('access'), null);
+	assert.equal(commandRegistry.getAutocompleteMetadata('access', 'user'), null);
 
 	const roll = commandRegistry.getAutocompleteMetadata('roll', 'expression', 'rpg');
 	assert.equal(roll.type, 'string');

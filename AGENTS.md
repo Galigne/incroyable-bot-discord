@@ -86,10 +86,11 @@ write real saves.
 - `services/entityStore.js`: resolves a globally unique EntityKey to its concrete
   persistent type and delegates to the matching store.
 - `services/entityOperationQueue.js`: shared per-EntityKey synchronization for
-  cross-type creation, mutation, undo, and deletion.
-- `services/entityAccess.js`: shared persisted `owner`/`partial` user-access
-  validation, lookup, and idempotent mutation for both concrete entity types;
-  `none` is an operation that removes an entry and is never persisted.
+  cross-type creation, mutation, undo, deletion, and ordered two-key rename locks.
+- `services/entitySettings.js`: shared exact Settings validation, serialization,
+  and complete modal parsing for visibility, EntityKey, and access replacement.
+- `services/entityAccess.js`: shared persisted `owner`/`partial` access validation
+  and lookup through each concrete entity's Settings.
 - `services/atomicJsonFile.js`: JSON serialization and same-directory atomic file
   publication used by all entity persistence.
 - `services/entityStoragePaths.js`: the sole active-save and `.history` path
@@ -99,12 +100,13 @@ write real saves.
 - `services/entityHistoryStore.js`: consolidated bounded-history validation,
   rotation, restoration, and prepared-write workflow used by both history stores.
 - `services/entityPersistenceTransaction.js`: shared ordered two-file commit,
-  permanent-deletion, and rollback coordination for active saves and history.
+  permanent deletion, atomic rename, and rollback coordination for active saves
+  and history.
 - `services/combatantSaveSchema.js`: shared strict validators for persisted
   statistics, resources, status, RULEs, gear, encumbrance, and other common
   combatant state consumed by both concrete save schemas.
-- `services/characterSaveSchema.js`: owns the current character-save schema version
-  and validates raw save metadata before model hydration.
+- `services/characterSaveSchema.js`: validates exact raw character saves before
+  model hydration, without entity-save version gating.
 - `services/creatureSaveSchema.js`: owns the strict creature-save schema and
   validates complete final state before model hydration or publication.
 - `services/characterStore.js`, `services/creatureStore.js`, and their matching
@@ -118,8 +120,7 @@ write real saves.
   aliases, storage paths, types, section order, and editable/viewable capabilities.
 - `services/creatureFieldCatalog.js`: independent creature field identities,
   aliases, storage paths, types, explicit section order, and editable/viewable
-  capabilities; source IDs, provenance, type, key, and schema metadata are not
-  editable.
+  capabilities; source IDs, provenance, and type are not editable.
 - `services/entityFieldEditor.js`: shared grouped parser/serializer foundation used
   by the type-specific character and creature editor adapters.
 - `services/characterEditor.js`: grouped editable-value parsing, complete
@@ -306,14 +307,22 @@ and mechanics directly. Models own state and hydration only. They must not impor
 Discord or localization code; entity embeds belong in the renderer adapters under
 `util/`.
 
-Character and creature creation, access changes, updates, undo, and deletion must remain inside the
-shared per-EntityKey critical section exposed by `services/entityOperationQueue.js`.
+Character and creature creation, Settings changes, updates, undo, and deletion must
+remain inside the shared per-EntityKey critical section exposed by
+`services/entityOperationQueue.js`.
 The same key lock protects cross-type creation so a character and creature cannot be
 created concurrently with the same key. Update locks cover the latest load,
 authorization, mutation, validation, serialization, and atomic replacement. Save
 replacements must be written and closed in a uniquely named same-directory temporary
 file before publication; exclusive creation must never replace an existing entity.
 Always release and discard unused keyed queues after success or failure.
+
+EntityKey renames must acquire the old-key and new-key queues in stable order and
+keep both until the complete operation finishes. Reject a target when an active save
+or history document of either concrete type already uses it. Move the active save
+and history together, rewrite every retained snapshot to the new key, and roll back
+all published files if any later operation fails. A Settings edit that does not
+rename the key still uses the normal single-key atomic replacement.
 
 History-backed mutations, undo, and permanent deletion must keep both the active
 entity and its type-specific history document inside that same critical section.
@@ -402,10 +411,10 @@ Do not use the deprecated `ephemeral: true` option. The test suite rejects it.
 
 The current viewing and editing decisions are intentional:
 
-- `/add entity-key:<new key> [type:<character|creature>]` creates a blank entity and
-  grants the invoking user explicit `owner` access; omitted `type` means
-  `character`. EntityKey and type are immutable.
-- `/get entity-key:<key>` posts the public character or creature summary followed
+- `/add entity-key:<new key> [type:<character|creature>]` creates a public blank
+  entity and grants the invoking user explicit `owner` access; omitted `type` means
+  `character`. Type is immutable; EntityKey may be renamed only through Settings.
+- `/get entity-key:<key>` posts an authorized character or creature summary followed
   by the type-compatible `gear` view, even when equipment and inventory are empty.
 - `/get entity-key:<key> field:<field>` posts one complete type-compatible field.
 - `/get entity-key:<key> field:all` omits the summary and posts every viewable field
@@ -413,26 +422,32 @@ The current viewing and editing decisions are intentional:
   empty-state views. `all` is a `/get`-only special value, not a catalog field or an
   editable section.
 - `/help command:get` explains the supported views.
-- `/access entity-key:<key>` publicly lists every explicit persisted user-access
-  entry, including users no longer present in the server.
-- `/access entity-key:<key> user:<Discord user> level:<owner|partial|none>` lets a
-  full-authority user add or change an `owner` or `partial` entry, or remove it with
-  `none`. Changes are idempotent, do not transfer ownership, and may leave no
-  explicit owners.
-- `/access entity-key:<key> user-id:<Discord user ID> level:<owner|partial|none>`
-  provides the same mutation workflow for a persisted
-  user who can no longer be selected through Discord. A mutation must provide
-  `level` and exactly one of `user` or `user-id`; incomplete or ambiguous forms are
-  invalid.
+- Public entities are visible to anyone with normal bot access. Private entities are
+  visible only to explicit `owner` or `partial` users, configured DM users, and the
+  actual Discord server owner. Unauthorized private keys must be absent from
+  autocomplete and behave exactly like missing entities during direct lookup.
+  Successful reads and management responses containing private entity data must be
+  ephemeral; public entity response behavior remains unchanged.
+- There is intentionally no `/access` command. Access is edited only as part of the
+  complete Settings replacement workflow.
 - There is intentionally no `/get-all` command.
 - `/set entity-key:<key> field:<field>` has no value argument. Submitting
   the command immediately opens one private modal prefilled with the saved value
   or complete grouped section.
+- `settings` is a shared edit-only `/set` field. It is never viewable through
+  `/get`, including `field:all`, and is offered only to full-authority users.
+  Its private modal has exactly Key, Visibility, and Access inputs. Visibility is
+  `public` or `private`; Access replaces the complete list with one
+  `DiscordUserId:owner|partial` entry per line, rejects duplicate IDs, and treats an
+  empty input as an empty list. Omitting a line removes that entry.
 - Character fields are `name`, `level`, `status`, `statistics`, `rules`, `talents`,
   `gear`, `race`, `background`, `personality`, and `modifiers`, in that exact order.
 - Creature fields use the independent exact order `identity`, `level`, `status`,
   `statistics`, `rules`, `traits`, `modifiers`, and `gear`.
-- Autocomplete must return only fields compatible with a resolved EntityKey.
+- Autocomplete must return only fields compatible with a resolved and visible
+  EntityKey, and must not disclose the type or fields of an unauthorized private
+  entity. `settings` requires full authority in autocomplete as well as at modal
+  opening and submission.
 - `/help command:set` explains every grouped modal, named statistics line, and
   multiline format.
 - `/delete entity-key:<key>` requires full authority and opens a private,
@@ -463,11 +478,12 @@ statistic.
 Accept them in any order, but require every name exactly once and reject unknown or
 duplicate names.
 Parse and validate a complete grouped submission before applying any value.
-One successful modal submission performs one concrete entity-store update, creates
-one `set` history entry, and returns one localized response. Invalid or unauthorized
-submissions must not mutate the entity or history. Authorization and session-bound
-type validation must be repeated inside the existing per-key update queue when the
-modal is submitted.
+One successful ordinary-field modal submission performs one concrete entity-store
+update, creates one `set` history entry, and returns one localized response. A
+Settings submission updates the active save atomically, returns privately, and does
+not create gameplay history. Invalid or unauthorized submissions must not mutate
+the entity or history. Authorization and session-bound type validation must be
+repeated inside the applicable key queue when the modal is submitted.
 
 Textual collections have no per-entry `add`, `set`, `remove`, or `clear` action
 syntax. The `/set` modal presents their full multiline content and replaces it
@@ -497,44 +513,42 @@ UX, not removal of the internal schema.
 Persistent concrete types are exactly `character` and `creature`. The public
 creature router's current animal, companion, and monster entries are generator
 types, never additional persistence types; the router may define more. EntityKeys
-are globally unique across both types. Character schema v5 uses the
-shared `access` collection instead of `creatorId`; the shared
-`modifiers` list is appended and defaults to empty when
-absent, and character saves do not require a discriminator. Creature schema v6
-also uses `access`, requires `type: "creature"`, and hydrates stored final state
-without rerunning random generation, localization, references, modifiers, or
-formulas. No older `creatorId` save compatibility or migration exists.
+are globally unique across both types. Both exact save formats contain
+`settings: { visibility, access }` and have no entity `schemaVersion` property.
+Character saves do not require a discriminator. Creature saves require
+`type: "creature"` and hydrate stored final state without rerunning random
+generation, localization, references, modifiers, or formulas. Do not add legacy
+save compatibility or migration unless the user explicitly requests it.
 
-Shared management commands are `/add`, `/get`, `/access`, `/set`, `/damage`,
+Shared management commands are `/add`, `/get`, `/set`, `/damage`,
 `/heal`, `/end-turn`, `/delete`, and `/undo`, all using `entity-key`. `/gen-character`
 remains character-only and keeps `character-key`. `/gen-creature` creates the persistent
 `creature` type from an optional stable type entry in the public `creature` catalog;
 when omitted, the router selects a type randomly, and its referenced detail
 generator supplies the creature state. It keeps `creature-key`.
 
-Anyone may view either type or its access list. Explicit `owner` and `partial`
-users may perform normal mutation and gameplay operations. Only explicit owners,
-configured DM users, and the actual Discord server owner may delete or change
-access. Creature encumbrance is an independent manual `{ current, max }` resource
+Anyone may view public entities. Explicit `owner` and `partial` users may view
+private entities and perform normal mutation and gameplay operations. Only explicit
+owners, configured DM users, and the actual Discord server owner may delete or edit
+Settings. Creature encumbrance is an independent manual `{ current, max }` resource
 that defaults to `0 / 0` and is never derived.
 
 ## Entity keys, character rules, and permissions
 
-An EntityKey is the immutable save identifier and filename stem for either concrete
-type. It is distinct from character `firstName` and `lastName`. Keys:
+An EntityKey is the save identifier and filename stem for either concrete type. It
+is distinct from character `firstName` and `lastName`. Keys:
 
 - must start and end with a letter or number;
 - may contain letters, numbers, periods, hyphens, and underscores;
-- are unique and cannot be renamed through edit commands.
+- are globally unique and may be renamed only through a full-authority Settings
+  edit.
 
 Character JSON is loaded through `Character.fromSave`; keep the model, editor,
-generator, renderer, and tests aligned when changing the schema. The current
-character-save schema version is owned by `services/characterSaveSchema.js`.
-Every raw save must contain `schemaVersion` as a non-negative integer equal to the
-current version, and `characterStore.js` must validate it before model hydration.
-Missing, malformed, and unsupported versions are rejected with distinct stable
-error codes. Invalid and outdated saves must not be migrated, rewritten, or loaded
-through a legacy fallback. Character listing skips them and reports their
+generator, renderer, and tests aligned when changing the schema. Both concrete save
+schemas validate exact properties before model hydration and reject unknown or
+malformed data. Entity saves and history envelopes have no schema-version constants
+or version gates; generator and statistical-profile schema versions are unrelated
+and remain intact. Character listing skips invalid saves and reports their
 CharacterKeys through `CharacterLoadError`.
 Existing character saves and save-format backward compatibility are out of scope
 by default. Do not inspect, migrate, repair, rewrite, or adapt implementation work
@@ -542,25 +556,22 @@ for existing save files, and do not add compatibility paths for older save forma
 unless the user explicitly requests that work. This does not authorize modifying
 or deleting real files under `save/`; preserve them and keep tests isolated.
 `background.archetype` and `background.physicalDescription` are generated text
-properties displayed directly below level and race in the public summary.
+properties displayed directly below level and race in the entity summary.
 `background.physicalDescription`, `background.backstory`, and `background.goals`
 remain editable as one atomic group; `background.archetype` remains read-only.
 
 Permissions:
 
-- Anyone with normal bot access can use `/gen` and view entity sheets and explicit
-  access lists.
-- Access-list rendering must use cached member or user display information when
-  available, must never fetch or require Discord resolution for every entry, and
-  must always show the persisted user ID with a mention-compatible fallback so a
-  stale entry can be copied into `/access user-id:`.
+- Anyone with normal bot access can use `/gen` and view public entity sheets.
+- Private entity discovery and direct lookup require explicit entity access or
+  implicit DM/server-owner authority and must otherwise use missing-entity behavior.
 - Every explicit access entry contains exactly `userId` plus level `owner` or
   `partial`; duplicate user IDs and persisted `none` entries are invalid.
-- Explicit `owner` users may set, heal, damage, end turns, undo, delete, and grant,
-  change, or remove any user's access, including their own. Multiple owners and no
-  owners are both valid states.
+- Explicit `owner` users may set, heal, damage, end turns, undo, delete, and replace
+  the complete Settings, including their own access. Multiple owners and no owners
+  are both valid states.
 - Explicit `partial` users may set, heal, damage, end turns, and undo, but may not
-  delete or change access.
+  delete or edit Settings.
 - When configured, the DM role may perform those actions on every entity and may
   use `/gen-character` and `/gen-creature`; otherwise those additional permissions
   are server-owner-only.
@@ -568,9 +579,10 @@ Permissions:
   otherwise those commands are server-owner-only.
 - The actual Discord server owner from `guild.ownerId` bypasses every role check
   and may use every command and manage every entity.
-- DM and server-owner authority is implicit and must never be added to a persisted
-  access list merely because the user invoked `/gen-character` or `/gen-creature`;
-  generated entities start with an empty explicit access list.
+- DM and server-owner authority is implicit and must never be added to persisted
+  Settings merely because the user invoked `/gen-character` or `/gen-creature`;
+  generated entities start private with an empty explicit access list, and every
+  generation response and follow-up is ephemeral.
 
 `/reload` replies ephemerally before lifecycle work, then validates and replaces
 configuration and localization data, clears generator caches, rebuilds and replaces
@@ -624,20 +636,22 @@ contains an oldest-to-newest `entries` stack. Normal entity listing and autocomp
 must not traverse `.history`; only the `/undo` provider may suggest history-backed
 keys.
 
-Successful `/set` modal submissions, `/damage`, `/heal`, and `/end-turn`
-push the complete schema-versioned pre-change state. Retain the newest
+Successful ordinary-field `/set` modal submissions, `/damage`, `/heal`, and
+`/end-turn` push the complete pre-change state. Retain the newest
 `characterHistory.maxEntries` entries and remove the oldest excess entries. Apply a
 reduced limit the next time that entity’s history is pushed or popped.
 
 `/undo entity-key:<key>` pops and validates the newest snapshot, restores it as the
-same concrete type while preserving the active entity's current access collection,
+same concrete type while preserving the active entity's current key and complete
+Settings,
 and never pushes the displaced state. Repeated undo therefore
 walks backward and cannot alternate indefinitely; redo and history browsing are
-intentionally unsupported. This prevents a partial user from changing access
+intentionally unsupported. This prevents a partial user from changing Settings
 indirectly through gameplay history. Authorize active entities from their current
 save. Explicit owner and partial users, configured DM users, and the actual Discord
 server owner may undo. Autocomplete follows those same rules and combines valid
-active EntityKeys with usable history. Access changes do not push gameplay history.
+active EntityKeys with usable history. Settings changes do not push gameplay
+history.
 
 `/delete entity-key:<key>` validates existence and authorization before opening
 a private, user-bound, key-bound, expiring confirmation modal. Submission consumes

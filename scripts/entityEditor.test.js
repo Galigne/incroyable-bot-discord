@@ -1159,7 +1159,7 @@ test('modal routing publishes canonical post-update details and repeats authoriz
 		},
 	}, config, authorizationKey, 'name');
 	await updateCharacter(authorizationKey, () => true, character => {
-		character.access = [{ userId: 'new-owner', level: 'owner' }];
+		character.settings.access = [{ userId: 'new-owner', level: 'owner' }];
 	});
 	let deniedResponse;
 	await handleEntityInteraction({
@@ -1179,6 +1179,107 @@ test('modal routing publishes canonical post-update details and repeats authoriz
 	assert.equal(deniedResponse.content, english.errors.entityEditor);
 	assert.equal(deniedResponse.embeds, undefined);
 	await assert.rejects(fsPromises.access(getCharacterHistoryPath(authorizationKey)));
+});
+
+test('Settings modal requires full authority at opening and submission', async () => {
+	const config = createConfig();
+	const entityKey = 'Editor.Settings.Authority';
+	const renamedKey = 'Editor.Settings.Renamed';
+	const firstOwnerId = '12345678901234567';
+	const secondOwnerId = '22345678901234567';
+	await createEntity(entityKey, firstOwnerId, 'character');
+
+	let staleModal;
+	await openEntityEditor({
+		...createInteraction(firstOwnerId),
+		showModal: async value => {
+			staleModal = value.toJSON();
+		},
+	}, config, entityKey, 'settings');
+	assert.deepEqual(
+		staleModal.components.map(component => component.component.custom_id),
+		[
+			getEntityEditInputId('settings.key'),
+			getEntityEditInputId('settings.visibility'),
+			getEntityEditInputId('settings.access'),
+		],
+	);
+
+	await updateCharacter(entityKey, () => true, character => {
+		character.settings.access = [
+			{ userId: firstOwnerId, level: 'partial' },
+			{ userId: secondOwnerId, level: 'owner' },
+		];
+	});
+	let deniedSubmission;
+	await handleEntityInteraction({
+		...createInteraction(firstOwnerId),
+		customId: staleModal.custom_id,
+		fields: {
+			getTextInputValue: customId => ({
+				[getEntityEditInputId('settings.key')]: entityKey,
+				[getEntityEditInputId('settings.visibility')]: 'private',
+				[getEntityEditInputId('settings.access')]: `${firstOwnerId}:owner`,
+			})[customId],
+		},
+		isModalSubmit: () => true,
+		reply: async value => {
+			deniedSubmission = value;
+		},
+	}, config);
+	assert.equal(deniedSubmission.content, english.errors.entityFullAuthority);
+	assert.ok(deniedSubmission.flags);
+	assert.equal((await getEntity(entityKey)).settings.visibility, 'public');
+
+	let deniedOpening;
+	let deniedModalOpened = false;
+	await openEntityEditor({
+		...createInteraction(firstOwnerId),
+		reply: async value => {
+			deniedOpening = value;
+		},
+		showModal: async () => {
+			deniedModalOpened = true;
+		},
+	}, config, entityKey, 'settings');
+	assert.equal(deniedModalOpened, false);
+	assert.equal(deniedOpening.content, english.errors.entityFullAuthority);
+
+	let authorizedModal;
+	await openEntityEditor({
+		...createInteraction(secondOwnerId),
+		showModal: async value => {
+			authorizedModal = value.toJSON();
+		},
+	}, config, entityKey, 'settings');
+	let successResponse;
+	await handleEntityInteraction({
+		...createInteraction(secondOwnerId),
+		customId: authorizedModal.custom_id,
+		fields: {
+			getTextInputValue: customId => ({
+				[getEntityEditInputId('settings.key')]: renamedKey,
+				[getEntityEditInputId('settings.visibility')]: 'private',
+				[getEntityEditInputId('settings.access')]: `${secondOwnerId}:owner\n${firstOwnerId}:partial`,
+			})[customId],
+		},
+		isModalSubmit: () => true,
+		reply: async value => {
+			successResponse = value;
+		},
+	}, config);
+	assert.ok(successResponse.flags);
+	assert.equal(successResponse.embeds, undefined);
+	assert.match(successResponse.content, new RegExp(renamedKey.replaceAll('.', '\\.')));
+	await assert.rejects(getEntity(entityKey), { code: 'ENOENT' });
+	assert.deepEqual((await getEntity(renamedKey)).settings, {
+		visibility: 'private',
+		access: [
+			{ userId: secondOwnerId, level: 'owner' },
+			{ userId: firstOwnerId, level: 'partial' },
+		],
+	});
+	await assert.rejects(fsPromises.access(getCharacterHistoryPath(renamedKey)));
 });
 
 test('grouped modal validation messages and descriptions are localized', () => {

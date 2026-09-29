@@ -1,13 +1,11 @@
-const {
-	CURRENT_CHARACTER_SAVE_SCHEMA_VERSION,
-	validateCharacterSaveSchema,
-} = require('../services/characterSaveSchema');
+const { validateCharacterSaveSchema } = require('../services/characterSaveSchema');
+const { normalizeInitialEntitySettings } = require('../services/entitySettings');
 const { createStats } = require('../services/mechanics/statistics');
 
 class Character {
 	static fromSave(data, characterKey = data?.key) {
 		validateCharacterSaveSchema(data, characterKey);
-		const character = new Character(characterKey, data.access);
+		const character = new Character(characterKey, data.settings);
 		character.name = structuredClone(data.name);
 		character.level = data.level;
 		character.race = structuredClone(data.race);
@@ -22,10 +20,9 @@ class Character {
 		return character;
 	}
 
-	constructor(key, access = []) {
-		this.schemaVersion = CURRENT_CHARACTER_SAVE_SCHEMA_VERSION;
+	constructor(key, settings) {
 		this.key = key;
-		this.access = structuredClone(access);
+		this.settings = structuredClone(normalizeInitialEntitySettings(settings));
 		this.name = {
 			firstName: '',
 			lastName: '',

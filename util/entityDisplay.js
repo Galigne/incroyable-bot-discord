@@ -6,10 +6,14 @@ const { assertEntityType } = require('../services/entityType');
 
 function getEntityFieldLabel(locale, type, fieldId, options = {}) {
 	assertEntityType(type);
+	const sharedDefinition = getEntityFieldDefinition(type, fieldId);
+	if (sharedDefinition?.labelKey?.startsWith('entity.settings.')) {
+		return t(locale, sharedDefinition.labelKey);
+	}
 	if (type === 'character') {
 		return getCharacterFieldLabel(locale, fieldId, options);
 	}
-	const definition = getEntityFieldDefinition(type, fieldId);
+	const definition = sharedDefinition;
 	if (!definition) {
 		return null;
 	}

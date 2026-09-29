@@ -5,7 +5,9 @@ const {
 const {
 	getCharacterSections,
 } = require('../services/characterFieldCatalog');
-const { getAllEntitySections } = require('../services/entityFieldCatalog');
+const {
+	getAllEditableEntityFields,
+} = require('../services/entityFieldCatalog');
 const { getCharacterFieldLabel } = require('./characterDisplay');
 const { getEntityFieldLabel } = require('./entityDisplay');
 const { t } = require('./i18n');
@@ -34,7 +36,7 @@ function getCharacterSectionValues(locale) {
 }
 
 function getEntitySectionValues(locale) {
-	const catalogs = getAllEntitySections();
+	const catalogs = getAllEditableEntityFields();
 	const choices = [
 		...createEntitySectionValues('character', catalogs.character, locale),
 		...createEntitySectionValues('creature', catalogs.creature, locale),

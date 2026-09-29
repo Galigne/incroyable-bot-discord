@@ -137,6 +137,7 @@ test('/help command:get and command:set list both explicit entity field orders',
 		for (const fieldId of CREATURE_SECTION_IDS) {
 			assert.ok(rendered.includes(`\`${fieldId}\``), `${locale}: ${fieldId}`);
 		}
+		assert.ok(rendered.includes('`settings`'), locale);
 		for (const removedField of [
 			'firstName',
 			'lastName',
@@ -156,6 +157,7 @@ test('/help command:get and command:set list both explicit entity field orders',
 		}
 		const getRendered = renderDetail('get', createInteraction('regular'), locale);
 		assert.ok(getRendered.includes('`all`'), locale);
+		assert.equal(getRendered.includes('`settings`'), false, locale);
 		assert.equal(rendered.includes('`all`'), false, locale);
 		for (const field of fields) {
 			assert.ok(getRendered.includes(`\`${field.viewId}\``), `${locale}: ${field.viewId}`);
@@ -163,22 +165,18 @@ test('/help command:get and command:set list both explicit entity field orders',
 	}
 	for (const [locale, formats] of [
 		['en', [
-			'`current:max` pairs for resources and encumbrance',
-			'`statName:value` lines for all seven statistics exactly once',
-			'`Name:Level:Description` per RULE',
-			'`Name:Description` per status effect or descriptive modifier',
-			'Plain collections, including creature intrinsic traits, use one entry per line; surrounding whitespace is trimmed',
-			'Creature edits also require level 1–10',
-			'EntityKey, type, access, schema metadata',
+			'edit-only `settings` group',
+			'Visibility accepts only `public` or `private`',
+			'`<Discord user ID>:owner`',
+			'partial users retain ordinary editing',
+			'Settings changes create no gameplay-history entry',
 		]],
 		['fr', [
-			'des paires de nombres pour les ressources et l’encombrement',
-			'des lignes `statName:valeur` avec chacun des sept noms exactement une fois',
-			'`Nom:Niveau:Description` pour chaque LOI',
-			'`Nom:Description` pour chaque effet d’état ou modificateur descriptif',
-			'Les collections simples, dont les dons intrinsèques des créatures, utilisent une entrée par ligne ; les espaces autour de chaque ligne sont supprimés',
-			'Les créatures exigent aussi un niveau de 1 à 10',
-			'L’EntityKey, le type, les accès, le schéma',
+			'groupe `settings`',
+			'accepte uniquement `public` ou `private`',
+			'`<identifiant Discord>:owner`',
+			'les accès `partial` conservent les modifications ordinaires',
+			'paramètres répond toujours en privé',
 		]],
 	]) {
 		const rendered = renderDetail('set', createInteraction('regular'), locale);
@@ -197,8 +195,9 @@ test('/help command:get explains summary plus gear, field:all, and individual fi
 		[
 			'en',
 			[
-				'Without `field`, posts the public entity summary followed by its `gear` category',
-				'`field:all` skips the summary and posts every viewable category',
+				'Without `field`, posts the entity summary followed by its `gear` category',
+				'Private entities are discoverable and readable only',
+				'`field:all` skips the summary',
 				'Character categories use `name`, `level`, `resources`, `status`',
 				'Creature categories use the independent order `identity`',
 			],
@@ -206,7 +205,8 @@ test('/help command:get explains summary plus gear, field:all, and individual fi
 		[
 			'fr',
 			[
-				'Sans `field`, publie le résumé public de l’entité, puis sa catégorie `gear`',
+				'Sans `field`, publie le résumé de l’entité puis sa catégorie `gear`',
+				'Les entités privées ne peuvent être découvertes et consultées',
 				'Avec `field:all`, n’affiche pas le résumé',
 				'Les catégories de personnage sont `name`, `level`, `resources`, `status`',
 				'Les catégories de créature suivent leur propre ordre',
@@ -234,7 +234,7 @@ test('/help command:undo explains retention, consumption, and the lack of redo',
 		[
 			'en',
 			[
-				'without changing its type or current access list',
+				'without changing its current key, type, or complete Settings',
 				'current `characterHistory.maxEntries` limit applies to both types',
 				'characterHistory.maxEntries',
 				'Repeated undos walk backward',
@@ -244,7 +244,7 @@ test('/help command:undo explains retention, consumption, and the lack of redo',
 		[
 			'fr',
 			[
-				'sans changer son type ni sa liste d’accès actuelle',
+				'sans changer sa clé actuelle, son type ni l’intégralité de ses paramètres actuels',
 				's’applique aux deux types',
 				'characterHistory.maxEntries',
 				'Des annulations répétées',
@@ -344,19 +344,6 @@ test('autocomplete respects Discord\'s 25-choice limit and filters values', asyn
 	assert.equal(filteredCategories.length, 1);
 	assert.equal(filteredCategories[0].value, 'loot:weapons');
 
-	const initialFields = await autocompleteOption(
-		'set',
-		'field',
-		'',
-		createInteraction('regular'),
-	);
-	assert.deepEqual(
-		initialFields.map(choice => choice.value),
-		[
-			...getEditableFields().map(field => field.editId),
-			...CREATURE_SECTION_IDS.filter(id => !CHARACTER_SECTION_IDS.includes(id)),
-		],
-	);
 	assert.deepEqual(
 		await autocompleteOption(
 			'set',
@@ -366,58 +353,30 @@ test('autocomplete respects Discord\'s 25-choice limit and filters values', asyn
 		),
 		[],
 	);
-	assert.ok((await autocompleteOption(
-		'set',
-		'field',
-		'statistics',
-		createInteraction('regular'),
-	)).some(choice => choice.value === 'statistics'));
+	assert.deepEqual(
+		await autocompleteOption(
+			'set',
+			'field',
+			'statistics',
+			createInteraction('regular'),
+		),
+		[],
+	);
 });
 
-test('/get autocomplete adds localized all without exposing it through /set', async () => {
+test('field autocomplete reveals nothing without a resolved visible entity', async () => {
 	for (const locale of ['en', 'fr']) {
-		for (const query of ['stat', 'gear']) {
+		for (const query of ['', 'stat', 'gear']) {
 			const getChoices = await autocompleteOption(
 				'get', 'field', query, createInteraction('regular'), locale,
 			);
 			const setChoices = await autocompleteOption(
 				'set', 'field', query, createInteraction('regular'), locale,
 			);
-			assert.deepEqual(getChoices, setChoices, `${locale}: ${query}`);
-			assert.ok(getChoices.every(choice => (
-				[
-					...CHARACTER_SECTION_IDS,
-					...CREATURE_SECTION_IDS,
-				].includes(choice.value)
-					&& choice.name.includes(`(${choice.value})`)
-			)));
+			assert.deepEqual(getChoices, [], `${locale}: get ${query}`);
+			assert.deepEqual(setChoices, [], `${locale}: set ${query}`);
 		}
-		const getChoices = await autocompleteOption(
-			'get', 'field', '', createInteraction('regular'), locale,
-		);
-		const setChoices = await autocompleteOption(
-			'set', 'field', '', createInteraction('regular'), locale,
-		);
-		assert.equal(getChoices[0].value, 'all', locale);
-		assert.deepEqual(getChoices.slice(1), setChoices, locale);
-		assert.equal(setChoices.some(choice => choice.value === 'all'), false, locale);
 	}
-	const english = await autocompleteOption(
-		'get', 'field', '', createInteraction('regular'), 'en',
-	);
-	assert.deepEqual(english.map(choice => choice.value), [
-		'all',
-		...CHARACTER_SECTION_IDS,
-		...CREATURE_SECTION_IDS.filter(id => !CHARACTER_SECTION_IDS.includes(id)),
-	]);
-	const french = await autocompleteOption(
-		'get', 'field', '', createInteraction('regular'), 'fr',
-	);
-	assert.match(
-		french.find(choice => choice.value === 'all').name,
-		/Toutes les catégories consultables \(all\)/,
-	);
-	assert.match(french.find(choice => choice.value === 'status').name, /État \(status\)/);
 });
 
 test('/help overview and details are localized in English and French', () => {

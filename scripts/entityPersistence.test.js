@@ -213,7 +213,10 @@ test('concurrent creation of the same key remains exclusive', async () => {
 	assert.equal(firstResult.status, 'fulfilled');
 	assert.equal(secondResult.status, 'rejected');
 	assert.equal(secondResult.reason.code, 'EEXIST');
-	assert.deepEqual((await getCharacter(characterKey)).access, ownerAccess('first-creator'));
+	assert.deepEqual(
+		(await getCharacter(characterKey)).settings.access,
+		ownerAccess('first-creator'),
+	);
 	assert.equal(getEntityOperationQueueSize(), 0);
 });
 
