@@ -52,7 +52,7 @@
     },
     {
       "id": "cursed_object_disposal",
-      "name": "safe removal or disposal of a cursed {{ loot.generator.name }}",
+      "name": "safe removal or disposal of the following cursed item: {{ loot.generator.name }}",
       "weight": 0.75
     },
     {
@@ -67,7 +67,7 @@
     },
     {
       "id": "ceremonial_impersonation",
-      "name": "impersonating a {{ background.generator.name }} at a ceremony or formal occasion",
+      "name": "impersonating someone with the {{ background.generator.name }} background at a ceremony or formal occasion",
       "weight": 0.5
     },
     {
