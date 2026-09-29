@@ -1,0 +1,187 @@
+{
+  "schemaVersion": 4,
+  "id": "artifact",
+  "visibility": "internal",
+  "name": "Artifacts",
+  "description": "Powerful, strange, or dangerous objects that create unusual choices and situations",
+  "entrySchema": {
+    "required": ["description"]
+  },
+  "entries": [
+    {
+      "id": "anchor_coin",
+      "name": "Anchor Coin",
+      "fields": {
+        "description": "When placed flat and deliberately released, this coin becomes impossibly heavy. It returns to normal the instant someone willingly tries to pick it up."
+      }
+    },
+    {
+      "id": "borrowed_door",
+      "name": "Borrowed Door",
+      "fields": {
+        "description": "Attaching this small door-shaped plaque to a solid surface turns it into a doorway until the plaque is removed; anyone entering emerges through another existing door nearby."
+      }
+    },
+    {
+      "id": "candle_of_the_last_room",
+      "name": "Candle of the Last Room",
+      "fields": {
+        "description": "When lit, its flame leans toward the nearest enclosed space that nobody present has entered before."
+      }
+    },
+    {
+      "id": "echo_jar",
+      "name": "Echo Jar",
+      "fields": {
+        "description": "While open, this jar can capture one sound it hears. Sealing it preserves the sound; opening it again releases that sound once at its original volume and duration."
+      }
+    },
+    {
+      "id": "empty_crown",
+      "name": "Empty Crown",
+      "fields": {
+        "description": "Anyone wearing this crown is instinctively treated as an authority until they directly contradict someone who genuinely holds authority over the situation."
+      }
+    },
+    {
+      "id": "glass_orchard_seed",
+      "name": "Glass Orchard Seed",
+      "fields": {
+        "description": "Planted in soil, this seed rapidly grows into a fragile crystal tree bearing a handful of edible fruits with unpredictable but harmless sensory properties, then shatters."
+      }
+    },
+    {
+      "id": "guest_bell",
+      "name": "Guest Bell",
+      "fields": {
+        "description": "Ringing this bell causes the nearest unoccupied chair, bed, or place at a table to become visibly prepared for an expected but unidentified guest."
+      }
+    },
+    {
+      "id": "key_of_returning",
+      "name": "Key of Returning",
+      "fields": {
+        "description": "This key can lock any ordinary lock. The next time that lock is opened, the key reappears inside whatever the lock secured."
+      }
+    },
+    {
+      "id": "last_match",
+      "name": "Last Match",
+      "fields": {
+        "description": "This match can ignite almost anything that could reasonably burn, even when wet or normally difficult to light, but disappears permanently after use."
+      }
+    },
+    {
+      "id": "liars_thread",
+      "name": "Liar's Thread",
+      "fields": {
+        "description": "This length of thread knots itself whenever someone holding it knowingly speaks a direct lie."
+      }
+    },
+    {
+      "id": "map_of_near_misses",
+      "name": "Map of Near Misses",
+      "fields": {
+        "description": "This map gradually draws places its owner almost visited, paths they nearly took, and locations they narrowly failed to discover."
+      }
+    },
+    {
+      "id": "mourning_cup",
+      "name": "Mourning Cup",
+      "fields": {
+        "description": "Any liquid poured into this cup takes on the taste and smell of a drink strongly associated with someone the holder misses."
+      }
+    },
+    {
+      "id": "nameless_mask",
+      "name": "Nameless Mask",
+      "fields": {
+        "description": "While this mask is worn, observers remember the wearer's actions clearly but afterward struggle to recall identifying details about them."
+      }
+    },
+    {
+      "id": "pocket_sunrise",
+      "name": "Pocket Sunrise",
+      "fields": {
+        "description": "Breaking this sealed golden bead fills the surrounding area with natural-looking daylight for a short time, regardless of the location."
+      }
+    },
+    {
+      "id": "promise_nail",
+      "name": "Promise Nail",
+      "fields": {
+        "description": "Hammering this nail into an object while making a sincere promise causes it to remain firmly embedded until the promise is fulfilled or deliberately abandoned."
+      }
+    },
+    {
+      "id": "second_shadow_lantern",
+      "name": "Second Shadow Lantern",
+      "fields": {
+        "description": "Anyone illuminated by this lantern casts an additional shadow showing the position their body occupied a few seconds earlier."
+      }
+    },
+    {
+      "id": "silent_compass",
+      "name": "Silent Compass",
+      "fields": {
+        "description": "Instead of pointing north, this compass turns toward the nearest place where nobody is currently speaking."
+      }
+    },
+    {
+      "id": "sleepless_pillow",
+      "name": "Sleepless Pillow",
+      "fields": {
+        "description": "Someone resting on this pillow remains fully awake while gaining the physical benefit of ordinary sleep. After one use, the pillow must remain unused for a full day."
+      }
+    },
+    {
+      "id": "strangers_mirror",
+      "name": "Stranger's Mirror",
+      "fields": {
+        "description": "This mirror shows its viewer as they would appear after several years of living a radically different life, without explaining how that future could occur."
+      }
+    },
+    {
+      "id": "threshold_rope",
+      "name": "Threshold Rope",
+      "fields": {
+        "description": "When stretched across an opening, this rope makes anyone crossing it feel unmistakably that they are entering somewhere important, however mundane the place may be."
+      }
+    },
+    {
+      "id": "unfinished_book",
+      "name": "Unfinished Book",
+      "fields": {
+        "description": "Its final pages remain blank until the book is left overnight where an important event recently occurred, then fill with a vague and incomplete account of that event."
+      }
+    },
+    {
+      "id": "ashen_hourglass",
+      "name": "Ashen Hourglass",
+      "fields": {
+        "description": "When turned, nearby dust, ash, and smoke briefly retrace the paths they followed during the previous minute, revealing movement and hidden air currents."
+      }
+    },
+    {
+      "id": "courtesy_blade",
+      "name": "Courtesy Blade",
+      "fields": {
+        "description": "This blunt-looking knife can cut any nonliving material in one stroke, but only after someone who reasonably owns or guards the target freely gives permission."
+      }
+    },
+    {
+      "id": "redaction_lens",
+      "name": "Redaction Lens",
+      "fields": {
+        "description": "Held over writing, this lens darkens the words its author most wanted to hide while the surrounding text fades; it cannot reveal anything never written there."
+      }
+    },
+    {
+      "id": "weather_knot",
+      "name": "Weather Knot",
+      "fields": {
+        "description": "Tied outdoors, this colored cord traps the local weather in its knot and leaves unnatural calm nearby. Untying it later releases that weather briefly around it and ruins the cord."
+      }
+    }
+  ]
+}

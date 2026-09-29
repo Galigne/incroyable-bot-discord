@@ -52,6 +52,11 @@
       "id": "curio",
       "name": "curios",
       "generator": "curio"
+    },
+    {
+      "id": "artifact",
+      "name": "artifacts",
+      "generator": "artifact"
     }
   ]
 }

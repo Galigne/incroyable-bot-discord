@@ -148,6 +148,7 @@ example:
 ```text
 /gen category:loot
 /gen category:loot.generator
+/gen category:loot:artifacts
 /gen category:loot:weapons
 /gen category:loot:weapons:long_sword
 /gen category:loot:weapons.generator:long_sword
@@ -157,7 +158,7 @@ example:
 ```
 
 With the French catalog, corresponding paths include
-`butin`, `butin.generator`, `butin:armes`,
+`butin`, `butin.generator`, `butin:artefacts`, `butin:armes`,
 `butin:armes:épée_longue.description`, and
 `lieu:donjons:temple_enseveli.name`. Stable generator and entry IDs remain
 accepted for manual input and are resolved to the same internal identities.

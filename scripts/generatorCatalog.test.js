@@ -535,6 +535,50 @@ test('/gen production traversal suggestions keep elemental essence labels and pa
 	}
 });
 
+test('artifact loot is a localized unmodified route in ordinary random loot', () => {
+	const expectedPaths = {
+		en: 'loot:artifacts',
+		fr: 'butin:artefacts',
+	};
+	for (const locale of ['en', 'fr']) {
+		const loot = generatorCatalog.getGenerator('loot', locale);
+		const routeIndex = loot.entries.findIndex(entry => entry.id === 'artifact');
+		assert.notEqual(routeIndex, -1);
+		const route = loot.entries[routeIndex];
+		assert.equal(route.generator, 'artifact');
+
+		const artifact = generatorCatalog.getGenerator('artifact', locale);
+		assert.equal(artifact.visibility, 'internal');
+		assert.deepEqual(artifact.entrySchema.required, ['description']);
+		assert.equal(Object.hasOwn(artifact, 'modifiers'), false);
+
+		const localizedPath = expectedPaths[locale];
+		assert.ok(getGeneratorTraversalSuggestions(localizedPath, locale)
+			.some(choice => choice.value === localizedPath));
+		const fixed = generatorResolver.generate(`${localizedPath}:anchor_coin`, locale, {
+			random: () => 0,
+		});
+		assert.equal(fixed.generatorId, 'artifact');
+		assert.equal(fixed.entryId, 'anchor_coin');
+		assert.deepEqual(Object.keys(fixed.displayFields), ['name', 'description']);
+		assert.deepEqual(fixed.modifiers, []);
+
+		const totalWeight = loot.entries.reduce((total, entry) => (
+			total + getEntryWeight(entry)
+		), 0);
+		const precedingWeight = loot.entries.slice(0, routeIndex)
+			.reduce((total, entry) => total + getEntryWeight(entry), 0);
+		const randomValue = (
+			precedingWeight + (getEntryWeight(route) / 2)
+		) / totalWeight;
+		const randomLoot = generatorResolver.generate('loot.generator', locale, {
+			random: () => randomValue,
+		});
+		assert.equal(randomLoot.generatorId, 'artifact');
+		assert.deepEqual(randomLoot.modifiers, []);
+	}
+});
+
 test('localized generator aliases are predictable and resolve to stable identities', () => {
 	assert.equal(
 		createGeneratorTraversalAlias('  L\'Épée—longue !  '),
