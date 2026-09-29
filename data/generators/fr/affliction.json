@@ -140,7 +140,7 @@
       "id": "unquiet_return",
       "name": "Retour sans repos",
       "fields": {
-        "type": "Malédiction",
+        "type": "malédiction",
         "description": "La mort ne retient plus durablement la victime. Chaque retour lui impose un prix important ou une transformation persistante laissée au choix du MJ."
       }
     },
@@ -148,7 +148,7 @@
       "id": "name_erosion",
       "name": "Érosion du nom",
       "fields": {
-        "type": "Malédiction",
+        "type": "malédiction",
         "description": "Les autres perdent progressivement la capacité de se souvenir du nom de la victime, de le prononcer, de l'écrire ou de le reconnaître, tout en se souvenant encore de la personne."
       }
     },
@@ -156,7 +156,7 @@
       "id": "shared_wound",
       "name": "Blessure partagée",
       "fields": {
-        "type": "Malédiction",
+        "type": "malédiction",
         "description": "Les blessures et maladies qui frappent la victime commencent aussi à apparaître sur une autre créature mystérieusement liée, ou passent de cette créature à la victime."
       }
     },
@@ -164,16 +164,8 @@
       "id": "dream_parasite",
       "name": "Parasite onirique",
       "fields": {
-        "type": "Malédiction",
+        "type": "malédiction",
         "description": "Une présence d'abord rencontrée uniquement en rêve laisse peu à peu des preuves, entraîne des conséquences et manifeste certaines parties d'elle-même dans la réalité éveillée."
-      }
-    },
-    {
-      "id": "hollow_hunger",
-      "name": "Faim creuse",
-      "fields": {
-        "type": "Malédiction",
-        "description": "La nourriture ordinaire ne rassasie plus la victime, qui se nourrit désormais de souvenirs, d'émotions, de rêves, de magie, de secrets, de peur ou d'une autre substance surnaturelle."
       }
     }
   ]
