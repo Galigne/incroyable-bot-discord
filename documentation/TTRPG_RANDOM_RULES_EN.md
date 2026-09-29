@@ -546,6 +546,9 @@ The [GM](#gm) may adjust this value slightly depending on the shield's size, sha
 In combat, you have several options when you are attacked:
 
 - **Dodge** ([dexterity](#dexterity)) or **block** ([strength](#strength)): you may try up to **`2` times per [turn](#turn)** to avoid an attack. Each attempt costs **[`2 AP`](#action-points-ap)**, deducted from your next [turn](#turn).
+  - Blocking still uses [strength](#strength) and otherwise follows the blocking rules above.
+  - When a character blocks with a shield or with a weapon particularly well suited to stopping the incoming attack, the [GM](#gm) may grant a bonus to the block. If the equipment used is clearly inadequate for blocking that particular attack, the GM may instead apply a penalty.
+  - There is no universal penalty for blocking with a weapon instead of a shield. Any bonus or penalty depends on the specific attack, equipment, and situation.
 - **Defensive magic** ([intelligence](#intelligence)): if your **[RULE](#rule)** allows it, you may use magic to protect yourself. The possibilities depend entirely on your RULE's description:
   - proactively, by creating a **magic shield** during your [turn](#turn);
   - reactively during the enemy [turn](#turn), like a dodge or block, for example by deflecting a projectile with a gust of wind;

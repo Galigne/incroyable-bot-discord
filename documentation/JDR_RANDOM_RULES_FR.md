@@ -546,6 +546,9 @@ Le [MJ](#mj) peut ajuster légèrement cette valeur selon la taille, la forme ou
 En combat, vous disposez de plusieurs options lorsque vous êtes attaqué :
 
 - **Esquiver** ([dextérité](#dextérité)) ou **bloquer** ([force](#force)) : vous pouvez tenter jusqu'à **`2` fois par [tour](#tour)** d'éviter une attaque. Chaque tentative coûte **[`2 PA`](#points-daction-pa)**, déduits de votre prochain [tour](#tour).
+  - Le blocage repose toujours sur la [force](#force) et suit par ailleurs les règles de blocage ci-dessus.
+  - Lorsqu'un personnage bloque avec un bouclier ou avec une arme particulièrement adaptée pour arrêter l'attaque reçue, le [MJ](#mj) peut accorder un bonus au jet de blocage. Si l'équipement utilisé est manifestement inadéquat pour bloquer cette attaque particulière, le MJ peut au contraire appliquer un malus.
+  - Il n'existe aucun malus universel pour bloquer avec une arme plutôt qu'avec un bouclier. Tout bonus ou malus dépend de l'attaque, de l'équipement et de la situation spécifiques.
 - **Magie défensive** ([intelligence](#intelligence)) : si votre **[LOI](#loi)** le permet, vous pouvez utiliser la magie pour vous protéger. Les possibilités dépendent entièrement de la description de votre LOI :
   - en prévention, en créant un **bouclier magique** pendant votre [tour](#tour) ;
   - en réaction pendant le [tour](#tour) adverse, comme une esquive ou un blocage, par exemple en déviant un projectile grâce à une bourrasque de vent ;
