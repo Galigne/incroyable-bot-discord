@@ -58,13 +58,6 @@
       }
     },
     {
-      "id": "key_of_returning",
-      "name": "Key of Returning",
-      "fields": {
-        "description": "This key can lock any ordinary lock. The next time that lock is opened, the key reappears inside whatever the lock secured."
-      }
-    },
-    {
       "id": "last_match",
       "name": "Last Match",
       "fields": {
@@ -72,10 +65,10 @@
       }
     },
     {
-      "id": "liars_thread",
-      "name": "Liar's Thread",
+      "id": "oath_thread",
+      "name": "Oath Thread",
       "fields": {
-        "description": "This length of thread knots itself whenever someone holding it knowingly speaks a direct lie."
+        "description": "Two people can knot this thread while explicitly agreeing to terms. The knot remains intact while both honor the agreement. If either knowingly breaks it, the thread unravels and permanently develops a visible mark identifying the oathbreaker; it neither enforces the oath nor punishes them."
       }
     },
     {
@@ -86,17 +79,10 @@
       }
     },
     {
-      "id": "mourning_cup",
-      "name": "Mourning Cup",
+      "id": "familiar_stranger_mask",
+      "name": "Familiar Stranger Mask",
       "fields": {
-        "description": "Any liquid poured into this cup takes on the taste and smell of a drink strongly associated with someone the holder misses."
-      }
-    },
-    {
-      "id": "nameless_mask",
-      "name": "Nameless Mask",
-      "fields": {
-        "description": "While this mask is worn, observers remember the wearer's actions clearly but afterward struggle to recall identifying details about them."
+        "description": "While worn, this mask makes everyone who encounters its wearer certain they recognize them, though each observer unconsciously assigns a different plausible identity. Witnesses remember the interaction afterward but may strongly disagree about who the wearer was."
       }
     },
     {
@@ -114,20 +100,6 @@
       }
     },
     {
-      "id": "second_shadow_lantern",
-      "name": "Second Shadow Lantern",
-      "fields": {
-        "description": "Anyone illuminated by this lantern casts an additional shadow showing the position their body occupied a few seconds earlier."
-      }
-    },
-    {
-      "id": "silent_compass",
-      "name": "Silent Compass",
-      "fields": {
-        "description": "Instead of pointing north, this compass turns toward the nearest place where nobody is currently speaking."
-      }
-    },
-    {
       "id": "sleepless_pillow",
       "name": "Sleepless Pillow",
       "fields": {
@@ -142,17 +114,10 @@
       }
     },
     {
-      "id": "threshold_rope",
-      "name": "Threshold Rope",
+      "id": "chronicle_of_the_unnoticed",
+      "name": "Chronicle of the Unnoticed",
       "fields": {
-        "description": "When stretched across an opening, this rope makes anyone crossing it feel unmistakably that they are entering somewhere important, however mundane the place may be."
-      }
-    },
-    {
-      "id": "unfinished_book",
-      "name": "Unfinished Book",
-      "fields": {
-        "description": "Its final pages remain blank until the book is left overnight where an important event recently occurred, then fill with a vague and incomplete account of that event."
+        "description": "When left overnight at a place where an important event occurred, this book adds a short account of one significant detail that those present overlooked, misunderstood, or failed to notice. It never reconstructs the whole event; the GM defines the revealed detail."
       }
     },
     {
@@ -167,13 +132,6 @@
       "name": "Courtesy Blade",
       "fields": {
         "description": "This blunt-looking knife can cut any nonliving material in one stroke, but only after someone who reasonably owns or guards the target freely gives permission."
-      }
-    },
-    {
-      "id": "redaction_lens",
-      "name": "Redaction Lens",
-      "fields": {
-        "description": "Held over writing, this lens darkens the words its author most wanted to hide while the surrounding text fades; it cannot reveal anything never written there."
       }
     },
     {

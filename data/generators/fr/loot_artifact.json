@@ -58,13 +58,6 @@
       }
     },
     {
-      "id": "key_of_returning",
-      "name": "Clé du retour",
-      "fields": {
-        "description": "Cette clé peut fermer n’importe quelle serrure ordinaire. La prochaine fois qu’on ouvre cette serrure, la clé réapparaît à l’intérieur de ce qu’elle protégeait."
-      }
-    },
-    {
       "id": "last_match",
       "name": "Dernière allumette",
       "fields": {
@@ -72,10 +65,10 @@
       }
     },
     {
-      "id": "liars_thread",
-      "name": "Fil du menteur",
+      "id": "oath_thread",
+      "name": "Fil du serment",
       "fields": {
-        "description": "Ce fil se noue de lui-même chaque fois que la personne qui le tient profère sciemment un mensonge direct."
+        "description": "Deux personnes peuvent nouer ce fil en énonçant explicitement les termes d’un accord. Le nœud reste intact tant que toutes deux le respectent. Si l’une le rompt sciemment, le fil se défait et porte définitivement une marque visible désignant la personne fautive ; il ne contraint personne à respecter l’accord et n’inflige aucune punition."
       }
     },
     {
@@ -86,17 +79,10 @@
       }
     },
     {
-      "id": "mourning_cup",
-      "name": "Coupe du deuil",
+      "id": "familiar_stranger_mask",
+      "name": "Masque de l'inconnu familier",
       "fields": {
-        "description": "Tout liquide versé dans cette coupe prend le goût et l’odeur d’une boisson que son détenteur associe fortement à une personne qui lui manque."
-      }
-    },
-    {
-      "id": "nameless_mask",
-      "name": "Masque sans nom",
-      "fields": {
-        "description": "Tant que ce masque est porté, les témoins se souviennent clairement des actes de son porteur, mais peinent ensuite à se rappeler ses traits distinctifs."
+        "description": "Tant que ce masque est porté, chaque personne qui rencontre son porteur est convaincue de le reconnaître, mais lui attribue inconsciemment une identité plausible différente. Les témoins gardent le souvenir de l’échange, mais peuvent ensuite être en profond désaccord sur l’identité réelle du porteur."
       }
     },
     {
@@ -114,20 +100,6 @@
       }
     },
     {
-      "id": "second_shadow_lantern",
-      "name": "Lanterne de la seconde ombre",
-      "fields": {
-        "description": "Toute personne éclairée par cette lanterne projette une ombre supplémentaire qui montre la position occupée par son corps quelques secondes plus tôt."
-      }
-    },
-    {
-      "id": "silent_compass",
-      "name": "Boussole silencieuse",
-      "fields": {
-        "description": "Au lieu d’indiquer le nord, cette boussole se tourne vers le lieu le plus proche où personne ne parle à cet instant."
-      }
-    },
-    {
       "id": "sleepless_pillow",
       "name": "Oreiller sans sommeil",
       "fields": {
@@ -142,17 +114,10 @@
       }
     },
     {
-      "id": "threshold_rope",
-      "name": "Corde du seuil",
+      "id": "chronicle_of_the_unnoticed",
+      "name": "Chronique des faits inaperçus",
       "fields": {
-        "description": "Tendue en travers d’une ouverture, cette corde donne à quiconque la franchit la certitude d’entrer dans un lieu important, aussi banal soit-il."
-      }
-    },
-    {
-      "id": "unfinished_book",
-      "name": "Livre inachevé",
-      "fields": {
-        "description": "Ses dernières pages restent vierges jusqu’à ce que le livre passe une nuit là où un événement important s’est récemment produit ; elles livrent alors un récit vague et incomplet de cet événement."
+        "description": "Lorsqu’on le laisse une nuit là où un événement important s’est produit, ce livre ajoute un court récit consacré à un détail significatif que les personnes présentes ont ignoré, mal compris ou omis de remarquer. Il ne reconstitue jamais l’ensemble de l’événement ; le MJ choisit le détail révélé."
       }
     },
     {
@@ -167,13 +132,6 @@
       "name": "Lame courtoise",
       "fields": {
         "description": "Ce couteau d’apparence émoussée peut trancher toute matière inerte d’un seul geste, mais uniquement après qu’une personne pouvant raisonnablement s’en dire propriétaire ou gardienne l’y autorise librement."
-      }
-    },
-    {
-      "id": "redaction_lens",
-      "name": "Lentille de la rature",
-      "fields": {
-        "description": "Placée au-dessus d’un texte, cette lentille assombrit les mots que son auteur voulait le plus cacher tandis que le reste s’efface ; elle ne révèle rien qui n’ait jamais été écrit."
       }
     },
     {
