@@ -19,6 +19,7 @@ const {
 } = require('../services/generatorTraversal');
 const { MAX_AUTOCOMPLETE_CHOICES } = require('../util/autocomplete');
 const { createHelpResponse } = require('../util/helpResponses');
+const { t } = require('../util/i18n');
 
 const AVATAR_URL = 'https://example.com/avatar.png';
 
@@ -188,6 +189,30 @@ test('/help command:get and command:set list both explicit entity field orders',
 		renderDetail('set', createInteraction('regular'), 'en').includes('`firstName:lastName`'),
 		false,
 	);
+});
+
+test('/help documents exact capability-specific entity field values', () => {
+	const normalFieldIds = uniqueValues([
+		...CHARACTER_SECTION_IDS,
+		...CREATURE_SECTION_IDS,
+	]);
+	const expectedSetValues = uniqueValues([
+		...CHARACTER_SECTION_IDS,
+		'settings',
+		...CREATURE_SECTION_IDS,
+		'settings',
+	]);
+	const expectedGetValues = ['all', ...normalFieldIds];
+
+	for (const locale of ['en', 'fr']) {
+		const setValues = getDocumentedFieldValues('set', locale);
+		const getValues = getDocumentedFieldValues('get', locale);
+		assert.deepEqual(setValues, expectedSetValues, `${locale}: /set values`);
+		assert.deepEqual(getValues, expectedGetValues, `${locale}: /get values`);
+		assert.equal(setValues.includes(undefined), false, `${locale}: /set undefined`);
+		assert.equal(setValues.includes('settings'), true, `${locale}: /set settings`);
+		assert.equal(getValues.includes('settings'), false, `${locale}: /get settings`);
+	}
 });
 
 test('/help command:get explains summary plus gear, field:all, and individual fields', () => {
@@ -442,6 +467,28 @@ function renderDetail(commandName, interaction, locale = 'en') {
 		locale,
 		registry: commandRegistry,
 	}).embeds[0].toJSON());
+}
+
+function getDocumentedFieldValues(commandName, locale) {
+	const detail = createHelpResponse({
+		avatarUrl: AVATAR_URL,
+		commandName,
+		config,
+		interaction: createInteraction('regular'),
+		locale,
+		registry: commandRegistry,
+	}).embeds[0].toJSON();
+	const parametersTitle = t(locale, 'commands.help.parametersTitle');
+	const parameters = detail.fields
+		.filter(field => field.name.startsWith(parametersTitle))
+		.map(field => field.value)
+		.join('\n');
+	return [...parameters.matchAll(/`([^`]+)` —/gu)]
+		.map(match => match[1]);
+}
+
+function uniqueValues(values) {
+	return values.filter((value, index) => values.indexOf(value) === index);
 }
 
 async function autocomplete(interaction) {

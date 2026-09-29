@@ -7,6 +7,7 @@ const {
 } = require('../services/characterFieldCatalog');
 const {
 	getAllEditableEntityFields,
+	getViewableEntityFields,
 } = require('../services/entityFieldCatalog');
 const { getCharacterFieldLabel } = require('./characterDisplay');
 const { getEntityFieldLabel } = require('./entityDisplay');
@@ -38,8 +39,18 @@ function getCharacterSectionValues(locale) {
 function getEntitySectionValues(locale) {
 	const catalogs = getAllEditableEntityFields();
 	const choices = [
-		...createEntitySectionValues('character', catalogs.character, locale),
-		...createEntitySectionValues('creature', catalogs.creature, locale),
+		...createEntitySectionValues(
+			'character',
+			catalogs.character,
+			'editId',
+			locale,
+		),
+		...createEntitySectionValues(
+			'creature',
+			catalogs.creature,
+			'editId',
+			locale,
+		),
 	];
 	return choices.filter((choice, index) => (
 		choices.findIndex(candidate => candidate.value === choice.value) === index
@@ -47,26 +58,43 @@ function getEntitySectionValues(locale) {
 }
 
 function getGetEntitySectionValues(locale) {
+	const choices = [
+		...createEntitySectionValues(
+			'character',
+			getViewableEntityFields('character'),
+			'viewId',
+			locale,
+		),
+		...createEntitySectionValues(
+			'creature',
+			getViewableEntityFields('creature'),
+			'viewId',
+			locale,
+		),
+	];
 	return [
 		{
 			label: t(locale, 'rpg.get.allField'),
 			name: `${t(locale, 'rpg.get.allField')} (all)`,
 			value: 'all',
 		},
-		...getEntitySectionValues(locale),
+		...choices.filter((choice, index) => (
+			choices.findIndex(candidate => candidate.value === choice.value) === index
+		)),
 	];
 }
 
-function createEntitySectionValues(type, sections, locale) {
+function createEntitySectionValues(type, sections, valueProperty, locale) {
 	return sections.map(field => {
 		const label = getEntityFieldLabel(locale, type, field.id);
+		const value = field[valueProperty];
 		return {
 			label,
-			name: `${label} (${field.sectionId}) - ${t(
+			name: `${label} (${value}) - ${t(
 				locale,
 				`entity.types.${type}`,
 			)}`,
-			value: field.sectionId,
+			value,
 		};
 	});
 }
