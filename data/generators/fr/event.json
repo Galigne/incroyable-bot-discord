@@ -508,6 +508,48 @@
       "fields": {
         "description": "Une influence magique ou ordinaire provoque une vague générale de grossièretés incontrôlables qui perturbe rites solennels, négociations, procès, spectacles et conversations polies."
       }
+    },
+    {
+      "id": "speaking_recent_dead",
+      "name": "Les morts contournent leur trépas",
+      "fields": {
+        "description": "Pendant une heure, les créatures récemment décédées peuvent converser normalement et se souviennent de leur vie, mais ne peuvent pas expliquer leur propre mort ni identifier directement son responsable."
+      }
+    },
+    {
+      "id": "synchronized_magic_pause",
+      "name": "Pause magique synchronisée",
+      "fields": {
+        "description": "Tous les effets magiques et de LOI de la zone deviennent inertes pendant plusieurs minutes, puis reprennent simultanément là où ils s'étaient arrêtés."
+      }
+    },
+    {
+      "id": "memory_exchange",
+      "name": "Souvenirs échangés",
+      "fields": {
+        "description": "Chaque personne à proximité reçoit le souvenir d'un autre appartenant à la même catégorie — premier amour, plus grande peur, maison d'enfance ou dernier repas — sans savoir à qui il appartient."
+      }
+    },
+    {
+      "id": "physical_hour_loop",
+      "name": "L'heure qui laisse des traces",
+      "fields": {
+        "description": "Une même heure recommence depuis son début, mais les blessures, les objets déplacés, les portes ouvertes, les écrits, les destructions et toutes les autres modifications physiques persistent d'une répétition à l'autre."
+      }
+    },
+    {
+      "id": "remembered_new_structure",
+      "name": "Structure apparue et déjà familière",
+      "fields": {
+        "description": "Une structure du type suivant apparaît pendant la nuit : {{ building.name }}. Les habitants la croient ancienne, mais les cartes et les preuves matérielles les contredisent."
+      }
+    },
+    {
+      "id": "contract_addendum",
+      "name": "Avenant universel",
+      "fields": {
+        "description": "Chaque contrat écrit de la région reçoit une clause supplémentaire à l'apparence magiquement valide, qu'aucun de ses signataires ne se souvient avoir acceptée."
+      }
     }
   ]
 }

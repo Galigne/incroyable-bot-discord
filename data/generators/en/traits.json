@@ -315,6 +315,55 @@
       "fields": {
         "description": "Cannot gain the {{ status_effect:frightened.name }} status effect."
       }
+    },
+    {
+      "id": "gaze_effect",
+      "name": "Gaze Effect",
+      "fields": {
+        "description": "Its direct gaze produces a supernatural effect described by the creature; barriers, indirect observation, or avoiding eye contact can prevent exposure."
+      }
+    },
+    {
+      "id": "swallowing",
+      "name": "Swallowing",
+      "fields": {
+        "description": "Can engulf or swallow a smaller creature it has firmly grappled; the captive remains alive inside and can attempt to escape or be freed."
+      }
+    },
+    {
+      "id": "splitting_body",
+      "name": "Splitting Body",
+      "fields": {
+        "description": "An appropriate trigger can divide its body into multiple smaller, independently moving portions that may later reunite."
+      }
+    },
+    {
+      "id": "spell_reflection",
+      "name": "Spell Reflection",
+      "fields": {
+        "description": "When it successfully resists a directly targeted supernatural effect, it can redirect that effect toward another plausible target nearby."
+      }
+    },
+    {
+      "id": "memory_theft",
+      "name": "Memory Theft",
+      "fields": {
+        "description": "Can steal, consume, copy, or erase a victim's memories through the contact or feeding method described by the creature."
+      }
+    },
+    {
+      "id": "reactive_adaptation",
+      "name": "Reactive Adaptation",
+      "fields": {
+        "description": "After surviving a source of harm, develops a visible response or resistance specifically suited to that source."
+      }
+    },
+    {
+      "id": "temporary_duplication",
+      "name": "Temporary Duplication",
+      "fields": {
+        "description": "Can create short-lived copies, echoes, or reflections that convincingly imitate its movements before vanishing."
+      }
     }
   ]
 }

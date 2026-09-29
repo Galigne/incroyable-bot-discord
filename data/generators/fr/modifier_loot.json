@@ -113,6 +113,62 @@
       "fields": {
         "description": "L’objet est surnaturellement difficile à dissimuler complètement ; une lueur, un bruit, une odeur, un mouvement ou un autre signe révélateur trahit sa présence."
       }
+    },
+    {
+      "id": "jealous",
+      "name": "Jaloux",
+      "fields": {
+        "description": "L'objet supporte mal que des équipements semblables reçoivent de l'attention et peut se plaindre, intervenir ou devenir peu fiable lorsque son propriétaire emploie un objet rival."
+      }
+    },
+    {
+      "id": "bloodthirsty",
+      "name": "Assoiffé de sang",
+      "fields": {
+        "description": "L'objet devient enthousiaste et particulièrement coopératif dès que de graves violences commencent, puis résiste à être rangé ou abandonné avant que le conflit ne le satisfasse."
+      }
+    },
+    {
+      "id": "truthbound",
+      "name": "Lié à la vérité",
+      "fields": {
+        "description": "L'objet réagit favorablement à une honnêteté sincère et devient froid, gênant ou peu fiable lorsque son propriétaire ment sciemment."
+      }
+    },
+    {
+      "id": "homesick",
+      "name": "Nostalgique",
+      "fields": {
+        "description": "L'objet coopère davantage près du lieu, de la culture, du créateur, de l'environnement magique ou de la matière dont il provient, et devient moins fiable au loin."
+      }
+    },
+    {
+      "id": "protective",
+      "name": "Protecteur",
+      "fields": {
+        "description": "L'objet cherche sincèrement à protéger son propriétaire, mais peut refuser un voyage dangereux, contrarier une action risquée ou attirer l'attention sur une menace contre sa volonté."
+      }
+    },
+    {
+      "id": "curious",
+      "name": "Curieux",
+      "fields": {
+        "description": "Les lieux, les créatures, les magies et les objets inconnus le fascinent ; il peut tirer, bouger, s'activer ou faire du bruit pour pousser son propriétaire à enquêter."
+      }
+    },
+    {
+      "id": "possessive",
+      "name": "Possessif",
+      "fields": {
+        "description": "L'objet considère que son propriétaire actuel lui appartient et résiste lorsqu'on tente de le vendre, de le prêter, de l'abandonner, de le voler ou de l'offrir."
+      }
+    },
+    {
+      "id": "cowardly",
+      "name": "Couard",
+      "fields": {
+        "description": "L'objet tente d'éviter les dangers évidents en se cachant, en refusant de s'activer, en devenant difficile à dégainer, en cherchant à fuir ou en multipliant les avertissements."
+      }
     }
   ]
 }

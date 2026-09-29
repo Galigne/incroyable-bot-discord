@@ -267,6 +267,66 @@
         "allies": "Paysans, commerçants et communes voisines.",
         "enemies": "Envahisseurs, aspirants seigneurs de guerre et nobles exigeant le désarmement."
       }
+    },
+    {
+      "id": "the_vaultward_order",
+      "name": "L'Ordre des gardiens de caveaux",
+      "fields": {
+        "type": "Un ordre de conservateurs d'objets surnaturels",
+        "goal": "Localiser les objets anormaux, les transporter sans danger, étudier leurs limites et confiner ceux qu'il est impossible de détruire.",
+        "resources": "Des caveaux spécialisés, des coffres de transport isolés, des catalogues d'incidents et des équipes de récupération.",
+        "hierarchy": "Les récupérateurs de terrain répondent aux gardiens de caveaux, dont chacun ne connaît que les procédures nécessaires à la collection qui lui est confiée.",
+        "allies": "Des érudits prudents, des communautés menacées par des reliques dangereuses et des dirigeants prêts à financer un stockage discret.",
+        "enemies": "Les trafiquants de reliques, les cultes apocalyptiques, les collectionneurs imprudents et les objets évadés capables de choisir leur propre détenteur."
+      }
+    },
+    {
+      "id": "the_long_memory_collegium",
+      "name": "Le Collège de la longue mémoire",
+      "fields": {
+        "type": "Une société savante dont certains membres éminents sont des morts-vivants intelligents",
+        "goal": "Préserver recherches, expériences, archives et mémoire institutionnelle au fil des siècles sans renoncer à la liberté intellectuelle.",
+        "resources": "Des laboratoires actifs, des archives scellées, des mécènes patients et des savants morts-vivants qui se souviennent personnellement de projets anciens.",
+        "hierarchy": "Des chercheurs mortels dirigent les travaux actuels, tandis que les titulaires les plus anciens gardent les études poursuivies sur plusieurs générations.",
+        "allies": "Les universités, les archivistes, les guérisseurs et les dirigeants qui apprécient une expertise durable.",
+        "enemies": "Les chasseurs de morts-vivants, les pilleurs de tombes, les plagiaires et les membres qui manipulent l'histoire en prétendant être les seuls à s'en souvenir correctement."
+      }
+    },
+    {
+      "id": "the_measured_hunt",
+      "name": "La Chasse mesurée",
+      "fields": {
+        "type": "Une confrérie professionnelle de gestion des monstres",
+        "goal": "Étudier territoires, reproduction, chaînes alimentaires, migrations et conflits avant de décider de déplacer, contrôler, traiter avec ou tuer une créature.",
+        "resources": "Des bestiaires de terrain, des pisteurs, des anatomistes, des cages mobiles, des antidotes et des accords avec les communautés frontalières.",
+        "hierarchy": "Des écologues régionaux évaluent chaque cas avant qu'un chasseur accrédité accepte le contrat et en consigne l'issue.",
+        "allies": "Les agriculteurs, les naturalistes, les communautés monstrueuses prudentes et les autorités confrontées à des attaques récurrentes.",
+        "enemies": "Les chasseurs de trophées, les braconniers, les foules effrayées et les commanditaires qui dissimulent leur responsabilité dans le déséquilibre d'un écosystème."
+      }
+    },
+    {
+      "id": "the_fleeting_gate_company",
+      "name": "La Compagnie des portes fugaces",
+      "fields": {
+        "type": "Une société d'exploration des portails temporaires et des lieux instables",
+        "goal": "Découvrir des ouvertures éphémères, cartographier ce qui se trouve au-delà et ramener personnes et objets avant la fermeture de toutes les routes connues.",
+        "resources": "Des explorateurs d'intervention rapide, des horloges synchronisées, des balises d'ancrage, des campements portatifs et des archives de routes disparues.",
+        "hierarchy": "Des éclaireurs dirigent chaque traversée, tandis que les archivistes des routes décident quelles ouvertures instables justifient une expédition.",
+        "allies": "Les réseaux de recherche de disparus, les savants curieux, les marchands attirés par des occasions brèves et les communautés séparées par des anomalies.",
+        "enemies": "Les prédateurs des portails, les rivaux bloqués ailleurs, les autorités cachottières et les clients qui mentent sur ce qu'ils ont perdu au-delà d'une route condamnée."
+      }
+    },
+    {
+      "id": "the_sealbound_registry",
+      "name": "Le Registre des sceaux",
+      "fields": {
+        "type": "Une guilde neutre de contrats garantis par magie",
+        "goal": "Rendre crédibles les accords majeurs en les enregistrant et en liant toute violation délibérée aux conséquences surnaturelles qui y sont stipulées.",
+        "resources": "Des témoins de confiance, des archives sûres, des sceaux rituels, des arbitres itinérants et des experts en formulations ambiguës.",
+        "hierarchy": "Des témoins accrédités enregistrent les accords ordinaires, tandis qu'un conseil masqué examine les contrats capables de nuire à des communautés entières.",
+        "allies": "Les marchands, les diplomates, les prêteurs, les dirigeants et tous ceux dont l'accord doit survivre à la distance ou à la méfiance.",
+        "enemies": "Les parjures, les commanditaires coercitifs, les faux greffiers et les entités littéralistes qui exploitent les clauses mal rédigées."
+      }
     }
   ]
 }

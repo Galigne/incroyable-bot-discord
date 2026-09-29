@@ -1369,6 +1369,424 @@
         ],
         "naturalArmorPercentage": 15
       }
+    },
+    {
+      "id": "forgotten_choir",
+      "name": "Forgotten Choir",
+      "weight": 1,
+      "fields": {
+        "description": "A large hidden predator whose continuous song makes listeners ignore it and rationalize the missing people it devours, even while abandoned rooms and extra possessions remain."
+      },
+      "generation": {
+        "statProfile": "creature-caster",
+        "traits": [
+          "{{ traits:camouflage }}",
+          "Forgetting Song — Listeners unconsciously overlook the creature and people it has eaten; silence, deafness, an interrupted song, indirect observation, or overwhelming contradictory evidence can reveal it."
+        ],
+        "fixedRules": [
+          {
+            "entry": "memory_rule",
+            "level": 2
+          }
+        ],
+        "naturalArmorPercentage": 20
+      }
+    },
+    {
+      "id": "many_eyed_tyrant",
+      "name": "Many-Eyed Tyrant",
+      "weight": 1,
+      "fields": {
+        "description": "A floating territorial aberration whose many eyes project different supernatural dangers while its dominant central gaze suppresses magic and RULE effects."
+      },
+      "generation": {
+        "statProfile": "creature-caster",
+        "traits": [
+          "{{ traits:flight }}",
+          "{{ traits:gaze_effect }}",
+          "Nulling Eye — Magic and RULE effects become dormant while the central eye is open and deliberately directed at them."
+        ],
+        "fixedRules": [
+          {
+            "entry": "vision_rule",
+            "level": 2
+          }
+        ],
+        "naturalArmorPercentage": 25
+      }
+    },
+    {
+      "id": "thought_eater",
+      "name": "Thought Eater",
+      "weight": 1,
+      "fields": {
+        "description": "A psychic predator that consumes memories, learned knowledge, reasoning, or fragments of personality while leaving the victim physically alive."
+      },
+      "generation": {
+        "statProfile": "creature-caster",
+        "traits": ["{{ traits:telepathy }}", "{{ traits:memory_theft }}"],
+        "fixedRules": [
+          {
+            "entry": "memory_rule",
+            "level": 2
+          }
+        ],
+        "naturalArmorPercentage": 10
+      }
+    },
+    {
+      "id": "offset_panther",
+      "name": "Offset Panther",
+      "weight": 1,
+      "fields": {
+        "description": "A stalking predator whose visible image continually appears a short distance from its true physical body."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          "{{ traits:camouflage }}",
+          "{{ traits:pounce }}",
+          "Offset Image — Attacks aimed only at its apparent position miss unless the attacker identifies the true body's location."
+        ],
+        "fixedRules": [
+          {
+            "entry": "illusion_rule",
+            "level": 1
+          }
+        ],
+        "naturalArmorPercentage": 15
+      }
+    },
+    {
+      "id": "stonefin",
+      "name": "Stonefin",
+      "weight": 1,
+      "fields": {
+        "description": "A heavily armored subterranean predator that senses movement above, races through earth, and erupts beneath or beside its prey."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          "{{ traits:burrower }}",
+          "{{ traits:tremorsense }}",
+          "{{ traits:pounce }}",
+          "{{ traits:powerful_build }}"
+        ],
+        "naturalArmorPercentage": 50
+      }
+    },
+    {
+      "id": "whispering_flesh",
+      "name": "Whispering Flesh",
+      "weight": 1,
+      "fields": {
+        "description": "A crawling amorphous aggregate of mouths, eyes, and half-formed flesh whose overlapping voices disrupt coherent thought and speech nearby."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          "{{ traits:swarm_body }}",
+          "{{ traits:poison_immunity }}",
+          "{{ traits:disease_immunity }}",
+          "Gibbering Chorus — Creatures that can hear it suffer -1 to actions requiring concentration or clear communication."
+        ],
+        "naturalArmorPercentage": 20
+      }
+    },
+    {
+      "id": "memory_colony",
+      "name": "Memory Colony",
+      "weight": 1,
+      "fields": {
+        "description": "A shapeless organism that absorbs memories and extrudes convincing imitations of people whose lives it has consumed."
+      },
+      "generation": {
+        "statProfile": "creature-caster",
+        "traits": [
+          "{{ traits:memory_theft }}",
+          "Borrowed Person — Can form a convincing physical imitation of someone whose memories it has absorbed, including habits and relationships known to that victim."
+        ],
+        "fixedRules": [
+          {
+            "entry": "memory_rule",
+            "level": 2
+          },
+          {
+            "entry": "borrowed_face_rule",
+            "level": 2
+          }
+        ],
+        "naturalArmorPercentage": 5
+      }
+    },
+    {
+      "id": "living_mantle",
+      "name": "Living Mantle",
+      "weight": 1,
+      "fields": {
+        "description": "A flat nocturnal predator that resembles a cloak, tapestry, hanging cloth, or patch of shadow until it unfolds and wraps around prey."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          "{{ traits:camouflage }}",
+          "{{ traits:flight }}",
+          "{{ traits:constrict }}"
+        ],
+        "naturalArmorPercentage": 10
+      }
+    },
+    {
+      "id": "secret_seer",
+      "name": "Secret Seer",
+      "weight": 1,
+      "fields": {
+        "description": "A malformed observer that perceives concealed guilt, personal secrets, and compromising facts, then bargains or threatens with what it learns."
+      },
+      "generation": {
+        "statProfile": "creature-caster",
+        "traits": [
+          "{{ traits:telepathy }}",
+          "{{ traits:magic_sense }}",
+          "Secret Sight — After observing someone closely, learns one important fact that person is deliberately concealing."
+        ],
+        "fixedRules": [
+          {
+            "entry": "truth_rule",
+            "level": 1
+          },
+          {
+            "entry": "vision_rule",
+            "level": 1
+          }
+        ],
+        "naturalArmorPercentage": 10
+      }
+    },
+    {
+      "id": "cursed_warplate",
+      "name": "Cursed Warplate",
+      "weight": 1,
+      "fields": {
+        "description": "A supernatural warrior whose armor is the true persistent creature; destroying its wearer only gives the intact plate time to build or possess another body."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          "{{ traits:poison_immunity }}",
+          "{{ traits:disease_immunity }}",
+          "Armor Rebirth — If the armor remains intact after the wearer falls, it can eventually reconstruct, create, or possess a new wearer."
+        ],
+        "fixedRules": [
+          {
+            "entry": "resurrection_rule",
+            "level": 2
+          }
+        ],
+        "naturalArmorPercentage": 40
+      }
+    },
+    {
+      "id": "toybone_child",
+      "name": "Toybone Child",
+      "weight": 1,
+      "fields": {
+        "description": "A small undead child-shape assembled from remains, abandoned toys, cloth, buttons, carved pieces, and household debris, able to steal and imitate familiar voices."
+      },
+      "generation": {
+        "statProfile": "creature-caster",
+        "traits": [
+          "{{ traits:poison_immunity }}",
+          "{{ traits:disease_immunity }}",
+          "Stolen Voice — Can perfectly reproduce a voice it has heard and temporarily leave that speaker unable to speak above a whisper."
+        ],
+        "fixedRules": [
+          {
+            "entry": "voice_rule",
+            "level": 1
+          }
+        ],
+        "naturalArmorPercentage": 10
+      }
+    },
+    {
+      "id": "doom_serpent",
+      "name": "Doom Serpent",
+      "weight": 1,
+      "fields": {
+        "description": "A colossal ancient serpent whose death curses the creature that actually delivered the killing blow."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          "{{ traits:natural_weapons }}",
+          "{{ traits:swallowing }}",
+          "Slayer's Curse — When the serpent dies, the creature that dealt the final harm receives a lasting curse unique to this serpent."
+        ],
+        "fixedRules": [
+          {
+            "entry": "curse_rule",
+            "level": 2
+          }
+        ],
+        "naturalArmorPercentage": 50
+      }
+    },
+    {
+      "id": "carrion_aggregate",
+      "name": "Carrion Aggregate",
+      "weight": 1,
+      "fields": {
+        "description": "A creature assembled from discarded flesh, failed experiments, corpses, and organic refuse that can deform through narrow spaces and rebuild itself from fresh remains."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          "{{ traits:swarm_body }}",
+          "{{ traits:regeneration }}",
+          "{{ traits:disease_immunity }}",
+          "Carrion Repair — Can incorporate fresh organic remains to replace a visibly destroyed portion of its body."
+        ],
+        "naturalArmorPercentage": 20
+      }
+    },
+    {
+      "id": "adaptive_hunter",
+      "name": "Adaptive Hunter",
+      "weight": 1,
+      "fields": {
+        "description": "A relentless supernatural hunter that returns after apparent destruction, changed so the exact method used against it before is less effective."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          "{{ traits:regeneration }}",
+          "{{ traits:reactive_adaptation }}",
+          "Inevitable Return — Apparent destruction ends the current pursuit but cannot permanently kill it; each return bears evidence of the last defeat."
+        ],
+        "fixedRules": [
+          {
+            "entry": "resurrection_rule",
+            "level": 2
+          }
+        ],
+        "naturalArmorPercentage": 25
+      }
+    },
+    {
+      "id": "grave_box",
+      "name": "Grave Box",
+      "weight": 1,
+      "fields": {
+        "description": "A mobile coffin-like predator that drags a victim inside, closes around them, and tries to carry or bury itself with the captive trapped within."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          "{{ traits:camouflage }}",
+          "{{ traits:swallowing }}",
+          "{{ traits:powerful_build }}",
+          "Self-Burial — While carrying a captive inside, can burrow through loose earth at half its normal movement speed without leaving a usable tunnel."
+        ],
+        "naturalArmorPercentage": 40
+      }
+    },
+    {
+      "id": "living_pool",
+      "name": "Living Pool",
+      "weight": 1,
+      "fields": {
+        "description": "An apparently ordinary pool or small body of water that is itself a creature, able to rise from its surface, seize prey, and drag victims into its depths."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          "{{ traits:camouflage }}",
+          "{{ traits:aquatic_speed }}",
+          "{{ traits:constrict }}",
+          "Water Body — Occupies its entire pool and cannot move away without carrying or abandoning most of its own substance."
+        ],
+        "naturalArmorPercentage": 10
+      }
+    },
+    {
+      "id": "grudge_spirit",
+      "name": "Grudge Spirit",
+      "weight": 1,
+      "fields": {
+        "description": "A supernatural social predator that feeds on resentment, humiliation, and bitterness by worsening disagreements and turning communities against themselves."
+      },
+      "generation": {
+        "statProfile": "creature-caster",
+        "traits": [
+          "{{ traits:incorporeal }}",
+          "{{ traits:telepathy }}",
+          "Fed by Resentment — Gains +1 to social and supernatural actions while nearby people are actively escalating a grievance it encouraged."
+        ],
+        "fixedRules": [
+          {
+            "entry": "influence_rule",
+            "level": 2
+          }
+        ],
+        "naturalArmorPercentage": 10
+      }
+    },
+    {
+      "id": "impossible_anatomy",
+      "name": "Impossible Anatomy",
+      "weight": 1,
+      "fields": {
+        "description": "A creature whose limbs, wounds, organs, and internal structure become mutually incompatible when viewed from different angles."
+      },
+      "generation": {
+        "statProfile": "creature-caster",
+        "traits": [
+          "{{ traits:magic_resistance }}",
+          "Perspective Anatomy — Changing viewpoint reveals a different arrangement of its body, so a wound or obstacle visible from one angle may not exist from another."
+        ],
+        "fixedRules": [
+          {
+            "entry": "space_rule",
+            "level": 2
+          }
+        ],
+        "naturalArmorPercentage": 20
+      }
+    },
+    {
+      "id": "hunger_in_the_walls",
+      "name": "Hunger in the Walls",
+      "weight": 1,
+      "fields": {
+        "description": "A building-dwelling organism spread through walls, ceilings, and floors that manifests temporary mouths, limbs, tendrils, and eyes through architectural surfaces."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          "{{ traits:camouflage }}",
+          "{{ traits:extended_reach }}",
+          "Distributed Body — Moves through connected architecture and exposes only temporary pieces of itself; destroying one manifestation does not reveal the whole creature."
+        ],
+        "naturalArmorPercentage": 30
+      }
+    },
+    {
+      "id": "borrowed_skeleton",
+      "name": "Borrowed Skeleton",
+      "weight": 1,
+      "fields": {
+        "description": "A naturally soft creature that inhabits discarded skeletons, armor, mannequins, or other rigid frames to stand and move, abandoning each support when it fails."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          "{{ traits:camouflage }}",
+          "Borrowed Frame — Can enter an unattended rigid frame to imitate its shape and movement, then leave it behind without injury.",
+          "Unsupported Flesh — Without a frame, can squeeze through any opening large enough for its soft body but can barely stand or carry weight."
+        ],
+        "naturalArmorPercentage": 5
+      }
     }
   ]
 }

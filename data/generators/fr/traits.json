@@ -315,6 +315,55 @@
       "fields": {
         "description": "Ne peut pas recevoir l’état {{ status_effect:frightened.name }}."
       }
+    },
+    {
+      "id": "gaze_effect",
+      "name": "Effet de regard",
+      "fields": {
+        "description": "Son regard direct produit l'effet surnaturel décrit par la créature ; les obstacles, l'observation indirecte ou le fait d'éviter son regard peuvent empêcher l'exposition."
+      }
+    },
+    {
+      "id": "swallowing",
+      "name": "Déglutition",
+      "fields": {
+        "description": "Peut engloutir ou avaler une créature plus petite qu'elle maintient fermement en lutte ; la captive reste vivante à l'intérieur et peut tenter de s'échapper ou d'être libérée."
+      }
+    },
+    {
+      "id": "splitting_body",
+      "name": "Corps divisible",
+      "fields": {
+        "description": "Un déclencheur approprié peut diviser son corps en plusieurs portions plus petites capables de se déplacer indépendamment, puis éventuellement de se réunir."
+      }
+    },
+    {
+      "id": "spell_reflection",
+      "name": "Réflexion des sorts",
+      "fields": {
+        "description": "Lorsqu'elle résiste à un effet surnaturel qui la vise directement, elle peut rediriger cet effet vers une autre cible plausible à proximité."
+      }
+    },
+    {
+      "id": "memory_theft",
+      "name": "Vol de souvenirs",
+      "fields": {
+        "description": "Peut voler, dévorer, copier ou effacer les souvenirs d'une victime par le mode de contact ou d'alimentation décrit par la créature."
+      }
+    },
+    {
+      "id": "reactive_adaptation",
+      "name": "Adaptation réactive",
+      "fields": {
+        "description": "Après avoir survécu à une source de dégâts, développe une réponse ou une résistance visible spécifiquement adaptée à celle-ci."
+      }
+    },
+    {
+      "id": "temporary_duplication",
+      "name": "Duplication temporaire",
+      "fields": {
+        "description": "Peut créer des copies, des échos ou des reflets éphémères qui imitent ses mouvements de manière convaincante avant de disparaître."
+      }
     }
   ]
 }

@@ -329,6 +329,62 @@
       "fields": {
         "description": "Trouver une personne capable d’assurer la prestation suivante — {{ service.name }} — puis la conduire auprès de {{ faction.name }} avant qu’un besoin urgent ne se transforme en crise."
       }
+    },
+    {
+      "id": "destroy_artifact_elsewhere",
+      "name": "Transporter un artefact vers son unique destruction sûre",
+      "fields": {
+        "description": "Transportez {{ artifact.name }} jusqu'à l'environnement, au lieu, au phénomène ou à la méthode précise qui peut le détruire sans provoquer une catastrophe plus grave."
+      }
+    },
+    {
+      "id": "capture_creature_avoid_death_trigger",
+      "name": "Capturer une créature dont la mort serait pire",
+      "fields": {
+        "description": "Capturez vivante une créature du type {{ monster.name }}, car la tuer déclencherait une malédiction, libérerait quelque chose, briserait un sceau ou provoquerait un autre désastre."
+      }
+    },
+    {
+      "id": "repair_dungeon_containment",
+      "name": "Réparer le confinement d'un donjon",
+      "fields": {
+        "description": "Entrez dans un donjon pour restaurer les protections, les mécanismes, les sceaux, les gardiens ou les infrastructures endommagés qui empêchent ce qu'il contient de s'échapper."
+      }
+    },
+    {
+      "id": "return_rejected_artifact",
+      "name": "Rendre un artefact à un lieu qui le rejette",
+      "fields": {
+        "description": "Rapportez {{ artifact.name }} au lieu décrit comme {{ site.generator.name }}, malgré les défenses, les gardiens ou le lieu lui-même qui s'opposent à son retour."
+      }
+    },
+    {
+      "id": "escort_without_revealing_purpose",
+      "name": "Escorter sans révéler la véritable raison",
+      "fields": {
+        "description": "Escortez une personne au passé de {{ background.generator.name }} dont la coopération est indispensable, tout en lui cachant le véritable but du voyage."
+      }
+    },
+    {
+      "id": "retrieve_unused_object",
+      "name": "Récupérer un objet que personne ne doit utiliser",
+      "fields": {
+        "description": "Récupérez {{ loot.generator.name }} sans laisser aucun membre du groupe l'utiliser ou l'activer, car cela ferait échouer la mission ou provoquerait une conséquence grave."
+      }
+    },
+    {
+      "id": "negotiate_with_hunted_creature",
+      "name": "Négocier avec une créature que tous veulent tuer",
+      "fields": {
+        "description": "Trouvez une créature intelligente du type {{ monster.name }} et obtenez ses informations ou sa coopération tandis qu'un autre groupe exige sa mort."
+      }
+    },
+    {
+      "id": "reenact_lost_expedition",
+      "name": "Reconstituer une expédition disparue aux récits contradictoires",
+      "fields": {
+        "description": "Reproduisez l'itinéraire et les actes d'une expédition disparue à {{ site.generator.name }} afin de comprendre pourquoi les récits qui subsistent se contredisent."
+      }
     }
   ]
 }

@@ -142,6 +142,33 @@
         "skill_bonus": "Voyage terrestre, {{ ability:tracking.name }} et combat monté.",
         "physical_ability": "Course rapide sur terrain ouvert et grande capacité de transport."
       }
+    },
+    {
+      "id": "crafted_people",
+      "name": "Peuple façonné",
+      "fields": {
+        "description": "Un peuple dont les corps sont délibérément assemblés à partir de matières ouvragées, puis éveillés par un esprit, une âme ou un enchantement vivant.",
+        "skill_bonus": "Construction, réparation et identification de la fonction des objets artificiels.",
+        "physical_ability": "Corps construit : n'a pas besoin de respirer et peut remplacer ses composants visiblement endommagés par des pièces façonnées adaptées."
+      }
+    },
+    {
+      "id": "elemental_people",
+      "name": "Peuple élémentaire",
+      "fields": {
+        "description": "Des lignées humanoïdes dont le corps mêle visiblement la chair au feu, à l'eau, à la pierre, à l'air, à la glace, à la foudre ou à une autre matière élémentaire.",
+        "skill_bonus": "Connaissance des phénomènes élémentaires et des environnements façonnés par leur propre élément.",
+        "physical_ability": "Corps élémentaire : supporte sans danger le contact ordinaire avec la matière qui le compose visiblement."
+      }
+    },
+    {
+      "id": "chorus_born",
+      "name": "Enfants du chœur",
+      "fields": {
+        "description": "Des individus distincts qui partagent naturellement des fragments de pensées, d'émotions, de souvenirs, de rêves ou de sensations avec les membres proches de leur peuple.",
+        "skill_bonus": "Coordination et perception de l'état émotionnel d'un groupe familier.",
+        "physical_ability": "Conscience partagée : peut transmettre silencieusement une sensation ou une émotion simple à un Enfant du chœur proche et consentant."
+      }
     }
   ]
 }

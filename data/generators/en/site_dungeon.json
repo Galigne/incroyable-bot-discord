@@ -215,6 +215,69 @@
       "fields": {
         "description": "An abandoned chapel or temple of {{ religion.name }} whose rites still produce effects without an officiant."
       }
+    },
+    {
+      "id": "containment_complex",
+      "name": "Containment Complex",
+      "fields": {
+        "description": "a fortress built to keep its contents from escaping, with inward-facing checkpoints, wards, traps, and emergency seals."
+      }
+    },
+    {
+      "id": "corpse_labyrinth",
+      "name": "Corpse Labyrinth",
+      "fields": {
+        "description": "passages carved through the bones, organs, wounds, parasites, and later constructions inside an impossibly large preserved corpse."
+      }
+    },
+    {
+      "id": "migrating_dungeon",
+      "name": "Migrating Dungeon",
+      "fields": {
+        "description": "an interior that periodically vanishes and reappears elsewhere while retaining the same rooms, inhabitants, and internal map."
+      }
+    },
+    {
+      "id": "future_ruin",
+      "name": "Future Ruin",
+      "fields": {
+        "description": "ruins containing bodies, records, damage, and artifacts left by events that have not yet happened."
+      }
+    },
+    {
+      "id": "parasite_temple",
+      "name": "Parasite Temple",
+      "fields": {
+        "description": "a seemingly constructed sanctuary that is actually a parasitic growth attached to a far larger living or sleeping entity."
+      }
+    },
+    {
+      "id": "broken_reality_vault",
+      "name": "Broken-Reality Vault",
+      "fields": {
+        "description": "a containment vault whose captive anomaly makes neighboring rooms obey incompatible rules of gravity, distance, scale, direction, or causality."
+      }
+    },
+    {
+      "id": "forgotten_palace",
+      "name": "Forgotten Palace",
+      "fields": {
+        "description": "a palace everyone nearby remembers as ancient even though maps, foundations, and old records prove it appeared only recently."
+      }
+    },
+    {
+      "id": "endless_procession",
+      "name": "Endless Procession",
+      "fields": {
+        "description": "an entire complex built around a funerary, royal, religious, or magical procession whose assigned participants have repeated their roles for centuries."
+      }
+    },
+    {
+      "id": "sleeping_machine",
+      "name": "Sleeping Machine",
+      "fields": {
+        "description": "a vast dormant mechanism whose passages, systems, lights, movement, and defenses awaken one by one as explorers travel through it."
+      }
     }
   ],
   "modifiers": {

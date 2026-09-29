@@ -42,6 +42,20 @@
       "fields": {
         "description": "Les panneaux, les étiquettes, les indications et les noms de pièces sont systématiquement faux avec une assurance parfaite, même lorsqu’on les remplace ou les corrige."
       }
+    },
+    {
+      "id": "overlapping_eras",
+      "name": "Époques superposées",
+      "fields": {
+        "description": "Les mêmes salles existent simultanément à deux époques de leur histoire ; les objets et les actes de l'une peuvent modifier ce que révèle l'autre."
+      }
+    },
+    {
+      "id": "independent_reflections",
+      "name": "Reflets indépendants",
+      "fields": {
+        "description": "Les reflets bougent, réagissent, révèlent des détails cachés et prennent des décisions indépendamment des personnes et des objets auxquels ils ressemblent."
+      }
     }
   ]
 }

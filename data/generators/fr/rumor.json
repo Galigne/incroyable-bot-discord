@@ -394,6 +394,55 @@
       "fields": {
         "description": "Une prétendue sainte relique serait un morceau de corps non identifié sans aucun lien établi avec le saint, la divinité ou le miracle qu’on lui attribue."
       }
+    },
+    {
+      "id": "unfindable_remembered_town",
+      "name": "La ville dont on se souvient sur une route",
+      "fields": {
+        "description": "Des voyageurs qui reviennent par la même route se souviennent indépendamment d'avoir visité une ville absente de toutes les cartes et que personne ne parvient à retrouver."
+      }
+    },
+    {
+      "id": "bereavement_visible_monster",
+      "name": "Monstre visible uniquement aux endeuillés",
+      "fields": {
+        "description": "La créature du type {{ monster.name }} ne serait perceptible que par les personnes qui ont perdu quelqu'un d'important à cause d'elle."
+      }
+    },
+    {
+      "id": "growing_abandoned_structure",
+      "name": "Nouvelle salle mensuelle",
+      "fields": {
+        "description": "Un lieu abandonné du type suivant gagne chaque mois une nouvelle salle intérieure sans changer à l'extérieur : {{ building.name }}."
+      }
+    },
+    {
+      "id": "warning_artifact",
+      "name": "Artefact maudit qui tente d'avertir",
+      "fields": {
+        "description": "Le comportement apparemment malveillant de {{ artifact.name }} serait en réalité une tentative d'avertir ses propriétaires d'un danger qu'ils ont mal compris."
+      }
+    },
+    {
+      "id": "shared_unknown_companion",
+      "name": "Même compagnon inconnu",
+      "fields": {
+        "description": "Des voyageurs sans lien entre eux décrivent le même mystérieux compagnon, mais aucun ne sait expliquer quand cette personne les a rejoints ni d'où elle vient."
+      }
+    },
+    {
+      "id": "domestic_dungeon_entrances",
+      "name": "Portes de donjon dans des maisons",
+      "fields": {
+        "description": "Des portes, des placards, des caves et des sous-sols ordinaires de maisons privées commencent à s'ouvrir sur le même lieu décrit comme {{ dungeon.name }}."
+      }
+    },
+    {
+      "id": "underground_false_bells",
+      "name": "Quelque chose imite les cloches sous terre",
+      "fields": {
+        "description": "Un son de cloche monte d'un sous-sol où il n'en existe aucune, et son rythme ressemble de plus en plus à une imitation ou à un signal volontaire."
+      }
     }
   ]
 }

@@ -199,6 +199,55 @@
       "fields": {
         "description": "Le personnage a été partiellement hybridé avec la créature suivante : {{ creature.generator.name }}. L’anatomie et les facultés distinctives de cette créature transforment l’apparence et le potentiel d’aventurier du personnage sans remplacer son esprit ni son identité."
       }
+    },
+    {
+      "id": "returned",
+      "name": "Revenu",
+      "fields": {
+        "description": "Le personnage est véritablement mort avant de revenir, durablement transformé sur le plan physique, émotionnel ou surnaturel par cette expérience."
+      }
+    },
+    {
+      "id": "living_experiment",
+      "name": "Expérience vivante",
+      "fields": {
+        "description": "Des expériences magiques, alchimiques, biologiques ou occultes délibérées ont transformé le corps du personnage de façon permanente."
+      }
+    },
+    {
+      "id": "planar_touched",
+      "name": "Marqué par un autre plan",
+      "fields": {
+        "description": "Le corps du personnage manifeste par intermittence la matière, le climat, la lumière, les sons ou les lois physiques d'un autre plan ou d'une réalité étrangère."
+      }
+    },
+    {
+      "id": "symbiotic",
+      "name": "Symbiotique",
+      "fields": {
+        "description": "Un organisme indépendant mais non hostile partage durablement le corps du personnage, lui offrant des capacités inhabituelles tout en poursuivant ses propres besoins et préférences."
+      }
+    },
+    {
+      "id": "cursed_bloodline",
+      "name": "Lignée maudite",
+      "fields": {
+        "description": "Un fardeau surnaturel héréditaire se manifeste périodiquement chez le personnage sous la forme d'une transformation, d'une compulsion, d'une contamination ou d'une malédiction ancestrale."
+      }
+    },
+    {
+      "id": "unstable_shapeshifter",
+      "name": "Métamorphe instable",
+      "fields": {
+        "description": "Le personnage peut changer d'apparence ou de forme, mais ses transformations peuvent se déclencher involontairement, s'interrompre ou laisser des traits imprévus."
+      }
+    },
+    {
+      "id": "dream_bound",
+      "name": "Lié aux rêves",
+      "fields": {
+        "description": "Chaque fois que le personnage dort, il rejoint le même lieu surnaturel, la même entité ou le même rêve partagé, dont les événements restent pertinents une fois éveillé."
+      }
     }
   ]
 }

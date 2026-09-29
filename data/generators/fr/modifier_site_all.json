@@ -116,6 +116,20 @@
       "fields": {
         "description": "La gravité locale tire selon un angle manifeste, faisant dériver les objets non arrimés, compliquant les trajets familiers et rendant dangereuse une architecture ordinaire."
       }
+    },
+    {
+      "id": "intermittent_magic_void",
+      "name": "Vide magique intermittent",
+      "fields": {
+        "description": "Une frontière mobile ou temporaire neutralise la magie et les effets de LOI en son sein ; les effets suspendus reprennent lorsqu'elle se déplace ou disparaît."
+      }
+    },
+    {
+      "id": "dream_shaped",
+      "name": "Façonné par les rêves",
+      "fields": {
+        "description": "Les créatures, les objets, les événements ou les structures dont on rêve régulièrement dans les environs commencent à apparaître ou à changer dans la réalité physique."
+      }
     }
   ]
 }

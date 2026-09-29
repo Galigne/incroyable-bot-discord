@@ -42,6 +42,20 @@
       "fields": {
         "description": "Signs, labels, directions, and room names are consistently and confidently wrong, even when replaced or corrected."
       }
+    },
+    {
+      "id": "overlapping_eras",
+      "name": "Overlapping Eras",
+      "fields": {
+        "description": "The same rooms exist in two periods of their own history at once, and objects or actions in either era can alter what the other reveals."
+      }
+    },
+    {
+      "id": "independent_reflections",
+      "name": "Independent Reflections",
+      "fields": {
+        "description": "Reflections move, react, reveal hidden details, and make choices independently of the people and objects they resemble."
+      }
     }
   ]
 }

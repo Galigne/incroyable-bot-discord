@@ -214,6 +214,20 @@
       "fields": {
         "description": "Air currents, solid clouds, and weather phenomena form a traversable but unstable territory."
       }
+    },
+    {
+      "id": "emotional_wilderness",
+      "name": "Empathic Wilds",
+      "fields": {
+        "description": "An enchanted wilderness reshapes paths, plants, weather, and visibility in response to the dominant emotions of travelers within it."
+      }
+    },
+    {
+      "id": "elemental_anomaly",
+      "name": "Elemental Anomaly",
+      "fields": {
+        "description": "One elemental phenomenon behaves impossibly across the region, such as stationary lightning, rising rivers, solid mist, floating stone, or fire that never spreads."
+      }
     }
   ],
   "modifiers": {

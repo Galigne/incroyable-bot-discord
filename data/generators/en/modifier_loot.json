@@ -113,6 +113,62 @@
       "fields": {
         "description": "The item is supernaturally difficult to conceal completely; some glow, sound, scent, movement, or other telltale sign betrays it."
       }
+    },
+    {
+      "id": "jealous",
+      "name": "Jealous",
+      "fields": {
+        "description": "The item resents similar equipment receiving attention and may complain, interfere, or behave unreliably while its owner uses a rival object."
+      }
+    },
+    {
+      "id": "bloodthirsty",
+      "name": "Bloodthirsty",
+      "fields": {
+        "description": "The item becomes eager and unusually cooperative once serious violence begins, then resists being put away or abandoned before the conflict satisfies it."
+      }
+    },
+    {
+      "id": "truthbound",
+      "name": "Truthbound",
+      "fields": {
+        "description": "The item responds favorably to genuine honesty and becomes cold, obstructive, or unreliable when its owner knowingly lies."
+      }
+    },
+    {
+      "id": "homesick",
+      "name": "Homesick",
+      "fields": {
+        "description": "The item becomes more cooperative near the place, culture, maker, magical environment, or material of its origin and less reliable far away."
+      }
+    },
+    {
+      "id": "protective",
+      "name": "Protective",
+      "fields": {
+        "description": "The item sincerely tries to keep its owner safe, but may resist dangerous journeys, obstruct risky actions, or draw attention to threats against the owner's wishes."
+      }
+    },
+    {
+      "id": "curious",
+      "name": "Curious",
+      "fields": {
+        "description": "Unfamiliar places, creatures, magic, and objects fascinate the item, which may tug, move, activate, or make noise to encourage investigation."
+      }
+    },
+    {
+      "id": "possessive",
+      "name": "Possessive",
+      "fields": {
+        "description": "The item considers its current owner to belong to it and resists being sold, lent, discarded, stolen, or given away."
+      }
+    },
+    {
+      "id": "cowardly",
+      "name": "Cowardly",
+      "fields": {
+        "description": "The item tries to avoid obvious danger by hiding, resisting activation, becoming difficult to draw, attempting to leave, or warning its owner excessively."
+      }
     }
   ]
 }

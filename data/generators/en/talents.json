@@ -388,6 +388,62 @@
       "fields": {
         "description": "+2 when searching explored locations for useful supplies, components, ammunition, or salvage."
       }
+    },
+    {
+      "id": "counterattacker",
+      "name": "Counterattacker",
+      "fields": {
+        "description": "+1 to the next close attack made against an opponent before the end of the next turn after that opponent fails a close attack against the character."
+      }
+    },
+    {
+      "id": "ritual_specialist",
+      "name": "Ritual Specialist",
+      "fields": {
+        "description": "+2 to actions made to prepare or perform a deliberate magical ritual when at least ten uninterrupted minutes are available."
+      }
+    },
+    {
+      "id": "battlefield_controller",
+      "name": "Battlefield Controller",
+      "fields": {
+        "description": "+1 to actions that reposition an opponent, deny a route, exploit terrain, or hold a chokepoint."
+      }
+    },
+    {
+      "id": "defensive_guardian",
+      "name": "Defensive Guardian",
+      "fields": {
+        "description": "+1 to actions made to interpose between danger and a nearby ally, protect that ally, or prevent an enemy from passing."
+      }
+    },
+    {
+      "id": "opportunist",
+      "name": "Opportunist",
+      "fields": {
+        "description": "+1 to the first action that immediately exploits an opponent's distraction, mistake, or newly exposed position."
+      }
+    },
+    {
+      "id": "magical_improviser",
+      "name": "Magical Improviser",
+      "fields": {
+        "description": "+2 when adapting a known magical effect to a plausible purpose outside its most obvious use."
+      }
+    },
+    {
+      "id": "animal_handler",
+      "name": "Animal Handler",
+      "fields": {
+        "description": "+2 when calming, training, directing, caring for, or working alongside ordinary or unusual animals."
+      }
+    },
+    {
+      "id": "escape_artist",
+      "name": "Escape Artist",
+      "fields": {
+        "description": "+2 to actions made to escape restraints, grapples, cages, bindings, or other physical confinement."
+      }
     }
   ]
 }

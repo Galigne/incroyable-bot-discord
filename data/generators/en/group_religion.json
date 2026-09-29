@@ -316,6 +316,76 @@
         "holy_place": "The Stair of Empty Thrones.",
         "relationship_with_magic": "Rewards domination, command, transformation, and dangerous tests of worth."
       }
+    },
+    {
+      "id": "the_last_radiance",
+      "name": "The Last Radiance",
+      "fields": {
+        "deity_or_belief": "A deity whose death is historically proven, yet whose prayers and miracles still receive answers from an unknown source.",
+        "rites": "Worshipers recite the god's final words, tend preserved remains or memorial ash, and compare new miracles with records made before the death.",
+        "commandment": "Continue the merciful work of the dead god without pretending to understand who or what now answers.",
+        "taboo": "Declaring the deity secretly alive or manufacturing a false explanation for the surviving miracles.",
+        "sacred_symbol": "A darkened sun ringed by one thin line of light.",
+        "religious_order": "The Posthumous Choir, priests who authenticate miracles and investigate their source.",
+        "holy_place": "The Sepulcher of Witnesses, where the deity's death was observed and documented.",
+        "relationship_with_magic": "Divine magic still functions, but every unexplained answer is recorded as evidence rather than proof of resurrection."
+      }
+    },
+    {
+      "id": "the_kindly_chain",
+      "name": "The Kindly Chain",
+      "fields": {
+        "deity_or_belief": "A beloved god whose free physical manifestation would overwhelm mortal choice and must remain sealed, sleeping, chained, or divided.",
+        "rites": "Congregations renew seals, sing lullabies, replace sacred chains, and confess temptations to release the god.",
+        "commandment": "Love the imprisoned deity enough to preserve the prison.",
+        "taboo": "Weakening a seal for revelation, power, or direct contact.",
+        "sacred_symbol": "A gentle hand closing a silver shackle.",
+        "religious_order": "The Tender Wardens, jailers, theologians, and caretakers of the divine prison.",
+        "holy_place": "The Heart-Lock, the most accessible of several sanctuaries maintaining the confinement.",
+        "relationship_with_magic": "Miracles seep through the seals in controlled fragments; stronger manifestations are treated as dangerous structural failures."
+      }
+    },
+    {
+      "id": "the_celestial_tide",
+      "name": "The Celestial Tide",
+      "fields": {
+        "deity_or_belief": "A vast observable current of light and magic crossing the heavens on a recurring cycle, revered without being considered a person.",
+        "rites": "Followers chart its passage, expose offerings to its light, and time journeys, vows, and funerals to its phases.",
+        "commandment": "Observe the greater cycle before acting and leave honest records for those who witness its next return.",
+        "taboo": "Claiming that the phenomenon speaks with a human voice or grants one person exclusive authority.",
+        "sacred_symbol": "Three curved bands crossing a field of stars.",
+        "religious_order": "The Tidewatchers, astronomer-priests who maintain shared observations across distant regions.",
+        "holy_place": "The Meridian Steps, an open observatory aligned with the current at its brightest passage.",
+        "relationship_with_magic": "Magic changes predictably as the current approaches and recedes, making measurement a sacred discipline."
+      }
+    },
+    {
+      "id": "the_returning_lamps",
+      "name": "The Returning Lamps",
+      "fields": {
+        "deity_or_belief": "Recognized saints are repeatedly reborn into new bodies while remaining distinct people shaped by each life.",
+        "rites": "Communities preserve memory tests, recover keepsakes, and perform public recognitions when a possible incarnation is found.",
+        "commandment": "Honor both the returning office and the new life carrying it.",
+        "taboo": "Forcing a child to imitate a prior incarnation or hiding evidence that a recognized claimant is false.",
+        "sacred_symbol": "One flame passed between lamps of different shapes.",
+        "religious_order": "The Seekers of Embers, investigators and guardians responsible for finding and educating new incarnations.",
+        "holy_place": "The Hall of Many Lives, an archive containing verified memories and objects from previous incarnations.",
+        "relationship_with_magic": "Recognition miracles reveal continuities of memory but cannot erase uncertainty, politics, or the personality of the new incarnation."
+      }
+    },
+    {
+      "id": "the_distant_mercy",
+      "name": "The Distant Mercy",
+      "fields": {
+        "deity_or_belief": "A genuinely benevolent entity whose physical arrival would unleash unbearable light, gravity, growth, storms, or reality distortion.",
+        "rites": "Worshipers communicate through layered mirrors, distant choirs, sealed dreams, and offerings sent away from inhabited lands.",
+        "commandment": "Receive compassion at a survivable distance and protect the world from the beloved presence.",
+        "taboo": "Inviting full manifestation near any living community.",
+        "sacred_symbol": "An open eye behind seven closed doors.",
+        "religious_order": "The Far Intercessors, mediators trained to answer the entity without drawing it closer.",
+        "holy_place": "The Last Horizon, a remote sanctuary built to redirect signs of an approaching manifestation.",
+        "relationship_with_magic": "Even indirect miracles produce dangerous side effects, so restraint and dispersal are central sacred techniques."
+      }
     }
   ]
 }

@@ -329,6 +329,62 @@
       "fields": {
         "description": "Find someone capable of providing the following service — {{ service.name }} — and bring them to {{ faction.name }} before an urgent need becomes a crisis."
       }
+    },
+    {
+      "id": "destroy_artifact_elsewhere",
+      "name": "Carry an Artifact to Its Only Safe Destruction",
+      "fields": {
+        "description": "Transport {{ artifact.name }} to the specific environment, location, phenomenon, or method that can destroy it without causing a greater catastrophe."
+      }
+    },
+    {
+      "id": "capture_creature_avoid_death_trigger",
+      "name": "Capture a Creature Whose Death Is Worse",
+      "fields": {
+        "description": "Capture a creature of the {{ monster.name }} type alive because killing it would activate a curse, release something, break a seal, or cause another disaster."
+      }
+    },
+    {
+      "id": "repair_dungeon_containment",
+      "name": "Repair a Dungeon's Containment",
+      "fields": {
+        "description": "Enter a dungeon to restore damaged wards, mechanisms, seals, guardians, or infrastructure that prevents something inside from escaping."
+      }
+    },
+    {
+      "id": "return_rejected_artifact",
+      "name": "Return an Artifact to a Rejecting Place",
+      "fields": {
+        "description": "Return {{ artifact.name }} to the place described as {{ site.generator.name }}, despite defenses, guardians, or the location itself resisting its return."
+      }
+    },
+    {
+      "id": "escort_without_revealing_purpose",
+      "name": "Escort Someone Without Revealing Why",
+      "fields": {
+        "description": "Escort a person with the {{ background.generator.name }} background whose cooperation is necessary, while keeping the true purpose of the journey secret from them."
+      }
+    },
+    {
+      "id": "retrieve_unused_object",
+      "name": "Retrieve an Object Nobody May Use",
+      "fields": {
+        "description": "Recover {{ loot.generator.name }} without allowing anyone in the party to use or activate it, because doing so would ruin the objective or trigger a serious consequence."
+      }
+    },
+    {
+      "id": "negotiate_with_hunted_creature",
+      "name": "Negotiate with a Creature Others Want Dead",
+      "fields": {
+        "description": "Locate an intelligent creature of the {{ monster.name }} type and secure its information or cooperation while another group demands its death."
+      }
+    },
+    {
+      "id": "reenact_lost_expedition",
+      "name": "Reenact a Contradictory Lost Expedition",
+      "fields": {
+        "description": "Reproduce the route and actions of a vanished expedition at {{ site.generator.name }} to learn why surviving accounts contradict one another."
+      }
     }
   ]
 }

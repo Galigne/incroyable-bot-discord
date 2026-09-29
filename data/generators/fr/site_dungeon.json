@@ -215,6 +215,69 @@
       "fields": {
         "description": "Une chapelle ou un temple abandonné dont les rites produisent encore des effets sans officiant. Le sanctuaire appartenait à la religion suivante : {{ religion.name }}."
       }
+    },
+    {
+      "id": "containment_complex",
+      "name": "Complexe de confinement",
+      "fields": {
+        "description": "une forteresse conçue pour empêcher son contenu de s'échapper, avec des postes de contrôle, des sceaux, des pièges et des protections tournés vers l'intérieur."
+      }
+    },
+    {
+      "id": "corpse_labyrinth",
+      "name": "Labyrinthe cadavérique",
+      "fields": {
+        "description": "des passages tracés parmi les os, les organes, les blessures, les parasites et les constructions tardives à l'intérieur d'un cadavre préservé aux dimensions impossibles."
+      }
+    },
+    {
+      "id": "migrating_dungeon",
+      "name": "Donjon migrateur",
+      "fields": {
+        "description": "un intérieur qui disparaît périodiquement pour réapparaître ailleurs tout en conservant ses salles, ses occupants et son plan interne."
+      }
+    },
+    {
+      "id": "future_ruin",
+      "name": "Ruine du futur",
+      "fields": {
+        "description": "des ruines contenant des corps, des archives, des dégâts et des artefacts laissés par des événements qui ne se sont pas encore produits."
+      }
+    },
+    {
+      "id": "parasite_temple",
+      "name": "Temple parasite",
+      "fields": {
+        "description": "un sanctuaire apparemment construit qui est en réalité une excroissance parasite fixée à une entité vivante ou endormie bien plus vaste."
+      }
+    },
+    {
+      "id": "broken_reality_vault",
+      "name": "Caveau de réalité brisée",
+      "fields": {
+        "description": "un caveau de confinement dont l'anomalie captive impose aux salles voisines des lois incompatibles de gravité, de distance, d'échelle, de direction ou de causalité."
+      }
+    },
+    {
+      "id": "forgotten_palace",
+      "name": "Palais oublié",
+      "fields": {
+        "description": "un palais que tous les habitants des environs croient ancien, alors que les cartes, les fondations et les archives prouvent qu'il n'est apparu que récemment."
+      }
+    },
+    {
+      "id": "endless_procession",
+      "name": "Procession sans fin",
+      "fields": {
+        "description": "un complexe entier organisé autour d'une procession funéraire, royale, religieuse ou magique dont les participants répètent leurs rôles depuis des siècles."
+      }
+    },
+    {
+      "id": "sleeping_machine",
+      "name": "Machine endormie",
+      "fields": {
+        "description": "un immense mécanisme assoupi dont les passages, les systèmes, les lumières, les mouvements et les défenses s'éveillent à mesure que les explorateurs le parcourent."
+      }
     }
   ],
   "modifiers": {

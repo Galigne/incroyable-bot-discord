@@ -199,6 +199,55 @@
       "fields": {
         "description": "The character has been partially hybridized with {{ creature.generator.name }}. Distinctive anatomy and capabilities from that creature reshape their appearance and adventuring potential without replacing their mind or identity."
       }
+    },
+    {
+      "id": "returned",
+      "name": "Returned",
+      "fields": {
+        "description": "The character genuinely died and later returned, carrying a persistent physical, emotional, or supernatural alteration from the experience."
+      }
+    },
+    {
+      "id": "living_experiment",
+      "name": "Living Experiment",
+      "fields": {
+        "description": "Deliberate magical, alchemical, biological, or occult experiments permanently reshaped the character's body."
+      }
+    },
+    {
+      "id": "planar_touched",
+      "name": "Planar-Touched",
+      "fields": {
+        "description": "The character's body intermittently manifests matter, weather, light, sounds, or physical laws associated with another plane or alien reality."
+      }
+    },
+    {
+      "id": "symbiotic",
+      "name": "Symbiotic",
+      "fields": {
+        "description": "An independent but non-hostile organism permanently shares the character's body, offering unusual capabilities while pursuing needs and preferences of its own."
+      }
+    },
+    {
+      "id": "cursed_bloodline",
+      "name": "Cursed Bloodline",
+      "fields": {
+        "description": "An inherited supernatural burden periodically manifests through the character as a transformation, compulsion, contamination, or ancestral curse."
+      }
+    },
+    {
+      "id": "unstable_shapeshifter",
+      "name": "Unstable Shapeshifter",
+      "fields": {
+        "description": "The character can change appearance or form, but transformations may begin involuntarily, fail partway, or leave unintended traits behind."
+      }
+    },
+    {
+      "id": "dream_bound",
+      "name": "Dream-Bound",
+      "fields": {
+        "description": "Whenever the character sleeps, they reconnect with the same supernatural place, entity, or shared dream whose events remain relevant while awake."
+      }
     }
   ]
 }

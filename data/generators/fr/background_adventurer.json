@@ -81,6 +81,14 @@
       "generation": {
         "statProfile": "character-fighter"
       }
+    },
+    {
+      "id": "relic_hunter",
+      "name": "Chasseur de reliques"
+    },
+    {
+      "id": "dungeon_cartographer",
+      "name": "Cartographe de donjons"
     }
   ]
 }

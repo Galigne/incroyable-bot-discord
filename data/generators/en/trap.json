@@ -296,6 +296,62 @@
       "fields": {
         "description": "A mirror produces a temporary duplicate of the victim that knows their recent memories and tries to mislead allies or open the way for nearby guardians."
       }
+    },
+    {
+      "id": "hungry_threshold",
+      "name": "Hungry Threshold",
+      "fields": {
+        "description": "The passage opens only after someone knowingly surrenders something of genuine personal value; money or an unwanted possession does not satisfy it."
+      }
+    },
+    {
+      "id": "moving_safe_zone",
+      "name": "Moving Safe Zone",
+      "fields": {
+        "description": "Only one part of the dangerous room is safe at a time. Environmental clues reveal the pattern by which that refuge moves."
+      }
+    },
+    {
+      "id": "sacrificial_lever",
+      "name": "Sacrificial Lever",
+      "fields": {
+        "description": "The mechanism appears to require someone to remain behind holding, operating, or weighing it down, but a clever substitute can preserve the effect."
+      }
+    },
+    {
+      "id": "statue_of_equal_force",
+      "name": "Statue of Equal Force",
+      "fields": {
+        "description": "Every push, strike, lift, or other physical force applied to the statue is reproduced with comparable force elsewhere in the room."
+      }
+    },
+    {
+      "id": "delayed_consequence",
+      "name": "Delayed Consequence",
+      "fields": {
+        "description": "Harmful consequences of actions taken inside the area are postponed until the responsible creature crosses its exit; visible traces reveal the connection."
+      }
+    },
+    {
+      "id": "listening_door",
+      "name": "Listening Door",
+      "fields": {
+        "description": "The door ignores keys and force, listens to travelers explain why they deserve passage, and opens only when their reasoning satisfies its values."
+      }
+    },
+    {
+      "id": "forgotten_exit",
+      "name": "Forgotten Exit",
+      "fields": {
+        "description": "Anyone who looks directly at the exit becomes unable to perceive it consciously, though touch, mirrors, effects, and another person's directions still reveal it."
+      }
+    },
+    {
+      "id": "living_mechanism",
+      "name": "Living Mechanism",
+      "fields": {
+        "description": "The apparent trap is an embedded creature repeating a biological behavior; understanding its needs offers alternatives to disabling it by force."
+      }
     }
   ]
 }

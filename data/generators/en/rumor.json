@@ -394,6 +394,55 @@
       "fields": {
         "description": "A supposedly holy relic is rumored to be an unidentified body part with no proven connection to the saint, deity, or miracle attributed to it."
       }
+    },
+    {
+      "id": "unfindable_remembered_town",
+      "name": "The Town Remembered on One Road",
+      "fields": {
+        "description": "Travelers returning by the same road independently remember visiting one settlement that no map records and nobody can locate again."
+      }
+    },
+    {
+      "id": "bereavement_visible_monster",
+      "name": "Monster Visible Only to the Bereaved",
+      "fields": {
+        "description": "The creature of the {{ monster.name }} type can supposedly be perceived only by people who have lost someone important to it."
+      }
+    },
+    {
+      "id": "growing_abandoned_structure",
+      "name": "Monthly Room in an Abandoned Structure",
+      "fields": {
+        "description": "An abandoned place of the following kind gains one new interior room every month without changing outside: {{ building.name }}."
+      }
+    },
+    {
+      "id": "warning_artifact",
+      "name": "Cursed Artifact Trying to Warn Its Owners",
+      "fields": {
+        "description": "The apparently malicious behavior of {{ artifact.name }} may actually be an attempt to warn its owners about a danger they have misunderstood."
+      }
+    },
+    {
+      "id": "shared_unknown_companion",
+      "name": "The Same Unknown Companion",
+      "fields": {
+        "description": "Unrelated travelers describe the same mysterious companion, yet none can explain when that person joined them or where they came from."
+      }
+    },
+    {
+      "id": "domestic_dungeon_entrances",
+      "name": "Dungeon Doors in Private Homes",
+      "fields": {
+        "description": "Ordinary doors, cupboards, cellars, and basements in private homes have begun opening into the same place described as {{ dungeon.name }}."
+      }
+    },
+    {
+      "id": "underground_false_bells",
+      "name": "Something Below Imitates Bells",
+      "fields": {
+        "description": "A bell-like sound rises from underground where no bell exists, and its rhythm increasingly resembles deliberate imitation or signaling."
+      }
     }
   ]
 }

@@ -388,6 +388,62 @@
       "fields": {
         "description": "+2 pour fouiller des lieux déjà explorés à la recherche de provisions, de composants, de munitions ou de matériaux récupérables utiles."
       }
+    },
+    {
+      "id": "counterattacker",
+      "name": "Contre-attaquant",
+      "fields": {
+        "description": "+1 à la prochaine attaque rapprochée portée contre un adversaire avant la fin du tour suivant lorsque celui-ci rate une attaque rapprochée contre le personnage."
+      }
+    },
+    {
+      "id": "ritual_specialist",
+      "name": "Spécialiste des rituels",
+      "fields": {
+        "description": "+2 aux actions visant à préparer ou accomplir un rituel magique méthodique lorsque dix minutes ininterrompues au moins sont disponibles."
+      }
+    },
+    {
+      "id": "battlefield_controller",
+      "name": "Contrôleur du champ de bataille",
+      "fields": {
+        "description": "+1 aux actions visant à déplacer un adversaire, condamner un passage, exploiter le terrain ou tenir un point d'étranglement."
+      }
+    },
+    {
+      "id": "defensive_guardian",
+      "name": "Gardien protecteur",
+      "fields": {
+        "description": "+1 aux actions visant à s'interposer entre un danger et un allié proche, à protéger cet allié ou à empêcher un ennemi de passer."
+      }
+    },
+    {
+      "id": "opportunist",
+      "name": "Opportuniste",
+      "fields": {
+        "description": "+1 à la première action qui exploite immédiatement la distraction, l'erreur ou la position nouvellement exposée d'un adversaire."
+      }
+    },
+    {
+      "id": "magical_improviser",
+      "name": "Improvisateur magique",
+      "fields": {
+        "description": "+2 lorsqu'un effet magique connu est adapté à un usage plausible qui sort de sa fonction la plus évidente."
+      }
+    },
+    {
+      "id": "animal_handler",
+      "name": "Dresseur d'animaux",
+      "fields": {
+        "description": "+2 pour calmer, dresser, diriger ou soigner des animaux ordinaires ou insolites, ainsi que pour travailler à leurs côtés."
+      }
+    },
+    {
+      "id": "escape_artist",
+      "name": "Roi de l'évasion",
+      "fields": {
+        "description": "+2 aux actions visant à s'échapper d'entraves, d'une lutte, d'une cage, de liens ou de toute autre captivité physique."
+      }
     }
   ]
 }

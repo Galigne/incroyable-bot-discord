@@ -135,6 +135,46 @@
         "type": "disease",
         "description": "Supernatural crystals grow around wounds and joints. Serious injury can restrict movement and inflict the {{ status_effect:slowed.name }} status effect, while breaking or forcibly removing the growth risks inflicting the {{ status_effect:bleeding.name }} status effect."
       }
+    },
+    {
+      "id": "unquiet_return",
+      "name": "Unquiet Return",
+      "fields": {
+        "type": "Curse",
+        "description": "Death no longer holds the afflicted permanently. Each return leaves a meaningful cost or lasting change chosen by the GM."
+      }
+    },
+    {
+      "id": "name_erosion",
+      "name": "Name Erosion",
+      "fields": {
+        "type": "Curse",
+        "description": "Other people gradually lose the ability to remember, speak, write, or recognize the afflicted person's name while still remembering the person."
+      }
+    },
+    {
+      "id": "shared_wound",
+      "name": "Shared Wound",
+      "fields": {
+        "type": "Curse",
+        "description": "Injuries and illnesses affecting the afflicted also begin appearing on another mysteriously linked creature, or pass from that creature to the afflicted."
+      }
+    },
+    {
+      "id": "dream_parasite",
+      "name": "Dream Parasite",
+      "fields": {
+        "type": "Curse",
+        "description": "A presence first encountered only in dreams gradually leaves evidence, inflicts consequences, and manifests parts of itself in waking reality."
+      }
+    },
+    {
+      "id": "hollow_hunger",
+      "name": "Hollow Hunger",
+      "fields": {
+        "type": "Curse",
+        "description": "Ordinary food no longer satisfies the afflicted, who hungers instead for memories, emotions, dreams, magic, secrets, fear, or another unnatural nourishment."
+      }
     }
   ]
 }

@@ -296,6 +296,62 @@
       "fields": {
         "description": "Un miroir crée un double temporaire de la victime, doté de ses souvenirs récents, qui tente d’égarer ses alliés ou d’ouvrir la voie aux gardiens proches."
       }
+    },
+    {
+      "id": "hungry_threshold",
+      "name": "Seuil affamé",
+      "fields": {
+        "description": "Le passage ne s'ouvre que lorsqu'une personne abandonne sciemment quelque chose qui possède une véritable valeur personnelle ; l'argent ou un objet indésirable ne le satisfait pas."
+      }
+    },
+    {
+      "id": "moving_safe_zone",
+      "name": "Zone sûre mouvante",
+      "fields": {
+        "description": "Une seule partie de la salle dangereuse est sûre à la fois. Des indices dans l'environnement révèlent le rythme selon lequel ce refuge se déplace."
+      }
+    },
+    {
+      "id": "sacrificial_lever",
+      "name": "Levier sacrificiel",
+      "fields": {
+        "description": "Le mécanisme semble exiger qu'une personne reste en arrière pour le tenir, l'actionner ou faire contrepoids, mais une substitution ingénieuse peut maintenir son effet."
+      }
+    },
+    {
+      "id": "statue_of_equal_force",
+      "name": "Statue de force égale",
+      "fields": {
+        "description": "Chaque poussée, frappe, traction ou autre force physique appliquée à la statue est reproduite avec une intensité comparable ailleurs dans la salle."
+      }
+    },
+    {
+      "id": "delayed_consequence",
+      "name": "Conséquence différée",
+      "fields": {
+        "description": "Les conséquences néfastes des actes accomplis dans la zone sont retardées jusqu'à ce que leur responsable franchisse la sortie ; des traces visibles permettent de comprendre le lien."
+      }
+    },
+    {
+      "id": "listening_door",
+      "name": "Porte à l'écoute",
+      "fields": {
+        "description": "La porte ignore les clés et la force, écoute les voyageurs expliquer pourquoi ils méritent de passer et ne s'ouvre que si leur raisonnement satisfait ses valeurs."
+      }
+    },
+    {
+      "id": "forgotten_exit",
+      "name": "Sortie oubliée",
+      "fields": {
+        "description": "Quiconque regarde directement la sortie devient incapable de la percevoir consciemment, mais le toucher, les miroirs, ses effets et les indications d'autrui la révèlent encore."
+      }
+    },
+    {
+      "id": "living_mechanism",
+      "name": "Mécanisme vivant",
+      "fields": {
+        "description": "Le prétendu piège est une créature encastrée qui répète un comportement biologique ; comprendre ses besoins offre d'autres solutions que sa neutralisation par la force."
+      }
     }
   ]
 }

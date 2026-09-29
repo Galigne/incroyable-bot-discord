@@ -219,6 +219,34 @@
       "fields": {
         "description": "Two independently alert heads broaden its awareness and make it harder to surprise, but conflicting instincts, attention, or timing can disrupt coordinated action."
       }
+    },
+    {
+      "id": "parasitized",
+      "name": "Parasitized",
+      "fields": {
+        "description": "Another organism visibly inhabits the creature and alters its body, behavior, priorities, or capabilities without fully replacing the host."
+      }
+    },
+    {
+      "id": "mirrored",
+      "name": "Mirrored",
+      "fields": {
+        "description": "The creature can briefly manifest a duplicate, reflection, or echo and may exchange positions with it before it vanishes."
+      }
+    },
+    {
+      "id": "hollow",
+      "name": "Hollow",
+      "fields": {
+        "description": "The creature's body is an empty or impossibly spacious shell that may conceal a smaller occupant, mechanism, or hidden interior."
+      }
+    },
+    {
+      "id": "material_fused",
+      "name": "Material-Fused",
+      "fields": {
+        "description": "Stone, metal, crystal, fungus, wood, glass, ice, machinery, or another material has been unnaturally fused into the creature's living body."
+      }
     }
   ]
 }

@@ -1369,6 +1369,424 @@
         ],
         "naturalArmorPercentage": 15
       }
+    },
+    {
+      "id": "forgotten_choir",
+      "name": "Chœur oublié",
+      "weight": 1,
+      "fields": {
+        "description": "Un grand prédateur dissimulé dont le chant continu pousse ceux qui l'entendent à l'ignorer et à rationaliser la disparition des personnes qu'il dévore, malgré les chambres abandonnées et les possessions en trop."
+      },
+      "generation": {
+        "statProfile": "creature-caster",
+        "traits": [
+          "{{ traits:camouflage }}",
+          "Chant d'oubli — Les auditeurs négligent inconsciemment la créature et les personnes qu'elle a dévorées ; le silence, la surdité, l'interruption du chant, l'observation indirecte ou des preuves contradictoires accablantes peuvent la révéler."
+        ],
+        "fixedRules": [
+          {
+            "entry": "memory_rule",
+            "level": 2
+          }
+        ],
+        "naturalArmorPercentage": 20
+      }
+    },
+    {
+      "id": "many_eyed_tyrant",
+      "name": "Tyran aux mille yeux",
+      "weight": 1,
+      "fields": {
+        "description": "Une aberration territoriale flottante dont les nombreux yeux projettent différents dangers surnaturels, tandis que son regard central dominant neutralise la magie et les effets de LOI."
+      },
+      "generation": {
+        "statProfile": "creature-caster",
+        "traits": [
+          "{{ traits:flight }}",
+          "{{ traits:gaze_effect }}",
+          "Œil d'annulation — La magie et les effets de LOI deviennent inertes tant que l'œil central reste ouvert et volontairement dirigé vers eux."
+        ],
+        "fixedRules": [
+          {
+            "entry": "vision_rule",
+            "level": 2
+          }
+        ],
+        "naturalArmorPercentage": 25
+      }
+    },
+    {
+      "id": "thought_eater",
+      "name": "Dévoreur de pensées",
+      "weight": 1,
+      "fields": {
+        "description": "Un prédateur psychique qui dévore les souvenirs, les connaissances acquises, le raisonnement ou des fragments de personnalité tout en laissant sa victime physiquement en vie."
+      },
+      "generation": {
+        "statProfile": "creature-caster",
+        "traits": ["{{ traits:telepathy }}", "{{ traits:memory_theft }}"],
+        "fixedRules": [
+          {
+            "entry": "memory_rule",
+            "level": 2
+          }
+        ],
+        "naturalArmorPercentage": 10
+      }
+    },
+    {
+      "id": "offset_panther",
+      "name": "Panthère décalée",
+      "weight": 1,
+      "fields": {
+        "description": "Un prédateur à l'affût dont l'image visible apparaît continuellement à faible distance de son véritable corps."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          "{{ traits:camouflage }}",
+          "{{ traits:pounce }}",
+          "Image décalée — Les attaques visant uniquement sa position apparente échouent à moins que l'assaillant ne repère l'emplacement de son véritable corps."
+        ],
+        "fixedRules": [
+          {
+            "entry": "illusion_rule",
+            "level": 1
+          }
+        ],
+        "naturalArmorPercentage": 15
+      }
+    },
+    {
+      "id": "stonefin",
+      "name": "Aileron de pierre",
+      "weight": 1,
+      "fields": {
+        "description": "Un prédateur souterrain lourdement cuirassé qui détecte les mouvements en surface, fend la terre et surgit sous sa proie ou juste à côté d'elle."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          "{{ traits:burrower }}",
+          "{{ traits:tremorsense }}",
+          "{{ traits:pounce }}",
+          "{{ traits:powerful_build }}"
+        ],
+        "naturalArmorPercentage": 50
+      }
+    },
+    {
+      "id": "whispering_flesh",
+      "name": "Chair murmurante",
+      "weight": 1,
+      "fields": {
+        "description": "Un agrégat rampant et amorphe de bouches, d'yeux et de chair à demi formée, dont les voix superposées troublent la pensée cohérente et la parole alentour."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          "{{ traits:swarm_body }}",
+          "{{ traits:poison_immunity }}",
+          "{{ traits:disease_immunity }}",
+          "Chœur balbutiant — Les créatures qui l'entendent subissent -1 aux actions exigeant de la concentration ou une communication claire."
+        ],
+        "naturalArmorPercentage": 20
+      }
+    },
+    {
+      "id": "memory_colony",
+      "name": "Colonie de mémoire",
+      "weight": 1,
+      "fields": {
+        "description": "Un organisme informe qui absorbe les souvenirs et fait émerger des imitations convaincantes des personnes dont il a dévoré la vie."
+      },
+      "generation": {
+        "statProfile": "creature-caster",
+        "traits": [
+          "{{ traits:memory_theft }}",
+          "Personne empruntée — Peut former une imitation physique convaincante d'une personne dont elle a absorbé les souvenirs, y compris les habitudes et les relations connues de cette victime."
+        ],
+        "fixedRules": [
+          {
+            "entry": "memory_rule",
+            "level": 2
+          },
+          {
+            "entry": "borrowed_face_rule",
+            "level": 2
+          }
+        ],
+        "naturalArmorPercentage": 5
+      }
+    },
+    {
+      "id": "living_mantle",
+      "name": "Manteau vivant",
+      "weight": 1,
+      "fields": {
+        "description": "Un prédateur nocturne aplati qui ressemble à une cape, une tapisserie, une étoffe suspendue ou une plaque d'ombre avant de se déployer et d'envelopper sa proie."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          "{{ traits:camouflage }}",
+          "{{ traits:flight }}",
+          "{{ traits:constrict }}"
+        ],
+        "naturalArmorPercentage": 10
+      }
+    },
+    {
+      "id": "secret_seer",
+      "name": "Voyant des secrets",
+      "weight": 1,
+      "fields": {
+        "description": "Un observateur difforme qui perçoit la culpabilité dissimulée, les secrets personnels et les faits compromettants, puis négocie ou menace grâce à ce qu'il apprend."
+      },
+      "generation": {
+        "statProfile": "creature-caster",
+        "traits": [
+          "{{ traits:telepathy }}",
+          "{{ traits:magic_sense }}",
+          "Vision des secrets — Après avoir observé attentivement une personne, découvre un fait important qu'elle cherche délibérément à cacher."
+        ],
+        "fixedRules": [
+          {
+            "entry": "truth_rule",
+            "level": 1
+          },
+          {
+            "entry": "vision_rule",
+            "level": 1
+          }
+        ],
+        "naturalArmorPercentage": 10
+      }
+    },
+    {
+      "id": "cursed_warplate",
+      "name": "Harnois maudit",
+      "weight": 1,
+      "fields": {
+        "description": "Un guerrier surnaturel dont l'armure est la véritable créature persistante ; détruire son porteur donne seulement au harnois intact le temps de fabriquer ou de posséder un nouveau corps."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          "{{ traits:poison_immunity }}",
+          "{{ traits:disease_immunity }}",
+          "Renaissance du harnois — Si l'armure reste intacte après la chute du porteur, elle peut finir par reconstruire, créer ou posséder un nouveau porteur."
+        ],
+        "fixedRules": [
+          {
+            "entry": "resurrection_rule",
+            "level": 2
+          }
+        ],
+        "naturalArmorPercentage": 40
+      }
+    },
+    {
+      "id": "toybone_child",
+      "name": "Enfant de bric et d'os",
+      "weight": 1,
+      "fields": {
+        "description": "Un petit mort-vivant à silhouette d'enfant assemblé avec des restes, des jouets abandonnés, du tissu, des boutons, des pièces sculptées et des débris domestiques, capable de voler et d'imiter les voix familières."
+      },
+      "generation": {
+        "statProfile": "creature-caster",
+        "traits": [
+          "{{ traits:poison_immunity }}",
+          "{{ traits:disease_immunity }}",
+          "Voix volée — Peut reproduire parfaitement une voix entendue et empêcher temporairement son propriétaire de parler plus fort qu'un murmure."
+        ],
+        "fixedRules": [
+          {
+            "entry": "voice_rule",
+            "level": 1
+          }
+        ],
+        "naturalArmorPercentage": 10
+      }
+    },
+    {
+      "id": "doom_serpent",
+      "name": "Serpent funeste",
+      "weight": 1,
+      "fields": {
+        "description": "Un colossal serpent antique dont la mort maudit la créature qui lui a réellement porté le coup fatal."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          "{{ traits:natural_weapons }}",
+          "{{ traits:swallowing }}",
+          "Malédiction du meurtrier — Lorsque le serpent meurt, la créature qui lui a infligé le dernier dégât reçoit une malédiction persistante propre à ce serpent."
+        ],
+        "fixedRules": [
+          {
+            "entry": "curse_rule",
+            "level": 2
+          }
+        ],
+        "naturalArmorPercentage": 50
+      }
+    },
+    {
+      "id": "carrion_aggregate",
+      "name": "Agrégat de charogne",
+      "weight": 1,
+      "fields": {
+        "description": "Une créature assemblée à partir de chair jetée, d'expériences ratées, de cadavres et de déchets organiques, capable de se déformer pour franchir des passages étroits et de se reconstruire avec des restes frais."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          "{{ traits:swarm_body }}",
+          "{{ traits:regeneration }}",
+          "{{ traits:disease_immunity }}",
+          "Réparation charognarde — Peut incorporer des restes organiques frais afin de remplacer une partie visiblement détruite de son corps."
+        ],
+        "naturalArmorPercentage": 20
+      }
+    },
+    {
+      "id": "adaptive_hunter",
+      "name": "Chasseur adaptatif",
+      "weight": 1,
+      "fields": {
+        "description": "Un chasseur surnaturel implacable qui revient après une destruction apparente, transformé de façon à rendre moins efficace la méthode précise déjà employée contre lui."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          "{{ traits:regeneration }}",
+          "{{ traits:reactive_adaptation }}",
+          "Retour inévitable — Une destruction apparente met fin à la poursuite en cours sans pouvoir le tuer définitivement ; chaque retour porte les marques de la défaite précédente."
+        ],
+        "fixedRules": [
+          {
+            "entry": "resurrection_rule",
+            "level": 2
+          }
+        ],
+        "naturalArmorPercentage": 25
+      }
+    },
+    {
+      "id": "grave_box",
+      "name": "Cercueil prédateur",
+      "weight": 1,
+      "fields": {
+        "description": "Un prédateur mobile en forme de cercueil qui attire une victime à l'intérieur, se referme sur elle et tente de l'emporter ou de s'enterrer avec sa captive."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          "{{ traits:camouflage }}",
+          "{{ traits:swallowing }}",
+          "{{ traits:powerful_build }}",
+          "Auto-inhumation — Lorsqu'il transporte une captive à l'intérieur, peut creuser dans la terre meuble à la moitié de sa vitesse normale sans laisser de tunnel praticable."
+        ],
+        "naturalArmorPercentage": 40
+      }
+    },
+    {
+      "id": "living_pool",
+      "name": "Bassin vivant",
+      "weight": 1,
+      "fields": {
+        "description": "Une mare ou une petite étendue d'eau apparemment ordinaire qui est elle-même une créature, capable de s'élever de sa propre surface, de saisir des proies et de les entraîner dans ses profondeurs."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          "{{ traits:camouflage }}",
+          "{{ traits:aquatic_speed }}",
+          "{{ traits:constrict }}",
+          "Corps liquide — Occupe tout son bassin et ne peut s'en éloigner sans transporter ou abandonner la majeure partie de sa propre substance."
+        ],
+        "naturalArmorPercentage": 10
+      }
+    },
+    {
+      "id": "grudge_spirit",
+      "name": "Esprit rancunier",
+      "weight": 1,
+      "fields": {
+        "description": "Un prédateur social surnaturel qui se nourrit de ressentiment, d'humiliation et d'amertume en aggravant les désaccords et en retournant les communautés contre elles-mêmes."
+      },
+      "generation": {
+        "statProfile": "creature-caster",
+        "traits": [
+          "{{ traits:incorporeal }}",
+          "{{ traits:telepathy }}",
+          "Nourri de rancune — Gagne +1 aux actions sociales et surnaturelles tant que des personnes proches aggravent activement un conflit qu'il a encouragé."
+        ],
+        "fixedRules": [
+          {
+            "entry": "influence_rule",
+            "level": 2
+          }
+        ],
+        "naturalArmorPercentage": 10
+      }
+    },
+    {
+      "id": "impossible_anatomy",
+      "name": "Anatomie impossible",
+      "weight": 1,
+      "fields": {
+        "description": "Une créature dont les membres, les blessures, les organes et la structure interne deviennent mutuellement incompatibles lorsqu'on les observe sous différents angles."
+      },
+      "generation": {
+        "statProfile": "creature-caster",
+        "traits": [
+          "{{ traits:magic_resistance }}",
+          "Anatomie perspective — Un changement de point de vue révèle une organisation différente de son corps ; une blessure ou un obstacle visible sous un angle peut ne pas exister sous un autre."
+        ],
+        "fixedRules": [
+          {
+            "entry": "space_rule",
+            "level": 2
+          }
+        ],
+        "naturalArmorPercentage": 20
+      }
+    },
+    {
+      "id": "hunger_in_the_walls",
+      "name": "Faim dans les murs",
+      "weight": 1,
+      "fields": {
+        "description": "Un organisme installé dans un bâtiment et répandu à travers ses murs, ses plafonds et ses sols, qui manifeste temporairement des bouches, des membres, des tentacules et des yeux à travers les surfaces."
+      },
+      "generation": {
+        "statProfile": "creature-brute",
+        "traits": [
+          "{{ traits:camouflage }}",
+          "{{ traits:extended_reach }}",
+          "Corps distribué — Se déplace dans l'architecture connectée et n'expose que des fragments temporaires ; détruire une manifestation ne révèle pas la créature entière."
+        ],
+        "naturalArmorPercentage": 30
+      }
+    },
+    {
+      "id": "borrowed_skeleton",
+      "name": "Squelette d'emprunt",
+      "weight": 1,
+      "fields": {
+        "description": "Une créature naturellement molle qui habite des squelettes abandonnés, des armures, des mannequins ou d'autres structures rigides pour se tenir debout et se déplacer, puis abandonne chaque support devenu inutile."
+      },
+      "generation": {
+        "statProfile": "creature-predator",
+        "traits": [
+          "{{ traits:camouflage }}",
+          "Structure empruntée — Peut entrer dans une armature rigide inoccupée pour en imiter la forme et les mouvements, puis l'abandonner sans dommage.",
+          "Chair sans soutien — Sans armature, peut se faufiler par toute ouverture assez grande pour son corps mou, mais tient à peine debout et ne peut presque rien porter."
+        ],
+        "naturalArmorPercentage": 5
+      }
     }
   ]
 }

@@ -140,6 +140,146 @@
       "fields": {
         "description": "Noué en plein air, ce cordon coloré emprisonne la météo locale dans son nœud et laisse un calme surnaturel alentour. Le dénouer plus tard libère brièvement cette météo aux environs et détruit le cordon."
       }
+    },
+    {
+      "id": "fate_deck",
+      "name": "Jeu du destin",
+      "fields": {
+        "description": "Les cartes de cet antique jeu imposent fortune, désastre, révélation, transformation, gain, perte ou obligation à quiconque accepte délibérément de piocher."
+      }
+    },
+    {
+      "id": "bottomless_satchel",
+      "name": "Besace sans fond",
+      "fields": {
+        "description": "Une besace d'apparence ordinaire dont l'intérieur sec est bien plus vaste que son ouverture extérieure."
+      }
+    },
+    {
+      "id": "anchor_baton",
+      "name": "Bâton d'ancrage",
+      "fields": {
+        "description": "Un petit bâton qui, une fois activé, reste absolument immobile à son emplacement dans l'espace, même sans support, jusqu'à ce qu'on le libère volontairement."
+      }
+    },
+    {
+      "id": "folded_pit",
+      "name": "Fosse pliée",
+      "fields": {
+        "description": "Une étoffe pliable qui ouvre une fosse extradimensionnelle lorsqu'on la déploie sur une surface et conserve son contenu une fois refermée."
+      }
+    },
+    {
+      "id": "endless_flask",
+      "name": "Flasque intarissable",
+      "fields": {
+        "description": "Une flasque qui produit de l'eau ordinaire sans se vider, sous la forme d'un filet maîtrisable ou d'un jet puissant."
+      }
+    },
+    {
+      "id": "endless_sand_jar",
+      "name": "Jarre de sable intarissable",
+      "fields": {
+        "description": "Une jarre ouverte produit continuellement du sable sec, assez pour combler des salles, bloquer des passages, remodeler le terrain ou provoquer un désastre si on l'oublie."
+      }
+    },
+    {
+      "id": "beastbag",
+      "name": "Sac bestial",
+      "fields": {
+        "description": "Les objets placés dans ce sac de rangement magique peuvent en ressortir imprévisiblement sous la forme de petits animaux vivants."
+      }
+    },
+    {
+      "id": "chaos_scepter",
+      "name": "Sceptre du chaos",
+      "fields": {
+        "description": "Chaque activation volontaire produit un phénomène surnaturel imprévisible choisi par le MJ."
+      }
+    },
+    {
+      "id": "wandering_pot",
+      "name": "Marmite vagabonde",
+      "fields": {
+        "description": "Une marmite montée sur de petites pattes suit son propriétaire, transporte son contenu et obéit à des ordres de déplacement simples."
+      }
+    },
+    {
+      "id": "reality_paint",
+      "name": "Peinture de réalité",
+      "fields": {
+        "description": "Un objet banal, une ouverture, un élément architectural ou un détail du décor peint de manière convaincante devient physiquement réel selon une interprétation raisonnable du MJ."
+      }
+    },
+    {
+      "id": "patchcloak",
+      "name": "Cape à écussons",
+      "fields": {
+        "description": "Les écussons amovibles de ce vêtement représentent des objets ordinaires et deviennent ces objets réels lorsqu'on les détache."
+      }
+    },
+    {
+      "id": "pocket_bastion",
+      "name": "Bastion de poche",
+      "fields": {
+        "description": "Un minuscule objet transportable se déploie rapidement en un bâtiment ou une tour temporaire et défendable."
+      }
+    },
+    {
+      "id": "perfect_adhesive",
+      "name": "Adhésif parfait",
+      "fields": {
+        "description": "Une petite quantité unit définitivement des objets solides ordinaires, sauf si une solution exceptionnelle les sépare."
+      }
+    },
+    {
+      "id": "thirsting_dust",
+      "name": "Poussière assoiffée",
+      "fields": {
+        "description": "Une pincée absorbe un immense volume d'eau dans un solide compact ; briser ce dernier libère toute l'eau emmagasinée d'un coup."
+      }
+    },
+    {
+      "id": "mercurial_weapon",
+      "name": "Arme mercurielle",
+      "fields": {
+        "description": "Une même arme magique peut adopter plusieurs formes d'armes ordinaires tout en restant le même artefact."
+      }
+    },
+    {
+      "id": "phantom_cards",
+      "name": "Cartes fantômes",
+      "fields": {
+        "description": "Une carte posée ou lancée crée la créature, l'objet ou la scène convaincante mais intangible qui figure sur sa face."
+      }
+    },
+    {
+      "id": "command_rope",
+      "name": "Corde docile",
+      "fields": {
+        "description": "Cette corde obéit à des ordres simples : bouger, se nouer, s'enrouler, grimper, s'arrimer ou atteindre un point désigné."
+      }
+    },
+    {
+      "id": "smoke_vessel",
+      "name": "Vase fumigène",
+      "fields": {
+        "description": "Une fois ouvert, le récipient libère continuellement une fumée dense qui masque la vue jusqu'à ce qu'on le referme correctement ou qu'on l'arrête autrement."
+      }
+    },
+    {
+      "id": "sleeping_idol",
+      "name": "Idole endormie",
+      "fields": {
+        "description": "Une petite figurine animale peut temporairement devenir une version vivante de la créature représentée avant de reprendre sa forme d'idole."
+      }
+    },
+    {
+      "id": "provision_jug",
+      "name": "Cruche à provisions",
+      "fields": {
+        "description": "Une cruche magique produit des quantités limitées de plusieurs liquides ou aliments ordinaires utiles, propices aux solutions improvisées."
+      }
     }
   ]
 }

@@ -508,6 +508,48 @@
       "fields": {
         "description": "A magical or mundane influence causes widespread uncontrollable profanity, disrupting solemn rites, negotiations, trials, performances, and polite conversation."
       }
+    },
+    {
+      "id": "speaking_recent_dead",
+      "name": "The Dead Speak Around Their Deaths",
+      "fields": {
+        "description": "For one hour, recently dead creatures can converse normally and remember their lives, but cannot explain their own deaths or directly identify whoever caused them."
+      }
+    },
+    {
+      "id": "synchronized_magic_pause",
+      "name": "Synchronized Magical Pause",
+      "fields": {
+        "description": "All magical and RULE effects in the area become dormant for several minutes, then resume simultaneously from where they stopped."
+      }
+    },
+    {
+      "id": "memory_exchange",
+      "name": "Exchanged Memories",
+      "fields": {
+        "description": "Everyone nearby receives someone else's memory from the same category, such as a first love, greatest fear, childhood home, or final meal, without learning its owner."
+      }
+    },
+    {
+      "id": "physical_hour_loop",
+      "name": "The Hour That Leaves Marks",
+      "fields": {
+        "description": "One hour repeats from its beginning, but wounds, moved objects, opened doors, writing, destruction, and every other physical change persist between repetitions."
+      }
+    },
+    {
+      "id": "remembered_new_structure",
+      "name": "Remembered Overnight Structure",
+      "fields": {
+        "description": "A structure of the following kind appears overnight: {{ building.name }}. Locals remember it as ancient, but maps and physical evidence contradict them."
+      }
+    },
+    {
+      "id": "contract_addendum",
+      "name": "Universal Contract Addendum",
+      "fields": {
+        "description": "Every written contract in the area acquires one additional, magically valid-looking clause that none of its signatories remembers accepting."
+      }
     }
   ]
 }

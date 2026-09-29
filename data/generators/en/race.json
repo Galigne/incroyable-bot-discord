@@ -142,6 +142,33 @@
         "skill_bonus": "Land travel, {{ ability:tracking.name }}, and mounted combat.",
         "physical_ability": "Fast running on open terrain and great carrying capacity."
       }
+    },
+    {
+      "id": "crafted_people",
+      "name": "Crafted People",
+      "fields": {
+        "description": "A people whose bodies are deliberately built from worked matter and awakened by a mind, spirit, or living enchantment.",
+        "skill_bonus": "Construction, repair, and identifying the purpose of artificial objects.",
+        "physical_ability": "Constructed body: does not need to breathe and can replace visibly damaged components with suitable crafted parts."
+      }
+    },
+    {
+      "id": "elemental_people",
+      "name": "Elemental People",
+      "fields": {
+        "description": "Humanoid lineages whose bodies visibly mingle flesh with fire, water, stone, air, ice, lightning, or another elemental substance.",
+        "skill_bonus": "Knowledge of elemental phenomena and environments shaped by their own element.",
+        "physical_ability": "Elemental body: safely endures ordinary contact with the substance visibly composing it."
+      }
+    },
+    {
+      "id": "chorus_born",
+      "name": "Chorus-Born",
+      "fields": {
+        "description": "Distinct individuals who naturally exchange fragments of thought, emotion, memory, dreams, or sensation with nearby members of their people.",
+        "skill_bonus": "Coordination and reading the emotional state of a familiar group.",
+        "physical_ability": "Shared awareness: can silently convey a simple sensation or emotion to a nearby willing Chorus-Born."
+      }
     }
   ]
 }

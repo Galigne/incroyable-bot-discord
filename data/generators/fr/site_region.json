@@ -214,6 +214,20 @@
       "fields": {
         "description": "Des courants aériens, des nuages solides et des phénomènes météorologiques forment un territoire praticable mais instable."
       }
+    },
+    {
+      "id": "emotional_wilderness",
+      "name": "Étendues empathiques",
+      "fields": {
+        "description": "Une contrée sauvage enchantée transforme ses sentiers, sa végétation, son climat et sa visibilité selon les émotions dominantes des voyageurs qui la traversent."
+      }
+    },
+    {
+      "id": "elemental_anomaly",
+      "name": "Anomalie élémentaire",
+      "fields": {
+        "description": "Un phénomène élémentaire se comporte de manière impossible dans toute la région : foudre immobile, rivière ascendante, brume solide, pierres flottantes ou feu qui ne se propage jamais."
+      }
     }
   ],
   "modifiers": {

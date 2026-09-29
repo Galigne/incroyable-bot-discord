@@ -116,6 +116,20 @@
       "fields": {
         "description": "Local gravity pulls at a noticeable angle, making unsecured objects drift, familiar routes awkward, and ordinary architecture unexpectedly hazardous."
       }
+    },
+    {
+      "id": "intermittent_magic_void",
+      "name": "Intermittent Magic Void",
+      "fields": {
+        "description": "A moving or temporary boundary suppresses magic and RULE effects within it; dormant effects resume when the boundary passes or collapses."
+      }
+    },
+    {
+      "id": "dream_shaped",
+      "name": "Dream-Shaped",
+      "fields": {
+        "description": "Creatures, objects, events, or structures repeatedly dreamed about nearby begin appearing or changing in physical reality."
+      }
     }
   ]
 }

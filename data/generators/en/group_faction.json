@@ -267,6 +267,66 @@
         "allies": "Farmers, shopkeepers, nearby communes.",
         "enemies": "Invaders, would-be warlords, nobles demanding disarmament."
       }
+    },
+    {
+      "id": "the_vaultward_order",
+      "name": "The Vaultward Order",
+      "fields": {
+        "type": "An order of supernatural custodians",
+        "goal": "Locate anomalous objects, transport them safely, study their limits, and contain those that cannot be destroyed.",
+        "resources": "Specialized vaults, insulated transport cases, catalogues of incidents, and recovery teams.",
+        "hierarchy": "Field recoverers answer to vault keepers, who each control only the procedures needed for their assigned collection.",
+        "allies": "Careful scholars, communities threatened by dangerous relics, and rulers willing to fund discreet storage.",
+        "enemies": "Relic traffickers, apocalyptic cults, reckless collectors, and escaped objects that can choose their own holders."
+      }
+    },
+    {
+      "id": "the_long_memory_collegium",
+      "name": "The Long Memory Collegium",
+      "fields": {
+        "type": "A scholarly society with intelligent undead among its senior members",
+        "goal": "Preserve research, experiments, archives, and institutional memory across centuries without surrendering intellectual freedom.",
+        "resources": "Living laboratories, sealed archives, patient patrons, and undead scholars who personally remember ancient projects.",
+        "hierarchy": "Short-lived fellows lead current work while senior chairs retain custody of studies spanning several generations.",
+        "allies": "Universities, archivists, healers, and rulers who value durable expertise.",
+        "enemies": "Undead hunters, grave robbers, plagiarists, and members who manipulate history by claiming only they remember it correctly."
+      }
+    },
+    {
+      "id": "the_measured_hunt",
+      "name": "The Measured Hunt",
+      "fields": {
+        "type": "A professional monster-management fellowship",
+        "goal": "Study territories, breeding, food chains, migration, and conflict before deciding whether a creature should be relocated, controlled, negotiated with, or killed.",
+        "resources": "Field bestiaries, trackers, anatomists, mobile cages, antidotes, and agreements with frontier communities.",
+        "hierarchy": "Regional ecologists assess cases before licensed hunters accept a contract and document its outcome.",
+        "allies": "Farmers, naturalists, cautious monster communities, and officials facing recurring attacks.",
+        "enemies": "Trophy hunters, poachers, frightened mobs, and patrons who conceal how their own actions disrupted an ecosystem."
+      }
+    },
+    {
+      "id": "the_fleeting_gate_company",
+      "name": "The Fleeting Gate Company",
+      "fields": {
+        "type": "An expeditionary society for temporary portals and unstable places",
+        "goal": "Discover vanishing openings, map what lies beyond, and recover people and objects before every known route closes.",
+        "resources": "Rapid-response explorers, synchronized clocks, anchor beacons, portable camps, and an archive of expired routes.",
+        "hierarchy": "Pathfinders lead individual crossings while route archivists decide which unstable openings justify an expedition.",
+        "allies": "Missing-person networks, curious scholars, merchants seeking brief opportunities, and settlements divided by anomalies.",
+        "enemies": "Portal predators, stranded rivals, secretive authorities, and clients who lie about what was lost beyond a closing route."
+      }
+    },
+    {
+      "id": "the_sealbound_registry",
+      "name": "The Sealbound Registry",
+      "fields": {
+        "type": "A neutral guild of magically enforced contracts",
+        "goal": "Make high-stakes agreements credible by recording them and binding deliberate violations to stated supernatural consequences.",
+        "resources": "Trusted witnesses, secure archives, ritual seals, traveling arbiters, and experts in ambiguous wording.",
+        "hierarchy": "Licensed witnesses register ordinary agreements while a masked council reviews contracts capable of harming whole communities.",
+        "allies": "Merchants, diplomats, lenders, rulers, and anyone whose agreement must survive distance or mistrust.",
+        "enemies": "Oathbreakers, coercive patrons, counterfeit registrars, and literal-minded entities that exploit badly written clauses."
+      }
     }
   ]
 }

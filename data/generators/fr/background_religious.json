@@ -85,6 +85,10 @@
       "generation": {
         "statProfile": "character-diplomat"
       }
+    },
+    {
+      "id": "former_cult_member",
+      "name": "Ancien membre d'une secte"
     }
   ]
 }

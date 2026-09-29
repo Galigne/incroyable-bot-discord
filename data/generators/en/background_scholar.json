@@ -78,6 +78,18 @@
       "generation": {
         "statProfile": "character-diplomat"
       }
+    },
+    {
+      "id": "monster_anatomist",
+      "name": "Monster anatomist"
+    },
+    {
+      "id": "magical_investigator",
+      "name": "Magical investigator"
+    },
+    {
+      "id": "containment_specialist",
+      "name": "Supernatural containment specialist"
     }
   ]
 }

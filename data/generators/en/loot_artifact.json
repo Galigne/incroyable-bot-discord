@@ -140,6 +140,146 @@
       "fields": {
         "description": "Tied outdoors, this colored cord traps the local weather in its knot and leaves unnatural calm nearby. Untying it later releases that weather briefly around it and ruins the cord."
       }
+    },
+    {
+      "id": "fate_deck",
+      "name": "Fate Deck",
+      "fields": {
+        "description": "An ancient deck whose cards impose a radical fortune, disaster, revelation, transformation, gain, loss, or obligation on anyone who deliberately accepts a draw."
+      }
+    },
+    {
+      "id": "bottomless_satchel",
+      "name": "Bottomless Satchel",
+      "fields": {
+        "description": "An ordinary-looking satchel whose dry interior is vastly larger than its exterior opening."
+      }
+    },
+    {
+      "id": "anchor_baton",
+      "name": "Anchor Baton",
+      "fields": {
+        "description": "A small baton that becomes absolutely fixed at its current point in space when activated and remains unsupported until deliberately released."
+      }
+    },
+    {
+      "id": "folded_pit",
+      "name": "Folded Pit",
+      "fields": {
+        "description": "A foldable cloth that creates an extradimensional pit when spread across a surface and keeps its contents when folded closed."
+      }
+    },
+    {
+      "id": "endless_flask",
+      "name": "Endless Flask",
+      "fields": {
+        "description": "A flask that produces ordinary water without emptying, either as a manageable stream or a forceful jet."
+      }
+    },
+    {
+      "id": "endless_sand_jar",
+      "name": "Endless Sand Jar",
+      "fields": {
+        "description": "An open jar continuously produces dry sand, enough to fill rooms, block passages, reshape terrain, or cause disaster if forgotten."
+      }
+    },
+    {
+      "id": "beastbag",
+      "name": "Beastbag",
+      "fields": {
+        "description": "Objects placed in this magical storage bag can unpredictably emerge as small living animals instead of their original forms."
+      }
+    },
+    {
+      "id": "chaos_scepter",
+      "name": "Chaos Scepter",
+      "fields": {
+        "description": "Each deliberate activation produces an unpredictable supernatural phenomenon chosen by the GM."
+      }
+    },
+    {
+      "id": "wandering_pot",
+      "name": "Wandering Pot",
+      "fields": {
+        "description": "A cooking cauldron on small legs follows its owner, carries its contents, and obeys simple movement instructions."
+      }
+    },
+    {
+      "id": "reality_paint",
+      "name": "Reality Paint",
+      "fields": {
+        "description": "A convincingly painted mundane object, opening, architectural feature, or environmental detail becomes physically real under reasonable GM interpretation."
+      }
+    },
+    {
+      "id": "patchcloak",
+      "name": "Patchcloak",
+      "fields": {
+        "description": "Removable patches on this garment depict mundane objects and become those real objects when peeled away."
+      }
+    },
+    {
+      "id": "pocket_bastion",
+      "name": "Pocket Bastion",
+      "fields": {
+        "description": "A tiny portable object rapidly unfolds into a defensible temporary building or tower."
+      }
+    },
+    {
+      "id": "perfect_adhesive",
+      "name": "Perfect Adhesive",
+      "fields": {
+        "description": "A small amount permanently joins ordinary solid objects unless an exceptional countermeasure separates them."
+      }
+    },
+    {
+      "id": "thirsting_dust",
+      "name": "Thirsting Dust",
+      "fields": {
+        "description": "A pinch absorbs a vast volume of water into a compact solid; breaking that solid releases all stored water at once."
+      }
+    },
+    {
+      "id": "mercurial_weapon",
+      "name": "Mercurial Weapon",
+      "fields": {
+        "description": "One magical weapon can transform among several ordinary weapon forms while remaining the same underlying artifact."
+      }
+    },
+    {
+      "id": "phantom_cards",
+      "name": "Phantom Cards",
+      "fields": {
+        "description": "A placed or thrown card creates a convincing but intangible creature, object, or scene depicted on its face."
+      }
+    },
+    {
+      "id": "command_rope",
+      "name": "Command Rope",
+      "fields": {
+        "description": "This rope obeys simple spoken orders to move, knot itself, coil, climb, anchor itself, or reach toward a specified point."
+      }
+    },
+    {
+      "id": "smoke_vessel",
+      "name": "Smoke Vessel",
+      "fields": {
+        "description": "Once opened, the vessel continuously releases dense obscuring smoke until correctly closed or otherwise stopped."
+      }
+    },
+    {
+      "id": "sleeping_idol",
+      "name": "Sleeping Idol",
+      "fields": {
+        "description": "A small animal figurine can temporarily become a living version of the represented creature before returning to figurine form."
+      }
+    },
+    {
+      "id": "provision_jug",
+      "name": "Provision Jug",
+      "fields": {
+        "description": "A magical jug produces limited quantities of several useful mundane liquids or foodstuffs, rewarding practical improvisation."
+      }
     }
   ]
 }

@@ -316,6 +316,76 @@
         "holy_place": "L'Escalier des Trônes Vides.",
         "relationship_with_magic": "Récompense la domination, le commandement, la transformation et les dangereuses épreuves de mérite."
       }
+    },
+    {
+      "id": "the_last_radiance",
+      "name": "L'Ultime Lueur",
+      "fields": {
+        "deity_or_belief": "Une divinité dont la mort est historiquement prouvée, mais dont les prières et les miracles reçoivent encore des réponses d'une source inconnue.",
+        "rites": "Les fidèles récitent les dernières paroles du dieu, veillent ses restes préservés ou ses cendres commémoratives et comparent les nouveaux miracles aux archives antérieures à sa mort.",
+        "commandment": "Poursuis l'œuvre miséricordieuse du dieu mort sans prétendre comprendre qui ou quoi répond désormais.",
+        "taboo": "Affirmer que la divinité vit secrètement ou fabriquer une fausse explication aux miracles qui subsistent.",
+        "sacred_symbol": "Un soleil obscurci cerclé d'un mince trait de lumière.",
+        "religious_order": "Le Chœur posthume, des prêtres qui authentifient les miracles et enquêtent sur leur origine.",
+        "holy_place": "Le Sépulcre des témoins, où la mort de la divinité a été observée et consignée.",
+        "relationship_with_magic": "La magie divine fonctionne toujours, mais chaque réponse inexpliquée est enregistrée comme un indice plutôt que comme une preuve de résurrection."
+      }
+    },
+    {
+      "id": "the_kindly_chain",
+      "name": "La Chaîne bienveillante",
+      "fields": {
+        "deity_or_belief": "Un dieu aimé dont la manifestation physique libre écraserait la volonté des mortels et qui doit rester scellé, endormi, enchaîné ou fragmenté.",
+        "rites": "Les congrégations renouvellent les sceaux, chantent des berceuses, remplacent les chaînes sacrées et confessent toute tentation de libérer le dieu.",
+        "commandment": "Aime assez la divinité emprisonnée pour préserver sa prison.",
+        "taboo": "Affaiblir un sceau en quête de révélation, de pouvoir ou de contact direct.",
+        "sacred_symbol": "Une main douce refermant une entrave d'argent.",
+        "religious_order": "Les Tendres Gardiens, geôliers, théologiens et intendants de la prison divine.",
+        "holy_place": "La Serrure du cœur, le plus accessible des sanctuaires qui maintiennent le confinement.",
+        "relationship_with_magic": "Les miracles filtrent à travers les sceaux par fragments maîtrisés ; les manifestations plus puissantes sont traitées comme de dangereuses défaillances de la prison."
+      }
+    },
+    {
+      "id": "the_celestial_tide",
+      "name": "La Marée céleste",
+      "fields": {
+        "deity_or_belief": "Un immense courant observable de lumière et de magie qui traverse les cieux selon un cycle régulier, vénéré sans être considéré comme une personne.",
+        "rites": "Les fidèles cartographient son passage, exposent des offrandes à sa lumière et accordent voyages, serments et funérailles à ses phases.",
+        "commandment": "Observe le grand cycle avant d'agir et laisse des archives sincères à ceux qui verront son prochain retour.",
+        "taboo": "Prétendre que le phénomène parle d'une voix humaine ou accorde à une personne une autorité exclusive.",
+        "sacred_symbol": "Trois bandes courbes traversant un champ d'étoiles.",
+        "religious_order": "Les Guetteurs de la marée, des prêtres-astronomes qui mettent en commun les observations de régions lointaines.",
+        "holy_place": "Les Degrés du méridien, un observatoire ouvert aligné sur le courant lors de son passage le plus lumineux.",
+        "relationship_with_magic": "La magie évolue de manière prévisible à mesure que le courant approche puis s'éloigne, faisant de sa mesure une discipline sacrée."
+      }
+    },
+    {
+      "id": "the_returning_lamps",
+      "name": "Les Lampes renaissantes",
+      "fields": {
+        "deity_or_belief": "Des saints reconnus renaissent successivement dans de nouveaux corps tout en demeurant des personnes distinctes façonnées par chaque vie.",
+        "rites": "Les communautés conservent des épreuves de mémoire, retrouvent des souvenirs matériels et organisent une reconnaissance publique lorsqu'une incarnation possible est découverte.",
+        "commandment": "Honore à la fois la fonction qui revient et la nouvelle vie qui la porte.",
+        "taboo": "Forcer un enfant à imiter une incarnation précédente ou cacher les preuves qu'un prétendant reconnu est un imposteur.",
+        "sacred_symbol": "Une même flamme transmise entre des lampes de formes différentes.",
+        "religious_order": "Les Chercheurs de braises, enquêteurs et gardiens chargés de trouver puis d'éduquer les nouvelles incarnations.",
+        "holy_place": "La Salle des nombreuses vies, des archives qui rassemblent souvenirs vérifiés et objets des incarnations précédentes.",
+        "relationship_with_magic": "Les miracles de reconnaissance révèlent des continuités de mémoire sans pouvoir effacer les doutes, la politique ni la personnalité de la nouvelle incarnation."
+      }
+    },
+    {
+      "id": "the_distant_mercy",
+      "name": "La Miséricorde lointaine",
+      "fields": {
+        "deity_or_belief": "Une entité véritablement bienveillante dont l'arrivée physique déchaînerait une lumière, une gravité, une croissance, des tempêtes ou une distorsion de la réalité insoutenables.",
+        "rites": "Les fidèles communiquent par des miroirs superposés, des chœurs distants, des rêves scellés et des offrandes envoyées loin des terres habitées.",
+        "commandment": "Reçois la compassion à une distance supportable et protège le monde de la présence bien-aimée.",
+        "taboo": "Inviter sa manifestation complète près d'une communauté vivante.",
+        "sacred_symbol": "Un œil ouvert derrière sept portes fermées.",
+        "religious_order": "Les Intercesseurs lointains, des médiateurs formés à répondre à l'entité sans l'attirer davantage.",
+        "holy_place": "Le Dernier Horizon, un sanctuaire isolé conçu pour détourner les signes d'une manifestation imminente.",
+        "relationship_with_magic": "Même les miracles indirects produisent de dangereux effets secondaires ; la retenue et la dispersion sont donc des techniques sacrées essentielles."
+      }
     }
   ]
 }

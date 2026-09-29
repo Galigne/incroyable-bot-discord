@@ -219,6 +219,34 @@
       "fields": {
         "description": "Deux têtes indépendantes élargissent sa vigilance et la rendent plus difficile à surprendre, mais des instincts, une attention ou un rythme contradictoires peuvent gêner ses actions coordonnées."
       }
+    },
+    {
+      "id": "parasitized",
+      "name": "Parasité",
+      "fields": {
+        "description": "Un autre organisme habite visiblement la créature et modifie son corps, son comportement, ses priorités ou ses capacités sans remplacer entièrement l'hôte."
+      }
+    },
+    {
+      "id": "mirrored",
+      "name": "Miroité",
+      "fields": {
+        "description": "La créature peut brièvement manifester un double, un reflet ou un écho, puis échanger sa place avec lui avant sa disparition."
+      }
+    },
+    {
+      "id": "hollow",
+      "name": "Creux",
+      "fields": {
+        "description": "Le corps de la créature est une enveloppe vide ou démesurément vaste qui peut dissimuler un occupant plus petit, un mécanisme ou un espace intérieur caché."
+      }
+    },
+    {
+      "id": "material_fused",
+      "name": "Fusionné à la matière",
+      "fields": {
+        "description": "De la pierre, du métal, du cristal, des champignons, du bois, du verre, de la glace, une machine ou une autre matière a été anormalement fusionnée au corps vivant de la créature."
+      }
     }
   ]
 }
