@@ -1,6 +1,6 @@
 **Auteur** : Joël GALIGNE & Tanguy Thiebault
 
-**Version** : `1.0`
+**Version** : `1.1`
 
 **Date** : `2 décembre 2025`
 
