@@ -239,35 +239,58 @@ test('visibility filters discovery and direct /get masks inaccessible private ke
 	assert.match(interaction.response.content, /does not exist/i);
 });
 
-test('Settings autocomplete is hidden from partial users and available to full authority', async () => {
-	const entityKey = 'Settings.Autocomplete';
-	await createEntity(entityKey, OWNER_ID, 'character');
-	await updateEntitySettings(
-		entityKey,
-		settingsSubmission(entityKey, 'private', [
-			{ userId: OWNER_ID, level: 'owner' },
-			{ userId: PARTIAL_ID, level: 'partial' },
-		]),
-		() => true,
-		'character',
-	);
-	const ownerFields = await autocomplete(
-		'set',
-		createInteraction(OWNER_ID),
-		'field',
-		'',
-		entityKey,
-	);
-	assert.equal(ownerFields.some(choice => choice.value === 'settings'), true);
-	const partialFields = await autocomplete(
-		'set',
-		createInteraction(PARTIAL_ID),
-		'field',
-		'',
-		entityKey,
-	);
-	assert.equal(partialFields.some(choice => choice.value === 'settings'), false);
-	assert.equal(partialFields.some(choice => choice.value === 'name'), true);
+test('Settings autocomplete renders localized names for full authority only and never for /get', async () => {
+	for (const type of ['character', 'creature']) {
+		const entityKey = `Settings.Autocomplete.${type}`;
+		await createEntity(entityKey, OWNER_ID, type);
+		await updateEntitySettings(
+			entityKey,
+			settingsSubmission(entityKey, 'private', [
+				{ userId: OWNER_ID, level: 'owner' },
+				{ userId: PARTIAL_ID, level: 'partial' },
+			]),
+			() => true,
+			type,
+		);
+		for (const [locale, expectedName] of [
+			['en', 'Settings (settings)'],
+			['fr', 'Paramètres (settings)'],
+		]) {
+			const ownerFields = await autocomplete(
+				'set',
+				createInteraction(OWNER_ID),
+				'field',
+				'',
+				entityKey,
+				locale,
+			);
+			assert.deepEqual(ownerFields.find(choice => choice.value === 'settings'), {
+				name: expectedName,
+				value: 'settings',
+			});
+			const partialFields = await autocomplete(
+				'set',
+				createInteraction(PARTIAL_ID),
+				'field',
+				'',
+				entityKey,
+				locale,
+			);
+			assert.equal(partialFields.some(choice => choice.value === 'settings'), false);
+			assert.equal(partialFields.some(choice => (
+				choice.value === (type === 'character' ? 'name' : 'identity')
+			)), true);
+			const getFields = await autocomplete(
+				'get',
+				createInteraction(OWNER_ID),
+				'field',
+				'',
+				entityKey,
+				locale,
+			);
+			assert.equal(getFields.some(choice => choice.value === 'settings'), false);
+		}
+	}
 });
 
 test('Settings key rename moves active/history state and rewrites every retained snapshot key', async () => {
@@ -411,6 +434,7 @@ async function autocomplete(
 	focusedName,
 	focusedValue,
 	entityKey = '',
+	locale = config.locale,
 ) {
 	let response;
 	interaction.options = {
@@ -421,7 +445,7 @@ async function autocomplete(
 		response = choices;
 	};
 	await commandRegistry.getRuntimeCommands().get(commandName).autocomplete({
-		config,
+		config: { ...config, locale },
 		interaction,
 	});
 	return response;

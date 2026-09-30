@@ -71,9 +71,10 @@ async function getEntitySectionChoices(
 function createSectionChoices(type, sections, locale) {
 	return sections.map(section => {
 		const sectionLabel = getEntityFieldLabel(locale, type, section.id);
+		const value = section.sectionId ?? section.editId ?? section.viewId;
 		return {
-			name: `${sectionLabel} (${section.sectionId})`,
-			value: section.sectionId ?? section.editId ?? section.viewId,
+			name: `${sectionLabel} (${value})`,
+			value,
 		};
 	});
 }
