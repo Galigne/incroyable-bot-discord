@@ -95,10 +95,10 @@ module.exports = function createLocalizationChecks(context) {
 			|| !frenchSummary.fields[0]?.value.includes('DD:')
 			|| frenchSummary.fields[1]?.name !== 'Statistiques'
 			|| frenchSummary.fields[1]?.value.includes('Dons raciaux')
- || frenchSummary.fields[3]?.name !== '\u200B'
- || frenchSummary.fields[3]?.inline !== false
- || frenchSummary.fields[4]?.name !== 'Dons raciaux'
- || !frenchSummary.fields[4]?.value.includes('Arcanes')
+			|| frenchSummary.fields[3]?.name !== '\u200B'
+			|| frenchSummary.fields[3]?.inline !== false
+			|| frenchSummary.fields[4]?.name !== 'Dons raciaux'
+			|| !frenchSummary.fields[4]?.value.includes('Arcanes')
 			|| frenchSummary.fields[2]?.name !== 'LOI'
 		) {
 			errors.push('Character embeds do not use the configured locale.');

@@ -201,10 +201,10 @@ module.exports = function createCharacterChecks(context) {
 				|| summary.fields[1]?.name !== 'Statistics'
 				|| summary.fields[2]?.name !== 'RULEs'
 				|| summary.fields[3]?.name !== '\u200B'
- || summary.fields[3]?.value !== '\u200B'
- || summary.fields[3]?.inline !== false
- || summary.fields[4]?.name !== 'Talents'
- || summary.fields[4]?.inline !== true
+				|| summary.fields[3]?.value !== '\u200B'
+				|| summary.fields[3]?.inline !== false
+				|| summary.fields[4]?.name !== 'Talents'
+				|| summary.fields[4]?.inline !== true
 				|| summary.fields[1]?.value.includes('**Racial traits**')
 				|| summary.fields[1]?.value.includes('Initiative:')
 				|| summary.fields[1]?.value.includes('Reflexes:')
