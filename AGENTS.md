@@ -421,6 +421,13 @@ The current viewing and editing decisions are intentional:
   in the canonical order of the matching concrete field catalog, including normal
   empty-state views. `all` is a `/get`-only special value, not a catalog field or an
   editable section.
+- Compact character summaries use non-inline Status, inline Statistics and RULEs,
+  a non-inline zero-width spacer when lower-row content is present, then inline
+  Racial traits and Talents. Creature summaries use non-inline Status, inline
+  Statistics and RULEs, then non-inline Traits. Optional fields appear only when
+  populated. Each real summary field value has its own 1024-character budget;
+  truncated collections preserve complete entries and include an exact
+  `... (+N)` omission count within that budget. Detailed field views are independent.
 - `/help command:get` explains the supported views.
 - Public entities are visible to anyone with normal bot access. Private entities are
   visible only to explicit `owner` or `partial` users, configured DM users, and the

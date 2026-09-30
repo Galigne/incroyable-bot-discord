@@ -200,13 +200,17 @@ module.exports = function createCharacterChecks(context) {
 				|| summary.fields.some(field => field.name === 'Status effects')
 				|| summary.fields[1]?.name !== 'Statistics'
 				|| summary.fields[2]?.name !== 'RULEs'
-				|| summary.fields.some(field => field.name === '\u200B')
+				|| summary.fields[3]?.name !== '\u200B'
+ || summary.fields[3]?.value !== '\u200B'
+ || summary.fields[3]?.inline !== false
+ || summary.fields[4]?.name !== 'Talents'
+ || summary.fields[4]?.inline !== true
 				|| summary.fields[1]?.value.includes('**Racial traits**')
 				|| summary.fields[1]?.value.includes('Initiative:')
 				|| summary.fields[1]?.value.includes('Reflexes:')
 				|| !summary.fields[2]?.value.includes('- Fire (Level 2)')
-				|| !summary.fields[2]?.value.includes('**Talents**')
-				|| !summary.fields[2]?.value.includes('1. - Athlete —')
+				|| summary.fields[2]?.value.includes('**Talents**')
+				|| !summary.fields[4]?.value.includes('1. - Athlete —')
 				|| JSON.stringify(summary).includes('Equipment')
 				|| JSON.stringify(summary).includes('Inventory')
 			) {

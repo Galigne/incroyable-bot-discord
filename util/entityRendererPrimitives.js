@@ -34,6 +34,24 @@ function formatNumberedJoinedList(items, maxLength, locale = 'en') {
 	);
 }
 
+function formatSummaryList(blocks, maxLength = 1_024) {
+	const complete = blocks.join('\n');
+	if (complete.length <= maxLength) return complete;
+	const included = [];
+	for (const block of blocks) {
+		const candidate = [...included, block, `... (+${blocks.length - included.length - 1})`].join('\n');
+		if (candidate.length > maxLength) break;
+		included.push(block);
+	}
+	const marker = `... (+${blocks.length - included.length})`;
+	// Very small caller budgets may not even accommodate the complete marker.
+	return marker.length <= maxLength ? [...included, marker].join('\n') : '';
+}
+
+function formatNumberedSummaryList(items, maxLength = 1_024) {
+	return formatSummaryList(items.map((item, index) => `${index + 1}. ${item}`), maxLength);
+}
+
 function formatRuleList(rules, formatRule, renderBlocks) {
 	return renderBlocks(rules.map(formatRule));
 }
@@ -79,6 +97,8 @@ function truncateBlocks(blocks, separator, maxLength) {
 }
 
 module.exports = {
+	formatSummaryList,
+	formatNumberedSummaryList,
 	formatBlockList,
 	formatJoinedList,
 	formatNumberedBlockList,

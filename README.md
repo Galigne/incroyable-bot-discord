@@ -183,7 +183,13 @@ paths are rejected before weighted selection, while a path ending at the unresol
 Internal children such as `dungeon` are invalid as direct roots.
 Without `field`, `/get` displays the entity summary followed by its `gear` category,
 including the normal empty gear view when equipment and inventory are empty. A
-specific field displays only that category. `field:all` omits the summary and
+specific field displays only that category.
+Compact character summaries show Status above Statistics and RULEs, then racial
+traits and Talents on a separate row. Creature summaries show Status above
+Statistics and RULEs, with intrinsic Traits in a separate full-width field.
+Empty optional fields are omitted. Each summary field has a 1024-character budget;
+collections retain complete entries and mark omitted entries with `... (+N)`.
+`field:all` omits the summary and
 displays every viewable category, including empty categories, in the canonical
 catalog order. Character categories are `name`, `level`, `resources`, `status`,
 `statistics`, `rules`, `talents`, `gear`, `race`, `background`, and `personality`.

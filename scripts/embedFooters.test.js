@@ -152,10 +152,10 @@ test('character summaries and talent details render localized bounded lists', ()
 	const detailed = createEntityGetResponse(character, 'talents', 'en')
 		.embeds[0].toJSON();
 	assert.match(
-		summary.fields[2].value,
+		summary.fields[3].value,
 		/^1\. Athlete — \+1 to sustained movement\.\n2\. Cold Immunity —/,
 	);
-	assert.equal(summary.fields[2].name, 'Talents');
+	assert.equal(summary.fields[3].name, 'Talents');
 	assert.equal(detailed.description, [
 		'1. Athlete — +1 to sustained movement.',
 		'2. Cold Immunity — Ordinary cold cannot freeze the character.',
@@ -179,7 +179,7 @@ test('character summaries and talent details render localized bounded lists', ()
 		.embeds[0].toJSON();
 	const boundedDetailed = createEntityGetResponse(character, 'talents', 'en')
 		.embeds[0].toJSON();
-	assert.ok(boundedSummary.fields[2].value.length <= 1_024);
+	assert.ok(boundedSummary.fields[3].value.length <= 1_024);
 	assert.equal(boundedDetailed.description.length, 4_096);
 	assert.match(boundedDetailed.description, /…$/);
 });
@@ -216,14 +216,16 @@ test('character summaries omit empty optional content and all gear lists', () =>
 	);
 	assert.match(populatedSummary.fields[0].value, /\*\*Status effects\*\*\n\*\*Inspired\*\* - Moves boldly\./);
 	assert.match(populatedSummary.fields[0].value, /\*\*Descriptive modifiers\*\*/);
-	assert.match(populatedSummary.fields[1].value, /Racial skill bonus: Arcana/);
-	assert.doesNotMatch(populatedSummary.fields[1].value, /Racial physical ability/);
+	assert.match(populatedSummary.fields[4].value, /Racial skill bonus: Arcana/);
+	assert.doesNotMatch(populatedSummary.fields[4].value, /Racial physical ability/);
 	assert.match(populatedSummary.fields[2].value, /Fire \(Level 2\)/);
-	assert.match(populatedSummary.fields[2].value, /\*\*Talents\*\*\n1\. Athlete/);
+	assert.equal(populatedSummary.fields[5].name, 'Talents');
+	assert.equal(populatedSummary.fields[5].value, '1. Athlete');
+	assert.doesNotMatch(populatedSummary.fields[2].value, /Talents|Athlete/);
 	assert.doesNotMatch(JSON.stringify(populatedSummary), /Equipment|Inventory/);
 });
 
-test('creature summaries match the concise character layout with intrinsic traits', () => {
+test('creature summaries give intrinsic traits a separate full-width field', () => {
 	const creature = new Creature('Concise.Creature');
 	creature.gear.equipment = ['Claws'];
 	creature.gear.inventory = ['Shiny stone'];
@@ -251,15 +253,17 @@ test('creature summaries match the concise character layout with intrinsic trait
 		/Archetype \*\*Monster\*\*\nA moonlit guardian\.$/,
 	);
 	assert.deepEqual(populatedSummary.fields.map(field => field.name), [
-		'Status', 'Statistics', 'RULEs',
+		'Status', 'Statistics', 'RULEs', 'Intrinsic traits',
 	]);
 	assert.match(populatedSummary.fields[0].value, /\*\*Status effects\*\*/);
 	assert.match(populatedSummary.fields[0].value, /\*\*Descriptive modifiers\*\*/);
 	assert.match(populatedSummary.fields[2].value, /1\. Fire \(Level 2\)/);
 	assert.match(
-		populatedSummary.fields[2].value,
-		/\*\*Intrinsic traits\*\*\n1\. Night sight — Sees in darkness\./,
+		populatedSummary.fields[3].value,
+		/^1\. Night sight — Sees in darkness\.$/,
 	);
+	assert.equal(populatedSummary.fields[3].inline, false);
+	assert.doesNotMatch(populatedSummary.fields[2].value, /Intrinsic traits|Night sight/);
 	assert.doesNotMatch(JSON.stringify(populatedSummary), /Equipment|Inventory|Gear/);
 
 	const detailedGear = createEntityGetResponse(creature, 'gear', 'en')

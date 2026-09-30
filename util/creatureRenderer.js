@@ -18,6 +18,7 @@ const {
 const {
 	formatJoinedList,
 	formatNumberedJoinedList,
+	formatNumberedSummaryList,
 	getStoredValue,
 	truncate,
 } = require('./entityRendererPrimitives');
@@ -27,31 +28,6 @@ function createCreatureSummaryEmbed(creature, locale = 'en') {
 	const getLabel = fieldId => label(locale, fieldId);
 	const status = formatCombatantSummaryStatus(creature, getLabel, locale);
 	const stats = formatCombatantSummaryStatistics(creature, getLabel);
-	const rightSections = [];
-	if (creature.rules.length > 0) {
-		rightSections.push({
-			label: getLabel('rules'),
-			value: formatCombatantSummaryRules(
-				creature.rules,
-				rule => t(locale, 'creature.summary.ruleLevel', {
-					level: rule.level,
-					name: rule.name,
-				}),
-				formatNumberedJoinedList,
-				250,
-				locale,
-			),
-		});
-	}
-	if (creature.traits.length > 0) {
-		rightSections.push({
-			label: getLabel('traits'),
-			value: formatStringList(creature.traits, 250, locale),
-		});
-	}
-	const rightColumn = rightSections
-		.map((section, index) => `${index === 0 ? '' : `**${section.label}**\n`}${section.value}`)
-		.join('\n\n');
 	const archetype = getArchetype(creature, locale);
 	const description = [
 		archetype
@@ -63,22 +39,20 @@ function createCreatureSummaryEmbed(creature, locale = 'en') {
 		...(hasText(creature.description) ? [creature.description] : []),
 	].join('\n');
 	const summaryFields = [
-		{
-			name: getLabel('status'),
-			value: truncate(status),
-		},
-		{
-			name: getLabel('statistics'),
-			value: truncate(stats),
-			inline: true,
-		},
+		{ name: getLabel('status'), value: status, inline: false },
+		{ name: getLabel('statistics'), value: truncate(stats), inline: true },
 	];
-	if (rightSections.length > 0) {
+	if (creature.rules.length > 0) {
 		summaryFields.push({
-			name: rightSections[0].label,
-			value: truncate(rightColumn),
+			name: getLabel('rules'),
+			value: formatCombatantSummaryRules(creature.rules,
+				rule => t(locale, 'creature.summary.ruleLevel', { level: rule.level, name: rule.name }),
+				formatNumberedJoinedList, 1_024, locale),
 			inline: true,
 		});
+	}
+	if (creature.traits.length > 0) {
+		summaryFields.push({ name: getLabel('traits'), value: formatNumberedSummaryList(creature.traits, 1_024), inline: false });
 	}
 	return new EmbedBuilder()
 		.setTitle(creature.displayName)

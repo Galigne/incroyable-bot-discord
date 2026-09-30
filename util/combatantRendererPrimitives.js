@@ -7,6 +7,7 @@ const { formatDescribedRecords } = require('./describedRecordDisplay');
 const {
 	formatRuleList,
 	formatStatistics,
+	formatSummaryList,
 	getStoredValue,
 } = require('./entityRendererPrimitives');
 
@@ -14,19 +15,19 @@ const SUMMARY_RESOURCE_IDS = ['hp', 'ar', 'ap', 'md'];
 const STATUS_IDS = ['effects', 'modifiers'];
 
 function formatCombatantSummaryStatus(combatant, getLabel, locale = 'en') {
-	const sections = [
-		formatCombatantResources(combatant, SUMMARY_RESOURCE_IDS, locale),
-	];
-	for (const statusId of STATUS_IDS) {
-		const records = combatant.status[statusId] ?? [];
-		if (records.length > 0) {
-			sections.push(
-				`**${getLabel(`status.${statusId}`)}**\n`
-					+ formatDescribedRecords(records, 1_024, locale),
-			);
-		}
+	let result = formatCombatantResources(combatant, SUMMARY_RESOURCE_IDS, locale);
+	const sections = STATUS_IDS.map(statusId => ({
+		heading: `\n\n**${getLabel(`status.${statusId}`)}**\n`,
+		blocks: (combatant.status[statusId] ?? []).map(record => formatDescribedRecords([record], Infinity, locale)),
+	})).filter(section => section.blocks.length > 0);
+	for (const [index, section] of sections.entries()) {
+		// Reserve each later collection's heading and omission count before filling this one.
+		const reserved = sections.slice(index + 1).reduce((length, later) =>
+			length + later.heading.length + `... (+${later.blocks.length})`.length, 0);
+		const budget = 1_024 - result.length - section.heading.length - reserved;
+		result += section.heading + formatSummaryList(section.blocks, budget);
 	}
-	return sections.join('\n\n');
+	return result;
 }
 
 function formatCombatantSummaryStatistics(combatant, getLabel) {

@@ -17,6 +17,8 @@ const {
 const {
 	formatBlockList,
 	formatNumberedBlockList,
+	formatNumberedSummaryList,
+	formatSummaryList,
 	getStoredValue,
 	truncate,
 } = require('./entityRendererPrimitives');
@@ -32,38 +34,6 @@ function createCharacterSummaryEmbed(character, locale = 'en') {
 	]
 		.filter(([, value]) => hasText(value))
 		.map(([field, value]) => `${getLabel(field)}: ${value}`);
-	const leftColumn = [
-		stats,
-		...(racialTraits.length > 0 ? [
-			`**${getLabel('race.traits')}**\n`
-				+ truncate(racialTraits.join('\n'), 250),
-		] : []),
-	].join('\n\n');
-	const rightSections = [];
-	if (character.rules.length > 0) {
-		rightSections.push({
-			label: getLabel('rules'),
-			value: formatCombatantSummaryRules(
-				character.rules,
-				rule => t(locale, 'character.summary.ruleLevel', {
-					level: rule.level,
-					name: rule.name,
-				}),
-				formatList,
-				250,
-				locale,
-			),
-		});
-	}
-	if (character.talents.length > 0) {
-		rightSections.push({
-			label: getLabel('talents'),
-			value: formatList(character.talents, 250, locale),
-		});
-	}
-	const rightColumn = rightSections
-		.map((section, index) => `${index === 0 ? '' : `**${section.label}**\n`}${section.value}`)
-		.join('\n\n');
 	const hasArchetype = hasText(character.background.archetype);
 	const identity = hasText(character.race.name)
 		? t(locale, hasArchetype
@@ -89,19 +59,26 @@ function createCharacterSummaryEmbed(character, locale = 'en') {
 		...backgroundDescription,
 	].join('\n');
 	const summaryFields = [
-		{ name: getLabel('status'), value: truncate(status) },
-		{
-			name: getLabel('statistics'),
-			value: truncate(leftColumn),
-			inline: true,
-		},
+		{ name: getLabel('status'), value: status, inline: false },
+		{ name: getLabel('statistics'), value: truncate(stats), inline: true },
 	];
-	if (rightSections.length > 0) {
+	if (character.rules.length > 0) {
 		summaryFields.push({
-			name: rightSections[0].label,
-			value: truncate(rightColumn),
+			name: getLabel('rules'),
+			value: formatCombatantSummaryRules(character.rules,
+				rule => t(locale, 'character.summary.ruleLevel', { level: rule.level, name: rule.name }),
+				formatList, 1_024, locale),
 			inline: true,
 		});
+	}
+	if (racialTraits.length > 0 || character.talents.length > 0) {
+		summaryFields.push({ name: '\u200B', value: '\u200B', inline: false });
+	}
+	if (racialTraits.length > 0) {
+		summaryFields.push({ name: getLabel('race.traits'), value: formatSummaryList(racialTraits, 1_024), inline: true });
+	}
+	if (character.talents.length > 0) {
+		summaryFields.push({ name: getLabel('talents'), value: formatNumberedSummaryList(character.talents, 1_024), inline: true });
 	}
 
 	return new EmbedBuilder()
