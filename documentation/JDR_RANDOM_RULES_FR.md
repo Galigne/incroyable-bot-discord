@@ -357,16 +357,20 @@ Les **bonus** et **malus** ajustent la valeur cible : un bonus **augmente vos ch
 
 ### Points d'inspiration
 
-Les **points d'inspiration** sont attribués **uniquement par le [MJ](#mj)** pour récompenser la **créativité** et le **[roleplay](#roleplay)** des joueurs.
+Les **points d'inspiration** célèbrent les **moments mémorables et positifs partagés par le groupe** en cours de jeu.
 
-- Si votre action plaît au [MJ](#mj) (`bonne idée`, `scène mémorable`, `moment très drôle`, `prise de risque héroïque`, etc.), il peut vous accorder **`1 point d'inspiration`**.
-- **`1 point d'inspiration`** permet de **relancer un dé** après un lancer de votre choix.
+Au début de chaque campagne, chaque joueur reçoit automatiquement et exactement **`1 point d'inspiration`**, quels que soient son personnage et son historique.
 
-Il est encouragé pour le [MJ](#mj) de distribuer **`1 à 2` points d'inspiration** dès le début de la partie, après la création des personnages, aux joueurs ayant fait preuve :
+En cours de jeu, le [MJ](#mj) peut accorder **`1 point d'inspiration`** pour une action particulièrement créative, originale, drôle, impressionnante ou pleine de panache. **La réaction positive du groupe est le critère principal**, par exemple :
 
-- d'**imagination** ;
-- d'**humour** ;
-- d'**originalité** dans leur concept ou leur histoire.
+- une action fait rire tout le monde ;
+- une idée astucieuse ou inattendue impressionne le groupe ;
+- un moment spectaculaire, héroïque ou mémorable enthousiasme les autres joueurs ;
+- une approche originale fait passer un bon moment à tout le monde.
+
+Le [MJ](#mj) garde la décision finale et doit tenir compte de l'enthousiasme du groupe, en récompensant le plaisir partagé plutôt que ses seules préférences personnelles.
+
+Dépensez **`1 point d'inspiration`** pour **relancer un dé** après un lancer de votre choix.
 
 ## Règles de calcul
 
@@ -509,7 +513,7 @@ Plus une attaque montre que le joueur a écouté la description du [MJ](#mj), co
 <u>Rôle du MJ</u>
 
 - Le [MJ](#mj) décide si l'attaque inflige seulement des dégâts ou si elle provoque aussi un effet narratif ou tactique.
-- Il peut accorder un bonus, augmenter l'effet ou offrir un [point d'inspiration](#points-dinspiration) pour une attaque particulièrement inventive.
+- Il peut accorder un bonus ou augmenter l'effet pour une attaque particulièrement inventive. Si elle crée un moment positif et mémorable pour le groupe, il peut aussi accorder **`1` [point d'inspiration](#points-dinspiration)**.
 - Il peut aussi imposer un malus, un coût supplémentaire ou un risque si l'action est trop ambitieuse par rapport à la situation.
 
 ## Armes

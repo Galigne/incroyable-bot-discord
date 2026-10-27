@@ -357,16 +357,20 @@ Most [actions](#action) **do not require a [roll](#roll)** if you have a suffici
 
 ### Inspiration Points
 
-**Inspiration Points** are awarded **only by the [GM](#gm)** to reward **creativity** and **[roleplay](#roleplay)**.
+**Inspiration Points** celebrate **memorable, positive moments shared by the group** during play.
 
-- If your action pleases the [GM](#gm) (`good idea`, `memorable scene`, `very funny moment`, `heroic risk-taking`, etc.), they may grant you **`1 inspiration point`**.
-- **`1 inspiration point`** lets you **reroll one die** after a roll of your choice.
+At the beginning of each campaign, every player automatically receives exactly **`1 inspiration point`**, regardless of their character or background.
 
-The [GM](#gm) is encouraged to distribute **`1 to 2` inspiration points** at the beginning of the session, after character creation, to players who showed:
+During gameplay, the [GM](#gm) may award **`1 inspiration point`** for an especially cool, creative, original, funny, or impressive action. **The group's positive reaction is the main criterion**, for example:
 
-- **imagination**;
-- **humor**;
-- **originality** in their concept or backstory.
+- an action makes everyone laugh;
+- a clever or unexpected idea impresses the group;
+- a cool, heroic, or memorable moment excites the other players;
+- an original approach creates an enjoyable moment for everyone.
+
+The [GM](#gm) retains the final decision and should consider the group's enthusiasm, rewarding shared enjoyment rather than simply their own personal preferences.
+
+Spend **`1 inspiration point`** to **reroll one die** after a roll of your choice.
 
 ## Calculation Rules
 
@@ -509,7 +513,7 @@ The more an attack shows that the player listened to the [GM](#gm)'s description
 <u>The GM's role</u>
 
 - The [GM](#gm) decides whether the attack deals only damage or also causes a narrative or tactical effect.
-- They may grant a bonus, improve the effect, or award an [inspiration point](#inspiration-points) for a particularly inventive attack.
+- They may grant a bonus or improve the effect for a particularly inventive attack. If it creates a positive, memorable moment for the group, they may also award **`1` [inspiration point](#inspiration-points)**.
 - They may also apply a penalty, an extra cost, or a risk if the action is too ambitious for the situation.
 
 ## Weapons
