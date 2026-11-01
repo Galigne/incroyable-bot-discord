@@ -425,6 +425,11 @@ spent points. HP, AR, and MD use ten-icon percentage bars.
 The full TTRPG rules are available in
 [`documentation/TTRPG_RANDOM_RULES_EN.md`](documentation/TTRPG_RANDOM_RULES_EN.md).
 
+An [illustrated English HTML edition](documentation/TTRPG_RANDOM_RULES_EN.html)
+provides chapter navigation and full-text search. Open the file directly in a
+browser; its artwork, fonts, and reading tools work offline. See the
+[HTML edition guide](documentation/rulebook/README.md) for rebuilding and validation.
+
 ## Project structure
 
 - `commands/handlers/`: one thin Discord adapter per top-level slash command,

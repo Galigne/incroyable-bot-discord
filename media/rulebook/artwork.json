@@ -1,0 +1,159 @@
+{
+  "tool": "image_gen.imagegen",
+  "generationDate": "2026-11-01",
+  "referencePolicy": "Each generation used the listed repository images as actual referenced_image_paths inputs. Supplied visual references took precedence over the written style. No revisions or unreferenced illustrations were generated.",
+  "artworks": [
+    {
+      "name": "cover",
+      "prompt": "Use case: illustration-story. Original illustration for the cover of the RANDOM tabletop roleplaying rulebook.\nInput images are STYLE REFERENCES, not images to reproduce: castle entry.jpg supplies architectural linework; young guy.jpg supplies energetic figure drafting; male driad.jpg supplies invented fantasy physiognomy; adventurer & monster.jpg supplies narrative depth and hatching. Match the actual visual references closely; the visual references take precedence over the written description wherever they differ. Do not copy any composition, character identity, signature, handwriting, watermark, or distinctive ornament.\nScene: an unlikely small company of three freely invented travelers pause at an ancient broken stone gateway and look out towards a distant winding path and a fantastical town. A wiry traveler in a practical patched cloak with a lantern, a short stocky companion carrying a bundle of miscellaneous gear, and a slender bark-featured wanderer. No uniforms, class labels, fixed lore, recognizable IP, or game mechanics. Evoke curiosity and open-ended adventure, not a battle poster.\nComposition: landscape 3:2, intricate gateway and travelers arranged along the lower two thirds, open quiet pale paper in the upper third, distant architecture sketched lightly through the opening; varied human-scale silhouettes, diagonal depth, visually rich but airy. This is artwork only; typography will be laid out separately. Natural sketch edges dissolve into clean warm off-white paper on all sides, especially the upper edge. No rectangular frame or scene border.\nStyle/medium: Traditional hand-drawn fantasy illustration, reminiscent of an illustrator's pencil studies for a classic tabletop RPG rulebook. Graphite pencil and fine ink on warm, off-white paper. Predominantly monochromatic with natural graphite grays and subtle sepia tones. Loose, confident, expressive linework, visible construction lines, overlapping strokes, varied line weight, irregular contours, and organic imperfections. Detailed cross-hatching and directional pencil shading. Some areas carefully rendered while others remain deliberately unfinished. Authentic traditional sketchbook aesthetic, visibly handmade. No watercolor, painted color fills, digital gradients, airbrushing, photorealism, polished digital concept art, or 3D rendering.\nNo lettering, labels, numbers, signature, logos, or watermark. Keep the reference images' lively draftsmanship and unusual character of the lines; avoid generic smooth AI fantasy illustration.",
+      "references": [
+        {
+          "path": "media/references/castle entry.jpg",
+          "sha256": "8c38c4486e689873160ff899355c77088a4e166838001de751709cc42b290ad9"
+        },
+        {
+          "path": "media/references/young guy.jpg",
+          "sha256": "96ca6c9a3d89020870ff8fafb546a957465473c2aae9a0fa812147abd1579e2c"
+        },
+        {
+          "path": "media/references/male driad.jpg",
+          "sha256": "ea245faf8f136b557a55ccee475c93c7f2e2ceda2d9ed5d78344682d704810c7"
+        },
+        {
+          "path": "media/references/adventurer & monster.jpg",
+          "sha256": "d6d7aada47f1a938f284d52f776caacd675006f34198185161c17bcd06683791"
+        }
+      ],
+      "original": {
+        "path": "cover.png",
+        "sha256": "11c4d91e906f7eb7fffdfd04174f20b7b7e77892b68e569d41e9ebcb484b99e9"
+      },
+      "web": {
+        "path": "cover.webp",
+        "sha256": "a4bd135a1c723b90656c847b2b0f95d1f5a87e11460d28b938c11343337c5900"
+      },
+      "width": 1536,
+      "height": 1024
+    },
+    {
+      "name": "characters",
+      "prompt": "Use case: illustration-story. A horizontal 3:2 character-study vignette for the Character Creation chapter of RANDOM, a game where players invent their own identities and races.\nActual input images: female corsair for expressive facial and clothing lines, old dwarf for characterful age and gesture, male driad for inventive bark anatomy, draco warlock for exploratory portrait composition. These are visual STYLE references, never subjects to copy. The visual references take precedence over the written description wherever they differ.\nDraw an original loose cluster of three half-length portrait studies on one sheet: a laughing older stocky traveler with weathered face and rolled sleeves, a thoughtful horned young woman with a simple scarf and travel-worn coat, and an alert slender bark-featured person with an asymmetrical cloak. Distinct personalities, believable expressive hands, layered practical clothing. The central portrait is slightly larger; the other two sit behind and to either side at different angles. No weapons catalog, class lineup, labels, annotations, costume uniforms, fixed lore, or identifiable copyrighted characters. One intimate sketchbook composition, not three bordered panels.\nTraditional hand-drawn fantasy illustration, reminiscent of an illustrator's pencil studies for a classic tabletop RPG rulebook. Graphite pencil and fine ink on warm, off-white paper. Predominantly monochromatic with natural graphite grays and subtle sepia tones. Loose, confident, expressive linework, visible construction lines, overlapping strokes, varied line weight, irregular contours, and organic imperfections. Detailed cross-hatching and directional pencil shading. Some areas carefully rendered while others remain deliberately unfinished. Authentic traditional sketchbook aesthetic, visibly handmade. No watercolor, painted color fills, digital gradients, airbrushing, photorealism, polished digital concept art, or 3D rendering.\nMatch the references' lively, occasionally scratchy hatching, hand-drafted contours and selectively unfinished forms. Lightly sketched shoulders taper away naturally into warm off-white paper; broad clean edges on every side. No rectangular background scene, border, lettering, signature, watermark or labels. No rendered gray wash; make the shading out of lines.",
+      "references": [
+        {
+          "path": "media/references/female corsair.jpg",
+          "sha256": "bc93e11d6c6e7ff4a6e36ff22b27ac46306230d5063554cd9b1519ad84abd02f"
+        },
+        {
+          "path": "media/references/old dwarf.jpg",
+          "sha256": "7fae2814b5d57e05bbba241efa1f448ece71617cdc3e57e61c9d1a08ac6ac901"
+        },
+        {
+          "path": "media/references/male driad.jpg",
+          "sha256": "ea245faf8f136b557a55ccee475c93c7f2e2ceda2d9ed5d78344682d704810c7"
+        },
+        {
+          "path": "media/references/draco warlock.jpg",
+          "sha256": "0ff4b8f67e44fb8d280371a7d346157bf8716682cf8a146bc1ac0d4a3d0707fe"
+        }
+      ],
+      "original": {
+        "path": "characters.png",
+        "sha256": "ff053758dbb85332fb104ab07c4f3fd65aac3961d8827bbca90f114363a8ef21"
+      },
+      "web": {
+        "path": "characters.webp",
+        "sha256": "f8074cc715808671a5c097855430f7080b276e96d986e6215f37ee69813b4f9f"
+      },
+      "width": 1536,
+      "height": 1024
+    },
+    {
+      "name": "combat",
+      "prompt": "Use case: illustration-story. Original wide 3:2 narrative vignette for the Combat chapter of RANDOM. The actual image inputs are visual STYLE references: adventurer & monster for spatial storytelling, female corsair for gestural action and clothing, young guy for dynamic pose and perspective. Match their line character; do not copy their people, monster, composition, signatures or handwriting. The visual references take precedence over the written description wherever they differ.\nA quick-thinking traveler braces a round plain shield against an enormous invented many-legged insect creature while a companion pulls a hanging rope to drop a loose timber between them. The creature is a fantastical beetle-like silhouette, not a named species or recognizable IP. Three-quarter elevated perspective inside the small broken corner of a stone ruin; strong diagonal action, equipment and fabric caught in motion, no blood or injury. Emphasize teamwork and using the environment rather than class-specific combat powers. Keep two figures and one creature anatomically readable, avoid clutter. The scene dissolves at all edges into warm off-white paper, no enclosing rectangular frame. Landscape image with enough margin that every figure is fully visible.\nTraditional hand-drawn fantasy illustration, reminiscent of an illustrator's pencil studies for a classic tabletop RPG rulebook. Graphite pencil and fine ink on warm, off-white paper. Predominantly monochromatic with natural graphite grays and subtle sepia tones. Loose, confident, expressive linework, visible construction lines, overlapping strokes, varied line weight, irregular contours, and organic imperfections. Detailed cross-hatching and directional pencil shading. Some areas carefully rendered while others remain deliberately unfinished. Authentic traditional sketchbook aesthetic, visibly handmade. No watercolor, painted color fills, digital gradients, airbrushing, photorealism, polished digital concept art, or 3D rendering.\nNo watercolor or flat color washes. Dense directional hatching at focal points, spare incomplete lines at margins. No labels, text, symbols implying rules, signature or watermark.",
+      "references": [
+        {
+          "path": "media/references/adventurer & monster.jpg",
+          "sha256": "d6d7aada47f1a938f284d52f776caacd675006f34198185161c17bcd06683791"
+        },
+        {
+          "path": "media/references/female corsair.jpg",
+          "sha256": "bc93e11d6c6e7ff4a6e36ff22b27ac46306230d5063554cd9b1519ad84abd02f"
+        },
+        {
+          "path": "media/references/young guy.jpg",
+          "sha256": "96ca6c9a3d89020870ff8fafb546a957465473c2aae9a0fa812147abd1579e2c"
+        }
+      ],
+      "original": {
+        "path": "combat.png",
+        "sha256": "b9045d6602730c96bc30aad49239987f6e4c65a4b063b280df749510dfb7ec1f"
+      },
+      "web": {
+        "path": "combat.webp",
+        "sha256": "9f5db1fa41c51ae1b46bc9eb97e98ac69ad67152516ec1764376da2e4894e94c"
+      },
+      "width": 1536,
+      "height": 1024
+    },
+    {
+      "name": "runes",
+      "prompt": "Use case: illustration-story. Small standalone pencil-and-ink still-life vignette for the Enchantments and Runes section of the RANDOM tabletop RPG rulebook.\nThe actual input images are visual STYLE references: scary toolshed for intricate tangible tools and cross-hatched wood and metal, mage for dense irregular ink hatching, draco warlock for exploratory magical sketch marks. The visual references take precedence over the written description wherever they differ. Do not reproduce any reference character, object arrangement, handwritten notes, signature, logo, or existing rune design.\nSubject: close oblique view of a craftsperson's two hands carefully engraving a small abstract mark into a plain short blade laid diagonally on a workbench fragment. Beside it are one engraving tool, a shallow dish with a few irregular mineral chips and a plain unlettered folded cloth. Magic is suggested only by tiny sketchy sparks around the blade, not glowing digital effects. No alphabet or diagram implying a fixed magic system. Detailed human hands, tangible nicked metal, expressive unfinished sketch contours.\nLandscape 3:2 canvas but a compact centrally gathered composition within the middle two thirds, broad clean warm off-white paper around all edges; a floating drawing with no full room, no rectangular scene/background, no frame. Keep the drawing moderate in density, suitable for a small margin vignette.\nTraditional hand-drawn fantasy illustration, reminiscent of an illustrator's pencil studies for a classic tabletop RPG rulebook. Graphite pencil and fine ink on warm, off-white paper. Predominantly monochromatic with natural graphite grays and subtle sepia tones. Loose, confident, expressive linework, visible construction lines, overlapping strokes, varied line weight, irregular contours, and organic imperfections. Detailed cross-hatching and directional pencil shading. Some areas carefully rendered while others remain deliberately unfinished. Authentic traditional sketchbook aesthetic, visibly handmade. No watercolor, painted color fills, digital gradients, airbrushing, photorealism, polished digital concept art, or 3D rendering.\nNo washes or tonal digital shading; shade with hatching. No text, numbers, labels, callouts, watermark or signature.",
+      "references": [
+        {
+          "path": "media/references/scary toolshed.jpg",
+          "sha256": "dbe5147a4bed1035af19b732f5e80693033c28d995fca4915757e1806cb5d27f"
+        },
+        {
+          "path": "media/references/mage.jpg",
+          "sha256": "323c136427494899efbcfd00ccca912e1238d43bc495139453ceadbfa4d8e4f9"
+        },
+        {
+          "path": "media/references/draco warlock.jpg",
+          "sha256": "0ff4b8f67e44fb8d280371a7d346157bf8716682cf8a146bc1ac0d4a3d0707fe"
+        }
+      ],
+      "original": {
+        "path": "runes.png",
+        "sha256": "a4ca4983edb7394a325b827b84a3a927025719cdb9e1f1303516bc3bf90d2038"
+      },
+      "web": {
+        "path": "runes.webp",
+        "sha256": "c1be666ee07efe21a753e0d4cf181dc10aa16ba9b2ac1feabf781fa7f4f63c2f"
+      },
+      "width": 1536,
+      "height": 1024
+    },
+    {
+      "name": "camp",
+      "prompt": "Use case: illustration-story. Original landscape 3:2 chapter illustration for Adventure in the RANDOM tabletop RPG rulebook.\nActual visual STYLE inputs: castle entry for irregular architectural ink contours, adventurer & monster for spatial depth and narrative linework, mage for clothing and organic hatching, old dwarf for expressive figures. The visual references take precedence over the written description wherever they differ. Use their artistic identity, never copy their composition, characters, handwriting or signatures.\nScene: a quiet traveling camp beneath the broken shelter of an old stone arch, seen at an intimate slightly elevated angle. Two original travel-worn companions sit near a very small campfire, one repairing a boot and the other unrolling a mostly blank map; a third stands a little farther back watching the open path. A simple slung canvas shelter, a kettle, a few packs and a lantern. Sparse low grasses and distant ruin silhouettes disappear into unfinished lines. Open-ended world, no emblems, established lore, class uniforms, captions, or magical restrictions. Human-scale, companionable, full of observed practical details. Fire shown with simple hand-drawn flickering strokes, not luminous rendered light. Keep the background airy and peripheral forms unfinished.\nTraditional hand-drawn fantasy illustration, reminiscent of an illustrator's pencil studies for a classic tabletop RPG rulebook. Graphite pencil and fine ink on warm, off-white paper. Predominantly monochromatic with natural graphite grays and subtle sepia tones. Loose, confident, expressive linework, visible construction lines, overlapping strokes, varied line weight, irregular contours, and organic imperfections. Detailed cross-hatching and directional pencil shading. Some areas carefully rendered while others remain deliberately unfinished. Authentic traditional sketchbook aesthetic, visibly handmade. No watercolor, painted color fills, digital gradients, airbrushing, photorealism, polished digital concept art, or 3D rendering.\nAllow the scene to dissolve naturally into clean warm off-white paper at all four edges. Detailed concentrated cross-hatching around packs, faces and stonework, lively exploratory lines elsewhere. No dark full-page sky, photographic textures, rectangular enclosing backdrop, border, text, labels, signature or watermark.",
+      "references": [
+        {
+          "path": "media/references/castle entry.jpg",
+          "sha256": "8c38c4486e689873160ff899355c77088a4e166838001de751709cc42b290ad9"
+        },
+        {
+          "path": "media/references/adventurer & monster.jpg",
+          "sha256": "d6d7aada47f1a938f284d52f776caacd675006f34198185161c17bcd06683791"
+        },
+        {
+          "path": "media/references/mage.jpg",
+          "sha256": "323c136427494899efbcfd00ccca912e1238d43bc495139453ceadbfa4d8e4f9"
+        },
+        {
+          "path": "media/references/old dwarf.jpg",
+          "sha256": "7fae2814b5d57e05bbba241efa1f448ece71617cdc3e57e61c9d1a08ac6ac901"
+        }
+      ],
+      "original": {
+        "path": "camp.png",
+        "sha256": "7f9e8f6261ce596b28761d568026fd576ea256a3532d852b2a6f463b734e673a"
+      },
+      "web": {
+        "path": "camp.webp",
+        "sha256": "abf392c00434fb3b1bd1f3c06c0dc202fc82b637e2745a8c7f536a2b42832d0d"
+      },
+      "width": 1536,
+      "height": 1024
+    }
+  ]
+}
