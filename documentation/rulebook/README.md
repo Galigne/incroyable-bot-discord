@@ -1,6 +1,7 @@
-# English HTML rulebook
+# English and French HTML rulebooks
 
-Open [`../TTRPG_RANDOM_RULES_EN.html`](../TTRPG_RANDOM_RULES_EN.html) directly in a
+Open the [English edition](../TTRPG_RANDOM_RULES_EN.html) or the
+[French edition](../JDR_RANDOM_RULES_FR.html) directly in a
 browser. This is a complete standalone file: typography, five illustrations,
 styles, navigation, and search are embedded. It requires neither a server nor a
 network connection. You can copy or share that HTML file by itself.
@@ -12,8 +13,9 @@ anchor links when JavaScript is disabled.
 
 ## Source and rebuilding
 
-The only rulebook content source is `documentation/TTRPG_RANDOM_RULES_EN.md`.
-The build reads that file; it never writes to either Markdown rulebook. Reading
+Each edition uses only its matching Markdown source, either
+`documentation/TTRPG_RANDOM_RULES_EN.md` or `documentation/JDR_RANDOM_RULES_FR.md`.
+The build reads those files; it never writes to either Markdown rulebook. Reading
 tools sit outside the marked canonical-content region of the HTML. Illustrations
 are decorative and introduce no captions, rules, class names, or lore.
 
@@ -30,6 +32,13 @@ Rebuild after formatting so the embedded reader script is current. There is no
 additional package installation or build-time network dependency. Marked 17.0.5 is
 vendored under `vendor/` with its MIT license. This documentation renderer is not
 loaded by the Discord bot.
+
+The default build produces both editions. Pass `en` or `fr` to build one edition,
+for example `node documentation/rulebook/build.js fr`. `editions.js` contains only
+source/output paths, section identifier mappings, and reading-interface labels.
+Both editions share the template, CSS rules, reader script, fonts, and exact WebP
+artwork bytes. The French edition adds an HTML-only target at the existing rarity
+label for the source's `#niveaux-de-rareté` link.
 
 `template.html`, `rulebook.css`, and `reader.js` own presentation and reading tools.
 `build.js` renders Markdown without smart punctuation or content rewriting,

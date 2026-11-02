@@ -19,10 +19,12 @@ file as the primary rules reference when implementing RPG mechanics. Rulebook fi
 are read-only unless the user explicitly requests a rulebook change; never edit them
 merely to make documentation match an implementation.
 
-The standalone English HTML edition is `documentation/TTRPG_RANDOM_RULES_EN.html`.
+The standalone HTML editions are `documentation/TTRPG_RANDOM_RULES_EN.html` and
+`documentation/JDR_RANDOM_RULES_FR.html`, each using its matching Markdown source.
 Its source renderer, styling, reading tools, bundled fonts, and build instructions
 live under `documentation/rulebook/`. Rebuild it with
-`node documentation/rulebook/build.js` after editing those files or after an
+`node documentation/rulebook/build.js` (both editions, or pass `en`/`fr` for one)
+after editing those files or after an
 explicitly authorized Markdown revision; do not hand-edit the generated HTML.
 The build embeds all assets for offline use and never writes to the Markdown
 rulebooks. Reusable original illustrations and their reference-input provenance
@@ -30,6 +32,9 @@ live under `media/rulebook/`. Keep presentation and reading tools separate from
 the canonical book text, and run the source-preservation tests plus desktop/mobile
 visual checks when changing this edition. This documentation tooling is independent
 of the Discord bot.
+Edition-specific paths, section identifier mappings, and reading-interface labels
+belong in `documentation/rulebook/editions.js`; preserve the shared visual design
+and artwork in both editions.
 
 ## Runtime and validation
 

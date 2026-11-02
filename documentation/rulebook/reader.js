@@ -1,6 +1,7 @@
-/* global document, window, NodeFilter, requestAnimationFrame */
+/* global document, window, NodeFilter, requestAnimationFrame, __READER_UI__ */
 (() => {
 	'use strict';
+	const ui = __READER_UI__;
 	const book = document.getElementById('rulebook');
 	const sidebar = document.getElementById('chapter-navigation');
 	const menu = document.getElementById('menu-toggle');
@@ -34,7 +35,7 @@
 			chapter: chapter.querySelector('h1').textContent,
 			text,
 			excerpt,
-			lower: text.toLocaleLowerCase('en'),
+			lower: text.toLocaleLowerCase(ui.language),
 		};
 	});
 
@@ -62,7 +63,7 @@
 	}
 
 	function appendHighlighted(element, text, query) {
-		const lower = text.toLocaleLowerCase('en');
+		const lower = text.toLocaleLowerCase(ui.language);
 		let start = 0;
 		let next = lower.indexOf(query);
 		while (next !== -1) {
@@ -77,14 +78,14 @@
 	}
 
 	function search() {
-		const query = normalize(input.value).toLocaleLowerCase('en');
+		const query = normalize(input.value).toLocaleLowerCase(ui.language);
 		results.replaceChildren();
 		if (!query) {
-			status.textContent = 'Search any rule, term, or phrase.';
+			status.textContent = ui.idle;
 			return;
 		}
-		const matches = index.filter(entry => entry.lower.includes(query)).sort((left, right) => Number(right.title.toLocaleLowerCase('en').includes(query)) - Number(left.title.toLocaleLowerCase('en').includes(query)));
-		status.textContent = matches.length ? `${matches.length} matching section${matches.length === 1 ? '' : 's'}` : 'No matching sections. Try another word or a shorter phrase.';
+		const matches = index.filter(entry => entry.lower.includes(query)).sort((left, right) => Number(right.title.toLocaleLowerCase(ui.language).includes(query)) - Number(left.title.toLocaleLowerCase(ui.language).includes(query)));
+		status.textContent = matches.length ? `${matches.length} ${matches.length === 1 ? ui.singular : ui.plural}` : ui.none;
 		for (const entry of matches) {
 			const item = document.createElement('li');
 			const link = document.createElement('a');
@@ -97,7 +98,7 @@
 			appendHighlighted(title, entry.title, query);
 			const excerpt = document.createElement('span');
 			excerpt.className = 'result-excerpt';
-			const position = Math.max(0, entry.excerpt.toLocaleLowerCase('en').indexOf(query));
+			const position = Math.max(0, entry.excerpt.toLocaleLowerCase(ui.language).indexOf(query));
 			const start = Math.max(0, position - 65);
 			const end = Math.min(entry.excerpt.length, position + query.length + 130);
 			appendHighlighted(excerpt, `${start ? '…' : ''}${entry.excerpt.slice(start, end)}${end < entry.excerpt.length ? '…' : ''}`, query);
@@ -135,7 +136,7 @@
 		const nodes = [];
 		while (walker.nextNode()) nodes.push(walker.currentNode);
 		for (const node of nodes) {
-			if (!node.textContent.toLocaleLowerCase('en').includes(query)) continue;
+			if (!node.textContent.toLocaleLowerCase(ui.language).includes(query)) continue;
 			const fragment = document.createDocumentFragment();
 			appendHighlighted(fragment, node.textContent, query);
 			for (const mark of fragment.querySelectorAll('mark')) mark.dataset.searchMark = '';
@@ -157,10 +158,10 @@
 		}
 		const total = document.documentElement.scrollHeight - window.innerHeight;
 		progress.style.width = `${total > 0 ? Math.min(100, Math.max(0, window.scrollY / total * 100)) : 0}%`;
-		locationLabel.textContent = active?.textContent || 'Rulebook - fantasy version';
+		locationLabel.textContent = active?.textContent || ui.subtitle;
 		for (const link of sidebar.querySelectorAll('a[aria-current]')) link.removeAttribute('aria-current');
 		if (active) {
-			const link = [...sidebar.querySelectorAll('a')].find(candidate => candidate.hash === `#${active.id}`);
+			const link = [...sidebar.querySelectorAll('a')].find(candidate => decodeURIComponent(candidate.hash) === `#${active.id}`);
 			link?.setAttribute('aria-current', 'location');
 		}
 		if (chapter === currentChapter) return;
@@ -256,8 +257,8 @@
 	const lastChapter = chapters.at(-2);
 	previous.href = `#${lastChapter.dataset.chapter}`;
 	previous.querySelector('strong').textContent = lastChapter.querySelector('h1').textContent;
-	next.href = '#table-of-contents';
-	next.querySelector('span').textContent = 'Back to';
-	next.querySelector('strong').textContent = 'Table of Contents';
+	next.href = `#${ui.contentsId}`;
+	next.querySelector('span').textContent = ui.back;
+	next.querySelector('strong').textContent = ui.contents;
 	pager.hidden = false;
 })();

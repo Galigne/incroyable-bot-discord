@@ -1,0 +1,59 @@
+const path = require('node:path');
+
+const directory = path.resolve(__dirname, '..');
+const editions = {
+	en: {
+		sourcePath: path.join(directory, 'TTRPG_RANDOM_RULES_EN.md'),
+		outputPath: path.join(directory, 'TTRPG_RANDOM_RULES_EN.html'),
+		ids: {},
+		interface: {},
+		ui: { language: 'en', subtitle: 'Rulebook - fantasy version', idle: 'Search any rule, term, or phrase.', none: 'No matching sections. Try another word or a shorter phrase.', singular: 'matching section', plural: 'matching sections', back: 'Back to', contents: 'Table of Contents' },
+	},
+	fr: {
+		sourcePath: path.join(directory, 'JDR_RANDOM_RULES_FR.md'),
+		outputPath: path.join(directory, 'JDR_RANDOM_RULES_FR.html'),
+		ids: {
+			'ttrpg-random': 'jdr-random',
+			'table-of-contents': 'sommaire',
+			overview: 'présentation',
+			'character-creation': 'création-de-personnage',
+			adventure: 'aventure',
+			definitions: 'définitions',
+			'enchantments-and-runes': 'enchantements-et-runes',
+			'point-cost-by-value': 'coût-en-points-selon-la-valeur',
+			'action-points-ap': 'points-daction-pa',
+			'encumbrance-value-of-items': 'valeur-dencombrement-des-objets',
+			'armor-ar': 'points-darmure-pr',
+		},
+		interface: {
+			'TTRPG RANDOM': 'JDR RANDOM',
+			'>TTRPG<': '>JDR<',
+			'Rulebook - fantasy version': 'Livre de règles - version fantaisie',
+			'Skip to the rules': 'Aller aux règles',
+			'Reading tools': 'Outils de lecture',
+			'Search words or phrases': 'Rechercher des mots ou des expressions',
+			'Search any rule, term, or phrase.': 'Recherchez une règle, un terme ou une expression.',
+			'Search the rulebook': 'Rechercher dans le livre',
+			'Search results': 'Résultats de recherche',
+			'Close search': 'Fermer la recherche',
+			'>Search<': '>Rechercher<',
+			'>Contents<': '>Sommaire<',
+			'Chapter navigation': 'Navigation par chapitre',
+			'Table of Contents': 'Sommaire',
+			'Chapters': 'Chapitres',
+			'Back to cover': 'Retour à la couverture',
+			'Close contents': 'Fermer le sommaire',
+			'Continue reading': 'Poursuivre la lecture',
+			'Previous chapter': 'Chapitre précédent',
+			'Next chapter': 'Chapitre suivant',
+			'to navigate': 'pour naviguer',
+			'to open': 'pour ouvrir',
+			'to close': 'pour fermer',
+			'>Enter<': '>Entrée<',
+			'>Esc<': '>Échap<',
+		},
+		ui: { language: 'fr', subtitle: 'Livre de règles - version fantaisie', idle: 'Recherchez une règle, un terme ou une expression.', none: 'Aucune section trouvée. Essayez un autre mot ou une expression plus courte.', singular: 'section trouvée', plural: 'sections trouvées', back: 'Retour au', contents: 'Sommaire' },
+	},
+};
+
+module.exports = editions;

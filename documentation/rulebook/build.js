@@ -2,9 +2,9 @@ const fs = require('node:fs/promises');
 const path = require('node:path');
 const { createHash } = require('node:crypto');
 
+const editions = require('./editions');
+
 const root = path.resolve(__dirname, '../..');
-const sourcePath = path.join(root, 'documentation/TTRPG_RANDOM_RULES_EN.md');
-const outputPath = path.join(root, 'documentation/TTRPG_RANDOM_RULES_EN.html');
 const artworkDirectory = path.join(root, 'media/rulebook');
 const sourceStart = '<!-- rulebook-source:start -->';
 const sourceEnd = '<!-- rulebook-source:end -->';
@@ -47,12 +47,12 @@ async function imageElement(name, className) {
 	return `<figure class="illustration ${className}" aria-hidden="true"><img src="data:image/webp;base64,${bytes.toString('base64')}" alt="" width="1536" height="1024" ${name === 'cover' ? 'fetchpriority="high"' : 'loading="eager"'} decoding="async" data-artwork="${name}"></figure>`;
 }
 
-function renderTopics(tokens, markdown, chapterId) {
+function renderTopics(tokens, markdown, chapterId, glossaryId) {
 	const groups = [];
 	let current = { id: `${chapterId}-introduction`, tokens: [] };
 	for (const token of tokens) {
 		const isHeading = token.type === 'heading';
-		const anchor = chapterId === 'definitions' && token.raw.match(/^<a id="([^"]+)"><\/a>/);
+		const anchor = chapterId === glossaryId && token.raw.match(/^<a id="([^"]+)"><\/a>/);
 		if (isHeading || anchor) {
 			if (current.tokens.some(part => part.type !== 'space')) groups.push(current);
 			current = { id: isHeading ? slugify(token.text) : anchor[1], tokens: [] };
@@ -63,8 +63,8 @@ function renderTopics(tokens, markdown, chapterId) {
 	return groups.map(group => `<div class="topic" data-topic="${group.id}">${markdown.parser(group.tokens)}</div>`).join('\n');
 }
 
-function navigation(headings) {
-	const chapters = headings.filter(heading => heading.depth === 1 && !['ttrpg-random', 'table-of-contents'].includes(heading.id));
+function navigation(headings, localId) {
+	const chapters = headings.filter(heading => heading.depth === 1 && ![localId('ttrpg-random'), localId('table-of-contents')].includes(heading.id));
 	return chapters.map((chapter, index) => {
 		const first = headings.indexOf(chapter) + 1;
 		const next = headings.findIndex((heading, position) => position >= first && heading.depth === 1);
@@ -75,16 +75,18 @@ function navigation(headings) {
 	}).join('\n');
 }
 
-async function renderBook(source, { illustrations = true } = {}) {
+async function renderBook(source, { illustrations = true, language = 'en' } = {}) {
+	const edition = editions[language];
+	const localId = id => edition.ids[id] || id;
 	const { markdown, headings } = await createRenderer();
 	const tokens = markdown.lexer(source);
-	const contentsIndex = tokens.findIndex(token => token.type === 'heading' && token.depth === 1 && token.text === 'Table of Contents');
+	const contentsIndex = tokens.findIndex(token => token.type === 'heading' && token.depth === 1 && slugify(token.text) === localId('table-of-contents'));
 	if (contentsIndex < 0) throw new Error('The canonical source must contain its table of contents.');
 	const front = tokens.slice(0, contentsIndex);
 	const firstRule = front.findIndex(token => token.type === 'hr');
 	const lastRule = front.findLastIndex(token => token.type === 'hr');
 	const image = async (name, className) => illustrations ? imageElement(name, className) : '';
-	const cover = `<header class="book-cover" aria-labelledby="ttrpg-random">
+	const cover = `<header class="book-cover" aria-labelledby="${localId('ttrpg-random')}">
 <div class="front-meta">${markdown.parser(front.slice(0, firstRule))}</div>
 <div class="cover-top-rule">${markdown.parser(front.slice(firstRule, firstRule + 1))}</div>
 <div class="cover-title">${markdown.parser(front.slice(firstRule + 1, lastRule))}</div>
@@ -100,22 +102,27 @@ ${await image('cover', 'cover-art')}
 	for (const [index, chapter] of chapters.entries()) {
 		const id = slugify(chapter.title.text);
 		const title = markdown.parser([chapter.title]);
-		let body = renderTopics(chapter.tokens, markdown, id);
+		let body = renderTopics(chapter.tokens, markdown, id, localId('definitions'));
 		if (id === 'combat') {
-			body = body.replace('<div class="topic" data-topic="enchantments-and-runes">', '<div class="topic illustrated-topic" data-topic="enchantments-and-runes">');
-			body = body.replace(/(<h2 id="enchantments-and-runes"[^>]*>.*?<\/h2>\n)/, `$1${await image('runes', 'rune-art')}`);
+			const runesId = localId('enchantments-and-runes');
+			body = body.replace(`<div class="topic" data-topic="${runesId}">`, `<div class="topic illustrated-topic" data-topic="${runesId}">`);
+			body = body.replace(new RegExp(`(<h2 id="${runesId}"[^>]*>.*?<\\/h2>\\n)`), `$1${await image('runes', 'rune-art')}`);
 		}
-		const openingArt = { 'character-creation': 'characters', combat: 'combat', adventure: 'camp' }[id];
+		if (language === 'fr' && id === localId('adventure')) body = body.replace('<u>Niveaux de rareté et valeur générale</u>', '<u id="niveaux-de-rareté">Niveaux de rareté et valeur générale</u>');
+		const openingArt = { [localId('character-creation')]: 'characters', combat: 'combat', [localId('adventure')]: 'camp' }[id];
 		const art = openingArt ? await image(openingArt, 'chapter-art') : '';
-		rendered.push(`<section class="chapter ${id === 'table-of-contents' ? 'contents' : ''}" data-chapter="${id}" aria-labelledby="${id}"><header class="chapter-heading" ${index ? `data-number="${String(index).padStart(2, '0')}"` : ''}>${title}</header>${art}<div class="chapter-body">${body}</div></section>`);
+		rendered.push(`<section class="chapter ${id === localId('table-of-contents') ? 'contents' : ''}" data-chapter="${id}" aria-labelledby="${id}"><header class="chapter-heading" ${index ? `data-number="${String(index).padStart(2, '0')}"` : ''}>${title}</header>${art}<div class="chapter-body">${body}</div></section>`);
 	}
-	return { book: `${cover}\n${rendered.join('\n')}`, headings, navigation: navigation(headings), canonical: (await createRenderer()).markdown.parse(source) };
+	return { book: `${cover}\n${rendered.join('\n')}`, headings, navigation: navigation(headings, localId), canonical: (await createRenderer()).markdown.parse(source) };
 }
 
-async function build() {
+async function build(language = 'en') {
+	const edition = editions[language];
+	if (!edition) throw new Error(`Unsupported rulebook language: ${language}`);
+	const { sourcePath, outputPath } = edition;
 	const bytes = await fs.readFile(sourcePath);
 	const source = bytes.toString('utf8');
-	const { book, navigation: nav } = await renderBook(source);
+	const { book, navigation: nav } = await renderBook(source, { language });
 	const [template, styles, reader, fonts] = await Promise.all([
 		fs.readFile(path.join(__dirname, 'template.html'), 'utf8'),
 		fs.readFile(path.join(__dirname, 'rulebook.css'), 'utf8'),
@@ -123,20 +130,29 @@ async function build() {
 		Promise.all(['EBGaramond', 'EBGaramond-Italic', 'Cinzel'].map(async name => [name, (await fs.readFile(path.join(__dirname, `fonts/${name}.ttf`))).toString('base64')])),
 	]);
 	let css = styles;
+	let localizedTemplate = template;
+	for (const [english, localized] of Object.entries(edition.ids)) {
+		css = css.replaceAll('="' + english + '"', '="' + localized + '"');
+		localizedTemplate = localizedTemplate.replaceAll('#' + english, '#' + localized);
+	}
+	for (const [english, localized] of Object.entries(edition.interface)) localizedTemplate = localizedTemplate.replaceAll(english, localized);
+	localizedTemplate = localizedTemplate.replace('<html lang="en">', '<html lang="' + language + '">');
+	const readerUi = { ...edition.ui, contentsId: edition.ids['table-of-contents'] || 'table-of-contents' };
+	const localizedReader = reader.replace('const ui = __READER_UI__;', `const ui = ${JSON.stringify(readerUi).replaceAll('<', '\\u003c')};`).replace(', __READER_UI__ */', ' */');
 	for (const [name, base64] of fonts) css = css.replace(`__FONT_${name}__`, `data:font/ttf;base64,${base64}`);
 	const hash = createHash('sha256').update(bytes).digest('hex');
 	const licenses = (await Promise.all(['EBGaramond-OFL.txt', 'Cinzel-OFL.txt'].map(name => fs.readFile(path.join(__dirname, `fonts/${name}`), 'utf8')))).join('\n\n');
-	const html = template.replace('__SOURCE_SHA256__', hash).replace('__FONT_LICENSES__', licenses.replaceAll('--', '—')).replace('__STYLES__', css).replace('__NAVIGATION__', nav).replace('__BOOK__', `${sourceStart}\n${book}\n${sourceEnd}`).replace('__READER__', reader);
+	const html = localizedTemplate.replace('__SOURCE_SHA256__', hash).replace('__FONT_LICENSES__', licenses.replaceAll('--', '—')).replace('__STYLES__', css).replace('__NAVIGATION__', nav).replace('__BOOK__', `${sourceStart}\n${book}\n${sourceEnd}`).replace('__READER__', localizedReader);
 	await fs.writeFile(outputPath, html);
-	console.log(`Built documentation/TTRPG_RANDOM_RULES_EN.html (${(Buffer.byteLength(html) / 1024 / 1024).toFixed(2)} MiB). Source SHA-256: ${hash}`);
+	console.log(`Built ${path.relative(root, outputPath)} (${(Buffer.byteLength(html) / 1024 / 1024).toFixed(2)} MiB). Source SHA-256: ${hash}`);
 	return { outputPath, hash };
 }
 
 if (require.main === module) {
-	build().catch(error => {
+	Promise.all((process.argv[2] ? [process.argv[2]] : Object.keys(editions)).map(language => build(language))).catch(error => {
 		console.error(error);
 		process.exitCode = 1;
 	});
 }
 
-module.exports = { build, renderBook, createRenderer, sourcePath, outputPath, sourceStart, sourceEnd, plainText, slugify };
+module.exports = { build, renderBook, createRenderer, sourcePath: editions.en.sourcePath, outputPath: editions.en.outputPath, sourceStart, sourceEnd, plainText, slugify };
