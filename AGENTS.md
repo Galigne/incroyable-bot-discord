@@ -35,6 +35,9 @@ of the Discord bot.
 Edition-specific paths, section identifier mappings, and reading-interface labels
 belong in `documentation/rulebook/editions.js`; preserve the shared visual design
 and artwork in both editions.
+`media/rulebook/artwork.json` records each illustration's original, WebP copy,
+generation inputs, and placement under a canonical English section ID. Add the
+corresponding French ID in `editions.js` when the heading differs.
 
 ## Runtime and validation
 

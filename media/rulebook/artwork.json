@@ -1,7 +1,6 @@
 {
   "tool": "image_gen.imagegen",
-  "generationDate": "2026-11-01",
-  "referencePolicy": "Each generation used the listed repository images as actual referenced_image_paths inputs. Supplied visual references took precedence over the written style. No revisions or unreferenced illustrations were generated.",
+  "referencePolicy": "Prompts and reference inputs record the initial generation history. The published originals are the latest user-supplied revisions; their subsequent editing or generation process is not inferred. Web copies preserve native resolution and continuous grayscale tones with lossless encoding.",
   "artworks": [
     {
       "name": "cover",
@@ -25,15 +24,29 @@
         }
       ],
       "original": {
-        "path": "cover.png",
-        "sha256": "11c4d91e906f7eb7fffdfd04174f20b7b7e77892b68e569d41e9ebcb484b99e9"
+        "path": "cover_new.png",
+        "sha256": "d58d4a2399db1b2f577a1abf7366180238065adfc0c6402a03e7c550793d3fb2"
       },
       "web": {
         "path": "cover.webp",
-        "sha256": "a4bd135a1c723b90656c847b2b0f95d1f5a87e11460d28b938c11343337c5900"
+        "sha256": "4deeaf2b8cb08afba0f2e121e930431b15e8f9d7ddaef722dfa88f9c767c0992"
       },
       "width": 1536,
-      "height": 1024
+      "height": 1024,
+      "generationDate": "2026-11-01",
+      "placement": {
+        "section": "ttrpg-random",
+        "kind": "cover"
+      },
+      "initialOriginal": {
+        "path": "cover.png",
+        "sha256": "11c4d91e906f7eb7fffdfd04174f20b7b7e77892b68e569d41e9ebcb484b99e9"
+      },
+      "revision": {
+        "source": "User-supplied final artwork",
+        "integratedDate": "2026-11-13",
+        "preparation": "Native resolution, neutral continuous grayscale, lossless WebP. No resampling, sharpening, thresholding or dithering. Soft edge blending is applied by the shared stylesheet."
+      }
     },
     {
       "name": "characters",
@@ -57,15 +70,29 @@
         }
       ],
       "original": {
-        "path": "characters.png",
-        "sha256": "ff053758dbb85332fb104ab07c4f3fd65aac3961d8827bbca90f114363a8ef21"
+        "path": "characters_new.png",
+        "sha256": "e26d09bd40a98c2c189d962446871173b795d4f7141609cebf848a68768da5f0"
       },
       "web": {
         "path": "characters.webp",
-        "sha256": "f8074cc715808671a5c097855430f7080b276e96d986e6215f37ee69813b4f9f"
+        "sha256": "96851583762622fa8d02570d0c23eb6e9b19a1b90ce5cb2cc1060ea62f07b95f"
       },
       "width": 1536,
-      "height": 1024
+      "height": 1024,
+      "generationDate": "2026-11-01",
+      "placement": {
+        "section": "character-creation",
+        "kind": "opening"
+      },
+      "initialOriginal": {
+        "path": "characters.png",
+        "sha256": "ff053758dbb85332fb104ab07c4f3fd65aac3961d8827bbca90f114363a8ef21"
+      },
+      "revision": {
+        "source": "User-supplied final artwork",
+        "integratedDate": "2026-11-13",
+        "preparation": "Native resolution, neutral continuous grayscale, lossless WebP. No resampling, sharpening, thresholding or dithering. Soft edge blending is applied by the shared stylesheet."
+      }
     },
     {
       "name": "combat",
@@ -85,15 +112,29 @@
         }
       ],
       "original": {
-        "path": "combat.png",
-        "sha256": "b9045d6602730c96bc30aad49239987f6e4c65a4b063b280df749510dfb7ec1f"
+        "path": "combat_new.png",
+        "sha256": "3faf25fbe4d385b1eac47dbcbd73197d2388a4b83eab8b520af6dabe5c65ac05"
       },
       "web": {
         "path": "combat.webp",
-        "sha256": "9f5db1fa41c51ae1b46bc9eb97e98ac69ad67152516ec1764376da2e4894e94c"
+        "sha256": "e011d61025cb6cf300b8ece86c32ed43319fd47c3d857fad8752dcfd3873923f"
       },
       "width": 1536,
-      "height": 1024
+      "height": 1024,
+      "generationDate": "2026-11-01",
+      "placement": {
+        "section": "combat",
+        "kind": "opening"
+      },
+      "initialOriginal": {
+        "path": "combat.png",
+        "sha256": "b9045d6602730c96bc30aad49239987f6e4c65a4b063b280df749510dfb7ec1f"
+      },
+      "revision": {
+        "source": "User-supplied final artwork",
+        "integratedDate": "2026-11-13",
+        "preparation": "Native resolution, neutral continuous grayscale, lossless WebP. No resampling, sharpening, thresholding or dithering. Soft edge blending is applied by the shared stylesheet."
+      }
     },
     {
       "name": "runes",
@@ -113,15 +154,29 @@
         }
       ],
       "original": {
-        "path": "runes.png",
-        "sha256": "a4ca4983edb7394a325b827b84a3a927025719cdb9e1f1303516bc3bf90d2038"
+        "path": "runes_new.png",
+        "sha256": "2b2e06134e64039f909b36bf4dd2fa7f160e46b675ee4e01f3c58ee892f84ef8"
       },
       "web": {
         "path": "runes.webp",
-        "sha256": "c1be666ee07efe21a753e0d4cf181dc10aa16ba9b2ac1feabf781fa7f4f63c2f"
+        "sha256": "a7e612d9e190eb50fc0a54ef7b4ced6644e6fe8e1baa48977bb72a5f86d2870b"
       },
       "width": 1536,
-      "height": 1024
+      "height": 1024,
+      "generationDate": "2026-11-01",
+      "placement": {
+        "section": "enchantments-and-runes",
+        "kind": "margin"
+      },
+      "initialOriginal": {
+        "path": "runes.png",
+        "sha256": "a4ca4983edb7394a325b827b84a3a927025719cdb9e1f1303516bc3bf90d2038"
+      },
+      "revision": {
+        "source": "User-supplied final artwork",
+        "integratedDate": "2026-11-13",
+        "preparation": "Native resolution, neutral continuous grayscale, lossless WebP. No resampling, sharpening, thresholding or dithering. Soft edge blending is applied by the shared stylesheet."
+      }
     },
     {
       "name": "camp",
@@ -145,15 +200,401 @@
         }
       ],
       "original": {
-        "path": "camp.png",
-        "sha256": "7f9e8f6261ce596b28761d568026fd576ea256a3532d852b2a6f463b734e673a"
+        "path": "camp_new.png",
+        "sha256": "870e9b90c66232332dc97bd4423554f97cbbb99baf9526355ede4144a697bea4"
       },
       "web": {
         "path": "camp.webp",
-        "sha256": "abf392c00434fb3b1bd1f3c06c0dc202fc82b637e2745a8c7f536a2b42832d0d"
+        "sha256": "80032afccd1df2c7bbb636f4e15ff689635b3d4b95706fd901d052fb7ce88c63"
       },
       "width": 1536,
-      "height": 1024
+      "height": 1024,
+      "generationDate": "2026-11-01",
+      "placement": {
+        "section": "adventure",
+        "kind": "opening"
+      },
+      "initialOriginal": {
+        "path": "camp.png",
+        "sha256": "7f9e8f6261ce596b28761d568026fd576ea256a3532d852b2a6f463b734e673a"
+      },
+      "revision": {
+        "source": "User-supplied final artwork",
+        "integratedDate": "2026-11-13",
+        "preparation": "Native resolution, neutral continuous grayscale, lossless WebP. No resampling, sharpening, thresholding or dithering. Soft edge blending is applied by the shared stylesheet."
+      }
+    },
+    {
+      "name": "dice",
+      "generationDate": "2026-11-02",
+      "prompt": "Use case: illustration-story. An original small marginal vignette for the RANDOM tabletop RPG rulebook. Actual visual style inputs: scary toolshed.jpg, young guy.jpg. Use their draftsmanship and line quality; wherever the references and written style differ, the visual references take precedence. Do not copy their subjects, signatures or compositions.\nA single relaxed player's hand lifting away from a settled twenty-sided die, with a thin worn coin for scale. Tabletop close-up, low three-quarter angle. Draw the die as a believable regular icosahedron with triangular faces; its upper face clearly shows the numeral 1. Foreshorten other faces so their marks are subordinate. Die and coin at the same scale as real gaming pieces under the fingers, with selective enlargement of the foreground die through perspective. Only the 1 is deliberately legible. No other dice or objects.\nTraditional hand-drawn fantasy illustration, reminiscent of an illustrator's pencil studies for a classic tabletop RPG rulebook. Graphite pencil and fine ink on warm, off-white paper. Predominantly monochromatic with natural graphite grays and subtle sepia tones. Loose, confident, expressive linework, visible construction lines, overlapping strokes, varied line weight, irregular contours, and organic imperfections. Detailed cross-hatching and directional pencil shading. Some areas carefully rendered while others remain deliberately unfinished. Authentic traditional sketchbook aesthetic, visibly handmade. No watercolor, painted color fills, digital gradients, airbrushing, photorealism, polished digital concept art, or 3D rendering.\nLandscape 3:2 canvas. One compact, readable focal cluster in the middle two thirds, with paper margins on every side. Let contours trail away into light warm ivory paper, broken lines at the edges. A floating ink sketch, not a rectangular scene, panel, decorative frame or page mockup. No text, lettering, watermarks or signatures except the die face specified above.",
+      "references": [
+        {
+          "path": "media/references/scary toolshed.jpg",
+          "sha256": "dbe5147a4bed1035af19b732f5e80693033c28d995fca4915757e1806cb5d27f"
+        },
+        {
+          "path": "media/references/young guy.jpg",
+          "sha256": "96ca6c9a3d89020870ff8fafb546a957465473c2aae9a0fa812147abd1579e2c"
+        }
+      ],
+      "original": {
+        "path": "dice_new.png",
+        "sha256": "b1fd34509d0afdb74c140e5aeadfc237f6a5b124211996e386674bcb77824843"
+      },
+      "web": {
+        "path": "dice.webp",
+        "sha256": "c6a0ffcb079915b5459ffb7c12ef1dd4e69ddd8edfc601c54bcea5e04e58dcb2"
+      },
+      "width": 1710,
+      "height": 1140,
+      "placement": {
+        "section": "types-of-dice",
+        "kind": "tail"
+      },
+      "initialOriginal": {
+        "path": "dice.png",
+        "sha256": "dece99b1f95fca52ab19f2a98a7f8c73d11fc3814c9cc5a235aa24b85f56cc30"
+      },
+      "revision": {
+        "source": "User-supplied final artwork",
+        "integratedDate": "2026-11-13",
+        "preparation": "Native resolution, neutral continuous grayscale, lossless WebP. No resampling, sharpening, thresholding or dithering. Soft edge blending is applied by the shared stylesheet."
+      }
+    },
+    {
+      "name": "map",
+      "generationDate": "2026-11-02",
+      "prompt": "Use case: illustration-story. An original chapter-opening drawing for the RANDOM tabletop RPG rulebook. Actual visual style inputs: castle entry.jpg, scary toolshed.jpg. Use their draftsmanship and line quality; wherever the references and written style differ, the visual references take precedence. Do not copy their subjects, signatures or compositions.\nGame Master chapter opening, a wide shallow overhead composition, approximately 2.5:1 landscape. Two distinct hands enter from opposite sides of a table: one steadies a mostly unmarked rough map, the other extends a path with a pencil toward an uncharted fork. Just a little bridge and a cluster of roofs mark two places; preserve a generous area of UNMARKED paper. No map labels, borders, ornate compass roses or invented lore. This should read as real people inventing a place together. Keep the cross-hatching in the hands, paper folds and tiny architecture rather than densely detailing the map.\nTraditional hand-drawn fantasy illustration, reminiscent of an illustrator's pencil studies for a classic tabletop RPG rulebook. Graphite pencil and fine ink on warm, off-white paper. Predominantly monochromatic with natural graphite grays and subtle sepia tones. Loose, confident, expressive linework, visible construction lines, overlapping strokes, varied line weight, irregular contours, and organic imperfections. Detailed cross-hatching and directional pencil shading. Some areas carefully rendered while others remain deliberately unfinished. Authentic traditional sketchbook aesthetic, visibly handmade. No watercolor, painted color fills, digital gradients, airbrushing, photorealism, polished digital concept art, or 3D rendering.\nWide shallow horizontal artwork, kept within the central band. Let contours trail away into light warm ivory paper, broken lines at the edges. A floating ink sketch, not a rectangular scene, panel, decorative frame or page mockup. No text, lettering, watermarks or signatures.",
+      "references": [
+        {
+          "path": "media/references/castle entry.jpg",
+          "sha256": "8c38c4486e689873160ff899355c77088a4e166838001de751709cc42b290ad9"
+        },
+        {
+          "path": "media/references/scary toolshed.jpg",
+          "sha256": "dbe5147a4bed1035af19b732f5e80693033c28d995fca4915757e1806cb5d27f"
+        }
+      ],
+      "original": {
+        "path": "map_new.png",
+        "sha256": "2dabeb04e11433664dd67123914e3b5552d1bf2871fec9141f8e44be3e701398"
+      },
+      "web": {
+        "path": "map.webp",
+        "sha256": "a5020e5805d6f286412b5c4f4dc6b4d779277d03779b9f9c5e1beec054d0bf8b"
+      },
+      "width": 1983,
+      "height": 793,
+      "placement": {
+        "section": "advice-for-the-game-master",
+        "kind": "opening"
+      },
+      "initialOriginal": {
+        "path": "map.png",
+        "sha256": "91211705a69e1a11e6b5e5b8cf2aa4b3f99761e8e788315e1ab5c63881d8d205"
+      },
+      "revision": {
+        "source": "User-supplied final artwork",
+        "integratedDate": "2026-11-13",
+        "preparation": "Native resolution, neutral continuous grayscale, lossless WebP. No resampling, sharpening, thresholding or dithering. Soft edge blending is applied by the shared stylesheet."
+      }
+    },
+    {
+      "name": "rule",
+      "generationDate": "2026-11-02",
+      "prompt": "Use case: illustration-story. An original small marginal vignette for the RANDOM tabletop RPG rulebook. Actual visual style inputs: mage.jpg, male driad.jpg. Use their draftsmanship and line quality; wherever the references and written style differ, the visual references take precedence. Do not copy their subjects, signatures or compositions.\nAn original traveler in a rolled sleeve crouches to coax a tendril rising from bare earth to curl around their outstretched finger. The eye follows the arc from the attentive face down the arm to the new leaf. This is one invented example of personal magical mastery tied to nature, with no universal spell glyphs, costume, elemental color, staff or spell list. Render the face, fingertips and leaf tips more carefully than the receding body. A tight readable gesture at small scale.\nTraditional hand-drawn fantasy illustration, reminiscent of an illustrator's pencil studies for a classic tabletop RPG rulebook. Graphite pencil and fine ink on warm, off-white paper. Predominantly monochromatic with natural graphite grays and subtle sepia tones. Loose, confident, expressive linework, visible construction lines, overlapping strokes, varied line weight, irregular contours, and organic imperfections. Detailed cross-hatching and directional pencil shading. Some areas carefully rendered while others remain deliberately unfinished. Authentic traditional sketchbook aesthetic, visibly handmade. No watercolor, painted color fills, digital gradients, airbrushing, photorealism, polished digital concept art, or 3D rendering.\nLandscape 3:2 canvas. One compact, readable focal cluster in the middle two thirds, with paper margins on every side. Let contours trail away into light warm ivory paper, broken lines at the edges. A floating ink sketch, not a rectangular scene, panel, decorative frame or page mockup. No text, lettering, watermarks or signatures.",
+      "references": [
+        {
+          "path": "media/references/mage.jpg",
+          "sha256": "323c136427494899efbcfd00ccca912e1238d43bc495139453ceadbfa4d8e4f9"
+        },
+        {
+          "path": "media/references/male driad.jpg",
+          "sha256": "ea245faf8f136b557a55ccee475c93c7f2e2ceda2d9ed5d78344682d704810c7"
+        }
+      ],
+      "original": {
+        "path": "rule_new.png",
+        "sha256": "51c360a9defce7fd06179dea2bf6af459ebaf58639fc4f3d32981e6d65183929"
+      },
+      "web": {
+        "path": "rule.webp",
+        "sha256": "202f933d690fd1825cb79c473f44f5b7dd1929b0e25097e679ece5b013f6be60"
+      },
+      "width": 1905,
+      "height": 1270,
+      "placement": {
+        "section": "rule",
+        "kind": "margin"
+      },
+      "initialOriginal": {
+        "path": "rule.png",
+        "sha256": "8fd6b586a5071f6a80a74e0634aa20c5688bafaa6a73aa3e6902a09f1a6c3637"
+      },
+      "revision": {
+        "source": "User-supplied final artwork",
+        "integratedDate": "2026-11-13",
+        "preparation": "Native resolution, neutral continuous grayscale, lossless WebP. No resampling, sharpening, thresholding or dithering. Soft edge blending is applied by the shared stylesheet."
+      }
+    },
+    {
+      "name": "attacks",
+      "generationDate": "2026-11-02",
+      "prompt": "Use case: illustration-story. An original small marginal vignette for the RANDOM tabletop RPG rulebook. Actual visual style inputs: female corsair.jpg, adventurer & monster.jpg. Use their draftsmanship and line quality; wherever the references and written style differ, the visual references take precedence. Do not copy their subjects, signatures or compositions.\nOne agile fighter makes a low, committed sweeping strike with a hooked pole to pull a foe's ankle off balance beside a loose stone. Draw the opponent only as the boot and lower leg stepping on the unstable stone at the right; emphasize intent and the useful angle of the hook, rather than damage. Side-on diagonal action. One lucid cause and effect; no wound, no blood, no diagram or motion arrows.\nTraditional hand-drawn fantasy illustration, reminiscent of an illustrator's pencil studies for a classic tabletop RPG rulebook. Graphite pencil and fine ink on warm, off-white paper. Predominantly monochromatic with natural graphite grays and subtle sepia tones. Loose, confident, expressive linework, visible construction lines, overlapping strokes, varied line weight, irregular contours, and organic imperfections. Detailed cross-hatching and directional pencil shading. Some areas carefully rendered while others remain deliberately unfinished. Authentic traditional sketchbook aesthetic, visibly handmade. No watercolor, painted color fills, digital gradients, airbrushing, photorealism, polished digital concept art, or 3D rendering.\nLandscape 3:2 canvas. One compact, readable focal cluster in the middle two thirds, with paper margins on every side. Let contours trail away into light warm ivory paper, broken lines at the edges. A floating ink sketch, not a rectangular scene, panel, decorative frame or page mockup. No text, lettering, watermarks or signatures.",
+      "references": [
+        {
+          "path": "media/references/female corsair.jpg",
+          "sha256": "bc93e11d6c6e7ff4a6e36ff22b27ac46306230d5063554cd9b1519ad84abd02f"
+        },
+        {
+          "path": "media/references/adventurer & monster.jpg",
+          "sha256": "d6d7aada47f1a938f284d52f776caacd675006f34198185161c17bcd06683791"
+        }
+      ],
+      "original": {
+        "path": "attacks_new.png",
+        "sha256": "f19a342a9137241865a908e15bc8de26f901bf14cc47190221c541e67af058ef"
+      },
+      "web": {
+        "path": "attacks.webp",
+        "sha256": "8e86a5960821ee56720cc5a9328bcb3b36a1ca2b5a07bf6eac0d61574c364477"
+      },
+      "width": 1536,
+      "height": 1024,
+      "placement": {
+        "section": "attacks",
+        "kind": "margin"
+      },
+      "initialOriginal": {
+        "path": "attacks.png",
+        "sha256": "fb72f54e152d6fecc19ebab2805175497d142c155b18caea594923b77158fe25"
+      },
+      "revision": {
+        "source": "User-supplied final artwork",
+        "integratedDate": "2026-11-13",
+        "preparation": "Native resolution, neutral continuous grayscale, lossless WebP. No resampling, sharpening, thresholding or dithering. Soft edge blending is applied by the shared stylesheet."
+      }
+    },
+    {
+      "name": "weapons",
+      "generationDate": "2026-11-02",
+      "prompt": "Use case: illustration-story. An original small marginal vignette for the RANDOM tabletop RPG rulebook. Actual visual style inputs: scary toolshed.jpg. Use their draftsmanship and line quality; wherever the references and written style differ, the visual references take precedence. Do not copy their subjects, signatures or compositions.\nA compact still life of contrasting silhouettes on a worn shield: a short plain saber and a longer halberd lying diagonally across it, their grips and the halberd's working head fully legible, shafts fading into a few loose strokes. Elevated three-quarter view, measured and tangible. No orderly armory chart, exotic oversized blades, inventory labels or inscriptions. Shifting fine marks distinguish wood, leather binding and nicked iron.\nTraditional hand-drawn fantasy illustration, reminiscent of an illustrator's pencil studies for a classic tabletop RPG rulebook. Graphite pencil and fine ink on warm, off-white paper. Predominantly monochromatic with natural graphite grays and subtle sepia tones. Loose, confident, expressive linework, visible construction lines, overlapping strokes, varied line weight, irregular contours, and organic imperfections. Detailed cross-hatching and directional pencil shading. Some areas carefully rendered while others remain deliberately unfinished. Authentic traditional sketchbook aesthetic, visibly handmade. No watercolor, painted color fills, digital gradients, airbrushing, photorealism, polished digital concept art, or 3D rendering.\nLandscape 3:2 canvas. One compact, readable focal cluster in the middle two thirds, with paper margins on every side. Let contours trail away into light warm ivory paper, broken lines at the edges. A floating ink sketch, not a rectangular scene, panel, decorative frame or page mockup. No text, lettering, watermarks or signatures.",
+      "references": [
+        {
+          "path": "media/references/scary toolshed.jpg",
+          "sha256": "dbe5147a4bed1035af19b732f5e80693033c28d995fca4915757e1806cb5d27f"
+        }
+      ],
+      "original": {
+        "path": "weapons_new.png",
+        "sha256": "c585c4a2371de1fc91857bcdfbb21a0dc4b99938d3cb4e50de03af2d1329bd87"
+      },
+      "web": {
+        "path": "weapons.webp",
+        "sha256": "c0c1a294e2f13046e2c43822fd0feb0151d9c9ecdae35d775505451d2a6f59f8"
+      },
+      "width": 1536,
+      "height": 1024,
+      "placement": {
+        "section": "weapons",
+        "kind": "margin"
+      },
+      "initialOriginal": {
+        "path": "weapons.png",
+        "sha256": "aa1f1d46d57ed78e51807f3e8e3562191961e2b83321346a4b8af3feae2b182c"
+      },
+      "revision": {
+        "source": "User-supplied final artwork",
+        "integratedDate": "2026-11-13",
+        "preparation": "Native resolution, neutral continuous grayscale, lossless WebP. No resampling, sharpening, thresholding or dithering. Soft edge blending is applied by the shared stylesheet."
+      }
+    },
+    {
+      "name": "defense",
+      "generationDate": "2026-11-02",
+      "prompt": "Use case: illustration-story. An original small marginal vignette for the RANDOM tabletop RPG rulebook. Actual visual style inputs: young guy.jpg, mage.jpg. Use their draftsmanship and line quality; wherever the references and written style differ, the visual references take precedence. Do not copy their subjects, signatures or compositions.\nAn original alert traveler twists sideways and raises a palm as a flying arrow is deflected past their shoulder by a small gust of wind. Freeze the single moment of reaction: arrow shaft slants harmlessly away, two loose leaves and the scarf tails sketch the direction of the gust. Close three-quarter bust, expressive concentrated face, no glow, force field or second projectile; no injury. Quiet paper showing through the negative space between face and shaft.\nTraditional hand-drawn fantasy illustration, reminiscent of an illustrator's pencil studies for a classic tabletop RPG rulebook. Graphite pencil and fine ink on warm, off-white paper. Predominantly monochromatic with natural graphite grays and subtle sepia tones. Loose, confident, expressive linework, visible construction lines, overlapping strokes, varied line weight, irregular contours, and organic imperfections. Detailed cross-hatching and directional pencil shading. Some areas carefully rendered while others remain deliberately unfinished. Authentic traditional sketchbook aesthetic, visibly handmade. No watercolor, painted color fills, digital gradients, airbrushing, photorealism, polished digital concept art, or 3D rendering.\nLandscape 3:2 canvas. One compact, readable focal cluster in the middle two thirds, with paper margins on every side. Let contours trail away into light warm ivory paper, broken lines at the edges. A floating ink sketch, not a rectangular scene, panel, decorative frame or page mockup. No text, lettering, watermarks or signatures.",
+      "references": [
+        {
+          "path": "media/references/young guy.jpg",
+          "sha256": "96ca6c9a3d89020870ff8fafb546a957465473c2aae9a0fa812147abd1579e2c"
+        },
+        {
+          "path": "media/references/mage.jpg",
+          "sha256": "323c136427494899efbcfd00ccca912e1238d43bc495139453ceadbfa4d8e4f9"
+        }
+      ],
+      "original": {
+        "path": "defense_new.png",
+        "sha256": "fe95703370af6b8ced5b835f1cc9c8b75619ccad1edfbfc28ce0353f104efdbf"
+      },
+      "web": {
+        "path": "defense.webp",
+        "sha256": "2f23f59f3697025bc39552ae0f5cbccc65aa7a03ca603a74d55347962bb14a67"
+      },
+      "width": 1536,
+      "height": 1024,
+      "placement": {
+        "section": "defense-saving-and-survival",
+        "kind": "margin"
+      },
+      "initialOriginal": {
+        "path": "defense.png",
+        "sha256": "70c2575ae8f2a0962c34881712486eeb73f4b6eaebbe89d2f1d2a36ffccb469e"
+      },
+      "revision": {
+        "source": "User-supplied final artwork",
+        "integratedDate": "2026-11-13",
+        "preparation": "Native resolution, neutral continuous grayscale, lossless WebP. No resampling, sharpening, thresholding or dithering. Soft edge blending is applied by the shared stylesheet."
+      }
+    },
+    {
+      "name": "armor",
+      "generationDate": "2026-11-02",
+      "prompt": "Use case: illustration-story. An original small marginal vignette for the RANDOM tabletop RPG rulebook. Actual visual style inputs: scary toolshed.jpg, old dwarf.jpg. Use their draftsmanship and line quality; wherever the references and written style differ, the visual references take precedence. Do not copy their subjects, signatures or compositions.\nAn armor repairer's hands lift the edge of a dented overlapping shoulder plate, exposing chain links, a quilted pad and a worn fastening strap underneath. Show a small piece of practical armor, not a full suit on a warrior. Close tactile technical study, three-quarter oblique view; render scuffs in metal, soft fabric and individual ring links with different marks. No diagram, numbers, labels, runes or magical glow.\nTraditional hand-drawn fantasy illustration, reminiscent of an illustrator's pencil studies for a classic tabletop RPG rulebook. Graphite pencil and fine ink on warm, off-white paper. Predominantly monochromatic with natural graphite grays and subtle sepia tones. Loose, confident, expressive linework, visible construction lines, overlapping strokes, varied line weight, irregular contours, and organic imperfections. Detailed cross-hatching and directional pencil shading. Some areas carefully rendered while others remain deliberately unfinished. Authentic traditional sketchbook aesthetic, visibly handmade. No watercolor, painted color fills, digital gradients, airbrushing, photorealism, polished digital concept art, or 3D rendering.\nLandscape 3:2 canvas. One compact, readable focal cluster in the middle two thirds, with paper margins on every side. Let contours trail away into light warm ivory paper, broken lines at the edges. A floating ink sketch, not a rectangular scene, panel, decorative frame or page mockup. No text, lettering, watermarks or signatures.",
+      "references": [
+        {
+          "path": "media/references/scary toolshed.jpg",
+          "sha256": "dbe5147a4bed1035af19b732f5e80693033c28d995fca4915757e1806cb5d27f"
+        },
+        {
+          "path": "media/references/old dwarf.jpg",
+          "sha256": "7fae2814b5d57e05bbba241efa1f448ece71617cdc3e57e61c9d1a08ac6ac901"
+        }
+      ],
+      "original": {
+        "path": "armor_new.png",
+        "sha256": "05353f7a4b1d3b796b9073803c30ef4cac54f844395e322d226f38de126f0ee7"
+      },
+      "web": {
+        "path": "armor.webp",
+        "sha256": "c97953ede69fcef60e85eb0cc0238e0d74ea2fda4223ba2583edff8dd0cf139b"
+      },
+      "width": 1536,
+      "height": 1024,
+      "placement": {
+        "section": "armor-ar",
+        "kind": "margin"
+      },
+      "initialOriginal": {
+        "path": "armor.png",
+        "sha256": "a863b007f928c28d6fdd377a56a145157039f9b85c9ecffe51872e9f585d3ea8"
+      },
+      "revision": {
+        "source": "User-supplied final artwork",
+        "integratedDate": "2026-11-13",
+        "preparation": "Native resolution, neutral continuous grayscale, lossless WebP. No resampling, sharpening, thresholding or dithering. Soft edge blending is applied by the shared stylesheet."
+      }
+    },
+    {
+      "name": "loot",
+      "generationDate": "2026-11-02",
+      "prompt": "Use case: illustration-story. An original small marginal vignette for the RANDOM tabletop RPG rulebook. Actual visual style inputs: scary toolshed.jpg. Use their draftsmanship and line quality; wherever the references and written style differ, the visual references take precedence. Do not copy their subjects, signatures or compositions.\nA traveler's leather purse has fallen open: an old key on a cord, a folded letter bearing an unmarked broken wax seal, and three uneven coins. One hand lifts the key into view. Emphasize personal belongings as possible clues; no overflowing treasure chest, gem piles or loot rarity chart. Low oblique view, quiet, intimate composition and convincing weight and wear. The letter has no visible writing.\nTraditional hand-drawn fantasy illustration, reminiscent of an illustrator's pencil studies for a classic tabletop RPG rulebook. Graphite pencil and fine ink on warm, off-white paper. Predominantly monochromatic with natural graphite grays and subtle sepia tones. Loose, confident, expressive linework, visible construction lines, overlapping strokes, varied line weight, irregular contours, and organic imperfections. Detailed cross-hatching and directional pencil shading. Some areas carefully rendered while others remain deliberately unfinished. Authentic traditional sketchbook aesthetic, visibly handmade. No watercolor, painted color fills, digital gradients, airbrushing, photorealism, polished digital concept art, or 3D rendering.\nLandscape 3:2 canvas. One compact, readable focal cluster in the middle two thirds, with paper margins on every side. Let contours trail away into light warm ivory paper, broken lines at the edges. A floating ink sketch, not a rectangular scene, panel, decorative frame or page mockup. No text, lettering, watermarks or signatures.",
+      "references": [
+        {
+          "path": "media/references/scary toolshed.jpg",
+          "sha256": "dbe5147a4bed1035af19b732f5e80693033c28d995fca4915757e1806cb5d27f"
+        }
+      ],
+      "original": {
+        "path": "loot_new.png",
+        "sha256": "b56a031cbdba5c8f24901e9949f269b1eb4c0f2b22a983beb5b7c5bf01beaf48"
+      },
+      "web": {
+        "path": "loot.webp",
+        "sha256": "ee944abb53fe85e64a70990aff0771315a013cf1b63ff26ba00987420c760e99"
+      },
+      "width": 1536,
+      "height": 1024,
+      "placement": {
+        "section": "loot-and-rewards",
+        "kind": "margin"
+      },
+      "initialOriginal": {
+        "path": "loot.png",
+        "sha256": "2c40a683b8f95faac42fff00370f0ab05e156b033a6448f322b1f49c4ae82e08"
+      },
+      "revision": {
+        "source": "User-supplied final artwork",
+        "integratedDate": "2026-11-13",
+        "preparation": "Native resolution, neutral continuous grayscale, lossless WebP. No resampling, sharpening, thresholding or dithering. Soft edge blending is applied by the shared stylesheet."
+      }
+    },
+    {
+      "name": "trade",
+      "generationDate": "2026-11-02",
+      "prompt": "Use case: illustration-story. An original small marginal vignette for the RANDOM tabletop RPG rulebook. Actual visual style inputs: old dwarf.jpg, female corsair.jpg. Use their draftsmanship and line quality; wherever the references and written style differ, the visual references take precedence. Do not copy their subjects, signatures or compositions.\nA small two-person bargaining vignette. In half-profile a canny older merchant tilts their head with a questioning eyebrow and offers a modest stoppered flask. Across the counter a traveler makes a counteroffer with coins in an open palm. Eye contact and expressive hands carry the negotiation; depict just a sliver of the counter, no shop background, signs, prices, currency marks or speech balloons. Neither figure is copied from a supplied reference.\nTraditional hand-drawn fantasy illustration, reminiscent of an illustrator's pencil studies for a classic tabletop RPG rulebook. Graphite pencil and fine ink on warm, off-white paper. Predominantly monochromatic with natural graphite grays and subtle sepia tones. Loose, confident, expressive linework, visible construction lines, overlapping strokes, varied line weight, irregular contours, and organic imperfections. Detailed cross-hatching and directional pencil shading. Some areas carefully rendered while others remain deliberately unfinished. Authentic traditional sketchbook aesthetic, visibly handmade. No watercolor, painted color fills, digital gradients, airbrushing, photorealism, polished digital concept art, or 3D rendering.\nLandscape 3:2 canvas. One compact, readable focal cluster in the middle two thirds, with paper margins on every side. Let contours trail away into light warm ivory paper, broken lines at the edges. A floating ink sketch, not a rectangular scene, panel, decorative frame or page mockup. No text, lettering, watermarks or signatures.",
+      "references": [
+        {
+          "path": "media/references/old dwarf.jpg",
+          "sha256": "7fae2814b5d57e05bbba241efa1f448ece71617cdc3e57e61c9d1a08ac6ac901"
+        },
+        {
+          "path": "media/references/female corsair.jpg",
+          "sha256": "bc93e11d6c6e7ff4a6e36ff22b27ac46306230d5063554cd9b1519ad84abd02f"
+        }
+      ],
+      "original": {
+        "path": "trade_new.png",
+        "sha256": "4cd407cd23860b6d46972d1581e7527ec27650068c237953b25fba39ebd974b6"
+      },
+      "web": {
+        "path": "trade.webp",
+        "sha256": "4a1dee709d9d30d0e2f53e8f21fecaa7197491a2f3cad1c914460c090e005fea"
+      },
+      "width": 1536,
+      "height": 1024,
+      "placement": {
+        "section": "trade",
+        "kind": "margin"
+      },
+      "initialOriginal": {
+        "path": "trade.png",
+        "sha256": "ad8c3f7119512b274e496de7d28fd1ef1c5b609f11fa2309701fff0122efc3eb"
+      },
+      "revision": {
+        "source": "User-supplied final artwork",
+        "integratedDate": "2026-11-13",
+        "preparation": "Native resolution, neutral continuous grayscale, lossless WebP. No resampling, sharpening, thresholding or dithering. Soft edge blending is applied by the shared stylesheet."
+      }
+    },
+    {
+      "name": "progression",
+      "generationDate": "2026-11-02",
+      "prompt": "Use case: illustration-story. An original small marginal vignette for the RANDOM tabletop RPG rulebook. Actual visual style inputs: young guy.jpg, old dwarf.jpg. Use their draftsmanship and line quality; wherever the references and written style differ, the visual references take precedence. Do not copy their subjects, signatures or compositions.\nOne well-traveled adventurer practicing a new stance under an older companion's guidance. Focus tightly on the mentor adjusting the learner's grip on a plain wooden practice staff, with the learner's attentive profile above it. A few exploratory pencil strokes suggest a previous grip without adding a third hand. Suggest experience and earned skill, not an age transformation, fixed class or unlockable weapon. No level indicators, arrows, labels or numbers.\nTraditional hand-drawn fantasy illustration, reminiscent of an illustrator's pencil studies for a classic tabletop RPG rulebook. Graphite pencil and fine ink on warm, off-white paper. Predominantly monochromatic with natural graphite grays and subtle sepia tones. Loose, confident, expressive linework, visible construction lines, overlapping strokes, varied line weight, irregular contours, and organic imperfections. Detailed cross-hatching and directional pencil shading. Some areas carefully rendered while others remain deliberately unfinished. Authentic traditional sketchbook aesthetic, visibly handmade. No watercolor, painted color fills, digital gradients, airbrushing, photorealism, polished digital concept art, or 3D rendering.\nLandscape 3:2 canvas. One compact, readable focal cluster in the middle two thirds, with paper margins on every side. Let contours trail away into light warm ivory paper, broken lines at the edges. A floating ink sketch, not a rectangular scene, panel, decorative frame or page mockup. No text, lettering, watermarks or signatures.",
+      "references": [
+        {
+          "path": "media/references/young guy.jpg",
+          "sha256": "96ca6c9a3d89020870ff8fafb546a957465473c2aae9a0fa812147abd1579e2c"
+        },
+        {
+          "path": "media/references/old dwarf.jpg",
+          "sha256": "7fae2814b5d57e05bbba241efa1f448ece71617cdc3e57e61c9d1a08ac6ac901"
+        }
+      ],
+      "original": {
+        "path": "progression_new.png",
+        "sha256": "b8e240d2dd256cbc2d848ce8adef0e387ee95e1dc97574e4fe92a47e364a80bf"
+      },
+      "web": {
+        "path": "progression.webp",
+        "sha256": "adeab4222f10f13c266a3d72c67bda6ffc0fabb4e417fa083dc07fe9f4ccf586"
+      },
+      "width": 1448,
+      "height": 1086,
+      "placement": {
+        "section": "character-progression",
+        "kind": "margin"
+      },
+      "initialOriginal": {
+        "path": "progression.png",
+        "sha256": "6bda5d46f678c29b03edba045b06d9562b5e4c1895ad9d8f3b9eaf2b19c39f65"
+      },
+      "revision": {
+        "source": "User-supplied final artwork",
+        "integratedDate": "2026-11-13",
+        "preparation": "Native resolution, neutral continuous grayscale, lossless WebP. No resampling, sharpening, thresholding or dithering. Soft edge blending is applied by the shared stylesheet."
+      }
     }
   ]
 }

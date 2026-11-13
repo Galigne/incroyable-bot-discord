@@ -3,6 +3,7 @@ const path = require('node:path');
 const { createHash } = require('node:crypto');
 
 const editions = require('./editions');
+const { artworks } = require('../../media/rulebook/artwork.json');
 
 const root = path.resolve(__dirname, '../..');
 const artworkDirectory = path.join(root, 'media/rulebook');
@@ -42,12 +43,13 @@ async function createRenderer() {
 	return { markdown, headings };
 }
 
-async function imageElement(name, className) {
-	const bytes = await fs.readFile(path.join(artworkDirectory, `${name}.webp`));
-	return `<figure class="illustration ${className}" aria-hidden="true"><img src="data:image/webp;base64,${bytes.toString('base64')}" alt="" width="1536" height="1024" ${name === 'cover' ? 'fetchpriority="high"' : 'loading="eager"'} decoding="async" data-artwork="${name}"></figure>`;
+async function imageElement(art) {
+	const classes = { cover: 'cover-art', opening: 'chapter-art', margin: 'spot-art', tail: 'spot-art tail-art' };
+	const bytes = await fs.readFile(path.join(artworkDirectory, art.web.path));
+	return `<figure class="illustration ${classes[art.placement.kind]}" aria-hidden="true"><img src="data:image/webp;base64,${bytes.toString('base64')}" alt="" width="${art.width}" height="${art.height}" ${art.placement.kind === 'cover' ? 'fetchpriority="high"' : 'loading="eager"'} decoding="async" data-artwork="${art.name}"></figure>`;
 }
 
-function renderTopics(tokens, markdown, chapterId, glossaryId) {
+async function renderTopics(tokens, markdown, chapterId, glossaryId, placements) {
 	const groups = [];
 	let current = { id: `${chapterId}-introduction`, tokens: [] };
 	for (const token of tokens) {
@@ -60,7 +62,21 @@ function renderTopics(tokens, markdown, chapterId, glossaryId) {
 		current.tokens.push(token);
 	}
 	if (current.tokens.some(part => part.type !== 'space')) groups.push(current);
-	return groups.map(group => `<div class="topic" data-topic="${group.id}">${markdown.parser(group.tokens)}</div>`).join('\n');
+	const rendered = [];
+	for (const group of groups) {
+		const art = placements.get(group.id);
+		if (!art) {
+			rendered.push(`<div class="topic" data-topic="${group.id}">${markdown.parser(group.tokens)}</div>`);
+			continue;
+		}
+		const [heading, ...body] = group.tokens;
+		const title = markdown.parser([heading]);
+		const content = markdown.parser(body);
+		const figure = await imageElement(art);
+		const illustrated = art.placement.kind === 'tail' ? content + figure : figure + content;
+		rendered.push(`<div class="topic illustrated-topic" data-topic="${group.id}">${title}${illustrated}</div>`);
+	}
+	return rendered.join('\n');
 }
 
 function navigation(headings, localId) {
@@ -78,6 +94,7 @@ function navigation(headings, localId) {
 async function renderBook(source, { illustrations = true, language = 'en' } = {}) {
 	const edition = editions[language];
 	const localId = id => edition.ids[id] || id;
+	const placements = new Map(illustrations ? artworks.map(art => [localId(art.placement.section), art]) : []);
 	const { markdown, headings } = await createRenderer();
 	const tokens = markdown.lexer(source);
 	const contentsIndex = tokens.findIndex(token => token.type === 'heading' && token.depth === 1 && slugify(token.text) === localId('table-of-contents'));
@@ -85,12 +102,12 @@ async function renderBook(source, { illustrations = true, language = 'en' } = {}
 	const front = tokens.slice(0, contentsIndex);
 	const firstRule = front.findIndex(token => token.type === 'hr');
 	const lastRule = front.findLastIndex(token => token.type === 'hr');
-	const image = async (name, className) => illustrations ? imageElement(name, className) : '';
+	const coverArt = placements.get(localId('ttrpg-random'));
 	const cover = `<header class="book-cover" aria-labelledby="${localId('ttrpg-random')}">
 <div class="front-meta">${markdown.parser(front.slice(0, firstRule))}</div>
 <div class="cover-top-rule">${markdown.parser(front.slice(firstRule, firstRule + 1))}</div>
 <div class="cover-title">${markdown.parser(front.slice(firstRule + 1, lastRule))}</div>
-${await image('cover', 'cover-art')}
+${coverArt ? await imageElement(coverArt) : ''}
 <div class="cover-bottom-rule">${markdown.parser(front.slice(lastRule))}</div>
 </header>`;
 	const chapters = [];
@@ -102,15 +119,10 @@ ${await image('cover', 'cover-art')}
 	for (const [index, chapter] of chapters.entries()) {
 		const id = slugify(chapter.title.text);
 		const title = markdown.parser([chapter.title]);
-		let body = renderTopics(chapter.tokens, markdown, id, localId('definitions'));
-		if (id === 'combat') {
-			const runesId = localId('enchantments-and-runes');
-			body = body.replace(`<div class="topic" data-topic="${runesId}">`, `<div class="topic illustrated-topic" data-topic="${runesId}">`);
-			body = body.replace(new RegExp(`(<h2 id="${runesId}"[^>]*>.*?<\\/h2>\\n)`), `$1${await image('runes', 'rune-art')}`);
-		}
+		let body = await renderTopics(chapter.tokens, markdown, id, localId('definitions'), placements);
 		if (language === 'fr' && id === localId('adventure')) body = body.replace('<u>Niveaux de rareté et valeur générale</u>', '<u id="niveaux-de-rareté">Niveaux de rareté et valeur générale</u>');
-		const openingArt = { [localId('character-creation')]: 'characters', combat: 'combat', [localId('adventure')]: 'camp' }[id];
-		const art = openingArt ? await image(openingArt, 'chapter-art') : '';
+		const openingArt = placements.get(id);
+		const art = openingArt ? await imageElement(openingArt) : '';
 		rendered.push(`<section class="chapter ${id === localId('table-of-contents') ? 'contents' : ''}" data-chapter="${id}" aria-labelledby="${id}"><header class="chapter-heading" ${index ? `data-number="${String(index).padStart(2, '0')}"` : ''}>${title}</header>${art}<div class="chapter-body">${body}</div></section>`);
 	}
 	return { book: `${cover}\n${rendered.join('\n')}`, headings, navigation: navigation(headings, localId), canonical: (await createRenderer()).markdown.parse(source) };

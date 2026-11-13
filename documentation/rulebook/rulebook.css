@@ -214,7 +214,10 @@ details[open] > summary .disclosure { transform: rotate(225deg); margin-bottom: 
 .chapter-heading:not([data-number])::before { display: none; }
 .chapter-heading h1 { margin: 0; color: var(--red); font: 500 clamp(28px, 3.2vw, 41px)/1.15 "Cinzel", Georgia, serif; letter-spacing: -0.025em; text-wrap: balance; }
 .chapter-body { max-width: 740px; margin: 0 auto; font-size: var(--body-size); line-height: 1.5; }
-.chapter-art { max-width: 620px; margin: -10px auto 28px; }
+.chapter-art {
+  max-width: 620px; margin: -10px auto 28px;
+  mask-image: linear-gradient(to right, transparent, #000 7%, #000 93%, transparent), linear-gradient(to bottom, transparent, #000 7%, #000 90%, transparent), radial-gradient(ellipse at center, #000 55%, transparent 100%);
+}
 .chapter-body p { margin: 0 0 0.85em; }
 .chapter-body h2, .chapter-body h3 { color: var(--red); text-wrap: balance; break-after: avoid; }
 .chapter-body h2 { font: 500 28px/1.25 "Cinzel", Georgia, serif; letter-spacing: -0.02em; margin: 0 0 0.8em; }
@@ -257,7 +260,7 @@ details[open] > summary .disclosure { transform: rotate(225deg); margin-bottom: 
 [data-topic="armor-ar"] > ul:first-of-type { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; padding: 18px 0 18px 1em; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); font-size: 0.9em; }
 [data-topic="armor-ar"] > ul:first-of-type > li { margin: 0; }
 .illustrated-topic { display: flow-root; }
-.rune-art { float: right; width: 40%; max-width: 300px; margin: 0 -32px 12px 20px; mask-image: radial-gradient(ellipse at center, #000 48%, transparent 74%); }
+.spot-art { float: right; width: 40%; max-width: 300px; margin: 0 -32px 12px 20px; mask-image: radial-gradient(ellipse at center, #000 48%, transparent 74%); }
 .contents .chapter-body { max-width: none; font-size: 18px; }
 .contents .chapter-heading h1 { font-size: 32px; }
 .contents .chapter-body > .topic > ul { columns: 2; column-gap: 50px; padding: 0; list-style: none; }
@@ -316,7 +319,7 @@ mark { color: inherit; background: #dcc18b77; }
   .chapter-heading::before { font-size: 52px; }
   .book-cover { padding-right: 32px; padding-left: 32px; }
   .cover-title h1 { font-size: clamp(35px, 5.7vw, 74px); }
-  .rune-art { margin-right: -12px; }
+  .spot-art { margin-right: -12px; }
   [data-topic="armor-ar"] > ul:first-of-type { gap: 22px; }
 }
 @media (max-width: 880px) {
@@ -373,7 +376,7 @@ mark { color: inherit; background: #dcc18b77; }
   .contents .chapter-body ul li a { display: inline-block; padding: 3px 0; }
   [data-topic="armor-ar"] > ul:first-of-type { display: block; font-size: 1em; padding: 12px 0 0 1em; }
   [data-topic="armor-ar"] > ul:first-of-type > li { margin-bottom: 18px; }
-  .rune-art { width: 44%; max-width: 190px; margin: 6px -10px 6px 10px; }
+  .spot-art { width: 44%; max-width: 190px; margin: 6px -10px 6px 10px; }
   .illustrated-topic h2 { clear: both; }
   [data-chapter="definitions"] .chapter-body { columns: 1; }
   [data-chapter="definitions"] .topic { margin-bottom: 25px; }
@@ -387,8 +390,9 @@ mark { color: inherit; background: #dcc18b77; }
   .chapter { padding-left: 19px; padding-right: 19px; }
   .chapter-heading h1 { font-size: 24px; }
   .chapter-heading::before { font-size: 39px; }
-  .rune-art { float: none; width: 65%; margin: 0 auto 16px; }
+  .spot-art { float: none; width: 65%; margin: 0 auto 16px; }
 }
+.illustrated-topic .tail-art { float: none; width: min(50%, 245px); margin: 0 auto; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation: none !important; }
 }

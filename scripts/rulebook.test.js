@@ -6,6 +6,15 @@ const { test } = require('node:test');
 const { createRenderer, renderBook, sourceStart, sourceEnd, plainText } = require('../documentation/rulebook/build');
 const editions = require('../documentation/rulebook/editions');
 
+const illustratedSections = [
+	['cover', 'ttrpg-random'], ['characters', 'character-creation'], ['rule', 'rule'],
+	['dice', 'types-of-dice'], ['combat', 'combat'], ['attacks', 'attacks'],
+	['weapons', 'weapons'], ['defense', 'defense-saving-and-survival'], ['armor', 'armor-ar'],
+	['runes', 'enchantments-and-runes'], ['camp', 'adventure'], ['loot', 'loot-and-rewards'],
+	['trade', 'trade'], ['progression', 'character-progression'],
+	['map', 'advice-for-the-game-master'],
+];
+
 function sourceContent(html) {
 	const start = html.indexOf(sourceStart);
 	const end = html.indexOf(sourceEnd);
@@ -52,9 +61,14 @@ for (const [language, { sourcePath, outputPath }] of Object.entries(editions)) {
 
 	test(language + ': the standalone edition embeds every artwork and font and loads no remote runtime resources', async () => {
 		const html = await fs.readFile(outputPath, 'utf8');
-		const art = [...html.matchAll(/data-artwork="([^"]+)"/g)].map(match => match[1]);
-		assert.deepEqual(art, ['cover', 'characters', 'combat', 'runes', 'camp']);
-		assert.equal([...html.matchAll(/<img src="data:image\/webp;base64,/g)].length, 5);
+		const placements = [];
+		let section;
+		for (const match of sourceContent(html).matchAll(/<h[123] id="([^"]+)"|data-artwork="([^"]+)"/g)) {
+			if (match[1]) section = match[1];
+			else placements.push([match[2], section]);
+		}
+		assert.deepEqual(placements, illustratedSections.map(([name, id]) => [name, editions[language].ids[id] || id]));
+		assert.equal([...html.matchAll(/<img src="data:image\/webp;base64,/g)].length, illustratedSections.length);
 		assert.equal([...html.matchAll(/src: url\("data:font\/ttf;base64,/g)].length, 3);
 		assert.doesNotMatch(html, /<(?:script|iframe)\b[^>]*\bsrc\s*=|<link\b[^>]*\bhref\s*=/i);
 		assert.doesNotMatch(html, /\b(?:fetch|XMLHttpRequest|WebSocket|EventSource)\s*\(/);
@@ -91,11 +105,11 @@ test('both editions share identical styles and reader behavior apart from locali
 	assert.ok(french.includes('id="niveaux-de-rareté"'));
 });
 
-test('every illustration records actual supplied reference inputs and a reusable original', async () => {
+test('every illustration retains reference history and verifies its current original and web copy', async () => {
 	const directory = path.resolve(__dirname, '../media/rulebook');
 	const manifest = JSON.parse(await fs.readFile(path.join(directory, 'artwork.json'), 'utf8'));
 	assert.equal(manifest.tool, 'image_gen.imagegen');
-	assert.equal(manifest.artworks.length, 5);
+	assert.deepEqual(manifest.artworks.map(art => art.name).sort(), illustratedSections.map(([name]) => name).sort());
 	for (const art of manifest.artworks) {
 		assert.ok(art.prompt.length > 500);
 		assert.ok(Array.isArray(art.references) && art.references.length >= 1);
@@ -104,5 +118,8 @@ test('every illustration records actual supplied reference inputs and a reusable
 			const bytes = await fs.readFile(path.join(directory, file.path));
 			assert.equal(createHash('sha256').update(bytes).digest('hex'), file.sha256);
 		}
+		const original = await fs.readFile(path.join(directory, art.original.path));
+		assert.equal(original.readUInt32BE(16), art.width, `${art.name}: intrinsic width must match the current PNG.`);
+		assert.equal(original.readUInt32BE(20), art.height, `${art.name}: intrinsic height must match the current PNG.`);
 	}
 });

@@ -2,8 +2,8 @@
 
 Open the [English edition](../TTRPG_RANDOM_RULES_EN.html) or the
 [French edition](../JDR_RANDOM_RULES_FR.html) directly in a
-browser. This is a complete standalone file: typography, five illustrations,
-styles, navigation, and search are embedded. It requires neither a server nor a
+browser. Each file embeds its typography, illustrations,
+styles, navigation, and search. It requires neither a server nor a
 network connection. You can copy or share that HTML file by itself.
 
 Use the chapter navigation or original table of contents to move around the book.
@@ -51,16 +51,21 @@ authorized source editions; no tables or rule summaries are invented.
 
 ## Illustrations and fonts
 
-Reusable original PNGs and smaller WebP copies live in `media/rulebook/`.
+Reusable original PNGs and lossless WebP copies live in `media/rulebook/`.
 [`artwork.json`](../../media/rulebook/artwork.json) records the full generation
-prompts, actual reference-image inputs, reference hashes, and output hashes.
-All five illustrations were produced with the integrated `image_gen.imagegen`
-tool using relevant supplied files from `media/references` as visual inputs.
-WebP copies only compress the original images; they do not redraw or recolor them.
+prompts, actual reference-image inputs, reference hashes, output hashes, and
+placement of each illustration. Prompts and reference inputs describe the initial
+generation with `image_gen.imagegen`. The published originals now point to the
+user's final `_new.png` revisions; their later editing history is not inferred.
+Those source files remain untouched. WebP copies use neutral continuous grayscale
+at native resolution with lossless encoding, without resizing or dithering.
 
-The cover establishes the visual identity. Interior artwork is limited to
-Character Creation, Combat, Enchantments and Runes, and Adventure. Other sections
-remain text-led. The supplied D&D PDF informed hierarchy, compact rule examples,
+The build places chapter openings below the chapter title and floats margin
+drawings beside their passages. The dice drawing closes its subsection; the
+encumbrance subsection has no illustration. Shared CSS masks gently fade the
+edges into the page without cropping the original files. Manifest section IDs refer to the English heading;
+`editions.js` maps them to the matching French headings. The supplied D&D PDF
+informed hierarchy, compact rule examples,
 and restrained typographic organization; none of its art or ornaments is reused.
 
 [EB Garamond](https://github.com/google/fonts/tree/main/ofl/ebgaramond) and
