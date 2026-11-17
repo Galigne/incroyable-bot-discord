@@ -402,6 +402,18 @@ details[open] > summary .disclosure { transform: rotate(225deg); margin-bottom: 
 .cover-title strong { font-family: system-ui, sans-serif; font-size: 10px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.2em; }
 .illustration { margin: 0; mix-blend-mode: multiply; }
 .illustration img { display: block; width: 100%; height: auto; }
+/* Lift the scanned paper to white so the multiply blend shows the page beneath it. */
+.illustration img[data-artwork=attacks] { filter: brightness(1.05); }
+.illustration img[data-artwork=defense],
+.illustration img[data-artwork=loot] { filter: brightness(1.08); }
+.illustration img[data-artwork=camp],
+.illustration img[data-artwork=combat],
+.illustration img[data-artwork=runes] { filter: brightness(1.10); }
+.illustration img[data-artwork=map],
+.illustration img[data-artwork=progression],
+.illustration img[data-artwork=weapons] { filter: brightness(1.13); }
+.illustration img[data-artwork=trade] { filter: brightness(1.16); }
+.illustration img[data-artwork=characters] { filter: brightness(1.21); }
 .cover-art { order: 2; width: 100%; max-width: 930px; align-self: center; margin: 12px -16px 0; }
 .cover-art, .chapter-art {
   mask-image: linear-gradient(to right, transparent, #000 7%, #000 93%, transparent), linear-gradient(to bottom, transparent, #000 7%, #000 90%, transparent);
